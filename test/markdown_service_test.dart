@@ -1,0 +1,154 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/markdown_service.dart';
+
+void main() {
+  test('round-trips image slide with title as image slide', () {
+    final service = MarkdownService();
+    final markdown = service.generateDeck(
+      Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(
+            SlideType.image,
+          ).copyWith(title: 'Overlay title', imagePath: 'images/photo.png'),
+        ],
+      ),
+    );
+
+    final deck = service.parseDeck(markdown);
+
+    expect(deck, isNotNull);
+    expect(deck!.slides.single.type, SlideType.image);
+    expect(deck.slides.single.title, 'Overlay title');
+    expect(deck.slides.single.imagePath, 'images/photo.png');
+  });
+
+  test('round-trips bulletsImage slide with image and size', () {
+    final service = MarkdownService();
+    final markdown = service.generateDeck(
+      Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.bulletsImage).copyWith(
+            title: 'Profiel',
+            bullets: ['Eerste punt', '\tGenest punt'],
+            imagePath: 'images/portret.png',
+            imageCaption: 'Een onderschrift',
+            imageSize: 45,
+          ),
+        ],
+      ),
+    );
+
+    final deck = service.parseDeck(markdown);
+
+    expect(deck, isNotNull);
+    final slide = deck!.slides.single;
+    expect(slide.type, SlideType.bulletsImage);
+    expect(slide.title, 'Profiel');
+    expect(slide.imagePath, 'images/portret.png');
+    expect(slide.imageCaption, 'Een onderschrift');
+    expect(slide.imageSize, 45);
+    expect(slide.bullets, ['Eerste punt', '\tGenest punt']);
+  });
+
+  test('keeps a plain image inside free markdown as free markdown', () {
+    final service = MarkdownService();
+    final deck = service.parseDeck(
+      '---\nmarp: true\ntheme: vigilis\n---\n\n'
+      '![](images/inline.png)\n\nWat losse tekst.\n',
+    );
+
+    expect(deck, isNotNull);
+    final slide = deck!.slides.single;
+    expect(slide.type, SlideType.freeMarkdown);
+    expect(slide.imagePath, isEmpty);
+  });
+
+  test('round-trips deck style profile', () {
+    final service = MarkdownService();
+    final profile = const ThemeProfile(
+      name: 'Klant A',
+      slideBackgroundColor: '#111827',
+      textColor: '#F8FAFC',
+      accentColor: '#F59E0B',
+      tableTextColor: '#111111',
+      tableHeaderTextColor: '#EEEEEE',
+      logoPosition: 'top-left',
+      logoSize: 120,
+      fontFamily: 'Georgia',
+      footerText: 'Vertrouwelijk · {page}/{total}',
+      footerShowPageNumbers: true,
+      footerPosition: 'center',
+    );
+
+    final markdown = service.generateDeck(
+      Deck(
+        title: 'Demo',
+        themeProfile: profile,
+        slides: [Slide.create(SlideType.title).copyWith(title: 'Demo')],
+      ),
+    );
+
+    final deck = service.parseDeck(markdown);
+
+    expect(deck, isNotNull);
+    expect(deck!.themeProfile.name, 'Klant A');
+    expect(deck.themeProfile.slideBackgroundColor, '#111827');
+    expect(deck.themeProfile.tableTextColor, '#111111');
+    expect(deck.themeProfile.tableHeaderTextColor, '#EEEEEE');
+    expect(deck.themeProfile.logoPosition, 'top-left');
+    expect(deck.themeProfile.logoSize, 120);
+    expect(deck.themeProfile.fontFamily, 'Georgia');
+    expect(deck.themeProfile.footerText, 'Vertrouwelijk · {page}/{total}');
+    expect(deck.themeProfile.footerShowPageNumbers, isTrue);
+    expect(deck.themeProfile.footerPosition, 'center');
+  });
+
+  test('adds logo-safe class when deck profile has logo', () {
+    final service = MarkdownService();
+    final markdown = service.generateDeck(
+      Deck(
+        title: 'Demo',
+        themeProfile: const ThemeProfile(logoPath: '/tmp/logo.png'),
+        slides: [
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Demo', bullets: ['Een lange bullet']),
+        ],
+      ),
+    );
+
+    expect(markdown, contains('<!-- _class: logo-safe -->'));
+  });
+
+  test('round-trips video slide with audio attachment', () {
+    final service = MarkdownService();
+    final markdown = service.generateDeck(
+      Deck(
+        title: 'Media',
+        slides: [
+          Slide.create(SlideType.video).copyWith(
+            title: 'Film',
+            videoPath: 'media/movie.mp4',
+            videoAutoplay: true,
+            audioPath: 'media/narration.mp3',
+            audioAutoplay: true,
+          ),
+        ],
+      ),
+    );
+
+    final deck = service.parseDeck(markdown);
+
+    expect(deck, isNotNull);
+    expect(deck!.slides.single.type, SlideType.video);
+    expect(deck.slides.single.videoPath, 'media/movie.mp4');
+    expect(deck.slides.single.videoAutoplay, isTrue);
+    expect(deck.slides.single.audioPath, 'media/narration.mp3');
+    expect(deck.slides.single.audioAutoplay, isTrue);
+  });
+}

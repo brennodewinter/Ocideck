@@ -1,0 +1,148 @@
+/* @theme ocideck */
+
+section {
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  color: #222222;
+  padding: 48px;
+}
+
+section ul,
+section ol {
+  font-size: 0.96em;
+  line-height: 1.25;
+}
+
+section li {
+  margin: 0.18em 0;
+  overflow-wrap: anywhere;
+}
+
+section ul ul {
+  font-size: 0.86em;
+}
+
+section ul ul ul {
+  font-size: 0.93em;
+  list-style-type: square;
+}
+
+section ul ul ul ul {
+  font-size: 0.95em;
+  list-style-type: circle;
+}
+
+section ul ul ul ul ul {
+  font-size: 0.95em;
+  list-style-type: "– ";
+}
+
+section.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #1f2937;
+  color: #ffffff;
+}
+
+section.title h1 {
+  font-size: 2.4em;
+  margin-bottom: 0.2em;
+}
+
+section.title h2 {
+  font-size: 1.4em;
+  font-weight: normal;
+  opacity: 0.82;
+}
+
+section.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #334155;
+  color: #ffffff;
+}
+
+section.section h1 {
+  font-size: 2em;
+}
+
+section.split {
+  --image-width: 40%;
+  --split-margin: 48px;
+  --split-text-scale: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--image-width);
+  gap: var(--split-margin);
+  padding: 48px 0 48px var(--split-margin);
+}
+
+section.split .split-text {
+  font-size: calc(1em * var(--split-text-scale));
+  min-width: 0;
+}
+
+section.split .split-text h1 {
+  font-size: 1.45em;
+  margin-top: 0;
+  margin-bottom: 0.42em;
+}
+
+section.split .split-text ul {
+  line-height: 1.16;
+  padding-left: 1em;
+}
+
+section.split .split-text li {
+  margin: 0.12em 0;
+}
+
+section.split .split-image {
+  position: relative;
+  align-self: stretch;
+  min-height: calc(100vh - 96px);
+  margin: -48px 0 -48px 0;
+}
+
+section.split .split-image p {
+  margin: 0;
+  height: 100%;
+}
+
+section.split .split-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+section.quote {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #f8fafc;
+}
+
+section.quote blockquote {
+  font-size: 1.6em;
+  font-style: italic;
+  border-left: 4px solid #334155;
+  padding-left: 24px;
+  margin: 0;
+}
+
+.image-caption {
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+  max-width: 58%;
+  padding: 4px 7px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.58);
+  color: #ffffff;
+  font-size: 0.38em;
+  line-height: 1.25;
+  text-align: right;
+  z-index: 10;
+}

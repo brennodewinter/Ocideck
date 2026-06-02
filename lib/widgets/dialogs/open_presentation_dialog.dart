@@ -1,0 +1,422 @@
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:path/path.dart' as p;
+import '../../models/slide.dart';
+import '../../services/file_service.dart';
+import '../../theme/app_theme.dart';
+
+/// What the open dialog returns: a presentation path and, optionally, the
+/// index of a slide to jump to (when the user picked a search hit).
+class OpenSearchResult {
+  final String path;
+  final int? slideIndex;
+  const OpenSearchResult(this.path, {this.slideIndex});
+}
+
+/// Dialog that scans a directory for Marp presentations and lets the user
+/// full-text search across the `.md` files (file name, title and slide text)
+/// before opening one. "Bladeren…" falls back to the native file picker.
+class OpenPresentationDialog extends StatefulWidget {
+  final FileService fileService;
+  final String? initialDirectory;
+
+  const OpenPresentationDialog({
+    super.key,
+    required this.fileService,
+    required this.initialDirectory,
+  });
+
+  static Future<OpenSearchResult?> show(
+    BuildContext context, {
+    required FileService fileService,
+    required String? initialDirectory,
+  }) {
+    return showDialog<OpenSearchResult>(
+      context: context,
+      builder: (_) => OpenPresentationDialog(
+        fileService: fileService,
+        initialDirectory: initialDirectory,
+      ),
+    );
+  }
+
+  @override
+  State<OpenPresentationDialog> createState() => _OpenPresentationDialogState();
+}
+
+class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
+  String? _directory;
+  bool _loading = false;
+  List<ScannedPresentation> _presentations = const [];
+  String _query = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _directory = widget.initialDirectory;
+    if (_directory != null) _scan();
+  }
+
+  Future<void> _scan() async {
+    final dir = _directory;
+    if (dir == null) return;
+    setState(() => _loading = true);
+    final results = await widget.fileService.scanPresentations(dir);
+    if (!mounted) return;
+    setState(() {
+      _presentations = results;
+      _loading = false;
+    });
+  }
+
+  Future<void> _pickDirectory() async {
+    final result = await FilePicker.getDirectoryPath(
+      dialogTitle: 'Map met presentaties kiezen',
+      initialDirectory: _directory,
+    );
+    if (result != null) {
+      setState(() => _directory = result);
+      await _scan();
+    }
+  }
+
+  Future<void> _browse() async {
+    final path = await widget.fileService.pickMarkdownFile(
+      initialDirectory: _directory,
+    );
+    if (path != null && mounted) {
+      Navigator.pop(context, OpenSearchResult(path));
+    }
+  }
+
+  String _slideText(Slide slide) {
+    return [
+      slide.title,
+      slide.subtitle,
+      ...slide.bullets,
+      slide.quote,
+      slide.quoteAuthor,
+      slide.customMarkdown,
+      slide.imageCaption,
+      slide.imageCaption2,
+      slide.imagePath,
+      slide.imagePath2,
+      slide.videoPath,
+      slide.audioPath,
+      slide.notes,
+    ].where((s) => s.isNotEmpty).join('  ·  ');
+  }
+
+  /// A short excerpt of [text] centred on the first occurrence of [query].
+  String _snippet(String text, String query) {
+    final lower = text.toLowerCase();
+    final idx = lower.indexOf(query);
+    if (idx < 0) return text.length <= 80 ? text : '${text.substring(0, 80)}…';
+    final start = (idx - 24).clamp(0, text.length);
+    final end = (idx + query.length + 48).clamp(0, text.length);
+    final prefix = start > 0 ? '…' : '';
+    final suffix = end < text.length ? '…' : '';
+    return '$prefix${text.substring(start, end).trim()}$suffix';
+  }
+
+  /// Per visible presentation: the matching slide hits for the current query
+  /// (empty when the match was on the file name / title, or no query).
+  List<(ScannedPresentation, List<_SlideHit>)> _visible() {
+    final q = _query.trim().toLowerCase();
+    final out = <(ScannedPresentation, List<_SlideHit>)>[];
+    if (q.isEmpty) {
+      for (final pres in _presentations) {
+        out.add((pres, const []));
+      }
+      return out;
+    }
+    // Multi-word AND: every term must appear somewhere, not necessarily
+    // adjacent — maximises what you can find.
+    final terms = q.split(RegExp(r'\s+')).where((t) => t.isNotEmpty).toList();
+    final first = terms.first;
+    bool matchesAll(String hay) => terms.every(hay.contains);
+
+    for (final pres in _presentations) {
+      // A file qualifies on its name/title or anywhere in the raw markdown
+      // (front matter, comments, image paths, …) — maximal reach.
+      final fileHay =
+          '${pres.fileName.toLowerCase()} '
+          '${pres.deck.title.toLowerCase()} '
+          '${pres.content.toLowerCase()}';
+      final fileMatch = matchesAll(fileHay);
+      final hits = <_SlideHit>[];
+      for (var i = 0; i < pres.deck.slides.length; i++) {
+        final text = _slideText(pres.deck.slides[i]);
+        if (matchesAll(text.toLowerCase())) {
+          hits.add(_SlideHit(i, _snippet(text, first)));
+        }
+      }
+      if (fileMatch || hits.isNotEmpty) out.add((pres, hits));
+    }
+    return out;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final visible = _visible();
+
+    return AlertDialog(
+      title: Row(
+        children: const [
+          Icon(Icons.folder_open_outlined, size: 20),
+          SizedBox(width: 8),
+          Text('Presentatie openen'),
+        ],
+      ),
+      contentPadding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
+      content: SizedBox(
+        width: 760,
+        height: 560,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _toolbar(),
+            const SizedBox(height: 12),
+            Expanded(child: _body(visible)),
+          ],
+        ),
+      ),
+      actions: [
+        OutlinedButton.icon(
+          onPressed: _browse,
+          icon: const Icon(Icons.insert_drive_file_outlined, size: 16),
+          label: const Text('Bladeren…'),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Annuleren'),
+        ),
+      ],
+      // Knoppen uit elkaar: Bladeren links, Annuleren rechts. (Geen Spacer in
+      // de actions — die gaan in een OverflowBar en accepteren geen Expanded.)
+      actionsAlignment: MainAxisAlignment.spaceBetween,
+    );
+  }
+
+  Widget _toolbar() {
+    return Row(
+      children: [
+        Expanded(
+          child: TextField(
+            autofocus: true,
+            decoration: const InputDecoration(
+              isDense: true,
+              prefixIcon: Icon(Icons.search, size: 18),
+              hintText: 'Zoek op bestandsnaam, titel of tekst in de slides…',
+            ),
+            onChanged: (v) => setState(() => _query = v),
+          ),
+        ),
+        const SizedBox(width: 8),
+        Tooltip(
+          message: _directory ?? 'Geen map gekozen',
+          child: OutlinedButton.icon(
+            onPressed: _pickDirectory,
+            icon: const Icon(Icons.folder_outlined, size: 16),
+            label: Text(
+              _directory == null ? 'Map kiezen' : p.basename(_directory!),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _body(List<(ScannedPresentation, List<_SlideHit>)> visible) {
+    if (_loading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    if (_directory == null) {
+      return _empty(
+        Icons.folder_off_outlined,
+        'Kies een map met presentaties om te beginnen.',
+      );
+    }
+    if (_presentations.isEmpty) {
+      return _empty(
+        Icons.search_off_outlined,
+        'Geen presentaties (.md) in deze map gevonden.',
+      );
+    }
+    if (visible.isEmpty) {
+      return _empty(
+        Icons.search_off_outlined,
+        'Geen presentaties gevonden voor "$_query".',
+      );
+    }
+
+    return ListView.separated(
+      itemCount: visible.length,
+      separatorBuilder: (_, _) => const Divider(height: 1),
+      itemBuilder: (_, i) {
+        final (pres, hits) = visible[i];
+        return _PresentationRow(
+          presentation: pres,
+          hits: hits,
+          onOpen: () => Navigator.pop(context, OpenSearchResult(pres.path)),
+          onOpenAt: (index) => Navigator.pop(
+            context,
+            OpenSearchResult(pres.path, slideIndex: index),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _empty(IconData icon, String message) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 40, color: const Color(0xFF94A3B8)),
+          const SizedBox(height: 12),
+          Text(
+            message,
+            textAlign: TextAlign.center,
+            style: const TextStyle(color: Color(0xFF64748B), fontSize: 13),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SlideHit {
+  final int index;
+  final String snippet;
+  const _SlideHit(this.index, this.snippet);
+}
+
+class _PresentationRow extends StatelessWidget {
+  final ScannedPresentation presentation;
+  final List<_SlideHit> hits;
+  final VoidCallback onOpen;
+  final ValueChanged<int> onOpenAt;
+
+  const _PresentationRow({
+    required this.presentation,
+    required this.hits,
+    required this.onOpen,
+    required this.onOpenAt,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final deck = presentation.deck;
+    final title = deck.title.isEmpty ? presentation.fileName : deck.title;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          InkWell(
+            onTap: onOpen,
+            borderRadius: BorderRadius.circular(6),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.slideshow_outlined,
+                    size: 18,
+                    color: AppTheme.navy,
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xFF1E293B),
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        Text(
+                          '${presentation.fileName}  ·  ${deck.slides.length} slides',
+                          style: const TextStyle(
+                            fontSize: 11,
+                            color: Color(0xFF94A3B8),
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Icon(Icons.north_east, size: 16, color: Colors.grey.shade500),
+                ],
+              ),
+            ),
+          ),
+          if (hits.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(left: 34, top: 2, bottom: 2),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (final hit in hits.take(4))
+                    InkWell(
+                      onTap: () => onOpenAt(hit.index),
+                      borderRadius: BorderRadius.circular(4),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 3,
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Slide ${hit.index + 1}',
+                              style: const TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                                color: AppTheme.accent,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                hit.snippet,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xFF475569),
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  if (hits.length > 4)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4, top: 2),
+                      child: Text(
+                        '+ ${hits.length - 4} meer treffer(s)',
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Color(0xFF94A3B8),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
