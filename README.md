@@ -65,6 +65,14 @@ lib/
 
 State is managed with [Riverpod](https://riverpod.dev/).
 
+## File format
+
+Presentations are saved as standard, Marp-compatible Markdown (`.md`) with a
+defined project folder layout and an optional portable `.ocideck` package. The
+full specification — front matter, per-slide markup, style profile, captions,
+and the package format — is documented in
+[`docs/FILE_FORMAT.md`](docs/FILE_FORMAT.md).
+
 ## License
 
 All rights reserved. _(Update this section if you intend to open-source the project.)_
