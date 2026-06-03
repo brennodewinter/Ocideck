@@ -299,6 +299,12 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     );
   }
 
+  /// Open een presentatie via de zoek-/kies-dialoog. App-breed zodat Ctrl/Cmd+O
+  /// altijd werkt, ongeacht waar de focus zit.
+  void _openActive() {
+    _openWithSearch(context, ref, ref.read(settingsProvider).homeDirectory);
+  }
+
   bool _dragging = false;
 
   static const _imageExtensions = {
@@ -370,6 +376,9 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
         const SingleActivator(LogicalKeyboardKey.keyS, control: true):
             _saveActive,
         const SingleActivator(LogicalKeyboardKey.keyS, meta: true): _saveActive,
+        const SingleActivator(LogicalKeyboardKey.keyO, control: true):
+            _openActive,
+        const SingleActivator(LogicalKeyboardKey.keyO, meta: true): _openActive,
       },
       child: FocusScope(
         autofocus: true,

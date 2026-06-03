@@ -7,6 +7,7 @@ import '../../models/slide.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/settings_provider.dart';
+import '../../state/tabs_provider.dart';
 import '../../services/image_service.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../state/slide_clipboard_provider.dart';
@@ -181,6 +182,78 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       SnackBar(
         content: Text(
           ok ? 'Slide gekopieerd naar klembord.' : 'Kopiëren mislukt.',
+        ),
+      ),
+    );
+  }
+
+  /// De geselecteerde slides, op volgorde van positie in het deck.
+  List<Slide> _selectedSlides(Deck deck) {
+    final indices = ref.read(editorProvider).selection.toList()..sort();
+    return [
+      for (final i in indices)
+        if (i >= 0 && i < deck.slides.length) deck.slides[i],
+    ];
+  }
+
+  /// Kopieer de geselecteerde slides (bulk) naar een ander open deck. Toont een
+  /// keuzelijst van de overige open tabbladen; de slides worden achteraan dat
+  /// deck toegevoegd (met nieuwe id's, zodat het kopieën zijn).
+  Future<void> _copySelectionToOtherDeck() async {
+    final deck = ref.read(deckProvider).deck;
+    if (deck == null) return;
+    final slides = _selectedSlides(deck);
+    if (slides.isEmpty) return;
+
+    final tabs = ref.read(tabsProvider);
+    final currentId = tabs.current?.id;
+    final targets = tabs.tabs
+        .where((t) => t.id != currentId && t.isOpen)
+        .toList();
+
+    final messenger = ScaffoldMessenger.of(context);
+    if (targets.isEmpty) {
+      messenger.showSnackBar(
+        const SnackBar(
+          content: Text('Geen ander deck open. Open eerst een ander tabblad.'),
+        ),
+      );
+      return;
+    }
+
+    final target = await showDialog<TabInfo>(
+      context: context,
+      builder: (ctx) => SimpleDialog(
+        title: Text(
+          slides.length == 1
+              ? '1 slide kopiëren naar…'
+              : '${slides.length} slides kopiëren naar…',
+        ),
+        children: [
+          for (final t in targets)
+            SimpleDialogOption(
+              onPressed: () => Navigator.pop(ctx, t),
+              child: Row(
+                children: [
+                  const Icon(Icons.slideshow_outlined, size: 16),
+                  const SizedBox(width: 8),
+                  Expanded(child: Text(t.label)),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+    if (target == null || !mounted) return;
+
+    final at = target.deckNotifier.insertSlides(slides);
+    if (!mounted) return;
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(
+          at >= 0
+              ? '${slides.length} slide(s) gekopieerd naar “${target.label}”.'
+              : 'Kopiëren mislukt.',
         ),
       ),
     );
@@ -497,6 +570,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                       const SizedBox(height: 6),
                       _BulkActionBar(
                         count: editor.selection.length,
+                        onCopyToDeck: _copySelectionToOtherDeck,
                         onDelete: _deleteSelection,
                         onSkip: () => notifier.setSkippedForSlides(
                           editor.selection,
@@ -779,6 +853,7 @@ class _SkipBanner extends StatelessWidget {
 
 class _BulkActionBar extends StatelessWidget {
   final int count;
+  final VoidCallback onCopyToDeck;
   final VoidCallback onDelete;
   final VoidCallback onSkip;
   final VoidCallback onShow;
@@ -786,6 +861,7 @@ class _BulkActionBar extends StatelessWidget {
 
   const _BulkActionBar({
     required this.count,
+    required this.onCopyToDeck,
     required this.onDelete,
     required this.onSkip,
     required this.onShow,
@@ -812,6 +888,11 @@ class _BulkActionBar extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
+          ),
+          _BulkIcon(
+            icon: Icons.drive_file_move_outline,
+            tooltip: 'Kopiëren naar ander deck',
+            onTap: onCopyToDeck,
           ),
           _BulkIcon(
             icon: Icons.visibility_off_outlined,
