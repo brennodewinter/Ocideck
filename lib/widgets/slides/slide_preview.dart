@@ -1,5 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_highlight/flutter_highlight.dart';
+import 'package:flutter_highlight/themes/github.dart';
+import 'package:flutter_math_fork/flutter_math.dart';
+import 'package:highlight/highlight.dart' show highlight;
+import 'package:highlight/languages/all.dart' show allLanguages;
 import 'package:video_player/video_player.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
@@ -1849,7 +1854,6 @@ class _MarkdownPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     final pad = w * 0.07;
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
-    final lines = slide.customMarkdown.split('\n');
 
     return Container(
       color: Colors.white,
@@ -1869,52 +1873,7 @@ class _MarkdownPreview extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
-                children: lines.take(20).map((line) {
-                  final link = _hexColor(profile.accentColor);
-                  if (line.startsWith('# ')) {
-                    return _md(
-                      context,
-                      line.substring(2),
-                      _applyFont(
-                        font,
-                        TextStyle(
-                          fontSize: w * 0.04,
-                          fontWeight: FontWeight.bold,
-                          color: AppTheme.navy,
-                        ),
-                      ),
-                      linkColor: link,
-                    );
-                  } else if (line.startsWith('## ')) {
-                    return _md(
-                      context,
-                      line.substring(3),
-                      _applyFont(
-                        font,
-                        TextStyle(
-                          fontSize: w * 0.03,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      linkColor: link,
-                    );
-                  } else if (line.startsWith('- ')) {
-                    return _md(
-                      context,
-                      '• ${line.substring(2)}',
-                      _applyFont(font, TextStyle(fontSize: w * 0.024)),
-                      linkColor: link,
-                    );
-                  } else if (line.isEmpty) {
-                    return SizedBox(height: w * 0.01);
-                  }
-                  return _md(
-                    context,
-                    line,
-                    _applyFont(font, TextStyle(fontSize: w * 0.024)),
-                    linkColor: link,
-                  );
-                }).toList(),
+                children: _buildBlocks(context),
               ),
             ),
           ),
@@ -1922,6 +1881,162 @@ class _MarkdownPreview extends StatelessWidget {
       ),
     );
   }
+
+  /// Parse the free Markdown into block widgets: fenced ```code``` (syntax
+  /// highlighted), `$$…$$` display math, and ordinary heading/bullet/text lines.
+  List<Widget> _buildBlocks(BuildContext context) {
+    final link = _hexColor(profile.accentColor);
+    final lines = slide.customMarkdown.split('\n');
+    final widgets = <Widget>[];
+    var i = 0;
+    // Cap rendered blocks so a huge slide can't blow up layout (the preview is a
+    // thumbnail; FittedBox scales the rest down).
+    while (i < lines.length && widgets.length < 24) {
+      final line = lines[i];
+
+      // Fenced code block: ``` or ```language … ```
+      final fence = RegExp(r'^\s*```(.*)$').firstMatch(line);
+      if (fence != null) {
+        final language = fence.group(1)!.trim();
+        final code = <String>[];
+        i++;
+        while (i < lines.length && !RegExp(r'^\s*```\s*$').hasMatch(lines[i])) {
+          code.add(lines[i]);
+          i++;
+        }
+        if (i < lines.length) i++; // consume the closing fence
+        widgets.add(_codeBlock(code.join('\n'), language));
+        continue;
+      }
+
+      // Display math fenced by lines containing only `$$`.
+      if (line.trim() == r'$$') {
+        final tex = <String>[];
+        i++;
+        while (i < lines.length && lines[i].trim() != r'$$') {
+          tex.add(lines[i]);
+          i++;
+        }
+        if (i < lines.length) i++; // consume the closing $$
+        widgets.add(_mathBlock(tex.join('\n')));
+        continue;
+      }
+      // Single-line display math: $$ … $$
+      final oneLine = RegExp(r'^\s*\$\$(.+)\$\$\s*$').firstMatch(line);
+      if (oneLine != null) {
+        widgets.add(_mathBlock(oneLine.group(1)!.trim()));
+        i++;
+        continue;
+      }
+
+      widgets.add(_textLine(context, line, link));
+      i++;
+    }
+    return widgets;
+  }
+
+  Widget _textLine(BuildContext context, String line, Color link) {
+    if (line.startsWith('# ')) {
+      return _md(
+        context,
+        line.substring(2),
+        _applyFont(
+          font,
+          TextStyle(
+            fontSize: w * 0.04,
+            fontWeight: FontWeight.bold,
+            color: AppTheme.navy,
+          ),
+        ),
+        linkColor: link,
+      );
+    } else if (line.startsWith('## ')) {
+      return _md(
+        context,
+        line.substring(3),
+        _applyFont(
+          font,
+          TextStyle(fontSize: w * 0.03, fontWeight: FontWeight.w600),
+        ),
+        linkColor: link,
+      );
+    } else if (line.startsWith('- ')) {
+      return _md(
+        context,
+        '• ${line.substring(2)}',
+        _applyFont(font, TextStyle(fontSize: w * 0.024)),
+        linkColor: link,
+      );
+    } else if (line.isEmpty) {
+      return SizedBox(height: w * 0.01);
+    }
+    return _md(
+      context,
+      line,
+      _applyFont(font, TextStyle(fontSize: w * 0.024)),
+      linkColor: link,
+    );
+  }
+
+  Widget _codeBlock(String code, String language) {
+    _ensureHighlightLanguages();
+    final mono = TextStyle(
+      fontFamily: 'monospace',
+      fontSize: w * 0.02,
+      height: 1.3,
+      color: const Color(0xFF24292E),
+    );
+    // HighlightView throws on an unregistered language, so only use it for ones
+    // we actually know; otherwise fall back to plain monospace.
+    final known = language.isNotEmpty && allLanguages.containsKey(language);
+    final Widget content = known
+        ? HighlightView(
+            code,
+            language: language,
+            theme: githubTheme,
+            padding: EdgeInsets.zero,
+            textStyle: mono,
+          )
+        : Text(code, style: mono);
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.symmetric(vertical: w * 0.008),
+      padding: EdgeInsets.all(w * 0.018),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF6F8FA),
+        borderRadius: BorderRadius.circular(w * 0.008),
+        border: Border.all(color: const Color(0xFFE1E4E8)),
+      ),
+      child: content,
+    );
+  }
+
+  Widget _mathBlock(String tex) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: w * 0.012),
+      child: Math.tex(
+        tex,
+        textStyle: _applyFont(font, TextStyle(fontSize: w * 0.032)),
+        onErrorFallback: (err) => Text(
+          '\$\$$tex\$\$',
+          style: TextStyle(
+            fontFamily: 'monospace',
+            fontSize: w * 0.022,
+            color: Colors.red,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Register highlight.js language definitions once, so [HighlightView] can
+/// colour any common language without throwing.
+bool _highlightReady = false;
+void _ensureHighlightLanguages() {
+  if (_highlightReady) return;
+  allLanguages.forEach(highlight.registerLanguage);
+  _highlightReady = true;
 }
 
 // ── Shared helper ─────────────────────────────────────────────────────────────
