@@ -174,8 +174,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     } catch (_) {}
     if (!mounted) return;
     final ok =
-        bytes != null &&
-        await ImageService().copyImageBytesToClipboard(bytes);
+        bytes != null && await ImageService().copyImageBytesToClipboard(bytes);
     if (!mounted) return;
     messenger.hideCurrentSnackBar();
     messenger.showSnackBar(
