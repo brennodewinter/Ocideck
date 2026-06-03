@@ -2,14 +2,12 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../models/settings.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../theme/app_theme.dart';
 
 TextStyle _fontStyle(String font, TextStyle base) {
-  if (font == 'EB Garamond') return GoogleFonts.ebGaramond(textStyle: base);
   return base.copyWith(fontFamily: font);
 }
 
@@ -26,6 +24,7 @@ class SettingsDialog extends ConsumerStatefulWidget {
 
 class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   late String? _homeDirectory;
+  late String? _exportDirectory;
   late ThemeProfile _themeProfile;
 
   /// The saved name of the profile currently being edited. Used as a stable
@@ -59,6 +58,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     super.initState();
     final settings = ref.read(settingsProvider);
     _homeDirectory = settings.homeDirectory;
+    _exportDirectory = settings.exportDirectory;
     // Reflect the profile the open presentation actually uses, falling back to
     // the globally selected profile when no deck is open.
     final deckProfile = ref
@@ -99,6 +99,14 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     if (result != null) setState(() => _homeDirectory = result);
   }
 
+  Future<void> _pickExportDirectory() async {
+    final result = await FilePicker.getDirectoryPath(
+      dialogTitle: 'Map voor exports',
+      initialDirectory: _exportDirectory ?? _homeDirectory,
+    );
+    if (result != null) setState(() => _exportDirectory = result);
+  }
+
   Future<void> _pickLogo() async {
     final result = await FilePicker.pickFiles(
       dialogTitle: 'Logo kiezen',
@@ -135,6 +143,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       footerText: _footerText.text,
     );
     notifier.setHomeDirectory(_homeDirectory);
+    notifier.setExportDirectory(_exportDirectory);
     notifier.saveThemeProfile(profile, previousName: _originalName);
 
     // Apply the chosen/edited profile to the presentation that is currently
@@ -344,6 +353,38 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                 tooltip: 'Verwijder standaard map',
               ),
           ],
+        ),
+        const SizedBox(height: 16),
+        _sectionTitle('Exportmap'),
+        Row(
+          children: [
+            Expanded(
+              child: _pathBox(
+                _exportDirectory ?? 'Naast het presentatiebestand',
+                muted: _exportDirectory == null,
+              ),
+            ),
+            const SizedBox(width: 8),
+            ElevatedButton.icon(
+              onPressed: _pickExportDirectory,
+              icon: const Icon(Icons.folder_open, size: 16),
+              label: const Text('Kiezen'),
+            ),
+            if (_exportDirectory != null)
+              IconButton(
+                onPressed: () => setState(() => _exportDirectory = null),
+                icon: const Icon(Icons.clear, size: 18),
+                tooltip: 'Verwijder exportmap',
+              ),
+          ],
+        ),
+        const Padding(
+          padding: EdgeInsets.only(top: 6),
+          child: Text(
+            'Alle exports (PDF/PPTX) worden hier opgeslagen. Niet ingesteld? '
+            'Dan komt de export naast het presentatiebestand te staan.',
+            style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
         ),
       ],
     );

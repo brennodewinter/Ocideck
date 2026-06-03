@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:video_player/video_player.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
@@ -8,9 +7,9 @@ import '../../models/slide.dart';
 import '../../theme/app_theme.dart';
 import 'inline_markdown.dart';
 
-/// Returns a TextStyle with the correct font, using GoogleFonts for web fonts.
+/// Returns a TextStyle with the correct font. 'EB Garamond' is bundled with the
+/// app (see pubspec.yaml); all other fonts resolve to system families.
 TextStyle _applyFont(String font, TextStyle base) {
-  if (font == 'EB Garamond') return GoogleFonts.ebGaramond(textStyle: base);
   return base.copyWith(fontFamily: font);
 }
 

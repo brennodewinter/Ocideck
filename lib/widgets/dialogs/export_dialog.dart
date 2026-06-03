@@ -15,6 +15,9 @@ class ExportDialog extends StatefulWidget {
   final ExportService exportService;
   final TlpLevel tlp;
 
+  /// Folder all exports are written to. Null = next to the source deck.
+  final String? exportDirectory;
+
   const ExportDialog({
     super.key,
     required this.deckPath,
@@ -23,6 +26,7 @@ class ExportDialog extends StatefulWidget {
     required this.projectPath,
     required this.exportService,
     this.tlp = TlpLevel.none,
+    this.exportDirectory,
   });
 
   static Future<void> show(
@@ -33,6 +37,7 @@ class ExportDialog extends StatefulWidget {
     required String? projectPath,
     required ExportService exportService,
     TlpLevel tlp = TlpLevel.none,
+    String? exportDirectory,
   }) {
     return showDialog(
       context: context,
@@ -44,6 +49,7 @@ class ExportDialog extends StatefulWidget {
         projectPath: projectPath,
         exportService: exportService,
         tlp: tlp,
+        exportDirectory: exportDirectory,
       ),
     );
   }
@@ -60,7 +66,11 @@ class _ExportDialogState extends State<ExportDialog> {
   int _done = 0;
   int _total = 0;
 
-  Future<void> _export(ExportFormat format) async {
+  /// Image quality for PDF export: false = full-resolution PNG, true = a smaller
+  /// downscaled JPEG handout.
+  bool _compress = false;
+
+  Future<void> _export(ExportFormat format, {bool compress = false}) async {
     setState(() {
       _loading = true;
       _result = null;
@@ -87,6 +97,8 @@ class _ExportDialogState extends State<ExportDialog> {
       widget.deckPath,
       format,
       images,
+      compress: compress,
+      outputDirectory: widget.exportDirectory,
     );
 
     if (!mounted) return;
@@ -175,17 +187,71 @@ class _ExportDialogState extends State<ExportDialog> {
             style: TextStyle(fontSize: 12, color: Color(0xFF64748B)),
           ),
         ),
-        ...ExportFormat.values.map((f) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: OutlinedButton.icon(
-              onPressed: () => _export(f),
-              icon: Icon(_formatIcon(f)),
-              label: Text('Exporteer als ${f.label}'),
+        const Padding(
+          padding: EdgeInsets.only(bottom: 6),
+          child: Text(
+            'Afbeeldingskwaliteit (PDF)',
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF475569),
             ),
-          );
-        }),
+          ),
+        ),
+        SegmentedButton<bool>(
+          segments: const [
+            ButtonSegment(
+              value: false,
+              icon: Icon(Icons.image_outlined),
+              label: Text('Normaal'),
+            ),
+            ButtonSegment(
+              value: true,
+              icon: Icon(Icons.compress),
+              label: Text('Gecomprimeerd'),
+            ),
+          ],
+          selected: {_compress},
+          onSelectionChanged: (s) => setState(() => _compress = s.first),
+          showSelectedIcon: false,
+          style: const ButtonStyle(visualDensity: VisualDensity.compact),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 4, bottom: 8),
+          child: Text(
+            _compress
+                ? 'JPEG op lagere resolutie — bedoeld als handout, veel kleiner '
+                      'bestand (apart opgeslagen als “-compact”).'
+                : 'Verliesvrije afbeeldingen op volledige resolutie.',
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+        ),
+        _exportButton(
+          icon: _formatIcon(ExportFormat.pdf),
+          label: 'Exporteer als PDF',
+          onPressed: () => _export(ExportFormat.pdf, compress: _compress),
+        ),
+        _exportButton(
+          icon: _formatIcon(ExportFormat.pptx),
+          label: 'Exporteer als ${ExportFormat.pptx.label}',
+          onPressed: () => _export(ExportFormat.pptx),
+        ),
       ],
+    );
+  }
+
+  Widget _exportButton({
+    required IconData icon,
+    required String label,
+    required VoidCallback onPressed,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: OutlinedButton.icon(
+        onPressed: onPressed,
+        icon: Icon(icon),
+        label: Text(label),
+      ),
     );
   }
 

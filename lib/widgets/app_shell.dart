@@ -918,6 +918,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         projectPath: deck.projectPath,
         exportService: widget.exportService,
         tlp: deck.tlp,
+        exportDirectory: ref.read(settingsProvider).exportDirectory,
       );
     }
 

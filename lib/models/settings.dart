@@ -146,12 +146,17 @@ class ThemeProfile {
 
 class AppSettings {
   final String? homeDirectory;
+
+  /// Folder where all exports (PDF/PPTX) are written. When null, exports land
+  /// next to the source deck (legacy behaviour).
+  final String? exportDirectory;
   final List<ThemeProfile> themeProfiles;
   final String selectedThemeProfileName;
   final List<String> recentFiles;
 
   const AppSettings({
     this.homeDirectory,
+    this.exportDirectory,
     this.themeProfiles = const [ThemeProfile()],
     this.selectedThemeProfileName = 'Standaard',
     this.recentFiles = const [],
@@ -180,17 +185,22 @@ class AppSettings {
 
   AppSettings copyWith({
     String? homeDirectory,
+    String? exportDirectory,
     ThemeProfile? themeProfile,
     List<ThemeProfile>? themeProfiles,
     String? selectedThemeProfileName,
     List<String>? recentFiles,
     bool clearHomeDirectory = false,
+    bool clearExportDirectory = false,
   }) {
     final nextProfiles = themeProfiles ?? this.themeProfiles;
     return AppSettings(
       homeDirectory: clearHomeDirectory
           ? null
           : (homeDirectory ?? this.homeDirectory),
+      exportDirectory: clearExportDirectory
+          ? null
+          : (exportDirectory ?? this.exportDirectory),
       themeProfiles: themeProfile == null
           ? nextProfiles
           : [

@@ -17,7 +17,6 @@ dependencies:
   uuid: ^4.5.1
   window_manager: ^0.5.1
   shared_preferences: ^2.3.3
-  google_fonts: ^8.1.0
   pasteboard: ^0.5.0
   pdf: ^3.12.0
   archive: ^4.0.9
@@ -25,12 +24,12 @@ dependencies:
   characters: ^1.3.0
   url_launcher: ^6.3.0
   desktop_drop: ^0.5.0
+  image: ^4.8.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  image: ^4.8.0
   xml: ^6.6.1
 
 flutter:
@@ -38,3 +37,9 @@ flutter:
   assets:
     - assets/images/de-winter-wittegeheel.png
     - assets/themes/ocideck.css
+  fonts:
+    - family: EB Garamond
+      fonts:
+        - asset: assets/fonts/EBGaramond-Variable.ttf
+        - asset: assets/fonts/EBGaramond-Italic-Variable.ttf
+          style: italic

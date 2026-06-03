@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
+import 'package:image/image.dart' as img;
 import 'package:path/path.dart' as p;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -49,22 +50,63 @@ class ExportService {
   static const int _slideWidthEmu = 12192000;
   static const int _slideHeightEmu = 6858000;
 
-  /// Write [images] to a file derived from [deckPath] (same folder/base name)
-  /// in the requested [format].
+  /// JPEG quality (0–100) used when a PDF is exported in compressed mode.
+  /// Low enough to shrink photo-heavy decks dramatically while keeping slides
+  /// legible.
+  static const int _compressedJpegQuality = 60;
+
+  /// Slides are downscaled to this width (px) in compressed mode. The compressed
+  /// PDF is meant as a screen handout, so 720p is plenty and shrinks the file
+  /// further on top of JPEG encoding. Wider slides are never upscaled.
+  static const int _compressedMaxWidth = 1280;
+
+  /// Timestamp for [time] in UTC, formatted `YYYYMMDDHHMMSS` —
+  /// e.g. `20260603124547`. Used as a filename prefix so exports sort
+  /// chronologically and never overwrite each other.
+  static String natoDtg(DateTime time) {
+    final t = time.toUtc();
+    String two(int n) => n.toString().padLeft(2, '0');
+    return '${t.year.toString().padLeft(4, '0')}${two(t.month)}${two(t.day)}'
+        '${two(t.hour)}${two(t.minute)}${two(t.second)}';
+  }
+
+  /// Write [images] to a file named after [deckPath] in the requested [format].
+  ///
+  /// The file name is prefixed with a UTC timestamp (see [natoDtg]),
+  /// e.g. `20260603124547 deck.pdf`.
+  ///
+  /// The file is written to [outputDirectory] when given (created if missing);
+  /// otherwise it lands next to the source deck (legacy behaviour).
+  ///
+  /// When [compress] is set (PDF only), each slide is re-encoded as JPEG instead
+  /// of being embedded as lossless PNG, and `-compact` is appended to the file
+  /// name so it never overwrites a full-quality export.
   Future<ExportResult> export(
     String deckPath,
     ExportFormat format,
-    List<Uint8List> images,
-  ) async {
+    List<Uint8List> images, {
+    bool compress = false,
+    String? outputDirectory,
+  }) async {
     if (images.isEmpty) {
       return ExportResult.fail('Geen slides om te exporteren.');
     }
-    final outputPath = '${p.withoutExtension(deckPath)}${format.extension}';
+    final compactSuffix = compress && format == ExportFormat.pdf
+        ? '-compact'
+        : '';
+    final dir = (outputDirectory != null && outputDirectory.isNotEmpty)
+        ? outputDirectory
+        : p.dirname(deckPath);
+    final prefix = '${natoDtg(DateTime.now())} ';
+    final fileName =
+        '$prefix${p.basenameWithoutExtension(deckPath)}$compactSuffix${format.extension}';
+    final outputPath = p.join(dir, fileName);
     try {
+      await Directory(dir).create(recursive: true);
       final Uint8List bytes;
       switch (format) {
         case ExportFormat.pdf:
-          bytes = await _buildPdf(images);
+          bytes = await _buildPdf(images, compress: compress);
         case ExportFormat.pptx:
           bytes = _buildPptx(images);
       }
@@ -77,12 +119,17 @@ class ExportService {
 
   // ── PDF ───────────────────────────────────────────────────────────────────
 
-  Future<Uint8List> _buildPdf(List<Uint8List> images) async {
+  Future<Uint8List> _buildPdf(
+    List<Uint8List> images, {
+    bool compress = false,
+  }) async {
     final doc = pw.Document();
     // Page size in points; only the ratio matters for a full-bleed image.
     const format = PdfPageFormat(1280, 720, marginAll: 0);
     for (final png in images) {
-      final image = pw.MemoryImage(png);
+      // MemoryImage auto-detects PNG vs JPEG from the byte header, so a
+      // compressed (JPEG) slide embeds just like the lossless one.
+      final image = pw.MemoryImage(compress ? _toJpeg(png) : png);
       doc.addPage(
         pw.Page(
           pageFormat: format,
@@ -91,6 +138,22 @@ class ExportService {
       );
     }
     return doc.save();
+  }
+
+  /// Downscale a rendered slide PNG to [_compressedMaxWidth] and re-encode it as
+  /// JPEG at [_compressedJpegQuality]. Slides are full-bleed (no transparency),
+  /// so dropping the alpha channel is safe.
+  Uint8List _toJpeg(Uint8List png) {
+    final decoded = img.decodePng(png);
+    if (decoded == null) return png; // Unexpected; keep the original bytes.
+    final resized = decoded.width > _compressedMaxWidth
+        ? img.copyResize(
+            decoded,
+            width: _compressedMaxWidth,
+            interpolation: img.Interpolation.average,
+          )
+        : decoded;
+    return img.encodeJpg(resized, quality: _compressedJpegQuality);
   }
 
   // ── PPTX (Office Open XML) ─────────────────────────────────────────────────

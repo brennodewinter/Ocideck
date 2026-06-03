@@ -5,7 +5,6 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart' as p;
 
 import '../models/deck.dart';
@@ -38,9 +37,6 @@ class SlideRasterizer {
   }) async {
     final overlay = Overlay.of(context, rootOverlay: true);
     final pixelRatio = targetWidth / logicalSize.width;
-
-    await _preloadFont(themeProfile.fontFamily);
-    if (!context.mounted) return const [];
 
     // The global image cache has a modest default budget (~100 MB / 1000
     // entries). A deck with several full-resolution photos blows past that, so
@@ -133,15 +129,6 @@ class SlideRasterizer {
       return byteData!.buffer.asUint8List();
     } finally {
       image.dispose();
-    }
-  }
-
-  static Future<void> _preloadFont(String fontFamily) async {
-    // Only the bundled Google font needs awaiting; system fonts resolve
-    // synchronously.
-    if (fontFamily == 'EB Garamond') {
-      GoogleFonts.ebGaramond();
-      await GoogleFonts.pendingFonts();
     }
   }
 

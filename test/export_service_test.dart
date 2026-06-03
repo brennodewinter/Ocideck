@@ -15,6 +15,31 @@ Uint8List _png() {
   return Uint8List.fromList(img.encodePng(image));
 }
 
+/// A photo-like PNG full of pseudo-random pixels, where lossless PNG is large
+/// and JPEG compression pays off — used to assert the compressed PDF shrinks.
+Uint8List _noisyPng() {
+  // Wider than ExportService's compressed target width so the export exercises
+  // both the JPEG re-encode and the downscale path.
+  final image = img.Image(width: 1600, height: 900);
+  var seed = 1234567;
+  for (var y = 0; y < image.height; y++) {
+    for (var x = 0; x < image.width; x++) {
+      seed = (seed * 1103515245 + 12345) & 0x7fffffff;
+      image.setPixelRgb(
+        x,
+        y,
+        seed & 0xff,
+        (seed >> 8) & 0xff,
+        (seed >> 16) & 0xff,
+      );
+    }
+  }
+  return Uint8List.fromList(img.encodePng(image));
+}
+
+/// Matches a leading UTC timestamp prefix: `YYYYMMDDHHMMSS ` (e.g. `20260603124547 `).
+final _dtgPrefix = RegExp(r'^\d{14} ');
+
 void main() {
   late Directory tmp;
   late ExportService service;
@@ -72,6 +97,75 @@ void main() {
         );
       }
     }
+  });
+
+  test('compressed PDF is written as a separate -compact file', () async {
+    final images = [_png(), _png()];
+    final r = await service.export(
+      deckPath(),
+      ExportFormat.pdf,
+      images,
+      compress: true,
+    );
+
+    expect(r.success, isTrue, reason: r.error);
+    expect(p.basename(r.outputPath!), endsWith(' deck-compact.pdf'));
+    expect(p.basename(r.outputPath!), matches(_dtgPrefix));
+    final bytes = await File(r.outputPath!).readAsBytes();
+    expect(String.fromCharCodes(bytes.take(4)), '%PDF');
+  });
+
+  test('compressed PDF is smaller than the lossless PDF', () async {
+    final images = [_noisyPng(), _noisyPng()];
+
+    final lossless = await service.export(deckPath(), ExportFormat.pdf, images);
+    final compressed = await service.export(
+      deckPath(),
+      ExportFormat.pdf,
+      images,
+      compress: true,
+    );
+
+    expect(lossless.success, isTrue, reason: lossless.error);
+    expect(compressed.success, isTrue, reason: compressed.error);
+
+    final losslessSize = await File(lossless.outputPath!).length();
+    final compressedSize = await File(compressed.outputPath!).length();
+    expect(compressedSize, lessThan(losslessSize));
+  });
+
+  test('writes into outputDirectory and creates it when missing', () async {
+    final exportDir = p.join(tmp.path, 'exports', 'pdf');
+    expect(Directory(exportDir).existsSync(), isFalse);
+
+    final r = await service.export(deckPath(), ExportFormat.pdf, [
+      _png(),
+    ], outputDirectory: exportDir);
+
+    expect(r.success, isTrue, reason: r.error);
+    expect(p.dirname(r.outputPath!), exportDir);
+    expect(p.basename(r.outputPath!), endsWith(' deck.pdf'));
+    expect(p.basename(r.outputPath!), matches(_dtgPrefix));
+    expect(File(r.outputPath!).existsSync(), isTrue);
+  });
+
+  test('without outputDirectory the export lands next to the deck', () async {
+    final r = await service.export(deckPath(), ExportFormat.pdf, [_png()]);
+
+    expect(r.success, isTrue, reason: r.error);
+    expect(p.dirname(r.outputPath!), tmp.path);
+  });
+
+  test('natoDtg formats a UTC YYYYMMDDHHMMSS timestamp', () {
+    final t = DateTime.utc(2026, 6, 3, 12, 45, 47);
+    expect(ExportService.natoDtg(t), '20260603124547');
+  });
+
+  test('natoDtg converts non-UTC input to UTC (zone-independent)', () {
+    final utc = DateTime.utc(2026, 1, 5, 9, 7, 3);
+    // toLocal() then format must still yield the original UTC timestamp,
+    // whatever the machine's time zone is.
+    expect(ExportService.natoDtg(utc.toLocal()), '20260105090703');
   });
 
   test('fails gracefully when there are no slides', () async {

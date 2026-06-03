@@ -30,6 +30,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     final profiles = _uniqueProfiles(loadedProfiles);
     state = AppSettings(
       homeDirectory: prefs.getString('homeDirectory'),
+      exportDirectory: prefs.getString('exportDirectory'),
       themeProfiles: profiles.isEmpty ? const [ThemeProfile()] : profiles,
       selectedThemeProfileName:
           prefs.getString('selectedThemeProfileName') ?? profiles.first.name,
@@ -56,6 +57,18 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       await prefs.remove('homeDirectory');
     } else {
       await prefs.setString('homeDirectory', path);
+    }
+  }
+
+  Future<void> setExportDirectory(String? path) async {
+    state = path == null
+        ? state.copyWith(clearExportDirectory: true)
+        : state.copyWith(exportDirectory: path);
+    final prefs = await SharedPreferences.getInstance();
+    if (path == null) {
+      await prefs.remove('exportDirectory');
+    } else {
+      await prefs.setString('exportDirectory', path);
     }
   }
 
