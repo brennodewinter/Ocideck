@@ -61,6 +61,34 @@ void main() {
     expect(n.state.deck!.slides[1].id, isNot(source.id));
   });
 
+  test('copying a selection into another deck leaves the source intact', () {
+    // Source deck with three slides; "select" indices 0 and 2.
+    final source = _notifier()..newDeck('Bron');
+    source.addSlide(SlideType.bullets); // 1
+    source.addSlide(SlideType.image); // 2
+    final picked = [source.state.deck!.slides[0], source.state.deck!.slides[2]];
+    final sourceIdsBefore = source.state.deck!.slides.map((s) => s.id).toList();
+
+    // Target deck receives the copies (appended at the end).
+    final target = _notifier()..newDeck('Doel');
+    final at = target.insertSlides(picked);
+
+    expect(at, 1); // appended after the single title slide
+    expect(target.state.deck!.slides, hasLength(3));
+    expect(target.state.deck!.slides[1].type, SlideType.title);
+    expect(target.state.deck!.slides[2].type, SlideType.image);
+    // Copies must have fresh ids, not the source ids.
+    expect(
+      target.state.deck!.slides[1].id,
+      isNot(anyOf(picked.map((s) => s.id))),
+    );
+    // The source deck is untouched.
+    expect(
+      source.state.deck!.slides.map((s) => s.id).toList(),
+      sourceIdsBefore,
+    );
+  });
+
   test('reorderSlides moves a slide to a new position', () {
     final n = _notifier()..newDeck('D');
     n.addSlide(SlideType.bullets); // 1
