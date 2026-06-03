@@ -928,6 +928,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         exportService: widget.exportService,
         tlp: deck.tlp,
         exportDirectory: ref.read(settingsProvider).exportDirectory,
+        markdown: deckNotifier.generateMarkdown(),
       );
     }
 

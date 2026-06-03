@@ -7,13 +7,13 @@ Built with Flutter for macOS, Windows, and Linux.
 ## Features
 
 - **Structured slide editors** — dedicated editors per slide type: title, bullets, two-column bullets, bullets + image, single/two images, quote, table, section divider, image-only, video, audio, and free-form Markdown.
-- **Live preview** — see each slide rendered as you edit, with inline Markdown, footers, and TLP (Traffic Light Protocol) marking.
+- **Live preview** — see each slide rendered as you edit, with inline Markdown, footers, and TLP (Traffic Light Protocol) marking. Free-Markdown slides render fenced code with syntax highlighting and `$…$` / `$$…$$` LaTeX math.
 - **Fullscreen presenter** — keyboard-driven navigation, presenter view, and a slide-grid overview.
 - **Media handling** — drag-and-drop images, an image carousel picker, captions, and descriptions stored as sidecar metadata.
-- **Import / export** — round-trips Marp Markdown, imports existing slides, and exports to PDF and PPTX. Decks are saved as a self-contained package with copied assets.
-- **Productivity** — find & replace, slide finder, undo/redo, skip-slide state, and tabbed multi-deck editing.
+- **Import / export** — round-trips Marp Markdown, imports existing slides, and exports to PDF, PPTX (with speaker notes), and a self-contained offline HTML deck (code highlighting, math, and mermaid diagrams render in the browser). Decks are saved as a self-contained package with copied assets.
+- **Productivity** — find & replace, slide finder, undo/redo, skip-slide state, multi-select with bulk copy-to-another-deck / delete / skip, and tabbed multi-deck editing. `Ctrl/Cmd+O` opens, `Ctrl/Cmd+S` saves.
 - **Crash recovery** — automatic snapshots so work survives an unexpected exit.
-- **Theming** — a bundled Marp CSS theme (`assets/themes/ocideck.css`) and Google Fonts.
+- **Theming** — a bundled Marp CSS theme (`assets/themes/ocideck.css`) and a bundled EB Garamond font (no network fetch).
 
 ## Requirements
 

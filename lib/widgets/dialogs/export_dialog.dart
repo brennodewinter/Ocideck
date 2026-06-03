@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
@@ -18,6 +20,9 @@ class ExportDialog extends StatefulWidget {
   /// Folder all exports are written to. Null = next to the source deck.
   final String? exportDirectory;
 
+  /// The deck's Marp Markdown, used for the self-contained HTML export.
+  final String markdown;
+
   const ExportDialog({
     super.key,
     required this.deckPath,
@@ -27,6 +32,7 @@ class ExportDialog extends StatefulWidget {
     required this.exportService,
     this.tlp = TlpLevel.none,
     this.exportDirectory,
+    this.markdown = '',
   });
 
   static Future<void> show(
@@ -38,6 +44,7 @@ class ExportDialog extends StatefulWidget {
     required ExportService exportService,
     TlpLevel tlp = TlpLevel.none,
     String? exportDirectory,
+    String markdown = '',
   }) {
     return showDialog(
       context: context,
@@ -50,6 +57,7 @@ class ExportDialog extends StatefulWidget {
         exportService: exportService,
         tlp: tlp,
         exportDirectory: exportDirectory,
+        markdown: markdown,
       ),
     );
   }
@@ -71,24 +79,28 @@ class _ExportDialogState extends State<ExportDialog> {
   bool _compress = false;
 
   Future<void> _export(ExportFormat format, {bool compress = false}) async {
+    // HTML renders from Markdown in the browser, so it needs no slide raster.
+    final needsRaster = format != ExportFormat.html;
     setState(() {
       _loading = true;
       _result = null;
-      _phase = 'Slides renderen…';
+      _phase = needsRaster ? 'Slides renderen…' : 'HTML samenstellen…';
       _done = 0;
-      _total = widget.slides.length;
+      _total = needsRaster ? widget.slides.length : 0;
     });
 
-    final images = await SlideRasterizer.rasterize(
-      context: context,
-      slides: widget.slides,
-      themeProfile: widget.themeProfile,
-      projectPath: widget.projectPath,
-      tlp: widget.tlp,
-      onProgress: (done, total) {
-        if (mounted) setState(() => _done = done);
-      },
-    );
+    final images = needsRaster
+        ? await SlideRasterizer.rasterize(
+            context: context,
+            slides: widget.slides,
+            themeProfile: widget.themeProfile,
+            projectPath: widget.projectPath,
+            tlp: widget.tlp,
+            onProgress: (done, total) {
+              if (mounted) setState(() => _done = done);
+            },
+          )
+        : const <Uint8List>[];
 
     if (!mounted) return;
     setState(() => _phase = '${format.label} samenstellen…');
@@ -101,6 +113,7 @@ class _ExportDialogState extends State<ExportDialog> {
       outputDirectory: widget.exportDirectory,
       // Speaker notes travel 1:1 with the rendered slides (PPTX notes pane).
       notes: [for (final s in widget.slides) s.notes],
+      markdown: widget.markdown,
     );
 
     if (!mounted) return;
@@ -114,6 +127,7 @@ class _ExportDialogState extends State<ExportDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      scrollable: true,
       title: const Text('Exporteren'),
       content: SizedBox(width: 380, child: _content()),
       actions: [
@@ -238,6 +252,19 @@ class _ExportDialogState extends State<ExportDialog> {
           label: 'Exporteer als ${ExportFormat.pptx.label}',
           onPressed: () => _export(ExportFormat.pptx),
         ),
+        _exportButton(
+          icon: _formatIcon(ExportFormat.html),
+          label: 'Exporteer als HTML (Marp, offline)',
+          onPressed: () => _export(ExportFormat.html),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(top: 4),
+          child: Text(
+            'HTML opent in elke browser zonder internet en rendert codeblokken, '
+            'wiskunde en mermaid-diagrammen.',
+            style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+        ),
       ],
     );
   }
@@ -263,6 +290,8 @@ class _ExportDialogState extends State<ExportDialog> {
         return Icons.picture_as_pdf_outlined;
       case ExportFormat.pptx:
         return Icons.slideshow_outlined;
+      case ExportFormat.html:
+        return Icons.public_outlined;
     }
   }
 }

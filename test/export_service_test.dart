@@ -6,6 +6,7 @@ import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
 import 'package:ocideck/services/export_service.dart';
+import 'package:ocideck/services/marp_html_service.dart';
 import 'package:path/path.dart' as p;
 import 'package:xml/xml.dart';
 
@@ -224,6 +225,31 @@ void main() {
 
   test('fails gracefully when there are no slides', () async {
     final r = await service.export(deckPath(), ExportFormat.pdf, const []);
+    expect(r.success, isFalse);
+  });
+
+  test('HTML export writes a self-contained .html from Markdown', () async {
+    final htmlService = ExportService(
+      htmlService: MarpHtmlService(loadAsset: (a) => File(a).readAsString()),
+    );
+    final r = await htmlService.export(
+      deckPath(),
+      ExportFormat.html,
+      const [], // HTML needs no rasterized slides
+      markdown: '# Titel\n\n---\n\n# Tweede',
+    );
+
+    expect(r.success, isTrue, reason: r.error);
+    expect(p.extension(r.outputPath!), '.html');
+    expect(p.basename(r.outputPath!), matches(_dtgPrefix));
+
+    final html = await File(r.outputPath!).readAsString();
+    expect(html, startsWith('<!doctype html>'));
+    expect(html, contains('# Titel'));
+  });
+
+  test('HTML export fails without Markdown', () async {
+    final r = await service.export(deckPath(), ExportFormat.html, const []);
     expect(r.success, isFalse);
   });
 }

@@ -8,7 +8,9 @@ import 'package:path/path.dart' as p;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-enum ExportFormat { pdf, pptx }
+import 'marp_html_service.dart';
+
+enum ExportFormat { pdf, pptx, html }
 
 extension ExportFormatExtension on ExportFormat {
   String get label {
@@ -17,6 +19,8 @@ extension ExportFormatExtension on ExportFormat {
         return 'PDF';
       case ExportFormat.pptx:
         return 'PowerPoint (PPTX)';
+      case ExportFormat.html:
+        return 'HTML (Marp, self-contained)';
     }
   }
 
@@ -26,6 +30,8 @@ extension ExportFormatExtension on ExportFormat {
         return '.pdf';
       case ExportFormat.pptx:
         return '.pptx';
+      case ExportFormat.html:
+        return '.html';
     }
   }
 }
@@ -46,6 +52,12 @@ class ExportResult {
 /// Builds PDF and PPTX files from pre-rendered slide images (WYSIWYG export).
 /// Slides are expected to be 16:9 PNG bytes (see [SlideRasterizer]).
 class ExportService {
+  /// Renders the self-contained Marp HTML export. Injectable for testing.
+  final MarpHtmlService _html;
+
+  ExportService({MarpHtmlService? htmlService})
+    : _html = htmlService ?? MarpHtmlService();
+
   // 16:9 widescreen slide size in EMU (English Metric Units): 13.333" x 7.5".
   static const int _slideWidthEmu = 12192000;
   static const int _slideHeightEmu = 6858000;
@@ -88,8 +100,13 @@ class ExportService {
     bool compress = false,
     String? outputDirectory,
     List<String>? notes,
+    String? markdown,
   }) async {
-    if (images.isEmpty) {
+    if (format == ExportFormat.html) {
+      if (markdown == null || markdown.trim().isEmpty) {
+        return ExportResult.fail('Geen inhoud om te exporteren.');
+      }
+    } else if (images.isEmpty) {
       return ExportResult.fail('Geen slides om te exporteren.');
     }
     final compactSuffix = compress && format == ExportFormat.pdf
@@ -110,6 +127,8 @@ class ExportService {
           bytes = await _buildPdf(images, compress: compress);
         case ExportFormat.pptx:
           bytes = _buildPptx(images, notes: notes);
+        case ExportFormat.html:
+          bytes = Uint8List.fromList(utf8.encode(await _html.build(markdown!)));
       }
       await File(outputPath).writeAsBytes(bytes, flush: true);
       return ExportResult.ok(outputPath);
@@ -204,7 +223,10 @@ class ExportService {
       addText('ppt/slides/slide$n.xml', _slideXml());
       addText('ppt/slides/_rels/slide$n.xml.rels', _slideRels(n, hasNote));
       if (hasNote) {
-        addText('ppt/notesSlides/notesSlide$n.xml', _notesSlideXml(noteFor[i]!));
+        addText(
+          'ppt/notesSlides/notesSlide$n.xml',
+          _notesSlideXml(noteFor[i]!),
+        );
         addText(
           'ppt/notesSlides/_rels/notesSlide$n.xml.rels',
           _notesSlideRels(n),
@@ -230,9 +252,7 @@ class ExportService {
   String _notesSlideXml(String note) {
     final paras = StringBuffer();
     for (final line in note.split('\n')) {
-      paras.write(
-        '<a:p><a:r><a:t>${_xmlEscape(line)}</a:t></a:r></a:p>',
-      );
+      paras.write('<a:p><a:r><a:t>${_xmlEscape(line)}</a:t></a:r></a:p>');
     }
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<p:notes xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
