@@ -99,6 +99,60 @@ void main() {
     }
   });
 
+  test('PPTX without notes has no notesSlide/notesMaster parts', () async {
+    final r = await service.export(deckPath(), ExportFormat.pptx, [_png()]);
+    final archive = ZipDecoder().decodeBytes(
+      await File(r.outputPath!).readAsBytes(),
+    );
+    final names = archive.files.map((f) => f.name).toSet();
+    expect(names.any((n) => n.startsWith('ppt/notesSlides/')), isFalse);
+    expect(names.any((n) => n.startsWith('ppt/notesMasters/')), isFalse);
+  });
+
+  test('PPTX embeds speaker notes only for slides that have them', () async {
+    final r = await service.export(
+      deckPath(),
+      ExportFormat.pptx,
+      [_png(), _png()],
+      notes: ['', 'Vergeet de cijfers niet <3 & co'],
+    );
+    expect(r.success, isTrue, reason: r.error);
+
+    final archive = ZipDecoder().decodeBytes(
+      await File(r.outputPath!).readAsBytes(),
+    );
+    final names = archive.files.map((f) => f.name).toSet();
+
+    // Notes machinery is present for the noted slide only.
+    expect(names, contains('ppt/notesMasters/notesMaster1.xml'));
+    expect(names, contains('ppt/notesSlides/notesSlide2.xml'));
+    expect(names, isNot(contains('ppt/notesSlides/notesSlide1.xml')));
+
+    String partText(String name) => utf8.decode(
+      archive.files.firstWhere((f) => f.name == name).content as List<int>,
+    );
+
+    // The note text is present and XML-escaped.
+    final notes2 = partText('ppt/notesSlides/notesSlide2.xml');
+    expect(notes2, contains('Vergeet de cijfers niet &lt;3 &amp; co'));
+    // The slide links to its notesSlide.
+    expect(
+      partText('ppt/slides/_rels/slide2.xml.rels'),
+      contains('notesSlide2.xml'),
+    );
+
+    // Every XML part (including the new notes parts) must be well-formed.
+    for (final file in archive.files) {
+      if (file.name.endsWith('.xml') || file.name.endsWith('.rels')) {
+        expect(
+          () => XmlDocument.parse(utf8.decode(file.content as List<int>)),
+          returnsNormally,
+          reason: '${file.name} is not well-formed XML',
+        );
+      }
+    }
+  });
+
   test('compressed PDF is written as a separate -compact file', () async {
     final images = [_png(), _png()];
     final r = await service.export(

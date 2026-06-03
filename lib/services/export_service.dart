@@ -87,6 +87,7 @@ class ExportService {
     List<Uint8List> images, {
     bool compress = false,
     String? outputDirectory,
+    List<String>? notes,
   }) async {
     if (images.isEmpty) {
       return ExportResult.fail('Geen slides om te exporteren.');
@@ -108,7 +109,7 @@ class ExportService {
         case ExportFormat.pdf:
           bytes = await _buildPdf(images, compress: compress);
         case ExportFormat.pptx:
-          bytes = _buildPptx(images);
+          bytes = _buildPptx(images, notes: notes);
       }
       await File(outputPath).writeAsBytes(bytes, flush: true);
       return ExportResult.ok(outputPath);
@@ -158,7 +159,7 @@ class ExportService {
 
   // ── PPTX (Office Open XML) ─────────────────────────────────────────────────
 
-  Uint8List _buildPptx(List<Uint8List> images) {
+  Uint8List _buildPptx(List<Uint8List> images, {List<String>? notes}) {
     final archive = Archive();
     void addText(String name, String content) {
       final data = utf8Bytes(content);
@@ -166,11 +167,22 @@ class ExportService {
     }
 
     final slideCount = images.length;
+    // Which slides carry speaker notes. When none do, the whole notes machinery
+    // (notesMaster + notesSlides) is omitted to keep the file minimal.
+    final noteFor = <int, String>{
+      for (var i = 0; i < slideCount; i++)
+        if (notes != null && i < notes.length && notes[i].trim().isNotEmpty)
+          i: notes[i].trim(),
+    };
+    final hasNotes = noteFor.isNotEmpty;
 
-    addText('[Content_Types].xml', _contentTypes(slideCount));
+    addText('[Content_Types].xml', _contentTypes(slideCount, noteFor.keys));
     addText('_rels/.rels', _rootRels());
-    addText('ppt/presentation.xml', _presentationXml(slideCount));
-    addText('ppt/_rels/presentation.xml.rels', _presentationRels(slideCount));
+    addText('ppt/presentation.xml', _presentationXml(slideCount, hasNotes));
+    addText(
+      'ppt/_rels/presentation.xml.rels',
+      _presentationRels(slideCount, hasNotes),
+    );
     addText('ppt/presProps.xml', _presProps());
     addText('ppt/theme/theme1.xml', _theme1());
     addText('ppt/slideMasters/slideMaster1.xml', _slideMaster());
@@ -178,10 +190,26 @@ class ExportService {
     addText('ppt/slideLayouts/slideLayout1.xml', _slideLayout());
     addText('ppt/slideLayouts/_rels/slideLayout1.xml.rels', _slideLayoutRels());
 
+    if (hasNotes) {
+      addText('ppt/notesMasters/notesMaster1.xml', _notesMaster());
+      addText(
+        'ppt/notesMasters/_rels/notesMaster1.xml.rels',
+        _notesMasterRels(),
+      );
+    }
+
     for (var i = 0; i < slideCount; i++) {
       final n = i + 1;
+      final hasNote = noteFor.containsKey(i);
       addText('ppt/slides/slide$n.xml', _slideXml());
-      addText('ppt/slides/_rels/slide$n.xml.rels', _slideRels(n));
+      addText('ppt/slides/_rels/slide$n.xml.rels', _slideRels(n, hasNote));
+      if (hasNote) {
+        addText('ppt/notesSlides/notesSlide$n.xml', _notesSlideXml(noteFor[i]!));
+        addText(
+          'ppt/notesSlides/_rels/notesSlide$n.xml.rels',
+          _notesSlideRels(n),
+        );
+      }
       final png = images[i];
       archive.add(ArchiveFile('ppt/media/image$n.png', png.length, png));
     }
@@ -189,15 +217,102 @@ class ExportService {
     return ZipEncoder().encodeBytes(archive);
   }
 
+  /// XML-escape free text destined for an `<a:t>` run.
+  static String _xmlEscape(String s) {
+    return s
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;');
+  }
+
+  /// A notesSlide whose body placeholder carries the speaker notes. Newlines in
+  /// [note] become separate paragraphs.
+  String _notesSlideXml(String note) {
+    final paras = StringBuffer();
+    for (final line in note.split('\n')) {
+      paras.write(
+        '<a:p><a:r><a:t>${_xmlEscape(line)}</a:t></a:r></a:p>',
+      );
+    }
+    return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<p:notes xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+        'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" '
+        'xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">'
+        '<p:cSld><p:spTree>'
+        '<p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr>'
+        '<p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/>'
+        '<a:chOff x="0" y="0"/><a:chExt cx="0" cy="0"/></a:xfrm></p:grpSpPr>'
+        '<p:sp>'
+        '<p:nvSpPr><p:cNvPr id="2" name="Notes Placeholder"/>'
+        '<p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr>'
+        '<p:nvPr><p:ph type="body" idx="1"/></p:nvPr></p:nvSpPr>'
+        '<p:spPr/>'
+        '<p:txBody><a:bodyPr/><a:lstStyle/>$paras</p:txBody>'
+        '</p:sp>'
+        '</p:spTree></p:cSld>'
+        '<p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr>'
+        '</p:notes>';
+  }
+
+  String _notesSlideRels(int n) {
+    return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+        '<Relationship Id="rId1" '
+        'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" '
+        'Target="../slides/slide$n.xml"/>'
+        '<Relationship Id="rId2" '
+        'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesMaster" '
+        'Target="../notesMasters/notesMaster1.xml"/>'
+        '</Relationships>';
+  }
+
+  String _notesMaster() {
+    return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<p:notesMaster xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+        'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" '
+        'xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">'
+        '<p:cSld><p:spTree>'
+        '<p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr>'
+        '<p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/>'
+        '<a:chOff x="0" y="0"/><a:chExt cx="0" cy="0"/></a:xfrm></p:grpSpPr>'
+        '</p:spTree></p:cSld>'
+        '<p:clrMap bg1="lt1" tx1="dk1" bg2="lt2" tx2="dk2" accent1="accent1" '
+        'accent2="accent2" accent3="accent3" accent4="accent4" accent5="accent5" '
+        'accent6="accent6" hlink="hlink" folHlink="folHlink"/>'
+        '</p:notesMaster>';
+  }
+
+  String _notesMasterRels() {
+    return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+        '<Relationship Id="rId1" '
+        'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme" '
+        'Target="../theme/theme1.xml"/>'
+        '</Relationships>';
+  }
+
   static List<int> utf8Bytes(String s) => utf8.encode(s);
 
-  String _contentTypes(int count) {
+  String _contentTypes(int count, Iterable<int> noteIndices) {
     final overrides = StringBuffer();
     for (var i = 1; i <= count; i++) {
       overrides.write(
         '<Override PartName="/ppt/slides/slide$i.xml" '
         'ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/>',
       );
+    }
+    final notes = noteIndices.toList();
+    if (notes.isNotEmpty) {
+      overrides.write(
+        '<Override PartName="/ppt/notesMasters/notesMaster1.xml" '
+        'ContentType="application/vnd.openxmlformats-officedocument.presentationml.notesMaster+xml"/>',
+      );
+      for (final i in notes) {
+        overrides.write(
+          '<Override PartName="/ppt/notesSlides/notesSlide${i + 1}.xml" '
+          'ContentType="application/vnd.openxmlformats-officedocument.presentationml.notesSlide+xml"/>',
+        );
+      }
     }
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
@@ -220,24 +335,31 @@ class ExportService {
         '</Relationships>';
   }
 
-  String _presentationXml(int count) {
+  String _presentationXml(int count, bool hasNotes) {
     final sldIds = StringBuffer();
     for (var i = 0; i < count; i++) {
       // Slide relationship ids start at rId2 (rId1 = master).
       sldIds.write('<p:sldId id="${256 + i}" r:id="rId${i + 2}"/>');
     }
+    // The notesMaster relationship is appended after the slides/presProps/theme
+    // rels (see _presentationRels): rId(count+4).
+    final notesMasterIdLst = hasNotes
+        ? '<p:notesMasterIdLst><p:notesMasterId r:id="rId${count + 4}"/></p:notesMasterIdLst>'
+        : '';
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<p:presentation xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
         'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" '
         'xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">'
         '<p:sldMasterIdLst><p:sldMasterId id="2147483648" r:id="rId1"/></p:sldMasterIdLst>'
+        // Schema order: notesMasterIdLst must precede sldIdLst.
+        '$notesMasterIdLst'
         '<p:sldIdLst>$sldIds</p:sldIdLst>'
         '<p:sldSz cx="$_slideWidthEmu" cy="$_slideHeightEmu" type="screen16x9"/>'
         '<p:notesSz cx="6858000" cy="9144000"/>'
         '</p:presentation>';
   }
 
-  String _presentationRels(int count) {
+  String _presentationRels(int count, bool hasNotes) {
     final rels = StringBuffer();
     rels.write(
       '<Relationship Id="rId1" '
@@ -264,6 +386,14 @@ class ExportService {
       'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme" '
       'Target="theme/theme1.xml"/>',
     );
+    if (hasNotes) {
+      // Must match the r:id used by notesMasterIdLst in _presentationXml.
+      rels.write(
+        '<Relationship Id="rId${count + 4}" '
+        'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesMaster" '
+        'Target="notesMasters/notesMaster1.xml"/>',
+      );
+    }
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
         '$rels'
@@ -348,7 +478,12 @@ class ExportService {
         '</p:sld>';
   }
 
-  String _slideRels(int n) {
+  String _slideRels(int n, bool hasNote) {
+    final notesRel = hasNote
+        ? '<Relationship Id="rId3" '
+              'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide" '
+              'Target="../notesSlides/notesSlide$n.xml"/>'
+        : '';
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
         '<Relationship Id="rId1" '
@@ -357,6 +492,7 @@ class ExportService {
         '<Relationship Id="rId2" '
         'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" '
         'Target="../media/image$n.png"/>'
+        '$notesRel'
         '</Relationships>';
   }
 

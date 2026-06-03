@@ -99,6 +99,8 @@ class _ExportDialogState extends State<ExportDialog> {
       images,
       compress: compress,
       outputDirectory: widget.exportDirectory,
+      // Speaker notes travel 1:1 with the rendered slides (PPTX notes pane).
+      notes: [for (final s in widget.slides) s.notes],
     );
 
     if (!mounted) return;

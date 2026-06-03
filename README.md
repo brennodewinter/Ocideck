@@ -50,7 +50,8 @@ Targeted test groups speed up focused work:
 | `make test-services`  | Image, caption, and description sidecar services |
 | `make test-presenter` | Fullscreen presenter navigation and keyboard shortcuts |
 
-CI runs `make check` on every push and pull request (see [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
+Run `make check` before pushing — it is the same quality gate (format check,
+static analysis, full test suite) you would wire into CI.
 
 ## Project layout
 
