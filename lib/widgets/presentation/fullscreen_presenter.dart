@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:screen_retriever/screen_retriever.dart';
 import 'package:window_manager/window_manager.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
@@ -107,6 +108,12 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// Met M te wisselen.
   bool _advanceOnAudioEnd = true;
 
+  /// Known displays for moving the fullscreen presentation window. This is not
+  /// a second presenter window; it keeps the current output movable between
+  /// screens with S or the presenter-view button.
+  List<Display> _displays = const [];
+  int _displayIndex = 0;
+
   @override
   void initState() {
     super.initState();
@@ -119,6 +126,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _focusNode.requestFocus();
+      _loadDisplays();
       _scheduleAdvance();
     });
   }
@@ -207,6 +215,55 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   void _toggleAudioAdvance() {
     setState(() => _advanceOnAudioEnd = !_advanceOnAudioEnd);
     _scheduleAdvance();
+  }
+
+  Future<void> _loadDisplays() async {
+    try {
+      final displays = await screenRetriever.getAllDisplays();
+      if (!mounted || displays.isEmpty) return;
+      final bounds = await windowManager.getBounds();
+      final center = bounds.center;
+      final current = displays.indexWhere((d) {
+        final p = d.visiblePosition ?? Offset.zero;
+        final s = d.visibleSize ?? d.size;
+        return Rect.fromLTWH(p.dx, p.dy, s.width, s.height).contains(center);
+      });
+      setState(() {
+        _displays = displays;
+        _displayIndex = current < 0 ? 0 : current;
+      });
+    } catch (_) {
+      // Screen detection is best-effort; presenting should still work.
+    }
+  }
+
+  Future<void> _moveToDisplay(int index) async {
+    if (_displays.length < 2) return;
+    final display = _displays[index.clamp(0, _displays.length - 1)];
+    final position = display.visiblePosition ?? Offset.zero;
+    final size = display.visibleSize ?? display.size;
+    try {
+      await windowManager.setFullScreen(false);
+      await windowManager.setBounds(
+        Rect.fromLTWH(position.dx, position.dy, size.width, size.height),
+      );
+      await windowManager.setFullScreen(true);
+      if (mounted) setState(() => _displayIndex = index);
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(context.l10n.d('Kon niet van scherm wisselen.')),
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _cycleDisplay() async {
+    if (_displays.isEmpty) await _loadDisplays();
+    if (_displays.length < 2) return;
+    await _moveToDisplay((_displayIndex + 1) % _displays.length);
   }
 
   Future<void> _exit() async {
@@ -452,6 +509,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       case LogicalKeyboardKey.keyM:
         _toggleAudioAdvance();
         return KeyEventResult.handled;
+      case LogicalKeyboardKey.keyS:
+        _cycleDisplay();
+        return KeyEventResult.handled;
       case LogicalKeyboardKey.escape:
         // Gelaagd: getypt nummer wissen, dan blanco scherm, dan pas afsluiten.
         if (_typed.isNotEmpty) {
@@ -587,12 +647,13 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       ('Home · End', l10n.d('Eerste · laatste slide')),
       ('G', l10n.d('Slide-overzicht (pijltjes + Enter)')),
       ('P', l10n.d('Presenter view (notities, klok)')),
+      ('S', l10n.d('Scherm wisselen (meerdere schermen)')),
       ('B · W', l10n.d('Zwart · wit scherm')),
       ('R', l10n.d('Verstreken tijd resetten')),
       ('A', l10n.d('Automatische modus aan/uit')),
       ('L', l10n.d('Herhalen (loop) aan/uit')),
       ('M', l10n.d('Na audio automatisch doorgaan')),
-      ('? · H', l10n.d('Dit overzicht')),
+      ('H', l10n.d('Deze legenda')),
       ('Esc', l10n.d('Terug / afsluiten')),
     ];
     return GestureDetector(
@@ -627,7 +688,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        l10n.d('Sneltoetsen'),
+                        l10n.d('Toetsenlegenda'),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -668,7 +729,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                   const SizedBox(height: 16),
                   Center(
                     child: Text(
-                      l10n.d('Klik of druk op ? / H / Esc om te sluiten'),
+                      l10n.d('Klik of druk op H / Esc om te sluiten'),
                       style: const TextStyle(
                         color: Colors.white30,
                         fontSize: 12,
@@ -681,44 +742,6 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           ),
         ),
       ),
-    );
-  }
-
-  /// Subtiele statusindicator (linksonder) voor de automatische modus. Toont
-  /// of auto-play, herhalen en 'na audio doorgaan' actief zijn.
-  Widget _autoPlayStatus() {
-    final l10n = context.l10n;
-    final items = <(IconData, String, bool)>[
-      (
-        _autoPlay ? Icons.play_circle_outline : Icons.pause_circle_outline,
-        _autoPlay ? l10n.d('Auto (A)') : l10n.d('Handmatig (A)'),
-        _autoPlay,
-      ),
-      (Icons.repeat, l10n.d('Herhalen (L)'), _loop),
-      (Icons.graphic_eq, l10n.d('Na audio (M)'), _advanceOnAudioEnd),
-    ];
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        for (final (icon, label, active) in items)
-          Padding(
-            padding: const EdgeInsets.only(right: 12),
-            child: Opacity(
-              opacity: active ? 0.7 : 0.28,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(icon, size: 14, color: Colors.white),
-                  const SizedBox(width: 4),
-                  Text(
-                    label,
-                    style: const TextStyle(color: Colors.white, fontSize: 11),
-                  ),
-                ],
-              ),
-            ),
-          ),
-      ],
     );
   }
 
@@ -783,148 +806,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     return GestureDetector(
       onTap: _next,
       onSecondaryTap: _prev,
-      child: Stack(
-        children: [
-          // ── Slide canvas ─────────────────────────────────────────────────
-          Positioned.fill(child: _slideCanvas(slide)),
-
-          // ── Voortgangsbalk (auto-advance) ────────────────────────────────
-          if (_progress > 0)
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: LinearProgressIndicator(
-                value: _progress,
-                backgroundColor: Colors.white12,
-                color: Colors.white54,
-                minHeight: 3,
-              ),
-            ),
-
-          // ── Slide counter ────────────────────────────────────────────────
-          Positioned(
-            right: 24,
-            bottom: 10,
-            child: Text(
-              '${_index + 1} / $total',
-              style: const TextStyle(
-                color: Colors.white38,
-                fontSize: 13,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-
-          // ── Auto-play status (linksonder) ────────────────────────────────
-          Positioned(left: 24, bottom: 10, child: _autoPlayStatus()),
-
-          // ── Navigation arrows ────────────────────────────────────────────
-          Positioned(
-            left: 0,
-            top: 0,
-            bottom: 0,
-            child: MouseRegion(
-              cursor: _index > 0 ? SystemMouseCursors.click : MouseCursor.defer,
-              child: GestureDetector(
-                onTap: _prev,
-                child: Container(
-                  width: 60,
-                  color: Colors.transparent,
-                  child: _index > 0
-                      ? const Icon(
-                          Icons.chevron_left,
-                          color: Colors.white24,
-                          size: 40,
-                        )
-                      : null,
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            right: 0,
-            top: 0,
-            bottom: 0,
-            child: MouseRegion(
-              cursor: _index < total - 1
-                  ? SystemMouseCursors.click
-                  : MouseCursor.defer,
-              child: GestureDetector(
-                onTap: _next,
-                child: Container(
-                  width: 60,
-                  color: Colors.transparent,
-                  child: _index < total - 1
-                      ? const Icon(
-                          Icons.chevron_right,
-                          color: Colors.white24,
-                          size: 40,
-                        )
-                      : null,
-                ),
-              ),
-            ),
-          ),
-
-          // ── Top-right controls (presenter view + afsluiten) ──────────────
-          Positioned(
-            top: 16,
-            right: 16,
-            child: Row(
-              children: [
-                Tooltip(
-                  message: context.l10n.d('Sneltoetsen (?)'),
-                  child: IconButton(
-                    onPressed: _toggleHelp,
-                    icon: const Icon(Icons.help_outline),
-                    color: Colors.white,
-                    style: IconButton.styleFrom(
-                      backgroundColor: Colors.black45,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Tooltip(
-                  message: context.l10n.d('Slide-overzicht (G)'),
-                  child: IconButton(
-                    onPressed: _toggleGrid,
-                    icon: const Icon(Icons.grid_view_rounded),
-                    color: Colors.white,
-                    style: IconButton.styleFrom(
-                      backgroundColor: Colors.black45,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Tooltip(
-                  message: context.l10n.d('Presenter view (P)'),
-                  child: IconButton(
-                    onPressed: _togglePresenterView,
-                    icon: const Icon(Icons.co_present_outlined),
-                    color: Colors.white,
-                    style: IconButton.styleFrom(
-                      backgroundColor: Colors.black45,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Tooltip(
-                  message: context.l10n.d('Afsluiten (Escape)'),
-                  child: IconButton(
-                    onPressed: _exit,
-                    icon: const Icon(Icons.close),
-                    color: Colors.white,
-                    style: IconButton.styleFrom(
-                      backgroundColor: Colors.black45,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+      child: SizedBox.expand(child: _slideCanvas(slide)),
     );
   }
 
@@ -1151,6 +1033,16 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           icon: Icons.chevron_right,
           onTap: _index < total - 1 ? _next : null,
         ),
+        if (_displays.length > 1) ...[
+          const SizedBox(width: 8),
+          Tooltip(
+            message: l10n.d('Wissel scherm (S)'),
+            child: _NavButton(
+              icon: Icons.screen_share_outlined,
+              onTap: _cycleDisplay,
+            ),
+          ),
+        ],
         const SizedBox(width: 16),
         Text(
           '${l10n.d('Slide')} ${_index + 1} / $total',
@@ -1164,7 +1056,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         Expanded(
           child: Text(
             l10n.d(
-              'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop',
+              _displays.length > 1
+                  ? 'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop'
+                  : 'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop',
             ),
             textAlign: TextAlign.right,
             maxLines: 1,

@@ -1184,13 +1184,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                   onPressed: saveDeck,
                 ),
               ),
-              Tooltip(
-                message: exportTooltip,
-                child: IconButton(
-                  icon: const Icon(Icons.upload_file_outlined, size: 18),
-                  onPressed: canExport ? exportDeck : null,
-                ),
-              ),
               const _ActionsDivider(),
               // ── Overig (minder vaak gebruikt) ───────────────────────────
               PopupMenuButton<String>(

@@ -30,7 +30,12 @@ void main() {
     await tester.pumpWidget(_host(slides));
     await tester.pump();
 
-    expect(find.text('1 / 2'), findsOneWidget); // slide counter
+    expect(find.text('Eerste'), findsOneWidget);
+    expect(find.text('1 / 2'), findsNothing); // no audience chrome
+    expect(find.byIcon(Icons.help_outline), findsNothing);
+    expect(find.byIcon(Icons.grid_view_rounded), findsNothing);
+    expect(find.byIcon(Icons.co_present_outlined), findsNothing);
+    expect(find.byIcon(Icons.close), findsNothing);
     expect(find.text('NOTITIES'), findsNothing); // presenter-only
     expect(find.text('VOLGENDE'), findsNothing);
 
@@ -88,17 +93,17 @@ void main() {
   testWidgets('B blanks the audience screen and toggles back', (tester) async {
     await tester.pumpWidget(_host(slides));
     await tester.pump();
-    expect(find.text('1 / 2'), findsOneWidget);
+    expect(find.text('Eerste'), findsOneWidget);
 
-    // Blank to black: the slide (and its counter) disappears.
+    // Blank to black: the slide disappears.
     await tester.sendKeyEvent(LogicalKeyboardKey.keyB);
     await tester.pump();
-    expect(find.text('1 / 2'), findsNothing);
+    expect(find.text('Eerste'), findsNothing);
 
     // Same key restores the slide.
     await tester.sendKeyEvent(LogicalKeyboardKey.keyB);
     await tester.pump();
-    expect(find.text('1 / 2'), findsOneWidget);
+    expect(find.text('Eerste'), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox());
   });
@@ -111,12 +116,12 @@ void main() {
 
     await tester.sendKeyEvent(LogicalKeyboardKey.keyB);
     await tester.pump();
-    expect(find.text('1 / 2'), findsNothing);
+    expect(find.text('Eerste'), findsNothing);
 
     // First arrow un-blanks without advancing (still on slide 1).
     await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
     await tester.pump();
-    expect(find.text('1 / 2'), findsOneWidget);
+    expect(find.text('Eerste'), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox());
   });
@@ -142,7 +147,7 @@ void main() {
 
     // Grid closed and we jumped to slide 2.
     expect(find.text('Slide-overzicht'), findsNothing);
-    expect(find.text('2 / 2'), findsOneWidget);
+    expect(find.text('Tweede'), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox());
   });
@@ -152,15 +157,15 @@ void main() {
   ) async {
     await tester.pumpWidget(_host(slides));
     await tester.pump();
-    expect(find.text('1 / 2'), findsOneWidget);
+    expect(find.text('Eerste'), findsOneWidget);
 
     await tester.sendKeyEvent(LogicalKeyboardKey.end);
     await tester.pump();
-    expect(find.text('2 / 2'), findsOneWidget);
+    expect(find.text('Tweede'), findsOneWidget);
 
     await tester.sendKeyEvent(LogicalKeyboardKey.home);
     await tester.pump();
-    expect(find.text('1 / 2'), findsOneWidget);
+    expect(find.text('Eerste'), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox());
   });
@@ -187,7 +192,7 @@ void main() {
     await tester.pump();
 
     expect(find.text('Slide-overzicht'), findsNothing);
-    expect(find.text('2 / 2'), findsOneWidget);
+    expect(find.text('Tweede'), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox());
   });
@@ -199,7 +204,7 @@ void main() {
     ];
     await tester.pumpWidget(_host(three));
     await tester.pump();
-    expect(find.text('1 / 3'), findsOneWidget);
+    expect(find.text('Eerste'), findsOneWidget);
 
     // Type "3" → a badge appears, Enter jumps to slide 3.
     await tester.sendKeyEvent(LogicalKeyboardKey.digit3);
@@ -208,8 +213,9 @@ void main() {
 
     await tester.sendKeyEvent(LogicalKeyboardKey.enter);
     await tester.pump();
-    // Badge gone, now actually on slide 3 (counter shows it).
-    expect(find.text('3 / 3'), findsOneWidget); // slide counter now
+    // Badge gone, now actually on slide 3.
+    expect(find.text('Derde'), findsOneWidget);
+    expect(find.text('3 / 3'), findsNothing);
     expect(find.byIcon(Icons.south_east), findsNothing); // badge icon gone
 
     await tester.pumpWidget(const SizedBox());
@@ -218,17 +224,18 @@ void main() {
   testWidgets('? toggles the shortcut cheatsheet', (tester) async {
     await tester.pumpWidget(_host(slides));
     await tester.pump();
-    expect(find.text('Sneltoetsen'), findsNothing);
+    expect(find.text('Toetsenlegenda'), findsNothing);
 
     await tester.sendKeyEvent(LogicalKeyboardKey.keyH);
     await tester.pump();
-    expect(find.text('Sneltoetsen'), findsOneWidget);
+    expect(find.text('Toetsenlegenda'), findsOneWidget);
+    expect(find.text('Scherm wisselen (meerdere schermen)'), findsOneWidget);
 
     await tester.sendKeyEvent(LogicalKeyboardKey.escape);
     await tester.pump();
-    expect(find.text('Sneltoetsen'), findsNothing);
+    expect(find.text('Toetsenlegenda'), findsNothing);
     // Esc closed the help, not the presentation.
-    expect(find.text('1 / 2'), findsOneWidget);
+    expect(find.text('Eerste'), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox());
   });
@@ -250,7 +257,7 @@ void main() {
     await tester.sendKeyEvent(LogicalKeyboardKey.escape);
     await tester.pump();
     expect(find.text('Slide-overzicht'), findsNothing);
-    expect(find.text('1 / 2'), findsOneWidget);
+    expect(find.text('Eerste'), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox());
   });

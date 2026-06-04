@@ -29,9 +29,9 @@ void main() {
   });
 
   testWidgets('free Markdown renders display math', (tester) async {
-    final slide = Slide.create(SlideType.freeMarkdown).copyWith(
-      customMarkdown: 'Stelling:\n\n\$\$E = mc^2\$\$\n',
-    );
+    final slide = Slide.create(
+      SlideType.freeMarkdown,
+    ).copyWith(customMarkdown: 'Stelling:\n\n\$\$E = mc^2\$\$\n');
     await tester.pumpWidget(_host(slide));
 
     expect(find.byType(Math), findsOneWidget);
@@ -40,9 +40,9 @@ void main() {
   testWidgets('an unknown code language falls back without throwing', (
     tester,
   ) async {
-    final slide = Slide.create(SlideType.freeMarkdown).copyWith(
-      customMarkdown: '```nonexistentlang\nsome code\n```\n',
-    );
+    final slide = Slide.create(
+      SlideType.freeMarkdown,
+    ).copyWith(customMarkdown: '```nonexistentlang\nsome code\n```\n');
     await tester.pumpWidget(_host(slide));
 
     // No HighlightView (unknown language) and no exception during build.
