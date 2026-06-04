@@ -138,6 +138,19 @@ List<String> _imageUsages(WidgetRef ref, String absolutePath) {
   return usages;
 }
 
+List<Slide> _slidesForPresentationOrExport(Deck deck) {
+  final slides = deck.slides.where((s) => !s.skipped).toList();
+  final closingMarkdown = deck.themeProfile.closingSlideMarkdown.trim();
+  if (deck.themeProfile.closingSlideEnabled && closingMarkdown.isNotEmpty) {
+    slides.add(
+      Slide.create(
+        SlideType.freeMarkdown,
+      ).copyWith(customMarkdown: closingMarkdown),
+    );
+  }
+  return slides;
+}
+
 // ── App shell ─────────────────────────────────────────────────────────────────
 
 class AppShell extends ConsumerStatefulWidget {
@@ -904,7 +917,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         for (var i = 0; i < deck.slides.length; i++)
           if (!deck.slides[i].skipped) i,
       ];
-      if (visible.isEmpty) {
+      final slides = _slidesForPresentationOrExport(deck);
+      if (slides.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
@@ -916,9 +930,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       }
       var initial = visible.indexWhere((i) => i >= editor.selectedIndex);
       if (initial < 0) initial = visible.length - 1;
+      if (initial < 0) initial = 0;
       FullscreenPresenter.show(
         context,
-        slides: [for (final i in visible) deck.slides[i]],
+        slides: slides,
         projectPath: deck.projectPath,
         themeProfile: deck.themeProfile,
         initialIndex: initial,
@@ -927,7 +942,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     }
 
     void exportDeck() {
-      final slides = deck.slides.where((s) => !s.skipped).toList();
+      final slides = _slidesForPresentationOrExport(deck);
       if (slides.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -947,7 +962,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         exportService: widget.exportService,
         tlp: deck.tlp,
         exportDirectory: ref.read(settingsProvider).exportDirectory,
-        markdown: deckNotifier.generateMarkdown(),
+        markdown: ref
+            .read(markdownServiceProvider)
+            .generateDeck(deck.copyWith(slides: slides)),
       );
     }
 

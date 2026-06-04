@@ -25,6 +25,11 @@ class ThemeProfile {
   /// Horizontale positie van de footer: left, center of right.
   final String footerPosition;
 
+  /// Optional markdown slide that is appended when presenting/exporting with
+  /// this theme profile. It stays out of the editable deck slide list.
+  final bool closingSlideEnabled;
+  final String closingSlideMarkdown;
+
   const ThemeProfile({
     this.name = 'Standaard',
     this.slideBackgroundColor = '#FFFFFF',
@@ -42,6 +47,8 @@ class ThemeProfile {
     this.footerText = '',
     this.footerShowPageNumbers = false,
     this.footerPosition = 'right',
+    this.closingSlideEnabled = false,
+    this.closingSlideMarkdown = '# Bedankt\n\nVragen?',
   }) : tableTextColor = tableTextColor ?? textColor;
 
   static const logoPositions = [
@@ -70,6 +77,8 @@ class ThemeProfile {
     String? footerText,
     bool? footerShowPageNumbers,
     String? footerPosition,
+    bool? closingSlideEnabled,
+    String? closingSlideMarkdown,
     bool clearLogo = false,
   }) {
     return ThemeProfile(
@@ -91,6 +100,8 @@ class ThemeProfile {
       footerShowPageNumbers:
           footerShowPageNumbers ?? this.footerShowPageNumbers,
       footerPosition: footerPosition ?? this.footerPosition,
+      closingSlideEnabled: closingSlideEnabled ?? this.closingSlideEnabled,
+      closingSlideMarkdown: closingSlideMarkdown ?? this.closingSlideMarkdown,
     );
   }
 
@@ -112,6 +123,8 @@ class ThemeProfile {
       'footerText': footerText,
       'footerShowPageNumbers': footerShowPageNumbers,
       'footerPosition': footerPosition,
+      'closingSlideEnabled': closingSlideEnabled,
+      'closingSlideMarkdown': closingSlideMarkdown,
     };
   }
 
@@ -140,6 +153,9 @@ class ThemeProfile {
       footerText: json['footerText'] as String? ?? '',
       footerShowPageNumbers: json['footerShowPageNumbers'] as bool? ?? false,
       footerPosition: json['footerPosition'] as String? ?? 'right',
+      closingSlideEnabled: json['closingSlideEnabled'] as bool? ?? false,
+      closingSlideMarkdown:
+          json['closingSlideMarkdown'] as String? ?? '# Bedankt\n\nVragen?',
     );
   }
 }

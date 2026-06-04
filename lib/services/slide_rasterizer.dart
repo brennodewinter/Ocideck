@@ -34,6 +34,7 @@ class SlideRasterizer {
     TlpLevel tlp = TlpLevel.none,
     int targetWidth = 1920,
     void Function(int done, int total)? onProgress,
+    void Function(String phase, int done, int total)? onStage,
   }) async {
     final overlay = Overlay.of(context, rootOverlay: true);
     final pixelRatio = targetWidth / logicalSize.width;
@@ -54,6 +55,7 @@ class SlideRasterizer {
     final results = <Uint8List>[];
     try {
       for (var i = 0; i < slides.length; i++) {
+        onStage?.call('prepare', i, slides.length);
         // Warm this slide's images immediately before capturing it. Doing it
         // per slide (instead of once up front) guarantees the bitmap is decoded
         // and resident in the cache at capture time, no matter how many images
@@ -66,6 +68,7 @@ class SlideRasterizer {
         ]);
         if (!context.mounted) break;
 
+        onStage?.call('render', i, slides.length);
         final key = GlobalKey();
         final entry = OverlayEntry(
           builder: (_) => Positioned(
@@ -96,6 +99,7 @@ class SlideRasterizer {
         } finally {
           entry.remove();
         }
+        onStage?.call('done', i + 1, slides.length);
         onProgress?.call(i + 1, slides.length);
       }
     } finally {

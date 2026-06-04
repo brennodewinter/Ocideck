@@ -35,6 +35,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   late TextEditingController _profileName;
   late TextEditingController _logoSize;
   late TextEditingController _footerText;
+  late TextEditingController _closingSlideMarkdown;
 
   /// Whether the user changed the active profile in this session. Used to
   /// decide whether to apply the profile to the currently open presentation.
@@ -74,6 +75,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _profileName = TextEditingController(text: _themeProfile.name);
     _logoSize = TextEditingController(text: _themeProfile.logoSize.toString());
     _footerText = TextEditingController(text: _themeProfile.footerText);
+    _closingSlideMarkdown = TextEditingController(
+      text: _themeProfile.closingSlideMarkdown,
+    );
   }
 
   @override
@@ -81,6 +85,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _profileName.dispose();
     _logoSize.dispose();
     _footerText.dispose();
+    _closingSlideMarkdown.dispose();
     super.dispose();
   }
 
@@ -130,6 +135,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       _profileName.text = profile.name;
       _logoSize.text = profile.logoSize.toString();
       _footerText.text = profile.footerText;
+      _closingSlideMarkdown.text = profile.closingSlideMarkdown;
       _profileTouched = true;
     });
   }
@@ -142,6 +148,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       name: name.isEmpty ? 'Stijlprofiel' : name,
       logoSize: size,
       footerText: _footerText.text,
+      closingSlideMarkdown: _closingSlideMarkdown.text,
     );
     notifier.setHomeDirectory(_homeDirectory);
     notifier.setExportDirectory(_exportDirectory);
@@ -295,6 +302,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                     _profileName.text = profile.name;
                     _logoSize.text = profile.logoSize.toString();
                     _footerText.text = profile.footerText;
+                    _closingSlideMarkdown.text = profile.closingSlideMarkdown;
                     _profileTouched = true;
                   });
                 },
@@ -312,6 +320,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       _profileName.text = profile.name;
       _logoSize.text = profile.logoSize.toString();
       _footerText.text = profile.footerText;
+      _closingSlideMarkdown.text = profile.closingSlideMarkdown;
       _profileTouched = true;
     });
   }
@@ -327,6 +336,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       _profileName.text = created.name;
       _logoSize.text = created.logoSize.toString();
       _footerText.text = created.footerText;
+      _closingSlideMarkdown.text = created.closingSlideMarkdown;
       _profileTouched = true;
     });
   }
@@ -689,6 +699,47 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           controlAffinity: ListTileControlAffinity.leading,
           contentPadding: EdgeInsets.zero,
           dense: true,
+        ),
+        const SizedBox(height: 24),
+        _sectionTitle(l10n.d('Laatste slide')),
+        SwitchListTile(
+          value: _themeProfile.closingSlideEnabled,
+          onChanged: (v) => setState(() {
+            _themeProfile = _themeProfile.copyWith(
+              closingSlideEnabled: v,
+              closingSlideMarkdown: _closingSlideMarkdown.text,
+            );
+            _profileTouched = true;
+          }),
+          title: Text(
+            l10n.d('Standaard laatste slide gebruiken'),
+            style: const TextStyle(fontSize: 13),
+          ),
+          subtitle: Text(
+            l10n.d(
+              'Wordt automatisch toegevoegd bij presenteren en exporteren.',
+            ),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+          ),
+          contentPadding: EdgeInsets.zero,
+          dense: true,
+        ),
+        const SizedBox(height: 8),
+        TextField(
+          controller: _closingSlideMarkdown,
+          enabled: _themeProfile.closingSlideEnabled,
+          minLines: 4,
+          maxLines: 8,
+          decoration: InputDecoration(
+            labelText: l10n.d('Markdown voor laatste slide'),
+            hintText: '# Bedankt\n\nVragen?',
+            alignLabelWithHint: true,
+            isDense: true,
+          ),
+          onChanged: (value) {
+            _themeProfile = _themeProfile.copyWith(closingSlideMarkdown: value);
+            _profileTouched = true;
+          },
         ),
       ],
     );

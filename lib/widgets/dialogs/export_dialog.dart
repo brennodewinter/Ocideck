@@ -91,6 +91,12 @@ class _ExportDialogState extends State<ExportDialog> {
       _total = needsRaster ? widget.slides.length : 0;
     });
 
+    // Give the dialog a frame to paint before the potentially expensive first
+    // image decode/raster pass starts.
+    await WidgetsBinding.instance.endOfFrame;
+    await Future<void>.delayed(Duration.zero);
+    if (!mounted) return;
+
     final images = needsRaster
         ? await SlideRasterizer.rasterize(
             context: context,
@@ -100,6 +106,14 @@ class _ExportDialogState extends State<ExportDialog> {
             tlp: widget.tlp,
             onProgress: (done, total) {
               if (mounted) setState(() => _done = done);
+            },
+            onStage: (phase, done, total) {
+              if (!mounted) return;
+              setState(() {
+                _phase = _stageText(phase, done, total);
+                _done = done;
+                _total = total;
+              });
             },
           )
         : const <Uint8List>[];
@@ -127,6 +141,23 @@ class _ExportDialogState extends State<ExportDialog> {
           ? '${l10n.t('exportedTo')}\n${r.outputPath}'
           : r.error;
     });
+  }
+
+  String _stageText(String phase, int done, int total) {
+    final l10n = context.l10n;
+    final number = (done + 1).clamp(1, total);
+    switch (phase) {
+      case 'prepare':
+        return '${l10n.d('Slide')} $number ${l10n.d('voorbereiden…')}';
+      case 'render':
+        return '${l10n.d('Slide')} $number ${l10n.d('renderen…')}';
+      case 'done':
+        return done >= total
+            ? l10n.d('Slides gerenderd.')
+            : '${l10n.d('Slide')} $done ${l10n.d('gerenderd.')}';
+      default:
+        return l10n.t('renderingSlides');
+    }
   }
 
   @override

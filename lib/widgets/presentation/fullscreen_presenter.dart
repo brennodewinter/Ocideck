@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:screen_retriever/screen_retriever.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
@@ -124,6 +125,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _clockTimer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (mounted && _presenterView) setState(() {});
     });
+    _enableWakeLock();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _focusNode.requestFocus();
       _loadDisplays();
@@ -136,9 +138,26 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _advanceTimer?.cancel();
     _clockTimer?.cancel();
     _typedTimer?.cancel();
+    _disableWakeLock();
     _gridScroll.dispose();
     _focusNode.dispose();
     super.dispose();
+  }
+
+  Future<void> _enableWakeLock() async {
+    try {
+      await WakelockPlus.enable();
+    } catch (_) {
+      // Best-effort: unsupported platforms should not interrupt presenting.
+    }
+  }
+
+  Future<void> _disableWakeLock() async {
+    try {
+      await WakelockPlus.disable();
+    } catch (_) {
+      // Best-effort cleanup.
+    }
   }
 
   void _scheduleAdvance() {
@@ -268,6 +287,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   Future<void> _exit() async {
     _advanceTimer?.cancel();
+    await _disableWakeLock();
     await windowManager.setFullScreen(false);
     if (mounted) Navigator.pop(context);
   }

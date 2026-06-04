@@ -83,6 +83,8 @@ void main() {
       footerText: 'Vertrouwelijk · {page}/{total}',
       footerShowPageNumbers: true,
       footerPosition: 'center',
+      closingSlideEnabled: true,
+      closingSlideMarkdown: '# Einde\n\nDank voor jullie aandacht.',
     );
 
     final markdown = service.generateDeck(
@@ -106,6 +108,11 @@ void main() {
     expect(deck.themeProfile.footerText, 'Vertrouwelijk · {page}/{total}');
     expect(deck.themeProfile.footerShowPageNumbers, isTrue);
     expect(deck.themeProfile.footerPosition, 'center');
+    expect(deck.themeProfile.closingSlideEnabled, isTrue);
+    expect(
+      deck.themeProfile.closingSlideMarkdown,
+      '# Einde\n\nDank voor jullie aandacht.',
+    );
   });
 
   test('adds logo-safe class when deck profile has logo', () {
