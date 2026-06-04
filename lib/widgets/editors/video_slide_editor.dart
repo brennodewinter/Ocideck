@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/slide.dart';
 import '../../services/image_service.dart';
+import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
 import 'audio_attachment_editor.dart';
 
@@ -47,6 +48,7 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
@@ -65,7 +67,7 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
             ElevatedButton.icon(
               onPressed: _pickVideo,
               icon: const Icon(Icons.movie_outlined, size: 16),
-              label: const Text('Kiezen'),
+              label: Text(l10n.d('Kiezen')),
             ),
           ],
         ),
@@ -77,7 +79,7 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
             onChanged: (value) => widget.onUpdate(
               widget.slide.copyWith(videoAutoplay: value ?? false),
             ),
-            title: const Text('Video automatisch afspelen'),
+            title: Text(l10n.d('Video automatisch afspelen')),
             dense: true,
             contentPadding: EdgeInsets.zero,
             controlAffinity: ListTileControlAffinity.leading,
@@ -101,6 +103,7 @@ class _PathBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
@@ -109,7 +112,7 @@ class _PathBox extends StatelessWidget {
         color: Colors.white,
       ),
       child: Text(
-        path.isEmpty ? 'Geen video gekozen' : path,
+        path.isEmpty ? l10n.d('Geen video gekozen') : path,
         style: TextStyle(
           fontSize: 12,
           color: path.isEmpty

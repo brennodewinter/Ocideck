@@ -6,6 +6,7 @@ import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/export_service.dart';
 import '../../services/slide_rasterizer.dart';
+import '../../l10n/app_localizations.dart';
 
 /// Exports the deck by rendering the on-screen slide previews to images and
 /// packing them into a PDF or PPTX (WYSIWYG — the export matches the preview).
@@ -79,12 +80,13 @@ class _ExportDialogState extends State<ExportDialog> {
   bool _compress = false;
 
   Future<void> _export(ExportFormat format, {bool compress = false}) async {
+    final l10n = context.l10n;
     // HTML renders from Markdown in the browser, so it needs no slide raster.
     final needsRaster = format != ExportFormat.html;
     setState(() {
       _loading = true;
       _result = null;
-      _phase = needsRaster ? 'Slides renderen…' : 'HTML samenstellen…';
+      _phase = needsRaster ? l10n.t('renderingSlides') : l10n.t('buildingHtml');
       _done = 0;
       _total = needsRaster ? widget.slides.length : 0;
     });
@@ -103,7 +105,7 @@ class _ExportDialogState extends State<ExportDialog> {
         : const <Uint8List>[];
 
     if (!mounted) return;
-    setState(() => _phase = '${format.label} samenstellen…');
+    setState(() => _phase = '${format.label} ${l10n.t('buildingExport')}');
 
     final r = await widget.exportService.export(
       widget.deckPath,
@@ -114,37 +116,42 @@ class _ExportDialogState extends State<ExportDialog> {
       // Speaker notes travel 1:1 with the rendered slides (PPTX notes pane).
       notes: [for (final s in widget.slides) s.notes],
       markdown: widget.markdown,
+      themeProfile: widget.themeProfile,
     );
 
     if (!mounted) return;
     setState(() {
       _loading = false;
       _success = r.success;
-      _result = r.success ? 'Geëxporteerd naar:\n${r.outputPath}' : r.error;
+      _result = r.success
+          ? '${l10n.t('exportedTo')}\n${r.outputPath}'
+          : r.error;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return AlertDialog(
       scrollable: true,
-      title: const Text('Exporteren'),
+      title: Text(l10n.t('exportDialogTitle')),
       content: SizedBox(width: 380, child: _content()),
       actions: [
         if (_result != null && _success)
           TextButton(
             onPressed: () => setState(() => _result = null),
-            child: const Text('Nogmaals exporteren'),
+            child: Text(l10n.t('exportAgain')),
           ),
         TextButton(
           onPressed: _loading ? null : () => Navigator.pop(context),
-          child: const Text('Sluiten'),
+          child: Text(l10n.t('close')),
         ),
       ],
     );
   }
 
   Widget _content() {
+    final l10n = context.l10n;
     if (_loading) {
       final fraction = _total == 0 ? null : _done / _total;
       return Column(
@@ -162,7 +169,9 @@ class _ExportDialogState extends State<ExportDialog> {
           ),
           const SizedBox(height: 8),
           Text(
-            _total == 0 ? '' : 'Slide $_done van $_total',
+            _total == 0
+                ? ''
+                : '${l10n.t('slideOf')} $_done ${l10n.t('of')} $_total',
             style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
           ),
         ],
@@ -195,19 +204,18 @@ class _ExportDialogState extends State<ExportDialog> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(bottom: 8),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            'De export gebruikt exact de weergave uit de editor, inclusief je '
-            'stijlprofiel.',
-            style: TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+            l10n.t('exportIntro'),
+            style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.only(bottom: 6),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 6),
           child: Text(
-            'Afbeeldingskwaliteit (PDF)',
-            style: TextStyle(
+            l10n.t('imageQualityPdf'),
+            style: const TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w600,
               color: Color(0xFF475569),
@@ -215,16 +223,16 @@ class _ExportDialogState extends State<ExportDialog> {
           ),
         ),
         SegmentedButton<bool>(
-          segments: const [
+          segments: [
             ButtonSegment(
               value: false,
-              icon: Icon(Icons.image_outlined),
-              label: Text('Normaal'),
+              icon: const Icon(Icons.image_outlined),
+              label: Text(l10n.t('normal')),
             ),
             ButtonSegment(
               value: true,
-              icon: Icon(Icons.compress),
-              label: Text('Gecomprimeerd'),
+              icon: const Icon(Icons.compress),
+              label: Text(l10n.t('compressed')),
             ),
           ],
           selected: {_compress},
@@ -235,26 +243,23 @@ class _ExportDialogState extends State<ExportDialog> {
         Padding(
           padding: const EdgeInsets.only(top: 4, bottom: 8),
           child: Text(
-            _compress
-                ? 'JPEG op lagere resolutie — bedoeld als handout, veel kleiner '
-                      'bestand (apart opgeslagen als “-compact”).'
-                : 'Verliesvrije afbeeldingen op volledige resolutie.',
+            _compress ? l10n.t('compressedHelp') : l10n.t('losslessHelp'),
             style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
           ),
         ),
         _exportButton(
           icon: _formatIcon(ExportFormat.pdf),
-          label: 'Exporteer als PDF',
+          label: l10n.t('exportAsPdf'),
           onPressed: () => _export(ExportFormat.pdf, compress: _compress),
         ),
         _exportButton(
           icon: _formatIcon(ExportFormat.pptx),
-          label: 'Exporteer als ${ExportFormat.pptx.label}',
+          label: l10n.t('exportAsPptx'),
           onPressed: () => _export(ExportFormat.pptx),
         ),
         _exportButton(
           icon: _formatIcon(ExportFormat.html),
-          label: 'Exporteer als HTML (Marp, offline)',
+          label: l10n.t('exportAsHtml'),
           onPressed: () => _export(ExportFormat.html),
         ),
         const Padding(

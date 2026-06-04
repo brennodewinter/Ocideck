@@ -4,6 +4,7 @@ import 'package:path/path.dart' as p;
 import '../../models/slide.dart';
 import '../../services/file_service.dart';
 import '../../theme/app_theme.dart';
+import '../../l10n/app_localizations.dart';
 
 /// What the open dialog returns: a presentation path and, optionally, the
 /// index of a slide to jump to (when the user picked a search hit).
@@ -71,7 +72,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
 
   Future<void> _pickDirectory() async {
     final result = await FilePicker.getDirectoryPath(
-      dialogTitle: 'Map met presentaties kiezen',
+      dialogTitle: context.l10n.d('Map met presentaties kiezen'),
       initialDirectory: _directory,
     );
     if (result != null) {
@@ -158,14 +159,15 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final visible = _visible();
 
     return AlertDialog(
       title: Row(
-        children: const [
-          Icon(Icons.folder_open_outlined, size: 20),
-          SizedBox(width: 8),
-          Text('Presentatie openen'),
+        children: [
+          const Icon(Icons.folder_open_outlined, size: 20),
+          const SizedBox(width: 8),
+          Text(l10n.d('Presentatie openen')),
         ],
       ),
       contentPadding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
@@ -185,11 +187,11 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
         OutlinedButton.icon(
           onPressed: _browse,
           icon: const Icon(Icons.insert_drive_file_outlined, size: 16),
-          label: const Text('Bladeren…'),
+          label: Text(l10n.d('Bladeren…')),
         ),
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Annuleren'),
+          child: Text(l10n.t('cancel')),
         ),
       ],
       // Knoppen uit elkaar: Bladeren links, Annuleren rechts. (Geen Spacer in
@@ -199,27 +201,32 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   }
 
   Widget _toolbar() {
+    final l10n = context.l10n;
     return Row(
       children: [
         Expanded(
           child: TextField(
             autofocus: true,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               isDense: true,
-              prefixIcon: Icon(Icons.search, size: 18),
-              hintText: 'Zoek op bestandsnaam, titel of tekst in de slides…',
+              prefixIcon: const Icon(Icons.search, size: 18),
+              hintText: l10n.d(
+                'Zoek op bestandsnaam, titel of tekst in de slides…',
+              ),
             ),
             onChanged: (v) => setState(() => _query = v),
           ),
         ),
         const SizedBox(width: 8),
         Tooltip(
-          message: _directory ?? 'Geen map gekozen',
+          message: _directory ?? l10n.d('Geen map gekozen'),
           child: OutlinedButton.icon(
             onPressed: _pickDirectory,
             icon: const Icon(Icons.folder_outlined, size: 16),
             label: Text(
-              _directory == null ? 'Map kiezen' : p.basename(_directory!),
+              _directory == null
+                  ? l10n.d('Map kiezen')
+                  : p.basename(_directory!),
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -229,25 +236,26 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   }
 
   Widget _body(List<(ScannedPresentation, List<_SlideHit>)> visible) {
+    final l10n = context.l10n;
     if (_loading) {
       return const Center(child: CircularProgressIndicator());
     }
     if (_directory == null) {
       return _empty(
         Icons.folder_off_outlined,
-        'Kies een map met presentaties om te beginnen.',
+        l10n.d('Kies een map met presentaties om te beginnen.'),
       );
     }
     if (_presentations.isEmpty) {
       return _empty(
         Icons.search_off_outlined,
-        'Geen presentaties (.md) in deze map gevonden.',
+        l10n.d('Geen presentaties (.md) in deze map gevonden.'),
       );
     }
     if (visible.isEmpty) {
       return _empty(
         Icons.search_off_outlined,
-        'Geen presentaties gevonden voor "$_query".',
+        '${l10n.d('Geen presentaties gevonden voor')} "$_query".',
       );
     }
 
@@ -308,6 +316,7 @@ class _PresentationRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final deck = presentation.deck;
     final title = deck.title.isEmpty ? presentation.fileName : deck.title;
 
@@ -343,7 +352,7 @@ class _PresentationRow extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          '${presentation.fileName}  ·  ${deck.slides.length} slides',
+                          '${presentation.fileName}  ·  ${deck.slides.length} ${l10n.t('slides')}',
                           style: const TextStyle(
                             fontSize: 11,
                             color: Color(0xFF94A3B8),
@@ -378,7 +387,7 @@ class _PresentationRow extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Slide ${hit.index + 1}',
+                              '${l10n.d('Slide')} ${hit.index + 1}',
                               style: const TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w600,
@@ -405,7 +414,7 @@ class _PresentationRow extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 4, top: 2),
                       child: Text(
-                        '+ ${hits.length - 4} meer treffer(s)',
+                        '+ ${hits.length - 4} ${l10n.d('meer treffer(s)')}',
                         style: const TextStyle(
                           fontSize: 11,
                           color: Color(0xFF94A3B8),

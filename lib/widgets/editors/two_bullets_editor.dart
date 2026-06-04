@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/slide.dart';
+import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
 
 typedef _Mutate = void Function(VoidCallback fn);
@@ -217,6 +218,7 @@ class _BulletColumnState extends State<_BulletColumn> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -228,13 +230,14 @@ class _BulletColumnState extends State<_BulletColumn> {
           onPressed: () =>
               set.addAfter((fn) => setState(fn), set.controllers.length - 1),
           icon: const Icon(Icons.add, size: 16),
-          label: const Text('Bullet toevoegen'),
+          label: Text(l10n.d('Bullet toevoegen')),
         ),
       ],
     );
   }
 
   Widget _buildRow(int i) {
+    final l10n = context.l10n;
     final level = set.levels[i];
     return Padding(
       key: ValueKey(set.controllers[i]),
@@ -284,7 +287,7 @@ class _BulletColumnState extends State<_BulletColumn> {
                 controller: set.controllers[i],
                 focusNode: set.focusNodes[i],
                 decoration: InputDecoration(
-                  hintText: 'Bullet ${i + 1}',
+                  hintText: '${l10n.d('Bullet')} ${i + 1}',
                   isDense: true,
                 ),
               ),
@@ -299,7 +302,7 @@ class _BulletColumnState extends State<_BulletColumn> {
             onPressed: set.controllers.length > 1
                 ? () => set.removeAndFocus((fn) => setState(fn), i)
                 : null,
-            tooltip: 'Verwijder',
+            tooltip: l10n.d('Verwijder'),
             padding: const EdgeInsets.symmetric(horizontal: 4),
             constraints: const BoxConstraints(minWidth: 28),
           ),

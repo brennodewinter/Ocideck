@@ -6,6 +6,7 @@ import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../utils/url_launcher_util.dart';
+import '../../l10n/app_localizations.dart';
 import '../slides/slide_preview.dart';
 
 /// Blanco-schermstand tijdens het presenteren (zoals B/W in PowerPoint).
@@ -578,20 +579,21 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   /// Sneltoets-overzicht (cheatsheet).
   Widget _buildHelpOverlay() {
-    const rows = <(String, String)>[
-      ('→ · spatie · klik', 'Volgende slide'),
-      ('←', 'Vorige slide'),
-      ('cijfers + Enter', 'Naar slidenummer'),
-      ('Home · End', 'Eerste · laatste slide'),
-      ('G', 'Slide-overzicht (pijltjes + Enter)'),
-      ('P', 'Presenter view (notities, klok)'),
-      ('B · W', 'Zwart · wit scherm'),
-      ('R', 'Verstreken tijd resetten'),
-      ('A', 'Automatische modus aan/uit'),
-      ('L', 'Herhalen (loop) aan/uit'),
-      ('M', 'Na audio automatisch doorgaan'),
-      ('? · H', 'Dit overzicht'),
-      ('Esc', 'Terug / afsluiten'),
+    final l10n = context.l10n;
+    final rows = <(String, String)>[
+      ('→ · ${l10n.d('spatie')} · ${l10n.d('klik')}', l10n.d('Volgende slide')),
+      ('←', l10n.d('Vorige slide')),
+      ('${l10n.d('cijfers')} + Enter', l10n.d('Naar slidenummer')),
+      ('Home · End', l10n.d('Eerste · laatste slide')),
+      ('G', l10n.d('Slide-overzicht (pijltjes + Enter)')),
+      ('P', l10n.d('Presenter view (notities, klok)')),
+      ('B · W', l10n.d('Zwart · wit scherm')),
+      ('R', l10n.d('Verstreken tijd resetten')),
+      ('A', l10n.d('Automatische modus aan/uit')),
+      ('L', l10n.d('Herhalen (loop) aan/uit')),
+      ('M', l10n.d('Na audio automatisch doorgaan')),
+      ('? · H', l10n.d('Dit overzicht')),
+      ('Esc', l10n.d('Terug / afsluiten')),
     ];
     return GestureDetector(
       onTap: _toggleHelp,
@@ -616,17 +618,17 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(
+                  Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.keyboard_outlined,
                         color: Colors.white70,
                         size: 20,
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Text(
-                        'Sneltoetsen',
-                        style: TextStyle(
+                        l10n.d('Sneltoetsen'),
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -664,10 +666,13 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                       ),
                     ),
                   const SizedBox(height: 16),
-                  const Center(
+                  Center(
                     child: Text(
-                      'Klik of druk op ? / H / Esc om te sluiten',
-                      style: TextStyle(color: Colors.white30, fontSize: 12),
+                      l10n.d('Klik of druk op ? / H / Esc om te sluiten'),
+                      style: const TextStyle(
+                        color: Colors.white30,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
                 ],
@@ -682,14 +687,15 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// Subtiele statusindicator (linksonder) voor de automatische modus. Toont
   /// of auto-play, herhalen en 'na audio doorgaan' actief zijn.
   Widget _autoPlayStatus() {
+    final l10n = context.l10n;
     final items = <(IconData, String, bool)>[
       (
         _autoPlay ? Icons.play_circle_outline : Icons.pause_circle_outline,
-        _autoPlay ? 'Auto (A)' : 'Handmatig (A)',
+        _autoPlay ? l10n.d('Auto (A)') : l10n.d('Handmatig (A)'),
         _autoPlay,
       ),
-      (Icons.repeat, 'Herhalen (L)', _loop),
-      (Icons.graphic_eq, 'Na audio (M)', _advanceOnAudioEnd),
+      (Icons.repeat, l10n.d('Herhalen (L)'), _loop),
+      (Icons.graphic_eq, l10n.d('Na audio (M)'), _advanceOnAudioEnd),
     ];
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -868,7 +874,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
             child: Row(
               children: [
                 Tooltip(
-                  message: 'Sneltoetsen (?)',
+                  message: context.l10n.d('Sneltoetsen (?)'),
                   child: IconButton(
                     onPressed: _toggleHelp,
                     icon: const Icon(Icons.help_outline),
@@ -880,7 +886,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                 ),
                 const SizedBox(width: 8),
                 Tooltip(
-                  message: 'Slide-overzicht (G)',
+                  message: context.l10n.d('Slide-overzicht (G)'),
                   child: IconButton(
                     onPressed: _toggleGrid,
                     icon: const Icon(Icons.grid_view_rounded),
@@ -892,7 +898,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                 ),
                 const SizedBox(width: 8),
                 Tooltip(
-                  message: 'Presenter view (P)',
+                  message: context.l10n.d('Presenter view (P)'),
                   child: IconButton(
                     onPressed: _togglePresenterView,
                     icon: const Icon(Icons.co_present_outlined),
@@ -904,7 +910,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                 ),
                 const SizedBox(width: 8),
                 Tooltip(
-                  message: 'Afsluiten (Escape)',
+                  message: context.l10n.d('Afsluiten (Escape)'),
                   child: IconButton(
                     onPressed: _exit,
                     icon: const Icon(Icons.close),
@@ -925,6 +931,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   // ── Presenter view (slide + volgende + notities + tijd) ──────────────────
 
   Widget _buildPresenterView(BuildContext context) {
+    final l10n = context.l10n;
     final total = widget.slides.length;
     final slide = widget.slides[_index.clamp(0, total - 1)];
     final hasNext = _index < total - 1;
@@ -942,7 +949,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const _SectionLabel('HUIDIGE SLIDE'),
+                _SectionLabel(l10n.d('HUIDIGE SLIDE')),
                 const SizedBox(height: 8),
                 Expanded(
                   child: ClipRRect(
@@ -988,7 +995,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
               children: [
                 _buildClockBar(),
                 const SizedBox(height: 16),
-                const _SectionLabel('VOLGENDE'),
+                _SectionLabel(l10n.d('VOLGENDE')),
                 const SizedBox(height: 8),
                 AspectRatio(
                   aspectRatio: 16 / 9,
@@ -1006,9 +1013,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                         : Container(
                             color: const Color(0xFF161616),
                             alignment: Alignment.center,
-                            child: const Text(
-                              'Einde van de presentatie',
-                              style: TextStyle(
+                            child: Text(
+                              l10n.d('Einde van de presentatie'),
+                              style: const TextStyle(
                                 color: Colors.white38,
                                 fontSize: 13,
                               ),
@@ -1017,7 +1024,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                const _SectionLabel('NOTITIES'),
+                _SectionLabel(l10n.d('NOTITIES')),
                 const SizedBox(height: 8),
                 Expanded(child: _buildNotes(slide)),
               ],
@@ -1029,6 +1036,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   }
 
   Widget _buildClockBar() {
+    final l10n = context.l10n;
     final elapsed = DateTime.now().difference(_startTime);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -1044,9 +1052,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Verstreken',
-                  style: TextStyle(color: Colors.white38, fontSize: 10),
+                Text(
+                  l10n.d('Verstreken'),
+                  style: const TextStyle(color: Colors.white38, fontSize: 10),
                 ),
                 const SizedBox(height: 2),
                 Text(
@@ -1063,7 +1071,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           ),
           // Reset-knop
           Tooltip(
-            message: 'Tijd resetten (R)',
+            message: l10n.d('Tijd resetten (R)'),
             child: IconButton(
               onPressed: _resetTimer,
               icon: const Icon(Icons.restart_alt, size: 18),
@@ -1076,9 +1084,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Text(
-                'Klok',
-                style: TextStyle(color: Colors.white38, fontSize: 10),
+              Text(
+                l10n.d('Klok'),
+                style: const TextStyle(color: Colors.white38, fontSize: 10),
               ),
               const SizedBox(height: 2),
               Text(
@@ -1098,6 +1106,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   }
 
   Widget _buildNotes(Slide slide) {
+    final l10n = context.l10n;
     final notes = slide.notes.trim();
     return Container(
       width: double.infinity,
@@ -1108,11 +1117,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         border: Border.all(color: const Color(0xFF262626)),
       ),
       child: notes.isEmpty
-          ? const Align(
+          ? Align(
               alignment: Alignment.topLeft,
               child: Text(
-                'Geen notities voor deze slide.',
-                style: TextStyle(
+                l10n.d('Geen notities voor deze slide.'),
+                style: const TextStyle(
                   color: Colors.white30,
                   fontSize: 14,
                   fontStyle: FontStyle.italic,
@@ -1133,6 +1142,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   }
 
   Widget _buildPresenterControls(int total) {
+    final l10n = context.l10n;
     return Row(
       children: [
         _NavButton(icon: Icons.chevron_left, onTap: _index > 0 ? _prev : null),
@@ -1143,7 +1153,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         ),
         const SizedBox(width: 16),
         Text(
-          'Slide ${_index + 1} / $total',
+          '${l10n.d('Slide')} ${_index + 1} / $total',
           style: const TextStyle(
             color: Colors.white,
             fontSize: 15,
@@ -1151,9 +1161,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           ),
         ),
         const SizedBox(width: 16),
-        const Expanded(
+        Expanded(
           child: Text(
-            'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop',
+            l10n.d(
+              'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop',
+            ),
             textAlign: TextAlign.right,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -1162,7 +1174,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         ),
         const SizedBox(width: 12),
         Tooltip(
-          message: 'Afsluiten (Escape)',
+          message: l10n.d('Afsluiten (Escape)'),
           child: IconButton(
             onPressed: _exit,
             icon: const Icon(Icons.close),
@@ -1177,6 +1189,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   // ── Rasteroverzicht (snel naar een slide springen) ───────────────────────
 
   Widget _buildGridOverlay() {
+    final l10n = context.l10n;
     final total = widget.slides.length;
     return Container(
       color: Colors.black.withValues(alpha: 0.94),
@@ -1187,9 +1200,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
               padding: const EdgeInsets.fromLTRB(24, 16, 16, 12),
               child: Row(
                 children: [
-                  const Text(
-                    'Slide-overzicht',
-                    style: TextStyle(
+                  Text(
+                    l10n.d('Slide-overzicht'),
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -1197,12 +1210,12 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                   ),
                   const SizedBox(width: 12),
                   Text(
-                    'pijltjes + Enter of klik om te springen · $total slides',
+                    '${l10n.d('pijltjes + Enter of klik om te springen')} · $total ${l10n.t('slides')}',
                     style: const TextStyle(color: Colors.white38, fontSize: 12),
                   ),
                   const Spacer(),
                   Tooltip(
-                    message: 'Sluiten (G of Esc)',
+                    message: l10n.d('Sluiten (G of Esc)'),
                     child: IconButton(
                       onPressed: _toggleGrid,
                       icon: const Icon(Icons.close),

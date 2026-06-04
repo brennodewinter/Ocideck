@@ -145,6 +145,7 @@ class ThemeProfile {
 }
 
 class AppSettings {
+  final String languageCode;
   final String? homeDirectory;
 
   /// Folder where all exports (PDF/PPTX) are written. When null, exports land
@@ -155,6 +156,7 @@ class AppSettings {
   final List<String> recentFiles;
 
   const AppSettings({
+    this.languageCode = 'nl',
     this.homeDirectory,
     this.exportDirectory,
     this.themeProfiles = const [ThemeProfile()],
@@ -184,6 +186,7 @@ class AppSettings {
   ];
 
   AppSettings copyWith({
+    String? languageCode,
     String? homeDirectory,
     String? exportDirectory,
     ThemeProfile? themeProfile,
@@ -195,6 +198,7 @@ class AppSettings {
   }) {
     final nextProfiles = themeProfiles ?? this.themeProfiles;
     return AppSettings(
+      languageCode: languageCode ?? this.languageCode,
       homeDirectory: clearHomeDirectory
           ? null
           : (homeDirectory ?? this.homeDirectory),

@@ -12,6 +12,7 @@ import '../../services/image_service.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../state/slide_clipboard_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../l10n/app_localizations.dart';
 import '../dialogs/add_slide_dialog.dart';
 import '../dialogs/import_slides_dialog.dart';
 import '../dialogs/slide_finder_dialog.dart';
@@ -157,9 +158,9 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     if (deck == null) return;
     final messenger = ScaffoldMessenger.of(context);
     messenger.showSnackBar(
-      const SnackBar(
-        content: Text('Slide renderen…'),
-        duration: Duration(milliseconds: 700),
+      SnackBar(
+        content: Text(context.l10n.d('Slide renderen…')),
+        duration: const Duration(milliseconds: 700),
       ),
     );
     Uint8List? bytes;
@@ -181,7 +182,9 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     messenger.showSnackBar(
       SnackBar(
         content: Text(
-          ok ? 'Slide gekopieerd naar klembord.' : 'Kopiëren mislukt.',
+          ok
+              ? context.l10n.d('Slide gekopieerd naar klembord.')
+              : context.l10n.d('Kopiëren mislukt.'),
         ),
       ),
     );
@@ -214,8 +217,12 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     final messenger = ScaffoldMessenger.of(context);
     if (targets.isEmpty) {
       messenger.showSnackBar(
-        const SnackBar(
-          content: Text('Geen ander deck open. Open eerst een ander tabblad.'),
+        SnackBar(
+          content: Text(
+            context.l10n.d(
+              'Geen ander deck open. Open eerst een ander tabblad.',
+            ),
+          ),
         ),
       );
       return;
@@ -223,26 +230,29 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
 
     final target = await showDialog<TabInfo>(
       context: context,
-      builder: (ctx) => SimpleDialog(
-        title: Text(
-          slides.length == 1
-              ? '1 slide kopiëren naar…'
-              : '${slides.length} slides kopiëren naar…',
-        ),
-        children: [
-          for (final t in targets)
-            SimpleDialogOption(
-              onPressed: () => Navigator.pop(ctx, t),
-              child: Row(
-                children: [
-                  const Icon(Icons.slideshow_outlined, size: 16),
-                  const SizedBox(width: 8),
-                  Expanded(child: Text(t.label)),
-                ],
+      builder: (ctx) {
+        final l10n = ctx.l10n;
+        return SimpleDialog(
+          title: Text(
+            slides.length == 1
+                ? l10n.d('1 slide kopiëren naar…')
+                : '${slides.length} ${l10n.d('slides kopiëren naar…')}',
+          ),
+          children: [
+            for (final t in targets)
+              SimpleDialogOption(
+                onPressed: () => Navigator.pop(ctx, t),
+                child: Row(
+                  children: [
+                    const Icon(Icons.slideshow_outlined, size: 16),
+                    const SizedBox(width: 8),
+                    Expanded(child: Text(t.label)),
+                  ],
+                ),
               ),
-            ),
-        ],
-      ),
+          ],
+        );
+      },
     );
     if (target == null || !mounted) return;
 
@@ -252,8 +262,8 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       SnackBar(
         content: Text(
           at >= 0
-              ? '${slides.length} slide(s) gekopieerd naar “${target.label}”.'
-              : 'Kopiëren mislukt.',
+              ? '${slides.length} ${context.l10n.d('slide(s) gekopieerd naar')} “${target.label}”.'
+              : context.l10n.d('Kopiëren mislukt.'),
         ),
       ),
     );
@@ -365,14 +375,15 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       SnackBar(
         content: Text(
           slides.length == 1
-              ? '1 slide geïmporteerd.'
-              : '${slides.length} slides geïmporteerd.',
+              ? context.l10n.d('1 slide geïmporteerd.')
+              : '${slides.length} ${context.l10n.d('slides geïmporteerd.')}',
         ),
       ),
     );
   }
 
   Widget _buildSearchField() {
+    final l10n = context.l10n;
     return SizedBox(
       height: 30,
       child: TextField(
@@ -381,7 +392,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         style: const TextStyle(color: Colors.white, fontSize: 12),
         decoration: InputDecoration(
           isDense: true,
-          hintText: 'Zoek in slides…',
+          hintText: l10n.d('Zoek in slides…'),
           hintStyle: const TextStyle(color: Color(0xFF6B7280), fontSize: 12),
           prefixIcon: const Icon(
             Icons.search,
@@ -431,6 +442,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     DeckNotifier notifier,
     EditorNotifier editorNotifier,
   ) {
+    final l10n = context.l10n;
     final matches = <int>[
       for (var i = 0; i < deck.slides.length; i++)
         if (_matches(deck.slides[i], query)) i,
@@ -450,7 +462,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
               ),
               const SizedBox(height: 10),
               Text(
-                'Geen slides met "$query"',
+                '${l10n.d('Geen slides met')} "$query"',
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 12),
               ),
@@ -496,6 +508,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final deckState = ref.watch(deckProvider);
     final deck = deckState.deck!;
     _pruneSlideKeys(deck);
@@ -533,9 +546,9 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                   children: [
                     Row(
                       children: [
-                        const Text(
-                          'SLIDES',
-                          style: TextStyle(
+                        Text(
+                          l10n.d('SLIDES'),
+                          style: const TextStyle(
                             color: Color(0xFF94A3B8),
                             fontSize: 10,
                             fontWeight: FontWeight.w700,
@@ -667,9 +680,11 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                           if (path == null) {
                             if (!context.mounted) return;
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
+                              SnackBar(
                                 content: Text(
-                                  'Geen afbeelding op het klembord gevonden.',
+                                  l10n.d(
+                                    'Geen afbeelding op het klembord gevonden.',
+                                  ),
                                 ),
                               ),
                             );
@@ -687,7 +702,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                           editorNotifier.select(newIdx);
                         },
                         icon: const Icon(Icons.image_outlined, size: 14),
-                        label: const Text('Afbeelding plakken'),
+                        label: Text(l10n.d('Afbeelding plakken')),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.white70,
                           side: const BorderSide(color: Color(0xFF4A4F5B)),
@@ -710,7 +725,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                           }
                         },
                         icon: const Icon(Icons.add, size: 16),
-                        label: const Text('Slide toevoegen'),
+                        label: Text(l10n.d('Slide toevoegen')),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppTheme.accent,
                           padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -728,7 +743,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                           Icons.travel_explore_outlined,
                           size: 14,
                         ),
-                        label: const Text('Slide zoeken'),
+                        label: Text(l10n.d('Slide zoeken')),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.white70,
                           side: const BorderSide(color: Color(0xFF4A4F5B)),
@@ -744,7 +759,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                       child: OutlinedButton.icon(
                         onPressed: () => _importSlides(context, ref, deckState),
                         icon: const Icon(Icons.library_add_outlined, size: 14),
-                        label: const Text('Slides importeren'),
+                        label: Text(l10n.d('Slides importeren')),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.white70,
                           side: const BorderSide(color: Color(0xFF4A4F5B)),
@@ -771,7 +786,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                             editorNotifier.select(newIdx);
                           },
                           icon: const Icon(Icons.content_paste, size: 14),
-                          label: const Text('Slide plakken'),
+                          label: Text(l10n.d('Slide plakken')),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: Colors.white70,
                             side: const BorderSide(color: Color(0xFF4A4F5B)),
@@ -802,6 +817,7 @@ class _SkipBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       padding: const EdgeInsets.fromLTRB(8, 5, 4, 5),
       decoration: BoxDecoration(
@@ -820,8 +836,8 @@ class _SkipBanner extends StatelessWidget {
           Expanded(
             child: Text(
               count == 1
-                  ? '1 slide overgeslagen'
-                  : '$count slides overgeslagen',
+                  ? l10n.d('1 slide overgeslagen')
+                  : '$count ${l10n.d('slides overgeslagen')}',
               style: const TextStyle(
                 color: Color(0xFFE3C281),
                 fontSize: 11,
@@ -841,7 +857,7 @@ class _SkipBanner extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            child: const Text('Alles tonen'),
+            child: Text(l10n.d('Alles tonen')),
           ),
         ],
       ),
@@ -870,6 +886,7 @@ class _BulkActionBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       padding: const EdgeInsets.fromLTRB(8, 4, 4, 4),
       decoration: BoxDecoration(
@@ -881,7 +898,7 @@ class _BulkActionBar extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              '$count geselecteerd',
+              '$count ${l10n.d('geselecteerd')}',
               style: const TextStyle(
                 color: Color(0xFFE2E8F0),
                 fontSize: 11,
@@ -891,28 +908,28 @@ class _BulkActionBar extends StatelessWidget {
           ),
           _BulkIcon(
             icon: Icons.drive_file_move_outline,
-            tooltip: 'Kopiëren naar ander deck',
+            tooltip: l10n.d('Kopiëren naar ander deck'),
             onTap: onCopyToDeck,
           ),
           _BulkIcon(
             icon: Icons.visibility_off_outlined,
-            tooltip: 'Overslaan bij presenteren/exporteren',
+            tooltip: l10n.d('Overslaan bij presenteren/exporteren'),
             onTap: onSkip,
           ),
           _BulkIcon(
             icon: Icons.visibility_outlined,
-            tooltip: 'Weer tonen',
+            tooltip: l10n.d('Weer tonen'),
             onTap: onShow,
           ),
           _BulkIcon(
             icon: Icons.delete_outline,
-            tooltip: 'Verwijderen',
+            tooltip: l10n.d('Verwijderen'),
             color: const Color(0xFFE5746E),
             onTap: onDelete,
           ),
           _BulkIcon(
             icon: Icons.close,
-            tooltip: 'Selectie opheffen',
+            tooltip: l10n.d('Selectie opheffen'),
             onTap: onDeselect,
           ),
         ],

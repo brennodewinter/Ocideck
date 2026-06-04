@@ -6,6 +6,7 @@ import '../../models/settings.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../l10n/app_localizations.dart';
 
 TextStyle _fontStyle(String font, TextStyle base) {
   return base.copyWith(fontFamily: font);
@@ -93,7 +94,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
   Future<void> _pickHomeDirectory() async {
     final result = await FilePicker.getDirectoryPath(
-      dialogTitle: 'Standaard map voor presentaties',
+      dialogTitle: context.l10n.d('Standaard map voor presentaties'),
       initialDirectory: _homeDirectory,
     );
     if (result != null) setState(() => _homeDirectory = result);
@@ -101,7 +102,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
   Future<void> _pickExportDirectory() async {
     final result = await FilePicker.getDirectoryPath(
-      dialogTitle: 'Map voor exports',
+      dialogTitle: context.l10n.d('Map voor exports'),
       initialDirectory: _exportDirectory ?? _homeDirectory,
     );
     if (result != null) setState(() => _exportDirectory = result);
@@ -109,7 +110,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
   Future<void> _pickLogo() async {
     final result = await FilePicker.pickFiles(
-      dialogTitle: 'Logo kiezen',
+      dialogTitle: context.l10n.d('Logo kiezen'),
       type: FileType.image,
     );
     final path = result?.files.single.path;
@@ -158,6 +159,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final profiles = _profiles;
     final dropdownValue = profiles.any((p) => p.name == _originalName)
         ? _originalName
@@ -166,7 +168,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     return DefaultTabController(
       length: 3,
       child: AlertDialog(
-        title: const Text('Instellingen'),
+        title: Text(l10n.t('settings')),
         content: SizedBox(
           width: 520,
           height: 560,
@@ -177,11 +179,20 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
               const SizedBox(height: 12),
               _profileNameField(),
               const SizedBox(height: 12),
-              const TabBar(
+              TabBar(
                 tabs: [
-                  Tab(icon: Icon(Icons.tune), text: 'Algemeen'),
-                  Tab(icon: Icon(Icons.palette_outlined), text: 'Kleuren'),
-                  Tab(icon: Icon(Icons.image_outlined), text: 'Logo'),
+                  Tab(
+                    icon: const Icon(Icons.tune),
+                    text: l10n.t('settingsGeneral'),
+                  ),
+                  Tab(
+                    icon: const Icon(Icons.palette_outlined),
+                    text: l10n.t('settingsColors'),
+                  ),
+                  Tab(
+                    icon: const Icon(Icons.image_outlined),
+                    text: l10n.t('settingsLogo'),
+                  ),
                 ],
               ),
               const SizedBox(height: 12),
@@ -200,23 +211,24 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Annuleren'),
+            child: Text(l10n.t('cancel')),
           ),
-          ElevatedButton(onPressed: _save, child: const Text('Opslaan')),
+          ElevatedButton(onPressed: _save, child: Text(l10n.t('saveSettings'))),
         ],
       ),
     );
   }
 
   Widget _profileNameField() {
+    final l10n = context.l10n;
     return TextField(
       controller: _profileName,
       textInputAction: TextInputAction.done,
-      decoration: const InputDecoration(
-        labelText: 'Profielnaam',
-        hintText: 'Naam van het stijlprofiel',
+      decoration: InputDecoration(
+        labelText: l10n.d('Profielnaam'),
+        hintText: l10n.d('Naam van het stijlprofiel'),
         isDense: true,
-        prefixIcon: Icon(Icons.badge_outlined, size: 18),
+        prefixIcon: const Icon(Icons.badge_outlined, size: 18),
       ),
       onChanged: (value) {
         final name = value.trim();
@@ -229,12 +241,13 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   }
 
   Widget _profileSelector(List<ThemeProfile> profiles, String dropdownValue) {
+    final l10n = context.l10n;
     return Row(
       children: [
         Expanded(
           child: InputDecorator(
-            decoration: const InputDecoration(
-              labelText: 'Stijlprofiel',
+            decoration: InputDecoration(
+              labelText: l10n.d('Stijlprofiel'),
               isDense: true,
             ),
             child: DropdownButtonHideUnderline(
@@ -258,17 +271,17 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         ),
         const SizedBox(width: 8),
         IconButton(
-          tooltip: 'Nieuw profiel',
+          tooltip: l10n.d('Nieuw profiel'),
           onPressed: _createProfile,
           icon: const Icon(Icons.add, size: 18),
         ),
         IconButton(
-          tooltip: 'Standaardprofiel laden',
+          tooltip: l10n.d('Standaardprofiel laden'),
           onPressed: _loadDefaultProfile,
           icon: const Icon(Icons.restart_alt, size: 18),
         ),
         IconButton(
-          tooltip: 'Profiel verwijderen',
+          tooltip: l10n.d('Profiel verwijderen'),
           onPressed: profiles.length <= 1
               ? null
               : () {
@@ -328,15 +341,50 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   }
 
   Widget _generalTab() {
+    final l10n = context.l10n;
+    final languageCode = ref.watch(
+      settingsProvider.select((s) => s.languageCode),
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _sectionTitle('Presentatiemap'),
+        _sectionTitle(l10n.t('language')),
+        InputDecorator(
+          decoration: InputDecoration(
+            labelText: l10n.t('applicationLanguage'),
+            isDense: true,
+            prefixIcon: const Icon(Icons.language, size: 18),
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              value: languageCode,
+              isExpanded: true,
+              isDense: true,
+              items: [
+                for (final entry in AppLocalizations.languageNames.entries)
+                  DropdownMenuItem(value: entry.key, child: Text(entry.value)),
+              ],
+              onChanged: (code) {
+                if (code == null) return;
+                ref.read(settingsProvider.notifier).setLanguageCode(code);
+              },
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 6),
+          child: Text(
+            l10n.t('languageHelp'),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+        ),
+        const SizedBox(height: 16),
+        _sectionTitle(l10n.t('presentationFolder')),
         Row(
           children: [
             Expanded(
               child: _pathBox(
-                _homeDirectory ?? 'Niet ingesteld',
+                _homeDirectory ?? l10n.t('notSet'),
                 muted: _homeDirectory == null,
               ),
             ),
@@ -344,23 +392,23 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             ElevatedButton.icon(
               onPressed: _pickHomeDirectory,
               icon: const Icon(Icons.folder_open, size: 16),
-              label: const Text('Kiezen'),
+              label: Text(l10n.t('choose')),
             ),
             if (_homeDirectory != null)
               IconButton(
                 onPressed: () => setState(() => _homeDirectory = null),
                 icon: const Icon(Icons.clear, size: 18),
-                tooltip: 'Verwijder standaard map',
+                tooltip: l10n.t('removeDefaultFolder'),
               ),
           ],
         ),
         const SizedBox(height: 16),
-        _sectionTitle('Exportmap'),
+        _sectionTitle(l10n.t('exportFolderSetting')),
         Row(
           children: [
             Expanded(
               child: _pathBox(
-                _exportDirectory ?? 'Naast het presentatiebestand',
+                _exportDirectory ?? l10n.t('nextToPresentationFile'),
                 muted: _exportDirectory == null,
               ),
             ),
@@ -368,22 +416,21 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             ElevatedButton.icon(
               onPressed: _pickExportDirectory,
               icon: const Icon(Icons.folder_open, size: 16),
-              label: const Text('Kiezen'),
+              label: Text(l10n.t('choose')),
             ),
             if (_exportDirectory != null)
               IconButton(
                 onPressed: () => setState(() => _exportDirectory = null),
                 icon: const Icon(Icons.clear, size: 18),
-                tooltip: 'Verwijder exportmap',
+                tooltip: l10n.t('removeExportFolder'),
               ),
           ],
         ),
-        const Padding(
-          padding: EdgeInsets.only(top: 6),
+        Padding(
+          padding: const EdgeInsets.only(top: 6),
           child: Text(
-            'Alle exports (PDF/PPTX) worden hier opgeslagen. Niet ingesteld? '
-            'Dan komt de export naast het presentatiebestand te staan.',
-            style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            l10n.t('exportFolderHelp'),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
           ),
         ),
       ],
@@ -446,60 +493,61 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   }
 
   Widget _colorsTab() {
+    final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _sectionTitle('Lettertype'),
+        _sectionTitle(l10n.d('Lettertype')),
         _fontSection(),
         const SizedBox(height: 20),
-        _sectionTitle('Kleuren'),
+        _sectionTitle(l10n.d('Kleuren')),
         _colorSetting(
-          'Achtergrond slides',
+          l10n.d('Achtergrond slides'),
           _themeProfile.slideBackgroundColor,
           (v) =>
               _themeProfile = _themeProfile.copyWith(slideBackgroundColor: v),
         ),
         const SizedBox(height: 12),
         _colorSetting(
-          'Tekst',
+          l10n.d('Tekst'),
           _themeProfile.textColor,
           (v) => _themeProfile = _themeProfile.copyWith(textColor: v),
         ),
         const SizedBox(height: 12),
         _colorSetting(
-          'Accent / bullets',
+          l10n.d('Accent / bullets'),
           _themeProfile.accentColor,
           (v) => _themeProfile = _themeProfile.copyWith(accentColor: v),
         ),
         const SizedBox(height: 12),
         _colorSetting(
-          'Tabeltekst',
+          l10n.d('Tabeltekst'),
           _themeProfile.tableTextColor,
           (v) => _themeProfile = _themeProfile.copyWith(tableTextColor: v),
         ),
         const SizedBox(height: 12),
         _colorSetting(
-          'Tabel koptekst',
+          l10n.d('Tabel koptekst'),
           _themeProfile.tableHeaderTextColor,
           (v) =>
               _themeProfile = _themeProfile.copyWith(tableHeaderTextColor: v),
         ),
         const SizedBox(height: 12),
         _colorSetting(
-          'Titelachtergrond',
+          l10n.d('Titelachtergrond'),
           _themeProfile.titleBackgroundColor,
           (v) =>
               _themeProfile = _themeProfile.copyWith(titleBackgroundColor: v),
         ),
         const SizedBox(height: 12),
         _colorSetting(
-          'Titeltekst',
+          l10n.d('Titeltekst'),
           _themeProfile.titleTextColor,
           (v) => _themeProfile = _themeProfile.copyWith(titleTextColor: v),
         ),
         const SizedBox(height: 12),
         _colorSetting(
-          'Sectieachtergrond',
+          l10n.d('Sectieachtergrond'),
           _themeProfile.sectionBackgroundColor,
           (v) =>
               _themeProfile = _themeProfile.copyWith(sectionBackgroundColor: v),
@@ -511,15 +559,16 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   }
 
   Widget _logoTab() {
+    final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _sectionTitle('Logo'),
+        _sectionTitle(l10n.d('Logo')),
         Row(
           children: [
             Expanded(
               child: _pathBox(
-                _themeProfile.logoPath ?? 'Geen logo ingesteld',
+                _themeProfile.logoPath ?? l10n.d('Geen logo ingesteld'),
                 muted: _themeProfile.logoPath == null,
               ),
             ),
@@ -527,7 +576,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             ElevatedButton.icon(
               onPressed: _pickLogo,
               icon: const Icon(Icons.image_outlined, size: 16),
-              label: const Text('Kiezen'),
+              label: Text(l10n.d('Kiezen')),
             ),
             if (_themeProfile.logoPath != null)
               IconButton(
@@ -536,22 +585,34 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                   _profileTouched = true;
                 }),
                 icon: const Icon(Icons.clear, size: 18),
-                tooltip: 'Verwijder logo',
+                tooltip: l10n.d('Verwijder logo'),
               ),
           ],
         ),
         const SizedBox(height: 18),
         DropdownButtonFormField<String>(
           initialValue: _themeProfile.logoPosition,
-          decoration: const InputDecoration(
-            labelText: 'Logo positie',
+          decoration: InputDecoration(
+            labelText: l10n.d('Logo positie'),
             isDense: true,
           ),
-          items: const [
-            DropdownMenuItem(value: 'top-left', child: Text('Linksboven')),
-            DropdownMenuItem(value: 'top-right', child: Text('Rechtsboven')),
-            DropdownMenuItem(value: 'bottom-left', child: Text('Linksonder')),
-            DropdownMenuItem(value: 'bottom-right', child: Text('Rechtsonder')),
+          items: [
+            DropdownMenuItem(
+              value: 'top-left',
+              child: Text(l10n.d('Linksboven')),
+            ),
+            DropdownMenuItem(
+              value: 'top-right',
+              child: Text(l10n.d('Rechtsboven')),
+            ),
+            DropdownMenuItem(
+              value: 'bottom-left',
+              child: Text(l10n.d('Linksonder')),
+            ),
+            DropdownMenuItem(
+              value: 'bottom-right',
+              child: Text(l10n.d('Rechtsonder')),
+            ),
           ],
           onChanged: (v) {
             if (v != null) {
@@ -567,10 +628,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           width: 160,
           child: TextField(
             controller: _logoSize,
-            decoration: const InputDecoration(
-              labelText: 'Logo px',
-              isDense: true,
-            ),
+            decoration: InputDecoration(labelText: 'Logo px', isDense: true),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             onChanged: (_) => _profileTouched = true,
@@ -580,30 +638,31 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         _sectionTitle('Footer'),
         TextField(
           controller: _footerText,
-          decoration: const InputDecoration(
-            labelText: 'Footertekst',
-            hintText: 'bijv. Vertrouwelijk · {title} · {date}',
+          decoration: InputDecoration(
+            labelText: l10n.d('Footertekst'),
+            hintText: l10n.d('bijv. Vertrouwelijk · {title} · {date}'),
             isDense: true,
           ),
           onChanged: (_) => _profileTouched = true,
         ),
         const SizedBox(height: 6),
-        const Text(
-          'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle '
-          'slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.',
-          style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+        Text(
+          l10n.d(
+            'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.',
+          ),
+          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
         ),
         const SizedBox(height: 14),
         DropdownButtonFormField<String>(
           initialValue: _themeProfile.footerPosition,
-          decoration: const InputDecoration(
-            labelText: 'Footerpositie',
+          decoration: InputDecoration(
+            labelText: l10n.d('Footerpositie'),
             isDense: true,
           ),
-          items: const [
-            DropdownMenuItem(value: 'left', child: Text('Links')),
-            DropdownMenuItem(value: 'center', child: Text('Midden')),
-            DropdownMenuItem(value: 'right', child: Text('Rechts')),
+          items: [
+            DropdownMenuItem(value: 'left', child: Text(l10n.d('Links'))),
+            DropdownMenuItem(value: 'center', child: Text(l10n.d('Midden'))),
+            DropdownMenuItem(value: 'right', child: Text(l10n.d('Rechts'))),
           ],
           onChanged: (v) {
             if (v != null) {
@@ -623,9 +682,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             );
             _profileTouched = true;
           }),
-          title: const Text(
-            'Paginanummers tonen (rechtsonder)',
-            style: TextStyle(fontSize: 13),
+          title: Text(
+            l10n.d('Paginanummers tonen (rechtsonder)'),
+            style: const TextStyle(fontSize: 13),
           ),
           controlAffinity: ListTileControlAffinity.leading,
           contentPadding: EdgeInsets.zero,
@@ -688,6 +747,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   }
 
   Widget _stylePreview() {
+    final l10n = context.l10n;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
@@ -699,7 +759,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Voorvertoning',
+            l10n.d('Voorvertoning'),
             style: _fontStyle(
               _themeProfile.fontFamily,
               TextStyle(
@@ -711,7 +771,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           ),
           const SizedBox(height: 2),
           Text(
-            'De snelle bruine vos springt over de luie hond.',
+            l10n.d('De snelle bruine vos springt over de luie hond.'),
             style: _fontStyle(
               _themeProfile.fontFamily,
               TextStyle(

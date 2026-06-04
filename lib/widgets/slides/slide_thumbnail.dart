@@ -5,6 +5,7 @@ import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../state/slide_clipboard_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../l10n/app_localizations.dart';
 import 'slide_preview.dart';
 
 class SlideThumbnail extends ConsumerWidget {
@@ -44,6 +45,7 @@ class SlideThumbnail extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final skipped = slide.skipped;
     final borderColor = isSelected
         ? AppTheme.accent
@@ -100,18 +102,18 @@ class SlideThumbnail extends ConsumerWidget {
                             color: const Color(0xCC8A6D3B),
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: const Row(
+                          child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.visibility_off_outlined,
                                 size: 10,
                                 color: Colors.white,
                               ),
-                              SizedBox(width: 3),
+                              const SizedBox(width: 3),
                               Text(
-                                'Overgeslagen',
-                                style: TextStyle(
+                                l10n.d('Overgeslagen'),
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 8,
                                   fontWeight: FontWeight.w600,
@@ -153,7 +155,7 @@ class SlideThumbnail extends ConsumerWidget {
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
-                      slide.type.label,
+                      l10n.d(slide.type.label),
                       style: const TextStyle(
                         color: Color(0xFF94A3B8),
                         fontSize: 9,
@@ -182,8 +184,8 @@ class SlideThumbnail extends ConsumerWidget {
                       iconSize: 14,
                       splashRadius: 12,
                       tooltip: skipped
-                          ? 'Weer tonen bij presenteren/exporteren'
-                          : 'Overslaan bij presenteren/exporteren',
+                          ? l10n.d('Weer tonen bij presenteren/exporteren')
+                          : l10n.d('Overslaan bij presenteren/exporteren'),
                       icon: Icon(
                         skipped
                             ? Icons.visibility_off
@@ -207,29 +209,31 @@ class SlideThumbnail extends ConsumerWidget {
                       ),
                       padding: EdgeInsets.zero,
                       itemBuilder: (_) => [
-                        const PopupMenuItem(
+                        PopupMenuItem(
                           value: 'copy',
-                          child: Text('Kopiëren'),
+                          child: Text(l10n.d('Kopiëren')),
                         ),
-                        const PopupMenuItem(
+                        PopupMenuItem(
                           value: 'copy_image',
-                          child: Text('Kopieer als afbeelding'),
+                          child: Text(l10n.d('Kopieer als afbeelding')),
                         ),
-                        const PopupMenuItem(
+                        PopupMenuItem(
                           value: 'duplicate',
-                          child: Text('Dupliceren'),
+                          child: Text(l10n.d('Dupliceren')),
                         ),
                         PopupMenuItem(
                           value: 'skip',
                           child: Text(
-                            skipped ? 'Niet meer overslaan' : 'Overslaan',
+                            skipped
+                                ? l10n.d('Niet meer overslaan')
+                                : l10n.d('Overslaan'),
                           ),
                         ),
-                        const PopupMenuItem(
+                        PopupMenuItem(
                           value: 'delete',
                           child: Text(
-                            'Verwijderen',
-                            style: TextStyle(color: Colors.red),
+                            l10n.d('Verwijderen'),
+                            style: const TextStyle(color: Colors.red),
                           ),
                         ),
                       ],

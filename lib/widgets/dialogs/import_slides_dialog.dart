@@ -5,6 +5,7 @@ import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/file_service.dart';
 import '../../theme/app_theme.dart';
+import '../../l10n/app_localizations.dart';
 import '../slides/slide_preview.dart';
 
 /// Dialog that scans a directory for other Marp presentations, lets the user
@@ -74,7 +75,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
 
   Future<void> _pickDirectory() async {
     final result = await FilePicker.getDirectoryPath(
-      dialogTitle: 'Map met presentaties kiezen',
+      dialogTitle: context.l10n.d('Map met presentaties kiezen'),
       initialDirectory: _directory,
     );
     if (result != null) {
@@ -148,6 +149,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final visible = _visible();
     final selectedCount = _selectedIds.length;
 
@@ -156,11 +158,11 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
         children: [
           const Icon(Icons.library_add_outlined, size: 20),
           const SizedBox(width: 8),
-          const Text('Slides importeren'),
+          Text(l10n.d('Slides importeren')),
           const Spacer(),
           if (selectedCount > 0)
             Text(
-              '$selectedCount geselecteerd',
+              '$selectedCount ${l10n.d('geselecteerd')}',
               style: const TextStyle(
                 fontSize: 12,
                 color: AppTheme.accent,
@@ -185,7 +187,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Annuleren'),
+          child: Text(l10n.t('cancel')),
         ),
         ElevatedButton.icon(
           onPressed: selectedCount == 0
@@ -193,7 +195,9 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
               : () => Navigator.pop(context, _collectSelected()),
           icon: const Icon(Icons.download_done, size: 16),
           label: Text(
-            selectedCount == 0 ? 'Importeren' : 'Importeren ($selectedCount)',
+            selectedCount == 0
+                ? l10n.d('Importeren')
+                : '${l10n.d('Importeren')} ($selectedCount)',
           ),
         ),
       ],
@@ -201,27 +205,30 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
   }
 
   Widget _toolbar() {
+    final l10n = context.l10n;
     return Row(
       children: [
         Expanded(
           child: TextField(
             autofocus: true,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               isDense: true,
-              prefixIcon: Icon(Icons.search, size: 18),
-              hintText: 'Zoek op presentatie, titel of tekst…',
+              prefixIcon: const Icon(Icons.search, size: 18),
+              hintText: l10n.d('Zoek op presentatie, titel of tekst…'),
             ),
             onChanged: (v) => setState(() => _query = v),
           ),
         ),
         const SizedBox(width: 8),
         Tooltip(
-          message: _directory ?? 'Geen map gekozen',
+          message: _directory ?? l10n.d('Geen map gekozen'),
           child: OutlinedButton.icon(
             onPressed: _pickDirectory,
             icon: const Icon(Icons.folder_open_outlined, size: 16),
             label: Text(
-              _directory == null ? 'Map kiezen' : p.basename(_directory!),
+              _directory == null
+                  ? l10n.d('Map kiezen')
+                  : p.basename(_directory!),
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -231,25 +238,26 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
   }
 
   Widget _body(List<(ScannedPresentation, List<Slide>)> visible) {
+    final l10n = context.l10n;
     if (_loading) {
       return const Center(child: CircularProgressIndicator());
     }
     if (_directory == null) {
       return _empty(
         Icons.folder_off_outlined,
-        'Kies een map met presentaties om te beginnen.',
+        l10n.d('Kies een map met presentaties om te beginnen.'),
       );
     }
     if (_presentations.isEmpty) {
       return _empty(
         Icons.search_off_outlined,
-        'Geen andere presentaties (.md) in deze map gevonden.',
+        l10n.d('Geen andere presentaties (.md) in deze map gevonden.'),
       );
     }
     if (visible.isEmpty) {
       return _empty(
         Icons.search_off_outlined,
-        'Geen slides gevonden voor "$_query".',
+        '${l10n.d('Geen slides gevonden voor')} "$_query".',
       );
     }
 
@@ -315,6 +323,7 @@ class _PresentationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final allSelected =
         slides.isNotEmpty && slides.every((s) => selectedIds.contains(s.id));
     final deck = presentation.deck;
@@ -365,7 +374,9 @@ class _PresentationSection extends StatelessWidget {
                   textStyle: const TextStyle(fontSize: 11),
                 ),
                 child: Text(
-                  allSelected ? 'Deselecteer alles' : 'Selecteer alles',
+                  allSelected
+                      ? l10n.d('Deselecteer alles')
+                      : l10n.d('Selecteer alles'),
                 ),
               ),
             ],

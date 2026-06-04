@@ -9,6 +9,7 @@ import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/url_launcher_util.dart';
+import '../../l10n/app_localizations.dart';
 import '../slides/slide_preview.dart';
 
 /// Of het preview-paneel ingeklapt is (UI-voorkeur, app-breed).
@@ -85,6 +86,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final deckState = ref.watch(deckProvider);
     final deck = deckState.deck!;
     final editor = ref.watch(editorProvider);
@@ -117,9 +119,9 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                       color: Color(0xFF64748B),
                     ),
                     const SizedBox(width: 6),
-                    const Text(
-                      'Preview',
-                      style: TextStyle(
+                    Text(
+                      l10n.d('Preview'),
+                      style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 13,
                         color: Color(0xFF334155),
@@ -128,7 +130,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                     const Spacer(),
                     // ── Zoom controls ──────────────────────────────────────
                     Tooltip(
-                      message: 'Uitzoomen',
+                      message: l10n.d('Uitzoomen'),
                       child: IconButton(
                         icon: const Icon(Icons.remove, size: 16),
                         onPressed: _zoom > _minZoom ? _zoomOut : null,
@@ -143,7 +145,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                     GestureDetector(
                       onTap: _zoom != _minZoom ? _resetZoom : null,
                       child: Tooltip(
-                        message: 'Zoom resetten',
+                        message: l10n.d('Zoom resetten'),
                         child: Text(
                           '${(_zoom * 100).round()}%',
                           style: TextStyle(
@@ -159,7 +161,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                       ),
                     ),
                     Tooltip(
-                      message: 'Inzoomen',
+                      message: l10n.d('Inzoomen'),
                       child: IconButton(
                         icon: const Icon(Icons.add, size: 16),
                         onPressed: _zoom < _maxZoom ? _zoomIn : null,
@@ -181,7 +183,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                     ),
                     const SizedBox(width: 4),
                     Tooltip(
-                      message: 'Preview inklappen',
+                      message: l10n.d('Preview inklappen'),
                       child: IconButton(
                         icon: const Icon(Icons.chevron_right, size: 18),
                         onPressed: () =>
@@ -266,12 +268,12 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                           : null,
                       icon: const Icon(Icons.chevron_left),
                       iconSize: 20,
-                      tooltip: 'Vorige slide',
+                      tooltip: l10n.d('Vorige slide'),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Text(
-                        slide.type.label,
+                        l10n.d(slide.type.label),
                         style: const TextStyle(
                           fontSize: 11,
                           color: Color(0xFF64748B),
@@ -286,7 +288,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                           : null,
                       icon: const Icon(Icons.chevron_right),
                       iconSize: 20,
-                      tooltip: 'Volgende slide',
+                      tooltip: l10n.d('Volgende slide'),
                     ),
                   ],
                 ),
@@ -308,7 +310,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      'Thema: ${deck.theme}',
+                      '${l10n.d('Thema')}: ${deck.theme}',
                       style: const TextStyle(
                         fontSize: 10,
                         color: Color(0xFF94A3B8),
@@ -318,9 +320,9 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                       const SizedBox(width: 10),
                       const Icon(Icons.tag, size: 12, color: Color(0xFF94A3B8)),
                       const SizedBox(width: 2),
-                      const Text(
-                        'paginering aan',
-                        style: TextStyle(
+                      Text(
+                        l10n.d('paginering aan'),
+                        style: const TextStyle(
                           fontSize: 10,
                           color: Color(0xFF94A3B8),
                         ),
@@ -351,10 +353,11 @@ class FullDeckPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
       backgroundColor: const Color(0xFF1E2028),
       appBar: AppBar(
-        title: Text('${deck.title} — volledig deck'),
+        title: Text('${deck.title} — ${l10n.d('volledig deck')}'),
         backgroundColor: AppTheme.navy,
         leading: IconButton(
           icon: const Icon(Icons.close),
@@ -371,7 +374,7 @@ class FullDeckPreview extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Slide ${i + 1}',
+                  '${l10n.d('Slide')} ${i + 1}',
                   style: const TextStyle(
                     color: Color(0xFF64748B),
                     fontSize: 11,
@@ -416,6 +419,7 @@ class CollapsedPreviewBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     return Container(
       width: 34,
       color: Colors.white,
@@ -423,7 +427,7 @@ class CollapsedPreviewBar extends ConsumerWidget {
         children: [
           const SizedBox(height: 6),
           Tooltip(
-            message: 'Preview uitklappen',
+            message: l10n.d('Preview uitklappen'),
             child: IconButton(
               icon: const Icon(Icons.chevron_left, size: 18),
               onPressed: () =>

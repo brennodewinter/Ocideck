@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/slide.dart';
+import '../../l10n/app_localizations.dart';
 
 class FreeMarkdownEditor extends StatefulWidget {
   final Slide slide;
@@ -37,14 +38,15 @@ class _FreeMarkdownEditorState extends State<FreeMarkdownEditor> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Markdown inhoud',
-            style: TextStyle(
+          Text(
+            l10n.d('Markdown inhoud'),
+            style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
               color: Color(0xFF64748B),
@@ -58,8 +60,8 @@ class _FreeMarkdownEditorState extends State<FreeMarkdownEditor> {
               expands: true,
               textAlignVertical: TextAlignVertical.top,
               style: const TextStyle(fontFamily: 'monospace', fontSize: 13),
-              decoration: const InputDecoration(
-                hintText: '# Slide\n\nInhoud hier...',
+              decoration: InputDecoration(
+                hintText: l10n.d('# Slide\n\nInhoud hier...'),
                 alignLabelWithHint: true,
               ),
             ),

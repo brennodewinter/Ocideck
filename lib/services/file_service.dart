@@ -6,6 +6,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter/services.dart' show rootBundle;
 import '../models/deck.dart';
+import '../l10n/app_localizations.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import 'caption_service.dart';
@@ -40,11 +41,19 @@ class FileService {
   final MarkdownService _md;
   final ImageService _img;
   final ThemeProfile Function() _themeProfile;
+  final String Function() _languageCode;
   final CaptionService _captions = CaptionService();
 
-  FileService(this._md, this._img, this._themeProfile);
+  FileService(
+    this._md,
+    this._img,
+    this._themeProfile, {
+    String Function()? languageCode,
+  }) : _languageCode = languageCode ?? (() => 'nl');
 
   ThemeProfile get currentThemeProfile => _themeProfile();
+
+  String _d(String text) => AppLocalizations.sourceFor(_languageCode(), text);
 
   static const _ignoredDirs = {
     'images',
@@ -117,7 +126,7 @@ class FileService {
 
   Future<String?> pickMarkdownFile({String? initialDirectory}) async {
     final result = await FilePicker.pickFiles(
-      dialogTitle: 'Presentatie openen',
+      dialogTitle: _d('Presentatie openen'),
       type: FileType.custom,
       allowedExtensions: ['md'],
       initialDirectory: initialDirectory,
@@ -144,7 +153,7 @@ class FileService {
         .replaceAll(RegExp(r'[^\w\s-]'), '')
         .replaceAll(' ', '_');
     final result = await FilePicker.saveFile(
-      dialogTitle: 'Opslaan als',
+      dialogTitle: _d('Opslaan als'),
       fileName: '$safeName.md',
       initialDirectory: initialDirectory,
     );
@@ -360,7 +369,7 @@ class FileService {
 
   Future<String?> pickPackageFile({String? initialDirectory}) async {
     final result = await FilePicker.pickFiles(
-      dialogTitle: 'Pakket importeren',
+      dialogTitle: _d('Pakket importeren'),
       type: FileType.custom,
       allowedExtensions: [packageExtension, 'zip'],
       initialDirectory: initialDirectory,
@@ -370,7 +379,7 @@ class FileService {
 
   Future<String?> pickPackageDestination(Deck deck) async {
     return FilePicker.saveFile(
-      dialogTitle: 'Pakket exporteren',
+      dialogTitle: _d('Pakket exporteren'),
       fileName: '${_safeName(deck.title)}.$packageExtension',
     );
   }

@@ -13,12 +13,17 @@ import 'settings_provider.dart';
 final markdownServiceProvider = Provider<MarkdownService>(
   (_) => MarkdownService(),
 );
-final imageServiceProvider = Provider<ImageService>((_) => ImageService());
+final imageServiceProvider = Provider<ImageService>((ref) {
+  return ImageService(
+    languageCode: () => ref.read(settingsProvider).languageCode,
+  );
+});
 final fileServiceProvider = Provider<FileService>((ref) {
   return FileService(
     ref.read(markdownServiceProvider),
     ref.read(imageServiceProvider),
     () => ref.read(settingsProvider).themeProfile,
+    languageCode: () => ref.read(settingsProvider).languageCode,
   );
 });
 

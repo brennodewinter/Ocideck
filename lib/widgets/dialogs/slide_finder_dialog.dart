@@ -4,6 +4,7 @@ import 'package:path/path.dart' as p;
 import '../../models/slide.dart';
 import '../../services/file_service.dart';
 import '../../theme/app_theme.dart';
+import '../../l10n/app_localizations.dart';
 import '../slides/slide_preview.dart';
 
 /// A single search hit: one slide from a scanned presentation.
@@ -92,7 +93,7 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
 
   Future<void> _pickDirectory() async {
     final result = await FilePicker.getDirectoryPath(
-      dialogTitle: 'Map met presentaties kiezen',
+      dialogTitle: context.l10n.d('Map met presentaties kiezen'),
       initialDirectory: _directory,
     );
     if (result != null) {
@@ -160,6 +161,7 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final hits = _hits();
 
     return AlertDialog(
@@ -167,11 +169,11 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
         children: [
           const Icon(Icons.travel_explore_outlined, size: 20),
           const SizedBox(width: 8),
-          const Text('Slide zoeken'),
+          Text(l10n.d('Slide zoeken')),
           const Spacer(),
           if (_addedCount > 0)
             Text(
-              '$_addedCount toegevoegd',
+              '$_addedCount ${l10n.d('toegevoegd')}',
               style: const TextStyle(
                 fontSize: 12,
                 color: AppTheme.accent,
@@ -196,34 +198,39 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
       actions: [
         ElevatedButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Klaar'),
+          child: Text(l10n.d('Klaar')),
         ),
       ],
     );
   }
 
   Widget _toolbar() {
+    final l10n = context.l10n;
     return Row(
       children: [
         Expanded(
           child: TextField(
             autofocus: true,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               isDense: true,
-              prefixIcon: Icon(Icons.search, size: 18),
-              hintText: 'Zoek slides op tekst, titel, onderschrift, pad…',
+              prefixIcon: const Icon(Icons.search, size: 18),
+              hintText: l10n.d(
+                'Zoek slides op tekst, titel, onderschrift, pad…',
+              ),
             ),
             onChanged: (v) => setState(() => _query = v),
           ),
         ),
         const SizedBox(width: 8),
         Tooltip(
-          message: _directory ?? 'Geen map gekozen',
+          message: _directory ?? l10n.d('Geen map gekozen'),
           child: OutlinedButton.icon(
             onPressed: _pickDirectory,
             icon: const Icon(Icons.folder_open_outlined, size: 16),
             label: Text(
-              _directory == null ? 'Map kiezen' : p.basename(_directory!),
+              _directory == null
+                  ? l10n.d('Map kiezen')
+                  : p.basename(_directory!),
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -233,25 +240,26 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
   }
 
   Widget _body(List<_Hit> hits) {
+    final l10n = context.l10n;
     if (_loading) {
       return const Center(child: CircularProgressIndicator());
     }
     if (_directory == null) {
       return _empty(
         Icons.folder_off_outlined,
-        'Kies een map met presentaties om te beginnen.',
+        l10n.d('Kies een map met presentaties om te beginnen.'),
       );
     }
     if (_query.trim().isEmpty) {
       return _empty(
         Icons.travel_explore_outlined,
-        'Typ zoektermen om slides uit al je presentaties te vinden.',
+        l10n.d('Typ zoektermen om slides uit al je presentaties te vinden.'),
       );
     }
     if (hits.isEmpty) {
       return _empty(
         Icons.search_off_outlined,
-        'Geen slides gevonden voor "${_query.trim()}".',
+        '${l10n.d('Geen slides gevonden voor')} "${_query.trim()}".',
       );
     }
 
@@ -262,8 +270,8 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
           padding: const EdgeInsets.only(bottom: 8, left: 2),
           child: Text(
             hits.length >= _maxResults
-                ? 'Eerste $_maxResults treffers — verfijn je zoekopdracht'
-                : '${hits.length} treffer(s)',
+                ? '${l10n.d('Eerste')} $_maxResults ${l10n.d('treffers — verfijn je zoekopdracht')}'
+                : '${hits.length} ${l10n.d('treffer(s)')}',
             style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
           ),
         ),
@@ -320,6 +328,7 @@ class _SlideHitCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final deck = hit.source.deck;
     final sourceName = deck.title.isEmpty ? hit.source.fileName : deck.title;
 
@@ -351,7 +360,7 @@ class _SlideHitCard extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          '$sourceName · slide ${hit.slideIndex + 1}',
+          '$sourceName · ${l10n.d('slide')} ${hit.slideIndex + 1}',
           style: const TextStyle(fontSize: 10.5, color: Color(0xFF94A3B8)),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
@@ -363,7 +372,7 @@ class _SlideHitCard extends StatelessWidget {
               ? OutlinedButton.icon(
                   onPressed: onAdd,
                   icon: const Icon(Icons.check, size: 14),
-                  label: const Text('Toegevoegd'),
+                  label: Text(l10n.d('Toegevoegd')),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: AppTheme.accent,
                     side: const BorderSide(color: AppTheme.accent),
@@ -374,7 +383,7 @@ class _SlideHitCard extends StatelessWidget {
               : ElevatedButton.icon(
                   onPressed: onAdd,
                   icon: const Icon(Icons.add, size: 14),
-                  label: const Text('Toevoegen'),
+                  label: Text(l10n.d('Toevoegen')),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppTheme.accent,
                     padding: const EdgeInsets.symmetric(horizontal: 8),

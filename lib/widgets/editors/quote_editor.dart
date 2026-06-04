@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/slide.dart';
 import '../../state/deck_provider.dart';
+import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
 
 class QuoteEditor extends ConsumerStatefulWidget {
@@ -70,6 +71,7 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final imagePath = widget.slide.imagePath;
 
     return ListView(
@@ -93,10 +95,11 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor> {
         // ── Background image ──────────────────────────────────────────────
         const SectionLabel('Achtergrondafbeelding (optioneel)'),
         const SizedBox(height: 4),
-        const Text(
-          'De afbeelding wordt schermvullend als achtergrond getoond '
-          'met verminderde opaciteit zodat de tekst leesbaar blijft.',
-          style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+        Text(
+          l10n.d(
+            'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.',
+          ),
+          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
         ),
         const SizedBox(height: 8),
         ImagePickerBar(

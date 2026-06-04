@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/slide.dart';
 import '../../services/image_service.dart';
+import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
 
 class BulletsImageEditor extends StatefulWidget {
@@ -175,6 +176,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final imagePath = widget.slide.imagePath;
 
     return ListView(
@@ -197,7 +199,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
           child: TextButton.icon(
             onPressed: () => _addBulletAfter(_bullets.length - 1),
             icon: const Icon(Icons.add, size: 16),
-            label: const Text('Bullet toevoegen'),
+            label: Text(l10n.d('Bullet toevoegen')),
           ),
         ),
         const SizedBox(height: 16),
@@ -235,6 +237,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   }
 
   Widget _buildBulletRow(int i) {
+    final l10n = context.l10n;
     final level = _levels[i];
     return Padding(
       key: ValueKey(_bullets[i]),
@@ -291,7 +294,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
                 controller: _bullets[i],
                 focusNode: _focusNodes[i],
                 decoration: InputDecoration(
-                  hintText: 'Bullet ${i + 1}',
+                  hintText: '${l10n.d('Bullet')} ${i + 1}',
                   isDense: true,
                 ),
               ),

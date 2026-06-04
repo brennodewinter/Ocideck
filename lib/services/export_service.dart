@@ -8,6 +8,7 @@ import 'package:path/path.dart' as p;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
+import '../models/settings.dart';
 import 'marp_html_service.dart';
 
 enum ExportFormat { pdf, pptx, html }
@@ -101,6 +102,7 @@ class ExportService {
     String? outputDirectory,
     List<String>? notes,
     String? markdown,
+    ThemeProfile? themeProfile,
   }) async {
     if (format == ExportFormat.html) {
       if (markdown == null || markdown.trim().isEmpty) {
@@ -128,7 +130,9 @@ class ExportService {
         case ExportFormat.pptx:
           bytes = _buildPptx(images, notes: notes);
         case ExportFormat.html:
-          bytes = Uint8List.fromList(utf8.encode(await _html.build(markdown!)));
+          bytes = Uint8List.fromList(
+            utf8.encode(await _html.build(markdown!, theme: themeProfile)),
+          );
       }
       await File(outputPath).writeAsBytes(bytes, flush: true);
       return ExportResult.ok(outputPath);

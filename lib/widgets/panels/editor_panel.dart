@@ -7,6 +7,7 @@ import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../l10n/app_localizations.dart';
 import '../editors/bullets_editor.dart';
 import '../editors/bullets_image_editor.dart';
 import '../editors/audio_attachment_editor.dart';
@@ -324,6 +325,7 @@ class _EditorToolbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     // Make sure the active profile is always selectable, even when it was
     // loaded from a file and is not part of the saved profile list.
     final profileItems = <ThemeProfile>[
@@ -365,7 +367,7 @@ class _EditorToolbar extends StatelessWidget {
                             const SizedBox(width: 4),
                             Flexible(
                               child: Text(
-                                type.label,
+                                l10n.d(type.label),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -435,7 +437,8 @@ class _EditorToolbar extends StatelessWidget {
           if (activeProfile.name != defaultProfile.name) ...[
             const SizedBox(width: 2),
             Tooltip(
-              message: "Terug naar standaardstijl '${defaultProfile.name}'",
+              message:
+                  '${context.l10n.d('Terug naar standaardstijl')} ${defaultProfile.name}',
               child: IconButton(
                 onPressed: onDefaultProfileRequested,
                 icon: const Icon(Icons.restart_alt, size: 16),
@@ -460,10 +463,11 @@ class _ToolbarField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Row(
       children: [
         Text(
-          label,
+          l10n.d(label),
           style: const TextStyle(
             fontSize: 9,
             fontWeight: FontWeight.w700,
@@ -502,6 +506,7 @@ class _SlideTimingControl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final enabled = slide.advanceDuration > 0;
     final duration = slide.advanceDuration;
 
@@ -519,9 +524,9 @@ class _SlideTimingControl extends StatelessWidget {
             visualDensity: VisualDensity.compact,
           ),
           const SizedBox(width: 4),
-          const Text(
-            'Automatisch doorgaan na',
-            style: TextStyle(fontSize: 12, color: Color(0xFF0369A1)),
+          Text(
+            l10n.d('Automatisch doorgaan na'),
+            style: const TextStyle(fontSize: 12, color: Color(0xFF0369A1)),
           ),
           const SizedBox(width: 8),
           // Minus knop
@@ -578,6 +583,7 @@ class _SlideLogoControl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       color: const Color(0xFFF8FAFC),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
@@ -596,9 +602,9 @@ class _SlideLogoControl extends StatelessWidget {
             visualDensity: VisualDensity.compact,
           ),
           const SizedBox(width: 4),
-          const Text(
-            'Logo tonen op deze slide',
-            style: TextStyle(fontSize: 12, color: Color(0xFF475569)),
+          Text(
+            l10n.d('Logo tonen op deze slide'),
+            style: const TextStyle(fontSize: 12, color: Color(0xFF475569)),
           ),
         ],
       ),
@@ -615,6 +621,7 @@ class _SlideFooterControl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       color: const Color(0xFFF8FAFC),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
@@ -633,9 +640,9 @@ class _SlideFooterControl extends StatelessWidget {
             visualDensity: VisualDensity.compact,
           ),
           const SizedBox(width: 4),
-          const Text(
-            'Footer tonen op deze slide',
-            style: TextStyle(fontSize: 12, color: Color(0xFF475569)),
+          Text(
+            l10n.d('Footer tonen op deze slide'),
+            style: const TextStyle(fontSize: 12, color: Color(0xFF475569)),
           ),
         ],
       ),
@@ -684,6 +691,7 @@ class _NotesFieldState extends State<_NotesField> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       color: const Color(0xFFFFFBEB),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -701,12 +709,15 @@ class _NotesFieldState extends State<_NotesField> {
               maxLines: 3,
               minLines: 1,
               style: const TextStyle(fontSize: 12),
-              decoration: const InputDecoration(
-                hintText: 'Sprekersnotities...',
-                hintStyle: TextStyle(fontSize: 12, color: Color(0xFFD97706)),
+              decoration: InputDecoration(
+                hintText: l10n.d('Sprekersnotities...'),
+                hintStyle: const TextStyle(
+                  fontSize: 12,
+                  color: Color(0xFFD97706),
+                ),
                 border: InputBorder.none,
                 isDense: true,
-                contentPadding: EdgeInsets.symmetric(vertical: 8),
+                contentPadding: const EdgeInsets.symmetric(vertical: 8),
               ),
             ),
           ),
@@ -753,6 +764,7 @@ class _MarkdownModeEditorState extends State<_MarkdownModeEditor> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -764,10 +776,15 @@ class _MarkdownModeEditorState extends State<_MarkdownModeEditor> {
             children: [
               const Icon(Icons.code, size: 14, color: Color(0xFF92400E)),
               const SizedBox(width: 6),
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'Markdown modus — bewerk de volledige presentatie als Marp Markdown',
-                  style: TextStyle(fontSize: 11, color: Color(0xFF92400E)),
+                  l10n.d(
+                    'Markdown modus — bewerk de volledige presentatie als Marp Markdown',
+                  ),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Color(0xFF92400E),
+                  ),
                 ),
               ),
               TextButton(
@@ -775,11 +792,11 @@ class _MarkdownModeEditorState extends State<_MarkdownModeEditor> {
                   final ok = widget.onApply(_ctrl.text);
                   if (ok) widget.onExitMarkdown();
                 },
-                child: const Text('Toepassen'),
+                child: Text(l10n.d('Toepassen')),
               ),
               TextButton(
                 onPressed: widget.onExitMarkdown,
-                child: const Text('Annuleren'),
+                child: Text(l10n.t('cancel')),
               ),
             ],
           ),
@@ -788,14 +805,20 @@ class _MarkdownModeEditorState extends State<_MarkdownModeEditor> {
           Container(
             color: const Color(0xFFFEE2E2),
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            child: const Row(
+            child: Row(
               children: [
-                Icon(Icons.warning_amber_outlined, size: 14, color: Colors.red),
-                SizedBox(width: 6),
+                const Icon(
+                  Icons.warning_amber_outlined,
+                  size: 14,
+                  color: Colors.red,
+                ),
+                const SizedBox(width: 6),
                 Expanded(
                   child: Text(
-                    'Markdown kon niet worden verwerkt. Controleer de syntax.',
-                    style: TextStyle(fontSize: 11, color: Colors.red),
+                    l10n.d(
+                      'Markdown kon niet worden verwerkt. Controleer de syntax.',
+                    ),
+                    style: const TextStyle(fontSize: 11, color: Colors.red),
                   ),
                 ),
               ],

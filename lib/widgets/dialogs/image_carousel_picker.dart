@@ -6,6 +6,7 @@ import 'package:path/path.dart' as p;
 import '../../services/caption_service.dart';
 import '../../services/description_service.dart';
 import '../../services/image_service.dart';
+import '../../l10n/app_localizations.dart';
 
 /// Resultaat van de afbeeldingencarousel.
 class ImagePickResult {
@@ -290,7 +291,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
   Future<void> _browse() async {
     final result = await FilePicker.pickFiles(
       type: FileType.image,
-      dialogTitle: 'Kies een afbeelding',
+      dialogTitle: context.l10n.d('Kies een afbeelding'),
     );
     if (result?.files.single.path != null && mounted) {
       final path = result!.files.single.path!;
@@ -378,7 +379,9 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Kopiëren naar klembord mislukt.')),
+        SnackBar(
+          content: Text(context.l10n.d('Kopiëren naar klembord mislukt.')),
+        ),
       );
     }
   }
@@ -418,107 +421,117 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
   Future<bool?> _showDeleteDialog(String path, List<String> usages) {
     return showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF161B22),
-        title: Row(
-          children: [
-            Icon(
-              usages.isEmpty
-                  ? Icons.delete_outline
-                  : Icons.warning_amber_rounded,
-              color: usages.isEmpty
-                  ? const Color(0xFFE5534B)
-                  : const Color(0xFFF0B429),
-              size: 20,
-            ),
-            const SizedBox(width: 10),
-            const Expanded(
-              child: Text(
-                'Afbeelding verwijderen?',
-                style: TextStyle(color: Colors.white, fontSize: 16),
+      builder: (ctx) {
+        final l10n = ctx.l10n;
+        return AlertDialog(
+          backgroundColor: const Color(0xFF161B22),
+          title: Row(
+            children: [
+              Icon(
+                usages.isEmpty
+                    ? Icons.delete_outline
+                    : Icons.warning_amber_rounded,
+                color: usages.isEmpty
+                    ? const Color(0xFFE5534B)
+                    : const Color(0xFFF0B429),
+                size: 20,
               ),
-            ),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              p.basename(path),
-              style: const TextStyle(
-                color: Color(0xFFCDD9E5),
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  l10n.d('Afbeelding verwijderen?'),
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                ),
               ),
-            ),
-            const SizedBox(height: 10),
-            if (usages.isEmpty)
-              const Text(
-                'Het bestand wordt permanent van schijf verwijderd. '
-                'Deze actie kan niet ongedaan worden gemaakt.',
-                style: TextStyle(color: Color(0xFF8B949E), fontSize: 13),
-              )
-            else ...[
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Text(
-                'Let op: deze afbeelding wordt nog gebruikt in '
-                '${usages.length} ${usages.length == 1 ? "slide" : "slides"}:',
+                p.basename(path),
                 style: const TextStyle(
-                  color: Color(0xFFF0B429),
+                  color: Color(0xFFCDD9E5),
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              const SizedBox(height: 8),
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 160),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      for (final u in usages)
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 3),
-                          child: Text(
-                            '•  $u',
-                            style: const TextStyle(
-                              color: Color(0xFFCDD9E5),
-                              fontSize: 12.5,
-                            ),
-                          ),
-                        ),
-                    ],
+              const SizedBox(height: 10),
+              if (usages.isEmpty)
+                Text(
+                  l10n.d(
+                    'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.',
+                  ),
+                  style: const TextStyle(
+                    color: Color(0xFF8B949E),
+                    fontSize: 13,
+                  ),
+                )
+              else ...[
+                Text(
+                  '${l10n.d('Let op: deze afbeelding wordt nog gebruikt in')} ${usages.length} ${usages.length == 1 ? l10n.d("slide") : l10n.t("slides")}:',
+                  style: const TextStyle(
+                    color: Color(0xFFF0B429),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                'Verwijderen maakt die slides leeg. Dit kan niet ongedaan '
-                'worden gemaakt.',
-                style: TextStyle(color: Color(0xFF8B949E), fontSize: 13),
-              ),
+                const SizedBox(height: 8),
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxHeight: 160),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (final u in usages)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 3),
+                            child: Text(
+                              '•  $u',
+                              style: const TextStyle(
+                                color: Color(0xFFCDD9E5),
+                                fontSize: 12.5,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  l10n.d(
+                    'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.',
+                  ),
+                  style: const TextStyle(
+                    color: Color(0xFF8B949E),
+                    fontSize: 13,
+                  ),
+                ),
+              ],
             ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              style: TextButton.styleFrom(
+                foregroundColor: const Color(0xFF8B949E),
+              ),
+              child: Text(l10n.t('cancel')),
+            ),
+            ElevatedButton.icon(
+              onPressed: () => Navigator.pop(ctx, true),
+              icon: const Icon(Icons.delete_outline, size: 16),
+              label: Text(l10n.d('Verwijderen')),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFB62324),
+                foregroundColor: Colors.white,
+              ),
+            ),
           ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx, false),
-            style: TextButton.styleFrom(
-              foregroundColor: const Color(0xFF8B949E),
-            ),
-            child: const Text('Annuleren'),
-          ),
-          ElevatedButton.icon(
-            onPressed: () => Navigator.pop(ctx, true),
-            icon: const Icon(Icons.delete_outline, size: 16),
-            label: const Text('Verwijderen'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFB62324),
-              foregroundColor: Colors.white,
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -595,15 +608,16 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
   }
 
   Widget _buildLoading() {
-    return const Center(
+    final l10n = context.l10n;
+    return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          CircularProgressIndicator(color: Color(0xFF3B82F6)),
-          SizedBox(height: 16),
+          const CircularProgressIndicator(color: Color(0xFF3B82F6)),
+          const SizedBox(height: 16),
           Text(
-            'Afbeeldingen laden…',
-            style: TextStyle(color: Color(0xFF8B949E), fontSize: 14),
+            l10n.d('Afbeeldingen laden…'),
+            style: const TextStyle(color: Color(0xFF8B949E), fontSize: 14),
           ),
         ],
       ),
@@ -611,6 +625,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
   }
 
   Widget _buildHeader() {
+    final l10n = context.l10n;
     return Container(
       height: 60,
       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -632,9 +647,9 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
             ),
           ),
           const SizedBox(width: 14),
-          const Text(
-            'Afbeelding kiezen',
-            style: TextStyle(
+          Text(
+            l10n.d('Afbeelding kiezen'),
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 17,
               fontWeight: FontWeight.w600,
@@ -667,7 +682,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
           IconButton(
             icon: const Icon(Icons.close, color: Color(0xFF6E7681), size: 20),
             onPressed: () => _close(),
-            tooltip: 'Sluiten (Esc)',
+            tooltip: l10n.d('Sluiten (Esc)'),
           ),
         ],
       ),
@@ -675,6 +690,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
   }
 
   Widget _buildSearchField() {
+    final l10n = context.l10n;
     return SizedBox(
       height: 36,
       child: TextField(
@@ -682,7 +698,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
         onChanged: _onSearchChanged,
         style: const TextStyle(color: Color(0xFFCDD9E5), fontSize: 13),
         decoration: InputDecoration(
-          hintText: 'Zoek op naam of beschrijving…',
+          hintText: l10n.d('Zoek op naam of beschrijving…'),
           hintStyle: const TextStyle(color: Color(0xFF6E7681), fontSize: 13),
           prefixIcon: const Icon(
             Icons.search,
@@ -725,6 +741,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
 
   /// Segmented control om tussen raster- en coverflow-weergave te wisselen.
   Widget _buildViewToggle() {
+    final l10n = context.l10n;
     Widget seg(_ViewMode mode, IconData icon, String tip) {
       final active = _viewMode == mode;
       return Tooltip(
@@ -758,9 +775,13 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          seg(_ViewMode.grid, Icons.grid_view_rounded, 'Raster'),
+          seg(_ViewMode.grid, Icons.grid_view_rounded, l10n.d('Raster')),
           const SizedBox(width: 3),
-          seg(_ViewMode.cover, Icons.view_carousel_rounded, 'Coverflow'),
+          seg(
+            _ViewMode.cover,
+            Icons.view_carousel_rounded,
+            l10n.d('Coverflow'),
+          ),
         ],
       ),
     );
@@ -768,6 +789,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
 
   /// Lege staat — gedeeld door raster- en coverflow-weergave.
   Widget _buildEmptyState() {
+    final l10n = context.l10n;
     final filtering = _query.trim().isNotEmpty;
     return Expanded(
       flex: 13,
@@ -790,8 +812,8 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
             const SizedBox(height: 20),
             Text(
               filtering
-                  ? 'Geen resultaten voor "${_query.trim()}"'
-                  : 'Geen afbeeldingen gevonden',
+                  ? '${l10n.d('Geen resultaten voor')} "${_query.trim()}"'
+                  : l10n.d('Geen afbeeldingen gevonden'),
               style: const TextStyle(
                 color: Color(0xFFCDD9E5),
                 fontSize: 16,
@@ -801,8 +823,10 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
             const SizedBox(height: 8),
             Text(
               filtering
-                  ? 'Pas je zoekterm aan of voeg een beschrijving toe.'
-                  : 'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.',
+                  ? l10n.d('Pas je zoekterm aan of voeg een beschrijving toe.')
+                  : l10n.d(
+                      'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.',
+                    ),
               style: const TextStyle(color: Color(0xFF6E7681), fontSize: 13),
             ),
           ],
@@ -1261,25 +1285,26 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
   }
 
   Widget _buildPreview() {
+    final l10n = context.l10n;
     return SizedBox(
       width: 300,
       child: Container(
         color: const Color(0xFF080D14),
         child: _selected == null
-            ? const Center(
+            ? Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.touch_app_outlined,
                       size: 40,
                       color: Color(0xFF30363D),
                     ),
-                    SizedBox(height: 12),
+                    const SizedBox(height: 12),
                     Text(
-                      'Selecteer een\nafbeelding',
+                      l10n.d('Selecteer een\nafbeelding'),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF6E7681),
                         fontSize: 13,
                         height: 1.5,
@@ -1363,7 +1388,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
                               fontSize: 12,
                             ),
                             decoration: InputDecoration(
-                              hintText: 'Caption / bronvermelding',
+                              hintText: l10n.d('Caption / bronvermelding'),
                               hintStyle: const TextStyle(
                                 color: Color(0xFF6E7681),
                                 fontSize: 12,
@@ -1408,7 +1433,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
                               fontSize: 12,
                             ),
                             decoration: InputDecoration(
-                              hintText: 'Beschrijving (doorzoekbaar)',
+                              hintText: l10n.d('Beschrijving (doorzoekbaar)'),
                               hintStyle: const TextStyle(
                                 color: Color(0xFF6E7681),
                                 fontSize: 12,
@@ -1455,7 +1480,9 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
                                   size: 16,
                                 ),
                                 label: Text(
-                                  _justCopied ? 'Gekopieerd' : 'Kopiëren',
+                                  _justCopied
+                                      ? l10n.d('Gekopieerd')
+                                      : l10n.d('Kopiëren'),
                                 ),
                                 style: TextButton.styleFrom(
                                   foregroundColor: _justCopied
@@ -1477,7 +1504,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
                                   Icons.delete_outline,
                                   size: 16,
                                 ),
-                                label: const Text('Verwijderen'),
+                                label: Text(l10n.d('Verwijderen')),
                                 style: TextButton.styleFrom(
                                   foregroundColor: const Color(0xFFE5746E),
                                   padding: const EdgeInsets.symmetric(
@@ -1499,6 +1526,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
   }
 
   Widget _buildFooter() {
+    final l10n = context.l10n;
     return Container(
       height: 64,
       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -1511,7 +1539,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
           OutlinedButton.icon(
             onPressed: _browse,
             icon: const Icon(Icons.folder_open_outlined, size: 16),
-            label: const Text('Bladeren…'),
+            label: Text(l10n.d('Bladeren…')),
             style: OutlinedButton.styleFrom(
               foregroundColor: const Color(0xFF8B949E),
               side: const BorderSide(color: Color(0xFF30363D)),
@@ -1520,9 +1548,9 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
           ),
           const SizedBox(width: 8),
           // Hint
-          const Text(
-            '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert',
-            style: TextStyle(color: Color(0xFF484F58), fontSize: 11),
+          Text(
+            l10n.d('↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert'),
+            style: const TextStyle(color: Color(0xFF484F58), fontSize: 11),
           ),
           const Spacer(),
           // Annuleren
@@ -1532,14 +1560,14 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
               foregroundColor: const Color(0xFF8B949E),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             ),
-            child: const Text('Annuleren'),
+            child: Text(l10n.t('cancel')),
           ),
           const SizedBox(width: 10),
           // Kiezen
           ElevatedButton.icon(
             onPressed: _selected != null ? () => _confirm() : null,
             icon: const Icon(Icons.check_circle_outline, size: 17),
-            label: const Text('Kiezen'),
+            label: Text(l10n.d('Kiezen')),
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF238636),
               foregroundColor: Colors.white,

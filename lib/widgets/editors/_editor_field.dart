@@ -5,6 +5,7 @@ import '../../services/caption_service.dart';
 import '../../services/description_service.dart';
 import '../../services/image_service.dart';
 import '../../state/tabs_provider.dart';
+import '../../l10n/app_localizations.dart';
 import '../dialogs/image_carousel_picker.dart';
 
 /// Shared layout helpers for slide editors.
@@ -25,11 +26,12 @@ class EditorField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label,
+          l10n.d(label),
           style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
@@ -41,7 +43,9 @@ class EditorField extends StatelessWidget {
           controller: controller,
           maxLines: maxLines,
           minLines: 1,
-          decoration: InputDecoration(hintText: hint),
+          decoration: InputDecoration(
+            hintText: hint.isEmpty ? '' : l10n.d(hint),
+          ),
         ),
       ],
     );
@@ -87,18 +91,20 @@ class ImageZoomControl extends StatelessWidget {
   // Effectieve sliderwaarde: 0 behandelen als 100
   int get _effective => value == 0 ? 100 : value.clamp(minValue, maxValue);
 
-  String get _label {
+  String _label(BuildContext context) {
+    final l10n = context.l10n;
     final v = _effective;
     if (maxValue <= 100) return '$v%'; // paneelbreedte-modus
-    if (v == 100) return 'Volledig zichtbaar (100%)';
+    if (v == 100) return l10n.d('Volledig zichtbaar (100%)');
     if (v > 100) {
-      return 'Ingezoomd $v% — ${((1 / (v / 100)) * 100).round()}% van de foto zichtbaar';
+      return '${l10n.d('Ingezoomd')} $v% — ${((1 / (v / 100)) * 100).round()}% ${l10n.d('van de foto zichtbaar')}';
     }
-    return 'Uitgezoomd $v%';
+    return '${l10n.d('Uitgezoomd')} $v%';
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final zoomed = _effective != 100;
 
     return Column(
@@ -106,9 +112,13 @@ class ImageZoomControl extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Tooltip(
-              message: 'Uitzoomen (meer van de foto zichtbaar)',
-              child: Icon(Icons.zoom_out, size: 16, color: Color(0xFF94A3B8)),
+            Tooltip(
+              message: l10n.d('Uitzoomen (meer van de foto zichtbaar)'),
+              child: const Icon(
+                Icons.zoom_out,
+                size: 16,
+                color: Color(0xFF94A3B8),
+              ),
             ),
             Expanded(
               child: Slider(
@@ -116,7 +126,7 @@ class ImageZoomControl extends StatelessWidget {
                 min: minValue.toDouble(),
                 max: maxValue.toDouble(),
                 divisions: (maxValue - minValue) ~/ step,
-                label: _label,
+                label: _label(context),
                 onChanged: (v) {
                   final snapped = ((v.round() / step).round() * step).clamp(
                     minValue,
@@ -126,9 +136,13 @@ class ImageZoomControl extends StatelessWidget {
                 },
               ),
             ),
-            const Tooltip(
-              message: 'Inzoomen (minder van de foto zichtbaar)',
-              child: Icon(Icons.zoom_in, size: 16, color: Color(0xFF94A3B8)),
+            Tooltip(
+              message: l10n.d('Inzoomen (minder van de foto zichtbaar)'),
+              child: const Icon(
+                Icons.zoom_in,
+                size: 16,
+                color: Color(0xFF94A3B8),
+              ),
             ),
             const SizedBox(width: 8),
             SizedBox(
@@ -147,7 +161,7 @@ class ImageZoomControl extends StatelessWidget {
             ),
             const SizedBox(width: 4),
             Tooltip(
-              message: 'Terugzetten (volledige afbeelding zichtbaar)',
+              message: l10n.d('Terugzetten (volledige afbeelding zichtbaar)'),
               child: IconButton(
                 icon: const Icon(Icons.refresh, size: 16),
                 onPressed: zoomed ? () => onChanged(100) : null,
@@ -161,7 +175,7 @@ class ImageZoomControl extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 8, bottom: 4),
           child: Text(
-            _label,
+            _label(context),
             style: const TextStyle(fontSize: 10, color: Color(0xFF94A3B8)),
           ),
         ),
@@ -250,6 +264,7 @@ class ImagePickerBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final captions = ref.read(captionServiceProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -263,7 +278,7 @@ class ImagePickerBar extends ConsumerWidget {
             color: Colors.white,
           ),
           child: Text(
-            imagePath.isEmpty ? label : imagePath,
+            imagePath.isEmpty ? l10n.d(label) : imagePath,
             style: TextStyle(
               fontSize: 12,
               color: imagePath.isEmpty
@@ -283,17 +298,17 @@ class ImagePickerBar extends ConsumerWidget {
             ElevatedButton.icon(
               onPressed: () => _openCarousel(context, ref, captions),
               icon: const Icon(Icons.photo_library_outlined, size: 16),
-              label: const Text('Uit bibliotheek…'),
+              label: Text(l10n.d('Uit bibliotheek…')),
             ),
             if (onBrowse != null)
               OutlinedButton.icon(
                 onPressed: onBrowse,
                 icon: const Icon(Icons.folder_open_outlined, size: 16),
-                label: const Text('Van computer…'),
+                label: Text(l10n.d('Van computer…')),
               ),
             if (onPaste != null)
               Tooltip(
-                message: 'Afbeelding plakken uit klembord',
+                message: l10n.d('Afbeelding plakken uit klembord'),
                 child: IconButton(
                   onPressed: onPaste,
                   icon: const Icon(Icons.content_paste, size: 18),
@@ -302,7 +317,7 @@ class ImagePickerBar extends ConsumerWidget {
               ),
             if (imagePath.isNotEmpty)
               Tooltip(
-                message: 'Kopieer afbeelding naar klembord',
+                message: l10n.d('Kopieer afbeelding naar klembord'),
                 child: IconButton(
                   onPressed: () async {
                     final ok = await ImageService().copyImageToClipboard(
@@ -313,8 +328,8 @@ class ImagePickerBar extends ConsumerWidget {
                         SnackBar(
                           content: Text(
                             ok
-                                ? 'Afbeelding gekopieerd naar klembord.'
-                                : 'Kopiëren naar klembord mislukt.',
+                                ? l10n.d('Afbeelding gekopieerd naar klembord.')
+                                : l10n.d('Kopiëren naar klembord mislukt.'),
                           ),
                         ),
                       );
@@ -326,7 +341,7 @@ class ImagePickerBar extends ConsumerWidget {
               ),
             if (onClear != null && imagePath.isNotEmpty)
               Tooltip(
-                message: 'Verwijder afbeelding',
+                message: l10n.d('Verwijder afbeelding'),
                 child: IconButton(
                   onPressed: onClear,
                   icon: const Icon(Icons.clear, size: 18),
@@ -423,10 +438,11 @@ class _CaptionFieldState extends State<_CaptionField> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return TextField(
       controller: _ctrl,
       decoration: InputDecoration(
-        hintText: 'Caption / bronvermelding (bijv. © Naam Fotograaf)',
+        hintText: l10n.d('Caption / bronvermelding (bijv. © Naam Fotograaf)'),
         hintStyle: const TextStyle(fontSize: 12, color: Color(0xFFB0BEC5)),
         prefixIcon: const Icon(
           Icons.copyright_outlined,
@@ -457,10 +473,11 @@ class SectionLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
       child: Text(
-        text,
+        l10n.d(text),
         style: const TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w600,

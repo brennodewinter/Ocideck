@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../l10n/app_localizations.dart';
 
 class NewDeckDialog extends StatefulWidget {
   const NewDeckDialog({super.key});
@@ -28,13 +29,14 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return CallbackShortcuts(
       bindings: {
         const SingleActivator(LogicalKeyboardKey.escape): () =>
             Navigator.pop(context),
       },
       child: AlertDialog(
-        title: const Text('Nieuwe presentatie'),
+        title: Text(l10n.d('Nieuwe presentatie')),
         content: Form(
           key: _formKey,
           child: SizedBox(
@@ -42,12 +44,13 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
             child: TextFormField(
               controller: _ctrl,
               autofocus: true,
-              decoration: const InputDecoration(
-                labelText: 'Titel',
-                hintText: 'Bijv. Kwartaalupdate Q4',
+              decoration: InputDecoration(
+                labelText: l10n.d('Titel'),
+                hintText: l10n.d('Bijv. Kwartaalupdate Q4'),
               ),
-              validator: (v) =>
-                  (v == null || v.trim().isEmpty) ? 'Vul een titel in' : null,
+              validator: (v) => (v == null || v.trim().isEmpty)
+                  ? l10n.d('Vul een titel in')
+                  : null,
               onFieldSubmitted: (_) => _submit(),
             ),
           ),
@@ -55,9 +58,9 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Annuleren'),
+            child: Text(l10n.t('cancel')),
           ),
-          ElevatedButton(onPressed: _submit, child: const Text('Aanmaken')),
+          ElevatedButton(onPressed: _submit, child: Text(l10n.d('Aanmaken'))),
         ],
       ),
     );

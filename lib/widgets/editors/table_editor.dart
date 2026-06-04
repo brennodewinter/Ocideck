@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/slide.dart';
+import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
 
 /// Editor for a table slide. Stores cells as a rectangular grid of
@@ -120,17 +121,18 @@ class _TableEditorState extends State<TableEditor> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         EditorField(label: 'Titel', controller: _title, hint: 'Slide titel'),
         const SizedBox(height: 16),
         const SectionLabel('Tabel'),
-        const Padding(
-          padding: EdgeInsets.only(bottom: 6),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 6),
           child: Text(
-            'Tip: druk op Enter binnen een cel voor een nieuwe regel.',
-            style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            l10n.d('Tip: druk op Enter binnen een cel voor een nieuwe regel.'),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
           ),
         ),
         _buildColumnControls(),
@@ -141,13 +143,13 @@ class _TableEditorState extends State<TableEditor> {
             TextButton.icon(
               onPressed: _addRow,
               icon: const Icon(Icons.add, size: 16),
-              label: const Text('Rij toevoegen'),
+              label: Text(l10n.d('Rij toevoegen')),
             ),
             const SizedBox(width: 8),
             TextButton.icon(
               onPressed: _addColumn,
               icon: const Icon(Icons.add, size: 16),
-              label: const Text('Kolom toevoegen'),
+              label: Text(l10n.d('Kolom toevoegen')),
             ),
           ],
         ),
@@ -156,6 +158,7 @@ class _TableEditorState extends State<TableEditor> {
   }
 
   Widget _buildColumnControls() {
+    final l10n = context.l10n;
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: Row(
@@ -170,7 +173,8 @@ class _TableEditorState extends State<TableEditor> {
                     color: Color(0xFF94A3B8),
                   ),
                   onPressed: _colCount > 1 ? () => _removeColumn(c) : null,
-                  tooltip: 'Kolom ${c + 1} verwijderen',
+                  tooltip:
+                      '${l10n.d('Kolom')} ${c + 1} ${l10n.d('verwijderen')}',
                   padding: EdgeInsets.zero,
                   visualDensity: VisualDensity.compact,
                   constraints: const BoxConstraints(
@@ -187,6 +191,7 @@ class _TableEditorState extends State<TableEditor> {
   }
 
   Widget _buildRow(int r) {
+    final l10n = context.l10n;
     final isHeader = r == 0;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3),
@@ -214,7 +219,7 @@ class _TableEditorState extends State<TableEditor> {
                     isDense: true,
                     filled: isHeader,
                     fillColor: isHeader ? const Color(0xFFF1F5F9) : null,
-                    hintText: isHeader ? 'Kolom ${c + 1}' : null,
+                    hintText: isHeader ? '${l10n.d('Kolom')} ${c + 1}' : null,
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 8,
                       vertical: 8,
@@ -234,7 +239,9 @@ class _TableEditorState extends State<TableEditor> {
                 color: Color(0xFF94A3B8),
               ),
               onPressed: _cells.length > 1 ? () => _removeRow(r) : null,
-              tooltip: isHeader ? 'Koprij verwijderen' : 'Rij verwijderen',
+              tooltip: isHeader
+                  ? l10n.d('Koprij verwijderen')
+                  : l10n.d('Rij verwijderen'),
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(minWidth: 28),
             ),

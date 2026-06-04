@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/deck.dart';
+import '../../l10n/app_localizations.dart';
 
 /// The editable general metadata of a presentation.
 class PresentationInfo {
@@ -86,6 +87,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return CallbackShortcuts(
       bindings: {
         const SingleActivator(LogicalKeyboardKey.escape): () =>
@@ -93,10 +95,10 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
       },
       child: AlertDialog(
         title: Row(
-          children: const [
-            Icon(Icons.info_outline, size: 20),
-            SizedBox(width: 8),
-            Text('Presentatie-eigenschappen'),
+          children: [
+            const Icon(Icons.info_outline, size: 20),
+            const SizedBox(width: 8),
+            Text(l10n.d('Presentatie-eigenschappen')),
           ],
         ),
         content: SizedBox(
@@ -160,10 +162,14 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
                   'Komma-gescheiden, bijv. kwartaal, cijfers, 2026',
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  'Deze gegevens worden in de markdown opgeslagen en zijn '
-                  'doorzoekbaar bij het openen.',
-                  style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+                Text(
+                  l10n.d(
+                    'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.',
+                  ),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Color(0xFF94A3B8),
+                  ),
                 ),
               ],
             ),
@@ -172,9 +178,9 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Annuleren'),
+            child: Text(l10n.t('cancel')),
           ),
-          ElevatedButton(onPressed: _save, child: const Text('Opslaan')),
+          ElevatedButton(onPressed: _save, child: Text(l10n.t('save'))),
         ],
       ),
     );
@@ -186,12 +192,13 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
     String hint, {
     int maxLines = 1,
   }) {
+    final l10n = context.l10n;
     return TextField(
       controller: controller,
       maxLines: maxLines,
       decoration: InputDecoration(
-        labelText: label,
-        hintText: hint,
+        labelText: l10n.d(label),
+        hintText: l10n.d(hint),
         isDense: true,
         border: const OutlineInputBorder(),
       ),

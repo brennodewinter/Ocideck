@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 
 /// Telt hoe vaak [query] voorkomt in de hele presentatie.
 typedef MatchCounter = int Function(String query, bool caseSensitive);
@@ -78,9 +79,10 @@ class _FindReplaceDialogState extends State<FindReplaceDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final hasQuery = _find.text.isNotEmpty;
     return AlertDialog(
-      title: const Text('Zoeken en vervangen'),
+      title: Text(l10n.d('Zoeken en vervangen')),
       content: SizedBox(
         width: 420,
         child: Column(
@@ -91,9 +93,9 @@ class _FindReplaceDialogState extends State<FindReplaceDialog> {
               controller: _find,
               focusNode: _findFocus,
               onChanged: (_) => _recount(),
-              decoration: const InputDecoration(
-                labelText: 'Zoeken naar',
-                prefixIcon: Icon(Icons.search, size: 18),
+              decoration: InputDecoration(
+                labelText: l10n.d('Zoeken naar'),
+                prefixIcon: const Icon(Icons.search, size: 18),
                 isDense: true,
               ),
             ),
@@ -101,9 +103,9 @@ class _FindReplaceDialogState extends State<FindReplaceDialog> {
             TextField(
               controller: _replace,
               onChanged: (_) => setState(() => _replaced = null),
-              decoration: const InputDecoration(
-                labelText: 'Vervangen door',
-                prefixIcon: Icon(Icons.edit_outlined, size: 18),
+              decoration: InputDecoration(
+                labelText: l10n.d('Vervangen door'),
+                prefixIcon: const Icon(Icons.edit_outlined, size: 18),
                 isDense: true,
               ),
             ),
@@ -119,9 +121,9 @@ class _FindReplaceDialogState extends State<FindReplaceDialog> {
                     _recount();
                   },
                 ),
-                const Text(
-                  'Hoofdlettergevoelig',
-                  style: TextStyle(fontSize: 13),
+                Text(
+                  l10n.d('Hoofdlettergevoelig'),
+                  style: const TextStyle(fontSize: 13),
                 ),
                 const Spacer(),
                 _statusText(hasQuery),
@@ -133,25 +135,26 @@ class _FindReplaceDialogState extends State<FindReplaceDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Sluiten'),
+          child: Text(l10n.t('close')),
         ),
         FilledButton.icon(
           onPressed: (hasQuery && _matches > 0) ? _runReplace : null,
           icon: const Icon(Icons.find_replace, size: 16),
-          label: const Text('Vervang alles'),
+          label: Text(l10n.d('Vervang alles')),
         ),
       ],
     );
   }
 
   Widget _statusText(bool hasQuery) {
+    final l10n = context.l10n;
     if (_replaced != null) {
       return Text(
         _replaced == 0
-            ? 'Niets vervangen'
+            ? l10n.d('Niets vervangen')
             : _replaced == 1
-            ? '1 vervangen'
-            : '$_replaced vervangen',
+            ? '1 ${l10n.d('vervangen')}'
+            : '$_replaced ${l10n.d('vervangen')}',
         style: const TextStyle(
           fontSize: 12,
           color: Color(0xFF15803D),
@@ -162,10 +165,10 @@ class _FindReplaceDialogState extends State<FindReplaceDialog> {
     if (!hasQuery) return const SizedBox.shrink();
     return Text(
       _matches == 0
-          ? 'Geen resultaten'
+          ? l10n.d('Geen resultaten')
           : _matches == 1
-          ? '1 resultaat'
-          : '$_matches resultaten',
+          ? '1 ${l10n.d('resultaat')}'
+          : '$_matches ${l10n.d('resultaten')}',
       style: TextStyle(
         fontSize: 12,
         color: _matches == 0

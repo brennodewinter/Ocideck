@@ -29,6 +29,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
               .toList();
     final profiles = _uniqueProfiles(loadedProfiles);
     state = AppSettings(
+      languageCode: prefs.getString('languageCode') ?? 'nl',
       homeDirectory: prefs.getString('homeDirectory'),
       exportDirectory: prefs.getString('exportDirectory'),
       themeProfiles: profiles.isEmpty ? const [ThemeProfile()] : profiles,
@@ -46,6 +47,12 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     state = state.copyWith(recentFiles: updated);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setStringList('recentFiles', updated);
+  }
+
+  Future<void> setLanguageCode(String code) async {
+    state = state.copyWith(languageCode: code);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('languageCode', code);
   }
 
   Future<void> setHomeDirectory(String? path) async {

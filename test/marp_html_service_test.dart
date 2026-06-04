@@ -1,10 +1,13 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 
 /// Reads the vendored libraries straight from the repo (tests run at the root).
 Future<String> _diskLoader(String asset) => File(asset).readAsString();
+Future<Uint8List> _diskBytes(String asset) => File(asset).readAsBytes();
 
 void main() {
   group('marpSlides', () {
@@ -72,5 +75,39 @@ void main() {}
     // The literal breakout must be escaped so it cannot terminate the payload.
     expect(html, isNot(contains('foo </script> bar')));
     expect(html, contains(r'<\/script'));
+  });
+
+  test('a theme colours the slides with the profile palette', () async {
+    final service = MarpHtmlService(
+      loadAsset: _diskLoader,
+      loadBytes: _diskBytes,
+    );
+    const theme = ThemeProfile(
+      slideBackgroundColor: '#102030',
+      textColor: '#EEF1F4',
+      accentColor: '#33CC99',
+      fontFamily: 'Arial',
+    );
+    final html = await service.build('# Titel', theme: theme);
+
+    expect(html, contains('background:#102030'));
+    expect(html, contains('color:#EEF1F4'));
+    expect(html, contains('#33CC99'));
+    expect(html, contains("'Arial'"));
+    // A system font is not embedded as base64.
+    expect(html, isNot(contains('data:font/ttf;base64,')));
+  });
+
+  test('EB Garamond theme embeds the font for offline rendering', () async {
+    final service = MarpHtmlService(
+      loadAsset: _diskLoader,
+      loadBytes: _diskBytes,
+    );
+    const theme = ThemeProfile(fontFamily: 'EB Garamond');
+    final html = await service.build('# Titel', theme: theme);
+
+    expect(html, contains('@font-face'));
+    expect(html, contains('data:font/ttf;base64,'));
+    expect(html, contains("'EB Garamond'"));
   });
 }

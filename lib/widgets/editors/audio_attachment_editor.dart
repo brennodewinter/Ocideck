@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/slide.dart';
 import '../../services/image_service.dart';
+import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
 
 class AudioAttachmentEditor extends StatelessWidget {
@@ -22,6 +23,7 @@ class AudioAttachmentEditor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -41,7 +43,7 @@ class AudioAttachmentEditor extends StatelessWidget {
                 ),
                 child: Text(
                   slide.audioPath.isEmpty
-                      ? 'Geen audiobestand gekozen'
+                      ? l10n.d('Geen audiobestand gekozen')
                       : slide.audioPath,
                   style: TextStyle(
                     fontSize: 12,
@@ -57,7 +59,7 @@ class AudioAttachmentEditor extends StatelessWidget {
             ElevatedButton.icon(
               onPressed: _pickAudio,
               icon: const Icon(Icons.audio_file_outlined, size: 16),
-              label: const Text('Kiezen'),
+              label: Text(l10n.d('Kiezen')),
             ),
             if (slide.audioPath.isNotEmpty)
               IconButton(
@@ -65,7 +67,7 @@ class AudioAttachmentEditor extends StatelessWidget {
                   slide.copyWith(audioPath: '', audioAutoplay: false),
                 ),
                 icon: const Icon(Icons.clear, size: 18),
-                tooltip: 'Audio verwijderen',
+                tooltip: l10n.d('Audio verwijderen'),
               ),
           ],
         ),
@@ -77,7 +79,7 @@ class AudioAttachmentEditor extends StatelessWidget {
                 ? null
                 : (value) =>
                       onUpdate(slide.copyWith(audioAutoplay: value ?? false)),
-            title: const Text('Audio automatisch afspelen'),
+            title: Text(l10n.d('Audio automatisch afspelen')),
             dense: true,
             contentPadding: EdgeInsets.zero,
             controlAffinity: ListTileControlAffinity.leading,

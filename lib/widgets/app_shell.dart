@@ -15,6 +15,7 @@ import '../state/editor_provider.dart';
 import '../state/settings_provider.dart';
 import '../state/tabs_provider.dart';
 import '../theme/app_theme.dart';
+import '../l10n/app_localizations.dart';
 import 'dialogs/export_dialog.dart';
 import 'dialogs/find_replace_dialog.dart';
 import 'dialogs/image_carousel_picker.dart';
@@ -50,20 +51,23 @@ Future<void> _openWithSearch(
 
 /// Vraag een URL op om een presentatie (pakket of markdown) op te halen.
 Future<String?> _showUrlDialog(BuildContext context) {
+  final l10n = context.l10n;
   final controller = TextEditingController();
   return showDialog<String>(
     context: context,
     builder: (ctx) => AlertDialog(
-      title: const Text('Importeren via URL'),
+      title: Text(l10n.d('Importeren via URL')),
       content: SizedBox(
         width: 460,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.',
-              style: TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+            Text(
+              l10n.d(
+                'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.',
+              ),
+              style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
             ),
             const SizedBox(height: 12),
             TextField(
@@ -84,12 +88,12 @@ Future<String?> _showUrlDialog(BuildContext context) {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(ctx),
-          child: const Text('Annuleren'),
+          child: Text(l10n.t('cancel')),
         ),
         ElevatedButton.icon(
           onPressed: () => Navigator.pop(ctx, controller.text),
           icon: const Icon(Icons.download, size: 16),
-          label: const Text('Ophalen'),
+          label: Text(l10n.d('Ophalen')),
         ),
       ],
     ),
@@ -160,46 +164,48 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     final restore = await showDialog<bool>(
       context: context,
       barrierDismissible: false,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Niet-opgeslagen werk herstellen?'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              snapshots.length == 1
-                  ? 'Er is een presentatie met niet-opgeslagen wijzigingen '
-                        'gevonden van een vorige sessie:'
-                  : 'Er zijn ${snapshots.length} presentaties met '
-                        'niet-opgeslagen wijzigingen gevonden van een vorige '
-                        'sessie:',
-              style: const TextStyle(fontSize: 13),
-            ),
-            const SizedBox(height: 10),
-            for (final s in snapshots)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 3),
-                child: Text(
-                  '•  ${s.label}  ·  ${_formatWhen(s.savedAt)}',
-                  style: const TextStyle(
-                    fontSize: 12.5,
-                    color: Color(0xFF475569),
+      builder: (ctx) {
+        final l10n = ctx.l10n;
+        return AlertDialog(
+          title: Text(l10n.d('Niet-opgeslagen werk herstellen?')),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                snapshots.length == 1
+                    ? l10n.d(
+                        'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:',
+                      )
+                    : '${l10n.d('Er zijn')} ${snapshots.length} ${l10n.d('presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:')}',
+                style: const TextStyle(fontSize: 13),
+              ),
+              const SizedBox(height: 10),
+              for (final s in snapshots)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 3),
+                  child: Text(
+                    '•  ${s.label}  ·  ${_formatWhen(s.savedAt)}',
+                    style: const TextStyle(
+                      fontSize: 12.5,
+                      color: Color(0xFF475569),
+                    ),
                   ),
                 ),
-              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: Text(l10n.d('Verwijderen')),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: Text(l10n.d('Herstellen')),
+            ),
           ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('Verwijderen'),
-          ),
-          ElevatedButton(
-            onPressed: () => Navigator.pop(ctx, true),
-            child: const Text('Herstellen'),
-          ),
-        ],
-      ),
+        );
+      },
     );
 
     if (restore == true) {
@@ -224,8 +230,9 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   void onWindowClose() async {
     if (ref.read(tabsProvider).anyDirty) {
       final shouldSave = await _confirmSaveBeforeClose(
-        'Er zijn presentaties met niet-opgeslagen wijzigingen. '
-        'Sla ze op voordat de app sluit.',
+        context.l10n.d(
+          'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.',
+        ),
       );
       if (!shouldSave) return;
       final saved = await _saveAllDirtyTabs();
@@ -246,20 +253,23 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     return await showDialog<bool>(
           context: context,
           barrierDismissible: false,
-          builder: (ctx) => AlertDialog(
-            title: const Text('Niet-opgeslagen wijzigingen'),
-            content: Text(message),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(ctx, false),
-                child: const Text('Annuleren'),
-              ),
-              ElevatedButton(
-                onPressed: () => Navigator.pop(ctx, true),
-                child: const Text('Opslaan en sluiten'),
-              ),
-            ],
-          ),
+          builder: (ctx) {
+            final l10n = ctx.l10n;
+            return AlertDialog(
+              title: Text(l10n.d('Niet-opgeslagen wijzigingen')),
+              content: Text(message),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(ctx, false),
+                  child: Text(l10n.t('cancel')),
+                ),
+                ElevatedButton(
+                  onPressed: () => Navigator.pop(ctx, true),
+                  child: Text(l10n.d('Opslaan en sluiten')),
+                ),
+              ],
+            );
+          },
         ) ??
         false;
   }
@@ -278,8 +288,9 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     final tab = ref.read(tabsProvider).tabs[index];
     if (tab.isDirty) {
       final shouldSave = await _confirmSaveBeforeClose(
-        'Deze presentatie heeft niet-opgeslagen wijzigingen. '
-        'Sla de presentatie op voordat het tabblad sluit.',
+        context.l10n.d(
+          'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.',
+        ),
       );
       if (!shouldSave) return;
       final saved = await tab.deckNotifier.save(
@@ -343,10 +354,11 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     if (tab == null || !tab.isOpen) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(
-              'Open eerst een presentatie om afbeeldingen toe te '
-              'voegen.',
+              context.l10n.d(
+                'Open eerst een presentatie om afbeeldingen toe te voegen.',
+              ),
             ),
           ),
         );
@@ -502,6 +514,7 @@ class _AppTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       height: 36,
       color: _bgColor,
@@ -525,7 +538,7 @@ class _AppTabBar extends StatelessWidget {
             ),
           ),
           Tooltip(
-            message: 'Nieuw tabblad',
+            message: l10n.t('newTab'),
             child: InkWell(
               onTap: onAdd,
               child: const SizedBox(
@@ -635,6 +648,7 @@ class _WelcomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final homeDir = ref.watch(settingsProvider.select((s) => s.homeDirectory));
     final recentFiles = ref.watch(
       settingsProvider.select((s) => s.recentFiles),
@@ -667,7 +681,7 @@ class _WelcomeScreen extends ConsumerWidget {
                     child: ElevatedButton.icon(
                       onPressed: () => _newDeck(context, ref),
                       icon: const Icon(Icons.add, size: 18),
-                      label: const Text('Nieuwe presentatie'),
+                      label: Text(l10n.t('newPresentation')),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -676,7 +690,7 @@ class _WelcomeScreen extends ConsumerWidget {
                     child: OutlinedButton.icon(
                       onPressed: () => _openWithSearch(context, ref, homeDir),
                       icon: const Icon(Icons.folder_open_outlined, size: 18),
-                      label: const Text('Openen...'),
+                      label: Text(l10n.t('open')),
                     ),
                   ),
                 ],
@@ -694,11 +708,11 @@ class _WelcomeScreen extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(16, 20, 16, 10),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 20, 16, 10),
                     child: Text(
-                      'Recente presentaties',
-                      style: TextStyle(
+                      l10n.t('recentPresentations'),
+                      style: const TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
                         color: Color(0xFF94A3B8),
@@ -802,6 +816,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     final deck = deckState.deck!;
     final editor = ref.watch(editorProvider);
     final settings = ref.watch(settingsProvider);
+    final l10n = context.l10n;
     final deckNotifier = ref.read(deckProvider.notifier);
     final editorNotifier = ref.read(editorProvider.notifier);
 
@@ -868,9 +883,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       if (updated == null) {
         if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(
-              'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.',
+              l10n.d(
+                'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.',
+              ),
             ),
           ),
         );
@@ -889,8 +906,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       ];
       if (visible.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Alle slides zijn overgeslagen — niets om te tonen.'),
+          SnackBar(
+            content: Text(
+              l10n.d('Alle slides zijn overgeslagen — niets om te tonen.'),
+            ),
           ),
         );
         return;
@@ -911,9 +930,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       final slides = deck.slides.where((s) => !s.skipped).toList();
       if (slides.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(
-              'Alle slides zijn overgeslagen — niets om te exporteren.',
+              l10n.d('Alle slides zijn overgeslagen — niets om te exporteren.'),
             ),
           ),
         );
@@ -931,6 +950,13 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         markdown: deckNotifier.generateMarkdown(),
       );
     }
+
+    final canExport = deckState.filePath != null && !deckState.isDirty;
+    final exportTooltip = deckState.filePath == null
+        ? l10n.t('exportNeedsSave')
+        : deckState.isDirty
+        ? l10n.t('exportNeedsClean')
+        : l10n.t('exportReady');
 
     void toggleMarkdownMode() {
       if (isMarkdownMode) {
@@ -981,13 +1007,15 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         await fileService.exportPackage(deck, dest);
         if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Pakket geëxporteerd naar:\n$dest')),
+          SnackBar(
+            content: Text('${l10n.d('Pakket geëxporteerd naar:')}\n$dest'),
+          ),
         );
       } catch (e) {
         if (!context.mounted) return;
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Export mislukt: $e')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('${l10n.d('Export mislukt:')} $e')),
+        );
       }
     }
 
@@ -1002,7 +1030,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           .importPackageFile(path, homeDir: settings.homeDirectory);
       if (!ok && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Kon dit pakket niet importeren.')),
+          SnackBar(content: Text(l10n.d('Kon dit pakket niet importeren.'))),
         );
       }
     }
@@ -1015,8 +1043,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           .importFromUrl(url, homeDir: settings.homeDirectory);
       if (!ok && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Kon van deze URL geen presentatie ophalen.'),
+          SnackBar(
+            content: Text(l10n.d('Kon van deze URL geen presentatie ophalen.')),
           ),
         );
       }
@@ -1106,14 +1134,14 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             actions: [
               // ── Bewerken ────────────────────────────────────────────────
               Tooltip(
-                message: 'Ongedaan maken (Ctrl/Cmd+Z)',
+                message: l10n.t('undo'),
                 child: IconButton(
                   icon: const Icon(Icons.undo, size: 18),
                   onPressed: deckState.canUndo ? deckNotifier.undo : null,
                 ),
               ),
               Tooltip(
-                message: 'Opnieuw uitvoeren (Ctrl/Cmd+Shift+Z)',
+                message: l10n.t('redo'),
                 child: IconButton(
                   icon: const Icon(Icons.redo, size: 18),
                   onPressed: deckState.canRedo ? deckNotifier.redo : null,
@@ -1122,7 +1150,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               const _ActionsDivider(),
               // ── Inhoud ──────────────────────────────────────────────────
               Tooltip(
-                message: 'Afbeeldingenbibliotheek',
+                message: l10n.t('imageLibrary'),
                 child: IconButton(
                   icon: const Icon(Icons.photo_library_outlined, size: 18),
                   onPressed: openImageCarousel,
@@ -1131,15 +1159,16 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               const _ActionsDivider(),
               // ── Presenteren & uitvoer ───────────────────────────────────
               Tooltip(
-                message:
-                    'Presenteren (volledig scherm) · P voor presenter view',
+                message: l10n.t('presentFullscreen'),
                 child: IconButton(
                   icon: const Icon(Icons.play_circle_outline, size: 20),
                   onPressed: presentDeck,
                 ),
               ),
               Tooltip(
-                message: isMarkdownMode ? 'Visuele modus' : 'Markdown modus',
+                message: isMarkdownMode
+                    ? l10n.t('visualMode')
+                    : l10n.t('markdownMode'),
                 child: IconButton(
                   icon: Icon(
                     isMarkdownMode ? Icons.view_quilt : Icons.code,
@@ -1149,25 +1178,23 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                 ),
               ),
               Tooltip(
-                message: 'Opslaan (Ctrl/Cmd+S)',
+                message: l10n.t('saveShortcut'),
                 child: IconButton(
                   icon: const Icon(Icons.save_outlined, size: 18),
                   onPressed: saveDeck,
                 ),
               ),
               Tooltip(
-                message: 'Exporteren (PDF/PPTX)',
+                message: exportTooltip,
                 child: IconButton(
                   icon: const Icon(Icons.upload_file_outlined, size: 18),
-                  onPressed: (deckState.filePath != null && !deckState.isDirty)
-                      ? exportDeck
-                      : null,
+                  onPressed: canExport ? exportDeck : null,
                 ),
               ),
               const _ActionsDivider(),
               // ── Overig (minder vaak gebruikt) ───────────────────────────
               PopupMenuButton<String>(
-                tooltip: 'Meer',
+                tooltip: l10n.t('more'),
                 icon: const Icon(Icons.more_vert, size: 20),
                 position: PopupMenuPosition.under,
                 onSelected: (v) {
@@ -1205,27 +1232,31 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                   menuItem(
                     'new_tab',
                     Icons.add_circle_outline,
-                    'Nieuwe presentatie (tab)',
+                    l10n.t('newPresentationTab'),
                   ),
-                  menuItem('open', Icons.folder_open_outlined, 'Openen…'),
+                  menuItem(
+                    'open',
+                    Icons.folder_open_outlined,
+                    l10n.t('openEllipsis'),
+                  ),
                   const PopupMenuDivider(),
                   menuItem(
                     'export_package',
                     Icons.inventory_2_outlined,
-                    'Pakket exporteren…',
+                    l10n.t('exportPackage'),
                   ),
                   menuItem(
                     'import_package',
                     Icons.unarchive_outlined,
-                    'Pakket importeren…',
+                    l10n.t('importPackage'),
                   ),
-                  menuItem('import_url', Icons.link, 'Importeren via URL…'),
+                  menuItem('import_url', Icons.link, l10n.t('importUrl')),
                   const PopupMenuDivider(),
-                  menuItem('find', Icons.find_replace, 'Zoeken en vervangen'),
+                  menuItem('find', Icons.find_replace, l10n.t('findReplace')),
                   menuItem(
                     'full_preview',
                     Icons.preview_outlined,
-                    'Volledig deck bekijken',
+                    l10n.t('fullDeckPreview'),
                   ),
                   const PopupMenuDivider(),
                   for (final profile in settings.themeProfiles)
@@ -1243,7 +1274,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                           const SizedBox(width: 10),
                           Flexible(
                             child: Text(
-                              'Stijl: ${profile.name}',
+                              '${l10n.t('styleProfile')}: ${profile.name}',
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -1254,13 +1285,25 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                   menuItem(
                     'properties',
                     Icons.info_outline,
-                    'Presentatie-eigenschappen',
+                    l10n.t('presentationProperties'),
                   ),
-                  menuItem('settings', Icons.settings_outlined, 'Instellingen'),
+                  menuItem(
+                    'settings',
+                    Icons.settings_outlined,
+                    l10n.t('settings'),
+                  ),
                 ],
               ),
               const SizedBox(width: 8),
             ],
+          ),
+          bottomNavigationBar: _DeckStatusBar(
+            deck: deck,
+            deckState: deckState,
+            exportDirectory: settings.exportDirectory,
+            onSave: saveDeck,
+            onExport: canExport ? exportDeck : null,
+            exportTooltip: exportTooltip,
           ),
           body: Builder(
             builder: (ctx) {
@@ -1323,6 +1366,212 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
 
 // ── AppBar helpers ────────────────────────────────────────────────────────────
 
+class _DeckStatusBar extends StatelessWidget {
+  final Deck deck;
+  final DeckState deckState;
+  final String? exportDirectory;
+  final Future<void> Function() onSave;
+  final VoidCallback? onExport;
+  final String exportTooltip;
+
+  const _DeckStatusBar({
+    required this.deck,
+    required this.deckState,
+    required this.exportDirectory,
+    required this.onSave,
+    required this.onExport,
+    required this.exportTooltip,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final skipped = deck.slides.where((s) => s.skipped).length;
+    final fileLabel = deckState.filePath == null
+        ? l10n.t('notSavedYet')
+        : p.basename(deckState.filePath!);
+    final saveLabel = deckState.isDirty ? l10n.t('unsaved') : l10n.t('saved');
+    final exportLabel = exportDirectory == null
+        ? l10n.t('exportNextToDeck')
+        : '${l10n.t('exportFolder')}: ${p.basename(exportDirectory!)}';
+
+    return Material(
+      color: const Color(0xFFF8FAFC),
+      child: Container(
+        height: 30,
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        decoration: const BoxDecoration(
+          border: Border(top: BorderSide(color: Color(0xFFE2E8F0))),
+        ),
+        child: Row(
+          children: [
+            _StatusAction(
+              icon: deckState.isDirty
+                  ? Icons.radio_button_checked
+                  : Icons.check_circle_outline,
+              label: saveLabel,
+              tooltip: deckState.isDirty
+                  ? l10n.t('unsavedChanges')
+                  : l10n.t('noUnsavedChanges'),
+              color: deckState.isDirty
+                  ? const Color(0xFFD97706)
+                  : const Color(0xFF15803D),
+              onTap: () => onSave(),
+            ),
+            const _StatusDivider(),
+            _StatusItem(
+              icon: Icons.description_outlined,
+              label: fileLabel,
+              tooltip: deckState.filePath ?? l10n.t('noFileYet'),
+            ),
+            const _StatusDivider(),
+            _StatusItem(
+              icon: Icons.slideshow_outlined,
+              label: skipped == 0
+                  ? '${deck.slides.length} ${l10n.t('slides')}'
+                  : '${deck.slides.length} ${l10n.t('slides')} · $skipped ${l10n.t('skipped')}',
+              tooltip: skipped == 0
+                  ? l10n.t('allSlidesIncluded')
+                  : '$skipped ${l10n.t('skippedSlidesExcluded')}',
+              color: skipped == 0 ? null : const Color(0xFF8A6D3B),
+            ),
+            const _StatusDivider(),
+            _StatusItem(
+              icon: Icons.palette_outlined,
+              label: deck.themeProfile.name,
+              tooltip: '${l10n.t('styleProfile')}: ${deck.themeProfile.name}',
+            ),
+            if (deck.tlp != TlpLevel.none) ...[
+              const _StatusDivider(),
+              _StatusItem(
+                icon: Icons.shield_outlined,
+                label: deck.tlp.label,
+                tooltip: '${l10n.t('classification')}: ${deck.tlp.label}',
+                color: Color(deck.tlp.foreground),
+              ),
+            ],
+            const Spacer(),
+            _StatusItem(
+              icon: Icons.folder_outlined,
+              label: exportLabel,
+              tooltip: exportDirectory ?? l10n.t('exportsNextToDeck'),
+            ),
+            const SizedBox(width: 6),
+            _StatusAction(
+              icon: Icons.upload_file_outlined,
+              label: l10n.t('export'),
+              tooltip: exportTooltip,
+              onTap: onExport,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _StatusItem extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String tooltip;
+  final Color? color;
+
+  const _StatusItem({
+    required this.icon,
+    required this.label,
+    required this.tooltip,
+    this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final fg = color ?? const Color(0xFF64748B);
+    return Tooltip(
+      message: tooltip,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 13, color: fg),
+          const SizedBox(width: 4),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 210),
+            child: Text(
+              label,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 11,
+                color: fg,
+                fontWeight: color == null ? FontWeight.normal : FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _StatusAction extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String tooltip;
+  final Color? color;
+  final VoidCallback? onTap;
+
+  const _StatusAction({
+    required this.icon,
+    required this.label,
+    required this.tooltip,
+    this.color,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final enabled = onTap != null;
+    final fg = enabled ? (color ?? AppTheme.accent) : const Color(0xFF94A3B8);
+    return Tooltip(
+      message: tooltip,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(4),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, size: 13, color: fg),
+              const SizedBox(width: 4),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 11,
+                  color: fg,
+                  fontWeight: enabled ? FontWeight.w600 : FontWeight.normal,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _StatusDivider extends StatelessWidget {
+  const _StatusDivider();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 1,
+      height: 14,
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      color: const Color(0xFFE2E8F0),
+    );
+  }
+}
+
 /// Dunne verticale scheiding tussen groepen AppBar-knoppen.
 class _ActionsDivider extends StatelessWidget {
   const _ActionsDivider();
@@ -1353,6 +1602,7 @@ class _ResizableDividerState extends State<_ResizableDivider> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final active = _hovered || _dragging;
     return MouseRegion(
       cursor: SystemMouseCursors.resizeColumn,
@@ -1365,7 +1615,9 @@ class _ResizableDividerState extends State<_ResizableDivider> {
         onHorizontalDragCancel: () => setState(() => _dragging = false),
         onHorizontalDragUpdate: (details) => widget.onDrag(details.delta.dx),
         child: Tooltip(
-          message: 'Sleep om de slide-preview breder of smaller te maken',
+          message: l10n.d(
+            'Sleep om de slide-preview breder of smaller te maken',
+          ),
           child: SizedBox(
             width: 9,
             child: Center(
@@ -1393,6 +1645,7 @@ class _TlpChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final isSet = tlp != TlpLevel.none;
     final fg = Color(tlp.foreground);
 
@@ -1432,7 +1685,7 @@ class _TlpChip extends StatelessWidget {
     );
 
     return PopupMenuButton<TlpLevel>(
-      tooltip: 'TLP-classificatie (Traffic Light Protocol)',
+      tooltip: l10n.d('TLP-classificatie (Traffic Light Protocol)'),
       position: PopupMenuPosition.under,
       onSelected: onSelected,
       itemBuilder: (_) => [
@@ -1453,7 +1706,7 @@ class _TlpChip extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 10),
-                Text(level.menuLabel),
+                Text(level == TlpLevel.none ? l10n.d('Geen') : level.label),
                 if (level == tlp) ...[
                   const SizedBox(width: 12),
                   const Spacer(),

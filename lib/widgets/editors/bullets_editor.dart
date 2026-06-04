@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/slide.dart';
+import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
 
 class BulletsEditor extends StatefulWidget {
@@ -161,6 +162,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
@@ -182,7 +184,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
           child: TextButton.icon(
             onPressed: () => _addBulletAfter(_bullets.length - 1),
             icon: const Icon(Icons.add, size: 16),
-            label: const Text('Bullet toevoegen'),
+            label: Text(l10n.d('Bullet toevoegen')),
           ),
         ),
       ],
@@ -190,6 +192,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
   }
 
   Widget _buildBulletRow(int i) {
+    final l10n = context.l10n;
     final level = _levels[i];
     return Padding(
       key: ValueKey(_bullets[i]),
@@ -250,7 +253,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
                 controller: _bullets[i],
                 focusNode: _focusNodes[i],
                 decoration: InputDecoration(
-                  hintText: 'Bullet ${i + 1}',
+                  hintText: '${l10n.d('Bullet')} ${i + 1}',
                   isDense: true,
                 ),
               ),
@@ -265,7 +268,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
             onPressed: _bullets.length > 1
                 ? () => _removeBulletAndFocus(i)
                 : null,
-            tooltip: 'Verwijder',
+            tooltip: l10n.d('Verwijder'),
             padding: const EdgeInsets.symmetric(horizontal: 4),
             constraints: const BoxConstraints(minWidth: 28),
           ),

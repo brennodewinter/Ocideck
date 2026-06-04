@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/slide.dart';
 import '../../theme/app_theme.dart';
+import '../../l10n/app_localizations.dart';
 
 class AddSlideDialog extends StatelessWidget {
   const AddSlideDialog({super.key});
@@ -33,6 +34,7 @@ class AddSlideDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return CallbackShortcuts(
       bindings: {
         const SingleActivator(LogicalKeyboardKey.escape): () =>
@@ -41,7 +43,7 @@ class AddSlideDialog extends StatelessWidget {
       child: Focus(
         autofocus: true,
         child: AlertDialog(
-          title: const Text('Slide type kiezen'),
+          title: Text(l10n.d('Slide type kiezen')),
           content: SizedBox(
             width: 400,
             child: Wrap(
@@ -51,7 +53,7 @@ class AddSlideDialog extends StatelessWidget {
                 final (type, icon, label) = entry;
                 return _TypeCard(
                   icon: icon,
-                  label: label,
+                  label: l10n.d(label),
                   onTap: () => Navigator.pop(context, type),
                 );
               }).toList(),
@@ -60,7 +62,7 @@ class AddSlideDialog extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Annuleren'),
+              child: Text(l10n.t('cancel')),
             ),
           ],
         ),

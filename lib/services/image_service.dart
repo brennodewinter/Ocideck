@@ -4,13 +4,21 @@ import 'package:file_picker/file_picker.dart';
 import 'package:pasteboard/pasteboard.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
+import '../l10n/app_localizations.dart';
 import '../models/slide.dart';
 
 class ImageService {
+  final String Function() _languageCode;
+
+  ImageService({String Function()? languageCode})
+    : _languageCode = languageCode ?? (() => 'nl');
+
+  String _d(String text) => AppLocalizations.sourceFor(_languageCode(), text);
+
   Future<String?> pickImage() async {
     final result = await FilePicker.pickFiles(
       type: FileType.image,
-      dialogTitle: 'Kies een afbeelding',
+      dialogTitle: _d('Kies een afbeelding'),
     );
     return result?.files.single.path;
   }
@@ -18,7 +26,7 @@ class ImageService {
   Future<String?> pickVideo() async {
     final result = await FilePicker.pickFiles(
       type: FileType.video,
-      dialogTitle: 'Kies een video',
+      dialogTitle: _d('Kies een video'),
     );
     return result?.files.single.path;
   }
@@ -26,7 +34,7 @@ class ImageService {
   Future<String?> pickAudio() async {
     final result = await FilePicker.pickFiles(
       type: FileType.audio,
-      dialogTitle: 'Kies een audiobestand',
+      dialogTitle: _d('Kies een audiobestand'),
     );
     return result?.files.single.path;
   }
