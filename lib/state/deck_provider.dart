@@ -384,6 +384,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
   }
 
   void updateInfo({
+    String? title,
     String? author,
     String? organization,
     String? version,
@@ -396,6 +397,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
     if (deck == null) return;
     _mutate(
       deck.copyWith(
+        title: title,
         author: author,
         organization: organization,
         version: version,

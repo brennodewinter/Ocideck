@@ -477,27 +477,32 @@ class _DropOverlay extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
               border: Border.all(color: const Color(0xFF60A5FA), width: 2),
             ),
-            child: const Column(
+            child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
+                const Icon(
                   Icons.file_download_outlined,
                   size: 40,
                   color: Color(0xFF2563EB),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
-                  'Laat los om toe te voegen',
-                  style: TextStyle(
+                  context.l10n.d('Laat los om toe te voegen'),
+                  style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                     color: Color(0xFF1E293B),
                   ),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
-                  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen',
-                  style: TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+                  context.l10n.d(
+                    'Afbeeldingen → nieuwe slides · .md / .ocideck → openen',
+                  ),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF64748B),
+                  ),
                 ),
               ],
             ),
@@ -1007,6 +1012,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       final info = await PresentationInfoDialog.show(context, deck);
       if (info == null) return;
       deckNotifier.updateInfo(
+        title: info.title,
         author: info.author,
         organization: info.organization,
         version: info.version,
@@ -1145,6 +1151,14 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                 _TlpChip(
                   tlp: deck.tlp,
                   onSelected: (level) => deckNotifier.updateInfo(tlp: level),
+                ),
+                const SizedBox(width: 6),
+                Tooltip(
+                  message: l10n.t('presentationProperties'),
+                  child: IconButton(
+                    icon: const Icon(Icons.info_outline, size: 18),
+                    onPressed: openProperties,
+                  ),
                 ),
               ],
             ),
@@ -1292,11 +1306,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                       ),
                     ),
                   const PopupMenuDivider(),
-                  menuItem(
-                    'properties',
-                    Icons.info_outline,
-                    l10n.t('presentationProperties'),
-                  ),
                   menuItem(
                     'settings',
                     Icons.settings_outlined,

@@ -6,6 +6,7 @@ import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:highlight/highlight.dart' show highlight;
 import 'package:highlight/languages/all.dart' show allLanguages;
 import 'package:video_player/video_player.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
@@ -154,6 +155,10 @@ class SlidePreviewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hasBottomRightTlp =
+        tlp != TlpLevel.none &&
+        !((themeProfile.logoPath?.isNotEmpty == true && slide.showLogo) &&
+            themeProfile.logoPosition == 'bottom-right');
     // Make the widget self-sufficient for text rendering. On screen it sits
     // inside a Material (which supplies a clean DefaultTextStyle), but the
     // export rasterizer mounts it in a bare Overlay subtree. Without an
@@ -172,7 +177,7 @@ class SlidePreviewWidget extends StatelessWidget {
         ),
         child: _SlideLinkScope(
           onTapLink: onLinkTap,
-          hasBottomTlp: tlp != TlpLevel.none,
+          hasBottomTlp: hasBottomRightTlp,
           child: _buildSlide(),
         ),
       ),
@@ -199,7 +204,14 @@ class SlidePreviewWidget extends StatelessWidget {
                   tlp: tlp,
                 ),
                 if (tlp != TlpLevel.none)
-                  _TlpOverlay(tlp: tlp, w: w, profile: themeProfile),
+                  _TlpOverlay(
+                    tlp: tlp,
+                    w: w,
+                    profile: themeProfile,
+                    hasLogo:
+                        themeProfile.logoPath?.isNotEmpty == true &&
+                        slide.showLogo,
+                  ),
                 if (themeProfile.logoPath?.isNotEmpty == true && slide.showLogo)
                   _LogoOverlay(
                     logoPath: themeProfile.logoPath!,
@@ -502,6 +514,7 @@ class _TitlePreview extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         _zoomedImage(
+          context,
           slide.imagePath,
           projectPath,
           slide.imageSize,
@@ -1065,13 +1078,8 @@ class _BulletsImagePreview extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                _resolvedImage(slide.imagePath, projectPath),
-                _captionOverlay(
-                  context,
-                  slide.imageCaption,
-                  w,
-                  right: w * 0.018,
-                ),
+                _resolvedImage(context, slide.imagePath, projectPath),
+                _captionOverlay(context, slide.imageCaption, w),
               ],
             ),
           ),
@@ -1449,7 +1457,7 @@ class _TwoImagesPreview extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    _resolvedImage(slide.imagePath, projectPath),
+                    _resolvedImage(context, slide.imagePath, projectPath),
                     _captionOverlay(context, slide.imageCaption, w),
                   ],
                 ),
@@ -1459,7 +1467,7 @@ class _TwoImagesPreview extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    _resolvedImage(slide.imagePath2, projectPath),
+                    _resolvedImage(context, slide.imagePath2, projectPath),
                     _captionOverlay(context, slide.imageCaption2, w),
                   ],
                 ),
@@ -1524,6 +1532,7 @@ class _ImagePreview extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         _zoomedImage(
+          context,
           slide.imagePath,
           projectPath,
           slide.imageSize,
@@ -1792,6 +1801,7 @@ class _QuotePreview extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         _zoomedImage(
+          context,
           slide.imagePath,
           projectPath,
           slide.imageSize,
@@ -1831,7 +1841,12 @@ class _LogoOverlay extends StatelessWidget {
       child: SizedBox(
         width: size,
         height: size,
-        child: _resolvedImage(logoPath, projectPath, fit: BoxFit.contain),
+        child: _resolvedImage(
+          context,
+          logoPath,
+          projectPath,
+          fit: BoxFit.contain,
+        ),
       ),
     );
   }
@@ -2047,6 +2062,7 @@ void _ensureHighlightLanguages() {
 ///   imageSize > 100 → inzoomen: groter dan contain, bijgesneden door ClipRect
 ///   imageSize < 100 → nog meer uitzoomen: afbeelding kleiner dan contain
 Widget _zoomedImage(
+  BuildContext context,
   String imagePath,
   String? projectPath,
   int imageSize, {
@@ -2054,7 +2070,11 @@ Widget _zoomedImage(
   Alignment alignment = Alignment.center,
 }) {
   if (imageSize == 0) {
-    return _resolvedImage(imagePath, projectPath); // BoxFit.cover standaard
+    return _resolvedImage(
+      context,
+      imagePath,
+      projectPath,
+    ); // BoxFit.cover standaard
   }
   final scale = imageSize / 100.0;
   // Size the image box to `scale` × the available area and let BoxFit.contain
@@ -2076,6 +2096,7 @@ Widget _zoomedImage(
               height: boxH,
               // BoxFit.contain: toont de volledige afbeelding zonder bijsnijden
               child: _resolvedImage(
+                context,
                 imagePath,
                 projectPath,
                 fit: BoxFit.contain,
@@ -2089,11 +2110,12 @@ Widget _zoomedImage(
 }
 
 Widget _resolvedImage(
+  BuildContext context,
   String imagePath,
   String? projectPath, {
   BoxFit fit = BoxFit.cover,
 }) {
-  if (imagePath.isEmpty) return _imagePlaceholder();
+  if (imagePath.isEmpty) return _imagePlaceholder(context);
 
   final String resolved;
   if (imagePath.startsWith('/') || imagePath.contains(':\\')) {
@@ -2109,7 +2131,7 @@ Widget _resolvedImage(
     fit: fit,
     width: double.infinity,
     height: double.infinity,
-    errorBuilder: (context, error, stackTrace) => _imagePlaceholder(),
+    errorBuilder: (context, error, stackTrace) => _imagePlaceholder(context),
   );
 }
 
@@ -2128,8 +2150,8 @@ Widget _captionOverlay(
       ? _tlpVerticalReserve(w)
       : 0.0;
   return Positioned(
-    right: right ?? w * 0.018,
-    bottom: (bottom ?? w * 0.014) + lift,
+    right: right ?? w * _kTlpEdge,
+    bottom: (bottom ?? _tlpBottomInset(w)) + lift,
     child: Container(
       constraints: BoxConstraints(maxWidth: w * 0.5),
       padding: EdgeInsets.symmetric(horizontal: w * 0.008, vertical: w * 0.005),
@@ -2165,13 +2187,15 @@ const double _kTlpEdge = 0.025; // afstand tot de slidehoek (× breedte)
 const double _kTlpHPad = 0.011;
 const double _kTlpVPad = 0.005;
 
+double _tlpBottomInset(double w) => w * 0.022;
+
 /// Geschatte breedte van de TLP-badge, zodat de footer ervoor kan uitwijken.
 double _tlpBadgeWidth(double w, TlpLevel tlp) =>
     tlp.label.length * w * _kTlpFont * 0.62 + 2 * (w * _kTlpHPad);
 
 /// Verticale ruimte die een TLP-badge rechtsonder inneemt (voor bijschriften).
 double _tlpVerticalReserve(double w) =>
-    w * _kTlpFont + 2 * (w * _kTlpVPad) + w * 0.014;
+    w * _kTlpFont + 2 * (w * _kTlpVPad) + _tlpBottomInset(w);
 
 /// Officiële TLP 2.0-markering (FIRST): de gekleurde label op een zwart vlak,
 /// rechtsonder. Wijkt uit naar linksonder als het logo rechtsonder staat.
@@ -2179,18 +2203,20 @@ class _TlpOverlay extends StatelessWidget {
   final TlpLevel tlp;
   final double w;
   final ThemeProfile profile;
+  final bool hasLogo;
 
   const _TlpOverlay({
     required this.tlp,
     required this.w,
     required this.profile,
+    required this.hasLogo,
   });
 
   @override
   Widget build(BuildContext context) {
-    final toLeft = profile.logoPosition == 'bottom-right';
+    final toLeft = hasLogo && profile.logoPosition == 'bottom-right';
     return Positioned(
-      bottom: w * 0.022,
+      bottom: _tlpBottomInset(w),
       left: toLeft ? w * _kTlpEdge : null,
       right: toLeft ? null : w * _kTlpEdge,
       child: Container(
@@ -2306,7 +2332,7 @@ class _FooterOverlay extends StatelessWidget {
     final logoOnLeft = profile.logoPosition.endsWith('left');
     final logoSpan = w * (profile.logoSize / 1280) * 1.28 + w * 0.012;
     final logoLeftEdge = w * (profile.logoSize / 1280) * 0.28;
-    final tlpOnRight = profile.logoPosition != 'bottom-right';
+    final tlpOnRight = !(hasLogo && profile.logoPosition == 'bottom-right');
     final tlpSpan = tlp == TlpLevel.none
         ? 0.0
         : w * _kTlpEdge + _tlpBadgeWidth(w, tlp) + w * 0.012;
@@ -2403,18 +2429,18 @@ Widget _mediaPlaceholder(IconData icon, String label) {
   );
 }
 
-Widget _imagePlaceholder() {
+Widget _imagePlaceholder(BuildContext context) {
   return Container(
     color: const Color(0xFFE2E8F0),
-    child: const Center(
+    child: Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.image_outlined, color: Color(0xFF94A3B8), size: 24),
-          SizedBox(height: 4),
+          const Icon(Icons.image_outlined, color: Color(0xFF94A3B8), size: 24),
+          const SizedBox(height: 4),
           Text(
-            'Afbeelding',
-            style: TextStyle(color: Color(0xFF94A3B8), fontSize: 10),
+            context.l10n.d('Afbeelding'),
+            style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 10),
           ),
         ],
       ),

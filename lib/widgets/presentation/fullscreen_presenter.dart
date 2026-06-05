@@ -38,29 +38,63 @@ class FullscreenPresenter extends StatefulWidget {
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
   }) async {
-    await windowManager.setFullScreen(true);
-    if (context.mounted) {
-      await Navigator.push(
-        context,
-        PageRouteBuilder(
-          opaque: true,
-          pageBuilder: (context, anim, anim2) => FullscreenPresenter(
-            slides: slides,
-            projectPath: projectPath,
-            themeProfile: themeProfile,
-            initialIndex: initialIndex,
-            tlp: tlp,
+    final hadWakeLock = await _wakeLockEnabled();
+    await _enableWakeLock();
+    try {
+      await windowManager.setFullScreen(true);
+      if (context.mounted) {
+        await Navigator.push(
+          context,
+          PageRouteBuilder(
+            opaque: true,
+            pageBuilder: (context, anim, anim2) => FullscreenPresenter(
+              slides: slides,
+              projectPath: projectPath,
+              themeProfile: themeProfile,
+              initialIndex: initialIndex,
+              tlp: tlp,
+            ),
+            transitionsBuilder: (context, animation, secondary, child) =>
+                FadeTransition(opacity: animation, child: child),
+            transitionDuration: const Duration(milliseconds: 200),
           ),
-          transitionsBuilder: (context, animation, secondary, child) =>
-              FadeTransition(opacity: animation, child: child),
-          transitionDuration: const Duration(milliseconds: 200),
-        ),
-      );
+        );
+      }
+    } finally {
+      await _restoreWakeLock(hadWakeLock);
     }
   }
 
   @override
   State<FullscreenPresenter> createState() => _FullscreenPresenterState();
+}
+
+Future<bool> _wakeLockEnabled() async {
+  try {
+    return await WakelockPlus.enabled;
+  } catch (_) {
+    return false;
+  }
+}
+
+Future<void> _enableWakeLock() async {
+  try {
+    await WakelockPlus.enable();
+  } catch (_) {
+    // Best-effort: unsupported platforms should not interrupt presenting.
+  }
+}
+
+Future<void> _restoreWakeLock(bool enabledBeforePresentation) async {
+  try {
+    if (enabledBeforePresentation) {
+      await WakelockPlus.enable();
+    } else {
+      await WakelockPlus.disable();
+    }
+  } catch (_) {
+    // Best-effort cleanup.
+  }
 }
 
 class _FullscreenPresenterState extends State<FullscreenPresenter> {
@@ -125,7 +159,6 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _clockTimer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (mounted && _presenterView) setState(() {});
     });
-    _enableWakeLock();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _focusNode.requestFocus();
       _loadDisplays();
@@ -138,26 +171,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _advanceTimer?.cancel();
     _clockTimer?.cancel();
     _typedTimer?.cancel();
-    _disableWakeLock();
     _gridScroll.dispose();
     _focusNode.dispose();
     super.dispose();
-  }
-
-  Future<void> _enableWakeLock() async {
-    try {
-      await WakelockPlus.enable();
-    } catch (_) {
-      // Best-effort: unsupported platforms should not interrupt presenting.
-    }
-  }
-
-  Future<void> _disableWakeLock() async {
-    try {
-      await WakelockPlus.disable();
-    } catch (_) {
-      // Best-effort cleanup.
-    }
   }
 
   void _scheduleAdvance() {
@@ -287,7 +303,6 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   Future<void> _exit() async {
     _advanceTimer?.cancel();
-    await _disableWakeLock();
     await windowManager.setFullScreen(false);
     if (mounted) Navigator.pop(context);
   }

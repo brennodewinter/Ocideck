@@ -293,12 +293,13 @@ class _ExportDialogState extends State<ExportDialog> {
           label: l10n.t('exportAsHtml'),
           onPressed: () => _export(ExportFormat.html),
         ),
-        const Padding(
-          padding: EdgeInsets.only(top: 4),
+        Padding(
+          padding: const EdgeInsets.only(top: 4),
           child: Text(
-            'HTML opent in elke browser zonder internet en rendert codeblokken, '
-            'wiskunde en mermaid-diagrammen.',
-            style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            l10n.d(
+              'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.',
+            ),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
           ),
         ),
       ],

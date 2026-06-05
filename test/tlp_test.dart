@@ -63,5 +63,39 @@ void main() {
       await tester.pump();
       expect(find.textContaining('TLP:'), findsNothing);
     });
+
+    testWidgets('right-side image caption aligns with the TLP badge', (
+      tester,
+    ) async {
+      const caption = 'Foto: iemand';
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: SizedBox(
+                width: 800,
+                height: 450,
+                child: SlidePreviewWidget(
+                  slide: Slide.create(
+                    SlideType.bulletsImage,
+                  ).copyWith(title: 'T', bullets: ['a'], imageCaption: caption),
+                  tlp: TlpLevel.red,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      final captionRight = tester.getTopRight(find.text(caption)).dx;
+      final tlpRight = tester.getTopRight(find.text('TLP:RED')).dx;
+
+      expect(
+        (captionRight - tlpRight).abs(),
+        lessThan(4),
+        reason: 'Caption and TLP badge should share the same right edge.',
+      );
+    });
   });
 }

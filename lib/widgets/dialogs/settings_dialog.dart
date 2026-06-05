@@ -173,24 +173,25 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         : profiles.first.name;
 
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: AlertDialog(
         title: Text(l10n.t('settings')),
         content: SizedBox(
           width: 520,
-          height: 560,
+          height: 600,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _profileSelector(profiles, dropdownValue),
-              const SizedBox(height: 12),
-              _profileNameField(),
-              const SizedBox(height: 12),
               TabBar(
+                isScrollable: true,
                 tabs: [
                   Tab(
                     icon: const Icon(Icons.tune),
                     text: l10n.t('settingsGeneral'),
+                  ),
+                  Tab(
+                    icon: const Icon(Icons.style_outlined),
+                    text: l10n.t('styleProfile'),
                   ),
                   Tab(
                     icon: const Icon(Icons.palette_outlined),
@@ -207,6 +208,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                 child: TabBarView(
                   children: [
                     _tabBody(_generalTab()),
+                    _tabBody(_styleTab(profiles, dropdownValue)),
                     _tabBody(_colorsTab()),
                     _tabBody(_logoTab()),
                   ],
@@ -347,6 +349,24 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         padding: const EdgeInsets.only(right: 4, bottom: 8),
         child: child,
       ),
+    );
+  }
+
+  Widget _styleTab(List<ThemeProfile> profiles, String dropdownValue) {
+    final l10n = context.l10n;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _sectionTitle(l10n.t('styleProfile')),
+        _profileSelector(profiles, dropdownValue),
+        const SizedBox(height: 12),
+        _profileNameField(),
+        const SizedBox(height: 20),
+        _sectionTitle(l10n.d('Lettertype')),
+        _fontSection(),
+        const SizedBox(height: 18),
+        _stylePreview(),
+      ],
     );
   }
 
@@ -507,9 +527,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _sectionTitle(l10n.d('Lettertype')),
-        _fontSection(),
-        const SizedBox(height: 20),
         _sectionTitle(l10n.d('Kleuren')),
         _colorSetting(
           l10n.d('Achtergrond slides'),
@@ -638,7 +655,10 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           width: 160,
           child: TextField(
             controller: _logoSize,
-            decoration: InputDecoration(labelText: 'Logo px', isDense: true),
+            decoration: InputDecoration(
+              labelText: context.l10n.d('Logo px'),
+              isDense: true,
+            ),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             onChanged: (_) => _profileTouched = true,
@@ -754,7 +774,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label,
+          '$label  $value',
           style: const TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w600,
@@ -767,33 +787,84 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           runSpacing: 6,
           children: [
             for (final color in _colorPresets)
-              Tooltip(
-                message: color,
-                child: InkWell(
-                  onTap: () => setState(() {
-                    onChanged(color);
-                    _profileTouched = true;
-                  }),
-                  borderRadius: BorderRadius.circular(12),
-                  child: Container(
-                    width: 24,
-                    height: 24,
-                    decoration: BoxDecoration(
-                      color: _parseColor(color),
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: value == color
-                            ? AppTheme.accent
-                            : const Color(0xFFCBD5E1),
-                        width: value == color ? 2 : 1,
-                      ),
-                    ),
-                  ),
-                ),
+              _colorSwatch(
+                color,
+                selected: value == color,
+                onTap: () => setState(() {
+                  onChanged(color);
+                  _profileTouched = true;
+                }),
               ),
           ],
         ),
       ],
+    );
+  }
+
+  Widget _colorSwatch(
+    String color, {
+    required bool selected,
+    required VoidCallback onTap,
+  }) {
+    final parsed = _parseColor(color);
+    final checkColor = parsed.computeLuminance() > 0.55
+        ? const Color(0xFF0F172A)
+        : Colors.white;
+    return Tooltip(
+      message: selected ? '${context.l10n.d('Geselecteerd')}: $color' : color,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(8),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 120),
+          width: 34,
+          height: 34,
+          padding: const EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            color: selected
+                ? AppTheme.accent.withValues(alpha: 0.12)
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: selected ? AppTheme.accent : const Color(0xFFCBD5E1),
+              width: selected ? 2 : 1,
+            ),
+          ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: parsed,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 2),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(0x330F172A),
+                      blurRadius: 2,
+                      offset: Offset(0, 1),
+                    ),
+                  ],
+                ),
+              ),
+              if (selected)
+                Icon(
+                  Icons.check,
+                  size: 16,
+                  color: checkColor,
+                  shadows: [
+                    Shadow(
+                      color: checkColor == Colors.white
+                          ? Colors.black54
+                          : Colors.white70,
+                      blurRadius: 2,
+                    ),
+                  ],
+                ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
