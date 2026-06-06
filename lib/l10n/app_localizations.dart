@@ -1860,8 +1860,7 @@ const _dutchSourceStrings = {
     'Vrije Markdown': 'Frije Markdown',
     'Broncode': 'Boarnekoade',
     'Programmeertaal': 'Programmeartaal',
-    'Plak of typ hier je broncode...':
-        'Plak of typ hjir dyn boarnekoade...',
+    'Plak of typ hier je broncode...': 'Plak of typ hjir dyn boarnekoade...',
     'Overgeslagen': 'Oerslein',
     'Kopiëren': 'Kopiearje',
     'Kopieer als afbeelding': 'Kopiearje as ôfbylding',
@@ -2033,8 +2032,7 @@ const _dutchSourceStrings = {
     'Vrije Markdown': 'Markdown liber',
     'Broncode': 'Código fuente',
     'Programmeertaal': 'Lenguahe di programashon',
-    'Plak of typ hier je broncode...':
-        'Pega òf tek bo código fuente akinan...',
+    'Plak of typ hier je broncode...': 'Pega òf tek bo código fuente akinan...',
     'Overgeslagen': 'Saltá',
     'Kopiëren': 'Kopia',
     'Kopieer als afbeelding': 'Kopia komo imágen',

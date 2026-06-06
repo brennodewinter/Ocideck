@@ -83,10 +83,7 @@ class _CodeEditorState extends State<CodeEditor> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          EditorField(
-            label: 'Titel (optioneel)',
-            controller: _title,
-          ),
+          EditorField(label: 'Titel (optioneel)', controller: _title),
           const SizedBox(height: 16),
           Row(
             children: [

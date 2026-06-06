@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
+import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:screen_retriever/screen_retriever.dart';
@@ -8,9 +10,11 @@ import 'package:window_manager/window_manager.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../services/markdown_service.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
 import '../slides/slide_preview.dart';
+import 'audience_window.dart';
 
 /// Blanco-schermstand tijdens het presenteren (zoals B/W in PowerPoint).
 enum _Blank { none, black, white }
@@ -22,6 +26,11 @@ class FullscreenPresenter extends StatefulWidget {
   final int initialIndex;
   final TlpLevel tlp;
 
+  /// When set, this presenter drives a separate audience (beamer) window: the
+  /// laptop shows the presenter view, the slide goes to [audienceWindow]. Null
+  /// for the classic single-screen mode.
+  final WindowController? audienceWindow;
+
   const FullscreenPresenter({
     super.key,
     required this.slides,
@@ -29,7 +38,50 @@ class FullscreenPresenter extends StatefulWidget {
     required this.themeProfile,
     required this.initialIndex,
     this.tlp = TlpLevel.none,
+    this.audienceWindow,
   });
+
+  /// Entry point used by the app: pick dual-screen mode when a second display is
+  /// available (macOS), otherwise the single-window presenter. Any failure to
+  /// open the second window falls back to single-window mode.
+  static Future<void> present(
+    BuildContext context, {
+    required List<Slide> slides,
+    required String? projectPath,
+    required ThemeProfile themeProfile,
+    required int initialIndex,
+    TlpLevel tlp = TlpLevel.none,
+  }) async {
+    var dual = false;
+    if (Platform.isMacOS) {
+      try {
+        final displays = await screenRetriever.getAllDisplays();
+        dual = displays.length >= 2;
+      } catch (_) {
+        dual = false;
+      }
+    }
+    if (!context.mounted) return;
+    if (dual) {
+      await showDualScreen(
+        context,
+        slides: slides,
+        projectPath: projectPath,
+        themeProfile: themeProfile,
+        initialIndex: initialIndex,
+        tlp: tlp,
+      );
+    } else {
+      await show(
+        context,
+        slides: slides,
+        projectPath: projectPath,
+        themeProfile: themeProfile,
+        initialIndex: initialIndex,
+        tlp: tlp,
+      );
+    }
+  }
 
   static Future<void> show(
     BuildContext context, {
@@ -63,6 +115,88 @@ class FullscreenPresenter extends StatefulWidget {
       }
     } finally {
       await _restoreWakeLock(hadWakeLock);
+    }
+  }
+
+  /// Dual-screen mode: open a borderless audience window on the beamer showing
+  /// the slide, and run the presenter view (current/next/notes/timer) in the
+  /// main window on the laptop. The two windows stay in sync over method
+  /// channels. Falls back to [show] if the second window can't be created.
+  static Future<void> showDualScreen(
+    BuildContext context, {
+    required List<Slide> slides,
+    required String? projectPath,
+    required ThemeProfile themeProfile,
+    required int initialIndex,
+    TlpLevel tlp = TlpLevel.none,
+  }) async {
+    // A self-contained markdown deck is the payload for the audience window; it
+    // carries the slides, the style profile and the TLP level in one string.
+    final markdown = MarkdownService().generateDeck(
+      Deck(
+        title: 'Presentatie',
+        slides: slides,
+        projectPath: projectPath,
+        themeProfile: themeProfile,
+        tlp: tlp,
+      ),
+    );
+    final argument = jsonEncode({
+      'markdown': markdown,
+      'projectPath': projectPath,
+      'index': initialIndex,
+    });
+
+    WindowController? audience;
+    try {
+      audience = await WindowController.create(
+        WindowConfiguration(arguments: argument, hiddenAtLaunch: true),
+      );
+      await audience.coverScreen(external: true);
+    } catch (_) {
+      audience = null;
+    }
+
+    if (audience == null) {
+      if (context.mounted) {
+        await show(
+          context,
+          slides: slides,
+          projectPath: projectPath,
+          themeProfile: themeProfile,
+          initialIndex: initialIndex,
+          tlp: tlp,
+        );
+      }
+      return;
+    }
+
+    final hadWakeLock = await _wakeLockEnabled();
+    await _enableWakeLock();
+    try {
+      if (context.mounted) {
+        await Navigator.push(
+          context,
+          PageRouteBuilder(
+            opaque: true,
+            pageBuilder: (context, anim, anim2) => FullscreenPresenter(
+              slides: slides,
+              projectPath: projectPath,
+              themeProfile: themeProfile,
+              initialIndex: initialIndex,
+              tlp: tlp,
+              audienceWindow: audience,
+            ),
+            transitionsBuilder: (context, animation, secondary, child) =>
+                FadeTransition(opacity: animation, child: child),
+            transitionDuration: const Duration(milliseconds: 200),
+          ),
+        );
+      }
+    } finally {
+      await _restoreWakeLock(hadWakeLock);
+      // Make sure the audience window is gone even if exit didn't close it.
+      audience.close().catchError((_) => null);
     }
   }
 
@@ -150,12 +284,38 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   List<Display> _displays = const [];
   int _displayIndex = 0;
 
+  /// True when this presenter drives a separate audience (beamer) window.
+  bool get _dual => widget.audienceWindow != null;
+
+  /// Last (index, blank) pushed to the audience window, to avoid redundant sends.
+  int? _lastSentIndex;
+  int? _lastSentBlank;
+
   @override
   void initState() {
     super.initState();
     _index = widget.initialIndex;
     _startTime = DateTime.now();
     _focusNode = FocusNode();
+    if (_dual) {
+      // The laptop shows the presenter view; the slide lives on the beamer.
+      _presenterView = true;
+      // Navigation triggered on the beamer (clicks) and its audio-end events
+      // come back over this channel.
+      presenterChannel.setMethodCallHandler((call) async {
+        switch (call.method) {
+          case 'next':
+            _next();
+          case 'prev':
+            _prev();
+          case 'exit':
+            _exit();
+          case 'audioComplete':
+            _onAudioCompleted();
+        }
+        return null;
+      });
+    }
     // Tik elke seconde, maar herbouw alleen in presenter view (klok/teller).
     _clockTimer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (mounted && _presenterView) setState(() {});
@@ -174,7 +334,24 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _typedTimer?.cancel();
     _gridScroll.dispose();
     _focusNode.dispose();
+    if (_dual) presenterChannel.setMethodCallHandler(null);
     super.dispose();
+  }
+
+  int get _blankCode =>
+      _blank == _Blank.white ? 2 : (_blank == _Blank.black ? 1 : 0);
+
+  /// Mirror the current index/blank state to the audience window when it changed.
+  void _syncAudience() {
+    final aw = widget.audienceWindow;
+    if (aw == null) return;
+    final blank = _blankCode;
+    if (_index == _lastSentIndex && blank == _lastSentBlank) return;
+    _lastSentIndex = _index;
+    _lastSentBlank = blank;
+    audienceChannel
+        .invokeMethod('update', {'index': _index, 'blank': blank})
+        .catchError((_) => null);
   }
 
   /// Decode the current slide's images plus its neighbours into the image cache
@@ -334,7 +511,15 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   Future<void> _exit() async {
     _advanceTimer?.cancel();
-    await windowManager.setFullScreen(false);
+    final aw = widget.audienceWindow;
+    if (aw != null) {
+      // Dual mode: the main window was never put in full screen; just tear down
+      // the audience window.
+      audienceChannel.invokeMethod('close').catchError((_) => null);
+      aw.close().catchError((_) => null);
+    } else {
+      await windowManager.setFullScreen(false);
+    }
     if (mounted) Navigator.pop(context);
   }
 
@@ -644,6 +829,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       return const SizedBox.shrink();
     }
 
+    // Keep the beamer window in step with whatever index/blank we now show.
+    _syncAudience();
+
     return Focus(
       focusNode: _focusNode,
       autofocus: true,
@@ -849,9 +1037,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
               slideCount: widget.slides.length,
               tlp: widget.tlp,
               // Tijdens het presenteren speelt media en starten audio/video
-              // vanzelf; het audio-einde stuurt de auto-advance aan.
-              enableMedia: true,
-              autoplayMedia: true,
+              // vanzelf; het audio-einde stuurt de auto-advance aan. In dual-
+              // schermmodus speelt de media op het beamervenster, niet hier,
+              // anders zou het geluid dubbel klinken.
+              enableMedia: !_dual,
+              autoplayMedia: !_dual,
               onAudioComplete: _onAudioCompleted,
             ),
           ),

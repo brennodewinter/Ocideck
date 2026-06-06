@@ -95,7 +95,8 @@ class Slide {
   final String quote;
   final String quoteAuthor;
   final String customMarkdown;
-  final String codeLanguage; // highlight.js language id for code slides ('' = plain)
+  final String
+  codeLanguage; // highlight.js language id for code slides ('' = plain)
   final String cssClass;
   final String notes;
   final double advanceDuration; // 0 = no auto-advance

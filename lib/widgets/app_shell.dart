@@ -963,7 +963,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       var initial = visible.indexWhere((i) => i >= editor.selectedIndex);
       if (initial < 0) initial = visible.length - 1;
       if (initial < 0) initial = 0;
-      FullscreenPresenter.show(
+      FullscreenPresenter.present(
         context,
         slides: slides,
         projectPath: deck.projectPath,
