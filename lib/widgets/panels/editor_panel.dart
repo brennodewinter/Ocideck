@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/image_service.dart';
@@ -126,6 +127,8 @@ class EditorPanel extends ConsumerWidget {
                 const Divider(height: 1),
                 _SlideTimingControl(slide: slide, onUpdate: update),
                 const Divider(height: 1),
+                _SlideTlpControl(slide: slide, onUpdate: update),
+                const Divider(height: 1),
                 _NotesField(slide: slide, onUpdate: update),
               ],
             ),
@@ -174,6 +177,7 @@ class EditorPanel extends ConsumerWidget {
       imageSize: slide.imageSize,
       showLogo: slide.showLogo,
       showFooter: slide.showFooter,
+      tlp: slide.tlp,
       tableRows: newType == SlideType.table
           ? (slide.tableRows.isNotEmpty
                 ? slide.tableRows
@@ -653,6 +657,57 @@ class _SlideFooterControl extends StatelessWidget {
           Text(
             l10n.d('Footer tonen op deze slide'),
             style: const TextStyle(fontSize: 12, color: Color(0xFF475569)),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Per-slide TLP-classificatie ───────────────────────────────────────────────
+
+class _SlideTlpControl extends StatelessWidget {
+  final Slide slide;
+  final ValueChanged<Slide> onUpdate;
+  const _SlideTlpControl({required this.slide, required this.onUpdate});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Container(
+      color: const Color(0xFFF8FAFC),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+      child: Row(
+        children: [
+          const Icon(Icons.shield_outlined, size: 14, color: Color(0xFF64748B)),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              l10n.d('TLP van deze slide'),
+              style: const TextStyle(fontSize: 12, color: Color(0xFF475569)),
+            ),
+          ),
+          DropdownButtonHideUnderline(
+            child: DropdownButton<TlpLevel>(
+              value: slide.tlp,
+              isDense: true,
+              borderRadius: BorderRadius.circular(6),
+              style: const TextStyle(fontSize: 12, color: Color(0xFF0F172A)),
+              items: [
+                for (final level in TlpLevel.values)
+                  DropdownMenuItem(
+                    value: level,
+                    child: Text(
+                      level == TlpLevel.none
+                          ? l10n.d('Geen')
+                          : level.menuLabel,
+                    ),
+                  ),
+              ],
+              onChanged: (v) {
+                if (v != null) onUpdate(slide.copyWith(tlp: v));
+              },
+            ),
           ),
         ],
       ),

@@ -34,6 +34,42 @@ void main() {
     });
   });
 
+  group('slideVisibleAtTlp', () {
+    Slide slideAt(TlpLevel level) =>
+        Slide.create(SlideType.bullets).copyWith(tlp: level);
+
+    test('an unclassified slide is always visible', () {
+      for (final level in TlpLevel.values) {
+        expect(slideVisibleAtTlp(slideAt(TlpLevel.none), level), isTrue);
+      }
+    });
+
+    test('a slide stricter than the presentation is withheld', () {
+      // Presentation at GREEN: CLEAR/GREEN shown, AMBER/RED withheld.
+      expect(slideVisibleAtTlp(slideAt(TlpLevel.clear), TlpLevel.green), isTrue);
+      expect(slideVisibleAtTlp(slideAt(TlpLevel.green), TlpLevel.green), isTrue);
+      expect(
+        slideVisibleAtTlp(slideAt(TlpLevel.amber), TlpLevel.green),
+        isFalse,
+      );
+      expect(slideVisibleAtTlp(slideAt(TlpLevel.red), TlpLevel.green), isFalse);
+    });
+
+    test('a RED presentation shows every slide', () {
+      for (final level in TlpLevel.values) {
+        expect(slideVisibleAtTlp(slideAt(level), TlpLevel.red), isTrue);
+      }
+    });
+
+    test('an unset presentation only shows unclassified slides', () {
+      expect(slideVisibleAtTlp(slideAt(TlpLevel.none), TlpLevel.none), isTrue);
+      expect(
+        slideVisibleAtTlp(slideAt(TlpLevel.clear), TlpLevel.none),
+        isFalse,
+      );
+    });
+  });
+
   group('TLP marking on slides', () {
     Widget host(TlpLevel tlp) => MaterialApp(
       home: Scaffold(

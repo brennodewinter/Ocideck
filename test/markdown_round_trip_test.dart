@@ -307,6 +307,32 @@ void main() {
       expect(normal.skipped, isFalse);
     });
 
+    test('keeps the per-slide TLP classification', () {
+      final out = _roundTrip(
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Gevoelig', bullets: ['Geheim'], tlp: TlpLevel.amber),
+      );
+      expect(out.tlp, TlpLevel.amber);
+
+      final none = _roundTrip(
+        Slide.create(SlideType.bullets).copyWith(bullets: ['Open']),
+      );
+      expect(none.tlp, TlpLevel.none);
+    });
+
+    test('keeps the per-slide TLP on a code slide', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.code).copyWith(
+          customMarkdown: 'secret_key = 42',
+          codeLanguage: 'python',
+          tlp: TlpLevel.red,
+        ),
+      );
+      expect(out.type, SlideType.code);
+      expect(out.tlp, TlpLevel.red);
+    });
+
     test('keeps general presentation metadata in the front matter', () {
       final service = MarkdownService();
       final markdown = service.generateDeck(

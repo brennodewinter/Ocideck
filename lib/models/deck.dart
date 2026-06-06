@@ -2,7 +2,16 @@ import 'slide.dart';
 import 'settings.dart';
 
 /// Traffic Light Protocol-classificatie (FIRST TLP 2.0) van een presentatie.
+///
+/// De volgorde loopt van minst naar meest beperkend; [TlpLevel.index] is dus
+/// bruikbaar om niveaus te vergelijken.
 enum TlpLevel { none, clear, green, amber, amberStrict, red }
+
+/// Of [slide] getoond mag worden wanneer de presentatie op [presentationTlp]
+/// wordt gedeeld. Een slide wordt achtergehouden zodra zijn eigen TLP-niveau
+/// strenger (hoger) is dan het voor de presentatie gekozen niveau.
+bool slideVisibleAtTlp(Slide slide, TlpLevel presentationTlp) =>
+    slide.tlp.index <= presentationTlp.index;
 
 extension TlpLevelX on TlpLevel {
   /// De officiële markering die op de slides verschijnt ('' bij [none]).

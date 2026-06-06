@@ -1174,6 +1174,7 @@ const _dutchSourceStrings = {
     'Vrije Markdown': 'Markdown libero',
     'Broncode': 'Codice sorgente',
     'Programmeertaal': 'Linguaggio di programmazione',
+    'TLP van deze slide': 'TLP di questa slide',
     'Plak of typ hier je broncode...':
         'Incolla o digita qui il tuo codice sorgente...',
     'Overgeslagen': 'Saltata',
@@ -1345,6 +1346,7 @@ const _dutchSourceStrings = {
     'Vrije Markdown': 'Freies Markdown',
     'Broncode': 'Quellcode',
     'Programmeertaal': 'Programmiersprache',
+    'TLP van deze slide': 'TLP dieser Folie',
     'Plak of typ hier je broncode...':
         'Quellcode hier einfügen oder eingeben...',
     'Overgeslagen': 'Übersprungen',
@@ -1517,6 +1519,7 @@ const _dutchSourceStrings = {
     'Vrije Markdown': 'Markdown libre',
     'Broncode': 'Code source',
     'Programmeertaal': 'Langage de programmation',
+    'TLP van deze slide': 'TLP de cette diapositive',
     'Plak of typ hier je broncode...':
         'Collez ou tapez votre code source ici...',
     'Overgeslagen': 'Ignorée',
@@ -1688,6 +1691,7 @@ const _dutchSourceStrings = {
     'Vrije Markdown': 'Markdown libre',
     'Broncode': 'Código fuente',
     'Programmeertaal': 'Lenguaje de programación',
+    'TLP van deze slide': 'TLP de esta diapositiva',
     'Plak of typ hier je broncode...':
         'Pega o escribe aquí tu código fuente...',
     'Overgeslagen': 'Omitida',
@@ -1860,6 +1864,7 @@ const _dutchSourceStrings = {
     'Vrije Markdown': 'Frije Markdown',
     'Broncode': 'Boarnekoade',
     'Programmeertaal': 'Programmeartaal',
+    'TLP van deze slide': 'TLP fan dizze slide',
     'Plak of typ hier je broncode...': 'Plak of typ hjir dyn boarnekoade...',
     'Overgeslagen': 'Oerslein',
     'Kopiëren': 'Kopiearje',
@@ -2032,6 +2037,7 @@ const _dutchSourceStrings = {
     'Vrije Markdown': 'Markdown liber',
     'Broncode': 'Código fuente',
     'Programmeertaal': 'Lenguahe di programashon',
+    'TLP van deze slide': 'TLP di e slide aki',
     'Plak of typ hier je broncode...': 'Pega òf tek bo código fuente akinan...',
     'Overgeslagen': 'Saltá',
     'Kopiëren': 'Kopia',
@@ -2193,6 +2199,7 @@ const _dutchSourceStringAdditions = {
     'Bullet': 'Bullet',
     'Plak of typ hier je broncode...': 'Paste or type your source code here...',
     'Programmeertaal': 'Programming language',
+    'TLP van deze slide': 'TLP of this slide',
     'Platte tekst': 'Plain text',
     'Titel (optioneel)': 'Title (optional)',
     'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':

@@ -354,6 +354,13 @@ class MarkdownService {
       buf.writeln('<!-- skip -->');
     }
 
+    // Per-slide TLP classification (used to withhold the slide when sharing at
+    // a lower level). Persisted so it survives save/load round-trips.
+    if (slide.tlp != TlpLevel.none) {
+      buf.writeln();
+      buf.writeln('<!-- tlp: ${slide.tlp.key} -->');
+    }
+
     if (slide.notes.isNotEmpty) {
       buf.writeln();
       buf.writeln('<!--');
@@ -597,6 +604,7 @@ class MarkdownService {
     final notesBuffer = StringBuffer();
     double advanceDuration = 0;
     bool skipped = false;
+    TlpLevel slideTlp = TlpLevel.none;
     final bullets = <String>[];
     var bullets2 = <String>[];
     // bulletsImage slides store their panel width in `<!-- _style:
@@ -610,6 +618,8 @@ class MarkdownService {
           advanceDuration = double.tryParse(content.substring(8).trim()) ?? 0;
         } else if (content == 'skip') {
           skipped = true;
+        } else if (content.startsWith('tlp:')) {
+          slideTlp = TlpLevelX.fromKey(content.substring(4));
         } else if (content.startsWith('_style:')) {
           final w = RegExp(r'--image-width:\s*(\d+)%').firstMatch(content);
           if (w != null) styleImageWidth = int.tryParse(w.group(1)!) ?? 0;
@@ -636,6 +646,7 @@ class MarkdownService {
         notes: notes,
         advanceDuration: advanceDuration,
         skipped: skipped,
+        tlp: slideTlp,
       );
     }
 
@@ -820,6 +831,7 @@ class MarkdownService {
       showLogo: showLogo,
       showFooter: showFooter,
       skipped: skipped,
+      tlp: slideTlp,
       tableRows: type == SlideType.table ? tableRows : const [],
     );
   }
@@ -832,6 +844,7 @@ class MarkdownService {
     required String notes,
     required double advanceDuration,
     required bool skipped,
+    TlpLevel tlp = TlpLevel.none,
   }) {
     final lines = remaining.split('\n');
     String title = '';
@@ -892,6 +905,7 @@ class MarkdownService {
       showLogo: !classTokens.contains('no-logo'),
       showFooter: !classTokens.contains('no-footer'),
       skipped: skipped,
+      tlp: tlp,
     );
   }
 }

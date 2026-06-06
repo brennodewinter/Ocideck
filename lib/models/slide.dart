@@ -1,4 +1,5 @@
 import 'package:uuid/uuid.dart';
+import 'deck.dart';
 
 const _uuid = Uuid();
 
@@ -104,6 +105,10 @@ class Slide {
   final bool showLogo; // show the profile logo on this slide (default true)
   final bool showFooter; // show the profile footer on this slide (default true)
   final bool skipped; // skip this slide when presenting and exporting
+  /// Per-slide Traffic Light Protocol classification. The slide is withheld
+  /// when the presentation is shared at a lower (less restrictive) level than
+  /// this. [TlpLevel.none] = no per-slide restriction (always shown).
+  final TlpLevel tlp;
   final List<List<String>> tableRows; // first row is the header
 
   const Slide({
@@ -132,6 +137,7 @@ class Slide {
     this.showLogo = true,
     this.showFooter = true,
     this.skipped = false,
+    this.tlp = TlpLevel.none,
     this.tableRows = const [],
   });
 
@@ -184,6 +190,7 @@ class Slide {
       showLogo: src.showLogo,
       showFooter: src.showFooter,
       skipped: src.skipped,
+      tlp: src.tlp,
       tableRows: src.tableRows.map((r) => List<String>.from(r)).toList(),
     );
   }
@@ -213,6 +220,7 @@ class Slide {
     bool? showLogo,
     bool? showFooter,
     bool? skipped,
+    TlpLevel? tlp,
     List<List<String>>? tableRows,
   }) {
     return Slide(
@@ -241,6 +249,7 @@ class Slide {
       showLogo: showLogo ?? this.showLogo,
       showFooter: showFooter ?? this.showFooter,
       skipped: skipped ?? this.skipped,
+      tlp: tlp ?? this.tlp,
       tableRows: tableRows ?? this.tableRows,
     );
   }

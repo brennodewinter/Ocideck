@@ -139,7 +139,11 @@ List<String> _imageUsages(WidgetRef ref, String absolutePath) {
 }
 
 List<Slide> _slidesForPresentationOrExport(Deck deck) {
-  final slides = deck.slides.where((s) => !s.skipped).toList();
+  // Drop skipped slides and slides whose TLP classification is stricter than
+  // the level chosen for this presentation/export.
+  final slides = deck.slides
+      .where((s) => !s.skipped && slideVisibleAtTlp(s, deck.tlp))
+      .toList();
   final closingMarkdown = deck.themeProfile.closingSlideMarkdown.trim();
   if (deck.themeProfile.closingSlideEnabled && closingMarkdown.isNotEmpty) {
     slides.add(
@@ -947,7 +951,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       // zichtbare slide vertalen.
       final visible = <int>[
         for (var i = 0; i < deck.slides.length; i++)
-          if (!deck.slides[i].skipped) i,
+          if (!deck.slides[i].skipped &&
+              slideVisibleAtTlp(deck.slides[i], deck.tlp))
+            i,
       ];
       final slides = _slidesForPresentationOrExport(deck);
       if (slides.isEmpty) {
