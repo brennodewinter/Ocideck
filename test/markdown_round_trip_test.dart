@@ -246,6 +246,31 @@ void main() {
         'Vrije tekst met **opmaak**.\n\nTweede alinea.',
       );
     });
+
+    test('code slide keeps title, language and code body', () {
+      const code = 'void main() {\n  print("Hallo");\n}';
+      final out = _roundTrip(
+        Slide.create(SlideType.code).copyWith(
+          title: 'Voorbeeld',
+          codeLanguage: 'dart',
+          customMarkdown: code,
+        ),
+      );
+      expect(out.type, SlideType.code);
+      expect(out.title, 'Voorbeeld');
+      expect(out.codeLanguage, 'dart');
+      expect(out.customMarkdown, code);
+    });
+
+    test('code slide without a language stays plain code', () {
+      const code = 'GET /api/v1/status HTTP/1.1\nHost: example.org';
+      final out = _roundTrip(
+        Slide.create(SlideType.code).copyWith(customMarkdown: code),
+      );
+      expect(out.type, SlideType.code);
+      expect(out.codeLanguage, '');
+      expect(out.customMarkdown, code);
+    });
   });
 
   group('markdown round-trip cross-cutting fields', () {

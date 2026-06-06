@@ -160,6 +160,137 @@ class ThemeProfile {
   }
 }
 
+class AppAppearanceProfile {
+  final String name;
+  final bool isBuiltIn;
+  final bool isDark;
+  final String primaryColor;
+  final String accentColor;
+  final String backgroundColor;
+  final String surfaceColor;
+  final String textColor;
+  final String mutedTextColor;
+  final String panelColor;
+  final String panelTextColor;
+
+  const AppAppearanceProfile({
+    required this.name,
+    this.isBuiltIn = false,
+    this.isDark = false,
+    required this.primaryColor,
+    required this.accentColor,
+    required this.backgroundColor,
+    required this.surfaceColor,
+    required this.textColor,
+    required this.mutedTextColor,
+    required this.panelColor,
+    required this.panelTextColor,
+  });
+
+  static const basic = AppAppearanceProfile(
+    name: 'Basic',
+    isBuiltIn: true,
+    primaryColor: '#1C2B47',
+    accentColor: '#2563EB',
+    backgroundColor: '#F8F9FA',
+    surfaceColor: '#FFFFFF',
+    textColor: '#1E293B',
+    mutedTextColor: '#64748B',
+    panelColor: '#1E2028',
+    panelTextColor: '#E2E8F0',
+  );
+
+  static const europa = AppAppearanceProfile(
+    name: 'Europa',
+    isBuiltIn: true,
+    primaryColor: '#003399',
+    accentColor: '#FFCC00',
+    backgroundColor: '#F4F7FC',
+    surfaceColor: '#FFFFFF',
+    textColor: '#17233D',
+    mutedTextColor: '#5D6B85',
+    panelColor: '#00266F',
+    panelTextColor: '#FFFFFF',
+  );
+
+  static const dark = AppAppearanceProfile(
+    name: 'Donker',
+    isBuiltIn: true,
+    isDark: true,
+    primaryColor: '#111827',
+    accentColor: '#60A5FA',
+    backgroundColor: '#0F172A',
+    surfaceColor: '#1E293B',
+    textColor: '#F1F5F9',
+    mutedTextColor: '#94A3B8',
+    panelColor: '#090E1A',
+    panelTextColor: '#E2E8F0',
+  );
+
+  static const builtIns = [basic, europa, dark];
+
+  AppAppearanceProfile copyWith({
+    String? name,
+    bool? isBuiltIn,
+    bool? isDark,
+    String? primaryColor,
+    String? accentColor,
+    String? backgroundColor,
+    String? surfaceColor,
+    String? textColor,
+    String? mutedTextColor,
+    String? panelColor,
+    String? panelTextColor,
+  }) {
+    return AppAppearanceProfile(
+      name: name ?? this.name,
+      isBuiltIn: isBuiltIn ?? this.isBuiltIn,
+      isDark: isDark ?? this.isDark,
+      primaryColor: primaryColor ?? this.primaryColor,
+      accentColor: accentColor ?? this.accentColor,
+      backgroundColor: backgroundColor ?? this.backgroundColor,
+      surfaceColor: surfaceColor ?? this.surfaceColor,
+      textColor: textColor ?? this.textColor,
+      mutedTextColor: mutedTextColor ?? this.mutedTextColor,
+      panelColor: panelColor ?? this.panelColor,
+      panelTextColor: panelTextColor ?? this.panelTextColor,
+    );
+  }
+
+  Map<String, Object?> toJson() {
+    return {
+      'name': name,
+      'isBuiltIn': isBuiltIn,
+      'isDark': isDark,
+      'primaryColor': primaryColor,
+      'accentColor': accentColor,
+      'backgroundColor': backgroundColor,
+      'surfaceColor': surfaceColor,
+      'textColor': textColor,
+      'mutedTextColor': mutedTextColor,
+      'panelColor': panelColor,
+      'panelTextColor': panelTextColor,
+    };
+  }
+
+  factory AppAppearanceProfile.fromJson(Map<String, Object?> json) {
+    return AppAppearanceProfile(
+      name: json['name'] as String? ?? 'Eigen thema',
+      isBuiltIn: json['isBuiltIn'] as bool? ?? false,
+      isDark: json['isDark'] as bool? ?? false,
+      primaryColor: json['primaryColor'] as String? ?? basic.primaryColor,
+      accentColor: json['accentColor'] as String? ?? basic.accentColor,
+      backgroundColor:
+          json['backgroundColor'] as String? ?? basic.backgroundColor,
+      surfaceColor: json['surfaceColor'] as String? ?? basic.surfaceColor,
+      textColor: json['textColor'] as String? ?? basic.textColor,
+      mutedTextColor: json['mutedTextColor'] as String? ?? basic.mutedTextColor,
+      panelColor: json['panelColor'] as String? ?? basic.panelColor,
+      panelTextColor: json['panelTextColor'] as String? ?? basic.panelTextColor,
+    );
+  }
+}
+
 class AppSettings {
   final String languageCode;
   final String? homeDirectory;
@@ -169,6 +300,8 @@ class AppSettings {
   final String? exportDirectory;
   final List<ThemeProfile> themeProfiles;
   final String selectedThemeProfileName;
+  final List<AppAppearanceProfile> appAppearanceProfiles;
+  final String selectedAppAppearanceProfileName;
   final List<String> recentFiles;
 
   const AppSettings({
@@ -177,6 +310,8 @@ class AppSettings {
     this.exportDirectory,
     this.themeProfiles = const [ThemeProfile()],
     this.selectedThemeProfileName = 'Standaard',
+    this.appAppearanceProfiles = AppAppearanceProfile.builtIns,
+    this.selectedAppAppearanceProfileName = 'Basic',
     this.recentFiles = const [],
   });
 
@@ -184,6 +319,13 @@ class AppSettings {
     return themeProfiles.firstWhere(
       (p) => p.name == selectedThemeProfileName,
       orElse: () => themeProfiles.first,
+    );
+  }
+
+  AppAppearanceProfile get appAppearanceProfile {
+    return appAppearanceProfiles.firstWhere(
+      (p) => p.name == selectedAppAppearanceProfileName,
+      orElse: () => appAppearanceProfiles.first,
     );
   }
 
@@ -208,6 +350,8 @@ class AppSettings {
     ThemeProfile? themeProfile,
     List<ThemeProfile>? themeProfiles,
     String? selectedThemeProfileName,
+    List<AppAppearanceProfile>? appAppearanceProfiles,
+    String? selectedAppAppearanceProfileName,
     List<String>? recentFiles,
     bool clearHomeDirectory = false,
     bool clearExportDirectory = false,
@@ -236,6 +380,11 @@ class AppSettings {
           selectedThemeProfileName ??
           themeProfile?.name ??
           this.selectedThemeProfileName,
+      appAppearanceProfiles:
+          appAppearanceProfiles ?? this.appAppearanceProfiles,
+      selectedAppAppearanceProfileName:
+          selectedAppAppearanceProfileName ??
+          this.selectedAppAppearanceProfileName,
       recentFiles: recentFiles ?? this.recentFiles,
     );
   }

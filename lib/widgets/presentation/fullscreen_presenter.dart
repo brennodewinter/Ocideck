@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:screen_retriever/screen_retriever.dart';
@@ -176,7 +177,37 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     super.dispose();
   }
 
+  /// Decode the current slide's images plus its neighbours into the image cache
+  /// ahead of time. Because a precached [FileImage] resolves synchronously, the
+  /// next slide paints its picture on the very first frame instead of flashing
+  /// the black Scaffold behind it while the file decodes — essential for a clean
+  /// recording. Best-effort: decode errors are swallowed.
+  void _precacheNeighbours() {
+    if (!mounted) return;
+    final logo = widget.themeProfile.logoPath;
+    if (logo != null && logo.isNotEmpty) {
+      _precachePath(logo);
+    }
+    // Current first, then the likely next/previous targets.
+    for (final offset in const [0, 1, -1, 2]) {
+      final i = _index + offset;
+      if (i < 0 || i >= widget.slides.length) continue;
+      final slide = widget.slides[i];
+      _precachePath(slide.imagePath);
+      _precachePath(slide.imagePath2);
+    }
+  }
+
+  void _precachePath(String path) {
+    final resolved = resolveSlideAssetPath(path, widget.projectPath);
+    if (resolved == null) return;
+    precacheImage(FileImage(File(resolved)), context, onError: (_, _) {});
+  }
+
   void _scheduleAdvance() {
+    // Funnel point for every navigation (next/prev/jump/auto) and the initial
+    // frame, so neighbour images are always warm before they are shown.
+    _precacheNeighbours();
     _advanceTimer?.cancel();
     _advanceTimer = null;
     setState(() => _progress = 0);

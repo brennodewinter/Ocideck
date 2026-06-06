@@ -27,6 +27,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   late String? _homeDirectory;
   late String? _exportDirectory;
   late ThemeProfile _themeProfile;
+  late AppAppearanceProfile _appearanceProfile;
+  late String _originalAppearanceName;
+  late TextEditingController _appearanceName;
 
   /// The saved name of the profile currently being edited. Used as a stable
   /// identity so renaming updates the existing profile instead of creating a
@@ -71,6 +74,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         .deck
         ?.themeProfile;
     _themeProfile = deckProfile ?? settings.themeProfile;
+    _appearanceProfile = settings.appAppearanceProfile;
+    _originalAppearanceName = _appearanceProfile.name;
+    _appearanceName = TextEditingController(text: _appearanceProfile.name);
     _originalName = _themeProfile.name;
     _profileName = TextEditingController(text: _themeProfile.name);
     _logoSize = TextEditingController(text: _themeProfile.logoSize.toString());
@@ -86,6 +92,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _logoSize.dispose();
     _footerText.dispose();
     _closingSlideMarkdown.dispose();
+    _appearanceName.dispose();
     super.dispose();
   }
 
@@ -153,6 +160,17 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     notifier.setHomeDirectory(_homeDirectory);
     notifier.setExportDirectory(_exportDirectory);
     notifier.saveThemeProfile(profile, previousName: _originalName);
+    if (_appearanceProfile.isBuiltIn) {
+      notifier.selectAppAppearanceProfile(_appearanceProfile.name);
+    } else {
+      final appearanceName = _appearanceName.text.trim();
+      notifier.saveAppAppearanceProfile(
+        _appearanceProfile.copyWith(
+          name: appearanceName.isEmpty ? 'Eigen thema' : appearanceName,
+        ),
+        previousName: _originalAppearanceName,
+      );
+    }
 
     // Apply the chosen/edited profile to the presentation that is currently
     // open, so the change is visible immediately. Only when the user actually
@@ -173,7 +191,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         : profiles.first.name;
 
     return DefaultTabController(
-      length: 4,
+      length: 5,
       child: AlertDialog(
         title: Text(l10n.t('settings')),
         content: SizedBox(
@@ -188,6 +206,10 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                   Tab(
                     icon: const Icon(Icons.tune),
                     text: l10n.t('settingsGeneral'),
+                  ),
+                  Tab(
+                    icon: const Icon(Icons.format_paint_outlined),
+                    text: l10n.d('App-thema'),
                   ),
                   Tab(
                     icon: const Icon(Icons.style_outlined),
@@ -208,6 +230,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                 child: TabBarView(
                   children: [
                     _tabBody(_generalTab()),
+                    _tabBody(_appearanceTab()),
                     _tabBody(_styleTab(profiles, dropdownValue)),
                     _tabBody(_colorsTab()),
                     _tabBody(_logoTab()),
@@ -465,6 +488,343 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         ),
       ],
     );
+  }
+
+  Widget _appearanceTab() {
+    final l10n = context.l10n;
+    final profiles = ref.watch(settingsProvider).appAppearanceProfiles;
+    final selectedName =
+        profiles.any((profile) => profile.name == _originalAppearanceName)
+        ? _originalAppearanceName
+        : profiles.first.name;
+    final editable = !_appearanceProfile.isBuiltIn;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _sectionTitle(l10n.d('Look-and-feel')),
+        Row(
+          children: [
+            Expanded(
+              child: DropdownButtonFormField<String>(
+                initialValue: selectedName,
+                decoration: InputDecoration(
+                  labelText: l10n.d('App-thema'),
+                  isDense: true,
+                ),
+                items: [
+                  for (final profile in profiles)
+                    DropdownMenuItem(
+                      value: profile.name,
+                      child: Row(
+                        children: [
+                          _appearanceDot(profile.primaryColor),
+                          const SizedBox(width: 8),
+                          Text(profile.name),
+                        ],
+                      ),
+                    ),
+                ],
+                onChanged: (name) {
+                  if (name == null) return;
+                  final profile = profiles.firstWhere(
+                    (item) => item.name == name,
+                  );
+                  setState(() {
+                    _appearanceProfile = profile;
+                    _originalAppearanceName = profile.name;
+                    _appearanceName.text = profile.name;
+                  });
+                },
+              ),
+            ),
+            const SizedBox(width: 8),
+            IconButton(
+              tooltip: l10n.d('Kopie maken en aanpassen'),
+              onPressed: () async {
+                final created = await ref
+                    .read(settingsProvider.notifier)
+                    .createAppAppearanceProfile(base: _appearanceProfile);
+                if (!mounted) return;
+                setState(() {
+                  _appearanceProfile = created;
+                  _originalAppearanceName = created.name;
+                  _appearanceName.text = created.name;
+                });
+              },
+              icon: const Icon(Icons.add, size: 18),
+            ),
+            IconButton(
+              tooltip: l10n.d('Thema verwijderen'),
+              onPressed: editable
+                  ? () async {
+                      await ref
+                          .read(settingsProvider.notifier)
+                          .deleteAppAppearanceProfile(_appearanceProfile.name);
+                      if (!mounted) return;
+                      const profile = AppAppearanceProfile.basic;
+                      setState(() {
+                        _appearanceProfile = profile;
+                        _originalAppearanceName = profile.name;
+                        _appearanceName.text = profile.name;
+                      });
+                    }
+                  : null,
+              icon: const Icon(Icons.delete_outline, size: 18),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        TextField(
+          controller: _appearanceName,
+          enabled: editable,
+          decoration: InputDecoration(
+            labelText: l10n.d('Themanaam'),
+            isDense: true,
+            prefixIcon: const Icon(Icons.badge_outlined, size: 18),
+          ),
+          onChanged: (value) {
+            if (value.trim().isNotEmpty) {
+              _appearanceProfile = _appearanceProfile.copyWith(
+                name: value.trim(),
+              );
+            }
+          },
+        ),
+        if (!editable)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text(
+              l10n.d(
+                'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.',
+              ),
+              style: TextStyle(
+                fontSize: 11,
+                color: Theme.of(context).extension<AppPalette>()?.mutedText,
+              ),
+            ),
+          ),
+        const SizedBox(height: 12),
+        SwitchListTile(
+          value: _appearanceProfile.isDark,
+          onChanged: editable
+              ? (value) => setState(() {
+                  _appearanceProfile = _appearanceProfile.copyWith(
+                    isDark: value,
+                  );
+                })
+              : null,
+          title: Text(
+            l10n.d('Donkere interface'),
+            style: const TextStyle(fontSize: 13),
+          ),
+          subtitle: Text(
+            l10n.d('Past contrast, invoervelden en systeemcomponenten aan.'),
+            style: const TextStyle(fontSize: 11),
+          ),
+          contentPadding: EdgeInsets.zero,
+          dense: true,
+        ),
+        const SizedBox(height: 8),
+        _appearanceColorSetting(
+          l10n.d('Hoofdkleur en bovenbalk'),
+          _appearanceProfile.primaryColor,
+          editable,
+          (value) => _appearanceProfile = _appearanceProfile.copyWith(
+            primaryColor: value,
+          ),
+        ),
+        _appearanceColorSetting(
+          l10n.d('Knoppen en accenten'),
+          _appearanceProfile.accentColor,
+          editable,
+          (value) => _appearanceProfile = _appearanceProfile.copyWith(
+            accentColor: value,
+          ),
+        ),
+        _appearanceColorSetting(
+          l10n.d('Schermachtergrond'),
+          _appearanceProfile.backgroundColor,
+          editable,
+          (value) => _appearanceProfile = _appearanceProfile.copyWith(
+            backgroundColor: value,
+          ),
+        ),
+        _appearanceColorSetting(
+          l10n.d('Kaarten en dialogen'),
+          _appearanceProfile.surfaceColor,
+          editable,
+          (value) => _appearanceProfile = _appearanceProfile.copyWith(
+            surfaceColor: value,
+          ),
+        ),
+        _appearanceColorSetting(
+          l10n.d('Tekst'),
+          _appearanceProfile.textColor,
+          editable,
+          (value) => _appearanceProfile = _appearanceProfile.copyWith(
+            textColor: value,
+          ),
+        ),
+        _appearanceColorSetting(
+          l10n.d('Gedempte tekst'),
+          _appearanceProfile.mutedTextColor,
+          editable,
+          (value) => _appearanceProfile = _appearanceProfile.copyWith(
+            mutedTextColor: value,
+          ),
+        ),
+        _appearanceColorSetting(
+          l10n.d('Zijpanelen'),
+          _appearanceProfile.panelColor,
+          editable,
+          (value) => _appearanceProfile = _appearanceProfile.copyWith(
+            panelColor: value,
+          ),
+        ),
+        _appearanceColorSetting(
+          l10n.d('Tekst op zijpanelen'),
+          _appearanceProfile.panelTextColor,
+          editable,
+          (value) => _appearanceProfile = _appearanceProfile.copyWith(
+            panelTextColor: value,
+          ),
+        ),
+        const SizedBox(height: 8),
+        _appearancePreview(),
+      ],
+    );
+  }
+
+  Widget _appearanceColorSetting(
+    String label,
+    String value,
+    bool enabled,
+    ValueChanged<String> onChanged,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Row(
+        children: [
+          _appearanceDot(value, size: 30),
+          const SizedBox(width: 10),
+          Expanded(
+            child: TextFormField(
+              key: ValueKey('$label-$value-$enabled'),
+              initialValue: value,
+              enabled: enabled,
+              decoration: InputDecoration(labelText: label, isDense: true),
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'[0-9a-fA-F#]')),
+                LengthLimitingTextInputFormatter(7),
+              ],
+              onChanged: (input) {
+                final normalized = input.startsWith('#')
+                    ? input.toUpperCase()
+                    : '#${input.toUpperCase()}';
+                if (RegExp(r'^#[0-9A-F]{6}$').hasMatch(normalized)) {
+                  setState(() => onChanged(normalized));
+                }
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _appearanceDot(String value, {double size = 18}) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: _parseColor(value),
+        shape: BoxShape.circle,
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+      ),
+    );
+  }
+
+  Widget _appearancePreview() {
+    final profile = _appearanceProfile;
+    final foreground = _parseColor(profile.textColor);
+    return Container(
+      height: 112,
+      decoration: BoxDecoration(
+        color: _parseColor(profile.backgroundColor),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: _parseColor(profile.panelColor)),
+      ),
+      child: Column(
+        children: [
+          Container(
+            height: 30,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            color: _parseColor(profile.primaryColor),
+            child: Row(
+              children: [
+                Text(
+                  'OciDeck',
+                  style: TextStyle(
+                    color: _contrastColor(_parseColor(profile.primaryColor)),
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Container(
+                    width: 52,
+                    color: _parseColor(profile.panelColor),
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.slideshow_outlined,
+                      color: _parseColor(profile.panelTextColor),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      color: _parseColor(profile.surfaceColor),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              context.l10n.d('Voorbeeldtekst'),
+                              style: TextStyle(color: foreground),
+                            ),
+                          ),
+                          FilledButton(
+                            style: FilledButton.styleFrom(
+                              backgroundColor: _parseColor(profile.accentColor),
+                              foregroundColor: _contrastColor(
+                                _parseColor(profile.accentColor),
+                              ),
+                            ),
+                            onPressed: () {},
+                            child: Text(context.l10n.d('Knop')),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Color _contrastColor(Color color) {
+    return color.computeLuminance() > 0.55 ? Colors.black : Colors.white;
   }
 
   /// Lettertype-keuze — hoort bij de stijl (themeProfile), niet bij de app.

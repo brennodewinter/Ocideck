@@ -528,14 +528,13 @@ class _AppTabBar extends StatelessWidget {
     required this.onAdd,
   });
 
-  static const _bgColor = Color(0xFF1E293B);
-
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final palette = Theme.of(context).extension<AppPalette>()!;
     return Container(
       height: 36,
-      color: _bgColor,
+      color: palette.panel,
       child: Row(
         children: [
           Expanded(
@@ -548,6 +547,8 @@ class _AppTabBar extends StatelessWidget {
                       tab: tabsState.tabs[i],
                       isActive: i == tabsState.clampedIndex,
                       showClose: tabsState.tabs.length > 1,
+                      panelText: palette.panelText,
+                      accent: Theme.of(context).colorScheme.secondary,
                       onTap: () => onSelect(i),
                       onClose: () => onClose(i),
                     ),
@@ -559,10 +560,14 @@ class _AppTabBar extends StatelessWidget {
             message: l10n.t('newTab'),
             child: InkWell(
               onTap: onAdd,
-              child: const SizedBox(
+              child: SizedBox(
                 width: 36,
                 height: 36,
-                child: Icon(Icons.add, size: 16, color: Colors.white54),
+                child: Icon(
+                  Icons.add,
+                  size: 16,
+                  color: palette.panelText.withValues(alpha: 0.55),
+                ),
               ),
             ),
           ),
@@ -578,6 +583,8 @@ class _TabChip extends StatelessWidget {
   final bool showClose;
   final VoidCallback onTap;
   final VoidCallback onClose;
+  final Color panelText;
+  final Color accent;
 
   const _TabChip({
     required this.tab,
@@ -585,6 +592,8 @@ class _TabChip extends StatelessWidget {
     required this.showClose,
     required this.onTap,
     required this.onClose,
+    required this.panelText,
+    required this.accent,
   });
 
   @override
@@ -595,10 +604,12 @@ class _TabChip extends StatelessWidget {
         constraints: const BoxConstraints(minWidth: 80, maxWidth: 200),
         height: 36,
         decoration: BoxDecoration(
-          color: isActive ? const Color(0xFF334155) : Colors.transparent,
+          color: isActive
+              ? panelText.withValues(alpha: 0.12)
+              : Colors.transparent,
           border: Border(
             bottom: BorderSide(
-              color: isActive ? const Color(0xFF60A5FA) : Colors.transparent,
+              color: isActive ? accent : Colors.transparent,
               width: 2,
             ),
           ),
@@ -622,7 +633,9 @@ class _TabChip extends StatelessWidget {
                 tab.label,
                 style: TextStyle(
                   fontSize: 12,
-                  color: isActive ? Colors.white : Colors.white70,
+                  color: isActive
+                      ? panelText
+                      : panelText.withValues(alpha: 0.72),
                   fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
                 ),
                 overflow: TextOverflow.ellipsis,
@@ -633,9 +646,13 @@ class _TabChip extends StatelessWidget {
               InkWell(
                 onTap: onClose,
                 borderRadius: BorderRadius.circular(3),
-                child: const Padding(
-                  padding: EdgeInsets.all(2),
-                  child: Icon(Icons.close, size: 12, color: Colors.white54),
+                child: Padding(
+                  padding: const EdgeInsets.all(2),
+                  child: Icon(
+                    Icons.close,
+                    size: 12,
+                    color: panelText.withValues(alpha: 0.55),
+                  ),
                 ),
               ),
             ],
@@ -667,13 +684,15 @@ class _WelcomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final theme = Theme.of(context);
+    final palette = theme.extension<AppPalette>()!;
     final homeDir = ref.watch(settingsProvider.select((s) => s.homeDirectory));
     final recentFiles = ref.watch(
       settingsProvider.select((s) => s.recentFiles),
     );
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: Row(
         children: [
           // ── Midden: logo + knoppen ─────────────────────────────────────
@@ -711,6 +730,12 @@ class _WelcomeScreen extends ConsumerWidget {
                       label: Text(l10n.t('open')),
                     ),
                   ),
+                  const SizedBox(height: 8),
+                  TextButton.icon(
+                    onPressed: () => SettingsDialog.show(context),
+                    icon: const Icon(Icons.settings_outlined, size: 17),
+                    label: Text(l10n.t('settings')),
+                  ),
                 ],
               ),
             ),
@@ -719,9 +744,11 @@ class _WelcomeScreen extends ConsumerWidget {
           if (recentFiles.isNotEmpty)
             Container(
               width: 280,
-              decoration: const BoxDecoration(
-                color: Color(0xFFF8FAFC),
-                border: Border(left: BorderSide(color: Color(0xFFE2E8F0))),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surface,
+                border: Border(
+                  left: BorderSide(color: theme.colorScheme.outlineVariant),
+                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -730,10 +757,10 @@ class _WelcomeScreen extends ConsumerWidget {
                     padding: const EdgeInsets.fromLTRB(16, 20, 16, 10),
                     child: Text(
                       l10n.t('recentPresentations'),
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
-                        color: Color(0xFF94A3B8),
+                        color: palette.mutedText,
                         letterSpacing: 0.8,
                       ),
                     ),
@@ -756,10 +783,10 @@ class _WelcomeScreen extends ConsumerWidget {
                             ),
                             child: Row(
                               children: [
-                                const Icon(
+                                Icon(
                                   Icons.slideshow_outlined,
                                   size: 16,
-                                  color: Color(0xFF64748B),
+                                  color: theme.colorScheme.onSurfaceVariant,
                                 ),
                                 const SizedBox(width: 10),
                                 Expanded(
@@ -769,18 +796,18 @@ class _WelcomeScreen extends ConsumerWidget {
                                     children: [
                                       Text(
                                         name,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w500,
-                                          color: Color(0xFF1E293B),
+                                          color: theme.colorScheme.onSurface,
                                         ),
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       Text(
                                         path,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 10,
-                                          color: Color(0xFF94A3B8),
+                                          color: palette.mutedText,
                                         ),
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -1414,13 +1441,16 @@ class _DeckStatusBar extends StatelessWidget {
         ? l10n.t('exportNextToDeck')
         : '${l10n.t('exportFolder')}: ${p.basename(exportDirectory!)}';
 
+    final theme = Theme.of(context);
     return Material(
-      color: const Color(0xFFF8FAFC),
+      color: theme.colorScheme.surface,
       child: Container(
         height: 30,
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        decoration: const BoxDecoration(
-          border: Border(top: BorderSide(color: Color(0xFFE2E8F0))),
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(color: theme.colorScheme.outlineVariant),
+          ),
         ),
         child: Row(
           children: [
@@ -1504,7 +1534,7 @@ class _StatusItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fg = color ?? const Color(0xFF64748B);
+    final fg = color ?? Theme.of(context).colorScheme.onSurfaceVariant;
     return Tooltip(
       message: tooltip,
       child: Row(
@@ -1548,7 +1578,9 @@ class _StatusAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final enabled = onTap != null;
-    final fg = enabled ? (color ?? AppTheme.accent) : const Color(0xFF94A3B8);
+    final fg = enabled
+        ? (color ?? Theme.of(context).colorScheme.secondary)
+        : Theme.of(context).disabledColor;
     return Tooltip(
       message: tooltip,
       child: InkWell(
@@ -1586,7 +1618,7 @@ class _StatusDivider extends StatelessWidget {
       width: 1,
       height: 14,
       margin: const EdgeInsets.symmetric(horizontal: 8),
-      color: const Color(0xFFE2E8F0),
+      color: Theme.of(context).colorScheme.outlineVariant,
     );
   }
 }
@@ -1643,7 +1675,9 @@ class _ResizableDividerState extends State<_ResizableDivider> {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 90),
                 width: active ? 3 : 1,
-                color: active ? AppTheme.accent : const Color(0xFFE2E8F0),
+                color: active
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.outlineVariant,
               ),
             ),
           ),

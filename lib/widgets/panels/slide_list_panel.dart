@@ -533,13 +533,15 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         behavior: HitTestBehavior.translucent,
         onTap: _focusNode.requestFocus,
         child: Container(
-          color: AppTheme.panelBg,
+          color: Theme.of(context).extension<AppPalette>()!.panel,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               // ── Header ──────────────────────────────────────────────────────
               Container(
-                color: const Color(0xFF252830),
+                color: Theme.of(
+                  context,
+                ).extension<AppPalette>()!.panelText.withValues(alpha: 0.05),
                 padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,

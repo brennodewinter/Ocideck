@@ -14,10 +14,13 @@ class OciDeckApp extends ConsumerWidget {
     final languageCode = ref.watch(
       settingsProvider.select((s) => s.languageCode),
     );
+    final appearance = ref.watch(
+      settingsProvider.select((s) => s.appAppearanceProfile),
+    );
     AppLocalizations.setActiveLanguageCode(languageCode);
     return MaterialApp(
       title: 'OciDeck',
-      theme: AppTheme.light,
+      theme: AppTheme.fromProfile(appearance),
       debugShowCheckedModeBanner: false,
       locale: AppLocalizations.materialLocaleFor(languageCode),
       supportedLocales: AppLocalizations.supportedLocales,

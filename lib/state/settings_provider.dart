@@ -28,6 +28,19 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
               )
               .toList();
     final profiles = _uniqueProfiles(loadedProfiles);
+    final appearanceJson = prefs.getString('appAppearanceProfiles');
+    final loadedAppearances = appearanceJson == null
+        ? const <AppAppearanceProfile>[]
+        : (jsonDecode(appearanceJson) as List)
+              .map(
+                (item) => AppAppearanceProfile.fromJson(
+                  Map<String, Object?>.from(item as Map),
+                ),
+              )
+              .toList();
+    final appearances = _mergeAppearanceProfiles(loadedAppearances);
+    final selectedAppearance =
+        prefs.getString('selectedAppAppearanceProfileName') ?? 'Basic';
     state = AppSettings(
       languageCode: prefs.getString('languageCode') ?? 'nl',
       homeDirectory: prefs.getString('homeDirectory'),
@@ -35,6 +48,11 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       themeProfiles: profiles.isEmpty ? const [ThemeProfile()] : profiles,
       selectedThemeProfileName:
           prefs.getString('selectedThemeProfileName') ?? profiles.first.name,
+      appAppearanceProfiles: appearances,
+      selectedAppAppearanceProfileName:
+          appearances.any((profile) => profile.name == selectedAppearance)
+          ? selectedAppearance
+          : 'Basic',
       recentFiles: prefs.getStringList('recentFiles') ?? [],
     );
   }
@@ -134,6 +152,82 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await _saveProfiles();
   }
 
+  Future<void> selectAppAppearanceProfile(String name) async {
+    if (!state.appAppearanceProfiles.any((profile) => profile.name == name)) {
+      return;
+    }
+    state = state.copyWith(selectedAppAppearanceProfileName: name);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedAppAppearanceProfileName', name);
+  }
+
+  Future<AppAppearanceProfile> createAppAppearanceProfile({
+    AppAppearanceProfile? base,
+  }) async {
+    final source = base ?? state.appAppearanceProfile;
+    final created = source.copyWith(
+      name: _uniqueAppearanceName('Eigen thema'),
+      isBuiltIn: false,
+    );
+    state = state.copyWith(
+      appAppearanceProfiles: [...state.appAppearanceProfiles, created],
+      selectedAppAppearanceProfileName: created.name,
+    );
+    await _saveAppearanceProfiles();
+    return created;
+  }
+
+  Future<void> saveAppAppearanceProfile(
+    AppAppearanceProfile profile, {
+    required String previousName,
+  }) async {
+    final existing = state.appAppearanceProfiles.firstWhere(
+      (item) => item.name == previousName,
+      orElse: () => profile,
+    );
+    if (existing.isBuiltIn) return;
+    final name = _uniqueAppearanceName(profile.name, exceptName: previousName);
+    final saved = profile.copyWith(name: name, isBuiltIn: false);
+    final profiles = [
+      for (final item in state.appAppearanceProfiles)
+        if (item.name == previousName) saved else item,
+    ];
+    state = state.copyWith(
+      appAppearanceProfiles: profiles,
+      selectedAppAppearanceProfileName: name,
+    );
+    await _saveAppearanceProfiles();
+  }
+
+  Future<void> deleteAppAppearanceProfile(String name) async {
+    final profile = state.appAppearanceProfiles.firstWhere(
+      (item) => item.name == name,
+      orElse: () => AppAppearanceProfile.basic,
+    );
+    if (profile.isBuiltIn) return;
+    final profiles = state.appAppearanceProfiles
+        .where((item) => item.name != name)
+        .toList();
+    state = state.copyWith(
+      appAppearanceProfiles: profiles,
+      selectedAppAppearanceProfileName: 'Basic',
+    );
+    await _saveAppearanceProfiles();
+  }
+
+  Future<void> _saveAppearanceProfiles() async {
+    final prefs = await SharedPreferences.getInstance();
+    final customProfiles = state.appAppearanceProfiles
+        .where((profile) => !profile.isBuiltIn)
+        .map((profile) => profile.toJson())
+        .toList();
+    await prefs.setString('appAppearanceProfiles', jsonEncode(customProfiles));
+    await prefs.setString(
+      'selectedAppAppearanceProfileName',
+      state.selectedAppAppearanceProfileName,
+    );
+  }
+
   Future<void> _saveProfiles() async {
     state = state.copyWith(themeProfiles: _uniqueProfiles(state.themeProfiles));
     final prefs = await SharedPreferences.getInstance();
@@ -170,6 +264,40 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     final base = rawName.trim().isEmpty ? 'Stijlprofiel' : rawName.trim();
     final used = existingProfiles
         .map((p) => p.name)
+        .where((name) => name != exceptName)
+        .toSet();
+    if (!used.contains(base)) return base;
+    var index = 2;
+    while (used.contains('$base $index')) {
+      index++;
+    }
+    return '$base $index';
+  }
+
+  List<AppAppearanceProfile> _mergeAppearanceProfiles(
+    List<AppAppearanceProfile> loaded,
+  ) {
+    final result = [...AppAppearanceProfile.builtIns];
+    for (final profile in loaded.where((profile) => !profile.isBuiltIn)) {
+      result.add(
+        profile.copyWith(
+          name: _uniqueAppearanceName(profile.name, profiles: result),
+          isBuiltIn: false,
+        ),
+      );
+    }
+    return result;
+  }
+
+  String _uniqueAppearanceName(
+    String rawName, {
+    List<AppAppearanceProfile>? profiles,
+    String? exceptName,
+  }) {
+    final existingProfiles = profiles ?? state.appAppearanceProfiles;
+    final base = rawName.trim().isEmpty ? 'Eigen thema' : rawName.trim();
+    final used = existingProfiles
+        .map((profile) => profile.name)
         .where((name) => name != exceptName)
         .toSet();
     if (!used.contains(base)) return base;

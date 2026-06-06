@@ -14,6 +14,7 @@ enum SlideType {
   quote,
   table,
   freeMarkdown,
+  code,
 }
 
 extension SlideTypeExtension on SlideType {
@@ -41,6 +42,8 @@ extension SlideTypeExtension on SlideType {
         return 'Tabel';
       case SlideType.freeMarkdown:
         return 'Vrije Markdown';
+      case SlideType.code:
+        return 'Broncode';
     }
   }
 
@@ -68,6 +71,8 @@ extension SlideTypeExtension on SlideType {
         return 'table';
       case SlideType.freeMarkdown:
         return '';
+      case SlideType.code:
+        return 'code';
     }
   }
 }
@@ -90,6 +95,7 @@ class Slide {
   final String quote;
   final String quoteAuthor;
   final String customMarkdown;
+  final String codeLanguage; // highlight.js language id for code slides ('' = plain)
   final String cssClass;
   final String notes;
   final double advanceDuration; // 0 = no auto-advance
@@ -117,6 +123,7 @@ class Slide {
     this.quote = '',
     this.quoteAuthor = '',
     this.customMarkdown = '',
+    this.codeLanguage = '',
     this.cssClass = '',
     this.notes = '',
     this.advanceDuration = 0,
@@ -168,6 +175,7 @@ class Slide {
       quote: src.quote,
       quoteAuthor: src.quoteAuthor,
       customMarkdown: src.customMarkdown,
+      codeLanguage: src.codeLanguage,
       cssClass: src.cssClass,
       notes: src.notes,
       advanceDuration: src.advanceDuration,
@@ -196,6 +204,7 @@ class Slide {
     String? quote,
     String? quoteAuthor,
     String? customMarkdown,
+    String? codeLanguage,
     String? cssClass,
     String? notes,
     double? advanceDuration,
@@ -223,6 +232,7 @@ class Slide {
       quote: quote ?? this.quote,
       quoteAuthor: quoteAuthor ?? this.quoteAuthor,
       customMarkdown: customMarkdown ?? this.customMarkdown,
+      codeLanguage: codeLanguage ?? this.codeLanguage,
       cssClass: cssClass ?? this.cssClass,
       notes: notes ?? this.notes,
       advanceDuration: advanceDuration ?? this.advanceDuration,

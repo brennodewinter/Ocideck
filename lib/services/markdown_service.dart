@@ -317,6 +317,19 @@ class MarkdownService {
             !slide.customMarkdown.endsWith('\n')) {
           buf.writeln();
         }
+
+      case SlideType.code:
+        if (slide.title.isNotEmpty) {
+          buf.writeln('# ${slide.title}');
+          buf.writeln();
+        }
+        buf.writeln('```${slide.codeLanguage.trim()}');
+        buf.write(slide.customMarkdown);
+        if (slide.customMarkdown.isNotEmpty &&
+            !slide.customMarkdown.endsWith('\n')) {
+          buf.writeln();
+        }
+        buf.writeln('```');
     }
 
     if (slide.audioPath.isNotEmpty) {
@@ -614,6 +627,18 @@ class MarkdownService {
     ).trim();
     final notes = notesBuffer.toString().trim();
 
+    // Code slides carry a fenced block that the generic line parser below would
+    // mangle (the body lines aren't markdown). Handle them up front.
+    if (cssClass.split(RegExp(r'\s+')).contains('code')) {
+      return _parseCodeBlock(
+        remaining: remaining,
+        cssClass: cssClass,
+        notes: notes,
+        advanceDuration: advanceDuration,
+        skipped: skipped,
+      );
+    }
+
     final lines = remaining.split('\n');
     String h1 = '';
     String h2 = '';
@@ -796,6 +821,77 @@ class MarkdownService {
       showFooter: showFooter,
       skipped: skipped,
       tableRows: type == SlideType.table ? tableRows : const [],
+    );
+  }
+
+  /// Parse a `<!-- _class: code -->` slide: an optional `# title`, the fenced
+  /// code block (its info string is the language) and an optional `<audio>`.
+  Slide _parseCodeBlock({
+    required String remaining,
+    required String cssClass,
+    required String notes,
+    required double advanceDuration,
+    required bool skipped,
+  }) {
+    final lines = remaining.split('\n');
+    String title = '';
+    String language = '';
+    String audioPath = '';
+    bool audioAutoplay = false;
+    final code = <String>[];
+    bool inFence = false;
+
+    for (final line in lines) {
+      final fence = RegExp(r'^\s*```(.*)$').firstMatch(line);
+      if (fence != null) {
+        if (!inFence) {
+          inFence = true;
+          language = fence.group(1)!.trim();
+        } else {
+          inFence = false;
+        }
+        continue;
+      }
+      if (inFence) {
+        code.add(line);
+        continue;
+      }
+      final t = line.trim();
+      if (t.startsWith('# ') && title.isEmpty) {
+        title = t.substring(2);
+      } else if (t.startsWith('<audio')) {
+        final m = RegExp(r'src="([^"]+)"').firstMatch(t);
+        if (m != null) audioPath = m.group(1) ?? '';
+        audioAutoplay = t.contains('autoplay');
+      }
+    }
+
+    final classTokens = cssClass.split(RegExp(r'\s+'));
+    final effectiveClass = classTokens
+        .where(
+          (c) =>
+              c.isNotEmpty &&
+              c != 'code' &&
+              c != 'logo-safe' &&
+              c != 'no-logo' &&
+              c != 'no-footer',
+        )
+        .join(' ');
+
+    return Slide(
+      id: _uuid.v4(),
+      type: SlideType.code,
+      title: title,
+      customMarkdown: code.join('\n'),
+      codeLanguage: language,
+      audioPath: audioPath,
+      audioAutoplay: audioAutoplay,
+      cssClass: effectiveClass,
+      notes: notes,
+      advanceDuration: advanceDuration,
+      showLogo: !classTokens.contains('no-logo'),
+      showFooter: !classTokens.contains('no-footer'),
+      skipped: skipped,
     );
   }
 }

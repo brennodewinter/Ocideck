@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/github.dart';
+import 'package:flutter_highlight/themes/atom-one-dark.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:highlight/highlight.dart' show highlight;
 import 'package:highlight/languages/all.dart' show allLanguages;
@@ -316,6 +317,13 @@ class SlidePreviewWidget extends StatelessWidget {
         );
       case SlideType.freeMarkdown:
         return _MarkdownPreview(
+          slide: slide,
+          w: w,
+          font: fontFamily,
+          profile: themeProfile,
+        );
+      case SlideType.code:
+        return _CodePreview(
           slide: slide,
           w: w,
           font: fontFamily,
@@ -2045,6 +2053,106 @@ class _MarkdownPreview extends StatelessWidget {
   }
 }
 
+/// Een 'broncode-sheet': de code op een donker editor-vlak, met
+/// syntaxkleuring wanneer een taal bekend is. De tekst blijft platte tekst maar
+/// wordt monospace en gekleurd weergegeven. Past zich met een FittedBox aan de
+/// slide aan zodat lange fragmenten netjes verkleinen i.p.v. af te kappen.
+class _CodePreview extends StatelessWidget {
+  final Slide slide;
+  final double w;
+  final String font;
+  final ThemeProfile profile;
+
+  const _CodePreview({
+    required this.slide,
+    required this.w,
+    required this.font,
+    required this.profile,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    _ensureHighlightLanguages();
+    final pad = w * 0.05;
+    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
+    final code = slide.customMarkdown;
+    final lang = slide.codeLanguage.trim();
+    final known = lang.isNotEmpty && allLanguages.containsKey(lang);
+
+    final mono = TextStyle(
+      fontFamily: 'monospace',
+      fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
+      fontSize: w * 0.024,
+      height: 1.4,
+      color: const Color(0xFFABB2BF), // atom-one-dark voorgrond
+    );
+
+    // HighlightView gooit een fout bij een onbekende taal; daarom vallen we
+    // dan terug op platte (maar wel monospace) tekst.
+    final Widget codeContent = known
+        ? HighlightView(
+            code,
+            language: lang,
+            theme: atomOneDarkTheme,
+            padding: EdgeInsets.zero,
+            textStyle: mono,
+          )
+        : Text(code, style: mono);
+
+    return Container(
+      color: _hexColor(profile.slideBackgroundColor),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+          pad,
+          pad + safe.top,
+          pad,
+          pad + safe.bottom,
+        ),
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: const Color(0xFF282C34), // atom-one-dark achtergrond
+            borderRadius: BorderRadius.circular(w * 0.012),
+            border: Border.all(color: const Color(0xFF3A3F4B)),
+          ),
+          padding: EdgeInsets.all(w * 0.03),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (slide.title.isNotEmpty) ...[
+                _md(
+                  context,
+                  slide.title,
+                  _applyFont(
+                    font,
+                    TextStyle(
+                      fontSize: w * 0.03,
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFFE5E7EB),
+                    ),
+                  ),
+                  linkColor: _hexColor(profile.accentColor),
+                ),
+                SizedBox(height: w * 0.02),
+              ],
+              Expanded(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.topLeft,
+                  // Een onbegrensde breedte laat code-regels op hun natuurlijke
+                  // lengte staan (geen woordafbreking), waarna de FittedBox het
+                  // geheel verkleint tot het past.
+                  child: codeContent,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 /// Register highlight.js language definitions once, so [HighlightView] can
 /// colour any common language without throwing.
 bool _highlightReady = false;
@@ -2131,6 +2239,10 @@ Widget _resolvedImage(
     fit: fit,
     width: double.infinity,
     height: double.infinity,
+    // Keep showing the previous frame while the next image decodes. Without
+    // this the widget paints nothing for a frame on a source change, which
+    // shows up as a black flash between slides — fatal when recording video.
+    gaplessPlayback: true,
     errorBuilder: (context, error, stackTrace) => _imagePlaceholder(context),
   );
 }
@@ -2174,7 +2286,13 @@ Widget _captionOverlay(
   );
 }
 
-String? _resolvePath(String path, String? projectPath) {
+String? _resolvePath(String path, String? projectPath) =>
+    resolveSlideAssetPath(path, projectPath);
+
+/// Resolves an image/media path the way the slide renderer does, so callers
+/// (e.g. the presenter, to precache) can point at the exact file that will be
+/// displayed. Returns null for an empty path.
+String? resolveSlideAssetPath(String path, String? projectPath) {
   if (path.isEmpty) return null;
   if (path.startsWith('/') || path.contains(':\\')) return path;
   if (projectPath != null) return '$projectPath/$path';
@@ -2257,6 +2375,8 @@ double _contentLeftInset(Slide slide, double w) {
     case SlideType.bullets:
     case SlideType.freeMarkdown:
       return w * 0.07;
+    case SlideType.code:
+      return w * 0.05;
     case SlideType.twoBullets:
       return w * 0.065;
     case SlideType.table:

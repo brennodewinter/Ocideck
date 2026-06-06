@@ -11,6 +11,7 @@ import '../../l10n/app_localizations.dart';
 import '../editors/bullets_editor.dart';
 import '../editors/bullets_image_editor.dart';
 import '../editors/audio_attachment_editor.dart';
+import '../editors/code_editor.dart';
 import '../editors/free_markdown_editor.dart';
 import '../editors/image_slide_editor.dart';
 import '../editors/quote_editor.dart';
@@ -166,6 +167,7 @@ class EditorPanel extends ConsumerWidget {
       quote: slide.quote,
       quoteAuthor: slide.quoteAuthor,
       customMarkdown: slide.customMarkdown,
+      codeLanguage: slide.codeLanguage,
       cssClass: slide.cssClass,
       notes: slide.notes,
       advanceDuration: slide.advanceDuration,
@@ -271,6 +273,12 @@ class EditorPanel extends ConsumerWidget {
           slide: slide,
           onUpdate: onUpdate,
         );
+      case SlideType.code:
+        return CodeEditor(
+          key: ValueKey(slide.id),
+          slide: slide,
+          onUpdate: onUpdate,
+        );
     }
   }
 }
@@ -301,6 +309,8 @@ IconData _slideTypeIcon(SlideType type) {
       return Icons.table_chart_outlined;
     case SlideType.freeMarkdown:
       return Icons.code;
+    case SlideType.code:
+      return Icons.terminal;
   }
 }
 

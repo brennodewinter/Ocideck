@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -100,5 +101,39 @@ void main() {
     final only = notifier.state.themeProfiles.single.name;
     await notifier.deleteThemeProfile(only);
     expect(notifier.state.themeProfiles, hasLength(1));
+  });
+
+  test('starts with Basic, Europa and Donker app themes', () async {
+    final notifier = await _loadedNotifier();
+    expect(
+      notifier.state.appAppearanceProfiles.map((profile) => profile.name),
+      containsAll(['Basic', 'Europa', 'Donker']),
+    );
+    expect(notifier.state.selectedAppAppearanceProfileName, 'Basic');
+  });
+
+  test('creates, edits and selects a custom app theme', () async {
+    final notifier = await _loadedNotifier();
+    final created = await notifier.createAppAppearanceProfile(
+      base: AppAppearanceProfile.europa,
+    );
+
+    await notifier.saveAppAppearanceProfile(
+      created.copyWith(name: 'Mijn Europa', accentColor: '#FFE000'),
+      previousName: created.name,
+    );
+
+    expect(notifier.state.selectedAppAppearanceProfileName, 'Mijn Europa');
+    expect(notifier.state.appAppearanceProfile.accentColor, '#FFE000');
+    expect(notifier.state.appAppearanceProfile.isBuiltIn, isFalse);
+  });
+
+  test('built-in app themes cannot be deleted', () async {
+    final notifier = await _loadedNotifier();
+    await notifier.deleteAppAppearanceProfile('Europa');
+    expect(
+      notifier.state.appAppearanceProfiles.map((profile) => profile.name),
+      contains('Europa'),
+    );
   });
 }

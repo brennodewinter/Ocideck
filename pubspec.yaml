@@ -42,6 +42,9 @@ dev_dependencies:
 dependency_overrides:
   screen_retriever_macos:
     path: third_party/screen_retriever_macos
+  # 2.9.5+ publishes a Swift module whose private Objective-C dependency is
+  # not packaged correctly by CocoaPods on Xcode 26.
+  video_player_avfoundation: 2.9.4
 
 flutter:
   config:
