@@ -42,8 +42,8 @@ class FullscreenPresenter extends StatefulWidget {
   });
 
   /// Entry point used by the app: pick dual-screen mode when a second display is
-  /// available (macOS), otherwise the single-window presenter. Any failure to
-  /// open the second window falls back to single-window mode.
+  /// available on desktop, otherwise the single-window presenter. Any failure
+  /// to open the second window falls back to single-window mode.
   static Future<void> present(
     BuildContext context, {
     required List<Slide> slides,
@@ -52,15 +52,21 @@ class FullscreenPresenter extends StatefulWidget {
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
   }) async {
-    var dual = false;
-    if (Platform.isMacOS) {
+    var displayCount = 0;
+    if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
       try {
         final displays = await screenRetriever.getAllDisplays();
-        dual = displays.length >= 2;
+        displayCount = displays.length;
       } catch (_) {
-        dual = false;
+        displayCount = 0;
       }
     }
+    final dual = shouldUseDualScreen(
+      isMacOS: Platform.isMacOS,
+      isWindows: Platform.isWindows,
+      isLinux: Platform.isLinux,
+      displayCount: displayCount,
+    );
     if (!context.mounted) return;
     if (dual) {
       await showDualScreen(
@@ -202,6 +208,16 @@ class FullscreenPresenter extends StatefulWidget {
 
   @override
   State<FullscreenPresenter> createState() => _FullscreenPresenterState();
+}
+
+@visibleForTesting
+bool shouldUseDualScreen({
+  required bool isMacOS,
+  required bool isWindows,
+  required bool isLinux,
+  required int displayCount,
+}) {
+  return (isMacOS || isWindows || isLinux) && displayCount >= 2;
 }
 
 Future<bool> _wakeLockEnabled() async {

@@ -8,6 +8,42 @@
 #include <memory>
 #include <string>
 
+namespace {
+
+struct MonitorSearch {
+  HMONITOR current = nullptr;
+  HMONITOR external = nullptr;
+  HMONITOR fallback = nullptr;
+};
+
+inline BOOL CALLBACK FindPresentationMonitor(HMONITOR monitor,
+                                             HDC,
+                                             LPRECT,
+                                             LPARAM data) {
+  auto* search = reinterpret_cast<MonitorSearch*>(data);
+  if (!search->fallback) {
+    search->fallback = monitor;
+  }
+  if (monitor != search->current && !search->external) {
+    search->external = monitor;
+  }
+  return TRUE;
+}
+
+inline bool ReadExternalArgument(const flutter::EncodableMap* arguments) {
+  if (!arguments) {
+    return true;
+  }
+  const auto it = arguments->find(flutter::EncodableValue("external"));
+  if (it == arguments->end()) {
+    return true;
+  }
+  const auto* external = std::get_if<bool>(&it->second);
+  return external ? *external : true;
+}
+
+}  // namespace
+
 class FlutterWindowWrapper {
  public:
   FlutterWindowWrapper(const std::string& window_id,
@@ -50,6 +86,45 @@ class FlutterWindowWrapper {
       if (hwnd_) {
         ::ShowWindow(hwnd_, SW_HIDE);
       }
+      result->Success();
+    } else if (method == "window_close") {
+      result->Success();
+      if (hwnd_) {
+        ::PostMessage(hwnd_, WM_CLOSE, 0, 0);
+      }
+    } else if (method == "window_coverScreen") {
+      if (!hwnd_) {
+        result->Error("-1", "window is not available");
+        return;
+      }
+
+      MonitorSearch search;
+      search.current = ::MonitorFromWindow(hwnd_, MONITOR_DEFAULTTONEAREST);
+      ::EnumDisplayMonitors(
+          nullptr, nullptr, FindPresentationMonitor,
+          reinterpret_cast<LPARAM>(&search));
+
+      HMONITOR target = search.current;
+      if (ReadExternalArgument(arguments) && search.external) {
+        target = search.external;
+      } else if (!target) {
+        target = search.fallback;
+      }
+
+      MONITORINFO monitor_info{sizeof(MONITORINFO)};
+      if (!target || !::GetMonitorInfo(target, &monitor_info)) {
+        result->Error("-1", "unable to find a display");
+        return;
+      }
+
+      const RECT bounds = monitor_info.rcMonitor;
+      ::SetWindowLongPtr(hwnd_, GWL_STYLE, WS_POPUP | WS_VISIBLE);
+      ::SetWindowLongPtr(hwnd_, GWL_EXSTYLE,
+                         ::GetWindowLongPtr(hwnd_, GWL_EXSTYLE) &
+                             ~WS_EX_WINDOWEDGE);
+      ::SetWindowPos(hwnd_, HWND_TOP, bounds.left, bounds.top,
+                     bounds.right - bounds.left, bounds.bottom - bounds.top,
+                     SWP_FRAMECHANGED | SWP_SHOWWINDOW);
       result->Success();
     } else {
       result->Error("-1", "unknown method: " + method);
