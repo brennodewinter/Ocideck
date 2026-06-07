@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/image_service.dart';
@@ -11,6 +12,8 @@ import '../../l10n/app_localizations.dart';
 import '../editors/bullets_editor.dart';
 import '../editors/bullets_image_editor.dart';
 import '../editors/audio_attachment_editor.dart';
+import '../editors/chart_editor.dart';
+import '../editors/code_editor.dart';
 import '../editors/free_markdown_editor.dart';
 import '../editors/image_slide_editor.dart';
 import '../editors/quote_editor.dart';
@@ -125,6 +128,8 @@ class EditorPanel extends ConsumerWidget {
                 const Divider(height: 1),
                 _SlideTimingControl(slide: slide, onUpdate: update),
                 const Divider(height: 1),
+                _SlideTlpControl(slide: slide, onUpdate: update),
+                const Divider(height: 1),
                 _NotesField(slide: slide, onUpdate: update),
               ],
             ),
@@ -166,12 +171,14 @@ class EditorPanel extends ConsumerWidget {
       quote: slide.quote,
       quoteAuthor: slide.quoteAuthor,
       customMarkdown: slide.customMarkdown,
+      codeLanguage: slide.codeLanguage,
       cssClass: slide.cssClass,
       notes: slide.notes,
       advanceDuration: slide.advanceDuration,
       imageSize: slide.imageSize,
       showLogo: slide.showLogo,
       showFooter: slide.showFooter,
+      tlp: slide.tlp,
       tableRows: newType == SlideType.table
           ? (slide.tableRows.isNotEmpty
                 ? slide.tableRows
@@ -271,6 +278,19 @@ class EditorPanel extends ConsumerWidget {
           slide: slide,
           onUpdate: onUpdate,
         );
+      case SlideType.code:
+        return CodeEditor(
+          key: ValueKey(slide.id),
+          slide: slide,
+          onUpdate: onUpdate,
+        );
+      case SlideType.chart:
+        return ChartEditor(
+          key: ValueKey(slide.id),
+          slide: slide,
+          onUpdate: onUpdate,
+          projectPath: captionBasePath,
+        );
     }
   }
 }
@@ -301,6 +321,10 @@ IconData _slideTypeIcon(SlideType type) {
       return Icons.table_chart_outlined;
     case SlideType.freeMarkdown:
       return Icons.code;
+    case SlideType.code:
+      return Icons.terminal;
+    case SlideType.chart:
+      return Icons.bar_chart;
   }
 }
 
@@ -643,6 +667,55 @@ class _SlideFooterControl extends StatelessWidget {
           Text(
             l10n.d('Footer tonen op deze slide'),
             style: const TextStyle(fontSize: 12, color: Color(0xFF475569)),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Per-slide TLP-classificatie ───────────────────────────────────────────────
+
+class _SlideTlpControl extends StatelessWidget {
+  final Slide slide;
+  final ValueChanged<Slide> onUpdate;
+  const _SlideTlpControl({required this.slide, required this.onUpdate});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Container(
+      color: const Color(0xFFF8FAFC),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+      child: Row(
+        children: [
+          const Icon(Icons.shield_outlined, size: 14, color: Color(0xFF64748B)),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              l10n.d('TLP van deze slide'),
+              style: const TextStyle(fontSize: 12, color: Color(0xFF475569)),
+            ),
+          ),
+          DropdownButtonHideUnderline(
+            child: DropdownButton<TlpLevel>(
+              value: slide.tlp,
+              isDense: true,
+              borderRadius: BorderRadius.circular(6),
+              style: const TextStyle(fontSize: 12, color: Color(0xFF0F172A)),
+              items: [
+                for (final level in TlpLevel.values)
+                  DropdownMenuItem(
+                    value: level,
+                    child: Text(
+                      level == TlpLevel.none ? l10n.d('Geen') : level.menuLabel,
+                    ),
+                  ),
+              ],
+              onChanged: (v) {
+                if (v != null) onUpdate(slide.copyWith(tlp: v));
+              },
+            ),
           ),
         ],
       ),

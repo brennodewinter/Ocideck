@@ -1,11 +1,15 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/github.dart';
+import 'package:flutter_highlight/themes/atom-one-dark.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:highlight/highlight.dart' show highlight;
 import 'package:highlight/languages/all.dart' show allLanguages;
 import 'package:video_player/video_player.dart';
+import '../../l10n/app_localizations.dart';
+import '../../models/chart.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
@@ -154,6 +158,10 @@ class SlidePreviewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hasBottomRightTlp =
+        tlp != TlpLevel.none &&
+        !((themeProfile.logoPath?.isNotEmpty == true && slide.showLogo) &&
+            themeProfile.logoPosition == 'bottom-right');
     // Make the widget self-sufficient for text rendering. On screen it sits
     // inside a Material (which supplies a clean DefaultTextStyle), but the
     // export rasterizer mounts it in a bare Overlay subtree. Without an
@@ -172,7 +180,7 @@ class SlidePreviewWidget extends StatelessWidget {
         ),
         child: _SlideLinkScope(
           onTapLink: onLinkTap,
-          hasBottomTlp: tlp != TlpLevel.none,
+          hasBottomTlp: hasBottomRightTlp,
           child: _buildSlide(),
         ),
       ),
@@ -199,7 +207,14 @@ class SlidePreviewWidget extends StatelessWidget {
                   tlp: tlp,
                 ),
                 if (tlp != TlpLevel.none)
-                  _TlpOverlay(tlp: tlp, w: w, profile: themeProfile),
+                  _TlpOverlay(
+                    tlp: tlp,
+                    w: w,
+                    profile: themeProfile,
+                    hasLogo:
+                        themeProfile.logoPath?.isNotEmpty == true &&
+                        slide.showLogo,
+                  ),
                 if (themeProfile.logoPath?.isNotEmpty == true && slide.showLogo)
                   _LogoOverlay(
                     logoPath: themeProfile.logoPath!,
@@ -304,6 +319,20 @@ class SlidePreviewWidget extends StatelessWidget {
         );
       case SlideType.freeMarkdown:
         return _MarkdownPreview(
+          slide: slide,
+          w: w,
+          font: fontFamily,
+          profile: themeProfile,
+        );
+      case SlideType.code:
+        return _CodePreview(
+          slide: slide,
+          w: w,
+          font: fontFamily,
+          profile: themeProfile,
+        );
+      case SlideType.chart:
+        return _ChartPreview(
           slide: slide,
           w: w,
           font: fontFamily,
@@ -502,6 +531,7 @@ class _TitlePreview extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         _zoomedImage(
+          context,
           slide.imagePath,
           projectPath,
           slide.imageSize,
@@ -1065,13 +1095,8 @@ class _BulletsImagePreview extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                _resolvedImage(slide.imagePath, projectPath),
-                _captionOverlay(
-                  context,
-                  slide.imageCaption,
-                  w,
-                  right: w * 0.018,
-                ),
+                _resolvedImage(context, slide.imagePath, projectPath),
+                _captionOverlay(context, slide.imageCaption, w),
               ],
             ),
           ),
@@ -1449,7 +1474,7 @@ class _TwoImagesPreview extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    _resolvedImage(slide.imagePath, projectPath),
+                    _resolvedImage(context, slide.imagePath, projectPath),
                     _captionOverlay(context, slide.imageCaption, w),
                   ],
                 ),
@@ -1459,7 +1484,7 @@ class _TwoImagesPreview extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    _resolvedImage(slide.imagePath2, projectPath),
+                    _resolvedImage(context, slide.imagePath2, projectPath),
                     _captionOverlay(context, slide.imageCaption2, w),
                   ],
                 ),
@@ -1524,6 +1549,7 @@ class _ImagePreview extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         _zoomedImage(
+          context,
           slide.imagePath,
           projectPath,
           slide.imageSize,
@@ -1792,6 +1818,7 @@ class _QuotePreview extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         _zoomedImage(
+          context,
           slide.imagePath,
           projectPath,
           slide.imageSize,
@@ -1831,7 +1858,12 @@ class _LogoOverlay extends StatelessWidget {
       child: SizedBox(
         width: size,
         height: size,
-        child: _resolvedImage(logoPath, projectPath, fit: BoxFit.contain),
+        child: _resolvedImage(
+          context,
+          logoPath,
+          projectPath,
+          fit: BoxFit.contain,
+        ),
       ),
     );
   }
@@ -2030,6 +2062,448 @@ class _MarkdownPreview extends StatelessWidget {
   }
 }
 
+/// Een 'broncode-sheet': de code op een donker editor-vlak, met
+/// syntaxkleuring wanneer een taal bekend is. De tekst blijft platte tekst maar
+/// wordt monospace en gekleurd weergegeven. Past zich met een FittedBox aan de
+/// slide aan zodat lange fragmenten netjes verkleinen i.p.v. af te kappen.
+class _CodePreview extends StatelessWidget {
+  final Slide slide;
+  final double w;
+  final String font;
+  final ThemeProfile profile;
+
+  const _CodePreview({
+    required this.slide,
+    required this.w,
+    required this.font,
+    required this.profile,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    _ensureHighlightLanguages();
+    final pad = w * 0.05;
+    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
+    final code = slide.customMarkdown;
+    final lang = slide.codeLanguage.trim();
+    final known = lang.isNotEmpty && allLanguages.containsKey(lang);
+
+    final mono = TextStyle(
+      fontFamily: 'monospace',
+      fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
+      fontSize: w * 0.024,
+      height: 1.4,
+      color: const Color(0xFFABB2BF), // atom-one-dark voorgrond
+    );
+
+    // HighlightView gooit een fout bij een onbekende taal; daarom vallen we
+    // dan terug op platte (maar wel monospace) tekst.
+    final Widget codeContent = known
+        ? HighlightView(
+            code,
+            language: lang,
+            theme: atomOneDarkTheme,
+            padding: EdgeInsets.zero,
+            textStyle: mono,
+          )
+        : Text(code, style: mono);
+
+    return Container(
+      color: _hexColor(profile.slideBackgroundColor),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+          pad,
+          pad + safe.top,
+          pad,
+          pad + safe.bottom,
+        ),
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: const Color(0xFF282C34), // atom-one-dark achtergrond
+            borderRadius: BorderRadius.circular(w * 0.012),
+            border: Border.all(color: const Color(0xFF3A3F4B)),
+          ),
+          padding: EdgeInsets.all(w * 0.03),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (slide.title.isNotEmpty) ...[
+                _md(
+                  context,
+                  slide.title,
+                  _applyFont(
+                    font,
+                    TextStyle(
+                      fontSize: w * 0.03,
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFFE5E7EB),
+                    ),
+                  ),
+                  linkColor: _hexColor(profile.accentColor),
+                ),
+                SizedBox(height: w * 0.02),
+              ],
+              Expanded(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.topLeft,
+                  // Een onbegrensde breedte laat code-regels op hun natuurlijke
+                  // lengte staan (geen woordafbreking), waarna de FittedBox het
+                  // geheel verkleint tot het past.
+                  child: codeContent,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Renders a chart slide (bar/line/pie) from its ```chart JSON spec.
+class _ChartPreview extends StatelessWidget {
+  final Slide slide;
+  final double w;
+  final String font;
+  final ThemeProfile profile;
+
+  const _ChartPreview({
+    required this.slide,
+    required this.w,
+    required this.font,
+    required this.profile,
+  });
+
+  static const _palette = <int>[
+    0xFF2563EB,
+    0xFFF59E0B,
+    0xFF10B981,
+    0xFFEF4444,
+    0xFF8B5CF6,
+    0xFF06B6D4,
+    0xFFEC4899,
+    0xFF84CC16,
+  ];
+
+  Color _seriesColor(int i) => i == 0
+      ? _hexColor(profile.accentColor)
+      : Color(_palette[i % _palette.length]);
+
+  @override
+  Widget build(BuildContext context) {
+    final spec = ChartSpec.parse(slide.customMarkdown);
+    final pad = w * 0.06;
+    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
+    final textColor = _hexColor(profile.textColor);
+
+    return Container(
+      color: _hexColor(profile.slideBackgroundColor),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+          pad,
+          pad + safe.top,
+          pad,
+          pad + safe.bottom,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (spec.title.isNotEmpty) ...[
+              _md(
+                context,
+                spec.title,
+                _applyFont(
+                  font,
+                  TextStyle(
+                    fontSize: w * 0.04,
+                    fontWeight: FontWeight.bold,
+                    color: textColor,
+                  ),
+                ),
+                linkColor: _hexColor(profile.accentColor),
+              ),
+              SizedBox(height: w * 0.02),
+            ],
+            if (spec.series.length > 1 && spec.type != ChartType.pie)
+              _legend(spec, textColor),
+            Expanded(
+              child: spec.hasInlineData
+                  ? _chart(spec, textColor)
+                  : _placeholder(context),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _legend(ChartSpec spec, Color textColor) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: w * 0.015),
+      child: Wrap(
+        spacing: w * 0.02,
+        runSpacing: w * 0.008,
+        children: [
+          for (var i = 0; i < spec.series.length; i++)
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: w * 0.018,
+                  height: w * 0.018,
+                  decoration: BoxDecoration(
+                    color: _seriesColor(i),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                SizedBox(width: w * 0.008),
+                Text(
+                  spec.series[i].name,
+                  style: _applyFont(
+                    font,
+                    TextStyle(fontSize: w * 0.02, color: textColor),
+                  ),
+                ),
+              ],
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _chart(ChartSpec spec, Color textColor) {
+    switch (spec.type) {
+      case ChartType.bar:
+        return _barChart(spec, textColor);
+      case ChartType.line:
+        return _lineChart(spec, textColor);
+      case ChartType.pie:
+        return _pieChart(spec, textColor);
+    }
+  }
+
+  double _maxY(ChartSpec spec) {
+    var m = 0.0;
+    for (final s in spec.series) {
+      for (final v in s.data) {
+        if (v > m) m = v;
+      }
+    }
+    return m <= 0 ? 1 : m * 1.15;
+  }
+
+  FlTitlesData _titles(ChartSpec spec, Color textColor) {
+    final style = _applyFont(
+      font,
+      TextStyle(fontSize: w * 0.018, color: textColor.withValues(alpha: 0.8)),
+    );
+    return FlTitlesData(
+      topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      leftTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: w * 0.06,
+          getTitlesWidget: (value, meta) =>
+              Text(_fmtNum(value), style: style.copyWith(fontSize: w * 0.016)),
+        ),
+      ),
+      bottomTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: w * 0.05,
+          getTitlesWidget: (value, meta) {
+            final i = value.round();
+            if (i < 0 || i >= spec.x.length) return const SizedBox.shrink();
+            return Padding(
+              padding: EdgeInsets.only(top: w * 0.008),
+              child: Text(spec.x[i], style: style),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  String _fmtNum(double v) {
+    if (v == v.roundToDouble()) return v.toInt().toString();
+    return v.toStringAsFixed(1);
+  }
+
+  FlGridData _grid(Color textColor) => FlGridData(
+    show: true,
+    drawVerticalLine: false,
+    getDrawingHorizontalLine: (v) =>
+        FlLine(color: textColor.withValues(alpha: 0.12), strokeWidth: 1),
+  );
+
+  Widget _barChart(ChartSpec spec, Color textColor) {
+    final groups = <BarChartGroupData>[];
+    for (var xi = 0; xi < spec.x.length; xi++) {
+      groups.add(
+        BarChartGroupData(
+          x: xi,
+          barRods: [
+            for (var si = 0; si < spec.series.length; si++)
+              if (xi < spec.series[si].data.length)
+                BarChartRodData(
+                  toY: spec.series[si].data[xi],
+                  color: _seriesColor(si),
+                  width: w * 0.012,
+                  borderRadius: BorderRadius.circular(w * 0.003),
+                ),
+          ],
+        ),
+      );
+    }
+    return BarChart(
+      BarChartData(
+        maxY: _maxY(spec),
+        barGroups: groups,
+        titlesData: _titles(spec, textColor),
+        gridData: _grid(textColor),
+        borderData: FlBorderData(show: false),
+        barTouchData: BarTouchData(enabled: false),
+      ),
+      duration: Duration.zero,
+    );
+  }
+
+  Widget _lineChart(ChartSpec spec, Color textColor) {
+    final bars = <LineChartBarData>[];
+    for (var si = 0; si < spec.series.length; si++) {
+      bars.add(
+        LineChartBarData(
+          spots: [
+            for (var xi = 0; xi < spec.series[si].data.length; xi++)
+              FlSpot(xi.toDouble(), spec.series[si].data[xi]),
+          ],
+          color: _seriesColor(si),
+          barWidth: w * 0.004,
+          isCurved: false,
+          dotData: const FlDotData(show: true),
+        ),
+      );
+    }
+    return LineChart(
+      LineChartData(
+        minY: 0,
+        maxY: _maxY(spec),
+        lineBarsData: bars,
+        titlesData: _titles(spec, textColor),
+        gridData: _grid(textColor),
+        borderData: FlBorderData(show: false),
+        lineTouchData: const LineTouchData(enabled: false),
+      ),
+      duration: Duration.zero,
+    );
+  }
+
+  Widget _pieChart(ChartSpec spec, Color textColor) {
+    // A pie uses the first series; each slice is an x label.
+    final series = spec.series.isNotEmpty ? spec.series.first : null;
+    if (series == null) return _placeholderText('—');
+    final total = series.data.fold<double>(0, (a, b) => a + b);
+    final sections = <PieChartSectionData>[];
+    for (var i = 0; i < series.data.length; i++) {
+      final v = series.data[i];
+      final pct = total > 0 ? (v / total * 100) : 0;
+      sections.add(
+        PieChartSectionData(
+          value: v,
+          color: _seriesColor(i),
+          title: '${pct.toStringAsFixed(0)}%',
+          radius: w * 0.16,
+          titleStyle: _applyFont(
+            font,
+            TextStyle(
+              fontSize: w * 0.02,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      );
+    }
+    return Row(
+      children: [
+        Expanded(
+          flex: 3,
+          child: PieChart(
+            PieChartData(
+              sections: sections,
+              sectionsSpace: 1,
+              centerSpaceRadius: w * 0.05,
+              pieTouchData: PieTouchData(enabled: false),
+            ),
+            duration: Duration.zero,
+          ),
+        ),
+        Expanded(
+          flex: 2,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (var i = 0; i < spec.x.length && i < series.data.length; i++)
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: w * 0.004),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        width: w * 0.018,
+                        height: w * 0.018,
+                        decoration: BoxDecoration(
+                          color: _seriesColor(i),
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      SizedBox(width: w * 0.008),
+                      Flexible(
+                        child: Text(
+                          spec.x[i],
+                          style: _applyFont(
+                            font,
+                            TextStyle(fontSize: w * 0.02, color: textColor),
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _placeholder(BuildContext context) =>
+      _placeholderText(context.l10n.d('Geen grafiekgegevens'));
+
+  Widget _placeholderText(String text) => Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(
+          Icons.bar_chart_outlined,
+          size: w * 0.08,
+          color: const Color(0xFF94A3B8),
+        ),
+        SizedBox(height: w * 0.01),
+        Text(
+          text,
+          style: TextStyle(color: const Color(0xFF94A3B8), fontSize: w * 0.02),
+        ),
+      ],
+    ),
+  );
+}
+
 /// Register highlight.js language definitions once, so [HighlightView] can
 /// colour any common language without throwing.
 bool _highlightReady = false;
@@ -2047,6 +2521,7 @@ void _ensureHighlightLanguages() {
 ///   imageSize > 100 → inzoomen: groter dan contain, bijgesneden door ClipRect
 ///   imageSize < 100 → nog meer uitzoomen: afbeelding kleiner dan contain
 Widget _zoomedImage(
+  BuildContext context,
   String imagePath,
   String? projectPath,
   int imageSize, {
@@ -2054,7 +2529,11 @@ Widget _zoomedImage(
   Alignment alignment = Alignment.center,
 }) {
   if (imageSize == 0) {
-    return _resolvedImage(imagePath, projectPath); // BoxFit.cover standaard
+    return _resolvedImage(
+      context,
+      imagePath,
+      projectPath,
+    ); // BoxFit.cover standaard
   }
   final scale = imageSize / 100.0;
   // Size the image box to `scale` × the available area and let BoxFit.contain
@@ -2076,6 +2555,7 @@ Widget _zoomedImage(
               height: boxH,
               // BoxFit.contain: toont de volledige afbeelding zonder bijsnijden
               child: _resolvedImage(
+                context,
                 imagePath,
                 projectPath,
                 fit: BoxFit.contain,
@@ -2089,11 +2569,12 @@ Widget _zoomedImage(
 }
 
 Widget _resolvedImage(
+  BuildContext context,
   String imagePath,
   String? projectPath, {
   BoxFit fit = BoxFit.cover,
 }) {
-  if (imagePath.isEmpty) return _imagePlaceholder();
+  if (imagePath.isEmpty) return _imagePlaceholder(context);
 
   final String resolved;
   if (imagePath.startsWith('/') || imagePath.contains(':\\')) {
@@ -2109,7 +2590,11 @@ Widget _resolvedImage(
     fit: fit,
     width: double.infinity,
     height: double.infinity,
-    errorBuilder: (context, error, stackTrace) => _imagePlaceholder(),
+    // Keep showing the previous frame while the next image decodes. Without
+    // this the widget paints nothing for a frame on a source change, which
+    // shows up as a black flash between slides — fatal when recording video.
+    gaplessPlayback: true,
+    errorBuilder: (context, error, stackTrace) => _imagePlaceholder(context),
   );
 }
 
@@ -2128,8 +2613,8 @@ Widget _captionOverlay(
       ? _tlpVerticalReserve(w)
       : 0.0;
   return Positioned(
-    right: right ?? w * 0.018,
-    bottom: (bottom ?? w * 0.014) + lift,
+    right: right ?? w * _kTlpEdge,
+    bottom: (bottom ?? _tlpBottomInset(w)) + lift,
     child: Container(
       constraints: BoxConstraints(maxWidth: w * 0.5),
       padding: EdgeInsets.symmetric(horizontal: w * 0.008, vertical: w * 0.005),
@@ -2152,7 +2637,13 @@ Widget _captionOverlay(
   );
 }
 
-String? _resolvePath(String path, String? projectPath) {
+String? _resolvePath(String path, String? projectPath) =>
+    resolveSlideAssetPath(path, projectPath);
+
+/// Resolves an image/media path the way the slide renderer does, so callers
+/// (e.g. the presenter, to precache) can point at the exact file that will be
+/// displayed. Returns null for an empty path.
+String? resolveSlideAssetPath(String path, String? projectPath) {
   if (path.isEmpty) return null;
   if (path.startsWith('/') || path.contains(':\\')) return path;
   if (projectPath != null) return '$projectPath/$path';
@@ -2165,13 +2656,15 @@ const double _kTlpEdge = 0.025; // afstand tot de slidehoek (× breedte)
 const double _kTlpHPad = 0.011;
 const double _kTlpVPad = 0.005;
 
+double _tlpBottomInset(double w) => w * 0.022;
+
 /// Geschatte breedte van de TLP-badge, zodat de footer ervoor kan uitwijken.
 double _tlpBadgeWidth(double w, TlpLevel tlp) =>
     tlp.label.length * w * _kTlpFont * 0.62 + 2 * (w * _kTlpHPad);
 
 /// Verticale ruimte die een TLP-badge rechtsonder inneemt (voor bijschriften).
 double _tlpVerticalReserve(double w) =>
-    w * _kTlpFont + 2 * (w * _kTlpVPad) + w * 0.014;
+    w * _kTlpFont + 2 * (w * _kTlpVPad) + _tlpBottomInset(w);
 
 /// Officiële TLP 2.0-markering (FIRST): de gekleurde label op een zwart vlak,
 /// rechtsonder. Wijkt uit naar linksonder als het logo rechtsonder staat.
@@ -2179,18 +2672,20 @@ class _TlpOverlay extends StatelessWidget {
   final TlpLevel tlp;
   final double w;
   final ThemeProfile profile;
+  final bool hasLogo;
 
   const _TlpOverlay({
     required this.tlp,
     required this.w,
     required this.profile,
+    required this.hasLogo,
   });
 
   @override
   Widget build(BuildContext context) {
-    final toLeft = profile.logoPosition == 'bottom-right';
+    final toLeft = hasLogo && profile.logoPosition == 'bottom-right';
     return Positioned(
-      bottom: w * 0.022,
+      bottom: _tlpBottomInset(w),
       left: toLeft ? w * _kTlpEdge : null,
       right: toLeft ? null : w * _kTlpEdge,
       child: Container(
@@ -2231,6 +2726,10 @@ double _contentLeftInset(Slide slide, double w) {
     case SlideType.bullets:
     case SlideType.freeMarkdown:
       return w * 0.07;
+    case SlideType.code:
+      return w * 0.05;
+    case SlideType.chart:
+      return w * 0.06;
     case SlideType.twoBullets:
       return w * 0.065;
     case SlideType.table:
@@ -2306,7 +2805,7 @@ class _FooterOverlay extends StatelessWidget {
     final logoOnLeft = profile.logoPosition.endsWith('left');
     final logoSpan = w * (profile.logoSize / 1280) * 1.28 + w * 0.012;
     final logoLeftEdge = w * (profile.logoSize / 1280) * 0.28;
-    final tlpOnRight = profile.logoPosition != 'bottom-right';
+    final tlpOnRight = !(hasLogo && profile.logoPosition == 'bottom-right');
     final tlpSpan = tlp == TlpLevel.none
         ? 0.0
         : w * _kTlpEdge + _tlpBadgeWidth(w, tlp) + w * 0.012;
@@ -2403,18 +2902,18 @@ Widget _mediaPlaceholder(IconData icon, String label) {
   );
 }
 
-Widget _imagePlaceholder() {
+Widget _imagePlaceholder(BuildContext context) {
   return Container(
     color: const Color(0xFFE2E8F0),
-    child: const Center(
+    child: Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.image_outlined, color: Color(0xFF94A3B8), size: 24),
-          SizedBox(height: 4),
+          const Icon(Icons.image_outlined, color: Color(0xFF94A3B8), size: 24),
+          const SizedBox(height: 4),
           Text(
-            'Afbeelding',
-            style: TextStyle(color: Color(0xFF94A3B8), fontSize: 10),
+            context.l10n.d('Afbeelding'),
+            style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 10),
           ),
         ],
       ),

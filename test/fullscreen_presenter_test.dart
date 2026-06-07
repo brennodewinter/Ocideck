@@ -24,6 +24,57 @@ void main() {
     Slide.create(SlideType.bullets).copyWith(title: 'Tweede', bullets: ['b']),
   ];
 
+  test('dual-screen mode is available on every desktop platform', () {
+    expect(
+      shouldUseDualScreen(
+        isMacOS: true,
+        isWindows: false,
+        isLinux: false,
+        displayCount: 2,
+      ),
+      isTrue,
+    );
+    expect(
+      shouldUseDualScreen(
+        isMacOS: false,
+        isWindows: true,
+        isLinux: false,
+        displayCount: 2,
+      ),
+      isTrue,
+    );
+    expect(
+      shouldUseDualScreen(
+        isMacOS: false,
+        isWindows: false,
+        isLinux: true,
+        displayCount: 2,
+      ),
+      isTrue,
+    );
+  });
+
+  test('dual-screen mode requires a desktop platform and two displays', () {
+    expect(
+      shouldUseDualScreen(
+        isMacOS: true,
+        isWindows: false,
+        isLinux: false,
+        displayCount: 1,
+      ),
+      isFalse,
+    );
+    expect(
+      shouldUseDualScreen(
+        isMacOS: false,
+        isWindows: false,
+        isLinux: false,
+        displayCount: 2,
+      ),
+      isFalse,
+    );
+  });
+
   testWidgets('starts in audience view without presenter chrome', (
     tester,
   ) async {

@@ -112,6 +112,13 @@ void main() {
     expect(n.state.deck!.paginate, isFalse);
   });
 
+  test('updateInfo can update the presentation title', () {
+    final n = _notifier()..newDeck('D');
+    n.updateInfo(title: 'Nieuwe presentatietitel', author: 'Auteur');
+    expect(n.state.deck!.title, 'Nieuwe presentatietitel');
+    expect(n.state.deck!.author, 'Auteur');
+  });
+
   test('generateMarkdown and applyMarkdown round-trip the deck', () {
     final n = _notifier()..newDeck('D');
     n.addSlide(SlideType.bulletsImage, afterIndex: 0);

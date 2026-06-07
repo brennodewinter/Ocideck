@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:characters/characters.dart';
 import 'package:uuid/uuid.dart';
+import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
@@ -10,7 +11,7 @@ const _uuid = Uuid();
 class MarkdownService {
   // ── Generation ──────────────────────────────────────────────────────────────
 
-  String generateDeck(Deck deck) {
+  String generateDeck(Deck deck, {bool inlineChartData = false}) {
     final buf = StringBuffer();
     buf.writeln('---');
     buf.writeln('marp: true');
@@ -49,7 +50,13 @@ class MarkdownService {
         buf.writeln('---');
         buf.writeln();
       }
-      buf.write(generateSlide(deck.slides[i], themeProfile: deck.themeProfile));
+      buf.write(
+        generateSlide(
+          deck.slides[i],
+          themeProfile: deck.themeProfile,
+          inlineChartData: inlineChartData,
+        ),
+      );
     }
     return buf.toString();
   }
@@ -158,7 +165,11 @@ class MarkdownService {
     return out.toString().replaceAll('<br>', '\n');
   }
 
-  String generateSlide(Slide slide, {ThemeProfile? themeProfile}) {
+  String generateSlide(
+    Slide slide, {
+    ThemeProfile? themeProfile,
+    bool inlineChartData = false,
+  }) {
     final buf = StringBuffer();
     final cssClass = slide.cssClass.isNotEmpty
         ? slide.cssClass
@@ -317,6 +328,27 @@ class MarkdownService {
             !slide.customMarkdown.endsWith('\n')) {
           buf.writeln();
         }
+
+      case SlideType.code:
+        if (slide.title.isNotEmpty) {
+          buf.writeln('# ${slide.title}');
+          buf.writeln();
+        }
+        buf.writeln('```${slide.codeLanguage.trim()}');
+        buf.write(slide.customMarkdown);
+        if (slide.customMarkdown.isNotEmpty &&
+            !slide.customMarkdown.endsWith('\n')) {
+          buf.writeln();
+        }
+        buf.writeln('```');
+
+      case SlideType.chart:
+        // Re-serialize so inline data is dropped when the chart links a CSV
+        // (the .md keeps only the spec + source; the CSV stays the source).
+        final spec = ChartSpec.parse(slide.customMarkdown);
+        buf.writeln('```chart');
+        buf.writeln(spec.toBlock(forStorage: !inlineChartData));
+        buf.writeln('```');
     }
 
     if (slide.audioPath.isNotEmpty) {
@@ -339,6 +371,13 @@ class MarkdownService {
     if (slide.skipped) {
       buf.writeln();
       buf.writeln('<!-- skip -->');
+    }
+
+    // Per-slide TLP classification (used to withhold the slide when sharing at
+    // a lower level). Persisted so it survives save/load round-trips.
+    if (slide.tlp != TlpLevel.none) {
+      buf.writeln();
+      buf.writeln('<!-- tlp: ${slide.tlp.key} -->');
     }
 
     if (slide.notes.isNotEmpty) {
@@ -584,6 +623,7 @@ class MarkdownService {
     final notesBuffer = StringBuffer();
     double advanceDuration = 0;
     bool skipped = false;
+    TlpLevel slideTlp = TlpLevel.none;
     final bullets = <String>[];
     var bullets2 = <String>[];
     // bulletsImage slides store their panel width in `<!-- _style:
@@ -597,6 +637,8 @@ class MarkdownService {
           advanceDuration = double.tryParse(content.substring(8).trim()) ?? 0;
         } else if (content == 'skip') {
           skipped = true;
+        } else if (content.startsWith('tlp:')) {
+          slideTlp = TlpLevelX.fromKey(content.substring(4));
         } else if (content.startsWith('_style:')) {
           final w = RegExp(r'--image-width:\s*(\d+)%').firstMatch(content);
           if (w != null) styleImageWidth = int.tryParse(w.group(1)!) ?? 0;
@@ -613,6 +655,31 @@ class MarkdownService {
       },
     ).trim();
     final notes = notesBuffer.toString().trim();
+
+    // Code slides carry a fenced block that the generic line parser below would
+    // mangle (the body lines aren't markdown). Handle them up front.
+    if (cssClass.split(RegExp(r'\s+')).contains('code')) {
+      return _parseCodeBlock(
+        remaining: remaining,
+        cssClass: cssClass,
+        notes: notes,
+        advanceDuration: advanceDuration,
+        skipped: skipped,
+        tlp: slideTlp,
+      );
+    }
+
+    // Chart slides carry a fenced ```chart JSON block; handle up front too.
+    if (cssClass.split(RegExp(r'\s+')).contains('chart')) {
+      return _parseChartBlock(
+        remaining: remaining,
+        cssClass: cssClass,
+        notes: notes,
+        advanceDuration: advanceDuration,
+        skipped: skipped,
+        tlp: slideTlp,
+      );
+    }
 
     final lines = remaining.split('\n');
     String h1 = '';
@@ -795,7 +862,143 @@ class MarkdownService {
       showLogo: showLogo,
       showFooter: showFooter,
       skipped: skipped,
+      tlp: slideTlp,
       tableRows: type == SlideType.table ? tableRows : const [],
+    );
+  }
+
+  /// Parse a `<!-- _class: code -->` slide: an optional `# title`, the fenced
+  /// code block (its info string is the language) and an optional `<audio>`.
+  Slide _parseCodeBlock({
+    required String remaining,
+    required String cssClass,
+    required String notes,
+    required double advanceDuration,
+    required bool skipped,
+    TlpLevel tlp = TlpLevel.none,
+  }) {
+    final lines = remaining.split('\n');
+    String title = '';
+    String language = '';
+    String audioPath = '';
+    bool audioAutoplay = false;
+    final code = <String>[];
+    bool inFence = false;
+
+    for (final line in lines) {
+      final fence = RegExp(r'^\s*```(.*)$').firstMatch(line);
+      if (fence != null) {
+        if (!inFence) {
+          inFence = true;
+          language = fence.group(1)!.trim();
+        } else {
+          inFence = false;
+        }
+        continue;
+      }
+      if (inFence) {
+        code.add(line);
+        continue;
+      }
+      final t = line.trim();
+      if (t.startsWith('# ') && title.isEmpty) {
+        title = t.substring(2);
+      } else if (t.startsWith('<audio')) {
+        final m = RegExp(r'src="([^"]+)"').firstMatch(t);
+        if (m != null) audioPath = m.group(1) ?? '';
+        audioAutoplay = t.contains('autoplay');
+      }
+    }
+
+    final classTokens = cssClass.split(RegExp(r'\s+'));
+    final effectiveClass = classTokens
+        .where(
+          (c) =>
+              c.isNotEmpty &&
+              c != 'code' &&
+              c != 'logo-safe' &&
+              c != 'no-logo' &&
+              c != 'no-footer',
+        )
+        .join(' ');
+
+    return Slide(
+      id: _uuid.v4(),
+      type: SlideType.code,
+      title: title,
+      customMarkdown: code.join('\n'),
+      codeLanguage: language,
+      audioPath: audioPath,
+      audioAutoplay: audioAutoplay,
+      cssClass: effectiveClass,
+      notes: notes,
+      advanceDuration: advanceDuration,
+      showLogo: !classTokens.contains('no-logo'),
+      showFooter: !classTokens.contains('no-footer'),
+      skipped: skipped,
+      tlp: tlp,
+    );
+  }
+
+  /// Parse a `<!-- _class: chart -->` slide: the fenced ```chart JSON block and
+  /// an optional `<audio>`. The JSON is kept verbatim in [Slide.customMarkdown].
+  Slide _parseChartBlock({
+    required String remaining,
+    required String cssClass,
+    required String notes,
+    required double advanceDuration,
+    required bool skipped,
+    TlpLevel tlp = TlpLevel.none,
+  }) {
+    final lines = remaining.split('\n');
+    final json = <String>[];
+    String audioPath = '';
+    bool audioAutoplay = false;
+    bool inFence = false;
+
+    for (final line in lines) {
+      final fence = RegExp(r'^\s*```').hasMatch(line);
+      if (fence) {
+        inFence = !inFence;
+        continue;
+      }
+      if (inFence) {
+        json.add(line);
+        continue;
+      }
+      final t = line.trim();
+      if (t.startsWith('<audio')) {
+        final m = RegExp(r'src="([^"]+)"').firstMatch(t);
+        if (m != null) audioPath = m.group(1) ?? '';
+        audioAutoplay = t.contains('autoplay');
+      }
+    }
+
+    final classTokens = cssClass.split(RegExp(r'\s+'));
+    final effectiveClass = classTokens
+        .where(
+          (c) =>
+              c.isNotEmpty &&
+              c != 'chart' &&
+              c != 'logo-safe' &&
+              c != 'no-logo' &&
+              c != 'no-footer',
+        )
+        .join(' ');
+
+    return Slide(
+      id: _uuid.v4(),
+      type: SlideType.chart,
+      customMarkdown: json.join('\n').trim(),
+      audioPath: audioPath,
+      audioAutoplay: audioAutoplay,
+      cssClass: effectiveClass,
+      notes: notes,
+      advanceDuration: advanceDuration,
+      showLogo: !classTokens.contains('no-logo'),
+      showFooter: !classTokens.contains('no-footer'),
+      skipped: skipped,
+      tlp: tlp,
     );
   }
 }

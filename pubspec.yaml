@@ -32,6 +32,11 @@ dependencies:
   flutter_math_fork: ^0.7.4
   highlight: ^0.7.0
   wakelock_plus: ^1.5.2
+  # Vendored fork: adds native macOS window-geometry/fullscreen methods that
+  # the published 0.3.0 dropped, needed for the dual-screen presenter mode.
+  desktop_multi_window:
+    path: third_party/desktop_multi_window
+  fl_chart: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +47,9 @@ dev_dependencies:
 dependency_overrides:
   screen_retriever_macos:
     path: third_party/screen_retriever_macos
+  # 2.9.5+ publishes a Swift module whose private Objective-C dependency is
+  # not packaged correctly by CocoaPods on Xcode 26.
+  video_player_avfoundation: 2.9.4
 
 flutter:
   config:

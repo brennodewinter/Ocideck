@@ -1,4 +1,5 @@
 import 'package:uuid/uuid.dart';
+import 'deck.dart';
 
 const _uuid = Uuid();
 
@@ -14,6 +15,8 @@ enum SlideType {
   quote,
   table,
   freeMarkdown,
+  code,
+  chart,
 }
 
 extension SlideTypeExtension on SlideType {
@@ -41,6 +44,10 @@ extension SlideTypeExtension on SlideType {
         return 'Tabel';
       case SlideType.freeMarkdown:
         return 'Vrije Markdown';
+      case SlideType.code:
+        return 'Broncode';
+      case SlideType.chart:
+        return 'Grafiek';
     }
   }
 
@@ -68,6 +75,10 @@ extension SlideTypeExtension on SlideType {
         return 'table';
       case SlideType.freeMarkdown:
         return '';
+      case SlideType.code:
+        return 'code';
+      case SlideType.chart:
+        return 'chart';
     }
   }
 }
@@ -90,6 +101,8 @@ class Slide {
   final String quote;
   final String quoteAuthor;
   final String customMarkdown;
+  final String
+  codeLanguage; // highlight.js language id for code slides ('' = plain)
   final String cssClass;
   final String notes;
   final double advanceDuration; // 0 = no auto-advance
@@ -97,6 +110,10 @@ class Slide {
   final bool showLogo; // show the profile logo on this slide (default true)
   final bool showFooter; // show the profile footer on this slide (default true)
   final bool skipped; // skip this slide when presenting and exporting
+  /// Per-slide Traffic Light Protocol classification. The slide is withheld
+  /// when the presentation is shared at a lower (less restrictive) level than
+  /// this. [TlpLevel.none] = no per-slide restriction (always shown).
+  final TlpLevel tlp;
   final List<List<String>> tableRows; // first row is the header
 
   const Slide({
@@ -117,6 +134,7 @@ class Slide {
     this.quote = '',
     this.quoteAuthor = '',
     this.customMarkdown = '',
+    this.codeLanguage = '',
     this.cssClass = '',
     this.notes = '',
     this.advanceDuration = 0,
@@ -124,6 +142,7 @@ class Slide {
     this.showLogo = true,
     this.showFooter = true,
     this.skipped = false,
+    this.tlp = TlpLevel.none,
     this.tableRows = const [],
   });
 
@@ -168,6 +187,7 @@ class Slide {
       quote: src.quote,
       quoteAuthor: src.quoteAuthor,
       customMarkdown: src.customMarkdown,
+      codeLanguage: src.codeLanguage,
       cssClass: src.cssClass,
       notes: src.notes,
       advanceDuration: src.advanceDuration,
@@ -175,6 +195,7 @@ class Slide {
       showLogo: src.showLogo,
       showFooter: src.showFooter,
       skipped: src.skipped,
+      tlp: src.tlp,
       tableRows: src.tableRows.map((r) => List<String>.from(r)).toList(),
     );
   }
@@ -196,6 +217,7 @@ class Slide {
     String? quote,
     String? quoteAuthor,
     String? customMarkdown,
+    String? codeLanguage,
     String? cssClass,
     String? notes,
     double? advanceDuration,
@@ -203,6 +225,7 @@ class Slide {
     bool? showLogo,
     bool? showFooter,
     bool? skipped,
+    TlpLevel? tlp,
     List<List<String>>? tableRows,
   }) {
     return Slide(
@@ -223,6 +246,7 @@ class Slide {
       quote: quote ?? this.quote,
       quoteAuthor: quoteAuthor ?? this.quoteAuthor,
       customMarkdown: customMarkdown ?? this.customMarkdown,
+      codeLanguage: codeLanguage ?? this.codeLanguage,
       cssClass: cssClass ?? this.cssClass,
       notes: notes ?? this.notes,
       advanceDuration: advanceDuration ?? this.advanceDuration,
@@ -230,6 +254,7 @@ class Slide {
       showLogo: showLogo ?? this.showLogo,
       showFooter: showFooter ?? this.showFooter,
       skipped: skipped ?? this.skipped,
+      tlp: tlp ?? this.tlp,
       tableRows: tableRows ?? this.tableRows,
     );
   }

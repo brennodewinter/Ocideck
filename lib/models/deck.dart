@@ -1,8 +1,18 @@
+import 'annotation.dart';
 import 'slide.dart';
 import 'settings.dart';
 
 /// Traffic Light Protocol-classificatie (FIRST TLP 2.0) van een presentatie.
+///
+/// De volgorde loopt van minst naar meest beperkend; [TlpLevel.index] is dus
+/// bruikbaar om niveaus te vergelijken.
 enum TlpLevel { none, clear, green, amber, amberStrict, red }
+
+/// Of [slide] getoond mag worden wanneer de presentatie op [presentationTlp]
+/// wordt gedeeld. Een slide wordt achtergehouden zodra zijn eigen TLP-niveau
+/// strenger (hoger) is dan het voor de presentatie gekozen niveau.
+bool slideVisibleAtTlp(Slide slide, TlpLevel presentationTlp) =>
+    slide.tlp.index <= presentationTlp.index;
 
 extension TlpLevelX on TlpLevel {
   /// De officiële markering die op de slides verschijnt ('' bij [none]).
@@ -99,6 +109,11 @@ class Deck {
   /// Traffic Light Protocol-classificatie van deze presentatie.
   final TlpLevel tlp;
 
+  /// Annotatielaag: vrije-hand-tekeningen per slide, gekeyd op [Slide.id].
+  /// Bewust géén onderdeel van de Marp-markdown — dit wordt los bewaard in een
+  /// sidecar zodat het deck pure, uitwisselbare Marp blijft.
+  final Map<String, List<InkStroke>> annotations;
+
   const Deck({
     required this.title,
     this.theme = 'ocideck',
@@ -113,6 +128,7 @@ class Deck {
     this.description = '',
     this.keywords = '',
     this.tlp = TlpLevel.none,
+    this.annotations = const {},
   });
 
   Deck copyWith({
@@ -130,6 +146,7 @@ class Deck {
     String? description,
     String? keywords,
     TlpLevel? tlp,
+    Map<String, List<InkStroke>>? annotations,
   }) {
     return Deck(
       title: title ?? this.title,
@@ -145,6 +162,7 @@ class Deck {
       description: description ?? this.description,
       keywords: keywords ?? this.keywords,
       tlp: tlp ?? this.tlp,
+      annotations: annotations ?? this.annotations,
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
@@ -246,6 +247,66 @@ void main() {
         'Vrije tekst met **opmaak**.\n\nTweede alinea.',
       );
     });
+
+    test('code slide keeps title, language and code body', () {
+      const code = 'void main() {\n  print("Hallo");\n}';
+      final out = _roundTrip(
+        Slide.create(SlideType.code).copyWith(
+          title: 'Voorbeeld',
+          codeLanguage: 'dart',
+          customMarkdown: code,
+        ),
+      );
+      expect(out.type, SlideType.code);
+      expect(out.title, 'Voorbeeld');
+      expect(out.codeLanguage, 'dart');
+      expect(out.customMarkdown, code);
+    });
+
+    test('chart slide keeps its inline spec', () {
+      const block =
+          '{\n  "type": "bar",\n  "title": "Omzet",\n  "x": ["Q1","Q2"],\n'
+          '  "series": [\n    {"name":"2025","data":[10,14]}\n  ]\n}';
+      final out = _roundTrip(
+        Slide.create(SlideType.chart).copyWith(customMarkdown: block),
+      );
+      expect(out.type, SlideType.chart);
+      final spec = ChartSpec.parse(out.customMarkdown);
+      expect(spec.type, ChartType.bar);
+      expect(spec.x, ['Q1', 'Q2']);
+      expect(spec.series.single.data, [10, 14]);
+    });
+
+    test('chart slide with a source keeps only the reference in markdown', () {
+      const block =
+          '{"type":"line","source":"data/omzet.csv",'
+          '"x":["Q1"],"series":[{"name":"2025","data":[10]}]}';
+      final service = MarkdownService();
+      final md = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.chart).copyWith(customMarkdown: block),
+          ],
+        ),
+      );
+      // The stored markdown references the CSV but does not inline the data.
+      expect(md.contains('data/omzet.csv'), isTrue);
+      final out = service.parseDeck(md)!.slides.single;
+      final spec = ChartSpec.parse(out.customMarkdown);
+      expect(spec.source, 'data/omzet.csv');
+      expect(spec.hasInlineData, isFalse);
+    });
+
+    test('code slide without a language stays plain code', () {
+      const code = 'GET /api/v1/status HTTP/1.1\nHost: example.org';
+      final out = _roundTrip(
+        Slide.create(SlideType.code).copyWith(customMarkdown: code),
+      );
+      expect(out.type, SlideType.code);
+      expect(out.codeLanguage, '');
+      expect(out.customMarkdown, code);
+    });
   });
 
   group('markdown round-trip cross-cutting fields', () {
@@ -280,6 +341,32 @@ void main() {
         ).copyWith(title: 'Gewoon', bullets: ['Punt']),
       );
       expect(normal.skipped, isFalse);
+    });
+
+    test('keeps the per-slide TLP classification', () {
+      final out = _roundTrip(
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Gevoelig', bullets: ['Geheim'], tlp: TlpLevel.amber),
+      );
+      expect(out.tlp, TlpLevel.amber);
+
+      final none = _roundTrip(
+        Slide.create(SlideType.bullets).copyWith(bullets: ['Open']),
+      );
+      expect(none.tlp, TlpLevel.none);
+    });
+
+    test('keeps the per-slide TLP on a code slide', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.code).copyWith(
+          customMarkdown: 'secret_key = 42',
+          codeLanguage: 'python',
+          tlp: TlpLevel.red,
+        ),
+      );
+      expect(out.type, SlideType.code);
+      expect(out.tlp, TlpLevel.red);
     });
 
     test('keeps general presentation metadata in the front matter', () {

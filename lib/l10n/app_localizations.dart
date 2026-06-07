@@ -69,16 +69,30 @@ class AppLocalizations {
 
   String d(String dutchText) {
     if (languageCode == 'nl') return dutchText;
-    return _dutchSourceStrings[languageCode]?[dutchText] ??
+    return _dutchSourceStringAdditions[languageCode]?[dutchText] ??
+        _dutchSourceStrings[languageCode]?[dutchText] ??
+        _dutchSourceStringAdditions['en']?[dutchText] ??
         _dutchSourceStrings['en']?[dutchText] ??
         dutchText;
   }
 
   static String sourceFor(String languageCode, String dutchText) {
     if (languageCode == 'nl') return dutchText;
-    return _dutchSourceStrings[languageCode]?[dutchText] ??
+    return _dutchSourceStringAdditions[languageCode]?[dutchText] ??
+        _dutchSourceStrings[languageCode]?[dutchText] ??
+        _dutchSourceStringAdditions['en']?[dutchText] ??
         _dutchSourceStrings['en']?[dutchText] ??
         dutchText;
+  }
+
+  static bool hasDirectDutchSourceTranslation(
+    String languageCode,
+    String dutchText,
+  ) {
+    if (languageCode == 'nl') return true;
+    return _dutchSourceStringAdditions[languageCode]?.containsKey(dutchText) ==
+            true ||
+        _dutchSourceStrings[languageCode]?.containsKey(dutchText) == true;
   }
 }
 
@@ -950,6 +964,25 @@ const _dutchSourceStrings = {
         'Comma-separated, e.g. quarterly, numbers, 2026',
     'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
         'These details are stored in the Markdown and searchable when opening.',
+    'App-thema': 'App theme',
+    'Look-and-feel': 'Look and feel',
+    'Kopie maken en aanpassen': 'Create and customize a copy',
+    'Thema verwijderen': 'Delete theme',
+    'Themanaam': 'Theme name',
+    'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+        'This is a built-in theme. Create a copy to customize its colors.',
+    'Donkere interface': 'Dark interface',
+    'Past contrast, invoervelden en systeemcomponenten aan.':
+        'Adjusts contrast, input fields, and system components.',
+    'Hoofdkleur en bovenbalk': 'Primary color and top bar',
+    'Knoppen en accenten': 'Buttons and accents',
+    'Schermachtergrond': 'Screen background',
+    'Kaarten en dialogen': 'Cards and dialogs',
+    'Gedempte tekst': 'Muted text',
+    'Zijpanelen': 'Side panels',
+    'Tekst op zijpanelen': 'Text on side panels',
+    'Voorbeeldtekst': 'Sample text',
+    'Knop': 'Button',
     'Profielnaam': 'Profile name',
     'Naam van het stijlprofiel': 'Name of the style profile',
     'Stijlprofiel': 'Style profile',
@@ -966,6 +999,7 @@ const _dutchSourceStrings = {
     'Titelachtergrond': 'Title background',
     'Titeltekst': 'Title text',
     'Sectieachtergrond': 'Section background',
+    'Geselecteerd': 'Selected',
     'Logo': 'Logo',
     'Geen logo ingesteld': 'No logo set',
     'Verwijder logo': 'Remove logo',
@@ -1138,6 +1172,33 @@ const _dutchSourceStrings = {
     'Grote Afbeelding': 'Immagine grande',
     'Tabel': 'Tabella',
     'Vrije Markdown': 'Markdown libero',
+    'Broncode': 'Codice sorgente',
+    'Programmeertaal': 'Linguaggio di programmazione',
+    'TLP van deze slide': 'TLP di questa slide',
+    'Wis annotaties (C)': 'Cancella annotazioni (C)',
+    'Stoppen (Esc)': 'Interrompi (Esc)',
+    'Pen · markeerstift · gum': 'Penna · evidenziatore · gomma',
+    'Laser · annotaties wissen': 'Laser · cancella annotazioni',
+    'Grafiek': 'Grafico',
+    'Type grafiek': 'Tipo di grafico',
+    'Staaf': 'Barre',
+    'Lijn': 'Linee',
+    'Cirkel': 'Torta',
+    'CSV importeren': 'Importa CSV',
+    'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+        'Dati (CSV: prima riga = nomi serie, prima colonna = etichette)',
+    'Gekoppeld aan': 'Collegato a',
+    'Ontkoppelen': 'Scollega',
+    'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+        'Salvare i dati nella slide o tenerli come file CSV separato accanto alla presentazione?',
+    'In de slide': 'Nella slide',
+    'Als CSV-bestand': 'Come file CSV',
+    'Geen grafiekgegevens': 'Nessun dato del grafico',
+    'Label': 'Etichetta',
+    'Rij': 'Riga',
+    'Reeks': 'Serie',
+    'Plak of typ hier je broncode...':
+        'Incolla o digita qui il tuo codice sorgente...',
     'Overgeslagen': 'Saltata',
     'Kopiëren': 'Copia',
     'Kopieer als afbeelding': 'Copia come immagine',
@@ -1206,6 +1267,25 @@ const _dutchSourceStrings = {
     'Datum': 'Data',
     'Beschrijving': 'Descrizione',
     'Trefwoorden': 'Parole chiave',
+    'App-thema': 'Tema dell’app',
+    'Look-and-feel': 'Aspetto',
+    'Kopie maken en aanpassen': 'Crea e personalizza una copia',
+    'Thema verwijderen': 'Elimina tema',
+    'Themanaam': 'Nome del tema',
+    'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+        'Questo è un tema integrato. Crea una copia per personalizzare i colori.',
+    'Donkere interface': 'Interfaccia scura',
+    'Past contrast, invoervelden en systeemcomponenten aan.':
+        'Adatta contrasto, campi di input e componenti di sistema.',
+    'Hoofdkleur en bovenbalk': 'Colore principale e barra superiore',
+    'Knoppen en accenten': 'Pulsanti e accenti',
+    'Schermachtergrond': 'Sfondo dello schermo',
+    'Kaarten en dialogen': 'Schede e finestre di dialogo',
+    'Gedempte tekst': 'Testo attenuato',
+    'Zijpanelen': 'Pannelli laterali',
+    'Tekst op zijpanelen': 'Testo sui pannelli laterali',
+    'Voorbeeldtekst': 'Testo di esempio',
+    'Knop': 'Pulsante',
     'Profielnaam': 'Nome profilo',
     'Stijlprofiel': 'Profilo stile',
     'Lettertype': 'Font',
@@ -1286,6 +1366,33 @@ const _dutchSourceStrings = {
     'Grote Afbeelding': 'Großes Bild',
     'Tabel': 'Tabelle',
     'Vrije Markdown': 'Freies Markdown',
+    'Broncode': 'Quellcode',
+    'Programmeertaal': 'Programmiersprache',
+    'TLP van deze slide': 'TLP dieser Folie',
+    'Wis annotaties (C)': 'Anmerkungen löschen (C)',
+    'Stoppen (Esc)': 'Beenden (Esc)',
+    'Pen · markeerstift · gum': 'Stift · Marker · Radierer',
+    'Laser · annotaties wissen': 'Laser · Anmerkungen löschen',
+    'Grafiek': 'Diagramm',
+    'Type grafiek': 'Diagrammtyp',
+    'Staaf': 'Balken',
+    'Lijn': 'Linie',
+    'Cirkel': 'Kreis',
+    'CSV importeren': 'CSV importieren',
+    'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+        'Daten (CSV: erste Zeile = Reihennamen, erste Spalte = Beschriftungen)',
+    'Gekoppeld aan': 'Verknüpft mit',
+    'Ontkoppelen': 'Trennen',
+    'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+        'Daten in der Folie speichern oder als separate CSV-Datei neben der Präsentation behalten?',
+    'In de slide': 'In der Folie',
+    'Als CSV-bestand': 'Als CSV-Datei',
+    'Geen grafiekgegevens': 'Keine Diagrammdaten',
+    'Label': 'Beschriftung',
+    'Rij': 'Zeile',
+    'Reeks': 'Reihe',
+    'Plak of typ hier je broncode...':
+        'Quellcode hier einfügen oder eingeben...',
     'Overgeslagen': 'Übersprungen',
     'Kopiëren': 'Kopieren',
     'Kopieer als afbeelding': 'Als Bild kopieren',
@@ -1354,6 +1461,25 @@ const _dutchSourceStrings = {
     'Datum': 'Datum',
     'Beschrijving': 'Beschreibung',
     'Trefwoorden': 'Schlüsselwörter',
+    'App-thema': 'App-Design',
+    'Look-and-feel': 'Erscheinungsbild',
+    'Kopie maken en aanpassen': 'Kopie erstellen und anpassen',
+    'Thema verwijderen': 'Design löschen',
+    'Themanaam': 'Designname',
+    'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+        'Dies ist ein integriertes Design. Erstellen Sie eine Kopie, um die Farben anzupassen.',
+    'Donkere interface': 'Dunkle Oberfläche',
+    'Past contrast, invoervelden en systeemcomponenten aan.':
+        'Passt Kontrast, Eingabefelder und Systemkomponenten an.',
+    'Hoofdkleur en bovenbalk': 'Hauptfarbe und obere Leiste',
+    'Knoppen en accenten': 'Schaltflächen und Akzente',
+    'Schermachtergrond': 'Bildschirmhintergrund',
+    'Kaarten en dialogen': 'Karten und Dialoge',
+    'Gedempte tekst': 'Gedämpfter Text',
+    'Zijpanelen': 'Seitenleisten',
+    'Tekst op zijpanelen': 'Text auf Seitenleisten',
+    'Voorbeeldtekst': 'Beispieltext',
+    'Knop': 'Schaltfläche',
     'Profielnaam': 'Profilname',
     'Stijlprofiel': 'Stilprofil',
     'Lettertype': 'Schriftart',
@@ -1435,6 +1561,33 @@ const _dutchSourceStrings = {
     'Grote Afbeelding': 'Grande image',
     'Tabel': 'Tableau',
     'Vrije Markdown': 'Markdown libre',
+    'Broncode': 'Code source',
+    'Programmeertaal': 'Langage de programmation',
+    'TLP van deze slide': 'TLP de cette diapositive',
+    'Wis annotaties (C)': 'Effacer les annotations (C)',
+    'Stoppen (Esc)': 'Arrêter (Esc)',
+    'Pen · markeerstift · gum': 'Stylo · surligneur · gomme',
+    'Laser · annotaties wissen': 'Laser · effacer les annotations',
+    'Grafiek': 'Graphique',
+    'Type grafiek': 'Type de graphique',
+    'Staaf': 'Barres',
+    'Lijn': 'Lignes',
+    'Cirkel': 'Secteurs',
+    'CSV importeren': 'Importer un CSV',
+    'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+        'Données (CSV : 1re ligne = noms de séries, 1re colonne = libellés)',
+    'Gekoppeld aan': 'Lié à',
+    'Ontkoppelen': 'Dissocier',
+    'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+        'Enregistrer les données dans la diapositive, ou les conserver dans un fichier CSV séparé à côté de la présentation ?',
+    'In de slide': 'Dans la diapositive',
+    'Als CSV-bestand': 'Comme fichier CSV',
+    'Geen grafiekgegevens': 'Aucune donnée de graphique',
+    'Label': 'Libellé',
+    'Rij': 'Ligne',
+    'Reeks': 'Série',
+    'Plak of typ hier je broncode...':
+        'Collez ou tapez votre code source ici...',
     'Overgeslagen': 'Ignorée',
     'Kopiëren': 'Copier',
     'Kopieer als afbeelding': 'Copier comme image',
@@ -1503,6 +1656,25 @@ const _dutchSourceStrings = {
     'Datum': 'Date',
     'Beschrijving': 'Description',
     'Trefwoorden': 'Mots-clés',
+    'App-thema': 'Thème de l’application',
+    'Look-and-feel': 'Apparence',
+    'Kopie maken en aanpassen': 'Créer et personnaliser une copie',
+    'Thema verwijderen': 'Supprimer le thème',
+    'Themanaam': 'Nom du thème',
+    'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+        'Ce thème est intégré. Créez une copie pour personnaliser ses couleurs.',
+    'Donkere interface': 'Interface sombre',
+    'Past contrast, invoervelden en systeemcomponenten aan.':
+        'Adapte le contraste, les champs de saisie et les composants système.',
+    'Hoofdkleur en bovenbalk': 'Couleur principale et barre supérieure',
+    'Knoppen en accenten': 'Boutons et accents',
+    'Schermachtergrond': 'Arrière-plan de l’écran',
+    'Kaarten en dialogen': 'Cartes et boîtes de dialogue',
+    'Gedempte tekst': 'Texte atténué',
+    'Zijpanelen': 'Panneaux latéraux',
+    'Tekst op zijpanelen': 'Texte des panneaux latéraux',
+    'Voorbeeldtekst': 'Exemple de texte',
+    'Knop': 'Bouton',
     'Profielnaam': 'Nom du profil',
     'Stijlprofiel': 'Profil de style',
     'Lettertype': 'Police',
@@ -1583,6 +1755,33 @@ const _dutchSourceStrings = {
     'Grote Afbeelding': 'Imagen grande',
     'Tabel': 'Tabla',
     'Vrije Markdown': 'Markdown libre',
+    'Broncode': 'Código fuente',
+    'Programmeertaal': 'Lenguaje de programación',
+    'TLP van deze slide': 'TLP de esta diapositiva',
+    'Wis annotaties (C)': 'Borrar anotaciones (C)',
+    'Stoppen (Esc)': 'Detener (Esc)',
+    'Pen · markeerstift · gum': 'Lápiz · marcador · goma',
+    'Laser · annotaties wissen': 'Láser · borrar anotaciones',
+    'Grafiek': 'Gráfico',
+    'Type grafiek': 'Tipo de gráfico',
+    'Staaf': 'Barras',
+    'Lijn': 'Líneas',
+    'Cirkel': 'Circular',
+    'CSV importeren': 'Importar CSV',
+    'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+        'Datos (CSV: primera fila = nombres de series, primera columna = etiquetas)',
+    'Gekoppeld aan': 'Vinculado a',
+    'Ontkoppelen': 'Desvincular',
+    'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+        '¿Guardar los datos en la diapositiva o mantenerlos como archivo CSV separado junto a la presentación?',
+    'In de slide': 'En la diapositiva',
+    'Als CSV-bestand': 'Como archivo CSV',
+    'Geen grafiekgegevens': 'Sin datos de gráfico',
+    'Label': 'Etiqueta',
+    'Rij': 'Fila',
+    'Reeks': 'Serie',
+    'Plak of typ hier je broncode...':
+        'Pega o escribe aquí tu código fuente...',
     'Overgeslagen': 'Omitida',
     'Kopiëren': 'Copiar',
     'Kopieer als afbeelding': 'Copiar como imagen',
@@ -1651,6 +1850,25 @@ const _dutchSourceStrings = {
     'Datum': 'Fecha',
     'Beschrijving': 'Descripción',
     'Trefwoorden': 'Palabras clave',
+    'App-thema': 'Tema de la aplicación',
+    'Look-and-feel': 'Apariencia',
+    'Kopie maken en aanpassen': 'Crear y personalizar una copia',
+    'Thema verwijderen': 'Eliminar tema',
+    'Themanaam': 'Nombre del tema',
+    'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+        'Este es un tema integrado. Crea una copia para personalizar los colores.',
+    'Donkere interface': 'Interfaz oscura',
+    'Past contrast, invoervelden en systeemcomponenten aan.':
+        'Ajusta el contraste, los campos de entrada y los componentes del sistema.',
+    'Hoofdkleur en bovenbalk': 'Color principal y barra superior',
+    'Knoppen en accenten': 'Botones y acentos',
+    'Schermachtergrond': 'Fondo de pantalla',
+    'Kaarten en dialogen': 'Tarjetas y diálogos',
+    'Gedempte tekst': 'Texto atenuado',
+    'Zijpanelen': 'Paneles laterales',
+    'Tekst op zijpanelen': 'Texto de los paneles laterales',
+    'Voorbeeldtekst': 'Texto de ejemplo',
+    'Knop': 'Botón',
     'Profielnaam': 'Nombre del perfil',
     'Stijlprofiel': 'Perfil de estilo',
     'Lettertype': 'Fuente',
@@ -1732,6 +1950,32 @@ const _dutchSourceStrings = {
     'Grote Afbeelding': 'Grutte ôfbylding',
     'Tabel': 'Tabel',
     'Vrije Markdown': 'Frije Markdown',
+    'Broncode': 'Boarnekoade',
+    'Programmeertaal': 'Programmeartaal',
+    'TLP van deze slide': 'TLP fan dizze slide',
+    'Wis annotaties (C)': 'Annotaasjes wiskje (C)',
+    'Stoppen (Esc)': 'Stopje (Esc)',
+    'Pen · markeerstift · gum': 'Pen · markearstift · gom',
+    'Laser · annotaties wissen': 'Laser · annotaasjes wiskje',
+    'Grafiek': 'Grafyk',
+    'Type grafiek': 'Grafyktype',
+    'Staaf': 'Steaf',
+    'Lijn': 'Line',
+    'Cirkel': 'Sirkel',
+    'CSV importeren': 'CSV ymportearje',
+    'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+        'Data (CSV: earste rige = rige-nammen, earste kolom = labels)',
+    'Gekoppeld aan': 'Keppele oan',
+    'Ontkoppelen': 'Ûntkeppelje',
+    'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+        'Data yn de slide bewarje, of as los CSV-bestân neist de presintaasje hâlde?',
+    'In de slide': 'Yn de slide',
+    'Als CSV-bestand': 'As CSV-bestân',
+    'Geen grafiekgegevens': 'Gjin grafykgegevens',
+    'Label': 'Label',
+    'Rij': 'Rige',
+    'Reeks': 'Rige (data)',
+    'Plak of typ hier je broncode...': 'Plak of typ hjir dyn boarnekoade...',
     'Overgeslagen': 'Oerslein',
     'Kopiëren': 'Kopiearje',
     'Kopieer als afbeelding': 'Kopiearje as ôfbylding',
@@ -1800,6 +2044,25 @@ const _dutchSourceStrings = {
     'Datum': 'Datum',
     'Beschrijving': 'Beskriuwing',
     'Trefwoorden': 'Trefwurden',
+    'App-thema': 'App-tema',
+    'Look-and-feel': 'Uterlik',
+    'Kopie maken en aanpassen': 'Kopy meitsje en oanpasse',
+    'Thema verwijderen': 'Tema wiskje',
+    'Themanaam': 'Temanamme',
+    'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+        'Dit is in ynboud tema. Meitsje in kopy om de kleuren oan te passen.',
+    'Donkere interface': 'Donkere ynterface',
+    'Past contrast, invoervelden en systeemcomponenten aan.':
+        'Past kontrast, ynfierfjilden en systeemkomponinten oan.',
+    'Hoofdkleur en bovenbalk': 'Haadkleur en boppebalke',
+    'Knoppen en accenten': 'Knoppen en aksinten',
+    'Schermachtergrond': 'Skermeftergrûn',
+    'Kaarten en dialogen': 'Kaarten en dialoochfinsters',
+    'Gedempte tekst': 'Dimde tekst',
+    'Zijpanelen': 'Sydpanielen',
+    'Tekst op zijpanelen': 'Tekst op sydpanielen',
+    'Voorbeeldtekst': 'Foarbyldtekst',
+    'Knop': 'Knop',
     'Profielnaam': 'Profylnamme',
     'Stijlprofiel': 'Stylprofyl',
     'Lettertype': 'Lettertype',
@@ -1882,6 +2145,32 @@ const _dutchSourceStrings = {
     'Grote Afbeelding': 'Imágen grandi',
     'Tabel': 'Tabel',
     'Vrije Markdown': 'Markdown liber',
+    'Broncode': 'Código fuente',
+    'Programmeertaal': 'Lenguahe di programashon',
+    'TLP van deze slide': 'TLP di e slide aki',
+    'Wis annotaties (C)': 'Kita anotashonnan (C)',
+    'Stoppen (Esc)': 'Stòp (Esc)',
+    'Pen · markeerstift · gum': 'Pèn · marker · gòm',
+    'Laser · annotaties wissen': 'Laser · kita anotashonnan',
+    'Grafiek': 'Gráfiko',
+    'Type grafiek': 'Tipo di gráfiko',
+    'Staaf': 'Bara',
+    'Lijn': 'Liña',
+    'Cirkel': 'Sirkel',
+    'CSV importeren': 'Importá CSV',
+    'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+        'Dato (CSV: promé fila = nòmber di serie, promé kolom = etiketnan)',
+    'Gekoppeld aan': 'Konektá na',
+    'Ontkoppelen': 'Deskonektá',
+    'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+        'Warda e dato den e slide, òf keda komo un archivo CSV separá banda di e presentashon?',
+    'In de slide': 'Den e slide',
+    'Als CSV-bestand': 'Komo archivo CSV',
+    'Geen grafiekgegevens': 'Sin dato di gráfiko',
+    'Label': 'Etiket',
+    'Rij': 'Fila',
+    'Reeks': 'Serie',
+    'Plak of typ hier je broncode...': 'Pega òf tek bo código fuente akinan...',
     'Overgeslagen': 'Saltá',
     'Kopiëren': 'Kopia',
     'Kopieer als afbeelding': 'Kopia komo imágen',
@@ -1950,6 +2239,25 @@ const _dutchSourceStrings = {
     'Datum': 'Fecha',
     'Beschrijving': 'Deskripshon',
     'Trefwoorden': 'Palabranan klave',
+    'App-thema': 'Tema di app',
+    'Look-and-feel': 'Aparensia',
+    'Kopie maken en aanpassen': 'Krea i personalisá un kopia',
+    'Thema verwijderen': 'Kita tema',
+    'Themanaam': 'Nòmber di tema',
+    'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+        'Esaki ta un tema integrá. Krea un kopia pa personalisá e kolónan.',
+    'Donkere interface': 'Interfas skur',
+    'Past contrast, invoervelden en systeemcomponenten aan.':
+        'Ta adaptá kontraste, kamponan di entrada i komponentenan di sistema.',
+    'Hoofdkleur en bovenbalk': 'Koló prinsipal i bara ariba',
+    'Knoppen en accenten': 'Botonnan i aksèntnan',
+    'Schermachtergrond': 'Fondo di pantaya',
+    'Kaarten en dialogen': 'Karchinan i diálogonan',
+    'Gedempte tekst': 'Teksto suavisa',
+    'Zijpanelen': 'Panelnan lateral',
+    'Tekst op zijpanelen': 'Teksto riba panelnan lateral',
+    'Voorbeeldtekst': 'Teksto di ehèmpel',
+    'Knop': 'Boton',
     'Profielnaam': 'Nòmber di perfil',
     'Stijlprofiel': 'Perfil di estilo',
     'Lettertype': 'Font',
@@ -2013,5 +2321,1246 @@ const _dutchSourceStrings = {
         'P públiko · H legenda · G resumen · B/W pretu/blanku · R tempu · Esc stop',
     'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
         'P públiko · H legenda · S pantalla · G resumen · B/W pretu/blanku · R tempu · Esc stop',
+  },
+};
+
+const _dutchSourceStringAdditions = {
+  'en': {
+    'Afbeelding': 'Image',
+    'Broncode': 'Source code',
+    'Bullet': 'Bullet',
+    'Plak of typ hier je broncode...': 'Paste or type your source code here...',
+    'Programmeertaal': 'Programming language',
+    'TLP van deze slide': 'TLP of this slide',
+    'Wis annotaties (C)': 'Clear annotations (C)',
+    'Stoppen (Esc)': 'Stop (Esc)',
+    'Pen · markeerstift · gum': 'Pen · highlighter · eraser',
+    'Laser · annotaties wissen': 'Laser · clear annotations',
+    'Grafiek': 'Chart',
+    'Type grafiek': 'Chart type',
+    'Staaf': 'Bar',
+    'Lijn': 'Line',
+    'Cirkel': 'Pie',
+    'CSV importeren': 'Import CSV',
+    'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+        'Data (CSV: first row = series names, first column = labels)',
+    'Gekoppeld aan': 'Linked to',
+    'Ontkoppelen': 'Unlink',
+    'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+        'Store the data in the slide, or keep it as a separate CSV file next to the presentation?',
+    'In de slide': 'In the slide',
+    'Als CSV-bestand': 'As a CSV file',
+    'Geen grafiekgegevens': 'No chart data',
+    'Label': 'Label',
+    'Rij': 'Row',
+    'Reeks': 'Series',
+    'Platte tekst': 'Plain text',
+    'Titel (optioneel)': 'Title (optional)',
+    'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+        'HTML opens in any browser without internet and renders code blocks, math and Mermaid diagrams.',
+    'Laatste slide': 'Final slide',
+    'Logo px': 'Logo px',
+    'Markdown voor laatste slide': 'Markdown for final slide',
+    'PREVIEW': 'PREVIEW',
+    'Slides gerenderd.': 'Slides rendered.',
+    'Standaard laatste slide gebruiken': 'Use default final slide',
+    'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+        'Automatically added when presenting and exporting.',
+    'gerenderd.': 'rendered.',
+    'renderen…': 'rendering…',
+    'voorbereiden…': 'preparing…',
+  },
+  'it': {
+    '# Slide\n\nInhoud hier...': '# Slide\n\nContent here...',
+    '1 slide geïmporteerd.': '1 slide imported.',
+    '1 slide kopiëren naar…': 'Copy 1 slide to…',
+    '1 slide overgeslagen': '1 slide skipped',
+    'Accent / bullets': 'Accent / bullets',
+    'Achtergrond slides': 'Slide background',
+    'Afbeelding': 'Immagine',
+    'Afbeelding gekopieerd naar klembord.': 'Image copied to clipboard.',
+    'Afbeelding plakken': 'Paste image',
+    'Afbeelding plakken uit klembord': 'Paste image from clipboard',
+    'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+        'Images → new slides · .md / .ocideck → open',
+    'Afsluiten (Escape)': 'Exit (Escape)',
+    'Alle slides zijn overgeslagen — niets om te exporteren.':
+        'All slides are skipped, so there is nothing to export.',
+    'Alle slides zijn overgeslagen — niets om te tonen.':
+        'All slides are skipped, so there is nothing to show.',
+    'Alles tonen': 'Show all',
+    'Audio verwijderen': 'Remove audio',
+    'Automatisch doorgaan na': 'Advance automatically after',
+    'Bijv. Kwartaalupdate Q4': 'E.g. Q4 update',
+    'Bullet': 'Punto elenco',
+    'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+        'Caption / credit (e.g. © Photographer Name)',
+    'Coverflow': 'Coverflow',
+    'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+        'The image is shown fullscreen as a background with reduced opacity so the text remains readable.',
+    'De snelle bruine vos springt over de luie hond.':
+        'The quick brown fox jumps over the lazy dog.',
+    'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+        'These details are stored in the Markdown and searchable when opening.',
+    'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+        'This presentation has unsaved changes. Save it before closing the tab.',
+    'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+        'This slide cannot receive an image. Choose an image slide first.',
+    'Eerste': 'First',
+    'Einde van de presentatie': 'End of presentation',
+    'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+        'A presentation with unsaved changes was found from a previous session:',
+    'Er zijn': 'There are',
+    'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+        'There are presentations with unsaved changes. Save them before closing the app.',
+    'Export mislukt:': 'Export failed:',
+    'Footer tonen op deze slide': 'Show footer on this slide',
+    'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+        'Use “Browse” to choose images from any location.',
+    'Geen afbeelding op het klembord gevonden.':
+        'No image found on the clipboard.',
+    'Geen ander deck open. Open eerst een ander tabblad.':
+        'No other deck is open. Open another tab first.',
+    'Geen andere presentaties (.md) in deze map gevonden.':
+        'No other presentations (.md) found in this folder.',
+    'Geen notities voor deze slide.': 'No notes for this slide.',
+    'Geen presentaties (.md) in deze map gevonden.':
+        'No presentations (.md) found in this folder.',
+    'Geen presentaties gevonden voor': 'No presentations found for',
+    'Geen resultaten': 'No results',
+    'Geen resultaten voor': 'No results for',
+    'Geen slides gevonden voor': 'No slides found for',
+    'Geen slides met': 'No slides with',
+    'Geselecteerd': 'Selected',
+    'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+        'L’HTML si apre in qualsiasi browser senza internet e renderizza blocchi di codice, matematica e diagrammi Mermaid.',
+    'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+        'The file will be permanently deleted from disk. This action cannot be undone.',
+    'Ingezoomd': 'Zoomed in',
+    'Inzoomen (minder van de foto zichtbaar)':
+        'Zoom in (less of the photo visible)',
+    'Kies een afbeelding': 'Choose an image',
+    'Kies een map met presentaties om te beginnen.':
+        'Choose a folder with presentations to begin.',
+    'Kon dit pakket niet importeren.': 'Could not import this package.',
+    'Kon niet van scherm wisselen.': 'Could not switch screens.',
+    'Kon van deze URL geen presentatie ophalen.':
+        'Could not fetch a presentation from this URL.',
+    'Kopieer afbeelding naar klembord': 'Copy image to clipboard',
+    'Kopiëren mislukt.': 'Copy failed.',
+    'Kopiëren naar ander deck': 'Copy to another deck',
+    'Kopiëren naar klembord mislukt.': 'Copying to clipboard failed.',
+    'Koprij verwijderen': 'Remove header row',
+    'Laat los om toe te voegen': 'Release to add',
+    'Laatste slide': 'Slide finale',
+    'Let op: deze afbeelding wordt nog gebruikt in':
+        'Warning: this image is still used in',
+    'Logo kiezen': 'Choose logo',
+    'Logo px': 'Logo px',
+    'Logo tonen op deze slide': 'Show logo on this slide',
+    'Map met presentaties kiezen': 'Choose presentation folder',
+    'Map voor exports': 'Export folder',
+    'Markdown kon niet worden verwerkt. Controleer de syntax.':
+        'Markdown could not be processed. Check the syntax.',
+    'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+        'Markdown mode — edit the full presentation as Marp Markdown',
+    'Markdown voor laatste slide': 'Markdown per la slide finale',
+    'Naam van het stijlprofiel': 'Name of the style profile',
+    'Niet-opgeslagen werk herstellen?': 'Restore unsaved work?',
+    'Niet-opgeslagen wijzigingen': 'Unsaved changes',
+    'Niets vervangen': 'Nothing replaced',
+    'Nieuw profiel': 'New profile',
+    'Open eerst een presentatie om afbeeldingen toe te voegen.':
+        'Open a presentation before adding images.',
+    'Overslaan bij presenteren/exporteren': 'Skip when presenting/exporting',
+    'PREVIEW': 'ANTEPRIMA',
+    'Paginanummers tonen (rechtsonder)': 'Show page numbers (bottom right)',
+    'Pakket geëxporteerd naar:': 'Package exported to:',
+    'Pas je zoekterm aan of voeg een beschrijving toe.':
+        'Adjust your search term or add a description.',
+    'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+        'Paste the link to an .ocideck package or a Marp Markdown file.',
+    'Preview inklappen': 'Collapse preview',
+    'Preview uitklappen': 'Expand preview',
+    'Profiel verwijderen': 'Delete profile',
+    'Rij verwijderen': 'Remove row',
+    'SLIDES': 'SLIDES',
+    'Sectieachtergrond': 'Section background',
+    'Selecteer een\nafbeelding': 'Select an\nimage',
+    'Selectie opheffen': 'Clear selection',
+    'Sleep om de slide-preview breder of smaller te maken':
+        'Drag to make the slide preview wider or narrower',
+    'Slide': 'Slide',
+    'Slide gekopieerd naar klembord.': 'Slide copied to clipboard.',
+    'Slide plakken': 'Paste slide',
+    'Slide renderen…': 'Rendering slide…',
+    'Slide toevoegen': 'Add slide',
+    'Slides gerenderd.': 'Slide renderizzate.',
+    'Sluiten (G of Esc)': 'Close (G or Esc)',
+    'Sprekersnotities...': 'Speaker notes...',
+    'Standaard laatste slide gebruiken': 'Usa slide finale predefinita',
+    'Standaard map voor presentaties': 'Default presentation folder',
+    'Standaardprofiel laden': 'Load default profile',
+    'TLP-classificatie (Traffic Light Protocol)':
+        'TLP classification (Traffic Light Protocol)',
+    'Tabel koptekst': 'Table header text',
+    'Tabeltekst': 'Table text',
+    'Terug naar standaardstijl': 'Back to default style',
+    'Terugzetten (volledige afbeelding zichtbaar)':
+        'Reset (full image visible)',
+    'Tijd resetten (R)': 'Reset timer (R)',
+    'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+        'Tip: press Enter inside a cell for a new line.',
+    'Titelachtergrond': 'Title background',
+    'Titeltekst': 'Title text',
+    'Toepassen': 'Apply',
+    'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+        'Tokens: {page}, {total}, {date}, {title}. The footer appears on all slides except title and section slides, unless you disable it per slide.',
+    'Typ zoektermen om slides uit al je presentaties te vinden.':
+        'Type search terms to find slides across your presentations.',
+    'Uitgezoomd': 'Zoomed out',
+    'Uitzoomen (meer van de foto zichtbaar)':
+        'Zoom out (more of the photo visible)',
+    'Verwijder afbeelding': 'Remove image',
+    'Verwijder logo': 'Remove logo',
+    'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+        'Deleting will clear those slides. This cannot be undone.',
+    'Volledig zichtbaar (100%)': 'Fully visible (100%)',
+    'Vul een titel in': 'Enter a title',
+    'Weer tonen': 'Show again',
+    'Weer tonen bij presenteren/exporteren':
+        'Show again when presenting/exporting',
+    'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+        'Aggiunta automaticamente durante la presentazione e l’esportazione.',
+    'Zoek in slides…': 'Search in slides…',
+    'Zoek op bestandsnaam, titel of tekst in de slides…':
+        'Search by file name, title or slide text…',
+    'Zoek op naam of beschrijving…': 'Search by name or description…',
+    'Zoek op presentatie, titel of tekst…':
+        'Search by presentation, title or text…',
+    'Zoek slides op tekst, titel, onderschrift, pad…':
+        'Search slides by text, title, caption, path…',
+    'bijv. Vertrouwelijk · {title} · {date}':
+        'e.g. Confidential · {title} · {date}',
+    'gerenderd.': 'renderizzata.',
+    'geselecteerd': 'selected',
+    'meer treffer(s)': 'more match(es)',
+    'paginering aan': 'pagination on',
+    'pijltjes + Enter of klik om te springen':
+        'arrows + Enter or click to jump',
+    'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+        'presentations with unsaved changes from a previous session:',
+    'renderen…': 'renderizzazione…',
+    'resultaat': 'result',
+    'resultaten': 'results',
+    'slide': 'slide',
+    'slide(s) gekopieerd naar': 'slide(s) copied to',
+    'slides geïmporteerd.': 'slides imported.',
+    'slides kopiëren naar…': 'slides to copy to…',
+    'slides overgeslagen': 'slides skipped',
+    'toegevoegd': 'added',
+    'treffer(s)': 'match(es)',
+    'treffers — verfijn je zoekopdracht': 'matches, refine your search',
+    'van de foto zichtbaar': 'of the photo visible',
+    'vervangen': 'replaced',
+    'verwijderen': 'remove',
+    'volledig deck': 'full deck',
+    'voorbereiden…': 'preparazione…',
+    '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+        '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+  },
+  'de': {
+    '# Slide\n\nInhoud hier...': '# Slide\n\nContent here...',
+    '1 slide geïmporteerd.': '1 slide imported.',
+    '1 slide kopiëren naar…': 'Copy 1 slide to…',
+    '1 slide overgeslagen': '1 slide skipped',
+    'Accent / bullets': 'Accent / bullets',
+    'Achtergrond slides': 'Slide background',
+    'Afbeelding': 'Bild',
+    'Afbeelding gekopieerd naar klembord.': 'Image copied to clipboard.',
+    'Afbeelding plakken': 'Paste image',
+    'Afbeelding plakken uit klembord': 'Paste image from clipboard',
+    'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+        'Images → new slides · .md / .ocideck → open',
+    'Afsluiten (Escape)': 'Exit (Escape)',
+    'Alle slides zijn overgeslagen — niets om te exporteren.':
+        'All slides are skipped, so there is nothing to export.',
+    'Alle slides zijn overgeslagen — niets om te tonen.':
+        'All slides are skipped, so there is nothing to show.',
+    'Alles tonen': 'Show all',
+    'Audio verwijderen': 'Remove audio',
+    'Automatisch doorgaan na': 'Advance automatically after',
+    'Bijv. Kwartaalupdate Q4': 'E.g. Q4 update',
+    'Bullet': 'Stichpunkt',
+    'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+        'Caption / credit (e.g. © Photographer Name)',
+    'Coverflow': 'Coverflow',
+    'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+        'The image is shown fullscreen as a background with reduced opacity so the text remains readable.',
+    'De snelle bruine vos springt over de luie hond.':
+        'The quick brown fox jumps over the lazy dog.',
+    'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+        'These details are stored in the Markdown and searchable when opening.',
+    'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+        'This presentation has unsaved changes. Save it before closing the tab.',
+    'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+        'This slide cannot receive an image. Choose an image slide first.',
+    'Eerste': 'First',
+    'Einde van de presentatie': 'End of presentation',
+    'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+        'A presentation with unsaved changes was found from a previous session:',
+    'Er zijn': 'There are',
+    'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+        'There are presentations with unsaved changes. Save them before closing the app.',
+    'Export mislukt:': 'Export failed:',
+    'Footer tonen op deze slide': 'Show footer on this slide',
+    'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+        'Use “Browse” to choose images from any location.',
+    'Geen afbeelding op het klembord gevonden.':
+        'No image found on the clipboard.',
+    'Geen ander deck open. Open eerst een ander tabblad.':
+        'No other deck is open. Open another tab first.',
+    'Geen andere presentaties (.md) in deze map gevonden.':
+        'No other presentations (.md) found in this folder.',
+    'Geen notities voor deze slide.': 'No notes for this slide.',
+    'Geen presentaties (.md) in deze map gevonden.':
+        'No presentations (.md) found in this folder.',
+    'Geen presentaties gevonden voor': 'No presentations found for',
+    'Geen resultaten': 'No results',
+    'Geen resultaten voor': 'No results for',
+    'Geen slides gevonden voor': 'No slides found for',
+    'Geen slides met': 'No slides with',
+    'Geselecteerd': 'Selected',
+    'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+        'HTML öffnet sich in jedem Browser ohne Internet und rendert Codeblöcke, Mathematik und Mermaid-Diagramme.',
+    'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+        'The file will be permanently deleted from disk. This action cannot be undone.',
+    'Ingezoomd': 'Zoomed in',
+    'Inzoomen (minder van de foto zichtbaar)':
+        'Zoom in (less of the photo visible)',
+    'Kies een afbeelding': 'Choose an image',
+    'Kies een map met presentaties om te beginnen.':
+        'Choose a folder with presentations to begin.',
+    'Kon dit pakket niet importeren.': 'Could not import this package.',
+    'Kon niet van scherm wisselen.': 'Could not switch screens.',
+    'Kon van deze URL geen presentatie ophalen.':
+        'Could not fetch a presentation from this URL.',
+    'Kopieer afbeelding naar klembord': 'Copy image to clipboard',
+    'Kopiëren mislukt.': 'Copy failed.',
+    'Kopiëren naar ander deck': 'Copy to another deck',
+    'Kopiëren naar klembord mislukt.': 'Copying to clipboard failed.',
+    'Koprij verwijderen': 'Remove header row',
+    'Laat los om toe te voegen': 'Release to add',
+    'Laatste slide': 'Letzte Folie',
+    'Let op: deze afbeelding wordt nog gebruikt in':
+        'Warning: this image is still used in',
+    'Logo kiezen': 'Choose logo',
+    'Logo px': 'Logo px',
+    'Logo tonen op deze slide': 'Show logo on this slide',
+    'Map met presentaties kiezen': 'Choose presentation folder',
+    'Map voor exports': 'Export folder',
+    'Markdown kon niet worden verwerkt. Controleer de syntax.':
+        'Markdown could not be processed. Check the syntax.',
+    'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+        'Markdown mode — edit the full presentation as Marp Markdown',
+    'Markdown voor laatste slide': 'Markdown für die letzte Folie',
+    'Naam van het stijlprofiel': 'Name of the style profile',
+    'Niet-opgeslagen werk herstellen?': 'Restore unsaved work?',
+    'Niet-opgeslagen wijzigingen': 'Unsaved changes',
+    'Niets vervangen': 'Nothing replaced',
+    'Nieuw profiel': 'New profile',
+    'Open eerst een presentatie om afbeeldingen toe te voegen.':
+        'Open a presentation before adding images.',
+    'Overslaan bij presenteren/exporteren': 'Skip when presenting/exporting',
+    'PREVIEW': 'VORSCHAU',
+    'Paginanummers tonen (rechtsonder)': 'Show page numbers (bottom right)',
+    'Pakket geëxporteerd naar:': 'Package exported to:',
+    'Pas je zoekterm aan of voeg een beschrijving toe.':
+        'Adjust your search term or add a description.',
+    'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+        'Paste the link to an .ocideck package or a Marp Markdown file.',
+    'Preview inklappen': 'Collapse preview',
+    'Preview uitklappen': 'Expand preview',
+    'Profiel verwijderen': 'Delete profile',
+    'Rij verwijderen': 'Remove row',
+    'SLIDES': 'SLIDES',
+    'Sectieachtergrond': 'Section background',
+    'Selecteer een\nafbeelding': 'Select an\nimage',
+    'Selectie opheffen': 'Clear selection',
+    'Sleep om de slide-preview breder of smaller te maken':
+        'Drag to make the slide preview wider or narrower',
+    'Slide': 'Slide',
+    'Slide gekopieerd naar klembord.': 'Slide copied to clipboard.',
+    'Slide plakken': 'Paste slide',
+    'Slide renderen…': 'Rendering slide…',
+    'Slide toevoegen': 'Add slide',
+    'Slides gerenderd.': 'Folien gerendert.',
+    'Sluiten (G of Esc)': 'Close (G or Esc)',
+    'Sprekersnotities...': 'Speaker notes...',
+    'Standaard laatste slide gebruiken':
+        'Standardmäßige letzte Folie verwenden',
+    'Standaard map voor presentaties': 'Default presentation folder',
+    'Standaardprofiel laden': 'Load default profile',
+    'TLP-classificatie (Traffic Light Protocol)':
+        'TLP classification (Traffic Light Protocol)',
+    'Tabel koptekst': 'Table header text',
+    'Tabeltekst': 'Table text',
+    'Terug naar standaardstijl': 'Back to default style',
+    'Terugzetten (volledige afbeelding zichtbaar)':
+        'Reset (full image visible)',
+    'Tijd resetten (R)': 'Reset timer (R)',
+    'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+        'Tip: press Enter inside a cell for a new line.',
+    'Titelachtergrond': 'Title background',
+    'Titeltekst': 'Title text',
+    'Toepassen': 'Apply',
+    'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+        'Tokens: {page}, {total}, {date}, {title}. The footer appears on all slides except title and section slides, unless you disable it per slide.',
+    'Typ zoektermen om slides uit al je presentaties te vinden.':
+        'Type search terms to find slides across your presentations.',
+    'Uitgezoomd': 'Zoomed out',
+    'Uitzoomen (meer van de foto zichtbaar)':
+        'Zoom out (more of the photo visible)',
+    'Verwijder afbeelding': 'Remove image',
+    'Verwijder logo': 'Remove logo',
+    'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+        'Deleting will clear those slides. This cannot be undone.',
+    'Volledig zichtbaar (100%)': 'Fully visible (100%)',
+    'Vul een titel in': 'Enter a title',
+    'Weer tonen': 'Show again',
+    'Weer tonen bij presenteren/exporteren':
+        'Show again when presenting/exporting',
+    'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+        'Wird beim Präsentieren und Exportieren automatisch hinzugefügt.',
+    'Zoek in slides…': 'Search in slides…',
+    'Zoek op bestandsnaam, titel of tekst in de slides…':
+        'Search by file name, title or slide text…',
+    'Zoek op naam of beschrijving…': 'Search by name or description…',
+    'Zoek op presentatie, titel of tekst…':
+        'Search by presentation, title or text…',
+    'Zoek slides op tekst, titel, onderschrift, pad…':
+        'Search slides by text, title, caption, path…',
+    'bijv. Vertrouwelijk · {title} · {date}':
+        'e.g. Confidential · {title} · {date}',
+    'gerenderd.': 'gerendert.',
+    'geselecteerd': 'selected',
+    'meer treffer(s)': 'more match(es)',
+    'paginering aan': 'pagination on',
+    'pijltjes + Enter of klik om te springen':
+        'arrows + Enter or click to jump',
+    'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+        'presentations with unsaved changes from a previous session:',
+    'renderen…': 'rendern…',
+    'resultaat': 'result',
+    'resultaten': 'results',
+    'slide': 'slide',
+    'slide(s) gekopieerd naar': 'slide(s) copied to',
+    'slides geïmporteerd.': 'slides imported.',
+    'slides kopiëren naar…': 'slides to copy to…',
+    'slides overgeslagen': 'slides skipped',
+    'toegevoegd': 'added',
+    'treffer(s)': 'match(es)',
+    'treffers — verfijn je zoekopdracht': 'matches, refine your search',
+    'van de foto zichtbaar': 'of the photo visible',
+    'vervangen': 'replaced',
+    'verwijderen': 'remove',
+    'volledig deck': 'full deck',
+    'voorbereiden…': 'vorbereiten…',
+    '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+        '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+  },
+  'fr': {
+    '# Slide\n\nInhoud hier...': '# Slide\n\nContent here...',
+    '1 slide geïmporteerd.': '1 slide imported.',
+    '1 slide kopiëren naar…': 'Copy 1 slide to…',
+    '1 slide overgeslagen': '1 slide skipped',
+    'Accent / bullets': 'Accent / bullets',
+    'Achtergrond slides': 'Slide background',
+    'Afbeelding': 'Image',
+    'Afbeelding gekopieerd naar klembord.': 'Image copied to clipboard.',
+    'Afbeelding plakken': 'Paste image',
+    'Afbeelding plakken uit klembord': 'Paste image from clipboard',
+    'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+        'Images → new slides · .md / .ocideck → open',
+    'Afsluiten (Escape)': 'Exit (Escape)',
+    'Alle slides zijn overgeslagen — niets om te exporteren.':
+        'All slides are skipped, so there is nothing to export.',
+    'Alle slides zijn overgeslagen — niets om te tonen.':
+        'All slides are skipped, so there is nothing to show.',
+    'Alles tonen': 'Show all',
+    'Audio verwijderen': 'Remove audio',
+    'Automatisch doorgaan na': 'Advance automatically after',
+    'Bijv. Kwartaalupdate Q4': 'E.g. Q4 update',
+    'Bullet': 'Puce',
+    'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+        'Caption / credit (e.g. © Photographer Name)',
+    'Coverflow': 'Coverflow',
+    'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+        'The image is shown fullscreen as a background with reduced opacity so the text remains readable.',
+    'De snelle bruine vos springt over de luie hond.':
+        'The quick brown fox jumps over the lazy dog.',
+    'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+        'These details are stored in the Markdown and searchable when opening.',
+    'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+        'This presentation has unsaved changes. Save it before closing the tab.',
+    'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+        'This slide cannot receive an image. Choose an image slide first.',
+    'Eerste': 'First',
+    'Einde van de presentatie': 'End of presentation',
+    'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+        'A presentation with unsaved changes was found from a previous session:',
+    'Er zijn': 'There are',
+    'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+        'There are presentations with unsaved changes. Save them before closing the app.',
+    'Export mislukt:': 'Export failed:',
+    'Footer tonen op deze slide': 'Show footer on this slide',
+    'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+        'Use “Browse” to choose images from any location.',
+    'Geen afbeelding op het klembord gevonden.':
+        'No image found on the clipboard.',
+    'Geen ander deck open. Open eerst een ander tabblad.':
+        'No other deck is open. Open another tab first.',
+    'Geen andere presentaties (.md) in deze map gevonden.':
+        'No other presentations (.md) found in this folder.',
+    'Geen notities voor deze slide.': 'No notes for this slide.',
+    'Geen presentaties (.md) in deze map gevonden.':
+        'No presentations (.md) found in this folder.',
+    'Geen presentaties gevonden voor': 'No presentations found for',
+    'Geen resultaten': 'No results',
+    'Geen resultaten voor': 'No results for',
+    'Geen slides gevonden voor': 'No slides found for',
+    'Geen slides met': 'No slides with',
+    'Geselecteerd': 'Selected',
+    'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+        'Le HTML s’ouvre dans n’importe quel navigateur sans internet et rend les blocs de code, les mathématiques et les diagrammes Mermaid.',
+    'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+        'The file will be permanently deleted from disk. This action cannot be undone.',
+    'Ingezoomd': 'Zoomed in',
+    'Inzoomen (minder van de foto zichtbaar)':
+        'Zoom in (less of the photo visible)',
+    'Kies een afbeelding': 'Choose an image',
+    'Kies een map met presentaties om te beginnen.':
+        'Choose a folder with presentations to begin.',
+    'Kon dit pakket niet importeren.': 'Could not import this package.',
+    'Kon niet van scherm wisselen.': 'Could not switch screens.',
+    'Kon van deze URL geen presentatie ophalen.':
+        'Could not fetch a presentation from this URL.',
+    'Kopieer afbeelding naar klembord': 'Copy image to clipboard',
+    'Kopiëren mislukt.': 'Copy failed.',
+    'Kopiëren naar ander deck': 'Copy to another deck',
+    'Kopiëren naar klembord mislukt.': 'Copying to clipboard failed.',
+    'Koprij verwijderen': 'Remove header row',
+    'Laat los om toe te voegen': 'Release to add',
+    'Laatste slide': 'Diapositive finale',
+    'Let op: deze afbeelding wordt nog gebruikt in':
+        'Warning: this image is still used in',
+    'Logo kiezen': 'Choose logo',
+    'Logo px': 'Logo px',
+    'Logo tonen op deze slide': 'Show logo on this slide',
+    'Map met presentaties kiezen': 'Choose presentation folder',
+    'Map voor exports': 'Export folder',
+    'Markdown kon niet worden verwerkt. Controleer de syntax.':
+        'Markdown could not be processed. Check the syntax.',
+    'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+        'Markdown mode — edit the full presentation as Marp Markdown',
+    'Markdown voor laatste slide': 'Markdown pour la diapositive finale',
+    'Naam van het stijlprofiel': 'Name of the style profile',
+    'Niet-opgeslagen werk herstellen?': 'Restore unsaved work?',
+    'Niet-opgeslagen wijzigingen': 'Unsaved changes',
+    'Niets vervangen': 'Nothing replaced',
+    'Nieuw profiel': 'New profile',
+    'Open eerst een presentatie om afbeeldingen toe te voegen.':
+        'Open a presentation before adding images.',
+    'Overslaan bij presenteren/exporteren': 'Skip when presenting/exporting',
+    'PREVIEW': 'APERÇU',
+    'Paginanummers tonen (rechtsonder)': 'Show page numbers (bottom right)',
+    'Pakket geëxporteerd naar:': 'Package exported to:',
+    'Pas je zoekterm aan of voeg een beschrijving toe.':
+        'Adjust your search term or add a description.',
+    'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+        'Paste the link to an .ocideck package or a Marp Markdown file.',
+    'Preview inklappen': 'Collapse preview',
+    'Preview uitklappen': 'Expand preview',
+    'Profiel verwijderen': 'Delete profile',
+    'Rij verwijderen': 'Remove row',
+    'SLIDES': 'SLIDES',
+    'Sectieachtergrond': 'Section background',
+    'Selecteer een\nafbeelding': 'Select an\nimage',
+    'Selectie opheffen': 'Clear selection',
+    'Sleep om de slide-preview breder of smaller te maken':
+        'Drag to make the slide preview wider or narrower',
+    'Slide': 'Slide',
+    'Slide gekopieerd naar klembord.': 'Slide copied to clipboard.',
+    'Slide plakken': 'Paste slide',
+    'Slide renderen…': 'Rendering slide…',
+    'Slide toevoegen': 'Add slide',
+    'Slides gerenderd.': 'Diapositives rendues.',
+    'Sluiten (G of Esc)': 'Close (G or Esc)',
+    'Sprekersnotities...': 'Speaker notes...',
+    'Standaard laatste slide gebruiken':
+        'Utiliser la diapositive finale par défaut',
+    'Standaard map voor presentaties': 'Default presentation folder',
+    'Standaardprofiel laden': 'Load default profile',
+    'TLP-classificatie (Traffic Light Protocol)':
+        'TLP classification (Traffic Light Protocol)',
+    'Tabel koptekst': 'Table header text',
+    'Tabeltekst': 'Table text',
+    'Terug naar standaardstijl': 'Back to default style',
+    'Terugzetten (volledige afbeelding zichtbaar)':
+        'Reset (full image visible)',
+    'Tijd resetten (R)': 'Reset timer (R)',
+    'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+        'Tip: press Enter inside a cell for a new line.',
+    'Titelachtergrond': 'Title background',
+    'Titeltekst': 'Title text',
+    'Toepassen': 'Apply',
+    'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+        'Tokens: {page}, {total}, {date}, {title}. The footer appears on all slides except title and section slides, unless you disable it per slide.',
+    'Typ zoektermen om slides uit al je presentaties te vinden.':
+        'Type search terms to find slides across your presentations.',
+    'Uitgezoomd': 'Zoomed out',
+    'Uitzoomen (meer van de foto zichtbaar)':
+        'Zoom out (more of the photo visible)',
+    'Verwijder afbeelding': 'Remove image',
+    'Verwijder logo': 'Remove logo',
+    'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+        'Deleting will clear those slides. This cannot be undone.',
+    'Volledig zichtbaar (100%)': 'Fully visible (100%)',
+    'Vul een titel in': 'Enter a title',
+    'Weer tonen': 'Show again',
+    'Weer tonen bij presenteren/exporteren':
+        'Show again when presenting/exporting',
+    'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+        'Ajoutée automatiquement lors de la présentation et de l’exportation.',
+    'Zoek in slides…': 'Search in slides…',
+    'Zoek op bestandsnaam, titel of tekst in de slides…':
+        'Search by file name, title or slide text…',
+    'Zoek op naam of beschrijving…': 'Search by name or description…',
+    'Zoek op presentatie, titel of tekst…':
+        'Search by presentation, title or text…',
+    'Zoek slides op tekst, titel, onderschrift, pad…':
+        'Search slides by text, title, caption, path…',
+    'bijv. Vertrouwelijk · {title} · {date}':
+        'e.g. Confidential · {title} · {date}',
+    'gerenderd.': 'rendue.',
+    'geselecteerd': 'selected',
+    'meer treffer(s)': 'more match(es)',
+    'paginering aan': 'pagination on',
+    'pijltjes + Enter of klik om te springen':
+        'arrows + Enter or click to jump',
+    'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+        'presentations with unsaved changes from a previous session:',
+    'renderen…': 'rendu…',
+    'resultaat': 'result',
+    'resultaten': 'results',
+    'slide': 'slide',
+    'slide(s) gekopieerd naar': 'slide(s) copied to',
+    'slides geïmporteerd.': 'slides imported.',
+    'slides kopiëren naar…': 'slides to copy to…',
+    'slides overgeslagen': 'slides skipped',
+    'toegevoegd': 'added',
+    'treffer(s)': 'match(es)',
+    'treffers — verfijn je zoekopdracht': 'matches, refine your search',
+    'van de foto zichtbaar': 'of the photo visible',
+    'vervangen': 'replaced',
+    'verwijderen': 'remove',
+    'volledig deck': 'full deck',
+    'voorbereiden…': 'préparation…',
+    '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+        '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+  },
+  'es': {
+    '# Slide\n\nInhoud hier...': '# Slide\n\nContent here...',
+    '1 slide geïmporteerd.': '1 slide imported.',
+    '1 slide kopiëren naar…': 'Copy 1 slide to…',
+    '1 slide overgeslagen': '1 slide skipped',
+    'Accent / bullets': 'Accent / bullets',
+    'Achtergrond slides': 'Slide background',
+    'Afbeelding': 'Imagen',
+    'Afbeelding gekopieerd naar klembord.': 'Image copied to clipboard.',
+    'Afbeelding plakken': 'Paste image',
+    'Afbeelding plakken uit klembord': 'Paste image from clipboard',
+    'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+        'Images → new slides · .md / .ocideck → open',
+    'Afsluiten (Escape)': 'Exit (Escape)',
+    'Alle slides zijn overgeslagen — niets om te exporteren.':
+        'All slides are skipped, so there is nothing to export.',
+    'Alle slides zijn overgeslagen — niets om te tonen.':
+        'All slides are skipped, so there is nothing to show.',
+    'Alles tonen': 'Show all',
+    'Audio verwijderen': 'Remove audio',
+    'Automatisch doorgaan na': 'Advance automatically after',
+    'Bijv. Kwartaalupdate Q4': 'E.g. Q4 update',
+    'Bullet': 'Viñeta',
+    'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+        'Caption / credit (e.g. © Photographer Name)',
+    'Coverflow': 'Coverflow',
+    'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+        'The image is shown fullscreen as a background with reduced opacity so the text remains readable.',
+    'De snelle bruine vos springt over de luie hond.':
+        'The quick brown fox jumps over the lazy dog.',
+    'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+        'These details are stored in the Markdown and searchable when opening.',
+    'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+        'This presentation has unsaved changes. Save it before closing the tab.',
+    'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+        'This slide cannot receive an image. Choose an image slide first.',
+    'Eerste': 'First',
+    'Einde van de presentatie': 'End of presentation',
+    'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+        'A presentation with unsaved changes was found from a previous session:',
+    'Er zijn': 'There are',
+    'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+        'There are presentations with unsaved changes. Save them before closing the app.',
+    'Export mislukt:': 'Export failed:',
+    'Footer tonen op deze slide': 'Show footer on this slide',
+    'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+        'Use “Browse” to choose images from any location.',
+    'Geen afbeelding op het klembord gevonden.':
+        'No image found on the clipboard.',
+    'Geen ander deck open. Open eerst een ander tabblad.':
+        'No other deck is open. Open another tab first.',
+    'Geen andere presentaties (.md) in deze map gevonden.':
+        'No other presentations (.md) found in this folder.',
+    'Geen notities voor deze slide.': 'No notes for this slide.',
+    'Geen presentaties (.md) in deze map gevonden.':
+        'No presentations (.md) found in this folder.',
+    'Geen presentaties gevonden voor': 'No presentations found for',
+    'Geen resultaten': 'No results',
+    'Geen resultaten voor': 'No results for',
+    'Geen slides gevonden voor': 'No slides found for',
+    'Geen slides met': 'No slides with',
+    'Geselecteerd': 'Selected',
+    'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+        'El HTML se abre en cualquier navegador sin internet y renderiza bloques de código, matemáticas y diagramas Mermaid.',
+    'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+        'The file will be permanently deleted from disk. This action cannot be undone.',
+    'Ingezoomd': 'Zoomed in',
+    'Inzoomen (minder van de foto zichtbaar)':
+        'Zoom in (less of the photo visible)',
+    'Kies een afbeelding': 'Choose an image',
+    'Kies een map met presentaties om te beginnen.':
+        'Choose a folder with presentations to begin.',
+    'Kon dit pakket niet importeren.': 'Could not import this package.',
+    'Kon niet van scherm wisselen.': 'Could not switch screens.',
+    'Kon van deze URL geen presentatie ophalen.':
+        'Could not fetch a presentation from this URL.',
+    'Kopieer afbeelding naar klembord': 'Copy image to clipboard',
+    'Kopiëren mislukt.': 'Copy failed.',
+    'Kopiëren naar ander deck': 'Copy to another deck',
+    'Kopiëren naar klembord mislukt.': 'Copying to clipboard failed.',
+    'Koprij verwijderen': 'Remove header row',
+    'Laat los om toe te voegen': 'Release to add',
+    'Laatste slide': 'Diapositiva final',
+    'Let op: deze afbeelding wordt nog gebruikt in':
+        'Warning: this image is still used in',
+    'Logo kiezen': 'Choose logo',
+    'Logo px': 'Logo px',
+    'Logo tonen op deze slide': 'Show logo on this slide',
+    'Map met presentaties kiezen': 'Choose presentation folder',
+    'Map voor exports': 'Export folder',
+    'Markdown kon niet worden verwerkt. Controleer de syntax.':
+        'Markdown could not be processed. Check the syntax.',
+    'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+        'Markdown mode — edit the full presentation as Marp Markdown',
+    'Markdown voor laatste slide': 'Markdown para la diapositiva final',
+    'Naam van het stijlprofiel': 'Name of the style profile',
+    'Niet-opgeslagen werk herstellen?': 'Restore unsaved work?',
+    'Niet-opgeslagen wijzigingen': 'Unsaved changes',
+    'Niets vervangen': 'Nothing replaced',
+    'Nieuw profiel': 'New profile',
+    'Open eerst een presentatie om afbeeldingen toe te voegen.':
+        'Open a presentation before adding images.',
+    'Overslaan bij presenteren/exporteren': 'Skip when presenting/exporting',
+    'PREVIEW': 'VISTA PREVIA',
+    'Paginanummers tonen (rechtsonder)': 'Show page numbers (bottom right)',
+    'Pakket geëxporteerd naar:': 'Package exported to:',
+    'Pas je zoekterm aan of voeg een beschrijving toe.':
+        'Adjust your search term or add a description.',
+    'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+        'Paste the link to an .ocideck package or a Marp Markdown file.',
+    'Preview inklappen': 'Collapse preview',
+    'Preview uitklappen': 'Expand preview',
+    'Profiel verwijderen': 'Delete profile',
+    'Rij verwijderen': 'Remove row',
+    'SLIDES': 'SLIDES',
+    'Sectieachtergrond': 'Section background',
+    'Selecteer een\nafbeelding': 'Select an\nimage',
+    'Selectie opheffen': 'Clear selection',
+    'Sleep om de slide-preview breder of smaller te maken':
+        'Drag to make the slide preview wider or narrower',
+    'Slide': 'Slide',
+    'Slide gekopieerd naar klembord.': 'Slide copied to clipboard.',
+    'Slide plakken': 'Paste slide',
+    'Slide renderen…': 'Rendering slide…',
+    'Slide toevoegen': 'Add slide',
+    'Slides gerenderd.': 'Diapositivas renderizadas.',
+    'Sluiten (G of Esc)': 'Close (G or Esc)',
+    'Sprekersnotities...': 'Speaker notes...',
+    'Standaard laatste slide gebruiken':
+        'Usar diapositiva final predeterminada',
+    'Standaard map voor presentaties': 'Default presentation folder',
+    'Standaardprofiel laden': 'Load default profile',
+    'TLP-classificatie (Traffic Light Protocol)':
+        'TLP classification (Traffic Light Protocol)',
+    'Tabel koptekst': 'Table header text',
+    'Tabeltekst': 'Table text',
+    'Terug naar standaardstijl': 'Back to default style',
+    'Terugzetten (volledige afbeelding zichtbaar)':
+        'Reset (full image visible)',
+    'Tijd resetten (R)': 'Reset timer (R)',
+    'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+        'Tip: press Enter inside a cell for a new line.',
+    'Titelachtergrond': 'Title background',
+    'Titeltekst': 'Title text',
+    'Toepassen': 'Apply',
+    'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+        'Tokens: {page}, {total}, {date}, {title}. The footer appears on all slides except title and section slides, unless you disable it per slide.',
+    'Typ zoektermen om slides uit al je presentaties te vinden.':
+        'Type search terms to find slides across your presentations.',
+    'Uitgezoomd': 'Zoomed out',
+    'Uitzoomen (meer van de foto zichtbaar)':
+        'Zoom out (more of the photo visible)',
+    'Verwijder afbeelding': 'Remove image',
+    'Verwijder logo': 'Remove logo',
+    'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+        'Deleting will clear those slides. This cannot be undone.',
+    'Volledig zichtbaar (100%)': 'Fully visible (100%)',
+    'Vul een titel in': 'Enter a title',
+    'Weer tonen': 'Show again',
+    'Weer tonen bij presenteren/exporteren':
+        'Show again when presenting/exporting',
+    'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+        'Se añade automáticamente al presentar y exportar.',
+    'Zoek in slides…': 'Search in slides…',
+    'Zoek op bestandsnaam, titel of tekst in de slides…':
+        'Search by file name, title or slide text…',
+    'Zoek op naam of beschrijving…': 'Search by name or description…',
+    'Zoek op presentatie, titel of tekst…':
+        'Search by presentation, title or text…',
+    'Zoek slides op tekst, titel, onderschrift, pad…':
+        'Search slides by text, title, caption, path…',
+    'bijv. Vertrouwelijk · {title} · {date}':
+        'e.g. Confidential · {title} · {date}',
+    'gerenderd.': 'renderizada.',
+    'geselecteerd': 'selected',
+    'meer treffer(s)': 'more match(es)',
+    'paginering aan': 'pagination on',
+    'pijltjes + Enter of klik om te springen':
+        'arrows + Enter or click to jump',
+    'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+        'presentations with unsaved changes from a previous session:',
+    'renderen…': 'renderizando…',
+    'resultaat': 'result',
+    'resultaten': 'results',
+    'slide': 'slide',
+    'slide(s) gekopieerd naar': 'slide(s) copied to',
+    'slides geïmporteerd.': 'slides imported.',
+    'slides kopiëren naar…': 'slides to copy to…',
+    'slides overgeslagen': 'slides skipped',
+    'toegevoegd': 'added',
+    'treffer(s)': 'match(es)',
+    'treffers — verfijn je zoekopdracht': 'matches, refine your search',
+    'van de foto zichtbaar': 'of the photo visible',
+    'vervangen': 'replaced',
+    'verwijderen': 'remove',
+    'volledig deck': 'full deck',
+    'voorbereiden…': 'preparando…',
+    '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+        '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+  },
+  'fy': {
+    '# Slide\n\nInhoud hier...': '# Slide\n\nContent here...',
+    '1 slide geïmporteerd.': '1 slide imported.',
+    '1 slide kopiëren naar…': 'Copy 1 slide to…',
+    '1 slide overgeslagen': '1 slide skipped',
+    'Accent / bullets': 'Accent / bullets',
+    'Achtergrond slides': 'Slide background',
+    'Afbeelding': 'Ofbylding',
+    'Afbeelding gekopieerd naar klembord.': 'Image copied to clipboard.',
+    'Afbeelding plakken': 'Paste image',
+    'Afbeelding plakken uit klembord': 'Paste image from clipboard',
+    'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+        'Images → new slides · .md / .ocideck → open',
+    'Afsluiten (Escape)': 'Exit (Escape)',
+    'Alle slides zijn overgeslagen — niets om te exporteren.':
+        'All slides are skipped, so there is nothing to export.',
+    'Alle slides zijn overgeslagen — niets om te tonen.':
+        'All slides are skipped, so there is nothing to show.',
+    'Alles tonen': 'Show all',
+    'Audio verwijderen': 'Remove audio',
+    'Automatisch doorgaan na': 'Advance automatically after',
+    'Bijv. Kwartaalupdate Q4': 'E.g. Q4 update',
+    'Bullet': 'Puntsje',
+    'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+        'Caption / credit (e.g. © Photographer Name)',
+    'Coverflow': 'Coverflow',
+    'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+        'The image is shown fullscreen as a background with reduced opacity so the text remains readable.',
+    'De snelle bruine vos springt over de luie hond.':
+        'The quick brown fox jumps over the lazy dog.',
+    'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+        'These details are stored in the Markdown and searchable when opening.',
+    'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+        'This presentation has unsaved changes. Save it before closing the tab.',
+    'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+        'This slide cannot receive an image. Choose an image slide first.',
+    'Eerste': 'First',
+    'Einde van de presentatie': 'End of presentation',
+    'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+        'A presentation with unsaved changes was found from a previous session:',
+    'Er zijn': 'There are',
+    'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+        'There are presentations with unsaved changes. Save them before closing the app.',
+    'Export mislukt:': 'Export failed:',
+    'Footer tonen op deze slide': 'Show footer on this slide',
+    'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+        'Use “Browse” to choose images from any location.',
+    'Geen afbeelding op het klembord gevonden.':
+        'No image found on the clipboard.',
+    'Geen ander deck open. Open eerst een ander tabblad.':
+        'No other deck is open. Open another tab first.',
+    'Geen andere presentaties (.md) in deze map gevonden.':
+        'No other presentations (.md) found in this folder.',
+    'Geen presentaties (.md) in deze map gevonden.':
+        'No presentations (.md) found in this folder.',
+    'Geen presentaties gevonden voor': 'No presentations found for',
+    'Geen resultaten': 'No results',
+    'Geen resultaten voor': 'No results for',
+    'Geen slides gevonden voor': 'No slides found for',
+    'Geen slides met': 'No slides with',
+    'Geselecteerd': 'Selected',
+    'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+        'HTML iepenet yn elke browser sûnder ynternet en rendert koadeblokken, wiskunde en Mermaid-diagrammen.',
+    'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+        'The file will be permanently deleted from disk. This action cannot be undone.',
+    'Ingezoomd': 'Zoomed in',
+    'Inzoomen (minder van de foto zichtbaar)':
+        'Zoom in (less of the photo visible)',
+    'Kies een afbeelding': 'Choose an image',
+    'Kies een map met presentaties om te beginnen.':
+        'Choose a folder with presentations to begin.',
+    'Kon dit pakket niet importeren.': 'Could not import this package.',
+    'Kon van deze URL geen presentatie ophalen.':
+        'Could not fetch a presentation from this URL.',
+    'Kopieer afbeelding naar klembord': 'Copy image to clipboard',
+    'Kopiëren mislukt.': 'Copy failed.',
+    'Kopiëren naar ander deck': 'Copy to another deck',
+    'Kopiëren naar klembord mislukt.': 'Copying to clipboard failed.',
+    'Koprij verwijderen': 'Remove header row',
+    'Laat los om toe te voegen': 'Release to add',
+    'Laatste slide': 'Lêste slide',
+    'Let op: deze afbeelding wordt nog gebruikt in':
+        'Warning: this image is still used in',
+    'Logo kiezen': 'Choose logo',
+    'Logo px': 'Logo px',
+    'Logo tonen op deze slide': 'Show logo on this slide',
+    'Map met presentaties kiezen': 'Choose presentation folder',
+    'Map voor exports': 'Export folder',
+    'Markdown kon niet worden verwerkt. Controleer de syntax.':
+        'Markdown could not be processed. Check the syntax.',
+    'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+        'Markdown mode — edit the full presentation as Marp Markdown',
+    'Markdown voor laatste slide': 'Markdown foar de lêste slide',
+    'Naam van het stijlprofiel': 'Name of the style profile',
+    'Niet-opgeslagen werk herstellen?': 'Restore unsaved work?',
+    'Niet-opgeslagen wijzigingen': 'Unsaved changes',
+    'Niets vervangen': 'Nothing replaced',
+    'Nieuw profiel': 'New profile',
+    'Open eerst een presentatie om afbeeldingen toe te voegen.':
+        'Open a presentation before adding images.',
+    'Overslaan bij presenteren/exporteren': 'Skip when presenting/exporting',
+    'PREVIEW': 'FOARBYLD',
+    'Paginanummers tonen (rechtsonder)': 'Show page numbers (bottom right)',
+    'Pakket geëxporteerd naar:': 'Package exported to:',
+    'Pas je zoekterm aan of voeg een beschrijving toe.':
+        'Adjust your search term or add a description.',
+    'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+        'Paste the link to an .ocideck package or a Marp Markdown file.',
+    'Preview inklappen': 'Collapse preview',
+    'Preview uitklappen': 'Expand preview',
+    'Profiel verwijderen': 'Delete profile',
+    'Rij verwijderen': 'Remove row',
+    'SLIDES': 'SLIDES',
+    'Sectieachtergrond': 'Section background',
+    'Selecteer een\nafbeelding': 'Select an\nimage',
+    'Selectie opheffen': 'Clear selection',
+    'Sleep om de slide-preview breder of smaller te maken':
+        'Drag to make the slide preview wider or narrower',
+    'Slide': 'Slide',
+    'Slide gekopieerd naar klembord.': 'Slide copied to clipboard.',
+    'Slide plakken': 'Paste slide',
+    'Slide renderen…': 'Rendering slide…',
+    'Slide toevoegen': 'Add slide',
+    'Slides gerenderd.': 'Slides rendere.',
+    'Sluiten (G of Esc)': 'Close (G or Esc)',
+    'Sprekersnotities...': 'Speaker notes...',
+    'Standaard laatste slide gebruiken': 'Standert lêste slide brûke',
+    'Standaard map voor presentaties': 'Default presentation folder',
+    'Standaardprofiel laden': 'Load default profile',
+    'TLP-classificatie (Traffic Light Protocol)':
+        'TLP classification (Traffic Light Protocol)',
+    'Tabel koptekst': 'Table header text',
+    'Tabeltekst': 'Table text',
+    'Terug naar standaardstijl': 'Back to default style',
+    'Terugzetten (volledige afbeelding zichtbaar)':
+        'Reset (full image visible)',
+    'Tijd resetten (R)': 'Reset timer (R)',
+    'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+        'Tip: press Enter inside a cell for a new line.',
+    'Titelachtergrond': 'Title background',
+    'Titeltekst': 'Title text',
+    'Toepassen': 'Apply',
+    'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+        'Tokens: {page}, {total}, {date}, {title}. The footer appears on all slides except title and section slides, unless you disable it per slide.',
+    'Typ zoektermen om slides uit al je presentaties te vinden.':
+        'Type search terms to find slides across your presentations.',
+    'Uitgezoomd': 'Zoomed out',
+    'Uitzoomen (meer van de foto zichtbaar)':
+        'Zoom out (more of the photo visible)',
+    'Verwijder afbeelding': 'Remove image',
+    'Verwijder logo': 'Remove logo',
+    'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+        'Deleting will clear those slides. This cannot be undone.',
+    'Volledig zichtbaar (100%)': 'Fully visible (100%)',
+    'Vul een titel in': 'Enter a title',
+    'Weer tonen': 'Show again',
+    'Weer tonen bij presenteren/exporteren':
+        'Show again when presenting/exporting',
+    'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+        'Wurdt automatysk tafoege by presintearjen en eksportearjen.',
+    'Zoek in slides…': 'Search in slides…',
+    'Zoek op bestandsnaam, titel of tekst in de slides…':
+        'Search by file name, title or slide text…',
+    'Zoek op naam of beschrijving…': 'Search by name or description…',
+    'Zoek op presentatie, titel of tekst…':
+        'Search by presentation, title or text…',
+    'Zoek slides op tekst, titel, onderschrift, pad…':
+        'Search slides by text, title, caption, path…',
+    'bijv. Vertrouwelijk · {title} · {date}':
+        'e.g. Confidential · {title} · {date}',
+    'gerenderd.': 'rendere.',
+    'geselecteerd': 'selected',
+    'meer treffer(s)': 'more match(es)',
+    'paginering aan': 'pagination on',
+    'pijltjes + Enter of klik om te springen':
+        'arrows + Enter or click to jump',
+    'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+        'presentations with unsaved changes from a previous session:',
+    'renderen…': 'rendere…',
+    'resultaat': 'result',
+    'resultaten': 'results',
+    'slide': 'slide',
+    'slide(s) gekopieerd naar': 'slide(s) copied to',
+    'slides geïmporteerd.': 'slides imported.',
+    'slides kopiëren naar…': 'slides to copy to…',
+    'slides overgeslagen': 'slides skipped',
+    'toegevoegd': 'added',
+    'treffer(s)': 'match(es)',
+    'treffers — verfijn je zoekopdracht': 'matches, refine your search',
+    'van de foto zichtbaar': 'of the photo visible',
+    'vervangen': 'replaced',
+    'verwijderen': 'remove',
+    'volledig deck': 'full deck',
+    'voorbereiden…': 'tariede…',
+    '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+        '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+  },
+  'pap': {
+    '# Slide\n\nInhoud hier...': '# Slide\n\nContent here...',
+    '1 slide geïmporteerd.': '1 slide imported.',
+    '1 slide kopiëren naar…': 'Copy 1 slide to…',
+    '1 slide overgeslagen': '1 slide skipped',
+    'Accent / bullets': 'Accent / bullets',
+    'Achtergrond slides': 'Slide background',
+    'Afbeelding': 'Imágen',
+    'Afbeelding gekopieerd naar klembord.': 'Image copied to clipboard.',
+    'Afbeelding plakken': 'Paste image',
+    'Afbeelding plakken uit klembord': 'Paste image from clipboard',
+    'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+        'Images → new slides · .md / .ocideck → open',
+    'Afsluiten (Escape)': 'Exit (Escape)',
+    'Alle slides zijn overgeslagen — niets om te exporteren.':
+        'All slides are skipped, so there is nothing to export.',
+    'Alle slides zijn overgeslagen — niets om te tonen.':
+        'All slides are skipped, so there is nothing to show.',
+    'Alles tonen': 'Show all',
+    'Audio verwijderen': 'Remove audio',
+    'Automatisch doorgaan na': 'Advance automatically after',
+    'Bijv. Kwartaalupdate Q4': 'E.g. Q4 update',
+    'Bullet': 'Punto',
+    'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+        'Caption / credit (e.g. © Photographer Name)',
+    'Coverflow': 'Coverflow',
+    'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+        'The image is shown fullscreen as a background with reduced opacity so the text remains readable.',
+    'De snelle bruine vos springt over de luie hond.':
+        'The quick brown fox jumps over the lazy dog.',
+    'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+        'These details are stored in the Markdown and searchable when opening.',
+    'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+        'This presentation has unsaved changes. Save it before closing the tab.',
+    'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+        'This slide cannot receive an image. Choose an image slide first.',
+    'Eerste': 'First',
+    'Einde van de presentatie': 'End of presentation',
+    'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+        'A presentation with unsaved changes was found from a previous session:',
+    'Er zijn': 'There are',
+    'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+        'There are presentations with unsaved changes. Save them before closing the app.',
+    'Export mislukt:': 'Export failed:',
+    'Footer tonen op deze slide': 'Show footer on this slide',
+    'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+        'Use “Browse” to choose images from any location.',
+    'Geen afbeelding op het klembord gevonden.':
+        'No image found on the clipboard.',
+    'Geen ander deck open. Open eerst een ander tabblad.':
+        'No other deck is open. Open another tab first.',
+    'Geen andere presentaties (.md) in deze map gevonden.':
+        'No other presentations (.md) found in this folder.',
+    'Geen presentaties (.md) in deze map gevonden.':
+        'No presentations (.md) found in this folder.',
+    'Geen presentaties gevonden voor': 'No presentations found for',
+    'Geen resultaten': 'No results',
+    'Geen resultaten voor': 'No results for',
+    'Geen slides gevonden voor': 'No slides found for',
+    'Geen slides met': 'No slides with',
+    'Geselecteerd': 'Selected',
+    'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+        'HTML ta habri den tur browser sin internet i ta render bloknan di kódigo, matemátika i diagramnan Mermaid.',
+    'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+        'The file will be permanently deleted from disk. This action cannot be undone.',
+    'Ingezoomd': 'Zoomed in',
+    'Inzoomen (minder van de foto zichtbaar)':
+        'Zoom in (less of the photo visible)',
+    'Kies een afbeelding': 'Choose an image',
+    'Kies een map met presentaties om te beginnen.':
+        'Choose a folder with presentations to begin.',
+    'Kon dit pakket niet importeren.': 'Could not import this package.',
+    'Kon van deze URL geen presentatie ophalen.':
+        'Could not fetch a presentation from this URL.',
+    'Kopieer afbeelding naar klembord': 'Copy image to clipboard',
+    'Kopiëren mislukt.': 'Copy failed.',
+    'Kopiëren naar ander deck': 'Copy to another deck',
+    'Kopiëren naar klembord mislukt.': 'Copying to clipboard failed.',
+    'Koprij verwijderen': 'Remove header row',
+    'Laat los om toe te voegen': 'Release to add',
+    'Laatste slide': 'Último slide',
+    'Let op: deze afbeelding wordt nog gebruikt in':
+        'Warning: this image is still used in',
+    'Logo kiezen': 'Choose logo',
+    'Logo px': 'Logo px',
+    'Logo tonen op deze slide': 'Show logo on this slide',
+    'Map met presentaties kiezen': 'Choose presentation folder',
+    'Map voor exports': 'Export folder',
+    'Markdown kon niet worden verwerkt. Controleer de syntax.':
+        'Markdown could not be processed. Check the syntax.',
+    'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+        'Markdown mode — edit the full presentation as Marp Markdown',
+    'Markdown voor laatste slide': 'Markdown pa e último slide',
+    'Naam van het stijlprofiel': 'Name of the style profile',
+    'Niet-opgeslagen werk herstellen?': 'Restore unsaved work?',
+    'Niet-opgeslagen wijzigingen': 'Unsaved changes',
+    'Niets vervangen': 'Nothing replaced',
+    'Nieuw profiel': 'New profile',
+    'Open eerst een presentatie om afbeeldingen toe te voegen.':
+        'Open a presentation before adding images.',
+    'Overslaan bij presenteren/exporteren': 'Skip when presenting/exporting',
+    'PREVIEW': 'PREVIEW',
+    'Paginanummers tonen (rechtsonder)': 'Show page numbers (bottom right)',
+    'Pakket geëxporteerd naar:': 'Package exported to:',
+    'Pas je zoekterm aan of voeg een beschrijving toe.':
+        'Adjust your search term or add a description.',
+    'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+        'Paste the link to an .ocideck package or a Marp Markdown file.',
+    'Preview inklappen': 'Collapse preview',
+    'Preview uitklappen': 'Expand preview',
+    'Profiel verwijderen': 'Delete profile',
+    'Rij verwijderen': 'Remove row',
+    'SLIDES': 'SLIDES',
+    'Sectieachtergrond': 'Section background',
+    'Selecteer een\nafbeelding': 'Select an\nimage',
+    'Selectie opheffen': 'Clear selection',
+    'Sleep om de slide-preview breder of smaller te maken':
+        'Drag to make the slide preview wider or narrower',
+    'Slide': 'Slide',
+    'Slide gekopieerd naar klembord.': 'Slide copied to clipboard.',
+    'Slide plakken': 'Paste slide',
+    'Slide renderen…': 'Rendering slide…',
+    'Slide toevoegen': 'Add slide',
+    'Slides gerenderd.': 'Slides a wordu render.',
+    'Sluiten (G of Esc)': 'Close (G or Esc)',
+    'Sprekersnotities...': 'Speaker notes...',
+    'Standaard laatste slide gebruiken': 'Usa e último slide standard',
+    'Standaard map voor presentaties': 'Default presentation folder',
+    'Standaardprofiel laden': 'Load default profile',
+    'TLP-classificatie (Traffic Light Protocol)':
+        'TLP classification (Traffic Light Protocol)',
+    'Tabel koptekst': 'Table header text',
+    'Tabeltekst': 'Table text',
+    'Terug naar standaardstijl': 'Back to default style',
+    'Terugzetten (volledige afbeelding zichtbaar)':
+        'Reset (full image visible)',
+    'Tijd resetten (R)': 'Reset timer (R)',
+    'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+        'Tip: press Enter inside a cell for a new line.',
+    'Titelachtergrond': 'Title background',
+    'Titeltekst': 'Title text',
+    'Toepassen': 'Apply',
+    'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+        'Tokens: {page}, {total}, {date}, {title}. The footer appears on all slides except title and section slides, unless you disable it per slide.',
+    'Typ zoektermen om slides uit al je presentaties te vinden.':
+        'Type search terms to find slides across your presentations.',
+    'Uitgezoomd': 'Zoomed out',
+    'Uitzoomen (meer van de foto zichtbaar)':
+        'Zoom out (more of the photo visible)',
+    'Verwijder afbeelding': 'Remove image',
+    'Verwijder logo': 'Remove logo',
+    'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+        'Deleting will clear those slides. This cannot be undone.',
+    'Volledig zichtbaar (100%)': 'Fully visible (100%)',
+    'Vul een titel in': 'Enter a title',
+    'Weer tonen': 'Show again',
+    'Weer tonen bij presenteren/exporteren':
+        'Show again when presenting/exporting',
+    'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+        'Ta wordu agregá automáticamente ora di presentá i eksportá.',
+    'Zoek in slides…': 'Search in slides…',
+    'Zoek op bestandsnaam, titel of tekst in de slides…':
+        'Search by file name, title or slide text…',
+    'Zoek op naam of beschrijving…': 'Search by name or description…',
+    'Zoek op presentatie, titel of tekst…':
+        'Search by presentation, title or text…',
+    'Zoek slides op tekst, titel, onderschrift, pad…':
+        'Search slides by text, title, caption, path…',
+    'bijv. Vertrouwelijk · {title} · {date}':
+        'e.g. Confidential · {title} · {date}',
+    'gerenderd.': 'render.',
+    'geselecteerd': 'selected',
+    'meer treffer(s)': 'more match(es)',
+    'paginering aan': 'pagination on',
+    'pijltjes + Enter of klik om te springen':
+        'arrows + Enter or click to jump',
+    'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+        'presentations with unsaved changes from a previous session:',
+    'renderen…': 'render…',
+    'resultaat': 'result',
+    'resultaten': 'results',
+    'slide': 'slide',
+    'slide(s) gekopieerd naar': 'slide(s) copied to',
+    'slides geïmporteerd.': 'slides imported.',
+    'slides kopiëren naar…': 'slides to copy to…',
+    'slides overgeslagen': 'slides skipped',
+    'toegevoegd': 'added',
+    'treffer(s)': 'match(es)',
+    'treffers — verfijn je zoekopdracht': 'matches, refine your search',
+    'van de foto zichtbaar': 'of the photo visible',
+    'vervangen': 'replaced',
+    'verwijderen': 'remove',
+    'volledig deck': 'full deck',
+    'voorbereiden…': 'preparando…',
+    '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+        '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
   },
 };

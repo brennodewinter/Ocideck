@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
+import '../models/annotation.dart';
 import '../models/deck.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
@@ -384,6 +385,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
   }
 
   void updateInfo({
+    String? title,
     String? author,
     String? organization,
     String? version,
@@ -396,6 +398,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
     if (deck == null) return;
     _mutate(
       deck.copyWith(
+        title: title,
         author: author,
         organization: organization,
         version: version,
@@ -412,6 +415,16 @@ class DeckNotifier extends StateNotifier<DeckState> {
     final deck = state.deck;
     if (deck == null) return;
     _mutate(deck.copyWith(themeProfile: profile));
+  }
+
+  /// Update the (separate) annotation layer. Kept out of the undo/redo history
+  /// and the content revision so drawing while presenting stays lightweight;
+  /// marks the deck dirty so the strokes get saved to the sidecar.
+  void setAnnotations(Map<String, List<InkStroke>> annotations) {
+    final deck = state.deck;
+    if (deck == null) return;
+    state = state.copyWith(deck: deck.copyWith(annotations: annotations));
+    if (!state.isDirty) state = state.copyWith(isDirty: true);
   }
 
   // ── Markdown mode ──────────────────────────────────────────────────────────

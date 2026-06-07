@@ -442,7 +442,7 @@ class CollapsedPreviewBar extends ConsumerWidget {
           RotatedBox(
             quarterTurns: 1,
             child: Text(
-              'PREVIEW',
+              context.l10n.d('PREVIEW'),
               style: TextStyle(
                 fontSize: 10,
                 letterSpacing: 1.5,

@@ -5,6 +5,7 @@ import '../../l10n/app_localizations.dart';
 
 /// The editable general metadata of a presentation.
 class PresentationInfo {
+  final String title;
   final String author;
   final String organization;
   final String version;
@@ -13,6 +14,7 @@ class PresentationInfo {
   final String keywords;
 
   const PresentationInfo({
+    required this.title,
     required this.author,
     required this.organization,
     required this.version,
@@ -42,6 +44,7 @@ class PresentationInfoDialog extends StatefulWidget {
 }
 
 class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
+  late final TextEditingController _title;
   late final TextEditingController _author;
   late final TextEditingController _organization;
   late final TextEditingController _version;
@@ -52,6 +55,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
   @override
   void initState() {
     super.initState();
+    _title = TextEditingController(text: widget.deck.title);
     _author = TextEditingController(text: widget.deck.author);
     _organization = TextEditingController(text: widget.deck.organization);
     _version = TextEditingController(text: widget.deck.version);
@@ -62,6 +66,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
 
   @override
   void dispose() {
+    _title.dispose();
     _author.dispose();
     _organization.dispose();
     _version.dispose();
@@ -75,6 +80,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
     Navigator.pop(
       context,
       PresentationInfo(
+        title: _title.text.trim(),
         author: _author.text.trim(),
         organization: _organization.text.trim(),
         version: _version.text.trim(),
@@ -108,14 +114,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  widget.deck.title,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF64748B),
-                  ),
-                ),
+                _field(_title, 'Titel', 'Titel van de presentatie'),
                 const SizedBox(height: 12),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
