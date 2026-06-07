@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/github.dart';
 import 'package:flutter_highlight/themes/atom-one-dark.dart';
@@ -8,6 +9,7 @@ import 'package:highlight/highlight.dart' show highlight;
 import 'package:highlight/languages/all.dart' show allLanguages;
 import 'package:video_player/video_player.dart';
 import '../../l10n/app_localizations.dart';
+import '../../models/chart.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
@@ -324,6 +326,13 @@ class SlidePreviewWidget extends StatelessWidget {
         );
       case SlideType.code:
         return _CodePreview(
+          slide: slide,
+          w: w,
+          font: fontFamily,
+          profile: themeProfile,
+        );
+      case SlideType.chart:
+        return _ChartPreview(
           slide: slide,
           w: w,
           font: fontFamily,
@@ -2153,6 +2162,347 @@ class _CodePreview extends StatelessWidget {
   }
 }
 
+/// Renders a chart slide (bar/line/pie) from its ```chart JSON spec.
+class _ChartPreview extends StatelessWidget {
+  final Slide slide;
+  final double w;
+  final String font;
+  final ThemeProfile profile;
+
+  const _ChartPreview({
+    required this.slide,
+    required this.w,
+    required this.font,
+    required this.profile,
+  });
+
+  static const _palette = <int>[
+    0xFF2563EB,
+    0xFFF59E0B,
+    0xFF10B981,
+    0xFFEF4444,
+    0xFF8B5CF6,
+    0xFF06B6D4,
+    0xFFEC4899,
+    0xFF84CC16,
+  ];
+
+  Color _seriesColor(int i) =>
+      i == 0 ? _hexColor(profile.accentColor) : Color(_palette[i % _palette.length]);
+
+  @override
+  Widget build(BuildContext context) {
+    final spec = ChartSpec.parse(slide.customMarkdown);
+    final pad = w * 0.06;
+    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
+    final textColor = _hexColor(profile.textColor);
+
+    return Container(
+      color: _hexColor(profile.slideBackgroundColor),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+          pad,
+          pad + safe.top,
+          pad,
+          pad + safe.bottom,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (spec.title.isNotEmpty) ...[
+              _md(
+                context,
+                spec.title,
+                _applyFont(
+                  font,
+                  TextStyle(
+                    fontSize: w * 0.04,
+                    fontWeight: FontWeight.bold,
+                    color: textColor,
+                  ),
+                ),
+                linkColor: _hexColor(profile.accentColor),
+              ),
+              SizedBox(height: w * 0.02),
+            ],
+            if (spec.series.length > 1 && spec.type != ChartType.pie)
+              _legend(spec, textColor),
+            Expanded(
+              child: spec.hasInlineData
+                  ? _chart(spec, textColor)
+                  : _placeholder(context),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _legend(ChartSpec spec, Color textColor) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: w * 0.015),
+      child: Wrap(
+        spacing: w * 0.02,
+        runSpacing: w * 0.008,
+        children: [
+          for (var i = 0; i < spec.series.length; i++)
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: w * 0.018,
+                  height: w * 0.018,
+                  decoration: BoxDecoration(
+                    color: _seriesColor(i),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                SizedBox(width: w * 0.008),
+                Text(
+                  spec.series[i].name,
+                  style: _applyFont(
+                    font,
+                    TextStyle(fontSize: w * 0.02, color: textColor),
+                  ),
+                ),
+              ],
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _chart(ChartSpec spec, Color textColor) {
+    switch (spec.type) {
+      case ChartType.bar:
+        return _barChart(spec, textColor);
+      case ChartType.line:
+        return _lineChart(spec, textColor);
+      case ChartType.pie:
+        return _pieChart(spec, textColor);
+    }
+  }
+
+  double _maxY(ChartSpec spec) {
+    var m = 0.0;
+    for (final s in spec.series) {
+      for (final v in s.data) {
+        if (v > m) m = v;
+      }
+    }
+    return m <= 0 ? 1 : m * 1.15;
+  }
+
+  FlTitlesData _titles(ChartSpec spec, Color textColor) {
+    final style = _applyFont(
+      font,
+      TextStyle(fontSize: w * 0.018, color: textColor.withValues(alpha: 0.8)),
+    );
+    return FlTitlesData(
+      topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      leftTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: w * 0.06,
+          getTitlesWidget: (value, meta) =>
+              Text(_fmtNum(value), style: style.copyWith(fontSize: w * 0.016)),
+        ),
+      ),
+      bottomTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: w * 0.05,
+          getTitlesWidget: (value, meta) {
+            final i = value.round();
+            if (i < 0 || i >= spec.x.length) return const SizedBox.shrink();
+            return Padding(
+              padding: EdgeInsets.only(top: w * 0.008),
+              child: Text(spec.x[i], style: style),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  String _fmtNum(double v) {
+    if (v == v.roundToDouble()) return v.toInt().toString();
+    return v.toStringAsFixed(1);
+  }
+
+  FlGridData _grid(Color textColor) => FlGridData(
+    show: true,
+    drawVerticalLine: false,
+    getDrawingHorizontalLine: (v) =>
+        FlLine(color: textColor.withValues(alpha: 0.12), strokeWidth: 1),
+  );
+
+  Widget _barChart(ChartSpec spec, Color textColor) {
+    final groups = <BarChartGroupData>[];
+    for (var xi = 0; xi < spec.x.length; xi++) {
+      groups.add(
+        BarChartGroupData(
+          x: xi,
+          barRods: [
+            for (var si = 0; si < spec.series.length; si++)
+              if (xi < spec.series[si].data.length)
+                BarChartRodData(
+                  toY: spec.series[si].data[xi],
+                  color: _seriesColor(si),
+                  width: w * 0.012,
+                  borderRadius: BorderRadius.circular(w * 0.003),
+                ),
+          ],
+        ),
+      );
+    }
+    return BarChart(
+      BarChartData(
+        maxY: _maxY(spec),
+        barGroups: groups,
+        titlesData: _titles(spec, textColor),
+        gridData: _grid(textColor),
+        borderData: FlBorderData(show: false),
+        barTouchData: BarTouchData(enabled: false),
+      ),
+      duration: Duration.zero,
+    );
+  }
+
+  Widget _lineChart(ChartSpec spec, Color textColor) {
+    final bars = <LineChartBarData>[];
+    for (var si = 0; si < spec.series.length; si++) {
+      bars.add(
+        LineChartBarData(
+          spots: [
+            for (var xi = 0; xi < spec.series[si].data.length; xi++)
+              FlSpot(xi.toDouble(), spec.series[si].data[xi]),
+          ],
+          color: _seriesColor(si),
+          barWidth: w * 0.004,
+          isCurved: false,
+          dotData: const FlDotData(show: true),
+        ),
+      );
+    }
+    return LineChart(
+      LineChartData(
+        minY: 0,
+        maxY: _maxY(spec),
+        lineBarsData: bars,
+        titlesData: _titles(spec, textColor),
+        gridData: _grid(textColor),
+        borderData: FlBorderData(show: false),
+        lineTouchData: const LineTouchData(enabled: false),
+      ),
+      duration: Duration.zero,
+    );
+  }
+
+  Widget _pieChart(ChartSpec spec, Color textColor) {
+    // A pie uses the first series; each slice is an x label.
+    final series = spec.series.isNotEmpty ? spec.series.first : null;
+    if (series == null) return _placeholderText('—');
+    final total = series.data.fold<double>(0, (a, b) => a + b);
+    final sections = <PieChartSectionData>[];
+    for (var i = 0; i < series.data.length; i++) {
+      final v = series.data[i];
+      final pct = total > 0 ? (v / total * 100) : 0;
+      sections.add(
+        PieChartSectionData(
+          value: v,
+          color: _seriesColor(i),
+          title: '${pct.toStringAsFixed(0)}%',
+          radius: w * 0.16,
+          titleStyle: _applyFont(
+            font,
+            TextStyle(
+              fontSize: w * 0.02,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      );
+    }
+    return Row(
+      children: [
+        Expanded(
+          flex: 3,
+          child: PieChart(
+            PieChartData(
+              sections: sections,
+              sectionsSpace: 1,
+              centerSpaceRadius: w * 0.05,
+              pieTouchData: PieTouchData(enabled: false),
+            ),
+            duration: Duration.zero,
+          ),
+        ),
+        Expanded(
+          flex: 2,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (var i = 0; i < spec.x.length && i < series.data.length; i++)
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: w * 0.004),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        width: w * 0.018,
+                        height: w * 0.018,
+                        decoration: BoxDecoration(
+                          color: _seriesColor(i),
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      SizedBox(width: w * 0.008),
+                      Flexible(
+                        child: Text(
+                          spec.x[i],
+                          style: _applyFont(
+                            font,
+                            TextStyle(fontSize: w * 0.02, color: textColor),
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _placeholder(BuildContext context) =>
+      _placeholderText(context.l10n.d('Geen grafiekgegevens'));
+
+  Widget _placeholderText(String text) => Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(
+          Icons.bar_chart_outlined,
+          size: w * 0.08,
+          color: const Color(0xFF94A3B8),
+        ),
+        SizedBox(height: w * 0.01),
+        Text(
+          text,
+          style: TextStyle(color: const Color(0xFF94A3B8), fontSize: w * 0.02),
+        ),
+      ],
+    ),
+  );
+}
+
 /// Register highlight.js language definitions once, so [HighlightView] can
 /// colour any common language without throwing.
 bool _highlightReady = false;
@@ -2377,6 +2727,8 @@ double _contentLeftInset(Slide slide, double w) {
       return w * 0.07;
     case SlideType.code:
       return w * 0.05;
+    case SlideType.chart:
+      return w * 0.06;
     case SlideType.twoBullets:
       return w * 0.065;
     case SlideType.table:

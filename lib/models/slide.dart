@@ -16,6 +16,7 @@ enum SlideType {
   table,
   freeMarkdown,
   code,
+  chart,
 }
 
 extension SlideTypeExtension on SlideType {
@@ -45,6 +46,8 @@ extension SlideTypeExtension on SlideType {
         return 'Vrije Markdown';
       case SlideType.code:
         return 'Broncode';
+      case SlideType.chart:
+        return 'Grafiek';
     }
   }
 
@@ -74,6 +77,8 @@ extension SlideTypeExtension on SlideType {
         return '';
       case SlideType.code:
         return 'code';
+      case SlideType.chart:
+        return 'chart';
     }
   }
 }

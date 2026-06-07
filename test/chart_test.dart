@@ -1,0 +1,74 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/chart.dart';
+
+void main() {
+  group('parseCsv', () {
+    test('reads header series names and labelled rows', () {
+      final (x, series) = parseCsv('\n, 2025, 2026\nQ1, 10, 12\nQ2, 14, 9\n');
+      expect(x, ['Q1', 'Q2']);
+      expect(series.map((s) => s.name), ['2025', '2026']);
+      expect(series[0].data, [10, 14]);
+      expect(series[1].data, [12, 9]);
+    });
+
+    test('non-numeric cells become 0', () {
+      final (x, series) = parseCsv(',A\nQ1,oops');
+      expect(x, ['Q1']);
+      expect(series.single.data, [0]);
+    });
+  });
+
+  group('ChartSpec', () {
+    test('round-trips inline data through the block JSON', () {
+      const spec = ChartSpec(
+        type: ChartType.line,
+        title: 'Omzet',
+        x: ['Q1', 'Q2'],
+        series: [
+          ChartSeries(name: '2025', data: [10, 14]),
+        ],
+      );
+      final back = ChartSpec.parse(spec.toBlock());
+      expect(back.type, ChartType.line);
+      expect(back.title, 'Omzet');
+      expect(back.x, ['Q1', 'Q2']);
+      expect(back.series.single.name, '2025');
+      expect(back.series.single.data, [10, 14]);
+      expect(back.hasInlineData, isTrue);
+    });
+
+    test('storage form drops inline data when a source is linked', () {
+      const spec = ChartSpec(
+        type: ChartType.bar,
+        title: 'Omzet',
+        source: 'data/omzet.csv',
+        x: ['Q1', 'Q2'],
+        series: [
+          ChartSeries(name: '2025', data: [10, 14]),
+        ],
+      );
+      final stored = ChartSpec.parse(spec.toBlock(forStorage: true));
+      expect(stored.source, 'data/omzet.csv');
+      expect(stored.hasInlineData, isFalse);
+
+      // The in-app/full form keeps the data.
+      final full = ChartSpec.parse(spec.toBlock());
+      expect(full.hasInlineData, isTrue);
+    });
+
+    test('withCsv fills x/series and keeps the source', () {
+      const spec = ChartSpec(type: ChartType.bar, source: 'data/o.csv');
+      final filled = spec.withCsv(',A,B\nJan,1,2\nFeb,3,4');
+      expect(filled.source, 'data/o.csv');
+      expect(filled.x, ['Jan', 'Feb']);
+      expect(filled.series.map((s) => s.name), ['A', 'B']);
+      expect(filled.series[1].data, [2, 4]);
+    });
+
+    test('parse is tolerant of malformed JSON', () {
+      final spec = ChartSpec.parse('{ not json');
+      expect(spec.type, ChartType.bar);
+      expect(spec.hasInlineData, isFalse);
+    });
+  });
+}

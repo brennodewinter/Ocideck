@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
@@ -260,6 +261,38 @@ void main() {
       expect(out.title, 'Voorbeeld');
       expect(out.codeLanguage, 'dart');
       expect(out.customMarkdown, code);
+    });
+
+    test('chart slide keeps its inline spec', () {
+      const block =
+          '{\n  "type": "bar",\n  "title": "Omzet",\n  "x": ["Q1","Q2"],\n'
+          '  "series": [\n    {"name":"2025","data":[10,14]}\n  ]\n}';
+      final out = _roundTrip(
+        Slide.create(SlideType.chart).copyWith(customMarkdown: block),
+      );
+      expect(out.type, SlideType.chart);
+      final spec = ChartSpec.parse(out.customMarkdown);
+      expect(spec.type, ChartType.bar);
+      expect(spec.x, ['Q1', 'Q2']);
+      expect(spec.series.single.data, [10, 14]);
+    });
+
+    test('chart slide with a source keeps only the reference in markdown', () {
+      const block = '{"type":"line","source":"data/omzet.csv",'
+          '"x":["Q1"],"series":[{"name":"2025","data":[10]}]}';
+      final service = MarkdownService();
+      final md = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [Slide.create(SlideType.chart).copyWith(customMarkdown: block)],
+        ),
+      );
+      // The stored markdown references the CSV but does not inline the data.
+      expect(md.contains('data/omzet.csv'), isTrue);
+      final out = service.parseDeck(md)!.slides.single;
+      final spec = ChartSpec.parse(out.customMarkdown);
+      expect(spec.source, 'data/omzet.csv');
+      expect(spec.hasInlineData, isFalse);
     });
 
     test('code slide without a language stays plain code', () {

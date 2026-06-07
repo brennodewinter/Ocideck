@@ -36,6 +36,7 @@ dependencies:
   # the published 0.3.0 dropped, needed for the dual-screen presenter mode.
   desktop_multi_window:
     path: third_party/desktop_multi_window
+  fl_chart: ^1.2.0
 
 dev_dependencies:
   flutter_test:

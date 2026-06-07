@@ -29,6 +29,7 @@ class AddSlideDialog extends StatelessWidget {
     (SlideType.video, Icons.movie_outlined, 'Video'),
     (SlideType.quote, Icons.format_quote_outlined, 'Quote'),
     (SlideType.table, Icons.table_chart_outlined, 'Tabel'),
+    (SlideType.chart, Icons.bar_chart, 'Grafiek'),
     (SlideType.code, Icons.terminal, 'Broncode'),
     (SlideType.freeMarkdown, Icons.code, 'Vrije Markdown'),
   ];

@@ -12,6 +12,7 @@ import '../../l10n/app_localizations.dart';
 import '../editors/bullets_editor.dart';
 import '../editors/bullets_image_editor.dart';
 import '../editors/audio_attachment_editor.dart';
+import '../editors/chart_editor.dart';
 import '../editors/code_editor.dart';
 import '../editors/free_markdown_editor.dart';
 import '../editors/image_slide_editor.dart';
@@ -283,6 +284,13 @@ class EditorPanel extends ConsumerWidget {
           slide: slide,
           onUpdate: onUpdate,
         );
+      case SlideType.chart:
+        return ChartEditor(
+          key: ValueKey(slide.id),
+          slide: slide,
+          onUpdate: onUpdate,
+          projectPath: captionBasePath,
+        );
     }
   }
 }
@@ -315,6 +323,8 @@ IconData _slideTypeIcon(SlideType type) {
       return Icons.code;
     case SlideType.code:
       return Icons.terminal;
+    case SlideType.chart:
+      return Icons.bar_chart;
   }
 }
 

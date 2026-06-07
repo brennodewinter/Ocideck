@@ -1002,9 +1002,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         exportService: widget.exportService,
         tlp: deck.tlp,
         exportDirectory: ref.read(settingsProvider).exportDirectory,
+        // Inline chart data so the HTML export can render charts standalone,
+        // even when a chart links an external CSV.
         markdown: ref
             .read(markdownServiceProvider)
-            .generateDeck(deck.copyWith(slides: slides)),
+            .generateDeck(deck.copyWith(slides: slides), inlineChartData: true),
       );
     }
 

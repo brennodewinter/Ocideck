@@ -8,6 +8,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import '../models/deck.dart';
 import '../l10n/app_localizations.dart';
 import '../models/settings.dart';
+import '../models/chart.dart';
 import '../models/slide.dart';
 import 'annotation_codec.dart';
 import 'caption_service.dart';
@@ -146,7 +147,7 @@ class FileService {
     }
     final deck = _md.parseDeck(raw, filePath: filePath);
     if (deck == null) return null;
-    final hydrated = await _hydrateImageCaptions(deck);
+    final hydrated = await _hydrateCharts(await _hydrateImageCaptions(deck));
     // Re-attach the separate annotation layer from its sidecar, if present.
     if (content == null) {
       final sidecar = File(_sidecarPath(filePath));
@@ -176,6 +177,75 @@ class FileService {
       if (await sidecar.exists()) await sidecar.delete();
     } else {
       await sidecar.writeAsString(json, flush: true);
+    }
+  }
+
+  /// Load the external CSV of any chart slide that links one, inlining the data
+  /// into the in-memory spec so the renderer has it. The markdown on disk keeps
+  /// only the `source` reference (data is stripped again on save).
+  Future<Deck> _hydrateCharts(Deck deck) async {
+    if (deck.projectPath == null) return deck;
+    var changed = false;
+    final slides = <Slide>[];
+    for (final s in deck.slides) {
+      if (s.type != SlideType.chart) {
+        slides.add(s);
+        continue;
+      }
+      final spec = ChartSpec.parse(s.customMarkdown);
+      if (spec.source == null || spec.hasInlineData) {
+        slides.add(s);
+        continue;
+      }
+      final abs = p.isAbsolute(spec.source!)
+          ? spec.source!
+          : p.join(deck.projectPath!, spec.source!);
+      final file = File(abs);
+      if (!await file.exists()) {
+        slides.add(s);
+        continue;
+      }
+      try {
+        final csv = await file.readAsString();
+        slides.add(s.copyWith(customMarkdown: spec.withCsv(csv).toBlock()));
+        changed = true;
+      } catch (_) {
+        slides.add(s);
+      }
+    }
+    return changed ? deck.copyWith(slides: slides) : deck;
+  }
+
+  /// For packaging: add a chart's linked CSV under data/ and rewrite its source
+  /// path; if the CSV is missing, fall back to keeping the data inline.
+  Slide _packChartSlide(Slide s, String? Function(String, String) addAsset) {
+    final spec = ChartSpec.parse(s.customMarkdown);
+    final src = spec.source;
+    if (src == null) return s;
+    final rel = addAsset(src, 'data');
+    if (rel == null) {
+      return s.copyWith(
+        customMarkdown: spec.copyWith(clearSource: true).toBlock(),
+      );
+    }
+    return s.copyWith(
+      customMarkdown: spec.copyWith(source: rel).toBlock(forStorage: true),
+    );
+  }
+
+  /// Copy any linked chart CSVs into [destDir]/data (used by Save As to a new
+  /// location). A normal save is a no-op because source and dest coincide.
+  Future<void> _copyChartData(Deck deck, String destDir) async {
+    for (final s in deck.slides) {
+      if (s.type != SlideType.chart) continue;
+      final src = ChartSpec.parse(s.customMarkdown).source;
+      if (src == null || p.isAbsolute(src) || deck.projectPath == null) continue;
+      final from = File(p.join(deck.projectPath!, src));
+      final toPath = p.join(destDir, src);
+      if (from.path == toPath || !from.existsSync()) continue;
+      final out = File(toPath);
+      await out.parent.create(recursive: true);
+      await out.writeAsBytes(await from.readAsBytes(), flush: true);
     }
   }
 
@@ -245,12 +315,19 @@ class FileService {
         ),
     ];
 
+    // Chart slides link their data via a CSV path inside the JSON block; bring
+    // the file along under data/ and rewrite the path to match.
+    final packedSlides = [
+      for (final s in slides)
+        if (s.type == SlideType.chart) _packChartSlide(s, addAsset) else s,
+    ];
+
     final logoRel = addAsset(deck.themeProfile.logoPath ?? '', 'logos');
     final profile = logoRel != null
         ? deck.themeProfile.copyWith(logoPath: logoRel)
         : deck.themeProfile;
 
-    final packDeck = deck.copyWith(slides: slides, themeProfile: profile);
+    final packDeck = deck.copyWith(slides: packedSlides, themeProfile: profile);
 
     // Markdown.
     final markdown = _md.generateDeck(packDeck);
@@ -452,6 +529,9 @@ class FileService {
       updatedDeck.themeProfile,
       logoAsset.cssUrl,
     );
+
+    // Bring linked chart CSVs along when saving to a new location.
+    await _copyChartData(deck, dir);
 
     final markdown = _md.generateDeck(updatedDeck);
     await File(filePath).writeAsString(markdown);

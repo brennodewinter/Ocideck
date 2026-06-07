@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:characters/characters.dart';
 import 'package:uuid/uuid.dart';
+import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
@@ -10,7 +11,7 @@ const _uuid = Uuid();
 class MarkdownService {
   // ── Generation ──────────────────────────────────────────────────────────────
 
-  String generateDeck(Deck deck) {
+  String generateDeck(Deck deck, {bool inlineChartData = false}) {
     final buf = StringBuffer();
     buf.writeln('---');
     buf.writeln('marp: true');
@@ -49,7 +50,13 @@ class MarkdownService {
         buf.writeln('---');
         buf.writeln();
       }
-      buf.write(generateSlide(deck.slides[i], themeProfile: deck.themeProfile));
+      buf.write(
+        generateSlide(
+          deck.slides[i],
+          themeProfile: deck.themeProfile,
+          inlineChartData: inlineChartData,
+        ),
+      );
     }
     return buf.toString();
   }
@@ -158,7 +165,11 @@ class MarkdownService {
     return out.toString().replaceAll('<br>', '\n');
   }
 
-  String generateSlide(Slide slide, {ThemeProfile? themeProfile}) {
+  String generateSlide(
+    Slide slide, {
+    ThemeProfile? themeProfile,
+    bool inlineChartData = false,
+  }) {
     final buf = StringBuffer();
     final cssClass = slide.cssClass.isNotEmpty
         ? slide.cssClass
@@ -329,6 +340,14 @@ class MarkdownService {
             !slide.customMarkdown.endsWith('\n')) {
           buf.writeln();
         }
+        buf.writeln('```');
+
+      case SlideType.chart:
+        // Re-serialize so inline data is dropped when the chart links a CSV
+        // (the .md keeps only the spec + source; the CSV stays the source).
+        final spec = ChartSpec.parse(slide.customMarkdown);
+        buf.writeln('```chart');
+        buf.writeln(spec.toBlock(forStorage: !inlineChartData));
         buf.writeln('```');
     }
 
@@ -650,6 +669,18 @@ class MarkdownService {
       );
     }
 
+    // Chart slides carry a fenced ```chart JSON block; handle up front too.
+    if (cssClass.split(RegExp(r'\s+')).contains('chart')) {
+      return _parseChartBlock(
+        remaining: remaining,
+        cssClass: cssClass,
+        notes: notes,
+        advanceDuration: advanceDuration,
+        skipped: skipped,
+        tlp: slideTlp,
+      );
+    }
+
     final lines = remaining.split('\n');
     String h1 = '';
     String h2 = '';
@@ -897,6 +928,68 @@ class MarkdownService {
       title: title,
       customMarkdown: code.join('\n'),
       codeLanguage: language,
+      audioPath: audioPath,
+      audioAutoplay: audioAutoplay,
+      cssClass: effectiveClass,
+      notes: notes,
+      advanceDuration: advanceDuration,
+      showLogo: !classTokens.contains('no-logo'),
+      showFooter: !classTokens.contains('no-footer'),
+      skipped: skipped,
+      tlp: tlp,
+    );
+  }
+
+  /// Parse a `<!-- _class: chart -->` slide: the fenced ```chart JSON block and
+  /// an optional `<audio>`. The JSON is kept verbatim in [Slide.customMarkdown].
+  Slide _parseChartBlock({
+    required String remaining,
+    required String cssClass,
+    required String notes,
+    required double advanceDuration,
+    required bool skipped,
+    TlpLevel tlp = TlpLevel.none,
+  }) {
+    final lines = remaining.split('\n');
+    final json = <String>[];
+    String audioPath = '';
+    bool audioAutoplay = false;
+    bool inFence = false;
+
+    for (final line in lines) {
+      final fence = RegExp(r'^\s*```').hasMatch(line);
+      if (fence) {
+        inFence = !inFence;
+        continue;
+      }
+      if (inFence) {
+        json.add(line);
+        continue;
+      }
+      final t = line.trim();
+      if (t.startsWith('<audio')) {
+        final m = RegExp(r'src="([^"]+)"').firstMatch(t);
+        if (m != null) audioPath = m.group(1) ?? '';
+        audioAutoplay = t.contains('autoplay');
+      }
+    }
+
+    final classTokens = cssClass.split(RegExp(r'\s+'));
+    final effectiveClass = classTokens
+        .where(
+          (c) =>
+              c.isNotEmpty &&
+              c != 'chart' &&
+              c != 'logo-safe' &&
+              c != 'no-logo' &&
+              c != 'no-footer',
+        )
+        .join(' ');
+
+    return Slide(
+      id: _uuid.v4(),
+      type: SlideType.chart,
+      customMarkdown: json.join('\n').trim(),
       audioPath: audioPath,
       audioAutoplay: audioAutoplay,
       cssClass: effectiveClass,
