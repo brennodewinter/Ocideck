@@ -222,7 +222,7 @@ class FileService {
     final spec = ChartSpec.parse(s.customMarkdown);
     final src = spec.source;
     if (src == null) return s;
-    final rel = addAsset(src, 'data');
+    final rel = addAsset(src, chartDataDirName);
     if (rel == null) {
       return s.copyWith(
         customMarkdown: spec.copyWith(clearSource: true).toBlock(),

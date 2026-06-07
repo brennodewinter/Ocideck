@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+/// Directory (relative to the deck) where linked chart CSVs are kept, so the
+/// data files stay tidily in one place — separate from images/media.
+const String chartDataDirName = 'data';
+
 /// Supported chart kinds for a chart slide.
 enum ChartType { bar, line, pie }
 
