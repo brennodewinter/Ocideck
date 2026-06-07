@@ -9,6 +9,7 @@ import '../models/deck.dart';
 import '../l10n/app_localizations.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import 'annotation_codec.dart';
 import 'caption_service.dart';
 import 'image_service.dart';
 import 'markdown_service.dart';
@@ -145,7 +146,37 @@ class FileService {
     }
     final deck = _md.parseDeck(raw, filePath: filePath);
     if (deck == null) return null;
-    return _hydrateImageCaptions(deck);
+    final hydrated = await _hydrateImageCaptions(deck);
+    // Re-attach the separate annotation layer from its sidecar, if present.
+    if (content == null) {
+      final sidecar = File(_sidecarPath(filePath));
+      if (await sidecar.exists()) {
+        try {
+          final map = AnnotationCodec.decode(
+            await sidecar.readAsString(),
+            hydrated.slides,
+          );
+          if (map.isNotEmpty) return hydrated.copyWith(annotations: map);
+        } catch (_) {
+          // A broken sidecar must never block opening the deck.
+        }
+      }
+    }
+    return hydrated;
+  }
+
+  /// Path of the annotation sidecar next to a deck `<name>.md` → `<name>.ink.json`.
+  String _sidecarPath(String mdPath) => p.setExtension(mdPath, '.ink.json');
+
+  /// Write the annotation sidecar next to [filePath], or remove it when empty.
+  Future<void> _writeSidecar(Deck deck, String filePath) async {
+    final sidecar = File(_sidecarPath(filePath));
+    final json = AnnotationCodec.encode(deck.slides, deck.annotations);
+    if (json == null) {
+      if (await sidecar.exists()) await sidecar.delete();
+    } else {
+      await sidecar.writeAsString(json, flush: true);
+    }
   }
 
   Future<String?> saveDeckAs(Deck deck, {String? initialDirectory}) async {
@@ -227,6 +258,20 @@ class FileService {
     archive.add(
       ArchiveFile('${_safeName(deck.title)}.md', mdBytes.length, mdBytes),
     );
+
+    // Annotation layer travels as a separate sidecar (same base name as the
+    // markdown), so the .md inside the package stays pure Marp.
+    final ink = AnnotationCodec.encode(packDeck.slides, packDeck.annotations);
+    if (ink != null) {
+      final inkBytes = utf8.encode(ink);
+      archive.add(
+        ArchiveFile(
+          '${_safeName(deck.title)}.ink.json',
+          inkBytes.length,
+          inkBytes,
+        ),
+      );
+    }
 
     // Thema-CSS (zodat het pakket ook in Marp/CLI bruikbaar is).
     final css = await _packageThemeCss(packDeck.theme, profile, logoRel);
@@ -410,6 +455,8 @@ class FileService {
 
     final markdown = _md.generateDeck(updatedDeck);
     await File(filePath).writeAsString(markdown);
+    // Annotations live in a separate sidecar so the Marp .md stays pure.
+    await _writeSidecar(updatedDeck, filePath);
     return updatedDeck;
   }
 

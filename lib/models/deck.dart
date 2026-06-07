@@ -1,3 +1,4 @@
+import 'annotation.dart';
 import 'slide.dart';
 import 'settings.dart';
 
@@ -108,6 +109,11 @@ class Deck {
   /// Traffic Light Protocol-classificatie van deze presentatie.
   final TlpLevel tlp;
 
+  /// Annotatielaag: vrije-hand-tekeningen per slide, gekeyd op [Slide.id].
+  /// Bewust géén onderdeel van de Marp-markdown — dit wordt los bewaard in een
+  /// sidecar zodat het deck pure, uitwisselbare Marp blijft.
+  final Map<String, List<InkStroke>> annotations;
+
   const Deck({
     required this.title,
     this.theme = 'ocideck',
@@ -122,6 +128,7 @@ class Deck {
     this.description = '',
     this.keywords = '',
     this.tlp = TlpLevel.none,
+    this.annotations = const {},
   });
 
   Deck copyWith({
@@ -139,6 +146,7 @@ class Deck {
     String? description,
     String? keywords,
     TlpLevel? tlp,
+    Map<String, List<InkStroke>>? annotations,
   }) {
     return Deck(
       title: title ?? this.title,
@@ -154,6 +162,7 @@ class Deck {
       description: description ?? this.description,
       keywords: keywords ?? this.keywords,
       tlp: tlp ?? this.tlp,
+      annotations: annotations ?? this.annotations,
     );
   }
 }

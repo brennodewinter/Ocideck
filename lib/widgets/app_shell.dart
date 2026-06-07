@@ -976,6 +976,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         themeProfile: deck.themeProfile,
         initialIndex: initial,
         tlp: deck.tlp,
+        annotations: deck.annotations,
+        onAnnotationsChanged: deckNotifier.setAnnotations,
       );
     }
 

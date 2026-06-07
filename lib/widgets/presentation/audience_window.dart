@@ -1,12 +1,14 @@
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../models/annotation.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/markdown_service.dart';
 import '../../utils/url_launcher_util.dart';
 import '../slides/slide_preview.dart';
+import 'annotation_overlay.dart';
 
 /// Channel the audience (beamer) window listens on for updates from the
 /// presenter (laptop) window.
@@ -41,6 +43,11 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   int _index = 0;
   int _blank = 0; // 0 = none, 1 = black, 2 = white
 
+  // Annotation layer, keyed by slide index (the beamer has no stable ids).
+  final Map<int, List<InkStroke>> _ink = {};
+  int? _laserIndex;
+  Offset? _laserPoint;
+
   @override
   void initState() {
     super.initState();
@@ -51,6 +58,14 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     _slides = deck?.slides ?? const [];
     _theme = deck?.themeProfile ?? const ThemeProfile();
     _tlp = deck?.tlp ?? TlpLevel.none;
+    // Pre-existing strokes passed at creation, keyed by index.
+    final ink = widget.args['ink'];
+    if (ink is Map) {
+      ink.forEach((k, v) {
+        final i = int.tryParse('$k');
+        if (i != null && v is List) _ink[i] = decodeStrokes(v);
+      });
+    }
     audienceChannel.setMethodCallHandler(_onPresenterCall);
   }
 
@@ -68,6 +83,23 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         setState(() {
           _index = (m['index'] as num?)?.toInt() ?? _index;
           _blank = (m['blank'] as num?)?.toInt() ?? 0;
+          _laserPoint = null; // laser never carries over to another slide
+        });
+      case 'ink':
+        final m = Map<String, dynamic>.from(call.arguments as Map);
+        final i = (m['index'] as num?)?.toInt();
+        if (i == null || !mounted) return null;
+        setState(() => _ink[i] = decodeStrokes((m['strokes'] as List?) ?? const []));
+      case 'laser':
+        final m = Map<String, dynamic>.from(call.arguments as Map);
+        final i = (m['index'] as num?)?.toInt();
+        final pt = m['point'] as List?;
+        if (!mounted) return null;
+        setState(() {
+          _laserIndex = i;
+          _laserPoint = pt == null
+              ? null
+              : Offset((pt[0] as num).toDouble(), (pt[1] as num).toDouble());
         });
       case 'close':
         try {
@@ -123,18 +155,29 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
           child: SizedBox(
             width: slideW,
             height: slideH,
-            child: SlidePreviewWidget(
-              slide: slide,
-              projectPath: _projectPath,
-              themeProfile: _theme,
-              onLinkTap: openExternalUrl,
-              slideNumber: _index + 1,
-              slideCount: _slides.length,
-              tlp: _tlp,
-              enableMedia: true,
-              autoplayMedia: true,
-              // Audio finishing on the beamer drives the presenter's auto-advance.
-              onAudioComplete: () => _send('audioComplete'),
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                SlidePreviewWidget(
+                  slide: slide,
+                  projectPath: _projectPath,
+                  themeProfile: _theme,
+                  onLinkTap: openExternalUrl,
+                  slideNumber: _index + 1,
+                  slideCount: _slides.length,
+                  tlp: _tlp,
+                  enableMedia: true,
+                  autoplayMedia: true,
+                  // Audio finishing on the beamer drives the presenter's
+                  // auto-advance.
+                  onAudioComplete: () => _send('audioComplete'),
+                ),
+                AnnotationLayer(
+                  strokes: _ink[_index] ?? const [],
+                  interactive: false,
+                  laserPoint: _laserIndex == _index ? _laserPoint : null,
+                ),
+              ],
             ),
           ),
         );

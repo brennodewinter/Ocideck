@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:screen_retriever/screen_retriever.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
+import '../../models/annotation.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
@@ -14,6 +15,7 @@ import '../../services/markdown_service.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
 import '../slides/slide_preview.dart';
+import 'annotation_overlay.dart';
 import 'audience_window.dart';
 
 /// Blanco-schermstand tijdens het presenteren (zoals B/W in PowerPoint).
@@ -31,6 +33,11 @@ class FullscreenPresenter extends StatefulWidget {
   /// for the classic single-screen mode.
   final WindowController? audienceWindow;
 
+  /// Annotation layer keyed by [Slide.id], and a callback to persist changes
+  /// made while presenting back to the deck.
+  final Map<String, List<InkStroke>> initialAnnotations;
+  final void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged;
+
   const FullscreenPresenter({
     super.key,
     required this.slides,
@@ -39,6 +46,8 @@ class FullscreenPresenter extends StatefulWidget {
     required this.initialIndex,
     this.tlp = TlpLevel.none,
     this.audienceWindow,
+    this.initialAnnotations = const {},
+    this.onAnnotationsChanged,
   });
 
   /// Entry point used by the app: pick dual-screen mode when a second display is
@@ -51,6 +60,8 @@ class FullscreenPresenter extends StatefulWidget {
     required ThemeProfile themeProfile,
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
+    Map<String, List<InkStroke>> annotations = const {},
+    void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
   }) async {
     var displayCount = 0;
     if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
@@ -76,6 +87,8 @@ class FullscreenPresenter extends StatefulWidget {
         themeProfile: themeProfile,
         initialIndex: initialIndex,
         tlp: tlp,
+        annotations: annotations,
+        onAnnotationsChanged: onAnnotationsChanged,
       );
     } else {
       await show(
@@ -85,6 +98,8 @@ class FullscreenPresenter extends StatefulWidget {
         themeProfile: themeProfile,
         initialIndex: initialIndex,
         tlp: tlp,
+        annotations: annotations,
+        onAnnotationsChanged: onAnnotationsChanged,
       );
     }
   }
@@ -96,6 +111,8 @@ class FullscreenPresenter extends StatefulWidget {
     required ThemeProfile themeProfile,
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
+    Map<String, List<InkStroke>> annotations = const {},
+    void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
   }) async {
     final hadWakeLock = await _wakeLockEnabled();
     await _enableWakeLock();
@@ -112,6 +129,8 @@ class FullscreenPresenter extends StatefulWidget {
               themeProfile: themeProfile,
               initialIndex: initialIndex,
               tlp: tlp,
+              initialAnnotations: annotations,
+              onAnnotationsChanged: onAnnotationsChanged,
             ),
             transitionsBuilder: (context, animation, secondary, child) =>
                 FadeTransition(opacity: animation, child: child),
@@ -135,6 +154,8 @@ class FullscreenPresenter extends StatefulWidget {
     required ThemeProfile themeProfile,
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
+    Map<String, List<InkStroke>> annotations = const {},
+    void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
   }) async {
     // A self-contained markdown deck is the payload for the audience window; it
     // carries the slides, the style profile and the TLP level in one string.
@@ -147,10 +168,20 @@ class FullscreenPresenter extends StatefulWidget {
         tlp: tlp,
       ),
     );
+    // Pre-existing annotations re-keyed by index so the beamer shows them
+    // immediately (the audience window has no stable slide ids of its own).
+    final inkByIndex = <String, dynamic>{};
+    for (var i = 0; i < slides.length; i++) {
+      final strokes = annotations[slides[i].id];
+      if (strokes != null && strokes.isNotEmpty) {
+        inkByIndex['$i'] = encodeStrokes(strokes);
+      }
+    }
     final argument = jsonEncode({
       'markdown': markdown,
       'projectPath': projectPath,
       'index': initialIndex,
+      'ink': inkByIndex,
     });
 
     WindowController? audience;
@@ -172,6 +203,8 @@ class FullscreenPresenter extends StatefulWidget {
           themeProfile: themeProfile,
           initialIndex: initialIndex,
           tlp: tlp,
+          annotations: annotations,
+          onAnnotationsChanged: onAnnotationsChanged,
         );
       }
       return;
@@ -192,6 +225,8 @@ class FullscreenPresenter extends StatefulWidget {
               initialIndex: initialIndex,
               tlp: tlp,
               audienceWindow: audience,
+              initialAnnotations: annotations,
+              onAnnotationsChanged: onAnnotationsChanged,
             ),
             transitionsBuilder: (context, animation, secondary, child) =>
                 FadeTransition(opacity: animation, child: child),
@@ -307,12 +342,35 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   int? _lastSentIndex;
   int? _lastSentBlank;
 
+  // ── Annotatielaag ─────────────────────────────────────────────────────────
+  /// Strokes per slide, keyed by [Slide.id] (stable within the session).
+  late Map<String, List<InkStroke>> _ink;
+
+  /// Active annotation tool, or null when annotation is off.
+  InkTool? _tool;
+  int _inkColor = 0xFFEF4444; // rood
+  static const _penWidth = 0.004;
+  static const _highlighterWidth = 0.022;
+  DateTime _lastLaserSent = DateTime.fromMillisecondsSinceEpoch(0);
+
+  double get _toolWidth =>
+      _tool == InkTool.highlighter ? _highlighterWidth : _penWidth;
+
+  List<InkStroke> get _currentStrokes {
+    final id = widget.slides[_index.clamp(0, widget.slides.length - 1)].id;
+    return _ink[id] ?? const [];
+  }
+
   @override
   void initState() {
     super.initState();
     _index = widget.initialIndex;
     _startTime = DateTime.now();
     _focusNode = FocusNode();
+    _ink = {
+      for (final e in widget.initialAnnotations.entries)
+        e.key: List<InkStroke>.from(e.value),
+    };
     if (_dual) {
       // The laptop shows the presenter view; the slide lives on the beamer.
       _presenterView = true;
@@ -363,11 +421,71 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     if (aw == null) return;
     final blank = _blankCode;
     if (_index == _lastSentIndex && blank == _lastSentBlank) return;
+    final indexChanged = _index != _lastSentIndex;
     _lastSentIndex = _index;
     _lastSentBlank = blank;
     audienceChannel
         .invokeMethod('update', {'index': _index, 'blank': blank})
         .catchError((_) => null);
+    // On a slide change, push that slide's strokes so saved/earlier ink shows.
+    if (indexChanged) _pushInk();
+  }
+
+  // ── Annotatielaag ─────────────────────────────────────────────────────────
+
+  /// Send the current slide's strokes to the beamer (keyed by index there).
+  void _pushInk() {
+    if (widget.audienceWindow == null) return;
+    audienceChannel
+        .invokeMethod('ink', {
+          'index': _index,
+          'strokes': encodeStrokes(_currentStrokes),
+        })
+        .catchError((_) => null);
+  }
+
+  void _onStrokesChanged(List<InkStroke> strokes) {
+    final id = widget.slides[_index.clamp(0, widget.slides.length - 1)].id;
+    setState(() {
+      if (strokes.isEmpty) {
+        _ink.remove(id);
+      } else {
+        _ink[id] = strokes;
+      }
+    });
+    widget.onAnnotationsChanged?.call(_ink);
+    _pushInk();
+  }
+
+  void _onLaserMove(Offset? point) {
+    if (widget.audienceWindow == null) return;
+    final now = DateTime.now();
+    // Throttle to keep the channel calm; always send the "gone" (null) event.
+    if (point != null &&
+        now.difference(_lastLaserSent) < const Duration(milliseconds: 33)) {
+      return;
+    }
+    _lastLaserSent = now;
+    audienceChannel
+        .invokeMethod('laser', {
+          'index': _index,
+          'point': point == null ? null : [point.dx, point.dy],
+        })
+        .catchError((_) => null);
+  }
+
+  /// Select a tool, or toggle it off when it is already active.
+  void _setTool(InkTool tool) {
+    setState(() => _tool = _tool == tool ? null : tool);
+    if (_tool != InkTool.laser) _onLaserMove(null); // hide laser on tool switch
+  }
+
+  void _clearCurrentInk() {
+    final id = widget.slides[_index.clamp(0, widget.slides.length - 1)].id;
+    if (!_ink.containsKey(id)) return;
+    setState(() => _ink.remove(id));
+    widget.onAnnotationsChanged?.call(_ink);
+    _pushInk();
   }
 
   /// Decode the current slide's images plus its neighbours into the image cache
@@ -779,9 +897,27 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       case LogicalKeyboardKey.keyS:
         _cycleDisplay();
         return KeyEventResult.handled;
+      case LogicalKeyboardKey.keyD:
+        _setTool(InkTool.pen);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.keyT:
+        _setTool(InkTool.highlighter);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.keyE:
+        _setTool(InkTool.eraser);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.keyX:
+        _setTool(InkTool.laser);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.keyC:
+        _clearCurrentInk();
+        return KeyEventResult.handled;
       case LogicalKeyboardKey.escape:
-        // Gelaagd: getypt nummer wissen, dan blanco scherm, dan pas afsluiten.
-        if (_typed.isNotEmpty) {
+        // Gelaagd: gereedschap weg, getypt nummer wissen, blanco scherm, afsluiten.
+        if (_tool != null) {
+          setState(() => _tool = null);
+          _onLaserMove(null);
+        } else if (_typed.isNotEmpty) {
           _clearTyped();
         } else if (_blank != _Blank.none) {
           setState(() => _blank = _Blank.none);
@@ -860,6 +996,13 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                 ? _buildPresenterView(context)
                 : _buildAudienceView(context),
             if (_gridOpen) Positioned.fill(child: _buildGridOverlay()),
+            if (_tool != null && !_gridOpen && !_helpOpen)
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 16,
+                child: Center(child: _buildAnnotationToolbar()),
+              ),
             if (_typed.isNotEmpty)
               Positioned(
                 left: 0,
@@ -870,6 +1013,94 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
             if (_helpOpen) Positioned.fill(child: _buildHelpOverlay()),
           ],
         ),
+      ),
+    );
+  }
+
+  /// Zwevende balk met annotatiegereedschap, kleuren en wissen.
+  Widget _buildAnnotationToolbar() {
+    const palette = [
+      0xFFEF4444, // rood
+      0xFFF59E0B, // amber
+      0xFF22C55E, // groen
+      0xFF3B82F6, // blauw
+      0xFFFFFFFF, // wit
+      0xFF111111, // zwart
+    ];
+    Widget toolBtn(InkTool tool, IconData icon, String tip) {
+      final active = _tool == tool;
+      return Tooltip(
+        message: tip,
+        child: IconButton(
+          onPressed: () => _setTool(tool),
+          icon: Icon(icon, size: 20),
+          color: active ? const Color(0xFF60A5FA) : Colors.white70,
+          style: IconButton.styleFrom(
+            backgroundColor: active ? Colors.white10 : Colors.transparent,
+          ),
+          visualDensity: VisualDensity.compact,
+        ),
+      );
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.black.withValues(alpha: 0.82),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFF2A2A2A)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          toolBtn(InkTool.pen, Icons.edit, 'Pen (D)'),
+          toolBtn(InkTool.highlighter, Icons.brush, 'Markeerstift (T)'),
+          toolBtn(InkTool.eraser, Icons.cleaning_services_outlined, 'Gum (E)'),
+          toolBtn(InkTool.laser, Icons.my_location, 'Laser (X)'),
+          const SizedBox(width: 8),
+          Container(width: 1, height: 22, color: Colors.white24),
+          const SizedBox(width: 8),
+          for (final c in palette)
+            GestureDetector(
+              onTap: () => setState(() => _inkColor = c),
+              child: Container(
+                width: 20,
+                height: 20,
+                margin: const EdgeInsets.symmetric(horizontal: 3),
+                decoration: BoxDecoration(
+                  color: Color(c),
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: _inkColor == c ? Colors.white : Colors.white24,
+                    width: _inkColor == c ? 2.5 : 1,
+                  ),
+                ),
+              ),
+            ),
+          const SizedBox(width: 8),
+          Container(width: 1, height: 22, color: Colors.white24),
+          Tooltip(
+            message: context.l10n.d('Wis annotaties (C)'),
+            child: IconButton(
+              onPressed: _clearCurrentInk,
+              icon: const Icon(Icons.delete_outline, size: 20),
+              color: Colors.white70,
+              visualDensity: VisualDensity.compact,
+            ),
+          ),
+          Tooltip(
+            message: context.l10n.d('Stoppen (Esc)'),
+            child: IconButton(
+              onPressed: () {
+                setState(() => _tool = null);
+                _onLaserMove(null);
+              },
+              icon: const Icon(Icons.close, size: 20),
+              color: Colors.white70,
+              visualDensity: VisualDensity.compact,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -919,6 +1150,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       ('P', l10n.d('Presenter view (notities, klok)')),
       ('S', l10n.d('Scherm wisselen (meerdere schermen)')),
       ('B · W', l10n.d('Zwart · wit scherm')),
+      (
+        'D · T · E',
+        l10n.d('Pen · markeerstift · gum'),
+      ),
+      ('X · C', l10n.d('Laser · annotaties wissen')),
       ('R', l10n.d('Verstreken tijd resetten')),
       ('A', l10n.d('Automatische modus aan/uit')),
       ('L', l10n.d('Herhalen (loop) aan/uit')),
@@ -1044,21 +1280,37 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           child: SizedBox(
             width: slideW,
             height: slideH,
-            child: SlidePreviewWidget(
-              slide: slide,
-              projectPath: widget.projectPath,
-              themeProfile: widget.themeProfile,
-              onLinkTap: openExternalUrl,
-              slideNumber: _index + 1,
-              slideCount: widget.slides.length,
-              tlp: widget.tlp,
-              // Tijdens het presenteren speelt media en starten audio/video
-              // vanzelf; het audio-einde stuurt de auto-advance aan. In dual-
-              // schermmodus speelt de media op het beamervenster, niet hier,
-              // anders zou het geluid dubbel klinken.
-              enableMedia: !_dual,
-              autoplayMedia: !_dual,
-              onAudioComplete: _onAudioCompleted,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                SlidePreviewWidget(
+                  slide: slide,
+                  projectPath: widget.projectPath,
+                  themeProfile: widget.themeProfile,
+                  onLinkTap: openExternalUrl,
+                  slideNumber: _index + 1,
+                  slideCount: widget.slides.length,
+                  tlp: widget.tlp,
+                  // Tijdens het presenteren speelt media en starten audio/video
+                  // vanzelf; het audio-einde stuurt de auto-advance aan. In dual-
+                  // schermmodus speelt de media op het beamervenster, niet hier,
+                  // anders zou het geluid dubbel klinken.
+                  enableMedia: !_dual,
+                  autoplayMedia: !_dual,
+                  onAudioComplete: _onAudioCompleted,
+                ),
+                // Annotatielaag bovenop de dia. Laat klikken door wanneer er
+                // geen gereedschap actief is (zodat tikken blijft doorbladeren).
+                AnnotationLayer(
+                  strokes: _currentStrokes,
+                  tool: _tool,
+                  color: _inkColor,
+                  width: _toolWidth,
+                  interactive: true,
+                  onStrokesChanged: _onStrokesChanged,
+                  onLaserMove: _onLaserMove,
+                ),
+              ],
             ),
           ),
         );
