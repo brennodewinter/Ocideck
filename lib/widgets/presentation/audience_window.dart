@@ -89,7 +89,9 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         final m = Map<String, dynamic>.from(call.arguments as Map);
         final i = (m['index'] as num?)?.toInt();
         if (i == null || !mounted) return null;
-        setState(() => _ink[i] = decodeStrokes((m['strokes'] as List?) ?? const []));
+        setState(
+          () => _ink[i] = decodeStrokes((m['strokes'] as List?) ?? const []),
+        );
       case 'laser':
         final m = Map<String, dynamic>.from(call.arguments as Map);
         final i = (m['index'] as num?)?.toInt();

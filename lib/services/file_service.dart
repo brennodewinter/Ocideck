@@ -239,7 +239,9 @@ class FileService {
     for (final s in deck.slides) {
       if (s.type != SlideType.chart) continue;
       final src = ChartSpec.parse(s.customMarkdown).source;
-      if (src == null || p.isAbsolute(src) || deck.projectPath == null) continue;
+      if (src == null || p.isAbsolute(src) || deck.projectPath == null) {
+        continue;
+      }
       final from = File(p.join(deck.projectPath!, src));
       final toPath = p.join(destDir, src);
       if (from.path == toPath || !from.existsSync()) continue;

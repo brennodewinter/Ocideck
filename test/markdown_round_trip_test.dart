@@ -278,13 +278,16 @@ void main() {
     });
 
     test('chart slide with a source keeps only the reference in markdown', () {
-      const block = '{"type":"line","source":"data/omzet.csv",'
+      const block =
+          '{"type":"line","source":"data/omzet.csv",'
           '"x":["Q1"],"series":[{"name":"2025","data":[10]}]}';
       final service = MarkdownService();
       final md = service.generateDeck(
         Deck(
           title: 'Demo',
-          slides: [Slide.create(SlideType.chart).copyWith(customMarkdown: block)],
+          slides: [
+            Slide.create(SlideType.chart).copyWith(customMarkdown: block),
+          ],
         ),
       );
       // The stored markdown references the CSV but does not inline the data.

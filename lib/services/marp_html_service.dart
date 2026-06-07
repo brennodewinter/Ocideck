@@ -135,8 +135,7 @@ class MarpHtmlService {
       .replaceAll('<', '&lt;')
       .replaceAll('>', '&gt;');
 
-  static String _color(int i) =>
-      _chartPalette[i % _chartPalette.length];
+  static String _color(int i) => _chartPalette[i % _chartPalette.length];
 
   static String _chartSvg(ChartSpec spec) {
     if (!spec.hasInlineData) {

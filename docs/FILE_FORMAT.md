@@ -25,9 +25,12 @@ opzichte van de map van het `.md`-bestand.
 ```
 mijn_presentatie/
 ├── Mijn_presentatie.md          # de presentatie (Marp Markdown)
+├── Mijn_presentatie.ink.json    # annotatielaag-sidecar (zie §6.2)
 ├── images/                      # gekopieerde afbeeldingen
 │   ├── foto.png
-│   └── .ocideck_captions.json   # bijschriften-sidecar (zie §6)
+│   └── .ocideck_captions.json   # bijschriften-sidecar (zie §6.1)
+├── data/                        # gekoppelde grafiek-CSV's (zie §6.3)
+│   └── omzet.csv
 ├── logos/                       # gekopieerd logo van het stijlprofiel
 │   └── logo.png
 ├── media/                       # video/audio (alleen in het pakket, zie §7)
@@ -41,6 +44,11 @@ mijn_presentatie/
 De mappen `images/`, `logos/`, `themes/` (en `node_modules/`, `build/`, `.git/`,
 `.dart_tool/`) worden overgeslagen wanneer OciDeck een map scant op
 presentaties.
+
+> Naast de `.md` staan **sidecars** die bewust géén onderdeel van de Marp-
+> Markdown zijn (zodat het `.md` puur en uitwisselbaar blijft): de
+> annotatielaag (`<naam>.ink.json`, §6.2), bijschriften (`.ocideck_captions.json`,
+> §6.1) en gekoppelde grafiekdata (`data/*.csv`, §6.3).
 
 ---
 
@@ -134,6 +142,8 @@ JSON heeft deze velden (met standaardwaarden):
 | `footerText` | `""` | Vrije footertekst; tokens: `{page}`, `{total}`, `{date}`, `{title}`. |
 | `footerShowPageNumbers` | `false` | Toon "pagina / totaal" rechtsonder. |
 | `footerPosition` | `right` | `left`/`center`/`right`. |
+| `closingSlideEnabled` | `false` | Voeg automatisch een slotslide toe bij presenteren/exporteren. |
+| `closingSlideMarkdown` | `"# Bedankt\n\nVragen?"` | Markdown van die slotslide. |
 
 Onbekende/ontbrekende velden vallen terug op de standaardwaarden, dus oudere
 bestanden migreren probleemloos.
@@ -159,10 +169,15 @@ De eerste class bepaalt (samen met de inhoud) het **slidetype**:
 | Quote | `quote` | een `>`-regel aanwezig |
 | Video | `video` | een `<video>`-tag aanwezig |
 | Tabel | `table` | alleen een tabel, geen kop/bullets/tekst |
+| Broncode | `code` | — |
+| Grafiek | `chart` | — |
 | Alleen bullets | *(geen)* | bullets aanwezig |
 | Twee afbeeldingen | *(geen)* | twee achtergrond-afbeeldingen |
 | Grote afbeelding | *(geen)* | één afbeelding, geen bullets |
 | Vrije Markdown | *(geen)* | geen kop/bullets/afbeelding/quote |
+
+> `code`- en `chart`-slides bevatten een fenced codeblok dat de generieke
+> regel-parser zou verstoren; ze worden daarom apart herkend aan hun `_class`.
 
 Extra gedragsklassen:
 
@@ -280,6 +295,34 @@ worden `|` als `\|` en regeleindes als `<br>` weggeschreven:
 
 **Vrije Markdown** (geen class) — de inhoud wordt letterlijk weggeschreven.
 
+**Broncode** (`code`) — een optionele kop plus een fenced codeblok; de
+info-string is de programmeertaal (highlight.js-id, leeg = platte tekst). De
+code zelf staat verbatim in het blok:
+````markdown
+# Optionele kop
+
+```dart
+void main() => print('hi');
+```
+````
+
+**Grafiek** (`chart`) — een fenced ```chart```-blok met de grafiekspecificatie
+als **JSON**. Kleine grafieken bewaren hun data inline; data-gedreven grafieken
+verwijzen via `source` naar een CSV in `data/` (zie §6.3). Bij opslaan wordt de
+inline data weggelaten zodra er een `source` is (de CSV is dan de bron); bij
+openen wordt die weer ingelezen.
+````markdown
+```chart
+{
+  "type": "bar",            // bar | line | pie
+  "title": "Omzet",
+  "source": "data/omzet.csv",  // optioneel; anders inline x/series
+  "x": ["Q1", "Q2"],
+  "series": [ { "name": "2025", "data": [10, 14] } ]
+}
+```
+````
+
 ### Afbeeldingsgrootte (`imageSize`)
 Eén integer-veld met typeafhankelijke betekenis: bij `image`/`title`/`quote` het
 achtergrond-percentage (`![bg N%]`), bij `split` de paneelbreedte (geklemd
@@ -287,7 +330,12 @@ achtergrond-percentage (`![bg N%]`), bij `split` de paneelbreedte (geklemd
 
 ---
 
-## 6. Afbeeldings-bijschriften (captions)
+## 6. Sidecars en losse data
+
+Drie soorten gegevens staan bewust náást het `.md` in plaats van erin, zodat de
+Marp-Markdown puur en uitwisselbaar blijft.
+
+### 6.1 Afbeeldings-bijschriften (captions)
 
 Bijschriften worden op **twee** plaatsen bewaard:
 
@@ -309,6 +357,54 @@ Bijschriften worden op **twee** plaatsen bewaard:
    ```
    Een lege caption verwijdert de sleutel; een leeg bestand wordt verwijderd.
 
+### 6.2 Annotatielaag (`<naam>.ink.json`)
+
+Vrije-hand-annotaties (pen, markeerstift) die tijdens het presenteren worden
+gemaakt, staan in een aparte JSON-sidecar naast de `.md` (en in het pakket, §7).
+De Marp-`.md` wordt er nooit door aangeraakt.
+
+- Coördinaten zijn **genormaliseerd** (0–1) binnen het 16:9-vlak, zodat een
+  streek identiek schaalt op laptop en beamer.
+- Omdat slide-id's bij elke keer inlezen opnieuw worden gegenereerd, worden
+  strekken op schijf **per slide verankerd op volgorde + een inhoud-fingerprint**.
+  Bij heropenen worden ze her-gekoppeld aan de slide met dezelfde fingerprint
+  (bij voorkeur dezelfde index); strekken van een gewijzigde/verwijderde slide
+  vervallen.
+
+```json
+{
+  "version": 1,
+  "slides": [
+    {
+      "index": 2,
+      "fp": "a1b2c3d4",
+      "strokes": [
+        { "tool": "pen", "color": 4294198070, "width": 0.004,
+          "points": [0.1, 0.2, 0.15, 0.22] }
+      ]
+    }
+  ]
+}
+```
+
+`points` is een platte lijst `[x0, y0, x1, y1, …]`; `color` is een ARGB-int;
+`tool` is `pen` of `highlighter` (laser-aanwijzingen zijn vluchtig en worden niet
+bewaard).
+
+### 6.3 Grafiekdata (`data/*.csv`)
+
+Een grafiek-slide (§5) kan zijn data inline in het `chart`-blok houden óf via
+`"source": "data/<naam>.csv"` verwijzen naar een CSV in de aparte **`data/`**-map
+naast het deck. Die map houdt alle gekoppelde databestanden bij elkaar,
+gescheiden van `images/`/`media/`. De CSV is dan de bron van waarheid: hij wordt
+los bewerkt (bijv. in een spreadsheet), bij opslaan/`Opslaan als…` meegekopieerd,
+en in het pakket meegenomen (§7). Bij openen wordt de CSV ingelezen en de data
+in het geheugen aan de grafiek gehangen; in de `.md` blijft alleen de
+`source`-verwijzing staan.
+
+CSV-vorm: eerste rij = reeksnamen (eerste cel = labelkolom), elke volgende rij is
+`label, waarde1, waarde2, …`.
+
 ---
 
 ## 7. Draagbaar pakket (`.ocideck`)
@@ -320,7 +416,9 @@ onderling met relatieve paden. Werkt ook als het deck nog niet is opgeslagen.
 ```
 <titel>.ocideck   (zip)
 ├── <titel>.md                # Marp Markdown
+├── <titel>.ink.json          # annotatielaag (indien aanwezig, §6.2)
 ├── images/…                  # alle gebruikte afbeeldingen
+├── data/…                    # gekoppelde grafiek-CSV's (§6.3)
 ├── media/…                   # gebruikte video/audio
 ├── logos/…                   # logo uit het stijlprofiel
 └── themes/<theme>.css        # gegenereerde thema-CSS (Marp/CLI-bruikbaar)
@@ -349,6 +447,7 @@ genegeerd, op presenter-notities na):
 | `<!-- ocideck_two_bullets_left/right: <base64url> -->` | Canonieke opslag van de twee bulletkolommen. |
 | `<!-- advance: N.N -->` | Auto-doorschakelen na N,N seconden (0 = uit). |
 | `<!-- skip -->` | Slide overslaan bij presenteren én exporteren. |
+| `<!-- tlp: <key> -->` | Per-slide TLP-niveau (zie §3.1). De slide wordt achtergehouden als het presentatie-TLP lager is. Alleen geschreven als ≠ `none`. |
 | `<!-- … (vrije tekst) … -->` | **Presenter-notities** (elk overig commentaar dat niet met `_` begint). |
 
 ---

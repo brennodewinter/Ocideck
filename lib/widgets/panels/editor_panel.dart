@@ -708,9 +708,7 @@ class _SlideTlpControl extends StatelessWidget {
                   DropdownMenuItem(
                     value: level,
                     child: Text(
-                      level == TlpLevel.none
-                          ? l10n.d('Geen')
-                          : level.menuLabel,
+                      level == TlpLevel.none ? l10n.d('Geen') : level.menuLabel,
                     ),
                   ),
               ],

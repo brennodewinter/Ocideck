@@ -2187,8 +2187,9 @@ class _ChartPreview extends StatelessWidget {
     0xFF84CC16,
   ];
 
-  Color _seriesColor(int i) =>
-      i == 0 ? _hexColor(profile.accentColor) : Color(_palette[i % _palette.length]);
+  Color _seriesColor(int i) => i == 0
+      ? _hexColor(profile.accentColor)
+      : Color(_palette[i % _palette.length]);
 
   @override
   Widget build(BuildContext context) {

@@ -52,9 +52,12 @@ void main() {
     test('re-anchors strokes to the matching slide after reordering', () {
       final a = Slide.create(SlideType.bullets).copyWith(title: 'A');
       final b = Slide.create(SlideType.bullets).copyWith(title: 'B');
-      final json = AnnotationCodec.encode([a, b], {
-        a.id: [stroke()],
-      })!;
+      final json = AnnotationCodec.encode(
+        [a, b],
+        {
+          a.id: [stroke()],
+        },
+      )!;
 
       // Reload parses fresh slides with NEW ids but identical content, in a
       // different order.
@@ -67,9 +70,12 @@ void main() {
 
     test('drops strokes when the slide content changed', () {
       final a = Slide.create(SlideType.bullets).copyWith(title: 'A');
-      final json = AnnotationCodec.encode([a], {
-        a.id: [stroke()],
-      })!;
+      final json = AnnotationCodec.encode(
+        [a],
+        {
+          a.id: [stroke()],
+        },
+      )!;
       final edited = Slide.create(
         SlideType.bullets,
       ).copyWith(title: 'A (changed)');

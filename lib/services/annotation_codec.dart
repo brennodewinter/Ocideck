@@ -43,7 +43,10 @@ class AnnotationCodec {
 
   /// Encode the id-keyed [annotations] for [slides] into a JSON string, or null
   /// when there is nothing to store.
-  static String? encode(List<Slide> slides, Map<String, List<InkStroke>> annotations) {
+  static String? encode(
+    List<Slide> slides,
+    Map<String, List<InkStroke>> annotations,
+  ) {
     final entries = <Map<String, dynamic>>[];
     for (var i = 0; i < slides.length; i++) {
       final strokes = annotations[slides[i].id];
@@ -70,9 +73,7 @@ class AnnotationCodec {
         final entry = Map<String, dynamic>.from(e as Map);
         final fp = entry['fp'] as String?;
         final index = (entry['index'] as num?)?.toInt() ?? -1;
-        final strokes = decodeStrokes(
-          (entry['strokes'] as List?) ?? const [],
-        );
+        final strokes = decodeStrokes((entry['strokes'] as List?) ?? const []);
         if (strokes.isEmpty) continue;
 
         int target = -1;

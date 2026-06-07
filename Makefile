@@ -1,4 +1,4 @@
-.PHONY: setup format format-check analyze test test-contracts test-preview test-export test-state test-services test-presenter deps-outdated check check-full help
+.PHONY: setup format format-check analyze test test-contracts test-preview test-export test-state test-services test-presenter deps-outdated licenses check check-full help
 
 help:
 	@echo "OciDeck quality targets:"
@@ -11,6 +11,7 @@ help:
 	@echo "  make test-services   Caption/description/image service tests."
 	@echo "  make test-presenter  Fullscreen presenter interaction tests."
 	@echo "  make deps-outdated   Advisory dependency freshness report."
+	@echo "  make licenses        Verify all dependencies use open-source licences."
 
 # Install Flutter/Dart dependencies.
 setup:
@@ -105,12 +106,20 @@ deps-outdated:
 	@echo "Failure means: inspect network/tooling first; outdated packages are not necessarily regressions."
 	flutter pub outdated
 
+# Open-source licence compliance check for all resolved dependencies.
+licenses:
+	@echo "== OciDeck check: licences =="
+	@echo "Command: dart run tool/check_licenses.dart"
+	@echo "Covers: licence of every resolved Dart/Flutter package (direct + transitive)."
+	@echo "Failure means: a dependency uses an unrecognised or non-open-source licence — review it."
+	dart run tool/check_licenses.dart
+
 # Full local quality gate. Intended for humans, CI logs, and LLM-assisted debugging.
 check: format-check analyze test
 	@echo "== OciDeck check complete =="
 	@echo "Validated: formatting, static analysis, and the full Flutter test suite."
 
 # Extended local check with advisory dependency freshness after the required gate.
-check-full: check deps-outdated
+check-full: check licenses deps-outdated
 	@echo "== OciDeck extended check complete =="
-	@echo "Validated: required quality gate plus dependency freshness report."
+	@echo "Validated: required quality gate, licence compliance, and dependency freshness."

@@ -1150,10 +1150,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       ('P', l10n.d('Presenter view (notities, klok)')),
       ('S', l10n.d('Scherm wisselen (meerdere schermen)')),
       ('B · W', l10n.d('Zwart · wit scherm')),
-      (
-        'D · T · E',
-        l10n.d('Pen · markeerstift · gum'),
-      ),
+      ('D · T · E', l10n.d('Pen · markeerstift · gum')),
       ('X · C', l10n.d('Laser · annotaties wissen')),
       ('R', l10n.d('Verstreken tijd resetten')),
       ('A', l10n.d('Automatische modus aan/uit')),

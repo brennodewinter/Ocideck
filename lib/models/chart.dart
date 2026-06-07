@@ -124,7 +124,8 @@ class ChartSpec {
       .toList();
   if (lines.isEmpty) return (const [], const []);
 
-  List<String> cells(String line) => line.split(',').map((c) => c.trim()).toList();
+  List<String> cells(String line) =>
+      line.split(',').map((c) => c.trim()).toList();
 
   final header = cells(lines.first);
   final seriesNames = header.length > 1 ? header.sublist(1) : <String>[];

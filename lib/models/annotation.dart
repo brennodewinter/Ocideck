@@ -36,10 +36,7 @@ class InkStroke {
     'color': color,
     'width': width,
     'points': [
-      for (final p in points) ...[
-        _round(p.dx),
-        _round(p.dy),
-      ],
+      for (final p in points) ...[_round(p.dx), _round(p.dy)],
     ],
   };
 
@@ -64,8 +61,9 @@ class InkStroke {
 }
 
 /// Encode/decode a per-slide map of strokes keyed by slide id.
-List<Map<String, dynamic>> encodeStrokes(List<InkStroke> strokes) =>
-    [for (final s in strokes) s.toJson()];
+List<Map<String, dynamic>> encodeStrokes(List<InkStroke> strokes) => [
+  for (final s in strokes) s.toJson(),
+];
 
 List<InkStroke> decodeStrokes(List<dynamic> raw) => [
   for (final e in raw) InkStroke.fromJson(Map<String, dynamic>.from(e as Map)),

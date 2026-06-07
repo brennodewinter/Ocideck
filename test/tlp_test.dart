@@ -46,8 +46,14 @@ void main() {
 
     test('a slide stricter than the presentation is withheld', () {
       // Presentation at GREEN: CLEAR/GREEN shown, AMBER/RED withheld.
-      expect(slideVisibleAtTlp(slideAt(TlpLevel.clear), TlpLevel.green), isTrue);
-      expect(slideVisibleAtTlp(slideAt(TlpLevel.green), TlpLevel.green), isTrue);
+      expect(
+        slideVisibleAtTlp(slideAt(TlpLevel.clear), TlpLevel.green),
+        isTrue,
+      );
+      expect(
+        slideVisibleAtTlp(slideAt(TlpLevel.green), TlpLevel.green),
+        isTrue,
+      );
       expect(
         slideVisibleAtTlp(slideAt(TlpLevel.amber), TlpLevel.green),
         isFalse,
