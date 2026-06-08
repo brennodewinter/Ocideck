@@ -76,6 +76,20 @@ void main() {
       ]);
     });
 
+    test('bullets slide keeps an optional subheading', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.bullets).copyWith(
+          title: 'Agenda',
+          subtitle: 'Vandaag',
+          bullets: ['Punt een', 'Punt twee'],
+        ),
+      );
+      expect(out.type, SlideType.bullets);
+      expect(out.title, 'Agenda');
+      expect(out.subtitle, 'Vandaag');
+      expect(out.bullets, ['Punt een', 'Punt twee']);
+    });
+
     test('twoBullets slide keeps both bullet columns', () {
       final out = _roundTrip(
         Slide.create(SlideType.twoBullets).copyWith(
@@ -88,6 +102,39 @@ void main() {
       expect(out.title, 'Vergelijking');
       expect(out.bullets, ['Links punt', '\tLinks subpunt']);
       expect(out.bullets2, ['Rechts punt', '\t\tRechts diep']);
+    });
+
+    test('twoBullets slide keeps optional column headings', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.twoBullets).copyWith(
+          title: 'Vergelijking',
+          columnTitle1: 'Voordelen',
+          columnTitle2: 'Nadelen',
+          bullets: ['Snel'],
+          bullets2: ['Duur'],
+        ),
+      );
+      expect(out.type, SlideType.twoBullets);
+      expect(out.columnTitle1, 'Voordelen');
+      expect(out.columnTitle2, 'Nadelen');
+      expect(out.bullets, ['Snel']);
+      expect(out.bullets2, ['Duur']);
+    });
+
+    test('twoBullets without headings stays empty (no spurious comments)', () {
+      final service = MarkdownService();
+      final md = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.twoBullets).copyWith(bullets: ['A'], bullets2: ['B']),
+          ],
+        ),
+      );
+      expect(md, isNot(contains('ocideck_two_bullets_left_title')));
+      final out = service.parseDeck(md)!.slides.single;
+      expect(out.columnTitle1, '');
+      expect(out.columnTitle2, '');
     });
 
     test('bulletsImage slide keeps bullets, image, size and caption', () {
@@ -386,7 +433,8 @@ void main() {
       );
       final deck = service.parseDeck(markdown);
       expect(deck, isNotNull);
-      expect(deck!.author, 'Jan Jansen');
+      expect(deck!.title, 'Demo');
+      expect(deck.author, 'Jan Jansen');
       expect(deck.organization, 'Vigilis');
       expect(deck.version, '1.2');
       expect(deck.date, '2026-05-30');

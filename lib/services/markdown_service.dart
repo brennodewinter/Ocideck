@@ -18,6 +18,9 @@ class MarkdownService {
     buf.writeln('theme: ${deck.theme}');
     if (deck.paginate) buf.writeln('paginate: true');
     // General presentation metadata (also picked up by Marp where applicable).
+    if (deck.title.isNotEmpty) {
+      buf.writeln('title: ${_yamlScalar(deck.title)}');
+    }
     if (deck.author.isNotEmpty) {
       buf.writeln('author: ${_yamlScalar(deck.author)}');
     }
@@ -212,6 +215,7 @@ class MarkdownService {
 
       case SlideType.bullets:
         if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
+        if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
         buf.writeln();
         for (final b in slide.bullets) {
           _writeBullet(buf, b);
@@ -220,7 +224,13 @@ class MarkdownService {
       case SlideType.twoBullets:
         if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
         buf.writeln();
-        _writeTwoBulletColumns(buf, slide.bullets, slide.bullets2);
+        _writeTwoBulletColumns(
+          buf,
+          slide.bullets,
+          slide.bullets2,
+          slide.columnTitle1,
+          slide.columnTitle2,
+        );
 
       case SlideType.bulletsImage:
         if (slide.imagePath.isNotEmpty) {
@@ -406,23 +416,59 @@ class MarkdownService {
     StringBuffer buf,
     List<String> left,
     List<String> right,
+    String leftTitle,
+    String rightTitle,
   ) {
     buf.writeln('<!-- ocideck_two_bullets_left: ${_encodeBullets(left)} -->');
     buf.writeln('<!-- ocideck_two_bullets_right: ${_encodeBullets(right)} -->');
+    if (leftTitle.isNotEmpty) {
+      buf.writeln(
+        '<!-- ocideck_two_bullets_left_title: ${_encodeText(leftTitle)} -->',
+      );
+    }
+    if (rightTitle.isNotEmpty) {
+      buf.writeln(
+        '<!-- ocideck_two_bullets_right_title: ${_encodeText(rightTitle)} -->',
+      );
+    }
     buf.writeln(
       '<div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">',
     );
+    _writeBulletColumn(buf, left, leftTitle);
+    _writeBulletColumn(buf, right, rightTitle);
+    buf.writeln('</div>');
+  }
+
+  static void _writeBulletColumn(
+    StringBuffer buf,
+    List<String> bullets,
+    String columnTitle,
+  ) {
+    buf.writeln('<div>');
+    if (columnTitle.isNotEmpty) {
+      buf.writeln(
+        '<h3 style="margin:0 0 .5rem;">${_escapeHtml(columnTitle)}</h3>',
+      );
+    }
     buf.writeln('<ul style="margin:0; padding-left:1.3em;">');
-    _writeHtmlBulletItems(buf, left);
-    buf.writeln('</ul>');
-    buf.writeln('<ul style="margin:0; padding-left:1.3em;">');
-    _writeHtmlBulletItems(buf, right);
+    _writeHtmlBulletItems(buf, bullets);
     buf.writeln('</ul>');
     buf.writeln('</div>');
   }
 
   static String _encodeBullets(List<String> bullets) {
     return base64Url.encode(utf8.encode(jsonEncode(bullets)));
+  }
+
+  static String _encodeText(String value) =>
+      base64Url.encode(utf8.encode(value));
+
+  static String _decodeText(String encoded) {
+    try {
+      return utf8.decode(base64Url.decode(encoded.trim()));
+    } catch (_) {
+      return '';
+    }
   }
 
   static List<String> _decodeBullets(String encoded) {
@@ -523,6 +569,7 @@ class MarkdownService {
     String theme = 'ocideck';
     bool paginate = true;
     ThemeProfile themeProfile = const ThemeProfile();
+    String? presentationTitle;
     String author = '';
     String organization = '';
     String version = '';
@@ -541,6 +588,8 @@ class MarkdownService {
             theme = line.substring(6).trim();
           } else if (line.startsWith('paginate:')) {
             paginate = line.substring(9).trim() == 'true';
+          } else if (line.startsWith('title:')) {
+            presentationTitle = _parseScalar(line.substring(6));
           } else if (line.startsWith('author:')) {
             author = _parseScalar(line.substring(7));
           } else if (line.startsWith('organization:')) {
@@ -574,10 +623,11 @@ class MarkdownService {
       if (slide != null) slides.add(slide);
     }
 
-    String title = 'Presentatie';
-    if (slides.isNotEmpty && slides.first.title.isNotEmpty) {
-      title = slides.first.title;
-    }
+    final title =
+        presentationTitle ??
+        (slides.isNotEmpty && slides.first.title.isNotEmpty
+            ? slides.first.title
+            : 'Presentatie');
 
     String? projectPath;
     if (filePath != null) {
@@ -626,6 +676,8 @@ class MarkdownService {
     TlpLevel slideTlp = TlpLevel.none;
     final bullets = <String>[];
     var bullets2 = <String>[];
+    var columnTitle1 = '';
+    var columnTitle2 = '';
     // bulletsImage slides store their panel width in `<!-- _style:
     // --image-width: N%; -->`; capture it before the comment is stripped.
     int styleImageWidth = 0;
@@ -646,6 +698,10 @@ class MarkdownService {
           bullets
             ..clear()
             ..addAll(_decodeBullets(content.substring(25)));
+        } else if (content.startsWith('ocideck_two_bullets_left_title:')) {
+          columnTitle1 = _decodeText(content.substring(31));
+        } else if (content.startsWith('ocideck_two_bullets_right_title:')) {
+          columnTitle2 = _decodeText(content.substring(32));
         } else if (content.startsWith('ocideck_two_bullets_right:')) {
           bullets2 = _decodeBullets(content.substring(26));
         } else if (!content.startsWith('_')) {
@@ -844,6 +900,8 @@ class MarkdownService {
       subtitle: type == SlideType.section ? paragraph : h2,
       bullets: bullets,
       bullets2: bullets2,
+      columnTitle1: columnTitle1,
+      columnTitle2: columnTitle2,
       imagePath: imagePath,
       imagePath2: imagePath2,
       imageCaption: imageCaption,

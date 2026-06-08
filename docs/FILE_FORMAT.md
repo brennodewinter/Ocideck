@@ -216,10 +216,11 @@ afbeelding geschreven.
 Optionele toelichtende paragraaf
 ```
 
-**Bullets** (geen class) — inspringen met tabs in het model → 2 spaties per
-niveau in Markdown:
+**Bullets** (geen class) — optioneel een **subkop** (`## …`, komt in `subtitle`),
+en inspringen met tabs in het model → 2 spaties per niveau in Markdown:
 ```markdown
 # Kop
+## Subkop (optioneel)
 
 - Eerste punt
   - Subpunt
@@ -227,13 +228,17 @@ niveau in Markdown:
 
 **Twee bulletkolommen** (`two-bullets`) — naast de zichtbare HTML-grid worden de
 twee kolommen ook **canoniek opgeslagen** in commentaar (base64url van een JSON-
-array), zodat ze verliesvrij teruggelezen worden:
+array), zodat ze verliesvrij teruggelezen worden. Elke kolom kan optioneel een
+**kop** krijgen (`*_title`, base64url van platte tekst); die wordt alleen
+geschreven als hij gevuld is en verschijnt als `<h3>` boven de kolom:
 ```markdown
 <!-- ocideck_two_bullets_left: <base64url(JSON[])> -->
 <!-- ocideck_two_bullets_right: <base64url(JSON[])> -->
+<!-- ocideck_two_bullets_left_title: <base64url(tekst)> -->   (optioneel)
+<!-- ocideck_two_bullets_right_title: <base64url(tekst)> -->  (optioneel)
 <div class="ocideck-two-bullets" style="…">
-<ul>…</ul>
-<ul>…</ul>
+<div><h3>…</h3><ul>…</ul></div>
+<div><h3>…</h3><ul>…</ul></div>
 </div>
 ```
 

@@ -22,6 +22,8 @@ class TwoBulletsEditor extends StatefulWidget {
 
 class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
   late final TextEditingController _title;
+  late final TextEditingController _heading1;
+  late final TextEditingController _heading2;
   late _BulletSet _left;
   late _BulletSet _right;
 
@@ -30,6 +32,10 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
     super.initState();
     _title = TextEditingController(text: widget.slide.title);
     _title.addListener(_emit);
+    _heading1 = TextEditingController(text: widget.slide.columnTitle1);
+    _heading2 = TextEditingController(text: widget.slide.columnTitle2);
+    _heading1.addListener(_emit);
+    _heading2.addListener(_emit);
     _left = _BulletSet(widget.slide.bullets, _emit);
     _right = _BulletSet(widget.slide.bullets2, _emit);
   }
@@ -38,6 +44,8 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
     widget.onUpdate(
       widget.slide.copyWith(
         title: _title.text,
+        columnTitle1: _heading1.text,
+        columnTitle2: _heading2.text,
         bullets: _left.values,
         bullets2: _right.values,
       ),
@@ -47,6 +55,8 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
   @override
   void dispose() {
     _title.dispose();
+    _heading1.dispose();
+    _heading2.dispose();
     _left.dispose();
     _right.dispose();
     super.dispose();
@@ -63,8 +73,18 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
           builder: (context, constraints) {
             final narrow = constraints.maxWidth < 560;
             final columns = [
-              _BulletColumn(label: 'Bullets links', set: _left, emit: _emit),
-              _BulletColumn(label: 'Bullets rechts', set: _right, emit: _emit),
+              _BulletColumn(
+                label: 'Bullets links',
+                set: _left,
+                emit: _emit,
+                headingController: _heading1,
+              ),
+              _BulletColumn(
+                label: 'Bullets rechts',
+                set: _right,
+                emit: _emit,
+                headingController: _heading2,
+              ),
             ];
             if (narrow) {
               return Column(
@@ -202,11 +222,13 @@ class _BulletColumn extends StatefulWidget {
   final String label;
   final _BulletSet set;
   final VoidCallback emit;
+  final TextEditingController headingController;
 
   const _BulletColumn({
     required this.label,
     required this.set,
     required this.emit,
+    required this.headingController,
   });
 
   @override
@@ -222,6 +244,14 @@ class _BulletColumnState extends State<_BulletColumn> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        TextField(
+          controller: widget.headingController,
+          decoration: InputDecoration(
+            labelText: l10n.d('Kop (optioneel)'),
+            isDense: true,
+          ),
+        ),
+        const SizedBox(height: 12),
         SectionLabel(widget.label),
         const SizedBox(height: 6),
         for (int i = 0; i < set.controllers.length; i++) _buildRow(i),

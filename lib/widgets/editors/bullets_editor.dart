@@ -16,6 +16,7 @@ class BulletsEditor extends StatefulWidget {
 
 class _BulletsEditorState extends State<BulletsEditor> {
   late final TextEditingController _title;
+  late final TextEditingController _subtitle;
   late List<TextEditingController> _bullets;
   late List<int> _levels;
   late List<FocusNode> _focusNodes;
@@ -27,6 +28,8 @@ class _BulletsEditorState extends State<BulletsEditor> {
     super.initState();
     _title = TextEditingController(text: widget.slide.title);
     _title.addListener(_emit);
+    _subtitle = TextEditingController(text: widget.slide.subtitle);
+    _subtitle.addListener(_emit);
     _initBullets(widget.slide.bullets);
   }
 
@@ -55,6 +58,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
     widget.onUpdate(
       widget.slide.copyWith(
         title: _title.text,
+        subtitle: _subtitle.text,
         bullets: List.generate(
           _bullets.length,
           (i) => '\t' * _levels[i] + _bullets[i].text,
@@ -151,6 +155,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
   @override
   void dispose() {
     _title.dispose();
+    _subtitle.dispose();
     for (final c in _bullets) {
       c.dispose();
     }
@@ -167,6 +172,12 @@ class _BulletsEditorState extends State<BulletsEditor> {
       padding: const EdgeInsets.all(16),
       children: [
         EditorField(label: 'Titel', controller: _title, hint: 'Slide titel'),
+        const SizedBox(height: 12),
+        EditorField(
+          label: l10n.d('Subkop (optioneel)'),
+          controller: _subtitle,
+          hint: l10n.d('Subkop'),
+        ),
         const SizedBox(height: 16),
         const SectionLabel('Bullets'),
         ReorderableListView(

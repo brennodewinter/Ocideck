@@ -90,6 +90,11 @@ class Slide {
   final String subtitle;
   final List<String> bullets;
   final List<String> bullets2;
+
+  /// Optional headings above the two bullet columns (twoBullets only). Empty =
+  /// no heading for that column.
+  final String columnTitle1;
+  final String columnTitle2;
   final String imagePath;
   final String imagePath2;
   final String imageCaption;
@@ -123,6 +128,8 @@ class Slide {
     this.subtitle = '',
     this.bullets = const [],
     this.bullets2 = const [],
+    this.columnTitle1 = '',
+    this.columnTitle2 = '',
     this.imagePath = '',
     this.imagePath2 = '',
     this.imageCaption = '',
@@ -176,6 +183,8 @@ class Slide {
       subtitle: src.subtitle,
       bullets: List<String>.from(src.bullets),
       bullets2: List<String>.from(src.bullets2),
+      columnTitle1: src.columnTitle1,
+      columnTitle2: src.columnTitle2,
       imagePath: src.imagePath,
       imagePath2: src.imagePath2,
       imageCaption: src.imageCaption,
@@ -206,6 +215,8 @@ class Slide {
     String? subtitle,
     List<String>? bullets,
     List<String>? bullets2,
+    String? columnTitle1,
+    String? columnTitle2,
     String? imagePath,
     String? imagePath2,
     String? imageCaption,
@@ -235,6 +246,8 @@ class Slide {
       subtitle: subtitle ?? this.subtitle,
       bullets: bullets ?? this.bullets,
       bullets2: bullets2 ?? this.bullets2,
+      columnTitle1: columnTitle1 ?? this.columnTitle1,
+      columnTitle2: columnTitle2 ?? this.columnTitle2,
       imagePath: imagePath ?? this.imagePath,
       imagePath2: imagePath2 ?? this.imagePath2,
       imageCaption: imageCaption ?? this.imageCaption,
