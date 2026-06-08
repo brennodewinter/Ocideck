@@ -91,6 +91,13 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
     );
   }
 
+  void _setCurrentDate() {
+    final now = DateTime.now();
+    String twoDigits(int value) => value.toString().padLeft(2, '0');
+    _date.text = '${now.year}-${twoDigits(now.month)}-${twoDigits(now.day)}';
+    _date.selection = TextSelection.collapsed(offset: _date.text.length);
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -143,7 +150,12 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
                     const SizedBox(width: 12),
                     SizedBox(
                       width: 120,
-                      child: _field(_date, 'Datum', 'Bijv. 2026-05-30'),
+                      child: _field(
+                        _date,
+                        'Datum',
+                        'Bijv. 2026-05-30',
+                        onDoubleTap: _setCurrentDate,
+                      ),
                     ),
                   ],
                 ),
@@ -190,9 +202,10 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
     String label,
     String hint, {
     int maxLines = 1,
+    VoidCallback? onDoubleTap,
   }) {
     final l10n = context.l10n;
-    return TextField(
+    final field = TextField(
       controller: controller,
       maxLines: maxLines,
       decoration: InputDecoration(
@@ -201,6 +214,12 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
         isDense: true,
         border: const OutlineInputBorder(),
       ),
+    );
+    if (onDoubleTap == null) return field;
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onDoubleTap: onDoubleTap,
+      child: field,
     );
   }
 }
