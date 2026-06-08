@@ -80,4 +80,78 @@ void main() {
     expect(codeText.style?.color, _hex('#33FF33'));
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('short code is enlarged to use the space; long code shrinks', (
+    tester,
+  ) async {
+    const profile = ThemeProfile(codeHighlightSyntax: false);
+
+    const short = 'x';
+    await tester.pumpWidget(
+      _host(
+        Slide.create(SlideType.code).copyWith(customMarkdown: short),
+        profile,
+      ),
+    );
+    await tester.pump();
+    final shortSize = tester.widget<Text>(find.text(short)).style!.fontSize!;
+
+    final long = List.generate(
+      40,
+      (i) => 'final someRatherLongVariableName$i = compute($i);',
+    ).join('\n');
+    await tester.pumpWidget(
+      _host(
+        Slide.create(SlideType.code).copyWith(customMarkdown: long),
+        profile,
+      ),
+    );
+    await tester.pump();
+    final longSize = tester.widget<Text>(find.text(long)).style!.fontSize!;
+
+    // A tiny snippet is scaled up to fill; a big one is scaled down to fit.
+    expect(longSize, lessThan(shortSize));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('the slide title sits above the code panel, not inside it', (
+    tester,
+  ) async {
+    final slide = Slide.create(
+      SlideType.code,
+    ).copyWith(title: 'Voorbeeld', customMarkdown: 'print("hi")');
+    const profile = ThemeProfile(
+      titleTextColor: '#FFFFFF',
+      titleBackgroundColor: '#1C2B47',
+      codeBackgroundColor: '#000000',
+      codeTextColor: '#33FF33',
+      codeHighlightSyntax: false,
+    );
+
+    await tester.pumpWidget(_host(slide, profile));
+    await tester.pump();
+
+    // The title is rendered above the code panel rather than inside it.
+    final titleBottom = tester.getBottomLeft(find.text('Voorbeeld')).dy;
+    final codeTop = tester.getTopLeft(find.text('print("hi")')).dy;
+    expect(titleBottom, lessThanOrEqualTo(codeTop));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('code uses the chosen monospace font family', (tester) async {
+    final slide = Slide.create(
+      SlideType.code,
+    ).copyWith(customMarkdown: 'void main() {}');
+    const profile = ThemeProfile(
+      codeFontFamily: 'Courier New',
+      codeHighlightSyntax: false,
+    );
+
+    await tester.pumpWidget(_host(slide, profile));
+    await tester.pump();
+
+    final codeText = tester.widget<Text>(find.text('void main() {}'));
+    expect(codeText.style?.fontFamily, 'Courier New');
+    expect(tester.takeException(), isNull);
+  });
 }

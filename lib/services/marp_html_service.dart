@@ -589,6 +589,11 @@ class MarpHtmlService {
   Future<String> _themedCss(ThemeProfile t) async {
     final fontFace = await _ebGaramondFontFace(t.fontFamily);
     final family = _cssFontStack(t.fontFamily);
+    final codePrefix = t.codeFontFamily == 'monospace'
+        ? ''
+        : "'${t.codeFontFamily}',";
+    final codeFamily =
+        '${codePrefix}SFMono-Regular,Consolas,"Liberation Mono",monospace';
     return '$fontFace\n'
         '*{box-sizing:border-box}'
         'html,body{margin:0;padding:0}'
@@ -603,9 +608,9 @@ class MarpHtmlService {
         '.slide p,.slide li{font-size:24px;line-height:1.45}'
         '.slide pre{background:${t.codeBackgroundColor};color:${t.codeTextColor};'
         'border:1px solid ${t.codeTextColor}38;border-radius:6px;'
-        'padding:16px;overflow:auto;font-size:18px}'
+        'padding:16px;overflow:auto;font-size:18px;font-family:$codeFamily}'
         '.slide pre code{color:${t.codeTextColor};background:transparent}'
-        '.slide code{font-family:SFMono-Regular,Consolas,"Liberation Mono",monospace}'
+        '.slide code{font-family:$codeFamily}'
         '.slide pre.mermaid{background:transparent;border:0;text-align:center}'
         '.slide img{max-width:100%}'
         '.slide blockquote{border-left:4px solid ${t.accentColor};margin:.5em 0;'

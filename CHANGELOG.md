@@ -9,9 +9,11 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ### Added
 - **Source-code slides** — a "code sheet" with per-language syntax highlighting,
-  stored as a fenced code block. Background and text colours are part of the style
-  profile, with a syntax-colouring toggle; turning it off renders the block in a
-  single colour (e.g. green on black for a CRT-terminal look).
+  stored as a fenced code block. Background, text colour and monospace font are
+  part of the style profile, with a syntax-colouring toggle; turning it off renders
+  the block in a single colour (e.g. green on black for a CRT-terminal look). The
+  code is sized to fill the panel — larger when there's room, smaller for long
+  fragments.
 - **Charts** — bar, line, pie, and **spider/radar** chart slides. Data is entered
   in an in-app grid or imported from CSV; the spec is stored as JSON in a ```chart
   block. Data can stay inline or be linked to a CSV in a separate `data/`

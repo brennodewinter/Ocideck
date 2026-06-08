@@ -2086,6 +2086,16 @@ class _CodePreview extends StatelessWidget {
     required this.profile,
   });
 
+  /// Natural (unwrapped) size of [text] in [style]: width is the longest line,
+  /// height the full block. Used to scale code to the available space.
+  static Size _measureMono(String text, TextStyle style) {
+    final painter = TextPainter(
+      text: TextSpan(text: text.isEmpty ? ' ' : text, style: style),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    return painter.size;
+  }
+
   @override
   Widget build(BuildContext context) {
     _ensureHighlightLanguages();
@@ -2098,10 +2108,20 @@ class _CodePreview extends StatelessWidget {
     final codeBg = _hexColor(profile.codeBackgroundColor);
     final codeFg = _hexColor(profile.codeTextColor);
 
-    final mono = TextStyle(
-      fontFamily: 'monospace',
-      fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
-      fontSize: w * 0.024,
+    // The chosen monospace family, always backed by a generic monospace fallback
+    // so an uninstalled face still renders fixed-width.
+    final fallback = <String>[
+      'Menlo',
+      'Consolas',
+      'Courier New',
+      'monospace',
+    ]..removeWhere((f) => f == profile.codeFontFamily);
+    final baseFont = w * 0.024;
+    final maxFont = w * 0.040; // grow to fill, but never huge
+    TextStyle monoAt(double size) => TextStyle(
+      fontFamily: profile.codeFontFamily,
+      fontFamilyFallback: fallback,
+      fontSize: size,
       height: 1.4,
       color: codeFg,
     );
@@ -2109,23 +2129,25 @@ class _CodePreview extends StatelessWidget {
     // HighlightView throws on an unknown language, so fall back to plain (but
     // monospace) text. When syntax highlighting is off we always render plain
     // text so the whole block is one colour — needed for a CRT-green screen.
-    final Widget codeContent = (known && profile.codeHighlightSyntax)
+    final useHighlight = known && profile.codeHighlightSyntax;
+    final highlightTheme = {
+      ...atomOneDarkTheme,
+      // Keep atom-one-dark's per-token colours but drop its own background so
+      // our themed [codeBg] shows through unchanged.
+      'root': (atomOneDarkTheme['root'] ?? const TextStyle()).copyWith(
+        backgroundColor: codeBg,
+        color: codeFg,
+      ),
+    };
+    Widget buildCode(TextStyle style) => useHighlight
         ? HighlightView(
             code,
             language: lang,
-            // Keep atom-one-dark's per-token colours but drop its own
-            // background so our themed [codeBg] shows through unchanged.
-            theme: {
-              ...atomOneDarkTheme,
-              'root': (atomOneDarkTheme['root'] ?? const TextStyle()).copyWith(
-                backgroundColor: codeBg,
-                color: codeFg,
-              ),
-            },
+            theme: highlightTheme,
             padding: EdgeInsets.zero,
-            textStyle: mono,
+            textStyle: style,
           )
-        : Text(code, style: mono);
+        : Text(code, style: style);
 
     return Container(
       color: _hexColor(profile.slideBackgroundColor),
@@ -2136,45 +2158,80 @@ class _CodePreview extends StatelessWidget {
           pad,
           pad + safe.bottom,
         ),
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: codeBg,
-            borderRadius: BorderRadius.circular(w * 0.012),
-            border: Border.all(color: codeFg.withValues(alpha: 0.22)),
-          ),
-          padding: EdgeInsets.all(w * 0.03),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (slide.title.isNotEmpty) ...[
-                _md(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // The slide title belongs to the slide, not inside the code window,
+            // so it sits above the panel like other slide types.
+            if (slide.title.isNotEmpty) ...[
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(
+                  horizontal: w * 0.025,
+                  vertical: w * 0.01,
+                ),
+                decoration: BoxDecoration(
+                  color: _hexColor(profile.titleBackgroundColor),
+                  borderRadius: BorderRadius.circular(w * 0.012),
+                  border: Border(
+                    left: BorderSide(
+                      color: _hexColor(profile.accentColor),
+                      width: w * 0.006,
+                    ),
+                  ),
+                ),
+                child: _md(
                   context,
                   slide.title,
                   _applyFont(
                     font,
                     TextStyle(
-                      fontSize: w * 0.03,
+                      fontSize: w * 0.032,
+                      height: 1.1,
                       fontWeight: FontWeight.bold,
-                      color: codeFg,
+                      color: _hexColor(profile.titleTextColor),
                     ),
                   ),
                   linkColor: _hexColor(profile.accentColor),
                 ),
-                SizedBox(height: w * 0.02),
-              ],
-              Expanded(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  alignment: Alignment.topLeft,
-                  // Een onbegrensde breedte laat code-regels op hun natuurlijke
-                  // lengte staan (geen woordafbreking), waarna de FittedBox het
-                  // geheel verkleint tot het past.
-                  child: codeContent,
+              ),
+              SizedBox(height: w * 0.018),
+            ],
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: codeBg,
+                  borderRadius: BorderRadius.circular(w * 0.012),
+                  border: Border.all(color: codeFg.withValues(alpha: 0.22)),
+                ),
+                padding: EdgeInsets.all(w * 0.03),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    // Size the code to fill the panel: scale up to use spare
+                    // space (capped at [maxFont]) and down so long fragments
+                    // still fit, rather than leaving a small block in a big box.
+                    final measured = useHighlight
+                        ? code.replaceAll('\t', '        ')
+                        : code;
+                    final natural = _measureMono(measured, monoAt(baseFont));
+                    final availW = math.max(1.0, constraints.maxWidth - 1);
+                    final availH = math.max(1.0, constraints.maxHeight - 1);
+                    var scale = math.min(
+                      availW / natural.width,
+                      availH / natural.height,
+                    );
+                    if (!scale.isFinite || scale <= 0) scale = 1;
+                    final size = math.min(baseFont * scale, maxFont);
+                    return Align(
+                      alignment: Alignment.topLeft,
+                      child: buildCode(monoAt(size)),
+                    );
+                  },
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

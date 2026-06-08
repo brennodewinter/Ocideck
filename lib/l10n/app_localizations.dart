@@ -2382,6 +2382,9 @@ const _dutchSourceStringAdditions = {
     'Eigen kleur (hex)': 'Custom colour (hex)',
     'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
         'For example #33FF33 for a CRT-green screen.',
+    'Onderdeel van stijlprofiel ': 'Part of style profile ',
+    'Broncode lettertype': 'Code font',
+    'Systeem (monospace)': 'System (monospace)',
     'Platte tekst': 'Plain text',
     'Titel (optioneel)': 'Title (optional)',
     'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
@@ -2418,6 +2421,9 @@ const _dutchSourceStringAdditions = {
     'Eigen kleur (hex)': 'Colore personalizzato (hex)',
     'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
         'Ad esempio #33FF33 per uno schermo verde CRT.',
+    'Onderdeel van stijlprofiel ': 'Parte del profilo di stile ',
+    'Broncode lettertype': 'Font del codice',
+    'Systeem (monospace)': 'Sistema (monospace)',
     'Kleur van reeks': 'Colore della serie',
     'Kleur van rij': 'Colore della riga',
     'Hexkleur': 'Colore esadecimale',
@@ -2644,6 +2650,9 @@ const _dutchSourceStringAdditions = {
     'Eigen kleur (hex)': 'Eigene Farbe (Hex)',
     'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
         'Zum Beispiel #33FF33 für einen CRT-grünen Bildschirm.',
+    'Onderdeel van stijlprofiel ': 'Teil des Stilprofils ',
+    'Broncode lettertype': 'Code-Schriftart',
+    'Systeem (monospace)': 'System (monospace)',
     'Kleur van reeks': 'Reihenfarbe',
     'Kleur van rij': 'Zeilenfarbe',
     'Hexkleur': 'Hex-Farbe',
@@ -2871,6 +2880,9 @@ const _dutchSourceStringAdditions = {
     'Eigen kleur (hex)': 'Couleur personnalisée (hex)',
     'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
         'Par exemple #33FF33 pour un écran vert CRT.',
+    'Onderdeel van stijlprofiel ': 'Fait partie du profil de style ',
+    'Broncode lettertype': 'Police du code',
+    'Systeem (monospace)': 'Système (monospace)',
     'Kleur van reeks': 'Couleur de la série',
     'Kleur van rij': 'Couleur de la ligne',
     'Hexkleur': 'Couleur hexadécimale',
@@ -3098,6 +3110,9 @@ const _dutchSourceStringAdditions = {
     'Eigen kleur (hex)': 'Color personalizado (hex)',
     'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
         'Por ejemplo #33FF33 para una pantalla verde CRT.',
+    'Onderdeel van stijlprofiel ': 'Parte del perfil de estilo ',
+    'Broncode lettertype': 'Fuente del código',
+    'Systeem (monospace)': 'Sistema (monospace)',
     'Kleur van reeks': 'Color de la serie',
     'Kleur van rij': 'Color de la fila',
     'Hexkleur': 'Color hexadecimal',
@@ -3325,6 +3340,9 @@ const _dutchSourceStringAdditions = {
     'Eigen kleur (hex)': 'Eigen kleur (hex)',
     'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
         'Bygelyks #33FF33 foar in CRT-grien skerm.',
+    'Onderdeel van stijlprofiel ': 'Underdiel fan stylprofyl ',
+    'Broncode lettertype': 'Boarnekoade lettertype',
+    'Systeem (monospace)': 'Systeem (monospace)',
     'Kleur van reeks': 'Rigekleur',
     'Kleur van rij': 'Rijekleur',
     'Hexkleur': 'Hekskleur',
@@ -3549,6 +3567,9 @@ const _dutchSourceStringAdditions = {
     'Eigen kleur (hex)': 'Koló propio (hex)',
     'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
         'Por ehèmpel #33FF33 pa un pantaya berde CRT.',
+    'Onderdeel van stijlprofiel ': 'Parti di e perfil di estilo ',
+    'Broncode lettertype': 'Tipo di lèter di kódigo',
+    'Systeem (monospace)': 'Sistema (monospace)',
     'Kleur van reeks': 'Koló di serie',
     'Kleur van rij': 'Koló di liña',
     'Hexkleur': 'Koló hexadecimal',

@@ -106,11 +106,14 @@ void main() {}
     const theme = ThemeProfile(
       codeBackgroundColor: '#000000',
       codeTextColor: '#33FF33',
+      codeFontFamily: 'Courier New',
     );
     final html = await service.build('```dart\nvoid main() {}\n```', theme: theme);
 
     expect(html, contains('.slide pre{background:#000000;color:#33FF33'));
     expect(html, contains('.slide pre code{color:#33FF33'));
+    // The chosen code font is used (with a monospace fallback chain).
+    expect(html, contains("font-family:'Courier New',"));
   });
 
   test('EB Garamond theme embeds the font for offline rendering', () async {

@@ -882,11 +882,47 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     );
   }
 
+  /// A banner shown on tabs that edit the active style profile, so it is clear
+  /// these settings belong to the loaded profile (and which one).
+  Widget _profileScopeBanner() {
+    final name = _themeProfile.name;
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: AppTheme.accent.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(8),
+        border: Border(left: BorderSide(color: AppTheme.accent, width: 3)),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.style_outlined, size: 16, color: AppTheme.accent),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(text: context.l10n.d('Onderdeel van stijlprofiel ')),
+                  TextSpan(
+                    text: '“$name”',
+                    style: const TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                ],
+              ),
+              style: const TextStyle(fontSize: 12, color: Color(0xFF334155)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _colorsTab() {
     final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _profileScopeBanner(),
         _sectionTitle(l10n.d('Kleuren')),
         _colorSetting(
           l10n.d('Achtergrond slides'),
@@ -974,6 +1010,33 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           contentPadding: EdgeInsets.zero,
           dense: true,
         ),
+        const SizedBox(height: 10),
+        DropdownButtonFormField<String>(
+          initialValue: AppSettings.codeFonts.contains(_themeProfile.codeFontFamily)
+              ? _themeProfile.codeFontFamily
+              : 'monospace',
+          decoration: InputDecoration(
+            labelText: l10n.d('Broncode lettertype'),
+            isDense: true,
+          ),
+          items: [
+            for (final f in AppSettings.codeFonts)
+              DropdownMenuItem(
+                value: f,
+                child: Text(
+                  f == 'monospace' ? l10n.d('Systeem (monospace)') : f,
+                  style: TextStyle(fontFamily: f),
+                ),
+              ),
+          ],
+          onChanged: (v) {
+            if (v == null) return;
+            setState(() {
+              _themeProfile = _themeProfile.copyWith(codeFontFamily: v);
+              _profileTouched = true;
+            });
+          },
+        ),
         const SizedBox(height: 18),
         _stylePreview(),
       ],
@@ -985,6 +1048,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _profileScopeBanner(),
         _sectionTitle(l10n.d('Logo')),
         Row(
           children: [

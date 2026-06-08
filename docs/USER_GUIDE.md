@@ -31,10 +31,12 @@ highlighting and `$…$` / `$$…$$` LaTeX math.
 ### Source-code slides
 
 Choose a programming language for syntax highlighting (or "plain text") and paste
-your code. It renders as a "code sheet" whose background and text colour come from
-the active **style profile**. Turn **syntax colouring** off to show the whole block
-in a single colour — e.g. bright green on black for a classic CRT-terminal look.
-Stored as a fenced code block in the Markdown.
+your code. It renders as a "code sheet" whose background, text colour and
+**monospace font** come from the active **style profile** (e.g. Courier). Turn
+**syntax colouring** off to show the whole block in a single colour — e.g. bright
+green on black for a classic CRT-terminal look. The text is sized to fill the
+panel — larger when there's room, smaller for long fragments. Stored as a fenced
+code block in the Markdown.
 
 ### Charts
 
@@ -112,10 +114,11 @@ Export to:
 
 ## Theming and language
 
-- **Style profiles** control deck colours (including the source-code background and
-  text, with an optional syntax-colouring toggle), fonts, logo, and footer. Every
-  colour can be picked from the presets or entered as a custom hex value. The
-  bundled Marp theme is `assets/themes/ocideck.css`.
+- **Style profiles** control deck colours (including the source-code background,
+  text, font and an optional syntax-colouring toggle), fonts, logo, and footer.
+  Every colour can be picked from the presets or entered as a custom hex value. The
+  Colours and Logo tabs show which profile you're editing. The bundled Marp theme
+  is `assets/themes/ocideck.css`.
 - **App appearance** (including a dark interface) is configurable in settings.
 - The interface is available in Dutch, English, Italian, German, French, Spanish,
   Frisian, and Papiamento.

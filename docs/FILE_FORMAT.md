@@ -138,6 +138,7 @@ JSON heeft deze velden (met standaardwaarden):
 | `codeBackgroundColor` | `#282C34` | Achtergrond van broncode-slides. |
 | `codeTextColor` | `#ABB2BF` | Tekstkleur van broncode-slides. |
 | `codeHighlightSyntax` | `true` | Syntaxkleuring aan/uit. Uit = alles in één kleur (bijv. groen op zwart voor een CRT-look). |
+| `codeFontFamily` | `monospace` | Lettertype van broncode-slides (bijv. `Courier New`). |
 | `logoPath` | `null` | Pad naar logo (relatief in `logos/`). |
 | `logoPosition` | `bottom-right` | `top-left`/`top-right`/`bottom-left`/`bottom-right`. |
 | `logoSize` | `96` | Logogrootte in px. |

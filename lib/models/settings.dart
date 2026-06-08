@@ -19,6 +19,10 @@ class ThemeProfile {
   /// syntax colours) — required for a believable single-colour CRT screen.
   final bool codeHighlightSyntax;
 
+  /// Monospace font family for code slides. `monospace` uses the system default;
+  /// e.g. `Courier New` for a typewriter look.
+  final String codeFontFamily;
+
   final String? logoPath;
   final String logoPosition;
   final int logoSize;
@@ -54,6 +58,7 @@ class ThemeProfile {
     this.codeBackgroundColor = '#282C34',
     this.codeTextColor = '#ABB2BF',
     this.codeHighlightSyntax = true,
+    this.codeFontFamily = 'monospace',
     this.logoPath,
     this.logoPosition = 'bottom-right',
     this.logoSize = 96,
@@ -87,6 +92,7 @@ class ThemeProfile {
     String? codeBackgroundColor,
     String? codeTextColor,
     bool? codeHighlightSyntax,
+    String? codeFontFamily,
     String? logoPath,
     String? logoPosition,
     int? logoSize,
@@ -112,6 +118,7 @@ class ThemeProfile {
       codeBackgroundColor: codeBackgroundColor ?? this.codeBackgroundColor,
       codeTextColor: codeTextColor ?? this.codeTextColor,
       codeHighlightSyntax: codeHighlightSyntax ?? this.codeHighlightSyntax,
+      codeFontFamily: codeFontFamily ?? this.codeFontFamily,
       logoPath: clearLogo ? null : (logoPath ?? this.logoPath),
       logoPosition: logoPosition ?? this.logoPosition,
       logoSize: logoSize ?? this.logoSize,
@@ -139,6 +146,7 @@ class ThemeProfile {
       'codeBackgroundColor': codeBackgroundColor,
       'codeTextColor': codeTextColor,
       'codeHighlightSyntax': codeHighlightSyntax,
+      'codeFontFamily': codeFontFamily,
       'logoPath': logoPath,
       'logoPosition': logoPosition,
       'logoSize': logoSize,
@@ -173,6 +181,7 @@ class ThemeProfile {
           json['codeBackgroundColor'] as String? ?? '#282C34',
       codeTextColor: json['codeTextColor'] as String? ?? '#ABB2BF',
       codeHighlightSyntax: json['codeHighlightSyntax'] as bool? ?? true,
+      codeFontFamily: json['codeFontFamily'] as String? ?? 'monospace',
       logoPath: json['logoPath'] as String?,
       logoPosition: json['logoPosition'] as String? ?? 'bottom-right',
       logoSize: (json['logoSize'] as num?)?.round() ?? 96,
@@ -368,6 +377,17 @@ class AppSettings {
     'Calibri',
     'Segoe UI',
     'Courier New',
+  ];
+
+  /// Monospace families offered for code slides. `monospace` is the system
+  /// default; the rest are common typewriter/coding faces.
+  static const codeFonts = [
+    'monospace',
+    'Courier New',
+    'Menlo',
+    'Consolas',
+    'Roboto Mono',
+    'Cascadia Code',
   ];
 
   AppSettings copyWith({
