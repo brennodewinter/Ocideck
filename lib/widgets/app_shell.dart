@@ -550,7 +550,8 @@ class _AppTabBar extends StatelessWidget {
                     _TabChip(
                       tab: tabsState.tabs[i],
                       isActive: i == tabsState.clampedIndex,
-                      showClose: tabsState.tabs.length > 1,
+                      showClose:
+                          tabsState.tabs.length > 1 || tabsState.tabs[i].isOpen,
                       panelText: palette.panelText,
                       accent: Theme.of(context).colorScheme.secondary,
                       onTap: () => onSelect(i),

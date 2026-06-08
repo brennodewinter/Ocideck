@@ -646,6 +646,7 @@ class _BulletsPreview extends StatelessWidget {
     final pad = w * 0.07;
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
     final titleSize = w * 0.042;
+    final subtitleSize = w * 0.030;
     final bulletSize = w * 0.026;
     final spacing = pad * 0.5;
     final bulletGap = w * 0.006;
@@ -653,6 +654,8 @@ class _BulletsPreview extends StatelessWidget {
         .where((b) => b.trimLeft().isNotEmpty)
         .toList();
     final hasTitle = slide.title.isNotEmpty;
+    final subtitle = slide.subtitle;
+    final hasSubtitle = subtitle.isNotEmpty;
 
     final slideHeight = w * 9 / 16;
     final availW = (w - pad * 2).clamp(w * 0.12, w);
@@ -669,6 +672,9 @@ class _BulletsPreview extends StatelessWidget {
       bulletSize: bulletSize,
       spacing: spacing,
       bulletGap: bulletGap,
+      font: font,
+      subtitle: subtitle,
+      subtitleSize: subtitleSize,
       maxScale: _kSplitBulletsMaxScale,
     );
 
@@ -705,7 +711,23 @@ class _BulletsPreview extends StatelessWidget {
                       ),
                       linkColor: _hexColor(profile.accentColor),
                     ),
-                  if (hasTitle && bullets.isNotEmpty)
+                  if (hasSubtitle) ...[
+                    SizedBox(height: spacing * scale * 0.4),
+                    _md(
+                      context,
+                      subtitle,
+                      _applyFont(
+                        font,
+                        TextStyle(
+                          fontSize: subtitleSize * scale,
+                          fontWeight: FontWeight.w600,
+                          color: _hexColor(profile.accentColor),
+                        ),
+                      ),
+                      linkColor: _hexColor(profile.accentColor),
+                    ),
+                  ],
+                  if ((hasTitle || hasSubtitle) && bullets.isNotEmpty)
                     SizedBox(height: spacing * scale),
                   ...bullets.map((b) {
                     int level = 0;
@@ -900,6 +922,62 @@ class _TwoBulletsPreview extends StatelessWidget {
     required this.profile,
   });
 
+  /// One bullet column with an optional heading above it. When any column has a
+  /// heading, an equal-height slot is reserved in both so the bullet lists line
+  /// up.
+  Widget _bulletColumn(
+    BuildContext context, {
+    required String title,
+    required List<String> bullets,
+    required double columnW,
+    required double headingSize,
+    required double headingSlotH,
+    required double headingGap,
+    required double bulletSize,
+    required double bulletGap,
+    required double scale,
+  }) {
+    return SizedBox(
+      width: columnW,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (headingSlotH > 0) ...[
+            SizedBox(
+              width: double.infinity,
+              height: headingSlotH,
+              child: title.isEmpty
+                  ? null
+                  : _md(
+                      context,
+                      title,
+                      _applyFont(
+                        font,
+                        TextStyle(
+                          fontSize: headingSize,
+                          fontWeight: FontWeight.bold,
+                          color: _hexColor(profile.accentColor),
+                        ),
+                      ),
+                      linkColor: _hexColor(profile.accentColor),
+                    ),
+            ),
+            SizedBox(height: headingGap),
+          ],
+          _BulletListColumn(
+            bullets: bullets,
+            font: font,
+            profile: profile,
+            bulletSize: bulletSize,
+            bulletGap: bulletGap,
+            scale: scale,
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final pad = w * 0.065;
@@ -917,6 +995,12 @@ class _TwoBulletsPreview extends StatelessWidget {
         .toList();
     final hasTitle = slide.title.isNotEmpty;
 
+    final col1Title = slide.columnTitle1.trim();
+    final col2Title = slide.columnTitle2.trim();
+    final hasColumnTitles = col1Title.isNotEmpty || col2Title.isNotEmpty;
+    final headingSize = w * 0.03;
+    final headingGap = w * 0.012;
+
     final slideHeight = w * 9 / 16;
     final contentW = (w - pad * 2).clamp(w * 0.12, w);
     final columnW = ((contentW - columnGap) / 2).clamp(w * 0.12, w);
@@ -927,9 +1011,19 @@ class _TwoBulletsPreview extends StatelessWidget {
         titleSize,
         contentW,
         bold: true,
+        fontFamily: font,
       );
       availH -= spacing;
     }
+    // Reserve room for the (optional) column headings so the bullets still fit.
+    double headingHeight(String t) => t.isEmpty
+        ? 0
+        : _measureTextHeight(t, headingSize, columnW, bold: true, fontFamily: font);
+    final maxHeadingH = math.max(
+      headingHeight(col1Title),
+      headingHeight(col2Title),
+    );
+    if (hasColumnTitles) availH -= maxHeadingH + headingGap;
     final leftScale = _bulletsFitScale(
       availW: columnW,
       availH: availH,
@@ -940,6 +1034,7 @@ class _TwoBulletsPreview extends StatelessWidget {
       bulletSize: bulletSize,
       spacing: spacing,
       bulletGap: bulletGap,
+      font: font,
       maxScale: _kBulletsMaxScale,
     );
     final rightScale = _bulletsFitScale(
@@ -952,6 +1047,7 @@ class _TwoBulletsPreview extends StatelessWidget {
       bulletSize: bulletSize,
       spacing: spacing,
       bulletGap: bulletGap,
+      font: font,
       maxScale: _kBulletsMaxScale,
     );
     final scale = leftScale < rightScale ? leftScale : rightScale;
@@ -993,28 +1089,30 @@ class _TwoBulletsPreview extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        width: columnW,
-                        child: _BulletListColumn(
-                          bullets: leftBullets,
-                          font: font,
-                          profile: profile,
-                          bulletSize: bulletSize,
-                          bulletGap: bulletGap,
-                          scale: scale,
-                        ),
+                      _bulletColumn(
+                        context,
+                        title: col1Title,
+                        bullets: leftBullets,
+                        columnW: columnW,
+                        headingSize: headingSize,
+                        headingSlotH: hasColumnTitles ? maxHeadingH : 0,
+                        headingGap: headingGap,
+                        bulletSize: bulletSize,
+                        bulletGap: bulletGap,
+                        scale: scale,
                       ),
                       SizedBox(width: columnGap),
-                      SizedBox(
-                        width: columnW,
-                        child: _BulletListColumn(
-                          bullets: rightBullets,
-                          font: font,
-                          profile: profile,
-                          bulletSize: bulletSize,
-                          bulletGap: bulletGap,
-                          scale: scale,
-                        ),
+                      _bulletColumn(
+                        context,
+                        title: col2Title,
+                        bullets: rightBullets,
+                        columnW: columnW,
+                        headingSize: headingSize,
+                        headingSlotH: hasColumnTitles ? maxHeadingH : 0,
+                        headingGap: headingGap,
+                        bulletSize: bulletSize,
+                        bulletGap: bulletGap,
+                        scale: scale,
                       ),
                     ],
                   ),
@@ -1087,6 +1185,7 @@ class _BulletsImagePreview extends StatelessWidget {
       bulletSize: bulletSize,
       spacing: spacing,
       bulletGap: bulletGap,
+      font: font,
       maxScale: _kBulletsMaxScale,
     );
 
@@ -1329,6 +1428,9 @@ double _bulletsFitScale({
   required double bulletSize,
   required double spacing,
   required double bulletGap,
+  required String font,
+  String subtitle = '',
+  double subtitleSize = 0,
   double minScale = 0.2,
   double maxScale = 1.0,
 }) {
@@ -1345,6 +1447,9 @@ double _bulletsFitScale({
     bulletSize: bulletSize,
     spacing: spacing,
     bulletGap: bulletGap,
+    font: font,
+    subtitle: subtitle,
+    subtitleSize: subtitleSize,
   );
 
   // Everything already fits at the largest allowed size → use it.
@@ -1381,12 +1486,33 @@ double _bulletsBlockHeight({
   required double bulletSize,
   required double spacing,
   required double bulletGap,
+  required String font,
+  String subtitle = '',
+  double subtitleSize = 0,
 }) {
   var height = 0.0;
   if (hasTitle) {
-    height += _measureTextHeight(title, titleSize * scale, availW, bold: true);
+    height += _measureTextHeight(
+      title,
+      titleSize * scale,
+      availW,
+      bold: true,
+      fontFamily: font,
+    );
   }
-  if (hasTitle && bullets.isNotEmpty) height += spacing * scale;
+  if (subtitle.isNotEmpty) {
+    height += spacing * scale * 0.4;
+    height += _measureTextHeight(
+      subtitle,
+      subtitleSize * scale,
+      availW,
+      bold: true,
+      fontFamily: font,
+    );
+  }
+  if ((hasTitle || subtitle.isNotEmpty) && bullets.isNotEmpty) {
+    height += spacing * scale;
+  }
   for (final b in bullets) {
     int level = 0;
     while (level < b.length && b[level] == '\t') {
@@ -1396,15 +1522,21 @@ double _bulletsBlockHeight({
     final fontSize = bulletSize * _bulletLevelScale(level) * scale;
     final indent = level * bulletSize * 1.05 * scale;
     final marker = '${_bulletMarkerForLevel(level)} ';
-    final markerW = _measureTextWidth(marker, fontSize, bold: true);
+    final markerW = _measureTextWidth(marker, fontSize, bold: true, fontFamily: font);
     final wrapW = (availW - indent - markerW).clamp(1.0, availW);
     final textH = _measureTextHeight(
       text,
       fontSize,
       wrapW,
       lineHeight: _kBulletLineHeight,
+      fontFamily: font,
     );
-    final markerH = _measureTextHeight(marker, fontSize, double.infinity);
+    final markerH = _measureTextHeight(
+      marker,
+      fontSize,
+      double.infinity,
+      fontFamily: font,
+    );
     height += bulletGap * scale * 2 + (textH > markerH ? textH : markerH);
   }
   return height;
@@ -1416,11 +1548,13 @@ double _measureTextHeight(
   double maxWidth, {
   double? lineHeight,
   bool bold = false,
+  String? fontFamily,
 }) {
   final painter = TextPainter(
     text: TextSpan(
       text: stripInlineMarkdown(text),
       style: TextStyle(
+        fontFamily: fontFamily,
         fontSize: fontSize,
         height: lineHeight,
         fontWeight: bold ? FontWeight.bold : null,
@@ -1431,11 +1565,17 @@ double _measureTextHeight(
   return painter.height;
 }
 
-double _measureTextWidth(String text, double fontSize, {bool bold = false}) {
+double _measureTextWidth(
+  String text,
+  double fontSize, {
+  bool bold = false,
+  String? fontFamily,
+}) {
   final painter = TextPainter(
     text: TextSpan(
       text: stripInlineMarkdown(text),
       style: TextStyle(
+        fontFamily: fontFamily,
         fontSize: fontSize,
         fontWeight: bold ? FontWeight.bold : null,
       ),

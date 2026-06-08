@@ -42,6 +42,11 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **Bullet slides** can now carry an optional **subheading** under the title; the
+  **two bullet columns** type can have an optional **heading above each column**,
+  separate from the slide title.
+- Slide text auto-sizing now measures with the deck's own font, so text grows to
+  use the available space more accurately instead of staying smaller than needed.
 - Slide transitions in the presenter no longer flash a black frame (neighbour
   images are precached and `gaplessPlayback` is enabled) — important for
   recording.
