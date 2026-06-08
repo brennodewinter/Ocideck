@@ -2326,6 +2326,7 @@ const _dutchSourceStrings = {
 
 const _dutchSourceStringAdditions = {
   'en': {
+    'Annuleren': 'Cancel',
     'Afbeelding': 'Image',
     'Broncode': 'Source code',
     'Bullet': 'Bullet',
@@ -2354,6 +2355,15 @@ const _dutchSourceStringAdditions = {
     'Label': 'Label',
     'Rij': 'Row',
     'Reeks': 'Series',
+    'Kleur van reeks': 'Series color',
+    'Kleur van rij': 'Row color',
+    'Hexkleur': 'Hex color',
+    'Sorteren': 'Sort',
+    'Oplopend sorteren': 'Sort ascending',
+    'Aflopend sorteren': 'Sort descending',
+    'Toepassen': 'Apply',
+    'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+        'Pie charts show at most the first two series; the labels form the slices.',
     'Platte tekst': 'Plain text',
     'Titel (optioneel)': 'Title (optional)',
     'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
@@ -2371,6 +2381,15 @@ const _dutchSourceStringAdditions = {
     'voorbereiden…': 'preparing…',
   },
   'it': {
+    'Annuleren': 'Annulla',
+    'Kleur van reeks': 'Colore della serie',
+    'Kleur van rij': 'Colore della riga',
+    'Hexkleur': 'Colore esadecimale',
+    'Sorteren': 'Ordina',
+    'Oplopend sorteren': 'Ordina in modo crescente',
+    'Aflopend sorteren': 'Ordina in modo decrescente',
+    'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+        'I grafici a torta mostrano al massimo le prime due serie; le etichette formano i segmenti.',
     '# Slide\n\nInhoud hier...': '# Slide\n\nContent here...',
     '1 slide geïmporteerd.': '1 slide imported.',
     '1 slide kopiëren naar…': 'Copy 1 slide to…',
@@ -2570,6 +2589,15 @@ const _dutchSourceStringAdditions = {
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
   },
   'de': {
+    'Annuleren': 'Abbrechen',
+    'Kleur van reeks': 'Reihenfarbe',
+    'Kleur van rij': 'Zeilenfarbe',
+    'Hexkleur': 'Hex-Farbe',
+    'Sorteren': 'Sortieren',
+    'Oplopend sorteren': 'Aufsteigend sortieren',
+    'Aflopend sorteren': 'Absteigend sortieren',
+    'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+        'Kreisdiagramme zeigen höchstens die ersten zwei Reihen; die Beschriftungen bilden die Segmente.',
     '# Slide\n\nInhoud hier...': '# Slide\n\nContent here...',
     '1 slide geïmporteerd.': '1 slide imported.',
     '1 slide kopiëren naar…': 'Copy 1 slide to…',
@@ -2770,6 +2798,15 @@ const _dutchSourceStringAdditions = {
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
   },
   'fr': {
+    'Annuleren': 'Annuler',
+    'Kleur van reeks': 'Couleur de la série',
+    'Kleur van rij': 'Couleur de la ligne',
+    'Hexkleur': 'Couleur hexadécimale',
+    'Sorteren': 'Trier',
+    'Oplopend sorteren': 'Trier par ordre croissant',
+    'Aflopend sorteren': 'Trier par ordre décroissant',
+    'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+        'Les graphiques en secteurs affichent au maximum les deux premières séries ; les libellés forment les segments.',
     '# Slide\n\nInhoud hier...': '# Slide\n\nContent here...',
     '1 slide geïmporteerd.': '1 slide imported.',
     '1 slide kopiëren naar…': 'Copy 1 slide to…',
@@ -2970,6 +3007,15 @@ const _dutchSourceStringAdditions = {
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
   },
   'es': {
+    'Annuleren': 'Cancelar',
+    'Kleur van reeks': 'Color de la serie',
+    'Kleur van rij': 'Color de la fila',
+    'Hexkleur': 'Color hexadecimal',
+    'Sorteren': 'Ordenar',
+    'Oplopend sorteren': 'Ordenar ascendente',
+    'Aflopend sorteren': 'Ordenar descendente',
+    'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+        'Los gráficos circulares muestran como máximo las dos primeras series; las etiquetas forman los segmentos.',
     '# Slide\n\nInhoud hier...': '# Slide\n\nContent here...',
     '1 slide geïmporteerd.': '1 slide imported.',
     '1 slide kopiëren naar…': 'Copy 1 slide to…',
@@ -3170,6 +3216,15 @@ const _dutchSourceStringAdditions = {
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
   },
   'fy': {
+    'Annuleren': 'Annulearje',
+    'Kleur van reeks': 'Rigekleur',
+    'Kleur van rij': 'Rijekleur',
+    'Hexkleur': 'Hekskleur',
+    'Sorteren': 'Sortearje',
+    'Oplopend sorteren': 'Oprinnend sortearje',
+    'Aflopend sorteren': 'Ôfrinnend sortearje',
+    'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+        'Sirkeldiagrammen litte maksimaal de earste twa rigen sjen; de labels foarmje de segminten.',
     '# Slide\n\nInhoud hier...': '# Slide\n\nContent here...',
     '1 slide geïmporteerd.': '1 slide imported.',
     '1 slide kopiëren naar…': 'Copy 1 slide to…',
@@ -3367,6 +3422,15 @@ const _dutchSourceStringAdditions = {
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
   },
   'pap': {
+    'Annuleren': 'Kanselá',
+    'Kleur van reeks': 'Koló di serie',
+    'Kleur van rij': 'Koló di liña',
+    'Hexkleur': 'Koló hexadecimal',
+    'Sorteren': 'Ordená',
+    'Oplopend sorteren': 'Ordená subiendu',
+    'Aflopend sorteren': 'Ordená bahando',
+    'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+        'Gráfikonan circular ta mustra máximo e promé dos serienan; e labelnan ta forma e segmentonan.',
     '# Slide\n\nInhoud hier...': '# Slide\n\nContent here...',
     '1 slide geïmporteerd.': '1 slide imported.',
     '1 slide kopiëren naar…': 'Copy 1 slide to…',

@@ -2,6 +2,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
 
 void main() {
+  test('chart palette starts with the EU flag colors', () {
+    expect(chartColorPalette.take(2), ['#003399', '#FFCC00']);
+  });
+
   group('parseCsv', () {
     test('reads header series names and labelled rows', () {
       final (x, series) = parseCsv('\n, 2025, 2026\nQ1, 10, 12\nQ2, 14, 9\n');
@@ -24,16 +28,19 @@ void main() {
         type: ChartType.line,
         title: 'Omzet',
         x: ['Q1', 'Q2'],
+        rowColors: ['#003399', '#FFCC00'],
         series: [
-          ChartSeries(name: '2025', data: [10, 14]),
+          ChartSeries(name: '2025', data: [10, 14], color: '#EF4444'),
         ],
       );
       final back = ChartSpec.parse(spec.toBlock());
       expect(back.type, ChartType.line);
       expect(back.title, 'Omzet');
       expect(back.x, ['Q1', 'Q2']);
+      expect(back.rowColors, ['#003399', '#FFCC00']);
       expect(back.series.single.name, '2025');
       expect(back.series.single.data, [10, 14]);
+      expect(back.series.single.color, '#EF4444');
       expect(back.hasInlineData, isTrue);
     });
 
@@ -43,13 +50,16 @@ void main() {
         title: 'Omzet',
         source: 'data/omzet.csv',
         x: ['Q1', 'Q2'],
+        rowColors: ['#003399', '#FFCC00'],
         series: [
-          ChartSeries(name: '2025', data: [10, 14]),
+          ChartSeries(name: '2025', data: [10, 14], color: '#10B981'),
         ],
       );
       final stored = ChartSpec.parse(spec.toBlock(forStorage: true));
       expect(stored.source, 'data/omzet.csv');
       expect(stored.hasInlineData, isFalse);
+      expect(stored.rowColors, ['#003399', '#FFCC00']);
+      expect(stored.series.single.color, '#10B981');
 
       // The in-app/full form keeps the data.
       final full = ChartSpec.parse(spec.toBlock());
@@ -57,18 +67,68 @@ void main() {
     });
 
     test('withCsv fills x/series and keeps the source', () {
-      const spec = ChartSpec(type: ChartType.bar, source: 'data/o.csv');
+      const spec = ChartSpec(
+        type: ChartType.bar,
+        source: 'data/o.csv',
+        rowColors: ['#003399', '#FFCC00'],
+        series: [ChartSeries(name: 'oud', data: [], color: '#10B981')],
+      );
       final filled = spec.withCsv(',A,B\nJan,1,2\nFeb,3,4');
       expect(filled.source, 'data/o.csv');
       expect(filled.x, ['Jan', 'Feb']);
       expect(filled.series.map((s) => s.name), ['A', 'B']);
       expect(filled.series[1].data, [2, 4]);
+      expect(filled.series[0].color, '#10B981');
+      expect(filled.series[1].color, isNull);
+      expect(filled.rowColors, ['#003399', '#FFCC00']);
+    });
+
+    test('invalid colors are ignored while valid colors are normalized', () {
+      final valid = ChartSeries.fromJson({
+        'name': 'A',
+        'data': [1],
+        'color': 'ef4444',
+      });
+      final invalid = ChartSeries.fromJson({
+        'name': 'B',
+        'data': [2],
+        'color': 'red',
+      });
+      expect(valid.color, '#EF4444');
+      expect(invalid.color, isNull);
     });
 
     test('parse is tolerant of malformed JSON', () {
       final spec = ChartSpec.parse('{ not json');
       expect(spec.type, ChartType.bar);
       expect(spec.hasInlineData, isFalse);
+    });
+
+    test('round-trips optional min/max bound lines for bar/line', () {
+      const spec = ChartSpec(
+        type: ChartType.line,
+        x: ['Q1'],
+        series: [ChartSeries(name: 'A', data: [10])],
+        minBound: 5,
+        maxBound: 20,
+      );
+      final back = ChartSpec.parse(spec.toBlock());
+      expect(back.minBound, 5);
+      expect(back.maxBound, 20);
+    });
+
+    test('bounds are dropped from a pie chart', () {
+      const spec = ChartSpec(
+        type: ChartType.pie,
+        x: ['Q1'],
+        series: [ChartSeries(name: 'A', data: [10])],
+        minBound: 5,
+        maxBound: 20,
+      );
+      expect(spec.supportsBounds, isFalse);
+      final back = ChartSpec.parse(spec.toBlock());
+      expect(back.minBound, isNull);
+      expect(back.maxBound, isNull);
     });
   });
 }
