@@ -2095,21 +2095,33 @@ class _CodePreview extends StatelessWidget {
     final lang = slide.codeLanguage.trim();
     final known = lang.isNotEmpty && allLanguages.containsKey(lang);
 
+    final codeBg = _hexColor(profile.codeBackgroundColor);
+    final codeFg = _hexColor(profile.codeTextColor);
+
     final mono = TextStyle(
       fontFamily: 'monospace',
       fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
       fontSize: w * 0.024,
       height: 1.4,
-      color: const Color(0xFFABB2BF), // atom-one-dark voorgrond
+      color: codeFg,
     );
 
-    // HighlightView gooit een fout bij een onbekende taal; daarom vallen we
-    // dan terug op platte (maar wel monospace) tekst.
-    final Widget codeContent = known
+    // HighlightView throws on an unknown language, so fall back to plain (but
+    // monospace) text. When syntax highlighting is off we always render plain
+    // text so the whole block is one colour — needed for a CRT-green screen.
+    final Widget codeContent = (known && profile.codeHighlightSyntax)
         ? HighlightView(
             code,
             language: lang,
-            theme: atomOneDarkTheme,
+            // Keep atom-one-dark's per-token colours but drop its own
+            // background so our themed [codeBg] shows through unchanged.
+            theme: {
+              ...atomOneDarkTheme,
+              'root': (atomOneDarkTheme['root'] ?? const TextStyle()).copyWith(
+                backgroundColor: codeBg,
+                color: codeFg,
+              ),
+            },
             padding: EdgeInsets.zero,
             textStyle: mono,
           )
@@ -2127,9 +2139,9 @@ class _CodePreview extends StatelessWidget {
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            color: const Color(0xFF282C34), // atom-one-dark achtergrond
+            color: codeBg,
             borderRadius: BorderRadius.circular(w * 0.012),
-            border: Border.all(color: const Color(0xFF3A3F4B)),
+            border: Border.all(color: codeFg.withValues(alpha: 0.22)),
           ),
           padding: EdgeInsets.all(w * 0.03),
           child: Column(
@@ -2144,7 +2156,7 @@ class _CodePreview extends StatelessWidget {
                     TextStyle(
                       fontSize: w * 0.03,
                       fontWeight: FontWeight.bold,
-                      color: const Color(0xFFE5E7EB),
+                      color: codeFg,
                     ),
                   ),
                   linkColor: _hexColor(profile.accentColor),
@@ -2475,6 +2487,8 @@ class _ChartPreviewState extends State<_ChartPreview> {
         return _lineChart(spec, textColor);
       case ChartType.pie:
         return _pieChart(spec, textColor);
+      case ChartType.radar:
+        return _radarChart(spec, textColor);
     }
   }
 
@@ -2511,7 +2525,7 @@ class _ChartPreviewState extends State<_ChartPreview> {
 
   /// Optional min/max threshold lines drawn across the plot (bar/line only).
   ExtraLinesData _boundLines(ChartSpec spec) {
-    if (!spec.supportsBounds) return const ExtraLinesData();
+    if (!spec.supportsBoundLines) return const ExtraLinesData();
     final dash = [
       (w * 0.018).round().clamp(4, 14),
       (w * 0.01).round().clamp(3, 9),
@@ -2729,6 +2743,10 @@ class _ChartPreviewState extends State<_ChartPreview> {
         extraLinesData: _boundLines(spec),
         lineTouchData: LineTouchData(
           enabled: true,
+          // Measure proximity to the actual dot (x *and* y), not just the
+          // column, so the tooltip belongs to the point under the cursor.
+          distanceCalculator: (touch, spot) => (touch - spot).distance,
+          touchSpotThreshold: (w * 0.02).clamp(8.0, 24.0).toDouble(),
           mouseCursorResolver: (event, response) =>
               response?.lineBarSpots?.isEmpty ?? true
               ? SystemMouseCursors.basic
@@ -2737,30 +2755,18 @@ class _ChartPreviewState extends State<_ChartPreview> {
             fitInsideHorizontally: true,
             fitInsideVertically: true,
             getTooltipColor: (_) => const Color(0xFF0F172A),
+            // Show every dot near the cursor. When several dots sit on (almost)
+            // the same spot they all appear; the font shrinks to keep them
+            // readable when stacked.
             getTooltipItems: (spots) {
-              // When several series cross the same x, fl_chart hands us one
-              // spot per series. Only show the value of the point closest to
-              // the cursor instead of stacking every series vertically.
-              var nearest = 0;
-              var best = double.infinity;
-              for (var k = 0; k < spots.length; k++) {
-                final s = spots[k];
-                final d = s is TouchLineBarSpot ? s.distance : 0.0;
-                if (d < best) {
-                  best = d;
-                  nearest = k;
-                }
-              }
+              final style = _lineTooltipStyle(spots.length);
               return [
-                for (var k = 0; k < spots.length; k++)
-                  if (k != nearest)
-                    null
-                  else
-                    LineTooltipItem(
-                      '${spots[k].spotIndex < spec.x.length ? spec.x[spots[k].spotIndex] : ''}\n'
-                      '${spots[k].barIndex < spec.series.length && spec.series[spots[k].barIndex].name.isNotEmpty ? spec.series[spots[k].barIndex].name : 'Reeks ${spots[k].barIndex + 1}'}: ${_fmtNum(spots[k].y)}',
-                      _tooltipStyle(),
-                    ),
+                for (final spot in spots)
+                  LineTooltipItem(
+                    '${spot.spotIndex < spec.x.length ? spec.x[spot.spotIndex] : ''}\n'
+                    '${spot.barIndex < spec.series.length && spec.series[spot.barIndex].name.isNotEmpty ? spec.series[spot.barIndex].name : 'Reeks ${spot.barIndex + 1}'}: ${_fmtNum(spot.y)}',
+                    style,
+                  ),
               ];
             },
           ),
@@ -2880,6 +2886,195 @@ class _ChartPreviewState extends State<_ChartPreview> {
     );
   }
 
+  Widget _radarChart(ChartSpec spec, Color textColor) {
+    if (spec.x.length < 3 || spec.series.isEmpty) {
+      return _placeholderText(
+        context.l10n.d('Een spider-diagram heeft minstens drie labels nodig'),
+      );
+    }
+    final grid = textColor.withValues(alpha: 0.18);
+    final scale = radarScale(spec);
+    final bg = _hexColor(profile.slideBackgroundColor);
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: w * 0.06, vertical: w * 0.012),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          // A square keeps fl_chart's centre/radius predictable so the tick
+          // labels we overlay line up exactly with its grid rings.
+          final side = math.min(constraints.maxWidth, constraints.maxHeight);
+          final centerOffset = side / 2;
+          final radius = centerOffset * 0.8; // matches RadarChartPainter
+          final tickStyle = _applyFont(
+            font,
+            TextStyle(
+              fontSize: w * 0.012 * _labelScale,
+              color: textColor.withValues(alpha: 0.6),
+              fontWeight: FontWeight.w600,
+            ),
+          );
+
+          return Center(
+            child: SizedBox(
+              width: side,
+              height: side,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: RadarChart(
+                      RadarChartData(
+                        dataSets: [
+                          for (var si = 0; si < spec.series.length; si++)
+                            RadarDataSet(
+                              dataEntries: [
+                                for (var xi = 0; xi < spec.x.length; xi++)
+                                  RadarEntry(
+                                    value: xi < spec.series[si].data.length
+                                        ? spec.series[si].data[xi]
+                                        : 0,
+                                  ),
+                              ],
+                              fillColor: _seriesDisplayColor(
+                                spec.series[si],
+                                si,
+                              ).withValues(alpha: _dimmed(si) ? 0.04 : 0.16),
+                              borderColor: _seriesDisplayColor(
+                                spec.series[si],
+                                si,
+                              ),
+                              borderWidth: w * (_hovered == si ? 0.0055 : 0.0035),
+                              entryRadius: w * (_hovered == si ? 0.006 : 0.004),
+                            ),
+                          // Invisible anchor pinning the scale to [lo, hi] so the
+                          // rings — and our labels — represent a fixed scale.
+                          RadarDataSet(
+                            dataEntries: [
+                              for (var xi = 0; xi < spec.x.length; xi++)
+                                RadarEntry(value: xi == 0 ? scale.hi : scale.lo),
+                            ],
+                            fillColor: Colors.transparent,
+                            borderColor: Colors.transparent,
+                            borderWidth: 0,
+                            entryRadius: 0,
+                          ),
+                        ],
+                        radarShape: RadarShape.polygon,
+                        radarBackgroundColor: Colors.transparent,
+                        radarBorderData: BorderSide(color: grid, width: 1),
+                        gridBorderData: BorderSide(color: grid, width: 1),
+                        tickBorderData: BorderSide(color: grid, width: 1),
+                        tickCount: scale.ticks,
+                        isMinValueAtCenter: true,
+                        // Hide fl_chart's own ring numbers; we draw labelled
+                        // ticks ourselves so any min/max scale reads correctly.
+                        ticksTextStyle: const TextStyle(
+                          color: Colors.transparent,
+                          fontSize: 0.001,
+                        ),
+                        titlePositionPercentageOffset: 0.14,
+                        getTitle: (index, angle) => RadarChartTitle(
+                          text: index < spec.x.length ? spec.x[index] : '',
+                        ),
+                        titleTextStyle: _applyFont(
+                          font,
+                          TextStyle(
+                            fontSize: w * 0.0135 * _labelScale,
+                            color: textColor.withValues(alpha: 0.88),
+                            fontWeight: presentationMode
+                                ? FontWeight.w600
+                                : FontWeight.w500,
+                          ),
+                        ),
+                        radarTouchData: RadarTouchData(enabled: false),
+                      ),
+                      duration: Duration.zero,
+                    ),
+                  ),
+                  // Evenly spaced scale labels up the top spoke: lo at centre,
+                  // hi at the outer ring, with equal steps between.
+                  for (var k = 0; k <= scale.ticks; k++)
+                    Positioned(
+                      left: centerOffset + w * 0.006,
+                      top:
+                          centerOffset -
+                          radius * k / scale.ticks -
+                          w * 0.01 * _labelScale,
+                      child: IgnorePointer(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: w * 0.004,
+                          ),
+                          color: bg.withValues(alpha: 0.7),
+                          child: Text(
+                            _fmtNum(scale.lo + (scale.hi - scale.lo) * k / scale.ticks),
+                            style: tickStyle,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  /// Resolves the radar scale: a low/high pair plus an even tick count. Honours
+  /// the optional [ChartSpec.minBound]/[maxBound] and otherwise rounds the data
+  /// range to a tidy scale so the rings read as round numbers.
+  ({double lo, double hi, int ticks}) radarScale(ChartSpec spec) {
+    var dataMin = 0.0;
+    var dataMax = 0.0;
+    var seen = false;
+    for (final s in spec.series) {
+      for (final v in s.data) {
+        if (!seen) {
+          dataMin = v;
+          dataMax = v;
+          seen = true;
+        } else {
+          if (v < dataMin) dataMin = v;
+          if (v > dataMax) dataMax = v;
+        }
+      }
+    }
+    if (!seen) {
+      dataMin = 0;
+      dataMax = 1;
+    }
+    final rawLo = spec.minBound ?? (dataMin < 0 ? dataMin : 0);
+    final rawHi = spec.maxBound ?? dataMax;
+    final nice = _niceScale(rawLo, rawHi);
+    final lo = spec.minBound ?? nice.lo;
+    var hi = spec.maxBound ?? nice.hi;
+    if (hi <= lo) hi = lo + nice.step;
+    final ticks = math.max(2, ((hi - lo) / nice.step).round());
+    return (lo: lo, hi: hi, ticks: ticks);
+  }
+
+  ({double lo, double hi, double step}) _niceScale(double lo, double hi) {
+    final range = (hi - lo).abs();
+    final r = range <= 0 ? 1.0 : range;
+    final rawStep = r / 4;
+    final mag = math.pow(10, (math.log(rawStep) / math.ln10).floor()).toDouble();
+    final norm = rawStep / mag;
+    final niceNorm = norm < 1.5
+        ? 1.0
+        : norm < 3
+        ? 2.0
+        : norm < 7
+        ? 5.0
+        : 10.0;
+    final step = niceNorm * mag;
+    return (
+      lo: (lo / step).floor() * step,
+      hi: (hi / step).ceil() * step,
+      step: step,
+    );
+  }
+
   TextStyle _tooltipStyle() => _applyFont(
     font,
     TextStyle(
@@ -2889,6 +3084,22 @@ class _ChartPreviewState extends State<_ChartPreview> {
       fontWeight: FontWeight.w700,
     ),
   );
+
+  /// Tooltip style for line charts. Each touched dot adds two lines, so when
+  /// several dots overlap the font shrinks a step to keep the stack readable.
+  TextStyle _lineTooltipStyle(int count) {
+    final base = (w * 0.013 * _labelScale).clamp(11.0, 18.0);
+    final shrink = (1 - (count - 2) * 0.13).clamp(0.6, 1.0);
+    return _applyFont(
+      font,
+      TextStyle(
+        color: Colors.white,
+        fontSize: (base * shrink).clamp(8.0, 18.0),
+        height: 1.2,
+        fontWeight: FontWeight.w700,
+      ),
+    );
+  }
 
   Widget _placeholder(BuildContext context) =>
       _placeholderText(context.l10n.d('Geen grafiekgegevens'));

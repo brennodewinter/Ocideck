@@ -15,6 +15,26 @@ Future<SettingsNotifier> _loadedNotifier() async {
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
+  test('ThemeProfile round-trips the code colours through JSON', () {
+    const profile = ThemeProfile(
+      codeBackgroundColor: '#000000',
+      codeTextColor: '#33FF33',
+      codeHighlightSyntax: false,
+    );
+    final back = ThemeProfile.fromJson(profile.toJson());
+    expect(back.codeBackgroundColor, '#000000');
+    expect(back.codeTextColor, '#33FF33');
+    expect(back.codeHighlightSyntax, isFalse);
+  });
+
+  test('ThemeProfile code colours default to the atom-one-dark look', () {
+    // Older decks without the fields fall back to the dark editor defaults.
+    final back = ThemeProfile.fromJson(const {'name': 'Legacy'});
+    expect(back.codeBackgroundColor, '#282C34');
+    expect(back.codeTextColor, '#ABB2BF');
+    expect(back.codeHighlightSyntax, isTrue);
+  });
+
   test('starts with a single default profile', () async {
     final notifier = await _loadedNotifier();
     expect(notifier.state.themeProfiles, hasLength(1));

@@ -8,6 +8,17 @@ class ThemeProfile {
   final String titleBackgroundColor;
   final String titleTextColor;
   final String sectionBackgroundColor;
+
+  /// Colours for code (broncode) slides. Defaults mirror the atom-one-dark
+  /// editor look. Set e.g. black background + bright green text with
+  /// [codeHighlightSyntax] off for a classic CRT terminal feel.
+  final String codeBackgroundColor;
+  final String codeTextColor;
+
+  /// When false, code is shown monochrome in [codeTextColor] (no per-token
+  /// syntax colours) — required for a believable single-colour CRT screen.
+  final bool codeHighlightSyntax;
+
   final String? logoPath;
   final String logoPosition;
   final int logoSize;
@@ -40,6 +51,9 @@ class ThemeProfile {
     this.titleBackgroundColor = '#1C2B47',
     this.titleTextColor = '#FFFFFF',
     this.sectionBackgroundColor = '#2E7D64',
+    this.codeBackgroundColor = '#282C34',
+    this.codeTextColor = '#ABB2BF',
+    this.codeHighlightSyntax = true,
     this.logoPath,
     this.logoPosition = 'bottom-right',
     this.logoSize = 96,
@@ -70,6 +84,9 @@ class ThemeProfile {
     String? titleBackgroundColor,
     String? titleTextColor,
     String? sectionBackgroundColor,
+    String? codeBackgroundColor,
+    String? codeTextColor,
+    bool? codeHighlightSyntax,
     String? logoPath,
     String? logoPosition,
     int? logoSize,
@@ -92,6 +109,9 @@ class ThemeProfile {
       titleTextColor: titleTextColor ?? this.titleTextColor,
       sectionBackgroundColor:
           sectionBackgroundColor ?? this.sectionBackgroundColor,
+      codeBackgroundColor: codeBackgroundColor ?? this.codeBackgroundColor,
+      codeTextColor: codeTextColor ?? this.codeTextColor,
+      codeHighlightSyntax: codeHighlightSyntax ?? this.codeHighlightSyntax,
       logoPath: clearLogo ? null : (logoPath ?? this.logoPath),
       logoPosition: logoPosition ?? this.logoPosition,
       logoSize: logoSize ?? this.logoSize,
@@ -116,6 +136,9 @@ class ThemeProfile {
       'titleBackgroundColor': titleBackgroundColor,
       'titleTextColor': titleTextColor,
       'sectionBackgroundColor': sectionBackgroundColor,
+      'codeBackgroundColor': codeBackgroundColor,
+      'codeTextColor': codeTextColor,
+      'codeHighlightSyntax': codeHighlightSyntax,
       'logoPath': logoPath,
       'logoPosition': logoPosition,
       'logoSize': logoSize,
@@ -146,6 +169,10 @@ class ThemeProfile {
       titleTextColor: json['titleTextColor'] as String? ?? '#FFFFFF',
       sectionBackgroundColor:
           json['sectionBackgroundColor'] as String? ?? '#2E7D64',
+      codeBackgroundColor:
+          json['codeBackgroundColor'] as String? ?? '#282C34',
+      codeTextColor: json['codeTextColor'] as String? ?? '#ABB2BF',
+      codeHighlightSyntax: json['codeHighlightSyntax'] as bool? ?? true,
       logoPath: json['logoPath'] as String?,
       logoPosition: json['logoPosition'] as String? ?? 'bottom-right',
       logoSize: (json['logoSize'] as num?)?.round() ?? 96,

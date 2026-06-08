@@ -2342,6 +2342,7 @@ const _dutchSourceStringAdditions = {
     'Staaf': 'Bar',
     'Lijn': 'Line',
     'Cirkel': 'Pie',
+    'Spider': 'Spider',
     'CSV importeren': 'Import CSV',
     'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
         'Data (CSV: first row = series names, first column = labels)',
@@ -2364,6 +2365,23 @@ const _dutchSourceStringAdditions = {
     'Toepassen': 'Apply',
     'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
         'Pie charts show at most the first two series; the labels form the slices.',
+    'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+        'A spider chart needs at least three labels (axes); each series forms a shape.',
+    'Een spider-diagram heeft minstens drie labels nodig':
+        'A spider chart needs at least three labels',
+    'Minimumlijn (optioneel)': 'Minimum line (optional)',
+    'Maximumlijn (optioneel)': 'Maximum line (optional)',
+    'Schaalminimum (optioneel)': 'Scale minimum (optional)',
+    'Schaalmaximum (optioneel)': 'Scale maximum (optional)',
+    'geen': 'none',
+    'Broncode achtergrond': 'Code background',
+    'Broncode tekst': 'Code text',
+    'Syntaxkleuring': 'Syntax colouring',
+    'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+        'Off = everything in one colour (e.g. green on black for a CRT screen).',
+    'Eigen kleur (hex)': 'Custom colour (hex)',
+    'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+        'For example #33FF33 for a CRT-green screen.',
     'Platte tekst': 'Plain text',
     'Titel (optioneel)': 'Title (optional)',
     'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
@@ -2382,6 +2400,24 @@ const _dutchSourceStringAdditions = {
   },
   'it': {
     'Annuleren': 'Annulla',
+    'Spider': 'Radar',
+    'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+        'Un grafico radar richiede almeno tre etichette (assi); ogni serie forma una superficie.',
+    'Een spider-diagram heeft minstens drie labels nodig':
+        'Un grafico radar richiede almeno tre etichette',
+    'Minimumlijn (optioneel)': 'Linea minima (facoltativa)',
+    'Maximumlijn (optioneel)': 'Linea massima (facoltativa)',
+    'Schaalminimum (optioneel)': 'Scala minima (facoltativa)',
+    'Schaalmaximum (optioneel)': 'Scala massima (facoltativa)',
+    'geen': 'nessuno',
+    'Broncode achtergrond': 'Sfondo del codice',
+    'Broncode tekst': 'Testo del codice',
+    'Syntaxkleuring': 'Colorazione della sintassi',
+    'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+        'Off = tutto in un solo colore (es. verde su nero per uno schermo CRT).',
+    'Eigen kleur (hex)': 'Colore personalizzato (hex)',
+    'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+        'Ad esempio #33FF33 per uno schermo verde CRT.',
     'Kleur van reeks': 'Colore della serie',
     'Kleur van rij': 'Colore della riga',
     'Hexkleur': 'Colore esadecimale',
@@ -2590,6 +2626,24 @@ const _dutchSourceStringAdditions = {
   },
   'de': {
     'Annuleren': 'Abbrechen',
+    'Spider': 'Netz',
+    'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+        'Ein Netzdiagramm braucht mindestens drei Beschriftungen (Achsen); jede Reihe bildet eine Fläche.',
+    'Een spider-diagram heeft minstens drie labels nodig':
+        'Ein Netzdiagramm braucht mindestens drei Beschriftungen',
+    'Minimumlijn (optioneel)': 'Minimumlinie (optional)',
+    'Maximumlijn (optioneel)': 'Maximumlinie (optional)',
+    'Schaalminimum (optioneel)': 'Skalenminimum (optional)',
+    'Schaalmaximum (optioneel)': 'Skalenmaximum (optional)',
+    'geen': 'keine',
+    'Broncode achtergrond': 'Code-Hintergrund',
+    'Broncode tekst': 'Code-Text',
+    'Syntaxkleuring': 'Syntaxfärbung',
+    'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+        'Aus = alles in einer Farbe (z. B. Grün auf Schwarz für einen CRT-Bildschirm).',
+    'Eigen kleur (hex)': 'Eigene Farbe (Hex)',
+    'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+        'Zum Beispiel #33FF33 für einen CRT-grünen Bildschirm.',
     'Kleur van reeks': 'Reihenfarbe',
     'Kleur van rij': 'Zeilenfarbe',
     'Hexkleur': 'Hex-Farbe',
@@ -2799,6 +2853,24 @@ const _dutchSourceStringAdditions = {
   },
   'fr': {
     'Annuleren': 'Annuler',
+    'Spider': 'Radar',
+    'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+        'Un graphique radar nécessite au moins trois étiquettes (axes); chaque série forme une surface.',
+    'Een spider-diagram heeft minstens drie labels nodig':
+        'Un graphique radar nécessite au moins trois étiquettes',
+    'Minimumlijn (optioneel)': 'Ligne minimale (facultatif)',
+    'Maximumlijn (optioneel)': 'Ligne maximale (facultatif)',
+    'Schaalminimum (optioneel)': 'Échelle minimale (facultatif)',
+    'Schaalmaximum (optioneel)': 'Échelle maximale (facultatif)',
+    'geen': 'aucune',
+    'Broncode achtergrond': 'Fond du code',
+    'Broncode tekst': 'Texte du code',
+    'Syntaxkleuring': 'Coloration syntaxique',
+    'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+        'Désactivé = tout en une seule couleur (p. ex. vert sur noir pour un écran CRT).',
+    'Eigen kleur (hex)': 'Couleur personnalisée (hex)',
+    'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+        'Par exemple #33FF33 pour un écran vert CRT.',
     'Kleur van reeks': 'Couleur de la série',
     'Kleur van rij': 'Couleur de la ligne',
     'Hexkleur': 'Couleur hexadécimale',
@@ -3008,6 +3080,24 @@ const _dutchSourceStringAdditions = {
   },
   'es': {
     'Annuleren': 'Cancelar',
+    'Spider': 'Radar',
+    'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+        'Un gráfico radar necesita al menos tres etiquetas (ejes); cada serie forma una superficie.',
+    'Een spider-diagram heeft minstens drie labels nodig':
+        'Un gráfico radar necesita al menos tres etiquetas',
+    'Minimumlijn (optioneel)': 'Línea mínima (opcional)',
+    'Maximumlijn (optioneel)': 'Línea máxima (opcional)',
+    'Schaalminimum (optioneel)': 'Escala mínima (opcional)',
+    'Schaalmaximum (optioneel)': 'Escala máxima (opcional)',
+    'geen': 'ninguno',
+    'Broncode achtergrond': 'Fondo del código',
+    'Broncode tekst': 'Texto del código',
+    'Syntaxkleuring': 'Coloreado de sintaxis',
+    'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+        'Desactivado = todo en un solo color (p. ej. verde sobre negro para una pantalla CRT).',
+    'Eigen kleur (hex)': 'Color personalizado (hex)',
+    'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+        'Por ejemplo #33FF33 para una pantalla verde CRT.',
     'Kleur van reeks': 'Color de la serie',
     'Kleur van rij': 'Color de la fila',
     'Hexkleur': 'Color hexadecimal',
@@ -3217,6 +3307,24 @@ const _dutchSourceStringAdditions = {
   },
   'fy': {
     'Annuleren': 'Annulearje',
+    'Spider': 'Spider',
+    'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+        'In spiderdiagram hat op syn minst trije labels (assen) nedich; eltse rige foarmet in flak.',
+    'Een spider-diagram heeft minstens drie labels nodig':
+        'In spiderdiagram hat op syn minst trije labels nedich',
+    'Minimumlijn (optioneel)': 'Minimumline (opsjoneel)',
+    'Maximumlijn (optioneel)': 'Maksimumline (opsjoneel)',
+    'Schaalminimum (optioneel)': 'Skaalminimum (opsjoneel)',
+    'Schaalmaximum (optioneel)': 'Skaalmaksimum (opsjoneel)',
+    'geen': 'gjin',
+    'Broncode achtergrond': 'Boarnekoade eftergrûn',
+    'Broncode tekst': 'Boarnekoade tekst',
+    'Syntaxkleuring': 'Syntakskleuring',
+    'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+        'Ut = alles yn ien kleur (bgl. grien op swart foar in CRT-skerm).',
+    'Eigen kleur (hex)': 'Eigen kleur (hex)',
+    'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+        'Bygelyks #33FF33 foar in CRT-grien skerm.',
     'Kleur van reeks': 'Rigekleur',
     'Kleur van rij': 'Rijekleur',
     'Hexkleur': 'Hekskleur',
@@ -3423,6 +3531,24 @@ const _dutchSourceStringAdditions = {
   },
   'pap': {
     'Annuleren': 'Kanselá',
+    'Spider': 'Radar',
+    'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+        'Un grafiko radar mester di por lo ménos tres etiketa (ehe); kada serie ta forma un superfisie.',
+    'Een spider-diagram heeft minstens drie labels nodig':
+        'Un grafiko radar mester di por lo ménos tres etiketa',
+    'Minimumlijn (optioneel)': 'Liña mínimo (opshonal)',
+    'Maximumlijn (optioneel)': 'Liña máksimo (opshonal)',
+    'Schaalminimum (optioneel)': 'Eskala mínimo (opshonal)',
+    'Schaalmaximum (optioneel)': 'Eskala máksimo (opshonal)',
+    'geen': 'niun',
+    'Broncode achtergrond': 'Fondo di kódigo',
+    'Broncode tekst': 'Teksto di kódigo',
+    'Syntaxkleuring': 'Koloreashon di sintaksis',
+    'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+        'Apagá = tur kos den un solo koló (p.e. berde riba pretu pa un pantaya CRT).',
+    'Eigen kleur (hex)': 'Koló propio (hex)',
+    'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+        'Por ehèmpel #33FF33 pa un pantaya berde CRT.',
     'Kleur van reeks': 'Koló di serie',
     'Kleur van rij': 'Koló di liña',
     'Hexkleur': 'Koló hexadecimal',

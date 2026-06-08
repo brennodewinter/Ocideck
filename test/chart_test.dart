@@ -130,5 +130,44 @@ void main() {
       expect(back.minBound, isNull);
       expect(back.maxBound, isNull);
     });
+
+    test('round-trips a spider/radar chart type', () {
+      const spec = ChartSpec(
+        type: ChartType.radar,
+        x: ['Snelheid', 'Kracht', 'Uithouding'],
+        series: [
+          ChartSeries(name: 'A', data: [3, 4, 5]),
+        ],
+      );
+      final back = ChartSpec.parse(spec.toBlock());
+      expect(back.type, ChartType.radar);
+      expect(back.x, ['Snelheid', 'Kracht', 'Uithouding']);
+      expect(back.series.single.data, [3, 4, 5]);
+    });
+
+    test('radar keeps bounds as a scale but never draws bound lines', () {
+      const spec = ChartSpec(
+        type: ChartType.radar,
+        x: ['A', 'B', 'C'],
+        series: [ChartSeries(name: 'A', data: [1, 2, 3])],
+        minBound: 1,
+        maxBound: 5,
+      );
+      expect(spec.supportsBounds, isTrue);
+      expect(spec.supportsBoundLines, isFalse);
+      final back = ChartSpec.parse(spec.toBlock());
+      expect(back.minBound, 1);
+      expect(back.maxBound, 5);
+    });
+
+    test('bar/line draw bound lines but pie does not', () {
+      const bar = ChartSpec(type: ChartType.bar);
+      const line = ChartSpec(type: ChartType.line);
+      const pie = ChartSpec(type: ChartType.pie);
+      expect(bar.supportsBoundLines, isTrue);
+      expect(line.supportsBoundLines, isTrue);
+      expect(pie.supportsBoundLines, isFalse);
+      expect(pie.supportsBounds, isFalse);
+    });
   });
 }

@@ -98,6 +98,21 @@ void main() {}
     expect(html, isNot(contains('data:font/ttf;base64,')));
   });
 
+  test('code blocks use the themed code colours in the export CSS', () async {
+    final service = MarpHtmlService(
+      loadAsset: _diskLoader,
+      loadBytes: _diskBytes,
+    );
+    const theme = ThemeProfile(
+      codeBackgroundColor: '#000000',
+      codeTextColor: '#33FF33',
+    );
+    final html = await service.build('```dart\nvoid main() {}\n```', theme: theme);
+
+    expect(html, contains('.slide pre{background:#000000;color:#33FF33'));
+    expect(html, contains('.slide pre code{color:#33FF33'));
+  });
+
   test('EB Garamond theme embeds the font for offline rendering', () async {
     final service = MarpHtmlService(
       loadAsset: _diskLoader,
@@ -194,5 +209,33 @@ void main() {}
 
     expect(html, isNot(contains('stroke-dasharray')));
     expect(html, isNot(contains('min 5')));
+  });
+
+  test('radar chart SVG draws a polygon per series with axis labels', () {
+    const slide = '''
+```chart
+{
+  "type": "radar",
+  "x": ["Snelheid", "Kracht", "Uithouding"],
+  "series": [
+    {"name": "A", "color": "#2563EB", "data": [3, 4, 5]},
+    {"name": "B", "color": "#EF4444", "data": [5, 2, 3]}
+  ]
+}
+```
+''';
+
+    final html = MarpHtmlService.renderChartBlocks(slide);
+
+    expect(html, contains('<polygon'));
+    expect(html, contains('Snelheid'));
+    expect(html, contains('Kracht'));
+    expect(html, contains('Uithouding'));
+    // Both series are drawn with their colours.
+    expect(html, contains('fill="#2563EB"'));
+    expect(html, contains('fill="#EF4444"'));
+    // The series legend is shown (not a pie legend).
+    expect(html, contains('A'));
+    expect(html, contains('B'));
   });
 }

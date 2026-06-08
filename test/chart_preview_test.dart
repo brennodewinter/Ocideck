@@ -151,6 +151,49 @@ void main() {
     expect(lineItems.single?.text, 'Februari\nBezoekers: 17.5');
   });
 
+  testWidgets('line tooltip uses true distance and shows every nearby dot', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.line,
+      x: ['Q1'],
+      series: [
+        ChartSeries(name: 'Alpha', data: [10], color: '#2563EB'),
+        ChartSeries(name: 'Beta', data: [10], color: '#EF4444'),
+        ChartSeries(name: 'Gamma', data: [10], color: '#10B981'),
+      ],
+    );
+    await tester.pumpWidget(_host(spec));
+    final line = tester.widget<LineChart>(find.byType(LineChart));
+    final touch = line.data.lineTouchData;
+
+    // Proximity is Euclidean (x AND y), not the x-only default.
+    expect(touch.distanceCalculator(Offset.zero, const Offset(3, 4)), 5);
+    expect(touch.touchSpotThreshold, greaterThan(0));
+
+    final spots = [
+      for (var i = 0; i < 3; i++)
+        LineBarSpot(
+          line.data.lineBarsData[i],
+          i,
+          line.data.lineBarsData[i].spots.single,
+        ),
+    ];
+    final items = touch.touchTooltipData.getTooltipItems(spots);
+    // All overlapping dots are shown (none filtered out).
+    expect(items.length, 3);
+    expect(items.whereType<LineTooltipItem>().length, 3);
+    expect(items[0]?.text, 'Q1\nAlpha: 10');
+    expect(items[2]?.text, 'Q1\nGamma: 10');
+
+    // A crowded stack uses a smaller font than a single tooltip.
+    final single = touch.touchTooltipData.getTooltipItems([spots.first]);
+    expect(
+      items[0]!.textStyle!.fontSize!,
+      lessThan(single.single!.textStyle!.fontSize!),
+    );
+  });
+
   testWidgets('pie hover shows the underlying category value', (tester) async {
     const spec = ChartSpec(
       type: ChartType.pie,
@@ -227,6 +270,83 @@ void main() {
     line = tester.widget<LineChart>(find.byType(LineChart));
     expect(line.data.lineBarsData[0].color!.a, 1.0); // hovered stays solid
     expect(line.data.lineBarsData[1].color!.a, lessThan(1.0)); // other fades
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('radar chart renders a polygon per series with axis labels', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.radar,
+      x: ['Snelheid', 'Kracht', 'Uithouding'],
+      series: [
+        ChartSeries(name: 'Alpha', data: [3, 4, 5], color: '#2563EB'),
+        ChartSeries(name: 'Beta', data: [5, 2, 3], color: '#EF4444'),
+      ],
+    );
+
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    final radar = tester.widget<RadarChart>(find.byType(RadarChart));
+    // Two visible series plus one invisible scale anchor.
+    expect(radar.data.dataSets.length, 3);
+    expect(radar.data.dataSets.first.dataEntries.map((e) => e.value), [3, 4, 5]);
+    expect(radar.data.dataSets.last.fillColor, Colors.transparent);
+    // The spoke labels are supplied through getTitle (canvas-painted).
+    expect(radar.data.getTitle!(0, 0).text, 'Snelheid');
+    expect(radar.data.getTitle!(2, 0).text, 'Uithouding');
+    // The series legend is shown as real text widgets.
+    expect(find.text('Alpha'), findsOneWidget);
+    expect(find.text('Beta'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('radar honours an explicit min/max scale with even ticks', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.radar,
+      x: ['A', 'B', 'C', 'D'],
+      series: [
+        ChartSeries(name: 'Score', data: [2, 4, 3, 5]),
+      ],
+      minBound: 0,
+      maxBound: 10,
+    );
+
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    final radar = tester.widget<RadarChart>(find.byType(RadarChart));
+    expect(radar.data.isMinValueAtCenter, isTrue);
+    // The hidden anchor pins the scale to [0, 10].
+    final anchor = radar.data.dataSets.last.dataEntries.map((e) => e.value);
+    expect(anchor.reduce((a, b) => a < b ? a : b), 0);
+    expect(anchor.reduce((a, b) => a > b ? a : b), 10);
+    // Evenly spaced scale labels are drawn (0..10).
+    expect(find.text('0'), findsWidgets);
+    expect(find.text('10'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('radar chart asks for at least three labels', (tester) async {
+    const spec = ChartSpec(
+      type: ChartType.radar,
+      x: ['Een', 'Twee'],
+      series: [
+        ChartSeries(name: 'Alpha', data: [3, 4]),
+      ],
+    );
+
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    expect(find.byType(RadarChart), findsNothing);
+    expect(
+      find.text('Een spider-diagram heeft minstens drie labels nodig'),
+      findsOneWidget,
+    );
     expect(tester.takeException(), isNull);
   });
 

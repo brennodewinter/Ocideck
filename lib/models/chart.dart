@@ -18,7 +18,7 @@ const List<String> chartColorPalette = [
 ];
 
 /// Supported chart kinds for a chart slide.
-enum ChartType { bar, line, pie }
+enum ChartType { bar, line, pie, radar }
 
 ChartType _chartTypeFromName(String? name) => ChartType.values.firstWhere(
   (t) => t.name == name,
@@ -100,8 +100,14 @@ class ChartSpec {
 
   bool get hasInlineData => x.isNotEmpty && series.isNotEmpty;
 
-  /// Bounds only apply to bar/line charts; a pie spec never shows them.
+  /// Whether the optional [minBound]/[maxBound] apply. On bar/line they are
+  /// horizontal threshold lines; on radar they fix the scale (centre/outer
+  /// ring). Pie charts have no axis, so they never use bounds.
   bool get supportsBounds => type != ChartType.pie;
+
+  /// True only where bounds render as horizontal threshold *lines*.
+  bool get supportsBoundLines =>
+      type == ChartType.bar || type == ChartType.line;
 
   ChartSpec copyWith({
     ChartType? type,

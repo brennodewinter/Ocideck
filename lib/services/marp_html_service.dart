@@ -171,6 +171,8 @@ class MarpHtmlService {
       case ChartType.pie:
         final legendRows = (spec.x.length / 6).ceil().clamp(1, 3);
         _pieSvg(b, spec, plotTop, theme, bottom: 398 - (legendRows - 1) * 28);
+      case ChartType.radar:
+        _radarSvg(b, spec, plotTop, theme, textColor);
     }
     if (spec.type == ChartType.pie) {
       _pieLegendSvg(b, spec, textColor);
@@ -269,7 +271,7 @@ class MarpHtmlService {
     double bottom,
     double maxY,
   ) {
-    if (!spec.supportsBounds) return;
+    if (!spec.supportsBoundLines) return;
     void draw(double? value, String color, String prefix) {
       if (value == null || value < 0 || value > maxY) return;
       final y = bottom - (bottom - top) * (value / maxY);
@@ -448,6 +450,129 @@ class MarpHtmlService {
     }
   }
 
+  static void _radarSvg(
+    StringBuffer b,
+    ChartSpec spec,
+    double top,
+    ThemeProfile? theme,
+    String textColor,
+  ) {
+    final n = spec.x.length;
+    if (n < 3 || spec.series.isEmpty) return;
+    const bottom = 382.0;
+    const cx = 400.0;
+    final cy = (top + bottom) / 2;
+    final radius = math.min(170.0, (bottom - top) / 2 - 34);
+    final (lo, hi, ticks) = _radarScale(spec);
+    final span = (hi - lo) == 0 ? 1.0 : (hi - lo);
+    double angle(int i) => -math.pi / 2 + 2 * math.pi * i / n;
+
+    // Concentric grid rings, evenly spaced across the [lo, hi] scale.
+    for (var ring = 1; ring <= ticks; ring++) {
+      final rr = radius * ring / ticks;
+      final pts = [
+        for (var i = 0; i < n; i++)
+          '${cx + rr * math.cos(angle(i))},${cy + rr * math.sin(angle(i))}',
+      ].join(' ');
+      b.write(
+        '<polygon points="$pts" fill="none" stroke="#e2e8f0" '
+        'stroke-width="1"/>',
+      );
+    }
+
+    // Scale labels up the top spoke: lo at the centre, hi at the outer ring.
+    for (var k = 0; k <= ticks; k++) {
+      final value = lo + span * k / ticks;
+      final y = cy - radius * k / ticks;
+      b.write(
+        '<text x="${cx + 6}" y="${y - 2}" font-size="11" '
+        'fill="#94a3b8">${_num(value)}</text>',
+      );
+    }
+
+    // Spokes and axis labels.
+    for (var i = 0; i < n; i++) {
+      final c = math.cos(angle(i));
+      final s = math.sin(angle(i));
+      b.write(
+        '<line x1="$cx" y1="$cy" x2="${cx + radius * c}" '
+        'y2="${cy + radius * s}" stroke="#e2e8f0" stroke-width="1"/>',
+      );
+      final anchor = c > 0.3 ? 'start' : (c < -0.3 ? 'end' : 'middle');
+      final label = spec.x[i].length > 12
+          ? '${spec.x[i].substring(0, 11)}…'
+          : spec.x[i];
+      b.write(
+        '<text x="${cx + (radius + 18) * c}" y="${cy + (radius + 18) * s + 4}" '
+        'text-anchor="$anchor" font-size="13" fill="$textColor">'
+        '${_esc(label)}</text>',
+      );
+    }
+
+    // One filled polygon per series.
+    for (var si = 0; si < spec.series.length; si++) {
+      final data = spec.series[si].data;
+      final pts = [
+        for (var i = 0; i < n; i++)
+          () {
+            final v = i < data.length ? data[i] : 0.0;
+            final rr = radius * ((v - lo) / span).clamp(0.0, 1.0);
+            return '${cx + rr * math.cos(angle(i))},'
+                '${cy + rr * math.sin(angle(i))}';
+          }(),
+      ].join(' ');
+      final color = _color(spec, si, theme);
+      b.write(
+        '<polygon points="$pts" fill="$color" fill-opacity="0.16" '
+        'stroke="$color" stroke-width="3" stroke-linejoin="round"/>',
+      );
+    }
+  }
+
+  /// Radar scale shared with the live preview: honour optional min/max bounds,
+  /// otherwise round the data range to a tidy scale with an even tick count.
+  static (double, double, int) _radarScale(ChartSpec spec) {
+    var dataMin = 0.0;
+    var dataMax = 0.0;
+    var seen = false;
+    for (final s in spec.series) {
+      for (final v in s.data) {
+        if (!seen) {
+          dataMin = v;
+          dataMax = v;
+          seen = true;
+        } else {
+          if (v < dataMin) dataMin = v;
+          if (v > dataMax) dataMax = v;
+        }
+      }
+    }
+    if (!seen) {
+      dataMin = 0;
+      dataMax = 1;
+    }
+    final rawLo = spec.minBound ?? (dataMin < 0 ? dataMin : 0);
+    final rawHi = spec.maxBound ?? dataMax;
+    final range = (rawHi - rawLo).abs();
+    final r = range <= 0 ? 1.0 : range;
+    final rawStep = r / 4;
+    final mag = math.pow(10, (math.log(rawStep) / math.ln10).floor()).toDouble();
+    final norm = rawStep / mag;
+    final niceNorm = norm < 1.5
+        ? 1.0
+        : norm < 3
+        ? 2.0
+        : norm < 7
+        ? 5.0
+        : 10.0;
+    final step = niceNorm * mag;
+    final lo = spec.minBound ?? (rawLo / step).floorToDouble() * step;
+    var hi = spec.maxBound ?? (rawHi / step).ceilToDouble() * step;
+    if (hi <= lo) hi = lo + step;
+    final ticks = math.max(2, ((hi - lo) / step).round());
+    return (lo, hi, ticks);
+  }
+
   static String _shortChartLabel(String value) =>
       value.length > 13 ? '${value.substring(0, 12)}…' : value;
 
@@ -469,8 +594,10 @@ class MarpHtmlService {
         '.slide h2{font-size:34px;margin:.15em 0;color:${t.accentColor}}'
         '.slide a{color:${t.accentColor}}'
         '.slide p,.slide li{font-size:24px;line-height:1.45}'
-        '.slide pre{background:#f6f8fa;border:1px solid #e1e4e8;border-radius:6px;'
+        '.slide pre{background:${t.codeBackgroundColor};color:${t.codeTextColor};'
+        'border:1px solid ${t.codeTextColor}38;border-radius:6px;'
         'padding:16px;overflow:auto;font-size:18px}'
+        '.slide pre code{color:${t.codeTextColor};background:transparent}'
         '.slide code{font-family:SFMono-Regular,Consolas,"Liberation Mono",monospace}'
         '.slide pre.mermaid{background:transparent;border:0;text-align:center}'
         '.slide img{max-width:100%}'

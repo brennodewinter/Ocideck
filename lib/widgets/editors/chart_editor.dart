@@ -65,6 +65,8 @@ class _ChartEditorState extends State<ChartEditor> {
     _loadFromSpec(spec);
   }
 
+  bool get _supportsBounds => _type != ChartType.pie;
+
   static String _fmtBound(double? v) => v == null ? '' : _fmt(v);
 
   static double? _parseBound(String raw) {
@@ -133,8 +135,8 @@ class _ChartEditorState extends State<ChartEditor> {
       x: List<String>.from(_xLabels),
       rowColors: List<String?>.from(_rowColors),
       series: series,
-      minBound: _type == ChartType.pie ? null : _parseBound(_minBound.text),
-      maxBound: _type == ChartType.pie ? null : _parseBound(_maxBound.text),
+      minBound: _supportsBounds ? _parseBound(_minBound.text) : null,
+      maxBound: _supportsBounds ? _parseBound(_maxBound.text) : null,
     );
     widget.onUpdate(widget.slide.copyWith(customMarkdown: spec.toBlock()));
   }
@@ -467,6 +469,10 @@ class _ChartEditorState extends State<ChartEditor> {
                     value: ChartType.pie,
                     child: Text(l10n.d('Cirkel')),
                   ),
+                  DropdownMenuItem(
+                    value: ChartType.radar,
+                    child: Text(l10n.d('Spider')),
+                  ),
                 ],
                 onChanged: (v) {
                   if (v == null) return;
@@ -492,7 +498,17 @@ class _ChartEditorState extends State<ChartEditor> {
                 style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
               ),
             ),
-          if (_type != ChartType.pie)
+          if (_type == ChartType.radar)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(
+                l10n.d(
+                  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.',
+                ),
+                style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+              ),
+            ),
+          if (_supportsBounds)
             Padding(
               padding: const EdgeInsets.only(top: 12),
               child: Row(
@@ -502,7 +518,9 @@ class _ChartEditorState extends State<ChartEditor> {
                     child: _boundField(
                       key: const ValueKey('chart-min-bound'),
                       controller: _minBound,
-                      label: l10n.d('Minimumlijn (optioneel)'),
+                      label: _type == ChartType.radar
+                          ? l10n.d('Schaalminimum (optioneel)')
+                          : l10n.d('Minimumlijn (optioneel)'),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -510,7 +528,9 @@ class _ChartEditorState extends State<ChartEditor> {
                     child: _boundField(
                       key: const ValueKey('chart-max-bound'),
                       controller: _maxBound,
-                      label: l10n.d('Maximumlijn (optioneel)'),
+                      label: _type == ChartType.radar
+                          ? l10n.d('Schaalmaximum (optioneel)')
+                          : l10n.d('Maximumlijn (optioneel)'),
                     ),
                   ),
                 ],
