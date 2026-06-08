@@ -189,8 +189,8 @@ void main() {
     // A crowded stack uses a smaller font than a single tooltip.
     final single = touch.touchTooltipData.getTooltipItems([spots.first]);
     expect(
-      items[0]!.textStyle!.fontSize!,
-      lessThan(single.single!.textStyle!.fontSize!),
+      items[0]!.textStyle.fontSize!,
+      lessThan(single.single!.textStyle.fontSize!),
     );
   });
 
@@ -324,9 +324,88 @@ void main() {
     final anchor = radar.data.dataSets.last.dataEntries.map((e) => e.value);
     expect(anchor.reduce((a, b) => a < b ? a : b), 0);
     expect(anchor.reduce((a, b) => a > b ? a : b), 10);
-    // Evenly spaced scale labels are drawn (0..10).
+    // The scale is shown in the side legend (0..10), not painted in the chart.
+    expect(radar.data.ticksTextStyle?.color, Colors.transparent);
     expect(find.text('0'), findsWidgets);
     expect(find.text('10'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('radar shows a tooltip for the hovered point', (tester) async {
+    const spec = ChartSpec(
+      type: ChartType.radar,
+      x: ['Snelheid', 'Kracht', 'Uithouding'],
+      series: [
+        ChartSeries(name: 'Alpha', data: [3, 4, 5]),
+        ChartSeries(name: 'Beta', data: [5, 2, 3]),
+      ],
+    );
+
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    final radar = tester.widget<RadarChart>(find.byType(RadarChart));
+    final touch = radar.data.radarTouchData;
+    expect(touch.enabled, isTrue);
+
+    // Simulate hovering the second axis of the Beta series.
+    final dataSet = radar.data.dataSets[1];
+    final entry = dataSet.dataEntries[1];
+    touch.touchCallback!(
+      const FlPointerHoverEvent(PointerHoverEvent()),
+      RadarTouchResponse(
+        touchLocation: const Offset(20, 20),
+        touchedSpot: RadarTouchedSpot(
+          dataSet,
+          1,
+          entry,
+          1,
+          const FlSpot(1, 2),
+          const Offset(20, 20),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.text('Kracht\nBeta: 2'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('radar ignores touches on the invisible scale anchor', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.radar,
+      x: ['A', 'B', 'C'],
+      series: [
+        ChartSeries(name: 'Alpha', data: [3, 4, 5]),
+      ],
+    );
+
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    final radar = tester.widget<RadarChart>(find.byType(RadarChart));
+    final anchorIndex = radar.data.dataSets.length - 1; // the anchor dataset
+    final anchor = radar.data.dataSets[anchorIndex];
+    radar.data.radarTouchData.touchCallback!(
+      const FlPointerHoverEvent(PointerHoverEvent()),
+      RadarTouchResponse(
+        touchLocation: Offset.zero,
+        touchedSpot: RadarTouchedSpot(
+          anchor,
+          anchorIndex,
+          anchor.dataEntries.first,
+          0,
+          const FlSpot(0, 0),
+          Offset.zero,
+        ),
+      ),
+    );
+    await tester.pump();
+
+    // No tooltip for the anchor: only the legend value "5" exists.
+    expect(find.textContaining(': '), findsNothing);
     expect(tester.takeException(), isNull);
   });
 

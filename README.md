@@ -9,8 +9,8 @@ Built with Flutter for macOS, Windows, and Linux.
 ## Features
 
 - **Structured slide editors** — dedicated editors per slide type: title, bullets, two-column bullets, bullets + image, single/two images, quote, table, section divider, image-only, video, audio, source code, charts, and free-form Markdown.
-- **Source-code slides** — a dark "code sheet" with syntax highlighting per language, stored as a fenced code block.
-- **Charts** — bar, line, and pie charts rendered natively (preview, presenter, PDF, PPTX) and as self-contained SVG in the HTML export. Data is entered in an in-app grid or imported from CSV; the spec is stored as JSON in the Markdown, with optional linking to a CSV kept in a tidy `data/` directory.
+- **Source-code slides** — a "code sheet" with per-language syntax highlighting, stored as a fenced code block. Background and text colours come from the style profile, with an optional syntax-colouring toggle (turn it off for a single-colour, CRT-terminal look).
+- **Charts** — bar, line, pie, and spider/radar charts rendered natively (preview, presenter, PDF, PPTX) and as self-contained SVG in the HTML export. Data is entered in an in-app grid or imported from CSV; the spec is stored as JSON in the Markdown, with optional linking to a CSV kept in a tidy `data/` directory. Optional min/max draw reference lines (bar/line) or fix the scale (radar); legend hover highlights a series, and line tooltips pick the dot under the cursor.
 - **Live preview** — see each slide rendered as you edit, with inline Markdown, footers, and TLP (Traffic Light Protocol) marking. Free-Markdown slides render fenced code with syntax highlighting and `$…$` / `$$…$$` LaTeX math.
 - **Traffic Light Protocol** — a deck-wide classification plus an optional **per-slide TLP level**; slides classified stricter than the level the deck is shown at are automatically withheld, both when presenting and exporting.
 - **Fullscreen presenter** — keyboard-driven navigation, presenter view, blank screen, auto-advance, and a slide-grid overview.
@@ -20,7 +20,7 @@ Built with Flutter for macOS, Windows, and Linux.
 - **Import / export** — round-trips Marp Markdown, imports existing slides, and exports to PDF, PPTX (with speaker notes), and a self-contained offline HTML deck (code highlighting, math, charts, and mermaid diagrams render in the browser). Decks are saved as a self-contained package with copied assets.
 - **Productivity** — find & replace, slide finder, undo/redo, skip-slide state, multi-select with bulk copy-to-another-deck / delete / skip, and tabbed multi-deck editing. `Ctrl/Cmd+O` opens, `Ctrl/Cmd+S` saves.
 - **Crash recovery** — automatic snapshots so work survives an unexpected exit.
-- **Theming** — customizable deck style profiles and app appearance (including a dark interface), a bundled Marp CSS theme (`assets/themes/ocideck.css`), and a bundled EB Garamond font (no network fetch).
+- **Theming** — customizable deck style profiles (deck and source-code colours via presets or custom hex, fonts, logo, footer) and app appearance (including a dark interface), a bundled Marp CSS theme (`assets/themes/ocideck.css`), and a bundled EB Garamond font (no network fetch).
 - **Localized** — Dutch, English, Italian, German, French, Spanish, Frisian, and Papiamento.
 
 ## Requirements

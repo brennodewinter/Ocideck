@@ -2212,6 +2212,10 @@ class _ChartPreviewState extends State<_ChartPreview> {
   /// slice (category) index for pie charts. Null when nothing is hovered.
   int? _hovered;
 
+  /// The radar vertex under the pointer, used to draw its tooltip. Null when not
+  /// hovering a point.
+  ({int series, int entry, double value, Offset offset})? _radarTouch;
+
   void _setHover(int? index) {
     if (_hovered != index) setState(() => _hovered = index);
   }
@@ -2894,130 +2898,244 @@ class _ChartPreviewState extends State<_ChartPreview> {
     }
     final grid = textColor.withValues(alpha: 0.18);
     final scale = radarScale(spec);
-    final bg = _hexColor(profile.slideBackgroundColor);
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: w * 0.06, vertical: w * 0.012),
+      padding: EdgeInsets.symmetric(horizontal: w * 0.03, vertical: w * 0.012),
       child: LayoutBuilder(
         builder: (context, constraints) {
-          // A square keeps fl_chart's centre/radius predictable so the tick
-          // labels we overlay line up exactly with its grid rings.
-          final side = math.min(constraints.maxWidth, constraints.maxHeight);
-          final centerOffset = side / 2;
-          final radius = centerOffset * 0.8; // matches RadarChartPainter
-          final tickStyle = _applyFont(
-            font,
-            TextStyle(
-              fontSize: w * 0.012 * _labelScale,
-              color: textColor.withValues(alpha: 0.6),
-              fontWeight: FontWeight.w600,
-            ),
+          // Reserve a slim column on the right for the scale legend, then keep
+          // the chart square so fl_chart's centre/radius stay predictable.
+          final legendWidth = w * 0.075;
+          final available = constraints.maxWidth - legendWidth - w * 0.02;
+          final side = math.max(
+            0.0,
+            math.min(available, constraints.maxHeight),
           );
 
-          return Center(
-            child: SizedBox(
-              width: side,
-              height: side,
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: RadarChart(
-                      RadarChartData(
-                        dataSets: [
-                          for (var si = 0; si < spec.series.length; si++)
-                            RadarDataSet(
-                              dataEntries: [
-                                for (var xi = 0; xi < spec.x.length; xi++)
-                                  RadarEntry(
-                                    value: xi < spec.series[si].data.length
-                                        ? spec.series[si].data[xi]
-                                        : 0,
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Center(
+                  child: SizedBox(
+                    width: side,
+                    height: side,
+                    child: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: RadarChart(
+                            RadarChartData(
+                              dataSets: [
+                                for (var si = 0; si < spec.series.length; si++)
+                                  RadarDataSet(
+                                    dataEntries: [
+                                      for (var xi = 0; xi < spec.x.length; xi++)
+                                        RadarEntry(
+                                          value:
+                                              xi < spec.series[si].data.length
+                                              ? spec.series[si].data[xi]
+                                              : 0,
+                                        ),
+                                    ],
+                                    fillColor: _seriesDisplayColor(
+                                      spec.series[si],
+                                      si,
+                                    ).withValues(alpha: _dimmed(si) ? 0.04 : 0.16),
+                                    borderColor: _seriesDisplayColor(
+                                      spec.series[si],
+                                      si,
+                                    ),
+                                    borderWidth:
+                                        w * (_hovered == si ? 0.0055 : 0.0035),
+                                    entryRadius:
+                                        w * (_hovered == si ? 0.006 : 0.004),
                                   ),
+                                // Invisible anchor pinning the scale to [lo, hi]
+                                // so the rings represent a fixed scale.
+                                RadarDataSet(
+                                  dataEntries: [
+                                    for (var xi = 0; xi < spec.x.length; xi++)
+                                      RadarEntry(
+                                        value: xi == 0 ? scale.hi : scale.lo,
+                                      ),
+                                  ],
+                                  fillColor: Colors.transparent,
+                                  borderColor: Colors.transparent,
+                                  borderWidth: 0,
+                                  entryRadius: 0,
+                                ),
                               ],
-                              fillColor: _seriesDisplayColor(
-                                spec.series[si],
-                                si,
-                              ).withValues(alpha: _dimmed(si) ? 0.04 : 0.16),
-                              borderColor: _seriesDisplayColor(
-                                spec.series[si],
-                                si,
+                              radarShape: RadarShape.polygon,
+                              radarBackgroundColor: Colors.transparent,
+                              radarBorderData: BorderSide(color: grid, width: 1),
+                              gridBorderData: BorderSide(color: grid, width: 1),
+                              tickBorderData: BorderSide(color: grid, width: 1),
+                              tickCount: scale.ticks,
+                              isMinValueAtCenter: true,
+                              // The scale now lives in a side legend, so hide
+                              // fl_chart's in-chart ring numbers.
+                              ticksTextStyle: const TextStyle(
+                                color: Colors.transparent,
+                                fontSize: 0.001,
                               ),
-                              borderWidth: w * (_hovered == si ? 0.0055 : 0.0035),
-                              entryRadius: w * (_hovered == si ? 0.006 : 0.004),
+                              titlePositionPercentageOffset: 0.14,
+                              getTitle: (index, angle) => RadarChartTitle(
+                                text: index < spec.x.length ? spec.x[index] : '',
+                              ),
+                              titleTextStyle: _applyFont(
+                                font,
+                                TextStyle(
+                                  fontSize: w * 0.0135 * _labelScale,
+                                  color: textColor.withValues(alpha: 0.88),
+                                  fontWeight: presentationMode
+                                      ? FontWeight.w600
+                                      : FontWeight.w500,
+                                ),
+                              ),
+                              radarTouchData: RadarTouchData(
+                                enabled: true,
+                                touchSpotThreshold: (w * 0.02).clamp(8.0, 24.0)
+                                    .toDouble(),
+                                mouseCursorResolver: (event, response) =>
+                                    _radarSpotFrom(response, spec) == null
+                                    ? SystemMouseCursors.basic
+                                    : SystemMouseCursors.click,
+                                touchCallback: (event, response) {
+                                  final next =
+                                      event.isInterestedForInteractions
+                                      ? _radarSpotFrom(response, spec)
+                                      : null;
+                                  if (next != _radarTouch) {
+                                    setState(() => _radarTouch = next);
+                                  }
+                                },
+                              ),
                             ),
-                          // Invisible anchor pinning the scale to [lo, hi] so the
-                          // rings — and our labels — represent a fixed scale.
-                          RadarDataSet(
-                            dataEntries: [
-                              for (var xi = 0; xi < spec.x.length; xi++)
-                                RadarEntry(value: xi == 0 ? scale.hi : scale.lo),
-                            ],
-                            fillColor: Colors.transparent,
-                            borderColor: Colors.transparent,
-                            borderWidth: 0,
-                            entryRadius: 0,
-                          ),
-                        ],
-                        radarShape: RadarShape.polygon,
-                        radarBackgroundColor: Colors.transparent,
-                        radarBorderData: BorderSide(color: grid, width: 1),
-                        gridBorderData: BorderSide(color: grid, width: 1),
-                        tickBorderData: BorderSide(color: grid, width: 1),
-                        tickCount: scale.ticks,
-                        isMinValueAtCenter: true,
-                        // Hide fl_chart's own ring numbers; we draw labelled
-                        // ticks ourselves so any min/max scale reads correctly.
-                        ticksTextStyle: const TextStyle(
-                          color: Colors.transparent,
-                          fontSize: 0.001,
-                        ),
-                        titlePositionPercentageOffset: 0.14,
-                        getTitle: (index, angle) => RadarChartTitle(
-                          text: index < spec.x.length ? spec.x[index] : '',
-                        ),
-                        titleTextStyle: _applyFont(
-                          font,
-                          TextStyle(
-                            fontSize: w * 0.0135 * _labelScale,
-                            color: textColor.withValues(alpha: 0.88),
-                            fontWeight: presentationMode
-                                ? FontWeight.w600
-                                : FontWeight.w500,
+                            duration: Duration.zero,
                           ),
                         ),
-                        radarTouchData: RadarTouchData(enabled: false),
-                      ),
-                      duration: Duration.zero,
+                        if (_radarTouch != null)
+                          _radarTooltip(spec, side, _radarTouch!),
+                      ],
                     ),
                   ),
-                  // Evenly spaced scale labels up the top spoke: lo at centre,
-                  // hi at the outer ring, with equal steps between.
-                  for (var k = 0; k <= scale.ticks; k++)
-                    Positioned(
-                      left: centerOffset + w * 0.006,
-                      top:
-                          centerOffset -
-                          radius * k / scale.ticks -
-                          w * 0.01 * _labelScale,
-                      child: IgnorePointer(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: w * 0.004,
-                          ),
-                          color: bg.withValues(alpha: 0.7),
-                          child: Text(
-                            _fmtNum(scale.lo + (scale.hi - scale.lo) * k / scale.ticks),
-                            style: tickStyle,
-                          ),
-                        ),
-                      ),
-                    ),
-                ],
+                ),
               ),
-            ),
+              SizedBox(
+                width: legendWidth,
+                child: _radarScaleLegend(scale, textColor),
+              ),
+            ],
           );
         },
       ),
+    );
+  }
+
+  /// Extract the touched real-series vertex from a radar touch response,
+  /// ignoring the invisible scale anchor dataset.
+  ({int series, int entry, double value, Offset offset})? _radarSpotFrom(
+    RadarTouchResponse? response,
+    ChartSpec spec,
+  ) {
+    final spot = response?.touchedSpot;
+    if (spot == null) return null;
+    if (spot.touchedDataSetIndex < 0 ||
+        spot.touchedDataSetIndex >= spec.series.length) {
+      return null; // the anchor dataset, or out of range
+    }
+    return (
+      series: spot.touchedDataSetIndex,
+      entry: spot.touchedRadarEntryIndex,
+      value: spot.touchedRadarEntry.value,
+      offset: spot.offset,
+    );
+  }
+
+  /// A small floating tooltip for the hovered radar vertex, like the other
+  /// charts: the axis label, the series name and the value.
+  Widget _radarTooltip(
+    ChartSpec spec,
+    double side,
+    ({int series, int entry, double value, Offset offset}) touch,
+  ) {
+    final axis = touch.entry >= 0 && touch.entry < spec.x.length
+        ? spec.x[touch.entry]
+        : '';
+    final series = touch.series < spec.series.length
+        ? spec.series[touch.series].name
+        : '';
+    final label = series.isEmpty ? 'Reeks ${touch.series + 1}' : series;
+    final onLeftHalf = touch.offset.dx <= side / 2;
+    return Positioned(
+      left: onLeftHalf ? (touch.offset.dx + w * 0.012) : null,
+      right: onLeftHalf ? null : (side - touch.offset.dx + w * 0.012),
+      top: (touch.offset.dy - w * 0.03).clamp(0.0, math.max(0.0, side - 1)),
+      child: IgnorePointer(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: side * 0.6),
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: w * 0.012,
+              vertical: w * 0.006,
+            ),
+            decoration: BoxDecoration(
+              color: const Color(0xFF0F172A),
+              borderRadius: BorderRadius.circular(w * 0.008),
+              boxShadow: const [
+                BoxShadow(color: Color(0x33000000), blurRadius: 6),
+              ],
+            ),
+            child: Text(
+              '${axis.isEmpty ? '' : '$axis\n'}$label: ${_fmtNum(touch.value)}',
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: _tooltipStyle(),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Vertical scale legend shown to the right of a radar chart: the tick values
+  /// from the outer ring (top) down to the centre (bottom), in a small font.
+  Widget _radarScaleLegend(
+    ({double lo, double hi, int ticks}) scale,
+    Color textColor,
+  ) {
+    final style = _applyFont(
+      font,
+      TextStyle(
+        fontSize: w * 0.012 * _labelScale,
+        color: textColor.withValues(alpha: 0.62),
+        fontWeight: FontWeight.w600,
+      ),
+    );
+    final tickColor = textColor.withValues(alpha: 0.3);
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (var k = scale.ticks; k >= 0; k--) ...[
+          if (k != scale.ticks) SizedBox(height: w * 0.018 * _labelScale),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(width: w * 0.012, height: 1, color: tickColor),
+              SizedBox(width: w * 0.006),
+              Flexible(
+                child: Text(
+                  _fmtNum(scale.lo + (scale.hi - scale.lo) * k / scale.ticks),
+                  style: style,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ],
     );
   }
 

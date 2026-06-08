@@ -480,14 +480,21 @@ class MarpHtmlService {
       );
     }
 
-    // Scale labels up the top spoke: lo at the centre, hi at the outer ring.
-    for (var k = 0; k <= ticks; k++) {
+    // Scale legend on the right: hi at the top down to lo at the bottom, so the
+    // figure itself stays clean.
+    final legendX = cx + radius + 30;
+    for (var k = ticks; k >= 0; k--) {
       final value = lo + span * k / ticks;
-      final y = cy - radius * k / ticks;
-      b.write(
-        '<text x="${cx + 6}" y="${y - 2}" font-size="11" '
-        'fill="#94a3b8">${_num(value)}</text>',
-      );
+      final y = (cy - radius) + (2 * radius) * (ticks - k) / ticks;
+      b
+        ..write(
+          '<line x1="$legendX" y1="$y" x2="${legendX + 8}" y2="$y" '
+          'stroke="#cbd5e1" stroke-width="1"/>',
+        )
+        ..write(
+          '<text x="${legendX + 12}" y="${y + 4}" font-size="12" '
+          'fill="#94a3b8">${_num(value)}</text>',
+        );
     }
 
     // Spokes and axis labels.

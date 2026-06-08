@@ -8,13 +8,22 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
-- **Source-code slides** — a dark "code sheet" with per-language syntax
-  highlighting, stored as a fenced code block.
-- **Charts** — bar, line, and pie chart slides. Data is entered in an in-app grid
-  or imported from CSV; the spec is stored as JSON in a ```chart block. Data can
-  stay inline or be linked to a CSV in a separate `data/` directory. Rendered
-  natively in-app (preview, presenter, PDF, PPTX) and as self-contained SVG in
-  the HTML export.
+- **Source-code slides** — a "code sheet" with per-language syntax highlighting,
+  stored as a fenced code block. Background and text colours are part of the style
+  profile, with a syntax-colouring toggle; turning it off renders the block in a
+  single colour (e.g. green on black for a CRT-terminal look).
+- **Charts** — bar, line, pie, and **spider/radar** chart slides. Data is entered
+  in an in-app grid or imported from CSV; the spec is stored as JSON in a ```chart
+  block. Data can stay inline or be linked to a CSV in a separate `data/`
+  directory. Rendered natively in-app (preview, presenter, PDF, PPTX) and as
+  self-contained SVG in the HTML export.
+  - Optional **min/max**: horizontal reference lines on bar/line charts, or a
+    fixed scale on spider/radar charts shown as a small legend beside the figure.
+  - **Legend hover** highlights the matching series (or pie slice). Line-chart
+    tooltips attach to the dot under the cursor (showing every overlapping dot),
+    and spider/radar points show a tooltip on hover too.
+- **Custom theme colours** — every style-profile colour can be entered as a custom
+  hex value in addition to the presets.
 - **Per-slide TLP classification** — each slide can carry its own Traffic Light
   Protocol level; slides classified stricter than the level the deck is shown at
   are withheld when presenting and exporting.
