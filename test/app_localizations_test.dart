@@ -50,6 +50,7 @@ void main() {
       'SLIDES',
       'Slide',
       'slide',
+      'Spider',
     };
     final expression = RegExp(r'''\.d\(\s*('(?:\\.|[^'])*'|"(?:\\.|[^"])*")''');
     final files = Directory('lib')

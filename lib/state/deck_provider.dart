@@ -25,6 +25,7 @@ final fileServiceProvider = Provider<FileService>((ref) {
     ref.read(imageServiceProvider),
     () => ref.read(settingsProvider).themeProfile,
     languageCode: () => ref.read(settingsProvider).languageCode,
+    homeDirectory: () => ref.read(settingsProvider).homeDirectory,
   );
 });
 
@@ -128,8 +129,14 @@ class DeckNotifier extends StateNotifier<DeckState> {
 
   /// Load a deck that was already parsed (used by the tab manager).
   void loadDeck(Deck deck, {String? filePath}) {
+    final resolvedDeck = deck.copyWith(
+      themeProfile: _file.resolveThemeProfile(
+        deck.themeProfile,
+        projectPath: deck.projectPath,
+      ),
+    );
     _clearHistory();
-    state = DeckState(deck: deck, filePath: filePath, isDirty: false);
+    state = DeckState(deck: resolvedDeck, filePath: filePath, isDirty: false);
   }
 
   Future<void> openDeck({String? initialDirectory}) async {
@@ -414,7 +421,14 @@ class DeckNotifier extends StateNotifier<DeckState> {
   void updateThemeProfile(ThemeProfile profile) {
     final deck = state.deck;
     if (deck == null) return;
-    _mutate(deck.copyWith(themeProfile: profile));
+    _mutate(
+      deck.copyWith(
+        themeProfile: _file.resolveThemeProfile(
+          profile,
+          projectPath: deck.projectPath,
+        ),
+      ),
+    );
   }
 
   /// Update the (separate) annotation layer. Kept out of the undo/redo history

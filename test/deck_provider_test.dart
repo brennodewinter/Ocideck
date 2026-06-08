@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
@@ -21,6 +24,36 @@ void main() {
     expect(n.state.deck!.slides.single.type, SlideType.title);
     expect(n.state.deck!.slides.single.title, 'Mijn deck');
     expect(n.state.isDirty, isTrue);
+  });
+
+  test('loadDeck resolves a relative logo for an unsaved recovered deck', () {
+    final temp = Directory.systemTemp.createTempSync(
+      'ocideck_recovered_logo_test_',
+    );
+    addTearDown(() => temp.deleteSync(recursive: true));
+    final logo = File('${temp.path}/logos/client.png')
+      ..createSync(recursive: true)
+      ..writeAsBytesSync([1, 2, 3]);
+
+    final md = MarkdownService();
+    final file = FileService(
+      md,
+      ImageService(),
+      () => const ThemeProfile(),
+      homeDirectory: () => temp.path,
+    );
+    final notifier = DeckNotifier(md, file);
+    notifier.loadDeck(
+      Deck(
+        title: 'Hersteld',
+        themeProfile: const ThemeProfile(logoPath: 'logos/client.png'),
+        slides: [Slide.create(SlideType.title)],
+      ),
+    );
+
+    expect(notifier.state.filePath, isNull);
+    expect(notifier.state.deck!.projectPath, isNull);
+    expect(notifier.state.deck!.themeProfile.logoPath, logo.path);
   });
 
   test('addSlide inserts right after the given index', () {

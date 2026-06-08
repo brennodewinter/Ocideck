@@ -1288,6 +1288,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                   slideNumber: _index + 1,
                   slideCount: widget.slides.length,
                   tlp: widget.tlp,
+                  presentationMode: true,
                   // Tijdens het presenteren speelt media en starten audio/video
                   // vanzelf; het audio-einde stuurt de auto-advance aan. In dual-
                   // schermmodus speelt de media op het beamervenster, niet hier,
@@ -1411,6 +1412,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                               slide: nextSlide,
                               projectPath: widget.projectPath,
                               themeProfile: widget.themeProfile,
+                              presentationMode: true,
                             ),
                           )
                         : Container(

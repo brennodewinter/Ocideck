@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
@@ -51,6 +52,30 @@ Future<({int width, int height, Uint8List bytes})> _capture(
 }
 
 void main() {
+  testWidgets('a missing small logo does not overflow its bounds', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: SizedBox(
+            width: 800,
+            child: SlidePreviewWidget(
+              slide: Slide.create(SlideType.bullets),
+              themeProfile: const ThemeProfile(
+                logoPath: '/path/that/does/not/exist.png',
+                logoSize: 36,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('twoImages paints both the left and right images', (
     tester,
   ) async {

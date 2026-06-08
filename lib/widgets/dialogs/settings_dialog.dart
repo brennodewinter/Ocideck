@@ -882,11 +882,47 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     );
   }
 
+  /// A banner shown on tabs that edit the active style profile, so it is clear
+  /// these settings belong to the loaded profile (and which one).
+  Widget _profileScopeBanner() {
+    final name = _themeProfile.name;
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: AppTheme.accent.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(8),
+        border: Border(left: BorderSide(color: AppTheme.accent, width: 3)),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.style_outlined, size: 16, color: AppTheme.accent),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(text: context.l10n.d('Onderdeel van stijlprofiel ')),
+                  TextSpan(
+                    text: '“$name”',
+                    style: const TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                ],
+              ),
+              style: const TextStyle(fontSize: 12, color: Color(0xFF334155)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _colorsTab() {
     final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _profileScopeBanner(),
         _sectionTitle(l10n.d('Kleuren')),
         _colorSetting(
           l10n.d('Achtergrond slides'),
@@ -939,6 +975,68 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           (v) =>
               _themeProfile = _themeProfile.copyWith(sectionBackgroundColor: v),
         ),
+        const SizedBox(height: 24),
+        _sectionTitle(l10n.d('Broncode')),
+        _colorSetting(
+          l10n.d('Broncode achtergrond'),
+          _themeProfile.codeBackgroundColor,
+          (v) =>
+              _themeProfile = _themeProfile.copyWith(codeBackgroundColor: v),
+        ),
+        const SizedBox(height: 12),
+        _colorSetting(
+          l10n.d('Broncode tekst'),
+          _themeProfile.codeTextColor,
+          (v) => _themeProfile = _themeProfile.copyWith(codeTextColor: v),
+        ),
+        const SizedBox(height: 6),
+        SwitchListTile(
+          value: _themeProfile.codeHighlightSyntax,
+          onChanged: (v) => setState(() {
+            _themeProfile = _themeProfile.copyWith(codeHighlightSyntax: v);
+            _profileTouched = true;
+          }),
+          title: Text(
+            l10n.d('Syntaxkleuring'),
+            style: const TextStyle(fontSize: 13),
+          ),
+          subtitle: Text(
+            l10n.d(
+              'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).',
+            ),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+          controlAffinity: ListTileControlAffinity.leading,
+          contentPadding: EdgeInsets.zero,
+          dense: true,
+        ),
+        const SizedBox(height: 10),
+        DropdownButtonFormField<String>(
+          initialValue: AppSettings.codeFonts.contains(_themeProfile.codeFontFamily)
+              ? _themeProfile.codeFontFamily
+              : 'monospace',
+          decoration: InputDecoration(
+            labelText: l10n.d('Broncode lettertype'),
+            isDense: true,
+          ),
+          items: [
+            for (final f in AppSettings.codeFonts)
+              DropdownMenuItem(
+                value: f,
+                child: Text(
+                  f == 'monospace' ? l10n.d('Systeem (monospace)') : f,
+                  style: TextStyle(fontFamily: f),
+                ),
+              ),
+          ],
+          onChanged: (v) {
+            if (v == null) return;
+            setState(() {
+              _themeProfile = _themeProfile.copyWith(codeFontFamily: v);
+              _profileTouched = true;
+            });
+          },
+        ),
         const SizedBox(height: 18),
         _stylePreview(),
       ],
@@ -950,6 +1048,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _profileScopeBanner(),
         _sectionTitle(l10n.d('Logo')),
         Row(
           children: [
@@ -1149,16 +1248,141 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             for (final color in _colorPresets)
               _colorSwatch(
                 color,
-                selected: value == color,
+                selected: value.toUpperCase() == color,
                 onTap: () => setState(() {
                   onChanged(color);
                   _profileTouched = true;
                 }),
               ),
+            // Show the current value as a selected swatch when it isn't one of
+            // the presets (e.g. a hand-entered CRT green).
+            if (!_colorPresets.contains(value.toUpperCase()))
+              _colorSwatch(
+                value,
+                selected: true,
+                onTap: () => _editCustomColor(value, onChanged),
+              ),
+            _customColorButton(value, onChanged),
           ],
         ),
       ],
     );
+  }
+
+  Widget _customColorButton(String value, ValueChanged<String> onChanged) {
+    return Tooltip(
+      message: context.l10n.d('Eigen kleur (hex)'),
+      child: InkWell(
+        onTap: () => _editCustomColor(value, onChanged),
+        borderRadius: BorderRadius.circular(8),
+        child: Container(
+          width: 34,
+          height: 34,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: const Color(0xFFCBD5E1)),
+          ),
+          child: const Icon(
+            Icons.tune,
+            size: 18,
+            color: Color(0xFF64748B),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _editCustomColor(
+    String initial,
+    ValueChanged<String> onChanged,
+  ) async {
+    final picked = await _pickHexColor(initial);
+    if (picked == null || !mounted) return;
+    setState(() {
+      onChanged(picked);
+      _profileTouched = true;
+    });
+  }
+
+  Future<String?> _pickHexColor(String initial) {
+    final controller = TextEditingController(text: initial);
+    String? normalize(String raw) {
+      final up = raw.trim().toUpperCase();
+      final hex = up.startsWith('#') ? up : '#$up';
+      return RegExp(r'^#[0-9A-F]{6}$').hasMatch(hex) ? hex : null;
+    }
+
+    final l10n = context.l10n;
+    return showDialog<String>(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setDialogState) {
+          final normalized = normalize(controller.text);
+          return AlertDialog(
+            title: Text(l10n.d('Eigen kleur (hex)')),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: _parseColor(normalized ?? '#FFFFFF'),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: const Color(0xFFCBD5E1)),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: TextField(
+                        controller: controller,
+                        autofocus: true,
+                        decoration: InputDecoration(
+                          labelText: l10n.d('Hexkleur'),
+                          hintText: '#33FF33',
+                          isDense: true,
+                          border: const OutlineInputBorder(),
+                        ),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                            RegExp(r'[#0-9a-fA-F]'),
+                          ),
+                          LengthLimitingTextInputFormatter(7),
+                        ],
+                        onChanged: (_) => setDialogState(() {}),
+                        onSubmitted: (_) {
+                          final ok = normalize(controller.text);
+                          if (ok != null) Navigator.pop(context, ok);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  l10n.d('Bijvoorbeeld #33FF33 voor een CRT-groen scherm.'),
+                  style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(l10n.d('Annuleren')),
+              ),
+              FilledButton(
+                onPressed: normalized == null
+                    ? null
+                    : () => Navigator.pop(context, normalized),
+                child: Text(l10n.d('Toepassen')),
+              ),
+            ],
+          );
+        },
+      ),
+    ).whenComplete(controller.dispose);
   }
 
   Widget _colorSwatch(

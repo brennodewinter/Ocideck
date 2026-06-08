@@ -37,4 +37,29 @@ void main() {
     expect(saved.themeProfile.logoPath, 'logos/client.png');
     expect(await File(p.join(temp.path, 'logos', 'client.png')).exists(), true);
   });
+
+  test(
+    'current theme resolves a relative logo from the home directory',
+    () async {
+      final temp = await Directory.systemTemp.createTemp(
+        'ocideck_theme_logo_test_',
+      );
+      addTearDown(() async {
+        if (await temp.exists()) await temp.delete(recursive: true);
+      });
+
+      final logo = File(p.join(temp.path, 'logos', 'client.png'));
+      await logo.parent.create(recursive: true);
+      await logo.writeAsBytes([1, 2, 3]);
+
+      final service = FileService(
+        MarkdownService(),
+        ImageService(),
+        () => const ThemeProfile(logoPath: 'logos/client.png'),
+        homeDirectory: () => temp.path,
+      );
+
+      expect(service.currentThemeProfile.logoPath, logo.path);
+    },
+  );
 }

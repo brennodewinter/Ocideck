@@ -44,6 +44,7 @@ class FileService {
   final ImageService _img;
   final ThemeProfile Function() _themeProfile;
   final String Function() _languageCode;
+  final String? Function() _homeDirectory;
   final CaptionService _captions = CaptionService();
 
   FileService(
@@ -51,9 +52,30 @@ class FileService {
     this._img,
     this._themeProfile, {
     String Function()? languageCode,
-  }) : _languageCode = languageCode ?? (() => 'nl');
+    String? Function()? homeDirectory,
+  }) : _languageCode = languageCode ?? (() => 'nl'),
+       _homeDirectory = homeDirectory ?? (() => null);
 
-  ThemeProfile get currentThemeProfile => _themeProfile();
+  ThemeProfile get currentThemeProfile => resolveThemeProfile(_themeProfile());
+
+  ThemeProfile resolveThemeProfile(
+    ThemeProfile profile, {
+    String? projectPath,
+  }) {
+    final logoPath = profile.logoPath;
+    if (logoPath == null || logoPath.trim().isEmpty || p.isAbsolute(logoPath)) {
+      return profile;
+    }
+
+    final bases = [?projectPath, ?_homeDirectory()];
+    for (final base in bases) {
+      final candidate = p.normalize(p.join(base, logoPath));
+      if (File(candidate).existsSync()) {
+        return profile.copyWith(logoPath: candidate);
+      }
+    }
+    return profile;
+  }
 
   String _d(String text) => AppLocalizations.sourceFor(_languageCode(), text);
 

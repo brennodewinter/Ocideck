@@ -98,6 +98,24 @@ void main() {}
     expect(html, isNot(contains('data:font/ttf;base64,')));
   });
 
+  test('code blocks use the themed code colours in the export CSS', () async {
+    final service = MarpHtmlService(
+      loadAsset: _diskLoader,
+      loadBytes: _diskBytes,
+    );
+    const theme = ThemeProfile(
+      codeBackgroundColor: '#000000',
+      codeTextColor: '#33FF33',
+      codeFontFamily: 'Courier New',
+    );
+    final html = await service.build('```dart\nvoid main() {}\n```', theme: theme);
+
+    expect(html, contains('.slide pre{background:#000000;color:#33FF33'));
+    expect(html, contains('.slide pre code{color:#33FF33'));
+    // The chosen code font is used (with a monospace fallback chain).
+    expect(html, contains("font-family:'Courier New',"));
+  });
+
   test('EB Garamond theme embeds the font for offline rendering', () async {
     final service = MarpHtmlService(
       loadAsset: _diskLoader,
@@ -109,5 +127,118 @@ void main() {}
     expect(html, contains('@font-face'));
     expect(html, contains('data:font/ttf;base64,'));
     expect(html, contains("'EB Garamond'"));
+  });
+
+  test('pie chart SVG renders every series and label', () {
+    const slide = '''
+```chart
+{
+  "type": "pie",
+  "x": ["Team A", "Team B"],
+  "series": [
+    {"name": "Gereed", "color": "#10B981", "data": [70, 40]},
+    {"name": "Open", "color": "#EF4444", "data": [30, 60]}
+  ]
+}
+```
+''';
+
+    final html = MarpHtmlService.renderChartBlocks(slide);
+
+    expect(html, contains('Team A'));
+    expect(html, contains('Team B'));
+    expect(html, contains('Gereed'));
+    expect(html, contains('Open'));
+    expect(html, contains('#003399'));
+    expect(html, contains('#FFCC00'));
+  });
+
+  test('pie chart SVG renders at most two series', () {
+    const slide = '''
+```chart
+{
+  "type": "pie",
+  "x": ["A", "B"],
+  "series": [
+    {"name": "Een", "data": [1, 2]},
+    {"name": "Twee", "data": [2, 3]},
+    {"name": "Drie", "data": [3, 4]}
+  ]
+}
+```
+''';
+
+    final html = MarpHtmlService.renderChartBlocks(slide);
+
+    expect(html, contains('Een'));
+    expect(html, contains('Twee'));
+    expect(html, isNot(contains('Drie')));
+  });
+
+  test('bar chart SVG draws optional min/max bound lines with labels', () {
+    const slide = '''
+```chart
+{
+  "type": "bar",
+  "x": ["Q1", "Q2"],
+  "series": [{"name": "Omzet", "data": [10, 14]}],
+  "minBound": 5,
+  "maxBound": 20
+}
+```
+''';
+
+    final html = MarpHtmlService.renderChartBlocks(slide);
+
+    expect(html, contains('stroke-dasharray'));
+    expect(html, contains('min 5'));
+    expect(html, contains('max 20'));
+  });
+
+  test('pie chart SVG never draws bound lines', () {
+    const slide = '''
+```chart
+{
+  "type": "pie",
+  "x": ["A", "B"],
+  "series": [{"name": "Een", "data": [1, 2]}],
+  "minBound": 5,
+  "maxBound": 20
+}
+```
+''';
+
+    final html = MarpHtmlService.renderChartBlocks(slide);
+
+    expect(html, isNot(contains('stroke-dasharray')));
+    expect(html, isNot(contains('min 5')));
+  });
+
+  test('radar chart SVG draws a polygon per series with axis labels', () {
+    const slide = '''
+```chart
+{
+  "type": "radar",
+  "x": ["Snelheid", "Kracht", "Uithouding"],
+  "series": [
+    {"name": "A", "color": "#2563EB", "data": [3, 4, 5]},
+    {"name": "B", "color": "#EF4444", "data": [5, 2, 3]}
+  ]
+}
+```
+''';
+
+    final html = MarpHtmlService.renderChartBlocks(slide);
+
+    expect(html, contains('<polygon'));
+    expect(html, contains('Snelheid'));
+    expect(html, contains('Kracht'));
+    expect(html, contains('Uithouding'));
+    // Both series are drawn with their colours.
+    expect(html, contains('fill="#2563EB"'));
+    expect(html, contains('fill="#EF4444"'));
+    // The series legend is shown (not a pie legend).
+    expect(html, contains('A'));
+    expect(html, contains('B'));
   });
 }

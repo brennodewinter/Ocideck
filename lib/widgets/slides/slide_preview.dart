@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
@@ -138,6 +140,9 @@ class SlidePreviewWidget extends StatelessWidget {
   /// staat dit uit (handmatig starten); in de presenter aan.
   final bool autoplayMedia;
 
+  /// Vergroot grafieklabels voor weergave op afstand in presentatiemodus.
+  final bool presentationMode;
+
   /// Wordt aangeroepen wanneer de audio van deze slide klaar is (voor de
   /// automatische modus van de presenter).
   final VoidCallback? onAudioComplete;
@@ -153,6 +158,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.tlp = TlpLevel.none,
     this.enableMedia = false,
     this.autoplayMedia = false,
+    this.presentationMode = false,
     this.onAudioComplete,
   });
 
@@ -337,6 +343,7 @@ class SlidePreviewWidget extends StatelessWidget {
           w: w,
           font: fontFamily,
           profile: themeProfile,
+          presentationMode: presentationMode,
         );
     }
   }
@@ -2079,6 +2086,16 @@ class _CodePreview extends StatelessWidget {
     required this.profile,
   });
 
+  /// Natural (unwrapped) size of [text] in [style]: width is the longest line,
+  /// height the full block. Used to scale code to the available space.
+  static Size _measureMono(String text, TextStyle style) {
+    final painter = TextPainter(
+      text: TextSpan(text: text.isEmpty ? ' ' : text, style: style),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    return painter.size;
+  }
+
   @override
   Widget build(BuildContext context) {
     _ensureHighlightLanguages();
@@ -2088,115 +2105,49 @@ class _CodePreview extends StatelessWidget {
     final lang = slide.codeLanguage.trim();
     final known = lang.isNotEmpty && allLanguages.containsKey(lang);
 
-    final mono = TextStyle(
-      fontFamily: 'monospace',
-      fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
-      fontSize: w * 0.024,
+    final codeBg = _hexColor(profile.codeBackgroundColor);
+    final codeFg = _hexColor(profile.codeTextColor);
+
+    // The chosen monospace family, always backed by a generic monospace fallback
+    // so an uninstalled face still renders fixed-width.
+    final fallback = <String>[
+      'Menlo',
+      'Consolas',
+      'Courier New',
+      'monospace',
+    ]..removeWhere((f) => f == profile.codeFontFamily);
+    final baseFont = w * 0.024;
+    final maxFont = w * 0.040; // grow to fill, but never huge
+    TextStyle monoAt(double size) => TextStyle(
+      fontFamily: profile.codeFontFamily,
+      fontFamilyFallback: fallback,
+      fontSize: size,
       height: 1.4,
-      color: const Color(0xFFABB2BF), // atom-one-dark voorgrond
+      color: codeFg,
     );
 
-    // HighlightView gooit een fout bij een onbekende taal; daarom vallen we
-    // dan terug op platte (maar wel monospace) tekst.
-    final Widget codeContent = known
+    // HighlightView throws on an unknown language, so fall back to plain (but
+    // monospace) text. When syntax highlighting is off we always render plain
+    // text so the whole block is one colour — needed for a CRT-green screen.
+    final useHighlight = known && profile.codeHighlightSyntax;
+    final highlightTheme = {
+      ...atomOneDarkTheme,
+      // Keep atom-one-dark's per-token colours but drop its own background so
+      // our themed [codeBg] shows through unchanged.
+      'root': (atomOneDarkTheme['root'] ?? const TextStyle()).copyWith(
+        backgroundColor: codeBg,
+        color: codeFg,
+      ),
+    };
+    Widget buildCode(TextStyle style) => useHighlight
         ? HighlightView(
             code,
             language: lang,
-            theme: atomOneDarkTheme,
+            theme: highlightTheme,
             padding: EdgeInsets.zero,
-            textStyle: mono,
+            textStyle: style,
           )
-        : Text(code, style: mono);
-
-    return Container(
-      color: _hexColor(profile.slideBackgroundColor),
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(
-          pad,
-          pad + safe.top,
-          pad,
-          pad + safe.bottom,
-        ),
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: const Color(0xFF282C34), // atom-one-dark achtergrond
-            borderRadius: BorderRadius.circular(w * 0.012),
-            border: Border.all(color: const Color(0xFF3A3F4B)),
-          ),
-          padding: EdgeInsets.all(w * 0.03),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (slide.title.isNotEmpty) ...[
-                _md(
-                  context,
-                  slide.title,
-                  _applyFont(
-                    font,
-                    TextStyle(
-                      fontSize: w * 0.03,
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xFFE5E7EB),
-                    ),
-                  ),
-                  linkColor: _hexColor(profile.accentColor),
-                ),
-                SizedBox(height: w * 0.02),
-              ],
-              Expanded(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  alignment: Alignment.topLeft,
-                  // Een onbegrensde breedte laat code-regels op hun natuurlijke
-                  // lengte staan (geen woordafbreking), waarna de FittedBox het
-                  // geheel verkleint tot het past.
-                  child: codeContent,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// Renders a chart slide (bar/line/pie) from its ```chart JSON spec.
-class _ChartPreview extends StatelessWidget {
-  final Slide slide;
-  final double w;
-  final String font;
-  final ThemeProfile profile;
-
-  const _ChartPreview({
-    required this.slide,
-    required this.w,
-    required this.font,
-    required this.profile,
-  });
-
-  static const _palette = <int>[
-    0xFF2563EB,
-    0xFFF59E0B,
-    0xFF10B981,
-    0xFFEF4444,
-    0xFF8B5CF6,
-    0xFF06B6D4,
-    0xFFEC4899,
-    0xFF84CC16,
-  ];
-
-  Color _seriesColor(int i) => i == 0
-      ? _hexColor(profile.accentColor)
-      : Color(_palette[i % _palette.length]);
-
-  @override
-  Widget build(BuildContext context) {
-    final spec = ChartSpec.parse(slide.customMarkdown);
-    final pad = w * 0.06;
-    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
-    final textColor = _hexColor(profile.textColor);
+        : Text(code, style: style);
 
     return Container(
       color: _hexColor(profile.slideBackgroundColor),
@@ -2208,30 +2159,228 @@ class _ChartPreview extends StatelessWidget {
           pad + safe.bottom,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            if (spec.title.isNotEmpty) ...[
-              _md(
-                context,
-                spec.title,
-                _applyFont(
-                  font,
-                  TextStyle(
-                    fontSize: w * 0.04,
-                    fontWeight: FontWeight.bold,
-                    color: textColor,
+            // The slide title belongs to the slide, not inside the code window,
+            // so it sits above the panel like other slide types.
+            if (slide.title.isNotEmpty) ...[
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(
+                  horizontal: w * 0.025,
+                  vertical: w * 0.01,
+                ),
+                decoration: BoxDecoration(
+                  color: _hexColor(profile.titleBackgroundColor),
+                  borderRadius: BorderRadius.circular(w * 0.012),
+                  border: Border(
+                    left: BorderSide(
+                      color: _hexColor(profile.accentColor),
+                      width: w * 0.006,
+                    ),
                   ),
                 ),
-                linkColor: _hexColor(profile.accentColor),
+                child: _md(
+                  context,
+                  slide.title,
+                  _applyFont(
+                    font,
+                    TextStyle(
+                      fontSize: w * 0.032,
+                      height: 1.1,
+                      fontWeight: FontWeight.bold,
+                      color: _hexColor(profile.titleTextColor),
+                    ),
+                  ),
+                  linkColor: _hexColor(profile.accentColor),
+                ),
               ),
-              SizedBox(height: w * 0.02),
+              SizedBox(height: w * 0.018),
             ],
-            if (spec.series.length > 1 && spec.type != ChartType.pie)
-              _legend(spec, textColor),
             Expanded(
-              child: spec.hasInlineData
-                  ? _chart(spec, textColor)
-                  : _placeholder(context),
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: codeBg,
+                  borderRadius: BorderRadius.circular(w * 0.012),
+                  border: Border.all(color: codeFg.withValues(alpha: 0.22)),
+                ),
+                padding: EdgeInsets.all(w * 0.03),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    // Size the code to fill the panel: scale up to use spare
+                    // space (capped at [maxFont]) and down so long fragments
+                    // still fit, rather than leaving a small block in a big box.
+                    final measured = useHighlight
+                        ? code.replaceAll('\t', '        ')
+                        : code;
+                    final natural = _measureMono(measured, monoAt(baseFont));
+                    final availW = math.max(1.0, constraints.maxWidth - 1);
+                    final availH = math.max(1.0, constraints.maxHeight - 1);
+                    var scale = math.min(
+                      availW / natural.width,
+                      availH / natural.height,
+                    );
+                    if (!scale.isFinite || scale <= 0) scale = 1;
+                    final size = math.min(baseFont * scale, maxFont);
+                    return Align(
+                      alignment: Alignment.topLeft,
+                      child: buildCode(monoAt(size)),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Renders a chart slide (bar/line/pie) from its ```chart JSON spec.
+class _ChartPreview extends StatefulWidget {
+  final Slide slide;
+  final double w;
+  final String font;
+  final ThemeProfile profile;
+  final bool presentationMode;
+
+  const _ChartPreview({
+    required this.slide,
+    required this.w,
+    required this.font,
+    required this.profile,
+    required this.presentationMode,
+  });
+
+  @override
+  State<_ChartPreview> createState() => _ChartPreviewState();
+}
+
+class _ChartPreviewState extends State<_ChartPreview> {
+  Slide get slide => widget.slide;
+  double get w => widget.w;
+  String get font => widget.font;
+  ThemeProfile get profile => widget.profile;
+  bool get presentationMode => widget.presentationMode;
+
+  /// Legend entry the pointer is over: a series index for bar/line charts, or a
+  /// slice (category) index for pie charts. Null when nothing is hovered.
+  int? _hovered;
+
+  /// The radar vertex under the pointer, used to draw its tooltip. Null when not
+  /// hovering a point.
+  ({int series, int entry, double value, Offset offset})? _radarTouch;
+
+  void _setHover(int? index) {
+    if (_hovered != index) setState(() => _hovered = index);
+  }
+
+  /// True when another legend entry is hovered, so [index] should fade back.
+  bool _dimmed(int index) => _hovered != null && _hovered != index;
+
+  /// Series colour with legend-hover feedback: non-hovered series fade out so
+  /// the hovered one stands out in the plot.
+  Color _seriesDisplayColor(ChartSeries series, int i) {
+    final base = _seriesColor(series, i);
+    return _dimmed(i) ? base.withValues(alpha: 0.2) : base;
+  }
+
+  double get _labelScale => presentationMode ? 1.12 : 1;
+
+  Color _seriesColor(ChartSeries series, int i) {
+    if (series.color == null && i == 0) {
+      return _hexColor(profile.accentColor);
+    }
+    return _hexColor(chartSeriesColor(series, i));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final spec = ChartSpec.parse(slide.customMarkdown);
+    final horizontalPad = w * 0.05;
+    final verticalPad = w * 0.018;
+    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
+    final textColor = _hexColor(profile.textColor);
+
+    return Container(
+      color: _hexColor(profile.slideBackgroundColor),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+          horizontalPad,
+          verticalPad + safe.top,
+          horizontalPad,
+          verticalPad + safe.bottom,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (spec.title.isNotEmpty) ...[
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(
+                  horizontal: w * 0.025,
+                  vertical: w * 0.01,
+                ),
+                decoration: BoxDecoration(
+                  color: _hexColor(profile.titleBackgroundColor),
+                  borderRadius: BorderRadius.circular(w * 0.012),
+                  border: Border(
+                    left: BorderSide(
+                      color: _hexColor(profile.accentColor),
+                      width: w * 0.006,
+                    ),
+                  ),
+                ),
+                child: _md(
+                  context,
+                  spec.title,
+                  _applyFont(
+                    font,
+                    TextStyle(
+                      fontSize: w * 0.032,
+                      height: 1.1,
+                      fontWeight: FontWeight.bold,
+                      color: _hexColor(profile.titleTextColor),
+                    ),
+                  ),
+                  linkColor: _hexColor(profile.accentColor),
+                ),
+              ),
+              SizedBox(height: w * 0.012),
+            ],
+            Expanded(
+              child: Container(
+                key: const ValueKey('chart-surface'),
+                padding: EdgeInsets.fromLTRB(
+                  w * 0.02,
+                  w * 0.01,
+                  w * 0.025,
+                  w * 0.01,
+                ),
+                decoration: BoxDecoration(
+                  color: textColor.withValues(alpha: 0.035),
+                  borderRadius: BorderRadius.circular(w * 0.014),
+                  border: Border.all(color: textColor.withValues(alpha: 0.09)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      child: spec.hasInlineData
+                          ? _chart(spec, textColor)
+                          : _placeholder(context),
+                    ),
+                    if (spec.hasInlineData && spec.series.isNotEmpty) ...[
+                      SizedBox(height: w * 0.006),
+                      spec.type == ChartType.pie
+                          ? _pieLegend(spec, textColor)
+                          : _legend(spec, textColor),
+                    ],
+                  ],
+                ),
+              ),
             ),
           ],
         ),
@@ -2240,36 +2389,154 @@ class _ChartPreview extends StatelessWidget {
   }
 
   Widget _legend(ChartSpec spec, Color textColor) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: w * 0.015),
-      child: Wrap(
-        spacing: w * 0.02,
-        runSpacing: w * 0.008,
-        children: [
-          for (var i = 0; i < spec.series.length; i++)
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: w * 0.018,
-                  height: w * 0.018,
-                  decoration: BoxDecoration(
-                    color: _seriesColor(i),
-                    shape: BoxShape.circle,
+    return SizedBox(
+      height: w * 0.03,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            for (var i = 0; i < spec.series.length; i++) ...[
+              if (i > 0) SizedBox(width: w * 0.01),
+              MouseRegion(
+                onEnter: (_) => _setHover(i),
+                onExit: (_) => _setHover(null),
+                child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 120),
+                  opacity: _dimmed(i) ? 0.4 : 1,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: w * 0.01,
+                      vertical: w * 0.004,
+                    ),
+                    decoration: BoxDecoration(
+                      color: _hovered == i
+                          ? _seriesColor(spec.series[i], i).withValues(alpha: 0.18)
+                          : textColor.withValues(alpha: 0.045),
+                      borderRadius: BorderRadius.circular(w),
+                      border: Border.all(
+                        color: _hovered == i
+                            ? _seriesColor(spec.series[i], i)
+                            : Colors.transparent,
+                        width: w * 0.0015,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: w * 0.012,
+                          height: w * 0.012,
+                          decoration: BoxDecoration(
+                            color: _seriesColor(spec.series[i], i),
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        SizedBox(width: w * 0.006),
+                        ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: w * 0.16),
+                          child: Text(
+                            spec.series[i].name.isEmpty
+                                ? 'Reeks ${i + 1}'
+                                : spec.series[i].name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: _applyFont(
+                              font,
+                              TextStyle(
+                                fontSize: w * 0.013,
+                                fontWeight: FontWeight.w600,
+                                color: textColor.withValues(alpha: 0.82),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                SizedBox(width: w * 0.008),
-                Text(
-                  spec.series[i].name,
-                  style: _applyFont(
-                    font,
-                    TextStyle(fontSize: w * 0.02, color: textColor),
-                  ),
-                ),
-              ],
-            ),
-        ],
+              ),
+            ],
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _pieLegend(ChartSpec spec, Color textColor) {
+    final itemCount = math.min(spec.x.length, 18);
+    final columns = math.min(itemCount, presentationMode ? 4 : 6);
+    final rows = (itemCount / columns).ceil();
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final gap = w * 0.006;
+        final itemWidth =
+            (constraints.maxWidth - gap * (columns - 1)) / columns;
+        return SizedBox(
+          height: rows * w * 0.03 * _labelScale + (rows - 1) * gap,
+          child: Wrap(
+            spacing: gap,
+            runSpacing: gap,
+            children: [
+              for (var i = 0; i < itemCount; i++)
+                MouseRegion(
+                  onEnter: (_) => _setHover(i),
+                  onExit: (_) => _setHover(null),
+                  child: AnimatedOpacity(
+                    duration: const Duration(milliseconds: 120),
+                    opacity: _dimmed(i) ? 0.4 : 1,
+                    child: Container(
+                      width: itemWidth,
+                      height: w * 0.03 * _labelScale,
+                      padding: EdgeInsets.symmetric(horizontal: w * 0.008),
+                      decoration: BoxDecoration(
+                        color: _hovered == i
+                            ? _hexColor(
+                                chartRowColor(spec, i),
+                              ).withValues(alpha: 0.18)
+                            : textColor.withValues(alpha: 0.045),
+                        borderRadius: BorderRadius.circular(w),
+                        border: Border.all(
+                          color: _hovered == i
+                              ? _hexColor(chartRowColor(spec, i))
+                              : Colors.transparent,
+                          width: w * 0.0015,
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: w * 0.012,
+                            height: w * 0.012,
+                            decoration: BoxDecoration(
+                              color: _hexColor(chartRowColor(spec, i)),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          SizedBox(width: w * 0.006),
+                          Expanded(
+                            child: Text(
+                              spec.x[i],
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: _applyFont(
+                                font,
+                                TextStyle(
+                                  fontSize: w * 0.013 * _labelScale,
+                                  fontWeight: FontWeight.w600,
+                                  color: textColor.withValues(alpha: 0.82),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -2281,6 +2548,8 @@ class _ChartPreview extends StatelessWidget {
         return _lineChart(spec, textColor);
       case ChartType.pie:
         return _pieChart(spec, textColor);
+      case ChartType.radar:
+        return _radarChart(spec, textColor);
     }
   }
 
@@ -2291,13 +2560,76 @@ class _ChartPreview extends StatelessWidget {
         if (v > m) m = v;
       }
     }
+    // Keep any bound line comfortably inside the plot so its label is visible.
+    if (spec.supportsBounds) {
+      for (final b in [spec.minBound, spec.maxBound]) {
+        if (b != null && b > m) m = b;
+      }
+    }
     return m <= 0 ? 1 : m * 1.15;
+  }
+
+  double _minY(ChartSpec spec) {
+    var m = 0.0;
+    for (final s in spec.series) {
+      for (final v in s.data) {
+        if (v < m) m = v;
+      }
+    }
+    if (spec.supportsBounds) {
+      for (final b in [spec.minBound, spec.maxBound]) {
+        if (b != null && b < m) m = b;
+      }
+    }
+    return m >= 0 ? 0 : m * 1.15;
+  }
+
+  /// Optional min/max threshold lines drawn across the plot (bar/line only).
+  ExtraLinesData _boundLines(ChartSpec spec) {
+    if (!spec.supportsBoundLines) return const ExtraLinesData();
+    final dash = [
+      (w * 0.018).round().clamp(4, 14),
+      (w * 0.01).round().clamp(3, 9),
+    ];
+    HorizontalLine line(double value, Color color, String prefix) =>
+        HorizontalLine(
+          y: value,
+          color: color,
+          strokeWidth: w * 0.0035,
+          dashArray: dash,
+          label: HorizontalLineLabel(
+            show: true,
+            alignment: Alignment.topRight,
+            padding: EdgeInsets.only(right: w * 0.006, bottom: w * 0.002),
+            style: _applyFont(
+              font,
+              TextStyle(
+                fontSize: w * 0.0115 * _labelScale,
+                color: color,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            labelResolver: (_) => '$prefix ${_fmtNum(value)}',
+          ),
+        );
+    return ExtraLinesData(
+      horizontalLines: [
+        if (spec.minBound != null)
+          line(spec.minBound!, const Color(0xFFF59E0B), 'min'),
+        if (spec.maxBound != null)
+          line(spec.maxBound!, const Color(0xFFEF4444), 'max'),
+      ],
+    );
   }
 
   FlTitlesData _titles(ChartSpec spec, Color textColor) {
     final style = _applyFont(
       font,
-      TextStyle(fontSize: w * 0.018, color: textColor.withValues(alpha: 0.8)),
+      TextStyle(
+        fontSize: w * 0.0115 * _labelScale,
+        color: textColor.withValues(alpha: 0.88),
+        fontWeight: presentationMode ? FontWeight.w600 : FontWeight.normal,
+      ),
     );
     return FlTitlesData(
       topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
@@ -2305,21 +2637,46 @@ class _ChartPreview extends StatelessWidget {
       leftTitles: AxisTitles(
         sideTitles: SideTitles(
           showTitles: true,
-          reservedSize: w * 0.06,
-          getTitlesWidget: (value, meta) =>
-              Text(_fmtNum(value), style: style.copyWith(fontSize: w * 0.016)),
+          reservedSize: w * 0.05 * _labelScale,
+          getTitlesWidget: (value, meta) => Text(
+            _fmtNum(value),
+            style: style.copyWith(fontSize: w * 0.0105 * _labelScale),
+          ),
         ),
       ),
       bottomTitles: AxisTitles(
         sideTitles: SideTitles(
           showTitles: true,
-          reservedSize: w * 0.05,
+          interval: 1,
+          reservedSize: w * 0.044 * _labelScale,
           getTitlesWidget: (value, meta) {
             final i = value.round();
-            if (i < 0 || i >= spec.x.length) return const SizedBox.shrink();
+            final n = spec.x.length;
+            if (i < 0 || i >= n) return const SizedBox.shrink();
+            // Show as many labels as fit without colliding: keep at least
+            // [minSlot] of horizontal room per label, then thin them out
+            // evenly based on the actual pixel spacing between points.
+            final spacing = n > 1
+                ? meta.parentAxisSize / (n - 1)
+                : meta.parentAxisSize;
+            final minSlot = w * 0.085 * _labelScale;
+            final step = math.max(1, (minSlot / spacing).ceil());
+            final lastMultiple = ((n - 1) ~/ step) * step;
+            final showLast = i == n - 1 && (n - 1 - lastMultiple) > step / 2;
+            if (i % step != 0 && !showLast) return const SizedBox.shrink();
+            final slot = (step * spacing - w * 0.012).clamp(w * 0.04, w * 0.16);
             return Padding(
               padding: EdgeInsets.only(top: w * 0.008),
-              child: Text(spec.x[i], style: style),
+              child: SizedBox(
+                width: slot,
+                child: Text(
+                  spec.x[i],
+                  style: style,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                ),
+              ),
             );
           },
         ),
@@ -2350,9 +2707,19 @@ class _ChartPreview extends StatelessWidget {
               if (xi < spec.series[si].data.length)
                 BarChartRodData(
                   toY: spec.series[si].data[xi],
-                  color: _seriesColor(si),
-                  width: w * 0.012,
-                  borderRadius: BorderRadius.circular(w * 0.003),
+                  color: _seriesDisplayColor(spec.series[si], si),
+                  width: (w * 0.032 / spec.series.length).clamp(
+                    w * 0.008,
+                    w * 0.022,
+                  ),
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(w * 0.006),
+                  ),
+                  backDrawRodData: BackgroundBarChartRodData(
+                    show: true,
+                    toY: _maxY(spec),
+                    color: textColor.withValues(alpha: 0.025),
+                  ),
                 ),
           ],
         ),
@@ -2360,12 +2727,36 @@ class _ChartPreview extends StatelessWidget {
     }
     return BarChart(
       BarChartData(
+        minY: _minY(spec),
         maxY: _maxY(spec),
         barGroups: groups,
         titlesData: _titles(spec, textColor),
         gridData: _grid(textColor),
         borderData: FlBorderData(show: false),
-        barTouchData: BarTouchData(enabled: false),
+        extraLinesData: _boundLines(spec),
+        barTouchData: BarTouchData(
+          enabled: true,
+          mouseCursorResolver: (event, response) => response?.spot == null
+              ? SystemMouseCursors.basic
+              : SystemMouseCursors.click,
+          touchTooltipData: BarTouchTooltipData(
+            fitInsideHorizontally: true,
+            fitInsideVertically: true,
+            getTooltipColor: (_) => const Color(0xFF0F172A),
+            getTooltipItem: (group, groupIndex, rod, rodIndex) {
+              final label = group.x >= 0 && group.x < spec.x.length
+                  ? spec.x[group.x]
+                  : '';
+              final series = rodIndex < spec.series.length
+                  ? spec.series[rodIndex].name
+                  : '';
+              return BarTooltipItem(
+                '$label\n${series.isEmpty ? 'Reeks ${rodIndex + 1}' : series}: ${_fmtNum(rod.toY)}',
+                _tooltipStyle(),
+              );
+            },
+          ),
+        ),
       ),
       duration: Duration.zero,
     );
@@ -2380,105 +2771,508 @@ class _ChartPreview extends StatelessWidget {
             for (var xi = 0; xi < spec.series[si].data.length; xi++)
               FlSpot(xi.toDouble(), spec.series[si].data[xi]),
           ],
-          color: _seriesColor(si),
-          barWidth: w * 0.004,
-          isCurved: false,
-          dotData: const FlDotData(show: true),
+          color: _seriesDisplayColor(spec.series[si], si),
+          barWidth: w * (_hovered == si ? 0.0065 : 0.0045),
+          isCurved: true,
+          curveSmoothness: 0.22,
+          dotData: FlDotData(
+            show: true,
+            getDotPainter: (spot, percent, bar, index) => FlDotCirclePainter(
+              radius: w * 0.005,
+              color: _seriesDisplayColor(spec.series[si], si),
+              strokeWidth: w * 0.0025,
+              strokeColor: _hexColor(profile.slideBackgroundColor),
+            ),
+          ),
+          belowBarData: BarAreaData(
+            show: true,
+            color: _seriesDisplayColor(spec.series[si], si).withValues(
+              alpha: spec.series.length == 1 ? 0.14 : 0.05,
+            ),
+          ),
         ),
       );
     }
     return LineChart(
       LineChartData(
-        minY: 0,
+        minY: _minY(spec),
         maxY: _maxY(spec),
         lineBarsData: bars,
         titlesData: _titles(spec, textColor),
         gridData: _grid(textColor),
         borderData: FlBorderData(show: false),
-        lineTouchData: const LineTouchData(enabled: false),
+        extraLinesData: _boundLines(spec),
+        lineTouchData: LineTouchData(
+          enabled: true,
+          // Measure proximity to the actual dot (x *and* y), not just the
+          // column, so the tooltip belongs to the point under the cursor.
+          distanceCalculator: (touch, spot) => (touch - spot).distance,
+          touchSpotThreshold: (w * 0.02).clamp(8.0, 24.0).toDouble(),
+          mouseCursorResolver: (event, response) =>
+              response?.lineBarSpots?.isEmpty ?? true
+              ? SystemMouseCursors.basic
+              : SystemMouseCursors.click,
+          touchTooltipData: LineTouchTooltipData(
+            fitInsideHorizontally: true,
+            fitInsideVertically: true,
+            getTooltipColor: (_) => const Color(0xFF0F172A),
+            // Show every dot near the cursor. When several dots sit on (almost)
+            // the same spot they all appear; the font shrinks to keep them
+            // readable when stacked.
+            getTooltipItems: (spots) {
+              final style = _lineTooltipStyle(spots.length);
+              return [
+                for (final spot in spots)
+                  LineTooltipItem(
+                    '${spot.spotIndex < spec.x.length ? spec.x[spot.spotIndex] : ''}\n'
+                    '${spot.barIndex < spec.series.length && spec.series[spot.barIndex].name.isNotEmpty ? spec.series[spot.barIndex].name : 'Reeks ${spot.barIndex + 1}'}: ${_fmtNum(spot.y)}',
+                    style,
+                  ),
+              ];
+            },
+          ),
+        ),
       ),
       duration: Duration.zero,
     );
   }
 
   Widget _pieChart(ChartSpec spec, Color textColor) {
-    // A pie uses the first series; each slice is an x label.
-    final series = spec.series.isNotEmpty ? spec.series.first : null;
-    if (series == null) return _placeholderText('—');
-    final total = series.data.fold<double>(0, (a, b) => a + b);
-    final sections = <PieChartSectionData>[];
-    for (var i = 0; i < series.data.length; i++) {
-      final v = series.data[i];
-      final pct = total > 0 ? (v / total * 100) : 0;
-      sections.add(
-        PieChartSectionData(
-          value: v,
-          color: _seriesColor(i),
-          title: '${pct.toStringAsFixed(0)}%',
-          radius: w * 0.16,
-          titleStyle: _applyFont(
-            font,
-            TextStyle(
-              fontSize: w * 0.02,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      );
+    if (spec.series.isEmpty || spec.x.isEmpty) {
+      return _placeholderText('—');
     }
-    return Row(
-      children: [
-        Expanded(
-          flex: 3,
-          child: PieChart(
-            PieChartData(
-              sections: sections,
-              sectionsSpace: 1,
-              centerSpaceRadius: w * 0.05,
-              pieTouchData: PieTouchData(enabled: false),
-            ),
-            duration: Duration.zero,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final visibleSeries = math.min(spec.series.length, 2);
+        final columns = visibleSeries;
+        const rows = 1;
+        final tileHeight = constraints.maxHeight / rows;
+        final tileWidth = constraints.maxWidth / columns;
+        return GridView.builder(
+          padding: EdgeInsets.zero,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: columns,
+            childAspectRatio: tileWidth / tileHeight,
+            crossAxisSpacing: w * 0.012,
+            mainAxisSpacing: w * 0.008,
           ),
-        ),
-        Expanded(
-          flex: 2,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              for (var i = 0; i < spec.x.length && i < series.data.length; i++)
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: w * 0.004),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        width: w * 0.018,
-                        height: w * 0.018,
-                        decoration: BoxDecoration(
-                          color: _seriesColor(i),
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      SizedBox(width: w * 0.008),
-                      Flexible(
-                        child: Text(
-                          spec.x[i],
-                          style: _applyFont(
-                            font,
-                            TextStyle(fontSize: w * 0.02, color: textColor),
+          itemCount: visibleSeries,
+          itemBuilder: (context, si) {
+            final series = spec.series[si];
+            final values = [
+              for (var xi = 0; xi < spec.x.length; xi++)
+                xi < series.data.length && series.data[xi] > 0
+                    ? series.data[xi]
+                    : 0.0,
+            ];
+            final total = values.fold<double>(0, (a, b) => a + b);
+            return Row(
+              children: [
+                Expanded(
+                  flex: 4,
+                  child: total <= 0
+                      ? Center(
+                          child: Text(
+                            '0',
+                            style: _applyFont(
+                              font,
+                              TextStyle(
+                                fontSize: w * 0.025,
+                                color: textColor.withValues(alpha: 0.5),
+                              ),
+                            ),
                           ),
-                          overflow: TextOverflow.ellipsis,
+                        )
+                      : LayoutBuilder(
+                          builder: (context, pieConstraints) {
+                            final available =
+                                pieConstraints.biggest.shortestSide;
+                            final radius = (available * 0.42).clamp(
+                              w * 0.018,
+                              w * 0.075,
+                            );
+                            return ClipRect(
+                              child: _HoverPieChart(
+                                externalHover: _hovered,
+                                values: values,
+                                labels: spec.x,
+                                colors: [
+                                  for (var xi = 0; xi < values.length; xi++)
+                                    _hexColor(chartRowColor(spec, xi)),
+                                ],
+                                radius: radius,
+                                centerSpaceRadius: radius * 0.42,
+                                sectionSpace: w * 0.002,
+                                titleStyle: _applyFont(
+                                  font,
+                                  TextStyle(
+                                    fontSize: (radius * 0.18).clamp(
+                                      w * 0.009,
+                                      w * 0.013,
+                                    ),
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                tooltipStyle: _tooltipStyle(),
+                              ),
+                            );
+                          },
                         ),
+                ),
+                SizedBox(width: w * 0.008),
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    series.name.isEmpty ? 'Reeks ${si + 1}' : series.name,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: _applyFont(
+                      font,
+                      TextStyle(
+                        fontSize: w * 0.015,
+                        height: 1.1,
+                        fontWeight: FontWeight.w700,
+                        color: textColor,
                       ),
-                    ],
+                    ),
                   ),
                 ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _radarChart(ChartSpec spec, Color textColor) {
+    if (spec.x.length < 3 || spec.series.isEmpty) {
+      return _placeholderText(
+        context.l10n.d('Een spider-diagram heeft minstens drie labels nodig'),
+      );
+    }
+    final grid = textColor.withValues(alpha: 0.18);
+    final scale = radarScale(spec);
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: w * 0.03, vertical: w * 0.012),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          // Reserve a slim column on the right for the scale legend, then keep
+          // the chart square so fl_chart's centre/radius stay predictable.
+          final legendWidth = w * 0.075;
+          final available = constraints.maxWidth - legendWidth - w * 0.02;
+          final side = math.max(
+            0.0,
+            math.min(available, constraints.maxHeight),
+          );
+
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Center(
+                  child: SizedBox(
+                    width: side,
+                    height: side,
+                    child: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: RadarChart(
+                            RadarChartData(
+                              dataSets: [
+                                for (var si = 0; si < spec.series.length; si++)
+                                  RadarDataSet(
+                                    dataEntries: [
+                                      for (var xi = 0; xi < spec.x.length; xi++)
+                                        RadarEntry(
+                                          value:
+                                              xi < spec.series[si].data.length
+                                              ? spec.series[si].data[xi]
+                                              : 0,
+                                        ),
+                                    ],
+                                    fillColor: _seriesDisplayColor(
+                                      spec.series[si],
+                                      si,
+                                    ).withValues(alpha: _dimmed(si) ? 0.04 : 0.16),
+                                    borderColor: _seriesDisplayColor(
+                                      spec.series[si],
+                                      si,
+                                    ),
+                                    borderWidth:
+                                        w * (_hovered == si ? 0.0055 : 0.0035),
+                                    entryRadius:
+                                        w * (_hovered == si ? 0.006 : 0.004),
+                                  ),
+                                // Invisible anchor pinning the scale to [lo, hi]
+                                // so the rings represent a fixed scale.
+                                RadarDataSet(
+                                  dataEntries: [
+                                    for (var xi = 0; xi < spec.x.length; xi++)
+                                      RadarEntry(
+                                        value: xi == 0 ? scale.hi : scale.lo,
+                                      ),
+                                  ],
+                                  fillColor: Colors.transparent,
+                                  borderColor: Colors.transparent,
+                                  borderWidth: 0,
+                                  entryRadius: 0,
+                                ),
+                              ],
+                              radarShape: RadarShape.polygon,
+                              radarBackgroundColor: Colors.transparent,
+                              radarBorderData: BorderSide(color: grid, width: 1),
+                              gridBorderData: BorderSide(color: grid, width: 1),
+                              tickBorderData: BorderSide(color: grid, width: 1),
+                              tickCount: scale.ticks,
+                              isMinValueAtCenter: true,
+                              // The scale now lives in a side legend, so hide
+                              // fl_chart's in-chart ring numbers.
+                              ticksTextStyle: const TextStyle(
+                                color: Colors.transparent,
+                                fontSize: 0.001,
+                              ),
+                              titlePositionPercentageOffset: 0.14,
+                              getTitle: (index, angle) => RadarChartTitle(
+                                text: index < spec.x.length ? spec.x[index] : '',
+                              ),
+                              titleTextStyle: _applyFont(
+                                font,
+                                TextStyle(
+                                  fontSize: w * 0.0135 * _labelScale,
+                                  color: textColor.withValues(alpha: 0.88),
+                                  fontWeight: presentationMode
+                                      ? FontWeight.w600
+                                      : FontWeight.w500,
+                                ),
+                              ),
+                              radarTouchData: RadarTouchData(
+                                enabled: true,
+                                touchSpotThreshold: (w * 0.02).clamp(8.0, 24.0)
+                                    .toDouble(),
+                                mouseCursorResolver: (event, response) =>
+                                    _radarSpotFrom(response, spec) == null
+                                    ? SystemMouseCursors.basic
+                                    : SystemMouseCursors.click,
+                                touchCallback: (event, response) {
+                                  final next =
+                                      event.isInterestedForInteractions
+                                      ? _radarSpotFrom(response, spec)
+                                      : null;
+                                  if (next != _radarTouch) {
+                                    setState(() => _radarTouch = next);
+                                  }
+                                },
+                              ),
+                            ),
+                            duration: Duration.zero,
+                          ),
+                        ),
+                        if (_radarTouch != null)
+                          _radarTooltip(spec, side, _radarTouch!),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: legendWidth,
+                child: _radarScaleLegend(scale, textColor),
+              ),
             ],
+          );
+        },
+      ),
+    );
+  }
+
+  /// Extract the touched real-series vertex from a radar touch response,
+  /// ignoring the invisible scale anchor dataset.
+  ({int series, int entry, double value, Offset offset})? _radarSpotFrom(
+    RadarTouchResponse? response,
+    ChartSpec spec,
+  ) {
+    final spot = response?.touchedSpot;
+    if (spot == null) return null;
+    if (spot.touchedDataSetIndex < 0 ||
+        spot.touchedDataSetIndex >= spec.series.length) {
+      return null; // the anchor dataset, or out of range
+    }
+    return (
+      series: spot.touchedDataSetIndex,
+      entry: spot.touchedRadarEntryIndex,
+      value: spot.touchedRadarEntry.value,
+      offset: spot.offset,
+    );
+  }
+
+  /// A small floating tooltip for the hovered radar vertex, like the other
+  /// charts: the axis label, the series name and the value.
+  Widget _radarTooltip(
+    ChartSpec spec,
+    double side,
+    ({int series, int entry, double value, Offset offset}) touch,
+  ) {
+    final axis = touch.entry >= 0 && touch.entry < spec.x.length
+        ? spec.x[touch.entry]
+        : '';
+    final series = touch.series < spec.series.length
+        ? spec.series[touch.series].name
+        : '';
+    final label = series.isEmpty ? 'Reeks ${touch.series + 1}' : series;
+    final onLeftHalf = touch.offset.dx <= side / 2;
+    return Positioned(
+      left: onLeftHalf ? (touch.offset.dx + w * 0.012) : null,
+      right: onLeftHalf ? null : (side - touch.offset.dx + w * 0.012),
+      top: (touch.offset.dy - w * 0.03).clamp(0.0, math.max(0.0, side - 1)),
+      child: IgnorePointer(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: side * 0.6),
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: w * 0.012,
+              vertical: w * 0.006,
+            ),
+            decoration: BoxDecoration(
+              color: const Color(0xFF0F172A),
+              borderRadius: BorderRadius.circular(w * 0.008),
+              boxShadow: const [
+                BoxShadow(color: Color(0x33000000), blurRadius: 6),
+              ],
+            ),
+            child: Text(
+              '${axis.isEmpty ? '' : '$axis\n'}$label: ${_fmtNum(touch.value)}',
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: _tooltipStyle(),
+            ),
           ),
         ),
+      ),
+    );
+  }
+
+  /// Vertical scale legend shown to the right of a radar chart: the tick values
+  /// from the outer ring (top) down to the centre (bottom), in a small font.
+  Widget _radarScaleLegend(
+    ({double lo, double hi, int ticks}) scale,
+    Color textColor,
+  ) {
+    final style = _applyFont(
+      font,
+      TextStyle(
+        fontSize: w * 0.012 * _labelScale,
+        color: textColor.withValues(alpha: 0.62),
+        fontWeight: FontWeight.w600,
+      ),
+    );
+    final tickColor = textColor.withValues(alpha: 0.3);
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (var k = scale.ticks; k >= 0; k--) ...[
+          if (k != scale.ticks) SizedBox(height: w * 0.018 * _labelScale),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(width: w * 0.012, height: 1, color: tickColor),
+              SizedBox(width: w * 0.006),
+              Flexible(
+                child: Text(
+                  _fmtNum(scale.lo + (scale.hi - scale.lo) * k / scale.ticks),
+                  style: style,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ],
       ],
+    );
+  }
+
+  /// Resolves the radar scale: a low/high pair plus an even tick count. Honours
+  /// the optional [ChartSpec.minBound]/[maxBound] and otherwise rounds the data
+  /// range to a tidy scale so the rings read as round numbers.
+  ({double lo, double hi, int ticks}) radarScale(ChartSpec spec) {
+    var dataMin = 0.0;
+    var dataMax = 0.0;
+    var seen = false;
+    for (final s in spec.series) {
+      for (final v in s.data) {
+        if (!seen) {
+          dataMin = v;
+          dataMax = v;
+          seen = true;
+        } else {
+          if (v < dataMin) dataMin = v;
+          if (v > dataMax) dataMax = v;
+        }
+      }
+    }
+    if (!seen) {
+      dataMin = 0;
+      dataMax = 1;
+    }
+    final rawLo = spec.minBound ?? (dataMin < 0 ? dataMin : 0);
+    final rawHi = spec.maxBound ?? dataMax;
+    final nice = _niceScale(rawLo, rawHi);
+    final lo = spec.minBound ?? nice.lo;
+    var hi = spec.maxBound ?? nice.hi;
+    if (hi <= lo) hi = lo + nice.step;
+    final ticks = math.max(2, ((hi - lo) / nice.step).round());
+    return (lo: lo, hi: hi, ticks: ticks);
+  }
+
+  ({double lo, double hi, double step}) _niceScale(double lo, double hi) {
+    final range = (hi - lo).abs();
+    final r = range <= 0 ? 1.0 : range;
+    final rawStep = r / 4;
+    final mag = math.pow(10, (math.log(rawStep) / math.ln10).floor()).toDouble();
+    final norm = rawStep / mag;
+    final niceNorm = norm < 1.5
+        ? 1.0
+        : norm < 3
+        ? 2.0
+        : norm < 7
+        ? 5.0
+        : 10.0;
+    final step = niceNorm * mag;
+    return (
+      lo: (lo / step).floor() * step,
+      hi: (hi / step).ceil() * step,
+      step: step,
+    );
+  }
+
+  TextStyle _tooltipStyle() => _applyFont(
+    font,
+    TextStyle(
+      color: Colors.white,
+      fontSize: (w * 0.013 * _labelScale).clamp(11, 18),
+      height: 1.25,
+      fontWeight: FontWeight.w700,
+    ),
+  );
+
+  /// Tooltip style for line charts. Each touched dot adds two lines, so when
+  /// several dots overlap the font shrinks a step to keep the stack readable.
+  TextStyle _lineTooltipStyle(int count) {
+    final base = (w * 0.013 * _labelScale).clamp(11.0, 18.0);
+    final shrink = (1 - (count - 2) * 0.13).clamp(0.6, 1.0);
+    return _applyFont(
+      font,
+      TextStyle(
+        color: Colors.white,
+        fontSize: (base * shrink).clamp(8.0, 18.0),
+        height: 1.2,
+        fontWeight: FontWeight.w700,
+      ),
     );
   }
 
@@ -2503,6 +3297,121 @@ class _ChartPreview extends StatelessWidget {
     ),
   );
 }
+
+class _HoverPieChart extends StatefulWidget {
+  final List<double> values;
+  final List<String> labels;
+  final List<Color> colors;
+  final double radius;
+  final double centerSpaceRadius;
+  final double sectionSpace;
+  final TextStyle titleStyle;
+  final TextStyle tooltipStyle;
+
+  /// Slice index highlighted from outside (e.g. hovering the legend), combined
+  /// with this chart's own touch hover.
+  final int? externalHover;
+
+  const _HoverPieChart({
+    required this.values,
+    required this.labels,
+    required this.colors,
+    required this.radius,
+    required this.centerSpaceRadius,
+    required this.sectionSpace,
+    required this.titleStyle,
+    required this.tooltipStyle,
+    this.externalHover,
+  });
+
+  @override
+  State<_HoverPieChart> createState() => _HoverPieChartState();
+}
+
+class _HoverPieChartState extends State<_HoverPieChart> {
+  int? _hovered;
+
+  @override
+  Widget build(BuildContext context) {
+    final total = widget.values.fold<double>(0, (a, b) => a + b);
+    final external = widget.externalHover;
+    final hovered = _hovered ?? (external != null && external >= 0 && external < widget.values.length ? external : null);
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Positioned.fill(
+          child: PieChart(
+            PieChartData(
+              sections: [
+                for (var i = 0; i < widget.values.length; i++)
+                  PieChartSectionData(
+                    value: widget.values[i],
+                    color: widget.colors[i],
+                    title: widget.values[i] / total >= 0.08
+                        ? '${(widget.values[i] / total * 100).round()}%'
+                        : '',
+                    radius: widget.radius * (hovered == i ? 1.08 : 1),
+                    titleStyle: widget.titleStyle,
+                  ),
+              ],
+              sectionsSpace: widget.sectionSpace,
+              centerSpaceRadius: widget.centerSpaceRadius,
+              pieTouchData: PieTouchData(
+                enabled: true,
+                mouseCursorResolver: (event, response) =>
+                    response?.touchedSection == null
+                    ? SystemMouseCursors.basic
+                    : SystemMouseCursors.click,
+                touchCallback: (event, response) {
+                  final next = event.isInterestedForInteractions
+                      ? response?.touchedSection?.touchedSectionIndex
+                      : null;
+                  if (next != _hovered) setState(() => _hovered = next);
+                },
+              ),
+            ),
+            duration: Duration.zero,
+          ),
+        ),
+        if (hovered != null && hovered >= 0 && hovered < widget.values.length)
+          Positioned(
+            top: 4,
+            left: 4,
+            right: 4,
+            child: IgnorePointer(
+              child: Center(
+                child: Container(
+                  key: const ValueKey('pie-hover-tooltip'),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0F172A),
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: const [
+                      BoxShadow(color: Color(0x33000000), blurRadius: 6),
+                    ],
+                  ),
+                  child: Text(
+                    '${widget.labels[hovered]}: ${_formatChartValue(widget.values[hovered])}',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: widget.tooltipStyle,
+                  ),
+                ),
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+String _formatChartValue(double value) => value == value.roundToDouble()
+    ? value.toInt().toString()
+    : value.toStringAsFixed(1);
 
 /// Register highlight.js language definitions once, so [HighlightView] can
 /// colour any common language without throwing.
@@ -2903,20 +3812,39 @@ Widget _mediaPlaceholder(IconData icon, String label) {
 }
 
 Widget _imagePlaceholder(BuildContext context) {
-  return Container(
+  return ColoredBox(
     color: const Color(0xFFE2E8F0),
-    child: Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.image_outlined, color: Color(0xFF94A3B8), size: 24),
-          const SizedBox(height: 4),
-          Text(
-            context.l10n.d('Afbeelding'),
-            style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 10),
+    child: LayoutBuilder(
+      builder: (context, constraints) {
+        final shortestSide = constraints.biggest.shortestSide;
+        if (shortestSide < 48) {
+          return Center(
+            child: Icon(
+              Icons.image_outlined,
+              color: const Color(0xFF94A3B8),
+              size: shortestSide * 0.65,
+            ),
+          );
+        }
+
+        return Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.image_outlined,
+                color: Color(0xFF94A3B8),
+                size: 24,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                context.l10n.d('Afbeelding'),
+                style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 10),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     ),
   );
 }

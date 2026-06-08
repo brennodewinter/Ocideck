@@ -135,6 +135,10 @@ JSON heeft deze velden (met standaardwaarden):
 | `titleBackgroundColor` | `#1C2B47` | Achtergrond titelslide. |
 | `titleTextColor` | `#FFFFFF` | Tekst op titel-/sectieslide. |
 | `sectionBackgroundColor` | `#2E7D64` | Achtergrond sectieslide. |
+| `codeBackgroundColor` | `#282C34` | Achtergrond van broncode-slides. |
+| `codeTextColor` | `#ABB2BF` | Tekstkleur van broncode-slides. |
+| `codeHighlightSyntax` | `true` | Syntaxkleuring aan/uit. Uit = alles in één kleur (bijv. groen op zwart voor een CRT-look). |
+| `codeFontFamily` | `monospace` | Lettertype van broncode-slides (bijv. `Courier New`). |
 | `logoPath` | `null` | Pad naar logo (relatief in `logos/`). |
 | `logoPosition` | `bottom-right` | `top-left`/`top-right`/`bottom-left`/`bottom-right`. |
 | `logoSize` | `96` | Logogrootte in px. |
@@ -314,14 +318,30 @@ openen wordt die weer ingelezen.
 ````markdown
 ```chart
 {
-  "type": "bar",            // bar | line | pie
+  "type": "bar",            // bar | line | pie | radar
   "title": "Omzet",
   "source": "data/omzet.csv",  // optioneel; anders inline x/series
   "x": ["Q1", "Q2"],
-  "series": [ { "name": "2025", "data": [10, 14] } ]
+  "rowColors": ["#003399", "#FFCC00"],  // optioneel; kleur per label (cirkel/radar)
+  "minBound": 0,            // optioneel; niet bij pie
+  "maxBound": 20,           // optioneel; niet bij pie
+  "series": [ { "name": "2025", "data": [10, 14], "color": "#2563EB" } ]
 }
 ```
 ````
+
+Velden:
+
+- `type` — `bar`, `line`, `pie` of `radar` (spider). Standaard `bar`.
+- `x` — labels; bij `pie`/`radar` zijn dit de segmenten/assen (radar heeft er
+  minstens drie nodig).
+- `series` — genoemde reeksen met `data` (uitgelijnd op `x`) en optioneel een
+  `color` (hex). `pie` toont maximaal de eerste twee reeksen.
+- `rowColors` — optionele kleur per label (gebruikt door `pie`/`radar`).
+- `minBound` / `maxBound` — optioneel en alleen voor niet-`pie`. Bij `bar`/`line`
+  zijn het horizontale **referentielijnen**; bij `radar` bepalen ze de **schaal**
+  (binnenste/buitenste ring) met een gelijkmatige verdeling. Worden weggelaten
+  bij `pie`.
 
 ### Afbeeldingsgrootte (`imageSize`)
 Eén integer-veld met typeafhankelijke betekenis: bij `image`/`title`/`quote` het

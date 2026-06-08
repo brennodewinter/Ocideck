@@ -20,8 +20,9 @@ Marp tools.
 
 Add a slide and pick a type: **title**, **section** divider, **bullets**, **two
 bullet columns**, **bullets + image**, **two images**, **large image**, **video**,
-**audio**, **quote**, **table**, **source code**, **chart**, and **free Markdown**.
-Each type has a dedicated editor on the left and a live preview on the right.
+**audio**, **quote**, **table**, **source code**, **chart** (bar, line, pie, or
+spider/radar), and **free Markdown**. Each type has a dedicated editor on the left
+and a live preview on the right.
 
 Text fields support inline Markdown (`**bold**`, `*italic*`, `` `code` ``,
 `[links](…)`). Free-Markdown slides also render fenced code with syntax
@@ -30,19 +31,32 @@ highlighting and `$…$` / `$$…$$` LaTeX math.
 ### Source-code slides
 
 Choose a programming language for syntax highlighting (or "plain text") and paste
-your code. It renders as a dark "code sheet". Stored as a fenced code block in the
-Markdown.
+your code. It renders as a "code sheet" whose background, text colour and
+**monospace font** come from the active **style profile** (e.g. Courier). Turn
+**syntax colouring** off to show the whole block in a single colour — e.g. bright
+green on black for a classic CRT-terminal look. The text is sized to fill the
+panel — larger when there's room, smaller for long fragments. Stored as a fenced
+code block in the Markdown.
 
 ### Charts
 
-Pick a type (**bar**, **line**, **pie**) and a title, then enter data in the grid:
-the first column is the labels, each further column is a named series. Use **Row**
-and **Series** to add data; the small ✕ removes a row/column.
+Pick a type (**bar**, **line**, **pie**, or **spider/radar**) and a title, then
+enter data in the grid: the first column is the labels, each further column is a
+named series. Use **Row** and **Series** to add data; the small ✕ removes a
+row/column. Each series and (for pie/radar) each label can be given its own colour.
 
 - **CSV import** — click **CSV importeren**. You can either keep the data **in the
   slide** (inline) or store it **as a CSV file**. A linked CSV lives in the deck's
   `data/` directory and stays the source of truth (edit it in a spreadsheet); the
   grid then shows it read-only until you **Ontkoppelen** (unlink).
+- **Min/max** (optional, bar/line/radar) — on bar and line charts these draw
+  horizontal **reference lines**; on a spider/radar chart they fix the **scale**
+  (centre to outer ring), shown as evenly spaced values in a small legend beside
+  the chart. Leave them empty to scale automatically.
+- **Reading values** — hovering a legend entry highlights its series (or pie
+  slice). On a line chart the tooltip belongs to the dot under the cursor and
+  shows every overlapping dot at once; on a spider/radar chart hovering a point
+  shows its value in a tooltip too.
 - Charts render in the preview, presenter, PDF, and PPTX, and as inline SVG in the
   HTML export.
 
@@ -100,8 +114,11 @@ Export to:
 
 ## Theming and language
 
-- **Style profiles** control deck colours, fonts, logo, and footer. The bundled
-  Marp theme is `assets/themes/ocideck.css`.
+- **Style profiles** control deck colours (including the source-code background,
+  text, font and an optional syntax-colouring toggle), fonts, logo, and footer.
+  Every colour can be picked from the presets or entered as a custom hex value. The
+  Colours and Logo tabs show which profile you're editing. The bundled Marp theme
+  is `assets/themes/ocideck.css`.
 - **App appearance** (including a dark interface) is configurable in settings.
 - The interface is available in Dutch, English, Italian, German, French, Spanish,
   Frisian, and Papiamento.

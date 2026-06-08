@@ -168,6 +168,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                   slideNumber: _index + 1,
                   slideCount: _slides.length,
                   tlp: _tlp,
+                  presentationMode: true,
                   enableMedia: true,
                   autoplayMedia: true,
                   // Audio finishing on the beamer drives the presenter's
