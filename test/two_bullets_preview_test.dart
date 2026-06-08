@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/widgets/slides/inline_markdown.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
 Widget _host(Slide slide) {
@@ -55,6 +56,31 @@ void main() {
 
     expect(find.text('Links'), findsOneWidget);
     expect(find.text('Rechts'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('two-bullet columns scale independently (sparse stays large)', (
+    tester,
+  ) async {
+    final slide = Slide.create(SlideType.twoBullets).copyWith(
+      bullets: const ['Solo'],
+      bullets2: List.generate(14, (i) => 'Item $i'),
+    );
+
+    await tester.pumpWidget(_host(slide));
+    await tester.pump();
+
+    double sizeOf(String text) => tester
+        .widget<InlineMarkdownText>(
+          find.byWidgetPredicate(
+            (x) => x is InlineMarkdownText && x.text == text,
+          ),
+        )
+        .style
+        .fontSize!;
+
+    // The single-bullet column is not shrunk to the 14-bullet column's size.
+    expect(sizeOf('Solo'), greaterThan(sizeOf('Item 0') * 1.3));
     expect(tester.takeException(), isNull);
   });
 

@@ -1050,7 +1050,6 @@ class _TwoBulletsPreview extends StatelessWidget {
       font: font,
       maxScale: _kBulletsMaxScale,
     );
-    final scale = leftScale < rightScale ? leftScale : rightScale;
 
     return Container(
       color: _hexColor(profile.slideBackgroundColor),
@@ -1089,6 +1088,8 @@ class _TwoBulletsPreview extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // Each column scales to fill its own height, so a sparse
+                      // column is not shrunk down to a crowded one's size.
                       _bulletColumn(
                         context,
                         title: col1Title,
@@ -1099,7 +1100,7 @@ class _TwoBulletsPreview extends StatelessWidget {
                         headingGap: headingGap,
                         bulletSize: bulletSize,
                         bulletGap: bulletGap,
-                        scale: scale,
+                        scale: leftScale,
                       ),
                       SizedBox(width: columnGap),
                       _bulletColumn(
@@ -1112,7 +1113,7 @@ class _TwoBulletsPreview extends StatelessWidget {
                         headingGap: headingGap,
                         bulletSize: bulletSize,
                         bulletGap: bulletGap,
-                        scale: scale,
+                        scale: rightScale,
                       ),
                     ],
                   ),
