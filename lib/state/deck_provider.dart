@@ -346,7 +346,12 @@ class DeckNotifier extends StateNotifier<DeckState> {
         slides.add(s);
       }
     }
-    if (changed) _mutate(deck.copyWith(slides: slides));
+    // Bump de revisie zodat de editor van de geselecteerde slide remount en de
+    // uitgevinkte checkboxen ook in het invoerpaneel toont (niet alleen in de
+    // slidepreview).
+    if (changed) {
+      _mutate(deck.copyWith(slides: slides), bumpRevision: true);
+    }
   }
 
   // ── Zoeken & vervangen ─────────────────────────────────────────────────────
@@ -553,7 +558,14 @@ class DeckNotifier extends StateNotifier<DeckState> {
   /// binnen [_coalesceWindow] valt, wordt geen nieuwe ongedaan-stap aangemaakt
   /// (zodat typen niet per teken een aparte stap oplevert). Een [coalesceKey]
   /// van null markeert een losse, discrete stap.
-  void _mutate(Deck deck, {String? coalesceKey}) {
+  ///
+  /// Wanneer [bumpRevision] waar is, wordt de inhouds-revisie opgehoogd. Dat
+  /// dwingt de editor-subtree (die op `revision` is gesleuteld) om te remounten
+  /// en zijn velden opnieuw uit de slide te laden. Nodig bij deck-brede
+  /// bewerkingen die de huidige slide aanpassen zonder dat de editor zelf de
+  /// bron van de wijziging was (anders blijft de editor de oude, gecachte
+  /// waarden tonen).
+  void _mutate(Deck deck, {String? coalesceKey, bool bumpRevision = false}) {
     final previous = state.deck;
     if (previous != null) {
       final now = DateTime.now();
@@ -576,6 +588,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
       isDirty: true,
       canUndo: _undoStack.isNotEmpty,
       canRedo: false,
+      revision: bumpRevision ? state.revision + 1 : null,
     );
   }
 }

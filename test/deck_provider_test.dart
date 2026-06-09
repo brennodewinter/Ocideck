@@ -151,6 +151,7 @@ void main() {
     n.loadDeck(n.state.deck!.copyWith(slides: [s1, s2]));
 
     expect(n.checkedChecklistCount, 4);
+    final revisionBefore = n.state.revision;
 
     n.clearAllChecklists();
 
@@ -159,6 +160,8 @@ void main() {
     expect(out[0].bullets, ['[ ] Klaar', '\t[ ] Subklaar', '[ ] Open']);
     expect(out[1].bullets, ['[ ] Eerste kolom']);
     expect(out[1].bullets2, ['[ ] Tweede kolom', '[ ] Nog open']);
+    // Revision bumps so the open slide editor remounts and reflects the change.
+    expect(n.state.revision, greaterThan(revisionBefore));
   });
 
   test('clearAllChecklists is a no-op when nothing is checked', () {
