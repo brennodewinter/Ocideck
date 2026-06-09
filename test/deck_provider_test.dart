@@ -137,6 +137,74 @@ void main() {
     expect(n.state.deck!.slides.first.title, 'Nieuw');
   });
 
+  test('clearAllChecklists unchecks every checklist item across the deck', () {
+    final n = _notifier()..newDeck('D');
+    final s1 = Slide.create(SlideType.bullets).copyWith(
+      listStyle: ListStyle.checklist,
+      bullets: ['[x] Klaar', '\t[X] Subklaar', '[ ] Open'],
+    );
+    final s2 = Slide.create(SlideType.bullets).copyWith(
+      listStyle: ListStyle.checklist,
+      bullets: ['[x] Eerste kolom'],
+      bullets2: ['[x] Tweede kolom', '[ ] Nog open'],
+    );
+    n.loadDeck(n.state.deck!.copyWith(slides: [s1, s2]));
+
+    expect(n.checkedChecklistCount, 4);
+    final revisionBefore = n.state.revision;
+
+    n.clearAllChecklists();
+
+    expect(n.checkedChecklistCount, 0);
+    final out = n.state.deck!.slides;
+    expect(out[0].bullets, ['[ ] Klaar', '\t[ ] Subklaar', '[ ] Open']);
+    expect(out[1].bullets, ['[ ] Eerste kolom']);
+    expect(out[1].bullets2, ['[ ] Tweede kolom', '[ ] Nog open']);
+    // Revision bumps so the open slide editor remounts and reflects the change.
+    expect(n.state.revision, greaterThan(revisionBefore));
+  });
+
+  test('clearAllChecklists is a single undoable step that restores the checks', () {
+    final n = _notifier()..newDeck('D');
+    final slide = Slide.create(SlideType.bullets).copyWith(
+      listStyle: ListStyle.checklist,
+      bullets: ['[x] Klaar', '[ ] Open'],
+      bullets2: ['[x] Tweede'],
+    );
+    n.loadDeck(n.state.deck!.copyWith(slides: [slide]));
+    expect(n.checkedChecklistCount, 2);
+
+    n.clearAllChecklists();
+    expect(n.checkedChecklistCount, 0);
+    expect(n.state.canUndo, isTrue);
+    final revisionAfterClear = n.state.revision;
+
+    n.undo();
+
+    // One undo restores every checked item in both columns...
+    expect(n.checkedChecklistCount, 2);
+    expect(n.state.deck!.slides.first.bullets, ['[x] Klaar', '[ ] Open']);
+    expect(n.state.deck!.slides.first.bullets2, ['[x] Tweede']);
+    // ...and bumps the revision again so the open editor reflects the restore.
+    expect(n.state.revision, greaterThan(revisionAfterClear));
+  });
+
+  test('clearAllChecklists is a no-op when nothing is checked', () {
+    final n = _notifier()..newDeck('D');
+    final slide = Slide.create(SlideType.bullets).copyWith(
+      listStyle: ListStyle.checklist,
+      bullets: ['[ ] Open'],
+    );
+    n.loadDeck(n.state.deck!.copyWith(slides: [slide]));
+    expect(n.state.canUndo, isFalse);
+
+    n.clearAllChecklists();
+
+    // No checked items, so no history entry is recorded.
+    expect(n.state.canUndo, isFalse);
+    expect(n.checkedChecklistCount, 0);
+  });
+
   test('updateMeta changes deck title/theme/paginate', () {
     final n = _notifier()..newDeck('D');
     n.updateMeta(title: 'Andere titel', theme: 'custom', paginate: false);

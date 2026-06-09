@@ -47,6 +47,8 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   separate from the slide title.
 - Slide text auto-sizing now measures with the deck's own font, so text grows to
   use the available space more accurately instead of staying smaller than needed.
+- The two bullet columns now scale **independently**, so a column with few items
+  is no longer shrunk down to the size of a crowded one beside it.
 - Slide transitions in the presenter no longer flash a black frame (neighbour
   images are precached and `gaplessPlayback` is enabled) — important for
   recording.

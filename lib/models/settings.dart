@@ -3,6 +3,9 @@ class ThemeProfile {
   final String slideBackgroundColor;
   final String textColor;
   final String accentColor;
+  final String checklistCheckedColor;
+  final String checklistUncheckedColor;
+  final bool checklistStrikeThrough;
   final String tableTextColor;
   final String tableHeaderTextColor;
   final String titleBackgroundColor;
@@ -50,6 +53,9 @@ class ThemeProfile {
     this.slideBackgroundColor = '#FFFFFF',
     this.textColor = '#222222',
     this.accentColor = '#2E7D64',
+    this.checklistCheckedColor = '#2E7D64',
+    this.checklistUncheckedColor = '#CBD5E1',
+    this.checklistStrikeThrough = true,
     String? tableTextColor,
     this.tableHeaderTextColor = '#FFFFFF',
     this.titleBackgroundColor = '#1C2B47',
@@ -84,6 +90,9 @@ class ThemeProfile {
     String? slideBackgroundColor,
     String? textColor,
     String? accentColor,
+    String? checklistCheckedColor,
+    String? checklistUncheckedColor,
+    bool? checklistStrikeThrough,
     String? tableTextColor,
     String? tableHeaderTextColor,
     String? titleBackgroundColor,
@@ -109,6 +118,12 @@ class ThemeProfile {
       slideBackgroundColor: slideBackgroundColor ?? this.slideBackgroundColor,
       textColor: textColor ?? this.textColor,
       accentColor: accentColor ?? this.accentColor,
+      checklistCheckedColor:
+          checklistCheckedColor ?? this.checklistCheckedColor,
+      checklistUncheckedColor:
+          checklistUncheckedColor ?? this.checklistUncheckedColor,
+      checklistStrikeThrough:
+          checklistStrikeThrough ?? this.checklistStrikeThrough,
       tableTextColor: tableTextColor ?? this.tableTextColor,
       tableHeaderTextColor: tableHeaderTextColor ?? this.tableHeaderTextColor,
       titleBackgroundColor: titleBackgroundColor ?? this.titleBackgroundColor,
@@ -138,6 +153,9 @@ class ThemeProfile {
       'name': name,
       'textColor': textColor,
       'accentColor': accentColor,
+      'checklistCheckedColor': checklistCheckedColor,
+      'checklistUncheckedColor': checklistUncheckedColor,
+      'checklistStrikeThrough': checklistStrikeThrough,
       'tableTextColor': tableTextColor,
       'tableHeaderTextColor': tableHeaderTextColor,
       'titleBackgroundColor': titleBackgroundColor,
@@ -166,6 +184,13 @@ class ThemeProfile {
       name: json['name'] as String? ?? 'Standaard',
       textColor: json['textColor'] as String? ?? '#222222',
       accentColor: json['accentColor'] as String? ?? '#2E7D64',
+      checklistCheckedColor:
+          json['checklistCheckedColor'] as String? ??
+          json['accentColor'] as String? ??
+          '#2E7D64',
+      checklistUncheckedColor:
+          json['checklistUncheckedColor'] as String? ?? '#CBD5E1',
+      checklistStrikeThrough: json['checklistStrikeThrough'] as bool? ?? true,
       tableTextColor:
           json['tableTextColor'] as String? ??
           json['textColor'] as String? ??
@@ -177,8 +202,7 @@ class ThemeProfile {
       titleTextColor: json['titleTextColor'] as String? ?? '#FFFFFF',
       sectionBackgroundColor:
           json['sectionBackgroundColor'] as String? ?? '#2E7D64',
-      codeBackgroundColor:
-          json['codeBackgroundColor'] as String? ?? '#282C34',
+      codeBackgroundColor: json['codeBackgroundColor'] as String? ?? '#282C34',
       codeTextColor: json['codeTextColor'] as String? ?? '#ABB2BF',
       codeHighlightSyntax: json['codeHighlightSyntax'] as bool? ?? true,
       codeFontFamily: json['codeFontFamily'] as String? ?? 'monospace',

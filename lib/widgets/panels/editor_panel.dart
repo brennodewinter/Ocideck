@@ -102,6 +102,13 @@ class EditorPanel extends ConsumerWidget {
                     imgService,
                     searchPaths,
                     deck.projectPath,
+                    (variants) {
+                      final first = deckNotifier.insertSlides(
+                        variants,
+                        afterIndex: idx,
+                      );
+                      if (first >= 0) editorNotifier.select(first);
+                    },
                   ),
                 ),
                 if (slide.type != SlideType.video) ...[
@@ -160,6 +167,8 @@ class EditorPanel extends ConsumerWidget {
       bullets2: newType == SlideType.twoBullets
           ? (slide.bullets2.isNotEmpty ? slide.bullets2 : [''])
           : const [],
+      listStyle: slide.listStyle,
+      showChecklistProgress: slide.showChecklistProgress,
       imagePath: keepsImage ? slide.imagePath : '',
       imagePath2: newType == SlideType.twoImages ? slide.imagePath2 : '',
       imageCaption: keepsImage ? slide.imageCaption : '',
@@ -197,6 +206,7 @@ class EditorPanel extends ConsumerWidget {
     ImageService imgService,
     List<String> searchPaths,
     String? captionBasePath,
+    ValueChanged<List<Slide>> onAddChartVariants,
   ) {
     switch (slide.type) {
       case SlideType.title:
@@ -289,6 +299,7 @@ class EditorPanel extends ConsumerWidget {
           key: ValueKey(slide.id),
           slide: slide,
           onUpdate: onUpdate,
+          onAddVariants: onAddChartVariants,
           projectPath: captionBasePath,
         );
     }

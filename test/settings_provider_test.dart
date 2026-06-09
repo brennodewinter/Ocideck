@@ -29,6 +29,18 @@ void main() {
     expect(back.codeFontFamily, 'Courier New');
   });
 
+  test('ThemeProfile round-trips checklist styling through JSON', () {
+    const profile = ThemeProfile(
+      checklistCheckedColor: '#00AA00',
+      checklistUncheckedColor: '#CC0000',
+      checklistStrikeThrough: false,
+    );
+    final back = ThemeProfile.fromJson(profile.toJson());
+    expect(back.checklistCheckedColor, '#00AA00');
+    expect(back.checklistUncheckedColor, '#CC0000');
+    expect(back.checklistStrikeThrough, isFalse);
+  });
+
   test('ThemeProfile code styling defaults to the atom-one-dark look', () {
     // Older decks without the fields fall back to the dark editor defaults.
     final back = ThemeProfile.fromJson(const {'name': 'Legacy'});

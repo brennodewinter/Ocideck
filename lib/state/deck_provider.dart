@@ -305,6 +305,55 @@ class DeckNotifier extends StateNotifier<DeckState> {
     _mutate(deck.copyWith(slides: slides));
   }
 
+  /// Hoeveel checklist-items in de hele presentatie momenteel afgevinkt zijn.
+  int get checkedChecklistCount {
+    final deck = state.deck;
+    if (deck == null) return 0;
+    var total = 0;
+    for (final s in deck.slides) {
+      total += s.bullets.where(checklistItemChecked).length;
+      total += s.bullets2.where(checklistItemChecked).length;
+    }
+    return total;
+  }
+
+  /// Vink in één keer alle checklist-items in de hele presentatie uit (bijv.
+  /// om een ingevulde checklist opnieuw te kunnen aflopen). Eén
+  /// ongedaan-maken-stap. No-op wanneer er niets is aangevinkt.
+  void clearAllChecklists() {
+    final deck = state.deck;
+    if (deck == null) return;
+    String uncheck(String bullet) => checklistItemChecked(bullet)
+        ? checklistBullet(
+            level: bulletLevel(bullet),
+            text: checklistItemText(bullet),
+            checked: false,
+          )
+        : bullet;
+    var changed = false;
+    final slides = <Slide>[];
+    for (final s in deck.slides) {
+      if (s.bullets.any(checklistItemChecked) ||
+          s.bullets2.any(checklistItemChecked)) {
+        changed = true;
+        slides.add(
+          s.copyWith(
+            bullets: [for (final b in s.bullets) uncheck(b)],
+            bullets2: [for (final b in s.bullets2) uncheck(b)],
+          ),
+        );
+      } else {
+        slides.add(s);
+      }
+    }
+    // Bump de revisie zodat de editor van de geselecteerde slide remount en de
+    // uitgevinkte checkboxen ook in het invoerpaneel toont (niet alleen in de
+    // slidepreview).
+    if (changed) {
+      _mutate(deck.copyWith(slides: slides), bumpRevision: true);
+    }
+  }
+
   // ── Zoeken & vervangen ─────────────────────────────────────────────────────
 
   /// Tel hoe vaak [query] in alle tekstvelden van de presentatie voorkomt.
@@ -509,7 +558,14 @@ class DeckNotifier extends StateNotifier<DeckState> {
   /// binnen [_coalesceWindow] valt, wordt geen nieuwe ongedaan-stap aangemaakt
   /// (zodat typen niet per teken een aparte stap oplevert). Een [coalesceKey]
   /// van null markeert een losse, discrete stap.
-  void _mutate(Deck deck, {String? coalesceKey}) {
+  ///
+  /// Wanneer [bumpRevision] waar is, wordt de inhouds-revisie opgehoogd. Dat
+  /// dwingt de editor-subtree (die op `revision` is gesleuteld) om te remounten
+  /// en zijn velden opnieuw uit de slide te laden. Nodig bij deck-brede
+  /// bewerkingen die de huidige slide aanpassen zonder dat de editor zelf de
+  /// bron van de wijziging was (anders blijft de editor de oude, gecachte
+  /// waarden tonen).
+  void _mutate(Deck deck, {String? coalesceKey, bool bumpRevision = false}) {
     final previous = state.deck;
     if (previous != null) {
       final now = DateTime.now();
@@ -532,6 +588,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
       isDirty: true,
       canUndo: _undoStack.isNotEmpty,
       canRedo: false,
+      revision: bumpRevision ? state.revision + 1 : null,
     );
   }
 }

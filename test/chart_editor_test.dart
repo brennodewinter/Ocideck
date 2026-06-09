@@ -4,13 +4,21 @@ import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/editors/chart_editor.dart';
 
-Widget _host(Slide slide, ValueChanged<Slide> onUpdate) {
+Widget _host(
+  Slide slide,
+  ValueChanged<Slide> onUpdate, {
+  ValueChanged<List<Slide>>? onAddVariants,
+}) {
   return MaterialApp(
     home: Scaffold(
       body: SizedBox(
         width: 900,
         height: 650,
-        child: ChartEditor(slide: slide, onUpdate: onUpdate),
+        child: ChartEditor(
+          slide: slide,
+          onUpdate: onUpdate,
+          onAddVariants: onAddVariants,
+        ),
       ),
     ),
   );
@@ -136,10 +144,7 @@ void main() {
     expect(find.byKey(const ValueKey('chart-min-bound')), findsOneWidget);
     expect(find.byKey(const ValueKey('chart-max-bound')), findsOneWidget);
 
-    await tester.enterText(
-      find.byKey(const ValueKey('chart-max-bound')),
-      '20',
-    );
+    await tester.enterText(find.byKey(const ValueKey('chart-max-bound')), '20');
     await tester.pump();
 
     expect(ChartSpec.parse(updated.customMarkdown).maxBound, 20);
@@ -162,5 +167,40 @@ void main() {
 
     expect(find.byKey(const ValueKey('chart-min-bound')), findsNothing);
     expect(find.byKey(const ValueKey('chart-max-bound')), findsNothing);
+  });
+
+  testWidgets('chart variants reuse data in the chosen order', (tester) async {
+    const spec = ChartSpec(
+      type: ChartType.bar,
+      title: 'Omzet',
+      x: ['A', 'B'],
+      series: [
+        ChartSeries(name: 'Waarde', data: [10, 20], color: '#003399'),
+      ],
+    );
+    final slide = Slide.create(
+      SlideType.chart,
+    ).copyWith(customMarkdown: spec.toBlock());
+    List<Slide>? variants;
+
+    await tester.pumpWidget(
+      _host(slide, (_) {}, onAddVariants: (value) => variants = value),
+    );
+    await tester.tap(find.byKey(const ValueKey('chart-create-variants')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('chart-variant-down-0')));
+    await tester.pump();
+    await tester.tap(find.text('Slides toevoegen'));
+    await tester.pump();
+
+    final specs = variants!.map((s) => ChartSpec.parse(s.customMarkdown));
+    expect(specs.map((s) => s.type), [
+      ChartType.pie,
+      ChartType.line,
+      ChartType.radar,
+    ]);
+    expect(specs.first.x, ['A', 'B']);
+    expect(specs.first.series.single.data, [10, 20]);
+    expect(specs.first.series.single.color, '#003399');
   });
 }

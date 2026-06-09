@@ -2327,6 +2327,35 @@ const _dutchSourceStrings = {
 const _dutchSourceStringAdditions = {
   'en': {
     'Annuleren': 'Cancel',
+    'Checklist': 'Task checklist',
+    'Voortgangsgrafiek tonen': 'Show progress chart',
+    'Toont afgevinkt en niet afgevinkt als percentages.':
+        'Shows checked and unchecked items as percentages.',
+    'Afgevinkt': 'Checked',
+    'Niet afgevinkt': 'Unchecked',
+    'Er zijn geen aangevinkte checklist-items om te legen.':
+        'There are no checked checklist items to clear.',
+    'Alle checkboxen legen?': 'Clear all checkboxes?',
+    'Hiermee worden alle': 'This will uncheck all',
+    'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+        'checked checklist items in the entire presentation. You can undo this with Ctrl/Cmd+Z.',
+    'Alles legen': 'Clear all',
+    'checklist-items uitgevinkt.': 'checklist items unchecked.',
+    'Alle checkboxen legen': 'Clear all checkboxes',
+    'Afgevinkte tekst doorhalen': 'Strike through checked text',
+    'Toont een streep door voltooide checklistitems.':
+        'Shows completed checklist items with a strike-through.',
+    'Na media automatisch doorgaan': 'Advance automatically after media',
+    'Opsomming': 'Bullets',
+    'Nummering': 'Numbering',
+    'Varianten': 'Variants',
+    'Grafiekvarianten maken': 'Create chart variants',
+    'Slides toevoegen': 'Add slides',
+    'Omhoog': 'Move up',
+    'Omlaag': 'Move down',
+    'Niet toevoegen': 'Do not add',
+    'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+        'These slides use the same data, colors, and title. Use the arrows to choose their order after the current slide.',
     'Afbeelding': 'Image',
     'Broncode': 'Source code',
     'Bullet': 'Bullet',
@@ -2406,6 +2435,36 @@ const _dutchSourceStringAdditions = {
   },
   'it': {
     'Annuleren': 'Annulla',
+    'Checklist': 'Lista di controllo',
+    'Voortgangsgrafiek tonen': 'Mostra grafico di avanzamento',
+    'Toont afgevinkt en niet afgevinkt als percentages.':
+        'Mostra gli elementi selezionati e non selezionati in percentuale.',
+    'Afgevinkt': 'Selezionati',
+    'Niet afgevinkt': 'Non selezionati',
+    'Er zijn geen aangevinkte checklist-items om te legen.':
+        'Non ci sono elementi della lista selezionati da azzerare.',
+    'Alle checkboxen legen?': 'Azzerare tutte le caselle?',
+    'Hiermee worden alle': 'Verranno deselezionati tutti i',
+    'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+        'elementi selezionati della lista in tutta la presentazione. Puoi annullare con Ctrl/Cmd+Z.',
+    'Alles legen': 'Azzera tutto',
+    'checklist-items uitgevinkt.': 'elementi della lista deselezionati.',
+    'Alle checkboxen legen': 'Azzera tutte le caselle',
+    'Afgevinkte tekst doorhalen': 'Barra il testo selezionato',
+    'Toont een streep door voltooide checklistitems.':
+        'Mostra gli elementi completati con il testo barrato.',
+    'Na media automatisch doorgaan':
+        'Avanza automaticamente dopo i contenuti multimediali',
+    'Opsomming': 'Elenco puntato',
+    'Nummering': 'Numerazione',
+    'Varianten': 'Varianti',
+    'Grafiekvarianten maken': 'Crea varianti del grafico',
+    'Slides toevoegen': 'Aggiungi diapositive',
+    'Omhoog': 'Sposta su',
+    'Omlaag': 'Sposta giù',
+    'Niet toevoegen': 'Non aggiungere',
+    'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+        'Queste diapositive usano gli stessi dati, colori e titolo. Usa le frecce per scegliere l’ordine dopo la diapositiva corrente.',
     'Spider': 'Radar',
     'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
         'Un grafico radar richiede almeno tre etichette (assi); ogni serie forma una superficie.',
@@ -2638,6 +2697,35 @@ const _dutchSourceStringAdditions = {
   },
   'de': {
     'Annuleren': 'Abbrechen',
+    'Checklist': 'Checkliste',
+    'Voortgangsgrafiek tonen': 'Fortschrittsdiagramm anzeigen',
+    'Toont afgevinkt en niet afgevinkt als percentages.':
+        'Zeigt erledigte und offene Einträge als Prozentwerte.',
+    'Afgevinkt': 'Erledigt',
+    'Niet afgevinkt': 'Offen',
+    'Er zijn geen aangevinkte checklist-items om te legen.':
+        'Es gibt keine angehakten Checklisten-Einträge zum Zurücksetzen.',
+    'Alle checkboxen legen?': 'Alle Kontrollkästchen leeren?',
+    'Hiermee worden alle': 'Damit werden die Häkchen von allen',
+    'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+        'angehakten Checklisten-Einträgen in der gesamten Präsentation entfernt. Du kannst dies mit Strg/Cmd+Z rückgängig machen.',
+    'Alles legen': 'Alle leeren',
+    'checklist-items uitgevinkt.': 'Checklisten-Einträge zurückgesetzt.',
+    'Alle checkboxen legen': 'Alle Kontrollkästchen leeren',
+    'Afgevinkte tekst doorhalen': 'Erledigten Text durchstreichen',
+    'Toont een streep door voltooide checklistitems.':
+        'Zeigt erledigte Checklistenpunkte durchgestrichen an.',
+    'Na media automatisch doorgaan': 'Nach Medienwiedergabe automatisch weiter',
+    'Opsomming': 'Aufzählung',
+    'Nummering': 'Nummerierung',
+    'Varianten': 'Varianten',
+    'Grafiekvarianten maken': 'Diagrammvarianten erstellen',
+    'Slides toevoegen': 'Folien hinzufügen',
+    'Omhoog': 'Nach oben',
+    'Omlaag': 'Nach unten',
+    'Niet toevoegen': 'Nicht hinzufügen',
+    'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+        'Diese Folien verwenden dieselben Daten, Farben und denselben Titel. Lege mit den Pfeilen die Reihenfolge nach der aktuellen Folie fest.',
     'Spider': 'Netz',
     'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
         'Ein Netzdiagramm braucht mindestens drei Beschriftungen (Achsen); jede Reihe bildet eine Fläche.',
@@ -2871,6 +2959,35 @@ const _dutchSourceStringAdditions = {
   },
   'fr': {
     'Annuleren': 'Annuler',
+    'Checklist': 'Liste de contrôle',
+    'Voortgangsgrafiek tonen': 'Afficher le graphique de progression',
+    'Toont afgevinkt en niet afgevinkt als percentages.':
+        'Affiche les éléments cochés et non cochés en pourcentage.',
+    'Afgevinkt': 'Coché',
+    'Niet afgevinkt': 'Non coché',
+    'Er zijn geen aangevinkte checklist-items om te legen.':
+        'Aucun élément de liste coché à effacer.',
+    'Alle checkboxen legen?': 'Effacer toutes les cases à cocher ?',
+    'Hiermee worden alle': 'Cela décochera tous les',
+    'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+        'éléments de liste cochés dans toute la présentation. Vous pouvez annuler avec Ctrl/Cmd+Z.',
+    'Alles legen': 'Tout effacer',
+    'checklist-items uitgevinkt.': 'éléments de liste décochés.',
+    'Alle checkboxen legen': 'Effacer toutes les cases à cocher',
+    'Afgevinkte tekst doorhalen': 'Barrer le texte coché',
+    'Toont een streep door voltooide checklistitems.':
+        'Affiche les éléments terminés avec un texte barré.',
+    'Na media automatisch doorgaan': 'Avancer automatiquement après le média',
+    'Opsomming': 'Liste à puces',
+    'Nummering': 'Numérotation',
+    'Varianten': 'Variantes',
+    'Grafiekvarianten maken': 'Créer des variantes du graphique',
+    'Slides toevoegen': 'Ajouter les diapositives',
+    'Omhoog': 'Monter',
+    'Omlaag': 'Descendre',
+    'Niet toevoegen': 'Ne pas ajouter',
+    'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+        'Ces diapositives utilisent les mêmes données, couleurs et titre. Utilisez les flèches pour choisir leur ordre après la diapositive actuelle.',
     'Spider': 'Radar',
     'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
         'Un graphique radar nécessite au moins trois étiquettes (axes); chaque série forme une surface.',
@@ -3104,6 +3221,36 @@ const _dutchSourceStringAdditions = {
   },
   'es': {
     'Annuleren': 'Cancelar',
+    'Checklist': 'Lista de verificación',
+    'Voortgangsgrafiek tonen': 'Mostrar gráfico de progreso',
+    'Toont afgevinkt en niet afgevinkt als percentages.':
+        'Muestra los elementos marcados y sin marcar como porcentajes.',
+    'Afgevinkt': 'Marcado',
+    'Niet afgevinkt': 'Sin marcar',
+    'Er zijn geen aangevinkte checklist-items om te legen.':
+        'No hay elementos de lista marcados que vaciar.',
+    'Alle checkboxen legen?': '¿Vaciar todas las casillas?',
+    'Hiermee worden alle': 'Se desmarcarán todos los',
+    'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+        'elementos de lista marcados de toda la presentación. Puedes deshacerlo con Ctrl/Cmd+Z.',
+    'Alles legen': 'Vaciar todo',
+    'checklist-items uitgevinkt.': 'elementos de lista desmarcados.',
+    'Alle checkboxen legen': 'Vaciar todas las casillas',
+    'Afgevinkte tekst doorhalen': 'Tachar el texto marcado',
+    'Toont een streep door voltooide checklistitems.':
+        'Muestra tachados los elementos completados.',
+    'Na media automatisch doorgaan':
+        'Avanzar automáticamente tras el contenido multimedia',
+    'Opsomming': 'Viñetas',
+    'Nummering': 'Numeración',
+    'Varianten': 'Variantes',
+    'Grafiekvarianten maken': 'Crear variantes del gráfico',
+    'Slides toevoegen': 'Añadir diapositivas',
+    'Omhoog': 'Subir',
+    'Omlaag': 'Bajar',
+    'Niet toevoegen': 'No añadir',
+    'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+        'Estas diapositivas usan los mismos datos, colores y título. Usa las flechas para elegir su orden después de la diapositiva actual.',
     'Spider': 'Radar',
     'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
         'Un gráfico radar necesita al menos tres etiquetas (ejes); cada serie forma una superficie.',
@@ -3337,6 +3484,35 @@ const _dutchSourceStringAdditions = {
   },
   'fy': {
     'Annuleren': 'Annulearje',
+    'Checklist': 'Kontrôlelist',
+    'Voortgangsgrafiek tonen': 'Fuortgongsgrafyk toane',
+    'Toont afgevinkt en niet afgevinkt als percentages.':
+        'Toant ôffinkte en net ôffinkte items as persintaazjes.',
+    'Afgevinkt': 'Ôffinkt',
+    'Niet afgevinkt': 'Net ôffinkt',
+    'Er zijn geen aangevinkte checklist-items om te legen.':
+        'Der binne gjin oanfinkte checklist-items om leech te meitsjen.',
+    'Alle checkboxen legen?': 'Alle oanfinkfakjes leechje?',
+    'Hiermee worden alle': 'Hjirmei wurde alle',
+    'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+        'oanfinkte checklist-items yn de hiele presintaasje útfinkt. Dit kinst weromdraaie mei Ctrl/Cmd+Z.',
+    'Alles legen': 'Alles leechje',
+    'checklist-items uitgevinkt.': 'checklist-items útfinke.',
+    'Alle checkboxen legen': 'Alle oanfinkfakjes leechje',
+    'Afgevinkte tekst doorhalen': 'Ôffinkte tekst trochstreekje',
+    'Toont een streep door voltooide checklistitems.':
+        'Toant foltôge kontrôlelistitems mei in streek der troch.',
+    'Na media automatisch doorgaan': 'Nei media automatysk trochgean',
+    'Opsomming': 'Puntelist',
+    'Nummering': 'Nûmering',
+    'Varianten': 'Farianten',
+    'Grafiekvarianten maken': 'Grafykfarianten meitsje',
+    'Slides toevoegen': 'Dia’s tafoegje',
+    'Omhoog': 'Omheech',
+    'Omlaag': 'Omleech',
+    'Niet toevoegen': 'Net tafoegje',
+    'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+        'Dizze dia’s brûke deselde gegevens, kleuren en titel. Kies mei de pylken de folchoarder nei de aktive dia.',
     'Spider': 'Spider',
     'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
         'In spiderdiagram hat op syn minst trije labels (assen) nedich; eltse rige foarmet in flak.',
@@ -3567,6 +3743,35 @@ const _dutchSourceStringAdditions = {
   },
   'pap': {
     'Annuleren': 'Kanselá',
+    'Checklist': 'Lista di kontrol',
+    'Voortgangsgrafiek tonen': 'Mustra gráfiko di progreso',
+    'Toont afgevinkt en niet afgevinkt als percentages.':
+        'Ta mustra elementonan marká i no marká komo porsentahe.',
+    'Afgevinkt': 'Marká',
+    'Niet afgevinkt': 'No marká',
+    'Er zijn geen aangevinkte checklist-items om te legen.':
+        'No tin elemento di lista marká pa kita.',
+    'Alle checkboxen legen?': 'Kita tur kasita di chèk?',
+    'Hiermee worden alle': 'Esaki ta desmarká tur',
+    'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+        'elemento di lista marká den henter e presentashon. Bo por deshasé esaki ku Ctrl/Cmd+Z.',
+    'Alles legen': 'Kita tur',
+    'checklist-items uitgevinkt.': 'elemento di lista desmarká.',
+    'Alle checkboxen legen': 'Kita tur kasita di chèk',
+    'Afgevinkte tekst doorhalen': 'Raya teksto marká',
+    'Toont een streep door voltooide checklistitems.':
+        'Ta mustra elementonan kompletá ku un raya den e teksto.',
+    'Na media automatisch doorgaan': 'Sigui outomátiko despues di multimedia',
+    'Opsomming': 'Lista ku punto',
+    'Nummering': 'Numerashon',
+    'Varianten': 'Variantenan',
+    'Grafiekvarianten maken': 'Krea variantenan di gráfiko',
+    'Slides toevoegen': 'Agregá diapositivanan',
+    'Omhoog': 'Move ariba',
+    'Omlaag': 'Move abou',
+    'Niet toevoegen': 'No agregá',
+    'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+        'E diapositivanan aki ta usa e mesun datonan, kolónan i título. Usa e flechanan pa skohe nan órden despues di e diapositiva aktual.',
     'Spider': 'Radar',
     'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
         'Un grafiko radar mester di por lo ménos tres etiketa (ehe); kada serie ta forma un superfisie.',

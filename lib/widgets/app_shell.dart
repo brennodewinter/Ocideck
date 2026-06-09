@@ -886,6 +886,53 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       );
     }
 
+    Future<void> clearAllChecklists() async {
+      final count = deckNotifier.checkedChecklistCount;
+      if (count == 0) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              l10n.d('Er zijn geen aangevinkte checklist-items om te legen.'),
+            ),
+          ),
+        );
+        return;
+      }
+      final confirmed = await showDialog<bool>(
+        context: context,
+        builder: (ctx) {
+          final l10n = ctx.l10n;
+          return AlertDialog(
+            title: Text(l10n.d('Alle checkboxen legen?')),
+            content: Text(
+              '${l10n.d('Hiermee worden alle')} $count '
+              '${l10n.d('aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.')}',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, false),
+                child: Text(l10n.t('cancel')),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(ctx, true),
+                child: Text(l10n.d('Alles legen')),
+              ),
+            ],
+          );
+        },
+      );
+      if (confirmed != true) return;
+      deckNotifier.clearAllChecklists();
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            '$count ${l10n.d('checklist-items uitgevinkt.')}',
+          ),
+        ),
+      );
+    }
+
     Future<void> openImageCarousel() async {
       final idx = editor.selectedIndex.clamp(0, deck.slides.length - 1);
       final slide = deck.slides[idx];
@@ -979,6 +1026,14 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         tlp: deck.tlp,
         annotations: deck.annotations,
         onAnnotationsChanged: deckNotifier.setAnnotations,
+        onSlideChanged: (updated) {
+          final index = deckNotifier.currentState.deck?.slides.indexWhere(
+            (slide) => slide.id == updated.id,
+          );
+          if (index != null && index >= 0) {
+            deckNotifier.updateSlide(index, updated);
+          }
+        },
       );
     }
 
@@ -1273,6 +1328,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                       importUrl();
                     case 'find':
                       openFindReplace();
+                    case 'clear_checklists':
+                      clearAllChecklists();
                     case 'full_preview':
                       openFullDeckPreview();
                     case 'properties':
@@ -1315,6 +1372,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                   menuItem('import_url', Icons.link, l10n.t('importUrl')),
                   const PopupMenuDivider(),
                   menuItem('find', Icons.find_replace, l10n.t('findReplace')),
+                  menuItem(
+                    'clear_checklists',
+                    Icons.check_box_outline_blank,
+                    l10n.d('Alle checkboxen legen'),
+                  ),
                   menuItem(
                     'full_preview',
                     Icons.preview_outlined,

@@ -75,6 +75,91 @@ void main() {
     );
   });
 
+  test('autoplay audio or video takes precedence over slide timing', () {
+    expect(
+      autoAdvanceWaitsForMedia(
+        Slide.create(SlideType.bullets).copyWith(
+          advanceDuration: 3,
+          audioPath: 'sound.mp3',
+          audioAutoplay: true,
+        ),
+      ),
+      isTrue,
+    );
+    expect(
+      autoAdvanceWaitsForMedia(
+        Slide.create(SlideType.video).copyWith(
+          advanceDuration: 3,
+          videoPath: 'movie.mp4',
+          videoAutoplay: true,
+        ),
+      ),
+      isTrue,
+    );
+    expect(
+      autoAdvanceWaitsForMedia(
+        Slide.create(SlideType.video).copyWith(
+          advanceDuration: 3,
+          videoPath: 'movie.mp4',
+          videoAutoplay: false,
+        ),
+      ),
+      isFalse,
+    );
+  });
+
+  testWidgets('slide timer does not interrupt autoplay media', (tester) async {
+    final mediaSlides = [
+      Slide.create(SlideType.video).copyWith(
+        title: 'Video blijft staan',
+        videoPath: '/tmp/does-not-exist.mp4',
+        videoAutoplay: true,
+        advanceDuration: 3,
+      ),
+      Slide.create(SlideType.bullets).copyWith(title: 'Na video'),
+    ];
+
+    await tester.pumpWidget(_host(mediaSlides));
+    await tester.pump(const Duration(seconds: 4));
+
+    expect(find.text('Video blijft staan'), findsOneWidget);
+    expect(find.text('Na video'), findsNothing);
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('checklist changes during presenting are persisted', (
+    tester,
+  ) async {
+    Slide? updated;
+    final checklistSlides = [
+      Slide.create(SlideType.bullets).copyWith(
+        title: 'Taken',
+        bullets: ['[ ] Live afvinken'],
+        listStyle: ListStyle.checklist,
+      ),
+    ];
+    await tester.pumpWidget(
+      MaterialApp(
+        home: FullscreenPresenter(
+          slides: checklistSlides,
+          projectPath: null,
+          themeProfile: const ThemeProfile(),
+          initialIndex: 0,
+          onSlideChanged: (slide) => updated = slide,
+        ),
+      ),
+    );
+    await tester.pump();
+
+    await tester.tap(
+      find.byKey(const ValueKey('checklist-preview-toggle-0-0')),
+    );
+    await tester.pump();
+
+    expect(updated?.bullets, ['[x] Live afvinken']);
+    expect(find.text('☑ '), findsOneWidget);
+  });
+
   testWidgets('starts in audience view without presenter chrome', (
     tester,
   ) async {

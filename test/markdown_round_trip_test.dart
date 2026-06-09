@@ -90,6 +90,51 @@ void main() {
       expect(out.bullets, ['Punt een', 'Punt twee']);
     });
 
+    test('numbered list style round-trips', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.bullets).copyWith(
+              title: 'Stappen',
+              bullets: ['Eerst', '\tDetail', 'Daarna'],
+              listStyle: ListStyle.numbered,
+            ),
+          ],
+        ),
+      );
+      final out = service.parseDeck(markdown)!.slides.single;
+      expect(out.listStyle, ListStyle.numbered);
+      expect(out.bullets, ['Eerst', '\tDetail', 'Daarna']);
+      expect(markdown, contains('1. Eerst'));
+      expect(markdown, contains('2. Daarna'));
+    });
+
+    test('checklist style and checked items round-trip', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.bullets).copyWith(
+              title: 'Taken',
+              bullets: ['[x] Gedaan', '[ ] Nog doen', '\t[x] Subtaak'],
+              listStyle: ListStyle.checklist,
+              showChecklistProgress: true,
+            ),
+          ],
+        ),
+      );
+      final out = service.parseDeck(markdown)!.slides.single;
+      expect(out.listStyle, ListStyle.checklist);
+      expect(out.showChecklistProgress, isTrue);
+      expect(out.bullets, ['[x] Gedaan', '[ ] Nog doen', '\t[x] Subtaak']);
+      expect(markdown, contains('- [x] Gedaan'));
+      expect(markdown, contains('- [ ] Nog doen'));
+      expect(markdown, contains('ocideck_checklist_progress: true'));
+    });
+
     test('twoBullets slide keeps both bullet columns', () {
       final out = _roundTrip(
         Slide.create(SlideType.twoBullets).copyWith(
@@ -127,7 +172,9 @@ void main() {
         Deck(
           title: 'Demo',
           slides: [
-            Slide.create(SlideType.twoBullets).copyWith(bullets: ['A'], bullets2: ['B']),
+            Slide.create(
+              SlideType.twoBullets,
+            ).copyWith(bullets: ['A'], bullets2: ['B']),
           ],
         ),
       );
@@ -135,6 +182,24 @@ void main() {
       final out = service.parseDeck(md)!.slides.single;
       expect(out.columnTitle1, '');
       expect(out.columnTitle2, '');
+    });
+
+    test('two-column checklist export respects disabled strike-through', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          themeProfile: const ThemeProfile(checklistStrikeThrough: false),
+          slides: [
+            Slide.create(SlideType.twoBullets).copyWith(
+              bullets: ['[x] Klaar'],
+              bullets2: ['[ ] Open'],
+              listStyle: ListStyle.checklist,
+            ),
+          ],
+        ),
+      );
+      expect(markdown, isNot(contains('text-decoration:line-through')));
     });
 
     test('bulletsImage slide keeps bullets, image, size and caption', () {
