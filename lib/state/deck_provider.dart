@@ -305,6 +305,50 @@ class DeckNotifier extends StateNotifier<DeckState> {
     _mutate(deck.copyWith(slides: slides));
   }
 
+  /// Hoeveel checklist-items in de hele presentatie momenteel afgevinkt zijn.
+  int get checkedChecklistCount {
+    final deck = state.deck;
+    if (deck == null) return 0;
+    var total = 0;
+    for (final s in deck.slides) {
+      total += s.bullets.where(checklistItemChecked).length;
+      total += s.bullets2.where(checklistItemChecked).length;
+    }
+    return total;
+  }
+
+  /// Vink in één keer alle checklist-items in de hele presentatie uit (bijv.
+  /// om een ingevulde checklist opnieuw te kunnen aflopen). Eén
+  /// ongedaan-maken-stap. No-op wanneer er niets is aangevinkt.
+  void clearAllChecklists() {
+    final deck = state.deck;
+    if (deck == null) return;
+    String uncheck(String bullet) => checklistItemChecked(bullet)
+        ? checklistBullet(
+            level: bulletLevel(bullet),
+            text: checklistItemText(bullet),
+            checked: false,
+          )
+        : bullet;
+    var changed = false;
+    final slides = <Slide>[];
+    for (final s in deck.slides) {
+      if (s.bullets.any(checklistItemChecked) ||
+          s.bullets2.any(checklistItemChecked)) {
+        changed = true;
+        slides.add(
+          s.copyWith(
+            bullets: [for (final b in s.bullets) uncheck(b)],
+            bullets2: [for (final b in s.bullets2) uncheck(b)],
+          ),
+        );
+      } else {
+        slides.add(s);
+      }
+    }
+    if (changed) _mutate(deck.copyWith(slides: slides));
+  }
+
   // ── Zoeken & vervangen ─────────────────────────────────────────────────────
 
   /// Tel hoe vaak [query] in alle tekstvelden van de presentatie voorkomt.

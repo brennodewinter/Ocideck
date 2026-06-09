@@ -1391,72 +1391,92 @@ class _ChecklistProgress extends StatelessWidget {
     );
 
     final interaction = _ChecklistInteractionScope.maybeOf(context);
-    Widget pie(bool? hovered) => PieChart(
-      key: const ValueKey('checklist-progress-pie'),
-      PieChartData(
-        sectionsSpace: w * 0.002,
-        centerSpaceRadius: 0,
-        startDegreeOffset: -90,
-        sections: [
-          if (checkedPercent > 0)
-            PieChartSectionData(
-              value: checkedPercent.toDouble(),
-              color: checkedColor,
-              radius: w * (hovered == true ? 0.088 : 0.081),
-              title: '$checkedPercent%',
-              titleStyle: labelStyle.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          if (openPercent > 0)
-            PieChartSectionData(
-              value: openPercent.toDouble(),
-              color: openColor,
-              radius: w * (hovered == false ? 0.088 : 0.081),
-              title: '$openPercent%',
-              titleStyle: labelStyle.copyWith(fontWeight: FontWeight.bold),
-            ),
-        ],
-        pieTouchData: PieTouchData(
-          enabled: interaction?.enabled == true,
-          touchCallback: (event, response) {
-            if (interaction?.enabled != true) return;
-            final index = event.isInterestedForInteractions
-                ? response?.touchedSection?.touchedSectionIndex
-                : null;
-            if (index == null) {
-              interaction!.hovered.value = null;
-            } else if (checkedPercent == 0) {
-              interaction!.hovered.value = false;
-            } else {
-              interaction!.hovered.value = index == 0;
-            }
-          },
-        ),
-      ),
-      duration: Duration.zero,
-    );
 
-    return Semantics(
-      label:
-          '${context.l10n.d('Afgevinkt')} $checkedPercent%, '
-          '${context.l10n.d('Niet afgevinkt')} $openPercent%',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            width: w * 0.36,
-            height: w * 0.19,
-            child: interaction == null
-                ? pie(null)
-                : ValueListenableBuilder<bool?>(
-                    valueListenable: interaction.hovered,
-                    builder: (_, hovered, _) => pie(hovered),
-                  ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Grow the pie to fill the width it is handed instead of staying at a
+        // fixed, tiny size. Every caller gives this widget a bounded column
+        // width, so the chart now scales with the space that is actually
+        // available next to (or above) the bullets.
+        final maxW = constraints.maxWidth.isFinite
+            ? constraints.maxWidth
+            : w * 0.4;
+        final diameter = maxW.clamp(w * 0.26, w * 0.38).toDouble();
+        final baseRadius = diameter * 0.44;
+        final hoverRadius = diameter * 0.48;
+        final pieTitleStyle = _applyFont(
+          font,
+          TextStyle(
+            fontSize: diameter * 0.085,
+            height: 1.1,
+            fontWeight: FontWeight.bold,
+            color: textColor,
           ),
-          SizedBox(height: w * 0.008),
+        );
+
+        Widget pie(bool? hovered) => PieChart(
+          key: const ValueKey('checklist-progress-pie'),
+          PieChartData(
+            sectionsSpace: w * 0.002,
+            centerSpaceRadius: 0,
+            startDegreeOffset: -90,
+            sections: [
+              if (checkedPercent > 0)
+                PieChartSectionData(
+                  value: checkedPercent.toDouble(),
+                  color: checkedColor,
+                  radius: hovered == true ? hoverRadius : baseRadius,
+                  title: '$checkedPercent%',
+                  titleStyle: pieTitleStyle.copyWith(color: Colors.white),
+                ),
+              if (openPercent > 0)
+                PieChartSectionData(
+                  value: openPercent.toDouble(),
+                  color: openColor,
+                  radius: hovered == false ? hoverRadius : baseRadius,
+                  title: '$openPercent%',
+                  titleStyle: pieTitleStyle,
+                ),
+            ],
+            pieTouchData: PieTouchData(
+              enabled: interaction?.enabled == true,
+              touchCallback: (event, response) {
+                if (interaction?.enabled != true) return;
+                final index = event.isInterestedForInteractions
+                    ? response?.touchedSection?.touchedSectionIndex
+                    : null;
+                if (index == null) {
+                  interaction!.hovered.value = null;
+                } else if (checkedPercent == 0) {
+                  interaction!.hovered.value = false;
+                } else {
+                  interaction!.hovered.value = index == 0;
+                }
+              },
+            ),
+          ),
+          duration: Duration.zero,
+        );
+
+        return Semantics(
+          label:
+              '${context.l10n.d('Afgevinkt')} $checkedPercent%, '
+              '${context.l10n.d('Niet afgevinkt')} $openPercent%',
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: diameter,
+                height: diameter,
+                child: interaction == null
+                    ? pie(null)
+                    : ValueListenableBuilder<bool?>(
+                        valueListenable: interaction.hovered,
+                        builder: (_, hovered, _) => pie(hovered),
+                      ),
+              ),
+              SizedBox(height: w * 0.008),
           MouseRegion(
             key: const ValueKey('checklist-progress-checked'),
             onEnter: interaction?.enabled != true
@@ -1485,8 +1505,10 @@ class _ChecklistProgress extends StatelessWidget {
               ),
             ),
           ),
-        ],
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
