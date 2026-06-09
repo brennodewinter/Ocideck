@@ -2333,6 +2333,15 @@ const _dutchSourceStringAdditions = {
         'Shows checked and unchecked items as percentages.',
     'Afgevinkt': 'Checked',
     'Niet afgevinkt': 'Unchecked',
+    'Er zijn geen aangevinkte checklist-items om te legen.':
+        'There are no checked checklist items to clear.',
+    'Alle checkboxen legen?': 'Clear all checkboxes?',
+    'Hiermee worden alle': 'This will uncheck all',
+    'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+        'checked checklist items in the entire presentation. You can undo this with Ctrl/Cmd+Z.',
+    'Alles legen': 'Clear all',
+    'checklist-items uitgevinkt.': 'checklist items unchecked.',
+    'Alle checkboxen legen': 'Clear all checkboxes',
     'Afgevinkte tekst doorhalen': 'Strike through checked text',
     'Toont een streep door voltooide checklistitems.':
         'Shows completed checklist items with a strike-through.',
@@ -2432,6 +2441,15 @@ const _dutchSourceStringAdditions = {
         'Mostra gli elementi selezionati e non selezionati in percentuale.',
     'Afgevinkt': 'Selezionati',
     'Niet afgevinkt': 'Non selezionati',
+    'Er zijn geen aangevinkte checklist-items om te legen.':
+        'Non ci sono elementi della lista selezionati da azzerare.',
+    'Alle checkboxen legen?': 'Azzerare tutte le caselle?',
+    'Hiermee worden alle': 'Verranno deselezionati tutti i',
+    'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+        'elementi selezionati della lista in tutta la presentazione. Puoi annullare con Ctrl/Cmd+Z.',
+    'Alles legen': 'Azzera tutto',
+    'checklist-items uitgevinkt.': 'elementi della lista deselezionati.',
+    'Alle checkboxen legen': 'Azzera tutte le caselle',
     'Afgevinkte tekst doorhalen': 'Barra il testo selezionato',
     'Toont een streep door voltooide checklistitems.':
         'Mostra gli elementi completati con il testo barrato.',
@@ -2685,6 +2703,15 @@ const _dutchSourceStringAdditions = {
         'Zeigt erledigte und offene Einträge als Prozentwerte.',
     'Afgevinkt': 'Erledigt',
     'Niet afgevinkt': 'Offen',
+    'Er zijn geen aangevinkte checklist-items om te legen.':
+        'Es gibt keine angehakten Checklisten-Einträge zum Zurücksetzen.',
+    'Alle checkboxen legen?': 'Alle Kontrollkästchen leeren?',
+    'Hiermee worden alle': 'Damit werden die Häkchen von allen',
+    'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+        'angehakten Checklisten-Einträgen in der gesamten Präsentation entfernt. Du kannst dies mit Strg/Cmd+Z rückgängig machen.',
+    'Alles legen': 'Alle leeren',
+    'checklist-items uitgevinkt.': 'Checklisten-Einträge zurückgesetzt.',
+    'Alle checkboxen legen': 'Alle Kontrollkästchen leeren',
     'Afgevinkte tekst doorhalen': 'Erledigten Text durchstreichen',
     'Toont een streep door voltooide checklistitems.':
         'Zeigt erledigte Checklistenpunkte durchgestrichen an.',
@@ -2938,6 +2965,15 @@ const _dutchSourceStringAdditions = {
         'Affiche les éléments cochés et non cochés en pourcentage.',
     'Afgevinkt': 'Coché',
     'Niet afgevinkt': 'Non coché',
+    'Er zijn geen aangevinkte checklist-items om te legen.':
+        'Aucun élément de liste coché à effacer.',
+    'Alle checkboxen legen?': 'Effacer toutes les cases à cocher ?',
+    'Hiermee worden alle': 'Cela décochera tous les',
+    'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+        'éléments de liste cochés dans toute la présentation. Vous pouvez annuler avec Ctrl/Cmd+Z.',
+    'Alles legen': 'Tout effacer',
+    'checklist-items uitgevinkt.': 'éléments de liste décochés.',
+    'Alle checkboxen legen': 'Effacer toutes les cases à cocher',
     'Afgevinkte tekst doorhalen': 'Barrer le texte coché',
     'Toont een streep door voltooide checklistitems.':
         'Affiche les éléments terminés avec un texte barré.',
@@ -3191,6 +3227,15 @@ const _dutchSourceStringAdditions = {
         'Muestra los elementos marcados y sin marcar como porcentajes.',
     'Afgevinkt': 'Marcado',
     'Niet afgevinkt': 'Sin marcar',
+    'Er zijn geen aangevinkte checklist-items om te legen.':
+        'No hay elementos de lista marcados que vaciar.',
+    'Alle checkboxen legen?': '¿Vaciar todas las casillas?',
+    'Hiermee worden alle': 'Se desmarcarán todos los',
+    'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+        'elementos de lista marcados de toda la presentación. Puedes deshacerlo con Ctrl/Cmd+Z.',
+    'Alles legen': 'Vaciar todo',
+    'checklist-items uitgevinkt.': 'elementos de lista desmarcados.',
+    'Alle checkboxen legen': 'Vaciar todas las casillas',
     'Afgevinkte tekst doorhalen': 'Tachar el texto marcado',
     'Toont een streep door voltooide checklistitems.':
         'Muestra tachados los elementos completados.',
@@ -3445,6 +3490,15 @@ const _dutchSourceStringAdditions = {
         'Toant ôffinkte en net ôffinkte items as persintaazjes.',
     'Afgevinkt': 'Ôffinkt',
     'Niet afgevinkt': 'Net ôffinkt',
+    'Er zijn geen aangevinkte checklist-items om te legen.':
+        'Der binne gjin oanfinkte checklist-items om leech te meitsjen.',
+    'Alle checkboxen legen?': 'Alle oanfinkfakjes leechje?',
+    'Hiermee worden alle': 'Hjirmei wurde alle',
+    'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+        'oanfinkte checklist-items yn de hiele presintaasje útfinkt. Dit kinst weromdraaie mei Ctrl/Cmd+Z.',
+    'Alles legen': 'Alles leechje',
+    'checklist-items uitgevinkt.': 'checklist-items útfinke.',
+    'Alle checkboxen legen': 'Alle oanfinkfakjes leechje',
     'Afgevinkte tekst doorhalen': 'Ôffinkte tekst trochstreekje',
     'Toont een streep door voltooide checklistitems.':
         'Toant foltôge kontrôlelistitems mei in streek der troch.',
@@ -3695,6 +3749,15 @@ const _dutchSourceStringAdditions = {
         'Ta mustra elementonan marká i no marká komo porsentahe.',
     'Afgevinkt': 'Marká',
     'Niet afgevinkt': 'No marká',
+    'Er zijn geen aangevinkte checklist-items om te legen.':
+        'No tin elemento di lista marká pa kita.',
+    'Alle checkboxen legen?': 'Kita tur kasita di chèk?',
+    'Hiermee worden alle': 'Esaki ta desmarká tur',
+    'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+        'elemento di lista marká den henter e presentashon. Bo por deshasé esaki ku Ctrl/Cmd+Z.',
+    'Alles legen': 'Kita tur',
+    'checklist-items uitgevinkt.': 'elemento di lista desmarká.',
+    'Alle checkboxen legen': 'Kita tur kasita di chèk',
     'Afgevinkte tekst doorhalen': 'Raya teksto marká',
     'Toont een streep door voltooide checklistitems.':
         'Ta mustra elementonan kompletá ku un raya den e teksto.',
