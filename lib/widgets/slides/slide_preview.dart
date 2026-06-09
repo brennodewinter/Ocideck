@@ -702,6 +702,7 @@ class _BulletsPreview extends StatelessWidget {
       subtitle: subtitle,
       subtitleSize: subtitleSize,
       maxScale: _kSplitBulletsMaxScale,
+      listStyle: slide.listStyle,
     );
 
     return Container(
@@ -1058,6 +1059,7 @@ class _TwoBulletsPreview extends StatelessWidget {
       bulletGap: bulletGap,
       font: font,
       maxScale: _kBulletsMaxScale,
+      listStyle: slide.listStyle,
     );
     final rightScale = _bulletsFitScale(
       availW: columnW,
@@ -1071,6 +1073,7 @@ class _TwoBulletsPreview extends StatelessWidget {
       bulletGap: bulletGap,
       font: font,
       maxScale: _kBulletsMaxScale,
+      listStyle: slide.listStyle,
     );
     // Treat both columns as one composition: the busiest column determines
     // the shared text size, so left and right never look typographically
@@ -1231,6 +1234,7 @@ class _BulletsImagePreview extends StatelessWidget {
       bulletGap: bulletGap,
       font: font,
       maxScale: _kBulletsMaxScale,
+      listStyle: slide.listStyle,
     );
 
     return Container(
@@ -1815,6 +1819,7 @@ double _bulletsFitScale({
   double subtitleSize = 0,
   double minScale = 0.2,
   double maxScale = 1.0,
+  ListStyle listStyle = ListStyle.bullets,
 }) {
   if (availW <= 0 || !availH.isFinite || availH <= 0) return 1.0;
   // 2% safety margin so minor measurement differences never overflow.
@@ -1822,6 +1827,7 @@ double _bulletsFitScale({
   double measure(double scale) => _bulletsBlockHeight(
     scale: scale,
     availW: availW,
+    listStyle: listStyle,
     hasTitle: hasTitle,
     title: title,
     bullets: bullets,
@@ -1871,6 +1877,7 @@ double _bulletsBlockHeight({
   required String font,
   String subtitle = '',
   double subtitleSize = 0,
+  ListStyle listStyle = ListStyle.bullets,
 }) {
   var height = 0.0;
   if (hasTitle) {
@@ -1895,15 +1902,22 @@ double _bulletsBlockHeight({
   if ((hasTitle || subtitle.isNotEmpty) && bullets.isNotEmpty) {
     height += spacing * scale;
   }
-  for (final b in bullets) {
+  for (var i = 0; i < bullets.length; i++) {
+    final b = bullets[i];
     int level = 0;
     while (level < b.length && b[level] == '\t') {
       level++;
     }
-    final text = b.substring(level);
+    // Measure exactly what gets rendered: checklists strip the `[x] ` prefix
+    // and use a checkbox marker, numbered lists use `N.`. Measuring the raw
+    // string with a bullet marker over-counts the height and would shrink the
+    // text below the space it actually needs.
+    final text = listStyle == ListStyle.checklist
+        ? checklistItemText(b)
+        : b.substring(level);
     final fontSize = bulletSize * _bulletLevelScale(level) * scale;
     final indent = level * bulletSize * 1.05 * scale;
-    final marker = '${_bulletMarkerForLevel(level)} ';
+    final marker = '${_listMarker(bullets, i, listStyle)} ';
     final markerW = _measureTextWidth(
       marker,
       fontSize,
