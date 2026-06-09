@@ -90,7 +90,9 @@ Color _hexColor(String hex) {
 
 EdgeInsets _logoSafeInsets(double w, ThemeProfile profile) {
   if (profile.logoPath?.isEmpty ?? true) return EdgeInsets.zero;
-  final reserved = w * ((profile.logoSize + 64) / 1280);
+  // Reserve just enough to clear the logo plus a small margin (matching the
+  // split-layout reserve). A larger margin needlessly shrinks the text area.
+  final reserved = w * ((profile.logoSize + 24) / 1280);
   if (profile.logoPosition.startsWith('top')) {
     return EdgeInsets.only(top: reserved);
   }
@@ -658,6 +660,10 @@ class _BulletsPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pad = w * 0.07;
+    // Slightly tighter top/bottom margin than the side margin so short
+    // checklists can grow into more of the slide height instead of leaving a
+    // wide empty band below the text.
+    final vPad = w * 0.05;
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
     final titleSize = w * 0.042;
     final subtitleSize = w * 0.030;
@@ -685,7 +691,7 @@ class _BulletsPreview extends StatelessWidget {
     final textAvailW = showProgress
         ? (availW - progressGap - progressW).clamp(w * 0.12, availW)
         : availW;
-    final availH = slideHeight - (pad + safe.top) - (pad + safe.bottom);
+    final availH = slideHeight - (vPad + safe.top) - (vPad + safe.bottom);
     // Grow (or, when needed, shrink) the text so it uses the full vertical
     // space instead of leaving a large empty area below a few short bullets.
     final scale = _bulletsFitScale(
@@ -716,9 +722,9 @@ class _BulletsPreview extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.fromLTRB(
                 pad,
-                pad + safe.top,
+                vPad + safe.top,
                 pad,
-                pad + safe.bottom,
+                vPad + safe.bottom,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
