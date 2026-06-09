@@ -35,17 +35,28 @@ class _ImageSlideEditorState extends State<ImageSlideEditor> {
 
   void _emit() => widget.onUpdate(widget.slide.copyWith(title: _title.text));
 
+  void _setImage(String path, {String caption = ''}) {
+    widget.onUpdate(
+      widget.slide.copyWith(
+        imagePath: path,
+        imageCaption: caption,
+        // A full-slide image should start at the largest uncropped size.
+        imageSize: 100,
+      ),
+    );
+  }
+
   Future<void> _pasteImage() async {
     final path = await widget.imageService.pasteImage();
     if (path != null) {
-      widget.onUpdate(widget.slide.copyWith(imagePath: path, imageCaption: ''));
+      _setImage(path);
     }
   }
 
   Future<void> _pickImage() async {
     final path = await widget.imageService.pickImage();
     if (path != null) {
-      widget.onUpdate(widget.slide.copyWith(imagePath: path, imageCaption: ''));
+      _setImage(path);
     }
   }
 
@@ -66,9 +77,7 @@ class _ImageSlideEditorState extends State<ImageSlideEditor> {
           imageCaption: widget.slide.imageCaption,
           searchPaths: widget.searchPaths,
           captionBasePath: widget.captionBasePath,
-          onPicked: (path, caption) => widget.onUpdate(
-            widget.slide.copyWith(imagePath: path, imageCaption: caption),
-          ),
+          onPicked: (path, caption) => _setImage(path, caption: caption),
           onBrowse: _pickImage,
           onPaste: _pasteImage,
           onClear: widget.slide.imagePath.isNotEmpty

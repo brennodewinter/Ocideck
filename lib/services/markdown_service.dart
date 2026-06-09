@@ -216,10 +216,12 @@ class MarkdownService {
       case SlideType.bullets:
         if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
         if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
-        buf.writeln();
-        for (final b in slide.bullets) {
-          _writeBullet(buf, b);
+        if (slide.listStyle != ListStyle.bullets) {
+          buf.writeln('<!-- ocideck_list_style: ${slide.listStyle.name} -->');
         }
+        _writeChecklistProgress(buf, slide);
+        buf.writeln();
+        _writeList(buf, slide.bullets, slide.listStyle);
 
       case SlideType.twoBullets:
         if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
@@ -230,6 +232,9 @@ class MarkdownService {
           slide.bullets2,
           slide.columnTitle1,
           slide.columnTitle2,
+          slide.listStyle,
+          slide.showChecklistProgress,
+          themeProfile ?? const ThemeProfile(),
         );
 
       case SlideType.bulletsImage:
@@ -248,10 +253,12 @@ class MarkdownService {
           );
           buf.writeln();
           if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
-          buf.writeln();
-          for (final b in slide.bullets) {
-            _writeBullet(buf, b);
+          if (slide.listStyle != ListStyle.bullets) {
+            buf.writeln('<!-- ocideck_list_style: ${slide.listStyle.name} -->');
           }
+          _writeChecklistProgress(buf, slide);
+          buf.writeln();
+          _writeList(buf, slide.bullets, slide.listStyle);
           buf.writeln();
           buf.writeln('</div>');
           buf.writeln();
@@ -263,10 +270,12 @@ class MarkdownService {
           buf.writeln('</div>');
         } else {
           if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
-          buf.writeln();
-          for (final b in slide.bullets) {
-            _writeBullet(buf, b);
+          if (slide.listStyle != ListStyle.bullets) {
+            buf.writeln('<!-- ocideck_list_style: ${slide.listStyle.name} -->');
           }
+          _writeChecklistProgress(buf, slide);
+          buf.writeln();
+          _writeList(buf, slide.bullets, slide.listStyle);
         }
 
       case SlideType.twoImages:
@@ -401,14 +410,35 @@ class MarkdownService {
     return buf.toString();
   }
 
-  static void _writeBullet(StringBuffer buf, String bullet) {
-    int level = 0;
-    while (level < bullet.length && bullet[level] == '\t') {
-      level++;
-    }
-    final text = bullet.substring(level);
-    if (text.isNotEmpty) {
-      buf.writeln('${'  ' * level}- $text');
+  static void _writeList(
+    StringBuffer buf,
+    List<String> items,
+    ListStyle style,
+  ) {
+    final counters = <int>[];
+    for (final item in items) {
+      int level = 0;
+      while (level < item.length && item[level] == '\t') {
+        level++;
+      }
+      final text = item.substring(level);
+      if (text.isEmpty) continue;
+      while (counters.length <= level) {
+        counters.add(0);
+      }
+      counters[level]++;
+      if (counters.length > level + 1) {
+        counters.removeRange(level + 1, counters.length);
+      }
+      final marker = switch (style) {
+        ListStyle.numbered => '${counters[level]}.',
+        ListStyle.bullets || ListStyle.checklist => '-',
+      };
+      final body = style == ListStyle.checklist
+          ? '[${checklistItemChecked(item) ? 'x' : ' '}] '
+                '${checklistItemText(item)}'
+          : text;
+      buf.writeln('${'  ' * level}$marker $body');
     }
   }
 
@@ -418,9 +448,18 @@ class MarkdownService {
     List<String> right,
     String leftTitle,
     String rightTitle,
+    ListStyle listStyle,
+    bool showChecklistProgress,
+    ThemeProfile themeProfile,
   ) {
     buf.writeln('<!-- ocideck_two_bullets_left: ${_encodeBullets(left)} -->');
     buf.writeln('<!-- ocideck_two_bullets_right: ${_encodeBullets(right)} -->');
+    if (listStyle != ListStyle.bullets) {
+      buf.writeln('<!-- ocideck_list_style: ${listStyle.name} -->');
+    }
+    if (showChecklistProgress) {
+      buf.writeln('<!-- ocideck_checklist_progress: true -->');
+    }
     if (leftTitle.isNotEmpty) {
       buf.writeln(
         '<!-- ocideck_two_bullets_left_title: ${_encodeText(leftTitle)} -->',
@@ -434,15 +473,23 @@ class MarkdownService {
     buf.writeln(
       '<div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">',
     );
-    _writeBulletColumn(buf, left, leftTitle);
-    _writeBulletColumn(buf, right, rightTitle);
+    _writeBulletColumn(buf, left, leftTitle, listStyle, themeProfile);
+    _writeBulletColumn(buf, right, rightTitle, listStyle, themeProfile);
     buf.writeln('</div>');
+  }
+
+  static void _writeChecklistProgress(StringBuffer buf, Slide slide) {
+    if (slide.showChecklistProgress) {
+      buf.writeln('<!-- ocideck_checklist_progress: true -->');
+    }
   }
 
   static void _writeBulletColumn(
     StringBuffer buf,
     List<String> bullets,
     String columnTitle,
+    ListStyle listStyle,
+    ThemeProfile themeProfile,
   ) {
     buf.writeln('<div>');
     if (columnTitle.isNotEmpty) {
@@ -450,9 +497,10 @@ class MarkdownService {
         '<h3 style="margin:0 0 .5rem;">${_escapeHtml(columnTitle)}</h3>',
       );
     }
-    buf.writeln('<ul style="margin:0; padding-left:1.3em;">');
-    _writeHtmlBulletItems(buf, bullets);
-    buf.writeln('</ul>');
+    final tag = listStyle == ListStyle.numbered ? 'ol' : 'ul';
+    buf.writeln('<$tag style="margin:0; padding-left:1.3em;">');
+    _writeHtmlBulletItems(buf, bullets, listStyle, themeProfile);
+    buf.writeln('</$tag>');
     buf.writeln('</div>');
   }
 
@@ -480,16 +528,41 @@ class MarkdownService {
     return const [];
   }
 
-  static void _writeHtmlBulletItems(StringBuffer buf, List<String> bullets) {
+  static void _writeHtmlBulletItems(
+    StringBuffer buf,
+    List<String> bullets,
+    ListStyle listStyle,
+    ThemeProfile themeProfile,
+  ) {
+    final counters = <int>[];
     for (final b in bullets) {
       int level = 0;
       while (level < b.length && b[level] == '\t') {
         level++;
       }
-      final text = b.substring(level).trim();
+      final text = listStyle == ListStyle.checklist
+          ? checklistItemText(b).trim()
+          : b.substring(level).trim();
       if (text.isEmpty) continue;
+      while (counters.length <= level) {
+        counters.add(0);
+      }
+      counters[level]++;
+      if (counters.length > level + 1) {
+        counters.removeRange(level + 1, counters.length);
+      }
       final style = level == 0 ? '' : ' style="margin-left:${level * 1.4}em;"';
-      buf.writeln('<li$style>${_escapeHtml(text)}</li>');
+      final value = listStyle == ListStyle.numbered
+          ? ' value="${counters[level]}"'
+          : '';
+      final checkbox = listStyle == ListStyle.checklist
+          ? '${checklistItemChecked(b) ? '☑' : '☐'} '
+          : '';
+      final decoration = listStyle == ListStyle.checklist
+          ? ' style="${level == 0 ? '' : 'margin-left:${level * 1.4}em;'}'
+                '${checklistItemChecked(b) && themeProfile.checklistStrikeThrough ? 'text-decoration:line-through;opacity:.7;' : ''}"'
+          : style;
+      buf.writeln('<li$value$decoration>${_escapeHtml(checkbox + text)}</li>');
     }
   }
 
@@ -676,6 +749,8 @@ class MarkdownService {
     TlpLevel slideTlp = TlpLevel.none;
     final bullets = <String>[];
     var bullets2 = <String>[];
+    var listStyle = ListStyle.bullets;
+    var showChecklistProgress = false;
     var columnTitle1 = '';
     var columnTitle2 = '';
     // bulletsImage slides store their panel width in `<!-- _style:
@@ -704,6 +779,16 @@ class MarkdownService {
           columnTitle2 = _decodeText(content.substring(32));
         } else if (content.startsWith('ocideck_two_bullets_right:')) {
           bullets2 = _decodeBullets(content.substring(26));
+        } else if (content.startsWith('ocideck_list_style:')) {
+          final name = content.substring(19).trim();
+          listStyle = ListStyle.values.firstWhere(
+            (style) => style.name == name,
+            orElse: () => ListStyle.bullets,
+          );
+        } else if (content.startsWith('ocideck_checklist_progress:')) {
+          showChecklistProgress =
+              content.substring('ocideck_checklist_progress:'.length).trim() ==
+              'true';
         } else if (!content.startsWith('_')) {
           notesBuffer.write(notesBuffer.isEmpty ? content : '\n$content');
         }
@@ -773,7 +858,23 @@ class MarkdownService {
           }
         }
         final level = spaces ~/ 2;
-        bullets.add('\t' * level + t.substring(2));
+        final body = t.substring(2);
+        bullets.add('\t' * level + body);
+        if (RegExp(r'^\[[ xX]\]\s*').hasMatch(body)) {
+          listStyle = ListStyle.checklist;
+        }
+      } else if (RegExp(r'^\d+\.\s+').hasMatch(t)) {
+        int spaces = 0;
+        for (final ch in line.characters) {
+          if (ch == ' ') {
+            spaces++;
+          } else {
+            break;
+          }
+        }
+        final level = spaces ~/ 2;
+        bullets.add('\t' * level + t.replaceFirst(RegExp(r'^\d+\.\s+'), ''));
+        listStyle = ListStyle.numbered;
       } else if (t.startsWith('> ')) {
         quote = t.substring(2);
       } else if (t.startsWith('— ')) {
@@ -900,6 +1001,8 @@ class MarkdownService {
       subtitle: type == SlideType.section ? paragraph : h2,
       bullets: bullets,
       bullets2: bullets2,
+      listStyle: listStyle,
+      showChecklistProgress: showChecklistProgress,
       columnTitle1: columnTitle1,
       columnTitle2: columnTitle2,
       imagePath: imagePath,

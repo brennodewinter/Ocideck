@@ -291,7 +291,11 @@ void main() {
     final radar = tester.widget<RadarChart>(find.byType(RadarChart));
     // Two visible series plus one invisible scale anchor.
     expect(radar.data.dataSets.length, 3);
-    expect(radar.data.dataSets.first.dataEntries.map((e) => e.value), [3, 4, 5]);
+    expect(radar.data.dataSets.first.dataEntries.map((e) => e.value), [
+      3,
+      4,
+      5,
+    ]);
     expect(radar.data.dataSets.last.fillColor, Colors.transparent);
     // The spoke labels are supplied through getTitle (canvas-painted).
     expect(radar.data.getTitle!(0, 0).text, 'Snelheid');
@@ -299,6 +303,43 @@ void main() {
     // The series legend is shown as real text widgets.
     expect(find.text('Alpha'), findsOneWidget);
     expect(find.text('Beta'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('long radar labels stay outside the diagram and each other', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.radar,
+      x: [
+        'Strategische wendbaarheid',
+        'Operationele betrouwbaarheid',
+        'Klantgerichte innovatie',
+        'Duurzame inzetbaarheid',
+        'Digitale volwassenheid',
+        'Financiële weerbaarheid',
+      ],
+      series: [
+        ChartSeries(name: 'Score', data: [3, 4, 5, 2, 4, 3]),
+      ],
+    );
+
+    await tester.pumpWidget(_host(spec, presentationMode: true));
+    await tester.pump();
+
+    final radarRect = tester.getRect(find.byType(RadarChart));
+    final labelRects = [
+      for (var i = 0; i < spec.x.length; i++)
+        tester.getRect(find.byKey(ValueKey('radar-axis-label-$i'))),
+    ];
+    for (final rect in labelRects) {
+      expect(rect.overlaps(radarRect), isFalse);
+    }
+    for (var i = 0; i < labelRects.length; i++) {
+      for (var j = i + 1; j < labelRects.length; j++) {
+        expect(labelRects[i].overlaps(labelRects[j]), isFalse);
+      }
+    }
     expect(tester.takeException(), isNull);
   });
 

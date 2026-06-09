@@ -143,9 +143,16 @@ class SlidePreviewWidget extends StatelessWidget {
   /// Vergroot grafieklabels voor weergave op afstand in presentatiemodus.
   final bool presentationMode;
 
+  /// Wijzigt tijdens het presenteren een checklistitem. [column] is 0 voor de
+  /// eerste/enkele lijst en 1 voor de rechterkolom.
+  final void Function(int column, int itemIndex)? onChecklistItemToggle;
+
   /// Wordt aangeroepen wanneer de audio van deze slide klaar is (voor de
   /// automatische modus van de presenter).
   final VoidCallback? onAudioComplete;
+
+  /// Wordt aangeroepen wanneer de video van deze slide klaar is.
+  final VoidCallback? onVideoComplete;
 
   const SlidePreviewWidget({
     super.key,
@@ -159,7 +166,9 @@ class SlidePreviewWidget extends StatelessWidget {
     this.enableMedia = false,
     this.autoplayMedia = false,
     this.presentationMode = false,
+    this.onChecklistItemToggle,
     this.onAudioComplete,
+    this.onVideoComplete,
   });
 
   @override
@@ -175,19 +184,23 @@ class SlidePreviewWidget extends StatelessWidget {
     // falls back to Flutter's broken default — red letters with a yellow
     // underline — which is exactly what showed up in exports. Wrapping here
     // guarantees identical results in the preview and the export.
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: DefaultTextStyle(
-        style: TextStyle(
-          color: _hexColor(themeProfile.textColor),
-          decoration: TextDecoration.none,
-          fontWeight: FontWeight.normal,
-          fontStyle: FontStyle.normal,
-        ),
-        child: _SlideLinkScope(
-          onTapLink: onLinkTap,
-          hasBottomTlp: hasBottomRightTlp,
-          child: _buildSlide(),
+    return _ChecklistInteractionHost(
+      enabled: presentationMode && onChecklistItemToggle != null,
+      onToggle: onChecklistItemToggle,
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: DefaultTextStyle(
+          style: TextStyle(
+            color: _hexColor(themeProfile.textColor),
+            decoration: TextDecoration.none,
+            fontWeight: FontWeight.normal,
+            fontStyle: FontStyle.normal,
+          ),
+          child: _SlideLinkScope(
+            onTapLink: onLinkTap,
+            hasBottomTlp: hasBottomRightTlp,
+            child: _buildSlide(),
+          ),
         ),
       ),
     );
@@ -307,6 +320,7 @@ class SlidePreviewWidget extends StatelessWidget {
           font: fontFamily,
           profile: themeProfile,
           autoplay: autoplayMedia && slide.videoAutoplay,
+          onComplete: onVideoComplete,
         );
       case SlideType.quote:
         return _QuotePreview(
@@ -656,14 +670,21 @@ class _BulletsPreview extends StatelessWidget {
     final hasTitle = slide.title.isNotEmpty;
     final subtitle = slide.subtitle;
     final hasSubtitle = subtitle.isNotEmpty;
+    final showProgress =
+        slide.listStyle == ListStyle.checklist &&
+        slide.showChecklistProgress &&
+        bullets.isNotEmpty;
 
     final slideHeight = w * 9 / 16;
     final availW = (w - pad * 2).clamp(w * 0.12, w);
+    final textAvailW = showProgress
+        ? ((availW - w * 0.025) / 2).clamp(w * 0.12, availW)
+        : availW;
     final availH = slideHeight - (pad + safe.top) - (pad + safe.bottom);
     // Grow (or, when needed, shrink) the text so it uses the full vertical
     // space instead of leaving a large empty area below a few short bullets.
     final scale = _bulletsFitScale(
-      availW: availW,
+      availW: textAvailW,
       availH: availH,
       hasTitle: hasTitle,
       title: slide.title,
@@ -729,50 +750,36 @@ class _BulletsPreview extends StatelessWidget {
                   ],
                   if ((hasTitle || hasSubtitle) && bullets.isNotEmpty)
                     SizedBox(height: spacing * scale),
-                  ...bullets.map((b) {
-                    int level = 0;
-                    while (level < b.length && b[level] == '\t') {
-                      level++;
-                    }
-                    final text = b.substring(level);
-                    final fontSize =
-                        bulletSize * _bulletLevelScale(level) * scale;
-                    return Padding(
-                      padding: EdgeInsets.only(
-                        left: level * bulletSize * 1.05 * scale,
-                        top: bulletGap * scale,
-                        bottom: bulletGap * scale,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: _BulletListColumn(
+                          bullets: bullets,
+                          listStyle: slide.listStyle,
+                          font: font,
+                          profile: profile,
+                          bulletSize: bulletSize,
+                          bulletGap: bulletGap,
+                          scale: scale,
+                          column: 0,
+                        ),
                       ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${_bulletMarkerForLevel(level)} ',
-                            style: TextStyle(
-                              fontSize: fontSize,
-                              color: _hexColor(profile.accentColor),
-                              fontWeight: FontWeight.bold,
+                      if (showProgress) ...[
+                        SizedBox(width: w * 0.025),
+                        Expanded(
+                          child: Center(
+                            child: _ChecklistProgress(
+                              bullets: bullets,
+                              w: w,
+                              font: font,
+                              profile: profile,
                             ),
                           ),
-                          Expanded(
-                            child: _md(
-                              context,
-                              text,
-                              _applyFont(
-                                font,
-                                TextStyle(
-                                  fontSize: fontSize,
-                                  height: _kBulletLineHeight,
-                                  color: _hexColor(profile.textColor),
-                                ),
-                              ),
-                              linkColor: _hexColor(profile.accentColor),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
+                        ),
+                      ],
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -936,6 +943,7 @@ class _TwoBulletsPreview extends StatelessWidget {
     required double bulletSize,
     required double bulletGap,
     required double scale,
+    required int column,
   }) {
     return SizedBox(
       width: columnW,
@@ -967,11 +975,13 @@ class _TwoBulletsPreview extends StatelessWidget {
           ],
           _BulletListColumn(
             bullets: bullets,
+            listStyle: slide.listStyle,
             font: font,
             profile: profile,
             bulletSize: bulletSize,
             bulletGap: bulletGap,
             scale: scale,
+            column: column,
           ),
         ],
       ),
@@ -1018,7 +1028,13 @@ class _TwoBulletsPreview extends StatelessWidget {
     // Reserve room for the (optional) column headings so the bullets still fit.
     double headingHeight(String t) => t.isEmpty
         ? 0
-        : _measureTextHeight(t, headingSize, columnW, bold: true, fontFamily: font);
+        : _measureTextHeight(
+            t,
+            headingSize,
+            columnW,
+            bold: true,
+            fontFamily: font,
+          );
     final maxHeadingH = math.max(
       headingHeight(col1Title),
       headingHeight(col2Title),
@@ -1050,6 +1066,10 @@ class _TwoBulletsPreview extends StatelessWidget {
       font: font,
       maxScale: _kBulletsMaxScale,
     );
+    // Treat both columns as one composition: the busiest column determines
+    // the shared text size, so left and right never look typographically
+    // unrelated.
+    final columnScale = math.min(leftScale, rightScale);
 
     return Container(
       color: _hexColor(profile.slideBackgroundColor),
@@ -1085,11 +1105,26 @@ class _TwoBulletsPreview extends StatelessWidget {
                       linkColor: _hexColor(profile.accentColor),
                     ),
                   if (hasTitle) SizedBox(height: spacing),
+                  if (slide.listStyle == ListStyle.checklist &&
+                      slide.showChecklistProgress &&
+                      (leftBullets.isNotEmpty || rightBullets.isNotEmpty)) ...[
+                    Align(
+                      alignment: Alignment.center,
+                      child: SizedBox(
+                        width: contentW * 0.5,
+                        child: _ChecklistProgress(
+                          bullets: [...leftBullets, ...rightBullets],
+                          w: w,
+                          font: font,
+                          profile: profile,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: spacing),
+                  ],
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Each column scales to fill its own height, so a sparse
-                      // column is not shrunk down to a crowded one's size.
                       _bulletColumn(
                         context,
                         title: col1Title,
@@ -1100,7 +1135,8 @@ class _TwoBulletsPreview extends StatelessWidget {
                         headingGap: headingGap,
                         bulletSize: bulletSize,
                         bulletGap: bulletGap,
-                        scale: leftScale,
+                        scale: columnScale,
+                        column: 0,
                       ),
                       SizedBox(width: columnGap),
                       _bulletColumn(
@@ -1113,7 +1149,8 @@ class _TwoBulletsPreview extends StatelessWidget {
                         headingGap: headingGap,
                         bulletSize: bulletSize,
                         bulletGap: bulletGap,
-                        scale: rightScale,
+                        scale: columnScale,
+                        column: 1,
                       ),
                     ],
                   ),
@@ -1274,47 +1311,43 @@ class _BulletsImagePreview extends StatelessWidget {
             linkColor: _hexColor(profile.accentColor),
           ),
         if (hasTitle && bullets.isNotEmpty) SizedBox(height: spacing * scale),
-        ...bullets.map((b) {
+        if (slide.listStyle == ListStyle.checklist &&
+            slide.showChecklistProgress &&
+            bullets.isNotEmpty) ...[
+          _ChecklistProgress(
+            bullets: bullets,
+            w: w,
+            font: font,
+            profile: profile,
+          ),
+          SizedBox(height: spacing * scale),
+        ],
+        ...bullets.asMap().entries.map((entry) {
+          final b = entry.value;
           int level = 0;
           while (level < b.length && b[level] == '\t') {
             level++;
           }
-          final text = b.substring(level);
+          final text = slide.listStyle == ListStyle.checklist
+              ? checklistItemText(b)
+              : b.substring(level);
+          final checked =
+              slide.listStyle == ListStyle.checklist && checklistItemChecked(b);
           final fontSize = bulletSize * _bulletLevelScale(level) * scale;
-          return Padding(
-            padding: EdgeInsets.only(
-              left: level * bulletSize * 1.05 * scale,
-              top: bulletGap * scale,
-              bottom: bulletGap * scale,
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${_bulletMarkerForLevel(level)} ',
-                  style: TextStyle(
-                    fontSize: fontSize,
-                    color: _hexColor(profile.accentColor),
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Expanded(
-                  child: _md(
-                    context,
-                    text,
-                    _applyFont(
-                      font,
-                      TextStyle(
-                        fontSize: fontSize,
-                        height: _kBulletLineHeight,
-                        color: _hexColor(profile.textColor),
-                      ),
-                    ),
-                    linkColor: _hexColor(profile.accentColor),
-                  ),
-                ),
-              ],
-            ),
+          return _ChecklistBulletRow(
+            bullets: bullets,
+            itemIndex: entry.key,
+            column: 0,
+            listStyle: slide.listStyle,
+            checked: checked,
+            text: text,
+            level: level,
+            fontSize: fontSize,
+            bulletSize: bulletSize,
+            bulletGap: bulletGap,
+            scale: scale,
+            font: font,
+            profile: profile,
           );
         }),
       ],
@@ -1322,21 +1355,161 @@ class _BulletsImagePreview extends StatelessWidget {
   }
 }
 
+class _ChecklistProgress extends StatelessWidget {
+  final List<String> bullets;
+  final double w;
+  final String font;
+  final ThemeProfile profile;
+
+  const _ChecklistProgress({
+    required this.bullets,
+    required this.w,
+    required this.font,
+    required this.profile,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final items = bullets
+        .where((bullet) => checklistItemText(bullet).trim().isNotEmpty)
+        .toList();
+    final checked = items.where(checklistItemChecked).length;
+    final total = items.length;
+    final checkedPercent = total == 0 ? 0 : ((checked / total) * 100).round();
+    final openPercent = total == 0 ? 0 : 100 - checkedPercent;
+    final textColor = _hexColor(profile.textColor);
+    final checkedColor = _hexColor(profile.checklistCheckedColor);
+    final openColor = _hexColor(profile.checklistUncheckedColor);
+    final labelStyle = _applyFont(
+      font,
+      TextStyle(
+        fontSize: w * 0.0125,
+        height: 1.2,
+        color: textColor,
+        fontWeight: FontWeight.w600,
+      ),
+    );
+
+    final interaction = _ChecklistInteractionScope.maybeOf(context);
+    Widget pie(bool? hovered) => PieChart(
+      key: const ValueKey('checklist-progress-pie'),
+      PieChartData(
+        sectionsSpace: w * 0.002,
+        centerSpaceRadius: 0,
+        startDegreeOffset: -90,
+        sections: [
+          if (checkedPercent > 0)
+            PieChartSectionData(
+              value: checkedPercent.toDouble(),
+              color: checkedColor,
+              radius: w * (hovered == true ? 0.088 : 0.081),
+              title: '$checkedPercent%',
+              titleStyle: labelStyle.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          if (openPercent > 0)
+            PieChartSectionData(
+              value: openPercent.toDouble(),
+              color: openColor,
+              radius: w * (hovered == false ? 0.088 : 0.081),
+              title: '$openPercent%',
+              titleStyle: labelStyle.copyWith(fontWeight: FontWeight.bold),
+            ),
+        ],
+        pieTouchData: PieTouchData(
+          enabled: interaction?.enabled == true,
+          touchCallback: (event, response) {
+            if (interaction?.enabled != true) return;
+            final index = event.isInterestedForInteractions
+                ? response?.touchedSection?.touchedSectionIndex
+                : null;
+            if (index == null) {
+              interaction!.hovered.value = null;
+            } else if (checkedPercent == 0) {
+              interaction!.hovered.value = false;
+            } else {
+              interaction!.hovered.value = index == 0;
+            }
+          },
+        ),
+      ),
+      duration: Duration.zero,
+    );
+
+    return Semantics(
+      label:
+          '${context.l10n.d('Afgevinkt')} $checkedPercent%, '
+          '${context.l10n.d('Niet afgevinkt')} $openPercent%',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: w * 0.36,
+            height: w * 0.19,
+            child: interaction == null
+                ? pie(null)
+                : ValueListenableBuilder<bool?>(
+                    valueListenable: interaction.hovered,
+                    builder: (_, hovered, _) => pie(hovered),
+                  ),
+          ),
+          SizedBox(height: w * 0.008),
+          MouseRegion(
+            key: const ValueKey('checklist-progress-checked'),
+            onEnter: interaction?.enabled != true
+                ? null
+                : (_) => interaction!.hovered.value = true,
+            onExit: interaction?.enabled != true
+                ? null
+                : (_) => interaction!.hovered.value = null,
+            child: Text(
+              '${context.l10n.d('Afgevinkt')} $checkedPercent%',
+              style: labelStyle,
+            ),
+          ),
+          MouseRegion(
+            key: const ValueKey('checklist-progress-unchecked'),
+            onEnter: interaction?.enabled != true
+                ? null
+                : (_) => interaction!.hovered.value = false,
+            onExit: interaction?.enabled != true
+                ? null
+                : (_) => interaction!.hovered.value = null,
+            child: Text(
+              '${context.l10n.d('Niet afgevinkt')} $openPercent%',
+              style: labelStyle.copyWith(
+                color: textColor.withValues(alpha: 0.7),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _BulletListColumn extends StatelessWidget {
   final List<String> bullets;
+  final ListStyle listStyle;
   final String font;
   final ThemeProfile profile;
   final double bulletSize;
   final double bulletGap;
   final double scale;
+  final int column;
 
   const _BulletListColumn({
     required this.bullets,
+    required this.listStyle,
     required this.font,
     required this.profile,
     required this.bulletSize,
     required this.bulletGap,
     required this.scale,
+    this.column = 0,
   });
 
   @override
@@ -1345,52 +1518,205 @@ class _BulletListColumn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        ...bullets.map((b) {
+        ...bullets.asMap().entries.map((entry) {
+          final b = entry.value;
           int level = 0;
           while (level < b.length && b[level] == '\t') {
             level++;
           }
-          final text = b.substring(level);
+          final text = listStyle == ListStyle.checklist
+              ? checklistItemText(b)
+              : b.substring(level);
+          final checked =
+              listStyle == ListStyle.checklist && checklistItemChecked(b);
           final fontSize = bulletSize * _bulletLevelScale(level) * scale;
-          return Padding(
-            padding: EdgeInsets.only(
-              left: level * bulletSize * 1.05 * scale,
-              top: bulletGap * scale,
-              bottom: bulletGap * scale,
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${_bulletMarkerForLevel(level)} ',
-                  style: TextStyle(
-                    fontSize: fontSize,
-                    color: _hexColor(profile.accentColor),
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Expanded(
-                  child: _md(
-                    context,
-                    text,
-                    _applyFont(
-                      font,
-                      TextStyle(
-                        fontSize: fontSize,
-                        height: _kBulletLineHeight,
-                        color: _hexColor(profile.textColor),
-                      ),
-                    ),
-                    linkColor: _hexColor(profile.accentColor),
-                  ),
-                ),
-              ],
-            ),
+          return _ChecklistBulletRow(
+            bullets: bullets,
+            itemIndex: entry.key,
+            column: column,
+            listStyle: listStyle,
+            checked: checked,
+            text: text,
+            level: level,
+            fontSize: fontSize,
+            bulletSize: bulletSize,
+            bulletGap: bulletGap,
+            scale: scale,
+            font: font,
+            profile: profile,
           );
         }),
       ],
     );
   }
+}
+
+class _ChecklistBulletRow extends StatelessWidget {
+  final List<String> bullets;
+  final int itemIndex;
+  final int column;
+  final ListStyle listStyle;
+  final bool checked;
+  final String text;
+  final int level;
+  final double fontSize;
+  final double bulletSize;
+  final double bulletGap;
+  final double scale;
+  final String font;
+  final ThemeProfile profile;
+
+  const _ChecklistBulletRow({
+    required this.bullets,
+    required this.itemIndex,
+    required this.column,
+    required this.listStyle,
+    required this.checked,
+    required this.text,
+    required this.level,
+    required this.fontSize,
+    required this.bulletSize,
+    required this.bulletGap,
+    required this.scale,
+    required this.font,
+    required this.profile,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final interaction = _ChecklistInteractionScope.maybeOf(context);
+    Widget row(bool highlighted) => AnimatedContainer(
+      key: ValueKey('checklist-preview-item-$column-$itemIndex'),
+      duration: const Duration(milliseconds: 140),
+      padding: EdgeInsets.symmetric(horizontal: highlighted ? wScale(6) : 0),
+      decoration: BoxDecoration(
+        color: highlighted
+            ? _hexColor(profile.accentColor).withValues(alpha: 0.16)
+            : Colors.transparent,
+        borderRadius: BorderRadius.circular(wScale(5)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GestureDetector(
+            key: ValueKey('checklist-preview-toggle-$column-$itemIndex'),
+            behavior: HitTestBehavior.opaque,
+            onTap:
+                listStyle == ListStyle.checklist && interaction?.enabled == true
+                ? () => interaction!.onToggle?.call(column, itemIndex)
+                : null,
+            child: MouseRegion(
+              cursor:
+                  listStyle == ListStyle.checklist &&
+                      interaction?.enabled == true
+                  ? SystemMouseCursors.click
+                  : MouseCursor.defer,
+              child: Text(
+                '${_listMarker(bullets, itemIndex, listStyle)} ',
+                style: TextStyle(
+                  fontSize: fontSize,
+                  color: _hexColor(profile.accentColor),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: _md(
+              context,
+              text,
+              _applyFont(
+                font,
+                TextStyle(
+                  fontSize: fontSize,
+                  height: _kBulletLineHeight,
+                  color: _hexColor(profile.textColor),
+                  decoration: checked && profile.checklistStrikeThrough
+                      ? TextDecoration.lineThrough
+                      : null,
+                  decorationColor: _hexColor(profile.textColor),
+                ),
+              ),
+              linkColor: _hexColor(profile.accentColor),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    final padded = Padding(
+      padding: EdgeInsets.only(
+        left: level * bulletSize * 1.05 * scale,
+        top: bulletGap * scale,
+        bottom: bulletGap * scale,
+      ),
+      child: interaction == null || listStyle != ListStyle.checklist
+          ? row(false)
+          : ValueListenableBuilder<bool?>(
+              valueListenable: interaction.hovered,
+              builder: (_, hovered, _) => row(hovered == checked),
+            ),
+    );
+    return padded;
+  }
+
+  double wScale(double value) => value * scale;
+}
+
+class _ChecklistInteractionHost extends StatefulWidget {
+  final bool enabled;
+  final void Function(int column, int itemIndex)? onToggle;
+  final Widget child;
+
+  const _ChecklistInteractionHost({
+    required this.enabled,
+    required this.onToggle,
+    required this.child,
+  });
+
+  @override
+  State<_ChecklistInteractionHost> createState() =>
+      _ChecklistInteractionHostState();
+}
+
+class _ChecklistInteractionHostState extends State<_ChecklistInteractionHost> {
+  final ValueNotifier<bool?> hovered = ValueNotifier(null);
+
+  @override
+  void dispose() {
+    hovered.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _ChecklistInteractionScope(
+      enabled: widget.enabled,
+      hovered: hovered,
+      onToggle: widget.onToggle,
+      child: widget.child,
+    );
+  }
+}
+
+class _ChecklistInteractionScope extends InheritedWidget {
+  final bool enabled;
+  final ValueNotifier<bool?> hovered;
+  final void Function(int column, int itemIndex)? onToggle;
+
+  const _ChecklistInteractionScope({
+    required this.enabled,
+    required this.hovered,
+    required this.onToggle,
+    required super.child,
+  });
+
+  static _ChecklistInteractionScope? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<_ChecklistInteractionScope>();
+
+  @override
+  bool updateShouldNotify(_ChecklistInteractionScope oldWidget) =>
+      enabled != oldWidget.enabled || onToggle != oldWidget.onToggle;
 }
 
 /// Upper bound for growing bullet text to fill otherwise empty vertical space.
@@ -1406,6 +1732,29 @@ const double _kBulletLineHeight = 1.16;
 String _bulletMarkerForLevel(int level) {
   const markers = ['•', '◦', '▪', '▫', '–'];
   return markers[level.clamp(0, markers.length - 1)];
+}
+
+String _listMarker(List<String> items, int index, ListStyle style) {
+  int levelOf(String item) {
+    var level = 0;
+    while (level < item.length && item[level] == '\t') {
+      level++;
+    }
+    return level;
+  }
+
+  final level = levelOf(items[index]);
+  if (style == ListStyle.bullets) return _bulletMarkerForLevel(level);
+  if (style == ListStyle.checklist) {
+    return checklistItemChecked(items[index]) ? '☑' : '☐';
+  }
+  var number = 0;
+  for (var i = 0; i <= index; i++) {
+    final itemLevel = levelOf(items[i]);
+    if (itemLevel == level) number++;
+    if (itemLevel < level) number = 0;
+  }
+  return '$number.';
 }
 
 double _bulletLevelScale(int level) {
@@ -1523,7 +1872,12 @@ double _bulletsBlockHeight({
     final fontSize = bulletSize * _bulletLevelScale(level) * scale;
     final indent = level * bulletSize * 1.05 * scale;
     final marker = '${_bulletMarkerForLevel(level)} ';
-    final markerW = _measureTextWidth(marker, fontSize, bold: true, fontFamily: font);
+    final markerW = _measureTextWidth(
+      marker,
+      fontSize,
+      bold: true,
+      fontFamily: font,
+    );
     final wrapW = (availW - indent - markerW).clamp(1.0, availW);
     final textH = _measureTextHeight(
       text,
@@ -1750,6 +2104,7 @@ class _VideoPreview extends StatefulWidget {
   final String font;
   final ThemeProfile profile;
   final bool autoplay;
+  final VoidCallback? onComplete;
 
   const _VideoPreview({
     required this.slide,
@@ -1758,6 +2113,7 @@ class _VideoPreview extends StatefulWidget {
     required this.font,
     required this.profile,
     this.autoplay = false,
+    this.onComplete,
   });
 
   @override
@@ -1767,6 +2123,7 @@ class _VideoPreview extends StatefulWidget {
 class _VideoPreviewState extends State<_VideoPreview> {
   VideoPlayerController? _controller;
   String? _path;
+  bool _completed = false;
 
   @override
   void initState() {
@@ -1784,8 +2141,10 @@ class _VideoPreviewState extends State<_VideoPreview> {
   }
 
   Future<void> _init() async {
+    _controller?.removeListener(_onTick);
     await _controller?.dispose();
     _controller = null;
+    _completed = false;
     _path = _resolvePath(widget.slide.videoPath, widget.projectPath);
     if (_path == null) {
       if (mounted) setState(() {});
@@ -1795,7 +2154,8 @@ class _VideoPreviewState extends State<_VideoPreview> {
     _controller = controller;
     try {
       await controller.initialize();
-      await controller.setLooping(widget.autoplay);
+      controller.addListener(_onTick);
+      await controller.setLooping(false);
       if (widget.autoplay) await controller.play();
     } catch (_) {
       // Keep the placeholder visible when the platform cannot open the file.
@@ -1803,8 +2163,27 @@ class _VideoPreviewState extends State<_VideoPreview> {
     if (mounted) setState(() {});
   }
 
+  void _onTick() {
+    final controller = _controller;
+    if (controller == null ||
+        !controller.value.isInitialized ||
+        _completed ||
+        !widget.autoplay) {
+      return;
+    }
+    final duration = controller.value.duration;
+    final position = controller.value.position;
+    if (duration > Duration.zero &&
+        position.inMilliseconds >= duration.inMilliseconds - 200 &&
+        !controller.value.isPlaying) {
+      _completed = true;
+      widget.onComplete?.call();
+    }
+  }
+
   @override
   void dispose() {
+    _controller?.removeListener(_onTick);
     _controller?.dispose();
     super.dispose();
   }
@@ -2251,12 +2630,8 @@ class _CodePreview extends StatelessWidget {
 
     // The chosen monospace family, always backed by a generic monospace fallback
     // so an uninstalled face still renders fixed-width.
-    final fallback = <String>[
-      'Menlo',
-      'Consolas',
-      'Courier New',
-      'monospace',
-    ]..removeWhere((f) => f == profile.codeFontFamily);
+    final fallback = <String>['Menlo', 'Consolas', 'Courier New', 'monospace']
+      ..removeWhere((f) => f == profile.codeFontFamily);
     final baseFont = w * 0.024;
     final maxFont = w * 0.040; // grow to fill, but never huge
     TextStyle monoAt(double size) => TextStyle(
@@ -2551,7 +2926,10 @@ class _ChartPreviewState extends State<_ChartPreview> {
                     ),
                     decoration: BoxDecoration(
                       color: _hovered == i
-                          ? _seriesColor(spec.series[i], i).withValues(alpha: 0.18)
+                          ? _seriesColor(
+                              spec.series[i],
+                              i,
+                            ).withValues(alpha: 0.18)
                           : textColor.withValues(alpha: 0.045),
                       borderRadius: BorderRadius.circular(w),
                       border: Border.all(
@@ -2927,9 +3305,10 @@ class _ChartPreviewState extends State<_ChartPreview> {
           ),
           belowBarData: BarAreaData(
             show: true,
-            color: _seriesDisplayColor(spec.series[si], si).withValues(
-              alpha: spec.series.length == 1 ? 0.14 : 0.05,
-            ),
+            color: _seriesDisplayColor(
+              spec.series[si],
+              si,
+            ).withValues(alpha: spec.series.length == 1 ? 0.14 : 0.05),
           ),
         ),
       );
@@ -3109,6 +3488,8 @@ class _ChartPreviewState extends State<_ChartPreview> {
             0.0,
             math.min(available, constraints.maxHeight),
           );
+          final labelBand = side * 0.23;
+          final chartSide = math.max(0.0, side - labelBand * 2);
 
           return Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -3120,100 +3501,154 @@ class _ChartPreviewState extends State<_ChartPreview> {
                     height: side,
                     child: Stack(
                       children: [
-                        Positioned.fill(
-                          child: RadarChart(
-                            RadarChartData(
-                              dataSets: [
-                                for (var si = 0; si < spec.series.length; si++)
-                                  RadarDataSet(
-                                    dataEntries: [
-                                      for (var xi = 0; xi < spec.x.length; xi++)
-                                        RadarEntry(
-                                          value:
-                                              xi < spec.series[si].data.length
-                                              ? spec.series[si].data[xi]
-                                              : 0,
+                        for (var i = 0; i < spec.x.length; i++)
+                          _radarAxisLabel(
+                            label: spec.x[i],
+                            index: i,
+                            count: spec.x.length,
+                            side: side,
+                            textColor: textColor,
+                          ),
+                        Positioned(
+                          left: labelBand,
+                          top: labelBand,
+                          width: chartSide,
+                          height: chartSide,
+                          child: Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              Positioned.fill(
+                                child: RadarChart(
+                                  RadarChartData(
+                                    dataSets: [
+                                      for (
+                                        var si = 0;
+                                        si < spec.series.length;
+                                        si++
+                                      )
+                                        RadarDataSet(
+                                          dataEntries: [
+                                            for (
+                                              var xi = 0;
+                                              xi < spec.x.length;
+                                              xi++
+                                            )
+                                              RadarEntry(
+                                                value:
+                                                    xi <
+                                                        spec
+                                                            .series[si]
+                                                            .data
+                                                            .length
+                                                    ? spec.series[si].data[xi]
+                                                    : 0,
+                                              ),
+                                          ],
+                                          fillColor:
+                                              _seriesDisplayColor(
+                                                spec.series[si],
+                                                si,
+                                              ).withValues(
+                                                alpha: _dimmed(si)
+                                                    ? 0.04
+                                                    : 0.16,
+                                              ),
+                                          borderColor: _seriesDisplayColor(
+                                            spec.series[si],
+                                            si,
+                                          ),
+                                          borderWidth:
+                                              w *
+                                              (_hovered == si
+                                                  ? 0.0055
+                                                  : 0.0035),
+                                          entryRadius:
+                                              w *
+                                              (_hovered == si ? 0.006 : 0.004),
                                         ),
-                                    ],
-                                    fillColor: _seriesDisplayColor(
-                                      spec.series[si],
-                                      si,
-                                    ).withValues(alpha: _dimmed(si) ? 0.04 : 0.16),
-                                    borderColor: _seriesDisplayColor(
-                                      spec.series[si],
-                                      si,
-                                    ),
-                                    borderWidth:
-                                        w * (_hovered == si ? 0.0055 : 0.0035),
-                                    entryRadius:
-                                        w * (_hovered == si ? 0.006 : 0.004),
-                                  ),
-                                // Invisible anchor pinning the scale to [lo, hi]
-                                // so the rings represent a fixed scale.
-                                RadarDataSet(
-                                  dataEntries: [
-                                    for (var xi = 0; xi < spec.x.length; xi++)
-                                      RadarEntry(
-                                        value: xi == 0 ? scale.hi : scale.lo,
+                                      // Invisible anchor pinning the scale to [lo, hi]
+                                      // so the rings represent a fixed scale.
+                                      RadarDataSet(
+                                        dataEntries: [
+                                          for (
+                                            var xi = 0;
+                                            xi < spec.x.length;
+                                            xi++
+                                          )
+                                            RadarEntry(
+                                              value: xi == 0
+                                                  ? scale.hi
+                                                  : scale.lo,
+                                            ),
+                                        ],
+                                        fillColor: Colors.transparent,
+                                        borderColor: Colors.transparent,
+                                        borderWidth: 0,
+                                        entryRadius: 0,
                                       ),
-                                  ],
-                                  fillColor: Colors.transparent,
-                                  borderColor: Colors.transparent,
-                                  borderWidth: 0,
-                                  entryRadius: 0,
+                                    ],
+                                    radarShape: RadarShape.polygon,
+                                    radarBackgroundColor: Colors.transparent,
+                                    radarBorderData: BorderSide(
+                                      color: grid,
+                                      width: 1,
+                                    ),
+                                    gridBorderData: BorderSide(
+                                      color: grid,
+                                      width: 1,
+                                    ),
+                                    tickBorderData: BorderSide(
+                                      color: grid,
+                                      width: 1,
+                                    ),
+                                    tickCount: scale.ticks,
+                                    isMinValueAtCenter: true,
+                                    // The scale now lives in a side legend, so hide
+                                    // fl_chart's in-chart ring numbers.
+                                    ticksTextStyle: const TextStyle(
+                                      color: Colors.transparent,
+                                      fontSize: 0.001,
+                                    ),
+                                    titlePositionPercentageOffset: 0,
+                                    getTitle: (index, angle) => RadarChartTitle(
+                                      text: index < spec.x.length
+                                          ? spec.x[index]
+                                          : '',
+                                    ),
+                                    // Labels are rendered as constrained widgets
+                                    // around the chart so long text can wrap.
+                                    titleTextStyle: const TextStyle(
+                                      color: Colors.transparent,
+                                      fontSize: 0.001,
+                                    ),
+                                    radarTouchData: RadarTouchData(
+                                      enabled: true,
+                                      touchSpotThreshold: (w * 0.02)
+                                          .clamp(8.0, 24.0)
+                                          .toDouble(),
+                                      mouseCursorResolver: (event, response) =>
+                                          _radarSpotFrom(response, spec) == null
+                                          ? SystemMouseCursors.basic
+                                          : SystemMouseCursors.click,
+                                      touchCallback: (event, response) {
+                                        final next =
+                                            event.isInterestedForInteractions
+                                            ? _radarSpotFrom(response, spec)
+                                            : null;
+                                        if (next != _radarTouch) {
+                                          setState(() => _radarTouch = next);
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  duration: Duration.zero,
                                 ),
-                              ],
-                              radarShape: RadarShape.polygon,
-                              radarBackgroundColor: Colors.transparent,
-                              radarBorderData: BorderSide(color: grid, width: 1),
-                              gridBorderData: BorderSide(color: grid, width: 1),
-                              tickBorderData: BorderSide(color: grid, width: 1),
-                              tickCount: scale.ticks,
-                              isMinValueAtCenter: true,
-                              // The scale now lives in a side legend, so hide
-                              // fl_chart's in-chart ring numbers.
-                              ticksTextStyle: const TextStyle(
-                                color: Colors.transparent,
-                                fontSize: 0.001,
                               ),
-                              titlePositionPercentageOffset: 0.14,
-                              getTitle: (index, angle) => RadarChartTitle(
-                                text: index < spec.x.length ? spec.x[index] : '',
-                              ),
-                              titleTextStyle: _applyFont(
-                                font,
-                                TextStyle(
-                                  fontSize: w * 0.0135 * _labelScale,
-                                  color: textColor.withValues(alpha: 0.88),
-                                  fontWeight: presentationMode
-                                      ? FontWeight.w600
-                                      : FontWeight.w500,
-                                ),
-                              ),
-                              radarTouchData: RadarTouchData(
-                                enabled: true,
-                                touchSpotThreshold: (w * 0.02).clamp(8.0, 24.0)
-                                    .toDouble(),
-                                mouseCursorResolver: (event, response) =>
-                                    _radarSpotFrom(response, spec) == null
-                                    ? SystemMouseCursors.basic
-                                    : SystemMouseCursors.click,
-                                touchCallback: (event, response) {
-                                  final next =
-                                      event.isInterestedForInteractions
-                                      ? _radarSpotFrom(response, spec)
-                                      : null;
-                                  if (next != _radarTouch) {
-                                    setState(() => _radarTouch = next);
-                                  }
-                                },
-                              ),
-                            ),
-                            duration: Duration.zero,
+                              if (_radarTouch != null)
+                                _radarTooltip(spec, chartSide, _radarTouch!),
+                            ],
                           ),
                         ),
-                        if (_radarTouch != null)
-                          _radarTooltip(spec, side, _radarTouch!),
                       ],
                     ),
                   ),
@@ -3226,6 +3661,61 @@ class _ChartPreviewState extends State<_ChartPreview> {
             ],
           );
         },
+      ),
+    );
+  }
+
+  Widget _radarAxisLabel({
+    required String label,
+    required int index,
+    required int count,
+    required double side,
+    required Color textColor,
+  }) {
+    final angle = (2 * math.pi * index / count) - math.pi / 2;
+    final boxWidth = side * (count <= 4 ? 0.22 : (count <= 6 ? 0.2 : 0.17));
+    final boxHeight = side * (count <= 6 ? 0.13 : 0.105);
+    final center = side / 2;
+    final horizontal = math.cos(angle);
+    final vertical = math.sin(angle);
+    final left = horizontal < -0.35
+        ? 0.0
+        : (horizontal > 0.35 ? side - boxWidth : center - boxWidth / 2);
+    final top = vertical < -0.7
+        ? 0.0
+        : (vertical > 0.7
+              ? side - boxHeight
+              : (center + vertical * side * 0.32 - boxHeight / 2).clamp(
+                  0.0,
+                  side - boxHeight,
+                ));
+    final alignment = horizontal < -0.25
+        ? TextAlign.left
+        : (horizontal > 0.25 ? TextAlign.right : TextAlign.center);
+
+    return Positioned(
+      key: ValueKey('radar-axis-label-$index'),
+      left: left,
+      top: top,
+      width: boxWidth,
+      height: boxHeight,
+      child: Align(
+        alignment: Alignment.center,
+        child: Text(
+          label,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          textAlign: alignment,
+          style: _applyFont(
+            font,
+            TextStyle(
+              fontSize: w * (count <= 6 ? 0.013 : 0.0115) * _labelScale,
+              height: 1.05,
+              color: textColor.withValues(alpha: 0.88),
+              fontWeight: presentationMode ? FontWeight.w600 : FontWeight.w500,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -3374,7 +3864,9 @@ class _ChartPreviewState extends State<_ChartPreview> {
     final range = (hi - lo).abs();
     final r = range <= 0 ? 1.0 : range;
     final rawStep = r / 4;
-    final mag = math.pow(10, (math.log(rawStep) / math.ln10).floor()).toDouble();
+    final mag = math
+        .pow(10, (math.log(rawStep) / math.ln10).floor())
+        .toDouble();
     final norm = rawStep / mag;
     final niceNorm = norm < 1.5
         ? 1.0
@@ -3476,7 +3968,11 @@ class _HoverPieChartState extends State<_HoverPieChart> {
   Widget build(BuildContext context) {
     final total = widget.values.fold<double>(0, (a, b) => a + b);
     final external = widget.externalHover;
-    final hovered = _hovered ?? (external != null && external >= 0 && external < widget.values.length ? external : null);
+    final hovered =
+        _hovered ??
+        (external != null && external >= 0 && external < widget.values.length
+            ? external
+            : null);
     return Stack(
       clipBehavior: Clip.none,
       children: [

@@ -37,6 +37,7 @@ class FullscreenPresenter extends StatefulWidget {
   /// made while presenting back to the deck.
   final Map<String, List<InkStroke>> initialAnnotations;
   final void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged;
+  final ValueChanged<Slide>? onSlideChanged;
 
   const FullscreenPresenter({
     super.key,
@@ -48,6 +49,7 @@ class FullscreenPresenter extends StatefulWidget {
     this.audienceWindow,
     this.initialAnnotations = const {},
     this.onAnnotationsChanged,
+    this.onSlideChanged,
   });
 
   /// Entry point used by the app: pick dual-screen mode when a second display is
@@ -62,6 +64,7 @@ class FullscreenPresenter extends StatefulWidget {
     TlpLevel tlp = TlpLevel.none,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
+    ValueChanged<Slide>? onSlideChanged,
   }) async {
     var displayCount = 0;
     if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
@@ -89,6 +92,7 @@ class FullscreenPresenter extends StatefulWidget {
         tlp: tlp,
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
+        onSlideChanged: onSlideChanged,
       );
     } else {
       await show(
@@ -100,6 +104,7 @@ class FullscreenPresenter extends StatefulWidget {
         tlp: tlp,
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
+        onSlideChanged: onSlideChanged,
       );
     }
   }
@@ -113,6 +118,7 @@ class FullscreenPresenter extends StatefulWidget {
     TlpLevel tlp = TlpLevel.none,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
+    ValueChanged<Slide>? onSlideChanged,
   }) async {
     final hadWakeLock = await _wakeLockEnabled();
     await _enableWakeLock();
@@ -131,6 +137,7 @@ class FullscreenPresenter extends StatefulWidget {
               tlp: tlp,
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
+              onSlideChanged: onSlideChanged,
             ),
             transitionsBuilder: (context, animation, secondary, child) =>
                 FadeTransition(opacity: animation, child: child),
@@ -156,6 +163,7 @@ class FullscreenPresenter extends StatefulWidget {
     TlpLevel tlp = TlpLevel.none,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
+    ValueChanged<Slide>? onSlideChanged,
   }) async {
     // A self-contained markdown deck is the payload for the audience window; it
     // carries the slides, the style profile and the TLP level in one string.
@@ -205,6 +213,7 @@ class FullscreenPresenter extends StatefulWidget {
           tlp: tlp,
           annotations: annotations,
           onAnnotationsChanged: onAnnotationsChanged,
+          onSlideChanged: onSlideChanged,
         );
       }
       return;
@@ -227,6 +236,7 @@ class FullscreenPresenter extends StatefulWidget {
               audienceWindow: audience,
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
+              onSlideChanged: onSlideChanged,
             ),
             transitionsBuilder: (context, animation, secondary, child) =>
                 FadeTransition(opacity: animation, child: child),
@@ -253,6 +263,16 @@ bool shouldUseDualScreen({
   required int displayCount,
 }) {
   return (isMacOS || isWindows || isLinux) && displayCount >= 2;
+}
+
+@visibleForTesting
+bool autoAdvanceWaitsForMedia(Slide slide) {
+  final autoplayVideo =
+      slide.type == SlideType.video &&
+      slide.videoPath.isNotEmpty &&
+      slide.videoAutoplay;
+  final autoplayAudio = slide.audioPath.isNotEmpty && slide.audioAutoplay;
+  return autoplayVideo || autoplayAudio;
 }
 
 Future<bool> _wakeLockEnabled() async {
@@ -325,9 +345,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// laatste slide staan). Met L te wisselen.
   bool _loop = false;
 
-  /// Wissel ná het afspelen van de audio op de slide i.p.v. op de tijdwissel.
+  /// Wissel ná het afspelen van autoplay-media i.p.v. op de tijdwissel.
   /// Met M te wisselen.
-  bool _advanceOnAudioEnd = true;
+  bool _advanceOnMediaEnd = true;
 
   /// Known displays for moving the fullscreen presentation window. This is not
   /// a second presenter window; it keeps the current output movable between
@@ -385,7 +405,20 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           case 'exit':
             _exit();
           case 'audioComplete':
-            _onAudioCompleted();
+            _onMediaCompleted(kind: 'audio');
+          case 'mediaComplete':
+            final args = Map<String, dynamic>.from(call.arguments as Map);
+            _onMediaCompleted(
+              index: (args['index'] as num?)?.toInt(),
+              kind: args['kind']?.toString(),
+            );
+          case 'checklistToggle':
+            final args = Map<String, dynamic>.from(call.arguments as Map);
+            _toggleChecklistItem(
+              slideIndex: (args['slideIndex'] as num?)?.toInt() ?? _index,
+              column: (args['column'] as num?)?.toInt() ?? 0,
+              itemIndex: (args['itemIndex'] as num?)?.toInt() ?? 0,
+            );
         }
         return null;
       });
@@ -429,6 +462,38 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         .catchError((_) => null);
     // On a slide change, push that slide's strokes so saved/earlier ink shows.
     if (indexChanged) _pushInk();
+  }
+
+  void _toggleChecklistItem({
+    required int slideIndex,
+    required int column,
+    required int itemIndex,
+  }) {
+    if (slideIndex < 0 || slideIndex >= widget.slides.length) return;
+    final slide = widget.slides[slideIndex];
+    final source = column == 1 ? slide.bullets2 : slide.bullets;
+    if (itemIndex < 0 || itemIndex >= source.length) return;
+    final updatedItems = List<String>.from(source);
+    final item = updatedItems[itemIndex];
+    updatedItems[itemIndex] = checklistBullet(
+      level: bulletLevel(item),
+      text: checklistItemText(item),
+      checked: !checklistItemChecked(item),
+    );
+    final updated = column == 1
+        ? slide.copyWith(bullets2: updatedItems)
+        : slide.copyWith(bullets: updatedItems);
+    setState(() => widget.slides[slideIndex] = updated);
+    widget.onSlideChanged?.call(updated);
+    if (_dual) {
+      audienceChannel
+          .invokeMethod('checklistUpdate', {
+            'slideIndex': slideIndex,
+            'bullets': updated.bullets,
+            'bullets2': updated.bullets2,
+          })
+          .catchError((_) => null);
+    }
   }
 
   // ── Annotatielaag ─────────────────────────────────────────────────────────
@@ -528,12 +593,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
     final slide = widget.slides[_index.clamp(0, widget.slides.length - 1)];
 
-    // Audio-gestuurd: heeft deze slide audio die vanzelf speelt én is de keuze
-    // 'na audio doorgaan' actief? Dan wachten we op het audio-einde (de
-    // _AudioPlayback meldt zich via onAudioComplete) en zetten we geen timer.
-    final audioDriven =
-        _advanceOnAudioEnd && slide.audioPath.isNotEmpty && slide.audioAutoplay;
-    if (audioDriven) return;
+    if (_advanceOnMediaEnd && autoAdvanceWaitsForMedia(slide)) return;
 
     final dur = slide.advanceDuration;
     if (dur <= 0) return;
@@ -559,7 +619,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     });
   }
 
-  /// Automatisch doorschakelen (tijd of audio-einde): naar de volgende slide,
+  /// Automatisch doorschakelen (tijd of media-einde): naar de volgende slide,
   /// of bij herhaling vanaf de laatste terug naar de eerste. Zonder herhaling
   /// blijft de laatste slide gewoon staan.
   void _autoAdvance() {
@@ -573,10 +633,20 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     }
   }
 
-  /// Aangeroepen door de audiospeler zodra de audio op de huidige slide klaar
-  /// is. In automatische modus met 'na audio doorgaan' schakelen we dan door.
-  void _onAudioCompleted() {
-    if (_autoPlay && _advanceOnAudioEnd) _autoAdvance();
+  void _onMediaCompleted({int? index, String? kind}) {
+    if (index != null && index != _index) return;
+    final slide = widget.slides[_index.clamp(0, widget.slides.length - 1)];
+    // A video is primary on a video slide. Ignore an attached audio track that
+    // happens to finish earlier.
+    if (kind == 'audio' &&
+        slide.type == SlideType.video &&
+        slide.videoPath.isNotEmpty &&
+        slide.videoAutoplay) {
+      return;
+    }
+    if (_autoPlay && _advanceOnMediaEnd && autoAdvanceWaitsForMedia(slide)) {
+      _autoAdvance();
+    }
   }
 
   void _toggleAutoPlay() {
@@ -589,8 +659,8 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _scheduleAdvance();
   }
 
-  void _toggleAudioAdvance() {
-    setState(() => _advanceOnAudioEnd = !_advanceOnAudioEnd);
+  void _toggleMediaAdvance() {
+    setState(() => _advanceOnMediaEnd = !_advanceOnMediaEnd);
     _scheduleAdvance();
   }
 
@@ -892,7 +962,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         _toggleLoop();
         return KeyEventResult.handled;
       case LogicalKeyboardKey.keyM:
-        _toggleAudioAdvance();
+        _toggleMediaAdvance();
         return KeyEventResult.handled;
       case LogicalKeyboardKey.keyS:
         _cycleDisplay();
@@ -1155,7 +1225,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       ('R', l10n.d('Verstreken tijd resetten')),
       ('A', l10n.d('Automatische modus aan/uit')),
       ('L', l10n.d('Herhalen (loop) aan/uit')),
-      ('M', l10n.d('Na audio automatisch doorgaan')),
+      ('M', l10n.d('Na media automatisch doorgaan')),
       ('H', l10n.d('Deze legenda')),
       ('Esc', l10n.d('Terug / afsluiten')),
     ];
@@ -1289,13 +1359,20 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                   slideCount: widget.slides.length,
                   tlp: widget.tlp,
                   presentationMode: true,
+                  onChecklistItemToggle: (column, itemIndex) =>
+                      _toggleChecklistItem(
+                        slideIndex: _index,
+                        column: column,
+                        itemIndex: itemIndex,
+                      ),
                   // Tijdens het presenteren speelt media en starten audio/video
-                  // vanzelf; het audio-einde stuurt de auto-advance aan. In dual-
+                  // vanzelf; het media-einde stuurt auto-advance aan. In dual-
                   // schermmodus speelt de media op het beamervenster, niet hier,
                   // anders zou het geluid dubbel klinken.
                   enableMedia: !_dual,
                   autoplayMedia: !_dual,
-                  onAudioComplete: _onAudioCompleted,
+                  onAudioComplete: () => _onMediaCompleted(kind: 'audio'),
+                  onVideoComplete: () => _onMediaCompleted(kind: 'video'),
                 ),
                 // Annotatielaag bovenop de dia. Laat klikken door wanneer er
                 // geen gereedschap actief is (zodat tikken blijft doorbladeren).

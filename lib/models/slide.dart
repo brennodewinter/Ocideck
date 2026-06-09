@@ -19,6 +19,30 @@ enum SlideType {
   chart,
 }
 
+enum ListStyle { bullets, numbered, checklist }
+
+int bulletLevel(String value) {
+  var level = 0;
+  while (level < value.length && value[level] == '\t') {
+    level++;
+  }
+  return level;
+}
+
+String bulletText(String value) => value.substring(bulletLevel(value));
+
+bool checklistItemChecked(String value) =>
+    RegExp(r'^\[[xX]\]\s*').hasMatch(bulletText(value));
+
+String checklistItemText(String value) =>
+    bulletText(value).replaceFirst(RegExp(r'^\[[ xX]\]\s*'), '');
+
+String checklistBullet({
+  required int level,
+  required String text,
+  required bool checked,
+}) => '${'\t' * level}[${checked ? 'x' : ' '}] $text';
+
 extension SlideTypeExtension on SlideType {
   String get label {
     switch (this) {
@@ -90,6 +114,8 @@ class Slide {
   final String subtitle;
   final List<String> bullets;
   final List<String> bullets2;
+  final ListStyle listStyle;
+  final bool showChecklistProgress;
 
   /// Optional headings above the two bullet columns (twoBullets only). Empty =
   /// no heading for that column.
@@ -128,6 +154,8 @@ class Slide {
     this.subtitle = '',
     this.bullets = const [],
     this.bullets2 = const [],
+    this.listStyle = ListStyle.bullets,
+    this.showChecklistProgress = false,
     this.columnTitle1 = '',
     this.columnTitle2 = '',
     this.imagePath = '',
@@ -183,6 +211,8 @@ class Slide {
       subtitle: src.subtitle,
       bullets: List<String>.from(src.bullets),
       bullets2: List<String>.from(src.bullets2),
+      listStyle: src.listStyle,
+      showChecklistProgress: src.showChecklistProgress,
       columnTitle1: src.columnTitle1,
       columnTitle2: src.columnTitle2,
       imagePath: src.imagePath,
@@ -215,6 +245,8 @@ class Slide {
     String? subtitle,
     List<String>? bullets,
     List<String>? bullets2,
+    ListStyle? listStyle,
+    bool? showChecklistProgress,
     String? columnTitle1,
     String? columnTitle2,
     String? imagePath,
@@ -246,6 +278,9 @@ class Slide {
       subtitle: subtitle ?? this.subtitle,
       bullets: bullets ?? this.bullets,
       bullets2: bullets2 ?? this.bullets2,
+      listStyle: listStyle ?? this.listStyle,
+      showChecklistProgress:
+          showChecklistProgress ?? this.showChecklistProgress,
       columnTitle1: columnTitle1 ?? this.columnTitle1,
       columnTitle2: columnTitle2 ?? this.columnTitle2,
       imagePath: imagePath ?? this.imagePath,

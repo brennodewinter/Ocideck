@@ -17,17 +17,127 @@ import '_editor_field.dart';
 class ChartEditor extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
+  final ValueChanged<List<Slide>>? onAddVariants;
   final String? projectPath;
 
   const ChartEditor({
     super.key,
     required this.slide,
     required this.onUpdate,
+    this.onAddVariants,
     this.projectPath,
   });
 
   @override
   State<ChartEditor> createState() => _ChartEditorState();
+}
+
+class _ChartVariantsDialog extends StatefulWidget {
+  final ChartType currentType;
+
+  const _ChartVariantsDialog({required this.currentType});
+
+  @override
+  State<_ChartVariantsDialog> createState() => _ChartVariantsDialogState();
+}
+
+class _ChartVariantsDialogState extends State<_ChartVariantsDialog> {
+  late final List<ChartType> _types = [
+    for (final type in ChartType.values)
+      if (type != widget.currentType) type,
+  ];
+
+  String _label(BuildContext context, ChartType type) {
+    final l10n = context.l10n;
+    return switch (type) {
+      ChartType.bar => l10n.d('Staaf'),
+      ChartType.line => l10n.d('Lijn'),
+      ChartType.pie => l10n.d('Cirkel'),
+      ChartType.radar => l10n.d('Spider'),
+    };
+  }
+
+  void _move(int index, int delta) {
+    final target = index + delta;
+    if (target < 0 || target >= _types.length) return;
+    setState(() {
+      final type = _types.removeAt(index);
+      _types.insert(target, type);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return AlertDialog(
+      title: Text(l10n.d('Grafiekvarianten maken')),
+      content: SizedBox(
+        width: 420,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              l10n.d(
+                'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.',
+              ),
+              style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+            ),
+            const SizedBox(height: 12),
+            for (var i = 0; i < _types.length; i++)
+              ListTile(
+                key: ValueKey('chart-variant-${_types[i].name}'),
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                leading: Icon(switch (_types[i]) {
+                  ChartType.bar => Icons.bar_chart,
+                  ChartType.line => Icons.show_chart,
+                  ChartType.pie => Icons.pie_chart_outline,
+                  ChartType.radar => Icons.radar,
+                }),
+                title: Text(_label(context, _types[i])),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      key: ValueKey('chart-variant-up-$i'),
+                      onPressed: i == 0 ? null : () => _move(i, -1),
+                      icon: const Icon(Icons.arrow_upward, size: 18),
+                      tooltip: l10n.d('Omhoog'),
+                    ),
+                    IconButton(
+                      key: ValueKey('chart-variant-down-$i'),
+                      onPressed: i == _types.length - 1
+                          ? null
+                          : () => _move(i, 1),
+                      icon: const Icon(Icons.arrow_downward, size: 18),
+                      tooltip: l10n.d('Omlaag'),
+                    ),
+                    IconButton(
+                      onPressed: () => setState(() => _types.removeAt(i)),
+                      icon: const Icon(Icons.close, size: 18),
+                      tooltip: l10n.d('Niet toevoegen'),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(l10n.d('Annuleren')),
+        ),
+        FilledButton(
+          onPressed: _types.isEmpty
+              ? null
+              : () => Navigator.pop(context, List<ChartType>.from(_types)),
+          child: Text(l10n.d('Slides toevoegen')),
+        ),
+      ],
+    );
+  }
 }
 
 class _ChartEditorState extends State<ChartEditor> {
@@ -111,7 +221,7 @@ class _ChartEditorState extends State<ChartEditor> {
     super.dispose();
   }
 
-  void _emit() {
+  ChartSpec _currentSpec() {
     final series = <ChartSeries>[
       for (var c = 0; c < _seriesNames.length; c++)
         ChartSeries(
@@ -128,7 +238,7 @@ class _ChartEditorState extends State<ChartEditor> {
           ],
         ),
     ];
-    final spec = ChartSpec(
+    return ChartSpec(
       type: _type,
       title: _title.text,
       source: _source,
@@ -138,7 +248,33 @@ class _ChartEditorState extends State<ChartEditor> {
       minBound: _supportsBounds ? _parseBound(_minBound.text) : null,
       maxBound: _supportsBounds ? _parseBound(_maxBound.text) : null,
     );
-    widget.onUpdate(widget.slide.copyWith(customMarkdown: spec.toBlock()));
+  }
+
+  void _emit() {
+    widget.onUpdate(
+      widget.slide.copyWith(customMarkdown: _currentSpec().toBlock()),
+    );
+  }
+
+  Future<void> _createVariants() async {
+    final selected = await showDialog<List<ChartType>>(
+      context: context,
+      builder: (context) => _ChartVariantsDialog(currentType: _type),
+    );
+    if (selected == null || selected.isEmpty) return;
+    final base = _currentSpec();
+    widget.onAddVariants?.call([
+      for (final type in selected)
+        widget.slide.copyWith(
+          customMarkdown: base
+              .copyWith(
+                type: type,
+                clearMinBound: type == ChartType.pie,
+                clearMaxBound: type == ChartType.pie,
+              )
+              .toBlock(),
+        ),
+    ]);
   }
 
   void _bump() => setState(() => _rev++);
@@ -481,6 +617,15 @@ class _ChartEditorState extends State<ChartEditor> {
                 },
               ),
               const Spacer(),
+              if (widget.onAddVariants != null) ...[
+                TextButton.icon(
+                  key: const ValueKey('chart-create-variants'),
+                  onPressed: _createVariants,
+                  icon: const Icon(Icons.auto_awesome_motion, size: 16),
+                  label: Text(l10n.d('Varianten')),
+                ),
+                const SizedBox(width: 4),
+              ],
               TextButton.icon(
                 onPressed: _importCsv,
                 icon: const Icon(Icons.upload_file, size: 16),
@@ -787,9 +932,7 @@ class _ChartEditorState extends State<ChartEditor> {
       decimal: true,
       signed: true,
     ),
-    inputFormatters: [
-      FilteringTextInputFormatter.allow(RegExp(r'[0-9.,\-]')),
-    ],
+    inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9.,\-]'))],
     style: const TextStyle(fontSize: 12),
     decoration: InputDecoration(
       labelText: label,

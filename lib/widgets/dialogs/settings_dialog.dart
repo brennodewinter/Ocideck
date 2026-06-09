@@ -942,6 +942,43 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           _themeProfile.accentColor,
           (v) => _themeProfile = _themeProfile.copyWith(accentColor: v),
         ),
+        const SizedBox(height: 24),
+        _sectionTitle(l10n.d('Checklist')),
+        _colorSetting(
+          l10n.d('Afgevinkt'),
+          _themeProfile.checklistCheckedColor,
+          (v) =>
+              _themeProfile = _themeProfile.copyWith(checklistCheckedColor: v),
+        ),
+        const SizedBox(height: 12),
+        _colorSetting(
+          l10n.d('Niet afgevinkt'),
+          _themeProfile.checklistUncheckedColor,
+          (v) => _themeProfile = _themeProfile.copyWith(
+            checklistUncheckedColor: v,
+          ),
+        ),
+        const SizedBox(height: 6),
+        SwitchListTile(
+          value: _themeProfile.checklistStrikeThrough,
+          onChanged: (value) => setState(() {
+            _themeProfile = _themeProfile.copyWith(
+              checklistStrikeThrough: value,
+            );
+            _profileTouched = true;
+          }),
+          title: Text(
+            l10n.d('Afgevinkte tekst doorhalen'),
+            style: const TextStyle(fontSize: 13),
+          ),
+          subtitle: Text(
+            l10n.d('Toont een streep door voltooide checklistitems.'),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+          controlAffinity: ListTileControlAffinity.leading,
+          contentPadding: EdgeInsets.zero,
+          dense: true,
+        ),
         const SizedBox(height: 12),
         _colorSetting(
           l10n.d('Tabeltekst'),
@@ -980,8 +1017,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         _colorSetting(
           l10n.d('Broncode achtergrond'),
           _themeProfile.codeBackgroundColor,
-          (v) =>
-              _themeProfile = _themeProfile.copyWith(codeBackgroundColor: v),
+          (v) => _themeProfile = _themeProfile.copyWith(codeBackgroundColor: v),
         ),
         const SizedBox(height: 12),
         _colorSetting(
@@ -1012,7 +1048,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         ),
         const SizedBox(height: 10),
         DropdownButtonFormField<String>(
-          initialValue: AppSettings.codeFonts.contains(_themeProfile.codeFontFamily)
+          initialValue:
+              AppSettings.codeFonts.contains(_themeProfile.codeFontFamily)
               ? _themeProfile.codeFontFamily
               : 'monospace',
           decoration: InputDecoration(
@@ -1282,11 +1319,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: const Color(0xFFCBD5E1)),
           ),
-          child: const Icon(
-            Icons.tune,
-            size: 18,
-            color: Color(0xFF64748B),
-          ),
+          child: const Icon(Icons.tune, size: 18, color: Color(0xFF64748B)),
         ),
       ),
     );
@@ -1363,7 +1396,10 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                 const SizedBox(height: 8),
                 Text(
                   l10n.d('Bijvoorbeeld #33FF33 voor een CRT-groen scherm.'),
-                  style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Color(0xFF94A3B8),
+                  ),
                 ),
               ],
             ),

@@ -4,6 +4,7 @@ import '../../models/slide.dart';
 import '../../services/image_service.dart';
 import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
+import 'list_style_selector.dart';
 
 class BulletsImageEditor extends StatefulWidget {
   final Slide slide;
@@ -29,7 +30,10 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   late final TextEditingController _title;
   late List<TextEditingController> _bullets;
   late List<int> _levels;
+  late List<bool> _checked;
   late List<FocusNode> _focusNodes;
+  late ListStyle _listStyle;
+  late bool _showChecklistProgress;
 
   static const _maxLevel = 4;
 
@@ -38,9 +42,12 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
     super.initState();
     _title = TextEditingController(text: widget.slide.title);
     _title.addListener(_emit);
+    _listStyle = widget.slide.listStyle;
+    _showChecklistProgress = widget.slide.showChecklistProgress;
     final list = widget.slide.bullets.isEmpty ? [''] : widget.slide.bullets;
     _levels = list.map(_levelOf).toList();
-    _bullets = list.map((b) => _makeCtrl(b.trimLeft())).toList();
+    _checked = list.map(checklistItemChecked).toList();
+    _bullets = list.map((b) => _makeCtrl(checklistItemText(b))).toList();
     _focusNodes = List.generate(_bullets.length, (_) => FocusNode());
   }
 
@@ -62,9 +69,17 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
     widget.onUpdate(
       widget.slide.copyWith(
         title: _title.text,
+        listStyle: _listStyle,
+        showChecklistProgress: _showChecklistProgress,
         bullets: List.generate(
           _bullets.length,
-          (i) => '\t' * _levels[i] + _bullets[i].text,
+          (i) => _listStyle == ListStyle.checklist
+              ? checklistBullet(
+                  level: _levels[i],
+                  text: _bullets[i].text,
+                  checked: _checked[i],
+                )
+              : '\t' * _levels[i] + _bullets[i].text,
         ),
       ),
     );
@@ -74,9 +89,11 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
     setState(() {
       final ctrl = _bullets.removeAt(oldIndex);
       final level = _levels.removeAt(oldIndex);
+      final checked = _checked.removeAt(oldIndex);
       final focus = _focusNodes.removeAt(oldIndex);
       _bullets.insert(newIndex, ctrl);
       _levels.insert(newIndex, level);
+      _checked.insert(newIndex, checked);
       _focusNodes.insert(newIndex, focus);
     });
     _emit();
@@ -86,6 +103,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
     setState(() {
       _bullets.insert(i + 1, _makeCtrl(''));
       _levels.insert(i + 1, _levels[i]);
+      _checked.insert(i + 1, false);
       _focusNodes.insert(i + 1, FocusNode());
     });
     _emit();
@@ -95,13 +113,25 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   }
 
   void _removeBulletAndFocus(int i) {
-    if (_bullets.length <= 1) return;
+    if (_bullets.length == 1) {
+      setState(() {
+        _bullets[i].removeListener(_emit);
+        _bullets[i].clear();
+        _bullets[i].addListener(_emit);
+        _levels[i] = 0;
+        _checked[i] = false;
+      });
+      _emit();
+      _focusNodes[i].requestFocus();
+      return;
+    }
     final target = (i - 1).clamp(0, _bullets.length - 2);
     setState(() {
       _bullets[i].removeListener(_emit);
       _bullets[i].dispose();
       _bullets.removeAt(i);
       _levels.removeAt(i);
+      _checked.removeAt(i);
       _focusNodes[i].dispose();
       _focusNodes.removeAt(i);
     });
@@ -138,6 +168,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
       for (int j = 1; j < lines.length; j++) {
         _bullets.insert(i + j, _makeCtrl(lines[j]));
         _levels.insert(i + j, _levels[i]);
+        _checked.insert(i + j, false);
         _focusNodes.insert(i + j, FocusNode());
       }
     });
@@ -183,6 +214,27 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
       padding: const EdgeInsets.all(16),
       children: [
         EditorField(label: 'Titel', controller: _title, hint: 'Slide titel'),
+        const SizedBox(height: 16),
+        ListStyleSelector(
+          value: _listStyle,
+          onChanged: (value) {
+            setState(() => _listStyle = value);
+            _emit();
+          },
+        ),
+        if (_listStyle == ListStyle.checklist)
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(l10n.d('Voortgangsgrafiek tonen')),
+            subtitle: Text(
+              l10n.d('Toont afgevinkt en niet afgevinkt als percentages.'),
+            ),
+            value: _showChecklistProgress,
+            onChanged: (value) {
+              setState(() => _showChecklistProgress = value);
+              _emit();
+            },
+          ),
         const SizedBox(height: 16),
         const SectionLabel('Bullets (links)'),
         ReorderableListView(
@@ -254,10 +306,25 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
             ),
           ),
           const SizedBox(width: 4),
-          Text(
-            _markerForLevel(level),
-            style: const TextStyle(fontSize: 16, color: Color(0xFF94A3B8)),
-          ),
+          if (_listStyle == ListStyle.checklist)
+            SizedBox(
+              width: 24,
+              height: 24,
+              child: Checkbox(
+                key: ValueKey('checklist-item-$i'),
+                value: _checked[i],
+                onChanged: (value) {
+                  setState(() => _checked[i] = value ?? false);
+                  _emit();
+                },
+                visualDensity: VisualDensity.compact,
+              ),
+            )
+          else
+            Text(
+              _markerForItem(i),
+              style: const TextStyle(fontSize: 16, color: Color(0xFF94A3B8)),
+            ),
           const SizedBox(width: 8),
           Expanded(
             child: Focus(
@@ -301,14 +368,13 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
             ),
           ),
           IconButton(
+            key: ValueKey('remove-bullet-$i'),
             icon: const Icon(
               Icons.remove_circle_outline,
               size: 18,
               color: Color(0xFF94A3B8),
             ),
-            onPressed: _bullets.length > 1
-                ? () => _removeBulletAndFocus(i)
-                : null,
+            onPressed: () => _removeBulletAndFocus(i),
             padding: const EdgeInsets.symmetric(horizontal: 4),
             constraints: const BoxConstraints(minWidth: 28),
           ),
@@ -320,5 +386,19 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   String _markerForLevel(int level) {
     const markers = ['•', '◦', '▪', '▫', '–'];
     return markers[level.clamp(0, markers.length - 1)];
+  }
+
+  String _markerForItem(int index) {
+    if (_listStyle == ListStyle.bullets) {
+      return _markerForLevel(_levels[index]);
+    }
+    if (_listStyle == ListStyle.checklist) return '';
+    final level = _levels[index];
+    var number = 0;
+    for (var i = 0; i <= index; i++) {
+      if (_levels[i] == level) number++;
+      if (_levels[i] < level) number = 0;
+    }
+    return '$number.';
   }
 }

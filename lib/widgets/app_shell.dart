@@ -979,6 +979,14 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         tlp: deck.tlp,
         annotations: deck.annotations,
         onAnnotationsChanged: deckNotifier.setAnnotations,
+        onSlideChanged: (updated) {
+          final index = deckNotifier.currentState.deck?.slides.indexWhere(
+            (slide) => slide.id == updated.id,
+          );
+          if (index != null && index >= 0) {
+            deckNotifier.updateSlide(index, updated);
+          }
+        },
       );
     }
 

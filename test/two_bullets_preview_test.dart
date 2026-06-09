@@ -59,9 +59,7 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('two-bullet columns scale independently (sparse stays large)', (
-    tester,
-  ) async {
+  testWidgets('two-bullet columns use the same font size', (tester) async {
     final slide = Slide.create(SlideType.twoBullets).copyWith(
       bullets: const ['Solo'],
       bullets2: List.generate(14, (i) => 'Item $i'),
@@ -79,8 +77,7 @@ void main() {
         .style
         .fontSize!;
 
-    // The single-bullet column is not shrunk to the 14-bullet column's size.
-    expect(sizeOf('Solo'), greaterThan(sizeOf('Item 0') * 1.3));
+    expect(sizeOf('Solo'), sizeOf('Item 0'));
     expect(tester.takeException(), isNull);
   });
 

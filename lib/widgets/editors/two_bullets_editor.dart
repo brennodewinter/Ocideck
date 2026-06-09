@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
+import 'list_style_selector.dart';
 
 typedef _Mutate = void Function(VoidCallback fn);
 
@@ -26,6 +27,8 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
   late final TextEditingController _heading2;
   late _BulletSet _left;
   late _BulletSet _right;
+  late ListStyle _listStyle;
+  late bool _showChecklistProgress;
 
   @override
   void initState() {
@@ -36,6 +39,8 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
     _heading2 = TextEditingController(text: widget.slide.columnTitle2);
     _heading1.addListener(_emit);
     _heading2.addListener(_emit);
+    _listStyle = widget.slide.listStyle;
+    _showChecklistProgress = widget.slide.showChecklistProgress;
     _left = _BulletSet(widget.slide.bullets, _emit);
     _right = _BulletSet(widget.slide.bullets2, _emit);
   }
@@ -46,8 +51,10 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
         title: _title.text,
         columnTitle1: _heading1.text,
         columnTitle2: _heading2.text,
-        bullets: _left.values,
-        bullets2: _right.values,
+        listStyle: _listStyle,
+        showChecklistProgress: _showChecklistProgress,
+        bullets: _left.values(_listStyle),
+        bullets2: _right.values(_listStyle),
       ),
     );
   }
@@ -69,6 +76,29 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
       children: [
         EditorField(label: 'Titel', controller: _title, hint: 'Slide titel'),
         const SizedBox(height: 16),
+        ListStyleSelector(
+          value: _listStyle,
+          onChanged: (value) {
+            setState(() => _listStyle = value);
+            _emit();
+          },
+        ),
+        if (_listStyle == ListStyle.checklist)
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(context.l10n.d('Voortgangsgrafiek tonen')),
+            subtitle: Text(
+              context.l10n.d(
+                'Toont afgevinkt en niet afgevinkt als percentages.',
+              ),
+            ),
+            value: _showChecklistProgress,
+            onChanged: (value) {
+              setState(() => _showChecklistProgress = value);
+              _emit();
+            },
+          ),
+        const SizedBox(height: 16),
         LayoutBuilder(
           builder: (context, constraints) {
             final narrow = constraints.maxWidth < 560;
@@ -78,12 +108,14 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
                 set: _left,
                 emit: _emit,
                 headingController: _heading1,
+                listStyle: _listStyle,
               ),
               _BulletColumn(
                 label: 'Bullets rechts',
                 set: _right,
                 emit: _emit,
                 headingController: _heading2,
+                listStyle: _listStyle,
               ),
             ];
             if (narrow) {
@@ -112,18 +144,26 @@ class _BulletSet {
   final VoidCallback emit;
   late List<TextEditingController> controllers;
   late List<int> levels;
+  late List<bool> checked;
   late List<FocusNode> focusNodes;
 
   _BulletSet(List<String> raw, this.emit) {
     final list = raw.isEmpty ? [''] : raw;
     levels = list.map(_levelOf).toList();
-    controllers = list.map((b) => _makeCtrl(b.trimLeft())).toList();
+    checked = list.map(checklistItemChecked).toList();
+    controllers = list.map((b) => _makeCtrl(checklistItemText(b))).toList();
     focusNodes = List.generate(controllers.length, (_) => FocusNode());
   }
 
-  List<String> get values => List.generate(
+  List<String> values(ListStyle listStyle) => List.generate(
     controllers.length,
-    (i) => '\t' * levels[i] + controllers[i].text,
+    (i) => listStyle == ListStyle.checklist
+        ? checklistBullet(
+            level: levels[i],
+            text: controllers[i].text,
+            checked: checked[i],
+          )
+        : '\t' * levels[i] + controllers[i].text,
   );
 
   static int _levelOf(String b) {
@@ -144,6 +184,7 @@ class _BulletSet {
     mutate(() {
       controllers.insert(i + 1, _makeCtrl(''));
       levels.insert(i + 1, levels[i]);
+      checked.insert(i + 1, false);
       focusNodes.insert(i + 1, FocusNode());
     });
     emit();
@@ -153,13 +194,25 @@ class _BulletSet {
   }
 
   void removeAndFocus(_Mutate mutate, int i) {
-    if (controllers.length <= 1) return;
+    if (controllers.length == 1) {
+      mutate(() {
+        controllers[i].removeListener(emit);
+        controllers[i].clear();
+        controllers[i].addListener(emit);
+        levels[i] = 0;
+        checked[i] = false;
+      });
+      emit();
+      focusNodes[i].requestFocus();
+      return;
+    }
     final target = (i - 1).clamp(0, controllers.length - 2);
     mutate(() {
       controllers[i].removeListener(emit);
       controllers[i].dispose();
       controllers.removeAt(i);
       levels.removeAt(i);
+      checked.removeAt(i);
       focusNodes[i].dispose();
       focusNodes.removeAt(i);
     });
@@ -198,6 +251,7 @@ class _BulletSet {
       for (int j = 1; j < lines.length; j++) {
         controllers.insert(i + j, _makeCtrl(lines[j]));
         levels.insert(i + j, levels[i]);
+        checked.insert(i + j, false);
         focusNodes.insert(i + j, FocusNode());
       }
     });
@@ -223,12 +277,14 @@ class _BulletColumn extends StatefulWidget {
   final _BulletSet set;
   final VoidCallback emit;
   final TextEditingController headingController;
+  final ListStyle listStyle;
 
   const _BulletColumn({
     required this.label,
     required this.set,
     required this.emit,
     required this.headingController,
+    required this.listStyle,
   });
 
   @override
@@ -275,10 +331,25 @@ class _BulletColumnState extends State<_BulletColumn> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            _markerForLevel(level),
-            style: const TextStyle(fontSize: 16, color: Color(0xFF94A3B8)),
-          ),
+          if (widget.listStyle == ListStyle.checklist)
+            SizedBox(
+              width: 24,
+              height: 24,
+              child: Checkbox(
+                key: ValueKey('checklist-item-${widget.label}-$i'),
+                value: set.checked[i],
+                onChanged: (value) {
+                  setState(() => set.checked[i] = value ?? false);
+                  widget.emit();
+                },
+                visualDensity: VisualDensity.compact,
+              ),
+            )
+          else
+            Text(
+              _markerForItem(i),
+              style: const TextStyle(fontSize: 16, color: Color(0xFF94A3B8)),
+            ),
           const SizedBox(width: 8),
           Expanded(
             child: Focus(
@@ -324,14 +395,13 @@ class _BulletColumnState extends State<_BulletColumn> {
             ),
           ),
           IconButton(
+            key: ValueKey('remove-bullet-${widget.label}-$i'),
             icon: const Icon(
               Icons.remove_circle_outline,
               size: 18,
               color: Color(0xFF94A3B8),
             ),
-            onPressed: set.controllers.length > 1
-                ? () => set.removeAndFocus((fn) => setState(fn), i)
-                : null,
+            onPressed: () => set.removeAndFocus((fn) => setState(fn), i),
             tooltip: l10n.d('Verwijder'),
             padding: const EdgeInsets.symmetric(horizontal: 4),
             constraints: const BoxConstraints(minWidth: 28),
@@ -344,5 +414,19 @@ class _BulletColumnState extends State<_BulletColumn> {
   String _markerForLevel(int level) {
     const markers = ['•', '◦', '▪', '▫', '–'];
     return markers[level.clamp(0, markers.length - 1)];
+  }
+
+  String _markerForItem(int index) {
+    if (widget.listStyle == ListStyle.bullets) {
+      return _markerForLevel(set.levels[index]);
+    }
+    if (widget.listStyle == ListStyle.checklist) return '';
+    final level = set.levels[index];
+    var number = 0;
+    for (var i = 0; i <= index; i++) {
+      if (set.levels[i] == level) number++;
+      if (set.levels[i] < level) number = 0;
+    }
+    return '$number.';
   }
 }

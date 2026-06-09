@@ -103,6 +103,16 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
               ? null
               : Offset((pt[0] as num).toDouble(), (pt[1] as num).toDouble());
         });
+      case 'checklistUpdate':
+        final m = Map<String, dynamic>.from(call.arguments as Map);
+        final i = (m['slideIndex'] as num?)?.toInt();
+        if (i == null || i < 0 || i >= _slides.length || !mounted) return null;
+        setState(() {
+          _slides[i] = _slides[i].copyWith(
+            bullets: List<String>.from(m['bullets'] as List? ?? const []),
+            bullets2: List<String>.from(m['bullets2'] as List? ?? const []),
+          );
+        });
       case 'close':
         try {
           final self = await WindowController.fromCurrentEngine();
@@ -112,9 +122,9 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     return null;
   }
 
-  void _send(String method) {
+  void _send(String method, [Object? arguments]) {
     // Best-effort: the presenter may already be gone.
-    presenterChannel.invokeMethod(method).catchError((_) => null);
+    presenterChannel.invokeMethod(method, arguments).catchError((_) => null);
   }
 
   @override
@@ -169,11 +179,23 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                   slideCount: _slides.length,
                   tlp: _tlp,
                   presentationMode: true,
+                  onChecklistItemToggle: (column, itemIndex) =>
+                      _send('checklistToggle', {
+                        'slideIndex': _index,
+                        'column': column,
+                        'itemIndex': itemIndex,
+                      }),
                   enableMedia: true,
                   autoplayMedia: true,
-                  // Audio finishing on the beamer drives the presenter's
-                  // auto-advance.
-                  onAudioComplete: () => _send('audioComplete'),
+                  // Media finishing on the beamer drives auto-advance.
+                  onAudioComplete: () => _send('mediaComplete', {
+                    'index': _index,
+                    'kind': 'audio',
+                  }),
+                  onVideoComplete: () => _send('mediaComplete', {
+                    'index': _index,
+                    'kind': 'video',
+                  }),
                 ),
                 AnnotationLayer(
                   strokes: _ink[_index] ?? const [],
