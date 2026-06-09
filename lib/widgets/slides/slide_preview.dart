@@ -677,8 +677,13 @@ class _BulletsPreview extends StatelessWidget {
 
     final slideHeight = w * 9 / 16;
     final availW = (w - pad * 2).clamp(w * 0.12, w);
+    // The progress chart only needs a modest, fixed slot; give all remaining
+    // width to the bullets so the text can grow as large (and readable) as
+    // possible, especially on slides with many checklist items.
+    final progressGap = w * 0.025;
+    final progressW = w * 0.34;
     final textAvailW = showProgress
-        ? ((availW - w * 0.025) / 2).clamp(w * 0.12, availW)
+        ? (availW - progressGap - progressW).clamp(w * 0.12, availW)
         : availW;
     final availH = slideHeight - (pad + safe.top) - (pad + safe.bottom);
     // Grow (or, when needed, shrink) the text so it uses the full vertical
@@ -766,8 +771,9 @@ class _BulletsPreview extends StatelessWidget {
                         ),
                       ),
                       if (showProgress) ...[
-                        SizedBox(width: w * 0.025),
-                        Expanded(
+                        SizedBox(width: progressGap),
+                        SizedBox(
+                          width: progressW,
                           child: Center(
                             child: _ChecklistProgress(
                               bullets: bullets,
@@ -1401,7 +1407,11 @@ class _ChecklistProgress extends StatelessWidget {
         final maxW = constraints.maxWidth.isFinite
             ? constraints.maxWidth
             : w * 0.4;
-        final diameter = maxW.clamp(w * 0.26, w * 0.38).toDouble();
+        // Cap the pie so it stays a balanced companion to the bullet column
+        // rather than dominating it: a smaller chart keeps the visual split
+        // closer to 50/50 and, crucially, never forces the surrounding text to
+        // shrink to fit the chart's height when a slide has many bullets.
+        final diameter = maxW.clamp(w * 0.22, w * 0.30).toDouble();
         final baseRadius = diameter * 0.44;
         final hoverRadius = diameter * 0.48;
         final pieTitleStyle = _applyFont(
