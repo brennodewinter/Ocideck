@@ -1004,12 +1004,10 @@ class _TwoBulletsPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pad = w * 0.065;
+    // Tighter top/bottom margin than the side margin so dense columns (e.g. a
+    // 19-item list) can use more of the slide height and stay readable.
+    final vPad = w * 0.045;
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
-    final titleSize = w * 0.04;
-    final bulletSize = w * 0.024;
-    final spacing = pad * 0.38;
-    final bulletGap = w * 0.0055;
-    final columnGap = w * 0.055;
     final leftBullets = slide.bullets
         .where((b) => b.trimLeft().isNotEmpty)
         .toList();
@@ -1018,16 +1016,26 @@ class _TwoBulletsPreview extends StatelessWidget {
         .toList();
     final hasTitle = slide.title.isNotEmpty;
 
+    // On dense slides (a long column drives the shared text size down) spend
+    // less of the height on the title, headings and inter-item gaps so the
+    // list items themselves can render larger and stay readable.
+    final dense = math.max(leftBullets.length, rightBullets.length) > 12;
+    final titleSize = w * (dense ? 0.034 : 0.04);
+    final bulletSize = w * 0.024;
+    final spacing = pad * (dense ? 0.28 : 0.38);
+    final bulletGap = w * (dense ? 0.0036 : 0.0055);
+    final columnGap = w * 0.055;
+
     final col1Title = slide.columnTitle1.trim();
     final col2Title = slide.columnTitle2.trim();
     final hasColumnTitles = col1Title.isNotEmpty || col2Title.isNotEmpty;
-    final headingSize = w * 0.03;
-    final headingGap = w * 0.012;
+    final headingSize = w * (dense ? 0.023 : 0.03);
+    final headingGap = w * (dense ? 0.007 : 0.012);
 
     final slideHeight = w * 9 / 16;
     final contentW = (w - pad * 2).clamp(w * 0.12, w);
     final columnW = ((contentW - columnGap) / 2).clamp(w * 0.12, w);
-    var availH = slideHeight - (pad + safe.top) - (pad + safe.bottom);
+    var availH = slideHeight - (vPad + safe.top) - (vPad + safe.bottom);
     if (hasTitle) {
       availH -= _measureTextHeight(
         slide.title,
@@ -1092,9 +1100,9 @@ class _TwoBulletsPreview extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.fromLTRB(
             pad,
-            pad + safe.top,
+            vPad + safe.top,
             pad,
-            pad + safe.bottom,
+            vPad + safe.bottom,
           ),
           child: FittedBox(
             fit: BoxFit.scaleDown,
