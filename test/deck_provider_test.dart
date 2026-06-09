@@ -164,6 +164,31 @@ void main() {
     expect(n.state.revision, greaterThan(revisionBefore));
   });
 
+  test('clearAllChecklists is a single undoable step that restores the checks', () {
+    final n = _notifier()..newDeck('D');
+    final slide = Slide.create(SlideType.bullets).copyWith(
+      listStyle: ListStyle.checklist,
+      bullets: ['[x] Klaar', '[ ] Open'],
+      bullets2: ['[x] Tweede'],
+    );
+    n.loadDeck(n.state.deck!.copyWith(slides: [slide]));
+    expect(n.checkedChecklistCount, 2);
+
+    n.clearAllChecklists();
+    expect(n.checkedChecklistCount, 0);
+    expect(n.state.canUndo, isTrue);
+    final revisionAfterClear = n.state.revision;
+
+    n.undo();
+
+    // One undo restores every checked item in both columns...
+    expect(n.checkedChecklistCount, 2);
+    expect(n.state.deck!.slides.first.bullets, ['[x] Klaar', '[ ] Open']);
+    expect(n.state.deck!.slides.first.bullets2, ['[x] Tweede']);
+    // ...and bumps the revision again so the open editor reflects the restore.
+    expect(n.state.revision, greaterThan(revisionAfterClear));
+  });
+
   test('clearAllChecklists is a no-op when nothing is checked', () {
     final n = _notifier()..newDeck('D');
     final slide = Slide.create(SlideType.bullets).copyWith(
