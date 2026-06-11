@@ -3,8 +3,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'l10n/app_localizations.dart';
 import 'state/settings_provider.dart';
+import 'state/consent_provider.dart';
 import 'theme/app_theme.dart';
 import 'widgets/app_shell.dart';
+import 'widgets/dialogs/consent_dialog.dart';
 
 class OciDeckApp extends ConsumerWidget {
   const OciDeckApp({super.key});
@@ -47,7 +49,39 @@ class OciDeckApp extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      home: const AppShell(),
+      home: const _ConsentGate(),
     );
+  }
+}
+
+class _ConsentGate extends ConsumerWidget {
+  const _ConsentGate();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final consent = ref.watch(consentProvider);
+
+    if (consent.isLoading) {
+      return Scaffold(
+        body: Center(
+          child: const CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    if (!consent.hasAccepted) {
+      return MaterialApp(
+        title: 'OciDeck',
+        theme: ThemeData.light(),
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          body: Center(
+            child: ConsentDialog(),
+          ),
+        ),
+      );
+    }
+
+    return const AppShell();
   }
 }

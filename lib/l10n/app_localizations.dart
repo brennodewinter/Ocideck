@@ -4191,5 +4191,22 @@ const _dutchSourceStringAdditions = {
     'Alle afbeeldingen hebben tags.': 'Tur imágen tin tag.',
     'Zet het filter uit om alles weer te zien.':
         'Paga e filter pa mira tur kos atrobe.',
+    'Welkom bij OciDeck': 'Welcome to OciDeck',
+    'Privacy en gebruik': 'Privacy and Usage',
+    'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
+        'OciDeck is a local desktop application. Your presentations and data are stored exclusively on your computer.',
+    'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
+        'The app collects no personal data, no statistics, and no usage data. Your privacy is our priority.',
+    'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
+        'All data you enter in OciDeck remains on your local system and is not sent to external servers.',
+    'Licentie (MIT)': 'License (MIT)',
+    'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
+        'By clicking "Agree", you accept these terms and agree to the use of OciDeck.',
+    'Volledige licentie online': 'Full license online',
+    'Akkoord gaan': 'Agree',
+    'Toestemming intrekken': 'Revoke Consent',
+    'Toestemming ingetrokken': 'Consent revoked',
+    'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.':
+        'You must accept the privacy and usage terms before you can use OciDeck.',
   },
 };
