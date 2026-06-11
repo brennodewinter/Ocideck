@@ -8,6 +8,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Duplicate clean-up in the image library** — a footer button finds
+  byte-identical images by md5 checksum, keeps one file per group (preferring
+  the one used in slides, then the oldest), merges the tags/descriptions and
+  captions of the copies onto it, repoints slides that used a copy — in open
+  decks and in `.md` presentations on disk that are not currently open — and
+  deletes the copies after confirmation.
+- **Untagged-images filter in the image library** — a toggle next to the search
+  box shows only images without a description/tags, making it easy to see which
+  ones still need attention.
+- **Delete warning covers decks on disk** — deleting an image from the library
+  now also warns when presentations that are not currently open still
+  reference it.
 - **Source-code slides** — a "code sheet" with per-language syntax highlighting,
   stored as a fenced code block. Background, text colour and monospace font are
   part of the style profile, with a syntax-colouring toggle; turning it off renders
@@ -37,6 +49,26 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   live to the beamer, and persisted in a `<name>.ink.json` sidecar.
 - **App theming** — customizable app appearance profiles, including a dark
   interface.
+- **Paste a table into a table cell** — pasting a spreadsheet selection (Excel,
+  Numbers, LibreOffice Calc, Google Sheets), CSV (comma or semicolon), or a
+  markdown table into any cell of the table editor fills the whole grid from
+  that cell, growing rows and columns as needed. Works with `Ctrl/Cmd+V` and
+  `Shift+Insert` on macOS, Windows, and Linux; plain text still pastes into the
+  single cell.
+- **Slide-type chooser previews** — the add-slide dialog shows a miniature
+  wireframe of each layout (in the spirit of other presentation tools) instead
+  of an abstract icon, and is fully keyboard-operable (`Tab`/`Enter`/`Esc`).
+- **Accessibility (WCAG 2.1)**:
+  - An **interface text size** setting (100–200%, Settings → General →
+    Accessibility) that scales all editor text; slides themselves keep their
+    fixed design size.
+  - The panel divider is focusable and **keyboard-resizable** (arrow keys), with
+    a visible focus state, and presents itself to screen readers as a slider.
+  - **Screen-reader support**: slide thumbnails announce one concise label
+    ("Slide 3/12: title") instead of their full content; charts expose their
+    type, title, and underlying values as a text alternative; the presenter
+    announces each slide change.
+  - Improved contrast for hint/label text in the editors.
 - Project documentation: contributing guide, security policy, architecture and
   build notes, user guide, keyboard-shortcut reference, third-party notices, and
   the EUPL-1.2 licence text.
@@ -47,11 +79,36 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   separate from the slide title.
 - Slide text auto-sizing now measures with the deck's own font, so text grows to
   use the available space more accurately instead of staying smaller than needed.
-- The two bullet columns now scale **independently**, so a column with few items
-  is no longer shrunk down to the size of a crowded one beside it.
+- The two bullet columns are measured **independently** and then rendered at a
+  **shared size** set by the busiest column, so the two columns always look
+  typographically related. Dense two-column slides spend less height on the
+  title, headings, and gaps so the list items themselves render larger.
 - Slide transitions in the presenter no longer flash a black frame (neighbour
   images are precached and `gaplessPlayback` is enabled) — important for
   recording.
+- **Spider/radar charts** now use the available space: axis labels are measured
+  and placed snugly around the polygon (up to three lines, full remaining
+  width), so the diagram renders considerably larger and long labels stay
+  readable instead of being truncated.
+- Bullet auto-fit now stops growing at ≈32 pt (on a 16:9 deck) — the upper end
+  of the 24–32 pt range presentation-design guidance recommends for body text —
+  so slides with few bullets no longer render body text that competes with the
+  title.
+- After resizing the slide panel (dragging the divider or resizing the window),
+  the list scrolls the slide being edited back into view.
+
+### Fixed
+- Hover on charts (tooltips, legend highlight) now works on a second screen:
+  macOS only delivered mouse-moved events to the key window, so the borderless
+  beamer window never saw them; the stuck hover state after the pointer left a
+  window is gone for the same reason.
+- Bar-chart x-axis labels could run through each other: the spacing maths now
+  matches how bar groups are actually laid out, and the final label shrinks to
+  the real gap when it sits closer than a full step.
+- A crash in the slide list ("A _RenderLayoutBuilder was mutated…") when its
+  keyed items were rebuilt during layout — both the resize-detection inside the
+  panel and the shell's width computation now avoid LayoutBuilders above the
+  reorderable list.
 
 ## [1.0.0]
 

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:screen_retriever/screen_retriever.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
@@ -14,6 +15,7 @@ import '../../models/slide.dart';
 import '../../services/markdown_service.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
+import '../slides/inline_markdown.dart';
 import '../slides/slide_preview.dart';
 import 'annotation_overlay.dart';
 import 'audience_window.dart';
@@ -727,6 +729,22 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     if (mounted) Navigator.pop(context);
   }
 
+  /// Meld de slidewissel aan schermlezers (WCAG 4.1.3, statusberichten):
+  /// visueel verandert de hele slide, maar zonder aankondiging merkt een
+  /// schermlezer-gebruiker de wissel niet op.
+  void _announceSlide() {
+    final total = widget.slides.length;
+    if (total == 0 || !mounted) return;
+    final slide = widget.slides[_index.clamp(0, total - 1)];
+    final title = stripInlineMarkdown(slide.title).trim();
+    SemanticsService.sendAnnouncement(
+      View.of(context),
+      '${context.l10n.d('Slide')} ${_index + 1}/$total'
+      '${title.isEmpty ? '' : ': $title'}',
+      TextDirection.ltr,
+    );
+  }
+
   void _next() {
     // Eerste toets/klik op een blanco scherm haalt het scherm terug.
     if (_blank != _Blank.none) {
@@ -736,6 +754,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     if (_index < widget.slides.length - 1) {
       setState(() => _index++);
       _scheduleAdvance();
+      _announceSlide();
     }
   }
 
@@ -747,6 +766,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     if (_index > 0) {
       setState(() => _index--);
       _scheduleAdvance();
+      _announceSlide();
     }
   }
 
@@ -839,6 +859,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       _gridOpen = false;
     });
     _scheduleAdvance();
+    _announceSlide();
   }
 
   /// Ga rechtstreeks naar slide [index] zonder het raster te openen (Home/End).
@@ -851,6 +872,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     if (target == _index) return;
     setState(() => _index = target);
     _scheduleAdvance();
+    _announceSlide();
   }
 
   /// Verplaats de rastercursor en houd 'm in beeld.

@@ -289,7 +289,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
           else
             Text(
               _markerForItem(i),
-              style: const TextStyle(fontSize: 16, color: Color(0xFF94A3B8)),
+              style: const TextStyle(fontSize: 16, color: Color(0xFF64748B)),
             ),
           const SizedBox(width: 8),
           Expanded(
@@ -342,7 +342,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
             icon: const Icon(
               Icons.remove_circle_outline,
               size: 18,
-              color: Color(0xFF94A3B8),
+              color: Color(0xFF64748B),
             ),
             onPressed: () => _removeBulletAndFocus(i),
             tooltip: l10n.d('Verwijder'),

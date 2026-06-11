@@ -17,11 +17,28 @@ class OciDeckApp extends ConsumerWidget {
     final appearance = ref.watch(
       settingsProvider.select((s) => s.appAppearanceProfile),
     );
+    final uiTextScale = ref.watch(
+      settingsProvider.select((s) => s.uiTextScale),
+    );
     AppLocalizations.setActiveLanguageCode(languageCode);
     return MaterialApp(
       title: 'OciDeck',
       theme: AppTheme.fromProfile(appearance),
       debugShowCheckedModeBanner: false,
+      // Interface text scaling (WCAG 1.4.4): the user's setting multiplies
+      // whatever the OS already asks for. Slides themselves opt out — they
+      // are a fixed design canvas (see SlidePreviewWidget).
+      builder: (context, child) {
+        final media = MediaQuery.of(context);
+        return MediaQuery(
+          data: media.copyWith(
+            textScaler: TextScaler.linear(
+              (media.textScaler.scale(1.0) * uiTextScale).clamp(1.0, 2.0),
+            ),
+          ),
+          child: child!,
+        );
+      },
       locale: AppLocalizations.materialLocaleFor(languageCode),
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [

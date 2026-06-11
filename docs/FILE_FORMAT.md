@@ -382,6 +382,13 @@ Bijschriften worden op **twee** plaatsen bewaard:
    ```
    Een lege caption verwijdert de sleutel; een leeg bestand wordt verwijderd.
 
+Naast de captions bestaat er een tweede, gelijkvormige sidecar
+`.ocideck_descriptions.json` voor **beschrijvingen/tags**: doorzoekbare
+vrije tekst per afbeelding, gebruikt door het zoekveld en het
+"zonder tags"-filter van de afbeeldingenbibliotheek (en samengevoegd bij het
+opruimen van md5-duplicaten). Zelfde formaat en dezelfde leeg-opruimregels als
+de captions-sidecar.
+
 ### 6.2 Annotatielaag (`<naam>.ink.json`)
 
 Vrije-hand-annotaties (pen, markeerstift) die tijdens het presenteren worden

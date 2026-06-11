@@ -107,6 +107,12 @@ class MultiWindowManager: NSObject {
         let project = FlutterDartProject()
         project.dartEntrypointArguments = ["multi_window", windowId, config.arguments]
         let flutterViewController = FlutterViewController(project: project)
+        // By default Flutter only delivers hover (mouse-moved) events to the
+        // key window. The audience/beamer window is borderless and never
+        // becomes key (the keyboard must stay with the presenter), so without
+        // this it would never see hover at all — and state set by a click
+        // (e.g. a chart highlight) would never be cleared again.
+        flutterViewController.mouseTrackingMode = .inActiveApp
         window.contentViewController = flutterViewController
         window.setFrame(NSRect(x: 0, y: 0, width: 800, height: 600), display: true)
 

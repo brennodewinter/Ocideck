@@ -99,7 +99,7 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor> {
           l10n.d(
             'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.',
           ),
-          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
         ),
         const SizedBox(height: 8),
         ImagePickerBar(

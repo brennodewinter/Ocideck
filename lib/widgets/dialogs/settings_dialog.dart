@@ -432,6 +432,18 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           ),
         ),
         const SizedBox(height: 16),
+        _sectionTitle(l10n.d('Toegankelijkheid')),
+        _uiTextScaleField(),
+        Padding(
+          padding: const EdgeInsets.only(top: 6),
+          child: Text(
+            l10n.d(
+              'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.',
+            ),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+        ),
+        const SizedBox(height: 16),
         _sectionTitle(l10n.t('presentationFolder')),
         Row(
           children: [
@@ -487,6 +499,42 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           ),
         ),
       ],
+    );
+  }
+
+  /// Dropdown with interface text-scale steps (WCAG 1.4.4 asks for up to
+  /// 200%). The stored value snaps to the nearest offered step.
+  Widget _uiTextScaleField() {
+    final l10n = context.l10n;
+    const steps = [1.0, 1.15, 1.3, 1.5, 1.75, 2.0];
+    final current = ref.watch(settingsProvider.select((s) => s.uiTextScale));
+    final value = steps.reduce(
+      (a, b) => (a - current).abs() <= (b - current).abs() ? a : b,
+    );
+    return InputDecorator(
+      decoration: InputDecoration(
+        labelText: l10n.d('Tekstgrootte van de interface'),
+        isDense: true,
+        prefixIcon: const Icon(Icons.text_increase, size: 18),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<double>(
+          value: value,
+          isExpanded: true,
+          isDense: true,
+          items: [
+            for (final step in steps)
+              DropdownMenuItem(
+                value: step,
+                child: Text('${(step * 100).round()}%'),
+              ),
+          ],
+          onChanged: (scale) {
+            if (scale == null) return;
+            ref.read(settingsProvider.notifier).setUiTextScale(scale);
+          },
+        ),
+      ),
     );
   }
 

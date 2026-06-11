@@ -117,7 +117,7 @@ class ImageZoomControl extends StatelessWidget {
               child: const Icon(
                 Icons.zoom_out,
                 size: 16,
-                color: Color(0xFF94A3B8),
+                color: Color(0xFF64748B),
               ),
             ),
             Expanded(
@@ -141,7 +141,7 @@ class ImageZoomControl extends StatelessWidget {
               child: const Icon(
                 Icons.zoom_in,
                 size: 16,
-                color: Color(0xFF94A3B8),
+                color: Color(0xFF64748B),
               ),
             ),
             const SizedBox(width: 8),
@@ -153,7 +153,7 @@ class ImageZoomControl extends StatelessWidget {
                   fontSize: 12,
                   color: zoomed
                       ? const Color(0xFF2563EB)
-                      : const Color(0xFF94A3B8),
+                      : const Color(0xFF64748B),
                   fontWeight: zoomed ? FontWeight.w600 : FontWeight.normal,
                 ),
                 textAlign: TextAlign.right,
@@ -167,7 +167,7 @@ class ImageZoomControl extends StatelessWidget {
                 onPressed: zoomed ? () => onChanged(100) : null,
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
-                color: const Color(0xFF94A3B8),
+                color: const Color(0xFF64748B),
               ),
             ),
           ],
@@ -176,7 +176,7 @@ class ImageZoomControl extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8, bottom: 4),
           child: Text(
             _label(context),
-            style: const TextStyle(fontSize: 10, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 10, color: Color(0xFF64748B)),
           ),
         ),
       ],
@@ -226,8 +226,57 @@ class ImagePickerBar extends ConsumerWidget {
       captionService: captions,
       descriptionService: ref.read(descriptionServiceProvider),
       usageOf: (absolutePath) => _imageUsages(ref, absolutePath),
+      onReplaceUsages: (from, to) => _replaceImageUsages(ref, from, to),
+      openDeckFiles: [
+        for (final tab in ref.read(tabsProvider).tabs)
+          ?tab.deckNotifier.currentState.filePath,
+      ],
     );
     if (result != null) onPicked(result.path, result.caption);
+  }
+
+  /// Wijs in alle open decks elke slideverwijzing naar [fromAbsolute] om naar
+  /// [toAbsolute]. Gebruikt door de afbeeldingenbibliotheek wanneer een md5-
+  /// duplicaat wordt opgeruimd, zodat slides het behouden bestand blijven tonen.
+  Future<void> _replaceImageUsages(
+    WidgetRef ref,
+    String fromAbsolute,
+    String toAbsolute,
+  ) async {
+    final target = p.normalize(fromAbsolute);
+    for (final tab in ref.read(tabsProvider).tabs) {
+      final notifier = tab.deckNotifier;
+      final deck = notifier.currentState.deck;
+      if (deck == null) continue;
+      final projectPath = deck.projectPath ?? '';
+
+      String resolve(String candidate) => p.normalize(
+        p.isAbsolute(candidate) ? candidate : p.join(projectPath, candidate),
+      );
+      // Blijf relatief opslaan als de slide dat al deed en het nieuwe pad
+      // binnen het project ligt; anders absoluut.
+      String replacement(String candidate) {
+        if (p.isAbsolute(candidate) || projectPath.isEmpty) return toAbsolute;
+        return p.isWithin(projectPath, toAbsolute)
+            ? p.relative(toAbsolute, from: projectPath)
+            : toAbsolute;
+      }
+
+      for (var i = 0; i < deck.slides.length; i++) {
+        final slide = deck.slides[i];
+        var updated = slide;
+        if (slide.imagePath.isNotEmpty && resolve(slide.imagePath) == target) {
+          updated = updated.copyWith(imagePath: replacement(slide.imagePath));
+        }
+        if (slide.imagePath2.isNotEmpty &&
+            resolve(slide.imagePath2) == target) {
+          updated = updated.copyWith(
+            imagePath2: replacement(slide.imagePath2),
+          );
+        }
+        if (!identical(updated, slide)) notifier.updateSlide(i, updated);
+      }
+    }
   }
 
   /// Find every open-deck slide that references [absolutePath], so we can warn
@@ -282,7 +331,7 @@ class ImagePickerBar extends ConsumerWidget {
             style: TextStyle(
               fontSize: 12,
               color: imagePath.isEmpty
-                  ? const Color(0xFF94A3B8)
+                  ? const Color(0xFF64748B)
                   : const Color(0xFF334155),
             ),
             overflow: TextOverflow.ellipsis,
@@ -345,7 +394,7 @@ class ImagePickerBar extends ConsumerWidget {
                 child: IconButton(
                   onPressed: onClear,
                   icon: const Icon(Icons.clear, size: 18),
-                  color: const Color(0xFF94A3B8),
+                  color: const Color(0xFF64748B),
                 ),
               ),
           ],
@@ -447,7 +496,7 @@ class _CaptionFieldState extends State<_CaptionField> {
         prefixIcon: const Icon(
           Icons.copyright_outlined,
           size: 16,
-          color: Color(0xFF94A3B8),
+          color: Color(0xFF64748B),
         ),
         isDense: true,
         contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),

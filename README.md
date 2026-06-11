@@ -16,9 +16,10 @@ Built with Flutter for macOS, Windows, and Linux.
 - **Fullscreen presenter** — keyboard-driven navigation, presenter view, blank screen, auto-advance, and a slide-grid overview.
 - **Dual-screen presenter** — when a second display is connected, the beamer shows the slide while the laptop shows the presenter view (current/next slide, notes, timer), kept in sync.
 - **Annotation layer** — draw on slides while presenting (pen, highlighter, eraser, laser pointer). Kept as a separate layer that never touches the Marp Markdown, mirrored live to the beamer, and saved in a `.ink.json` sidecar.
-- **Media handling** — drag-and-drop images, an image carousel picker, captions, and descriptions stored as sidecar metadata.
+- **Media handling** — drag-and-drop images, an image carousel picker, captions, and descriptions stored as sidecar metadata. The library can filter images without tags and clean up md5-identical duplicates (merging their tags/captions and repointing every deck — open or on disk — to the kept file).
 - **Import / export** — round-trips Marp Markdown, imports existing slides, and exports to PDF, PPTX (with speaker notes), and a self-contained offline HTML deck (code highlighting, math, charts, and mermaid diagrams render in the browser). Decks are saved as a self-contained package with copied assets.
-- **Productivity** — find & replace, slide finder, undo/redo, skip-slide state, multi-select with bulk copy-to-another-deck / delete / skip, and tabbed multi-deck editing. `Ctrl/Cmd+O` opens, `Ctrl/Cmd+S` saves.
+- **Productivity** — find & replace, slide finder, undo/redo, skip-slide state, multi-select with bulk copy-to-another-deck / delete / skip, and tabbed multi-deck editing. Paste a spreadsheet selection (or CSV / a markdown table) into a table cell to fill the whole grid. `Ctrl/Cmd+O` opens, `Ctrl/Cmd+S` saves.
+- **Accessibility** — WCAG 2.1-oriented: interface text scaling up to 200%, keyboard-operable panel divider and dialogs, screen-reader labels for slides and charts (charts read out their data), and slide-change announcements while presenting.
 - **Crash recovery** — automatic snapshots so work survives an unexpected exit.
 - **Theming** — customizable deck style profiles (deck and source-code colours via presets or custom hex, fonts, logo, footer) and app appearance (including a dark interface), a bundled Marp CSS theme (`assets/themes/ocideck.css`), and a bundled EB Garamond font (no network fetch).
 - **Localized** — Dutch, English, Italian, German, French, Spanish, Frisian, and Papiamento.
@@ -69,7 +70,9 @@ lib/
   services/   # Markdown, export, file, image, caption, recovery, rasterizer
   state/      # Riverpod providers (deck, editor, settings, tabs, clipboard)
   widgets/    # UI: app shell, panels, dialogs, per-type editors, presenter
+  l10n/       # AppLocalizations (8 languages)
   theme/      # App theming
+  utils/      # Small shared helpers (clipboard table parsing, URL launching)
 ```
 
 State is managed with [Riverpod](https://riverpod.dev/).
