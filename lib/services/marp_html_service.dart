@@ -6,6 +6,7 @@ import 'package:flutter/services.dart' show rootBundle;
 
 import '../models/chart.dart';
 import '../models/settings.dart';
+import '../utils/log.dart';
 
 /// Builds a single, self-contained HTML file from a deck's Marp Markdown.
 ///
@@ -38,6 +39,7 @@ class MarpHtmlService {
   /// colours and font so the export matches the in-app / PDF look.
   Future<String> build(String deckMarkdown, {ThemeProfile? theme}) async {
     final marked = await loadAsset('$_assetDir/marked.min.js');
+    final purify = await loadAsset('$_assetDir/purify.min.js');
     final hljs = await loadAsset('$_assetDir/highlight.min.js');
     final hljsCss = await loadAsset('$_assetDir/highlight.css');
     final mathjax = await loadAsset('$_assetDir/tex-svg.js');
@@ -61,6 +63,7 @@ class MarpHtmlService {
         '<style>$css\n$hljsCss</style>'
         '<script>$_mathjaxConfig</script>'
         '${inline(marked)}'
+        '${inline(purify)}'
         '${inline(hljs)}'
         '${inline(mathjax)}'
         '${inline(mermaid)}'
@@ -97,11 +100,16 @@ class MarpHtmlService {
   }
 
   /// Neutralise any `</script` inside inlined content so it can't break out of
-  /// the surrounding <script> element. Safe for both JS (string contexts) and
-  /// the embedded Markdown payloads.
-  static String _guard(String s) => s
-      .replaceAll('</script', r'<\/script')
-      .replaceAll('</SCRIPT', r'<\/SCRIPT');
+  /// the surrounding <script> element. Case-insensitive — `</ScRiPt>` must not
+  /// slip through. Safe for both JS (string contexts) and the embedded Markdown
+  /// payloads.
+  static final RegExp _scriptClose = RegExp(
+    r'</(script)',
+    caseSensitive: false,
+  );
+
+  static String _guard(String s) =>
+      s.replaceAllMapped(_scriptClose, (m) => '<\\/${m.group(1)}');
 
   // ── Charts → inline SVG ────────────────────────────────────────────────────
 
@@ -563,7 +571,9 @@ class MarpHtmlService {
     final range = (rawHi - rawLo).abs();
     final r = range <= 0 ? 1.0 : range;
     final rawStep = r / 4;
-    final mag = math.pow(10, (math.log(rawStep) / math.ln10).floor()).toDouble();
+    final mag = math
+        .pow(10, (math.log(rawStep) / math.ln10).floor())
+        .toDouble();
     final norm = rawStep / mag;
     final niceNorm = norm < 1.5
         ? 1.0
@@ -640,7 +650,8 @@ class MarpHtmlService {
       return "@font-face{font-family:'EB Garamond';font-weight:400 800;"
           "font-style:normal;src:url(data:font/ttf;base64,$b64) "
           "format('truetype');}";
-    } catch (_) {
+    } catch (e) {
+      logWarning('MarpHtmlService._ebGaramondFontFace: load font asset', e);
       return ''; // Fall back to the CSS font stack if the asset is missing.
     }
   }
@@ -672,7 +683,11 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
     var holder=sec.querySelector('script[type="text/markdown"]');
     var src=holder?holder.textContent:'';
     var div=document.createElement('div');div.className='content';
-    div.innerHTML=window.marked?marked.parse(src):src;
+    var html=window.marked?marked.parse(src):src;
+    // Sanitise rendered Markdown before it touches the DOM: a deck must not be
+    // able to run script/onerror/javascript: payloads when the export is opened.
+    // If the sanitiser somehow isn't present, fail closed to plain text.
+    if(window.DOMPurify){div.innerHTML=DOMPurify.sanitize(html);}else{div.textContent=src;}
     sec.innerHTML='';sec.appendChild(div);
   });
   document.querySelectorAll('code.language-mermaid').forEach(function(code){
