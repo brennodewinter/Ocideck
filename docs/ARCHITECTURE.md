@@ -16,11 +16,13 @@ are stored on disk, see [`FILE_FORMAT.md`](FILE_FORMAT.md).
 lib/
   models/     # Deck, Slide, Settings/ThemeProfile, Chart, Annotation
   services/   # markdown, file, export, image, caption, description,
+              # image_dedup (md5 duplicates), image_reference (.md rewrites),
               # recovery, rasterizer, marp_html, annotation_codec
   state/      # Riverpod providers: deck, editor, settings, tabs, clipboard
   widgets/    # app shell, panels, dialogs, per-type editors, slides, presenter
   l10n/       # AppLocalizations (8 languages)
   theme/      # app theming
+  utils/      # small shared helpers (clipboard table parsing, URL launching)
 ```
 
 ## Data model
@@ -90,10 +92,12 @@ hence the vendored multi-window fork below.
 
 ## Sidecars (separate layers)
 
-To keep the `.md` pure Marp, three kinds of data live beside it (see
+To keep the `.md` pure Marp, four kinds of data live beside it (see
 `FILE_FORMAT.md` §6):
 
 - **Captions** — `.ocideck_captions.json` (per image, in `images/`).
+- **Descriptions/tags** — `.ocideck_descriptions.json` (searchable image
+  metadata, used by the library's search and the untagged filter).
 - **Annotations** — `<name>.ink.json` (`services/annotation_codec.dart`).
 - **Linked chart data** — `data/*.csv` (the living source for a chart).
 
@@ -105,8 +109,12 @@ Two upstream plugins are forked into `third_party/` and wired via `pubspec.yaml`
 - **`desktop_multi_window`** (MixinNetwork) — published 0.3.0 dropped the native
   window-geometry API. The fork adds macOS `window_setFrame`,
   `window_coverScreen` (borderless fill of a chosen screen), and `window_close`,
-  exposed on `WindowController`. This is what makes the dual-screen audience
-  window possible.
+  exposed on `WindowController`. It also tracks the mouse for **non-key
+  windows** (matched by `macos/Runner/MainFlutterWindow.swift` for the main
+  window): macOS only delivers mouse-moved events to the key window by default,
+  and the borderless audience window deliberately never becomes key, so chart
+  tooltips and hover states would otherwise never appear on the beamer. This is
+  what makes the dual-screen audience window possible.
 - **`screen_retriever_macos`** (leanflutter) — a packaging fix for recent
   Xcode/CocoaPods.
 

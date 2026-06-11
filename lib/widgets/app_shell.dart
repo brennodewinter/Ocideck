@@ -138,6 +138,47 @@ List<String> _imageUsages(WidgetRef ref, String absolutePath) {
   return usages;
 }
 
+/// Wijs in alle open decks elke slideverwijzing naar [fromAbsolute] om naar
+/// [toAbsolute]. Gebruikt door de afbeeldingenbibliotheek wanneer een md5-
+/// duplicaat wordt opgeruimd, zodat slides het behouden bestand blijven tonen.
+Future<void> _replaceImageUsages(
+  WidgetRef ref,
+  String fromAbsolute,
+  String toAbsolute,
+) async {
+  final target = p.normalize(fromAbsolute);
+  for (final tab in ref.read(tabsProvider).tabs) {
+    final notifier = tab.deckNotifier;
+    final deck = notifier.currentState.deck;
+    if (deck == null) continue;
+    final projectPath = deck.projectPath ?? '';
+
+    String resolve(String candidate) => p.normalize(
+      p.isAbsolute(candidate) ? candidate : p.join(projectPath, candidate),
+    );
+    // Blijf relatief opslaan als de slide dat al deed en het nieuwe pad
+    // binnen het project ligt; anders absoluut.
+    String replacement(String candidate) {
+      if (p.isAbsolute(candidate) || projectPath.isEmpty) return toAbsolute;
+      return p.isWithin(projectPath, toAbsolute)
+          ? p.relative(toAbsolute, from: projectPath)
+          : toAbsolute;
+    }
+
+    for (var i = 0; i < deck.slides.length; i++) {
+      final slide = deck.slides[i];
+      var updated = slide;
+      if (slide.imagePath.isNotEmpty && resolve(slide.imagePath) == target) {
+        updated = updated.copyWith(imagePath: replacement(slide.imagePath));
+      }
+      if (slide.imagePath2.isNotEmpty && resolve(slide.imagePath2) == target) {
+        updated = updated.copyWith(imagePath2: replacement(slide.imagePath2));
+      }
+      if (!identical(updated, slide)) notifier.updateSlide(i, updated);
+    }
+  }
+}
+
 List<Slide> _slidesForPresentationOrExport(Deck deck) {
   // Drop skipped slides and slides whose TLP classification is stricter than
   // the level chosen for this presentation/export.
@@ -926,9 +967,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            '$count ${l10n.d('checklist-items uitgevinkt.')}',
-          ),
+          content: Text('$count ${l10n.d('checklist-items uitgevinkt.')}'),
         ),
       );
     }
@@ -947,6 +986,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         captionService: ref.read(captionServiceProvider),
         descriptionService: ref.read(descriptionServiceProvider),
         usageOf: (absolutePath) => _imageUsages(ref, absolutePath),
+        onReplaceUsages: (from, to) => _replaceImageUsages(ref, from, to),
+        openDeckFiles: [
+          for (final tab in ref.read(tabsProvider).tabs)
+            ?tab.deckNotifier.currentState.filePath,
+        ],
       );
       if (result == null) return;
 
@@ -1444,36 +1488,43 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                 });
               }
 
-              return LayoutBuilder(
-                builder: (context, constraints) {
-                  final maxRailWidth = (constraints.maxWidth - _minEditorWidth)
-                      .clamp(_minSlideRailWidth, constraints.maxWidth)
-                      .toDouble();
-                  final railWidth = _slideRailWidth
-                      .clamp(_minSlideRailWidth, maxRailWidth)
-                      .toDouble();
-                  if (railWidth != _slideRailWidth) {
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      if (mounted) setState(() => _slideRailWidth = railWidth);
-                    });
-                  }
+              // The available width comes from MediaQuery, NOT a
+              // LayoutBuilder: a LayoutBuilder rebuilds this subtree during
+              // the layout phase, and when the slide list's keyed
+              // ReorderableListView items get reparented in that pass their
+              // overlay children are activated outside an active layout —
+              // "A _RenderLayoutBuilder was mutated in performLayout". The
+              // body row spans the window, so the window width is equivalent.
+              final bodyWidth = MediaQuery.sizeOf(ctx).width;
+              final maxRailWidth = (bodyWidth - _minEditorWidth)
+                  .clamp(_minSlideRailWidth, bodyWidth)
+                  .toDouble();
+              final railWidth = _slideRailWidth
+                  .clamp(_minSlideRailWidth, maxRailWidth)
+                  .toDouble();
+              if (railWidth != _slideRailWidth) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  if (mounted) setState(() => _slideRailWidth = railWidth);
+                });
+              }
 
-                  return Row(
-                    children: [
-                      SizedBox(width: railWidth, child: const SlideListPanel()),
-                      _ResizableDivider(
-                        onDrag: (delta) {
-                          setState(() {
-                            _slideRailWidth = (_slideRailWidth + delta)
-                                .clamp(_minSlideRailWidth, maxRailWidth)
-                                .toDouble();
-                          });
-                        },
-                      ),
-                      const Expanded(child: EditorPanel()),
-                    ],
-                  );
-                },
+              return Row(
+                children: [
+                  SizedBox(
+                    width: railWidth,
+                    child: SlideListPanel(railWidth: railWidth),
+                  ),
+                  _ResizableDivider(
+                    onDrag: (delta) {
+                      setState(() {
+                        _slideRailWidth = (_slideRailWidth + delta)
+                            .clamp(_minSlideRailWidth, maxRailWidth)
+                            .toDouble();
+                      });
+                    },
+                  ),
+                  const Expanded(child: EditorPanel()),
+                ],
               );
             },
           ),
@@ -1721,36 +1772,67 @@ class _ResizableDivider extends StatefulWidget {
 }
 
 class _ResizableDividerState extends State<_ResizableDivider> {
+  static const double _keyboardStep = 24;
+
   bool _hovered = false;
   bool _dragging = false;
+  bool _focused = false;
+
+  KeyEventResult _onKeyEvent(FocusNode node, KeyEvent event) {
+    if (event is KeyUpEvent) return KeyEventResult.ignored;
+    if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
+      widget.onDrag(-_keyboardStep);
+      return KeyEventResult.handled;
+    }
+    if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
+      widget.onDrag(_keyboardStep);
+      return KeyEventResult.handled;
+    }
+    return KeyEventResult.ignored;
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final active = _hovered || _dragging;
-    return MouseRegion(
-      cursor: SystemMouseCursors.resizeColumn,
-      onEnter: (_) => setState(() => _hovered = true),
-      onExit: (_) => setState(() => _hovered = false),
-      child: GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onHorizontalDragStart: (_) => setState(() => _dragging = true),
-        onHorizontalDragEnd: (_) => setState(() => _dragging = false),
-        onHorizontalDragCancel: () => setState(() => _dragging = false),
-        onHorizontalDragUpdate: (details) => widget.onDrag(details.delta.dx),
-        child: Tooltip(
-          message: l10n.d(
-            'Sleep om de slide-preview breder of smaller te maken',
-          ),
-          child: SizedBox(
-            width: 9,
-            child: Center(
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 90),
-                width: active ? 3 : 1,
-                color: active
-                    ? Theme.of(context).colorScheme.secondary
-                    : Theme.of(context).colorScheme.outlineVariant,
+    final active = _hovered || _dragging || _focused;
+    // Keyboard-operable (WCAG 2.1.1): the divider is focusable, arrow keys
+    // move it, and focus is shown with the same highlight as hovering
+    // (WCAG 2.4.7). Screen readers see it as an adjustable element.
+    return Focus(
+      onKeyEvent: _onKeyEvent,
+      onFocusChange: (focused) => setState(() => _focused = focused),
+      child: Semantics(
+        slider: true,
+        label: l10n.d('Breedte van het slidepaneel'),
+        hint: l10n.d('Pijltjestoetsen passen de breedte aan'),
+        onIncrease: () => widget.onDrag(_keyboardStep),
+        onDecrease: () => widget.onDrag(-_keyboardStep),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.resizeColumn,
+          onEnter: (_) => setState(() => _hovered = true),
+          onExit: (_) => setState(() => _hovered = false),
+          child: GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onHorizontalDragStart: (_) => setState(() => _dragging = true),
+            onHorizontalDragEnd: (_) => setState(() => _dragging = false),
+            onHorizontalDragCancel: () => setState(() => _dragging = false),
+            onHorizontalDragUpdate: (details) =>
+                widget.onDrag(details.delta.dx),
+            child: Tooltip(
+              message: l10n.d(
+                'Sleep om de slide-preview breder of smaller te maken',
+              ),
+              child: SizedBox(
+                width: 9,
+                child: Center(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 90),
+                    width: active ? 3 : 1,
+                    color: active
+                        ? Theme.of(context).colorScheme.secondary
+                        : Theme.of(context).colorScheme.outlineVariant,
+                  ),
+                ),
               ),
             ),
           ),

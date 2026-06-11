@@ -11,7 +11,19 @@ const _uuid = Uuid();
 class MarkdownService {
   // ── Generation ──────────────────────────────────────────────────────────────
 
-  String generateDeck(Deck deck, {bool inlineChartData = false}) {
+  /// Serialise a deck to Marp markdown.
+  ///
+  /// The styling (the [ThemeProfile]) is deliberately NOT written to the file:
+  /// a saved `.md` holds only the content (the "base"), and the app applies the
+  /// active style profile when it opens the deck. [inlineStyleProfile] re-adds
+  /// the profile for transient, non-file payloads — currently only the markdown
+  /// streamed to the audience (beamer) window, which has no other way to learn
+  /// the styling. It must stay false for anything written to disk.
+  String generateDeck(
+    Deck deck, {
+    bool inlineChartData = false,
+    bool inlineStyleProfile = false,
+  }) {
     final buf = StringBuffer();
     buf.writeln('---');
     buf.writeln('marp: true');
@@ -42,9 +54,11 @@ class MarkdownService {
     if (deck.tlp != TlpLevel.none) {
       buf.writeln('tlp: ${deck.tlp.key}');
     }
-    buf.writeln(
-      'ocideck_style_profile: ${base64Url.encode(utf8.encode(jsonEncode(deck.themeProfile.toJson())))}',
-    );
+    if (inlineStyleProfile) {
+      buf.writeln(
+        'ocideck_style_profile: ${base64Url.encode(utf8.encode(jsonEncode(deck.themeProfile.toJson())))}',
+      );
+    }
     buf.writeln('---');
     buf.writeln();
 

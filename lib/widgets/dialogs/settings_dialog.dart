@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/settings.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
+import '../../state/consent_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 
@@ -191,7 +192,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         : profiles.first.name;
 
     return DefaultTabController(
-      length: 5,
+      length: 6,
       child: AlertDialog(
         title: Text(l10n.t('settings')),
         content: SizedBox(
@@ -223,6 +224,10 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                     icon: const Icon(Icons.image_outlined),
                     text: l10n.t('settingsLogo'),
                   ),
+                  Tab(
+                    icon: const Icon(Icons.privacy_tip_outlined),
+                    text: l10n.d('Privacy'),
+                  ),
                 ],
               ),
               const SizedBox(height: 12),
@@ -234,6 +239,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                     _tabBody(_styleTab(profiles, dropdownValue)),
                     _tabBody(_colorsTab()),
                     _tabBody(_logoTab()),
+                    _tabBody(_privacyTab()),
                   ],
                 ),
               ),
@@ -432,6 +438,18 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           ),
         ),
         const SizedBox(height: 16),
+        _sectionTitle(l10n.d('Toegankelijkheid')),
+        _uiTextScaleField(),
+        Padding(
+          padding: const EdgeInsets.only(top: 6),
+          child: Text(
+            l10n.d(
+              'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.',
+            ),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+        ),
+        const SizedBox(height: 16),
         _sectionTitle(l10n.t('presentationFolder')),
         Row(
           children: [
@@ -487,6 +505,42 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           ),
         ),
       ],
+    );
+  }
+
+  /// Dropdown with interface text-scale steps (WCAG 1.4.4 asks for up to
+  /// 200%). The stored value snaps to the nearest offered step.
+  Widget _uiTextScaleField() {
+    final l10n = context.l10n;
+    const steps = [1.0, 1.15, 1.3, 1.5, 1.75, 2.0];
+    final current = ref.watch(settingsProvider.select((s) => s.uiTextScale));
+    final value = steps.reduce(
+      (a, b) => (a - current).abs() <= (b - current).abs() ? a : b,
+    );
+    return InputDecorator(
+      decoration: InputDecoration(
+        labelText: l10n.d('Tekstgrootte van de interface'),
+        isDense: true,
+        prefixIcon: const Icon(Icons.text_increase, size: 18),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<double>(
+          value: value,
+          isExpanded: true,
+          isDense: true,
+          items: [
+            for (final step in steps)
+              DropdownMenuItem(
+                value: step,
+                child: Text('${(step * 100).round()}%'),
+              ),
+          ],
+          onChanged: (scale) {
+            if (scale == null) return;
+            ref.read(settingsProvider.notifier).setUiTextScale(scale);
+          },
+        ),
+      ),
     );
   }
 
@@ -1574,5 +1628,84 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       radix: 16,
     );
     return Color(value ?? 0xFFFFFFFF);
+  }
+
+  Widget _privacyTab() {
+    final l10n = context.l10n;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _sectionTitle(l10n.d('Toestemming')),
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: const Color(0xFFF0F9FF),
+            border: Border.all(color: const Color(0xFFBFDBFE)),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.d('U hebt al toegestemd in het gebruik van OciDeck.'),
+                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                l10n.d(
+                  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.',
+                ),
+                style: const TextStyle(fontSize: 11, color: Color(0xFF475569)),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+        Center(
+          child: ElevatedButton.icon(
+            onPressed: _revokeConsent,
+            icon: const Icon(Icons.undo, size: 16),
+            label: Text(l10n.d('Toestemming intrekken')),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red[600],
+              foregroundColor: Colors.white,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _revokeConsent() {
+    final l10n = context.l10n;
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.d('Toestemming intrekken?')),
+        content: Text(
+          l10n.d(
+            'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.',
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text(l10n.t('cancel')),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              ref.read(consentProvider.notifier).revokeConsent();
+              Navigator.pop(ctx);
+              Navigator.pop(context);
+            },
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red[600]),
+            child: Text(
+              l10n.d('Intrekken'),
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

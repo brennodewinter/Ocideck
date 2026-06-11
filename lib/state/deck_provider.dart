@@ -127,13 +127,12 @@ class DeckNotifier extends StateNotifier<DeckState> {
     state = DeckState(deck: deck, isDirty: true);
   }
 
-  /// Load a deck that was already parsed (used by the tab manager).
+  /// Load a deck that was already parsed (used by the tab manager). Styling is
+  /// not taken from the deck/markdown but from the active style profile, so an
+  /// opened or recovered deck always picks up the current look.
   void loadDeck(Deck deck, {String? filePath}) {
     final resolvedDeck = deck.copyWith(
-      themeProfile: _file.resolveThemeProfile(
-        deck.themeProfile,
-        projectPath: deck.projectPath,
-      ),
+      themeProfile: _file.activeProfileFor(projectPath: deck.projectPath),
     );
     _clearHistory();
     state = DeckState(deck: resolvedDeck, filePath: filePath, isDirty: false);
@@ -499,8 +498,14 @@ class DeckNotifier extends StateNotifier<DeckState> {
 
   /// Returns false if parsing fails (content is preserved).
   bool applyMarkdown(String markdown) {
-    final deck = _md.parseDeck(markdown, filePath: state.filePath);
-    if (deck == null) return false;
+    final parsed = _md.parseDeck(markdown, filePath: state.filePath);
+    if (parsed == null) return false;
+    // The markdown carries only content; keep the deck's current styling rather
+    // than resetting it to the default profile the parser returns.
+    final current = state.deck;
+    final deck = current == null
+        ? parsed
+        : parsed.copyWith(themeProfile: current.themeProfile);
     _mutate(deck); // discrete stap → ook ongedaan te maken
     return true;
   }

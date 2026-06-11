@@ -791,7 +791,7 @@ class _ChartEditorState extends State<ChartEditor> {
                           decoration: BoxDecoration(
                             color: Color(
                               _type == ChartType.pie && c >= 2
-                                  ? 0xFF94A3B8
+                                  ? 0xFF64748B
                                   : int.parse(
                                           chartSeriesColor(
                                             ChartSeries(
@@ -951,7 +951,7 @@ class _ChartEditorState extends State<ChartEditor> {
       style: const TextStyle(
         fontSize: 11,
         fontWeight: FontWeight.w600,
-        color: Color(0xFF94A3B8),
+        color: Color(0xFF64748B),
       ),
     ),
   );
@@ -1038,7 +1038,7 @@ class _ChartEditorState extends State<ChartEditor> {
     key: key,
     onPressed: onTap,
     icon: Icon(icon, size: 14),
-    color: const Color(0xFF94A3B8),
+    color: const Color(0xFF64748B),
     visualDensity: VisualDensity.compact,
     padding: EdgeInsets.zero,
     constraints: const BoxConstraints(minWidth: 24, minHeight: 24),

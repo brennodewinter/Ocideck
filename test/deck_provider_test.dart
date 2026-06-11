@@ -26,7 +26,7 @@ void main() {
     expect(n.state.isDirty, isTrue);
   });
 
-  test('loadDeck resolves a relative logo for an unsaved recovered deck', () {
+  test('loadDeck applies the active profile and resolves its relative logo', () {
     final temp = Directory.systemTemp.createTempSync(
       'ocideck_recovered_logo_test_',
     );
@@ -36,17 +36,19 @@ void main() {
       ..writeAsBytesSync([1, 2, 3]);
 
     final md = MarkdownService();
+    // Styling comes from the active style profile, not from the deck/markdown.
     final file = FileService(
       md,
       ImageService(),
-      () => const ThemeProfile(),
+      () => const ThemeProfile(logoPath: 'logos/client.png'),
       homeDirectory: () => temp.path,
     );
     final notifier = DeckNotifier(md, file);
     notifier.loadDeck(
       Deck(
         title: 'Hersteld',
-        themeProfile: const ThemeProfile(logoPath: 'logos/client.png'),
+        // The deck's own profile is ignored on load.
+        themeProfile: const ThemeProfile(logoPath: 'should-be-ignored.png'),
         slides: [Slide.create(SlideType.title)],
       ),
     );

@@ -116,7 +116,7 @@ class _PathBox extends StatelessWidget {
         style: TextStyle(
           fontSize: 12,
           color: path.isEmpty
-              ? const Color(0xFF94A3B8)
+              ? const Color(0xFF64748B)
               : const Color(0xFF334155),
         ),
         overflow: TextOverflow.ellipsis,

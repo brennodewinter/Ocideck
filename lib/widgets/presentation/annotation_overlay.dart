@@ -31,6 +31,11 @@ class AnnotationLayer extends StatefulWidget {
   /// Called as the laser moves (normalized), or null when it leaves.
   final ValueChanged<Offset?>? onLaserMove;
 
+  /// Called as the in-progress stroke grows, so a presenter can mirror the
+  /// live drawing to the beamer instead of only the committed result. Carries
+  /// the current partial stroke, or null when it commits or is cancelled.
+  final ValueChanged<InkStroke?>? onActiveStrokeChanged;
+
   const AnnotationLayer({
     super.key,
     required this.strokes,
@@ -41,6 +46,7 @@ class AnnotationLayer extends StatefulWidget {
     this.laserPoint,
     this.onStrokesChanged,
     this.onLaserMove,
+    this.onActiveStrokeChanged,
   });
 
   @override
@@ -55,6 +61,18 @@ class _AnnotationLayerState extends State<AnnotationLayer> {
   bool get _drawing =>
       widget.tool == InkTool.pen || widget.tool == InkTool.highlighter;
 
+  /// The in-progress stroke as a committable [InkStroke], or null when there is
+  /// nothing being drawn. Used to mirror live drawing to the beamer.
+  InkStroke? _activeStroke() {
+    if (!_drawing || _active.isEmpty) return null;
+    return InkStroke(
+      tool: widget.tool!,
+      color: widget.color,
+      width: widget.width,
+      points: List<Offset>.from(_active),
+    );
+  }
+
   Offset _norm(Offset local) => _size.shortestSide == 0
       ? Offset.zero
       : Offset(
@@ -65,6 +83,7 @@ class _AnnotationLayerState extends State<AnnotationLayer> {
   void _commitActive() {
     if (_active.length < 2) {
       setState(() => _active = const []);
+      widget.onActiveStrokeChanged?.call(null);
       return;
     }
     final stroke = InkStroke(
@@ -76,6 +95,8 @@ class _AnnotationLayerState extends State<AnnotationLayer> {
     final next = [...widget.strokes, stroke];
     setState(() => _active = const []);
     widget.onStrokesChanged?.call(next);
+    // Clear the beamer's live preview; the committed stroke arrives via strokes.
+    widget.onActiveStrokeChanged?.call(null);
   }
 
   void _eraseAt(Offset norm) {
@@ -95,6 +116,7 @@ class _AnnotationLayerState extends State<AnnotationLayer> {
       case InkTool.pen:
       case InkTool.highlighter:
         setState(() => _active = [n]);
+        widget.onActiveStrokeChanged?.call(_activeStroke());
       case InkTool.eraser:
         _eraseAt(n);
       case InkTool.laser:
@@ -110,7 +132,10 @@ class _AnnotationLayerState extends State<AnnotationLayer> {
     switch (widget.tool) {
       case InkTool.pen:
       case InkTool.highlighter:
-        if (_active.isNotEmpty) setState(() => _active = [..._active, n]);
+        if (_active.isNotEmpty) {
+          setState(() => _active = [..._active, n]);
+          widget.onActiveStrokeChanged?.call(_activeStroke());
+        }
       case InkTool.eraser:
         _eraseAt(n);
       case InkTool.laser:

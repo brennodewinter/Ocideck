@@ -81,6 +81,32 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('short bullet lists grow but respect the body-text maximum', (
+    tester,
+  ) async {
+    final slide = Slide.create(
+      SlideType.bullets,
+    ).copyWith(title: 'Kort', bullets: const ['Eén punt', 'Twee punten']);
+
+    await tester.pumpWidget(_host(slide));
+    await tester.pump();
+
+    final size = tester
+        .widget<InlineMarkdownText>(
+          find.byWidgetPredicate(
+            (x) => x is InlineMarkdownText && x.text == 'Eén punt',
+          ),
+        )
+        .style
+        .fontSize!;
+    // Auto-fit still grows the text beyond its design size (w * 0.026)…
+    expect(size, greaterThan(800 * 0.026));
+    // …but never past ≈32pt-on-a-16:9-deck (w * 0.0335), so the body text
+    // keeps a clear distance from the title.
+    expect(size, lessThanOrEqualTo(800 * 0.0335 + 0.1));
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('bullets slide renders an optional subheading below the title', (
     tester,
   ) async {

@@ -565,8 +565,7 @@ void main() {
       );
       final deck = service.parseDeck(markdown);
       expect(deck, isNotNull);
-      expect(deck!.themeProfile.footerPosition, 'center');
-      expect(deck.slides[0].showFooter, isTrue);
+      expect(deck!.slides[0].showFooter, isTrue);
       expect(deck.slides[1].showFooter, isFalse);
     });
 

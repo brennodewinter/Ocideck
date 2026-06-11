@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -19,7 +21,14 @@ import '../dialogs/slide_finder_dialog.dart';
 import '../slides/slide_thumbnail.dart';
 
 class SlideListPanel extends ConsumerStatefulWidget {
-  const SlideListPanel({super.key});
+  /// Current width of the slide rail. When it changes (dragging the divider),
+  /// the slide being edited is scrolled back into view once the resize
+  /// settles. Passed in by the shell rather than measured with a
+  /// LayoutBuilder: rebuilding a ReorderableListView during layout trips its
+  /// overlay bookkeeping ("_RenderLayoutBuilder was mutated…").
+  final double? railWidth;
+
+  const SlideListPanel({super.key, this.railWidth});
 
   @override
   ConsumerState<SlideListPanel> createState() => _SlideListPanelState();
@@ -31,13 +40,33 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
   final _scrollController = ScrollController();
   final _focusNode = FocusNode(debugLabel: 'SlideListPanel');
   final Map<String, GlobalKey> _slideKeys = {};
+  Timer? _resizeSettleTimer;
 
   @override
   void dispose() {
+    _resizeSettleTimer?.cancel();
     _searchController.dispose();
     _scrollController.dispose();
     _focusNode.dispose();
     super.dispose();
+  }
+
+  /// Thumbnails are 16:9, so when the rail is resized their heights change and
+  /// the scroll offset no longer points at the slide being edited. Once the
+  /// resize settles, bring the selected slide back to the top of the list.
+  @override
+  void didUpdateWidget(covariant SlideListPanel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final width = widget.railWidth;
+    final previous = oldWidget.railWidth;
+    if (width == null || previous == null || (width - previous).abs() < 0.5) {
+      return;
+    }
+    _resizeSettleTimer?.cancel();
+    _resizeSettleTimer = Timer(const Duration(milliseconds: 200), () {
+      if (!mounted) return;
+      _scrollSlideToTop(ref.read(editorProvider).selectedIndex);
+    });
   }
 
   /// Lower-cased, concatenated text of a slide for searching. Kept broad on
@@ -88,7 +117,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     _slideKeys.removeWhere((id, _) => !ids.contains(id));
   }
 
-  void _scrollSlideToTop(int index) {
+  void _scrollSlideToTop(int index, {int attempts = 2}) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final deck = ref.read(deckProvider).deck;
       if (deck == null ||
@@ -100,7 +129,21 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
 
       final keyContext = _slideKeys[deck.slides[index].id]?.currentContext;
       final target = keyContext?.findRenderObject();
-      if (target == null) return;
+      if (target == null) {
+        // The thumbnail hasn't been built (it sits outside the viewport and
+        // cache). Jump close to it based on the average item height, then try
+        // again now that the surrounding items exist.
+        if (attempts <= 0) return;
+        final position = _scrollController.position;
+        final avgItem =
+            (position.maxScrollExtent + position.viewportDimension) /
+            deck.slides.length;
+        _scrollController.jumpTo(
+          (avgItem * index).clamp(0.0, position.maxScrollExtent),
+        );
+        _scrollSlideToTop(index, attempts: attempts - 1);
+        return;
+      }
 
       final viewport = RenderAbstractViewport.maybeOf(target);
       if (viewport == null) return;
@@ -506,6 +549,67 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     );
   }
 
+  Widget _buildSlideList(
+    Deck deck,
+    bool searching,
+    String query,
+    EditorState editor,
+    DeckNotifier notifier,
+    EditorNotifier editorNotifier,
+  ) {
+    if (searching) {
+      return _buildFilteredList(deck, query, editor, notifier, editorNotifier);
+    }
+    return ReorderableListView.builder(
+      scrollController: _scrollController,
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      buildDefaultDragHandles: false,
+      itemCount: deck.slides.length,
+      onReorderItem: (old, nw) {
+        notifier.reorderSlides(old, nw);
+        // Adjust selection when active slide moved
+        final selIdx = editor.selectedIndex;
+        int newSel = selIdx;
+        if (old == selIdx) {
+          newSel = nw;
+        } else if (old < selIdx && nw >= selIdx) {
+          newSel = selIdx - 1;
+        } else if (old > selIdx && nw <= selIdx) {
+          newSel = selIdx + 1;
+        }
+        editorNotifier.select(newSel.clamp(0, deck.slides.length - 1));
+      },
+      proxyDecorator: (child, index, animation) =>
+          Material(color: Colors.transparent, child: child),
+      itemBuilder: (_, i) {
+        final slide = deck.slides[i];
+        return SlideThumbnail(
+          key: _keyForSlide(slide),
+          slide: slide,
+          index: i,
+          isSelected: editor.selection.contains(i),
+          isPrimary: editor.selectedIndex == i,
+          projectPath: deck.projectPath,
+          themeProfile: deck.themeProfile,
+          slideCount: deck.slides.length,
+          tlp: deck.tlp,
+          onTap: () => _onSlideTap(i),
+          onToggleSkip: () => notifier.toggleSkip(i),
+          onCopyImage: () => _copySlideAsImage(slide),
+          onDuplicate: () {
+            notifier.duplicateSlide(i);
+            editorNotifier.select(i + 1);
+          },
+          onDelete: () {
+            if (deck.slides.length <= 1) return;
+            notifier.removeSlide(i);
+            editorNotifier.clampIndex(deck.slides.length - 2);
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -605,64 +709,14 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
 
               // ── Slide list ───────────────────────────────────────────────────
               Expanded(
-                child: searching
-                    ? _buildFilteredList(
-                        deck,
-                        query,
-                        editor,
-                        notifier,
-                        editorNotifier,
-                      )
-                    : ReorderableListView.builder(
-                        scrollController: _scrollController,
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        buildDefaultDragHandles: false,
-                        itemCount: deck.slides.length,
-                        onReorderItem: (old, nw) {
-                          notifier.reorderSlides(old, nw);
-                          // Adjust selection when active slide moved
-                          final selIdx = editor.selectedIndex;
-                          int newSel = selIdx;
-                          if (old == selIdx) {
-                            newSel = nw;
-                          } else if (old < selIdx && nw >= selIdx) {
-                            newSel = selIdx - 1;
-                          } else if (old > selIdx && nw <= selIdx) {
-                            newSel = selIdx + 1;
-                          }
-                          editorNotifier.select(
-                            newSel.clamp(0, deck.slides.length - 1),
-                          );
-                        },
-                        proxyDecorator: (child, index, animation) =>
-                            Material(color: Colors.transparent, child: child),
-                        itemBuilder: (_, i) {
-                          final slide = deck.slides[i];
-                          return SlideThumbnail(
-                            key: _keyForSlide(slide),
-                            slide: slide,
-                            index: i,
-                            isSelected: editor.selection.contains(i),
-                            isPrimary: editor.selectedIndex == i,
-                            projectPath: deck.projectPath,
-                            themeProfile: deck.themeProfile,
-                            slideCount: deck.slides.length,
-                            tlp: deck.tlp,
-                            onTap: () => _onSlideTap(i),
-                            onToggleSkip: () => notifier.toggleSkip(i),
-                            onCopyImage: () => _copySlideAsImage(slide),
-                            onDuplicate: () {
-                              notifier.duplicateSlide(i);
-                              editorNotifier.select(i + 1);
-                            },
-                            onDelete: () {
-                              if (deck.slides.length <= 1) return;
-                              notifier.removeSlide(i);
-                              editorNotifier.clampIndex(deck.slides.length - 2);
-                            },
-                          );
-                        },
-                      ),
+                child: _buildSlideList(
+                  deck,
+                  searching,
+                  query,
+                  editor,
+                  notifier,
+                  editorNotifier,
+                ),
               ),
 
               // ── Add / Paste slide buttons ─────────────────────────────────

@@ -5,6 +5,11 @@ import desktop_multi_window
 class MainFlutterWindow: NSWindow {
   override func awakeFromNib() {
     let flutterViewController = FlutterViewController()
+    // Keep hover events flowing while this window is not key (e.g. when a
+    // dialog or the beamer window is in front): otherwise an element that was
+    // hovered when the window lost key status keeps its hover styling because
+    // the matching exit event is never delivered.
+    flutterViewController.mouseTrackingMode = .inActiveApp
     let windowFrame = self.frame
     self.contentViewController = flutterViewController
     self.setFrame(windowFrame, display: true)

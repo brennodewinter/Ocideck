@@ -1348,6 +1348,18 @@ const _dutchSourceStrings = {
         'P pubblico · H legenda · G panoramica · B/W nero/bianco · R tempo · Esc stop',
     'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
         'P pubblico · H legenda · S schermo · G panoramica · B/W nero/bianco · R tempo · Esc stop',
+    'Akkoord gaan': 'Accetto',
+    'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Tutti i dati che inserisci in OciDeck rimangono sul tuo sistema locale e non vengono inviati a server esterni.',
+    'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'L\'app non raccoglie dati personali, statistiche o dati di utilizzo. La tua privacy è la nostra priorità.',
+    'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'Facendo clic su "Accetto", accetti questi termini e accetti l\'uso di OciDeck.',
+    'Licentie (EUPL 1.2)': 'Licenza (EUPL 1.2)',
+    'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'OciDeck è un\'applicazione desktop locale. Le tue presentazioni e i tuoi dati vengono archiviati esclusivamente sul tuo computer.',
+    'Privacy en gebruik': 'Privacy e utilizzo',
+    'Toestemming ingetrokken': 'Consenso revocato',
+    'Toestemming intrekken': 'Revoca consenso',
+    'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.': 'Devi accettare i termini di privacy e utilizzo prima di poter utilizzare OciDeck.',
+    'Volledige licentie online': 'Licenza completa online',
+    'Welkom bij OciDeck': 'Benvenuto in OciDeck',
   },
   'de': {
     'Geen': 'Keine',
@@ -1543,6 +1555,18 @@ const _dutchSourceStrings = {
         'P Publikum · H Legende · G Übersicht · B/W schwarz/weiß · R Zeit · Esc Stopp',
     'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
         'P Publikum · H Legende · S Bildschirm · G Übersicht · B/W schwarz/weiß · R Zeit · Esc Stopp',
+    'Akkoord gaan': 'Akzeptieren',
+    'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Alle Daten, die Sie in OciDeck eingeben, bleiben auf Ihrem lokalen System und werden nicht an externe Server gesendet.',
+    'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'Die App sammelt keine persönlichen Daten, Statistiken oder Nutzungsdaten. Ihre Privatsphäre ist unsere Priorität.',
+    'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'Indem Sie auf "Akzeptieren" klicken, akzeptieren Sie diese Bedingungen und stimmen der Verwendung von OciDeck zu.',
+    'Licentie (EUPL 1.2)': 'Lizenz (EUPL 1.2)',
+    'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'OciDeck ist eine lokale Desktop-Anwendung. Ihre Präsentationen und Daten werden ausschließlich auf Ihrem Computer gespeichert.',
+    'Privacy en gebruik': 'Datenschutz und Verwendung',
+    'Toestemming ingetrokken': 'Zustimmung widerrufen',
+    'Toestemming intrekken': 'Zustimmung widerrufen',
+    'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.': 'Sie müssen die Datenschutz- und Nutzungsbedingungen akzeptieren, bevor Sie OciDeck verwenden können.',
+    'Volledige licentie online': 'Vollständige Lizenz online',
+    'Welkom bij OciDeck': 'Willkommen bei OciDeck',
   },
   'fr': {
     'Geen': 'Aucun',
@@ -1737,6 +1761,18 @@ const _dutchSourceStrings = {
         'P public · H legende · G vue d’ensemble · B/W noir/blanc · R temps · Esc arret',
     'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
         'P public · H legende · S ecran · G vue d’ensemble · B/W noir/blanc · R temps · Esc arret',
+    'Akkoord gaan': 'Accepter',
+    'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Toutes les données que vous saisissez dans OciDeck restent sur votre système local et ne sont pas envoyées à des serveurs externes.',
+    'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'L\'application ne collecte aucune donnée personnelle, statistique ou d\'utilisation. Votre confidentialité est notre priorité.',
+    'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'En cliquant sur "Accepter", vous acceptez ces conditions et acceptez l\'utilisation d\'OciDeck.',
+    'Licentie (EUPL 1.2)': 'Licence (EUPL 1.2)',
+    'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'OciDeck est une application de bureau locale. Vos présentations et vos données sont stockées exclusivement sur votre ordinateur.',
+    'Privacy en gebruik': 'Confidentialité et utilisation',
+    'Toestemming ingetrokken': 'Consentement révoqué',
+    'Toestemming intrekken': 'Révoquer le consentement',
+    'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.': 'Vous devez accepter les conditions de confidentialité et d\'utilisation avant de pouvoir utiliser OciDeck.',
+    'Volledige licentie online': 'Licence complète en ligne',
+    'Welkom bij OciDeck': 'Bienvenue dans OciDeck',
   },
   'es': {
     'Geen': 'Ninguno',
@@ -1932,6 +1968,18 @@ const _dutchSourceStrings = {
         'P público · H leyenda · G vista general · B/W negro/blanco · R tiempo · Esc detener',
     'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
         'P público · H leyenda · S pantalla · G vista general · B/W negro/blanco · R tiempo · Esc detener',
+    'Akkoord gaan': 'Aceptar',
+    'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Todos los datos que ingresa en OciDeck permanecen en su sistema local y no se envían a servidores externos.',
+    'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'La aplicación no recopila datos personales, estadísticas ni datos de uso. Su privacidad es nuestra prioridad.',
+    'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'Al hacer clic en "Aceptar", acepta estos términos y acepta el uso de OciDeck.',
+    'Licentie (EUPL 1.2)': 'Licencia (EUPL 1.2)',
+    'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'OciDeck es una aplicación de escritorio local. Sus presentaciones y datos se almacenan exclusivamente en su ordenador.',
+    'Privacy en gebruik': 'Privacidad y uso',
+    'Toestemming ingetrokken': 'Consentimiento revocado',
+    'Toestemming intrekken': 'Revocar consentimiento',
+    'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.': 'Debe aceptar los términos de privacidad y uso antes de poder usar OciDeck.',
+    'Volledige licentie online': 'Licencia completa en línea',
+    'Welkom bij OciDeck': 'Bienvenido a OciDeck',
   },
   'fy': {
     'Geen': 'Gjin',
@@ -2127,6 +2175,18 @@ const _dutchSourceStrings = {
         'P publyk · H leginda · G oersjoch · B/W swart/wyt · R tiid · Esc stop',
     'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
         'P publyk · H leginda · S skerm · G oersjoch · B/W swart/wyt · R tiid · Esc stop',
+    'Akkoord gaan': 'Akseptyf gean',
+    'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Alle gegevens dy\'t jo yn OciDeck ynfiere, bliuwe op jo lokale systeem en wurde net stjoerd nei eksterne servers.',
+    'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'De app sammelt gjin persoanlike gegevens, statistiken of gebrûksgegevens. Jo privacy is ús prioriteit.',
+    'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'Troch op "Akseptyf gean" te klikken, akseptearje jo dizze betingsten en akseptyf jo it brûken fan OciDeck.',
+    'Licentie (EUPL 1.2)': 'Lisintse (EUPL 1.2)',
+    'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'OciDeck is in lokaal bureauprogram. Jo presintatoarjes en gegevens wurde allinnich op jo kompjûter opslein.',
+    'Privacy en gebruik': 'Privacy en brûk',
+    'Toestemming ingetrokken': 'Tastimming yntrokken',
+    'Toestemming intrekken': 'Tastimming yntrekke',
+    'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.': 'Jo moatte de privacy- en brûksbetingsten akseptyf gean foardat jo OciDeck brûke kûnne.',
+    'Volledige licentie online': 'Folsleine lisintse online',
+    'Welkom bij OciDeck': 'Wolkom by OciDeck',
   },
   'pap': {
     'Geen': 'Ningun',
@@ -2321,11 +2381,31 @@ const _dutchSourceStrings = {
         'P públiko · H legenda · G resumen · B/W pretu/blanku · R tempu · Esc stop',
     'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
         'P públiko · H legenda · S pantalla · G resumen · B/W pretu/blanku · R tempu · Esc stop',
+    'Akkoord gaan': 'Akuerdo',
+    'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Tur datos ku bo ta entrá den OciDeck ta keda riba bo sistema lokal i no ta mandá pa servidor eksterno.',
+    'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'E aplikashon no ta kolektá datos personal, estadístika o datos di uso. Bo privacidad ta nos prioridad.',
+    'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'Dor ku bo ta klikí "Akuerdo", bo ta akseptá e termino aki i bo ta akuerdo ku e uso di OciDeck.',
+    'Licentie (EUPL 1.2)': 'Lisencia (EUPL 1.2)',
+    'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'OciDeck ta un programa di buró lokal. Bo presentashon i datos ta almasená solamente riba bo komputer.',
+    'Privacy en gebruik': 'Privacidad i Uso',
+    'Toestemming ingetrokken': 'Aprobashon retirá',
+    'Toestemming intrekken': 'Retirá Aprobashon',
+    'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.': 'Bo mester akseptá e termino di privacidad i uso antes bo por usa OciDeck.',
+    'Volledige licentie online': 'Lisencia kompleto online',
+    'Welkom bij OciDeck': 'Bienvenido na OciDeck',
   },
 };
 
 const _dutchSourceStringAdditions = {
   'en': {
+    'Toegankelijkheid': 'Accessibility',
+    'Tekstgrootte van de interface': 'Interface text size',
+    'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+        'Enlarges all editor text up to 200%. The slides themselves are not affected.',
+    'Breedte van het slidepaneel': 'Width of the slide panel',
+    'Pijltjestoetsen passen de breedte aan': 'Arrow keys adjust the width',
+    'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+        'Tip: paste a table from your spreadsheet into a cell with Cmd/Ctrl+V to fill the whole table.',
     'Annuleren': 'Cancel',
     'Checklist': 'Task checklist',
     'Voortgangsgrafiek tonen': 'Show progress chart',
@@ -2432,8 +2512,58 @@ const _dutchSourceStringAdditions = {
     'gerenderd.': 'rendered.',
     'renderen…': 'rendering…',
     'voorbereiden…': 'preparing…',
+    'Duplicaten opruimen': 'Clean up duplicates',
+    'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+        'Find byte-identical images (md5), merge tags and notes, and remove the copies',
+    'Geen dubbele afbeeldingen gevonden.': 'No duplicate images found.',
+    'Dubbele afbeeldingen opruimen?': 'Clean up duplicate images?',
+    'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+        'One file per group is kept. Tags and notes are merged, and slides that use a copy will point to the kept file afterwards — including presentations that are not currently open.',
+    'Opruimen': 'Clean up',
+    '1 presentatiebestand bijgewerkt.': '1 presentation file updated.',
+    'presentatiebestanden bijgewerkt.': 'presentation files updated.',
+    'niet geopend': 'not open',
+    '1 dubbele afbeelding verwijderd.': '1 duplicate image removed.',
+    'dubbele afbeeldingen verwijderd.': 'duplicate images removed.',
+    'Alleen afbeeldingen zonder tags tonen': 'Show only images without tags',
+    'Alle afbeeldingen hebben tags.': 'All images have tags.',
+    'Zet het filter uit om alles weer te zien.':
+        'Turn off the filter to see everything again.',
+    'Welkom bij OciDeck': 'Welcome to OciDeck',
+    'Privacy en gebruik': 'Privacy and use',
+    'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
+        'OciDeck is a local desktop application. Your presentations and data are stored solely on your computer.',
+    'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
+        'The app collects no personal data, no statistics, and no usage data. Your privacy is our priority.',
+    'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
+        'All data you enter in OciDeck stays on your local system and is not sent to external servers.',
+    'Licentie (EUPL 1.2)': 'License (EUPL 1.2)',
+    'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
+        'By clicking "Agree", you accept these terms and consent to the use of OciDeck.',
+    'Volledige licentie online': 'Full license online',
+    'Akkoord gaan': 'Agree',
+    'Privacy': 'Privacy',
+    'Toestemming': 'Consent',
+    'Toestemming intrekken': 'Withdraw consent',
+    'Toestemming intrekken?': 'Withdraw consent?',
+    'Intrekken': 'Withdraw',
+    'U hebt al toegestemd in het gebruik van OciDeck.':
+        'You have already consented to the use of OciDeck.',
+    'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+        'You can withdraw your consent at any time. After withdrawal you must accept these terms again.',
+    'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+        'If you withdraw your consent, you must accept these terms again when you restart OciDeck.',
   },
   'it': {
+    'Toegankelijkheid': 'Accessibilità',
+    'Tekstgrootte van de interface': 'Dimensione del testo dell\'interfaccia',
+    'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+        'Ingrandisce tutto il testo dell\'editor fino al 200%. Le slide non cambiano.',
+    'Breedte van het slidepaneel': 'Larghezza del pannello delle slide',
+    'Pijltjestoetsen passen de breedte aan':
+        'I tasti freccia regolano la larghezza',
+    'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+        'Suggerimento: incolla con Cmd/Ctrl+V una tabella dal tuo foglio di calcolo in una cella per riempire l\'intera tabella.',
     'Annuleren': 'Annulla',
     'Checklist': 'Lista di controllo',
     'Voortgangsgrafiek tonen': 'Mostra grafico di avanzamento',
@@ -2694,8 +2824,45 @@ const _dutchSourceStringAdditions = {
     'voorbereiden…': 'preparazione…',
     '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+    'Duplicaten opruimen': 'Rimuovi duplicati',
+    'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+        'Trova immagini identiche byte per byte (md5), unisci tag e note ed elimina le copie',
+    'Geen dubbele afbeeldingen gevonden.':
+        'Nessuna immagine duplicata trovata.',
+    'Dubbele afbeeldingen opruimen?': 'Rimuovere le immagini duplicate?',
+    'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+        'Di ogni gruppo resta un solo file. Tag e note vengono uniti e le slide che usano una copia punteranno poi al file conservato, anche nelle presentazioni non aperte al momento.',
+    'Opruimen': 'Rimuovi',
+    '1 presentatiebestand bijgewerkt.': '1 file di presentazione aggiornato.',
+    'presentatiebestanden bijgewerkt.': 'file di presentazione aggiornati.',
+    'niet geopend': 'non aperto',
+    '1 dubbele afbeelding verwijderd.': '1 immagine duplicata eliminata.',
+    'dubbele afbeeldingen verwijderd.': 'immagini duplicate eliminate.',
+    'Alleen afbeeldingen zonder tags tonen':
+        'Mostra solo immagini senza tag',
+    'Alle afbeeldingen hebben tags.': 'Tutte le immagini hanno tag.',
+    'Zet het filter uit om alles weer te zien.':
+        'Disattiva il filtro per rivedere tutto.',
+    'Intrekken': 'Revoca',
+    'Privacy': 'Privacy',
+    'Toestemming': 'Consenso',
+    'Toestemming intrekken?': 'Revocare il consenso?',
+    'U hebt al toegestemd in het gebruik van OciDeck.':
+        'Hai già acconsentito all\'uso di OciDeck.',
+    'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+        'Puoi revocare il consenso in qualsiasi momento. Dopo la revoca dovrai accettare nuovamente questi termini.',
+    'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+        'Se revochi il consenso, dovrai accettare nuovamente questi termini al riavvio di OciDeck.',
   },
   'de': {
+    'Toegankelijkheid': 'Barrierefreiheit',
+    'Tekstgrootte van de interface': 'Textgröße der Oberfläche',
+    'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+        'Vergrößert sämtlichen Text der Bearbeitungsumgebung auf bis zu 200 %. Die Folien selbst ändern sich nicht.',
+    'Breedte van het slidepaneel': 'Breite des Folienbereichs',
+    'Pijltjestoetsen passen de breedte aan': 'Pfeiltasten passen die Breite an',
+    'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+        'Tipp: Füge mit Cmd/Strg+V eine Tabelle aus deiner Tabellenkalkulation in eine Zelle ein, um die ganze Tabelle zu füllen.',
     'Annuleren': 'Abbrechen',
     'Checklist': 'Checkliste',
     'Voortgangsgrafiek tonen': 'Fortschrittsdiagramm anzeigen',
@@ -2956,8 +3123,44 @@ const _dutchSourceStringAdditions = {
     'voorbereiden…': 'vorbereiten…',
     '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+    'Duplicaten opruimen': 'Duplikate aufräumen',
+    'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+        'Byte-identische Bilder (md5) finden, Tags und Anmerkungen zusammenführen und die Kopien löschen',
+    'Geen dubbele afbeeldingen gevonden.': 'Keine doppelten Bilder gefunden.',
+    'Dubbele afbeeldingen opruimen?': 'Doppelte Bilder aufräumen?',
+    'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+        'Aus jeder Gruppe bleibt eine Datei erhalten. Tags und Anmerkungen werden zusammengeführt, und Folien, die eine Kopie verwenden, verweisen danach auf die erhaltene Datei — auch in Präsentationen, die gerade nicht geöffnet sind.',
+    'Opruimen': 'Aufräumen',
+    '1 presentatiebestand bijgewerkt.': '1 Präsentationsdatei aktualisiert.',
+    'presentatiebestanden bijgewerkt.': 'Präsentationsdateien aktualisiert.',
+    'niet geopend': 'nicht geöffnet',
+    '1 dubbele afbeelding verwijderd.': '1 doppeltes Bild entfernt.',
+    'dubbele afbeeldingen verwijderd.': 'doppelte Bilder entfernt.',
+    'Alleen afbeeldingen zonder tags tonen': 'Nur Bilder ohne Tags anzeigen',
+    'Alle afbeeldingen hebben tags.': 'Alle Bilder haben Tags.',
+    'Zet het filter uit om alles weer te zien.':
+        'Filter ausschalten, um wieder alles zu sehen.',
+    'Intrekken': 'Widerrufen',
+    'Privacy': 'Datenschutz',
+    'Toestemming': 'Zustimmung',
+    'Toestemming intrekken?': 'Zustimmung widerrufen?',
+    'U hebt al toegestemd in het gebruik van OciDeck.':
+        'Sie haben der Nutzung von OciDeck bereits zugestimmt.',
+    'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+        'Sie können Ihre Zustimmung jederzeit widerrufen. Nach dem Widerruf müssen Sie diese Bedingungen erneut akzeptieren.',
+    'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+        'Wenn Sie Ihre Zustimmung widerrufen, müssen Sie diese Bedingungen beim Neustart von OciDeck erneut akzeptieren.',
   },
   'fr': {
+    'Toegankelijkheid': 'Accessibilité',
+    'Tekstgrootte van de interface': 'Taille du texte de l\'interface',
+    'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+        'Agrandit tout le texte de l\'éditeur jusqu\'à 200 %. Les diapositives ne changent pas.',
+    'Breedte van het slidepaneel': 'Largeur du panneau des diapositives',
+    'Pijltjestoetsen passen de breedte aan':
+        'Les touches fléchées ajustent la largeur',
+    'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+        'Astuce : collez avec Cmd/Ctrl+V un tableau de votre tableur dans une cellule pour remplir tout le tableau.',
     'Annuleren': 'Annuler',
     'Checklist': 'Liste de contrôle',
     'Voortgangsgrafiek tonen': 'Afficher le graphique de progression',
@@ -3218,8 +3421,48 @@ const _dutchSourceStringAdditions = {
     'voorbereiden…': 'préparation…',
     '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+    'Duplicaten opruimen': 'Nettoyer les doublons',
+    'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+        'Trouver les images identiques octet par octet (md5), fusionner tags et remarques et supprimer les copies',
+    'Geen dubbele afbeeldingen gevonden.':
+        'Aucune image en double trouvée.',
+    'Dubbele afbeeldingen opruimen?': 'Nettoyer les images en double ?',
+    'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+        'Un seul fichier par groupe est conservé. Les tags et remarques sont fusionnés et les diapositives utilisant une copie pointeront ensuite vers le fichier conservé — y compris dans les présentations qui ne sont pas ouvertes actuellement.',
+    'Opruimen': 'Nettoyer',
+    '1 presentatiebestand bijgewerkt.':
+        '1 fichier de présentation mis à jour.',
+    'presentatiebestanden bijgewerkt.':
+        'fichiers de présentation mis à jour.',
+    'niet geopend': 'non ouvert',
+    '1 dubbele afbeelding verwijderd.': '1 image en double supprimée.',
+    'dubbele afbeeldingen verwijderd.': 'images en double supprimées.',
+    'Alleen afbeeldingen zonder tags tonen':
+        'Afficher uniquement les images sans tags',
+    'Alle afbeeldingen hebben tags.': 'Toutes les images ont des tags.',
+    'Zet het filter uit om alles weer te zien.':
+        'Désactivez le filtre pour tout revoir.',
+    'Intrekken': 'Révoquer',
+    'Privacy': 'Confidentialité',
+    'Toestemming': 'Consentement',
+    'Toestemming intrekken?': 'Révoquer le consentement ?',
+    'U hebt al toegestemd in het gebruik van OciDeck.':
+        'Vous avez déjà consenti à l\'utilisation d\'OciDeck.',
+    'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+        'Vous pouvez révoquer votre consentement à tout moment. Après la révocation, vous devrez accepter à nouveau ces conditions.',
+    'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+        'Si vous révoquez votre consentement, vous devrez accepter à nouveau ces conditions au redémarrage d\'OciDeck.',
   },
   'es': {
+    'Toegankelijkheid': 'Accesibilidad',
+    'Tekstgrootte van de interface': 'Tamaño del texto de la interfaz',
+    'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+        'Amplía todo el texto del editor hasta un 200 %. Las diapositivas no cambian.',
+    'Breedte van het slidepaneel': 'Ancho del panel de diapositivas',
+    'Pijltjestoetsen passen de breedte aan':
+        'Las teclas de flecha ajustan el ancho',
+    'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+        'Consejo: pega con Cmd/Ctrl+V una tabla de tu hoja de cálculo en una celda para rellenar toda la tabla.',
     'Annuleren': 'Cancelar',
     'Checklist': 'Lista de verificación',
     'Voortgangsgrafiek tonen': 'Mostrar gráfico de progreso',
@@ -3481,8 +3724,47 @@ const _dutchSourceStringAdditions = {
     'voorbereiden…': 'preparando…',
     '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+    'Duplicaten opruimen': 'Limpiar duplicados',
+    'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+        'Buscar imágenes idénticas byte a byte (md5), combinar etiquetas y notas y eliminar las copias',
+    'Geen dubbele afbeeldingen gevonden.':
+        'No se encontraron imágenes duplicadas.',
+    'Dubbele afbeeldingen opruimen?': '¿Limpiar imágenes duplicadas?',
+    'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+        'De cada grupo se conserva un archivo. Las etiquetas y notas se combinan y las diapositivas que usan una copia pasarán a apuntar al archivo conservado, también en las presentaciones que no estén abiertas.',
+    'Opruimen': 'Limpiar',
+    '1 presentatiebestand bijgewerkt.':
+        '1 archivo de presentación actualizado.',
+    'presentatiebestanden bijgewerkt.':
+        'archivos de presentación actualizados.',
+    'niet geopend': 'no abierto',
+    '1 dubbele afbeelding verwijderd.': '1 imagen duplicada eliminada.',
+    'dubbele afbeeldingen verwijderd.': 'imágenes duplicadas eliminadas.',
+    'Alleen afbeeldingen zonder tags tonen':
+        'Mostrar solo imágenes sin etiquetas',
+    'Alle afbeeldingen hebben tags.': 'Todas las imágenes tienen etiquetas.',
+    'Zet het filter uit om alles weer te zien.':
+        'Desactiva el filtro para volver a ver todo.',
+    'Intrekken': 'Revocar',
+    'Privacy': 'Privacidad',
+    'Toestemming': 'Consentimiento',
+    'Toestemming intrekken?': '¿Revocar el consentimiento?',
+    'U hebt al toegestemd in het gebruik van OciDeck.':
+        'Ya has dado tu consentimiento para el uso de OciDeck.',
+    'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+        'Puedes revocar tu consentimiento en cualquier momento. Tras la revocación, deberás aceptar de nuevo estas condiciones.',
+    'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+        'Si revocas tu consentimiento, deberás aceptar de nuevo estas condiciones al reiniciar OciDeck.',
   },
   'fy': {
+    'Toegankelijkheid': 'Tagonklikens',
+    'Tekstgrootte van de interface': 'Tekstgrutte fan de ynterface',
+    'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+        'Fergruttet alle tekst fan de bewurkomjouwing oant maksimaal 200%. De slides sels feroarje net.',
+    'Breedte van het slidepaneel': 'Breedte fan it slidepaniel',
+    'Pijltjestoetsen passen de breedte aan': 'Pylktoetsen passe de breedte oan',
+    'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+        'Tip: plak mei Cmd/Ctrl+V in tabel út dyn rekkenblêd yn in sel om de hiele tabel te foljen.',
     'Annuleren': 'Annulearje',
     'Checklist': 'Kontrôlelist',
     'Voortgangsgrafiek tonen': 'Fuortgongsgrafyk toane',
@@ -3740,8 +4022,45 @@ const _dutchSourceStringAdditions = {
     'voorbereiden…': 'tariede…',
     '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+    'Duplicaten opruimen': 'Duplikaten opromje',
+    'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+        'Sykje byte-identike ôfbyldings (md5), foegje tags en opmerkings gear en smyt de kopyen fuort',
+    'Geen dubbele afbeeldingen gevonden.': 'Gjin dûbele ôfbyldings fûn.',
+    'Dubbele afbeeldingen opruimen?': 'Dûbele ôfbyldings opromje?',
+    'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+        'Fan elke groep bliuwt ien bestân stean. Tags en opmerkings wurde gearfoege en slides dy\'t in kopy brûke, ferwize dêrnei nei it behâlden bestân — ek yn presintaasjes dy\'t no net iepene binne.',
+    'Opruimen': 'Opromje',
+    '1 presentatiebestand bijgewerkt.': '1 presintaasjebestân bywurke.',
+    'presentatiebestanden bijgewerkt.': 'presintaasjebestannen bywurke.',
+    'niet geopend': 'net iepene',
+    '1 dubbele afbeelding verwijderd.': '1 dûbele ôfbylding fuorthelle.',
+    'dubbele afbeeldingen verwijderd.': 'dûbele ôfbyldings fuorthelle.',
+    'Alleen afbeeldingen zonder tags tonen':
+        'Allinnich ôfbyldings sûnder tags toane',
+    'Alle afbeeldingen hebben tags.': 'Alle ôfbyldings hawwe tags.',
+    'Zet het filter uit om alles weer te zien.':
+        'Set it filter út om alles wer te sjen.',
+    'Intrekken': 'Ynlûke',
+    'Privacy': 'Privacy',
+    'Toestemming': 'Tastimming',
+    'Toestemming intrekken?': 'Tastimming ynlûke?',
+    'U hebt al toegestemd in het gebruik van OciDeck.':
+        'Jo hawwe al tastimming jûn foar it gebrûk fan OciDeck.',
+    'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+        'Jo kinne jo tastimming op elk momint ynlûke. Nei it ynlûken moatte jo dizze betingsten opnij akseptearje.',
+    'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+        'As jo jo tastimming ynlûke, moatte jo dizze betingsten opnij akseptearje as jo OciDeck opnij begjinne.',
   },
   'pap': {
+    'Toegankelijkheid': 'Aksesibilidat',
+    'Tekstgrootte van de interface': 'Tamaño di teksto di e interfaz',
+    'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+        'Ta hasi tur teksto di e editor mas grandi te 200%. E slidenan mes no ta kambia.',
+    'Breedte van het slidepaneel': 'Hanchura di e panel di slide',
+    'Pijltjestoetsen passen de breedte aan':
+        'Tekla di flecha ta atapta e hanchura',
+    'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+        'Tip: pega ku Cmd/Ctrl+V un tabel for di bo spreadsheet den un sèl pa yena henter e tabel.',
     'Annuleren': 'Kanselá',
     'Checklist': 'Lista di kontrol',
     'Voortgangsgrafiek tonen': 'Mustra gráfiko di progreso',
@@ -3999,5 +4318,51 @@ const _dutchSourceStringAdditions = {
     'voorbereiden…': 'preparando…',
     '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+    'Duplicaten opruimen': 'Limpia duplikadonan',
+    'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+        'Buska imágennan idéntiko byte pa byte (md5), kombiná tag i remarkanan i eliminá e kopianan',
+    'Geen dubbele afbeeldingen gevonden.': 'No a haña imágen duplikado.',
+    'Dubbele afbeeldingen opruimen?': 'Limpia imágennan duplikado?',
+    'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+        'Di kada grupo un archivo so ta keda. Tag i remarkanan ta wòrdu kombiná i e slidenan ku ta usa un kopia lo mustra despues riba e archivo ku a keda — tambe den presentashonnan ku no ta habrí awor.',
+    'Opruimen': 'Limpia',
+    '1 presentatiebestand bijgewerkt.': '1 archivo di presentashon aktualisá.',
+    'presentatiebestanden bijgewerkt.':
+        'archivonan di presentashon aktualisá.',
+    'niet geopend': 'no habrí',
+    '1 dubbele afbeelding verwijderd.': '1 imágen duplikado eliminá.',
+    'dubbele afbeeldingen verwijderd.': 'imágennan duplikado eliminá.',
+    'Alleen afbeeldingen zonder tags tonen':
+        'Mustra solamente imágennan sin tag',
+    'Alle afbeeldingen hebben tags.': 'Tur imágen tin tag.',
+    'Zet het filter uit om alles weer te zien.':
+        'Paga e filter pa mira tur kos atrobe.',
+    'Welkom bij OciDeck': 'Welcome to OciDeck',
+    'Privacy en gebruik': 'Privacy and Usage',
+    'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
+        'OciDeck is a local desktop application. Your presentations and data are stored exclusively on your computer.',
+    'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
+        'The app collects no personal data, no statistics, and no usage data. Your privacy is our priority.',
+    'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
+        'All data you enter in OciDeck remains on your local system and is not sent to external servers.',
+    'Licentie (EUPL 1.2)': 'License (EUPL 1.2)',
+    'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
+        'By clicking "Agree", you accept these terms and agree to the use of OciDeck.',
+    'Volledige licentie online': 'Full license online',
+    'Akkoord gaan': 'Agree',
+    'Toestemming intrekken': 'Revoke Consent',
+    'Toestemming ingetrokken': 'Consent revoked',
+    'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.':
+        'You must accept the privacy and usage terms before you can use OciDeck.',
+    'Intrekken': 'Retirá',
+    'Privacy': 'Privasidat',
+    'Toestemming': 'Konsentimentu',
+    'Toestemming intrekken?': 'Retirá konsentimentu?',
+    'U hebt al toegestemd in het gebruik van OciDeck.':
+        'Bo a duna kaba bo konsentimentu pa uzo di OciDeck.',
+    'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+        'Bo por retirá bo konsentimentu na kualkier momentu. Despues di retirá, bo tin ku aseptá e kondishonnan akí di nobo.',
+    'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+        'Si bo retirá bo konsentimentu, bo tin ku aseptá e kondishonnan akí di nobo ora bo start OciDeck di nobo.',
   },
 };
