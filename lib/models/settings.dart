@@ -364,6 +364,11 @@ class AppSettings {
   final String selectedAppAppearanceProfileName;
   final List<String> recentFiles;
 
+  /// Scale factor for all interface text (1.0–2.0), on top of the system
+  /// text scaling. The slide canvas itself is never scaled: slides are a
+  /// fixed 16:9 design surface. WCAG 1.4.4 asks for text resizing up to 200%.
+  final double uiTextScale;
+
   const AppSettings({
     this.languageCode = 'nl',
     this.homeDirectory,
@@ -373,6 +378,7 @@ class AppSettings {
     this.appAppearanceProfiles = AppAppearanceProfile.builtIns,
     this.selectedAppAppearanceProfileName = 'Basic',
     this.recentFiles = const [],
+    this.uiTextScale = 1.0,
   });
 
   ThemeProfile get themeProfile {
@@ -424,6 +430,7 @@ class AppSettings {
     List<AppAppearanceProfile>? appAppearanceProfiles,
     String? selectedAppAppearanceProfileName,
     List<String>? recentFiles,
+    double? uiTextScale,
     bool clearHomeDirectory = false,
     bool clearExportDirectory = false,
   }) {
@@ -457,6 +464,7 @@ class AppSettings {
           selectedAppAppearanceProfileName ??
           this.selectedAppAppearanceProfileName,
       recentFiles: recentFiles ?? this.recentFiles,
+      uiTextScale: uiTextScale ?? this.uiTextScale,
     );
   }
 }

@@ -186,22 +186,27 @@ class SlidePreviewWidget extends StatelessWidget {
     // falls back to Flutter's broken default — red letters with a yellow
     // underline — which is exactly what showed up in exports. Wrapping here
     // guarantees identical results in the preview and the export.
-    return _ChecklistInteractionHost(
-      enabled: presentationMode && onChecklistItemToggle != null,
-      onToggle: onChecklistItemToggle,
-      child: Directionality(
-        textDirection: TextDirection.ltr,
-        child: DefaultTextStyle(
-          style: TextStyle(
-            color: _hexColor(themeProfile.textColor),
-            decoration: TextDecoration.none,
-            fontWeight: FontWeight.normal,
-            fontStyle: FontStyle.normal,
-          ),
-          child: _SlideLinkScope(
-            onTapLink: onLinkTap,
-            hasBottomTlp: hasBottomRightTlp,
-            child: _buildSlide(),
+    // The slide is a fixed 16:9 design surface whose sizes all derive from
+    // its width; interface text scaling must not reflow it (the auto-fit
+    // measuring assumes unscaled text), so the canvas opts out.
+    return MediaQuery.withNoTextScaling(
+      child: _ChecklistInteractionHost(
+        enabled: presentationMode && onChecklistItemToggle != null,
+        onToggle: onChecklistItemToggle,
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: DefaultTextStyle(
+            style: TextStyle(
+              color: _hexColor(themeProfile.textColor),
+              decoration: TextDecoration.none,
+              fontWeight: FontWeight.normal,
+              fontStyle: FontStyle.normal,
+            ),
+            child: _SlideLinkScope(
+              onTapLink: onLinkTap,
+              hasBottomTlp: hasBottomRightTlp,
+              child: _buildSlide(),
+            ),
           ),
         ),
       ),
@@ -707,7 +712,7 @@ class _BulletsPreview extends StatelessWidget {
       font: font,
       subtitle: subtitle,
       subtitleSize: subtitleSize,
-      maxScale: _kSplitBulletsMaxScale,
+      maxScale: _bulletScaleCap(w, bulletSize, _kSplitBulletsMaxScale),
       listStyle: slide.listStyle,
     );
 
@@ -1072,7 +1077,7 @@ class _TwoBulletsPreview extends StatelessWidget {
       spacing: spacing,
       bulletGap: bulletGap,
       font: font,
-      maxScale: _kBulletsMaxScale,
+      maxScale: _bulletScaleCap(w, bulletSize, _kBulletsMaxScale),
       listStyle: slide.listStyle,
     );
     final rightScale = _bulletsFitScale(
@@ -1086,7 +1091,7 @@ class _TwoBulletsPreview extends StatelessWidget {
       spacing: spacing,
       bulletGap: bulletGap,
       font: font,
-      maxScale: _kBulletsMaxScale,
+      maxScale: _bulletScaleCap(w, bulletSize, _kBulletsMaxScale),
       listStyle: slide.listStyle,
     );
     // Treat both columns as one composition: the busiest column determines
@@ -1247,7 +1252,7 @@ class _BulletsImagePreview extends StatelessWidget {
       spacing: spacing,
       bulletGap: bulletGap,
       font: font,
-      maxScale: _kBulletsMaxScale,
+      maxScale: _bulletScaleCap(w, bulletSize, _kBulletsMaxScale),
       listStyle: slide.listStyle,
     );
 
@@ -1505,34 +1510,34 @@ class _ChecklistProgress extends StatelessWidget {
                       ),
               ),
               SizedBox(height: w * 0.008),
-          MouseRegion(
-            key: const ValueKey('checklist-progress-checked'),
-            onEnter: interaction?.enabled != true
-                ? null
-                : (_) => interaction!.hovered.value = true,
-            onExit: interaction?.enabled != true
-                ? null
-                : (_) => interaction!.hovered.value = null,
-            child: Text(
-              '${context.l10n.d('Afgevinkt')} $checkedPercent%',
-              style: labelStyle,
-            ),
-          ),
-          MouseRegion(
-            key: const ValueKey('checklist-progress-unchecked'),
-            onEnter: interaction?.enabled != true
-                ? null
-                : (_) => interaction!.hovered.value = false,
-            onExit: interaction?.enabled != true
-                ? null
-                : (_) => interaction!.hovered.value = null,
-            child: Text(
-              '${context.l10n.d('Niet afgevinkt')} $openPercent%',
-              style: labelStyle.copyWith(
-                color: textColor.withValues(alpha: 0.7),
+              MouseRegion(
+                key: const ValueKey('checklist-progress-checked'),
+                onEnter: interaction?.enabled != true
+                    ? null
+                    : (_) => interaction!.hovered.value = true,
+                onExit: interaction?.enabled != true
+                    ? null
+                    : (_) => interaction!.hovered.value = null,
+                child: Text(
+                  '${context.l10n.d('Afgevinkt')} $checkedPercent%',
+                  style: labelStyle,
+                ),
               ),
-            ),
-          ),
+              MouseRegion(
+                key: const ValueKey('checklist-progress-unchecked'),
+                onEnter: interaction?.enabled != true
+                    ? null
+                    : (_) => interaction!.hovered.value = false,
+                onExit: interaction?.enabled != true
+                    ? null
+                    : (_) => interaction!.hovered.value = null,
+                child: Text(
+                  '${context.l10n.d('Niet afgevinkt')} $openPercent%',
+                  style: labelStyle.copyWith(
+                    color: textColor.withValues(alpha: 0.7),
+                  ),
+                ),
+              ),
             ],
           ),
         );
@@ -1775,6 +1780,19 @@ const double _kBulletsMaxScale = 3.2;
 /// Split slides have a much narrower column, so short bullet lists can stay
 /// visually timid unless they are allowed to grow a little further.
 const double _kSplitBulletsMaxScale = 4.35;
+
+/// Hard ceiling for the *rendered* bullet text size when auto-growing, as a
+/// fraction of the slide width: ≈32pt on a standard 16:9 deck (PowerPoint's
+/// 960pt-wide canvas). Presentation-design guidance consistently puts body
+/// text at 24–32pt — beyond that it stops aiding readability and starts
+/// competing with the title. The fit scale multiplies title and bullets
+/// alike, so capping the bullet size also keeps the hierarchy intact.
+const double _kBulletMaxFontFraction = 0.0335;
+
+/// The largest auto-fit scale that keeps bullets at or under
+/// [_kBulletMaxFontFraction], given the layout's own [layoutMax] growth bound.
+double _bulletScaleCap(double w, double bulletSize, double layoutMax) =>
+    math.min(layoutMax, _kBulletMaxFontFraction * w / bulletSize);
 
 /// Line height used for bullet body text, shared by rendering and measuring.
 const double _kBulletLineHeight = 1.16;
@@ -2872,6 +2890,36 @@ class _ChartPreviewState extends State<_ChartPreview> {
     return _hexColor(chartSeriesColor(series, i));
   }
 
+  /// Text alternative for the chart (WCAG 1.1.1): chart type, title and the
+  /// underlying values per series, so a screen reader conveys the same
+  /// information the visual encodes.
+  String _semanticsLabel(BuildContext context, ChartSpec spec) {
+    final l10n = context.l10n;
+    final typeName = switch (spec.type) {
+      ChartType.bar => l10n.d('Staaf'),
+      ChartType.line => l10n.d('Lijn'),
+      ChartType.pie => l10n.d('Cirkel'),
+      ChartType.radar => l10n.d('Spider'),
+    };
+    final buffer = StringBuffer('${l10n.d('Grafiek')} ($typeName)');
+    if (spec.title.isNotEmpty) {
+      buffer.write(': ${stripInlineMarkdown(spec.title)}');
+    }
+    if (!spec.hasInlineData) return buffer.toString();
+    for (var si = 0; si < spec.series.length; si++) {
+      final series = spec.series[si];
+      final name = series.name.isEmpty
+          ? '${l10n.d('Reeks')} ${si + 1}'
+          : series.name;
+      final values = [
+        for (var xi = 0; xi < spec.x.length && xi < series.data.length; xi++)
+          '${spec.x[xi]} ${_fmtNum(series.data[xi])}',
+      ];
+      buffer.write('. $name: ${values.join(', ')}');
+    }
+    return buffer.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     final spec = ChartSpec.parse(slide.customMarkdown);
@@ -2880,6 +2928,32 @@ class _ChartPreviewState extends State<_ChartPreview> {
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
     final textColor = _hexColor(profile.textColor);
 
+    return Semantics(
+      image: true,
+      label: _semanticsLabel(context, spec),
+      // The visual chart (axis labels, legend chips, tooltips) would read as
+      // disconnected fragments; the label above carries the full story.
+      child: ExcludeSemantics(
+        child: _chartBody(
+          context,
+          spec,
+          horizontalPad,
+          verticalPad,
+          safe,
+          textColor,
+        ),
+      ),
+    );
+  }
+
+  Widget _chartBody(
+    BuildContext context,
+    ChartSpec spec,
+    double horizontalPad,
+    double verticalPad,
+    EdgeInsets safe,
+    Color textColor,
+  ) {
     return Container(
       color: _hexColor(profile.slideBackgroundColor),
       child: Padding(
@@ -3201,7 +3275,7 @@ class _ChartPreviewState extends State<_ChartPreview> {
     );
   }
 
-  FlTitlesData _titles(ChartSpec spec, Color textColor) {
+  FlTitlesData _titles(ChartSpec spec, Color textColor, {bool bars = false}) {
     final style = _applyFont(
       font,
       TextStyle(
@@ -3234,16 +3308,30 @@ class _ChartPreviewState extends State<_ChartPreview> {
             if (i < 0 || i >= n) return const SizedBox.shrink();
             // Show as many labels as fit without colliding: keep at least
             // [minSlot] of horizontal room per label, then thin them out
-            // evenly based on the actual pixel spacing between points.
-            final spacing = n > 1
-                ? meta.parentAxisSize / (n - 1)
-                : meta.parentAxisSize;
+            // evenly based on the actual pixel spacing between points. Line
+            // charts spread n points over n-1 intervals; bar groups are laid
+            // out spaceEvenly, which puts their centres (axis + groupWidth) /
+            // (n + 1) apart.
+            final spacing = bars
+                ? (meta.parentAxisSize + _barGroupWidth(spec)) / (n + 1)
+                : (n > 1 ? meta.parentAxisSize / (n - 1) : meta.parentAxisSize);
             final minSlot = w * 0.085 * _labelScale;
             final step = math.max(1, (minSlot / spacing).ceil());
             final lastMultiple = ((n - 1) ~/ step) * step;
-            final showLast = i == n - 1 && (n - 1 - lastMultiple) > step / 2;
+            final lastGap = n - 1 - lastMultiple;
+            final showLast = i == n - 1 && lastGap > step / 2;
             if (i % step != 0 && !showLast) return const SizedBox.shrink();
-            final slot = (step * spacing - w * 0.012).clamp(w * 0.04, w * 0.16);
+            // The extra end label can sit closer than a full step to its
+            // neighbour; shrink both of their slots to the real gap so they
+            // never run through each other.
+            var slotSteps = step.toDouble();
+            if (showLast || (i == lastMultiple && lastGap > step / 2)) {
+              slotSteps = math.min(slotSteps, lastGap.toDouble());
+            }
+            final slot = (slotSteps * spacing - w * 0.012).clamp(
+              w * 0.04,
+              w * 0.16,
+            );
             return Padding(
               padding: EdgeInsets.only(top: w * 0.008),
               child: SizedBox(
@@ -3275,6 +3363,17 @@ class _ChartPreviewState extends State<_ChartPreview> {
         FlLine(color: textColor.withValues(alpha: 0.12), strokeWidth: 1),
   );
 
+  /// Width of one bar rod, shared by the chart and the axis-label spacing.
+  double _barRodWidth(ChartSpec spec) =>
+      (w * 0.032 / spec.series.length).clamp(w * 0.008, w * 0.022);
+
+  /// Total width of one bar group: its rods plus fl_chart's default 2px
+  /// spacing between rods within a group.
+  double _barGroupWidth(ChartSpec spec) {
+    final rods = math.max(1, spec.series.length);
+    return rods * _barRodWidth(spec) + (rods - 1) * 2;
+  }
+
   Widget _barChart(ChartSpec spec, Color textColor) {
     final groups = <BarChartGroupData>[];
     for (var xi = 0; xi < spec.x.length; xi++) {
@@ -3287,10 +3386,7 @@ class _ChartPreviewState extends State<_ChartPreview> {
                 BarChartRodData(
                   toY: spec.series[si].data[xi],
                   color: _seriesDisplayColor(spec.series[si], si),
-                  width: (w * 0.032 / spec.series.length).clamp(
-                    w * 0.008,
-                    w * 0.022,
-                  ),
+                  width: _barRodWidth(spec),
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(w * 0.006),
                   ),
@@ -3308,8 +3404,11 @@ class _ChartPreviewState extends State<_ChartPreview> {
       BarChartData(
         minY: _minY(spec),
         maxY: _maxY(spec),
+        // The axis-label spacing in _titles assumes this layout; keep it
+        // explicit rather than relying on fl_chart's default.
+        alignment: BarChartAlignment.spaceEvenly,
         barGroups: groups,
-        titlesData: _titles(spec, textColor),
+        titlesData: _titles(spec, textColor, bars: true),
         gridData: _grid(textColor),
         borderData: FlBorderData(show: false),
         extraLinesData: _boundLines(spec),
@@ -3537,19 +3636,25 @@ class _ChartPreviewState extends State<_ChartPreview> {
     final scale = radarScale(spec);
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: w * 0.03, vertical: w * 0.012),
+      padding: EdgeInsets.symmetric(horizontal: w * 0.02, vertical: w * 0.012),
       child: LayoutBuilder(
         builder: (context, constraints) {
-          // Reserve a slim column on the right for the scale legend, then keep
-          // the chart square so fl_chart's centre/radius stay predictable.
+          // Reserve a slim column on the right for the scale legend; the rest
+          // of the area is shared between the spider and its axis labels.
           final legendWidth = w * 0.075;
-          final available = constraints.maxWidth - legendWidth - w * 0.02;
-          final side = math.max(
+          final boxW = math.max(
             0.0,
-            math.min(available, constraints.maxHeight),
+            constraints.maxWidth - legendWidth - w * 0.02,
           );
-          final labelBand = side * 0.23;
-          final chartSide = math.max(0.0, side - labelBand * 2);
+          final boxH = constraints.maxHeight;
+          if (boxW <= 0 || !boxH.isFinite || boxH <= 0) {
+            return const SizedBox.shrink();
+          }
+          // Measure every axis label and grow the spider until the labels just
+          // fit between the polygon and the edges of the available area, so
+          // the diagram uses the space the old fixed label bands wasted.
+          final layout = _radarLabelLayout(spec, boxW, boxH, textColor);
+          final chartSide = layout.chartSide;
 
           return Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -3557,8 +3662,8 @@ class _ChartPreviewState extends State<_ChartPreview> {
               Expanded(
                 child: Center(
                   child: SizedBox(
-                    width: side,
-                    height: side,
+                    width: boxW,
+                    height: boxH,
                     child: Stack(
                       children: [
                         for (var i = 0; i < spec.x.length; i++)
@@ -3566,12 +3671,12 @@ class _ChartPreviewState extends State<_ChartPreview> {
                             label: spec.x[i],
                             index: i,
                             count: spec.x.length,
-                            side: side,
+                            layout: layout,
                             textColor: textColor,
                           ),
                         Positioned(
-                          left: labelBand,
-                          top: labelBand,
+                          left: (boxW - chartSide) / 2,
+                          top: (boxH - chartSide) / 2,
                           width: chartSide,
                           height: chartSide,
                           child: Stack(
@@ -3725,57 +3830,149 @@ class _ChartPreviewState extends State<_ChartPreview> {
     );
   }
 
+  TextStyle _radarLabelStyle(int count, Color textColor) => _applyFont(
+    font,
+    TextStyle(
+      fontSize: w * (count <= 6 ? 0.013 : 0.0115) * _labelScale,
+      height: 1.05,
+      color: textColor.withValues(alpha: 0.88),
+      fontWeight: presentationMode ? FontWeight.w600 : FontWeight.w500,
+    ),
+  );
+
+  /// True when the vertex in [direction] gets its label placed beside the
+  /// polygon (left/right) rather than above/below it.
+  static bool _radarLabelBeside(Offset direction) => direction.dx.abs() > 0.35;
+
+  /// Sizes the spider and places every axis label around it.
+  ///
+  /// Each label is measured at its real text size, then the polygon radius is
+  /// grown until the tightest label exactly fits between the polygon and the
+  /// edge of the [boxW]×[boxH] area. fl_chart draws the polygon at 0.4× the
+  /// side of its (square) widget, which is what ties [chartSide] to the
+  /// resulting radius.
+  ({double chartSide, List<Rect> rects, List<TextAlign> aligns, int maxLines})
+  _radarLabelLayout(ChartSpec spec, double boxW, double boxH, Color textColor) {
+    const radiusFactor = 0.4; // fl_chart: radius = min(w, h) / 2 * 0.8
+    final n = spec.x.length;
+    final style = _radarLabelStyle(n, textColor);
+    final gap = w * 0.008;
+    final maxLines = n <= 6 ? 3 : 2;
+    final sideCap = math.min(boxW * 0.28, w * 0.2);
+    final topCap = math.min(boxW * 0.5, w * 0.3);
+
+    Size measure(String text, double maxWidth) {
+      final painter = TextPainter(
+        text: TextSpan(text: text, style: style),
+        textDirection: TextDirection.ltr,
+        maxLines: maxLines,
+        ellipsis: '…',
+      )..layout(maxWidth: math.max(0.0, maxWidth));
+      final size = Size(painter.width, painter.height);
+      painter.dispose();
+      return size;
+    }
+
+    final directions = <Offset>[];
+    final sizes = <Size>[];
+    for (var i = 0; i < n; i++) {
+      final angle = (2 * math.pi * i / n) - math.pi / 2;
+      final dir = Offset(math.cos(angle), math.sin(angle));
+      directions.add(dir);
+      sizes.add(measure(spec.x[i], _radarLabelBeside(dir) ? sideCap : topCap));
+    }
+
+    // The largest polygon radius every label still fits next to.
+    var radius = radiusFactor * math.min(boxW, boxH);
+    for (var i = 0; i < n; i++) {
+      final dx = directions[i].dx.abs();
+      final dy = directions[i].dy.abs();
+      if (_radarLabelBeside(directions[i])) {
+        radius = math.min(radius, (boxW / 2 - gap - sizes[i].width) / dx);
+        if (dy > 0.01) {
+          radius = math.min(radius, (boxH / 2 - sizes[i].height / 2) / dy);
+        }
+      } else {
+        radius = math.min(radius, (boxH / 2 - gap - sizes[i].height) / dy);
+        if (dx > 0.01) {
+          radius = math.min(radius, (boxW / 2 - sizes[i].width / 2) / dx);
+        }
+      }
+    }
+    // Never let extreme labels crush the spider entirely; below this floor the
+    // labels get clamped (and ellipsized) instead.
+    final floor = 0.18 * math.min(boxW, boxH);
+    radius = radius.clamp(
+      math.min(floor, radiusFactor * math.min(boxW, boxH)),
+      radiusFactor * math.min(boxW, boxH),
+    );
+    final chartSide = radius / radiusFactor;
+
+    final center = Offset(boxW / 2, boxH / 2);
+    final rects = <Rect>[];
+    final aligns = <TextAlign>[];
+    for (var i = 0; i < n; i++) {
+      final dir = directions[i];
+      final anchor = center + dir * (radius + gap);
+      var size = sizes[i];
+      double left;
+      double top;
+      if (_radarLabelBeside(dir)) {
+        // Re-measure against the room actually left beside the polygon, so a
+        // clamped radius still produces a label that wraps inside the box.
+        final room = dir.dx > 0 ? boxW - anchor.dx : anchor.dx;
+        if (size.width > room) size = measure(spec.x[i], room);
+        left = dir.dx > 0 ? anchor.dx : anchor.dx - size.width;
+        top = anchor.dy - size.height / 2;
+        aligns.add(dir.dx > 0 ? TextAlign.left : TextAlign.right);
+      } else {
+        left = anchor.dx - size.width / 2;
+        top = dir.dy < 0 ? anchor.dy - size.height : anchor.dy;
+        aligns.add(TextAlign.center);
+      }
+      rects.add(
+        Rect.fromLTWH(
+          left.clamp(0.0, math.max(0.0, boxW - size.width)),
+          top.clamp(0.0, math.max(0.0, boxH - size.height)),
+          size.width,
+          size.height,
+        ),
+      );
+    }
+    return (
+      chartSide: chartSide,
+      rects: rects,
+      aligns: aligns,
+      maxLines: maxLines,
+    );
+  }
+
   Widget _radarAxisLabel({
     required String label,
     required int index,
     required int count,
-    required double side,
+    required ({
+      double chartSide,
+      List<Rect> rects,
+      List<TextAlign> aligns,
+      int maxLines,
+    })
+    layout,
     required Color textColor,
   }) {
-    final angle = (2 * math.pi * index / count) - math.pi / 2;
-    final boxWidth = side * (count <= 4 ? 0.22 : (count <= 6 ? 0.2 : 0.17));
-    final boxHeight = side * (count <= 6 ? 0.13 : 0.105);
-    final center = side / 2;
-    final horizontal = math.cos(angle);
-    final vertical = math.sin(angle);
-    final left = horizontal < -0.35
-        ? 0.0
-        : (horizontal > 0.35 ? side - boxWidth : center - boxWidth / 2);
-    final top = vertical < -0.7
-        ? 0.0
-        : (vertical > 0.7
-              ? side - boxHeight
-              : (center + vertical * side * 0.32 - boxHeight / 2).clamp(
-                  0.0,
-                  side - boxHeight,
-                ));
-    final alignment = horizontal < -0.25
-        ? TextAlign.left
-        : (horizontal > 0.25 ? TextAlign.right : TextAlign.center);
-
+    final rect = layout.rects[index];
     return Positioned(
       key: ValueKey('radar-axis-label-$index'),
-      left: left,
-      top: top,
-      width: boxWidth,
-      height: boxHeight,
-      child: Align(
-        alignment: Alignment.center,
-        child: Text(
-          label,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          textAlign: alignment,
-          style: _applyFont(
-            font,
-            TextStyle(
-              fontSize: w * (count <= 6 ? 0.013 : 0.0115) * _labelScale,
-              height: 1.05,
-              color: textColor.withValues(alpha: 0.88),
-              fontWeight: presentationMode ? FontWeight.w600 : FontWeight.w500,
-            ),
-          ),
-        ),
+      left: rect.left,
+      top: rect.top,
+      width: rect.width,
+      height: rect.height,
+      child: Text(
+        label,
+        maxLines: layout.maxLines,
+        overflow: TextOverflow.ellipsis,
+        textAlign: layout.aligns[index],
+        style: _radarLabelStyle(count, textColor),
       ),
     );
   }

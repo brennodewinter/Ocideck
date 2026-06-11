@@ -12,6 +12,11 @@
 | `Ctrl/Cmd + Shift + Z` | Redo |
 | `Ctrl + Y` | Redo (alternative) |
 | `Ctrl/Cmd + H` | Find & replace |
+| `Ctrl/Cmd + V` (in a table cell) | Paste a spreadsheet/CSV/markdown selection as a table (also `Shift + Insert`) |
+| `Tab` to the panel divider, then `←` / `→` | Resize the slide panel |
+
+In the **add-slide dialog**, `Tab` moves between the type cards, `Enter` picks
+the focused one, and `Esc` cancels.
 
 ## Fullscreen presenter
 

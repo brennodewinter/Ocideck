@@ -2326,6 +2326,14 @@ const _dutchSourceStrings = {
 
 const _dutchSourceStringAdditions = {
   'en': {
+    'Toegankelijkheid': 'Accessibility',
+    'Tekstgrootte van de interface': 'Interface text size',
+    'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+        'Enlarges all editor text up to 200%. The slides themselves are not affected.',
+    'Breedte van het slidepaneel': 'Width of the slide panel',
+    'Pijltjestoetsen passen de breedte aan': 'Arrow keys adjust the width',
+    'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+        'Tip: paste a table from your spreadsheet into a cell with Cmd/Ctrl+V to fill the whole table.',
     'Annuleren': 'Cancel',
     'Checklist': 'Task checklist',
     'Voortgangsgrafiek tonen': 'Show progress chart',
@@ -2432,8 +2440,34 @@ const _dutchSourceStringAdditions = {
     'gerenderd.': 'rendered.',
     'renderen…': 'rendering…',
     'voorbereiden…': 'preparing…',
+    'Duplicaten opruimen': 'Clean up duplicates',
+    'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+        'Find byte-identical images (md5), merge tags and notes, and remove the copies',
+    'Geen dubbele afbeeldingen gevonden.': 'No duplicate images found.',
+    'Dubbele afbeeldingen opruimen?': 'Clean up duplicate images?',
+    'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+        'One file per group is kept. Tags and notes are merged, and slides that use a copy will point to the kept file afterwards — including presentations that are not currently open.',
+    'Opruimen': 'Clean up',
+    '1 presentatiebestand bijgewerkt.': '1 presentation file updated.',
+    'presentatiebestanden bijgewerkt.': 'presentation files updated.',
+    'niet geopend': 'not open',
+    '1 dubbele afbeelding verwijderd.': '1 duplicate image removed.',
+    'dubbele afbeeldingen verwijderd.': 'duplicate images removed.',
+    'Alleen afbeeldingen zonder tags tonen': 'Show only images without tags',
+    'Alle afbeeldingen hebben tags.': 'All images have tags.',
+    'Zet het filter uit om alles weer te zien.':
+        'Turn off the filter to see everything again.',
   },
   'it': {
+    'Toegankelijkheid': 'Accessibilità',
+    'Tekstgrootte van de interface': 'Dimensione del testo dell\'interfaccia',
+    'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+        'Ingrandisce tutto il testo dell\'editor fino al 200%. Le slide non cambiano.',
+    'Breedte van het slidepaneel': 'Larghezza del pannello delle slide',
+    'Pijltjestoetsen passen de breedte aan':
+        'I tasti freccia regolano la larghezza',
+    'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+        'Suggerimento: incolla con Cmd/Ctrl+V una tabella dal tuo foglio di calcolo in una cella per riempire l\'intera tabella.',
     'Annuleren': 'Annulla',
     'Checklist': 'Lista di controllo',
     'Voortgangsgrafiek tonen': 'Mostra grafico di avanzamento',
@@ -2694,8 +2728,35 @@ const _dutchSourceStringAdditions = {
     'voorbereiden…': 'preparazione…',
     '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+    'Duplicaten opruimen': 'Rimuovi duplicati',
+    'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+        'Trova immagini identiche byte per byte (md5), unisci tag e note ed elimina le copie',
+    'Geen dubbele afbeeldingen gevonden.':
+        'Nessuna immagine duplicata trovata.',
+    'Dubbele afbeeldingen opruimen?': 'Rimuovere le immagini duplicate?',
+    'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+        'Di ogni gruppo resta un solo file. Tag e note vengono uniti e le slide che usano una copia punteranno poi al file conservato, anche nelle presentazioni non aperte al momento.',
+    'Opruimen': 'Rimuovi',
+    '1 presentatiebestand bijgewerkt.': '1 file di presentazione aggiornato.',
+    'presentatiebestanden bijgewerkt.': 'file di presentazione aggiornati.',
+    'niet geopend': 'non aperto',
+    '1 dubbele afbeelding verwijderd.': '1 immagine duplicata eliminata.',
+    'dubbele afbeeldingen verwijderd.': 'immagini duplicate eliminate.',
+    'Alleen afbeeldingen zonder tags tonen':
+        'Mostra solo immagini senza tag',
+    'Alle afbeeldingen hebben tags.': 'Tutte le immagini hanno tag.',
+    'Zet het filter uit om alles weer te zien.':
+        'Disattiva il filtro per rivedere tutto.',
   },
   'de': {
+    'Toegankelijkheid': 'Barrierefreiheit',
+    'Tekstgrootte van de interface': 'Textgröße der Oberfläche',
+    'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+        'Vergrößert sämtlichen Text der Bearbeitungsumgebung auf bis zu 200 %. Die Folien selbst ändern sich nicht.',
+    'Breedte van het slidepaneel': 'Breite des Folienbereichs',
+    'Pijltjestoetsen passen de breedte aan': 'Pfeiltasten passen die Breite an',
+    'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+        'Tipp: Füge mit Cmd/Strg+V eine Tabelle aus deiner Tabellenkalkulation in eine Zelle ein, um die ganze Tabelle zu füllen.',
     'Annuleren': 'Abbrechen',
     'Checklist': 'Checkliste',
     'Voortgangsgrafiek tonen': 'Fortschrittsdiagramm anzeigen',
@@ -2956,8 +3017,34 @@ const _dutchSourceStringAdditions = {
     'voorbereiden…': 'vorbereiten…',
     '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+    'Duplicaten opruimen': 'Duplikate aufräumen',
+    'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+        'Byte-identische Bilder (md5) finden, Tags und Anmerkungen zusammenführen und die Kopien löschen',
+    'Geen dubbele afbeeldingen gevonden.': 'Keine doppelten Bilder gefunden.',
+    'Dubbele afbeeldingen opruimen?': 'Doppelte Bilder aufräumen?',
+    'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+        'Aus jeder Gruppe bleibt eine Datei erhalten. Tags und Anmerkungen werden zusammengeführt, und Folien, die eine Kopie verwenden, verweisen danach auf die erhaltene Datei — auch in Präsentationen, die gerade nicht geöffnet sind.',
+    'Opruimen': 'Aufräumen',
+    '1 presentatiebestand bijgewerkt.': '1 Präsentationsdatei aktualisiert.',
+    'presentatiebestanden bijgewerkt.': 'Präsentationsdateien aktualisiert.',
+    'niet geopend': 'nicht geöffnet',
+    '1 dubbele afbeelding verwijderd.': '1 doppeltes Bild entfernt.',
+    'dubbele afbeeldingen verwijderd.': 'doppelte Bilder entfernt.',
+    'Alleen afbeeldingen zonder tags tonen': 'Nur Bilder ohne Tags anzeigen',
+    'Alle afbeeldingen hebben tags.': 'Alle Bilder haben Tags.',
+    'Zet het filter uit om alles weer te zien.':
+        'Filter ausschalten, um wieder alles zu sehen.',
   },
   'fr': {
+    'Toegankelijkheid': 'Accessibilité',
+    'Tekstgrootte van de interface': 'Taille du texte de l\'interface',
+    'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+        'Agrandit tout le texte de l\'éditeur jusqu\'à 200 %. Les diapositives ne changent pas.',
+    'Breedte van het slidepaneel': 'Largeur du panneau des diapositives',
+    'Pijltjestoetsen passen de breedte aan':
+        'Les touches fléchées ajustent la largeur',
+    'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+        'Astuce : collez avec Cmd/Ctrl+V un tableau de votre tableur dans une cellule pour remplir tout le tableau.',
     'Annuleren': 'Annuler',
     'Checklist': 'Liste de contrôle',
     'Voortgangsgrafiek tonen': 'Afficher le graphique de progression',
@@ -3218,8 +3305,38 @@ const _dutchSourceStringAdditions = {
     'voorbereiden…': 'préparation…',
     '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+    'Duplicaten opruimen': 'Nettoyer les doublons',
+    'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+        'Trouver les images identiques octet par octet (md5), fusionner tags et remarques et supprimer les copies',
+    'Geen dubbele afbeeldingen gevonden.':
+        'Aucune image en double trouvée.',
+    'Dubbele afbeeldingen opruimen?': 'Nettoyer les images en double ?',
+    'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+        'Un seul fichier par groupe est conservé. Les tags et remarques sont fusionnés et les diapositives utilisant une copie pointeront ensuite vers le fichier conservé — y compris dans les présentations qui ne sont pas ouvertes actuellement.',
+    'Opruimen': 'Nettoyer',
+    '1 presentatiebestand bijgewerkt.':
+        '1 fichier de présentation mis à jour.',
+    'presentatiebestanden bijgewerkt.':
+        'fichiers de présentation mis à jour.',
+    'niet geopend': 'non ouvert',
+    '1 dubbele afbeelding verwijderd.': '1 image en double supprimée.',
+    'dubbele afbeeldingen verwijderd.': 'images en double supprimées.',
+    'Alleen afbeeldingen zonder tags tonen':
+        'Afficher uniquement les images sans tags',
+    'Alle afbeeldingen hebben tags.': 'Toutes les images ont des tags.',
+    'Zet het filter uit om alles weer te zien.':
+        'Désactivez le filtre pour tout revoir.',
   },
   'es': {
+    'Toegankelijkheid': 'Accesibilidad',
+    'Tekstgrootte van de interface': 'Tamaño del texto de la interfaz',
+    'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+        'Amplía todo el texto del editor hasta un 200 %. Las diapositivas no cambian.',
+    'Breedte van het slidepaneel': 'Ancho del panel de diapositivas',
+    'Pijltjestoetsen passen de breedte aan':
+        'Las teclas de flecha ajustan el ancho',
+    'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+        'Consejo: pega con Cmd/Ctrl+V una tabla de tu hoja de cálculo en una celda para rellenar toda la tabla.',
     'Annuleren': 'Cancelar',
     'Checklist': 'Lista de verificación',
     'Voortgangsgrafiek tonen': 'Mostrar gráfico de progreso',
@@ -3481,8 +3598,37 @@ const _dutchSourceStringAdditions = {
     'voorbereiden…': 'preparando…',
     '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+    'Duplicaten opruimen': 'Limpiar duplicados',
+    'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+        'Buscar imágenes idénticas byte a byte (md5), combinar etiquetas y notas y eliminar las copias',
+    'Geen dubbele afbeeldingen gevonden.':
+        'No se encontraron imágenes duplicadas.',
+    'Dubbele afbeeldingen opruimen?': '¿Limpiar imágenes duplicadas?',
+    'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+        'De cada grupo se conserva un archivo. Las etiquetas y notas se combinan y las diapositivas que usan una copia pasarán a apuntar al archivo conservado, también en las presentaciones que no estén abiertas.',
+    'Opruimen': 'Limpiar',
+    '1 presentatiebestand bijgewerkt.':
+        '1 archivo de presentación actualizado.',
+    'presentatiebestanden bijgewerkt.':
+        'archivos de presentación actualizados.',
+    'niet geopend': 'no abierto',
+    '1 dubbele afbeelding verwijderd.': '1 imagen duplicada eliminada.',
+    'dubbele afbeeldingen verwijderd.': 'imágenes duplicadas eliminadas.',
+    'Alleen afbeeldingen zonder tags tonen':
+        'Mostrar solo imágenes sin etiquetas',
+    'Alle afbeeldingen hebben tags.': 'Todas las imágenes tienen etiquetas.',
+    'Zet het filter uit om alles weer te zien.':
+        'Desactiva el filtro para volver a ver todo.',
   },
   'fy': {
+    'Toegankelijkheid': 'Tagonklikens',
+    'Tekstgrootte van de interface': 'Tekstgrutte fan de ynterface',
+    'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+        'Fergruttet alle tekst fan de bewurkomjouwing oant maksimaal 200%. De slides sels feroarje net.',
+    'Breedte van het slidepaneel': 'Breedte fan it slidepaniel',
+    'Pijltjestoetsen passen de breedte aan': 'Pylktoetsen passe de breedte oan',
+    'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+        'Tip: plak mei Cmd/Ctrl+V in tabel út dyn rekkenblêd yn in sel om de hiele tabel te foljen.',
     'Annuleren': 'Annulearje',
     'Checklist': 'Kontrôlelist',
     'Voortgangsgrafiek tonen': 'Fuortgongsgrafyk toane',
@@ -3740,8 +3886,35 @@ const _dutchSourceStringAdditions = {
     'voorbereiden…': 'tariede…',
     '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+    'Duplicaten opruimen': 'Duplikaten opromje',
+    'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+        'Sykje byte-identike ôfbyldings (md5), foegje tags en opmerkings gear en smyt de kopyen fuort',
+    'Geen dubbele afbeeldingen gevonden.': 'Gjin dûbele ôfbyldings fûn.',
+    'Dubbele afbeeldingen opruimen?': 'Dûbele ôfbyldings opromje?',
+    'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+        'Fan elke groep bliuwt ien bestân stean. Tags en opmerkings wurde gearfoege en slides dy\'t in kopy brûke, ferwize dêrnei nei it behâlden bestân — ek yn presintaasjes dy\'t no net iepene binne.',
+    'Opruimen': 'Opromje',
+    '1 presentatiebestand bijgewerkt.': '1 presintaasjebestân bywurke.',
+    'presentatiebestanden bijgewerkt.': 'presintaasjebestannen bywurke.',
+    'niet geopend': 'net iepene',
+    '1 dubbele afbeelding verwijderd.': '1 dûbele ôfbylding fuorthelle.',
+    'dubbele afbeeldingen verwijderd.': 'dûbele ôfbyldings fuorthelle.',
+    'Alleen afbeeldingen zonder tags tonen':
+        'Allinnich ôfbyldings sûnder tags toane',
+    'Alle afbeeldingen hebben tags.': 'Alle ôfbyldings hawwe tags.',
+    'Zet het filter uit om alles weer te zien.':
+        'Set it filter út om alles wer te sjen.',
   },
   'pap': {
+    'Toegankelijkheid': 'Aksesibilidat',
+    'Tekstgrootte van de interface': 'Tamaño di teksto di e interfaz',
+    'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+        'Ta hasi tur teksto di e editor mas grandi te 200%. E slidenan mes no ta kambia.',
+    'Breedte van het slidepaneel': 'Hanchura di e panel di slide',
+    'Pijltjestoetsen passen de breedte aan':
+        'Tekla di flecha ta atapta e hanchura',
+    'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+        'Tip: pega ku Cmd/Ctrl+V un tabel for di bo spreadsheet den un sèl pa yena henter e tabel.',
     'Annuleren': 'Kanselá',
     'Checklist': 'Lista di kontrol',
     'Voortgangsgrafiek tonen': 'Mustra gráfiko di progreso',
@@ -3999,5 +4172,24 @@ const _dutchSourceStringAdditions = {
     'voorbereiden…': 'preparando…',
     '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
         '↑↓←→ navigate  ·  Enter chooses  ·  Double-click selects',
+    'Duplicaten opruimen': 'Limpia duplikadonan',
+    'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+        'Buska imágennan idéntiko byte pa byte (md5), kombiná tag i remarkanan i eliminá e kopianan',
+    'Geen dubbele afbeeldingen gevonden.': 'No a haña imágen duplikado.',
+    'Dubbele afbeeldingen opruimen?': 'Limpia imágennan duplikado?',
+    'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+        'Di kada grupo un archivo so ta keda. Tag i remarkanan ta wòrdu kombiná i e slidenan ku ta usa un kopia lo mustra despues riba e archivo ku a keda — tambe den presentashonnan ku no ta habrí awor.',
+    'Opruimen': 'Limpia',
+    '1 presentatiebestand bijgewerkt.': '1 archivo di presentashon aktualisá.',
+    'presentatiebestanden bijgewerkt.':
+        'archivonan di presentashon aktualisá.',
+    'niet geopend': 'no habrí',
+    '1 dubbele afbeelding verwijderd.': '1 imágen duplikado eliminá.',
+    'dubbele afbeeldingen verwijderd.': 'imágennan duplikado eliminá.',
+    'Alleen afbeeldingen zonder tags tonen':
+        'Mustra solamente imágennan sin tag',
+    'Alle afbeeldingen hebben tags.': 'Tur imágen tin tag.',
+    'Zet het filter uit om alles weer te zien.':
+        'Paga e filter pa mira tur kos atrobe.',
   },
 };

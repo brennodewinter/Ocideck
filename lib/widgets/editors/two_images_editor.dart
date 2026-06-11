@@ -135,7 +135,7 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
           child: Text(
             'Links ${widget.slide.imageSize > 0 ? widget.slide.imageSize : 50}% — '
             'Rechts ${100 - (widget.slide.imageSize > 0 ? widget.slide.imageSize : 50)}%',
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
           ),
         ),
       ],

@@ -5,6 +5,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:path/path.dart' as p;
 import '../../services/caption_service.dart';
 import '../../services/description_service.dart';
+import '../../services/image_dedup_service.dart';
+import '../../services/image_reference_service.dart';
 import '../../services/image_service.dart';
 import '../../l10n/app_localizations.dart';
 
@@ -18,6 +20,12 @@ class ImagePickResult {
 /// Geeft per absoluut afbeeldingspad terug waar het in gebruik is
 /// (bijv. "Presentatie X · slide 3"). Lege lijst = nergens gevonden.
 typedef ImageUsageLookup = List<String> Function(String absolutePath);
+
+/// Vervangt in alle open decks elke slideverwijzing naar [fromAbsolute] door
+/// [toAbsolute]. Gebruikt bij het opruimen van duplicaten, zodat slides niet
+/// leeg raken wanneer hun kopie wordt verwijderd.
+typedef ImageUsageReplace =
+    Future<void> Function(String fromAbsolute, String toAbsolute);
 
 /// Manier waarop de afbeeldingen worden getoond. Tussen beide kan in de
 /// header gewisseld worden.
@@ -38,6 +46,12 @@ class ImageCarouselPicker extends StatefulWidget {
   final CaptionService captionService;
   final DescriptionService descriptionService;
   final ImageUsageLookup? usageOf;
+  final ImageUsageReplace? onReplaceUsages;
+
+  /// Bestandspaden van de presentaties die nu in tabs geopend zijn. Die zijn
+  /// al gedekt door [usageOf]; bij het scannen van decks op schijf worden ze
+  /// overgeslagen om dubbeltellingen te voorkomen.
+  final List<String> openDeckFiles;
 
   const ImageCarouselPicker({
     super.key,
@@ -46,6 +60,8 @@ class ImageCarouselPicker extends StatefulWidget {
     required this.descriptionService,
     this.initialPath,
     this.usageOf,
+    this.onReplaceUsages,
+    this.openDeckFiles = const [],
   });
 
   static Future<ImagePickResult?> show(
@@ -55,6 +71,8 @@ class ImageCarouselPicker extends StatefulWidget {
     CaptionService? captionService,
     DescriptionService? descriptionService,
     ImageUsageLookup? usageOf,
+    ImageUsageReplace? onReplaceUsages,
+    List<String> openDeckFiles = const [],
   }) {
     return showDialog<ImagePickResult>(
       context: context,
@@ -65,6 +83,8 @@ class ImageCarouselPicker extends StatefulWidget {
         captionService: captionService ?? CaptionService(),
         descriptionService: descriptionService ?? DescriptionService(),
         usageOf: usageOf,
+        onReplaceUsages: onReplaceUsages,
+        openDeckFiles: openDeckFiles,
       ),
     );
   }
@@ -101,6 +121,8 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
   String? _descEditing; // path the description field currently edits
   bool _loading = true;
   bool _justCopied = false; // korte feedback na kopiëren naar klembord
+  bool _untaggedOnly = false; // toon alleen afbeeldingen zonder tags
+  bool _deduping = false; // duplicaten-opruimactie bezig
   int _hoveredIndex = -1;
   _ViewMode _viewMode = _ViewMode.grid;
 
@@ -187,9 +209,15 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
   /// andere "kl"-woorden. Bij gelijke score blijft de datumvolgorde van
   /// [_images] (nieuwste eerst) behouden.
   void _applyFilter() {
+    final base = _untaggedOnly
+        ? [
+            for (final path in _images)
+              if ((_descriptions[path] ?? '').trim().isEmpty) path,
+          ]
+        : _images;
     final q = _query.trim().toLowerCase();
     if (q.isEmpty) {
-      _filtered = _images;
+      _filtered = base;
       return;
     }
     final terms = q
@@ -198,9 +226,9 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
         .toList(growable: false);
 
     final hits = <({String path, int score, int order})>[];
-    for (var i = 0; i < _images.length; i++) {
-      final score = _relevance(_images[i], terms);
-      if (score > 0) hits.add((path: _images[i], score: score, order: i));
+    for (var i = 0; i < base.length; i++) {
+      final score = _relevance(base[i], terms);
+      if (score > 0) hits.add((path: base[i], score: score, order: i));
     }
     hits.sort((a, b) {
       final byScore = b.score.compareTo(a.score);
@@ -254,6 +282,277 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
     // De indexen zijn verschoven; coverflow opnieuw uitlijnen na de rebuild.
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => _syncCoverToSelection(),
+    );
+  }
+
+  /// Zet het "alleen zonder tags"-filter aan of uit, zodat snel te zien is
+  /// welke afbeeldingen nog geen beschrijving/tags hebben.
+  void _toggleUntaggedOnly() {
+    setState(() {
+      _untaggedOnly = !_untaggedOnly;
+      _applyFilter();
+    });
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _syncCoverToSelection(),
+    );
+  }
+
+  /// Zoek byte-identieke afbeeldingen (md5), laat de gebruiker bevestigen en
+  /// ruim ze op: per groep blijft één bestand staan, tags/beschrijvingen en
+  /// opmerkingen/captions worden samengevoegd en slides die een verwijderde
+  /// kopie gebruikten gaan naar het behouden bestand wijzen — zowel in open
+  /// presentaties als in .md-bestanden op schijf binnen de zoekmappen.
+  Future<void> _dedupe() async {
+    await _persistDescription();
+    setState(() => _deduping = true);
+    final dedup = ImageDedupService();
+    final refs = ImageReferenceService();
+    final groups = await dedup.findDuplicateGroups(_images);
+    if (!mounted) return;
+    if (groups.isEmpty) {
+      setState(() => _deduping = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(context.l10n.d('Geen dubbele afbeeldingen gevonden.')),
+        ),
+      );
+      return;
+    }
+
+    // Ook presentaties op schijf tellen mee: zo blijft bij voorkeur het
+    // bestand staan waar de meeste slides (open of niet) naar wijzen. Open
+    // decks worden via usageOf geteld en hier overgeslagen.
+    final deckFiles = await refs.findDeckFiles(widget.searchPaths);
+    final diskCounts = await refs.countReferences(_withoutOpenDecks(deckFiles), [
+      for (final group in groups) ...group,
+    ]);
+    if (!mounted) return;
+
+    final plan = <({String keeper, List<String> remove})>[
+      for (final group in groups)
+        () {
+          final keeper = dedup.chooseKeeper(
+            group,
+            usageCountOf: (path) =>
+                (widget.usageOf?.call(path).length ?? 0) +
+                (diskCounts[p.normalize(path)] ?? 0),
+          );
+          return (
+            keeper: keeper,
+            remove: [
+              for (final path in group)
+                if (path != keeper) path,
+            ],
+          );
+        }(),
+    ];
+
+    final confirmed = await _showDedupeDialog(plan);
+    if (confirmed != true) {
+      if (mounted) setState(() => _deduping = false);
+      return;
+    }
+
+    var removed = 0;
+    final updatedDeckFiles = <String>{};
+    for (final entry in plan) {
+      // Keeper eerst, zodat zijn eigen tekst vooraan blijft staan.
+      final ordered = [entry.keeper, ...entry.remove];
+      final captions = <String?>[
+        for (final path in ordered) await widget.captionService.getCaption(path),
+      ];
+      final mergedCaption = dedup.mergeMetadata(captions);
+      final mergedDescription = dedup.mergeMetadata(
+        [for (final path in ordered) _descriptions[path]],
+        separator: ', ',
+      );
+      if (mergedCaption.isNotEmpty) {
+        await widget.captionService.saveCaption(entry.keeper, mergedCaption);
+      }
+      if (mergedDescription.isNotEmpty) {
+        _descriptions[entry.keeper] = mergedDescription;
+        await widget.descriptionService.saveDescription(
+          entry.keeper,
+          mergedDescription,
+        );
+      }
+      for (final path in entry.remove) {
+        await widget.onReplaceUsages?.call(path, entry.keeper);
+        // Ook niet-geopende presentaties op schijf laten meewijzen.
+        for (final deckFile in deckFiles) {
+          final updated = await refs.replaceReferences(
+            deckFile,
+            path,
+            entry.keeper,
+          );
+          if (updated) updatedDeckFiles.add(deckFile);
+        }
+        try {
+          final file = File(path);
+          if (file.existsSync()) await file.delete();
+        } catch (_) {}
+        await widget.captionService.saveCaption(path, '');
+        await widget.descriptionService.removeDescription(path);
+        _descriptions.remove(path);
+        removed++;
+      }
+    }
+
+    if (!mounted) return;
+    final removedSet = {for (final entry in plan) ...entry.remove};
+    setState(() {
+      _images = [
+        for (final path in _images)
+          if (!removedSet.contains(path)) path,
+      ];
+      _descEditing = null;
+      if (_selected != null && removedSet.contains(_selected)) {
+        _selected = plan
+            .firstWhere((entry) => entry.remove.contains(_selected))
+            .keeper;
+      }
+      _deduping = false;
+      _applyFilter();
+    });
+    await _loadCaptionForSelection();
+    _loadDescriptionForSelection();
+    if (!mounted) return;
+    final l10n = context.l10n;
+    final removedText = removed == 1
+        ? l10n.d('1 dubbele afbeelding verwijderd.')
+        : '$removed ${l10n.d('dubbele afbeeldingen verwijderd.')}';
+    final filesText = updatedDeckFiles.isEmpty
+        ? ''
+        : updatedDeckFiles.length == 1
+        ? '  ·  ${l10n.d('1 presentatiebestand bijgewerkt.')}'
+        : '  ·  ${updatedDeckFiles.length} ${l10n.d('presentatiebestanden bijgewerkt.')}';
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('$removedText$filesText')),
+    );
+  }
+
+  Future<bool?> _showDedupeDialog(
+    List<({String keeper, List<String> remove})> plan,
+  ) {
+    final removeCount = plan.fold(0, (sum, e) => sum + e.remove.length);
+    return showDialog<bool>(
+      context: context,
+      builder: (ctx) {
+        final l10n = ctx.l10n;
+        return AlertDialog(
+          backgroundColor: const Color(0xFF161B22),
+          title: Row(
+            children: [
+              const Icon(
+                Icons.layers_clear_outlined,
+                color: Color(0xFF60A5FA),
+                size: 20,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  '${l10n.d('Dubbele afbeeldingen opruimen?')} ($removeCount)',
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
+            ],
+          ),
+          content: SizedBox(
+            width: 440,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.d(
+                    'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.',
+                  ),
+                  style: const TextStyle(
+                    color: Color(0xFF8B949E),
+                    fontSize: 13,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Flexible(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (final entry in plan) ...[
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.check_circle_outline,
+                                size: 14,
+                                color: Color(0xFF22C55E),
+                              ),
+                              const SizedBox(width: 6),
+                              Expanded(
+                                child: Text(
+                                  p.basename(entry.keeper),
+                                  style: const TextStyle(
+                                    color: Color(0xFFCDD9E5),
+                                    fontSize: 12.5,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                          for (final path in entry.remove)
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20, top: 2),
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.delete_outline,
+                                    size: 13,
+                                    color: Color(0xFFE5746E),
+                                  ),
+                                  const SizedBox(width: 6),
+                                  Expanded(
+                                    child: Text(
+                                      p.basename(path),
+                                      style: const TextStyle(
+                                        color: Color(0xFF8B949E),
+                                        fontSize: 12,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          const SizedBox(height: 10),
+                        ],
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              style: TextButton.styleFrom(
+                foregroundColor: const Color(0xFF8B949E),
+              ),
+              child: Text(l10n.t('cancel')),
+            ),
+            ElevatedButton.icon(
+              onPressed: () => Navigator.pop(ctx, true),
+              icon: const Icon(Icons.layers_clear_outlined, size: 16),
+              label: Text(l10n.d('Opruimen')),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF238636),
+                foregroundColor: Colors.white,
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -386,11 +685,38 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
     }
   }
 
+  /// Filter de deckbestanden op schijf die niet in een tab geopend zijn
+  /// (open decks zijn al gedekt door [ImageCarouselPicker.usageOf]).
+  List<String> _withoutOpenDecks(List<String> deckFiles) {
+    final open = {for (final f in widget.openDeckFiles) p.normalize(f)};
+    return [
+      for (final f in deckFiles)
+        if (!open.contains(p.normalize(f))) f,
+    ];
+  }
+
   Future<void> _deleteSelected() async {
     final path = _selected;
     if (path == null) return;
-    final usages = widget.usageOf?.call(path) ?? const [];
-    final confirmed = await _showDeleteDialog(path, usages);
+    final usages = [...widget.usageOf?.call(path) ?? const <String>[]];
+    var slideCount = usages.length;
+    // Ook niet-geopende presentaties op schijf meenemen in de waarschuwing.
+    final refs = ImageReferenceService();
+    final onDisk = await refs.referencingFiles(
+      _withoutOpenDecks(await refs.findDeckFiles(widget.searchPaths)),
+      path,
+    );
+    if (!mounted) return;
+    final notOpen = context.l10n.d('niet geopend');
+    for (final entry in onDisk.entries) {
+      slideCount += entry.value;
+      usages.add(
+        entry.value == 1
+            ? '${p.basename(entry.key)} · $notOpen'
+            : '${p.basename(entry.key)} · ${entry.value}× · $notOpen',
+      );
+    }
+    final confirmed = await _showDeleteDialog(path, usages, slideCount);
     if (confirmed != true) return;
 
     try {
@@ -418,7 +744,11 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
     _loadDescriptionForSelection();
   }
 
-  Future<bool?> _showDeleteDialog(String path, List<String> usages) {
+  Future<bool?> _showDeleteDialog(
+    String path,
+    List<String> usages,
+    int slideCount,
+  ) {
     return showDialog<bool>(
       context: context,
       builder: (ctx) {
@@ -470,7 +800,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
                 )
               else ...[
                 Text(
-                  '${l10n.d('Let op: deze afbeelding wordt nog gebruikt in')} ${usages.length} ${usages.length == 1 ? l10n.d("slide") : l10n.t("slides")}:',
+                  '${l10n.d('Let op: deze afbeelding wordt nog gebruikt in')} $slideCount ${slideCount == 1 ? l10n.d("slide") : l10n.t("slides")}:',
                   style: const TextStyle(
                     color: Color(0xFFF0B429),
                     fontSize: 13,
@@ -664,7 +994,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              _query.trim().isEmpty
+              _query.trim().isEmpty && !_untaggedOnly
                   ? '${_images.length}'
                   : '${_filtered.length} / ${_images.length}',
               style: const TextStyle(
@@ -676,6 +1006,8 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
           ),
           const SizedBox(width: 16),
           Expanded(child: _buildSearchField()),
+          const SizedBox(width: 12),
+          _buildUntaggedToggle(),
           const SizedBox(width: 12),
           _buildViewToggle(),
           const SizedBox(width: 12),
@@ -739,6 +1071,38 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
     );
   }
 
+  /// Aan/uit-knop voor het filter "alleen afbeeldingen zonder tags". Handig om
+  /// te zien welke afbeeldingen nog een beschrijving/tags nodig hebben.
+  Widget _buildUntaggedToggle() {
+    final l10n = context.l10n;
+    return Tooltip(
+      message: l10n.d('Alleen afbeeldingen zonder tags tonen'),
+      child: GestureDetector(
+        onTap: _toggleUntaggedOnly,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          decoration: BoxDecoration(
+            color: _untaggedOnly ? const Color(0xFF1D2433) : const Color(0xFF0D1117),
+            borderRadius: BorderRadius.circular(9),
+            border: Border.all(
+              color: _untaggedOnly
+                  ? const Color(0xFF3B82F6)
+                  : const Color(0xFF30363D),
+            ),
+          ),
+          child: Icon(
+            Icons.label_off_outlined,
+            size: 17,
+            color: _untaggedOnly
+                ? const Color(0xFF60A5FA)
+                : const Color(0xFF6E7681),
+          ),
+        ),
+      ),
+    );
+  }
+
   /// Segmented control om tussen raster- en coverflow-weergave te wisselen.
   Widget _buildViewToggle() {
     final l10n = context.l10n;
@@ -790,6 +1154,37 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
   /// Lege staat — gedeeld door raster- en coverflow-weergave.
   Widget _buildEmptyState() {
     final l10n = context.l10n;
+    if (_untaggedOnly && _query.trim().isEmpty) {
+      return Expanded(
+        flex: 13,
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.verified_outlined,
+                size: 56,
+                color: Color(0xFF22C55E),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                l10n.d('Alle afbeeldingen hebben tags.'),
+                style: const TextStyle(
+                  color: Color(0xFFCDD9E5),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                l10n.d('Zet het filter uit om alles weer te zien.'),
+                style: const TextStyle(color: Color(0xFF6E7681), fontSize: 13),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
     final filtering = _query.trim().isNotEmpty;
     return Expanded(
       flex: 13,
@@ -1544,6 +1939,35 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
               foregroundColor: const Color(0xFF8B949E),
               side: const BorderSide(color: Color(0xFF30363D)),
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+            ),
+          ),
+          const SizedBox(width: 8),
+          // Duplicaten opruimen (md5)
+          Tooltip(
+            message: l10n.d(
+              'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën',
+            ),
+            child: OutlinedButton.icon(
+              onPressed: _deduping || _images.length < 2 ? null : _dedupe,
+              icon: _deduping
+                  ? const SizedBox(
+                      width: 14,
+                      height: 14,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Color(0xFF8B949E),
+                      ),
+                    )
+                  : const Icon(Icons.layers_clear_outlined, size: 16),
+              label: Text(l10n.d('Duplicaten opruimen')),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: const Color(0xFF8B949E),
+                side: const BorderSide(color: Color(0xFF30363D)),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 10,
+                ),
+              ),
             ),
           ),
           const SizedBox(width: 8),

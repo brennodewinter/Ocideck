@@ -54,7 +54,15 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           ? selectedAppearance
           : 'Basic',
       recentFiles: prefs.getStringList('recentFiles') ?? [],
+      uiTextScale: (prefs.getDouble('uiTextScale') ?? 1.0).clamp(1.0, 2.0),
     );
+  }
+
+  Future<void> setUiTextScale(double scale) async {
+    final clamped = scale.clamp(1.0, 2.0).toDouble();
+    state = state.copyWith(uiTextScale: clamped);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble('uiTextScale', clamped);
   }
 
   Future<void> addRecentFile(String path) async {

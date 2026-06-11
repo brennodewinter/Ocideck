@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -327,13 +329,27 @@ void main() {
     await tester.pumpWidget(_host(spec, presentationMode: true));
     await tester.pump();
 
+    // fl_chart draws the spider at 0.8 × half the (square) widget side; the
+    // labels hug the polygon, so they may overlap the widget's corners but
+    // must stay off the polygon itself (its apothem) and off each other.
     final radarRect = tester.getRect(find.byType(RadarChart));
+    final center = radarRect.center;
+    final radius = radarRect.width / 2 * 0.8;
+    final apothem = radius * math.cos(math.pi / spec.x.length);
+    double distanceToRect(Offset c, Rect r) {
+      final nearest = Offset(
+        c.dx.clamp(r.left, r.right),
+        c.dy.clamp(r.top, r.bottom),
+      );
+      return (c - nearest).distance;
+    }
+
     final labelRects = [
       for (var i = 0; i < spec.x.length; i++)
         tester.getRect(find.byKey(ValueKey('radar-axis-label-$i'))),
     ];
     for (final rect in labelRects) {
-      expect(rect.overlaps(radarRect), isFalse);
+      expect(distanceToRect(center, rect), greaterThan(apothem * 0.98));
     }
     for (var i = 0; i < labelRects.length; i++) {
       for (var j = i + 1; j < labelRects.length; j++) {
@@ -529,6 +545,67 @@ void main() {
       final rect = tester.getRect(find.text(label).first);
       expect(slideRect.contains(rect.topLeft), isTrue);
       expect(slideRect.contains(rect.bottomRight), isTrue);
+    }
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('charts expose their data as a text alternative', (tester) async {
+    final handle = tester.ensureSemantics();
+    const spec = ChartSpec(
+      type: ChartType.bar,
+      title: 'Omzet',
+      x: ['Q1', 'Q2'],
+      series: [
+        ChartSeries(name: '2026', data: [10, 14]),
+      ],
+    );
+
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    // WCAG 1.1.1: the chart carries a label with type, title and values.
+    expect(
+      find.bySemanticsLabel('Grafiek (Staaf): Omzet. 2026: Q1 10, Q2 14'),
+      findsOneWidget,
+    );
+    handle.dispose();
+  });
+
+  testWidgets('bar chart x-axis labels never run through each other', (
+    tester,
+  ) async {
+    // Six groups: enough that the label slots are narrower than the clamp,
+    // which used to overlap because the spacing was computed with n-1
+    // intervals while bar groups each occupy a full nth of the axis.
+    const labels = [
+      'Strategische koers',
+      'Operationele basis',
+      'Innovatievermogen',
+      'Mensen en cultuur',
+      'Financiële ruimte',
+      'Digitale veiligheid',
+    ];
+    const spec = ChartSpec(
+      type: ChartType.bar,
+      x: labels,
+      series: [
+        ChartSeries(name: 'Score', data: [3, 4, 5, 2, 4, 3]),
+      ],
+    );
+
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    final rects = [
+      for (final label in labels)
+        if (find.text(label).evaluate().isNotEmpty)
+          tester.getRect(find.text(label).first),
+    ];
+    expect(rects.length, greaterThanOrEqualTo(2));
+    for (var i = 0; i < rects.length; i++) {
+      for (var j = i + 1; j < rects.length; j++) {
+        expect(rects[i].overlaps(rects[j]), isFalse);
+      }
     }
     expect(tester.takeException(), isNull);
   });
