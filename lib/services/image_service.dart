@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 import '../l10n/app_localizations.dart';
 import '../models/slide.dart';
+import '../utils/log.dart';
 
 class ImageService {
   final String Function() _languageCode;
@@ -46,7 +47,8 @@ class ImageService {
       if (bytes.isEmpty) return false;
       await Pasteboard.writeImage(bytes);
       return true;
-    } catch (_) {
+    } catch (e) {
+      logError('ImageService.copyImageBytesToClipboard: write image', e);
       return false;
     }
   }
@@ -60,7 +62,8 @@ class ImageService {
       final file = File(path);
       if (!await file.exists()) return false;
       return copyImageBytesToClipboard(await file.readAsBytes());
-    } catch (_) {
+    } catch (e) {
+      logWarning('ImageService.copyImageToClipboard: read image file', e);
       return false;
     }
   }

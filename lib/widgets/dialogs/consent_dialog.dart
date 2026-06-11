@@ -41,9 +41,7 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: theme.colorScheme.surface,
-                  border: Border.all(
-                    color: theme.colorScheme.outlineVariant,
-                  ),
+                  border: Border.all(color: theme.colorScheme.outlineVariant),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Column(
@@ -115,8 +113,9 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.primaryContainer
-                      .withValues(alpha: 0.2),
+                  color: theme.colorScheme.primaryContainer.withValues(
+                    alpha: 0.2,
+                  ),
                   border: Border.all(
                     color: theme.colorScheme.primary.withValues(alpha: 0.3),
                   ),

@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
@@ -60,6 +62,69 @@ void main() {
       );
 
       expect(service.currentThemeProfile.logoPath, logo.path);
+    },
+  );
+
+  test(
+    'importPackageBytes ignores path-traversal entries (zip slip)',
+    () async {
+      final temp = await Directory.systemTemp.createTemp('ocideck_zipslip_');
+      addTearDown(() async {
+        if (await temp.exists()) await temp.delete(recursive: true);
+      });
+
+      final archive = Archive();
+      final md = utf8.encode('---\nmarp: true\n---\n# Hi');
+      archive.addFile(ArchiveFile('deck.md', md.length, md));
+      final evil = utf8.encode('pwned');
+      archive.addFile(ArchiveFile('../evil.txt', evil.length, evil));
+      final zipBytes = ZipEncoder().encode(archive);
+
+      final service = FileService(
+        MarkdownService(),
+        ImageService(),
+        () => const ThemeProfile(),
+      );
+      final mdPath = await service.importPackageBytes(zipBytes, temp.path);
+
+      // The traversal entry must not have escaped the extraction folder.
+      expect(await File(p.join(temp.path, 'evil.txt')).exists(), isFalse);
+      // The legitimate markdown landed inside it.
+      expect(mdPath, isNotNull);
+      expect(p.isWithin(temp.path, mdPath!), isTrue);
+      expect(await File(mdPath).exists(), isTrue);
+    },
+  );
+
+  test(
+    'importFromUrl refuses non-web schemes and private/loopback hosts',
+    () async {
+      final temp = await Directory.systemTemp.createTemp('ocideck_ssrf_');
+      addTearDown(() async {
+        if (await temp.exists()) await temp.delete(recursive: true);
+      });
+      final service = FileService(
+        MarkdownService(),
+        ImageService(),
+        () => const ThemeProfile(),
+      );
+
+      // These are all rejected before any network access happens.
+      for (final url in [
+        'ftp://example.com/x', // non-web scheme
+        'file:///etc/passwd', // non-web scheme
+        'http://localhost:8080/x.ocideck', // loopback name
+        'http://127.0.0.1/x', // loopback IP
+        'http://192.168.1.5/x', // private IP
+        'http://10.0.0.9/x', // private IP
+        'http://169.254.1.1/x', // link-local IP
+      ]) {
+        expect(
+          await service.importFromUrl(url, temp.path),
+          isNull,
+          reason: 'should refuse $url',
+        );
+      }
     },
   );
 }

@@ -108,7 +108,9 @@ void main() {
       const spec = ChartSpec(
         type: ChartType.line,
         x: ['Q1'],
-        series: [ChartSeries(name: 'A', data: [10])],
+        series: [
+          ChartSeries(name: 'A', data: [10]),
+        ],
         minBound: 5,
         maxBound: 20,
       );
@@ -121,7 +123,9 @@ void main() {
       const spec = ChartSpec(
         type: ChartType.pie,
         x: ['Q1'],
-        series: [ChartSeries(name: 'A', data: [10])],
+        series: [
+          ChartSeries(name: 'A', data: [10]),
+        ],
         minBound: 5,
         maxBound: 20,
       );
@@ -149,7 +153,9 @@ void main() {
       const spec = ChartSpec(
         type: ChartType.radar,
         x: ['A', 'B', 'C'],
-        series: [ChartSeries(name: 'A', data: [1, 2, 3])],
+        series: [
+          ChartSeries(name: 'A', data: [1, 2, 3]),
+        ],
         minBound: 1,
         maxBound: 5,
       );

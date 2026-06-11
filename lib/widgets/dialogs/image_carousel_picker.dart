@@ -9,6 +9,7 @@ import '../../services/image_dedup_service.dart';
 import '../../services/image_reference_service.dart';
 import '../../services/image_service.dart';
 import '../../l10n/app_localizations.dart';
+import '../../utils/log.dart';
 
 /// Resultaat van de afbeeldingencarousel.
 class ImagePickResult {
@@ -169,7 +170,9 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
             if (_exts.contains(ext)) found.add(e.path);
           }
         }
-      } catch (_) {}
+      } catch (e) {
+        logWarning('_ImageCarouselPickerState._loadImages: directory scan', e);
+      }
     }
 
     // Stat each file exactly once (instead of repeatedly inside the sort
@@ -179,7 +182,8 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
       DateTime modified;
       try {
         modified = File(path).statSync().modified;
-      } catch (_) {
+      } catch (e) {
+        logWarning('_ImageCarouselPickerState._loadImages: statSync', e);
         modified = DateTime.fromMillisecondsSinceEpoch(0);
       }
       withTimes.add((path, modified));
@@ -323,9 +327,10 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
     // bestand staan waar de meeste slides (open of niet) naar wijzen. Open
     // decks worden via usageOf geteld en hier overgeslagen.
     final deckFiles = await refs.findDeckFiles(widget.searchPaths);
-    final diskCounts = await refs.countReferences(_withoutOpenDecks(deckFiles), [
-      for (final group in groups) ...group,
-    ]);
+    final diskCounts = await refs.countReferences(
+      _withoutOpenDecks(deckFiles),
+      [for (final group in groups) ...group],
+    );
     if (!mounted) return;
 
     final plan = <({String keeper, List<String> remove})>[
@@ -359,13 +364,13 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
       // Keeper eerst, zodat zijn eigen tekst vooraan blijft staan.
       final ordered = [entry.keeper, ...entry.remove];
       final captions = <String?>[
-        for (final path in ordered) await widget.captionService.getCaption(path),
+        for (final path in ordered)
+          await widget.captionService.getCaption(path),
       ];
       final mergedCaption = dedup.mergeMetadata(captions);
-      final mergedDescription = dedup.mergeMetadata(
-        [for (final path in ordered) _descriptions[path]],
-        separator: ', ',
-      );
+      final mergedDescription = dedup.mergeMetadata([
+        for (final path in ordered) _descriptions[path],
+      ], separator: ', ');
       if (mergedCaption.isNotEmpty) {
         await widget.captionService.saveCaption(entry.keeper, mergedCaption);
       }
@@ -390,7 +395,9 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
         try {
           final file = File(path);
           if (file.existsSync()) await file.delete();
-        } catch (_) {}
+        } catch (e) {
+          logWarning('_ImageCarouselPickerState._dedupe: delete file', e);
+        }
         await widget.captionService.saveCaption(path, '');
         await widget.descriptionService.removeDescription(path);
         _descriptions.remove(path);
@@ -426,9 +433,9 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
         : updatedDeckFiles.length == 1
         ? '  ·  ${l10n.d('1 presentatiebestand bijgewerkt.')}'
         : '  ·  ${updatedDeckFiles.length} ${l10n.d('presentatiebestanden bijgewerkt.')}';
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('$removedText$filesText')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('$removedText$filesText')));
   }
 
   Future<bool?> _showDedupeDialog(
@@ -719,11 +726,18 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
     final confirmed = await _showDeleteDialog(path, usages, slideCount);
     if (confirmed != true) return;
 
+    var deleted = false;
     try {
       final file = File(path);
       if (file.existsSync()) await file.delete();
-    } catch (_) {}
-    // Drop the sidecar metadata too.
+      deleted = true;
+    } catch (e) {
+      debugPrint('Kon afbeelding niet verwijderen: $e');
+    }
+    // Only drop the sidecar metadata and the carousel entry once the file is
+    // actually gone; otherwise the image would disappear from the UI while it
+    // still exists on disk, having silently lost its caption/description.
+    if (!deleted) return;
     await widget.captionService.saveCaption(path, '');
     await widget.descriptionService.removeDescription(path);
 
@@ -1083,7 +1097,9 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
           duration: const Duration(milliseconds: 150),
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           decoration: BoxDecoration(
-            color: _untaggedOnly ? const Color(0xFF1D2433) : const Color(0xFF0D1117),
+            color: _untaggedOnly
+                ? const Color(0xFF1D2433)
+                : const Color(0xFF0D1117),
             borderRadius: BorderRadius.circular(9),
             border: Border.all(
               color: _untaggedOnly
@@ -2053,7 +2069,9 @@ class _FileSizeState extends State<_FileSize> {
           ? '${mb.toStringAsFixed(1)} MB'
           : '${kb.toStringAsFixed(0)} KB';
       if (mounted) setState(() => _size = label);
-    } catch (_) {}
+    } catch (e) {
+      logWarning('_FileSizeState._load: compute size label', e);
+    }
   }
 
   @override

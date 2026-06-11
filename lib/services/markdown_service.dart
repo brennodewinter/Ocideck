@@ -5,6 +5,7 @@ import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../utils/log.dart';
 
 const _uuid = Uuid();
 
@@ -528,7 +529,8 @@ class MarkdownService {
   static String _decodeText(String encoded) {
     try {
       return utf8.decode(base64Url.decode(encoded.trim()));
-    } catch (_) {
+    } catch (e, s) {
+      logError('MarkdownService._decodeText: base64/utf8 decode', e, s);
       return '';
     }
   }
@@ -538,7 +540,9 @@ class MarkdownService {
       final decoded = utf8.decode(base64Url.decode(encoded.trim()));
       final raw = jsonDecode(decoded);
       if (raw is List) return raw.map((v) => v.toString()).toList();
-    } catch (_) {}
+    } catch (e, s) {
+      logError('MarkdownService._decodeBullets: base64/utf8/json decode', e, s);
+    }
     return const [];
   }
 
@@ -646,7 +650,8 @@ class MarkdownService {
   Deck? parseDeck(String markdown, {String? filePath}) {
     try {
       return _doParse(markdown, filePath: filePath);
-    } catch (_) {
+    } catch (e, s) {
+      logError('MarkdownService.parseDeck: parse markdown', e, s);
       return null;
     }
   }
@@ -692,11 +697,22 @@ class MarkdownService {
           } else if (line.startsWith('tlp:')) {
             tlp = TlpLevelX.fromKey(line.substring(4));
           } else if (line.startsWith('ocideck_style_profile:')) {
-            final encoded = line.substring(22).trim();
-            final decoded = utf8.decode(base64Url.decode(encoded));
-            themeProfile = ThemeProfile.fromJson(
-              Map<String, Object?>.from(jsonDecode(decoded) as Map),
-            );
+            // Best-effort: a corrupt profile token must not fail the whole
+            // parse (which would blank the audience window). Keep the default.
+            try {
+              final encoded = line.substring(22).trim();
+              final decoded = utf8.decode(base64Url.decode(encoded));
+              themeProfile = ThemeProfile.fromJson(
+                Map<String, Object?>.from(jsonDecode(decoded) as Map),
+              );
+            } catch (e, s) {
+              logError(
+                'MarkdownService._doParse: decode ocideck_style_profile',
+                e,
+                s,
+              );
+              // Leave themeProfile at its default.
+            }
           }
         }
         content = content.substring(end + 5).trim();

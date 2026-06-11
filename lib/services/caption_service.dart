@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
+import '../utils/log.dart';
+
 /// Slaat afbeeldingscaptions op als JSON-sidecar in de map van de afbeelding.
 /// Bestandsnaam: .ocideck_captions.json
 class CaptionService {
@@ -17,7 +19,8 @@ class CaptionService {
       final data = jsonDecode(await file.readAsString()) as Map;
       final caption = data[p.basename(resolvedPath)];
       return caption is String ? caption : null;
-    } catch (_) {
+    } catch (e) {
+      logWarning('CaptionService.getCaption: read caption sidecar', e);
       return null;
     }
   }
@@ -36,7 +39,9 @@ class CaptionService {
         data = Map<String, dynamic>.from(
           jsonDecode(await file.readAsString()) as Map,
         );
-      } catch (_) {}
+      } catch (e, s) {
+        logError('CaptionService.saveCaption: parse existing sidecar', e, s);
+      }
     }
     final key = p.basename(resolvedPath);
     if (caption.trim().isEmpty) {

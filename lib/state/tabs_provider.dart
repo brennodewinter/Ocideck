@@ -101,7 +101,24 @@ class TabsNotifier extends StateNotifier<TabsState> {
     for (final sub in _subs.values) {
       sub.cancel();
     }
+    // The tabs' notifiers are not disposed here: at teardown the widget tree is
+    // still unmounting and may read a tab one last time. The process is ending
+    // anyway. The per-close path (_disposeTab) is what prevents the real leak.
     super.dispose();
+  }
+
+  /// Tear down a tab that is being removed: stop listening to it and dispose
+  /// its notifiers so their listeners and undo/redo history are released. The
+  /// dispose is deferred to a microtask so any widget still referencing this
+  /// tab while it unmounts has finished before the notifiers go away.
+  void _disposeTab(TabInfo tab) {
+    _subs.remove(tab.id)?.cancel();
+    final deckNotifier = tab.deckNotifier;
+    final editorNotifier = tab.editorNotifier;
+    Future.microtask(() {
+      deckNotifier.dispose();
+      editorNotifier.dispose();
+    });
   }
 
   TabInfo _createTab() {
@@ -163,7 +180,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // Een ongebruikt leeg begin-tabblad vervangen, anders toevoegen.
     final replaceEmpty = state.tabs.length == 1 && !state.tabs.first.isOpen;
     if (replaceEmpty) {
-      _subs.remove(state.tabs.first.id)?.cancel();
+      _disposeTab(state.tabs.first);
       state = state.copyWith(tabs: restored, selectedIndex: 0);
     } else {
       final tabs = [...state.tabs, ...restored];
@@ -282,7 +299,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     }
     final tab = state.tabs[index];
     _recovery.discard(tab.recoveryId);
-    _subs.remove(tab.id)?.cancel();
+    _disposeTab(tab);
     final newTabs = List<TabInfo>.from(state.tabs)..removeAt(index);
     final newSelected = index >= newTabs.length ? newTabs.length - 1 : index;
     state = state.copyWith(tabs: newTabs, selectedIndex: newSelected);

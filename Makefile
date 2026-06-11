@@ -1,4 +1,4 @@
-.PHONY: setup format format-check analyze test test-contracts test-preview test-export test-state test-services test-presenter deps-outdated licenses check check-full help
+.PHONY: setup format format-check analyze test test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check licenses check check-full help
 
 help:
 	@echo "OciDeck quality targets:"
@@ -11,6 +11,7 @@ help:
 	@echo "  make test-services   Caption/description/image service tests."
 	@echo "  make test-presenter  Fullscreen presenter interaction tests."
 	@echo "  make deps-outdated   Advisory dependency freshness report."
+	@echo "  make deps-check      Verify vendored JS bundles vs manifest + OSV CVEs."
 	@echo "  make licenses        Verify all dependencies use open-source licences."
 
 # Install Flutter/Dart dependencies.
@@ -106,6 +107,18 @@ deps-outdated:
 	@echo "Failure means: inspect network/tooling first; outdated packages are not necessarily regressions."
 	flutter pub outdated
 
+# Security gate for the vendored JS bundles inlined into the HTML export.
+# Verifies each file still matches assets/web_export/MANIFEST.json (sha256) and
+# queries the OSV database for known vulnerabilities in the pinned versions.
+deps-check:
+	@echo "== OciDeck check: bundled JavaScript =="
+	@echo "Command: dart run tool/check_bundled_js.dart"
+	@echo "Covers: integrity (sha256 vs manifest) + known CVEs (OSV) for marked,"
+	@echo "        highlight.js, DOMPurify, mermaid and MathJax."
+	@echo "Failure means: a bundle drifted from the manifest, or a pinned version"
+	@echo "        now has a known vulnerability — upgrade it and refresh the manifest."
+	dart run tool/check_bundled_js.dart
+
 # Open-source licence compliance check for all resolved dependencies.
 licenses:
 	@echo "== OciDeck check: licences =="
@@ -120,6 +133,6 @@ check: format-check analyze test
 	@echo "Validated: formatting, static analysis, and the full Flutter test suite."
 
 # Extended local check with advisory dependency freshness after the required gate.
-check-full: check licenses deps-outdated
+check-full: check licenses deps-check deps-outdated
 	@echo "== OciDeck extended check complete =="
-	@echo "Validated: required quality gate, licence compliance, and dependency freshness."
+	@echo "Validated: required quality gate, licence compliance, bundled-JS CVEs, and dependency freshness."

@@ -1,0 +1,46 @@
+{
+  "_comment": "Pinned inventory of the vendored JavaScript bundles inlined into the offline HTML export (see lib/services/marp_html_service.dart). Each entry records the npm package + exact version so `make deps-check` can query the OSV vulnerability database, and a sha256 so the same check can prove the on-disk file still matches this manifest (tamper / accidental-replacement guard). When you intentionally upgrade a bundle, update its version, source and sha256 here in the same commit.",
+  "ecosystem": "npm",
+  "bundles": [
+    {
+      "file": "marked.min.js",
+      "npm": "marked",
+      "version": "18.0.5",
+      "sha256": "2dc4769dfde29f51c7aca1a539c6407c789c8ea644cf8b7d01ded28a9c1d800b",
+      "source": "https://cdn.jsdelivr.net/npm/marked@18.0.5/lib/marked.umd.js",
+      "license": "MIT"
+    },
+    {
+      "file": "highlight.min.js",
+      "npm": "highlight.js",
+      "version": "11.11.1",
+      "sha256": "c4a399dd6f488bc97a3546e3476747b3e714c99c57b9473154c6fb8d259b9381",
+      "source": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "file": "purify.min.js",
+      "npm": "dompurify",
+      "version": "3.4.9",
+      "sha256": "3c16cc90eb152b823b71b8585cd79e7fb7cd7a380157a800dfbd9459aad5f726",
+      "source": "https://cdn.jsdelivr.net/npm/dompurify@3.4.9/dist/purify.min.js",
+      "license": "Apache-2.0 OR MPL-2.0"
+    },
+    {
+      "file": "mermaid.min.js",
+      "npm": "mermaid",
+      "version": "10.9.6",
+      "sha256": "eda3a0ad572bbe69a318c1be0163e8233dd824f3f12939e5168feba207767151",
+      "source": "https://cdn.jsdelivr.net/npm/mermaid@10.9.6/dist/mermaid.min.js",
+      "license": "MIT"
+    },
+    {
+      "file": "tex-svg.js",
+      "npm": "mathjax",
+      "version": "3.2.2",
+      "sha256": "d4295dc33744836935c1399feece5159577b34c5c8ffb9f1c6324cd82e03a882",
+      "source": "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js",
+      "license": "Apache-2.0"
+    }
+  ]
+}

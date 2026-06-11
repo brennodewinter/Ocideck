@@ -61,13 +61,10 @@ void main() {
     });
 
     test('parses a markdown table and drops the separator row', () {
-      expect(
-        parseClipboardTable('| Naam | Score |\n|---|---:|\n| Jan | 8 |'),
-        [
-          ['Naam', 'Score'],
-          ['Jan', '8'],
-        ],
-      );
+      expect(parseClipboardTable('| Naam | Score |\n|---|---:|\n| Jan | 8 |'), [
+        ['Naam', 'Score'],
+        ['Jan', '8'],
+      ]);
     });
 
     test('plain text is not a table', () {

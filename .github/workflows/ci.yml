@@ -34,3 +34,8 @@ jobs:
       # Fail the build if any dependency is not open source.
       - name: Licence compliance (make licenses)
         run: make licenses
+
+      # Fail the build if a vendored JS bundle drifted from its manifest or a
+      # pinned version has a known vulnerability (queries the OSV database).
+      - name: Bundled JS security (make deps-check)
+        run: make deps-check

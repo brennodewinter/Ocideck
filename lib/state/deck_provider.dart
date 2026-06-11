@@ -201,7 +201,12 @@ class DeckNotifier extends StateNotifier<DeckState> {
 
   void removeSlide(int index) {
     final deck = state.deck;
-    if (deck == null || deck.slides.length <= 1) return;
+    if (deck == null ||
+        deck.slides.length <= 1 ||
+        index < 0 ||
+        index >= deck.slides.length) {
+      return;
+    }
     final slides = List<Slide>.from(deck.slides)..removeAt(index);
     _mutate(deck.copyWith(slides: slides));
   }
@@ -254,7 +259,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
 
   void duplicateSlide(int index) {
     final deck = state.deck;
-    if (deck == null) return;
+    if (deck == null || index < 0 || index >= deck.slides.length) return;
     final slides = List<Slide>.from(deck.slides);
     slides.insert(index + 1, Slide.duplicate(slides[index]));
     _mutate(deck.copyWith(slides: slides));
@@ -272,7 +277,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
 
   void updateSlide(int index, Slide updated) {
     final deck = state.deck;
-    if (deck == null) return;
+    if (deck == null || index < 0 || index >= deck.slides.length) return;
     final slides = List<Slide>.from(deck.slides);
     slides[index] = updated;
     // Snel typen op dezelfde slide telt als één ongedaan-maken-stap.
@@ -393,6 +398,9 @@ class DeckNotifier extends StateNotifier<DeckState> {
           title: sub(s.title),
           subtitle: sub(s.subtitle),
           bullets: [for (final b in s.bullets) sub(b)],
+          bullets2: [for (final b in s.bullets2) sub(b)],
+          columnTitle1: sub(s.columnTitle1),
+          columnTitle2: sub(s.columnTitle2),
           quote: sub(s.quote),
           quoteAuthor: sub(s.quoteAuthor),
           customMarkdown: sub(s.customMarkdown),
@@ -414,6 +422,9 @@ class DeckNotifier extends StateNotifier<DeckState> {
     s.title,
     s.subtitle,
     ...s.bullets,
+    ...s.bullets2,
+    s.columnTitle1,
+    s.columnTitle2,
     s.quote,
     s.quoteAuthor,
     s.customMarkdown,

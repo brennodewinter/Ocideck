@@ -68,10 +68,10 @@ void main() {
       final a = write('a.png', [1]);
       final b = write('b.png', [1]);
 
-      final keeper = service.chooseKeeper(
-        [a, b],
-        usageCountOf: (path) => path == b ? 2 : 0,
-      );
+      final keeper = service.chooseKeeper([
+        a,
+        b,
+      ], usageCountOf: (path) => path == b ? 2 : 0);
 
       expect(keeper, b);
     });
@@ -79,9 +79,9 @@ void main() {
     test('falls back to the oldest file when usages are equal', () {
       final newer = write('newer.png', [1]);
       final older = write('older.png', [1]);
-      File(older).setLastModifiedSync(
-        DateTime.now().subtract(const Duration(days: 7)),
-      );
+      File(
+        older,
+      ).setLastModifiedSync(DateTime.now().subtract(const Duration(days: 7)));
 
       expect(service.chooseKeeper([newer, older]), older);
     });

@@ -77,6 +77,25 @@ void main() {}
     expect(html, contains(r'<\/script'));
   });
 
+  test('build() neutralises a mixed-case closing-script breakout', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    final html = await service.build('# X\n\nfoo </ScRiPt> bar');
+    // Case tricks must not slip past the guard.
+    expect(html, isNot(contains('</ScRiPt>')));
+    expect(html, contains(r'<\/ScRiPt'));
+  });
+
+  test(
+    'build() bundles DOMPurify and sanitises the rendered markdown',
+    () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build('# X');
+      // The sanitiser is inlined and actually used before content hits the DOM.
+      expect(html, contains('DOMPurify'));
+      expect(html, contains('DOMPurify.sanitize('));
+    },
+  );
+
   test('a theme colours the slides with the profile palette', () async {
     final service = MarpHtmlService(
       loadAsset: _diskLoader,
@@ -108,7 +127,10 @@ void main() {}
       codeTextColor: '#33FF33',
       codeFontFamily: 'Courier New',
     );
-    final html = await service.build('```dart\nvoid main() {}\n```', theme: theme);
+    final html = await service.build(
+      '```dart\nvoid main() {}\n```',
+      theme: theme,
+    );
 
     expect(html, contains('.slide pre{background:#000000;color:#33FF33'));
     expect(html, contains('.slide pre code{color:#33FF33'));

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import '../models/annotation.dart';
 import '../models/slide.dart';
+import '../utils/log.dart';
 
 /// Serializes the annotation layer into a sidecar payload that is fully
 /// decoupled from the Marp markdown.
@@ -96,7 +97,8 @@ class AnnotationCodec {
         used.add(target);
         result[slides[target].id] = strokes;
       }
-    } catch (_) {
+    } catch (e, s) {
+      logError('AnnotationCodec.decode: decode annotation sidecar JSON', e, s);
       return {};
     }
     return result;

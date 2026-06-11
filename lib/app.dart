@@ -62,9 +62,7 @@ class _ConsentGate extends ConsumerWidget {
     final consent = ref.watch(consentProvider);
 
     if (consent.isLoading) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     if (!consent.hasAccepted) {
@@ -72,9 +70,7 @@ class _ConsentGate extends ConsumerWidget {
       // supplies the theme and the AppLocalizations delegate, so context.l10n
       // resolves here. A nested MaterialApp would start a fresh Localizations
       // scope without our delegate and the consent text would render blank.
-      return const Scaffold(
-        body: Center(child: ConsentDialog()),
-      );
+      return const Scaffold(body: Center(child: ConsentDialog()));
     }
 
     return const AppShell();

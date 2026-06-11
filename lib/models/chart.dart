@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../utils/log.dart';
+
 /// Directory (relative to the deck) where linked chart CSVs are kept, so the
 /// data files stay tidily in one place — separate from images/media.
 const String chartDataDirName = 'data';
@@ -155,7 +157,8 @@ class ChartSpec {
             ChartSeries.fromJson(Map<String, dynamic>.from(s as Map)),
         ],
       );
-    } catch (_) {
+    } catch (e, s) {
+      logError('ChartSpec.parse: decode chart JSON block', e, s);
       return const ChartSpec();
     }
   }

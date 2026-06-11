@@ -14,9 +14,15 @@ Shipped inside the app and embedded into the **offline HTML export**
 | --- | --- | --- |
 | [marked](https://github.com/markedjs/marked) | Markdown → HTML in the export | MIT |
 | [highlight.js](https://github.com/highlightjs/highlight.js) | Code highlighting in the export | BSD-3-Clause |
-| [Mermaid](https://github.com/mermaid-js/mermaid) | Diagrams in the export | MIT (bundles [DOMPurify](https://github.com/cure53/DOMPurify), Apache-2.0 / MPL-2.0) |
+| [DOMPurify](https://github.com/cure53/DOMPurify) | Sanitises the rendered Markdown before it hits the DOM in the export | Apache-2.0 / MPL-2.0 |
+| [Mermaid](https://github.com/mermaid-js/mermaid) | Diagrams in the export | MIT |
 | [MathJax](https://github.com/mathjax/MathJax) (`tex-svg.js`) | Math rendering in the export | Apache-2.0 |
 | [EB Garamond](https://github.com/octaviopardo/EBGaramond12) font | Bundled deck font | SIL Open Font License 1.1 |
+
+The exact pinned version, source URL and SHA-256 of every vendored JS bundle
+live in [`assets/web_export/MANIFEST.json`](assets/web_export/MANIFEST.json).
+`make deps-check` verifies each file still matches that manifest and queries the
+[OSV](https://osv.dev) database for known vulnerabilities.
 
 ## Vendored (forked) plugins
 

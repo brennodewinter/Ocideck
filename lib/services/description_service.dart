@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
+import '../utils/log.dart';
+
 /// Stores short, searchable image descriptions as a JSON sidecar in the image's
 /// own directory. File name: .ocideck_descriptions.json, keyed by base name.
 ///
@@ -19,7 +21,11 @@ class DescriptionService {
       final data = jsonDecode(await file.readAsString()) as Map;
       final value = data[p.basename(imagePath)];
       return value is String ? value : null;
-    } catch (_) {
+    } catch (e) {
+      logWarning(
+        'DescriptionService.getDescription: read description sidecar',
+        e,
+      );
       return null;
     }
   }
@@ -33,7 +39,13 @@ class DescriptionService {
         data = Map<String, dynamic>.from(
           jsonDecode(await file.readAsString()) as Map,
         );
-      } catch (_) {}
+      } catch (e, s) {
+        logError(
+          'DescriptionService.saveDescription: parse existing sidecar',
+          e,
+          s,
+        );
+      }
     }
     final key = p.basename(imagePath);
     if (description.trim().isEmpty) {
@@ -71,7 +83,9 @@ class DescriptionService {
             result[p.join(dir, entry.key as String)] = entry.value as String;
           }
         }
-      } catch (_) {}
+      } catch (e) {
+        logWarning('DescriptionService.loadFor: read description sidecar', e);
+      }
     }
     return result;
   }

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
+import '../utils/log.dart';
 
 /// Vindt en herschrijft afbeeldingsverwijzingen (`![…](pad)`) in
 /// Marp-markdownbestanden op schijf. Zo gaan bij het opruimen van duplicaten
@@ -31,7 +32,8 @@ class ImageReferenceService {
       List<FileSystemEntity> entries;
       try {
         entries = await dir.list(followLinks: false).toList();
-      } catch (_) {
+      } catch (e) {
+        logWarning('ImageReferenceService.findDeckFiles: list directory', e);
         return;
       }
       for (final entity in entries) {
@@ -69,7 +71,8 @@ class ImageReferenceService {
       String content;
       try {
         content = await File(deckFile).readAsString();
-      } catch (_) {
+      } catch (e) {
+        logWarning('ImageReferenceService.countReferences: read deck file', e);
         continue;
       }
       final mdDir = p.dirname(deckFile);
@@ -100,7 +103,8 @@ class ImageReferenceService {
       String content;
       try {
         content = await File(deckFile).readAsString();
-      } catch (_) {
+      } catch (e) {
+        logWarning('ImageReferenceService.referencingFiles: read deck file', e);
         continue;
       }
       final mdDir = p.dirname(deckFile);
@@ -127,7 +131,8 @@ class ImageReferenceService {
     String content;
     try {
       content = await file.readAsString();
-    } catch (_) {
+    } catch (e) {
+      logWarning('ImageReferenceService.replaceReferences: read deck file', e);
       return false;
     }
     final mdDir = p.dirname(deckFile);
@@ -150,7 +155,8 @@ class ImageReferenceService {
     if (!changed) return false;
     try {
       await file.writeAsString(updated);
-    } catch (_) {
+    } catch (e) {
+      logWarning('ImageReferenceService.replaceReferences: write deck file', e);
       return false;
     }
     return true;
@@ -159,7 +165,9 @@ class ImageReferenceService {
   String? _resolve(String ref, String mdDir) {
     final cleaned = ref.trim();
     if (cleaned.isEmpty || cleaned.contains('://')) return null;
-    return p.normalize(p.isAbsolute(cleaned) ? cleaned : p.join(mdDir, cleaned));
+    return p.normalize(
+      p.isAbsolute(cleaned) ? cleaned : p.join(mdDir, cleaned),
+    );
   }
 }
 
