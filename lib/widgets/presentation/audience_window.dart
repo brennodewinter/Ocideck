@@ -6,6 +6,7 @@ import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/markdown_service.dart';
+import '../../utils/log.dart';
 import '../../utils/url_launcher_util.dart';
 import '../slides/slide_preview.dart';
 import 'annotation_overlay.dart';
@@ -133,7 +134,12 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         try {
           final self = await WindowController.fromCurrentEngine();
           await self.close();
-        } catch (_) {}
+        } catch (e) {
+          logWarning(
+            '_AudienceWindowAppState._onPresenterCall: close window',
+            e,
+          );
+        }
     }
     return null;
   }

@@ -13,6 +13,7 @@ import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/markdown_service.dart';
+import '../../utils/log.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
 import '../slides/inline_markdown.dart';
@@ -73,7 +74,8 @@ class FullscreenPresenter extends StatefulWidget {
       try {
         final displays = await screenRetriever.getAllDisplays();
         displayCount = displays.length;
-      } catch (_) {
+      } catch (e) {
+        logWarning('FullscreenPresenter.present: display detection failed', e);
         displayCount = 0;
       }
     }
@@ -203,7 +205,11 @@ class FullscreenPresenter extends StatefulWidget {
         WindowConfiguration(arguments: argument, hiddenAtLaunch: true),
       );
       await audience.coverScreen(external: true);
-    } catch (_) {
+    } catch (e) {
+      logError(
+        'FullscreenPresenter.showDualScreen: audience window setup failed',
+        e,
+      );
       audience = null;
     }
 
@@ -283,7 +289,8 @@ bool autoAdvanceWaitsForMedia(Slide slide) {
 Future<bool> _wakeLockEnabled() async {
   try {
     return await WakelockPlus.enabled;
-  } catch (_) {
+  } catch (e) {
+    logWarning('fullscreen_presenter._wakeLockEnabled: query failed', e);
     return false;
   }
 }
@@ -291,7 +298,8 @@ Future<bool> _wakeLockEnabled() async {
 Future<void> _enableWakeLock() async {
   try {
     await WakelockPlus.enable();
-  } catch (_) {
+  } catch (e) {
+    logWarning('fullscreen_presenter._enableWakeLock: enable failed', e);
     // Best-effort: unsupported platforms should not interrupt presenting.
   }
 }
@@ -303,7 +311,8 @@ Future<void> _restoreWakeLock(bool enabledBeforePresentation) async {
     } else {
       await WakelockPlus.disable();
     }
-  } catch (_) {
+  } catch (e) {
+    logWarning('fullscreen_presenter._restoreWakeLock: restore failed', e);
     // Best-effort cleanup.
   }
 }
@@ -560,10 +569,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     }
     _lastInkLiveSent = now;
     audienceChannel
-        .invokeMethod('inkLive', {
-          'index': _index,
-          'stroke': stroke?.toJson(),
-        })
+        .invokeMethod('inkLive', {'index': _index, 'stroke': stroke?.toJson()})
         .catchError((_) => null);
   }
 
@@ -707,7 +713,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         _displays = displays;
         _displayIndex = current < 0 ? 0 : current;
       });
-    } catch (_) {
+    } catch (e) {
+      logWarning(
+        '_FullscreenPresenterState._loadDisplays: screen detection failed',
+        e,
+      );
       // Screen detection is best-effort; presenting should still work.
     }
   }
@@ -724,7 +734,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       );
       await windowManager.setFullScreen(true);
       if (mounted) setState(() => _displayIndex = index);
-    } catch (_) {
+    } catch (e) {
+      logError(
+        '_FullscreenPresenterState._moveToDisplay: moving window to display failed',
+        e,
+      );
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -1425,6 +1439,10 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                 // Annotatielaag bovenop de dia. Laat klikken door wanneer er
                 // geen gereedschap actief is (zodat tikken blijft doorbladeren).
                 AnnotationLayer(
+                  // Keyed by slide so a slide change (e.g. auto-advance) while a
+                  // stroke is in progress resets the layer instead of committing
+                  // the half-drawn stroke onto the next slide.
+                  key: ValueKey(slide.id),
                   strokes: _currentStrokes,
                   tool: _tool,
                   color: _inkColor,

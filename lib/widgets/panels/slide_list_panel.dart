@@ -15,6 +15,7 @@ import '../../services/slide_rasterizer.dart';
 import '../../state/slide_clipboard_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
+import '../../utils/log.dart';
 import '../dialogs/add_slide_dialog.dart';
 import '../dialogs/import_slides_dialog.dart';
 import '../dialogs/slide_finder_dialog.dart';
@@ -216,7 +217,9 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         tlp: deck.tlp,
       );
       if (images.isNotEmpty) bytes = images.first;
-    } catch (_) {}
+    } catch (e) {
+      logWarning('_SlideListPanelState._copySlideAsImage: rasterize slide', e);
+    }
     if (!mounted) return;
     final ok =
         bytes != null && await ImageService().copyImageBytesToClipboard(bytes);

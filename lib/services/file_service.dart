@@ -10,6 +10,7 @@ import '../l10n/app_localizations.dart';
 import '../models/settings.dart';
 import '../models/chart.dart';
 import '../models/slide.dart';
+import '../utils/log.dart';
 import 'annotation_codec.dart';
 import 'caption_service.dart';
 import 'image_service.dart';
@@ -64,6 +65,19 @@ class FileService {
   ThemeProfile activeProfileFor({String? projectPath}) =>
       resolveThemeProfile(_themeProfile(), projectPath: projectPath);
 
+  /// Resolve a project-relative [path] to an absolute path strictly inside
+  /// [projectPath], or null for absolute paths or `../` escapes. Used for file
+  /// references an untrusted deck controls (e.g. a chart's linked CSV) so it
+  /// can't read arbitrary files outside its own folder.
+  static String? _projectFile(String? projectPath, String path) {
+    if (projectPath == null || path.trim().isEmpty || p.isAbsolute(path)) {
+      return null;
+    }
+    final abs = p.normalize(p.join(projectPath, path));
+    if (abs != projectPath && !p.isWithin(projectPath, abs)) return null;
+    return abs;
+  }
+
   ThemeProfile resolveThemeProfile(
     ThemeProfile profile, {
     String? projectPath,
@@ -112,7 +126,11 @@ class FileService {
       List<FileSystemEntity> entries;
       try {
         entries = await dir.list(followLinks: false).toList();
-      } catch (_) {
+      } catch (e) {
+        logWarning(
+          'FileService.scanPresentations: directory listing failed',
+          e,
+        );
         return;
       }
       for (final entity in entries) {
@@ -124,7 +142,8 @@ class FileService {
           String content;
           try {
             content = await entity.readAsString();
-          } catch (_) {
+          } catch (e) {
+            logWarning('FileService.scanPresentations: file not readable', e);
             continue;
           }
           final deck = await openDeck(entity.path, content: content);
@@ -190,8 +209,9 @@ class FileService {
             hydrated.slides,
           );
           if (map.isNotEmpty) return hydrated.copyWith(annotations: map);
-        } catch (_) {
+        } catch (e) {
           // A broken sidecar must never block opening the deck.
+          logWarning('FileService.openDeck: annotation sidecar unreadable', e);
         }
       }
     }
@@ -229,11 +249,11 @@ class FileService {
         slides.add(s);
         continue;
       }
-      final abs = p.isAbsolute(spec.source!)
-          ? spec.source!
-          : p.join(deck.projectPath!, spec.source!);
-      final file = File(abs);
-      if (!await file.exists()) {
+      // A chart's CSV link must stay inside the project (no absolute paths or
+      // `../` escapes) — otherwise an untrusted deck could read arbitrary files.
+      final abs = _projectFile(deck.projectPath, spec.source!);
+      final file = abs == null ? null : File(abs);
+      if (file == null || !await file.exists()) {
         slides.add(s);
         continue;
       }
@@ -241,7 +261,8 @@ class FileService {
         final csv = await file.readAsString();
         slides.add(s.copyWith(customMarkdown: spec.withCsv(csv).toBlock()));
         changed = true;
-      } catch (_) {
+      } catch (e) {
+        logWarning('FileService._hydrateCharts: chart CSV unreadable', e);
         slides.add(s);
       }
     }
@@ -325,9 +346,18 @@ class FileService {
     /// bestand toe onder `<subdir>/<bestandsnaam>` en geef dat pad terug.
     String? addAsset(String path, String subdir) {
       if (path.trim().isEmpty) return null;
-      final abs = p.isAbsolute(path)
-          ? path
-          : (deck.projectPath != null ? p.join(deck.projectPath!, path) : path);
+      final String abs;
+      if (p.isAbsolute(path)) {
+        // Absolute paths come from the picker (the user explicitly chose them).
+        abs = path;
+      } else if (deck.projectPath != null) {
+        // A relative asset must not escape the project via `../`.
+        final resolved = _projectFile(deck.projectPath, path);
+        if (resolved == null) return null;
+        abs = resolved;
+      } else {
+        abs = path;
+      }
       final file = File(abs);
       if (!file.existsSync()) return null;
       final rel = p.posix.join(subdir, p.basename(abs));
@@ -415,7 +445,8 @@ class FileService {
         profile,
         logoRel == null ? null : '../$logoRel',
       );
-    } catch (_) {
+    } catch (e) {
+      logWarning('FileService._packageThemeCss: theme asset not bundled', e);
       return null;
     }
   }
@@ -429,7 +460,8 @@ class FileService {
     final Archive archive;
     try {
       archive = ZipDecoder().decodeBytes(zipBytes);
-    } catch (_) {
+    } catch (e, s) {
+      logError('FileService.importPackageBytes: ZIP decode failed', e, s);
       return null;
     }
 
@@ -448,14 +480,33 @@ class FileService {
     final destDir = _uniqueDir(destParentDir, folderName);
     await destDir.create(recursive: true);
 
-    for (final f in archive.files) {
-      if (!f.isFile) continue;
-      final out = File(p.join(destDir.path, f.name));
-      await out.parent.create(recursive: true);
-      await out.writeAsBytes(f.content as List<int>, flush: true);
+    // Resolve an archive entry name to a path strictly inside [destDir], or
+    // null when it would escape (zip-slip: `../`, absolute paths, …).
+    String? safeOutPath(String entryName) {
+      final resolved = p.normalize(p.join(destDir.path, entryName));
+      if (resolved != destDir.path && !p.isWithin(destDir.path, resolved)) {
+        return null;
+      }
+      return resolved;
     }
 
-    return p.join(destDir.path, mdEntry.name);
+    var extracted = 0;
+    for (final f in archive.files) {
+      if (!f.isFile) continue;
+      final outPath = safeOutPath(f.name);
+      if (outPath == null) continue; // skip path-traversal entries
+      final content = f.content as List<int>;
+      // Bound total extracted size so a small zip can't fill the disk (zip bomb).
+      extracted += content.length;
+      if (extracted > _maxDownloadBytes) break;
+      final out = File(outPath);
+      await out.parent.create(recursive: true);
+      await out.writeAsBytes(content, flush: true);
+    }
+
+    // The main markdown must itself resolve inside the extraction folder.
+    final mdPath = safeOutPath(mdEntry.name);
+    return mdPath;
   }
 
   Directory _uniqueDir(String parent, String name) {
@@ -471,26 +522,65 @@ class FileService {
   /// Download een presentatie vanaf [url]. Een zip-pakket wordt uitgepakt;
   /// platte markdown wordt als losse `.md` opgeslagen. Geeft het pad naar het
   /// markdown-bestand terug.
+  /// Cap on how much we download / extract, to bound memory and disk use.
+  static const _maxDownloadBytes = 64 * 1024 * 1024; // 64 MB
+
+  /// Hosts an import must never reach (loopback, private and link-local ranges)
+  /// so a deck URL can't be used to probe the local machine or intranet (SSRF).
+  static bool _isBlockedHost(String host) {
+    final h = host.toLowerCase();
+    if (h.isEmpty || h == 'localhost' || h.endsWith('.localhost')) return true;
+    final addr = InternetAddress.tryParse(host);
+    if (addr == null) return false; // a hostname; can't classify offline
+    if (addr.isLoopback || addr.isLinkLocal || addr.isMulticast) return true;
+    final raw = addr.rawAddress;
+    if (addr.type == InternetAddressType.IPv4) {
+      final a = raw[0], b = raw[1];
+      if (a == 0 || a == 10 || a == 127) {
+        return true; // this-host/private/loopback
+      }
+      if (a == 172 && b >= 16 && b <= 31) return true; // 172.16.0.0/12
+      if (a == 192 && b == 168) return true; // 192.168.0.0/16
+      if (a == 169 && b == 254) return true; // 169.254.0.0/16 link-local
+    } else if ((raw[0] & 0xfe) == 0xfc) {
+      return true; // fc00::/7 unique-local
+    }
+    return false;
+  }
+
   Future<String?> importFromUrl(String url, String destParentDir) async {
     final uri = Uri.tryParse(url.trim());
     if (uri == null || !uri.hasScheme) return null;
+    // Only fetch over web schemes, and never reach private/loopback hosts.
+    final scheme = uri.scheme.toLowerCase();
+    if (scheme != 'http' && scheme != 'https') return null;
+    if (_isBlockedHost(uri.host)) return null;
 
     final List<int> bytes;
     try {
-      final client = HttpClient();
+      final client = HttpClient()
+        ..connectionTimeout = const Duration(seconds: 15);
       try {
         final request = await client.getUrl(uri);
-        final response = await request.close();
+        // Don't auto-follow redirects: a 3xx could point at a private host and
+        // bypass the SSRF check above.
+        request.followRedirects = false;
+        final response = await request.close().timeout(
+          const Duration(seconds: 30),
+        );
         if (response.statusCode != 200) return null;
+        if (response.contentLength > _maxDownloadBytes) return null;
         final builder = BytesBuilder(copy: false);
         await for (final chunk in response) {
           builder.add(chunk);
+          if (builder.length > _maxDownloadBytes) return null; // runaway body
         }
         bytes = builder.takeBytes();
       } finally {
         client.close(force: true);
       }
-    } catch (_) {
+    } catch (e) {
+      logError('FileService.importFromUrl: download failed', e);
       return null;
     }
 
@@ -509,7 +599,8 @@ class FileService {
     final String markdown;
     try {
       markdown = utf8.decode(bytes);
-    } catch (_) {
+    } catch (e, s) {
+      logError('FileService.importFromUrl: UTF-8 decode failed', e, s);
       return null;
     }
     if (!markdown.contains('marp') && !markdown.contains('---')) return null;
@@ -630,8 +721,9 @@ class FileService {
         'assets/themes/ocideck.css',
       )).replaceFirst('@theme ocideck', '@theme $safeThemeName');
       await dest.writeAsString(_buildThemeCss(base, profile, logoUrl));
-    } catch (_) {
+    } catch (e) {
       // Asset not bundled in this build context; skip
+      logWarning('FileService._writeTheme: theme asset not bundled', e);
     }
   }
 

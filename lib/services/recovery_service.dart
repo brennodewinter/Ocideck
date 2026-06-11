@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
+import '../utils/log.dart';
+
 /// Eén automatisch bewaard herstelbestand voor een (nog) niet-opgeslagen deck.
 class RecoverySnapshot {
   final String id;
@@ -72,7 +74,8 @@ class RecoveryService {
         dir,
         snapshot.id,
       ).writeAsString(jsonEncode(snapshot.toJson()), flush: true);
-    } catch (_) {
+    } catch (e) {
+      logWarning('RecoveryService.save: write recovery snapshot', e);
       // Autosave mag nooit de app verstoren.
     }
   }
@@ -81,7 +84,9 @@ class RecoveryService {
     try {
       final file = _file(await _dir(), id);
       if (file.existsSync()) await file.delete();
-    } catch (_) {}
+    } catch (e) {
+      logWarning('RecoveryService.discard: delete recovery file', e);
+    }
   }
 
   Future<List<RecoverySnapshot>> loadAll() async {
@@ -93,12 +98,15 @@ class RecoveryService {
           try {
             final data = jsonDecode(await entry.readAsString());
             out.add(RecoverySnapshot.fromJson(Map<String, Object?>.from(data)));
-          } catch (_) {}
+          } catch (e, s) {
+            logError('RecoveryService.loadAll: decode recovery snapshot', e, s);
+          }
         }
       }
       out.sort((a, b) => b.savedAt.compareTo(a.savedAt));
       return out;
-    } catch (_) {
+    } catch (e) {
+      logWarning('RecoveryService.loadAll: list recovery dir', e);
       return const [];
     }
   }
@@ -110,10 +118,14 @@ class RecoveryService {
         if (entry is File && entry.path.endsWith('.json')) {
           try {
             await entry.delete();
-          } catch (_) {}
+          } catch (e) {
+            logWarning('RecoveryService.clearAll: delete recovery file', e);
+          }
         }
       }
-    } catch (_) {}
+    } catch (e) {
+      logWarning('RecoveryService.clearAll: list recovery dir', e);
+    }
   }
 }
 

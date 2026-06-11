@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../utils/log.dart';
 
 /// Vindt exacte duplicaten tussen afbeeldingen op basis van hun md5-checksum,
 /// zodat de bibliotheek opgeschoond kan worden. Bestanden worden eerst op
@@ -20,7 +21,9 @@ class ImageDedupService {
       try {
         final size = File(path).statSync().size;
         bySize.putIfAbsent(size, () => []).add(path);
-      } catch (_) {}
+      } catch (e) {
+        logWarning('ImageDedupService.findDuplicateGroups: stat for size', e);
+      }
     }
 
     // Stap 2: alleen binnen gelijke groottes de md5 berekenen.
@@ -32,7 +35,9 @@ class ImageDedupService {
         try {
           final digest = await md5.bind(File(path).openRead()).single;
           byHash.putIfAbsent(digest.toString(), () => []).add(path);
-        } catch (_) {}
+        } catch (e) {
+          logWarning('ImageDedupService.findDuplicateGroups: md5 hash', e);
+        }
       }
       for (final group in byHash.values) {
         if (group.length >= 2) groups.add(group);
@@ -51,7 +56,8 @@ class ImageDedupService {
     DateTime modifiedOf(String path) {
       try {
         return File(path).statSync().modified;
-      } catch (_) {
+      } catch (e) {
+        logWarning('ImageDedupService.chooseKeeper: stat modified time', e);
         return DateTime.fromMillisecondsSinceEpoch(0);
       }
     }
