@@ -76,7 +76,7 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
               // License Section
               ExpansionTile(
                 title: Text(
-                  l10n.d('Licentie (MIT)'),
+                  l10n.d('Licentie (EUPL 1.2)'),
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -151,32 +151,39 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
   }
 
   String _getLicenseText() {
-    return '''MIT License
+    return '''SPDX-License-Identifier: EUPL-1.2
+Copyright © Brenno de Winter
 
-Copyright (c) 2024 De Winter Information Solutions
+OciDeck is licensed under the European Union Public Licence (EUPL) v. 1.2.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+The Work is provided under the terms of this Licence when the Licensor has
+placed the following notice immediately following the copyright notice for
+the Work:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Licensed under the EUPL
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.''';
+TERMS:
+- The Licence: the European Union Public Licence v1.2
+- The Original Work: OciDeck, distributed under this Licence
+- Derivative Works: works created based upon OciDeck
+- The Work: the Original Work or its Derivative Works
+
+PERMISSIONS:
+You are allowed to use, reproduce, modify, and distribute the Work, as long
+as you comply with the terms of the EUPL v1.2.
+
+CONDITIONS:
+- You must include a copy of the Licence with any distribution
+- You must state significant changes made to the Work
+- You must maintain all copyright, patent and trademark notices
+- You must provide clear notice of any modifications
+
+The full EUPL v1.2 text is available at:
+https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12''';
   }
 
   void _launchLicense(BuildContext context) async {
-    const url =
-        'https://github.com/yourusername/ocideck/blob/main/LICENSE.md';
+    const url = 'https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12';
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
     }

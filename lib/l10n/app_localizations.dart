@@ -4199,7 +4199,7 @@ const _dutchSourceStringAdditions = {
         'The app collects no personal data, no statistics, and no usage data. Your privacy is our priority.',
     'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
         'All data you enter in OciDeck remains on your local system and is not sent to external servers.',
-    'Licentie (MIT)': 'License (MIT)',
+    'Licentie (EUPL 1.2)': 'License (EUPL 1.2)',
     'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
         'By clicking "Agree", you accept these terms and agree to the use of OciDeck.',
     'Volledige licentie online': 'Full license online',
