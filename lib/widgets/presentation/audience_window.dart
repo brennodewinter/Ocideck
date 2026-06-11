@@ -47,6 +47,10 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   final Map<int, List<InkStroke>> _ink = {};
   int? _laserIndex;
   Offset? _laserPoint;
+  // The stroke the presenter is drawing right now, mirrored live until it
+  // commits (then it arrives as a normal stroke over the 'ink' channel).
+  int? _activeIndex;
+  InkStroke? _activeStroke;
 
   @override
   void initState() {
@@ -84,6 +88,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
           _index = (m['index'] as num?)?.toInt() ?? _index;
           _blank = (m['blank'] as num?)?.toInt() ?? 0;
           _laserPoint = null; // laser never carries over to another slide
+          _activeStroke = null; // nor does an in-progress stroke
         });
       case 'ink':
         final m = Map<String, dynamic>.from(call.arguments as Map);
@@ -92,6 +97,17 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         setState(
           () => _ink[i] = decodeStrokes((m['strokes'] as List?) ?? const []),
         );
+      case 'inkLive':
+        final m = Map<String, dynamic>.from(call.arguments as Map);
+        final i = (m['index'] as num?)?.toInt();
+        final s = m['stroke'];
+        if (!mounted) return null;
+        setState(() {
+          _activeIndex = i;
+          _activeStroke = s == null
+              ? null
+              : InkStroke.fromJson(Map<String, dynamic>.from(s as Map));
+        });
       case 'laser':
         final m = Map<String, dynamic>.from(call.arguments as Map);
         final i = (m['index'] as num?)?.toInt();
@@ -198,7 +214,13 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                   }),
                 ),
                 AnnotationLayer(
-                  strokes: _ink[_index] ?? const [],
+                  strokes: [
+                    ...?_ink[_index],
+                    // The live in-progress stroke renders just like a committed
+                    // one, so the audience sees the line grow as it's drawn.
+                    if (_activeStroke != null && _activeIndex == _index)
+                      _activeStroke!,
+                  ],
                   interactive: false,
                   laserPoint: _laserIndex == _index ? _laserPoint : null,
                 ),

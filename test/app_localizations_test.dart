@@ -47,6 +47,7 @@ void main() {
       'Logo px',
       'PREVIEW',
       'Preview',
+      'Privacy',
       'SLIDES',
       'Slide',
       'slide',

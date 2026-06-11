@@ -132,7 +132,15 @@ class FlutterWindow: NSObject {
             }
             if let screen = target ?? screens.first {
                 window.styleMask = [.borderless]
-                window.level = .normal
+                // Raise above the menu bar (.mainMenu == 24) so the macOS menu
+                // bar and notch area on the beamer are covered by the slide; a
+                // plain .normal window would sit *under* the menu bar and leave
+                // the Apple/Wi-Fi strip visible during the presentation. We stay
+                // below .popUpMenu (101) so context menus still show on top.
+                window.level = .statusBar
+                // Keep the cover in place across Spaces/displays without ever
+                // stealing keyboard focus from the presenter window.
+                window.collectionBehavior = [.canJoinAllSpaces, .stationary, .fullScreenAuxiliary]
                 window.isOpaque = true
                 window.setFrame(screen.frame, display: true)
                 window.orderFrontRegardless()

@@ -12,9 +12,9 @@ void main() {
   testWidgets('the interface text-scale setting scales the editor UI', (
     tester,
   ) async {
-    SharedPreferences.setMockInitialValues({});
+    SharedPreferences.setMockInitialValues({'app_consent_accepted': true});
     await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
-    await tester.pump();
+    await tester.pumpAndSettle();
     final container = ProviderScope.containerOf(
       tester.element(find.byType(AppShell)),
     );

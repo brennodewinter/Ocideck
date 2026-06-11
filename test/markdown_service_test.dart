@@ -87,12 +87,15 @@ void main() {
       closingSlideMarkdown: '# Einde\n\nDank voor jullie aandacht.',
     );
 
+    // The style profile only travels inside the markdown when explicitly
+    // inlined (transient beamer payloads); a plain save keeps the file clean.
     final markdown = service.generateDeck(
       Deck(
         title: 'Demo',
         themeProfile: profile,
         slides: [Slide.create(SlideType.title).copyWith(title: 'Demo')],
       ),
+      inlineStyleProfile: true,
     );
 
     final deck = service.parseDeck(markdown);
@@ -113,6 +116,27 @@ void main() {
       deck.themeProfile.closingSlideMarkdown,
       '# Einde\n\nDank voor jullie aandacht.',
     );
+  });
+
+  test('a saved deck does not embed the style profile', () {
+    final service = MarkdownService();
+    final markdown = service.generateDeck(
+      Deck(
+        title: 'Demo',
+        themeProfile: const ThemeProfile(
+          name: 'Klant A',
+          slideBackgroundColor: '#111827',
+        ),
+        slides: [Slide.create(SlideType.title).copyWith(title: 'Demo')],
+      ),
+    );
+
+    // The file is the base content only; styling stays out of it. Parsing it
+    // back yields the default profile, not the one that was saved.
+    expect(markdown.contains('ocideck_style_profile'), isFalse);
+    final deck = service.parseDeck(markdown);
+    expect(deck!.themeProfile.name, 'Standaard');
+    expect(deck.themeProfile.slideBackgroundColor, isNot('#111827'));
   });
 
   test('adds logo-safe class when deck profile has logo', () {

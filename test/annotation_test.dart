@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/annotation_codec.dart';
+import 'package:ocideck/widgets/presentation/annotation_overlay.dart';
 
 void main() {
   group('InkStroke JSON', () {
@@ -81,6 +83,88 @@ void main() {
       ).copyWith(title: 'A (changed)');
       final back = AnnotationCodec.decode(json, [edited]);
       expect(back, isEmpty);
+    });
+  });
+
+  group('AnnotationLayer live stroke', () {
+    testWidgets('streams the in-progress stroke and clears it on commit', (
+      tester,
+    ) async {
+      final active = <InkStroke?>[];
+      final committed = <List<InkStroke>>[];
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: SizedBox(
+                width: 400,
+                height: 225,
+                child: AnnotationLayer(
+                  strokes: const [],
+                  tool: InkTool.pen,
+                  interactive: true,
+                  onStrokesChanged: committed.add,
+                  onActiveStrokeChanged: active.add,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      final center = tester.getCenter(find.byType(AnnotationLayer));
+      final gesture = await tester.startGesture(center);
+      await gesture.moveBy(const Offset(20, 0));
+      await gesture.moveBy(const Offset(20, 10));
+      await tester.pump();
+
+      // While drawing, the partial stroke is reported with growing points.
+      final partials = active.whereType<InkStroke>().toList();
+      expect(partials, isNotEmpty);
+      expect(partials.last.tool, InkTool.pen);
+      expect(partials.last.points.length, greaterThan(1));
+
+      await gesture.up();
+      await tester.pump();
+
+      // Committing clears the live preview (null) and emits the final stroke.
+      expect(active.last, isNull);
+      expect(committed.single.single.points.length, greaterThan(1));
+    });
+
+    testWidgets('reports null when a tap is too short to commit', (
+      tester,
+    ) async {
+      final active = <InkStroke?>[];
+      final committed = <List<InkStroke>>[];
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: SizedBox(
+                width: 400,
+                height: 225,
+                child: AnnotationLayer(
+                  strokes: const [],
+                  tool: InkTool.pen,
+                  interactive: true,
+                  onStrokesChanged: committed.add,
+                  onActiveStrokeChanged: active.add,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byType(AnnotationLayer));
+      await tester.pump();
+
+      // A single down/up makes no stroke, but the preview must still be cleared.
+      expect(active.last, isNull);
+      expect(committed, isEmpty);
     });
   });
 }

@@ -58,6 +58,12 @@ class FileService {
 
   ThemeProfile get currentThemeProfile => resolveThemeProfile(_themeProfile());
 
+  /// The user's active style profile, resolved for [projectPath]. Styling is no
+  /// longer read from the markdown (the file holds only content); the app
+  /// applies the current profile whenever a deck is opened.
+  ThemeProfile activeProfileFor({String? projectPath}) =>
+      resolveThemeProfile(_themeProfile(), projectPath: projectPath);
+
   ThemeProfile resolveThemeProfile(
     ThemeProfile profile, {
     String? projectPath,
@@ -167,8 +173,12 @@ class FileService {
       if (!await file.exists()) return null;
       raw = await file.readAsString();
     }
-    final deck = _md.parseDeck(raw, filePath: filePath);
-    if (deck == null) return null;
+    final parsed = _md.parseDeck(raw, filePath: filePath);
+    if (parsed == null) return null;
+    // The file carries only content; apply the active style profile on open.
+    final deck = parsed.copyWith(
+      themeProfile: activeProfileFor(projectPath: parsed.projectPath),
+    );
     final hydrated = await _hydrateCharts(await _hydrateImageCaptions(deck));
     // Re-attach the separate annotation layer from its sidecar, if present.
     if (content == null) {

@@ -169,6 +169,8 @@ class FullscreenPresenter extends StatefulWidget {
   }) async {
     // A self-contained markdown deck is the payload for the audience window; it
     // carries the slides, the style profile and the TLP level in one string.
+    // This payload never touches disk, so it inlines the style profile — the
+    // beamer has no other way to learn the deck's styling.
     final markdown = MarkdownService().generateDeck(
       Deck(
         title: 'Presentatie',
@@ -177,6 +179,7 @@ class FullscreenPresenter extends StatefulWidget {
         themeProfile: themeProfile,
         tlp: tlp,
       ),
+      inlineStyleProfile: true,
     );
     // Pre-existing annotations re-keyed by index so the beamer shows them
     // immediately (the audience window has no stable slide ids of its own).
@@ -374,6 +377,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   static const _penWidth = 0.004;
   static const _highlighterWidth = 0.022;
   DateTime _lastLaserSent = DateTime.fromMillisecondsSinceEpoch(0);
+  DateTime _lastInkLiveSent = DateTime.fromMillisecondsSinceEpoch(0);
 
   double get _toolWidth =>
       _tool == InkTool.highlighter ? _highlighterWidth : _penWidth;
@@ -537,6 +541,28 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         .invokeMethod('laser', {
           'index': _index,
           'point': point == null ? null : [point.dx, point.dy],
+        })
+        .catchError((_) => null);
+  }
+
+  /// Mirror the stroke that is being drawn right now to the beamer, so the
+  /// audience sees a pen/highlighter line appear live instead of only after the
+  /// pen lifts. The committed stroke still follows over the 'ink' channel; this
+  /// just keeps the in-progress preview in sync for the same slide.
+  void _onActiveStroke(InkStroke? stroke) {
+    if (widget.audienceWindow == null) return;
+    final now = DateTime.now();
+    // Throttle growth events; always send the "done" (null) event so the
+    // beamer drops its live preview the moment the stroke commits.
+    if (stroke != null &&
+        now.difference(_lastInkLiveSent) < const Duration(milliseconds: 33)) {
+      return;
+    }
+    _lastInkLiveSent = now;
+    audienceChannel
+        .invokeMethod('inkLive', {
+          'index': _index,
+          'stroke': stroke?.toJson(),
         })
         .catchError((_) => null);
   }
@@ -1406,6 +1432,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                   interactive: true,
                   onStrokesChanged: _onStrokesChanged,
                   onLaserMove: _onLaserMove,
+                  onActiveStrokeChanged: _onActiveStroke,
                 ),
               ],
             ),

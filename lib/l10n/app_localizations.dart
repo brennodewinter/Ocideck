@@ -2529,6 +2529,30 @@ const _dutchSourceStringAdditions = {
     'Alle afbeeldingen hebben tags.': 'All images have tags.',
     'Zet het filter uit om alles weer te zien.':
         'Turn off the filter to see everything again.',
+    'Welkom bij OciDeck': 'Welcome to OciDeck',
+    'Privacy en gebruik': 'Privacy and use',
+    'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
+        'OciDeck is a local desktop application. Your presentations and data are stored solely on your computer.',
+    'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
+        'The app collects no personal data, no statistics, and no usage data. Your privacy is our priority.',
+    'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
+        'All data you enter in OciDeck stays on your local system and is not sent to external servers.',
+    'Licentie (EUPL 1.2)': 'License (EUPL 1.2)',
+    'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
+        'By clicking "Agree", you accept these terms and consent to the use of OciDeck.',
+    'Volledige licentie online': 'Full license online',
+    'Akkoord gaan': 'Agree',
+    'Privacy': 'Privacy',
+    'Toestemming': 'Consent',
+    'Toestemming intrekken': 'Withdraw consent',
+    'Toestemming intrekken?': 'Withdraw consent?',
+    'Intrekken': 'Withdraw',
+    'U hebt al toegestemd in het gebruik van OciDeck.':
+        'You have already consented to the use of OciDeck.',
+    'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+        'You can withdraw your consent at any time. After withdrawal you must accept these terms again.',
+    'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+        'If you withdraw your consent, you must accept these terms again when you restart OciDeck.',
   },
   'it': {
     'Toegankelijkheid': 'Accessibilità',
@@ -2819,6 +2843,16 @@ const _dutchSourceStringAdditions = {
     'Alle afbeeldingen hebben tags.': 'Tutte le immagini hanno tag.',
     'Zet het filter uit om alles weer te zien.':
         'Disattiva il filtro per rivedere tutto.',
+    'Intrekken': 'Revoca',
+    'Privacy': 'Privacy',
+    'Toestemming': 'Consenso',
+    'Toestemming intrekken?': 'Revocare il consenso?',
+    'U hebt al toegestemd in het gebruik van OciDeck.':
+        'Hai già acconsentito all\'uso di OciDeck.',
+    'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+        'Puoi revocare il consenso in qualsiasi momento. Dopo la revoca dovrai accettare nuovamente questi termini.',
+    'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+        'Se revochi il consenso, dovrai accettare nuovamente questi termini al riavvio di OciDeck.',
   },
   'de': {
     'Toegankelijkheid': 'Barrierefreiheit',
@@ -3106,6 +3140,16 @@ const _dutchSourceStringAdditions = {
     'Alle afbeeldingen hebben tags.': 'Alle Bilder haben Tags.',
     'Zet het filter uit om alles weer te zien.':
         'Filter ausschalten, um wieder alles zu sehen.',
+    'Intrekken': 'Widerrufen',
+    'Privacy': 'Datenschutz',
+    'Toestemming': 'Zustimmung',
+    'Toestemming intrekken?': 'Zustimmung widerrufen?',
+    'U hebt al toegestemd in het gebruik van OciDeck.':
+        'Sie haben der Nutzung von OciDeck bereits zugestimmt.',
+    'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+        'Sie können Ihre Zustimmung jederzeit widerrufen. Nach dem Widerruf müssen Sie diese Bedingungen erneut akzeptieren.',
+    'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+        'Wenn Sie Ihre Zustimmung widerrufen, müssen Sie diese Bedingungen beim Neustart von OciDeck erneut akzeptieren.',
   },
   'fr': {
     'Toegankelijkheid': 'Accessibilité',
@@ -3398,6 +3442,16 @@ const _dutchSourceStringAdditions = {
     'Alle afbeeldingen hebben tags.': 'Toutes les images ont des tags.',
     'Zet het filter uit om alles weer te zien.':
         'Désactivez le filtre pour tout revoir.',
+    'Intrekken': 'Révoquer',
+    'Privacy': 'Confidentialité',
+    'Toestemming': 'Consentement',
+    'Toestemming intrekken?': 'Révoquer le consentement ?',
+    'U hebt al toegestemd in het gebruik van OciDeck.':
+        'Vous avez déjà consenti à l\'utilisation d\'OciDeck.',
+    'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+        'Vous pouvez révoquer votre consentement à tout moment. Après la révocation, vous devrez accepter à nouveau ces conditions.',
+    'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+        'Si vous révoquez votre consentement, vous devrez accepter à nouveau ces conditions au redémarrage d\'OciDeck.',
   },
   'es': {
     'Toegankelijkheid': 'Accesibilidad',
@@ -3691,6 +3745,16 @@ const _dutchSourceStringAdditions = {
     'Alle afbeeldingen hebben tags.': 'Todas las imágenes tienen etiquetas.',
     'Zet het filter uit om alles weer te zien.':
         'Desactiva el filtro para volver a ver todo.',
+    'Intrekken': 'Revocar',
+    'Privacy': 'Privacidad',
+    'Toestemming': 'Consentimiento',
+    'Toestemming intrekken?': '¿Revocar el consentimiento?',
+    'U hebt al toegestemd in het gebruik van OciDeck.':
+        'Ya has dado tu consentimiento para el uso de OciDeck.',
+    'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+        'Puedes revocar tu consentimiento en cualquier momento. Tras la revocación, deberás aceptar de nuevo estas condiciones.',
+    'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+        'Si revocas tu consentimiento, deberás aceptar de nuevo estas condiciones al reiniciar OciDeck.',
   },
   'fy': {
     'Toegankelijkheid': 'Tagonklikens',
@@ -3976,6 +4040,16 @@ const _dutchSourceStringAdditions = {
     'Alle afbeeldingen hebben tags.': 'Alle ôfbyldings hawwe tags.',
     'Zet het filter uit om alles weer te zien.':
         'Set it filter út om alles wer te sjen.',
+    'Intrekken': 'Ynlûke',
+    'Privacy': 'Privacy',
+    'Toestemming': 'Tastimming',
+    'Toestemming intrekken?': 'Tastimming ynlûke?',
+    'U hebt al toegestemd in het gebruik van OciDeck.':
+        'Jo hawwe al tastimming jûn foar it gebrûk fan OciDeck.',
+    'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+        'Jo kinne jo tastimming op elk momint ynlûke. Nei it ynlûken moatte jo dizze betingsten opnij akseptearje.',
+    'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+        'As jo jo tastimming ynlûke, moatte jo dizze betingsten opnij akseptearje as jo OciDeck opnij begjinne.',
   },
   'pap': {
     'Toegankelijkheid': 'Aksesibilidat',
@@ -4280,5 +4354,15 @@ const _dutchSourceStringAdditions = {
     'Toestemming ingetrokken': 'Consent revoked',
     'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.':
         'You must accept the privacy and usage terms before you can use OciDeck.',
+    'Intrekken': 'Retirá',
+    'Privacy': 'Privasidat',
+    'Toestemming': 'Konsentimentu',
+    'Toestemming intrekken?': 'Retirá konsentimentu?',
+    'U hebt al toegestemd in het gebruik van OciDeck.':
+        'Bo a duna kaba bo konsentimentu pa uzo di OciDeck.',
+    'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+        'Bo por retirá bo konsentimentu na kualkier momentu. Despues di retirá, bo tin ku aseptá e kondishonnan akí di nobo.',
+    'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+        'Si bo retirá bo konsentimentu, bo tin ku aseptá e kondishonnan akí di nobo ora bo start OciDeck di nobo.',
   },
 };
