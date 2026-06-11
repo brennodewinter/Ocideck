@@ -45,19 +45,20 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('syntax highlighting on uses HighlightView for a known language', (
-    tester,
-  ) async {
-    final slide = Slide.create(
-      SlideType.code,
-    ).copyWith(codeLanguage: 'dart', customMarkdown: 'void main() {}');
-    const profile = ThemeProfile(codeHighlightSyntax: true);
+  testWidgets(
+    'syntax highlighting on uses HighlightView for a known language',
+    (tester) async {
+      final slide = Slide.create(
+        SlideType.code,
+      ).copyWith(codeLanguage: 'dart', customMarkdown: 'void main() {}');
+      const profile = ThemeProfile(codeHighlightSyntax: true);
 
-    await tester.pumpWidget(_host(slide, profile));
-    await tester.pump();
+      await tester.pumpWidget(_host(slide, profile));
+      await tester.pump();
 
-    expect(find.byType(HighlightView), findsOneWidget);
-  });
+      expect(find.byType(HighlightView), findsOneWidget);
+    },
+  );
 
   testWidgets('syntax highlighting off renders monochrome (CRT) text', (
     tester,

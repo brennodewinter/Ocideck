@@ -270,9 +270,7 @@ class ImagePickerBar extends ConsumerWidget {
         }
         if (slide.imagePath2.isNotEmpty &&
             resolve(slide.imagePath2) == target) {
-          updated = updated.copyWith(
-            imagePath2: replacement(slide.imagePath2),
-          );
+          updated = updated.copyWith(imagePath2: replacement(slide.imagePath2));
         }
         if (!identical(updated, slide)) notifier.updateSlide(i, updated);
       }

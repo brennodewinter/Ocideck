@@ -1648,7 +1648,10 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             children: [
               Text(
                 l10n.d('U hebt al toegestemd in het gebruik van OciDeck.'),
-                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               const SizedBox(height: 8),
               Text(

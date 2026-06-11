@@ -57,7 +57,8 @@ void main() {
         home: Builder(
           builder: (context) => Center(
             child: ElevatedButton(
-              onPressed: () async => picked = await AddSlideDialog.show(context),
+              onPressed: () async =>
+                  picked = await AddSlideDialog.show(context),
               child: const Text('open'),
             ),
           ),
