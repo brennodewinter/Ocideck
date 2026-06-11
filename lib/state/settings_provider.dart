@@ -54,8 +54,23 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           ? selectedAppearance
           : 'Basic',
       recentFiles: prefs.getStringList('recentFiles') ?? [],
+      maxReleaseExportTlpKey: prefs.getString('maxReleaseExportTlp'),
       uiTextScale: (prefs.getDouble('uiTextScale') ?? 1.0).clamp(1.0, 2.0),
     );
+  }
+
+  /// Stel het vrijgaveplafond voor de export-gate in (een TLP-sleutel), of
+  /// `null` om de gate uit te zetten. Persisteert in hetzelfde prefs-domein.
+  Future<void> setMaxReleaseExportTlp(String? key) async {
+    state = key == null
+        ? state.copyWith(clearMaxReleaseExportTlp: true)
+        : state.copyWith(maxReleaseExportTlpKey: key);
+    final prefs = await SharedPreferences.getInstance();
+    if (key == null) {
+      await prefs.remove('maxReleaseExportTlp');
+    } else {
+      await prefs.setString('maxReleaseExportTlp', key);
+    }
   }
 
   Future<void> setUiTextScale(double scale) async {

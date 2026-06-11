@@ -8,7 +8,9 @@ import 'package:path/path.dart' as p;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
+import '../models/deck.dart';
 import '../models/settings.dart';
+import 'classification_policy.dart';
 import 'marp_html_service.dart';
 
 enum ExportFormat { pdf, pptx, html }
@@ -103,7 +105,17 @@ class ExportService {
     List<String>? notes,
     String? markdown,
     ThemeProfile? themeProfile,
+    TlpLevel tlp = TlpLevel.none,
+    ClassificationPolicy policy = const ClassificationPolicy(),
   }) async {
+    // Classificatie-gate. Dit is het enige chokepoint waar elk formaat
+    // (PDF/PPTX/HTML) doorheen moet, dus de handhaving zit hier en niet in de
+    // UI-laag: zo kan geen exportpad de gate omzeilen. Fail-closed — bij een
+    // weigering wordt er niets gebouwd of weggeschreven.
+    final decision = policy.evaluate(tlp);
+    if (!decision.allowed) {
+      return ExportResult.fail(decision.reason!);
+    }
     if (format == ExportFormat.html) {
       if (markdown == null || markdown.trim().isEmpty) {
         return ExportResult.fail('Geen inhoud om te exporteren.');

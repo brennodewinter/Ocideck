@@ -5,6 +5,8 @@ import 'dart:typed_data';
 import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
+import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/services/classification_policy.dart';
 import 'package:ocideck/services/export_service.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 import 'package:path/path.dart' as p;
@@ -55,6 +57,41 @@ void main() {
   });
 
   String deckPath() => p.join(tmp.path, 'deck.md');
+
+  test(
+    'classificatie-gate blocks an over-classified export, writes nothing',
+    () async {
+      const policy = ClassificationPolicy(maxReleaseLevel: TlpLevel.green);
+      final r = await service.export(
+        deckPath(),
+        ExportFormat.pdf,
+        [_png()],
+        tlp: TlpLevel.red,
+        policy: policy,
+      );
+
+      expect(r.success, isFalse);
+      expect(r.outputPath, isNull);
+      expect(r.error, contains('classificatiebeleid'));
+      // Fail-closed: no file may be produced when the gate refuses.
+      final produced = tmp.listSync().whereType<File>().where(
+        (f) => p.extension(f.path) == '.pdf',
+      );
+      expect(produced, isEmpty);
+    },
+  );
+
+  test('classificatie-gate allows an export at or below the ceiling', () async {
+    const policy = ClassificationPolicy(maxReleaseLevel: TlpLevel.amber);
+    final r = await service.export(
+      deckPath(),
+      ExportFormat.pdf,
+      [_png()],
+      tlp: TlpLevel.green,
+      policy: policy,
+    );
+    expect(r.success, isTrue, reason: r.error);
+  });
 
   test('exports a PDF that starts with the PDF magic header', () async {
     final images = [_png(), _png()];

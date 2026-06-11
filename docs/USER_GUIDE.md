@@ -114,6 +114,10 @@ A deck has an overall TLP level (shown as a marking on the slides). Each slide c
 deck can be shown safely to audiences with different clearances. Order, least to
 most restrictive: none < CLEAR < GREEN < AMBER < AMBER+STRICT < RED.
 
+Classifying a deck is **optional**. As an extra guardrail, an organisation can
+set a **release ceiling** — a maximum level that may leave the machine; see
+*Exporting* below.
+
 ## Presenting
 
 Start the fullscreen presenter from the toolbar. See
@@ -147,6 +151,11 @@ Export to:
   mermaid diagrams render in the browser.
 - **Portable package** (`.ocideck`) — a single zip with the Markdown and all
   assets, to hand the whole deck to someone else.
+
+**Release ceiling (optional).** When a maximum TLP level is configured, exporting
+a deck classified *above* it is blocked for every format, and the export dialog
+explains why. The ceiling is off by default and classifying a deck stays
+optional — it only stops decks that exceed the configured level.
 
 ## Accessibility
 

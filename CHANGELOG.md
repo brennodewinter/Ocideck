@@ -41,6 +41,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 - **Per-slide TLP classification** — each slide can carry its own Traffic Light
   Protocol level; slides classified stricter than the level the deck is shown at
   are withheld when presenting and exporting.
+- **Export release ceiling** — an optional maximum TLP level that may be
+  exported. When set, a deck classified *above* it cannot be exported in any
+  format; the gate is enforced at the single export chokepoint and fails closed
+  (no file is written when blocked, and the export dialog explains why).
+  Classifying a deck stays optional — the ceiling only stops decks that exceed
+  it, and it is off by default.
 - **Dual-screen presenter** — on a second display the beamer shows the slide
   while the laptop shows the presenter view (current/next slide, notes, timer),
   kept in sync over method channels.

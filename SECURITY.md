@@ -38,6 +38,8 @@ OciDeck is an offline desktop application. Areas of particular interest:
 - Importing presentations from a URL.
 - The HTML export, which inlines third-party JavaScript (marked, highlight.js,
   mermaid, MathJax) to render offline.
+- The export classification gate (`ClassificationPolicy`) — any way to export a
+  deck classified above the configured release ceiling.
 
 ## Supported versions
 

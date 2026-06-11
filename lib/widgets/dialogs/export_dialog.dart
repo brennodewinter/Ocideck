@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../services/classification_policy.dart';
 import '../../services/export_service.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../l10n/app_localizations.dart';
@@ -17,6 +18,9 @@ class ExportDialog extends StatefulWidget {
   final String? projectPath;
   final ExportService exportService;
   final TlpLevel tlp;
+
+  /// Classificatie-gate. Standaard geen plafond (alles mag).
+  final ClassificationPolicy policy;
 
   /// Folder all exports are written to. Null = next to the source deck.
   final String? exportDirectory;
@@ -32,6 +36,7 @@ class ExportDialog extends StatefulWidget {
     required this.projectPath,
     required this.exportService,
     this.tlp = TlpLevel.none,
+    this.policy = const ClassificationPolicy(),
     this.exportDirectory,
     this.markdown = '',
   });
@@ -44,6 +49,7 @@ class ExportDialog extends StatefulWidget {
     required String? projectPath,
     required ExportService exportService,
     TlpLevel tlp = TlpLevel.none,
+    ClassificationPolicy policy = const ClassificationPolicy(),
     String? exportDirectory,
     String markdown = '',
   }) {
@@ -57,6 +63,7 @@ class ExportDialog extends StatefulWidget {
         projectPath: projectPath,
         exportService: exportService,
         tlp: tlp,
+        policy: policy,
         exportDirectory: exportDirectory,
         markdown: markdown,
       ),
@@ -131,6 +138,8 @@ class _ExportDialogState extends State<ExportDialog> {
       notes: [for (final s in widget.slides) s.notes],
       markdown: widget.markdown,
       themeProfile: widget.themeProfile,
+      tlp: widget.tlp,
+      policy: widget.policy,
     );
 
     if (!mounted) return;
@@ -226,6 +235,25 @@ class _ExportDialogState extends State<ExportDialog> {
               fontSize: 13,
               color: _success ? const Color(0xFF166534) : Colors.red[800],
             ),
+          ),
+        ],
+      );
+    }
+
+    // Pre-flight classificatie-gate: blokkeert de export al vóór een poging,
+    // zodat de gebruiker meteen de reden ziet. De service handhaaft dezelfde
+    // regel nog eens als backstop, dus dit is puur UX — niet de beveiliging.
+    final decision = widget.policy.evaluate(widget.tlp);
+    if (!decision.allowed) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.block, color: Colors.red, size: 36),
+          const SizedBox(height: 12),
+          Text(
+            decision.reason!,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 13, color: Colors.red[800]),
           ),
         ],
       );

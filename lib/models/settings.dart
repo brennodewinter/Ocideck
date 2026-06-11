@@ -364,6 +364,12 @@ class AppSettings {
   final String selectedAppAppearanceProfileName;
   final List<String> recentFiles;
 
+  /// Optioneel vrijgaveplafond voor de classificatie-gate, opgeslagen als
+  /// TLP-sleutel (zie `TlpLevelX.key`). `null` = geen plafond, alles mag worden
+  /// geëxporteerd (standaard). Classificeren blijft optioneel; dit plafond
+  /// blokkeert alleen decks die er bovenuit zijn geclassificeerd.
+  final String? maxReleaseExportTlpKey;
+
   /// Scale factor for all interface text (1.0–2.0), on top of the system
   /// text scaling. The slide canvas itself is never scaled: slides are a
   /// fixed 16:9 design surface. WCAG 1.4.4 asks for text resizing up to 200%.
@@ -378,6 +384,7 @@ class AppSettings {
     this.appAppearanceProfiles = AppAppearanceProfile.builtIns,
     this.selectedAppAppearanceProfileName = 'Basic',
     this.recentFiles = const [],
+    this.maxReleaseExportTlpKey,
     this.uiTextScale = 1.0,
   });
 
@@ -430,9 +437,11 @@ class AppSettings {
     List<AppAppearanceProfile>? appAppearanceProfiles,
     String? selectedAppAppearanceProfileName,
     List<String>? recentFiles,
+    String? maxReleaseExportTlpKey,
     double? uiTextScale,
     bool clearHomeDirectory = false,
     bool clearExportDirectory = false,
+    bool clearMaxReleaseExportTlp = false,
   }) {
     final nextProfiles = themeProfiles ?? this.themeProfiles;
     return AppSettings(
@@ -464,6 +473,9 @@ class AppSettings {
           selectedAppAppearanceProfileName ??
           this.selectedAppAppearanceProfileName,
       recentFiles: recentFiles ?? this.recentFiles,
+      maxReleaseExportTlpKey: clearMaxReleaseExportTlp
+          ? null
+          : (maxReleaseExportTlpKey ?? this.maxReleaseExportTlpKey),
       uiTextScale: uiTextScale ?? this.uiTextScale,
     );
   }

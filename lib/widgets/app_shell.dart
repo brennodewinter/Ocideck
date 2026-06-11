@@ -8,6 +8,7 @@ import '../models/deck.dart';
 import '../models/slide.dart';
 import '../services/caption_service.dart';
 import '../services/description_service.dart';
+import '../services/classification_policy.dart';
 import '../services/export_service.dart';
 import '../services/recovery_service.dart';
 import '../state/deck_provider.dart';
@@ -560,6 +561,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         projectPath: deck.projectPath,
         exportService: widget.exportService,
         tlp: deck.tlp,
+        policy: ClassificationPolicy.fromKey(
+          ref.read(settingsProvider).maxReleaseExportTlpKey,
+        ),
         exportDirectory: ref.read(settingsProvider).exportDirectory,
         // Inline chart data so the HTML export can render charts standalone,
         // even when a chart links an external CSV.
