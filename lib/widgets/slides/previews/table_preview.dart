@@ -35,6 +35,7 @@ class _TablePreview extends StatelessWidget {
     final accent = _hexColor(profile.accentColor);
     final textColor = _hexColor(profile.tableTextColor);
     final headerTextColor = _hexColor(profile.tableHeaderTextColor);
+    final headerBackground = _hexColor(profile.tableHeaderBackgroundColor);
     final borderColor = accent.withValues(alpha: 0.35);
 
     Widget cell(String value, {required bool header}) {
@@ -61,7 +62,7 @@ class _TablePreview extends StatelessWidget {
 
     TableRow buildRow(List<String> row, {required bool header}) {
       return TableRow(
-        decoration: BoxDecoration(color: header ? accent : null),
+        decoration: BoxDecoration(color: header ? headerBackground : null),
         children: List.generate(colCount, (c) {
           final value = c < row.length ? row[c] : '';
           return TableCell(

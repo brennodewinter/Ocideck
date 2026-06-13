@@ -18,7 +18,7 @@ lib/
   services/   # markdown, file, export, classification_policy, image, caption,
               # description, image_dedup (md5 duplicates),
               # image_reference (.md rewrites), recovery, rasterizer,
-              # marp_html, annotation_codec
+              # marp_html, annotation_codec, rehearsal_controller
   state/      # Riverpod providers: deck, editor, settings, tabs, clipboard
   widgets/    # app shell, panels, dialogs, per-type editors, slides, presenter
   l10n/       # AppLocalizations (8 languages)
@@ -84,6 +84,13 @@ before any work starts.
   and the **annotation tools** (pen/highlighter/eraser/laser).
 - Neighbour slide images are **precached** and `gaplessPlayback` is on, so slide
   changes never flash black (important for screen recording).
+- **Rehearsal timing** lives in `services/rehearsal_controller.dart` — a plain,
+  unit-testable controller (injectable clock) that the presenter feeds via a
+  cheap, idempotent `observe(id, index)` on every build, so it captures every
+  navigation path. It measures only: elapsed, remaining against a target, and
+  per-slide time — no pacing logic. State is **session-only** (no prefs, no `.md`);
+  `_exit` shows a summary (`rehearsal_summary.dart`) and discards it. The default
+  target lives in `AppSettings.presentationTargetSeconds`.
 
 ### Dual-screen mode
 

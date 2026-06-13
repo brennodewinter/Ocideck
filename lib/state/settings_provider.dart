@@ -56,6 +56,8 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       recentFiles: prefs.getStringList('recentFiles') ?? [],
       maxReleaseExportTlpKey: prefs.getString('maxReleaseExportTlp'),
       uiTextScale: (prefs.getDouble('uiTextScale') ?? 1.0).clamp(1.0, 2.0),
+      presentationTargetSeconds: (prefs.getInt('presentationTargetSeconds') ?? 0)
+          .clamp(0, 86400),
     );
   }
 
@@ -78,6 +80,15 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     state = state.copyWith(uiTextScale: clamped);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setDouble('uiTextScale', clamped);
+  }
+
+  /// Stel de standaard doeltijd (in seconden) voor de presenter-aftelling in.
+  /// 0 = geen aftelling. Begrensd tot een etmaal tegen onzin-invoer.
+  Future<void> setPresentationTargetSeconds(int seconds) async {
+    final clamped = seconds.clamp(0, 86400);
+    state = state.copyWith(presentationTargetSeconds: clamped);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('presentationTargetSeconds', clamped);
   }
 
   Future<void> addRecentFile(String path) async {

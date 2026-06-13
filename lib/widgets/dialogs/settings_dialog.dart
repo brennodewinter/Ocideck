@@ -450,6 +450,18 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           ),
         ),
         const SizedBox(height: 16),
+        _sectionTitle(l10n.d('Presentatie')),
+        _presentationTargetField(),
+        Padding(
+          padding: const EdgeInsets.only(top: 6),
+          child: Text(
+            l10n.d(
+              'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.',
+            ),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+        ),
+        const SizedBox(height: 16),
         _sectionTitle(l10n.t('presentationFolder')),
         Row(
           children: [
@@ -538,6 +550,49 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           onChanged: (scale) {
             if (scale == null) return;
             ref.read(settingsProvider.notifier).setUiTextScale(scale);
+          },
+        ),
+      ),
+    );
+  }
+
+  /// Dropdown met veelgebruikte doeltijden voor de presenter-aftelling. De
+  /// opgeslagen waarde snapt naar de dichtstbijzijnde optie; fijnregelen kan
+  /// live met toets K tijdens het presenteren.
+  Widget _presentationTargetField() {
+    final l10n = context.l10n;
+    const steps = [0, 300, 600, 900, 1200, 1500, 1800, 2700, 3600, 5400];
+    final current = ref.watch(
+      settingsProvider.select((s) => s.presentationTargetSeconds),
+    );
+    final value = steps.reduce(
+      (a, b) => (a - current).abs() <= (b - current).abs() ? a : b,
+    );
+    return InputDecorator(
+      decoration: InputDecoration(
+        labelText: l10n.d('Doeltijd (aftellen)'),
+        isDense: true,
+        prefixIcon: const Icon(Icons.timer_outlined, size: 18),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<int>(
+          value: value,
+          isExpanded: true,
+          isDense: true,
+          items: [
+            for (final step in steps)
+              DropdownMenuItem(
+                value: step,
+                child: Text(
+                  step == 0 ? l10n.d('Geen aftelling') : '${step ~/ 60} min',
+                ),
+              ),
+          ],
+          onChanged: (seconds) {
+            if (seconds == null) return;
+            ref
+                .read(settingsProvider.notifier)
+                .setPresentationTargetSeconds(seconds);
           },
         ),
       ),
@@ -1045,6 +1100,14 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           _themeProfile.tableHeaderTextColor,
           (v) =>
               _themeProfile = _themeProfile.copyWith(tableHeaderTextColor: v),
+        ),
+        const SizedBox(height: 12),
+        _colorSetting(
+          l10n.d('Tabel kopachtergrond'),
+          _themeProfile.tableHeaderBackgroundColor,
+          (v) => _themeProfile = _themeProfile.copyWith(
+            tableHeaderBackgroundColor: v,
+          ),
         ),
         const SizedBox(height: 12),
         _colorSetting(

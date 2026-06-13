@@ -122,8 +122,30 @@ set a **release ceiling** — a maximum level that may leave the machine; see
 
 Start the fullscreen presenter from the toolbar. See
 [`SHORTCUTS.md`](SHORTCUTS.md) for the full key list; highlights: arrows to move,
-`G` for the grid overview, `B`/`W` to blank, `P` for presenter view, `H` for the
-in-app cheatsheet.
+`G` for the grid overview, `B`/`W` to blank, `P` for presenter view, `K` for the
+countdown, `R` to reset the timing, `H` for the in-app cheatsheet.
+
+### Rehearsing and timing
+
+The presenter view (`P`) is also a rehearsal clock — it measures, it does not
+nag. The clock bar shows four things:
+
+- **Elapsed** — time since the run started (or since the last `R`).
+- **Remaining** — a countdown against a **target time**. It turns red and shows a
+  minus sign once you go over; there is no "speed up" coaching, just the number.
+- **This slide** — how long you have spent on the current slide. Time accumulates
+  per slide across the whole run, even if you jump back and forth.
+- **Clock** — the wall-clock time.
+
+Set the target time up front under *Settings → General → Presentation*, or change
+it live while presenting with **`K`** (type the minutes and seconds as `MMSS`,
+`Enter` to confirm, `0` to switch the countdown off). **`R`** resets the run —
+elapsed time and per-slide timings — while keeping the target.
+
+When you leave the presenter after a run of at least ten seconds, a **summary**
+shows the total time against the target and the time spent per slide, with a
+button to copy the times to the clipboard. This is **session-only**: nothing is
+written to disk or into the `.md` file.
 
 ### Two screens (beamer + laptop)
 

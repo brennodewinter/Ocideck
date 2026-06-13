@@ -528,6 +528,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         themeProfile: deck.themeProfile,
         initialIndex: initial,
         tlp: deck.tlp,
+        targetDuration: () {
+          final secs = ref.read(settingsProvider).presentationTargetSeconds;
+          return secs > 0 ? Duration(seconds: secs) : null;
+        }(),
         annotations: deck.annotations,
         onAnnotationsChanged: deckNotifier.setAnnotations,
         onSlideChanged: (updated) {
