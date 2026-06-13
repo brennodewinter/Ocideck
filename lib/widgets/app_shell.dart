@@ -39,6 +39,9 @@ part 'shell/welcome_screen.dart';
 part 'shell/status_bar.dart';
 part 'shell/shell_overlays.dart';
 
+/// Keuze uit de "niet-opgeslagen wijzigingen"-dialoog bij het sluiten.
+enum _CloseChoice { cancel, discard, save }
+
 class AppShell extends ConsumerStatefulWidget {
   const AppShell({super.key});
 
@@ -128,14 +131,21 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   @override
   void onWindowClose() async {
     if (ref.read(tabsProvider).anyDirty) {
-      final shouldSave = await _confirmSaveBeforeClose(
+      final choice = await _confirmSaveBeforeClose(
         context.l10n.d(
           'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.',
         ),
       );
-      if (!shouldSave) return;
-      final saved = await _saveAllDirtyTabs();
-      if (saved) await _destroy();
+      switch (choice) {
+        case _CloseChoice.cancel:
+          return;
+        case _CloseChoice.discard:
+          // Wijzigingen verwerpen: herstelbestanden weg, niets opslaan.
+          await _destroy();
+        case _CloseChoice.save:
+          final saved = await _saveAllDirtyTabs();
+          if (saved) await _destroy();
+      }
     } else {
       await _destroy();
     }
@@ -147,9 +157,9 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     await windowManager.destroy();
   }
 
-  Future<bool> _confirmSaveBeforeClose(String message) async {
-    if (!mounted) return false;
-    return await showDialog<bool>(
+  Future<_CloseChoice> _confirmSaveBeforeClose(String message) async {
+    if (!mounted) return _CloseChoice.cancel;
+    return await showDialog<_CloseChoice>(
           context: context,
           barrierDismissible: false,
           builder: (ctx) {
@@ -159,18 +169,25 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
               content: Text(message),
               actions: [
                 TextButton(
-                  onPressed: () => Navigator.pop(ctx, false),
+                  onPressed: () => Navigator.pop(ctx, _CloseChoice.cancel),
                   child: Text(l10n.t('cancel')),
                 ),
+                TextButton(
+                  onPressed: () => Navigator.pop(ctx, _CloseChoice.discard),
+                  style: TextButton.styleFrom(
+                    foregroundColor: Theme.of(ctx).colorScheme.error,
+                  ),
+                  child: Text(l10n.d('Niet opslaan')),
+                ),
                 ElevatedButton(
-                  onPressed: () => Navigator.pop(ctx, true),
+                  onPressed: () => Navigator.pop(ctx, _CloseChoice.save),
                   child: Text(l10n.d('Opslaan en sluiten')),
                 ),
               ],
             );
           },
         ) ??
-        false;
+        _CloseChoice.cancel;
   }
 
   Future<bool> _saveAllDirtyTabs() async {
@@ -186,16 +203,23 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   Future<void> _onCloseTab(int index) async {
     final tab = ref.read(tabsProvider).tabs[index];
     if (tab.isDirty) {
-      final shouldSave = await _confirmSaveBeforeClose(
+      final choice = await _confirmSaveBeforeClose(
         context.l10n.d(
           'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.',
         ),
       );
-      if (!shouldSave) return;
-      final saved = await tab.deckNotifier.save(
-        initialDirectory: ref.read(settingsProvider).homeDirectory,
-      );
-      if (!saved) return;
+      switch (choice) {
+        case _CloseChoice.cancel:
+          return;
+        case _CloseChoice.discard:
+          // Wijzigingen verwerpen: closeTab() ruimt ook het herstelbestand op.
+          break;
+        case _CloseChoice.save:
+          final saved = await tab.deckNotifier.save(
+            initialDirectory: ref.read(settingsProvider).homeDirectory,
+          );
+          if (!saved) return;
+      }
     }
     ref.read(tabsProvider.notifier).closeTab(index);
   }
