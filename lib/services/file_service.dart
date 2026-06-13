@@ -883,7 +883,7 @@ th, td {
 }
 
 thead th, tr:first-child th {
-  background: ${profile.accentColor};
+  background: ${profile.tableHeaderBackgroundColor};
   color: ${profile.tableHeaderTextColor};
 }
 $logoCss

@@ -8,6 +8,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Presentation timer / rehearsal mode** — the presenter view now doubles as a
+  rehearsal clock that measures without coaching. A **countdown** runs against a
+  target time (default under *Settings → General → Presentation*, or set live with
+  `K` as `MMSS`; `0` turns it off) and turns red when you go over. The clock bar
+  also shows the time spent on the **current slide**, accumulated per slide across
+  the run. `R` resets the run (elapsed and per-slide timings, keeping the target).
+  Leaving the presenter after a run shows a **summary** (total vs. target, time per
+  slide) with copy-to-clipboard. Session-only: nothing is persisted to disk or the
+  `.md` file.
 - **Duplicate clean-up in the image library** — a footer button finds
   byte-identical images by md5 checksum, keeps one file per group (preferring
   the one used in slides, then the oldest), merges the tags/descriptions and
@@ -41,6 +50,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 - **Per-slide TLP classification** — each slide can carry its own Traffic Light
   Protocol level; slides classified stricter than the level the deck is shown at
   are withheld when presenting and exporting.
+- **Export release ceiling** — an optional maximum TLP level that may be
+  exported. When set, a deck classified *above* it cannot be exported in any
+  format; the gate is enforced at the single export chokepoint and fails closed
+  (no file is written when blocked, and the export dialog explains why).
+  Classifying a deck stays optional — the ceiling only stops decks that exceed
+  it, and it is off by default.
 - **Dual-screen presenter** — on a second display the beamer shows the slide
   while the laptop shows the presenter view (current/next slide, notes, timer),
   kept in sync over method channels.

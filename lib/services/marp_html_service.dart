@@ -626,7 +626,7 @@ class MarpHtmlService {
         '.slide blockquote{border-left:4px solid ${t.accentColor};margin:.5em 0;'
         'padding-left:16px;opacity:.85}'
         '.slide table{border-collapse:collapse}'
-        '.slide th{background:${t.sectionBackgroundColor};color:${t.tableHeaderTextColor};'
+        '.slide th{background:${t.tableHeaderBackgroundColor};color:${t.tableHeaderTextColor};'
         'border:1px solid #ccc;padding:6px 12px;font-size:20px}'
         '.slide td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px;font-size:20px}'
         '@media print{body{background:#fff}.slide{margin:0;box-shadow:none;'

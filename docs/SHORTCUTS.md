@@ -35,10 +35,11 @@ View & timing:
 
 | Shortcut | Action |
 | --- | --- |
-| `P` | Toggle presenter view (notes, clock, next slide) |
+| `P` | Toggle presenter view (notes, clock, countdown, per-slide timer, next slide) |
 | `S` | Move the presentation to another screen |
 | `B` · `W` | Black · white screen |
-| `R` | Reset the elapsed-time counter |
+| `K` | Set the target time / countdown (type `MMSS`, `Enter` to confirm, `0` = off) |
+| `R` | Reset the time & rehearsal run (elapsed and per-slide timings; the target stays) |
 | `A` | Auto-advance on/off |
 | `L` | Loop (restart after the last slide) on/off |
 | `M` | Advance automatically after a slide's audio finishes |

@@ -13,6 +13,7 @@ import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/markdown_service.dart';
+import '../../services/rehearsal_controller.dart';
 import '../../utils/log.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
@@ -20,6 +21,7 @@ import '../slides/inline_markdown.dart';
 import '../slides/slide_preview.dart';
 import 'annotation_overlay.dart';
 import 'audience_window.dart';
+import 'rehearsal_summary.dart';
 
 /// Blanco-schermstand tijdens het presenteren (zoals B/W in PowerPoint).
 enum _Blank { none, black, white }
@@ -30,6 +32,10 @@ class FullscreenPresenter extends StatefulWidget {
   final ThemeProfile themeProfile;
   final int initialIndex;
   final TlpLevel tlp;
+
+  /// Optionele doeltijd voor de aftelling/oefenklok. Null = geen aftelling.
+  /// Sessie-only; live aanpasbaar in de presenter (toets K).
+  final Duration? targetDuration;
 
   /// When set, this presenter drives a separate audience (beamer) window: the
   /// laptop shows the presenter view, the slide goes to [audienceWindow]. Null
@@ -49,6 +55,7 @@ class FullscreenPresenter extends StatefulWidget {
     required this.themeProfile,
     required this.initialIndex,
     this.tlp = TlpLevel.none,
+    this.targetDuration,
     this.audienceWindow,
     this.initialAnnotations = const {},
     this.onAnnotationsChanged,
@@ -65,6 +72,7 @@ class FullscreenPresenter extends StatefulWidget {
     required ThemeProfile themeProfile,
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
+    Duration? targetDuration,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
@@ -94,6 +102,7 @@ class FullscreenPresenter extends StatefulWidget {
         themeProfile: themeProfile,
         initialIndex: initialIndex,
         tlp: tlp,
+        targetDuration: targetDuration,
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
         onSlideChanged: onSlideChanged,
@@ -106,6 +115,7 @@ class FullscreenPresenter extends StatefulWidget {
         themeProfile: themeProfile,
         initialIndex: initialIndex,
         tlp: tlp,
+        targetDuration: targetDuration,
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
         onSlideChanged: onSlideChanged,
@@ -120,6 +130,7 @@ class FullscreenPresenter extends StatefulWidget {
     required ThemeProfile themeProfile,
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
+    Duration? targetDuration,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
@@ -139,6 +150,7 @@ class FullscreenPresenter extends StatefulWidget {
               themeProfile: themeProfile,
               initialIndex: initialIndex,
               tlp: tlp,
+              targetDuration: targetDuration,
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
               onSlideChanged: onSlideChanged,
@@ -165,6 +177,7 @@ class FullscreenPresenter extends StatefulWidget {
     required ThemeProfile themeProfile,
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
+    Duration? targetDuration,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
@@ -341,12 +354,18 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   double _gridRowExtent = 220;
   final ScrollController _gridScroll = ScrollController();
 
-  /// Starttijd voor de verstreken-tijd-teller (resetbaar met R).
-  late DateTime _startTime;
+  /// Oefenklok: verstreken tijd, aftelling en per-slide-tijd. Sessie-only,
+  /// puur meten (geen pacing). Resetbaar met R.
+  late RehearsalController _rehearsal;
 
   /// Getypte cijfers om naar een slidenummer te springen (leeg = niet actief).
   String _typed = '';
   Timer? _typedTimer;
+
+  /// Doeltijd-invoermodus (toets K): cijfers worden als MMSS gelezen i.p.v. als
+  /// slidenummer. [_targetTyped] houdt de invoer tot Enter/Esc.
+  bool _targetInput = false;
+  String _targetTyped = '';
 
   /// Sneltoets-overzicht (cheatsheet) zichtbaar.
   bool _helpOpen = false;
@@ -400,7 +419,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   void initState() {
     super.initState();
     _index = widget.initialIndex;
-    _startTime = DateTime.now();
+    _rehearsal = RehearsalController(target: widget.targetDuration);
     _focusNode = FocusNode();
     _ink = {
       for (final e in widget.initialAnnotations.entries)
@@ -757,6 +776,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   Future<void> _exit() async {
     _advanceTimer?.cancel();
+    await _maybeShowRehearsalSummary();
     final aw = widget.audienceWindow;
     if (aw != null) {
       // Dual mode: the main window was never put in full screen; just tear down
@@ -767,6 +787,14 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       await windowManager.setFullScreen(false);
     }
     if (mounted) Navigator.pop(context);
+  }
+
+  /// Toon na afloop de oefenrun-samenvatting, mits er genoeg gemeten is.
+  /// Sessie-only: niets wordt opgeslagen.
+  Future<void> _maybeShowRehearsalSummary() async {
+    if (!mounted || !_rehearsal.hasMeaningfulData) return;
+    final run = _rehearsal.finish();
+    await showRehearsalSummary(context, run: run, slides: widget.slides);
   }
 
   /// Meld de slidewissel aan schermlezers (WCAG 4.1.3, statusberichten):
@@ -815,7 +843,40 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   }
 
   void _resetTimer() {
-    setState(() => _startTime = DateTime.now());
+    setState(() => _rehearsal.reset());
+  }
+
+  /// Open de doeltijd-invoer (toets K): cijfers worden voortaan als MMSS
+  /// gelezen. Een lege invoer laat de huidige doeltijd ongemoeid.
+  void _beginTargetInput() {
+    _clearTyped();
+    setState(() {
+      _targetInput = true;
+      _targetTyped = '';
+    });
+  }
+
+  void _cancelTargetInput() {
+    setState(() {
+      _targetInput = false;
+      _targetTyped = '';
+    });
+  }
+
+  /// Lees [_targetTyped] als MMSS en zet de doeltijd. Leeg = ongewijzigd,
+  /// nul = aftelling uit.
+  void _commitTarget() {
+    final raw = _targetTyped;
+    setState(() {
+      _targetInput = false;
+      _targetTyped = '';
+    });
+    if (raw.isEmpty) return;
+    final n = int.tryParse(raw) ?? 0;
+    final secs = (n ~/ 100) * 60 + (n % 100);
+    setState(
+      () => _rehearsal.target = secs <= 0 ? null : Duration(seconds: secs),
+    );
   }
 
   void _toggleHelp() {
@@ -957,6 +1018,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       return KeyEventResult.handled;
     }
 
+    // Doeltijd-invoer vangt cijfers/Enter/Esc tot de invoer klaar is.
+    if (_targetInput) return _handleTargetKey(key);
+
     // Terwijl het raster open is, sturen de pijltjes een aparte cursor aan.
     if (_gridOpen) return _handleGridKey(key);
 
@@ -1007,6 +1071,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         return KeyEventResult.handled;
       case LogicalKeyboardKey.keyR:
         _resetTimer();
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.keyK:
+        _beginTargetInput();
         return KeyEventResult.handled;
       case LogicalKeyboardKey.keyB:
         _toggleBlank(_Blank.black);
@@ -1062,6 +1129,41 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     }
   }
 
+  /// Toetsen terwijl de doeltijd wordt ingevoerd (MMSS). Alles wordt
+  /// opgeslokt zodat losse cijfers niet als slidesprong gelden.
+  KeyEventResult _handleTargetKey(LogicalKeyboardKey key) {
+    final digit = _digits[key];
+    if (digit != null) {
+      setState(() {
+        _targetTyped += digit;
+        if (_targetTyped.length > 4) {
+          _targetTyped = _targetTyped.substring(_targetTyped.length - 4);
+        }
+      });
+      return KeyEventResult.handled;
+    }
+    switch (key) {
+      case LogicalKeyboardKey.enter:
+      case LogicalKeyboardKey.numpadEnter:
+      case LogicalKeyboardKey.keyK:
+        _commitTarget();
+      case LogicalKeyboardKey.backspace:
+        if (_targetTyped.isNotEmpty) {
+          setState(
+            () => _targetTyped = _targetTyped.substring(
+              0,
+              _targetTyped.length - 1,
+            ),
+          );
+        }
+      case LogicalKeyboardKey.escape:
+        _cancelTargetInput();
+      default:
+        break;
+    }
+    return KeyEventResult.handled;
+  }
+
   /// Toetsen terwijl het rasteroverzicht open is.
   KeyEventResult _handleGridKey(LogicalKeyboardKey key) {
     final last = widget.slides.length - 1;
@@ -1105,6 +1207,12 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     return d.inHours > 0 ? '${d.inHours}:$mm:$ss' : '$mm:$ss';
   }
 
+  /// Resterende tijd, met minteken zodra je over de doeltijd gaat.
+  String _fmtRemaining(Duration d) {
+    final body = _fmtElapsed(d.abs());
+    return d.isNegative ? '-$body' : body;
+  }
+
   @override
   Widget build(BuildContext context) {
     final total = widget.slides.length;
@@ -1115,6 +1223,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
     // Keep the beamer window in step with whatever index/blank we now show.
     _syncAudience();
+
+    // Per-slide-timing: registreer de huidige slide. Idempotent en goedkoop,
+    // dus veilig om elke build aan te roepen — vangt álle navigatiepaden.
+    final clampedIndex = _index.clamp(0, total - 1);
+    _rehearsal.observe(widget.slides[clampedIndex].id, clampedIndex);
 
     return Focus(
       focusNode: _focusNode,
@@ -1141,6 +1254,13 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                 right: 0,
                 bottom: 60,
                 child: Center(child: _buildTypedBadge(total)),
+              ),
+            if (_targetInput)
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 60,
+                child: Center(child: _buildTargetBadge()),
               ),
             if (_helpOpen) Positioned.fill(child: _buildHelpOverlay()),
           ],
@@ -1270,6 +1390,42 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     );
   }
 
+  /// Badge tijdens het invoeren van de doeltijd ("Doeltijd 20:00 · Enter").
+  /// Cijfers schuiven van rechts in als MM:SS (zoals een magnetron).
+  Widget _buildTargetBadge() {
+    final padded = _targetTyped.padLeft(4, '0');
+    final preview = '${padded.substring(0, 2)}:${padded.substring(2)}';
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      decoration: BoxDecoration(
+        color: Colors.black.withValues(alpha: 0.82),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFF59E0B), width: 1.5),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.timer_outlined, color: Color(0xFFF59E0B), size: 20),
+          const SizedBox(width: 10),
+          Text(
+            preview,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 26,
+              fontWeight: FontWeight.w700,
+              fontFeatures: [FontFeature.tabularFigures()],
+            ),
+          ),
+          const SizedBox(width: 12),
+          Text(
+            '${context.l10n.d('Doeltijd')} · Enter · 0 = ${context.l10n.d('uit')}',
+            style: const TextStyle(color: Colors.white38, fontSize: 13),
+          ),
+        ],
+      ),
+    );
+  }
+
   /// Sneltoets-overzicht (cheatsheet).
   Widget _buildHelpOverlay() {
     final l10n = context.l10n;
@@ -1284,7 +1440,8 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       ('B · W', l10n.d('Zwart · wit scherm')),
       ('D · T · E', l10n.d('Pen · markeerstift · gum')),
       ('X · C', l10n.d('Laser · annotaties wissen')),
-      ('R', l10n.d('Verstreken tijd resetten')),
+      ('K', l10n.d('Doeltijd / aftellen instellen (MMSS)')),
+      ('R', l10n.d('Tijd & oefenrun resetten')),
       ('A', l10n.d('Automatische modus aan/uit')),
       ('L', l10n.d('Herhalen (loop) aan/uit')),
       ('M', l10n.d('Na media automatisch doorgaan')),
@@ -1584,9 +1741,41 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     );
   }
 
+  /// Eén tijdwaarde met bijschrift voor de klokbalk.
+  Widget _metric(
+    String label,
+    String value, {
+    Color? color,
+    CrossAxisAlignment align = CrossAxisAlignment.start,
+    double size = 24,
+  }) {
+    return Column(
+      crossAxisAlignment: align,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(color: Colors.white38, fontSize: 10),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          value,
+          style: TextStyle(
+            color: color ?? Colors.white,
+            fontSize: size,
+            fontWeight: FontWeight.w600,
+            fontFeatures: const [FontFeature.tabularFigures()],
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildClockBar() {
     final l10n = context.l10n;
-    final elapsed = DateTime.now().difference(_startTime);
+    final elapsed = _rehearsal.elapsed;
+    final remaining = _rehearsal.remaining;
+    final slideElapsed = _rehearsal.currentSlideElapsed;
+    final overtime = remaining != null && remaining.isNegative;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
@@ -1594,58 +1783,63 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: const Color(0xFF262626)),
       ),
-      child: Row(
+      child: Column(
         children: [
-          // Verstreken tijd
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  l10n.d('Verstreken'),
-                  style: const TextStyle(color: Colors.white38, fontSize: 10),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  _fmtElapsed(elapsed),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                    fontFeatures: [FontFeature.tabularFigures()],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          // Reset-knop
-          Tooltip(
-            message: l10n.d('Tijd resetten (R)'),
-            child: IconButton(
-              onPressed: _resetTimer,
-              icon: const Icon(Icons.restart_alt, size: 18),
-              color: Colors.white38,
-              visualDensity: VisualDensity.compact,
-            ),
-          ),
-          const SizedBox(width: 4),
-          // Wandklok
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+          // Bovenrij: verstreken tijd, knoppen, wandklok.
+          Row(
             children: [
-              Text(
-                l10n.d('Klok'),
-                style: const TextStyle(color: Colors.white38, fontSize: 10),
+              Expanded(
+                child: _metric(l10n.d('Verstreken'), _fmtElapsed(elapsed)),
               ),
-              const SizedBox(height: 2),
-              Text(
-                _fmtClock(DateTime.now()),
-                style: const TextStyle(
-                  color: Colors.white70,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  fontFeatures: [FontFeature.tabularFigures()],
+              Tooltip(
+                message: l10n.d('Doeltijd / aftellen (K)'),
+                child: IconButton(
+                  onPressed: _beginTargetInput,
+                  icon: const Icon(Icons.timer_outlined, size: 18),
+                  color: Colors.white38,
+                  visualDensity: VisualDensity.compact,
                 ),
+              ),
+              Tooltip(
+                message: l10n.d('Tijd resetten (R)'),
+                child: IconButton(
+                  onPressed: _resetTimer,
+                  icon: const Icon(Icons.restart_alt, size: 18),
+                  color: Colors.white38,
+                  visualDensity: VisualDensity.compact,
+                ),
+              ),
+              const SizedBox(width: 4),
+              _metric(
+                l10n.d('Klok'),
+                _fmtClock(DateTime.now()),
+                color: Colors.white70,
+                align: CrossAxisAlignment.end,
+              ),
+            ],
+          ),
+          const Divider(height: 18, color: Color(0xFF262626)),
+          // Onderrij: aftelling (resterend/over) en tijd op huidige slide.
+          Row(
+            children: [
+              Expanded(
+                child: _metric(
+                  overtime ? l10n.d('Over de tijd') : l10n.d('Resterend'),
+                  remaining == null ? '–:––' : _fmtRemaining(remaining),
+                  color: remaining == null
+                      ? Colors.white24
+                      : (overtime
+                            ? const Color(0xFFEF4444)
+                            : const Color(0xFF22C55E)),
+                  size: 20,
+                ),
+              ),
+              _metric(
+                l10n.d('Deze slide'),
+                _fmtElapsed(slideElapsed),
+                color: Colors.white70,
+                align: CrossAxisAlignment.end,
+                size: 20,
               ),
             ],
           ),

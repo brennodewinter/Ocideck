@@ -8,6 +8,7 @@ class ThemeProfile {
   final bool checklistStrikeThrough;
   final String tableTextColor;
   final String tableHeaderTextColor;
+  final String tableHeaderBackgroundColor;
   final String titleBackgroundColor;
   final String titleTextColor;
   final String sectionBackgroundColor;
@@ -58,6 +59,7 @@ class ThemeProfile {
     this.checklistStrikeThrough = true,
     String? tableTextColor,
     this.tableHeaderTextColor = '#FFFFFF',
+    String? tableHeaderBackgroundColor,
     this.titleBackgroundColor = '#1C2B47',
     this.titleTextColor = '#FFFFFF',
     this.sectionBackgroundColor = '#2E7D64',
@@ -74,7 +76,9 @@ class ThemeProfile {
     this.footerPosition = 'right',
     this.closingSlideEnabled = false,
     this.closingSlideMarkdown = '# Bedankt\n\nVragen?',
-  }) : tableTextColor = tableTextColor ?? textColor;
+  }) : tableTextColor = tableTextColor ?? textColor,
+       tableHeaderBackgroundColor =
+           tableHeaderBackgroundColor ?? accentColor;
 
   static const logoPositions = [
     'top-left',
@@ -95,6 +99,7 @@ class ThemeProfile {
     bool? checklistStrikeThrough,
     String? tableTextColor,
     String? tableHeaderTextColor,
+    String? tableHeaderBackgroundColor,
     String? titleBackgroundColor,
     String? titleTextColor,
     String? sectionBackgroundColor,
@@ -126,6 +131,8 @@ class ThemeProfile {
           checklistStrikeThrough ?? this.checklistStrikeThrough,
       tableTextColor: tableTextColor ?? this.tableTextColor,
       tableHeaderTextColor: tableHeaderTextColor ?? this.tableHeaderTextColor,
+      tableHeaderBackgroundColor:
+          tableHeaderBackgroundColor ?? this.tableHeaderBackgroundColor,
       titleBackgroundColor: titleBackgroundColor ?? this.titleBackgroundColor,
       titleTextColor: titleTextColor ?? this.titleTextColor,
       sectionBackgroundColor:
@@ -158,6 +165,7 @@ class ThemeProfile {
       'checklistStrikeThrough': checklistStrikeThrough,
       'tableTextColor': tableTextColor,
       'tableHeaderTextColor': tableHeaderTextColor,
+      'tableHeaderBackgroundColor': tableHeaderBackgroundColor,
       'titleBackgroundColor': titleBackgroundColor,
       'titleTextColor': titleTextColor,
       'sectionBackgroundColor': sectionBackgroundColor,
@@ -197,6 +205,10 @@ class ThemeProfile {
           '#222222',
       tableHeaderTextColor:
           json['tableHeaderTextColor'] as String? ?? '#FFFFFF',
+      tableHeaderBackgroundColor:
+          json['tableHeaderBackgroundColor'] as String? ??
+          json['accentColor'] as String? ??
+          '#2E7D64',
       titleBackgroundColor:
           json['titleBackgroundColor'] as String? ?? '#1C2B47',
       titleTextColor: json['titleTextColor'] as String? ?? '#FFFFFF',
@@ -364,10 +376,20 @@ class AppSettings {
   final String selectedAppAppearanceProfileName;
   final List<String> recentFiles;
 
+  /// Optioneel vrijgaveplafond voor de classificatie-gate, opgeslagen als
+  /// TLP-sleutel (zie `TlpLevelX.key`). `null` = geen plafond, alles mag worden
+  /// geëxporteerd (standaard). Classificeren blijft optioneel; dit plafond
+  /// blokkeert alleen decks die er bovenuit zijn geclassificeerd.
+  final String? maxReleaseExportTlpKey;
+
   /// Scale factor for all interface text (1.0–2.0), on top of the system
   /// text scaling. The slide canvas itself is never scaled: slides are a
   /// fixed 16:9 design surface. WCAG 1.4.4 asks for text resizing up to 200%.
   final double uiTextScale;
+
+  /// Standaard doeltijd (in seconden) voor de aftelling/oefenklok in de
+  /// presenter. 0 = geen aftelling. Live aanpasbaar tijdens presenteren (K).
+  final int presentationTargetSeconds;
 
   const AppSettings({
     this.languageCode = 'nl',
@@ -378,7 +400,9 @@ class AppSettings {
     this.appAppearanceProfiles = AppAppearanceProfile.builtIns,
     this.selectedAppAppearanceProfileName = 'Basic',
     this.recentFiles = const [],
+    this.maxReleaseExportTlpKey,
     this.uiTextScale = 1.0,
+    this.presentationTargetSeconds = 0,
   });
 
   ThemeProfile get themeProfile {
@@ -430,9 +454,12 @@ class AppSettings {
     List<AppAppearanceProfile>? appAppearanceProfiles,
     String? selectedAppAppearanceProfileName,
     List<String>? recentFiles,
+    String? maxReleaseExportTlpKey,
     double? uiTextScale,
+    int? presentationTargetSeconds,
     bool clearHomeDirectory = false,
     bool clearExportDirectory = false,
+    bool clearMaxReleaseExportTlp = false,
   }) {
     final nextProfiles = themeProfiles ?? this.themeProfiles;
     return AppSettings(
@@ -464,7 +491,12 @@ class AppSettings {
           selectedAppAppearanceProfileName ??
           this.selectedAppAppearanceProfileName,
       recentFiles: recentFiles ?? this.recentFiles,
+      maxReleaseExportTlpKey: clearMaxReleaseExportTlp
+          ? null
+          : (maxReleaseExportTlpKey ?? this.maxReleaseExportTlpKey),
       uiTextScale: uiTextScale ?? this.uiTextScale,
+      presentationTargetSeconds:
+          presentationTargetSeconds ?? this.presentationTargetSeconds,
     );
   }
 }
