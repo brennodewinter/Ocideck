@@ -23,6 +23,7 @@ import '../editors/title_editor.dart';
 import '../editors/two_bullets_editor.dart';
 import '../editors/two_images_editor.dart';
 import '../editors/video_slide_editor.dart';
+import '../editors/markdown_deck_editor.dart';
 
 class EditorPanel extends ConsumerWidget {
   const EditorPanel({super.key});
@@ -52,7 +53,7 @@ class EditorPanel extends ConsumerWidget {
     ];
 
     if (editor.mode == EditorMode.markdown) {
-      return _MarkdownModeEditor(
+      return MarkdownDeckEditor(
         // Verse instantie na undo/redo zodat de markdown opnieuw wordt geladen.
         key: ValueKey('md-${deckState.revision}'),
         initialContent: deckNotifier.generateMarkdown(),
@@ -807,129 +808,6 @@ class _NotesFieldState extends State<_NotesField> {
           ),
         ],
       ),
-    );
-  }
-}
-
-// ── Markdown mode editor ──────────────────────────────────────────────────────
-
-class _MarkdownModeEditor extends StatefulWidget {
-  final String initialContent;
-  final bool Function(String) onApply;
-  final bool parseError;
-  final VoidCallback onExitMarkdown;
-
-  const _MarkdownModeEditor({
-    super.key,
-    required this.initialContent,
-    required this.onApply,
-    required this.parseError,
-    required this.onExitMarkdown,
-  });
-
-  @override
-  State<_MarkdownModeEditor> createState() => _MarkdownModeEditorState();
-}
-
-class _MarkdownModeEditorState extends State<_MarkdownModeEditor> {
-  late final TextEditingController _ctrl;
-
-  @override
-  void initState() {
-    super.initState();
-    _ctrl = TextEditingController(text: widget.initialContent);
-  }
-
-  @override
-  void dispose() {
-    _ctrl.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        // Toolbar
-        Container(
-          color: const Color(0xFFFFF9E6),
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          child: Row(
-            children: [
-              const Icon(Icons.code, size: 14, color: Color(0xFF92400E)),
-              const SizedBox(width: 6),
-              Expanded(
-                child: Text(
-                  l10n.d(
-                    'Markdown modus — bewerk de volledige presentatie als Marp Markdown',
-                  ),
-                  style: const TextStyle(
-                    fontSize: 11,
-                    color: Color(0xFF92400E),
-                  ),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  final ok = widget.onApply(_ctrl.text);
-                  if (ok) widget.onExitMarkdown();
-                },
-                child: Text(l10n.d('Toepassen')),
-              ),
-              TextButton(
-                onPressed: widget.onExitMarkdown,
-                child: Text(l10n.t('cancel')),
-              ),
-            ],
-          ),
-        ),
-        if (widget.parseError)
-          Container(
-            color: const Color(0xFFFEE2E2),
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.warning_amber_outlined,
-                  size: 14,
-                  color: Colors.red,
-                ),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: Text(
-                    l10n.d(
-                      'Markdown kon niet worden verwerkt. Controleer de syntax.',
-                    ),
-                    style: const TextStyle(fontSize: 11, color: Colors.red),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        const Divider(height: 1),
-        // Code editor
-        Expanded(
-          child: TextField(
-            controller: _ctrl,
-            maxLines: null,
-            expands: true,
-            textAlignVertical: TextAlignVertical.top,
-            style: const TextStyle(
-              fontFamily: 'monospace',
-              fontSize: 13,
-              height: 1.5,
-            ),
-            decoration: const InputDecoration(
-              contentPadding: EdgeInsets.all(16),
-              border: InputBorder.none,
-              filled: true,
-              fillColor: Color(0xFFF8FAFC),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

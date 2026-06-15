@@ -165,11 +165,8 @@ void MultiWindowManager::ObserveWindowClose(const std::string& window_id,
       G_CALLBACK(+[](GtkWidget* widget, gpointer arg) {
         auto* window_id_ptr = static_cast<std::string*>(arg);
 
-        GtkWidget* child = gtk_bin_get_child(GTK_BIN(widget));
-        if (child && FL_IS_VIEW(child)) {
-          gtk_container_remove(GTK_CONTAINER(widget), child);
-        }
-
+        // Let GTK tear down the FlView with the window; manually removing the
+        // view first triggers FlutterEngineRemoveView errors on Linux.
         MultiWindowManager::Instance()->RemoveWindow(*window_id_ptr);
         delete window_id_ptr;
       }),

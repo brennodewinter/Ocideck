@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
@@ -52,6 +53,22 @@ void main() {
       ),
       isTrue,
     );
+  });
+
+  test('AudienceWindowHandle closes only once', () async {
+    var closeCount = 0;
+    final handle = AudienceWindowHandle(
+      WindowController.fromWindowId('test'),
+      closeImpl: (_) async {
+        closeCount++;
+      },
+    );
+
+    await handle.close();
+    await handle.close();
+
+    expect(closeCount, 1);
+    expect(handle.isClosed, isTrue);
   });
 
   test('dual-screen mode requires a desktop platform and two displays', () {

@@ -497,3 +497,58 @@ genegeerd, op presenter-notities na):
 - **Voorwaartse migratie:** ontbrekende front-matter-velden en
   stijlprofiel-velden vallen terug op standaardwaarden, en het ontbreken van het
   `no-footer`-token betekent (voor oudere bestanden) "footer zichtbaar".
+
+---
+
+## 10. Markdown-modus en syntaxcontrole
+
+In de editor schakelt het code-icoon in de werkbalk naar **Markdown-modus**: de
+hele presentatie wordt als één Marp-markdownbestand getoond (dezelfde structuur
+als op schijf). **Toepassen** parsed de tekst terug naar de getype slides;
+**Annuleren** keert terug zonder wijzigingen door te voeren.
+
+### Wanneer controleren?
+
+- **Controleren** — op elk moment tijdens het bewerken; resultaten in een
+  samenvattingsbalk, met uitklapbare lijst. Regelnummers links worden rood
+  (fout) of geel (waarschuwing) gemarkeerd; klik op een melding om naar die regel
+  te springen.
+- **Toepassen** — voert altijd eerst de controle uit. Bij bevindingen verschijnt
+  een dialoog met **Terug naar editor**, **Annuleren** of **Toch toepassen**.
+
+De controle is **structureel**: hij volgt dezelfde regels als `MarkdownService`
+(front matter, `\n---\n` als scheiding, `_class`-commentaar, fenced blocks en de
+HTML-fragmenten die OciDeck zelf genereert). Geldige Marp-syntax die OciDeck
+niet modelleert wordt niet gerapporteerd.
+
+### Uitgevoerde controles
+
+| Onderdeel | Ernst | Controle |
+| --- | --- | --- |
+| **Document** | waarschuwing | Presentatie is leeg. |
+| **Document** | fout | Geen slide-inhoud na front matter. |
+| **Document** | fout | `parseDeck` faalt volledig (`null`). |
+| **Front matter** | fout | Openings-`---` zonder afsluitende `---`-regel. |
+| **Front matter** | waarschuwing | Regel zonder `sleutel: waarde`-vorm. |
+| **Front matter** | fout | Onbekende `tlp:`-waarde. |
+| **Commentaar** | fout | `<!--` zonder `-->` op dezelfde regel. |
+| **Commentaar** | waarschuwing | Commentaar zonder `_class:`, `_style:`, `ocideck_…`, `skip`, `tlp:` of `advance:`. |
+| **Codeblokken** | fout | Oneven aantal ` ``` `-regels (niet afgesloten). |
+| **`_class`** | fout | Malformed `<!-- _class: … -->`. |
+| **`_class`** | waarschuwing | Onbekend token in `_class` (bekend: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `logo-safe`, `no-logo`, `no-footer`). |
+| **Slide-metadata** | fout | Onbekende `<!-- tlp: … -->`, niet-numerieke `<!-- advance: … -->`, of ongeldige `<!-- ocideck_list_style: … -->` (`bullets`, `numbered`, `checklist`). |
+| **Twee kolommen** | fout | Ongeldige base64/JSON in `ocideck_two_bullets_*`-commentaren. |
+| **Afbeeldingen** | fout | `![…](…` zonder sluitende `)`. |
+| **Video/audio** | fout | Onvolledige `<video>`/`<audio>`-tag, of `<video>` zonder `src="…"`. |
+| **`code`-slide** | fout | Geen afgesloten fenced ```-blok. |
+| **`chart`-slide** | fout | Geen ` ```chart `-blok, niet afgesloten, of ongeldige JSON (geen `{…}`-object). |
+| **`chart`-slide** | waarschuwing | Lege JSON in een afgesloten ` ```chart `-blok. |
+| **`split`-slide** | fout | Ontbrekende of niet-afgesloten `<div class="split-text">` / `split-image`. |
+| **`two-bullets`-slide** | fout | Ontbrekende of niet-afgesloten `<div class="ocideck-two-bullets">`. |
+| **`table`-slide** | waarschuwing | Geen tabelregels. |
+| **`table`-slide** | fout | Geen scheidingsrij (`\| --- \|`) of tweede rij is geen geldige GFM-scheiding. |
+| **HTML** | fout | Ongebalanceerde `<div>`/ `</div>` binnen een slide. |
+
+Implementatie: `lib/services/markdown_validator.dart`; tests:
+`test/markdown_validator_test.dart`. Zie ook [`USER_GUIDE.md`](USER_GUIDE.md) (§
+Markdown mode).

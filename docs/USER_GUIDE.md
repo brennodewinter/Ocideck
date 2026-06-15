@@ -194,6 +194,70 @@ OciDeck aims for WCAG 2.1 in the editor:
   title", including the skipped state), charts read out their data as a text
   alternative, and the fullscreen presenter announces every slide change.
 
+## Markdown mode
+
+The toolbar code icon switches the editor to **Markdown mode**: the whole deck is
+shown as one Marp Markdown document (the same structure OciDeck writes to disk).
+Use this for bulk edits, copy-paste from another tool, or tweaks that are faster
+in raw text. Switch back with **Apply** (to parse the text back into typed slides)
+or **Cancel** (discard your edits and return to the visual editor).
+
+### Syntax check
+
+Markdown mode includes a **syntax check** that validates your text against what
+OciDeck's parser (`MarkdownService`) can read reliably. Broken structure often
+does not fail loudly — the deck may load with the wrong slide types or missing
+content — so the check catches problems before you apply.
+
+- **Check** — run validation at any time while editing. Results appear in a
+  summary bar; expand it for a list of issues. Line numbers in the gutter are
+  highlighted (red = error, amber = warning). Click an issue or a line number to
+  jump to that line.
+- **Apply** — always runs the check first. If anything is found, a dialog lists
+  the problems and offers **Back to editor**, **Cancel**, or **Apply anyway**.
+  Choosing **Apply anyway** proceeds despite the warnings (you may still see the
+  existing "Markdown could not be processed" banner if parsing returns `null`).
+
+The check is **structural**, not a full Marp linter: it mirrors OciDeck's own
+splitting rules (front matter, `\n---\n` slide separators, `_class` comments,
+fenced blocks, and the HTML fragments OciDeck generates). Valid Marp that OciDeck
+does not model (e.g. arbitrary directives) is not reported.
+
+#### Checks performed
+
+Issues are reported with a **line number**, a **severity**, and a short message.
+
+| Area | Severity | What is checked |
+| --- | --- | --- |
+| **Document** | warning | The file is empty. |
+| **Document** | error | No slide content after the front matter. |
+| **Document** | error | `MarkdownService.parseDeck` returns `null` (unrecoverable parse failure). |
+| **Front matter** | error | Opening `---` without a closing `---` line. |
+| **Front matter** | warning | A line inside the block is not `key: value`. |
+| **Front matter** | error | `tlp:` value is not a known key (`clear`, `green`, `amber`, `amber+strict`, `red`, or empty/`none`). |
+| **Comments** | error | `<!--` without a matching `-->` on the same line. |
+| **Comments** | warning | A comment looks like metadata but lacks `_class:`, `_style:`, `ocideck_…`, `skip`, `tlp:`, or `advance:`. |
+| **Fenced code** | error | An odd number of ` ``` ` lines in the file (unclosed fence). |
+| **Slide class** | error | A malformed `<!-- _class: … -->` (present but not parseable). |
+| **Slide class** | warning | An unknown token in `_class` (only `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `logo-safe`, `no-logo`, `no-footer` are recognised; other tokens are kept as custom CSS classes but may change auto-detection). |
+| **Per-slide metadata** | error | `<!-- tlp: … -->` with an unknown level. |
+| **Per-slide metadata** | error | `<!-- advance: … -->` where the value is not a number. |
+| **Per-slide metadata** | error | `<!-- ocideck_list_style: … -->` not `bullets`, `numbered`, or `checklist`. |
+| **Two-column bullets** | error | `ocideck_two_bullets_left/right` or `*_title` comments with invalid base64/JSON. |
+| **Images** | error | `![…](…` without a closing `)`. |
+| **Video / audio** | error | `<video>` / `<audio>` tag incomplete, or `<video>` without `src="…"`. |
+| **`code` slides** | error | `_class: code` but fewer than two fence lines (no closed fenced block). |
+| **`chart` slides** | error | Missing ` ```chart ` block, unclosed fence, or JSON that is not a valid `{…}` object. |
+| **`chart` slides** | warning | Empty JSON inside a closed ` ```chart ` block. |
+| **`split` slides** | error | Missing or unclosed `<div class="split-text">` or `<div class="split-image">`. |
+| **`two-bullets` slides** | error | Missing or unclosed `<div class="ocideck-two-bullets">`. |
+| **`table` slides** | warning | `_class: table` but no `\| … \|` rows. |
+| **`table` slides** | error | Table present but no separator row (`\| --- \|`), or the second row is not a valid GFM separator. |
+| **HTML layout** | error | Unbalanced `<div>` / `</div>` within a slide (extra closing tag, or an opening tag left open). |
+
+Implementation: `lib/services/markdown_validator.dart` (unit tests in
+`test/markdown_validator_test.dart`).
+
 ## Theming and language
 
 - **Style profiles** control deck colours (including the source-code background,

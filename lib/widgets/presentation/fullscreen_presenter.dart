@@ -23,6 +23,32 @@ import 'annotation_overlay.dart';
 import 'audience_window.dart';
 import 'rehearsal_summary.dart';
 
+/// Guards teardown of the secondary audience window so native close is only
+/// invoked once (double-close on Linux can crash the embedder).
+@visibleForTesting
+class AudienceWindowHandle {
+  AudienceWindowHandle(
+    this.controller, {
+    Future<void> Function(WindowController controller)? closeImpl,
+  }) : _closeImpl = closeImpl ?? ((c) => c.close());
+
+  final WindowController controller;
+  final Future<void> Function(WindowController controller) _closeImpl;
+  bool _closed = false;
+
+  bool get isClosed => _closed;
+
+  Future<void> close() async {
+    if (_closed) return;
+    _closed = true;
+    try {
+      await _closeImpl(controller);
+    } catch (e) {
+      logWarning('AudienceWindowHandle.close: audience window', e);
+    }
+  }
+}
+
 /// Blanco-schermstand tijdens het presenteren (zoals B/W in PowerPoint).
 enum _Blank { none, black, white }
 
@@ -38,9 +64,9 @@ class FullscreenPresenter extends StatefulWidget {
   final Duration? targetDuration;
 
   /// When set, this presenter drives a separate audience (beamer) window: the
-  /// laptop shows the presenter view, the slide goes to [audienceWindow]. Null
+  /// laptop shows the presenter view, the slide goes to [audience]. Null
   /// for the classic single-screen mode.
-  final WindowController? audienceWindow;
+  final AudienceWindowHandle? audience;
 
   /// Annotation layer keyed by [Slide.id], and a callback to persist changes
   /// made while presenting back to the deck.
@@ -56,7 +82,7 @@ class FullscreenPresenter extends StatefulWidget {
     required this.initialIndex,
     this.tlp = TlpLevel.none,
     this.targetDuration,
-    this.audienceWindow,
+    this.audience,
     this.initialAnnotations = const {},
     this.onAnnotationsChanged,
     this.onSlideChanged,
@@ -213,20 +239,27 @@ class FullscreenPresenter extends StatefulWidget {
     });
 
     WindowController? audience;
+    AudienceWindowHandle? audienceHandle;
     try {
       audience = await WindowController.create(
         WindowConfiguration(arguments: argument, hiddenAtLaunch: true),
       );
+      audienceHandle = AudienceWindowHandle(audience);
+      await audience.show();
       await audience.coverScreen(external: true);
     } catch (e) {
       logError(
         'FullscreenPresenter.showDualScreen: audience window setup failed',
         e,
       );
+      if (audienceHandle != null) {
+        await audienceHandle.close();
+      }
       audience = null;
+      audienceHandle = null;
     }
 
-    if (audience == null) {
+    if (audience == null || audienceHandle == null) {
       if (context.mounted) {
         await show(
           context,
@@ -257,7 +290,7 @@ class FullscreenPresenter extends StatefulWidget {
               themeProfile: themeProfile,
               initialIndex: initialIndex,
               tlp: tlp,
-              audienceWindow: audience,
+              audience: audienceHandle,
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
               onSlideChanged: onSlideChanged,
@@ -271,7 +304,7 @@ class FullscreenPresenter extends StatefulWidget {
     } finally {
       await _restoreWakeLock(hadWakeLock);
       // Make sure the audience window is gone even if exit didn't close it.
-      audience.close().catchError((_) => null);
+      await audienceHandle.close();
     }
   }
 
@@ -389,7 +422,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   int _displayIndex = 0;
 
   /// True when this presenter drives a separate audience (beamer) window.
-  bool get _dual => widget.audienceWindow != null;
+  bool get _dual => widget.audience != null;
 
   /// Last (index, blank) pushed to the audience window, to avoid redundant sends.
   int? _lastSentIndex;
@@ -484,7 +517,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   /// Mirror the current index/blank state to the audience window when it changed.
   void _syncAudience() {
-    final aw = widget.audienceWindow;
+    final aw = widget.audience?.controller;
     if (aw == null) return;
     final blank = _blankCode;
     if (_index == _lastSentIndex && blank == _lastSentBlank) return;
@@ -534,7 +567,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   /// Send the current slide's strokes to the beamer (keyed by index there).
   void _pushInk() {
-    if (widget.audienceWindow == null) return;
+    if (widget.audience == null) return;
     audienceChannel
         .invokeMethod('ink', {
           'index': _index,
@@ -557,7 +590,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   }
 
   void _onLaserMove(Offset? point) {
-    if (widget.audienceWindow == null) return;
+    if (widget.audience == null) return;
     final now = DateTime.now();
     // Throttle to keep the channel calm; always send the "gone" (null) event.
     if (point != null &&
@@ -578,7 +611,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// pen lifts. The committed stroke still follows over the 'ink' channel; this
   /// just keeps the in-progress preview in sync for the same slide.
   void _onActiveStroke(InkStroke? stroke) {
-    if (widget.audienceWindow == null) return;
+    if (widget.audience == null) return;
     final now = DateTime.now();
     // Throttle growth events; always send the "done" (null) event so the
     // beamer drops its live preview the moment the stroke commits.
@@ -777,12 +810,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   Future<void> _exit() async {
     _advanceTimer?.cancel();
     await _maybeShowRehearsalSummary();
-    final aw = widget.audienceWindow;
+    final aw = widget.audience;
     if (aw != null) {
       // Dual mode: the main window was never put in full screen; just tear down
-      // the audience window.
-      audienceChannel.invokeMethod('close').catchError((_) => null);
-      aw.close().catchError((_) => null);
+      // the audience window (once — double-close crashes the Linux embedder).
+      await aw.close();
     } else {
       await windowManager.setFullScreen(false);
     }
