@@ -1056,6 +1056,17 @@ const _dutchSourceStrings = {
     'Toepassen': 'Apply',
     'Markdown kon niet worden verwerkt. Controleer de syntax.':
         'Markdown could not be processed. Check the syntax.',
+    'Controleren': 'Check syntax',
+    'Syntaxproblemen gevonden': 'Syntax issues found',
+    'De markdown bevat': 'The markdown contains',
+    'fout(en) en': 'error(s) and',
+    'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+        'warning(s). Slides may not be parsed correctly.',
+    'Terug naar editor': 'Back to editor',
+    'Toch toepassen': 'Apply anyway',
+    'Geen syntaxproblemen gevonden': 'No syntax issues found',
+    'fout(en),': 'error(s),',
+    'waarschuwing(en)': 'warning(s)',
     'Afbeelding kiezen': 'Choose image',
     'Afbeeldingen laden…': 'Loading images…',
     'Sluiten (Esc)': 'Close (Esc)',

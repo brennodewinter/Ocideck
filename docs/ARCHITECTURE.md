@@ -15,7 +15,8 @@ are stored on disk, see [`FILE_FORMAT.md`](FILE_FORMAT.md).
 ```
 lib/
   models/     # Deck, Slide, Settings/ThemeProfile, Chart, Annotation
-  services/   # markdown, file, export, classification_policy, image, caption,
+  services/   # markdown, markdown_validator, file, export, classification_policy,
+              # image, caption,
               # description, image_dedup (md5 duplicates),
               # image_reference (.md rewrites), recovery, rasterizer,
               # marp_html, annotation_codec, rehearsal_controller
@@ -47,6 +48,12 @@ lib/
 - `parseDeck` / `_parseBlock` read it back. `code` and `chart` slides are detected
   by their `_class` and parsed separately (their fenced block would otherwise
   confuse the generic line parser).
+
+`MarkdownValidator` (`lib/services/markdown_validator.dart`) performs a
+structural pre-flight before applying raw markdown in the editor: it reports line-
+anchored errors/warnings for the same shapes the parser expects (front matter,
+slide separators, `_class`, fences, OciDeck HTML fragments, chart JSON, etc.).
+See `docs/FILE_FORMAT.md` §10 and `docs/USER_GUIDE.md` (Markdown mode).
 
 This service is heavily covered by the round-trip tests — treat it as the
 source-of-truth for the file format and keep `FILE_FORMAT.md` in sync.
