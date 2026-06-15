@@ -427,19 +427,29 @@ class _LineNumberGutter extends StatelessWidget {
       color: const Color(0xFFEEF2F7),
       child: SizedBox(
         width: 44,
-        child: ListView.builder(
-          controller: scrollController,
-          padding: const EdgeInsets.only(top: 16),
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: lineCount,
-          itemBuilder: (context, index) {
-            final line = index + 1;
-            return _LineNumberCell(
-              line: line,
-              severity: issueLines[line],
-              onTap: onLineTap,
-            );
-          },
+        child: ClipRect(
+          child: AnimatedBuilder(
+            animation: scrollController,
+            builder: (context, child) {
+              final offset =
+                  scrollController.hasClients ? scrollController.offset : 0.0;
+              return Transform.translate(
+                offset: Offset(0, 16 - offset),
+                child: child,
+              );
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                for (var index = 0; index < lineCount; index++)
+                  _LineNumberCell(
+                    line: index + 1,
+                    severity: issueLines[index + 1],
+                    onTap: onLineTap,
+                  ),
+              ],
+            ),
+          ),
         ),
       ),
     );
