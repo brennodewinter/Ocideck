@@ -56,6 +56,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   (no file is written when blocked, and the export dialog explains why).
   Classifying a deck stays optional — the ceiling only stops decks that exceed
   it, and it is off by default.
+- **Classification enforcement** — extends the export gate with an optional
+  **required minimum TLP**, a **classification required** flag (reject decks
+  with no TLP level), and a **classification watermark** on every slide
+  (diagonal `TLP · organisation`, WYSIWYG in preview and raster exports).
+  Settings live under *Settings → General → Accessibility → Classification
+  enforcement*. The title-bar TLP chip highlights in orange when export is
+  blocked because the deck is unclassified.
+- **Export metadata** — PDF, PPTX, and HTML exports embed title, author,
+  description, keywords, and TLP (Subject prefix, Keywords, HTML `<meta
+  name="classification">` / `<meta name="tlp">`, plus a fixed HTML banner).
 - **Dual-screen presenter** — on a second display the beamer shows the slide
   while the laptop shows the presenter view (current/next slide, notes, timer),
   kept in sync over method channels.

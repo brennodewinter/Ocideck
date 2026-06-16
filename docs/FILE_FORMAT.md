@@ -118,6 +118,18 @@ Opgeslagen onder de sleutel `tlp` met deze stabiele waarden:
 | `amber+strict` | `TLP:AMBER+STRICT` |
 | `red` | `TLP:RED` |
 
+**Effectieve markering.** In de app wordt per slide het **strengste** niveau
+getoond: het maximum van het deck-TLP (`tlp` in front matter) en het
+per-slide TLP (`<!-- tlp: … -->`). Dat bepaalt banner, badge en optioneel
+watermerk in preview, presenter en rasterexport — niet opgeslagen als extra
+Markdown, maar berekend bij renderen (`effectiveTlp` in `lib/models/deck.dart`).
+
+**Zichtbaarheid vs. export-gate.** Per-slide TLP bepaalt welke slides worden
+achtergehouden bij presenteren/exporteren (`slideVisibleAtTlp`). De
+**export-handhaving** (plafond, minimum, verplichte classificatie) kijkt
+alleen naar het deck-brede `tlp`-veld in front matter, niet naar per-slide
+niveaus.
+
 ### 3.2 `ocideck_style_profile` (stijlprofiel)
 
 Het complete visuele profiel wordt als JSON geserialiseerd, ge-UTF-8'd en
@@ -552,3 +564,26 @@ niet modelleert wordt niet gerapporteerd.
 Implementatie: `lib/services/markdown_validator.dart`; tests:
 `test/markdown_validator_test.dart`. Zie ook [`USER_GUIDE.md`](USER_GUIDE.md) (§
 Markdown mode).
+
+---
+
+## 11. Exportmetadata (niet in `.md`)
+
+Bij PDF-, PPTX- en HTML-export schrijft OciDeck **documenteigenschappen** die
+afgeleid zijn van front matter (`author`, `organization`, `description`,
+`keywords`, `tlp`, titel). Deze metadata staat **niet** in het `.md`-bestand
+en verandert het round-trip-formaat niet; ze worden alleen bij export gezet
+(`ExportDocumentMetadata` in `lib/services/export_metadata.dart`).
+
+| Bron (front matter) | PDF / PPTX | HTML |
+| --- | --- | --- |
+| Titel | `Title` | `<title>` |
+| `author`, anders `organization` | `Author` / `dc:creator` | `<meta name="author">` |
+| `description` | — | `<meta name="description">` |
+| `keywords` + TLP + `OciDeck` | `Keywords` | `<meta name="keywords">` |
+| `tlp` (wanneer ≠ none) | `Subject`: `TLP:… — titel` | `<meta name="classification">`, `<meta name="tlp">`, vaste `.tlp-export-banner` bovenaan |
+
+Visuele TLP-markering (banner, badge, optioneel watermerk) wordt **gerasterd**
+in PDF/PPTX-slides en staat los van deze documenteigenschappen. Zie
+[`USER_GUIDE.md`](USER_GUIDE.md) (§ Traffic Light Protocol, § Exporting) en
+[`ARCHITECTURE.md`](ARCHITECTURE.md) (§ Classification enforcement).

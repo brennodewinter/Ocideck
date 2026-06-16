@@ -108,15 +108,38 @@ Below each editor you can set:
 
 ## Traffic Light Protocol (TLP)
 
-A deck has an overall TLP level (shown as a marking on the slides). Each slide can
-*also* carry its own level. When you present or export, slides whose level is
+A deck has an overall TLP level (set from the **TLP** chip in the title bar, or
+under *Presentation properties*). Each slide can *also* carry its own level
+(*Per-slide options*). When you present or export, slides whose level is
 **stricter** than the level chosen for the deck are **withheld** — so the same
 deck can be shown safely to audiences with different clearances. Order, least to
 most restrictive: none < CLEAR < GREEN < AMBER < AMBER+STRICT < RED.
 
-Classifying a deck is **optional**. As an extra guardrail, an organisation can
-set a **release ceiling** — a maximum level that may leave the machine; see
-*Exporting* below.
+Classifying a deck is **optional** by default. An organisation can tighten that
+with the **classification enforcement** settings under *Settings → General →
+Accessibility* (see *Exporting* below).
+
+### Visual marking (WYSIWYG)
+
+When a slide is classified, OciDeck shows the official FIRST TLP 2.0 marking in
+the preview, presenter, audience window, thumbnails, and raster exports (PDF/PPTX).
+What you see on screen is what leaves the app — the marking is not a separate
+overlay added only at export time.
+
+For each visible slide, the **effective** level is the **stricter** of the deck
+level and that slide's own level. On top of that:
+
+- **Banner** — a full-width black bar at the top with the coloured TLP label
+  (e.g. `TLP:AMBER`).
+- **Badge** — the same label in a compact box at the bottom-right (or bottom-left
+  when the logo sits bottom-right), so the footer text can step aside.
+- **Watermark** (optional, off by default) — a faint diagonal repeat of the TLP
+  label and the deck's **organisation** field across the slide. Enable it under
+  *Settings → General → Accessibility → Classification watermark*.
+
+Slides with no classification show none of the above. Per-slide TLP that is
+stricter than the deck still contributes to the effective marking on slides that
+are shown.
 
 ## Presenting
 
@@ -174,10 +197,37 @@ Export to:
 - **Portable package** (`.ocideck`) — a single zip with the Markdown and all
   assets, to hand the whole deck to someone else.
 
-**Release ceiling (optional).** When a maximum TLP level is configured, exporting
-a deck classified *above* it is blocked for every format, and the export dialog
-explains why. The ceiling is off by default and classifying a deck stays
-optional — it only stops decks that exceed the configured level.
+**Classification enforcement (optional).** Under *Settings → General →
+Accessibility → Classification enforcement* an organisation can configure up to
+four independent rules. All are off by default; together they form a single
+**export gate** that applies to PDF, PPTX, HTML, and the portable package.
+When a rule blocks export, **no file is written** (fail-closed) and the export
+dialog shows the reason. The status bar export button tooltip repeats that reason
+when the deck is saved and clean.
+
+| Setting | Effect |
+| --- | --- |
+| **Release ceiling** | Blocks export when the deck's TLP is **higher** than the chosen maximum (same as before — a deck at RED cannot export when the ceiling is AMBER). |
+| **Required minimum level** | Blocks export when the deck's TLP is **lower** than the chosen minimum (e.g. minimum GREEN rejects CLEAR and unclassified decks). |
+| **Classification required** | Blocks export when the deck has **no** TLP level set, even if no minimum is configured. |
+| **Classification watermark** | Does not block export; adds the diagonal watermark described under *Traffic Light Protocol*. |
+
+The gate evaluates the **deck-wide** TLP from front matter, not per-slide levels.
+Per-slide stricter levels still affect which slides appear in the export (they are
+withheld), but they do not satisfy "classification required" on their own — set
+the deck level explicitly.
+
+When export is blocked because the deck is unclassified, the **TLP** chip in the
+title bar gets an orange border and its tooltip explains that a level is required.
+
+**Export metadata.** PDF, PPTX, and HTML exports embed document properties derived
+from the deck: title, author (falling back to organisation), description, keywords,
+and TLP. When a TLP level is set, it is prefixed in the PDF/PPTX **Subject**
+(`TLP:GREEN — My deck`), added to **Keywords** (`TLP`, the label, and the stable
+key), and written to HTML `<meta name="classification">` and `<meta name="tlp">`.
+HTML exports also show a fixed top banner with the TLP label when classified.
+These properties are for discovery and handling downstream — they do not replace
+the visible banner, badge, and optional watermark on the slides themselves.
 
 ## Accessibility
 
