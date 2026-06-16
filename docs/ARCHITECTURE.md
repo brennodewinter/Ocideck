@@ -15,8 +15,9 @@ are stored on disk, see [`FILE_FORMAT.md`](FILE_FORMAT.md).
 ```
 lib/
   models/     # Deck, Slide, Settings/ThemeProfile, Chart, Annotation
-  services/   # markdown, markdown_validator, file, export, classification_policy,
-              # image, caption,
+  services/   # markdown, markdown_validator, file, export,
+              # classification_policy, classification_enforcement_policy,
+              # export_metadata, image, caption,
               # description, image_dedup (md5 duplicates),
               # image_reference (.md rewrites), recovery, rasterizer,
               # marp_html, annotation_codec, rehearsal_controller
@@ -75,13 +76,48 @@ the key thing to understand before touching rendering:
    renderer by design.
 
 Both worlds converge at one chokepoint: `services/export_service.dart`
-(`ExportService.export()`) is the only place that writes an export, so the
-**classification gate** lives there rather than in the export dialog. A
-`ClassificationPolicy` enforces an optional *release ceiling* and refuses,
-**fail-closed**, to export a deck classified above it — no format can bypass it.
-The ceiling is stored in app settings (`maxReleaseExportTlpKey`, off by default);
-the dialog also runs the same check up front so a blocked export is explained
-before any work starts.
+(`ExportService.export()`) is the only place that writes an export.
+
+### Classification enforcement
+
+Export blocking is decided by `ClassificationEnforcementPolicy`
+(`services/classification_enforcement_policy.dart`), evaluated inside
+`ExportService.export()` **before** any file bytes are built — fail-closed, so no
+format (PDF/PPTX/HTML/package) can bypass the gate. The export dialog and status
+bar run the same policy up front for UX (explain early, disable misleading work).
+
+The policy combines three optional rules from `AppSettings`:
+
+| Setting key | Rule |
+| --- | --- |
+| `maxReleaseExportTlpKey` | Release **ceiling** — deck TLP must not exceed this level. |
+| `minRequiredExportTlpKey` | **Floor** — deck TLP must be at least this level. |
+| `requireClassificationOnExport` | Deck must have a TLP level (`TlpLevel.none` is rejected). |
+
+`ClassificationPolicy` remains as a thin wrapper around the ceiling only
+(backward compatible); new code should use `ClassificationEnforcementPolicy`.
+The gate evaluates **deck-wide** `Deck.tlp`, not per-slide levels (those still
+control visibility via `slideVisibleAtTlp`).
+
+`ExportDocumentMetadata` (`services/export_metadata.dart`) is built from deck
+metadata and passed into PDF (`pw.Document` title/author/subject/keywords),
+PPTX core properties, and HTML `<meta>` tags. HTML also gets a fixed
+`.tlp-export-banner` when classified.
+
+### Visual TLP marking
+
+In-app slides (`SlidePreviewWidget`) compute `effectiveTlp(deckTlp, slideTlp)` —
+the stricter of deck and slide — and render FIRST TLP 2.0 markings from
+`widgets/slides/previews/overlays.dart`:
+
+- `_ClassificationBanner` — full-width top bar
+- `_TlpOverlay` — bottom-right (or bottom-left) badge
+- `_ClassificationWatermark` — optional diagonal watermark (`TLP · organisation`),
+  controlled by `AppSettings.classificationWatermarkEnabled`
+
+The same widget tree is rasterized for PDF/PPTX (`slide_rasterizer.dart`), so
+markings are WYSIWYG. The watermark setting is threaded through preview, presenter,
+audience window, thumbnails, and export dialog.
 
 ## Presenter
 
