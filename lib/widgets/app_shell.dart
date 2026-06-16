@@ -10,7 +10,9 @@ import '../services/caption_service.dart';
 import '../services/description_service.dart';
 import '../services/classification_policy.dart';
 import '../services/export_service.dart';
+import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
+import '../services/slide_quality_analyzer.dart';
 import '../state/deck_provider.dart';
 import '../state/editor_provider.dart';
 import '../state/settings_provider.dart';
@@ -591,6 +593,14 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         tlp: deck.tlp,
         policy: ClassificationPolicy.fromKey(
           ref.read(settingsProvider).maxReleaseExportTlpKey,
+        ),
+        qualityResult: const SlideQualityAnalyzer().analyzeSlides(
+          slides: slides,
+          theme: deck.themeProfile,
+          font: deck.themeProfile.fontFamily,
+        ),
+        qualityPolicy: QualityExportPolicy.fromEnabled(
+          ref.read(settingsProvider).qualityWarningsOnExport,
         ),
         exportDirectory: ref.read(settingsProvider).exportDirectory,
         // Inline chart data so the HTML export can render charts standalone,

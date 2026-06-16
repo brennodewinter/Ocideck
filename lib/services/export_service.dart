@@ -11,6 +11,8 @@ import 'package:pdf/widgets.dart' as pw;
 import '../models/deck.dart';
 import '../models/settings.dart';
 import 'classification_policy.dart';
+import '../models/slide_quality.dart';
+import 'quality_export_policy.dart';
 import 'marp_html_service.dart';
 
 enum ExportFormat { pdf, pptx, html }
@@ -107,6 +109,9 @@ class ExportService {
     ThemeProfile? themeProfile,
     TlpLevel tlp = TlpLevel.none,
     ClassificationPolicy policy = const ClassificationPolicy(),
+    SlideQualityResult? qualityResult,
+    QualityExportPolicy qualityPolicy = const QualityExportPolicy(),
+    bool qualityAcknowledged = false,
   }) async {
     // Classificatie-gate. Dit is het enige chokepoint waar elk formaat
     // (PDF/PPTX/HTML) doorheen moet, dus de handhaving zit hier en niet in de
@@ -115,6 +120,14 @@ class ExportService {
     final decision = policy.evaluate(tlp);
     if (!decision.allowed) {
       return ExportResult.fail(decision.reason!);
+    }
+    final quality = qualityResult ?? const SlideQualityResult([]);
+    final qualityDecision = qualityPolicy.evaluate(
+      quality,
+      acknowledged: qualityAcknowledged,
+    );
+    if (!qualityDecision.allowed) {
+      return ExportResult.fail(qualityDecision.reason!);
     }
     if (format == ExportFormat.html) {
       if (markdown == null || markdown.trim().isEmpty) {

@@ -1,0 +1,72 @@
+import 'markdown_validation.dart';
+
+/// Sentinel index for deck-wide issues (theme contrast, etc.).
+const int kDeckWideSlideIndex = -1;
+
+enum SlideQualityCategory { altText, contrast, textDensity }
+
+enum SlideQualityIssueKind {
+  missingAltCaption,
+  themeContrast,
+  slideContrast,
+  imageContrastUnverified,
+  chartMissingDescription,
+  mediaMissingDescription,
+  textDensityWarning,
+  textDensityCritical,
+  tableDensityMinimum,
+  codeDensityHigh,
+  freeMarkdownDensityHigh,
+  titleDensityHigh,
+}
+
+class SlideQualityIssue {
+  final int slideIndex;
+  final SlideQualityIssueKind kind;
+  final SlideQualityCategory category;
+  final MarkdownValidationSeverity severity;
+
+  /// Optional hint for UI focus, e.g. `imageCaption` or `textColor`.
+  final String? field;
+
+  /// Structured parameters for localized formatting ([formatSlideQualityIssue]).
+  final Map<String, String> args;
+
+  const SlideQualityIssue({
+    required this.slideIndex,
+    required this.kind,
+    required this.category,
+    required this.severity,
+    this.field,
+    this.args = const {},
+  });
+
+  bool get isDeckWide => slideIndex == kDeckWideSlideIndex;
+}
+
+class SlideQualityResult {
+  final List<SlideQualityIssue> issues;
+
+  const SlideQualityResult(this.issues);
+
+  bool get hasIssues => issues.isNotEmpty;
+
+  int get errorCount => issues
+      .where((i) => i.severity == MarkdownValidationSeverity.error)
+      .length;
+
+  int get warningCount => issues
+      .where((i) => i.severity == MarkdownValidationSeverity.warning)
+      .length;
+
+  List<SlideQualityIssue> forSlide(int slideIndex) =>
+      issues.where((i) => i.slideIndex == slideIndex).toList();
+
+  bool hasCategoryOnSlide(int slideIndex, SlideQualityCategory category) =>
+      issues.any(
+        (i) => i.slideIndex == slideIndex && i.category == category,
+      );
+
+  List<SlideQualityIssue> get deckWideIssues =>
+      issues.where((i) => i.isDeckWide).toList();
+}

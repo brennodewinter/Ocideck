@@ -391,6 +391,10 @@ class AppSettings {
   /// presenter. 0 = geen aftelling. Live aanpasbaar tijdens presenteren (K).
   final int presentationTargetSeconds;
 
+  /// Toon een waarschuwing vóór export wanneer de slide-kwaliteitscontrole
+  /// problemen vindt (alt-tekst, contrast, tekstdichtheid).
+  final bool qualityWarningsOnExport;
+
   const AppSettings({
     this.languageCode = 'nl',
     this.homeDirectory,
@@ -403,6 +407,7 @@ class AppSettings {
     this.maxReleaseExportTlpKey,
     this.uiTextScale = 1.0,
     this.presentationTargetSeconds = 0,
+    this.qualityWarningsOnExport = true,
   });
 
   ThemeProfile get themeProfile {
@@ -457,6 +462,7 @@ class AppSettings {
     String? maxReleaseExportTlpKey,
     double? uiTextScale,
     int? presentationTargetSeconds,
+    bool? qualityWarningsOnExport,
     bool clearHomeDirectory = false,
     bool clearExportDirectory = false,
     bool clearMaxReleaseExportTlp = false,
@@ -497,6 +503,8 @@ class AppSettings {
       uiTextScale: uiTextScale ?? this.uiTextScale,
       presentationTargetSeconds:
           presentationTargetSeconds ?? this.presentationTargetSeconds,
+      qualityWarningsOnExport:
+          qualityWarningsOnExport ?? this.qualityWarningsOnExport,
     );
   }
 }

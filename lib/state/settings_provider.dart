@@ -58,6 +58,8 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       uiTextScale: (prefs.getDouble('uiTextScale') ?? 1.0).clamp(1.0, 2.0),
       presentationTargetSeconds: (prefs.getInt('presentationTargetSeconds') ?? 0)
           .clamp(0, 86400),
+      qualityWarningsOnExport:
+          prefs.getBool('qualityWarningsOnExport') ?? true,
     );
   }
 
@@ -89,6 +91,12 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     state = state.copyWith(presentationTargetSeconds: clamped);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('presentationTargetSeconds', clamped);
+  }
+
+  Future<void> setQualityWarningsOnExport(bool enabled) async {
+    state = state.copyWith(qualityWarningsOnExport: enabled);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('qualityWarningsOnExport', enabled);
   }
 
   Future<void> addRecentFile(String path) async {

@@ -449,6 +449,26 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
           ),
         ),
+        const SizedBox(height: 8),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(
+            l10n.d('Waarschuwing bij export'),
+            style: const TextStyle(fontSize: 13),
+          ),
+          subtitle: Text(
+            l10n.d(
+              'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.',
+            ),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+          value: ref.watch(
+            settingsProvider.select((s) => s.qualityWarningsOnExport),
+          ),
+          onChanged: (value) => ref
+              .read(settingsProvider.notifier)
+              .setQualityWarningsOnExport(value),
+        ),
         const SizedBox(height: 16),
         _sectionTitle(l10n.d('Presentatie')),
         _presentationTargetField(),

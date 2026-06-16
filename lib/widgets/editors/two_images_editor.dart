@@ -107,6 +107,7 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
         ImagePickerBar(
           imagePath: widget.slide.imagePath2,
           imageCaption: widget.slide.imageCaption2,
+          captionField: 'imageCaption2',
           searchPaths: widget.searchPaths,
           captionBasePath: widget.captionBasePath,
           onPicked: (path, caption) => widget.onUpdate(

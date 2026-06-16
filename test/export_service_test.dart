@@ -6,8 +6,11 @@ import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/markdown_validation.dart';
+import 'package:ocideck/models/slide_quality.dart';
 import 'package:ocideck/services/classification_policy.dart';
 import 'package:ocideck/services/export_service.dart';
+import 'package:ocideck/services/quality_export_policy.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 import 'package:path/path.dart' as p;
 import 'package:xml/xml.dart';
@@ -92,6 +95,41 @@ void main() {
     );
     expect(r.success, isTrue, reason: r.error);
   });
+
+  test(
+    'quality gate blocks export until acknowledged, writes nothing',
+    () async {
+      const policy = QualityExportPolicy();
+      const quality = SlideQualityResult([
+        SlideQualityIssue(
+          slideIndex: 0,
+          kind: SlideQualityIssueKind.missingAltCaption,
+          category: SlideQualityCategory.altText,
+          severity: MarkdownValidationSeverity.warning,
+        ),
+      ]);
+      final blocked = await service.export(
+        deckPath(),
+        ExportFormat.pdf,
+        [_png()],
+        qualityResult: quality,
+        qualityPolicy: policy,
+      );
+
+      expect(blocked.success, isFalse);
+      expect(blocked.error, contains('kwaliteitsproblemen'));
+
+      final allowed = await service.export(
+        deckPath(),
+        ExportFormat.pdf,
+        [_png()],
+        qualityResult: quality,
+        qualityPolicy: policy,
+        qualityAcknowledged: true,
+      );
+      expect(allowed.success, isTrue, reason: allowed.error);
+    },
+  );
 
   test('exports a PDF that starts with the PDF magic header', () async {
     final images = [_png(), _png()];

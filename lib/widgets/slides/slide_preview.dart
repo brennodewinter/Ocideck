@@ -16,6 +16,7 @@ import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../theme/app_theme.dart';
+import '../../services/slide_layout_metrics.dart';
 import '../../utils/log.dart';
 import 'inline_markdown.dart';
 

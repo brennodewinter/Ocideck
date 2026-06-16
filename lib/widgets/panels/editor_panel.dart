@@ -23,6 +23,7 @@ import '../editors/title_editor.dart';
 import '../editors/two_bullets_editor.dart';
 import '../editors/two_images_editor.dart';
 import '../editors/video_slide_editor.dart';
+import '../panels/slide_quality_panel.dart';
 import '../editors/markdown_deck_editor.dart';
 
 class EditorPanel extends ConsumerWidget {
@@ -90,6 +91,8 @@ class EditorPanel extends ConsumerWidget {
             onDefaultProfileRequested: () =>
                 deckNotifier.updateThemeProfile(settings.themeProfile),
           ),
+          const Divider(height: 1),
+          const SlideQualityPanel(),
           const Divider(height: 1),
 
           // ── Slide editor body ────────────────────────────────────────────

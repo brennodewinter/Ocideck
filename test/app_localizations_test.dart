@@ -52,6 +52,8 @@ void main() {
       'Slide',
       'slide',
       'Spider',
+      'Contrast',
+      ':1).',
     };
     final expression = RegExp(r'''\.d\(\s*('(?:\\.|[^'])*'|"(?:\\.|[^"])*")''');
     final files = Directory('lib')
@@ -89,6 +91,8 @@ void main() {
       'SLIDES',
       'Slide',
       'slide',
+      'Contrast',
+      ':1).',
     };
     final expression = RegExp(r'''\.d\(\s*('(?:\\.|[^'])*'|"(?:\\.|[^"])*")''');
     final files = Directory('lib')

@@ -5,6 +5,9 @@ import '../../services/caption_service.dart';
 import '../../services/description_service.dart';
 import '../../services/image_service.dart';
 import '../../state/tabs_provider.dart';
+import '../../l10n/slide_quality_localization.dart';
+import '../../state/deck_quality_provider.dart';
+import '../../state/editor_provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../dialogs/image_carousel_picker.dart';
 
@@ -199,6 +202,7 @@ class ImagePickerBar extends ConsumerWidget {
   final VoidCallback? onClear;
   final ValueChanged<String>? onCaptionChanged;
   final String label;
+  final String captionField;
 
   const ImagePickerBar({
     super.key,
@@ -212,6 +216,7 @@ class ImagePickerBar extends ConsumerWidget {
     this.onClear,
     this.onCaptionChanged,
     this.label = 'Geen afbeelding gekozen',
+    this.captionField = 'imageCaption',
   });
 
   Future<void> _openCarousel(
@@ -405,6 +410,7 @@ class ImagePickerBar extends ConsumerWidget {
             imagePath: imagePath,
             captionBasePath: captionBasePath,
             captionService: captions,
+            captionField: captionField,
             onChanged: onCaptionChanged!,
           ),
         ],
@@ -414,11 +420,12 @@ class ImagePickerBar extends ConsumerWidget {
 }
 
 /// Captionveld met auto-save naar sidecar.
-class _CaptionField extends StatefulWidget {
+class _CaptionField extends ConsumerStatefulWidget {
   final String caption;
   final String imagePath;
   final String? captionBasePath;
   final CaptionService captionService;
+  final String captionField;
   final ValueChanged<String> onChanged;
 
   const _CaptionField({
@@ -426,14 +433,15 @@ class _CaptionField extends StatefulWidget {
     required this.imagePath,
     this.captionBasePath,
     required this.captionService,
+    required this.captionField,
     required this.onChanged,
   });
 
   @override
-  State<_CaptionField> createState() => _CaptionFieldState();
+  ConsumerState<_CaptionField> createState() => _CaptionFieldState();
 }
 
-class _CaptionFieldState extends State<_CaptionField> {
+class _CaptionFieldState extends ConsumerState<_CaptionField> {
   late final TextEditingController _ctrl;
 
   @override
@@ -486,30 +494,58 @@ class _CaptionFieldState extends State<_CaptionField> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return TextField(
-      controller: _ctrl,
-      decoration: InputDecoration(
-        hintText: l10n.d('Caption / bronvermelding (bijv. © Naam Fotograaf)'),
-        hintStyle: const TextStyle(fontSize: 12, color: Color(0xFFB0BEC5)),
-        prefixIcon: const Icon(
-          Icons.copyright_outlined,
-          size: 16,
-          color: Color(0xFF64748B),
+    final slideIndex = ref.watch(editorProvider).selectedIndex;
+    final severity = slideQualitySeverityForField(
+      result: ref.watch(deckQualityProvider),
+      slideIndex: slideIndex,
+      field: widget.captionField,
+    );
+    final showHint = severity != null && widget.caption.trim().isEmpty;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextField(
+          controller: _ctrl,
+          decoration: InputDecoration(
+            hintText: l10n.d('Caption / bronvermelding (bijv. © Naam Fotograaf)'),
+            hintStyle: const TextStyle(fontSize: 12, color: Color(0xFFB0BEC5)),
+            prefixIcon: Icon(
+              Icons.copyright_outlined,
+              size: 16,
+              color: showHint ? const Color(0xFFB45309) : const Color(0xFF64748B),
+            ),
+            isDense: true,
+            contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+            filled: true,
+            fillColor: showHint ? const Color(0xFFFFFBEB) : const Color(0xFFF8FAFC),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(6),
+              borderSide: BorderSide(
+                color: showHint ? const Color(0xFFF59E0B) : const Color(0xFFCBD5E1),
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(6),
+              borderSide: BorderSide(
+                color: showHint ? const Color(0xFFD97706) : const Color(0xFF64748B),
+              ),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(6),
+              borderSide: const BorderSide(color: Color(0xFFCBD5E1)),
+            ),
+          ),
+          style: const TextStyle(fontSize: 12),
         ),
-        isDense: true,
-        contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-        filled: true,
-        fillColor: const Color(0xFFF8FAFC),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(6),
-          borderSide: const BorderSide(color: Color(0xFFCBD5E1)),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(6),
-          borderSide: const BorderSide(color: Color(0xFFCBD5E1)),
-        ),
-      ),
-      style: const TextStyle(fontSize: 12),
+        if (showHint) ...[
+          const SizedBox(height: 4),
+          Text(
+            l10n.d('Voeg alt-tekst / bijschrift toe voor toegankelijkheid'),
+            style: const TextStyle(fontSize: 10, color: Color(0xFFB45309)),
+          ),
+        ],
+      ],
     );
   }
 }

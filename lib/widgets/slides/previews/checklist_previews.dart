@@ -225,7 +225,7 @@ class _ChecklistBulletRow extends StatelessWidget {
                   ? SystemMouseCursors.click
                   : MouseCursor.defer,
               child: Text(
-                '${_listMarker(bullets, itemIndex, listStyle)} ',
+                '${bulletListMarker(bullets, itemIndex, listStyle)} ',
                 style: TextStyle(
                   fontSize: fontSize,
                   color: _hexColor(profile.accentColor),
@@ -242,7 +242,7 @@ class _ChecklistBulletRow extends StatelessWidget {
                 font,
                 TextStyle(
                   fontSize: fontSize,
-                  height: _kBulletLineHeight,
+                  height: kBulletLineHeight,
                   color: _hexColor(profile.textColor),
                   decoration: checked && profile.checklistStrikeThrough
                       ? TextDecoration.lineThrough

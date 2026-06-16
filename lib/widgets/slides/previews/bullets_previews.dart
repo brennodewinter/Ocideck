@@ -52,7 +52,7 @@ class _BulletsPreview extends StatelessWidget {
     final availH = slideHeight - (vPad + safe.top) - (vPad + safe.bottom);
     // Grow (or, when needed, shrink) the text so it uses the full vertical
     // space instead of leaving a large empty area below a few short bullets.
-    final scale = _bulletsFitScale(
+    final scale = bulletsFitScale(
       availW: textAvailW,
       availH: availH,
       hasTitle: hasTitle,
@@ -65,7 +65,7 @@ class _BulletsPreview extends StatelessWidget {
       font: font,
       subtitle: subtitle,
       subtitleSize: subtitleSize,
-      maxScale: _bulletScaleCap(w, bulletSize, _kSplitBulletsMaxScale),
+      maxScale: bulletScaleCap(w, bulletSize, kSplitBulletsMaxScale),
       listStyle: slide.listStyle,
     );
 
@@ -269,7 +269,7 @@ class _TwoBulletsPreview extends StatelessWidget {
     final columnW = ((contentW - columnGap) / 2).clamp(w * 0.12, w);
     var availH = slideHeight - (vPad + safe.top) - (vPad + safe.bottom);
     if (hasTitle) {
-      availH -= _measureTextHeight(
+      availH -= measureTextHeight(
         slide.title,
         titleSize,
         contentW,
@@ -281,7 +281,7 @@ class _TwoBulletsPreview extends StatelessWidget {
     // Reserve room for the (optional) column headings so the bullets still fit.
     double headingHeight(String t) => t.isEmpty
         ? 0
-        : _measureTextHeight(
+        : measureTextHeight(
             t,
             headingSize,
             columnW,
@@ -293,7 +293,7 @@ class _TwoBulletsPreview extends StatelessWidget {
       headingHeight(col2Title),
     );
     if (hasColumnTitles) availH -= maxHeadingH + headingGap;
-    final leftScale = _bulletsFitScale(
+    final leftScale = bulletsFitScale(
       availW: columnW,
       availH: availH,
       hasTitle: false,
@@ -304,10 +304,10 @@ class _TwoBulletsPreview extends StatelessWidget {
       spacing: spacing,
       bulletGap: bulletGap,
       font: font,
-      maxScale: _bulletScaleCap(w, bulletSize, _kBulletsMaxScale),
+      maxScale: bulletScaleCap(w, bulletSize, kBulletsMaxScale),
       listStyle: slide.listStyle,
     );
-    final rightScale = _bulletsFitScale(
+    final rightScale = bulletsFitScale(
       availW: columnW,
       availH: availH,
       hasTitle: false,
@@ -318,7 +318,7 @@ class _TwoBulletsPreview extends StatelessWidget {
       spacing: spacing,
       bulletGap: bulletGap,
       font: font,
-      maxScale: _bulletScaleCap(w, bulletSize, _kBulletsMaxScale),
+      maxScale: bulletScaleCap(w, bulletSize, kBulletsMaxScale),
       listStyle: slide.listStyle,
     );
     // Treat both columns as one composition: the busiest column determines
@@ -468,7 +468,7 @@ class _BulletsImagePreview extends StatelessWidget {
     // still fits the available height at the full column width. This keeps the
     // text as large as possible and lets it span the full width toward the
     // image, instead of uniformly shrinking and leaving a wide gap.
-    final scale = _bulletsFitScale(
+    final scale = bulletsFitScale(
       availW: availW,
       availH: availH,
       hasTitle: hasTitle,
@@ -479,7 +479,7 @@ class _BulletsImagePreview extends StatelessWidget {
       spacing: spacing,
       bulletGap: bulletGap,
       font: font,
-      maxScale: _bulletScaleCap(w, bulletSize, _kBulletsMaxScale),
+      maxScale: bulletScaleCap(w, bulletSize, kBulletsMaxScale),
       listStyle: slide.listStyle,
     );
 
@@ -589,7 +589,7 @@ class _BulletsImagePreview extends StatelessWidget {
               : b.substring(level);
           final checked =
               slide.listStyle == ListStyle.checklist && checklistItemChecked(b);
-          final fontSize = bulletSize * _bulletLevelScale(level) * scale;
+          final fontSize = bulletSize * bulletLevelScale(level) * scale;
           return _ChecklistBulletRow(
             bullets: bullets,
             itemIndex: entry.key,
@@ -649,7 +649,7 @@ class _BulletListColumn extends StatelessWidget {
               : b.substring(level);
           final checked =
               listStyle == ListStyle.checklist && checklistItemChecked(b);
-          final fontSize = bulletSize * _bulletLevelScale(level) * scale;
+          final fontSize = bulletSize * bulletLevelScale(level) * scale;
           return _ChecklistBulletRow(
             bullets: bullets,
             itemIndex: entry.key,
@@ -669,248 +669,4 @@ class _BulletListColumn extends StatelessWidget {
       ],
     );
   }
-}
-
-/// Upper bound for growing bullet text to fill otherwise empty vertical space.
-const double _kBulletsMaxScale = 3.2;
-
-/// Split slides have a much narrower column, so short bullet lists can stay
-/// visually timid unless they are allowed to grow a little further.
-const double _kSplitBulletsMaxScale = 4.35;
-
-/// Hard ceiling for the *rendered* bullet text size when auto-growing, as a
-/// fraction of the slide width: ≈32pt on a standard 16:9 deck (PowerPoint's
-/// 960pt-wide canvas). Presentation-design guidance consistently puts body
-/// text at 24–32pt — beyond that it stops aiding readability and starts
-/// competing with the title. The fit scale multiplies title and bullets
-/// alike, so capping the bullet size also keeps the hierarchy intact.
-const double _kBulletMaxFontFraction = 0.0335;
-
-/// The largest auto-fit scale that keeps bullets at or under
-/// [_kBulletMaxFontFraction], given the layout's own [layoutMax] growth bound.
-double _bulletScaleCap(double w, double bulletSize, double layoutMax) =>
-    math.min(layoutMax, _kBulletMaxFontFraction * w / bulletSize);
-
-/// Line height used for bullet body text, shared by rendering and measuring.
-const double _kBulletLineHeight = 1.16;
-
-String _bulletMarkerForLevel(int level) {
-  const markers = ['•', '◦', '▪', '▫', '–'];
-  return markers[level.clamp(0, markers.length - 1)];
-}
-
-String _listMarker(List<String> items, int index, ListStyle style) {
-  int levelOf(String item) {
-    var level = 0;
-    while (level < item.length && item[level] == '\t') {
-      level++;
-    }
-    return level;
-  }
-
-  final level = levelOf(items[index]);
-  if (style == ListStyle.bullets) return _bulletMarkerForLevel(level);
-  if (style == ListStyle.checklist) {
-    return checklistItemChecked(items[index]) ? '☑' : '☐';
-  }
-  var number = 0;
-  for (var i = 0; i <= index; i++) {
-    final itemLevel = levelOf(items[i]);
-    if (itemLevel == level) number++;
-    if (itemLevel < level) number = 0;
-  }
-  return '$number.';
-}
-
-double _bulletLevelScale(int level) {
-  if (level <= 0) return 1.0;
-  if (level == 1) return 0.86;
-  if (level == 2) return 0.80;
-  return 0.76;
-}
-
-/// Largest scale in [minScale, maxScale] for which the bullet block fits
-/// [availH] at the full column width. Unlike a plain `BoxFit.scaleDown`, this
-/// also grows the text *above* its design size when there is spare vertical
-/// room, so short slides use the full height instead of clustering at the top.
-double _bulletsFitScale({
-  required double availW,
-  required double availH,
-  required bool hasTitle,
-  required String title,
-  required List<String> bullets,
-  required double titleSize,
-  required double bulletSize,
-  required double spacing,
-  required double bulletGap,
-  required String font,
-  String subtitle = '',
-  double subtitleSize = 0,
-  double minScale = 0.2,
-  double maxScale = 1.0,
-  ListStyle listStyle = ListStyle.bullets,
-}) {
-  if (availW <= 0 || !availH.isFinite || availH <= 0) return 1.0;
-  // 2% safety margin so minor measurement differences never overflow.
-  final budget = availH * 0.98;
-  double measure(double scale) => _bulletsBlockHeight(
-    scale: scale,
-    availW: availW,
-    listStyle: listStyle,
-    hasTitle: hasTitle,
-    title: title,
-    bullets: bullets,
-    titleSize: titleSize,
-    bulletSize: bulletSize,
-    spacing: spacing,
-    bulletGap: bulletGap,
-    font: font,
-    subtitle: subtitle,
-    subtitleSize: subtitleSize,
-  );
-
-  // Everything already fits at the largest allowed size → use it.
-  if (measure(maxScale) <= budget) return maxScale;
-
-  // Otherwise binary-search the largest scale that fits. Search upward from the
-  // design size when it fits, downward when even the design size overflows.
-  double lo, hi;
-  if (maxScale > 1.0 && measure(1.0) <= budget) {
-    lo = 1.0;
-    hi = maxScale;
-  } else {
-    lo = minScale;
-    hi = maxScale > 1.0 ? 1.0 : maxScale;
-  }
-  for (var i = 0; i < 24; i++) {
-    final mid = (lo + hi) / 2;
-    if (measure(mid) <= budget) {
-      lo = mid;
-    } else {
-      hi = mid;
-    }
-  }
-  return lo;
-}
-
-double _bulletsBlockHeight({
-  required double scale,
-  required double availW,
-  required bool hasTitle,
-  required String title,
-  required List<String> bullets,
-  required double titleSize,
-  required double bulletSize,
-  required double spacing,
-  required double bulletGap,
-  required String font,
-  String subtitle = '',
-  double subtitleSize = 0,
-  ListStyle listStyle = ListStyle.bullets,
-}) {
-  var height = 0.0;
-  if (hasTitle) {
-    height += _measureTextHeight(
-      title,
-      titleSize * scale,
-      availW,
-      bold: true,
-      fontFamily: font,
-    );
-  }
-  if (subtitle.isNotEmpty) {
-    height += spacing * scale * 0.4;
-    height += _measureTextHeight(
-      subtitle,
-      subtitleSize * scale,
-      availW,
-      bold: true,
-      fontFamily: font,
-    );
-  }
-  if ((hasTitle || subtitle.isNotEmpty) && bullets.isNotEmpty) {
-    height += spacing * scale;
-  }
-  for (var i = 0; i < bullets.length; i++) {
-    final b = bullets[i];
-    int level = 0;
-    while (level < b.length && b[level] == '\t') {
-      level++;
-    }
-    // Measure exactly what gets rendered: checklists strip the `[x] ` prefix
-    // and use a checkbox marker, numbered lists use `N.`. Measuring the raw
-    // string with a bullet marker over-counts the height and would shrink the
-    // text below the space it actually needs.
-    final text = listStyle == ListStyle.checklist
-        ? checklistItemText(b)
-        : b.substring(level);
-    final fontSize = bulletSize * _bulletLevelScale(level) * scale;
-    final indent = level * bulletSize * 1.05 * scale;
-    final marker = '${_listMarker(bullets, i, listStyle)} ';
-    final markerW = _measureTextWidth(
-      marker,
-      fontSize,
-      bold: true,
-      fontFamily: font,
-    );
-    final wrapW = (availW - indent - markerW).clamp(1.0, availW);
-    final textH = _measureTextHeight(
-      text,
-      fontSize,
-      wrapW,
-      lineHeight: _kBulletLineHeight,
-      fontFamily: font,
-    );
-    final markerH = _measureTextHeight(
-      marker,
-      fontSize,
-      double.infinity,
-      fontFamily: font,
-    );
-    height += bulletGap * scale * 2 + (textH > markerH ? textH : markerH);
-  }
-  return height;
-}
-
-double _measureTextHeight(
-  String text,
-  double fontSize,
-  double maxWidth, {
-  double? lineHeight,
-  bool bold = false,
-  String? fontFamily,
-}) {
-  final painter = TextPainter(
-    text: TextSpan(
-      text: stripInlineMarkdown(text),
-      style: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: fontSize,
-        height: lineHeight,
-        fontWeight: bold ? FontWeight.bold : null,
-      ),
-    ),
-    textDirection: TextDirection.ltr,
-  )..layout(maxWidth: maxWidth.isFinite ? maxWidth : double.infinity);
-  return painter.height;
-}
-
-double _measureTextWidth(
-  String text,
-  double fontSize, {
-  bool bold = false,
-  String? fontFamily,
-}) {
-  final painter = TextPainter(
-    text: TextSpan(
-      text: stripInlineMarkdown(text),
-      style: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: fontSize,
-        fontWeight: bold ? FontWeight.bold : null,
-      ),
-    ),
-    textDirection: TextDirection.ltr,
-  )..layout();
-  return painter.width;
 }

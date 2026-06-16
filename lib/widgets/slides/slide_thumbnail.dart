@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../models/markdown_validation.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../state/deck_quality_provider.dart';
 import '../../state/slide_clipboard_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
@@ -47,6 +49,11 @@ class SlideThumbnail extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final skipped = slide.skipped;
+    final slideIssues = ref.watch(deckQualityProvider).forSlide(index);
+    final hasQualityErrors = slideIssues.any(
+      (i) => i.severity == MarkdownValidationSeverity.error,
+    );
+    final hasQualityWarnings = slideIssues.isNotEmpty;
     final borderColor = isSelected
         ? AppTheme.accent
         : skipped
@@ -62,7 +69,8 @@ class SlideThumbnail extends ConsumerWidget {
     final semanticLabel =
         '${l10n.d('Slide')} ${index + 1}/$slideCount: '
         '${title.isNotEmpty ? title : l10n.d(slide.type.label)}'
-        '${skipped ? ' (${l10n.d('Overgeslagen')})' : ''}';
+        '${skipped ? ' (${l10n.d('Overgeslagen')})' : ''}'
+        '${hasQualityWarnings ? ' (${l10n.d('Kwaliteitsprobleem')})' : ''}';
 
     return Semantics(
       button: true,
@@ -136,6 +144,34 @@ class SlideThumbnail extends ConsumerWidget {
                                     ),
                                   ),
                                 ],
+                              ),
+                            ),
+                          ),
+                        if (hasQualityWarnings)
+                          Positioned(
+                            top: 4,
+                            right: 4,
+                            child: Tooltip(
+                              message: hasQualityErrors
+                                  ? l10n.d(
+                                      'Kwaliteitsproblemen (inclusief ernstige)',
+                                    )
+                                  : l10n.d('Kwaliteitsproblemen'),
+                              child: Container(
+                                padding: const EdgeInsets.all(3),
+                                decoration: BoxDecoration(
+                                  color: Color(
+                                    hasQualityErrors
+                                        ? 0xCCD32F2F
+                                        : 0xCCB45309,
+                                  ),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: Icon(
+                                  Icons.accessibility_new_outlined,
+                                  size: 10,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),

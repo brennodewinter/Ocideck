@@ -193,6 +193,14 @@ OciDeck aims for WCAG 2.1 in the editor:
 - **Screen readers** — slide thumbnails announce a concise label ("Slide 3/12:
   title", including the skipped state), charts read out their data as a text
   alternative, and the fullscreen presenter announces every slide change.
+- **Slide quality** — while you edit, OciDeck checks each slide for missing
+  alt text/captions, low theme contrast, and overcrowded text (font auto-fit
+  shrinking too far). Issues appear as badges on slide thumbnails, in a
+  collapsible **Slide quality** bar in the editor, and inline hints on image
+  caption fields. Before export you can get a confirmation dialog listing open
+  issues (**Settings → General → Accessibility → Warn on export**; on by
+  default). Quality checks warn but do not block export once you choose
+  **Export anyway**.
 
 ## Markdown mode
 

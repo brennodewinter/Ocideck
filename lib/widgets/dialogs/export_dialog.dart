@@ -2,12 +2,16 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import '../../models/deck.dart';
+import '../../models/markdown_validation.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../models/slide_quality.dart';
 import '../../services/classification_policy.dart';
 import '../../services/export_service.dart';
+import '../../services/quality_export_policy.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../l10n/app_localizations.dart';
+import '../../l10n/slide_quality_localization.dart';
 
 /// Exports the deck by rendering the on-screen slide previews to images and
 /// packing them into a PDF or PPTX (WYSIWYG — the export matches the preview).
@@ -21,6 +25,12 @@ class ExportDialog extends StatefulWidget {
 
   /// Classificatie-gate. Standaard geen plafond (alles mag).
   final ClassificationPolicy policy;
+
+  /// Slide-kwaliteit van de te exporteren slides.
+  final SlideQualityResult qualityResult;
+
+  /// Soft gate — waarschuwing vóór export wanneer ingeschakeld.
+  final QualityExportPolicy qualityPolicy;
 
   /// Folder all exports are written to. Null = next to the source deck.
   final String? exportDirectory;
@@ -37,6 +47,8 @@ class ExportDialog extends StatefulWidget {
     required this.exportService,
     this.tlp = TlpLevel.none,
     this.policy = const ClassificationPolicy(),
+    this.qualityResult = const SlideQualityResult([]),
+    this.qualityPolicy = const QualityExportPolicy(),
     this.exportDirectory,
     this.markdown = '',
   });
@@ -50,6 +62,8 @@ class ExportDialog extends StatefulWidget {
     required ExportService exportService,
     TlpLevel tlp = TlpLevel.none,
     ClassificationPolicy policy = const ClassificationPolicy(),
+    SlideQualityResult qualityResult = const SlideQualityResult([]),
+    QualityExportPolicy qualityPolicy = const QualityExportPolicy(),
     String? exportDirectory,
     String markdown = '',
   }) {
@@ -64,6 +78,8 @@ class ExportDialog extends StatefulWidget {
         exportService: exportService,
         tlp: tlp,
         policy: policy,
+        qualityResult: qualityResult,
+        qualityPolicy: qualityPolicy,
         exportDirectory: exportDirectory,
         markdown: markdown,
       ),
@@ -86,7 +102,86 @@ class _ExportDialogState extends State<ExportDialog> {
   /// downscaled JPEG handout.
   bool _compress = false;
 
+  Future<bool> _confirmQualityExport() async {
+    final decision = widget.qualityPolicy.evaluate(widget.qualityResult);
+    if (decision.allowed) return true;
+
+    final l10n = context.l10n;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) {
+        final issues = widget.qualityResult.issues.take(8).toList();
+        return AlertDialog(
+          title: Text(l10n.d('Kwaliteitsproblemen gevonden')),
+          content: SizedBox(
+            width: 480,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  '${decision.errorCount} ${l10n.d('fout(en),')} '
+                  '${decision.warningCount} ${l10n.d('waarschuwing(en)')}',
+                ),
+                const SizedBox(height: 12),
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxHeight: 220),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (final issue in issues)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 6),
+                            child: Text(
+                              issue.isDeckWide
+                                  ? '${l10n.d('Thema (hele presentatie)')}: '
+                                        '${formatSlideQualityIssue(l10n, issue)}'
+                                  : '${l10n.d('Slide')} ${issue.slideIndex + 1}: '
+                                        '${formatSlideQualityIssue(l10n, issue)}',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: issue.severity ==
+                                        MarkdownValidationSeverity.error
+                                    ? Colors.red.shade800
+                                    : const Color(0xFF92400E),
+                              ),
+                            ),
+                          ),
+                        if (widget.qualityResult.issues.length > issues.length)
+                          Text(
+                            l10n.d('… en meer problemen in het kwaliteitspaneel.'),
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: Color(0xFF94A3B8),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: Text(l10n.t('cancel')),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: Text(l10n.d('Toch exporteren')),
+            ),
+          ],
+        );
+      },
+    );
+    return confirmed == true;
+  }
+
   Future<void> _export(ExportFormat format, {bool compress = false}) async {
+    if (!await _confirmQualityExport()) return;
+
     final l10n = context.l10n;
     // HTML renders from Markdown in the browser, so it needs no slide raster.
     final needsRaster = format != ExportFormat.html;
@@ -140,6 +235,9 @@ class _ExportDialogState extends State<ExportDialog> {
       themeProfile: widget.themeProfile,
       tlp: widget.tlp,
       policy: widget.policy,
+      qualityResult: widget.qualityResult,
+      qualityPolicy: widget.qualityPolicy,
+      qualityAcknowledged: true,
     );
 
     if (!mounted) return;
@@ -263,6 +361,7 @@ class _ExportDialogState extends State<ExportDialog> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        if (widget.qualityResult.hasIssues) _qualityBanner(l10n),
         Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
@@ -331,6 +430,43 @@ class _ExportDialogState extends State<ExportDialog> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _qualityBanner(AppLocalizations l10n) {
+    final hasErrors = widget.qualityResult.errorCount > 0;
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: hasErrors ? const Color(0xFFFEE2E2) : const Color(0xFFFEF3C7),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+          color: hasErrors ? const Color(0xFFFECACA) : const Color(0xFFFDE68A),
+        ),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            Icons.accessibility_new_outlined,
+            size: 16,
+            color: hasErrors ? Colors.red.shade700 : const Color(0xFF92400E),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              '${l10n.d('Slidekwaliteit')}: '
+              '${widget.qualityResult.errorCount} ${l10n.d('fout(en),')} '
+              '${widget.qualityResult.warningCount} ${l10n.d('waarschuwing(en)')}',
+              style: TextStyle(
+                fontSize: 11,
+                color: hasErrors ? Colors.red.shade800 : const Color(0xFF92400E),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

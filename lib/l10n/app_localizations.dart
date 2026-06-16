@@ -2623,6 +2623,66 @@ const _dutchSourceStringAdditions = {
         'You can withdraw your consent at any time. After withdrawal you must accept these terms again.',
     'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
         'If you withdraw your consent, you must accept these terms again when you restart OciDeck.',
+    'Slidekwaliteit': 'Slide quality',
+    'Geen kwaliteitsproblemen gevonden': 'No quality issues found',
+    'Thema (hele presentatie)': 'Theme (entire presentation)',
+    'Kwaliteitsprobleem': 'Quality issue',
+    'Kwaliteitsproblemen': 'Quality issues',
+    'Kwaliteitsproblemen (inclusief ernstige)':
+        'Quality issues (including serious ones)',
+    'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+        'Add alt text / caption for accessibility',
+    'Alt-tekst': 'Alt text',
+    'Tekstdichtheid': 'Text density',
+    'Contrast': 'Contrast',
+    'heeft geen bijschrift/alt-tekst.': 'has no caption/alt text.',
+    'contrastverhouding': 'contrast ratio',
+    '(minimaal ': '(minimum ',
+    ':1 voor normale tekst).': ':1 for normal text).',
+    ':1 voor grote tekst).': ':1 for large text).',
+    ':1).': ':1).',
+    'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+        'Contrast of text on or over an image cannot be checked automatically — verify visually.',
+    'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+        'Chart has no title or descriptive data — add a title or series names.',
+    'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+        'has no title or speaker notes describing the content.',
+    'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+        'A lot of text on this slide: font size is reduced to ',
+    ' van de ontwerpgrootte.': ' of the design size.',
+    'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+        'A lot of text on this slide: font size is heavily reduced (',
+    'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+        'of the design size). Consider splitting the content.',
+    'Grote tabel (': 'Large table (',
+    ' rijen, ': ' rows, ',
+    ' kolommen): celtekst staat op het minimumformaat.':
+        ' columns): cell text is at the minimum size.',
+    'Veel broncode (': 'A lot of source code (',
+    ' regels) — de tekst wordt sterk verkleind om te passen.':
+        ' lines) — text is heavily reduced to fit.',
+    'Veel vrije markdown (': 'A lot of free markdown (',
+    ' regels) — controleer of alles leesbaar blijft op de slide.':
+        ' lines) — check that everything stays readable on the slide.',
+    'Lange titelpagina (': 'Long title slide (',
+    ' tekens) — de tekst wordt verkleind om te passen.':
+        ' characters) — text is reduced to fit.',
+    'Thema bodytekst': 'Theme body text',
+    'Thema titel': 'Theme title',
+    'Thema tabeltekst': 'Theme table text',
+    'Thema tabelkop': 'Theme table header',
+    'Thema code': 'Theme code',
+    'Tussentitel': 'Section heading',
+    'Eerste afbeelding': 'First image',
+    'Tweede afbeelding': 'Second image',
+    'Achtergrondafbeelding': 'Background image',
+    'Waarschuwing bij export': 'Warn on export',
+    'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+        'Ask for confirmation before exporting when slide quality issues are present.',
+    'Kwaliteitsproblemen gevonden': 'Quality issues found',
+    'Toch exporteren': 'Export anyway',
+    '… en meer problemen in het kwaliteitspaneel.':
+        '… and more issues in the quality panel.',
   },
   'it': {
     'Toegankelijkheid': 'Accessibilità',
@@ -2950,6 +3010,77 @@ const _dutchSourceStringAdditions = {
         'Puoi revocare il consenso in qualsiasi momento. Dopo la revoca dovrai accettare nuovamente questi termini.',
     'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
         'Se revochi il consenso, dovrai accettare nuovamente questi termini al riavvio di OciDeck.',
+    'Controleren': 'Controlla sintassi',
+    'Syntaxproblemen gevonden': 'Problemi di sintassi trovati',
+    'De markdown bevat': 'Il markdown contiene',
+    'Geen syntaxproblemen gevonden': 'Nessun problema di sintassi trovato',
+    'Terug naar editor': 'Torna all\'editor',
+    'Toch toepassen': 'Applica comunque',
+    'fout(en) en': 'errore/i e',
+    'fout(en),': 'errore/i,',
+    'waarschuwing(en)': 'avviso/i',
+    'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+        'avviso/i. Le slide potrebbero essere interpretate in modo errato.',
+    'Slidekwaliteit': 'Qualità slide',
+    'Geen kwaliteitsproblemen gevonden': 'Nessun problema di qualità trovato',
+    'Thema (hele presentatie)': 'Tema (intera presentazione)',
+    'Kwaliteitsprobleem': 'Problema di qualità',
+    'Kwaliteitsproblemen': 'Problemi di qualità',
+    'Kwaliteitsproblemen (inclusief ernstige)':
+        'Problemi di qualità (inclusi quelli gravi)',
+    'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+        'Aggiungi testo alt / didascalia per l\'accessibilità',
+    'Alt-tekst': 'Testo alt',
+    'Tekstdichtheid': 'Densità del testo',
+    'Contrast': 'Contrasto',
+    'heeft geen bijschrift/alt-tekst.': 'non ha didascalia/testo alt.',
+    'contrastverhouding': 'rapporto di contrasto',
+    '(minimaal ': '(minimo ',
+    ':1 voor normale tekst).': ':1 per testo normale).',
+    ':1 voor grote tekst).': ':1 per testo grande).',
+    ':1).': ':1).',
+    'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+        'Il contrasto del testo su o sopra un\'immagine non può essere verificato automaticamente — controlla visivamente.',
+    'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+        'Il grafico non ha titolo o dati descrittivi — aggiungi un titolo o nomi delle serie.',
+    'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+        'non ha titolo o note del relatore che descrivono il contenuto.',
+    'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+        'Molto testo su questa slide: il carattere è ridotto a ',
+    ' van de ontwerpgrootte.': ' della dimensione di progetto.',
+    'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+        'Molto testo su questa slide: il carattere è fortemente ridotto (',
+    'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+        'della dimensione di progetto). Valuta di dividere il contenuto.',
+    'Grote tabel (': 'Tabella grande (',
+    ' rijen, ': ' righe, ',
+    ' kolommen): celtekst staat op het minimumformaat.':
+        ' colonne): il testo delle celle è alla dimensione minima.',
+    'Veel broncode (': 'Molto codice sorgente (',
+    ' regels) — de tekst wordt sterk verkleind om te passen.':
+        ' righe) — il testo è fortemente ridotto per adattarsi.',
+    'Veel vrije markdown (': 'Molto markdown libero (',
+    ' regels) — controleer of alles leesbaar blijft op de slide.':
+        ' righe) — verifica che tutto resti leggibile sulla slide.',
+    'Lange titelpagina (': 'Diapositiva titolo lunga (',
+    ' tekens) — de tekst wordt verkleind om te passen.':
+        ' caratteri) — il testo è ridotto per adattarsi.',
+    'Thema bodytekst': 'Testo corpo del tema',
+    'Thema titel': 'Titolo del tema',
+    'Thema tabeltekst': 'Testo tabella del tema',
+    'Thema tabelkop': 'Intestazione tabella del tema',
+    'Thema code': 'Codice del tema',
+    'Tussentitel': 'Intestazione di sezione',
+    'Eerste afbeelding': 'Prima immagine',
+    'Tweede afbeelding': 'Seconda immagine',
+    'Achtergrondafbeelding': 'Immagine di sfondo',
+    'Waarschuwing bij export': 'Avviso in export',
+    'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+        'Chiedi conferma prima di esportare quando ci sono problemi di qualità delle slide.',
+    'Kwaliteitsproblemen gevonden': 'Problemi di qualità trovati',
+    'Toch exporteren': 'Esporta comunque',
+    '… en meer problemen in het kwaliteitspaneel.':
+        '… e altri problemi nel pannello qualità.',
   },
   'de': {
     'Toegankelijkheid': 'Barrierefreiheit',
@@ -3277,6 +3408,77 @@ const _dutchSourceStringAdditions = {
         'Sie können Ihre Zustimmung jederzeit widerrufen. Nach dem Widerruf müssen Sie diese Bedingungen erneut akzeptieren.',
     'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
         'Wenn Sie Ihre Zustimmung widerrufen, müssen Sie diese Bedingungen beim Neustart von OciDeck erneut akzeptieren.',
+    'Controleren': 'Syntax prüfen',
+    'Syntaxproblemen gevonden': 'Syntaxprobleme gefunden',
+    'De markdown bevat': 'Das Markdown enthält',
+    'Geen syntaxproblemen gevonden': 'Keine Syntaxprobleme gefunden',
+    'Terug naar editor': 'Zurück zum Editor',
+    'Toch toepassen': 'Trotzdem anwenden',
+    'fout(en) en': 'Fehler und',
+    'fout(en),': 'Fehler,',
+    'waarschuwing(en)': 'Warnung(en)',
+    'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+        'Warnung(en). Folien können dadurch falsch eingelesen werden.',
+    'Slidekwaliteit': 'Folienqualität',
+    'Geen kwaliteitsproblemen gevonden': 'Keine Qualitätsprobleme gefunden',
+    'Thema (hele presentatie)': 'Design (gesamte Präsentation)',
+    'Kwaliteitsprobleem': 'Qualitätsproblem',
+    'Kwaliteitsproblemen': 'Qualitätsprobleme',
+    'Kwaliteitsproblemen (inclusief ernstige)':
+        'Qualitätsprobleme (einschließlich schwerwiegender)',
+    'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+        'Alt-Text / Bildunterschrift für Barrierefreiheit hinzufügen',
+    'Alt-tekst': 'Alt-Text',
+    'Tekstdichtheid': 'Textdichte',
+    'Contrast': 'Kontrast',
+    'heeft geen bijschrift/alt-tekst.': 'hat keine Bildunterschrift/Alt-Text.',
+    'contrastverhouding': 'Kontrastverhältnis',
+    '(minimaal ': '(mindestens ',
+    ':1 voor normale tekst).': ':1 für normalen Text).',
+    ':1 voor grote tekst).': ':1 für großen Text).',
+    ':1).': ':1).',
+    'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+        'Der Kontrast von Text auf oder über einem Bild kann nicht automatisch geprüft werden — visuell prüfen.',
+    'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+        'Diagramm hat keinen Titel oder beschreibende Daten — Titel oder Seriennamen hinzufügen.',
+    'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+        'hat keinen Titel oder Sprechernotizen, die den Inhalt beschreiben.',
+    'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+        'Viel Text auf dieser Folie: Schriftgröße wird verkleinert auf ',
+    ' van de ontwerpgrootte.': ' der Entwurfsgröße.',
+    'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+        'Viel Text auf dieser Folie: Schriftgröße wird stark verkleinert (',
+    'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+        'der Entwurfsgröße). Inhalt aufteilen erwägen.',
+    'Grote tabel (': 'Große Tabelle (',
+    ' rijen, ': ' Zeilen, ',
+    ' kolommen): celtekst staat op het minimumformaat.':
+        ' Spalten): Zelltext ist auf Mindestgröße.',
+    'Veel broncode (': 'Viel Quellcode (',
+    ' regels) — de tekst wordt sterk verkleind om te passen.':
+        ' Zeilen) — Text wird stark verkleinert, um zu passen.',
+    'Veel vrije markdown (': 'Viel freies Markdown (',
+    ' regels) — controleer of alles leesbaar blijft op de slide.':
+        ' Zeilen) — prüfen, ob alles auf der Folie lesbar bleibt.',
+    'Lange titelpagina (': 'Lange Titelfolie (',
+    ' tekens) — de tekst wordt verkleind om te passen.':
+        ' Zeichen) — Text wird verkleinert, um zu passen.',
+    'Thema bodytekst': 'Design-Fließtext',
+    'Thema titel': 'Design-Titel',
+    'Thema tabeltekst': 'Design-Tabellentext',
+    'Thema tabelkop': 'Design-Tabellenkopf',
+    'Thema code': 'Design-Code',
+    'Tussentitel': 'Abschnittsüberschrift',
+    'Eerste afbeelding': 'Erstes Bild',
+    'Tweede afbeelding': 'Zweites Bild',
+    'Achtergrondafbeelding': 'Hintergrundbild',
+    'Waarschuwing bij export': 'Warnung beim Export',
+    'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+        'Vor dem Export bestätigen lassen, wenn Folienqualitätsprobleme vorliegen.',
+    'Kwaliteitsproblemen gevonden': 'Qualitätsprobleme gefunden',
+    'Toch exporteren': 'Trotzdem exportieren',
+    '… en meer problemen in het kwaliteitspaneel.':
+        '… und weitere Probleme im Qualitätsbereich.',
   },
   'fr': {
     'Toegankelijkheid': 'Accessibilité',
@@ -3608,6 +3810,77 @@ const _dutchSourceStringAdditions = {
         'Vous pouvez révoquer votre consentement à tout moment. Après la révocation, vous devrez accepter à nouveau ces conditions.',
     'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
         'Si vous révoquez votre consentement, vous devrez accepter à nouveau ces conditions au redémarrage d\'OciDeck.',
+    'Controleren': 'Vérifier la syntaxe',
+    'Syntaxproblemen gevonden': 'Problèmes de syntaxe détectés',
+    'De markdown bevat': 'Le markdown contient',
+    'Geen syntaxproblemen gevonden': 'Aucun problème de syntaxe trouvé',
+    'Terug naar editor': 'Retour à l\'éditeur',
+    'Toch toepassen': 'Appliquer quand même',
+    'fout(en) en': 'erreur(s) et',
+    'fout(en),': 'erreur(s),',
+    'waarschuwing(en)': 'avertissement(s)',
+    'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+        'avertissement(s). Les slides peuvent être mal interprétées.',
+    'Slidekwaliteit': 'Qualité des slides',
+    'Geen kwaliteitsproblemen gevonden': 'Aucun problème de qualité trouvé',
+    'Thema (hele presentatie)': 'Thème (présentation entière)',
+    'Kwaliteitsprobleem': 'Problème de qualité',
+    'Kwaliteitsproblemen': 'Problèmes de qualité',
+    'Kwaliteitsproblemen (inclusief ernstige)':
+        'Problèmes de qualité (y compris graves)',
+    'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+        'Ajoutez un texte alt / une légende pour l\'accessibilité',
+    'Alt-tekst': 'Texte alt',
+    'Tekstdichtheid': 'Densité du texte',
+    'Contrast': 'Contraste',
+    'heeft geen bijschrift/alt-tekst.': 'n\'a pas de légende/texte alt.',
+    'contrastverhouding': 'rapport de contraste',
+    '(minimaal ': '(minimum ',
+    ':1 voor normale tekst).': ':1 pour texte normal).',
+    ':1 voor grote tekst).': ':1 pour grand texte).',
+    ':1).': ':1).',
+    'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+        'Le contraste du texte sur ou au-dessus d\'une image ne peut pas être vérifié automatiquement — vérifiez visuellement.',
+    'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+        'Le graphique n\'a pas de titre ou de données descriptives — ajoutez un titre ou des noms de séries.',
+    'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+        'n\'a pas de titre ou de notes du présentateur décrivant le contenu.',
+    'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+        'Beaucoup de texte sur cette slide : la taille de police est réduite à ',
+    ' van de ontwerpgrootte.': ' de la taille de conception.',
+    'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+        'Beaucoup de texte sur cette slide : la taille de police est fortement réduite (',
+    'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+        'de la taille de conception). Envisagez de diviser le contenu.',
+    'Grote tabel (': 'Grand tableau (',
+    ' rijen, ': ' lignes, ',
+    ' kolommen): celtekst staat op het minimumformaat.':
+        ' colonnes) : le texte des cellules est à la taille minimale.',
+    'Veel broncode (': 'Beaucoup de code source (',
+    ' regels) — de tekst wordt sterk verkleind om te passen.':
+        ' lignes) — le texte est fortement réduit pour tenir.',
+    'Veel vrije markdown (': 'Beaucoup de markdown libre (',
+    ' regels) — controleer of alles leesbaar blijft op de slide.':
+        ' lignes) — vérifiez que tout reste lisible sur la slide.',
+    'Lange titelpagina (': 'Diapositive de titre longue (',
+    ' tekens) — de tekst wordt verkleind om te passen.':
+        ' caractères) — le texte est réduit pour tenir.',
+    'Thema bodytekst': 'Texte courant du thème',
+    'Thema titel': 'Titre du thème',
+    'Thema tabeltekst': 'Texte de tableau du thème',
+    'Thema tabelkop': 'En-tête de tableau du thème',
+    'Thema code': 'Code du thème',
+    'Tussentitel': 'Titre intermédiaire',
+    'Eerste afbeelding': 'Première image',
+    'Tweede afbeelding': 'Deuxième image',
+    'Achtergrondafbeelding': 'Image d\'arrière-plan',
+    'Waarschuwing bij export': 'Avertissement à l\'export',
+    'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+        'Demander une confirmation avant l\'export lorsqu\'il y a des problèmes de qualité.',
+    'Kwaliteitsproblemen gevonden': 'Problèmes de qualité détectés',
+    'Toch exporteren': 'Exporter quand même',
+    '… en meer problemen in het kwaliteitspaneel.':
+        '… et d\'autres problèmes dans le panneau qualité.',
   },
   'es': {
     'Toegankelijkheid': 'Accesibilidad',
@@ -3935,6 +4208,77 @@ const _dutchSourceStringAdditions = {
         'Puedes revocar tu consentimiento en cualquier momento. Tras la revocación, deberás aceptar de nuevo estas condiciones.',
     'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
         'Si revocas tu consentimiento, deberás aceptar de nuevo estas condiciones al reiniciar OciDeck.',
+    'Controleren': 'Comprobar sintaxis',
+    'Syntaxproblemen gevonden': 'Problemas de sintaxis encontrados',
+    'De markdown bevat': 'El markdown contiene',
+    'Geen syntaxproblemen gevonden': 'No se encontraron problemas de sintaxis',
+    'Terug naar editor': 'Volver al editor',
+    'Toch toepassen': 'Aplicar de todos modos',
+    'fout(en) en': 'error(es) y',
+    'fout(en),': 'error(es),',
+    'waarschuwing(en)': 'advertencia(s)',
+    'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+        'advertencia(s). Las diapositivas pueden interpretarse incorrectamente.',
+    'Slidekwaliteit': 'Calidad de diapositivas',
+    'Geen kwaliteitsproblemen gevonden': 'No se encontraron problemas de calidad',
+    'Thema (hele presentatie)': 'Tema (presentación completa)',
+    'Kwaliteitsprobleem': 'Problema de calidad',
+    'Kwaliteitsproblemen': 'Problemas de calidad',
+    'Kwaliteitsproblemen (inclusief ernstige)':
+        'Problemas de calidad (incluidos graves)',
+    'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+        'Añade texto alt / leyenda para accesibilidad',
+    'Alt-tekst': 'Texto alt',
+    'Tekstdichtheid': 'Densidad de texto',
+    'Contrast': 'Contraste',
+    'heeft geen bijschrift/alt-tekst.': 'no tiene leyenda/texto alt.',
+    'contrastverhouding': 'relación de contraste',
+    '(minimaal ': '(mínimo ',
+    ':1 voor normale tekst).': ':1 para texto normal).',
+    ':1 voor grote tekst).': ':1 para texto grande).',
+    ':1).': ':1).',
+    'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+        'El contraste del texto sobre una imagen no puede comprobarse automáticamente — verifica visualmente.',
+    'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+        'El gráfico no tiene título ni datos descriptivos — añade un título o nombres de series.',
+    'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+        'no tiene título ni notas del ponente que describan el contenido.',
+    'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+        'Mucho texto en esta diapositiva: el tamaño de fuente se reduce a ',
+    ' van de ontwerpgrootte.': ' del tamaño de diseño.',
+    'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+        'Mucho texto en esta diapositiva: el tamaño de fuente se reduce mucho (',
+    'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+        'del tamaño de diseño). Considera dividir el contenido.',
+    'Grote tabel (': 'Tabla grande (',
+    ' rijen, ': ' filas, ',
+    ' kolommen): celtekst staat op het minimumformaat.':
+        ' columnas): el texto de cel está en el tamaño mínimo.',
+    'Veel broncode (': 'Mucho código fuente (',
+    ' regels) — de tekst wordt sterk verkleind om te passen.':
+        ' líneas) — el texto se reduce mucho para caber.',
+    'Veel vrije markdown (': 'Mucho markdown libre (',
+    ' regels) — controleer of alles leesbaar blijft op de slide.':
+        ' líneas) — comprueba que todo siga legible en la diapositiva.',
+    'Lange titelpagina (': 'Diapositiva de título larga (',
+    ' tekens) — de tekst wordt verkleind om te passen.':
+        ' caracteres) — el texto se reduce para caber.',
+    'Thema bodytekst': 'Texto principal del tema',
+    'Thema titel': 'Título del tema',
+    'Thema tabeltekst': 'Texto de tabla del tema',
+    'Thema tabelkop': 'Encabezado de tabla del tema',
+    'Thema code': 'Código del tema',
+    'Tussentitel': 'Título intermedio',
+    'Eerste afbeelding': 'Primera imagen',
+    'Tweede afbeelding': 'Segunda imagen',
+    'Achtergrondafbeelding': 'Imagen de fondo',
+    'Waarschuwing bij export': 'Advertencia al exportar',
+    'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+        'Pedir confirmación antes de exportar cuando hay problemas de calidad en las diapositivas.',
+    'Kwaliteitsproblemen gevonden': 'Problemas de calidad encontrados',
+    'Toch exporteren': 'Exportar de todos modos',
+    '… en meer problemen in het kwaliteitspaneel.':
+        '… y más problemas en el panel de calidad.',
   },
   'fy': {
     'Toegankelijkheid': 'Tagonklikens',
@@ -4255,6 +4599,77 @@ const _dutchSourceStringAdditions = {
         'Jo kinne jo tastimming op elk momint ynlûke. Nei it ynlûken moatte jo dizze betingsten opnij akseptearje.',
     'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
         'As jo jo tastimming ynlûke, moatte jo dizze betingsten opnij akseptearje as jo OciDeck opnij begjinne.',
+    'Controleren': 'Syntax kontrolearje',
+    'Syntaxproblemen gevonden': 'Syntaxproblemen fûn',
+    'De markdown bevat': 'De markdown befettet',
+    'Geen syntaxproblemen gevonden': 'Gjin syntaxproblemen fûn',
+    'Terug naar editor': 'Werom nei de editor',
+    'Toch toepassen': 'Dochs tapasse',
+    'fout(en) en': 'flater(s) en',
+    'fout(en),': 'flater(s),',
+    'waarschuwing(en)': 'warnings',
+    'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+        'warnings. Dizenn kinne dêrtroch ferkeard ynladen wurde.',
+    'Slidekwaliteit': 'Dia-kwaliteit',
+    'Geen kwaliteitsproblemen gevonden': 'Gjin kwaliteitsproblemen fûn',
+    'Thema (hele presentatie)': 'Tema (hiele presintaasje)',
+    'Kwaliteitsprobleem': 'Kwaliteitsprobleem',
+    'Kwaliteitsproblemen': 'Kwaliteitsproblemen',
+    'Kwaliteitsproblemen (inclusief ernstige)':
+        'Kwaliteitsproblemen (ynklusyf earnstige)',
+    'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+        'Foegje alt-tekst / byskrift ta foar tagonklikheid',
+    'Alt-tekst': 'Alt-tekst',
+    'Tekstdichtheid': 'Teksttichtheid',
+    'Contrast': 'Kontrast',
+    'heeft geen bijschrift/alt-tekst.': 'hat gjin byskrift/alt-tekst.',
+    'contrastverhouding': 'kontrastferhâlding',
+    '(minimaal ': '(minimaal ',
+    ':1 voor normale tekst).': ':1 foar normale tekst).',
+    ':1 voor grote tekst).': ':1 foar grutte tekst).',
+    ':1).': ':1).',
+    'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+        'Kontrast fan tekst op of oer in ôfbylding kin net automatysk kontrolearre wurde — kontrolearje fisueel.',
+    'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+        'Grafyk hat gjin titel of beskriuwende data — foegje in titel of serjenammen ta.',
+    'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+        'hat gjin titel of sprekernotysjes dy\'t de ynhâld beskriuwe.',
+    'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+        'In protte tekst op dizze dia: lettergrutte wurdt ferlytse ta ',
+    ' van de ontwerpgrootte.': ' fan de ûntwerpgrootte.',
+    'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+        'In protte tekst op dizze dia: lettergrutte wurdt sterk ferlytse (',
+    'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+        'fan de ûntwerpgrootte). Split de ynhâld op.',
+    'Grote tabel (': 'Grutte tabel (',
+    ' rijen, ': ' rigen, ',
+    ' kolommen): celtekst staat op het minimumformaat.':
+        ' kolommen): seltekst stiet op minimale grutte.',
+    'Veel broncode (': 'In protte boarnkoade (',
+    ' regels) — de tekst wordt sterk verkleind om te passen.':
+        ' rigels) — tekst wurdt sterk ferlytse om te passen.',
+    'Veel vrije markdown (': 'In protte frije markdown (',
+    ' regels) — controleer of alles leesbaar blijft op de slide.':
+        ' rigels) — kontrolearje oft alles lêsber bliuwt op de dia.',
+    'Lange titelpagina (': 'Lange titeldia (',
+    ' tekens) — de tekst wordt verkleind om te passen.':
+        ' tekens) — tekst wurdt ferlytse om te passen.',
+    'Thema bodytekst': 'Tema-bodytekst',
+    'Thema titel': 'Tema-titel',
+    'Thema tabeltekst': 'Tema-tabeltekst',
+    'Thema tabelkop': 'Tema-tabelkop',
+    'Thema code': 'Tema-koade',
+    'Tussentitel': 'Tussentitel',
+    'Eerste afbeelding': 'Earste ôfbylding',
+    'Tweede afbeelding': 'Twadde ôfbylding',
+    'Achtergrondafbeelding': 'Eftergrûnôfbylding',
+    'Waarschuwing bij export': 'Warskôging by eksport',
+    'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+        'Freeg befêstiging foardat jo eksportearje as der dia-kwaliteitsproblemen binne.',
+    'Kwaliteitsproblemen gevonden': 'Kwaliteitsproblemen fûn',
+    'Toch exporteren': 'Dochs eksportearje',
+    '… en meer problemen in het kwaliteitspaneel.':
+        '… en mear problemen yn it kwaliteitspaneel.',
   },
   'pap': {
     'Toegankelijkheid': 'Aksesibilidat',
@@ -4578,5 +4993,76 @@ const _dutchSourceStringAdditions = {
         'Bo por retirá bo konsentimentu na kualkier momentu. Despues di retirá, bo tin ku aseptá e kondishonnan akí di nobo.',
     'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
         'Si bo retirá bo konsentimentu, bo tin ku aseptá e kondishonnan akí di nobo ora bo start OciDeck di nobo.',
+    'Controleren': 'Verifiká sintaxis',
+    'Syntaxproblemen gevonden': 'Probleman di sintaxis haña',
+    'De markdown bevat': 'E markdown tin',
+    'Geen syntaxproblemen gevonden': 'No a haña problema di sintaxis',
+    'Terug naar editor': 'Bai bek na e editor',
+    'Toch toepassen': 'Apliká igualmente',
+    'fout(en) en': 'eror(nan) i',
+    'fout(en),': 'eror(nan),',
+    'waarschuwing(en)': 'advertensia(nan)',
+    'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+        'advertensia(nan). Slide-nan por wòrdu lesá mal.',
+    'Slidekwaliteit': 'Kalidad di slide',
+    'Geen kwaliteitsproblemen gevonden': 'No a haña problema di kalidad',
+    'Thema (hele presentatie)': 'Tema (presentashon kompleto)',
+    'Kwaliteitsprobleem': 'Problema di kalidad',
+    'Kwaliteitsproblemen': 'Problemanan di kalidad',
+    'Kwaliteitsproblemen (inclusief ernstige)':
+        'Problemanan di kalidad (inclusí serio)',
+    'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+        'Agregá alt-tekst / caption pa aksesibilidad',
+    'Alt-tekst': 'Alt-tekst',
+    'Tekstdichtheid': 'Densidat di teksto',
+    'Contrast': 'Kontraste',
+    'heeft geen bijschrift/alt-tekst.': 'no tin caption/alt-tekst.',
+    'contrastverhouding': 'proporcion di kontraste',
+    '(minimaal ': '(mínimo ',
+    ':1 voor normale tekst).': ':1 pa teksto normal).',
+    ':1 voor grote tekst).': ':1 pa teksto grandi).',
+    ':1).': ':1).',
+    'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+        'Kontraste di teksto riba un imágen no por wòrdu verifiká automáticamente — verifiká visualmente.',
+    'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+        'Gráfiko no tin título ni datonan deskriptivo — agregá un título of nòmber di serienan.',
+    'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+        'no tin título ni notanan di presentadó ku ta deskribí e kontenido.',
+    'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+        'Hopi teksto riba e slide aki: tamaño di letra ta baha te ',
+    ' van de ontwerpgrootte.': ' di e tamaño di diseño.',
+    'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+        'Hopi teksto riba e slide aki: tamaño di letra ta baha hopi (',
+    'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+        'di e tamaño di diseño). Konsiderá di dividí e kontenido.',
+    'Grote tabel (': 'Tabel grandi (',
+    ' rijen, ': ' fila, ',
+    ' kolommen): celtekst staat op het minimumformaat.':
+        ' kolom): teksto di sel ta na tamaño mínimo.',
+    'Veel broncode (': 'Hopi kódigo fuente (',
+    ' regels) — de tekst wordt sterk verkleind om te passen.':
+        ' regel) — teksto ta baha hopi pa kaba.',
+    'Veel vrije markdown (': 'Hopi markdown libre (',
+    ' regels) — controleer of alles leesbaar blijft op de slide.':
+        ' regel) — verifiká si tur kos ta lesibel riba e slide.',
+    'Lange titelpagina (': 'Slide di título largo (',
+    ' tekens) — de tekst wordt verkleind om te passen.':
+        ' karakter) — teksto ta baha pa kaba.',
+    'Thema bodytekst': 'Teksto principal di tema',
+    'Thema titel': 'Título di tema',
+    'Thema tabeltekst': 'Teksto di tabel di tema',
+    'Thema tabelkop': 'Header di tabel di tema',
+    'Thema code': 'Kódigo di tema',
+    'Tussentitel': 'Título intermedio',
+    'Eerste afbeelding': 'Promé imágen',
+    'Tweede afbeelding': 'Segundo imágen',
+    'Achtergrondafbeelding': 'Imágen di fondo',
+    'Waarschuwing bij export': 'Advertensia na export',
+    'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+        'Pidi konfirmashon promé ku exportá ora tin problema di kalidad di slide.',
+    'Kwaliteitsproblemen gevonden': 'Problemanan di kalidad haña',
+    'Toch exporteren': 'Exportá igualmente',
+    '… en meer problemen in het kwaliteitspaneel.':
+        '… i mas problema den e panel di kalidad.',
   },
 };
