@@ -2683,6 +2683,23 @@ const _dutchSourceStringAdditions = {
     'Toch exporteren': 'Export anyway',
     '… en meer problemen in het kwaliteitspaneel.':
         '… and more issues in the quality panel.',
+    'Classificatie-handhaving': 'Classification enforcement',
+    'Vrijgaveplafond': 'Release ceiling',
+    'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+        'Highest TLP level allowed to export. Empty = no ceiling.',
+    'Vereist minimumniveau': 'Required minimum level',
+    'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+        'Lowest classification a deck must have to export. Empty = no minimum.',
+    'Geen plafond': 'No ceiling',
+    'Geen minimum': 'No minimum',
+    'Classificatie verplicht': 'Classification required',
+    'Weiger export wanneer het deck geen TLP-niveau heeft.':
+        'Refuse export when the deck has no TLP level.',
+    'Classificatie-watermerk': 'Classification watermark',
+    'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+        'Show a diagonal watermark with TLP and organization on every slide.',
+    'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+        'Set a TLP level — export is blocked by the classification policy.',
   },
   'it': {
     'Toegankelijkheid': 'Accessibilità',
@@ -3081,6 +3098,23 @@ const _dutchSourceStringAdditions = {
     'Toch exporteren': 'Esporta comunque',
     '… en meer problemen in het kwaliteitspaneel.':
         '… e altri problemi nel pannello qualità.',
+    'Classificatie-handhaving': 'Applicazione classificazione',
+    'Vrijgaveplafond': 'Limite di rilascio',
+    'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+        'Livello TLP massimo esportabile. Vuoto = nessun limite.',
+    'Vereist minimumniveau': 'Livello minimo richiesto',
+    'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+        'Classificazione minima richiesta per esportare. Vuoto = nessun minimo.',
+    'Geen plafond': 'Nessun limite',
+    'Geen minimum': 'Nessun minimo',
+    'Classificatie verplicht': 'Classificazione obbligatoria',
+    'Weiger export wanneer het deck geen TLP-niveau heeft.':
+        'Rifiuta l\'export se il deck non ha un livello TLP.',
+    'Classificatie-watermerk': 'Filigrana di classificazione',
+    'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+        'Mostra una filigrana diagonale con TLP e organizzazione su ogni slide.',
+    'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+        'Imposta un livello TLP — l\'export è bloccato dalla policy di classificazione.',
   },
   'de': {
     'Toegankelijkheid': 'Barrierefreiheit',
@@ -3479,6 +3513,23 @@ const _dutchSourceStringAdditions = {
     'Toch exporteren': 'Trotzdem exportieren',
     '… en meer problemen in het kwaliteitspaneel.':
         '… und weitere Probleme im Qualitätsbereich.',
+    'Classificatie-handhaving': 'Klassifizierungsdurchsetzung',
+    'Vrijgaveplafond': 'Freigabeobergrenze',
+    'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+        'Höchstes exportierbares TLP-Niveau. Leer = keine Obergrenze.',
+    'Vereist minimumniveau': 'Erforderliches Mindestniveau',
+    'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+        'Niedrigste Klassifizierung zum Exportieren. Leer = kein Minimum.',
+    'Geen plafond': 'Keine Obergrenze',
+    'Geen minimum': 'Kein Minimum',
+    'Classificatie verplicht': 'Klassifizierung erforderlich',
+    'Weiger export wanneer het deck geen TLP-niveau heeft.':
+        'Export verweigern, wenn das Deck kein TLP-Niveau hat.',
+    'Classificatie-watermerk': 'Klassifizierungs-Wasserzeichen',
+    'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+        'Diagonales Wasserzeichen mit TLP und Organisation auf jeder Folie.',
+    'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+        'TLP-Niveau festlegen — Export durch Klassifizierungsrichtlinie blockiert.',
   },
   'fr': {
     'Toegankelijkheid': 'Accessibilité',
@@ -3881,6 +3932,23 @@ const _dutchSourceStringAdditions = {
     'Toch exporteren': 'Exporter quand même',
     '… en meer problemen in het kwaliteitspaneel.':
         '… et d\'autres problèmes dans le panneau qualité.',
+    'Classificatie-handhaving': 'Application de la classification',
+    'Vrijgaveplafond': 'Plafond de diffusion',
+    'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+        'Niveau TLP maximal exportable. Vide = pas de plafond.',
+    'Vereist minimumniveau': 'Niveau minimum requis',
+    'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+        'Classification minimale requise pour exporter. Vide = pas de minimum.',
+    'Geen plafond': 'Pas de plafond',
+    'Geen minimum': 'Pas de minimum',
+    'Classificatie verplicht': 'Classification obligatoire',
+    'Weiger export wanneer het deck geen TLP-niveau heeft.':
+        'Refuser l\'export si le deck n\'a pas de niveau TLP.',
+    'Classificatie-watermerk': 'Filigrane de classification',
+    'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+        'Filigrane diagonal avec TLP et organisation sur chaque diapositive.',
+    'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+        'Définissez un niveau TLP — export bloqué par la politique de classification.',
   },
   'es': {
     'Toegankelijkheid': 'Accesibilidad',
@@ -4279,6 +4347,23 @@ const _dutchSourceStringAdditions = {
     'Toch exporteren': 'Exportar de todos modos',
     '… en meer problemen in het kwaliteitspaneel.':
         '… y más problemas en el panel de calidad.',
+    'Classificatie-handhaving': 'Aplicación de clasificación',
+    'Vrijgaveplafond': 'Techo de difusión',
+    'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+        'Nivel TLP máximo exportable. Vacío = sin techo.',
+    'Vereist minimumniveau': 'Nivel mínimo requerido',
+    'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+        'Clasificación mínima para exportar. Vacío = sin mínimo.',
+    'Geen plafond': 'Sin techo',
+    'Geen minimum': 'Sin mínimo',
+    'Classificatie verplicht': 'Clasificación obligatoria',
+    'Weiger export wanneer het deck geen TLP-niveau heeft.':
+        'Rechazar exportación si el deck no tiene nivel TLP.',
+    'Classificatie-watermerk': 'Marca de agua de clasificación',
+    'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+        'Marca de agua diagonal con TLP y organización en cada diapositiva.',
+    'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+        'Establece un nivel TLP — exportación bloqueada por la política de clasificación.',
   },
   'fy': {
     'Toegankelijkheid': 'Tagonklikens',
@@ -4670,6 +4755,23 @@ const _dutchSourceStringAdditions = {
     'Toch exporteren': 'Dochs eksportearje',
     '… en meer problemen in het kwaliteitspaneel.':
         '… en mear problemen yn it kwaliteitspaneel.',
+    'Classificatie-handhaving': 'Klassifikaasje-ôfstimming',
+    'Vrijgaveplafond': 'Frijwaringsplafond',
+    'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+        'Heechste TLP-nivo dat eksportearje mei. Leech = gjin plafond.',
+    'Vereist minimumniveau': 'Fereaske minimumnivo',
+    'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+        'Lechste klassifikaasje om te eksportearjen. Leech = gjin minimum.',
+    'Geen plafond': 'Gjin plafond',
+    'Geen minimum': 'Gjin minimum',
+    'Classificatie verplicht': 'Klassifikaasje ferplicht',
+    'Weiger export wanneer het deck geen TLP-niveau heeft.':
+        'Eksport wegerje as it deck gjin TLP-nivo hat.',
+    'Classificatie-watermerk': 'Klassifikaasje-watermerk',
+    'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+        'Diagonaal watermerk mei TLP en organisaasje op elke slide.',
+    'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+        'Stel in TLP-nivo yn — eksport blokkearre troch it klassifikaasjebelied.',
   },
   'pap': {
     'Toegankelijkheid': 'Aksesibilidat',
@@ -5064,5 +5166,22 @@ const _dutchSourceStringAdditions = {
     'Toch exporteren': 'Exportá igualmente',
     '… en meer problemen in het kwaliteitspaneel.':
         '… i mas problema den e panel di kalidad.',
+    'Classificatie-handhaving': 'Aplikashon di klasifikashon',
+    'Vrijgaveplafond': 'Techo di difushon',
+    'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+        'Máksimo nivel TLP pa exportá. Bashí = sin techo.',
+    'Vereist minimumniveau': 'Mínimo rekerí',
+    'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+        'Klasifikashon mínimo pa exportá. Bashí = sin mínimo.',
+    'Geen plafond': 'Sin techo',
+    'Geen minimum': 'Sin mínimo',
+    'Classificatie verplicht': 'Klasifikashon obligatorio',
+    'Weiger export wanneer het deck geen TLP-niveau heeft.':
+        'Negá exportá ora e deck no tin nivel TLP.',
+    'Classificatie-watermerk': 'Watermark di klasifikashon',
+    'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+        'Watermark diagonal ku TLP i organisashon riba kada slide.',
+    'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+        'Pone un nivel TLP — exportá blokeá pa e polítika di klasifikashon.',
   },
 };

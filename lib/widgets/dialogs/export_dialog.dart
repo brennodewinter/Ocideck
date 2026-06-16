@@ -6,7 +6,8 @@ import '../../models/markdown_validation.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../models/slide_quality.dart';
-import '../../services/classification_policy.dart';
+import '../../services/classification_enforcement_policy.dart';
+import '../../services/export_metadata.dart';
 import '../../services/export_service.dart';
 import '../../services/quality_export_policy.dart';
 import '../../services/slide_rasterizer.dart';
@@ -23,8 +24,8 @@ class ExportDialog extends StatefulWidget {
   final ExportService exportService;
   final TlpLevel tlp;
 
-  /// Classificatie-gate. Standaard geen plafond (alles mag).
-  final ClassificationPolicy policy;
+  /// Classificatie-handhaving (plafond, minimum, verplicht classificeren).
+  final ClassificationEnforcementPolicy enforcementPolicy;
 
   /// Slide-kwaliteit van de te exporteren slides.
   final SlideQualityResult qualityResult;
@@ -38,6 +39,10 @@ class ExportDialog extends StatefulWidget {
   /// The deck's Marp Markdown, used for the self-contained HTML export.
   final String markdown;
 
+  final String organization;
+  final bool showClassificationWatermark;
+  final ExportDocumentMetadata documentMetadata;
+
   const ExportDialog({
     super.key,
     required this.deckPath,
@@ -46,11 +51,14 @@ class ExportDialog extends StatefulWidget {
     required this.projectPath,
     required this.exportService,
     this.tlp = TlpLevel.none,
-    this.policy = const ClassificationPolicy(),
+    this.enforcementPolicy = const ClassificationEnforcementPolicy(),
     this.qualityResult = const SlideQualityResult([]),
     this.qualityPolicy = const QualityExportPolicy(),
     this.exportDirectory,
     this.markdown = '',
+    this.organization = '',
+    this.showClassificationWatermark = false,
+    this.documentMetadata = const ExportDocumentMetadata(),
   });
 
   static Future<void> show(
@@ -61,11 +69,15 @@ class ExportDialog extends StatefulWidget {
     required String? projectPath,
     required ExportService exportService,
     TlpLevel tlp = TlpLevel.none,
-    ClassificationPolicy policy = const ClassificationPolicy(),
+    ClassificationEnforcementPolicy enforcementPolicy =
+        const ClassificationEnforcementPolicy(),
     SlideQualityResult qualityResult = const SlideQualityResult([]),
     QualityExportPolicy qualityPolicy = const QualityExportPolicy(),
     String? exportDirectory,
     String markdown = '',
+    String organization = '',
+    bool showClassificationWatermark = false,
+    ExportDocumentMetadata documentMetadata = const ExportDocumentMetadata(),
   }) {
     return showDialog(
       context: context,
@@ -77,11 +89,14 @@ class ExportDialog extends StatefulWidget {
         projectPath: projectPath,
         exportService: exportService,
         tlp: tlp,
-        policy: policy,
+        enforcementPolicy: enforcementPolicy,
         qualityResult: qualityResult,
         qualityPolicy: qualityPolicy,
         exportDirectory: exportDirectory,
         markdown: markdown,
+        organization: organization,
+        showClassificationWatermark: showClassificationWatermark,
+        documentMetadata: documentMetadata,
       ),
     );
   }
@@ -206,6 +221,8 @@ class _ExportDialogState extends State<ExportDialog> {
             themeProfile: widget.themeProfile,
             projectPath: widget.projectPath,
             tlp: widget.tlp,
+            showClassificationWatermark: widget.showClassificationWatermark,
+            organization: widget.organization,
             onProgress: (done, total) {
               if (mounted) setState(() => _done = done);
             },
@@ -234,10 +251,11 @@ class _ExportDialogState extends State<ExportDialog> {
       markdown: widget.markdown,
       themeProfile: widget.themeProfile,
       tlp: widget.tlp,
-      policy: widget.policy,
+      enforcementPolicy: widget.enforcementPolicy,
       qualityResult: widget.qualityResult,
       qualityPolicy: widget.qualityPolicy,
       qualityAcknowledged: true,
+      metadata: widget.documentMetadata,
     );
 
     if (!mounted) return;
@@ -341,7 +359,7 @@ class _ExportDialogState extends State<ExportDialog> {
     // Pre-flight classificatie-gate: blokkeert de export al vóór een poging,
     // zodat de gebruiker meteen de reden ziet. De service handhaaft dezelfde
     // regel nog eens als backstop, dus dit is puur UX — niet de beveiliging.
-    final decision = widget.policy.evaluate(widget.tlp);
+    final decision = widget.enforcementPolicy.evaluate(widget.tlp);
     if (!decision.allowed) {
       return Column(
         mainAxisSize: MainAxisSize.min,

@@ -10,8 +10,9 @@ import 'package:pdf/widgets.dart' as pw;
 
 import '../models/deck.dart';
 import '../models/settings.dart';
-import 'classification_policy.dart';
+import 'classification_enforcement_policy.dart';
 import '../models/slide_quality.dart';
+import 'export_metadata.dart';
 import 'quality_export_policy.dart';
 import 'marp_html_service.dart';
 
@@ -108,16 +109,18 @@ class ExportService {
     String? markdown,
     ThemeProfile? themeProfile,
     TlpLevel tlp = TlpLevel.none,
-    ClassificationPolicy policy = const ClassificationPolicy(),
+    ClassificationEnforcementPolicy enforcementPolicy =
+        const ClassificationEnforcementPolicy(),
     SlideQualityResult? qualityResult,
     QualityExportPolicy qualityPolicy = const QualityExportPolicy(),
     bool qualityAcknowledged = false,
+    ExportDocumentMetadata? metadata,
   }) async {
     // Classificatie-gate. Dit is het enige chokepoint waar elk formaat
     // (PDF/PPTX/HTML) doorheen moet, dus de handhaving zit hier en niet in de
     // UI-laag: zo kan geen exportpad de gate omzeilen. Fail-closed — bij een
     // weigering wordt er niets gebouwd of weggeschreven.
-    final decision = policy.evaluate(tlp);
+    final decision = enforcementPolicy.evaluate(tlp);
     if (!decision.allowed) {
       return ExportResult.fail(decision.reason!);
     }
@@ -136,6 +139,10 @@ class ExportService {
     } else if (images.isEmpty) {
       return ExportResult.fail('Geen slides om te exporteren.');
     }
+    final fallbackTitle = p.basenameWithoutExtension(deckPath);
+    final docMeta =
+        metadata ??
+        ExportDocumentMetadata(title: fallbackTitle, tlp: tlp);
     final compactSuffix = compress && format == ExportFormat.pdf
         ? '-compact'
         : '';
@@ -151,12 +158,29 @@ class ExportService {
       final Uint8List bytes;
       switch (format) {
         case ExportFormat.pdf:
-          bytes = await _buildPdf(images, compress: compress);
+          bytes = await _buildPdf(
+            images,
+            metadata: docMeta,
+            fallbackTitle: fallbackTitle,
+            compress: compress,
+          );
         case ExportFormat.pptx:
-          bytes = _buildPptx(images, notes: notes);
+          bytes = _buildPptx(
+            images,
+            metadata: docMeta,
+            fallbackTitle: fallbackTitle,
+            notes: notes,
+          );
         case ExportFormat.html:
           bytes = Uint8List.fromList(
-            utf8.encode(await _html.build(markdown!, theme: themeProfile)),
+            utf8.encode(
+              await _html.build(
+                markdown!,
+                theme: themeProfile,
+                metadata: docMeta,
+                fallbackTitle: fallbackTitle,
+              ),
+            ),
           );
       }
       await File(outputPath).writeAsBytes(bytes, flush: true);
@@ -170,9 +194,18 @@ class ExportService {
 
   Future<Uint8List> _buildPdf(
     List<Uint8List> images, {
+    required ExportDocumentMetadata metadata,
+    required String fallbackTitle,
     bool compress = false,
   }) async {
-    final doc = pw.Document();
+    final doc = pw.Document(
+      title: metadata.displayTitle(fallbackTitle),
+      author: metadata.documentAuthor,
+      subject: metadata.subject(fallbackTitle),
+      keywords: metadata.exportKeywords(),
+      creator: metadata.producer,
+      producer: metadata.producer,
+    );
     // Page size in points; only the ratio matters for a full-bleed image.
     const format = PdfPageFormat(1280, 720, marginAll: 0);
     for (final png in images) {
@@ -207,7 +240,12 @@ class ExportService {
 
   // ── PPTX (Office Open XML) ─────────────────────────────────────────────────
 
-  Uint8List _buildPptx(List<Uint8List> images, {List<String>? notes}) {
+  Uint8List _buildPptx(
+    List<Uint8List> images, {
+    required ExportDocumentMetadata metadata,
+    required String fallbackTitle,
+    List<String>? notes,
+  }) {
     final archive = Archive();
     void addText(String name, String content) {
       final data = utf8Bytes(content);
@@ -226,6 +264,11 @@ class ExportService {
 
     addText('[Content_Types].xml', _contentTypes(slideCount, noteFor.keys));
     addText('_rels/.rels', _rootRels());
+    addText(
+      'docProps/core.xml',
+      _coreProps(metadata, fallbackTitle: fallbackTitle),
+    );
+    addText('docProps/app.xml', _appProps(metadata));
     addText('ppt/presentation.xml', _presentationXml(slideCount, hasNotes));
     addText(
       'ppt/_rels/presentation.xml.rels',
@@ -368,6 +411,8 @@ class ExportService {
         '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
         '<Default Extension="xml" ContentType="application/xml"/>'
         '<Default Extension="png" ContentType="image/png"/>'
+        '<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>'
+        '<Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/>'
         '<Override PartName="/ppt/presentation.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml"/>'
         '<Override PartName="/ppt/presProps.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.presProps+xml"/>'
         '<Override PartName="/ppt/slideMasters/slideMaster1.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slideMaster+xml"/>'
@@ -381,7 +426,53 @@ class ExportService {
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
         '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="ppt/presentation.xml"/>'
+        '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>'
+        '<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/>'
         '</Relationships>';
+  }
+
+  String _coreProps(
+    ExportDocumentMetadata metadata, {
+    required String fallbackTitle,
+  }) {
+    final now = DateTime.now().toUtc();
+    String iso(DateTime t) => t.toIso8601String();
+    final title = _xmlEscape(metadata.displayTitle(fallbackTitle));
+    final subject = _xmlEscape(metadata.subject(fallbackTitle));
+    final creator = _xmlEscape(metadata.documentAuthor);
+    final keywords = _xmlEscape(metadata.exportKeywords());
+    final description = metadata.htmlDescription;
+    final descXml = description == null
+        ? ''
+        : '<dc:description>${_xmlEscape(description)}</dc:description>';
+    return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<cp:coreProperties '
+        'xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" '
+        'xmlns:dc="http://purl.org/dc/elements/1.1/" '
+        'xmlns:dcterms="http://purl.org/dc/terms/" '
+        'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
+        '<dc:title>$title</dc:title>'
+        '<dc:subject>$subject</dc:subject>'
+        '<dc:creator>$creator</dc:creator>'
+        '$descXml'
+        '<cp:keywords>$keywords</cp:keywords>'
+        '<cp:lastModifiedBy>${_xmlEscape(metadata.producer)}</cp:lastModifiedBy>'
+        '<dcterms:created xsi:type="dcterms:W3CDTF">${iso(now)}</dcterms:created>'
+        '<dcterms:modified xsi:type="dcterms:W3CDTF">${iso(now)}</dcterms:modified>'
+        '</cp:coreProperties>';
+  }
+
+  String _appProps(ExportDocumentMetadata metadata) {
+    final company = metadata.organization.trim();
+    final companyXml = company.isEmpty
+        ? ''
+        : '<Company>${_xmlEscape(company)}</Company>';
+    return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" '
+        'xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">'
+        '<Application>${_xmlEscape(metadata.producer)}</Application>'
+        '$companyXml'
+        '</Properties>';
   }
 
   String _presentationXml(int count, bool hasNotes) {

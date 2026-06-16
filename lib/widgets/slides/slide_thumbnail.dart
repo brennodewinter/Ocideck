@@ -5,6 +5,7 @@ import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../state/deck_quality_provider.dart';
+import '../../state/settings_provider.dart';
 import '../../state/slide_clipboard_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
@@ -22,6 +23,7 @@ class SlideThumbnail extends ConsumerWidget {
   final ThemeProfile themeProfile;
   final int slideCount;
   final TlpLevel tlp;
+  final String organization;
   final VoidCallback onTap;
   final VoidCallback onDuplicate;
   final VoidCallback onDelete;
@@ -43,6 +45,7 @@ class SlideThumbnail extends ConsumerWidget {
     this.themeProfile = const ThemeProfile(),
     this.slideCount = 1,
     this.tlp = TlpLevel.none,
+    this.organization = '',
   });
 
   @override
@@ -50,6 +53,8 @@ class SlideThumbnail extends ConsumerWidget {
     final l10n = context.l10n;
     final skipped = slide.skipped;
     final slideIssues = ref.watch(deckQualityProvider).forSlide(index);
+    final showWatermark =
+        ref.watch(settingsProvider).classificationWatermarkEnabled;
     final hasQualityErrors = slideIssues.any(
       (i) => i.severity == MarkdownValidationSeverity.error,
     );
@@ -111,6 +116,8 @@ class SlideThumbnail extends ConsumerWidget {
                             slideNumber: index + 1,
                             slideCount: slideCount,
                             tlp: tlp,
+                            organization: organization,
+                            showClassificationWatermark: showWatermark,
                           ),
                         ),
                         if (skipped)

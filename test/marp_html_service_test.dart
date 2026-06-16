@@ -2,7 +2,9 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 
 /// Reads the vendored libraries straight from the repo (tests run at the root).
@@ -67,6 +69,26 @@ void main() {}
     expect(html, contains('mermaid'));
     // Everything is inlined: there must be no external <script src=...> tags.
     expect(html, isNot(contains('<script src')));
+  });
+
+  test('build() stamps classification metadata and banner in the head', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    const md = '# Slide\n';
+    final html = await service.build(
+      md,
+      metadata: const ExportDocumentMetadata(
+        title: 'Rapport',
+        author: 'Bob',
+        tlp: TlpLevel.amber,
+      ),
+      fallbackTitle: 'deck',
+    );
+
+    expect(html, contains('<title>Rapport</title>'));
+    expect(html, contains('name="classification" content="TLP:AMBER"'));
+    expect(html, contains('name="tlp" content="amber"'));
+    expect(html, contains('name="author" content="Bob"'));
+    expect(html, contains('class="tlp-export-banner">TLP:AMBER</div>'));
   });
 
   test('build() neutralises a closing-script breakout in content', () async {

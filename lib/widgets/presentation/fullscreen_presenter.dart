@@ -58,6 +58,8 @@ class FullscreenPresenter extends StatefulWidget {
   final ThemeProfile themeProfile;
   final int initialIndex;
   final TlpLevel tlp;
+  final String organization;
+  final bool showClassificationWatermark;
 
   /// Optionele doeltijd voor de aftelling/oefenklok. Null = geen aftelling.
   /// Sessie-only; live aanpasbaar in de presenter (toets K).
@@ -81,6 +83,8 @@ class FullscreenPresenter extends StatefulWidget {
     required this.themeProfile,
     required this.initialIndex,
     this.tlp = TlpLevel.none,
+    this.organization = '',
+    this.showClassificationWatermark = false,
     this.targetDuration,
     this.audience,
     this.initialAnnotations = const {},
@@ -98,6 +102,8 @@ class FullscreenPresenter extends StatefulWidget {
     required ThemeProfile themeProfile,
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
+    String organization = '',
+    bool showClassificationWatermark = false,
     Duration? targetDuration,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
@@ -128,6 +134,8 @@ class FullscreenPresenter extends StatefulWidget {
         themeProfile: themeProfile,
         initialIndex: initialIndex,
         tlp: tlp,
+        organization: organization,
+        showClassificationWatermark: showClassificationWatermark,
         targetDuration: targetDuration,
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
@@ -141,6 +149,8 @@ class FullscreenPresenter extends StatefulWidget {
         themeProfile: themeProfile,
         initialIndex: initialIndex,
         tlp: tlp,
+        organization: organization,
+        showClassificationWatermark: showClassificationWatermark,
         targetDuration: targetDuration,
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
@@ -156,6 +166,8 @@ class FullscreenPresenter extends StatefulWidget {
     required ThemeProfile themeProfile,
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
+    String organization = '',
+    bool showClassificationWatermark = false,
     Duration? targetDuration,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
@@ -176,6 +188,8 @@ class FullscreenPresenter extends StatefulWidget {
               themeProfile: themeProfile,
               initialIndex: initialIndex,
               tlp: tlp,
+              organization: organization,
+              showClassificationWatermark: showClassificationWatermark,
               targetDuration: targetDuration,
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
@@ -203,6 +217,8 @@ class FullscreenPresenter extends StatefulWidget {
     required ThemeProfile themeProfile,
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
+    String organization = '',
+    bool showClassificationWatermark = false,
     Duration? targetDuration,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
@@ -219,6 +235,7 @@ class FullscreenPresenter extends StatefulWidget {
         projectPath: projectPath,
         themeProfile: themeProfile,
         tlp: tlp,
+        organization: organization,
       ),
       inlineStyleProfile: true,
     );
@@ -236,6 +253,7 @@ class FullscreenPresenter extends StatefulWidget {
       'projectPath': projectPath,
       'index': initialIndex,
       'ink': inkByIndex,
+      'classificationWatermarkEnabled': showClassificationWatermark,
     });
 
     WindowController? audience;
@@ -268,6 +286,8 @@ class FullscreenPresenter extends StatefulWidget {
           themeProfile: themeProfile,
           initialIndex: initialIndex,
           tlp: tlp,
+          organization: organization,
+          showClassificationWatermark: showClassificationWatermark,
           annotations: annotations,
           onAnnotationsChanged: onAnnotationsChanged,
           onSlideChanged: onSlideChanged,
@@ -290,6 +310,8 @@ class FullscreenPresenter extends StatefulWidget {
               themeProfile: themeProfile,
               initialIndex: initialIndex,
               tlp: tlp,
+              organization: organization,
+              showClassificationWatermark: showClassificationWatermark,
               audience: audienceHandle,
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
@@ -1609,6 +1631,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                   slideNumber: _index + 1,
                   slideCount: widget.slides.length,
                   tlp: widget.tlp,
+                  organization: widget.organization,
+                  showClassificationWatermark:
+                      widget.showClassificationWatermark,
                   presentationMode: true,
                   onChecklistItemToggle: (column, itemIndex) =>
                       _toggleChecklistItem(
@@ -1745,6 +1770,10 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                               slide: nextSlide,
                               projectPath: widget.projectPath,
                               themeProfile: widget.themeProfile,
+                              tlp: widget.tlp,
+                              organization: widget.organization,
+                              showClassificationWatermark:
+                                  widget.showClassificationWatermark,
                               presentationMode: true,
                             ),
                           )
@@ -2098,6 +2127,10 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                       slide: widget.slides[i],
                       projectPath: widget.projectPath,
                       themeProfile: widget.themeProfile,
+                      tlp: widget.tlp,
+                      organization: widget.organization,
+                      showClassificationWatermark:
+                          widget.showClassificationWatermark,
                     ),
                   ),
                 ),

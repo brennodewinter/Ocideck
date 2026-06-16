@@ -76,6 +76,34 @@ void main() {
     });
   });
 
+  group('effectiveTlp', () {
+    test('uses the stricter of deck and slide level', () {
+      expect(
+        effectiveTlp(deckTlp: TlpLevel.green, slideTlp: TlpLevel.none),
+        TlpLevel.green,
+      );
+      expect(
+        effectiveTlp(deckTlp: TlpLevel.green, slideTlp: TlpLevel.amber),
+        TlpLevel.amber,
+      );
+      expect(
+        effectiveTlp(deckTlp: TlpLevel.none, slideTlp: TlpLevel.red),
+        TlpLevel.red,
+      );
+      expect(
+        effectiveTlp(deckTlp: TlpLevel.amberStrict, slideTlp: TlpLevel.amber),
+        TlpLevel.amberStrict,
+      );
+    });
+
+    test('returns none when neither level is set', () {
+      expect(
+        effectiveTlp(deckTlp: TlpLevel.none, slideTlp: TlpLevel.none),
+        TlpLevel.none,
+      );
+    });
+  });
+
   group('TLP marking on slides', () {
     Widget host(TlpLevel tlp) => MaterialApp(
       home: Scaffold(
@@ -97,13 +125,63 @@ void main() {
     testWidgets('renders the marking when a level is set', (tester) async {
       await tester.pumpWidget(host(TlpLevel.red));
       await tester.pump();
-      expect(find.text('TLP:RED'), findsOneWidget);
+      // Banner bovenaan + hoek-badge.
+      expect(find.text('TLP:RED'), findsNWidgets(2));
     });
 
     testWidgets('renders nothing when none', (tester) async {
       await tester.pumpWidget(host(TlpLevel.none));
       await tester.pump();
       expect(find.textContaining('TLP:'), findsNothing);
+    });
+
+    testWidgets('uses the stricter per-slide classification', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: SizedBox(
+                width: 800,
+                height: 450,
+                child: SlidePreviewWidget(
+                  slide: Slide.create(
+                    SlideType.bullets,
+                  ).copyWith(title: 'T', bullets: ['a'], tlp: TlpLevel.amber),
+                  tlp: TlpLevel.green,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+      expect(find.text('TLP:AMBER'), findsNWidgets(2));
+      expect(find.text('TLP:GREEN'), findsNothing);
+    });
+
+    testWidgets('shows a diagonal watermark when enabled', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: SizedBox(
+                width: 800,
+                height: 450,
+                child: SlidePreviewWidget(
+                  slide: Slide.create(
+                    SlideType.bullets,
+                  ).copyWith(title: 'T', bullets: ['a']),
+                  tlp: TlpLevel.amber,
+                  organization: 'Acme BV',
+                  showClassificationWatermark: true,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+      expect(find.text('TLP:AMBER · Acme BV'), findsOneWidget);
     });
 
     testWidgets('right-side image caption aligns with the TLP badge', (
@@ -131,7 +209,15 @@ void main() {
       await tester.pump();
 
       final captionRight = tester.getTopRight(find.text(caption)).dx;
-      final tlpRight = tester.getTopRight(find.text('TLP:RED')).dx;
+      final tlpMarks = find.text('TLP:RED');
+      expect(tlpMarks, findsNWidgets(2));
+      var tlpRight = 0.0;
+      for (var i = 0; i < 2; i++) {
+        final topRight = tester.getTopRight(tlpMarks.at(i));
+        if (topRight.dy > 200) {
+          tlpRight = topRight.dx;
+        }
+      }
 
       expect(
         (captionRight - tlpRight).abs(),

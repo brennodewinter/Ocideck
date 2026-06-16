@@ -8,8 +8,10 @@ import 'package:image/image.dart' as img;
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/markdown_validation.dart';
 import 'package:ocideck/models/slide_quality.dart';
+import 'package:ocideck/services/classification_enforcement_policy.dart';
 import 'package:ocideck/services/classification_policy.dart';
 import 'package:ocideck/services/export_service.dart';
+import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/services/quality_export_policy.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 import 'package:path/path.dart' as p;
@@ -64,13 +66,15 @@ void main() {
   test(
     'classificatie-gate blocks an over-classified export, writes nothing',
     () async {
-      const policy = ClassificationPolicy(maxReleaseLevel: TlpLevel.green);
+      const policy = ClassificationEnforcementPolicy(
+        maxReleaseLevel: TlpLevel.green,
+      );
       final r = await service.export(
         deckPath(),
         ExportFormat.pdf,
         [_png()],
         tlp: TlpLevel.red,
-        policy: policy,
+        enforcementPolicy: policy,
       );
 
       expect(r.success, isFalse);
@@ -85,16 +89,61 @@ void main() {
   );
 
   test('classificatie-gate allows an export at or below the ceiling', () async {
-    const policy = ClassificationPolicy(maxReleaseLevel: TlpLevel.amber);
+    const policy = ClassificationEnforcementPolicy(
+      maxReleaseLevel: TlpLevel.amber,
+    );
     final r = await service.export(
       deckPath(),
       ExportFormat.pdf,
       [_png()],
       tlp: TlpLevel.green,
-      policy: policy,
+      enforcementPolicy: policy,
     );
     expect(r.success, isTrue, reason: r.error);
   });
+
+  test(
+    'enforcement blocks export below the required minimum, writes nothing',
+    () async {
+      const policy = ClassificationEnforcementPolicy(
+        minRequiredLevel: TlpLevel.green,
+      );
+      final r = await service.export(
+        deckPath(),
+        ExportFormat.pdf,
+        [_png()],
+        tlp: TlpLevel.clear,
+        enforcementPolicy: policy,
+      );
+
+      expect(r.success, isFalse);
+      expect(r.error, contains('minimum'));
+      expect(
+        tmp.listSync().whereType<File>().where(
+          (f) => p.extension(f.path) == '.pdf',
+        ),
+        isEmpty,
+      );
+    },
+  );
+
+  test(
+    'enforcement blocks unclassified export when classification is required',
+    () async {
+      const policy = ClassificationEnforcementPolicy(
+        requireClassification: true,
+      );
+      final r = await service.export(
+        deckPath(),
+        ExportFormat.pdf,
+        [_png()],
+        enforcementPolicy: policy,
+      );
+
+      expect(r.success, isFalse);
+      expect(r.error, contains('TLP-niveau'));
+    },
+  );
 
   test(
     'quality gate blocks export until acknowledged, writes nothing',
@@ -140,6 +189,27 @@ void main() {
     expect(String.fromCharCodes(bytes.take(4)), '%PDF');
   });
 
+  test('PDF embeds classification metadata when classified', () async {
+    const metadata = ExportDocumentMetadata(
+      title: 'Kwartaalupdate',
+      author: 'Alex',
+      keywords: 'kwartaal',
+      tlp: TlpLevel.amber,
+    );
+    final r = await service.export(
+      deckPath(),
+      ExportFormat.pdf,
+      [_png()],
+      tlp: TlpLevel.amber,
+      metadata: metadata,
+    );
+    expect(r.success, isTrue, reason: r.error);
+    final text = String.fromCharCodes(await File(r.outputPath!).readAsBytes());
+    expect(text, contains('TLP:AMBER'));
+    expect(text, contains('Kwartaalupdate'));
+    expect(text, contains('OciDeck'));
+  });
+
   test('exports a valid PPTX zip with the expected parts', () async {
     final images = [_png(), _png()];
     final r = await service.export(deckPath(), ExportFormat.pptx, images);
@@ -153,6 +223,8 @@ void main() {
 
     expect(names, contains('[Content_Types].xml'));
     expect(names, contains('_rels/.rels'));
+    expect(names, contains('docProps/core.xml'));
+    expect(names, contains('docProps/app.xml'));
     expect(names, contains('ppt/presentation.xml'));
     expect(names, contains('ppt/slideMasters/slideMaster1.xml'));
     expect(names, contains('ppt/slideLayouts/slideLayout1.xml'));
@@ -173,6 +245,41 @@ void main() {
         );
       }
     }
+  });
+
+  test('PPTX core properties carry classification metadata', () async {
+    const metadata = ExportDocumentMetadata(
+      title: 'Strategie',
+      organization: 'Acme BV',
+      tlp: TlpLevel.green,
+    );
+    final r = await service.export(
+      deckPath(),
+      ExportFormat.pptx,
+      [_png()],
+      tlp: TlpLevel.green,
+      metadata: metadata,
+    );
+    expect(r.success, isTrue, reason: r.error);
+
+    final archive = ZipDecoder().decodeBytes(
+      await File(r.outputPath!).readAsBytes(),
+    );
+    final core = utf8.decode(
+      archive.files.firstWhere((f) => f.name == 'docProps/core.xml').content
+          as List<int>,
+    );
+    expect(core, contains('<dc:title>Strategie</dc:title>'));
+    expect(core, contains('<dc:subject>TLP:GREEN — Strategie</dc:subject>'));
+    expect(core, contains('<cp:keywords>'));
+    expect(core, contains('TLP:GREEN'));
+
+    final app = utf8.decode(
+      archive.files.firstWhere((f) => f.name == 'docProps/app.xml').content
+          as List<int>,
+    );
+    expect(app, contains('<Company>Acme BV</Company>'));
+    expect(app, contains('OciDeck'));
   });
 
   test('PPTX without notes has no notesSlide/notesMaster parts', () async {

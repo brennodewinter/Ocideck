@@ -58,6 +58,90 @@ double _tlpBadgeWidth(double w, TlpLevel tlp) =>
 double _tlpVerticalReserve(double w) =>
     w * _kTlpFont + 2 * (w * _kTlpVPad) + _tlpBottomInset(w);
 
+/// Hoogte van de classificatiebanner bovenaan de slide.
+double _classificationBannerHeight(double w) => w * 0.038;
+
+TextStyle _tlpMarkingTextStyle(double w, TlpLevel tlp, {double scale = 1}) =>
+    TextStyle(
+      color: Color(tlp.foreground),
+      fontSize: w * _kTlpFont * scale,
+      fontWeight: FontWeight.w700,
+      letterSpacing: 0.4,
+      fontFamily: 'monospace',
+      fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
+      height: 1.0,
+    );
+
+/// Volledige breedte bovenaan: de officiële TLP-markering als banner.
+class _ClassificationBanner extends StatelessWidget {
+  final TlpLevel tlp;
+  final double w;
+
+  const _ClassificationBanner({required this.tlp, required this.w});
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: 0,
+      left: 0,
+      right: 0,
+      height: _classificationBannerHeight(w),
+      child: ColoredBox(
+        color: Colors.black,
+        child: Center(
+          child: Text(
+            tlp.label,
+            style: _tlpMarkingTextStyle(w, tlp, scale: 1.05),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Optioneel diagonaal watermerk over de slide-inhoud.
+class _ClassificationWatermark extends StatelessWidget {
+  final TlpLevel tlp;
+  final double w;
+  final String organization;
+
+  const _ClassificationWatermark({
+    required this.tlp,
+    required this.w,
+    this.organization = '',
+  });
+
+  String get _label {
+    final org = organization.trim();
+    return org.isEmpty ? tlp.label : '${tlp.label} · $org';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned.fill(
+      child: IgnorePointer(
+        child: Center(
+          child: Transform.rotate(
+            angle: -0.35,
+            child: Text(
+              _label,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Color(tlp.foreground).withValues(alpha: 0.12),
+                fontSize: w * 0.105,
+                fontWeight: FontWeight.w800,
+                letterSpacing: w * 0.003,
+                fontFamily: 'monospace',
+                fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 /// Officiële TLP 2.0-markering (FIRST): de gekleurde label op een zwart vlak,
 /// rechtsonder. Wijkt uit naar linksonder als het logo rechtsonder staat.
 class _TlpOverlay extends StatelessWidget {
@@ -91,15 +175,7 @@ class _TlpOverlay extends StatelessWidget {
         ),
         child: Text(
           tlp.label,
-          style: TextStyle(
-            color: Color(tlp.foreground),
-            fontSize: w * _kTlpFont,
-            fontWeight: FontWeight.w700,
-            letterSpacing: 0.4,
-            fontFamily: 'monospace',
-            fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
-            height: 1.0,
-          ),
+          style: _tlpMarkingTextStyle(w, tlp),
         ),
       ),
     );

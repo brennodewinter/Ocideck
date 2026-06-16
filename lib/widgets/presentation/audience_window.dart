@@ -39,6 +39,8 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   List<Slide> _slides = const [];
   ThemeProfile _theme = const ThemeProfile();
   TlpLevel _tlp = TlpLevel.none;
+  String _organization = '';
+  bool _showClassificationWatermark = false;
   String? _projectPath;
   int _index = 0;
   int _blank = 0; // 0 = none, 1 = black, 2 = white
@@ -62,6 +64,9 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     _slides = deck?.slides ?? const [];
     _theme = deck?.themeProfile ?? const ThemeProfile();
     _tlp = deck?.tlp ?? TlpLevel.none;
+    _organization = deck?.organization ?? '';
+    _showClassificationWatermark =
+        widget.args['classificationWatermarkEnabled'] as bool? ?? false;
     // Pre-existing strokes passed at creation, keyed by index.
     final ink = widget.args['ink'];
     if (ink is Map) {
@@ -189,6 +194,8 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                   slideNumber: _index + 1,
                   slideCount: _slides.length,
                   tlp: _tlp,
+                  organization: _organization,
+                  showClassificationWatermark: _showClassificationWatermark,
                   presentationMode: true,
                   onChecklistItemToggle: (column, itemIndex) =>
                       _send('checklistToggle', {
