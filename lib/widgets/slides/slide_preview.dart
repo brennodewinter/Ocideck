@@ -144,8 +144,15 @@ class SlidePreviewWidget extends StatelessWidget {
   final int? slideNumber;
   final int? slideCount;
 
-  /// TLP-classificatie van de presentatie; getoond als markering op de slide.
+  /// TLP-classificatie van de presentatie (deck-niveau). Samen met
+  /// [slide.tlp] bepaalt dit de zichtbare markering via [effectiveTlp].
   final TlpLevel tlp;
+
+  /// Diagonaal classificatie-watermerk (organisatie-instelling).
+  final bool showClassificationWatermark;
+
+  /// Organisatienaam voor het watermerk (uit deck-metadata).
+  final String organization;
 
   /// Of audio/video op deze slide afgespeeld kan worden (de audioknop verschijnt
   /// en video kan starten). Standaard uit — thumbnails en export spelen niets.
@@ -178,6 +185,8 @@ class SlidePreviewWidget extends StatelessWidget {
     this.slideNumber,
     this.slideCount,
     this.tlp = TlpLevel.none,
+    this.showClassificationWatermark = false,
+    this.organization = '',
     this.enableMedia = false,
     this.autoplayMedia = false,
     this.presentationMode = false,
@@ -188,8 +197,9 @@ class SlidePreviewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final markingTlp = effectiveTlp(deckTlp: tlp, slideTlp: slide.tlp);
     final hasBottomRightTlp =
-        tlp != TlpLevel.none &&
+        markingTlp != TlpLevel.none &&
         !((themeProfile.logoPath?.isNotEmpty == true && slide.showLogo) &&
             themeProfile.logoPosition == 'bottom-right');
     // Make the widget self-sufficient for text rendering. On screen it sits
@@ -227,6 +237,7 @@ class SlidePreviewWidget extends StatelessWidget {
   }
 
   Widget _buildSlide() {
+    final markingTlp = effectiveTlp(deckTlp: tlp, slideTlp: slide.tlp);
     return LayoutBuilder(
       builder: (_, constraints) {
         final w = constraints.maxWidth;
@@ -237,17 +248,23 @@ class SlidePreviewWidget extends StatelessWidget {
               fit: StackFit.expand,
               children: [
                 _buildContent(w),
+                if (showClassificationWatermark && markingTlp != TlpLevel.none)
+                  _ClassificationWatermark(
+                    tlp: markingTlp,
+                    w: w,
+                    organization: organization,
+                  ),
                 _FooterOverlay(
                   slide: slide,
                   w: w,
                   profile: themeProfile,
                   slideNumber: slideNumber,
                   slideCount: slideCount,
-                  tlp: tlp,
+                  tlp: markingTlp,
                 ),
-                if (tlp != TlpLevel.none)
+                if (markingTlp != TlpLevel.none)
                   _TlpOverlay(
-                    tlp: tlp,
+                    tlp: markingTlp,
                     w: w,
                     profile: themeProfile,
                     hasLogo:
@@ -261,6 +278,8 @@ class SlidePreviewWidget extends StatelessWidget {
                     position: themeProfile.logoPosition,
                     size: w * (themeProfile.logoSize / 1280),
                   ),
+                if (markingTlp != TlpLevel.none)
+                  _ClassificationBanner(tlp: markingTlp, w: w),
                 if (enableMedia && slide.audioPath.isNotEmpty)
                   _AudioPlayback(
                     audioPath: slide.audioPath,

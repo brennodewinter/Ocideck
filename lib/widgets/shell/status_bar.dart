@@ -233,23 +233,32 @@ class _ActionsDivider extends StatelessWidget {
 /// bij klikken een keuzelijst met alle niveaus (incl. "Geen").
 class _TlpChip extends StatelessWidget {
   final TlpLevel tlp;
+  final bool warnUnset;
   final ValueChanged<TlpLevel> onSelected;
 
-  const _TlpChip({required this.tlp, required this.onSelected});
+  const _TlpChip({
+    required this.tlp,
+    this.warnUnset = false,
+    required this.onSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final isSet = tlp != TlpLevel.none;
     final fg = Color(tlp.foreground);
+    final borderColor = warnUnset
+        ? const Color(0xFFF59E0B)
+        : (isSet ? fg.withValues(alpha: 0.7) : Colors.white24);
 
     final child = Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       decoration: BoxDecoration(
-        color: isSet ? Colors.black : Colors.transparent,
+        color: isSet ? Colors.black : (warnUnset ? Colors.black45 : Colors.transparent),
         borderRadius: BorderRadius.circular(6),
         border: Border.all(
-          color: isSet ? fg.withValues(alpha: 0.7) : Colors.white24,
+          color: borderColor,
+          width: warnUnset ? 1.5 : 1,
         ),
       ),
       child: Row(
@@ -279,7 +288,11 @@ class _TlpChip extends StatelessWidget {
     );
 
     return PopupMenuButton<TlpLevel>(
-      tooltip: l10n.d('TLP-classificatie (Traffic Light Protocol)'),
+      tooltip: warnUnset
+          ? l10n.d(
+              'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.',
+            )
+          : l10n.d('TLP-classificatie (Traffic Light Protocol)'),
       position: PopupMenuPosition.under,
       onSelected: onSelected,
       itemBuilder: (_) => [

@@ -14,6 +14,13 @@ enum TlpLevel { none, clear, green, amber, amberStrict, red }
 bool slideVisibleAtTlp(Slide slide, TlpLevel presentationTlp) =>
     slide.tlp.index <= presentationTlp.index;
 
+/// Strengste classificatie voor markering op een slide: het hoogste van het
+/// deck-niveau en het per-slide niveau.
+TlpLevel effectiveTlp({
+  required TlpLevel deckTlp,
+  required TlpLevel slideTlp,
+}) => deckTlp.index >= slideTlp.index ? deckTlp : slideTlp;
+
 extension TlpLevelX on TlpLevel {
   /// De officiële markering die op de slides verschijnt ('' bij [none]).
   String get label {

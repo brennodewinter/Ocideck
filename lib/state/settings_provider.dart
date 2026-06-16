@@ -55,6 +55,11 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           : 'Basic',
       recentFiles: prefs.getStringList('recentFiles') ?? [],
       maxReleaseExportTlpKey: prefs.getString('maxReleaseExportTlp'),
+      minRequiredExportTlpKey: prefs.getString('minRequiredExportTlp'),
+      requireClassificationOnExport:
+          prefs.getBool('requireClassificationOnExport') ?? false,
+      classificationWatermarkEnabled:
+          prefs.getBool('classificationWatermarkEnabled') ?? false,
       uiTextScale: (prefs.getDouble('uiTextScale') ?? 1.0).clamp(1.0, 2.0),
       presentationTargetSeconds: (prefs.getInt('presentationTargetSeconds') ?? 0)
           .clamp(0, 86400),
@@ -75,6 +80,31 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     } else {
       await prefs.setString('maxReleaseExportTlp', key);
     }
+  }
+
+  /// Stel het vereiste minimumniveau voor export in, of `null` om uit te zetten.
+  Future<void> setMinRequiredExportTlp(String? key) async {
+    state = key == null
+        ? state.copyWith(clearMinRequiredExportTlp: true)
+        : state.copyWith(minRequiredExportTlpKey: key);
+    final prefs = await SharedPreferences.getInstance();
+    if (key == null) {
+      await prefs.remove('minRequiredExportTlp');
+    } else {
+      await prefs.setString('minRequiredExportTlp', key);
+    }
+  }
+
+  Future<void> setRequireClassificationOnExport(bool enabled) async {
+    state = state.copyWith(requireClassificationOnExport: enabled);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('requireClassificationOnExport', enabled);
+  }
+
+  Future<void> setClassificationWatermarkEnabled(bool enabled) async {
+    state = state.copyWith(classificationWatermarkEnabled: enabled);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('classificationWatermarkEnabled', enabled);
   }
 
   Future<void> setUiTextScale(double scale) async {

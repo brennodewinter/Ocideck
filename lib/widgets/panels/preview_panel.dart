@@ -7,6 +7,7 @@ import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
+import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
@@ -90,6 +91,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
     final deckState = ref.watch(deckProvider);
     final deck = deckState.deck!;
     final editor = ref.watch(editorProvider);
+    final settings = ref.watch(settingsProvider);
 
     final idx = editor.selectedIndex.clamp(0, deck.slides.length - 1);
     final slide = deck.slides[idx];
@@ -237,6 +239,9 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                             slideNumber: idx + 1,
                             slideCount: deck.slides.length,
                             tlp: deck.tlp,
+                            organization: deck.organization,
+                            showClassificationWatermark:
+                                settings.classificationWatermarkEnabled,
                             // In de editor mag audio/video bediend worden, maar
                             // niet vanzelf starten (anders dreunt het door op
                             // elke slide-wissel).
@@ -341,7 +346,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
 
 // ── Full-deck preview overlay ─────────────────────────────────────────────────
 
-class FullDeckPreview extends StatelessWidget {
+class FullDeckPreview extends ConsumerWidget {
   final Deck deck;
   final ThemeProfile themeProfile;
 
@@ -352,8 +357,10 @@ class FullDeckPreview extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final showWatermark =
+        ref.watch(settingsProvider).classificationWatermarkEnabled;
     return Scaffold(
       backgroundColor: const Color(0xFF1E2028),
       appBar: AppBar(
@@ -399,6 +406,8 @@ class FullDeckPreview extends StatelessWidget {
                     slideNumber: i + 1,
                     slideCount: deck.slides.length,
                     tlp: deck.tlp,
+                    organization: deck.organization,
+                    showClassificationWatermark: showWatermark,
                   ),
                 ),
               ],

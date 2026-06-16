@@ -5,8 +5,10 @@ import 'dart:typed_data';
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../models/chart.dart';
+import '../models/deck.dart';
 import '../models/settings.dart';
 import '../utils/log.dart';
+import 'export_metadata.dart';
 
 /// Builds a single, self-contained HTML file from a deck's Marp Markdown.
 ///
@@ -37,7 +39,12 @@ class MarpHtmlService {
 
   /// Builds the HTML. When [theme] is given, the slides take that profile's
   /// colours and font so the export matches the in-app / PDF look.
-  Future<String> build(String deckMarkdown, {ThemeProfile? theme}) async {
+  Future<String> build(
+    String deckMarkdown, {
+    ThemeProfile? theme,
+    ExportDocumentMetadata? metadata,
+    String fallbackTitle = 'Presentatie',
+  }) async {
     final marked = await loadAsset('$_assetDir/marked.min.js');
     final purify = await loadAsset('$_assetDir/purify.min.js');
     final hljs = await loadAsset('$_assetDir/highlight.min.js');
@@ -56,10 +63,18 @@ class MarpHtmlService {
 
     String inline(String code) => '<script>${_guard(code)}</script>';
 
+    final meta = metadata ?? const ExportDocumentMetadata();
+    final title = _htmlAttr(meta.displayTitle(fallbackTitle));
+    final headMeta = _htmlHeadMeta(meta, fallbackTitle: fallbackTitle);
+    final banner = meta.htmlClassification == null
+        ? ''
+        : '<div class="tlp-export-banner">${_htmlAttr(meta.htmlClassification!)}</div>';
+
     return '<!doctype html>\n'
         '<html lang="nl"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
-        '<title>OciDeck export</title>'
+        '<title>$title</title>'
+        '$headMeta'
         '<style>$css\n$hljsCss</style>'
         '<script>$_mathjaxConfig</script>'
         '${inline(marked)}'
@@ -68,6 +83,7 @@ class MarpHtmlService {
         '${inline(mathjax)}'
         '${inline(mermaid)}'
         '</head><body>'
+        '$banner'
         '$sections'
         '${inline(_renderScript)}'
         '</body></html>';
@@ -673,8 +689,39 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 .slide img{max-width:100%}
 .slide blockquote{border-left:4px solid #ccc;margin:.5em 0;padding-left:16px;color:#555}
 .slide table{border-collapse:collapse}.slide th,.slide td{border:1px solid #ccc;padding:6px 12px;font-size:20px}
+.tlp-export-banner{position:fixed;top:0;left:0;right:0;background:#000;color:#ffc000;text-align:center;font:700 14px/2.4 monospace;z-index:9999;letter-spacing:.06em}
 @media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}}
 ''';
+
+  static String _htmlAttr(String value) {
+    return value
+        .replaceAll('&', '&amp;')
+        .replaceAll('"', '&quot;')
+        .replaceAll('<', '&lt;');
+  }
+
+  static String _htmlHeadMeta(
+    ExportDocumentMetadata meta, {
+    required String fallbackTitle,
+  }) {
+    final buf = StringBuffer();
+    void tag(String name, String content) {
+      if (content.trim().isEmpty) return;
+      buf.write('<meta name="$name" content="${_htmlAttr(content)}">');
+    }
+
+    tag('author', meta.documentAuthor);
+    tag('keywords', meta.exportKeywords());
+    final desc = meta.htmlDescription;
+    if (desc != null) tag('description', desc);
+    final classification = meta.htmlClassification;
+    if (classification != null) {
+      tag('classification', classification);
+      tag('tlp', meta.tlp.key);
+    }
+    tag('generator', meta.producer);
+    return buf.toString();
+  }
 
   static const _renderScript = r'''
 (function(){

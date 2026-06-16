@@ -8,7 +8,8 @@ import '../models/deck.dart';
 import '../models/slide.dart';
 import '../services/caption_service.dart';
 import '../services/description_service.dart';
-import '../services/classification_policy.dart';
+import '../services/classification_enforcement_policy.dart';
+import '../services/export_metadata.dart';
 import '../services/export_service.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
@@ -554,6 +555,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         themeProfile: deck.themeProfile,
         initialIndex: initial,
         tlp: deck.tlp,
+        organization: deck.organization,
+        showClassificationWatermark:
+            ref.read(settingsProvider).classificationWatermarkEnabled,
         targetDuration: () {
           final secs = ref.read(settingsProvider).presentationTargetSeconds;
           return secs > 0 ? Duration(seconds: secs) : null;
@@ -591,8 +595,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         projectPath: deck.projectPath,
         exportService: widget.exportService,
         tlp: deck.tlp,
-        policy: ClassificationPolicy.fromKey(
-          ref.read(settingsProvider).maxReleaseExportTlpKey,
+        enforcementPolicy: ClassificationEnforcementPolicy.fromAppSettings(
+          ref.read(settingsProvider),
         ),
         qualityResult: const SlideQualityAnalyzer().analyzeSlides(
           slides: slides,
@@ -608,14 +612,31 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         markdown: ref
             .read(markdownServiceProvider)
             .generateDeck(deck.copyWith(slides: slides), inlineChartData: true),
+        organization: deck.organization,
+        showClassificationWatermark:
+            ref.read(settingsProvider).classificationWatermarkEnabled,
+        documentMetadata: ExportDocumentMetadata(
+          title: deck.title,
+          author: deck.author,
+          organization: deck.organization,
+          description: deck.description,
+          keywords: deck.keywords,
+          tlp: deck.tlp,
+        ),
       );
     }
 
     final canExport = deckState.filePath != null && !deckState.isDirty;
+    final enforcement = ClassificationEnforcementPolicy.fromAppSettings(
+      ref.watch(settingsProvider),
+    );
+    final classificationDecision = enforcement.evaluate(deck.tlp);
     final exportTooltip = deckState.filePath == null
         ? l10n.t('exportNeedsSave')
         : deckState.isDirty
         ? l10n.t('exportNeedsClean')
+        : !classificationDecision.allowed
+        ? classificationDecision.reason!
         : l10n.t('exportReady');
 
     void toggleMarkdownMode() {
@@ -788,6 +809,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                 const SizedBox(width: 16),
                 _TlpChip(
                   tlp: deck.tlp,
+                  warnUnset:
+                      !classificationDecision.allowed &&
+                      deck.tlp == TlpLevel.none,
                   onSelected: (level) => deckNotifier.updateInfo(tlp: level),
                 ),
                 const SizedBox(width: 6),

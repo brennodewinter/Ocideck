@@ -2,6 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
@@ -470,6 +471,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
               .setQualityWarningsOnExport(value),
         ),
         const SizedBox(height: 16),
+        _sectionTitle(l10n.d('Classificatie-handhaving')),
+        _classificationEnforcementSection(l10n),
+        const SizedBox(height: 16),
         _sectionTitle(l10n.d('Presentatie')),
         _presentationTargetField(),
         Padding(
@@ -573,6 +577,119 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           },
         ),
       ),
+    );
+  }
+
+  Widget _classificationEnforcementSection(AppLocalizations l10n) {
+    final settings = ref.watch(settingsProvider);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _tlpPolicyDropdown(
+          label: l10n.d('Vrijgaveplafond'),
+          help: l10n.d(
+            'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.',
+          ),
+          noneLabel: l10n.d('Geen plafond'),
+          currentKey: settings.maxReleaseExportTlpKey,
+          includeNoneLevel: true,
+          onChanged: (key) =>
+              ref.read(settingsProvider.notifier).setMaxReleaseExportTlp(key),
+        ),
+        const SizedBox(height: 12),
+        _tlpPolicyDropdown(
+          label: l10n.d('Vereist minimumniveau'),
+          help: l10n.d(
+            'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.',
+          ),
+          noneLabel: l10n.d('Geen minimum'),
+          currentKey: settings.minRequiredExportTlpKey,
+          includeNoneLevel: false,
+          onChanged: (key) =>
+              ref.read(settingsProvider.notifier).setMinRequiredExportTlp(key),
+        ),
+        const SizedBox(height: 8),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(
+            l10n.d('Classificatie verplicht'),
+            style: const TextStyle(fontSize: 13),
+          ),
+          subtitle: Text(
+            l10n.d('Weiger export wanneer het deck geen TLP-niveau heeft.'),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+          value: settings.requireClassificationOnExport,
+          onChanged: (value) => ref
+              .read(settingsProvider.notifier)
+              .setRequireClassificationOnExport(value),
+        ),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(
+            l10n.d('Classificatie-watermerk'),
+            style: const TextStyle(fontSize: 13),
+          ),
+          subtitle: Text(
+            l10n.d(
+              'Toon een diagonaal watermerk met TLP en organisatie op elke slide.',
+            ),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+          value: settings.classificationWatermarkEnabled,
+          onChanged: (value) => ref
+              .read(settingsProvider.notifier)
+              .setClassificationWatermarkEnabled(value),
+        ),
+      ],
+    );
+  }
+
+  Widget _tlpPolicyDropdown({
+    required String label,
+    required String help,
+    required String noneLabel,
+    required String? currentKey,
+    required ValueChanged<String?> onChanged,
+    bool includeNoneLevel = true,
+  }) {
+    final levels = includeNoneLevel
+        ? TlpLevel.values
+        : TlpLevel.values.where((level) => level != TlpLevel.none);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        InputDecorator(
+          decoration: InputDecoration(
+            labelText: label,
+            isDense: true,
+            prefixIcon: const Icon(Icons.shield_outlined, size: 18),
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String?>(
+              value: currentKey,
+              isExpanded: true,
+              isDense: true,
+              items: [
+                DropdownMenuItem(value: null, child: Text(noneLabel)),
+                for (final level in levels)
+                  DropdownMenuItem(
+                    value: level.key,
+                    child: Text(level.label),
+                  ),
+              ],
+              onChanged: onChanged,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 6),
+          child: Text(
+            help,
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+        ),
+      ],
     );
   }
 

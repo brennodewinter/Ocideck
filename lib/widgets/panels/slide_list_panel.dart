@@ -215,6 +215,9 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         themeProfile: deck.themeProfile,
         projectPath: deck.projectPath,
         tlp: deck.tlp,
+        organization: deck.organization,
+        showClassificationWatermark:
+            ref.read(settingsProvider).classificationWatermarkEnabled,
       );
       if (images.isNotEmpty) bytes = images.first;
     } catch (e) {
@@ -535,6 +538,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
           themeProfile: deck.themeProfile,
           slideCount: deck.slides.length,
           tlp: deck.tlp,
+          organization: deck.organization,
           onTap: () => _onSlideTap(index),
           onToggleSkip: () => notifier.toggleSkip(index),
           onCopyImage: () => _copySlideAsImage(slide),
@@ -596,6 +600,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
           themeProfile: deck.themeProfile,
           slideCount: deck.slides.length,
           tlp: deck.tlp,
+          organization: deck.organization,
           onTap: () => _onSlideTap(i),
           onToggleSkip: () => notifier.toggleSkip(i),
           onCopyImage: () => _copySlideAsImage(slide),

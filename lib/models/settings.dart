@@ -382,6 +382,18 @@ class AppSettings {
   /// blokkeert alleen decks die er bovenuit zijn geclassificeerd.
   final String? maxReleaseExportTlpKey;
 
+  /// Optioneel minimumniveau voor export-handhaving (TLP-sleutel). Decks
+  /// onder dit niveau (inclusief ongeclassificeerd) worden geweigerd zodra dit
+  /// is ingesteld. Standaard uit — backward compatible.
+  final String? minRequiredExportTlpKey;
+
+  /// Weiger export wanneer het deck geen TLP-niveau heeft ([TlpLevel.none]).
+  /// Standaard uit. Kan samen met [minRequiredExportTlpKey] worden gebruikt.
+  final bool requireClassificationOnExport;
+
+  /// Diagonaal classificatie-watermerk op slides (fase 2). Standaard uit.
+  final bool classificationWatermarkEnabled;
+
   /// Scale factor for all interface text (1.0–2.0), on top of the system
   /// text scaling. The slide canvas itself is never scaled: slides are a
   /// fixed 16:9 design surface. WCAG 1.4.4 asks for text resizing up to 200%.
@@ -405,6 +417,9 @@ class AppSettings {
     this.selectedAppAppearanceProfileName = 'Basic',
     this.recentFiles = const [],
     this.maxReleaseExportTlpKey,
+    this.minRequiredExportTlpKey,
+    this.requireClassificationOnExport = false,
+    this.classificationWatermarkEnabled = false,
     this.uiTextScale = 1.0,
     this.presentationTargetSeconds = 0,
     this.qualityWarningsOnExport = true,
@@ -460,12 +475,16 @@ class AppSettings {
     String? selectedAppAppearanceProfileName,
     List<String>? recentFiles,
     String? maxReleaseExportTlpKey,
+    String? minRequiredExportTlpKey,
+    bool? requireClassificationOnExport,
+    bool? classificationWatermarkEnabled,
     double? uiTextScale,
     int? presentationTargetSeconds,
     bool? qualityWarningsOnExport,
     bool clearHomeDirectory = false,
     bool clearExportDirectory = false,
     bool clearMaxReleaseExportTlp = false,
+    bool clearMinRequiredExportTlp = false,
   }) {
     final nextProfiles = themeProfiles ?? this.themeProfiles;
     return AppSettings(
@@ -500,6 +519,13 @@ class AppSettings {
       maxReleaseExportTlpKey: clearMaxReleaseExportTlp
           ? null
           : (maxReleaseExportTlpKey ?? this.maxReleaseExportTlpKey),
+      minRequiredExportTlpKey: clearMinRequiredExportTlp
+          ? null
+          : (minRequiredExportTlpKey ?? this.minRequiredExportTlpKey),
+      requireClassificationOnExport:
+          requireClassificationOnExport ?? this.requireClassificationOnExport,
+      classificationWatermarkEnabled:
+          classificationWatermarkEnabled ?? this.classificationWatermarkEnabled,
       uiTextScale: uiTextScale ?? this.uiTextScale,
       presentationTargetSeconds:
           presentationTargetSeconds ?? this.presentationTargetSeconds,
