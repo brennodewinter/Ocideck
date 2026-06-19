@@ -101,24 +101,16 @@ class TabsNotifier extends StateNotifier<TabsState> {
     for (final sub in _subs.values) {
       sub.cancel();
     }
-    // The tabs' notifiers are not disposed here: at teardown the widget tree is
-    // still unmounting and may read a tab one last time. The process is ending
-    // anyway. The per-close path (_disposeTab) is what prevents the real leak.
+    // Tab notifiers are released when each tab's ProviderScope unmounts (tab
+    // close) or when the app shell tears down at process exit.
     super.dispose();
   }
 
-  /// Tear down a tab that is being removed: stop listening to it and dispose
-  /// its notifiers so their listeners and undo/redo history are released. The
-  /// dispose is deferred to a microtask so any widget still referencing this
-  /// tab while it unmounts has finished before the notifiers go away.
+  /// Tear down a tab that is being removed: stop listening to it.
+  /// [DeckNotifier] and [EditorNotifier] are disposed by Riverpod when the tab's
+  /// [ProviderScope] unmounts (see `deckProvider.overrideWith` in [AppShell]).
   void _disposeTab(TabInfo tab) {
     _subs.remove(tab.id)?.cancel();
-    final deckNotifier = tab.deckNotifier;
-    final editorNotifier = tab.editorNotifier;
-    Future.microtask(() {
-      deckNotifier.dispose();
-      editorNotifier.dispose();
-    });
   }
 
   TabInfo _createTab() {

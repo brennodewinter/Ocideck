@@ -10,6 +10,7 @@ import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:highlight/highlight.dart' show highlight;
 import 'package:highlight/languages/all.dart' show allLanguages;
 import 'package:video_player/video_player.dart';
+import 'mermaid_diagram.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
 import '../../models/deck.dart';
@@ -169,6 +170,13 @@ class SlidePreviewWidget extends StatelessWidget {
   /// eerste/enkele lijst en 1 voor de rechterkolom.
   final void Function(int column, int itemIndex)? onChecklistItemToggle;
 
+  /// Live tabelbewerking tijdens presenteren (toets E op een tabeldia).
+  final bool tableEditMode;
+  final int? tableEditRow;
+  final int? tableEditCol;
+  final void Function(int row, int col)? onTableCellSelected;
+  final void Function(int row, int col, String value)? onTableCellChanged;
+
   /// Wordt aangeroepen wanneer de audio van deze slide klaar is (voor de
   /// automatische modus van de presenter).
   final VoidCallback? onAudioComplete;
@@ -191,6 +199,11 @@ class SlidePreviewWidget extends StatelessWidget {
     this.autoplayMedia = false,
     this.presentationMode = false,
     this.onChecklistItemToggle,
+    this.tableEditMode = false,
+    this.tableEditRow,
+    this.tableEditCol,
+    this.onTableCellSelected,
+    this.onTableCellChanged,
     this.onAudioComplete,
     this.onVideoComplete,
   });
@@ -213,22 +226,30 @@ class SlidePreviewWidget extends StatelessWidget {
     // its width; interface text scaling must not reflow it (the auto-fit
     // measuring assumes unscaled text), so the canvas opts out.
     return MediaQuery.withNoTextScaling(
-      child: _ChecklistInteractionHost(
-        enabled: presentationMode && onChecklistItemToggle != null,
-        onToggle: onChecklistItemToggle,
-        child: Directionality(
-          textDirection: TextDirection.ltr,
-          child: DefaultTextStyle(
-            style: TextStyle(
-              color: _hexColor(themeProfile.textColor),
-              decoration: TextDecoration.none,
-              fontWeight: FontWeight.normal,
-              fontStyle: FontStyle.normal,
-            ),
-            child: _SlideLinkScope(
-              onTapLink: onLinkTap,
-              hasBottomTlp: hasBottomRightTlp,
-              child: _buildSlide(),
+      child: _TableEditHost(
+        enabled:
+            presentationMode && slide.type == SlideType.table && tableEditMode,
+        selectedRow: tableEditRow,
+        selectedCol: tableEditCol,
+        onCellSelected: onTableCellSelected,
+        onCellChanged: onTableCellChanged,
+        child: _ChecklistInteractionHost(
+          enabled: presentationMode && onChecklistItemToggle != null,
+          onToggle: onChecklistItemToggle,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: DefaultTextStyle(
+              style: TextStyle(
+                color: _hexColor(themeProfile.textColor),
+                decoration: TextDecoration.none,
+                fontWeight: FontWeight.normal,
+                fontStyle: FontStyle.normal,
+              ),
+              child: _SlideLinkScope(
+                onTapLink: onLinkTap,
+                hasBottomTlp: hasBottomRightTlp,
+                child: _buildSlide(),
+              ),
             ),
           ),
         ),

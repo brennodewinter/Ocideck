@@ -579,6 +579,8 @@ en verandert het round-trip-formaat niet; ze worden alleen bij export gezet
 | --- | --- | --- |
 | Titel | `Title` | `<title>` |
 | `author`, anders `organization` | `Author` / `dc:creator` | `<meta name="author">` |
+| OciDeck (vast) | `Creator` | `<meta name="generator">` |
+| OciDeck + versie (vast) | `Producer` / `Application` / `lastModifiedBy` | — |
 | `description` | — | `<meta name="description">` |
 | `keywords` + TLP + `OciDeck` | `Keywords` | `<meta name="keywords">` |
 | `tlp` (wanneer ≠ none) | `Subject`: `TLP:… — titel` | `<meta name="classification">`, `<meta name="tlp">`, vaste `.tlp-export-banner` bovenaan |

@@ -26,8 +26,21 @@ extra steps. See [`ARCHITECTURE.md`](ARCHITECTURE.md#vendored-forks).
 ## Run
 
 ```sh
-flutter run -d macos     # or -d windows / -d linux
+flutter run -d macos     # or -d windows / -d linux / -d chrome
 ```
+
+## Web
+
+OciDeck also builds for the browser:
+
+```sh
+flutter build web --release
+```
+
+Serve `build/web/` from any static host. The web build supports editing, preview,
+HTML export, and presenting in a single window. Dual-screen presenter mode and
+direct filesystem project folders are desktop-only; use **Open** / **Save** via
+the browser file picker on web.
 
 ## Quality gate
 
@@ -41,6 +54,7 @@ make check        # format-check + flutter analyze + full test suite
 flutter build macos --release
 flutter build windows --release
 flutter build linux --release
+flutter build web --release
 ```
 
 Artifacts land under `build/<platform>/`.

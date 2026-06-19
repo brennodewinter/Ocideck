@@ -26,32 +26,13 @@ void main() {
   ];
 
   test('dual-screen mode is available on every desktop platform', () {
+    expect(shouldUseDualScreen(isDesktopNative: true, displayCount: 2), isTrue);
+  });
+
+  test('dual-screen mode is unavailable on web', () {
     expect(
-      shouldUseDualScreen(
-        isMacOS: true,
-        isWindows: false,
-        isLinux: false,
-        displayCount: 2,
-      ),
-      isTrue,
-    );
-    expect(
-      shouldUseDualScreen(
-        isMacOS: false,
-        isWindows: true,
-        isLinux: false,
-        displayCount: 2,
-      ),
-      isTrue,
-    );
-    expect(
-      shouldUseDualScreen(
-        isMacOS: false,
-        isWindows: false,
-        isLinux: true,
-        displayCount: 2,
-      ),
-      isTrue,
+      shouldUseDualScreen(isDesktopNative: false, displayCount: 2),
+      isFalse,
     );
   });
 
@@ -73,21 +54,11 @@ void main() {
 
   test('dual-screen mode requires a desktop platform and two displays', () {
     expect(
-      shouldUseDualScreen(
-        isMacOS: true,
-        isWindows: false,
-        isLinux: false,
-        displayCount: 1,
-      ),
+      shouldUseDualScreen(isDesktopNative: true, displayCount: 1),
       isFalse,
     );
     expect(
-      shouldUseDualScreen(
-        isMacOS: false,
-        isWindows: false,
-        isLinux: false,
-        displayCount: 2,
-      ),
+      shouldUseDualScreen(isDesktopNative: false, displayCount: 2),
       isFalse,
     );
   });
@@ -175,6 +146,65 @@ void main() {
 
     expect(updated?.bullets, ['[x] Live afvinken']);
     expect(find.text('☑ '), findsOneWidget);
+  });
+
+  testWidgets('table edit mode toggles with E and persists cell changes', (
+    tester,
+  ) async {
+    Slide? updated;
+    final tableSlides = [
+      Slide.create(SlideType.table).copyWith(
+        title: 'Cijfers',
+        tableRows: [
+          ['Kolom', 'Waarde'],
+          ['Omzet', '100'],
+        ],
+      ),
+    ];
+    await tester.pumpWidget(
+      MaterialApp(
+        home: FullscreenPresenter(
+          slides: tableSlides,
+          projectPath: null,
+          themeProfile: const ThemeProfile(),
+          initialIndex: 0,
+          onSlideChanged: (slide) => updated = slide,
+        ),
+      ),
+    );
+    await tester.pump();
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyE);
+    await tester.pump();
+    expect(find.text('Tabel bewerken'), findsOneWidget);
+
+    await tester.tap(find.byKey(const ValueKey('table-edit-cell-1-1')));
+    await tester.pump();
+    await tester.enterText(
+      find.byKey(const ValueKey('table-edit-cell-1-1')),
+      '250',
+    );
+    await tester.pump();
+
+    expect(updated?.tableRows[1][1], '250');
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyE);
+    await tester.pump();
+    expect(find.text('Tabel bewerken'), findsNothing);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('E still selects eraser on non-table slides', (tester) async {
+    await tester.pumpWidget(_host(slides));
+    await tester.pump();
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyE);
+    await tester.pump();
+    expect(find.text('Tabel bewerken'), findsNothing);
+    expect(find.byIcon(Icons.cleaning_services_outlined), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
   });
 
   testWidgets('starts in audience view without presenter chrome', (

@@ -13,6 +13,7 @@ import '../services/export_metadata.dart';
 import '../services/export_service.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
+import '../services/mermaid_render_service.dart';
 import '../services/slide_quality_analyzer.dart';
 import '../state/deck_provider.dart';
 import '../state/editor_provider.dart';
@@ -363,6 +364,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                   ],
                 ),
                 if (_dragging) const _DropOverlay(),
+                const MermaidRenderHostLayer(),
               ],
             ),
           ),
@@ -556,8 +558,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         initialIndex: initial,
         tlp: deck.tlp,
         organization: deck.organization,
-        showClassificationWatermark:
-            ref.read(settingsProvider).classificationWatermarkEnabled,
+        showClassificationWatermark: ref
+            .read(settingsProvider)
+            .classificationWatermarkEnabled,
         targetDuration: () {
           final secs = ref.read(settingsProvider).presentationTargetSeconds;
           return secs > 0 ? Duration(seconds: secs) : null;
@@ -613,8 +616,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             .read(markdownServiceProvider)
             .generateDeck(deck.copyWith(slides: slides), inlineChartData: true),
         organization: deck.organization,
-        showClassificationWatermark:
-            ref.read(settingsProvider).classificationWatermarkEnabled,
+        showClassificationWatermark: ref
+            .read(settingsProvider)
+            .classificationWatermarkEnabled,
         documentMetadata: ExportDocumentMetadata(
           title: deck.title,
           author: deck.author,

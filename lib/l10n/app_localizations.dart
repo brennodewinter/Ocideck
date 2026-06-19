@@ -1151,6 +1151,18 @@ const _dutchSourceStrings = {
     'slide(s) gekopieerd naar': 'slide(s) copied to',
     '1 slide geïmporteerd.': '1 slide imported.',
     'slides geïmporteerd.': 'slides imported.',
+    'Export wordt voorbereid…': 'Preparing export…',
+    'tip(s)': 'tip(s)',
+    'fout(en)': 'error(s)',
+    'Kwaliteitsoverzicht': 'Quality overview',
+    'Bekijk meldingen…': 'View issues…',
+    'Bekijk alle meldingen…': 'View all issues…',
+    'Tips': 'Tips',
+    'Waarschuwingen': 'Warnings',
+    'Fouten': 'Errors',
+    'Afbeeldingen laden…': 'Loading images…',
+    'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+        'Tip: add alt text / caption for accessibility',
     'Zoek in slides…': 'Search in slides…',
     'Geen slides met': 'No slides with',
     'SLIDES': 'SLIDES',
@@ -2700,6 +2712,12 @@ const _dutchSourceStringAdditions = {
         'Show a diagonal watermark with TLP and organization on every slide.',
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Set a TLP level — export is blocked by the classification policy.',
+    'Tabel bewerken': 'Edit table',
+    'Pijltjes · Tab · E of Esc': 'Arrow keys · Tab · E or Esc',
+    'Tabel bewerken (op tabeldia)': 'Edit table (on table slides)',
+    'Pen · markeerstift · ⇧E': 'Pen · highlighter · ⇧E',
+    'Gestapelde staaf': 'Stacked bar',
+    'Spreiding': 'Scatter',
   },
   'it': {
     'Toegankelijkheid': 'Accessibilità',
@@ -3115,6 +3133,12 @@ const _dutchSourceStringAdditions = {
         'Mostra una filigrana diagonale con TLP e organizzazione su ogni slide.',
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Imposta un livello TLP — l\'export è bloccato dalla policy di classificazione.',
+    'Tabel bewerken': 'Modifica tabella',
+    'Pijltjes · Tab · E of Esc': 'Frecce · Tab · E o Esc',
+    'Tabel bewerken (op tabeldia)': 'Modifica tabella (su slide tabella)',
+    'Pen · markeerstift · ⇧E': 'Penna · evidenziatore · ⇧E',
+    'Gestapelde staaf': 'Barre impilate',
+    'Spreiding': 'Dispersione',
   },
   'de': {
     'Toegankelijkheid': 'Barrierefreiheit',
@@ -3138,8 +3162,7 @@ const _dutchSourceStringAdditions = {
     'Totaal': 'Gesamt',
     'Totale tijd': 'Gesamtzeit',
     'Geen slides gemeten.': 'Keine Folien gemessen.',
-    'Tijden gekopieerd naar klembord.':
-        'Zeiten in die Zwischenablage kopiert.',
+    'Tijden gekopieerd naar klembord.': 'Zeiten in die Zwischenablage kopiert.',
     'Kopieer': 'Kopieren',
     'Sluiten': 'Schließen',
     'Tekstgrootte van de interface': 'Textgröße der Oberfläche',
@@ -3530,6 +3553,12 @@ const _dutchSourceStringAdditions = {
         'Diagonales Wasserzeichen mit TLP und Organisation auf jeder Folie.',
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'TLP-Niveau festlegen — Export durch Klassifizierungsrichtlinie blockiert.',
+    'Tabel bewerken': 'Tabelle bearbeiten',
+    'Pijltjes · Tab · E of Esc': 'Pfeiltasten · Tab · E oder Esc',
+    'Tabel bewerken (op tabeldia)': 'Tabelle bearbeiten (auf Tabellenfolie)',
+    'Pen · markeerstift · ⇧E': 'Stift · Marker · ⇧E',
+    'Gestapelde staaf': 'Gestapelte Balken',
+    'Spreiding': 'Streudiagramm',
   },
   'fr': {
     'Toegankelijkheid': 'Accessibilité',
@@ -3553,8 +3582,7 @@ const _dutchSourceStringAdditions = {
     'Totaal': 'Total',
     'Totale tijd': 'Temps total',
     'Geen slides gemeten.': 'Aucune diapo mesurée.',
-    'Tijden gekopieerd naar klembord.':
-        'Temps copiés dans le presse-papiers.',
+    'Tijden gekopieerd naar klembord.': 'Temps copiés dans le presse-papiers.',
     'Kopieer': 'Copier',
     'Sluiten': 'Fermer',
     'Tekstgrootte van de interface': 'Taille du texte de l\'interface',
@@ -3949,6 +3977,12 @@ const _dutchSourceStringAdditions = {
         'Filigrane diagonal avec TLP et organisation sur chaque diapositive.',
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Définissez un niveau TLP — export bloqué par la politique de classification.',
+    'Tabel bewerken': 'Modifier le tableau',
+    'Pijltjes · Tab · E of Esc': 'Flèches · Tab · E ou Échap',
+    'Tabel bewerken (op tabeldia)': 'Modifier le tableau (sur diapo tableau)',
+    'Pen · markeerstift · ⇧E': 'Stylo · surligneur · ⇧E',
+    'Gestapelde staaf': 'Barres empilées',
+    'Spreiding': 'Nuage de points',
   },
   'es': {
     'Toegankelijkheid': 'Accesibilidad',
@@ -4288,7 +4322,8 @@ const _dutchSourceStringAdditions = {
     'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
         'advertencia(s). Las diapositivas pueden interpretarse incorrectamente.',
     'Slidekwaliteit': 'Calidad de diapositivas',
-    'Geen kwaliteitsproblemen gevonden': 'No se encontraron problemas de calidad',
+    'Geen kwaliteitsproblemen gevonden':
+        'No se encontraron problemas de calidad',
     'Thema (hele presentatie)': 'Tema (presentación completa)',
     'Kwaliteitsprobleem': 'Problema de calidad',
     'Kwaliteitsproblemen': 'Problemas de calidad',
@@ -4364,6 +4399,12 @@ const _dutchSourceStringAdditions = {
         'Marca de agua diagonal con TLP y organización en cada diapositiva.',
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Establece un nivel TLP — exportación bloqueada por la política de clasificación.',
+    'Tabel bewerken': 'Editar tabla',
+    'Pijltjes · Tab · E of Esc': 'Flechas · Tab · E o Esc',
+    'Tabel bewerken (op tabeldia)': 'Editar tabla (en diapositiva de tabla)',
+    'Pen · markeerstift · ⇧E': 'Lápiz · marcador · ⇧E',
+    'Gestapelde staaf': 'Barras apiladas',
+    'Spreiding': 'Dispersión',
   },
   'fy': {
     'Toegankelijkheid': 'Tagonklikens',
@@ -4772,6 +4813,12 @@ const _dutchSourceStringAdditions = {
         'Diagonaal watermerk mei TLP en organisaasje op elke slide.',
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Stel in TLP-nivo yn — eksport blokkearre troch it klassifikaasjebelied.',
+    'Tabel bewerken': 'Tabel bewurkje',
+    'Pijltjes · Tab · E of Esc': 'Pylktoetsen · Tab · E of Esc',
+    'Tabel bewerken (op tabeldia)': 'Tabel bewurkje (op tabelslide)',
+    'Pen · markeerstift · ⇧E': 'Pen · markearstift · ⇧E',
+    'Gestapelde staaf': 'Stapele staven',
+    'Spreiding': 'Sparring',
   },
   'pap': {
     'Toegankelijkheid': 'Aksesibilidat',
@@ -5183,5 +5230,11 @@ const _dutchSourceStringAdditions = {
         'Watermark diagonal ku TLP i organisashon riba kada slide.',
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Pone un nivel TLP — exportá blokeá pa e polítika di klasifikashon.',
+    'Tabel bewerken': 'Edita tabel',
+    'Pijltjes · Tab · E of Esc': 'Flechanan · Tab · E of Esc',
+    'Tabel bewerken (op tabeldia)': 'Edita tabel (riba slide di tabel)',
+    'Pen · markeerstift · ⇧E': 'Pèn · marker · ⇧E',
+    'Gestapelde staaf': 'Baranan apilá',
+    'Spreiding': 'Dispershon',
   },
 };

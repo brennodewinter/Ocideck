@@ -84,10 +84,10 @@ class WindowController {
 
   Future<void> hide() => _callWindowMethod('window_hide', {});
 
-  /// Close (destroy) this window. (macOS)
+  /// Close (destroy) this window. (macOS, Windows, Linux)
   Future<void> close() => _callWindowMethod('window_close', {});
 
-  /// Position/size this window in screen coordinates. (macOS)
+  /// Position/size this window in screen coordinates. (macOS, Windows, Linux)
   Future<void> setFrame(Rect frame) => _callWindowMethod('window_setFrame', {
         'x': frame.left,
         'y': frame.top,
@@ -98,7 +98,7 @@ class WindowController {
   /// Make this window a borderless surface filling an entire screen. When
   /// [external] is true the first non-main screen (e.g. a beamer) is used,
   /// otherwise the main screen. The window does not become key, so keyboard
-  /// focus stays with the window that had it. (macOS)
+  /// focus stays with the window that had it. (macOS, Windows, Linux)
   Future<void> coverScreen({bool external = true}) =>
       _callWindowMethod('window_coverScreen', {'external': external});
 

@@ -173,10 +173,7 @@ class _TlpOverlay extends StatelessWidget {
           color: Colors.black,
           borderRadius: BorderRadius.circular(w * 0.005),
         ),
-        child: Text(
-          tlp.label,
-          style: _tlpMarkingTextStyle(w, tlp),
-        ),
+        child: Text(tlp.label, style: _tlpMarkingTextStyle(w, tlp)),
       ),
     );
   }

@@ -1,6 +1,55 @@
+import 'package:flutter/material.dart';
+
 import '../l10n/app_localizations.dart';
 import '../models/markdown_validation.dart';
 import '../models/slide_quality.dart';
+
+String formatSlideQualityCountSummary(
+  AppLocalizations l10n,
+  SlideQualityResult result,
+) {
+  if (!result.hasIssues) {
+    return l10n.d('Geen kwaliteitsproblemen gevonden');
+  }
+  final parts = <String>[];
+  if (result.errorCount > 0) {
+    parts.add('${result.errorCount} ${l10n.d('fout(en)')}');
+  }
+  if (result.warningCount > 0) {
+    parts.add('${result.warningCount} ${l10n.d('waarschuwing(en)')}');
+  }
+  if (result.infoCount > 0) {
+    parts.add('${result.infoCount} ${l10n.d('tip(s)')}');
+  }
+  return parts.join(', ');
+}
+
+Color slideQualitySeverityColor(MarkdownValidationSeverity severity) {
+  return switch (severity) {
+    MarkdownValidationSeverity.error => const Color(0xFFB91C1C),
+    MarkdownValidationSeverity.warning => const Color(0xFF92400E),
+    MarkdownValidationSeverity.informational => const Color(0xFF475569),
+  };
+}
+
+IconData slideQualitySeverityIcon(MarkdownValidationSeverity severity) {
+  return switch (severity) {
+    MarkdownValidationSeverity.error => Icons.error_outline,
+    MarkdownValidationSeverity.warning => Icons.warning_amber_outlined,
+    MarkdownValidationSeverity.informational => Icons.info_outline,
+  };
+}
+
+String slideQualitySeverityLabel(
+  AppLocalizations l10n,
+  MarkdownValidationSeverity severity,
+) {
+  return switch (severity) {
+    MarkdownValidationSeverity.error => l10n.d('Fouten'),
+    MarkdownValidationSeverity.warning => l10n.d('Waarschuwingen'),
+    MarkdownValidationSeverity.informational => l10n.d('Tips'),
+  };
+}
 
 String slideQualityCategoryLabel(
   AppLocalizations l10n,
@@ -31,22 +80,22 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
       '${label('label')} ${l10n.d('heeft geen titel of sprekernotities die de inhoud beschrijven.')}',
     SlideQualityIssueKind.textDensityWarning =>
       '${l10n.d('Veel tekst op deze slide: het lettertype wordt verkleind tot ')}'
-      '${issue.args['percent']}${l10n.d(' van de ontwerpgrootte.')}',
+          '${issue.args['percent']}${l10n.d(' van de ontwerpgrootte.')}',
     SlideQualityIssueKind.textDensityCritical =>
       '${l10n.d('Veel tekst op deze slide: het lettertype wordt sterk verkleind (')}'
-      '${issue.args['percent']}${l10n.d('van de ontwerpgrootte). Overweeg de inhoud te splitsen.')}',
+          '${issue.args['percent']}${l10n.d('van de ontwerpgrootte). Overweeg de inhoud te splitsen.')}',
     SlideQualityIssueKind.tableDensityMinimum =>
       '${l10n.d('Grote tabel (')}${issue.args['rows']}${l10n.d(' rijen, ')}'
-      '${issue.args['cols']}${l10n.d(' kolommen): celtekst staat op het minimumformaat.')}',
+          '${issue.args['cols']}${l10n.d(' kolommen): celtekst staat op het minimumformaat.')}',
     SlideQualityIssueKind.codeDensityHigh =>
       '${l10n.d('Veel broncode (')}${issue.args['lines']}'
-      '${l10n.d(' regels) — de tekst wordt sterk verkleind om te passen.')}',
+          '${l10n.d(' regels) — de tekst wordt sterk verkleind om te passen.')}',
     SlideQualityIssueKind.freeMarkdownDensityHigh =>
       '${l10n.d('Veel vrije markdown (')}${issue.args['lines']}'
-      '${l10n.d(' regels) — controleer of alles leesbaar blijft op de slide.')}',
+          '${l10n.d(' regels) — controleer of alles leesbaar blijft op de slide.')}',
     SlideQualityIssueKind.titleDensityHigh =>
       '${l10n.d('Lange titelpagina (')}${issue.args['chars']}'
-      '${l10n.d(' tekens) — de tekst wordt verkleind om te passen.')}',
+          '${l10n.d(' tekens) — de tekst wordt verkleind om te passen.')}',
   };
 }
 
@@ -76,5 +125,8 @@ MarkdownValidationSeverity? slideQualitySeverityForField({
   if (match.any((i) => i.severity == MarkdownValidationSeverity.error)) {
     return MarkdownValidationSeverity.error;
   }
-  return MarkdownValidationSeverity.warning;
+  if (match.any((i) => i.severity == MarkdownValidationSeverity.warning)) {
+    return MarkdownValidationSeverity.warning;
+  }
+  return MarkdownValidationSeverity.informational;
 }

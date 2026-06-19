@@ -28,7 +28,8 @@ the left and a live preview on the right.
 
 Text fields support inline Markdown (`**bold**`, `*italic*`, `` `code` ``,
 `[links](…)`). Free-Markdown slides also render fenced code with syntax
-highlighting and `$…$` / `$$…$$` LaTeX math.
+highlighting, `$…$` / `$$…$$` LaTeX math, and ` ```mermaid ` diagrams (rendered
+in preview, presenter, PDF/PPTX, and HTML export).
 
 ### Source-code slides
 
@@ -52,7 +53,8 @@ in it — still pastes into just the one cell.
 
 ### Charts
 
-Pick a type (**bar**, **line**, **pie**, or **spider/radar**) and a title, then
+Pick a type (**bar**, **stacked bar**, **line**, **pie**, **spider/radar**, or
+**scatter**) and a title, then
 enter data in the grid: the first column is the labels, each further column is a
 named series. Use **Row** and **Series** to add data; the small ✕ removes a
 row/column. Each series and (for pie/radar) each label can be given its own colour.
@@ -172,17 +174,19 @@ written to disk or into the `.md` file.
 
 ### Two screens (beamer + laptop)
 
-When a second display is connected, OciDeck automatically shows the **slide on the
-beamer** and the **presenter view on your laptop** (current slide, next slide,
-notes, clock). Use an *extended* (not mirrored) display. Notes:
+When a second display is connected on **macOS, Windows, or Linux**, OciDeck
+automatically shows the **slide on the beamer** and the **presenter view on your
+laptop** (current slide, next slide, notes, clock). Use an *extended* (not
+mirrored) display. Notes:
 
 - The keyboard stays on the laptop; clicking the beamer also advances.
 - On macOS the "external" screen is the one without the menu bar.
 
 ### Annotating while presenting
 
-Draw on the slide live with **D** pen, **T** highlighter, **E** eraser, **X**
-laser pointer, and **C** to clear; `Esc` puts the tool away. Drawings are a
+Draw on the slide live with **D** pen, **T** highlighter, **⇧E** eraser, **E**
+to edit a table on table slides, **X** laser pointer, and **C** to clear; `Esc`
+puts the tool away. Drawings are a
 separate layer (never written into the Marp Markdown), mirror live to the beamer,
 and are saved in a `<name>.ink.json` sidecar so they persist with the deck.
 

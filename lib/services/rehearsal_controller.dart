@@ -67,7 +67,8 @@ class RehearsalController {
     final t = _now();
     final prev = _currentId;
     if (prev != null) {
-      _spent[prev] = (_spent[prev] ?? Duration.zero) + t.difference(_slideEntered);
+      _spent[prev] =
+          (_spent[prev] ?? Duration.zero) + t.difference(_slideEntered);
     }
     _currentId = id;
     _slideEntered = t;

@@ -51,7 +51,8 @@ Annotation tools:
 | --- | --- |
 | `D` | Pen |
 | `T` | Highlighter |
-| `E` | Eraser |
+| `E` | Edit table (on table slides) |
+| `⇧E` | Eraser |
 | `X` | Laser pointer |
 | `C` | Clear the current slide's annotations |
 
@@ -59,5 +60,5 @@ Annotation tools:
 typed slide number, then removes a black/white screen, and finally exits the
 presentation.
 
-> In **dual-screen** mode the keyboard stays with the laptop (presenter) window;
-> clicks on the beamer also advance the slide.
+> In **dual-screen** mode (macOS, Windows, Linux) the keyboard stays with the
+> laptop (presenter) window; clicks on the beamer also advance the slide.

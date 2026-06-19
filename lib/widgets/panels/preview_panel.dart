@@ -359,8 +359,9 @@ class FullDeckPreview extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final showWatermark =
-        ref.watch(settingsProvider).classificationWatermarkEnabled;
+    final showWatermark = ref
+        .watch(settingsProvider)
+        .classificationWatermarkEnabled;
     return Scaffold(
       backgroundColor: const Color(0xFF1E2028),
       appBar: AppBar(

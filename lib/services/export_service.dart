@@ -141,8 +141,7 @@ class ExportService {
     }
     final fallbackTitle = p.basenameWithoutExtension(deckPath);
     final docMeta =
-        metadata ??
-        ExportDocumentMetadata(title: fallbackTitle, tlp: tlp);
+        metadata ?? ExportDocumentMetadata(title: fallbackTitle, tlp: tlp);
     final compactSuffix = compress && format == ExportFormat.pdf
         ? '-compact'
         : '';
@@ -203,7 +202,7 @@ class ExportService {
       author: metadata.documentAuthor,
       subject: metadata.subject(fallbackTitle),
       keywords: metadata.exportKeywords(),
-      creator: metadata.producer,
+      creator: metadata.creator,
       producer: metadata.producer,
     );
     // Page size in points; only the ratio matters for a full-bleed image.

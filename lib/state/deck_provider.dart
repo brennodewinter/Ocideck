@@ -253,7 +253,10 @@ class DeckNotifier extends StateNotifier<DeckState> {
     final at = afterIndex != null ? afterIndex + 1 : slides.length;
     final clamped = at.clamp(0, slides.length);
     slides.insertAll(clamped, newSlides.map(Slide.duplicate));
-    _mutate(deck.copyWith(slides: slides));
+    _mutate(
+      deck.copyWith(slides: slides),
+      bumpRevision: newSlides.length > 1,
+    );
     return clamped;
   }
 

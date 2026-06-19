@@ -192,7 +192,7 @@ class SlideQualityAnalyzer {
           slideIndex: index,
           kind: SlideQualityIssueKind.missingAltCaption,
           category: SlideQualityCategory.altText,
-          severity: MarkdownValidationSeverity.warning,
+          severity: MarkdownValidationSeverity.informational,
           field: field,
           args: {'label': label},
         ),
@@ -272,7 +272,8 @@ class SlideQualityAnalyzer {
   ) {
     final spec = ChartSpec.parse(slide.customMarkdown);
     if (spec.title.trim().isNotEmpty) return;
-    if (spec.hasInlineData && spec.series.any((s) => s.name.trim().isNotEmpty)) {
+    if (spec.hasInlineData &&
+        spec.series.any((s) => s.name.trim().isNotEmpty)) {
       return;
     }
     if (spec.source != null && spec.source!.trim().isNotEmpty) return;
@@ -282,7 +283,7 @@ class SlideQualityAnalyzer {
         slideIndex: index,
         kind: SlideQualityIssueKind.chartMissingDescription,
         category: SlideQualityCategory.altText,
-        severity: MarkdownValidationSeverity.warning,
+        severity: MarkdownValidationSeverity.informational,
         field: 'customMarkdown',
       ),
     );
@@ -296,7 +297,8 @@ class SlideQualityAnalyzer {
     required String label,
   }) {
     if (!hasMedia) return;
-    final hasDescription = slide.title.trim().isNotEmpty ||
+    final hasDescription =
+        slide.title.trim().isNotEmpty ||
         slide.notes.trim().isNotEmpty ||
         slide.subtitle.trim().isNotEmpty;
     if (hasDescription) return;
@@ -306,7 +308,7 @@ class SlideQualityAnalyzer {
         slideIndex: index,
         kind: SlideQualityIssueKind.mediaMissingDescription,
         category: SlideQualityCategory.altText,
-        severity: MarkdownValidationSeverity.warning,
+        severity: MarkdownValidationSeverity.informational,
         field: 'title',
         args: {'label': label},
       ),
@@ -388,7 +390,11 @@ class SlideQualityAnalyzer {
     if (rows.isEmpty) return;
     final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
     final w = kReferenceSlideWidth;
-    final cellSize = tableCellFontSize(w, rowCount: rows.length, colCount: colCount);
+    final cellSize = tableCellFontSize(
+      w,
+      rowCount: rows.length,
+      colCount: colCount,
+    );
     final minimum = tableCellFontMinimum(w);
     if (cellSize > minimum + 0.001) return;
 
@@ -398,15 +404,16 @@ class SlideQualityAnalyzer {
         kind: SlideQualityIssueKind.tableDensityMinimum,
         category: SlideQualityCategory.textDensity,
         severity: MarkdownValidationSeverity.warning,
-        args: {
-          'rows': '${rows.length}',
-          'cols': '$colCount',
-        },
+        args: {'rows': '${rows.length}', 'cols': '$colCount'},
       ),
     );
   }
 
-  void _checkCodeDensity(Slide slide, int index, List<SlideQualityIssue> issues) {
+  void _checkCodeDensity(
+    Slide slide,
+    int index,
+    List<SlideQualityIssue> issues,
+  ) {
     final code = slide.customMarkdown;
     if (code.trim().isEmpty) return;
     final lines = code.split('\n');
@@ -446,7 +453,11 @@ class SlideQualityAnalyzer {
     );
   }
 
-  void _checkTitleDensity(Slide slide, int index, List<SlideQualityIssue> issues) {
+  void _checkTitleDensity(
+    Slide slide,
+    int index,
+    List<SlideQualityIssue> issues,
+  ) {
     final titleLen = stripInlineMarkdown(slide.title).length;
     final subtitleLen = stripInlineMarkdown(slide.subtitle).length;
     if (titleLen + subtitleLen <= 120) return;

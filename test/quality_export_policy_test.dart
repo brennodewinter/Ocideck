@@ -12,7 +12,7 @@ void main() {
           slideIndex: 0,
           kind: SlideQualityIssueKind.missingAltCaption,
           category: SlideQualityCategory.altText,
-          severity: MarkdownValidationSeverity.warning,
+          severity: MarkdownValidationSeverity.informational,
         ),
       ]);
 
@@ -24,13 +24,27 @@ void main() {
       expect(policy.evaluate(const SlideQualityResult([])).allowed, isTrue);
     });
 
-    test('requires acknowledgement when enabled and issues exist', () {
+    test('allows export when only informational tips exist', () {
       const policy = QualityExportPolicy();
       const result = SlideQualityResult([
         SlideQualityIssue(
           slideIndex: 0,
           kind: SlideQualityIssueKind.missingAltCaption,
           category: SlideQualityCategory.altText,
+          severity: MarkdownValidationSeverity.informational,
+        ),
+      ]);
+
+      expect(policy.evaluate(result).allowed, isTrue);
+    });
+
+    test('requires acknowledgement when enabled and warnings exist', () {
+      const policy = QualityExportPolicy();
+      const result = SlideQualityResult([
+        SlideQualityIssue(
+          slideIndex: 0,
+          kind: SlideQualityIssueKind.imageContrastUnverified,
+          category: SlideQualityCategory.contrast,
           severity: MarkdownValidationSeverity.warning,
         ),
       ]);

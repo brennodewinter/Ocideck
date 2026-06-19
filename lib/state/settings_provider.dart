@@ -61,10 +61,9 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       classificationWatermarkEnabled:
           prefs.getBool('classificationWatermarkEnabled') ?? false,
       uiTextScale: (prefs.getDouble('uiTextScale') ?? 1.0).clamp(1.0, 2.0),
-      presentationTargetSeconds: (prefs.getInt('presentationTargetSeconds') ?? 0)
-          .clamp(0, 86400),
-      qualityWarningsOnExport:
-          prefs.getBool('qualityWarningsOnExport') ?? true,
+      presentationTargetSeconds:
+          (prefs.getInt('presentationTargetSeconds') ?? 0).clamp(0, 86400),
+      qualityWarningsOnExport: prefs.getBool('qualityWarningsOnExport') ?? true,
     );
   }
 

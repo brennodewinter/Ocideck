@@ -673,10 +673,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
               items: [
                 DropdownMenuItem(value: null, child: Text(noneLabel)),
                 for (final level in levels)
-                  DropdownMenuItem(
-                    value: level.key,
-                    child: Text(level.label),
-                  ),
+                  DropdownMenuItem(value: level.key, child: Text(level.label)),
               ],
               onChanged: onChanged,
             ),

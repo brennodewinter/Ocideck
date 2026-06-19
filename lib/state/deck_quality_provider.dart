@@ -37,6 +37,7 @@ class DeckQualityNotifier extends StateNotifier<SlideQualityResult> {
       return;
     }
     _debounce = Timer(const Duration(milliseconds: 300), () {
+      if (!mounted) return;
       final current = _ref.read(deckProvider).deck;
       if (current == null) {
         state = const SlideQualityResult([]);

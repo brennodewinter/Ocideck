@@ -37,7 +37,11 @@ const double kWcagAaLargeText = 3.0;
 /// Body text below this ratio is treated as a hard quality error.
 const double kWcagCriticalBodyText = 3.0;
 
-bool meetsWcagAa(String foreground, String background, {bool largeText = false}) {
+bool meetsWcagAa(
+  String foreground,
+  String background, {
+  bool largeText = false,
+}) {
   final ratio = hexContrastRatio(foreground, background);
   if (ratio == null) return true;
   final threshold = largeText ? kWcagAaLargeText : kWcagAaNormalText;

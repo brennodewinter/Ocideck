@@ -77,8 +77,7 @@ class ThemeProfile {
     this.closingSlideEnabled = false,
     this.closingSlideMarkdown = '# Bedankt\n\nVragen?',
   }) : tableTextColor = tableTextColor ?? textColor,
-       tableHeaderBackgroundColor =
-           tableHeaderBackgroundColor ?? accentColor;
+       tableHeaderBackgroundColor = tableHeaderBackgroundColor ?? accentColor;
 
   static const logoPositions = [
     'top-left',

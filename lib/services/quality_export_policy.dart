@@ -18,8 +18,7 @@ class QualityExportDecision {
     this.warningCount = 0,
   });
 
-  const QualityExportDecision.allow()
-    : this._(allowed: true);
+  const QualityExportDecision.allow() : this._(allowed: true);
 
   factory QualityExportDecision.needsAcknowledgement({
     required int errorCount,
@@ -50,7 +49,7 @@ class QualityExportPolicy {
     SlideQualityResult result, {
     bool acknowledged = false,
   }) {
-    if (!enabled || !result.hasIssues || acknowledged) {
+    if (!enabled || !result.hasActionableIssues || acknowledged) {
       return const QualityExportDecision.allow();
     }
     return QualityExportDecision.needsAcknowledgement(

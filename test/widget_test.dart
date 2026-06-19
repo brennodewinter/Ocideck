@@ -53,4 +53,39 @@ void main() {
 
     expect(container.read(tabsProvider).current!.isOpen, isFalse);
   });
+
+  testWidgets('closing one of two tabs does not double-dispose deck notifier', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1600, 1000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+    await tester.pumpAndSettle();
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(AppShell)),
+    );
+    container
+        .read(tabsProvider)
+        .current!
+        .deckNotifier
+        .loadDeck(
+          Deck(
+            title: 'First',
+            slides: [Slide.create(SlideType.title).copyWith(title: 'First')],
+          ),
+        );
+    await tester.pump();
+
+    container.read(tabsProvider.notifier).newEmptyTab();
+    await tester.pumpAndSettle();
+    expect(container.read(tabsProvider).tabs.length, 2);
+
+    final firstNotifier = container.read(tabsProvider).tabs[0].deckNotifier;
+    container.read(tabsProvider.notifier).closeTab(1);
+    await tester.pumpAndSettle();
+
+    expect(container.read(tabsProvider).tabs.length, 1);
+    expect(firstNotifier.mounted, isTrue);
+    expect(container.read(tabsProvider).current!.label, 'First');
+  });
 }
