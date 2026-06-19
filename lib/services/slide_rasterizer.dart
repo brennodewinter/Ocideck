@@ -55,10 +55,10 @@ class SlideRasterizer {
 
     final logo = _resolve(themeProfile.logoPath ?? '', projectPath);
     final allPaths = <String>{
-      if (logo != null) logo,
+      ?logo,
       for (final slide in slides) ...[
-        if (_resolve(slide.imagePath, projectPath) case final path?) path,
-        if (_resolve(slide.imagePath2, projectPath) case final path?) path,
+        ?_resolve(slide.imagePath, projectPath),
+        ?_resolve(slide.imagePath2, projectPath),
       ],
     };
 
@@ -86,6 +86,7 @@ class SlideRasterizer {
     try {
       overlay.insert(entry);
       await WidgetsBinding.instance.endOfFrame;
+      if (!context.mounted) return results;
 
       onStage?.call('precache', 0, allPaths.length);
       await _precachePathsBatched(
@@ -154,11 +155,8 @@ class SlideRasterizer {
       final batch = list.skip(i).take(batchSize);
       await Future.wait(
         batch.map(
-          (path) => precacheImage(
-            FileImage(File(path)),
-            context,
-            onError: (_, _) {},
-          ),
+          (path) =>
+              precacheImage(FileImage(File(path)), context, onError: (_, _) {}),
         ),
       );
       done += batch.length;

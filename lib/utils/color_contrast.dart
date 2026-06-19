@@ -47,3 +47,19 @@ bool meetsWcagAa(
   final threshold = largeText ? kWcagAaLargeText : kWcagAaNormalText;
   return ratio >= threshold;
 }
+
+/// Blends [foreground] over [background] and returns the WCAG contrast ratio.
+double? blendedHexContrastRatio(
+  String foreground,
+  String background, {
+  required double foregroundAlpha,
+}) {
+  final fg = parseHexColor(foreground);
+  final bg = parseHexColor(background);
+  if (fg == null || bg == null) return null;
+  final blended = Color.alphaBlend(
+    fg.withValues(alpha: foregroundAlpha.clamp(0.0, 1.0)),
+    bg,
+  );
+  return contrastRatio(blended, bg);
+}

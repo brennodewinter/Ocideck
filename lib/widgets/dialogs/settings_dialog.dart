@@ -15,10 +15,30 @@ TextStyle _fontStyle(String font, TextStyle base) {
 }
 
 class SettingsDialog extends ConsumerStatefulWidget {
-  const SettingsDialog({super.key});
+  final int initialTab;
 
-  static Future<void> show(BuildContext context) {
-    return showDialog(context: context, builder: (_) => const SettingsDialog());
+  /// Theme profile field to scroll to and briefly highlight on the Colours tab
+  /// (e.g. `textColor`, `accentColor`). See [SlideQualityIssue.field].
+  final String? highlightThemeField;
+
+  const SettingsDialog({
+    super.key,
+    this.initialTab = 0,
+    this.highlightThemeField,
+  });
+
+  static Future<void> show(
+    BuildContext context, {
+    int initialTab = 0,
+    String? highlightThemeField,
+  }) {
+    return showDialog(
+      context: context,
+      builder: (_) => SettingsDialog(
+        initialTab: initialTab,
+        highlightThemeField: highlightThemeField,
+      ),
+    );
   }
 
   @override
@@ -45,6 +65,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// Whether the user changed the active profile in this session. Used to
   /// decide whether to apply the profile to the currently open presentation.
   bool _profileTouched = false;
+
+  String? _highlightedThemeField;
+  final _themeFieldKeys = <String, GlobalKey>{};
 
   static const _colorPresets = [
     '#FFFFFF',
@@ -86,6 +109,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _closingSlideMarkdown = TextEditingController(
       text: _themeProfile.closingSlideMarkdown,
     );
+    _highlightedThemeField = widget.highlightThemeField;
+    if (widget.highlightThemeField != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollToThemeField(widget.highlightThemeField!);
+      });
+    }
   }
 
   @override
@@ -194,6 +223,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
     return DefaultTabController(
       length: 6,
+      initialIndex: widget.initialTab.clamp(0, 5),
       child: AlertDialog(
         title: Text(l10n.t('settings')),
         content: SizedBox(
@@ -382,6 +412,48 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     );
   }
 
+  GlobalKey _themeFieldKey(String field) =>
+      _themeFieldKeys.putIfAbsent(field, GlobalKey.new);
+
+  void _scrollToThemeField(String field) {
+    if (!mounted) return;
+    setState(() => _highlightedThemeField = field);
+    final ctx = _themeFieldKeys[field]?.currentContext;
+    if (ctx != null) {
+      Scrollable.ensureVisible(
+        ctx,
+        alignment: 0.25,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
+    Future<void>.delayed(const Duration(seconds: 3), () {
+      if (mounted && _highlightedThemeField == field) {
+        setState(() => _highlightedThemeField = null);
+      }
+    });
+  }
+
+  Widget _themeColorAnchor(String field, Widget child) {
+    final highlighted = _highlightedThemeField == field;
+    return KeyedSubtree(
+      key: _themeFieldKey(field),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        margin: const EdgeInsets.only(bottom: 2),
+        padding: highlighted ? const EdgeInsets.all(8) : EdgeInsets.zero,
+        decoration: highlighted
+            ? BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: AppTheme.accent, width: 2),
+                color: AppTheme.accent.withValues(alpha: 0.06),
+              )
+            : null,
+        child: child,
+      ),
+    );
+  }
+
   Widget _styleTab(List<ThemeProfile> profiles, String dropdownValue) {
     final l10n = context.l10n;
     return Column(
@@ -469,6 +541,25 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           onChanged: (value) => ref
               .read(settingsProvider.notifier)
               .setQualityWarningsOnExport(value),
+        ),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(
+            l10n.d('Blokkeer export bij ernstige kwaliteitsproblemen'),
+            style: const TextStyle(fontSize: 13),
+          ),
+          subtitle: Text(
+            l10n.d(
+              'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.',
+            ),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+          value: ref.watch(
+            settingsProvider.select((s) => s.qualityBlockExportOnErrors),
+          ),
+          onChanged: (value) => ref
+              .read(settingsProvider.notifier)
+              .setQualityBlockExportOnErrors(value),
         ),
         const SizedBox(height: 16),
         _sectionTitle(l10n.d('Classificatie-handhaving')),
@@ -1167,38 +1258,54 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       children: [
         _profileScopeBanner(),
         _sectionTitle(l10n.d('Kleuren')),
-        _colorSetting(
-          l10n.d('Achtergrond slides'),
-          _themeProfile.slideBackgroundColor,
-          (v) =>
-              _themeProfile = _themeProfile.copyWith(slideBackgroundColor: v),
+        _themeColorAnchor(
+          'slideBackgroundColor',
+          _colorSetting(
+            l10n.d('Achtergrond slides'),
+            _themeProfile.slideBackgroundColor,
+            (v) =>
+                _themeProfile = _themeProfile.copyWith(slideBackgroundColor: v),
+          ),
         ),
         const SizedBox(height: 12),
-        _colorSetting(
-          l10n.d('Tekst'),
-          _themeProfile.textColor,
-          (v) => _themeProfile = _themeProfile.copyWith(textColor: v),
+        _themeColorAnchor(
+          'textColor',
+          _colorSetting(
+            l10n.d('Tekst'),
+            _themeProfile.textColor,
+            (v) => _themeProfile = _themeProfile.copyWith(textColor: v),
+          ),
         ),
         const SizedBox(height: 12),
-        _colorSetting(
-          l10n.d('Accent / bullets'),
-          _themeProfile.accentColor,
-          (v) => _themeProfile = _themeProfile.copyWith(accentColor: v),
+        _themeColorAnchor(
+          'accentColor',
+          _colorSetting(
+            l10n.d('Accent / bullets'),
+            _themeProfile.accentColor,
+            (v) => _themeProfile = _themeProfile.copyWith(accentColor: v),
+          ),
         ),
         const SizedBox(height: 24),
         _sectionTitle(l10n.d('Checklist')),
-        _colorSetting(
-          l10n.d('Afgevinkt'),
-          _themeProfile.checklistCheckedColor,
-          (v) =>
-              _themeProfile = _themeProfile.copyWith(checklistCheckedColor: v),
+        _themeColorAnchor(
+          'checklistCheckedColor',
+          _colorSetting(
+            l10n.d('Afgevinkt'),
+            _themeProfile.checklistCheckedColor,
+            (v) => _themeProfile = _themeProfile.copyWith(
+              checklistCheckedColor: v,
+            ),
+          ),
         ),
         const SizedBox(height: 12),
-        _colorSetting(
-          l10n.d('Niet afgevinkt'),
-          _themeProfile.checklistUncheckedColor,
-          (v) => _themeProfile = _themeProfile.copyWith(
-            checklistUncheckedColor: v,
+        _themeColorAnchor(
+          'checklistUncheckedColor',
+          _colorSetting(
+            l10n.d('Niet afgevinkt'),
+            _themeProfile.checklistUncheckedColor,
+            (v) => _themeProfile = _themeProfile.copyWith(
+              checklistUncheckedColor: v,
+            ),
           ),
         ),
         const SizedBox(height: 6),
@@ -1223,58 +1330,84 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           dense: true,
         ),
         const SizedBox(height: 12),
-        _colorSetting(
-          l10n.d('Tabeltekst'),
-          _themeProfile.tableTextColor,
-          (v) => _themeProfile = _themeProfile.copyWith(tableTextColor: v),
-        ),
-        const SizedBox(height: 12),
-        _colorSetting(
-          l10n.d('Tabel koptekst'),
-          _themeProfile.tableHeaderTextColor,
-          (v) =>
-              _themeProfile = _themeProfile.copyWith(tableHeaderTextColor: v),
-        ),
-        const SizedBox(height: 12),
-        _colorSetting(
-          l10n.d('Tabel kopachtergrond'),
-          _themeProfile.tableHeaderBackgroundColor,
-          (v) => _themeProfile = _themeProfile.copyWith(
-            tableHeaderBackgroundColor: v,
+        _themeColorAnchor(
+          'tableTextColor',
+          _colorSetting(
+            l10n.d('Tabeltekst'),
+            _themeProfile.tableTextColor,
+            (v) => _themeProfile = _themeProfile.copyWith(tableTextColor: v),
           ),
         ),
         const SizedBox(height: 12),
-        _colorSetting(
-          l10n.d('Titelachtergrond'),
-          _themeProfile.titleBackgroundColor,
-          (v) =>
-              _themeProfile = _themeProfile.copyWith(titleBackgroundColor: v),
+        _themeColorAnchor(
+          'tableHeaderTextColor',
+          _colorSetting(
+            l10n.d('Tabel koptekst'),
+            _themeProfile.tableHeaderTextColor,
+            (v) =>
+                _themeProfile = _themeProfile.copyWith(tableHeaderTextColor: v),
+          ),
         ),
         const SizedBox(height: 12),
-        _colorSetting(
-          l10n.d('Titeltekst'),
-          _themeProfile.titleTextColor,
-          (v) => _themeProfile = _themeProfile.copyWith(titleTextColor: v),
+        _themeColorAnchor(
+          'tableHeaderBackgroundColor',
+          _colorSetting(
+            l10n.d('Tabel kopachtergrond'),
+            _themeProfile.tableHeaderBackgroundColor,
+            (v) => _themeProfile = _themeProfile.copyWith(
+              tableHeaderBackgroundColor: v,
+            ),
+          ),
         ),
         const SizedBox(height: 12),
-        _colorSetting(
-          l10n.d('Sectieachtergrond'),
-          _themeProfile.sectionBackgroundColor,
-          (v) =>
-              _themeProfile = _themeProfile.copyWith(sectionBackgroundColor: v),
+        _themeColorAnchor(
+          'titleBackgroundColor',
+          _colorSetting(
+            l10n.d('Titelachtergrond'),
+            _themeProfile.titleBackgroundColor,
+            (v) =>
+                _themeProfile = _themeProfile.copyWith(titleBackgroundColor: v),
+          ),
+        ),
+        const SizedBox(height: 12),
+        _themeColorAnchor(
+          'titleTextColor',
+          _colorSetting(
+            l10n.d('Titeltekst'),
+            _themeProfile.titleTextColor,
+            (v) => _themeProfile = _themeProfile.copyWith(titleTextColor: v),
+          ),
+        ),
+        const SizedBox(height: 12),
+        _themeColorAnchor(
+          'sectionBackgroundColor',
+          _colorSetting(
+            l10n.d('Sectieachtergrond'),
+            _themeProfile.sectionBackgroundColor,
+            (v) => _themeProfile = _themeProfile.copyWith(
+              sectionBackgroundColor: v,
+            ),
+          ),
         ),
         const SizedBox(height: 24),
         _sectionTitle(l10n.d('Broncode')),
-        _colorSetting(
-          l10n.d('Broncode achtergrond'),
-          _themeProfile.codeBackgroundColor,
-          (v) => _themeProfile = _themeProfile.copyWith(codeBackgroundColor: v),
+        _themeColorAnchor(
+          'codeBackgroundColor',
+          _colorSetting(
+            l10n.d('Broncode achtergrond'),
+            _themeProfile.codeBackgroundColor,
+            (v) =>
+                _themeProfile = _themeProfile.copyWith(codeBackgroundColor: v),
+          ),
         ),
         const SizedBox(height: 12),
-        _colorSetting(
-          l10n.d('Broncode tekst'),
-          _themeProfile.codeTextColor,
-          (v) => _themeProfile = _themeProfile.copyWith(codeTextColor: v),
+        _themeColorAnchor(
+          'codeTextColor',
+          _colorSetting(
+            l10n.d('Broncode tekst'),
+            _themeProfile.codeTextColor,
+            (v) => _themeProfile = _themeProfile.copyWith(codeTextColor: v),
+          ),
         ),
         const SizedBox(height: 6),
         SwitchListTile(

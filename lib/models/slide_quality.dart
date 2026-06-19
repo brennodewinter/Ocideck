@@ -9,15 +9,19 @@ enum SlideQualityIssueKind {
   missingAltCaption,
   themeContrast,
   slideContrast,
+  footerContrast,
+  checklistContrast,
   imageContrastUnverified,
   chartMissingDescription,
   mediaMissingDescription,
+  missingMediaFile,
   textDensityWarning,
   textDensityCritical,
   tableDensityMinimum,
   codeDensityHigh,
   freeMarkdownDensityHigh,
   titleDensityHigh,
+  quoteDensityHigh,
 }
 
 class SlideQualityIssue {
@@ -52,9 +56,8 @@ class SlideQualityResult {
   bool get hasIssues => issues.isNotEmpty;
 
   /// Issues that should block or warn at export time (excludes informational tips).
-  bool get hasActionableIssues => issues.any(
-    (i) => i.severity != MarkdownValidationSeverity.informational,
-  );
+  bool get hasActionableIssues =>
+      issues.any((i) => i.severity != MarkdownValidationSeverity.informational);
 
   int get errorCount => issues
       .where((i) => i.severity == MarkdownValidationSeverity.error)

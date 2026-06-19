@@ -94,7 +94,7 @@ class _SeveritySection extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 4),
               child: InkWell(
-                onTap: onIssueTap == null || issue.isDeckWide
+                onTap: onIssueTap == null
                     ? null
                     : () {
                         Navigator.pop(context);

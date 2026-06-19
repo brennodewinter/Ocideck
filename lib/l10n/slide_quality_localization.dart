@@ -24,6 +24,22 @@ String formatSlideQualityCountSummary(
   return parts.join(', ');
 }
 
+/// Localized summary used when export is blocked or needs acknowledgement.
+String formatQualityExportReason(
+  AppLocalizations l10n,
+  SlideQualityResult result,
+) {
+  final parts = <String>[];
+  if (result.errorCount > 0) {
+    parts.add('${result.errorCount} ${l10n.d('ernstige probleem(en)')}');
+  }
+  if (result.warningCount > 0) {
+    parts.add('${result.warningCount} ${l10n.d('waarschuwing(en)')}');
+  }
+  return '${l10n.d('De presentatie heeft kwaliteitsproblemen (')}'
+      '${parts.join(', ')}).';
+}
+
 Color slideQualitySeverityColor(MarkdownValidationSeverity severity) {
   return switch (severity) {
     MarkdownValidationSeverity.error => const Color(0xFFB91C1C),
@@ -69,6 +85,11 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.missingAltCaption =>
       '${label('label')} ${l10n.d('heeft geen bijschrift/alt-tekst.')}',
     SlideQualityIssueKind.themeContrast => _formatThemeContrast(l10n, issue),
+    SlideQualityIssueKind.footerContrast => _formatThemeContrast(l10n, issue),
+    SlideQualityIssueKind.checklistContrast => _formatThemeContrast(
+      l10n,
+      issue,
+    ),
     SlideQualityIssueKind.slideContrast => _formatSlideContrast(l10n, issue),
     SlideQualityIssueKind.imageContrastUnverified => l10n.d(
       'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.',
@@ -96,6 +117,12 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.titleDensityHigh =>
       '${l10n.d('Lange titelpagina (')}${issue.args['chars']}'
           '${l10n.d(' tekens) — de tekst wordt verkleind om te passen.')}',
+    SlideQualityIssueKind.quoteDensityHigh =>
+      '${l10n.d('Lange quote (')}${issue.args['chars']}'
+          '${l10n.d(' tekens) — de tekst wordt verkleind om te passen.')}',
+    SlideQualityIssueKind.missingMediaFile =>
+      '${label('label')}${l10n.d(': bestand niet gevonden (')}'
+          '${issue.args['path'] ?? ''}).',
   };
 }
 

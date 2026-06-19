@@ -5,17 +5,18 @@ class QualityExportDecision {
   /// Whether [ExportService] may write the file now.
   final bool allowed;
 
-  /// Human-readable reason when [allowed] is false (acknowledgement required).
-  final String? reason;
-
   final int errorCount;
   final int warningCount;
 
+  /// When false, export cannot proceed even with user acknowledgement
+  /// ([QualityExportPolicy.blockOnErrors] and [errorCount] > 0).
+  final bool canAcknowledge;
+
   const QualityExportDecision._({
     required this.allowed,
-    this.reason,
     this.errorCount = 0,
     this.warningCount = 0,
+    this.canAcknowledge = true,
   });
 
   const QualityExportDecision.allow() : this._(allowed: true);
@@ -23,22 +24,36 @@ class QualityExportDecision {
   factory QualityExportDecision.needsAcknowledgement({
     required int errorCount,
     required int warningCount,
-    required String reason,
+    bool canAcknowledge = true,
   }) => QualityExportDecision._(
     allowed: false,
-    reason: reason,
     errorCount: errorCount,
     warningCount: warningCount,
+    canAcknowledge: canAcknowledge,
   );
+
+  bool get hardBlocked => !allowed && !canAcknowledge;
 }
 
 /// Soft export gate for slide quality issues — warns by default, never blocks
-/// once the user explicitly acknowledges (see [evaluate]).
+/// once the user explicitly acknowledges (see [evaluate]), unless
+/// [blockOnErrors] is enabled.
 class QualityExportPolicy {
   /// When false, quality issues are ignored at export time.
   final bool enabled;
 
-  const QualityExportPolicy({this.enabled = true});
+  /// When true, [MarkdownValidationSeverity.error] issues block export entirely.
+  final bool blockOnErrors;
+
+  const QualityExportPolicy({this.enabled = true, this.blockOnErrors = false});
+
+  factory QualityExportPolicy.fromAppSettings({
+    required bool warningsEnabled,
+    required bool blockOnErrors,
+  }) => QualityExportPolicy(
+    enabled: warningsEnabled,
+    blockOnErrors: blockOnErrors,
+  );
 
   factory QualityExportPolicy.fromEnabled(bool enabled) =>
       QualityExportPolicy(enabled: enabled);
@@ -49,24 +64,22 @@ class QualityExportPolicy {
     SlideQualityResult result, {
     bool acknowledged = false,
   }) {
-    if (!enabled || !result.hasActionableIssues || acknowledged) {
+    if (!enabled || !result.hasActionableIssues) {
+      return const QualityExportDecision.allow();
+    }
+    if (blockOnErrors && result.errorCount > 0) {
+      return QualityExportDecision.needsAcknowledgement(
+        errorCount: result.errorCount,
+        warningCount: result.warningCount,
+        canAcknowledge: false,
+      );
+    }
+    if (acknowledged) {
       return const QualityExportDecision.allow();
     }
     return QualityExportDecision.needsAcknowledgement(
       errorCount: result.errorCount,
       warningCount: result.warningCount,
-      reason: _buildReason(result),
     );
-  }
-
-  String _buildReason(SlideQualityResult result) {
-    final parts = <String>[];
-    if (result.errorCount > 0) {
-      parts.add('${result.errorCount} ernstige probleem(en)');
-    }
-    if (result.warningCount > 0) {
-      parts.add('${result.warningCount} waarschuwing(en)');
-    }
-    return 'De presentatie heeft kwaliteitsproblemen (${parts.join(', ')}).';
   }
 }

@@ -14,11 +14,14 @@ import '../dialogs/image_carousel_picker.dart';
 
 /// Shared layout helpers for slide editors.
 
-class EditorField extends StatelessWidget {
+class EditorField extends ConsumerStatefulWidget {
   final String label;
   final TextEditingController controller;
   final String hint;
   final int maxLines;
+
+  /// Matches [SlideQualityIssue.field] for one-shot focus after navigation.
+  final String? qualityField;
 
   const EditorField({
     super.key,
@@ -26,7 +29,48 @@ class EditorField extends StatelessWidget {
     required this.controller,
     this.hint = '',
     this.maxLines = 1,
+    this.qualityField,
   });
+
+  @override
+  ConsumerState<EditorField> createState() => _EditorFieldState();
+}
+
+class _EditorFieldState extends ConsumerState<EditorField> {
+  final _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _applyQualityFocus());
+  }
+
+  @override
+  void didUpdateWidget(EditorField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _applyQualityFocus();
+  }
+
+  void _applyQualityFocus() {
+    final field = widget.qualityField;
+    if (field == null) return;
+    final target = ref.read(editorProvider).focusQualityField;
+    if (target != field || !mounted) return;
+    _focusNode.requestFocus();
+    Scrollable.ensureVisible(
+      context,
+      alignment: 0.25,
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeOut,
+    );
+    ref.read(editorProvider.notifier).clearFocusQualityField();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +79,7 @@ class EditorField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          l10n.d(label),
+          l10n.d(widget.label),
           style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
@@ -44,11 +88,12 @@ class EditorField extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         TextField(
-          controller: controller,
-          maxLines: maxLines,
+          controller: widget.controller,
+          focusNode: _focusNode,
+          maxLines: widget.maxLines,
           minLines: 1,
           decoration: InputDecoration(
-            hintText: hint.isEmpty ? '' : l10n.d(hint),
+            hintText: widget.hint.isEmpty ? '' : l10n.d(widget.hint),
           ),
         ),
       ],
@@ -444,6 +489,7 @@ class _CaptionField extends ConsumerStatefulWidget {
 
 class _CaptionFieldState extends ConsumerState<_CaptionField> {
   late final TextEditingController _ctrl;
+  final _focusNode = FocusNode();
 
   @override
   void initState() {
@@ -451,6 +497,7 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
     _ctrl = TextEditingController(text: widget.caption);
     _ctrl.addListener(_onChanged);
     _loadStoredCaption();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _applyQualityFocus());
   }
 
   @override
@@ -462,6 +509,20 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
       _ctrl.addListener(_onChanged);
       _loadStoredCaption();
     }
+    _applyQualityFocus();
+  }
+
+  void _applyQualityFocus() {
+    final target = ref.read(editorProvider).focusQualityField;
+    if (target != widget.captionField || !mounted) return;
+    _focusNode.requestFocus();
+    Scrollable.ensureVisible(
+      context,
+      alignment: 0.25,
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeOut,
+    );
+    ref.read(editorProvider.notifier).clearFocusQualityField();
   }
 
   void _onChanged() {
@@ -489,6 +550,7 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
   @override
   void dispose() {
     _ctrl.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -515,6 +577,7 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
       children: [
         TextField(
           controller: _ctrl,
+          focusNode: _focusNode,
           decoration: InputDecoration(
             hintText: l10n.d(
               'Caption / bronvermelding (bijv. © Naam Fotograaf)',
@@ -561,8 +624,12 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
           const SizedBox(height: 4),
           Text(
             isError || isWarning
-                ? l10n.d('Voeg alt-tekst / bijschrift toe voor toegankelijkheid')
-                : l10n.d('Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid'),
+                ? l10n.d(
+                    'Voeg alt-tekst / bijschrift toe voor toegankelijkheid',
+                  )
+                : l10n.d(
+                    'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid',
+                  ),
             style: TextStyle(
               fontSize: 10,
               color: isError || isWarning

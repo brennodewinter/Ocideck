@@ -120,6 +120,7 @@ class _ExportDialogState extends State<ExportDialog> {
   Future<bool> _confirmQualityExport() async {
     final decision = widget.qualityPolicy.evaluate(widget.qualityResult);
     if (decision.allowed) return true;
+    if (decision.hardBlocked) return false;
 
     final l10n = context.l10n;
     final confirmed = await showDialog<bool>(
@@ -374,6 +375,37 @@ class _ExportDialogState extends State<ExportDialog> {
       );
     }
 
+    final qualityDecision = widget.qualityPolicy.evaluate(widget.qualityResult);
+    if (qualityDecision.hardBlocked) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.block, color: Colors.red, size: 36),
+          const SizedBox(height: 12),
+          Text(
+            l10n.d('Export geblokkeerd vanwege ernstige kwaliteitsproblemen.'),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 13, color: Colors.red[800]),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            formatQualityExportReason(l10n, widget.qualityResult),
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+          ),
+          const SizedBox(height: 12),
+          OutlinedButton.icon(
+            onPressed: () => showSlideQualityDetailsDialog(
+              context,
+              result: widget.qualityResult,
+            ),
+            icon: const Icon(Icons.list_alt_outlined, size: 16),
+            label: Text(l10n.d('Bekijk alle meldingen…')),
+          ),
+        ],
+      );
+    }
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -425,7 +457,9 @@ class _ExportDialogState extends State<ExportDialog> {
         _exportButton(
           icon: _formatIcon(ExportFormat.pdf),
           label: l10n.t('exportAsPdf'),
-          onPressed: _loading ? null : () => _export(ExportFormat.pdf, compress: _compress),
+          onPressed: _loading
+              ? null
+              : () => _export(ExportFormat.pdf, compress: _compress),
         ),
         _exportButton(
           icon: _formatIcon(ExportFormat.pptx),
@@ -484,7 +518,11 @@ class _ExportDialogState extends State<ExportDialog> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(Icons.accessibility_new_outlined, size: 16, color: iconColor),
+              Icon(
+                Icons.accessibility_new_outlined,
+                size: 16,
+                color: iconColor,
+              ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -499,10 +537,8 @@ class _ExportDialogState extends State<ExportDialog> {
           Align(
             alignment: Alignment.centerLeft,
             child: TextButton.icon(
-              onPressed: () => showSlideQualityDetailsDialog(
-                context,
-                result: result,
-              ),
+              onPressed: () =>
+                  showSlideQualityDetailsDialog(context, result: result),
               icon: const Icon(Icons.list_alt_outlined, size: 14),
               label: Text(l10n.d('Bekijk meldingen…')),
               style: TextButton.styleFrom(

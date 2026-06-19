@@ -12,12 +12,17 @@ class EditorState {
   final String markdownBuffer;
   final bool parseError;
 
+  /// When set, the active slide editor should focus this field once (see
+  /// [EditorNotifier.selectWithQualityField]).
+  final String? focusQualityField;
+
   const EditorState({
     this.selectedIndex = 0,
     this.selection = const {0},
     this.mode = EditorMode.visual,
     this.markdownBuffer = '',
     this.parseError = false,
+    this.focusQualityField,
   });
 
   bool get hasMultiSelection => selection.length > 1;
@@ -28,6 +33,8 @@ class EditorState {
     EditorMode? mode,
     String? markdownBuffer,
     bool? parseError,
+    String? focusQualityField,
+    bool clearFocusQualityField = false,
   }) {
     return EditorState(
       selectedIndex: selectedIndex ?? this.selectedIndex,
@@ -35,6 +42,9 @@ class EditorState {
       mode: mode ?? this.mode,
       markdownBuffer: markdownBuffer ?? this.markdownBuffer,
       parseError: parseError ?? this.parseError,
+      focusQualityField: clearFocusQualityField
+          ? null
+          : (focusQualityField ?? this.focusQualityField),
     );
   }
 }
@@ -46,12 +56,32 @@ class EditorNotifier extends StateNotifier<EditorState> {
 
   /// Single-select [index] (clears any multi-selection).
   void select(int index) {
-    if (index == state.selectedIndex && state.selection.length == 1) return;
+    if (index == state.selectedIndex &&
+        state.selection.length == 1 &&
+        state.focusQualityField == null) {
+      return;
+    }
     state = state.copyWith(
       selectedIndex: index,
       selection: {index},
       parseError: false,
+      clearFocusQualityField: true,
     );
+  }
+
+  /// Jump to [index] and request focus on [field] in the slide editor (once).
+  void selectWithQualityField(int index, String? field) {
+    state = state.copyWith(
+      selectedIndex: index,
+      selection: {index},
+      focusQualityField: field,
+      parseError: false,
+    );
+  }
+
+  void clearFocusQualityField() {
+    if (state.focusQualityField == null) return;
+    state = state.copyWith(clearFocusQualityField: true);
   }
 
   /// Ctrl/Cmd-click: voeg [index] toe of haal 'm uit de selectie.

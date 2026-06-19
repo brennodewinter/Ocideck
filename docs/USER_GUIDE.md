@@ -233,6 +233,19 @@ HTML exports also show a fixed top banner with the TLP label when classified.
 These properties are for discovery and handling downstream — they do not replace
 the visible banner, badge, and optional watermark on the slides themselves.
 
+**Slide quality at export.** When the deck has open quality issues, the export
+dialog shows a summary banner with a link to the full issue list. Depending on
+your settings (see *Slide quality* below), export may ask for
+confirmation or be blocked entirely.
+
+| Setting | Effect |
+| --- | --- |
+| **Warn on export** (on by default) | When there are warnings or errors, a confirmation dialog lists the issues before export proceeds. Choose **Export anyway** to continue. Informational tips alone do not trigger this dialog. |
+| **Block export on serious quality issues** (off by default) | When any issue is at **error** severity, export is blocked until you fix the deck. The export dialog shows the reason and the issue list; there is no "Export anyway". Warnings and tips alone do not block. |
+
+These gates apply to PDF, PPTX, HTML, and the portable package. They are
+independent of classification enforcement — both can apply at once.
+
 ## Accessibility
 
 OciDeck aims for WCAG 2.1 in the editor:
@@ -247,14 +260,58 @@ OciDeck aims for WCAG 2.1 in the editor:
 - **Screen readers** — slide thumbnails announce a concise label ("Slide 3/12:
   title", including the skipped state), charts read out their data as a text
   alternative, and the fullscreen presenter announces every slide change.
-- **Slide quality** — while you edit, OciDeck checks each slide for missing
-  alt text/captions, low theme contrast, and overcrowded text (font auto-fit
-  shrinking too far). Issues appear as badges on slide thumbnails, in a
-  collapsible **Slide quality** bar in the editor, and inline hints on image
-  caption fields. Before export you can get a confirmation dialog listing open
-  issues (**Settings → General → Accessibility → Warn on export**; on by
-  default). Quality checks warn but do not block export once you choose
-  **Export anyway**.
+- **Slide quality** — while you edit, OciDeck continuously checks the deck for
+  accessibility and readability problems. See the subsection below.
+
+### Slide quality
+
+The **Slide quality** bar sits below the editor preview. It summarises open
+issues and can be expanded to browse them. Filter chips let you show **All
+issues** or only **Errors**, **Warnings**, or **Tips**. Click a slide-specific
+issue to jump to that slide and focus the relevant editor field; click a **theme
+(entire presentation)** issue to open *Settings → Colours* with the matching
+colour field scrolled into view and highlighted.
+
+Issues also appear as badges on slide thumbnails (amber for warnings, red when
+errors are included) and as inline hints on relevant editor fields (for example
+image captions).
+
+Skipped slides are not checked. Export and presentation use the same analyser on
+the slides that will actually be shown.
+
+#### Severity
+
+| Severity | Meaning | Export (default settings) |
+| --- | --- | --- |
+| **Tip** | Good practice, not a hard readability problem | Ignored at export |
+| **Warning** | Likely problem; review recommended | Confirmation dialog when *Warn on export* is on |
+| **Error** | Serious problem (very low contrast or extreme text density) | Confirmation dialog when *Warn on export* is on; hard block when *Block export on serious quality issues* is on |
+
+#### Checks performed
+
+Issues are grouped in three categories. The table lists what the analyser looks
+for (`lib/services/slide_quality_analyzer.dart`).
+
+| Category | Severity | What is checked |
+| --- | --- | --- |
+| **Contrast** | error / warning | Style profile: body text, title, table text, table header, code colours, and accent colour against their backgrounds (WCAG 2.1 AA). Footer text at 70% opacity against the slide background when a footer is configured. Checklist marker colours against the slide background when the deck contains checklist slides. Section slides: title colour against the section background. Title or quote slides with a background image: reminder that text-on-image contrast cannot be verified automatically. |
+| **Alt text** | tip / warning | Image slides (including two-image, bullets + image, and background images on title/quote slides): missing caption/alt text. Charts: no title, series names, or linked data description. Video slides: no title, subtitle, or speaker notes describing the content. Missing image or video **files on disk** when the deck is saved in a project folder (path in the slide points to a file that is not there). |
+| **Text density** | error / warning | Bullet slides (one column, two columns, bullets + image): auto-fit shrinks text below 70% of design size (warning) or 20% (error). Tables: cell text at the minimum readable size. Source-code and free-Markdown slides: very long content. Title slides: long title + subtitle combined. Quote slides: long quote + author combined. |
+
+Theme-wide contrast issues are listed once for the whole deck; slide-specific
+issues name the slide number.
+
+#### Settings
+
+Under *Settings → General → Accessibility*:
+
+| Setting | Default | Effect |
+| --- | --- | --- |
+| **Warn on export** | On | Ask for confirmation before exporting when warnings or errors are open. Informational tips do not count. |
+| **Block export on serious quality issues** | Off | Refuse export entirely while any **error**-severity issue remains. Works together with *Warn on export* — when blocking is on, errors cannot be overridden with **Export anyway**. |
+
+When *Warn on export* is off, quality issues are ignored at export time (they
+still show while editing).
 
 ## Markdown mode
 

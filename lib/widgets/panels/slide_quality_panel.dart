@@ -3,9 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_localization.dart';
+import '../../l10n/slide_quality_navigation.dart';
+import '../../models/markdown_validation.dart';
 import '../../models/slide_quality.dart';
 import '../../state/deck_quality_provider.dart';
-import '../../state/editor_provider.dart';
 import '../dialogs/slide_quality_details_dialog.dart';
 
 class SlideQualityPanel extends ConsumerStatefulWidget {
@@ -17,11 +18,24 @@ class SlideQualityPanel extends ConsumerStatefulWidget {
 
 class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
   var _expanded = false;
+  MarkdownValidationSeverity? _severityFilter;
+
+  void _handleIssueTap(SlideQualityIssue issue) {
+    navigateToSlideQualityIssue(context: context, ref: ref, issue: issue);
+  }
+
+  List<SlideQualityIssue> _filteredIssues(SlideQualityResult result) {
+    if (_severityFilter == null) return result.issues;
+    return result.issues
+        .where((issue) => issue.severity == _severityFilter)
+        .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final result = ref.watch(deckQualityProvider);
+    final visibleIssues = _filteredIssues(result);
     final hasErrors = result.errorCount > 0;
     final hasWarnings = result.warningCount > 0;
     final color = !result.hasIssues
@@ -87,9 +101,7 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
                   onPressed: () => showSlideQualityDetailsDialog(
                     context,
                     result: result,
-                    onIssueTap: (issue) {
-                      ref.read(editorProvider.notifier).select(issue.slideIndex);
-                    },
+                    onIssueTap: _handleIssueTap,
                   ),
                   icon: const Icon(Icons.list_alt_outlined, size: 13),
                   label: Text(l10n.d('Bekijk meldingen…')),
@@ -102,28 +114,54 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
               ),
             ),
           ],
-          if (_expanded && result.hasIssues)
+          if (_expanded && result.hasIssues) ...[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 0, 12, 6),
+              child: Wrap(
+                spacing: 6,
+                runSpacing: 4,
+                children: [
+                  FilterChip(
+                    label: Text(l10n.d('Alle meldingen')),
+                    selected: _severityFilter == null,
+                    onSelected: (_) => setState(() => _severityFilter = null),
+                    visualDensity: VisualDensity.compact,
+                    labelStyle: const TextStyle(fontSize: 10),
+                  ),
+                  for (final severity in MarkdownValidationSeverity.values)
+                    if (result.issuesWithSeverity(severity).isNotEmpty)
+                      FilterChip(
+                        label: Text(
+                          '${slideQualitySeverityLabel(l10n, severity)} '
+                          '(${result.issuesWithSeverity(severity).length})',
+                        ),
+                        selected: _severityFilter == severity,
+                        onSelected: (selected) => setState(
+                          () => _severityFilter = selected ? severity : null,
+                        ),
+                        visualDensity: VisualDensity.compact,
+                        labelStyle: const TextStyle(fontSize: 10),
+                      ),
+                ],
+              ),
+            ),
             ConstrainedBox(
               constraints: const BoxConstraints(maxHeight: 180),
               child: ListView.separated(
                 padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
-                itemCount: result.issues.length,
+                itemCount: visibleIssues.length,
                 separatorBuilder: (_, _) => const SizedBox(height: 4),
                 itemBuilder: (context, index) {
-                  final issue = result.issues[index];
+                  final issue = visibleIssues[index];
                   return _QualityIssueTile(
                     issue: issue,
-                    onTap: issue.isDeckWide
-                        ? null
-                        : () {
-                            ref
-                                .read(editorProvider.notifier)
-                                .select(issue.slideIndex);
-                          },
+                    onTap: () => _handleIssueTap(issue),
+                    showThemeHint: issue.isDeckWide,
                   );
                 },
               ),
             ),
+          ],
         ],
       ),
     );
@@ -133,8 +171,13 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
 class _QualityIssueTile extends StatelessWidget {
   final SlideQualityIssue issue;
   final VoidCallback? onTap;
+  final bool showThemeHint;
 
-  const _QualityIssueTile({required this.issue, this.onTap});
+  const _QualityIssueTile({
+    required this.issue,
+    this.onTap,
+    this.showThemeHint = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +222,7 @@ class _QualityIssueTile extends StatelessWidget {
             ),
             if (onTap != null)
               Icon(
-                Icons.arrow_forward,
+                showThemeHint ? Icons.palette_outlined : Icons.arrow_forward,
                 size: 12,
                 color: color.withValues(alpha: 0.7),
               ),

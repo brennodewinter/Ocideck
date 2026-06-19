@@ -601,13 +601,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         enforcementPolicy: ClassificationEnforcementPolicy.fromAppSettings(
           ref.read(settingsProvider),
         ),
-        qualityResult: const SlideQualityAnalyzer().analyzeSlides(
-          slides: slides,
-          theme: deck.themeProfile,
-          font: deck.themeProfile.fontFamily,
-        ),
-        qualityPolicy: QualityExportPolicy.fromEnabled(
-          ref.read(settingsProvider).qualityWarningsOnExport,
+        qualityResult: const SlideQualityAnalyzer().analyze(deck),
+        qualityPolicy: QualityExportPolicy.fromAppSettings(
+          warningsEnabled: ref.read(settingsProvider).qualityWarningsOnExport,
+          blockOnErrors: ref.read(settingsProvider).qualityBlockExportOnErrors,
         ),
         exportDirectory: ref.read(settingsProvider).exportDirectory,
         // Inline chart data so the HTML export can render charts standalone,

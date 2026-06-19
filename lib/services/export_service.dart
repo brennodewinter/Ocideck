@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'dart:ui' show Locale;
 
 import 'package:archive/archive.dart';
 import 'package:image/image.dart' as img;
@@ -8,6 +9,8 @@ import 'package:path/path.dart' as p;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
+import '../l10n/app_localizations.dart';
+import '../l10n/slide_quality_localization.dart';
 import '../models/deck.dart';
 import '../models/settings.dart';
 import 'classification_enforcement_policy.dart';
@@ -130,7 +133,8 @@ class ExportService {
       acknowledged: qualityAcknowledged,
     );
     if (!qualityDecision.allowed) {
-      return ExportResult.fail(qualityDecision.reason!);
+      final l10n = AppLocalizations(const Locale('nl'));
+      return ExportResult.fail(formatQualityExportReason(l10n, quality));
     }
     if (format == ExportFormat.html) {
       if (markdown == null || markdown.trim().isEmpty) {
