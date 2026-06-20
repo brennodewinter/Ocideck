@@ -114,7 +114,9 @@ void main() {
           requireClassificationOnExport: true,
           classificationWatermarkEnabled: true,
         );
-        final policy = ClassificationEnforcementPolicy.fromAppSettings(settings);
+        final policy = ClassificationEnforcementPolicy.fromAppSettings(
+          settings,
+        );
         expect(policy.maxReleaseLevel, TlpLevel.amber);
         expect(policy.minRequiredLevel, TlpLevel.green);
         expect(policy.requireClassification, isTrue);

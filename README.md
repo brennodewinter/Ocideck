@@ -2,7 +2,7 @@
 
 A desktop application for building [Marp](https://marp.app/) presentations through a structured, slide-by-slide editor — no raw Markdown wrangling required. Compose decks from typed slide templates (title, bullets, quotes, tables, images, video, audio, source code, charts), preview them live, present them fullscreen — even across two screens — and export to Marp Markdown, PDF, PPTX, and self-contained HTML.
 
-Built with Flutter for macOS, Windows, and Linux.
+Built with Flutter for macOS, Windows, Linux, and **web**.
 
 > **What's in a name?** *OciDeck* is a small wink: **Oci** is borrowed from the *Ocicats* — the cats of [Brenno de Winter](https://nl.wikipedia.org/wiki/Brenno_de_Winter) — and **Deck** is short for a presentation deck. So: the cats' presentation tool.
 
@@ -10,8 +10,8 @@ Built with Flutter for macOS, Windows, and Linux.
 
 - **Structured slide editors** — dedicated editors per slide type: title, bullets, two-column bullets, bullets + image, single/two images, quote, table, section divider, image-only, video, audio, source code, charts, and free-form Markdown.
 - **Source-code slides** — a "code sheet" with per-language syntax highlighting, stored as a fenced code block. Background, text colour and monospace font come from the style profile, with an optional syntax-colouring toggle (turn it off for a single-colour, CRT-terminal look). The code auto-sizes to fill the panel.
-- **Charts** — bar, line, pie, and spider/radar charts rendered natively (preview, presenter, PDF, PPTX) and as self-contained SVG in the HTML export. Data is entered in an in-app grid or imported from CSV; the spec is stored as JSON in the Markdown, with optional linking to a CSV kept in a tidy `data/` directory. Optional min/max draw reference lines (bar/line) or fix the scale (radar); legend hover highlights a series, and line tooltips pick the dot under the cursor.
-- **Live preview** — see each slide rendered as you edit, with inline Markdown, footers, and TLP (Traffic Light Protocol) marking. Free-Markdown slides render fenced code with syntax highlighting and `$…$` / `$$…$$` LaTeX math.
+- **Charts** — bar, stacked bar, line, pie, spider/radar, and scatter charts rendered natively (preview, presenter, PDF, PPTX) and as self-contained SVG in the HTML export. Data is entered in an in-app grid or imported from CSV; the spec is stored as JSON in the Markdown, with optional linking to a CSV kept in a tidy `data/` directory. Optional min/max draw reference lines (bar/line) or fix the scale (radar); legend hover highlights a series, and line tooltips pick the dot under the cursor.
+- **Live preview** — see each slide rendered as you edit, with inline Markdown, footers, and TLP (Traffic Light Protocol) marking. Free-Markdown slides render fenced code with syntax highlighting, `$…$` / `$$…$$` LaTeX math, and Mermaid diagrams.
 - **Traffic Light Protocol** — a deck-wide classification plus an optional **per-slide TLP level**; slides classified stricter than the level the deck is shown at are automatically withheld, both when presenting and exporting. **Visual marking** (banner, badge, optional diagonal watermark) follows FIRST TLP 2.0 colours and is WYSIWYG through preview, presenter, and PDF/PPTX export. Optional **classification enforcement** (release ceiling, required minimum, mandatory classification, watermark toggle) blocks export fail-closed when policy fails; export metadata embeds TLP in PDF/PPTX/HTML.
 - **Fullscreen presenter** — keyboard-driven navigation, presenter view, blank screen, auto-advance, and a slide-grid overview.
 - **Presentation timer / rehearsal mode** — the presenter view doubles as a rehearsal clock: a countdown against a target time (set in Settings or live with `K`), the time spent on the current slide, and an end-of-run summary (total vs. target and per-slide times, copyable). It measures only — no pacing coaching — and is session-only, never written to disk.
@@ -28,13 +28,13 @@ Built with Flutter for macOS, Windows, and Linux.
 ## Requirements
 
 - Flutter SDK `^3.12.0` (Dart 3.12+)
-- A desktop target enabled: macOS, Windows, or Linux
+- A desktop target enabled: macOS, Windows, or Linux — or run in a browser via Flutter web
 
 ## Getting started
 
 ```sh
 make setup      # flutter pub get
-flutter run -d macos   # or -d windows / -d linux
+flutter run -d macos   # or -d windows / -d linux / -d chrome
 ```
 
 ## Development

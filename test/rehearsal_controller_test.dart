@@ -42,24 +42,33 @@ void main() {
   });
 
   test('aftelling: resterend wordt negatief na de doeltijd', () {
-    final c = RehearsalController(now: clock, target: const Duration(minutes: 1));
+    final c = RehearsalController(
+      now: clock,
+      target: const Duration(minutes: 1),
+    );
     advance(const Duration(seconds: 40));
     expect(c.remaining, const Duration(seconds: 20));
     advance(const Duration(seconds: 30));
     expect(c.remaining, const Duration(seconds: -10));
   });
 
-  test('geen doeltijd → geen resterende tijd; nul-target zet aftelling uit', () {
-    final c = RehearsalController(now: clock);
-    expect(c.remaining, isNull);
-    c.target = Duration.zero;
-    expect(c.target, isNull);
-    c.target = const Duration(minutes: 5);
-    expect(c.target, const Duration(minutes: 5));
-  });
+  test(
+    'geen doeltijd → geen resterende tijd; nul-target zet aftelling uit',
+    () {
+      final c = RehearsalController(now: clock);
+      expect(c.remaining, isNull);
+      c.target = Duration.zero;
+      expect(c.target, isNull);
+      c.target = const Duration(minutes: 5);
+      expect(c.target, const Duration(minutes: 5));
+    },
+  );
 
   test('reset wist run en per-slide-tijden, behoudt doeltijd', () {
-    final c = RehearsalController(now: clock, target: const Duration(minutes: 1));
+    final c = RehearsalController(
+      now: clock,
+      target: const Duration(minutes: 1),
+    );
     c.observe('a', 0);
     advance(const Duration(seconds: 30));
     c.reset();
@@ -81,7 +90,10 @@ void main() {
   });
 
   test('delta beschrijft over/onder de doeltijd', () {
-    final c = RehearsalController(now: clock, target: const Duration(minutes: 1));
+    final c = RehearsalController(
+      now: clock,
+      target: const Duration(minutes: 1),
+    );
     c.observe('a', 0);
     advance(const Duration(seconds: 70));
     final run = c.finish();

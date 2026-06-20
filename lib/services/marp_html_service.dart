@@ -190,6 +190,8 @@ class MarpHtmlService {
     switch (spec.type) {
       case ChartType.bar:
         _barSvg(b, spec, plotTop, theme);
+      case ChartType.stackedBar:
+        _stackedBarSvg(b, spec, plotTop, theme);
       case ChartType.line:
         _lineSvg(b, spec, plotTop, theme);
       case ChartType.pie:
@@ -197,6 +199,8 @@ class MarpHtmlService {
         _pieSvg(b, spec, plotTop, theme, bottom: 398 - (legendRows - 1) * 28);
       case ChartType.radar:
         _radarSvg(b, spec, plotTop, theme, textColor);
+      case ChartType.scatter:
+        _scatterSvg(b, spec, plotTop, theme);
     }
     if (spec.type == ChartType.pie) {
       _pieLegendSvg(b, spec, textColor);
@@ -272,9 +276,19 @@ class MarpHtmlService {
 
   static double _maxY(ChartSpec spec) {
     var m = 0.0;
-    for (final s in spec.series) {
-      for (final v in s.data) {
-        if (v > m) m = v;
+    if (spec.type == ChartType.stackedBar) {
+      for (var xi = 0; xi < spec.x.length; xi++) {
+        var sum = 0.0;
+        for (final s in spec.series) {
+          if (xi < s.data.length) sum += s.data[xi];
+        }
+        if (sum > m) m = sum;
+      }
+    } else {
+      for (final s in spec.series) {
+        for (final v in s.data) {
+          if (v > m) m = v;
+        }
       }
     }
     if (spec.supportsBounds) {
@@ -378,6 +392,59 @@ class MarpHtmlService {
         b.write(
           '<rect x="$x" y="${bottom - h}" width="${barW * 0.86}" height="$h" '
           'rx="5" fill="${_color(spec, si, theme)}"/>',
+        );
+      }
+    }
+    _boundLinesSvg(b, spec, left, top, right, bottom, maxY);
+  }
+
+  static void _stackedBarSvg(
+    StringBuffer b,
+    ChartSpec spec,
+    double top,
+    ThemeProfile? theme,
+  ) {
+    const left = 60.0, right = 770.0, bottom = 382.0;
+    final maxY = _maxY(spec);
+    _axes(b, spec, left, top, right, bottom, maxY);
+    final n = spec.x.length;
+    final groupW = (right - left) / n;
+    final barW = groupW * 0.55;
+    for (var xi = 0; xi < n; xi++) {
+      final gx = left + groupW * xi + (groupW - barW) / 2;
+      var bottomY = bottom;
+      for (var si = 0; si < spec.series.length; si++) {
+        if (xi >= spec.series[si].data.length) continue;
+        final v = spec.series[si].data[xi];
+        final h = (bottom - top) * (v / maxY);
+        bottomY -= h;
+        b.write(
+          '<rect x="$gx" y="$bottomY" width="$barW" height="$h" '
+          'rx="4" fill="${_color(spec, si, theme)}"/>',
+        );
+      }
+    }
+    _boundLinesSvg(b, spec, left, top, right, bottom, maxY);
+  }
+
+  static void _scatterSvg(
+    StringBuffer b,
+    ChartSpec spec,
+    double top,
+    ThemeProfile? theme,
+  ) {
+    const left = 60.0, right = 770.0, bottom = 382.0;
+    final maxY = _maxY(spec);
+    _axes(b, spec, left, top, right, bottom, maxY);
+    final n = spec.x.length;
+    double px(int i) => left + (right - left) * (i + 0.5) / n;
+    double py(double v) => bottom - (bottom - top) * (v / maxY);
+    for (var si = 0; si < spec.series.length; si++) {
+      for (var xi = 0; xi < spec.series[si].data.length; xi++) {
+        final x = px(xi);
+        final y = py(spec.series[si].data[xi]);
+        b.write(
+          '<circle cx="$x" cy="$y" r="6" fill="${_color(spec, si, theme)}"/>',
         );
       }
     }

@@ -6,6 +6,7 @@ import '../../services/description_service.dart';
 import '../../services/image_service.dart';
 import '../../state/tabs_provider.dart';
 import '../../l10n/slide_quality_localization.dart';
+import '../../models/markdown_validation.dart';
 import '../../state/deck_quality_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../l10n/app_localizations.dart';
@@ -13,11 +14,14 @@ import '../dialogs/image_carousel_picker.dart';
 
 /// Shared layout helpers for slide editors.
 
-class EditorField extends StatelessWidget {
+class EditorField extends ConsumerStatefulWidget {
   final String label;
   final TextEditingController controller;
   final String hint;
   final int maxLines;
+
+  /// Matches [SlideQualityIssue.field] for one-shot focus after navigation.
+  final String? qualityField;
 
   const EditorField({
     super.key,
@@ -25,7 +29,48 @@ class EditorField extends StatelessWidget {
     required this.controller,
     this.hint = '',
     this.maxLines = 1,
+    this.qualityField,
   });
+
+  @override
+  ConsumerState<EditorField> createState() => _EditorFieldState();
+}
+
+class _EditorFieldState extends ConsumerState<EditorField> {
+  final _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _applyQualityFocus());
+  }
+
+  @override
+  void didUpdateWidget(EditorField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _applyQualityFocus();
+  }
+
+  void _applyQualityFocus() {
+    final field = widget.qualityField;
+    if (field == null) return;
+    final target = ref.read(editorProvider).focusQualityField;
+    if (target != field || !mounted) return;
+    _focusNode.requestFocus();
+    Scrollable.ensureVisible(
+      context,
+      alignment: 0.25,
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeOut,
+    );
+    ref.read(editorProvider.notifier).clearFocusQualityField();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +79,7 @@ class EditorField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          l10n.d(label),
+          l10n.d(widget.label),
           style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
@@ -43,11 +88,12 @@ class EditorField extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         TextField(
-          controller: controller,
-          maxLines: maxLines,
+          controller: widget.controller,
+          focusNode: _focusNode,
+          maxLines: widget.maxLines,
           minLines: 1,
           decoration: InputDecoration(
-            hintText: hint.isEmpty ? '' : l10n.d(hint),
+            hintText: widget.hint.isEmpty ? '' : l10n.d(widget.hint),
           ),
         ),
       ],
@@ -443,6 +489,7 @@ class _CaptionField extends ConsumerStatefulWidget {
 
 class _CaptionFieldState extends ConsumerState<_CaptionField> {
   late final TextEditingController _ctrl;
+  final _focusNode = FocusNode();
 
   @override
   void initState() {
@@ -450,6 +497,7 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
     _ctrl = TextEditingController(text: widget.caption);
     _ctrl.addListener(_onChanged);
     _loadStoredCaption();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _applyQualityFocus());
   }
 
   @override
@@ -461,6 +509,20 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
       _ctrl.addListener(_onChanged);
       _loadStoredCaption();
     }
+    _applyQualityFocus();
+  }
+
+  void _applyQualityFocus() {
+    final target = ref.read(editorProvider).focusQualityField;
+    if (target != widget.captionField || !mounted) return;
+    _focusNode.requestFocus();
+    Scrollable.ensureVisible(
+      context,
+      alignment: 0.25,
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeOut,
+    );
+    ref.read(editorProvider.notifier).clearFocusQualityField();
   }
 
   void _onChanged() {
@@ -488,6 +550,7 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
   @override
   void dispose() {
     _ctrl.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -501,34 +564,53 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
       field: widget.captionField,
     );
     final showHint = severity != null && widget.caption.trim().isEmpty;
+    final isError = severity == MarkdownValidationSeverity.error;
+    final isWarning = severity == MarkdownValidationSeverity.warning;
+    final hintColor = isError
+        ? const Color(0xFFB45309)
+        : isWarning
+        ? const Color(0xFFB45309)
+        : const Color(0xFF64748B);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextField(
           controller: _ctrl,
+          focusNode: _focusNode,
           decoration: InputDecoration(
-            hintText: l10n.d('Caption / bronvermelding (bijv. © Naam Fotograaf)'),
+            hintText: l10n.d(
+              'Caption / bronvermelding (bijv. © Naam Fotograaf)',
+            ),
             hintStyle: const TextStyle(fontSize: 12, color: Color(0xFFB0BEC5)),
             prefixIcon: Icon(
               Icons.copyright_outlined,
               size: 16,
-              color: showHint ? const Color(0xFFB45309) : const Color(0xFF64748B),
+              color: showHint ? hintColor : const Color(0xFF64748B),
             ),
             isDense: true,
-            contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+            contentPadding: const EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 10,
+            ),
             filled: true,
-            fillColor: showHint ? const Color(0xFFFFFBEB) : const Color(0xFFF8FAFC),
+            fillColor: showHint
+                ? const Color(0xFFFFFBEB)
+                : const Color(0xFFF8FAFC),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
               borderSide: BorderSide(
-                color: showHint ? const Color(0xFFF59E0B) : const Color(0xFFCBD5E1),
+                color: showHint && (isError || isWarning)
+                    ? const Color(0xFFF59E0B)
+                    : const Color(0xFFCBD5E1),
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
               borderSide: BorderSide(
-                color: showHint ? const Color(0xFFD97706) : const Color(0xFF64748B),
+                color: showHint && (isError || isWarning)
+                    ? const Color(0xFFD97706)
+                    : const Color(0xFF64748B),
               ),
             ),
             border: OutlineInputBorder(
@@ -541,8 +623,19 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
         if (showHint) ...[
           const SizedBox(height: 4),
           Text(
-            l10n.d('Voeg alt-tekst / bijschrift toe voor toegankelijkheid'),
-            style: const TextStyle(fontSize: 10, color: Color(0xFFB45309)),
+            isError || isWarning
+                ? l10n.d(
+                    'Voeg alt-tekst / bijschrift toe voor toegankelijkheid',
+                  )
+                : l10n.d(
+                    'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid',
+                  ),
+            style: TextStyle(
+              fontSize: 10,
+              color: isError || isWarning
+                  ? const Color(0xFFB45309)
+                  : const Color(0xFF64748B),
+            ),
           ),
         ],
       ],

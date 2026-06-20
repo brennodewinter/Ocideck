@@ -82,6 +82,7 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor> {
           controller: _quote,
           hint: 'Citaat tekst...',
           maxLines: 5,
+          qualityField: 'quote',
         ),
         const SizedBox(height: 16),
         EditorField(

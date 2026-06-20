@@ -254,12 +254,11 @@ class _TlpChip extends StatelessWidget {
     final child = Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       decoration: BoxDecoration(
-        color: isSet ? Colors.black : (warnUnset ? Colors.black45 : Colors.transparent),
+        color: isSet
+            ? Colors.black
+            : (warnUnset ? Colors.black45 : Colors.transparent),
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(
-          color: borderColor,
-          width: warnUnset ? 1.5 : 1,
-        ),
+        border: Border.all(color: borderColor, width: warnUnset ? 1.5 : 1),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

@@ -1,5 +1,8 @@
 import '../models/deck.dart';
 
+/// Application name embedded in PDF Creator / XMP CreatorTool.
+const kOciDeckCreator = 'OciDeck';
+
 /// Producer string embedded in PDF/PPTX metadata.
 const kOciDeckProducer = 'OciDeck 1.0.0';
 
@@ -60,11 +63,13 @@ class ExportDocumentMetadata {
     return 'OciDeck';
   }
 
+  /// PDF Creator — de toepassing die het document heeft gemaakt.
+  String get creator => kOciDeckCreator;
+
   String get producer => kOciDeckProducer;
 
   String? get htmlDescription =>
       description.trim().isNotEmpty ? description.trim() : null;
 
-  String? get htmlClassification =>
-      tlp == TlpLevel.none ? null : tlp.label;
+  String? get htmlClassification => tlp == TlpLevel.none ? null : tlp.label;
 }

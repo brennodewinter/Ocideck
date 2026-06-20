@@ -31,7 +31,9 @@ class ClassificationEnforcementPolicy {
       );
 
   /// Volledig beleid uit app-instellingen.
-  factory ClassificationEnforcementPolicy.fromAppSettings(AppSettings settings) {
+  factory ClassificationEnforcementPolicy.fromAppSettings(
+    AppSettings settings,
+  ) {
     return ClassificationEnforcementPolicy(
       maxReleaseLevel: settings.maxReleaseExportTlpKey == null
           ? null

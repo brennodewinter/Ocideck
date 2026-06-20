@@ -5,7 +5,7 @@ are stored on disk, see [`FILE_FORMAT.md`](FILE_FORMAT.md).
 
 ## Stack
 
-- **Flutter** desktop app (macOS, Windows, Linux), Dart 3.12+.
+- **Flutter** desktop and web app (macOS, Windows, Linux, web), Dart 3.12+.
 - **State**: [Riverpod](https://riverpod.dev/).
 - **Storage**: standard Marp Markdown (`.md`) as the single source of truth, with
   sidecars for anything that isn't plain Marp.
@@ -65,7 +65,9 @@ Charts, diagrams, and slides are rendered in **two independent places**, which i
 the key thing to understand before touching rendering:
 
 1. **In-app** — `widgets/slides/slide_preview.dart` (`SlidePreviewWidget`) renders
-   a slide as Flutter widgets. The *same* widget is used for the editor preview,
+   a slide as Flutter widgets. Free-Markdown ` ```mermaid ` blocks are rendered
+   to inline SVG via `services/mermaid_render_service.dart` (shared WebView +
+   bundled `mermaid.min.js`). The *same* widget is used for the editor preview,
    thumbnails, the fullscreen presenter, and — via `services/slide_rasterizer.dart`
    — the **PDF and PPTX** exports (rasterized to images). So anything that must
    appear in PDF/PPTX must render here. Charts use `fl_chart`.
@@ -100,7 +102,7 @@ The gate evaluates **deck-wide** `Deck.tlp`, not per-slide levels (those still
 control visibility via `slideVisibleAtTlp`).
 
 `ExportDocumentMetadata` (`services/export_metadata.dart`) is built from deck
-metadata and passed into PDF (`pw.Document` title/author/subject/keywords),
+metadata and passed into PDF (`pw.Document` title/author/subject/keywords/creator/producer),
 PPTX core properties, and HTML `<meta>` tags. HTML also gets a fixed
 `.tlp-export-banner` when classified.
 
@@ -137,8 +139,8 @@ audience window, thumbnails, and export dialog.
 
 ### Dual-screen mode
 
-When a second display is present (`shouldUseDualScreen`), the presenter runs in
-two OS windows:
+When a second display is present (`shouldUseDualScreen` on macOS, Windows, or
+Linux), the presenter runs in two OS windows:
 
 - The **laptop** window shows the presenter view.
 - A borderless **audience** window (`audience_window.dart`) fills the external
@@ -166,15 +168,10 @@ To keep the `.md` pure Marp, four kinds of data live beside it (see
 Two upstream plugins are forked into `third_party/` and wired via `pubspec.yaml`
 (path dependency / `dependency_overrides`):
 
-- **`desktop_multi_window`** (MixinNetwork) — published 0.3.0 dropped the native
-  window-geometry API. The fork adds macOS `window_setFrame`,
-  `window_coverScreen` (borderless fill of a chosen screen), and `window_close`,
-  exposed on `WindowController`. It also tracks the mouse for **non-key
-  windows** (matched by `macos/Runner/MainFlutterWindow.swift` for the main
-  window): macOS only delivers mouse-moved events to the key window by default,
-  and the borderless audience window deliberately never becomes key, so chart
-  tooltips and hover states would otherwise never appear on the beamer. This is
-  what makes the dual-screen audience window possible.
+- **`desktop_multi_window`** (MixinNetwork) — vendored fork with
+  `window_setFrame`, `window_coverScreen` (borderless fill of a chosen screen),
+  and `window_close` on **macOS, Windows, and Linux**. macOS additionally tracks
+  the mouse for non-key windows so chart hover works on the beamer.
 - **`screen_retriever_macos`** (leanflutter) — a packaging fix for recent
   Xcode/CocoaPods.
 

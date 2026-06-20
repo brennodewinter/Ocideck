@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import '../../models/deck.dart';
-import '../../models/markdown_validation.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../models/slide_quality.dart';
@@ -13,6 +12,7 @@ import '../../services/quality_export_policy.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_localization.dart';
+import 'slide_quality_details_dialog.dart';
 
 /// Exports the deck by rendering the on-screen slide previews to images and
 /// packing them into a PDF or PPTX (WYSIWYG — the export matches the preview).
@@ -120,12 +120,12 @@ class _ExportDialogState extends State<ExportDialog> {
   Future<bool> _confirmQualityExport() async {
     final decision = widget.qualityPolicy.evaluate(widget.qualityResult);
     if (decision.allowed) return true;
+    if (decision.hardBlocked) return false;
 
     final l10n = context.l10n;
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) {
-        final issues = widget.qualityResult.issues.take(8).toList();
         return AlertDialog(
           title: Text(l10n.d('Kwaliteitsproblemen gevonden')),
           content: SizedBox(
@@ -135,45 +135,17 @@ class _ExportDialogState extends State<ExportDialog> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  '${decision.errorCount} ${l10n.d('fout(en),')} '
-                  '${decision.warningCount} ${l10n.d('waarschuwing(en)')}',
+                  formatSlideQualityCountSummary(l10n, widget.qualityResult),
+                  style: const TextStyle(fontSize: 13),
                 ),
                 const SizedBox(height: 12),
-                ConstrainedBox(
-                  constraints: const BoxConstraints(maxHeight: 220),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        for (final issue in issues)
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 6),
-                            child: Text(
-                              issue.isDeckWide
-                                  ? '${l10n.d('Thema (hele presentatie)')}: '
-                                        '${formatSlideQualityIssue(l10n, issue)}'
-                                  : '${l10n.d('Slide')} ${issue.slideIndex + 1}: '
-                                        '${formatSlideQualityIssue(l10n, issue)}',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: issue.severity ==
-                                        MarkdownValidationSeverity.error
-                                    ? Colors.red.shade800
-                                    : const Color(0xFF92400E),
-                              ),
-                            ),
-                          ),
-                        if (widget.qualityResult.issues.length > issues.length)
-                          Text(
-                            l10n.d('… en meer problemen in het kwaliteitspaneel.'),
-                            style: const TextStyle(
-                              fontSize: 11,
-                              color: Color(0xFF94A3B8),
-                            ),
-                          ),
-                      ],
-                    ),
+                OutlinedButton.icon(
+                  onPressed: () => showSlideQualityDetailsDialog(
+                    ctx,
+                    result: widget.qualityResult,
                   ),
+                  icon: const Icon(Icons.list_alt_outlined, size: 16),
+                  label: Text(l10n.d('Bekijk alle meldingen…')),
                 ),
               ],
             ),
@@ -195,21 +167,33 @@ class _ExportDialogState extends State<ExportDialog> {
   }
 
   Future<void> _export(ExportFormat format, {bool compress = false}) async {
-    if (!await _confirmQualityExport()) return;
-
     final l10n = context.l10n;
-    // HTML renders from Markdown in the browser, so it needs no slide raster.
     final needsRaster = format != ExportFormat.html;
+
+    // Show progress immediately so the dialog does not look idle while the
+    // quality gate or the first heavy raster pass runs.
     setState(() {
       _loading = true;
       _result = null;
+      _phase = l10n.d('Export wordt voorbereid…');
+      _done = 0;
+      _total = needsRaster ? widget.slides.length : 0;
+    });
+    await WidgetsBinding.instance.endOfFrame;
+    await Future<void>.delayed(Duration.zero);
+    if (!mounted) return;
+
+    if (!await _confirmQualityExport()) {
+      if (mounted) setState(() => _loading = false);
+      return;
+    }
+
+    if (!mounted) return;
+    setState(() {
       _phase = needsRaster ? l10n.t('renderingSlides') : l10n.t('buildingHtml');
       _done = 0;
       _total = needsRaster ? widget.slides.length : 0;
     });
-
-    // Give the dialog a frame to paint before the potentially expensive first
-    // image decode/raster pass starts.
     await WidgetsBinding.instance.endOfFrame;
     await Future<void>.delayed(Duration.zero);
     if (!mounted) return;
@@ -223,6 +207,7 @@ class _ExportDialogState extends State<ExportDialog> {
             tlp: widget.tlp,
             showClassificationWatermark: widget.showClassificationWatermark,
             organization: widget.organization,
+            targetWidth: compress ? 1280 : 1920,
             onProgress: (done, total) {
               if (mounted) setState(() => _done = done);
             },
@@ -238,7 +223,12 @@ class _ExportDialogState extends State<ExportDialog> {
         : const <Uint8List>[];
 
     if (!mounted) return;
-    setState(() => _phase = '${format.label} ${l10n.t('buildingExport')}');
+    setState(() {
+      _phase = '${format.label} ${l10n.t('buildingExport')}';
+      _done = needsRaster ? widget.slides.length : 0;
+    });
+    await WidgetsBinding.instance.endOfFrame;
+    if (!mounted) return;
 
     final r = await widget.exportService.export(
       widget.deckPath,
@@ -272,6 +262,10 @@ class _ExportDialogState extends State<ExportDialog> {
     final l10n = context.l10n;
     final number = (done + 1).clamp(1, total);
     switch (phase) {
+      case 'precache':
+        return total == 0
+            ? l10n.d('Afbeeldingen laden…')
+            : '${l10n.d('Afbeeldingen laden…')} $done ${l10n.t('of')} $total';
       case 'prepare':
         return '${l10n.d('Slide')} $number ${l10n.d('voorbereiden…')}';
       case 'render':
@@ -309,7 +303,13 @@ class _ExportDialogState extends State<ExportDialog> {
   Widget _content() {
     final l10n = context.l10n;
     if (_loading) {
-      final fraction = _total == 0 ? null : _done / _total;
+      final showDeterminate = _total > 0 && _done > 0;
+      final fraction = showDeterminate ? _done / _total : null;
+      final counter = _total == 0
+          ? ''
+          : _done == 0
+          ? '${l10n.d('Slide')} 1 ${l10n.t('of')} $_total…'
+          : '${l10n.t('slideOf')} $_done ${l10n.t('of')} $_total';
       return Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -323,13 +323,13 @@ class _ExportDialogState extends State<ExportDialog> {
             borderRadius: BorderRadius.circular(4),
             child: LinearProgressIndicator(value: fraction, minHeight: 6),
           ),
-          const SizedBox(height: 8),
-          Text(
-            _total == 0
-                ? ''
-                : '${l10n.t('slideOf')} $_done ${l10n.t('of')} $_total',
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
-          ),
+          if (counter.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Text(
+              counter,
+              style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            ),
+          ],
         ],
       );
     }
@@ -370,6 +370,37 @@ class _ExportDialogState extends State<ExportDialog> {
             decision.reason!,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 13, color: Colors.red[800]),
+          ),
+        ],
+      );
+    }
+
+    final qualityDecision = widget.qualityPolicy.evaluate(widget.qualityResult);
+    if (qualityDecision.hardBlocked) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.block, color: Colors.red, size: 36),
+          const SizedBox(height: 12),
+          Text(
+            l10n.d('Export geblokkeerd vanwege ernstige kwaliteitsproblemen.'),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 13, color: Colors.red[800]),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            formatQualityExportReason(l10n, widget.qualityResult),
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+          ),
+          const SizedBox(height: 12),
+          OutlinedButton.icon(
+            onPressed: () => showSlideQualityDetailsDialog(
+              context,
+              result: widget.qualityResult,
+            ),
+            icon: const Icon(Icons.list_alt_outlined, size: 16),
+            label: Text(l10n.d('Bekijk alle meldingen…')),
           ),
         ],
       );
@@ -426,17 +457,19 @@ class _ExportDialogState extends State<ExportDialog> {
         _exportButton(
           icon: _formatIcon(ExportFormat.pdf),
           label: l10n.t('exportAsPdf'),
-          onPressed: () => _export(ExportFormat.pdf, compress: _compress),
+          onPressed: _loading
+              ? null
+              : () => _export(ExportFormat.pdf, compress: _compress),
         ),
         _exportButton(
           icon: _formatIcon(ExportFormat.pptx),
           label: l10n.t('exportAsPptx'),
-          onPressed: () => _export(ExportFormat.pptx),
+          onPressed: _loading ? null : () => _export(ExportFormat.pptx),
         ),
         _exportButton(
           icon: _formatIcon(ExportFormat.html),
           label: l10n.t('exportAsHtml'),
-          onPressed: () => _export(ExportFormat.html),
+          onPressed: _loading ? null : () => _export(ExportFormat.html),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 4),
@@ -452,34 +485,66 @@ class _ExportDialogState extends State<ExportDialog> {
   }
 
   Widget _qualityBanner(AppLocalizations l10n) {
-    final hasErrors = widget.qualityResult.errorCount > 0;
+    final result = widget.qualityResult;
+    final hasErrors = result.errorCount > 0;
+    final hasWarnings = result.warningCount > 0;
+    final color = hasErrors
+        ? const Color(0xFFFEE2E2)
+        : hasWarnings
+        ? const Color(0xFFFEF3C7)
+        : const Color(0xFFEFF6FF);
+    final borderColor = hasErrors
+        ? const Color(0xFFFECACA)
+        : hasWarnings
+        ? const Color(0xFFFDE68A)
+        : const Color(0xFFBFDBFE);
+    final iconColor = hasErrors
+        ? Colors.red.shade700
+        : hasWarnings
+        ? const Color(0xFF92400E)
+        : const Color(0xFF475569);
+
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: hasErrors ? const Color(0xFFFEE2E2) : const Color(0xFFFEF3C7),
+        color: color,
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(
-          color: hasErrors ? const Color(0xFFFECACA) : const Color(0xFFFDE68A),
-        ),
+        border: Border.all(color: borderColor),
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Icon(
-            Icons.accessibility_new_outlined,
-            size: 16,
-            color: hasErrors ? Colors.red.shade700 : const Color(0xFF92400E),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                Icons.accessibility_new_outlined,
+                size: 16,
+                color: iconColor,
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  '${l10n.d('Slidekwaliteit')}: '
+                  '${formatSlideQualityCountSummary(l10n, result)}',
+                  style: TextStyle(fontSize: 11, color: iconColor),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              '${l10n.d('Slidekwaliteit')}: '
-              '${widget.qualityResult.errorCount} ${l10n.d('fout(en),')} '
-              '${widget.qualityResult.warningCount} ${l10n.d('waarschuwing(en)')}',
-              style: TextStyle(
-                fontSize: 11,
-                color: hasErrors ? Colors.red.shade800 : const Color(0xFF92400E),
+          const SizedBox(height: 8),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton.icon(
+              onPressed: () =>
+                  showSlideQualityDetailsDialog(context, result: result),
+              icon: const Icon(Icons.list_alt_outlined, size: 14),
+              label: Text(l10n.d('Bekijk meldingen…')),
+              style: TextButton.styleFrom(
+                foregroundColor: iconColor,
+                visualDensity: VisualDensity.compact,
+                padding: EdgeInsets.zero,
               ),
             ),
           ),
@@ -491,7 +556,7 @@ class _ExportDialogState extends State<ExportDialog> {
   Widget _exportButton({
     required IconData icon,
     required String label,
-    required VoidCallback onPressed,
+    required VoidCallback? onPressed,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),

@@ -77,8 +77,7 @@ class ThemeProfile {
     this.closingSlideEnabled = false,
     this.closingSlideMarkdown = '# Bedankt\n\nVragen?',
   }) : tableTextColor = tableTextColor ?? textColor,
-       tableHeaderBackgroundColor =
-           tableHeaderBackgroundColor ?? accentColor;
+       tableHeaderBackgroundColor = tableHeaderBackgroundColor ?? accentColor;
 
   static const logoPositions = [
     'top-left',
@@ -407,6 +406,9 @@ class AppSettings {
   /// problemen vindt (alt-tekst, contrast, tekstdichtheid).
   final bool qualityWarningsOnExport;
 
+  /// Blokkeer export volledig wanneer de kwaliteitscontrole fouten vindt.
+  final bool qualityBlockExportOnErrors;
+
   const AppSettings({
     this.languageCode = 'nl',
     this.homeDirectory,
@@ -423,6 +425,7 @@ class AppSettings {
     this.uiTextScale = 1.0,
     this.presentationTargetSeconds = 0,
     this.qualityWarningsOnExport = true,
+    this.qualityBlockExportOnErrors = false,
   });
 
   ThemeProfile get themeProfile {
@@ -481,6 +484,7 @@ class AppSettings {
     double? uiTextScale,
     int? presentationTargetSeconds,
     bool? qualityWarningsOnExport,
+    bool? qualityBlockExportOnErrors,
     bool clearHomeDirectory = false,
     bool clearExportDirectory = false,
     bool clearMaxReleaseExportTlp = false,
@@ -531,6 +535,8 @@ class AppSettings {
           presentationTargetSeconds ?? this.presentationTargetSeconds,
       qualityWarningsOnExport:
           qualityWarningsOnExport ?? this.qualityWarningsOnExport,
+      qualityBlockExportOnErrors:
+          qualityBlockExportOnErrors ?? this.qualityBlockExportOnErrors,
     );
   }
 }

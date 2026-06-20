@@ -9,7 +9,6 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/markdown_validation.dart';
 import 'package:ocideck/models/slide_quality.dart';
 import 'package:ocideck/services/classification_enforcement_policy.dart';
-import 'package:ocideck/services/classification_policy.dart';
 import 'package:ocideck/services/export_service.dart';
 import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/services/quality_export_policy.dart';
@@ -133,12 +132,9 @@ void main() {
       const policy = ClassificationEnforcementPolicy(
         requireClassification: true,
       );
-      final r = await service.export(
-        deckPath(),
-        ExportFormat.pdf,
-        [_png()],
-        enforcementPolicy: policy,
-      );
+      final r = await service.export(deckPath(), ExportFormat.pdf, [
+        _png(),
+      ], enforcementPolicy: policy);
 
       expect(r.success, isFalse);
       expect(r.error, contains('TLP-niveau'));
@@ -187,6 +183,16 @@ void main() {
     expect(r.success, isTrue, reason: r.error);
     final bytes = await File(r.outputPath!).readAsBytes();
     expect(String.fromCharCodes(bytes.take(4)), '%PDF');
+  });
+
+  test('PDF embeds OciDeck as Creator and Producer', () async {
+    final r = await service.export(deckPath(), ExportFormat.pdf, [_png()]);
+    expect(r.success, isTrue, reason: r.error);
+    final text = String.fromCharCodes(await File(r.outputPath!).readAsBytes());
+    expect(text, contains('/Creator'));
+    expect(text, contains('/Producer'));
+    expect(text, contains(kOciDeckCreator));
+    expect(text, contains(kOciDeckProducer));
   });
 
   test('PDF embeds classification metadata when classified', () async {

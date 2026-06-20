@@ -195,9 +195,11 @@ void main() {
 
     final specs = variants!.map((s) => ChartSpec.parse(s.customMarkdown));
     expect(specs.map((s) => s.type), [
-      ChartType.pie,
       ChartType.line,
+      ChartType.stackedBar,
+      ChartType.pie,
       ChartType.radar,
+      ChartType.scatter,
     ]);
     expect(specs.first.x, ['A', 'B']);
     expect(specs.first.series.single.data, [10, 20]);

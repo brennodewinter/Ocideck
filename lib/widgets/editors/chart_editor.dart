@@ -51,9 +51,11 @@ class _ChartVariantsDialogState extends State<_ChartVariantsDialog> {
     final l10n = context.l10n;
     return switch (type) {
       ChartType.bar => l10n.d('Staaf'),
+      ChartType.stackedBar => l10n.d('Gestapelde staaf'),
       ChartType.line => l10n.d('Lijn'),
       ChartType.pie => l10n.d('Cirkel'),
       ChartType.radar => l10n.d('Spider'),
+      ChartType.scatter => l10n.d('Spreiding'),
     };
   }
 
@@ -91,9 +93,11 @@ class _ChartVariantsDialogState extends State<_ChartVariantsDialog> {
                 contentPadding: EdgeInsets.zero,
                 leading: Icon(switch (_types[i]) {
                   ChartType.bar => Icons.bar_chart,
+                  ChartType.stackedBar => Icons.stacked_bar_chart,
                   ChartType.line => Icons.show_chart,
                   ChartType.pie => Icons.pie_chart_outline,
                   ChartType.radar => Icons.radar,
+                  ChartType.scatter => Icons.scatter_plot,
                 }),
                 title: Text(_label(context, _types[i])),
                 trailing: Row(
@@ -576,7 +580,10 @@ class _ChartEditorState extends State<ChartEditor> {
         children: [
           EditorField(label: 'Titel (optioneel)', controller: _title),
           const SizedBox(height: 16),
-          Row(
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 12,
+            runSpacing: 8,
             children: [
               Text(
                 l10n.d('Type grafiek'),
@@ -586,7 +593,6 @@ class _ChartEditorState extends State<ChartEditor> {
                   color: Color(0xFF64748B),
                 ),
               ),
-              const SizedBox(width: 12),
               DropdownButton<ChartType>(
                 value: _type,
                 isDense: true,
@@ -596,6 +602,10 @@ class _ChartEditorState extends State<ChartEditor> {
                   DropdownMenuItem(
                     value: ChartType.bar,
                     child: Text(l10n.d('Staaf')),
+                  ),
+                  DropdownMenuItem(
+                    value: ChartType.stackedBar,
+                    child: Text(l10n.d('Gestapelde staaf')),
                   ),
                   DropdownMenuItem(
                     value: ChartType.line,
@@ -609,6 +619,10 @@ class _ChartEditorState extends State<ChartEditor> {
                     value: ChartType.radar,
                     child: Text(l10n.d('Spider')),
                   ),
+                  DropdownMenuItem(
+                    value: ChartType.scatter,
+                    child: Text(l10n.d('Spreiding')),
+                  ),
                 ],
                 onChanged: (v) {
                   if (v == null) return;
@@ -616,16 +630,13 @@ class _ChartEditorState extends State<ChartEditor> {
                   _emit();
                 },
               ),
-              const Spacer(),
-              if (widget.onAddVariants != null) ...[
+              if (widget.onAddVariants != null)
                 TextButton.icon(
                   key: const ValueKey('chart-create-variants'),
                   onPressed: _createVariants,
                   icon: const Icon(Icons.auto_awesome_motion, size: 16),
                   label: Text(l10n.d('Varianten')),
                 ),
-                const SizedBox(width: 4),
-              ],
               TextButton.icon(
                 onPressed: _importCsv,
                 icon: const Icon(Icons.upload_file, size: 16),

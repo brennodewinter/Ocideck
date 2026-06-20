@@ -37,9 +37,29 @@ const double kWcagAaLargeText = 3.0;
 /// Body text below this ratio is treated as a hard quality error.
 const double kWcagCriticalBodyText = 3.0;
 
-bool meetsWcagAa(String foreground, String background, {bool largeText = false}) {
+bool meetsWcagAa(
+  String foreground,
+  String background, {
+  bool largeText = false,
+}) {
   final ratio = hexContrastRatio(foreground, background);
   if (ratio == null) return true;
   final threshold = largeText ? kWcagAaLargeText : kWcagAaNormalText;
   return ratio >= threshold;
+}
+
+/// Blends [foreground] over [background] and returns the WCAG contrast ratio.
+double? blendedHexContrastRatio(
+  String foreground,
+  String background, {
+  required double foregroundAlpha,
+}) {
+  final fg = parseHexColor(foreground);
+  final bg = parseHexColor(background);
+  if (fg == null || bg == null) return null;
+  final blended = Color.alphaBlend(
+    fg.withValues(alpha: foregroundAlpha.clamp(0.0, 1.0)),
+    bg,
+  );
+  return contrastRatio(blended, bg);
 }

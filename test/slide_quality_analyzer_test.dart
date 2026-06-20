@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
@@ -32,10 +34,9 @@ void main() {
       final deck = Deck(
         title: 'Demo',
         slides: [
-          Slide.create(SlideType.bullets).copyWith(
-            title: 'Kort',
-            bullets: ['Eerste punt'],
-          ),
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Kort', bullets: ['Eerste punt']),
         ],
       );
 
@@ -43,13 +44,11 @@ void main() {
       expect(result.hasIssues, isFalse);
     });
 
-    test('detects missing image caption', () {
+    test('detects missing image caption as informational tip', () {
       final deck = Deck(
         title: 'Demo',
         slides: [
-          Slide.create(SlideType.image).copyWith(
-            imagePath: 'images/photo.jpg',
-          ),
+          Slide.create(SlideType.image).copyWith(imagePath: 'images/photo.jpg'),
         ],
       );
 
@@ -58,10 +57,12 @@ void main() {
         result.issues.any(
           (i) =>
               i.kind == SlideQualityIssueKind.missingAltCaption &&
-              i.field == 'imageCaption',
+              i.field == 'imageCaption' &&
+              i.severity == MarkdownValidationSeverity.informational,
         ),
         isTrue,
       );
+      expect(result.hasActionableIssues, isFalse);
     });
 
     test('does not warn when image caption is present', () {
@@ -153,9 +154,9 @@ void main() {
       final deck = Deck(
         title: 'Demo',
         slides: [
-          Slide.create(SlideType.chart).copyWith(
-            customMarkdown: const ChartSpec().toBlock(),
-          ),
+          Slide.create(
+            SlideType.chart,
+          ).copyWith(customMarkdown: const ChartSpec().toBlock()),
         ],
       );
 
@@ -172,9 +173,9 @@ void main() {
       final deck = Deck(
         title: 'Demo',
         slides: [
-          Slide.create(SlideType.chart).copyWith(
-            customMarkdown: const ChartSpec(title: 'Omzet').toBlock(),
-          ),
+          Slide.create(
+            SlideType.chart,
+          ).copyWith(customMarkdown: const ChartSpec(title: 'Omzet').toBlock()),
         ],
       );
 
@@ -189,9 +190,7 @@ void main() {
       final deck = Deck(
         title: 'Demo',
         slides: [
-          Slide.create(SlideType.video).copyWith(
-            videoPath: 'media/demo.mp4',
-          ),
+          Slide.create(SlideType.video).copyWith(videoPath: 'media/demo.mp4'),
         ],
       );
 
@@ -229,10 +228,9 @@ void main() {
       final deck = Deck(
         title: 'Demo',
         slides: [
-          Slide.create(SlideType.image).copyWith(
-            imagePath: 'images/hidden.jpg',
-            skipped: true,
-          ),
+          Slide.create(
+            SlideType.image,
+          ).copyWith(imagePath: 'images/hidden.jpg', skipped: true),
         ],
       );
 
@@ -245,15 +243,121 @@ void main() {
         title: 'Demo',
         slides: [
           Slide.create(SlideType.bullets),
-          Slide.create(SlideType.image).copyWith(
-            imagePath: 'images/photo.jpg',
-          ),
+          Slide.create(SlideType.image).copyWith(imagePath: 'images/photo.jpg'),
         ],
       );
 
       final result = analyzer.analyze(deck);
       expect(result.forSlide(0), isEmpty);
       expect(result.forSlide(1), isNotEmpty);
+    });
+
+    test('detects long quote text density', () {
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(
+            SlideType.quote,
+          ).copyWith(quote: 'Lang citaat. ' * 30, quoteAuthor: 'Auteur'),
+        ],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) => i.kind == SlideQualityIssueKind.quoteDensityHigh,
+        ),
+        isTrue,
+      );
+    });
+
+    test('detects low footer contrast when footer is enabled', () {
+      final deck = Deck(
+        title: 'Demo',
+        themeProfile: const ThemeProfile(
+          textColor: '#CCCCCC',
+          slideBackgroundColor: '#FFFFFF',
+          footerText: 'Pagina {page}',
+        ),
+        slides: [Slide.create(SlideType.bullets)],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) => i.kind == SlideQualityIssueKind.footerContrast,
+        ),
+        isTrue,
+      );
+    });
+
+    test('detects missing image file on disk', () async {
+      final dir = await Directory.systemTemp.createTemp('ocideck-quality-');
+      addTearDown(() => dir.delete(recursive: true));
+
+      final deck = Deck(
+        title: 'Demo',
+        projectPath: dir.path,
+        slides: [
+          Slide.create(
+            SlideType.image,
+          ).copyWith(imagePath: 'images/missing.jpg'),
+        ],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) => i.kind == SlideQualityIssueKind.missingMediaFile,
+        ),
+        isTrue,
+      );
+    });
+
+    test('detects low checklist contrast as deck-wide issue', () {
+      final deck = Deck(
+        title: 'Demo',
+        themeProfile: const ThemeProfile(
+          checklistUncheckedColor: '#EEEEEE',
+          slideBackgroundColor: '#FFFFFF',
+        ),
+        slides: [
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(listStyle: ListStyle.checklist, bullets: ['☐ Taak']),
+        ],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) =>
+              i.isDeckWide && i.kind == SlideQualityIssueKind.checklistContrast,
+        ),
+        isTrue,
+      );
+    });
+
+    test('detects low accent contrast as deck-wide issue', () {
+      final deck = Deck(
+        title: 'Demo',
+        themeProfile: const ThemeProfile(
+          accentColor: '#DDDDDD',
+          slideBackgroundColor: '#FFFFFF',
+        ),
+        slides: [Slide.create(SlideType.bullets)],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) =>
+              i.isDeckWide &&
+              i.kind == SlideQualityIssueKind.themeContrast &&
+              i.field == 'accentColor',
+        ),
+        isTrue,
+      );
     });
   });
 }

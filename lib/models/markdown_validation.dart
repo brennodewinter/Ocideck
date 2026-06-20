@@ -1,4 +1,4 @@
-enum MarkdownValidationSeverity { error, warning }
+enum MarkdownValidationSeverity { error, warning, informational }
 
 class MarkdownValidationIssue {
   final int line;

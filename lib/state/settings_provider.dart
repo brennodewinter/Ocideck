@@ -61,10 +61,11 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       classificationWatermarkEnabled:
           prefs.getBool('classificationWatermarkEnabled') ?? false,
       uiTextScale: (prefs.getDouble('uiTextScale') ?? 1.0).clamp(1.0, 2.0),
-      presentationTargetSeconds: (prefs.getInt('presentationTargetSeconds') ?? 0)
-          .clamp(0, 86400),
-      qualityWarningsOnExport:
-          prefs.getBool('qualityWarningsOnExport') ?? true,
+      presentationTargetSeconds:
+          (prefs.getInt('presentationTargetSeconds') ?? 0).clamp(0, 86400),
+      qualityWarningsOnExport: prefs.getBool('qualityWarningsOnExport') ?? true,
+      qualityBlockExportOnErrors:
+          prefs.getBool('qualityBlockExportOnErrors') ?? false,
     );
   }
 
@@ -127,6 +128,12 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     state = state.copyWith(qualityWarningsOnExport: enabled);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('qualityWarningsOnExport', enabled);
+  }
+
+  Future<void> setQualityBlockExportOnErrors(bool enabled) async {
+    state = state.copyWith(qualityBlockExportOnErrors: enabled);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('qualityBlockExportOnErrors', enabled);
   }
 
   Future<void> addRecentFile(String path) async {

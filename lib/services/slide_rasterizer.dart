@@ -15,10 +15,9 @@ import '../widgets/slides/slide_preview.dart';
 /// Renders the exact on-screen slide previews to PNG images so exports look
 /// identical to what the user sees (WYSIWYG).
 ///
-/// Each slide is mounted in an [Overlay] inside a keyed [RepaintBoundary] that
-/// is positioned off-screen. A RepaintBoundary records its subtree into its
-/// own layer regardless of where it sits on screen, so `toImage` captures the
-/// full slide even though nothing is visible to the user.
+/// Slides are mounted once in a persistent off-screen [OverlayEntry] and updated
+/// in place between captures, which avoids rebuilding the whole preview tree
+/// for every slide.
 class SlideRasterizer {
   /// Logical size used while laying out a slide. The real output resolution is
   /// [logicalSize] * [pixelRatio]; because the preview is fully proportional
@@ -38,6 +37,8 @@ class SlideRasterizer {
     void Function(int done, int total)? onProgress,
     void Function(String phase, int done, int total)? onStage,
   }) async {
+    if (slides.isEmpty) return const [];
+
     final overlay = Overlay.of(context, rootOverlay: true);
     final pixelRatio = targetWidth / logicalSize.width;
 
@@ -53,60 +54,62 @@ class SlideRasterizer {
     imageCache.maximumSizeBytes = 1024 * 1024 * 1024; // 1 GB
 
     final logo = _resolve(themeProfile.logoPath ?? '', projectPath);
+    final allPaths = <String>{
+      ?logo,
+      for (final slide in slides) ...[
+        ?_resolve(slide.imagePath, projectPath),
+        ?_resolve(slide.imagePath2, projectPath),
+      ],
+    };
+
+    final repaintKey = GlobalKey();
+    final hostKey = GlobalKey<_RasterSlideHostState>();
+    final entry = OverlayEntry(
+      builder: (_) => Positioned(
+        left: -logicalSize.width - 100,
+        top: -logicalSize.height - 100,
+        child: _RasterSlideHost(
+          key: hostKey,
+          repaintKey: repaintKey,
+          initialSlide: slides.first,
+          projectPath: projectPath,
+          themeProfile: themeProfile,
+          slideCount: slides.length,
+          tlp: tlp,
+          showClassificationWatermark: showClassificationWatermark,
+          organization: organization,
+        ),
+      ),
+    );
 
     final results = <Uint8List>[];
     try {
+      overlay.insert(entry);
+      await WidgetsBinding.instance.endOfFrame;
+      if (!context.mounted) return results;
+
+      onStage?.call('precache', 0, allPaths.length);
+      await _precachePathsBatched(
+        context,
+        allPaths,
+        onProgress: (done, total) => onStage?.call('precache', done, total),
+      );
+      if (!context.mounted) return results;
+
       for (var i = 0; i < slides.length; i++) {
         onStage?.call('prepare', i, slides.length);
-        // Warm this slide's images immediately before capturing it. Doing it
-        // per slide (instead of once up front) guarantees the bitmap is decoded
-        // and resident in the cache at capture time, no matter how many images
-        // the whole deck contains.
-        if (!context.mounted) break;
-        await _precachePaths(context, [
-          _resolve(slides[i].imagePath, projectPath),
-          _resolve(slides[i].imagePath2, projectPath),
-          logo,
-        ]);
+        hostKey.currentState!.showSlide(slides[i], i + 1);
         if (!context.mounted) break;
 
         onStage?.call('render', i, slides.length);
-        final key = GlobalKey();
-        final entry = OverlayEntry(
-          builder: (_) => Positioned(
-            left: -logicalSize.width - 100,
-            top: -logicalSize.height - 100,
-            child: RepaintBoundary(
-              key: key,
-              child: SizedBox(
-                width: logicalSize.width,
-                height: logicalSize.height,
-                child: SlidePreviewWidget(
-                  slide: slides[i],
-                  projectPath: projectPath,
-                  themeProfile: themeProfile,
-                  slideNumber: i + 1,
-                  slideCount: slides.length,
-                  tlp: tlp,
-                  showClassificationWatermark: showClassificationWatermark,
-                  organization: organization,
-                ),
-              ),
-            ),
-          ),
-        );
+        final png = await _capture(repaintKey, pixelRatio);
+        results.add(png);
 
-        overlay.insert(entry);
-        try {
-          final png = await _capture(key, pixelRatio);
-          results.add(png);
-        } finally {
-          entry.remove();
-        }
         onStage?.call('done', i + 1, slides.length);
         onProgress?.call(i + 1, slides.length);
       }
     } finally {
+      entry.remove();
       imageCache.maximumSize = prevMaxSize;
       imageCache.maximumSizeBytes = prevMaxBytes;
     }
@@ -114,19 +117,15 @@ class SlideRasterizer {
   }
 
   static Future<Uint8List> _capture(GlobalKey key, double pixelRatio) async {
-    // Allow build + layout + paint to settle before capturing. Wait for a
-    // couple of frames first so LayoutBuilder-driven subtrees (e.g. zoomed
-    // images) have a chance to lay out and paint their decoded bitmap.
-    await WidgetsBinding.instance.endOfFrame;
     await WidgetsBinding.instance.endOfFrame;
     RenderRepaintBoundary? boundary;
-    for (var attempt = 0; attempt < 30; attempt++) {
+    for (var attempt = 0; attempt < 12; attempt++) {
       final obj = key.currentContext?.findRenderObject();
       if (obj is RenderRepaintBoundary && !obj.debugNeedsPaint) {
         boundary = obj;
         break;
       }
-      await Future<void>.delayed(const Duration(milliseconds: 16));
+      await Future<void>.delayed(const Duration(milliseconds: 8));
     }
     boundary ??=
         key.currentContext!.findRenderObject() as RenderRepaintBoundary;
@@ -140,22 +139,30 @@ class SlideRasterizer {
     }
   }
 
-  /// Decode and cache the given (already resolved) image paths, awaiting all of
-  /// them. Nulls and duplicates are ignored; decode errors are swallowed so a
-  /// single missing file never aborts the whole export.
-  static Future<void> _precachePaths(
+  /// Decode image paths in small parallel batches so the UI stays responsive
+  /// and progress can be reported.
+  static Future<void> _precachePathsBatched(
     BuildContext context,
-    List<String?> paths,
-  ) async {
-    final unique = paths.whereType<String>().toSet();
-    final futures = <Future<void>>[];
-    for (final path in unique) {
+    Iterable<String> paths, {
+    void Function(int done, int total)? onProgress,
+  }) async {
+    final list = paths.toList();
+    if (list.isEmpty) return;
+    const batchSize = 4;
+    var done = 0;
+    for (var i = 0; i < list.length; i += batchSize) {
       if (!context.mounted) return;
-      futures.add(
-        precacheImage(FileImage(File(path)), context, onError: (_, _) {}),
+      final batch = list.skip(i).take(batchSize);
+      await Future.wait(
+        batch.map(
+          (path) =>
+              precacheImage(FileImage(File(path)), context, onError: (_, _) {}),
+        ),
       );
+      done += batch.length;
+      onProgress?.call(done, list.length);
+      await Future<void>.delayed(Duration.zero);
     }
-    await Future.wait(futures);
   }
 
   static String? _resolve(String imagePath, String? projectPath) {
@@ -163,5 +170,72 @@ class SlideRasterizer {
     if (p.isAbsolute(imagePath)) return imagePath;
     if (projectPath != null) return p.join(projectPath, imagePath);
     return imagePath;
+  }
+}
+
+class _RasterSlideHost extends StatefulWidget {
+  final GlobalKey repaintKey;
+  final Slide initialSlide;
+  final String? projectPath;
+  final ThemeProfile themeProfile;
+  final int slideCount;
+  final TlpLevel tlp;
+  final bool showClassificationWatermark;
+  final String organization;
+
+  const _RasterSlideHost({
+    super.key,
+    required this.repaintKey,
+    required this.initialSlide,
+    required this.projectPath,
+    required this.themeProfile,
+    required this.slideCount,
+    required this.tlp,
+    required this.showClassificationWatermark,
+    required this.organization,
+  });
+
+  @override
+  State<_RasterSlideHost> createState() => _RasterSlideHostState();
+}
+
+class _RasterSlideHostState extends State<_RasterSlideHost> {
+  late Slide _slide;
+  late int _slideNumber;
+
+  @override
+  void initState() {
+    super.initState();
+    _slide = widget.initialSlide;
+    _slideNumber = 1;
+  }
+
+  void showSlide(Slide slide, int slideNumber) {
+    if (_slide.id == slide.id && _slideNumber == slideNumber) return;
+    setState(() {
+      _slide = slide;
+      _slideNumber = slideNumber;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RepaintBoundary(
+      key: widget.repaintKey,
+      child: SizedBox(
+        width: SlideRasterizer.logicalSize.width,
+        height: SlideRasterizer.logicalSize.height,
+        child: SlidePreviewWidget(
+          slide: _slide,
+          projectPath: widget.projectPath,
+          themeProfile: widget.themeProfile,
+          slideNumber: _slideNumber,
+          slideCount: widget.slideCount,
+          tlp: widget.tlp,
+          showClassificationWatermark: widget.showClassificationWatermark,
+          organization: widget.organization,
+        ),
+      ),
+    );
   }
 }

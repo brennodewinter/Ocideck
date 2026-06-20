@@ -426,6 +426,9 @@ class _MarkdownPreview extends StatelessWidget {
   }
 
   Widget _codeBlock(String code, String language) {
+    if (language.toLowerCase() == 'mermaid') {
+      return MermaidDiagram(source: code, width: w);
+    }
     _ensureHighlightLanguages();
     final mono = TextStyle(
       fontFamily: 'monospace',

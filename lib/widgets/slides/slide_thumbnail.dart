@@ -53,12 +53,16 @@ class SlideThumbnail extends ConsumerWidget {
     final l10n = context.l10n;
     final skipped = slide.skipped;
     final slideIssues = ref.watch(deckQualityProvider).forSlide(index);
-    final showWatermark =
-        ref.watch(settingsProvider).classificationWatermarkEnabled;
+    final showWatermark = ref
+        .watch(settingsProvider)
+        .classificationWatermarkEnabled;
     final hasQualityErrors = slideIssues.any(
       (i) => i.severity == MarkdownValidationSeverity.error,
     );
-    final hasQualityWarnings = slideIssues.isNotEmpty;
+    final hasQualityWarnings = slideIssues.any(
+      (i) => i.severity == MarkdownValidationSeverity.warning,
+    );
+    final hasActionableQualityIssues = hasQualityErrors || hasQualityWarnings;
     final borderColor = isSelected
         ? AppTheme.accent
         : skipped
@@ -75,7 +79,7 @@ class SlideThumbnail extends ConsumerWidget {
         '${l10n.d('Slide')} ${index + 1}/$slideCount: '
         '${title.isNotEmpty ? title : l10n.d(slide.type.label)}'
         '${skipped ? ' (${l10n.d('Overgeslagen')})' : ''}'
-        '${hasQualityWarnings ? ' (${l10n.d('Kwaliteitsprobleem')})' : ''}';
+        '${hasActionableQualityIssues ? ' (${l10n.d('Kwaliteitsprobleem')})' : ''}';
 
     return Semantics(
       button: true,
@@ -168,9 +172,7 @@ class SlideThumbnail extends ConsumerWidget {
                                 padding: const EdgeInsets.all(3),
                                 decoration: BoxDecoration(
                                   color: Color(
-                                    hasQualityErrors
-                                        ? 0xCCD32F2F
-                                        : 0xCCB45309,
+                                    hasQualityErrors ? 0xCCD32F2F : 0xCCB45309,
                                   ),
                                   borderRadius: BorderRadius.circular(4),
                                 ),

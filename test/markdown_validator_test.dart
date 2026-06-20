@@ -15,10 +15,9 @@ void main() {
       Deck(
         title: 'Demo',
         slides: [
-          Slide.create(SlideType.bullets).copyWith(
-            title: 'Kop',
-            bullets: ['Eerste punt'],
-          ),
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Kop', bullets: ['Eerste punt']),
         ],
       ),
     );
@@ -126,9 +125,7 @@ marp: true
     final result = validator.validate(markdown);
     expect(result.isValid, isFalse);
     expect(
-      result.issues.any(
-        (issue) => issue.message.contains('split-image'),
-      ),
+      result.issues.any((issue) => issue.message.contains('split-image')),
       isTrue,
     );
   });
@@ -172,9 +169,7 @@ marp: true
     final result = validator.validate(markdown);
     expect(result.isValid, isFalse);
     expect(
-      result.issues.any(
-        (issue) => issue.message.contains('scheidingsrij'),
-      ),
+      result.issues.any((issue) => issue.message.contains('scheidingsrij')),
       isTrue,
     );
   });
@@ -200,7 +195,8 @@ marp: true
 
   test('accepts valid encoded two-bullets payload', () {
     final encoded = base64Url.encode(utf8.encode(jsonEncode(['A', 'B'])));
-    final markdown = '''
+    final markdown =
+        '''
 ---
 marp: true
 ---

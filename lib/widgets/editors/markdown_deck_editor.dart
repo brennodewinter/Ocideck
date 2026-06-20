@@ -119,13 +119,17 @@ class _MarkdownDeckEditorState extends State<MarkdownDeckEditor> {
           ),
           actions: [
             TextButton(
-              onPressed: () =>
-                  Navigator.pop(ctx, const _ApplyChoiceResult(_ApplyChoice.edit)),
+              onPressed: () => Navigator.pop(
+                ctx,
+                const _ApplyChoiceResult(_ApplyChoice.edit),
+              ),
               child: Text(l10n.d('Terug naar editor')),
             ),
             TextButton(
-              onPressed: () =>
-                  Navigator.pop(ctx, const _ApplyChoiceResult(_ApplyChoice.cancel)),
+              onPressed: () => Navigator.pop(
+                ctx,
+                const _ApplyChoiceResult(_ApplyChoice.cancel),
+              ),
               child: Text(l10n.t('cancel')),
             ),
             ElevatedButton(
@@ -397,7 +401,9 @@ class _IssueTile extends StatelessWidget {
                 'Regel ${issue.line}: ${issue.message}',
                 style: TextStyle(
                   fontSize: 11,
-                  color: isError ? Colors.red.shade700 : const Color(0xFF92400E),
+                  color: isError
+                      ? Colors.red.shade700
+                      : const Color(0xFF92400E),
                 ),
               ),
             ),
@@ -431,8 +437,9 @@ class _LineNumberGutter extends StatelessWidget {
           child: AnimatedBuilder(
             animation: scrollController,
             builder: (context, child) {
-              final offset =
-                  scrollController.hasClients ? scrollController.offset : 0.0;
+              final offset = scrollController.hasClients
+                  ? scrollController.offset
+                  : 0.0;
               return Transform.translate(
                 offset: Offset(0, 16 - offset),
                 child: child,
@@ -472,6 +479,7 @@ class _LineNumberCell extends StatelessWidget {
     final bg = switch (severity) {
       MarkdownValidationSeverity.error => const Color(0xFFFECACA),
       MarkdownValidationSeverity.warning => const Color(0xFFFDE68A),
+      MarkdownValidationSeverity.informational => const Color(0xFFE2E8F0),
       null => Colors.transparent,
     };
     return GestureDetector(

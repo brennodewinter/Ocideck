@@ -94,6 +94,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
     type, title, and underlying values as a text alternative; the presenter
     announces each slide change.
   - Improved contrast for hint/label text in the editors.
+- **Slide quality** — continuous accessibility and readability checks while you
+  edit. A bar below the preview summarises open issues (tips, warnings, errors);
+  expand it or open **View issues…** for the full list. Filter by severity, click
+  an issue to jump to the relevant slide field or open *Settings → Colours* with
+  the matching theme colour highlighted. Checks cover style-profile contrast
+  (body, title, table, code, accent, checklist, footer), alt text and media
+  descriptions, missing image/video files on disk, and text density (bullets,
+  tables, code, markdown, title, quote). Thumbnail badges and inline editor hints
+  mark affected slides and fields. Export respects *Warn on export* and optional
+  *Block export on serious quality issues* under *Settings → General →
+  Accessibility*.
 - Project documentation: contributing guide, security policy, architecture and
   build notes, user guide, keyboard-shortcut reference, third-party notices, and
   the EUPL-1.2 licence text.

@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+
 import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/markdown_validation.dart';
@@ -8,6 +12,12 @@ import '../utils/color_contrast.dart';
 import '../widgets/slides/inline_markdown.dart';
 import 'slide_layout_metrics.dart';
 
+/// Maximum combined quote + author length before a density warning.
+const int kQuoteDensityCharThreshold = 200;
+
+/// Footer text opacity in slide previews — keep in sync with overlays.dart.
+const double kFooterTextAlpha = 0.7;
+
 /// Analyses deck slides for accessibility and readability quality issues.
 class SlideQualityAnalyzer {
   const SlideQualityAnalyzer();
@@ -16,21 +26,26 @@ class SlideQualityAnalyzer {
     slides: deck.slides,
     theme: deck.themeProfile,
     font: deck.themeProfile.fontFamily,
+    projectPath: deck.projectPath,
   );
 
   SlideQualityResult analyzeSlides({
     required List<Slide> slides,
     required ThemeProfile theme,
     required String font,
+    String? projectPath,
   }) {
     final issues = <SlideQualityIssue>[];
     _checkThemeContrast(theme, issues);
+    _checkFooterContrast(theme, issues);
+    _checkChecklistContrast(theme, slides, issues);
     for (var i = 0; i < slides.length; i++) {
       final slide = slides[i];
       if (slide.skipped) continue;
       _checkAltText(slide, i, issues);
       _checkSlideContrast(slide, i, theme, issues);
       _checkTextDensity(slide, i, font, issues);
+      _checkMissingMedia(slide, i, projectPath, issues);
     }
     return SlideQualityResult(issues);
   }
@@ -103,6 +118,98 @@ class SlideQualityAnalyzer {
       background: theme.codeBackgroundColor,
       largeText: false,
       field: 'codeTextColor',
+    );
+    addPairIssue(
+      label: 'Thema accent',
+      foreground: theme.accentColor,
+      background: theme.slideBackgroundColor,
+      largeText: false,
+      field: 'accentColor',
+    );
+  }
+
+  void _checkFooterContrast(
+    ThemeProfile theme,
+    List<SlideQualityIssue> issues,
+  ) {
+    if (theme.footerText.trim().isEmpty && !theme.footerShowPageNumbers) return;
+
+    final ratio = blendedHexContrastRatio(
+      theme.textColor,
+      theme.slideBackgroundColor,
+      foregroundAlpha: kFooterTextAlpha,
+    );
+    if (ratio == null) return;
+    const aaThreshold = kWcagAaNormalText;
+    if (ratio >= aaThreshold) return;
+
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: kDeckWideSlideIndex,
+        kind: SlideQualityIssueKind.footerContrast,
+        category: SlideQualityCategory.contrast,
+        severity: MarkdownValidationSeverity.warning,
+        field: 'textColor',
+        args: {
+          'label': 'Footer-tekst',
+          'ratio': ratio.toStringAsFixed(1),
+          'threshold': aaThreshold.toStringAsFixed(1),
+          'largeText': 'false',
+        },
+      ),
+    );
+  }
+
+  void _checkChecklistContrast(
+    ThemeProfile theme,
+    List<Slide> slides,
+    List<SlideQualityIssue> issues,
+  ) {
+    final usesChecklist = slides.any(
+      (slide) =>
+          !slide.skipped &&
+          (slide.type == SlideType.bullets ||
+              slide.type == SlideType.twoBullets ||
+              slide.type == SlideType.bulletsImage) &&
+          slide.listStyle == ListStyle.checklist,
+    );
+    if (!usesChecklist) return;
+    void addPair({
+      required String label,
+      required String foreground,
+      required String field,
+    }) {
+      final ratio = hexContrastRatio(foreground, theme.slideBackgroundColor);
+      if (ratio == null) return;
+      const aaThreshold = kWcagAaNormalText;
+      if (ratio >= aaThreshold) return;
+
+      issues.add(
+        SlideQualityIssue(
+          slideIndex: kDeckWideSlideIndex,
+          kind: SlideQualityIssueKind.checklistContrast,
+          category: SlideQualityCategory.contrast,
+          severity: MarkdownValidationSeverity.warning,
+          field: field,
+          args: {
+            'label': label,
+            'ratio': ratio.toStringAsFixed(1),
+            'threshold': aaThreshold.toStringAsFixed(1),
+            'largeText': 'false',
+          },
+        ),
+      );
+    }
+
+    addPair(
+      label: 'Checklist (niet aangevinkt)',
+      foreground: theme.checklistUncheckedColor,
+      field: 'checklistUncheckedColor',
+    );
+    addPair(
+      label: 'Checklist (aangevinkt)',
+      foreground: theme.checklistCheckedColor,
+      field: 'checklistCheckedColor',
     );
   }
 
@@ -192,7 +299,7 @@ class SlideQualityAnalyzer {
           slideIndex: index,
           kind: SlideQualityIssueKind.missingAltCaption,
           category: SlideQualityCategory.altText,
-          severity: MarkdownValidationSeverity.warning,
+          severity: MarkdownValidationSeverity.informational,
           field: field,
           args: {'label': label},
         ),
@@ -272,7 +379,8 @@ class SlideQualityAnalyzer {
   ) {
     final spec = ChartSpec.parse(slide.customMarkdown);
     if (spec.title.trim().isNotEmpty) return;
-    if (spec.hasInlineData && spec.series.any((s) => s.name.trim().isNotEmpty)) {
+    if (spec.hasInlineData &&
+        spec.series.any((s) => s.name.trim().isNotEmpty)) {
       return;
     }
     if (spec.source != null && spec.source!.trim().isNotEmpty) return;
@@ -282,7 +390,7 @@ class SlideQualityAnalyzer {
         slideIndex: index,
         kind: SlideQualityIssueKind.chartMissingDescription,
         category: SlideQualityCategory.altText,
-        severity: MarkdownValidationSeverity.warning,
+        severity: MarkdownValidationSeverity.informational,
         field: 'customMarkdown',
       ),
     );
@@ -296,7 +404,8 @@ class SlideQualityAnalyzer {
     required String label,
   }) {
     if (!hasMedia) return;
-    final hasDescription = slide.title.trim().isNotEmpty ||
+    final hasDescription =
+        slide.title.trim().isNotEmpty ||
         slide.notes.trim().isNotEmpty ||
         slide.subtitle.trim().isNotEmpty;
     if (hasDescription) return;
@@ -306,11 +415,86 @@ class SlideQualityAnalyzer {
         slideIndex: index,
         kind: SlideQualityIssueKind.mediaMissingDescription,
         category: SlideQualityCategory.altText,
-        severity: MarkdownValidationSeverity.warning,
+        severity: MarkdownValidationSeverity.informational,
         field: 'title',
         args: {'label': label},
       ),
     );
+  }
+
+  void _checkMissingMedia(
+    Slide slide,
+    int index,
+    String? projectPath,
+    List<SlideQualityIssue> issues,
+  ) {
+    if (kIsWeb || projectPath == null || projectPath.trim().isEmpty) return;
+
+    void missingFile({
+      required String path,
+      required String field,
+      required String label,
+    }) {
+      if (path.trim().isEmpty) return;
+      final resolved = _resolveAssetPath(path, projectPath);
+      if (resolved == null || File(resolved).existsSync()) return;
+
+      issues.add(
+        SlideQualityIssue(
+          slideIndex: index,
+          kind: SlideQualityIssueKind.missingMediaFile,
+          category: SlideQualityCategory.altText,
+          severity: MarkdownValidationSeverity.warning,
+          field: field,
+          args: {'label': label, 'path': path},
+        ),
+      );
+    }
+
+    switch (slide.type) {
+      case SlideType.image:
+      case SlideType.bulletsImage:
+        missingFile(
+          path: slide.imagePath,
+          field: 'imagePath',
+          label: 'Afbeelding',
+        );
+      case SlideType.twoImages:
+        missingFile(
+          path: slide.imagePath,
+          field: 'imagePath',
+          label: 'Eerste afbeelding',
+        );
+        missingFile(
+          path: slide.imagePath2,
+          field: 'imagePath2',
+          label: 'Tweede afbeelding',
+        );
+      case SlideType.title:
+      case SlideType.quote:
+        missingFile(
+          path: slide.imagePath,
+          field: 'imagePath',
+          label: 'Achtergrondafbeelding',
+        );
+      case SlideType.video:
+        missingFile(path: slide.videoPath, field: 'videoPath', label: 'Video');
+      case SlideType.bullets:
+      case SlideType.twoBullets:
+      case SlideType.section:
+      case SlideType.table:
+      case SlideType.freeMarkdown:
+      case SlideType.code:
+      case SlideType.chart:
+        break;
+    }
+  }
+
+  String? _resolveAssetPath(String path, String? projectPath) {
+    if (path.trim().isEmpty) return null;
+    if (path.startsWith('/') || path.contains(':\\')) return path;
+    if (projectPath != null) return '$projectPath/$path';
+    return path;
   }
 
   void _checkTextDensity(
@@ -346,11 +530,12 @@ class SlideQualityAnalyzer {
         _checkFreeMarkdownDensity(slide, index, issues);
       case SlideType.title:
         _checkTitleDensity(slide, index, issues);
+      case SlideType.quote:
+        _checkQuoteDensity(slide, index, issues);
       case SlideType.section:
       case SlideType.image:
       case SlideType.twoImages:
       case SlideType.video:
-      case SlideType.quote:
       case SlideType.chart:
         break;
     }
@@ -388,7 +573,11 @@ class SlideQualityAnalyzer {
     if (rows.isEmpty) return;
     final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
     final w = kReferenceSlideWidth;
-    final cellSize = tableCellFontSize(w, rowCount: rows.length, colCount: colCount);
+    final cellSize = tableCellFontSize(
+      w,
+      rowCount: rows.length,
+      colCount: colCount,
+    );
     final minimum = tableCellFontMinimum(w);
     if (cellSize > minimum + 0.001) return;
 
@@ -398,15 +587,16 @@ class SlideQualityAnalyzer {
         kind: SlideQualityIssueKind.tableDensityMinimum,
         category: SlideQualityCategory.textDensity,
         severity: MarkdownValidationSeverity.warning,
-        args: {
-          'rows': '${rows.length}',
-          'cols': '$colCount',
-        },
+        args: {'rows': '${rows.length}', 'cols': '$colCount'},
       ),
     );
   }
 
-  void _checkCodeDensity(Slide slide, int index, List<SlideQualityIssue> issues) {
+  void _checkCodeDensity(
+    Slide slide,
+    int index,
+    List<SlideQualityIssue> issues,
+  ) {
     final code = slide.customMarkdown;
     if (code.trim().isEmpty) return;
     final lines = code.split('\n');
@@ -446,7 +636,11 @@ class SlideQualityAnalyzer {
     );
   }
 
-  void _checkTitleDensity(Slide slide, int index, List<SlideQualityIssue> issues) {
+  void _checkTitleDensity(
+    Slide slide,
+    int index,
+    List<SlideQualityIssue> issues,
+  ) {
     final titleLen = stripInlineMarkdown(slide.title).length;
     final subtitleLen = stripInlineMarkdown(slide.subtitle).length;
     if (titleLen + subtitleLen <= 120) return;
@@ -458,6 +652,27 @@ class SlideQualityAnalyzer {
         category: SlideQualityCategory.textDensity,
         severity: MarkdownValidationSeverity.warning,
         args: {'chars': '${titleLen + subtitleLen}'},
+      ),
+    );
+  }
+
+  void _checkQuoteDensity(
+    Slide slide,
+    int index,
+    List<SlideQualityIssue> issues,
+  ) {
+    final quoteLen = stripInlineMarkdown(slide.quote).length;
+    final authorLen = stripInlineMarkdown(slide.quoteAuthor).length;
+    if (quoteLen + authorLen <= kQuoteDensityCharThreshold) return;
+
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: index,
+        kind: SlideQualityIssueKind.quoteDensityHigh,
+        category: SlideQualityCategory.textDensity,
+        severity: MarkdownValidationSeverity.warning,
+        field: 'quote',
+        args: {'chars': '${quoteLen + authorLen}'},
       ),
     );
   }

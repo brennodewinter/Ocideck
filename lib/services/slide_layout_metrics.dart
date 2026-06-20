@@ -237,7 +237,11 @@ double measureTextWidth(
 }
 
 /// Table cell font size fraction used in [table_preview.dart].
-double tableCellFontSize(double w, {required int rowCount, required int colCount}) {
+double tableCellFontSize(
+  double w, {
+  required int rowCount,
+  required int colCount,
+}) {
   final density = (rowCount + colCount).clamp(2, 24);
   return (w * 0.025 * (10 / (density + 6))).clamp(w * 0.010, w * 0.021);
 }
@@ -298,7 +302,9 @@ double twoBulletsSlideFitScale({required Slide slide, required String font}) {
   final w = kReferenceSlideWidth;
   final pad = w * 0.07;
   final vPad = w * 0.05;
-  final leftBullets = slide.bullets.where((b) => b.trimLeft().isNotEmpty).toList();
+  final leftBullets = slide.bullets
+      .where((b) => b.trimLeft().isNotEmpty)
+      .toList();
   final rightBullets = slide.bullets2
       .where((b) => b.trimLeft().isNotEmpty)
       .toList();

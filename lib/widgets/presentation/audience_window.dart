@@ -6,6 +6,7 @@ import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/markdown_service.dart';
+import '../../services/mermaid_render_service.dart';
 import '../../utils/url_launcher_util.dart';
 import '../slides/slide_preview.dart';
 import 'annotation_overlay.dart';
@@ -134,6 +135,22 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
             bullets2: List<String>.from(m['bullets2'] as List? ?? const []),
           );
         });
+      case 'tableUpdate':
+        final m = Map<String, dynamic>.from(call.arguments as Map);
+        final i = (m['slideIndex'] as num?)?.toInt();
+        if (i == null || i < 0 || i >= _slides.length || !mounted) return null;
+        final raw = m['tableRows'] as List?;
+        if (raw == null) return null;
+        final rows = raw
+            .map(
+              (row) => List<String>.from(
+                (row as List).map((cell) => cell.toString()),
+              ),
+            )
+            .toList();
+        setState(() {
+          _slides[i] = _slides[i].copyWith(tableRows: rows);
+        });
     }
     return null;
   }
@@ -147,7 +164,10 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(backgroundColor: Colors.black, body: _body()),
+      home: Scaffold(
+        backgroundColor: Colors.black,
+        body: Stack(children: [_body(), const MermaidRenderHostLayer()]),
+      ),
     );
   }
 

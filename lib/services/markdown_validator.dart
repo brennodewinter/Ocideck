@@ -43,7 +43,10 @@ class MarkdownValidator {
 
     final body = _stripFrontMatter(markdown);
     final bodyStartLine = markdown.length - body.length > 0
-        ? markdown.substring(0, markdown.length - body.length).split('\n').length
+        ? markdown
+              .substring(0, markdown.length - body.length)
+              .split('\n')
+              .length
         : 1;
 
     final blocks = body.split(RegExp(r'\n---\n'));
@@ -269,14 +272,16 @@ class MarkdownValidator {
       final trimmed = line.trim();
 
       if (trimmed.startsWith('<!-- tlp:')) {
-        final value = trimmed.substring('<!-- tlp:'.length).replaceAll('-->', '').trim();
+        final value = trimmed
+            .substring('<!-- tlp:'.length)
+            .replaceAll('-->', '')
+            .trim();
         if (!_isValidTlpKey(value)) {
           issues.add(
             MarkdownValidationIssue(
               line: lineNo(i),
               severity: MarkdownValidationSeverity.error,
-              message:
-                  'Slide $slideNumber: onbekend TLP-niveau "$value".',
+              message: 'Slide $slideNumber: onbekend TLP-niveau "$value".',
             ),
           );
         }
@@ -366,7 +371,8 @@ class MarkdownValidator {
           MarkdownValidationIssue(
             line: lineNo(i),
             severity: MarkdownValidationSeverity.error,
-            message: 'Slide $slideNumber: `<video>` mist een `src="…"`-attribuut.',
+            message:
+                'Slide $slideNumber: `<video>` mist een `src="…"`-attribuut.',
           ),
         );
       }
@@ -561,8 +567,7 @@ class MarkdownValidator {
         MarkdownValidationIssue(
           line: lineNo(0),
           severity: MarkdownValidationSeverity.error,
-          message:
-              'Slide $slideNumber: verwacht `<div class="$className">`.',
+          message: 'Slide $slideNumber: verwacht `<div class="$className">`.',
         ),
       );
       return;
@@ -678,7 +683,8 @@ class MarkdownValidator {
         MarkdownValidationIssue(
           line: lineNo(firstOpenLine),
           severity: MarkdownValidationSeverity.error,
-          message: 'Slide $slideNumber: niet alle `<div>`-tags zijn afgesloten.',
+          message:
+              'Slide $slideNumber: niet alle `<div>`-tags zijn afgesloten.',
         ),
       );
     }

@@ -57,6 +57,7 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
           controller: _title,
           hint: 'Titel boven de video',
           maxLines: 2,
+          qualityField: 'title',
         ),
         const SizedBox(height: 16),
         const SectionLabel('Video'),

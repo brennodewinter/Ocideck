@@ -9,15 +9,19 @@ enum SlideQualityIssueKind {
   missingAltCaption,
   themeContrast,
   slideContrast,
+  footerContrast,
+  checklistContrast,
   imageContrastUnverified,
   chartMissingDescription,
   mediaMissingDescription,
+  missingMediaFile,
   textDensityWarning,
   textDensityCritical,
   tableDensityMinimum,
   codeDensityHigh,
   freeMarkdownDensityHigh,
   titleDensityHigh,
+  quoteDensityHigh,
 }
 
 class SlideQualityIssue {
@@ -51,6 +55,10 @@ class SlideQualityResult {
 
   bool get hasIssues => issues.isNotEmpty;
 
+  /// Issues that should block or warn at export time (excludes informational tips).
+  bool get hasActionableIssues =>
+      issues.any((i) => i.severity != MarkdownValidationSeverity.informational);
+
   int get errorCount => issues
       .where((i) => i.severity == MarkdownValidationSeverity.error)
       .length;
@@ -59,13 +67,23 @@ class SlideQualityResult {
       .where((i) => i.severity == MarkdownValidationSeverity.warning)
       .length;
 
+  int get infoCount => issues
+      .where((i) => i.severity == MarkdownValidationSeverity.informational)
+      .length;
+
+  List<SlideQualityIssue> get actionableIssues => issues
+      .where((i) => i.severity != MarkdownValidationSeverity.informational)
+      .toList();
+
+  Iterable<SlideQualityIssue> issuesWithSeverity(
+    MarkdownValidationSeverity severity,
+  ) => issues.where((i) => i.severity == severity);
+
   List<SlideQualityIssue> forSlide(int slideIndex) =>
       issues.where((i) => i.slideIndex == slideIndex).toList();
 
   bool hasCategoryOnSlide(int slideIndex, SlideQualityCategory category) =>
-      issues.any(
-        (i) => i.slideIndex == slideIndex && i.category == category,
-      );
+      issues.any((i) => i.slideIndex == slideIndex && i.category == category);
 
   List<SlideQualityIssue> get deckWideIssues =>
       issues.where((i) => i.isDeckWide).toList();

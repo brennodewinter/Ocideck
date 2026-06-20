@@ -1151,6 +1151,17 @@ const _dutchSourceStrings = {
     'slide(s) gekopieerd naar': 'slide(s) copied to',
     '1 slide geïmporteerd.': '1 slide imported.',
     'slides geïmporteerd.': 'slides imported.',
+    'Export wordt voorbereid…': 'Preparing export…',
+    'tip(s)': 'hint(s)',
+    'fout(en)': 'error(s)',
+    'Kwaliteitsoverzicht': 'Quality overview',
+    'Bekijk meldingen…': 'View issues…',
+    'Bekijk alle meldingen…': 'View all issues…',
+    'Tips': 'Hints',
+    'Waarschuwingen': 'Warnings',
+    'Fouten': 'Errors',
+    'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+        'Tip: add alt text / caption for accessibility',
     'Zoek in slides…': 'Search in slides…',
     'Geen slides met': 'No slides with',
     'SLIDES': 'SLIDES',
@@ -2672,6 +2683,7 @@ const _dutchSourceStringAdditions = {
     'Thema tabeltekst': 'Theme table text',
     'Thema tabelkop': 'Theme table header',
     'Thema code': 'Theme code',
+    'Thema accent': 'Theme accent',
     'Tussentitel': 'Section heading',
     'Eerste afbeelding': 'First image',
     'Tweede afbeelding': 'Second image',
@@ -2681,6 +2693,21 @@ const _dutchSourceStringAdditions = {
         'Ask for confirmation before exporting when slide quality issues are present.',
     'Kwaliteitsproblemen gevonden': 'Quality issues found',
     'Toch exporteren': 'Export anyway',
+    'ernstige probleem(en)': 'serious issue(s)',
+    'De presentatie heeft kwaliteitsproblemen (':
+        'The presentation has quality issues (',
+    'Lange quote (': 'Long quote (',
+    'Footer-tekst': 'Footer text',
+    'Checklist (niet aangevinkt)': 'Checklist (unchecked)',
+    'Checklist (aangevinkt)': 'Checklist (checked)',
+    ': bestand niet gevonden (': ': file not found (',
+    'Blokkeer export bij ernstige kwaliteitsproblemen':
+        'Block export on serious quality issues',
+    'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+        'Export is not possible while slide quality checks report errors.',
+    'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+        'Export blocked due to serious quality issues.',
+    'Alle meldingen': 'All issues',
     '… en meer problemen in het kwaliteitspaneel.':
         '… and more issues in the quality panel.',
     'Classificatie-handhaving': 'Classification enforcement',
@@ -2700,6 +2727,12 @@ const _dutchSourceStringAdditions = {
         'Show a diagonal watermark with TLP and organization on every slide.',
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Set a TLP level — export is blocked by the classification policy.',
+    'Tabel bewerken': 'Edit table',
+    'Pijltjes · Tab · E of Esc': 'Arrow keys · Tab · E or Esc',
+    'Tabel bewerken (op tabeldia)': 'Edit table (on table slides)',
+    'Pen · markeerstift · ⇧E': 'Pen · highlighter · ⇧E',
+    'Gestapelde staaf': 'Stacked bar',
+    'Spreiding': 'Scatter',
   },
   'it': {
     'Toegankelijkheid': 'Accessibilità',
@@ -3039,6 +3072,17 @@ const _dutchSourceStringAdditions = {
     'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
         'avviso/i. Le slide potrebbero essere interpretate in modo errato.',
     'Slidekwaliteit': 'Qualità slide',
+    'tip(s)': 'suggerimento/i',
+    'fout(en)': 'errore/i',
+    'Kwaliteitsoverzicht': 'Panoramica qualità',
+    'Bekijk meldingen…': 'Vedi segnalazioni…',
+    'Bekijk alle meldingen…': 'Vedi tutte le segnalazioni…',
+    'Tips': 'Suggerimenti',
+    'Waarschuwingen': 'Avvisi',
+    'Fouten': 'Errori',
+    'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+        'Suggerimento: aggiungi testo alt / didascalia per l\'accessibilità',
+    'Export wordt voorbereid…': 'Preparazione export…',
     'Geen kwaliteitsproblemen gevonden': 'Nessun problema di qualità trovato',
     'Thema (hele presentatie)': 'Tema (intera presentazione)',
     'Kwaliteitsprobleem': 'Problema di qualità',
@@ -3087,6 +3131,7 @@ const _dutchSourceStringAdditions = {
     'Thema tabeltekst': 'Testo tabella del tema',
     'Thema tabelkop': 'Intestazione tabella del tema',
     'Thema code': 'Codice del tema',
+    'Thema accent': 'Accento del tema',
     'Tussentitel': 'Intestazione di sezione',
     'Eerste afbeelding': 'Prima immagine',
     'Tweede afbeelding': 'Seconda immagine',
@@ -3096,6 +3141,21 @@ const _dutchSourceStringAdditions = {
         'Chiedi conferma prima di esportare quando ci sono problemi di qualità delle slide.',
     'Kwaliteitsproblemen gevonden': 'Problemi di qualità trovati',
     'Toch exporteren': 'Esporta comunque',
+    'ernstige probleem(en)': 'problema/i grave/i',
+    'De presentatie heeft kwaliteitsproblemen (':
+        'La presentazione ha problemi di qualità (',
+    'Lange quote (': 'Citazione lunga (',
+    'Footer-tekst': 'Testo footer',
+    'Checklist (niet aangevinkt)': 'Checklist (non selezionato)',
+    'Checklist (aangevinkt)': 'Checklist (selezionato)',
+    ': bestand niet gevonden (': ': file non trovato (',
+    'Blokkeer export bij ernstige kwaliteitsproblemen':
+        'Blocca l\'esportazione in caso di problemi gravi di qualità',
+    'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+        'L\'esportazione non è possibile finché i controlli di qualità segnalano errori.',
+    'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+        'Esportazione bloccata per problemi di qualità gravi.',
+    'Alle meldingen': 'Tutte le segnalazioni',
     '… en meer problemen in het kwaliteitspaneel.':
         '… e altri problemi nel pannello qualità.',
     'Classificatie-handhaving': 'Applicazione classificazione',
@@ -3115,6 +3175,12 @@ const _dutchSourceStringAdditions = {
         'Mostra una filigrana diagonale con TLP e organizzazione su ogni slide.',
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Imposta un livello TLP — l\'export è bloccato dalla policy di classificazione.',
+    'Tabel bewerken': 'Modifica tabella',
+    'Pijltjes · Tab · E of Esc': 'Frecce · Tab · E o Esc',
+    'Tabel bewerken (op tabeldia)': 'Modifica tabella (su slide tabella)',
+    'Pen · markeerstift · ⇧E': 'Penna · evidenziatore · ⇧E',
+    'Gestapelde staaf': 'Barre impilate',
+    'Spreiding': 'Dispersione',
   },
   'de': {
     'Toegankelijkheid': 'Barrierefreiheit',
@@ -3138,8 +3204,7 @@ const _dutchSourceStringAdditions = {
     'Totaal': 'Gesamt',
     'Totale tijd': 'Gesamtzeit',
     'Geen slides gemeten.': 'Keine Folien gemessen.',
-    'Tijden gekopieerd naar klembord.':
-        'Zeiten in die Zwischenablage kopiert.',
+    'Tijden gekopieerd naar klembord.': 'Zeiten in die Zwischenablage kopiert.',
     'Kopieer': 'Kopieren',
     'Sluiten': 'Schließen',
     'Tekstgrootte van de interface': 'Textgröße der Oberfläche',
@@ -3454,6 +3519,17 @@ const _dutchSourceStringAdditions = {
     'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
         'Warnung(en). Folien können dadurch falsch eingelesen werden.',
     'Slidekwaliteit': 'Folienqualität',
+    'tip(s)': 'Hinweis/Hinweise',
+    'fout(en)': 'Fehler',
+    'Kwaliteitsoverzicht': 'Qualitätsübersicht',
+    'Bekijk meldingen…': 'Meldungen anzeigen…',
+    'Bekijk alle meldingen…': 'Alle Meldungen anzeigen…',
+    'Tips': 'Hinweise',
+    'Waarschuwingen': 'Warnungen',
+    'Fouten': 'Fehler',
+    'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+        'Tipp: Alt-Text / Bildunterschrift für Barrierefreiheit hinzufügen',
+    'Export wordt voorbereid…': 'Export wird vorbereitet…',
     'Geen kwaliteitsproblemen gevonden': 'Keine Qualitätsprobleme gefunden',
     'Thema (hele presentatie)': 'Design (gesamte Präsentation)',
     'Kwaliteitsprobleem': 'Qualitätsproblem',
@@ -3502,6 +3578,7 @@ const _dutchSourceStringAdditions = {
     'Thema tabeltekst': 'Design-Tabellentext',
     'Thema tabelkop': 'Design-Tabellenkopf',
     'Thema code': 'Design-Code',
+    'Thema accent': 'Design-Akzent',
     'Tussentitel': 'Abschnittsüberschrift',
     'Eerste afbeelding': 'Erstes Bild',
     'Tweede afbeelding': 'Zweites Bild',
@@ -3511,6 +3588,21 @@ const _dutchSourceStringAdditions = {
         'Vor dem Export bestätigen lassen, wenn Folienqualitätsprobleme vorliegen.',
     'Kwaliteitsproblemen gevonden': 'Qualitätsprobleme gefunden',
     'Toch exporteren': 'Trotzdem exportieren',
+    'ernstige probleem(en)': 'schwerwiegende(s) Problem(e)',
+    'De presentatie heeft kwaliteitsproblemen (':
+        'Die Präsentation hat Qualitätsprobleme (',
+    'Lange quote (': 'Langes Zitat (',
+    'Footer-tekst': 'Footer-Text',
+    'Checklist (niet aangevinkt)': 'Checkliste (nicht angehakt)',
+    'Checklist (aangevinkt)': 'Checkliste (angehakt)',
+    ': bestand niet gevonden (': ': Datei nicht gefunden (',
+    'Blokkeer export bij ernstige kwaliteitsproblemen':
+        'Export bei schwerwiegenden Qualitätsproblemen blockieren',
+    'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+        'Export ist nicht möglich, solange die Folienqualitätsprüfung Fehler meldet.',
+    'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+        'Export wegen schwerwiegender Qualitätsprobleme blockiert.',
+    'Alle meldingen': 'Alle Meldungen',
     '… en meer problemen in het kwaliteitspaneel.':
         '… und weitere Probleme im Qualitätsbereich.',
     'Classificatie-handhaving': 'Klassifizierungsdurchsetzung',
@@ -3530,6 +3622,12 @@ const _dutchSourceStringAdditions = {
         'Diagonales Wasserzeichen mit TLP und Organisation auf jeder Folie.',
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'TLP-Niveau festlegen — Export durch Klassifizierungsrichtlinie blockiert.',
+    'Tabel bewerken': 'Tabelle bearbeiten',
+    'Pijltjes · Tab · E of Esc': 'Pfeiltasten · Tab · E oder Esc',
+    'Tabel bewerken (op tabeldia)': 'Tabelle bearbeiten (auf Tabellenfolie)',
+    'Pen · markeerstift · ⇧E': 'Stift · Marker · ⇧E',
+    'Gestapelde staaf': 'Gestapelte Balken',
+    'Spreiding': 'Streudiagramm',
   },
   'fr': {
     'Toegankelijkheid': 'Accessibilité',
@@ -3553,8 +3651,7 @@ const _dutchSourceStringAdditions = {
     'Totaal': 'Total',
     'Totale tijd': 'Temps total',
     'Geen slides gemeten.': 'Aucune diapo mesurée.',
-    'Tijden gekopieerd naar klembord.':
-        'Temps copiés dans le presse-papiers.',
+    'Tijden gekopieerd naar klembord.': 'Temps copiés dans le presse-papiers.',
     'Kopieer': 'Copier',
     'Sluiten': 'Fermer',
     'Tekstgrootte van de interface': 'Taille du texte de l\'interface',
@@ -3873,6 +3970,17 @@ const _dutchSourceStringAdditions = {
     'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
         'avertissement(s). Les slides peuvent être mal interprétées.',
     'Slidekwaliteit': 'Qualité des slides',
+    'tip(s)': 'conseil(s)',
+    'fout(en)': 'erreur(s)',
+    'Kwaliteitsoverzicht': 'Aperçu qualité',
+    'Bekijk meldingen…': 'Voir les alertes…',
+    'Bekijk alle meldingen…': 'Voir toutes les alertes…',
+    'Tips': 'Conseils',
+    'Waarschuwingen': 'Avertissements',
+    'Fouten': 'Erreurs',
+    'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+        'Conseil : ajoutez un texte alt / une légende pour l\'accessibilité',
+    'Export wordt voorbereid…': 'Préparation de l\'export…',
     'Geen kwaliteitsproblemen gevonden': 'Aucun problème de qualité trouvé',
     'Thema (hele presentatie)': 'Thème (présentation entière)',
     'Kwaliteitsprobleem': 'Problème de qualité',
@@ -3921,6 +4029,7 @@ const _dutchSourceStringAdditions = {
     'Thema tabeltekst': 'Texte de tableau du thème',
     'Thema tabelkop': 'En-tête de tableau du thème',
     'Thema code': 'Code du thème',
+    'Thema accent': 'Accent du thème',
     'Tussentitel': 'Titre intermédiaire',
     'Eerste afbeelding': 'Première image',
     'Tweede afbeelding': 'Deuxième image',
@@ -3930,6 +4039,21 @@ const _dutchSourceStringAdditions = {
         'Demander une confirmation avant l\'export lorsqu\'il y a des problèmes de qualité.',
     'Kwaliteitsproblemen gevonden': 'Problèmes de qualité détectés',
     'Toch exporteren': 'Exporter quand même',
+    'ernstige probleem(en)': 'problème(s) grave(s)',
+    'De presentatie heeft kwaliteitsproblemen (':
+        'La présentation a des problèmes de qualité (',
+    'Lange quote (': 'Longue citation (',
+    'Footer-tekst': 'Texte du pied de page',
+    'Checklist (niet aangevinkt)': 'Liste de contrôle (non coché)',
+    'Checklist (aangevinkt)': 'Liste de contrôle (coché)',
+    ': bestand niet gevonden (': ': fichier introuvable (',
+    'Blokkeer export bij ernstige kwaliteitsproblemen':
+        'Bloquer l\'export en cas de problèmes de qualité graves',
+    'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+        'L\'export est impossible tant que le contrôle qualité signale des erreurs.',
+    'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+        'Export bloqué en raison de problèmes de qualité graves.',
+    'Alle meldingen': 'Toutes les alertes',
     '… en meer problemen in het kwaliteitspaneel.':
         '… et d\'autres problèmes dans le panneau qualité.',
     'Classificatie-handhaving': 'Application de la classification',
@@ -3949,6 +4073,12 @@ const _dutchSourceStringAdditions = {
         'Filigrane diagonal avec TLP et organisation sur chaque diapositive.',
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Définissez un niveau TLP — export bloqué par la politique de classification.',
+    'Tabel bewerken': 'Modifier le tableau',
+    'Pijltjes · Tab · E of Esc': 'Flèches · Tab · E ou Échap',
+    'Tabel bewerken (op tabeldia)': 'Modifier le tableau (sur diapo tableau)',
+    'Pen · markeerstift · ⇧E': 'Stylo · surligneur · ⇧E',
+    'Gestapelde staaf': 'Barres empilées',
+    'Spreiding': 'Nuage de points',
   },
   'es': {
     'Toegankelijkheid': 'Accesibilidad',
@@ -4288,7 +4418,19 @@ const _dutchSourceStringAdditions = {
     'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
         'advertencia(s). Las diapositivas pueden interpretarse incorrectamente.',
     'Slidekwaliteit': 'Calidad de diapositivas',
-    'Geen kwaliteitsproblemen gevonden': 'No se encontraron problemas de calidad',
+    'tip(s)': 'consejo(s)',
+    'fout(en)': 'error(es)',
+    'Kwaliteitsoverzicht': 'Resumen de calidad',
+    'Bekijk meldingen…': 'Ver alertas…',
+    'Bekijk alle meldingen…': 'Ver todas las alertas…',
+    'Tips': 'Consejos',
+    'Waarschuwingen': 'Advertencias',
+    'Fouten': 'Errores',
+    'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+        'Consejo: añade texto alt / pie de foto para accesibilidad',
+    'Export wordt voorbereid…': 'Preparando exportación…',
+    'Geen kwaliteitsproblemen gevonden':
+        'No se encontraron problemas de calidad',
     'Thema (hele presentatie)': 'Tema (presentación completa)',
     'Kwaliteitsprobleem': 'Problema de calidad',
     'Kwaliteitsproblemen': 'Problemas de calidad',
@@ -4336,6 +4478,7 @@ const _dutchSourceStringAdditions = {
     'Thema tabeltekst': 'Texto de tabla del tema',
     'Thema tabelkop': 'Encabezado de tabla del tema',
     'Thema code': 'Código del tema',
+    'Thema accent': 'Acento del tema',
     'Tussentitel': 'Título intermedio',
     'Eerste afbeelding': 'Primera imagen',
     'Tweede afbeelding': 'Segunda imagen',
@@ -4345,6 +4488,21 @@ const _dutchSourceStringAdditions = {
         'Pedir confirmación antes de exportar cuando hay problemas de calidad en las diapositivas.',
     'Kwaliteitsproblemen gevonden': 'Problemas de calidad encontrados',
     'Toch exporteren': 'Exportar de todos modos',
+    'ernstige probleem(en)': 'problema(s) grave(s)',
+    'De presentatie heeft kwaliteitsproblemen (':
+        'La presentación tiene problemas de calidad (',
+    'Lange quote (': 'Cita larga (',
+    'Footer-tekst': 'Texto del pie',
+    'Checklist (niet aangevinkt)': 'Lista de verificación (sin marcar)',
+    'Checklist (aangevinkt)': 'Lista de verificación (marcada)',
+    ': bestand niet gevonden (': ': archivo no encontrado (',
+    'Blokkeer export bij ernstige kwaliteitsproblemen':
+        'Bloquear exportación con problemas graves de calidad',
+    'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+        'No se puede exportar mientras el control de calidad reporte errores.',
+    'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+        'Exportación bloqueada por problemas graves de calidad.',
+    'Alle meldingen': 'Todas las alertas',
     '… en meer problemen in het kwaliteitspaneel.':
         '… y más problemas en el panel de calidad.',
     'Classificatie-handhaving': 'Aplicación de clasificación',
@@ -4364,6 +4522,12 @@ const _dutchSourceStringAdditions = {
         'Marca de agua diagonal con TLP y organización en cada diapositiva.',
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Establece un nivel TLP — exportación bloqueada por la política de clasificación.',
+    'Tabel bewerken': 'Editar tabla',
+    'Pijltjes · Tab · E of Esc': 'Flechas · Tab · E o Esc',
+    'Tabel bewerken (op tabeldia)': 'Editar tabla (en diapositiva de tabla)',
+    'Pen · markeerstift · ⇧E': 'Lápiz · marcador · ⇧E',
+    'Gestapelde staaf': 'Barras apiladas',
+    'Spreiding': 'Dispersión',
   },
   'fy': {
     'Toegankelijkheid': 'Tagonklikens',
@@ -4696,6 +4860,17 @@ const _dutchSourceStringAdditions = {
     'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
         'warnings. Dizenn kinne dêrtroch ferkeard ynladen wurde.',
     'Slidekwaliteit': 'Dia-kwaliteit',
+    'tip(s)': 'tip(s)',
+    'fout(en)': 'flater(s)',
+    'Kwaliteitsoverzicht': 'Kwaliteitsoersicht',
+    'Bekijk meldingen…': 'Sjoch meldingen…',
+    'Bekijk alle meldingen…': 'Sjoch alle meldingen…',
+    'Tips': 'Tips',
+    'Waarschuwingen': 'Warnings',
+    'Fouten': 'Flaters',
+    'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+        'Tip: foeg alt-tekst / byskrift ta foar tagonklikens',
+    'Export wordt voorbereid…': 'Eksport wurdt taret…',
     'Geen kwaliteitsproblemen gevonden': 'Gjin kwaliteitsproblemen fûn',
     'Thema (hele presentatie)': 'Tema (hiele presintaasje)',
     'Kwaliteitsprobleem': 'Kwaliteitsprobleem',
@@ -4744,6 +4919,7 @@ const _dutchSourceStringAdditions = {
     'Thema tabeltekst': 'Tema-tabeltekst',
     'Thema tabelkop': 'Tema-tabelkop',
     'Thema code': 'Tema-koade',
+    'Thema accent': 'Tema-accent',
     'Tussentitel': 'Tussentitel',
     'Eerste afbeelding': 'Earste ôfbylding',
     'Tweede afbeelding': 'Twadde ôfbylding',
@@ -4753,6 +4929,21 @@ const _dutchSourceStringAdditions = {
         'Freeg befêstiging foardat jo eksportearje as der dia-kwaliteitsproblemen binne.',
     'Kwaliteitsproblemen gevonden': 'Kwaliteitsproblemen fûn',
     'Toch exporteren': 'Dochs eksportearje',
+    'ernstige probleem(en)': 'earnstige probleem/problemen',
+    'De presentatie heeft kwaliteitsproblemen (':
+        'De presintaasje hat kwaliteitsproblemen (',
+    'Lange quote (': 'Lange quote (',
+    'Footer-tekst': 'Footer-tekst',
+    'Checklist (niet aangevinkt)': 'Checklist (net oanfinkt)',
+    'Checklist (aangevinkt)': 'Checklist (oanfinkt)',
+    ': bestand niet gevonden (': ': bestân net fûn (',
+    'Blokkeer export bij ernstige kwaliteitsproblemen':
+        'Eksport blokkearje by earnstige kwaliteitsproblemen',
+    'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+        'Eksport is net mooglik salang der flaters yn de dia-kwaliteitskontrole steane.',
+    'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+        'Eksport blokkearre fanwegen earnstige kwaliteitsproblemen.',
+    'Alle meldingen': 'Alle meldingen',
     '… en meer problemen in het kwaliteitspaneel.':
         '… en mear problemen yn it kwaliteitspaneel.',
     'Classificatie-handhaving': 'Klassifikaasje-ôfstimming',
@@ -4772,6 +4963,12 @@ const _dutchSourceStringAdditions = {
         'Diagonaal watermerk mei TLP en organisaasje op elke slide.',
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Stel in TLP-nivo yn — eksport blokkearre troch it klassifikaasjebelied.',
+    'Tabel bewerken': 'Tabel bewurkje',
+    'Pijltjes · Tab · E of Esc': 'Pylktoetsen · Tab · E of Esc',
+    'Tabel bewerken (op tabeldia)': 'Tabel bewurkje (op tabelslide)',
+    'Pen · markeerstift · ⇧E': 'Pen · markearstift · ⇧E',
+    'Gestapelde staaf': 'Stapele staven',
+    'Spreiding': 'Sparring',
   },
   'pap': {
     'Toegankelijkheid': 'Aksesibilidat',
@@ -5107,6 +5304,17 @@ const _dutchSourceStringAdditions = {
     'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
         'advertensia(nan). Slide-nan por wòrdu lesá mal.',
     'Slidekwaliteit': 'Kalidad di slide',
+    'tip(s)': 'tip(nan)',
+    'fout(en)': 'eror(nan)',
+    'Kwaliteitsoverzicht': 'Resumen di kalidad',
+    'Bekijk meldingen…': 'Mira alertanan…',
+    'Bekijk alle meldingen…': 'Mira tur alertanan…',
+    'Tips': 'Tips',
+    'Waarschuwingen': 'Advertensianan',
+    'Fouten': 'Erornan',
+    'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+        'Tip: agregá teksto alt / caption pa aksesibilidat',
+    'Export wordt voorbereid…': 'Export ta prepará…',
     'Geen kwaliteitsproblemen gevonden': 'No a haña problema di kalidad',
     'Thema (hele presentatie)': 'Tema (presentashon kompleto)',
     'Kwaliteitsprobleem': 'Problema di kalidad',
@@ -5155,6 +5363,7 @@ const _dutchSourceStringAdditions = {
     'Thema tabeltekst': 'Teksto di tabel di tema',
     'Thema tabelkop': 'Header di tabel di tema',
     'Thema code': 'Kódigo di tema',
+    'Thema accent': 'Acento di tema',
     'Tussentitel': 'Título intermedio',
     'Eerste afbeelding': 'Promé imágen',
     'Tweede afbeelding': 'Segundo imágen',
@@ -5164,6 +5373,21 @@ const _dutchSourceStringAdditions = {
         'Pidi konfirmashon promé ku exportá ora tin problema di kalidad di slide.',
     'Kwaliteitsproblemen gevonden': 'Problemanan di kalidad haña',
     'Toch exporteren': 'Exportá igualmente',
+    'ernstige probleem(en)': 'problema(nan) serio',
+    'De presentatie heeft kwaliteitsproblemen (':
+        'E presentashon tin problema di kalidad (',
+    'Lange quote (': 'Siña largo (',
+    'Footer-tekst': 'Teksto di footer',
+    'Checklist (niet aangevinkt)': 'Checklist (no marká)',
+    'Checklist (aangevinkt)': 'Checklist (marká)',
+    ': bestand niet gevonden (': ': archivo no a haña (',
+    'Blokkeer export bij ernstige kwaliteitsproblemen':
+        'Blok exportá ora tin problema serio di kalidad',
+    'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+        'Export no ta posibel mientras e kontrol di kalidad ta reportá erornan.',
+    'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+        'Export bloká pa problema serio di kalidad.',
+    'Alle meldingen': 'Tur alertanan',
     '… en meer problemen in het kwaliteitspaneel.':
         '… i mas problema den e panel di kalidad.',
     'Classificatie-handhaving': 'Aplikashon di klasifikashon',
@@ -5183,5 +5407,11 @@ const _dutchSourceStringAdditions = {
         'Watermark diagonal ku TLP i organisashon riba kada slide.',
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Pone un nivel TLP — exportá blokeá pa e polítika di klasifikashon.',
+    'Tabel bewerken': 'Edita tabel',
+    'Pijltjes · Tab · E of Esc': 'Flechanan · Tab · E of Esc',
+    'Tabel bewerken (op tabeldia)': 'Edita tabel (riba slide di tabel)',
+    'Pen · markeerstift · ⇧E': 'Pèn · marker · ⇧E',
+    'Gestapelde staaf': 'Baranan apilá',
+    'Spreiding': 'Dispershon',
   },
 };

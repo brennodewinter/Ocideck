@@ -72,7 +72,32 @@ void FlutterWindow::HandleWindowMethod(const gchar* method,
     if (window_) {
       g_idle_add(CloseWindowOnIdle, g_object_ref(window_));
     }
-  } else if (strcmp(method, "window_coverScreen") == 0) {
+    } else if (strcmp(method, "window_setFrame") == 0) {
+      if (!window_) {
+        response = FL_METHOD_RESPONSE(
+            fl_method_error_response_new("-1", "window is not available",
+                                       nullptr));
+      } else {
+        FlValue* x_val = fl_value_lookup_string(arguments, "x");
+        FlValue* y_val = fl_value_lookup_string(arguments, "y");
+        FlValue* w_val = fl_value_lookup_string(arguments, "width");
+        FlValue* h_val = fl_value_lookup_string(arguments, "height");
+        if (x_val == nullptr || y_val == nullptr || w_val == nullptr ||
+            h_val == nullptr) {
+          response = FL_METHOD_RESPONSE(
+              fl_method_error_response_new("-1", "missing frame arguments",
+                                         nullptr));
+        } else {
+          gtk_window_resize(GTK_WINDOW(window_),
+                            fl_value_get_int(w_val),
+                            fl_value_get_int(h_val));
+          gtk_window_move(GTK_WINDOW(window_), fl_value_get_int(x_val),
+                          fl_value_get_int(y_val));
+          response =
+              FL_METHOD_RESPONSE(fl_method_success_response_new(nullptr));
+        }
+      }
+    } else if (strcmp(method, "window_coverScreen") == 0) {
     if (!window_) {
       response = FL_METHOD_RESPONSE(
           fl_method_error_response_new("-1", "window is not available",

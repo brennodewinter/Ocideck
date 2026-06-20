@@ -216,8 +216,9 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         projectPath: deck.projectPath,
         tlp: deck.tlp,
         organization: deck.organization,
-        showClassificationWatermark:
-            ref.read(settingsProvider).classificationWatermarkEnabled,
+        showClassificationWatermark: ref
+            .read(settingsProvider)
+            .classificationWatermarkEnabled,
       );
       if (images.isNotEmpty) bytes = images.first;
     } catch (e) {
@@ -306,6 +307,13 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     if (target == null || !mounted) return;
 
     final at = target.deckNotifier.insertSlides(slides);
+    if (at >= 0) target.editorNotifier.select(at);
+
+    final targetIndex = tabs.tabs.indexWhere((t) => t.id == target.id);
+    if (targetIndex >= 0) {
+      ref.read(tabsProvider.notifier).selectTab(targetIndex);
+    }
+
     if (!mounted) return;
     messenger.showSnackBar(
       SnackBar(
@@ -417,7 +425,10 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     final editorNotifier = ref.read(editorProvider.notifier);
     final at = ref.read(editorProvider).selectedIndex;
     final firstIndex = notifier.insertSlides(slides, afterIndex: at);
-    if (firstIndex >= 0) editorNotifier.select(firstIndex);
+    if (firstIndex >= 0) {
+      editorNotifier.select(firstIndex);
+      _scrollSlideToTop(firstIndex);
+    }
 
     if (!context.mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
@@ -568,6 +579,11 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       return _buildFilteredList(deck, query, editor, notifier, editorNotifier);
     }
     return ReorderableListView.builder(
+      // Rebuild when slides are bulk-added/removed — the list's internal
+      // bookkeeping can otherwise keep showing the old item count until restart.
+      key: ValueKey(
+        'slide-list-${deck.slides.length}-${deck.slides.isEmpty ? 'empty' : deck.slides.last.id}',
+      ),
       scrollController: _scrollController,
       padding: const EdgeInsets.symmetric(vertical: 4),
       buildDefaultDragHandles: false,
@@ -625,6 +641,21 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     final deck = deckState.deck!;
     _pruneSlideKeys(deck);
     final editor = ref.watch(editorProvider);
+
+    ref.listen<int>(editorProvider.select((s) => s.selectedIndex), (
+      previous,
+      next,
+    ) {
+      if (previous != next) _scrollSlideToTop(next);
+    });
+    ref.listen<int?>(deckProvider.select((s) => s.deck?.slides.length), (
+      previous,
+      next,
+    ) {
+      if (previous != null && next != null && next > previous) {
+        _scrollSlideToTop(ref.read(editorProvider).selectedIndex);
+      }
+    });
     final notifier = ref.read(deckProvider.notifier);
     final editorNotifier = ref.read(editorProvider.notifier);
 

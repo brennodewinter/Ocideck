@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
+import '../../platform/platform_features.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
@@ -13,6 +15,7 @@ import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/markdown_service.dart';
+import '../../services/mermaid_render_service.dart';
 import '../../services/rehearsal_controller.dart';
 import '../../utils/log.dart';
 import '../../utils/url_launcher_util.dart';
@@ -110,7 +113,7 @@ class FullscreenPresenter extends StatefulWidget {
     ValueChanged<Slide>? onSlideChanged,
   }) async {
     var displayCount = 0;
-    if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+    if (supportsDualScreenPresenter) {
       try {
         final displays = await screenRetriever.getAllDisplays();
         displayCount = displays.length;
@@ -120,9 +123,7 @@ class FullscreenPresenter extends StatefulWidget {
       }
     }
     final dual = shouldUseDualScreen(
-      isMacOS: Platform.isMacOS,
-      isWindows: Platform.isWindows,
-      isLinux: Platform.isLinux,
+      isDesktopNative: supportsDualScreenPresenter,
       displayCount: displayCount,
     );
     if (!context.mounted) return;
@@ -336,12 +337,10 @@ class FullscreenPresenter extends StatefulWidget {
 
 @visibleForTesting
 bool shouldUseDualScreen({
-  required bool isMacOS,
-  required bool isWindows,
-  required bool isLinux,
+  required bool isDesktopNative,
   required int displayCount,
 }) {
-  return (isMacOS || isWindows || isLinux) && displayCount >= 2;
+  return isDesktopNative && displayCount >= 2;
 }
 
 @visibleForTesting
@@ -424,6 +423,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   /// Sneltoets-overzicht (cheatsheet) zichtbaar.
   bool _helpOpen = false;
+
+  /// Live tabelbewerking op een tabeldia (toets E).
+  bool _tableEditMode = false;
+  int? _tableEditRow;
+  int? _tableEditCol;
 
   /// Automatische modus: slides wisselen vanzelf (op tijd of na audio). Staat
   /// standaard aan zodat ingestelde tijdwissels meteen werken; met A te pauzeren.
@@ -585,6 +589,94 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     }
   }
 
+  Slide get _currentSlide =>
+      widget.slides[_index.clamp(0, widget.slides.length - 1)];
+
+  bool get _currentSlideIsTable => _currentSlide.type == SlideType.table;
+
+  bool get _textFieldFocused =>
+      FocusManager.instance.primaryFocus?.context?.widget is EditableText;
+
+  void _exitTableEditMode() {
+    if (!_tableEditMode) return;
+    setState(() {
+      _tableEditMode = false;
+      _tableEditRow = null;
+      _tableEditCol = null;
+    });
+    _focusNode.requestFocus();
+  }
+
+  void _toggleTableEditMode() {
+    if (!_currentSlideIsTable) return;
+    if (_tableEditMode) {
+      _exitTableEditMode();
+      return;
+    }
+    setState(() {
+      _tableEditMode = true;
+      _tableEditRow = 0;
+      _tableEditCol = 0;
+      _tool = null;
+    });
+    _advanceTimer?.cancel();
+    _onLaserMove(null);
+    _focusNode.requestFocus();
+  }
+
+  void _selectTableCell(int row, int col) {
+    if (!_tableEditMode) return;
+    setState(() {
+      _tableEditRow = row;
+      _tableEditCol = col;
+    });
+  }
+
+  void _updateTableCell({
+    required int slideIndex,
+    required int row,
+    required int col,
+    required String value,
+  }) {
+    if (slideIndex < 0 || slideIndex >= widget.slides.length) return;
+    final slide = widget.slides[slideIndex];
+    if (slide.type != SlideType.table) return;
+    final rows = slide.tableRows.map((r) => List<String>.from(r)).toList();
+    if (rows.isEmpty) return;
+    final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
+    while (rows.length <= row) {
+      rows.add(List<String>.filled(colCount, ''));
+    }
+    while (rows[row].length <= col) {
+      rows[row].add('');
+    }
+    rows[row][col] = value;
+    final updated = slide.copyWith(tableRows: rows);
+    setState(() => widget.slides[slideIndex] = updated);
+    widget.onSlideChanged?.call(updated);
+    if (_dual) {
+      audienceChannel
+          .invokeMethod('tableUpdate', {
+            'slideIndex': slideIndex,
+            'tableRows': updated.tableRows,
+          })
+          .catchError((_) => null);
+    }
+  }
+
+  void _moveTableCell({required int dRow, required int dCol}) {
+    if (!_tableEditMode || _textFieldFocused) return;
+    final slide = _currentSlide;
+    final rows = slide.tableRows.where((r) => r.isNotEmpty).toList();
+    if (rows.isEmpty) return;
+    final rowCount = rows.length;
+    final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
+    final row = (_tableEditRow ?? 0) + dRow;
+    final col = (_tableEditCol ?? 0) + dCol;
+    if (row < 0 || col < 0 || row >= rowCount || col >= colCount) return;
+    _selectTableCell(row, col);
+  }
+
   // ── Annotatielaag ─────────────────────────────────────────────────────────
 
   /// Send the current slide's strokes to the beamer (keyed by index there).
@@ -697,7 +789,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     setState(() => _progress = 0);
 
     // Auto-modus uit: nooit vanzelf wisselen.
-    if (!_autoPlay) return;
+    if (!_autoPlay || _tableEditMode) return;
 
     final slide = widget.slides[_index.clamp(0, widget.slides.length - 1)];
 
@@ -731,7 +823,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// of bij herhaling vanaf de laatste terug naar de eerste. Zonder herhaling
   /// blijft de laatste slide gewoon staan.
   void _autoAdvance() {
-    if (_blank != _Blank.none) return;
+    if (_blank != _Blank.none || _tableEditMode) return;
     if (_index < widget.slides.length - 1) {
       setState(() => _index++);
       _scheduleAdvance();
@@ -873,6 +965,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       setState(() => _blank = _Blank.none);
       return;
     }
+    if (_tableEditMode) return;
     if (_index < widget.slides.length - 1) {
       setState(() => _index++);
       _scheduleAdvance();
@@ -885,6 +978,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       setState(() => _blank = _Blank.none);
       return;
     }
+    if (_tableEditMode) return;
     if (_index > 0) {
       setState(() => _index--);
       _scheduleAdvance();
@@ -1012,6 +1106,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       _index = index.clamp(0, widget.slides.length - 1);
       _blank = _Blank.none;
       _gridOpen = false;
+      _tableEditMode = false;
+      _tableEditRow = null;
+      _tableEditCol = null;
     });
     _scheduleAdvance();
     _announceSlide();
@@ -1025,7 +1122,12 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     }
     final target = index.clamp(0, widget.slides.length - 1);
     if (target == _index) return;
-    setState(() => _index = target);
+    setState(() {
+      _index = target;
+      _tableEditMode = false;
+      _tableEditRow = null;
+      _tableEditCol = null;
+    });
     _scheduleAdvance();
     _announceSlide();
   }
@@ -1077,6 +1179,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
     // Terwijl het raster open is, sturen de pijltjes een aparte cursor aan.
     if (_gridOpen) return _handleGridKey(key);
+
+    // Tabelbewerking: navigatie-toetsen voor celkeuze; tekstinvoer blijft intact.
+    if (_tableEditMode) return _handleTableEditKey(key);
 
     // Cijfers verzamelen om naar een slidenummer te springen.
     final digit = _digits[key];
@@ -1157,7 +1262,13 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         _setTool(InkTool.highlighter);
         return KeyEventResult.handled;
       case LogicalKeyboardKey.keyE:
-        _setTool(InkTool.eraser);
+        if (HardwareKeyboard.instance.isShiftPressed) {
+          _setTool(InkTool.eraser);
+        } else if (_currentSlideIsTable) {
+          _toggleTableEditMode();
+        } else {
+          _setTool(InkTool.eraser);
+        }
         return KeyEventResult.handled;
       case LogicalKeyboardKey.keyX:
         _setTool(InkTool.laser);
@@ -1166,8 +1277,10 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         _clearCurrentInk();
         return KeyEventResult.handled;
       case LogicalKeyboardKey.escape:
-        // Gelaagd: gereedschap weg, getypt nummer wissen, blanco scherm, afsluiten.
-        if (_tool != null) {
+        // Gelaagd: tabelbewerking, gereedschap, getypt nummer, blanco, afsluiten.
+        if (_tableEditMode) {
+          _exitTableEditMode();
+        } else if (_tool != null) {
           setState(() => _tool = null);
           _onLaserMove(null);
         } else if (_typed.isNotEmpty) {
@@ -1247,6 +1360,56 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     return KeyEventResult.handled;
   }
 
+  /// Toetsen tijdens live tabelbewerking.
+  KeyEventResult _handleTableEditKey(LogicalKeyboardKey key) {
+    if (_textFieldFocused) {
+      switch (key) {
+        case LogicalKeyboardKey.escape:
+          _exitTableEditMode();
+          return KeyEventResult.handled;
+        case LogicalKeyboardKey.keyE:
+          _toggleTableEditMode();
+          return KeyEventResult.handled;
+        case LogicalKeyboardKey.tab:
+          _moveTableCell(
+            dRow: 0,
+            dCol: HardwareKeyboard.instance.isShiftPressed ? -1 : 1,
+          );
+          return KeyEventResult.handled;
+        default:
+          return KeyEventResult.ignored;
+      }
+    }
+
+    switch (key) {
+      case LogicalKeyboardKey.keyE:
+      case LogicalKeyboardKey.escape:
+        _exitTableEditMode();
+      case LogicalKeyboardKey.arrowRight:
+        _moveTableCell(dRow: 0, dCol: 1);
+      case LogicalKeyboardKey.arrowLeft:
+        _moveTableCell(dRow: 0, dCol: -1);
+      case LogicalKeyboardKey.arrowDown:
+        _moveTableCell(dRow: 1, dCol: 0);
+      case LogicalKeyboardKey.arrowUp:
+        _moveTableCell(dRow: -1, dCol: 0);
+      case LogicalKeyboardKey.enter:
+      case LogicalKeyboardKey.numpadEnter:
+      case LogicalKeyboardKey.space:
+        if (_tableEditRow != null && _tableEditCol != null) {
+          _selectTableCell(_tableEditRow!, _tableEditCol!);
+        }
+      case LogicalKeyboardKey.tab:
+        _moveTableCell(
+          dRow: 0,
+          dCol: HardwareKeyboard.instance.isShiftPressed ? -1 : 1,
+        );
+      default:
+        return KeyEventResult.ignored;
+    }
+    return KeyEventResult.handled;
+  }
+
   // ── Formatters ─────────────────────────────────────────────────────────────
 
   String _fmtClock(DateTime t) {
@@ -1317,6 +1480,14 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                 child: Center(child: _buildTargetBadge()),
               ),
             if (_helpOpen) Positioned.fill(child: _buildHelpOverlay()),
+            if (_tableEditMode)
+              Positioned(
+                left: 0,
+                right: 0,
+                top: 20,
+                child: Center(child: _buildTableEditBanner()),
+              ),
+            const MermaidRenderHostLayer(),
           ],
         ),
       ),
@@ -1361,7 +1532,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         children: [
           toolBtn(InkTool.pen, Icons.edit, 'Pen (D)'),
           toolBtn(InkTool.highlighter, Icons.brush, 'Markeerstift (T)'),
-          toolBtn(InkTool.eraser, Icons.cleaning_services_outlined, 'Gum (E)'),
+          toolBtn(
+            InkTool.eraser,
+            Icons.cleaning_services_outlined,
+            'Gum (E / ⇧E)',
+          ),
           toolBtn(InkTool.laser, Icons.my_location, 'Laser (X)'),
           const SizedBox(width: 8),
           Container(width: 1, height: 22, color: Colors.white24),
@@ -1480,6 +1655,82 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     );
   }
 
+  /// Zwevende banner tijdens live tabelbewerking.
+  Widget _buildTableEditBanner() {
+    final l10n = context.l10n;
+    final accent = _hexColor(widget.themeProfile.accentColor);
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0.9, end: 1),
+      duration: const Duration(milliseconds: 280),
+      curve: Curves.easeOutBack,
+      builder: (_, scale, child) => Transform.scale(scale: scale, child: child),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 520),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                accent.withValues(alpha: 0.92),
+                accent.withValues(alpha: 0.72),
+              ],
+            ),
+            borderRadius: BorderRadius.circular(999),
+            boxShadow: [
+              BoxShadow(
+                color: accent.withValues(alpha: 0.45),
+                blurRadius: 18,
+                offset: const Offset(0, 6),
+              ),
+            ],
+            border: Border.all(color: Colors.white.withValues(alpha: 0.35)),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.edit_note_rounded,
+                color: Colors.white,
+                size: 20,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                l10n.d('Tabel bewerken'),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 0.2,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Flexible(
+                child: Text(
+                  l10n.d('Pijltjes · Tab · E of Esc'),
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: Colors.white.withValues(alpha: 0.9),
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Color _hexColor(String hex) {
+    final cleaned = hex.replaceFirst('#', '');
+    final value = int.tryParse(
+      cleaned.length == 6 ? 'FF$cleaned' : cleaned,
+      radix: 16,
+    );
+    return Color(value ?? 0xFFFFFFFF);
+  }
+
   /// Sneltoets-overzicht (cheatsheet).
   Widget _buildHelpOverlay() {
     final l10n = context.l10n;
@@ -1492,7 +1743,8 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       ('P', l10n.d('Presenter view (notities, klok)')),
       ('S', l10n.d('Scherm wisselen (meerdere schermen)')),
       ('B · W', l10n.d('Zwart · wit scherm')),
-      ('D · T · E', l10n.d('Pen · markeerstift · gum')),
+      ('D · T · ⇧E', l10n.d('Pen · markeerstift · gum')),
+      ('E', l10n.d('Tabel bewerken (op tabeldia)')),
       ('X · C', l10n.d('Laser · annotaties wissen')),
       ('K', l10n.d('Doeltijd / aftellen instellen (MMSS)')),
       ('R', l10n.d('Tijd & oefenrun resetten')),
@@ -1641,6 +1893,17 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                         column: column,
                         itemIndex: itemIndex,
                       ),
+                  tableEditMode:
+                      _tableEditMode && slide.type == SlideType.table,
+                  tableEditRow: _tableEditRow,
+                  tableEditCol: _tableEditCol,
+                  onTableCellSelected: (row, col) => _selectTableCell(row, col),
+                  onTableCellChanged: (row, col, value) => _updateTableCell(
+                    slideIndex: _index,
+                    row: row,
+                    col: col,
+                    value: value,
+                  ),
                   // Tijdens het presenteren speelt media en starten audio/video
                   // vanzelf; het media-einde stuurt auto-advance aan. In dual-
                   // schermmodus speelt de media op het beamervenster, niet hier,
@@ -1658,10 +1921,10 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                   // the half-drawn stroke onto the next slide.
                   key: ValueKey(slide.id),
                   strokes: _currentStrokes,
-                  tool: _tool,
+                  tool: _tableEditMode ? null : _tool,
                   color: _inkColor,
                   width: _toolWidth,
-                  interactive: true,
+                  interactive: !_tableEditMode,
                   onStrokesChanged: _onStrokesChanged,
                   onLaserMove: _onLaserMove,
                   onActiveStrokeChanged: _onActiveStroke,
@@ -1684,8 +1947,8 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     if (_blank != _Blank.none) return _blankFill();
 
     return GestureDetector(
-      onTap: _next,
-      onSecondaryTap: _prev,
+      onTap: _tableEditMode ? null : _next,
+      onSecondaryTap: _tableEditMode ? null : _prev,
       child: SizedBox.expand(child: _slideCanvas(slide)),
     );
   }
@@ -1717,7 +1980,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: GestureDetector(
-                      onTap: _next,
+                      onTap: _tableEditMode ? null : _next,
                       child: Stack(
                         children: [
                           Positioned.fill(child: _slideCanvas(slide)),

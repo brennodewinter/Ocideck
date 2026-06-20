@@ -67,9 +67,11 @@ class _ChartPreviewState extends State<_ChartPreview> {
     final l10n = context.l10n;
     final typeName = switch (spec.type) {
       ChartType.bar => l10n.d('Staaf'),
+      ChartType.stackedBar => l10n.d('Gestapelde staaf'),
       ChartType.line => l10n.d('Lijn'),
       ChartType.pie => l10n.d('Cirkel'),
       ChartType.radar => l10n.d('Spider'),
+      ChartType.scatter => l10n.d('Spreiding'),
     };
     final buffer = StringBuffer('${l10n.d('Grafiek')} ($typeName)');
     if (spec.title.isNotEmpty) {
@@ -367,20 +369,34 @@ class _ChartPreviewState extends State<_ChartPreview> {
     switch (spec.type) {
       case ChartType.bar:
         return _barChart(spec, textColor);
+      case ChartType.stackedBar:
+        return _stackedBarChart(spec, textColor);
       case ChartType.line:
         return _lineChart(spec, textColor);
       case ChartType.pie:
         return _pieChart(spec, textColor);
       case ChartType.radar:
         return _radarChart(spec, textColor);
+      case ChartType.scatter:
+        return _scatterChart(spec, textColor);
     }
   }
 
   double _maxY(ChartSpec spec) {
     var m = 0.0;
-    for (final s in spec.series) {
-      for (final v in s.data) {
-        if (v > m) m = v;
+    if (spec.type == ChartType.stackedBar) {
+      for (var xi = 0; xi < spec.x.length; xi++) {
+        var sum = 0.0;
+        for (final s in spec.series) {
+          if (xi < s.data.length) sum += s.data[xi];
+        }
+        if (sum > m) m = sum;
+      }
+    } else {
+      for (final s in spec.series) {
+        for (final v in s.data) {
+          if (v > m) m = v;
+        }
       }
     }
     // Keep any bound line comfortably inside the plot so its label is visible.
@@ -605,6 +621,77 @@ class _ChartPreviewState extends State<_ChartPreview> {
             },
           ),
         ),
+      ),
+      duration: Duration.zero,
+    );
+  }
+
+  Widget _stackedBarChart(ChartSpec spec, Color textColor) {
+    final groups = <BarChartGroupData>[];
+    for (var xi = 0; xi < spec.x.length; xi++) {
+      var bottom = 0.0;
+      final rods = <BarChartRodData>[];
+      for (var si = 0; si < spec.series.length; si++) {
+        if (xi >= spec.series[si].data.length) continue;
+        final value = spec.series[si].data[xi];
+        rods.add(
+          BarChartRodData(
+            fromY: bottom,
+            toY: bottom + value,
+            color: _seriesDisplayColor(spec.series[si], si),
+            width: _barRodWidth(spec),
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(w * 0.006),
+            ),
+          ),
+        );
+        bottom += value;
+      }
+      groups.add(BarChartGroupData(x: xi, barRods: rods));
+    }
+    return BarChart(
+      BarChartData(
+        minY: _minY(spec),
+        maxY: _maxY(spec),
+        alignment: BarChartAlignment.spaceEvenly,
+        barGroups: groups,
+        titlesData: _titles(spec, textColor, bars: true),
+        gridData: _grid(textColor),
+        borderData: FlBorderData(show: false),
+        extraLinesData: _boundLines(spec),
+        barTouchData: BarTouchData(enabled: false),
+      ),
+      duration: Duration.zero,
+    );
+  }
+
+  Widget _scatterChart(ChartSpec spec, Color textColor) {
+    final spots = <ScatterSpot>[];
+    for (var si = 0; si < spec.series.length; si++) {
+      for (var xi = 0; xi < spec.series[si].data.length; xi++) {
+        spots.add(
+          ScatterSpot(
+            xi.toDouble(),
+            spec.series[si].data[xi],
+            dotPainter: FlDotCirclePainter(
+              radius: w * 0.007,
+              color: _seriesDisplayColor(spec.series[si], si),
+              strokeWidth: w * 0.002,
+              strokeColor: _hexColor(profile.slideBackgroundColor),
+            ),
+          ),
+        );
+      }
+    }
+    return ScatterChart(
+      ScatterChartData(
+        minY: _minY(spec),
+        maxY: _maxY(spec),
+        scatterSpots: spots,
+        titlesData: _titles(spec, textColor),
+        gridData: _grid(textColor),
+        borderData: FlBorderData(show: false),
+        scatterTouchData: ScatterTouchData(enabled: false),
       ),
       duration: Duration.zero,
     );

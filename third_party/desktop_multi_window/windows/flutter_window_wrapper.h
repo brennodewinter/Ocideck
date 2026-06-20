@@ -92,6 +92,29 @@ class FlutterWindowWrapper {
       if (hwnd_) {
         ::PostMessage(hwnd_, WM_CLOSE, 0, 0);
       }
+    } else if (method == "window_setFrame") {
+      if (!hwnd_) {
+        result->Error("-1", "window is not available");
+        return;
+      }
+      if (arguments) {
+        auto xIt = arguments->find(flutter::EncodableValue("x"));
+        auto yIt = arguments->find(flutter::EncodableValue("y"));
+        auto wIt = arguments->find(flutter::EncodableValue("width"));
+        auto hIt = arguments->find(flutter::EncodableValue("height"));
+        if (xIt != arguments->end() && yIt != arguments->end() &&
+            wIt != arguments->end() && hIt != arguments->end()) {
+          const double x = std::get<double>(xIt->second);
+          const double y = std::get<double>(yIt->second);
+          const double width = std::get<double>(wIt->second);
+          const double height = std::get<double>(hIt->second);
+          ::SetWindowPos(hwnd_, nullptr, static_cast<int>(x),
+                         static_cast<int>(y), static_cast<int>(width),
+                         static_cast<int>(height),
+                         SWP_NOZORDER | SWP_NOACTIVATE | SWP_SHOWWINDOW);
+        }
+      }
+      result->Success();
     } else if (method == "window_coverScreen") {
       if (!hwnd_) {
         result->Error("-1", "window is not available");
@@ -120,9 +143,10 @@ class FlutterWindowWrapper {
       const RECT bounds = monitor_info.rcMonitor;
       ::SetWindowLongPtr(hwnd_, GWL_STYLE, WS_POPUP | WS_VISIBLE);
       ::SetWindowLongPtr(hwnd_, GWL_EXSTYLE,
-                         ::GetWindowLongPtr(hwnd_, GWL_EXSTYLE) &
-                             ~WS_EX_WINDOWEDGE);
-      ::SetWindowPos(hwnd_, HWND_TOP, bounds.left, bounds.top,
+                         (::GetWindowLongPtr(hwnd_, GWL_EXSTYLE) &
+                          ~WS_EX_WINDOWEDGE) |
+                             WS_EX_TOPMOST);
+      ::SetWindowPos(hwnd_, HWND_TOPMOST, bounds.left, bounds.top,
                      bounds.right - bounds.left, bounds.bottom - bounds.top,
                      SWP_FRAMECHANGED | SWP_SHOWWINDOW);
       result->Success();

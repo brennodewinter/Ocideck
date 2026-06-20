@@ -34,11 +34,14 @@ void main() {
       expect(const ExportDocumentMetadata().exportKeywords(), 'OciDeck');
     });
 
+    test('creator and producer identify OciDeck', () {
+      const meta = ExportDocumentMetadata();
+      expect(meta.creator, kOciDeckCreator);
+      expect(meta.producer, kOciDeckProducer);
+    });
+
     test('documentAuthor prefers author over organization', () {
-      const meta = ExportDocumentMetadata(
-        author: 'Alex',
-        organization: 'Acme',
-      );
+      const meta = ExportDocumentMetadata(author: 'Alex', organization: 'Acme');
       expect(meta.documentAuthor, 'Alex');
     });
 
