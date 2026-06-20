@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../services/mermaid_render_service.dart';
+import '../../utils/sanitize_svg.dart';
 
 /// Renders a Mermaid diagram definition as inline SVG in slide previews.
 class MermaidDiagram extends StatefulWidget {
@@ -38,21 +39,24 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
       builder: (context, snapshot) {
         final svg = snapshot.data;
         if (svg != null) {
-          return Container(
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(vertical: widget.width * 0.008),
-            padding: EdgeInsets.all(widget.width * 0.012),
-            decoration: BoxDecoration(
-              color: const Color(0xFFFAFBFC),
-              borderRadius: BorderRadius.circular(widget.width * 0.008),
-              border: Border.all(color: const Color(0xFFE1E4E8)),
-            ),
-            child: SvgPicture.string(
-              svg,
-              fit: BoxFit.contain,
-              width: widget.width * 0.84,
-            ),
-          );
+          final safe = sanitizeMermaidSvg(svg);
+          if (safe != null) {
+            return Container(
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(vertical: widget.width * 0.008),
+              padding: EdgeInsets.all(widget.width * 0.012),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFAFBFC),
+                borderRadius: BorderRadius.circular(widget.width * 0.008),
+                border: Border.all(color: const Color(0xFFE1E4E8)),
+              ),
+              child: SvgPicture.string(
+                safe,
+                fit: BoxFit.contain,
+                width: widget.width * 0.84,
+              ),
+            );
+          }
         }
         if (snapshot.connectionState != ConnectionState.done) {
           return Padding(

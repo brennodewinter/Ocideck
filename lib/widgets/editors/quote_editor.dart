@@ -10,6 +10,7 @@ class QuoteEditor extends ConsumerStatefulWidget {
   final ValueChanged<Slide> onUpdate;
   final List<String> searchPaths;
   final String? captionBasePath;
+  final bool nestedInScrollView;
 
   const QuoteEditor({
     super.key,
@@ -17,6 +18,7 @@ class QuoteEditor extends ConsumerStatefulWidget {
     required this.onUpdate,
     this.searchPaths = const [],
     this.captionBasePath,
+    this.nestedInScrollView = false,
   });
 
   @override
@@ -44,7 +46,9 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor> {
 
   Future<void> _pasteBgImage() async {
     final imgService = ref.read(imageServiceProvider);
-    final path = await imgService.pasteImage();
+    final path = await imgService.pasteImage(
+      projectPath: widget.captionBasePath,
+    );
     if (path != null) {
       widget.onUpdate(widget.slide.copyWith(imagePath: path, imageCaption: ''));
     }
@@ -52,7 +56,9 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor> {
 
   Future<void> _pickBgImage() async {
     final imgService = ref.read(imageServiceProvider);
-    final path = await imgService.pickImage();
+    final path = await imgService.pickImage(
+      projectPath: widget.captionBasePath,
+    );
     if (path != null) {
       widget.onUpdate(widget.slide.copyWith(imagePath: path, imageCaption: ''));
     }
@@ -74,8 +80,8 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor> {
     final l10n = context.l10n;
     final imagePath = widget.slide.imagePath;
 
-    return ListView(
-      padding: const EdgeInsets.all(16),
+    return editorScrollList(
+      nestedInScrollView: widget.nestedInScrollView,
       children: [
         EditorField(
           label: 'Citaat',

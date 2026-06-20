@@ -246,8 +246,7 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
                   value: widget.caseSensitive,
                   visualDensity: VisualDensity.compact,
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  onChanged: (v) =>
-                      widget.onCaseSensitiveChanged(v ?? false),
+                  onChanged: (v) => widget.onCaseSensitiveChanged(v ?? false),
                 ),
                 Text(
                   l10n.d('Hoofdlettergevoelig'),

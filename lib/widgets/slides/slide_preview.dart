@@ -19,6 +19,7 @@ import '../../models/slide.dart';
 import '../../theme/app_theme.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../utils/log.dart';
+import '../../utils/project_path.dart';
 import 'inline_markdown.dart';
 
 // Slide preview widgets, split into part files by slide type for
@@ -425,16 +426,6 @@ class SlidePreviewWidget extends StatelessWidget {
 
 String? _resolvePath(String path, String? projectPath) =>
     resolveSlideAssetPath(path, projectPath);
-
-/// Resolves an image/media path the way the slide renderer does, so callers
-/// (e.g. the presenter, to precache) can point at the exact file that will be
-/// displayed. Returns null for an empty path.
-String? resolveSlideAssetPath(String path, String? projectPath) {
-  if (path.isEmpty) return null;
-  if (path.startsWith('/') || path.contains(':\\')) return path;
-  if (projectPath != null) return '$projectPath/$path';
-  return path;
-}
 
 /// Footer onderaan een slide: vrije tekst (links) + paginanummers (rechts),
 /// op basis van het stijlprofiel. Verborgen op titel-/sectieslides (daar is

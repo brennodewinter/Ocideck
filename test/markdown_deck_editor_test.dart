@@ -56,9 +56,9 @@ void main() {
     final container = ProviderScope.containerOf(
       tester.element(find.byType(MarkdownDeckEditor)),
     );
-    container.read(editorProvider.notifier).requestMarkdownFind(
-          showReplace: false,
-        );
+    container
+        .read(editorProvider.notifier)
+        .requestMarkdownFind(showReplace: false);
     await tester.pumpAndSettle();
 
     await tester.enterText(find.byType(TextField).first, 'alpha');
@@ -70,18 +70,15 @@ void main() {
   testWidgets('replace all updates live markdown text', (tester) async {
     String? applied;
     await tester.pumpWidget(
-      _host(
-        content: 'foo bar foo',
-        onApply: (md) => applied = md,
-      ),
+      _host(content: 'foo bar foo', onApply: (md) => applied = md),
     );
 
     final container = ProviderScope.containerOf(
       tester.element(find.byType(MarkdownDeckEditor)),
     );
-    container.read(editorProvider.notifier).requestMarkdownFind(
-          showReplace: true,
-        );
+    container
+        .read(editorProvider.notifier)
+        .requestMarkdownFind(showReplace: true);
     await tester.pumpAndSettle();
 
     final fields = find.byType(TextField);

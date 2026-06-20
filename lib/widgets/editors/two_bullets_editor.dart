@@ -10,11 +10,13 @@ typedef _Mutate = void Function(VoidCallback fn);
 class TwoBulletsEditor extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
+  final bool nestedInScrollView;
 
   const TwoBulletsEditor({
     super.key,
     required this.slide,
     required this.onUpdate,
+    this.nestedInScrollView = false,
   });
 
   @override
@@ -71,8 +73,8 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(16),
+    return editorScrollList(
+      nestedInScrollView: widget.nestedInScrollView,
       children: [
         EditorField(label: 'Titel', controller: _title, hint: 'Slide titel'),
         const SizedBox(height: 16),

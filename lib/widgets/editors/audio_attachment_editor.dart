@@ -8,16 +8,18 @@ class AudioAttachmentEditor extends StatelessWidget {
   final Slide slide;
   final ImageService imageService;
   final ValueChanged<Slide> onUpdate;
+  final String? projectPath;
 
   const AudioAttachmentEditor({
     super.key,
     required this.slide,
     required this.imageService,
     required this.onUpdate,
+    this.projectPath,
   });
 
   Future<void> _pickAudio() async {
-    final path = await imageService.pickAudio();
+    final path = await imageService.pickAudio(projectPath: projectPath);
     if (path != null) onUpdate(slide.copyWith(audioPath: path));
   }
 

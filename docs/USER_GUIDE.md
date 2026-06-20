@@ -190,6 +190,17 @@ puts the tool away. Drawings are a
 separate layer (never written into the Marp Markdown), mirror live to the beamer,
 and are saved in a `<name>.ink.json` sidecar so they persist with the deck.
 
+### User notes (recipient / course)
+
+Separate from **speaker notes** (the amber field in the editor and the presenter
+sidebar). User notes are for the person following the presentation — for example
+during a course. They are stored in a `<name>.user-notes.json` sidecar, never
+written into the Marp Markdown, and hidden by default while presenting. Press
+`Ctrl/Cmd + N` in the presenter to open a local **My notes** panel on the laptop
+only (never mirrored to the beamer). `Esc` closes the panel before other layers.
+In the visual editor, expand **User notes** below speaker notes to author them
+per slide.
+
 ## Exporting
 
 Export to:

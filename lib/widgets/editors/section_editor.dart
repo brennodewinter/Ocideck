@@ -5,8 +5,14 @@ import '_editor_field.dart';
 class SectionEditor extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
+  final bool nestedInScrollView;
 
-  const SectionEditor({super.key, required this.slide, required this.onUpdate});
+  const SectionEditor({
+    super.key,
+    required this.slide,
+    required this.onUpdate,
+    this.nestedInScrollView = false,
+  });
 
   @override
   State<SectionEditor> createState() => _SectionEditorState();
@@ -41,6 +47,7 @@ class _SectionEditorState extends State<SectionEditor> {
   @override
   Widget build(BuildContext context) {
     return EditorFieldList(
+      nestedInScrollView: widget.nestedInScrollView,
       children: [
         EditorField(
           label: 'Tussentitel (H1)',

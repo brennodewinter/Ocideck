@@ -8,6 +8,11 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **User notes (recipient / course)** — personal notes per slide, fully separate
+  from speaker notes (`Slide.notes`). Stored in a `<name>.user-notes.json`
+  sidecar (fingerprint-anchored like annotations). Hidden by default while
+  presenting; `Ctrl/Cmd + N` toggles a local **My notes** panel on the presenter
+  window only. Visual editor: collapsible **User notes** block below speaker notes.
 - **Find & replace in Markdown mode** — an in-editor find bar searches the live
   markdown buffer (`Ctrl/Cmd+F`; replace row via `Ctrl/Cmd+H`), with next/previous
   navigation, match counter, case sensitivity, and replace current / replace all.

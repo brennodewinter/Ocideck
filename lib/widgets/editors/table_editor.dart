@@ -10,8 +10,14 @@ import '_editor_field.dart';
 class TableEditor extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
+  final bool nestedInScrollView;
 
-  const TableEditor({super.key, required this.slide, required this.onUpdate});
+  const TableEditor({
+    super.key,
+    required this.slide,
+    required this.onUpdate,
+    this.nestedInScrollView = false,
+  });
 
   @override
   State<TableEditor> createState() => _TableEditorState();
@@ -187,8 +193,8 @@ class _TableEditorState extends State<TableEditor> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return ListView(
-      padding: const EdgeInsets.all(16),
+    return editorScrollList(
+      nestedInScrollView: widget.nestedInScrollView,
       children: [
         EditorField(label: 'Titel', controller: _title, hint: 'Slide titel'),
         const SizedBox(height: 16),

@@ -73,6 +73,29 @@ void main() {
     },
   );
 
+  test('export then import round-trips user notes sidecar', () async {
+    final slide = Slide.create(SlideType.bullets).copyWith(title: 'Een');
+    final deck = Deck(
+      title: 'Mijn Deck',
+      slides: [slide],
+      userNotes: {slide.id: 'Cursusnotitie'},
+    );
+
+    final zipPath = p.join(tmp.path, 'notes.ocideck');
+    await file.exportPackage(deck, zipPath);
+
+    final out = Directory(p.join(tmp.path, 'out_notes'))..createSync();
+    final mdPath = await file.importPackageBytes(
+      File(zipPath).readAsBytesSync(),
+      out.path,
+    );
+    expect(mdPath, isNotNull);
+
+    final imported = await file.openDeck(mdPath!);
+    expect(imported, isNotNull);
+    expect(imported!.userNotes.values, contains('Cursusnotitie'));
+  });
+
   test(
     'importing the same package twice does not overwrite the first',
     () async {

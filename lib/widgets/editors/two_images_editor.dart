@@ -9,6 +9,7 @@ class TwoImagesEditor extends ConsumerStatefulWidget {
   final ValueChanged<Slide> onUpdate;
   final List<String> searchPaths;
   final String? captionBasePath;
+  final bool nestedInScrollView;
 
   const TwoImagesEditor({
     super.key,
@@ -16,6 +17,7 @@ class TwoImagesEditor extends ConsumerStatefulWidget {
     required this.onUpdate,
     this.searchPaths = const [],
     this.captionBasePath,
+    this.nestedInScrollView = false,
   });
 
   @override
@@ -44,7 +46,9 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
 
   Future<void> _pasteImage(bool isSecond) async {
     final imgService = ref.read(imageServiceProvider);
-    final path = await imgService.pasteImage();
+    final path = await imgService.pasteImage(
+      projectPath: widget.captionBasePath,
+    );
     if (path != null) {
       widget.onUpdate(
         isSecond
@@ -56,7 +60,9 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
 
   Future<void> _pickImage(bool isSecond) async {
     final imgService = ref.read(imageServiceProvider);
-    final path = await imgService.pickImage();
+    final path = await imgService.pickImage(
+      projectPath: widget.captionBasePath,
+    );
     if (path != null) {
       widget.onUpdate(
         isSecond
@@ -76,8 +82,8 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(16),
+    return editorScrollList(
+      nestedInScrollView: widget.nestedInScrollView,
       children: [
         EditorField(
           label: 'Ondertitel (optioneel)',

@@ -121,6 +121,11 @@ class Deck {
   /// sidecar zodat het deck pure, uitwisselbare Marp blijft.
   final Map<String, List<InkStroke>> annotations;
 
+  /// Gebruikersnotities per slide (ontvanger/cursist), gekeyd op [Slide.id].
+  /// Gescheiden van [Slide.notes] (sprekersnotities); bewust géén onderdeel
+  /// van de Marp-markdown — opgeslagen in een aparte sidecar.
+  final Map<String, String> userNotes;
+
   const Deck({
     required this.title,
     this.theme = 'ocideck',
@@ -136,6 +141,7 @@ class Deck {
     this.keywords = '',
     this.tlp = TlpLevel.none,
     this.annotations = const {},
+    this.userNotes = const {},
   });
 
   Deck copyWith({
@@ -154,6 +160,7 @@ class Deck {
     String? keywords,
     TlpLevel? tlp,
     Map<String, List<InkStroke>>? annotations,
+    Map<String, String>? userNotes,
   }) {
     return Deck(
       title: title ?? this.title,
@@ -170,6 +177,7 @@ class Deck {
       keywords: keywords ?? this.keywords,
       tlp: tlp ?? this.tlp,
       annotations: annotations ?? this.annotations,
+      userNotes: userNotes ?? this.userNotes,
     );
   }
 }

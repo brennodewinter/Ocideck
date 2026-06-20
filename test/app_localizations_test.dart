@@ -41,8 +41,10 @@ void main() {
     const unchangedInEnglish = {
       'Accent / bullets',
       'Bullet',
+      'Code',
       'Coverflow',
       'Label',
+      'Link',
       'Logo',
       'Logo px',
       'PREVIEW',
@@ -82,8 +84,10 @@ void main() {
     const unchangedInAllLanguages = {
       'Accent / bullets',
       'Bullet',
+      'Code',
       'Coverflow',
       'Label',
+      'Link',
       'Logo',
       'Logo px',
       'PREVIEW',

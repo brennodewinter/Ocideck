@@ -84,7 +84,9 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       _matches = matches;
       if (matches.isEmpty) {
         _matchIndex = -1;
-      } else if (selectFirst || _matchIndex < 0 || _matchIndex >= matches.length) {
+      } else if (selectFirst ||
+          _matchIndex < 0 ||
+          _matchIndex >= matches.length) {
         _matchIndex = 0;
         _jumpToRange(matches[0]);
       } else {
@@ -342,7 +344,10 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
             if (widget.parseError)
               Container(
                 color: const Color(0xFFFEE2E2),
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 child: Row(
                   children: [
                     const Icon(
@@ -375,7 +380,8 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                   _findQuery = value;
                   _recountMatches(selectFirst: true);
                 },
-                onReplaceChanged: (value) => setState(() => _replaceText = value),
+                onReplaceChanged: (value) =>
+                    setState(() => _replaceText = value),
                 onCaseSensitiveChanged: (value) {
                   _caseSensitive = value;
                   _recountMatches(selectFirst: false);
@@ -600,16 +606,23 @@ class _LineNumberGutter extends StatelessWidget {
                 child: child,
               );
             },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                for (var index = 0; index < lineCount; index++)
-                  _LineNumberCell(
-                    line: index + 1,
-                    severity: issueLines[index + 1],
-                    onTap: onLineTap,
-                  ),
-              ],
+            child: OverflowBox(
+              alignment: Alignment.topCenter,
+              maxWidth: 44,
+              minWidth: 44,
+              maxHeight: double.infinity,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  for (var index = 0; index < lineCount; index++)
+                    _LineNumberCell(
+                      line: index + 1,
+                      severity: issueLines[index + 1],
+                      onTap: onLineTap,
+                    ),
+                ],
+              ),
             ),
           ),
         ),

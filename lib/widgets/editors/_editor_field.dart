@@ -10,6 +10,7 @@ import '../../models/markdown_validation.dart';
 import '../../state/deck_quality_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../l10n/app_localizations.dart';
+import '../../utils/project_path.dart';
 import '../dialogs/image_carousel_picker.dart';
 
 /// Shared layout helpers for slide editors.
@@ -103,17 +104,44 @@ class _EditorFieldState extends ConsumerState<EditorField> {
 
 class EditorFieldList extends StatelessWidget {
   final List<Widget> children;
-  const EditorFieldList({super.key, required this.children});
+  final bool nestedInScrollView;
+
+  const EditorFieldList({
+    super.key,
+    required this.children,
+    this.nestedInScrollView = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      shrinkWrap: nestedInScrollView,
+      physics: nestedInScrollView
+          ? const NeverScrollableScrollPhysics()
+          : const AlwaysScrollableScrollPhysics(),
       padding: const EdgeInsets.all(16),
       itemCount: children.length,
       separatorBuilder: (context, index) => const SizedBox(height: 16),
       itemBuilder: (_, i) => children[i],
     );
   }
+}
+
+/// Root [ListView] for slide editors. When [nestedInScrollView] is true the
+/// list sizes to its children so the editor panel can scroll as one page.
+ListView editorScrollList({
+  required bool nestedInScrollView,
+  required List<Widget> children,
+  EdgeInsetsGeometry padding = const EdgeInsets.all(16),
+}) {
+  return ListView(
+    shrinkWrap: nestedInScrollView,
+    physics: nestedInScrollView
+        ? const NeverScrollableScrollPhysics()
+        : const AlwaysScrollableScrollPhysics(),
+    padding: padding,
+    children: children,
+  );
 }
 
 /// Zoom-bediening voor afbeeldingen in slides.
@@ -356,8 +384,7 @@ class ImagePickerBar extends ConsumerWidget {
   }
 
   String _resolveImagePath(String path) {
-    if (p.isAbsolute(path) || captionBasePath == null) return path;
-    return p.join(captionBasePath!, path);
+    return resolveEditorAssetPath(path, captionBasePath) ?? path;
   }
 
   @override

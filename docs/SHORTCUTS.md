@@ -52,6 +52,7 @@ View & timing:
 | Shortcut | Action |
 | --- | --- |
 | `P` | Toggle presenter view (notes, clock, countdown, per-slide timer, next slide) |
+| `Ctrl/Cmd + N` | Toggle **my notes** panel (recipient/course notes; local only, never on beamer) |
 | `S` | Move the presentation to another screen |
 | `B` · `W` | Black · white screen |
 | `K` | Set the target time / countdown (type `MMSS`, `Enter` to confirm, `0` = off) |
@@ -72,9 +73,9 @@ Annotation tools:
 | `X` | Laser pointer |
 | `C` | Clear the current slide's annotations |
 
-`Esc` is layered: it first puts away the active annotation tool, then clears a
-typed slide number, then removes a black/white screen, and finally exits the
-presentation.
+`Esc` is layered: it first closes the **my notes** panel (`Ctrl/Cmd + N`), then puts
+away the active annotation tool, then clears a typed slide number, then removes a
+black/white screen, and finally exits the presentation.
 
 > In **dual-screen** mode (macOS, Windows, Linux) the keyboard stays with the
 > laptop (presenter) window; clicks on the beamer also advance the slide.

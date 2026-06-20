@@ -482,14 +482,8 @@ Widget _resolvedImage(
 }) {
   if (imagePath.isEmpty) return _imagePlaceholder(context);
 
-  final String resolved;
-  if (imagePath.startsWith('/') || imagePath.contains(':\\')) {
-    resolved = imagePath;
-  } else if (projectPath != null) {
-    resolved = '$projectPath/$imagePath';
-  } else {
-    resolved = imagePath;
-  }
+  final resolved = resolveSlideAssetPath(imagePath, projectPath);
+  if (resolved == null) return _imagePlaceholder(context);
 
   return Image.file(
     File(resolved),

@@ -771,7 +771,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                         onPressed: () async {
                           final path = await ref
                               .read(imageServiceProvider)
-                              .pasteImage();
+                              .pasteImage(projectPath: deck.projectPath);
                           if (path == null) {
                             if (!context.mounted) return;
                             ScaffoldMessenger.of(context).showSnackBar(
