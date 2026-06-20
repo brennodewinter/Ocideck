@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/markdown_validation.dart';
 import '../../services/markdown_validator.dart';
+import '../../state/editor_provider.dart';
+import '../../utils/text_search.dart';
+import 'markdown_find_bar.dart';
 
-class MarkdownDeckEditor extends StatefulWidget {
+class MarkdownDeckEditor extends ConsumerStatefulWidget {
   final String initialContent;
   final bool Function(String) onApply;
   final bool parseError;
@@ -19,10 +24,10 @@ class MarkdownDeckEditor extends StatefulWidget {
   });
 
   @override
-  State<MarkdownDeckEditor> createState() => _MarkdownDeckEditorState();
+  ConsumerState<MarkdownDeckEditor> createState() => _MarkdownDeckEditorState();
 }
 
-class _MarkdownDeckEditorState extends State<MarkdownDeckEditor> {
+class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   static const _lineHeight = 19.5;
 
   late final TextEditingController _ctrl;
@@ -30,6 +35,14 @@ class _MarkdownDeckEditorState extends State<MarkdownDeckEditor> {
   final _validator = MarkdownValidator();
   MarkdownValidationResult? _validation;
   bool _showIssues = false;
+
+  bool _findVisible = false;
+  bool _showReplace = false;
+  String _findQuery = '';
+  String _replaceText = '';
+  bool _caseSensitive = false;
+  int _matchIndex = -1;
+  List<TextMatchRange> _matches = const [];
 
   @override
   void initState() {
@@ -43,6 +56,83 @@ class _MarkdownDeckEditorState extends State<MarkdownDeckEditor> {
     _ctrl.dispose();
     _scrollController.dispose();
     super.dispose();
+  }
+
+  void _openFind({required bool showReplace}) {
+    setState(() {
+      _findVisible = true;
+      _showReplace = showReplace;
+    });
+    _recountMatches(selectFirst: true);
+  }
+
+  void _closeFind() {
+    setState(() {
+      _findVisible = false;
+      _matchIndex = -1;
+      _matches = const [];
+    });
+  }
+
+  void _recountMatches({bool selectFirst = false}) {
+    final matches = findAllMatches(
+      _ctrl.text,
+      _findQuery,
+      caseSensitive: _caseSensitive,
+    );
+    setState(() {
+      _matches = matches;
+      if (matches.isEmpty) {
+        _matchIndex = -1;
+      } else if (selectFirst || _matchIndex < 0 || _matchIndex >= matches.length) {
+        _matchIndex = 0;
+        _jumpToRange(matches[0]);
+      } else {
+        _jumpToRange(matches[_matchIndex]);
+      }
+    });
+  }
+
+  void _goToNextMatch() {
+    if (_matches.isEmpty) return;
+    final next = nextMatchIndex(_matchIndex, _matches.length);
+    setState(() => _matchIndex = next);
+    _jumpToRange(_matches[next]);
+  }
+
+  void _goToPreviousMatch() {
+    if (_matches.isEmpty) return;
+    final prev = previousMatchIndex(_matchIndex, _matches.length);
+    setState(() => _matchIndex = prev);
+    _jumpToRange(_matches[prev]);
+  }
+
+  void _replaceCurrentMatch() {
+    if (_matchIndex < 0 || _matchIndex >= _matches.length) return;
+    final match = _matches[_matchIndex];
+    final updated = replaceRange(_ctrl.text, match, _replaceText);
+    _ctrl.text = updated;
+    _recountMatches(selectFirst: false);
+    if (_matches.isNotEmpty) {
+      final idx = _matchIndex.clamp(0, _matches.length - 1);
+      setState(() => _matchIndex = idx);
+      _jumpToRange(_matches[idx]);
+    }
+  }
+
+  void _replaceAllMatches() {
+    if (_findQuery.isEmpty) return;
+    final result = replaceAllInText(
+      _ctrl.text,
+      _findQuery,
+      _replaceText,
+      caseSensitive: _caseSensitive,
+    );
+    _ctrl.text = result.text;
+    setState(() {
+      _matches = const [];
+      _matchIndex = -1;
+    });
   }
 
   MarkdownValidationResult _runValidation() {
@@ -61,11 +151,17 @@ class _MarkdownDeckEditorState extends State<MarkdownDeckEditor> {
     for (var i = 0; i < index; i++) {
       offset += lines[i].length + 1;
     }
+    _jumpToRange(TextMatchRange(offset, offset + lines[index].length));
+  }
+
+  void _jumpToRange(TextMatchRange range) {
     _ctrl.selection = TextSelection(
-      baseOffset: offset,
-      extentOffset: offset + lines[index].length,
+      baseOffset: range.start,
+      extentOffset: range.end,
     );
-    final target = (line - 1) * _lineHeight;
+    final textBefore = _ctrl.text.substring(0, range.start);
+    final line = '\n'.allMatches(textBefore).length;
+    final target = line * _lineHeight;
     if (_scrollController.hasClients) {
       _scrollController.animateTo(
         target.clamp(0.0, _scrollController.position.maxScrollExtent),
@@ -160,8 +256,25 @@ class _MarkdownDeckEditorState extends State<MarkdownDeckEditor> {
     if (ok) widget.onExitMarkdown();
   }
 
+  KeyEventResult _handleEscape(FocusNode node, KeyEvent event) {
+    if (!_findVisible) return KeyEventResult.ignored;
+    if (event is! KeyDownEvent) return KeyEventResult.ignored;
+    if (event.logicalKey == LogicalKeyboardKey.escape) {
+      _closeFind();
+      return KeyEventResult.handled;
+    }
+    return KeyEventResult.ignored;
+  }
+
   @override
   Widget build(BuildContext context) {
+    ref.listen<EditorState>(editorProvider, (previous, next) {
+      if (previous?.markdownFindRequestId != next.markdownFindRequestId &&
+          next.markdownFindRequestId > 0) {
+        _openFind(showReplace: next.markdownFindShowReplace);
+      }
+    });
+
     final l10n = context.l10n;
     final lineCount = '\n'.allMatches(_ctrl.text).length + 1;
     final issueLines = <int, MarkdownValidationSeverity>{
@@ -169,113 +282,155 @@ class _MarkdownDeckEditorState extends State<MarkdownDeckEditor> {
         issue.line: issue.severity,
     };
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Container(
-          color: const Color(0xFFFFF9E6),
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          child: Row(
-            children: [
-              const Icon(Icons.code, size: 14, color: Color(0xFF92400E)),
-              const SizedBox(width: 6),
-              Expanded(
-                child: Text(
-                  l10n.d(
-                    'Markdown modus — bewerk de volledige presentatie als Marp Markdown',
-                  ),
-                  style: const TextStyle(
-                    fontSize: 11,
-                    color: Color(0xFF92400E),
-                  ),
-                ),
-              ),
-              TextButton.icon(
-                onPressed: _runValidation,
-                icon: const Icon(Icons.rule, size: 16),
-                label: Text(l10n.d('Controleren')),
-              ),
-              TextButton(
-                onPressed: _applyMarkdown,
-                child: Text(l10n.d('Toepassen')),
-              ),
-              TextButton(
-                onPressed: widget.onExitMarkdown,
-                child: Text(l10n.t('cancel')),
-              ),
-            ],
-          ),
-        ),
-        if (_validation != null)
-          _ValidationSummaryBar(
-            result: _validation!,
-            expanded: _showIssues,
-            onToggle: () => setState(() => _showIssues = !_showIssues),
-            onJumpToLine: _jumpToLine,
-          ),
-        if (widget.parseError)
-          Container(
-            color: const Color(0xFFFEE2E2),
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.warning_amber_outlined,
-                  size: 14,
-                  color: Colors.red,
-                ),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: Text(
-                    l10n.d(
-                      'Markdown kon niet worden verwerkt. Controleer de syntax.',
+    return CallbackShortcuts(
+      bindings: {
+        const SingleActivator(LogicalKeyboardKey.keyF, control: true): () =>
+            _openFind(showReplace: false),
+        const SingleActivator(LogicalKeyboardKey.keyF, meta: true): () =>
+            _openFind(showReplace: false),
+        const SingleActivator(LogicalKeyboardKey.keyH, control: true): () =>
+            _openFind(showReplace: true),
+        const SingleActivator(LogicalKeyboardKey.keyH, meta: true): () =>
+            _openFind(showReplace: true),
+      },
+      child: Focus(
+        onKeyEvent: _handleEscape,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              color: const Color(0xFFFFF9E6),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              child: Row(
+                children: [
+                  const Icon(Icons.code, size: 14, color: Color(0xFF92400E)),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text(
+                      l10n.d(
+                        'Markdown modus — bewerk de volledige presentatie als Marp Markdown',
+                      ),
+                      style: const TextStyle(
+                        fontSize: 11,
+                        color: Color(0xFF92400E),
+                      ),
                     ),
-                    style: const TextStyle(fontSize: 11, color: Colors.red),
                   ),
-                ),
-              ],
+                  TextButton.icon(
+                    onPressed: _runValidation,
+                    icon: const Icon(Icons.rule, size: 16),
+                    label: Text(l10n.d('Controleren')),
+                  ),
+                  TextButton(
+                    onPressed: _applyMarkdown,
+                    child: Text(l10n.d('Toepassen')),
+                  ),
+                  TextButton(
+                    onPressed: widget.onExitMarkdown,
+                    child: Text(l10n.t('cancel')),
+                  ),
+                ],
+              ),
             ),
-          ),
-        const Divider(height: 1),
-        Expanded(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _LineNumberGutter(
-                scrollController: _scrollController,
-                lineCount: lineCount,
-                issueLines: issueLines,
-                onLineTap: _jumpToLine,
+            if (_validation != null)
+              _ValidationSummaryBar(
+                result: _validation!,
+                expanded: _showIssues,
+                onToggle: () => setState(() => _showIssues = !_showIssues),
+                onJumpToLine: _jumpToLine,
               ),
-              Expanded(
-                child: TextField(
-                  controller: _ctrl,
-                  scrollController: _scrollController,
-                  maxLines: null,
-                  expands: true,
-                  textAlignVertical: TextAlignVertical.top,
-                  style: const TextStyle(
-                    fontFamily: 'monospace',
-                    fontSize: 13,
-                    height: 1.5,
-                  ),
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(8, 16, 16, 16),
-                    border: InputBorder.none,
-                    filled: true,
-                    fillColor: Color(0xFFF8FAFC),
-                  ),
-                  onChanged: (_) {
-                    setState(() {
-                      _validation = null;
-                    });
-                  },
+            if (widget.parseError)
+              Container(
+                color: const Color(0xFFFEE2E2),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.warning_amber_outlined,
+                      size: 14,
+                      color: Colors.red,
+                    ),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        l10n.d(
+                          'Markdown kon niet worden verwerkt. Controleer de syntax.',
+                        ),
+                        style: const TextStyle(fontSize: 11, color: Colors.red),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            if (_findVisible)
+              MarkdownFindBar(
+                key: ValueKey('find-$_showReplace'),
+                query: _findQuery,
+                replace: _replaceText,
+                caseSensitive: _caseSensitive,
+                showReplace: _showReplace,
+                matchCount: _matches.length,
+                matchIndex: _matchIndex,
+                onQueryChanged: (value) {
+                  _findQuery = value;
+                  _recountMatches(selectFirst: true);
+                },
+                onReplaceChanged: (value) => setState(() => _replaceText = value),
+                onCaseSensitiveChanged: (value) {
+                  _caseSensitive = value;
+                  _recountMatches(selectFirst: false);
+                },
+                onNext: _goToNextMatch,
+                onPrevious: _goToPreviousMatch,
+                onReplaceCurrent: _replaceCurrentMatch,
+                onReplaceAll: _replaceAllMatches,
+                onClose: _closeFind,
+              ),
+            const Divider(height: 1),
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _LineNumberGutter(
+                    scrollController: _scrollController,
+                    lineCount: lineCount,
+                    issueLines: issueLines,
+                    onLineTap: _jumpToLine,
+                  ),
+                  Expanded(
+                    child: TextField(
+                      controller: _ctrl,
+                      scrollController: _scrollController,
+                      maxLines: null,
+                      expands: true,
+                      textAlignVertical: TextAlignVertical.top,
+                      style: const TextStyle(
+                        fontFamily: 'monospace',
+                        fontSize: 13,
+                        height: 1.5,
+                      ),
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(8, 16, 16, 16),
+                        border: InputBorder.none,
+                        filled: true,
+                        fillColor: Color(0xFFF8FAFC),
+                      ),
+                      onChanged: (_) {
+                        setState(() {
+                          _validation = null;
+                        });
+                        if (_findVisible && _findQuery.isNotEmpty) {
+                          _recountMatches(selectFirst: false);
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

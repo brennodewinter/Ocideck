@@ -519,6 +519,25 @@ hele presentatie wordt als één Marp-markdownbestand getoond (dezelfde structuu
 als op schijf). **Toepassen** parsed de tekst terug naar de getype slides;
 **Annuleren** keert terug zonder wijzigingen door te voeren.
 
+### Zoeken en vervangen
+
+In markdown-modus doorzoekt een **in-editor zoekbalk** de live markdown-tekst
+(inclusief front matter, scheidingstekens `---`, HTML-commentaar en nog niet
+toegepaste wijzigingen). Dit verschilt van het **Zoeken en vervangen**-dialoog
+in visuele modus (`Ctrl/Cmd + H`), dat alleen door slide-velden zoekt.
+
+| Sneltoets | Actie |
+| --- | --- |
+| `Ctrl/Cmd + F` | Zoekbalk openen |
+| `Ctrl/Cmd + H` | Zoekbalk met vervang-veld |
+| `Enter` / `Shift + Enter` (in zoekveld) | Volgende / vorige match |
+| `Esc` | Zoekbalk sluiten |
+
+De balk toont een match-teller (`1 / 3`), vorige/volgende-knoppen, een
+hoofdlettergevoelig-toggle, **Vervang** (huidige match) en **Vervang alles**.
+Elke match wordt geselecteerd in de editor zodat je snel naar een titel,
+slide-scheiding of ander onderdeel kunt springen.
+
 ### Wanneer controleren?
 
 - **Controleren** — op elk moment tijdens het bewerken; resultaten in een

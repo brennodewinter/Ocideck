@@ -406,7 +406,17 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       await deckNotifier.save(initialDirectory: settings.homeDirectory);
     }
 
+    void openFind() {
+      if (isMarkdownMode) {
+        editorNotifier.requestMarkdownFind(showReplace: false);
+      }
+    }
+
     void openFindReplace() {
+      if (isMarkdownMode) {
+        editorNotifier.requestMarkdownFind(showReplace: true);
+        return;
+      }
       FindReplaceDialog.show(
         context,
         countMatches: (q, cs) =>
@@ -782,6 +792,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           ): deckNotifier.redo,
           const SingleActivator(LogicalKeyboardKey.keyY, control: true):
               deckNotifier.redo,
+          const SingleActivator(LogicalKeyboardKey.keyF, control: true): openFind,
+          const SingleActivator(LogicalKeyboardKey.keyF, meta: true): openFind,
           const SingleActivator(LogicalKeyboardKey.keyH, control: true):
               openFindReplace,
           const SingleActivator(LogicalKeyboardKey.keyH, meta: true):

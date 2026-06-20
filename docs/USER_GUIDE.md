@@ -321,6 +321,26 @@ Use this for bulk edits, copy-paste from another tool, or tweaks that are faster
 in raw text. Switch back with **Apply** (to parse the text back into typed slides)
 or **Cancel** (discard your edits and return to the visual editor).
 
+### Find & replace
+
+Markdown mode has an **in-editor find bar** (IDE-style) that searches the live
+markdown buffer — including front matter, `\n---\n` separators, HTML comments, and
+any text you have not yet applied back to the deck. This is separate from the
+**Find & replace** dialog in visual mode (`Ctrl/Cmd + H`), which searches
+individual slide fields.
+
+- **`Ctrl/Cmd + F`** — open the find bar and focus the search field.
+- **`Ctrl/Cmd + H`** — open the find bar with the replace row visible.
+- **Enter** / **Shift + Enter** (in the find field) — jump to the next or
+  previous match (wraps around).
+- **Esc** — close the find bar.
+
+The bar shows a match counter (`1 / 3`), previous/next buttons, a case-sensitivity
+toggle, **Replace** (current match only), and **Replace all**. Each match is
+selected in the editor so you can jump quickly to a slide title, separator, or
+other section. You can also open find from the **More** menu (⋯) while in
+markdown mode.
+
 ### Syntax check
 
 Markdown mode includes a **syntax check** that validates your text against what

@@ -11,12 +11,28 @@
 | `Ctrl/Cmd + Z` | Undo |
 | `Ctrl/Cmd + Shift + Z` | Redo |
 | `Ctrl + Y` | Redo (alternative) |
-| `Ctrl/Cmd + H` | Find & replace |
+| `Ctrl/Cmd + H` | Find & replace (visual mode: dialog; markdown mode: in-editor bar — see below) |
 | `Ctrl/Cmd + V` (in a table cell) | Paste a spreadsheet/CSV/markdown selection as a table (also `Shift + Insert`) |
 | `Tab` to the panel divider, then `←` / `→` | Resize the slide panel |
 
 In the **add-slide dialog**, `Tab` moves between the type cards, `Enter` picks
 the focused one, and `Esc` cancels.
+
+## Markdown mode
+
+When the editor is in **Markdown mode**, find & replace works on the live
+markdown text (including front matter, slide separators, and HTML comments), not
+on the last-applied slide fields.
+
+| Shortcut | Action |
+| --- | --- |
+| `Ctrl/Cmd + F` | Open the find bar |
+| `Ctrl/Cmd + H` | Open the find bar with replace |
+| `Enter` / `Shift + Enter` (in find field) | Next / previous match |
+| `Esc` | Close find bar |
+
+The find bar also offers previous/next buttons, a match counter (`1 / 3`), a
+case-sensitivity toggle, **Replace** (current match), and **Replace all**.
 
 ## Fullscreen presenter
 

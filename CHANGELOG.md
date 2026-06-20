@@ -8,6 +8,10 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Find & replace in Markdown mode** — an in-editor find bar searches the live
+  markdown buffer (`Ctrl/Cmd+F`; replace row via `Ctrl/Cmd+H`), with next/previous
+  navigation, match counter, case sensitivity, and replace current / replace all.
+  Visual mode keeps the existing find & replace dialog over slide fields.
 - **Presentation timer / rehearsal mode** — the presenter view now doubles as a
   rehearsal clock that measures without coaching. A **countdown** runs against a
   target time (default under *Settings → General → Presentation*, or set live with
