@@ -6,12 +6,14 @@ import 'markdown_editor_theme.dart';
 
 class MarkdownEditorToolbar extends StatelessWidget {
   final TextEditingController controller;
+  final FocusNode? focusNode;
   final MarkdownEditorTheme theme;
   final bool compact;
 
   const MarkdownEditorToolbar({
     super.key,
     required this.controller,
+    this.focusNode,
     required this.theme,
     this.compact = false,
   });
@@ -32,7 +34,15 @@ class MarkdownEditorToolbar extends StatelessWidget {
       return Tooltip(
         message: tooltip,
         child: InkWell(
-          onTap: onPressed,
+          onTap: () {
+            onPressed();
+            final target = focusNode;
+            if (target != null) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (target.canRequestFocus) target.requestFocus();
+              });
+            }
+          },
           borderRadius: BorderRadius.circular(4),
           child: Padding(
             padding: padding,

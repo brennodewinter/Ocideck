@@ -5,12 +5,14 @@ import 'markdown_editor_theme.dart';
 
 class WysiwygNotesToolbar extends StatelessWidget {
   final QuillController controller;
+  final FocusNode focusNode;
   final MarkdownEditorTheme theme;
   final bool compact;
 
   const WysiwygNotesToolbar({
     super.key,
     required this.controller,
+    required this.focusNode,
     required this.theme,
     this.compact = false,
   });
@@ -18,6 +20,12 @@ class WysiwygNotesToolbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final iconSize = compact ? 16.0 : 18.0;
+    void refocusEditor() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (focusNode.canRequestFocus) focusNode.requestFocus();
+      });
+    }
+
     return DecoratedBox(
       decoration: BoxDecoration(
         color: theme.surface,
@@ -31,6 +39,11 @@ class WysiwygNotesToolbar extends StatelessWidget {
           showDividers: false,
           toolbarSize: iconSize * 1.4,
           decoration: const BoxDecoration(),
+          buttonOptions: QuillSimpleToolbarButtonOptions(
+            base: QuillToolbarBaseButtonOptions(
+              afterButtonPressed: refocusEditor,
+            ),
+          ),
           iconTheme: QuillIconTheme(
             iconButtonUnselectedData: IconButtonData(
               iconSize: iconSize,

@@ -5,6 +5,7 @@ import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../utils/deck_markdown_dashes.dart';
 import '../utils/log.dart';
 
 const _uuid = Uuid();
@@ -231,12 +232,22 @@ class MarkdownService {
       case SlideType.bullets:
         if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
         if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
-        if (slide.listStyle != ListStyle.bullets) {
-          buf.writeln('<!-- ocideck_list_style: ${slide.listStyle.name} -->');
+        if (slide.listStyle == ListStyle.richText) {
+          buf.writeln('<!-- ocideck_list_style: richText -->');
+          buf.writeln();
+          final body = escapeDeckMarkdownDashLines(slide.customMarkdown);
+          buf.write(body);
+          if (body.isNotEmpty && !body.endsWith('\n')) {
+            buf.writeln();
+          }
+        } else {
+          if (slide.listStyle != ListStyle.bullets) {
+            buf.writeln('<!-- ocideck_list_style: ${slide.listStyle.name} -->');
+          }
+          _writeChecklistProgress(buf, slide);
+          buf.writeln();
+          _writeList(buf, slide.bullets, slide.listStyle);
         }
-        _writeChecklistProgress(buf, slide);
-        buf.writeln();
-        _writeList(buf, slide.bullets, slide.listStyle);
 
       case SlideType.twoBullets:
         if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
@@ -357,9 +368,9 @@ class MarkdownService {
         _writeTable(buf, slide.tableRows);
 
       case SlideType.freeMarkdown:
-        buf.write(slide.customMarkdown);
-        if (slide.customMarkdown.isNotEmpty &&
-            !slide.customMarkdown.endsWith('\n')) {
+        final body = escapeDeckMarkdownDashLines(slide.customMarkdown);
+        buf.write(body);
+        if (body.isNotEmpty && !body.endsWith('\n')) {
           buf.writeln();
         }
 
@@ -448,6 +459,7 @@ class MarkdownService {
       final marker = switch (style) {
         ListStyle.numbered => '${counters[level]}.',
         ListStyle.bullets || ListStyle.checklist => '-',
+        ListStyle.richText => '-',
       };
       final body = style == ListStyle.checklist
           ? '[${checklistItemChecked(item) ? 'x' : ' '}] '
@@ -868,8 +880,40 @@ class MarkdownService {
     String quote = '';
     String quoteAuthor = '';
     final tableLines = <String>[];
+    final richTextLines = <String>[];
+    var richTextHeaderPhase = listStyle == ListStyle.richText;
 
     for (final line in lines) {
+      if (listStyle == ListStyle.richText) {
+        final t = line.trim();
+        if (richTextHeaderPhase) {
+          if (t.isEmpty) continue;
+          if (t.startsWith('# ') && h1.isEmpty) {
+            h1 = t.substring(2);
+            continue;
+          }
+          if (t.startsWith('## ') && h2.isEmpty && h1.isNotEmpty) {
+            h2 = t.substring(3);
+            continue;
+          }
+          richTextHeaderPhase = false;
+        }
+        if (t.startsWith('|')) {
+          tableLines.add(t);
+        } else if (t.startsWith('<video')) {
+          final m = RegExp(r'src="([^"]+)"').firstMatch(t);
+          if (m != null) videoPath = m.group(1) ?? '';
+          videoAutoplay = t.contains('autoplay');
+        } else if (t.startsWith('<audio')) {
+          final m = RegExp(r'src="([^"]+)"').firstMatch(t);
+          if (m != null) audioPath = m.group(1) ?? '';
+          audioAutoplay = t.contains('autoplay');
+        } else {
+          richTextLines.add(line);
+        }
+        continue;
+      }
+
       final t = line.trim();
       if (t.startsWith('|')) {
         tableLines.add(t);
@@ -991,6 +1035,8 @@ class MarkdownService {
           type = SlideType.twoImages;
         } else if (bullets.isNotEmpty && imagePath.isNotEmpty) {
           type = SlideType.bulletsImage;
+        } else if (listStyle == ListStyle.richText) {
+          type = SlideType.bullets;
         } else if (bullets.isNotEmpty) {
           type = SlideType.bullets;
         } else if (videoPath.isNotEmpty) {
@@ -1046,7 +1092,11 @@ class MarkdownService {
       audioAutoplay: audioAutoplay,
       quote: quote,
       quoteAuthor: quoteAuthor,
-      customMarkdown: type == SlideType.freeMarkdown ? remaining : '',
+      customMarkdown: type == SlideType.freeMarkdown
+          ? unescapeDeckMarkdownDashLines(remaining)
+          : listStyle == ListStyle.richText
+          ? unescapeDeckMarkdownDashLines(richTextLines.join('\n').trim())
+          : '',
       cssClass: effectiveClass,
       notes: notes,
       advanceDuration: advanceDuration,

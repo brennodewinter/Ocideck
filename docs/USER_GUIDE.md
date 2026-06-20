@@ -105,7 +105,13 @@ Below each editor you can set:
 - **Auto-advance** after N seconds.
 - **TLP of this slide** — a Traffic Light Protocol level (see below).
 - Show/hide the **logo** and **footer** on this slide.
-- **Speaker notes**.
+- **Speaker notes** — collapsible amber block at the bottom of the editor (stored
+  in the Marp Markdown and included in PPTX export). Use the discard button in the
+  header to clear the field; undo restores cleared speaker notes.
+- **User notes** — collapsible blue block below speaker notes (stored in a
+  sidecar, not in the Markdown). Use the discard button in the header to remove
+  them for that slide. Slides with user notes show a blue badge on the thumbnail
+  in the slide list.
 - An optional **audio** attachment.
 
 ## Traffic Light Protocol (TLP)
@@ -192,14 +198,21 @@ and are saved in a `<name>.ink.json` sidecar so they persist with the deck.
 
 ### User notes (recipient / course)
 
-Separate from **speaker notes** (the amber field in the editor and the presenter
-sidebar). User notes are for the person following the presentation — for example
-during a course. They are stored in a `<name>.user-notes.json` sidecar, never
-written into the Marp Markdown, and hidden by default while presenting. Press
-`Ctrl/Cmd + N` in the presenter to open a local **My notes** panel on the laptop
-only (never mirrored to the beamer). `Esc` closes the panel before other layers.
-In the visual editor, expand **User notes** below speaker notes to author them
-per slide.
+Separate from **speaker notes** (the collapsible amber block above). User notes
+are for the person following the presentation — for example during a course. They
+are stored in a `<name>.user-notes.json` sidecar, never written into the Marp
+Markdown, and hidden by default while presenting. Press `Ctrl/Cmd + N` in the
+presenter to open a local **My notes** panel on the laptop only (never mirrored
+to the beamer). `Esc` closes the panel before other layers.
+
+In the visual editor, expand **User notes** below **Speaker notes** to author them
+per slide. Both blocks share the same layout: a collapsible header (icon, title,
+discard button) and the markdown editor underneath. The discard button is enabled
+only when the field has content. Clearing user notes is immediate and is not part
+of undo/redo; clearing speaker notes can be undone.
+
+Slides that carry user notes show a **blue badge** on their thumbnail in the slide
+list so you can spot them without opening each slide.
 
 ## Exporting
 
@@ -269,8 +282,9 @@ OciDeck aims for WCAG 2.1 in the editor:
   focused with `Tab` and resized with `←`/`→`; the add-slide dialog is fully
   keyboard-operable.
 - **Screen readers** — slide thumbnails announce a concise label ("Slide 3/12:
-  title", including the skipped state), charts read out their data as a text
-  alternative, and the fullscreen presenter announces every slide change.
+  title", including skipped state and whether the slide has user notes), charts
+  read out their data as a text alternative, and the fullscreen presenter
+  announces every slide change.
 - **Slide quality** — while you edit, OciDeck continuously checks the deck for
   accessibility and readability problems. See the subsection below.
 
@@ -284,8 +298,8 @@ issue to jump to that slide and focus the relevant editor field; click a **theme
 colour field scrolled into view and highlighted.
 
 Issues also appear as badges on slide thumbnails (amber for warnings, red when
-errors are included) and as inline hints on relevant editor fields (for example
-image captions).
+errors are included), as a blue badge when a slide has **user notes**, and as
+inline hints on relevant editor fields (for example image captions).
 
 Skipped slides are not checked. Export and presentation use the same analyser on
 the slides that will actually be shown.

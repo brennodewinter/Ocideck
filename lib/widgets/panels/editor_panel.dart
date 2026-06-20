@@ -765,6 +765,42 @@ class _SlideTlpControl extends StatelessWidget {
 double _notesEditorHeight(BuildContext context) =>
     (MediaQuery.sizeOf(context).height * 0.28).clamp(240.0, 420.0);
 
+class _NotesDiscardButton extends StatelessWidget {
+  final TextEditingController controller;
+  final VoidCallback onDiscard;
+  final Color color;
+
+  const _NotesDiscardButton({
+    super.key,
+    required this.controller,
+    required this.onDiscard,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return ValueListenableBuilder<TextEditingValue>(
+      valueListenable: controller,
+      builder: (context, value, _) {
+        final enabled = value.text.trim().isNotEmpty;
+        return Tooltip(
+          message: l10n.d('Notities weggooien'),
+          child: IconButton(
+            onPressed: enabled ? onDiscard : null,
+            icon: const Icon(Icons.delete_outline, size: 16),
+            color: color,
+            disabledColor: color.withValues(alpha: 0.35),
+            visualDensity: VisualDensity.compact,
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+          ),
+        );
+      },
+    );
+  }
+}
+
 class _NotesField extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
@@ -776,6 +812,7 @@ class _NotesField extends StatefulWidget {
 
 class _NotesFieldState extends State<_NotesField> {
   late final TextEditingController _ctrl;
+  bool _expanded = true;
 
   @override
   void initState() {
@@ -796,6 +833,14 @@ class _NotesFieldState extends State<_NotesField> {
 
   void _emit() => widget.onUpdate(widget.slide.copyWith(notes: _ctrl.text));
 
+  void _discardNotes() {
+    if (_ctrl.text.trim().isEmpty) return;
+    _ctrl.removeListener(_emit);
+    _ctrl.text = '';
+    _ctrl.addListener(_emit);
+    widget.onUpdate(widget.slide.copyWith(notes: ''));
+  }
+
   @override
   void dispose() {
     _ctrl.dispose();
@@ -805,19 +850,47 @@ class _NotesFieldState extends State<_NotesField> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return Container(
+    return Material(
       color: const Color(0xFFFFFBEB),
-      padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 10),
-            child: Icon(Icons.notes, size: 14, color: Color(0xFFB45309)),
+      child: Theme(
+        data: Theme.of(context).copyWith(dividerColor: const Color(0xFFFCD34D)),
+        child: ExpansionTile(
+          initiallyExpanded: _expanded,
+          onExpansionChanged: (open) => setState(() => _expanded = open),
+          tilePadding: const EdgeInsets.symmetric(horizontal: 12),
+          childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+          leading: const Icon(Icons.notes, size: 18, color: Color(0xFFB45309)),
+          title: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  l10n.d('Sprekersnotities'),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF92400E),
+                  ),
+                ),
+              ),
+              _NotesDiscardButton(
+                key: ValueKey('discard-speaker-notes-${widget.slide.id}'),
+                controller: _ctrl,
+                onDiscard: _discardNotes,
+                color: const Color(0xFFB45309),
+              ),
+            ],
           ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: SizedBox(
+          subtitle: widget.slide.notes.trim().isEmpty
+              ? Text(
+                  l10n.d('Notities voor tijdens het presenteren'),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Color(0xFFD97706),
+                  ),
+                )
+              : null,
+          children: [
+            SizedBox(
               height: _notesEditorHeight(context),
               child: MarkdownNotesEditor.legacy(
                 key: ValueKey('speaker-notes-${widget.slide.id}'),
@@ -858,8 +931,8 @@ class _NotesFieldState extends State<_NotesField> {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -905,6 +978,14 @@ class _UserNotesFieldState extends State<_UserNotesField> {
 
   void _emit() => widget.onChanged(_ctrl.text);
 
+  void _discardNotes() {
+    if (_ctrl.text.trim().isEmpty) return;
+    _ctrl.removeListener(_emit);
+    _ctrl.text = '';
+    _ctrl.addListener(_emit);
+    widget.onChanged('');
+  }
+
   @override
   void dispose() {
     _ctrl.dispose();
@@ -928,13 +1009,25 @@ class _UserNotesFieldState extends State<_UserNotesField> {
             size: 18,
             color: Color(0xFF2563EB),
           ),
-          title: Text(
-            l10n.d('Gebruikersnotities'),
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF1D4ED8),
-            ),
+          title: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  l10n.d('Gebruikersnotities'),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF1D4ED8),
+                  ),
+                ),
+              ),
+              _NotesDiscardButton(
+                key: ValueKey('discard-user-notes-${widget.slide.id}'),
+                controller: _ctrl,
+                onDiscard: _discardNotes,
+                color: const Color(0xFF2563EB),
+              ),
+            ],
           ),
           subtitle: widget.note.trim().isEmpty
               ? Text(

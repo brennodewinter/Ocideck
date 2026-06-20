@@ -19,7 +19,7 @@ enum SlideType {
   chart,
 }
 
-enum ListStyle { bullets, numbered, checklist }
+enum ListStyle { bullets, numbered, checklist, richText }
 
 int bulletLevel(String value) {
   var level = 0;

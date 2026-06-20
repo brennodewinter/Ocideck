@@ -32,6 +32,11 @@ class ListStyleSelector extends StatelessWidget {
           icon: const Icon(Icons.checklist, size: 18),
           label: Text(l10n.d('Checklist')),
         ),
+        ButtonSegment(
+          value: ListStyle.richText,
+          icon: const Icon(Icons.text_fields, size: 18),
+          label: Text(l10n.d('Teksteditor')),
+        ),
       ],
       selected: {value},
       showSelectedIcon: false,

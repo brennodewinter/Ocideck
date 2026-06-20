@@ -42,6 +42,7 @@ String bulletListMarker(List<String> items, int index, ListStyle style) {
   if (style == ListStyle.checklist) {
     return checklistItemChecked(items[index]) ? '☑' : '☐';
   }
+  if (style == ListStyle.richText) return '•';
   var number = 0;
   for (var i = 0; i <= index; i++) {
     final itemLevel = levelOf(items[i]);

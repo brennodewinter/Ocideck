@@ -100,4 +100,36 @@ void main() {
     expect(find.bySemanticsLabel(RegExp(r'^Slide 2/2: ')), findsOneWidget);
     handle.dispose();
   });
+
+  testWidgets('thumbnail shows badge when slide has user notes', (
+    tester,
+  ) async {
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+    final deckNotifier = container.read(deckProvider.notifier);
+    deckNotifier.newDeck('Test');
+    final slide = container.read(deckProvider).deck!.slides.single;
+    deckNotifier.setUserNoteForSlide(slide.id, 'Cursusnotitie');
+
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          theme: AppTheme.light,
+          home: const Scaffold(
+            body: SizedBox(width: 320, child: SlideListPanel(railWidth: 320)),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(
+      find.byWidgetPredicate(
+        (w) => w is SlideThumbnail && w.hasUserNotes && w.index == 0,
+      ),
+      findsOneWidget,
+    );
+    expect(find.byIcon(Icons.edit_note_outlined), findsOneWidget);
+  });
 }

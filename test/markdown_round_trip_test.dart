@@ -135,6 +135,59 @@ void main() {
       expect(markdown, contains('ocideck_checklist_progress: true'));
     });
 
+    test('richText bullets slide round-trips with custom markdown', () {
+      final service = MarkdownService();
+      const body = 'Paragraaf één\n\n**Vet** tekst';
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.bullets).copyWith(
+              title: 'Titel',
+              subtitle: 'Sub',
+              listStyle: ListStyle.richText,
+              customMarkdown: body,
+            ),
+          ],
+        ),
+      );
+      final out = service.parseDeck(markdown)!;
+      expect(out.slides, hasLength(1));
+      final slide = out.slides.single;
+      expect(slide.type, SlideType.bullets);
+      expect(slide.listStyle, ListStyle.richText);
+      expect(slide.title, 'Titel');
+      expect(slide.subtitle, 'Sub');
+      expect(slide.customMarkdown, body);
+      expect(markdown, contains('ocideck_list_style: richText'));
+    });
+
+    test('richText content with dash lines does not create extra slides', () {
+      final service = MarkdownService();
+      const body = 'Scheiding\n---\nNog tekst';
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.bullets).copyWith(
+              title: 'Dash test',
+              listStyle: ListStyle.richText,
+              customMarkdown: body,
+            ),
+            Slide.create(SlideType.bullets).copyWith(
+              title: 'Tweede slide',
+              bullets: ['Punt'],
+            ),
+          ],
+        ),
+      );
+      final out = service.parseDeck(markdown)!;
+      expect(out.slides, hasLength(2));
+      expect(out.slides.first.listStyle, ListStyle.richText);
+      expect(out.slides.first.customMarkdown, body);
+      expect(out.slides.last.title, 'Tweede slide');
+    });
+
     test('twoBullets slide keeps both bullet columns', () {
       final out = _roundTrip(
         Slide.create(SlideType.twoBullets).copyWith(

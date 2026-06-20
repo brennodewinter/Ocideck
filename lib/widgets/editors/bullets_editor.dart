@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
+import '../markdown_editor/markdown_editor.dart';
 import '_editor_field.dart';
 import 'list_style_selector.dart';
 
@@ -30,6 +31,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
   late List<FocusNode> _focusNodes;
   late ListStyle _listStyle;
   late bool _showChecklistProgress;
+  late final TextEditingController _richText;
 
   static const _maxLevel = 4;
 
@@ -42,6 +44,8 @@ class _BulletsEditorState extends State<BulletsEditor> {
     _subtitle.addListener(_emit);
     _listStyle = widget.slide.listStyle;
     _showChecklistProgress = widget.slide.showChecklistProgress;
+    _richText = TextEditingController(text: widget.slide.customMarkdown);
+    _richText.addListener(_emit);
     _initBullets(widget.slide.bullets);
   }
 
@@ -74,16 +78,21 @@ class _BulletsEditorState extends State<BulletsEditor> {
         subtitle: _subtitle.text,
         listStyle: _listStyle,
         showChecklistProgress: _showChecklistProgress,
-        bullets: List.generate(
-          _bullets.length,
-          (i) => _listStyle == ListStyle.checklist
-              ? checklistBullet(
-                  level: _levels[i],
-                  text: _bullets[i].text,
-                  checked: _checked[i],
-                )
-              : '\t' * _levels[i] + _bullets[i].text,
-        ),
+        customMarkdown: _listStyle == ListStyle.richText
+            ? _richText.text
+            : widget.slide.customMarkdown,
+        bullets: _listStyle == ListStyle.richText
+            ? widget.slide.bullets
+            : List.generate(
+                _bullets.length,
+                (i) => _listStyle == ListStyle.checklist
+                    ? checklistBullet(
+                        level: _levels[i],
+                        text: _bullets[i].text,
+                        checked: _checked[i],
+                      )
+                    : '\t' * _levels[i] + _bullets[i].text,
+              ),
       ),
     );
   }
@@ -193,6 +202,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
   void dispose() {
     _title.dispose();
     _subtitle.dispose();
+    _richText.dispose();
     for (final c in _bullets) {
       c.dispose();
     }
@@ -236,26 +246,42 @@ class _BulletsEditorState extends State<BulletsEditor> {
               _emit();
             },
           ),
-        const SizedBox(height: 16),
-        const SectionLabel('Bullets'),
-        ReorderableListView(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          buildDefaultDragHandles: false,
-          onReorderItem: _reorderItem,
-          children: [
-            for (int i = 0; i < _bullets.length; i++) _buildBulletRow(i),
-          ],
-        ),
-        const SizedBox(height: 4),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: TextButton.icon(
-            onPressed: () => _addBulletAfter(_bullets.length - 1),
-            icon: const Icon(Icons.add, size: 16),
-            label: Text(l10n.d('Bullet toevoegen')),
+        if (_listStyle == ListStyle.richText) ...[
+          const SizedBox(height: 16),
+          const SectionLabel('Tekst'),
+          SizedBox(
+            height: 320,
+            child: MarkdownNotesEditor.legacy(
+              controller: _richText,
+              baseStyle: const TextStyle(fontSize: 14, height: 1.45),
+              linkColor: const Color(0xFF2563EB),
+              hintText: l10n.d('Tekst...'),
+              expand: true,
+              minLines: 8,
+            ),
           ),
-        ),
+        ] else ...[
+          const SizedBox(height: 16),
+          const SectionLabel('Bullets'),
+          ReorderableListView(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            buildDefaultDragHandles: false,
+            onReorder: _reorderItem,
+            children: [
+              for (int i = 0; i < _bullets.length; i++) _buildBulletRow(i),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton.icon(
+              onPressed: () => _addBulletAfter(_bullets.length - 1),
+              icon: const Icon(Icons.add, size: 16),
+              label: Text(l10n.d('Bullet toevoegen')),
+            ),
+          ),
+        ],
       ],
     );
   }

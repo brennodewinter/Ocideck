@@ -30,6 +30,9 @@ class SlideThumbnail extends ConsumerWidget {
   final VoidCallback onToggleSkip;
   final VoidCallback onCopyImage;
 
+  /// Persoonlijke gebruikersnotities (sidecar), los van sprekersnotities.
+  final bool hasUserNotes;
+
   const SlideThumbnail({
     super.key,
     required this.slide,
@@ -40,6 +43,7 @@ class SlideThumbnail extends ConsumerWidget {
     required this.onDelete,
     required this.onToggleSkip,
     required this.onCopyImage,
+    this.hasUserNotes = false,
     this.isPrimary = true,
     this.projectPath,
     this.themeProfile = const ThemeProfile(),
@@ -79,6 +83,7 @@ class SlideThumbnail extends ConsumerWidget {
         '${l10n.d('Slide')} ${index + 1}/$slideCount: '
         '${title.isNotEmpty ? title : l10n.d(slide.type.label)}'
         '${skipped ? ' (${l10n.d('Overgeslagen')})' : ''}'
+        '${hasUserNotes ? ' (${l10n.d('Gebruikersnotities')})' : ''}'
         '${hasActionableQualityIssues ? ' (${l10n.d('Kwaliteitsprobleem')})' : ''}';
 
     return Semantics(
@@ -155,6 +160,26 @@ class SlideThumbnail extends ConsumerWidget {
                                     ),
                                   ),
                                 ],
+                              ),
+                            ),
+                          ),
+                        if (hasUserNotes)
+                          Positioned(
+                            bottom: 4,
+                            left: 4,
+                            child: Tooltip(
+                              message: l10n.d('Gebruikersnotities'),
+                              child: Container(
+                                padding: const EdgeInsets.all(3),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xCC2563EB),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: const Icon(
+                                  Icons.edit_note_outlined,
+                                  size: 10,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
