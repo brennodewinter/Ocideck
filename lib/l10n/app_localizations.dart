@@ -1060,6 +1060,8 @@ const _dutchSourceStrings = {
     'Logo tonen op deze slide': 'Show logo on this slide',
     'Footer tonen op deze slide': 'Show footer on this slide',
     'Sprekersnotities...': 'Speaker notes...',
+    'Sprekersnotities': 'Speaker notes',
+    'Notities voor tijdens het presenteren': 'Notes for while presenting',
     'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
         'Markdown mode — edit the full presentation as Marp Markdown',
     'Toepassen': 'Apply',
@@ -1139,6 +1141,7 @@ const _dutchSourceStrings = {
     'Mijn notities': 'My notes',
     'Gebruikersnotities': 'User notes',
     'Gebruikersnotities voor deze slide...': 'User notes for this slide...',
+    'Notities weggooien': 'Discard notes',
     'Notities voor de ontvanger tijdens een cursus':
         'Notes for the recipient during a course',
     'Schakel naar Markdown-modus om notities toe te voegen.':

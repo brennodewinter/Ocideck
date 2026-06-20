@@ -1,14 +1,83 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/editors/bullets_editor.dart';
+import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
 import 'package:ocideck/widgets/slides/inline_markdown.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
+Widget _testApp(Widget child) {
+  return MaterialApp(
+    localizationsDelegates: const [
+      AppLocalizations.delegate,
+      GlobalMaterialLocalizations.delegate,
+      FlutterQuillLocalizations.delegate,
+    ],
+    supportedLocales: AppLocalizations.supportedLocales,
+    home: Scaffold(body: child),
+  );
+}
+
 void main() {
+  setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
+
+  testWidgets('rich text mode uses the markdown editor', (tester) async {
+    var updated = Slide.create(SlideType.bullets).copyWith(
+      title: 'Titel',
+      customMarkdown: 'Bestaande tekst',
+    );
+
+    await tester.pumpWidget(
+      _testApp(
+        BulletsEditor(
+          slide: updated,
+          onUpdate: (slide) => updated = slide,
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('Teksteditor'));
+    await tester.pumpAndSettle();
+    expect(updated.listStyle, ListStyle.richText);
+    expect(find.byType(MarkdownNotesEditor), findsOneWidget);
+    expect(find.text('Voortgangsgrafiek tonen'), findsNothing);
+    expect(find.text('Bullet toevoegen'), findsNothing);
+  });
+
+  testWidgets('switching list styles preserves bullets and rich text', (
+    tester,
+  ) async {
+    var updated = Slide.create(SlideType.bullets).copyWith(
+      bullets: ['Eerste punt'],
+      customMarkdown: 'Vrije tekst',
+    );
+
+    await tester.pumpWidget(
+      _testApp(
+        BulletsEditor(
+          slide: updated,
+          onUpdate: (slide) => updated = slide,
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('Teksteditor'));
+    await tester.pumpAndSettle();
+    expect(updated.bullets, ['Eerste punt']);
+    expect(updated.customMarkdown, 'Vrije tekst');
+
+    await tester.tap(find.text('Opsomming'));
+    await tester.pumpAndSettle();
+    expect(updated.bullets, ['Eerste punt']);
+    expect(updated.customMarkdown, 'Vrije tekst');
+  });
+
   testWidgets('checklist items can be marked as checked', (tester) async {
     var updated = Slide.create(SlideType.bullets).copyWith(bullets: ['Taak']);
 
@@ -241,6 +310,37 @@ void main() {
       find.byKey(const ValueKey('checklist-preview-toggle-0-0')),
     );
     expect(updated?.bullets, ['[x] Open']);
+  });
+
+  testWidgets('rich text bullets slide renders title and body', (tester) async {
+    final slide = Slide.create(SlideType.bullets).copyWith(
+      title: 'Kop',
+      subtitle: 'Subkop',
+      listStyle: ListStyle.richText,
+      customMarkdown: 'Inhoud met **vet**',
+    );
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: SizedBox(
+            width: 800,
+            height: 450,
+            child: SlidePreviewWidget(slide: slide),
+          ),
+        ),
+      ),
+    );
+
+    expect(find.text('Kop'), findsOneWidget);
+    expect(find.text('Subkop'), findsOneWidget);
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is InlineMarkdownText &&
+            widget.text.contains('Inhoud met'),
+      ),
+      findsOneWidget,
+    );
   });
 
   testWidgets('hovering progress highlights matching checklist items', (

@@ -12,7 +12,9 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   from speaker notes (`Slide.notes`). Stored in a `<name>.user-notes.json`
   sidecar (fingerprint-anchored like annotations). Hidden by default while
   presenting; `Ctrl/Cmd + N` toggles a local **My notes** panel on the presenter
-  window only. Visual editor: collapsible **User notes** block below speaker notes.
+  window only. Visual editor: collapsible **User notes** block below **Speaker
+  notes** (matching amber/blue headers, each with a discard button). Slides
+  that carry user notes show a blue badge on their thumbnail in the slide list.
 - **Find & replace in Markdown mode** — an in-editor find bar searches the live
   markdown buffer (`Ctrl/Cmd+F`; replace row via `Ctrl/Cmd+H`), with next/previous
   navigation, match counter, case sensitivity, and replace current / replace all.
@@ -141,6 +143,8 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   title.
 - After resizing the slide panel (dragging the divider or resizing the window),
   the list scrolls the slide being edited back into view.
+- **Speaker notes** in the visual editor now use the same collapsible header
+  pattern as user notes, with a discard button in the header row.
 
 ### Fixed
 - Hover on charts (tooltips, legend highlight) now works on a second screen:
@@ -154,6 +158,8 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   keyed items were rebuilt during layout — both the resize-detection inside the
   panel and the shell's width computation now avoid LayoutBuilders above the
   reorderable list.
+- A scheduler crash when jumping away from a slide before a quality-focus callback
+  ran on a caption or editor field (`ref` used after the widget unmounted).
 
 ## [1.0.0]
 

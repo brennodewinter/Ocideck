@@ -17,6 +17,10 @@ class _BulletsPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (slide.listStyle == ListStyle.richText) {
+      return _buildRichTextPreview(context);
+    }
+
     final pad = w * 0.07;
     // Slightly tighter top/bottom margin than the side margin so short
     // checklists can grow into more of the slide height instead of leaving a
@@ -150,6 +154,87 @@ class _BulletsPreview extends StatelessWidget {
                         ),
                       ],
                     ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRichTextPreview(BuildContext context) {
+    final pad = w * 0.07;
+    final vPad = w * 0.05;
+    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
+    final titleSize = w * 0.042;
+    final subtitleSize = w * 0.030;
+    final spacing = pad * 0.5;
+    final bodySize = w * 0.026;
+    final hasTitle = slide.title.isNotEmpty;
+    final subtitle = slide.subtitle;
+    final hasSubtitle = subtitle.isNotEmpty;
+    final body = slide.customMarkdown.trim();
+
+    return Container(
+      color: _hexColor(profile.slideBackgroundColor),
+      child: SizedBox.expand(
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.topLeft,
+          child: SizedBox(
+            width: w,
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                pad,
+                vPad + safe.top,
+                pad,
+                vPad + safe.bottom,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (hasTitle)
+                    _md(
+                      context,
+                      slide.title,
+                      _applyFont(
+                        font,
+                        TextStyle(
+                          fontSize: titleSize,
+                          fontWeight: FontWeight.bold,
+                          color: _hexColor(profile.textColor),
+                        ),
+                      ),
+                      linkColor: _hexColor(profile.accentColor),
+                    ),
+                  if (hasSubtitle) ...[
+                    SizedBox(height: spacing * 0.4),
+                    _md(
+                      context,
+                      subtitle,
+                      _applyFont(
+                        font,
+                        TextStyle(
+                          fontSize: subtitleSize,
+                          fontWeight: FontWeight.w600,
+                          color: _hexColor(profile.accentColor),
+                        ),
+                      ),
+                      linkColor: _hexColor(profile.accentColor),
+                    ),
+                  ],
+                  if ((hasTitle || hasSubtitle) && body.isNotEmpty)
+                    SizedBox(height: spacing),
+                  ..._markdownBodyBlocks(
+                    context,
+                    markdown: slide.customMarkdown,
+                    w: w,
+                    font: font,
+                    profile: profile,
+                    bodyFontSize: bodySize,
                   ),
                 ],
               ),

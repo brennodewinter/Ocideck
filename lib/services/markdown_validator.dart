@@ -21,7 +21,7 @@ class MarkdownValidator {
     'no-footer',
   };
 
-  static const _validListStyles = {'bullets', 'numbered', 'checklist'};
+  static const _validListStyles = {'bullets', 'numbered', 'checklist', 'richText'};
 
   MarkdownValidationResult validate(String markdown) {
     final issues = <MarkdownValidationIssue>[];
@@ -315,7 +315,7 @@ class MarkdownValidator {
               line: lineNo(i),
               severity: MarkdownValidationSeverity.error,
               message:
-                  'Slide $slideNumber: onbekende lijststijl "$value". Gebruik bullets, numbered of checklist.',
+                  'Slide $slideNumber: onbekende lijststijl "$value". Gebruik bullets, numbered, checklist of richText.',
             ),
           );
         }

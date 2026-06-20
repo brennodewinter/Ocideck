@@ -138,4 +138,88 @@ void main() {
 
     await tester.pump(const Duration(milliseconds: 350));
   });
+
+  testWidgets('discard button clears speaker notes only', (tester) async {
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+    final deckNotifier = container.read(deckProvider.notifier);
+    deckNotifier.newDeck('Test');
+    final slide = container
+        .read(deckProvider)
+        .deck!
+        .slides
+        .single
+        .copyWith(notes: 'Spreker tekst');
+    deckNotifier.updateSlide(0, slide);
+    deckNotifier.setUserNoteForSlide(slide.id, 'Cursusnotitie');
+
+    await tester.binding.setSurfaceSize(const Size(900, 2200));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          theme: AppTheme.light,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            FlutterQuillLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: const Scaffold(body: EditorPanel()),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(ValueKey('discard-speaker-notes-${slide.id}')));
+    await tester.pumpAndSettle();
+
+    final deck = container.read(deckProvider).deck!;
+    expect(deck.slides.single.notes, isEmpty);
+    expect(deck.userNotes[slide.id], 'Cursusnotitie');
+  });
+
+  testWidgets('discard button clears user notes only', (tester) async {
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+    final deckNotifier = container.read(deckProvider.notifier);
+    deckNotifier.newDeck('Test');
+    final slide = container
+        .read(deckProvider)
+        .deck!
+        .slides
+        .single
+        .copyWith(notes: 'Spreker tekst');
+    deckNotifier.updateSlide(0, slide);
+    deckNotifier.setUserNoteForSlide(slide.id, 'Cursusnotitie');
+
+    await tester.binding.setSurfaceSize(const Size(900, 2200));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          theme: AppTheme.light,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            FlutterQuillLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: const Scaffold(body: EditorPanel()),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(ValueKey('discard-user-notes-${slide.id}')));
+    await tester.pumpAndSettle();
+
+    final deck = container.read(deckProvider).deck!;
+    expect(deck.slides.single.notes, 'Spreker tekst');
+    expect(deck.userNotes.containsKey(slide.id), isFalse);
+  });
 }

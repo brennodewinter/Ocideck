@@ -173,9 +173,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (_quillController != null) return;
     _scrollController = ScrollController();
     _quillController = QuillController(
-      document: MarkdownQuillCodec.documentFromMarkdown(
-        widget.controller.text,
-      ),
+      document: MarkdownQuillCodec.documentFromMarkdown(widget.controller.text),
       selection: const TextSelection.collapsed(offset: 0),
     );
     _markdownSnapshot = widget.controller.text;
@@ -200,9 +198,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (quill == null) return;
     _syncingMarkdown = true;
     _markdownSnapshot = widget.controller.text;
-    quill.document = MarkdownQuillCodec.documentFromMarkdown(
-      _markdownSnapshot,
-    );
+    quill.document = MarkdownQuillCodec.documentFromMarkdown(_markdownSnapshot);
     _syncingMarkdown = false;
   }
 
@@ -357,12 +353,14 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
           if (_effectiveMode == NotesEditorMode.markdown)
             MarkdownEditorToolbar(
               controller: widget.controller,
+              focusNode: _focusNode,
               theme: widget.editorTheme,
               compact: widget.compactToolbar,
             )
           else if (quill != null)
             WysiwygNotesToolbar(
               controller: quill,
+              focusNode: _focusNode,
               theme: widget.editorTheme,
               compact: widget.compactToolbar,
             ),

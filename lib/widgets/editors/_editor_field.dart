@@ -53,10 +53,11 @@ class _EditorFieldState extends ConsumerState<EditorField> {
   }
 
   void _applyQualityFocus() {
+    if (!mounted) return;
     final field = widget.qualityField;
     if (field == null) return;
     final target = ref.read(editorProvider).focusQualityField;
-    if (target != field || !mounted) return;
+    if (target != field) return;
     _focusNode.requestFocus();
     Scrollable.ensureVisible(
       context,
@@ -540,8 +541,9 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
   }
 
   void _applyQualityFocus() {
+    if (!mounted) return;
     final target = ref.read(editorProvider).focusQualityField;
-    if (target != widget.captionField || !mounted) return;
+    if (target != widget.captionField) return;
     _focusNode.requestFocus();
     Scrollable.ensureVisible(
       context,

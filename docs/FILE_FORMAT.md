@@ -443,7 +443,9 @@ Persoonlijke notities voor de ontvanger of cursist tijdens het volgen van een
 presentatie. Volledig gescheiden van sprekersnotities (`Slide.notes` in de `.md`,
 HTML-commentaar) en van de annotatielaag. Standaard onzichtbaar tijdens
 presenteren; de presentator opent ze lokaal met `Ctrl/Cmd + N` (nooit op het
-beamer-/publieksscherm).
+beamer-/publieksscherm). In de visuele editor staan sprekers- en gebruikersnotities
+elk in een inklapbaar blok met kopregel (titel + weggooi-knop); slides met
+gebruikersnotities tonen een blauw badge op de miniatuur in de slidelijst.
 
 Omdat slide-id's bij elke keer inlezen opnieuw worden gegenereerd, worden notities
 op schijf **per slide verankerd op volgorde + een inhoud-fingerprint** (dezelfde
