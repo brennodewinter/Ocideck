@@ -80,9 +80,7 @@ List<String> _imageSearchPaths(String? projectPath, String? homeDirectory) {
 }
 
 String? _resolveImagePath(String path, String? projectPath) {
-  if (path.isEmpty) return null;
-  if (p.isAbsolute(path) || projectPath == null) return path;
-  return p.join(projectPath, path);
+  return resolveEditorAssetPath(path, projectPath);
 }
 
 List<String> _imageUsages(WidgetRef ref, String absolutePath) {
@@ -95,12 +93,12 @@ List<String> _imageUsages(WidgetRef ref, String absolutePath) {
       final slide = deck.slides[i];
       for (final candidate in [slide.imagePath, slide.imagePath2]) {
         if (candidate.isEmpty) continue;
-        final resolved = p.normalize(
-          p.isAbsolute(candidate)
-              ? candidate
-              : p.join(deck.projectPath ?? '', candidate),
+        final resolved = resolveSlideAssetPath(
+          candidate,
+          deck.projectPath,
         );
-        if (resolved == target) {
+        if (resolved == null) continue;
+        if (p.normalize(resolved) == target) {
           usages.add('${tab.label} · slide ${i + 1}');
           break;
         }
@@ -125,9 +123,8 @@ Future<void> _replaceImageUsages(
     if (deck == null) continue;
     final projectPath = deck.projectPath ?? '';
 
-    String resolve(String candidate) => p.normalize(
-      p.isAbsolute(candidate) ? candidate : p.join(projectPath, candidate),
-    );
+    String resolve(String candidate) =>
+        resolveSlideAssetPath(candidate, deck.projectPath) ?? '';
     // Blijf relatief opslaan als de slide dat al deed en het nieuwe pad
     // binnen het project ligt; anders absoluut.
     String replacement(String candidate) {

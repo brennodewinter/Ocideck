@@ -941,6 +941,15 @@ const _dutchSourceStrings = {
     'Zoeken en vervangen': 'Find and replace',
     'Zoeken naar': 'Find',
     'Vervangen door': 'Replace with',
+    'Vervang': 'Replace',
+    'Vorige': 'Previous',
+    'Volgende': 'Next',
+    'Vet': 'Bold',
+    'Cursief': 'Italic',
+    'Doorhalen': 'Strikethrough',
+    'Code': 'Code',
+    'Link': 'Link',
+    'Kop': 'Heading',
     'Hoofdlettergevoelig': 'Case sensitive',
     'Vervang alles': 'Replace all',
     'Niets vervangen': 'Nothing replaced',
@@ -1127,6 +1136,14 @@ const _dutchSourceStrings = {
     'Verstreken': 'Elapsed',
     'Klok': 'Clock',
     'Geen notities voor deze slide.': 'No notes for this slide.',
+    'Mijn notities': 'My notes',
+    'Gebruikersnotities': 'User notes',
+    'Gebruikersnotities voor deze slide...': 'User notes for this slide...',
+    'Notities voor de ontvanger tijdens een cursus':
+        'Notes for the recipient during a course',
+    'Schakel naar Markdown-modus om notities toe te voegen.':
+        'Switch to Markdown mode to add notes.',
+    'Mijn notities aan/uit': 'Toggle my notes on/off',
     'Wissel scherm (S)': 'Switch screen (S)',
     'Kon niet van scherm wisselen.': 'Could not switch screens.',
     'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
@@ -1280,6 +1297,15 @@ const _dutchSourceStrings = {
     'Zoeken en vervangen': 'Trova e sostituisci',
     'Zoeken naar': 'Trova',
     'Vervangen door': 'Sostituisci con',
+    'Vervang': 'Sostituisci',
+    'Vorige': 'Precedente',
+    'Volgende': 'Successivo',
+    'Vet': 'Grassetto',
+    'Cursief': 'Corsivo',
+    'Doorhalen': 'Barrato',
+    'Code': 'Codice',
+    'Link': 'Link',
+    'Kop': 'Titolo',
     'Hoofdlettergevoelig': 'Maiuscole/minuscole',
     'Vervang alles': 'Sostituisci tutto',
     'Nieuwe presentatie': 'Nuova presentazione',
@@ -1492,6 +1518,15 @@ const _dutchSourceStrings = {
     'Zoeken en vervangen': 'Suchen und ersetzen',
     'Zoeken naar': 'Suchen nach',
     'Vervangen door': 'Ersetzen durch',
+    'Vervang': 'Ersetzen',
+    'Vorige': 'Vorherige',
+    'Volgende': 'Nächste',
+    'Vet': 'Fett',
+    'Cursief': 'Kursiv',
+    'Doorhalen': 'Durchgestrichen',
+    'Code': 'Code',
+    'Link': 'Link',
+    'Kop': 'Überschrift',
     'Hoofdlettergevoelig': 'Groß-/Kleinschreibung',
     'Vervang alles': 'Alle ersetzen',
     'Nieuwe presentatie': 'Neue Präsentation',
@@ -1705,6 +1740,15 @@ const _dutchSourceStrings = {
     'Zoeken en vervangen': 'Rechercher et remplacer',
     'Zoeken naar': 'Rechercher',
     'Vervangen door': 'Remplacer par',
+    'Vervang': 'Remplacer',
+    'Vorige': 'Précédent',
+    'Volgende': 'Suivant',
+    'Vet': 'Gras',
+    'Cursief': 'Italique',
+    'Doorhalen': 'Barré',
+    'Code': 'Code',
+    'Link': 'Lien',
+    'Kop': 'Titre',
     'Hoofdlettergevoelig': 'Respecter la casse',
     'Vervang alles': 'Tout remplacer',
     'Nieuwe presentatie': 'Nouvelle présentation',
@@ -1917,6 +1961,15 @@ const _dutchSourceStrings = {
     'Zoeken en vervangen': 'Buscar y reemplazar',
     'Zoeken naar': 'Buscar',
     'Vervangen door': 'Reemplazar por',
+    'Vervang': 'Reemplazar',
+    'Vorige': 'Anterior',
+    'Volgende': 'Siguiente',
+    'Vet': 'Negrita',
+    'Cursief': 'Cursiva',
+    'Doorhalen': 'Tachado',
+    'Code': 'Código',
+    'Link': 'Enlace',
+    'Kop': 'Encabezado',
     'Hoofdlettergevoelig': 'Distinguir mayúsculas',
     'Vervang alles': 'Reemplazar todo',
     'Nieuwe presentatie': 'Nueva presentación',
@@ -2129,6 +2182,15 @@ const _dutchSourceStrings = {
     'Zoeken en vervangen': 'Sykje en ferfange',
     'Zoeken naar': 'Sykje nei',
     'Vervangen door': 'Ferfange troch',
+    'Vervang': 'Ferfange',
+    'Vorige': 'Foarige',
+    'Volgende': 'Folgjende',
+    'Vet': 'Fet',
+    'Cursief': 'Kursyf',
+    'Doorhalen': 'Trochhalen',
+    'Code': 'Koade',
+    'Link': 'Link',
+    'Kop': 'Kop',
     'Hoofdlettergevoelig': 'Haadlettergefoelich',
     'Vervang alles': 'Alles ferfange',
     'Nieuwe presentatie': 'Nije presintaasje',
@@ -2217,6 +2279,15 @@ const _dutchSourceStrings = {
     'Verstreken': 'Ferrûn',
     'Klok': 'Klok',
     'Geen notities voor deze slide.': 'Gjin notysjes foar dizze slide.',
+    'Mijn notities': 'Myn notysjes',
+    'Gebruikersnotities': 'Brûkersnotysjes',
+    'Gebruikersnotities voor deze slide...':
+        'Brûkersnotysjes foar dizze slide...',
+    'Notities voor de ontvanger tijdens een cursus':
+        'Notysjes foar de ûntfanger tidens in kursus',
+    'Schakel naar Markdown-modus om notities toe te voegen.':
+        'Skeakel nei Markdown-modus om notysjes ta te foegjen.',
+    'Mijn notities aan/uit': 'Myn notysjes oan/út',
     'Wissel scherm (S)': 'Skerm wikselje (S)',
     'Kon niet van scherm wisselen.': 'Koe net fan skerm wikselje.',
     'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
@@ -2342,6 +2413,15 @@ const _dutchSourceStrings = {
     'Zoeken en vervangen': 'Busca i reemplasá',
     'Zoeken naar': 'Busca',
     'Vervangen door': 'Reemplasá ku',
+    'Vervang': 'Reemplasá',
+    'Vorige': 'Anterior',
+    'Volgende': 'Siguiente',
+    'Vet': 'Grèp',
+    'Cursief': 'Kursivo',
+    'Doorhalen': 'Tachá',
+    'Code': 'Kòdigo',
+    'Link': 'Link',
+    'Kop': 'Titulo',
     'Hoofdlettergevoelig': 'Sensitivo pa mayúskula',
     'Vervang alles': 'Reemplasá tur',
     'Nieuwe presentatie': 'Presentashon nobo',
@@ -2429,6 +2509,15 @@ const _dutchSourceStrings = {
     'Verstreken': 'Transkurí',
     'Klok': 'Oloshi',
     'Geen notities voor deze slide.': 'No tin nota pa e slide aki.',
+    'Mijn notities': 'Mi notanan',
+    'Gebruikersnotities': 'Notanan di usuario',
+    'Gebruikersnotities voor deze slide...':
+        'Notanan di usuario pa e slide aki...',
+    'Notities voor de ontvanger tijdens een cursus':
+        'Notanan pa e destinataro durante un kurso',
+    'Schakel naar Markdown-modus om notities toe te voegen.':
+        'Kambia na modo Markdown pa agregá notanan.',
+    'Mijn notities aan/uit': 'Mi notanan on/off',
     'Wissel scherm (S)': 'Kambia pantalla (S)',
     'Kon niet van scherm wisselen.': 'No por a kambia pantalla.',
     'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
@@ -2884,6 +2973,15 @@ const _dutchSourceStringAdditions = {
     'Geen andere presentaties (.md) in deze map gevonden.':
         'Nessun\'altra presentazione (.md) trovata in questa cartella.',
     'Geen notities voor deze slide.': 'Nessuna nota per questa diapositiva.',
+    'Mijn notities': 'Le mie note',
+    'Gebruikersnotities': 'Note utente',
+    'Gebruikersnotities voor deze slide...':
+        'Note utente per questa diapositiva...',
+    'Notities voor de ontvanger tijdens een cursus':
+        'Note per il destinatario durante un corso',
+    'Schakel naar Markdown-modus om notities toe te voegen.':
+        'Passa alla modalità Markdown per aggiungere note.',
+    'Mijn notities aan/uit': 'Attiva/disattiva le mie note',
     'Geen presentaties (.md) in deze map gevonden.':
         'Nessuna presentazione (.md) trovata in questa cartella.',
     'Geen presentaties gevonden voor': 'Nessuna presentazione trovata per',
@@ -3330,6 +3428,15 @@ const _dutchSourceStringAdditions = {
     'Geen andere presentaties (.md) in deze map gevonden.':
         'Keine anderen Präsentationen (.md) in diesem Ordner gefunden.',
     'Geen notities voor deze slide.': 'Keine Notizen für diese Folie.',
+    'Mijn notities': 'Meine Notizen',
+    'Gebruikersnotities': 'Benutzernotizen',
+    'Gebruikersnotities voor deze slide...':
+        'Benutzernotizen für diese Folie...',
+    'Notities voor de ontvanger tijdens een cursus':
+        'Notizen für den Teilnehmer während eines Kurses',
+    'Schakel naar Markdown-modus om notities toe te voegen.':
+        'Wechseln Sie in den Markdown-Modus, um Notizen hinzuzufügen.',
+    'Mijn notities aan/uit': 'Meine Notizen ein/aus',
     'Geen presentaties (.md) in deze map gevonden.':
         'Keine Präsentationen (.md) in diesem Ordner gefunden.',
     'Geen presentaties gevonden voor': 'Keine Präsentationen gefunden für',
@@ -3780,6 +3887,15 @@ const _dutchSourceStringAdditions = {
     'Geen andere presentaties (.md) in deze map gevonden.':
         'Aucune autre présentation (.md) trouvée dans ce dossier.',
     'Geen notities voor deze slide.': 'Aucune note pour cette diapositive.',
+    'Mijn notities': 'Mes notes',
+    'Gebruikersnotities': 'Notes utilisateur',
+    'Gebruikersnotities voor deze slide...':
+        'Notes utilisateur pour cette diapositive...',
+    'Notities voor de ontvanger tijdens een cursus':
+        'Notes pour le destinataire pendant un cours',
+    'Schakel naar Markdown-modus om notities toe te voegen.':
+        'Passez en mode Markdown pour ajouter des notes.',
+    'Mijn notities aan/uit': 'Activer/désactiver mes notes',
     'Geen presentaties (.md) in deze map gevonden.':
         'Aucune présentation (.md) trouvée dans ce dossier.',
     'Geen presentaties gevonden voor': 'Aucune présentation trouvée pour',
@@ -4229,6 +4345,15 @@ const _dutchSourceStringAdditions = {
     'Geen andere presentaties (.md) in deze map gevonden.':
         'No se encontraron otras presentaciones (.md) en esta carpeta.',
     'Geen notities voor deze slide.': 'No hay notas para esta diapositiva.',
+    'Mijn notities': 'Mis notas',
+    'Gebruikersnotities': 'Notas de usuario',
+    'Gebruikersnotities voor deze slide...':
+        'Notas de usuario para esta diapositiva...',
+    'Notities voor de ontvanger tijdens een cursus':
+        'Notas para el destinatario durante un curso',
+    'Schakel naar Markdown-modus om notities toe te voegen.':
+        'Cambia al modo Markdown para añadir notas.',
+    'Mijn notities aan/uit': 'Activar/desactivar mis notas',
     'Geen presentaties (.md) in deze map gevonden.':
         'No se encontraron presentaciones (.md) en esta carpeta.',
     'Geen presentaties gevonden voor': 'No se encontraron presentaciones para',

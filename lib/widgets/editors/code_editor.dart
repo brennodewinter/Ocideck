@@ -8,8 +8,14 @@ import '_editor_field.dart';
 class CodeEditor extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
+  final bool nestedInScrollView;
 
-  const CodeEditor({super.key, required this.slide, required this.onUpdate});
+  const CodeEditor({
+    super.key,
+    required this.slide,
+    required this.onUpdate,
+    this.nestedInScrollView = false,
+  });
 
   /// Veelgebruikte talen. De waarde is de highlight.js-id; een lege waarde
   /// betekent platte tekst (geen kleuring).
@@ -122,19 +128,32 @@ class _CodeEditorState extends State<CodeEditor> {
             ),
           ),
           const SizedBox(height: 6),
-          Expanded(
-            child: TextField(
+          if (widget.nestedInScrollView)
+            TextField(
               controller: _code,
-              maxLines: null,
-              expands: true,
+              minLines: 12,
+              maxLines: 24,
               textAlignVertical: TextAlignVertical.top,
               style: const TextStyle(fontFamily: 'monospace', fontSize: 13),
               decoration: InputDecoration(
                 hintText: l10n.d('Plak of typ hier je broncode...'),
                 alignLabelWithHint: true,
               ),
+            )
+          else
+            Expanded(
+              child: TextField(
+                controller: _code,
+                maxLines: null,
+                expands: true,
+                textAlignVertical: TextAlignVertical.top,
+                style: const TextStyle(fontFamily: 'monospace', fontSize: 13),
+                decoration: InputDecoration(
+                  hintText: l10n.d('Plak of typ hier je broncode...'),
+                  alignLabelWithHint: true,
+                ),
+              ),
             ),
-          ),
         ],
       ),
     );

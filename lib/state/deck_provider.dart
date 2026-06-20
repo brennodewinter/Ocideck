@@ -7,6 +7,7 @@ import '../models/slide.dart';
 import '../services/file_service.dart';
 import '../services/image_service.dart';
 import '../services/markdown_service.dart';
+import '../services/user_notes_codec.dart';
 import 'settings_provider.dart';
 
 // ── Service providers ────────────────────────────────────────────────────────
@@ -500,6 +501,36 @@ class DeckNotifier extends StateNotifier<DeckState> {
     if (!state.isDirty) state = state.copyWith(isDirty: true);
   }
 
+  /// Update the (separate) user-notes layer. Kept out of undo/redo history;
+  /// marks the deck dirty so notes get saved to the sidecar.
+  void setUserNotes(Map<String, String> notes) {
+    final deck = state.deck;
+    if (deck == null) return;
+    final cleaned = <String, String>{};
+    for (final entry in notes.entries) {
+      final text = entry.value.trim();
+      if (text.isNotEmpty) cleaned[entry.key] = text;
+    }
+    state = state.copyWith(deck: deck.copyWith(userNotes: cleaned));
+    if (!state.isDirty) state = state.copyWith(isDirty: true);
+  }
+
+  void setUserNoteForSlide(String slideId, String text) {
+    final deck = state.deck;
+    if (deck == null) return;
+    final next = Map<String, String>.from(deck.userNotes);
+    final trimmed = text.trim();
+    if (trimmed.isEmpty) {
+      next.remove(slideId);
+    } else {
+      next[slideId] = trimmed;
+    }
+    setUserNotes(next);
+  }
+
+  void clearUserNoteForSlide(String slideId) =>
+      setUserNoteForSlide(slideId, '');
+
   // ── Markdown mode ──────────────────────────────────────────────────────────
 
   String generateMarkdown() {
@@ -514,9 +545,16 @@ class DeckNotifier extends StateNotifier<DeckState> {
     // The markdown carries only content; keep the deck's current styling rather
     // than resetting it to the default profile the parser returns.
     final current = state.deck;
-    final deck = current == null
+    var deck = current == null
         ? parsed
         : parsed.copyWith(themeProfile: current.themeProfile);
+    if (current != null && current.userNotes.isNotEmpty) {
+      final encoded = UserNotesCodec.encode(current.slides, current.userNotes);
+      final remapped = encoded != null
+          ? UserNotesCodec.decode(encoded, deck.slides)
+          : const <String, String>{};
+      deck = deck.copyWith(userNotes: remapped);
+    }
     _mutate(deck); // discrete stap → ook ongedaan te maken
     return true;
   }

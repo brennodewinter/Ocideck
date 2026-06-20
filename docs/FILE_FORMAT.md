@@ -26,10 +26,11 @@ opzichte van de map van het `.md`-bestand.
 mijn_presentatie/
 ├── Mijn_presentatie.md          # de presentatie (Marp Markdown)
 ├── Mijn_presentatie.ink.json    # annotatielaag-sidecar (zie §6.2)
+├── Mijn_presentatie.user-notes.json  # gebruikersnotities-sidecar (zie §6.3)
 ├── images/                      # gekopieerde afbeeldingen
 │   ├── foto.png
 │   └── .ocideck_captions.json   # bijschriften-sidecar (zie §6.1)
-├── data/                        # gekoppelde grafiek-CSV's (zie §6.3)
+├── data/                        # gekoppelde grafiek-CSV's (zie §6.4)
 │   └── omzet.csv
 ├── logos/                       # gekopieerd logo van het stijlprofiel
 │   └── logo.png
@@ -47,8 +48,9 @@ presentaties.
 
 > Naast de `.md` staan **sidecars** die bewust géén onderdeel van de Marp-
 > Markdown zijn (zodat het `.md` puur en uitwisselbaar blijft): de
-> annotatielaag (`<naam>.ink.json`, §6.2), bijschriften (`.ocideck_captions.json`,
-> §6.1) en gekoppelde grafiekdata (`data/*.csv`, §6.3).
+> annotatielaag (`<naam>.ink.json`, §6.2), gebruikersnotities
+> (`<naam>.user-notes.json`, §6.3), bijschriften (`.ocideck_captions.json`,
+> §6.1) en gekoppelde grafiekdata (`data/*.csv`, §6.4).
 
 ---
 
@@ -329,7 +331,7 @@ void main() => print('hi');
 
 **Grafiek** (`chart`) — een fenced ```chart```-blok met de grafiekspecificatie
 als **JSON**. Kleine grafieken bewaren hun data inline; data-gedreven grafieken
-verwijzen via `source` naar een CSV in `data/` (zie §6.3). Bij opslaan wordt de
+verwijzen via `source` naar een CSV in `data/` (zie §6.4). Bij opslaan wordt de
 inline data weggelaten zodra er een `source` is (de CSV is dan de bron); bij
 openen wordt die weer ingelezen.
 ````markdown
@@ -435,7 +437,31 @@ De Marp-`.md` wordt er nooit door aangeraakt.
 `tool` is `pen` of `highlighter` (laser-aanwijzingen zijn vluchtig en worden niet
 bewaard).
 
-### 6.3 Grafiekdata (`data/*.csv`)
+### 6.3 Gebruikersnotities (`<naam>.user-notes.json`)
+
+Persoonlijke notities voor de ontvanger of cursist tijdens het volgen van een
+presentatie. Volledig gescheiden van sprekersnotities (`Slide.notes` in de `.md`,
+HTML-commentaar) en van de annotatielaag. Standaard onzichtbaar tijdens
+presenteren; de presentator opent ze lokaal met `Ctrl/Cmd + N` (nooit op het
+beamer-/publieksscherm).
+
+Omdat slide-id's bij elke keer inlezen opnieuw worden gegenereerd, worden notities
+op schijf **per slide verankerd op volgorde + een inhoud-fingerprint** (dezelfde
+hash als bij §6.2). Bij heropenen worden ze her-gekoppeld aan de slide met dezelfde
+fingerprint (bij voorkeur dezelfde index); notities van een gewijzigde/verwijderde
+slide vervallen. Lege notities worden niet opgeslagen; als er geen notities zijn,
+wordt het sidecar-bestand verwijderd of niet geschreven.
+
+```json
+{
+  "version": 1,
+  "slides": [
+    { "index": 1, "fp": "a1b2c3d4", "text": "Vraag stellen over diagram" }
+  ]
+}
+```
+
+### 6.4 Grafiekdata (`data/*.csv`)
 
 Een grafiek-slide (§5) kan zijn data inline in het `chart`-blok houden óf via
 `"source": "data/<naam>.csv"` verwijzen naar een CSV in de aparte **`data/`**-map
@@ -461,8 +487,9 @@ onderling met relatieve paden. Werkt ook als het deck nog niet is opgeslagen.
 <titel>.ocideck   (zip)
 ├── <titel>.md                # Marp Markdown
 ├── <titel>.ink.json          # annotatielaag (indien aanwezig, §6.2)
+├── <titel>.user-notes.json   # gebruikersnotities (indien aanwezig, §6.3)
 ├── images/…                  # alle gebruikte afbeeldingen
-├── data/…                    # gekoppelde grafiek-CSV's (§6.3)
+├── data/…                    # gekoppelde grafiek-CSV's (§6.4)
 ├── media/…                   # gebruikte video/audio
 ├── logos/…                   # logo uit het stijlprofiel
 └── themes/<theme>.css        # gegenereerde thema-CSS (Marp/CLI-bruikbaar)
@@ -518,6 +545,25 @@ In de editor schakelt het code-icoon in de werkbalk naar **Markdown-modus**: de
 hele presentatie wordt als één Marp-markdownbestand getoond (dezelfde structuur
 als op schijf). **Toepassen** parsed de tekst terug naar de getype slides;
 **Annuleren** keert terug zonder wijzigingen door te voeren.
+
+### Zoeken en vervangen
+
+In markdown-modus doorzoekt een **in-editor zoekbalk** de live markdown-tekst
+(inclusief front matter, scheidingstekens `---`, HTML-commentaar en nog niet
+toegepaste wijzigingen). Dit verschilt van het **Zoeken en vervangen**-dialoog
+in visuele modus (`Ctrl/Cmd + H`), dat alleen door slide-velden zoekt.
+
+| Sneltoets | Actie |
+| --- | --- |
+| `Ctrl/Cmd + F` | Zoekbalk openen |
+| `Ctrl/Cmd + H` | Zoekbalk met vervang-veld |
+| `Enter` / `Shift + Enter` (in zoekveld) | Volgende / vorige match |
+| `Esc` | Zoekbalk sluiten |
+
+De balk toont een match-teller (`1 / 3`), vorige/volgende-knoppen, een
+hoofdlettergevoelig-toggle, **Vervang** (huidige match) en **Vervang alles**.
+Elke match wordt geselecteerd in de editor zodat je snel naar een titel,
+slide-scheiding of ander onderdeel kunt springen.
 
 ### Wanneer controleren?
 

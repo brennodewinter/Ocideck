@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
 import '../utils/log.dart';
+import '../utils/project_path.dart';
 
 /// Slaat afbeeldingscaptions op als JSON-sidecar in de map van de afbeelding.
 /// Bestandsnaam: .ocideck_captions.json
@@ -11,8 +12,8 @@ class CaptionService {
   static const _sidecar = '.ocideck_captions.json';
 
   Future<String?> getCaption(String imagePath, {String? basePath}) async {
-    if (imagePath.isEmpty) return null;
     final resolvedPath = _resolvePath(imagePath, basePath);
+    if (resolvedPath == null) return null;
     final file = _sidecarFile(resolvedPath);
     if (!file.existsSync()) return null;
     try {
@@ -30,8 +31,8 @@ class CaptionService {
     String caption, {
     String? basePath,
   }) async {
-    if (imagePath.isEmpty) return;
     final resolvedPath = _resolvePath(imagePath, basePath);
+    if (resolvedPath == null) return;
     final file = _sidecarFile(resolvedPath);
     Map<String, dynamic> data = {};
     if (file.existsSync()) {
@@ -73,11 +74,15 @@ class CaptionService {
     );
   }
 
-  String _resolvePath(String imagePath, String? basePath) {
-    if (p.isAbsolute(imagePath) || basePath == null || basePath.isEmpty) {
-      return imagePath;
+  String? _resolvePath(String imagePath, String? basePath) {
+    if (imagePath.trim().isEmpty) return null;
+    if (basePath == null || basePath.isEmpty) {
+      return p.isAbsolute(imagePath) ? p.normalize(imagePath) : null;
     }
-    return p.join(basePath, imagePath);
+    if (p.isAbsolute(imagePath)) {
+      return resolveProjectAbsolute(basePath, imagePath);
+    }
+    return resolveProjectRelative(basePath, imagePath);
   }
 
   File _sidecarFile(String imagePath) {

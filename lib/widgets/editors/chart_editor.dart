@@ -19,6 +19,7 @@ class ChartEditor extends StatefulWidget {
   final ValueChanged<Slide> onUpdate;
   final ValueChanged<List<Slide>>? onAddVariants;
   final String? projectPath;
+  final bool nestedInScrollView;
 
   const ChartEditor({
     super.key,
@@ -26,6 +27,7 @@ class ChartEditor extends StatefulWidget {
     required this.onUpdate,
     this.onAddVariants,
     this.projectPath,
+    this.nestedInScrollView = false,
   });
 
   @override
@@ -717,22 +719,41 @@ class _ChartEditorState extends State<ChartEditor> {
               ),
             ),
           const SizedBox(height: 12),
-          Expanded(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final availableWidth = constraints.maxWidth;
-                return SingleChildScrollView(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: _grid(
-                      enabled: !linked,
-                      availableWidth: availableWidth,
+          if (widget.nestedInScrollView)
+            SizedBox(
+              height: 280,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final availableWidth = constraints.maxWidth;
+                  return SingleChildScrollView(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: _grid(
+                        enabled: !linked,
+                        availableWidth: availableWidth,
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
+            )
+          else
+            Expanded(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final availableWidth = constraints.maxWidth;
+                  return SingleChildScrollView(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: _grid(
+                        enabled: !linked,
+                        availableWidth: availableWidth,
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
           if (!linked) ...[
             const SizedBox(height: 8),
             Row(

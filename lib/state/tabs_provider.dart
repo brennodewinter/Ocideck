@@ -7,6 +7,7 @@ import 'package:uuid/uuid.dart';
 import '../services/file_service.dart';
 import '../services/markdown_service.dart';
 import '../services/recovery_service.dart';
+import '../services/user_notes_codec.dart';
 import 'deck_provider.dart';
 import 'editor_provider.dart';
 import 'settings_provider.dart';
@@ -141,6 +142,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     for (final tab in state.tabs) {
       final st = tab.deckNotifier.currentState;
       if (st.isOpen && st.isDirty) {
+        final deck = st.deck!;
         _recovery.save(
           RecoverySnapshot(
             id: tab.recoveryId,
@@ -148,6 +150,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
             filePath: st.filePath,
             label: tab.label,
             markdown: tab.deckNotifier.generateMarkdown(),
+            userNotes: UserNotesCodec.encode(deck.slides, deck.userNotes),
           ),
         );
       }
@@ -159,9 +162,15 @@ class TabsNotifier extends StateNotifier<TabsState> {
   void restoreRecovered(List<RecoverySnapshot> snapshots) {
     final restored = <TabInfo>[];
     for (final snap in snapshots) {
-      final deck = _md.parseDeck(snap.markdown, filePath: snap.filePath);
+      var deck = _md.parseDeck(snap.markdown, filePath: snap.filePath);
       _recovery.discard(snap.id); // oude sleutel; tab krijgt een nieuwe
       if (deck == null) continue;
+      if (snap.userNotes != null && snap.userNotes!.isNotEmpty) {
+        final notes = UserNotesCodec.decode(snap.userNotes!, deck.slides);
+        if (notes.isNotEmpty) {
+          deck = deck.copyWith(userNotes: notes);
+        }
+      }
       final tab = _createTab();
       tab.deckNotifier.loadDeck(deck, filePath: snap.filePath);
       tab.deckNotifier.markDirty(); // herstelde inhoud is nog niet opgeslagen
@@ -257,7 +266,9 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// Importeer een `.ocideck`-pakket (zip) en open het in een tab.
   Future<bool> importPackageFile(String zipPath, {String? homeDir}) async {
     final dest = await _importDestDir(homeDir);
-    final bytes = await File(zipPath).readAsBytes();
+    final file = File(zipPath);
+    if (await file.length() > FileService.maxPackageBytes) return false;
+    final bytes = await file.readAsBytes();
     final mdPath = await _file.importPackageBytes(bytes, dest);
     if (mdPath == null) return false;
     await openFileByPath(mdPath);

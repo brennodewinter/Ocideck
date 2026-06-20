@@ -12,6 +12,7 @@ class BulletsImageEditor extends StatefulWidget {
   final ImageService imageService;
   final List<String> searchPaths;
   final String? captionBasePath;
+  final bool nestedInScrollView;
 
   const BulletsImageEditor({
     super.key,
@@ -20,6 +21,7 @@ class BulletsImageEditor extends StatefulWidget {
     required this.imageService,
     this.searchPaths = const [],
     this.captionBasePath,
+    this.nestedInScrollView = false,
   });
 
   @override
@@ -180,14 +182,18 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   }
 
   Future<void> _pasteImage() async {
-    final path = await widget.imageService.pasteImage();
+    final path = await widget.imageService.pasteImage(
+      projectPath: widget.captionBasePath,
+    );
     if (path != null) {
       widget.onUpdate(widget.slide.copyWith(imagePath: path, imageCaption: ''));
     }
   }
 
   Future<void> _pickImage() async {
-    final path = await widget.imageService.pickImage();
+    final path = await widget.imageService.pickImage(
+      projectPath: widget.captionBasePath,
+    );
     if (path != null) {
       widget.onUpdate(widget.slide.copyWith(imagePath: path, imageCaption: ''));
     }
@@ -210,8 +216,8 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
     final l10n = context.l10n;
     final imagePath = widget.slide.imagePath;
 
-    return ListView(
-      padding: const EdgeInsets.all(16),
+    return editorScrollList(
+      nestedInScrollView: widget.nestedInScrollView,
       children: [
         EditorField(label: 'Titel', controller: _title, hint: 'Slide titel'),
         const SizedBox(height: 16),

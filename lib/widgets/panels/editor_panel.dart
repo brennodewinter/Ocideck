@@ -25,6 +25,7 @@ import '../editors/two_images_editor.dart';
 import '../editors/video_slide_editor.dart';
 import '../panels/slide_quality_panel.dart';
 import '../editors/markdown_deck_editor.dart';
+import '../markdown_notes_editor.dart';
 
 class EditorPanel extends ConsumerWidget {
   const EditorPanel({super.key});
@@ -92,28 +93,26 @@ class EditorPanel extends ConsumerWidget {
                 deckNotifier.updateThemeProfile(settings.themeProfile),
           ),
           const Divider(height: 1),
-          const SlideQualityPanel(),
-          const Divider(height: 1),
-
-          // ── Slide editor body ────────────────────────────────────────────
           Expanded(
-            child: Column(
+            child: ListView(
+              padding: EdgeInsets.zero,
               children: [
-                Expanded(
-                  child: _buildEditor(
-                    slide,
-                    update,
-                    imgService,
-                    searchPaths,
-                    deck.projectPath,
-                    (variants) {
-                      final first = deckNotifier.insertSlides(
-                        variants,
-                        afterIndex: idx,
-                      );
-                      if (first >= 0) editorNotifier.select(first);
-                    },
-                  ),
+                const SlideQualityPanel(),
+                const Divider(height: 1),
+                _buildEditor(
+                  slide,
+                  update,
+                  imgService,
+                  searchPaths,
+                  deck.projectPath,
+                  (variants) {
+                    final first = deckNotifier.insertSlides(
+                      variants,
+                      afterIndex: idx,
+                    );
+                    if (first >= 0) editorNotifier.select(first);
+                  },
+                  nestedInScrollView: true,
                 ),
                 if (slide.type != SlideType.video) ...[
                   const Divider(height: 1),
@@ -124,6 +123,7 @@ class EditorPanel extends ConsumerWidget {
                       slide: slide,
                       imageService: imgService,
                       onUpdate: update,
+                      projectPath: deck.projectPath,
                     ),
                   ),
                 ],
@@ -142,6 +142,13 @@ class EditorPanel extends ConsumerWidget {
                 _SlideTlpControl(slide: slide, onUpdate: update),
                 const Divider(height: 1),
                 _NotesField(slide: slide, onUpdate: update),
+                const Divider(height: 1),
+                _UserNotesField(
+                  slide: slide,
+                  note: deck.userNotes[slide.id] ?? '',
+                  onChanged: (text) =>
+                      deckNotifier.setUserNoteForSlide(slide.id, text),
+                ),
               ],
             ),
           ),
@@ -210,8 +217,9 @@ class EditorPanel extends ConsumerWidget {
     ImageService imgService,
     List<String> searchPaths,
     String? captionBasePath,
-    ValueChanged<List<Slide>> onAddChartVariants,
-  ) {
+    ValueChanged<List<Slide>> onAddChartVariants, {
+    bool nestedInScrollView = false,
+  }) {
     switch (slide.type) {
       case SlideType.title:
         return TitleEditor(
@@ -220,24 +228,28 @@ class EditorPanel extends ConsumerWidget {
           onUpdate: onUpdate,
           searchPaths: searchPaths,
           captionBasePath: captionBasePath,
+          nestedInScrollView: nestedInScrollView,
         );
       case SlideType.section:
         return SectionEditor(
           key: ValueKey(slide.id),
           slide: slide,
           onUpdate: onUpdate,
+          nestedInScrollView: nestedInScrollView,
         );
       case SlideType.bullets:
         return BulletsEditor(
           key: ValueKey(slide.id),
           slide: slide,
           onUpdate: onUpdate,
+          nestedInScrollView: nestedInScrollView,
         );
       case SlideType.twoBullets:
         return TwoBulletsEditor(
           key: ValueKey(slide.id),
           slide: slide,
           onUpdate: onUpdate,
+          nestedInScrollView: nestedInScrollView,
         );
       case SlideType.bulletsImage:
         return BulletsImageEditor(
@@ -247,6 +259,7 @@ class EditorPanel extends ConsumerWidget {
           imageService: imgService,
           searchPaths: searchPaths,
           captionBasePath: captionBasePath,
+          nestedInScrollView: nestedInScrollView,
         );
       case SlideType.twoImages:
         return TwoImagesEditor(
@@ -255,6 +268,7 @@ class EditorPanel extends ConsumerWidget {
           onUpdate: onUpdate,
           searchPaths: searchPaths,
           captionBasePath: captionBasePath,
+          nestedInScrollView: nestedInScrollView,
         );
       case SlideType.image:
         return ImageSlideEditor(
@@ -264,6 +278,7 @@ class EditorPanel extends ConsumerWidget {
           imageService: imgService,
           searchPaths: searchPaths,
           captionBasePath: captionBasePath,
+          nestedInScrollView: nestedInScrollView,
         );
       case SlideType.video:
         return VideoSlideEditor(
@@ -271,6 +286,8 @@ class EditorPanel extends ConsumerWidget {
           slide: slide,
           onUpdate: onUpdate,
           imageService: imgService,
+          projectPath: captionBasePath,
+          nestedInScrollView: nestedInScrollView,
         );
       case SlideType.quote:
         return QuoteEditor(
@@ -279,24 +296,28 @@ class EditorPanel extends ConsumerWidget {
           onUpdate: onUpdate,
           searchPaths: searchPaths,
           captionBasePath: captionBasePath,
+          nestedInScrollView: nestedInScrollView,
         );
       case SlideType.table:
         return TableEditor(
           key: ValueKey(slide.id),
           slide: slide,
           onUpdate: onUpdate,
+          nestedInScrollView: nestedInScrollView,
         );
       case SlideType.freeMarkdown:
         return FreeMarkdownEditor(
           key: ValueKey(slide.id),
           slide: slide,
           onUpdate: onUpdate,
+          nestedInScrollView: nestedInScrollView,
         );
       case SlideType.code:
         return CodeEditor(
           key: ValueKey(slide.id),
           slide: slide,
           onUpdate: onUpdate,
+          nestedInScrollView: nestedInScrollView,
         );
       case SlideType.chart:
         return ChartEditor(
@@ -305,6 +326,7 @@ class EditorPanel extends ConsumerWidget {
           onUpdate: onUpdate,
           onAddVariants: onAddChartVariants,
           projectPath: captionBasePath,
+          nestedInScrollView: nestedInScrollView,
         );
     }
   }
@@ -740,6 +762,9 @@ class _SlideTlpControl extends StatelessWidget {
 
 // ── Speakernotes veld ─────────────────────────────────────────────────────────
 
+double _notesEditorHeight(BuildContext context) =>
+    (MediaQuery.sizeOf(context).height * 0.28).clamp(240.0, 420.0);
+
 class _NotesField extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
@@ -782,7 +807,7 @@ class _NotesFieldState extends State<_NotesField> {
     final l10n = context.l10n;
     return Container(
       color: const Color(0xFFFFFBEB),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -792,24 +817,178 @@ class _NotesFieldState extends State<_NotesField> {
           ),
           const SizedBox(width: 8),
           Expanded(
-            child: TextField(
-              controller: _ctrl,
-              maxLines: 3,
-              minLines: 1,
-              style: const TextStyle(fontSize: 12),
-              decoration: InputDecoration(
-                hintText: l10n.d('Sprekersnotities...'),
-                hintStyle: const TextStyle(
+            child: SizedBox(
+              height: _notesEditorHeight(context),
+              child: MarkdownNotesEditor.legacy(
+                key: ValueKey('speaker-notes-${widget.slide.id}'),
+                controller: _ctrl,
+                expand: true,
+                baseStyle: const TextStyle(
                   fontSize: 12,
-                  color: Color(0xFFD97706),
+                  color: Color(0xFF78350F),
+                  height: 1.45,
                 ),
-                border: InputBorder.none,
-                isDense: true,
-                contentPadding: const EdgeInsets.symmetric(vertical: 8),
+                linkColor: const Color(0xFFB45309),
+                codeBackground: const Color(0xFFFFF7ED),
+                hintText: l10n.d('Sprekersnotities...'),
+                minLines: 10,
+                contentPadding: const EdgeInsets.all(10),
+                inputDecoration: InputDecoration(
+                  hintText: l10n.d('Sprekersnotities...'),
+                  hintStyle: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFFD97706),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Color(0xFFFCD34D)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Color(0xFFFCD34D)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Color(0xFFF59E0B)),
+                  ),
+                  isDense: true,
+                  contentPadding: const EdgeInsets.all(10),
+                ),
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+// ── Gebruikersnotities veld ────────────────────────────────────────────────────
+
+class _UserNotesField extends StatefulWidget {
+  final Slide slide;
+  final String note;
+  final ValueChanged<String> onChanged;
+
+  const _UserNotesField({
+    required this.slide,
+    required this.note,
+    required this.onChanged,
+  });
+
+  @override
+  State<_UserNotesField> createState() => _UserNotesFieldState();
+}
+
+class _UserNotesFieldState extends State<_UserNotesField> {
+  late final TextEditingController _ctrl;
+  bool _expanded = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = TextEditingController(text: widget.note);
+    _ctrl.addListener(_emit);
+  }
+
+  @override
+  void didUpdateWidget(_UserNotesField old) {
+    super.didUpdateWidget(old);
+    if (old.slide.id != widget.slide.id || old.note != widget.note) {
+      _ctrl.removeListener(_emit);
+      _ctrl.text = widget.note;
+      _ctrl.addListener(_emit);
+    }
+  }
+
+  void _emit() => widget.onChanged(_ctrl.text);
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Material(
+      color: const Color(0xFFEFF6FF),
+      child: Theme(
+        data: Theme.of(context).copyWith(dividerColor: const Color(0xFFBFDBFE)),
+        child: ExpansionTile(
+          initiallyExpanded: _expanded,
+          onExpansionChanged: (open) => setState(() => _expanded = open),
+          tilePadding: const EdgeInsets.symmetric(horizontal: 12),
+          childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+          leading: const Icon(
+            Icons.edit_note_outlined,
+            size: 18,
+            color: Color(0xFF2563EB),
+          ),
+          title: Text(
+            l10n.d('Gebruikersnotities'),
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF1D4ED8),
+            ),
+          ),
+          subtitle: widget.note.trim().isEmpty
+              ? Text(
+                  l10n.d('Notities voor de ontvanger tijdens een cursus'),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Color(0xFF60A5FA),
+                  ),
+                )
+              : null,
+          children: [
+            SizedBox(
+              height: _notesEditorHeight(context),
+              child: MarkdownNotesEditor.legacy(
+                key: ValueKey('user-notes-${widget.slide.id}'),
+                controller: _ctrl,
+                expand: true,
+                baseStyle: const TextStyle(
+                  fontSize: 12,
+                  color: Color(0xFF1E3A8A),
+                  height: 1.45,
+                ),
+                linkColor: const Color(0xFF2563EB),
+                codeBackground: const Color(0xFFEFF6FF),
+                hintText: l10n.d('Gebruikersnotities voor deze slide...'),
+                minLines: 10,
+                contentPadding: const EdgeInsets.all(10),
+                inputDecoration: InputDecoration(
+                  hintText: l10n.d('Gebruikersnotities voor deze slide...'),
+                  hintStyle: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF93C5FD),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Color(0xFFBFDBFE)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Color(0xFFBFDBFE)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(color: Color(0xFF3B82F6)),
+                  ),
+                  isDense: true,
+                  contentPadding: const EdgeInsets.all(10),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

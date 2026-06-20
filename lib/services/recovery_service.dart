@@ -14,12 +14,16 @@ class RecoverySnapshot {
   final String label;
   final String markdown;
 
+  /// JSON payload from [UserNotesCodec.encode], when the deck has user notes.
+  final String? userNotes;
+
   const RecoverySnapshot({
     required this.id,
     required this.savedAt,
     required this.filePath,
     required this.label,
     required this.markdown,
+    this.userNotes,
   });
 
   Map<String, Object?> toJson() => {
@@ -28,6 +32,7 @@ class RecoverySnapshot {
     'filePath': filePath,
     'label': label,
     'markdown': markdown,
+    if (userNotes != null) 'userNotes': userNotes,
   };
 
   static RecoverySnapshot fromJson(Map<String, Object?> json) {
@@ -38,6 +43,7 @@ class RecoverySnapshot {
       filePath: json['filePath'] as String?,
       label: (json['label'] as String?) ?? 'Presentatie',
       markdown: (json['markdown'] as String?) ?? '',
+      userNotes: json['userNotes'] as String?,
     );
   }
 }

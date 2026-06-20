@@ -11,7 +11,9 @@ import '../models/settings.dart';
 import '../models/chart.dart';
 import '../models/slide.dart';
 import '../utils/log.dart';
+import '../utils/project_path.dart';
 import 'annotation_codec.dart';
+import 'user_notes_codec.dart';
 import 'caption_service.dart';
 import 'image_service.dart';
 import 'markdown_service.dart';
@@ -64,19 +66,6 @@ class FileService {
   /// applies the current profile whenever a deck is opened.
   ThemeProfile activeProfileFor({String? projectPath}) =>
       resolveThemeProfile(_themeProfile(), projectPath: projectPath);
-
-  /// Resolve a project-relative [path] to an absolute path strictly inside
-  /// [projectPath], or null for absolute paths or `../` escapes. Used for file
-  /// references an untrusted deck controls (e.g. a chart's linked CSV) so it
-  /// can't read arbitrary files outside its own folder.
-  static String? _projectFile(String? projectPath, String path) {
-    if (projectPath == null || path.trim().isEmpty || p.isAbsolute(path)) {
-      return null;
-    }
-    final abs = p.normalize(p.join(projectPath, path));
-    if (abs != projectPath && !p.isWithin(projectPath, abs)) return null;
-    return abs;
-  }
 
   ThemeProfile resolveThemeProfile(
     ThemeProfile profile, {
@@ -198,8 +187,8 @@ class FileService {
     final deck = parsed.copyWith(
       themeProfile: activeProfileFor(projectPath: parsed.projectPath),
     );
-    final hydrated = await _hydrateCharts(await _hydrateImageCaptions(deck));
-    // Re-attach the separate annotation layer from its sidecar, if present.
+    var hydrated = await _hydrateCharts(await _hydrateImageCaptions(deck));
+    // Re-attach separate sidecar layers when reading from disk.
     if (content == null) {
       final sidecar = File(_sidecarPath(filePath));
       if (await sidecar.exists()) {
@@ -208,10 +197,22 @@ class FileService {
             await sidecar.readAsString(),
             hydrated.slides,
           );
-          if (map.isNotEmpty) return hydrated.copyWith(annotations: map);
+          if (map.isNotEmpty) hydrated = hydrated.copyWith(annotations: map);
         } catch (e) {
           // A broken sidecar must never block opening the deck.
           logWarning('FileService.openDeck: annotation sidecar unreadable', e);
+        }
+      }
+      final userNotesSidecar = File(_userNotesSidecarPath(filePath));
+      if (await userNotesSidecar.exists()) {
+        try {
+          final map = UserNotesCodec.decode(
+            await userNotesSidecar.readAsString(),
+            hydrated.slides,
+          );
+          if (map.isNotEmpty) hydrated = hydrated.copyWith(userNotes: map);
+        } catch (e) {
+          logWarning('FileService.openDeck: user-notes sidecar unreadable', e);
         }
       }
     }
@@ -225,6 +226,21 @@ class FileService {
   Future<void> _writeSidecar(Deck deck, String filePath) async {
     final sidecar = File(_sidecarPath(filePath));
     final json = AnnotationCodec.encode(deck.slides, deck.annotations);
+    if (json == null) {
+      if (await sidecar.exists()) await sidecar.delete();
+    } else {
+      await sidecar.writeAsString(json, flush: true);
+    }
+  }
+
+  /// Path of the user-notes sidecar next to a deck `<name>.md`.
+  String _userNotesSidecarPath(String mdPath) =>
+      p.setExtension(mdPath, '.user-notes.json');
+
+  /// Write the user-notes sidecar next to [filePath], or remove it when empty.
+  Future<void> _writeUserNotesSidecar(Deck deck, String filePath) async {
+    final sidecar = File(_userNotesSidecarPath(filePath));
+    final json = UserNotesCodec.encode(deck.slides, deck.userNotes);
     if (json == null) {
       if (await sidecar.exists()) await sidecar.delete();
     } else {
@@ -251,7 +267,7 @@ class FileService {
       }
       // A chart's CSV link must stay inside the project (no absolute paths or
       // `../` escapes) — otherwise an untrusted deck could read arbitrary files.
-      final abs = _projectFile(deck.projectPath, spec.source!);
+      final abs = resolveProjectRelative(deck.projectPath, spec.source!);
       final file = abs == null ? null : File(abs);
       if (file == null || !await file.exists()) {
         slides.add(s);
@@ -352,7 +368,7 @@ class FileService {
         abs = path;
       } else if (deck.projectPath != null) {
         // A relative asset must not escape the project via `../`.
-        final resolved = _projectFile(deck.projectPath, path);
+        final resolved = resolveProjectRelative(deck.projectPath, path);
         if (resolved == null) return null;
         abs = resolved;
       } else {
@@ -414,6 +430,21 @@ class FileService {
       );
     }
 
+    final userNotes = UserNotesCodec.encode(
+      packDeck.slides,
+      packDeck.userNotes,
+    );
+    if (userNotes != null) {
+      final userNotesBytes = utf8.encode(userNotes);
+      archive.add(
+        ArchiveFile(
+          '${_safeName(deck.title)}.user-notes.json',
+          userNotesBytes.length,
+          userNotesBytes,
+        ),
+      );
+    }
+
     // Thema-CSS (zodat het pakket ook in Marp/CLI bruikbaar is).
     final css = await _packageThemeCss(packDeck.theme, profile, logoRel);
     if (css != null) {
@@ -451,17 +482,32 @@ class FileService {
     }
   }
 
+  /// Cap on how much we download / extract, to bound memory and disk use.
+  static const maxPackageBytes = 64 * 1024 * 1024; // 64 MB
+  static const maxPackageEntries = 10000;
+  static const maxZipEntryPathLength = 512;
+
   /// Pak een pakket uit in een nieuwe submap onder [destParentDir]. Geeft het
   /// pad naar het uitgepakte markdown-bestand terug (om in een tab te openen).
   Future<String?> importPackageBytes(
     List<int> zipBytes,
     String destParentDir,
   ) async {
+    if (zipBytes.length > maxPackageBytes) return null;
+
     final Archive archive;
     try {
       archive = ZipDecoder().decodeBytes(zipBytes);
     } catch (e, s) {
       logError('FileService.importPackageBytes: ZIP decode failed', e, s);
+      return null;
+    }
+
+    if (archive.files.length > maxPackageEntries) {
+      logWarning(
+        'FileService.importPackageBytes: too many archive entries '
+        '(${archive.files.length})',
+      );
       return null;
     }
 
@@ -493,12 +539,18 @@ class FileService {
     var extracted = 0;
     for (final f in archive.files) {
       if (!f.isFile) continue;
+      if (f.name.length > maxZipEntryPathLength) continue;
       final outPath = safeOutPath(f.name);
       if (outPath == null) continue; // skip path-traversal entries
       final content = f.content as List<int>;
       // Bound total extracted size so a small zip can't fill the disk (zip bomb).
       extracted += content.length;
-      if (extracted > _maxDownloadBytes) break;
+      if (extracted > maxPackageBytes) {
+        logWarning(
+          'FileService.importPackageBytes: decompressed size exceeds limit',
+        );
+        return null;
+      }
       final out = File(outPath);
       await out.parent.create(recursive: true);
       await out.writeAsBytes(content, flush: true);
@@ -522,8 +574,6 @@ class FileService {
   /// Download een presentatie vanaf [url]. Een zip-pakket wordt uitgepakt;
   /// platte markdown wordt als losse `.md` opgeslagen. Geeft het pad naar het
   /// markdown-bestand terug.
-  /// Cap on how much we download / extract, to bound memory and disk use.
-  static const _maxDownloadBytes = 64 * 1024 * 1024; // 64 MB
 
   /// Hosts an import must never reach (loopback, private and link-local ranges)
   /// so a deck URL can't be used to probe the local machine or intranet (SSRF).
@@ -569,11 +619,11 @@ class FileService {
           const Duration(seconds: 30),
         );
         if (response.statusCode != 200) return null;
-        if (response.contentLength > _maxDownloadBytes) return null;
+        if (response.contentLength > maxPackageBytes) return null;
         final builder = BytesBuilder(copy: false);
         await for (final chunk in response) {
           builder.add(chunk);
-          if (builder.length > _maxDownloadBytes) return null; // runaway body
+          if (builder.length > maxPackageBytes) return null; // runaway body
         }
         bytes = builder.takeBytes();
       } finally {
@@ -660,8 +710,9 @@ class FileService {
 
     final markdown = _md.generateDeck(updatedDeck);
     await File(filePath).writeAsString(markdown);
-    // Annotations live in a separate sidecar so the Marp .md stays pure.
+    // Annotations and user notes live in separate sidecars so the .md stays pure.
     await _writeSidecar(updatedDeck, filePath);
+    await _writeUserNotesSidecar(updatedDeck, filePath);
     return updatedDeck;
   }
 

@@ -9,6 +9,7 @@ class ImageSlideEditor extends StatefulWidget {
   final ImageService imageService;
   final List<String> searchPaths;
   final String? captionBasePath;
+  final bool nestedInScrollView;
 
   const ImageSlideEditor({
     super.key,
@@ -17,6 +18,7 @@ class ImageSlideEditor extends StatefulWidget {
     required this.imageService,
     this.searchPaths = const [],
     this.captionBasePath,
+    this.nestedInScrollView = false,
   });
 
   @override
@@ -47,14 +49,18 @@ class _ImageSlideEditorState extends State<ImageSlideEditor> {
   }
 
   Future<void> _pasteImage() async {
-    final path = await widget.imageService.pasteImage();
+    final path = await widget.imageService.pasteImage(
+      projectPath: widget.captionBasePath,
+    );
     if (path != null) {
       _setImage(path);
     }
   }
 
   Future<void> _pickImage() async {
-    final path = await widget.imageService.pickImage();
+    final path = await widget.imageService.pickImage(
+      projectPath: widget.captionBasePath,
+    );
     if (path != null) {
       _setImage(path);
     }
@@ -68,8 +74,8 @@ class _ImageSlideEditorState extends State<ImageSlideEditor> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(16),
+    return editorScrollList(
+      nestedInScrollView: widget.nestedInScrollView,
       children: [
         const SectionLabel('Achtergrondafbeelding'),
         ImagePickerBar(

@@ -85,11 +85,13 @@ class AppTheme {
       ).textTheme.apply(bodyColor: text, displayColor: text),
       appBarTheme: AppBarTheme(
         backgroundColor: primary,
-        foregroundColor: scheme.onPrimary,
+        foregroundColor: panelText,
         elevation: 0,
         centerTitle: false,
+        iconTheme: IconThemeData(color: panelText),
+        actionsIconTheme: IconThemeData(color: panelText),
         titleTextStyle: TextStyle(
-          color: scheme.onPrimary,
+          color: panelText,
           fontSize: 16,
           fontWeight: FontWeight.w600,
           letterSpacing: 0.5,
@@ -135,9 +137,6 @@ class AppTheme {
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(foregroundColor: primary),
-      ),
-      iconButtonTheme: IconButtonThemeData(
-        style: IconButton.styleFrom(foregroundColor: text),
       ),
       extensions: [
         AppPalette(panel: panel, panelText: panelText, mutedText: muted),

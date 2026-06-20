@@ -14,12 +14,13 @@ class DescriptionService {
   static const _sidecar = '.ocideck_descriptions.json';
 
   Future<String?> getDescription(String imagePath) async {
-    if (imagePath.isEmpty) return null;
-    final file = _sidecarFile(imagePath);
+    final resolvedPath = _resolveSidecarImagePath(imagePath);
+    if (resolvedPath == null) return null;
+    final file = _sidecarFile(resolvedPath);
     if (!file.existsSync()) return null;
     try {
       final data = jsonDecode(await file.readAsString()) as Map;
-      final value = data[p.basename(imagePath)];
+      final value = data[p.basename(resolvedPath)];
       return value is String ? value : null;
     } catch (e) {
       logWarning(
@@ -31,8 +32,9 @@ class DescriptionService {
   }
 
   Future<void> saveDescription(String imagePath, String description) async {
-    if (imagePath.isEmpty) return;
-    final file = _sidecarFile(imagePath);
+    final resolvedPath = _resolveSidecarImagePath(imagePath);
+    if (resolvedPath == null) return;
+    final file = _sidecarFile(resolvedPath);
     Map<String, dynamic> data = {};
     if (file.existsSync()) {
       try {
@@ -47,7 +49,7 @@ class DescriptionService {
         );
       }
     }
-    final key = p.basename(imagePath);
+    final key = p.basename(resolvedPath);
     if (description.trim().isEmpty) {
       data.remove(key);
     } else {
@@ -71,7 +73,11 @@ class DescriptionService {
   /// Returns a map of absolute image path → description. Each sidecar is read
   /// once, so this stays cheap even for thousands of images.
   Future<Map<String, String>> loadFor(Iterable<String> imagePaths) async {
-    final dirs = <String>{for (final path in imagePaths) p.dirname(path)};
+    final dirs = <String>{};
+    for (final path in imagePaths) {
+      final resolved = _resolveSidecarImagePath(path);
+      if (resolved != null) dirs.add(p.dirname(resolved));
+    }
     final result = <String, String>{};
     for (final dir in dirs) {
       final file = File(p.join(dir, _sidecar));
@@ -88,6 +94,17 @@ class DescriptionService {
       }
     }
     return result;
+  }
+
+  /// Normalize and reject paths that escape via `../` after normalization.
+  String? _resolveSidecarImagePath(String imagePath) {
+    if (imagePath.trim().isEmpty || !p.isAbsolute(imagePath)) return null;
+    final normalized = p.normalize(imagePath);
+    if (normalized.contains('..${p.separator}') ||
+        normalized.endsWith('..')) {
+      return null;
+    }
+    return normalized;
   }
 
   File _sidecarFile(String imagePath) {

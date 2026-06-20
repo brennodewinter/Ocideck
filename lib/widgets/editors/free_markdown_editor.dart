@@ -5,11 +5,13 @@ import '../../l10n/app_localizations.dart';
 class FreeMarkdownEditor extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
+  final bool nestedInScrollView;
 
   const FreeMarkdownEditor({
     super.key,
     required this.slide,
     required this.onUpdate,
+    this.nestedInScrollView = false,
   });
 
   @override
@@ -39,6 +41,19 @@ class _FreeMarkdownEditorState extends State<FreeMarkdownEditor> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final field = TextField(
+      controller: _ctrl,
+      maxLines: widget.nestedInScrollView ? 16 : null,
+      minLines: widget.nestedInScrollView ? 8 : null,
+      expands: !widget.nestedInScrollView,
+      textAlignVertical: TextAlignVertical.top,
+      style: const TextStyle(fontFamily: 'monospace', fontSize: 13),
+      decoration: InputDecoration(
+        hintText: l10n.d('# Slide\n\nInhoud hier...'),
+        alignLabelWithHint: true,
+      ),
+    );
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -53,19 +68,7 @@ class _FreeMarkdownEditorState extends State<FreeMarkdownEditor> {
             ),
           ),
           const SizedBox(height: 6),
-          Expanded(
-            child: TextField(
-              controller: _ctrl,
-              maxLines: null,
-              expands: true,
-              textAlignVertical: TextAlignVertical.top,
-              style: const TextStyle(fontFamily: 'monospace', fontSize: 13),
-              decoration: InputDecoration(
-                hintText: l10n.d('# Slide\n\nInhoud hier...'),
-                alignLabelWithHint: true,
-              ),
-            ),
-          ),
+          if (widget.nestedInScrollView) field else Expanded(child: field),
         ],
       ),
     );

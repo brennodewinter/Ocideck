@@ -9,6 +9,7 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/user_notes_codec.dart';
 import 'package:path/path.dart' as p;
 
 void main() {
@@ -96,6 +97,66 @@ void main() {
     },
   );
 
+  test('importPackageBytes rejects archives with too many entries', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_zip_entries_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+
+    final archive = Archive();
+    final md = utf8.encode('---\nmarp: true\n---\n# Hi');
+    archive.addFile(ArchiveFile('deck.md', md.length, md));
+    for (var i = 0; i < FileService.maxPackageEntries; i++) {
+      archive.addFile(ArchiveFile('extra/$i.txt', 1, [0]));
+    }
+    final zipBytes = ZipEncoder().encode(archive);
+
+    final service = FileService(
+      MarkdownService(),
+      ImageService(),
+      () => const ThemeProfile(),
+    );
+    expect(await service.importPackageBytes(zipBytes, temp.path), isNull);
+  });
+
+  test('importPackageBytes rejects oversized compressed input', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_zip_size_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+
+    final service = FileService(
+      MarkdownService(),
+      ImageService(),
+      () => const ThemeProfile(),
+    );
+    final oversized = List<int>.filled(FileService.maxPackageBytes + 1, 0);
+    expect(await service.importPackageBytes(oversized, temp.path), isNull);
+  });
+
+  test('importPackageBytes aborts when decompressed size exceeds limit', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_zip_bomb_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+
+    final archive = Archive();
+    final md = utf8.encode('---\nmarp: true\n---\n# Hi');
+    archive.addFile(ArchiveFile('deck.md', md.length, md));
+    final huge = List<int>.filled(FileService.maxPackageBytes + 1, 0);
+    archive.addFile(ArchiveFile('images/huge.bin', huge.length, huge));
+
+    final service = FileService(
+      MarkdownService(),
+      ImageService(),
+      () => const ThemeProfile(),
+    );
+    expect(
+      await service.importPackageBytes(ZipEncoder().encode(archive), temp.path),
+      isNull,
+    );
+  });
+
   test(
     'importFromUrl refuses non-web schemes and private/loopback hosts',
     () async {
@@ -127,4 +188,71 @@ void main() {
       }
     },
   );
+
+  test('saveDeck writes user-notes sidecar and openDeck reloads it', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_user_notes_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+
+    final service = FileService(
+      MarkdownService(),
+      ImageService(),
+      () => const ThemeProfile(),
+    );
+    final slide = Slide.create(
+      SlideType.bullets,
+    ).copyWith(title: 'Slide', notes: 'Spreker alleen');
+    final deck = Deck(
+      title: 'Notes test',
+      slides: [slide],
+      userNotes: {slide.id: 'Cursist notitie'},
+    );
+
+    final mdPath = p.join(temp.path, 'notes_test.md');
+    await service.saveDeck(deck, mdPath);
+
+    final sidecar = File(p.setExtension(mdPath, '.user-notes.json'));
+    expect(await sidecar.exists(), isTrue);
+    final decoded = UserNotesCodec.decode(await sidecar.readAsString(), [
+      slide,
+    ]);
+    expect(decoded.values, contains('Cursist notitie'));
+
+    final markdown = await File(mdPath).readAsString();
+    expect(markdown, contains('Spreker alleen'));
+    expect(markdown, isNot(contains('Cursist notitie')));
+
+    final reopened = await service.openDeck(mdPath);
+    expect(reopened, isNotNull);
+    expect(reopened!.slides.single.notes, 'Spreker alleen');
+    expect(reopened.userNotes.length, 1);
+    expect(reopened.userNotes.values.single, 'Cursist notitie');
+  });
+
+  test('saveDeck removes empty user-notes sidecar', () async {
+    final temp = await Directory.systemTemp.createTemp(
+      'ocideck_user_notes_empty_',
+    );
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+
+    final service = FileService(
+      MarkdownService(),
+      ImageService(),
+      () => const ThemeProfile(),
+    );
+    final mdPath = p.join(temp.path, 'empty_notes.md');
+    final sidecar = File(p.setExtension(mdPath, '.user-notes.json'));
+    await sidecar.writeAsString('{"version":1,"slides":[]}');
+
+    final deck = Deck(
+      title: 'Empty notes',
+      slides: [Slide.create(SlideType.bullets)],
+    );
+    await service.saveDeck(deck, mdPath);
+
+    expect(await sidecar.exists(), isFalse);
+  });
 }

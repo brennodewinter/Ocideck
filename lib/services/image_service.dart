@@ -7,6 +7,7 @@ import 'package:path/path.dart' as p;
 import '../l10n/app_localizations.dart';
 import '../models/slide.dart';
 import '../utils/log.dart';
+import '../utils/project_path.dart';
 
 class ImageService {
   final String Function() _languageCode;
@@ -16,28 +17,34 @@ class ImageService {
 
   String _d(String text) => AppLocalizations.sourceFor(_languageCode(), text);
 
-  Future<String?> pickImage() async {
+  Future<String?> pickImage({String? projectPath}) async {
     final result = await FilePicker.pickFiles(
       type: FileType.image,
       dialogTitle: _d('Kies een afbeelding'),
     );
-    return result?.files.single.path;
+    final path = result?.files.single.path;
+    if (path == null) return null;
+    return _importIntoProject(path, projectPath, subdir: 'images');
   }
 
-  Future<String?> pickVideo() async {
+  Future<String?> pickVideo({String? projectPath}) async {
     final result = await FilePicker.pickFiles(
       type: FileType.video,
       dialogTitle: _d('Kies een video'),
     );
-    return result?.files.single.path;
+    final path = result?.files.single.path;
+    if (path == null) return null;
+    return _importIntoProject(path, projectPath, subdir: 'media');
   }
 
-  Future<String?> pickAudio() async {
+  Future<String?> pickAudio({String? projectPath}) async {
     final result = await FilePicker.pickFiles(
       type: FileType.audio,
       dialogTitle: _d('Kies een audiobestand'),
     );
-    return result?.files.single.path;
+    final path = result?.files.single.path;
+    if (path == null) return null;
+    return _importIntoProject(path, projectPath, subdir: 'media');
   }
 
   /// Schrijf afbeeldings[bytes] naar het systeemklembord. Geeft false terug
@@ -71,10 +78,22 @@ class ImageService {
   /// Read an image from the system clipboard and save it to a temp file.
   /// Returns the absolute path to the temp file, or null if no image is on
   /// the clipboard.
-  Future<String?> pasteImage() async {
+  Future<String?> pasteImage({String? projectPath}) async {
     try {
       final bytes = await Pasteboard.image;
       if (bytes == null) return null;
+      if (projectPath != null && projectPath.isNotEmpty) {
+        final imagesDir = Directory(p.join(projectPath, 'images'));
+        await imagesDir.create(recursive: true);
+        final file = File(
+          p.join(
+            imagesDir.path,
+            'pasted_${DateTime.now().millisecondsSinceEpoch}.png',
+          ),
+        );
+        await file.writeAsBytes(bytes, flush: true);
+        return p.relative(file.path, from: projectPath);
+      }
       final cacheDir = await getTemporaryDirectory();
       final dir = Directory(p.join(cacheDir.path, 'pasted_images'));
       await dir.create(recursive: true);
@@ -86,6 +105,28 @@ class ImageService {
     } on FileSystemException {
       return null;
     }
+  }
+
+  Future<String?> _importIntoProject(
+    String sourcePath,
+    String? projectPath, {
+    required String subdir,
+  }) async {
+    if (projectPath == null || projectPath.isEmpty) return sourcePath;
+    final destDir = Directory(p.join(projectPath, subdir));
+    await destDir.create(recursive: true);
+    final normalized = p.normalize(sourcePath);
+    if (p.isWithin(projectPath, normalized)) {
+      return p.relative(normalized, from: projectPath);
+    }
+    final src = File(sourcePath);
+    if (!await src.exists()) return null;
+    final filename = p.basename(sourcePath);
+    final dest = File(p.join(destDir.path, filename));
+    if (!await dest.exists()) {
+      await src.copy(dest.path);
+    }
+    return '$subdir/$filename';
   }
 
   /// Copy images referenced by absolute path into the project images/ dir
@@ -174,9 +215,6 @@ class ImageService {
 
   /// Resolve a slide image path to an absolute path for display.
   String resolve(String imagePath, String? projectPath) {
-    if (imagePath.isEmpty) return '';
-    if (p.isAbsolute(imagePath)) return imagePath;
-    if (projectPath != null) return p.join(projectPath, imagePath);
-    return imagePath;
+    return resolveEditorAssetPath(imagePath, projectPath) ?? '';
   }
 }

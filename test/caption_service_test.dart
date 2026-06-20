@@ -44,4 +44,33 @@ void main() {
     await service.copyCaption(a, b);
     expect(await service.getCaption(b), 'Gedeeld');
   });
+
+  test('does not write caption sidecar outside project via ../ path', () async {
+    final project = Directory.systemTemp.createTempSync('ocideck_cap_proj');
+    final outside = Directory.systemTemp.createTempSync('ocideck_cap_out');
+    addTearDown(() {
+      if (project.existsSync()) project.deleteSync(recursive: true);
+      if (outside.existsSync()) outside.deleteSync(recursive: true);
+    });
+
+    await service.saveCaption(
+      p.join('..', outside.path, 'photo.png'),
+      'evil',
+      basePath: project.path,
+    );
+
+    expect(
+      File(p.join(outside.path, '.ocideck_captions.json')).existsSync(),
+      isFalse,
+    );
+    expect(await service.getCaption('../secret.png', basePath: project.path), isNull);
+  });
+
+  test('reads caption via project-relative path with basePath', () async {
+    final img = p.join('images', 'photo.png');
+    final abs = p.join(tmp.path, img);
+    await File(abs).parent.create(recursive: true);
+    await service.saveCaption(img, 'Relatief', basePath: tmp.path);
+    expect(await service.getCaption(img, basePath: tmp.path), 'Relatief');
+  });
 }

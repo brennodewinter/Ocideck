@@ -190,6 +190,17 @@ puts the tool away. Drawings are a
 separate layer (never written into the Marp Markdown), mirror live to the beamer,
 and are saved in a `<name>.ink.json` sidecar so they persist with the deck.
 
+### User notes (recipient / course)
+
+Separate from **speaker notes** (the amber field in the editor and the presenter
+sidebar). User notes are for the person following the presentation — for example
+during a course. They are stored in a `<name>.user-notes.json` sidecar, never
+written into the Marp Markdown, and hidden by default while presenting. Press
+`Ctrl/Cmd + N` in the presenter to open a local **My notes** panel on the laptop
+only (never mirrored to the beamer). `Esc` closes the panel before other layers.
+In the visual editor, expand **User notes** below speaker notes to author them
+per slide.
+
 ## Exporting
 
 Export to:
@@ -320,6 +331,26 @@ shown as one Marp Markdown document (the same structure OciDeck writes to disk).
 Use this for bulk edits, copy-paste from another tool, or tweaks that are faster
 in raw text. Switch back with **Apply** (to parse the text back into typed slides)
 or **Cancel** (discard your edits and return to the visual editor).
+
+### Find & replace
+
+Markdown mode has an **in-editor find bar** (IDE-style) that searches the live
+markdown buffer — including front matter, `\n---\n` separators, HTML comments, and
+any text you have not yet applied back to the deck. This is separate from the
+**Find & replace** dialog in visual mode (`Ctrl/Cmd + H`), which searches
+individual slide fields.
+
+- **`Ctrl/Cmd + F`** — open the find bar and focus the search field.
+- **`Ctrl/Cmd + H`** — open the find bar with the replace row visible.
+- **Enter** / **Shift + Enter** (in the find field) — jump to the next or
+  previous match (wraps around).
+- **Esc** — close the find bar.
+
+The bar shows a match counter (`1 / 3`), previous/next buttons, a case-sensitivity
+toggle, **Replace** (current match only), and **Replace all**. Each match is
+selected in the editor so you can jump quickly to a slide title, separator, or
+other section. You can also open find from the **More** menu (⋯) while in
+markdown mode.
 
 ### Syntax check
 

@@ -34,6 +34,24 @@ void main() {
     expect(all.single.label, 'Eerste');
     expect(all.single.markdown, '# Eerste\n');
     expect(all.single.filePath, '/tmp/a.md');
+    expect(all.single.userNotes, isNull);
+  });
+
+  test('save round-trips user notes in snapshot', () async {
+    const notesJson =
+        '{"version":1,"slides":[{"index":0,"fp":"abc","text":"Cursusnotitie"}]}';
+    await service.save(
+      RecoverySnapshot(
+        id: 'notes',
+        savedAt: DateTime(2026, 6, 1),
+        filePath: '/tmp/deck.md',
+        label: 'Met notities',
+        markdown: '# Deck\n',
+        userNotes: notesJson,
+      ),
+    );
+    final all = await service.loadAll();
+    expect(all.single.userNotes, notesJson);
   });
 
   test('loadAll returns newest first', () async {

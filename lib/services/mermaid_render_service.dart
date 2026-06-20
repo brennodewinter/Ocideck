@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../utils/sanitize_svg.dart';
+
 /// Renders Mermaid diagram source to inline SVG for preview, presenter, and
 /// raster export (WYSIWYG). Results are cached by trimmed source text.
 ///
@@ -20,7 +22,6 @@ class MermaidRenderService {
 
   final ValueNotifier<bool> hostNeeded = ValueNotifier(false);
 
-  final Map<String, String> _cache = {};
   WebViewController? _controller;
   bool _bootstrapped = false;
   Completer<void>? _bootstrapCompleter;
@@ -50,10 +51,17 @@ class MermaidRenderService {
 <html>
 <head><meta charset="utf-8"></head>
 <body>
+<script id="mermaid-bundle"></script>
 <script>
-const mermaidSource = $escapedJs;
-eval(mermaidSource);
-mermaid.initialize({startOnLoad:false, theme:'neutral'});
+document.getElementById('mermaid-bundle').textContent = $escapedJs;
+eval(document.getElementById('mermaid-bundle').textContent);
+mermaid.initialize({
+  startOnLoad: false,
+  theme: 'neutral',
+  securityLevel: 'strict',
+  htmlLabels: false,
+  secure: ['securityLevel', 'startOnLoad', 'htmlLabels']
+});
 window.__renderMermaid = async function(source) {
   const id = 'm' + Math.abs(source.split('').reduce((h,c)=>((h<<5)-h+c.charCodeAt(0))|0,0));
   const out = await mermaid.render(id, source);
@@ -83,6 +91,8 @@ window.__renderMermaid = async function(source) {
     return completer.future;
   }
 
+  final Map<String, String> _cache = {};
+
   void _pumpQueue() {
     if (_busy || _queue.isEmpty || _controller == null) return;
     if (!_bootstrapped) {
@@ -101,7 +111,7 @@ window.__renderMermaid = async function(source) {
       final raw = await _controller!.runJavaScriptReturningResult(
         'window.__renderMermaid($encoded)',
       );
-      final svg = _unwrapJsString(raw);
+      final svg = sanitizeMermaidSvg(_unwrapJsString(raw) ?? '');
       if (svg != null && svg.contains('<svg')) {
         _cache[job.source] = svg;
         job.completer.complete(svg);
@@ -172,6 +182,7 @@ class MermaidRenderHost extends StatefulWidget {
 
 class _MermaidRenderHostState extends State<MermaidRenderHost> {
   WebViewController? _controller;
+  var _initialLoadDone = false;
 
   @override
   void initState() {
@@ -185,7 +196,21 @@ class _MermaidRenderHostState extends State<MermaidRenderHost> {
     if (!mounted || _controller != null) return;
     final controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0xFFFFFFFF));
+      ..setBackgroundColor(const Color(0xFFFFFFFF))
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onNavigationRequest: (request) {
+            if (!_initialLoadDone) {
+              _initialLoadDone = true;
+              return NavigationDecision.navigate;
+            }
+            return NavigationDecision.prevent;
+          },
+          onHttpAuthRequest: (request) async {
+            // Deny auth prompts from the offline renderer.
+          },
+        ),
+      );
     setState(() => _controller = controller);
     MermaidRenderService.instance.attachController(controller);
   }

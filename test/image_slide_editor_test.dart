@@ -12,7 +12,7 @@ class _FakeImageService extends ImageService {
   _FakeImageService({this.pastedPath});
 
   @override
-  Future<String?> pasteImage() async => pastedPath;
+  Future<String?> pasteImage({String? projectPath}) async => pastedPath;
 }
 
 Widget _host(

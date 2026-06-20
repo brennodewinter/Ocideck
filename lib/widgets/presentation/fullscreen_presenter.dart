@@ -18,10 +18,12 @@ import '../../services/markdown_service.dart';
 import '../../services/mermaid_render_service.dart';
 import '../../services/rehearsal_controller.dart';
 import '../../utils/log.dart';
+import '../../utils/project_path.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
 import '../slides/inline_markdown.dart';
 import '../slides/slide_preview.dart';
+import '../markdown_notes_editor.dart';
 import 'annotation_overlay.dart';
 import 'audience_window.dart';
 import 'rehearsal_summary.dart';
@@ -79,6 +81,11 @@ class FullscreenPresenter extends StatefulWidget {
   final void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged;
   final ValueChanged<Slide>? onSlideChanged;
 
+  /// Recipient/course notes keyed by [Slide.id]; never shown on the audience
+  /// display unless the presenter toggles the local notes panel (Ctrl+N).
+  final Map<String, String> initialUserNotes;
+  final void Function(Map<String, String>)? onUserNotesChanged;
+
   const FullscreenPresenter({
     super.key,
     required this.slides,
@@ -93,6 +100,8 @@ class FullscreenPresenter extends StatefulWidget {
     this.initialAnnotations = const {},
     this.onAnnotationsChanged,
     this.onSlideChanged,
+    this.initialUserNotes = const {},
+    this.onUserNotesChanged,
   });
 
   /// Entry point used by the app: pick dual-screen mode when a second display is
@@ -111,6 +120,8 @@ class FullscreenPresenter extends StatefulWidget {
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
+    Map<String, String> initialUserNotes = const {},
+    void Function(Map<String, String>)? onUserNotesChanged,
   }) async {
     var displayCount = 0;
     if (supportsDualScreenPresenter) {
@@ -141,6 +152,8 @@ class FullscreenPresenter extends StatefulWidget {
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
         onSlideChanged: onSlideChanged,
+        initialUserNotes: initialUserNotes,
+        onUserNotesChanged: onUserNotesChanged,
       );
     } else {
       await show(
@@ -156,6 +169,8 @@ class FullscreenPresenter extends StatefulWidget {
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
         onSlideChanged: onSlideChanged,
+        initialUserNotes: initialUserNotes,
+        onUserNotesChanged: onUserNotesChanged,
       );
     }
   }
@@ -173,6 +188,8 @@ class FullscreenPresenter extends StatefulWidget {
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
+    Map<String, String> initialUserNotes = const {},
+    void Function(Map<String, String>)? onUserNotesChanged,
   }) async {
     final hadWakeLock = await _wakeLockEnabled();
     await _enableWakeLock();
@@ -195,6 +212,8 @@ class FullscreenPresenter extends StatefulWidget {
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
               onSlideChanged: onSlideChanged,
+              initialUserNotes: initialUserNotes,
+              onUserNotesChanged: onUserNotesChanged,
             ),
             transitionsBuilder: (context, animation, secondary, child) =>
                 FadeTransition(opacity: animation, child: child),
@@ -224,6 +243,8 @@ class FullscreenPresenter extends StatefulWidget {
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
+    Map<String, String> initialUserNotes = const {},
+    void Function(Map<String, String>)? onUserNotesChanged,
   }) async {
     // A self-contained markdown deck is the payload for the audience window; it
     // carries the slides, the style profile and the TLP level in one string.
@@ -292,6 +313,8 @@ class FullscreenPresenter extends StatefulWidget {
           annotations: annotations,
           onAnnotationsChanged: onAnnotationsChanged,
           onSlideChanged: onSlideChanged,
+          initialUserNotes: initialUserNotes,
+          onUserNotesChanged: onUserNotesChanged,
         );
       }
       return;
@@ -317,6 +340,8 @@ class FullscreenPresenter extends StatefulWidget {
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
               onSlideChanged: onSlideChanged,
+              initialUserNotes: initialUserNotes,
+              onUserNotesChanged: onUserNotesChanged,
             ),
             transitionsBuilder: (context, animation, secondary, child) =>
                 FadeTransition(opacity: animation, child: child),
@@ -424,6 +449,13 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// Sneltoets-overzicht (cheatsheet) zichtbaar.
   bool _helpOpen = false;
 
+  /// Gebruikersnotities-paneel (ontvanger/cursist); standaard uit.
+  bool _userNotesMode = false;
+  NotesEditorMode _userNotesEditorMode = NotesEditorMode.visual;
+  late Map<String, String> _userNotes;
+  TextEditingController? _userNoteCtrl;
+  late final FocusNode _userNotesFocusNode;
+
   /// Live tabelbewerking op een tabeldia (toets E).
   bool _tableEditMode = false;
   int? _tableEditRow;
@@ -480,10 +512,12 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _index = widget.initialIndex;
     _rehearsal = RehearsalController(target: widget.targetDuration);
     _focusNode = FocusNode();
+    _userNotesFocusNode = FocusNode();
     _ink = {
       for (final e in widget.initialAnnotations.entries)
         e.key: List<InkStroke>.from(e.value),
     };
+    _userNotes = Map<String, String>.from(widget.initialUserNotes);
     if (_dual) {
       // The laptop shows the presenter view; the slide lives on the beamer.
       _presenterView = true;
@@ -518,7 +552,13 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     }
     // Tik elke seconde, maar herbouw alleen in presenter view (klok/teller).
     _clockTimer = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (mounted && _presenterView) setState(() {});
+      if (!mounted) return;
+      if (_presenterView) setState(() {});
+      if (_userNotesMode) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) _userNotesFocusNode.requestFocus();
+        });
+      }
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _focusNode.requestFocus();
@@ -534,6 +574,8 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _typedTimer?.cancel();
     _gridScroll.dispose();
     _focusNode.dispose();
+    _userNotesFocusNode.dispose();
+    _userNoteCtrl?.dispose();
     if (_dual) presenterChannel.setMethodCallHandler(null);
     super.dispose();
   }
@@ -825,10 +867,14 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   void _autoAdvance() {
     if (_blank != _Blank.none || _tableEditMode) return;
     if (_index < widget.slides.length - 1) {
+      _persistUserNoteFromController();
       setState(() => _index++);
+      _loadUserNoteIntoController();
       _scheduleAdvance();
     } else if (_loop) {
+      _persistUserNoteFromController();
       setState(() => _index = 0);
+      _loadUserNoteIntoController();
       _scheduleAdvance();
     }
   }
@@ -960,6 +1006,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   }
 
   void _next() {
+    if (_userNotesMode) return;
     // Eerste toets/klik op een blanco scherm haalt het scherm terug.
     if (_blank != _Blank.none) {
       setState(() => _blank = _Blank.none);
@@ -967,20 +1014,25 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     }
     if (_tableEditMode) return;
     if (_index < widget.slides.length - 1) {
+      _persistUserNoteFromController();
       setState(() => _index++);
+      _loadUserNoteIntoController();
       _scheduleAdvance();
       _announceSlide();
     }
   }
 
   void _prev() {
+    if (_userNotesMode) return;
     if (_blank != _Blank.none) {
       setState(() => _blank = _Blank.none);
       return;
     }
     if (_tableEditMode) return;
     if (_index > 0) {
+      _persistUserNoteFromController();
       setState(() => _index--);
+      _loadUserNoteIntoController();
       _scheduleAdvance();
       _announceSlide();
     }
@@ -1029,6 +1081,83 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   void _toggleHelp() {
     setState(() => _helpOpen = !_helpOpen);
+  }
+
+  void _onUserNoteTextChanged() {
+    if (!_userNotesMode || _userNoteCtrl == null) return;
+    final slideId = widget.slides[_index.clamp(0, widget.slides.length - 1)].id;
+    final text = _userNoteCtrl!.text;
+    final next = Map<String, String>.from(_userNotes);
+    if (text.trim().isEmpty) {
+      next.remove(slideId);
+    } else {
+      next[slideId] = text;
+    }
+    _userNotes = next;
+    widget.onUserNotesChanged?.call(Map<String, String>.from(_userNotes));
+  }
+
+  void _persistUserNoteFromController() {
+    if (!_userNotesMode || _userNoteCtrl == null) return;
+    final slideId = widget.slides[_index.clamp(0, widget.slides.length - 1)].id;
+    final text = _userNoteCtrl!.text;
+    final next = Map<String, String>.from(_userNotes);
+    if (text.trim().isEmpty) {
+      next.remove(slideId);
+    } else {
+      next[slideId] = text;
+    }
+    _userNotes = next;
+    widget.onUserNotesChanged?.call(Map<String, String>.from(_userNotes));
+  }
+
+  void _loadUserNoteIntoController() {
+    if (!_userNotesMode || _userNoteCtrl == null) return;
+    final slideId = widget.slides[_index.clamp(0, widget.slides.length - 1)].id;
+    final text = _userNotes[slideId] ?? '';
+    if (_userNoteCtrl!.text == text) return;
+    _userNoteCtrl!.removeListener(_onUserNoteTextChanged);
+    _userNoteCtrl!.text = text;
+    _userNoteCtrl!.addListener(_onUserNoteTextChanged);
+  }
+
+  void _openUserNotesMode() {
+    setState(() {
+      _userNotesMode = true;
+      _userNoteCtrl ??= TextEditingController();
+      _userNoteCtrl!.removeListener(_onUserNoteTextChanged);
+      _userNoteCtrl!.text =
+          _userNotes[widget
+              .slides[_index.clamp(0, widget.slides.length - 1)]
+              .id] ??
+          '';
+      _userNoteCtrl!.addListener(_onUserNoteTextChanged);
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _userNotesFocusNode.requestFocus();
+    });
+  }
+
+  void _closeUserNotesMode() {
+    if (!_userNotesMode) return;
+    _persistUserNoteFromController();
+    setState(() {
+      _userNotesMode = false;
+      _userNoteCtrl?.removeListener(_onUserNoteTextChanged);
+      _userNoteCtrl?.dispose();
+      _userNoteCtrl = null;
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _focusNode.requestFocus();
+    });
+  }
+
+  void _toggleUserNotesMode() {
+    if (_userNotesMode) {
+      _closeUserNotesMode();
+    } else {
+      _openUserNotesMode();
+    }
   }
 
   /// Cijfer (gewoon of numpad) → karakter, of null bij andere toetsen.
@@ -1102,6 +1231,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   /// Spring direct naar een slide (vanuit het rasteroverzicht).
   void _jumpTo(int index) {
+    _persistUserNoteFromController();
     setState(() {
       _index = index.clamp(0, widget.slides.length - 1);
       _blank = _Blank.none;
@@ -1110,6 +1240,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       _tableEditRow = null;
       _tableEditCol = null;
     });
+    _loadUserNoteIntoController();
     _scheduleAdvance();
     _announceSlide();
   }
@@ -1122,12 +1253,14 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     }
     final target = index.clamp(0, widget.slides.length - 1);
     if (target == _index) return;
+    _persistUserNoteFromController();
     setState(() {
       _index = target;
       _tableEditMode = false;
       _tableEditRow = null;
       _tableEditCol = null;
     });
+    _loadUserNoteIntoController();
     _scheduleAdvance();
     _announceSlide();
   }
@@ -1177,6 +1310,21 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     // Doeltijd-invoer vangt cijfers/Enter/Esc tot de invoer klaar is.
     if (_targetInput) return _handleTargetKey(key);
 
+    // Gebruikersnotities: alleen sluiten/togglen; overige toetsen naar het veld.
+    if (_userNotesMode) {
+      final keys = HardwareKeyboard.instance;
+      if (key == LogicalKeyboardKey.escape) {
+        _closeUserNotesMode();
+        return KeyEventResult.handled;
+      }
+      if ((keys.isControlPressed || keys.isMetaPressed) &&
+          key == LogicalKeyboardKey.keyN) {
+        _toggleUserNotesMode();
+        return KeyEventResult.handled;
+      }
+      return KeyEventResult.ignored;
+    }
+
     // Terwijl het raster open is, sturen de pijltjes een aparte cursor aan.
     if (_gridOpen) return _handleGridKey(key);
 
@@ -1187,6 +1335,13 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     final digit = _digits[key];
     if (digit != null) {
       _appendDigit(digit);
+      return KeyEventResult.handled;
+    }
+
+    final keys = HardwareKeyboard.instance;
+    if ((keys.isControlPressed || keys.isMetaPressed) &&
+        key == LogicalKeyboardKey.keyN) {
+      _toggleUserNotesMode();
       return KeyEventResult.handled;
     }
 
@@ -1277,8 +1432,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         _clearCurrentInk();
         return KeyEventResult.handled;
       case LogicalKeyboardKey.escape:
-        // Gelaagd: tabelbewerking, gereedschap, getypt nummer, blanco, afsluiten.
-        if (_tableEditMode) {
+        // Gelaagd: gebruikersnotities, tabelbewerking, gereedschap, getypt
+        // nummer, blanco, afsluiten.
+        if (_userNotesMode) {
+          _closeUserNotesMode();
+        } else if (_tableEditMode) {
           _exitTableEditMode();
         } else if (_tool != null) {
           setState(() => _tool = null);
@@ -1487,6 +1645,18 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                 top: 20,
                 child: Center(child: _buildTableEditBanner()),
               ),
+            if (_userNotesMode) ...[
+              Positioned.fill(
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => _userNotesFocusNode.requestFocus(),
+                  child: ColoredBox(
+                    color: Colors.black.withValues(alpha: 0.45),
+                  ),
+                ),
+              ),
+              _buildUserNotesOverlay(),
+            ],
             const MermaidRenderHostLayer(),
           ],
         ),
@@ -1741,6 +1911,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       ('Home · End', l10n.d('Eerste · laatste slide')),
       ('G', l10n.d('Slide-overzicht (pijltjes + Enter)')),
       ('P', l10n.d('Presenter view (notities, klok)')),
+      ('Ctrl+N', l10n.d('Mijn notities aan/uit')),
       ('S', l10n.d('Scherm wisselen (meerdere schermen)')),
       ('B · W', l10n.d('Zwart · wit scherm')),
       ('D · T · ⇧E', l10n.d('Pen · markeerstift · gum')),
@@ -2168,6 +2339,103 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  /// Lokaal paneel voor gebruikersnotities (ontvanger/cursist); nooit op beamer.
+  Widget _buildUserNotesOverlay() {
+    final l10n = context.l10n;
+    final profile = widget.themeProfile;
+    final bg = _hexColor(profile.slideBackgroundColor);
+    final fg = _hexColor(profile.textColor);
+    final accent = _hexColor(profile.accentColor);
+    return Positioned(
+      top: 24,
+      right: 24,
+      bottom: 24,
+      width: 360,
+      child: Material(
+        color: Colors.transparent,
+        child: Container(
+          decoration: BoxDecoration(
+            color: bg,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: accent, width: 2),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black54,
+                blurRadius: 24,
+                offset: Offset(0, 8),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 12, 8, 12),
+                child: Row(
+                  children: [
+                    Icon(Icons.edit_note_outlined, color: accent, size: 22),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        l10n.d('Mijn notities'),
+                        style: TextStyle(
+                          fontFamily: profile.fontFamily,
+                          color: fg,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    NotesModeToggle(
+                      mode: _userNotesEditorMode,
+                      onModeChanged: (mode) =>
+                          setState(() => _userNotesEditorMode = mode),
+                      style: NotesModeToggleStyle.compact,
+                      foregroundColor: fg,
+                      accentColor: accent,
+                    ),
+                    const SizedBox(width: 4),
+                    IconButton(
+                      tooltip: l10n.d('Sluiten'),
+                      onPressed: _closeUserNotesMode,
+                      icon: Icon(Icons.close, color: fg.withValues(alpha: 0.6)),
+                      visualDensity: VisualDensity.compact,
+                    ),
+                  ],
+                ),
+              ),
+              Divider(height: 1, color: accent.withValues(alpha: 0.35)),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                  child: MarkdownNotesEditor(
+                    key: const ValueKey('presenter-user-notes'),
+                    controller: _userNoteCtrl!,
+                    focusNode: _userNotesFocusNode,
+                    mode: _userNotesEditorMode,
+                    onModeChanged: (mode) =>
+                        setState(() => _userNotesEditorMode = mode),
+                    showModeToggle: false,
+                    expand: true,
+                    compactToolbar: true,
+                    editorTheme: MarkdownEditorTheme.presenterOverlay(
+                      panelBackground: bg,
+                      panelText: fg,
+                      accent: accent,
+                      fontFamily: profile.fontFamily,
+                    ),
+                    hintText: l10n.d('Gebruikersnotities voor deze slide...'),
+                    minLines: 8,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

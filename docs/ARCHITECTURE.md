@@ -161,6 +161,7 @@ To keep the `.md` pure Marp, four kinds of data live beside it (see
 - **Descriptions/tags** — `.ocideck_descriptions.json` (searchable image
   metadata, used by the library's search and the untagged filter).
 - **Annotations** — `<name>.ink.json` (`services/annotation_codec.dart`).
+- **User notes** — `<name>.user-notes.json` (`services/user_notes_codec.dart`).
 - **Linked chart data** — `data/*.csv` (the living source for a chart).
 
 ## Vendored forks

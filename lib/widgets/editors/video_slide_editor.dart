@@ -9,12 +9,16 @@ class VideoSlideEditor extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
   final ImageService imageService;
+  final String? projectPath;
+  final bool nestedInScrollView;
 
   const VideoSlideEditor({
     super.key,
     required this.slide,
     required this.onUpdate,
     required this.imageService,
+    this.projectPath,
+    this.nestedInScrollView = false,
   });
 
   @override
@@ -36,7 +40,9 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
   }
 
   Future<void> _pickVideo() async {
-    final path = await widget.imageService.pickVideo();
+    final path = await widget.imageService.pickVideo(
+      projectPath: widget.projectPath,
+    );
     if (path != null) widget.onUpdate(widget.slide.copyWith(videoPath: path));
   }
 
@@ -49,8 +55,8 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return ListView(
-      padding: const EdgeInsets.all(16),
+    return editorScrollList(
+      nestedInScrollView: widget.nestedInScrollView,
       children: [
         EditorField(
           label: 'Titel (optioneel)',

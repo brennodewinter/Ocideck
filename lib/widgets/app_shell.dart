@@ -19,6 +19,7 @@ import '../state/deck_provider.dart';
 import '../state/editor_provider.dart';
 import '../state/settings_provider.dart';
 import '../state/tabs_provider.dart';
+import '../utils/project_path.dart';
 import '../theme/app_theme.dart';
 import '../l10n/app_localizations.dart';
 import 'dialogs/export_dialog.dart';
@@ -406,7 +407,17 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       await deckNotifier.save(initialDirectory: settings.homeDirectory);
     }
 
+    void openFind() {
+      if (isMarkdownMode) {
+        editorNotifier.requestMarkdownFind(showReplace: false);
+      }
+    }
+
     void openFindReplace() {
+      if (isMarkdownMode) {
+        editorNotifier.requestMarkdownFind(showReplace: true);
+        return;
+      }
       FindReplaceDialog.show(
         context,
         countMatches: (q, cs) =>
@@ -567,6 +578,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         }(),
         annotations: deck.annotations,
         onAnnotationsChanged: deckNotifier.setAnnotations,
+        initialUserNotes: deck.userNotes,
+        onUserNotesChanged: deckNotifier.setUserNotes,
         onSlideChanged: (updated) {
           final index = deckNotifier.currentState.deck?.slides.indexWhere(
             (slide) => slide.id == updated.id,
@@ -782,6 +795,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           ): deckNotifier.redo,
           const SingleActivator(LogicalKeyboardKey.keyY, control: true):
               deckNotifier.redo,
+          const SingleActivator(LogicalKeyboardKey.keyF, control: true):
+              openFind,
+          const SingleActivator(LogicalKeyboardKey.keyF, meta: true): openFind,
           const SingleActivator(LogicalKeyboardKey.keyH, control: true):
               openFindReplace,
           const SingleActivator(LogicalKeyboardKey.keyH, meta: true):

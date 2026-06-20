@@ -16,6 +16,12 @@ class EditorState {
   /// [EditorNotifier.selectWithQualityField]).
   final String? focusQualityField;
 
+  /// Monotonic counter; [MarkdownDeckEditor] listens to open the find bar.
+  final int markdownFindRequestId;
+
+  /// When a find request is fired, whether to show the replace row.
+  final bool markdownFindShowReplace;
+
   const EditorState({
     this.selectedIndex = 0,
     this.selection = const {0},
@@ -23,6 +29,8 @@ class EditorState {
     this.markdownBuffer = '',
     this.parseError = false,
     this.focusQualityField,
+    this.markdownFindRequestId = 0,
+    this.markdownFindShowReplace = false,
   });
 
   bool get hasMultiSelection => selection.length > 1;
@@ -35,6 +43,8 @@ class EditorState {
     bool? parseError,
     String? focusQualityField,
     bool clearFocusQualityField = false,
+    int? markdownFindRequestId,
+    bool? markdownFindShowReplace,
   }) {
     return EditorState(
       selectedIndex: selectedIndex ?? this.selectedIndex,
@@ -45,6 +55,10 @@ class EditorState {
       focusQualityField: clearFocusQualityField
           ? null
           : (focusQualityField ?? this.focusQualityField),
+      markdownFindRequestId:
+          markdownFindRequestId ?? this.markdownFindRequestId,
+      markdownFindShowReplace:
+          markdownFindShowReplace ?? this.markdownFindShowReplace,
     );
   }
 }
@@ -133,6 +147,14 @@ class EditorNotifier extends StateNotifier<EditorState> {
 
   void setParseError(bool value) {
     state = state.copyWith(parseError: value);
+  }
+
+  /// Opens the in-editor find bar in markdown mode (Ctrl/Cmd+F or H).
+  void requestMarkdownFind({required bool showReplace}) {
+    state = state.copyWith(
+      markdownFindRequestId: state.markdownFindRequestId + 1,
+      markdownFindShowReplace: showReplace,
+    );
   }
 
   /// Clamp/normaliseer de selectie nadat slides zijn verwijderd.

@@ -8,8 +8,14 @@ import 'list_style_selector.dart';
 class BulletsEditor extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
+  final bool nestedInScrollView;
 
-  const BulletsEditor({super.key, required this.slide, required this.onUpdate});
+  const BulletsEditor({
+    super.key,
+    required this.slide,
+    required this.onUpdate,
+    this.nestedInScrollView = false,
+  });
 
   @override
   State<BulletsEditor> createState() => _BulletsEditorState();
@@ -199,8 +205,8 @@ class _BulletsEditorState extends State<BulletsEditor> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return ListView(
-      padding: const EdgeInsets.all(16),
+    return editorScrollList(
+      nestedInScrollView: widget.nestedInScrollView,
       children: [
         EditorField(label: 'Titel', controller: _title, hint: 'Slide titel'),
         const SizedBox(height: 12),

@@ -6,15 +6,28 @@ import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
 
-Widget _host(List<Slide> slides) {
+Widget _host(
+  List<Slide> slides, {
+  Map<String, String> initialUserNotes = const {},
+  void Function(Map<String, String>)? onUserNotesChanged,
+}) {
   return MaterialApp(
     home: FullscreenPresenter(
       slides: slides,
       projectPath: null,
       themeProfile: const ThemeProfile(),
       initialIndex: 0,
+      initialUserNotes: initialUserNotes,
+      onUserNotesChanged: onUserNotesChanged,
     ),
   );
+}
+
+Future<void> sendControlKey(WidgetTester tester, LogicalKeyboardKey key) async {
+  await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
+  await tester.sendKeyDownEvent(key);
+  await tester.sendKeyUpEvent(key);
+  await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
 }
 
 void main() {
@@ -441,6 +454,72 @@ void main() {
     await tester.pump();
     expect(find.text('Slide-overzicht'), findsNothing);
     expect(find.text('Eerste'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('user notes panel is hidden by default', (tester) async {
+    await tester.pumpWidget(_host(slides));
+    await tester.pump();
+    expect(find.text('Mijn notities'), findsNothing);
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('Ctrl+N toggles user notes panel', (tester) async {
+    await tester.pumpWidget(_host(slides));
+    await tester.pump();
+
+    await sendControlKey(tester, LogicalKeyboardKey.keyN);
+    await tester.pump();
+    expect(find.text('Mijn notities'), findsOneWidget);
+
+    await sendControlKey(tester, LogicalKeyboardKey.keyN);
+    await tester.pump();
+    expect(find.text('Mijn notities'), findsNothing);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('Escape closes user notes without exiting presentation', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_host(slides));
+    await tester.pump();
+
+    await sendControlKey(tester, LogicalKeyboardKey.keyN);
+    await tester.pump();
+    expect(find.text('Mijn notities'), findsOneWidget);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+    await tester.pump();
+    expect(find.text('Mijn notities'), findsNothing);
+    expect(find.text('Eerste'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('typing in user notes does not change speaker notes', (
+    tester,
+  ) async {
+    Map<String, String>? captured;
+    await tester.pumpWidget(
+      _host(slides, onUserNotesChanged: (notes) => captured = notes),
+    );
+    await tester.pump();
+
+    await sendControlKey(tester, LogicalKeyboardKey.keyN);
+    await tester.pumpAndSettle();
+
+    final userField = find.descendant(
+      of: find.byKey(const ValueKey('presenter-user-notes')),
+      matching: find.byType(TextField),
+    );
+    await tester.enterText(userField, 'Cursusvraag');
+    await tester.pump();
+
+    expect(captured, isNotNull);
+    expect(captured!.values, contains('Cursusvraag'));
+    expect(slides.first.notes, 'Mijn spiekbriefje');
 
     await tester.pumpWidget(const SizedBox());
   });
