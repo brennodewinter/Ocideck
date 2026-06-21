@@ -139,36 +139,22 @@ class _ChartPreviewState extends State<_ChartPreview> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             if (spec.title.isNotEmpty) ...[
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(
-                  horizontal: w * 0.025,
-                  vertical: w * 0.01,
-                ),
-                decoration: BoxDecoration(
-                  color: _hexColor(profile.titleBackgroundColor),
-                  borderRadius: BorderRadius.circular(w * 0.012),
-                  border: Border(
-                    left: BorderSide(
-                      color: _hexColor(profile.accentColor),
-                      width: w * 0.006,
-                    ),
+              // Render the title like every other content slide (plain bold
+              // text in the slide's text colour) instead of a boxed band, so
+              // the header reads consistently across slide types.
+              _md(
+                context,
+                spec.title,
+                _applyFont(
+                  font,
+                  TextStyle(
+                    fontSize: w * 0.038,
+                    height: 1.2,
+                    fontWeight: FontWeight.bold,
+                    color: _hexColor(profile.textColor),
                   ),
                 ),
-                child: _md(
-                  context,
-                  spec.title,
-                  _applyFont(
-                    font,
-                    TextStyle(
-                      fontSize: w * 0.032,
-                      height: 1.1,
-                      fontWeight: FontWeight.bold,
-                      color: _hexColor(profile.titleTextColor),
-                    ),
-                  ),
-                  linkColor: _hexColor(profile.accentColor),
-                ),
+                linkColor: _hexColor(profile.accentColor),
               ),
               SizedBox(height: w * 0.012),
             ],
