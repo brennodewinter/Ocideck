@@ -133,7 +133,7 @@ class _ChartPreviewState extends State<_ChartPreview> {
           horizontalPad,
           verticalPad + safe.top,
           horizontalPad,
-          verticalPad + safe.bottom,
+          _logoAwareBottomPadding(verticalPad, safe.bottom),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

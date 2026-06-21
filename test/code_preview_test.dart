@@ -21,6 +21,25 @@ Widget _host(Slide slide, ThemeProfile profile) {
 Color _hex(String hex) =>
     Color(int.parse(hex.substring(1), radix: 16) | 0xFF000000);
 
+TextStyle? _styleForText(WidgetTester tester, String text) {
+  TextStyle? findInSpan(InlineSpan span) {
+    if (span is TextSpan) {
+      if (span.text == text) return span.style;
+      for (final child in span.children ?? const <InlineSpan>[]) {
+        final found = findInSpan(child);
+        if (found != null) return found;
+      }
+    }
+    return null;
+  }
+
+  for (final richText in tester.widgetList<RichText>(find.byType(RichText))) {
+    final found = findInSpan(richText.text);
+    if (found != null) return found;
+  }
+  return null;
+}
+
 void main() {
   testWidgets('code slide paints the themed background colour', (tester) async {
     final slide = Slide.create(
@@ -136,6 +155,71 @@ void main() {
     final titleBottom = tester.getBottomLeft(find.text('Voorbeeld')).dy;
     final codeTop = tester.getTopLeft(find.text('print("hi")')).dy;
     expect(titleBottom, lessThanOrEqualTo(codeTop));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('code slide title uses the regular slide title style', (
+    tester,
+  ) async {
+    final slide = Slide.create(
+      SlideType.code,
+    ).copyWith(title: 'Voorbeeld', customMarkdown: 'print("hi")');
+    const profile = ThemeProfile(
+      textColor: '#123456',
+      titleTextColor: '#FFFFFF',
+      titleBackgroundColor: '#FF00FF',
+      codeHighlightSyntax: false,
+    );
+
+    await tester.pumpWidget(_host(slide, profile));
+    await tester.pump();
+
+    final titleStyle = _styleForText(tester, 'Voorbeeld');
+    expect(titleStyle?.color, _hex('#123456'));
+    expect(titleStyle?.fontSize, closeTo(800 * 0.042, 0.001));
+
+    final titleCards = tester
+        .widgetList<Container>(find.byType(Container))
+        .where((c) {
+          final d = c.decoration;
+          return d is BoxDecoration && d.color == _hex('#FF00FF');
+        });
+    expect(titleCards, isEmpty);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('code panel uses bottom logo space up to the logo reserve', (
+    tester,
+  ) async {
+    final slide = Slide.create(SlideType.code).copyWith(
+      title: 'Voorbeeld',
+      customMarkdown: 'print("hi")',
+      showLogo: true,
+    );
+    const profile = ThemeProfile(
+      logoPath: 'logo.png',
+      logoPosition: 'bottom-right',
+      logoSize: 128,
+      codeHighlightSyntax: false,
+    );
+
+    await tester.pumpWidget(_host(slide, profile));
+    await tester.pump();
+
+    final codePanel = tester
+        .widgetList<Container>(find.byType(Container))
+        .where((c) {
+          final d = c.decoration;
+          return d is BoxDecoration &&
+              d.color == _hex(profile.codeBackgroundColor);
+        })
+        .single;
+    final panelBottom = tester.getBottomLeft(find.byWidget(codePanel)).dy;
+    final slideTop = tester.getTopLeft(find.byType(SlidePreviewWidget)).dy;
+
+    final logoReserve = 800 * ((profile.logoSize + 24) / 1280);
+    expect(panelBottom, greaterThan(slideTop + 450 - logoReserve - 2));
+    expect(panelBottom, lessThanOrEqualTo(slideTop + 450 - logoReserve + 2));
     expect(tester.takeException(), isNull);
   });
 

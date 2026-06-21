@@ -15,6 +15,15 @@ TextStyle _fontStyle(String font, TextStyle base) {
   return base.copyWith(fontFamily: font);
 }
 
+Color _parseHexColor(String hex) {
+  final cleaned = hex.replaceFirst('#', '');
+  final value = int.tryParse(
+    cleaned.length == 6 ? 'FF$cleaned' : cleaned,
+    radix: 16,
+  );
+  return Color(value ?? 0xFFFFFFFF);
+}
+
 class SettingsDialog extends ConsumerStatefulWidget {
   final int initialTab;
 
@@ -141,6 +150,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       dialogTitle: context.l10n.d('Standaard map voor presentaties'),
       initialDirectory: _homeDirectory,
     );
+    if (!mounted) return;
     if (result != null) setState(() => _homeDirectory = result);
   }
 
@@ -149,6 +159,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       dialogTitle: context.l10n.d('Map voor exports'),
       initialDirectory: _exportDirectory ?? _homeDirectory,
     );
+    if (!mounted) return;
     if (result != null) setState(() => _exportDirectory = result);
   }
 
@@ -157,6 +168,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       dialogTitle: context.l10n.d('Logo kiezen'),
       type: FileType.image,
     );
+    if (!mounted) return;
     final path = result?.files.single.path;
     if (path != null) {
       setState(() {
@@ -1646,87 +1658,10 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   }
 
   Future<String?> _pickHexColor(String initial) {
-    final controller = TextEditingController(text: initial);
-    String? normalize(String raw) {
-      final up = raw.trim().toUpperCase();
-      final hex = up.startsWith('#') ? up : '#$up';
-      return RegExp(r'^#[0-9A-F]{6}$').hasMatch(hex) ? hex : null;
-    }
-
-    final l10n = context.l10n;
     return showDialog<String>(
       context: context,
-      builder: (context) => StatefulBuilder(
-        builder: (context, setDialogState) {
-          final normalized = normalize(controller.text);
-          return AlertDialog(
-            title: Text(l10n.d('Eigen kleur (hex)')),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: _parseColor(normalized ?? '#FFFFFF'),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: const Color(0xFFCBD5E1)),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: TextField(
-                        controller: controller,
-                        autofocus: true,
-                        decoration: InputDecoration(
-                          labelText: l10n.d('Hexkleur'),
-                          hintText: '#33FF33',
-                          isDense: true,
-                          border: const OutlineInputBorder(),
-                        ),
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                            RegExp(r'[#0-9a-fA-F]'),
-                          ),
-                          LengthLimitingTextInputFormatter(7),
-                        ],
-                        onChanged: (_) => setDialogState(() {}),
-                        onSubmitted: (_) {
-                          final ok = normalize(controller.text);
-                          if (ok != null) Navigator.pop(context, ok);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  l10n.d('Bijvoorbeeld #33FF33 voor een CRT-groen scherm.'),
-                  style: const TextStyle(
-                    fontSize: 11,
-                    color: Color(0xFF94A3B8),
-                  ),
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(l10n.d('Annuleren')),
-              ),
-              FilledButton(
-                onPressed: normalized == null
-                    ? null
-                    : () => Navigator.pop(context, normalized),
-                child: Text(l10n.d('Toepassen')),
-              ),
-            ],
-          );
-        },
-      ),
-    ).whenComplete(controller.dispose);
+      builder: (context) => _HexColorDialog(initial: initial),
+    );
   }
 
   Widget _colorSwatch(
@@ -1876,12 +1811,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   }
 
   Color _parseColor(String hex) {
-    final cleaned = hex.replaceFirst('#', '');
-    final value = int.tryParse(
-      cleaned.length == 6 ? 'FF$cleaned' : cleaned,
-      radix: 16,
-    );
-    return Color(value ?? 0xFFFFFFFF);
+    return _parseHexColor(hex);
   }
 
   Widget _privacyTab() {
@@ -1965,6 +1895,103 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _HexColorDialog extends StatefulWidget {
+  final String initial;
+
+  const _HexColorDialog({required this.initial});
+
+  @override
+  State<_HexColorDialog> createState() => _HexColorDialogState();
+}
+
+class _HexColorDialogState extends State<_HexColorDialog> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.initial);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  String? _normalize(String raw) {
+    final up = raw.trim().toUpperCase();
+    final hex = up.startsWith('#') ? up : '#$up';
+    return RegExp(r'^#[0-9A-F]{6}$').hasMatch(hex) ? hex : null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final normalized = _normalize(_controller.text);
+    return AlertDialog(
+      title: Text(l10n.d('Eigen kleur (hex)')),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: _parseHexColor(normalized ?? '#FFFFFF'),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: const Color(0xFFCBD5E1)),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: TextField(
+                  controller: _controller,
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    labelText: l10n.d('Hexkleur'),
+                    hintText: '#33FF33',
+                    isDense: true,
+                    border: const OutlineInputBorder(),
+                  ),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'[#0-9a-fA-F]')),
+                    LengthLimitingTextInputFormatter(7),
+                  ],
+                  onChanged: (_) => setState(() {}),
+                  onSubmitted: (_) {
+                    final ok = _normalize(_controller.text);
+                    if (ok != null) Navigator.pop(context, ok);
+                  },
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            l10n.d('Bijvoorbeeld #33FF33 voor een CRT-groen scherm.'),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(l10n.d('Annuleren')),
+        ),
+        FilledButton(
+          onPressed: normalized == null
+              ? null
+              : () => Navigator.pop(context, normalized),
+          child: Text(l10n.d('Toepassen')),
+        ),
+      ],
     );
   }
 }

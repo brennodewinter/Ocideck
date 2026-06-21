@@ -146,6 +146,118 @@ class _ChartVariantsDialogState extends State<_ChartVariantsDialog> {
   }
 }
 
+class _ChartColorDialog extends StatefulWidget {
+  final String initial;
+  final String title;
+
+  const _ChartColorDialog({required this.initial, required this.title});
+
+  @override
+  State<_ChartColorDialog> createState() => _ChartColorDialogState();
+}
+
+class _ChartColorDialogState extends State<_ChartColorDialog> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.initial);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final normalized = normalizeChartColor(_controller.text);
+    return AlertDialog(
+      title: Text(widget.title),
+      content: SizedBox(
+        width: 320,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              children: [
+                for (final hex in chartColorPalette)
+                  _colorChoice(
+                    hex,
+                    selected: normalized == hex,
+                    onTap: () {
+                      _controller.text = hex;
+                      setState(() {});
+                    },
+                  ),
+              ],
+            ),
+            const SizedBox(height: 18),
+            TextField(
+              controller: _controller,
+              decoration: InputDecoration(
+                labelText: context.l10n.d('Hexkleur'),
+                hintText: '#2563EB',
+                border: const OutlineInputBorder(),
+                isDense: true,
+              ),
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'[#0-9a-fA-F]')),
+                LengthLimitingTextInputFormatter(7),
+              ],
+              onChanged: (_) => setState(() {}),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(context.l10n.d('Annuleren')),
+        ),
+        FilledButton(
+          onPressed: normalized == null
+              ? null
+              : () => Navigator.pop(context, normalized),
+          child: Text(context.l10n.d('Toepassen')),
+        ),
+      ],
+    );
+  }
+
+  Widget _colorChoice(
+    String hex, {
+    required bool selected,
+    required VoidCallback onTap,
+  }) {
+    final color = Color(int.parse(hex.substring(1), radix: 16) | 0xFF000000);
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(18),
+      child: Container(
+        width: 34,
+        height: 34,
+        decoration: BoxDecoration(
+          color: color,
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: selected ? Colors.black : const Color(0xFFE2E8F0),
+            width: selected ? 3 : 1,
+          ),
+        ),
+        child: selected
+            ? const Icon(Icons.check, size: 16, color: Colors.white)
+            : null,
+      ),
+    );
+  }
+}
+
 class _ChartEditorState extends State<ChartEditor> {
   late final TextEditingController _title;
   late final TextEditingController _minBound;
@@ -329,12 +441,14 @@ class _ChartEditorState extends State<ChartEditor> {
       allowedExtensions: ['csv'],
       withData: true,
     );
+    if (!mounted) return;
     if (result == null || result.files.isEmpty) return;
     final file = result.files.first;
     final text = file.bytes != null
         ? utf8.decode(file.bytes!)
         : (file.path != null ? await File(file.path!).readAsString() : null);
     if (text == null) return;
+    if (!mounted) return;
 
     var asFile = false;
     if (widget.projectPath != null && mounted) {
@@ -372,6 +486,7 @@ class _ChartEditorState extends State<ChartEditor> {
       source = '$chartDataDirName/$name';
     }
 
+    if (!mounted) return;
     final parsed = parseCsv(text);
     setState(() {
       _source = source;
@@ -476,98 +591,9 @@ class _ChartEditorState extends State<ChartEditor> {
     required String initial,
     required String title,
   }) async {
-    final controller = TextEditingController(text: initial);
-    final selected = await showDialog<String>(
+    return showDialog<String>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(title),
-        content: StatefulBuilder(
-          builder: (context, setDialogState) => SizedBox(
-            width: 320,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
-                  children: [
-                    for (final hex in chartColorPalette)
-                      _colorChoice(
-                        hex,
-                        selected: normalizeChartColor(controller.text) == hex,
-                        onTap: () {
-                          controller.text = hex;
-                          setDialogState(() {});
-                        },
-                      ),
-                  ],
-                ),
-                const SizedBox(height: 18),
-                TextField(
-                  controller: controller,
-                  decoration: InputDecoration(
-                    labelText: context.l10n.d('Hexkleur'),
-                    hintText: '#2563EB',
-                    border: const OutlineInputBorder(),
-                    isDense: true,
-                  ),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'[#0-9a-fA-F]')),
-                    LengthLimitingTextInputFormatter(7),
-                  ],
-                  onChanged: (_) => setDialogState(() {}),
-                ),
-              ],
-            ),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(context.l10n.d('Annuleren')),
-          ),
-          FilledButton(
-            onPressed: normalizeChartColor(controller.text) == null
-                ? null
-                : () => Navigator.pop(
-                    context,
-                    normalizeChartColor(controller.text),
-                  ),
-            child: Text(context.l10n.d('Toepassen')),
-          ),
-        ],
-      ),
-    );
-    controller.dispose();
-    return selected;
-  }
-
-  Widget _colorChoice(
-    String hex, {
-    required bool selected,
-    required VoidCallback onTap,
-  }) {
-    final color = Color(int.parse(hex.substring(1), radix: 16) | 0xFF000000);
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(18),
-      child: Container(
-        width: 34,
-        height: 34,
-        decoration: BoxDecoration(
-          color: color,
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: selected ? const Color(0xFF0F172A) : Colors.white,
-            width: selected ? 3 : 2,
-          ),
-          boxShadow: const [BoxShadow(color: Color(0x330F172A), blurRadius: 3)],
-        ),
-        child: selected
-            ? const Icon(Icons.check, size: 18, color: Colors.white)
-            : null,
-      ),
+      builder: (_) => _ChartColorDialog(initial: initial, title: title),
     );
   }
 

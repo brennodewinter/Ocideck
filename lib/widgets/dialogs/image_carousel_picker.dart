@@ -308,6 +308,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
   /// presentaties als in .md-bestanden op schijf binnen de zoekmappen.
   Future<void> _dedupe() async {
     await _persistDescription();
+    if (!mounted) return;
     setState(() => _deduping = true);
     final dedup = ImageDedupService();
     final refs = ImageReferenceService();
@@ -353,8 +354,9 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
     ];
 
     final confirmed = await _showDedupeDialog(plan);
+    if (!mounted) return;
     if (confirmed != true) {
-      if (mounted) setState(() => _deduping = false);
+      setState(() => _deduping = false);
       return;
     }
 
@@ -608,6 +610,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
 
   Future<void> _select(String path) async {
     await _persistDescription();
+    if (!mounted) return;
     setState(() => _selected = path);
     await _loadCaptionForSelection();
     _loadDescriptionForSelection();

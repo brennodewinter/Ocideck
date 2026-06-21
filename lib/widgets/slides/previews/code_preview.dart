@@ -34,6 +34,8 @@ class _CodePreview extends StatelessWidget {
     _ensureHighlightLanguages();
     final pad = w * 0.05;
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
+    final topPad = safe.top > 0 ? pad + safe.top : pad;
+    final bottomPad = _logoAwareBottomPadding(pad, safe.bottom);
     final code = slide.customMarkdown;
     final lang = slide.codeLanguage.trim();
     final known = lang.isNotEmpty && allLanguages.containsKey(lang);
@@ -81,50 +83,26 @@ class _CodePreview extends StatelessWidget {
     return Container(
       color: _hexColor(profile.slideBackgroundColor),
       child: Padding(
-        padding: EdgeInsets.fromLTRB(
-          pad,
-          pad + safe.top,
-          pad,
-          pad + safe.bottom,
-        ),
+        padding: EdgeInsets.fromLTRB(pad, topPad, pad, bottomPad),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // The slide title belongs to the slide, not inside the code window,
-            // so it sits above the panel like other slide types.
+            // The slide title belongs to the slide, not inside the code window.
             if (slide.title.isNotEmpty) ...[
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(
-                  horizontal: w * 0.025,
-                  vertical: w * 0.01,
-                ),
-                decoration: BoxDecoration(
-                  color: _hexColor(profile.titleBackgroundColor),
-                  borderRadius: BorderRadius.circular(w * 0.012),
-                  border: Border(
-                    left: BorderSide(
-                      color: _hexColor(profile.accentColor),
-                      width: w * 0.006,
-                    ),
+              _md(
+                context,
+                slide.title,
+                _applyFont(
+                  font,
+                  TextStyle(
+                    fontSize: w * 0.042,
+                    fontWeight: FontWeight.bold,
+                    color: _hexColor(profile.textColor),
                   ),
                 ),
-                child: _md(
-                  context,
-                  slide.title,
-                  _applyFont(
-                    font,
-                    TextStyle(
-                      fontSize: w * 0.032,
-                      height: 1.1,
-                      fontWeight: FontWeight.bold,
-                      color: _hexColor(profile.titleTextColor),
-                    ),
-                  ),
-                  linkColor: _hexColor(profile.accentColor),
-                ),
+                linkColor: _hexColor(profile.accentColor),
               ),
-              SizedBox(height: w * 0.018),
+              SizedBox(height: pad * 0.35),
             ],
             Expanded(
               child: Container(

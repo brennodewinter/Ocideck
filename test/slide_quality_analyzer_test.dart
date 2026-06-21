@@ -44,25 +44,28 @@ void main() {
       expect(result.hasIssues, isFalse);
     });
 
-    test('detects missing image caption as informational tip', () {
+    test('does not report missing image captions as quality issues', () {
       final deck = Deck(
         title: 'Demo',
         slides: [
           Slide.create(SlideType.image).copyWith(imagePath: 'images/photo.jpg'),
+          Slide.create(SlideType.twoImages).copyWith(
+            imagePath: 'images/left.jpg',
+            imagePath2: 'images/right.jpg',
+          ),
+          Slide.create(
+            SlideType.bulletsImage,
+          ).copyWith(bullets: ['Eerste punt'], imagePath: 'images/photo.jpg'),
         ],
       );
 
       final result = analyzer.analyze(deck);
       expect(
-        result.issues.any(
-          (i) =>
-              i.kind == SlideQualityIssueKind.missingAltCaption &&
-              i.field == 'imageCaption' &&
-              i.severity == MarkdownValidationSeverity.informational,
+        result.issues.where(
+          (i) => i.kind == SlideQualityIssueKind.missingAltCaption,
         ),
-        isTrue,
+        isEmpty,
       );
-      expect(result.hasActionableIssues, isFalse);
     });
 
     test('does not warn when image caption is present', () {
@@ -118,6 +121,271 @@ void main() {
       expect(
         result.issues.any(
           (i) => i.category == SlideQualityCategory.textDensity,
+        ),
+        isTrue,
+      );
+    });
+
+    test('detects many short bullets before text has to shrink', () {
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.bullets).copyWith(
+            title: 'Planning',
+            bullets: List.generate(10, (i) => 'Punt ${i + 1}'),
+          ),
+        ],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) =>
+              i.kind == SlideQualityIssueKind.bulletCountHigh &&
+              i.severity == MarkdownValidationSeverity.warning,
+        ),
+        isTrue,
+      );
+    });
+
+    test('detects many rich-text markdown bullets', () {
+      final markdown = List.generate(
+        13,
+        (i) =>
+            '- Bullet ${i + 1} met toelichting die visueel over meerdere regels kan lopen',
+      ).join('\n');
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.bullets).copyWith(
+            title: 'Rich text',
+            listStyle: ListStyle.richText,
+            customMarkdown: markdown,
+          ),
+        ],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) => i.kind == SlideQualityIssueKind.bulletCountHigh,
+        ),
+        isTrue,
+      );
+    });
+
+    test('detects many free-markdown bullet items', () {
+      final markdown = List.generate(
+        13,
+        (i) => '- Vrije markdown bullet ${i + 1}',
+      ).join('\n');
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(
+            SlideType.freeMarkdown,
+          ).copyWith(title: 'Markdown', customMarkdown: markdown),
+        ],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) => i.kind == SlideQualityIssueKind.bulletCountHigh,
+        ),
+        isTrue,
+      );
+    });
+
+    test('detects many bullets on split bullets-image slides', () {
+      final slide = Slide.create(SlideType.bulletsImage).copyWith(
+        title: 'blah blah blah',
+        imagePath: 'images/pasted.png',
+        bullets: List.generate(
+          13,
+          (i) =>
+              'Controleer op een SPECI: Kijk of er tussentijds een speciaal '
+              'weerrapport is uitgegeven vanwege plotseling veranderde '
+              'omstandigheden ${i + 1}.',
+        ),
+      );
+      final deck = Deck(title: 'Demo', slides: [slide]);
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) =>
+              i.kind == SlideQualityIssueKind.bulletCountHigh &&
+              i.severity == MarkdownValidationSeverity.warning,
+        ),
+        isTrue,
+      );
+    });
+
+    test('detects unicode and HTML bullet items in markdown', () {
+      final unicodeMarkdown = List.generate(
+        13,
+        (i) => '• Unicode bullet ${i + 1}',
+      ).join('\n');
+      final htmlMarkdown = [
+        '<ul>',
+        for (var i = 1; i <= 13; i++) '<li>HTML bullet $i</li>',
+        '</ul>',
+      ].join('\n');
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(
+            SlideType.freeMarkdown,
+          ).copyWith(title: 'Unicode', customMarkdown: unicodeMarkdown),
+          Slide.create(
+            SlideType.freeMarkdown,
+          ).copyWith(title: 'HTML', customMarkdown: htmlMarkdown),
+        ],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result
+            .forSlide(0)
+            .any((i) => i.kind == SlideQualityIssueKind.bulletCountHigh),
+        isTrue,
+      );
+      expect(
+        result
+            .forSlide(1)
+            .any((i) => i.kind == SlideQualityIssueKind.bulletCountHigh),
+        isTrue,
+      );
+    });
+
+    test('reports extreme bullet counts as error', () {
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.bullets).copyWith(
+            title: 'Alles op een slide',
+            bullets: List.generate(16, (i) => 'Kort punt ${i + 1}'),
+          ),
+        ],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) =>
+              i.kind == SlideQualityIssueKind.bulletCountCritical &&
+              i.severity == MarkdownValidationSeverity.error,
+        ),
+        isTrue,
+      );
+    });
+
+    test('detects long bullet prose even when bullet count is modest', () {
+      final proseBullet =
+          'Deze bullet beschrijft meerdere details die beter in de toelichting '
+          'of op een aparte slide passen';
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.bullets).copyWith(
+            title: 'Context',
+            bullets: List.generate(6, (_) => proseBullet),
+          ),
+        ],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) => i.kind == SlideQualityIssueKind.bulletWordCountHigh,
+        ),
+        isTrue,
+      );
+      expect(
+        result.issues.any(
+          (i) =>
+              i.kind == SlideQualityIssueKind.bulletAverageLengthHigh &&
+              i.severity == MarkdownValidationSeverity.informational,
+        ),
+        isTrue,
+      );
+    });
+
+    test('reports very long average bullet length as warning', () {
+      const longBullet =
+          'een twee drie vier vijf zes zeven acht negen tien elf twaalf '
+          'dertien veertien vijftien zestien zeventien achttien negentien '
+          'twintig eenentwintig tweeentwintig drieentwintig vierentwintig '
+          'vijfentwintig';
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.bullets).copyWith(
+            title: 'Uitgeschreven bullets',
+            bullets: List.generate(3, (_) => longBullet),
+          ),
+        ],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) =>
+              i.kind == SlideQualityIssueKind.bulletAverageLengthHigh &&
+              i.severity == MarkdownValidationSeverity.warning,
+        ),
+        isTrue,
+      );
+    });
+
+    test('detects multi-sentence bullets and deep nesting', () {
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.bullets).copyWith(
+            title: 'Details',
+            bullets: [
+              'Eerste observatie. Tweede zin met extra context.',
+              'Kort punt',
+              '\t\tDiep genest punt',
+              'Afronding',
+            ],
+          ),
+        ],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) => i.kind == SlideQualityIssueKind.bulletMultiSentence,
+        ),
+        isTrue,
+      );
+      expect(
+        result.issues.any(
+          (i) => i.kind == SlideQualityIssueKind.bulletNestingDeep,
+        ),
+        isTrue,
+      );
+    });
+
+    test('detects strongly imbalanced two-column bullets', () {
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.twoBullets).copyWith(
+            title: 'Vergelijking',
+            bullets: List.generate(8, (i) => 'Links ${i + 1}'),
+            bullets2: ['Rechts 1', 'Rechts 2'],
+          ),
+        ],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) => i.kind == SlideQualityIssueKind.bulletColumnImbalance,
         ),
         isTrue,
       );
@@ -203,7 +471,7 @@ void main() {
       );
     });
 
-    test('warns about contrast on title slide with background image', () {
+    test('does not warn about unverified image contrast on title slide', () {
       final deck = Deck(
         title: 'Demo',
         slides: [
@@ -220,7 +488,7 @@ void main() {
         result.issues.any(
           (i) => i.kind == SlideQualityIssueKind.imageContrastUnverified,
         ),
-        isTrue,
+        isFalse,
       );
     });
 
@@ -243,7 +511,7 @@ void main() {
         title: 'Demo',
         slides: [
           Slide.create(SlideType.bullets),
-          Slide.create(SlideType.image).copyWith(imagePath: 'images/photo.jpg'),
+          Slide.create(SlideType.video).copyWith(videoPath: 'video/demo.mp4'),
         ],
       );
 

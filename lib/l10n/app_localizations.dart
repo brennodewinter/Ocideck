@@ -2549,6 +2549,30 @@ const _dutchSourceStrings = {
 
 const _dutchSourceStringAdditions = {
   'en': {
+    'Veel bullets op deze slide': 'Many bullets on this slide',
+    'bullets': 'bullets',
+    'Overweeg de inhoud te splitsen.': 'Consider splitting the content.',
+    'Erg veel bullets op deze slide': 'Too many bullets on this slide',
+    'Splits deze inhoud over meerdere slides.':
+        'Split this content across multiple slides.',
+    'Veel woorden in bullets': 'Many words in bullets',
+    'woorden': 'words',
+    'Maak bullets korter of splits de slide.':
+        'Shorten the bullets or split the slide.',
+    'Erg veel woorden in bullets': 'Too many words in bullets',
+    'Gemiddeld lange bullets': 'Long bullets on average',
+    'woorden per bullet': 'words per bullet',
+    'Maak elke bullet kernachtiger.': 'Make each bullet more concise.',
+    'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+        'Bullet with multiple sentences found. Make bullets more concise or split the content.',
+    'Diepe bulletniveaus gevonden': 'Deep bullet levels found',
+    'niveau': 'level',
+    'Beperk nesting voor betere leesbaarheid.':
+        'Limit nesting for better readability.',
+    'Twee kolommen zijn sterk uit balans':
+        'Two columns are strongly imbalanced',
+    'tegenover': 'versus',
+    'Verdeel of splits de inhoud.': 'Redistribute or split the content.',
     'Slidetitel': 'Slide title',
     'Cockpitmeters': 'Cockpit meters',
     'Meter toevoegen': 'Add meter',
@@ -2872,6 +2896,30 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Scatter',
   },
   'it': {
+    'Veel bullets op deze slide': 'Many bullets on this slide',
+    'bullets': 'bullets',
+    'Overweeg de inhoud te splitsen.': 'Consider splitting the content.',
+    'Erg veel bullets op deze slide': 'Too many bullets on this slide',
+    'Splits deze inhoud over meerdere slides.':
+        'Split this content across multiple slides.',
+    'Veel woorden in bullets': 'Many words in bullets',
+    'woorden': 'words',
+    'Maak bullets korter of splits de slide.':
+        'Shorten the bullets or split the slide.',
+    'Erg veel woorden in bullets': 'Too many words in bullets',
+    'Gemiddeld lange bullets': 'Long bullets on average',
+    'woorden per bullet': 'words per bullet',
+    'Maak elke bullet kernachtiger.': 'Make each bullet more concise.',
+    'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+        'Bullet with multiple sentences found. Make bullets more concise or split the content.',
+    'Diepe bulletniveaus gevonden': 'Deep bullet levels found',
+    'niveau': 'level',
+    'Beperk nesting voor betere leesbaarheid.':
+        'Limit nesting for better readability.',
+    'Twee kolommen zijn sterk uit balans':
+        'Two columns are strongly imbalanced',
+    'tegenover': 'versus',
+    'Verdeel of splits de inhoud.': 'Redistribute or split the content.',
     'Slidetitel': 'Titolo slide',
     'Cockpitmeters': 'Strumenti cockpit',
     'Meter toevoegen': 'Aggiungi strumento',
@@ -3374,6 +3422,30 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Dispersione',
   },
   'de': {
+    'Veel bullets op deze slide': 'Many bullets on this slide',
+    'bullets': 'bullets',
+    'Overweeg de inhoud te splitsen.': 'Consider splitting the content.',
+    'Erg veel bullets op deze slide': 'Too many bullets on this slide',
+    'Splits deze inhoud over meerdere slides.':
+        'Split this content across multiple slides.',
+    'Veel woorden in bullets': 'Many words in bullets',
+    'woorden': 'words',
+    'Maak bullets korter of splits de slide.':
+        'Shorten the bullets or split the slide.',
+    'Erg veel woorden in bullets': 'Too many words in bullets',
+    'Gemiddeld lange bullets': 'Long bullets on average',
+    'woorden per bullet': 'words per bullet',
+    'Maak elke bullet kernachtiger.': 'Make each bullet more concise.',
+    'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+        'Bullet with multiple sentences found. Make bullets more concise or split the content.',
+    'Diepe bulletniveaus gevonden': 'Deep bullet levels found',
+    'niveau': 'level',
+    'Beperk nesting voor betere leesbaarheid.':
+        'Limit nesting for better readability.',
+    'Twee kolommen zijn sterk uit balans':
+        'Two columns are strongly imbalanced',
+    'tegenover': 'versus',
+    'Verdeel of splits de inhoud.': 'Redistribute or split the content.',
     'Slidetitel': 'Folientitel',
     'Cockpitmeters': 'Cockpit-Instrumente',
     'Meter toevoegen': 'Instrument hinzufügen',
@@ -3875,6 +3947,30 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Streudiagramm',
   },
   'fr': {
+    'Veel bullets op deze slide': 'Many bullets on this slide',
+    'bullets': 'bullets',
+    'Overweeg de inhoud te splitsen.': 'Consider splitting the content.',
+    'Erg veel bullets op deze slide': 'Too many bullets on this slide',
+    'Splits deze inhoud over meerdere slides.':
+        'Split this content across multiple slides.',
+    'Veel woorden in bullets': 'Many words in bullets',
+    'woorden': 'words',
+    'Maak bullets korter of splits de slide.':
+        'Shorten the bullets or split the slide.',
+    'Erg veel woorden in bullets': 'Too many words in bullets',
+    'Gemiddeld lange bullets': 'Long bullets on average',
+    'woorden per bullet': 'words per bullet',
+    'Maak elke bullet kernachtiger.': 'Make each bullet more concise.',
+    'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+        'Bullet with multiple sentences found. Make bullets more concise or split the content.',
+    'Diepe bulletniveaus gevonden': 'Deep bullet levels found',
+    'niveau': 'level',
+    'Beperk nesting voor betere leesbaarheid.':
+        'Limit nesting for better readability.',
+    'Twee kolommen zijn sterk uit balans':
+        'Two columns are strongly imbalanced',
+    'tegenover': 'versus',
+    'Verdeel of splits de inhoud.': 'Redistribute or split the content.',
     'Slidetitel': 'Titre de la diapositive',
     'Cockpitmeters': 'Instruments du cockpit',
     'Meter toevoegen': 'Ajouter un instrument',
@@ -4380,6 +4476,30 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Nuage de points',
   },
   'es': {
+    'Veel bullets op deze slide': 'Many bullets on this slide',
+    'bullets': 'bullets',
+    'Overweeg de inhoud te splitsen.': 'Consider splitting the content.',
+    'Erg veel bullets op deze slide': 'Too many bullets on this slide',
+    'Splits deze inhoud over meerdere slides.':
+        'Split this content across multiple slides.',
+    'Veel woorden in bullets': 'Many words in bullets',
+    'woorden': 'words',
+    'Maak bullets korter of splits de slide.':
+        'Shorten the bullets or split the slide.',
+    'Erg veel woorden in bullets': 'Too many words in bullets',
+    'Gemiddeld lange bullets': 'Long bullets on average',
+    'woorden per bullet': 'words per bullet',
+    'Maak elke bullet kernachtiger.': 'Make each bullet more concise.',
+    'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+        'Bullet with multiple sentences found. Make bullets more concise or split the content.',
+    'Diepe bulletniveaus gevonden': 'Deep bullet levels found',
+    'niveau': 'level',
+    'Beperk nesting voor betere leesbaarheid.':
+        'Limit nesting for better readability.',
+    'Twee kolommen zijn sterk uit balans':
+        'Two columns are strongly imbalanced',
+    'tegenover': 'versus',
+    'Verdeel of splits de inhoud.': 'Redistribute or split the content.',
     'Slidetitel': 'Título de diapositiva',
     'Cockpitmeters': 'Instrumentos del cockpit',
     'Meter toevoegen': 'Añadir instrumento',
@@ -4883,6 +5003,30 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Dispersión',
   },
   'fy': {
+    'Veel bullets op deze slide': 'Many bullets on this slide',
+    'bullets': 'bullets',
+    'Overweeg de inhoud te splitsen.': 'Consider splitting the content.',
+    'Erg veel bullets op deze slide': 'Too many bullets on this slide',
+    'Splits deze inhoud over meerdere slides.':
+        'Split this content across multiple slides.',
+    'Veel woorden in bullets': 'Many words in bullets',
+    'woorden': 'words',
+    'Maak bullets korter of splits de slide.':
+        'Shorten the bullets or split the slide.',
+    'Erg veel woorden in bullets': 'Too many words in bullets',
+    'Gemiddeld lange bullets': 'Long bullets on average',
+    'woorden per bullet': 'words per bullet',
+    'Maak elke bullet kernachtiger.': 'Make each bullet more concise.',
+    'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+        'Bullet with multiple sentences found. Make bullets more concise or split the content.',
+    'Diepe bulletniveaus gevonden': 'Deep bullet levels found',
+    'niveau': 'level',
+    'Beperk nesting voor betere leesbaarheid.':
+        'Limit nesting for better readability.',
+    'Twee kolommen zijn sterk uit balans':
+        'Two columns are strongly imbalanced',
+    'tegenover': 'versus',
+    'Verdeel of splits de inhoud.': 'Redistribute or split the content.',
     'Slidetitel': 'Slidetitel',
     'Cockpitmeters': 'Cockpitmeters',
     'Meter toevoegen': 'Meter tafoegje',
@@ -5370,6 +5514,30 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Sparring',
   },
   'pap': {
+    'Veel bullets op deze slide': 'Many bullets on this slide',
+    'bullets': 'bullets',
+    'Overweeg de inhoud te splitsen.': 'Consider splitting the content.',
+    'Erg veel bullets op deze slide': 'Too many bullets on this slide',
+    'Splits deze inhoud over meerdere slides.':
+        'Split this content across multiple slides.',
+    'Veel woorden in bullets': 'Many words in bullets',
+    'woorden': 'words',
+    'Maak bullets korter of splits de slide.':
+        'Shorten the bullets or split the slide.',
+    'Erg veel woorden in bullets': 'Too many words in bullets',
+    'Gemiddeld lange bullets': 'Long bullets on average',
+    'woorden per bullet': 'words per bullet',
+    'Maak elke bullet kernachtiger.': 'Make each bullet more concise.',
+    'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+        'Bullet with multiple sentences found. Make bullets more concise or split the content.',
+    'Diepe bulletniveaus gevonden': 'Deep bullet levels found',
+    'niveau': 'level',
+    'Beperk nesting voor betere leesbaarheid.':
+        'Limit nesting for better readability.',
+    'Twee kolommen zijn sterk uit balans':
+        'Two columns are strongly imbalanced',
+    'tegenover': 'versus',
+    'Verdeel of splits de inhoud.': 'Redistribute or split the content.',
     'Slidetitel': 'Título di slide',
     'Cockpitmeters': 'Meternan di cockpit',
     'Meter toevoegen': 'Agregá meter',

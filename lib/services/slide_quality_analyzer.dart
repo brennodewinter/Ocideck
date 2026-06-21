@@ -15,6 +15,22 @@ import 'slide_layout_metrics.dart';
 /// Maximum combined quote + author length before a density warning.
 const int kQuoteDensityCharThreshold = 200;
 
+/// Readability guardrails for bullet-heavy slides. The existing fit-scale check
+/// catches physical overflow; these thresholds catch slides that still fit but
+/// are likely too dense for an audience to read comfortably.
+const int kSingleColumnBulletWarningCount = 8;
+const int kSingleColumnBulletCriticalCount = 14;
+const int kTwoColumnBulletWarningCount = 14;
+const int kTwoColumnBulletCriticalCount = 22;
+const int kSingleColumnWordWarningCount = 90;
+const int kSingleColumnWordCriticalCount = 150;
+const int kTwoColumnWordWarningCount = 120;
+const int kTwoColumnWordCriticalCount = 220;
+const int kAverageBulletWordInfoCount = 15;
+const int kAverageBulletWordWarningCount = 25;
+const int kLongMultiSentenceBulletWordCount = 24;
+const int kBulletDisplayLevelWarning = 3;
+
 /// Footer text opacity in slide previews — keep in sync with overlays.dart.
 const double kFooterTextAlpha = 0.7;
 
@@ -42,7 +58,7 @@ class SlideQualityAnalyzer {
     for (var i = 0; i < slides.length; i++) {
       final slide = slides[i];
       if (slide.skipped) continue;
-      _checkAltText(slide, i, issues);
+      _checkMediaDescriptions(slide, i, issues);
       _checkSlideContrast(slide, i, theme, issues);
       _checkTextDensity(slide, i, font, issues);
       _checkMissingMedia(slide, i, projectPath, issues);
@@ -228,35 +244,9 @@ class SlideQualityAnalyzer {
           foreground: theme.titleTextColor,
           background: theme.sectionBackgroundColor,
         );
-      case SlideType.title:
-        if (slide.imagePath.isNotEmpty) {
-          _addImageContrastNote(issues, index);
-        }
-      case SlideType.quote:
-        if (slide.imagePath.isNotEmpty) {
-          _addImageContrastNote(issues, index);
-        }
       default:
         break;
     }
-  }
-
-  void _addImageContrastNote(List<SlideQualityIssue> issues, int index) {
-    if (issues.any(
-      (i) =>
-          i.slideIndex == index &&
-          i.kind == SlideQualityIssueKind.imageContrastUnverified,
-    )) {
-      return;
-    }
-    issues.add(
-      SlideQualityIssue(
-        slideIndex: index,
-        kind: SlideQualityIssueKind.imageContrastUnverified,
-        category: SlideQualityCategory.contrast,
-        severity: MarkdownValidationSeverity.warning,
-      ),
-    );
   }
 
   void _addSlidePairIssue({
@@ -286,72 +276,12 @@ class SlideQualityAnalyzer {
     );
   }
 
-  void _checkAltText(Slide slide, int index, List<SlideQualityIssue> issues) {
-    void missingCaption({
-      required String path,
-      required String caption,
-      required String field,
-      required String label,
-    }) {
-      if (path.trim().isEmpty || caption.trim().isNotEmpty) return;
-      issues.add(
-        SlideQualityIssue(
-          slideIndex: index,
-          kind: SlideQualityIssueKind.missingAltCaption,
-          category: SlideQualityCategory.altText,
-          severity: MarkdownValidationSeverity.informational,
-          field: field,
-          args: {'label': label},
-        ),
-      );
-    }
-
+  void _checkMediaDescriptions(
+    Slide slide,
+    int index,
+    List<SlideQualityIssue> issues,
+  ) {
     switch (slide.type) {
-      case SlideType.image:
-        missingCaption(
-          path: slide.imagePath,
-          caption: slide.imageCaption,
-          field: 'imageCaption',
-          label: 'Afbeelding',
-        );
-      case SlideType.twoImages:
-        missingCaption(
-          path: slide.imagePath,
-          caption: slide.imageCaption,
-          field: 'imageCaption',
-          label: 'Eerste afbeelding',
-        );
-        missingCaption(
-          path: slide.imagePath2,
-          caption: slide.imageCaption2,
-          field: 'imageCaption2',
-          label: 'Tweede afbeelding',
-        );
-      case SlideType.bulletsImage:
-        missingCaption(
-          path: slide.imagePath,
-          caption: slide.imageCaption,
-          field: 'imageCaption',
-          label: 'Afbeelding',
-        );
-      case SlideType.title:
-        if (slide.imagePath.isNotEmpty) {
-          missingCaption(
-            path: slide.imagePath,
-            caption: slide.imageCaption,
-            field: 'imageCaption',
-            label: 'Achtergrondafbeelding',
-          );
-        }
-      case SlideType.quote:
-        if (slide.imagePath.isNotEmpty) {
-          missingCaption(
-            path: slide.imagePath,
-            caption: slide.imageCaption,
-            field: 'imageCaption',
-            label: 'Achtergrondafbeelding',
-          );
-        }
       case SlideType.chart:
         _checkChartAltText(slide, index, issues);
       case SlideType.video:
@@ -362,6 +292,11 @@ class SlideQualityAnalyzer {
           hasMedia: slide.videoPath.trim().isNotEmpty,
           label: 'Video',
         );
+      case SlideType.image:
+      case SlideType.twoImages:
+      case SlideType.bulletsImage:
+      case SlideType.title:
+      case SlideType.quote:
       case SlideType.bullets:
       case SlideType.twoBullets:
       case SlideType.section:
@@ -512,17 +447,35 @@ class SlideQualityAnalyzer {
           index,
           bulletsSlideFitScale(slide: slide, font: font),
         );
+        _checkBulletReadability(
+          slide: slide,
+          index: index,
+          issues: issues,
+          twoColumn: false,
+        );
       case SlideType.twoBullets:
         _addFitScaleIssue(
           issues,
           index,
           twoBulletsSlideFitScale(slide: slide, font: font),
         );
+        _checkBulletReadability(
+          slide: slide,
+          index: index,
+          issues: issues,
+          twoColumn: true,
+        );
       case SlideType.bulletsImage:
         _addFitScaleIssue(
           issues,
           index,
           bulletsImageSlideFitScale(slide: slide, font: font),
+        );
+        _checkBulletReadability(
+          slide: slide,
+          index: index,
+          issues: issues,
+          twoColumn: false,
         );
       case SlideType.table:
         _checkTableDensity(slide, index, issues);
@@ -542,6 +495,165 @@ class SlideQualityAnalyzer {
       case SlideType.cockpit:
         break;
     }
+  }
+
+  void _checkBulletReadability({
+    required Slide slide,
+    required int index,
+    required List<SlideQualityIssue> issues,
+    required bool twoColumn,
+  }) {
+    final left = slide.listStyle == ListStyle.richText
+        ? _markdownBulletTexts(slide.customMarkdown)
+        : _visibleBulletTexts(slide.bullets, slide.listStyle);
+    final right = twoColumn
+        ? _visibleBulletTexts(slide.bullets2, slide.listStyle)
+        : const <_BulletText>[];
+    _checkBulletItemsReadability(
+      left: left,
+      right: right,
+      index: index,
+      issues: issues,
+      twoColumn: twoColumn,
+    );
+  }
+
+  void _checkBulletItemsReadability({
+    required List<_BulletText> left,
+    required List<_BulletText> right,
+    required int index,
+    required List<SlideQualityIssue> issues,
+    required bool twoColumn,
+  }) {
+    final all = [...left, ...right];
+    if (all.isEmpty) return;
+
+    final bulletCount = all.length;
+    final warningCount = twoColumn
+        ? kTwoColumnBulletWarningCount
+        : kSingleColumnBulletWarningCount;
+    final criticalCount = twoColumn
+        ? kTwoColumnBulletCriticalCount
+        : kSingleColumnBulletCriticalCount;
+    if (bulletCount > criticalCount) {
+      _addBulletIssue(
+        issues,
+        index,
+        SlideQualityIssueKind.bulletCountCritical,
+        MarkdownValidationSeverity.error,
+        {'count': '$bulletCount', 'limit': '$criticalCount'},
+      );
+    } else if (bulletCount > warningCount) {
+      _addBulletIssue(
+        issues,
+        index,
+        SlideQualityIssueKind.bulletCountHigh,
+        MarkdownValidationSeverity.warning,
+        {'count': '$bulletCount', 'limit': '$warningCount'},
+      );
+    }
+
+    final wordCounts = all.map((b) => _wordCount(b.text)).toList();
+    final totalWords = wordCounts.fold<int>(0, (sum, value) => sum + value);
+    final warningWords = twoColumn
+        ? kTwoColumnWordWarningCount
+        : kSingleColumnWordWarningCount;
+    final criticalWords = twoColumn
+        ? kTwoColumnWordCriticalCount
+        : kSingleColumnWordCriticalCount;
+    if (totalWords > criticalWords) {
+      _addBulletIssue(
+        issues,
+        index,
+        SlideQualityIssueKind.bulletWordCountCritical,
+        MarkdownValidationSeverity.error,
+        {'words': '$totalWords', 'limit': '$criticalWords'},
+      );
+    } else if (totalWords > warningWords) {
+      _addBulletIssue(
+        issues,
+        index,
+        SlideQualityIssueKind.bulletWordCountHigh,
+        MarkdownValidationSeverity.warning,
+        {'words': '$totalWords', 'limit': '$warningWords'},
+      );
+    }
+
+    final averageWords = totalWords / bulletCount;
+    if (bulletCount >= 3 && averageWords >= kAverageBulletWordInfoCount) {
+      final severity = averageWords >= kAverageBulletWordWarningCount
+          ? MarkdownValidationSeverity.warning
+          : MarkdownValidationSeverity.informational;
+      _addBulletIssue(
+        issues,
+        index,
+        SlideQualityIssueKind.bulletAverageLengthHigh,
+        severity,
+        {'average': averageWords.round().toString()},
+      );
+    }
+
+    final multiSentenceBullets = all.where((b) {
+      final words = _wordCount(b.text);
+      return _sentenceLikeCount(b.text) > 1 &&
+          (words >= kLongMultiSentenceBulletWordCount || bulletCount >= 4);
+    }).length;
+    if (multiSentenceBullets > 0) {
+      _addBulletIssue(
+        issues,
+        index,
+        SlideQualityIssueKind.bulletMultiSentence,
+        MarkdownValidationSeverity.warning,
+        {'count': '$multiSentenceBullets'},
+      );
+    }
+
+    final maxDisplayLevel = all
+        .map((b) => b.level + 1)
+        .fold<int>(1, (max, value) => value > max ? value : max);
+    if (maxDisplayLevel >= kBulletDisplayLevelWarning) {
+      _addBulletIssue(
+        issues,
+        index,
+        SlideQualityIssueKind.bulletNestingDeep,
+        MarkdownValidationSeverity.warning,
+        {'level': '$maxDisplayLevel'},
+      );
+    }
+
+    if (twoColumn && left.isNotEmpty && right.isNotEmpty) {
+      final leftCount = left.length;
+      final rightCount = right.length;
+      final larger = leftCount > rightCount ? leftCount : rightCount;
+      final smaller = leftCount < rightCount ? leftCount : rightCount;
+      if (larger - smaller >= 4 && larger >= smaller * 2) {
+        _addBulletIssue(
+          issues,
+          index,
+          SlideQualityIssueKind.bulletColumnImbalance,
+          MarkdownValidationSeverity.warning,
+          {'left': '$leftCount', 'right': '$rightCount'},
+        );
+      }
+    }
+  }
+
+  void _addBulletIssue(
+    List<SlideQualityIssue> issues,
+    int index,
+    SlideQualityIssueKind kind,
+    MarkdownValidationSeverity severity,
+    Map<String, String> args,
+  ) {
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: index,
+        kind: kind,
+        category: SlideQualityCategory.textDensity,
+        severity: severity,
+        args: args,
+      ),
+    );
   }
 
   void _addFitScaleIssue(
@@ -624,6 +736,16 @@ class SlideQualityAnalyzer {
   ) {
     final md = slide.customMarkdown;
     if (md.trim().isEmpty) return;
+    final markdownBullets = _markdownBulletTexts(md);
+    if (markdownBullets.isNotEmpty) {
+      _checkBulletItemsReadability(
+        left: markdownBullets,
+        right: const [],
+        index: index,
+        issues: issues,
+        twoColumn: false,
+      );
+    }
     final lines = md.split('\n').where((l) => l.trim().isNotEmpty).length;
     if (lines <= 18 && md.length <= 1200) return;
 
@@ -680,5 +802,67 @@ class SlideQualityAnalyzer {
     );
   }
 
+  List<_BulletText> _visibleBulletTexts(List<String> bullets, ListStyle style) {
+    return bullets
+        .where((b) => b.trimLeft().isNotEmpty)
+        .map((b) {
+          final level = bulletLevel(b);
+          final text = style == ListStyle.checklist
+              ? checklistItemText(b)
+              : bulletText(b);
+          return _BulletText(text: stripInlineMarkdown(text), level: level);
+        })
+        .where((b) => b.text.trim().isNotEmpty)
+        .toList();
+  }
+
+  List<_BulletText> _markdownBulletTexts(String markdown) {
+    final bullets = <_BulletText>[];
+    final lines = markdown.split('\n');
+    final marker = RegExp(r'^(\s*)(?:[-*+•◦▪▫–]|\d+[.)])\s+(.+)$');
+    final htmlItem = RegExp(r'<li[^>]*>(.*?)</li>', caseSensitive: false);
+    for (final line in lines) {
+      for (final item in htmlItem.allMatches(line)) {
+        bullets.add(
+          _BulletText(text: _cleanInlineText(item.group(1) ?? ''), level: 0),
+        );
+      }
+      final match = marker.firstMatch(line);
+      if (match == null) continue;
+      final indent = match.group(1) ?? '';
+      final raw = match.group(2) ?? '';
+      final text = raw.replaceFirst(RegExp(r'^\[[ xX]\]\s*'), '');
+      bullets.add(
+        _BulletText(
+          text: _cleanInlineText(text),
+          level: (indent.replaceAll('\t', '  ').length / 2).floor(),
+        ),
+      );
+    }
+    return bullets.where((b) => b.text.trim().isNotEmpty).toList();
+  }
+
+  String _cleanInlineText(String value) {
+    final withoutTags = value.replaceAll(RegExp(r'<[^>]+>'), ' ');
+    return stripInlineMarkdown(withoutTags).replaceAll(RegExp(r'\s+'), ' ');
+  }
+
+  int _wordCount(String value) {
+    return RegExp(
+      r"[A-Za-zÀ-ÖØ-öø-ÿ0-9]+(?:[-'][A-Za-zÀ-ÖØ-öø-ÿ0-9]+)*",
+    ).allMatches(value).length;
+  }
+
+  int _sentenceLikeCount(String value) {
+    return RegExp(r'[.!?](?:\s+|$)').allMatches(value).length;
+  }
+
   String _percent(double scale) => '${(scale * 100).round()}%';
+}
+
+class _BulletText {
+  final String text;
+  final int level;
+
+  const _BulletText({required this.text, required this.level});
 }

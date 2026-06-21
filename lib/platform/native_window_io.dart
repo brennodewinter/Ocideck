@@ -10,7 +10,7 @@ Future<void> configureNativeWindow() async {
       minimumSize: Size(1000, 650),
       title: 'OciDeck',
     );
-    windowManager.waitUntilReadyToShow(options, () async {
+    await windowManager.waitUntilReadyToShow(options, () async {
       await windowManager.show();
       await windowManager.focus();
       await windowManager.setPreventClose(true);

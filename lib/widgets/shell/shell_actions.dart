@@ -23,11 +23,32 @@ Future<void> _openWithSearch(
 
 /// Vraag een URL op om een presentatie (pakket of markdown) op te halen.
 Future<String?> _showUrlDialog(BuildContext context) {
-  final l10n = context.l10n;
-  final controller = TextEditingController();
   return showDialog<String>(
     context: context,
-    builder: (ctx) => AlertDialog(
+    builder: (_) => const _UrlImportDialog(),
+  );
+}
+
+class _UrlImportDialog extends StatefulWidget {
+  const _UrlImportDialog();
+
+  @override
+  State<_UrlImportDialog> createState() => _UrlImportDialogState();
+}
+
+class _UrlImportDialogState extends State<_UrlImportDialog> {
+  final _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return AlertDialog(
       title: Text(l10n.d('Importeren via URL')),
       content: SizedBox(
         width: 460,
@@ -43,33 +64,33 @@ Future<String?> _showUrlDialog(BuildContext context) {
             ),
             const SizedBox(height: 12),
             TextField(
-              controller: controller,
+              controller: _controller,
               autofocus: true,
               keyboardType: TextInputType.url,
               decoration: const InputDecoration(
-                hintText: 'https://…',
+                hintText: 'https://...',
                 prefixIcon: Icon(Icons.link, size: 18),
                 isDense: true,
                 border: OutlineInputBorder(),
               ),
-              onSubmitted: (v) => Navigator.pop(ctx, v),
+              onSubmitted: (v) => Navigator.pop(context, v),
             ),
           ],
         ),
       ),
       actions: [
         TextButton(
-          onPressed: () => Navigator.pop(ctx),
+          onPressed: () => Navigator.pop(context),
           child: Text(l10n.t('cancel')),
         ),
         ElevatedButton.icon(
-          onPressed: () => Navigator.pop(ctx, controller.text),
+          onPressed: () => Navigator.pop(context, _controller.text),
           icon: const Icon(Icons.download, size: 16),
           label: Text(l10n.d('Ophalen')),
         ),
       ],
-    ),
-  );
+    );
+  }
 }
 
 List<String> _imageSearchPaths(String? projectPath, String? homeDirectory) {

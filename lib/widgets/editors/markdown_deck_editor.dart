@@ -279,9 +279,10 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
 
     final l10n = context.l10n;
     final lineCount = '\n'.allMatches(_ctrl.text).length + 1;
+    final validationIssues =
+        _validation?.issues ?? const <MarkdownValidationIssue>[];
     final issueLines = <int, MarkdownValidationSeverity>{
-      for (final issue in _validation?.issues ?? const [])
-        issue.line: issue.severity,
+      for (final issue in validationIssues) issue.line: issue.severity,
     };
 
     return CallbackShortcuts(

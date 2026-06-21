@@ -78,6 +78,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
       dialogTitle: context.l10n.d('Map met presentaties kiezen'),
       initialDirectory: _directory,
     );
+    if (!mounted) return;
     if (result != null) {
       setState(() {
         _directory = result;

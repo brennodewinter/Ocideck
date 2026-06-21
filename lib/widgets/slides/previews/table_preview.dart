@@ -358,7 +358,7 @@ class _TablePreview extends StatelessWidget {
               pad,
               pad + safe.top,
               pad,
-              pad + safe.bottom,
+              _logoAwareBottomPadding(pad, safe.bottom),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

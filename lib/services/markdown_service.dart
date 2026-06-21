@@ -219,8 +219,15 @@ class MarkdownService {
       case SlideType.title:
         // Background image before headings so Marp treats it as a bg directive
         if (slide.imagePath.isNotEmpty) {
-          final sizeSpec = slide.imageSize > 0 ? '${slide.imageSize}% ' : '';
-          buf.writeln('![bg ${sizeSpec}opacity:.45](${slide.imagePath})');
+          final bgOptions = [
+            'bg',
+            if (slide.imageSize > 0) '${slide.imageSize}%',
+            if (slide.titleImageOverlay) 'opacity:.45',
+          ].join(' ');
+          buf.writeln('![$bgOptions](${slide.imagePath})');
+          if (!slide.titleImageOverlay) {
+            buf.writeln('<!-- ocideck_title_image_overlay: false -->');
+          }
           _writeImageCaption(buf, slide.imageCaption);
           buf.writeln();
         }
@@ -837,6 +844,7 @@ class MarkdownService {
     var bullets2 = <String>[];
     var listStyle = ListStyle.bullets;
     var showChecklistProgress = false;
+    var titleImageOverlay = true;
     var columnTitle1 = '';
     var columnTitle2 = '';
     // bulletsImage slides store their panel width in `<!-- _style:
@@ -875,6 +883,10 @@ class MarkdownService {
           showChecklistProgress =
               content.substring('ocideck_checklist_progress:'.length).trim() ==
               'true';
+        } else if (content.startsWith('ocideck_title_image_overlay:')) {
+          titleImageOverlay =
+              content.substring('ocideck_title_image_overlay:'.length).trim() !=
+              'false';
         } else if (!content.startsWith('_')) {
           notesBuffer.write(notesBuffer.isEmpty ? content : '\n$content');
         }
@@ -988,40 +1000,50 @@ class MarkdownService {
       }
 
       final t = line.trim();
-      if (t.startsWith('|')) {
+      final htmlItems = RegExp(
+        r'<li[^>]*>(.*?)</li>',
+        caseSensitive: false,
+      ).allMatches(t).toList();
+      final bulletMatch = RegExp(
+        r'^([-*+•◦▪▫–]|\d+[.)])\s+(.+)$',
+      ).firstMatch(t);
+      if (htmlItems.isNotEmpty) {
+        for (final item in htmlItems) {
+          final body = _stripInlineHtml(item.group(1) ?? '');
+          if (body.trim().isNotEmpty) bullets.add(body.trim());
+        }
+      } else if (RegExp(
+        r'^</?(ul|ol)(?:\s[^>]*)?>$',
+        caseSensitive: false,
+      ).hasMatch(t)) {
+        // HTML list container; individual <li> items are handled above.
+      } else if (t.startsWith('|')) {
         tableLines.add(t);
       } else if (t.startsWith('# ')) {
         h1 = t.substring(2);
       } else if (t.startsWith('## ')) {
         h2 = t.substring(3);
-      } else if (t.startsWith('- ')) {
+      } else if (bulletMatch != null) {
         // Count leading spaces (2 per level)
         int spaces = 0;
         for (final ch in line.characters) {
           if (ch == ' ') {
             spaces++;
+          } else if (ch == '\t') {
+            spaces += 2;
           } else {
             break;
           }
         }
         final level = spaces ~/ 2;
-        final body = t.substring(2);
+        final marker = bulletMatch.group(1) ?? '';
+        final body = bulletMatch.group(2) ?? '';
         bullets.add('\t' * level + body);
         if (RegExp(r'^\[[ xX]\]\s*').hasMatch(body)) {
           listStyle = ListStyle.checklist;
+        } else if (RegExp(r'^\d+[.)]$').hasMatch(marker)) {
+          listStyle = ListStyle.numbered;
         }
-      } else if (RegExp(r'^\d+\.\s+').hasMatch(t)) {
-        int spaces = 0;
-        for (final ch in line.characters) {
-          if (ch == ' ') {
-            spaces++;
-          } else {
-            break;
-          }
-        }
-        final level = spaces ~/ 2;
-        bullets.add('\t' * level + t.replaceFirst(RegExp(r'^\d+\.\s+'), ''));
-        listStyle = ListStyle.numbered;
       } else if (t.startsWith('> ')) {
         quote = t.substring(2);
       } else if (t.startsWith('— ')) {
@@ -1159,6 +1181,7 @@ class MarkdownService {
       imageCaption: imageCaption,
       imageCaption2: imageCaption2,
       imageSize: imageSize,
+      titleImageOverlay: titleImageOverlay,
       videoPath: videoPath,
       videoAutoplay: videoAutoplay,
       audioPath: audioPath,
@@ -1385,5 +1408,11 @@ class MarkdownService {
       skipped: skipped,
       tlp: tlp,
     );
+  }
+
+  String _stripInlineHtml(String value) {
+    return value
+        .replaceAll(RegExp(r'<[^>]+>'), ' ')
+        .replaceAll(RegExp(r'\s+'), ' ');
   }
 }

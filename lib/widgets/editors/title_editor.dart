@@ -103,7 +103,7 @@ class _TitleEditorState extends ConsumerState<TitleEditor> {
         const SizedBox(height: 4),
         Text(
           l10n.d(
-            'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.',
+            'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.',
           ),
           style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
         ),
@@ -130,6 +130,20 @@ class _TitleEditorState extends ConsumerState<TitleEditor> {
             value: widget.slide.imageSize,
             onChanged: (v) =>
                 widget.onUpdate(widget.slide.copyWith(imageSize: v)),
+          ),
+          const SizedBox(height: 12),
+          CheckboxListTile(
+            value: widget.slide.titleImageOverlay,
+            onChanged: (value) => widget.onUpdate(
+              widget.slide.copyWith(titleImageOverlay: value ?? true),
+            ),
+            contentPadding: EdgeInsets.zero,
+            dense: true,
+            controlAffinity: ListTileControlAffinity.leading,
+            title: const Text('Grijze waas over afbeelding'),
+            subtitle: const Text(
+              'Maakt de achtergrond rustiger achter titel en subtitel.',
+            ),
           ),
         ],
       ],

@@ -537,7 +537,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           case 'prev':
             _prev();
           case 'exit':
-            _exit();
+            await _exit();
           case 'audioComplete':
             _onMediaCompleted(kind: 'audio');
           case 'mediaComplete':

@@ -103,6 +103,9 @@ class RecoveryService {
         if (entry is File && entry.path.endsWith('.json')) {
           try {
             final data = jsonDecode(await entry.readAsString());
+            if (data is! Map) {
+              throw const FormatException('Recovery snapshot is not a map');
+            }
             out.add(RecoverySnapshot.fromJson(Map<String, Object?>.from(data)));
           } catch (e, s) {
             logError('RecoveryService.loadAll: decode recovery snapshot', e, s);

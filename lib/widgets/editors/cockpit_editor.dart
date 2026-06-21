@@ -214,7 +214,6 @@ class _CockpitEditorState extends State<CockpitEditor> {
       ),
     );
   }
-
 }
 
 class _AnimationDurationControl extends StatelessWidget {

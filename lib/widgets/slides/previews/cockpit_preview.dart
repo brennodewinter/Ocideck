@@ -77,7 +77,7 @@ class _CockpitPreviewState extends State<_CockpitPreview>
       pad + logoSafe.left,
       pad + logoSafe.top,
       pad + logoSafe.right,
-      pad + logoSafe.bottom,
+      _logoAwareBottomPadding(pad, logoSafe.bottom),
     );
     return Container(
       color: bg,
@@ -438,14 +438,13 @@ class _CockpitInstrumentPainter extends CustomPainter {
     );
     final body = Path.combine(
       PathOperation.union,
-      Path()
-        ..addRRect(
-          RRect.fromRectAndCorners(
-            tubeRect,
-            topLeft: Radius.circular(tubeWidth / 2),
-            topRight: Radius.circular(tubeWidth / 2),
-          ),
+      Path()..addRRect(
+        RRect.fromRectAndCorners(
+          tubeRect,
+          topLeft: Radius.circular(tubeWidth / 2),
+          topRight: Radius.circular(tubeWidth / 2),
         ),
+      ),
       Path()..addOval(Rect.fromCircle(center: bulbCenter, radius: bulbRadius)),
     );
     canvas.drawPath(body, Paint()..color = _line(0.08));
@@ -777,8 +776,13 @@ class _CockpitInstrumentPainter extends CustomPainter {
   /// A tapered instrument needle (wide at the hub, pointed at the tip, with a
   /// short counterweight tail) — reads far more like a real gauge than a plain
   /// line. [s] is the instrument's shortest side.
-  void _needle(Canvas canvas, Offset c, double angleRad, double length,
-      double s) {
+  void _needle(
+    Canvas canvas,
+    Offset c,
+    double angleRad,
+    double length,
+    double s,
+  ) {
     final dir = Offset(math.cos(angleRad), math.sin(angleRad));
     final perp = Offset(-dir.dy, dir.dx);
     final halfW = math.max(2.0, s * 0.016);

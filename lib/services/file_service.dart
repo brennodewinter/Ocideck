@@ -960,14 +960,15 @@ $logoCss
   }
 
   String _logoSafePaddingCss(ThemeProfile profile) {
-    final reserved = profile.logoSize + 64;
     switch (profile.logoPosition) {
       case 'top-left':
       case 'top-right':
+        final reserved = profile.logoSize + 52;
         return 'padding-top: ${reserved}px;';
       case 'bottom-left':
       case 'bottom-right':
       default:
+        final reserved = profile.logoSize + 24;
         return 'padding-bottom: ${reserved}px;';
     }
   }

@@ -92,11 +92,12 @@ class _TitlePreview extends StatelessWidget {
           slide.imageSize,
           bgColor: _hexColor(profile.titleBackgroundColor),
         ),
-        Container(
-          color: _hexColor(
-            profile.titleBackgroundColor,
-          ).withValues(alpha: 0.62),
-        ),
+        if (slide.titleImageOverlay)
+          Container(
+            color: _hexColor(
+              profile.titleBackgroundColor,
+            ).withValues(alpha: 0.62),
+          ),
         _content(context),
         _captionOverlay(context, slide.imageCaption, w),
       ],
@@ -315,7 +316,7 @@ class _MarkdownPreview extends StatelessWidget {
                 pad,
                 pad + safe.top,
                 pad,
-                pad + safe.bottom,
+                _logoAwareBottomPadding(pad, safe.bottom),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

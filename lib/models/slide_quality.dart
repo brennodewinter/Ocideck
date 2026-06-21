@@ -22,6 +22,14 @@ enum SlideQualityIssueKind {
   freeMarkdownDensityHigh,
   titleDensityHigh,
   quoteDensityHigh,
+  bulletCountHigh,
+  bulletCountCritical,
+  bulletWordCountHigh,
+  bulletWordCountCritical,
+  bulletAverageLengthHigh,
+  bulletMultiSentence,
+  bulletNestingDeep,
+  bulletColumnImbalance,
 }
 
 class SlideQualityIssue {

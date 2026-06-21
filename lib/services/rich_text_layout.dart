@@ -54,8 +54,11 @@ double bulletsSlideBottomInset({
   double safeBottom = 0,
 }) {
   final footer = footerSafeInset(w: w, slide: slide, profile: profile);
-  if (footer <= 0) return defaultBottomPad + safeBottom;
-  return safeBottom + w * 0.004;
+  if (footer <= 0) {
+    return safeBottom > defaultBottomPad ? safeBottom : defaultBottomPad;
+  }
+  final footerCushion = w * 0.004;
+  return safeBottom > footerCushion ? safeBottom : footerCushion;
 }
 
 double _richTextBudget(double availH, double footerInset) =>

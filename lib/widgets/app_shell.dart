@@ -6,6 +6,7 @@ import 'package:path/path.dart' as p;
 import 'package:window_manager/window_manager.dart';
 import '../models/deck.dart';
 import '../models/slide.dart';
+import '../models/slide_quality.dart';
 import '../services/caption_service.dart';
 import '../services/description_service.dart';
 import '../services/classification_enforcement_policy.dart';
@@ -16,6 +17,7 @@ import '../services/recovery_service.dart';
 import '../services/mermaid_render_service.dart';
 import '../services/slide_quality_analyzer.dart';
 import '../state/deck_provider.dart';
+import '../state/deck_quality_provider.dart';
 import '../state/editor_provider.dart';
 import '../state/settings_provider.dart';
 import '../state/tabs_provider.dart';
@@ -356,6 +358,17 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                                 editorProvider.overrideWith(
                                   (ref) => tab.editorNotifier,
                                 ),
+                                deckQualityProvider.overrideWith((ref) {
+                                  final deck = ref.watch(
+                                    deckProvider.select((state) => state.deck),
+                                  );
+                                  if (deck == null) {
+                                    return const SlideQualityResult([]);
+                                  }
+                                  return ref
+                                      .watch(slideQualityAnalyzerProvider)
+                                      .analyze(deck);
+                                }),
                               ],
                               child: const _TabContent(),
                             ),

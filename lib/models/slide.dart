@@ -144,6 +144,7 @@ class Slide {
   final String notes;
   final double advanceDuration; // 0 = no auto-advance
   final int imageSize; // 0 = auto; image: bg %, bulletsImage: right panel %
+  final bool titleImageOverlay; // darken title background image for readability
   final bool showLogo; // show the profile logo on this slide (default true)
   final bool showFooter; // show the profile footer on this slide (default true)
   final bool skipped; // skip this slide when presenting and exporting
@@ -180,6 +181,7 @@ class Slide {
     this.notes = '',
     this.advanceDuration = 0,
     this.imageSize = 0,
+    this.titleImageOverlay = true,
     this.showLogo = true,
     this.showFooter = true,
     this.skipped = false,
@@ -240,6 +242,7 @@ class Slide {
       notes: src.notes,
       advanceDuration: src.advanceDuration,
       imageSize: src.imageSize,
+      titleImageOverlay: src.titleImageOverlay,
       showLogo: src.showLogo,
       showFooter: src.showFooter,
       skipped: src.skipped,
@@ -274,6 +277,7 @@ class Slide {
     String? notes,
     double? advanceDuration,
     int? imageSize,
+    bool? titleImageOverlay,
     bool? showLogo,
     bool? showFooter,
     bool? skipped,
@@ -308,6 +312,7 @@ class Slide {
       notes: notes ?? this.notes,
       advanceDuration: advanceDuration ?? this.advanceDuration,
       imageSize: imageSize ?? this.imageSize,
+      titleImageOverlay: titleImageOverlay ?? this.titleImageOverlay,
       showLogo: showLogo ?? this.showLogo,
       showFooter: showFooter ?? this.showFooter,
       skipped: skipped ?? this.skipped,

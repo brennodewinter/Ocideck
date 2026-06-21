@@ -120,6 +120,32 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.quoteDensityHigh =>
       '${l10n.d('Lange quote (')}${issue.args['chars']}'
           '${l10n.d(' tekens) — de tekst wordt verkleind om te passen.')}',
+    SlideQualityIssueKind.bulletCountHigh =>
+      '${l10n.d('Veel bullets op deze slide')} (${issue.args['count']} '
+          'bullets). ${l10n.d('Overweeg de inhoud te splitsen.')}',
+    SlideQualityIssueKind.bulletCountCritical =>
+      '${l10n.d('Erg veel bullets op deze slide')} (${issue.args['count']} '
+          'bullets). ${l10n.d('Splits deze inhoud over meerdere slides.')}',
+    SlideQualityIssueKind.bulletWordCountHigh =>
+      '${l10n.d('Veel woorden in bullets')} (${issue.args['words']} '
+          '${l10n.d('woorden')}). ${l10n.d('Maak bullets korter of splits de slide.')}',
+    SlideQualityIssueKind.bulletWordCountCritical =>
+      '${l10n.d('Erg veel woorden in bullets')} (${issue.args['words']} '
+          '${l10n.d('woorden')}). ${l10n.d('Splits deze inhoud over meerdere slides.')}',
+    SlideQualityIssueKind.bulletAverageLengthHigh =>
+      '${l10n.d('Gemiddeld lange bullets')} (${issue.args['average']} '
+          '${l10n.d('woorden per bullet')}). ${l10n.d('Maak elke bullet kernachtiger.')}',
+    SlideQualityIssueKind.bulletMultiSentence => l10n.d(
+      'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.',
+    ),
+    SlideQualityIssueKind.bulletNestingDeep =>
+      '${l10n.d('Diepe bulletniveaus gevonden')} (${l10n.d('niveau')} '
+          '${issue.args['level']}). ${l10n.d('Beperk nesting voor betere leesbaarheid.')}',
+    SlideQualityIssueKind.bulletColumnImbalance =>
+      '${l10n.d('Twee kolommen zijn sterk uit balans')} '
+          '(${issue.args['left']} ${l10n.d('tegenover')} '
+          '${issue.args['right']} bullets). '
+          '${l10n.d('Verdeel of splits de inhoud.')}',
     SlideQualityIssueKind.missingMediaFile =>
       '${label('label')}${l10n.d(': bestand niet gevonden (')}'
           '${issue.args['path'] ?? ''}).',

@@ -118,6 +118,11 @@ EdgeInsets _logoSafeInsets(double w, ThemeProfile profile) {
   return EdgeInsets.only(bottom: reserved);
 }
 
+double _logoAwareBottomPadding(double defaultPad, double safeBottom) {
+  if (safeBottom <= 0) return defaultPad;
+  return math.max(defaultPad, safeBottom);
+}
+
 EdgeInsets _splitTextLogoSafeInsets(double w, ThemeProfile profile) {
   if (profile.logoPath?.isEmpty ?? true) return EdgeInsets.zero;
   if (profile.logoPosition.endsWith('right')) return EdgeInsets.zero;
