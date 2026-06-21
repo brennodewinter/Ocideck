@@ -18,7 +18,9 @@ import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../theme/app_theme.dart';
 import '../../services/slide_layout_metrics.dart';
+import '../../services/rich_text_layout.dart';
 import '../../utils/log.dart';
+import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/project_path.dart';
 import 'inline_markdown.dart';
 
@@ -83,7 +85,7 @@ Widget _md(
   bool softWrap = true,
 }) {
   return InlineMarkdownText(
-    text,
+    normalizeRichTextMarkdown(text),
     style: style,
     linkColor: linkColor,
     onTapLink: _SlideLinkScope.of(context),
@@ -185,6 +187,16 @@ class SlidePreviewWidget extends StatelessWidget {
   /// Wordt aangeroepen wanneer de video van deze slide klaar is.
   final VoidCallback? onVideoComplete;
 
+  /// Pagina binnen een rich-text slide (0-gebaseerd). Alleen relevant bij
+  /// [ListStyle.richText] wanneer de tekst over meerdere schermen loopt.
+  final int richTextPage;
+
+  /// Toont vorige/volgende-knoppen op rich-text slides met meerdere pagina's.
+  final bool showRichTextPageControls;
+
+  /// Callback wanneer de gebruiker van pagina wisselt binnen een rich-text slide.
+  final ValueChanged<int>? onRichTextPageChanged;
+
   const SlidePreviewWidget({
     super.key,
     required this.slide,
@@ -207,6 +219,9 @@ class SlidePreviewWidget extends StatelessWidget {
     this.onTableCellChanged,
     this.onAudioComplete,
     this.onVideoComplete,
+    this.richTextPage = 0,
+    this.showRichTextPageControls = false,
+    this.onRichTextPageChanged,
   });
 
   @override
@@ -263,6 +278,17 @@ class SlidePreviewWidget extends StatelessWidget {
     return LayoutBuilder(
       builder: (_, constraints) {
         final w = constraints.maxWidth;
+        final splitImage = slide.type == SlideType.bulletsImage;
+        final richTextPages = showRichTextPageControls &&
+                onRichTextPageChanged != null &&
+                slideUsesRichText(slide)
+            ? richTextPageCountForSlide(
+                slide: slide,
+                profile: themeProfile,
+                splitWithImage: splitImage,
+              )
+            : 1;
+        final showRichTextControls = richTextPages > 1;
         return AspectRatio(
           aspectRatio: 16 / 9,
           child: ClipRect(
@@ -299,6 +325,22 @@ class SlidePreviewWidget extends StatelessWidget {
                     projectPath: projectPath,
                     position: themeProfile.logoPosition,
                     size: w * (themeProfile.logoSize / 1280),
+                  ),
+                if (showRichTextControls)
+                  _RichTextPageControlsOverlay(
+                    slide: slide,
+                    w: w,
+                    font: fontFamily,
+                    profile: themeProfile,
+                    tlp: markingTlp,
+                    pageIndex: richTextPage.clamp(0, richTextPages - 1),
+                    pageCount: richTextPages,
+                    onPrevious: richTextPage > 0
+                        ? () => onRichTextPageChanged!(richTextPage - 1)
+                        : null,
+                    onNext: richTextPage < richTextPages - 1
+                        ? () => onRichTextPageChanged!(richTextPage + 1)
+                        : null,
                   ),
                 if (markingTlp != TlpLevel.none)
                   _ClassificationBanner(tlp: markingTlp, w: w),
@@ -341,6 +383,9 @@ class SlidePreviewWidget extends StatelessWidget {
           w: w,
           font: fontFamily,
           profile: themeProfile,
+          richTextPage: richTextPage,
+          showRichTextPageControls: showRichTextPageControls,
+          onRichTextPageChanged: onRichTextPageChanged,
         );
       case SlideType.twoBullets:
         return _TwoBulletsPreview(
@@ -356,6 +401,9 @@ class SlidePreviewWidget extends StatelessWidget {
           projectPath: projectPath,
           font: fontFamily,
           profile: themeProfile,
+          richTextPage: richTextPage,
+          showRichTextPageControls: showRichTextPageControls,
+          onRichTextPageChanged: onRichTextPageChanged,
         );
       case SlideType.twoImages:
         return _TwoImagesPreview(

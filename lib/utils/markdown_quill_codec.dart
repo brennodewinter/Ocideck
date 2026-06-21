@@ -2,6 +2,8 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:markdown_quill/markdown_quill.dart';
 
+import 'markdown_paste_cleanup.dart';
+
 /// Round-trip conversion between stored markdown and a Quill document.
 class MarkdownQuillCodec {
   MarkdownQuillCodec._();
@@ -37,7 +39,8 @@ class MarkdownQuillCodec {
   }
 
   static String markdownFromDocument(Document document) {
-    return _deltaToMd.convert(document.toDelta()).trimRight();
+    final raw = _deltaToMd.convert(document.toDelta()).trimRight();
+    return normalizeRichTextMarkdown(raw);
   }
 }
 

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import '../models/slide.dart';
 import '../utils/log.dart';
+import '../utils/page_scoped_notes.dart';
 import 'annotation_codec.dart';
 
 /// Serializes per-slide user notes (recipient/course notes) into a sidecar
@@ -11,32 +12,42 @@ import 'annotation_codec.dart';
 /// each note by its position plus a content fingerprint. On load we re-attach
 /// notes to the matching slide (same fingerprint, preferring the same index),
 /// and silently drop notes whose slide no longer exists.
+///
+/// Version 2 adds optional [page] (0-based) for rich-text slides split across
+/// multiple presentation pages.
 class UserNotesCodec {
-  static const int version = 1;
+  static const int version = 2;
 
   /// Encode the id-keyed [userNotes] for [slides] into a JSON string, or null
   /// when there is nothing to store.
   static String? encode(List<Slide> slides, Map<String, String> userNotes) {
     final entries = <Map<String, dynamic>>[];
     for (var i = 0; i < slides.length; i++) {
-      final text = userNotes[slides[i].id]?.trim() ?? '';
-      if (text.isEmpty) continue;
-      entries.add({
-        'index': i,
-        'fp': AnnotationCodec.fingerprint(slides[i]),
-        'text': text,
-      });
+      final slideId = slides[i].id;
+      for (final entry in userNotes.entries) {
+        if (!userNoteKeyBelongsToSlide(entry.key, slideId)) continue;
+        final text = entry.value.trim();
+        if (text.isEmpty) continue;
+        final page = pageIndexFromUserNoteKey(entry.key, slideId) ?? 0;
+        entries.add({
+          'index': i,
+          'fp': AnnotationCodec.fingerprint(slides[i]),
+          'text': text,
+          if (page > 0) 'page': page,
+        });
+      }
     }
     if (entries.isEmpty) return null;
     return jsonEncode({'version': version, 'slides': entries});
   }
 
   /// Decode [json] against the freshly parsed [slides], returning a map keyed
-  /// by the current slide ids.
+  /// by the current slide ids (and slideId#pN when page-specific).
   static Map<String, String> decode(String json, List<Slide> slides) {
     final result = <String, String>{};
     try {
       final data = jsonDecode(json);
+      final fileVersion = (data is Map ? data['version'] as num? : null)?.toInt() ?? 1;
       final raw = (data is Map ? data['slides'] : null) as List? ?? const [];
       final used = <int>{};
       for (final e in raw) {
@@ -45,16 +56,17 @@ class UserNotesCodec {
         final index = (entry['index'] as num?)?.toInt() ?? -1;
         final text = (entry['text'] as String?)?.trim() ?? '';
         if (text.isEmpty) continue;
+        final page = fileVersion >= 2
+            ? ((entry['page'] as num?)?.toInt() ?? 0)
+            : 0;
 
         int target = -1;
-        // Prefer the same index when its fingerprint still matches.
         if (index >= 0 &&
             index < slides.length &&
             !used.contains(index) &&
             AnnotationCodec.fingerprint(slides[index]) == fp) {
           target = index;
         } else {
-          // Otherwise re-anchor to any unused slide with the same fingerprint.
           for (var i = 0; i < slides.length; i++) {
             if (!used.contains(i) &&
                 AnnotationCodec.fingerprint(slides[i]) == fp) {
@@ -63,9 +75,13 @@ class UserNotesCodec {
             }
           }
         }
-        if (target < 0) continue; // slide gone/changed → drop this note
+        if (target < 0) continue;
         used.add(target);
-        result[slides[target].id] = text;
+        final slideId = slides[target].id;
+        final key = page > 0
+            ? userNoteStorageKey(slideId, page, multiPage: true)
+            : slideId;
+        result[key] = text;
       }
     } catch (e, s) {
       logError('UserNotesCodec.decode: decode user-notes sidecar JSON', e, s);

@@ -25,6 +25,8 @@ import '../editors/two_images_editor.dart';
 import '../editors/video_slide_editor.dart';
 import '../panels/slide_quality_panel.dart';
 import '../editors/markdown_deck_editor.dart';
+import '../../utils/page_scoped_notes.dart';
+import '../panels/preview_panel.dart';
 import '../markdown_notes_editor.dart';
 
 class EditorPanel extends ConsumerWidget {
@@ -42,6 +44,9 @@ class EditorPanel extends ConsumerWidget {
     final deckNotifier = ref.read(deckProvider.notifier);
     final editorNotifier = ref.read(editorProvider.notifier);
     final imgService = ref.read(imageServiceProvider);
+    final richTextPage = ref.watch(richTextPreviewPageProvider);
+    final richTextPages = richTextPageCount(slide, deck.themeProfile);
+    final multiPageNotes = richTextPages > 1;
 
     void update(Slide updated) => deckNotifier.updateSlide(idx, updated);
 
@@ -141,13 +146,29 @@ class EditorPanel extends ConsumerWidget {
                 const Divider(height: 1),
                 _SlideTlpControl(slide: slide, onUpdate: update),
                 const Divider(height: 1),
-                _NotesField(slide: slide, onUpdate: update),
+                _NotesField(
+                  slide: slide,
+                  richTextPage: richTextPage,
+                  richTextPageCount: richTextPages,
+                  onUpdate: update,
+                ),
                 const Divider(height: 1),
                 _UserNotesField(
                   slide: slide,
-                  note: deck.userNotes[slide.id] ?? '',
-                  onChanged: (text) =>
-                      deckNotifier.setUserNoteForSlide(slide.id, text),
+                  note: deckNotifier.userNoteForSlide(
+                        slide.id,
+                        pageIndex: richTextPage,
+                        multiPage: multiPageNotes,
+                      ) ??
+                      '',
+                  richTextPage: richTextPage,
+                  richTextPageCount: richTextPages,
+                  onChanged: (text) => deckNotifier.setUserNoteForSlide(
+                    slide.id,
+                    text,
+                    pageIndex: richTextPage,
+                    multiPage: multiPageNotes,
+                  ),
                 ),
               ],
             ),
@@ -803,8 +824,15 @@ class _NotesDiscardButton extends StatelessWidget {
 
 class _NotesField extends StatefulWidget {
   final Slide slide;
+  final int richTextPage;
+  final int richTextPageCount;
   final ValueChanged<Slide> onUpdate;
-  const _NotesField({required this.slide, required this.onUpdate});
+  const _NotesField({
+    required this.slide,
+    required this.richTextPage,
+    required this.richTextPageCount,
+    required this.onUpdate,
+  });
 
   @override
   State<_NotesField> createState() => _NotesFieldState();
@@ -817,28 +845,60 @@ class _NotesFieldState extends State<_NotesField> {
   @override
   void initState() {
     super.initState();
-    _ctrl = TextEditingController(text: widget.slide.notes);
+    _ctrl = TextEditingController(text: _noteText());
+    _ctrl.addListener(_emit);
+  }
+
+  String _noteText() => speakerNoteForPage(
+        widget.slide.notes,
+        widget.richTextPage,
+        widget.richTextPageCount,
+      );
+
+  void _reloadController() {
+    _ctrl.removeListener(_emit);
+    _ctrl.text = _noteText();
     _ctrl.addListener(_emit);
   }
 
   @override
   void didUpdateWidget(_NotesField old) {
     super.didUpdateWidget(old);
-    if (old.slide.id != widget.slide.id) {
-      _ctrl.removeListener(_emit);
-      _ctrl.text = widget.slide.notes;
-      _ctrl.addListener(_emit);
+    if (old.slide.id != widget.slide.id ||
+        old.richTextPage != widget.richTextPage ||
+        old.slide.notes != widget.slide.notes) {
+      _reloadController();
     }
   }
 
-  void _emit() => widget.onUpdate(widget.slide.copyWith(notes: _ctrl.text));
+  void _emit() {
+    widget.onUpdate(
+      widget.slide.copyWith(
+        notes: updateSpeakerNoteForPage(
+          widget.slide.notes,
+          widget.richTextPage,
+          widget.richTextPageCount,
+          _ctrl.text,
+        ),
+      ),
+    );
+  }
 
   void _discardNotes() {
     if (_ctrl.text.trim().isEmpty) return;
     _ctrl.removeListener(_emit);
     _ctrl.text = '';
     _ctrl.addListener(_emit);
-    widget.onUpdate(widget.slide.copyWith(notes: ''));
+    widget.onUpdate(
+      widget.slide.copyWith(
+        notes: updateSpeakerNoteForPage(
+          widget.slide.notes,
+          widget.richTextPage,
+          widget.richTextPageCount,
+          '',
+        ),
+      ),
+    );
   }
 
   @override
@@ -880,20 +940,21 @@ class _NotesFieldState extends State<_NotesField> {
               ),
             ],
           ),
-          subtitle: widget.slide.notes.trim().isEmpty
-              ? Text(
-                  l10n.d('Notities voor tijdens het presenteren'),
-                  style: const TextStyle(
-                    fontSize: 11,
-                    color: Color(0xFFD97706),
-                  ),
-                )
-              : null,
+          subtitle: _notesPageSubtitle(
+            l10n,
+            pageIndex: widget.richTextPage,
+            pageCount: widget.richTextPageCount,
+            emptyHint: l10n.d('Notities voor tijdens het presenteren'),
+            hasContent: _noteText().isNotEmpty,
+            accent: const Color(0xFFD97706),
+          ),
           children: [
             SizedBox(
               height: _notesEditorHeight(context),
               child: MarkdownNotesEditor.legacy(
-                key: ValueKey('speaker-notes-${widget.slide.id}'),
+                key: ValueKey(
+                  'speaker-notes-${widget.slide.id}-p${widget.richTextPage}',
+                ),
                 controller: _ctrl,
                 expand: true,
                 baseStyle: const TextStyle(
@@ -943,11 +1004,15 @@ class _NotesFieldState extends State<_NotesField> {
 class _UserNotesField extends StatefulWidget {
   final Slide slide;
   final String note;
+  final int richTextPage;
+  final int richTextPageCount;
   final ValueChanged<String> onChanged;
 
   const _UserNotesField({
     required this.slide,
     required this.note,
+    required this.richTextPage,
+    required this.richTextPageCount,
     required this.onChanged,
   });
 
@@ -969,7 +1034,9 @@ class _UserNotesFieldState extends State<_UserNotesField> {
   @override
   void didUpdateWidget(_UserNotesField old) {
     super.didUpdateWidget(old);
-    if (old.slide.id != widget.slide.id || old.note != widget.note) {
+    if (old.slide.id != widget.slide.id ||
+        old.note != widget.note ||
+        old.richTextPage != widget.richTextPage) {
       _ctrl.removeListener(_emit);
       _ctrl.text = widget.note;
       _ctrl.addListener(_emit);
@@ -1029,20 +1096,21 @@ class _UserNotesFieldState extends State<_UserNotesField> {
               ),
             ],
           ),
-          subtitle: widget.note.trim().isEmpty
-              ? Text(
-                  l10n.d('Notities voor de ontvanger tijdens een cursus'),
-                  style: const TextStyle(
-                    fontSize: 11,
-                    color: Color(0xFF60A5FA),
-                  ),
-                )
-              : null,
+          subtitle: _notesPageSubtitle(
+            l10n,
+            pageIndex: widget.richTextPage,
+            pageCount: widget.richTextPageCount,
+            emptyHint: l10n.d('Notities voor de ontvanger tijdens een cursus'),
+            hasContent: widget.note.trim().isNotEmpty,
+            accent: const Color(0xFF60A5FA),
+          ),
           children: [
             SizedBox(
               height: _notesEditorHeight(context),
               child: MarkdownNotesEditor.legacy(
-                key: ValueKey('user-notes-${widget.slide.id}'),
+                key: ValueKey(
+                  'user-notes-${widget.slide.id}-p${widget.richTextPage}',
+                ),
                 controller: _ctrl,
                 expand: true,
                 baseStyle: const TextStyle(
@@ -1085,4 +1153,27 @@ class _UserNotesFieldState extends State<_UserNotesField> {
       ),
     );
   }
+}
+
+Widget? _notesPageSubtitle(
+  AppLocalizations l10n, {
+  required int pageIndex,
+  required int pageCount,
+  required String emptyHint,
+  required bool hasContent,
+  required Color accent,
+}) {
+  if (pageCount <= 1) {
+    if (hasContent) return null;
+    return Text(
+      emptyHint,
+      style: TextStyle(fontSize: 11, color: accent),
+    );
+  }
+  return Text(
+    hasContent
+        ? '${l10n.d('Pagina')} ${pageIndex + 1} / $pageCount'
+        : '${l10n.d('Pagina')} ${pageIndex + 1} / $pageCount · $emptyHint',
+    style: TextStyle(fontSize: 11, color: accent),
+  );
 }

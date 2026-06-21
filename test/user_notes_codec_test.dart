@@ -69,5 +69,14 @@ void main() {
       final back = UserNotesCodec.decode(json, [onlyB]);
       expect(back, isEmpty);
     });
+
+    test('round-trips page-specific notes', () {
+      final slide = Slide.create(SlideType.bullets).copyWith(title: 'A');
+      final slides = [slide];
+      final notes = {'${slide.id}#p1': 'Pagina 2 notitie'};
+      final json = UserNotesCodec.encode(slides, notes)!;
+      final back = UserNotesCodec.decode(json, slides);
+      expect(back['${slide.id}#p1'], 'Pagina 2 notitie');
+    });
   });
 }

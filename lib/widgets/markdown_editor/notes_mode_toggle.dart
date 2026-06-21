@@ -39,32 +39,39 @@ class NotesModeToggle extends StatelessWidget {
       required IconData icon,
     }) {
       final selected = mode == value;
-      return Material(
-        color: selected ? accent.withValues(alpha: 0.12) : Colors.transparent,
-        borderRadius: BorderRadius.circular(6),
-        child: InkWell(
-          onTap: () => onModeChanged(value),
+      return Tooltip(
+        message: label,
+        child: Material(
+          color: selected ? accent.withValues(alpha: 0.12) : Colors.transparent,
           borderRadius: BorderRadius.circular(6),
-          child: Padding(
-            padding: padding,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  icon,
-                  size: compact ? 14 : 16,
-                  color: selected ? accent : fg,
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  label,
-                  style: TextStyle(
-                    fontSize: fontSize,
-                    fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+          child: InkWell(
+            onTap: () => onModeChanged(value),
+            borderRadius: BorderRadius.circular(6),
+            child: Padding(
+              padding: padding,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    icon,
+                    size: compact ? 14 : 16,
                     color: selected ? accent : fg,
                   ),
-                ),
-              ],
+                  if (!compact) ...[
+                    const SizedBox(width: 4),
+                    Text(
+                      label,
+                      style: TextStyle(
+                        fontSize: fontSize,
+                        fontWeight: selected
+                            ? FontWeight.w600
+                            : FontWeight.w500,
+                        color: selected ? accent : fg,
+                      ),
+                    ),
+                  ],
+                ],
+              ),
             ),
           ),
         ),

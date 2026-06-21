@@ -130,32 +130,45 @@ void main() {
       ImageService(),
       () => const ThemeProfile(),
     );
-    final oversized = List<int>.filled(FileService.maxPackageBytes + 1, 0);
-    expect(await service.importPackageBytes(oversized, temp.path), isNull);
-  });
-
-  test('importPackageBytes aborts when decompressed size exceeds limit', () async {
-    final temp = await Directory.systemTemp.createTemp('ocideck_zip_bomb_');
-    addTearDown(() async {
-      if (await temp.exists()) await temp.delete(recursive: true);
-    });
-
-    final archive = Archive();
-    final md = utf8.encode('---\nmarp: true\n---\n# Hi');
-    archive.addFile(ArchiveFile('deck.md', md.length, md));
-    final huge = List<int>.filled(FileService.maxPackageBytes + 1, 0);
-    archive.addFile(ArchiveFile('images/huge.bin', huge.length, huge));
-
-    final service = FileService(
-      MarkdownService(),
-      ImageService(),
-      () => const ThemeProfile(),
-    );
+    final oversized = List<int>.filled(17, 0);
     expect(
-      await service.importPackageBytes(ZipEncoder().encode(archive), temp.path),
+      await service.importPackageBytes(oversized, temp.path, maxBytes: 16),
       isNull,
     );
   });
+
+  test(
+    'importPackageBytes aborts when decompressed size exceeds limit',
+    () async {
+      final temp = await Directory.systemTemp.createTemp('ocideck_zip_bomb_');
+      addTearDown(() async {
+        if (await temp.exists()) await temp.delete(recursive: true);
+      });
+
+      final archive = Archive();
+      final md = utf8.encode('---\nmarp: true\n---\n# Hi');
+      archive.addFile(ArchiveFile('deck.md', md.length, md));
+      final huge = List<int>.filled(2048, 0);
+      archive.addFile(ArchiveFile('images/huge.bin', huge.length, huge));
+      final zipBytes = ZipEncoder().encode(archive);
+      final maxBytes = zipBytes.length + 1;
+
+      final service = FileService(
+        MarkdownService(),
+        ImageService(),
+        () => const ThemeProfile(),
+      );
+      expect(huge.length + md.length, greaterThan(maxBytes));
+      expect(
+        await service.importPackageBytes(
+          zipBytes,
+          temp.path,
+          maxBytes: maxBytes,
+        ),
+        isNull,
+      );
+    },
+  );
 
   test(
     'importFromUrl refuses non-web schemes and private/loopback hosts',

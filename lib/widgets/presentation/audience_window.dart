@@ -44,6 +44,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   bool _showClassificationWatermark = false;
   String? _projectPath;
   int _index = 0;
+  int _richTextPage = 0;
   int _blank = 0; // 0 = none, 1 = black, 2 = white
 
   // Annotation layer, keyed by slide index (the beamer has no stable ids).
@@ -92,6 +93,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         if (!mounted) return null;
         setState(() {
           _index = (m['index'] as num?)?.toInt() ?? _index;
+          _richTextPage = (m['richTextPage'] as num?)?.toInt() ?? 0;
           _blank = (m['blank'] as num?)?.toInt() ?? 0;
           _laserPoint = null; // laser never carries over to another slide
           _activeStroke = null; // nor does an in-progress stroke
@@ -213,6 +215,8 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                   onLinkTap: openExternalUrl,
                   slideNumber: _index + 1,
                   slideCount: _slides.length,
+                  richTextPage: _richTextPage,
+                  showRichTextPageControls: false,
                   tlp: _tlp,
                   organization: _organization,
                   showClassificationWatermark: _showClassificationWatermark,

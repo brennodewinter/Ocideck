@@ -7,6 +7,7 @@ import '../models/settings.dart';
 import '../models/slide.dart';
 import '../utils/deck_markdown_dashes.dart';
 import '../utils/log.dart';
+import '../utils/markdown_paste_cleanup.dart';
 
 const _uuid = Uuid();
 
@@ -55,6 +56,9 @@ class MarkdownService {
     }
     if (deck.tlp != TlpLevel.none) {
       buf.writeln('tlp: ${deck.tlp.key}');
+    }
+    if (deck.presentationTargetSeconds > 0) {
+      buf.writeln('ocideck_target_seconds: ${deck.presentationTargetSeconds}');
     }
     if (inlineStyleProfile) {
       buf.writeln(
@@ -279,12 +283,24 @@ class MarkdownService {
           );
           buf.writeln();
           if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
-          if (slide.listStyle != ListStyle.bullets) {
-            buf.writeln('<!-- ocideck_list_style: ${slide.listStyle.name} -->');
+          if (slide.listStyle == ListStyle.richText) {
+            buf.writeln('<!-- ocideck_list_style: richText -->');
+            buf.writeln();
+            final body = escapeDeckMarkdownDashLines(slide.customMarkdown);
+            buf.write(body);
+            if (body.isNotEmpty && !body.endsWith('\n')) {
+              buf.writeln();
+            }
+          } else {
+            if (slide.listStyle != ListStyle.bullets) {
+              buf.writeln(
+                '<!-- ocideck_list_style: ${slide.listStyle.name} -->',
+              );
+            }
+            _writeChecklistProgress(buf, slide);
+            buf.writeln();
+            _writeList(buf, slide.bullets, slide.listStyle);
           }
-          _writeChecklistProgress(buf, slide);
-          buf.writeln();
-          _writeList(buf, slide.bullets, slide.listStyle);
           buf.writeln();
           buf.writeln('</div>');
           buf.writeln();
@@ -296,12 +312,24 @@ class MarkdownService {
           buf.writeln('</div>');
         } else {
           if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
-          if (slide.listStyle != ListStyle.bullets) {
-            buf.writeln('<!-- ocideck_list_style: ${slide.listStyle.name} -->');
+          if (slide.listStyle == ListStyle.richText) {
+            buf.writeln('<!-- ocideck_list_style: richText -->');
+            buf.writeln();
+            final body = escapeDeckMarkdownDashLines(slide.customMarkdown);
+            buf.write(body);
+            if (body.isNotEmpty && !body.endsWith('\n')) {
+              buf.writeln();
+            }
+          } else {
+            if (slide.listStyle != ListStyle.bullets) {
+              buf.writeln(
+                '<!-- ocideck_list_style: ${slide.listStyle.name} -->',
+              );
+            }
+            _writeChecklistProgress(buf, slide);
+            buf.writeln();
+            _writeList(buf, slide.bullets, slide.listStyle);
           }
-          _writeChecklistProgress(buf, slide);
-          buf.writeln();
-          _writeList(buf, slide.bullets, slide.listStyle);
         }
 
       case SlideType.twoImages:
@@ -681,6 +709,7 @@ class MarkdownService {
     String description = '';
     String keywords = '';
     TlpLevel tlp = TlpLevel.none;
+    int presentationTargetSeconds = 0;
 
     // Strip front matter
     if (content.startsWith('---\n')) {
@@ -708,6 +737,9 @@ class MarkdownService {
             keywords = _parseScalar(line.substring(9));
           } else if (line.startsWith('tlp:')) {
             tlp = TlpLevelX.fromKey(line.substring(4));
+          } else if (line.startsWith('ocideck_target_seconds:')) {
+            presentationTargetSeconds =
+                int.tryParse(line.substring(24).trim()) ?? 0;
           } else if (line.startsWith('ocideck_style_profile:')) {
             // Best-effort: a corrupt profile token must not fail the whole
             // parse (which would blank the audience window). Keep the default.
@@ -767,6 +799,7 @@ class MarkdownService {
       description: description,
       keywords: keywords,
       tlp: tlp,
+      presentationTargetSeconds: presentationTargetSeconds.clamp(0, 86400),
     );
   }
 
@@ -888,6 +921,11 @@ class MarkdownService {
         final t = line.trim();
         if (richTextHeaderPhase) {
           if (t.isEmpty) continue;
+          if (t.startsWith('<div') ||
+              t == '</div>' ||
+              t.startsWith('<!-- _style:')) {
+            continue;
+          }
           if (t.startsWith('# ') && h1.isEmpty) {
             h1 = t.substring(2);
             continue;
@@ -908,6 +946,19 @@ class MarkdownService {
           final m = RegExp(r'src="([^"]+)"').firstMatch(t);
           if (m != null) audioPath = m.group(1) ?? '';
           audioAutoplay = t.contains('autoplay');
+        } else if (t.startsWith('<div') ||
+            t == '</div>' ||
+            t.startsWith('<!-- _style:')) {
+          // Split-slide structural markup; not part of the rich-text body.
+        } else if (cssClass.split(RegExp(r'\s+')).contains('split') &&
+            RegExp(r'!\[[^\]]*\]\(([^)]+)\)').hasMatch(t)) {
+          final m = RegExp(r'!\[[^\]]*\]\(([^)]+)\)').firstMatch(t);
+          if (m != null && imagePath.isEmpty) {
+            imagePath = m.group(1) ?? '';
+          }
+        } else if (t.startsWith('<div class="image-caption">')) {
+          final captionParts = _decodeImageCaption(t).split(' | ');
+          imageCaption = captionParts.isNotEmpty ? captionParts.first : '';
         } else {
           richTextLines.add(line);
         }
@@ -1093,9 +1144,11 @@ class MarkdownService {
       quote: quote,
       quoteAuthor: quoteAuthor,
       customMarkdown: type == SlideType.freeMarkdown
-          ? unescapeDeckMarkdownDashLines(remaining)
+          ? normalizeRichTextMarkdown(unescapeDeckMarkdownDashLines(remaining))
           : listStyle == ListStyle.richText
-          ? unescapeDeckMarkdownDashLines(richTextLines.join('\n').trim())
+          ? normalizeRichTextMarkdown(
+              unescapeDeckMarkdownDashLines(richTextLines.join('\n').trim()),
+            )
           : '',
       cssClass: effectiveClass,
       notes: notes,

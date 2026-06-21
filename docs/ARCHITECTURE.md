@@ -135,7 +135,7 @@ audience window, thumbnails, and export dialog.
   navigation path. It measures only: elapsed, remaining against a target, and
   per-slide time — no pacing logic. State is **session-only** (no prefs, no `.md`);
   `_exit` shows a summary (`rehearsal_summary.dart`) and discards it. The default
-  target lives in `AppSettings.presentationTargetSeconds`.
+  target lives in `Deck.presentationTargetSeconds` (front matter: `ocideck_target_seconds`).
 
 ### Dual-screen mode
 

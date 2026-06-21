@@ -5,11 +5,13 @@ import '../../models/slide.dart';
 class ListStyleSelector extends StatelessWidget {
   final ListStyle value;
   final ValueChanged<ListStyle> onChanged;
+  final bool allowRichText;
 
   const ListStyleSelector({
     super.key,
     required this.value,
     required this.onChanged,
+    this.allowRichText = true,
   });
 
   @override
@@ -32,11 +34,12 @@ class ListStyleSelector extends StatelessWidget {
           icon: const Icon(Icons.checklist, size: 18),
           label: Text(l10n.d('Checklist')),
         ),
-        ButtonSegment(
-          value: ListStyle.richText,
-          icon: const Icon(Icons.text_fields, size: 18),
-          label: Text(l10n.d('Teksteditor')),
-        ),
+        if (allowRichText)
+          ButtonSegment(
+            value: ListStyle.richText,
+            icon: const Icon(Icons.text_fields, size: 18),
+            label: Text(l10n.d('Teksteditor')),
+          ),
       ],
       selected: {value},
       showSelectedIcon: false,

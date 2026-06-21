@@ -317,3 +317,173 @@ class _FooterOverlay extends StatelessWidget {
     );
   }
 }
+
+/// Compact page navigation, placed beside the slide logo (or bottom-right).
+class _RichTextPageControlsOverlay extends StatelessWidget {
+  final Slide slide;
+  final double w;
+  final String font;
+  final ThemeProfile profile;
+  final TlpLevel tlp;
+  final int pageIndex;
+  final int pageCount;
+  final VoidCallback? onPrevious;
+  final VoidCallback? onNext;
+
+  const _RichTextPageControlsOverlay({
+    required this.slide,
+    required this.w,
+    required this.font,
+    required this.profile,
+    this.tlp = TlpLevel.none,
+    required this.pageIndex,
+    required this.pageCount,
+    required this.onPrevious,
+    required this.onNext,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final hasLogo =
+        profile.logoPath?.isNotEmpty == true && slide.showLogo;
+    final logoSize = w * (profile.logoSize / 1280);
+    final logoHInset = logoSize * 0.28;
+    final logoTopInset = logoSize * 0.42;
+    final logoBottomInset = logoSize * 0.12;
+    final controlH = w * 0.022;
+    final gap = w * 0.008;
+
+    final controls = _RichTextPageControls(
+      pageIndex: pageIndex,
+      pageCount: pageCount,
+      w: w,
+      font: font,
+      profile: profile,
+      onPrevious: onPrevious,
+      onNext: onNext,
+    );
+
+    if (hasLogo) {
+      final pos = profile.logoPosition;
+      final onRight = pos.endsWith('right');
+      final onLeft = pos.endsWith('left');
+      final onBottom = pos.startsWith('bottom');
+      final onTop = pos.startsWith('top');
+      final verticalOffset = onBottom
+          ? logoBottomInset + (logoSize - controlH) / 2
+          : logoTopInset + (logoSize - controlH) / 2;
+
+      if (onRight) {
+        return Positioned(
+          right: logoHInset + logoSize + gap,
+          bottom: onBottom ? verticalOffset : null,
+          top: onTop ? verticalOffset : null,
+          child: controls,
+        );
+      }
+      if (onLeft) {
+        return Positioned(
+          left: logoHInset + logoSize + gap,
+          bottom: onBottom ? verticalOffset : null,
+          top: onTop ? verticalOffset : null,
+          child: controls,
+        );
+      }
+    }
+
+    return Positioned(
+      right: w * 0.04 +
+          (tlp != TlpLevel.none
+              ? w * _kTlpEdge + _tlpBadgeWidth(w, tlp) + w * 0.012
+              : 0),
+      bottom: w * 0.022,
+      child: controls,
+    );
+  }
+}
+
+class _RichTextPageControls extends StatelessWidget {
+  final int pageIndex;
+  final int pageCount;
+  final double w;
+  final String font;
+  final ThemeProfile profile;
+  final VoidCallback? onPrevious;
+  final VoidCallback? onNext;
+
+  const _RichTextPageControls({
+    required this.pageIndex,
+    required this.pageCount,
+    required this.w,
+    required this.font,
+    required this.profile,
+    required this.onPrevious,
+    required this.onNext,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final textColor = _hexColor(profile.textColor);
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: _hexColor(profile.slideBackgroundColor).withValues(alpha: 0.82),
+        borderRadius: BorderRadius.circular(w * 0.004),
+        border: Border.all(color: textColor.withValues(alpha: 0.12)),
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: w * 0.004),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _navButton(
+              icon: Icons.chevron_left,
+              enabled: onPrevious != null,
+              onTap: onPrevious,
+              textColor: textColor,
+            ),
+            Text(
+              '${pageIndex + 1}/$pageCount',
+              style: _applyFont(
+                font,
+                TextStyle(
+                  fontSize: w * 0.013,
+                  fontWeight: FontWeight.w500,
+                  color: textColor.withValues(alpha: 0.6),
+                  height: 1.0,
+                ),
+              ),
+            ),
+            _navButton(
+              icon: Icons.chevron_right,
+              enabled: onNext != null,
+              onTap: onNext,
+              textColor: textColor,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _navButton({
+    required IconData icon,
+    required bool enabled,
+    required VoidCallback? onTap,
+    required Color textColor,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: SizedBox(
+        width: w * 0.024,
+        height: w * 0.022,
+        child: Icon(
+          icon,
+          size: w * 0.014,
+          color: enabled
+              ? textColor.withValues(alpha: 0.5)
+              : textColor.withValues(alpha: 0.18),
+        ),
+      ),
+    );
+  }
+}

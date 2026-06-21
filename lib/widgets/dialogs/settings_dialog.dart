@@ -9,6 +9,7 @@ import '../../state/tabs_provider.dart';
 import '../../state/consent_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
+import '../privacy_statement_content.dart';
 
 TextStyle _fontStyle(String font, TextStyle base) {
   return base.copyWith(fontFamily: font);
@@ -217,13 +218,10 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final profiles = _profiles;
-    final dropdownValue = profiles.any((p) => p.name == _originalName)
-        ? _originalName
-        : profiles.first.name;
 
     return DefaultTabController(
-      length: 6,
-      initialIndex: widget.initialTab.clamp(0, 5),
+      length: 4,
+      initialIndex: widget.initialTab.clamp(0, 3),
       child: AlertDialog(
         title: Text(l10n.t('settings')),
         content: SizedBox(
@@ -244,16 +242,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                     text: l10n.d('App-thema'),
                   ),
                   Tab(
-                    icon: const Icon(Icons.style_outlined),
-                    text: l10n.t('styleProfile'),
-                  ),
-                  Tab(
-                    icon: const Icon(Icons.palette_outlined),
-                    text: l10n.t('settingsColors'),
-                  ),
-                  Tab(
-                    icon: const Icon(Icons.image_outlined),
-                    text: l10n.t('settingsLogo'),
+                    icon: const Icon(Icons.slideshow_outlined),
+                    text: l10n.d('Presentatiestijl'),
                   ),
                   Tab(
                     icon: const Icon(Icons.privacy_tip_outlined),
@@ -267,9 +257,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                   children: [
                     _tabBody(_generalTab()),
                     _tabBody(_appearanceTab()),
-                    _tabBody(_styleTab(profiles, dropdownValue)),
-                    _tabBody(_colorsTab()),
-                    _tabBody(_logoTab()),
+                    _tabBody(_presentationStyleTab(profiles)),
                     _tabBody(_privacyTab()),
                   ],
                 ),
@@ -288,54 +276,49 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     );
   }
 
-  Widget _profileNameField() {
-    final l10n = context.l10n;
-    return TextField(
-      controller: _profileName,
-      textInputAction: TextInputAction.done,
-      decoration: InputDecoration(
-        labelText: l10n.d('Profielnaam'),
-        hintText: l10n.d('Naam van het stijlprofiel'),
-        isDense: true,
-        prefixIcon: const Icon(Icons.badge_outlined, size: 18),
-      ),
-      onChanged: (value) {
-        final name = value.trim();
-        _themeProfile = _themeProfile.copyWith(
-          name: name.isEmpty ? _themeProfile.name : name,
-        );
-        _profileTouched = true;
-      },
-    );
-  }
-
-  Widget _profileSelector(List<ThemeProfile> profiles, String dropdownValue) {
+  Widget _profileSelector(List<ThemeProfile> profiles) {
     final l10n = context.l10n;
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: InputDecorator(
+          child: TextField(
+            controller: _profileName,
+            textInputAction: TextInputAction.done,
             decoration: InputDecoration(
               labelText: l10n.d('Stijlprofiel'),
+              hintText: l10n.d('Naam van het stijlprofiel'),
               isDense: true,
-            ),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton<String>(
-                value: dropdownValue,
-                isExpanded: true,
-                isDense: true,
-                items: [
+              prefixIcon: const Icon(Icons.style_outlined, size: 18),
+              suffixIcon: PopupMenuButton<String>(
+                tooltip: l10n.d('Ander profiel kiezen'),
+                icon: const Icon(Icons.arrow_drop_down),
+                onSelected: _selectProfile,
+                itemBuilder: (context) => [
                   for (final profile in profiles)
-                    DropdownMenuItem(
+                    PopupMenuItem(
                       value: profile.name,
-                      child: Text(profile.name),
+                      child: Row(
+                        children: [
+                          if (profile.name == _originalName)
+                            const Padding(
+                              padding: EdgeInsets.only(right: 8),
+                              child: Icon(Icons.check, size: 16),
+                            ),
+                          Expanded(child: Text(profile.name)),
+                        ],
+                      ),
                     ),
                 ],
-                onChanged: (name) {
-                  if (name != null) _selectProfile(name);
-                },
               ),
             ),
+            onChanged: (value) {
+              final name = value.trim();
+              _themeProfile = _themeProfile.copyWith(
+                name: name.isEmpty ? _themeProfile.name : name,
+              );
+              _profileTouched = true;
+            },
           ),
         ),
         const SizedBox(width: 8),
@@ -454,20 +437,35 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     );
   }
 
-  Widget _styleTab(List<ThemeProfile> profiles, String dropdownValue) {
+  Widget _presentationStyleTab(List<ThemeProfile> profiles) {
     final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _profileScopeBanner(),
         _sectionTitle(l10n.t('styleProfile')),
-        _profileSelector(profiles, dropdownValue),
-        const SizedBox(height: 12),
-        _profileNameField(),
+        _profileSelector(profiles),
         const SizedBox(height: 20),
         _sectionTitle(l10n.d('Lettertype')),
         _fontSection(),
+        _presentationStyleDivider(l10n.t('settingsColors')),
+        ..._colorsSectionChildren(),
+        _presentationStyleDivider(l10n.d('Logo en footer')),
+        ..._logoSectionChildren(),
         const SizedBox(height: 18),
         _stylePreview(),
+      ],
+    );
+  }
+
+  Widget _presentationStyleDivider(String title) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 24),
+        const Divider(height: 1),
+        const SizedBox(height: 16),
+        _sectionTitle(title),
       ],
     );
   }
@@ -564,18 +562,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         const SizedBox(height: 16),
         _sectionTitle(l10n.d('Classificatie-handhaving')),
         _classificationEnforcementSection(l10n),
-        const SizedBox(height: 16),
-        _sectionTitle(l10n.d('Presentatie')),
-        _presentationTargetField(),
-        Padding(
-          padding: const EdgeInsets.only(top: 6),
-          child: Text(
-            l10n.d(
-              'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.',
-            ),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
-          ),
-        ),
         const SizedBox(height: 16),
         _sectionTitle(l10n.t('presentationFolder')),
         Row(
@@ -781,48 +767,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     );
   }
 
-  /// Dropdown met veelgebruikte doeltijden voor de presenter-aftelling. De
-  /// opgeslagen waarde snapt naar de dichtstbijzijnde optie; fijnregelen kan
-  /// live met toets K tijdens het presenteren.
-  Widget _presentationTargetField() {
-    final l10n = context.l10n;
-    const steps = [0, 300, 600, 900, 1200, 1500, 1800, 2700, 3600, 5400];
-    final current = ref.watch(
-      settingsProvider.select((s) => s.presentationTargetSeconds),
-    );
-    final value = steps.reduce(
-      (a, b) => (a - current).abs() <= (b - current).abs() ? a : b,
-    );
-    return InputDecorator(
-      decoration: InputDecoration(
-        labelText: l10n.d('Doeltijd (aftellen)'),
-        isDense: true,
-        prefixIcon: const Icon(Icons.timer_outlined, size: 18),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<int>(
-          value: value,
-          isExpanded: true,
-          isDense: true,
-          items: [
-            for (final step in steps)
-              DropdownMenuItem(
-                value: step,
-                child: Text(
-                  step == 0 ? l10n.d('Geen aftelling') : '${step ~/ 60} min',
-                ),
-              ),
-          ],
-          onChanged: (seconds) {
-            if (seconds == null) return;
-            ref
-                .read(settingsProvider.notifier)
-                .setPresentationTargetSeconds(seconds);
-          },
-        ),
-      ),
-    );
-  }
 
   Widget _appearanceTab() {
     final l10n = context.l10n;
@@ -1236,7 +1180,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             child: Text.rich(
               TextSpan(
                 children: [
-                  TextSpan(text: context.l10n.d('Onderdeel van stijlprofiel ')),
+                  TextSpan(text: context.l10n.d('Presentatiestijl: ')),
                   TextSpan(
                     text: '“$name”',
                     style: const TextStyle(fontWeight: FontWeight.w700),
@@ -1251,13 +1195,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     );
   }
 
-  Widget _colorsTab() {
+  List<Widget> _colorsSectionChildren() {
     final l10n = context.l10n;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _profileScopeBanner(),
-        _sectionTitle(l10n.d('Kleuren')),
+    return [
         _themeColorAnchor(
           'slideBackgroundColor',
           _colorSetting(
@@ -1458,19 +1398,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             });
           },
         ),
-        const SizedBox(height: 18),
-        _stylePreview(),
-      ],
-    );
+    ];
   }
 
-  Widget _logoTab() {
+  List<Widget> _logoSectionChildren() {
     final l10n = context.l10n;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _profileScopeBanner(),
-        _sectionTitle(l10n.d('Logo')),
+    return [
         Row(
           children: [
             Expanded(
@@ -1641,8 +1574,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             _profileTouched = true;
           },
         ),
-      ],
-    );
+    ];
   }
 
   Widget _colorSetting(
@@ -1965,6 +1897,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const PrivacyStatementContent(),
+        const SizedBox(height: 20),
         _sectionTitle(l10n.d('Toestemming')),
         Container(
           padding: const EdgeInsets.all(12),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter/services.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,6 +14,12 @@ Widget _host(
   void Function(Map<String, String>)? onUserNotesChanged,
 }) {
   return MaterialApp(
+    localizationsDelegates: const [
+      GlobalMaterialLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+      FlutterQuillLocalizations.delegate,
+    ],
     home: FullscreenPresenter(
       slides: slides,
       projectPath: null,

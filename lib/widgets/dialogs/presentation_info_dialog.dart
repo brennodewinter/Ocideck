@@ -12,6 +12,7 @@ class PresentationInfo {
   final String date;
   final String description;
   final String keywords;
+  final int presentationTargetSeconds;
 
   const PresentationInfo({
     required this.title,
@@ -21,6 +22,7 @@ class PresentationInfo {
     required this.date,
     required this.description,
     required this.keywords,
+    this.presentationTargetSeconds = 0,
   });
 }
 
@@ -44,6 +46,8 @@ class PresentationInfoDialog extends StatefulWidget {
 }
 
 class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
+  static const _targetSteps = [0, 300, 600, 900, 1200, 1500, 1800, 2700, 3600, 5400];
+
   late final TextEditingController _title;
   late final TextEditingController _author;
   late final TextEditingController _organization;
@@ -51,6 +55,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
   late final TextEditingController _date;
   late final TextEditingController _description;
   late final TextEditingController _keywords;
+  late int _presentationTargetSeconds;
 
   @override
   void initState() {
@@ -62,6 +67,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
     _date = TextEditingController(text: widget.deck.date);
     _description = TextEditingController(text: widget.deck.description);
     _keywords = TextEditingController(text: widget.deck.keywords);
+    _presentationTargetSeconds = widget.deck.presentationTargetSeconds;
   }
 
   @override
@@ -87,6 +93,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
         date: _date.text.trim(),
         description: _description.text.trim(),
         keywords: _keywords.text.trim(),
+        presentationTargetSeconds: _presentationTargetSeconds,
       ),
     );
   }
@@ -96,6 +103,16 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
     String twoDigits(int value) => value.toString().padLeft(2, '0');
     _date.text = '${now.year}-${twoDigits(now.month)}-${twoDigits(now.day)}';
     _date.selection = TextSelection.collapsed(offset: _date.text.length);
+  }
+
+  int get _targetDropdownValue {
+    return _targetSteps.reduce(
+      (a, b) =>
+          (a - _presentationTargetSeconds).abs() <=
+              (b - _presentationTargetSeconds).abs()
+          ? a
+          : b,
+    );
   }
 
   @override
@@ -171,6 +188,49 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
                   _keywords,
                   'Trefwoorden',
                   'Komma-gescheiden, bijv. kwartaal, cijfers, 2026',
+                ),
+                const SizedBox(height: 16),
+                InputDecorator(
+                  decoration: InputDecoration(
+                    labelText: l10n.d('Doeltijd (aftellen)'),
+                    isDense: true,
+                    prefixIcon: const Icon(Icons.timer_outlined, size: 18),
+                    border: const OutlineInputBorder(),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<int>(
+                      value: _targetDropdownValue,
+                      isExpanded: true,
+                      isDense: true,
+                      items: [
+                        for (final step in _targetSteps)
+                          DropdownMenuItem(
+                            value: step,
+                            child: Text(
+                              step == 0
+                                  ? l10n.d('Geen aftelling')
+                                  : '${step ~/ 60} min',
+                            ),
+                          ),
+                      ],
+                      onChanged: (seconds) {
+                        if (seconds == null) return;
+                        setState(() => _presentationTargetSeconds = seconds);
+                      },
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 6),
+                  child: Text(
+                    l10n.d(
+                      'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.',
+                    ),
+                    style: const TextStyle(
+                      fontSize: 11,
+                      color: Color(0xFF94A3B8),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Text(
