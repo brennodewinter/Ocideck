@@ -17,18 +17,12 @@ void main() {
     });
 
     test('strips soft hyphens copied from news sites', () {
-      expect(
-        normalizeRichTextMarkdown('woord\u00ADbreuk'),
-        'woordbreuk',
-      );
+      expect(normalizeRichTextMarkdown('woord\u00ADbreuk'), 'woordbreuk');
     });
 
     test('unescapes hyphen escapes anywhere in the line', () {
       const input = 'Intro\n\\- regel\nmidden\\-woord';
-      expect(
-        normalizeRichTextMarkdown(input),
-        'Intro\n- regel\nmidden-woord',
-      );
+      expect(normalizeRichTextMarkdown(input), 'Intro\n- regel\nmidden-woord');
     });
 
     test('unescapes dotted and parenthesis escapes from web paste', () {

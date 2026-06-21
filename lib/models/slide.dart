@@ -1,4 +1,5 @@
 import 'package:uuid/uuid.dart';
+import 'cockpit.dart';
 import 'deck.dart';
 
 const _uuid = Uuid();
@@ -17,6 +18,7 @@ enum SlideType {
   freeMarkdown,
   code,
   chart,
+  cockpit,
 }
 
 enum ListStyle { bullets, numbered, checklist, richText }
@@ -72,6 +74,8 @@ extension SlideTypeExtension on SlideType {
         return 'Broncode';
       case SlideType.chart:
         return 'Grafiek';
+      case SlideType.cockpit:
+        return 'Cockpit';
     }
   }
 
@@ -103,6 +107,8 @@ extension SlideTypeExtension on SlideType {
         return 'code';
       case SlideType.chart:
         return 'chart';
+      case SlideType.cockpit:
+        return 'cockpit';
     }
   }
 }
@@ -200,6 +206,9 @@ class Slide {
               ['', ''],
             ]
           : const [],
+      customMarkdown: type == SlideType.cockpit
+          ? CockpitSpec.pentestPreset().toBlock()
+          : '',
     );
   }
 

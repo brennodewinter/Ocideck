@@ -26,6 +26,7 @@ class AddSlideDialog extends StatelessWidget {
     (SlideType.quote, 'Quote'),
     (SlideType.table, 'Tabel'),
     (SlideType.chart, 'Grafiek'),
+    (SlideType.cockpit, 'Cockpit'),
     (SlideType.code, 'Broncode'),
     (SlideType.freeMarkdown, 'Vrije Markdown'),
   ];
@@ -221,6 +222,12 @@ class SlideTypePreviewPainter extends CustomPainter {
         _bar(canvas, 64, 36, 18, 38, _accent, radius: 2);
         _bar(canvas, 94, 44, 18, 30, _soft, radius: 2);
         _bar(canvas, 124, 24, 18, 50, _accent, radius: 2);
+      case SlideType.cockpit:
+        _dial(canvas, 24, 24, 22);
+        _dial(canvas, 69, 24, 22);
+        _dial(canvas, 114, 24, 22);
+        _dial(canvas, 46, 58, 22);
+        _dial(canvas, 92, 58, 22);
       case SlideType.code:
         _bar(canvas, 10, 10, 140, 70, const Color(0xFF1E293B), radius: 4);
         _bar(canvas, 20, 22, 44, 6, const Color(0xFF7DD3A7), radius: 3);
@@ -300,6 +307,25 @@ class SlideTypePreviewPainter extends CustomPainter {
         ..close();
       canvas.drawPath(tail, paint);
     }
+  }
+
+  void _dial(Canvas canvas, double x, double y, double r) {
+    canvas.drawCircle(Offset(x, y), r, _paint(_accent.withValues(alpha: 0.12)));
+    canvas.drawCircle(
+      Offset(x, y),
+      r,
+      _paint(_ink)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2.5,
+    );
+    canvas.drawLine(
+      Offset(x, y),
+      Offset(x + r * 0.55, y - r * 0.35),
+      _paint(_accent)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2,
+    );
+    canvas.drawCircle(Offset(x, y), 3, _paint(_ink));
   }
 
   @override

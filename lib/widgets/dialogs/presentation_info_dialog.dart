@@ -46,7 +46,18 @@ class PresentationInfoDialog extends StatefulWidget {
 }
 
 class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
-  static const _targetSteps = [0, 300, 600, 900, 1200, 1500, 1800, 2700, 3600, 5400];
+  static const _targetSteps = [
+    0,
+    300,
+    600,
+    900,
+    1200,
+    1500,
+    1800,
+    2700,
+    3600,
+    5400,
+  ];
 
   late final TextEditingController _title;
   late final TextEditingController _author;

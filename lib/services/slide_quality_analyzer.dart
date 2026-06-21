@@ -368,6 +368,7 @@ class SlideQualityAnalyzer {
       case SlideType.table:
       case SlideType.freeMarkdown:
       case SlideType.code:
+      case SlideType.cockpit:
         break;
     }
   }
@@ -486,6 +487,7 @@ class SlideQualityAnalyzer {
       case SlideType.freeMarkdown:
       case SlideType.code:
       case SlideType.chart:
+      case SlideType.cockpit:
         break;
     }
   }
@@ -537,6 +539,7 @@ class SlideQualityAnalyzer {
       case SlideType.twoImages:
       case SlideType.video:
       case SlideType.chart:
+      case SlideType.cockpit:
         break;
     }
   }

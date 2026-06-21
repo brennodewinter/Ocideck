@@ -40,6 +40,7 @@ void main() {
 
     const unchangedInEnglish = {
       'Accent / bullets',
+      'Bank',
       'Bullet',
       'Code',
       'Coverflow',
@@ -47,13 +48,18 @@ void main() {
       'Link',
       'Logo',
       'Logo px',
+      'Max',
+      'Meter',
+      'Min',
       'PREVIEW',
+      'Pitch',
       'Preview',
       'Privacy',
       'SLIDES',
       'Slide',
       'slide',
       'Spider',
+      'Type',
       'Contrast',
       ':1).',
     };

@@ -28,17 +28,13 @@ void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
   testWidgets('rich text mode uses the markdown editor', (tester) async {
-    var updated = Slide.create(SlideType.bullets).copyWith(
-      title: 'Titel',
-      customMarkdown: 'Bestaande tekst',
-    );
+    var updated = Slide.create(
+      SlideType.bullets,
+    ).copyWith(title: 'Titel', customMarkdown: 'Bestaande tekst');
 
     await tester.pumpWidget(
       _testApp(
-        BulletsEditor(
-          slide: updated,
-          onUpdate: (slide) => updated = slide,
-        ),
+        BulletsEditor(slide: updated, onUpdate: (slide) => updated = slide),
       ),
     );
 
@@ -53,17 +49,13 @@ void main() {
   testWidgets('switching list styles preserves bullets and rich text', (
     tester,
   ) async {
-    var updated = Slide.create(SlideType.bullets).copyWith(
-      bullets: ['Eerste punt'],
-      customMarkdown: 'Vrije tekst',
-    );
+    var updated = Slide.create(
+      SlideType.bullets,
+    ).copyWith(bullets: ['Eerste punt'], customMarkdown: 'Vrije tekst');
 
     await tester.pumpWidget(
       _testApp(
-        BulletsEditor(
-          slide: updated,
-          onUpdate: (slide) => updated = slide,
-        ),
+        BulletsEditor(slide: updated, onUpdate: (slide) => updated = slide),
       ),
     );
 
@@ -336,8 +328,7 @@ void main() {
     expect(
       find.byWidgetPredicate(
         (widget) =>
-            widget is InlineMarkdownText &&
-            widget.text.contains('Inhoud met'),
+            widget is InlineMarkdownText && widget.text.contains('Inhoud met'),
       ),
       findsOneWidget,
     );
@@ -367,8 +358,7 @@ void main() {
 
     final bodyFinder = find.byWidgetPredicate(
       (widget) =>
-          widget is InlineMarkdownText &&
-          widget.text.contains('Lange tekst'),
+          widget is InlineMarkdownText && widget.text.contains('Lange tekst'),
     );
     final renderBox = tester.renderObject<RenderBox>(bodyFinder);
     final expectedContentWidth = slideWidth * (1 - 0.07 * 2);

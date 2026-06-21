@@ -14,6 +14,7 @@ import '../editors/bullets_image_editor.dart';
 import '../editors/audio_attachment_editor.dart';
 import '../editors/chart_editor.dart';
 import '../editors/code_editor.dart';
+import '../editors/cockpit_editor.dart';
 import '../editors/free_markdown_editor.dart';
 import '../editors/image_slide_editor.dart';
 import '../editors/quote_editor.dart';
@@ -155,7 +156,8 @@ class EditorPanel extends ConsumerWidget {
                 const Divider(height: 1),
                 _UserNotesField(
                   slide: slide,
-                  note: deckNotifier.userNoteForSlide(
+                  note:
+                      deckNotifier.userNoteForSlide(
                         slide.id,
                         pageIndex: richTextPage,
                         multiPage: multiPageNotes,
@@ -211,7 +213,11 @@ class EditorPanel extends ConsumerWidget {
       audioAutoplay: slide.audioAutoplay,
       quote: slide.quote,
       quoteAuthor: slide.quoteAuthor,
-      customMarkdown: slide.customMarkdown,
+      customMarkdown: newType == SlideType.cockpit
+          ? (slide.type == SlideType.cockpit
+                ? slide.customMarkdown
+                : Slide.create(SlideType.cockpit).customMarkdown)
+          : slide.customMarkdown,
       codeLanguage: slide.codeLanguage,
       cssClass: slide.cssClass,
       notes: slide.notes,
@@ -349,6 +355,13 @@ class EditorPanel extends ConsumerWidget {
           projectPath: captionBasePath,
           nestedInScrollView: nestedInScrollView,
         );
+      case SlideType.cockpit:
+        return CockpitEditor(
+          key: ValueKey(slide.id),
+          slide: slide,
+          onUpdate: onUpdate,
+          nestedInScrollView: nestedInScrollView,
+        );
     }
   }
 }
@@ -383,6 +396,8 @@ IconData _slideTypeIcon(SlideType type) {
       return Icons.terminal;
     case SlideType.chart:
       return Icons.bar_chart;
+    case SlideType.cockpit:
+      return Icons.speed_outlined;
   }
 }
 
@@ -850,10 +865,10 @@ class _NotesFieldState extends State<_NotesField> {
   }
 
   String _noteText() => speakerNoteForPage(
-        widget.slide.notes,
-        widget.richTextPage,
-        widget.richTextPageCount,
-      );
+    widget.slide.notes,
+    widget.richTextPage,
+    widget.richTextPageCount,
+  );
 
   void _reloadController() {
     _ctrl.removeListener(_emit);
@@ -1165,10 +1180,7 @@ Widget? _notesPageSubtitle(
 }) {
   if (pageCount <= 1) {
     if (hasContent) return null;
-    return Text(
-      emptyHint,
-      style: TextStyle(fontSize: 11, color: accent),
-    );
+    return Text(emptyHint, style: TextStyle(fontSize: 11, color: accent));
   }
   return Text(
     hasContent

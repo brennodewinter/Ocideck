@@ -229,7 +229,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                     Text(
                       hasRichTextPages
                           ? '${idx + 1} / ${deck.slides.length}'
-                              ' · ${l10n.d('Pagina')} ${richTextPage + 1} / $richTextPages'
+                                ' · ${l10n.d('Pagina')} ${richTextPage + 1} / $richTextPages'
                           : '${idx + 1} / ${deck.slides.length}',
                       style: TextStyle(
                         fontSize: 12,
@@ -299,9 +299,14 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                             richTextPage: richTextPage,
                             showRichTextPageControls: hasRichTextPages,
                             onRichTextPageChanged: hasRichTextPages
-                                ? (page) => ref
-                                      .read(richTextPreviewPageProvider.notifier)
-                                      .state = page
+                                ? (page) =>
+                                      ref
+                                              .read(
+                                                richTextPreviewPageProvider
+                                                    .notifier,
+                                              )
+                                              .state =
+                                          page
                                 : null,
                             tlp: deck.tlp,
                             organization: deck.organization,
@@ -364,15 +369,16 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                       ),
                     ),
                     IconButton(
-                      onPressed: idx < deck.slides.length - 1 ||
+                      onPressed:
+                          idx < deck.slides.length - 1 ||
                               (hasRichTextPages &&
                                   richTextPage < richTextPages - 1)
                           ? () => _move(1)
                           : null,
                       icon: const Icon(Icons.chevron_right),
                       iconSize: 20,
-                      tooltip: hasRichTextPages &&
-                              richTextPage < richTextPages - 1
+                      tooltip:
+                          hasRichTextPages && richTextPage < richTextPages - 1
                           ? l10n.d('Volgende pagina')
                           : l10n.d('Volgende slide'),
                     ),

@@ -13,6 +13,7 @@ import 'package:video_player/video_player.dart';
 import 'mermaid_diagram.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
+import '../../models/cockpit.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
@@ -33,6 +34,7 @@ part 'previews/table_preview.dart';
 part 'previews/media_previews.dart';
 part 'previews/code_preview.dart';
 part 'previews/chart_preview.dart';
+part 'previews/cockpit_preview.dart';
 part 'previews/overlays.dart';
 
 /// Returns a TextStyle with the correct font. 'EB Garamond' is bundled with the
@@ -279,7 +281,8 @@ class SlidePreviewWidget extends StatelessWidget {
       builder: (_, constraints) {
         final w = constraints.maxWidth;
         final splitImage = slide.type == SlideType.bulletsImage;
-        final richTextPages = showRichTextPageControls &&
+        final richTextPages =
+            showRichTextPageControls &&
                 onRichTextPageChanged != null &&
                 slideUsesRichText(slide)
             ? richTextPageCountForSlide(
@@ -468,6 +471,14 @@ class SlidePreviewWidget extends StatelessWidget {
           profile: themeProfile,
           presentationMode: presentationMode,
         );
+      case SlideType.cockpit:
+        return _CockpitPreview(
+          slide: slide,
+          w: w,
+          font: fontFamily,
+          profile: themeProfile,
+          presentationMode: presentationMode,
+        );
     }
   }
 }
@@ -490,6 +501,7 @@ double _contentLeftInset(Slide slide, double w) {
     case SlideType.code:
       return w * 0.05;
     case SlideType.chart:
+    case SlideType.cockpit:
       return w * 0.06;
     case SlideType.twoBullets:
       return w * 0.065;

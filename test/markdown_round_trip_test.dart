@@ -174,10 +174,9 @@ void main() {
               listStyle: ListStyle.richText,
               customMarkdown: body,
             ),
-            Slide.create(SlideType.bullets).copyWith(
-              title: 'Tweede slide',
-              bullets: ['Punt'],
-            ),
+            Slide.create(
+              SlideType.bullets,
+            ).copyWith(title: 'Tweede slide', bullets: ['Punt']),
           ],
         ),
       );

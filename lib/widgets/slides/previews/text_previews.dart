@@ -387,7 +387,10 @@ List<Widget> _markdownBodyBlocks(
       }
       if (i < lines.length) i++;
       widgets.add(
-        _fullWidthBlock(contentWidth, _markdownMathBlock(tex.join('\n'), w, font)),
+        _fullWidthBlock(
+          contentWidth,
+          _markdownMathBlock(tex.join('\n'), w, font),
+        ),
       );
       continue;
     }
@@ -493,12 +496,7 @@ Widget _markdownTextLine(
   } else if (line.isEmpty) {
     return SizedBox(height: emptyLineHeight ?? w * 0.01);
   }
-  return _md(
-    context,
-    line,
-    bodyStyle,
-    linkColor: linkColor,
-  );
+  return _md(context, line, bodyStyle, linkColor: linkColor);
 }
 
 Widget _markdownCodeBlock(String code, String language, double w, String font) {

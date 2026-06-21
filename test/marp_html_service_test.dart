@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/cockpit.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/export_metadata.dart';
@@ -220,6 +221,32 @@ void main() {}
     expect(html, contains('Een'));
     expect(html, contains('Twee'));
     expect(html, isNot(contains('Drie')));
+  });
+
+  test('cockpit SVG renders meters for portable HTML export', () {
+    final block = CockpitSpec(
+      meters: const [
+        CockpitMeterSpec(label: 'Overall risk', value: 78),
+        CockpitMeterSpec(
+          type: CockpitMeterType.heading,
+          label: 'Current phase',
+          value: 187,
+          heading: 90,
+          markerLabel: 'Build',
+        ),
+      ],
+    ).toBlock();
+    final slide = '```cockpit\n$block\n```';
+
+    final html = MarpHtmlService.renderCockpitBlocks(slide);
+
+    expect(html, contains('<svg'));
+    expect(html, contains('COCKPIT VIEW'));
+    expect(html, contains('Overall risk'));
+    expect(html, contains('ACT 187'));
+    expect(html, contains('TGT 090'));
+    expect(html, contains('Build'));
+    expect(html, isNot(contains('```cockpit')));
   });
 
   test('bar chart SVG draws optional min/max bound lines with labels', () {

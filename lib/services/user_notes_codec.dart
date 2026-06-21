@@ -47,7 +47,8 @@ class UserNotesCodec {
     final result = <String, String>{};
     try {
       final data = jsonDecode(json);
-      final fileVersion = (data is Map ? data['version'] as num? : null)?.toInt() ?? 1;
+      final fileVersion =
+          (data is Map ? data['version'] as num? : null)?.toInt() ?? 1;
       final raw = (data is Map ? data['slides'] : null) as List? ?? const [];
       final used = <int>{};
       for (final e in raw) {

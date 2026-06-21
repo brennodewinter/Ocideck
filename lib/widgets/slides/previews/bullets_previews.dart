@@ -398,10 +398,7 @@ Widget _richTextPageBadge({
   required ThemeProfile profile,
 }) {
   return Container(
-    padding: EdgeInsets.symmetric(
-      horizontal: w * 0.014,
-      vertical: w * 0.005,
-    ),
+    padding: EdgeInsets.symmetric(horizontal: w * 0.014, vertical: w * 0.005),
     decoration: BoxDecoration(
       color: _hexColor(profile.textColor).withValues(alpha: 0.12),
       borderRadius: BorderRadius.circular(w * 0.008),
@@ -791,9 +788,14 @@ class _BulletsImagePreview extends StatelessWidget {
               builder: (context, constraints) {
                 final outerW = constraints.maxWidth;
                 final outerH = constraints.maxHeight;
-                final availW = (outerW - textPadding.horizontal)
-                    .clamp(w * 0.12, w);
-                final availH = (outerH - textPadding.vertical).clamp(1.0, outerH);
+                final availW = (outerW - textPadding.horizontal).clamp(
+                  w * 0.12,
+                  w,
+                );
+                final availH = (outerH - textPadding.vertical).clamp(
+                  1.0,
+                  outerH,
+                );
                 var scale = bulletsFitScale(
                   availW: availW,
                   availH: availH,
@@ -908,9 +910,14 @@ class _BulletsImagePreview extends StatelessWidget {
               builder: (context, constraints) {
                 final outerW = constraints.maxWidth;
                 final outerH = constraints.maxHeight;
-                final availW = (outerW - textPadding.horizontal)
-                    .clamp(w * 0.12, w);
-                final availH = (outerH - textPadding.vertical).clamp(1.0, outerH);
+                final availW = (outerW - textPadding.horizontal).clamp(
+                  w * 0.12,
+                  w,
+                );
+                final availH = (outerH - textPadding.vertical).clamp(
+                  1.0,
+                  outerH,
+                );
 
                 return ClipRect(
                   child: SizedBox(
@@ -958,61 +965,62 @@ class _BulletsImagePreview extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
-        if (hasTitle)
-          _md(
-            context,
-            slide.title,
-            _applyFont(
-              font,
-              TextStyle(
-                fontSize: titleSize * scale,
-                fontWeight: FontWeight.bold,
-                color: _hexColor(profile.textColor),
+          if (hasTitle)
+            _md(
+              context,
+              slide.title,
+              _applyFont(
+                font,
+                TextStyle(
+                  fontSize: titleSize * scale,
+                  fontWeight: FontWeight.bold,
+                  color: _hexColor(profile.textColor),
+                ),
               ),
+              linkColor: _hexColor(profile.accentColor),
             ),
-            linkColor: _hexColor(profile.accentColor),
-          ),
-        if (hasTitle && bullets.isNotEmpty) SizedBox(height: spacing * scale),
-        if (slide.listStyle == ListStyle.checklist &&
-            slide.showChecklistProgress &&
-            bullets.isNotEmpty) ...[
-          _ChecklistProgress(
-            bullets: bullets,
-            w: w,
-            font: font,
-            profile: profile,
-          ),
-          SizedBox(height: spacing * scale),
+          if (hasTitle && bullets.isNotEmpty) SizedBox(height: spacing * scale),
+          if (slide.listStyle == ListStyle.checklist &&
+              slide.showChecklistProgress &&
+              bullets.isNotEmpty) ...[
+            _ChecklistProgress(
+              bullets: bullets,
+              w: w,
+              font: font,
+              profile: profile,
+            ),
+            SizedBox(height: spacing * scale),
+          ],
+          ...bullets.asMap().entries.map((entry) {
+            final b = entry.value;
+            int level = 0;
+            while (level < b.length && b[level] == '\t') {
+              level++;
+            }
+            final text = slide.listStyle == ListStyle.checklist
+                ? checklistItemText(b)
+                : b.substring(level);
+            final checked =
+                slide.listStyle == ListStyle.checklist &&
+                checklistItemChecked(b);
+            final fontSize = bulletSize * bulletLevelScale(level) * scale;
+            return _ChecklistBulletRow(
+              bullets: bullets,
+              itemIndex: entry.key,
+              column: 0,
+              listStyle: slide.listStyle,
+              checked: checked,
+              text: text,
+              level: level,
+              fontSize: fontSize,
+              bulletSize: bulletSize,
+              bulletGap: bulletGap,
+              scale: scale,
+              font: font,
+              profile: profile,
+            );
+          }),
         ],
-        ...bullets.asMap().entries.map((entry) {
-          final b = entry.value;
-          int level = 0;
-          while (level < b.length && b[level] == '\t') {
-            level++;
-          }
-          final text = slide.listStyle == ListStyle.checklist
-              ? checklistItemText(b)
-              : b.substring(level);
-          final checked =
-              slide.listStyle == ListStyle.checklist && checklistItemChecked(b);
-          final fontSize = bulletSize * bulletLevelScale(level) * scale;
-          return _ChecklistBulletRow(
-            bullets: bullets,
-            itemIndex: entry.key,
-            column: 0,
-            listStyle: slide.listStyle,
-            checked: checked,
-            text: text,
-            level: level,
-            fontSize: fontSize,
-            bulletSize: bulletSize,
-            bulletGap: bulletGap,
-            scale: scale,
-            font: font,
-            profile: profile,
-          );
-        }),
-      ],
       ),
     );
   }

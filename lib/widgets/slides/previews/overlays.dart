@@ -344,8 +344,7 @@ class _RichTextPageControlsOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hasLogo =
-        profile.logoPath?.isNotEmpty == true && slide.showLogo;
+    final hasLogo = profile.logoPath?.isNotEmpty == true && slide.showLogo;
     final logoSize = w * (profile.logoSize / 1280);
     final logoHInset = logoSize * 0.28;
     final logoTopInset = logoSize * 0.42;
@@ -392,7 +391,8 @@ class _RichTextPageControlsOverlay extends StatelessWidget {
     }
 
     return Positioned(
-      right: w * 0.04 +
+      right:
+          w * 0.04 +
           (tlp != TlpLevel.none
               ? w * _kTlpEdge + _tlpBadgeWidth(w, tlp) + w * 0.012
               : 0),

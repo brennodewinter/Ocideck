@@ -100,8 +100,7 @@ class DescriptionService {
   String? _resolveSidecarImagePath(String imagePath) {
     if (imagePath.trim().isEmpty || !p.isAbsolute(imagePath)) return null;
     final normalized = p.normalize(imagePath);
-    if (normalized.contains('..${p.separator}') ||
-        normalized.endsWith('..')) {
+    if (normalized.contains('..${p.separator}') || normalized.endsWith('..')) {
       return null;
     }
     return normalized;

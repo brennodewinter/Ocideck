@@ -40,10 +40,7 @@ void main() {
     });
 
     test('allows absolute paths when the deck is unsaved', () {
-      expect(
-        resolveSlideAssetPath('/tmp/pasted.png', null),
-        '/tmp/pasted.png',
-      );
+      expect(resolveSlideAssetPath('/tmp/pasted.png', null), '/tmp/pasted.png');
     });
 
     test('blocks relative traversal for saved decks', () {

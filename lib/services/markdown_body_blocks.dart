@@ -100,9 +100,7 @@ double _measureBlock({
       final codeLines = lines.length > 2 ? lines.length - 2 : 1;
       // Code blocks render at fixed [refW] sizes (not scaled by text scale).
       height +=
-          refW * 0.008 * 2 +
-          refW * 0.018 * 2 +
-          codeLines * refW * 0.02 * 1.3;
+          refW * 0.008 * 2 + refW * 0.018 * 2 + codeLines * refW * 0.02 * 1.3;
       return height;
     }
     if (line.trim() == r'$$' ||

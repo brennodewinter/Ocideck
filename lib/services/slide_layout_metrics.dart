@@ -484,7 +484,10 @@ double richTextFitScale({
   double maxScale = kSplitBulletsMaxScale,
 }) {
   if (availH <= 0 || contentW <= 0) return 1.0;
-  final target = (availH - refW * kRichTextRenderSlopFraction).clamp(1.0, availH);
+  final target = (availH - refW * kRichTextRenderSlopFraction).clamp(
+    1.0,
+    availH,
+  );
 
   double measure(double scale) => measureRichTextHeight(
     scale: scale,

@@ -93,10 +93,7 @@ List<String> _imageUsages(WidgetRef ref, String absolutePath) {
       final slide = deck.slides[i];
       for (final candidate in [slide.imagePath, slide.imagePath2]) {
         if (candidate.isEmpty) continue;
-        final resolved = resolveSlideAssetPath(
-          candidate,
-          deck.projectPath,
-        );
+        final resolved = resolveSlideAssetPath(candidate, deck.projectPath);
         if (resolved == null) continue;
         if (p.normalize(resolved) == target) {
           usages.add('${tab.label} · slide ${i + 1}');
