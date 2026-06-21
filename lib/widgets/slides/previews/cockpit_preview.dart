@@ -286,15 +286,28 @@ class _CockpitInstrumentPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final rect = Offset.zero & size;
-    final r = math.min(size.width, size.height) * 0.06;
+    final r = math.min(size.width, size.height) * 0.07;
     final bg = Paint()..color = surface;
     canvas.drawRRect(RRect.fromRectAndRadius(rect, Radius.circular(r)), bg);
+    final borderW = math.max(1.0, size.shortestSide * 0.008);
     canvas.drawRRect(
-      RRect.fromRectAndRadius(rect.deflate(1), Radius.circular(r)),
+      RRect.fromRectAndRadius(rect.deflate(borderW / 2), Radius.circular(r)),
       Paint()
         ..style = PaintingStyle.stroke
-        ..strokeWidth = math.max(1, size.shortestSide * 0.008)
+        ..strokeWidth = borderW
         ..color = accent.withValues(alpha: 0.42 + progress * 0.22),
+    );
+    // Thin inner hairline for a machined "bezel" depth, derived from the slide
+    // text colour so it works on any background.
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        rect.deflate(borderW + 1.5),
+        Radius.circular(r - borderW),
+      ),
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1
+        ..color = _line(0.06 + progress * 0.04),
     );
     switch (meter.type) {
       case CockpitMeterType.speedometer:
@@ -329,8 +342,8 @@ class _CockpitInstrumentPainter extends CustomPainter {
     bool compact = false,
     bool altimeter = false,
   }) {
-    final c = Offset(size.width * 0.43, size.height * (compact ? 0.52 : 0.50));
-    final radius = math.min(size.width, size.height) * (compact ? 0.33 : 0.35);
+    final c = Offset(size.width * 0.40, size.height * (compact ? 0.52 : 0.50));
+    final radius = math.min(size.width, size.height) * (compact ? 0.34 : 0.37);
     final stroke = math.max(3.0, size.shortestSide * 0.035);
     final rect = Rect.fromCircle(center: c, radius: radius);
     void arc(double from, double to, Color color) {
@@ -374,40 +387,31 @@ class _CockpitInstrumentPainter extends CustomPainter {
       arc(greenEnd, meter.max, _amber);
     }
 
-    final tickPaint = Paint()
-      ..color = _line(0.50)
-      ..strokeWidth = math.max(1, size.shortestSide * 0.006);
+    final tickPaint = Paint();
     for (var i = 0; i <= 10; i++) {
+      final major = i % 5 == 0;
       final angle = _rad(startDeg + sweep * i / 10);
-      final outer = c + Offset(math.cos(angle), math.sin(angle)) * (radius + 2);
-      final inner =
-          c +
-          Offset(math.cos(angle), math.sin(angle)) * (radius - stroke * 1.2);
+      final dir = Offset(math.cos(angle), math.sin(angle));
+      final outer = c + dir * (radius + 2);
+      final inner = c + dir * (radius - stroke * (major ? 1.45 : 0.75));
+      tickPaint
+        ..color = _line(major ? 0.62 : 0.30)
+        ..strokeWidth = major
+            ? math.max(1.5, size.shortestSide * 0.009)
+            : math.max(1, size.shortestSide * 0.005);
       canvas.drawLine(inner, outer, tickPaint);
     }
 
     final shown = meter.value * progress + meter.min * (1 - progress);
     final angle = _rad(_angleFor(shown, startDeg, sweep));
-    final needleEnd =
-        c + Offset(math.cos(angle), math.sin(angle)) * (radius - stroke * 1.35);
-    canvas.drawLine(
-      c,
-      needleEnd,
-      Paint()
-        ..color = accent
-        ..strokeWidth = math.max(2, size.shortestSide * 0.018)
-        ..strokeCap = StrokeCap.round,
-    );
-    canvas.drawCircle(c, size.shortestSide * 0.035, Paint()..color = accent);
-    _text(
+    _needle(canvas, c, angle, radius - stroke * 1.35, size.shortestSide);
+    _hub(canvas, c, size.shortestSide);
+    _valueText(
       canvas,
-      '${_fmt(meter.value)}${meter.unit}',
-      Offset(size.width * 0.78, size.height * 0.52),
-      size.width * 0.058,
-      textColor,
-      align: TextAlign.center,
-      anchor: _Anchor.center,
-      weight: FontWeight.w700,
+      Offset(size.width * 0.75, size.height * 0.50),
+      size.width * 0.092,
+      number: _fmt(meter.value),
+      unit: meter.unit,
     );
   }
 
@@ -525,21 +529,18 @@ class _CockpitInstrumentPainter extends CustomPainter {
       ..close();
     canvas.drawPath(tri, Paint()..color = textColor);
 
-    _text(
+    _valueText(
       canvas,
-      '${_fmt(meter.value)}${meter.unit}',
-      Offset(w * 0.76, h * 0.5),
-      w * 0.066,
-      textColor,
-      anchor: _Anchor.center,
-      align: TextAlign.center,
-      weight: FontWeight.w800,
+      Offset(w * 0.72, h * 0.5),
+      w * 0.092,
+      number: _fmt(meter.value),
+      unit: meter.unit,
     );
   }
 
   void _climb(Canvas canvas, Size size) {
-    final c = Offset(size.width * 0.44, size.height * 0.50);
-    final r = math.min(size.width, size.height) * 0.34;
+    final c = Offset(size.width * 0.42, size.height * 0.50);
+    final r = math.min(size.width, size.height) * 0.36;
     canvas.drawCircle(
       c,
       r,
@@ -591,31 +592,20 @@ class _CockpitInstrumentPainter extends CustomPainter {
     );
     final shown = meter.value * progress;
     final angle = _rad(90 - 180 * _norm(shown));
-    final needleEnd = c + Offset(math.cos(angle), math.sin(angle)) * (r * 0.76);
-    canvas.drawLine(
-      c,
-      needleEnd,
-      Paint()
-        ..color = accent
-        ..strokeWidth = math.max(2, size.shortestSide * 0.018)
-        ..strokeCap = StrokeCap.round,
-    );
-    canvas.drawCircle(c, size.shortestSide * 0.034, Paint()..color = accent);
-    _text(
+    _needle(canvas, c, angle, r * 0.76, size.shortestSide);
+    _hub(canvas, c, size.shortestSide);
+    _valueText(
       canvas,
-      '${meter.value > 0 ? '+' : ''}${_fmt(meter.value)}${meter.unit}',
-      Offset(size.width * 0.78, size.height * 0.53),
-      size.width * 0.058,
-      textColor,
-      anchor: _Anchor.center,
-      align: TextAlign.center,
-      weight: FontWeight.w700,
+      Offset(size.width * 0.77, size.height * 0.50),
+      size.width * 0.092,
+      number: '${meter.value > 0 ? '+' : ''}${_fmt(meter.value)}',
+      unit: meter.unit,
     );
   }
 
   void _horizon(Canvas canvas, Size size) {
-    final c = Offset(size.width * 0.45, size.height * 0.50);
-    final r = math.min(size.width, size.height) * 0.34;
+    final c = Offset(size.width * 0.42, size.height * 0.50);
+    final r = math.min(size.width, size.height) * 0.35;
     canvas.save();
     canvas.clipPath(Path()..addOval(Rect.fromCircle(center: c, radius: r)));
     canvas.translate(c.dx, c.dy);
@@ -656,17 +646,18 @@ class _CockpitInstrumentPainter extends CustomPainter {
     _text(
       canvas,
       'P ${_fmt(meter.pitch)}  B ${_fmt(meter.bank)}',
-      Offset(size.width * 0.77, size.height * 0.53),
-      size.width * 0.042,
-      mutedColor,
+      Offset(size.width * 0.80, size.height * 0.50),
+      size.width * 0.04,
+      textColor,
       align: TextAlign.center,
       anchor: _Anchor.center,
+      weight: FontWeight.w700,
     );
   }
 
   void _heading(Canvas canvas, Size size) {
-    final c = Offset(size.width * 0.44, size.height * 0.50);
-    final r = math.min(size.width, size.height) * 0.34;
+    final c = Offset(size.width * 0.42, size.height * 0.50);
+    final r = math.min(size.width, size.height) * 0.35;
     canvas.drawCircle(
       c,
       r,
@@ -734,22 +725,22 @@ class _CockpitInstrumentPainter extends CustomPainter {
       )
       ..close();
     canvas.drawPath(needle, Paint()..color = accent);
-    canvas.drawCircle(c, size.shortestSide * 0.034, Paint()..color = accent);
+    _hub(canvas, c, size.shortestSide);
     _text(
       canvas,
       'ACT ${_fmt(meter.value).padLeft(3, '0')}°',
-      Offset(size.width * 0.78, size.height * 0.44),
-      size.width * 0.042,
+      Offset(size.width * 0.76, size.height * 0.43),
+      size.width * 0.05,
       textColor,
       align: TextAlign.center,
       anchor: _Anchor.center,
-      weight: FontWeight.w700,
+      weight: FontWeight.w800,
     );
     _text(
       canvas,
       'TGT ${_fmt(meter.heading).padLeft(3, '0')}°',
-      Offset(size.width * 0.78, size.height * 0.60),
-      size.width * 0.034,
+      Offset(size.width * 0.76, size.height * 0.59),
+      size.width * 0.038,
       mutedColor,
       align: TextAlign.center,
       anchor: _Anchor.center,
@@ -759,8 +750,8 @@ class _CockpitInstrumentPainter extends CustomPainter {
       _text(
         canvas,
         meter.markerLabel,
-        Offset(size.width * 0.78, size.height * 0.72),
-        size.width * 0.030,
+        Offset(size.width * 0.76, size.height * 0.72),
+        size.width * 0.032,
         mutedColor,
         align: TextAlign.center,
         anchor: _Anchor.center,
@@ -782,6 +773,80 @@ class _CockpitInstrumentPainter extends CustomPainter {
   String _fmt(double value) => value == value.roundToDouble()
       ? value.toStringAsFixed(0)
       : value.toStringAsFixed(1);
+
+  /// A tapered instrument needle (wide at the hub, pointed at the tip, with a
+  /// short counterweight tail) — reads far more like a real gauge than a plain
+  /// line. [s] is the instrument's shortest side.
+  void _needle(Canvas canvas, Offset c, double angleRad, double length,
+      double s) {
+    final dir = Offset(math.cos(angleRad), math.sin(angleRad));
+    final perp = Offset(-dir.dy, dir.dx);
+    final halfW = math.max(2.0, s * 0.016);
+    final tip = c + dir * length;
+    final tail = c - dir * (length * 0.20);
+    final path = Path()
+      ..moveTo(tip.dx, tip.dy)
+      ..lineTo(c.dx + perp.dx * halfW, c.dy + perp.dy * halfW)
+      ..lineTo(tail.dx, tail.dy)
+      ..lineTo(c.dx - perp.dx * halfW, c.dy - perp.dy * halfW)
+      ..close();
+    canvas.drawPath(path, Paint()..color = accent);
+  }
+
+  /// A machined two-tone hub: accent disc, a ring punched out in the surface
+  /// colour, and an accent centre dot.
+  void _hub(Canvas canvas, Offset c, double s) {
+    canvas.drawCircle(c, s * 0.05, Paint()..color = accent);
+    canvas.drawCircle(c, s * 0.026, Paint()..color = surface);
+    canvas.drawCircle(c, s * 0.013, Paint()..color = accent);
+  }
+
+  /// Renders a reading as a large number with a smaller, muted unit so the
+  /// value carries weight without the unit shouting.
+  void _valueText(
+    Canvas canvas,
+    Offset center,
+    double numberSize, {
+    required String number,
+    String unit = '',
+  }) {
+    final painter = TextPainter(
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: number,
+            style: TextStyle(
+              color: textColor,
+              fontSize: numberSize,
+              fontWeight: FontWeight.w800,
+              fontFamily: font,
+              decoration: TextDecoration.none,
+              height: 1.0,
+            ),
+          ),
+          if (unit.isNotEmpty)
+            TextSpan(
+              text: unit,
+              style: TextStyle(
+                color: mutedColor,
+                fontSize: numberSize * 0.6,
+                fontWeight: FontWeight.w600,
+                fontFamily: font,
+                decoration: TextDecoration.none,
+                height: 1.0,
+              ),
+            ),
+        ],
+      ),
+      textDirection: TextDirection.ltr,
+      textAlign: TextAlign.center,
+      maxLines: 1,
+    )..layout(maxWidth: numberSize * 16);
+    painter.paint(
+      canvas,
+      Offset(center.dx - painter.width / 2, center.dy - painter.height / 2),
+    );
+  }
 
   void _text(
     Canvas canvas,

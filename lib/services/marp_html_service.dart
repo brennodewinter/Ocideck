@@ -580,9 +580,6 @@ class MarpHtmlService {
       return '<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg"></svg>';
     }
     final textColor = theme?.textColor ?? '#111827';
-    final titleBackground = theme?.titleBackgroundColor ?? '#F8FAFC';
-    final titleColor = theme?.titleTextColor ?? textColor;
-    final accent = theme?.accentColor ?? '#2563EB';
     final b = StringBuffer()
       ..write(
         '<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" '
@@ -592,20 +589,14 @@ class MarpHtmlService {
       final title = spec.title.length > 52
           ? '${spec.title.substring(0, 51)}…'
           : spec.title;
-      b
-        ..write(
-          '<rect x="38" y="12" width="724" height="44" rx="9" '
-          'fill="$titleBackground"/>',
-        )
-        ..write(
-          '<rect x="38" y="12" width="7" height="44" rx="3" fill="$accent"/>',
-        )
-        ..write(
-          '<text x="62" y="41" font-size="23" font-weight="bold" '
-          'fill="$titleColor">${_esc(title)}</text>',
-        );
+      // Plain bold title in the slide's text colour, matching every other
+      // slide type instead of a boxed band.
+      b.write(
+        '<text x="40" y="40" font-size="26" font-weight="bold" '
+        'fill="$textColor">${_esc(title)}</text>',
+      );
     }
-    final plotTop = spec.title.isNotEmpty ? 68.0 : 20.0;
+    final plotTop = spec.title.isNotEmpty ? 60.0 : 20.0;
     switch (spec.type) {
       case ChartType.bar:
         _barSvg(b, spec, plotTop, theme);
