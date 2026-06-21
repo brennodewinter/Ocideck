@@ -16,12 +16,18 @@ class MarkdownValidator {
     'table',
     'code',
     'chart',
+    'cockpit',
     'logo-safe',
     'no-logo',
     'no-footer',
   };
 
-  static const _validListStyles = {'bullets', 'numbered', 'checklist', 'richText'};
+  static const _validListStyles = {
+    'bullets',
+    'numbered',
+    'checklist',
+    'richText',
+  };
 
   MarkdownValidationResult validate(String markdown) {
     final issues = <MarkdownValidationIssue>[];
@@ -395,6 +401,9 @@ class MarkdownValidator {
     if (classTokens.contains('chart')) {
       _validateChartSlide(blockLines, slideNumber, lineNo, issues);
     }
+    if (classTokens.contains('cockpit')) {
+      _validateCockpitSlide(blockLines, slideNumber, lineNo, issues);
+    }
     if (classTokens.contains('split')) {
       _validateSplitSlide(blockLines, slideNumber, lineNo, issues);
     }
@@ -510,6 +519,90 @@ class MarkdownValidator {
           line: lineNo(openingIndex + 1),
           severity: MarkdownValidationSeverity.error,
           message: 'Slide $slideNumber: grafiek-JSON is ongeldig.',
+        ),
+      );
+    }
+  }
+
+  void _validateCockpitSlide(
+    List<String> blockLines,
+    int slideNumber,
+    int Function(int) lineNo,
+    List<MarkdownValidationIssue> issues,
+  ) {
+    final openingIndex = blockLines.indexWhere(
+      (line) => RegExp(r'^\s*```cockpit\s*$').hasMatch(line.trim()),
+    );
+    if (openingIndex < 0) {
+      issues.add(
+        MarkdownValidationIssue(
+          line: lineNo(0),
+          severity: MarkdownValidationSeverity.error,
+          message:
+              'Slide $slideNumber: cockpit slide requires a ```cockpit block.',
+        ),
+      );
+      return;
+    }
+
+    final jsonLines = <String>[];
+    var inFence = false;
+    var closingIndex = -1;
+    for (var i = 0; i < blockLines.length; i++) {
+      final trimmed = blockLines[i].trim();
+      if (RegExp(r'^```cockpit\s*$').hasMatch(trimmed)) {
+        inFence = true;
+        continue;
+      }
+      if (inFence && RegExp(r'^```\s*$').hasMatch(trimmed)) {
+        closingIndex = i;
+        break;
+      }
+      if (inFence) jsonLines.add(blockLines[i]);
+    }
+
+    if (closingIndex < 0) {
+      issues.add(
+        MarkdownValidationIssue(
+          line: lineNo(openingIndex),
+          severity: MarkdownValidationSeverity.error,
+          message: 'Slide $slideNumber: ```cockpit block is not closed.',
+        ),
+      );
+      return;
+    }
+
+    final raw = jsonLines.join('\n').trim();
+    if (raw.isEmpty) {
+      issues.add(
+        MarkdownValidationIssue(
+          line: lineNo(openingIndex + 1),
+          severity: MarkdownValidationSeverity.warning,
+          message: 'Slide $slideNumber: cockpit specification is empty.',
+        ),
+      );
+      return;
+    }
+
+    try {
+      final decoded = jsonDecode(raw);
+      if (decoded is! Map) {
+        issues.add(
+          MarkdownValidationIssue(
+            line: lineNo(openingIndex + 1),
+            severity: MarkdownValidationSeverity.error,
+            message:
+                'Slide $slideNumber: cockpit specification must be a JSON object.',
+          ),
+        );
+      }
+    } catch (_) {
+      issues.add(
+        MarkdownValidationIssue(
+          line: lineNo(openingIndex + 1),
+          severity: MarkdownValidationSeverity.error,
+          message:
+              'Slide $slideNumber: cockpit specification contains invalid JSON.',
         ),
       );
     }

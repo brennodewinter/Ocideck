@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:characters/characters.dart';
 import 'package:uuid/uuid.dart';
 import '../models/chart.dart';
+import '../models/cockpit.dart';
 import '../models/deck.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
@@ -421,6 +422,16 @@ class MarkdownService {
         final spec = ChartSpec.parse(slide.customMarkdown);
         buf.writeln('```chart');
         buf.writeln(spec.toBlock(forStorage: !inlineChartData));
+        buf.writeln('```');
+
+      case SlideType.cockpit:
+        final spec = CockpitSpec.parse(slide.customMarkdown);
+        if (slide.title.isNotEmpty) {
+          buf.writeln('# ${slide.title}');
+          buf.writeln();
+        }
+        buf.writeln('```cockpit');
+        buf.writeln(spec.toBlock());
         buf.writeln('```');
     }
 
@@ -897,6 +908,17 @@ class MarkdownService {
       );
     }
 
+    if (cssClass.split(RegExp(r'\s+')).contains('cockpit')) {
+      return _parseCockpitBlock(
+        remaining: remaining,
+        cssClass: cssClass,
+        notes: notes,
+        advanceDuration: advanceDuration,
+        skipped: skipped,
+        tlp: slideTlp,
+      );
+    }
+
     final lines = remaining.split('\n');
     String h1 = '';
     String h2 = '';
@@ -1246,6 +1268,7 @@ class MarkdownService {
   }) {
     final lines = remaining.split('\n');
     final json = <String>[];
+    String title = '';
     String audioPath = '';
     bool audioAutoplay = false;
     bool inFence = false;
@@ -1261,7 +1284,9 @@ class MarkdownService {
         continue;
       }
       final t = line.trim();
-      if (t.startsWith('<audio')) {
+      if (t.startsWith('# ') && title.isEmpty) {
+        title = t.substring(2);
+      } else if (t.startsWith('<audio')) {
         final m = RegExp(r'src="([^"]+)"').firstMatch(t);
         if (m != null) audioPath = m.group(1) ?? '';
         audioAutoplay = t.contains('autoplay');
@@ -1284,6 +1309,72 @@ class MarkdownService {
       id: _uuid.v4(),
       type: SlideType.chart,
       customMarkdown: json.join('\n').trim(),
+      audioPath: audioPath,
+      audioAutoplay: audioAutoplay,
+      cssClass: effectiveClass,
+      notes: notes,
+      advanceDuration: advanceDuration,
+      showLogo: !classTokens.contains('no-logo'),
+      showFooter: !classTokens.contains('no-footer'),
+      skipped: skipped,
+      tlp: tlp,
+    );
+  }
+
+  /// Parse a `<!-- _class: cockpit -->` slide: the fenced ```cockpit JSON block
+  /// and an optional `<audio>`. The JSON is kept in [Slide.customMarkdown].
+  Slide _parseCockpitBlock({
+    required String remaining,
+    required String cssClass,
+    required String notes,
+    required double advanceDuration,
+    required bool skipped,
+    TlpLevel tlp = TlpLevel.none,
+  }) {
+    final lines = remaining.split('\n');
+    final json = <String>[];
+    String title = '';
+    String audioPath = '';
+    bool audioAutoplay = false;
+    bool inFence = false;
+
+    for (final line in lines) {
+      final fence = RegExp(r'^\s*```').hasMatch(line);
+      if (fence) {
+        inFence = !inFence;
+        continue;
+      }
+      if (inFence) {
+        json.add(line);
+        continue;
+      }
+      final t = line.trim();
+      if (t.startsWith('# ') && title.isEmpty) {
+        title = t.substring(2).trim();
+      } else if (t.startsWith('<audio')) {
+        final m = RegExp(r'src="([^"]+)"').firstMatch(t);
+        if (m != null) audioPath = m.group(1) ?? '';
+        audioAutoplay = t.contains('autoplay');
+      }
+    }
+
+    final classTokens = cssClass.split(RegExp(r'\s+'));
+    final effectiveClass = classTokens
+        .where(
+          (c) =>
+              c.isNotEmpty &&
+              c != 'cockpit' &&
+              c != 'logo-safe' &&
+              c != 'no-logo' &&
+              c != 'no-footer',
+        )
+        .join(' ');
+
+    return Slide(
+      id: _uuid.v4(),
+      type: SlideType.cockpit,
+      title: title,
+      customMarkdown: CockpitSpec.parse(json.join('\n').trim()).toBlock(),
       audioPath: audioPath,
       audioAutoplay: audioAutoplay,
       cssClass: effectiveClass,

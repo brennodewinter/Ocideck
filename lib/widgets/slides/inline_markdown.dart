@@ -99,9 +99,7 @@ String stripInlineMarkdown(String text) {
 bool _hasMarker(String s) {
   for (var i = 0; i < s.length; i++) {
     if (_markers.contains(s[i])) return true;
-    if (s[i] == r'\' &&
-        i + 1 < s.length &&
-        _isEscapedPunctuation(s[i + 1])) {
+    if (s[i] == r'\' && i + 1 < s.length && _isEscapedPunctuation(s[i + 1])) {
       return true;
     }
   }

@@ -3,7 +3,8 @@ import 'package:ocideck/utils/sanitize_svg.dart';
 
 void main() {
   test('keeps a simple SVG intact', () {
-    const svg = '<svg xmlns="http://www.w3.org/2000/svg"><rect width="10"/></svg>';
+    const svg =
+        '<svg xmlns="http://www.w3.org/2000/svg"><rect width="10"/></svg>';
     final safe = sanitizeMermaidSvg(svg);
     expect(safe, contains('<svg'));
     expect(safe, contains('<rect'));

@@ -97,9 +97,7 @@ Map<int, String> parsePageScopedNotes(String raw) {
 
 String encodePageScopedNotes(Map<int, String> byPage) {
   if (byPage.isEmpty) return '';
-  final sorted = byPage.entries
-      .where((e) => e.value.trim().isNotEmpty)
-      .toList()
+  final sorted = byPage.entries.where((e) => e.value.trim().isNotEmpty).toList()
     ..sort((a, b) => a.key.compareTo(b.key));
   if (sorted.isEmpty) return '';
   if (sorted.length == 1 && sorted.first.key == 0) {
@@ -142,6 +140,5 @@ String updateSpeakerNoteForPage(
 
 bool speakerNotesSpanMultiplePages(String raw) {
   if (raw.trim().isEmpty) return false;
-  return parsePageScopedNotes(raw).length > 1 ||
-      _pageMarker.hasMatch(raw);
+  return parsePageScopedNotes(raw).length > 1 || _pageMarker.hasMatch(raw);
 }

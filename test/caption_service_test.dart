@@ -63,7 +63,10 @@ void main() {
       File(p.join(outside.path, '.ocideck_captions.json')).existsSync(),
       isFalse,
     );
-    expect(await service.getCaption('../secret.png', basePath: project.path), isNull);
+    expect(
+      await service.getCaption('../secret.png', basePath: project.path),
+      isNull,
+    );
   });
 
   test('reads caption via project-relative path with basePath', () async {

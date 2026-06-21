@@ -12,10 +12,7 @@ const _l10n = AppLocalizations(Locale('nl'));
 
 Future<void> _switchToMarkdownMode(WidgetTester tester, Finder scope) async {
   await tester.tap(
-    find.descendant(
-      of: scope,
-      matching: find.text(_l10n.t('markdownMode')),
-    ),
+    find.descendant(of: scope, matching: find.text(_l10n.t('markdownMode'))),
   );
   await tester.pumpAndSettle();
 }

@@ -29,10 +29,9 @@ void main() {
         Deck(
           title: 'Demo',
           slides: [
-            Slide.create(SlideType.bullets).copyWith(
-              listStyle: ListStyle.richText,
-              customMarkdown: body,
-            ),
+            Slide.create(
+              SlideType.bullets,
+            ).copyWith(listStyle: ListStyle.richText, customMarkdown: body),
           ],
         ),
       );

@@ -4,17 +4,11 @@ import 'package:ocideck/utils/page_scoped_notes.dart';
 void main() {
   group('user note keys', () {
     test('slide-wide key when not multi-page', () {
-      expect(
-        userNoteStorageKey('abc', 2, multiPage: false),
-        'abc',
-      );
+      expect(userNoteStorageKey('abc', 2, multiPage: false), 'abc');
     });
 
     test('page key when multi-page', () {
-      expect(
-        userNoteStorageKey('abc', 2, multiPage: true),
-        'abc#p2',
-      );
+      expect(userNoteStorageKey('abc', 2, multiPage: true), 'abc#p2');
     });
 
     test('slideHasUserNotes finds page-specific notes', () {

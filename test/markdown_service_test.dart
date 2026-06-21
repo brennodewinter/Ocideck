@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/cockpit.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
@@ -66,6 +67,50 @@ void main() {
     final slide = deck!.slides.single;
     expect(slide.type, SlideType.freeMarkdown);
     expect(slide.imagePath, isEmpty);
+  });
+
+  test('round-trips cockpit slide JSON', () {
+    final service = MarkdownService();
+    const spec = CockpitSpec(
+      meters: [
+        CockpitMeterSpec(
+          type: CockpitMeterType.speedometer,
+          label: 'Overall risk',
+          value: 78,
+          greenFrom: 0,
+          greenTo: 40,
+          redFrom: 70,
+        ),
+        CockpitMeterSpec(
+          type: CockpitMeterType.heading,
+          label: 'Phase',
+          heading: 90,
+          markerLabel: 'Build',
+        ),
+      ],
+    );
+    final markdown = service.generateDeck(
+      Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(
+            SlideType.cockpit,
+          ).copyWith(title: 'Cockpit overview', customMarkdown: spec.toBlock()),
+        ],
+      ),
+    );
+
+    final deck = service.parseDeck(markdown);
+
+    expect(deck, isNotNull);
+    final slide = deck!.slides.single;
+    expect(slide.type, SlideType.cockpit);
+    expect(slide.title, 'Cockpit overview');
+    final back = CockpitSpec.parse(slide.customMarkdown);
+    expect(back.meters, hasLength(2));
+    expect(back.meters.first.label, 'Overall risk');
+    expect(back.meters.last.type, CockpitMeterType.heading);
+    expect(back.meters.last.markerLabel, 'Build');
   });
 
   test('round-trips deck style profile', () {

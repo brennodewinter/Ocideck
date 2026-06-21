@@ -250,7 +250,9 @@ RichTextLayoutPlan planRichTextLayout({
   return RichTextLayoutPlan(
     scale: scale,
     pageCount: pages.length,
-    pageMarkdown: pages.map((p) => p.map((b) => b.markdown).join('\n\n')).toList(),
+    pageMarkdown: pages
+        .map((p) => p.map((b) => b.markdown).join('\n\n'))
+        .toList(),
   );
 }
 

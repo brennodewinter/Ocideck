@@ -11,8 +11,7 @@ const _invisibleChars = {
 };
 
 /// ASCII punctuation that CommonMark allows to escape with a leading `\`.
-const markdownEscapedPunctuation =
-    '!"#\$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
+const markdownEscapedPunctuation = '!"#\$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
 
 /// Unescapes `\`-prefixed punctuation (repeat until stable for `\\.` etc.).
 String unescapeMarkdownEscapes(String text) {

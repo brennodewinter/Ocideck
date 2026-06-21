@@ -767,7 +767,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     );
   }
 
-
   Widget _appearanceTab() {
     final l10n = context.l10n;
     final profiles = ref.watch(settingsProvider).appAppearanceProfiles;
@@ -1198,382 +1197,375 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   List<Widget> _colorsSectionChildren() {
     final l10n = context.l10n;
     return [
-        _themeColorAnchor(
-          'slideBackgroundColor',
-          _colorSetting(
-            l10n.d('Achtergrond slides'),
-            _themeProfile.slideBackgroundColor,
-            (v) =>
-                _themeProfile = _themeProfile.copyWith(slideBackgroundColor: v),
+      _themeColorAnchor(
+        'slideBackgroundColor',
+        _colorSetting(
+          l10n.d('Achtergrond slides'),
+          _themeProfile.slideBackgroundColor,
+          (v) =>
+              _themeProfile = _themeProfile.copyWith(slideBackgroundColor: v),
+        ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'textColor',
+        _colorSetting(
+          l10n.d('Tekst'),
+          _themeProfile.textColor,
+          (v) => _themeProfile = _themeProfile.copyWith(textColor: v),
+        ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'accentColor',
+        _colorSetting(
+          l10n.d('Accent / bullets'),
+          _themeProfile.accentColor,
+          (v) => _themeProfile = _themeProfile.copyWith(accentColor: v),
+        ),
+      ),
+      const SizedBox(height: 24),
+      _sectionTitle(l10n.d('Checklist')),
+      _themeColorAnchor(
+        'checklistCheckedColor',
+        _colorSetting(
+          l10n.d('Afgevinkt'),
+          _themeProfile.checklistCheckedColor,
+          (v) =>
+              _themeProfile = _themeProfile.copyWith(checklistCheckedColor: v),
+        ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'checklistUncheckedColor',
+        _colorSetting(
+          l10n.d('Niet afgevinkt'),
+          _themeProfile.checklistUncheckedColor,
+          (v) => _themeProfile = _themeProfile.copyWith(
+            checklistUncheckedColor: v,
           ),
         ),
-        const SizedBox(height: 12),
-        _themeColorAnchor(
-          'textColor',
-          _colorSetting(
-            l10n.d('Tekst'),
-            _themeProfile.textColor,
-            (v) => _themeProfile = _themeProfile.copyWith(textColor: v),
+      ),
+      const SizedBox(height: 6),
+      SwitchListTile(
+        value: _themeProfile.checklistStrikeThrough,
+        onChanged: (value) => setState(() {
+          _themeProfile = _themeProfile.copyWith(checklistStrikeThrough: value);
+          _profileTouched = true;
+        }),
+        title: Text(
+          l10n.d('Afgevinkte tekst doorhalen'),
+          style: const TextStyle(fontSize: 13),
+        ),
+        subtitle: Text(
+          l10n.d('Toont een streep door voltooide checklistitems.'),
+          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+        ),
+        controlAffinity: ListTileControlAffinity.leading,
+        contentPadding: EdgeInsets.zero,
+        dense: true,
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'tableTextColor',
+        _colorSetting(
+          l10n.d('Tabeltekst'),
+          _themeProfile.tableTextColor,
+          (v) => _themeProfile = _themeProfile.copyWith(tableTextColor: v),
+        ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'tableHeaderTextColor',
+        _colorSetting(
+          l10n.d('Tabel koptekst'),
+          _themeProfile.tableHeaderTextColor,
+          (v) =>
+              _themeProfile = _themeProfile.copyWith(tableHeaderTextColor: v),
+        ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'tableHeaderBackgroundColor',
+        _colorSetting(
+          l10n.d('Tabel kopachtergrond'),
+          _themeProfile.tableHeaderBackgroundColor,
+          (v) => _themeProfile = _themeProfile.copyWith(
+            tableHeaderBackgroundColor: v,
           ),
         ),
-        const SizedBox(height: 12),
-        _themeColorAnchor(
-          'accentColor',
-          _colorSetting(
-            l10n.d('Accent / bullets'),
-            _themeProfile.accentColor,
-            (v) => _themeProfile = _themeProfile.copyWith(accentColor: v),
-          ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'titleBackgroundColor',
+        _colorSetting(
+          l10n.d('Titelachtergrond'),
+          _themeProfile.titleBackgroundColor,
+          (v) =>
+              _themeProfile = _themeProfile.copyWith(titleBackgroundColor: v),
         ),
-        const SizedBox(height: 24),
-        _sectionTitle(l10n.d('Checklist')),
-        _themeColorAnchor(
-          'checklistCheckedColor',
-          _colorSetting(
-            l10n.d('Afgevinkt'),
-            _themeProfile.checklistCheckedColor,
-            (v) => _themeProfile = _themeProfile.copyWith(
-              checklistCheckedColor: v,
-            ),
-          ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'titleTextColor',
+        _colorSetting(
+          l10n.d('Titeltekst'),
+          _themeProfile.titleTextColor,
+          (v) => _themeProfile = _themeProfile.copyWith(titleTextColor: v),
         ),
-        const SizedBox(height: 12),
-        _themeColorAnchor(
-          'checklistUncheckedColor',
-          _colorSetting(
-            l10n.d('Niet afgevinkt'),
-            _themeProfile.checklistUncheckedColor,
-            (v) => _themeProfile = _themeProfile.copyWith(
-              checklistUncheckedColor: v,
-            ),
-          ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'sectionBackgroundColor',
+        _colorSetting(
+          l10n.d('Sectieachtergrond'),
+          _themeProfile.sectionBackgroundColor,
+          (v) =>
+              _themeProfile = _themeProfile.copyWith(sectionBackgroundColor: v),
         ),
-        const SizedBox(height: 6),
-        SwitchListTile(
-          value: _themeProfile.checklistStrikeThrough,
-          onChanged: (value) => setState(() {
-            _themeProfile = _themeProfile.copyWith(
-              checklistStrikeThrough: value,
-            );
-            _profileTouched = true;
-          }),
-          title: Text(
-            l10n.d('Afgevinkte tekst doorhalen'),
-            style: const TextStyle(fontSize: 13),
-          ),
-          subtitle: Text(
-            l10n.d('Toont een streep door voltooide checklistitems.'),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
-          ),
-          controlAffinity: ListTileControlAffinity.leading,
-          contentPadding: EdgeInsets.zero,
-          dense: true,
+      ),
+      const SizedBox(height: 24),
+      _sectionTitle(l10n.d('Broncode')),
+      _themeColorAnchor(
+        'codeBackgroundColor',
+        _colorSetting(
+          l10n.d('Broncode achtergrond'),
+          _themeProfile.codeBackgroundColor,
+          (v) => _themeProfile = _themeProfile.copyWith(codeBackgroundColor: v),
         ),
-        const SizedBox(height: 12),
-        _themeColorAnchor(
-          'tableTextColor',
-          _colorSetting(
-            l10n.d('Tabeltekst'),
-            _themeProfile.tableTextColor,
-            (v) => _themeProfile = _themeProfile.copyWith(tableTextColor: v),
-          ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'codeTextColor',
+        _colorSetting(
+          l10n.d('Broncode tekst'),
+          _themeProfile.codeTextColor,
+          (v) => _themeProfile = _themeProfile.copyWith(codeTextColor: v),
         ),
-        const SizedBox(height: 12),
-        _themeColorAnchor(
-          'tableHeaderTextColor',
-          _colorSetting(
-            l10n.d('Tabel koptekst'),
-            _themeProfile.tableHeaderTextColor,
-            (v) =>
-                _themeProfile = _themeProfile.copyWith(tableHeaderTextColor: v),
-          ),
+      ),
+      const SizedBox(height: 6),
+      SwitchListTile(
+        value: _themeProfile.codeHighlightSyntax,
+        onChanged: (v) => setState(() {
+          _themeProfile = _themeProfile.copyWith(codeHighlightSyntax: v);
+          _profileTouched = true;
+        }),
+        title: Text(
+          l10n.d('Syntaxkleuring'),
+          style: const TextStyle(fontSize: 13),
         ),
-        const SizedBox(height: 12),
-        _themeColorAnchor(
-          'tableHeaderBackgroundColor',
-          _colorSetting(
-            l10n.d('Tabel kopachtergrond'),
-            _themeProfile.tableHeaderBackgroundColor,
-            (v) => _themeProfile = _themeProfile.copyWith(
-              tableHeaderBackgroundColor: v,
-            ),
+        subtitle: Text(
+          l10n.d(
+            'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).',
           ),
+          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
         ),
-        const SizedBox(height: 12),
-        _themeColorAnchor(
-          'titleBackgroundColor',
-          _colorSetting(
-            l10n.d('Titelachtergrond'),
-            _themeProfile.titleBackgroundColor,
-            (v) =>
-                _themeProfile = _themeProfile.copyWith(titleBackgroundColor: v),
-          ),
+        controlAffinity: ListTileControlAffinity.leading,
+        contentPadding: EdgeInsets.zero,
+        dense: true,
+      ),
+      const SizedBox(height: 10),
+      DropdownButtonFormField<String>(
+        initialValue:
+            AppSettings.codeFonts.contains(_themeProfile.codeFontFamily)
+            ? _themeProfile.codeFontFamily
+            : 'monospace',
+        decoration: InputDecoration(
+          labelText: l10n.d('Broncode lettertype'),
+          isDense: true,
         ),
-        const SizedBox(height: 12),
-        _themeColorAnchor(
-          'titleTextColor',
-          _colorSetting(
-            l10n.d('Titeltekst'),
-            _themeProfile.titleTextColor,
-            (v) => _themeProfile = _themeProfile.copyWith(titleTextColor: v),
-          ),
-        ),
-        const SizedBox(height: 12),
-        _themeColorAnchor(
-          'sectionBackgroundColor',
-          _colorSetting(
-            l10n.d('Sectieachtergrond'),
-            _themeProfile.sectionBackgroundColor,
-            (v) => _themeProfile = _themeProfile.copyWith(
-              sectionBackgroundColor: v,
-            ),
-          ),
-        ),
-        const SizedBox(height: 24),
-        _sectionTitle(l10n.d('Broncode')),
-        _themeColorAnchor(
-          'codeBackgroundColor',
-          _colorSetting(
-            l10n.d('Broncode achtergrond'),
-            _themeProfile.codeBackgroundColor,
-            (v) =>
-                _themeProfile = _themeProfile.copyWith(codeBackgroundColor: v),
-          ),
-        ),
-        const SizedBox(height: 12),
-        _themeColorAnchor(
-          'codeTextColor',
-          _colorSetting(
-            l10n.d('Broncode tekst'),
-            _themeProfile.codeTextColor,
-            (v) => _themeProfile = _themeProfile.copyWith(codeTextColor: v),
-          ),
-        ),
-        const SizedBox(height: 6),
-        SwitchListTile(
-          value: _themeProfile.codeHighlightSyntax,
-          onChanged: (v) => setState(() {
-            _themeProfile = _themeProfile.copyWith(codeHighlightSyntax: v);
-            _profileTouched = true;
-          }),
-          title: Text(
-            l10n.d('Syntaxkleuring'),
-            style: const TextStyle(fontSize: 13),
-          ),
-          subtitle: Text(
-            l10n.d(
-              'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).',
-            ),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
-          ),
-          controlAffinity: ListTileControlAffinity.leading,
-          contentPadding: EdgeInsets.zero,
-          dense: true,
-        ),
-        const SizedBox(height: 10),
-        DropdownButtonFormField<String>(
-          initialValue:
-              AppSettings.codeFonts.contains(_themeProfile.codeFontFamily)
-              ? _themeProfile.codeFontFamily
-              : 'monospace',
-          decoration: InputDecoration(
-            labelText: l10n.d('Broncode lettertype'),
-            isDense: true,
-          ),
-          items: [
-            for (final f in AppSettings.codeFonts)
-              DropdownMenuItem(
-                value: f,
-                child: Text(
-                  f == 'monospace' ? l10n.d('Systeem (monospace)') : f,
-                  style: TextStyle(fontFamily: f),
-                ),
+        items: [
+          for (final f in AppSettings.codeFonts)
+            DropdownMenuItem(
+              value: f,
+              child: Text(
+                f == 'monospace' ? l10n.d('Systeem (monospace)') : f,
+                style: TextStyle(fontFamily: f),
               ),
-          ],
-          onChanged: (v) {
-            if (v == null) return;
-            setState(() {
-              _themeProfile = _themeProfile.copyWith(codeFontFamily: v);
-              _profileTouched = true;
-            });
-          },
-        ),
+            ),
+        ],
+        onChanged: (v) {
+          if (v == null) return;
+          setState(() {
+            _themeProfile = _themeProfile.copyWith(codeFontFamily: v);
+            _profileTouched = true;
+          });
+        },
+      ),
     ];
   }
 
   List<Widget> _logoSectionChildren() {
     final l10n = context.l10n;
     return [
-        Row(
-          children: [
-            Expanded(
-              child: _pathBox(
-                _themeProfile.logoPath ?? l10n.d('Geen logo ingesteld'),
-                muted: _themeProfile.logoPath == null,
-              ),
+      Row(
+        children: [
+          Expanded(
+            child: _pathBox(
+              _themeProfile.logoPath ?? l10n.d('Geen logo ingesteld'),
+              muted: _themeProfile.logoPath == null,
             ),
-            const SizedBox(width: 8),
-            ElevatedButton.icon(
-              onPressed: _pickLogo,
-              icon: const Icon(Icons.image_outlined, size: 16),
-              label: Text(l10n.d('Kiezen')),
-            ),
-            if (_themeProfile.logoPath != null)
-              IconButton(
-                onPressed: () => setState(() {
-                  _themeProfile = _themeProfile.copyWith(clearLogo: true);
-                  _profileTouched = true;
-                }),
-                icon: const Icon(Icons.clear, size: 18),
-                tooltip: l10n.d('Verwijder logo'),
-              ),
-          ],
-        ),
-        const SizedBox(height: 18),
-        DropdownButtonFormField<String>(
-          initialValue: _themeProfile.logoPosition,
-          decoration: InputDecoration(
-            labelText: l10n.d('Logo positie'),
-            isDense: true,
           ),
-          items: [
-            DropdownMenuItem(
-              value: 'top-left',
-              child: Text(l10n.d('Linksboven')),
-            ),
-            DropdownMenuItem(
-              value: 'top-right',
-              child: Text(l10n.d('Rechtsboven')),
-            ),
-            DropdownMenuItem(
-              value: 'bottom-left',
-              child: Text(l10n.d('Linksonder')),
-            ),
-            DropdownMenuItem(
-              value: 'bottom-right',
-              child: Text(l10n.d('Rechtsonder')),
-            ),
-          ],
-          onChanged: (v) {
-            if (v != null) {
-              setState(() {
-                _themeProfile = _themeProfile.copyWith(logoPosition: v);
+          const SizedBox(width: 8),
+          ElevatedButton.icon(
+            onPressed: _pickLogo,
+            icon: const Icon(Icons.image_outlined, size: 16),
+            label: Text(l10n.d('Kiezen')),
+          ),
+          if (_themeProfile.logoPath != null)
+            IconButton(
+              onPressed: () => setState(() {
+                _themeProfile = _themeProfile.copyWith(clearLogo: true);
                 _profileTouched = true;
-              });
-            }
-          },
-        ),
-        const SizedBox(height: 14),
-        SizedBox(
-          width: 160,
-          child: TextField(
-            controller: _logoSize,
-            decoration: InputDecoration(
-              labelText: context.l10n.d('Logo px'),
-              isDense: true,
+              }),
+              icon: const Icon(Icons.clear, size: 18),
+              tooltip: l10n.d('Verwijder logo'),
             ),
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            onChanged: (_) => _profileTouched = true,
-          ),
+        ],
+      ),
+      const SizedBox(height: 18),
+      DropdownButtonFormField<String>(
+        initialValue: _themeProfile.logoPosition,
+        decoration: InputDecoration(
+          labelText: l10n.d('Logo positie'),
+          isDense: true,
         ),
-        const SizedBox(height: 24),
-        _sectionTitle('Footer'),
-        TextField(
-          controller: _footerText,
+        items: [
+          DropdownMenuItem(
+            value: 'top-left',
+            child: Text(l10n.d('Linksboven')),
+          ),
+          DropdownMenuItem(
+            value: 'top-right',
+            child: Text(l10n.d('Rechtsboven')),
+          ),
+          DropdownMenuItem(
+            value: 'bottom-left',
+            child: Text(l10n.d('Linksonder')),
+          ),
+          DropdownMenuItem(
+            value: 'bottom-right',
+            child: Text(l10n.d('Rechtsonder')),
+          ),
+        ],
+        onChanged: (v) {
+          if (v != null) {
+            setState(() {
+              _themeProfile = _themeProfile.copyWith(logoPosition: v);
+              _profileTouched = true;
+            });
+          }
+        },
+      ),
+      const SizedBox(height: 14),
+      SizedBox(
+        width: 160,
+        child: TextField(
+          controller: _logoSize,
           decoration: InputDecoration(
-            labelText: l10n.d('Footertekst'),
-            hintText: l10n.d('bijv. Vertrouwelijk · {title} · {date}'),
+            labelText: context.l10n.d('Logo px'),
             isDense: true,
           ),
+          keyboardType: TextInputType.number,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           onChanged: (_) => _profileTouched = true,
         ),
-        const SizedBox(height: 6),
-        Text(
-          l10n.d(
-            'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.',
-          ),
-          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+      ),
+      const SizedBox(height: 24),
+      _sectionTitle('Footer'),
+      TextField(
+        controller: _footerText,
+        decoration: InputDecoration(
+          labelText: l10n.d('Footertekst'),
+          hintText: l10n.d('bijv. Vertrouwelijk · {title} · {date}'),
+          isDense: true,
         ),
-        const SizedBox(height: 14),
-        DropdownButtonFormField<String>(
-          initialValue: _themeProfile.footerPosition,
-          decoration: InputDecoration(
-            labelText: l10n.d('Footerpositie'),
-            isDense: true,
-          ),
-          items: [
-            DropdownMenuItem(value: 'left', child: Text(l10n.d('Links'))),
-            DropdownMenuItem(value: 'center', child: Text(l10n.d('Midden'))),
-            DropdownMenuItem(value: 'right', child: Text(l10n.d('Rechts'))),
-          ],
-          onChanged: (v) {
-            if (v != null) {
-              setState(() {
-                _themeProfile = _themeProfile.copyWith(footerPosition: v);
-                _profileTouched = true;
-              });
-            }
-          },
+        onChanged: (_) => _profileTouched = true,
+      ),
+      const SizedBox(height: 6),
+      Text(
+        l10n.d(
+          'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.',
         ),
-        const SizedBox(height: 6),
-        CheckboxListTile(
-          value: _themeProfile.footerShowPageNumbers,
-          onChanged: (v) => setState(() {
-            _themeProfile = _themeProfile.copyWith(
-              footerShowPageNumbers: v ?? false,
-            );
-            _profileTouched = true;
-          }),
-          title: Text(
-            l10n.d('Paginanummers tonen (rechtsonder)'),
-            style: const TextStyle(fontSize: 13),
-          ),
-          controlAffinity: ListTileControlAffinity.leading,
-          contentPadding: EdgeInsets.zero,
-          dense: true,
+        style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+      ),
+      const SizedBox(height: 14),
+      DropdownButtonFormField<String>(
+        initialValue: _themeProfile.footerPosition,
+        decoration: InputDecoration(
+          labelText: l10n.d('Footerpositie'),
+          isDense: true,
         ),
-        const SizedBox(height: 24),
-        _sectionTitle(l10n.d('Laatste slide')),
-        SwitchListTile(
-          value: _themeProfile.closingSlideEnabled,
-          onChanged: (v) => setState(() {
-            _themeProfile = _themeProfile.copyWith(
-              closingSlideEnabled: v,
-              closingSlideMarkdown: _closingSlideMarkdown.text,
-            );
-            _profileTouched = true;
-          }),
-          title: Text(
-            l10n.d('Standaard laatste slide gebruiken'),
-            style: const TextStyle(fontSize: 13),
-          ),
-          subtitle: Text(
-            l10n.d(
-              'Wordt automatisch toegevoegd bij presenteren en exporteren.',
-            ),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
-          ),
-          contentPadding: EdgeInsets.zero,
-          dense: true,
+        items: [
+          DropdownMenuItem(value: 'left', child: Text(l10n.d('Links'))),
+          DropdownMenuItem(value: 'center', child: Text(l10n.d('Midden'))),
+          DropdownMenuItem(value: 'right', child: Text(l10n.d('Rechts'))),
+        ],
+        onChanged: (v) {
+          if (v != null) {
+            setState(() {
+              _themeProfile = _themeProfile.copyWith(footerPosition: v);
+              _profileTouched = true;
+            });
+          }
+        },
+      ),
+      const SizedBox(height: 6),
+      CheckboxListTile(
+        value: _themeProfile.footerShowPageNumbers,
+        onChanged: (v) => setState(() {
+          _themeProfile = _themeProfile.copyWith(
+            footerShowPageNumbers: v ?? false,
+          );
+          _profileTouched = true;
+        }),
+        title: Text(
+          l10n.d('Paginanummers tonen (rechtsonder)'),
+          style: const TextStyle(fontSize: 13),
         ),
-        const SizedBox(height: 8),
-        TextField(
-          controller: _closingSlideMarkdown,
-          enabled: _themeProfile.closingSlideEnabled,
-          minLines: 4,
-          maxLines: 8,
-          decoration: InputDecoration(
-            labelText: l10n.d('Markdown voor laatste slide'),
-            hintText: '# Bedankt\n\nVragen?',
-            alignLabelWithHint: true,
-            isDense: true,
-          ),
-          onChanged: (value) {
-            _themeProfile = _themeProfile.copyWith(closingSlideMarkdown: value);
-            _profileTouched = true;
-          },
+        controlAffinity: ListTileControlAffinity.leading,
+        contentPadding: EdgeInsets.zero,
+        dense: true,
+      ),
+      const SizedBox(height: 24),
+      _sectionTitle(l10n.d('Laatste slide')),
+      SwitchListTile(
+        value: _themeProfile.closingSlideEnabled,
+        onChanged: (v) => setState(() {
+          _themeProfile = _themeProfile.copyWith(
+            closingSlideEnabled: v,
+            closingSlideMarkdown: _closingSlideMarkdown.text,
+          );
+          _profileTouched = true;
+        }),
+        title: Text(
+          l10n.d('Standaard laatste slide gebruiken'),
+          style: const TextStyle(fontSize: 13),
         ),
+        subtitle: Text(
+          l10n.d('Wordt automatisch toegevoegd bij presenteren en exporteren.'),
+          style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+        ),
+        contentPadding: EdgeInsets.zero,
+        dense: true,
+      ),
+      const SizedBox(height: 8),
+      TextField(
+        controller: _closingSlideMarkdown,
+        enabled: _themeProfile.closingSlideEnabled,
+        minLines: 4,
+        maxLines: 8,
+        decoration: InputDecoration(
+          labelText: l10n.d('Markdown voor laatste slide'),
+          hintText: '# Bedankt\n\nVragen?',
+          alignLabelWithHint: true,
+          isDense: true,
+        ),
+        onChanged: (value) {
+          _themeProfile = _themeProfile.copyWith(closingSlideMarkdown: value);
+          _profileTouched = true;
+        },
+      ),
     ];
   }
 

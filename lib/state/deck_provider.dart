@@ -543,25 +543,23 @@ class DeckNotifier extends StateNotifier<DeckState> {
     String slideId, {
     int pageIndex = 0,
     bool multiPage = false,
-  }) =>
-      userNoteForPage(
-        state.deck?.userNotes ?? const {},
-        slideId,
-        pageIndex,
-        multiPage: multiPage,
-      );
+  }) => userNoteForPage(
+    state.deck?.userNotes ?? const {},
+    slideId,
+    pageIndex,
+    multiPage: multiPage,
+  );
 
   void clearUserNoteForSlide(
     String slideId, {
     int pageIndex = 0,
     bool multiPage = false,
-  }) =>
-      setUserNoteForSlide(
-        slideId,
-        '',
-        pageIndex: pageIndex,
-        multiPage: multiPage,
-      );
+  }) => setUserNoteForSlide(
+    slideId,
+    '',
+    pageIndex: pageIndex,
+    multiPage: multiPage,
+  );
 
   // ── Markdown mode ──────────────────────────────────────────────────────────
 
