@@ -1,421 +1,418 @@
-# OciDeck — Bestandsformaat
+# OciDeck — File Format
 
-OciDeck slaat presentaties op als **standaard [Marp](https://marp.app/) Markdown** (`.md`).
-Er is geen eigen binair formaat: een opgeslagen presentatie kan direct met de
-Marp CLI of VS Code Marp-extensie verwerkt worden. OciDeck-specifieke informatie
-wordt meegeschreven op manieren die Marp negeert (front-matter-sleutels en
-HTML-commentaar), zodat het bestand zowel volledig Marp-compatibel is als een
-verliesvrije round-trip in OciDeck oplevert.
+OciDeck stores presentations as **standard [Marp](https://marp.app/) Markdown**
+(`.md`). There is no custom binary format: a saved presentation can be processed
+directly with the Marp CLI or the VS Code Marp extension. OciDeck-specific
+information is written in places Marp ignores (front-matter keys and HTML
+comments), so the file remains fully Marp-compatible while still round-tripping
+losslessly in OciDeck.
 
-Daarnaast bestaan er twee afgeleide vormen:
+There are also two derived forms:
 
-- een **projectmap** rond het `.md`-bestand met gekopieerde assets, en
-- een **draagbaar pakket** (`.ocideck`, een zip) om een presentatie als één
-  bestand uit te wisselen.
+- a **project folder** around the `.md` file with copied assets, and
+- a **portable package** (`.ocideck`, a zip file) for exchanging a presentation as
+  a single file.
 
 ---
 
-## 1. Projectmap-indeling
+## 1. Project Folder Layout
 
-Bij opslaan (`Opslaan` / `Opslaan als…`) schrijft OciDeck niet alleen de `.md`,
-maar legt het ook een vaste mapstructuur ernaast aan en kopieert het alle
-gebruikte assets erheen. Paden in de Markdown zijn daarna **relatief** ten
-opzichte van de map van het `.md`-bestand.
+When saving (`Save` / `Save as...`), OciDeck writes more than the `.md` file: it
+also creates a fixed folder structure next to it and copies all used assets
+there. Paths in the Markdown are then **relative** to the folder containing the
+`.md` file.
 
 ```
-mijn_presentatie/
-├── Mijn_presentatie.md          # de presentatie (Marp Markdown)
-├── Mijn_presentatie.ink.json    # annotatielaag-sidecar (zie §6.2)
-├── Mijn_presentatie.user-notes.json  # gebruikersnotities-sidecar (zie §6.3)
-├── images/                      # gekopieerde afbeeldingen
-│   ├── foto.png
-│   └── .ocideck_captions.json   # bijschriften-sidecar (zie §6.1)
-├── data/                        # gekoppelde grafiek-CSV's (zie §6.4)
-│   └── omzet.csv
-├── logos/                       # gekopieerd logo van het stijlprofiel
+my_presentation/
+├── My_presentation.md              # the presentation (Marp Markdown)
+├── My_presentation.ink.json        # annotation-layer sidecar (see §6.2)
+├── My_presentation.user-notes.json # user-notes sidecar (see §6.3)
+├── images/                         # copied images
+│   ├── photo.png
+│   └── .ocideck_captions.json      # caption sidecar (see §6.1)
+├── data/                           # linked chart CSV files (see §6.4)
+│   └── revenue.csv
+├── logos/                          # copied logo from the style profile
 │   └── logo.png
-├── media/                       # video/audio (alleen in het pakket, zie §7)
+├── media/                          # video/audio (only in packages, see §7)
 └── themes/
-    └── ocideck.css              # gegenereerde thema-CSS (zie §5)
+    └── ocideck.css                 # generated theme CSS (see §5)
 ```
 
-> De bestandsnaam van de `.md` wordt afgeleid van de presentatietitel: niet-
-> alfanumerieke tekens worden verwijderd en spaties worden `_`.
+> The `.md` filename is derived from the presentation title: non-alphanumeric
+> characters are removed and spaces become `_`.
 
-De mappen `images/`, `logos/`, `themes/` (en `node_modules/`, `build/`, `.git/`,
-`.dart_tool/`) worden overgeslagen wanneer OciDeck een map scant op
-presentaties.
+The folders `images/`, `logos/`, `themes/` (and `node_modules/`, `build/`,
+`.git/`, `.dart_tool/`) are skipped when OciDeck scans a folder for
+presentations.
 
-> Naast de `.md` staan **sidecars** die bewust géén onderdeel van de Marp-
-> Markdown zijn (zodat het `.md` puur en uitwisselbaar blijft): de
-> annotatielaag (`<naam>.ink.json`, §6.2), gebruikersnotities
-> (`<naam>.user-notes.json`, §6.3), bijschriften (`.ocideck_captions.json`,
-> §6.1) en gekoppelde grafiekdata (`data/*.csv`, §6.4).
+> Next to the `.md` file, OciDeck writes **sidecars** that deliberately are not
+> part of the Marp Markdown (so the `.md` stays clean and exchangeable): the
+> annotation layer (`<name>.ink.json`, §6.2), user notes
+> (`<name>.user-notes.json`, §6.3), captions (`.ocideck_captions.json`, §6.1),
+> and linked chart data (`data/*.csv`, §6.4).
 
 ---
 
-## 2. Markdown-structuur op hoofdlijnen
+## 2. Markdown Structure at a Glance
 
 ```markdown
 ---
 marp: true
 theme: ocideck
 paginate: true
-... (overige metadata) ...
+... (other metadata) ...
 ocideck_style_profile: <base64url(JSON)>
 ---
 
 <!-- _class: title -->
 
-# Eerste slide
+# First slide
 
 ---
 
 <!-- _class: ... -->
 
-(tweede slide)
+(second slide)
 ```
 
-- Het document begint met **YAML front matter** tussen `---`-regels (§3).
-- Slides worden gescheiden door een regel met exact `---` (intern gesplitst op
+- The document starts with **YAML front matter** between `---` lines (§3).
+- Slides are separated by a line containing exactly `---` (internally split on
   `\n---\n`).
-- Elke slide begint optioneel met een `<!-- _class: … -->`-regel die het
-  slidetype en gedrag bepaalt (§4).
+- Each slide can optionally start with a `<!-- _class: ... -->` line that
+  determines the slide type and behavior (§4).
 
 ---
 
-## 3. Front matter
+## 3. Front Matter
 
-| Sleutel | Type | Betekenis |
+| Key | Type | Meaning |
 | --- | --- | --- |
-| `marp` | `true` | Vaste Marp-marker. |
-| `theme` | string | Themanaam; standaard `ocideck`. Verwijst naar `themes/<theme>.css`. |
-| `paginate` | `true`/afwezig | Wordt alleen geschreven als paginering aanstaat. |
-| `author` | string | Auteur. |
-| `organization` | string | Organisatie. |
-| `version` | string | Versie. |
-| `date` | string | Datum (vrije tekst). |
-| `description` | string | Beschrijving. |
-| `keywords` | string | Trefwoorden. |
-| `tlp` | enum | Traffic Light Protocol-niveau (§3.1). Alleen geschreven als ≠ `none`. |
-| `ocideck_style_profile` | base64url | Volledig stijlprofiel als JSON (§3.2). |
+| `marp` | `true` | Fixed Marp marker. |
+| `theme` | string | Theme name; defaults to `ocideck`. Refers to `themes/<theme>.css`. |
+| `paginate` | `true`/absent | Written only when pagination is enabled. |
+| `author` | string | Author. |
+| `organization` | string | Organization. |
+| `version` | string | Version. |
+| `date` | string | Date (free text). |
+| `description` | string | Description. |
+| `keywords` | string | Keywords. |
+| `tlp` | enum | Traffic Light Protocol level (§3.1). Written only when not `none`. |
+| `ocideck_style_profile` | base64url | Complete style profile as JSON (§3.2). |
 
-De metadatavelden worden alleen geschreven wanneer ze niet leeg zijn. Tekst
-wordt als YAML-scalar geschreven en alleen tussen dubbele quotes gezet wanneer
-dat nodig is (lege waarde, rand-witruimte, of speciale tekens zoals `: # "` of
-een YAML-indicator aan het begin). Bij het lezen wordt geen volwaardige
-YAML-parser gebruikt maar een eenvoudige regel-voor-regel-parser; houd de front
-matter dus plat (één sleutel per regel).
+Metadata fields are written only when they are not empty. Text is written as a
+YAML scalar and quoted only when needed (empty value, leading/trailing
+whitespace, special characters such as `: # "`, or a YAML indicator at the
+start). OciDeck does not use a full YAML parser when reading; it uses a simple
+line-by-line parser, so keep front matter flat (one key per line).
 
-### 3.1 TLP-niveaus
+### 3.1 TLP Levels
 
-Opgeslagen onder de sleutel `tlp` met deze stabiele waarden:
+Stored under the `tlp` key with these stable values:
 
-| `tlp` waarde | Markering op slide |
+| `tlp` value | Slide marking |
 | --- | --- |
-| `none` *(niet geschreven)* | — |
+| `none` *(not written)* | — |
 | `clear` | `TLP:CLEAR` |
 | `green` | `TLP:GREEN` |
 | `amber` | `TLP:AMBER` |
 | `amber+strict` | `TLP:AMBER+STRICT` |
 | `red` | `TLP:RED` |
 
-**Effectieve markering.** In de app wordt per slide het **strengste** niveau
-getoond: het maximum van het deck-TLP (`tlp` in front matter) en het
-per-slide TLP (`<!-- tlp: … -->`). Dat bepaalt banner, badge en optioneel
-watermerk in preview, presenter en rasterexport — niet opgeslagen als extra
-Markdown, maar berekend bij renderen (`effectiveTlp` in `lib/models/deck.dart`).
+**Effective marking.** In the app, each slide shows the **strictest** level: the
+maximum of the deck-level TLP (`tlp` in front matter) and the per-slide TLP
+(`<!-- tlp: ... -->`). That determines the banner, badge, and optional watermark
+in preview, presenter, and raster export. It is not stored as extra Markdown; it
+is calculated while rendering (`effectiveTlp` in `lib/models/deck.dart`).
 
-**Zichtbaarheid vs. export-gate.** Per-slide TLP bepaalt welke slides worden
-achtergehouden bij presenteren/exporteren (`slideVisibleAtTlp`). De
-**export-handhaving** (plafond, minimum, verplichte classificatie) kijkt
-alleen naar het deck-brede `tlp`-veld in front matter, niet naar per-slide
-niveaus.
+**Visibility vs. export gate.** Per-slide TLP determines which slides are held
+back during presenting/exporting (`slideVisibleAtTlp`). The **export enforcement**
+(ceiling, minimum, mandatory classification) only looks at the deck-wide `tlp`
+field in front matter, not at per-slide levels.
 
-### 3.2 `ocideck_style_profile` (stijlprofiel)
+### 3.2 `ocideck_style_profile` (Style Profile)
 
-Het complete visuele profiel wordt als JSON geserialiseerd, ge-UTF-8'd en
-**base64url**-gecodeerd op één regel. Decodeer met base64url → UTF-8 → JSON. De
-JSON heeft deze velden (met standaardwaarden):
+The complete visual profile is serialized as JSON, UTF-8 encoded, and
+**base64url** encoded on one line. Decode as base64url -> UTF-8 -> JSON. The JSON
+has these fields (with defaults):
 
-| Veld | Standaard | Betekenis |
+| Field | Default | Meaning |
 | --- | --- | --- |
-| `name` | `"Standaard"` | Profielnaam. |
-| `slideBackgroundColor` | `#FFFFFF` | Achtergrond gewone slide. |
-| `textColor` | `#222222` | Tekstkleur. |
-| `accentColor` | `#2E7D64` | Accent (bullets-marker, tabelranden/-kop). |
-| `tableTextColor` | = `textColor` | Tekstkleur in tabellen. |
-| `tableHeaderTextColor` | `#FFFFFF` | Tekstkleur tabelkop. |
-| `titleBackgroundColor` | `#1C2B47` | Achtergrond titelslide. |
-| `titleTextColor` | `#FFFFFF` | Tekst op titel-/sectieslide. |
-| `sectionBackgroundColor` | `#2E7D64` | Achtergrond sectieslide. |
-| `codeBackgroundColor` | `#282C34` | Achtergrond van broncode-slides. |
-| `codeTextColor` | `#ABB2BF` | Tekstkleur van broncode-slides. |
-| `codeHighlightSyntax` | `true` | Syntaxkleuring aan/uit. Uit = alles in één kleur (bijv. groen op zwart voor een CRT-look). |
-| `codeFontFamily` | `monospace` | Lettertype van broncode-slides (bijv. `Courier New`). |
-| `logoPath` | `null` | Pad naar logo (relatief in `logos/`). |
+| `name` | `"Standaard"` | Profile name. |
+| `slideBackgroundColor` | `#FFFFFF` | Background for normal slides. |
+| `textColor` | `#222222` | Text color. |
+| `accentColor` | `#2E7D64` | Accent (bullet marker, table borders/header). |
+| `tableTextColor` | = `textColor` | Text color in tables. |
+| `tableHeaderTextColor` | `#FFFFFF` | Table header text color. |
+| `titleBackgroundColor` | `#1C2B47` | Title-slide background. |
+| `titleTextColor` | `#FFFFFF` | Text on title/section slides. |
+| `sectionBackgroundColor` | `#2E7D64` | Section-slide background. |
+| `codeBackgroundColor` | `#282C34` | Source-code slide background. |
+| `codeTextColor` | `#ABB2BF` | Source-code slide text color. |
+| `codeHighlightSyntax` | `true` | Syntax highlighting on/off. Off = everything in one color (for example green on black for a CRT look). |
+| `codeFontFamily` | `monospace` | Font family for source-code slides (for example `Courier New`). |
+| `logoPath` | `null` | Path to the logo (relative path in `logos/`). |
 | `logoPosition` | `bottom-right` | `top-left`/`top-right`/`bottom-left`/`bottom-right`. |
-| `logoSize` | `96` | Logogrootte in px. |
-| `fontFamily` | `Arial` | Lettertype van de presentatie. |
-| `footerText` | `""` | Vrije footertekst; tokens: `{page}`, `{total}`, `{date}`, `{title}`. |
-| `footerShowPageNumbers` | `false` | Toon "pagina / totaal" rechtsonder. |
+| `logoSize` | `96` | Logo size in px. |
+| `fontFamily` | `Arial` | Presentation font family. |
+| `footerText` | `""` | Free footer text; tokens: `{page}`, `{total}`, `{date}`, `{title}`. |
+| `footerShowPageNumbers` | `false` | Show "page / total" at the bottom right. |
 | `footerPosition` | `right` | `left`/`center`/`right`. |
-| `closingSlideEnabled` | `false` | Voeg automatisch een slotslide toe bij presenteren/exporteren. |
-| `closingSlideMarkdown` | `"# Bedankt\n\nVragen?"` | Markdown van die slotslide. |
+| `closingSlideEnabled` | `false` | Automatically add a closing slide during presenting/exporting. |
+| `closingSlideMarkdown` | `"# Bedankt\n\nVragen?"` | Markdown for that closing slide. |
 
-Onbekende/ontbrekende velden vallen terug op de standaardwaarden, dus oudere
-bestanden migreren probleemloos.
+Unknown or missing fields fall back to defaults, so older files migrate cleanly.
 
 ---
 
-## 4. Slide-classes en gedrag
+## 4. Slide Classes and Behavior
 
-Direct na de scheiding kan een slide een class-commentaar bevatten:
+Immediately after a separator, a slide can contain a class comment:
 
 ```markdown
-<!-- _class: <typeclass> [logo-safe] [no-logo] [no-footer] [eigen-classes] -->
+<!-- _class: <typeclass> [logo-safe] [no-logo] [no-footer] [custom-classes] -->
 ```
 
-De eerste class bepaalt (samen met de inhoud) het **slidetype**:
+The first class determines (together with the content) the **slide type**:
 
-| Type | `_class` token | Detectie zonder token |
+| Type | `_class` token | Detection without token |
 | --- | --- | --- |
-| Titelpagina | `title` | — |
-| Tussentitel (sectie) | `section` | — |
-| Twee bulletkolommen | `two-bullets` | — |
-| Bullets + afbeelding | `split` | bullets **en** afbeelding aanwezig |
-| Quote | `quote` | een `>`-regel aanwezig |
-| Video | `video` | een `<video>`-tag aanwezig |
-| Tabel | `table` | alleen een tabel, geen kop/bullets/tekst |
-| Broncode | `code` | — |
-| Grafiek | `chart` | — |
-| Alleen bullets | *(geen)* | bullets aanwezig |
-| Twee afbeeldingen | *(geen)* | twee achtergrond-afbeeldingen |
-| Grote afbeelding | *(geen)* | één afbeelding, geen bullets |
-| Vrije Markdown | *(geen)* | geen kop/bullets/afbeelding/quote |
+| Title page | `title` | — |
+| Section divider | `section` | — |
+| Two bullet columns | `two-bullets` | — |
+| Bullets + image | `split` | bullets **and** image present |
+| Quote | `quote` | a `>` line is present |
+| Video | `video` | a `<video>` tag is present |
+| Table | `table` | only a table, no heading/bullets/text |
+| Source code | `code` | — |
+| Chart | `chart` | — |
+| Bullets only | *(none)* | bullets present |
+| Two images | *(none)* | two background images |
+| Large image | *(none)* | one image, no bullets |
+| Free Markdown | *(none)* | no heading/bullets/image/quote |
 
-> `code`- en `chart`-slides bevatten een fenced codeblok dat de generieke
-> regel-parser zou verstoren; ze worden daarom apart herkend aan hun `_class`.
+> `code` and `chart` slides contain fenced code blocks that would confuse the
+> generic line parser, so they are recognized separately through their `_class`.
 
-Extra gedragsklassen:
+Additional behavior classes:
 
-- `logo-safe` — gereserveerde ruimte zodat het logo de inhoud niet overlapt.
-  Wordt automatisch toegevoegd als er een logo is **en** de slide het logo toont.
-- `no-logo` — verberg het logo op deze slide (`showLogo = false`).
-- `no-footer` — verberg de footer op deze slide (`showFooter = false`).
-  Ontbreekt dit token (oudere bestanden), dan blijft de footer zichtbaar.
+- `logo-safe` — reserve space so the logo does not overlap content. Added
+  automatically when a logo exists **and** the slide shows it.
+- `no-logo` — hide the logo on this slide (`showLogo = false`).
+- `no-footer` — hide the footer on this slide (`showFooter = false`). If this
+  token is absent (older files), the footer remains visible.
 
-Bij het inlezen worden de type- en gedragsklassen herkend en verwijderd; wat
-overblijft, wordt bewaard als de eigen `cssClass` van de slide.
+When reading, OciDeck recognizes and removes the type and behavior classes; what
+remains is preserved as the slide's custom `cssClass`.
 
 ---
 
-## 5. Per slidetype: Markdown-weergave
+## 5. Per-Slide-Type Markdown Representation
 
-Hieronder de gegenereerde vorm per type. Afbeeldings-bijschriften (§6) worden
-waar van toepassing als `<div class="image-caption">…</div>` direct onder de
-afbeelding geschreven.
+The generated form for each type is shown below. Image captions (§6) are written,
+where applicable, as `<div class="image-caption">...</div>` directly below the
+image.
 
-**Titel** (`title`)
+**Title** (`title`)
 ```markdown
-![bg 60% opacity:.45](images/achtergrond.png)   <!-- optionele achtergrond -->
-# Titel
-## Ondertitel
+![bg 60% opacity:.45](images/background.png)   <!-- optional background -->
+# Title
+## Subtitle
 ```
 
-**Sectie** (`section`)
+**Section** (`section`)
 ```markdown
-# Sectietitel
+# Section title
 
-Optionele toelichtende paragraaf
+Optional explanatory paragraph
 ```
 
-**Bullets** (geen class) — optioneel een **subkop** (`## …`, komt in `subtitle`),
-en inspringen met tabs in het model → 2 spaties per niveau in Markdown:
+**Bullets** (no class) — optionally a **subheading** (`## ...`, stored in
+`subtitle`), and indentation with tabs in the model -> two spaces per level in
+Markdown:
 ```markdown
-# Kop
-## Subkop (optioneel)
+# Heading
+## Subheading (optional)
 
-- Eerste punt
-  - Subpunt
+- First point
+  - Subpoint
 ```
 
-**Twee bulletkolommen** (`two-bullets`) — naast de zichtbare HTML-grid worden de
-twee kolommen ook **canoniek opgeslagen** in commentaar (base64url van een JSON-
-array), zodat ze verliesvrij teruggelezen worden. Elke kolom kan optioneel een
-**kop** krijgen (`*_title`, base64url van platte tekst); die wordt alleen
-geschreven als hij gevuld is en verschijnt als `<h3>` boven de kolom:
+**Two bullet columns** (`two-bullets`) — besides the visible HTML grid, the two
+columns are also stored **canonically** in comments (base64url of a JSON array),
+so they can be read back losslessly. Each column can optionally have a
+**heading** (`*_title`, base64url of plain text); it is written only when filled
+and appears as `<h3>` above the column:
 ```markdown
 <!-- ocideck_two_bullets_left: <base64url(JSON[])> -->
 <!-- ocideck_two_bullets_right: <base64url(JSON[])> -->
-<!-- ocideck_two_bullets_left_title: <base64url(tekst)> -->   (optioneel)
-<!-- ocideck_two_bullets_right_title: <base64url(tekst)> -->  (optioneel)
-<div class="ocideck-two-bullets" style="…">
-<div><h3>…</h3><ul>…</ul></div>
-<div><h3>…</h3><ul>…</ul></div>
+<!-- ocideck_two_bullets_left_title: <base64url(text)> -->   (optional)
+<!-- ocideck_two_bullets_right_title: <base64url(text)> -->  (optional)
+<div class="ocideck-two-bullets" style="...">
+<div><h3>...</h3><ul>...</ul></div>
+<div><h3>...</h3><ul>...</ul></div>
 </div>
 ```
 
-**Bullets + afbeelding** (`split`) — paneelbreedte en tekstschaal staan in een
-`_style`-commentaar; de afbeelding zit in een `split-image`-div:
+**Bullets + image** (`split`) — panel width and text scale are stored in a
+`_style` comment; the image is inside a `split-image` div:
 ```markdown
 <!-- _style: --image-width: 40%; --split-text-scale: 1.85; -->
 
 <div class="split-text" style="font-size: 1.85em">
 
-# Kop
+# Heading
 
-- Punt
+- Point
 
 </div>
 
 <div class="split-image">
 
-![](images/foto.png)
+![](images/photo.png)
 
 </div>
 ```
 
-**Twee afbeeldingen** (geen class) — als links/rechts achtergronden:
+**Two images** (no class) — as left/right backgrounds:
 ```markdown
-![bg left:50%](images/links.png)
-![bg right:50%](images/rechts.png)
+![bg left:50%](images/left.png)
+![bg right:50%](images/right.png)
 
-# Optionele kop
+# Optional heading
 ```
 
-**Grote afbeelding** (geen class)
+**Large image** (no class)
 ```markdown
-![bg 80%](images/foto.png)
+![bg 80%](images/photo.png)
 
-# Optionele kop
+# Optional heading
 ```
 
 **Video** (`video`)
 ```markdown
-# Optionele kop
+# Optional heading
 
-<video src="media/clip.mp4" controls autoplay muted loop style="…"></video>
+<video src="media/clip.mp4" controls autoplay muted loop style="..."></video>
 ```
 
 **Quote** (`quote`)
 ```markdown
-![bg 50% opacity:.45](images/achtergrond.png)   <!-- optioneel -->
-> De quote-tekst
+![bg 50% opacity:.45](images/background.png)   <!-- optional -->
+> The quote text
 
-— Auteur
+— Author
 ```
 
-**Tabel** (`table`) — GitHub-flavoured Markdown; eerste rij is de kop. In cellen
-worden `|` als `\|` en regeleindes als `<br>` weggeschreven:
+**Table** (`table`) — GitHub-flavored Markdown; the first row is the header.
+Inside cells, `|` is written as `\|` and line endings as `<br>`:
 ```markdown
-# Optionele kop
+# Optional heading
 
-| Kop 1 | Kop 2 |
+| Header 1 | Header 2 |
 | --- | --- |
 | a | b |
 ```
 
-**Vrije Markdown** (geen class) — de inhoud wordt letterlijk weggeschreven.
+**Free Markdown** (no class) — content is written verbatim.
 
-**Broncode** (`code`) — een optionele kop plus een fenced codeblok; de
-info-string is de programmeertaal (highlight.js-id, leeg = platte tekst). De
-code zelf staat verbatim in het blok:
+**Source code** (`code`) — an optional heading plus a fenced code block; the info
+string is the programming language (highlight.js id, empty = plain text). The
+code itself is stored verbatim in the block:
 ````markdown
-# Optionele kop
+# Optional heading
 
 ```dart
 void main() => print('hi');
 ```
 ````
 
-**Grafiek** (`chart`) — een fenced ```chart```-blok met de grafiekspecificatie
-als **JSON**. Kleine grafieken bewaren hun data inline; data-gedreven grafieken
-verwijzen via `source` naar een CSV in `data/` (zie §6.4). Bij opslaan wordt de
-inline data weggelaten zodra er een `source` is (de CSV is dan de bron); bij
-openen wordt die weer ingelezen.
+**Chart** (`chart`) — a fenced ```chart``` block with the chart specification as
+**JSON**. Small charts store their data inline; data-driven charts point through
+`source` to a CSV in `data/` (see §6.4). When saving, inline data is omitted as
+soon as a `source` exists (the CSV is then the source of truth); when opening,
+that CSV is read back in.
 ````markdown
 ```chart
 {
   "type": "bar",            // bar | line | pie | radar
-  "title": "Omzet",
-  "source": "data/omzet.csv",  // optioneel; anders inline x/series
+  "title": "Revenue",
+  "source": "data/revenue.csv",  // optional; otherwise inline x/series
   "x": ["Q1", "Q2"],
-  "rowColors": ["#003399", "#FFCC00"],  // optioneel; kleur per label (cirkel/radar)
-  "minBound": 0,            // optioneel; niet bij pie
-  "maxBound": 20,           // optioneel; niet bij pie
+  "rowColors": ["#003399", "#FFCC00"],  // optional; color per label (pie/radar)
+  "minBound": 0,            // optional; not for pie
+  "maxBound": 20,           // optional; not for pie
   "series": [ { "name": "2025", "data": [10, 14], "color": "#2563EB" } ]
 }
 ```
 ````
 
-Velden:
+Fields:
 
-- `type` — `bar`, `line`, `pie` of `radar` (spider). Standaard `bar`.
-- `x` — labels; bij `pie`/`radar` zijn dit de segmenten/assen (radar heeft er
-  minstens drie nodig).
-- `series` — genoemde reeksen met `data` (uitgelijnd op `x`) en optioneel een
-  `color` (hex). `pie` toont maximaal de eerste twee reeksen.
-- `rowColors` — optionele kleur per label (gebruikt door `pie`/`radar`).
-- `minBound` / `maxBound` — optioneel en alleen voor niet-`pie`. Bij `bar`/`line`
-  zijn het horizontale **referentielijnen**; bij `radar` bepalen ze de **schaal**
-  (binnenste/buitenste ring) met een gelijkmatige verdeling. Worden weggelaten
-  bij `pie`.
+- `type` — `bar`, `line`, `pie`, or `radar` (spider). Defaults to `bar`.
+- `x` — labels; for `pie`/`radar`, these are the segments/axes (radar requires
+  at least three).
+- `series` — named series with `data` (aligned with `x`) and optionally a
+  `color` (hex). `pie` shows at most the first two series.
+- `rowColors` — optional color per label (used by `pie`/`radar`).
+- `minBound` / `maxBound` — optional and only for non-`pie`. For `bar`/`line`,
+  these are horizontal **reference lines**; for `radar`, they determine the
+  **scale** (inner/outer ring) with even spacing. Omitted for `pie`.
 
-### Afbeeldingsgrootte (`imageSize`)
-Eén integer-veld met typeafhankelijke betekenis: bij `image`/`title`/`quote` het
-achtergrond-percentage (`![bg N%]`), bij `split` de paneelbreedte (geklemd
-20–70%), bij twee afbeeldingen de `left:`/`right:`-verdeling. `0` = automatisch.
+### Image Size (`imageSize`)
+
+One integer field with type-dependent meaning: for `image`/`title`/`quote`, it
+is the background percentage (`![bg N%]`); for `split`, it is the panel width
+(clamped to 20-70%); for two images, it is the `left:`/`right:` split. `0` =
+automatic.
 
 ---
 
-## 6. Sidecars en losse data
+## 6. Sidecars and Separate Data
 
-Drie soorten gegevens staan bewust náást het `.md` in plaats van erin, zodat de
-Marp-Markdown puur en uitwisselbaar blijft.
+Three kinds of data deliberately live **next to** the `.md` file instead of
+inside it, so the Marp Markdown remains clean and exchangeable.
 
-### 6.1 Afbeeldings-bijschriften (captions)
+### 6.1 Image Captions
 
-Bijschriften worden op **twee** plaatsen bewaard:
+Captions are stored in **two** places:
 
-1. **In de Markdown**, als zichtbare regel onder de afbeelding:
+1. **In the Markdown**, as a visible line below the image:
    ```markdown
-   <div class="image-caption">Mijn bijschrift</div>
+   <div class="image-caption">My caption</div>
    ```
-   Bij twee afbeeldingen worden beide bijschriften samengevoegd met ` | `.
-   HTML-tekens worden ge-escaped.
+   For two images, both captions are joined with ` | `. HTML characters are
+   escaped.
 
-2. **Als JSON-sidecar** `\.ocideck_captions.json` in de map van de afbeelding,
-   zodat het bijschrift aan het *bestand* hangt (en gedeeld kan worden tussen
-   presentaties). Formaat — sleutel is de bestandsnaam, waarde het bijschrift:
+2. **As a JSON sidecar** `.ocideck_captions.json` in the image folder, so the
+   caption belongs to the *file* (and can be shared between presentations).
+   Format: key is the filename, value is the caption:
    ```json
    {
-     "foto.png": "Mijn bijschrift",
-     "grafiek.png": "Omzet per kwartaal"
+     "photo.png": "My caption",
+     "chart.png": "Quarterly revenue"
    }
    ```
-   Een lege caption verwijdert de sleutel; een leeg bestand wordt verwijderd.
+   An empty caption removes the key; an empty file is deleted.
 
-Naast de captions bestaat er een tweede, gelijkvormige sidecar
-`.ocideck_descriptions.json` voor **beschrijvingen/tags**: doorzoekbare
-vrije tekst per afbeelding, gebruikt door het zoekveld en het
-"zonder tags"-filter van de afbeeldingenbibliotheek (en samengevoegd bij het
-opruimen van md5-duplicaten). Zelfde formaat en dezelfde leeg-opruimregels als
-de captions-sidecar.
+Alongside captions, there is a second sidecar with the same shape:
+`.ocideck_descriptions.json` for **descriptions/tags**. It stores searchable free
+text per image, used by the search box and the "without tags" filter in the
+image library (and merged when cleaning up md5-identical duplicates). It uses the
+same format and the same empty-cleanup rules as the captions sidecar.
 
-### 6.2 Annotatielaag (`<naam>.ink.json`)
+### 6.2 Annotation Layer (`<name>.ink.json`)
 
-Vrije-hand-annotaties (pen, markeerstift) die tijdens het presenteren worden
-gemaakt, staan in een aparte JSON-sidecar naast de `.md` (en in het pakket, §7).
-De Marp-`.md` wordt er nooit door aangeraakt.
+Freehand annotations (pen, highlighter) made while presenting are stored in a
+separate JSON sidecar next to the `.md` file (and inside the package, §7). The
+Marp `.md` is never touched by annotations.
 
-- Coördinaten zijn **genormaliseerd** (0–1) binnen het 16:9-vlak, zodat een
-  streek identiek schaalt op laptop en beamer.
-- Omdat slide-id's bij elke keer inlezen opnieuw worden gegenereerd, worden
-  strekken op schijf **per slide verankerd op volgorde + een inhoud-fingerprint**.
-  Bij heropenen worden ze her-gekoppeld aan de slide met dezelfde fingerprint
-  (bij voorkeur dezelfde index); strekken van een gewijzigde/verwijderde slide
-  vervallen.
+- Coordinates are **normalized** (0-1) inside the 16:9 canvas, so a stroke scales
+  identically on a laptop and projector.
+- Because slide ids are regenerated every time a file is read, strokes are
+  stored **per slide by order + a content fingerprint**. When reopening, they
+  are reattached to the slide with the same fingerprint (preferably at the same
+  index); strokes for changed/deleted slides are dropped.
 
 ```json
 {
@@ -433,207 +430,203 @@ De Marp-`.md` wordt er nooit door aangeraakt.
 }
 ```
 
-`points` is een platte lijst `[x0, y0, x1, y1, …]`; `color` is een ARGB-int;
-`tool` is `pen` of `highlighter` (laser-aanwijzingen zijn vluchtig en worden niet
-bewaard).
+`points` is a flat list `[x0, y0, x1, y1, ...]`; `color` is an ARGB int; `tool`
+is `pen` or `highlighter` (laser pointers are transient and are not stored).
 
-### 6.3 Gebruikersnotities (`<naam>.user-notes.json`)
+### 6.3 User Notes (`<name>.user-notes.json`)
 
-Persoonlijke notities voor de ontvanger of cursist tijdens het volgen van een
-presentatie. Volledig gescheiden van sprekersnotities (`Slide.notes` in de `.md`,
-HTML-commentaar) en van de annotatielaag. Standaard onzichtbaar tijdens
-presenteren; de presentator opent ze lokaal met `Ctrl/Cmd + N` (nooit op het
-beamer-/publieksscherm). In de visuele editor staan sprekers- en gebruikersnotities
-elk in een inklapbaar blok met kopregel (titel + weggooi-knop); slides met
-gebruikersnotities tonen een blauw badge op de miniatuur in de slidelijst.
+Personal notes for the recipient or learner while following a presentation. They
+are fully separate from speaker notes (`Slide.notes` in the `.md`, HTML comments)
+and from the annotation layer. They are hidden by default during presenting; the
+presenter opens them locally with `Ctrl/Cmd + N` (never on the projector/audience
+screen). In the visual editor, speaker notes and user notes each live in a
+collapsible block with a header row (title + discard button); slides with user
+notes show a blue badge on the thumbnail in the slide list.
 
-Omdat slide-id's bij elke keer inlezen opnieuw worden gegenereerd, worden notities
-op schijf **per slide verankerd op volgorde + een inhoud-fingerprint** (dezelfde
-hash als bij §6.2). Bij heropenen worden ze her-gekoppeld aan de slide met dezelfde
-fingerprint (bij voorkeur dezelfde index); notities van een gewijzigde/verwijderde
-slide vervallen. Lege notities worden niet opgeslagen; als er geen notities zijn,
-wordt het sidecar-bestand verwijderd of niet geschreven.
+Because slide ids are regenerated every time a file is read, notes are stored
+**per slide by order + a content fingerprint** (the same hash as in §6.2). When
+reopening, they are reattached to the slide with the same fingerprint (preferably
+at the same index); notes for changed/deleted slides are dropped. Empty notes are
+not stored; when there are no notes, the sidecar file is deleted or not written.
 
 ```json
 {
   "version": 1,
   "slides": [
-    { "index": 1, "fp": "a1b2c3d4", "text": "Vraag stellen over diagram" }
+    { "index": 1, "fp": "a1b2c3d4", "text": "Ask a question about the diagram" }
   ]
 }
 ```
 
-### 6.4 Grafiekdata (`data/*.csv`)
+### 6.4 Chart Data (`data/*.csv`)
 
-Een grafiek-slide (§5) kan zijn data inline in het `chart`-blok houden óf via
-`"source": "data/<naam>.csv"` verwijzen naar een CSV in de aparte **`data/`**-map
-naast het deck. Die map houdt alle gekoppelde databestanden bij elkaar,
-gescheiden van `images/`/`media/`. De CSV is dan de bron van waarheid: hij wordt
-los bewerkt (bijv. in een spreadsheet), bij opslaan/`Opslaan als…` meegekopieerd,
-en in het pakket meegenomen (§7). Bij openen wordt de CSV ingelezen en de data
-in het geheugen aan de grafiek gehangen; in de `.md` blijft alleen de
-`source`-verwijzing staan.
+A chart slide (§5) can keep its data inline in the `chart` block, or point via
+`"source": "data/<name>.csv"` to a CSV in a separate **`data/`** folder next to
+the deck. That folder keeps all linked data files together, separate from
+`images/`/`media/`. The CSV is then the source of truth: it is edited separately
+(for example in a spreadsheet), copied along during save/`Save as...`, and
+included in packages (§7). When opening, the CSV is read and attached to the
+chart in memory; the `.md` keeps only the `source` reference.
 
-CSV-vorm: eerste rij = reeksnamen (eerste cel = labelkolom), elke volgende rij is
-`label, waarde1, waarde2, …`.
+CSV shape: first row = series names (first cell = label column), every next row
+is `label, value1, value2, ...`.
 
 ---
 
-## 7. Draagbaar pakket (`.ocideck`)
+## 7. Portable Package (`.ocideck`)
 
-`Pakket exporteren` schrijft één **zip-bestand** (extensie `.ocideck`; ook `.zip`
-wordt bij import geaccepteerd) met de presentatie en alle gebruikte assets,
-onderling met relatieve paden. Werkt ook als het deck nog niet is opgeslagen.
+`Export package` writes one **zip file** (extension `.ocideck`; `.zip` is also
+accepted on import) containing the presentation and all used assets, with
+relative paths between them. This also works when the deck has not been saved
+yet.
 
 ```
-<titel>.ocideck   (zip)
-├── <titel>.md                # Marp Markdown
-├── <titel>.ink.json          # annotatielaag (indien aanwezig, §6.2)
-├── <titel>.user-notes.json   # gebruikersnotities (indien aanwezig, §6.3)
-├── images/…                  # alle gebruikte afbeeldingen
-├── data/…                    # gekoppelde grafiek-CSV's (§6.4)
-├── media/…                   # gebruikte video/audio
-├── logos/…                   # logo uit het stijlprofiel
-└── themes/<theme>.css        # gegenereerde thema-CSS (Marp/CLI-bruikbaar)
+<title>.ocideck   (zip)
+├── <title>.md                # Marp Markdown
+├── <title>.ink.json          # annotation layer (if present, §6.2)
+├── <title>.user-notes.json   # user notes (if present, §6.3)
+├── images/...                # all used images
+├── data/...                  # linked chart CSV files (§6.4)
+├── media/...                 # used video/audio
+├── logos/...                 # logo from the style profile
+└── themes/<theme>.css        # generated theme CSS (usable by Marp/CLI)
 ```
 
-Bij import:
+On import:
 
-- De zip wordt uitgepakt in een **nieuwe**, unieke submap (naam afgeleid van de
-  hoofd-`.md`; bij botsing `naam (2)`, `naam (3)`, …).
-- Als hoofdbestand wordt de `.md` met het **ondiepste** pad gekozen.
-- Een pakket kan ook van een URL worden geïmporteerd: begint de download met de
-  zip-magie `PK\x03\x04` dan wordt het als pakket behandeld, anders als platte
-  Markdown opgeslagen.
+- The zip is extracted into a **new**, unique subfolder (name derived from the
+  main `.md`; on collision, `name (2)`, `name (3)`, ...).
+- The `.md` file with the **shallowest** path is chosen as the main file.
+- A package can also be imported from a URL: if the download starts with zip
+  magic `PK\x03\x04`, it is treated as a package; otherwise it is saved as plain
+  Markdown.
 
 ---
 
-## 8. Speciale per-slide-commentaren (overzicht)
+## 8. Special Per-Slide Comments (Overview)
 
-Naast `_class` gebruikt OciDeck deze HTML-commentaren (allemaal door Marp
-genegeerd, op presenter-notities na):
+Besides `_class`, OciDeck uses these HTML comments (all ignored by Marp, except
+for presenter notes):
 
-| Commentaar | Betekenis |
+| Comment | Meaning |
 | --- | --- |
-| `<!-- _class: … -->` | Slidetype + gedrag (§4). |
-| `<!-- _style: --image-width: N%; --split-text-scale: x; -->` | Layout van een `split`-slide. |
-| `<!-- ocideck_two_bullets_left/right: <base64url> -->` | Canonieke opslag van de twee bulletkolommen. |
-| `<!-- advance: N.N -->` | Auto-doorschakelen na N,N seconden (0 = uit). |
-| `<!-- skip -->` | Slide overslaan bij presenteren én exporteren. |
-| `<!-- tlp: <key> -->` | Per-slide TLP-niveau (zie §3.1). De slide wordt achtergehouden als het presentatie-TLP lager is. Alleen geschreven als ≠ `none`. |
-| `<!-- … (vrije tekst) … -->` | **Presenter-notities** (elk overig commentaar dat niet met `_` begint). |
+| `<!-- _class: ... -->` | Slide type + behavior (§4). |
+| `<!-- _style: --image-width: N%; --split-text-scale: x; -->` | Layout of a `split` slide. |
+| `<!-- ocideck_two_bullets_left/right: <base64url> -->` | Canonical storage for the two bullet columns. |
+| `<!-- advance: N.N -->` | Auto-advance after N.N seconds (0 = off). |
+| `<!-- skip -->` | Skip slide during both presenting and export. |
+| `<!-- tlp: <key> -->` | Per-slide TLP level (see §3.1). The slide is held back if the presentation TLP is lower. Written only when not `none`. |
+| `<!-- ... (free text) ... -->` | **Presenter notes** (any other comment that does not start with `_`). |
 
 ---
 
-## 9. Round-trip en compatibiliteit
+## 9. Round-Trip and Compatibility
 
-- **Verliesvrij in OciDeck:** alles wat de editor kan instellen wordt of als
-  echte Markdown, of als OciDeck-commentaar/front-matter-sleutel bewaard en bij
-  het openen weer ingelezen. De parse is "best effort": mislukt het volledig,
-  dan geeft de parser `null`; een leeg document levert één lege titelslide op.
-- **Marp-compatibel:** het bestand blijft geldige Marp Markdown. Externe tools
-  zien gewone koppen, bullets, tabellen, achtergrond-afbeeldingen en HTML; de
-  OciDeck-extra's staan in genegeerd commentaar en in eigen front-matter-
-  sleutels.
-- **Voorwaartse migratie:** ontbrekende front-matter-velden en
-  stijlprofiel-velden vallen terug op standaardwaarden, en het ontbreken van het
-  `no-footer`-token betekent (voor oudere bestanden) "footer zichtbaar".
+- **Lossless in OciDeck:** everything the editor can set is stored either as real
+  Markdown or as OciDeck comments/front-matter keys and read back when opening.
+  Parsing is "best effort": if it fails completely, the parser returns `null`;
+  an empty document produces one empty title slide.
+- **Marp-compatible:** the file remains valid Marp Markdown. External tools see
+  normal headings, bullets, tables, background images, and HTML; OciDeck extras
+  live in ignored comments and custom front-matter keys.
+- **Forward migration:** missing front-matter fields and style-profile fields
+  fall back to defaults, and the absence of the `no-footer` token means (for
+  older files) "footer visible".
 
 ---
 
-## 10. Markdown-modus en syntaxcontrole
+## 10. Markdown Mode and Syntax Checking
 
-In de editor schakelt het code-icoon in de werkbalk naar **Markdown-modus**: de
-hele presentatie wordt als één Marp-markdownbestand getoond (dezelfde structuur
-als op schijf). **Toepassen** parsed de tekst terug naar de getype slides;
-**Annuleren** keert terug zonder wijzigingen door te voeren.
+In the editor, the code icon in the toolbar switches to **Markdown mode**: the
+entire presentation is shown as one Marp Markdown document (the same structure as
+on disk). **Apply** parses the text back into typed slides; **Cancel** returns
+without applying changes.
 
-### Zoeken en vervangen
+### Find and Replace
 
-In markdown-modus doorzoekt een **in-editor zoekbalk** de live markdown-tekst
-(inclusief front matter, scheidingstekens `---`, HTML-commentaar en nog niet
-toegepaste wijzigingen). Dit verschilt van het **Zoeken en vervangen**-dialoog
-in visuele modus (`Ctrl/Cmd + H`), dat alleen door slide-velden zoekt.
+In Markdown mode, an **in-editor find bar** searches the live Markdown text
+(including front matter, `---` separators, HTML comments, and unapplied changes).
+This differs from the **Find and replace** dialog in visual mode (`Ctrl/Cmd + H`),
+which only searches through slide fields.
 
-| Sneltoets | Actie |
+| Shortcut | Action |
 | --- | --- |
-| `Ctrl/Cmd + F` | Zoekbalk openen |
-| `Ctrl/Cmd + H` | Zoekbalk met vervang-veld |
-| `Enter` / `Shift + Enter` (in zoekveld) | Volgende / vorige match |
-| `Esc` | Zoekbalk sluiten |
+| `Ctrl/Cmd + F` | Open find bar |
+| `Ctrl/Cmd + H` | Open find bar with replace field |
+| `Enter` / `Shift + Enter` (in find field) | Next / previous match |
+| `Esc` | Close find bar |
 
-De balk toont een match-teller (`1 / 3`), vorige/volgende-knoppen, een
-hoofdlettergevoelig-toggle, **Vervang** (huidige match) en **Vervang alles**.
-Elke match wordt geselecteerd in de editor zodat je snel naar een titel,
-slide-scheiding of ander onderdeel kunt springen.
+The bar shows a match counter (`1 / 3`), previous/next buttons, a case-sensitive
+toggle, **Replace** (current match), and **Replace all**. Each match is selected
+in the editor so you can quickly jump to a title, slide separator, or other
+part.
 
-### Wanneer controleren?
+### When to Check
 
-- **Controleren** — op elk moment tijdens het bewerken; resultaten in een
-  samenvattingsbalk, met uitklapbare lijst. Regelnummers links worden rood
-  (fout) of geel (waarschuwing) gemarkeerd; klik op een melding om naar die regel
-  te springen.
-- **Toepassen** — voert altijd eerst de controle uit. Bij bevindingen verschijnt
-  een dialoog met **Terug naar editor**, **Annuleren** of **Toch toepassen**.
+- **Check** — at any time while editing; results appear in a summary bar with an
+  expandable list. Line numbers on the left are marked red (error) or yellow
+  (warning); click a message to jump to that line.
+- **Apply** — always runs the check first. If findings exist, a dialog appears
+  with **Back to editor**, **Cancel**, or **Apply anyway**.
 
-De controle is **structureel**: hij volgt dezelfde regels als `MarkdownService`
-(front matter, `\n---\n` als scheiding, `_class`-commentaar, fenced blocks en de
-HTML-fragmenten die OciDeck zelf genereert). Geldige Marp-syntax die OciDeck
-niet modelleert wordt niet gerapporteerd.
+The check is **structural**: it follows the same rules as `MarkdownService`
+(front matter, `\n---\n` as separator, `_class` comments, fenced blocks, and the
+HTML fragments OciDeck itself generates). Valid Marp syntax that OciDeck does
+not model is not reported.
 
-### Uitgevoerde controles
+### Checks Performed
 
-| Onderdeel | Ernst | Controle |
+| Area | Severity | Check |
 | --- | --- | --- |
-| **Document** | waarschuwing | Presentatie is leeg. |
-| **Document** | fout | Geen slide-inhoud na front matter. |
-| **Document** | fout | `parseDeck` faalt volledig (`null`). |
-| **Front matter** | fout | Openings-`---` zonder afsluitende `---`-regel. |
-| **Front matter** | waarschuwing | Regel zonder `sleutel: waarde`-vorm. |
-| **Front matter** | fout | Onbekende `tlp:`-waarde. |
-| **Commentaar** | fout | `<!--` zonder `-->` op dezelfde regel. |
-| **Commentaar** | waarschuwing | Commentaar zonder `_class:`, `_style:`, `ocideck_…`, `skip`, `tlp:` of `advance:`. |
-| **Codeblokken** | fout | Oneven aantal ` ``` `-regels (niet afgesloten). |
-| **`_class`** | fout | Malformed `<!-- _class: … -->`. |
-| **`_class`** | waarschuwing | Onbekend token in `_class` (bekend: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `logo-safe`, `no-logo`, `no-footer`). |
-| **Slide-metadata** | fout | Onbekende `<!-- tlp: … -->`, niet-numerieke `<!-- advance: … -->`, of ongeldige `<!-- ocideck_list_style: … -->` (`bullets`, `numbered`, `checklist`). |
-| **Twee kolommen** | fout | Ongeldige base64/JSON in `ocideck_two_bullets_*`-commentaren. |
-| **Afbeeldingen** | fout | `![…](…` zonder sluitende `)`. |
-| **Video/audio** | fout | Onvolledige `<video>`/`<audio>`-tag, of `<video>` zonder `src="…"`. |
-| **`code`-slide** | fout | Geen afgesloten fenced ```-blok. |
-| **`chart`-slide** | fout | Geen ` ```chart `-blok, niet afgesloten, of ongeldige JSON (geen `{…}`-object). |
-| **`chart`-slide** | waarschuwing | Lege JSON in een afgesloten ` ```chart `-blok. |
-| **`split`-slide** | fout | Ontbrekende of niet-afgesloten `<div class="split-text">` / `split-image`. |
-| **`two-bullets`-slide** | fout | Ontbrekende of niet-afgesloten `<div class="ocideck-two-bullets">`. |
-| **`table`-slide** | waarschuwing | Geen tabelregels. |
-| **`table`-slide** | fout | Geen scheidingsrij (`\| --- \|`) of tweede rij is geen geldige GFM-scheiding. |
-| **HTML** | fout | Ongebalanceerde `<div>`/ `</div>` binnen een slide. |
+| **Document** | warning | Presentation is empty. |
+| **Document** | error | No slide content after front matter. |
+| **Document** | error | `parseDeck` fails completely (`null`). |
+| **Front matter** | error | Opening `---` without a closing `---` line. |
+| **Front matter** | warning | Line without `key: value` shape. |
+| **Front matter** | error | Unknown `tlp:` value. |
+| **Comment** | error | `<!--` without `-->` on the same line. |
+| **Comment** | warning | Comment without `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:`, or `advance:`. |
+| **Code blocks** | error | Odd number of ` ``` ` lines (not closed). |
+| **`_class`** | error | Malformed `<!-- _class: ... -->`. |
+| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `logo-safe`, `no-logo`, `no-footer`). |
+| **Slide metadata** | error | Unknown `<!-- tlp: ... -->`, non-numeric `<!-- advance: ... -->`, or invalid `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`). |
+| **Two columns** | error | Invalid base64/JSON in `ocideck_two_bullets_*` comments. |
+| **Images** | error | `![...](...` without closing `)`. |
+| **Video/audio** | error | Incomplete `<video>`/`<audio>` tag, or `<video>` without `src="..."`. |
+| **`code` slide** | error | No closed fenced ``` block. |
+| **`chart` slide** | error | No ` ```chart ` block, not closed, or invalid JSON (not a `{...}` object). |
+| **`chart` slide** | warning | Empty JSON in a closed ` ```chart ` block. |
+| **`split` slide** | error | Missing or unclosed `<div class="split-text">` / `split-image`. |
+| **`two-bullets` slide** | error | Missing or unclosed `<div class="ocideck-two-bullets">`. |
+| **`table` slide** | warning | No table rows. |
+| **`table` slide** | error | No separator row (`\| --- \|`) or second row is not a valid GFM separator. |
+| **HTML** | error | Unbalanced `<div>`/`</div>` inside a slide. |
 
-Implementatie: `lib/services/markdown_validator.dart`; tests:
-`test/markdown_validator_test.dart`. Zie ook [`USER_GUIDE.md`](USER_GUIDE.md) (§
-Markdown mode).
+Implementation: `lib/services/markdown_validator.dart`; tests:
+`test/markdown_validator_test.dart`. See also [`USER_GUIDE.md`](USER_GUIDE.md)
+(§ Markdown mode).
 
 ---
 
-## 11. Exportmetadata (niet in `.md`)
+## 11. Export Metadata (Not in `.md`)
 
-Bij PDF-, PPTX- en HTML-export schrijft OciDeck **documenteigenschappen** die
-afgeleid zijn van front matter (`author`, `organization`, `description`,
-`keywords`, `tlp`, titel). Deze metadata staat **niet** in het `.md`-bestand
-en verandert het round-trip-formaat niet; ze worden alleen bij export gezet
-(`ExportDocumentMetadata` in `lib/services/export_metadata.dart`).
+For PDF, PPTX, and HTML export, OciDeck writes **document properties** derived
+from front matter (`author`, `organization`, `description`, `keywords`, `tlp`,
+title). This metadata is **not** stored in the `.md` file and does not change the
+round-trip format; it is set only during export (`ExportDocumentMetadata` in
+`lib/services/export_metadata.dart`).
 
-| Bron (front matter) | PDF / PPTX | HTML |
+| Source (front matter) | PDF / PPTX | HTML |
 | --- | --- | --- |
-| Titel | `Title` | `<title>` |
-| `author`, anders `organization` | `Author` / `dc:creator` | `<meta name="author">` |
-| OciDeck (vast) | `Creator` | `<meta name="generator">` |
-| OciDeck + versie (vast) | `Producer` / `Application` / `lastModifiedBy` | — |
+| Title | `Title` | `<title>` |
+| `author`, otherwise `organization` | `Author` / `dc:creator` | `<meta name="author">` |
+| OciDeck (fixed) | `Creator` | `<meta name="generator">` |
+| OciDeck + version (fixed) | `Producer` / `Application` / `lastModifiedBy` | — |
 | `description` | — | `<meta name="description">` |
 | `keywords` + TLP + `OciDeck` | `Keywords` | `<meta name="keywords">` |
-| `tlp` (wanneer ≠ none) | `Subject`: `TLP:… — titel` | `<meta name="classification">`, `<meta name="tlp">`, vaste `.tlp-export-banner` bovenaan |
+| `tlp` (when not `none`) | `Subject`: `TLP:... — title` | `<meta name="classification">`, `<meta name="tlp">`, fixed `.tlp-export-banner` at the top |
 
-Visuele TLP-markering (banner, badge, optioneel watermerk) wordt **gerasterd**
-in PDF/PPTX-slides en staat los van deze documenteigenschappen. Zie
-[`USER_GUIDE.md`](USER_GUIDE.md) (§ Traffic Light Protocol, § Exporting) en
+Visual TLP marking (banner, badge, optional watermark) is **rasterized** into
+PDF/PPTX slides and is separate from these document properties. See
+[`USER_GUIDE.md`](USER_GUIDE.md) (§ Traffic Light Protocol, § Exporting) and
 [`ARCHITECTURE.md`](ARCHITECTURE.md) (§ Classification enforcement).
