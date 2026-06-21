@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import '../../models/slide.dart';
 import '../../services/image_service.dart';
 import '../../l10n/app_localizations.dart';
+import '../../utils/markdown_paste_cleanup.dart';
+import '../markdown_editor/markdown_editor.dart';
 import '_editor_field.dart';
 import 'list_style_selector.dart';
 
@@ -36,6 +38,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   late List<FocusNode> _focusNodes;
   late ListStyle _listStyle;
   late bool _showChecklistProgress;
+  late final TextEditingController _richText;
 
   static const _maxLevel = 4;
 
@@ -46,6 +49,10 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
     _title.addListener(_emit);
     _listStyle = widget.slide.listStyle;
     _showChecklistProgress = widget.slide.showChecklistProgress;
+    _richText = TextEditingController(
+      text: normalizeRichTextMarkdown(widget.slide.customMarkdown),
+    );
+    _richText.addListener(_emit);
     final list = widget.slide.bullets.isEmpty ? [''] : widget.slide.bullets;
     _levels = list.map(_levelOf).toList();
     _checked = list.map(checklistItemChecked).toList();
@@ -73,16 +80,21 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
         title: _title.text,
         listStyle: _listStyle,
         showChecklistProgress: _showChecklistProgress,
-        bullets: List.generate(
-          _bullets.length,
-          (i) => _listStyle == ListStyle.checklist
-              ? checklistBullet(
-                  level: _levels[i],
-                  text: _bullets[i].text,
-                  checked: _checked[i],
-                )
-              : '\t' * _levels[i] + _bullets[i].text,
-        ),
+        customMarkdown: _listStyle == ListStyle.richText
+            ? normalizeRichTextMarkdown(_richText.text)
+            : widget.slide.customMarkdown,
+        bullets: _listStyle == ListStyle.richText
+            ? widget.slide.bullets
+            : List.generate(
+                _bullets.length,
+                (i) => _listStyle == ListStyle.checklist
+                    ? checklistBullet(
+                        level: _levels[i],
+                        text: _bullets[i].text,
+                        checked: _checked[i],
+                      )
+                    : '\t' * _levels[i] + _bullets[i].text,
+              ),
       ),
     );
   }
@@ -202,6 +214,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   @override
   void dispose() {
     _title.dispose();
+    _richText.dispose();
     for (final c in _bullets) {
       c.dispose();
     }
@@ -241,25 +254,41 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
               _emit();
             },
           ),
-        const SizedBox(height: 16),
-        const SectionLabel('Bullets (links)'),
-        ReorderableListView(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          buildDefaultDragHandles: false,
-          onReorderItem: _reorderItem,
-          children: [
-            for (int i = 0; i < _bullets.length; i++) _buildBulletRow(i),
-          ],
-        ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: TextButton.icon(
-            onPressed: () => _addBulletAfter(_bullets.length - 1),
-            icon: const Icon(Icons.add, size: 16),
-            label: Text(l10n.d('Bullet toevoegen')),
+        if (_listStyle == ListStyle.richText) ...[
+          const SizedBox(height: 16),
+          const SectionLabel('Tekst (links)'),
+          SizedBox(
+            height: 320,
+            child: MarkdownNotesEditor.legacy(
+              controller: _richText,
+              baseStyle: const TextStyle(fontSize: 14, height: 1.45),
+              linkColor: const Color(0xFF2563EB),
+              hintText: l10n.d('Tekst...'),
+              expand: true,
+              minLines: 8,
+            ),
           ),
-        ),
+        ] else ...[
+          const SizedBox(height: 16),
+          const SectionLabel('Bullets (links)'),
+          ReorderableListView(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            buildDefaultDragHandles: false,
+            onReorderItem: _reorderItem,
+            children: [
+              for (int i = 0; i < _bullets.length; i++) _buildBulletRow(i),
+            ],
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton.icon(
+              onPressed: () => _addBulletAfter(_bullets.length - 1),
+              icon: const Icon(Icons.add, size: 16),
+              label: Text(l10n.d('Bullet toevoegen')),
+            ),
+          ),
+        ],
         const SizedBox(height: 16),
         const SectionLabel('Afbeelding (rechts)'),
         ImagePickerBar(

@@ -346,13 +346,17 @@ List<Widget> _markdownBodyBlocks(
   required ThemeProfile profile,
   Color? headingColor,
   double bodyFontSize = 0,
+  double? contentWidth,
+  double? emptyLineHeight,
+  double? heading1Size,
+  double? heading2Size,
 }) {
   final link = _hexColor(profile.accentColor);
   final bodySize = bodyFontSize > 0 ? bodyFontSize : w * 0.024;
-  final lines = markdown.split('\n');
+  final lines = normalizeRichTextMarkdown(markdown).split('\n');
   final widgets = <Widget>[];
   var i = 0;
-  while (i < lines.length && widgets.length < 24) {
+  while (i < lines.length) {
     final line = lines[i];
 
     final fence = RegExp(r'^\s*```(.*)$').firstMatch(line);
@@ -365,7 +369,12 @@ List<Widget> _markdownBodyBlocks(
         i++;
       }
       if (i < lines.length) i++;
-      widgets.add(_markdownCodeBlock(code.join('\n'), language, w, font));
+      widgets.add(
+        _fullWidthBlock(
+          contentWidth,
+          _markdownCodeBlock(code.join('\n'), language, w, font),
+        ),
+      );
       continue;
     }
 
@@ -377,31 +386,51 @@ List<Widget> _markdownBodyBlocks(
         i++;
       }
       if (i < lines.length) i++;
-      widgets.add(_markdownMathBlock(tex.join('\n'), w, font));
+      widgets.add(
+        _fullWidthBlock(contentWidth, _markdownMathBlock(tex.join('\n'), w, font)),
+      );
       continue;
     }
     final oneLine = RegExp(r'^\s*\$\$(.+)\$\$\s*$').firstMatch(line);
     if (oneLine != null) {
-      widgets.add(_markdownMathBlock(oneLine.group(1)!.trim(), w, font));
+      widgets.add(
+        _fullWidthBlock(
+          contentWidth,
+          _markdownMathBlock(oneLine.group(1)!.trim(), w, font),
+        ),
+      );
       i++;
       continue;
     }
 
     widgets.add(
-      _markdownTextLine(
-        context,
-        line: line,
-        w: w,
-        font: font,
-        profile: profile,
-        linkColor: link,
-        bodySize: bodySize,
-        headingColor: headingColor,
+      _fullWidthBlock(
+        contentWidth,
+        _markdownTextLine(
+          context,
+          line: line,
+          w: w,
+          font: font,
+          profile: profile,
+          linkColor: link,
+          bodySize: bodySize,
+          headingColor: headingColor,
+          emptyLineHeight: emptyLineHeight,
+          heading1Size: heading1Size,
+          heading2Size: heading2Size,
+        ),
       ),
     );
     i++;
   }
   return widgets;
+}
+
+Widget _fullWidthBlock(double? contentWidth, Widget child) {
+  if (contentWidth == null) {
+    return SizedBox(width: double.infinity, child: child);
+  }
+  return SizedBox(width: contentWidth, child: child);
 }
 
 Widget _markdownTextLine(
@@ -413,8 +442,19 @@ Widget _markdownTextLine(
   required Color linkColor,
   required double bodySize,
   Color? headingColor,
+  double? emptyLineHeight,
+  double? heading1Size,
+  double? heading2Size,
 }) {
   final textColor = headingColor ?? _hexColor(profile.textColor);
+  final bodyStyle = _applyFont(
+    font,
+    TextStyle(
+      fontSize: bodySize,
+      height: kRichTextBodyLineHeight,
+      color: textColor,
+    ),
+  );
   if (line.startsWith('# ')) {
     return _md(
       context,
@@ -422,7 +462,7 @@ Widget _markdownTextLine(
       _applyFont(
         font,
         TextStyle(
-          fontSize: w * 0.04,
+          fontSize: heading1Size ?? w * 0.04,
           fontWeight: FontWeight.bold,
           color: textColor,
         ),
@@ -436,7 +476,7 @@ Widget _markdownTextLine(
       _applyFont(
         font,
         TextStyle(
-          fontSize: w * 0.03,
+          fontSize: heading2Size ?? w * 0.03,
           fontWeight: FontWeight.w600,
           color: headingColor ?? _hexColor(profile.accentColor),
         ),
@@ -447,16 +487,16 @@ Widget _markdownTextLine(
     return _md(
       context,
       '• ${line.substring(2)}',
-      _applyFont(font, TextStyle(fontSize: bodySize, color: textColor)),
+      bodyStyle,
       linkColor: linkColor,
     );
   } else if (line.isEmpty) {
-    return SizedBox(height: w * 0.01);
+    return SizedBox(height: emptyLineHeight ?? w * 0.01);
   }
   return _md(
     context,
     line,
-    _applyFont(font, TextStyle(fontSize: bodySize, color: textColor)),
+    bodyStyle,
     linkColor: linkColor,
   );
 }

@@ -8,6 +8,7 @@ import '../../models/slide.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/settings_provider.dart';
+import '../../services/rich_text_layout.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
@@ -15,6 +16,10 @@ import '../slides/slide_preview.dart';
 
 /// Of het preview-paneel ingeklapt is (UI-voorkeur, app-breed).
 final previewCollapsedProvider = StateProvider<bool>((_) => false);
+
+/// Huidige rich-text-pagina (0-gebaseerd) in het preview-paneel; gedeeld met
+/// notitievelden in de editor.
+final richTextPreviewPageProvider = StateProvider<int>((_) => 0);
 
 class PreviewPanel extends ConsumerStatefulWidget {
   const PreviewPanel({super.key});
@@ -27,6 +32,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
   final TransformationController _transform = TransformationController();
   final FocusNode _focusNode = FocusNode(debugLabel: 'PreviewPanel');
   double _zoom = 1.0;
+  String? _richTextSlideId;
 
   static const double _minZoom = 1.0;
   static const double _maxZoom = 4.0;
@@ -39,13 +45,39 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
     super.dispose();
   }
 
-  /// Verplaats de slideselectie met de pijltjestoetsen (toegankelijkheid).
+  /// Verplaats de slideselectie of rich-text-pagina met de pijltjestoetsen.
   void _move(int delta) {
     final deck = ref.read(deckProvider).deck;
     if (deck == null) return;
     final current = ref.read(editorProvider).selectedIndex;
+    final slide = deck.slides[current.clamp(0, deck.slides.length - 1)];
+
+    if (slideUsesRichText(slide)) {
+      final pages = richTextPageCountForSlide(
+        slide: slide,
+        profile: deck.themeProfile,
+        splitWithImage: slide.type == SlideType.bulletsImage,
+      );
+      final richTextPage = ref.read(richTextPreviewPageProvider);
+      if (pages > 1) {
+        if (delta > 0 && richTextPage < pages - 1) {
+          ref.read(richTextPreviewPageProvider.notifier).state =
+              richTextPage + 1;
+          return;
+        }
+        if (delta < 0 && richTextPage > 0) {
+          ref.read(richTextPreviewPageProvider.notifier).state =
+              richTextPage - 1;
+          return;
+        }
+      }
+    }
+
     final next = (current + delta).clamp(0, deck.slides.length - 1);
-    if (next != current) ref.read(editorProvider.notifier).select(next);
+    if (next != current) {
+      ref.read(editorProvider.notifier).select(next);
+      ref.read(richTextPreviewPageProvider.notifier).state = 0;
+    }
   }
 
   KeyEventResult _onKey(FocusNode node, KeyEvent event) {
@@ -95,6 +127,24 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
 
     final idx = editor.selectedIndex.clamp(0, deck.slides.length - 1);
     final slide = deck.slides[idx];
+    final richTextPage = ref.watch(richTextPreviewPageProvider);
+
+    if (_richTextSlideId != slide.id) {
+      _richTextSlideId = slide.id;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        ref.read(richTextPreviewPageProvider.notifier).state = 0;
+      });
+    }
+
+    final richTextPages = slideUsesRichText(slide)
+        ? richTextPageCountForSlide(
+            slide: slide,
+            profile: deck.themeProfile,
+            splitWithImage: slide.type == SlideType.bulletsImage,
+          )
+        : 1;
+    final hasRichTextPages = richTextPages > 1;
 
     return Focus(
       focusNode: _focusNode,
@@ -177,10 +227,18 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      '${idx + 1} / ${deck.slides.length}',
-                      style: const TextStyle(
+                      hasRichTextPages
+                          ? '${idx + 1} / ${deck.slides.length}'
+                              ' · ${l10n.d('Pagina')} ${richTextPage + 1} / $richTextPages'
+                          : '${idx + 1} / ${deck.slides.length}',
+                      style: TextStyle(
                         fontSize: 12,
-                        color: Color(0xFF94A3B8),
+                        color: hasRichTextPages
+                            ? AppTheme.accent
+                            : const Color(0xFF94A3B8),
+                        fontWeight: hasRichTextPages
+                            ? FontWeight.w600
+                            : FontWeight.normal,
                       ),
                     ),
                     const SizedBox(width: 4),
@@ -238,6 +296,13 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                             onLinkTap: openExternalUrl,
                             slideNumber: idx + 1,
                             slideCount: deck.slides.length,
+                            richTextPage: richTextPage,
+                            showRichTextPageControls: hasRichTextPages,
+                            onRichTextPageChanged: hasRichTextPages
+                                ? (page) => ref
+                                      .read(richTextPreviewPageProvider.notifier)
+                                      .state = page
+                                : null,
                             tlp: deck.tlp,
                             organization: deck.organization,
                             showClassificationWatermark:
@@ -266,34 +331,50 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
-                      onPressed: idx > 0
-                          ? () => ref
-                                .read(editorProvider.notifier)
-                                .select(idx - 1)
+                      onPressed: idx > 0 || richTextPage > 0
+                          ? () => _move(-1)
                           : null,
                       icon: const Icon(Icons.chevron_left),
                       iconSize: 20,
-                      tooltip: l10n.d('Vorige slide'),
+                      tooltip: hasRichTextPages && richTextPage > 0
+                          ? l10n.d('Vorige pagina')
+                          : l10n.d('Vorige slide'),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Text(
-                        l10n.d(slide.type.label),
-                        style: const TextStyle(
-                          fontSize: 11,
-                          color: Color(0xFF64748B),
-                        ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            l10n.d(slide.type.label),
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: Color(0xFF64748B),
+                            ),
+                          ),
+                          if (hasRichTextPages)
+                            Text(
+                              '${l10n.d('Pagina')} ${richTextPage + 1} / $richTextPages',
+                              style: const TextStyle(
+                                fontSize: 10,
+                                color: Color(0xFF94A3B8),
+                              ),
+                            ),
+                        ],
                       ),
                     ),
                     IconButton(
-                      onPressed: idx < deck.slides.length - 1
-                          ? () => ref
-                                .read(editorProvider.notifier)
-                                .select(idx + 1)
+                      onPressed: idx < deck.slides.length - 1 ||
+                              (hasRichTextPages &&
+                                  richTextPage < richTextPages - 1)
+                          ? () => _move(1)
                           : null,
                       icon: const Icon(Icons.chevron_right),
                       iconSize: 20,
-                      tooltip: l10n.d('Volgende slide'),
+                      tooltip: hasRichTextPages &&
+                              richTextPage < richTextPages - 1
+                          ? l10n.d('Volgende pagina')
+                          : l10n.d('Volgende slide'),
                     ),
                   ],
                 ),

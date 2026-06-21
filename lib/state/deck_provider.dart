@@ -8,6 +8,7 @@ import '../services/file_service.dart';
 import '../services/image_service.dart';
 import '../services/markdown_service.dart';
 import '../services/user_notes_codec.dart';
+import '../utils/page_scoped_notes.dart';
 import 'settings_provider.dart';
 
 // ── Service providers ────────────────────────────────────────────────────────
@@ -460,6 +461,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
     String? description,
     String? keywords,
     TlpLevel? tlp,
+    int? presentationTargetSeconds,
   }) {
     final deck = state.deck;
     if (deck == null) return;
@@ -473,6 +475,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
         description: description,
         keywords: keywords,
         tlp: tlp,
+        presentationTargetSeconds: presentationTargetSeconds,
       ),
       coalesceKey: 'info',
     );
@@ -515,21 +518,50 @@ class DeckNotifier extends StateNotifier<DeckState> {
     if (!state.isDirty) state = state.copyWith(isDirty: true);
   }
 
-  void setUserNoteForSlide(String slideId, String text) {
+  void setUserNoteForSlide(
+    String slideId,
+    String text, {
+    int pageIndex = 0,
+    bool multiPage = false,
+  }) {
     final deck = state.deck;
     if (deck == null) return;
     final next = Map<String, String>.from(deck.userNotes);
     final trimmed = text.trim();
+    final key = userNoteStorageKey(slideId, pageIndex, multiPage: multiPage);
     if (trimmed.isEmpty) {
-      next.remove(slideId);
+      next.remove(key);
+      if (multiPage && pageIndex == 0) next.remove(slideId);
     } else {
-      next[slideId] = trimmed;
+      next[key] = trimmed;
+      if (multiPage && pageIndex == 0) next.remove(slideId);
     }
     setUserNotes(next);
   }
 
-  void clearUserNoteForSlide(String slideId) =>
-      setUserNoteForSlide(slideId, '');
+  String? userNoteForSlide(
+    String slideId, {
+    int pageIndex = 0,
+    bool multiPage = false,
+  }) =>
+      userNoteForPage(
+        state.deck?.userNotes ?? const {},
+        slideId,
+        pageIndex,
+        multiPage: multiPage,
+      );
+
+  void clearUserNoteForSlide(
+    String slideId, {
+    int pageIndex = 0,
+    bool multiPage = false,
+  }) =>
+      setUserNoteForSlide(
+        slideId,
+        '',
+        pageIndex: pageIndex,
+        multiPage: multiPage,
+      );
 
   // ── Markdown mode ──────────────────────────────────────────────────────────
 

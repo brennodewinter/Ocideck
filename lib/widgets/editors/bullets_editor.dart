@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
+import '../../utils/markdown_paste_cleanup.dart';
 import '../markdown_editor/markdown_editor.dart';
 import '_editor_field.dart';
 import 'list_style_selector.dart';
@@ -44,7 +45,9 @@ class _BulletsEditorState extends State<BulletsEditor> {
     _subtitle.addListener(_emit);
     _listStyle = widget.slide.listStyle;
     _showChecklistProgress = widget.slide.showChecklistProgress;
-    _richText = TextEditingController(text: widget.slide.customMarkdown);
+    _richText = TextEditingController(
+      text: normalizeRichTextMarkdown(widget.slide.customMarkdown),
+    );
     _richText.addListener(_emit);
     _initBullets(widget.slide.bullets);
   }
@@ -79,7 +82,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
         listStyle: _listStyle,
         showChecklistProgress: _showChecklistProgress,
         customMarkdown: _listStyle == ListStyle.richText
-            ? _richText.text
+            ? normalizeRichTextMarkdown(_richText.text)
             : widget.slide.customMarkdown,
         bullets: _listStyle == ListStyle.richText
             ? widget.slide.bullets
@@ -267,7 +270,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             buildDefaultDragHandles: false,
-            onReorder: _reorderItem,
+            onReorderItem: _reorderItem,
             children: [
               for (int i = 0; i < _bullets.length; i++) _buildBulletRow(i),
             ],

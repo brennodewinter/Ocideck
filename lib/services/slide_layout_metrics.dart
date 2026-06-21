@@ -1,9 +1,10 @@
 import 'dart:math' as math;
 
-import 'package:flutter/material.dart';
-
 import '../models/slide.dart';
-import '../widgets/slides/inline_markdown.dart';
+import 'markdown_body_blocks.dart' as md_body;
+import 'text_measurement.dart';
+
+export 'text_measurement.dart' show measureTextHeight, measureTextWidth;
 
 /// Reference slide width (960pt) used for consistent quality metrics across
 /// deck sizes — matches the PowerPoint 16:9 canvas the previews emulate.
@@ -16,6 +17,12 @@ const double kSplitBulletsMaxScale = 4.35;
 const double kBulletMaxFontFraction = 0.0335;
 
 const double kBulletLineHeight = 1.16;
+
+/// Line height for rich-text body paragraphs (preview + measurement).
+const double kRichTextBodyLineHeight = 1.2;
+
+/// Fraction of slide width kept below measured height (TextPainter slop).
+const double kRichTextRenderSlopFraction = 0.008;
 
 /// Text-density warning when auto-fit shrinks below this scale factor.
 const double kTextDensityWarningScale = 0.70;
@@ -194,49 +201,6 @@ double bulletsBlockHeight({
   return height;
 }
 
-double measureTextHeight(
-  String text,
-  double fontSize,
-  double maxWidth, {
-  double? lineHeight,
-  bool bold = false,
-  String? fontFamily,
-}) {
-  final painter = TextPainter(
-    text: TextSpan(
-      text: stripInlineMarkdown(text),
-      style: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: fontSize,
-        height: lineHeight,
-        fontWeight: bold ? FontWeight.bold : null,
-      ),
-    ),
-    textDirection: TextDirection.ltr,
-  )..layout(maxWidth: maxWidth.isFinite ? maxWidth : double.infinity);
-  return painter.height;
-}
-
-double measureTextWidth(
-  String text,
-  double fontSize, {
-  bool bold = false,
-  String? fontFamily,
-}) {
-  final painter = TextPainter(
-    text: TextSpan(
-      text: stripInlineMarkdown(text),
-      style: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: fontSize,
-        fontWeight: bold ? FontWeight.bold : null,
-      ),
-    ),
-    textDirection: TextDirection.ltr,
-  )..layout();
-  return painter.width;
-}
-
 /// Table cell font size fraction used in [table_preview.dart].
 double tableCellFontSize(
   double w, {
@@ -379,6 +343,183 @@ double twoBulletsSlideFitScale({required Slide slide, required String font}) {
     listStyle: slide.listStyle,
   );
   return math.min(leftScale, rightScale);
+}
+
+/// Total height of a rich-text bullets slide body at [scale].
+double measureRichTextHeight({
+  required double scale,
+  required double contentW,
+  required double refW,
+  required bool hasTitle,
+  required String title,
+  required String subtitle,
+  required double titleSize,
+  required double subtitleSize,
+  required double spacing,
+  required String markdown,
+  required double bodySize,
+  required String font,
+}) {
+  var h = 0.0;
+  if (hasTitle) {
+    h += measureTextHeight(
+      title,
+      titleSize * scale,
+      contentW,
+      bold: true,
+      fontFamily: font,
+    );
+  }
+  if (subtitle.isNotEmpty) {
+    h += spacing * scale * 0.4;
+    h += measureTextHeight(
+      subtitle,
+      subtitleSize * scale,
+      contentW,
+      fontFamily: font,
+    );
+  }
+  if ((hasTitle || subtitle.isNotEmpty) && markdown.trim().isNotEmpty) {
+    h += spacing * scale;
+  }
+  h += md_body.markdownBodyHeight(
+    markdown: markdown,
+    contentW: contentW,
+    refW: refW,
+    bodySize: bodySize,
+    font: font,
+    scale: scale,
+  );
+  return h;
+}
+
+/// Nudge [scale] down until [measure] reports a height that fits [availH].
+double tightenVerticalFitScale({
+  required double scale,
+  required double availH,
+  required double Function(double scale) measure,
+  double minScale = kTextDensityCriticalScale,
+  double fillRatio = 0.96,
+}) {
+  var s = scale;
+  while (measure(s) > availH * fillRatio && s > minScale + 0.005) {
+    final h = measure(s);
+    final next = (s * availH / h * fillRatio).clamp(minScale, s);
+    if ((next - s).abs() < 0.001) break;
+    s = next;
+  }
+  return s;
+}
+
+/// Nudge [scale] up until [measure] fills [availH] or [maxScale] is reached.
+double growVerticalFitScale({
+  required double scale,
+  required double availH,
+  required double Function(double scale) measure,
+  required double maxScale,
+  double fillRatio = 0.96,
+}) {
+  var s = scale;
+  while (measure(s) < availH * fillRatio && s < maxScale - 0.005) {
+    final h = measure(s);
+    if (h <= 0) break;
+    final next = (s * availH / h * fillRatio).clamp(s, maxScale);
+    if ((next - s).abs() < 0.001) break;
+    s = next;
+  }
+  return s;
+}
+
+/// Largest [scale] in [minScale, maxScale] where [measure](scale) fits [availH].
+double maxVerticalFitScale({
+  required double availH,
+  required double refW,
+  required double Function(double scale) measure,
+  required double minScale,
+  required double maxScale,
+  double slopFraction = kRichTextRenderSlopFraction,
+}) {
+  if (availH <= 0) return 1.0;
+  final target = (availH - refW * slopFraction).clamp(1.0, availH);
+
+  if (measure(maxScale) <= target) return maxScale;
+  if (measure(minScale) > target) return minScale;
+
+  double lo;
+  double hi;
+  if (maxScale > 1.0 && measure(1.0) <= target) {
+    lo = 1.0;
+    hi = maxScale;
+  } else {
+    lo = minScale;
+    hi = maxScale > 1.0 ? 1.0 : maxScale;
+  }
+  for (var i = 0; i < 24; i++) {
+    final mid = (lo + hi) / 2;
+    if (measure(mid) <= target) {
+      lo = mid;
+    } else {
+      hi = mid;
+    }
+  }
+  return lo;
+}
+
+/// Largest scale in [minScale, maxScale] for which a rich-text bullets body
+/// fits [availH] at the full [contentW].
+double richTextFitScale({
+  required double availH,
+  required double contentW,
+  required double refW,
+  required bool hasTitle,
+  required String title,
+  required String subtitle,
+  required double titleSize,
+  required double subtitleSize,
+  required double spacing,
+  required String markdown,
+  required double bodySize,
+  required String font,
+  double minScale = kTextDensityCriticalScale,
+  double maxScale = kSplitBulletsMaxScale,
+}) {
+  if (availH <= 0 || contentW <= 0) return 1.0;
+  final target = (availH - refW * kRichTextRenderSlopFraction).clamp(1.0, availH);
+
+  double measure(double scale) => measureRichTextHeight(
+    scale: scale,
+    contentW: contentW,
+    refW: refW,
+    hasTitle: hasTitle,
+    title: title,
+    subtitle: subtitle,
+    titleSize: titleSize,
+    subtitleSize: subtitleSize,
+    spacing: spacing,
+    markdown: markdown,
+    bodySize: bodySize,
+    font: font,
+  );
+
+  if (measure(maxScale) <= target) return maxScale;
+
+  double lo, hi;
+  if (maxScale > 1.0 && measure(1.0) <= target) {
+    lo = 1.0;
+    hi = maxScale;
+  } else {
+    lo = minScale;
+    hi = maxScale > 1.0 ? 1.0 : maxScale;
+  }
+  for (var i = 0; i < 24; i++) {
+    final mid = (lo + hi) / 2;
+    if (measure(mid) <= target) {
+      lo = mid;
+    } else {
+      hi = mid;
+    }
+  }
+  return lo;
 }
 
 /// Layout metrics for a bullets + image slide.

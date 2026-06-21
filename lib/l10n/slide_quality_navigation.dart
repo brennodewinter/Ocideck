@@ -5,8 +5,8 @@ import '../models/slide_quality.dart';
 import '../state/editor_provider.dart';
 import '../widgets/dialogs/settings_dialog.dart';
 
-/// Tab index of the style-profile colours pane in [SettingsDialog].
-const int kSettingsColorsTabIndex = 3;
+/// Tab index of the presentation-style pane in [SettingsDialog].
+const int kSettingsColorsTabIndex = 2;
 
 /// Navigate from a quality issue to the relevant editor field or theme colour.
 void navigateToSlideQualityIssue({

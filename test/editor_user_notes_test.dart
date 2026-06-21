@@ -64,7 +64,7 @@ void main() {
       'Spreker tekst',
     );
 
-    final userNotesEditor = find.byKey(ValueKey('user-notes-${slide.id}'));
+    final userNotesEditor = find.byKey(ValueKey('user-notes-${slide.id}-p0'));
     expect(userNotesEditor, findsOneWidget);
     await _switchToMarkdownMode(tester, userNotesEditor);
 
@@ -122,7 +122,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    final userNotesEditor = find.byKey(ValueKey('user-notes-${slide.id}'));
+    final userNotesEditor = find.byKey(ValueKey('user-notes-${slide.id}-p0'));
     await _switchToMarkdownMode(tester, userNotesEditor);
 
     final userField = find.descendant(

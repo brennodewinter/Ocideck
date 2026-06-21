@@ -16,6 +16,7 @@ import '../../state/slide_clipboard_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/log.dart';
+import '../../utils/page_scoped_notes.dart';
 import '../dialogs/add_slide_dialog.dart';
 import '../dialogs/import_slides_dialog.dart';
 import '../dialogs/slide_finder_dialog.dart';
@@ -545,7 +546,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
           index: index,
           isSelected: editor.selection.contains(index),
           isPrimary: editor.selectedIndex == index,
-          hasUserNotes: deck.userNotes[slide.id]?.trim().isNotEmpty ?? false,
+          hasUserNotes: slideHasUserNotes(deck.userNotes, slide.id),
           projectPath: deck.projectPath,
           themeProfile: deck.themeProfile,
           slideCount: deck.slides.length,
@@ -613,7 +614,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
           index: i,
           isSelected: editor.selection.contains(i),
           isPrimary: editor.selectedIndex == i,
-          hasUserNotes: deck.userNotes[slide.id]?.trim().isNotEmpty ?? false,
+          hasUserNotes: slideHasUserNotes(deck.userNotes, slide.id),
           projectPath: deck.projectPath,
           themeProfile: deck.themeProfile,
           slideCount: deck.slides.length,

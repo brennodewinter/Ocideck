@@ -17,7 +17,10 @@ import '../../models/slide.dart';
 import '../../services/markdown_service.dart';
 import '../../services/mermaid_render_service.dart';
 import '../../services/rehearsal_controller.dart';
+import '../../services/rich_text_layout.dart';
+import '../../services/slide_layout_metrics.dart';
 import '../../utils/log.dart';
+import '../../utils/page_scoped_notes.dart';
 import '../../utils/project_path.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
@@ -451,7 +454,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   /// Gebruikersnotities-paneel (ontvanger/cursist); standaard uit.
   bool _userNotesMode = false;
-  NotesEditorMode _userNotesEditorMode = NotesEditorMode.visual;
+  NotesEditorMode _userNotesEditorMode = NotesEditorMode.markdown;
   late Map<String, String> _userNotes;
   TextEditingController? _userNoteCtrl;
   late final FocusNode _userNotesFocusNode;
@@ -482,9 +485,13 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// True when this presenter drives a separate audience (beamer) window.
   bool get _dual => widget.audience != null;
 
-  /// Last (index, blank) pushed to the audience window, to avoid redundant sends.
+  /// Last (index, blank, richTextPage) pushed to the audience window.
   int? _lastSentIndex;
   int? _lastSentBlank;
+  int? _lastSentRichTextPage;
+
+  /// Pagina binnen een rich-text slide (0-gebaseerd).
+  int _richTextPage = 0;
 
   // ── Annotatielaag ─────────────────────────────────────────────────────────
   /// Strokes per slide, keyed by [Slide.id] (stable within the session).
@@ -588,15 +595,76 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     final aw = widget.audience?.controller;
     if (aw == null) return;
     final blank = _blankCode;
-    if (_index == _lastSentIndex && blank == _lastSentBlank) return;
+    if (_index == _lastSentIndex &&
+        blank == _lastSentBlank &&
+        _richTextPage == _lastSentRichTextPage) {
+      return;
+    }
     final indexChanged = _index != _lastSentIndex;
     _lastSentIndex = _index;
     _lastSentBlank = blank;
+    _lastSentRichTextPage = _richTextPage;
     audienceChannel
-        .invokeMethod('update', {'index': _index, 'blank': blank})
+        .invokeMethod('update', {
+          'index': _index,
+          'blank': blank,
+          'richTextPage': _richTextPage,
+        })
         .catchError((_) => null);
-    // On a slide change, push that slide's strokes so saved/earlier ink shows.
     if (indexChanged) _pushInk();
+  }
+
+  RichTextLayoutPlan? _richTextPlanFor(Slide slide) {
+    if (!slideUsesRichText(slide)) return null;
+    const w = kReferenceSlideWidth;
+    final split = slide.type == SlideType.bulletsImage;
+    final hPad = split ? w * 0.038 : w * 0.07;
+    final imgFraction = split
+        ? ((slide.imageSize > 0 ? slide.imageSize / 100.0 : 0.40).clamp(
+            0.1,
+            0.70,
+          ))
+        : 0.0;
+    final contentW = split
+        ? (w - imgFraction * w - hPad * 2).clamp(w * 0.12, w)
+        : w - hPad * 2;
+    final contentH = w * 9 / 16 - (split ? w * 0.042 * 2 : w * 0.05 * 2);
+    return planRichTextForSlide(
+      slide: slide,
+      profile: widget.themeProfile,
+      w: w,
+      availW: contentW,
+      availH: contentH,
+      font: widget.themeProfile.fontFamily,
+      splitWithImage: split,
+    );
+  }
+
+  int _richTextPageCountFor(Slide slide) =>
+      _richTextPlanFor(slide)?.pageCount ?? 1;
+
+  bool _userNotesMultiPage(Slide slide) => _richTextPageCountFor(slide) > 1;
+
+  String _userNoteKeyFor(Slide slide) => userNoteStorageKey(
+    slide.id,
+    _richTextPage,
+    multiPage: _userNotesMultiPage(slide),
+  );
+
+  String _userNoteTextFor(Slide slide) =>
+      userNoteForPage(
+        _userNotes,
+        slide.id,
+        _richTextPage,
+        multiPage: _userNotesMultiPage(slide),
+      ) ??
+      '';
+
+  void _setRichTextPage(int page) {
+    _persistUserNoteFromController();
+    setState(() => _richTextPage = page);
+    _loadUserNoteIntoController();
+    _syncAudience();
   }
 
   void _toggleChecklistItem({
@@ -866,14 +934,26 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// blijft de laatste slide gewoon staan.
   void _autoAdvance() {
     if (_blank != _Blank.none || _tableEditMode) return;
+    final plan = _richTextPlanFor(_currentSlide);
+    if (plan != null && _richTextPage < plan.pageCount - 1) {
+      _setRichTextPage(_richTextPage + 1);
+      _scheduleAdvance();
+      return;
+    }
     if (_index < widget.slides.length - 1) {
       _persistUserNoteFromController();
-      setState(() => _index++);
+      setState(() {
+        _index++;
+        _richTextPage = 0;
+      });
       _loadUserNoteIntoController();
       _scheduleAdvance();
     } else if (_loop) {
       _persistUserNoteFromController();
-      setState(() => _index = 0);
+      setState(() {
+        _index = 0;
+        _richTextPage = 0;
+      });
       _loadUserNoteIntoController();
       _scheduleAdvance();
     }
@@ -1013,9 +1093,17 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       return;
     }
     if (_tableEditMode) return;
+    final plan = _richTextPlanFor(_currentSlide);
+    if (plan != null && _richTextPage < plan.pageCount - 1) {
+      _setRichTextPage(_richTextPage + 1);
+      return;
+    }
     if (_index < widget.slides.length - 1) {
       _persistUserNoteFromController();
-      setState(() => _index++);
+      setState(() {
+        _index++;
+        _richTextPage = 0;
+      });
       _loadUserNoteIntoController();
       _scheduleAdvance();
       _announceSlide();
@@ -1029,9 +1117,17 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       return;
     }
     if (_tableEditMode) return;
+    if (_richTextPage > 0) {
+      _setRichTextPage(_richTextPage - 1);
+      return;
+    }
     if (_index > 0) {
       _persistUserNoteFromController();
-      setState(() => _index--);
+      setState(() {
+        _index--;
+        final prevPlan = _richTextPlanFor(widget.slides[_index]);
+        _richTextPage = prevPlan != null ? prevPlan.pageCount - 1 : 0;
+      });
       _loadUserNoteIntoController();
       _scheduleAdvance();
       _announceSlide();
@@ -1085,13 +1181,20 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   void _onUserNoteTextChanged() {
     if (!_userNotesMode || _userNoteCtrl == null) return;
-    final slideId = widget.slides[_index.clamp(0, widget.slides.length - 1)].id;
+    final slide = widget.slides[_index.clamp(0, widget.slides.length - 1)];
     final text = _userNoteCtrl!.text;
     final next = Map<String, String>.from(_userNotes);
+    final key = _userNoteKeyFor(slide);
     if (text.trim().isEmpty) {
-      next.remove(slideId);
+      next.remove(key);
+      if (_userNotesMultiPage(slide) && _richTextPage == 0) {
+        next.remove(slide.id);
+      }
     } else {
-      next[slideId] = text;
+      next[key] = text;
+      if (_userNotesMultiPage(slide) && _richTextPage == 0) {
+        next.remove(slide.id);
+      }
     }
     _userNotes = next;
     widget.onUserNotesChanged?.call(Map<String, String>.from(_userNotes));
@@ -1099,13 +1202,20 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   void _persistUserNoteFromController() {
     if (!_userNotesMode || _userNoteCtrl == null) return;
-    final slideId = widget.slides[_index.clamp(0, widget.slides.length - 1)].id;
+    final slide = widget.slides[_index.clamp(0, widget.slides.length - 1)];
     final text = _userNoteCtrl!.text;
     final next = Map<String, String>.from(_userNotes);
+    final key = _userNoteKeyFor(slide);
     if (text.trim().isEmpty) {
-      next.remove(slideId);
+      next.remove(key);
+      if (_userNotesMultiPage(slide) && _richTextPage == 0) {
+        next.remove(slide.id);
+      }
     } else {
-      next[slideId] = text;
+      next[key] = text;
+      if (_userNotesMultiPage(slide) && _richTextPage == 0) {
+        next.remove(slide.id);
+      }
     }
     _userNotes = next;
     widget.onUserNotesChanged?.call(Map<String, String>.from(_userNotes));
@@ -1113,8 +1223,8 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   void _loadUserNoteIntoController() {
     if (!_userNotesMode || _userNoteCtrl == null) return;
-    final slideId = widget.slides[_index.clamp(0, widget.slides.length - 1)].id;
-    final text = _userNotes[slideId] ?? '';
+    final slide = widget.slides[_index.clamp(0, widget.slides.length - 1)];
+    final text = _userNoteTextFor(slide);
     if (_userNoteCtrl!.text == text) return;
     _userNoteCtrl!.removeListener(_onUserNoteTextChanged);
     _userNoteCtrl!.text = text;
@@ -1126,11 +1236,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       _userNotesMode = true;
       _userNoteCtrl ??= TextEditingController();
       _userNoteCtrl!.removeListener(_onUserNoteTextChanged);
-      _userNoteCtrl!.text =
-          _userNotes[widget
-              .slides[_index.clamp(0, widget.slides.length - 1)]
-              .id] ??
-          '';
+      _userNoteCtrl!.text = _userNoteTextFor(
+        widget.slides[_index.clamp(0, widget.slides.length - 1)],
+      );
       _userNoteCtrl!.addListener(_onUserNoteTextChanged);
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -1234,6 +1342,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _persistUserNoteFromController();
     setState(() {
       _index = index.clamp(0, widget.slides.length - 1);
+      _richTextPage = 0;
       _blank = _Blank.none;
       _gridOpen = false;
       _tableEditMode = false;
@@ -1256,6 +1365,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _persistUserNoteFromController();
     setState(() {
       _index = target;
+      _richTextPage = 0;
       _tableEditMode = false;
       _tableEditRow = null;
       _tableEditCol = null;
@@ -1905,8 +2015,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   Widget _buildHelpOverlay() {
     final l10n = context.l10n;
     final rows = <(String, String)>[
-      ('→ · ${l10n.d('spatie')} · ${l10n.d('klik')}', l10n.d('Volgende slide')),
-      ('←', l10n.d('Vorige slide')),
+      (
+        '→ · ${l10n.d('spatie')} · ${l10n.d('klik')}',
+        l10n.d('Volgende slide of pagina'),
+      ),
+      ('←', l10n.d('Vorige slide of pagina')),
       ('${l10n.d('cijfers')} + Enter', l10n.d('Naar slidenummer')),
       ('Home · End', l10n.d('Eerste · laatste slide')),
       ('G', l10n.d('Slide-overzicht (pijltjes + Enter)')),
@@ -2053,6 +2166,13 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                   onLinkTap: openExternalUrl,
                   slideNumber: _index + 1,
                   slideCount: widget.slides.length,
+                  richTextPage: _richTextPage,
+                  showRichTextPageControls:
+                      (_richTextPlanFor(slide)?.pageCount ?? 1) > 1,
+                  onRichTextPageChanged:
+                      (_richTextPlanFor(slide)?.pageCount ?? 1) > 1
+                      ? (page) => _setRichTextPage(page)
+                      : null,
                   tlp: widget.tlp,
                   organization: widget.organization,
                   showClassificationWatermark:
@@ -2347,6 +2467,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   Widget _buildUserNotesOverlay() {
     final l10n = context.l10n;
     final profile = widget.themeProfile;
+    final slide = _currentSlide;
+    final pageCount = _richTextPageCountFor(slide);
+    final showPageLabel = pageCount > 1;
     final bg = _hexColor(profile.slideBackgroundColor);
     final fg = _hexColor(profile.textColor);
     final accent = _hexColor(profile.accentColor);
@@ -2375,35 +2498,61 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 12, 8, 12),
-                child: Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Icon(Icons.edit_note_outlined, color: accent, size: 22),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        l10n.d('Mijn notities'),
-                        style: TextStyle(
-                          fontFamily: profile.fontFamily,
-                          color: fg,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                    Row(
+                      children: [
+                        Icon(Icons.edit_note_outlined, color: accent, size: 22),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                l10n.d('Mijn notities'),
+                                style: TextStyle(
+                                  fontFamily: profile.fontFamily,
+                                  color: fg,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              if (showPageLabel)
+                                Text(
+                                  '${l10n.d('Pagina')} ${_richTextPage + 1} / $pageCount',
+                                  style: TextStyle(
+                                    fontFamily: profile.fontFamily,
+                                    color: fg.withValues(alpha: 0.55),
+                                    fontSize: 11,
+                                  ),
+                                ),
+                            ],
+                          ),
                         ),
+                        const SizedBox(width: 4),
+                        IconButton(
+                          tooltip: l10n.d('Sluiten'),
+                          onPressed: _closeUserNotesMode,
+                          icon: Icon(
+                            Icons.close,
+                            color: fg.withValues(alpha: 0.6),
+                          ),
+                          visualDensity: VisualDensity.compact,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: NotesModeToggle(
+                        mode: _userNotesEditorMode,
+                        onModeChanged: (mode) =>
+                            setState(() => _userNotesEditorMode = mode),
+                        style: NotesModeToggleStyle.compact,
+                        foregroundColor: fg,
+                        accentColor: accent,
                       ),
-                    ),
-                    NotesModeToggle(
-                      mode: _userNotesEditorMode,
-                      onModeChanged: (mode) =>
-                          setState(() => _userNotesEditorMode = mode),
-                      style: NotesModeToggleStyle.compact,
-                      foregroundColor: fg,
-                      accentColor: accent,
-                    ),
-                    const SizedBox(width: 4),
-                    IconButton(
-                      tooltip: l10n.d('Sluiten'),
-                      onPressed: _closeUserNotesMode,
-                      icon: Icon(Icons.close, color: fg.withValues(alpha: 0.6)),
-                      visualDensity: VisualDensity.compact,
                     ),
                   ],
                 ),
@@ -2412,24 +2561,29 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-                  child: MarkdownNotesEditor(
+                  child: KeyedSubtree(
                     key: const ValueKey('presenter-user-notes'),
-                    controller: _userNoteCtrl!,
-                    focusNode: _userNotesFocusNode,
-                    mode: _userNotesEditorMode,
-                    onModeChanged: (mode) =>
-                        setState(() => _userNotesEditorMode = mode),
-                    showModeToggle: false,
-                    expand: true,
-                    compactToolbar: true,
-                    editorTheme: MarkdownEditorTheme.presenterOverlay(
-                      panelBackground: bg,
-                      panelText: fg,
-                      accent: accent,
-                      fontFamily: profile.fontFamily,
+                    child: MarkdownNotesEditor(
+                      key: ValueKey(
+                        'presenter-user-notes-${slide.id}-p$_richTextPage',
+                      ),
+                      controller: _userNoteCtrl!,
+                      focusNode: _userNotesFocusNode,
+                      mode: _userNotesEditorMode,
+                      onModeChanged: (mode) =>
+                          setState(() => _userNotesEditorMode = mode),
+                      showModeToggle: false,
+                      expand: true,
+                      compactToolbar: true,
+                      editorTheme: MarkdownEditorTheme.presenterOverlay(
+                        panelBackground: bg,
+                        panelText: fg,
+                        accent: accent,
+                        fontFamily: profile.fontFamily,
+                      ),
+                      hintText: l10n.d('Gebruikersnotities voor deze slide...'),
+                      minLines: 8,
                     ),
-                    hintText: l10n.d('Gebruikersnotities voor deze slide...'),
-                    minLines: 8,
                   ),
                 ),
               ),
@@ -2442,7 +2596,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   Widget _buildNotes(Slide slide) {
     final l10n = context.l10n;
-    final notes = slide.notes.trim();
+    final pageCount = _richTextPageCountFor(slide);
+    final notes = speakerNoteForPage(slide.notes, _richTextPage, pageCount);
+    final showPageLabel = pageCount > 1;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(14),
@@ -2451,40 +2607,69 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: const Color(0xFF262626)),
       ),
-      child: notes.isEmpty
-          ? Align(
-              alignment: Alignment.topLeft,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (showPageLabel)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
               child: Text(
-                l10n.d('Geen notities voor deze slide.'),
+                '${l10n.d('Pagina')} ${_richTextPage + 1} / $pageCount',
                 style: const TextStyle(
-                  color: Colors.white30,
-                  fontSize: 14,
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-            )
-          : SingleChildScrollView(
-              child: Text(
-                notes,
-                style: const TextStyle(
-                  color: Color(0xFFE5E5E5),
-                  fontSize: 17,
-                  height: 1.5,
+                  color: Colors.white38,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),
+          Expanded(
+            child: notes.isEmpty
+                ? Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      l10n.d('Geen notities voor deze slide.'),
+                      style: const TextStyle(
+                        color: Colors.white30,
+                        fontSize: 14,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  )
+                : SingleChildScrollView(
+                    child: Text(
+                      notes,
+                      style: const TextStyle(
+                        color: Color(0xFFE5E5E5),
+                        fontSize: 17,
+                        height: 1.5,
+                      ),
+                    ),
+                  ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildPresenterControls(int total) {
     final l10n = context.l10n;
+    final richTextPlan = _richTextPlanFor(_currentSlide);
+    final richTextPages = richTextPlan?.pageCount ?? 1;
+    final hasRichTextPages = richTextPages > 1;
     return Row(
       children: [
-        _NavButton(icon: Icons.chevron_left, onTap: _index > 0 ? _prev : null),
+        _NavButton(
+          icon: Icons.chevron_left,
+          onTap: _index > 0 || _richTextPage > 0 ? _prev : null,
+        ),
         const SizedBox(width: 8),
         _NavButton(
           icon: Icons.chevron_right,
-          onTap: _index < total - 1 ? _next : null,
+          onTap:
+              _index < total - 1 ||
+                  (hasRichTextPages && _richTextPage < richTextPages - 1)
+              ? _next
+              : null,
         ),
         if (_displays.length > 1) ...[
           const SizedBox(width: 8),
@@ -2498,7 +2683,10 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         ],
         const SizedBox(width: 16),
         Text(
-          '${l10n.d('Slide')} ${_index + 1} / $total',
+          hasRichTextPages
+              ? '${l10n.d('Slide')} ${_index + 1} / $total'
+                    ' · ${l10n.d('Pagina')} ${_richTextPage + 1} / $richTextPages'
+              : '${l10n.d('Slide')} ${_index + 1} / $total',
           style: const TextStyle(
             color: Colors.white,
             fontSize: 15,

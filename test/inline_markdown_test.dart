@@ -33,6 +33,10 @@ void main() {
         stripInlineMarkdown(r'letterlijk \*sterren\*'),
         'letterlijk *sterren*',
       );
+      expect(
+        stripInlineMarkdown(r'Geen \- streepje'),
+        'Geen - streepje',
+      );
     });
   });
 

@@ -116,6 +116,10 @@ class Deck {
   /// Traffic Light Protocol-classificatie van deze presentatie.
   final TlpLevel tlp;
 
+  /// Doeltijd (in seconden) voor de aftelling in de presenter. 0 = geen
+  /// aftelling. Live aanpasbaar tijdens presenteren (toets K).
+  final int presentationTargetSeconds;
+
   /// Annotatielaag: vrije-hand-tekeningen per slide, gekeyd op [Slide.id].
   /// Bewust géén onderdeel van de Marp-markdown — dit wordt los bewaard in een
   /// sidecar zodat het deck pure, uitwisselbare Marp blijft.
@@ -140,6 +144,7 @@ class Deck {
     this.description = '',
     this.keywords = '',
     this.tlp = TlpLevel.none,
+    this.presentationTargetSeconds = 0,
     this.annotations = const {},
     this.userNotes = const {},
   });
@@ -159,6 +164,7 @@ class Deck {
     String? description,
     String? keywords,
     TlpLevel? tlp,
+    int? presentationTargetSeconds,
     Map<String, List<InkStroke>>? annotations,
     Map<String, String>? userNotes,
   }) {
@@ -176,6 +182,8 @@ class Deck {
       description: description ?? this.description,
       keywords: keywords ?? this.keywords,
       tlp: tlp ?? this.tlp,
+      presentationTargetSeconds:
+          presentationTargetSeconds ?? this.presentationTargetSeconds,
       annotations: annotations ?? this.annotations,
       userNotes: userNotes ?? this.userNotes,
     );

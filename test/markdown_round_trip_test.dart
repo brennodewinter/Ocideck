@@ -273,6 +273,32 @@ void main() {
       expect(out.imageCaption, 'Een onderschrift');
     });
 
+    test('bulletsImage richText slide round-trips with custom markdown', () {
+      const body = 'Dit is **vet** tekst\n\n- Een lijst in markdown';
+      final out = _roundTrip(
+        Slide.create(SlideType.bulletsImage).copyWith(
+          title: 'Profiel',
+          listStyle: ListStyle.richText,
+          customMarkdown: body,
+          imagePath: 'images/portret.png',
+          imageSize: 45,
+        ),
+      );
+      expect(out.type, SlideType.bulletsImage);
+      expect(out.listStyle, ListStyle.richText);
+      expect(out.customMarkdown, body);
+      expect(out.title, 'Profiel');
+      expect(out.imagePath, 'images/portret.png');
+      expect(out.imageSize, 45);
+
+      final markdown = MarkdownService().generateDeck(
+        Deck(title: 'Demo', slides: [out]),
+      );
+      expect(markdown, contains('ocideck_list_style: richText'));
+      expect(markdown, contains('images/portret.png'));
+      expect(markdown, contains('Dit is **vet** tekst'));
+    });
+
     test('twoImages slide keeps both images, split and captions', () {
       final out = _roundTrip(
         Slide.create(SlideType.twoImages).copyWith(

@@ -41,7 +41,9 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
     _heading2 = TextEditingController(text: widget.slide.columnTitle2);
     _heading1.addListener(_emit);
     _heading2.addListener(_emit);
-    _listStyle = widget.slide.listStyle;
+    _listStyle = widget.slide.listStyle == ListStyle.richText
+        ? ListStyle.bullets
+        : widget.slide.listStyle;
     _showChecklistProgress = widget.slide.showChecklistProgress;
     _left = _BulletSet(widget.slide.bullets, _emit);
     _right = _BulletSet(widget.slide.bullets2, _emit);
@@ -80,6 +82,7 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
         const SizedBox(height: 16),
         ListStyleSelector(
           value: _listStyle,
+          allowRichText: false,
           onChanged: (value) {
             setState(() => _listStyle = value);
             _emit();

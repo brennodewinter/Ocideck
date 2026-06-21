@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
+import '../../utils/markdown_paste_cleanup.dart';
+import '../../utils/markdown_quill_codec.dart';
 import 'markdown_editor_theme.dart';
 
 DefaultStyles _defaultStylesFor(MarkdownEditorTheme theme) {
@@ -50,7 +53,7 @@ DefaultStyles _defaultStylesFor(MarkdownEditorTheme theme) {
   );
 }
 
-class WysiwygNotesField extends StatelessWidget {
+class WysiwygNotesField extends StatefulWidget {
   final QuillController controller;
   final ScrollController scrollController;
   final FocusNode focusNode;
@@ -73,27 +76,91 @@ class WysiwygNotesField extends StatelessWidget {
   });
 
   @override
+  State<WysiwygNotesField> createState() => _WysiwygNotesFieldState();
+}
+
+class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
+  Future<void> _pasteSanitized() async {
+    final data = await Clipboard.getData(Clipboard.kTextPlain);
+    final raw = data?.text;
+    if (raw == null || raw.isEmpty) return;
+    final text = sanitizeMarkdownPaste(raw);
+    final index = widget.controller.selection.baseOffset;
+    final length = widget.controller.selection.extentOffset - index;
+    widget.controller.replaceText(
+      index,
+      length,
+      text,
+      TextSelection.collapsed(offset: index + text.length),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: editorTheme.surface,
+        color: widget.editorTheme.surface,
         borderRadius: BorderRadius.circular(6),
-        border: bordered ? Border.all(color: editorTheme.border) : null,
+        border: widget.bordered
+            ? Border.all(color: widget.editorTheme.border)
+            : null,
       ),
       clipBehavior: Clip.antiAlias,
-      child: QuillEditor.basic(
-        controller: controller,
-        focusNode: focusNode,
-        scrollController: scrollController,
-        config: QuillEditorConfig(
-          expands: expand,
-          padding: contentPadding,
-          placeholder: hintText,
-          customStyles: _defaultStylesFor(editorTheme),
-          autoFocus: false,
+      child: Shortcuts(
+        shortcuts: const {
+          SingleActivator(LogicalKeyboardKey.keyV, control: true):
+              _SanitizedPasteIntent(),
+          SingleActivator(LogicalKeyboardKey.keyV, meta: true):
+              _SanitizedPasteIntent(),
+        },
+        child: Actions(
+          actions: {
+            _SanitizedPasteIntent: CallbackAction<_SanitizedPasteIntent>(
+              onInvoke: (_) {
+                _pasteSanitized();
+                return null;
+              },
+            ),
+          },
+          child: QuillEditor.basic(
+            controller: widget.controller,
+            focusNode: widget.focusNode,
+            scrollController: widget.scrollController,
+            config: QuillEditorConfig(
+              expands: widget.expand,
+              padding: widget.contentPadding,
+              placeholder: widget.hintText,
+              customStyles: _defaultStylesFor(widget.editorTheme),
+              autoFocus: false,
+            ),
+          ),
         ),
       ),
     );
   }
+}
+
+class _SanitizedPasteIntent extends Intent {
+  const _SanitizedPasteIntent();
+}
+
+/// Inserts sanitized plain text at the cursor in a Quill document.
+void insertSanitizedPlainText(QuillController controller, String raw) {
+  final text = sanitizeMarkdownPaste(raw);
+  final index = controller.selection.baseOffset;
+  final length = controller.selection.extentOffset - index;
+  controller.replaceText(
+    index,
+    length,
+    text,
+    TextSelection.collapsed(offset: index + text.length),
+  );
+}
+
+/// Reloads the Quill document from sanitized markdown.
+void loadSanitizedMarkdown(QuillController controller, String markdown) {
+  controller.document = MarkdownQuillCodec.documentFromMarkdown(
+    normalizeRichTextMarkdown(markdown),
+  );
 }

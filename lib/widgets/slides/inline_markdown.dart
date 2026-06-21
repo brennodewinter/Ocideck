@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/markdown_paste_cleanup.dart';
+
 /// Lichtgewicht inline-markdown: **vet**, *cursief* / _cursief_, `code`,
 /// ~~doorhalen~~ en [tekst](url). Geen block-niveau (dat doet de slide-layout
 /// al); puur de opmaak binnen één tekstregel.
@@ -48,6 +50,9 @@ class InlineRun {
 
 const _markers = r'*_~`[]()\';
 
+bool _isEscapedPunctuation(String c) =>
+    c.length == 1 && markdownEscapedPunctuation.contains(c);
+
 /// Parse [text] naar opeenvolgende [InlineRun]s. Onafgesloten of ongeldige
 /// opmaaktekens blijven gewoon letterlijke tekst.
 List<InlineRun> parseInlineRuns(String text) {
@@ -94,6 +99,11 @@ String stripInlineMarkdown(String text) {
 bool _hasMarker(String s) {
   for (var i = 0; i < s.length; i++) {
     if (_markers.contains(s[i])) return true;
+    if (s[i] == r'\' &&
+        i + 1 < s.length &&
+        _isEscapedPunctuation(s[i + 1])) {
+      return true;
+    }
   }
   return false;
 }
@@ -111,8 +121,8 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
   while (i < s.length) {
     final c = s[i];
 
-    // Escape: \* → *
-    if (c == r'\' && i + 1 < s.length && _markers.contains(s[i + 1])) {
+    // CommonMark: \X → X for punctuation (Quill export / pasted web markdown).
+    if (c == r'\' && i + 1 < s.length && _isEscapedPunctuation(s[i + 1])) {
       buf.write(s[i + 1]);
       i += 2;
       continue;

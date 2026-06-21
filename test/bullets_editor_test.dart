@@ -343,6 +343,94 @@ void main() {
     );
   });
 
+  testWidgets('rich text bullets use the full slide content width', (
+    tester,
+  ) async {
+    const slideWidth = 800.0;
+    final slide = Slide.create(SlideType.bullets).copyWith(
+      listStyle: ListStyle.richText,
+      customMarkdown:
+          '${'Lange tekst '.padRight(120, 'a')} die over de volle breedte moet lopen.',
+    );
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: SizedBox(
+            width: slideWidth,
+            height: 450,
+            child: SlidePreviewWidget(slide: slide),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    final bodyFinder = find.byWidgetPredicate(
+      (widget) =>
+          widget is InlineMarkdownText &&
+          widget.text.contains('Lange tekst'),
+    );
+    final renderBox = tester.renderObject<RenderBox>(bodyFinder);
+    final expectedContentWidth = slideWidth * (1 - 0.07 * 2);
+    expect(renderBox.size.width, greaterThan(expectedContentWidth * 0.95));
+  });
+
+  testWidgets('rich text bullets do not overflow in a small thumbnail', (
+    tester,
+  ) async {
+    final slide = Slide.create(SlideType.bullets).copyWith(
+      title: 'Korte titel',
+      listStyle: ListStyle.richText,
+      customMarkdown: '''
+# Kop
+Paragraaf met **vet** en wat extra tekst zodat de layout echt iets te doen heeft.
+- Eerste punt
+- Tweede punt met meer woorden
+''',
+    );
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: SizedBox(
+            width: 260,
+            height: 112,
+            child: SlidePreviewWidget(slide: slide),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('rich text bullets+image do not overflow in a small thumbnail', (
+    tester,
+  ) async {
+    final slide = Slide.create(SlideType.bulletsImage).copyWith(
+      title: 'Korte titel',
+      listStyle: ListStyle.richText,
+      imagePath: 'images/test.png',
+      customMarkdown: '''
+Paragraaf met **vet** en wat extra tekst zodat de layout echt iets te doen heeft.
+- Eerste punt
+- Tweede punt met meer woorden
+''',
+    );
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: SizedBox(
+            width: 260,
+            height: 112,
+            child: SlidePreviewWidget(slide: slide),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('hovering progress highlights matching checklist items', (
     tester,
   ) async {

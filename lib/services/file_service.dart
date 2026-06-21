@@ -483,7 +483,10 @@ class FileService {
   }
 
   /// Cap on how much we download / extract, to bound memory and disk use.
-  static const maxPackageBytes = 64 * 1024 * 1024; // 64 MB
+  ///
+  /// Image-heavy decks routinely exceed 64 MiB, so keep the safety guard high
+  /// enough for real presentation exchange while still bounding abuse.
+  static const maxPackageBytes = 512 * 1024 * 1024; // 512 MiB
   static const maxPackageEntries = 10000;
   static const maxZipEntryPathLength = 512;
 
@@ -491,9 +494,10 @@ class FileService {
   /// pad naar het uitgepakte markdown-bestand terug (om in een tab te openen).
   Future<String?> importPackageBytes(
     List<int> zipBytes,
-    String destParentDir,
-  ) async {
-    if (zipBytes.length > maxPackageBytes) return null;
+    String destParentDir, {
+    int maxBytes = maxPackageBytes,
+  }) async {
+    if (zipBytes.length > maxBytes) return null;
 
     final Archive archive;
     try {
@@ -545,7 +549,7 @@ class FileService {
       final content = f.content as List<int>;
       // Bound total extracted size so a small zip can't fill the disk (zip bomb).
       extracted += content.length;
-      if (extracted > maxPackageBytes) {
+      if (extracted > maxBytes) {
         logWarning(
           'FileService.importPackageBytes: decompressed size exceeds limit',
         );

@@ -278,7 +278,7 @@ class AppAppearanceProfile {
     accentColor: '#FFCC00',
     backgroundColor: '#F4F7FC',
     surfaceColor: '#FFFFFF',
-    textColor: '#17233D',
+    textColor: '#003399',
     mutedTextColor: '#5D6B85',
     panelColor: '#00266F',
     panelTextColor: '#FFFFFF',
@@ -398,10 +398,6 @@ class AppSettings {
   /// fixed 16:9 design surface. WCAG 1.4.4 asks for text resizing up to 200%.
   final double uiTextScale;
 
-  /// Standaard doeltijd (in seconden) voor de aftelling/oefenklok in de
-  /// presenter. 0 = geen aftelling. Live aanpasbaar tijdens presenteren (K).
-  final int presentationTargetSeconds;
-
   /// Toon een waarschuwing vóór export wanneer de slide-kwaliteitscontrole
   /// problemen vindt (alt-tekst, contrast, tekstdichtheid).
   final bool qualityWarningsOnExport;
@@ -423,7 +419,6 @@ class AppSettings {
     this.requireClassificationOnExport = false,
     this.classificationWatermarkEnabled = false,
     this.uiTextScale = 1.0,
-    this.presentationTargetSeconds = 0,
     this.qualityWarningsOnExport = true,
     this.qualityBlockExportOnErrors = false,
   });
@@ -482,7 +477,6 @@ class AppSettings {
     bool? requireClassificationOnExport,
     bool? classificationWatermarkEnabled,
     double? uiTextScale,
-    int? presentationTargetSeconds,
     bool? qualityWarningsOnExport,
     bool? qualityBlockExportOnErrors,
     bool clearHomeDirectory = false,
@@ -531,8 +525,6 @@ class AppSettings {
       classificationWatermarkEnabled:
           classificationWatermarkEnabled ?? this.classificationWatermarkEnabled,
       uiTextScale: uiTextScale ?? this.uiTextScale,
-      presentationTargetSeconds:
-          presentationTargetSeconds ?? this.presentationTargetSeconds,
       qualityWarningsOnExport:
           qualityWarningsOnExport ?? this.qualityWarningsOnExport,
       qualityBlockExportOnErrors:

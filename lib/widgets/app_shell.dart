@@ -573,7 +573,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             .read(settingsProvider)
             .classificationWatermarkEnabled,
         targetDuration: () {
-          final secs = ref.read(settingsProvider).presentationTargetSeconds;
+          final secs = deck.presentationTargetSeconds;
           return secs > 0 ? Duration(seconds: secs) : null;
         }(),
         annotations: deck.annotations,
@@ -692,6 +692,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         date: info.date,
         description: info.description,
         keywords: info.keywords,
+        presentationTargetSeconds: info.presentationTargetSeconds,
       );
     }
 

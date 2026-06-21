@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../utils/markdown_quill_codec.dart';
+import '../../utils/markdown_paste_cleanup.dart';
 import 'markdown_editor_theme.dart';
 import 'markdown_editor_toolbar.dart';
 import 'notes_editor_mode.dart';
@@ -173,7 +174,9 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (_quillController != null) return;
     _scrollController = ScrollController();
     _quillController = QuillController(
-      document: MarkdownQuillCodec.documentFromMarkdown(widget.controller.text),
+      document: MarkdownQuillCodec.documentFromMarkdown(
+        normalizeRichTextMarkdown(widget.controller.text),
+      ),
       selection: const TextSelection.collapsed(offset: 0),
     );
     _markdownSnapshot = widget.controller.text;
@@ -198,7 +201,9 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (quill == null) return;
     _syncingMarkdown = true;
     _markdownSnapshot = widget.controller.text;
-    quill.document = MarkdownQuillCodec.documentFromMarkdown(_markdownSnapshot);
+    quill.document = MarkdownQuillCodec.documentFromMarkdown(
+      normalizeRichTextMarkdown(_markdownSnapshot),
+    );
     _syncingMarkdown = false;
   }
 
