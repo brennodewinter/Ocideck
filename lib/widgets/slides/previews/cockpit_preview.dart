@@ -278,6 +278,7 @@ class _CockpitInstrumentPainter extends CustomPainter {
   static const _green = Color(0xFF22C55E);
   static const _amber = Color(0xFFF59E0B);
   static const _red = Color(0xFFEF4444);
+  static const _blue = Color(0xFF3B82F6);
 
   /// Structural lines (gauge tracks, ticks, glass) derive from the slide text
   /// colour at low opacity so the instruments read on any slide background.
@@ -462,10 +463,13 @@ class _CockpitInstrumentPainter extends CustomPainter {
     final List<Color> paletteColors;
     final List<double> paletteStops;
     if (redHigh) {
-      final g = n(greenEnd);
-      final rr = math.max(g, n(meter.redFrom));
-      paletteColors = const [_green, _green, _amber, _red, _red];
-      paletteStops = [0.0, g, (g + rr) / 2, rr, 1.0];
+      final gs = n(greenStart);
+      final ge = math.max(gs, n(greenEnd));
+      final rf = math.max(ge, n(meter.redFrom));
+      // Below the green zone's lower bound reads as "too cold" → blue, then
+      // green in range, warming through amber to red at the top.
+      paletteColors = const [_blue, _blue, _green, _green, _amber, _red, _red];
+      paletteStops = [0.0, gs * 0.55, gs, ge, (ge + rf) / 2, rf, 1.0];
     } else {
       final rr = n(meter.redFrom);
       final g = math.max(rr, n(greenStart));
