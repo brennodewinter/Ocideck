@@ -187,6 +187,26 @@ class _CockpitEditorState extends State<CockpitEditor> {
               ),
             ],
           ),
+          const SizedBox(height: 10),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Icon(
+                Icons.palette_outlined,
+                size: 15,
+                color: Color(0xFF64748B),
+              ),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  l10n.d(
+                    'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.',
+                  ),
+                  style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+                ),
+              ),
+            ],
+          ),
           if (_spec.animateOnEnter) ...[
             const SizedBox(height: 10),
             _AnimationDurationControl(

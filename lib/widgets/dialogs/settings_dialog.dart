@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -63,6 +65,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   late String _originalAppearanceName;
   late TextEditingController _appearanceName;
 
+  /// The cockpit colour scheme currently being edited, plus its saved name as a
+  /// stable identity for rename/save.
+  late CockpitColorScheme _cockpitScheme;
+  late String _originalCockpitName;
+  late TextEditingController _cockpitName;
+
   /// The saved name of the profile currently being edited. Used as a stable
   /// identity so renaming updates the existing profile instead of creating a
   /// duplicate.
@@ -112,6 +120,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _appearanceProfile = settings.appAppearanceProfile;
     _originalAppearanceName = _appearanceProfile.name;
     _appearanceName = TextEditingController(text: _appearanceProfile.name);
+    _cockpitScheme = settings.cockpitColorScheme;
+    _originalCockpitName = _cockpitScheme.name;
+    _cockpitName = TextEditingController(text: _cockpitScheme.name);
     _originalName = _themeProfile.name;
     _profileName = TextEditingController(text: _themeProfile.name);
     _logoSize = TextEditingController(text: _themeProfile.logoSize.toString());
@@ -134,6 +145,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _footerText.dispose();
     _closingSlideMarkdown.dispose();
     _appearanceName.dispose();
+    _cockpitName.dispose();
     super.dispose();
   }
 
@@ -215,6 +227,17 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         previousName: _originalAppearanceName,
       );
     }
+    if (_cockpitScheme.isBuiltIn) {
+      notifier.selectCockpitColorScheme(_cockpitScheme.name);
+    } else {
+      final cockpitName = _cockpitName.text.trim();
+      notifier.saveCockpitColorScheme(
+        _cockpitScheme.copyWith(
+          name: cockpitName.isEmpty ? 'Eigen schema' : cockpitName,
+        ),
+        previousName: _originalCockpitName,
+      );
+    }
 
     // Apply the chosen/edited profile to the presentation that is currently
     // open, so the change is visible immediately. Only when the user actually
@@ -230,15 +253,18 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final profiles = _profiles;
+    final screen = MediaQuery.sizeOf(context);
+    final dialogWidth = math.min(920.0, screen.width * 0.88).clamp(640.0, 920.0);
+    final dialogHeight = math.min(760.0, screen.height * 0.86).clamp(560.0, 760.0);
 
     return DefaultTabController(
-      length: 4,
-      initialIndex: widget.initialTab.clamp(0, 3),
+      length: 5,
+      initialIndex: widget.initialTab.clamp(0, 4),
       child: AlertDialog(
         title: Text(l10n.t('settings')),
         content: SizedBox(
-          width: 520,
-          height: 600,
+          width: dialogWidth,
+          height: dialogHeight,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -258,6 +284,10 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                     text: l10n.d('Presentatiestijl'),
                   ),
                   Tab(
+                    icon: const Icon(Icons.speed_outlined),
+                    text: l10n.d('Cockpit'),
+                  ),
+                  Tab(
                     icon: const Icon(Icons.privacy_tip_outlined),
                     text: l10n.d('Privacy'),
                   ),
@@ -270,6 +300,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                     _tabBody(_generalTab()),
                     _tabBody(_appearanceTab()),
                     _tabBody(_presentationStyleTab(profiles)),
+                    _tabBody(_cockpitTab()),
                     _tabBody(_privacyTab()),
                   ],
                 ),
@@ -773,6 +804,170 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           child: Text(
             help,
             style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _cockpitTab() {
+    final l10n = context.l10n;
+    final schemes = ref.watch(settingsProvider).cockpitColorSchemes;
+    final selectedName = schemes.any((s) => s.name == _originalCockpitName)
+        ? _originalCockpitName
+        : schemes.first.name;
+    final editable = !_cockpitScheme.isBuiltIn;
+    final mutedText = Theme.of(context).extension<AppPalette>()?.mutedText;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _sectionTitle(l10n.d('Cockpit-kleurschema')),
+        Text(
+          l10n.d(
+            'Standaard statuskleuren voor cockpit-meters zonder eigen kleuren. Maak benoemde varianten; per instrument kun je kleuren ook in de cockpit-editor overschrijven.',
+          ),
+          style: TextStyle(fontSize: 11, color: mutedText),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Expanded(
+              child: DropdownButtonFormField<String>(
+                initialValue: selectedName,
+                decoration: InputDecoration(
+                  labelText: l10n.d('Cockpit-kleurschema'),
+                  isDense: true,
+                ),
+                items: [
+                  for (final scheme in schemes)
+                    DropdownMenuItem(
+                      value: scheme.name,
+                      child: Row(
+                        children: [
+                          _appearanceDot(scheme.good),
+                          const SizedBox(width: 8),
+                          Text(scheme.name),
+                        ],
+                      ),
+                    ),
+                ],
+                onChanged: (name) {
+                  if (name == null) return;
+                  final scheme = schemes.firstWhere((s) => s.name == name);
+                  setState(() {
+                    _cockpitScheme = scheme;
+                    _originalCockpitName = scheme.name;
+                    _cockpitName.text = scheme.name;
+                  });
+                },
+              ),
+            ),
+            const SizedBox(width: 8),
+            IconButton(
+              tooltip: l10n.d('Kopie maken en aanpassen'),
+              onPressed: () async {
+                final created = await ref
+                    .read(settingsProvider.notifier)
+                    .createCockpitColorScheme(base: _cockpitScheme);
+                if (!mounted) return;
+                setState(() {
+                  _cockpitScheme = created;
+                  _originalCockpitName = created.name;
+                  _cockpitName.text = created.name;
+                });
+              },
+              icon: const Icon(Icons.add, size: 18),
+            ),
+            IconButton(
+              tooltip: l10n.d('Kleurschema verwijderen'),
+              onPressed: editable
+                  ? () async {
+                      await ref
+                          .read(settingsProvider.notifier)
+                          .deleteCockpitColorScheme(_cockpitScheme.name);
+                      if (!mounted) return;
+                      const scheme = CockpitColorScheme.standard;
+                      setState(() {
+                        _cockpitScheme = scheme;
+                        _originalCockpitName = scheme.name;
+                        _cockpitName.text = scheme.name;
+                      });
+                    }
+                  : null,
+              icon: const Icon(Icons.delete_outline, size: 18),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        TextField(
+          controller: _cockpitName,
+          enabled: editable,
+          decoration: InputDecoration(
+            labelText: l10n.d('Schemanaam'),
+            isDense: true,
+            prefixIcon: const Icon(Icons.badge_outlined, size: 18),
+          ),
+          onChanged: (value) {
+            if (value.trim().isNotEmpty) {
+              _cockpitScheme = _cockpitScheme.copyWith(name: value.trim());
+            }
+          },
+        ),
+        if (!editable)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text(
+              l10n.d(
+                'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.',
+              ),
+              style: TextStyle(fontSize: 11, color: mutedText),
+            ),
+          ),
+        const SizedBox(height: 16),
+        _appearanceColorSetting(
+          l10n.d('Goed'),
+          _cockpitScheme.good,
+          editable,
+          (v) =>
+              setState(() => _cockpitScheme = _cockpitScheme.copyWith(good: v)),
+        ),
+        _appearanceColorSetting(
+          l10n.d('Waarschuwing'),
+          _cockpitScheme.warning,
+          editable,
+          (v) => setState(
+            () => _cockpitScheme = _cockpitScheme.copyWith(warning: v),
+          ),
+        ),
+        _appearanceColorSetting(
+          l10n.d('Kritiek'),
+          _cockpitScheme.critical,
+          editable,
+          (v) => setState(
+            () => _cockpitScheme = _cockpitScheme.copyWith(critical: v),
+          ),
+        ),
+        _appearanceColorSetting(
+          l10n.d('Te laag (koud)'),
+          _cockpitScheme.cold,
+          editable,
+          (v) =>
+              setState(() => _cockpitScheme = _cockpitScheme.copyWith(cold: v)),
+        ),
+        _appearanceColorSetting(
+          l10n.d('Lucht (horizon)'),
+          _cockpitScheme.sky,
+          editable,
+          (v) =>
+              setState(() => _cockpitScheme = _cockpitScheme.copyWith(sky: v)),
+        ),
+        _appearanceColorSetting(
+          l10n.d('Grond (horizon)'),
+          _cockpitScheme.ground,
+          editable,
+          (v) => setState(
+            () => _cockpitScheme = _cockpitScheme.copyWith(ground: v),
           ),
         ),
       ],

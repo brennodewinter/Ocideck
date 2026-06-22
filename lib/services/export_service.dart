@@ -111,6 +111,7 @@ class ExportService {
     List<String>? notes,
     String? markdown,
     ThemeProfile? themeProfile,
+    CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     TlpLevel tlp = TlpLevel.none,
     ClassificationEnforcementPolicy enforcementPolicy =
         const ClassificationEnforcementPolicy(),
@@ -180,6 +181,7 @@ class ExportService {
               await _html.build(
                 markdown!,
                 theme: themeProfile,
+                cockpitColorScheme: cockpitColorScheme,
                 metadata: docMeta,
                 fallbackTitle: fallbackTitle,
               ),

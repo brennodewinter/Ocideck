@@ -21,7 +21,8 @@ Marp tools.
 Add a slide and pick a type: **title**, **section** divider, **bullets**, **two
 bullet columns**, **bullets + image**, **two images**, **large image**, **video**,
 **audio**, **quote**, **table**, **source code**, **chart** (bar, line, pie, or
-spider/radar), and **free Markdown**. Each card in the chooser shows a miniature
+spider/radar), **cockpit** (a dashboard of aviation-style instrument gauges), and
+**free Markdown**. Each card in the chooser shows a miniature
 wireframe of the layout, and the dialog works entirely with the keyboard
 (`Tab`/`Enter` to choose, `Esc` to cancel). Each type has a dedicated editor on
 the left and a live preview on the right.
@@ -430,5 +431,14 @@ Implementation: `lib/services/markdown_validator.dart` (unit tests in
   Colours and Logo tabs show which profile you're editing. The bundled Marp theme
   is `assets/themes/ocideck.css`.
 - **App appearance** (including a dark interface) is configurable in settings.
+- **Cockpit colour schemes** set the status colours of the cockpit instruments —
+  *good* (green), *warning* (amber), *critical* (red) and *too low/cold* (blue,
+  used below a meter's lower bound), plus the artificial horizon's *sky* (blue)
+  and *ground* (brown). Manage them on the **Cockpit** tab in
+  settings: the built-in *Standaard* scheme keeps the original colours, and you
+  can make a copy to create and name your own variants. The chosen scheme applies
+  to every cockpit slide — in the editor, the presenter and all exports. Like the
+  style profile, these colours are app settings and are not stored in the `.md`
+  file.
 - The interface is available in Dutch, English, Italian, German, French, Spanish,
   Frisian, and Papiamento.

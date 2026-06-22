@@ -29,6 +29,7 @@ class SlideRasterizer {
     required BuildContext context,
     required List<Slide> slides,
     required ThemeProfile themeProfile,
+    CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     required String? projectPath,
     TlpLevel tlp = TlpLevel.none,
     bool showClassificationWatermark = false,
@@ -74,6 +75,7 @@ class SlideRasterizer {
           initialSlide: slides.first,
           projectPath: projectPath,
           themeProfile: themeProfile,
+          cockpitColorScheme: cockpitColorScheme,
           slideCount: slides.length,
           tlp: tlp,
           showClassificationWatermark: showClassificationWatermark,
@@ -178,6 +180,7 @@ class _RasterSlideHost extends StatefulWidget {
   final Slide initialSlide;
   final String? projectPath;
   final ThemeProfile themeProfile;
+  final CockpitColorScheme cockpitColorScheme;
   final int slideCount;
   final TlpLevel tlp;
   final bool showClassificationWatermark;
@@ -189,6 +192,7 @@ class _RasterSlideHost extends StatefulWidget {
     required this.initialSlide,
     required this.projectPath,
     required this.themeProfile,
+    required this.cockpitColorScheme,
     required this.slideCount,
     required this.tlp,
     required this.showClassificationWatermark,
@@ -229,6 +233,7 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
           slide: _slide,
           projectPath: widget.projectPath,
           themeProfile: widget.themeProfile,
+          cockpitColorScheme: widget.cockpitColorScheme,
           slideNumber: _slideNumber,
           slideCount: widget.slideCount,
           tlp: widget.tlp,

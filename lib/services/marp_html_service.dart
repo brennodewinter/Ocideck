@@ -43,6 +43,7 @@ class MarpHtmlService {
   Future<String> build(
     String deckMarkdown, {
     ThemeProfile? theme,
+    CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     ExportDocumentMetadata? metadata,
     String fallbackTitle = 'Presentatie',
   }) async {
@@ -59,6 +60,7 @@ class MarpHtmlService {
       final renderedBlocks = renderCockpitBlocks(
         renderChartBlocks(slide, theme: theme),
         theme: theme,
+        scheme: cockpitColorScheme,
       );
       sections
         ..write('<section class="slide"><script type="text/markdown">')
@@ -160,14 +162,19 @@ class MarpHtmlService {
   static String renderCockpitBlocks(
     String slideMarkdown, {
     ThemeProfile? theme,
+    CockpitColorScheme scheme = CockpitColorScheme.standard,
   }) {
     return slideMarkdown.replaceAllMapped(_cockpitFence, (m) {
       final spec = CockpitSpec.parse(m.group(1)!);
-      return '\n<div class="cockpit">${_cockpitSvg(spec, theme)}</div>\n';
+      return '\n<div class="cockpit">${_cockpitSvg(spec, theme, scheme)}</div>\n';
     });
   }
 
-  static String _cockpitSvg(CockpitSpec spec, ThemeProfile? theme) {
+  static String _cockpitSvg(
+    CockpitSpec spec,
+    ThemeProfile? theme,
+    CockpitColorScheme scheme,
+  ) {
     final meters =
         (spec.meters.isEmpty ? CockpitSpec.pentestPreset().meters : spec.meters)
             .take(cockpitMaxMeters)
@@ -209,6 +216,7 @@ class MarpHtmlService {
         cellW - 20,
         cellH - 20,
         accent,
+        scheme,
       );
     }
     b.write('</svg>');
@@ -224,7 +232,9 @@ class MarpHtmlService {
     double w,
     double h,
     String accent,
+    CockpitColorScheme scheme,
   ) {
+    final colors = scheme;
     final cardH = math.max(80.0, h - 24);
     b
       ..write(
@@ -238,21 +248,21 @@ class MarpHtmlService {
       );
     switch (meter.type) {
       case CockpitMeterType.thermometer:
-        _thermometerSvg(b, meter, x, y, w, cardH);
+        _thermometerSvg(b, meter, x, y, w, cardH, colors);
         break;
       case CockpitMeterType.climbDescent:
-        _climbDescentSvg(b, meter, x, y, w, cardH);
+        _climbDescentSvg(b, meter, x, y, w, cardH, accent);
         break;
       case CockpitMeterType.horizon:
-        _horizonSvg(b, meter, index, x, y, w, cardH);
+        _horizonSvg(b, meter, index, x, y, w, cardH, colors);
         break;
       case CockpitMeterType.heading:
-        _headingSvg(b, meter, x, y, w, cardH, accent);
+        _headingSvg(b, meter, x, y, w, cardH, accent, colors);
         break;
       case CockpitMeterType.speedometer:
       case CockpitMeterType.voltmeter:
       case CockpitMeterType.altimeter:
-        _arcGaugeSvg(b, meter, x, y, w, cardH, accent);
+        _arcGaugeSvg(b, meter, x, y, w, cardH, accent, colors);
         break;
     }
   }
@@ -265,6 +275,7 @@ class MarpHtmlService {
     double w,
     double h,
     String accent,
+    CockpitColorScheme scheme,
   ) {
     final cx = x + w * .43;
     final cy = y + h * 0.52;
@@ -290,15 +301,15 @@ class MarpHtmlService {
       'stroke="#1E293B" stroke-width="12" stroke-linecap="round"/>',
     );
     if (meter.redFrom < meter.greenFrom) {
-      arc(meter.min, meter.redFrom, '#EF4444');
-      arc(meter.redFrom, meter.greenFrom, '#F59E0B');
-      arc(meter.greenFrom, meter.greenTo, '#22C55E');
-      arc(meter.greenTo, meter.max, '#F59E0B');
+      arc(meter.min, meter.redFrom, scheme.critical);
+      arc(meter.redFrom, meter.greenFrom, scheme.warning);
+      arc(meter.greenFrom, meter.greenTo, scheme.good);
+      arc(meter.greenTo, meter.max, scheme.warning);
     } else {
-      arc(meter.min, meter.greenFrom, '#F59E0B');
-      arc(meter.greenFrom, meter.greenTo, '#22C55E');
-      arc(meter.greenTo, meter.redFrom, '#F59E0B');
-      arc(meter.redFrom, meter.max, '#EF4444');
+      arc(meter.min, meter.greenFrom, scheme.warning);
+      arc(meter.greenFrom, meter.greenTo, scheme.good);
+      arc(meter.greenTo, meter.redFrom, scheme.warning);
+      arc(meter.redFrom, meter.max, scheme.critical);
     }
 
     final needle = angleFor(meter.value) * math.pi / 180;
@@ -332,6 +343,7 @@ class MarpHtmlService {
     double y,
     double w,
     double h,
+    CockpitColorScheme scheme,
   ) {
     final tubeX = x + w * .43;
     final top = y + 22;
@@ -340,11 +352,14 @@ class MarpHtmlService {
     final span = meter.max - meter.min == 0 ? 1.0 : meter.max - meter.min;
     final n = ((meter.value - meter.min) / span).clamp(0.0, 1.0);
     final fillTop = bottom - (bottom - top) * n;
+    final greenStart = math.min(meter.greenFrom, meter.greenTo);
     final color = meter.value >= meter.redFrom
-        ? '#EF4444'
+        ? scheme.critical
         : meter.value >= meter.greenTo
-        ? '#F59E0B'
-        : '#22C55E';
+        ? scheme.warning
+        : meter.value < greenStart
+        ? scheme.cold
+        : scheme.good;
     b
       ..write(
         '<rect x="${tubeX - 12}" y="${top - 9}" width="${tubeWidth + 24}" '
@@ -388,6 +403,7 @@ class MarpHtmlService {
     double y,
     double w,
     double h,
+    String accent,
   ) {
     final cx = x + w * .44;
     final cy = y + h * .52;
@@ -426,10 +442,10 @@ class MarpHtmlService {
         'font-size="18" font-weight="900" fill="#94A3B8">-</text>',
       )
       ..write(
-        '<line x1="$cx" y1="$cy" x2="$nx" y2="$ny" stroke="#38BDF8" '
+        '<line x1="$cx" y1="$cy" x2="$nx" y2="$ny" stroke="$accent" '
         'stroke-width="4" stroke-linecap="round"/>',
       )
-      ..write('<circle cx="$cx" cy="$cy" r="8" fill="#38BDF8"/>')
+      ..write('<circle cx="$cx" cy="$cy" r="8" fill="$accent"/>')
       ..write(
         '<text x="${x + w * .78}" y="${y + h * .56}" text-anchor="middle" '
         'font-size="18" font-weight="800" fill="#F8FAFC">'
@@ -445,6 +461,7 @@ class MarpHtmlService {
     double y,
     double w,
     double h,
+    CockpitColorScheme colors,
   ) {
     final cx = x + w * .44;
     final cy = y + h * .50;
@@ -459,9 +476,9 @@ class MarpHtmlService {
       ..write(
         '<g clip-path="url(#$clip)" transform="rotate($bank $cx $cy)">'
         '<rect x="${cx - r * 1.8}" y="${cy - r * 1.8 + pitchOffset}" '
-        'width="${r * 3.6}" height="${r * 1.8}" fill="#2563EB"/>'
+        'width="${r * 3.6}" height="${r * 1.8}" fill="${colors.sky}"/>'
         '<rect x="${cx - r * 1.8}" y="${cy + pitchOffset}" '
-        'width="${r * 3.6}" height="${r * 1.8}" fill="#92400E"/>'
+        'width="${r * 3.6}" height="${r * 1.8}" fill="${colors.ground}"/>'
         '<line x1="${cx - r * 1.8}" y1="${cy + pitchOffset}" '
         'x2="${cx + r * 1.8}" y2="${cy + pitchOffset}" '
         'stroke="#F8FAFC" stroke-width="3"/></g>',
@@ -488,6 +505,7 @@ class MarpHtmlService {
     double w,
     double h,
     String accent,
+    CockpitColorScheme scheme,
   ) {
     final cx = x + w / 2;
     final cy = y + h * .50;
@@ -517,7 +535,7 @@ class MarpHtmlService {
     b
       ..write(
         '<path d="M$markerTipX,$markerTipY L$markerLeftX,$markerLeftY '
-        'L$markerRightX,$markerRightY Z" fill="#F59E0B" fill-opacity=".95"/>',
+        'L$markerRightX,$markerRightY Z" fill="$accent" fill-opacity=".95"/>',
       )
       ..write(
         '<path d="M$cx,${cy - 10} L$tipX,$tipY L$cx,${cy + 10} Z" '

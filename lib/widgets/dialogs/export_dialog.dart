@@ -20,6 +20,7 @@ class ExportDialog extends StatefulWidget {
   final String deckPath;
   final List<Slide> slides;
   final ThemeProfile themeProfile;
+  final CockpitColorScheme cockpitColorScheme;
   final String? projectPath;
   final ExportService exportService;
   final TlpLevel tlp;
@@ -48,6 +49,7 @@ class ExportDialog extends StatefulWidget {
     required this.deckPath,
     required this.slides,
     required this.themeProfile,
+    this.cockpitColorScheme = CockpitColorScheme.standard,
     required this.projectPath,
     required this.exportService,
     this.tlp = TlpLevel.none,
@@ -66,6 +68,7 @@ class ExportDialog extends StatefulWidget {
     required String deckPath,
     required List<Slide> slides,
     required ThemeProfile themeProfile,
+    CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     required String? projectPath,
     required ExportService exportService,
     TlpLevel tlp = TlpLevel.none,
@@ -86,6 +89,7 @@ class ExportDialog extends StatefulWidget {
         deckPath: deckPath,
         slides: slides,
         themeProfile: themeProfile,
+        cockpitColorScheme: cockpitColorScheme,
         projectPath: projectPath,
         exportService: exportService,
         tlp: tlp,
@@ -203,6 +207,7 @@ class _ExportDialogState extends State<ExportDialog> {
             context: context,
             slides: widget.slides,
             themeProfile: widget.themeProfile,
+            cockpitColorScheme: widget.cockpitColorScheme,
             projectPath: widget.projectPath,
             tlp: widget.tlp,
             showClassificationWatermark: widget.showClassificationWatermark,
@@ -240,6 +245,7 @@ class _ExportDialogState extends State<ExportDialog> {
       notes: [for (final s in widget.slides) s.notes],
       markdown: widget.markdown,
       themeProfile: widget.themeProfile,
+      cockpitColorScheme: widget.cockpitColorScheme,
       tlp: widget.tlp,
       enforcementPolicy: widget.enforcementPolicy,
       qualityResult: widget.qualityResult,

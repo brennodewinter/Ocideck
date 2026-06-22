@@ -35,10 +35,19 @@ lib/
   List<InkStroke>>`) that is *never* serialized into the Markdown.
 - **`Slide`** is a single immutable value with a `SlideType` and typed fields. A
   few types reuse `customMarkdown` for their payload: free-Markdown (raw),
-  `code` (the source), and `chart` (the JSON spec).
+  `code` (the source), `chart` (the JSON spec), and `cockpit` (the JSON spec of
+  its instrument meters).
 - Slide ids are **regenerated on every parse**, so they are stable only within a
   session. Anything persisted that must survive a reload (annotations) re-anchors
   by slide order + a content fingerprint rather than by id.
+- **`CockpitColorScheme`** is a named set of cockpit status colours (good /
+  warning / critical / cold). Schemes live in `AppSettings` (a managed list plus
+  a globally selected name, mirroring `ThemeProfile`/`AppAppearanceProfile`), not
+  in the deck — the colours are styling. The active scheme is resolved from
+  settings and threaded into `SlidePreviewWidget` and the export chain alongside
+  `themeProfile`; the cockpit painter and the export SVG read the four colours
+  from it instead of hardcoded constants. For the beamer window it travels in the
+  transient audience payload, like the inlined style profile.
 
 ## Markdown round-trip
 

@@ -41,6 +41,19 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     final appearances = _mergeAppearanceProfiles(loadedAppearances);
     final selectedAppearance =
         prefs.getString('selectedAppAppearanceProfileName') ?? 'Basic';
+    final cockpitJson = prefs.getString('cockpitColorSchemes');
+    final loadedCockpitSchemes = cockpitJson == null
+        ? const <CockpitColorScheme>[]
+        : (jsonDecode(cockpitJson) as List)
+              .map(
+                (item) => CockpitColorScheme.fromJson(
+                  Map<String, Object?>.from(item as Map),
+                ),
+              )
+              .toList();
+    final cockpitSchemes = _mergeCockpitSchemes(loadedCockpitSchemes);
+    final selectedCockpit =
+        prefs.getString('selectedCockpitColorSchemeName') ?? 'Standaard';
     state = AppSettings(
       languageCode: prefs.getString('languageCode') ?? 'nl',
       homeDirectory: prefs.getString('homeDirectory'),
@@ -53,6 +66,11 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           appearances.any((profile) => profile.name == selectedAppearance)
           ? selectedAppearance
           : 'Basic',
+      cockpitColorSchemes: cockpitSchemes,
+      selectedCockpitColorSchemeName:
+          cockpitSchemes.any((scheme) => scheme.name == selectedCockpit)
+          ? selectedCockpit
+          : 'Standaard',
       recentFiles: prefs.getStringList('recentFiles') ?? [],
       maxReleaseExportTlpKey: prefs.getString('maxReleaseExportTlp'),
       minRequiredExportTlpKey: prefs.getString('minRequiredExportTlp'),
@@ -281,6 +299,119 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       selectedAppAppearanceProfileName: 'Basic',
     );
     await _saveAppearanceProfiles();
+  }
+
+  Future<void> selectCockpitColorScheme(String name) async {
+    if (!state.cockpitColorSchemes.any((scheme) => scheme.name == name)) {
+      return;
+    }
+    state = state.copyWith(selectedCockpitColorSchemeName: name);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedCockpitColorSchemeName', name);
+  }
+
+  Future<CockpitColorScheme> createCockpitColorScheme({
+    CockpitColorScheme? base,
+  }) async {
+    final source = base ?? state.cockpitColorScheme;
+    final created = source.copyWith(
+      name: _uniqueCockpitSchemeName('Eigen schema'),
+      isBuiltIn: false,
+    );
+    state = state.copyWith(
+      cockpitColorSchemes: [...state.cockpitColorSchemes, created],
+      selectedCockpitColorSchemeName: created.name,
+    );
+    await _saveCockpitSchemes();
+    return created;
+  }
+
+  Future<void> saveCockpitColorScheme(
+    CockpitColorScheme scheme, {
+    required String previousName,
+  }) async {
+    final existing = state.cockpitColorSchemes.firstWhere(
+      (item) => item.name == previousName,
+      orElse: () => scheme,
+    );
+    if (existing.isBuiltIn) return;
+    final name = _uniqueCockpitSchemeName(
+      scheme.name,
+      exceptName: previousName,
+    );
+    final saved = scheme.copyWith(name: name, isBuiltIn: false);
+    final schemes = [
+      for (final item in state.cockpitColorSchemes)
+        if (item.name == previousName) saved else item,
+    ];
+    state = state.copyWith(
+      cockpitColorSchemes: schemes,
+      selectedCockpitColorSchemeName: name,
+    );
+    await _saveCockpitSchemes();
+  }
+
+  Future<void> deleteCockpitColorScheme(String name) async {
+    final scheme = state.cockpitColorSchemes.firstWhere(
+      (item) => item.name == name,
+      orElse: () => CockpitColorScheme.standard,
+    );
+    if (scheme.isBuiltIn) return;
+    final schemes = state.cockpitColorSchemes
+        .where((item) => item.name != name)
+        .toList();
+    state = state.copyWith(
+      cockpitColorSchemes: schemes,
+      selectedCockpitColorSchemeName: 'Standaard',
+    );
+    await _saveCockpitSchemes();
+  }
+
+  Future<void> _saveCockpitSchemes() async {
+    final prefs = await SharedPreferences.getInstance();
+    final customSchemes = state.cockpitColorSchemes
+        .where((scheme) => !scheme.isBuiltIn)
+        .map((scheme) => scheme.toJson())
+        .toList();
+    await prefs.setString('cockpitColorSchemes', jsonEncode(customSchemes));
+    await prefs.setString(
+      'selectedCockpitColorSchemeName',
+      state.selectedCockpitColorSchemeName,
+    );
+  }
+
+  List<CockpitColorScheme> _mergeCockpitSchemes(
+    List<CockpitColorScheme> loaded,
+  ) {
+    final result = [...CockpitColorScheme.builtIns];
+    for (final scheme in loaded.where((scheme) => !scheme.isBuiltIn)) {
+      result.add(
+        scheme.copyWith(
+          name: _uniqueCockpitSchemeName(scheme.name, schemes: result),
+          isBuiltIn: false,
+        ),
+      );
+    }
+    return result;
+  }
+
+  String _uniqueCockpitSchemeName(
+    String rawName, {
+    List<CockpitColorScheme>? schemes,
+    String? exceptName,
+  }) {
+    final existing = schemes ?? state.cockpitColorSchemes;
+    final base = rawName.trim().isEmpty ? 'Eigen schema' : rawName.trim();
+    final used = existing
+        .map((scheme) => scheme.name)
+        .where((name) => name != exceptName)
+        .toSet();
+    if (!used.contains(base)) return base;
+    var index = 2;
+    while (used.contains('$base $index')) {
+      index++;
+    }
+    return '$base $index';
   }
 
   Future<void> _saveAppearanceProfiles() async {

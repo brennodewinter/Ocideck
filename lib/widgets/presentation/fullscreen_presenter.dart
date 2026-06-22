@@ -64,6 +64,7 @@ class FullscreenPresenter extends StatefulWidget {
   final List<Slide> slides;
   final String? projectPath;
   final ThemeProfile themeProfile;
+  final CockpitColorScheme cockpitColorScheme;
   final int initialIndex;
   final TlpLevel tlp;
   final String organization;
@@ -94,6 +95,7 @@ class FullscreenPresenter extends StatefulWidget {
     required this.slides,
     required this.projectPath,
     required this.themeProfile,
+    this.cockpitColorScheme = CockpitColorScheme.standard,
     required this.initialIndex,
     this.tlp = TlpLevel.none,
     this.organization = '',
@@ -115,6 +117,7 @@ class FullscreenPresenter extends StatefulWidget {
     required List<Slide> slides,
     required String? projectPath,
     required ThemeProfile themeProfile,
+    CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
     String organization = '',
@@ -147,6 +150,7 @@ class FullscreenPresenter extends StatefulWidget {
         slides: slides,
         projectPath: projectPath,
         themeProfile: themeProfile,
+        cockpitColorScheme: cockpitColorScheme,
         initialIndex: initialIndex,
         tlp: tlp,
         organization: organization,
@@ -164,6 +168,7 @@ class FullscreenPresenter extends StatefulWidget {
         slides: slides,
         projectPath: projectPath,
         themeProfile: themeProfile,
+        cockpitColorScheme: cockpitColorScheme,
         initialIndex: initialIndex,
         tlp: tlp,
         organization: organization,
@@ -183,6 +188,7 @@ class FullscreenPresenter extends StatefulWidget {
     required List<Slide> slides,
     required String? projectPath,
     required ThemeProfile themeProfile,
+    CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
     String organization = '',
@@ -207,6 +213,7 @@ class FullscreenPresenter extends StatefulWidget {
               slides: slides,
               projectPath: projectPath,
               themeProfile: themeProfile,
+              cockpitColorScheme: cockpitColorScheme,
               initialIndex: initialIndex,
               tlp: tlp,
               organization: organization,
@@ -238,6 +245,7 @@ class FullscreenPresenter extends StatefulWidget {
     required List<Slide> slides,
     required String? projectPath,
     required ThemeProfile themeProfile,
+    CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
     String organization = '',
@@ -279,6 +287,9 @@ class FullscreenPresenter extends StatefulWidget {
       'index': initialIndex,
       'ink': inkByIndex,
       'classificationWatermarkEnabled': showClassificationWatermark,
+      // The cockpit colour scheme is styling, so it travels with the transient
+      // beamer payload (like the inlined style profile) rather than the deck.
+      'cockpitColorScheme': cockpitColorScheme.toJson(),
     });
 
     WindowController? audience;
@@ -309,6 +320,7 @@ class FullscreenPresenter extends StatefulWidget {
           slides: slides,
           projectPath: projectPath,
           themeProfile: themeProfile,
+          cockpitColorScheme: cockpitColorScheme,
           initialIndex: initialIndex,
           tlp: tlp,
           organization: organization,
@@ -335,6 +347,7 @@ class FullscreenPresenter extends StatefulWidget {
               slides: slides,
               projectPath: projectPath,
               themeProfile: themeProfile,
+              cockpitColorScheme: cockpitColorScheme,
               initialIndex: initialIndex,
               tlp: tlp,
               organization: organization,
@@ -764,14 +777,20 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     final updated = slide.copyWith(tableRows: rows);
     setState(() => widget.slides[slideIndex] = updated);
     widget.onSlideChanged?.call(updated);
-    if (_dual) {
-      audienceChannel
-          .invokeMethod('tableUpdate', {
-            'slideIndex': slideIndex,
-            'tableRows': updated.tableRows,
-          })
-          .catchError((_) => null);
-    }
+    _pushTableToAudience(slideIndex, updated);
+  }
+
+  /// Vult vanaf cel (row, col) een geplakte tabel in en laat het raster
+  /// meegroeien, zodat plakken net als in de editor rijen/kolommen toevoegt.
+  /// Spiegel een tabelwijziging naar het publieksscherm (alleen bij dual).
+  void _pushTableToAudience(int slideIndex, Slide updated) {
+    if (!_dual) return;
+    audienceChannel
+        .invokeMethod('tableUpdate', {
+          'slideIndex': slideIndex,
+          'tableRows': updated.tableRows,
+        })
+        .catchError((_) => null);
   }
 
   void _moveTableCell({required int dRow, required int dCol}) {
@@ -784,6 +803,61 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     final row = (_tableEditRow ?? 0) + dRow;
     final col = (_tableEditCol ?? 0) + dCol;
     if (row < 0 || col < 0 || row >= rowCount || col >= colCount) return;
+    _selectTableCell(row, col);
+  }
+
+  /// Voegt onderaan de tabel een lege rij toe en selecteert de eerste cel
+  /// ervan. Werkt ook terwijl een cel in bewerking is (geen [_textFieldFocused]
+  /// guard), zodat Tab op de laatste cel een rij kan aanmaken.
+  void _addTableRow() {
+    if (!_tableEditMode) return;
+    final slideIndex = _index.clamp(0, widget.slides.length - 1);
+    final slide = widget.slides[slideIndex];
+    if (slide.type != SlideType.table) return;
+    final rows = slide.tableRows.map((r) => List<String>.from(r)).toList();
+    final colCount = rows.fold<int>(1, (m, r) => r.length > m ? r.length : m);
+    rows.add(List<String>.filled(colCount, ''));
+    final updated = slide.copyWith(tableRows: rows);
+    setState(() {
+      widget.slides[slideIndex] = updated;
+      _tableEditRow = rows.length - 1;
+      _tableEditCol = 0;
+    });
+    widget.onSlideChanged?.call(updated);
+    _pushTableToAudience(slideIndex, updated);
+  }
+
+  /// Tab loopt door de cellen: aan het einde van een rij naar de volgende
+  /// rij, en op de allerlaatste cel voegt het onderaan een nieuwe rij toe.
+  /// Shift+Tab loopt terug en stopt bij de eerste cel.
+  void _tabTableCell({required bool backwards}) {
+    if (!_tableEditMode) return;
+    final slide = _currentSlide;
+    if (slide.type != SlideType.table) return;
+    final rows = slide.tableRows.where((r) => r.isNotEmpty).toList();
+    if (rows.isEmpty) return;
+    final rowCount = rows.length;
+    final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
+    var row = _tableEditRow ?? 0;
+    var col = _tableEditCol ?? 0;
+    if (backwards) {
+      col -= 1;
+      if (col < 0) {
+        if (row == 0) return;
+        row -= 1;
+        col = colCount - 1;
+      }
+    } else {
+      col += 1;
+      if (col >= colCount) {
+        col = 0;
+        row += 1;
+      }
+      if (row >= rowCount) {
+        _addTableRow();
+        return;
+      }
+    }
     _selectTableCell(row, col);
   }
 
@@ -1639,10 +1713,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           _toggleTableEditMode();
           return KeyEventResult.handled;
         case LogicalKeyboardKey.tab:
-          _moveTableCell(
-            dRow: 0,
-            dCol: HardwareKeyboard.instance.isShiftPressed ? -1 : 1,
-          );
+          _tabTableCell(backwards: HardwareKeyboard.instance.isShiftPressed);
           return KeyEventResult.handled;
         default:
           return KeyEventResult.ignored;
@@ -1668,10 +1739,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           _selectTableCell(_tableEditRow!, _tableEditCol!);
         }
       case LogicalKeyboardKey.tab:
-        _moveTableCell(
-          dRow: 0,
-          dCol: HardwareKeyboard.instance.isShiftPressed ? -1 : 1,
-        );
+        _tabTableCell(backwards: HardwareKeyboard.instance.isShiftPressed);
       default:
         return KeyEventResult.ignored;
     }
@@ -2163,6 +2231,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                   slide: slide,
                   projectPath: widget.projectPath,
                   themeProfile: widget.themeProfile,
+                  cockpitColorScheme: widget.cockpitColorScheme,
                   onLinkTap: openExternalUrl,
                   slideNumber: _index + 1,
                   slideCount: widget.slides.length,
@@ -2324,6 +2393,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                               slide: nextSlide,
                               projectPath: widget.projectPath,
                               themeProfile: widget.themeProfile,
+                              cockpitColorScheme: widget.cockpitColorScheme,
                               tlp: widget.tlp,
                               organization: widget.organization,
                               showClassificationWatermark:
@@ -2846,6 +2916,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                       slide: widget.slides[i],
                       projectPath: widget.projectPath,
                       themeProfile: widget.themeProfile,
+                      cockpitColorScheme: widget.cockpitColorScheme,
                       tlp: widget.tlp,
                       organization: widget.organization,
                       showClassificationWatermark:
