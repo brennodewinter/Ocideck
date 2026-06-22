@@ -825,7 +825,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         _sectionTitle(l10n.d('Cockpit-kleurschema')),
         Text(
           l10n.d(
-            'Standaard statuskleuren voor cockpit-meters zonder eigen kleuren. Maak benoemde varianten; per instrument kun je kleuren ook in de cockpit-editor overschrijven.',
+            'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.',
           ),
           style: TextStyle(fontSize: 11, color: mutedText),
         ),
