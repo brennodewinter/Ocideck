@@ -949,6 +949,7 @@ class MarkdownService {
     final tableLines = <String>[];
     final richTextLines = <String>[];
     var richTextHeaderPhase = listStyle == ListStyle.richText;
+    final isTwoBullets = cssClass.split(RegExp(r'\s+')).contains('two-bullets');
 
     for (final line in lines) {
       if (listStyle == ListStyle.richText) {
@@ -1000,6 +1001,19 @@ class MarkdownService {
       }
 
       final t = line.trim();
+      if (isTwoBullets) {
+        // Two-column bullets keep their canonical data in the
+        // ocideck_two_bullets_* comments (already decoded above). The visible
+        // <div> with its <li> items is display-only and must not be re-parsed
+        // into `bullets`, or the columns get duplicated on every round-trip.
+        // Only the heading lines still carry the title/subtitle.
+        if (t.startsWith('# ')) {
+          h1 = t.substring(2);
+        } else if (t.startsWith('## ')) {
+          h2 = t.substring(3);
+        }
+        continue;
+      }
       final htmlItems = RegExp(
         r'<li[^>]*>(.*?)</li>',
         caseSensitive: false,
