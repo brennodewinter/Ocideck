@@ -2549,6 +2549,33 @@ const _dutchSourceStrings = {
 
 const _dutchSourceStringAdditions = {
   'en': {
+    'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+        'The image is shown full-screen as a background. Use the blur when the title needs more calm or contrast.',
+    'Cockpit-kleurschema': 'Cockpit colour scheme',
+    'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+        'The status colours of the cockpit meters. Create named variants; the chosen scheme applies to all cockpit slides.',
+    'Standaard statuskleuren voor cockpit-meters zonder eigen kleuren. Maak benoemde varianten; per instrument kun je kleuren ook in de cockpit-editor overschrijven.':
+        'Default status colours for cockpit meters without their own colours. Create named variants; you can also override colours per instrument in the cockpit editor.',
+    'Statuskleuren (per instrument)': 'Status colours (per instrument)',
+    'Standaard': 'Default',
+    'Standaardkleuren gebruiken': 'Use default colours',
+    'Stel per meter statuskleuren in, of laat het standaardschema uit Instellingen → Cockpit gelden.':
+        'Set status colours per meter, or use the default scheme from Settings → Cockpit.',
+    'Kleurschema verwijderen': 'Delete colour scheme',
+    'Schemanaam': 'Scheme name',
+    'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+        'This is the built-in scheme. Make a copy to adjust colours.',
+    'Goed': 'Good',
+    'Waarschuwing': 'Warning',
+    'Kritiek': 'Critical',
+    'Te laag (koud)': 'Too low (cold)',
+    'Lucht (horizon)': 'Sky (horizon)',
+    'Grond (horizon)': 'Ground (horizon)',
+    'Hex-kleur': 'Hex colour',
+    'Pijltjes · Tab voegt rij toe · E of Esc':
+        'Arrow keys · Tab adds a row · E or Esc',
+    'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+        'The status colours follow the cockpit colour scheme; adjust it or create variants via Settings → Cockpit.',
     'Veel bullets op deze slide': 'Many bullets on this slide',
     'bullets': 'bullets',
     'Overweeg de inhoud te splitsen.': 'Consider splitting the content.',
@@ -2896,6 +2923,33 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Scatter',
   },
   'it': {
+    'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+        'L\'immagine viene mostrata a schermo intero come sfondo. Usa la sfocatura quando il titolo ha bisogno di più calma o contrasto.',
+    'Cockpit-kleurschema': 'Schema colori cockpit',
+    'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+        'I colori di stato degli strumenti del cockpit. Crea varianti con nome; lo schema scelto vale per tutte le slide cockpit.',
+    'Standaard statuskleuren voor cockpit-meters zonder eigen kleuren. Maak benoemde varianten; per instrument kun je kleuren ook in de cockpit-editor overschrijven.':
+        'Colori di stato predefiniti per strumenti senza colori propri. Crea varianti con nome; puoi anche sovrascrivere i colori per strumento nell\'editor cockpit.',
+    'Statuskleuren (per instrument)': 'Colori di stato (per strumento)',
+    'Standaard': 'Predefinito',
+    'Standaardkleuren gebruiken': 'Usa colori predefiniti',
+    'Stel per meter statuskleuren in, of laat het standaardschema uit Instellingen → Cockpit gelden.':
+        'Imposta i colori di stato per strumento, oppure usa lo schema predefinito da Impostazioni → Cockpit.',
+    'Kleurschema verwijderen': 'Elimina schema colori',
+    'Schemanaam': 'Nome schema',
+    'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+        'Questo è lo schema integrato. Crea una copia per modificare i colori.',
+    'Goed': 'Buono',
+    'Waarschuwing': 'Avviso',
+    'Kritiek': 'Critico',
+    'Te laag (koud)': 'Troppo basso (freddo)',
+    'Lucht (horizon)': 'Cielo (orizzonte)',
+    'Grond (horizon)': 'Terreno (orizzonte)',
+    'Hex-kleur': 'Colore esadecimale',
+    'Pijltjes · Tab voegt rij toe · E of Esc':
+        'Frecce · Tab aggiunge una riga · E o Esc',
+    'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+        'I colori di stato seguono lo schema colori del cockpit; modificalo o crea varianti tramite Impostazioni → Cockpit.',
     'Veel bullets op deze slide': 'Many bullets on this slide',
     'bullets': 'bullets',
     'Overweeg de inhoud te splitsen.': 'Consider splitting the content.',
@@ -3422,6 +3476,33 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Dispersione',
   },
   'de': {
+    'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+        'Das Bild wird bildschirmfüllend als Hintergrund angezeigt. Nutze die Unschärfe, wenn der Titel mehr Ruhe oder Kontrast braucht.',
+    'Cockpit-kleurschema': 'Cockpit-Farbschema',
+    'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+        'Die Statusfarben der Cockpit-Instrumente. Erstelle benannte Varianten; das gewählte Schema gilt für alle Cockpit-Folien.',
+    'Standaard statuskleuren voor cockpit-meters zonder eigen kleuren. Maak benoemde varianten; per instrument kun je kleuren ook in de cockpit-editor overschrijven.':
+        'Standard-Statusfarben für Cockpit-Instrumente ohne eigene Farben. Erstelle benannte Varianten; pro Instrument kannst du Farben auch im Cockpit-Editor überschreiben.',
+    'Statuskleuren (per instrument)': 'Statusfarben (pro Instrument)',
+    'Standaard': 'Standard',
+    'Standaardkleuren gebruiken': 'Standardfarben verwenden',
+    'Stel per meter statuskleuren in, of laat het standaardschema uit Instellingen → Cockpit gelden.':
+        'Statusfarben pro Instrument festlegen oder das Standardschema unter Einstellungen → Cockpit verwenden.',
+    'Kleurschema verwijderen': 'Farbschema löschen',
+    'Schemanaam': 'Schemaname',
+    'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+        'Dies ist das integrierte Schema. Erstelle eine Kopie, um Farben anzupassen.',
+    'Goed': 'Gut',
+    'Waarschuwing': 'Warnung',
+    'Kritiek': 'Kritisch',
+    'Te laag (koud)': 'Zu niedrig (kalt)',
+    'Lucht (horizon)': 'Himmel (Horizont)',
+    'Grond (horizon)': 'Boden (Horizont)',
+    'Hex-kleur': 'Hex-Farbe',
+    'Pijltjes · Tab voegt rij toe · E of Esc':
+        'Pfeiltasten · Tab fügt Zeile hinzu · E oder Esc',
+    'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+        'Die Statusfarben folgen dem Cockpit-Farbschema; passe es an oder erstelle Varianten über Einstellungen → Cockpit.',
     'Veel bullets op deze slide': 'Many bullets on this slide',
     'bullets': 'bullets',
     'Overweeg de inhoud te splitsen.': 'Consider splitting the content.',
@@ -3947,6 +4028,33 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Streudiagramm',
   },
   'fr': {
+    'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+        'L\'image est affichée en plein écran en arrière-plan. Utilisez le flou lorsque le titre a besoin de plus de calme ou de contraste.',
+    'Cockpit-kleurschema': 'Schéma de couleurs du cockpit',
+    'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+        'Les couleurs d\'état des instruments du cockpit. Créez des variantes nommées ; le schéma choisi s\'applique à toutes les diapositives cockpit.',
+    'Standaard statuskleuren voor cockpit-meters zonder eigen kleuren. Maak benoemde varianten; per instrument kun je kleuren ook in de cockpit-editor overschrijven.':
+        'Couleurs d\'état par défaut pour les instruments sans couleurs propres. Créez des variantes nommées ; vous pouvez aussi remplacer les couleurs par instrument dans l\'éditeur cockpit.',
+    'Statuskleuren (per instrument)': 'Couleurs d\'état (par instrument)',
+    'Standaard': 'Par défaut',
+    'Standaardkleuren gebruiken': 'Utiliser les couleurs par défaut',
+    'Stel per meter statuskleuren in, of laat het standaardschema uit Instellingen → Cockpit gelden.':
+        'Définissez les couleurs d\'état par instrument, ou utilisez le schéma par défaut via Réglages → Cockpit.',
+    'Kleurschema verwijderen': 'Supprimer le schéma de couleurs',
+    'Schemanaam': 'Nom du schéma',
+    'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+        'Ceci est le schéma intégré. Faites une copie pour modifier les couleurs.',
+    'Goed': 'Bon',
+    'Waarschuwing': 'Avertissement',
+    'Kritiek': 'Critique',
+    'Te laag (koud)': 'Trop bas (froid)',
+    'Lucht (horizon)': 'Ciel (horizon)',
+    'Grond (horizon)': 'Sol (horizon)',
+    'Hex-kleur': 'Couleur hex',
+    'Pijltjes · Tab voegt rij toe · E of Esc':
+        'Flèches · Tab ajoute une ligne · E ou Échap',
+    'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+        'Les couleurs d\'état suivent le schéma de couleurs du cockpit ; modifiez-le ou créez des variantes via Réglages → Cockpit.',
     'Veel bullets op deze slide': 'Many bullets on this slide',
     'bullets': 'bullets',
     'Overweeg de inhoud te splitsen.': 'Consider splitting the content.',
@@ -4476,6 +4584,33 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Nuage de points',
   },
   'es': {
+    'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+        'La imagen se muestra a pantalla completa como fondo. Usa el desenfoque cuando el título necesite más calma o contraste.',
+    'Cockpit-kleurschema': 'Esquema de colores del cockpit',
+    'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+        'Los colores de estado de los instrumentos del cockpit. Crea variantes con nombre; el esquema elegido se aplica a todas las diapositivas cockpit.',
+    'Standaard statuskleuren voor cockpit-meters zonder eigen kleuren. Maak benoemde varianten; per instrument kun je kleuren ook in de cockpit-editor overschrijven.':
+        'Colores de estado predeterminados para instrumentos sin colores propios. Crea variantes con nombre; también puedes sobrescribir colores por instrumento en el editor de cockpit.',
+    'Statuskleuren (per instrument)': 'Colores de estado (por instrumento)',
+    'Standaard': 'Predeterminado',
+    'Standaardkleuren gebruiken': 'Usar colores predeterminados',
+    'Stel per meter statuskleuren in, of laat het standaardschema uit Instellingen → Cockpit gelden.':
+        'Configura colores de estado por instrumento, o usa el esquema predeterminado en Ajustes → Cockpit.',
+    'Kleurschema verwijderen': 'Eliminar esquema de colores',
+    'Schemanaam': 'Nombre del esquema',
+    'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+        'Este es el esquema integrado. Haz una copia para ajustar los colores.',
+    'Goed': 'Bien',
+    'Waarschuwing': 'Advertencia',
+    'Kritiek': 'Crítico',
+    'Te laag (koud)': 'Demasiado bajo (frío)',
+    'Lucht (horizon)': 'Cielo (horizonte)',
+    'Grond (horizon)': 'Suelo (horizonte)',
+    'Hex-kleur': 'Color hex',
+    'Pijltjes · Tab voegt rij toe · E of Esc':
+        'Flechas · Tab añade una fila · E o Esc',
+    'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+        'Los colores de estado siguen el esquema de colores del cockpit; ajústalo o crea variantes en Ajustes → Cockpit.',
     'Veel bullets op deze slide': 'Many bullets on this slide',
     'bullets': 'bullets',
     'Overweeg de inhoud te splitsen.': 'Consider splitting the content.',
@@ -5003,6 +5138,33 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Dispersión',
   },
   'fy': {
+    'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+        'De ôfbylding wurdt skermfoljend as eftergrûn toand. Brûk de waas as de titel mear rêst of kontrast nedich hat.',
+    'Cockpit-kleurschema': 'Cockpit-kleurskema',
+    'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+        'De statuskleuren fan de cockpitmeters. Meitsje beneamde farianten; it keazen skema jildt foar alle cockpit-slides.',
+    'Standaard statuskleuren voor cockpit-meters zonder eigen kleuren. Maak benoemde varianten; per instrument kun je kleuren ook in de cockpit-editor overschrijven.':
+        'Standert statuskleuren foar cockpitmeters sûnder eigen kleuren. Meitsje beneamde farianten; per ynstrumint kinst kleuren ek yn de cockpit-bewurker oerskriuwe.',
+    'Statuskleuren (per instrument)': 'Statuskleuren (per ynstrumint)',
+    'Standaard': 'Standert',
+    'Standaardkleuren gebruiken': 'Standertkleuren brûke',
+    'Stel per meter statuskleuren in, of laat het standaardschema uit Instellingen → Cockpit gelden.':
+        'Stel statuskleuren yn per meter, of brûk it standertskema út Ynstellingen → Cockpit.',
+    'Kleurschema verwijderen': 'Kleurskema fuortsmite',
+    'Schemanaam': 'Skemanamme',
+    'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+        'Dit is it ynboude skema. Meitsje in kopy om kleuren oan te passen.',
+    'Goed': 'Goed',
+    'Waarschuwing': 'Warskôging',
+    'Kritiek': 'Kritysk',
+    'Te laag (koud)': 'Te leech (kâld)',
+    'Lucht (horizon)': 'Loft (hoarizon)',
+    'Grond (horizon)': 'Grûn (hoarizon)',
+    'Hex-kleur': 'Heks-kleur',
+    'Pijltjes · Tab voegt rij toe · E of Esc':
+        'Pylkjes · Tab foeget rige ta · E of Esc',
+    'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+        'De statuskleuren folgje it cockpit-kleurskema; pas it oan of meitsje farianten fia Ynstellingen → Cockpit.',
     'Veel bullets op deze slide': 'Many bullets on this slide',
     'bullets': 'bullets',
     'Overweeg de inhoud te splitsen.': 'Consider splitting the content.',
@@ -5514,6 +5676,33 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Sparring',
   },
   'pap': {
+    'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+        'E imagen ta wòrdu mustrá na pantaya kompleto komo fondo. Usa e waas ora e título mester di mas trankilidat òf kontraste.',
+    'Cockpit-kleurschema': 'Skema di koló di cockpit',
+    'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+        'E kolónan di estado di e meternan di cockpit. Krea variantenan ku nòmber; e skema skohé ta konta pa tur slide di cockpit.',
+    'Standaard statuskleuren voor cockpit-meters zonder eigen kleuren. Maak benoemde varianten; per instrument kun je kleuren ook in de cockpit-editor overschrijven.':
+        'Koló di estado standart pa meternan sin koló propio. Krea variantenan ku nòmber; bo por sobreskríbí koló pa instrumento den e editor di cockpit.',
+    'Statuskleuren (per instrument)': 'Koló di estado (pa instrumento)',
+    'Standaard': 'Standart',
+    'Standaardkleuren gebruiken': 'Usa koló standart',
+    'Stel per meter statuskleuren in, of laat het standaardschema uit Instellingen → Cockpit gelden.':
+        'Stelá koló di estado pa instrumento, òf usa e skema standart for di Konfigurashon → Cockpit.',
+    'Kleurschema verwijderen': 'Kita skema di koló',
+    'Schemanaam': 'Nòmber di skema',
+    'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+        'Esaki ta e skema inkorporá. Hasi un kopia pa ahustá e kolónan.',
+    'Goed': 'Bon',
+    'Waarschuwing': 'Atvertensia',
+    'Kritiek': 'Krítiko',
+    'Te laag (koud)': 'Muchu abou (friu)',
+    'Lucht (horizon)': 'Shelu (horizonte)',
+    'Grond (horizon)': 'Suela (horizonte)',
+    'Hex-kleur': 'Koló hex',
+    'Pijltjes · Tab voegt rij toe · E of Esc':
+        'Flecha · Tab ta agregá un fila · E òf Esc',
+    'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+        'E kolónan di estado ta sigui e skema di koló di cockpit; ahust\'é òf krea variantenan via Konfigurashon → Cockpit.',
     'Veel bullets op deze slide': 'Many bullets on this slide',
     'bullets': 'bullets',
     'Overweeg de inhoud te splitsen.': 'Consider splitting the content.',

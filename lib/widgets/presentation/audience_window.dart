@@ -39,6 +39,7 @@ class AudienceWindowApp extends StatefulWidget {
 class _AudienceWindowAppState extends State<AudienceWindowApp> {
   List<Slide> _slides = const [];
   ThemeProfile _theme = const ThemeProfile();
+  CockpitColorScheme _scheme = CockpitColorScheme.standard;
   TlpLevel _tlp = TlpLevel.none;
   String _organization = '';
   bool _showClassificationWatermark = false;
@@ -65,6 +66,12 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     final deck = MarkdownService().parseDeck(markdown);
     _slides = deck?.slides ?? const [];
     _theme = deck?.themeProfile ?? const ThemeProfile();
+    final schemeJson = widget.args['cockpitColorScheme'];
+    if (schemeJson is Map) {
+      _scheme = CockpitColorScheme.fromJson(
+        Map<String, Object?>.from(schemeJson),
+      );
+    }
     _tlp = deck?.tlp ?? TlpLevel.none;
     _organization = deck?.organization ?? '';
     _showClassificationWatermark =
@@ -212,6 +219,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                   slide: slide,
                   projectPath: _projectPath,
                   themeProfile: _theme,
+                  cockpitColorScheme: _scheme,
                   onLinkTap: openExternalUrl,
                   slideNumber: _index + 1,
                   slideCount: _slides.length,

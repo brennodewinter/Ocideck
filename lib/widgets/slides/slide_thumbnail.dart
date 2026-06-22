@@ -122,6 +122,8 @@ class SlideThumbnail extends ConsumerWidget {
                             slide: slide,
                             projectPath: projectPath,
                             themeProfile: themeProfile,
+                            cockpitColorScheme:
+                                ref.watch(settingsProvider).cockpitColorScheme,
                             slideNumber: index + 1,
                             slideCount: slideCount,
                             tlp: tlp,

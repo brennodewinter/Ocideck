@@ -163,6 +163,12 @@ has these fields (with defaults):
 
 Unknown or missing fields fall back to defaults, so older files migrate cleanly.
 
+> **Cockpit status colours are not part of the style profile or the file.** The
+> cockpit instruments use a named *cockpit colour scheme* (good / warning /
+> critical / cold) that is an app-level setting, selected globally and applied at
+> render time. It is intentionally kept out of the deck `.md` so the file stays
+> pure content.
+
 ---
 
 ## 4. Slide Classes and Behavior

@@ -249,6 +249,60 @@ void main() {}
     expect(html, isNot(contains('```cockpit')));
   });
 
+  test('cockpit SVG uses the active colour scheme', () {
+    final block = CockpitSpec(
+      meters: const [
+        CockpitMeterSpec(
+          label: 'Risk',
+          value: 30,
+          greenFrom: 0,
+          greenTo: 40,
+          redFrom: 70,
+        ),
+      ],
+    ).toBlock();
+    final slide = '```cockpit\n$block\n```';
+
+    const scheme = CockpitColorScheme(
+      name: 'Test',
+      good: '#0AA0FF',
+      warning: '#FF22AA',
+      critical: '#00FF7F',
+      cold: '#123456',
+    );
+    final html = MarpHtmlService.renderCockpitBlocks(slide, scheme: scheme);
+
+    // The green zone of the speedometer now uses the scheme colour, not the
+    // previously hardcoded green.
+    expect(html, contains('#0AA0FF'));
+    expect(html, isNot(contains('#22C55E')));
+  });
+
+  test('cockpit horizon SVG uses the scheme sky and ground colours', () {
+    final block = CockpitSpec(
+      meters: const [
+        CockpitMeterSpec(
+          type: CockpitMeterType.horizon,
+          pitch: 5,
+          bank: 10,
+        ),
+      ],
+    ).toBlock();
+    final slide = '```cockpit\n$block\n```';
+
+    const scheme = CockpitColorScheme(
+      name: 'Test',
+      sky: '#0EA5E9',
+      ground: '#7C4A12',
+    );
+    final html = MarpHtmlService.renderCockpitBlocks(slide, scheme: scheme);
+
+    expect(html, contains('#0EA5E9')); // sky
+    expect(html, contains('#7C4A12')); // ground
+    expect(html, isNot(contains('#2563EB'))); // not the hardcoded sky
+    expect(html, isNot(contains('#92400E'))); // not the hardcoded ground
+  });
+
   test('bar chart SVG draws optional min/max bound lines with labels', () {
     const slide = '''
 ```chart

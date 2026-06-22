@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/cockpit.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
@@ -96,6 +97,69 @@ void main() {
       MaterialApp(
         home: Center(
           child: SizedBox(width: 640, child: SlidePreviewWidget(slide: slide)),
+        ),
+      ),
+    );
+
+    expect(tester.takeException(), isNull);
+    expect(find.byType(SlidePreviewWidget), findsOneWidget);
+  });
+
+  test('CockpitColorScheme round-trips through JSON', () {
+    const scheme = CockpitColorScheme(
+      name: 'Koud thema',
+      good: '#11AA22',
+      warning: '#FFAA00',
+      critical: '#CC0000',
+      cold: '#0066FF',
+      sky: '#0EA5E9',
+      ground: '#7C4A12',
+    );
+
+    final back = CockpitColorScheme.fromJson(scheme.toJson());
+
+    expect(back.name, 'Koud thema');
+    expect(back.isBuiltIn, isFalse);
+    expect(back.good, '#11AA22');
+    expect(back.warning, '#FFAA00');
+    expect(back.critical, '#CC0000');
+    expect(back.cold, '#0066FF');
+    expect(back.sky, '#0EA5E9');
+    expect(back.ground, '#7C4A12');
+  });
+
+  testWidgets('preview renders with a custom cockpit colour scheme', (
+    tester,
+  ) async {
+    final slide = Slide.create(SlideType.cockpit).copyWith(
+      customMarkdown: CockpitSpec(
+        meters: const [
+          CockpitMeterSpec(
+            type: CockpitMeterType.thermometer,
+            min: 0,
+            max: 10,
+            greenFrom: 2,
+            greenTo: 6,
+            redFrom: 8,
+            value: 1,
+          ),
+          CockpitMeterSpec(value: 78),
+        ],
+      ).toBlock(),
+    );
+    const scheme = CockpitColorScheme(
+      name: 'Test',
+      good: '#11AA22',
+      cold: '#0066FF',
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Center(
+          child: SizedBox(
+            width: 640,
+            child: SlidePreviewWidget(slide: slide, cockpitColorScheme: scheme),
+          ),
         ),
       ),
     );

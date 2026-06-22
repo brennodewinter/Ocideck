@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/github.dart';
@@ -143,6 +144,11 @@ class SlidePreviewWidget extends StatelessWidget {
   final String? projectPath;
   final ThemeProfile themeProfile;
 
+  /// Actief cockpit-kleurschema (statuskleuren goed/waarschuwing/kritiek/koud).
+  /// Globaal geselecteerd in de instellingen; alleen cockpit-slides gebruiken
+  /// het. Default = het ingebouwde standaardschema.
+  final CockpitColorScheme cockpitColorScheme;
+
   /// Het lettertype hoort bij de stijl (themeProfile), niet bij de app.
   String get fontFamily => themeProfile.fontFamily;
 
@@ -209,6 +215,7 @@ class SlidePreviewWidget extends StatelessWidget {
     required this.slide,
     this.projectPath,
     this.themeProfile = const ThemeProfile(),
+    this.cockpitColorScheme = CockpitColorScheme.standard,
     this.onLinkTap,
     this.slideNumber,
     this.slideCount,
@@ -482,6 +489,7 @@ class SlidePreviewWidget extends StatelessWidget {
           w: w,
           font: fontFamily,
           profile: themeProfile,
+          scheme: cockpitColorScheme,
           presentationMode: presentationMode,
         );
     }

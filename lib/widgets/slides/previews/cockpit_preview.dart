@@ -5,6 +5,7 @@ class _CockpitPreview extends StatefulWidget {
   final double w;
   final String font;
   final ThemeProfile profile;
+  final CockpitColorScheme scheme;
   final bool presentationMode;
 
   const _CockpitPreview({
@@ -12,6 +13,7 @@ class _CockpitPreview extends StatefulWidget {
     required this.w,
     required this.font,
     required this.profile,
+    required this.scheme,
     required this.presentationMode,
   });
 
@@ -113,6 +115,7 @@ class _CockpitPreviewState extends State<_CockpitPreview>
                   surface: bg,
                   textColor: textColor,
                   mutedColor: textColor.withValues(alpha: 0.62),
+                  scheme: widget.scheme,
                   bootProgress: boot,
                   font: widget.font,
                 ),
@@ -131,6 +134,7 @@ class _CockpitGrid extends StatelessWidget {
   final Color surface;
   final Color textColor;
   final Color mutedColor;
+  final CockpitColorScheme scheme;
   final double bootProgress;
   final String font;
 
@@ -140,6 +144,7 @@ class _CockpitGrid extends StatelessWidget {
     required this.surface,
     required this.textColor,
     required this.mutedColor,
+    required this.scheme,
     required this.bootProgress,
     required this.font,
   });
@@ -175,6 +180,12 @@ class _CockpitGrid extends StatelessWidget {
                   surface: surface,
                   textColor: textColor,
                   mutedColor: mutedColor,
+                  good: _hexColor(scheme.good),
+                  warning: _hexColor(scheme.warning),
+                  critical: _hexColor(scheme.critical),
+                  cold: _hexColor(scheme.cold),
+                  sky: _hexColor(scheme.sky),
+                  ground: _hexColor(scheme.ground),
                   font: font,
                 ),
               ),
@@ -198,6 +209,12 @@ class _CockpitInstrument extends StatelessWidget {
   final Color surface;
   final Color textColor;
   final Color mutedColor;
+  final Color good;
+  final Color warning;
+  final Color critical;
+  final Color cold;
+  final Color sky;
+  final Color ground;
   final String font;
 
   const _CockpitInstrument({
@@ -207,6 +224,12 @@ class _CockpitInstrument extends StatelessWidget {
     required this.surface,
     required this.textColor,
     required this.mutedColor,
+    required this.good,
+    required this.warning,
+    required this.critical,
+    required this.cold,
+    required this.sky,
+    required this.ground,
     required this.font,
   });
 
@@ -229,6 +252,12 @@ class _CockpitInstrument extends StatelessWidget {
                   surface: surface,
                   textColor: textColor,
                   mutedColor: mutedColor,
+                  good: good,
+                  warning: warning,
+                  critical: critical,
+                  cold: cold,
+                  sky: sky,
+                  ground: ground,
                   font: font,
                 ),
                 child: const SizedBox.expand(),
@@ -263,6 +292,16 @@ class _CockpitInstrumentPainter extends CustomPainter {
   final Color surface;
   final Color textColor;
   final Color mutedColor;
+
+  /// Status zone colours from the active cockpit colour scheme.
+  final Color good;
+  final Color warning;
+  final Color critical;
+  final Color cold;
+
+  /// Artificial-horizon sky and ground colours.
+  final Color sky;
+  final Color ground;
   final String font;
 
   _CockpitInstrumentPainter({
@@ -272,13 +311,14 @@ class _CockpitInstrumentPainter extends CustomPainter {
     required this.surface,
     required this.textColor,
     required this.mutedColor,
+    required this.good,
+    required this.warning,
+    required this.critical,
+    required this.cold,
+    required this.sky,
+    required this.ground,
     required this.font,
   });
-
-  static const _green = Color(0xFF22C55E);
-  static const _amber = Color(0xFFF59E0B);
-  static const _red = Color(0xFFEF4444);
-  static const _blue = Color(0xFF3B82F6);
 
   /// Structural lines (gauge tracks, ticks, glass) derive from the slide text
   /// colour at low opacity so the instruments read on any slide background.
@@ -377,15 +417,15 @@ class _CockpitInstrumentPainter extends CustomPainter {
     final greenStart = math.min(meter.greenFrom, meter.greenTo);
     final greenEnd = math.max(meter.greenFrom, meter.greenTo);
     if (meter.redFrom > greenEnd) {
-      arc(meter.min, greenStart, _amber);
-      arc(greenStart, greenEnd, _green);
-      arc(greenEnd, meter.redFrom, _amber);
-      arc(meter.redFrom, meter.max, _red);
+      arc(meter.min, greenStart, warning);
+      arc(greenStart, greenEnd, good);
+      arc(greenEnd, meter.redFrom, warning);
+      arc(meter.redFrom, meter.max, critical);
     } else {
-      arc(meter.min, meter.redFrom, _red);
-      arc(meter.redFrom, greenStart, _amber);
-      arc(greenStart, greenEnd, _green);
-      arc(greenEnd, meter.max, _amber);
+      arc(meter.min, meter.redFrom, critical);
+      arc(meter.redFrom, greenStart, warning);
+      arc(greenStart, greenEnd, good);
+      arc(greenEnd, meter.max, warning);
     }
 
     final tickPaint = Paint();
@@ -468,12 +508,12 @@ class _CockpitInstrumentPainter extends CustomPainter {
       final rf = math.max(ge, n(meter.redFrom));
       // Below the green zone's lower bound reads as "too cold" → blue, then
       // green in range, warming through amber to red at the top.
-      paletteColors = const [_blue, _blue, _green, _green, _amber, _red, _red];
+      paletteColors = [cold, cold, good, good, warning, critical, critical];
       paletteStops = [0.0, gs * 0.55, gs, ge, (ge + rf) / 2, rf, 1.0];
     } else {
       final rr = n(meter.redFrom);
       final g = math.max(rr, n(greenStart));
-      paletteColors = const [_red, _red, _amber, _green, _green];
+      paletteColors = [critical, critical, warning, good, good];
       paletteStops = [0.0, rr, (rr + g) / 2, g, 1.0];
     }
     final bounds = body.getBounds();
@@ -616,11 +656,11 @@ class _CockpitInstrumentPainter extends CustomPainter {
     final pitch = meter.pitch * progress * r / 45;
     canvas.drawRect(
       Rect.fromLTWH(-r * 1.6, -r * 1.6 + pitch, r * 3.2, r * 1.6),
-      Paint()..color = const Color(0xFF2563EB),
+      Paint()..color = sky,
     );
     canvas.drawRect(
       Rect.fromLTWH(-r * 1.6, pitch, r * 3.2, r * 1.6),
-      Paint()..color = const Color(0xFF9A5A22),
+      Paint()..color = ground,
     );
     canvas.drawLine(
       Offset(-r * 1.4, pitch),
@@ -710,7 +750,7 @@ class _CockpitInstrumentPainter extends CustomPainter {
       ..lineTo(markerLeft.dx, markerLeft.dy)
       ..lineTo(markerRight.dx, markerRight.dy)
       ..close();
-    canvas.drawPath(marker, Paint()..color = _amber.withValues(alpha: 0.95));
+    canvas.drawPath(marker, Paint()..color = accent.withValues(alpha: 0.95));
 
     final angle = _rad((meter.value * progress) - 90);
     final needle = Path()
@@ -901,6 +941,12 @@ class _CockpitInstrumentPainter extends CustomPainter {
       oldDelegate.surface != surface ||
       oldDelegate.textColor != textColor ||
       oldDelegate.mutedColor != mutedColor ||
+      oldDelegate.good != good ||
+      oldDelegate.warning != warning ||
+      oldDelegate.critical != critical ||
+      oldDelegate.cold != cold ||
+      oldDelegate.sky != sky ||
+      oldDelegate.ground != ground ||
       oldDelegate.font != font;
 }
 
