@@ -180,6 +180,18 @@ class FileService {
     } else {
       final file = File(filePath);
       if (!await file.exists()) return null;
+      // A deck is plain text (images/media are sidecar files), so a huge .md is
+      // pathological. Cap it to avoid loading/parsing an attacker-sized file.
+      try {
+        if (await file.length() > maxDeckMarkdownBytes) {
+          logWarning(
+            'FileService.openDeck: file exceeds ${maxDeckMarkdownBytes ~/ (1024 * 1024)} MiB cap',
+          );
+          return null;
+        }
+      } catch (_) {
+        return null;
+      }
       try {
         raw = await file.readAsString();
       } catch (e) {
@@ -344,7 +356,11 @@ class FileService {
       if (src == null || p.isAbsolute(src) || deck.projectPath == null) {
         continue;
       }
-      final from = File(p.join(deck.projectPath!, src));
+      // Containment guard, matching _hydrateCharts: a chart source like
+      // ../../../secret.csv must not be copied out of the project on Save As.
+      final resolved = resolveProjectRelative(deck.projectPath, src);
+      if (resolved == null) continue;
+      final from = File(resolved);
       final toPath = p.join(destDir, src);
       if (from.path == toPath || !from.existsSync()) continue;
       final out = File(toPath);
@@ -519,6 +535,9 @@ class FileService {
   ///
   /// Image-heavy decks routinely exceed 64 MiB, so keep the safety guard high
   /// enough for real presentation exchange while still bounding abuse.
+  /// A deck's markdown is plain text; cap it so a crafted oversized `.md`
+  /// can't exhaust memory on open. Generous — real decks are well under this.
+  static const maxDeckMarkdownBytes = 32 * 1024 * 1024; // 32 MiB
   static const maxPackageBytes = 512 * 1024 * 1024; // 512 MiB
   static const maxPackageEntries = 10000;
   static const maxZipEntryPathLength = 512;

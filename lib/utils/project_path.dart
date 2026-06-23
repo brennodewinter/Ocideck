@@ -47,6 +47,11 @@ String? resolveEditorAssetPath(String path, String? basePath) {
   if (basePath == null || basePath.isEmpty) {
     return p.isAbsolute(path) ? p.normalize(path) : path;
   }
+  // Intentionally permissive for the EDITOR: a user can pick an image from
+  // anywhere on disk and the editor must display it before it is copied into
+  // the project. Security-sensitive sinks (e.g. copy-to-clipboard) must NOT use
+  // this resolver for a deck-opened-from-disk; use resolveSlideAssetPath, which
+  // enforces project containment.
   if (p.isAbsolute(path)) {
     return resolveProjectAbsolute(basePath, path) ?? p.normalize(path);
   }

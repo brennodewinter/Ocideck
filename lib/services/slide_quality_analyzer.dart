@@ -9,6 +9,7 @@ import '../models/settings.dart';
 import '../models/slide.dart';
 import '../models/slide_quality.dart';
 import '../utils/color_contrast.dart';
+import '../utils/project_path.dart';
 import '../widgets/slides/inline_markdown.dart';
 import 'slide_layout_metrics.dart';
 
@@ -436,12 +437,11 @@ class SlideQualityAnalyzer {
     }
   }
 
-  String? _resolveAssetPath(String path, String? projectPath) {
-    if (path.trim().isEmpty) return null;
-    if (path.startsWith('/') || path.contains(':\\')) return path;
-    if (projectPath != null) return '$projectPath/$path';
-    return path;
-  }
+  // Route through the shared containment guard so a crafted deck can't turn the
+  // "missing media" check into a file-existence oracle (existsSync) for paths
+  // outside the project via absolute or `../` references.
+  String? _resolveAssetPath(String path, String? projectPath) =>
+      resolveSlideAssetPath(path, projectPath);
 
   void _checkTextDensity(
     Slide slide,

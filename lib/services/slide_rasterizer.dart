@@ -5,11 +5,10 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:path/path.dart' as p;
-
 import '../models/deck.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../utils/project_path.dart';
 import '../widgets/slides/slide_preview.dart';
 
 /// Renders the exact on-screen slide previews to PNG images so exports look
@@ -167,12 +166,11 @@ class SlideRasterizer {
     }
   }
 
-  static String? _resolve(String imagePath, String? projectPath) {
-    if (imagePath.isEmpty) return null;
-    if (p.isAbsolute(imagePath)) return imagePath;
-    if (projectPath != null) return p.join(projectPath, imagePath);
-    return imagePath;
-  }
+  // Route through the shared containment guard so an untrusted deck can't make
+  // the export precache read files outside the project via absolute or `../`
+  // image paths.
+  static String? _resolve(String imagePath, String? projectPath) =>
+      resolveSlideAssetPath(imagePath, projectPath);
 }
 
 class _RasterSlideHost extends StatefulWidget {

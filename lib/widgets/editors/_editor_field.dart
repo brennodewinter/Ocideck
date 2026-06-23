@@ -384,8 +384,18 @@ class ImagePickerBar extends ConsumerWidget {
     return usages;
   }
 
+  // Permissive: shows user-picked images from anywhere (e.g. before they're
+  // copied into the project). Not for security-sensitive file reads — see
+  // _resolveImagePathForClipboard.
   String _resolveImagePath(String path) {
     return resolveEditorAssetPath(path, captionBasePath) ?? path;
+  }
+
+  /// Strict containment for the copy-to-clipboard sink: a deck opened from disk
+  /// must not be able to exfiltrate an arbitrary file (e.g. imagePath
+  /// `/etc/passwd`) to the clipboard. Returns empty for out-of-project paths.
+  String _resolveImagePathForClipboard(String path) {
+    return resolveSlideAssetPath(path, captionBasePath) ?? '';
   }
 
   @override
@@ -447,7 +457,7 @@ class ImagePickerBar extends ConsumerWidget {
                 child: IconButton(
                   onPressed: () async {
                     final ok = await ImageService().copyImageToClipboard(
-                      _resolveImagePath(imagePath),
+                      _resolveImagePathForClipboard(imagePath),
                     );
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
