@@ -523,8 +523,10 @@ Widget _resolvedImage(
   final resolved = resolveSlideAssetPath(imagePath, projectPath);
   if (resolved == null) return _imagePlaceholder(context);
 
-  return Image.file(
-    File(resolved),
+  return Image(
+    // Cap the decode so a huge-dimensioned (possibly untrusted) image can't
+    // exhaust memory; see cappedFileImage / kMaxImageDecodeDimension.
+    image: cappedFileImage(File(resolved)),
     fit: fit,
     width: double.infinity,
     height: double.infinity,

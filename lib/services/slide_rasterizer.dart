@@ -8,6 +8,7 @@ import 'package:flutter/rendering.dart';
 import '../models/deck.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../utils/image_limits.dart';
 import '../utils/project_path.dart';
 import '../widgets/slides/slide_preview.dart';
 
@@ -156,8 +157,11 @@ class SlideRasterizer {
       final batch = list.skip(i).take(batchSize);
       await Future.wait(
         batch.map(
-          (path) =>
-              precacheImage(FileImage(File(path)), context, onError: (_, _) {}),
+          (path) => precacheImage(
+            cappedFileImage(File(path)),
+            context,
+            onError: (_, _) {},
+          ),
         ),
       );
       done += batch.length;
