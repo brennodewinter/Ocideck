@@ -4201,7 +4201,8 @@ const _dutchSourceStringAdditions = {
     'Onjuist': 'Faux',
     'De stelling hierboven is juist of onjuist; kies welke.':
         'L\'affirmation ci-dessus est vraie ou fausse ; choisissez.',
-    'Selecteer alle juiste antwoorden': 'Sélectionnez toutes les bonnes réponses',
+    'Selecteer alle juiste antwoorden':
+        'Sélectionnez toutes les bonnes réponses',
     'Bevestig': 'Confirmer',
     'Het juiste antwoord': 'La bonne réponse',
     'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
@@ -4799,7 +4800,8 @@ const _dutchSourceStringAdditions = {
     'Onjuist': 'Falso',
     'De stelling hierboven is juist of onjuist; kies welke.':
         'La afirmación de arriba es verdadera o falsa; elige cuál.',
-    'Selecteer alle juiste antwoorden': 'Selecciona todas las respuestas correctas',
+    'Selecteer alle juiste antwoorden':
+        'Selecciona todas las respuestas correctas',
     'Bevestig': 'Confirmar',
     'Het juiste antwoord': 'La respuesta correcta',
     'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':

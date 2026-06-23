@@ -45,14 +45,23 @@ class _QuestionPreview extends StatelessWidget {
     final pad = w * 0.06;
 
     final body = Padding(
-      padding: EdgeInsets.fromLTRB(pad, w * 0.05, hasImage ? w * 0.02 : pad, pad),
+      padding: EdgeInsets.fromLTRB(
+        pad,
+        w * 0.05,
+        hasImage ? w * 0.02 : pad,
+        pad,
+      ),
       child: _content(context, spec),
     );
 
     Widget content = body;
     if (hasImage) {
       final imgWidth =
-          w * (slide.imageSize > 0 ? slide.imageSize / 100.0 : 0.40).clamp(0.2, 0.6);
+          w *
+          (slide.imageSize > 0 ? slide.imageSize / 100.0 : 0.40).clamp(
+            0.2,
+            0.6,
+          );
       final gap = w * 0.03;
       content = Stack(
         children: [
@@ -109,11 +118,7 @@ class _QuestionPreview extends StatelessWidget {
               ),
               child: Padding(
                 padding: EdgeInsets.all(w * 0.012),
-                child: Icon(
-                  Icons.zoom_in,
-                  color: Colors.white,
-                  size: w * 0.03,
-                ),
+                child: Icon(Icons.zoom_in, color: Colors.white, size: w * 0.03),
               ),
             ),
           ),
@@ -248,7 +253,13 @@ class _QuestionPreview extends StatelessWidget {
             ),
             SizedBox(height: w * _gapPromptF * scale),
             for (var i = 0; i < options.length; i++) ...[
-              _optionTile(context, options[i].text, i, options[i].visual, scale),
+              _optionTile(
+                context,
+                options[i].text,
+                i,
+                options[i].visual,
+                scale,
+              ),
               if (i < options.length - 1)
                 SizedBox(height: w * _tileGapF * scale),
             ],

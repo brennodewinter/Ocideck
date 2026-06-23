@@ -96,10 +96,9 @@ void main() {
         title: 'Deck',
         slides: [
           Slide.create(SlideType.title).copyWith(title: 'Eerste'),
-          Slide.create(SlideType.bullets).copyWith(
-            title: 'Tweede',
-            bullets: ['een', 'twee'],
-          ),
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Tweede', bullets: ['een', 'twee']),
         ],
       );
       final lf = md.generateDeck(deck);

@@ -30,12 +30,16 @@ void main() {
     final tabs = container.read(tabsProvider.notifier);
 
     // Open a real deck in the first tab, then add a second tab.
-    container.read(tabsProvider).current!.deckNotifier.loadDeck(
-      Deck(
-        title: 'First',
-        slides: [Slide.create(SlideType.title).copyWith(title: 'First')],
-      ),
-    );
+    container
+        .read(tabsProvider)
+        .current!
+        .deckNotifier
+        .loadDeck(
+          Deck(
+            title: 'First',
+            slides: [Slide.create(SlideType.title).copyWith(title: 'First')],
+          ),
+        );
     await tester.pump();
     tabs.newEmptyTab();
     await tester.pumpAndSettle();

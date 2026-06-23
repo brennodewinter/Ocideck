@@ -254,8 +254,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     final l10n = context.l10n;
     final profiles = _profiles;
     final screen = MediaQuery.sizeOf(context);
-    final dialogWidth = math.min(920.0, screen.width * 0.88).clamp(640.0, 920.0);
-    final dialogHeight = math.min(760.0, screen.height * 0.86).clamp(560.0, 760.0);
+    final dialogWidth = math
+        .min(920.0, screen.width * 0.88)
+        .clamp(640.0, 920.0);
+    final dialogHeight = math
+        .min(760.0, screen.height * 0.86)
+        .clamp(560.0, 760.0);
 
     return DefaultTabController(
       length: 5,

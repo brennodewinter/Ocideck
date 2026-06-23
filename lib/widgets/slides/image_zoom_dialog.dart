@@ -82,7 +82,10 @@ class _ImageZoomView extends StatelessWidget {
                       ),
                       child: Text(
                         caption.trim(),
-                        style: const TextStyle(color: Colors.white, fontSize: 16),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),

@@ -86,10 +86,9 @@ void main() {
       ],
       optionCount: 6,
     );
-    final slide = _questionSlide(spec).copyWith(
-      imagePath: 'does/not/exist.png',
-      imageSize: 45,
-    );
+    final slide = _questionSlide(
+      spec,
+    ).copyWith(imagePath: 'does/not/exist.png', imageSize: 45);
     // Grid-/volgende-slide-miniatuur: heel klein, mag niet overflowen.
     await _pump(tester, slide, width: 180, height: 101);
     expect(tester.takeException(), isNull);

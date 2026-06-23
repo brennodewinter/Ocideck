@@ -544,7 +544,9 @@ void main() {
         statementIsTrue: false,
       );
       final out = _roundTrip(
-        Slide.create(SlideType.question).copyWith(customMarkdown: spec.toBlock()),
+        Slide.create(
+          SlideType.question,
+        ).copyWith(customMarkdown: spec.toBlock()),
       );
       expect(out.type, SlideType.question);
       final parsed = QuestionSpec.parse(out.customMarkdown);
@@ -568,7 +570,9 @@ void main() {
         optionCount: 4,
       );
       final out = _roundTrip(
-        Slide.create(SlideType.question).copyWith(customMarkdown: spec.toBlock()),
+        Slide.create(
+          SlideType.question,
+        ).copyWith(customMarkdown: spec.toBlock()),
       );
       final parsed = QuestionSpec.parse(out.customMarkdown);
       expect(parsed.kind, QuestionKind.multipleCorrect);
@@ -769,6 +773,92 @@ void main() {
       ]);
       expect(deck.slides[2].imagePath, 'images/c.png');
       expect(deck.slides[3].imagePath, 'images/d.png');
+    });
+  });
+
+  group('markdown round-trip edge cases', () {
+    const tricky = 'Quote " back\\slash pipe | angle <b> & amp 🎉 日本語 العربية';
+
+    test('title and subtitle keep special characters and unicode', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.title).copyWith(title: tricky, subtitle: tricky),
+      );
+      expect(out.title, tricky);
+      expect(out.subtitle, tricky);
+    });
+
+    test('bullets keep pipes, angle brackets and unicode', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.bullets).copyWith(
+          title: 'Tekens',
+          bullets: ['a | b', 'x <y> z', 'quote " and \\ slash', '✓ café 漢字'],
+        ),
+      );
+      expect(out.bullets, [
+        'a | b',
+        'x <y> z',
+        'quote " and \\ slash',
+        '✓ café 漢字',
+      ]);
+    });
+
+    test('quote slide keeps special characters', () {
+      final out = _roundTrip(
+        Slide.create(
+          SlideType.quote,
+        ).copyWith(quote: tricky, quoteAuthor: 'A. "Nony" Mous'),
+      );
+      expect(out.quote, tricky);
+      expect(out.quoteAuthor, 'A. "Nony" Mous');
+    });
+
+    test('table cells keep pipes and special characters', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.table).copyWith(
+          title: 'Tabel',
+          tableRows: [
+            ['Kolom A', 'Kolom B'],
+            ['a | b', 'x <y> & z'],
+          ],
+        ),
+      );
+      expect(out.tableRows, [
+        ['Kolom A', 'Kolom B'],
+        ['a | b', 'x <y> & z'],
+      ]);
+    });
+
+    test('a bullets slide with a title but no bullets keeps its type', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.bullets).copyWith(title: 'Leeg'),
+      );
+      expect(out.type, SlideType.bullets);
+      expect(out.title, 'Leeg');
+      expect(out.bullets, isEmpty);
+    });
+
+    test('free-markdown keeps inline and block math verbatim', () {
+      const body =
+          'Inline \$E = mc^2\$ and a block:\n\n\$\$\n\\int_0^1 x\\,dx\n\$\$';
+      final out = _roundTrip(
+        Slide.create(SlideType.freeMarkdown).copyWith(customMarkdown: body),
+      );
+      expect(out.customMarkdown.contains('E = mc^2'), isTrue);
+      expect(out.customMarkdown.contains('\\int_0^1 x'), isTrue);
+    });
+
+    test('deck-level presentation target seconds round-trips', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          presentationTargetSeconds: 1500,
+          slides: [Slide.create(SlideType.title).copyWith(title: 'Een')],
+        ),
+      );
+      final deck = service.parseDeck(markdown);
+      expect(deck, isNotNull);
+      expect(deck!.presentationTargetSeconds, 1500);
     });
   });
 }

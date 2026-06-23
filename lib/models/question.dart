@@ -29,11 +29,8 @@ QuestionKind _kindFromName(String? name) => QuestionKind.values.firstWhere(
 /// slide so it cannot be retried, and allows advancing.
 enum QuestionOnWrong { retry, lockAndContinue }
 
-QuestionOnWrong _onWrongFromName(String? name) =>
-    QuestionOnWrong.values.firstWhere(
-      (v) => v.name == name,
-      orElse: () => QuestionOnWrong.retry,
-    );
+QuestionOnWrong _onWrongFromName(String? name) => QuestionOnWrong.values
+    .firstWhere((v) => v.name == name, orElse: () => QuestionOnWrong.retry);
 
 /// A single possible answer in the pool. The pool may hold any number of
 /// correct and incorrect answers; the presentation draws a random subset.
@@ -48,10 +45,8 @@ class QuestionAnswer {
     correct: json['correct'] == true,
   );
 
-  QuestionAnswer copyWith({String? text, bool? correct}) => QuestionAnswer(
-    text: text ?? this.text,
-    correct: correct ?? this.correct,
-  );
+  QuestionAnswer copyWith({String? text, bool? correct}) =>
+      QuestionAnswer(text: text ?? this.text, correct: correct ?? this.correct);
 
   Map<String, dynamic> toJson() => {'text': text, 'correct': correct};
 }
@@ -135,7 +130,9 @@ class QuestionSpec {
     prompt: prompt ?? this.prompt,
     answers: answers ?? this.answers,
     optionCount: _clampOptionCount(optionCount ?? this.optionCount),
-    timeLimitSeconds: _clampTimeLimit(timeLimitSeconds ?? this.timeLimitSeconds),
+    timeLimitSeconds: _clampTimeLimit(
+      timeLimitSeconds ?? this.timeLimitSeconds,
+    ),
     onWrong: onWrong ?? this.onWrong,
     statementIsTrue: statementIsTrue ?? this.statementIsTrue,
   );

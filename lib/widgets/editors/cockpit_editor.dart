@@ -202,7 +202,10 @@ class _CockpitEditorState extends State<CockpitEditor> {
                   l10n.d(
                     'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.',
                   ),
-                  style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Color(0xFF64748B),
+                  ),
                 ),
               ),
             ],

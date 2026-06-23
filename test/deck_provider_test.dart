@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui' show Offset;
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/annotation.dart';
@@ -511,10 +510,9 @@ void main() {
         title: 'D',
         slides: [
           Slide.create(SlideType.title).copyWith(title: 'A'),
-          Slide.create(SlideType.bullets).copyWith(
-            title: 'B',
-            bullets: ['punt'],
-          ),
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'B', bullets: ['punt']),
         ],
       ),
     );
