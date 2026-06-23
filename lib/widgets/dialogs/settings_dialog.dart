@@ -87,6 +87,17 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   String? _highlightedThemeField;
   final _themeFieldKeys = <String, GlobalKey>{};
 
+  /// Index of the section shown in the sidebar navigation (0..4).
+  late int _selectedTab;
+
+  static const _navIcons = [
+    Icons.tune,
+    Icons.format_paint_outlined,
+    Icons.slideshow_outlined,
+    Icons.speed_outlined,
+    Icons.privacy_tip_outlined,
+  ];
+
   static const _colorPresets = [
     '#FFFFFF',
     '#F8FAFC',
@@ -131,6 +142,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       text: _themeProfile.closingSlideMarkdown,
     );
     _highlightedThemeField = widget.highlightThemeField;
+    _selectedTab = widget.initialTab.clamp(0, 4);
     if (widget.highlightThemeField != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scrollToThemeField(widget.highlightThemeField!);
@@ -261,63 +273,246 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         .min(760.0, screen.height * 0.86)
         .clamp(560.0, 760.0);
 
-    return DefaultTabController(
-      length: 5,
-      initialIndex: widget.initialTab.clamp(0, 4),
-      child: AlertDialog(
-        title: Text(l10n.t('settings')),
-        content: SizedBox(
-          width: dialogWidth,
-          height: dialogHeight,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TabBar(
-                isScrollable: true,
-                tabs: [
-                  Tab(
-                    icon: const Icon(Icons.tune),
-                    text: l10n.t('settingsGeneral'),
-                  ),
-                  Tab(
-                    icon: const Icon(Icons.format_paint_outlined),
-                    text: l10n.d('App-thema'),
-                  ),
-                  Tab(
-                    icon: const Icon(Icons.slideshow_outlined),
-                    text: l10n.d('Presentatiestijl'),
-                  ),
-                  Tab(
-                    icon: const Icon(Icons.speed_outlined),
-                    text: l10n.d('Cockpit'),
-                  ),
-                  Tab(
-                    icon: const Icon(Icons.privacy_tip_outlined),
-                    text: l10n.d('Privacy'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              Expanded(
-                child: TabBarView(
+    final labels = <String>[
+      l10n.t('settingsGeneral'),
+      l10n.d('App-thema'),
+      l10n.d('Presentatiestijl'),
+      l10n.d('Cockpit'),
+      l10n.d('Privacy'),
+    ];
+
+    final bodies = <Widget>[
+      _tabBody(_generalTab()),
+      _tabBody(_appearanceTab()),
+      _tabBody(_presentationStyleTab(profiles)),
+      _tabBody(_cockpitTab()),
+      _tabBody(_privacyTab()),
+    ];
+
+    return Dialog(
+      clipBehavior: Clip.antiAlias,
+      backgroundColor: Colors.white,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 28),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      child: SizedBox(
+        width: dialogWidth,
+        height: dialogHeight,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _sidebar(l10n, labels),
+            Expanded(
+              child: ColoredBox(
+                color: const Color(0xFFF8FAFC),
+                child: Column(
                   children: [
-                    _tabBody(_generalTab()),
-                    _tabBody(_appearanceTab()),
-                    _tabBody(_presentationStyleTab(profiles)),
-                    _tabBody(_cockpitTab()),
-                    _tabBody(_privacyTab()),
+                    _contentHeader(labels[_selectedTab]),
+                    Expanded(
+                      child: IndexedStack(
+                        index: _selectedTab,
+                        sizing: StackFit.expand,
+                        children: bodies,
+                      ),
+                    ),
+                    _footerBar(l10n),
                   ],
                 ),
               ),
-            ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _sidebar(AppLocalizations l10n, List<String> labels) {
+    return Container(
+      width: 234,
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [Color(0xFF273A60), AppTheme.navy],
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 26, 20, 22),
+            child: Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [Color(0xFF3B82F6), AppTheme.accent],
+                    ),
+                    borderRadius: BorderRadius.circular(11),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppTheme.accent.withValues(alpha: 0.45),
+                        blurRadius: 12,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: const Icon(
+                    Icons.settings_suggest_outlined,
+                    color: Colors.white,
+                    size: 23,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    l10n.t('settings'),
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.2,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          for (var i = 0; i < labels.length; i++)
+            _navItem(i, _navIcons[i], labels[i]),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 18),
+            child: Text(
+              'OciDeck',
+              style: TextStyle(
+                color: Colors.white.withValues(alpha: 0.32),
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 2.5,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _navItem(int index, IconData icon, String label) {
+    final selected = _selectedTab == index;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(11),
+          onTap: () => setState(() => _selectedTab = index),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 150),
+            padding: const EdgeInsets.fromLTRB(12, 11, 14, 11),
+            decoration: BoxDecoration(
+              color: selected
+                  ? Colors.white.withValues(alpha: 0.13)
+                  : Colors.transparent,
+              borderRadius: BorderRadius.circular(11),
+            ),
+            child: Row(
+              children: [
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 150),
+                  width: 3,
+                  height: 18,
+                  margin: const EdgeInsets.only(right: 11),
+                  decoration: BoxDecoration(
+                    color: selected ? const Color(0xFF60A5FA) : Colors.transparent,
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                ),
+                Icon(
+                  icon,
+                  size: 19,
+                  color: selected
+                      ? Colors.white
+                      : Colors.white.withValues(alpha: 0.62),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    label,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: selected
+                          ? Colors.white
+                          : Colors.white.withValues(alpha: 0.72),
+                      fontSize: 13.5,
+                      fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-        actions: [
+      ),
+    );
+  }
+
+  Widget _contentHeader(String title) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(28, 18, 14, 16),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        border: Border(bottom: BorderSide(color: Color(0xFFE9EEF5))),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF1E293B),
+                letterSpacing: 0.1,
+              ),
+            ),
+          ),
+          IconButton(
+            tooltip: context.l10n.t('cancel'),
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.close, size: 20),
+            color: const Color(0xFF94A3B8),
+            splashRadius: 20,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _footerBar(AppLocalizations l10n) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        border: Border(top: BorderSide(color: Color(0xFFE9EEF5))),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(l10n.t('cancel')),
           ),
-          ElevatedButton(onPressed: _save, child: Text(l10n.t('saveSettings'))),
+          const SizedBox(width: 10),
+          ElevatedButton.icon(
+            onPressed: _save,
+            icon: const Icon(Icons.check_rounded, size: 18),
+            label: Text(l10n.t('saveSettings')),
+          ),
         ],
       ),
     );
@@ -435,10 +630,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
   Widget _tabBody(Widget child) {
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.only(right: 4, bottom: 8),
-        child: child,
-      ),
+      padding: const EdgeInsets.fromLTRB(28, 22, 24, 22),
+      child: child,
     );
   }
 
