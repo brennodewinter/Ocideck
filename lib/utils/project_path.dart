@@ -1,4 +1,29 @@
+import 'dart:io';
+
 import 'package:path/path.dart' as p;
+
+/// [resolveSlideAssetPath] plus a symlink check: resolves the real (symlink-
+/// followed) path and returns null if it escapes the project. This catches a
+/// symlink *inside* the project that points outside it — which the lexical
+/// `isWithin` guards cannot see.
+///
+/// It does filesystem stats (`resolveSymbolicLinksSync`), so it is meant for
+/// non-hot read sinks that move file *bytes* out of the app (e.g. copy-to-
+/// clipboard), NOT the per-frame render path (a stat per image per frame would
+/// jank on network-mounted projects). Returns null when the file is missing or
+/// the realpath can't be taken.
+String? resolveContainedRealPath(String path, String? projectPath) {
+  final resolved = resolveSlideAssetPath(path, projectPath);
+  if (resolved == null || projectPath == null) return resolved;
+  try {
+    final realBase = Directory(projectPath).resolveSymbolicLinksSync();
+    final real = File(resolved).resolveSymbolicLinksSync();
+    if (real == realBase || p.isWithin(realBase, real)) return resolved;
+    return null;
+  } on FileSystemException {
+    return null;
+  }
+}
 
 /// Resolve a project-relative [path] to an absolute path strictly inside
 /// [basePath], or null for absolute paths, empty paths, or `../` escapes.

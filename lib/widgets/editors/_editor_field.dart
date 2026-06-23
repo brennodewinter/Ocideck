@@ -393,9 +393,10 @@ class ImagePickerBar extends ConsumerWidget {
 
   /// Strict containment for the copy-to-clipboard sink: a deck opened from disk
   /// must not be able to exfiltrate an arbitrary file (e.g. imagePath
-  /// `/etc/passwd`) to the clipboard. Returns empty for out-of-project paths.
+  /// `/etc/passwd`, or a symlink inside the project pointing outside it) to the
+  /// clipboard. Returns empty for out-of-project paths.
   String _resolveImagePathForClipboard(String path) {
-    return resolveSlideAssetPath(path, captionBasePath) ?? '';
+    return resolveContainedRealPath(path, captionBasePath) ?? '';
   }
 
   @override
