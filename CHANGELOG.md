@@ -209,6 +209,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   oversized uncompressed size is rejected before being inflated into memory.
 - Audience-window sync failures during a presentation are now logged instead of
   silently swallowed, so a beamer that drifts out of sync leaves a trace.
+- **Switching to Markdown mode and back no longer wipes slide drawings.** Ink
+  annotations are re-anchored across the toggle (previously they were dropped,
+  and a following save deleted their sidecar — permanent loss). Linked chart
+  data is also kept across the toggle.
+- Front-matter parsing is more forgiving: indented keys and missing spaces after
+  the colon (e.g. hand-edited files) are now read correctly instead of being
+  silently ignored.
+- Rapidly switching between slides with video or audio can no longer leave an
+  orphaned media player or double-dispose a controller.
+- Undo no longer risks merging edits to different slides into one step (the
+  coalescing key is now the stable slide id, not its position).
 
 ## [1.0.0]
 

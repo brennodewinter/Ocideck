@@ -229,6 +229,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (path == null) return;
     final deck = await _file.openDeck(path);
     if (deck == null) return;
+    if (!mounted) return; // notifier disposed during the await
 
     final current = state.current;
     if (current != null && !current.isOpen) {
@@ -249,6 +250,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
   Future<void> openFileByPath(String path, {int? selectIndex}) async {
     final deck = await _file.openDeck(path);
     if (deck == null) return;
+    if (!mounted) return; // notifier disposed during the await
     final index = (selectIndex ?? 0).clamp(0, deck.slides.length - 1);
     final current = state.current;
     if (current != null && !current.isOpen) {

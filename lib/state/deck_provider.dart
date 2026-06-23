@@ -4,6 +4,7 @@ import '../models/annotation.dart';
 import '../models/deck.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../services/annotation_codec.dart';
 import '../services/file_service.dart';
 import '../services/image_service.dart';
 import '../services/markdown_service.dart';
@@ -320,8 +321,10 @@ class DeckNotifier extends StateNotifier<DeckState> {
     if (deck == null || index < 0 || index >= deck.slides.length) return;
     final slides = List<Slide>.from(deck.slides);
     slides[index] = updated;
-    // Snel typen op dezelfde slide telt als één ongedaan-maken-stap.
-    _mutate(deck.copyWith(slides: slides), coalesceKey: 'slide:$index');
+    // Snel typen op dezelfde slide telt als één ongedaan-maken-stap. Sleutel op
+    // de stabiele slide-id, niet de index: na verwijderen/herordenen mag een
+    // bewerking op een ándere slide (zelfde index) niet meecoalescen.
+    _mutate(deck.copyWith(slides: slides), coalesceKey: 'slide:${updated.id}');
   }
 
   /// Zet de "overslaan"-status van een slide aan/uit. Overgeslagen slides
@@ -603,7 +606,10 @@ class DeckNotifier extends StateNotifier<DeckState> {
 
   String generateMarkdown() {
     final deck = state.deck;
-    return deck != null ? _md.generateDeck(deck) : '';
+    // Inline linked chart data so a markdown round-trip (toggle, recovery
+    // snapshot) keeps the chart's points. Saving to disk still writes the
+    // source-only form (see FileService._writeProject), so the .md stays clean.
+    return deck != null ? _md.generateDeck(deck, inlineChartData: true) : '';
   }
 
   /// Returns false if parsing fails (content is preserved).
@@ -622,6 +628,19 @@ class DeckNotifier extends StateNotifier<DeckState> {
           ? UserNotesCodec.decode(encoded, deck.slides)
           : const <String, String>{};
       deck = deck.copyWith(userNotes: remapped);
+    }
+    // Annotations (ink layers) live outside the markdown; without re-anchoring
+    // them to the new slides a markdown toggle would wipe the drawings, and a
+    // subsequent save would delete their sidecar — permanent data loss.
+    if (current != null && current.annotations.isNotEmpty) {
+      final encoded = AnnotationCodec.encode(
+        current.slides,
+        current.annotations,
+      );
+      final remapped = encoded != null
+          ? AnnotationCodec.decode(encoded, deck.slides)
+          : const <String, List<InkStroke>>{};
+      deck = deck.copyWith(annotations: remapped);
     }
     _mutate(deck); // discrete stap → ook ongedaan te maken
     return true;

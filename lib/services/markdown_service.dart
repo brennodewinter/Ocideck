@@ -759,47 +759,55 @@ class MarkdownService {
       final end = content.indexOf('\n---\n', 4);
       if (end != -1) {
         final frontMatter = content.substring(4, end);
-        for (final line in frontMatter.split('\n')) {
-          if (line.startsWith('theme:')) {
-            theme = line.substring(6).trim();
-          } else if (line.startsWith('paginate:')) {
-            paginate = line.substring(9).trim() == 'true';
-          } else if (line.startsWith('title:')) {
-            presentationTitle = _parseScalar(line.substring(6));
-          } else if (line.startsWith('author:')) {
-            author = _parseScalar(line.substring(7));
-          } else if (line.startsWith('organization:')) {
-            organization = _parseScalar(line.substring(13));
-          } else if (line.startsWith('version:')) {
-            version = _parseScalar(line.substring(8));
-          } else if (line.startsWith('date:')) {
-            date = _parseScalar(line.substring(5));
-          } else if (line.startsWith('description:')) {
-            description = _parseScalar(line.substring(12));
-          } else if (line.startsWith('keywords:')) {
-            keywords = _parseScalar(line.substring(9));
-          } else if (line.startsWith('tlp:')) {
-            tlp = TlpLevelX.fromKey(line.substring(4));
-          } else if (line.startsWith('ocideck_target_seconds:')) {
-            presentationTargetSeconds =
-                int.tryParse(line.substring(24).trim()) ?? 0;
-          } else if (line.startsWith('ocideck_style_profile:')) {
-            // Best-effort: a corrupt profile token must not fail the whole
-            // parse (which would blank the audience window). Keep the default.
-            try {
-              final encoded = line.substring(22).trim();
-              final decoded = utf8.decode(base64Url.decode(encoded));
-              themeProfile = ThemeProfile.fromJson(
-                Map<String, Object?>.from(jsonDecode(decoded) as Map),
-              );
-            } catch (e, s) {
-              logError(
-                'MarkdownService._doParse: decode ocideck_style_profile',
-                e,
-                s,
-              );
-              // Leave themeProfile at its default.
-            }
+        for (final rawLine in frontMatter.split('\n')) {
+          // Parse `key: value` generically: split on the first colon and trim,
+          // so leading indentation or extra spacing no longer silently drops a
+          // field. Splitting on the *first* colon keeps colons in the value
+          // (e.g. an ISO date/time).
+          final line = rawLine.trim();
+          final colon = line.indexOf(':');
+          if (colon <= 0) continue;
+          final key = line.substring(0, colon).trim();
+          final value = line.substring(colon + 1).trim();
+          switch (key) {
+            case 'theme':
+              theme = value;
+            case 'paginate':
+              paginate = value == 'true';
+            case 'title':
+              presentationTitle = _parseScalar(value);
+            case 'author':
+              author = _parseScalar(value);
+            case 'organization':
+              organization = _parseScalar(value);
+            case 'version':
+              version = _parseScalar(value);
+            case 'date':
+              date = _parseScalar(value);
+            case 'description':
+              description = _parseScalar(value);
+            case 'keywords':
+              keywords = _parseScalar(value);
+            case 'tlp':
+              tlp = TlpLevelX.fromKey(value);
+            case 'ocideck_target_seconds':
+              presentationTargetSeconds = int.tryParse(value) ?? 0;
+            case 'ocideck_style_profile':
+              // Best-effort: a corrupt profile token must not fail the whole
+              // parse (which would blank the audience window). Keep the default.
+              try {
+                final decoded = utf8.decode(base64Url.decode(value));
+                themeProfile = ThemeProfile.fromJson(
+                  Map<String, Object?>.from(jsonDecode(decoded) as Map),
+                );
+              } catch (e, s) {
+                logError(
+                  'MarkdownService._doParse: decode ocideck_style_profile',
+                  e,
+                  s,
+                );
+                // Leave themeProfile at its default.
+              }
           }
         }
         content = content.substring(end + 5).trim();
