@@ -60,12 +60,24 @@ OciDeck constrains what an opened deck can do:
   guards; URL imports use an `http`/`https` allowlist with an SSRF host
   blocklist and no redirect following.
 - **Render/export sanitization.** Deck content rendered to HTML is sanitized
-  with the bundled DOMPurify before insertion into the DOM.
+  with the bundled DOMPurify before insertion into the DOM, and the export
+  carries a **nonce-based Content-Security-Policy** (`script-src 'nonce-…';
+  object-src 'none'; base-uri 'none'`) so an injected inline script that somehow
+  survives sanitization still can't execute when the file is opened. Mermaid in
+  the export runs `securityLevel:'strict'` and its produced SVG is re-sanitized
+  with DOMPurify; the in-app mermaid render webview is locked down with its own
+  CSP.
+- **Bounded image decoding.** Every deck-supplied image is decoded with its
+  dimensions capped (`cappedFileImage` / `kMaxImageDecodeDimension`), so a
+  small but huge-dimensioned file can't exhaust memory on display or export.
+- **SSRF — hostname resolution.** URL import resolves the host and rejects it
+  if *any* resolved address is internal (loopback / private / link-local /
+  metadata), closing the bypass where a public hostname points at an internal
+  IP. (A narrow DNS-rebinding window remains because the socket is not pinned.)
 
 Known residual hardening tracked for future work: symlink-aware (realpath)
-containment, decoded-image dimension caps, per-asset import byte/magic-byte
-validation, hostname-resolution SSRF checks, and a Content-Security-Policy in
-the HTML export.
+containment, and per-asset import byte/magic-byte validation on individual
+image/media imports.
 
 ## Supported versions
 

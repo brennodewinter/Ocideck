@@ -265,6 +265,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the same containment guard as the preview (`resolveSlideAssetPath`).
 - A deck `.md` is now size-capped (32 MiB) on open to avoid loading and parsing
   a maliciously oversized file.
+- The HTML export now carries a **nonce-based Content-Security-Policy** so an
+  injected inline script that survives sanitization still cannot execute when
+  the file is opened. Mermaid in the export runs in strict mode and its SVG is
+  re-sanitized with DOMPurify; the in-app mermaid webview has its own CSP.
+- **Image decoding is dimension-capped** everywhere a deck-supplied image is
+  shown, exported, or precached, so a tiny but huge-dimensioned file can no
+  longer exhaust memory and crash the app.
+- **URL import now resolves the hostname** and refuses it when it maps to an
+  internal address, closing the SSRF bypass where a public name points at a
+  loopback/private/metadata IP.
 
 ## [1.0.0]
 
