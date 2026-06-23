@@ -29,6 +29,11 @@ class _TitleEditorState extends ConsumerState<TitleEditor> {
   late final TextEditingController _title;
   late final TextEditingController _subtitle;
 
+  /// Zoom to restore when the user turns "fill slide" back off, so toggling the
+  /// checkbox doesn't discard the zoom they had dialled in. The editor is keyed
+  /// per slide (ValueKey(slide.id)), so this state is naturally per-slide.
+  int _zoomBeforeFill = 100;
+
   @override
   void initState() {
     super.initState();
@@ -36,6 +41,7 @@ class _TitleEditorState extends ConsumerState<TitleEditor> {
     _subtitle = TextEditingController(text: widget.slide.subtitle);
     _title.addListener(_emit);
     _subtitle.addListener(_emit);
+    if (widget.slide.imageSize > 0) _zoomBeforeFill = widget.slide.imageSize;
   }
 
   void _emit() {
@@ -130,9 +136,19 @@ class _TitleEditorState extends ConsumerState<TitleEditor> {
           // switches to the zoom/contain control below.
           CheckboxListTile(
             value: widget.slide.imageSize == 0,
-            onChanged: (value) => widget.onUpdate(
-              widget.slide.copyWith(imageSize: (value ?? false) ? 0 : 100),
-            ),
+            onChanged: (value) {
+              final fill = value ?? false;
+              if (fill) {
+                if (widget.slide.imageSize > 0) {
+                  _zoomBeforeFill = widget.slide.imageSize;
+                }
+                widget.onUpdate(widget.slide.copyWith(imageSize: 0));
+              } else {
+                widget.onUpdate(
+                  widget.slide.copyWith(imageSize: _zoomBeforeFill),
+                );
+              }
+            },
             contentPadding: EdgeInsets.zero,
             dense: true,
             controlAffinity: ListTileControlAffinity.leading,
