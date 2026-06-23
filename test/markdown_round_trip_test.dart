@@ -4,6 +4,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/question.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/models/timeline.dart';
 import 'package:ocideck/services/markdown_service.dart';
 
 /// Serialize a single slide to markdown and parse it straight back.
@@ -859,6 +860,48 @@ void main() {
       final deck = service.parseDeck(markdown);
       expect(deck, isNotNull);
       expect(deck!.presentationTargetSeconds, 1500);
+    });
+
+    test('timeline slide keeps title, events, layout and animation', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.timeline).copyWith(
+          title: 'Van idee tot beursgang',
+          bullets: [
+            '2019 :: Oprichting :: Drie mensen, één zolderkamer.',
+            '2021 :: Lancering :: 1.000 gebruikers in zes weken.',
+            'Nu :: Vandaag',
+          ],
+          timelineLayout: TimelineLayout.vertical,
+          timelineReveal: TimelineReveal.steps,
+          timelineAnimationMs: 2600,
+        ),
+      );
+      expect(out.type, SlideType.timeline);
+      expect(out.title, 'Van idee tot beursgang');
+      expect(out.timelineLayout, TimelineLayout.vertical);
+      expect(out.timelineReveal, TimelineReveal.steps);
+      expect(out.timelineAnimationMs, 2600);
+      final events = parseTimelineEvents(out.bullets);
+      expect(events, hasLength(3));
+      expect(events[0].marker, '2019');
+      expect(events[0].title, 'Oprichting');
+      expect(events[0].description, 'Drie mensen, één zolderkamer.');
+      expect(events[2].marker, 'Nu');
+      expect(events[2].title, 'Vandaag');
+      expect(events[2].description, isEmpty);
+      // cssClass must stay clean: the timeline option tokens are absorbed into
+      // the typed fields, not left dangling in the class string.
+      expect(out.cssClass, isEmpty);
+    });
+
+    test('timeline slide defaults to auto layout and on-enter animation', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.timeline).copyWith(title: 'Reis'),
+      );
+      expect(out.type, SlideType.timeline);
+      expect(out.timelineLayout, TimelineLayout.auto);
+      expect(out.timelineReveal, TimelineReveal.onEnter);
+      expect(out.timelineAnimationMs, timelineDefaultAnimationDurationMs);
     });
   });
 }

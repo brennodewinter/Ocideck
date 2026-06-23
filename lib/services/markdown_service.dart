@@ -7,6 +7,7 @@ import '../models/deck.dart';
 import '../models/question.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../models/timeline.dart';
 import '../utils/deck_markdown_dashes.dart';
 import '../utils/log.dart';
 import '../utils/markdown_paste_cleanup.dart';
@@ -209,6 +210,11 @@ class MarkdownService {
       // Mark slides that opt out of the footer. Older presentations lack this
       // token and therefore keep the existing default: footer shown.
       if (!slide.showFooter) 'no-footer',
+      // Timeline layout/animation options ride along as extra class tokens so
+      // they round-trip without a JSON block (the base `timeline` token comes
+      // from marpClass above).
+      if (slide.type == SlideType.timeline)
+        ...timelineClassTokens(slide.timelineLayout, slide.timelineReveal),
     ];
 
     if (classes.isNotEmpty) {
@@ -441,6 +447,22 @@ class MarkdownService {
         buf.writeln('```cockpit');
         buf.writeln(spec.toBlock());
         buf.writeln('```');
+
+      case SlideType.timeline:
+        // Events are a plain Markdown list (`- marker :: title :: desc`), so the
+        // slide stays a readable, Marp-compatible list. Layout/animation mode
+        // live in the `_class` tokens written above; the (non-default) draw-in
+        // duration round-trips in an HTML comment Marp ignores.
+        if (slide.title.isNotEmpty) {
+          buf.writeln('# ${slide.title}');
+          buf.writeln();
+        }
+        if (slide.timelineAnimationMs != timelineDefaultAnimationDurationMs) {
+          buf.writeln(
+            '<!-- ocideck_timeline_duration: ${slide.timelineAnimationMs} -->',
+          );
+        }
+        _writeList(buf, slide.bullets, ListStyle.bullets);
 
       case SlideType.question:
         final spec = QuestionSpec.parse(slide.customMarkdown);
@@ -876,6 +898,7 @@ class MarkdownService {
     final bullets = <String>[];
     var bullets2 = <String>[];
     var listStyle = ListStyle.bullets;
+    var timelineAnimationMs = timelineDefaultAnimationDurationMs;
     var showChecklistProgress = false;
     var titleImageOverlay = true;
     var columnTitle1 = '';
@@ -906,6 +929,9 @@ class MarkdownService {
           columnTitle2 = _decodeText(content.substring(32));
         } else if (content.startsWith('ocideck_two_bullets_right:')) {
           bullets2 = _decodeBullets(content.substring(26));
+        } else if (content.startsWith('ocideck_timeline_duration:')) {
+          final ms = int.tryParse(content.substring(26).trim());
+          if (ms != null) timelineAnimationMs = clampTimelineDuration(ms);
         } else if (content.startsWith('ocideck_list_style:')) {
           final name = content.substring(19).trim();
           listStyle = ListStyle.values.firstWhere(
@@ -1172,6 +1198,8 @@ class MarkdownService {
         type = SlideType.title;
       case final c when c.split(RegExp(r'\s+')).contains('section'):
         type = SlideType.section;
+      case final c when c.split(RegExp(r'\s+')).contains('timeline'):
+        type = SlideType.timeline;
       case final c when c.split(RegExp(r'\s+')).contains('two-bullets'):
         type = SlideType.twoBullets;
       case final c when c.split(RegExp(r'\s+')).contains('split'):
@@ -1220,7 +1248,8 @@ class MarkdownService {
               c != type.marpClass &&
               c != 'logo-safe' &&
               c != 'no-logo' &&
-              c != 'no-footer',
+              c != 'no-footer' &&
+              !isTimelineOptionToken(c),
         )
         .join(' ');
 
@@ -1262,6 +1291,13 @@ class MarkdownService {
       skipped: skipped,
       tlp: slideTlp,
       tableRows: type == SlideType.table ? tableRows : const [],
+      timelineLayout: type == SlideType.timeline
+          ? timelineLayoutFromTokens(classTokens)
+          : TimelineLayout.auto,
+      timelineReveal: type == SlideType.timeline
+          ? timelineRevealFromTokens(classTokens)
+          : TimelineReveal.onEnter,
+      timelineAnimationMs: timelineAnimationMs,
     );
   }
 

@@ -2,6 +2,7 @@ import 'package:uuid/uuid.dart';
 import 'cockpit.dart';
 import 'deck.dart';
 import 'question.dart';
+import 'timeline.dart';
 
 const _uuid = Uuid();
 
@@ -21,6 +22,7 @@ enum SlideType {
   chart,
   cockpit,
   question,
+  timeline,
 }
 
 enum ListStyle { bullets, numbered, checklist, richText }
@@ -80,6 +82,8 @@ extension SlideTypeExtension on SlideType {
         return 'Cockpit';
       case SlideType.question:
         return 'Vraag';
+      case SlideType.timeline:
+        return 'Tijdlijn';
     }
   }
 
@@ -115,6 +119,8 @@ extension SlideTypeExtension on SlideType {
         return 'cockpit';
       case SlideType.question:
         return 'question';
+      case SlideType.timeline:
+        return 'timeline';
     }
   }
 }
@@ -160,6 +166,14 @@ class Slide {
   final TlpLevel tlp;
   final List<List<String>> tableRows; // first row is the header
 
+  /// Timeline slides only: how the events are arranged and animated. The events
+  /// themselves are stored in [bullets] as `marker :: title :: description`
+  /// strings; the layout/reveal options round-trip as `_class` tokens and the
+  /// draw-in duration as an `ocideck_timeline_duration` comment.
+  final TimelineLayout timelineLayout;
+  final TimelineReveal timelineReveal;
+  final int timelineAnimationMs;
+
   const Slide({
     required this.id,
     required this.type,
@@ -193,16 +207,20 @@ class Slide {
     this.skipped = false,
     this.tlp = TlpLevel.none,
     this.tableRows = const [],
+    this.timelineLayout = TimelineLayout.auto,
+    this.timelineReveal = TimelineReveal.onEnter,
+    this.timelineAnimationMs = timelineDefaultAnimationDurationMs,
   });
 
   factory Slide.create(SlideType type) {
     return Slide(
       id: _uuid.v4(),
       type: type,
-      bullets:
-          (type == SlideType.bullets ||
-              type == SlideType.twoBullets ||
-              type == SlideType.bulletsImage)
+      bullets: type == SlideType.timeline
+          ? timelineEventsToBullets(defaultTimelineEvents())
+          : (type == SlideType.bullets ||
+                type == SlideType.twoBullets ||
+                type == SlideType.bulletsImage)
           ? const ['']
           : const [],
       bullets2: type == SlideType.twoBullets ? const [''] : const [],
@@ -256,6 +274,9 @@ class Slide {
       skipped: src.skipped,
       tlp: src.tlp,
       tableRows: src.tableRows.map((r) => List<String>.from(r)).toList(),
+      timelineLayout: src.timelineLayout,
+      timelineReveal: src.timelineReveal,
+      timelineAnimationMs: src.timelineAnimationMs,
     );
   }
 
@@ -291,6 +312,9 @@ class Slide {
     bool? skipped,
     TlpLevel? tlp,
     List<List<String>>? tableRows,
+    TimelineLayout? timelineLayout,
+    TimelineReveal? timelineReveal,
+    int? timelineAnimationMs,
   }) {
     return Slide(
       id: id,
@@ -326,6 +350,9 @@ class Slide {
       skipped: skipped ?? this.skipped,
       tlp: tlp ?? this.tlp,
       tableRows: tableRows ?? this.tableRows,
+      timelineLayout: timelineLayout ?? this.timelineLayout,
+      timelineReveal: timelineReveal ?? this.timelineReveal,
+      timelineAnimationMs: timelineAnimationMs ?? this.timelineAnimationMs,
     );
   }
 }

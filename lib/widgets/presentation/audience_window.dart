@@ -6,6 +6,7 @@ import '../../models/deck.dart';
 import '../../models/question.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../models/timeline.dart';
 import '../../services/markdown_service.dart';
 import '../../services/mermaid_render_service.dart';
 import '../../utils/url_launcher_util.dart';
@@ -47,6 +48,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   String? _projectPath;
   int _index = 0;
   int _richTextPage = 0;
+  int _timelineStep = 0;
   int _blank = 0; // 0 = none, 1 = black, 2 = white
 
   // Annotation layer, keyed by slide index (the beamer has no stable ids).
@@ -107,6 +109,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         setState(() {
           _index = (m['index'] as num?)?.toInt() ?? _index;
           _richTextPage = (m['richTextPage'] as num?)?.toInt() ?? 0;
+          _timelineStep = (m['timelineStep'] as num?)?.toInt() ?? 0;
           _blank = (m['blank'] as num?)?.toInt() ?? 0;
           _laserPoint = null; // laser never carries over to another slide
           _activeStroke = null; // nor does an in-progress stroke
@@ -190,6 +193,18 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     presenterChannel.invokeMethod(method, arguments).catchError((_) => null);
   }
 
+  /// Reveal count for a timeline in step mode, mirroring the presenter so the
+  /// beamer stays in sync; null when the slide isn't a stepping timeline.
+  int? _timelineRevealedFor(Slide slide) {
+    if (slide.type != SlideType.timeline ||
+        slide.timelineReveal != TimelineReveal.steps) {
+      return null;
+    }
+    final n = parseTimelineEvents(slide.bullets).length;
+    if (n <= 0) return 0;
+    return (_timelineStep + 1).clamp(1, n);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -246,6 +261,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                   slideCount: _slides.length,
                   richTextPage: _richTextPage,
                   showRichTextPageControls: false,
+                  timelineRevealedCount: _timelineRevealedFor(slide),
                   tlp: _tlp,
                   organization: _organization,
                   showClassificationWatermark: _showClassificationWatermark,

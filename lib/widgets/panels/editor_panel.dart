@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../models/timeline.dart';
 import '../../services/image_service.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
@@ -21,6 +22,7 @@ import '../editors/question_editor.dart';
 import '../editors/quote_editor.dart';
 import '../editors/section_editor.dart';
 import '../editors/table_editor.dart';
+import '../editors/timeline_editor.dart';
 import '../editors/title_editor.dart';
 import '../editors/two_bullets_editor.dart';
 import '../editors/two_images_editor.dart';
@@ -197,7 +199,11 @@ class EditorPanel extends ConsumerWidget {
       type: newType,
       title: slide.title,
       subtitle: slide.subtitle,
-      bullets: keepsBullets
+      bullets: newType == SlideType.timeline
+          ? (slide.bullets.isNotEmpty
+                ? slide.bullets
+                : timelineEventsToBullets(defaultTimelineEvents()))
+          : keepsBullets
           ? (slide.bullets.isNotEmpty ? slide.bullets : [''])
           : const [],
       bullets2: newType == SlideType.twoBullets
@@ -241,6 +247,8 @@ class EditorPanel extends ConsumerWidget {
                     ['', ''],
                   ])
           : const [],
+      timelineLayout: slide.timelineLayout,
+      timelineReveal: slide.timelineReveal,
     );
   }
 
@@ -378,6 +386,13 @@ class EditorPanel extends ConsumerWidget {
           captionBasePath: captionBasePath,
           nestedInScrollView: nestedInScrollView,
         );
+      case SlideType.timeline:
+        return TimelineEditor(
+          key: ValueKey(slide.id),
+          slide: slide,
+          onUpdate: onUpdate,
+          nestedInScrollView: nestedInScrollView,
+        );
     }
   }
 }
@@ -416,6 +431,8 @@ IconData _slideTypeIcon(SlideType type) {
       return Icons.speed_outlined;
     case SlideType.question:
       return Icons.quiz_outlined;
+    case SlideType.timeline:
+      return Icons.timeline_outlined;
   }
 }
 

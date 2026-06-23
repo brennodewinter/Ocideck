@@ -8,6 +8,23 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Timeline slides** — a new `timeline` slide type that turns a list of dated
+  events into an animated, eye-candy timeline. Each event is a plain Markdown
+  list item using `marker :: title :: description` (marker and description
+  optional), so the `.md` stays a readable, Marp-compatible list — no JSON block.
+  The renderer draws a glowing accent spine with nodes and cards that alternate
+  above/below (horizontal rail) or left/right (vertical spine), styled from the
+  active profile (accent, fonts, background). When a horizontal rail gets
+  crowded the cards stack onto multiple *floors* (heights) so they tile instead
+  of colliding. On enter, the line draws itself first and the events are then
+  placed onto it one after another. **Layout** is *auto* (horizontal
+  for short timelines, vertical for longer ones) or forced horizontal/vertical;
+  **animation** is *draw-in on open*, *step-by-step* (each click reveals the next
+  event, kept in sync on the audience window) or *none*. Layout and animation
+  round-trip as `_class` tokens (`timeline-horizontal` / `timeline-vertical` /
+  `timeline-steps` / `timeline-static`); the events live in the list itself. The
+  draw-in **animation speed** is adjustable per slide via a slider (≈0.4–6 s) and
+  round-trips in an `ocideck_timeline_duration` comment.
 - **Question slides (interactive quiz)** — a new `question` slide type that turns a
   presentation into a short quiz. Three kinds, chosen in the editor: **multiple
   choice** (one correct answer shown with a random pick of wrong ones), **true /

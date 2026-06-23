@@ -305,6 +305,7 @@ class SlideQualityAnalyzer {
       case SlideType.code:
       case SlideType.cockpit:
       case SlideType.question:
+      case SlideType.timeline:
         break;
     }
   }
@@ -430,6 +431,7 @@ class SlideQualityAnalyzer {
       case SlideType.code:
       case SlideType.chart:
       case SlideType.cockpit:
+      case SlideType.timeline:
         break;
     }
   }
@@ -501,6 +503,7 @@ class SlideQualityAnalyzer {
       case SlideType.chart:
       case SlideType.cockpit:
       case SlideType.question:
+      case SlideType.timeline:
         break;
     }
   }

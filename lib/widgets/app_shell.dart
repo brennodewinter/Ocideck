@@ -939,15 +939,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                       openProperties();
                     case 'settings':
                       SettingsDialog.show(context);
-                    default:
-                      if (v.startsWith('style:')) {
-                        final name = v.substring(6);
-                        final profile = settings.themeProfiles.firstWhere(
-                          (p) => p.name == name,
-                          orElse: () => settings.themeProfile,
-                        );
-                        deckNotifier.updateThemeProfile(profile);
-                      }
                   }
                 },
                 itemBuilder: (_) => [
@@ -986,29 +977,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                     l10n.t('fullDeckPreview'),
                   ),
                   const PopupMenuDivider(),
-                  for (final profile in settings.themeProfiles)
-                    PopupMenuItem<String>(
-                      value: 'style:${profile.name}',
-                      child: Row(
-                        children: [
-                          Icon(
-                            profile.name == deck.themeProfile.name
-                                ? Icons.check
-                                : Icons.palette_outlined,
-                            size: 16,
-                            color: const Color(0xFF475569),
-                          ),
-                          const SizedBox(width: 10),
-                          Flexible(
-                            child: Text(
-                              '${l10n.t('styleProfile')}: ${profile.name}',
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  const PopupMenuDivider(),
+                  // Style profiles are chosen via the "STIJL" pulldown in the
+                  // editor toolbar; no need to duplicate them here.
                   menuItem(
                     'settings',
                     Icons.settings_outlined,
