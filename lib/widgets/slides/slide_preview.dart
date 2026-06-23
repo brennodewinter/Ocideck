@@ -23,6 +23,7 @@ import '../../models/timeline.dart';
 import '../../theme/app_theme.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../services/rich_text_layout.dart';
+import '../../utils/image_limits.dart';
 import '../../utils/log.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/project_path.dart';

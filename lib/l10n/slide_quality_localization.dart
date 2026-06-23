@@ -94,6 +94,9 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.imageContrastUnverified => l10n.d(
       'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.',
     ),
+    SlideQualityIssueKind.titleImageContrast =>
+      '${l10n.d('Titeltekst heeft te weinig contrast met de achtergrondafbeelding')} '
+          '(${issue.args['ratio']}:1).',
     SlideQualityIssueKind.chartMissingDescription => l10n.d(
       'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.',
     ),

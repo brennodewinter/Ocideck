@@ -180,6 +180,18 @@ class FileService {
     } else {
       final file = File(filePath);
       if (!await file.exists()) return null;
+      // A deck is plain text (images/media are sidecar files), so a huge .md is
+      // pathological. Cap it to avoid loading/parsing an attacker-sized file.
+      try {
+        if (await file.length() > maxDeckMarkdownBytes) {
+          logWarning(
+            'FileService.openDeck: file exceeds ${maxDeckMarkdownBytes ~/ (1024 * 1024)} MiB cap',
+          );
+          return null;
+        }
+      } catch (_) {
+        return null;
+      }
       try {
         raw = await file.readAsString();
       } catch (e) {
@@ -344,7 +356,11 @@ class FileService {
       if (src == null || p.isAbsolute(src) || deck.projectPath == null) {
         continue;
       }
-      final from = File(p.join(deck.projectPath!, src));
+      // Containment guard, matching _hydrateCharts: a chart source like
+      // ../../../secret.csv must not be copied out of the project on Save As.
+      final resolved = resolveProjectRelative(deck.projectPath, src);
+      if (resolved == null) continue;
+      final from = File(resolved);
       final toPath = p.join(destDir, src);
       if (from.path == toPath || !from.existsSync()) continue;
       final out = File(toPath);
@@ -519,6 +535,9 @@ class FileService {
   ///
   /// Image-heavy decks routinely exceed 64 MiB, so keep the safety guard high
   /// enough for real presentation exchange while still bounding abuse.
+  /// A deck's markdown is plain text; cap it so a crafted oversized `.md`
+  /// can't exhaust memory on open. Generous — real decks are well under this.
+  static const maxDeckMarkdownBytes = 32 * 1024 * 1024; // 32 MiB
   static const maxPackageBytes = 512 * 1024 * 1024; // 512 MiB
   static const maxPackageEntries = 10000;
   static const maxZipEntryPathLength = 512;
@@ -636,7 +655,12 @@ class FileService {
     final h = host.toLowerCase();
     if (h.isEmpty || h == 'localhost' || h.endsWith('.localhost')) return true;
     final addr = InternetAddress.tryParse(host);
-    if (addr == null) return false; // a hostname; can't classify offline
+    if (addr == null) return false; // a hostname; resolved in _resolvesToBlocked
+    return _isBlockedAddress(addr);
+  }
+
+  /// Classifies a resolved IP as loopback/private/link-local/etc.
+  static bool _isBlockedAddress(InternetAddress addr) {
     if (addr.isLoopback || addr.isLinkLocal || addr.isMulticast) return true;
     final raw = addr.rawAddress;
     if (addr.type == InternetAddressType.IPv4) {
@@ -653,6 +677,25 @@ class FileService {
     return false;
   }
 
+  /// Resolves [host] to validated addresses, or null when the host (or ANY of
+  /// its addresses) is internal or it can't be resolved — closes the SSRF hole
+  /// where `attacker.com` resolves to 127.0.0.1 / 169.254.169.254 / an RFC1918
+  /// host. The caller pins the connection to the returned address so a DNS
+  /// rebind between this check and connect can't redirect the socket internally.
+  static Future<List<InternetAddress>?> _safeResolve(String host) async {
+    final literal = InternetAddress.tryParse(host);
+    if (literal != null) {
+      return _isBlockedAddress(literal) ? null : [literal];
+    }
+    try {
+      final addrs = await InternetAddress.lookup(host);
+      if (addrs.isEmpty || addrs.any(_isBlockedAddress)) return null;
+      return addrs;
+    } catch (_) {
+      return null; // can't resolve safely → refuse
+    }
+  }
+
   Future<String?> importFromUrl(String url, String destParentDir) async {
     final uri = Uri.tryParse(url.trim());
     if (uri == null || !uri.hasScheme) return null;
@@ -660,11 +703,20 @@ class FileService {
     final scheme = uri.scheme.toLowerCase();
     if (scheme != 'http' && scheme != 'https') return null;
     if (_isBlockedHost(uri.host)) return null;
+    // Resolve the hostname up front and reject internal addresses.
+    final safeAddrs = await _safeResolve(uri.host);
+    if (safeAddrs == null) return null;
+    final pinned = safeAddrs.first;
 
     final List<int> bytes;
     try {
       final client = HttpClient()
-        ..connectionTimeout = const Duration(seconds: 15);
+        ..connectionTimeout = const Duration(seconds: 15)
+        // Pin the socket to the validated address so a DNS rebind between the
+        // check above and the actual connect can't point us at an internal IP.
+        // TLS (for https) still validates against the original hostname.
+        ..connectionFactory = (u, proxyHost, proxyPort) =>
+            Socket.startConnect(pinned, u.port);
       try {
         final request = await client.getUrl(uri);
         // Don't auto-follow redirects: a 3xx could point at a private host and

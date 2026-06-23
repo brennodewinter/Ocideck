@@ -29,6 +29,11 @@ class _TitleEditorState extends ConsumerState<TitleEditor> {
   late final TextEditingController _title;
   late final TextEditingController _subtitle;
 
+  /// Zoom to restore when the user turns "fill slide" back off, so toggling the
+  /// checkbox doesn't discard the zoom they had dialled in. The editor is keyed
+  /// per slide (ValueKey(slide.id)), so this state is naturally per-slide.
+  int _zoomBeforeFill = 100;
+
   @override
   void initState() {
     super.initState();
@@ -36,6 +41,7 @@ class _TitleEditorState extends ConsumerState<TitleEditor> {
     _subtitle = TextEditingController(text: widget.slide.subtitle);
     _title.addListener(_emit);
     _subtitle.addListener(_emit);
+    if (widget.slide.imageSize > 0) _zoomBeforeFill = widget.slide.imageSize;
   }
 
   void _emit() {
@@ -125,12 +131,41 @@ class _TitleEditorState extends ConsumerState<TitleEditor> {
         ),
         if (imagePath.isNotEmpty) ...[
           const SizedBox(height: 12),
-          const SectionLabel('Zoom achtergrond'),
-          ImageZoomControl(
-            value: widget.slide.imageSize,
-            onChanged: (v) =>
-                widget.onUpdate(widget.slide.copyWith(imageSize: v)),
+          // imageSize == 0 renders the image with BoxFit.cover: it fills the
+          // whole slide and crops whatever falls outside. Any other value
+          // switches to the zoom/contain control below.
+          CheckboxListTile(
+            value: widget.slide.imageSize == 0,
+            onChanged: (value) {
+              final fill = value ?? false;
+              if (fill) {
+                if (widget.slide.imageSize > 0) {
+                  _zoomBeforeFill = widget.slide.imageSize;
+                }
+                widget.onUpdate(widget.slide.copyWith(imageSize: 0));
+              } else {
+                widget.onUpdate(
+                  widget.slide.copyWith(imageSize: _zoomBeforeFill),
+                );
+              }
+            },
+            contentPadding: EdgeInsets.zero,
+            dense: true,
+            controlAffinity: ListTileControlAffinity.leading,
+            title: const Text('Afbeelding vult hele slide'),
+            subtitle: const Text(
+              'Vult de hele slide; wat buiten beeld valt wordt bijgesneden.',
+            ),
           ),
+          if (widget.slide.imageSize != 0) ...[
+            const SizedBox(height: 12),
+            const SectionLabel('Zoom achtergrond'),
+            ImageZoomControl(
+              value: widget.slide.imageSize,
+              onChanged: (v) =>
+                  widget.onUpdate(widget.slide.copyWith(imageSize: v)),
+            ),
+          ],
           const SizedBox(height: 12),
           CheckboxListTile(
             value: widget.slide.titleImageOverlay,
@@ -144,6 +179,39 @@ class _TitleEditorState extends ConsumerState<TitleEditor> {
             subtitle: const Text(
               'Maakt de achtergrond rustiger achter titel en subtitel.',
             ),
+          ),
+          const SizedBox(height: 12),
+          const SectionLabel('Titeltekstkleur'),
+          const SizedBox(height: 6),
+          Wrap(
+            spacing: 8,
+            children: [
+              ChoiceChip(
+                label: const Text('Thema'),
+                selected: widget.slide.titleTextColorOverride.isEmpty,
+                onSelected: (_) => widget.onUpdate(
+                  widget.slide.copyWith(titleTextColorOverride: ''),
+                ),
+              ),
+              ChoiceChip(
+                label: const Text('Licht'),
+                selected:
+                    widget.slide.titleTextColorOverride.toUpperCase() ==
+                    '#FFFFFF',
+                onSelected: (_) => widget.onUpdate(
+                  widget.slide.copyWith(titleTextColorOverride: '#FFFFFF'),
+                ),
+              ),
+              ChoiceChip(
+                label: const Text('Donker'),
+                selected:
+                    widget.slide.titleTextColorOverride.toUpperCase() ==
+                    '#111827',
+                onSelected: (_) => widget.onUpdate(
+                  widget.slide.copyWith(titleTextColorOverride: '#111827'),
+                ),
+              ),
+            ],
           ),
         ],
       ],

@@ -157,6 +157,11 @@ class Slide {
   final double advanceDuration; // 0 = no auto-advance
   final int imageSize; // 0 = auto; image: bg %, bulletsImage: right panel %
   final bool titleImageOverlay; // darken title background image for readability
+  /// Title slides only: overrides the theme's title text colour for this one
+  /// slide (hex, e.g. `#FFFFFF`). Empty = use the theme colour. Lets the
+  /// contrast auto-fix flip text light/dark on a single slide without touching
+  /// the deck-wide theme.
+  final String titleTextColorOverride;
   final bool showLogo; // show the profile logo on this slide (default true)
   final bool showFooter; // show the profile footer on this slide (default true)
   final bool skipped; // skip this slide when presenting and exporting
@@ -202,6 +207,7 @@ class Slide {
     this.advanceDuration = 0,
     this.imageSize = 0,
     this.titleImageOverlay = true,
+    this.titleTextColorOverride = '',
     this.showLogo = true,
     this.showFooter = true,
     this.skipped = false,
@@ -269,6 +275,7 @@ class Slide {
       advanceDuration: src.advanceDuration,
       imageSize: src.imageSize,
       titleImageOverlay: src.titleImageOverlay,
+      titleTextColorOverride: src.titleTextColorOverride,
       showLogo: src.showLogo,
       showFooter: src.showFooter,
       skipped: src.skipped,
@@ -307,6 +314,7 @@ class Slide {
     double? advanceDuration,
     int? imageSize,
     bool? titleImageOverlay,
+    String? titleTextColorOverride,
     bool? showLogo,
     bool? showFooter,
     bool? skipped,
@@ -345,6 +353,8 @@ class Slide {
       advanceDuration: advanceDuration ?? this.advanceDuration,
       imageSize: imageSize ?? this.imageSize,
       titleImageOverlay: titleImageOverlay ?? this.titleImageOverlay,
+      titleTextColorOverride:
+          titleTextColorOverride ?? this.titleTextColorOverride,
       showLogo: showLogo ?? this.showLogo,
       showFooter: showFooter ?? this.showFooter,
       skipped: skipped ?? this.skipped,

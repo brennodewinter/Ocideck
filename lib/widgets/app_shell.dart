@@ -18,6 +18,7 @@ import '../services/mermaid_render_service.dart';
 import '../services/slide_quality_analyzer.dart';
 import '../state/deck_provider.dart';
 import '../state/deck_quality_provider.dart';
+import '../state/image_contrast_provider.dart';
 import '../state/editor_provider.dart';
 import '../state/settings_provider.dart';
 import '../state/tabs_provider.dart';
@@ -369,6 +370,9 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                                       .watch(slideQualityAnalyzerProvider)
                                       .analyze(deck);
                                 }),
+                                imageContrastIssuesProvider.overrideWith(
+                                  computeImageContrastIssues,
+                                ),
                               ],
                               child: const _TabContent(),
                             ),
@@ -606,7 +610,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       );
     }
 
-    void exportDeck() {
+    Future<void> exportDeck() async {
       final slides = _slidesForPresentationOrExport(deck);
       if (slides.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -618,7 +622,27 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         );
         return;
       }
-      ExportDialog.show(
+      // The export gate runs on the synchronous analyzer, but the title-image
+      // contrast check is asynchronous. Fold its findings in so the gate and
+      // the quality panel agree (the panel keeps the provider warm, so this is
+      // usually already resolved).
+      final syncQuality = const SlideQualityAnalyzer().analyze(deck);
+      var quality = syncQuality;
+      try {
+        final imageIssues = await ref.read(
+          imageContrastIssuesProvider.future,
+        );
+        if (imageIssues.isNotEmpty) {
+          quality = SlideQualityResult([
+            ...syncQuality.issues,
+            ...imageIssues,
+          ]);
+        }
+      } catch (_) {
+        // Fall back to the sync result if the async pass fails.
+      }
+      if (!context.mounted) return;
+      await ExportDialog.show(
         context,
         deckPath: deckState.filePath!,
         slides: slides,
@@ -630,7 +654,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         enforcementPolicy: ClassificationEnforcementPolicy.fromAppSettings(
           ref.read(settingsProvider),
         ),
-        qualityResult: const SlideQualityAnalyzer().analyze(deck),
+        qualityResult: quality,
         qualityPolicy: QualityExportPolicy.fromAppSettings(
           warningsEnabled: ref.read(settingsProvider).qualityWarningsOnExport,
           blockOnErrors: ref.read(settingsProvider).qualityBlockExportOnErrors,

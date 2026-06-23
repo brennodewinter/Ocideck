@@ -6,7 +6,10 @@ import '../../l10n/slide_quality_localization.dart';
 import '../../l10n/slide_quality_navigation.dart';
 import '../../models/markdown_validation.dart';
 import '../../models/slide_quality.dart';
+import '../../state/deck_provider.dart';
 import '../../state/deck_quality_provider.dart';
+import '../../state/image_contrast_provider.dart';
+import '../../utils/title_contrast.dart';
 import '../dialogs/slide_quality_details_dialog.dart';
 
 class SlideQualityPanel extends ConsumerStatefulWidget {
@@ -24,6 +27,26 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
     navigateToSlideQualityIssue(context: context, ref: ref, issue: issue);
   }
 
+  /// Applies the recommended contrast fix carried in the issue's args to the
+  /// slide, then re-analyses (the providers rebuild automatically).
+  void _handleFix(SlideQualityIssue issue) {
+    final fix = TitleContrastFix.values.firstWhere(
+      (f) => f.name == issue.args['fix'],
+      orElse: () => TitleContrastFix.none,
+    );
+    if (fix == TitleContrastFix.none) return;
+    final deck = ref.read(deckProvider).deck;
+    if (deck == null ||
+        issue.slideIndex < 0 ||
+        issue.slideIndex >= deck.slides.length) {
+      return;
+    }
+    final slide = deck.slides[issue.slideIndex];
+    ref
+        .read(deckProvider.notifier)
+        .updateSlide(issue.slideIndex, applyTitleContrastFix(slide, fix));
+  }
+
   List<SlideQualityIssue> _filteredIssues(SlideQualityResult result) {
     if (_severityFilter == null) return result.issues;
     return result.issues
@@ -34,7 +57,17 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final result = ref.watch(deckQualityProvider);
+    final syncResult = ref.watch(deckQualityProvider);
+    // Image-contrast checks decode the background asynchronously; fold their
+    // findings into the same result so counts, summary and dialog include them.
+    // Use `.value` (not `.asData?.value`): it retains the previous result while
+    // the autoDispose FutureProvider reloads on each deck edit, so the contrast
+    // warnings don't blink away on every keystroke.
+    final imageIssues =
+        ref.watch(imageContrastIssuesProvider).value ?? const [];
+    final result = imageIssues.isEmpty
+        ? syncResult
+        : SlideQualityResult([...syncResult.issues, ...imageIssues]);
     final visibleIssues = _filteredIssues(result);
     final hasErrors = result.errorCount > 0;
     final hasWarnings = result.warningCount > 0;
@@ -102,6 +135,7 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
                     context,
                     result: result,
                     onIssueTap: _handleIssueTap,
+                    onFix: _handleFix,
                   ),
                   icon: const Icon(Icons.list_alt_outlined, size: 13),
                   label: Text(l10n.d('Bekijk meldingen…')),

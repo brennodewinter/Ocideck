@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../utils/image_limits.dart';
 import '../../utils/project_path.dart';
 
 /// Opens a full-screen, pan-and-zoomable view of [imagePath] (resolved against
@@ -52,8 +53,8 @@ class _ImageZoomView extends StatelessWidget {
                 minScale: 0.8,
                 maxScale: 6,
                 child: Center(
-                  child: Image.file(
-                    file,
+                  child: Image(
+                    image: cappedFileImage(file),
                     fit: BoxFit.contain,
                     errorBuilder: (_, _, _) => const Icon(
                       Icons.broken_image_outlined,

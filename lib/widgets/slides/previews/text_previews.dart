@@ -20,6 +20,11 @@ class _TitlePreview extends StatelessWidget {
   Widget _content(BuildContext context) {
     final pad = w * 0.08;
     final link = _hexColor(profile.accentColor);
+    final titleColor = _hexColor(
+      slide.titleTextColorOverride.isNotEmpty
+          ? slide.titleTextColorOverride
+          : profile.titleTextColor,
+    );
     return FittedBox(
       fit: BoxFit.scaleDown,
       alignment: Alignment.center,
@@ -38,7 +43,7 @@ class _TitlePreview extends StatelessWidget {
                   _applyFont(
                     font,
                     TextStyle(
-                      color: _hexColor(profile.titleTextColor),
+                      color: titleColor,
                       fontSize: w * 0.055,
                       fontWeight: FontWeight.bold,
                       height: 1.2,
@@ -54,9 +59,7 @@ class _TitlePreview extends StatelessWidget {
                   _applyFont(
                     font,
                     TextStyle(
-                      color: _hexColor(
-                        profile.titleTextColor,
-                      ).withValues(alpha: 0.72),
+                      color: titleColor.withValues(alpha: 0.72),
                       fontSize: w * 0.03,
                       height: 1.3,
                     ),

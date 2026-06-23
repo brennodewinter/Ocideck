@@ -70,6 +70,19 @@ void main() {}
     expect(html, contains('mermaid'));
     // Everything is inlined: there must be no external <script src=...> tags.
     expect(html, isNot(contains('<script src')));
+
+    // A nonce-based CSP backs DOMPurify: injected inline scripts can't run.
+    expect(html, contains('http-equiv="Content-Security-Policy"'));
+    expect(html, contains("script-src 'nonce-"));
+    expect(html, contains("object-src 'none'"));
+    // Every executable <script> we emit carries the nonce (the per-slide
+    // markdown holders use `<script type="text/markdown">`), so no bare
+    // `<script>` opening tag should remain.
+    expect(html, isNot(contains('<script>')));
+
+    // Mermaid runs strict and its injected SVG is sanitised post-render.
+    expect(html, contains("securityLevel:'strict'"));
+    expect(html, contains('sanitizeMermaid'));
   });
 
   test(

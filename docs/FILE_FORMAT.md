@@ -46,6 +46,14 @@ The folders `images/`, `logos/`, `themes/` (and `node_modules/`, `build/`,
 `.git/`, `.dart_tool/`) are skipped when OciDeck scans a folder for
 presentations.
 
+> **Security — asset paths are confined to the project folder.** Because a
+> `.md` may come from an untrusted source, every asset reference
+> (`![](…)` images, `logoPath`, video/audio, chart `source`) is resolved
+> strictly inside the project folder. Absolute paths and `../` escapes are
+> ignored when previewing, presenting, exporting, or analysing a deck — a
+> deck cannot read files elsewhere on disk. See `SECURITY.md` →
+> *Untrusted deck handling*.
+
 > Next to the `.md` file, OciDeck writes **sidecars** that deliberately are not
 > part of the Marp Markdown (so the `.md` stays clean and exchangeable): the
 > annotation layer (`<name>.ink.json`, §6.2), user notes

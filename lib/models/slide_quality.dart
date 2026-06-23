@@ -12,6 +12,7 @@ enum SlideQualityIssueKind {
   footerContrast,
   checklistContrast,
   imageContrastUnverified,
+  titleImageContrast,
   chartMissingDescription,
   mediaMissingDescription,
   missingMediaFile,

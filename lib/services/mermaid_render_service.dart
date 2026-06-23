@@ -50,7 +50,9 @@ class MermaidRenderService {
     await _controller!.loadHtmlString('''
 <!DOCTYPE html>
 <html>
-<head><meta charset="utf-8"></head>
+<head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval'; style-src 'unsafe-inline'; img-src data:; font-src data:">
+</head>
 <body>
 <script id="mermaid-bundle"></script>
 <script>

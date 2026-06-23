@@ -55,6 +55,16 @@ class MarpHtmlService {
     final mermaid = await loadAsset('$_assetDir/mermaid.min.js');
     final css = theme == null ? _baseCss : await _themedCss(theme);
 
+    // Per-export CSP nonce. Every executable <script> we emit carries it; the
+    // CSP then allows only nonce'd scripts, so an injected inline <script> that
+    // somehow survives DOMPurify can't execute when the file is opened. The
+    // per-slide `<script type="text/markdown">` data holders are inert (never
+    // executed) and intentionally carry no nonce.
+    final rng = math.Random.secure();
+    final nonce = base64.encode(
+      List<int>.generate(16, (_) => rng.nextInt(256)),
+    );
+
     final sections = StringBuffer();
     for (final slide in marpSlides(deckMarkdown)) {
       final renderedBlocks = renderCockpitBlocks(
@@ -68,7 +78,8 @@ class MarpHtmlService {
         ..write('</script></section>');
     }
 
-    String inline(String code) => '<script>${_guard(code)}</script>';
+    String inline(String code) =>
+        '<script nonce="$nonce">${_guard(code)}</script>';
 
     final meta = metadata ?? const ExportDocumentMetadata();
     final title = _htmlAttr(meta.displayTitle(fallbackTitle));
@@ -80,10 +91,16 @@ class MarpHtmlService {
     return '<!doctype html>\n'
         '<html lang="nl"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
+        // Neutralise injected inline scripts (defence-in-depth behind DOMPurify)
+        // without over-restricting img/style/font, which would break locally
+        // opened exports that reference relative image files.
+        '<meta http-equiv="Content-Security-Policy" '
+        'content="script-src \'nonce-$nonce\'; object-src \'none\'; '
+        'base-uri \'none\'; frame-src \'none\'">'
         '<title>$title</title>'
         '$headMeta'
         '<style>$css\n$hljsCss</style>'
-        '<script>$_mathjaxConfig</script>'
+        '<script nonce="$nonce">$_mathjaxConfig</script>'
         '${inline(marked)}'
         '${inline(purify)}'
         '${inline(hljs)}'
@@ -1220,6 +1237,20 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 
   static const _renderScript = r'''
 (function(){
+  // Defence-in-depth: mermaid injects its SVG into the DOM AFTER DOMPurify has
+  // run on the markdown, so sanitise the produced SVG ourselves too (mirrors
+  // the in-app sanitize_svg.dart). Mermaid also runs with securityLevel strict.
+  function sanitizeMermaid(){
+    if(!window.DOMPurify)return;
+    document.querySelectorAll('.mermaid svg').forEach(function(svg){
+      try{
+        var clean=DOMPurify.sanitize(svg.outerHTML,{USE_PROFILES:{svg:true,svgFilters:true}});
+        var tpl=document.createElement('template');tpl.innerHTML=clean;
+        var node=tpl.content.firstElementChild;
+        if(node)svg.replaceWith(node);
+      }catch(e){}
+    });
+  }
   if(window.marked&&marked.setOptions){marked.setOptions({gfm:true,breaks:false});}
   document.querySelectorAll('section.slide').forEach(function(sec){
     var holder=sec.querySelector('script[type="text/markdown"]');
@@ -1238,7 +1269,11 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
     holder.textContent=code.textContent;pre.replaceWith(holder);
   });
   if(window.hljs){document.querySelectorAll('pre code').forEach(function(el){try{hljs.highlightElement(el);}catch(e){}});}
-  if(window.mermaid){try{mermaid.initialize({startOnLoad:false});mermaid.run();}catch(e){}}
+  if(window.mermaid){try{
+    mermaid.initialize({startOnLoad:false,securityLevel:'strict'});
+    var mres=mermaid.run();
+    if(mres&&mres.then){mres.then(sanitizeMermaid).catch(function(e){});}else{sanitizeMermaid();}
+  }catch(e){}}
   if(window.MathJax&&MathJax.typesetPromise){MathJax.typesetPromise();}
 })();
 ''';
