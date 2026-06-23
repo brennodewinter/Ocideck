@@ -522,6 +522,11 @@ Widget _resolvedImage(
 
   final resolved = resolveSlideAssetPath(imagePath, projectPath);
   if (resolved == null) return _imagePlaceholder(context);
+  // Block a project-internal symlink that points outside the project (cached,
+  // so the per-frame cost is O(1) after the first render of each image).
+  if (projectPath != null && !isRenderPathContained(resolved, projectPath)) {
+    return _imagePlaceholder(context);
+  }
 
   return Image(
     // Cap the decode so a huge-dimensioned (possibly untrusted) image can't

@@ -16,14 +16,48 @@ String? resolveContainedRealPath(String path, String? projectPath) {
   final resolved = resolveSlideAssetPath(path, projectPath);
   if (resolved == null || projectPath == null) return resolved;
   try {
-    final realBase = Directory(projectPath).resolveSymbolicLinksSync();
-    final real = File(resolved).resolveSymbolicLinksSync();
-    if (real == realBase || p.isWithin(realBase, real)) return resolved;
-    return null;
+    return _isInsideRealBase(resolved, projectPath) ? resolved : null;
   } on FileSystemException {
-    return null;
+    return null; // missing/unresolvable → refuse (can't copy anyway)
   }
 }
+
+/// True when [resolved]'s real (symlink-followed) path is inside [projectPath].
+/// Throws [FileSystemException] when the path is missing/unresolvable.
+bool _isInsideRealBase(String resolved, String projectPath) {
+  final realBase = Directory(projectPath).resolveSymbolicLinksSync();
+  final real = File(resolved).resolveSymbolicLinksSync();
+  return real == realBase || p.isWithin(realBase, real);
+}
+
+final Map<String, bool> _renderContainedCache = {};
+
+/// Symlink-containment check for the hot render/export path: blocks a project-
+/// internal symlink that points outside the project. Cached by resolved path
+/// (an opened deck's symlink topology is fixed for the session), so only the
+/// first render of each image does a filesystem stat — the per-frame cost is
+/// O(1), avoiding jank on network-mounted projects.
+///
+/// A missing/unresolvable path returns `true` (it is not a symlink escape; the
+/// normal load path renders a placeholder), so only a genuine escape is blocked.
+bool isRenderPathContained(String resolved, String projectPath) {
+  final hit = _renderContainedCache[resolved];
+  if (hit != null) return hit;
+  bool ok;
+  try {
+    ok = _isInsideRealBase(resolved, projectPath);
+  } on FileSystemException {
+    ok = true;
+  }
+  if (_renderContainedCache.length >= 1024) {
+    _renderContainedCache.remove(_renderContainedCache.keys.first);
+  }
+  _renderContainedCache[resolved] = ok;
+  return ok;
+}
+
+/// Clears the [isRenderPathContained] cache (tests).
+void resetRenderContainedCache() => _renderContainedCache.clear();
 
 /// Resolve a project-relative [path] to an absolute path strictly inside
 /// [basePath], or null for absolute paths, empty paths, or `../` escapes.
