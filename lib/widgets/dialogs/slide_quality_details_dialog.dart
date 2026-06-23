@@ -124,7 +124,9 @@ class _SeveritySection extends StatelessWidget {
                     ),
                   ),
                   if (onFix != null &&
-                      issue.kind == SlideQualityIssueKind.titleImageContrast)
+                      issue.kind == SlideQualityIssueKind.titleImageContrast &&
+                      issue.args['fix'] != null &&
+                      issue.args['fix'] != 'none')
                     Padding(
                       padding: const EdgeInsets.only(left: 6),
                       child: TextButton.icon(

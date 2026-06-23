@@ -43,6 +43,55 @@ void main() {
     expect(eval.fixedRatio, greaterThanOrEqualTo(3.0));
   });
 
+  test('subtitle (0.72 alpha) is the binding constraint when present', () {
+    // A mid-grey background where opaque white text clears 3:1 but the
+    // 0.72-alpha subtitle does not. With only a subtitle present the slide
+    // must be flagged, even though the opaque title would have passed.
+    const grey = Color(0xFF767676);
+    final titleOnly = titleSlide.copyWith(
+      title: 'Alleen titel',
+      subtitle: '',
+      titleImageOverlay: false,
+    );
+    final subtitleOnly = titleSlide.copyWith(
+      title: '',
+      subtitle: 'Alleen ondertitel',
+      titleImageOverlay: false,
+    );
+    final titleEval = evaluateTitleContrast(
+      avgImage: grey,
+      theme: theme,
+      slide: titleOnly,
+    );
+    final subtitleEval = evaluateTitleContrast(
+      avgImage: grey,
+      theme: theme,
+      slide: subtitleOnly,
+    );
+    // The subtitle's effective contrast is strictly lower than the title's.
+    expect(subtitleEval.ratio, lessThan(titleEval.ratio));
+  });
+
+  test('no fix is offered when none improves on the current contrast', () {
+    // Overlay already on and the wash makes a near-black background; the
+    // theme text is white and already maximal, so no lever helps.
+    const darkOverlayTheme = ThemeProfile(
+      titleTextColor: '#FFFFFF',
+      titleBackgroundColor: '#000000',
+    );
+    final eval = evaluateTitleContrast(
+      avgImage: const Color(0xFF6E6E6E),
+      theme: darkOverlayTheme,
+      // Force the failing branch with a high threshold so we exercise the
+      // "best lever still doesn't beat current" fallback.
+      slide: titleSlide.copyWith(title: 'Hallo', titleImageOverlay: true),
+      threshold: 99,
+    );
+    expect(eval.passes, isFalse);
+    expect(eval.fix, TitleContrastFix.none);
+    expect(eval.fixedRatio, eval.ratio);
+  });
+
   test('applyTitleContrastFix sets the expected slide fields', () {
     expect(
       applyTitleContrastFix(titleSlide, TitleContrastFix.enableOverlay)

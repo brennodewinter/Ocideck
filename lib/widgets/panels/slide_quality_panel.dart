@@ -60,8 +60,11 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
     final syncResult = ref.watch(deckQualityProvider);
     // Image-contrast checks decode the background asynchronously; fold their
     // findings into the same result so counts, summary and dialog include them.
+    // Use `.value` (not `.asData?.value`): it retains the previous result while
+    // the autoDispose FutureProvider reloads on each deck edit, so the contrast
+    // warnings don't blink away on every keystroke.
     final imageIssues =
-        ref.watch(imageContrastIssuesProvider).asData?.value ?? const [];
+        ref.watch(imageContrastIssuesProvider).value ?? const [];
     final result = imageIssues.isEmpty
         ? syncResult
         : SlideQualityResult([...syncResult.issues, ...imageIssues]);

@@ -17,16 +17,36 @@ Future<List<SlideQualityIssue>> computeImageContrastIssues(Ref ref) async {
   final deck = ref.watch(deckProvider.select((s) => s.deck));
   if (deck == null) return const [];
   final theme = deck.themeProfile;
+
+  // Title slides whose text sits on a background image; everything else is
+  // irrelevant to this check.
+  final indices = [
+    for (var i = 0; i < deck.slides.length; i++)
+      if (!deck.slides[i].skipped &&
+          deck.slides[i].type == SlideType.title &&
+          deck.slides[i].imagePath.isNotEmpty &&
+          (deck.slides[i].title.isNotEmpty ||
+              deck.slides[i].subtitle.isNotEmpty))
+        i,
+  ];
+
+  // Decode the backgrounds in parallel so a deck with many title images
+  // doesn't pay the sum of every decode on a cold cache.
+  final averages = await Future.wait(
+    indices.map((i) async {
+      final resolved = resolveSlideAssetPath(
+        deck.slides[i].imagePath,
+        deck.projectPath,
+      );
+      return resolved == null ? null : await averageImageColor(resolved);
+    }),
+  );
+
   final issues = <SlideQualityIssue>[];
-
-  for (var i = 0; i < deck.slides.length; i++) {
+  for (var k = 0; k < indices.length; k++) {
+    final i = indices[k];
     final slide = deck.slides[i];
-    if (slide.skipped) continue;
-    if (slide.type != SlideType.title || slide.imagePath.isEmpty) continue;
-    if (slide.title.isEmpty && slide.subtitle.isEmpty) continue;
-
-    final resolved = resolveSlideAssetPath(slide.imagePath, deck.projectPath);
-    final avg = resolved == null ? null : await averageImageColor(resolved);
+    final avg = averages[k];
     if (avg == null) {
       // Couldn't decode — fall back to the "verify visually" informational
       // note instead of a confident pass/fail.

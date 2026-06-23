@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../models/settings.dart';
@@ -39,6 +41,11 @@ class TitleContrastEval {
 /// Grey-wash opacity used by the title preview (`_TitlePreview`).
 const double kTitleOverlayAlpha = 0.62;
 
+/// The subtitle is drawn at this opacity in `_TitlePreview`, so it always has
+/// lower contrast than the opaque title of the same colour — it is the binding
+/// constraint whenever a subtitle is present.
+const double kTitleSubtitleAlpha = 0.72;
+
 const Color _lightText = Color(0xFFFFFFFF);
 const Color _darkText = Color(0xFF111827);
 
@@ -62,6 +69,29 @@ class _Candidate {
   const _Candidate(this.fix, this.ratio);
 }
 
+/// Lowest contrast across the title text actually shown on the slide: the
+/// opaque title and/or the 0.72-alpha subtitle, whichever is present and worst.
+/// Returns `double.infinity` when neither is present (the caller skips those).
+double _bindingRatio(
+  Color text,
+  Color bg, {
+  required bool hasTitle,
+  required bool hasSubtitle,
+}) {
+  var worst = double.infinity;
+  if (hasTitle) {
+    worst = contrastRatio(text, bg);
+  }
+  if (hasSubtitle) {
+    final subtitle = Color.alphaBlend(
+      text.withValues(alpha: kTitleSubtitleAlpha),
+      bg,
+    );
+    worst = math.min(worst, contrastRatio(subtitle, bg));
+  }
+  return worst;
+}
+
 /// Evaluates the title text contrast against [avgImage] (the average colour of
 /// the background image), accounting for the grey wash and any per-slide text
 /// colour override, and recommends a fix when it falls short.
@@ -73,8 +103,17 @@ TitleContrastEval evaluateTitleContrast({
 }) {
   final text = _effectiveTextColor(theme, slide);
   final overlayOn = slide.titleImageOverlay;
-  final current = contrastRatio(text, _background(avgImage, theme, overlayOn));
+  final hasTitle = slide.title.isNotEmpty;
+  final hasSubtitle = slide.subtitle.isNotEmpty;
 
+  double ratioFor(Color textColor, bool overlay) => _bindingRatio(
+    textColor,
+    _background(avgImage, theme, overlay),
+    hasTitle: hasTitle,
+    hasSubtitle: hasSubtitle,
+  );
+
+  final current = ratioFor(text, overlayOn);
   if (current >= threshold) {
     return TitleContrastEval(
       ratio: current,
@@ -87,28 +126,12 @@ TitleContrastEval evaluateTitleContrast({
   // Ordered least → most intrusive. The overlay (the designed readability tool)
   // comes first; a per-slide colour flip next; both combined as a last resort.
   final candidates = <_Candidate>[
-    if (!overlayOn)
-      _Candidate(
-        TitleContrastFix.enableOverlay,
-        contrastRatio(text, _background(avgImage, theme, true)),
-      ),
-    _Candidate(
-      TitleContrastFix.lightText,
-      contrastRatio(_lightText, _background(avgImage, theme, overlayOn)),
-    ),
-    _Candidate(
-      TitleContrastFix.darkText,
-      contrastRatio(_darkText, _background(avgImage, theme, overlayOn)),
-    ),
+    if (!overlayOn) _Candidate(TitleContrastFix.enableOverlay, ratioFor(text, true)),
+    _Candidate(TitleContrastFix.lightText, ratioFor(_lightText, overlayOn)),
+    _Candidate(TitleContrastFix.darkText, ratioFor(_darkText, overlayOn)),
     if (!overlayOn) ...[
-      _Candidate(
-        TitleContrastFix.overlayLightText,
-        contrastRatio(_lightText, _background(avgImage, theme, true)),
-      ),
-      _Candidate(
-        TitleContrastFix.overlayDarkText,
-        contrastRatio(_darkText, _background(avgImage, theme, true)),
-      ),
+      _Candidate(TitleContrastFix.overlayLightText, ratioFor(_lightText, true)),
+      _Candidate(TitleContrastFix.overlayDarkText, ratioFor(_darkText, true)),
     ],
   ];
 
@@ -119,7 +142,21 @@ TitleContrastEval evaluateTitleContrast({
       break;
     }
   }
-  chosen ??= candidates.reduce((a, b) => b.ratio > a.ratio ? b : a);
+  // No single lever reaches the threshold: fall back to the best one, but only
+  // if it actually improves on the current contrast — otherwise report that
+  // there is no automatic fix rather than offering one that makes it worse.
+  if (chosen == null) {
+    final best = candidates.reduce((a, b) => b.ratio > a.ratio ? b : a);
+    if (best.ratio <= current) {
+      return TitleContrastEval(
+        ratio: current,
+        passes: false,
+        fix: TitleContrastFix.none,
+        fixedRatio: current,
+      );
+    }
+    chosen = best;
+  }
 
   return TitleContrastEval(
     ratio: current,
