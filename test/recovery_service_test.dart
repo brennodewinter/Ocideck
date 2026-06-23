@@ -100,4 +100,34 @@ void main() {
     await service.discard('nope'); // mag geen exception gooien
     expect(await service.loadAll(), isEmpty);
   });
+
+  // The periodic autosave (save) and the "tab became clean" listener (discard)
+  // fire independently for the same id. Per-id serialisation must make the
+  // later call win, regardless of internal async interleaving.
+  test('a discard issued after a save wins: no stale recovery file', () async {
+    final saving = service.save(snap('race')); // in flight, not awaited
+    final discarding = service.discard('race'); // issued right after
+    await Future.wait([saving, discarding]);
+    expect(await service.loadAll(), isEmpty);
+  });
+
+  test('a save issued after a discard persists', () async {
+    await service.save(snap('x'));
+    final discarding = service.discard('x');
+    final saving = service.save(snap('x', label: 'Opnieuw'));
+    await Future.wait([discarding, saving]);
+    final all = await service.loadAll();
+    expect(all, hasLength(1));
+    expect(all.single.label, 'Opnieuw');
+  });
+
+  test('many interleaved save/discard pairs end deterministically', () async {
+    final ops = <Future<void>>[];
+    for (var i = 0; i < 20; i++) {
+      ops.add(service.save(snap('loop')));
+      ops.add(service.discard('loop')); // last op for the id is a discard
+    }
+    await Future.wait(ops);
+    expect(await service.loadAll(), isEmpty);
+  });
 }

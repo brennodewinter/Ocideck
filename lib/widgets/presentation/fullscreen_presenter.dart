@@ -589,9 +589,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
             );
           case 'answerSubmit':
             final args = Map<String, dynamic>.from(call.arguments as Map);
-            _onAnswerSubmit(
-              slideIndex: (args['slideIndex'] as num?)?.toInt(),
-            );
+            _onAnswerSubmit(slideIndex: (args['slideIndex'] as num?)?.toInt());
         }
         return null;
       });
@@ -650,7 +648,12 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           'blank': blank,
           'richTextPage': _richTextPage,
         })
-        .catchError((_) => null);
+        .catchError((Object e) {
+          // Audience-window sync is best-effort, but a fully silent failure
+          // left the beamer out of sync with no trace; make it observable.
+          logWarning('FullscreenPresenter: audience window sync failed', e);
+          return null;
+        });
     if (indexChanged) _pushInk();
   }
 
@@ -922,11 +925,13 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     if (aw == null) return;
     final view = _currentQuestionView;
     audienceChannel
-        .invokeMethod('question', {
-          'index': _index,
-          'view': view?.toJson(),
-        })
-        .catchError((_) => null);
+        .invokeMethod('question', {'index': _index, 'view': view?.toJson()})
+        .catchError((Object e) {
+          // Audience-window sync is best-effort, but a fully silent failure
+          // left the beamer out of sync with no trace; make it observable.
+          logWarning('FullscreenPresenter: audience window sync failed', e);
+          return null;
+        });
   }
 
   RichTextLayoutPlan? _richTextPlanFor(Slide slide) {
@@ -1010,7 +1015,12 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
             'bullets': updated.bullets,
             'bullets2': updated.bullets2,
           })
-          .catchError((_) => null);
+          .catchError((Object e) {
+            // Audience-window sync is best-effort, but a fully silent failure
+            // left the beamer out of sync with no trace; make it observable.
+            logWarning('FullscreenPresenter: audience window sync failed', e);
+            return null;
+          });
     }
   }
 
@@ -1092,7 +1102,12 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           'slideIndex': slideIndex,
           'tableRows': updated.tableRows,
         })
-        .catchError((_) => null);
+        .catchError((Object e) {
+          // Audience-window sync is best-effort, but a fully silent failure
+          // left the beamer out of sync with no trace; make it observable.
+          logWarning('FullscreenPresenter: audience window sync failed', e);
+          return null;
+        });
   }
 
   void _moveTableCell({required int dRow, required int dCol}) {
@@ -1173,7 +1188,12 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           'index': _index,
           'strokes': encodeStrokes(_currentStrokes),
         })
-        .catchError((_) => null);
+        .catchError((Object e) {
+          // Audience-window sync is best-effort, but a fully silent failure
+          // left the beamer out of sync with no trace; make it observable.
+          logWarning('FullscreenPresenter: audience window sync failed', e);
+          return null;
+        });
   }
 
   void _onStrokesChanged(List<InkStroke> strokes) {
@@ -1203,7 +1223,12 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           'index': _index,
           'point': point == null ? null : [point.dx, point.dy],
         })
-        .catchError((_) => null);
+        .catchError((Object e) {
+          // Audience-window sync is best-effort, but a fully silent failure
+          // left the beamer out of sync with no trace; make it observable.
+          logWarning('FullscreenPresenter: audience window sync failed', e);
+          return null;
+        });
   }
 
   /// Mirror the stroke that is being drawn right now to the beamer, so the
@@ -1222,7 +1247,12 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _lastInkLiveSent = now;
     audienceChannel
         .invokeMethod('inkLive', {'index': _index, 'stroke': stroke?.toJson()})
-        .catchError((_) => null);
+        .catchError((Object e) {
+          // Audience-window sync is best-effort, but a fully silent failure
+          // left the beamer out of sync with no trace; make it observable.
+          logWarning('FullscreenPresenter: audience window sync failed', e);
+          return null;
+        });
   }
 
   /// Select a tool, or toggle it off when it is already active.

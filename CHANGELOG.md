@@ -200,6 +200,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   error box.
 - The Mermaid diagram render cache is now bounded (LRU), so a long session with
   many distinct diagrams can no longer grow memory without limit.
+- Crash recovery no longer leaves a stale autosave file after a deck is saved:
+  the periodic autosave and the "saved → discard" cleanup are now serialised
+  per tab, so the app won't falsely offer to restore already-saved work on the
+  next start.
+- Importing a package (`.ocideck` zip) is more robust: a corrupt archive entry
+  is skipped instead of aborting the whole import, and an entry that declares an
+  oversized uncompressed size is rejected before being inflated into memory.
+- Audience-window sync failures during a presentation are now logged instead of
+  silently swallowed, so a beamer that drifts out of sync leaves a trace.
 
 ## [1.0.0]
 

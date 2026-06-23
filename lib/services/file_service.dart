@@ -579,8 +579,26 @@ class FileService {
       if (f.name.length > maxZipEntryPathLength) continue;
       final outPath = safeOutPath(f.name);
       if (outPath == null) continue; // skip path-traversal entries
-      final content = f.content as List<int>;
-      // Bound total extracted size so a small zip can't fill the disk (zip bomb).
+      // Reject before inflating: an entry that declares a huge uncompressed
+      // size (zip bomb) must not be materialised into memory at all.
+      if (f.size < 0 || extracted + f.size > maxBytes) {
+        logWarning(
+          'FileService.importPackageBytes: decompressed size exceeds limit',
+        );
+        return null;
+      }
+      // Decompressing a corrupt entry can throw; skip it instead of aborting.
+      final List<int> content;
+      try {
+        content = f.content;
+      } catch (e) {
+        logWarning(
+          'FileService.importPackageBytes: unreadable entry skipped (${f.name})',
+          e,
+        );
+        continue;
+      }
+      // Backstop in case a header understated the real uncompressed size.
       extracted += content.length;
       if (extracted > maxBytes) {
         logWarning(

@@ -73,26 +73,46 @@ class RecoveryService {
 
   File _file(Directory dir, String id) => File(p.join(dir.path, '$id.json'));
 
-  Future<void> save(RecoverySnapshot snapshot) async {
-    try {
-      final dir = await _dir();
-      await _file(
-        dir,
-        snapshot.id,
-      ).writeAsString(jsonEncode(snapshot.toJson()), flush: true);
-    } catch (e) {
-      logWarning('RecoveryService.save: write recovery snapshot', e);
-      // Autosave mag nooit de app verstoren.
-    }
+  /// Per-id operation chains. The periodic autosave tick (`save`) and the
+  /// "tab became clean" listener (`discard`) fire independently for the same
+  /// id; without ordering, a save that was already in flight could land *after*
+  /// a discard and leave a stale recovery file that falsely prompts to restore
+  /// already-saved work. Serialising per id makes the later call win.
+  final Map<String, Future<void>> _chains = {};
+
+  Future<void> _enqueue(String id, Future<void> Function() op) {
+    final next = (_chains[id] ?? Future<void>.value()).then((_) => op());
+    _chains[id] = next;
+    next.whenComplete(() {
+      if (_chains[id] == next) _chains.remove(id);
+    });
+    return next;
   }
 
-  Future<void> discard(String id) async {
-    try {
-      final file = _file(await _dir(), id);
-      if (file.existsSync()) await file.delete();
-    } catch (e) {
-      logWarning('RecoveryService.discard: delete recovery file', e);
-    }
+  Future<void> save(RecoverySnapshot snapshot) {
+    return _enqueue(snapshot.id, () async {
+      try {
+        final dir = await _dir();
+        await _file(
+          dir,
+          snapshot.id,
+        ).writeAsString(jsonEncode(snapshot.toJson()), flush: true);
+      } catch (e) {
+        logWarning('RecoveryService.save: write recovery snapshot', e);
+        // Autosave mag nooit de app verstoren.
+      }
+    });
+  }
+
+  Future<void> discard(String id) {
+    return _enqueue(id, () async {
+      try {
+        final file = _file(await _dir(), id);
+        if (file.existsSync()) await file.delete();
+      } catch (e) {
+        logWarning('RecoveryService.discard: delete recovery file', e);
+      }
+    });
   }
 
   Future<List<RecoverySnapshot>> loadAll() async {
