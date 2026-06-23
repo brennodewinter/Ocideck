@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
@@ -18,6 +19,7 @@ import '../../models/deck.dart';
 import '../../models/question.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../models/timeline.dart';
 import '../../theme/app_theme.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../services/rich_text_layout.dart';
@@ -38,6 +40,7 @@ part 'previews/code_preview.dart';
 part 'previews/chart_preview.dart';
 part 'previews/cockpit_preview.dart';
 part 'previews/question_preview.dart';
+part 'previews/timeline_preview.dart';
 part 'previews/overlays.dart';
 
 /// Returns a TextStyle with the correct font. 'EB Garamond' is bundled with the
@@ -224,6 +227,11 @@ class SlidePreviewWidget extends StatelessWidget {
   /// Aangeroepen bij 'Bevestig' op een meerdere-juiste-antwoorden-vraag.
   final VoidCallback? onAnswerSubmit;
 
+  /// Tijdlijn-slides in stap-voor-stap-modus: hoeveel gebeurtenissen tot nu toe
+  /// onthuld zijn (door de presenter aangestuurd). Null = niet in stapmodus →
+  /// de tijdlijn toont alles (en tekent zichzelf in bij [presentationMode]).
+  final int? timelineRevealedCount;
+
   const SlidePreviewWidget({
     super.key,
     required this.slide,
@@ -253,6 +261,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.questionView,
     this.onAnswerSelected,
     this.onAnswerSubmit,
+    this.timelineRevealedCount,
   });
 
   @override
@@ -521,6 +530,15 @@ class SlidePreviewWidget extends StatelessWidget {
           onAnswerSelected: onAnswerSelected,
           onAnswerSubmit: onAnswerSubmit,
         );
+      case SlideType.timeline:
+        return _TimelinePreview(
+          slide: slide,
+          w: w,
+          font: fontFamily,
+          profile: themeProfile,
+          presentationMode: presentationMode,
+          revealedCount: timelineRevealedCount,
+        );
     }
   }
 }
@@ -552,6 +570,8 @@ double _contentLeftInset(Slide slide, double w) {
     case SlideType.bulletsImage:
       return w * 0.038;
     case SlideType.question:
+      return w * 0.06;
+    case SlideType.timeline:
       return w * 0.06;
     case SlideType.quote:
       return w * 0.08;

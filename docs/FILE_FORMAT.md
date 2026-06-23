@@ -194,6 +194,7 @@ The first class determines (together with the content) the **slide type**:
 | Chart | `chart` | — |
 | Cockpit | `cockpit` | — |
 | Question | `question` | — |
+| Timeline | `timeline` | — |
 | Bullets only | *(none)* | bullets present |
 | Two images | *(none)* | two background images |
 | Large image | *(none)* | one image, no bullets |
@@ -407,6 +408,43 @@ Fields:
 > The live answer state (which options were drawn, what the viewer picked,
 > correct/wrong) is **session-only** and never written to the file. A static
 > export renders the question without interactivity.
+
+**Timeline** (`timeline`) — a normal Markdown list, optionally preceded by a
+`# title`. Each list item is one event in the form
+`marker :: title :: description`, where `marker` (a date/phase label) and
+`description` are optional — a single segment is treated as the title. Because it
+is an ordinary list, the slide renders sensibly in plain Marp too.
+
+```markdown
+<!-- _class: timeline timeline-vertical timeline-steps -->
+# Van idee tot beursgang
+
+- 2019 :: Oprichting :: Drie mensen, één zolderkamer.
+- 2021 :: Lancering :: 1.000 gebruikers in zes weken.
+- Nu :: Vandaag
+```
+
+The layout and animation are **presentation options**, not content, so they
+round-trip as extra `_class` tokens alongside the base `timeline` token:
+
+- `timeline-horizontal` / `timeline-vertical` — force a layout; absent = *auto*
+  (horizontal for ≤ 5 events, vertical otherwise).
+- `timeline-steps` — reveal one event per click while presenting; absent = the
+  whole timeline draws itself in when the slide opens.
+- `timeline-static` — no animation; everything is shown at once.
+
+The draw-in **speed** (only meaningful for the default on-enter animation) is the
+one numeric option, so it round-trips in an HTML comment rather than a class
+token, and only when it differs from the 1600 ms default:
+
+```markdown
+<!-- ocideck_timeline_duration: 2600 -->
+```
+
+It is the full draw-in duration in milliseconds, clamped to 400–6000 ms.
+
+> The reveal step (how many events are currently shown in step mode) is
+> **session-only** and never written to the file.
 
 ### Image Size (`imageSize`)
 

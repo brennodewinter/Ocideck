@@ -1,0 +1,782 @@
+part of '../slide_preview.dart';
+
+/// Eye-candy timeline renderer.
+///
+/// The graphics (glowing spine, nodes, connectors) are painted by
+/// [_TimelineRailPainter]; the event cards are real widgets layered on top so
+/// their text stays crisp. Cards size to their content. When a horizontal rail
+/// gets crowded the cards are distributed across several *floors* (heights) so
+/// they tile instead of colliding — full cards, just at varying distances from
+/// the line.
+///
+/// Animation: the line is the starting point — it draws itself first, then the
+/// events are placed onto it one after another (sequentially).
+///
+/// Reveal modes:
+/// * [revealedCount] non-null → step mode: exactly that many events are shown
+///   (driven by the presenter, click-by-click).
+/// * else, in [presentationMode] with [TimelineReveal.onEnter] → the line draws,
+///   then events appear in sequence, on a one-shot controller.
+/// * otherwise everything is shown at once (editor, thumbnails, static mode).
+class _TimelinePreview extends StatefulWidget {
+  final Slide slide;
+  final double w;
+  final String font;
+  final ThemeProfile profile;
+  final bool presentationMode;
+  final int? revealedCount;
+
+  const _TimelinePreview({
+    required this.slide,
+    required this.w,
+    required this.font,
+    required this.profile,
+    required this.presentationMode,
+    this.revealedCount,
+  });
+
+  @override
+  State<_TimelinePreview> createState() => _TimelinePreviewState();
+}
+
+class _TimelinePreviewState extends State<_TimelinePreview>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  bool get _animatesOnEnter =>
+      widget.presentationMode &&
+      widget.revealedCount == null &&
+      widget.slide.timelineReveal == TimelineReveal.onEnter;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(
+        milliseconds: clampTimelineDuration(widget.slide.timelineAnimationMs),
+      ),
+      value: 1,
+    );
+    _maybeStart();
+  }
+
+  @override
+  void didUpdateWidget(_TimelinePreview oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.slide.id != widget.slide.id ||
+        !listEquals(oldWidget.slide.bullets, widget.slide.bullets) ||
+        oldWidget.slide.timelineReveal != widget.slide.timelineReveal ||
+        oldWidget.slide.timelineAnimationMs !=
+            widget.slide.timelineAnimationMs ||
+        oldWidget.presentationMode != widget.presentationMode ||
+        oldWidget.revealedCount != widget.revealedCount) {
+      _maybeStart();
+    }
+  }
+
+  void _maybeStart() {
+    _controller.duration = Duration(
+      milliseconds: clampTimelineDuration(widget.slide.timelineAnimationMs),
+    );
+    if (_animatesOnEnter) {
+      _controller.forward(from: 0);
+    } else {
+      _controller.value = 1;
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final events = parseTimelineEvents(widget.slide.bullets);
+    final bg = _hexColor(widget.profile.slideBackgroundColor);
+    final accent = _hexColor(widget.profile.accentColor);
+    final textColor = _hexColor(widget.profile.textColor);
+    // Secondary text is the configured text colour, only slightly softened so it
+    // still reads as the same colour as the rest of the slides.
+    final muted = textColor.withValues(alpha: 0.74);
+    // Text on the accent badge prefers the profile's title-text colour (what the
+    // theme uses for text on accent/dark bars), but falls back to black/white
+    // when that colour doesn't contrast with the accent — so the marker can
+    // never become unreadable on an unlucky palette.
+    final onAccent = _readableOn(
+      accent,
+      _hexColor(widget.profile.titleTextColor),
+    );
+
+    final pad = widget.w * 0.045;
+    final logoSafe = widget.slide.showLogo
+        ? _logoSafeInsets(widget.w, widget.profile)
+        : EdgeInsets.zero;
+    final outerPadding = EdgeInsets.fromLTRB(
+      pad + logoSafe.left,
+      pad + logoSafe.top,
+      pad + logoSafe.right,
+      _logoAwareBottomPadding(pad, logoSafe.bottom),
+    );
+
+    final title = widget.slide.title.trim();
+
+    return Container(
+      color: bg,
+      padding: outerPadding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (title.isNotEmpty) ...[
+            Text(
+              title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: textColor,
+                fontSize: widget.w * 0.036,
+                fontFamily: widget.font,
+                fontWeight: FontWeight.w800,
+                decoration: TextDecoration.none,
+                height: 1.08,
+              ),
+            ),
+            SizedBox(height: widget.w * 0.025),
+          ],
+          Expanded(
+            child: events.isEmpty
+                ? const SizedBox.expand()
+                : AnimatedBuilder(
+                    animation: _controller,
+                    builder: (context, _) => _TimelineCanvas(
+                      events: events,
+                      w: widget.w,
+                      horizontal: _effectiveHorizontal(events.length),
+                      drawT: _controller.value,
+                      revealedCount: widget.revealedCount,
+                      animating: _animatesOnEnter,
+                      accent: accent,
+                      onAccent: onAccent,
+                      bg: bg,
+                      textColor: textColor,
+                      muted: muted,
+                      font: widget.font,
+                    ),
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Auto uses the horizontal multi-floor rail (it tiles cards across heights,
+  /// so it stays elegant well into the teens) and only switches to a vertical
+  /// spine for very long timelines; an explicit choice always wins.
+  bool _effectiveHorizontal(int count) {
+    switch (widget.slide.timelineLayout) {
+      case TimelineLayout.horizontal:
+        return true;
+      case TimelineLayout.vertical:
+        return false;
+      case TimelineLayout.auto:
+        return count <= 14;
+    }
+  }
+}
+
+/// One node's geometry: the dot on the spine, where its card sits, and the point
+/// on the card edge the connector should reach.
+class _TlNode {
+  final Offset pos;
+  final double cardLeft;
+  final double cardWidth;
+  final double anchorTop; // Positioned `top` for the card
+  final double
+  vertAnchor; // FractionalTranslation y: 0 below, -1 above, -.5 centre
+  final Offset connector; // point on the card edge
+
+  const _TlNode({
+    required this.pos,
+    required this.cardLeft,
+    required this.cardWidth,
+    required this.anchorTop,
+    required this.vertAnchor,
+    required this.connector,
+  });
+}
+
+/// The result of laying out a timeline for the available area: the nodes plus
+/// the shared content settings (font scale, whether descriptions fit, how many
+/// description lines the room allows, node size).
+class _TlLayout {
+  final List<_TlNode> nodes;
+  final double scale;
+  final bool showDesc;
+  final int descLines;
+  final double nodeRadius;
+
+  const _TlLayout(
+    this.nodes,
+    this.scale,
+    this.showDesc,
+    this.descLines,
+    this.nodeRadius,
+  );
+}
+
+/// Returns [preferred] when it has enough contrast against [bg] to stay legible,
+/// otherwise black or white — whichever reads on [bg]. Used for the marker badge
+/// text, which sits on the accent colour.
+Color _readableOn(Color bg, Color preferred) {
+  double rel(Color c) => c.computeLuminance();
+  double contrast(Color a, Color b) {
+    final hi = math.max(rel(a), rel(b)) + 0.05;
+    final lo = math.min(rel(a), rel(b)) + 0.05;
+    return hi / lo;
+  }
+
+  if (contrast(bg, preferred) >= 3.0) return preferred;
+  return rel(bg) > 0.5 ? const Color(0xFF10231C) : Colors.white;
+}
+
+/// Picks a font [scale] and description line count that fill [room] px of
+/// vertical space per card without overflowing into the next row. Short content
+/// grows the text (up to 1.25×) to use the space; long content shrinks it and
+/// shows more lines (up to 3) so nothing is needlessly truncated.
+({double scale, int descLines}) _fitCards(
+  List<TimelineEvent> events,
+  double cardW,
+  double room,
+  double w,
+  bool showDesc,
+) {
+  // Estimate how many lines the longest description wraps to in this card width,
+  // so the scale accounts for the tallest card the content will produce.
+  var lines = 1;
+  if (showDesc) {
+    final innerW = cardW - 2 * (w * 0.012);
+    final charsPerLine = math.max(8.0, innerW / (w * 0.0072));
+    for (final e in events) {
+      final d = e.description.trim();
+      if (d.isEmpty) continue;
+      final needed = (d.length / charsPerLine).ceil().clamp(1, 3);
+      if (needed > lines) lines = needed;
+    }
+  }
+  // Reduce the line count if even that won't fit, so the description is shown
+  // (shorter) rather than dropped when the room is a little tight.
+  const base = 0.046; // marker+title row + paddings (one line), at scale 1
+  const lineH = 0.0175;
+  while (lines > 1 && base + lines * lineH > (room / w) * 0.92) {
+    lines--;
+  }
+  // The title is never enlarged (it's bold already); the scale only shrinks the
+  // card to fit, never grows it past its natural size — leaving room is fine.
+  final contentH1 = w * (base + (showDesc ? lines : 0) * lineH);
+  final scale = (room * 0.9 / contentH1).clamp(0.62, 1.0).toDouble();
+  return (scale: scale, descLines: lines);
+}
+
+/// Lays out the spine, nodes and cards for the available area, then stacks the
+/// painted graphics under the (content-hugging) card widgets.
+class _TimelineCanvas extends StatelessWidget {
+  final List<TimelineEvent> events;
+  final double w; // full slide width, for uniform typography
+  final bool horizontal;
+  final double drawT;
+  final int? revealedCount;
+  final bool animating;
+  final Color accent;
+  final Color onAccent;
+  final Color bg;
+  final Color textColor;
+  final Color muted;
+  final String font;
+
+  /// Fraction of the animation spent drawing the line before events appear.
+  static const double _linePhase = 0.32;
+
+  const _TimelineCanvas({
+    required this.events,
+    required this.w,
+    required this.horizontal,
+    required this.drawT,
+    required this.revealedCount,
+    required this.animating,
+    required this.accent,
+    required this.onAccent,
+    required this.bg,
+    required this.textColor,
+    required this.muted,
+    required this.font,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final size = Size(constraints.maxWidth, constraints.maxHeight);
+        final n = events.length;
+        final layout = horizontal
+            ? _horizontalLayout(size, n)
+            : _verticalLayout(size, n);
+        final nodes = layout.nodes;
+        final reveal = _revealFactors(n);
+
+        return Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Positioned.fill(
+              child: CustomPaint(
+                painter: _TimelineRailPainter(
+                  nodes: nodes,
+                  reveal: reveal,
+                  spineStart: nodes.first.pos,
+                  spineEnd: nodes.last.pos,
+                  spineProgress: _spineProgress(n),
+                  nodeRadius: layout.nodeRadius,
+                  accent: accent,
+                  bg: bg,
+                ),
+              ),
+            ),
+            for (var i = 0; i < n; i++)
+              _card(
+                i,
+                nodes[i],
+                reveal[i],
+                layout.scale,
+                layout.showDesc,
+                layout.descLines,
+              ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _card(
+    int i,
+    _TlNode node,
+    double r,
+    double scale,
+    bool showDesc,
+    int descLines,
+  ) {
+    return Positioned(
+      left: node.cardLeft,
+      top: node.anchorTop,
+      width: node.cardWidth,
+      child: FractionalTranslation(
+        translation: Offset(0, node.vertAnchor),
+        child: IgnorePointer(
+          child: Opacity(
+            opacity: r.clamp(0.0, 1.0),
+            child: Transform.translate(
+              offset: Offset(0, (1 - r) * 10),
+              child: _TimelineCard(
+                event: events[i],
+                emphasized: i == events.length - 1,
+                w: w,
+                scale: scale,
+                showDescription:
+                    showDesc && events[i].description.trim().isNotEmpty,
+                descLines: descLines,
+                accent: accent,
+                onAccent: onAccent,
+                textColor: textColor,
+                muted: muted,
+                font: font,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Per-event reveal 0..1. Step mode is binary; on-enter places events in
+  /// sequence *after* the line has drawn; otherwise everything is fully shown.
+  List<double> _revealFactors(int n) {
+    if (revealedCount != null) {
+      final shown = revealedCount!.clamp(0, n);
+      return [for (var i = 0; i < n; i++) i < shown ? 1.0 : 0.0];
+    }
+    if (!animating) return List<double>.filled(n, 1.0);
+    final eventsT = ((drawT - _linePhase) / (1 - _linePhase)).clamp(0.0, 1.0);
+    return [
+      for (var i = 0; i < n; i++)
+        Curves.easeOutBack.transform(_sequence(eventsT, i, n)).clamp(0.0, 1.0),
+    ];
+  }
+
+  double _sequence(double eventsT, int i, int n) {
+    if (n <= 1) return eventsT;
+    final start = (i / n) * 0.9;
+    final window = 0.9 / n + 0.12;
+    return ((eventsT - start) / window).clamp(0.0, 1.0);
+  }
+
+  /// The line draws over the first [_linePhase] of the animation, then stays.
+  double _spineProgress(int n) {
+    if (revealedCount != null) {
+      if (n <= 1) return revealedCount! > 0 ? 1.0 : 0.0;
+      final shown = revealedCount!.clamp(0, n);
+      if (shown <= 0) return 0.0;
+      return ((shown - 1) / (n - 1)).clamp(0.0, 1.0);
+    }
+    if (!animating) return 1.0;
+    return (drawT / _linePhase).clamp(0.0, 1.0);
+  }
+
+  /// Horizontal rail. Cards alternate above/below and, when crowded, climb to
+  /// further *floors* so they never overlap. Card size adapts to the room each
+  /// floor gets, dropping the description only when a floor is genuinely tight.
+  _TlLayout _horizontalLayout(Size size, int n) {
+    final aw = size.width;
+    final ah = size.height;
+    final railY = ah * 0.5;
+    final startX = aw * 0.06;
+    final endX = aw * 0.94;
+    final span = endX - startX;
+    final spacing = n > 1 ? span / (n - 1) : span;
+
+    // Vertical room on the smaller side of the rail; reserve a little margin.
+    final half = math.min(railY, ah - railY) - ah * 0.02;
+    final nearGap = ah * 0.05;
+    final minPitch = w * 0.07;
+    final maxFloors = math.max(1, ((half - nearGap) / minPitch).floor());
+    // Decide floors from a comfortable base width: same-side cards sit 2·spacing
+    // apart, and a floor holds them only if a card plus a clear gap (the 1.25
+    // breathing factor) fits in that span; otherwise climb to another floor.
+    final baseCardW = (spacing * 1.7).clamp(aw * 0.17, aw * 0.27).toDouble();
+    final neededFloors = math.max(1, (baseCardW * 1.25 / (2 * spacing)).ceil());
+    final floors = math.min(maxFloors, neededFloors);
+    final pitch = (half - nearGap) / floors;
+    // Now widen the cards to use the horizontal room the floors afford
+    // (same-side-same-floor nodes are 2·floors·spacing apart), so the cards
+    // aren't needlessly narrow with empty space between them.
+    final cardW = (2 * floors * spacing * 0.8)
+        .clamp(aw * 0.18, aw * 0.30)
+        .toDouble();
+    final showDesc = pitch > w * 0.052;
+    final fit = _fitCards(events, cardW, pitch, w, showDesc);
+    final scale = fit.scale;
+    final descLines = fit.descLines;
+    // Node size scales with the slide width (not the pixel size of this view),
+    // so the editor preview and the full-screen presentation match exactly.
+    final nodeRadius = math.max(2.5, w * 0.0095);
+
+    final nodes = <_TlNode>[
+      for (var i = 0; i < n; i++)
+        () {
+          final x = n > 1 ? startX + spacing * i : startX + span / 2;
+          final above = i.isEven;
+          final floor = (i ~/ 2) % floors;
+          final cardLeft = (x - cardW / 2)
+              .clamp(0.0, math.max(0.0, aw - cardW))
+              .toDouble();
+          final nearY = above
+              ? railY - nearGap - floor * pitch
+              : railY + nearGap + floor * pitch;
+          final connX = x
+              .clamp(cardLeft + 10, cardLeft + cardW - 10)
+              .toDouble();
+          return _TlNode(
+            pos: Offset(x, railY),
+            cardLeft: cardLeft,
+            cardWidth: cardW,
+            anchorTop: nearY,
+            vertAnchor: above ? -1.0 : 0.0,
+            connector: Offset(connX, nearY),
+          );
+        }(),
+    ];
+    return _TlLayout(nodes, scale, showDesc, descLines, nodeRadius);
+  }
+
+  /// Vertical spine with cards alternating left/right. Used for very long
+  /// timelines; cards shrink (and drop the description) as events pack in.
+  _TlLayout _verticalLayout(Size size, int n) {
+    final aw = size.width;
+    final ah = size.height;
+    final spineX = aw * 0.5;
+    final top = ah * 0.06;
+    final bottom = ah * 0.965;
+    final span = bottom - top;
+    final spacing = n > 1 ? span / (n - 1) : span;
+    final cardW = aw * 0.36;
+    final gap = aw * 0.05;
+
+    final nodes = <_TlNode>[
+      for (var i = 0; i < n; i++)
+        () {
+          final y = n > 1 ? top + spacing * i : top + span / 2;
+          final leftSide = i.isEven;
+          final cardLeft = leftSide ? spineX - gap - cardW : spineX + gap;
+          return _TlNode(
+            pos: Offset(spineX, y),
+            cardLeft: cardLeft,
+            cardWidth: cardW,
+            anchorTop: y,
+            vertAnchor: -0.5,
+            connector: Offset(leftSide ? spineX - gap : spineX + gap, y),
+          );
+        }(),
+    ];
+
+    final vSlot = n > 1 ? nodes[1].pos.dy - nodes[0].pos.dy : double.infinity;
+    final showDesc = vSlot.isFinite ? vSlot > w * 0.052 : true;
+    // A centred card can use the whole slot (half above + half below its node).
+    final room = vSlot.isFinite ? vSlot : w * 0.30;
+    final fit = _fitCards(events, cardW, room, w, showDesc);
+    final scale = fit.scale;
+    final descLines = fit.descLines;
+    // Width-relative node size (matches preview ↔ presentation), capped so dense
+    // spines keep the dots from touching.
+    var nodeRadius = math.max(2.5, w * 0.0095);
+    if (vSlot.isFinite) nodeRadius = math.min(nodeRadius, vSlot * 0.34);
+    return _TlLayout(nodes, scale, showDesc, descLines, nodeRadius);
+  }
+}
+
+/// A single event card: marker badge, title, optional description. Sizes to its
+/// content; typography scales from the slide width [w] times [scale] so all
+/// cards match while dense timelines shrink. When [showDescription] is false the
+/// card collapses to a compact one-line `badge + title` entry.
+class _TimelineCard extends StatelessWidget {
+  final TimelineEvent event;
+  final bool emphasized;
+  final double w;
+  final double scale;
+  final bool showDescription;
+  final int descLines;
+  final Color accent;
+  final Color onAccent;
+  final Color textColor;
+  final Color muted;
+  final String font;
+
+  const _TimelineCard({
+    required this.event,
+    required this.emphasized,
+    required this.w,
+    required this.scale,
+    required this.showDescription,
+    required this.descLines,
+    required this.accent,
+    required this.onAccent,
+    required this.textColor,
+    required this.muted,
+    required this.font,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final hasMarker = event.marker.trim().isNotEmpty;
+    final hasTitle = event.title.trim().isNotEmpty;
+    final badge = hasMarker ? _badge() : null;
+    // Titles are short headlines → one line; the description carries the detail
+    // and gets as many lines (1–3) as the card's room allows.
+    final title = hasTitle ? _title(maxLines: 1) : null;
+
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: w * 0.012,
+        vertical: w * 0.009 * scale,
+      ),
+      // Surfaces are tinted with the profile accent so the timeline visibly
+      // belongs to the presentation's colour scheme rather than a neutral grey.
+      decoration: BoxDecoration(
+        color: accent.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(w * 0.009),
+        border: Border.all(
+          color: emphasized
+              ? accent.withValues(alpha: 0.7)
+              : accent.withValues(alpha: 0.22),
+          width: emphasized ? 1.6 : 1.0,
+        ),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Marker and title share one line, so the description gets the row
+          // that a stacked badge would otherwise take.
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              if (badge != null) ...[badge, SizedBox(width: w * 0.01)],
+              if (title != null) Flexible(child: title),
+            ],
+          ),
+          if (showDescription) ...[
+            SizedBox(height: w * 0.006 * scale),
+            Text(
+              event.description.trim(),
+              maxLines: descLines,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: muted,
+                fontSize: w * 0.0135 * scale,
+                fontFamily: font,
+                fontWeight: FontWeight.w400,
+                decoration: TextDecoration.none,
+                height: 1.25,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _badge() => Container(
+    padding: EdgeInsets.symmetric(
+      horizontal: w * 0.008,
+      vertical: w * 0.0028 * scale,
+    ),
+    decoration: BoxDecoration(
+      color: accent,
+      borderRadius: BorderRadius.circular(w * 0.02),
+    ),
+    child: Text(
+      event.marker.trim(),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        color: onAccent,
+        fontSize: w * 0.0135 * scale,
+        fontFamily: font,
+        fontWeight: FontWeight.w700,
+        decoration: TextDecoration.none,
+        height: 1.0,
+      ),
+    ),
+  );
+
+  // Bold but deliberately not oversized — the weight already sets it apart, and
+  // keeping it modest leaves room for the description.
+  Widget _title({required int maxLines}) => Text(
+    event.title.trim(),
+    maxLines: maxLines,
+    overflow: TextOverflow.ellipsis,
+    style: TextStyle(
+      color: textColor,
+      fontSize: w * 0.0168 * scale,
+      fontFamily: font,
+      fontWeight: FontWeight.w700,
+      decoration: TextDecoration.none,
+      height: 1.15,
+    ),
+  );
+}
+
+/// Paints the glowing spine, the connector stubs and the nodes. Text lives in
+/// the overlaid card widgets, so this painter is purely the line-art.
+class _TimelineRailPainter extends CustomPainter {
+  final List<_TlNode> nodes;
+  final List<double> reveal;
+  final Offset spineStart;
+  final Offset spineEnd;
+  final double spineProgress;
+  final double nodeRadius;
+  final Color accent;
+  final Color bg;
+
+  _TimelineRailPainter({
+    required this.nodes,
+    required this.reveal,
+    required this.spineStart,
+    required this.spineEnd,
+    required this.spineProgress,
+    required this.nodeRadius,
+    required this.accent,
+    required this.bg,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (nodes.isEmpty) return;
+    final drawnEnd = Offset.lerp(spineStart, spineEnd, spineProgress)!;
+    final trackW = math.max(2.0, nodeRadius * 0.42);
+
+    // Faint full-length track so you can see where the timeline is going.
+    canvas.drawLine(
+      spineStart,
+      spineEnd,
+      Paint()
+        ..color = accent.withValues(alpha: 0.16)
+        ..strokeWidth = trackW
+        ..strokeCap = StrokeCap.round,
+    );
+    // Soft glow under the drawn portion.
+    canvas.drawLine(
+      spineStart,
+      drawnEnd,
+      Paint()
+        ..color = accent.withValues(alpha: 0.14)
+        ..strokeWidth = nodeRadius * 1.5
+        ..strokeCap = StrokeCap.round,
+    );
+    // Bright drawn spine.
+    canvas.drawLine(
+      spineStart,
+      drawnEnd,
+      Paint()
+        ..color = accent
+        ..strokeWidth = trackW * 1.4
+        ..strokeCap = StrokeCap.round,
+    );
+
+    // Connectors from each revealed node to its card.
+    for (var i = 0; i < nodes.length; i++) {
+      final r = reveal[i];
+      if (r <= 0.01) continue;
+      final node = nodes[i];
+      canvas.drawLine(
+        node.pos,
+        Offset.lerp(node.pos, node.connector, r)!,
+        Paint()
+          ..color = accent.withValues(alpha: 0.35 * r)
+          ..strokeWidth = math.max(1.0, nodeRadius * 0.16),
+      );
+    }
+
+    // Nodes on top.
+    for (var i = 0; i < nodes.length; i++) {
+      final r = reveal[i];
+      if (r <= 0.01) continue;
+      final node = nodes[i];
+      final last = i == nodes.length - 1;
+      final rad = nodeRadius * (0.55 + 0.45 * r) * (last ? 1.18 : 1.0);
+      canvas.drawCircle(
+        node.pos,
+        rad * 2.1,
+        Paint()..color = accent.withValues(alpha: (last ? 0.18 : 0.12) * r),
+      );
+      canvas.drawCircle(node.pos, rad, Paint()..color = accent);
+      canvas.drawCircle(
+        node.pos,
+        rad,
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = math.max(1.5, rad * 0.34)
+          ..color = bg,
+      );
+      canvas.drawCircle(node.pos, rad * 0.32, Paint()..color = accent);
+    }
+  }
+
+  @override
+  bool shouldRepaint(_TimelineRailPainter old) =>
+      old.spineProgress != spineProgress ||
+      !listEquals(old.reveal, reveal) ||
+      old.nodeRadius != nodeRadius ||
+      old.accent != accent ||
+      old.bg != bg ||
+      old.nodes.length != nodes.length;
+}

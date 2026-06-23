@@ -22,7 +22,8 @@ Add a slide and pick a type: **title**, **section** divider, **bullets**, **two
 bullet columns**, **bullets + image**, **two images**, **large image**, **video**,
 **audio**, **quote**, **table**, **source code**, **chart** (bar, line, pie, or
 spider/radar), **cockpit** (a dashboard of aviation-style instrument gauges),
-**question** (an interactive quiz slide), and
+**question** (an interactive quiz slide), **timeline** (an animated timeline of
+dated events), and
 **free Markdown**. Each card in the chooser shows a miniature
 wireframe of the layout, and the dialog works entirely with the keyboard
 (`Tab`/`Enter` to choose, `Esc` to cancel). Each type has a dedicated editor on
@@ -109,6 +110,29 @@ continue; a wrong answer turns red and highlights the correct one. On a
 answer and both screens stay in sync. The answer state is session-only — it is
 never written to the `.md` file, and a static export shows the question without
 interactivity.
+
+### Timeline slides
+
+A timeline slide turns a list of dated events into an animated visual. Pick
+**Timeline** in the type chooser, give the slide a title, then add events; each
+event has a **marker** (a year or phase, optional), a **title** and an optional
+**description**. Drag the handle to reorder, and use the buttons to add or remove
+events.
+
+Two display options sit above the event list:
+
+- **Layout** — *Automatic* lays the events out as a horizontal rail, stacking
+  the cards onto extra levels when there are many so they stay readable; you can
+  also force *Horizontal* or a *Vertical* spine (cards alternating left/right).
+- **Animation** — *Draw in on open* first draws the line, then places the events
+  onto it one after another when the slide appears; *Step by step* reveals one more event on each click while
+  presenting (and stays in sync on the audience window); *No animation* shows
+  everything at once. With *Draw in on open* selected, an **Animation speed**
+  slider sets how long the draw-in takes (from ~0.4 s up to ~6 s).
+
+The timeline picks up the active style profile (accent colour, fonts and slide
+background), so it matches the rest of the deck. Events are stored as an ordinary
+Markdown list, so the slide stays readable and Marp-compatible in the `.md` file.
 
 ## Image library
 

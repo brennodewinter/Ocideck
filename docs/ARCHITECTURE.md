@@ -45,6 +45,14 @@ lib/
   truth: the audience window forwards clicks (`answerSelected` / `answerSubmit`)
   and the presenter pushes the resulting `QuestionView` back over the window
   channel, the same pattern as the checklist/table sync.
+- **Timeline slides** keep their events in the normal `bullets` field as
+  `marker :: title :: description` list items (no `customMarkdown`), so the `.md`
+  stays a readable Markdown list. The layout (`TimelineLayout`) and animation
+  (`TimelineReveal`) are typed `Slide` fields that round-trip as extra `_class`
+  tokens (`timeline-horizontal/-vertical/-steps/-static`) rather than in the
+  content. In *step* mode the revealed-event count is **session-only**, mirroring
+  the `_richTextPage` pattern: the presenter intercepts next/prev and pushes a
+  `timelineStep` over the window channel so the audience window reveals in sync.
 - Slide ids are **regenerated on every parse**, so they are stable only within a
   session. Anything persisted that must survive a reload (annotations) re-anchors
   by slide order + a content fingerprint rather than by id.

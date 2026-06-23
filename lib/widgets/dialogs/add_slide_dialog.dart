@@ -27,6 +27,7 @@ class AddSlideDialog extends StatelessWidget {
     (SlideType.table, 'Tabel'),
     (SlideType.chart, 'Grafiek'),
     (SlideType.cockpit, 'Cockpit'),
+    (SlideType.timeline, 'Tijdlijn'),
     (SlideType.question, 'Vraag'),
     (SlideType.code, 'Broncode'),
     (SlideType.freeMarkdown, 'Vrije Markdown'),
@@ -229,6 +230,38 @@ class SlideTypePreviewPainter extends CustomPainter {
         _dial(canvas, 114, 24, 22);
         _dial(canvas, 46, 58, 22);
         _dial(canvas, 92, 58, 22);
+      case SlideType.timeline:
+        // Horizontal rail with four nodes and cards alternating above/below.
+        canvas.drawLine(
+          const Offset(18, 45),
+          const Offset(146, 45),
+          _paint(_accent)
+            ..strokeWidth = 3
+            ..strokeCap = StrokeCap.round,
+        );
+        const xs = [26.0, 66.0, 106.0, 142.0];
+        for (var i = 0; i < xs.length; i++) {
+          final x = xs[i];
+          final above = i.isEven;
+          final cardY = above ? 12.0 : 56.0;
+          _bar(canvas, x - 16, cardY, 32, 22, _fill, radius: 3);
+          _bar(canvas, x - 12, cardY + 4, 14, 5, _accent, radius: 2);
+          _bar(canvas, x - 12, cardY + 12, 22, 4, _soft, radius: 2);
+          canvas.drawLine(
+            Offset(x, 45),
+            Offset(x, above ? 34 : 56),
+            _paint(_accent.withValues(alpha: 0.4))..strokeWidth = 1.5,
+          );
+          canvas.drawCircle(Offset(x, 45), 6, _paint(_accent.withValues(alpha: 0.18)));
+          canvas.drawCircle(Offset(x, 45), 4, _paint(_accent));
+          canvas.drawCircle(
+            Offset(x, 45),
+            4,
+            _paint(_ink)
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 1.5,
+          );
+        }
       case SlideType.code:
         _bar(canvas, 10, 10, 140, 70, const Color(0xFF1E293B), radius: 4);
         _bar(canvas, 20, 22, 44, 6, const Color(0xFF7DD3A7), radius: 3);

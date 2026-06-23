@@ -16,6 +16,7 @@ import '../../models/deck.dart';
 import '../../models/question.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../models/timeline.dart';
 import '../../services/markdown_service.dart';
 import '../../services/mermaid_render_service.dart';
 import '../../services/rehearsal_controller.dart';
@@ -504,9 +505,15 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   int? _lastSentIndex;
   int? _lastSentBlank;
   int? _lastSentRichTextPage;
+  int? _lastSentTimelineStep;
 
   /// Pagina binnen een rich-text slide (0-gebaseerd).
   int _richTextPage = 0;
+
+  /// Aantal reeds onthulde extra gebeurtenissen op een tijdlijn-slide in
+  /// stap-voor-stap-modus (0 = alleen de eerste gebeurtenis getoond). Net als
+  /// [_richTextPage] is dit sessie-only en wordt het naar de beamer gepusht.
+  int _timelineStep = 0;
 
   // ── Vraag-slides (sessie-only, niet naar .md) ─────────────────────────────
   /// Live toestand per vraag-slide, gekeyd op [Slide.id]. De presenter is de
@@ -635,18 +642,21 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     final blank = _blankCode;
     if (_index == _lastSentIndex &&
         blank == _lastSentBlank &&
-        _richTextPage == _lastSentRichTextPage) {
+        _richTextPage == _lastSentRichTextPage &&
+        _timelineStep == _lastSentTimelineStep) {
       return;
     }
     final indexChanged = _index != _lastSentIndex;
     _lastSentIndex = _index;
     _lastSentBlank = blank;
     _lastSentRichTextPage = _richTextPage;
+    _lastSentTimelineStep = _timelineStep;
     audienceChannel
         .invokeMethod('update', {
           'index': _index,
           'blank': blank,
           'richTextPage': _richTextPage,
+          'timelineStep': _timelineStep,
         })
         .catchError((Object e) {
           // Audience-window sync is best-effort, but a fully silent failure
@@ -985,6 +995,34 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     setState(() => _richTextPage = page);
     _loadUserNoteIntoController();
     _syncAudience();
+  }
+
+  // ── Tijdlijn stap-voor-stap ──────────────────────────────────────────────
+
+  /// True wanneer [slide] zijn gebeurtenissen klik-voor-klik onthult.
+  bool _slideUsesTimelineSteps(Slide slide) =>
+      slide.type == SlideType.timeline &&
+      slide.timelineReveal == TimelineReveal.steps;
+
+  int _timelineEventCountFor(Slide slide) =>
+      parseTimelineEvents(slide.bullets).length;
+
+  /// Hoeveel gebeurtenissen nu zichtbaar moeten zijn, of null als de slide niet
+  /// in stapmodus staat (dan toont de tijdlijn alles / tekent zichzelf in).
+  /// Stap 0 toont al de eerste gebeurtenis, zodat de slide nooit leeg opent.
+  int? _timelineRevealedFor(Slide slide) {
+    if (!_slideUsesTimelineSteps(slide)) return null;
+    final n = _timelineEventCountFor(slide);
+    if (n <= 0) return 0;
+    return (_timelineStep + 1).clamp(1, n);
+  }
+
+  /// True zolang er nog een volgende gebeurtenis te onthullen valt op de huidige
+  /// tijdlijn-slide (dan houdt een klik je op de slide).
+  bool get _timelineHasMoreSteps {
+    final slide = _currentSlide;
+    if (!_slideUsesTimelineSteps(slide)) return false;
+    return _timelineStep < _timelineEventCountFor(slide) - 1;
   }
 
   void _toggleChecklistItem({
@@ -1356,6 +1394,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       setState(() {
         _index++;
         _richTextPage = 0;
+        _timelineStep = 0;
       });
       _loadUserNoteIntoController();
       _scheduleAdvance();
@@ -1364,6 +1403,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       setState(() {
         _index = 0;
         _richTextPage = 0;
+        _timelineStep = 0;
       });
       _loadUserNoteIntoController();
       _scheduleAdvance();
@@ -1509,6 +1549,13 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       _setRichTextPage(_richTextPage + 1);
       return;
     }
+    // Een tijdlijn in stapmodus onthult eerst zijn volgende gebeurtenis.
+    if (_timelineHasMoreSteps) {
+      setState(() => _timelineStep++);
+      _syncAudience();
+      _announceSlide();
+      return;
+    }
     // Een vraag-slide houdt je vast tot er (juist) is geantwoord.
     if (_questionBlocksAdvance) {
       // Na een fout antwoord (retry-modus) start een klik een nieuwe poging.
@@ -1524,6 +1571,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       setState(() {
         _index++;
         _richTextPage = 0;
+        _timelineStep = 0;
       });
       _loadUserNoteIntoController();
       _scheduleAdvance();
@@ -1552,12 +1600,20 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       _setRichTextPage(_richTextPage - 1);
       return;
     }
+    // Stap terug binnen een tijdlijn voordat we naar de vorige slide gaan.
+    if (_slideUsesTimelineSteps(_currentSlide) && _timelineStep > 0) {
+      setState(() => _timelineStep--);
+      _syncAudience();
+      _announceSlide();
+      return;
+    }
     if (_index > 0) {
       _persistUserNoteFromController();
       setState(() {
         _index--;
         final prevPlan = _richTextPlanFor(widget.slides[_index]);
         _richTextPage = prevPlan != null ? prevPlan.pageCount - 1 : 0;
+        _timelineStep = 0;
       });
       _loadUserNoteIntoController();
       _scheduleAdvance();
@@ -1774,6 +1830,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     setState(() {
       _index = index.clamp(0, widget.slides.length - 1);
       _richTextPage = 0;
+      _timelineStep = 0;
       _blank = _Blank.none;
       _gridOpen = false;
       _tableEditMode = false;
@@ -1797,6 +1854,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     setState(() {
       _index = target;
       _richTextPage = 0;
+      _timelineStep = 0;
       _tableEditMode = false;
       _tableEditRow = null;
       _tableEditCol = null;
@@ -2599,6 +2657,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                       (_richTextPlanFor(slide)?.pageCount ?? 1) > 1
                       ? (page) => _setRichTextPage(page)
                       : null,
+                  timelineRevealedCount: _timelineRevealedFor(slide),
                   tlp: widget.tlp,
                   organization: widget.organization,
                   showClassificationWatermark:
