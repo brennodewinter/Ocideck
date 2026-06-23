@@ -35,8 +35,16 @@ lib/
   List<InkStroke>>`) that is *never* serialized into the Markdown.
 - **`Slide`** is a single immutable value with a `SlideType` and typed fields. A
   few types reuse `customMarkdown` for their payload: free-Markdown (raw),
-  `code` (the source), `chart` (the JSON spec), and `cockpit` (the JSON spec of
-  its instrument meters).
+  `code` (the source), `chart` (the JSON spec), `cockpit` (the JSON spec of
+  its instrument meters), and `question` (the JSON quiz spec — kind, prompt,
+  answers, option count, time limit).
+- **Question slides** are interactive. The authored `QuestionSpec` round-trips in
+  `customMarkdown`; the live per-presentation state (`QuestionView` — the random
+  options drawn, the pick, correct/wrong, timer) is **session-only** and never
+  serialized. During presentation the presenter window is the single source of
+  truth: the audience window forwards clicks (`answerSelected` / `answerSubmit`)
+  and the presenter pushes the resulting `QuestionView` back over the window
+  channel, the same pattern as the checklist/table sync.
 - Slide ids are **regenerated on every parse**, so they are stable only within a
   session. Anything persisted that must survive a reload (annotations) re-anchors
   by slide order + a content fingerprint rather than by id.

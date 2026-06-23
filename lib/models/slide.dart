@@ -1,6 +1,7 @@
 import 'package:uuid/uuid.dart';
 import 'cockpit.dart';
 import 'deck.dart';
+import 'question.dart';
 
 const _uuid = Uuid();
 
@@ -19,6 +20,7 @@ enum SlideType {
   code,
   chart,
   cockpit,
+  question,
 }
 
 enum ListStyle { bullets, numbered, checklist, richText }
@@ -76,6 +78,8 @@ extension SlideTypeExtension on SlideType {
         return 'Grafiek';
       case SlideType.cockpit:
         return 'Cockpit';
+      case SlideType.question:
+        return 'Vraag';
     }
   }
 
@@ -109,6 +113,8 @@ extension SlideTypeExtension on SlideType {
         return 'chart';
       case SlideType.cockpit:
         return 'cockpit';
+      case SlideType.question:
+        return 'question';
     }
   }
 }
@@ -210,6 +216,8 @@ class Slide {
           : const [],
       customMarkdown: type == SlideType.cockpit
           ? CockpitSpec.pentestPreset().toBlock()
+          : type == SlideType.question
+          ? QuestionSpec.defaultMultipleChoice().toBlock()
           : '',
     );
   }

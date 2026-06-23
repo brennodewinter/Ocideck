@@ -2549,6 +2549,56 @@ const _dutchSourceStrings = {
 
 const _dutchSourceStringAdditions = {
   'en': {
+    // Vraag-slides (multiple choice question).
+    'Vraag (meerkeuze)': 'Question (multiple choice)',
+    'Soort vraag': 'Question type',
+    'Meerkeuze': 'Multiple choice',
+    'Vraag': 'Question',
+    'Wat wil je vragen?': 'What do you want to ask?',
+    'Antwoorden': 'Answers',
+    'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+        'Mark the correct answers. No limit; when presenting, one correct and the rest wrong answers are shown at random.',
+    'Antwoord': 'Answer',
+    'Antwoord toevoegen': 'Add answer',
+    'Goed antwoord': 'Correct answer',
+    'Geef minstens één goed én één fout antwoord op.':
+        'Provide at least one correct and one wrong answer.',
+    'Weergave': 'Display',
+    'Aantal getoonde opties': 'Number of options shown',
+    'Maximale antwoordtijd in seconden (0 = geen limiet)':
+        'Maximum answer time in seconds (0 = no limit)',
+    'Bij een fout antwoord': 'On a wrong answer',
+    'Opnieuw proberen': 'Try again',
+    'Doorgaan toestaan': 'Allow continuing',
+    'Fout = niet doorgaan; de vraag moet opnieuw.':
+        'Wrong = cannot continue; the question must be retried.',
+    'Fout = wel doorgaan, maar niet opnieuw doen.':
+        'Wrong = may continue, but no retry.',
+    'Afbeelding (optioneel)': 'Image (optional)',
+    'Breedte afbeelding': 'Image width',
+    'Goed!': 'Correct!',
+    'Helaas, fout': 'Sorry, wrong',
+    'van': 'of',
+    'opties worden willekeurig getoond': 'options are shown at random',
+    'antwoordtijd': 'answer time',
+    'bij fout: opnieuw proberen': 'on wrong: try again',
+    'bij fout: door, niet opnieuw': 'on wrong: continue, no retry',
+    'Beantwoord eerst de vraag.': 'Answer the question first.',
+    'Klik om opnieuw te proberen': 'Click to try again',
+    'Juist / Onjuist': 'True / False',
+    'Meerdere juiste antwoorden': 'Multiple correct answers',
+    'Stelling': 'Statement',
+    'Formuleer een stelling die juist of onjuist is':
+        'Phrase a statement that is true or false',
+    'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+        'Mark all correct answers. When presenting, a random set is shown with at least one correct and one wrong.',
+    'Juist': 'True',
+    'Onjuist': 'False',
+    'De stelling hierboven is juist of onjuist; kies welke.':
+        'The statement above is true or false; choose which.',
+    'Selecteer alle juiste antwoorden': 'Select all correct answers',
+    'Bevestig': 'Confirm',
+    'Het juiste antwoord': 'The correct answer',
     'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
         'The image is shown full-screen as a background. Use the blur when the title needs more calm or contrast.',
     'Cockpit-kleurschema': 'Cockpit colour scheme',
@@ -2915,6 +2965,56 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Scatter',
   },
   'it': {
+    // Vraag-slides (multiple choice question).
+    'Vraag (meerkeuze)': 'Domanda (scelta multipla)',
+    'Soort vraag': 'Tipo di domanda',
+    'Meerkeuze': 'Scelta multipla',
+    'Vraag': 'Domanda',
+    'Wat wil je vragen?': 'Cosa vuoi chiedere?',
+    'Antwoorden': 'Risposte',
+    'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+        'Contrassegna le risposte corrette. Nessun limite; durante la presentazione vengono mostrate a caso una giusta e le altre sbagliate.',
+    'Antwoord': 'Risposta',
+    'Antwoord toevoegen': 'Aggiungi risposta',
+    'Goed antwoord': 'Risposta corretta',
+    'Geef minstens één goed én één fout antwoord op.':
+        'Fornisci almeno una risposta giusta e una sbagliata.',
+    'Weergave': 'Visualizzazione',
+    'Aantal getoonde opties': 'Numero di opzioni mostrate',
+    'Maximale antwoordtijd in seconden (0 = geen limiet)':
+        'Tempo massimo di risposta in secondi (0 = nessun limite)',
+    'Bij een fout antwoord': 'In caso di risposta sbagliata',
+    'Opnieuw proberen': 'Riprova',
+    'Doorgaan toestaan': 'Consenti di continuare',
+    'Fout = niet doorgaan; de vraag moet opnieuw.':
+        'Sbagliato = non si prosegue; la domanda va rifatta.',
+    'Fout = wel doorgaan, maar niet opnieuw doen.':
+        'Sbagliato = si può proseguire, ma senza riprovare.',
+    'Afbeelding (optioneel)': 'Immagine (facoltativa)',
+    'Breedte afbeelding': 'Larghezza immagine',
+    'Goed!': 'Giusto!',
+    'Helaas, fout': 'Purtroppo sbagliato',
+    'van': 'di',
+    'opties worden willekeurig getoond': 'opzioni mostrate a caso',
+    'antwoordtijd': 'tempo di risposta',
+    'bij fout: opnieuw proberen': 'se sbagliato: riprova',
+    'bij fout: door, niet opnieuw': 'se sbagliato: prosegui, senza riprovare',
+    'Beantwoord eerst de vraag.': 'Rispondi prima alla domanda.',
+    'Klik om opnieuw te proberen': 'Clicca per riprovare',
+    'Juist / Onjuist': 'Vero / Falso',
+    'Meerdere juiste antwoorden': 'Più risposte corrette',
+    'Stelling': 'Affermazione',
+    'Formuleer een stelling die juist of onjuist is':
+        'Formula un\'affermazione vera o falsa',
+    'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+        'Contrassegna tutte le risposte corrette. Durante la presentazione viene mostrato un set casuale con almeno una giusta e una sbagliata.',
+    'Juist': 'Vero',
+    'Onjuist': 'Falso',
+    'De stelling hierboven is juist of onjuist; kies welke.':
+        'L\'affermazione qui sopra è vera o falsa; scegli quale.',
+    'Selecteer alle juiste antwoorden': 'Seleziona tutte le risposte corrette',
+    'Bevestig': 'Conferma',
+    'Het juiste antwoord': 'La risposta corretta',
     'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
         'L\'immagine viene mostrata a schermo intero come sfondo. Usa la sfocatura quando il titolo ha bisogno di più calma o contrasto.',
     'Cockpit-kleurschema': 'Schema colori cockpit',
@@ -3460,6 +3560,56 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Dispersione',
   },
   'de': {
+    // Vraag-slides (multiple choice question).
+    'Vraag (meerkeuze)': 'Frage (Multiple Choice)',
+    'Soort vraag': 'Fragetyp',
+    'Meerkeuze': 'Multiple Choice',
+    'Vraag': 'Frage',
+    'Wat wil je vragen?': 'Was möchtest du fragen?',
+    'Antwoorden': 'Antworten',
+    'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+        'Markiere die richtigen Antworten. Kein Limit; beim Präsentieren werden zufällig eine richtige und die übrigen falsche Antworten gezeigt.',
+    'Antwoord': 'Antwort',
+    'Antwoord toevoegen': 'Antwort hinzufügen',
+    'Goed antwoord': 'Richtige Antwort',
+    'Geef minstens één goed én één fout antwoord op.':
+        'Gib mindestens eine richtige und eine falsche Antwort an.',
+    'Weergave': 'Anzeige',
+    'Aantal getoonde opties': 'Anzahl angezeigter Optionen',
+    'Maximale antwoordtijd in seconden (0 = geen limiet)':
+        'Maximale Antwortzeit in Sekunden (0 = kein Limit)',
+    'Bij een fout antwoord': 'Bei einer falschen Antwort',
+    'Opnieuw proberen': 'Erneut versuchen',
+    'Doorgaan toestaan': 'Fortfahren erlauben',
+    'Fout = niet doorgaan; de vraag moet opnieuw.':
+        'Falsch = kein Fortfahren; die Frage muss wiederholt werden.',
+    'Fout = wel doorgaan, maar niet opnieuw doen.':
+        'Falsch = Fortfahren möglich, aber kein erneuter Versuch.',
+    'Afbeelding (optioneel)': 'Bild (optional)',
+    'Breedte afbeelding': 'Bildbreite',
+    'Goed!': 'Richtig!',
+    'Helaas, fout': 'Leider falsch',
+    'van': 'von',
+    'opties worden willekeurig getoond': 'Optionen werden zufällig angezeigt',
+    'antwoordtijd': 'Antwortzeit',
+    'bij fout: opnieuw proberen': 'bei falsch: erneut versuchen',
+    'bij fout: door, niet opnieuw': 'bei falsch: weiter, kein erneuter Versuch',
+    'Beantwoord eerst de vraag.': 'Beantworte zuerst die Frage.',
+    'Klik om opnieuw te proberen': 'Klicken, um erneut zu versuchen',
+    'Juist / Onjuist': 'Wahr / Falsch',
+    'Meerdere juiste antwoorden': 'Mehrere richtige Antworten',
+    'Stelling': 'Aussage',
+    'Formuleer een stelling die juist of onjuist is':
+        'Formuliere eine wahre oder falsche Aussage',
+    'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+        'Markiere alle richtigen Antworten. Beim Präsentieren wird ein zufälliger Satz mit mindestens einer richtigen und einer falschen gezeigt.',
+    'Juist': 'Wahr',
+    'Onjuist': 'Falsch',
+    'De stelling hierboven is juist of onjuist; kies welke.':
+        'Die Aussage oben ist wahr oder falsch; wähle, was zutrifft.',
+    'Selecteer alle juiste antwoorden': 'Wähle alle richtigen Antworten',
+    'Bevestig': 'Bestätigen',
+    'Het juiste antwoord': 'Die richtige Antwort',
     'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
         'Das Bild wird bildschirmfüllend als Hintergrund angezeigt. Nutze die Unschärfe, wenn der Titel mehr Ruhe oder Kontrast braucht.',
     'Cockpit-kleurschema': 'Cockpit-Farbschema',
@@ -4004,6 +4154,56 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Streudiagramm',
   },
   'fr': {
+    // Vraag-slides (multiple choice question).
+    'Vraag (meerkeuze)': 'Question (choix multiple)',
+    'Soort vraag': 'Type de question',
+    'Meerkeuze': 'Choix multiple',
+    'Vraag': 'Question',
+    'Wat wil je vragen?': 'Que voulez-vous demander ?',
+    'Antwoorden': 'Réponses',
+    'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+        'Marquez les bonnes réponses. Pas de limite ; à la présentation, une bonne et les autres mauvaises réponses sont affichées au hasard.',
+    'Antwoord': 'Réponse',
+    'Antwoord toevoegen': 'Ajouter une réponse',
+    'Goed antwoord': 'Bonne réponse',
+    'Geef minstens één goed én één fout antwoord op.':
+        'Indiquez au moins une bonne et une mauvaise réponse.',
+    'Weergave': 'Affichage',
+    'Aantal getoonde opties': 'Nombre d\'options affichées',
+    'Maximale antwoordtijd in seconden (0 = geen limiet)':
+        'Temps de réponse maximal en secondes (0 = sans limite)',
+    'Bij een fout antwoord': 'En cas de mauvaise réponse',
+    'Opnieuw proberen': 'Réessayer',
+    'Doorgaan toestaan': 'Autoriser à continuer',
+    'Fout = niet doorgaan; de vraag moet opnieuw.':
+        'Faux = pas de progression ; la question doit être refaite.',
+    'Fout = wel doorgaan, maar niet opnieuw doen.':
+        'Faux = on peut continuer, mais pas de nouvel essai.',
+    'Afbeelding (optioneel)': 'Image (facultative)',
+    'Breedte afbeelding': 'Largeur de l\'image',
+    'Goed!': 'Correct !',
+    'Helaas, fout': 'Hélas, faux',
+    'van': 'sur',
+    'opties worden willekeurig getoond': 'options affichées au hasard',
+    'antwoordtijd': 'temps de réponse',
+    'bij fout: opnieuw proberen': 'si faux : réessayer',
+    'bij fout: door, niet opnieuw': 'si faux : continuer, sans réessayer',
+    'Beantwoord eerst de vraag.': 'Répondez d\'abord à la question.',
+    'Klik om opnieuw te proberen': 'Cliquez pour réessayer',
+    'Juist / Onjuist': 'Vrai / Faux',
+    'Meerdere juiste antwoorden': 'Plusieurs bonnes réponses',
+    'Stelling': 'Affirmation',
+    'Formuleer een stelling die juist of onjuist is':
+        'Formulez une affirmation vraie ou fausse',
+    'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+        'Marquez toutes les bonnes réponses. À la présentation, un ensemble aléatoire est affiché avec au moins une bonne et une mauvaise.',
+    'Juist': 'Vrai',
+    'Onjuist': 'Faux',
+    'De stelling hierboven is juist of onjuist; kies welke.':
+        'L\'affirmation ci-dessus est vraie ou fausse ; choisissez.',
+    'Selecteer alle juiste antwoorden': 'Sélectionnez toutes les bonnes réponses',
+    'Bevestig': 'Confirmer',
+    'Het juiste antwoord': 'La bonne réponse',
     'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
         'L\'image est affichée en plein écran en arrière-plan. Utilisez le flou lorsque le titre a besoin de plus de calme ou de contraste.',
     'Cockpit-kleurschema': 'Schéma de couleurs du cockpit',
@@ -4552,6 +4752,56 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Nuage de points',
   },
   'es': {
+    // Vraag-slides (multiple choice question).
+    'Vraag (meerkeuze)': 'Pregunta (opción múltiple)',
+    'Soort vraag': 'Tipo de pregunta',
+    'Meerkeuze': 'Opción múltiple',
+    'Vraag': 'Pregunta',
+    'Wat wil je vragen?': '¿Qué quieres preguntar?',
+    'Antwoorden': 'Respuestas',
+    'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+        'Marca las respuestas correctas. Sin límite; al presentar se muestran al azar una correcta y el resto incorrectas.',
+    'Antwoord': 'Respuesta',
+    'Antwoord toevoegen': 'Añadir respuesta',
+    'Goed antwoord': 'Respuesta correcta',
+    'Geef minstens één goed én één fout antwoord op.':
+        'Indica al menos una respuesta correcta y una incorrecta.',
+    'Weergave': 'Visualización',
+    'Aantal getoonde opties': 'Número de opciones mostradas',
+    'Maximale antwoordtijd in seconden (0 = geen limiet)':
+        'Tiempo máximo de respuesta en segundos (0 = sin límite)',
+    'Bij een fout antwoord': 'Ante una respuesta incorrecta',
+    'Opnieuw proberen': 'Intentar de nuevo',
+    'Doorgaan toestaan': 'Permitir continuar',
+    'Fout = niet doorgaan; de vraag moet opnieuw.':
+        'Incorrecto = no se continúa; hay que repetir la pregunta.',
+    'Fout = wel doorgaan, maar niet opnieuw doen.':
+        'Incorrecto = se puede continuar, pero sin reintento.',
+    'Afbeelding (optioneel)': 'Imagen (opcional)',
+    'Breedte afbeelding': 'Ancho de la imagen',
+    'Goed!': '¡Correcto!',
+    'Helaas, fout': 'Lo siento, incorrecto',
+    'van': 'de',
+    'opties worden willekeurig getoond': 'opciones mostradas al azar',
+    'antwoordtijd': 'tiempo de respuesta',
+    'bij fout: opnieuw proberen': 'si falla: intentar de nuevo',
+    'bij fout: door, niet opnieuw': 'si falla: continuar, sin reintento',
+    'Beantwoord eerst de vraag.': 'Responde primero la pregunta.',
+    'Klik om opnieuw te proberen': 'Haz clic para intentar de nuevo',
+    'Juist / Onjuist': 'Verdadero / Falso',
+    'Meerdere juiste antwoorden': 'Varias respuestas correctas',
+    'Stelling': 'Afirmación',
+    'Formuleer een stelling die juist of onjuist is':
+        'Formula una afirmación verdadera o falsa',
+    'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+        'Marca todas las respuestas correctas. Al presentar se muestra un conjunto aleatorio con al menos una correcta y una incorrecta.',
+    'Juist': 'Verdadero',
+    'Onjuist': 'Falso',
+    'De stelling hierboven is juist of onjuist; kies welke.':
+        'La afirmación de arriba es verdadera o falsa; elige cuál.',
+    'Selecteer alle juiste antwoorden': 'Selecciona todas las respuestas correctas',
+    'Bevestig': 'Confirmar',
+    'Het juiste antwoord': 'La respuesta correcta',
     'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
         'La imagen se muestra a pantalla completa como fondo. Usa el desenfoque cuando el título necesite más calma o contraste.',
     'Cockpit-kleurschema': 'Esquema de colores del cockpit',
@@ -5098,6 +5348,56 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Dispersión',
   },
   'fy': {
+    // Vraag-slides (multiple choice question).
+    'Vraag (meerkeuze)': 'Fraach (merkar)',
+    'Soort vraag': 'Fraachtype',
+    'Meerkeuze': 'Merkar',
+    'Vraag': 'Fraach',
+    'Wat wil je vragen?': 'Wat wolsto freegje?',
+    'Antwoorden': 'Antwurden',
+    'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+        'Markearje de goede antwurden. Gjin limyt; by it presintearjen wurde willekeurich 1 goed en de rest fout toand.',
+    'Antwoord': 'Antwurd',
+    'Antwoord toevoegen': 'Antwurd tafoegje',
+    'Goed antwoord': 'Goed antwurd',
+    'Geef minstens één goed én één fout antwoord op.':
+        'Jou op syn minst ien goed en ien fout antwurd op.',
+    'Weergave': 'Werjefte',
+    'Aantal getoonde opties': 'Oantal toande opsjes',
+    'Maximale antwoordtijd in seconden (0 = geen limiet)':
+        'Maksimale antwurdtiid yn sekonden (0 = gjin limyt)',
+    'Bij een fout antwoord': 'By in fout antwurd',
+    'Opnieuw proberen': 'Opnij besykje',
+    'Doorgaan toestaan': 'Trochgean tastean',
+    'Fout = niet doorgaan; de vraag moet opnieuw.':
+        'Fout = net trochgean; de fraach moat opnij.',
+    'Fout = wel doorgaan, maar niet opnieuw doen.':
+        'Fout = trochgean mei, mar net opnij.',
+    'Afbeelding (optioneel)': 'Ôfbylding (opsjoneel)',
+    'Breedte afbeelding': 'Breedte ôfbylding',
+    'Goed!': 'Goed!',
+    'Helaas, fout': 'Spitigernôch, fout',
+    'van': 'fan',
+    'opties worden willekeurig getoond': 'opsjes wurde willekeurich toand',
+    'antwoordtijd': 'antwurdtiid',
+    'bij fout: opnieuw proberen': 'by fout: opnij besykje',
+    'bij fout: door, niet opnieuw': 'by fout: troch, net opnij',
+    'Beantwoord eerst de vraag.': 'Beäntwurdzje earst de fraach.',
+    'Klik om opnieuw te proberen': 'Klik om opnij te besykjen',
+    'Juist / Onjuist': 'Wier / Net wier',
+    'Meerdere juiste antwoorden': 'Meardere juste antwurden',
+    'Stelling': 'Stelling',
+    'Formuleer een stelling die juist of onjuist is':
+        'Formulearje in stelling dy\'t wier of net wier is',
+    'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+        'Markearje alle juste antwurden. By it presintearjen wurdt willekeurich in set toand mei op syn minst ien goed en ien fout.',
+    'Juist': 'Wier',
+    'Onjuist': 'Net wier',
+    'De stelling hierboven is juist of onjuist; kies welke.':
+        'De stelling hjirboppe is wier of net wier; kies hokker.',
+    'Selecteer alle juiste antwoorden': 'Selektearje alle juste antwurden',
+    'Bevestig': 'Befêstigje',
+    'Het juiste antwoord': 'It juste antwurd',
     'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
         'De ôfbylding wurdt skermfoljend as eftergrûn toand. Brûk de waas as de titel mear rêst of kontrast nedich hat.',
     'Cockpit-kleurschema': 'Cockpit-kleurskema',
@@ -5628,6 +5928,56 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Sparring',
   },
   'pap': {
+    // Vraag-slides (multiple choice question).
+    'Vraag (meerkeuze)': 'Pregunta (selekshon múltiple)',
+    'Soort vraag': 'Tipo di pregunta',
+    'Meerkeuze': 'Selekshon múltiple',
+    'Vraag': 'Pregunta',
+    'Wat wil je vragen?': 'Kiko bo ke puntra?',
+    'Antwoorden': 'Kontestanan',
+    'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+        'Marka e kontestanan korekto. Sin límite; ora di presentá ta mustra na zar 1 korekto i e rest robes.',
+    'Antwoord': 'Kontesta',
+    'Antwoord toevoegen': 'Agregá kontesta',
+    'Goed antwoord': 'Kontesta korekto',
+    'Geef minstens één goed én één fout antwoord op.':
+        'Duna por lo ménos un kontesta korekto i un robes.',
+    'Weergave': 'Mustrá',
+    'Aantal getoonde opties': 'Kantidat di opshon mustrá',
+    'Maximale antwoordtijd in seconden (0 = geen limiet)':
+        'Tempo máksimo di kontesta na sekònde (0 = sin límite)',
+    'Bij een fout antwoord': 'Ora di un kontesta robes',
+    'Opnieuw proberen': 'Purba atrobe',
+    'Doorgaan toestaan': 'Permití sigui',
+    'Fout = niet doorgaan; de vraag moet opnieuw.':
+        'Robes = no por sigui; e pregunta mester wòrdu hasí atrobe.',
+    'Fout = wel doorgaan, maar niet opnieuw doen.':
+        'Robes = por sigui, pero sin purba atrobe.',
+    'Afbeelding (optioneel)': 'Imagen (opshonal)',
+    'Breedte afbeelding': 'Hanchura di imagen',
+    'Goed!': 'Korekto!',
+    'Helaas, fout': 'Lamentablemente, robes',
+    'van': 'di',
+    'opties worden willekeurig getoond': 'opshon ta wòrdu mustrá na zar',
+    'antwoordtijd': 'tempo di kontesta',
+    'bij fout: opnieuw proberen': 'si robes: purba atrobe',
+    'bij fout: door, niet opnieuw': 'si robes: sigui, sin purba atrobe',
+    'Beantwoord eerst de vraag.': 'Kontestá e pregunta promé.',
+    'Klik om opnieuw te proberen': 'Klik pa purba atrobe',
+    'Juist / Onjuist': 'Bèrdat / Falsu',
+    'Meerdere juiste antwoorden': 'Vários kontesta korekto',
+    'Stelling': 'Deklarashon',
+    'Formuleer een stelling die juist of onjuist is':
+        'Formulá un deklarashon ku ta bèrdat òf falsu',
+    'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+        'Marka tur e kontestanan korekto. Ora di presentá ta mustra un set na zar ku por lo ménos un korekto i un robes.',
+    'Juist': 'Bèrdat',
+    'Onjuist': 'Falsu',
+    'De stelling hierboven is juist of onjuist; kies welke.':
+        'E deklarashon ariba ta bèrdat òf falsu; skohe kua.',
+    'Selecteer alle juiste antwoorden': 'Selektá tur e kontestanan korekto',
+    'Bevestig': 'Konfirmá',
+    'Het juiste antwoord': 'E kontesta korekto',
     'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
         'E imagen ta wòrdu mustrá na pantaya kompleto komo fondo. Usa e waas ora e título mester di mas trankilidat òf kontraste.',
     'Cockpit-kleurschema': 'Skema di koló di cockpit',

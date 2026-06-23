@@ -4,6 +4,7 @@ import 'package:uuid/uuid.dart';
 import '../models/chart.dart';
 import '../models/cockpit.dart';
 import '../models/deck.dart';
+import '../models/question.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../utils/deck_markdown_dashes.dart';
@@ -440,6 +441,26 @@ class MarkdownService {
         buf.writeln('```cockpit');
         buf.writeln(spec.toBlock());
         buf.writeln('```');
+
+      case SlideType.question:
+        final spec = QuestionSpec.parse(slide.customMarkdown);
+        if (slide.title.isNotEmpty) {
+          buf.writeln('# ${slide.title}');
+          buf.writeln();
+        }
+        if (slide.imagePath.isNotEmpty) {
+          if (slide.imageSize > 0) {
+            // Reuse the shared split-width comment so it round-trips via the
+            // existing `_style` capture in _parseBlock.
+            buf.writeln('<!-- _style: --image-width: ${slide.imageSize}%; -->');
+          }
+          buf.writeln('![](${slide.imagePath})');
+          _writeImageCaption(buf, slide.imageCaption);
+          buf.writeln();
+        }
+        buf.writeln('```question');
+        buf.writeln(spec.toBlock());
+        buf.writeln('```');
     }
 
     if (slide.audioPath.isNotEmpty) {
@@ -706,8 +727,12 @@ class MarkdownService {
   /// Best-effort parse of Marp markdown into a Deck. Returns null if the
   /// content cannot be parsed at all.
   Deck? parseDeck(String markdown, {String? filePath}) {
+    // Normalise line endings up front. A Windows (CRLF) or classic-Mac (CR)
+    // file would otherwise miss the `---\n` frontmatter start and the
+    // `\n---\n` slide separators, collapsing the whole deck into one block.
+    final normalized = markdown.replaceAll('\r\n', '\n').replaceAll('\r', '\n');
     try {
-      return _doParse(markdown, filePath: filePath);
+      return _doParse(normalized, filePath: filePath);
     } catch (e, s) {
       logError('MarkdownService.parseDeck: parse markdown', e, s);
       return null;
@@ -928,6 +953,18 @@ class MarkdownService {
         advanceDuration: advanceDuration,
         skipped: skipped,
         tlp: slideTlp,
+      );
+    }
+
+    if (cssClass.split(RegExp(r'\s+')).contains('question')) {
+      return _parseQuestionBlock(
+        remaining: remaining,
+        cssClass: cssClass,
+        notes: notes,
+        advanceDuration: advanceDuration,
+        skipped: skipped,
+        tlp: slideTlp,
+        imageSize: styleImageWidth,
       );
     }
 
@@ -1414,6 +1451,76 @@ class MarkdownService {
       customMarkdown: CockpitSpec.parse(json.join('\n').trim()).toBlock(),
       audioPath: audioPath,
       audioAutoplay: audioAutoplay,
+      cssClass: effectiveClass,
+      notes: notes,
+      advanceDuration: advanceDuration,
+      showLogo: !classTokens.contains('no-logo'),
+      showFooter: !classTokens.contains('no-footer'),
+      skipped: skipped,
+      tlp: tlp,
+    );
+  }
+
+  /// Parse a `<!-- _class: question -->` slide: an optional `# title`, an
+  /// optional `![](image)` with caption, and the fenced ```` ```question ````
+  /// JSON block (kept in [Slide.customMarkdown]).
+  Slide _parseQuestionBlock({
+    required String remaining,
+    required String cssClass,
+    required String notes,
+    required double advanceDuration,
+    required bool skipped,
+    TlpLevel tlp = TlpLevel.none,
+    int imageSize = 0,
+  }) {
+    final lines = remaining.split('\n');
+    final json = <String>[];
+    String title = '';
+    String imagePath = '';
+    String imageCaption = '';
+    bool inFence = false;
+
+    for (final line in lines) {
+      final fence = RegExp(r'^\s*```').hasMatch(line);
+      if (fence) {
+        inFence = !inFence;
+        continue;
+      }
+      if (inFence) {
+        json.add(line);
+        continue;
+      }
+      final t = line.trim();
+      if (t.startsWith('# ') && title.isEmpty) {
+        title = t.substring(2).trim();
+      } else if (t.startsWith('![')) {
+        final m = RegExp(r'!\[[^\]]*\]\(([^)]*)\)').firstMatch(t);
+        if (m != null) imagePath = m.group(1) ?? '';
+      } else if (t.startsWith('<div class="image-caption">')) {
+        imageCaption = _decodeImageCaption(t);
+      }
+    }
+
+    final classTokens = cssClass.split(RegExp(r'\s+'));
+    final effectiveClass = classTokens
+        .where(
+          (c) =>
+              c.isNotEmpty &&
+              c != 'question' &&
+              c != 'logo-safe' &&
+              c != 'no-logo' &&
+              c != 'no-footer',
+        )
+        .join(' ');
+
+    return Slide(
+      id: _uuid.v4(),
+      type: SlideType.question,
+      title: title,
+      imagePath: imagePath,
+      imageCaption: imageCaption,
+      imageSize: imageSize,
+      customMarkdown: QuestionSpec.parse(json.join('\n').trim()).toBlock(),
       cssClass: effectiveClass,
       notes: notes,
       advanceDuration: advanceDuration,

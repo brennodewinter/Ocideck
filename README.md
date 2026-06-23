@@ -1,6 +1,6 @@
 # OciDeck
 
-A desktop application for building [Marp](https://marp.app/) presentations through a structured, slide-by-slide editor — no raw Markdown wrangling required. Compose decks from typed slide templates (title, bullets, quotes, tables, images, video, audio, source code, charts), preview them live, present them fullscreen — even across two screens — and export to Marp Markdown, PDF, PPTX, and self-contained HTML.
+A desktop application for building [Marp](https://marp.app/) presentations through a structured, slide-by-slide editor — no raw Markdown wrangling required. Compose decks from typed slide templates (title, bullets, quotes, tables, images, video, audio, source code, charts, cockpit dashboards, interactive quiz questions), preview them live, present them fullscreen — even across two screens — and export to Marp Markdown, PDF, PPTX, and self-contained HTML.
 
 Built with Flutter for macOS, Windows, Linux, and **web**.
 
@@ -8,9 +8,10 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 
 ## Features
 
-- **Structured slide editors** — dedicated editors per slide type: title, bullets, two-column bullets, bullets + image, single/two images, quote, table, section divider, image-only, video, audio, source code, charts, and free-form Markdown.
+- **Structured slide editors** — dedicated editors per slide type: title, bullets, two-column bullets, bullets + image, single/two images, quote, table, section divider, image-only, video, audio, source code, charts, cockpit dashboards, interactive question (quiz) slides, and free-form Markdown.
 - **Source-code slides** — a "code sheet" with per-language syntax highlighting, stored as a fenced code block. Background, text colour and monospace font come from the style profile, with an optional syntax-colouring toggle (turn it off for a single-colour, CRT-terminal look). The code auto-sizes to fill the panel.
 - **Charts** — bar, stacked bar, line, pie, spider/radar, and scatter charts rendered natively (preview, presenter, PDF, PPTX) and as self-contained SVG in the HTML export. Data is entered in an in-app grid or imported from CSV; the spec is stored as JSON in the Markdown, with optional linking to a CSV kept in a tidy `data/` directory. Optional min/max draw reference lines (bar/line) or fix the scale (radar); legend hover highlights a series, and line tooltips pick the dot under the cursor.
+- **Question slides (interactive quiz)** — multiple choice, true/false, or multiple-correct questions, with the kind chosen in the editor. The answer pool is unlimited; a configurable number of options (default 4) is drawn at random each run. Optional answer-time countdown, an on-wrong policy (retry until correct, or reveal-and-continue), and an optional image with a pan-and-zoom detail view. Presenting blocks advancing until answered correctly; the audience window is interactive and stays in sync. The spec round-trips as a JSON block; answer state is session-only.
 - **Live preview** — see each slide rendered as you edit, with inline Markdown, footers, and TLP (Traffic Light Protocol) marking. Free-Markdown slides render fenced code with syntax highlighting, `$…$` / `$$…$$` LaTeX math, and Mermaid diagrams.
 - **Traffic Light Protocol** — a deck-wide classification plus an optional **per-slide TLP level**; slides classified stricter than the level the deck is shown at are automatically withheld, both when presenting and exporting. **Visual marking** (banner, badge, optional diagonal watermark) follows FIRST TLP 2.0 colours and is WYSIWYG through preview, presenter, and PDF/PPTX export. Optional **classification enforcement** (release ceiling, required minimum, mandatory classification, watermark toggle) blocks export fail-closed when policy fails; export metadata embeds TLP in PDF/PPTX/HTML.
 - **Fullscreen presenter** — keyboard-driven navigation, presenter view, blank screen, auto-advance, and a slide-grid overview.

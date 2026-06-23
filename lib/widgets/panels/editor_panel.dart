@@ -17,6 +17,7 @@ import '../editors/code_editor.dart';
 import '../editors/cockpit_editor.dart';
 import '../editors/free_markdown_editor.dart';
 import '../editors/image_slide_editor.dart';
+import '../editors/question_editor.dart';
 import '../editors/quote_editor.dart';
 import '../editors/section_editor.dart';
 import '../editors/table_editor.dart';
@@ -189,7 +190,8 @@ class EditorPanel extends ConsumerWidget {
     final keepsImage =
         newType == SlideType.bulletsImage ||
         newType == SlideType.image ||
-        newType == SlideType.twoImages;
+        newType == SlideType.twoImages ||
+        newType == SlideType.question;
     return Slide(
       id: slide.id,
       type: newType,
@@ -217,6 +219,10 @@ class EditorPanel extends ConsumerWidget {
           ? (slide.type == SlideType.cockpit
                 ? slide.customMarkdown
                 : Slide.create(SlideType.cockpit).customMarkdown)
+          : newType == SlideType.question
+          ? (slide.type == SlideType.question
+                ? slide.customMarkdown
+                : Slide.create(SlideType.question).customMarkdown)
           : slide.customMarkdown,
       codeLanguage: slide.codeLanguage,
       cssClass: slide.cssClass,
@@ -362,6 +368,16 @@ class EditorPanel extends ConsumerWidget {
           onUpdate: onUpdate,
           nestedInScrollView: nestedInScrollView,
         );
+      case SlideType.question:
+        return QuestionEditor(
+          key: ValueKey(slide.id),
+          slide: slide,
+          onUpdate: onUpdate,
+          imageService: imgService,
+          searchPaths: searchPaths,
+          captionBasePath: captionBasePath,
+          nestedInScrollView: nestedInScrollView,
+        );
     }
   }
 }
@@ -398,6 +414,8 @@ IconData _slideTypeIcon(SlideType type) {
       return Icons.bar_chart;
     case SlideType.cockpit:
       return Icons.speed_outlined;
+    case SlideType.question:
+      return Icons.quiz_outlined;
   }
 }
 

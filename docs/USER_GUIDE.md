@@ -21,7 +21,8 @@ Marp tools.
 Add a slide and pick a type: **title**, **section** divider, **bullets**, **two
 bullet columns**, **bullets + image**, **two images**, **large image**, **video**,
 **audio**, **quote**, **table**, **source code**, **chart** (bar, line, pie, or
-spider/radar), **cockpit** (a dashboard of aviation-style instrument gauges), and
+spider/radar), **cockpit** (a dashboard of aviation-style instrument gauges),
+**question** (an interactive quiz slide), and
 **free Markdown**. Each card in the chooser shows a miniature
 wireframe of the layout, and the dialog works entirely with the keyboard
 (`Tab`/`Enter` to choose, `Esc` to cancel). Each type has a dedicated editor on
@@ -75,6 +76,39 @@ row/column. Each series and (for pie/radar) each label can be given its own colo
   a text alternative with its type, title, and the values per series.
 - Charts render in the preview, presenter, PDF, and PPTX, and as inline SVG in the
   HTML export.
+
+### Question slides
+
+A question slide turns the presentation into a short quiz. Pick **Question** in
+the chooser, then choose the **kind** in the editor:
+
+- **Multiple choice** — one correct answer is shown together with a random pick of
+  wrong ones. Add as many answers as you like (no limit) and tick the correct ones;
+  set **how many options are shown** (default 4). At presentation time one correct
+  answer plus random wrong ones are drawn, so each run differs.
+- **True / false** — the prompt is a statement; a switch in the editor sets whether
+  it is **true or false**. The viewer picks *Juist* (true) or *Onjuist* (false).
+- **Multiple correct answers** — several answers may be correct. The viewer ticks
+  **all** correct ones and presses **Confirm**; it is only right when exactly the
+  correct set is selected.
+
+Common options for every kind:
+
+- **Answer time** (optional) — a countdown starts the moment the slide appears;
+  running out counts as a wrong answer.
+- **On a wrong answer** — *try again* (you cannot continue; a click shows a fresh
+  random set for another attempt) or *allow continuing* (the right answer is
+  revealed, the slide locks, and you may move on without a retry).
+- **Image** (optional) — shown beside the question with a split bar, with a
+  magnifier button that opens a **pan-and-zoom** detail view of the photo.
+
+While presenting, you **cannot advance** past a question until it is answered
+correctly (or answered and locked). A correct answer turns green and lets you
+continue; a wrong answer turns red and highlights the correct one. On a
+**two-screen** setup the audience window is interactive: clicks there register the
+answer and both screens stay in sync. The answer state is session-only — it is
+never written to the `.md` file, and a static export shows the question without
+interactivity.
 
 ## Image library
 

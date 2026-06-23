@@ -1,0 +1,139 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/file_service.dart';
+import 'package:ocideck/services/image_service.dart';
+import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/state/deck_provider.dart';
+import 'package:path/path.dart' as p;
+
+/// A FileService whose write fails, to exercise the save error path.
+class _ThrowingFileService extends FileService {
+  _ThrowingFileService(MarkdownService md)
+    : super(md, ImageService(), () => const ThemeProfile());
+
+  @override
+  Future<Deck> saveDeck(Deck deck, String filePath) async =>
+      throw const FileSystemException('disk full');
+}
+
+/// A FileService whose write blocks until [gate] completes, to exercise the
+/// concurrent-save lock.
+class _BlockingFileService extends FileService {
+  _BlockingFileService(this.gate, MarkdownService md)
+    : super(md, ImageService(), () => const ThemeProfile());
+
+  final Completer<void> gate;
+  int calls = 0;
+
+  @override
+  Future<Deck> saveDeck(Deck deck, String filePath) async {
+    calls++;
+    await gate.future;
+    return deck;
+  }
+}
+
+Deck _deck() => Deck(
+  title: 'T',
+  slides: [Slide.create(SlideType.title).copyWith(title: 'T')],
+);
+
+void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  group('save error handling', () {
+    test('a write failure returns false, sets error and stays dirty', () async {
+      final md = MarkdownService();
+      final n = DeckNotifier(md, _ThrowingFileService(md));
+      n.loadDeck(_deck(), filePath: '/tmp/does-not-matter.md');
+      n.addSlide(SlideType.bullets); // make it dirty
+      expect(n.state.isDirty, isTrue);
+
+      final ok = await n.save();
+
+      expect(ok, isFalse);
+      expect(n.state.isDirty, isTrue, reason: 'unsaved work must stay dirty');
+      expect(n.state.error, isNotNull);
+    });
+
+    test('a second concurrent save is rejected by the lock', () async {
+      final md = MarkdownService();
+      final gate = Completer<void>();
+      final fs = _BlockingFileService(gate, md);
+      final n = DeckNotifier(md, fs);
+      n.loadDeck(_deck(), filePath: '/tmp/x.md');
+      n.addSlide(SlideType.bullets);
+
+      final first = n.save(); // acquires the lock, blocks on the gate
+      final second = await n.save(); // lock held → rejected immediately
+
+      expect(second, isFalse);
+      gate.complete();
+      expect(await first, isTrue);
+      expect(fs.calls, 1, reason: 'only one write must reach disk');
+    });
+  });
+
+  group('openDeck load robustness', () {
+    late FileService service;
+    late MarkdownService md;
+    late Directory temp;
+
+    setUp(() async {
+      md = MarkdownService();
+      service = FileService(md, ImageService(), () => const ThemeProfile());
+      temp = await Directory.systemTemp.createTemp('ocideck_load_');
+    });
+    tearDown(() => temp.delete(recursive: true));
+
+    test('a CRLF file loads identically to its LF form', () async {
+      final deck = Deck(
+        title: 'Deck',
+        slides: [
+          Slide.create(SlideType.title).copyWith(title: 'Eerste'),
+          Slide.create(SlideType.bullets).copyWith(
+            title: 'Tweede',
+            bullets: ['een', 'twee'],
+          ),
+        ],
+      );
+      final lf = md.generateDeck(deck);
+      final crlf = lf.replaceAll('\n', '\r\n');
+
+      final lfFile = File(p.join(temp.path, 'lf.md'));
+      final crlfFile = File(p.join(temp.path, 'crlf.md'));
+      await lfFile.writeAsString(lf);
+      await crlfFile.writeAsString(crlf);
+
+      final lfDeck = await service.openDeck(lfFile.path);
+      final crlfDeck = await service.openDeck(crlfFile.path);
+
+      expect(lfDeck, isNotNull);
+      expect(crlfDeck, isNotNull);
+      expect(
+        crlfDeck!.slides.map((s) => s.title),
+        lfDeck!.slides.map((s) => s.title),
+      );
+      expect(crlfDeck.slides.length, lfDeck.slides.length);
+    });
+
+    test('a truncated file (frontmatter, empty body) returns null', () async {
+      final file = File(p.join(temp.path, 'truncated.md'));
+      await file.writeAsString('---\nmarp: true\ntitle: X\n---\n');
+
+      expect(await service.openDeck(file.path), isNull);
+    });
+
+    test('non-UTF8 bytes return null instead of throwing', () async {
+      final file = File(p.join(temp.path, 'binary.md'));
+      await file.writeAsBytes([0xFF, 0xFE, 0x00, 0x80, 0x81]);
+
+      expect(await service.openDeck(file.path), isNull);
+    });
+  });
+}

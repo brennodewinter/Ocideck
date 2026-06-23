@@ -27,6 +27,7 @@ class AddSlideDialog extends StatelessWidget {
     (SlideType.table, 'Tabel'),
     (SlideType.chart, 'Grafiek'),
     (SlideType.cockpit, 'Cockpit'),
+    (SlideType.question, 'Vraag'),
     (SlideType.code, 'Broncode'),
     (SlideType.freeMarkdown, 'Vrije Markdown'),
   ];
@@ -241,6 +242,14 @@ class SlideTypePreviewPainter extends CustomPainter {
         _bar(canvas, 14, 44, 132, 6, _soft);
         _bar(canvas, 14, 56, 92, 6, _soft);
         _bar(canvas, 14, 68, 110, 6, _soft);
+      case SlideType.question:
+        // Prompt line on top, then four answer pills — the first highlighted
+        // as the (correct) selected option.
+        _bar(canvas, 14, 12, 96, 9, _ink);
+        for (var r = 0; r < 4; r++) {
+          final y = 30.0 + r * 13;
+          _bar(canvas, 14, y, 132, 10, r == 0 ? _accent : _soft, radius: 3);
+        }
     }
   }
 

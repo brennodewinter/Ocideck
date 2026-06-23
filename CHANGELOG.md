@@ -8,6 +8,21 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Question slides (interactive quiz)** — a new `question` slide type that turns a
+  presentation into a short quiz. Three kinds, chosen in the editor: **multiple
+  choice** (one correct answer shown with a random pick of wrong ones), **true /
+  false** (the prompt is a statement; the editor sets whether it is true), and
+  **multiple correct answers** (tick all correct, then **Confirm**). The answer
+  pool is unlimited; a configurable number of options (default 4) is drawn at
+  random each run. Options: an optional **answer-time** countdown (running out =
+  wrong), an **on-wrong** policy (*try again* — blocks advancing until correct, a
+  click draws a fresh set — or *allow continuing* — reveal, lock, move on), and an
+  optional **image** with a pan-and-zoom detail popup. Presenting **blocks
+  advancing** until the question is answered correctly (or answered and locked);
+  correct turns green, wrong turns red and highlights the right answer. On a
+  two-screen setup the audience window is interactive and stays in sync. The quiz
+  spec round-trips in a fenced ` ```question ` JSON block; the live answer state is
+  session-only and a static export shows the question without interactivity.
 - **User notes (recipient / course)** — personal notes per slide, fully separate
   from speaker notes (`Slide.notes`). Stored in a `<name>.user-notes.json`
   sidecar (fingerprint-anchored like annotations). Hidden by default while
@@ -160,6 +175,24 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   reorderable list.
 - A scheduler crash when jumping away from a slide before a quality-focus callback
   ran on a caption or editor field (`ref` used after the widget unmounted).
+- **Saving can no longer corrupt a deck.** Decks, sidecars, theme CSS, copied
+  chart data, exported packages and URL-imported files are now written
+  atomically (to a temp file, then renamed into place), so a crash, full disk or
+  process kill mid-write leaves the original file intact instead of half-written.
+- **Save failures are no longer silent.** A failed write (read-only volume, full
+  disk, permission denied) now shows an error and keeps the deck marked as
+  unsaved, instead of being swallowed and reported as success. `Save` reliably
+  reports failure so closing a tab/window no longer crashes or loses work, and a
+  *Save As* whose file cannot be re-read afterwards surfaces a warning rather
+  than silently treating the deck as saved.
+- **Windows (CRLF) markdown files now open correctly** — line endings are
+  normalised before parsing, so frontmatter and slide separators are no longer
+  missed and the whole deck no longer collapses into a single slide.
+- A truncated or corrupt `.md`, or a file with non-UTF-8 bytes, now reports
+  "could not open" instead of silently opening as an empty presentation that
+  could be overwritten.
+- Rapid double `Cmd/Ctrl+S` can no longer start two overlapping writes to the
+  same file.
 
 ## [1.0.0]
 
