@@ -108,8 +108,16 @@ class TabsNotifier extends StateNotifier<TabsState> {
   }
 
   /// Tear down a tab that is being removed: stop listening to it.
-  /// [DeckNotifier] and [EditorNotifier] are disposed by Riverpod when the tab's
-  /// [ProviderScope] unmounts (see `deckProvider.overrideWith` in [AppShell]).
+  ///
+  /// The notifiers are owned by the tab's [ProviderScope] (see
+  /// `deckProvider.overrideWith` in [AppShell]): Riverpod disposes each one when
+  /// that scope unmounts, *for every provider the scope actually initialised*.
+  /// The heavy [DeckNotifier] (full deck + undo history) is always read — by the
+  /// quality provider and the shell — so it is always disposed; this is verified
+  /// by a regression test. We must NOT dispose it here too, or the later scope
+  /// unmount would double-dispose it. A never-opened tab shows the welcome
+  /// screen, so its lightweight [EditorNotifier] may never be initialised and is
+  /// simply garbage-collected on close.
   void _disposeTab(TabInfo tab) {
     _subs.remove(tab.id)?.cancel();
   }

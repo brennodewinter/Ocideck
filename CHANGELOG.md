@@ -193,6 +193,13 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   could be overwritten.
 - Rapid double `Cmd/Ctrl+S` can no longer start two overlapping writes to the
   same file.
+- **Uncaught errors are now caught and logged.** The app runs inside a guarded
+  zone with framework- and platform-level error handlers, so an unexpected
+  error during a presentation no longer disappears silently or leaves the UI
+  wedged; in release a build failure shows a quiet placeholder instead of a red
+  error box.
+- The Mermaid diagram render cache is now bounded (LRU), so a long session with
+  many distinct diagrams can no longer grow memory without limit.
 
 ## [1.0.0]
 
