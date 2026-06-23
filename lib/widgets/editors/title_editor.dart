@@ -164,6 +164,39 @@ class _TitleEditorState extends ConsumerState<TitleEditor> {
               'Maakt de achtergrond rustiger achter titel en subtitel.',
             ),
           ),
+          const SizedBox(height: 12),
+          const SectionLabel('Titeltekstkleur'),
+          const SizedBox(height: 6),
+          Wrap(
+            spacing: 8,
+            children: [
+              ChoiceChip(
+                label: const Text('Thema'),
+                selected: widget.slide.titleTextColorOverride.isEmpty,
+                onSelected: (_) => widget.onUpdate(
+                  widget.slide.copyWith(titleTextColorOverride: ''),
+                ),
+              ),
+              ChoiceChip(
+                label: const Text('Licht'),
+                selected:
+                    widget.slide.titleTextColorOverride.toUpperCase() ==
+                    '#FFFFFF',
+                onSelected: (_) => widget.onUpdate(
+                  widget.slide.copyWith(titleTextColorOverride: '#FFFFFF'),
+                ),
+              ),
+              ChoiceChip(
+                label: const Text('Donker'),
+                selected:
+                    widget.slide.titleTextColorOverride.toUpperCase() ==
+                    '#111827',
+                onSelected: (_) => widget.onUpdate(
+                  widget.slide.copyWith(titleTextColorOverride: '#111827'),
+                ),
+              ),
+            ],
+          ),
         ],
       ],
     );

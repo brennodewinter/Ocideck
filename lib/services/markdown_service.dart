@@ -240,6 +240,11 @@ class MarkdownService {
         }
         if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
         if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
+        if (slide.titleTextColorOverride.isNotEmpty) {
+          buf.writeln(
+            '<!-- ocideck_title_text_color: ${slide.titleTextColorOverride} -->',
+          );
+        }
 
       case SlideType.section:
         if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
@@ -901,6 +906,7 @@ class MarkdownService {
     var timelineAnimationMs = timelineDefaultAnimationDurationMs;
     var showChecklistProgress = false;
     var titleImageOverlay = true;
+    var titleTextColorOverride = '';
     var columnTitle1 = '';
     var columnTitle2 = '';
     // bulletsImage slides store their panel width in `<!-- _style:
@@ -946,6 +952,10 @@ class MarkdownService {
           titleImageOverlay =
               content.substring('ocideck_title_image_overlay:'.length).trim() !=
               'false';
+        } else if (content.startsWith('ocideck_title_text_color:')) {
+          titleTextColorOverride = content
+              .substring('ocideck_title_text_color:'.length)
+              .trim();
         } else if (!content.startsWith('_')) {
           notesBuffer.write(notesBuffer.isEmpty ? content : '\n$content');
         }
@@ -1270,6 +1280,7 @@ class MarkdownService {
       imageCaption2: imageCaption2,
       imageSize: imageSize,
       titleImageOverlay: titleImageOverlay,
+      titleTextColorOverride: titleTextColorOverride,
       videoPath: videoPath,
       videoAutoplay: videoAutoplay,
       audioPath: audioPath,

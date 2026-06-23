@@ -41,6 +41,26 @@ void main() {
       expect(out.imageCaption, 'Bron: archief');
     });
 
+    test('title slide round-trips a per-slide text colour override', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.title).copyWith(
+          title: 'Welkom',
+          imagePath: 'images/cover.png',
+          titleTextColorOverride: '#FFFFFF',
+        ),
+      );
+      expect(out.titleTextColorOverride, '#FFFFFF');
+    });
+
+    test('title slide without override keeps it empty', () {
+      final out = _roundTrip(
+        Slide.create(
+          SlideType.title,
+        ).copyWith(title: 'Welkom', imagePath: 'images/cover.png'),
+      );
+      expect(out.titleTextColorOverride, '');
+    });
+
     test('section slide keeps title and subtitle', () {
       final out = _roundTrip(
         Slide.create(

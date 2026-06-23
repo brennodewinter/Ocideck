@@ -18,6 +18,7 @@ import '../services/mermaid_render_service.dart';
 import '../services/slide_quality_analyzer.dart';
 import '../state/deck_provider.dart';
 import '../state/deck_quality_provider.dart';
+import '../state/image_contrast_provider.dart';
 import '../state/editor_provider.dart';
 import '../state/settings_provider.dart';
 import '../state/tabs_provider.dart';
@@ -369,6 +370,9 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                                       .watch(slideQualityAnalyzerProvider)
                                       .analyze(deck);
                                 }),
+                                imageContrastIssuesProvider.overrideWith(
+                                  computeImageContrastIssues,
+                                ),
                               ],
                               child: const _TabContent(),
                             ),

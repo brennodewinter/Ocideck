@@ -2551,6 +2551,10 @@ const _dutchSourceStringAdditions = {
   'en': {
     // Vraag-slides (multiple choice question).
     'Vraag (meerkeuze)': 'Question (multiple choice)',
+    // Titel-contrast (slidekwaliteit).
+    'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+        'Title text has too little contrast with the background image',
+    'Herstel': 'Fix',
     // Tijdlijn-slides.
     'Tijdlijn': 'Timeline',
     'Indeling': 'Layout',
@@ -2986,6 +2990,10 @@ const _dutchSourceStringAdditions = {
   'it': {
     // Vraag-slides (multiple choice question).
     'Vraag (meerkeuze)': 'Domanda (scelta multipla)',
+    // Titel-contrast (slidekwaliteit).
+    'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+        'Il testo del titolo ha troppo poco contrasto con l\'immagine di sfondo',
+    'Herstel': 'Correggi',
     // Tijdlijn-slides.
     'Tijdlijn': 'Cronologia',
     'Indeling': 'Disposizione',
@@ -3600,6 +3608,10 @@ const _dutchSourceStringAdditions = {
   'de': {
     // Vraag-slides (multiple choice question).
     'Vraag (meerkeuze)': 'Frage (Multiple Choice)',
+    // Titel-contrast (slidekwaliteit).
+    'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+        'Titeltext hat zu wenig Kontrast zum Hintergrundbild',
+    'Herstel': 'Beheben',
     // Tijdlijn-slides.
     'Tijdlijn': 'Zeitleiste',
     'Indeling': 'Anordnung',
@@ -4213,6 +4225,10 @@ const _dutchSourceStringAdditions = {
   'fr': {
     // Vraag-slides (multiple choice question).
     'Vraag (meerkeuze)': 'Question (choix multiple)',
+    // Titel-contrast (slidekwaliteit).
+    'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+        "Le texte du titre a trop peu de contraste avec l'image de fond",
+    'Herstel': 'Corriger',
     // Tijdlijn-slides.
     'Tijdlijn': 'Chronologie',
     'Indeling': 'Disposition',
@@ -4831,6 +4847,10 @@ const _dutchSourceStringAdditions = {
   'es': {
     // Vraag-slides (multiple choice question).
     'Vraag (meerkeuze)': 'Pregunta (opción múltiple)',
+    // Titel-contrast (slidekwaliteit).
+    'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+        'El texto del título tiene muy poco contraste con la imagen de fondo',
+    'Herstel': 'Corregir',
     // Tijdlijn-slides.
     'Tijdlijn': 'Cronología',
     'Indeling': 'Disposición',
@@ -5447,6 +5467,10 @@ const _dutchSourceStringAdditions = {
   'fy': {
     // Vraag-slides (multiple choice question).
     'Vraag (meerkeuze)': 'Fraach (merkar)',
+    // Titel-contrast (slidekwaliteit).
+    'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+        'Titeltekst hat te min kontrast mei de eftergrûnôfbylding',
+    'Herstel': 'Herstelle',
     // Tijdlijn-slides.
     'Tijdlijn': 'Tiidline',
     'Indeling': 'Yndieling',
@@ -6046,6 +6070,10 @@ const _dutchSourceStringAdditions = {
   'pap': {
     // Vraag-slides (multiple choice question).
     'Vraag (meerkeuze)': 'Pregunta (selekshon múltiple)',
+    // Titel-contrast (slidekwaliteit).
+    'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+        'Teksto di título tin muhigu poko kontraste ku e imagen di fondo',
+    'Herstel': 'Drecha',
     // Tijdlijn-slides.
     'Tijdlijn': 'Liña di tempu',
     'Indeling': 'Areglo',
