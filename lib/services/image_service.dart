@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
+import 'package:meta/meta.dart';
 import 'package:pasteboard/pasteboard.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
@@ -17,6 +18,66 @@ class ImageService {
 
   String _d(String text) => AppLocalizations.sourceFor(_languageCode(), text);
 
+  /// Per-asset import caps. Images are validated by magic bytes (not just the
+  /// picker's extension filter); video/audio are size-capped only.
+  static const maxImageBytes = 64 * 1024 * 1024; // 64 MiB
+  static const maxMediaBytes = 1024 * 1024 * 1024; // 1 GiB
+
+  /// True when [path] is within the size cap and its leading bytes match a
+  /// known raster image signature (PNG/JPEG/GIF/BMP/WebP).
+  Future<bool> _isAcceptableImageFile(String path) async {
+    try {
+      final file = File(path);
+      final len = await file.length();
+      if (len <= 0 || len > maxImageBytes) return false;
+      final raf = await file.open();
+      try {
+        final head = await raf.read(16);
+        return _looksLikeImage(head);
+      } finally {
+        await raf.close();
+      }
+    } catch (_) {
+      return false;
+    }
+  }
+
+  @visibleForTesting
+  static bool looksLikeImage(List<int> b) => _looksLikeImage(b);
+
+  static bool _looksLikeImage(List<int> b) {
+    if (b.length < 4) return false;
+    // PNG
+    if (b[0] == 0x89 && b[1] == 0x50 && b[2] == 0x4E && b[3] == 0x47) {
+      return true;
+    }
+    if (b[0] == 0xFF && b[1] == 0xD8 && b[2] == 0xFF) return true; // JPEG
+    if (b[0] == 0x47 && b[1] == 0x49 && b[2] == 0x46) return true; // GIF
+    if (b[0] == 0x42 && b[1] == 0x4D) return true; // BMP
+    // WebP: "RIFF"...."WEBP"
+    if (b.length >= 12 &&
+        b[0] == 0x52 &&
+        b[1] == 0x49 &&
+        b[2] == 0x46 &&
+        b[3] == 0x46 &&
+        b[8] == 0x57 &&
+        b[9] == 0x45 &&
+        b[10] == 0x42 &&
+        b[11] == 0x50) {
+      return true;
+    }
+    return false;
+  }
+
+  Future<bool> _isWithinMediaCap(String path) async {
+    try {
+      final len = await File(path).length();
+      return len > 0 && len <= maxMediaBytes;
+    } catch (_) {
+      return false;
+    }
+  }
+
   Future<String?> pickImage({String? projectPath}) async {
     final result = await FilePicker.pickFiles(
       type: FileType.image,
@@ -24,6 +85,10 @@ class ImageService {
     );
     final path = result?.files.single.path;
     if (path == null) return null;
+    if (!await _isAcceptableImageFile(path)) {
+      logWarning('ImageService.pickImage: rejected (too large or not an image)');
+      return null;
+    }
     return _importIntoProject(path, projectPath, subdir: 'images');
   }
 
@@ -34,6 +99,10 @@ class ImageService {
     );
     final path = result?.files.single.path;
     if (path == null) return null;
+    if (!await _isWithinMediaCap(path)) {
+      logWarning('ImageService.pickVideo: rejected (exceeds size cap)');
+      return null;
+    }
     return _importIntoProject(path, projectPath, subdir: 'media');
   }
 
@@ -44,6 +113,10 @@ class ImageService {
     );
     final path = result?.files.single.path;
     if (path == null) return null;
+    if (!await _isWithinMediaCap(path)) {
+      logWarning('ImageService.pickAudio: rejected (exceeds size cap)');
+      return null;
+    }
     return _importIntoProject(path, projectPath, subdir: 'media');
   }
 
@@ -82,6 +155,7 @@ class ImageService {
     try {
       final bytes = await Pasteboard.image;
       if (bytes == null) return null;
+      if (bytes.isEmpty || bytes.length > maxImageBytes) return null;
       if (projectPath != null && projectPath.isNotEmpty) {
         final imagesDir = Directory(p.join(projectPath, 'images'));
         await imagesDir.create(recursive: true);

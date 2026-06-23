@@ -121,4 +121,34 @@ void main() {
       expect(await service.copyImageBytesToClipboard(Uint8List(0)), isFalse);
     });
   });
+
+  group('looksLikeImage magic-byte validation', () {
+    test('accepts real raster signatures', () {
+      expect(
+        ImageService.looksLikeImage(const [0x89, 0x50, 0x4E, 0x47]),
+        isTrue,
+      ); // PNG
+      expect(
+        ImageService.looksLikeImage(const [0xFF, 0xD8, 0xFF, 0xE0]),
+        isTrue,
+      ); // JPEG
+      expect(
+        ImageService.looksLikeImage(const [0x47, 0x49, 0x46, 0x38]),
+        isTrue,
+      ); // GIF
+      expect(
+        ImageService.looksLikeImage(const [
+          0x52, 0x49, 0x46, 0x46, 0, 0, 0, 0, // RIFF
+          0x57, 0x45, 0x42, 0x50, // WEBP
+        ]),
+        isTrue,
+      );
+    });
+
+    test('rejects non-image bytes (e.g. a script renamed to .png)', () {
+      expect(ImageService.looksLikeImage('<?php evil();'.codeUnits), isFalse);
+      expect(ImageService.looksLikeImage('# markdown'.codeUnits), isFalse);
+      expect(ImageService.looksLikeImage(const [0x00, 0x01]), isFalse);
+    });
+  });
 }
