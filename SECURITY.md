@@ -41,6 +41,32 @@ OciDeck is an offline desktop application. Areas of particular interest:
 - The export classification gate (`ClassificationPolicy`) — any way to export a
   deck classified above the configured release ceiling.
 
+## Untrusted deck handling
+
+A `.md` deck (and the assets it references) may come from an untrusted source.
+OciDeck constrains what an opened deck can do:
+
+- **Asset-path containment.** Image / video / audio / logo / chart paths in a
+  deck are resolved strictly inside the deck's project folder. Absolute paths
+  and `../` escapes are ignored by the preview, presenter, exporter, the
+  slide-quality analyzer (so a crafted deck can't turn the "missing media" check
+  into a file-existence oracle), and the copy-to-clipboard action — all via
+  `resolveSlideAssetPath` in `lib/utils/project_path.dart`. The in-editor image
+  *display* is intentionally permissive (so a user can preview a freshly picked
+  image before it is copied into the project), but it is never used as a read
+  sink for clipboard or export.
+- **Size limits.** A deck `.md` is capped at 32 MiB on open; `.ocideck`
+  packages at 512 MiB / 10 000 entries with zip-slip and decompression-bomb
+  guards; URL imports use an `http`/`https` allowlist with an SSRF host
+  blocklist and no redirect following.
+- **Render/export sanitization.** Deck content rendered to HTML is sanitized
+  with the bundled DOMPurify before insertion into the DOM.
+
+Known residual hardening tracked for future work: symlink-aware (realpath)
+containment, decoded-image dimension caps, per-asset import byte/magic-byte
+validation, hostname-resolution SSRF checks, and a Content-Security-Policy in
+the HTML export.
+
 ## Supported versions
 
 Security fixes target the latest released version and the default development

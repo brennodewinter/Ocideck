@@ -8,6 +8,19 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Redesigned settings dialog** — the settings window moves from a flat tab bar
+  to a sidebar navigation (sections on the left, a titled content area on the
+  right, a footer action bar), without changing any of the settings themselves.
+- **Title background can fill the whole slide** — a "fill slide" toggle on title
+  slides shows the background image edge-to-edge (cover, cropping the overflow)
+  instead of being limited to the zoom slider. Toggling it back off restores the
+  zoom you had set.
+- **Low-contrast title text is detected and auto-fixed** — when a title slide's
+  text has too little contrast against its background image, the slide-quality
+  panel flags it (with the measured ratio) and offers a one-click **Herstel**
+  that picks the smallest effective change: enable the grey wash, or switch the
+  title text light/dark for that one slide (a new per-slide title text colour
+  that round-trips in the `.md`). The check also feeds the export gate.
 - **Timeline slides** — a new `timeline` slide type that turns a list of dated
   events into an animated, eye-candy timeline. Each event is a plain Markdown
   list item using `marker :: title :: description` (marker and description
@@ -179,6 +192,10 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   pattern as user notes, with a discard button in the header row.
 
 ### Fixed
+- The export quality gate now includes the asynchronous title-image contrast
+  warnings, so the gate and the on-screen quality panel no longer disagree.
+- Turning the title "fill slide" option back off no longer discards the zoom you
+  had dialled in.
 - Hover on charts (tooltips, legend highlight) now works on a second screen:
   macOS only delivered mouse-moved events to the key window, so the borderless
   beamer window never saw them; the stuck hover state after the pointer left a
@@ -237,6 +254,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   orphaned media player or double-dispose a controller.
 - Undo no longer risks merging edits to different slides into one step (the
   coalescing key is now the stable slide id, not its position).
+
+### Security
+- **Deck asset paths are confined to the project folder on every read path.**
+  An untrusted `.md` can no longer use absolute or `../` image/logo/chart paths
+  to make the slide-quality analyzer probe arbitrary files (a file-existence
+  oracle that ran automatically on open), the exporter precache read files
+  outside the project, the Save-As chart copy read outside the project, or the
+  copy-to-clipboard action exfiltrate an arbitrary file. All of these now use
+  the same containment guard as the preview (`resolveSlideAssetPath`).
+- A deck `.md` is now size-capped (32 MiB) on open to avoid loading and parsing
+  a maliciously oversized file.
 
 ## [1.0.0]
 
