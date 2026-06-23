@@ -677,18 +677,22 @@ class FileService {
     return false;
   }
 
-  /// Resolves a hostname and rejects it if ANY address is internal — closes the
-  /// SSRF hole where `attacker.com` resolves to 127.0.0.1 / 169.254.169.254 /
-  /// an RFC1918 host. Literal IPs are already covered by [_isBlockedHost].
-  /// (A residual DNS-rebinding window remains because HttpClient re-resolves on
-  /// connect; this raises the bar substantially without pinning the socket.)
-  static Future<bool> _resolvesToBlockedHost(String host) async {
-    if (InternetAddress.tryParse(host) != null) return false;
+  /// Resolves [host] to validated addresses, or null when the host (or ANY of
+  /// its addresses) is internal or it can't be resolved — closes the SSRF hole
+  /// where `attacker.com` resolves to 127.0.0.1 / 169.254.169.254 / an RFC1918
+  /// host. The caller pins the connection to the returned address so a DNS
+  /// rebind between this check and connect can't redirect the socket internally.
+  static Future<List<InternetAddress>?> _safeResolve(String host) async {
+    final literal = InternetAddress.tryParse(host);
+    if (literal != null) {
+      return _isBlockedAddress(literal) ? null : [literal];
+    }
     try {
       final addrs = await InternetAddress.lookup(host);
-      return addrs.isEmpty || addrs.any(_isBlockedAddress);
+      if (addrs.isEmpty || addrs.any(_isBlockedAddress)) return null;
+      return addrs;
     } catch (_) {
-      return true; // can't resolve safely → refuse
+      return null; // can't resolve safely → refuse
     }
   }
 
@@ -699,13 +703,20 @@ class FileService {
     final scheme = uri.scheme.toLowerCase();
     if (scheme != 'http' && scheme != 'https') return null;
     if (_isBlockedHost(uri.host)) return null;
-    // Resolve the hostname and reject if it maps to an internal address.
-    if (await _resolvesToBlockedHost(uri.host)) return null;
+    // Resolve the hostname up front and reject internal addresses.
+    final safeAddrs = await _safeResolve(uri.host);
+    if (safeAddrs == null) return null;
+    final pinned = safeAddrs.first;
 
     final List<int> bytes;
     try {
       final client = HttpClient()
-        ..connectionTimeout = const Duration(seconds: 15);
+        ..connectionTimeout = const Duration(seconds: 15)
+        // Pin the socket to the validated address so a DNS rebind between the
+        // check above and the actual connect can't point us at an internal IP.
+        // TLS (for https) still validates against the original hostname.
+        ..connectionFactory = (u, proxyHost, proxyPort) =>
+            Socket.startConnect(pinned, u.port);
       try {
         final request = await client.getUrl(uri);
         // Don't auto-follow redirects: a 3xx could point at a private host and
