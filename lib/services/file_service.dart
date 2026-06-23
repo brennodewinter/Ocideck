@@ -655,7 +655,12 @@ class FileService {
     final h = host.toLowerCase();
     if (h.isEmpty || h == 'localhost' || h.endsWith('.localhost')) return true;
     final addr = InternetAddress.tryParse(host);
-    if (addr == null) return false; // a hostname; can't classify offline
+    if (addr == null) return false; // a hostname; resolved in _resolvesToBlocked
+    return _isBlockedAddress(addr);
+  }
+
+  /// Classifies a resolved IP as loopback/private/link-local/etc.
+  static bool _isBlockedAddress(InternetAddress addr) {
     if (addr.isLoopback || addr.isLinkLocal || addr.isMulticast) return true;
     final raw = addr.rawAddress;
     if (addr.type == InternetAddressType.IPv4) {
@@ -672,6 +677,21 @@ class FileService {
     return false;
   }
 
+  /// Resolves a hostname and rejects it if ANY address is internal — closes the
+  /// SSRF hole where `attacker.com` resolves to 127.0.0.1 / 169.254.169.254 /
+  /// an RFC1918 host. Literal IPs are already covered by [_isBlockedHost].
+  /// (A residual DNS-rebinding window remains because HttpClient re-resolves on
+  /// connect; this raises the bar substantially without pinning the socket.)
+  static Future<bool> _resolvesToBlockedHost(String host) async {
+    if (InternetAddress.tryParse(host) != null) return false;
+    try {
+      final addrs = await InternetAddress.lookup(host);
+      return addrs.isEmpty || addrs.any(_isBlockedAddress);
+    } catch (_) {
+      return true; // can't resolve safely → refuse
+    }
+  }
+
   Future<String?> importFromUrl(String url, String destParentDir) async {
     final uri = Uri.tryParse(url.trim());
     if (uri == null || !uri.hasScheme) return null;
@@ -679,6 +699,8 @@ class FileService {
     final scheme = uri.scheme.toLowerCase();
     if (scheme != 'http' && scheme != 'https') return null;
     if (_isBlockedHost(uri.host)) return null;
+    // Resolve the hostname and reject if it maps to an internal address.
+    if (await _resolvesToBlockedHost(uri.host)) return null;
 
     final List<int> bytes;
     try {
