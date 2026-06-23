@@ -125,12 +125,31 @@ class _TitleEditorState extends ConsumerState<TitleEditor> {
         ),
         if (imagePath.isNotEmpty) ...[
           const SizedBox(height: 12),
-          const SectionLabel('Zoom achtergrond'),
-          ImageZoomControl(
-            value: widget.slide.imageSize,
-            onChanged: (v) =>
-                widget.onUpdate(widget.slide.copyWith(imageSize: v)),
+          // imageSize == 0 renders the image with BoxFit.cover: it fills the
+          // whole slide and crops whatever falls outside. Any other value
+          // switches to the zoom/contain control below.
+          CheckboxListTile(
+            value: widget.slide.imageSize == 0,
+            onChanged: (value) => widget.onUpdate(
+              widget.slide.copyWith(imageSize: (value ?? false) ? 0 : 100),
+            ),
+            contentPadding: EdgeInsets.zero,
+            dense: true,
+            controlAffinity: ListTileControlAffinity.leading,
+            title: const Text('Afbeelding vult hele slide'),
+            subtitle: const Text(
+              'Vult de hele slide; wat buiten beeld valt wordt bijgesneden.',
+            ),
           ),
+          if (widget.slide.imageSize != 0) ...[
+            const SizedBox(height: 12),
+            const SectionLabel('Zoom achtergrond'),
+            ImageZoomControl(
+              value: widget.slide.imageSize,
+              onChanged: (v) =>
+                  widget.onUpdate(widget.slide.copyWith(imageSize: v)),
+            ),
+          ],
           const SizedBox(height: 12),
           CheckboxListTile(
             value: widget.slide.titleImageOverlay,
