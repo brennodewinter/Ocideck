@@ -304,6 +304,7 @@ class SlideQualityAnalyzer {
       case SlideType.freeMarkdown:
       case SlideType.code:
       case SlideType.cockpit:
+      case SlideType.question:
         break;
     }
   }
@@ -415,6 +416,12 @@ class SlideQualityAnalyzer {
         );
       case SlideType.video:
         missingFile(path: slide.videoPath, field: 'videoPath', label: 'Video');
+      case SlideType.question:
+        missingFile(
+          path: slide.imagePath,
+          field: 'imagePath',
+          label: 'Afbeelding',
+        );
       case SlideType.bullets:
       case SlideType.twoBullets:
       case SlideType.section:
@@ -493,6 +500,7 @@ class SlideQualityAnalyzer {
       case SlideType.video:
       case SlideType.chart:
       case SlideType.cockpit:
+      case SlideType.question:
         break;
     }
   }

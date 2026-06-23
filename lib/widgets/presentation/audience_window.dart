@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/annotation.dart';
 import '../../models/deck.dart';
+import '../../models/question.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/markdown_service.dart';
@@ -57,6 +58,11 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   int? _activeIndex;
   InkStroke? _activeStroke;
 
+  // Live question state pushed by the presenter, plus the slide index it
+  // belongs to (so it never leaks onto another slide).
+  QuestionView? _questionView;
+  int _questionIndex = -1;
+
   @override
   void initState() {
     super.initState();
@@ -104,6 +110,21 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
           _blank = (m['blank'] as num?)?.toInt() ?? 0;
           _laserPoint = null; // laser never carries over to another slide
           _activeStroke = null; // nor does an in-progress stroke
+          // Drop a stale question overlay when moving to a different slide. If a
+          // 'question' message for this index already arrived (either order),
+          // _questionIndex matches and the overlay is kept.
+          if (_questionIndex != _index) _questionView = null;
+        });
+      case 'question':
+        final m = Map<String, dynamic>.from(call.arguments as Map);
+        if (!mounted) return null;
+        final i = (m['index'] as num?)?.toInt() ?? _index;
+        final raw = m['view'];
+        setState(() {
+          _questionIndex = i;
+          _questionView = raw is Map
+              ? QuestionView.fromJson(Map<String, dynamic>.from(raw))
+              : null;
         });
       case 'ink':
         final m = Map<String, dynamic>.from(call.arguments as Map);
@@ -235,6 +256,13 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                         'column': column,
                         'itemIndex': itemIndex,
                       }),
+                  questionView: _questionIndex == _index ? _questionView : null,
+                  onAnswerSelected: (i) => _send('answerSelected', {
+                    'slideIndex': _index,
+                    'optionIndex': i,
+                  }),
+                  onAnswerSubmit: () =>
+                      _send('answerSubmit', {'slideIndex': _index}),
                   enableMedia: true,
                   autoplayMedia: true,
                   // Media finishing on the beamer drives auto-advance.

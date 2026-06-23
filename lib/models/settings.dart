@@ -617,8 +617,7 @@ class AppSettings {
           this.selectedAppAppearanceProfileName,
       cockpitColorSchemes: cockpitColorSchemes ?? this.cockpitColorSchemes,
       selectedCockpitColorSchemeName:
-          selectedCockpitColorSchemeName ??
-          this.selectedCockpitColorSchemeName,
+          selectedCockpitColorSchemeName ?? this.selectedCockpitColorSchemeName,
       recentFiles: recentFiles ?? this.recentFiles,
       maxReleaseExportTlpKey: clearMaxReleaseExportTlp
           ? null

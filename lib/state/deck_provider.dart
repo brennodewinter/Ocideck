@@ -4,10 +4,12 @@ import '../models/annotation.dart';
 import '../models/deck.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../services/annotation_codec.dart';
 import '../services/file_service.dart';
 import '../services/image_service.dart';
 import '../services/markdown_service.dart';
 import '../services/user_notes_codec.dart';
+import '../utils/log.dart';
 import '../utils/page_scoped_notes.dart';
 import 'settings_provider.dart';
 
@@ -97,6 +99,10 @@ class DeckNotifier extends StateNotifier<DeckState> {
   final List<Deck> _redoStack = [];
   static const _maxHistory = 80;
 
+  /// Guards against two save triggers (the toolbar, status bar and several
+  /// Cmd/Ctrl+S key bindings all call [save]) writing the same file at once.
+  bool _saving = false;
+
   /// Snelle, opeenvolgende bewerkingen (zoals typen) worden samengevoegd tot
   /// één ongedaan-maken-stap zolang ze dezelfde [_lastCoalesceKey] delen en
   /// binnen dit tijdvenster vallen.
@@ -155,32 +161,65 @@ class DeckNotifier extends StateNotifier<DeckState> {
   }
 
   Future<bool> save({String? initialDirectory}) async {
-    if (state.filePath != null) {
-      return _saveToPath(state.filePath!);
-    } else {
-      return saveAs(initialDirectory: initialDirectory);
+    // Reject a second concurrent save rather than interleaving two writes to
+    // the same file. A dropped trigger is harmless — the deck is still dirty.
+    if (_saving) return false;
+    _saving = true;
+    try {
+      if (state.filePath != null) {
+        return await _saveToPath(state.filePath!);
+      } else {
+        return await saveAs(initialDirectory: initialDirectory);
+      }
+    } finally {
+      _saving = false;
     }
   }
 
   Future<bool> saveAs({String? initialDirectory}) async {
     final deck = state.deck;
     if (deck == null) return false;
-    final path = await _file.saveDeckAs(
-      deck,
-      initialDirectory: initialDirectory,
-    );
-    if (path != null) {
-      final savedDeck = await _file.openDeck(path) ?? deck;
-      state = state.copyWith(deck: savedDeck, filePath: path, isDirty: false);
-      return true;
+    final String? path;
+    try {
+      path = await _file.saveDeckAs(deck, initialDirectory: initialDirectory);
+    } catch (e, s) {
+      logError('DeckNotifier.saveAs: write deck', e, s);
+      // Keep isDirty so the work still counts as unsaved.
+      state = state.copyWith(error: 'Opslaan mislukt:\n$e');
+      return false;
     }
-    return false;
+    if (path == null) return false; // user cancelled the picker
+    // The write succeeded; re-read to pick up the normalised on-disk form. If
+    // that read fails the data is still safely persisted, so keep the in-memory
+    // deck and mark it clean, but surface the anomaly instead of hiding it.
+    final reopened = await _file.openDeck(path);
+    if (reopened == null) {
+      logWarning('DeckNotifier.saveAs: saved file could not be re-read', path);
+      state = state.copyWith(
+        deck: deck,
+        filePath: path,
+        isDirty: false,
+        error:
+            'Opgeslagen, maar het bestand kon niet opnieuw worden gelezen:\n$path',
+      );
+    } else {
+      state = state.copyWith(deck: reopened, filePath: path, isDirty: false);
+    }
+    return true;
   }
 
   Future<bool> _saveToPath(String path) async {
     final deck = state.deck;
     if (deck == null) return false;
-    final savedDeck = await _file.saveDeck(deck, path);
+    final Deck savedDeck;
+    try {
+      savedDeck = await _file.saveDeck(deck, path);
+    } catch (e, s) {
+      logError('DeckNotifier._saveToPath: write deck', e, s);
+      // Keep isDirty so the work still counts as unsaved.
+      state = state.copyWith(error: 'Opslaan mislukt:\n$path\n$e');
+      return false;
+    }
     state = state.copyWith(deck: savedDeck, isDirty: false);
     return true;
   }
@@ -282,8 +321,10 @@ class DeckNotifier extends StateNotifier<DeckState> {
     if (deck == null || index < 0 || index >= deck.slides.length) return;
     final slides = List<Slide>.from(deck.slides);
     slides[index] = updated;
-    // Snel typen op dezelfde slide telt als één ongedaan-maken-stap.
-    _mutate(deck.copyWith(slides: slides), coalesceKey: 'slide:$index');
+    // Snel typen op dezelfde slide telt als één ongedaan-maken-stap. Sleutel op
+    // de stabiele slide-id, niet de index: na verwijderen/herordenen mag een
+    // bewerking op een ándere slide (zelfde index) niet meecoalescen.
+    _mutate(deck.copyWith(slides: slides), coalesceKey: 'slide:${updated.id}');
   }
 
   /// Zet de "overslaan"-status van een slide aan/uit. Overgeslagen slides
@@ -565,7 +606,10 @@ class DeckNotifier extends StateNotifier<DeckState> {
 
   String generateMarkdown() {
     final deck = state.deck;
-    return deck != null ? _md.generateDeck(deck) : '';
+    // Inline linked chart data so a markdown round-trip (toggle, recovery
+    // snapshot) keeps the chart's points. Saving to disk still writes the
+    // source-only form (see FileService._writeProject), so the .md stays clean.
+    return deck != null ? _md.generateDeck(deck, inlineChartData: true) : '';
   }
 
   /// Returns false if parsing fails (content is preserved).
@@ -584,6 +628,19 @@ class DeckNotifier extends StateNotifier<DeckState> {
           ? UserNotesCodec.decode(encoded, deck.slides)
           : const <String, String>{};
       deck = deck.copyWith(userNotes: remapped);
+    }
+    // Annotations (ink layers) live outside the markdown; without re-anchoring
+    // them to the new slides a markdown toggle would wipe the drawings, and a
+    // subsequent save would delete their sidecar — permanent data loss.
+    if (current != null && current.annotations.isNotEmpty) {
+      final encoded = AnnotationCodec.encode(
+        current.slides,
+        current.annotations,
+      );
+      final remapped = encoded != null
+          ? AnnotationCodec.decode(encoded, deck.slides)
+          : const <String, List<InkStroke>>{};
+      deck = deck.copyWith(annotations: remapped);
     }
     _mutate(deck); // discrete stap → ook ongedaan te maken
     return true;

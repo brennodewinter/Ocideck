@@ -1,0 +1,133 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/question.dart';
+import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/widgets/slides/slide_preview.dart';
+
+Slide _questionSlide(QuestionSpec spec) =>
+    Slide(id: 'q', type: SlideType.question, customMarkdown: spec.toBlock());
+
+Future<void> _pump(
+  WidgetTester tester,
+  Slide slide, {
+  double width = 800,
+  double height = 450,
+}) async {
+  await tester.pumpWidget(
+    MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: SizedBox(
+            width: width,
+            height: height,
+            child: SlidePreviewWidget(slide: slide),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+void main() {
+  testWidgets('question with many options fits without overflow', (
+    tester,
+  ) async {
+    final spec = QuestionSpec(
+      prompt: 'Een vrij lange vraag die over de breedte van de slide loopt?',
+      answers: [
+        for (var i = 1; i <= 8; i++)
+          QuestionAnswer(
+            text: 'Antwoordoptie nummer $i met een wat langere tekst erbij',
+            correct: i == 1,
+          ),
+      ],
+      optionCount: 8,
+    );
+    await _pump(tester, _questionSlide(spec));
+
+    // A RenderFlex/box overflow surfaces as a thrown FlutterError in tests;
+    // the auto-fit (FittedBox) must keep everything on the fixed 16:9 surface.
+    expect(tester.takeException(), isNull);
+    expect(find.textContaining('Antwoordoptie nummer 8'), findsOneWidget);
+  });
+
+  testWidgets('question with an image fits the narrower text column', (
+    tester,
+  ) async {
+    final spec = QuestionSpec(
+      prompt: 'Welke optie hoort bij deze afbeelding van een landschap?',
+      answers: [
+        for (var i = 1; i <= 6; i++)
+          QuestionAnswer(
+            text: 'Een vrij lang antwoord nummer $i dat de kolom flink vult',
+            correct: i == 1,
+          ),
+      ],
+      optionCount: 6,
+    );
+    final slide = _questionSlide(spec).copyWith(
+      imagePath: 'does/not/exist.png', // valt terug op placeholder, geen error
+      imageSize: 45,
+    );
+    await _pump(tester, slide);
+
+    expect(tester.takeException(), isNull);
+    expect(find.textContaining('antwoord nummer 6'), findsOneWidget);
+  });
+
+  testWidgets('tiny thumbnail with image and options does not overflow', (
+    tester,
+  ) async {
+    final spec = QuestionSpec(
+      prompt: 'Een wat langere vraag die in een miniatuur moet passen?',
+      answers: [
+        for (var i = 1; i <= 6; i++)
+          QuestionAnswer(text: 'Antwoordoptie nummer $i', correct: i == 1),
+      ],
+      optionCount: 6,
+    );
+    final slide = _questionSlide(
+      spec,
+    ).copyWith(imagePath: 'does/not/exist.png', imageSize: 45);
+    // Grid-/volgende-slide-miniatuur: heel klein, mag niet overflowen.
+    await _pump(tester, slide, width: 180, height: 101);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('true/false authoring view shows Juist and Onjuist', (
+    tester,
+  ) async {
+    final spec = const QuestionSpec(
+      kind: QuestionKind.trueFalse,
+      prompt: 'Nederland grenst aan Duitsland.',
+      statementIsTrue: true,
+    );
+    await _pump(tester, _questionSlide(spec));
+    expect(find.textContaining('Juist'), findsOneWidget);
+    expect(find.textContaining('Onjuist'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('authoring view shows all answers, not a random subset', (
+    tester,
+  ) async {
+    final spec = const QuestionSpec(
+      prompt: 'Vraag?',
+      answers: [
+        QuestionAnswer(text: 'Alpha', correct: true),
+        QuestionAnswer(text: 'Bravo'),
+        QuestionAnswer(text: 'Charlie'),
+        QuestionAnswer(text: 'Delta'),
+        QuestionAnswer(text: 'Echo'),
+      ],
+      optionCount: 3,
+    );
+    await _pump(tester, _questionSlide(spec));
+
+    // No QuestionView passed → editor/authoring view shows every answer.
+    for (final t in ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo']) {
+      expect(find.textContaining(t), findsOneWidget, reason: t);
+    }
+    expect(tester.takeException(), isNull);
+  });
+}

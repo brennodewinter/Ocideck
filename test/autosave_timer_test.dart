@@ -1,0 +1,97 @@
+import 'dart:io';
+
+import 'package:fake_async/fake_async.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/file_service.dart';
+import 'package:ocideck/services/image_service.dart';
+import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/recovery_service.dart';
+import 'package:ocideck/state/settings_provider.dart';
+import 'package:ocideck/state/tabs_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+/// Records recovery calls synchronously so the periodic autosave tick can be
+/// asserted without touching the filesystem.
+class _RecordingRecovery extends RecoveryService {
+  _RecordingRecovery() : super(baseDir: Directory.systemTemp);
+
+  final List<RecoverySnapshot> saved = [];
+  final List<String> discarded = [];
+
+  @override
+  Future<void> save(RecoverySnapshot snapshot) async => saved.add(snapshot);
+
+  @override
+  Future<void> discard(String id) async => discarded.add(id);
+}
+
+TabsNotifier _tabs(_RecordingRecovery recovery) {
+  final md = MarkdownService();
+  final file = FileService(md, ImageService(), () => const ThemeProfile());
+  return TabsNotifier(md, file, SettingsNotifier(), recovery);
+}
+
+Deck _deck() => Deck(
+  title: 'D',
+  slides: [Slide.create(SlideType.title).copyWith(title: 'D')],
+);
+
+void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  setUp(() => SharedPreferences.setMockInitialValues({}));
+
+  test('autosave writes a recovery snapshot for a dirty tab on the tick', () {
+    fakeAsync((async) {
+      final recovery = _RecordingRecovery();
+      final tabs = _tabs(recovery);
+      addTearDown(tabs.dispose);
+
+      tabs.state.current!.deckNotifier
+        ..loadDeck(_deck())
+        ..markDirty();
+
+      // Nothing is written before the 25-second interval elapses.
+      async.elapse(const Duration(seconds: 24));
+      expect(recovery.saved, isEmpty);
+
+      // The periodic tick fires and snapshots the dirty tab.
+      async.elapse(const Duration(seconds: 2));
+      expect(recovery.saved, isNotEmpty);
+      expect(recovery.saved.last.markdown, contains('D'));
+    });
+  });
+
+  test('a clean tab is not autosaved', () {
+    fakeAsync((async) {
+      final recovery = _RecordingRecovery();
+      final tabs = _tabs(recovery);
+      addTearDown(tabs.dispose);
+
+      tabs.state.current!.deckNotifier.loadDeck(
+        _deck(),
+      ); // clean (isDirty:false)
+
+      async.elapse(const Duration(seconds: 30));
+      expect(recovery.saved, isEmpty);
+    });
+  });
+
+  test('disposing the notifier cancels the autosave timer', () {
+    fakeAsync((async) {
+      final recovery = _RecordingRecovery();
+      final tabs = _tabs(recovery);
+
+      tabs.state.current!.deckNotifier
+        ..loadDeck(_deck())
+        ..markDirty();
+
+      tabs.dispose();
+      async.elapse(const Duration(seconds: 60));
+      expect(recovery.saved, isEmpty);
+    });
+  });
+}

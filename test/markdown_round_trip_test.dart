@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/question.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
@@ -497,6 +498,88 @@ void main() {
       expect(out.codeLanguage, '');
       expect(out.customMarkdown, code);
     });
+
+    test('question slide keeps spec, image and settings', () {
+      final spec = const QuestionSpec(
+        prompt: 'Wat is de hoofdstad van Nederland?',
+        answers: [
+          QuestionAnswer(text: 'Amsterdam', correct: true),
+          QuestionAnswer(text: 'Rotterdam'),
+          QuestionAnswer(text: 'Den Haag'),
+          QuestionAnswer(text: 'Utrecht'),
+          QuestionAnswer(text: 'Eindhoven'),
+        ],
+        optionCount: 3,
+        timeLimitSeconds: 20,
+        onWrong: QuestionOnWrong.lockAndContinue,
+      );
+      final out = _roundTrip(
+        Slide.create(SlideType.question).copyWith(
+          title: 'Aardrijkskunde',
+          customMarkdown: spec.toBlock(),
+          imagePath: 'images/nl.png',
+          imageCaption: 'Bron: atlas',
+          imageSize: 45,
+        ),
+      );
+      expect(out.type, SlideType.question);
+      expect(out.title, 'Aardrijkskunde');
+      expect(out.imagePath, 'images/nl.png');
+      expect(out.imageCaption, 'Bron: atlas');
+      expect(out.imageSize, 45);
+      final parsed = QuestionSpec.parse(out.customMarkdown);
+      expect(parsed.prompt, 'Wat is de hoofdstad van Nederland?');
+      expect(parsed.answers, hasLength(5));
+      expect(parsed.correctAnswers.map((a) => a.text), ['Amsterdam']);
+      expect(parsed.wrongAnswers, hasLength(4));
+      expect(parsed.optionCount, 3);
+      expect(parsed.timeLimitSeconds, 20);
+      expect(parsed.onWrong, QuestionOnWrong.lockAndContinue);
+    });
+
+    test('true/false question keeps kind and statement value', () {
+      final spec = const QuestionSpec(
+        kind: QuestionKind.trueFalse,
+        prompt: 'De maan is gemaakt van kaas.',
+        statementIsTrue: false,
+      );
+      final out = _roundTrip(
+        Slide.create(
+          SlideType.question,
+        ).copyWith(customMarkdown: spec.toBlock()),
+      );
+      expect(out.type, SlideType.question);
+      final parsed = QuestionSpec.parse(out.customMarkdown);
+      expect(parsed.kind, QuestionKind.trueFalse);
+      expect(parsed.prompt, 'De maan is gemaakt van kaas.');
+      expect(parsed.statementIsTrue, isFalse);
+      expect(parsed.isPresentable, isTrue);
+    });
+
+    test('multiple-correct question keeps kind and all answers', () {
+      final spec = const QuestionSpec(
+        kind: QuestionKind.multipleCorrect,
+        prompt: 'Welke zijn priemgetallen?',
+        answers: [
+          QuestionAnswer(text: '2', correct: true),
+          QuestionAnswer(text: '3', correct: true),
+          QuestionAnswer(text: '4'),
+          QuestionAnswer(text: '5', correct: true),
+          QuestionAnswer(text: '6'),
+        ],
+        optionCount: 4,
+      );
+      final out = _roundTrip(
+        Slide.create(
+          SlideType.question,
+        ).copyWith(customMarkdown: spec.toBlock()),
+      );
+      final parsed = QuestionSpec.parse(out.customMarkdown);
+      expect(parsed.kind, QuestionKind.multipleCorrect);
+      expect(parsed.correctAnswers.map((a) => a.text), ['2', '3', '5']);
+      expect(parsed.wrongAnswers, hasLength(2));
+      expect(parsed.isPresentable, isTrue);
+    });
   });
 
   group('markdown round-trip cross-cutting fields', () {
@@ -690,6 +773,92 @@ void main() {
       ]);
       expect(deck.slides[2].imagePath, 'images/c.png');
       expect(deck.slides[3].imagePath, 'images/d.png');
+    });
+  });
+
+  group('markdown round-trip edge cases', () {
+    const tricky = 'Quote " back\\slash pipe | angle <b> & amp 🎉 日本語 العربية';
+
+    test('title and subtitle keep special characters and unicode', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.title).copyWith(title: tricky, subtitle: tricky),
+      );
+      expect(out.title, tricky);
+      expect(out.subtitle, tricky);
+    });
+
+    test('bullets keep pipes, angle brackets and unicode', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.bullets).copyWith(
+          title: 'Tekens',
+          bullets: ['a | b', 'x <y> z', 'quote " and \\ slash', '✓ café 漢字'],
+        ),
+      );
+      expect(out.bullets, [
+        'a | b',
+        'x <y> z',
+        'quote " and \\ slash',
+        '✓ café 漢字',
+      ]);
+    });
+
+    test('quote slide keeps special characters', () {
+      final out = _roundTrip(
+        Slide.create(
+          SlideType.quote,
+        ).copyWith(quote: tricky, quoteAuthor: 'A. "Nony" Mous'),
+      );
+      expect(out.quote, tricky);
+      expect(out.quoteAuthor, 'A. "Nony" Mous');
+    });
+
+    test('table cells keep pipes and special characters', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.table).copyWith(
+          title: 'Tabel',
+          tableRows: [
+            ['Kolom A', 'Kolom B'],
+            ['a | b', 'x <y> & z'],
+          ],
+        ),
+      );
+      expect(out.tableRows, [
+        ['Kolom A', 'Kolom B'],
+        ['a | b', 'x <y> & z'],
+      ]);
+    });
+
+    test('a bullets slide with a title but no bullets keeps its type', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.bullets).copyWith(title: 'Leeg'),
+      );
+      expect(out.type, SlideType.bullets);
+      expect(out.title, 'Leeg');
+      expect(out.bullets, isEmpty);
+    });
+
+    test('free-markdown keeps inline and block math verbatim', () {
+      const body =
+          'Inline \$E = mc^2\$ and a block:\n\n\$\$\n\\int_0^1 x\\,dx\n\$\$';
+      final out = _roundTrip(
+        Slide.create(SlideType.freeMarkdown).copyWith(customMarkdown: body),
+      );
+      expect(out.customMarkdown.contains('E = mc^2'), isTrue);
+      expect(out.customMarkdown.contains('\\int_0^1 x'), isTrue);
+    });
+
+    test('deck-level presentation target seconds round-trips', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          presentationTargetSeconds: 1500,
+          slides: [Slide.create(SlideType.title).copyWith(title: 'Een')],
+        ),
+      );
+      final deck = service.parseDeck(markdown);
+      expect(deck, isNotNull);
+      expect(deck!.presentationTargetSeconds, 1500);
     });
   });
 }

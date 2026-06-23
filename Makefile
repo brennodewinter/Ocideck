@@ -1,9 +1,10 @@
-.PHONY: setup format format-check analyze test test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check licenses check check-full help
+.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check licenses check check-full help
 
 help:
 	@echo "OciDeck quality targets:"
 	@echo "  make check           Format check + static analysis + full Flutter test suite."
 	@echo "  make check-full      make check + dependency outdated report."
+	@echo "  make coverage        Run the test suite with coverage and print a line-coverage summary."
 	@echo "  make test-contracts  Markdown/save-load contract and parsing tests."
 	@echo "  make test-preview    Slide rendering, footer, TLP, inline markdown, and preview tests."
 	@echo "  make test-export     Export and file-service smoke tests."
@@ -49,6 +50,16 @@ test:
 	@echo "Covers: all unit/widget tests under test/, including markdown round-trip, preview, export, provider, footer, and presenter tests."
 	@echo "Failure means: inspect the named failing test file and test case in the Flutter output."
 	flutter test
+
+# Run the full test suite with coverage and summarise line coverage. The floor
+# guards against large regressions; raise it as coverage improves.
+coverage:
+	@echo "== OciDeck check: coverage =="
+	@echo "Command: flutter test --coverage && dart run tool/coverage_summary.dart --min=50"
+	@echo "Covers: line coverage across every lib/ file a test imports."
+	@echo "Failure means: overall line coverage dropped below the required floor."
+	flutter test --coverage
+	dart run tool/coverage_summary.dart --min=50
 
 # Contract tests for persistence and parsing.
 test-contracts:

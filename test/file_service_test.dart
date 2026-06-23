@@ -97,6 +97,33 @@ void main() {
     },
   );
 
+  test('importPackageBytes extracts a normal multi-file package', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_zip_ok_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+
+    final archive = Archive();
+    final md = utf8.encode('---\nmarp: true\n---\n# Hi');
+    archive.addFile(ArchiveFile('deck.md', md.length, md));
+    final png = utf8.encode('not-really-a-png-but-bytes');
+    archive.addFile(ArchiveFile('images/pic.png', png.length, png));
+    final zipBytes = ZipEncoder().encode(archive);
+
+    final service = FileService(
+      MarkdownService(),
+      ImageService(),
+      () => const ThemeProfile(),
+    );
+    final mdPath = await service.importPackageBytes(zipBytes, temp.path);
+
+    expect(mdPath, isNotNull);
+    expect(await File(mdPath!).exists(), isTrue);
+    final asset = File(p.join(p.dirname(mdPath), 'images', 'pic.png'));
+    expect(await asset.exists(), isTrue);
+    expect(await asset.readAsBytes(), png);
+  });
+
   test('importPackageBytes rejects archives with too many entries', () async {
     final temp = await Directory.systemTemp.createTemp('ocideck_zip_entries_');
     addTearDown(() async {

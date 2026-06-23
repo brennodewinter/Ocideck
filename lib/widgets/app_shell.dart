@@ -511,6 +511,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         SlideType.title ||
         SlideType.image ||
         SlideType.quote ||
+        SlideType.question ||
         SlideType.bulletsImage => slide.copyWith(
           imagePath: result.path,
           imageCaption: result.caption,

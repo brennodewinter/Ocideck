@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../utils/lru_cache.dart';
 import '../utils/sanitize_svg.dart';
 
 /// Renders Mermaid diagram source to inline SVG for preview, presenter, and
@@ -91,7 +92,9 @@ window.__renderMermaid = async function(source) {
     return completer.future;
   }
 
-  final Map<String, String> _cache = {};
+  // Bounded so a long session with many distinct diagrams cannot grow the
+  // cache without limit; rendered SVGs can each be tens of KB.
+  final LruCache<String, String> _cache = LruCache(128);
 
   void _pumpQueue() {
     if (_busy || _queue.isEmpty || _controller == null) return;

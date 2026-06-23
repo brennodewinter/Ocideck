@@ -192,13 +192,16 @@ The first class determines (together with the content) the **slide type**:
 | Table | `table` | only a table, no heading/bullets/text |
 | Source code | `code` | — |
 | Chart | `chart` | — |
+| Cockpit | `cockpit` | — |
+| Question | `question` | — |
 | Bullets only | *(none)* | bullets present |
 | Two images | *(none)* | two background images |
 | Large image | *(none)* | one image, no bullets |
 | Free Markdown | *(none)* | no heading/bullets/image/quote |
 
-> `code` and `chart` slides contain fenced code blocks that would confuse the
-> generic line parser, so they are recognized separately through their `_class`.
+> `code`, `chart`, `cockpit`, and `question` slides contain fenced code blocks
+> that would confuse the generic line parser, so they are recognized separately
+> through their `_class`.
 
 Additional behavior classes:
 
@@ -364,6 +367,46 @@ Fields:
 - `minBound` / `maxBound` — optional and only for non-`pie`. For `bar`/`line`,
   these are horizontal **reference lines**; for `radar`, they determine the
   **scale** (inner/outer ring) with even spacing. Omitted for `pie`.
+
+**Question** (`question`) — a fenced ```question``` block with the quiz
+specification as **JSON**, optionally preceded by a `# title`, an `![](image)`
+with caption, and an `<!-- _style: --image-width: N%; -->` comment when an image
+is present. The block is the round-trip source of truth.
+````markdown
+```question
+{
+  "kind": "multipleChoice",      // multipleChoice | trueFalse | multipleCorrect
+  "prompt": "What is the capital of the Netherlands?",
+  "optionCount": 4,              // total options shown (random pick)
+  "timeLimitSeconds": 0,         // 0 = no limit
+  "onWrong": "retry",            // retry | lockAndContinue
+  "statementIsTrue": true,       // trueFalse only
+  "answers": [
+    { "text": "Amsterdam", "correct": true },
+    { "text": "Rotterdam", "correct": false }
+  ]
+}
+```
+````
+
+Fields:
+
+- `kind` — `multipleChoice` (one correct + a random pick of wrong ones; pick one),
+  `trueFalse` (the prompt is a statement; pick true/false), or `multipleCorrect`
+  (several may be correct; pick all). Defaults to `multipleChoice`.
+- `prompt` — the question, or the statement for `trueFalse`.
+- `answers` — the full pool; each has `text` and `correct`. Ignored for
+  `trueFalse`. The presentation draws a random subset from it.
+- `optionCount` — how many options are shown (2–8, default 4). Not used by
+  `trueFalse`.
+- `timeLimitSeconds` — optional countdown; running out counts as wrong.
+- `onWrong` — `retry` (cannot continue; a fresh set is drawn on the next click) or
+  `lockAndContinue` (reveal the answer, lock the slide, allow advancing).
+- `statementIsTrue` — for `trueFalse`, whether the statement is true.
+
+> The live answer state (which options were drawn, what the viewer picked,
+> correct/wrong) is **session-only** and never written to the file. A static
+> export renders the question without interactivity.
 
 ### Image Size (`imageSize`)
 

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
+import '../utils/atomic_file.dart';
 import '../utils/log.dart';
 import '../utils/project_path.dart';
 
@@ -53,7 +54,8 @@ class CaptionService {
     if (data.isEmpty) {
       if (file.existsSync()) await file.delete();
     } else {
-      await file.writeAsString(
+      await writeStringAtomic(
+        file,
         const JsonEncoder.withIndent('  ').convert(data),
       );
     }

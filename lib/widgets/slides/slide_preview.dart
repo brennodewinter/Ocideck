@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/github.dart';
@@ -16,6 +15,7 @@ import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
 import '../../models/cockpit.dart';
 import '../../models/deck.dart';
+import '../../models/question.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../theme/app_theme.dart';
@@ -25,6 +25,7 @@ import '../../utils/log.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/project_path.dart';
 import 'inline_markdown.dart';
+import 'image_zoom_dialog.dart';
 
 // Slide preview widgets, split into part files by slide type for
 // navigability. These parts share this library's imports and private scope.
@@ -36,6 +37,7 @@ part 'previews/media_previews.dart';
 part 'previews/code_preview.dart';
 part 'previews/chart_preview.dart';
 part 'previews/cockpit_preview.dart';
+part 'previews/question_preview.dart';
 part 'previews/overlays.dart';
 
 /// Returns a TextStyle with the correct font. 'EB Garamond' is bundled with the
@@ -210,6 +212,18 @@ class SlidePreviewWidget extends StatelessWidget {
   /// Callback wanneer de gebruiker van pagina wisselt binnen een rich-text slide.
   final ValueChanged<int>? onRichTextPageChanged;
 
+  /// Live toestand van een vraag-slide tijdens het presenteren (de willekeurig
+  /// getoonde opties, selectie, juist/fout, timer). Null in editor/thumbnail →
+  /// de vraag wordt in auteursweergave getoond (alle antwoorden, juiste
+  /// gemarkeerd).
+  final QuestionView? questionView;
+
+  /// Aangeroepen wanneer een antwoordoptie wordt aangetikt (presentatiemodus).
+  final ValueChanged<int>? onAnswerSelected;
+
+  /// Aangeroepen bij 'Bevestig' op een meerdere-juiste-antwoorden-vraag.
+  final VoidCallback? onAnswerSubmit;
+
   const SlidePreviewWidget({
     super.key,
     required this.slide,
@@ -236,6 +250,9 @@ class SlidePreviewWidget extends StatelessWidget {
     this.richTextPage = 0,
     this.showRichTextPageControls = false,
     this.onRichTextPageChanged,
+    this.questionView,
+    this.onAnswerSelected,
+    this.onAnswerSubmit,
   });
 
   @override
@@ -492,6 +509,18 @@ class SlidePreviewWidget extends StatelessWidget {
           scheme: cockpitColorScheme,
           presentationMode: presentationMode,
         );
+      case SlideType.question:
+        return _QuestionPreview(
+          slide: slide,
+          w: w,
+          projectPath: projectPath,
+          font: fontFamily,
+          profile: themeProfile,
+          presentationMode: presentationMode,
+          view: questionView,
+          onAnswerSelected: onAnswerSelected,
+          onAnswerSubmit: onAnswerSubmit,
+        );
     }
   }
 }
@@ -522,6 +551,8 @@ double _contentLeftInset(Slide slide, double w) {
       return w * 0.06;
     case SlideType.bulletsImage:
       return w * 0.038;
+    case SlideType.question:
+      return w * 0.06;
     case SlideType.quote:
       return w * 0.08;
     default:

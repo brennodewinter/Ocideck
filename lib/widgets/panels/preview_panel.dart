@@ -491,8 +491,9 @@ class FullDeckPreview extends ConsumerWidget {
                     slide: deck.slides[i],
                     projectPath: deck.projectPath,
                     themeProfile: themeProfile,
-                    cockpitColorScheme:
-                        ref.watch(settingsProvider).cockpitColorScheme,
+                    cockpitColorScheme: ref
+                        .watch(settingsProvider)
+                        .cockpitColorScheme,
                     onLinkTap: openExternalUrl,
                     slideNumber: i + 1,
                     slideCount: deck.slides.length,

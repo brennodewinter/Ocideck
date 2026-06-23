@@ -40,21 +40,42 @@ class _AudioPlaybackState extends State<_AudioPlayback> {
     }
   }
 
+  /// Bumped on every (re)init so an in-flight run that has been superseded by a
+  /// newer one (rapid slide switches) can bail and clean up its controller.
+  int _initGen = 0;
+
   Future<void> _init() async {
+    final gen = ++_initGen;
+    // Detach and null the old controller *before* awaiting its dispose, so a
+    // concurrent _init sees no controller and cannot dispose it a second time.
     _controller?.removeListener(_onTick);
-    await _controller?.dispose();
+    final old = _controller;
+    _controller = null;
+    await old?.dispose();
+    if (gen != _initGen) return; // superseded
     _completed = false;
     final path = _resolvePath(widget.audioPath, widget.projectPath);
-    if (path == null) return;
+    if (path == null) {
+      if (mounted) setState(() {});
+      return;
+    }
     final controller = VideoPlayerController.file(File(path));
-    _controller = controller;
     try {
       await controller.initialize();
+      if (gen != _initGen) {
+        await controller.dispose();
+        return;
+      }
       controller.addListener(_onTick);
       if (widget.autoplay) await controller.play();
     } catch (e) {
       logWarning('_AudioPlaybackState._init: audio controller init failed', e);
     }
+    if (gen != _initGen) {
+      await controller.dispose();
+      return;
+    }
+    _controller = controller;
     if (mounted) setState(() {});
   }
 
@@ -309,10 +330,19 @@ class _VideoPreviewState extends State<_VideoPreview> {
     }
   }
 
+  /// Bumped on every (re)init so an in-flight run that has been superseded by a
+  /// newer one (rapid slide switches) can bail and clean up its controller.
+  int _initGen = 0;
+
   Future<void> _init() async {
+    final gen = ++_initGen;
+    // Detach and null the old controller *before* awaiting its dispose, so a
+    // concurrent _init sees no controller and cannot dispose it a second time.
     _controller?.removeListener(_onTick);
-    await _controller?.dispose();
+    final old = _controller;
     _controller = null;
+    await old?.dispose();
+    if (gen != _initGen) return; // superseded
     _completed = false;
     _path = _resolvePath(widget.slide.videoPath, widget.projectPath);
     if (_path == null) {
@@ -320,9 +350,12 @@ class _VideoPreviewState extends State<_VideoPreview> {
       return;
     }
     final controller = VideoPlayerController.file(File(_path!));
-    _controller = controller;
     try {
       await controller.initialize();
+      if (gen != _initGen) {
+        await controller.dispose();
+        return;
+      }
       controller.addListener(_onTick);
       await controller.setLooping(false);
       if (widget.autoplay) await controller.play();
@@ -330,6 +363,11 @@ class _VideoPreviewState extends State<_VideoPreview> {
       logWarning('_VideoPreviewState._init: video controller init failed', e);
       // Keep the placeholder visible when the platform cannot open the file.
     }
+    if (gen != _initGen) {
+      await controller.dispose();
+      return;
+    }
+    _controller = controller;
     if (mounted) setState(() {});
   }
 

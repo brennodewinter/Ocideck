@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
@@ -500,5 +501,78 @@ void main() {
     expect(s.columnTitle1, 'bar left');
     expect(s.columnTitle2, 'bar right');
     expect(s.bullets2, ['bar b', 'bar c']);
+  });
+
+  test('applyMarkdown preserves annotations across a toggle', () {
+    final n = _notifier();
+    n.loadDeck(
+      Deck(
+        title: 'D',
+        slides: [
+          Slide.create(SlideType.title).copyWith(title: 'A'),
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'B', bullets: ['punt']),
+        ],
+      ),
+    );
+    final slideId = n.state.deck!.slides[1].id;
+    n.setAnnotations({
+      slideId: const [
+        InkStroke(
+          tool: InkTool.pen,
+          color: 0xFF112233,
+          width: 0.01,
+          points: [Offset(0.1, 0.1), Offset(0.2, 0.2)],
+        ),
+      ],
+    });
+    expect(n.state.deck!.annotations, isNotEmpty);
+
+    final md = n.generateMarkdown();
+    expect(n.applyMarkdown(md), isTrue);
+
+    // The ink layer survived the markdown round-trip (re-anchored to the new
+    // slide id), so a subsequent save won't wipe the drawing's sidecar.
+    final strokes = n.state.deck!.annotations.values.expand((s) => s).toList();
+    expect(strokes, isNotEmpty);
+    expect(strokes.first.color, 0xFF112233);
+  });
+
+  test('generateMarkdown inlines linked chart data for the editor', () {
+    final n = _notifier();
+    const chartBlock =
+        '{"type":"bar","source":"data.csv",'
+        '"x":["a","b"],"series":[{"label":"S","data":[1,2]}]}';
+    n.loadDeck(
+      Deck(
+        title: 'C',
+        slides: [
+          Slide.create(SlideType.chart).copyWith(customMarkdown: chartBlock),
+        ],
+      ),
+    );
+    final md = n.generateMarkdown();
+    // Inline points are kept (not dropped to source-only) so a toggle round-trip
+    // doesn't blank the chart; the source link is still present.
+    expect(md, contains('"x"'));
+    expect(md, contains('data.csv'));
+    expect(n.applyMarkdown(md), isTrue);
+    expect(n.state.deck!.slides.first.customMarkdown, contains('"x"'));
+  });
+
+  test('updateSlide coalesces consecutive edits of the same slide', () {
+    final n = _notifier()..newDeck('Deck');
+    n.addSlide(SlideType.bullets); // 2 slides; undo stack now has 1 entry
+    final undoDepthBefore = n.canUndo;
+    expect(undoDepthBefore, isTrue);
+    final slide = n.state.deck!.slides[0];
+    // Two quick edits to the same slide collapse into a single undo step.
+    n.updateSlide(0, slide.copyWith(title: 'X'));
+    n.updateSlide(0, slide.copyWith(title: 'XY'));
+    // Undo once returns to before BOTH edits (title back to the original).
+    n.undo();
+    expect(n.state.deck!.slides[0].title, isNot('XY'));
+    expect(n.state.deck!.slides[0].title, isNot('X'));
   });
 }

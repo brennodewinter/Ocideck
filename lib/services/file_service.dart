@@ -10,6 +10,7 @@ import '../l10n/app_localizations.dart';
 import '../models/settings.dart';
 import '../models/chart.dart';
 import '../models/slide.dart';
+import '../utils/atomic_file.dart';
 import '../utils/log.dart';
 import '../utils/project_path.dart';
 import 'annotation_codec.dart';
@@ -179,10 +180,26 @@ class FileService {
     } else {
       final file = File(filePath);
       if (!await file.exists()) return null;
-      raw = await file.readAsString();
+      try {
+        raw = await file.readAsString();
+      } catch (e) {
+        // Non-UTF8 / unreadable bytes must not crash the open flow.
+        logWarning('FileService.openDeck: file not readable as UTF-8', e);
+        return null;
+      }
     }
     final parsed = _md.parseDeck(raw, filePath: filePath);
     if (parsed == null) return null;
+    // Guard against silently opening a truncated/corrupt file as a blank deck:
+    // a valid save always emits at least one slide block after the frontmatter,
+    // so a complete header with an empty body means the source was cut short.
+    if (content == null && _looksTruncated(raw, parsed)) {
+      logWarning(
+        'FileService.openDeck: frontmatter present but no slide body',
+        filePath,
+      );
+      return null;
+    }
     // The file carries only content; apply the active style profile on open.
     final deck = parsed.copyWith(
       themeProfile: activeProfileFor(projectPath: parsed.projectPath),
@@ -219,6 +236,22 @@ class FileService {
     return hydrated;
   }
 
+  /// True when [raw] opens with a complete frontmatter block but carries no
+  /// slide body after it, while [parsed] degraded to the single placeholder
+  /// slide — the signature of a truncated or corrupt deck file.
+  bool _looksTruncated(String raw, Deck parsed) {
+    if (parsed.slides.length != 1) return false;
+    final norm = raw.replaceAll('\r\n', '\n').replaceAll('\r', '\n');
+    if (!norm.startsWith('---\n')) return false;
+    final end = norm.indexOf('\n---\n', 4);
+    // Unterminated frontmatter: leave it to the parser rather than reject here.
+    if (end == -1) return false;
+    // A complete frontmatter header followed by no slide body means the file
+    // was cut short — trim only the part *after* the closing fence so the
+    // fence's own trailing newline is preserved.
+    return norm.substring(end + 5).trim().isEmpty;
+  }
+
   /// Path of the annotation sidecar next to a deck `<name>.md` → `<name>.ink.json`.
   String _sidecarPath(String mdPath) => p.setExtension(mdPath, '.ink.json');
 
@@ -229,7 +262,7 @@ class FileService {
     if (json == null) {
       if (await sidecar.exists()) await sidecar.delete();
     } else {
-      await sidecar.writeAsString(json, flush: true);
+      await writeStringAtomic(sidecar, json);
     }
   }
 
@@ -244,7 +277,7 @@ class FileService {
     if (json == null) {
       if (await sidecar.exists()) await sidecar.delete();
     } else {
-      await sidecar.writeAsString(json, flush: true);
+      await writeStringAtomic(sidecar, json);
     }
   }
 
@@ -316,7 +349,7 @@ class FileService {
       if (from.path == toPath || !from.existsSync()) continue;
       final out = File(toPath);
       await out.parent.create(recursive: true);
-      await out.writeAsBytes(await from.readAsBytes(), flush: true);
+      await writeBytesAtomic(out, await from.readAsBytes());
     }
   }
 
@@ -458,7 +491,7 @@ class FileService {
     }
 
     final bytes = ZipEncoder().encodeBytes(archive);
-    await File(destPath).writeAsBytes(bytes, flush: true);
+    await writeBytesAtomic(File(destPath), bytes);
   }
 
   Future<String?> _packageThemeCss(
@@ -546,8 +579,26 @@ class FileService {
       if (f.name.length > maxZipEntryPathLength) continue;
       final outPath = safeOutPath(f.name);
       if (outPath == null) continue; // skip path-traversal entries
-      final content = f.content as List<int>;
-      // Bound total extracted size so a small zip can't fill the disk (zip bomb).
+      // Reject before inflating: an entry that declares a huge uncompressed
+      // size (zip bomb) must not be materialised into memory at all.
+      if (f.size < 0 || extracted + f.size > maxBytes) {
+        logWarning(
+          'FileService.importPackageBytes: decompressed size exceeds limit',
+        );
+        return null;
+      }
+      // Decompressing a corrupt entry can throw; skip it instead of aborting.
+      final List<int> content;
+      try {
+        content = f.content;
+      } catch (e) {
+        logWarning(
+          'FileService.importPackageBytes: unreadable entry skipped (${f.name})',
+          e,
+        );
+        continue;
+      }
+      // Backstop in case a header understated the real uncompressed size.
       extracted += content.length;
       if (extracted > maxBytes) {
         logWarning(
@@ -664,7 +715,7 @@ class FileService {
     final destDir = _uniqueDir(destParentDir, base);
     await destDir.create(recursive: true);
     final mdPath = p.join(destDir.path, '$base.md');
-    await File(mdPath).writeAsString(markdown);
+    await writeStringAtomic(File(mdPath), markdown);
     return mdPath;
   }
 
@@ -713,7 +764,7 @@ class FileService {
     await _copyChartData(deck, dir);
 
     final markdown = _md.generateDeck(updatedDeck);
-    await File(filePath).writeAsString(markdown);
+    await writeStringAtomic(File(filePath), markdown);
     // Annotations and user notes live in separate sidecars so the .md stays pure.
     await _writeSidecar(updatedDeck, filePath);
     await _writeUserNotesSidecar(updatedDeck, filePath);
@@ -775,7 +826,7 @@ class FileService {
       final base = (await rootBundle.loadString(
         'assets/themes/ocideck.css',
       )).replaceFirst('@theme ocideck', '@theme $safeThemeName');
-      await dest.writeAsString(_buildThemeCss(base, profile, logoUrl));
+      await writeStringAtomic(dest, _buildThemeCss(base, profile, logoUrl));
     } catch (e) {
       // Asset not bundled in this build context; skip
       logWarning('FileService._writeTheme: theme asset not bundled', e);

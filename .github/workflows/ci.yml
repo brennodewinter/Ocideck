@@ -6,8 +6,10 @@ on:
   pull_request:
 
 jobs:
-  check:
-    name: Format · Analyze · Test
+  # Canonical gate on Linux: formatting, analysis, the full suite with coverage,
+  # licence compliance and the bundled-JS security check.
+  gate:
+    name: Gate (Linux) · Format · Analyze · Coverage
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,10 +28,23 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # The same quality gate developers run locally:
-      # format-check + flutter analyze + the full test suite.
-      - name: Quality gate (make check)
-        run: make check
+      - name: Format check
+        run: make format-check
+
+      - name: Analyze
+        run: make analyze
+
+      # Runs the full suite with coverage and enforces a line-coverage floor.
+      - name: Test + coverage (make coverage)
+        run: make coverage
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-lcov
+          path: coverage/lcov.info
+          if-no-files-found: warn
 
       # Fail the build if any dependency is not open source.
       - name: Licence compliance (make licenses)
@@ -39,3 +54,31 @@ jobs:
       # pinned version has a known vulnerability (queries the OSV database).
       - name: Bundled JS security (make deps-check)
         run: make deps-check
+
+  # The app ships on macOS, Windows and Linux, so run the suite on the other two
+  # desktop platforms as well to catch platform-specific (path, Platform.isX)
+  # regressions the Linux gate would miss. `make` isn't reliably present on the
+  # Windows runner, so this calls Flutter directly.
+  test-matrix:
+    name: Test (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.44.1
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Test
+        run: flutter test

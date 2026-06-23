@@ -281,11 +281,7 @@ void main() {}
   test('cockpit horizon SVG uses the scheme sky and ground colours', () {
     final block = CockpitSpec(
       meters: const [
-        CockpitMeterSpec(
-          type: CockpitMeterType.horizon,
-          pitch: 5,
-          bank: 10,
-        ),
+        CockpitMeterSpec(type: CockpitMeterType.horizon, pitch: 5, bank: 10),
       ],
     ).toBlock();
     final slide = '```cockpit\n$block\n```';

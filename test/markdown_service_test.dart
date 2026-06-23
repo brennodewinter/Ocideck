@@ -6,6 +6,22 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
 
 void main() {
+  test('frontmatter tolerates indentation and missing spaces', () {
+    const md =
+        '---\n'
+        '  title:   Mijn Talk\n' // leading indent + extra spaces
+        'theme:ocideck\n' // no space after the colon
+        'ocideck_target_seconds: 600\n'
+        'date: 2026-06-23T09:30:00\n' // value contains colons
+        '---\n'
+        '# Eerste\n';
+    final deck = MarkdownService().parseDeck(md)!;
+    expect(deck.title, 'Mijn Talk');
+    expect(deck.theme, 'ocideck');
+    expect(deck.presentationTargetSeconds, 600);
+    expect(deck.date, '2026-06-23T09:30:00');
+  });
+
   test('round-trips image slide with title as image slide', () {
     final service = MarkdownService();
     final markdown = service.generateDeck(
