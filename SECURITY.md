@@ -74,10 +74,20 @@ OciDeck constrains what an opened deck can do:
   if *any* resolved address is internal (loopback / private / link-local /
   metadata), closing the bypass where a public hostname points at an internal
   IP. (A narrow DNS-rebinding window remains because the socket is not pinned.)
+- **Symlink containment.** The copy-to-clipboard sink resolves the real
+  (symlink-followed) path and refuses it if it escapes the project
+  (`resolveContainedRealPath`), so a project-internal symlink to an outside file
+  can't be exfiltrated. Package import already skips symlink entries. The
+  per-frame render path keeps the fast lexical guard (a filesystem stat per
+  image per frame would jank on network-mounted projects); a *displayed*
+  symlinked image is decoded to pixels but its bytes are never handed out.
+- **Per-asset import validation.** Picked/pasted images are validated by magic
+  bytes (PNG/JPEG/GIF/BMP/WebP), not just the file extension, and capped at
+  64 MiB; video/audio imports are capped at 1 GiB.
 
-Known residual hardening tracked for future work: symlink-aware (realpath)
-containment, and per-asset import byte/magic-byte validation on individual
-image/media imports.
+Known residual hardening tracked for future work: pinning the URL-import socket
+to the validated IP (full DNS-rebinding protection), and realpath symlink
+containment on the export render path (currently lexical for performance).
 
 ## Supported versions
 

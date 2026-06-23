@@ -275,6 +275,11 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 - **URL import now resolves the hostname** and refuses it when it maps to an
   internal address, closing the SSRF bypass where a public name points at a
   loopback/private/metadata IP.
+- **Copy-to-clipboard follows symlinks** and refuses a project-internal symlink
+  that points outside the project, so it can't be used to exfiltrate an
+  arbitrary file.
+- **Imported images are validated by magic bytes** (not just the file
+  extension) and capped at 64 MiB; video/audio imports are capped at 1 GiB.
 
 ## [1.0.0]
 

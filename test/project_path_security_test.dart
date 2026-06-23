@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/utils/project_path.dart';
+import 'package:path/path.dart' as p;
 
 /// Locks the containment guarantee that protects against a malicious deck (.md)
 /// referencing files outside its project directory via absolute or `../` asset
@@ -37,6 +40,41 @@ void main() {
 
   // Note: resolveEditorAssetPath is intentionally permissive (the editor must
   // display user-picked images from anywhere on disk). Security-sensitive sinks
-  // such as copy-to-clipboard deliberately use resolveSlideAssetPath above
-  // instead, so a deck opened from disk can't exfiltrate an arbitrary file.
+  // such as copy-to-clipboard deliberately use resolveContainedRealPath instead,
+  // so a deck opened from disk can't exfiltrate an arbitrary file.
+
+  group('resolveContainedRealPath follows symlinks', () {
+    late Directory tmp;
+    late Directory projectDir;
+    late File outsideSecret;
+
+    setUp(() {
+      tmp = Directory.systemTemp.createTempSync('ocideck_symlink_test');
+      projectDir = Directory(p.join(tmp.path, 'project'))..createSync();
+      Directory(p.join(projectDir.path, 'images')).createSync();
+      outsideSecret = File(p.join(tmp.path, 'secret.txt'))
+        ..writeAsStringSync('top secret');
+      File(p.join(projectDir.path, 'images', 'real.png'))
+          .writeAsBytesSync(const [0x89, 0x50, 0x4e, 0x47]);
+    });
+
+    tearDown(() => tmp.deleteSync(recursive: true));
+
+    test('rejects a project-internal symlink that points outside', () {
+      Link(
+        p.join(projectDir.path, 'images', 'sneaky.png'),
+      ).createSync(outsideSecret.path);
+      expect(
+        resolveContainedRealPath('images/sneaky.png', projectDir.path),
+        isNull,
+      );
+    });
+
+    test('allows a genuine file inside the project', () {
+      expect(
+        resolveContainedRealPath('images/real.png', projectDir.path),
+        p.join(projectDir.path, 'images', 'real.png'),
+      );
+    });
+  });
 }
