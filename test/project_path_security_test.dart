@@ -76,5 +76,21 @@ void main() {
         p.join(projectDir.path, 'images', 'real.png'),
       );
     });
+
+    test('isRenderPathContained blocks an escaping symlink but allows '
+        'genuine and missing files', () {
+      resetRenderContainedCache();
+      Link(
+        p.join(projectDir.path, 'images', 'sneaky.png'),
+      ).createSync(outsideSecret.path);
+      final escape = p.join(projectDir.path, 'images', 'sneaky.png');
+      final real = p.join(projectDir.path, 'images', 'real.png');
+      final missing = p.join(projectDir.path, 'images', 'nope.png');
+
+      expect(isRenderPathContained(escape, projectDir.path), isFalse);
+      expect(isRenderPathContained(real, projectDir.path), isTrue);
+      // Missing path is not a symlink escape — the normal load path handles it.
+      expect(isRenderPathContained(missing, projectDir.path), isTrue);
+    });
   });
 }

@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
-import 'package:meta/meta.dart';
 import 'package:pasteboard/pasteboard.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
@@ -42,7 +41,8 @@ class ImageService {
     }
   }
 
-  @visibleForTesting
+  /// Whether [b] (a file's leading bytes) matches a known raster image
+  /// signature. Public for the import validation and its tests.
   static bool looksLikeImage(List<int> b) => _looksLikeImage(b);
 
   static bool _looksLikeImage(List<int> b) {

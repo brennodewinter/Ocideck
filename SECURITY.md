@@ -70,24 +70,24 @@ OciDeck constrains what an opened deck can do:
 - **Bounded image decoding.** Every deck-supplied image is decoded with its
   dimensions capped (`cappedFileImage` / `kMaxImageDecodeDimension`), so a
   small but huge-dimensioned file can't exhaust memory on display or export.
-- **SSRF — hostname resolution.** URL import resolves the host and rejects it
-  if *any* resolved address is internal (loopback / private / link-local /
-  metadata), closing the bypass where a public hostname points at an internal
-  IP. (A narrow DNS-rebinding window remains because the socket is not pinned.)
-- **Symlink containment.** The copy-to-clipboard sink resolves the real
-  (symlink-followed) path and refuses it if it escapes the project
-  (`resolveContainedRealPath`), so a project-internal symlink to an outside file
-  can't be exfiltrated. Package import already skips symlink entries. The
-  per-frame render path keeps the fast lexical guard (a filesystem stat per
-  image per frame would jank on network-mounted projects); a *displayed*
-  symlinked image is decoded to pixels but its bytes are never handed out.
+- **SSRF — hostname resolution + socket pinning.** URL import resolves the host
+  up front, rejects it if *any* resolved address is internal (loopback /
+  private / link-local / metadata), and then **pins the connection to that
+  validated address** (`connectionFactory`), so a DNS rebind between the check
+  and the connect can't redirect the socket internally. TLS still validates
+  against the original hostname.
+- **Symlink containment.** Both the copy-to-clipboard sink
+  (`resolveContainedRealPath`) and the render/export path (`isRenderPathContained`,
+  cached so the per-frame cost is O(1)) resolve the real (symlink-followed)
+  path and refuse a project-internal symlink that escapes the project. Package
+  import already skips symlink entries.
 - **Per-asset import validation.** Picked/pasted images are validated by magic
   bytes (PNG/JPEG/GIF/BMP/WebP), not just the file extension, and capped at
   64 MiB; video/audio imports are capped at 1 GiB.
 
-Known residual hardening tracked for future work: pinning the URL-import socket
-to the validated IP (full DNS-rebinding protection), and realpath symlink
-containment on the export render path (currently lexical for performance).
+Known residual hardening: the render-path symlink cache is keyed by path for the
+session, so a symlink swapped *after* its first render isn't re-checked (a
+narrow TOCTOU on an already-open deck).
 
 ## Supported versions
 

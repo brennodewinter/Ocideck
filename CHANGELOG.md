@@ -280,6 +280,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   arbitrary file.
 - **Imported images are validated by magic bytes** (not just the file
   extension) and capped at 64 MiB; video/audio imports are capped at 1 GiB.
+- **URL import pins the connection** to the validated address, closing the
+  DNS-rebinding window where a host re-resolves to an internal IP at connect
+  time.
+- **Symlink containment now also covers the render/export path** (cached), not
+  just copy-to-clipboard, so a project-internal symlink pointing outside the
+  project can't be rendered into an export.
 
 ## [1.0.0]
 
