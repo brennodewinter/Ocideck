@@ -23,3 +23,16 @@ ImageProvider cappedFileImage(File file) => ResizeImage(
   policy: ResizeImagePolicy.fit,
   allowUpscaling: false,
 );
+
+/// A [NetworkImage] whose decode is capped to [kMaxImageDecodeDimension], the
+/// network twin of [cappedFileImage]. Used for deck-supplied `http(s)` image
+/// URLs so a remote (untrusted) image can't exhaust memory on decode. The
+/// caller is responsible for the remote-media gate and SSRF host check before
+/// constructing this; the cap is the decode-bomb defence only.
+ImageProvider cappedNetworkImage(String url) => ResizeImage(
+  NetworkImage(url),
+  width: kMaxImageDecodeDimension,
+  height: kMaxImageDecodeDimension,
+  policy: ResizeImagePolicy.fit,
+  allowUpscaling: false,
+);

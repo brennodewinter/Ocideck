@@ -464,6 +464,22 @@ class _ValidationSummaryBar extends StatelessWidget {
     required this.onJumpToLine,
   });
 
+  Future<void> _copyIssues(BuildContext context) async {
+    final l10n = context.l10n;
+    final buf = StringBuffer();
+    for (final issue in result.issues) {
+      buf.writeln('Regel ${issue.line}: ${issue.message}');
+    }
+    await Clipboard.setData(ClipboardData(text: buf.toString()));
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.d('Syntaxproblemen gekopieerd naar klembord.')),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -503,12 +519,26 @@ class _ValidationSummaryBar extends StatelessWidget {
                       style: TextStyle(fontSize: 11, color: iconColor),
                     ),
                   ),
-                  if (result.hasIssues)
+                  if (result.hasIssues) ...[
+                    IconButton(
+                      icon: const Icon(Icons.copy_outlined),
+                      iconSize: 14,
+                      color: iconColor,
+                      visualDensity: VisualDensity.compact,
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(
+                        minWidth: 28,
+                        minHeight: 28,
+                      ),
+                      tooltip: l10n.d('Kopieer syntaxproblemen'),
+                      onPressed: () => _copyIssues(context),
+                    ),
                     Icon(
                       expanded ? Icons.expand_less : Icons.expand_more,
                       size: 18,
                       color: iconColor,
                     ),
+                  ],
                 ],
               ),
             ),

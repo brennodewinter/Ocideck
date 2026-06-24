@@ -12,6 +12,7 @@ import '../models/chart.dart';
 import '../models/slide.dart';
 import '../utils/atomic_file.dart';
 import '../utils/log.dart';
+import '../utils/net_guard.dart';
 import '../utils/project_path.dart';
 import 'annotation_codec.dart';
 import 'user_notes_codec.dart';
@@ -34,6 +35,39 @@ class ScannedPresentation {
     required this.deck,
     this.content = '',
   });
+}
+
+/// A Marp presentation found by the disk-wide scan. Unlike [ScannedPresentation]
+/// this is a lightweight record built from a frontmatter probe only — no full
+/// parse — so scanning large folder trees stays cheap.
+class ScanHit {
+  final String path;
+  final String fileName;
+
+  /// Title from the frontmatter, or null when the deck omits one.
+  final String? title;
+
+  /// The declared `theme:` value, or null when absent.
+  final String? theme;
+
+  /// True when [theme] is the OciDeck theme (sorted/marked first in the UI).
+  final bool isOcideckTheme;
+
+  const ScanHit({
+    required this.path,
+    required this.fileName,
+    required this.title,
+    required this.theme,
+    required this.isOcideckTheme,
+  });
+
+  /// A display label: the frontmatter title, falling back to the file name
+  /// without its extension.
+  String get displayTitle {
+    final t = title?.trim();
+    if (t != null && t.isNotEmpty) return t;
+    return p.basenameWithoutExtension(fileName);
+  }
 }
 
 class _LogoProjectAsset {
@@ -161,6 +195,168 @@ class FileService {
           a.deck.title.toLowerCase().compareTo(b.deck.title.toLowerCase()),
     );
     return results;
+  }
+
+  /// Directories the broad scan never descends into, on top of [_ignoredDirs]:
+  /// large system trees that can't hold user presentations.
+  static const _scanDenylistDirs = {
+    'Library',
+    'Applications',
+    'System',
+    'Pods',
+    'Caches',
+  };
+
+  /// Only the first slice of each `.md` is read for the frontmatter probe; the
+  /// header always lives at the very top, so 64 KiB is plenty.
+  static const _scanHeadBytes = 64 * 1024;
+
+  /// Scan a fixed set of well-known locations (parent folders of [recentFiles],
+  /// plus the user's Documents/Desktop/Downloads/iCloud and configured home
+  /// directory) for Marp markdown presentations, using a cheap frontmatter
+  /// probe rather than a full parse.
+  ///
+  /// Only files declaring `marp: true` are returned; OciDeck-themed decks are
+  /// flagged via [ScanHit.isOcideckTheme] and sorted first. The walk is bounded
+  /// by [maxDepth], [maxFilesVisited] and [maxMatches] so a pathological tree
+  /// can't hang the UI; [onProgress] reports the current folder and match count,
+  /// and [isCancelled] lets the caller abort.
+  Future<List<ScanHit>> scanKnownLocations({
+    List<String> recentFiles = const [],
+    void Function(String phase, int found)? onProgress,
+    bool Function()? isCancelled,
+    int maxDepth = 8,
+    int maxFilesVisited = 20000,
+    int maxMatches = 2000,
+  }) async {
+    final roots = _knownScanRoots(recentFiles);
+    final hits = <ScanHit>[];
+    final seen = <String>{};
+    var visited = 0;
+    var capped = false;
+    bool cancelled() => isCancelled?.call() ?? false;
+
+    Future<void> walk(Directory dir, int depth) async {
+      if (cancelled() || hits.length >= maxMatches || capped) return;
+      onProgress?.call(p.basename(dir.path), hits.length);
+      List<FileSystemEntity> entries;
+      try {
+        entries = await dir.list(followLinks: false).toList();
+      } catch (e) {
+        logWarning('FileService.scanKnownLocations: directory not readable', e);
+        return;
+      }
+      for (final entity in entries) {
+        if (cancelled() || hits.length >= maxMatches) return;
+        if (entity is File) {
+          if (!entity.path.toLowerCase().endsWith('.md')) continue;
+          final normPath = p.normalize(entity.path);
+          if (!seen.add(normPath)) continue;
+          if (++visited > maxFilesVisited) {
+            capped = true;
+            logWarning(
+              'FileService.scanKnownLocations: visited cap reached '
+              '($maxFilesVisited files) — results truncated',
+            );
+            return;
+          }
+          final hit = await _probeMarkdown(entity);
+          if (hit != null) hits.add(hit);
+        } else if (entity is Directory && depth < maxDepth) {
+          final name = p.basename(entity.path);
+          if (name.startsWith('.') ||
+              _ignoredDirs.contains(name) ||
+              _scanDenylistDirs.contains(name)) {
+            continue;
+          }
+          await walk(entity, depth + 1);
+        }
+      }
+    }
+
+    for (final root in roots) {
+      if (cancelled() || hits.length >= maxMatches || capped) break;
+      final dir = Directory(root);
+      if (!await dir.exists()) continue;
+      await walk(dir, 0);
+    }
+
+    // OciDeck-themed decks first, then by display title (case-insensitive).
+    hits.sort((a, b) {
+      if (a.isOcideckTheme != b.isOcideckTheme) {
+        return a.isOcideckTheme ? -1 : 1;
+      }
+      return a.displayTitle.toLowerCase().compareTo(
+        b.displayTitle.toLowerCase(),
+      );
+    });
+    return hits;
+  }
+
+  /// Frontmatter probe for one file: reads at most [_scanHeadBytes], and returns
+  /// a [ScanHit] only when the file declares `marp: true`. Oversized or
+  /// unreadable files are skipped (logged, never thrown).
+  Future<ScanHit?> _probeMarkdown(File file) async {
+    try {
+      final length = await file.length();
+      if (length > maxDeckMarkdownBytes) return null;
+      final cap = length < _scanHeadBytes ? length : _scanHeadBytes;
+      final bytes = <int>[];
+      await for (final chunk in file.openRead(0, cap)) {
+        bytes.addAll(chunk);
+      }
+      // Tolerate malformed bytes: the header is ASCII/UTF-8, and a bad tail
+      // byte from the cut-off point must not drop the whole probe.
+      final head = utf8.decode(bytes, allowMalformed: true);
+      final fm = _md.sniffFrontmatter(head);
+      if (!fm.marp) return null;
+      final theme = fm.theme?.trim();
+      return ScanHit(
+        path: file.path,
+        fileName: p.basename(file.path),
+        title: fm.title,
+        theme: (theme == null || theme.isEmpty) ? null : theme,
+        isOcideckTheme: theme == 'ocideck',
+      );
+    } catch (e) {
+      logWarning('FileService.scanKnownLocations: file probe failed', e);
+      return null;
+    }
+  }
+
+  /// The deduplicated set of root folders the broad scan walks. Parent folders
+  /// of recent files plus the standard user locations; a root nested inside
+  /// another is dropped so the tree isn't walked twice.
+  List<String> _knownScanRoots(List<String> recentFiles) {
+    final home = _homeDirectory() ?? Platform.environment['HOME'];
+    final candidates = <String>[];
+    if (home != null && home.trim().isNotEmpty) {
+      for (final sub in const [
+        'Documents',
+        'Desktop',
+        'Downloads',
+        'Library/Mobile Documents/com~apple~CloudDocs',
+      ]) {
+        candidates.add(p.join(home, sub));
+      }
+    }
+    for (final f in recentFiles) {
+      if (f.trim().isEmpty) continue;
+      candidates.add(p.dirname(f));
+    }
+
+    // Normalise, dedupe, then drop any root that lives inside another root.
+    final normalized = <String>{
+      for (final c in candidates) p.normalize(c),
+    }.toList();
+    final roots = <String>[];
+    for (final c in normalized) {
+      final nested = normalized.any(
+        (other) => other != c && p.isWithin(other, c),
+      );
+      if (!nested) roots.add(c);
+    }
+    return roots;
   }
 
   Future<String?> pickMarkdownFile({String? initialDirectory}) async {
@@ -649,52 +845,12 @@ class FileService {
   /// platte markdown wordt als losse `.md` opgeslagen. Geeft het pad naar het
   /// markdown-bestand terug.
 
-  /// Hosts an import must never reach (loopback, private and link-local ranges)
-  /// so a deck URL can't be used to probe the local machine or intranet (SSRF).
-  static bool _isBlockedHost(String host) {
-    final h = host.toLowerCase();
-    if (h.isEmpty || h == 'localhost' || h.endsWith('.localhost')) return true;
-    final addr = InternetAddress.tryParse(host);
-    if (addr == null) return false; // a hostname; resolved in _resolvesToBlocked
-    return _isBlockedAddress(addr);
-  }
+  /// SSRF host/address guards live in [NetGuard] so the URL-import path and the
+  /// live remote-media path share exactly the same rules.
+  static bool _isBlockedHost(String host) => NetGuard.isBlockedHost(host);
 
-  /// Classifies a resolved IP as loopback/private/link-local/etc.
-  static bool _isBlockedAddress(InternetAddress addr) {
-    if (addr.isLoopback || addr.isLinkLocal || addr.isMulticast) return true;
-    final raw = addr.rawAddress;
-    if (addr.type == InternetAddressType.IPv4) {
-      final a = raw[0], b = raw[1];
-      if (a == 0 || a == 10 || a == 127) {
-        return true; // this-host/private/loopback
-      }
-      if (a == 172 && b >= 16 && b <= 31) return true; // 172.16.0.0/12
-      if (a == 192 && b == 168) return true; // 192.168.0.0/16
-      if (a == 169 && b == 254) return true; // 169.254.0.0/16 link-local
-    } else if ((raw[0] & 0xfe) == 0xfc) {
-      return true; // fc00::/7 unique-local
-    }
-    return false;
-  }
-
-  /// Resolves [host] to validated addresses, or null when the host (or ANY of
-  /// its addresses) is internal or it can't be resolved — closes the SSRF hole
-  /// where `attacker.com` resolves to 127.0.0.1 / 169.254.169.254 / an RFC1918
-  /// host. The caller pins the connection to the returned address so a DNS
-  /// rebind between this check and connect can't redirect the socket internally.
-  static Future<List<InternetAddress>?> _safeResolve(String host) async {
-    final literal = InternetAddress.tryParse(host);
-    if (literal != null) {
-      return _isBlockedAddress(literal) ? null : [literal];
-    }
-    try {
-      final addrs = await InternetAddress.lookup(host);
-      if (addrs.isEmpty || addrs.any(_isBlockedAddress)) return null;
-      return addrs;
-    } catch (_) {
-      return null; // can't resolve safely → refuse
-    }
-  }
+  static Future<List<InternetAddress>?> _safeResolve(String host) =>
+      NetGuard.safeResolve(host);
 
   Future<String?> importFromUrl(String url, String destParentDir) async {
     final uri = Uri.tryParse(url.trim());

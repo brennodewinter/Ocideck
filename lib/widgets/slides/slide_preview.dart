@@ -11,7 +11,9 @@ import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:highlight/highlight.dart' show highlight;
 import 'package:highlight/languages/all.dart' show allLanguages;
 import 'package:video_player/video_player.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'mermaid_diagram.dart';
+import 'video_playhead_bus.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
 import '../../models/cockpit.dart';
@@ -20,6 +22,7 @@ import '../../models/question.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../models/timeline.dart';
+import '../../models/video_source.dart';
 import '../../theme/app_theme.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../services/rich_text_layout.dart';
@@ -56,9 +59,15 @@ TextStyle _applyFont(String font, TextStyle base) {
 class _SlideLinkScope extends InheritedWidget {
   final void Function(String url)? onTapLink;
   final bool hasBottomTlp;
+
+  /// Of online media (URL-afbeeldingen/-video's en embeds) live geladen mag
+  /// worden. Standaard uit; de media-renderers tonen anders een placeholder met
+  /// de URL i.p.v. naar buiten te bellen.
+  final bool allowRemoteMedia;
   const _SlideLinkScope({
     required this.onTapLink,
     this.hasBottomTlp = false,
+    this.allowRemoteMedia = false,
     required super.child,
   });
 
@@ -75,10 +84,18 @@ class _SlideLinkScope extends InheritedWidget {
         false;
   }
 
+  static bool allowRemoteMediaOf(BuildContext context) {
+    return context
+            .dependOnInheritedWidgetOfExactType<_SlideLinkScope>()
+            ?.allowRemoteMedia ??
+        false;
+  }
+
   @override
   bool updateShouldNotify(_SlideLinkScope oldWidget) =>
       oldWidget.onTapLink != onTapLink ||
-      oldWidget.hasBottomTlp != hasBottomTlp;
+      oldWidget.hasBottomTlp != hasBottomTlp ||
+      oldWidget.allowRemoteMedia != allowRemoteMedia;
 }
 
 /// Tekst met inline-markdown (**vet**, *cursief*, `code`, ~~door~~, [link](url)).
@@ -185,6 +202,12 @@ class SlidePreviewWidget extends StatelessWidget {
   /// staat dit uit (handmatig starten); in de presenter aan.
   final bool autoplayMedia;
 
+  /// Of online media (URL-afbeeldingen/-video's en YouTube/Vimeo-embeds) live
+  /// geladen mag worden. Komt uit de instelling `allowRemoteMedia` (fail-closed:
+  /// standaard uit). Staat dit uit, dan tonen de renderers een placeholder met
+  /// de URL i.p.v. naar buiten te bellen.
+  final bool allowRemoteMedia;
+
   /// Vergroot grafieklabels voor weergave op afstand in presentatiemodus.
   final bool presentationMode;
 
@@ -247,6 +270,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.organization = '',
     this.enableMedia = false,
     this.autoplayMedia = false,
+    this.allowRemoteMedia = false,
     this.presentationMode = false,
     this.onChecklistItemToggle,
     this.tableEditMode = false,
@@ -305,6 +329,7 @@ class SlidePreviewWidget extends StatelessWidget {
               child: _SlideLinkScope(
                 onTapLink: onLinkTap,
                 hasBottomTlp: hasBottomRightTlp,
+                allowRemoteMedia: allowRemoteMedia,
                 child: _buildSlide(),
               ),
             ),
@@ -338,7 +363,7 @@ class SlidePreviewWidget extends StatelessWidget {
               fit: StackFit.expand,
               children: [
                 _buildContent(w),
-                // Decoratieve overlays (watermerk, footer, TLP, logo, banner)
+                // Decoratieve overlays (watermerk, footer, TLP, logo)
                 // mogen geen muis/tikken afvangen: anders blokkeren ze de hover
                 // van de media-knoppen eronder en het tikken om door te
                 // bladeren. Eén gedeelde IgnorePointer i.p.v. per overlay, zodat
@@ -380,8 +405,6 @@ class SlidePreviewWidget extends StatelessWidget {
                           position: themeProfile.logoPosition,
                           size: w * (themeProfile.logoSize / 1280),
                         ),
-                      if (markingTlp != TlpLevel.none)
-                        _ClassificationBanner(tlp: markingTlp, w: w),
                     ],
                   ),
                 ),
@@ -479,13 +502,28 @@ class SlidePreviewWidget extends StatelessWidget {
           profile: themeProfile,
         );
       case SlideType.video:
+        final source = VideoSource.parse(slide.videoPath);
+        if (source.isEmbed) {
+          return _VideoEmbedPreview(
+            slide: slide,
+            source: source,
+            w: w,
+            font: fontFamily,
+            profile: themeProfile,
+            autoplay: autoplayMedia && slide.videoAutoplay,
+            allowRemoteMedia: allowRemoteMedia,
+            onComplete: onVideoComplete,
+          );
+        }
         return _VideoPreview(
           slide: slide,
+          source: source,
           w: w,
           projectPath: projectPath,
           font: fontFamily,
           profile: themeProfile,
           autoplay: autoplayMedia && slide.videoAutoplay,
+          allowRemoteMedia: allowRemoteMedia,
           onComplete: onVideoComplete,
         );
       case SlideType.quote:

@@ -73,6 +73,11 @@ class FullscreenPresenter extends StatefulWidget {
   final String organization;
   final bool showClassificationWatermark;
 
+  /// Of online media (URL-video's/-afbeeldingen en YouTube/Vimeo-embeds) live
+  /// geladen mag worden tijdens presenteren. Komt uit de instelling
+  /// `allowRemoteMedia` (fail-closed: standaard uit).
+  final bool allowRemoteMedia;
+
   /// Optionele doeltijd voor de aftelling/oefenklok. Null = geen aftelling.
   /// Sessie-only; live aanpasbaar in de presenter (toets K).
   final Duration? targetDuration;
@@ -103,6 +108,7 @@ class FullscreenPresenter extends StatefulWidget {
     this.tlp = TlpLevel.none,
     this.organization = '',
     this.showClassificationWatermark = false,
+    this.allowRemoteMedia = false,
     this.targetDuration,
     this.audience,
     this.initialAnnotations = const {},
@@ -125,6 +131,7 @@ class FullscreenPresenter extends StatefulWidget {
     TlpLevel tlp = TlpLevel.none,
     String organization = '',
     bool showClassificationWatermark = false,
+    bool allowRemoteMedia = false,
     Duration? targetDuration,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
@@ -158,6 +165,7 @@ class FullscreenPresenter extends StatefulWidget {
         tlp: tlp,
         organization: organization,
         showClassificationWatermark: showClassificationWatermark,
+        allowRemoteMedia: allowRemoteMedia,
         targetDuration: targetDuration,
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
@@ -176,6 +184,7 @@ class FullscreenPresenter extends StatefulWidget {
         tlp: tlp,
         organization: organization,
         showClassificationWatermark: showClassificationWatermark,
+        allowRemoteMedia: allowRemoteMedia,
         targetDuration: targetDuration,
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
@@ -196,6 +205,7 @@ class FullscreenPresenter extends StatefulWidget {
     TlpLevel tlp = TlpLevel.none,
     String organization = '',
     bool showClassificationWatermark = false,
+    bool allowRemoteMedia = false,
     Duration? targetDuration,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
@@ -221,6 +231,7 @@ class FullscreenPresenter extends StatefulWidget {
               tlp: tlp,
               organization: organization,
               showClassificationWatermark: showClassificationWatermark,
+              allowRemoteMedia: allowRemoteMedia,
               targetDuration: targetDuration,
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
@@ -253,6 +264,7 @@ class FullscreenPresenter extends StatefulWidget {
     TlpLevel tlp = TlpLevel.none,
     String organization = '',
     bool showClassificationWatermark = false,
+    bool allowRemoteMedia = false,
     Duration? targetDuration,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
@@ -290,6 +302,7 @@ class FullscreenPresenter extends StatefulWidget {
       'index': initialIndex,
       'ink': inkByIndex,
       'classificationWatermarkEnabled': showClassificationWatermark,
+      'allowRemoteMedia': allowRemoteMedia,
       // The cockpit colour scheme is styling, so it travels with the transient
       // beamer payload (like the inlined style profile) rather than the deck.
       'cockpitColorScheme': cockpitColorScheme.toJson(),
@@ -328,6 +341,7 @@ class FullscreenPresenter extends StatefulWidget {
           tlp: tlp,
           organization: organization,
           showClassificationWatermark: showClassificationWatermark,
+          allowRemoteMedia: allowRemoteMedia,
           annotations: annotations,
           onAnnotationsChanged: onAnnotationsChanged,
           onSlideChanged: onSlideChanged,
@@ -355,6 +369,7 @@ class FullscreenPresenter extends StatefulWidget {
               tlp: tlp,
               organization: organization,
               showClassificationWatermark: showClassificationWatermark,
+              allowRemoteMedia: allowRemoteMedia,
               audience: audienceHandle,
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
@@ -1316,7 +1331,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     if (!mounted) return;
     final logo = widget.themeProfile.logoPath;
     if (logo != null && logo.isNotEmpty) {
-      _precachePath(logo);
+      _precachePath(logo, trusted: true);
     }
     // Current first, then the likely next/previous targets.
     for (final offset in const [0, 1, -1, 2]) {
@@ -1328,8 +1343,10 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     }
   }
 
-  void _precachePath(String path) {
-    final resolved = resolveSlideAssetPath(path, widget.projectPath);
+  void _precachePath(String path, {bool trusted = false}) {
+    final resolved = trusted
+        ? resolveTrustedAssetPath(path, widget.projectPath)
+        : resolveSlideAssetPath(path, widget.projectPath);
     if (resolved == null) return;
     precacheImage(FileImage(File(resolved)), context, onError: (_, _) {});
   }
@@ -2681,6 +2698,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                   // anders zou het geluid dubbel klinken.
                   enableMedia: !_dual,
                   autoplayMedia: !_dual,
+                  allowRemoteMedia: widget.allowRemoteMedia,
                   onAudioComplete: () => _onMediaCompleted(kind: 'audio'),
                   onVideoComplete: () => _onMediaCompleted(kind: 'video'),
                 ),

@@ -495,6 +495,12 @@ class AppSettings {
   /// Blokkeer export volledig wanneer de kwaliteitscontrole fouten vindt.
   final bool qualityBlockExportOnErrors;
 
+  /// Of online media (afbeeldingen/video's via URL en YouTube/Vimeo-embeds)
+  /// live mag worden geladen. Standaard uit (fail-closed): een geopende deck
+  /// van een ander kan dan niet ongevraagd naar buiten "bellen" of pixels van
+  /// derden laden. De gebruiker zet dit bewust aan in de instellingen.
+  final bool allowRemoteMedia;
+
   const AppSettings({
     this.languageCode = 'nl',
     this.homeDirectory,
@@ -513,6 +519,7 @@ class AppSettings {
     this.uiTextScale = 1.0,
     this.qualityWarningsOnExport = true,
     this.qualityBlockExportOnErrors = false,
+    this.allowRemoteMedia = false,
   });
 
   ThemeProfile get themeProfile {
@@ -581,6 +588,7 @@ class AppSettings {
     double? uiTextScale,
     bool? qualityWarningsOnExport,
     bool? qualityBlockExportOnErrors,
+    bool? allowRemoteMedia,
     bool clearHomeDirectory = false,
     bool clearExportDirectory = false,
     bool clearMaxReleaseExportTlp = false,
@@ -634,6 +642,7 @@ class AppSettings {
           qualityWarningsOnExport ?? this.qualityWarningsOnExport,
       qualityBlockExportOnErrors:
           qualityBlockExportOnErrors ?? this.qualityBlockExportOnErrors,
+      allowRemoteMedia: allowRemoteMedia ?? this.allowRemoteMedia,
     );
   }
 }

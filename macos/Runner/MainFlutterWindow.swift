@@ -16,6 +16,10 @@ class MainFlutterWindow: NSWindow {
 
     RegisterGeneratedPlugins(registry: flutterViewController)
 
+    // Bridge macOS "open document" events to Flutter. Registered only on the
+    // main window's engine, not on audience/beamer sub-windows.
+    OpenFileHandler.shared.register(messenger: flutterViewController.engine.binaryMessenger)
+
     // Register the app's plugins in every sub-window (e.g. the audience/beamer
     // window) too, so video_player, image loading, etc. work there as well.
     FlutterMultiWindowPlugin.setOnWindowCreatedCallback { controller in

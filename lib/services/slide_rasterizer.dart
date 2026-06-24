@@ -54,7 +54,12 @@ class SlideRasterizer {
     imageCache.maximumSize = (slides.length * 4) + 64;
     imageCache.maximumSizeBytes = 1024 * 1024 * 1024; // 1 GB
 
-    final logo = _resolve(themeProfile.logoPath ?? '', projectPath);
+    // The logo is trusted style-profile config (not deck content), so it may
+    // live outside the project — unlike slide images, which stay contained.
+    final logo = resolveTrustedAssetPath(
+      themeProfile.logoPath ?? '',
+      projectPath,
+    );
     final allPaths = <String>{
       ?logo,
       for (final slide in slides) ...[

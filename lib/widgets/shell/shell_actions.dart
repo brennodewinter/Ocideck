@@ -21,6 +21,18 @@ Future<void> _openWithSearch(
       .openFileByPath(result.path, selectIndex: result.slideIndex);
 }
 
+/// Scan a fixed set of well-known folders for Marp presentations and open the
+/// chosen one. Complements [_openWithSearch], which scans a single folder.
+Future<void> _scanLibrary(BuildContext context, WidgetRef ref) async {
+  final path = await ScanLibraryDialog.show(
+    context,
+    fileService: ref.read(fileServiceProvider),
+    recentFiles: ref.read(settingsProvider).recentFiles,
+  );
+  if (path == null) return;
+  await ref.read(tabsProvider.notifier).openFileByPath(path);
+}
+
 /// Vraag een URL op om een presentatie (pakket of markdown) op te halen.
 Future<String?> _showUrlDialog(BuildContext context) {
   return showDialog<String>(

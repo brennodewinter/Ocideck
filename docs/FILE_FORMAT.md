@@ -196,7 +196,7 @@ The first class determines (together with the content) the **slide type**:
 | Two bullet columns | `two-bullets` | — |
 | Bullets + image | `split` | bullets **and** image present |
 | Quote | `quote` | a `>` line is present |
-| Video | `video` | a `<video>` tag is present |
+| Video | `video` | a `<video>` tag or an `<iframe class="ocideck-embed">` is present |
 | Table | `table` | only a table, no heading/bullets/text |
 | Source code | `code` | — |
 | Chart | `chart` | — |
@@ -308,11 +308,44 @@ and appears as `<h3>` above the column:
 ```
 
 **Video** (`video`)
+
+The source is a local file, an online `http(s)` URL to a direct video file
+(`.mp4`/`.mov`/…), or a YouTube/Vimeo link. Local and remote files use a
+`<video>` tag; YouTube/Vimeo use an `<iframe class="ocideck-embed">`.
+
 ```markdown
 # Optional heading
 
 <video src="media/clip.mp4" controls autoplay muted loop style="..."></video>
 ```
+
+Online file by URL:
+```markdown
+<video src="https://example.com/clip.mp4" controls style="..."></video>
+```
+
+YouTube/Vimeo embed (`data-src` keeps the original URL; the player `src` is the
+embeddable form):
+```markdown
+<iframe class="ocideck-embed" data-src="https://youtu.be/ID" src="https://www.youtube-nocookie.com/embed/ID?..." style="width:100%; aspect-ratio:16/9; border:0;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+```
+
+**Splitting a video across slides (trim window).** A video can be watched in
+parts: each slide plays one segment `[start, end]` of the same source. The trim
+window is stored in seconds. For `<video>` it rides in a
+[media fragment](https://www.w3.org/TR/media-frags/) on the `src`
+(`#t=START,END`, or `#t=START` when there is no end). For embeds it rides in
+`data-start`/`data-end` attributes (seconds). `start = 0` plays from the
+beginning; a missing end plays to the natural end.
+
+```markdown
+<video src="media/clip.mp4#t=5,12" controls style="..."></video>
+```
+
+> Online media (URL files and embeds) is only loaded live when the
+> **Online media** privacy setting is on (off by default). When off, the slide
+> shows a placeholder with the URL instead of fetching anything. On **export**,
+> a remote source also gets a clickable literal URL link.
 
 **Quote** (`quote`)
 ```markdown

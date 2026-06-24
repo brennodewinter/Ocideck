@@ -2549,6 +2549,43 @@ const _dutchSourceStrings = {
 
 const _dutchSourceStringAdditions = {
   'en': {
+    // Schijf-brede presentatiezoeker (bekende mappen).
+    'Zoek op deze computer': 'Search this computer',
+    'Presentaties zoeken op deze computer':
+        'Find presentations on this computer',
+    'Zoek op titel, pad of thema…': 'Search by title, path or theme…',
+    'Bekende mappen worden doorzocht…': 'Searching known folders…',
+    'gevonden': 'found',
+    'presentatie(s) gevonden': 'presentation(s) found',
+    'Geen Marp-presentaties gevonden in de bekende mappen.':
+        'No Marp presentations found in the known folders.',
+    'Geen thema': 'No theme',
+    // Markdown-syntaxcontrole: foutmeldingen kopiëren.
+    'Kopieer syntaxproblemen': 'Copy syntax issues',
+    'Syntaxproblemen gekopieerd naar klembord.':
+        'Syntax issues copied to clipboard.',
+    // Online media, video-URL's, YouTube/Vimeo-embeds en video knippen.
+    'Online media': 'Online media',
+    'Online media staat uit': 'Online media is off',
+    'Online media toestaan': 'Allow online media',
+    'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+        'Allow images and videos to load live from a URL and from YouTube/Vimeo embeds. Off by default for your privacy and security.',
+    'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+        'File path or URL (YouTube, Vimeo, .mp4 …)',
+    'Bestand kiezen': 'Choose file',
+    'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+        'Play this slide\'s segment in the preview and cut at the point where you want to split: the second part goes onto a new slide.',
+    'Begin (sec)': 'Start (sec)',
+    'Einde (sec)': 'End (sec)',
+    'einde': 'end',
+    'Knip de video op het huidige afspeelpunt':
+        'Cut the video at the current playback point',
+    'Speel de video eerst af in het voorbeeld':
+        'Play the video in the preview first',
+    'Knip hier': 'Cut here',
+    'Online': 'Online',
+    'Lokaal bestand': 'Local file',
+    'Geen video': 'No video',
     // Vraag-slides (multiple choice question).
     'Vraag (meerkeuze)': 'Question (multiple choice)',
     // Titel-contrast (slidekwaliteit).
@@ -2988,6 +3025,43 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Scatter',
   },
   'it': {
+    // Schijf-brede presentatiezoeker (bekende mappen).
+    'Zoek op deze computer': 'Cerca in questo computer',
+    'Presentaties zoeken op deze computer':
+        'Trova presentazioni su questo computer',
+    'Zoek op titel, pad of thema…': 'Cerca per titolo, percorso o tema…',
+    'Bekende mappen worden doorzocht…': 'Ricerca nelle cartelle note…',
+    'gevonden': 'trovate',
+    'presentatie(s) gevonden': 'presentazione/i trovata/e',
+    'Geen Marp-presentaties gevonden in de bekende mappen.':
+        'Nessuna presentazione Marp trovata nelle cartelle note.',
+    'Geen thema': 'Nessun tema',
+    // Markdown-syntaxcontrole: foutmeldingen kopiëren.
+    'Kopieer syntaxproblemen': 'Copia i problemi di sintassi',
+    'Syntaxproblemen gekopieerd naar klembord.':
+        'Problemi di sintassi copiati negli appunti.',
+    // Online media, video-URL's, YouTube/Vimeo-embeds en video knippen.
+    'Online media': 'Media online',
+    'Online media staat uit': 'I media online sono disattivati',
+    'Online media toestaan': 'Consenti media online',
+    'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+        'Consenti il caricamento in tempo reale di immagini e video da un URL e da embed di YouTube/Vimeo. Disattivato per impostazione predefinita per la tua privacy e sicurezza.',
+    'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+        'Percorso file o URL (YouTube, Vimeo, .mp4 …)',
+    'Bestand kiezen': 'Scegli file',
+    'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+        'Riproduci il segmento di questa slide nell\'anteprima e taglia nel punto in cui vuoi dividere: la seconda parte va su una nuova slide.',
+    'Begin (sec)': 'Inizio (sec)',
+    'Einde (sec)': 'Fine (sec)',
+    'einde': 'fine',
+    'Knip de video op het huidige afspeelpunt':
+        'Taglia il video nel punto di riproduzione attuale',
+    'Speel de video eerst af in het voorbeeld':
+        'Riproduci prima il video nell\'anteprima',
+    'Knip hier': 'Taglia qui',
+    'Online': 'Online',
+    'Lokaal bestand': 'File locale',
+    'Geen video': 'Nessun video',
     // Vraag-slides (multiple choice question).
     'Vraag (meerkeuze)': 'Domanda (scelta multipla)',
     // Titel-contrast (slidekwaliteit).
@@ -3606,6 +3680,43 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Dispersione',
   },
   'de': {
+    // Schijf-brede presentatiezoeker (bekende mappen).
+    'Zoek op deze computer': 'Diesen Computer durchsuchen',
+    'Presentaties zoeken op deze computer':
+        'Präsentationen auf diesem Computer finden',
+    'Zoek op titel, pad of thema…': 'Nach Titel, Pfad oder Thema suchen…',
+    'Bekende mappen worden doorzocht…': 'Bekannte Ordner werden durchsucht…',
+    'gevonden': 'gefunden',
+    'presentatie(s) gevonden': 'Präsentation(en) gefunden',
+    'Geen Marp-presentaties gevonden in de bekende mappen.':
+        'Keine Marp-Präsentationen in den bekannten Ordnern gefunden.',
+    'Geen thema': 'Kein Thema',
+    // Markdown-syntaxcontrole: foutmeldingen kopiëren.
+    'Kopieer syntaxproblemen': 'Syntaxprobleme kopieren',
+    'Syntaxproblemen gekopieerd naar klembord.':
+        'Syntaxprobleme in die Zwischenablage kopiert.',
+    // Online media, video-URL's, YouTube/Vimeo-embeds en video knippen.
+    'Online media': 'Online-Medien',
+    'Online media staat uit': 'Online-Medien sind aus',
+    'Online media toestaan': 'Online-Medien zulassen',
+    'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+        'Erlaube das Live-Laden von Bildern und Videos über eine URL und von YouTube/Vimeo-Embeds. Standardmäßig aus – zum Schutz deiner Privatsphäre und Sicherheit.',
+    'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+        'Dateipfad oder URL (YouTube, Vimeo, .mp4 …)',
+    'Bestand kiezen': 'Datei wählen',
+    'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+        'Spiele das Segment dieser Folie in der Vorschau ab und schneide an der Stelle, an der du teilen möchtest: Der zweite Teil kommt auf eine neue Folie.',
+    'Begin (sec)': 'Start (Sek.)',
+    'Einde (sec)': 'Ende (Sek.)',
+    'einde': 'Ende',
+    'Knip de video op het huidige afspeelpunt':
+        'Schneide das Video an der aktuellen Wiedergabeposition',
+    'Speel de video eerst af in het voorbeeld':
+        'Spiele das Video zuerst in der Vorschau ab',
+    'Knip hier': 'Hier schneiden',
+    'Online': 'Online',
+    'Lokaal bestand': 'Lokale Datei',
+    'Geen video': 'Kein Video',
     // Vraag-slides (multiple choice question).
     'Vraag (meerkeuze)': 'Frage (Multiple Choice)',
     // Titel-contrast (slidekwaliteit).
@@ -4223,6 +4334,44 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Streudiagramm',
   },
   'fr': {
+    // Schijf-brede presentatiezoeker (bekende mappen).
+    'Zoek op deze computer': 'Rechercher sur cet ordinateur',
+    'Presentaties zoeken op deze computer':
+        'Trouver des présentations sur cet ordinateur',
+    'Zoek op titel, pad of thema…': 'Rechercher par titre, chemin ou thème…',
+    'Bekende mappen worden doorzocht…':
+        'Recherche dans les dossiers connus…',
+    'gevonden': 'trouvée(s)',
+    'presentatie(s) gevonden': 'présentation(s) trouvée(s)',
+    'Geen Marp-presentaties gevonden in de bekende mappen.':
+        'Aucune présentation Marp trouvée dans les dossiers connus.',
+    'Geen thema': 'Aucun thème',
+    // Markdown-syntaxcontrole: foutmeldingen kopiëren.
+    'Kopieer syntaxproblemen': 'Copier les problèmes de syntaxe',
+    'Syntaxproblemen gekopieerd naar klembord.':
+        'Problèmes de syntaxe copiés dans le presse-papiers.',
+    // Online media, video-URL's, YouTube/Vimeo-embeds en video knippen.
+    'Online media': 'Médias en ligne',
+    'Online media staat uit': 'Les médias en ligne sont désactivés',
+    'Online media toestaan': 'Autoriser les médias en ligne',
+    'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+        'Autorise le chargement en direct d\'images et de vidéos depuis une URL et depuis des intégrations YouTube/Vimeo. Désactivé par défaut pour ta confidentialité et ta sécurité.',
+    'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+        'Chemin du fichier ou URL (YouTube, Vimeo, .mp4 …)',
+    'Bestand kiezen': 'Choisir un fichier',
+    'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+        'Lis le segment de cette diapositive dans l\'aperçu et coupe à l\'endroit où tu veux scinder : la seconde partie passe sur une nouvelle diapositive.',
+    'Begin (sec)': 'Début (s)',
+    'Einde (sec)': 'Fin (s)',
+    'einde': 'fin',
+    'Knip de video op het huidige afspeelpunt':
+        'Coupe la vidéo au point de lecture actuel',
+    'Speel de video eerst af in het voorbeeld':
+        'Lis d\'abord la vidéo dans l\'aperçu',
+    'Knip hier': 'Couper ici',
+    'Online': 'En ligne',
+    'Lokaal bestand': 'Fichier local',
+    'Geen video': 'Aucune vidéo',
     // Vraag-slides (multiple choice question).
     'Vraag (meerkeuze)': 'Question (choix multiple)',
     // Titel-contrast (slidekwaliteit).
@@ -4845,6 +4994,43 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Nuage de points',
   },
   'es': {
+    // Schijf-brede presentatiezoeker (bekende mappen).
+    'Zoek op deze computer': 'Buscar en este equipo',
+    'Presentaties zoeken op deze computer':
+        'Buscar presentaciones en este equipo',
+    'Zoek op titel, pad of thema…': 'Buscar por título, ruta o tema…',
+    'Bekende mappen worden doorzocht…': 'Buscando en las carpetas conocidas…',
+    'gevonden': 'encontradas',
+    'presentatie(s) gevonden': 'presentación(es) encontrada(s)',
+    'Geen Marp-presentaties gevonden in de bekende mappen.':
+        'No se encontraron presentaciones Marp en las carpetas conocidas.',
+    'Geen thema': 'Sin tema',
+    // Markdown-syntaxcontrole: foutmeldingen kopiëren.
+    'Kopieer syntaxproblemen': 'Copiar problemas de sintaxis',
+    'Syntaxproblemen gekopieerd naar klembord.':
+        'Problemas de sintaxis copiados al portapapeles.',
+    // Online media, video-URL's, YouTube/Vimeo-embeds en video knippen.
+    'Online media': 'Medios en línea',
+    'Online media staat uit': 'Los medios en línea están desactivados',
+    'Online media toestaan': 'Permitir medios en línea',
+    'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+        'Permite cargar imágenes y vídeos en directo desde una URL y desde incrustaciones de YouTube/Vimeo. Desactivado por defecto por tu privacidad y seguridad.',
+    'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+        'Ruta de archivo o URL (YouTube, Vimeo, .mp4 …)',
+    'Bestand kiezen': 'Elegir archivo',
+    'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+        'Reproduce el segmento de esta diapositiva en la vista previa y corta en el punto donde quieras dividir: la segunda parte va a una diapositiva nueva.',
+    'Begin (sec)': 'Inicio (s)',
+    'Einde (sec)': 'Fin (s)',
+    'einde': 'fin',
+    'Knip de video op het huidige afspeelpunt':
+        'Corta el vídeo en el punto de reproducción actual',
+    'Speel de video eerst af in het voorbeeld':
+        'Reproduce primero el vídeo en la vista previa',
+    'Knip hier': 'Cortar aquí',
+    'Online': 'En línea',
+    'Lokaal bestand': 'Archivo local',
+    'Geen video': 'Sin vídeo',
     // Vraag-slides (multiple choice question).
     'Vraag (meerkeuze)': 'Pregunta (opción múltiple)',
     // Titel-contrast (slidekwaliteit).
@@ -5465,6 +5651,43 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Dispersión',
   },
   'fy': {
+    // Schijf-brede presentatiezoeker (bekende mappen).
+    'Zoek op deze computer': 'Sykje op dizze kompjûter',
+    'Presentaties zoeken op deze computer':
+        'Presintaasjes op dizze kompjûter sykje',
+    'Zoek op titel, pad of thema…': 'Sykje op titel, paad of tema…',
+    'Bekende mappen worden doorzocht…': 'Bekende mappen wurde trochsocht…',
+    'gevonden': 'fûn',
+    'presentatie(s) gevonden': 'presintaasje(s) fûn',
+    'Geen Marp-presentaties gevonden in de bekende mappen.':
+        'Gjin Marp-presintaasjes fûn yn de bekende mappen.',
+    'Geen thema': 'Gjin tema',
+    // Markdown-syntaxcontrole: foutmeldingen kopiëren.
+    'Kopieer syntaxproblemen': 'Syntaksisproblemen kopiearje',
+    'Syntaxproblemen gekopieerd naar klembord.':
+        'Syntaksisproblemen nei it klamboerd kopiearre.',
+    // Online media, video-URL's, YouTube/Vimeo-embeds en video knippen.
+    'Online media': 'Online media',
+    'Online media staat uit': 'Online media stiet út',
+    'Online media toestaan': 'Online media tastean',
+    'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+        'Stean it live laden ta fan ôfbyldings en fideo\'s fia in URL en fan YouTube/Vimeo-embeds. Standert út foar dyn privacy en feilichheid.',
+    'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+        'Bestânspaad of URL (YouTube, Vimeo, .mp4 …)',
+    'Bestand kiezen': 'Bestân kieze',
+    'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+        'Spylje it segmint fan dizze slide ôf yn it foarbyld en knip op it punt dêr\'t je splitse wolle: it twadde diel komt op in nije slide.',
+    'Begin (sec)': 'Begjin (sek)',
+    'Einde (sec)': 'Ein (sek)',
+    'einde': 'ein',
+    'Knip de video op het huidige afspeelpunt':
+        'Knip de fideo op it hjoeddeiske ôfspylpunt',
+    'Speel de video eerst af in het voorbeeld':
+        'Spylje de fideo earst ôf yn it foarbyld',
+    'Knip hier': 'Hjir knippe',
+    'Online': 'Online',
+    'Lokaal bestand': 'Lokaal bestân',
+    'Geen video': 'Gjin fideo',
     // Vraag-slides (multiple choice question).
     'Vraag (meerkeuze)': 'Fraach (merkar)',
     // Titel-contrast (slidekwaliteit).
@@ -6068,6 +6291,43 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Sparring',
   },
   'pap': {
+    // Schijf-brede presentatiezoeker (bekende mappen).
+    'Zoek op deze computer': 'Busca den e computer aki',
+    'Presentaties zoeken op deze computer':
+        'Haña presentashon riba e computer aki',
+    'Zoek op titel, pad of thema…': 'Busca pa título, kaminda of tema…',
+    'Bekende mappen worden doorzocht…': 'Ta buscando den e mapnan konosí…',
+    'gevonden': 'hañá',
+    'presentatie(s) gevonden': 'presentashon(nan) hañá',
+    'Geen Marp-presentaties gevonden in de bekende mappen.':
+        'No a haña presentashon Marp den e mapnan konosí.',
+    'Geen thema': 'Sin tema',
+    // Markdown-syntaxcontrole: foutmeldingen kopiëren.
+    'Kopieer syntaxproblemen': 'Kopia problemanan di sintaksis',
+    'Syntaxproblemen gekopieerd naar klembord.':
+        'Problemanan di sintaksis kopiá pa klembord.',
+    // Online media, video-URL's, YouTube/Vimeo-embeds en video knippen.
+    'Online media': 'Media online',
+    'Online media staat uit': 'Media online ta paga',
+    'Online media toestaan': 'Permití media online',
+    'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+        'Permití karga di imagen i video en bivo for di un URL i for di embed di YouTube/Vimeo. Paga pa default pa bo privasidat i siguridat.',
+    'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+        'Kaminda di archivo òf URL (YouTube, Vimeo, .mp4 …)',
+    'Bestand kiezen': 'Skohe archivo',
+    'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+        'Toká e segmento di e slide aki den e vista previa i kòrta na e punto kaminda bo ke parti: e di dos parti ta bai riba un slide nobo.',
+    'Begin (sec)': 'Kuminsamentu (seg)',
+    'Einde (sec)': 'Final (seg)',
+    'einde': 'final',
+    'Knip de video op het huidige afspeelpunt':
+        'Kòrta e video na e punto di reprodukshon aktual',
+    'Speel de video eerst af in het voorbeeld':
+        'Toká e video promé den e vista previa',
+    'Knip hier': 'Kòrta aki',
+    'Online': 'Online',
+    'Lokaal bestand': 'Archivo lokal',
+    'Geen video': 'Sin video',
     // Vraag-slides (multiple choice question).
     'Vraag (meerkeuze)': 'Pregunta (selekshon múltiple)',
     // Titel-contrast (slidekwaliteit).

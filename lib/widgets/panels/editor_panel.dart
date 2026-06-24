@@ -122,6 +122,11 @@ class EditorPanel extends ConsumerWidget {
                     if (first >= 0) editorNotifier.select(first);
                   },
                   nestedInScrollView: true,
+                  onSplitVideo: (atMs) {
+                    deckNotifier.splitVideoSlide(idx, atMs);
+                    // Spring naar het nieuwe vervolgdeel zodat je het meteen ziet.
+                    editorNotifier.select(idx + 1);
+                  },
                 ),
                 if (slide.type != SlideType.video) ...[
                   const Divider(height: 1),
@@ -260,6 +265,7 @@ class EditorPanel extends ConsumerWidget {
     String? captionBasePath,
     ValueChanged<List<Slide>> onAddChartVariants, {
     bool nestedInScrollView = false,
+    void Function(int atMs)? onSplitVideo,
   }) {
     switch (slide.type) {
       case SlideType.title:
@@ -329,6 +335,7 @@ class EditorPanel extends ConsumerWidget {
           imageService: imgService,
           projectPath: captionBasePath,
           nestedInScrollView: nestedInScrollView,
+          onSplit: onSplitVideo,
         );
       case SlideType.quote:
         return QuoteEditor(

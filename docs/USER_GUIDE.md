@@ -134,6 +134,24 @@ The timeline picks up the active style profile (accent colour, fonts and slide
 background), so it matches the rest of the deck. Events are stored as an ordinary
 Markdown list, so the slide stays readable and Marp-compatible in the `.md` file.
 
+### Video slides
+
+A video slide plays a clip from a **local file** or, when you enable **Online
+media** in *Settings → Privacy*, from an **online source**: paste a direct
+`http(s)` link to an `.mp4`/`.mov`, or a **YouTube/Vimeo** link to embed the
+official player. Image fields accept an online URL the same way. Online media is
+off by default for your privacy — until you turn it on, an online slide shows a
+placeholder with the URL instead of loading anything, and on export an online
+source is written as a clickable link.
+
+**Watching a video in parts (cutting).** You can split a video so you watch it in
+pieces across slides. Play the video in the preview, then click **Knip hier**
+(Cut here): the part up to that point stays on this slide, and the remainder
+becomes a **new slide** with the same source — which you can cut again. You can
+also type the start/end seconds by hand. When presenting with autoplay, each
+segment stops at its cut point and advances to the next slide. Cutting works for
+local files, online files and YouTube/Vimeo embeds.
+
 ## Image library
 
 Image fields open a library that shows every image found in the deck's

@@ -100,6 +100,21 @@ String? resolveSlideAssetPath(String path, String? projectPath) {
   return resolveProjectRelative(projectPath, path);
 }
 
+/// Resolve a TRUSTED asset path (the active style-profile logo) for display.
+///
+/// Unlike [resolveSlideAssetPath], an absolute path is allowed even when it
+/// lies outside [projectPath]. The logo comes from the user's style profile
+/// (app configuration the app forces onto every opened deck), not from the
+/// deck markdown, so the project-containment guard — which exists to stop an
+/// untrusted deck from reading arbitrary files — must not apply to it. A
+/// relative path still resolves inside the project (the profile loader has
+/// already made a found relative logo absolute via the home fallback).
+String? resolveTrustedAssetPath(String path, String? projectPath) {
+  if (path.trim().isEmpty) return null;
+  if (p.isAbsolute(path)) return p.normalize(path);
+  return resolveProjectRelative(projectPath, path);
+}
+
 /// Resolve an image path for editor/carousel use (may join relative paths).
 String? resolveEditorAssetPath(String path, String? basePath) {
   if (path.trim().isEmpty) return null;

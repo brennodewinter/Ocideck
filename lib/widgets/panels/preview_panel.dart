@@ -318,6 +318,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                             // elke slide-wissel).
                             enableMedia: true,
                             autoplayMedia: false,
+                            allowRemoteMedia: settings.allowRemoteMedia,
                           ),
                         ),
                       ),
