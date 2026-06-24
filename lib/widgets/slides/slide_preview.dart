@@ -338,36 +338,53 @@ class SlidePreviewWidget extends StatelessWidget {
               fit: StackFit.expand,
               children: [
                 _buildContent(w),
-                if (showClassificationWatermark && markingTlp != TlpLevel.none)
-                  _ClassificationWatermark(
-                    tlp: markingTlp,
-                    w: w,
-                    organization: organization,
+                // Decoratieve overlays (watermerk, footer, TLP, logo, banner)
+                // mogen geen muis/tikken afvangen: anders blokkeren ze de hover
+                // van de media-knoppen eronder en het tikken om door te
+                // bladeren. Eén gedeelde IgnorePointer i.p.v. per overlay, zodat
+                // een nieuwe decoratieve laag dit niet opnieuw kan introduceren.
+                // De interactieve overlays staan hier bewust bóvenop.
+                IgnorePointer(
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      if (showClassificationWatermark &&
+                          markingTlp != TlpLevel.none)
+                        _ClassificationWatermark(
+                          tlp: markingTlp,
+                          w: w,
+                          organization: organization,
+                        ),
+                      _FooterOverlay(
+                        slide: slide,
+                        w: w,
+                        profile: themeProfile,
+                        slideNumber: slideNumber,
+                        slideCount: slideCount,
+                        tlp: markingTlp,
+                      ),
+                      if (markingTlp != TlpLevel.none)
+                        _TlpOverlay(
+                          tlp: markingTlp,
+                          w: w,
+                          profile: themeProfile,
+                          hasLogo:
+                              themeProfile.logoPath?.isNotEmpty == true &&
+                              slide.showLogo,
+                        ),
+                      if (themeProfile.logoPath?.isNotEmpty == true &&
+                          slide.showLogo)
+                        _LogoOverlay(
+                          logoPath: themeProfile.logoPath!,
+                          projectPath: projectPath,
+                          position: themeProfile.logoPosition,
+                          size: w * (themeProfile.logoSize / 1280),
+                        ),
+                      if (markingTlp != TlpLevel.none)
+                        _ClassificationBanner(tlp: markingTlp, w: w),
+                    ],
                   ),
-                _FooterOverlay(
-                  slide: slide,
-                  w: w,
-                  profile: themeProfile,
-                  slideNumber: slideNumber,
-                  slideCount: slideCount,
-                  tlp: markingTlp,
                 ),
-                if (markingTlp != TlpLevel.none)
-                  _TlpOverlay(
-                    tlp: markingTlp,
-                    w: w,
-                    profile: themeProfile,
-                    hasLogo:
-                        themeProfile.logoPath?.isNotEmpty == true &&
-                        slide.showLogo,
-                  ),
-                if (themeProfile.logoPath?.isNotEmpty == true && slide.showLogo)
-                  _LogoOverlay(
-                    logoPath: themeProfile.logoPath!,
-                    projectPath: projectPath,
-                    position: themeProfile.logoPosition,
-                    size: w * (themeProfile.logoSize / 1280),
-                  ),
                 if (showRichTextControls)
                   _RichTextPageControlsOverlay(
                     slide: slide,
@@ -384,8 +401,6 @@ class SlidePreviewWidget extends StatelessWidget {
                         ? () => onRichTextPageChanged!(richTextPage + 1)
                         : null,
                   ),
-                if (markingTlp != TlpLevel.none)
-                  _ClassificationBanner(tlp: markingTlp, w: w),
                 if (enableMedia && slide.audioPath.isNotEmpty)
                   _AudioPlayback(
                     audioPath: slide.audioPath,

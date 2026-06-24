@@ -2,6 +2,128 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../slide_preview.dart';
 
+/// Pauzeert een mediacontroller vóór dispose en breekt 'm dan af. Op desktop
+/// kan de audio anders blijven doorspelen nadat de controller al is opgeruimd:
+/// de dispose-melding reist los van de pauze-opdracht over het platformkanaal.
+/// Pause vóór dispose op hetzelfde kanaal garandeert dat het geluid stopt.
+/// Veilig op een niet-geïnitialiseerde controller (pause/dispose no-op'en dan).
+/// Gebruikt bij elke teardown: widget-dispose én het vervangen van een oude of
+/// achterhaalde controller in [_MediaPlaybackHost.initMedia] (snel wisselen).
+Future<void> _stopAndDispose(VideoPlayerController? controller) async {
+  if (controller == null) return;
+  await controller.pause();
+  await controller.dispose();
+}
+
+/// Gedeelde levenscyclus voor de audio- en videopreview. Beide spelen via een
+/// [VideoPlayerController] (video_player dekt op desktop ook audio) en delen
+/// exact dezelfde (her)initialisatie met generatie-bewaking tegen snelle
+/// slide-wissels, eind-detectie en teardown. De subklasse vult alleen de
+/// mediaspecifieke delen in: het pad, de autoplay-vlag, eventuele extra
+/// controller-configuratie en de eind-callback.
+///
+/// De controller, [_completed] en de generatieteller leven hier, zodat de
+/// race-bewaking (en de pauze-vóór-dispose) op één plek staat in plaats van in
+/// twee bijna-identieke kopieën.
+mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
+  VideoPlayerController? _controller;
+  bool _completed = false;
+
+  /// Bumped on every (re)init so an in-flight run that has been superseded by a
+  /// newer one (rapid slide switches) can bail and clean up its controller.
+  int _initGen = 0;
+
+  // ── Door de subklasse ingevuld ───────────────────────────────────────────
+
+  /// Resolved pad naar het mediabestand, of null als er niets te spelen is.
+  String? resolveMediaPath();
+
+  /// Of de media automatisch start.
+  bool get mediaAutoplay;
+
+  /// Of het einde van de media gemeld moet worden (voor auto-advance). Audio
+  /// meldt altijd; video alleen tijdens autoplay.
+  bool get reportsMediaCompletion => true;
+
+  /// Extra controller-instelling vóór play (bv. setLooping). Standaard niets.
+  Future<void> configureController(VideoPlayerController controller) async {}
+
+  /// Aangeroepen wanneer de media (eenmalig) is afgelopen.
+  void onMediaComplete();
+
+  /// Label voor de waarschuwing als initialisatie faalt.
+  String get mediaLogLabel;
+
+  // ── Gedeelde levenscyclus ────────────────────────────────────────────────
+
+  Future<void> initMedia() async {
+    final gen = ++_initGen;
+    // Detach and null the old controller *before* awaiting its dispose, so a
+    // concurrent initMedia sees no controller and cannot dispose it twice.
+    _controller?.removeListener(_onMediaTick);
+    final old = _controller;
+    _controller = null;
+    await _stopAndDispose(old);
+    if (gen != _initGen) return; // superseded
+    _completed = false;
+    final path = resolveMediaPath();
+    if (path == null) {
+      if (mounted) setState(() {});
+      return;
+    }
+    final controller = VideoPlayerController.file(File(path));
+    try {
+      await controller.initialize();
+      if (gen != _initGen) {
+        await _stopAndDispose(controller);
+        return;
+      }
+      controller.addListener(_onMediaTick);
+      await configureController(controller);
+      if (mediaAutoplay) await controller.play();
+    } catch (e) {
+      logWarning(mediaLogLabel, e);
+      // Keep the placeholder visible when the platform cannot open the file.
+    }
+    if (gen != _initGen) {
+      await _stopAndDispose(controller);
+      return;
+    }
+    _controller = controller;
+    if (mounted) setState(() {});
+  }
+
+  /// Detecteer het einde van de media en meld dat één keer (voor auto-advance).
+  void _onMediaTick() {
+    final c = _controller;
+    if (c == null ||
+        !c.value.isInitialized ||
+        _completed ||
+        !reportsMediaCompletion) {
+      return;
+    }
+    final dur = c.value.duration;
+    final pos = c.value.position;
+    if (dur > Duration.zero &&
+        pos.inMilliseconds >= dur.inMilliseconds - 200 &&
+        !c.value.isPlaying) {
+      _completed = true;
+      onMediaComplete();
+    }
+  }
+
+  @override
+  void dispose() {
+    final controller = _controller;
+    _controller = null;
+    controller?.removeListener(_onMediaTick);
+    // Pauzeer vóór dispose, anders blijft de audio op desktop doorspelen nadat
+    // de widget is afgebroken (bv. bij het verlaten met Esc). Zie [_stopAndDispose].
+    _stopAndDispose(controller);
+    super.dispose();
+  }
+}
+
 class _AudioPlayback extends StatefulWidget {
   final String audioPath;
   final String? projectPath;
@@ -21,14 +143,12 @@ class _AudioPlayback extends StatefulWidget {
   State<_AudioPlayback> createState() => _AudioPlaybackState();
 }
 
-class _AudioPlaybackState extends State<_AudioPlayback> {
-  VideoPlayerController? _controller;
-  bool _completed = false;
-
+class _AudioPlaybackState extends State<_AudioPlayback>
+    with _MediaPlaybackHost<_AudioPlayback> {
   @override
   void initState() {
     super.initState();
-    _init();
+    initMedia();
   }
 
   @override
@@ -36,69 +156,23 @@ class _AudioPlaybackState extends State<_AudioPlayback> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.audioPath != widget.audioPath ||
         oldWidget.autoplay != widget.autoplay) {
-      _init();
-    }
-  }
-
-  /// Bumped on every (re)init so an in-flight run that has been superseded by a
-  /// newer one (rapid slide switches) can bail and clean up its controller.
-  int _initGen = 0;
-
-  Future<void> _init() async {
-    final gen = ++_initGen;
-    // Detach and null the old controller *before* awaiting its dispose, so a
-    // concurrent _init sees no controller and cannot dispose it a second time.
-    _controller?.removeListener(_onTick);
-    final old = _controller;
-    _controller = null;
-    await old?.dispose();
-    if (gen != _initGen) return; // superseded
-    _completed = false;
-    final path = _resolvePath(widget.audioPath, widget.projectPath);
-    if (path == null) {
-      if (mounted) setState(() {});
-      return;
-    }
-    final controller = VideoPlayerController.file(File(path));
-    try {
-      await controller.initialize();
-      if (gen != _initGen) {
-        await controller.dispose();
-        return;
-      }
-      controller.addListener(_onTick);
-      if (widget.autoplay) await controller.play();
-    } catch (e) {
-      logWarning('_AudioPlaybackState._init: audio controller init failed', e);
-    }
-    if (gen != _initGen) {
-      await controller.dispose();
-      return;
-    }
-    _controller = controller;
-    if (mounted) setState(() {});
-  }
-
-  /// Detecteer het einde van de audio en meld dat één keer (voor auto-advance).
-  void _onTick() {
-    final c = _controller;
-    if (c == null || !c.value.isInitialized || _completed) return;
-    final pos = c.value.position;
-    final dur = c.value.duration;
-    if (dur > Duration.zero &&
-        pos.inMilliseconds >= dur.inMilliseconds - 200 &&
-        !c.value.isPlaying) {
-      _completed = true;
-      widget.onComplete?.call();
+      initMedia();
     }
   }
 
   @override
-  void dispose() {
-    _controller?.removeListener(_onTick);
-    _controller?.dispose();
-    super.dispose();
-  }
+  String? resolveMediaPath() =>
+      _resolvePath(widget.audioPath, widget.projectPath);
+
+  @override
+  bool get mediaAutoplay => widget.autoplay;
+
+  @override
+  void onMediaComplete() => widget.onComplete?.call();
+
+  @override
+  String get mediaLogLabel =>
+      '_AudioPlaybackState.initMedia: audio controller init failed';
 
   @override
   Widget build(BuildContext context) {
@@ -310,15 +384,16 @@ class _VideoPreview extends StatefulWidget {
   State<_VideoPreview> createState() => _VideoPreviewState();
 }
 
-class _VideoPreviewState extends State<_VideoPreview> {
-  VideoPlayerController? _controller;
-  String? _path;
-  bool _completed = false;
+class _VideoPreviewState extends State<_VideoPreview>
+    with _MediaPlaybackHost<_VideoPreview> {
+  // De afspeel-/pauzeknop blijft verborgen tot de muis boven de video hangt,
+  // zodat hij de dia niet ontsiert tijdens het presenteren.
+  bool _hovering = false;
 
   @override
   void initState() {
     super.initState();
-    _init();
+    initMedia();
   }
 
   @override
@@ -326,134 +401,111 @@ class _VideoPreviewState extends State<_VideoPreview> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.slide.videoPath != widget.slide.videoPath ||
         oldWidget.autoplay != widget.autoplay) {
-      _init();
-    }
-  }
-
-  /// Bumped on every (re)init so an in-flight run that has been superseded by a
-  /// newer one (rapid slide switches) can bail and clean up its controller.
-  int _initGen = 0;
-
-  Future<void> _init() async {
-    final gen = ++_initGen;
-    // Detach and null the old controller *before* awaiting its dispose, so a
-    // concurrent _init sees no controller and cannot dispose it a second time.
-    _controller?.removeListener(_onTick);
-    final old = _controller;
-    _controller = null;
-    await old?.dispose();
-    if (gen != _initGen) return; // superseded
-    _completed = false;
-    _path = _resolvePath(widget.slide.videoPath, widget.projectPath);
-    if (_path == null) {
-      if (mounted) setState(() {});
-      return;
-    }
-    final controller = VideoPlayerController.file(File(_path!));
-    try {
-      await controller.initialize();
-      if (gen != _initGen) {
-        await controller.dispose();
-        return;
-      }
-      controller.addListener(_onTick);
-      await controller.setLooping(false);
-      if (widget.autoplay) await controller.play();
-    } catch (e) {
-      logWarning('_VideoPreviewState._init: video controller init failed', e);
-      // Keep the placeholder visible when the platform cannot open the file.
-    }
-    if (gen != _initGen) {
-      await controller.dispose();
-      return;
-    }
-    _controller = controller;
-    if (mounted) setState(() {});
-  }
-
-  void _onTick() {
-    final controller = _controller;
-    if (controller == null ||
-        !controller.value.isInitialized ||
-        _completed ||
-        !widget.autoplay) {
-      return;
-    }
-    final duration = controller.value.duration;
-    final position = controller.value.position;
-    if (duration > Duration.zero &&
-        position.inMilliseconds >= duration.inMilliseconds - 200 &&
-        !controller.value.isPlaying) {
-      _completed = true;
-      widget.onComplete?.call();
+      initMedia();
     }
   }
 
   @override
-  void dispose() {
-    _controller?.removeListener(_onTick);
-    _controller?.dispose();
-    super.dispose();
-  }
+  String? resolveMediaPath() =>
+      _resolvePath(widget.slide.videoPath, widget.projectPath);
+
+  @override
+  bool get mediaAutoplay => widget.autoplay;
+
+  // Video meldt het einde alleen tijdens autoplay: handmatig afspelen mag niet
+  // ongevraagd doorbladeren.
+  @override
+  bool get reportsMediaCompletion => widget.autoplay;
+
+  @override
+  Future<void> configureController(VideoPlayerController controller) =>
+      controller.setLooping(false);
+
+  @override
+  void onMediaComplete() => widget.onComplete?.call();
+
+  @override
+  String get mediaLogLabel =>
+      '_VideoPreviewState.initMedia: video controller init failed';
 
   @override
   Widget build(BuildContext context) {
     final controller = _controller;
-    return Container(
-      color: _hexColor(widget.profile.slideBackgroundColor),
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          if (controller != null && controller.value.isInitialized)
-            Center(
-              child: AspectRatio(
-                aspectRatio: controller.value.aspectRatio,
-                child: VideoPlayer(controller),
+    return MouseRegion(
+      onEnter: (_) {
+        if (!_hovering) setState(() => _hovering = true);
+      },
+      onExit: (_) {
+        if (_hovering) setState(() => _hovering = false);
+      },
+      child: Container(
+        color: _hexColor(widget.profile.slideBackgroundColor),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            if (controller != null && controller.value.isInitialized)
+              Center(
+                child: AspectRatio(
+                  aspectRatio: controller.value.aspectRatio,
+                  child: VideoPlayer(controller),
+                ),
+              )
+            else
+              _mediaPlaceholder(Icons.movie_outlined, 'Video'),
+            if (widget.slide.title.isNotEmpty)
+              Positioned(
+                left: widget.w * 0.06,
+                right: widget.w * 0.06,
+                top: widget.w * 0.04,
+                child: _md(
+                  context,
+                  widget.slide.title,
+                  _applyFont(
+                    widget.font,
+                    TextStyle(
+                      color: _hexColor(widget.profile.textColor),
+                      fontSize: widget.w * 0.038,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  linkColor: _hexColor(widget.profile.accentColor),
+                ),
               ),
-            )
-          else
-            _mediaPlaceholder(Icons.movie_outlined, 'Video'),
-          if (widget.slide.title.isNotEmpty)
             Positioned(
-              left: widget.w * 0.06,
-              right: widget.w * 0.06,
-              top: widget.w * 0.04,
-              child: _md(
-                context,
-                widget.slide.title,
-                _applyFont(
-                  widget.font,
-                  TextStyle(
-                    color: _hexColor(widget.profile.textColor),
-                    fontSize: widget.w * 0.038,
-                    fontWeight: FontWeight.bold,
+              left: widget.w * 0.04,
+              bottom: widget.w * 0.035,
+              // Verborgen tot je over de video hovert; dan vloeit hij in. Als hij
+              // verborgen is laat IgnorePointer tikken door (doorbladeren blijft
+              // werken) en is hij niet bereikbaar.
+              child: IgnorePointer(
+                ignoring: !_hovering,
+                child: AnimatedOpacity(
+                  opacity: _hovering ? 1 : 0,
+                  duration: const Duration(milliseconds: 160),
+                  curve: Curves.easeOut,
+                  child: IconButton(
+                    onPressed:
+                        controller == null || !controller.value.isInitialized
+                        ? null
+                        : () {
+                            setState(() {
+                              controller.value.isPlaying
+                                  ? controller.pause()
+                                  : controller.play();
+                            });
+                          },
+                    icon: Icon(
+                      controller?.value.isPlaying == true
+                          ? Icons.pause_circle
+                          : Icons.play_circle,
+                    ),
+                    iconSize: widget.w * 0.045,
                   ),
                 ),
-                linkColor: _hexColor(widget.profile.accentColor),
               ),
             ),
-          Positioned(
-            left: widget.w * 0.04,
-            bottom: widget.w * 0.035,
-            child: IconButton(
-              onPressed: controller == null || !controller.value.isInitialized
-                  ? null
-                  : () {
-                      setState(() {
-                        controller.value.isPlaying
-                            ? controller.pause()
-                            : controller.play();
-                      });
-                    },
-              icon: Icon(
-                controller?.value.isPlaying == true
-                    ? Icons.pause_circle
-                    : Icons.play_circle,
-              ),
-              iconSize: widget.w * 0.045,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

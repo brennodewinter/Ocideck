@@ -2118,47 +2118,39 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   }
 
   /// Toetsen tijdens live tabelbewerking.
+  ///
+  /// Tijdens het bewerken mogen letters (incl. 'e'), cijfers, spatie en
+  /// leestekens géén presentatie- of toggle-rol hebben: ze horen in de cel
+  /// thuis. Daarom vangen we hier alléén de navigatie (pijltjes/Tab) en het
+  /// afsluiten (Esc) af; al het overige laten we los zodat het naar het
+  /// tekstveld gaat. We leunen bewust niet op [_textFieldFocused] om dit te
+  /// bepalen — die focusstatus is niet altijd betrouwbaar, waardoor een letter
+  /// je vroeger soms uit de bewerking gooide. Pijltjes verplaatsen de celkeuze
+  /// alleen als er geen tekstveld focus heeft; staat de cursor in een cel, dan
+  /// vangt het veld ze zelf op om de tekstcursor te bewegen.
   KeyEventResult _handleTableEditKey(LogicalKeyboardKey key) {
-    if (_textFieldFocused) {
-      switch (key) {
-        case LogicalKeyboardKey.escape:
-          _exitTableEditMode();
-          return KeyEventResult.handled;
-        case LogicalKeyboardKey.keyE:
-          _toggleTableEditMode();
-          return KeyEventResult.handled;
-        case LogicalKeyboardKey.tab:
-          _tabTableCell(backwards: HardwareKeyboard.instance.isShiftPressed);
-          return KeyEventResult.handled;
-        default:
-          return KeyEventResult.ignored;
-      }
-    }
-
     switch (key) {
-      case LogicalKeyboardKey.keyE:
       case LogicalKeyboardKey.escape:
         _exitTableEditMode();
-      case LogicalKeyboardKey.arrowRight:
-        _moveTableCell(dRow: 0, dCol: 1);
-      case LogicalKeyboardKey.arrowLeft:
-        _moveTableCell(dRow: 0, dCol: -1);
-      case LogicalKeyboardKey.arrowDown:
-        _moveTableCell(dRow: 1, dCol: 0);
-      case LogicalKeyboardKey.arrowUp:
-        _moveTableCell(dRow: -1, dCol: 0);
-      case LogicalKeyboardKey.enter:
-      case LogicalKeyboardKey.numpadEnter:
-      case LogicalKeyboardKey.space:
-        if (_tableEditRow != null && _tableEditCol != null) {
-          _selectTableCell(_tableEditRow!, _tableEditCol!);
-        }
+        return KeyEventResult.handled;
       case LogicalKeyboardKey.tab:
         _tabTableCell(backwards: HardwareKeyboard.instance.isShiftPressed);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.arrowRight:
+        _moveTableCell(dRow: 0, dCol: 1);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.arrowLeft:
+        _moveTableCell(dRow: 0, dCol: -1);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.arrowDown:
+        _moveTableCell(dRow: 1, dCol: 0);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.arrowUp:
+        _moveTableCell(dRow: -1, dCol: 0);
+        return KeyEventResult.handled;
       default:
         return KeyEventResult.ignored;
     }
-    return KeyEventResult.handled;
   }
 
   // ── Formatters ─────────────────────────────────────────────────────────────
@@ -2469,7 +2461,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
               const SizedBox(width: 12),
               Flexible(
                 child: Text(
-                  l10n.d('Pijltjes · Tab · E of Esc'),
+                  l10n.d('Pijltjes · Tab · Esc'),
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.white.withValues(alpha: 0.9),

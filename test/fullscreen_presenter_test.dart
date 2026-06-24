@@ -169,7 +169,7 @@ void main() {
     expect(find.text('☑ '), findsOneWidget);
   });
 
-  testWidgets('table edit mode toggles with E and persists cell changes', (
+  testWidgets('table edit mode enters with E, persists changes, exits with Esc', (
     tester,
   ) async {
     Slide? updated;
@@ -209,7 +209,73 @@ void main() {
 
     expect(updated?.tableRows[1][1], '250');
 
+    // Terwijl een cel in bewerking is mag 'e' geen sneltoets zijn: het typt in
+    // de cel en sluit de bewerking niet af.
     await tester.sendKeyEvent(LogicalKeyboardKey.keyE);
+    await tester.pump();
+    expect(find.text('Tabel bewerken'), findsOneWidget);
+
+    // Afsluiten doe je met Esc.
+    await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+    await tester.pump();
+    expect(find.text('Tabel bewerken'), findsNothing);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('keys during table edit never navigate or exit', (tester) async {
+    // Twee dia's: een tabeldia en een gewone dia erna. Navigeren reset de
+    // tabelbewerking, dus zolang "Tabel bewerken" zichtbaar blijft is er noch
+    // doorgebladerd noch uit de bewerking gesprongen.
+    final tableSlides = [
+      Slide.create(SlideType.table).copyWith(
+        title: 'Cijfers',
+        tableRows: [
+          ['Kolom', 'Waarde'],
+          ['Omzet', '100'],
+        ],
+      ),
+      Slide.create(SlideType.bullets).copyWith(title: 'Tweede'),
+    ];
+    await tester.pumpWidget(
+      MaterialApp(
+        home: FullscreenPresenter(
+          slides: tableSlides,
+          projectPath: null,
+          themeProfile: const ThemeProfile(),
+          initialIndex: 0,
+        ),
+      ),
+    );
+    await tester.pump();
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyE);
+    await tester.pump();
+    expect(find.text('Tabel bewerken'), findsOneWidget);
+
+    // Letters (incl. 'e'), spatie en cijfers horen tijdens het bewerken naar de
+    // cel te gaan: geen sneltoetsrol, dus geen doorbladeren of afsluiten.
+    // Pijltjes verplaatsen de celkeuze maar mogen evenmin navigeren/afsluiten.
+    for (final key in [
+      LogicalKeyboardKey.space,
+      LogicalKeyboardKey.keyA,
+      LogicalKeyboardKey.keyE,
+      LogicalKeyboardKey.digit3,
+      LogicalKeyboardKey.arrowRight,
+      LogicalKeyboardKey.arrowDown,
+    ]) {
+      await tester.sendKeyEvent(key);
+      await tester.pump();
+    }
+
+    expect(
+      find.text('Tabel bewerken'),
+      findsOneWidget,
+      reason: 'noch doorbladeren noch uit de bewerking springen',
+    );
+
+    // Esc blijft de enige uitgang.
+    await tester.sendKeyEvent(LogicalKeyboardKey.escape);
     await tester.pump();
     expect(find.text('Tabel bewerken'), findsNothing);
 
