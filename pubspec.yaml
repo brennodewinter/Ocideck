@@ -53,6 +53,9 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   # Deterministic Timer/Future control for the autosave/recovery timer tests.
   fake_async: ^1.3.3
+  # A fake VideoPlayerPlatform drives the media-lifecycle tests without real
+  # playback (pause-before-dispose, supersession, completion).
+  video_player_platform_interface: ^6.4.0
 
 dependency_overrides:
   screen_retriever_macos:

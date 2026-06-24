@@ -2981,7 +2981,7 @@ const _dutchSourceStringAdditions = {
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Set a TLP level — export is blocked by the classification policy.',
     'Tabel bewerken': 'Edit table',
-    'Pijltjes · Tab · E of Esc': 'Arrow keys · Tab · E or Esc',
+    'Pijltjes · Tab · Esc': 'Arrow keys · Tab · Esc',
     'Tabel bewerken (op tabeldia)': 'Edit table (on table slides)',
     'Pen · markeerstift · ⇧E': 'Pen · highlighter · ⇧E',
     'Gestapelde staaf': 'Stacked bar',
@@ -3599,7 +3599,7 @@ const _dutchSourceStringAdditions = {
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Imposta un livello TLP — l\'export è bloccato dalla policy di classificazione.',
     'Tabel bewerken': 'Modifica tabella',
-    'Pijltjes · Tab · E of Esc': 'Frecce · Tab · E o Esc',
+    'Pijltjes · Tab · Esc': 'Frecce · Tab · Esc',
     'Tabel bewerken (op tabeldia)': 'Modifica tabella (su slide tabella)',
     'Pen · markeerstift · ⇧E': 'Penna · evidenziatore · ⇧E',
     'Gestapelde staaf': 'Barre impilate',
@@ -4216,7 +4216,7 @@ const _dutchSourceStringAdditions = {
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'TLP-Niveau festlegen — Export durch Klassifizierungsrichtlinie blockiert.',
     'Tabel bewerken': 'Tabelle bearbeiten',
-    'Pijltjes · Tab · E of Esc': 'Pfeiltasten · Tab · E oder Esc',
+    'Pijltjes · Tab · Esc': 'Pfeiltasten · Tab · Esc',
     'Tabel bewerken (op tabeldia)': 'Tabelle bearbeiten (auf Tabellenfolie)',
     'Pen · markeerstift · ⇧E': 'Stift · Marker · ⇧E',
     'Gestapelde staaf': 'Gestapelte Balken',
@@ -4838,7 +4838,7 @@ const _dutchSourceStringAdditions = {
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Définissez un niveau TLP — export bloqué par la politique de classification.',
     'Tabel bewerken': 'Modifier le tableau',
-    'Pijltjes · Tab · E of Esc': 'Flèches · Tab · E ou Échap',
+    'Pijltjes · Tab · Esc': 'Flèches · Tab · Échap',
     'Tabel bewerken (op tabeldia)': 'Modifier le tableau (sur diapo tableau)',
     'Pen · markeerstift · ⇧E': 'Stylo · surligneur · ⇧E',
     'Gestapelde staaf': 'Barres empilées',
@@ -5458,7 +5458,7 @@ const _dutchSourceStringAdditions = {
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Establece un nivel TLP — exportación bloqueada por la política de clasificación.',
     'Tabel bewerken': 'Editar tabla',
-    'Pijltjes · Tab · E of Esc': 'Flechas · Tab · E o Esc',
+    'Pijltjes · Tab · Esc': 'Flechas · Tab · Esc',
     'Tabel bewerken (op tabeldia)': 'Editar tabla (en diapositiva de tabla)',
     'Pen · markeerstift · ⇧E': 'Lápiz · marcador · ⇧E',
     'Gestapelde staaf': 'Barras apiladas',
@@ -6061,7 +6061,7 @@ const _dutchSourceStringAdditions = {
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Stel in TLP-nivo yn — eksport blokkearre troch it klassifikaasjebelied.',
     'Tabel bewerken': 'Tabel bewurkje',
-    'Pijltjes · Tab · E of Esc': 'Pylktoetsen · Tab · E of Esc',
+    'Pijltjes · Tab · Esc': 'Pylktoetsen · Tab · Esc',
     'Tabel bewerken (op tabeldia)': 'Tabel bewurkje (op tabelslide)',
     'Pen · markeerstift · ⇧E': 'Pen · markearstift · ⇧E',
     'Gestapelde staaf': 'Stapele staven',
@@ -6666,7 +6666,7 @@ const _dutchSourceStringAdditions = {
     'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
         'Pone un nivel TLP — exportá blokeá pa e polítika di klasifikashon.',
     'Tabel bewerken': 'Edita tabel',
-    'Pijltjes · Tab · E of Esc': 'Flechanan · Tab · E of Esc',
+    'Pijltjes · Tab · Esc': 'Flechanan · Tab · Esc',
     'Tabel bewerken (op tabeldia)': 'Edita tabel (riba slide di tabel)',
     'Pen · markeerstift · ⇧E': 'Pèn · marker · ⇧E',
     'Gestapelde staaf': 'Baranan apilá',
