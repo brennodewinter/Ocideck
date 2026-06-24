@@ -302,7 +302,10 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           children: [
             _sidebar(l10n, labels),
             Expanded(
-              child: ColoredBox(
+              // Material (not ColoredBox) so ListTiles inside the tab bodies
+              // paint their ink/selected state onto this surface instead of a
+              // hidden ancestor behind an opaque box.
+              child: Material(
                 color: const Color(0xFFF8FAFC),
                 child: Column(
                   children: [
@@ -2212,6 +2215,26 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const PrivacyStatementContent(),
+        const SizedBox(height: 20),
+        _sectionTitle(l10n.d('Online media')),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(
+            l10n.d('Online media toestaan'),
+            style: const TextStyle(fontSize: 13),
+          ),
+          subtitle: Text(
+            l10n.d(
+              'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.',
+            ),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+          value: ref.watch(
+            settingsProvider.select((s) => s.allowRemoteMedia),
+          ),
+          onChanged: (value) =>
+              ref.read(settingsProvider.notifier).setAllowRemoteMedia(value),
+        ),
         const SizedBox(height: 20),
         _sectionTitle(l10n.d('Toestemming')),
         Container(

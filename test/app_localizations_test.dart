@@ -51,6 +51,8 @@ void main() {
       'Max',
       'Meter',
       'Min',
+      'Online',
+      'Online media',
       'PREVIEW',
       'Pitch',
       'Preview',

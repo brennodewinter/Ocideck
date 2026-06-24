@@ -306,6 +306,30 @@ class DeckNotifier extends StateNotifier<DeckState> {
     _mutate(deck.copyWith(slides: slides));
   }
 
+  /// Knip de videoslide op [index] op tijdstip [atMs]: het huidige segment
+  /// `[start, eind]` wordt `[start, atMs]` op deze slide, en een nieuwe slide
+  /// erna toont `[atMs, eind]` van dezelfde bron (opnieuw knipbaar). Doet niets
+  /// als de slide geen video heeft of als het knippunt buiten het segment valt.
+  void splitVideoSlide(int index, int atMs) {
+    final deck = state.deck;
+    if (deck == null || index < 0 || index >= deck.slides.length) return;
+    final slide = deck.slides[index];
+    if (slide.type != SlideType.video || slide.videoPath.isEmpty) return;
+    final start = slide.videoStartMs;
+    final end = slide.videoEndMs; // 0 = natuurlijk einde
+    // Het knippunt moet strikt binnen het huidige segment liggen.
+    if (atMs <= start) return;
+    if (end > 0 && atMs >= end) return;
+    final first = slide.copyWith(videoEndMs: atMs);
+    final second = Slide.duplicate(
+      slide,
+    ).copyWith(videoStartMs: atMs, videoEndMs: end);
+    final slides = List<Slide>.from(deck.slides);
+    slides[index] = first;
+    slides.insert(index + 1, second);
+    _mutate(deck.copyWith(slides: slides));
+  }
+
   // newIndex from onReorderItem is pre-adjusted (no -1 needed)
   void reorderSlides(int oldIndex, int newIndex) {
     final deck = state.deck;

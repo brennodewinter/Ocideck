@@ -45,6 +45,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   TlpLevel _tlp = TlpLevel.none;
   String _organization = '';
   bool _showClassificationWatermark = false;
+  bool _allowRemoteMedia = false;
   String? _projectPath;
   int _index = 0;
   int _richTextPage = 0;
@@ -84,6 +85,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     _organization = deck?.organization ?? '';
     _showClassificationWatermark =
         widget.args['classificationWatermarkEnabled'] as bool? ?? false;
+    _allowRemoteMedia = widget.args['allowRemoteMedia'] as bool? ?? false;
     // Pre-existing strokes passed at creation, keyed by index.
     final ink = widget.args['ink'];
     if (ink is Map) {
@@ -281,6 +283,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                       _send('answerSubmit', {'slideIndex': _index}),
                   enableMedia: true,
                   autoplayMedia: true,
+                  allowRemoteMedia: _allowRemoteMedia,
                   // Media finishing on the beamer drives auto-advance.
                   onAudioComplete: () => _send('mediaComplete', {
                     'index': _index,

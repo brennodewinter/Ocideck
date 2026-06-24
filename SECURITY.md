@@ -84,6 +84,18 @@ OciDeck constrains what an opened deck can do:
 - **Per-asset import validation.** Picked/pasted images are validated by magic
   bytes (PNG/JPEG/GIF/BMP/WebP), not just the file extension, and capped at
   64 MiB; video/audio imports are capped at 1 GiB.
+- **Online media is gated and fails closed.** Image/video URLs and YouTube/Vimeo
+  embeds are only fetched live when the **Online media** setting is on (off by
+  default), so an opened deck authored by someone else cannot beacon home or
+  pull third-party content unasked. At insert time URLs pass the same
+  `http(s)`-only + SSRF host blocklist (`NetGuard`, shared with URL import).
+  Live rendering (`NetworkImage` / `VideoPlayerController.networkUrl` / the embed
+  WebView) does its own DNS, so it cannot pin the socket the way URL *import*
+  does — this residual SSRF/rebind exposure is the reason the gate defaults off
+  and is scoped to user-enabled sessions. Remote images keep the decode-dimension
+  cap (`cappedNetworkImage`); magic-byte validation does not apply to live
+  streams (no pre-fetched bytes), a deliberate trade-off. The embed WebView
+  restricts navigation to the player origins and refuses auth prompts/pop-ups.
 
 Known residual hardening: the render-path symlink cache is keyed by path for the
 session, so a symlink swapped *after* its first render isn't re-checked (a

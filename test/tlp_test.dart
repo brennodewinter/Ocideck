@@ -125,8 +125,8 @@ void main() {
     testWidgets('renders the marking when a level is set', (tester) async {
       await tester.pumpWidget(host(TlpLevel.red));
       await tester.pump();
-      // Banner bovenaan + hoek-badge.
-      expect(find.text('TLP:RED'), findsNWidgets(2));
+      // Alleen de hoek-badge rechtsonder (de bovenbanner is vervallen).
+      expect(find.text('TLP:RED'), findsOneWidget);
     });
 
     testWidgets('renders nothing when none', (tester) async {
@@ -155,7 +155,7 @@ void main() {
         ),
       );
       await tester.pump();
-      expect(find.text('TLP:AMBER'), findsNWidgets(2));
+      expect(find.text('TLP:AMBER'), findsOneWidget);
       expect(find.text('TLP:GREEN'), findsNothing);
     });
 
@@ -209,15 +209,9 @@ void main() {
       await tester.pump();
 
       final captionRight = tester.getTopRight(find.text(caption)).dx;
-      final tlpMarks = find.text('TLP:RED');
-      expect(tlpMarks, findsNWidgets(2));
-      var tlpRight = 0.0;
-      for (var i = 0; i < 2; i++) {
-        final topRight = tester.getTopRight(tlpMarks.at(i));
-        if (topRight.dy > 200) {
-          tlpRight = topRight.dx;
-        }
-      }
+      final tlpMark = find.text('TLP:RED');
+      expect(tlpMark, findsOneWidget);
+      final tlpRight = tester.getTopRight(tlpMark).dx;
 
       expect(
         (captionRight - tlpRight).abs(),

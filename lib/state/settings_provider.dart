@@ -82,6 +82,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       qualityWarningsOnExport: prefs.getBool('qualityWarningsOnExport') ?? true,
       qualityBlockExportOnErrors:
           prefs.getBool('qualityBlockExportOnErrors') ?? false,
+      allowRemoteMedia: prefs.getBool('allowRemoteMedia') ?? false,
     );
   }
 
@@ -141,6 +142,14 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     state = state.copyWith(qualityBlockExportOnErrors: enabled);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('qualityBlockExportOnErrors', enabled);
+  }
+
+  /// Sta live laden van online media (URL-afbeeldingen/-video's en embeds) toe,
+  /// of zet het uit (fail-closed). Persisteert in hetzelfde prefs-domein.
+  Future<void> setAllowRemoteMedia(bool enabled) async {
+    state = state.copyWith(allowRemoteMedia: enabled);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('allowRemoteMedia', enabled);
   }
 
   Future<void> addRecentFile(String path) async {

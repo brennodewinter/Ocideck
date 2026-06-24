@@ -8,6 +8,7 @@ import '../models/question.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../models/timeline.dart';
+import '../models/video_source.dart';
 import '../utils/deck_markdown_dashes.dart';
 import '../utils/log.dart';
 import '../utils/markdown_paste_cleanup.dart';
@@ -29,6 +30,7 @@ class MarkdownService {
     Deck deck, {
     bool inlineChartData = false,
     bool inlineStyleProfile = false,
+    bool forExport = false,
   }) {
     final buf = StringBuffer();
     buf.writeln('---');
@@ -81,6 +83,7 @@ class MarkdownService {
           deck.slides[i],
           themeProfile: deck.themeProfile,
           inlineChartData: inlineChartData,
+          forExport: forExport,
         ),
       );
     }
@@ -195,6 +198,7 @@ class MarkdownService {
     Slide slide, {
     ThemeProfile? themeProfile,
     bool inlineChartData = false,
+    bool forExport = false,
   }) {
     final buf = StringBuffer();
     final cssClass = slide.cssClass.isNotEmpty
@@ -389,10 +393,7 @@ class MarkdownService {
           buf.writeln();
         }
         if (slide.videoPath.isNotEmpty) {
-          final autoplay = slide.videoAutoplay ? ' autoplay muted loop' : '';
-          buf.writeln(
-            '<video src="${slide.videoPath}" controls$autoplay style="width:100%; max-height:72vh;"></video>',
-          );
+          _writeVideo(buf, slide, forExport: forExport);
         }
 
       case SlideType.quote:
@@ -737,6 +738,117 @@ class MarkdownService {
     );
   }
 
+  /// Serialiseert een videoslide. Lokale/online bestanden worden een `<video>`
+  /// met een `#t=start,end` media-fragment (de standaard, ook door browsers en
+  /// Marp begrepen). YouTube/Vimeo worden een `<iframe class="ocideck-embed">`
+  /// met de speler-URL; start/eind reizen mee in `data-start`/`data-end` zodat
+  /// het knippen verliesvrij round-trippt. Bij [forExport] krijgt een online
+  /// bron óók een aanklikbare letterlijke URL eronder.
+  static void _writeVideo(
+    StringBuffer buf,
+    Slide slide, {
+    required bool forExport,
+  }) {
+    final source = VideoSource.parse(slide.videoPath);
+    final startSec = (slide.videoStartMs / 1000).floor();
+    final endSec = (slide.videoEndMs / 1000).ceil();
+
+    if (source.isEmbed) {
+      final embed =
+          source
+              .embedUri(
+                startMs: slide.videoStartMs,
+                endMs: slide.videoEndMs,
+                autoplay: slide.videoAutoplay,
+              )
+              ?.toString() ??
+          slide.videoPath;
+      const attr = HtmlEscape(HtmlEscapeMode.attribute);
+      final data = StringBuffer()
+        ..write(' data-src="${attr.convert(slide.videoPath)}"');
+      if (slide.videoStartMs > 0) data.write(' data-start="$startSec"');
+      if (slide.videoEndMs > 0) data.write(' data-end="$endSec"');
+      buf.writeln(
+        '<iframe class="ocideck-embed"$data src="${attr.convert(embed)}" '
+        'style="width:100%; aspect-ratio:16/9; border:0;" '
+        'allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>',
+      );
+    } else {
+      // Lokaal pad of directe online videobestand-URL.
+      var frag = '';
+      if (slide.videoStartMs > 0 || slide.videoEndMs > 0) {
+        frag = slide.videoEndMs > 0 ? '#t=$startSec,$endSec' : '#t=$startSec';
+      }
+      final autoplay = slide.videoAutoplay ? ' autoplay muted loop' : '';
+      const attr = HtmlEscape(HtmlEscapeMode.attribute);
+      buf.writeln(
+        '<video src="${attr.convert(slide.videoPath)}$frag" controls$autoplay style="width:100%; max-height:72vh;"></video>',
+      );
+    }
+
+    // Bij export een aanklikbare letterlijke URL voor online bronnen (de bron
+    // zelf is dan ook buiten de presentatie te bereiken).
+    if (forExport && source.isRemote) {
+      buf.writeln();
+      buf.writeln('[${slide.videoPath}](${slide.videoPath})');
+    }
+  }
+
+  /// Parseert een `<video …>`-regel: splitst het `#t=start,end` media-fragment
+  /// van de bron af en leest de trim-grenzen (in ms).
+  static ({String path, int startMs, int endMs, bool autoplay}) _parseVideoLine(
+    String t,
+  ) {
+    final m = RegExp(r'src="([^"]+)"').firstMatch(t);
+    var src = _unescapeAttr(m?.group(1) ?? '');
+    var startMs = 0;
+    var endMs = 0;
+    final hash = src.indexOf('#t=');
+    if (hash >= 0) {
+      final frag = src.substring(hash + 3);
+      src = src.substring(0, hash);
+      final parts = frag.split(',');
+      startMs = _secToMs(parts.isNotEmpty ? parts[0] : '');
+      endMs = parts.length > 1 ? _secToMs(parts[1]) : 0;
+    }
+    return (
+      path: src,
+      startMs: startMs,
+      endMs: endMs,
+      autoplay: t.contains('autoplay'),
+    );
+  }
+
+  /// Parseert een `<iframe class="ocideck-embed" …>`-regel terug naar de bron en
+  /// trim-grenzen. `data-src` (de originele URL) gaat vóór `src`; `data-start`/
+  /// `data-end` (seconden) bevatten de knip-grenzen.
+  static ({String path, int startMs, int endMs}) _parseEmbedLine(String t) {
+    String attr(String name) =>
+        _unescapeAttr(RegExp('$name="([^"]*)"').firstMatch(t)?.group(1) ?? '');
+    final dataSrc = attr('data-src');
+    final src = dataSrc.isNotEmpty ? dataSrc : attr('src');
+    return (
+      path: src,
+      startMs: _secToMs(attr('data-start')),
+      endMs: _secToMs(attr('data-end')),
+    );
+  }
+
+  /// Keert de attribuut-escaping van [_writeVideo] om (`&amp;`/`&quot;`/…).
+  static String _unescapeAttr(String s) => s
+      .replaceAll('&quot;', '"')
+      .replaceAll('&#47;', '/')
+      .replaceAll('&#39;', "'")
+      .replaceAll('&lt;', '<')
+      .replaceAll('&gt;', '>')
+      .replaceAll('&amp;', '&');
+
+  static int _secToMs(String s) {
+    final v = double.tryParse(s.trim());
+    if (v == null || v <= 0) return 0;
+    return (v * 1000).round();
+  }
+
   static String _decodeImageCaption(String line) {
     return line
         .replaceFirst('<div class="image-caption">', '')
@@ -764,6 +876,42 @@ class MarkdownService {
       logError('MarkdownService.parseDeck: parse markdown', e, s);
       return null;
     }
+  }
+
+  /// Cheap frontmatter probe for the disk-wide presentation scan: reads only the
+  /// `--- … ---` header (no slide body, no Deck construction) and reports whether
+  /// the file declares `marp: true`, plus its `theme`/`title`. [head] may be a
+  /// truncated prefix of the file — if the closing `---` is missing we still
+  /// parse whatever header lines are present.
+  ({bool marp, String? theme, String? title}) sniffFrontmatter(String head) {
+    final norm = head.replaceAll('\r\n', '\n').replaceAll('\r', '\n');
+    if (!norm.startsWith('---\n')) {
+      return (marp: false, theme: null, title: null);
+    }
+    final end = norm.indexOf('\n---\n', 4);
+    final frontMatter = end == -1
+        ? norm.substring(4)
+        : norm.substring(4, end);
+
+    bool marp = false;
+    String? theme;
+    String? title;
+    for (final rawLine in frontMatter.split('\n')) {
+      final line = rawLine.trim();
+      final colon = line.indexOf(':');
+      if (colon <= 0) continue;
+      final key = line.substring(0, colon).trim();
+      final value = line.substring(colon + 1).trim();
+      switch (key) {
+        case 'marp':
+          marp = value == 'true';
+        case 'theme':
+          theme = value;
+        case 'title':
+          title = _parseScalar(value);
+      }
+    }
+    return (marp: marp, theme: theme, title: title);
   }
 
   Deck _doParse(String markdown, {String? filePath}) {
@@ -1023,6 +1171,8 @@ class MarkdownService {
     int imageSize = 0;
     String videoPath = '';
     bool videoAutoplay = false;
+    int videoStartMs = 0;
+    int videoEndMs = 0;
     String audioPath = '';
     bool audioAutoplay = false;
     String quote = '';
@@ -1055,9 +1205,16 @@ class MarkdownService {
         if (t.startsWith('|')) {
           tableLines.add(t);
         } else if (t.startsWith('<video')) {
-          final m = RegExp(r'src="([^"]+)"').firstMatch(t);
-          if (m != null) videoPath = m.group(1) ?? '';
-          videoAutoplay = t.contains('autoplay');
+          final v = _parseVideoLine(t);
+          videoPath = v.path;
+          videoStartMs = v.startMs;
+          videoEndMs = v.endMs;
+          videoAutoplay = v.autoplay;
+        } else if (t.startsWith('<iframe') && t.contains('ocideck-embed')) {
+          final e = _parseEmbedLine(t);
+          videoPath = e.path;
+          videoStartMs = e.startMs;
+          videoEndMs = e.endMs;
         } else if (t.startsWith('<audio')) {
           final m = RegExp(r'src="([^"]+)"').firstMatch(t);
           if (m != null) audioPath = m.group(1) ?? '';
@@ -1177,9 +1334,16 @@ class MarkdownService {
             ? captionParts.sublist(1).join(' | ')
             : '';
       } else if (t.startsWith('<video')) {
-        final m = RegExp(r'src="([^"]+)"').firstMatch(t);
-        if (m != null) videoPath = m.group(1) ?? '';
-        videoAutoplay = t.contains('autoplay');
+        final v = _parseVideoLine(t);
+        videoPath = v.path;
+        videoStartMs = v.startMs;
+        videoEndMs = v.endMs;
+        videoAutoplay = v.autoplay;
+      } else if (t.startsWith('<iframe') && t.contains('ocideck-embed')) {
+        final e = _parseEmbedLine(t);
+        videoPath = e.path;
+        videoStartMs = e.startMs;
+        videoEndMs = e.endMs;
       } else if (t.startsWith('<audio')) {
         final m = RegExp(r'src="([^"]+)"').firstMatch(t);
         if (m != null) audioPath = m.group(1) ?? '';
@@ -1283,6 +1447,8 @@ class MarkdownService {
       titleTextColorOverride: titleTextColorOverride,
       videoPath: videoPath,
       videoAutoplay: videoAutoplay,
+      videoStartMs: videoStartMs,
+      videoEndMs: videoEndMs,
       audioPath: audioPath,
       audioAutoplay: audioAutoplay,
       quote: quote,

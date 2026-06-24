@@ -145,6 +145,13 @@ class Slide {
   final String imageCaption2;
   final String videoPath;
   final bool videoAutoplay;
+
+  /// Trim window for the video, in milliseconds. Lets one source play in parts
+  /// across consecutive slides (the "cut" feature). [videoStartMs] = 0 plays
+  /// from the start; [videoEndMs] = 0 plays to the natural end. Applies to
+  /// local files, remote files and YouTube/Vimeo embeds alike.
+  final int videoStartMs;
+  final int videoEndMs;
   final String audioPath;
   final bool audioAutoplay;
   final String quote;
@@ -196,6 +203,8 @@ class Slide {
     this.imageCaption2 = '',
     this.videoPath = '',
     this.videoAutoplay = false,
+    this.videoStartMs = 0,
+    this.videoEndMs = 0,
     this.audioPath = '',
     this.audioAutoplay = false,
     this.quote = '',
@@ -264,6 +273,8 @@ class Slide {
       imageCaption2: src.imageCaption2,
       videoPath: src.videoPath,
       videoAutoplay: src.videoAutoplay,
+      videoStartMs: src.videoStartMs,
+      videoEndMs: src.videoEndMs,
       audioPath: src.audioPath,
       audioAutoplay: src.audioAutoplay,
       quote: src.quote,
@@ -303,6 +314,8 @@ class Slide {
     String? imageCaption2,
     String? videoPath,
     bool? videoAutoplay,
+    int? videoStartMs,
+    int? videoEndMs,
     String? audioPath,
     bool? audioAutoplay,
     String? quote,
@@ -342,6 +355,8 @@ class Slide {
       imageCaption2: imageCaption2 ?? this.imageCaption2,
       videoPath: videoPath ?? this.videoPath,
       videoAutoplay: videoAutoplay ?? this.videoAutoplay,
+      videoStartMs: videoStartMs ?? this.videoStartMs,
+      videoEndMs: videoEndMs ?? this.videoEndMs,
       audioPath: audioPath ?? this.audioPath,
       audioAutoplay: audioAutoplay ?? this.audioAutoplay,
       quote: quote ?? this.quote,

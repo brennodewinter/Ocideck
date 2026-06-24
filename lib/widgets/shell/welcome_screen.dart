@@ -54,6 +54,15 @@ class _WelcomeScreen extends ConsumerWidget {
                       label: Text(l10n.t('open')),
                     ),
                   ),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: 220,
+                    child: OutlinedButton.icon(
+                      onPressed: () => _scanLibrary(context, ref),
+                      icon: const Icon(Icons.travel_explore, size: 18),
+                      label: Text(l10n.d('Zoek op deze computer')),
+                    ),
+                  ),
                   const SizedBox(height: 8),
                   TextButton.icon(
                     onPressed: () => SettingsDialog.show(context),

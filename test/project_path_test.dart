@@ -49,6 +49,33 @@ void main() {
     });
   });
 
+  group('resolveTrustedAssetPath', () {
+    test('allows an absolute logo outside the opened deck project', () {
+      // The style-profile logo lives in the user's regular folder; opening a
+      // deck elsewhere must still resolve it (it is trusted app config).
+      final project = p.join('/tmp', 'other-deck');
+      final logo = p.join('/tmp', 'regular', 'logos', 'logo.png');
+      expect(resolveTrustedAssetPath(logo, project), logo);
+    });
+
+    test('still resolves a relative logo inside the project', () {
+      final project = p.join('/tmp', 'deck');
+      expect(
+        resolveTrustedAssetPath('logos/logo.png', project),
+        p.join(project, 'logos', 'logo.png'),
+      );
+    });
+
+    test('rejects relative traversal even for trusted assets', () {
+      final project = p.join('/tmp', 'deck');
+      expect(resolveTrustedAssetPath('../../etc/passwd', project), isNull);
+    });
+
+    test('empty path resolves to null', () {
+      expect(resolveTrustedAssetPath('', p.join('/tmp', 'deck')), isNull);
+    });
+  });
+
   group('resolveEditorAssetPath', () {
     test('joins relative paths safely for the editor', () {
       final project = p.join('/tmp', 'deck');

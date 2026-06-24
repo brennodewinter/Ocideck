@@ -8,6 +8,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Online media by URL** — image and video slides accept an `http(s)` URL as
+  the source, rendered live (no local copy). Off by default: the new
+  **Online media** privacy setting must be enabled before any remote source is
+  fetched; until then the slide shows a placeholder with the URL. On export, a
+  remote source also emits a clickable literal URL.
+- **YouTube/Vimeo embeds** — a video slide can embed a YouTube or Vimeo link,
+  played by the official iframe player (designed to extend to more providers).
+- **Watch a video in parts ("cut")** — a video can be split at a playback point:
+  the first part stays on this slide and the remainder moves to a new slide with
+  the same source, which can be cut again. Works for local, online and embedded
+  video. The trim window round-trips in the `.md` (a `#t=START,END` media
+  fragment on `<video>`, or `data-start`/`data-end` on the embed iframe).
 - **Redesigned settings dialog** — the settings window moves from a flat tab bar
   to a sidebar navigation (sections on the left, a titled content area on the
   right, a footer action bar), without changing any of the settings themselves.

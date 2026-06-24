@@ -11,6 +11,7 @@ import '../services/caption_service.dart';
 import '../services/description_service.dart';
 import '../services/classification_enforcement_policy.dart';
 import '../services/export_metadata.dart';
+import '../services/open_file_channel.dart';
 import '../services/export_service.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
@@ -31,6 +32,7 @@ import 'dialogs/image_carousel_picker.dart';
 import 'dialogs/new_deck_dialog.dart';
 import 'dialogs/open_presentation_dialog.dart';
 import 'dialogs/presentation_info_dialog.dart';
+import 'dialogs/scan_library_dialog.dart';
 import 'dialogs/settings_dialog.dart';
 import 'panels/editor_panel.dart';
 import 'panels/preview_panel.dart';
@@ -58,11 +60,19 @@ class AppShell extends ConsumerStatefulWidget {
 }
 
 class _AppShellState extends ConsumerState<AppShell> with WindowListener {
+  late final OpenFileChannel _openFileChannel;
+
   @override
   void initState() {
     super.initState();
     windowManager.addListener(this);
-    WidgetsBinding.instance.addPostFrameCallback((_) => _maybeRestore());
+    _openFileChannel = OpenFileChannel(_onFilesDropped);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _maybeRestore();
+      // Open any file the app was launched with, and start listening for files
+      // opened from Finder while the app is running.
+      _openFileChannel.start();
+    });
   }
 
   /// Bij opstart: zijn er herstelbestanden van een vorige (gecrashte) sessie?
@@ -591,6 +601,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         showClassificationWatermark: ref
             .read(settingsProvider)
             .classificationWatermarkEnabled,
+        allowRemoteMedia: ref.read(settingsProvider).allowRemoteMedia,
         targetDuration: () {
           final secs = deck.presentationTargetSeconds;
           return secs > 0 ? Duration(seconds: secs) : null;
@@ -664,7 +675,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         // even when a chart links an external CSV.
         markdown: ref
             .read(markdownServiceProvider)
-            .generateDeck(deck.copyWith(slides: slides), inlineChartData: true),
+            .generateDeck(
+              deck.copyWith(slides: slides),
+              inlineChartData: true,
+              forExport: true,
+            ),
         organization: deck.organization,
         showClassificationWatermark: ref
             .read(settingsProvider)

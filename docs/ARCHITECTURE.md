@@ -96,6 +96,15 @@ the key thing to understand before touching rendering:
    thumbnails, the fullscreen presenter, and — via `services/slide_rasterizer.dart`
    — the **PDF and PPTX** exports (rasterized to images). So anything that must
    appear in PDF/PPTX must render here. Charts use `fl_chart`.
+   Video sources are classified once by `models/video_source.dart`
+   (`VideoSource`: local file / remote file / YouTube / Vimeo) so the preview,
+   markdown serializer and exporter agree. Local and remote files play through
+   the shared `_MediaPlaybackHost` (`video_player`, file vs `networkUrl`), which
+   also seeks to the segment start and stops at the segment end (the per-slide
+   trim window that powers "cut a video across slides"). YouTube/Vimeo play in a
+   second on-screen WebView (`_VideoEmbedPreview`, the same pattern as the
+   Mermaid host) wired to the provider's iframe API for end-detection and
+   playhead reporting; remote rendering is gated by the **Online media** setting.
 2. **HTML export** — `services/marp_html_service.dart` produces a single
    self-contained `.html` that renders in a browser using inlined JavaScript
    (marked, highlight.js, mermaid, MathJax). Charts are pre-rendered to inline
