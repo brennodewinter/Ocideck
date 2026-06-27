@@ -1082,8 +1082,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   bool get _currentSlideIsTable => _currentSlide.type == SlideType.table;
 
-  bool get _textFieldFocused =>
-      FocusManager.instance.primaryFocus?.context?.widget is EditableText;
+  /// Of de huidige dia een tabel is die de auteur in de bouwer als
+  /// "bewerkbaar tijdens presenteren" heeft aangemerkt. Alleen dan mag de
+  /// live-bewerking aangezet worden (standaard staan tabellen op alleen-lezen).
+  bool get _currentSlideTableEditable =>
+      _currentSlideIsTable && _currentSlide.tableEditable;
 
   void _exitTableEditMode() {
     if (!_tableEditMode) return;
@@ -1096,7 +1099,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   }
 
   void _toggleTableEditMode() {
-    if (!_currentSlideIsTable) return;
+    // Alleen tabellen die de auteur expliciet bewerkbaar maakte mogen live
+    // bewerkt worden; standaard zijn ze alleen-lezen.
+    if (!_currentSlideTableEditable) return;
     if (_tableEditMode) {
       _exitTableEditMode();
       return;
@@ -1109,7 +1114,10 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     });
     _advanceTimer?.cancel();
     _onLaserMove(null);
-    _focusNode.requestFocus();
+    // Geen focus naar de root: dan kan de geselecteerde cel zelf focus pakken
+    // en vangen de pijltjes de tekstcursor op i.p.v. de presentatie. De
+    // toetsenbordevents bereiken [_handleKey] nog steeds via bubbling vanuit de
+    // cel. Bij het verlaten zet [_exitTableEditMode] de focus terug op de root.
   }
 
   void _selectTableCell(int row, int col) {
@@ -1163,22 +1171,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         });
   }
 
-  void _moveTableCell({required int dRow, required int dCol}) {
-    if (!_tableEditMode || _textFieldFocused) return;
-    final slide = _currentSlide;
-    final rows = slide.tableRows.where((r) => r.isNotEmpty).toList();
-    if (rows.isEmpty) return;
-    final rowCount = rows.length;
-    final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
-    final row = (_tableEditRow ?? 0) + dRow;
-    final col = (_tableEditCol ?? 0) + dCol;
-    if (row < 0 || col < 0 || row >= rowCount || col >= colCount) return;
-    _selectTableCell(row, col);
-  }
-
   /// Voegt onderaan de tabel een lege rij toe en selecteert de eerste cel
-  /// ervan. Werkt ook terwijl een cel in bewerking is (geen [_textFieldFocused]
-  /// guard), zodat Tab op de laatste cel een rij kan aanmaken.
+  /// ervan. Werkt ook terwijl een cel in bewerking is, zodat Tab op de laatste
+  /// cel een rij kan aanmaken.
   void _addTableRow() {
     if (!_tableEditMode) return;
     final slideIndex = _index.clamp(0, widget.slides.length - 1);
@@ -2035,7 +2030,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       case LogicalKeyboardKey.keyE:
         if (HardwareKeyboard.instance.isShiftPressed) {
           _setTool(InkTool.eraser);
-        } else if (_currentSlideIsTable) {
+        } else if (_currentSlideTableEditable) {
           _toggleTableEditMode();
         } else {
           _setTool(InkTool.eraser);
@@ -2157,24 +2152,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       case LogicalKeyboardKey.arrowLeft:
       case LogicalKeyboardKey.arrowDown:
       case LogicalKeyboardKey.arrowUp:
-        // Staat de cursor in een cel? Laat de pijltjes dan door het tekstveld
-        // afhandelen, zodat je met links/rechts/omhoog/omlaag door de celtekst
-        // beweegt in plaats van naar een andere cel of slide te springen.
-        // Tussen cellen wissel je met Tab. We geven het event vrij (ignored)
-        // zodat het naar de tekst-bewerkingsacties van het veld doorvloeit.
-        if (_textFieldFocused) return KeyEventResult.ignored;
-        // Zonder actief tekstveld (zeldzaam, vlak na het openen) verplaatsen de
-        // pijltjes nog wél de celkeuze.
-        if (key == LogicalKeyboardKey.arrowRight) {
-          _moveTableCell(dRow: 0, dCol: 1);
-        } else if (key == LogicalKeyboardKey.arrowLeft) {
-          _moveTableCell(dRow: 0, dCol: -1);
-        } else if (key == LogicalKeyboardKey.arrowDown) {
-          _moveTableCell(dRow: 1, dCol: 0);
-        } else {
-          _moveTableCell(dRow: -1, dCol: 0);
-        }
-        return KeyEventResult.handled;
+        // Pijltjes bewegen de tekstcursor binnen de cel, niet tussen cellen of
+        // slides. We geven het event vrij (ignored) zodat het naar de tekst-
+        // bewerkingsacties van het geselecteerde celveld doorvloeit. Tussen
+        // cellen wissel je met Tab, afsluiten doe je met Esc.
+        return KeyEventResult.ignored;
       default:
         return KeyEventResult.ignored;
     }
@@ -2260,7 +2242,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
             // Subtiel potlood-icoon op tabeldia's: gedimd wanneer bewerken uit
             // staat, opgelicht wanneer het aan staat. Klikken schakelt het net
             // als de E-toets, zodat je ook met muis/clicker kunt bewerken.
-            if (_currentSlideIsTable &&
+            if (_currentSlideTableEditable &&
                 !_helpOpen &&
                 !_gridOpen &&
                 !_userNotesMode &&

@@ -1058,6 +1058,7 @@ const _dutchSourceStrings = {
     'Terug naar standaardstijl': 'Back to default style',
     'Automatisch doorgaan na': 'Advance automatically after',
     'Logo tonen op deze slide': 'Show logo on this slide',
+    'Tabel bewerkbaar tijdens presenteren': 'Table editable while presenting',
     'Footer tonen op deze slide': 'Show footer on this slide',
     'Sprekersnotities...': 'Speaker notes...',
     'Sprekersnotities': 'Speaker notes',
@@ -3470,6 +3471,8 @@ const _dutchSourceStringAdditions = {
     'Logo kiezen': 'Scegli logo',
     'Logo px': 'Logo px',
     'Logo tonen op deze slide': 'Mostra il logo su questa diapositiva',
+    'Tabel bewerkbaar tijdens presenteren':
+        'Tabella modificabile durante la presentazione',
     'Map met presentaties kiezen': 'Scegli la cartella delle presentazioni',
     'Map voor exports': 'Cartella per le esportazioni',
     'Markdown kon niet worden verwerkt. Controleer de syntax.':
@@ -4153,6 +4156,8 @@ const _dutchSourceStringAdditions = {
     'Logo kiezen': 'Logo auswählen',
     'Logo px': 'Logo px',
     'Logo tonen op deze slide': 'Logo auf dieser Folie anzeigen',
+    'Tabel bewerkbaar tijdens presenteren':
+        'Tabelle während der Präsentation bearbeitbar',
     'Map met presentaties kiezen': 'Präsentationsordner auswählen',
     'Map voor exports': 'Ordner für Exporte',
     'Markdown kon niet worden verwerkt. Controleer de syntax.':
@@ -4839,6 +4844,8 @@ const _dutchSourceStringAdditions = {
     'Logo kiezen': 'Choisir un logo',
     'Logo px': 'Logo px',
     'Logo tonen op deze slide': 'Afficher le logo sur cette diapositive',
+    'Tabel bewerkbaar tijdens presenteren':
+        'Tableau modifiable pendant la présentation',
     'Map met presentaties kiezen': 'Choisir le dossier des présentations',
     'Map voor exports': 'Dossier des exports',
     'Markdown kon niet worden verwerkt. Controleer de syntax.':
@@ -5522,6 +5529,8 @@ const _dutchSourceStringAdditions = {
     'Logo kiezen': 'Elegir logotipo',
     'Logo px': 'Logo px',
     'Logo tonen op deze slide': 'Mostrar logotipo en esta diapositiva',
+    'Tabel bewerkbaar tijdens presenteren':
+        'Tabla editable durante la presentación',
     'Map met presentaties kiezen': 'Elegir carpeta de presentaciones',
     'Map voor exports': 'Carpeta de exportaciones',
     'Markdown kon niet worden verwerkt. Controleer de syntax.':
@@ -6195,6 +6204,8 @@ const _dutchSourceStringAdditions = {
     'Logo kiezen': 'Logo kieze',
     'Logo px': 'Logo px',
     'Logo tonen op deze slide': 'Logo sjen litte op dizze dia',
+    'Tabel bewerkbaar tijdens presenteren':
+        'Tabel te bewurkjen ûnder it presintearjen',
     'Map met presentaties kiezen': 'Map mei presintaasjes kieze',
     'Map voor exports': 'Map foar eksports',
     'Markdown kon niet worden verwerkt. Controleer de syntax.':
@@ -6862,6 +6873,8 @@ const _dutchSourceStringAdditions = {
     'Logo kiezen': 'Skohe logo',
     'Logo px': 'Logo px',
     'Logo tonen op deze slide': 'Mustra logo riba e lámina aki',
+    'Tabel bewerkbaar tijdens presenteren':
+        'Tabel editabel durante presentashon',
     'Map met presentaties kiezen': 'Skohe karpeta ku presentashon',
     'Map voor exports': 'Karpeta pa eksportashon',
     'Markdown kon niet worden verwerkt. Controleer de syntax.':

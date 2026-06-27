@@ -100,11 +100,13 @@ class _TableEditCell extends StatefulWidget {
 
 class _TableEditCellState extends State<_TableEditCell> {
   late final TextEditingController _controller;
+  final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController(text: widget.value);
+    if (widget.selected) _requestFocusSoon();
   }
 
   @override
@@ -113,10 +115,24 @@ class _TableEditCellState extends State<_TableEditCell> {
     if (widget.value != oldWidget.value && widget.value != _controller.text) {
       _controller.text = widget.value;
     }
+    // Zodra deze cel geselecteerd raakt (via Tab, klik of de toggle) pakt het
+    // tekstveld expliciet focus, zodat de pijltjes de tekstcursor sturen in
+    // plaats van de presentatie. Enkel `autofocus` is onbetrouwbaar wanneer de
+    // root-focusnode de focus nog vasthield.
+    if (widget.selected && !oldWidget.selected) _requestFocusSoon();
+  }
+
+  /// Vraag focus ná de frame waarin het tekstveld is opgebouwd, zodat de
+  /// [FocusNode] daadwerkelijk aan een veld hangt voordat we hem focussen.
+  void _requestFocusSoon() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && widget.selected) _focusNode.requestFocus();
+    });
   }
 
   @override
   void dispose() {
+    _focusNode.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -172,7 +188,7 @@ class _TableEditCellState extends State<_TableEditCell> {
         child: widget.selected
             ? TextField(
                 controller: _controller,
-                autofocus: true,
+                focusNode: _focusNode,
                 maxLines: null,
                 style: fieldStyle,
                 decoration: const InputDecoration(

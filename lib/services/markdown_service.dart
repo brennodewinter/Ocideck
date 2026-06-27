@@ -214,6 +214,9 @@ class MarkdownService {
       // Mark slides that opt out of the footer. Older presentations lack this
       // token and therefore keep the existing default: footer shown.
       if (!slide.showFooter) 'no-footer',
+      // Table slides that may be edited live during a presentation. Absent by
+      // default, so tables stay read-only unless the author opts in.
+      if (slide.type == SlideType.table && slide.tableEditable) 'table-editable',
       // Timeline layout/animation options ride along as extra class tokens so
       // they round-trip without a JSON block (the base `timeline` token comes
       // from marpClass above).
@@ -1423,6 +1426,7 @@ class MarkdownService {
               c != 'logo-safe' &&
               c != 'no-logo' &&
               c != 'no-footer' &&
+              c != 'table-editable' &&
               !isTimelineOptionToken(c),
         )
         .join(' ');
@@ -1468,6 +1472,8 @@ class MarkdownService {
       skipped: skipped,
       tlp: slideTlp,
       tableRows: type == SlideType.table ? tableRows : const [],
+      tableEditable:
+          type == SlideType.table && classTokens.contains('table-editable'),
       timelineLayout: type == SlideType.timeline
           ? timelineLayoutFromTokens(classTokens)
           : TimelineLayout.auto,

@@ -176,6 +176,7 @@ void main() {
     final tableSlides = [
       Slide.create(SlideType.table).copyWith(
         title: 'Cijfers',
+        tableEditable: true,
         tableRows: [
           ['Kolom', 'Waarde'],
           ['Omzet', '100'],
@@ -229,6 +230,7 @@ void main() {
     final tableSlides = [
       Slide.create(SlideType.table).copyWith(
         title: 'Cijfers',
+        tableEditable: true,
         tableRows: [
           ['Kolom', 'Waarde'],
           ['Omzet', '100'],
@@ -272,6 +274,7 @@ void main() {
     final tableSlides = [
       Slide.create(SlideType.table).copyWith(
         title: 'Cijfers',
+        tableEditable: true,
         tableRows: [
           ['Kolom', 'Waarde'],
           ['Omzet', '100'],
@@ -296,8 +299,8 @@ void main() {
     expect(find.text('Tabel bewerken'), findsOneWidget);
 
     // Letters (incl. 'e'), spatie en cijfers horen tijdens het bewerken naar de
-    // cel te gaan: geen sneltoetsrol, dus geen doorbladeren of afsluiten.
-    // Pijltjes verplaatsen de celkeuze maar mogen evenmin navigeren/afsluiten.
+    // cel te gaan: geen sneltoetsrol, dus geen doorbladeren of afsluiten. De
+    // pijltjes sturen de tekstcursor in de cel en mogen evenmin navigeren.
     for (final key in [
       LogicalKeyboardKey.space,
       LogicalKeyboardKey.keyA,
@@ -320,6 +323,42 @@ void main() {
     await tester.sendKeyEvent(LogicalKeyboardKey.escape);
     await tester.pump();
     expect(find.text('Tabel bewerken'), findsNothing);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('a read-only table offers no edit toggle and E acts as eraser', (
+    tester,
+  ) async {
+    // Standaard staat een tabel op alleen-lezen (tableEditable == false): geen
+    // potlood-icoon, en E valt terug op het gum-gereedschap.
+    final tableSlides = [
+      Slide.create(SlideType.table).copyWith(
+        title: 'Cijfers',
+        tableRows: [
+          ['Kolom', 'Waarde'],
+          ['Omzet', '100'],
+        ],
+      ),
+    ];
+    await tester.pumpWidget(
+      MaterialApp(
+        home: FullscreenPresenter(
+          slides: tableSlides,
+          projectPath: null,
+          themeProfile: const ThemeProfile(),
+          initialIndex: 0,
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.byTooltip('Tabel bewerken (E)'), findsNothing);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyE);
+    await tester.pump();
+    expect(find.text('Tabel bewerken'), findsNothing);
+    expect(find.byIcon(Icons.cleaning_services_outlined), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox());
   });
