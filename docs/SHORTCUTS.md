@@ -68,14 +68,29 @@ Annotation tools:
 | --- | --- |
 | `D` | Pen |
 | `T` | Highlighter |
-| `E` | Edit table (on table slides) |
+| `E` | Toggle table editing — only on tables marked *editable while presenting* in the builder; otherwise acts as the eraser |
 | `⇧E` | Eraser |
 | `X` | Laser pointer |
 | `C` | Clear the current slide's annotations |
 
-`Esc` is layered: it first closes the **my notes** panel (`Ctrl/Cmd + N`), then puts
-away the active annotation tool, then clears a typed slide number, then removes a
-black/white screen, and finally exits the presentation.
+Live table editing:
+
+A table can only be edited during a presentation when it is marked **editable
+while presenting** in the builder (a per-table checkbox; off by default). On such
+slides a subtle pencil icon appears in the top-right corner — dimmed when off,
+highlighted when on — that toggles editing with a mouse/clicker, just like `E`.
+
+| Shortcut | Action |
+| --- | --- |
+| `E` · pencil icon | Toggle table editing |
+| `←` · `→` · `↑` · `↓` | Move the text cursor inside the focused cell |
+| `Tab` · `⇧Tab` | Move to the next · previous cell (a new row is added past the last cell) |
+| `Esc` | Leave table editing |
+
+`Esc` is layered: it first closes the **my notes** panel (`Ctrl/Cmd + N`), then
+leaves table editing, then puts away the active annotation tool, then clears a
+typed slide number, then removes a black/white screen, and finally exits the
+presentation.
 
 > In **dual-screen** mode (macOS, Windows, Linux) the keyboard stays with the
 > laptop (presenter) window; clicks on the beamer also advance the slide.

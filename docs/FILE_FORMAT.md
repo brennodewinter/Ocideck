@@ -219,6 +219,9 @@ Additional behavior classes:
 - `no-logo` — hide the logo on this slide (`showLogo = false`).
 - `no-footer` — hide the footer on this slide (`showFooter = false`). If this
   token is absent (older files), the footer remains visible.
+- `table-editable` — allow this table to be edited live during a presentation
+  (`tableEditable = true`). Only meaningful on `table` slides. If the token is
+  absent (older files, or the default), the table is read-only while presenting.
 
 When reading, OciDeck recognizes and removes the type and behavior classes; what
 remains is preserved as the slide's custom `cssClass`.
@@ -364,6 +367,8 @@ Inside cells, `|` is written as `\|` and line endings as `<br>`:
 | --- | --- |
 | a | b |
 ```
+Add the `table-editable` behavior class (see §4) to let the table be edited live
+while presenting; without it the table is read-only during a presentation.
 
 **Free Markdown** (no class) — content is written verbatim.
 
@@ -716,7 +721,7 @@ not model is not reported.
 | **Comment** | warning | Comment without `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:`, or `advance:`. |
 | **Code blocks** | error | Odd number of ` ``` ` lines (not closed). |
 | **`_class`** | error | Malformed `<!-- _class: ... -->`. |
-| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `logo-safe`, `no-logo`, `no-footer`). |
+| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`). |
 | **Slide metadata** | error | Unknown `<!-- tlp: ... -->`, non-numeric `<!-- advance: ... -->`, or invalid `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`). |
 | **Two columns** | error | Invalid base64/JSON in `ocideck_two_bullets_*` comments. |
 | **Images** | error | `![...](...` without closing `)`. |

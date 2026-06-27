@@ -54,6 +54,11 @@ semicolon-separated), or a markdown table fills the grid from that cell onward,
 adding rows and columns as needed. Ordinary text — even a sentence with a comma
 in it — still pastes into just the one cell.
 
+By default a table can only be changed in the builder. To also let it be edited
+live during a presentation, tick **Table editable while presenting** in
+*Per-slide options* (shown only on table slides). See
+[Editing a table while presenting](#editing-a-table-while-presenting).
+
 ### Charts
 
 Pick a type (**bar**, **stacked bar**, **line**, **pie**, **spider/radar**, or
@@ -182,6 +187,8 @@ Below each editor you can set:
 - **Auto-advance** after N seconds.
 - **TLP of this slide** — a Traffic Light Protocol level (see below).
 - Show/hide the **logo** and **footer** on this slide.
+- **Table editable while presenting** (table slides only) — off by default;
+  when on, the table can be changed live during a presentation.
 - **Speaker notes** — collapsible amber block at the bottom of the editor (stored
   in the Marp Markdown and included in PPTX export). Use the discard button in the
   header to clear the field; undo restores cleared speaker notes.
@@ -267,11 +274,22 @@ mirrored) display. Notes:
 
 ### Annotating while presenting
 
-Draw on the slide live with **D** pen, **T** highlighter, **⇧E** eraser, **E**
-to edit a table on table slides, **X** laser pointer, and **C** to clear; `Esc`
-puts the tool away. Drawings are a
+Draw on the slide live with **D** pen, **T** highlighter, **⇧E** eraser, **X**
+laser pointer, and **C** to clear; `Esc` puts the tool away. Drawings are a
 separate layer (never written into the Marp Markdown), mirror live to the beamer,
 and are saved in a `<name>.ink.json` sidecar so they persist with the deck.
+
+### Editing a table while presenting
+
+Tables marked **editable while presenting** (see *Per-slide options*) can be
+changed live without leaving the presentation — handy for filling in figures or
+ticking items in front of an audience. On such a slide a subtle pencil icon
+appears top-right: dimmed when off, highlighted when on. Click it, or press
+**E**, to toggle editing (read-only tables keep **E** as the eraser). While
+editing, the **arrow keys** move the text cursor inside the cell, **Tab** /
+**⇧Tab** jump to the next / previous cell (a new row is added past the last
+cell), and `Esc` leaves editing. Changes are written back to the deck and mirror
+to the beamer in dual-screen mode.
 
 ### User notes (recipient / course)
 
