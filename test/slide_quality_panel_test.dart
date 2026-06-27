@@ -75,6 +75,49 @@ void main() {
     expect(find.textContaining('waarschuwing(en)'), findsOneWidget);
   });
 
+  testWidgets('green bar lists the checks that were performed', (tester) async {
+    final cleanDeck = Deck(
+      title: 'Schoon',
+      themeProfile: const ThemeProfile(
+        textColor: '#000000',
+        slideBackgroundColor: '#FFFFFF',
+        titleTextColor: '#000000',
+        titleBackgroundColor: '#FFFFFF',
+        tableTextColor: '#000000',
+        tableHeaderTextColor: '#000000',
+        tableHeaderBackgroundColor: '#FFFFFF',
+      ),
+      slides: [Slide.create(SlideType.title).copyWith(title: 'Welkom')],
+    );
+
+    await tester.pumpWidget(_host(cleanDeck));
+    await tester.pump();
+
+    expect(
+      find.textContaining('Geen kwaliteitsproblemen gevonden'),
+      findsOneWidget,
+    );
+    // Ingeklapt: de verantwoording is nog verborgen tot je uitklapt.
+    expect(find.textContaining('Uitgevoerde controles'), findsNothing);
+
+    await tester.tap(find.textContaining('Slidekwaliteit'));
+    await tester.pump();
+
+    expect(find.textContaining('Uitgevoerde controles'), findsOneWidget);
+    expect(
+      find.text('Contrast en leesbaarheid van tekstkleuren'),
+      findsOneWidget,
+    );
+    expect(find.textContaining('getoetst aan WCAG AA'), findsOneWidget);
+    // De parameterregel toont de echte drempels uit de constanten, bv. de
+    // bullet-waarschuwing (8) en de quote-grens (750 tekens).
+    expect(
+      find.textContaining('Waarschuwing boven 8 bullets'),
+      findsOneWidget,
+    );
+    expect(find.textContaining('Quote boven 750 tekens'), findsOneWidget);
+  });
+
   testWidgets('app shell tab scope shows quality issues for overfull deck', (
     tester,
   ) async {

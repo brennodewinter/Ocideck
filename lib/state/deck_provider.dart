@@ -8,6 +8,12 @@ import '../services/annotation_codec.dart';
 import '../services/file_service.dart';
 import '../services/image_service.dart';
 import '../services/markdown_service.dart';
+import '../services/slide_layout_metrics.dart';
+import '../services/slide_quality_analyzer.dart'
+    show
+        kChecklistBulletWarningCount,
+        kSingleColumnBulletWarningCount,
+        kTwoColumnBulletWarningCount;
 import '../services/user_notes_codec.dart';
 import '../utils/log.dart';
 import '../utils/page_scoped_notes.dart';
@@ -304,6 +310,77 @@ class DeckNotifier extends StateNotifier<DeckState> {
     final slides = List<Slide>.from(deck.slides);
     slides.insert(index + 1, Slide.duplicate(slides[index]));
     _mutate(deck.copyWith(slides: slides));
+  }
+
+  /// Splitst de bulletslide op [index] in tweeën: het maximale aantal bullets
+  /// dat op natuurlijke grootte op één slide past blijft staan, de rest verhuist
+  /// naar een nieuwe slide erna. Doet niets als de slide geen (genoeg) bullets
+  /// heeft om te splitsen.
+  void splitSlide(int index) {
+    final deck = state.deck;
+    if (deck == null || index < 0 || index >= deck.slides.length) return;
+    final split = _splitSlide(deck.slides[index], deck.themeProfile.fontFamily);
+    if (split == null) return;
+    final slides = List<Slide>.from(deck.slides);
+    slides[index] = split.first;
+    slides.insert(index + 1, split.second);
+    // De huidige slide krijgt nieuwe inhoud, dus forceer een editor-refresh.
+    _mutate(deck.copyWith(slides: slides), bumpRevision: true);
+  }
+
+  /// Bepaalt hoe de bulletslide [slide] in tweeën valt, of `null` als dat niet
+  /// kan (geen bullettype, of te weinig bullets om te splitsen).
+  ({Slide first, Slide second})? _splitSlide(Slide slide, String font) {
+    // Slide 1 houdt het optimum: niet meer dan wat op natuurlijke grootte past
+    // én niet meer dan de leesbaarheidsdrempel, zodat de overgebleven slide niet
+    // opnieuw te vol is. Past de hele kolom al binnen het optimum (de slide is
+    // niet te vol), dan splitsen we netjes doormidden — de gebruiker koos er
+    // immers bewust voor om in tweeën te knippen. Resultaat ligt altijd in
+    // [1, len-1] zodat beide helften minstens één bullet houden.
+    int keepFor(int fit, int len, int limit) {
+      if (len < 2) return len; // niets te verplaatsen in deze kolom
+      var keep = fit < limit ? fit : limit;
+      if (keep >= len) keep = len ~/ 2;
+      return keep < 1 ? 1 : (keep > len - 1 ? len - 1 : keep);
+    }
+
+    switch (slide.type) {
+      case SlideType.bullets:
+      case SlideType.bulletsImage:
+        final bullets = slide.bullets;
+        if (bullets.length < 2) return null;
+        final counts = bulletFitCounts(slide: slide, font: font);
+        // Checklists houden hun ruimere optimum aan (consistent met de
+        // waarschuwingsdrempel), zodat een lijst van 12 niet onnodig krimpt.
+        final limit = slide.listStyle == ListStyle.checklist
+            ? kChecklistBulletWarningCount
+            : kSingleColumnBulletWarningCount;
+        final at = keepFor(counts.left, bullets.length, limit);
+        return (
+          first: slide.copyWith(bullets: bullets.sublist(0, at)),
+          second: Slide.duplicate(slide).copyWith(bullets: bullets.sublist(at)),
+        );
+      case SlideType.twoBullets:
+        final left = slide.bullets;
+        final right = slide.bullets2;
+        if (left.length < 2 && right.length < 2) return null;
+        final counts = bulletFitCounts(slide: slide, font: font);
+        const perColumn = kTwoColumnBulletWarningCount ~/ 2;
+        final leftAt = keepFor(counts.left, left.length, perColumn);
+        final rightAt = keepFor(counts.right, right.length, perColumn);
+        return (
+          first: slide.copyWith(
+            bullets: left.sublist(0, leftAt),
+            bullets2: right.sublist(0, rightAt),
+          ),
+          second: Slide.duplicate(slide).copyWith(
+            bullets: left.sublist(leftAt),
+            bullets2: right.sublist(rightAt),
+          ),
+        );
+      default:
+        return null;
+    }
   }
 
   /// Knip de videoslide op [index] op tijdstip [atMs]: het huidige segment

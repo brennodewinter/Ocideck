@@ -94,9 +94,7 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           InkWell(
-            onTap: result.hasIssues
-                ? () => setState(() => _expanded = !_expanded)
-                : null,
+            onTap: () => setState(() => _expanded = !_expanded),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               child: Row(
@@ -115,16 +113,74 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
                       style: TextStyle(fontSize: 11, color: iconColor),
                     ),
                   ),
-                  if (result.hasIssues)
-                    Icon(
-                      _expanded ? Icons.expand_less : Icons.expand_more,
-                      size: 18,
-                      color: iconColor,
-                    ),
+                  Icon(
+                    _expanded ? Icons.expand_less : Icons.expand_more,
+                    size: 18,
+                    color: iconColor,
+                  ),
                 ],
               ),
             ),
           ),
+          if (!result.hasIssues && _expanded) ...[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${l10n.d('Uitgevoerde controles')}:',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w600,
+                      color: iconColor,
+                    ),
+                  ),
+                  for (final check in slideQualityPerformedChecks(l10n))
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(Icons.check, size: 12, color: iconColor),
+                          const SizedBox(width: 6),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  check.title,
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w600,
+                                    color: iconColor,
+                                  ),
+                                ),
+                                Text(
+                                  check.detail,
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: iconColor.withValues(alpha: 0.85),
+                                  ),
+                                ),
+                                Text(
+                                  check.params,
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontStyle: FontStyle.italic,
+                                    color: iconColor.withValues(alpha: 0.7),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
           if (result.hasIssues) ...[
             Padding(
               padding: const EdgeInsets.fromLTRB(12, 0, 12, 4),

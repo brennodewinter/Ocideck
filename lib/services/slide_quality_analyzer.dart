@@ -14,13 +14,18 @@ import '../widgets/slides/inline_markdown.dart';
 import 'slide_layout_metrics.dart';
 
 /// Maximum combined quote + author length before a density warning.
-const int kQuoteDensityCharThreshold = 200;
+const int kQuoteDensityCharThreshold = 750;
 
 /// Readability guardrails for bullet-heavy slides. The existing fit-scale check
 /// catches physical overflow; these thresholds catch slides that still fit but
 /// are likely too dense for an audience to read comfortably.
 const int kSingleColumnBulletWarningCount = 8;
 const int kSingleColumnBulletCriticalCount = 14;
+
+/// Checklists mogen meer regels dragen voor een waarschuwing verschijnt: een
+/// af te vinken takenlijst kan een legitiem zakelijk doel dienen waar acht
+/// regels te beperkend voor is.
+const int kChecklistBulletWarningCount = 12;
 const int kTwoColumnBulletWarningCount = 14;
 const int kTwoColumnBulletCriticalCount = 22;
 const int kSingleColumnWordWarningCount = 90;
@@ -31,6 +36,9 @@ const int kAverageBulletWordInfoCount = 15;
 const int kAverageBulletWordWarningCount = 25;
 const int kLongMultiSentenceBulletWordCount = 24;
 const int kBulletDisplayLevelWarning = 3;
+
+/// Maximum combined title + subtitle length before a density warning.
+const int kTitleDensityCharThreshold = 120;
 
 /// Footer text opacity in slide previews — keep in sync with overlays.dart.
 const double kFooterTextAlpha = 0.7;
@@ -526,6 +534,7 @@ class SlideQualityAnalyzer {
       index: index,
       issues: issues,
       twoColumn: twoColumn,
+      listStyle: slide.listStyle,
     );
   }
 
@@ -535,14 +544,19 @@ class SlideQualityAnalyzer {
     required int index,
     required List<SlideQualityIssue> issues,
     required bool twoColumn,
+    required ListStyle listStyle,
   }) {
     final all = [...left, ...right];
     if (all.isEmpty) return;
 
     final bulletCount = all.length;
+    // Enkelkoloms checklists krijgen een ruimere drempel (zie
+    // [kChecklistBulletWarningCount]); andere lijsten en twee kolommen niet.
     final warningCount = twoColumn
         ? kTwoColumnBulletWarningCount
-        : kSingleColumnBulletWarningCount;
+        : (listStyle == ListStyle.checklist
+              ? kChecklistBulletWarningCount
+              : kSingleColumnBulletWarningCount);
     final criticalCount = twoColumn
         ? kTwoColumnBulletCriticalCount
         : kSingleColumnBulletCriticalCount;
@@ -755,6 +769,8 @@ class SlideQualityAnalyzer {
         index: index,
         issues: issues,
         twoColumn: false,
+        // Vrije markdown is geen checklist: gewone enkelkoloms drempel.
+        listStyle: ListStyle.bullets,
       );
     }
     final lines = md.split('\n').where((l) => l.trim().isNotEmpty).length;
@@ -779,7 +795,7 @@ class SlideQualityAnalyzer {
   ) {
     final titleLen = stripInlineMarkdown(slide.title).length;
     final subtitleLen = stripInlineMarkdown(slide.subtitle).length;
-    if (titleLen + subtitleLen <= 120) return;
+    if (titleLen + subtitleLen <= kTitleDensityCharThreshold) return;
 
     issues.add(
       SlideQualityIssue(

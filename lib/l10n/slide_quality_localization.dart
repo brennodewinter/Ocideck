@@ -3,6 +3,22 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../models/markdown_validation.dart';
 import '../models/slide_quality.dart';
+import '../services/slide_layout_metrics.dart'
+    show kTextDensityCriticalScale, kTextDensityWarningScale;
+import '../services/slide_quality_analyzer.dart'
+    show
+        kAverageBulletWordWarningCount,
+        kBulletDisplayLevelWarning,
+        kChecklistBulletWarningCount,
+        kQuoteDensityCharThreshold,
+        kSingleColumnBulletCriticalCount,
+        kSingleColumnBulletWarningCount,
+        kSingleColumnWordWarningCount,
+        kTitleDensityCharThreshold,
+        kTwoColumnBulletCriticalCount,
+        kTwoColumnBulletWarningCount,
+        kTwoColumnWordWarningCount;
+import '../utils/color_contrast.dart' show kWcagCriticalBodyText;
 
 String formatSlideQualityCountSummary(
   AppLocalizations l10n,
@@ -38,6 +54,92 @@ String formatQualityExportReason(
   }
   return '${l10n.d('De presentatie heeft kwaliteitsproblemen (')}'
       '${parts.join(', ')}).';
+}
+
+/// Vervangt `{sleutel}`-plaatshouders in een vertaalde template door de echte
+/// drempelwaarden. Zo blijven de cijfers één bron (de constanten) en hoeft de
+/// vertaling alleen de tekst eromheen te dekken.
+String _fillParams(String template, Map<String, Object> values) {
+  var out = template;
+  values.forEach((key, value) => out = out.replaceAll('{$key}', '$value'));
+  return out;
+}
+
+/// De controles die de slidekwaliteit-analyse altijd uitvoert, met per controle
+/// een korte verantwoording ([detail]) en de geldende parameters ([params],
+/// opgebouwd uit de echte drempelconstanten). Getoond bij een groene balk zodat
+/// duidelijk is wat er is gecontroleerd, hoe en met welke grenzen. Houd in lijn
+/// met de checks in [SlideQualityAnalyzer.analyzeSlides].
+List<({String title, String detail, String params})> slideQualityPerformedChecks(
+  AppLocalizations l10n,
+) {
+  // De tekstkrimp-grenzen worden als percentage getoond.
+  final warnPct = (kTextDensityWarningScale * 100).round();
+  final critPct = (kTextDensityCriticalScale * 100).round();
+  // Elke d()-string is één enkele literal: de l10n-volledigheidstest leest per
+  // .d(...) maar één string, dus geen aaneengeschakelde literals gebruiken.
+  return [
+    (
+      title: l10n.d('Contrast en leesbaarheid van tekstkleuren'),
+      detail: l10n.d(
+        'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).',
+      ),
+      params: _fillParams(
+        l10n.d(
+          'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.',
+        ),
+        {'crit': kWcagCriticalBodyText.toStringAsFixed(1)},
+      ),
+    ),
+    (
+      title: l10n.d(
+        'Alt-teksten en bijschriften van afbeeldingen, grafieken en media',
+      ),
+      detail: l10n.d(
+        'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.',
+      ),
+      params: l10n.d(
+        'Geen drempelwaarde: een niet-lege beschrijving is verplicht.',
+      ),
+    ),
+    (
+      title: l10n.d('Aanwezigheid van gekoppelde mediabestanden'),
+      detail: l10n.d(
+        'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.',
+      ),
+      params: l10n.d(
+        'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.',
+      ),
+    ),
+    (
+      title: l10n.d(
+        'Tekstdichtheid: bullets, woorden, quotes, tabellen en code',
+      ),
+      detail: l10n.d(
+        'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.',
+      ),
+      params: _fillParams(
+        l10n.d(
+          'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.',
+        ),
+        {
+          'b1': kSingleColumnBulletWarningCount,
+          'bcl': kChecklistBulletWarningCount,
+          'b2': kTwoColumnBulletWarningCount,
+          'bc1': kSingleColumnBulletCriticalCount,
+          'bc2': kTwoColumnBulletCriticalCount,
+          'w1': kSingleColumnWordWarningCount,
+          'w2': kTwoColumnWordWarningCount,
+          'avg': kAverageBulletWordWarningCount,
+          'q': kQuoteDensityCharThreshold,
+          't': kTitleDensityCharThreshold,
+          'lvl': kBulletDisplayLevelWarning,
+          'warn': warnPct,
+          'crit': critPct,
+        },
+      ),
+    ),
+  ];
 }
 
 Color slideQualitySeverityColor(MarkdownValidationSeverity severity) {
