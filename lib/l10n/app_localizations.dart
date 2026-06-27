@@ -2550,6 +2550,32 @@ const _dutchSourceStrings = {
 const _dutchSourceStringAdditions = {
   'en': {
     // Schijf-brede presentatiezoeker (bekende mappen).
+    'In tweeën splitsen': 'Split in two',
+    'Uitgevoerde controles': 'Checks performed',
+    'Contrast en leesbaarheid van tekstkleuren':
+        'Contrast and legibility of text colours',
+    'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+        'Alt text and captions for images, charts and media',
+    'Aanwezigheid van gekoppelde mediabestanden':
+        'Presence of linked media files',
+    'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+        'Text density: bullets, words, quotes, tables and code',
+    'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+        'Theme, slides, footer, checklist and titles over images, checked against WCAG AA (4.5:1 for text, 3:1 for large text).',
+    'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+        'Every image, chart, video and audio needs a description for screen readers and handouts.',
+    'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+        'References to images, video and audio are checked for an existing file in the project.',
+    'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+        'Number and length of bullets, words, nesting, column balance and the density of quotes, titles, tables and code so everything fits legibly.',
+    'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+        'Body text with contrast below {crit}:1 counts as an error; above that up to the AA norm as a warning.',
+    'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+        'No threshold: a non-empty description is required.',
+    'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+        'No threshold: the linked file must exist within the project folder.',
+    'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+        'Warning above {b1} bullets (1 column), {bcl} (checklist) or {b2} (2 columns); critical above {bc1} or {bc2}. Words above {w1}/{w2}, on average above {avg} per bullet. Quote above {q} characters, title above {t} characters. Nesting deeper than level {lvl}. Text that must shrink below {warn}% warns, below {crit}% is critical.',
     'Zoek op deze computer': 'Search this computer',
     'Presentaties zoeken op deze computer':
         'Find presentations on this computer',
@@ -3020,12 +3046,40 @@ const _dutchSourceStringAdditions = {
     'Tabel bewerken': 'Edit table',
     'Pijltjes · Tab · Esc': 'Arrow keys · Tab · Esc',
     'Tabel bewerken (op tabeldia)': 'Edit table (on table slides)',
+    'Tabel bewerken (E)': 'Edit table (E)',
+    'Tab wisselt cel · Esc sluit': 'Tab switches cell · Esc closes',
     'Pen · markeerstift · ⇧E': 'Pen · highlighter · ⇧E',
     'Gestapelde staaf': 'Stacked bar',
     'Spreiding': 'Scatter',
   },
   'it': {
     // Schijf-brede presentatiezoeker (bekende mappen).
+    'In tweeën splitsen': 'Dividi in due',
+    'Uitgevoerde controles': 'Controlli eseguiti',
+    'Contrast en leesbaarheid van tekstkleuren':
+        'Contrasto e leggibilità dei colori del testo',
+    'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+        'Testi alternativi e didascalie di immagini, grafici e media',
+    'Aanwezigheid van gekoppelde mediabestanden':
+        'Presenza dei file multimediali collegati',
+    'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+        'Densità del testo: elenchi, parole, citazioni, tabelle e codice',
+    'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+        'Tema, slide, piè di pagina, checklist e titoli su immagini, verificati secondo WCAG AA (4,5:1 per il testo, 3:1 per il testo grande).',
+    'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+        'Ogni immagine, grafico, video e audio necessita di una descrizione per screen reader e dispense.',
+    'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+        'I riferimenti a immagini, video e audio vengono verificati per un file esistente nel progetto.',
+    'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+        'Numero e lunghezza di elenchi, parole, annidamento, equilibrio delle colonne e densità di citazioni, titoli, tabelle e codice affinché tutto entri in modo leggibile.',
+    'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+        'Il testo del corpo con contrasto inferiore a {crit}:1 è un errore; oltre, fino alla norma AA, un avviso.',
+    'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+        'Nessuna soglia: è obbligatoria una descrizione non vuota.',
+    'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+        'Nessuna soglia: il file collegato deve esistere nella cartella del progetto.',
+    'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+        'Avviso oltre {b1} elenchi puntati (1 colonna), {bcl} (checklist) o {b2} (2 colonne); critico oltre {bc1} o {bc2}. Parole oltre {w1}/{w2}, in media oltre {avg} per punto. Citazione oltre {q} caratteri, titolo oltre {t} caratteri. Annidamento più profondo del livello {lvl}. Il testo che deve ridursi sotto il {warn}% avvisa, sotto il {crit}% è critico.',
     'Zoek op deze computer': 'Cerca in questo computer',
     'Presentaties zoeken op deze computer':
         'Trova presentazioni su questo computer',
@@ -3675,12 +3729,40 @@ const _dutchSourceStringAdditions = {
     'Tabel bewerken': 'Modifica tabella',
     'Pijltjes · Tab · Esc': 'Frecce · Tab · Esc',
     'Tabel bewerken (op tabeldia)': 'Modifica tabella (su slide tabella)',
+    'Tabel bewerken (E)': 'Modifica tabella (E)',
+    'Tab wisselt cel · Esc sluit': 'Tab cambia cella · Esc chiude',
     'Pen · markeerstift · ⇧E': 'Penna · evidenziatore · ⇧E',
     'Gestapelde staaf': 'Barre impilate',
     'Spreiding': 'Dispersione',
   },
   'de': {
     // Schijf-brede presentatiezoeker (bekende mappen).
+    'In tweeën splitsen': 'In zwei teilen',
+    'Uitgevoerde controles': 'Durchgeführte Prüfungen',
+    'Contrast en leesbaarheid van tekstkleuren':
+        'Kontrast und Lesbarkeit der Textfarben',
+    'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+        'Alt-Texte und Bildunterschriften für Bilder, Diagramme und Medien',
+    'Aanwezigheid van gekoppelde mediabestanden':
+        'Vorhandensein verknüpfter Mediendateien',
+    'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+        'Textdichte: Aufzählungen, Wörter, Zitate, Tabellen und Code',
+    'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+        'Thema, Folien, Fußzeile, Checkliste und Titel über Bildern, geprüft nach WCAG AA (4,5:1 für Text, 3:1 für großen Text).',
+    'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+        'Jedes Bild, Diagramm, Video und Audio braucht eine Beschreibung für Screenreader und Handouts.',
+    'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+        'Verweise auf Bilder, Video und Audio werden auf eine vorhandene Datei im Projekt geprüft.',
+    'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+        'Anzahl und Länge von Aufzählungen, Wörtern, Verschachtelung, Spaltenbalance und die Dichte von Zitaten, Titeln, Tabellen und Code, damit alles lesbar passt.',
+    'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+        'Fließtext mit Kontrast unter {crit}:1 gilt als Fehler; darüber bis zur AA-Norm als Warnung.',
+    'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+        'Kein Schwellenwert: eine nicht leere Beschreibung ist erforderlich.',
+    'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+        'Kein Schwellenwert: die verknüpfte Datei muss im Projektordner vorhanden sein.',
+    'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+        'Warnung über {b1} Aufzählungen (1 Spalte), {bcl} (Checkliste) oder {b2} (2 Spalten); kritisch über {bc1} oder {bc2}. Wörter über {w1}/{w2}, im Schnitt über {avg} pro Punkt. Zitat über {q} Zeichen, Titel über {t} Zeichen. Verschachtelung tiefer als Ebene {lvl}. Text, der unter {warn}% schrumpfen muss, warnt, unter {crit}% ist kritisch.',
     'Zoek op deze computer': 'Diesen Computer durchsuchen',
     'Presentaties zoeken op deze computer':
         'Präsentationen auf diesem Computer finden',
@@ -4329,12 +4411,40 @@ const _dutchSourceStringAdditions = {
     'Tabel bewerken': 'Tabelle bearbeiten',
     'Pijltjes · Tab · Esc': 'Pfeiltasten · Tab · Esc',
     'Tabel bewerken (op tabeldia)': 'Tabelle bearbeiten (auf Tabellenfolie)',
+    'Tabel bewerken (E)': 'Tabelle bearbeiten (E)',
+    'Tab wisselt cel · Esc sluit': 'Tab wechselt Zelle · Esc schließt',
     'Pen · markeerstift · ⇧E': 'Stift · Marker · ⇧E',
     'Gestapelde staaf': 'Gestapelte Balken',
     'Spreiding': 'Streudiagramm',
   },
   'fr': {
     // Schijf-brede presentatiezoeker (bekende mappen).
+    'In tweeën splitsen': 'Diviser en deux',
+    'Uitgevoerde controles': 'Contrôles effectués',
+    'Contrast en leesbaarheid van tekstkleuren':
+        'Contraste et lisibilité des couleurs de texte',
+    'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+        'Textes alternatifs et légendes des images, graphiques et médias',
+    'Aanwezigheid van gekoppelde mediabestanden':
+        'Présence des fichiers multimédias liés',
+    'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+        'Densité du texte : puces, mots, citations, tableaux et code',
+    'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+        'Thème, diapositives, pied de page, checklist et titres sur images, vérifiés selon WCAG AA (4,5:1 pour le texte, 3:1 pour le grand texte).',
+    'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+        'Chaque image, graphique, vidéo et audio nécessite une description pour les lecteurs d’écran et les documents.',
+    'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+        'Les références aux images, vidéos et audio sont vérifiées pour un fichier existant dans le projet.',
+    'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+        'Nombre et longueur des puces, mots, imbrication, équilibre des colonnes et densité des citations, titres, tableaux et code pour que tout tienne lisiblement.',
+    'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+        'Le texte courant avec un contraste inférieur à {crit}:1 est une erreur ; au-dessus, jusqu’à la norme AA, un avertissement.',
+    'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+        'Aucun seuil : une description non vide est obligatoire.',
+    'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+        'Aucun seuil : le fichier lié doit exister dans le dossier du projet.',
+    'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+        'Avertissement au-delà de {b1} puces (1 colonne), {bcl} (checklist) ou {b2} (2 colonnes) ; critique au-delà de {bc1} ou {bc2}. Mots au-delà de {w1}/{w2}, en moyenne au-delà de {avg} par puce. Citation au-delà de {q} caractères, titre au-delà de {t} caractères. Imbrication plus profonde que le niveau {lvl}. Le texte qui doit se réduire en dessous de {warn}% avertit, en dessous de {crit}% est critique.',
     'Zoek op deze computer': 'Rechercher sur cet ordinateur',
     'Presentaties zoeken op deze computer':
         'Trouver des présentations sur cet ordinateur',
@@ -4989,12 +5099,40 @@ const _dutchSourceStringAdditions = {
     'Tabel bewerken': 'Modifier le tableau',
     'Pijltjes · Tab · Esc': 'Flèches · Tab · Échap',
     'Tabel bewerken (op tabeldia)': 'Modifier le tableau (sur diapo tableau)',
+    'Tabel bewerken (E)': 'Modifier le tableau (E)',
+    'Tab wisselt cel · Esc sluit': 'Tab change de cellule · Échap ferme',
     'Pen · markeerstift · ⇧E': 'Stylo · surligneur · ⇧E',
     'Gestapelde staaf': 'Barres empilées',
     'Spreiding': 'Nuage de points',
   },
   'es': {
     // Schijf-brede presentatiezoeker (bekende mappen).
+    'In tweeën splitsen': 'Dividir en dos',
+    'Uitgevoerde controles': 'Comprobaciones realizadas',
+    'Contrast en leesbaarheid van tekstkleuren':
+        'Contraste y legibilidad de los colores del texto',
+    'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+        'Textos alternativos y leyendas de imágenes, gráficos y medios',
+    'Aanwezigheid van gekoppelde mediabestanden':
+        'Presencia de los archivos multimedia vinculados',
+    'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+        'Densidad de texto: viñetas, palabras, citas, tablas y código',
+    'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+        'Tema, diapositivas, pie de página, lista de tareas y títulos sobre imágenes, verificados según WCAG AA (4,5:1 para texto, 3:1 para texto grande).',
+    'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+        'Cada imagen, gráfico, vídeo y audio necesita una descripción para lectores de pantalla y documentos.',
+    'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+        'Las referencias a imágenes, vídeo y audio se comprueban para un archivo existente en el proyecto.',
+    'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+        'Número y longitud de viñetas, palabras, anidación, equilibrio de columnas y la densidad de citas, títulos, tablas y código para que todo quepa de forma legible.',
+    'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+        'El texto de cuerpo con contraste por debajo de {crit}:1 cuenta como error; por encima, hasta la norma AA, como advertencia.',
+    'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+        'Sin umbral: se requiere una descripción no vacía.',
+    'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+        'Sin umbral: el archivo vinculado debe existir dentro de la carpeta del proyecto.',
+    'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+        'Advertencia por encima de {b1} viñetas (1 columna), {bcl} (lista de tareas) o {b2} (2 columnas); crítico por encima de {bc1} o {bc2}. Palabras por encima de {w1}/{w2}, en promedio por encima de {avg} por viñeta. Cita por encima de {q} caracteres, título por encima de {t} caracteres. Anidación más profunda que el nivel {lvl}. El texto que debe reducirse por debajo del {warn}% advierte, por debajo del {crit}% es crítico.',
     'Zoek op deze computer': 'Buscar en este equipo',
     'Presentaties zoeken op deze computer':
         'Buscar presentaciones en este equipo',
@@ -5646,12 +5784,40 @@ const _dutchSourceStringAdditions = {
     'Tabel bewerken': 'Editar tabla',
     'Pijltjes · Tab · Esc': 'Flechas · Tab · Esc',
     'Tabel bewerken (op tabeldia)': 'Editar tabla (en diapositiva de tabla)',
+    'Tabel bewerken (E)': 'Editar tabla (E)',
+    'Tab wisselt cel · Esc sluit': 'Tab cambia de celda · Esc cierra',
     'Pen · markeerstift · ⇧E': 'Lápiz · marcador · ⇧E',
     'Gestapelde staaf': 'Barras apiladas',
     'Spreiding': 'Dispersión',
   },
   'fy': {
     // Schijf-brede presentatiezoeker (bekende mappen).
+    'In tweeën splitsen': 'Yn twaen splitse',
+    'Uitgevoerde controles': 'Utfierde kontrôles',
+    'Contrast en leesbaarheid van tekstkleuren':
+        'Kontrast en lêsberens fan tekstkleuren',
+    'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+        'Alt-teksten en ûnderskriften fan ôfbyldingen, grafiken en media',
+    'Aanwezigheid van gekoppelde mediabestanden':
+        'Oanwêzigens fan keppele mediabestannen',
+    'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+        'Teksttichtheid: bullets, wurden, sitaten, tabellen en koade',
+    'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+        'Tema, slides, footer, checklist en titels oer ôfbyldingen, toetst oan WCAG AA (4,5:1 foar tekst, 3:1 foar grutte tekst).',
+    'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+        'Eltse ôfbylding, grafyk, fideo en audio hat in beskriuwing nedich foar skermlêzers en hânouts.',
+    'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+        'Ferwizings nei ôfbyldingen, fideo en audio wurde kontrolearre op in besteand bestân yn it projekt.',
+    'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+        'Tal en lingte fan bullets, wurden, nesting, kolombalâns en de tichtheid fan sitaten, titels, tabellen en koade sadat alles lêsber past.',
+    'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+        'Bodytekst mei kontrast ûnder {crit}:1 jildt as flater; dêrboppe oant de AA-noarm as warskôging.',
+    'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+        'Gjin drompelwearde: in net-lege beskriuwing is ferplicht.',
+    'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+        'Gjin drompelwearde: it keppele bestân moat binnen de projektmap bestean.',
+    'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+        'Warskôging boppe {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); krityk boppe {bc1} of {bc2}. Wurden boppe {w1}/{w2}, gemiddeld boppe {avg} de bullet. Sitaat boppe {q} tekens, titel boppe {t} tekens. Nesting djipper as nivo {lvl}. Tekst dy’t ûnder {warn}% krimpe moat warskôget, ûnder {crit}% is krityk.',
     'Zoek op deze computer': 'Sykje op dizze kompjûter',
     'Presentaties zoeken op deze computer':
         'Presintaasjes op dizze kompjûter sykje',
@@ -6286,12 +6452,40 @@ const _dutchSourceStringAdditions = {
     'Tabel bewerken': 'Tabel bewurkje',
     'Pijltjes · Tab · Esc': 'Pylktoetsen · Tab · Esc',
     'Tabel bewerken (op tabeldia)': 'Tabel bewurkje (op tabelslide)',
+    'Tabel bewerken (E)': 'Tabel bewurkje (E)',
+    'Tab wisselt cel · Esc sluit': 'Tab wikselet sel · Esc slút',
     'Pen · markeerstift · ⇧E': 'Pen · markearstift · ⇧E',
     'Gestapelde staaf': 'Stapele staven',
     'Spreiding': 'Sparring',
   },
   'pap': {
     // Schijf-brede presentatiezoeker (bekende mappen).
+    'In tweeën splitsen': 'Parti na dos',
+    'Uitgevoerde controles': 'Chekeonan ehekutá',
+    'Contrast en leesbaarheid van tekstkleuren':
+        'Kontraste i legibilidat di koló di teksto',
+    'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+        'Teksto alternativo i pie di foto pa imágen, gráfiko i media',
+    'Aanwezigheid van gekoppelde mediabestanden':
+        'Presensia di archivo di media konektá',
+    'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+        'Densidat di teksto: bullet, palabra, sita, tabel i kódigo',
+    'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+        'Tema, slide, footer, checklist i título riba imágen, chequeá kontra WCAG AA (4,5:1 pa teksto, 3:1 pa teksto grandi).',
+    'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+        'Tur imágen, gráfiko, video i audio mester di un deskripshon pa lektor di pantaya i handout.',
+    'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+        'Referensia na imágen, video i audio ta wòrdu chequeá pa un archivo eksistente den e proyekto.',
+    'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+        'Kantidat i largura di bullet, palabra, nesting, balansa di kolom i densidat di sita, título, tabel i kódigo pa tur kos kaber legibel.',
+    'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+        'Teksto di kurpa ku kontraste bou di {crit}:1 ta konta komo eror; ariba di esei te na e norma AA komo avertensia.',
+    'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+        'Sin balor di drèmpel: un deskripshon no-bashí ta obligatorio.',
+    'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+        'Sin balor di drèmpel: e archivo konektá mester eksistí den e karpeta di proyekto.',
+    'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+        'Avertensia ariba {b1} bullet (1 kolom), {bcl} (checklist) of {b2} (2 kolom); krítiko ariba {bc1} of {bc2}. Palabra ariba {w1}/{w2}, na promedio ariba {avg} pa bullet. Sita ariba {q} karakter, título ariba {t} karakter. Nesting mas profundo ku nivel {lvl}. Teksto ku mester redusí bou di {warn}% ta avertí, bou di {crit}% ta krítiko.',
     'Zoek op deze computer': 'Busca den e computer aki',
     'Presentaties zoeken op deze computer':
         'Haña presentashon riba e computer aki',
@@ -6928,6 +7122,8 @@ const _dutchSourceStringAdditions = {
     'Tabel bewerken': 'Edita tabel',
     'Pijltjes · Tab · Esc': 'Flechanan · Tab · Esc',
     'Tabel bewerken (op tabeldia)': 'Edita tabel (riba slide di tabel)',
+    'Tabel bewerken (E)': 'Edita tabel (E)',
+    'Tab wisselt cel · Esc sluit': 'Tab ta kambia selda · Esc ta sera',
     'Pen · markeerstift · ⇧E': 'Pèn · marker · ⇧E',
     'Gestapelde staaf': 'Baranan apilá',
     'Spreiding': 'Dispershon',

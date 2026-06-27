@@ -148,6 +148,29 @@ void main() {
       );
     });
 
+    test('allows up to 12 checklist items before warning', () {
+      Deck deckWith(int count) => Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.bullets).copyWith(
+            title: 'Checklist',
+            listStyle: ListStyle.checklist,
+            bullets: List.generate(count, (i) => '[ ] Taak ${i + 1}'),
+          ),
+        ],
+      );
+
+      bool hasBulletCountWarning(Deck deck) => analyzer
+          .analyze(deck)
+          .issues
+          .any((i) => i.kind == SlideQualityIssueKind.bulletCountHigh);
+
+      // 12 mag (zakelijke takenlijst); een tiende gewone bulletslide zou hier
+      // al waarschuwen, maar een checklist heeft de ruimere drempel.
+      expect(hasBulletCountWarning(deckWith(12)), isFalse);
+      expect(hasBulletCountWarning(deckWith(13)), isTrue);
+    });
+
     test('detects many rich-text markdown bullets', () {
       final markdown = List.generate(
         13,
@@ -526,7 +549,7 @@ void main() {
         slides: [
           Slide.create(
             SlideType.quote,
-          ).copyWith(quote: 'Lang citaat. ' * 30, quoteAuthor: 'Auteur'),
+          ).copyWith(quote: 'Lang citaat. ' * 70, quoteAuthor: 'Auteur'),
         ],
       );
 
@@ -536,6 +559,26 @@ void main() {
           (i) => i.kind == SlideQualityIssueKind.quoteDensityHigh,
         ),
         isTrue,
+      );
+    });
+
+    test('allows a quote up to 750 characters without a density warning', () {
+      // 'Lang citaat. ' is 13 tekens; * 40 = 520 + auteur blijft onder 750.
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(
+            SlideType.quote,
+          ).copyWith(quote: 'Lang citaat. ' * 40, quoteAuthor: 'Auteur'),
+        ],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) => i.kind == SlideQualityIssueKind.quoteDensityHigh,
+        ),
+        isFalse,
       );
     });
 

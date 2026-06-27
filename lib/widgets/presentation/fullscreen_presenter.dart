@@ -2154,16 +2154,26 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         _tabTableCell(backwards: HardwareKeyboard.instance.isShiftPressed);
         return KeyEventResult.handled;
       case LogicalKeyboardKey.arrowRight:
-        _moveTableCell(dRow: 0, dCol: 1);
-        return KeyEventResult.handled;
       case LogicalKeyboardKey.arrowLeft:
-        _moveTableCell(dRow: 0, dCol: -1);
-        return KeyEventResult.handled;
       case LogicalKeyboardKey.arrowDown:
-        _moveTableCell(dRow: 1, dCol: 0);
-        return KeyEventResult.handled;
       case LogicalKeyboardKey.arrowUp:
-        _moveTableCell(dRow: -1, dCol: 0);
+        // Staat de cursor in een cel? Laat de pijltjes dan door het tekstveld
+        // afhandelen, zodat je met links/rechts/omhoog/omlaag door de celtekst
+        // beweegt in plaats van naar een andere cel of slide te springen.
+        // Tussen cellen wissel je met Tab. We geven het event vrij (ignored)
+        // zodat het naar de tekst-bewerkingsacties van het veld doorvloeit.
+        if (_textFieldFocused) return KeyEventResult.ignored;
+        // Zonder actief tekstveld (zeldzaam, vlak na het openen) verplaatsen de
+        // pijltjes nog wél de celkeuze.
+        if (key == LogicalKeyboardKey.arrowRight) {
+          _moveTableCell(dRow: 0, dCol: 1);
+        } else if (key == LogicalKeyboardKey.arrowLeft) {
+          _moveTableCell(dRow: 0, dCol: -1);
+        } else if (key == LogicalKeyboardKey.arrowDown) {
+          _moveTableCell(dRow: 1, dCol: 0);
+        } else {
+          _moveTableCell(dRow: -1, dCol: 0);
+        }
         return KeyEventResult.handled;
       default:
         return KeyEventResult.ignored;
@@ -2246,6 +2256,20 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                 right: 0,
                 top: 20,
                 child: Center(child: _buildTableEditBanner()),
+              ),
+            // Subtiel potlood-icoon op tabeldia's: gedimd wanneer bewerken uit
+            // staat, opgelicht wanneer het aan staat. Klikken schakelt het net
+            // als de E-toets, zodat je ook met muis/clicker kunt bewerken.
+            if (_currentSlideIsTable &&
+                !_helpOpen &&
+                !_gridOpen &&
+                !_userNotesMode &&
+                !_targetInput &&
+                _blank == _Blank.none)
+              Positioned(
+                top: 20,
+                right: 20,
+                child: _buildTableEditToggle(),
               ),
             if (_userNotesMode) ...[
               Positioned.fill(
@@ -2428,6 +2452,58 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   }
 
   /// Zwevende banner tijdens live tabelbewerking.
+  /// Subtiel, klikbaar potlood-icoon dat op tabeldia's de bewerkmodus toont en
+  /// schakelt. Gedimd = uit, accentkleur = aan — hetzelfde als de E-toets.
+  Widget _buildTableEditToggle() {
+    final accent = _hexColor(widget.themeProfile.accentColor);
+    final active = _tableEditMode;
+    return Tooltip(
+      message: context.l10n.d('Tabel bewerken (E)'),
+      child: Material(
+        color: Colors.transparent,
+        shape: const CircleBorder(),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: _toggleTableEditMode,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeOut,
+            width: 44,
+            height: 44,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: active
+                  ? accent.withValues(alpha: 0.92)
+                  : Colors.black.withValues(alpha: 0.42),
+              border: Border.all(
+                color: active
+                    ? Colors.white.withValues(alpha: 0.85)
+                    : Colors.white.withValues(alpha: 0.22),
+                width: active ? 1.5 : 1,
+              ),
+              boxShadow: active
+                  ? [
+                      BoxShadow(
+                        color: accent.withValues(alpha: 0.5),
+                        blurRadius: 14,
+                        offset: const Offset(0, 4),
+                      ),
+                    ]
+                  : null,
+            ),
+            child: Icon(
+              active ? Icons.edit_note_rounded : Icons.edit_outlined,
+              size: 22,
+              color: active
+                  ? Colors.white
+                  : Colors.white.withValues(alpha: 0.55),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildTableEditBanner() {
     final l10n = context.l10n;
     final accent = _hexColor(widget.themeProfile.accentColor);
@@ -2478,7 +2554,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
               const SizedBox(width: 12),
               Flexible(
                 child: Text(
-                  l10n.d('Pijltjes · Tab · Esc'),
+                  l10n.d('Tab wisselt cel · Esc sluit'),
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.white.withValues(alpha: 0.9),

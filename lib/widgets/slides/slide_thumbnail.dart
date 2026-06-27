@@ -29,6 +29,7 @@ class SlideThumbnail extends ConsumerWidget {
   final VoidCallback onDelete;
   final VoidCallback onToggleSkip;
   final VoidCallback onCopyImage;
+  final VoidCallback onSplit;
 
   /// Persoonlijke gebruikersnotities (sidecar), los van sprekersnotities.
   final bool hasUserNotes;
@@ -43,6 +44,7 @@ class SlideThumbnail extends ConsumerWidget {
     required this.onDelete,
     required this.onToggleSkip,
     required this.onCopyImage,
+    required this.onSplit,
     this.hasUserNotes = false,
     this.isPrimary = true,
     this.projectPath,
@@ -63,6 +65,17 @@ class SlideThumbnail extends ConsumerWidget {
     final hasQualityErrors = slideIssues.any(
       (i) => i.severity == MarkdownValidationSeverity.error,
     );
+    // "In tweeën splitsen" is beschikbaar op elke bulletslide met genoeg bullets
+    // om te verdelen — óók bullets-met-afbeelding, waar het tekstvlak maar de
+    // halve breedte heeft en een slide dus eerder vol oogt dan de algemene
+    // bullettelling-drempel suggereert. De daadwerkelijke knip (op het optimum
+    // dat past) gebeurt in DeckNotifier.splitSlide.
+    final canSplit = switch (slide.type) {
+      SlideType.bullets || SlideType.bulletsImage => slide.bullets.length >= 2,
+      SlideType.twoBullets =>
+        slide.bullets.length >= 2 || slide.bullets2.length >= 2,
+      _ => false,
+    };
     final hasQualityWarnings = slideIssues.any(
       (i) => i.severity == MarkdownValidationSeverity.warning,
     );
@@ -311,6 +324,11 @@ class SlideThumbnail extends ConsumerWidget {
                             value: 'duplicate',
                             child: Text(l10n.d('Dupliceren')),
                           ),
+                          if (canSplit)
+                            PopupMenuItem(
+                              value: 'split',
+                              child: Text(l10n.d('In tweeën splitsen')),
+                            ),
                           PopupMenuItem(
                             value: 'skip',
                             child: Text(
@@ -334,6 +352,7 @@ class SlideThumbnail extends ConsumerWidget {
                           }
                           if (v == 'copy_image') onCopyImage();
                           if (v == 'duplicate') onDuplicate();
+                          if (v == 'split') onSplit();
                           if (v == 'skip') onToggleSkip();
                           if (v == 'delete') onDelete();
                         },

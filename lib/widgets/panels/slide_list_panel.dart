@@ -560,6 +560,10 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
             notifier.duplicateSlide(index);
             editorNotifier.select(index + 1);
           },
+          onSplit: () {
+            notifier.splitSlide(index);
+            editorNotifier.select(index + 1);
+          },
           onDelete: () {
             if (deck.slides.length <= 1) return;
             notifier.removeSlide(index);
@@ -626,6 +630,10 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
           onCopyImage: () => _copySlideAsImage(slide),
           onDuplicate: () {
             notifier.duplicateSlide(i);
+            editorNotifier.select(i + 1);
+          },
+          onSplit: () {
+            notifier.splitSlide(i);
             editorNotifier.select(i + 1);
           },
           onDelete: () {

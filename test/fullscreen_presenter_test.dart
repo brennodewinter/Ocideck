@@ -223,6 +223,48 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets('pencil toggle on a table slide turns edit mode on and off', (
+    tester,
+  ) async {
+    final tableSlides = [
+      Slide.create(SlideType.table).copyWith(
+        title: 'Cijfers',
+        tableRows: [
+          ['Kolom', 'Waarde'],
+          ['Omzet', '100'],
+        ],
+      ),
+    ];
+    await tester.pumpWidget(
+      MaterialApp(
+        home: FullscreenPresenter(
+          slides: tableSlides,
+          projectPath: null,
+          themeProfile: const ThemeProfile(),
+          initialIndex: 0,
+        ),
+      ),
+    );
+    await tester.pump();
+
+    // Op een tabeldia is het potlood-icoon zichtbaar, maar bewerken staat uit.
+    final toggle = find.byTooltip('Tabel bewerken (E)');
+    expect(toggle, findsOneWidget);
+    expect(find.text('Tabel bewerken'), findsNothing);
+
+    // Klikken schakelt bewerken aan (net als de E-toets).
+    await tester.tap(toggle);
+    await tester.pump();
+    expect(find.text('Tabel bewerken'), findsOneWidget);
+
+    // Nogmaals klikken sluit het weer.
+    await tester.tap(toggle);
+    await tester.pump();
+    expect(find.text('Tabel bewerken'), findsNothing);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
   testWidgets('keys during table edit never navigate or exit', (tester) async {
     // Twee dia's: een tabeldia en een gewone dia erna. Navigeren reset de
     // tabelbewerking, dus zolang "Tabel bewerken" zichtbaar blijft is er noch

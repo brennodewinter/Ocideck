@@ -8,6 +8,8 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/slide_quality_analyzer.dart'
+    show kSingleColumnBulletWarningCount;
 import 'package:ocideck/state/deck_provider.dart';
 
 DeckNotifier _notifier() {
@@ -85,6 +87,63 @@ void main() {
     expect(slides, hasLength(2));
     expect(slides[1].title, slides[0].title);
     expect(slides[1].id, isNot(originalId));
+  });
+
+  test('splitSlide moves overflow bullets onto a fresh second slide', () {
+    // Layout-metingen gebruiken TextPainter; binding moet geïnitialiseerd zijn.
+    TestWidgetsFlutterBinding.ensureInitialized();
+    final n = _notifier()..newDeck('D');
+    final bullets = List.generate(30, (i) => 'Bullet met wat tekst nummer $i');
+    n.addSlide(SlideType.bullets, afterIndex: 0);
+    n.updateSlide(1, n.state.deck!.slides[1].copyWith(bullets: bullets));
+
+    n.splitSlide(1);
+
+    final slides = n.state.deck!.slides;
+    expect(slides, hasLength(3));
+    final first = slides[1];
+    final second = slides[2];
+    expect(first.type, SlideType.bullets);
+    expect(second.type, SlideType.bullets);
+    expect(second.id, isNot(first.id));
+    // Beide helften houden minstens één bullet en samen zijn ze het origineel.
+    expect(first.bullets, isNotEmpty);
+    expect(second.bullets, isNotEmpty);
+    expect([...first.bullets, ...second.bullets], bullets);
+    // Slide 1 houdt het optimum: de leesbaarheidsdrempel (8 bullets), niet het
+    // fysieke maximum dat nog zou passen.
+    expect(first.bullets.length, kSingleColumnBulletWarningCount);
+    expect(second.bullets.length, 30 - kSingleColumnBulletWarningCount);
+  });
+
+  test('splitSlide is a no-op for non-bullet slides', () {
+    final n = _notifier()..newDeck('D'); // enkele titelslide
+    n.splitSlide(0);
+    expect(n.state.deck!.slides, hasLength(1));
+  });
+
+  test('splitSlide also works on a bullets+image slide that still fits', () {
+    // De gemelde casus: weinig bullets náást een afbeelding. Het tekstvlak is
+    // smal, en de gebruiker wil toch in tweeën knippen; dan splitsen we
+    // doormidden in plaats van een dode klik.
+    TestWidgetsFlutterBinding.ensureInitialized();
+    final n = _notifier()..newDeck('D');
+    final bullets = List.generate(6, (i) => 'Bullet $i');
+    n.addSlide(SlideType.bulletsImage, afterIndex: 0);
+    n.updateSlide(
+      1,
+      n.state.deck!.slides[1].copyWith(imagePath: 'foto.png', bullets: bullets),
+    );
+
+    n.splitSlide(1);
+
+    final slides = n.state.deck!.slides;
+    expect(slides, hasLength(3));
+    expect(slides[1].type, SlideType.bulletsImage);
+    expect(slides[2].type, SlideType.bulletsImage);
+    expect(slides[1].bullets, isNotEmpty);
+    expect(slides[2].bullets, isNotEmpty);
+    expect([...slides[1].bullets, ...slides[2].bullets], bullets);
   });
 
   test('insertSlides duplicates with fresh ids and returns insert index', () {
