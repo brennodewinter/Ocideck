@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Edit a table while presenting** — tables can be changed live during a
+  presentation (filling in figures, ticking items in front of an audience).
+  It is opt-in per table: a new **Table editable while presenting** checkbox in
+  *Per-slide options* (off by default, so tables stay read-only otherwise),
+  round-tripping in the `.md` as a `table-editable` `_class` token. On an
+  editable table a subtle pencil icon (top-right) toggles editing — dimmed when
+  off, highlighted when on — alongside the **E** key. While editing, the arrow
+  keys move the text cursor inside the cell, **Tab** / **⇧Tab** switch cells
+  (a new row is added past the last cell), and `Esc` leaves editing; changes
+  mirror to the beamer in dual-screen mode.
 - **Online media by URL** — image and video slides accept an `http(s)` URL as
   the source, rendered live (no local copy). Off by default: the new
   **Online media** privacy setting must be enabled before any remote source is

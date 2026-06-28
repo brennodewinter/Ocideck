@@ -178,6 +178,12 @@ class Slide {
   final TlpLevel tlp;
   final List<List<String>> tableRows; // first row is the header
 
+  /// Table slides only: whether the table may be edited live during a
+  /// presentation. Off by default, so tables are read-only unless the author
+  /// explicitly opts in from the builder. Older presentations lack the token
+  /// and therefore keep the safe default (not editable).
+  final bool tableEditable;
+
   /// Timeline slides only: how the events are arranged and animated. The events
   /// themselves are stored in [bullets] as `marker :: title :: description`
   /// strings; the layout/reveal options round-trip as `_class` tokens and the
@@ -222,6 +228,7 @@ class Slide {
     this.skipped = false,
     this.tlp = TlpLevel.none,
     this.tableRows = const [],
+    this.tableEditable = false,
     this.timelineLayout = TimelineLayout.auto,
     this.timelineReveal = TimelineReveal.onEnter,
     this.timelineAnimationMs = timelineDefaultAnimationDurationMs,
@@ -292,6 +299,7 @@ class Slide {
       skipped: src.skipped,
       tlp: src.tlp,
       tableRows: src.tableRows.map((r) => List<String>.from(r)).toList(),
+      tableEditable: src.tableEditable,
       timelineLayout: src.timelineLayout,
       timelineReveal: src.timelineReveal,
       timelineAnimationMs: src.timelineAnimationMs,
@@ -333,6 +341,7 @@ class Slide {
     bool? skipped,
     TlpLevel? tlp,
     List<List<String>>? tableRows,
+    bool? tableEditable,
     TimelineLayout? timelineLayout,
     TimelineReveal? timelineReveal,
     int? timelineAnimationMs,
@@ -375,6 +384,7 @@ class Slide {
       skipped: skipped ?? this.skipped,
       tlp: tlp ?? this.tlp,
       tableRows: tableRows ?? this.tableRows,
+      tableEditable: tableEditable ?? this.tableEditable,
       timelineLayout: timelineLayout ?? this.timelineLayout,
       timelineReveal: timelineReveal ?? this.timelineReveal,
       timelineAnimationMs: timelineAnimationMs ?? this.timelineAnimationMs,

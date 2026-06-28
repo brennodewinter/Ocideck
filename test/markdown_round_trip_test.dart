@@ -408,6 +408,33 @@ void main() {
       ]);
     });
 
+    test('table editable-during-presentation flag round-trips', () {
+      final editable = _roundTrip(
+        Slide.create(SlideType.table).copyWith(
+          title: 'Bewerkbaar',
+          tableEditable: true,
+          tableRows: const [
+            ['Kolom', 'Waarde'],
+            ['Omzet', '100'],
+          ],
+        ),
+      );
+      expect(editable.type, SlideType.table);
+      expect(editable.tableEditable, isTrue);
+
+      // Standaard (alleen-lezen) blijft alleen-lezen en zonder de flag is dat
+      // ook het gedrag voor oudere presentaties zonder het token.
+      final readOnly = _roundTrip(
+        Slide.create(SlideType.table).copyWith(
+          title: 'Alleen lezen',
+          tableRows: const [
+            ['Kolom', 'Waarde'],
+          ],
+        ),
+      );
+      expect(readOnly.tableEditable, isFalse);
+    });
+
     test('table slide escapes pipes and newlines in cells', () {
       final out = _roundTrip(
         Slide.create(SlideType.table).copyWith(

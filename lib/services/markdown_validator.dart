@@ -26,6 +26,7 @@ class MarkdownValidator {
     'logo-safe',
     'no-logo',
     'no-footer',
+    'table-editable',
   };
 
   static const _validListStyles = {

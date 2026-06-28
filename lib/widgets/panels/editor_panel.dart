@@ -150,6 +150,10 @@ class EditorPanel extends ConsumerWidget {
                   const Divider(height: 1),
                   _SlideFooterControl(slide: slide, onUpdate: update),
                 ],
+                if (slide.type == SlideType.table) ...[
+                  const Divider(height: 1),
+                  _SlideTableEditControl(slide: slide, onUpdate: update),
+                ],
                 const Divider(height: 1),
                 _SlideTimingControl(slide: slide, onUpdate: update),
                 const Divider(height: 1),
@@ -782,6 +786,43 @@ class _SlideFooterControl extends StatelessWidget {
           Text(
             l10n.d('Footer tonen op deze slide'),
             style: const TextStyle(fontSize: 12, color: Color(0xFF475569)),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Per-tabel: bewerkbaar tijdens presenteren ─────────────────────────────────
+
+class _SlideTableEditControl extends StatelessWidget {
+  final Slide slide;
+  final ValueChanged<Slide> onUpdate;
+  const _SlideTableEditControl({required this.slide, required this.onUpdate});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Container(
+      color: const Color(0xFFF8FAFC),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+      child: Row(
+        children: [
+          const Icon(Icons.edit_outlined, size: 14, color: Color(0xFF64748B)),
+          const SizedBox(width: 8),
+          Checkbox(
+            value: slide.tableEditable,
+            onChanged: (v) =>
+                onUpdate(slide.copyWith(tableEditable: v ?? false)),
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            visualDensity: VisualDensity.compact,
+          ),
+          const SizedBox(width: 4),
+          Expanded(
+            child: Text(
+              l10n.d('Tabel bewerkbaar tijdens presenteren'),
+              style: const TextStyle(fontSize: 12, color: Color(0xFF475569)),
+            ),
           ),
         ],
       ),
