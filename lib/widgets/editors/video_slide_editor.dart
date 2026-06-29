@@ -66,14 +66,16 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
     }
   }
 
-  static String _secText(int ms) => ms <= 0 ? '' : (ms / 1000).toStringAsFixed(0);
+  static String _secText(int ms) =>
+      ms <= 0 ? '' : (ms / 1000).toStringAsFixed(0);
   static int _parseSec(String text) {
     final v = double.tryParse(text.trim().replaceAll(',', '.'));
     if (v == null || v <= 0) return 0;
     return (v * 1000).round();
   }
 
-  void _emitTitle() => widget.onUpdate(widget.slide.copyWith(title: _title.text));
+  void _emitTitle() =>
+      widget.onUpdate(widget.slide.copyWith(title: _title.text));
 
   void _emitSource() {
     widget.onUpdate(widget.slide.copyWith(videoPath: _source.text.trim()));
@@ -274,7 +276,10 @@ class _SourceKindChip extends StatelessWidget {
       VideoSourceKind.youtube => ('YouTube', const Color(0xFFCC0000)),
       VideoSourceKind.vimeo => ('Vimeo', const Color(0xFF1AB7EA)),
       VideoSourceKind.remoteFile => (l10n.d('Online'), const Color(0xFF2E7D64)),
-      VideoSourceKind.localFile => (l10n.d('Lokaal bestand'), const Color(0xFF64748B)),
+      VideoSourceKind.localFile => (
+        l10n.d('Lokaal bestand'),
+        const Color(0xFF64748B),
+      ),
       VideoSourceKind.none => (l10n.d('Geen video'), const Color(0xFF94A3B8)),
     };
     return Container(
@@ -286,7 +291,11 @@ class _SourceKindChip extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: TextStyle(fontSize: 11, color: color, fontWeight: FontWeight.w600),
+        style: TextStyle(
+          fontSize: 11,
+          color: color,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }

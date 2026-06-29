@@ -70,9 +70,8 @@ String _fillParams(String template, Map<String, Object> values) {
 /// opgebouwd uit de echte drempelconstanten). Getoond bij een groene balk zodat
 /// duidelijk is wat er is gecontroleerd, hoe en met welke grenzen. Houd in lijn
 /// met de checks in [SlideQualityAnalyzer.analyzeSlides].
-List<({String title, String detail, String params})> slideQualityPerformedChecks(
-  AppLocalizations l10n,
-) {
+List<({String title, String detail, String params})>
+slideQualityPerformedChecks(AppLocalizations l10n) {
   // De tekstkrimp-grenzen worden als percentage getoond.
   final warnPct = (kTextDensityWarningScale * 100).round();
   final critPct = (kTextDensityCriticalScale * 100).round();

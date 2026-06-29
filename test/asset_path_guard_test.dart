@@ -24,10 +24,11 @@ void main() {
     const allowlist = <String>{};
 
     final offenders = <String>[];
-    for (final file in Directory('lib')
-        .listSync(recursive: true)
-        .whereType<File>()
-        .where((f) => f.path.endsWith('.dart'))) {
+    for (final file
+        in Directory('lib')
+            .listSync(recursive: true)
+            .whereType<File>()
+            .where((f) => f.path.endsWith('.dart'))) {
       final lines = file.readAsLinesSync();
       for (var i = 0; i < lines.length; i++) {
         if (!antiPattern.hasMatch(lines[i])) continue;

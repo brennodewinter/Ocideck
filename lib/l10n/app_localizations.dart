@@ -4454,8 +4454,7 @@ const _dutchSourceStringAdditions = {
     'Presentaties zoeken op deze computer':
         'Trouver des présentations sur cet ordinateur',
     'Zoek op titel, pad of thema…': 'Rechercher par titre, chemin ou thème…',
-    'Bekende mappen worden doorzocht…':
-        'Recherche dans les dossiers connus…',
+    'Bekende mappen worden doorzocht…': 'Recherche dans les dossiers connus…',
     'gevonden': 'trouvée(s)',
     'presentatie(s) gevonden': 'présentation(s) trouvée(s)',
     'Geen Marp-presentaties gevonden in de bekende mappen.':

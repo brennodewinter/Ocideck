@@ -640,14 +640,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       final syncQuality = const SlideQualityAnalyzer().analyze(deck);
       var quality = syncQuality;
       try {
-        final imageIssues = await ref.read(
-          imageContrastIssuesProvider.future,
-        );
+        final imageIssues = await ref.read(imageContrastIssuesProvider.future);
         if (imageIssues.isNotEmpty) {
-          quality = SlideQualityResult([
-            ...syncQuality.issues,
-            ...imageIssues,
-          ]);
+          quality = SlideQualityResult([...syncQuality.issues, ...imageIssues]);
         }
       } catch (_) {
         // Fall back to the sync result if the async pass fails.

@@ -431,7 +431,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                   height: 18,
                   margin: const EdgeInsets.only(right: 11),
                   decoration: BoxDecoration(
-                    color: selected ? const Color(0xFF60A5FA) : Colors.transparent,
+                    color: selected
+                        ? const Color(0xFF60A5FA)
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),
@@ -2229,9 +2231,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             ),
             style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
           ),
-          value: ref.watch(
-            settingsProvider.select((s) => s.allowRemoteMedia),
-          ),
+          value: ref.watch(settingsProvider.select((s) => s.allowRemoteMedia)),
           onChanged: (value) =>
               ref.read(settingsProvider.notifier).setAllowRemoteMedia(value),
         ),

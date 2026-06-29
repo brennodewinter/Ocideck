@@ -1003,7 +1003,11 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.cloud_off_outlined, color: Color(0xFF94A3B8), size: 32),
+          const Icon(
+            Icons.cloud_off_outlined,
+            color: Color(0xFF94A3B8),
+            size: 32,
+          ),
           const SizedBox(height: 8),
           Text(
             context.l10n.d('Online media staat uit'),

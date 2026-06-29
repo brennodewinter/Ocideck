@@ -86,7 +86,9 @@ class ImageService {
     final path = result?.files.single.path;
     if (path == null) return null;
     if (!await _isAcceptableImageFile(path)) {
-      logWarning('ImageService.pickImage: rejected (too large or not an image)');
+      logWarning(
+        'ImageService.pickImage: rejected (too large or not an image)',
+      );
       return null;
     }
     return _importIntoProject(path, projectPath, subdir: 'images');

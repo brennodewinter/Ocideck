@@ -20,10 +20,7 @@ void main() {
 
     test('rejects absolute paths outside the project', () {
       expect(resolveSlideAssetPath('/etc/passwd', project), isNull);
-      expect(
-        resolveSlideAssetPath('/home/user/.ssh/id_rsa', project),
-        isNull,
-      );
+      expect(resolveSlideAssetPath('/home/user/.ssh/id_rsa', project), isNull);
     });
 
     test('allows project-contained relative and absolute paths', () {
@@ -54,8 +51,9 @@ void main() {
       Directory(p.join(projectDir.path, 'images')).createSync();
       outsideSecret = File(p.join(tmp.path, 'secret.txt'))
         ..writeAsStringSync('top secret');
-      File(p.join(projectDir.path, 'images', 'real.png'))
-          .writeAsBytesSync(const [0x89, 0x50, 0x4e, 0x47]);
+      File(
+        p.join(projectDir.path, 'images', 'real.png'),
+      ).writeAsBytesSync(const [0x89, 0x50, 0x4e, 0x47]);
     });
 
     tearDown(() => tmp.deleteSync(recursive: true));

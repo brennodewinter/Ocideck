@@ -169,60 +169,61 @@ void main() {
     expect(find.text('☑ '), findsOneWidget);
   });
 
-  testWidgets('table edit mode enters with E, persists changes, exits with Esc', (
-    tester,
-  ) async {
-    Slide? updated;
-    final tableSlides = [
-      Slide.create(SlideType.table).copyWith(
-        title: 'Cijfers',
-        tableEditable: true,
-        tableRows: [
-          ['Kolom', 'Waarde'],
-          ['Omzet', '100'],
-        ],
-      ),
-    ];
-    await tester.pumpWidget(
-      MaterialApp(
-        home: FullscreenPresenter(
-          slides: tableSlides,
-          projectPath: null,
-          themeProfile: const ThemeProfile(),
-          initialIndex: 0,
-          onSlideChanged: (slide) => updated = slide,
+  testWidgets(
+    'table edit mode enters with E, persists changes, exits with Esc',
+    (tester) async {
+      Slide? updated;
+      final tableSlides = [
+        Slide.create(SlideType.table).copyWith(
+          title: 'Cijfers',
+          tableEditable: true,
+          tableRows: [
+            ['Kolom', 'Waarde'],
+            ['Omzet', '100'],
+          ],
         ),
-      ),
-    );
-    await tester.pump();
+      ];
+      await tester.pumpWidget(
+        MaterialApp(
+          home: FullscreenPresenter(
+            slides: tableSlides,
+            projectPath: null,
+            themeProfile: const ThemeProfile(),
+            initialIndex: 0,
+            onSlideChanged: (slide) => updated = slide,
+          ),
+        ),
+      );
+      await tester.pump();
 
-    await tester.sendKeyEvent(LogicalKeyboardKey.keyE);
-    await tester.pump();
-    expect(find.text('Tabel bewerken'), findsOneWidget);
+      await tester.sendKeyEvent(LogicalKeyboardKey.keyE);
+      await tester.pump();
+      expect(find.text('Tabel bewerken'), findsOneWidget);
 
-    await tester.tap(find.byKey(const ValueKey('table-edit-cell-1-1')));
-    await tester.pump();
-    await tester.enterText(
-      find.byKey(const ValueKey('table-edit-cell-1-1')),
-      '250',
-    );
-    await tester.pump();
+      await tester.tap(find.byKey(const ValueKey('table-edit-cell-1-1')));
+      await tester.pump();
+      await tester.enterText(
+        find.byKey(const ValueKey('table-edit-cell-1-1')),
+        '250',
+      );
+      await tester.pump();
 
-    expect(updated?.tableRows[1][1], '250');
+      expect(updated?.tableRows[1][1], '250');
 
-    // Terwijl een cel in bewerking is mag 'e' geen sneltoets zijn: het typt in
-    // de cel en sluit de bewerking niet af.
-    await tester.sendKeyEvent(LogicalKeyboardKey.keyE);
-    await tester.pump();
-    expect(find.text('Tabel bewerken'), findsOneWidget);
+      // Terwijl een cel in bewerking is mag 'e' geen sneltoets zijn: het typt in
+      // de cel en sluit de bewerking niet af.
+      await tester.sendKeyEvent(LogicalKeyboardKey.keyE);
+      await tester.pump();
+      expect(find.text('Tabel bewerken'), findsOneWidget);
 
-    // Afsluiten doe je met Esc.
-    await tester.sendKeyEvent(LogicalKeyboardKey.escape);
-    await tester.pump();
-    expect(find.text('Tabel bewerken'), findsNothing);
+      // Afsluiten doe je met Esc.
+      await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+      await tester.pump();
+      expect(find.text('Tabel bewerken'), findsNothing);
 
-    await tester.pumpWidget(const SizedBox());
-  });
+      await tester.pumpWidget(const SizedBox());
+    },
+  );
 
   testWidgets('pencil toggle on a table slide turns edit mode on and off', (
     tester,

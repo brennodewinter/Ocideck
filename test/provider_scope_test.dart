@@ -40,10 +40,11 @@ void main() {
       final defPattern = RegExp(r'final (\w+Provider)\s*=');
 
       final offenders = <String>[];
-      for (final file in Directory('lib/state')
-          .listSync(recursive: true)
-          .whereType<File>()
-          .where((f) => f.path.endsWith('.dart'))) {
+      for (final file
+          in Directory('lib/state')
+              .listSync(recursive: true)
+              .whereType<File>()
+              .where((f) => f.path.endsWith('.dart'))) {
         final content = file.readAsStringSync();
         if (!readPattern.hasMatch(content)) continue;
 

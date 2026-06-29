@@ -216,7 +216,8 @@ class MarkdownService {
       if (!slide.showFooter) 'no-footer',
       // Table slides that may be edited live during a presentation. Absent by
       // default, so tables stay read-only unless the author opts in.
-      if (slide.type == SlideType.table && slide.tableEditable) 'table-editable',
+      if (slide.type == SlideType.table && slide.tableEditable)
+        'table-editable',
       // Timeline layout/animation options ride along as extra class tokens so
       // they round-trip without a JSON block (the base `timeline` token comes
       // from marpClass above).
@@ -892,9 +893,7 @@ class MarkdownService {
       return (marp: false, theme: null, title: null);
     }
     final end = norm.indexOf('\n---\n', 4);
-    final frontMatter = end == -1
-        ? norm.substring(4)
-        : norm.substring(4, end);
+    final frontMatter = end == -1 ? norm.substring(4) : norm.substring(4, end);
 
     bool marp = false;
     String? theme;

@@ -55,9 +55,7 @@ Future<Color?> averageImageColor(String resolvedPath) async {
       final frame = await codec.getNextFrame();
       final image = frame.image;
       try {
-        final data = await image.toByteData(
-          format: ui.ImageByteFormat.rawRgba,
-        );
+        final data = await image.toByteData(format: ui.ImageByteFormat.rawRgba);
         if (data != null) result = _averageOf(data);
       } finally {
         image.dispose();
