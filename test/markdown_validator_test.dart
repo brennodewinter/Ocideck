@@ -62,6 +62,34 @@ void main() {}
     );
   });
 
+  test('detects per-slide fence imbalances that cancel out document-wide', () {
+    // One unclosed fence in each of two slides sums to an even count; a
+    // document-wide counter saw a balanced total and reported nothing (C5).
+    const markdown = '''
+---
+marp: true
+---
+
+# Slide een
+
+```dart
+void main() {}
+
+---
+
+# Slide twee
+
+```dart
+void other() {}
+''';
+
+    final result = validator.validate(markdown);
+    final fenceIssues = result.issues
+        .where((i) => i.message.contains('Codeblok is niet afgesloten'))
+        .toList();
+    expect(fenceIssues, hasLength(2));
+  });
+
   test('detects code slide without fenced block', () {
     const markdown = '''
 ---

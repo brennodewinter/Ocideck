@@ -377,7 +377,10 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final maxBytes = entry.isMarkdown
         ? FileService.maxDeckMarkdownBytes
         : FileService.maxPackageBytes;
-    final bytes = await service.download(entry.relativePath, maxBytes: maxBytes);
+    final bytes = await service.download(
+      entry.relativePath,
+      maxBytes: maxBytes,
+    );
     if (!mounted) return OpenResult.unreadable;
     final mdPath = entry.isMarkdown
         ? await _file.importMarkdownBytes(bytes, dest, entry.name)

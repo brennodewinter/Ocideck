@@ -50,6 +50,125 @@ void main() {
     expect(back.codeFontFamily, 'monospace');
   });
 
+  test('ThemeProfile.fromJson rejects CSS/HTML-injection colours', () {
+    // A theme profile travels inside the deck front matter (base64url JSON) and
+    // its colours are interpolated raw into the HTML-export <style> block and
+    // the audience-window inline styles. An attacker-supplied value that breaks
+    // out of the declaration must be discarded, not carried through.
+    final back = ThemeProfile.fromJson(const {
+      'accentColor':
+          "red}</style><meta http-equiv='refresh' "
+          "content='0;url=https://evil/phish'><style>",
+      'slideBackgroundColor': 'url(http://evil/?leak)',
+      'textColor': '#3366', // too short
+    });
+    // All fall back to the trusted defaults; the payload never survives.
+    expect(back.accentColor, '#2E7D64');
+    expect(back.slideBackgroundColor, '#FFFFFF');
+    expect(back.textColor, '#222222');
+  });
+
+  test('ThemeProfile.fromJson does not inherit a poisoned colour', () {
+    // checklistCheckedColor inherits accentColor when absent — the inherited
+    // value must be sanitised too, not trusted because it came via the chain.
+    final back = ThemeProfile.fromJson(const {
+      'accentColor': 'evil}</style><script>x</script>',
+    });
+    expect(back.accentColor, '#2E7D64');
+    expect(back.checklistCheckedColor, '#2E7D64');
+    expect(back.tableHeaderBackgroundColor, '#2E7D64');
+  });
+
+  test('ThemeProfile.fromJson whitelists font families', () {
+    final back = ThemeProfile.fromJson(const {
+      'fontFamily': "Arial'}</style><style>",
+      'codeFontFamily': "monospace'},body{display:none",
+    });
+    expect(back.fontFamily, 'Arial');
+    expect(back.codeFontFamily, 'monospace');
+
+    // A legitimate offered font is preserved (lossless for real data).
+    final ok = ThemeProfile.fromJson(const {
+      'fontFamily': 'Georgia',
+      'codeFontFamily': 'Menlo',
+    });
+    expect(ok.fontFamily, 'Georgia');
+    expect(ok.codeFontFamily, 'Menlo');
+  });
+
+  test('ThemeProfile.fromJson normalises valid colours losslessly', () {
+    final back = ThemeProfile.fromJson(const {
+      'accentColor': '#2e7d64', // lowercase still accepted
+      'titleTextColor': '#FFFFFF',
+    });
+    expect(back.accentColor, '#2E7D64');
+    expect(back.titleTextColor, '#FFFFFF');
+  });
+
+  test('ThemeProfile.fromJson sanitises EVERY style field (fuzz)', () {
+    // Guards the *class* of bug behind S2: a theme colour/font interpolated
+    // raw into the export <style> block (and audience-window inline styles)
+    // without validation. Every style field is read back via toJson() and must
+    // be a strict #RRGGBB literal or a whitelisted font — never the payload.
+    // When a new style field is added, extend the relevant list here (this is
+    // the single checklist of CSS-interpolated fields).
+    const colorKeys = <String>[
+      'slideBackgroundColor',
+      'textColor',
+      'accentColor',
+      'checklistCheckedColor',
+      'checklistUncheckedColor',
+      'tableTextColor',
+      'tableHeaderTextColor',
+      'tableHeaderBackgroundColor',
+      'titleBackgroundColor',
+      'titleTextColor',
+      'sectionBackgroundColor',
+      'codeBackgroundColor',
+      'codeTextColor',
+    ];
+    const payloads = <String>[
+      "red}</style><meta http-equiv='refresh' content='0;url=https://evil'>",
+      'url(http://evil/?leak)',
+      '#12', // too short
+      '#1234ZZ', // non-hex
+      'rgb(1,2,3)',
+      'expression(alert(1))',
+      '',
+    ];
+    final hex = RegExp(r'^#[0-9A-Fa-f]{6}$');
+
+    for (final key in colorKeys) {
+      for (final payload in payloads) {
+        final out = ThemeProfile.fromJson({key: payload}).toJson()[key];
+        expect(
+          out is String && hex.hasMatch(out),
+          isTrue,
+          reason: 'Colour field "$key" not sanitised for "$payload" → "$out"',
+        );
+      }
+    }
+
+    for (final payload in payloads) {
+      final font = ThemeProfile.fromJson({
+        'fontFamily': payload,
+      }).toJson()['fontFamily'];
+      expect(
+        AppSettings.availableFonts.contains(font),
+        isTrue,
+        reason: 'fontFamily not whitelisted for "$payload" → "$font"',
+      );
+      final codeFont = ThemeProfile.fromJson({
+        'codeFontFamily': payload,
+      }).toJson()['codeFontFamily'];
+      expect(
+        AppSettings.codeFonts.contains(codeFont),
+        isTrue,
+        reason: 'codeFontFamily not whitelisted for "$payload" → "$codeFont"',
+      );
+    }
+  });
+
   test('starts with a single default profile', () async {
     final notifier = await _loadedNotifier();
     expect(notifier.state.themeProfiles, hasLength(1));

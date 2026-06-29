@@ -229,7 +229,8 @@ class _ChecklistBulletRow extends StatelessWidget {
                       interaction?.enabled == true
                   ? SystemMouseCursors.click
                   : MouseCursor.defer,
-              child: marker == BulletMarker.paw && listStyle == ListStyle.bullets
+              child:
+                  marker == BulletMarker.paw && listStyle == ListStyle.bullets
                   ? _PawMarker(
                       fontSize: fontSize,
                       color: _hexColor(profile.accentColor),
@@ -361,10 +362,7 @@ class _PawMarker extends StatelessWidget {
         width: paw,
         height: fontSize * kBulletLineHeight,
         child: Center(
-          child: CustomPaint(
-            size: Size(paw, paw),
-            painter: _PawPainter(color),
-          ),
+          child: CustomPaint(size: Size(paw, paw), painter: _PawPainter(color)),
         ),
       ),
     );
@@ -411,11 +409,7 @@ class _PawPainter extends CustomPainter {
         ..translate(w * cx, h * cy)
         ..rotate(rot);
       canvas.drawOval(
-        Rect.fromCenter(
-          center: Offset.zero,
-          width: w * tw,
-          height: h * th,
-        ),
+        Rect.fromCenter(center: Offset.zero, width: w * tw, height: h * th),
         paint,
       );
       canvas.restore();

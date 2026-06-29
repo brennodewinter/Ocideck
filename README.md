@@ -103,6 +103,7 @@ style profile, sidecars, and the package format — is documented in
 | [Keyboard shortcuts](docs/SHORTCUTS.md) | Editor and presenter shortcuts |
 | [File format](docs/FILE_FORMAT.md) | The Marp Markdown, front matter, sidecars, and `.ocideck` package |
 | [Architecture](docs/ARCHITECTURE.md) | How the code fits together (for contributors) |
+| [Source map](docs/SOURCE_MAP.md) | One-line description of every file under `lib/` |
 | [Build & release](docs/BUILD.md) | Building from source and producing distributables |
 | [Checks & CI](docs/CHECKS.md) | Every automated check, what it covers, and how CI runs it |
 | [Contributing](CONTRIBUTING.md) | Setup, the quality gate, and how to propose changes |

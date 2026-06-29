@@ -4,7 +4,12 @@ How to build OciDeck from source and produce distributable apps.
 
 ## Prerequisites
 
-- **Flutter** 3.44+ (stable), **Dart** 3.12+. Check with `flutter --version`.
+- **Flutter 3.44.2** (stable) / **Dart 3.12.2** — the exact version CI pins
+  (see `.tool-versions` and both `.github/workflows/*.yml`). Building tolerates
+  3.44+, but **`make format-check` is version-sensitive**: a different
+  `dart format` reflows whitespace and fails the gate. Use the Flutter-bundled
+  `dart` (not a separately installed standalone Dart, which can drift) so
+  "green locally" equals "green in CI". Check with `flutter --version`.
 - A desktop toolchain for your target:
   - **macOS**: Xcode + CocoaPods.
   - **Windows**: Visual Studio with the "Desktop development with C++" workload.

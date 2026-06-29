@@ -75,8 +75,7 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
             const Divider(height: 1),
             Expanded(
               child: listing.when(
-                loading: () =>
-                    const Center(child: CircularProgressIndicator()),
+                loading: () => const Center(child: CircularProgressIndicator()),
                 error: (error, _) => _error(l10n, error),
                 data: (entries) => _list(l10n, entries),
               ),
@@ -220,7 +219,9 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
                   ? l10n.d(
                       'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.',
                     )
-                  : l10n.d('Kon de map niet laden. Controleer je verbinding en instellingen.'),
+                  : l10n.d(
+                      'Kon de map niet laden. Controleer je verbinding en instellingen.',
+                    ),
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 13, color: Color(0xFF64748B)),
             ),

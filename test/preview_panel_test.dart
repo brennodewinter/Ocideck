@@ -47,7 +47,9 @@ Future<void> _pumpPanel(
 }
 
 void main() {
-  testWidgets('renders the current slide preview without error', (tester) async {
+  testWidgets('renders the current slide preview without error', (
+    tester,
+  ) async {
     final container = _deckWith([SlideType.bullets]);
     addTearDown(container.dispose);
 
@@ -57,7 +59,9 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('renders across several slide types without error', (tester) async {
+  testWidgets('renders across several slide types without error', (
+    tester,
+  ) async {
     final container = _deckWith([
       SlideType.title,
       SlideType.bullets,

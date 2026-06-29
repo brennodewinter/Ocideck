@@ -1,3 +1,4 @@
+import 'chart.dart' show normalizeChartColor;
 import 'webdav_settings.dart';
 
 export 'webdav_settings.dart';
@@ -202,47 +203,68 @@ class ThemeProfile {
     };
   }
 
+  /// Validates a deck-supplied colour to a strict `#RRGGBB` literal, falling
+  /// back to [fallback] for anything else. Theme profiles travel inside the
+  /// deck front matter (base64url JSON) and are interpolated raw into the
+  /// `<style>` block of the HTML export and the audience-window inline styles,
+  /// so an unvalidated value like `red}</style>…<style>` is a CSS/HTML
+  /// injection. The import-safety scanner never sees the base64 payload, so
+  /// this is the choke point.
+  static String _color(Object? value, String fallback) =>
+      normalizeChartColor(value is String ? value : null) ?? fallback;
+
+  /// Whitelists a font family against the offered set; an unknown value can
+  /// break out of the `font-family:'…'` declaration, so reject it.
+  static String _font(Object? value, List<String> allowed, String fallback) =>
+      value is String && allowed.contains(value) ? value : fallback;
+
   factory ThemeProfile.fromJson(Map<String, Object?> json) {
     return ThemeProfile(
-      slideBackgroundColor:
-          json['slideBackgroundColor'] as String? ?? '#FFFFFF',
+      slideBackgroundColor: _color(json['slideBackgroundColor'], '#FFFFFF'),
       name: json['name'] as String? ?? 'Standaard',
-      textColor: json['textColor'] as String? ?? '#222222',
-      accentColor: json['accentColor'] as String? ?? '#2E7D64',
-      checklistCheckedColor:
-          json['checklistCheckedColor'] as String? ??
-          json['accentColor'] as String? ??
-          '#2E7D64',
-      checklistUncheckedColor:
-          json['checklistUncheckedColor'] as String? ?? '#CBD5E1',
+      textColor: _color(json['textColor'], '#222222'),
+      accentColor: _color(json['accentColor'], '#2E7D64'),
+      checklistCheckedColor: _color(
+        json['checklistCheckedColor'] ?? json['accentColor'],
+        '#2E7D64',
+      ),
+      checklistUncheckedColor: _color(
+        json['checklistUncheckedColor'],
+        '#CBD5E1',
+      ),
       checklistStrikeThrough: json['checklistStrikeThrough'] as bool? ?? true,
       bulletMarker: BulletMarker.values.firstWhere(
         (m) => m.name == json['bulletMarker'],
         orElse: () => BulletMarker.dot,
       ),
-      tableTextColor:
-          json['tableTextColor'] as String? ??
-          json['textColor'] as String? ??
-          '#222222',
-      tableHeaderTextColor:
-          json['tableHeaderTextColor'] as String? ?? '#FFFFFF',
-      tableHeaderBackgroundColor:
-          json['tableHeaderBackgroundColor'] as String? ??
-          json['accentColor'] as String? ??
-          '#2E7D64',
-      titleBackgroundColor:
-          json['titleBackgroundColor'] as String? ?? '#1C2B47',
-      titleTextColor: json['titleTextColor'] as String? ?? '#FFFFFF',
-      sectionBackgroundColor:
-          json['sectionBackgroundColor'] as String? ?? '#2E7D64',
-      codeBackgroundColor: json['codeBackgroundColor'] as String? ?? '#282C34',
-      codeTextColor: json['codeTextColor'] as String? ?? '#ABB2BF',
+      tableTextColor: _color(
+        json['tableTextColor'] ?? json['textColor'],
+        '#222222',
+      ),
+      tableHeaderTextColor: _color(json['tableHeaderTextColor'], '#FFFFFF'),
+      tableHeaderBackgroundColor: _color(
+        json['tableHeaderBackgroundColor'] ?? json['accentColor'],
+        '#2E7D64',
+      ),
+      titleBackgroundColor: _color(json['titleBackgroundColor'], '#1C2B47'),
+      titleTextColor: _color(json['titleTextColor'], '#FFFFFF'),
+      sectionBackgroundColor: _color(json['sectionBackgroundColor'], '#2E7D64'),
+      codeBackgroundColor: _color(json['codeBackgroundColor'], '#282C34'),
+      codeTextColor: _color(json['codeTextColor'], '#ABB2BF'),
       codeHighlightSyntax: json['codeHighlightSyntax'] as bool? ?? true,
-      codeFontFamily: json['codeFontFamily'] as String? ?? 'monospace',
+      codeFontFamily: _font(
+        json['codeFontFamily'],
+        AppSettings.codeFonts,
+        'monospace',
+      ),
       logoPath: json['logoPath'] as String?,
       logoPosition: json['logoPosition'] as String? ?? 'bottom-right',
       logoSize: (json['logoSize'] as num?)?.round() ?? 96,
-      fontFamily: json['fontFamily'] as String? ?? 'Arial',
+      fontFamily: _font(
+        json['fontFamily'],
+        AppSettings.availableFonts,
+        'Arial',
+      ),
       footerText: json['footerText'] as String? ?? '',
       footerShowPageNumbers: json['footerShowPageNumbers'] as bool? ?? false,
       footerPosition: json['footerPosition'] as String? ?? 'right',

@@ -24,9 +24,9 @@ To give a sense of scale (point-in-time figures — they only grow):
 
 | Metric | Approx. |
 | --- | ---: |
-| Automated tests in the suite | **~785** |
-| Test files under `test/` | **~99** |
-| Source files under `lib/` | ~154 |
+| Automated tests in the suite | **~900** |
+| Test files under `test/` | **~105** |
+| Source files under `lib/` | ~178 (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
 | Line coverage (enforced floor: 60%) | **~65%** |
 
 Every push runs the **entire** suite — there is no "smoke subset". The tests
@@ -46,7 +46,7 @@ run locally and in CI, the number you see locally is the number CI gates on.
 | [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ |
 | [`make check-conventions`](#make-check-conventions) | No `print()`; bare `catch (_)` ratchet | ✅ | ✅ | ✅ |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ | ✅ | ✅ |
-| [`make coverage`](#make-coverage) | Line coverage ≥ 50% floor | — | — | ✅ (gate) |
+| [`make coverage`](#make-coverage) | Line coverage ≥ 60% floor | — | — | ✅ (gate) |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ |
 | [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ |
@@ -109,7 +109,7 @@ These three run on every push and pull request (and as `make check`).
   printed at the top of the run so you can reproduce it.
 
 ### `make coverage`
-- **Runs:** `flutter test --coverage` then `dart run tool/coverage_summary.dart --min=50`.
+- **Runs:** `flutter test --coverage` then `dart run tool/coverage_summary.dart --min=60`.
 - **Covers:** line coverage across every `lib/` file a test imports.
 - **Failure means:** overall line coverage dropped below the floor (currently
   **60%**). The floor guards against large regressions; raise it as coverage
@@ -174,6 +174,16 @@ These three run on every push and pull request (and as `make check`).
   the export carries a strict, nonce-based CSP (no `unsafe-inline`/`unsafe-eval`,
   `object-src 'none'`) and any `</script>` an untrusted deck injects is escaped
   so it can't break out of the inert markdown data holder.
+- **Class-level guards** catch whole bug *families*, not just known cases:
+  - `test/network_sink_guard_test.dart` — a source scan that fails if
+    `NetworkImage` / `VideoPlayerController.networkUrl` / `HttpClient` appears
+    outside the files that apply `NetGuard` (a new sink can't reintroduce SSRF).
+  - `test/markdown_roundtrip_fuzz_test.dart` — an adversarial corpus (pipe,
+    `-->`, `<br>`, backslash, HTML metachars, newlines) through every lossless
+    field, so a new escaping bug fails instead of silently losing author text.
+  - the `ThemeProfile.fromJson` fuzz in `test/settings_provider_test.dart` —
+    every style colour must read back as `#RRGGBB` and every font as a
+    whitelisted family, blocking CSS/HTML injection via an imported theme.
 
 ### Targeted test groups
 
@@ -187,6 +197,16 @@ For focused work, run only the relevant slice instead of the whole suite:
 | `make test-state`     | Providers, undo/redo, search/replace, settings, recovery |
 | `make test-services`  | Image, caption, and description sidecar services |
 | `make test-presenter` | Fullscreen presenter navigation and keyboard shortcuts |
+
+### Manual tools (not gates)
+
+- **`make mutate`** — a lightweight mutation check for the *dead/untested
+  boolean-operand* bug class that `dart analyze` and line coverage both miss
+  (an `||`/`&&` operand that can never be true — the line is still hit via
+  another operand). It forces each `String.startsWith`/`endsWith` predicate in a
+  target file to false and reruns the given tests; a **surviving** mutant is a
+  dead or untested predicate to review. Slow and triage-heavy, so it stays out of
+  `make check`. Override the target: `make mutate FILE=lib/services/markdown_service.dart TESTS="test/markdown_round_trip_test.dart"`.
 
 ---
 
@@ -227,8 +247,10 @@ See [`BUILD.md`](BUILD.md) for the matching local `make build-*` targets.
 
 ## Version pin
 
-CI pins **Flutter 3.44.2 (stable)**. The pin matters mainly for **`dart format`**:
-its line-wrapping output changes between releases, so an unpinned local toolchain
+CI pins **Flutter 3.44.2 (stable)**, recorded in `.tool-versions` (asdf) and in
+both `.github/workflows/*.yml`. The pin matters mainly for **`dart format`**: its
+line-wrapping output changes between releases, so an unpinned local toolchain — or
+a separately installed standalone Dart used instead of the Flutter-bundled one —
 can disagree with CI on formatting. Keep your local Flutter on the pinned version
-(or bump the pin in both `ci.yml` and `release.yml` and reformat the tree in one
-mechanical commit).
+and use its bundled `dart` (or bump the pin in `.tool-versions` + both workflows
+and reformat the tree in one mechanical commit).

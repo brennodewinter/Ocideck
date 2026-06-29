@@ -390,8 +390,10 @@ void main() {
     );
 
     expect(markdown, isNot(contains('ocideck_bullet_marker')));
-    expect(service.parseDeck(markdown)!.slides.single.bulletMarkerOverride,
-        isNull);
+    expect(
+      service.parseDeck(markdown)!.slides.single.bulletMarkerOverride,
+      isNull,
+    );
   });
 
   test('forExport pins the effective paw marker on bullet slides only', () {
@@ -403,18 +405,13 @@ void main() {
         Slide.create(
           SlideType.bullets,
         ).copyWith(title: 'Punten', bullets: const ['x']),
-        Slide.create(
-          SlideType.freeMarkdown,
-        ).copyWith(customMarkdown: '- y'),
+        Slide.create(SlideType.freeMarkdown).copyWith(customMarkdown: '- y'),
       ],
     );
 
     // Export pins the bullet slide's paw, but never the free-markdown list.
     final exported = MarkdownService().generateDeck(deck, forExport: true);
-    expect(
-      'ocideck_bullet_marker: paw'.allMatches(exported).length,
-      1,
-    );
+    expect('ocideck_bullet_marker: paw'.allMatches(exported).length, 1);
 
     // A normal save leaves the inherited default implicit (no comment), so the
     // override semantics — and the file — stay clean.

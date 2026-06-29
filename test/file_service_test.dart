@@ -296,30 +296,35 @@ void main() {
     expect(await sidecar.exists(), isFalse);
   });
 
-  test('openDeck always refuses markdown with executable content (fail-closed)', () async {
-    final temp = await Directory.systemTemp.createTemp('ocideck_unsafe_open_');
-    addTearDown(() async {
-      if (await temp.exists()) await temp.delete(recursive: true);
-    });
+  test(
+    'openDeck always refuses markdown with executable content (fail-closed)',
+    () async {
+      final temp = await Directory.systemTemp.createTemp(
+        'ocideck_unsafe_open_',
+      );
+      addTearDown(() async {
+        if (await temp.exists()) await temp.delete(recursive: true);
+      });
 
-    final service = FileService(
-      MarkdownService(),
-      ImageService(),
-      () => const ThemeProfile(),
-    );
-    final unsafe = p.join(temp.path, 'unsafe.md');
-    await File(unsafe).writeAsString(
-      '---\nmarp: true\ntitle: X\n---\n\n# Hi\n\n<script>steal()</script>\n',
-    );
-    // The scanner reports it and openDeck refuses it — there is no trust bypass.
-    expect(await service.scanForUnsafeMarkdown(unsafe), isNotEmpty);
-    expect(await service.openDeck(unsafe), isNull);
+      final service = FileService(
+        MarkdownService(),
+        ImageService(),
+        () => const ThemeProfile(),
+      );
+      final unsafe = p.join(temp.path, 'unsafe.md');
+      await File(unsafe).writeAsString(
+        '---\nmarp: true\ntitle: X\n---\n\n# Hi\n\n<script>steal()</script>\n',
+      );
+      // The scanner reports it and openDeck refuses it — there is no trust bypass.
+      expect(await service.scanForUnsafeMarkdown(unsafe), isNotEmpty);
+      expect(await service.openDeck(unsafe), isNull);
 
-    // A clean deck on the same path opens normally.
-    final safe = p.join(temp.path, 'safe.md');
-    await File(safe).writeAsString(
-      '---\nmarp: true\ntitle: Y\n---\n\n# Hi\n\n- data only\n',
-    );
-    expect(await service.openDeck(safe), isNotNull);
-  });
+      // A clean deck on the same path opens normally.
+      final safe = p.join(temp.path, 'safe.md');
+      await File(safe).writeAsString(
+        '---\nmarp: true\ntitle: Y\n---\n\n# Hi\n\n- data only\n',
+      );
+      expect(await service.openDeck(safe), isNotNull);
+    },
+  );
 }
