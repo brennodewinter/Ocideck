@@ -230,6 +230,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the list scrolls the slide being edited back into view.
 - **Speaker notes** in the visual editor now use the same collapsible header
   pattern as user notes, with a discard button in the header row.
+- **Maintainability: the two largest source files were split up.** The
+  localization data now lives one file per language under `lib/l10n/translations/`
+  (`app_localizations.dart` shrank from ~7,600 to ~160 lines and only assembles
+  the lookup maps), and `fullscreen_presenter.dart` (~3,500 → ~1,270 lines) was
+  split into themed `part` files under `widgets/presentation/parts/`. No
+  behavioural change; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ### Fixed
 - **Consent dialog no longer crashes its action bar.** A `Spacer` in the

@@ -69,7 +69,8 @@ Targeted test groups for focused work:
   brontekst')`. The test `test/app_localizations_test.dart` fails if a literal
   `.d('…')` string lacks a translation in **every** supported language
   (Dutch is the source; en/it/de/fr/es/fy/pap need an entry). Add your strings to
-  `lib/l10n/app_localizations.dart` for all languages, or the suite goes red.
+  the matching per-language file in `lib/l10n/translations/` for all languages, or
+  the suite goes red.
 - **Tests**: add or update tests for behaviour you change — especially the
   Markdown round-trip and any file-format change.
 - **File format**: if you change how anything is stored, update

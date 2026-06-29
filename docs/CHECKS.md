@@ -163,8 +163,9 @@ These three run on every push and pull request (and as `make check`).
 - **Localization is enforced by a test.** `test/app_localizations_test.dart`
   fails if any `context.l10n.d('Nederlandse brontekst')` string lacks a
   translation in **every** supported language (Dutch is the source;
-  en/it/de/fr/es/fy/pap each need an entry). Add UI strings to
-  `lib/l10n/app_localizations.dart` for all languages or `make test` goes red.
+  en/it/de/fr/es/fy/pap each need an entry). Add the translations to the relevant
+  per-language file in `lib/l10n/translations/` for every language or `make test`
+  goes red.
 - **Path / SSRF guards** are covered by `test/asset_path_guard_test.dart`,
   `test/project_path_security_test.dart`, and the net-guard tests — they keep
   deck-supplied paths and URLs from escaping the project or reaching internal
