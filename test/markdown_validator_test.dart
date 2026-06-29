@@ -404,4 +404,105 @@ marp: true
       isTrue,
     );
   });
+
+  // Branches the mutation check (`make mutate`) flagged as untested: the
+  // slide-level comment-key validators and the <video>/<audio> tag guards.
+  // Each test forces one predicate to matter, so a mutant that neutralises it
+  // is killed instead of surviving.
+  group('slide-level comment and media-tag validation', () {
+    test('flags an unknown slide-level TLP comment', () {
+      const md = '---\nmarp: true\n---\n\n# Slide\n\n<!-- tlp: bogus -->\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any((i) => i.message.contains('onbekend TLP-niveau')),
+        isTrue,
+      );
+    });
+
+    test('flags a non-numeric advance comment', () {
+      const md = '---\nmarp: true\n---\n\n# Slide\n\n<!-- advance: abc -->\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any((i) => i.message.contains('advance-waarde')),
+        isTrue,
+      );
+    });
+
+    test('flags an unknown list-style comment', () {
+      const md =
+          '---\nmarp: true\n---\n\n# Slide\n\n<!-- ocideck_list_style: bogus -->\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any((i) => i.message.contains('onbekende lijststijl')),
+        isTrue,
+      );
+    });
+
+    test('flags an unterminated <video> tag', () {
+      const md = '---\nmarp: true\n---\n\n# Slide\n\n<video src="clip.mp4"\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any(
+          (i) => i.message.contains('`<video>`-tag is onvolledig'),
+        ),
+        isTrue,
+      );
+    });
+
+    test('accepts a complete <video> tag without an incomplete-tag error', () {
+      const md =
+          '---\nmarp: true\n---\n\n# Slide\n\n<video src="clip.mp4" controls></video>\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any(
+          (i) => i.message.contains('`<video>`-tag is onvolledig'),
+        ),
+        isFalse,
+      );
+    });
+
+    test('flags a <video> tag missing a src attribute', () {
+      const md = '---\nmarp: true\n---\n\n# Slide\n\n<video controls></video>\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any((i) => i.message.contains('mist een `src')),
+        isTrue,
+      );
+    });
+
+    test('flags an unterminated <audio> tag', () {
+      const md = '---\nmarp: true\n---\n\n# Slide\n\n<audio src="a.mp3"\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any(
+          (i) => i.message.contains('`<audio>`-tag is onvolledig'),
+        ),
+        isTrue,
+      );
+    });
+
+    test('accepts a complete <audio> tag without an incomplete-tag error', () {
+      const md =
+          '---\nmarp: true\n---\n\n# Slide\n\n<audio src="a.mp3" controls></audio>\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any(
+          (i) => i.message.contains('`<audio>`-tag is onvolledig'),
+        ),
+        isFalse,
+      );
+    });
+
+    test('does not warn about a # comment line in the front matter', () {
+      const md =
+          '---\nmarp: true\n# een commentaar\ntheme: ocideck\n---\n\n# Slide\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any(
+          (i) => i.message.contains('geen sleutel:waarde-vorm'),
+        ),
+        isFalse,
+      );
+    });
+  });
 }
