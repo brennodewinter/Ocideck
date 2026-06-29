@@ -18,6 +18,7 @@ Shipped inside the app and embedded into the **offline HTML export**
 | [Mermaid](https://github.com/mermaid-js/mermaid) | Diagrams in the export | MIT |
 | [MathJax](https://github.com/mathjax/MathJax) (`tex-svg.js`) | Math rendering in the export | Apache-2.0 |
 | [EB Garamond](https://github.com/octaviopardo/EBGaramond12) font | Bundled deck font | SIL Open Font License 1.1 |
+| [Roboto](https://github.com/googlefonts/roboto-classic) font | Bundled UI font (replaces the runtime fetch from fonts.gstatic.com) | SIL Open Font License 1.1 |
 
 The exact pinned version, source URL and SHA-256 of every vendored JS bundle
 live in [`assets/web_export/MANIFEST.json`](assets/web_export/MANIFEST.json).

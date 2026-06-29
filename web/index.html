@@ -18,6 +18,28 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+
+  <!--
+    Content-Security-Policy hardening for the web build.
+
+    - script-src is locked to first-party plus 'wasm-unsafe-eval' (CanvasKit must
+      compile a WebAssembly module; this narrow token does NOT re-enable JS
+      eval()/Function()). Build with `make build-web` (flutter build web --csp)
+      so the Flutter loader needs no 'unsafe-inline'/'unsafe-eval' either.
+    - style-src keeps 'unsafe-inline' because the Flutter engine injects styles
+      at runtime; there is no way around this for a CanvasKit app.
+    - img-src/media-src are first-party only (data:/blob:). Remote deck media is
+      therefore blocked on web by design — on web there is no net_guard SSRF
+      check, so this closes that hole. To allow remote media, add `https:` to
+      img-src AND media-src.
+    - child-src/frame-src allow blob:/data: for the offscreen Mermaid render
+      WebView (an iframe on web).
+    - base-uri is 'self' (NOT 'none') because Flutter relies on <base href>.
+    - frame-ancestors 'none' prevents clickjacking standalone; relax to 'self'
+      (or the host origin) when embedding this bundle inside Nextcloud.
+  -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; child-src 'self' blob: data:; frame-src 'self' blob: data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'">
+
   <meta name="description" content="A new Flutter project.">
 
   <!-- iOS meta tags & icons -->

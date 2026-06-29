@@ -75,6 +75,10 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: brightness,
+      // Use the locally bundled Roboto (see pubspec.yaml) so the CanvasKit web
+      // engine never fetches it from fonts.gstatic.com. Keeps the web build
+      // self-contained and renders text under a strict connect-src 'self' CSP.
+      fontFamily: 'Roboto',
       colorScheme: scheme,
       scaffoldBackgroundColor: background,
       canvasColor: surfaceColor,

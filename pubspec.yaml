@@ -78,3 +78,10 @@ flutter:
         - asset: assets/fonts/EBGaramond-Variable.ttf
         - asset: assets/fonts/EBGaramond-Italic-Variable.ttf
           style: italic
+    # Bundled UI font. Registered under the literal family name "Roboto" so the
+    # CanvasKit web engine finds it already present and does NOT download Roboto
+    # from fonts.gstatic.com — keeping the web build self-contained (no
+    # third-party origin) and working under a strict connect-src 'self' CSP.
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Variable.ttf
