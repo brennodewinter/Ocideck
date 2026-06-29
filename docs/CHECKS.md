@@ -20,6 +20,26 @@ make check-full   # check + licenses + deps-check + deps-outdated
 
 ---
 
+## All checks at a glance
+
+| Check | Verifies | In `make check` | In `check-full` | In CI |
+| --- | --- | :---: | :---: | :---: |
+| [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ |
+| [`make analyze`](#make-analyze) | No analyzer/lint/type issues | ✅ | ✅ | ✅ |
+| [`make test`](#make-test) | Full unit/widget suite passes | ✅ | ✅ | ✅ |
+| [`make coverage`](#make-coverage) | Line coverage ≥ 50% floor | — | — | ✅ (gate) |
+| [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
+| [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ |
+| [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — |
+
+Enforced inside `make test`: **localization in all 8 languages** and the
+**path/SSRF guards** (see [below](#enforced-behaviours-worth-calling-out)). The
+[targeted test groups](#targeted-test-groups) (`make test-contracts`,
+`test-preview`, `test-export`, `test-state`, `test-services`, `test-presenter`)
+are subsets of `make test` for focused work — not separate gates.
+
+---
+
 ## Quality gate
 
 These three run on every push and pull request (and as `make check`).
