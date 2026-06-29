@@ -1,13 +1,16 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 import '../services/file_service.dart';
+import '../services/markdown_safety.dart';
 import '../services/markdown_service.dart';
 import '../services/recovery_service.dart';
 import '../services/user_notes_codec.dart';
+import '../utils/log.dart';
 import 'deck_provider.dart';
 import 'editor_provider.dart';
 import 'settings_provider.dart';
@@ -74,9 +77,32 @@ class TabsState {
   }
 }
 
+/// How a single open/import attempt ended. Used by the import flows to decide
+/// whether to clean up downloaded/extracted files and what to report.
+enum OpenResult {
+  /// The deck was opened in a tab.
+  opened,
+
+  /// The file could not be read or parsed (missing, over-size, corrupt).
+  unreadable,
+
+  /// The file was refused because it contains executable content; the security
+  /// alarm has been raised via [importSecurityAlarmProvider].
+  blocked,
+}
+
+/// A blocked import surfaced to the UI: the offending file plus what was found.
+/// The shell listens on [importSecurityAlarmProvider] and shows the alarm.
+class ImportSecurityAlarm {
+  final String path;
+  final List<MarkdownSafetyFinding> findings;
+  const ImportSecurityAlarm({required this.path, required this.findings});
+}
+
 // ── Tabs notifier ─────────────────────────────────────────────────────────────
 
 class TabsNotifier extends StateNotifier<TabsState> {
+  final Ref _ref;
   final MarkdownService _md;
   final FileService _file;
   final SettingsNotifier _settings;
@@ -88,7 +114,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// Hoe vaak niet-opgeslagen tabbladen naar een herstelbestand worden bewaard.
   static const _autosaveInterval = Duration(seconds: 25);
 
-  TabsNotifier(this._md, this._file, this._settings, this._recovery)
+  TabsNotifier(this._ref, this._md, this._file, this._settings, this._recovery)
     : super(const TabsState(tabs: [])) {
     // Start with one empty tab
     final tab = _createTab();
@@ -247,10 +273,26 @@ class TabsNotifier extends StateNotifier<TabsState> {
     await _settings.addRecentFile(path);
   }
 
-  Future<void> openFileByPath(String path, {int? selectIndex}) async {
+  Future<OpenResult> openFileByPath(String path, {int? selectIndex}) async {
+    // Security gate: every file that enters the app (open, recent, drag-drop,
+    // URL/package import) is scanned first. A presentation is data only — if the
+    // file carries anything executable we refuse it and raise the alarm instead
+    // of parsing/opening it. Fail-closed.
+    final findings = await _file.scanForUnsafeMarkdown(path);
+    if (findings.isNotEmpty) {
+      if (mounted) {
+        _ref.read(importSecurityAlarmProvider.notifier).state =
+            ImportSecurityAlarm(path: path, findings: findings);
+      }
+      return OpenResult.blocked;
+    }
+    // The scan above only drives the alarm; openDeck re-reads and re-scans the
+    // exact bytes it parses, so a file swapped after this point is still caught
+    // (it simply returns null here rather than loading unsafe content).
     final deck = await _file.openDeck(path);
-    if (deck == null) return;
-    if (!mounted) return; // notifier disposed during the await
+    if (deck == null) return OpenResult.unreadable;
+    // notifier disposed during the await
+    if (!mounted) return OpenResult.unreadable;
     final index = (selectIndex ?? 0).clamp(0, deck.slides.length - 1);
     final current = state.current;
     if (current != null && !current.isOpen) {
@@ -265,6 +307,19 @@ class TabsNotifier extends StateNotifier<TabsState> {
       state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
     }
     await _settings.addRecentFile(path);
+    return OpenResult.opened;
+  }
+
+  /// Remove the unique folder an import extracted/downloaded into when the deck
+  /// was not opened (blocked or unreadable). Only ever deletes folders the
+  /// import itself just created — never a folder the user opened in place.
+  Future<void> _discardImportArtifacts(String mdPath) async {
+    try {
+      final dir = Directory(p.dirname(mdPath));
+      if (await dir.exists()) await dir.delete(recursive: true);
+    } catch (e) {
+      logWarning('TabsNotifier._discardImportArtifacts: cleanup failed', e);
+    }
   }
 
   /// Map waarin geïmporteerde pakketten worden uitgepakt.
@@ -274,6 +329,10 @@ class TabsNotifier extends StateNotifier<TabsState> {
   }
 
   /// Importeer een `.ocideck`-pakket (zip) en open het in een tab.
+  ///
+  /// Retourneert `true` wanneer het pakket is opgehaald én verwerkt — ook als de
+  /// veiligheidscontrole de inhoud blokkeert (dan toont de shell het alarm).
+  /// `false` betekent dat het pakket niet kon worden gelezen/uitgepakt.
   Future<bool> importPackageFile(String zipPath, {String? homeDir}) async {
     final dest = await _importDestDir(homeDir);
     final file = File(zipPath);
@@ -281,18 +340,20 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final bytes = await file.readAsBytes();
     final mdPath = await _file.importPackageBytes(bytes, dest);
     if (mdPath == null) return false;
-    await openFileByPath(mdPath);
-    return true;
+    final result = await openFileByPath(mdPath);
+    if (result != OpenResult.opened) await _discardImportArtifacts(mdPath);
+    return result != OpenResult.unreadable;
   }
 
   /// Haal een presentatie op via een URL (pakket of platte markdown) en open
-  /// het in een tab.
+  /// het in een tab. Zie [importPackageFile] voor de betekenis van de retour.
   Future<bool> importFromUrl(String url, {String? homeDir}) async {
     final dest = await _importDestDir(homeDir);
     final mdPath = await _file.importFromUrl(url, dest);
     if (mdPath == null) return false;
-    await openFileByPath(mdPath);
-    return true;
+    final result = await openFileByPath(mdPath);
+    if (result != OpenResult.opened) await _discardImportArtifacts(mdPath);
+    return result != OpenResult.unreadable;
   }
 
   void selectTab(int index) {
@@ -323,9 +384,17 @@ class TabsNotifier extends StateNotifier<TabsState> {
 
 final tabsProvider = StateNotifierProvider<TabsNotifier, TabsState>((ref) {
   return TabsNotifier(
+    ref,
     ref.read(markdownServiceProvider),
     ref.read(fileServiceProvider),
     ref.read(settingsProvider.notifier),
     ref.read(recoveryServiceProvider),
   );
 });
+
+/// Holds the most recent blocked-import alarm, or null. The shell listens on
+/// this and shows [ImportSecurityAlarmDialog] when it becomes non-null, then
+/// resets it to null. Set by [TabsNotifier.openFileByPath].
+final importSecurityAlarmProvider = StateProvider<ImportSecurityAlarm?>(
+  (ref) => null,
+);

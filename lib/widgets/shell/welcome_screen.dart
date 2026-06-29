@@ -16,60 +16,88 @@ class _WelcomeScreen extends ConsumerWidget {
     );
 
     return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
+      // Wit i.p.v. het lichtgrijze scaffold-vlak, zodat het openscherm één
+      // egaal wit oppervlak is dat aansluit op de (witte) recente-bestanden­kolom.
+      backgroundColor: theme.colorScheme.surface,
       body: Row(
         children: [
           // ── Midden: logo + knoppen ─────────────────────────────────────
           Expanded(
-            child: Align(
-              alignment: const Alignment(-0.15, 0.12),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Semantics(
-                    label: 'OciDeck',
-                    image: true,
-                    child: Image.asset(
-                      'assets/images/ocideck-logo.png',
-                      width: 200,
-                      fit: BoxFit.contain,
-                      filterQuality: FilterQuality.high,
+            // Scroll-safe: bij sterk vergrote interfacetekst (tot 200%) passen
+            // logo + knoppen niet meer op de hoogte; dan scrollt het in plaats
+            // van te overlopen. Bij genoeg ruimte blijft het gecentreerd.
+            child: LayoutBuilder(
+              builder: (context, constraints) => SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: Align(
+                    alignment: const Alignment(-0.15, 0.12),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Semantics(
+                          label: 'OciDeck',
+                          image: true,
+                          child: Image.asset(
+                            'assets/images/ocideck-logo.png',
+                            width: 200,
+                            fit: BoxFit.contain,
+                            filterQuality: FilterQuality.high,
+                          ),
+                        ),
+                        const SizedBox(height: 36),
+                        SizedBox(
+                          width: 220,
+                          child: ElevatedButton.icon(
+                            onPressed: () => _newDeck(context, ref),
+                            icon: const Icon(Icons.add, size: 18),
+                            label: Text(l10n.t('newPresentation')),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          width: 220,
+                          child: OutlinedButton.icon(
+                            onPressed: () =>
+                                _openWithSearch(context, ref, homeDir),
+                            icon: const Icon(
+                              Icons.folder_open_outlined,
+                              size: 18,
+                            ),
+                            label: Text(l10n.t('open')),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          width: 220,
+                          child: OutlinedButton.icon(
+                            onPressed: () => _importFromUrl(context, ref),
+                            icon: const Icon(
+                              Icons.cloud_download_outlined,
+                              size: 18,
+                            ),
+                            label: Text(l10n.t('importUrl')),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          width: 220,
+                          child: OutlinedButton.icon(
+                            onPressed: () => _scanLibrary(context, ref),
+                            icon: const Icon(Icons.travel_explore, size: 18),
+                            label: Text(l10n.d('Zoek op deze computer')),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        TextButton.icon(
+                          onPressed: () => SettingsDialog.show(context),
+                          icon: const Icon(Icons.settings_outlined, size: 17),
+                          label: Text(l10n.t('settings')),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 36),
-                  SizedBox(
-                    width: 220,
-                    child: ElevatedButton.icon(
-                      onPressed: () => _newDeck(context, ref),
-                      icon: const Icon(Icons.add, size: 18),
-                      label: Text(l10n.t('newPresentation')),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  SizedBox(
-                    width: 220,
-                    child: OutlinedButton.icon(
-                      onPressed: () => _openWithSearch(context, ref, homeDir),
-                      icon: const Icon(Icons.folder_open_outlined, size: 18),
-                      label: Text(l10n.t('open')),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  SizedBox(
-                    width: 220,
-                    child: OutlinedButton.icon(
-                      onPressed: () => _scanLibrary(context, ref),
-                      icon: const Icon(Icons.travel_explore, size: 18),
-                      label: Text(l10n.d('Zoek op deze computer')),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  TextButton.icon(
-                    onPressed: () => SettingsDialog.show(context),
-                    icon: const Icon(Icons.settings_outlined, size: 17),
-                    label: Text(l10n.t('settings')),
-                  ),
-                ],
+                ),
               ),
             ),
           ),

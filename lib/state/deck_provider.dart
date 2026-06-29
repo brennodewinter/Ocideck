@@ -198,6 +198,9 @@ class DeckNotifier extends StateNotifier<DeckState> {
     // The write succeeded; re-read to pick up the normalised on-disk form. If
     // that read fails the data is still safely persisted, so keep the in-memory
     // deck and mark it clean, but surface the anomaly instead of hiding it.
+    // Not "trusted": once it is on disk it could have been changed, so the
+    // re-read is scanned like any other open. Our own decks are clean data and
+    // pass; only a tampered file on disk would be refused — which is correct.
     final reopened = await _file.openDeck(path);
     if (reopened == null) {
       logWarning('DeckNotifier.saveAs: saved file could not be re-read', path);

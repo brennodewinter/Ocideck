@@ -82,6 +82,11 @@ class FullscreenPresenter extends StatefulWidget {
   /// Sessie-only; live aanpasbaar in de presenter (toets K).
   final Duration? targetDuration;
 
+  /// Of het oefenoverzicht (bestede tijd per slide) na afloop verschijnt. De
+  /// tijd wordt altijd gemeten; dit schakelt enkel het eindscherm. Komt uit de
+  /// instelling `showRehearsalSummary` (standaard aan).
+  final bool showRehearsalSummary;
+
   /// When set, this presenter drives a separate audience (beamer) window: the
   /// laptop shows the presenter view, the slide goes to [audience]. Null
   /// for the classic single-screen mode.
@@ -110,6 +115,7 @@ class FullscreenPresenter extends StatefulWidget {
     this.showClassificationWatermark = false,
     this.allowRemoteMedia = false,
     this.targetDuration,
+    this.showRehearsalSummary = true,
     this.audience,
     this.initialAnnotations = const {},
     this.onAnnotationsChanged,
@@ -133,6 +139,7 @@ class FullscreenPresenter extends StatefulWidget {
     bool showClassificationWatermark = false,
     bool allowRemoteMedia = false,
     Duration? targetDuration,
+    bool showRehearsalSummary = true,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
@@ -167,6 +174,7 @@ class FullscreenPresenter extends StatefulWidget {
         showClassificationWatermark: showClassificationWatermark,
         allowRemoteMedia: allowRemoteMedia,
         targetDuration: targetDuration,
+        showRehearsalSummary: showRehearsalSummary,
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
         onSlideChanged: onSlideChanged,
@@ -186,6 +194,7 @@ class FullscreenPresenter extends StatefulWidget {
         showClassificationWatermark: showClassificationWatermark,
         allowRemoteMedia: allowRemoteMedia,
         targetDuration: targetDuration,
+        showRehearsalSummary: showRehearsalSummary,
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
         onSlideChanged: onSlideChanged,
@@ -207,6 +216,7 @@ class FullscreenPresenter extends StatefulWidget {
     bool showClassificationWatermark = false,
     bool allowRemoteMedia = false,
     Duration? targetDuration,
+    bool showRehearsalSummary = true,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
@@ -233,6 +243,7 @@ class FullscreenPresenter extends StatefulWidget {
               showClassificationWatermark: showClassificationWatermark,
               allowRemoteMedia: allowRemoteMedia,
               targetDuration: targetDuration,
+              showRehearsalSummary: showRehearsalSummary,
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
               onSlideChanged: onSlideChanged,
@@ -266,6 +277,7 @@ class FullscreenPresenter extends StatefulWidget {
     bool showClassificationWatermark = false,
     bool allowRemoteMedia = false,
     Duration? targetDuration,
+    bool showRehearsalSummary = true,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
@@ -342,6 +354,7 @@ class FullscreenPresenter extends StatefulWidget {
           organization: organization,
           showClassificationWatermark: showClassificationWatermark,
           allowRemoteMedia: allowRemoteMedia,
+          showRehearsalSummary: showRehearsalSummary,
           annotations: annotations,
           onAnnotationsChanged: onAnnotationsChanged,
           onSlideChanged: onSlideChanged,
@@ -370,6 +383,7 @@ class FullscreenPresenter extends StatefulWidget {
               organization: organization,
               showClassificationWatermark: showClassificationWatermark,
               allowRemoteMedia: allowRemoteMedia,
+              showRehearsalSummary: showRehearsalSummary,
               audience: audienceHandle,
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
@@ -1527,6 +1541,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// Toon na afloop de oefenrun-samenvatting, mits er genoeg gemeten is.
   /// Sessie-only: niets wordt opgeslagen.
   Future<void> _maybeShowRehearsalSummary() async {
+    // Tijd wordt altijd gemeten; deze schakelaar bepaalt enkel of het
+    // eindscherm verschijnt (uit = stille modus, bv. bij een echte presentatie).
+    if (!widget.showRehearsalSummary) return;
     if (!mounted || !_rehearsal.hasMeaningfulData) return;
     final run = _rehearsal.finish();
     await showRehearsalSummary(context, run: run, slides: widget.slides);
@@ -1588,6 +1605,12 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       _loadUserNoteIntoController();
       _scheduleAdvance();
       _announceSlide();
+    } else {
+      // Voorbij de laatste slide klikken/tikken verlaat de presentatie, zodat je
+      // er na de laatste slide gewoon "doorheen" loopt i.p.v. vast te lopen en
+      // Esc te moeten zoeken. Alleen handmatige navigatie komt hier langs; de
+      // auto-play loopt via [_autoAdvance] en blijft op de laatste slide staan.
+      _exit();
     }
   }
 

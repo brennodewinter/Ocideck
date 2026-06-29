@@ -2558,6 +2558,18 @@ const _dutchSourceStrings = {
 const _dutchSourceStringAdditions = {
   'en': {
     // Accessibility labels for icon-only buttons (screen readers).
+    'Presenteren': 'Presenting',
+    'Oefenoverzicht tonen na afloop': 'Show rehearsal summary afterwards',
+    'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+        'After a presentation, show the overview of time spent per slide. Time is always measured; this only controls whether the screen appears.',
+    'Onveilige presentatie geblokkeerd': 'Unsafe presentation blocked',
+    'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+        'This presentation was not opened. The file contains content that can execute code, and a presentation should contain only data — nothing executable.',
+    'Gevonden:': 'Found:',
+    'Regel': 'Line',
+    'Scriptuitvoering': 'Script execution',
+    'Ingesloten inhoud': 'Embedded content',
+    'Onveilige URL': 'Unsafe URL',
     'Zoekopdracht wissen': 'Clear search',
     'Bullet verwijderen': 'Remove bullet',
     'Kolom verwijderen': 'Remove column',
@@ -3077,6 +3089,19 @@ const _dutchSourceStringAdditions = {
   },
   'it': {
     // Accessibility labels for icon-only buttons (screen readers).
+    'Presenteren': 'Presentazione',
+    'Oefenoverzicht tonen na afloop':
+        'Mostra il riepilogo della prova al termine',
+    'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+        'Dopo una presentazione, mostra il riepilogo del tempo trascorso per diapositiva. Il tempo viene sempre misurato; questa opzione determina solo se la schermata appare.',
+    'Onveilige presentatie geblokkeerd': 'Presentazione non sicura bloccata',
+    'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+        'Questa presentazione non è stata aperta. Il file contiene contenuti che possono eseguire codice, mentre una presentazione deve contenere solo dati — nulla di eseguibile.',
+    'Gevonden:': 'Trovato:',
+    'Regel': 'Riga',
+    'Scriptuitvoering': 'Esecuzione di script',
+    'Ingesloten inhoud': 'Contenuto incorporato',
+    'Onveilige URL': 'URL non sicuro',
     'Zoekopdracht wissen': 'Cancella ricerca',
     'Bullet verwijderen': 'Rimuovi punto',
     'Kolom verwijderen': 'Rimuovi colonna',
@@ -3777,6 +3802,18 @@ const _dutchSourceStringAdditions = {
   },
   'de': {
     // Accessibility labels for icon-only buttons (screen readers).
+    'Presenteren': 'Präsentieren',
+    'Oefenoverzicht tonen na afloop': 'Übersicht des Probelaufs danach anzeigen',
+    'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+        'Zeige nach einer Präsentation die Übersicht der pro Folie aufgewendeten Zeit. Die Zeit wird immer gemessen; dies legt nur fest, ob der Bildschirm erscheint.',
+    'Onveilige presentatie geblokkeerd': 'Unsichere Präsentation blockiert',
+    'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+        'Diese Präsentation wurde nicht geöffnet. Die Datei enthält Inhalte, die Code ausführen können, während eine Präsentation nur Daten enthalten darf – nichts Ausführbares.',
+    'Gevonden:': 'Gefunden:',
+    'Regel': 'Zeile',
+    'Scriptuitvoering': 'Skriptausführung',
+    'Ingesloten inhoud': 'Eingebetteter Inhalt',
+    'Onveilige URL': 'Unsichere URL',
     'Zoekopdracht wissen': 'Suche löschen',
     'Bullet verwijderen': 'Aufzählungspunkt entfernen',
     'Kolom verwijderen': 'Spalte entfernen',
@@ -4476,6 +4513,19 @@ const _dutchSourceStringAdditions = {
   },
   'fr': {
     // Accessibility labels for icon-only buttons (screen readers).
+    'Presenteren': 'Présentation',
+    'Oefenoverzicht tonen na afloop':
+        'Afficher le récapitulatif de répétition à la fin',
+    'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+        'Après une présentation, affiche le récapitulatif du temps passé par diapositive. Le temps est toujours mesuré ; ceci détermine seulement si l\'écran apparaît.',
+    'Onveilige presentatie geblokkeerd': 'Présentation non sécurisée bloquée',
+    'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+        'Cette présentation n\'a pas été ouverte. Le fichier contient du contenu pouvant exécuter du code, alors qu\'une présentation ne doit contenir que des données — rien d\'exécutable.',
+    'Gevonden:': 'Trouvé :',
+    'Regel': 'Ligne',
+    'Scriptuitvoering': 'Exécution de script',
+    'Ingesloten inhoud': 'Contenu intégré',
+    'Onveilige URL': 'URL non sécurisée',
     'Zoekopdracht wissen': 'Effacer la recherche',
     'Bullet verwijderen': 'Supprimer la puce',
     'Kolom verwijderen': 'Supprimer la colonne',
@@ -5180,6 +5230,18 @@ const _dutchSourceStringAdditions = {
   },
   'es': {
     // Accessibility labels for icon-only buttons (screen readers).
+    'Presenteren': 'Presentación',
+    'Oefenoverzicht tonen na afloop': 'Mostrar el resumen del ensayo al finalizar',
+    'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+        'Después de una presentación, muestra el resumen del tiempo dedicado por diapositiva. El tiempo siempre se mide; esto solo determina si aparece la pantalla.',
+    'Onveilige presentatie geblokkeerd': 'Presentación no segura bloqueada',
+    'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+        'Esta presentación no se abrió. El archivo contiene contenido que puede ejecutar código, y una presentación solo debe contener datos — nada ejecutable.',
+    'Gevonden:': 'Encontrado:',
+    'Regel': 'Línea',
+    'Scriptuitvoering': 'Ejecución de scripts',
+    'Ingesloten inhoud': 'Contenido incrustado',
+    'Onveilige URL': 'URL no segura',
     'Zoekopdracht wissen': 'Borrar búsqueda',
     'Bullet verwijderen': 'Eliminar viñeta',
     'Kolom verwijderen': 'Eliminar columna',
@@ -5882,6 +5944,18 @@ const _dutchSourceStringAdditions = {
   },
   'fy': {
     // Accessibility labels for icon-only buttons (screen readers).
+    'Presenteren': 'Presintearje',
+    'Oefenoverzicht tonen na afloop': 'Oefenoersjoch nei ôfrin toane',
+    'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+        'Lit nei in presintaasje it oersjoch sjen mei de bestede tiid de dia. De tiid wurdt altyd metten; dit bepaalt allinnich oft it skerm ferskynt.',
+    'Onveilige presentatie geblokkeerd': 'Unfeilige presintaasje blokkearre',
+    'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+        'Dizze presintaasje is net iepene. It bestân befettet ynhâld dy\'t koade útfiere kin, wylst in presintaasje allinnich gegevens befetsje mei — neat útfierbers.',
+    'Gevonden:': 'Fûn:',
+    'Regel': 'Rigel',
+    'Scriptuitvoering': 'Skriptútfiering',
+    'Ingesloten inhoud': 'Ynsletten ynhâld',
+    'Onveilige URL': 'Unfeilige URL',
     'Zoekopdracht wissen': 'Sykopdracht wiskje',
     'Bullet verwijderen': 'Bullet fuortsmite',
     'Kolom verwijderen': 'Kolom fuortsmite',
@@ -6567,6 +6641,18 @@ const _dutchSourceStringAdditions = {
   },
   'pap': {
     // Accessibility labels for icon-only buttons (screen readers).
+    'Presenteren': 'Presentá',
+    'Oefenoverzicht tonen na afloop': 'Mustra resúmen di práktika despues',
+    'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+        'Despues di un presentashon, mustra e resúmen di tempu pasá pa slide. Semper ta midi tempu; esaki solamente ta determiná si e pantaya ta aparesé.',
+    'Onveilige presentatie geblokkeerd': 'Presentashon insigur blokeá',
+    'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+        'E presentashon aki no a wòrdu habrí. E archivo ta kontené kontenido ku por ehekutá kódigo, miéntras un presentashon mester kontené solamente datos — nada ehekutabel.',
+    'Gevonden:': 'Hañá:',
+    'Regel': 'Liña',
+    'Scriptuitvoering': 'Ehekushon di script',
+    'Ingesloten inhoud': 'Kontenido inkrustá',
+    'Onveilige URL': 'URL insigur',
     'Zoekopdracht wissen': 'Limpia búskeda',
     'Bullet verwijderen': 'Kita bala',
     'Kolom verwijderen': 'Kita kolumna',
