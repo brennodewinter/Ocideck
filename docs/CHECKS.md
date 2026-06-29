@@ -18,6 +18,24 @@ local sweep that also covers licences and dependency health:
 make check-full   # check + licenses + deps-check + deps-outdated
 ```
 
+## How intensively is it tested?
+
+To give a sense of scale (point-in-time figures — they only grow):
+
+| Metric | Approx. |
+| --- | ---: |
+| Automated tests in the suite | **~785** |
+| Test files under `test/` | **~99** |
+| Source files under `lib/` | ~154 |
+| Line coverage (enforced floor: 60%) | **~65%** |
+
+Every push runs the **entire** suite — there is no "smoke subset". The tests
+span unit (model/parsing/state), widget (every slide editor, the dialogs, the
+panels, the live preview and the fullscreen presenter's keyboard handling) and
+service-level (export, file IO, sanitisation) layers, plus the enforced
+localization and security guards listed below. Because the same `make` targets
+run locally and in CI, the number you see locally is the number CI gates on.
+
 ---
 
 ## All checks at a glance
