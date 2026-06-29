@@ -1,7 +1,8 @@
 # OciDeck — Architecture
 
 A high-level map of how OciDeck is put together, for contributors. For how files
-are stored on disk, see [`FILE_FORMAT.md`](FILE_FORMAT.md).
+are stored on disk, see [`FILE_FORMAT.md`](FILE_FORMAT.md). For a one-line
+description of **every** file under `lib/`, see [`SOURCE_MAP.md`](SOURCE_MAP.md).
 
 ## Stack
 
