@@ -553,6 +553,11 @@ class AppSettings {
   /// Blokkeer export volledig wanneer de kwaliteitscontrole fouten vindt.
   final bool qualityBlockExportOnErrors;
 
+  /// Minimale contrastverhouding voor normale tekst waaronder de
+  /// kwaliteitscontrole markeert. Standaard WCAG AA (4.5); lager = toleranter
+  /// (bijv. 3.5 accepteert een 3.6:1-verhouding). Begrensd tot 1.0–7.0.
+  final double contrastMinRatio;
+
   /// Of online media (afbeeldingen/video's via URL en YouTube/Vimeo-embeds)
   /// live mag worden geladen. Standaard uit (fail-closed): een geopende deck
   /// van een ander kan dan niet ongevraagd naar buiten "bellen" of pixels van
@@ -586,6 +591,7 @@ class AppSettings {
     this.uiTextScale = 1.0,
     this.qualityWarningsOnExport = true,
     this.qualityBlockExportOnErrors = false,
+    this.contrastMinRatio = 4.5,
     this.allowRemoteMedia = false,
     this.showRehearsalSummary = true,
     this.webdavServer,
@@ -657,6 +663,7 @@ class AppSettings {
     double? uiTextScale,
     bool? qualityWarningsOnExport,
     bool? qualityBlockExportOnErrors,
+    double? contrastMinRatio,
     bool? allowRemoteMedia,
     bool? showRehearsalSummary,
     WebdavServer? webdavServer,
@@ -714,6 +721,7 @@ class AppSettings {
           qualityWarningsOnExport ?? this.qualityWarningsOnExport,
       qualityBlockExportOnErrors:
           qualityBlockExportOnErrors ?? this.qualityBlockExportOnErrors,
+      contrastMinRatio: contrastMinRatio ?? this.contrastMinRatio,
       allowRemoteMedia: allowRemoteMedia ?? this.allowRemoteMedia,
       showRehearsalSummary: showRehearsalSummary ?? this.showRehearsalSummary,
       webdavServer: clearWebdavServer

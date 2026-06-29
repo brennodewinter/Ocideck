@@ -327,6 +327,17 @@ void main() {
       expect(n.state.uiTextScale, 1.5);
     });
 
+    test('contrastMinRatio defaults to WCAG AA, persists and clamps', () async {
+      final n = await _loadedNotifier();
+      expect(n.state.contrastMinRatio, 4.5);
+      await n.setContrastMinRatio(3.5);
+      expect(n.state.contrastMinRatio, 3.5);
+      await n.setContrastMinRatio(99);
+      expect(n.state.contrastMinRatio, 7.0);
+      await n.setContrastMinRatio(0.1);
+      expect(n.state.contrastMinRatio, 1.0);
+    });
+
     test('allowRemoteMedia and languageCode persist', () async {
       final n = await _loadedNotifier();
       await n.setAllowRemoteMedia(true);

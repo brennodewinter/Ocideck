@@ -99,6 +99,10 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       qualityWarningsOnExport: prefs.getBool('qualityWarningsOnExport') ?? true,
       qualityBlockExportOnErrors:
           prefs.getBool('qualityBlockExportOnErrors') ?? false,
+      contrastMinRatio: (prefs.getDouble('contrastMinRatio') ?? 4.5).clamp(
+        1.0,
+        7.0,
+      ),
       allowRemoteMedia: prefs.getBool('allowRemoteMedia') ?? false,
       showRehearsalSummary: prefs.getBool('showRehearsalSummary') ?? true,
       webdavServer: webdav,
@@ -204,6 +208,13 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     state = state.copyWith(qualityBlockExportOnErrors: enabled);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('qualityBlockExportOnErrors', enabled);
+  }
+
+  Future<void> setContrastMinRatio(double ratio) async {
+    final clamped = ratio.clamp(1.0, 7.0).toDouble();
+    state = state.copyWith(contrastMinRatio: clamped);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble('contrastMinRatio', clamped);
   }
 
   /// Sta live laden van online media (URL-afbeeldingen/-video's en embeds) toe,

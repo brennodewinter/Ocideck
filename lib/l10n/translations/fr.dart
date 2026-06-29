@@ -1020,6 +1020,9 @@ const _dutchSourceAddFr = {
   'Tweede afbeelding': 'Deuxième image',
   'Achtergrondafbeelding': 'Image d\'arrière-plan',
   'Waarschuwing bij export': 'Avertissement à l\'export',
+  'Minimale contrastverhouding': 'Rapport de contraste minimal',
+  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.':
+      'Le texte sous ce rapport est signalé. 4.5 = WCAG AA, 3.0 = WCAG AA grand texte. Plus haut = plus strict.',
   'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
       'Demander une confirmation avant l\'export lorsqu\'il y a des problèmes de qualité.',
   'Kwaliteitsproblemen gevonden': 'Problèmes de qualité détectés',

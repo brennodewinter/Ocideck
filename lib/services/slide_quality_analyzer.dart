@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
 
@@ -45,7 +46,14 @@ const double kFooterTextAlpha = 0.7;
 
 /// Analyses deck slides for accessibility and readability quality issues.
 class SlideQualityAnalyzer {
-  const SlideQualityAnalyzer();
+  /// Minimum acceptable contrast ratio for normal-size text. Defaults to the
+  /// WCAG AA threshold ([kWcagAaNormalText] = 4.5); the user can relax it via
+  /// settings (e.g. 3.5) when they accept slightly lower contrast. Large text
+  /// still uses the lower of this and the WCAG large-text threshold (3.0), and
+  /// the hard-error floor stays at [kWcagCriticalBodyText].
+  final double minContrastRatio;
+
+  const SlideQualityAnalyzer({this.minContrastRatio = kWcagAaNormalText});
 
   SlideQualityResult analyze(Deck deck) => analyzeSlides(
     slides: deck.slides,
@@ -85,7 +93,9 @@ class SlideQualityAnalyzer {
     }) {
       final ratio = hexContrastRatio(foreground, background);
       if (ratio == null) return;
-      final aaThreshold = largeText ? kWcagAaLargeText : kWcagAaNormalText;
+      final aaThreshold = largeText
+          ? math.min(kWcagAaLargeText, minContrastRatio)
+          : minContrastRatio;
       if (ratio >= aaThreshold) return;
 
       final severity = !largeText && ratio < kWcagCriticalBodyText
@@ -165,7 +175,7 @@ class SlideQualityAnalyzer {
       foregroundAlpha: kFooterTextAlpha,
     );
     if (ratio == null) return;
-    const aaThreshold = kWcagAaNormalText;
+    final aaThreshold = minContrastRatio;
     if (ratio >= aaThreshold) return;
 
     issues.add(
@@ -206,7 +216,7 @@ class SlideQualityAnalyzer {
     }) {
       final ratio = hexContrastRatio(foreground, theme.slideBackgroundColor);
       if (ratio == null) return;
-      const aaThreshold = kWcagAaNormalText;
+      final aaThreshold = minContrastRatio;
       if (ratio >= aaThreshold) return;
 
       issues.add(
@@ -267,7 +277,7 @@ class SlideQualityAnalyzer {
   }) {
     final ratio = hexContrastRatio(foreground, background);
     if (ratio == null) return;
-    const aaThreshold = kWcagAaLargeText;
+    final aaThreshold = math.min(kWcagAaLargeText, minContrastRatio);
     if (ratio >= aaThreshold) return;
 
     issues.add(
