@@ -68,4 +68,35 @@ void main() {
     expect(updated.imageCaption, 'Bijschrift');
     expect(updated.imageSize, 100);
   });
+
+  testWidgets('slide-filling checkbox toggles cover mode (imageSize 0)', (
+    tester,
+  ) async {
+    var updated = Slide.create(
+      SlideType.image,
+    ).copyWith(imagePath: 'photo.png', imageSize: 100);
+    await tester.pumpWidget(
+      _host(updated, _FakeImageService(), (slide) => updated = slide),
+    );
+
+    // Off by default: the image is shown in full and the zoom control applies.
+    expect(find.text('Zoom afbeelding'), findsOneWidget);
+
+    // Tick "slide-filling" → cover mode (imageSize 0).
+    await tester.tap(find.text('Afbeelding slidevullend'));
+    await tester.pump();
+    expect(updated.imageSize, 0);
+
+    // Re-pump with the cover-mode slide: the zoom control is now hidden, and
+    // unticking restores the full-image (contain) default.
+    await tester.pumpWidget(
+      _host(updated, _FakeImageService(), (slide) => updated = slide),
+    );
+    await tester.pump();
+    expect(find.text('Zoom afbeelding'), findsNothing);
+
+    await tester.tap(find.text('Afbeelding slidevullend'));
+    await tester.pump();
+    expect(updated.imageSize, 100);
+  });
 }

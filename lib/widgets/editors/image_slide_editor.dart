@@ -94,13 +94,32 @@ class _ImageSlideEditorState extends State<ImageSlideEditor> {
           onCaptionChanged: (caption) =>
               widget.onUpdate(widget.slide.copyWith(imageCaption: caption)),
         ),
-        const SizedBox(height: 16),
-        const SectionLabel('Zoom afbeelding'),
-        ImageZoomControl(
-          value: widget.slide.imageSize,
-          onChanged: (v) =>
-              widget.onUpdate(widget.slide.copyWith(imageSize: v)),
+        const SizedBox(height: 8),
+        // Slide-filling = cover mode (imageSize 0): the image fills the whole
+        // slide and the overflow is cropped. Off = the image is shown in full
+        // (contain) and the zoom control below applies.
+        CheckboxListTile(
+          contentPadding: EdgeInsets.zero,
+          controlAffinity: ListTileControlAffinity.leading,
+          dense: true,
+          title: const Text('Afbeelding slidevullend'),
+          subtitle: const Text('Vult de hele slide en snijdt de randen bij'),
+          value: widget.slide.imageSize == 0,
+          onChanged: widget.slide.imagePath.isEmpty
+              ? null
+              : (checked) => widget.onUpdate(
+                  widget.slide.copyWith(imageSize: checked == true ? 0 : 100),
+                ),
         ),
+        if (widget.slide.imageSize != 0) ...[
+          const SizedBox(height: 12),
+          const SectionLabel('Zoom afbeelding'),
+          ImageZoomControl(
+            value: widget.slide.imageSize,
+            onChanged: (v) =>
+                widget.onUpdate(widget.slide.copyWith(imageSize: v)),
+          ),
+        ],
         const SizedBox(height: 16),
         EditorField(
           label: 'Titel overlay (optioneel)',

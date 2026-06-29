@@ -500,6 +500,19 @@ is the background percentage (`![bg N%]`); for `split`, it is the panel width
 (clamped to 20-70%); for two images, it is the `left:`/`right:` split. `0` =
 automatic.
 
+For a single **image** slide the percentage controls how the picture fits:
+
+| `imageSize` | Result |
+| --- | --- |
+| `0` | **Slide-filling (cover)** — fills the whole slide, cropping the overflow. Emitted as a plain `![bg]` with no percentage. |
+| `100` | The full image is shown (contain), with letterboxing if the aspect differs. |
+| `> 100` | Zoomed in past contain; the excess is cropped. |
+| `< 100` (and `> 0`) | Zoomed out, smaller than contain. |
+
+The editor exposes the cover case as an **"Afbeelding slidevullend"**
+(slide-filling) checkbox that sets `imageSize` to `0` (ticked) or `100`
+(unticked); the zoom control is hidden while it is ticked.
+
 ---
 
 ## 6. Sidecars and Separate Data

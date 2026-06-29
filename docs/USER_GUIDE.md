@@ -34,6 +34,15 @@ Text fields support inline Markdown (`**bold**`, `*italic*`, `` `code` ``,
 highlighting, `$…$` / `$$…$$` LaTeX math, and ` ```mermaid ` diagrams (rendered
 in preview, presenter, PDF/PPTX, and HTML export).
 
+### Large image
+
+A single image fills the slide as a background. Tick **Afbeelding slidevullend**
+(slide-filling) to have the image **cover** the whole slide, cropping whatever
+falls outside the frame — handy for full-bleed photos. Leave it off to show the
+**full** image (letterboxed if its aspect differs); the **Zoom** control then
+scales it from edge-to-edge fit down to smaller, or zoomed in past the frame.
+An optional title overlay can sit on top.
+
 ### Source-code slides
 
 Choose a programming language for syntax highlighting (or "plain text") and paste
