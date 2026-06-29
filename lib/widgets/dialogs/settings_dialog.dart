@@ -805,6 +805,27 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
               .setQualityBlockExportOnErrors(value),
         ),
         const SizedBox(height: 16),
+        _sectionTitle(l10n.d('Presenteren')),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(
+            l10n.d('Oefenoverzicht tonen na afloop'),
+            style: const TextStyle(fontSize: 13),
+          ),
+          subtitle: Text(
+            l10n.d(
+              'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.',
+            ),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+          value: ref.watch(
+            settingsProvider.select((s) => s.showRehearsalSummary),
+          ),
+          onChanged: (value) => ref
+              .read(settingsProvider.notifier)
+              .setShowRehearsalSummary(value),
+        ),
+        const SizedBox(height: 16),
         _sectionTitle(l10n.d('Classificatie-handhaving')),
         _classificationEnforcementSection(l10n),
         const SizedBox(height: 16),

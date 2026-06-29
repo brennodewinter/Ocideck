@@ -31,6 +31,7 @@ import '../l10n/app_localizations.dart';
 import 'dialogs/export_dialog.dart';
 import 'dialogs/find_replace_dialog.dart';
 import 'dialogs/image_carousel_picker.dart';
+import 'dialogs/import_security_alarm_dialog.dart';
 import 'dialogs/new_deck_dialog.dart';
 import 'dialogs/open_presentation_dialog.dart';
 import 'dialogs/presentation_info_dialog.dart';
@@ -326,6 +327,15 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   Widget build(BuildContext context) {
     final tabsState = ref.watch(tabsProvider);
 
+    // A blocked import (executable content) raises the alarm from the state
+    // layer; show it here so it covers every entry point (open, recent,
+    // drag-drop, URL/package import) with one listener, then clear it.
+    ref.listen<ImportSecurityAlarm?>(importSecurityAlarmProvider, (_, alarm) {
+      if (alarm == null) return;
+      ImportSecurityAlarmDialog.show(context, alarm);
+      ref.read(importSecurityAlarmProvider.notifier).state = null;
+    });
+
     return CallbackShortcuts(
       bindings: {
         const SingleActivator(LogicalKeyboardKey.keyS, control: true):
@@ -604,6 +614,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             .read(settingsProvider)
             .classificationWatermarkEnabled,
         allowRemoteMedia: ref.read(settingsProvider).allowRemoteMedia,
+        showRehearsalSummary: ref.read(settingsProvider).showRehearsalSummary,
         targetDuration: () {
           final secs = deck.presentationTargetSeconds;
           return secs > 0 ? Duration(seconds: secs) : null;
@@ -785,20 +796,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       }
     }
 
-    Future<void> importUrl() async {
-      final url = await _showUrlDialog(context);
-      if (url == null || url.trim().isEmpty) return;
-      final ok = await ref
-          .read(tabsProvider.notifier)
-          .importFromUrl(url, homeDir: settings.homeDirectory);
-      if (!ok && context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(l10n.d('Kon van deze URL geen presentatie ophalen.')),
-          ),
-        );
-      }
-    }
+    Future<void> importUrl() => _importFromUrl(context, ref);
 
     PopupMenuItem<String> menuItem(String value, IconData icon, String label) {
       return PopupMenuItem<String>(

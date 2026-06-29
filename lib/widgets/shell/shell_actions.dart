@@ -33,6 +33,27 @@ Future<void> _scanLibrary(BuildContext context, WidgetRef ref) async {
   await ref.read(tabsProvider.notifier).openFileByPath(path);
 }
 
+/// Vraag een URL op, haal de presentatie (een .ocideck-pakket of een Marp-
+/// markdownbestand) op en open hem. Toont een melding als ophalen mislukt.
+/// Gedeeld door het hoofdmenu én het openscherm, zodat je ook bij het openen
+/// online een presentatie kunt ophalen.
+Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
+  final url = await _showUrlDialog(context);
+  if (url == null || url.trim().isEmpty) return;
+  final ok = await ref
+      .read(tabsProvider.notifier)
+      .importFromUrl(url, homeDir: ref.read(settingsProvider).homeDirectory);
+  if (!ok && context.mounted) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d('Kon van deze URL geen presentatie ophalen.'),
+        ),
+      ),
+    );
+  }
+}
+
 /// Vraag een URL op om een presentatie (pakket of markdown) op te halen.
 Future<String?> _showUrlDialog(BuildContext context) {
   return showDialog<String>(

@@ -18,6 +18,7 @@ import 'annotation_codec.dart';
 import 'user_notes_codec.dart';
 import 'caption_service.dart';
 import 'image_service.dart';
+import 'markdown_safety.dart';
 import 'markdown_service.dart';
 
 /// A presentation found on disk while scanning a directory.
@@ -369,6 +370,35 @@ class FileService {
     return result?.files.single.path;
   }
 
+  /// Scan the `.md` at [filePath] for executable/dangerous content before it is
+  /// opened or imported. An empty list means the file is data-only and safe.
+  ///
+  /// Reading problems (missing, over-size, non-UTF-8) return an empty list:
+  /// [openDeck] applies the same caps and will refuse those files anyway, so we
+  /// must not raise a false security alarm for a file that simply won't load.
+  Future<List<MarkdownSafetyFinding>> scanForUnsafeMarkdown(
+    String filePath,
+  ) async {
+    try {
+      final file = File(filePath);
+      if (!await file.exists()) return const [];
+      if (await file.length() > maxDeckMarkdownBytes) return const [];
+      final raw = await file.readAsString();
+      return MarkdownSafetyScanner.scan(raw);
+    } catch (e, s) {
+      logError('FileService.scanForUnsafeMarkdown', e, s);
+      return const [];
+    }
+  }
+
+  /// Open and parse a deck file.
+  ///
+  /// The bytes are ALWAYS scanned for executable content and the open is refused
+  /// (returns null) if any is found. The scan runs on the exact in-memory bytes
+  /// that are about to be parsed — there is no separate "check" read that a file
+  /// could change behind, so no caller can be marked "trusted" to skip it. A
+  /// disk file can be swapped between any two reads, so trust is never assumed;
+  /// only the bytes in hand at parse time are authoritative.
   Future<Deck?> openDeck(String filePath, {String? content}) async {
     String raw;
     if (content != null) {
@@ -396,6 +426,19 @@ class FileService {
         logWarning('FileService.openDeck: file not readable as UTF-8', e);
         return null;
       }
+    }
+    // Fail-closed: never parse/open a deck that carries executable content.
+    // Scanning `raw` (the very bytes we hand to the parser) closes any
+    // time-of-check/time-of-use gap — the file cannot have changed between the
+    // scan and the parse because both use this one in-memory string.
+    final findings = MarkdownSafetyScanner.scan(raw);
+    if (findings.isNotEmpty) {
+      logWarning(
+        'FileService.openDeck: refused — executable content '
+        '(${findings.length} finding(s))',
+        filePath,
+      );
+      return null;
     }
     final parsed = _md.parseDeck(raw, filePath: filePath);
     if (parsed == null) return null;

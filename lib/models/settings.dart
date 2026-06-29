@@ -533,6 +533,11 @@ class AppSettings {
   /// derden laden. De gebruiker zet dit bewust aan in de instellingen.
   final bool allowRemoteMedia;
 
+  /// Toon na afloop van een presentatie het oefenoverzicht (bestede tijd per
+  /// slide). De tijd wordt altijd gemeten; dit bepaalt enkel of het scherm
+  /// verschijnt. Standaard aan — backward compatible met het oude gedrag.
+  final bool showRehearsalSummary;
+
   const AppSettings({
     this.languageCode = 'nl',
     this.homeDirectory,
@@ -552,6 +557,7 @@ class AppSettings {
     this.qualityWarningsOnExport = true,
     this.qualityBlockExportOnErrors = false,
     this.allowRemoteMedia = false,
+    this.showRehearsalSummary = true,
   });
 
   ThemeProfile get themeProfile {
@@ -621,6 +627,7 @@ class AppSettings {
     bool? qualityWarningsOnExport,
     bool? qualityBlockExportOnErrors,
     bool? allowRemoteMedia,
+    bool? showRehearsalSummary,
     bool clearHomeDirectory = false,
     bool clearExportDirectory = false,
     bool clearMaxReleaseExportTlp = false,
@@ -675,6 +682,7 @@ class AppSettings {
       qualityBlockExportOnErrors:
           qualityBlockExportOnErrors ?? this.qualityBlockExportOnErrors,
       allowRemoteMedia: allowRemoteMedia ?? this.allowRemoteMedia,
+      showRehearsalSummary: showRehearsalSummary ?? this.showRehearsalSummary,
     );
   }
 }

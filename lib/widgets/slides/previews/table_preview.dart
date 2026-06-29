@@ -329,13 +329,20 @@ class _TablePreview extends StatelessWidget {
     // table is far more likely to fit the 16:9 slide at full width rather than
     // being scaled down by the FittedBox — which is what left the width unused
     // and made tables look oversized. The weights still flex to fill the width.
+    //
+    // The upper clamp keeps one pathologically long cell from squashing the
+    // rest, but it was set so low (32) that ordinary long sentences hit the cap
+    // and kept wrapping: the column couldn't claim its fair share, the table
+    // grew tall, the FittedBox scaled it down and left width unused on the
+    // right. A higher cap lets full sentences breathe while still reining in
+    // paragraph-length outliers.
     final columnWidths = <int, TableColumnWidth>{
       for (var c = 0; c < colCount; c++)
         c: FlexColumnWidth(
           rows
               .map((r) => c < r.length ? r[c].trim().length : 0)
               .fold<int>(1, (longest, len) => len > longest ? len : longest)
-              .clamp(1, 32)
+              .clamp(1, 80)
               .toDouble(),
         ),
     };

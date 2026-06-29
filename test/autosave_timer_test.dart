@@ -1,15 +1,11 @@
 import 'dart:io';
 
 import 'package:fake_async/fake_async.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
-import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
-import 'package:ocideck/services/file_service.dart';
-import 'package:ocideck/services/image_service.dart';
-import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/recovery_service.dart';
-import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,9 +25,12 @@ class _RecordingRecovery extends RecoveryService {
 }
 
 TabsNotifier _tabs(_RecordingRecovery recovery) {
-  final md = MarkdownService();
-  final file = FileService(md, ImageService(), () => const ThemeProfile());
-  return TabsNotifier(md, file, SettingsNotifier(), recovery);
+  // Build through a container so the notifier gets a real Ref (used for the
+  // import-security alarm); only the recovery service is swapped for the spy.
+  final container = ProviderContainer(
+    overrides: [recoveryServiceProvider.overrideWithValue(recovery)],
+  );
+  return container.read(tabsProvider.notifier);
 }
 
 Deck _deck() => Deck(
