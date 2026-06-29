@@ -317,4 +317,63 @@ marp: true
       isTrue,
     );
   });
+
+  test('detects an unclosed chart block', () {
+    const markdown = '''
+---
+marp: true
+---
+
+<!-- _class: chart -->
+
+```chart
+{"type":"bar"}
+''';
+    final result = validator.validate(markdown);
+    expect(
+      result.issues.any(
+        (i) => i.message.contains('chart-blok is niet afgesloten'),
+      ),
+      isTrue,
+    );
+  });
+
+  test('detects an empty chart specification', () {
+    const markdown = '''
+---
+marp: true
+---
+
+<!-- _class: chart -->
+
+```chart
+```
+''';
+    final result = validator.validate(markdown);
+    expect(
+      result.issues.any(
+        (i) => i.message.contains('grafiek-specificatie is leeg'),
+      ),
+      isTrue,
+    );
+  });
+
+  test('detects a table slide without a table', () {
+    const markdown = '''
+---
+marp: true
+---
+
+<!-- _class: table -->
+
+# Geen tabel hier
+''';
+    final result = validator.validate(markdown);
+    expect(
+      result.issues.any(
+        (i) => i.message.contains('tabel-slide bevat geen tabel'),
+      ),
+      isTrue,
+    );
+  });
 }
