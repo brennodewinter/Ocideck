@@ -39,7 +39,8 @@ class VideoSource {
 
   /// Any source whose bytes come over the network (live file or embed). These
   /// are the sources that must pass the remote-media gate before they render.
-  bool get isRemote => kind != VideoSourceKind.localFile && kind != VideoSourceKind.none;
+  bool get isRemote =>
+      kind != VideoSourceKind.localFile && kind != VideoSourceKind.none;
 
   static final RegExp _youTubeId = RegExp(r'^[A-Za-z0-9_-]{6,20}$');
   static final RegExp _vimeoId = RegExp(r'^\d{6,12}$');
@@ -50,7 +51,8 @@ class VideoSource {
 
     final uri = Uri.tryParse(raw);
     final scheme = uri?.scheme.toLowerCase();
-    final isWeb = uri != null &&
+    final isWeb =
+        uri != null &&
         uri.hasAuthority &&
         (scheme == 'http' || scheme == 'https');
     if (uri == null || !isWeb) {
@@ -72,7 +74,9 @@ class VideoSource {
       final id = uri.pathSegments.isNotEmpty ? uri.pathSegments.first : '';
       return _youTubeId.hasMatch(id) ? id : null;
     }
-    if (h == 'youtube.com' || h == 'm.youtube.com' || h == 'youtube-nocookie.com') {
+    if (h == 'youtube.com' ||
+        h == 'm.youtube.com' ||
+        h == 'youtube-nocookie.com') {
       final v = uri.queryParameters['v'];
       if (v != null && _youTubeId.hasMatch(v)) return v;
       final segs = uri.pathSegments;

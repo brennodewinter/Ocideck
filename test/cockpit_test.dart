@@ -128,6 +128,77 @@ void main() {
     expect(back.ground, '#7C4A12');
   });
 
+  group('CockpitSpec parse and copyWith', () {
+    test('falls back to the pentest preset on invalid or non-object JSON', () {
+      final preset = CockpitSpec.pentestPreset();
+      expect(
+        CockpitSpec.parse('not json').meters,
+        hasLength(preset.meters.length),
+      );
+      expect(CockpitSpec.parse('[1, 2, 3]').layout, preset.layout);
+    });
+
+    test('reads layout and animateOnEnter from the block', () {
+      final spec = CockpitSpec.parse(
+        '{"layout":"vertical","animateOnEnter":false}',
+      );
+      expect(spec.layout, 'vertical');
+      expect(spec.animateOnEnter, isFalse);
+      // animateOnEnter defaults to true when the key is absent.
+      expect(CockpitSpec.parse('{}').animateOnEnter, isTrue);
+    });
+
+    test('copyWith caps meters at six and re-clamps the duration', () {
+      final base = CockpitSpec(
+        meters: [for (var i = 0; i < 4; i++) CockpitMeterSpec(label: 'M$i')],
+      );
+      final updated = base.copyWith(
+        meters: [for (var i = 0; i < 9; i++) CockpitMeterSpec(label: 'N$i')],
+        animationDurationMs: 999999,
+      );
+      expect(updated.meters, hasLength(cockpitMaxMeters));
+      expect(updated.animationDurationMs, cockpitMaxAnimationDurationMs);
+    });
+  });
+
+  group('CockpitMeterSpec.normalized', () {
+    test('clamps the value into [min, max] and trims the label', () {
+      const meter = CockpitMeterSpec(
+        type: CockpitMeterType.thermometer,
+        label: '  Heat  ',
+        min: 0,
+        max: 10,
+        value: 50,
+      );
+      final n = meter.normalized();
+      expect(n.value, 10);
+      expect(n.label, 'Heat');
+    });
+
+    test('bumps a degenerate max above min and clamps to it', () {
+      const meter = CockpitMeterSpec(
+        type: CockpitMeterType.thermometer,
+        min: 5,
+        max: 5,
+        value: 100,
+      );
+      final n = meter.normalized();
+      expect(n.max, 6); // min + 1
+      expect(n.value, 6);
+    });
+
+    test('clamps pitch and bank to their instrument ranges', () {
+      const meter = CockpitMeterSpec(
+        type: CockpitMeterType.horizon,
+        pitch: 90,
+        bank: -100,
+      );
+      final n = meter.normalized();
+      expect(n.pitch, 45);
+      expect(n.bank, -60);
+    });
+  });
+
   testWidgets('preview renders with a custom cockpit colour scheme', (
     tester,
   ) async {

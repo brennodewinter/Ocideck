@@ -21,7 +21,7 @@ void main(List<String> args) {
 
     if (!kIsWeb && args.isNotEmpty && args.first == 'multi_window') {
       final raw = args.length >= 3 ? args[2] : '';
-      final parsed = raw.isEmpty ? const {} : jsonDecode(raw);
+      final parsed = raw.isEmpty ? const <String, dynamic>{} : jsonDecode(raw);
       final map = Map<String, dynamic>.from(parsed as Map);
       runApp(AudienceWindowApp(args: map));
       return;

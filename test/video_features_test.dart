@@ -28,7 +28,10 @@ void main() {
   group('VideoSource.parse', () {
     test('classifies local paths and empty', () {
       expect(VideoSource.parse('').kind, VideoSourceKind.none);
-      expect(VideoSource.parse('media/clip.mp4').kind, VideoSourceKind.localFile);
+      expect(
+        VideoSource.parse('media/clip.mp4').kind,
+        VideoSourceKind.localFile,
+      );
       expect(
         VideoSource.parse('/abs/path/clip.mov').kind,
         VideoSourceKind.localFile,
@@ -121,9 +124,9 @@ void main() {
 
     test('remote direct video URL round-trips', () {
       final out = _roundTrip(
-        Slide.create(SlideType.video).copyWith(
-          videoPath: 'https://example.com/clip.mp4',
-        ),
+        Slide.create(
+          SlideType.video,
+        ).copyWith(videoPath: 'https://example.com/clip.mp4'),
       );
       expect(VideoSource.parse(out.videoPath).kind, VideoSourceKind.remoteFile);
       expect(out.videoPath, 'https://example.com/clip.mp4');

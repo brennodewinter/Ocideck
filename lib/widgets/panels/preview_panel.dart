@@ -457,6 +457,7 @@ class FullDeckPreview extends ConsumerWidget {
         title: Text('${deck.title} — ${l10n.d('volledig deck')}'),
         backgroundColor: AppTheme.navy,
         leading: IconButton(
+          tooltip: l10n.d('Sluiten'),
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
         ),

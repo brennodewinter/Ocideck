@@ -892,7 +892,11 @@ class _ChartEditorState extends State<ChartEditor> {
                       ),
                       _sortButton(column: c, enabled: enabled),
                       if (enabled && cols > 1)
-                        _iconBtn(Icons.close, () => _removeColumn(c)),
+                        _iconBtn(
+                          Icons.close,
+                          () => _removeColumn(c),
+                          tooltip: context.l10n.d('Kolom verwijderen'),
+                        ),
                     ],
                   ),
                 ),
@@ -937,6 +941,7 @@ class _ChartEditorState extends State<ChartEditor> {
                             Icons.keyboard_arrow_up,
                             r == 0 ? null : () => _moveRow(r, r - 1),
                             key: ValueKey('chart-row-up-$r'),
+                            tooltip: context.l10n.d('Rij omhoog'),
                           ),
                           _iconBtn(
                             Icons.keyboard_arrow_down,
@@ -944,6 +949,7 @@ class _ChartEditorState extends State<ChartEditor> {
                                 ? null
                                 : () => _moveRow(r, r + 1),
                             key: ValueKey('chart-row-down-$r'),
+                            tooltip: context.l10n.d('Rij omlaag'),
                           ),
                         ],
                       ],
@@ -970,7 +976,11 @@ class _ChartEditorState extends State<ChartEditor> {
                       ),
                     ),
                   if (enabled && _xLabels.length > 1)
-                    _iconBtn(Icons.close, () => _removeRow(r)),
+                    _iconBtn(
+                      Icons.close,
+                      () => _removeRow(r),
+                      tooltip: context.l10n.d('Rij verwijderen'),
+                    ),
                 ],
               ),
             ),
@@ -1092,9 +1102,15 @@ class _ChartEditorState extends State<ChartEditor> {
     );
   }
 
-  Widget _iconBtn(IconData icon, VoidCallback? onTap, {Key? key}) => IconButton(
+  Widget _iconBtn(
+    IconData icon,
+    VoidCallback? onTap, {
+    Key? key,
+    String? tooltip,
+  }) => IconButton(
     key: key,
     onPressed: onTap,
+    tooltip: tooltip,
     icon: Icon(icon, size: 14),
     color: const Color(0xFF64748B),
     visualDensity: VisualDensity.compact,

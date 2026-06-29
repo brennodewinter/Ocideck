@@ -982,6 +982,7 @@ const _dutchSourceStrings = {
     'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
         'This is a built-in theme. Create a copy to customize its colors.',
     'Donkere interface': 'Dark interface',
+    'Lettertype interface': 'Interface font',
     'Past contrast, invoervelden en systeemcomponenten aan.':
         'Adjusts contrast, input fields, and system components.',
     'Hoofdkleur en bovenbalk': 'Primary color and top bar',
@@ -1329,6 +1330,7 @@ const _dutchSourceStrings = {
     'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
         'Questo è un tema integrato. Crea una copia per personalizzare i colori.',
     'Donkere interface': 'Interfaccia scura',
+    'Lettertype interface': 'Carattere interfaccia',
     'Past contrast, invoervelden en systeemcomponenten aan.':
         'Adatta contrasto, campi di input e componenti di sistema.',
     'Hoofdkleur en bovenbalk': 'Colore principale e barra superiore',
@@ -1550,6 +1552,7 @@ const _dutchSourceStrings = {
     'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
         'Dies ist ein integriertes Design. Erstellen Sie eine Kopie, um die Farben anzupassen.',
     'Donkere interface': 'Dunkle Oberfläche',
+    'Lettertype interface': 'Schriftart der Oberfläche',
     'Past contrast, invoervelden en systeemcomponenten aan.':
         'Passt Kontrast, Eingabefelder und Systemkomponenten an.',
     'Hoofdkleur en bovenbalk': 'Hauptfarbe und obere Leiste',
@@ -1772,6 +1775,7 @@ const _dutchSourceStrings = {
     'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
         'Ce thème est intégré. Créez une copie pour personnaliser ses couleurs.',
     'Donkere interface': 'Interface sombre',
+    'Lettertype interface': 'Police de l’interface',
     'Past contrast, invoervelden en systeemcomponenten aan.':
         'Adapte le contraste, les champs de saisie et les composants système.',
     'Hoofdkleur en bovenbalk': 'Couleur principale et barre supérieure',
@@ -1993,6 +1997,7 @@ const _dutchSourceStrings = {
     'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
         'Este es un tema integrado. Crea una copia para personalizar los colores.',
     'Donkere interface': 'Interfaz oscura',
+    'Lettertype interface': 'Fuente de la interfaz',
     'Past contrast, invoervelden en systeemcomponenten aan.':
         'Ajusta el contraste, los campos de entrada y los componentes del sistema.',
     'Hoofdkleur en bovenbalk': 'Color principal y barra superior',
@@ -2214,6 +2219,7 @@ const _dutchSourceStrings = {
     'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
         'Dit is in ynboud tema. Meitsje in kopy om de kleuren oan te passen.',
     'Donkere interface': 'Donkere ynterface',
+    'Lettertype interface': 'Lettertype ynterface',
     'Past contrast, invoervelden en systeemcomponenten aan.':
         'Past kontrast, ynfierfjilden en systeemkomponinten oan.',
     'Hoofdkleur en bovenbalk': 'Haadkleur en boppebalke',
@@ -2445,6 +2451,7 @@ const _dutchSourceStrings = {
     'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
         'Esaki ta un tema integrá. Krea un kopia pa personalisá e kolónan.',
     'Donkere interface': 'Interfas skur',
+    'Lettertype interface': 'Lettertipo interfase',
     'Past contrast, invoervelden en systeemcomponenten aan.':
         'Ta adaptá kontraste, kamponan di entrada i komponentenan di sistema.',
     'Hoofdkleur en bovenbalk': 'Koló prinsipal i bara ariba',
@@ -2550,6 +2557,21 @@ const _dutchSourceStrings = {
 
 const _dutchSourceStringAdditions = {
   'en': {
+    // Accessibility labels for icon-only buttons (screen readers).
+    'Zoekopdracht wissen': 'Clear search',
+    'Bullet verwijderen': 'Remove bullet',
+    'Kolom verwijderen': 'Remove column',
+    'Rij omhoog': 'Move row up',
+    'Rij omlaag': 'Move row down',
+    'Optie verwijderen': 'Remove option',
+    'Optie toevoegen': 'Add option',
+    'Duur verkorten': 'Decrease duration',
+    'Duur verlengen': 'Increase duration',
+    'Afspelen': 'Play',
+    'Pauzeren': 'Pause',
+    'Opsommingsteken': 'Bullet',
+    'Stip': 'Dot',
+    'Pootje': 'Paw',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Split in two',
     'Uitgevoerde controles': 'Checks performed',
@@ -3054,6 +3076,21 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Scatter',
   },
   'it': {
+    // Accessibility labels for icon-only buttons (screen readers).
+    'Zoekopdracht wissen': 'Cancella ricerca',
+    'Bullet verwijderen': 'Rimuovi punto',
+    'Kolom verwijderen': 'Rimuovi colonna',
+    'Rij omhoog': 'Sposta riga su',
+    'Rij omlaag': 'Sposta riga giù',
+    'Optie verwijderen': 'Rimuovi opzione',
+    'Optie toevoegen': 'Aggiungi opzione',
+    'Duur verkorten': 'Riduci durata',
+    'Duur verlengen': 'Aumenta durata',
+    'Afspelen': 'Riproduci',
+    'Pauzeren': 'Pausa',
+    'Opsommingsteken': 'Punto elenco',
+    'Stip': 'Punto',
+    'Pootje': 'Zampa',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Dividi in due',
     'Uitgevoerde controles': 'Controlli eseguiti',
@@ -3739,6 +3776,21 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Dispersione',
   },
   'de': {
+    // Accessibility labels for icon-only buttons (screen readers).
+    'Zoekopdracht wissen': 'Suche löschen',
+    'Bullet verwijderen': 'Aufzählungspunkt entfernen',
+    'Kolom verwijderen': 'Spalte entfernen',
+    'Rij omhoog': 'Zeile nach oben',
+    'Rij omlaag': 'Zeile nach unten',
+    'Optie verwijderen': 'Option entfernen',
+    'Optie toevoegen': 'Option hinzufügen',
+    'Duur verkorten': 'Dauer verkürzen',
+    'Duur verlengen': 'Dauer verlängern',
+    'Afspelen': 'Abspielen',
+    'Pauzeren': 'Pause',
+    'Opsommingsteken': 'Aufzählungszeichen',
+    'Stip': 'Punkt',
+    'Pootje': 'Pfötchen',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'In zwei teilen',
     'Uitgevoerde controles': 'Durchgeführte Prüfungen',
@@ -4423,6 +4475,21 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Streudiagramm',
   },
   'fr': {
+    // Accessibility labels for icon-only buttons (screen readers).
+    'Zoekopdracht wissen': 'Effacer la recherche',
+    'Bullet verwijderen': 'Supprimer la puce',
+    'Kolom verwijderen': 'Supprimer la colonne',
+    'Rij omhoog': 'Monter la ligne',
+    'Rij omlaag': 'Descendre la ligne',
+    'Optie verwijderen': 'Supprimer l\'option',
+    'Optie toevoegen': 'Ajouter une option',
+    'Duur verkorten': 'Réduire la durée',
+    'Duur verlengen': 'Augmenter la durée',
+    'Afspelen': 'Lire',
+    'Pauzeren': 'Pause',
+    'Opsommingsteken': 'Puce',
+    'Stip': 'Point',
+    'Pootje': 'Patte',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Diviser en deux',
     'Uitgevoerde controles': 'Contrôles effectués',
@@ -4454,8 +4521,7 @@ const _dutchSourceStringAdditions = {
     'Presentaties zoeken op deze computer':
         'Trouver des présentations sur cet ordinateur',
     'Zoek op titel, pad of thema…': 'Rechercher par titre, chemin ou thème…',
-    'Bekende mappen worden doorzocht…':
-        'Recherche dans les dossiers connus…',
+    'Bekende mappen worden doorzocht…': 'Recherche dans les dossiers connus…',
     'gevonden': 'trouvée(s)',
     'presentatie(s) gevonden': 'présentation(s) trouvée(s)',
     'Geen Marp-presentaties gevonden in de bekende mappen.':
@@ -5113,6 +5179,21 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Nuage de points',
   },
   'es': {
+    // Accessibility labels for icon-only buttons (screen readers).
+    'Zoekopdracht wissen': 'Borrar búsqueda',
+    'Bullet verwijderen': 'Eliminar viñeta',
+    'Kolom verwijderen': 'Eliminar columna',
+    'Rij omhoog': 'Subir fila',
+    'Rij omlaag': 'Bajar fila',
+    'Optie verwijderen': 'Eliminar opción',
+    'Optie toevoegen': 'Añadir opción',
+    'Duur verkorten': 'Reducir duración',
+    'Duur verlengen': 'Aumentar duración',
+    'Afspelen': 'Reproducir',
+    'Pauzeren': 'Pausar',
+    'Opsommingsteken': 'Viñeta',
+    'Stip': 'Punto',
+    'Pootje': 'Patita',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Dividir en dos',
     'Uitgevoerde controles': 'Comprobaciones realizadas',
@@ -5800,6 +5881,21 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Dispersión',
   },
   'fy': {
+    // Accessibility labels for icon-only buttons (screen readers).
+    'Zoekopdracht wissen': 'Sykopdracht wiskje',
+    'Bullet verwijderen': 'Bullet fuortsmite',
+    'Kolom verwijderen': 'Kolom fuortsmite',
+    'Rij omhoog': 'Rige omheech',
+    'Rij omlaag': 'Rige omleech',
+    'Optie verwijderen': 'Opsje fuortsmite',
+    'Optie toevoegen': 'Opsje tafoegje',
+    'Duur verkorten': 'Doer ferkoartsje',
+    'Duur verlengen': 'Doer ferlingje',
+    'Afspelen': 'Ofspylje',
+    'Pauzeren': 'Skoftsje',
+    'Opsommingsteken': 'Opsommingsteken',
+    'Stip': 'Stip',
+    'Pootje': 'Poatsje',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Yn twaen splitse',
     'Uitgevoerde controles': 'Utfierde kontrôles',
@@ -6470,6 +6566,21 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Sparring',
   },
   'pap': {
+    // Accessibility labels for icon-only buttons (screen readers).
+    'Zoekopdracht wissen': 'Limpia búskeda',
+    'Bullet verwijderen': 'Kita bala',
+    'Kolom verwijderen': 'Kita kolumna',
+    'Rij omhoog': 'Hisa fila',
+    'Rij omlaag': 'Baha fila',
+    'Optie verwijderen': 'Kita opshon',
+    'Optie toevoegen': 'Agregá opshon',
+    'Duur verkorten': 'Redusí durashon',
+    'Duur verlengen': 'Oumentá durashon',
+    'Afspelen': 'Toka',
+    'Pauzeren': 'Pousa',
+    'Opsommingsteken': 'Punto di lista',
+    'Stip': 'Punto',
+    'Pootje': 'Pata',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Parti na dos',
     'Uitgevoerde controles': 'Chekeonan ehekutá',

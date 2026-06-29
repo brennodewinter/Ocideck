@@ -654,4 +654,36 @@ void main() {
       expect(tester.takeException(), isNull);
     },
   );
+
+  testWidgets('stacked bar stacks series vertically in one rod per group', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.stackedBar,
+      x: ['Q1', 'Q2'],
+      series: [
+        ChartSeries(name: 'A', data: [3, 5]),
+        ChartSeries(name: 'B', data: [2, 1]),
+      ],
+    );
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    final bar = tester.widget<BarChart>(find.byType(BarChart));
+    // Stacking = one rod per group with a stack item per series — NOT several
+    // side-by-side rods (which would be grouping).
+    for (final group in bar.data.barGroups) {
+      expect(group.barRods, hasLength(1));
+      expect(group.barRods.single.rodStackItems, hasLength(2));
+    }
+
+    // Q1 stacks 3 then 2 → contiguous segments [0,3] and [3,5], total 5.
+    final q1 = bar.data.barGroups.first.barRods.single;
+    expect(q1.toY, 5);
+    expect(q1.rodStackItems[0].fromY, 0);
+    expect(q1.rodStackItems[0].toY, 3);
+    expect(q1.rodStackItems[1].fromY, 3);
+    expect(q1.rodStackItems[1].toY, 5);
+    expect(tester.takeException(), isNull);
+  });
 }

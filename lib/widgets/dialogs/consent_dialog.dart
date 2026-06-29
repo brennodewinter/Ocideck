@@ -18,7 +18,23 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
     final theme = Theme.of(context);
 
     return AlertDialog(
-      title: Text(l10n.d('Welkom bij OciDeck')),
+      title: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Semantics(
+            label: 'OciDeck',
+            image: true,
+            child: Image.asset(
+              'assets/images/ocideck-logo.png',
+              height: 72,
+              fit: BoxFit.contain,
+              filterQuality: FilterQuality.high,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(l10n.d('Welkom bij OciDeck')),
+        ],
+      ),
       content: SizedBox(
         width: 600,
         child: SingleChildScrollView(
@@ -54,12 +70,16 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
           ),
         ),
       ),
+      // Split the two actions to opposite ends. AlertDialog lays its actions out
+      // in an OverflowBar (not a Flex), so a Spacer/Expanded here throws a
+      // parentData subtype error at layout time (swallowed into the release
+      // ErrorWidget placeholder). actionsAlignment is the correct lever.
+      actionsAlignment: MainAxisAlignment.spaceBetween,
       actions: [
         TextButton(
           onPressed: () => PrivacyStatementContent.launchLicenseOnline(),
           child: Text(l10n.d('Volledige licentie online')),
         ),
-        const Spacer(),
         ElevatedButton(
           onPressed: () => _acceptConsent(ref),
           child: Text(l10n.d('Akkoord gaan')),

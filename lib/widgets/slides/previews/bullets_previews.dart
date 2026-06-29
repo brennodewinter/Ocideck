@@ -185,6 +185,7 @@ class _BulletsPreview extends StatelessWidget {
                   child: _BulletListColumn(
                     bullets: bullets,
                     listStyle: slide.listStyle,
+                    marker: slide.bulletMarkerOverride ?? profile.bulletMarker,
                     font: font,
                     profile: profile,
                     bulletSize: bulletSize,
@@ -480,6 +481,7 @@ class _TwoBulletsPreview extends StatelessWidget {
           _BulletListColumn(
             bullets: bullets,
             listStyle: slide.listStyle,
+            marker: slide.bulletMarkerOverride ?? profile.bulletMarker,
             font: font,
             profile: profile,
             bulletSize: bulletSize,
@@ -774,7 +776,12 @@ class _BulletsImagePreview extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                _resolvedImage(context, slide.imagePath, projectPath),
+                _resolvedImage(
+                  context,
+                  slide.imagePath,
+                  projectPath,
+                  semanticLabel: imageSemanticsLabel(context, slide.imageCaption),
+                ),
                 _captionOverlay(context, slide.imageCaption, w),
               ],
             ),
@@ -896,7 +903,12 @@ class _BulletsImagePreview extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                _resolvedImage(context, slide.imagePath, projectPath),
+                _resolvedImage(
+                  context,
+                  slide.imagePath,
+                  projectPath,
+                  semanticLabel: imageSemanticsLabel(context, slide.imageCaption),
+                ),
                 _captionOverlay(context, slide.imageCaption, w),
               ],
             ),
@@ -1009,6 +1021,7 @@ class _BulletsImagePreview extends StatelessWidget {
               itemIndex: entry.key,
               column: 0,
               listStyle: slide.listStyle,
+              marker: slide.bulletMarkerOverride ?? profile.bulletMarker,
               checked: checked,
               text: text,
               level: level,
@@ -1029,6 +1042,7 @@ class _BulletsImagePreview extends StatelessWidget {
 class _BulletListColumn extends StatelessWidget {
   final List<String> bullets;
   final ListStyle listStyle;
+  final BulletMarker marker;
   final String font;
   final ThemeProfile profile;
   final double bulletSize;
@@ -1039,6 +1053,7 @@ class _BulletListColumn extends StatelessWidget {
   const _BulletListColumn({
     required this.bullets,
     required this.listStyle,
+    this.marker = BulletMarker.dot,
     required this.font,
     required this.profile,
     required this.bulletSize,
@@ -1070,6 +1085,7 @@ class _BulletListColumn extends StatelessWidget {
             itemIndex: entry.key,
             column: column,
             listStyle: listStyle,
+            marker: marker,
             checked: checked,
             text: text,
             level: level,

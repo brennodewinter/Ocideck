@@ -471,6 +471,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                   padding: EdgeInsets.zero,
                   iconSize: 14,
                   splashRadius: 14,
+                  tooltip: l10n.d('Zoekopdracht wissen'),
                   icon: const Icon(Icons.clear, color: Color(0xFF6B7280)),
                   onPressed: () => setState(() {
                     _searchController.clear();

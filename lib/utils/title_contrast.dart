@@ -126,7 +126,8 @@ TitleContrastEval evaluateTitleContrast({
   // Ordered least → most intrusive. The overlay (the designed readability tool)
   // comes first; a per-slide colour flip next; both combined as a last resort.
   final candidates = <_Candidate>[
-    if (!overlayOn) _Candidate(TitleContrastFix.enableOverlay, ratioFor(text, true)),
+    if (!overlayOn)
+      _Candidate(TitleContrastFix.enableOverlay, ratioFor(text, true)),
     _Candidate(TitleContrastFix.lightText, ratioFor(_lightText, overlayOn)),
     _Candidate(TitleContrastFix.darkText, ratioFor(_darkText, overlayOn)),
     if (!overlayOn) ...[

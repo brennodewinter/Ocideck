@@ -252,7 +252,11 @@ class SlideTypePreviewPainter extends CustomPainter {
             Offset(x, above ? 34 : 56),
             _paint(_accent.withValues(alpha: 0.4))..strokeWidth = 1.5,
           );
-          canvas.drawCircle(Offset(x, 45), 6, _paint(_accent.withValues(alpha: 0.18)));
+          canvas.drawCircle(
+            Offset(x, 45),
+            6,
+            _paint(_accent.withValues(alpha: 0.18)),
+          );
           canvas.drawCircle(Offset(x, 45), 4, _paint(_accent));
           canvas.drawCircle(
             Offset(x, 45),

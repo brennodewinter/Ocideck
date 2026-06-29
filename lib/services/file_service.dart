@@ -385,7 +385,8 @@ class FileService {
           );
           return null;
         }
-      } catch (_) {
+      } catch (e) {
+        logWarning('FileService.openDeck: cannot stat file', e);
         return null;
       }
       try {

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'log.dart';
+
 /// Shared SSRF guards for any code that turns a deck-supplied string into a
 /// network request. Extracted from `FileService` so the URL-import path and the
 /// live remote-media path apply exactly the same host/address rules.
@@ -56,7 +58,9 @@ class NetGuard {
       final addrs = await InternetAddress.lookup(host);
       if (addrs.isEmpty || addrs.any(isBlockedAddress)) return null;
       return addrs;
-    } catch (_) {
+    } catch (e) {
+      // Host omitted from the log: it is deck-supplied and may be sensitive.
+      logWarning('NetGuard.safeResolve: DNS lookup failed', e);
       return null; // can't resolve safely → refuse
     }
   }

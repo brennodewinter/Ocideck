@@ -1057,6 +1057,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
           suffixIcon: _query.isEmpty
               ? null
               : IconButton(
+                  tooltip: l10n.d('Zoekopdracht wissen'),
                   icon: const Icon(
                     Icons.clear,
                     color: Color(0xFF6E7681),

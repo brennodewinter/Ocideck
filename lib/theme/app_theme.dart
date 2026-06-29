@@ -75,6 +75,11 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: brightness,
+      // The interface font from the appearance profile (one of the bundled
+      // [AppAppearanceProfile.uiFonts]). Bundled in pubspec.yaml so the CanvasKit
+      // web engine never fetches it from fonts.gstatic.com — keeping the web
+      // build self-contained under a strict connect-src 'self' CSP.
+      fontFamily: profile.fontFamily,
       colorScheme: scheme,
       scaffoldBackgroundColor: background,
       canvasColor: surfaceColor,

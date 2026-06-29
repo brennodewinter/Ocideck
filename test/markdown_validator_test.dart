@@ -217,4 +217,163 @@ marp: true
       isEmpty,
     );
   });
+
+  test('flags an empty presentation', () {
+    final result = validator.validate('   \n  ');
+    expect(
+      result.issues.any((i) => i.message.contains('De presentatie is leeg')),
+      isTrue,
+    );
+  });
+
+  test('flags front matter with no slides', () {
+    final result = validator.validate('---\nmarp: true\ntheme: ocideck\n---\n');
+    expect(
+      result.issues.any((i) => i.message.contains('Geen slides gevonden')),
+      isTrue,
+    );
+  });
+
+  test('detects an unclosed HTML comment', () {
+    const markdown = '''
+---
+marp: true
+---
+
+# Kop
+
+<!-- this comment never closes
+''';
+    final result = validator.validate(markdown);
+    expect(result.isValid, isFalse);
+    expect(
+      result.issues.any(
+        (i) => i.message.contains('HTML-commentaar is niet afgesloten'),
+      ),
+      isTrue,
+    );
+  });
+
+  test('detects invalid cockpit JSON', () {
+    const markdown = '''
+---
+marp: true
+---
+
+<!-- _class: cockpit -->
+
+```cockpit
+{ broken json
+```
+''';
+    final result = validator.validate(markdown);
+    expect(
+      result.issues.any(
+        (i) =>
+            i.message.contains('cockpit specification contains invalid JSON'),
+      ),
+      isTrue,
+    );
+  });
+
+  test('detects an unclosed cockpit block', () {
+    const markdown = '''
+---
+marp: true
+---
+
+<!-- _class: cockpit -->
+
+```cockpit
+{"instruments": []}
+''';
+    final result = validator.validate(markdown);
+    expect(
+      result.issues.any(
+        (i) => i.message.contains('cockpit block is not closed'),
+      ),
+      isTrue,
+    );
+  });
+
+  test('detects a cockpit spec that is not a JSON object', () {
+    const markdown = '''
+---
+marp: true
+---
+
+<!-- _class: cockpit -->
+
+```cockpit
+[1, 2, 3]
+```
+''';
+    final result = validator.validate(markdown);
+    expect(
+      result.issues.any(
+        (i) =>
+            i.message.contains('cockpit specification must be a JSON object'),
+      ),
+      isTrue,
+    );
+  });
+
+  test('detects an unclosed chart block', () {
+    const markdown = '''
+---
+marp: true
+---
+
+<!-- _class: chart -->
+
+```chart
+{"type":"bar"}
+''';
+    final result = validator.validate(markdown);
+    expect(
+      result.issues.any(
+        (i) => i.message.contains('chart-blok is niet afgesloten'),
+      ),
+      isTrue,
+    );
+  });
+
+  test('detects an empty chart specification', () {
+    const markdown = '''
+---
+marp: true
+---
+
+<!-- _class: chart -->
+
+```chart
+```
+''';
+    final result = validator.validate(markdown);
+    expect(
+      result.issues.any(
+        (i) => i.message.contains('grafiek-specificatie is leeg'),
+      ),
+      isTrue,
+    );
+  });
+
+  test('detects a table slide without a table', () {
+    const markdown = '''
+---
+marp: true
+---
+
+<!-- _class: table -->
+
+# Geen tabel hier
+''';
+    final result = validator.validate(markdown);
+    expect(
+      result.issues.any(
+        (i) => i.message.contains('tabel-slide bevat geen tabel'),
+      ),
+      isTrue,
+    );
+  });
 }

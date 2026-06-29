@@ -283,7 +283,15 @@ class _TwoImagesPreview extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    _resolvedImage(context, slide.imagePath, projectPath),
+                    _resolvedImage(
+                      context,
+                      slide.imagePath,
+                      projectPath,
+                      semanticLabel: imageSemanticsLabel(
+                        context,
+                        slide.imageCaption,
+                      ),
+                    ),
                     _captionOverlay(context, slide.imageCaption, w),
                   ],
                 ),
@@ -293,7 +301,15 @@ class _TwoImagesPreview extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    _resolvedImage(context, slide.imagePath2, projectPath),
+                    _resolvedImage(
+                      context,
+                      slide.imagePath2,
+                      projectPath,
+                      semanticLabel: imageSemanticsLabel(
+                        context,
+                        slide.imageCaption2,
+                      ),
+                    ),
                     _captionOverlay(context, slide.imageCaption2, w),
                   ],
                 ),
@@ -366,6 +382,7 @@ class _ImagePreview extends StatelessWidget {
           // When zoomed out, anchor the image to the top so the bottom title
           // banner sits in the freed-up space instead of over the picture.
           alignment: hasTitle ? Alignment.topCenter : Alignment.center,
+          semanticLabel: imageSemanticsLabel(context, slide.imageCaption),
         ),
         if (slide.title.isNotEmpty)
           Positioned(
@@ -575,6 +592,9 @@ class _VideoPreviewState extends State<_VideoPreview>
                   duration: const Duration(milliseconds: 160),
                   curve: Curves.easeOut,
                   child: IconButton(
+                    tooltip: controller?.value.isPlaying == true
+                        ? context.l10n.d('Pauzeren')
+                        : context.l10n.d('Afspelen'),
                     onPressed:
                         controller == null || !controller.value.isInitialized
                         ? null
@@ -855,12 +875,14 @@ Widget _zoomedImage(
   int imageSize, {
   Color bgColor = Colors.black,
   Alignment alignment = Alignment.center,
+  String? semanticLabel,
 }) {
   if (imageSize == 0) {
     return _resolvedImage(
       context,
       imagePath,
       projectPath,
+      semanticLabel: semanticLabel,
     ); // BoxFit.cover standaard
   }
   final scale = imageSize / 100.0;
@@ -887,6 +909,7 @@ Widget _zoomedImage(
                 imagePath,
                 projectPath,
                 fit: BoxFit.contain,
+                semanticLabel: semanticLabel,
               ),
             ),
           );
@@ -896,12 +919,22 @@ Widget _zoomedImage(
   );
 }
 
+/// Alt text for a content image (WCAG 1.1.1): the author's caption when there
+/// is one, otherwise a generic "image" so a screen reader still announces that
+/// a picture is present (the slide-quality analyzer nudges adding a caption).
+/// Background/decorative images pass `null` and stay out of the semantics tree.
+String imageSemanticsLabel(BuildContext context, String caption) {
+  final text = caption.trim();
+  return text.isEmpty ? context.l10n.d('Afbeelding') : text;
+}
+
 Widget _resolvedImage(
   BuildContext context,
   String imagePath,
   String? projectPath, {
   BoxFit fit = BoxFit.cover,
   bool trustedAsset = false,
+  String? semanticLabel,
 }) {
   if (imagePath.isEmpty) return _imagePlaceholder(context);
 
@@ -919,6 +952,7 @@ Widget _resolvedImage(
       width: double.infinity,
       height: double.infinity,
       gaplessPlayback: true,
+      semanticLabel: semanticLabel,
       errorBuilder: (context, error, stackTrace) => _imagePlaceholder(context),
     );
   }
@@ -945,6 +979,7 @@ Widget _resolvedImage(
     fit: fit,
     width: double.infinity,
     height: double.infinity,
+    semanticLabel: semanticLabel,
     // Keep showing the previous frame while the next image decodes. Without
     // this the widget paints nothing for a frame on a source change, which
     // shows up as a black flash between slides — fatal when recording video.
@@ -1003,7 +1038,11 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.cloud_off_outlined, color: Color(0xFF94A3B8), size: 32),
+          const Icon(
+            Icons.cloud_off_outlined,
+            color: Color(0xFF94A3B8),
+            size: 32,
+          ),
           const SizedBox(height: 8),
           Text(
             context.l10n.d('Online media staat uit'),

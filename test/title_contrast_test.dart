@@ -8,16 +8,19 @@ void main() {
   const theme = ThemeProfile(); // white title text on dark navy wash
   final titleSlide = Slide.create(SlideType.title).copyWith(title: 'Hallo');
 
-  test('white text over a bright image fails and is fixed by the grey wash', () {
-    final eval = evaluateTitleContrast(
-      avgImage: const Color(0xFFF2F2F2),
-      theme: theme,
-      slide: titleSlide.copyWith(titleImageOverlay: false),
-    );
-    expect(eval.passes, isFalse);
-    expect(eval.fix, TitleContrastFix.enableOverlay);
-    expect(eval.fixedRatio, greaterThanOrEqualTo(3.0));
-  });
+  test(
+    'white text over a bright image fails and is fixed by the grey wash',
+    () {
+      final eval = evaluateTitleContrast(
+        avgImage: const Color(0xFFF2F2F2),
+        theme: theme,
+        slide: titleSlide.copyWith(titleImageOverlay: false),
+      );
+      expect(eval.passes, isFalse);
+      expect(eval.fix, TitleContrastFix.enableOverlay);
+      expect(eval.fixedRatio, greaterThanOrEqualTo(3.0));
+    },
+  );
 
   test('white text over a dark image already passes', () {
     final eval = evaluateTitleContrast(
@@ -94,18 +97,24 @@ void main() {
 
   test('applyTitleContrastFix sets the expected slide fields', () {
     expect(
-      applyTitleContrastFix(titleSlide, TitleContrastFix.enableOverlay)
-          .titleImageOverlay,
+      applyTitleContrastFix(
+        titleSlide,
+        TitleContrastFix.enableOverlay,
+      ).titleImageOverlay,
       isTrue,
     );
     expect(
-      applyTitleContrastFix(titleSlide, TitleContrastFix.lightText)
-          .titleTextColorOverride,
+      applyTitleContrastFix(
+        titleSlide,
+        TitleContrastFix.lightText,
+      ).titleTextColorOverride,
       '#FFFFFF',
     );
     expect(
-      applyTitleContrastFix(titleSlide, TitleContrastFix.darkText)
-          .titleTextColorOverride,
+      applyTitleContrastFix(
+        titleSlide,
+        TitleContrastFix.darkText,
+      ).titleTextColorOverride,
       '#111827',
     );
   });

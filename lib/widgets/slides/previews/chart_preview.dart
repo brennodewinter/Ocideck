@@ -615,25 +615,41 @@ class _ChartPreviewState extends State<_ChartPreview> {
   Widget _stackedBarChart(ChartSpec spec, Color textColor) {
     final groups = <BarChartGroupData>[];
     for (var xi = 0; xi < spec.x.length; xi++) {
-      var bottom = 0.0;
-      final rods = <BarChartRodData>[];
+      // A stacked bar is ONE rod per group whose segments are stacked vertically
+      // via rodStackItems. (Multiple rods in a group render side-by-side, which
+      // is grouping, not stacking.)
+      var top = 0.0;
+      final stackItems = <BarChartRodStackItem>[];
       for (var si = 0; si < spec.series.length; si++) {
         if (xi >= spec.series[si].data.length) continue;
         final value = spec.series[si].data[xi];
-        rods.add(
-          BarChartRodData(
-            fromY: bottom,
-            toY: bottom + value,
-            color: _seriesDisplayColor(spec.series[si], si),
-            width: _barRodWidth(spec),
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(w * 0.006),
-            ),
+        stackItems.add(
+          BarChartRodStackItem(
+            top,
+            top + value,
+            _seriesDisplayColor(spec.series[si], si),
           ),
         );
-        bottom += value;
+        top += value;
       }
-      groups.add(BarChartGroupData(x: xi, barRods: rods));
+      groups.add(
+        BarChartGroupData(
+          x: xi,
+          barRods: [
+            BarChartRodData(
+              fromY: 0,
+              toY: top,
+              width: _barRodWidth(spec),
+              rodStackItems: stackItems,
+              // The segments carry the colours; the rod body stays clear.
+              color: Colors.transparent,
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(w * 0.006),
+              ),
+            ),
+          ],
+        ),
+      );
     }
     return BarChart(
       BarChartData(
@@ -968,8 +984,8 @@ class _ChartPreviewState extends State<_ChartPreview> {
                                           borderWidth:
                                               w *
                                               (_hovered == si
-                                                  ? 0.0055
-                                                  : 0.0035),
+                                                  ? 0.0040
+                                                  : 0.0022),
                                           entryRadius:
                                               w *
                                               (_hovered == si ? 0.006 : 0.004),

@@ -154,7 +154,8 @@ class _TitleEditorState extends ConsumerState<TitleEditor> {
             controlAffinity: ListTileControlAffinity.leading,
             title: const Text('Afbeelding vult hele slide'),
             subtitle: const Text(
-              'Vult de hele slide; wat buiten beeld valt wordt bijgesneden.',
+              'Aan: vult de hele slide, titel eroverheen (bijgesneden). '
+              'Uit: beeld bovenaan, titel in een band eronder.',
             ),
           ),
           if (widget.slide.imageSize != 0) ...[

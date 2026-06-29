@@ -2,6 +2,7 @@ import 'package:uuid/uuid.dart';
 import 'cockpit.dart';
 import 'deck.dart';
 import 'question.dart';
+import 'settings.dart';
 import 'timeline.dart';
 
 const _uuid = Uuid();
@@ -169,6 +170,12 @@ class Slide {
   /// contrast auto-fix flip text light/dark on a single slide without touching
   /// the deck-wide theme.
   final String titleTextColorOverride;
+
+  /// Bullet/twoBullets/bulletsImage slides only: overrides the theme's
+  /// [ThemeProfile.bulletMarker] for this one slide. `null` = inherit the
+  /// theme default. Lets a single slide turn cat-paws on or off without
+  /// touching the deck-wide theme (mirrors [titleTextColorOverride]).
+  final BulletMarker? bulletMarkerOverride;
   final bool showLogo; // show the profile logo on this slide (default true)
   final bool showFooter; // show the profile footer on this slide (default true)
   final bool skipped; // skip this slide when presenting and exporting
@@ -223,6 +230,7 @@ class Slide {
     this.imageSize = 0,
     this.titleImageOverlay = true,
     this.titleTextColorOverride = '',
+    this.bulletMarkerOverride,
     this.showLogo = true,
     this.showFooter = true,
     this.skipped = false,
@@ -294,6 +302,7 @@ class Slide {
       imageSize: src.imageSize,
       titleImageOverlay: src.titleImageOverlay,
       titleTextColorOverride: src.titleTextColorOverride,
+      bulletMarkerOverride: src.bulletMarkerOverride,
       showLogo: src.showLogo,
       showFooter: src.showFooter,
       skipped: src.skipped,
@@ -336,6 +345,8 @@ class Slide {
     int? imageSize,
     bool? titleImageOverlay,
     String? titleTextColorOverride,
+    BulletMarker? bulletMarkerOverride,
+    bool clearBulletMarkerOverride = false,
     bool? showLogo,
     bool? showFooter,
     bool? skipped,
@@ -379,6 +390,9 @@ class Slide {
       titleImageOverlay: titleImageOverlay ?? this.titleImageOverlay,
       titleTextColorOverride:
           titleTextColorOverride ?? this.titleTextColorOverride,
+      bulletMarkerOverride: clearBulletMarkerOverride
+          ? null
+          : (bulletMarkerOverride ?? this.bulletMarkerOverride),
       showLogo: showLogo ?? this.showLogo,
       showFooter: showFooter ?? this.showFooter,
       skipped: skipped ?? this.skipped,

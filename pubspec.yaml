@@ -69,6 +69,7 @@ flutter:
     enable-swift-package-manager: false
   uses-material-design: true
   assets:
+    - assets/images/ocideck-logo.png
     - assets/images/de-winter-wittegeheel.png
     - assets/themes/ocideck.css
     - assets/web_export/
@@ -78,3 +79,19 @@ flutter:
         - asset: assets/fonts/EBGaramond-Variable.ttf
         - asset: assets/fonts/EBGaramond-Italic-Variable.ttf
           style: italic
+    # Bundled UI font. Registered under the literal family name "Roboto" so the
+    # CanvasKit web engine finds it already present and does NOT download Roboto
+    # from fonts.gstatic.com — keeping the web build self-contained (no
+    # third-party origin) and working under a strict connect-src 'self' CSP.
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Variable.ttf
+    # Extra interface fonts the user can pick for the app UI. Bundled (not
+    # system fonts) so the choice also works in the hardened web build and in
+    # PDF/PPTX export.
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Variable.ttf
+    - family: Lora
+      fonts:
+        - asset: assets/fonts/Lora-Variable.ttf

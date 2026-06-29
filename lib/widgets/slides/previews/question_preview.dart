@@ -99,7 +99,12 @@ class _QuestionPreview extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        _resolvedImage(context, slide.imagePath, projectPath),
+        _resolvedImage(
+          context,
+          slide.imagePath,
+          projectPath,
+          semanticLabel: imageSemanticsLabel(context, slide.imageCaption),
+        ),
         _captionOverlay(context, slide.imageCaption, w),
         // Magnify affordance — opens the detail/zoom popup.
         Positioned(

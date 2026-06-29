@@ -25,10 +25,8 @@ class ScanLibraryDialog extends StatefulWidget {
   }) {
     return showDialog<String>(
       context: context,
-      builder: (_) => ScanLibraryDialog(
-        fileService: fileService,
-        recentFiles: recentFiles,
-      ),
+      builder: (_) =>
+          ScanLibraryDialog(fileService: fileService, recentFiles: recentFiles),
     );
   }
 
@@ -95,9 +93,7 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
         children: [
           const Icon(Icons.travel_explore, size: 20),
           const SizedBox(width: 8),
-          Expanded(
-            child: Text(l10n.d('Presentaties zoeken op deze computer')),
-          ),
+          Expanded(child: Text(l10n.d('Presentaties zoeken op deze computer'))),
         ],
       ),
       contentPadding: const EdgeInsets.fromLTRB(24, 12, 24, 0),

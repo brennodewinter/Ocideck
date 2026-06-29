@@ -34,6 +34,15 @@ Text fields support inline Markdown (`**bold**`, `*italic*`, `` `code` ``,
 highlighting, `$…$` / `$$…$$` LaTeX math, and ` ```mermaid ` diagrams (rendered
 in preview, presenter, PDF/PPTX, and HTML export).
 
+### Large image
+
+A single image fills the slide as a background. Tick **Afbeelding slidevullend**
+(slide-filling) to have the image **cover** the whole slide, cropping whatever
+falls outside the frame — handy for full-bleed photos. Leave it off to show the
+**full** image (letterboxed if its aspect differs); the **Zoom** control then
+scales it from edge-to-edge fit down to smaller, or zoomed in past the frame.
+An optional title overlay can sit on top.
+
 ### Source-code slides
 
 Choose a programming language for syntax highlighting (or "plain text") and paste
@@ -379,7 +388,9 @@ OciDeck aims for WCAG 2.1 in the editor:
 - **Screen readers** — slide thumbnails announce a concise label ("Slide 3/12:
   title", including skipped state and whether the slide has user notes), charts
   read out their data as a text alternative, and the fullscreen presenter
-  announces every slide change.
+  announces every slide change. Pictures expose their caption as alt text (and a
+  generic "image" when uncaptioned, which the slide-quality analyser flags), and
+  icon-only buttons carry a label so their purpose is read aloud.
 - **Slide quality** — while you edit, OciDeck continuously checks the deck for
   accessibility and readability problems. See the subsection below.
 
@@ -524,7 +535,10 @@ Implementation: `lib/services/markdown_validator.dart` (unit tests in
   Every colour can be picked from the presets or entered as a custom hex value. The
   Colours and Logo tabs show which profile you're editing. The bundled Marp theme
   is `assets/themes/ocideck.css`.
-- **App appearance** (including a dark interface) is configurable in settings.
+- **App appearance** (a dark interface, the accent and panel colours, and the
+  **interface font** — Roboto, Inter, Lora or EB Garamond, all bundled so the
+  choice also holds on the web build) is configurable in settings. Create a
+  custom app theme (the built-ins are read-only) to change them.
 - **Cockpit colour schemes** set the status colours of the cockpit instruments —
   *good* (green), *warning* (amber), *critical* (red) and *too low/cold* (blue,
   used below a meter's lower bound), plus the artificial horizon's *sky* (blue)

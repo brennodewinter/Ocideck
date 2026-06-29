@@ -431,7 +431,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                   height: 18,
                   margin: const EdgeInsets.only(right: 11),
                   decoration: BoxDecoration(
-                    color: selected ? const Color(0xFF60A5FA) : Colors.transparent,
+                    color: selected
+                        ? const Color(0xFF60A5FA)
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),
@@ -1310,6 +1312,43 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           dense: true,
         ),
         const SizedBox(height: 8),
+        InputDecorator(
+          decoration: InputDecoration(
+            labelText: l10n.d('Lettertype interface'),
+            isDense: true,
+            prefixIcon: const Icon(Icons.font_download_outlined, size: 18),
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              value:
+                  AppAppearanceProfile.uiFonts.contains(
+                    _appearanceProfile.fontFamily,
+                  )
+                  ? _appearanceProfile.fontFamily
+                  : 'Roboto',
+              isExpanded: true,
+              isDense: true,
+              items: [
+                for (final family in AppAppearanceProfile.uiFonts)
+                  DropdownMenuItem(
+                    value: family,
+                    child: Text(family, style: TextStyle(fontFamily: family)),
+                  ),
+              ],
+              onChanged: editable
+                  ? (value) {
+                      if (value == null) return;
+                      setState(() {
+                        _appearanceProfile = _appearanceProfile.copyWith(
+                          fontFamily: value,
+                        );
+                      });
+                    }
+                  : null,
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
         _appearanceColorSetting(
           l10n.d('Hoofdkleur en bovenbalk'),
           _appearanceProfile.primaryColor,
@@ -1630,6 +1669,40 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           _themeProfile.accentColor,
           (v) => _themeProfile = _themeProfile.copyWith(accentColor: v),
         ),
+      ),
+      const SizedBox(height: 12),
+      Row(
+        children: [
+          Expanded(
+            child: Text(
+              l10n.d('Opsommingsteken'),
+              style: const TextStyle(fontSize: 13),
+            ),
+          ),
+          SegmentedButton<BulletMarker>(
+            segments: [
+              ButtonSegment(
+                value: BulletMarker.dot,
+                icon: const Icon(Icons.fiber_manual_record, size: 12),
+                label: Text(l10n.d('Stip')),
+              ),
+              ButtonSegment(
+                value: BulletMarker.paw,
+                icon: const Icon(Icons.pets, size: 16),
+                label: Text(l10n.d('Pootje')),
+              ),
+            ],
+            selected: {_themeProfile.bulletMarker},
+            showSelectedIcon: false,
+            style: const ButtonStyle(visualDensity: VisualDensity.compact),
+            onSelectionChanged: (selection) => setState(() {
+              _themeProfile = _themeProfile.copyWith(
+                bulletMarker: selection.first,
+              );
+              _profileTouched = true;
+            }),
+          ),
+        ],
       ),
       const SizedBox(height: 24),
       _sectionTitle(l10n.d('Checklist')),
@@ -2229,9 +2302,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             ),
             style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
           ),
-          value: ref.watch(
-            settingsProvider.select((s) => s.allowRemoteMedia),
-          ),
+          value: ref.watch(settingsProvider.select((s) => s.allowRemoteMedia)),
           onChanged: (value) =>
               ref.read(settingsProvider.notifier).setAllowRemoteMedia(value),
         ),

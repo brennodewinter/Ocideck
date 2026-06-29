@@ -31,16 +31,31 @@ flutter run -d macos     # or -d windows / -d linux / -d chrome
 
 ## Web
 
-OciDeck also builds for the browser:
+OciDeck also builds for the browser. Use the hardened target:
 
 ```sh
-flutter build web --release
+make build-web        # flutter build web --release --no-web-resources-cdn --csp
 ```
+
+The two flags make the bundle **self-contained and CSP-safe**:
+
+- `--no-web-resources-cdn` self-hosts CanvasKit instead of fetching it from the
+  gstatic CDN, so the running app pulls **zero third-party origins**.
+- `--csp` emits a loader with no `eval()`/inline scripts, so it runs under the
+  strict Content-Security-Policy declared in `web/index.html` (`script-src 'self'
+  'wasm-unsafe-eval'`, no `unsafe-inline`/`unsafe-eval`).
+
+The UI font (Roboto) is bundled too, so the engine never reaches out to
+`fonts.gstatic.com`. Remote deck media is blocked on web by that CSP by design;
+to allow it, add `https:` to `img-src`/`media-src` in `web/index.html`.
 
 Serve `build/web/` from any static host. The web build supports editing, preview,
 HTML export, and presenting in a single window. Dual-screen presenter mode and
 direct filesystem project folders are desktop-only; use **Open** / **Save** via
 the browser file picker on web.
+
+> A plain `flutter build web` still works, but it falls back to the gstatic CDN
+> and an `unsafe-*` loader — use `make build-web` so the hardening stays pinned.
 
 ## Quality gate
 
@@ -50,14 +65,21 @@ make check        # format-check + flutter analyze + full test suite
 
 ## Building release apps
 
+Each platform has a `make` target (each only builds on its own OS — Flutter
+cannot cross-compile a desktop bundle):
+
 ```sh
-flutter build macos --release
-flutter build windows --release
-flutter build linux --release
-flutter build web --release
+make build-macos     # flutter build macos --release    → build/macos/Build/Products/Release/*.app
+make build-windows   # flutter build windows --release  → build/windows/x64/runner/Release
+make build-linux     # flutter build linux --release    → build/linux/x64/release/bundle
+make build-web       # hardened web bundle              → build/web
+make build-all       # web + this machine's native desktop target
 ```
 
-Artifacts land under `build/<platform>/`.
+`make build-all` builds the web bundle plus whichever desktop target matches the
+host OS (web + macOS on a Mac, web + Linux on Linux). Windows and Linux bundles
+for the *other* OSes come from the release CI workflow, not from a single
+machine. Artifacts land under `build/<platform>/`.
 
 ### macOS notes
 
@@ -91,6 +113,14 @@ Artifacts land under `build/<platform>/`.
 
 ## CI
 
-`.github/workflows/ci.yml` runs `make check` on Ubuntu for every push and pull
-request. It does not build native binaries; it validates formatting, static
-analysis, and the test suite (which are platform-independent).
+`.github/workflows/ci.yml` runs the quality gate on Ubuntu for every push and
+pull request (plus `flutter test` on macOS and Windows). It does not build native
+binaries; it validates formatting, static analysis, and the test suite (which are
+platform-independent).
+
+`.github/workflows/release.yml` builds the distributable artifacts. On a version
+tag (`v*`) — or a manual run — it builds **web, macOS, Windows and Linux** on
+their matching runners and uploads each as an artifact, so one tag produces all
+four. Both workflows pin **Flutter 3.44.2** (stable).
+
+For the full check reference, see [`CHECKS.md`](CHECKS.md).

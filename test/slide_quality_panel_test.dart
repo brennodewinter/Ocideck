@@ -111,10 +111,7 @@ void main() {
     expect(find.textContaining('getoetst aan WCAG AA'), findsOneWidget);
     // De parameterregel toont de echte drempels uit de constanten, bv. de
     // bullet-waarschuwing (8) en de quote-grens (750 tekens).
-    expect(
-      find.textContaining('Waarschuwing boven 8 bullets'),
-      findsOneWidget,
-    );
+    expect(find.textContaining('Waarschuwing boven 8 bullets'), findsOneWidget);
     expect(find.textContaining('Quote boven 750 tekens'), findsOneWidget);
   });
 

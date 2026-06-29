@@ -150,6 +150,7 @@ has these fields (with defaults):
 | `slideBackgroundColor` | `#FFFFFF` | Background for normal slides. |
 | `textColor` | `#222222` | Text color. |
 | `accentColor` | `#2E7D64` | Accent (bullet marker, table borders/header). |
+| `bulletMarker` | `dot` | Default bullet-list marker: `dot` or `paw` (a cat-paw drawn in the accent colour). A slide may override it (see §8). |
 | `tableTextColor` | = `textColor` | Text color in tables. |
 | `tableHeaderTextColor` | `#FFFFFF` | Table header text color. |
 | `titleBackgroundColor` | `#1C2B47` | Title-slide background. |
@@ -499,6 +500,19 @@ is the background percentage (`![bg N%]`); for `split`, it is the panel width
 (clamped to 20-70%); for two images, it is the `left:`/`right:` split. `0` =
 automatic.
 
+For a single **image** slide the percentage controls how the picture fits:
+
+| `imageSize` | Result |
+| --- | --- |
+| `0` | **Slide-filling (cover)** — fills the whole slide, cropping the overflow. Emitted as a plain `![bg]` with no percentage. |
+| `100` | The full image is shown (contain), with letterboxing if the aspect differs. |
+| `> 100` | Zoomed in past contain; the excess is cropped. |
+| `< 100` (and `> 0`) | Zoomed out, smaller than contain. |
+
+The editor exposes the cover case as an **"Afbeelding slidevullend"**
+(slide-filling) checkbox that sets `imageSize` to `0` (ticked) or `100`
+(unticked); the zoom control is hidden while it is ticked.
+
 ---
 
 ## 6. Sidecars and Separate Data
@@ -646,6 +660,7 @@ for presenter notes):
 | `<!-- _class: ... -->` | Slide type + behavior (§4). |
 | `<!-- _style: --image-width: N%; --split-text-scale: x; -->` | Layout of a `split` slide. |
 | `<!-- ocideck_two_bullets_left/right: <base64url> -->` | Canonical storage for the two bullet columns. |
+| `<!-- ocideck_bullet_marker: dot\|paw -->` | Per-slide bullet-marker override (bullets/two-bullets/bullets+image). Absent = inherit the theme's `bulletMarker` (§3.2). |
 | `<!-- advance: N.N -->` | Auto-advance after N.N seconds (0 = off). |
 | `<!-- skip -->` | Skip slide during both presenting and export. |
 | `<!-- tlp: <key> -->` | Per-slide TLP level (see §3.1). The slide is held back if the presentation TLP is lower. Written only when not `none`. |

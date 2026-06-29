@@ -40,7 +40,9 @@ void main() {
     });
 
     test('CRLF line endings are handled', () {
-      final fm = md.sniffFrontmatter('---\r\nmarp: true\r\ntheme: ocideck\r\n---\r\n');
+      final fm = md.sniffFrontmatter(
+        '---\r\nmarp: true\r\ntheme: ocideck\r\n---\r\n',
+      );
       expect(fm.marp, isTrue);
       expect(fm.theme, 'ocideck');
     });
@@ -99,10 +101,7 @@ void main() {
     });
 
     test('ignored and denylisted directories are skipped', () async {
-      await writeMd(
-        'good.md',
-        '---\nmarp: true\ntheme: ocideck\n---\n# ok\n',
-      );
+      await writeMd('good.md', '---\nmarp: true\ntheme: ocideck\n---\n# ok\n');
       await writeMd(
         'node_modules/skip.md',
         '---\nmarp: true\ntheme: ocideck\n---\n# no\n',

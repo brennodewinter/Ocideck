@@ -220,7 +220,7 @@ class FullscreenPresenter extends StatefulWidget {
       if (context.mounted) {
         await Navigator.push(
           context,
-          PageRouteBuilder(
+          PageRouteBuilder<void>(
             opaque: true,
             pageBuilder: (context, anim, anim2) => FullscreenPresenter(
               slides: slides,
@@ -358,7 +358,7 @@ class FullscreenPresenter extends StatefulWidget {
       if (context.mounted) {
         await Navigator.push(
           context,
-          PageRouteBuilder(
+          PageRouteBuilder<void>(
             opaque: true,
             pageBuilder: (context, anim, anim2) => FullscreenPresenter(
               slides: slides,
@@ -2248,11 +2248,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                 !_userNotesMode &&
                 !_targetInput &&
                 _blank == _Blank.none)
-              Positioned(
-                top: 20,
-                right: 20,
-                child: _buildTableEditToggle(),
-              ),
+              Positioned(top: 20, right: 20, child: _buildTableEditToggle()),
             if (_userNotesMode) ...[
               Positioned.fill(
                 child: GestureDetector(

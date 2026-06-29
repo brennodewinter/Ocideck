@@ -140,6 +140,61 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('horizontal timeline cards never overlap each other', (
+    tester,
+  ) async {
+    Rect cardRect(int i) =>
+        tester.getRect(find.byKey(ValueKey('timeline-card-$i')));
+
+    Future<void> check(int n, double height) async {
+      final slide = Slide.create(SlideType.timeline).copyWith(
+        title: 'Reis door de tijd',
+        bullets: [
+          for (var k = 0; k < n; k++)
+            '20${10 + k} :: Mijlpaal $k :: Een gebeurtenis met wat toelichting.',
+        ],
+        timelineLayout: TimelineLayout.horizontal,
+      );
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: SizedBox(
+                width: 800,
+                height: height,
+                child: SlidePreviewWidget(slide: slide),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      final rects = [for (var i = 0; i < n; i++) cardRect(i)];
+      for (var a = 0; a < n; a++) {
+        for (var b = a + 1; b < n; b++) {
+          final inter = rects[a].intersect(rects[b]);
+          final overlaps = inter.width > 0.5 && inter.height > 0.5;
+          expect(
+            overlaps,
+            isFalse,
+            reason:
+                'n=$n h=$height: card $a (${rects[a]}) overlaps '
+                'card $b (${rects[b]})',
+          );
+        }
+      }
+    }
+
+    // timelineMaxEvents caps a timeline at 12 events; cover the whole range at a
+    // normal 16:9 height and at a squat height (less vertical room for floors,
+    // which exercises the width-cap fallback).
+    for (final n in [4, 5, 6, 7, 8, 9, 10, 11, 12]) {
+      await check(n, 450);
+      await check(n, 300);
+    }
+  });
+
   testWidgets('empty timeline renders just the title without crashing', (
     tester,
   ) async {

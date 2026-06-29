@@ -37,10 +37,16 @@ Individual steps:
 | --- | --- |
 | `make format` | Rewrites Dart files with `dart format`. |
 | `make format-check` | Fails if any file needs formatting. |
-| `make analyze` | `flutter analyze` (analyzer + lints + type checks). |
-| `make test` | The full test suite. |
+| `make analyze` | `flutter analyze --fatal-infos` (analyzer + lints + strict type checks). |
+| `make check-conventions` | No `print()`; the bare `catch (_)` count may not grow. |
+| `make test` | The full test suite (randomised order). |
 | `make licenses` | Verify every dependency uses an open-source licence. |
-| `make check-full` | `check` plus licence compliance and a dependency-freshness report. |
+| `make deps-check` | Verify the vendored export JS bundles (integrity + known CVEs via OSV). |
+| `make check-web` | Build the web bundle and assert its hardening (CSP, self-hosted, fonts). |
+| `make check-full` | `check` plus licences, bundled-JS, web hardening, and a freshness report. |
+
+See [`docs/CHECKS.md`](docs/CHECKS.md) for the full reference — what each check
+covers, what a failure means, and how CI runs them.
 
 Targeted test groups for focused work:
 

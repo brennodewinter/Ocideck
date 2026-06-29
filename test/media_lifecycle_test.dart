@@ -69,7 +69,8 @@ class _RecordingVideoPlayerPlatform extends VideoPlayerPlatform {
   Future<void> setPlaybackSpeed(int playerId, double speed) async {}
 
   @override
-  Future<Duration> getPosition(int playerId) async => const Duration(seconds: 5);
+  Future<Duration> getPosition(int playerId) async =>
+      const Duration(seconds: 5);
 
   @override
   Future<void> setMixWithOthers(bool mixWithOthers) async {}
@@ -166,7 +167,10 @@ void main() {
     await settle(tester);
 
     // De oude controller is opgeruimd, de nieuwe speelt — geen dubbele weergave.
-    expect(fake.calls, containsAll(<String>['dispose#0', 'create#1', 'play#1']));
+    expect(
+      fake.calls,
+      containsAll(<String>['dispose#0', 'create#1', 'play#1']),
+    );
     expect(
       fake.calls.indexOf('dispose#0'),
       lessThan(fake.calls.indexOf('create#1')),

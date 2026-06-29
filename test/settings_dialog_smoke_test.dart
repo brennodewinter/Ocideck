@@ -1,0 +1,53 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+/// Smoke test for the settings dialog. Its tab bodies are built into an
+/// IndexedStack, so a single render exercises every tab; tapping the nav icons
+/// then exercises the tab-selection path.
+void main() {
+  setUp(() => SharedPreferences.setMockInitialValues({}));
+
+  testWidgets('SettingsDialog renders and switches tabs', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1500, 1100));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: Builder(
+              builder: (context) => ElevatedButton(
+                onPressed: () => SettingsDialog.show(context),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+    expect(find.byType(SettingsDialog), findsOneWidget);
+
+    // Walk the navigation rail to exercise each tab's selection.
+    for (final icon in const [
+      Icons.format_paint_outlined,
+      Icons.slideshow_outlined,
+      Icons.speed_outlined,
+      Icons.privacy_tip_outlined,
+      Icons.tune,
+    ]) {
+      final finder = find.byIcon(icon);
+      if (finder.evaluate().isNotEmpty) {
+        await tester.tap(finder.first);
+        await tester.pumpAndSettle();
+      }
+    }
+
+    expect(find.byType(SettingsDialog), findsOneWidget);
+  });
+}

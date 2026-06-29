@@ -8,6 +8,13 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **OciDeck logo on startup** — the welcome screen and the first-run consent
+  dialog now show the OciDeck cat logo.
+- **One-command builds for every target** — `make build-web` (hardened),
+  `make build-macos` / `build-windows` / `build-linux`, and `make build-all`
+  (web plus the host's native desktop target). A release CI workflow
+  (`.github/workflows/release.yml`) builds web, macOS, Windows and Linux on a
+  version tag and uploads each as an artifact. See [`docs/CHECKS.md`](docs/CHECKS.md).
 - **Edit a table while presenting** — tables can be changed live during a
   presentation (filling in figures, ticking items in front of an audience).
   It is opt-in per table: a new **Table editable while presenting** checkbox in
@@ -214,6 +221,11 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   pattern as user notes, with a discard button in the header row.
 
 ### Fixed
+- **Consent dialog no longer crashes its action bar.** A `Spacer` in the
+  `AlertDialog` actions (which are laid out in an OverflowBar, not a Flex) threw
+  a layout error that the release build swallowed into a dark placeholder box
+  (and spammed the console on web). The two actions are now split with
+  `actionsAlignment` instead.
 - The export quality gate now includes the asynchronous title-image contrast
   warnings, so the gate and the on-screen quality panel no longer disagree.
 - Turning the title "fill slide" option back off no longer discards the zoom you
@@ -278,6 +290,11 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   coalescing key is now the stable slide id, not its position).
 
 ### Security
+- **The web build is now self-contained and CSP-hardened.** CanvasKit and the
+  Roboto UI font are bundled locally instead of fetched from Google's CDN, so the
+  running app makes **zero third-party requests**, and `web/index.html` ships a
+  strict Content-Security-Policy (`script-src 'self' 'wasm-unsafe-eval'`, no
+  `unsafe-inline`/`unsafe-eval`). Build with `make build-web`.
 - **Deck asset paths are confined to the project folder on every read path.**
   An untrusted `.md` can no longer use absolute or `../` image/logo/chart paths
   to make the slide-quality analyzer probe arbitrary files (a file-existence

@@ -36,7 +36,8 @@ class ImageService {
       } finally {
         await raf.close();
       }
-    } catch (_) {
+    } catch (e) {
+      logWarning('ImageService: image signature probe failed', e);
       return false;
     }
   }
@@ -73,7 +74,8 @@ class ImageService {
     try {
       final len = await File(path).length();
       return len > 0 && len <= maxMediaBytes;
-    } catch (_) {
+    } catch (e) {
+      logWarning('ImageService: media size check failed', e);
       return false;
     }
   }
@@ -86,7 +88,9 @@ class ImageService {
     final path = result?.files.single.path;
     if (path == null) return null;
     if (!await _isAcceptableImageFile(path)) {
-      logWarning('ImageService.pickImage: rejected (too large or not an image)');
+      logWarning(
+        'ImageService.pickImage: rejected (too large or not an image)',
+      );
       return null;
     }
     return _importIntoProject(path, projectPath, subdir: 'images');
