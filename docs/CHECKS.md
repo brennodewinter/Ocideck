@@ -94,7 +94,7 @@ These three run on every push and pull request (and as `make check`).
 - **Runs:** `flutter test --coverage` then `dart run tool/coverage_summary.dart --min=50`.
 - **Covers:** line coverage across every `lib/` file a test imports.
 - **Failure means:** overall line coverage dropped below the floor (currently
-  **55%**). The floor guards against large regressions; raise it as coverage
+  **60%**). The floor guards against large regressions; raise it as coverage
   improves. This is the coverage form of the gate used in CI.
 
 ---
