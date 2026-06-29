@@ -40,6 +40,11 @@ OciDeck is an offline desktop application. Areas of particular interest:
   mermaid, MathJax) to render offline.
 - The export classification gate (`ClassificationPolicy`) — any way to export a
   deck classified above the configured release ceiling.
+- The **web build's self-contained guarantee.** Built with `make build-web`, the
+  browser app bundles CanvasKit and the UI font locally (no gstatic CDN) and runs
+  under a strict Content-Security-Policy in `web/index.html` (`script-src 'self'
+  'wasm-unsafe-eval'`, no `unsafe-inline`/`unsafe-eval`; media first-party). Any
+  way to make the running app load third-party script or origins is in scope.
 
 ## Untrusted deck handling
 

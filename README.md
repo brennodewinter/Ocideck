@@ -64,7 +64,10 @@ Targeted test groups speed up focused work:
 | `make test-presenter` | Fullscreen presenter navigation and keyboard shortcuts |
 
 Run `make check` before pushing — it is the same quality gate (format check,
-static analysis, full test suite) you would wire into CI.
+static analysis, full test suite) you would wire into CI. `make check-full` adds
+licence compliance (`make licenses`) and the vendored-JS security check
+(`make deps-check`). For the full reference — every check, what it covers, and
+how CI runs it — see [`docs/CHECKS.md`](docs/CHECKS.md).
 
 ## Project layout
 
@@ -100,6 +103,7 @@ style profile, sidecars, and the package format — is documented in
 | [File format](docs/FILE_FORMAT.md) | The Marp Markdown, front matter, sidecars, and `.ocideck` package |
 | [Architecture](docs/ARCHITECTURE.md) | How the code fits together (for contributors) |
 | [Build & release](docs/BUILD.md) | Building from source and producing distributables |
+| [Checks & CI](docs/CHECKS.md) | Every automated check, what it covers, and how CI runs it |
 | [Contributing](CONTRIBUTING.md) | Setup, the quality gate, and how to propose changes |
 | [Security policy](SECURITY.md) | How to report a vulnerability |
 | [Changelog](CHANGELOG.md) | Notable changes per version |

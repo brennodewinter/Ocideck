@@ -40,7 +40,11 @@ Individual steps:
 | `make analyze` | `flutter analyze` (analyzer + lints + type checks). |
 | `make test` | The full test suite. |
 | `make licenses` | Verify every dependency uses an open-source licence. |
-| `make check-full` | `check` plus licence compliance and a dependency-freshness report. |
+| `make deps-check` | Verify the vendored export JS bundles (integrity + known CVEs via OSV). |
+| `make check-full` | `check` plus licence compliance, the bundled-JS check, and a dependency-freshness report. |
+
+See [`docs/CHECKS.md`](docs/CHECKS.md) for the full reference — what each check
+covers, what a failure means, and how CI runs them.
 
 Targeted test groups for focused work:
 
