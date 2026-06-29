@@ -951,4 +951,57 @@ void main() {
       expect(out.timelineAnimationMs, timelineDefaultAnimationDurationMs);
     });
   });
+
+  group('round-trip edge cases (silent data-loss regressions)', () {
+    test('C1: split-image captions survive a literal " | " in the text', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.twoImages).copyWith(
+          imagePath: 'images/a.png',
+          imagePath2: 'images/b.png',
+          imageCaption: 'links a | b', // contains the join delimiter
+          imageCaption2: 'rechts | c',
+        ),
+      );
+      expect(out.imageCaption, 'links a | b');
+      expect(out.imageCaption2, 'rechts | c');
+    });
+
+    test('C2: video trim keeps sub-second (millisecond) precision', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.video).copyWith(
+          videoPath: 'media/movie.mp4',
+          videoStartMs: 1500,
+          videoEndMs: 8200,
+        ),
+      );
+      // Previously start floor()'d to 1s and end ceil()'d to 9s, widening the
+      // segment on every save.
+      expect(out.videoStartMs, 1500);
+      expect(out.videoEndMs, 8200);
+    });
+
+    test('C3: speaker notes keep an embedded "-->"', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.section).copyWith(
+          title: 'Deel',
+          notes: 'zie a --> b, en c --> d aan het einde',
+        ),
+      );
+      expect(out.notes, 'zie a --> b, en c --> d aan het einde');
+    });
+
+    test('C4: table cell separates a literal "<br>" from a real newline', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.table).copyWith(
+          tableRows: const [
+            ['Kop'],
+            ['gebruik de <br> tag'], // literal text, not a line break
+            ['regel1\nregel2'], // an actual newline
+          ],
+        ),
+      );
+      expect(out.tableRows[1][0], 'gebruik de <br> tag');
+      expect(out.tableRows[2][0], 'regel1\nregel2');
+    });
+  });
 }

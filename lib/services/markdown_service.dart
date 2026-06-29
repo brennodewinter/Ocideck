@@ -150,6 +150,10 @@ class MarkdownService {
       return v
           .replaceAll('\\', r'\\')
           .replaceAll('|', r'\|')
+          // Escape an author-typed literal "<br>" before encoding real newlines
+          // as "<br>", so the two are distinguishable on parse (otherwise a
+          // literal "<br>" silently became a line break every load).
+          .replaceAll('<br>', r'\<br>')
           .replaceAll('\n', '<br>');
     }
 
@@ -178,20 +182,23 @@ class MarkdownService {
     for (var i = 0; i < s.length; i++) {
       if (s[i] == r'\'[0] && i + 1 < s.length) {
         final n = s[i + 1];
-        if (n == '|') {
-          out.write('|');
-          i++;
-          continue;
-        }
-        if (n == r'\'[0]) {
-          out.write(r'\');
+        // `\|`, `\\` and `\<` unescape to the literal char; a `\<` keeps a
+        // following `br>` as literal text rather than an author newline.
+        if (n == '|' || n == r'\'[0] || n == '<') {
+          out.write(n);
           i++;
           continue;
         }
       }
+      // An unescaped `<br>` is an author-inserted line break.
+      if (s.startsWith('<br>', i)) {
+        out.write('\n');
+        i += 3; // skip 'br>'; the loop's i++ steps past the '<'
+        continue;
+      }
       out.write(s[i]);
     }
-    return out.toString().replaceAll('<br>', '\n');
+    return out.toString();
   }
 
   String generateSlide(
@@ -374,10 +381,7 @@ class MarkdownService {
         }
         _writeImageCaption(
           buf,
-          [
-            slide.imageCaption,
-            slide.imageCaption2,
-          ].where((caption) => caption.trim().isNotEmpty).join(' | '),
+          _joinTwoCaptions(slide.imageCaption, slide.imageCaption2),
         );
         if (slide.title.isNotEmpty) {
           buf.writeln();
@@ -531,7 +535,7 @@ class MarkdownService {
     if (slide.notes.isNotEmpty) {
       buf.writeln();
       buf.writeln('<!--');
-      buf.writeln(slide.notes);
+      buf.writeln(_escapeNotes(slide.notes));
       buf.writeln('-->');
     }
 
@@ -786,8 +790,12 @@ class MarkdownService {
     required bool forExport,
   }) {
     final source = VideoSource.parse(slide.videoPath);
-    final startSec = (slide.videoStartMs / 1000).floor();
-    final endSec = (slide.videoEndMs / 1000).ceil();
+    // Decimal seconds so the trim window round-trips losslessly: flooring the
+    // start and ceiling the end widened the segment by up to a second on every
+    // save, eventually overlapping the neighbouring split. `_secToMs` already
+    // parses fractional seconds back to milliseconds.
+    final startSec = _msToSec(slide.videoStartMs);
+    final endSec = _msToSec(slide.videoEndMs);
 
     if (source.isEmbed) {
       final embed =
@@ -884,6 +892,41 @@ class MarkdownService {
     if (v == null || v <= 0) return 0;
     return (v * 1000).round();
   }
+
+  /// Milliseconds → a compact seconds string for a `#t=`/`data-start` value:
+  /// whole seconds stay integer (`5`), otherwise up to millisecond precision
+  /// with no trailing zeros (`1.5`, `1.234`). The inverse of [_secToMs].
+  static String _msToSec(int ms) {
+    final seconds = ms / 1000;
+    if (seconds == seconds.roundToDouble()) return seconds.toStringAsFixed(0);
+    return seconds.toStringAsFixed(3).replaceFirst(RegExp(r'0+$'), '');
+  }
+
+  /// The two captions of a split-image slide share one
+  /// `<div class="image-caption">` joined by `" | "`. A literal pipe in a
+  /// caption would shift text across that boundary on the next load, so each
+  /// caption's pipes are swapped for a private-use sentinel that cannot occur
+  /// in real caption text and passes through the HTML (un)escaping untouched.
+  static const String _captionSeparator = ' | ';
+  static const String _captionPipeSentinel = '\u{E000}';
+
+  static String _joinTwoCaptions(String first, String second) => [first, second]
+      .where((caption) => caption.trim().isNotEmpty)
+      .map((caption) => caption.replaceAll('|', _captionPipeSentinel))
+      .join(_captionSeparator);
+
+  static List<String> _splitTwoCaptions(String decoded) => decoded
+      .split(_captionSeparator)
+      .map((part) => part.replaceAll(_captionPipeSentinel, '|'))
+      .toList();
+
+  /// An HTML comment cannot contain `-->`; a speaker note that does would be
+  /// truncated there on parse (the comment closes early and the tail leaks into
+  /// the slide body). Escape the token on write and restore it on read. A note
+  /// containing the literal escape `--\>` is the only (negligible) collision.
+  static String _escapeNotes(String notes) => notes.replaceAll('-->', r'--\>');
+  static String _unescapeNotes(String notes) =>
+      notes.replaceAll(r'--\>', '-->');
 
   static String _decodeImageCaption(String line) {
     return line
@@ -1151,7 +1194,7 @@ class MarkdownService {
         return '';
       },
     ).trim();
-    final notes = notesBuffer.toString().trim();
+    final notes = _unescapeNotes(notesBuffer.toString().trim());
 
     // Code slides carry a fenced block that the generic line parser below would
     // mangle (the body lines aren't markdown). Handle them up front.
@@ -1271,7 +1314,7 @@ class MarkdownService {
             imagePath = m.group(1) ?? '';
           }
         } else if (t.startsWith('<div class="image-caption">')) {
-          final captionParts = _decodeImageCaption(t).split(' | ');
+          final captionParts = _splitTwoCaptions(_decodeImageCaption(t));
           imageCaption = captionParts.isNotEmpty ? captionParts.first : '';
         } else {
           richTextLines.add(line);
@@ -1369,7 +1412,7 @@ class MarkdownService {
           }
         }
       } else if (t.startsWith('<div class="image-caption">')) {
-        final captionParts = _decodeImageCaption(t).split(' | ');
+        final captionParts = _splitTwoCaptions(_decodeImageCaption(t));
         imageCaption = captionParts.isNotEmpty ? captionParts.first : '';
         imageCaption2 = captionParts.length > 1
             ? captionParts.sublist(1).join(' | ')
