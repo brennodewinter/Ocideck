@@ -36,6 +36,9 @@ OciDeck is an offline desktop application. Areas of particular interest:
 - Parsing of untrusted decks (`.md`), packages (`.ocideck`), sidecars
   (`.ink.json`, captions), and linked CSV data.
 - Importing presentations from a URL.
+- The **Nextcloud (WebDAV) source** — a user-configured server the app
+  authenticates to (basic auth) and reads/writes files on, including how its
+  credentials are stored and how its host is reached (see below).
 - The HTML export, which inlines third-party JavaScript (marked, highlight.js,
   mermaid, MathJax) to render offline.
 - The export classification gate (`ClassificationPolicy`) — any way to export a
@@ -81,6 +84,20 @@ OciDeck constrains what an opened deck can do:
   validated address** (`connectionFactory`), so a DNS rebind between the check
   and the connect can't redirect the socket internally. TLS still validates
   against the original hostname.
+- **WebDAV/Nextcloud source — credentials and trust boundary.** The app
+  password is stored encrypted in the OS keychain (`flutter_secure_storage`,
+  keyed by server URL + username via `SecretStore`), never in the preferences
+  file; only the server URL, username, subfolder and trust flag live in prefs.
+  The configured server is the only host allowed to bypass the private-address
+  SSRF block, and only after the user explicitly ticks **Trusted internal
+  server** (`NetGuard.safeResolveTrusted`); the host is still resolved and the
+  socket pinned, and deck-supplied URLs never get this exception. WebDAV
+  requests follow no redirects, cap the PROPFIND response and entry count, and
+  enforce the same per-file size limits as other imports; remote paths are
+  contained to the configured root (`WebdavServer.uriFor` rejects `..` escapes)
+  and listing entries with a traversal segment are dropped. Downloaded decks go
+  through the same `MarkdownSafetyScanner` gate and `.ocideck`/`.md` limits as
+  every other import.
 - **Symlink containment.** Both the copy-to-clipboard sink
   (`resolveContainedRealPath`) and the render/export path (`isRenderPathContained`,
   cached so the per-frame cost is O(1)) resolve the real (symlink-followed)

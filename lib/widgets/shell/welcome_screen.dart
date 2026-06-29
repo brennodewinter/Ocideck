@@ -88,6 +88,15 @@ class _WelcomeScreen extends ConsumerWidget {
                             label: Text(l10n.d('Zoek op deze computer')),
                           ),
                         ),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          width: 220,
+                          child: OutlinedButton.icon(
+                            onPressed: () => _openFromNextcloud(context, ref),
+                            icon: const Icon(Icons.cloud_outlined, size: 18),
+                            label: Text(l10n.d('Openen vanaf Nextcloud')),
+                          ),
+                        ),
                         const SizedBox(height: 8),
                         TextButton.icon(
                           onPressed: () => SettingsDialog.show(context),

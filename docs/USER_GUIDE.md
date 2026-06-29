@@ -16,6 +16,29 @@ Marp tools.
 - **Crash recovery**: unsaved work is snapshotted automatically and offered back
   after an unexpected exit.
 
+## Nextcloud (WebDAV)
+
+You can use a folder on your Nextcloud as a source for decks and assets.
+
+- **Set it up** in *Settings → Nextcloud*: enter the server URL
+  (`https://cloud.example.com`), your username, an **app password** (create one
+  in Nextcloud under *Settings → Security*, don't use your login password), and
+  an optional subfolder. Use **Test connection** to check it before saving. The
+  app password is stored encrypted in your operating system's keychain, not in
+  the plain settings file.
+- **Self-hosted / home server**: if your Nextcloud runs on a private or LAN
+  address, tick **Trusted internal server** — otherwise the connection is
+  refused (the same safeguard that stops a deck from reaching internal hosts).
+- **Open** via the welcome screen (*Open from Nextcloud*) or the `…` menu:
+  browse the folder and pick an `.ocideck` package or a Marp `.md`. The file is
+  downloaded, checked by the same safety scan as any other deck, and opened in a
+  tab.
+- **Save back** with *Save to Nextcloud* (`…` menu). Choose a target path and a
+  format: a single **`.ocideck` package** (one file, assets included) or a
+  **flat `.md` plus its asset folders** (`images/`, `themes/`, …) mirrored into
+  the same folder. A deck opened from Nextcloud remembers where it came from, so
+  saving suggests the original location.
+
 ## Slide types
 
 Add a slide and pick a type: **title**, **section** divider, **bullets**, **two

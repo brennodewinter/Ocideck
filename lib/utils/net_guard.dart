@@ -65,6 +65,32 @@ class NetGuard {
     }
   }
 
+  /// Variant of [safeResolve] for a host the user has *explicitly* configured
+  /// (the WebDAV/Nextcloud server), not one supplied by a deck. When
+  /// [allowPrivate] is true the private/loopback/link-local block is skipped so
+  /// a self-hosted LAN server can be reached — the user opted in by ticking
+  /// "trusted internal server". The host is still resolved and the returned
+  /// address is still meant to be pinned by the caller, so TLS validates the
+  /// real hostname and a DNS rebind can't move the socket after this check.
+  ///
+  /// With [allowPrivate] false this is exactly [safeResolve]: deck-supplied
+  /// URLs never reach here, and even a configured public server stays guarded.
+  static Future<List<InternetAddress>?> safeResolveTrusted(
+    String host, {
+    required bool allowPrivate,
+  }) async {
+    if (!allowPrivate) return safeResolve(host);
+    final literal = InternetAddress.tryParse(host);
+    if (literal != null) return [literal];
+    try {
+      final addrs = await InternetAddress.lookup(host);
+      return addrs.isEmpty ? null : addrs;
+    } catch (e) {
+      logWarning('NetGuard.safeResolveTrusted: DNS lookup failed', e);
+      return null;
+    }
+  }
+
   /// Lexical, synchronous check for whether [url] is a usable `http(s)` media
   /// URL that is not aimed at an obviously-internal host. Returns false for
   /// non-web schemes and blocked hosts. A `true` result does NOT guarantee the

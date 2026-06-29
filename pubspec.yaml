@@ -46,6 +46,10 @@ dependencies:
   markdown_quill: ^4.3.0
   markdown: ^7.3.1
   xml: ^6.6.1
+  # Wachtwoord voor de WebDAV/Nextcloud-bron versleuteld in de OS-keychain
+  # (macOS/iOS Keychain, elders de veilige backend). Alleen het wachtwoord gaat
+  # hierheen; server-URL/gebruikersnaam blijven in het prefs-domein.
+  flutter_secure_storage: ^9.2.2
 
 dev_dependencies:
   flutter_test:

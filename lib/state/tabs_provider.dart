@@ -5,11 +5,13 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
+import '../models/webdav_settings.dart';
 import '../services/file_service.dart';
 import '../services/markdown_safety.dart';
 import '../services/markdown_service.dart';
 import '../services/recovery_service.dart';
 import '../services/user_notes_codec.dart';
+import '../services/webdav_service.dart';
 import '../utils/log.dart';
 import 'deck_provider.dart';
 import 'editor_provider.dart';
@@ -27,11 +29,17 @@ class TabInfo {
   final DeckNotifier deckNotifier;
   final EditorNotifier editorNotifier;
 
-  const TabInfo({
+  /// Gezet wanneer dit tabblad uit een WebDAV/Nextcloud-bron is geopend, zodat
+  /// "Opslaan naar Nextcloud" terug weet te schrijven. Muteerbaar: wordt na het
+  /// openen ingevuld en bij elke `state`-kopie hergebruikt.
+  WebdavOrigin? webdavOrigin;
+
+  TabInfo({
     required this.id,
     required this.recoveryId,
     required this.deckNotifier,
     required this.editorNotifier,
+    this.webdavOrigin,
   });
 
   String get label {
@@ -354,6 +362,79 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final result = await openFileByPath(mdPath);
     if (result != OpenResult.opened) await _discardImportArtifacts(mdPath);
     return result != OpenResult.unreadable;
+  }
+
+  /// Download [entry] van de WebDAV-bron, haal het door de bestaande
+  /// security-gate en open het in een tab. Het tabblad onthoudt zijn herkomst
+  /// zodat "Opslaan naar Nextcloud" terug kan schrijven. Een netwerk-/auth-fout
+  /// wordt als [WebdavException] doorgegeven aan de aanroeper.
+  Future<OpenResult> openFromWebdav(
+    WebdavService service,
+    WebdavEntry entry, {
+    String? homeDir,
+  }) async {
+    final dest = await _importDestDir(homeDir);
+    final maxBytes = entry.isMarkdown
+        ? FileService.maxDeckMarkdownBytes
+        : FileService.maxPackageBytes;
+    final bytes = await service.download(entry.relativePath, maxBytes: maxBytes);
+    if (!mounted) return OpenResult.unreadable;
+    final mdPath = entry.isMarkdown
+        ? await _file.importMarkdownBytes(bytes, dest, entry.name)
+        : await _file.importPackageBytes(bytes, dest);
+    if (mdPath == null) return OpenResult.unreadable;
+    final result = await openFileByPath(mdPath);
+    if (result != OpenResult.opened) {
+      await _discardImportArtifacts(mdPath);
+      return result;
+    }
+    // De zojuist geopende deck zit in het huidige tabblad (zie openFileByPath).
+    state.current?.webdavOrigin = WebdavOrigin(
+      baseUrl: service.server.baseUrl,
+      username: service.server.username,
+      remotePath: entry.relativePath,
+    );
+    if (mounted) state = state.copyWith(tabs: List.from(state.tabs));
+    return OpenResult.opened;
+  }
+
+  /// Schrijf het deck van [tab] terug naar de WebDAV-bron op [targetPath]
+  /// (relatief aan de wortelmap). Bij [WebdavSaveFormat.ocideck] gaat er één
+  /// pakketbestand omhoog; bij [WebdavSaveFormat.flat] worden de pakket-leden
+  /// (`.md` + assetmappen) los geüpload in dezelfde map. Werkt de herkomst van
+  /// het tabblad bij. Gooit [WebdavException] bij een netwerk-/auth-fout.
+  Future<void> saveToWebdav(
+    TabInfo tab,
+    WebdavService service, {
+    required WebdavSaveFormat format,
+    required String targetPath,
+  }) async {
+    final deck = tab.deckNotifier.currentState.deck;
+    if (deck == null) return;
+    if (format == WebdavSaveFormat.ocideck) {
+      final bytes = await _file.buildPackageBytes(deck);
+      await service.upload(targetPath, bytes);
+    } else {
+      final members = await _file.buildPackageMembers(deck);
+      final dir = p.posix.dirname(targetPath);
+      final mdBase = p.posix.basename(targetPath);
+      for (final entry in members.entries) {
+        // Het pakket-markdownbestand heet naar de deck-titel; geef het op de
+        // server de naam die de gebruiker koos. Assets behouden hun submap.
+        final isRootMd =
+            entry.key.toLowerCase().endsWith('.md') && !entry.key.contains('/');
+        final remote = isRootMd
+            ? p.posix.join(dir, mdBase)
+            : p.posix.join(dir, entry.key);
+        await service.upload(remote, entry.value);
+      }
+    }
+    tab.webdavOrigin = WebdavOrigin(
+      baseUrl: service.server.baseUrl,
+      username: service.server.username,
+      remotePath: targetPath,
+    );
+    if (mounted) state = state.copyWith(tabs: List.from(state.tabs));
   }
 
   void selectTab(int index) {

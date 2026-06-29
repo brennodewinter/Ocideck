@@ -644,6 +644,28 @@ class FileService {
   /// (afbeeldingen, media, logo) en de thema-CSS, met onderling relatieve
   /// paden. Werkt ongeacht of het deck al is opgeslagen.
   Future<void> exportPackage(Deck deck, String destPath) async {
+    final bytes = await buildPackageBytes(deck);
+    await writeBytesAtomic(File(destPath), bytes);
+  }
+
+  /// Bouw de bytes van een zelfstandig `.ocideck`-pakket (zie [exportPackage]),
+  /// zonder ze weg te schrijven. Gebruikt om hetzelfde pakket te uploaden naar
+  /// een WebDAV-bron in plaats van naar schijf.
+  Future<List<int>> buildPackageBytes(Deck deck) async =>
+      ZipEncoder().encodeBytes(await _buildPackageArchive(deck));
+
+  /// Pakket-leden (pad → bytes) zonder ze te zippen, zodat elk bestand los naar
+  /// een WebDAV-map kan worden geüpload — een "platte" spiegel van het deck met
+  /// dezelfde asset-mappen en herschreven relatieve paden als het pakket.
+  Future<Map<String, List<int>>> buildPackageMembers(Deck deck) async {
+    final archive = await _buildPackageArchive(deck);
+    return {
+      for (final f in archive.files)
+        if (f.isFile) f.name: f.content,
+    };
+  }
+
+  Future<Archive> _buildPackageArchive(Deck deck) async {
     final archive = Archive();
     final added = <String>{};
 
@@ -746,8 +768,7 @@ class FileService {
       );
     }
 
-    final bytes = ZipEncoder().encodeBytes(archive);
-    await writeBytesAtomic(File(destPath), bytes);
+    return archive;
   }
 
   Future<String?> _packageThemeCss(
@@ -953,16 +974,29 @@ class FileService {
     }
 
     // Platte markdown.
+    return importMarkdownBytes(bytes, destParentDir, uri.path);
+  }
+
+  /// Sla losse markdown-bytes op als zelfstandig deck in een nieuwe submap van
+  /// [destParentDir] en geef het pad naar het `.md`-bestand terug. Weigert
+  /// inhoud die niet op een Marp-deck lijkt of niet als UTF-8 te lezen is.
+  /// Gedeeld door de URL-import en de WebDAV-bron.
+  Future<String?> importMarkdownBytes(
+    List<int> bytes,
+    String destParentDir,
+    String suggestedName,
+  ) async {
+    if (bytes.length > maxDeckMarkdownBytes) return null;
     final String markdown;
     try {
       markdown = utf8.decode(bytes);
     } catch (e, s) {
-      logError('FileService.importFromUrl: UTF-8 decode failed', e, s);
+      logError('FileService.importMarkdownBytes: UTF-8 decode failed', e, s);
       return null;
     }
     if (!markdown.contains('marp') && !markdown.contains('---')) return null;
 
-    var base = p.basenameWithoutExtension(uri.path);
+    var base = p.basenameWithoutExtension(suggestedName);
     if (base.isEmpty) base = 'presentatie';
     final destDir = _uniqueDir(destParentDir, base);
     await destDir.create(recursive: true);

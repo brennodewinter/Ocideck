@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
+import '../../services/webdav_service.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../state/consent_provider.dart';
@@ -80,6 +81,28 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   late TextEditingController _footerText;
   late TextEditingController _closingSlideMarkdown;
 
+  // WebDAV/Nextcloud-bron.
+  late TextEditingController _webdavUrl;
+  late TextEditingController _webdavUser;
+  late TextEditingController _webdavRoot;
+  late TextEditingController _webdavPassword;
+
+  /// Het wachtwoord zoals uit de keychain geladen, om bij opslaan te bepalen of
+  /// het écht gewijzigd is. Voorkomt dat een snelle Opslaan vóórdat de
+  /// asynchrone keychain-load klaar is het wachtwoord met leeg overschrijft.
+  String _loadedWebdavPassword = '';
+
+  /// Server-identiteit (URL|gebruiker) bij het openen, om te detecteren dat de
+  /// keychain-sleutel wijzigt en het wachtwoord onder de nieuwe sleutel moet.
+  String _initialWebdavIdentity = '';
+  bool _webdavTrusted = false;
+
+  /// Status van de verbindingstest: null = nog niet getest, true = ok,
+  /// false = mislukt (met [_webdavTestMessage]).
+  bool? _webdavTestOk;
+  String? _webdavTestMessage;
+  bool _webdavTesting = false;
+
   /// Whether the user changed the active profile in this session. Used to
   /// decide whether to apply the profile to the currently open presentation.
   bool _profileTouched = false;
@@ -96,6 +119,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     Icons.slideshow_outlined,
     Icons.speed_outlined,
     Icons.privacy_tip_outlined,
+    Icons.cloud_outlined,
   ];
 
   static const _colorPresets = [
@@ -141,8 +165,30 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _closingSlideMarkdown = TextEditingController(
       text: _themeProfile.closingSlideMarkdown,
     );
+    final webdav = settings.webdavServer;
+    _webdavUrl = TextEditingController(text: webdav?.baseUrl ?? '');
+    _webdavUser = TextEditingController(text: webdav?.username ?? '');
+    _webdavRoot = TextEditingController(text: webdav?.rootPath ?? '');
+    _webdavPassword = TextEditingController();
+    _webdavTrusted = webdav?.trustedInternal ?? false;
+    _initialWebdavIdentity = '${webdav?.baseUrl ?? ''}|${webdav?.username ?? ''}';
+    if (webdav != null && webdav.isConfigured) {
+      // Het wachtwoord staat in de keychain; laad het in zodat de gebruiker
+      // ziet dat het er is en het niet opnieuw hoeft te typen.
+      ref
+          .read(settingsProvider.notifier)
+          .readWebdavPassword(webdav.baseUrl, webdav.username)
+          .then((pw) {
+            if (mounted && pw != null) {
+              setState(() {
+                _webdavPassword.text = pw;
+                _loadedWebdavPassword = pw;
+              });
+            }
+          });
+    }
     _highlightedThemeField = widget.highlightThemeField;
-    _selectedTab = widget.initialTab.clamp(0, 4);
+    _selectedTab = widget.initialTab.clamp(0, 5);
     if (widget.highlightThemeField != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scrollToThemeField(widget.highlightThemeField!);
@@ -158,7 +204,21 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _closingSlideMarkdown.dispose();
     _appearanceName.dispose();
     _cockpitName.dispose();
+    _webdavUrl.dispose();
+    _webdavUser.dispose();
+    _webdavRoot.dispose();
+    _webdavPassword.dispose();
     super.dispose();
+  }
+
+  /// Bouw een [WebdavServer] uit de huidige veldwaarden (zonder wachtwoord).
+  WebdavServer _webdavServerFromFields() {
+    return WebdavServer(
+      baseUrl: _webdavUrl.text.trim(),
+      username: _webdavUser.text.trim(),
+      rootPath: WebdavServer.normalizeRoot(_webdavRoot.text),
+      trustedInternal: _webdavTrusted,
+    );
   }
 
   List<ThemeProfile> get _profiles {
@@ -258,7 +318,84 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     if (_profileTouched) {
       ref.read(tabsProvider).current?.deckNotifier.updateThemeProfile(profile);
     }
+
+    // WebDAV/Nextcloud-bron: serverconfig in prefs, wachtwoord in de keychain.
+    final server = _webdavServerFromFields();
+    if (server.isConfigured) {
+      notifier.setWebdavServer(server);
+      // Schrijf het wachtwoord als het is gewijzigd, of wanneer de server-
+      // identiteit (en dus de keychain-sleutel) wijzigde. Zo leegt een Opslaan
+      // vóór de asynchrone keychain-load het wachtwoord niet, maar verhuist het
+      // wél mee bij een nieuwe gebruikersnaam/URL.
+      final identityChanged =
+          '${server.baseUrl}|${server.username}' != _initialWebdavIdentity;
+      if (_webdavPassword.text != _loadedWebdavPassword || identityChanged) {
+        notifier.setWebdavPassword(
+          server.baseUrl,
+          server.username,
+          _webdavPassword.text,
+        );
+      }
+    } else {
+      notifier.setWebdavServer(null);
+    }
+
     Navigator.pop(context);
+  }
+
+  Future<void> _testWebdavConnection() async {
+    final l10n = context.l10n;
+    final server = _webdavServerFromFields();
+    if (!server.isConfigured) {
+      setState(() {
+        _webdavTestOk = false;
+        _webdavTestMessage = l10n.d('Vul server-URL en gebruikersnaam in');
+      });
+      return;
+    }
+    setState(() {
+      _webdavTesting = true;
+      _webdavTestOk = null;
+      _webdavTestMessage = null;
+    });
+    final service = WebdavService(
+      server: server,
+      password: _webdavPassword.text,
+    );
+    String? error;
+    try {
+      await service.probe();
+    } on WebdavException catch (e) {
+      error = _webdavErrorText(l10n, e.kind);
+    } catch (_) {
+      error = l10n.d('Verbinding mislukt');
+    }
+    if (!mounted) return;
+    setState(() {
+      _webdavTesting = false;
+      _webdavTestOk = error == null;
+      _webdavTestMessage = error;
+    });
+  }
+
+  String _webdavErrorText(AppLocalizations l10n, WebdavError kind) {
+    switch (kind) {
+      case WebdavError.auth:
+        return l10n.d('Aanmelden mislukt — controleer gebruikersnaam en wachtwoord');
+      case WebdavError.blockedHost:
+        return l10n.d(
+          'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.',
+        );
+      case WebdavError.notFound:
+        return l10n.d('Map niet gevonden op de server');
+      case WebdavError.config:
+        return l10n.d('Ongeldige server-URL');
+      case WebdavError.tooLarge:
+        return l10n.d('Het antwoord van de server was te groot');
+      case WebdavError.network:
+      case WebdavError.server:
+        return l10n.d('Verbinding mislukt');
+    }
   }
 
   @override
@@ -279,6 +416,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       l10n.d('Presentatiestijl'),
       l10n.d('Cockpit'),
       l10n.d('Privacy'),
+      l10n.d('Nextcloud'),
     ];
 
     final bodies = <Widget>[
@@ -287,6 +425,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       _tabBody(_presentationStyleTab(profiles)),
       _tabBody(_cockpitTab()),
       _tabBody(_privacyTab()),
+      _tabBody(_webdavTab()),
     ];
 
     return Dialog(
@@ -2296,6 +2435,142 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       border: Border.all(color: const Color(0xFFCBD5E1)),
       borderRadius: BorderRadius.circular(6),
       color: Colors.white,
+    );
+  }
+
+  Widget _webdavField(
+    TextEditingController controller,
+    String label, {
+    String? hint,
+    bool obscure = false,
+    IconData? icon,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: TextField(
+        controller: controller,
+        obscureText: obscure,
+        style: const TextStyle(fontSize: 13),
+        decoration: InputDecoration(
+          isDense: true,
+          labelText: label,
+          hintText: hint,
+          prefixIcon: icon == null ? null : Icon(icon, size: 18),
+        ),
+      ),
+    );
+  }
+
+  Widget _webdavTab() {
+    final l10n = context.l10n;
+    final testMsg = _webdavTestMessage;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _sectionTitle(l10n.d('Nextcloud-bron (WebDAV)')),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 14),
+          child: Text(
+            l10n.d(
+              'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.',
+            ),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+        ),
+        _webdavField(
+          _webdavUrl,
+          l10n.d('Server-URL'),
+          hint: 'https://cloud.voorbeeld.nl',
+          icon: Icons.link,
+        ),
+        _webdavField(
+          _webdavUser,
+          l10n.d('Gebruikersnaam'),
+          icon: Icons.person_outline,
+        ),
+        _webdavField(
+          _webdavPassword,
+          l10n.d('App-wachtwoord'),
+          hint: l10n.d('Maak hiervoor een app-wachtwoord aan in Nextcloud'),
+          obscure: true,
+          icon: Icons.key_outlined,
+        ),
+        _webdavField(
+          _webdavRoot,
+          l10n.d('Submap (optioneel)'),
+          hint: '/Presentaties',
+          icon: Icons.folder_outlined,
+        ),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(
+            l10n.d('Vertrouwde interne server'),
+            style: const TextStyle(fontSize: 13),
+          ),
+          subtitle: Text(
+            l10n.d(
+              'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.',
+            ),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          ),
+          value: _webdavTrusted,
+          onChanged: (value) => setState(() {
+            _webdavTrusted = value;
+            _webdavTestOk = null;
+            _webdavTestMessage = null;
+          }),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            ElevatedButton.icon(
+              onPressed: _webdavTesting ? null : _testWebdavConnection,
+              icon: _webdavTesting
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Icon(Icons.wifi_tethering, size: 16),
+              label: Text(l10n.d('Verbinding testen')),
+            ),
+            const SizedBox(width: 12),
+            if (_webdavTestOk == true)
+              Row(
+                children: [
+                  const Icon(Icons.check_circle, color: Color(0xFF2E7D64), size: 18),
+                  const SizedBox(width: 6),
+                  Text(
+                    l10n.d('Verbinding gelukt'),
+                    style: const TextStyle(fontSize: 12, color: Color(0xFF2E7D64)),
+                  ),
+                ],
+              ),
+          ],
+        ),
+        if (_webdavTestOk == false && testMsg != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Icon(Icons.error_outline, color: Color(0xFFDC2626), size: 18),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    testMsg,
+                    style: const TextStyle(fontSize: 12, color: Color(0xFFDC2626)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        const SizedBox(height: 8),
+        Text(
+          l10n.d('Wijzigingen worden bewaard wanneer je op Opslaan klikt.'),
+          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+        ),
+      ],
     );
   }
 
