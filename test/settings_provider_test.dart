@@ -104,6 +104,70 @@ void main() {
     expect(back.titleTextColor, '#FFFFFF');
   });
 
+  test('ThemeProfile.fromJson sanitises EVERY style field (fuzz)', () {
+    // Guards the *class* of bug behind S2: a theme colour/font interpolated
+    // raw into the export <style> block (and audience-window inline styles)
+    // without validation. Every style field is read back via toJson() and must
+    // be a strict #RRGGBB literal or a whitelisted font — never the payload.
+    // When a new style field is added, extend the relevant list here (this is
+    // the single checklist of CSS-interpolated fields).
+    const colorKeys = <String>[
+      'slideBackgroundColor',
+      'textColor',
+      'accentColor',
+      'checklistCheckedColor',
+      'checklistUncheckedColor',
+      'tableTextColor',
+      'tableHeaderTextColor',
+      'tableHeaderBackgroundColor',
+      'titleBackgroundColor',
+      'titleTextColor',
+      'sectionBackgroundColor',
+      'codeBackgroundColor',
+      'codeTextColor',
+    ];
+    const payloads = <String>[
+      "red}</style><meta http-equiv='refresh' content='0;url=https://evil'>",
+      'url(http://evil/?leak)',
+      '#12', // too short
+      '#1234ZZ', // non-hex
+      'rgb(1,2,3)',
+      'expression(alert(1))',
+      '',
+    ];
+    final hex = RegExp(r'^#[0-9A-Fa-f]{6}$');
+
+    for (final key in colorKeys) {
+      for (final payload in payloads) {
+        final out = ThemeProfile.fromJson({key: payload}).toJson()[key];
+        expect(
+          out is String && hex.hasMatch(out),
+          isTrue,
+          reason: 'Colour field "$key" not sanitised for "$payload" → "$out"',
+        );
+      }
+    }
+
+    for (final payload in payloads) {
+      final font = ThemeProfile.fromJson({
+        'fontFamily': payload,
+      }).toJson()['fontFamily'];
+      expect(
+        AppSettings.availableFonts.contains(font),
+        isTrue,
+        reason: 'fontFamily not whitelisted for "$payload" → "$font"',
+      );
+      final codeFont = ThemeProfile.fromJson({
+        'codeFontFamily': payload,
+      }).toJson()['codeFontFamily'];
+      expect(
+        AppSettings.codeFonts.contains(codeFont),
+        isTrue,
+        reason: 'codeFontFamily not whitelisted for "$payload" → "$codeFont"',
+      );
+    }
+  });
+
   test('starts with a single default profile', () async {
     final notifier = await _loadedNotifier();
     expect(notifier.state.themeProfiles, hasLength(1));

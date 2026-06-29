@@ -379,7 +379,7 @@ class MarkdownService {
         if (slide.imagePath2.isNotEmpty) {
           buf.writeln('![bg right:${100 - splitPct}%](${slide.imagePath2})');
         }
-        _writeImageCaption(
+        _writeCaptionDiv(
           buf,
           _joinTwoCaptions(slide.imageCaption, slide.imageCaption2),
         );
@@ -771,10 +771,16 @@ class MarkdownService {
   }
 
   static void _writeImageCaption(StringBuffer buf, String caption) {
-    final text = caption.trim();
-    if (text.isEmpty) return;
+    _writeCaptionDiv(buf, _encodeCaption(caption.trim()));
+  }
+
+  /// Writes an already pipe-encoded caption body as the shared
+  /// `<div class="image-caption">`. The single-caption and two-caption paths
+  /// both end here so the markup is produced in exactly one place.
+  static void _writeCaptionDiv(StringBuffer buf, String body) {
+    if (body.isEmpty) return;
     buf.writeln(
-      '<div class="image-caption">${const HtmlEscape().convert(text)}</div>',
+      '<div class="image-caption">${const HtmlEscape().convert(body)}</div>',
     );
   }
 
@@ -902,23 +908,30 @@ class MarkdownService {
     return seconds.toStringAsFixed(3).replaceFirst(RegExp(r'0+$'), '');
   }
 
-  /// The two captions of a split-image slide share one
-  /// `<div class="image-caption">` joined by `" | "`. A literal pipe in a
-  /// caption would shift text across that boundary on the next load, so each
-  /// caption's pipes are swapped for a private-use sentinel that cannot occur
-  /// in real caption text and passes through the HTML (un)escaping untouched.
+  /// Captions live in a `<div class="image-caption">`; a split-image slide puts
+  /// two of them in one div joined by `" | "`. A literal pipe in a caption would
+  /// otherwise be mistaken for that separator on parse (truncating a single
+  /// caption or shifting text between two), so EVERY caption's pipes are swapped
+  /// for a private-use sentinel before serialisation — single and two-caption
+  /// alike — leaving the real `" | "` separator unambiguous. The sentinel cannot
+  /// occur in real caption text and passes through the HTML (un)escaping
+  /// untouched. Both write paths funnel through [_writeCaptionDiv].
   static const String _captionSeparator = ' | ';
   static const String _captionPipeSentinel = '\u{E000}';
 
+  static String _encodeCaption(String caption) =>
+      caption.replaceAll('|', _captionPipeSentinel);
+
+  static String _decodeCaption(String caption) =>
+      caption.replaceAll(_captionPipeSentinel, '|');
+
   static String _joinTwoCaptions(String first, String second) => [first, second]
       .where((caption) => caption.trim().isNotEmpty)
-      .map((caption) => caption.replaceAll('|', _captionPipeSentinel))
+      .map((caption) => _encodeCaption(caption.trim()))
       .join(_captionSeparator);
 
-  static List<String> _splitTwoCaptions(String decoded) => decoded
-      .split(_captionSeparator)
-      .map((part) => part.replaceAll(_captionPipeSentinel, '|'))
-      .toList();
+  static List<String> _splitTwoCaptions(String decoded) =>
+      decoded.split(_captionSeparator).map(_decodeCaption).toList();
 
   /// An HTML comment cannot contain `-->`; a speaker note that does would be
   /// truncated there on parse (the comment closes early and the tail leaks into
@@ -1802,7 +1815,7 @@ class MarkdownService {
         final m = RegExp(r'!\[[^\]]*\]\(([^)]*)\)').firstMatch(t);
         if (m != null) imagePath = m.group(1) ?? '';
       } else if (t.startsWith('<div class="image-caption">')) {
-        imageCaption = _decodeImageCaption(t);
+        imageCaption = _decodeCaption(_decodeImageCaption(t));
       }
     }
 
