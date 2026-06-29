@@ -1,4 +1,4 @@
-.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check licenses check check-full help
+.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check licenses build-web build-macos build-windows build-linux build-all check check-full help
 
 help:
 	@echo "OciDeck quality targets:"
@@ -14,6 +14,11 @@ help:
 	@echo "  make deps-outdated   Advisory dependency freshness report."
 	@echo "  make deps-check      Verify vendored JS bundles vs manifest + OSV CVEs."
 	@echo "  make licenses        Verify all dependencies use open-source licences."
+	@echo "  make build-web       Build the hardened web bundle (self-hosted CanvasKit + CSP-safe loader)."
+	@echo "  make build-macos     Build the macOS .app (macOS only)."
+	@echo "  make build-windows   Build the Windows app (Windows only)."
+	@echo "  make build-linux     Build the Linux bundle (Linux only)."
+	@echo "  make build-all       Build web + this OS's native desktop target."
 
 # Install Flutter/Dart dependencies.
 setup:
@@ -137,6 +142,57 @@ licenses:
 	@echo "Covers: licence of every resolved Dart/Flutter package (direct + transitive)."
 	@echo "Failure means: a dependency uses an unrecognised or non-open-source licence — review it."
 	dart run tool/check_licenses.dart
+
+# Build the hardened web bundle. Two flags do the security work:
+#   --no-web-resources-cdn  Self-host CanvasKit instead of fetching it from the
+#                           gstatic CDN, so the running app pulls ZERO third-party
+#                           origins (air-gappable, reproducible, fits the pinned
+#                           bundled-JS policy in deps-check).
+#   --csp                   Emit a CSP-compliant loader: no eval()/inline scripts
+#                           in the Flutter bootstrap, so script-src needs neither
+#                           'unsafe-eval' nor 'unsafe-inline'. Pairs with the
+#                           Content-Security-Policy meta tag in web/index.html.
+build-web:
+	@echo "== OciDeck build: hardened web bundle =="
+	@echo "Command: flutter build web --release --no-web-resources-cdn --csp"
+	@echo "Covers: self-hosted CanvasKit (no third-party CDN) and a CSP-safe loader."
+	@echo "Output: build/web — serve behind the CSP declared in web/index.html."
+	flutter build web --release --no-web-resources-cdn --csp
+
+# Native desktop release builds. Each target only works on its own OS — Flutter
+# cannot cross-compile a desktop bundle (a macOS .app needs macOS, a Windows
+# .exe needs Windows, a Linux bundle needs Linux). Run the matching target on
+# the matching machine, or use the release CI workflow to produce all at once.
+build-macos:
+	@echo "== OciDeck build: macOS app (.app) =="
+	@echo "Command: flutter build macos --release"
+	@echo "Output: build/macos/Build/Products/Release/*.app"
+	flutter build macos --release
+
+build-windows:
+	@echo "== OciDeck build: Windows app (.exe) =="
+	@echo "Command: flutter build windows --release"
+	@echo "Output: build/windows/x64/runner/Release"
+	flutter build windows --release
+
+build-linux:
+	@echo "== OciDeck build: Linux bundle =="
+	@echo "Command: flutter build linux --release"
+	@echo "Output: build/linux/x64/release/bundle"
+	flutter build linux --release
+
+# Build everything this machine CAN build: the hardened web bundle always, plus
+# the desktop target native to the current OS. Windows/Linux desktop bundles for
+# the other OSes come from the release CI workflow, not from here.
+build-all:
+	@echo "== OciDeck build: all targets for this OS =="
+	$(MAKE) build-web
+	@case "$$(uname -s)" in \
+	  Darwin) $(MAKE) build-macos ;; \
+	  Linux) $(MAKE) build-linux ;; \
+	  *) echo "No native desktop build for '$$(uname -s)' here — run 'make build-windows' on Windows." ;; \
+	esac
+	@echo "== OciDeck build-all complete =="
 
 # Full local quality gate. Intended for humans, CI logs, and LLM-assisted debugging.
 check: format-check analyze test
