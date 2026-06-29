@@ -2550,6 +2550,18 @@ const _dutchSourceStrings = {
 
 const _dutchSourceStringAdditions = {
   'en': {
+    // Accessibility labels for icon-only buttons (screen readers).
+    'Zoekopdracht wissen': 'Clear search',
+    'Bullet verwijderen': 'Remove bullet',
+    'Kolom verwijderen': 'Remove column',
+    'Rij omhoog': 'Move row up',
+    'Rij omlaag': 'Move row down',
+    'Optie verwijderen': 'Remove option',
+    'Optie toevoegen': 'Add option',
+    'Duur verkorten': 'Decrease duration',
+    'Duur verlengen': 'Increase duration',
+    'Afspelen': 'Play',
+    'Pauzeren': 'Pause',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Split in two',
     'Uitgevoerde controles': 'Checks performed',
@@ -3054,6 +3066,18 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Scatter',
   },
   'it': {
+    // Accessibility labels for icon-only buttons (screen readers).
+    'Zoekopdracht wissen': 'Cancella ricerca',
+    'Bullet verwijderen': 'Rimuovi punto',
+    'Kolom verwijderen': 'Rimuovi colonna',
+    'Rij omhoog': 'Sposta riga su',
+    'Rij omlaag': 'Sposta riga giù',
+    'Optie verwijderen': 'Rimuovi opzione',
+    'Optie toevoegen': 'Aggiungi opzione',
+    'Duur verkorten': 'Riduci durata',
+    'Duur verlengen': 'Aumenta durata',
+    'Afspelen': 'Riproduci',
+    'Pauzeren': 'Pausa',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Dividi in due',
     'Uitgevoerde controles': 'Controlli eseguiti',
@@ -3739,6 +3763,18 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Dispersione',
   },
   'de': {
+    // Accessibility labels for icon-only buttons (screen readers).
+    'Zoekopdracht wissen': 'Suche löschen',
+    'Bullet verwijderen': 'Aufzählungspunkt entfernen',
+    'Kolom verwijderen': 'Spalte entfernen',
+    'Rij omhoog': 'Zeile nach oben',
+    'Rij omlaag': 'Zeile nach unten',
+    'Optie verwijderen': 'Option entfernen',
+    'Optie toevoegen': 'Option hinzufügen',
+    'Duur verkorten': 'Dauer verkürzen',
+    'Duur verlengen': 'Dauer verlängern',
+    'Afspelen': 'Abspielen',
+    'Pauzeren': 'Pause',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'In zwei teilen',
     'Uitgevoerde controles': 'Durchgeführte Prüfungen',
@@ -4423,6 +4459,18 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Streudiagramm',
   },
   'fr': {
+    // Accessibility labels for icon-only buttons (screen readers).
+    'Zoekopdracht wissen': 'Effacer la recherche',
+    'Bullet verwijderen': 'Supprimer la puce',
+    'Kolom verwijderen': 'Supprimer la colonne',
+    'Rij omhoog': 'Monter la ligne',
+    'Rij omlaag': 'Descendre la ligne',
+    'Optie verwijderen': 'Supprimer l\'option',
+    'Optie toevoegen': 'Ajouter une option',
+    'Duur verkorten': 'Réduire la durée',
+    'Duur verlengen': 'Augmenter la durée',
+    'Afspelen': 'Lire',
+    'Pauzeren': 'Pause',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Diviser en deux',
     'Uitgevoerde controles': 'Contrôles effectués',
@@ -5112,6 +5160,18 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Nuage de points',
   },
   'es': {
+    // Accessibility labels for icon-only buttons (screen readers).
+    'Zoekopdracht wissen': 'Borrar búsqueda',
+    'Bullet verwijderen': 'Eliminar viñeta',
+    'Kolom verwijderen': 'Eliminar columna',
+    'Rij omhoog': 'Subir fila',
+    'Rij omlaag': 'Bajar fila',
+    'Optie verwijderen': 'Eliminar opción',
+    'Optie toevoegen': 'Añadir opción',
+    'Duur verkorten': 'Reducir duración',
+    'Duur verlengen': 'Aumentar duración',
+    'Afspelen': 'Reproducir',
+    'Pauzeren': 'Pausar',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Dividir en dos',
     'Uitgevoerde controles': 'Comprobaciones realizadas',
@@ -5799,6 +5859,18 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Dispersión',
   },
   'fy': {
+    // Accessibility labels for icon-only buttons (screen readers).
+    'Zoekopdracht wissen': 'Sykopdracht wiskje',
+    'Bullet verwijderen': 'Bullet fuortsmite',
+    'Kolom verwijderen': 'Kolom fuortsmite',
+    'Rij omhoog': 'Rige omheech',
+    'Rij omlaag': 'Rige omleech',
+    'Optie verwijderen': 'Opsje fuortsmite',
+    'Optie toevoegen': 'Opsje tafoegje',
+    'Duur verkorten': 'Doer ferkoartsje',
+    'Duur verlengen': 'Doer ferlingje',
+    'Afspelen': 'Ofspylje',
+    'Pauzeren': 'Skoftsje',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Yn twaen splitse',
     'Uitgevoerde controles': 'Utfierde kontrôles',
@@ -6469,6 +6541,18 @@ const _dutchSourceStringAdditions = {
     'Spreiding': 'Sparring',
   },
   'pap': {
+    // Accessibility labels for icon-only buttons (screen readers).
+    'Zoekopdracht wissen': 'Limpia búskeda',
+    'Bullet verwijderen': 'Kita bala',
+    'Kolom verwijderen': 'Kita kolumna',
+    'Rij omhoog': 'Hisa fila',
+    'Rij omlaag': 'Baha fila',
+    'Optie verwijderen': 'Kita opshon',
+    'Optie toevoegen': 'Agregá opshon',
+    'Duur verkorten': 'Redusí durashon',
+    'Duur verlengen': 'Oumentá durashon',
+    'Afspelen': 'Toka',
+    'Pauzeren': 'Pousa',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Parti na dos',
     'Uitgevoerde controles': 'Chekeonan ehekutá',

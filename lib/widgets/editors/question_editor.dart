@@ -395,6 +395,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
           ),
         ),
         IconButton(
+          tooltip: l10n.d('Optie verwijderen'),
           icon: const Icon(Icons.remove_circle_outline),
           onPressed: _optionCount > questionMinOptionCount
               ? () {
@@ -412,6 +413,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
           ),
         ),
         IconButton(
+          tooltip: l10n.d('Optie toevoegen'),
           icon: const Icon(Icons.add_circle_outline),
           onPressed: _optionCount < questionMaxOptionCount
               ? () {

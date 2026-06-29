@@ -379,7 +379,9 @@ OciDeck aims for WCAG 2.1 in the editor:
 - **Screen readers** — slide thumbnails announce a concise label ("Slide 3/12:
   title", including skipped state and whether the slide has user notes), charts
   read out their data as a text alternative, and the fullscreen presenter
-  announces every slide change.
+  announces every slide change. Pictures expose their caption as alt text (and a
+  generic "image" when uncaptioned, which the slide-quality analyser flags), and
+  icon-only buttons carry a label so their purpose is read aloud.
 - **Slide quality** — while you edit, OciDeck continuously checks the deck for
   accessibility and readability problems. See the subsection below.
 

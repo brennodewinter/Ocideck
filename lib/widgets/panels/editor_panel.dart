@@ -678,6 +678,7 @@ class _SlideTimingControl extends StatelessWidget {
             height: 24,
             child: IconButton(
               padding: EdgeInsets.zero,
+              tooltip: l10n.d('Duur verkorten'),
               icon: const Icon(Icons.remove, size: 14),
               onPressed: enabled && duration > 0.1
                   ? () => _setDuration(duration - 0.1)
@@ -706,6 +707,7 @@ class _SlideTimingControl extends StatelessWidget {
             height: 24,
             child: IconButton(
               padding: EdgeInsets.zero,
+              tooltip: l10n.d('Duur verlengen'),
               icon: const Icon(Icons.add, size: 14),
               onPressed: enabled ? () => _setDuration(duration + 0.1) : null,
               color: const Color(0xFF0369A1),

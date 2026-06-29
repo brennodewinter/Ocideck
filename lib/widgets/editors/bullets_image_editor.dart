@@ -404,6 +404,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
           ),
           IconButton(
             key: ValueKey('remove-bullet-$i'),
+            tooltip: l10n.d('Bullet verwijderen'),
             icon: const Icon(
               Icons.remove_circle_outline,
               size: 18,

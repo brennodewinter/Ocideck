@@ -774,7 +774,12 @@ class _BulletsImagePreview extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                _resolvedImage(context, slide.imagePath, projectPath),
+                _resolvedImage(
+                  context,
+                  slide.imagePath,
+                  projectPath,
+                  semanticLabel: imageSemanticsLabel(context, slide.imageCaption),
+                ),
                 _captionOverlay(context, slide.imageCaption, w),
               ],
             ),
@@ -896,7 +901,12 @@ class _BulletsImagePreview extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                _resolvedImage(context, slide.imagePath, projectPath),
+                _resolvedImage(
+                  context,
+                  slide.imagePath,
+                  projectPath,
+                  semanticLabel: imageSemanticsLabel(context, slide.imageCaption),
+                ),
                 _captionOverlay(context, slide.imageCaption, w),
               ],
             ),
