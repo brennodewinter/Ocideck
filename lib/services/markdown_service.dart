@@ -1271,9 +1271,7 @@ class MarkdownService {
         final t = line.trim();
         if (richTextHeaderPhase) {
           if (t.isEmpty) continue;
-          if (t.startsWith('<div') ||
-              t == '</div>' ||
-              t.startsWith('<!-- _style:')) {
+          if (t.startsWith('<div') || t == '</div>') {
             continue;
           }
           if (t.startsWith('# ') && h1.isEmpty) {
@@ -1303,9 +1301,7 @@ class MarkdownService {
           final m = RegExp(r'src="([^"]+)"').firstMatch(t);
           if (m != null) audioPath = m.group(1) ?? '';
           audioAutoplay = t.contains('autoplay');
-        } else if (t.startsWith('<div') ||
-            t == '</div>' ||
-            t.startsWith('<!-- _style:')) {
+        } else if (t.startsWith('<div') || t == '</div>') {
           // Split-slide structural markup; not part of the rich-text body.
         } else if (cssClass.split(RegExp(r'\s+')).contains('split') &&
             RegExp(r'!\[[^\]]*\]\(([^)]+)\)').hasMatch(t)) {

@@ -53,7 +53,6 @@ class MarkdownValidator {
     final lines = markdown.split('\n');
     _validateFrontMatter(lines, issues);
     _validateHtmlComments(lines, issues);
-    _validateFenceBalance(lines, issues);
 
     final body = _stripFrontMatter(markdown);
     final bodyStartLine = markdown.length - body.length > 0
@@ -86,6 +85,13 @@ class MarkdownValidator {
         slideNumber: i + 1,
         startLine: blockStartLine,
         issues: issues,
+      );
+      // Per slide: a fence opened in one slide and another left open in the
+      // next would cancel out in a document-wide count (false negative).
+      _validateFenceBalance(
+        block.split('\n'),
+        issues,
+        lineOffset: blockStartLine - 1,
       );
       blockStartLine += block.split('\n').length + 1;
     }
@@ -208,14 +214,15 @@ class MarkdownValidator {
 
   void _validateFenceBalance(
     List<String> lines,
-    List<MarkdownValidationIssue> issues,
-  ) {
+    List<MarkdownValidationIssue> issues, {
+    int lineOffset = 0,
+  }) {
     var fenceCount = 0;
     int? firstFenceLine;
     for (var i = 0; i < lines.length; i++) {
       if (RegExp(r'^\s*```').hasMatch(lines[i])) {
         fenceCount++;
-        firstFenceLine ??= i + 1;
+        firstFenceLine ??= lineOffset + i + 1;
       }
     }
     if (fenceCount.isOdd && firstFenceLine != null) {
