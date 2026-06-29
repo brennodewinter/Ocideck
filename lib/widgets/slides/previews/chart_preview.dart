@@ -968,8 +968,8 @@ class _ChartPreviewState extends State<_ChartPreview> {
                                           borderWidth:
                                               w *
                                               (_hovered == si
-                                                  ? 0.0055
-                                                  : 0.0035),
+                                                  ? 0.0040
+                                                  : 0.0022),
                                           entryRadius:
                                               w *
                                               (_hovered == si ? 0.006 : 0.004),

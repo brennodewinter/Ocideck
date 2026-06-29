@@ -72,8 +72,10 @@ class MarpHtmlService {
         theme: theme,
         scheme: cockpitColorScheme,
       );
+      final markerClass = _bulletMarkerSectionClass(slide);
       sections
-        ..write('<section class="slide"><script type="text/markdown">')
+        ..write('<section class="slide$markerClass">')
+        ..write('<script type="text/markdown">')
         ..write(_guard(renderedBlocks))
         ..write('</script></section>');
     }
@@ -137,6 +139,47 @@ class MarpHtmlService {
     }
     slides.add(buf.toString().trim());
     return slides.where((s) => s.isNotEmpty).toList();
+  }
+
+  static final RegExp _listStyleComment = RegExp(
+    r'<!--\s*ocideck_list_style:\s*(\w+)',
+  );
+  static final RegExp _bulletMarkerComment = RegExp(
+    r'<!--\s*ocideck_bullet_marker:\s*(\w+)',
+  );
+
+  /// Extra `<section>` class that turns this slide's plain bullets into cat-paw
+  /// markers (` paw-bullets`), or `''`. The decision is taken entirely from the
+  /// `ocideck_bullet_marker` comment that the *export* markdown carries for
+  /// every paw-rendering bullet slide (see `MarkdownService`, `forExport`). A
+  /// free-markdown slide that merely contains a `-` list never carries that
+  /// comment, so it never gets a paw — keeping HTML, app and PDF/PPTX identical.
+  /// Numbered, checklist and rich-text slides keep their own markers.
+  static String _bulletMarkerSectionClass(String slideMarkdown) {
+    final style = _listStyleComment.firstMatch(slideMarkdown)?.group(1);
+    if (style == 'numbered' || style == 'checklist' || style == 'richText') {
+      return '';
+    }
+    final marker = _bulletMarkerComment.firstMatch(slideMarkdown)?.group(1);
+    return marker == BulletMarker.paw.name ? ' paw-bullets' : '';
+  }
+
+  /// A self-contained cat-paw as an inline SVG `data:` URI, with [accent] baked
+  /// in as the fill. Used as the `li::before` marker for paw bullet lists. The
+  /// whole SVG is percent-encoded, so the (theme-controlled) colour value can
+  /// never break out of the attribute.
+  static String _pawDataUri(String accent) {
+    const path =
+        "M8 9.28Q12.64 9.28 10.32 12.4Q8 15.52 5.68 12.4Q3.36 9.28 8 9.28Z";
+    final svg =
+        "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'>"
+        "<path d='$path' fill='$accent'/>"
+        "<ellipse cx='2.56' cy='6.88' rx='1.76' ry='2.4' fill='$accent' transform='rotate(-31.5 2.56 6.88)'/>"
+        "<ellipse cx='6.24' cy='3.36' rx='1.92' ry='2.8' fill='$accent' transform='rotate(-10.3 6.24 3.36)'/>"
+        "<ellipse cx='9.76' cy='3.36' rx='1.92' ry='2.8' fill='$accent' transform='rotate(10.3 9.76 3.36)'/>"
+        "<ellipse cx='13.44' cy='6.88' rx='1.76' ry='2.4' fill='$accent' transform='rotate(31.5 13.44 6.88)'/>"
+        "</svg>";
+    return 'data:image/svg+xml,${Uri.encodeComponent(svg)}';
   }
 
   /// Neutralise any `</script` inside inlined content so it can't break out of
@@ -1067,7 +1110,7 @@ class MarpHtmlService {
       final color = _color(spec, si, theme);
       b.write(
         '<polygon points="$pts" fill="$color" fill-opacity="0.16" '
-        'stroke="$color" stroke-width="3" stroke-linejoin="round"/>',
+        'stroke="$color" stroke-width="2" stroke-linejoin="round"/>',
       );
     }
   }
@@ -1144,6 +1187,14 @@ class MarpHtmlService {
         '.slide h2{font-size:34px;margin:.15em 0;color:${t.accentColor}}'
         '.slide a{color:${t.accentColor}}'
         '.slide p,.slide li{font-size:24px;line-height:1.45}'
+        // Cat-paw bullet markers (only on slides tagged .paw-bullets). The dot
+        // is removed and an inline-SVG paw is absolutely positioned in the gutter
+        // so it scales with the text and never disturbs the line box.
+        '.slide.paw-bullets ul{list-style:none;padding-left:1.5em}'
+        '.slide.paw-bullets ul li{position:relative}'
+        '.slide.paw-bullets ul li::before{content:"";position:absolute;'
+        'left:-1.4em;top:.5em;width:.78em;height:.78em;'
+        'background:url("${_pawDataUri(t.accentColor)}") center/contain no-repeat}'
         '.slide pre{background:${t.codeBackgroundColor};color:${t.codeTextColor};'
         'border:1px solid ${t.codeTextColor}38;border-radius:6px;'
         'padding:16px;overflow:auto;font-size:18px;font-family:$codeFamily}'
