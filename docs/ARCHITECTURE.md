@@ -25,7 +25,7 @@ lib/
   state/      # Riverpod providers: deck, editor, settings, tabs, clipboard,
               # webdav
   widgets/    # app shell, panels, dialogs, per-type editors, slides, presenter
-  l10n/       # AppLocalizations (8 languages)
+  l10n/       # AppLocalizations + translations/<lang>.dart (8 languages)
   theme/      # app theming
   utils/      # small shared helpers (clipboard table parsing, URL launching)
 ```
@@ -163,6 +163,16 @@ audience window, thumbnails, and export dialog.
 
 - Keyboard navigation, presenter view, blank screen, grid overview, auto-advance,
   and the **annotation tools** (pen/highlighter/eraser/laser).
+- The single `_FullscreenPresenterState` is split for navigability into
+  `widgets/presentation/parts/presenter_*.dart` (questions, table, ink, playback,
+  displays, navigation, keys, notes, overlays). Each is a `part of` the main file
+  and adds one `extension _PresenterX on _FullscreenPresenterState`, so the state
+  and all imports stay in the main library. Two rules for this pattern: extensions
+  can't call the protected `setState`, so they go through the main class's
+  `_rebuild(fn)` wrapper; and `static` members used by a part must live at
+  top-level (e.g. `_questionTickMs`, `_digits`), since extensions don't see class
+  statics. The main file keeps the fields, lifecycle (`initState`/`dispose`/
+  `build`), `_slideCanvas`, and the shared getters.
 - Neighbour slide images are **precached** and `gaplessPlayback` is on, so slide
   changes never flash black (important for screen recording).
 - **Rehearsal timing** lives in `services/rehearsal_controller.dart` — a plain,
@@ -219,6 +229,18 @@ documented in the diff) and re-test the dual-screen presenter.
 
 ## Localization
 
-`l10n/app_localizations.dart` holds Dutch source strings (`d('…')`) and
-translation maps for en/it/de/fr/es/fy/pap. A test enforces that every literal
-`.d('…')` has a translation in every language — add new strings to all maps.
+Dutch is the source language: UI code calls `d('Nederlandse brontekst')` (literal
+source) or `t('key')` (keyed). `l10n/app_localizations.dart` keeps only the
+`AppLocalizations` class and delegate, and **assembles** the three lookup maps
+(`_strings`, `_dutchSourceStrings`, `_dutchSourceStringAdditions`) from one file
+per language. The translation data lives in `l10n/translations/<lang>.dart`
+(nl/en/it/de/fr/es/fy/pap), each a `part of '../app_localizations.dart'` that
+declares `_strings<Lang>`, `_dutchSource<Lang>`, and `_dutchSourceAdd<Lang>`
+(Dutch only needs `_stringsNl`, being the source).
+
+- **Translate or add a string:** edit the relevant language file(s). A test
+  (`test/app_localizations_test.dart`) fails unless every literal `d('…')` has a
+  translation in *every* language.
+- **Add a language:** create `translations/<lang>.dart`, add its `part` directive
+  and its entry in each of the three assembly maps in `app_localizations.dart`,
+  and register it in `supportedLocales` and `languageNames`.
