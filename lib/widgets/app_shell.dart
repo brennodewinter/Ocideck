@@ -717,7 +717,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     void openFullDeckPreview() {
       Navigator.push(
         context,
-        MaterialPageRoute(
+        MaterialPageRoute<void>(
           builder: (_) =>
               FullDeckPreview(deck: deck, themeProfile: deck.themeProfile),
         ),

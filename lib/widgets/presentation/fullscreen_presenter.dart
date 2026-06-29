@@ -220,7 +220,7 @@ class FullscreenPresenter extends StatefulWidget {
       if (context.mounted) {
         await Navigator.push(
           context,
-          PageRouteBuilder(
+          PageRouteBuilder<void>(
             opaque: true,
             pageBuilder: (context, anim, anim2) => FullscreenPresenter(
               slides: slides,
@@ -358,7 +358,7 @@ class FullscreenPresenter extends StatefulWidget {
       if (context.mounted) {
         await Navigator.push(
           context,
-          PageRouteBuilder(
+          PageRouteBuilder<void>(
             opaque: true,
             pageBuilder: (context, anim, anim2) => FullscreenPresenter(
               slides: slides,
