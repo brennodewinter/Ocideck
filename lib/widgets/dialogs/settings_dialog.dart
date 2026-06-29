@@ -1312,6 +1312,43 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           dense: true,
         ),
         const SizedBox(height: 8),
+        InputDecorator(
+          decoration: InputDecoration(
+            labelText: l10n.d('Lettertype interface'),
+            isDense: true,
+            prefixIcon: const Icon(Icons.font_download_outlined, size: 18),
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              value:
+                  AppAppearanceProfile.uiFonts.contains(
+                    _appearanceProfile.fontFamily,
+                  )
+                  ? _appearanceProfile.fontFamily
+                  : 'Roboto',
+              isExpanded: true,
+              isDense: true,
+              items: [
+                for (final family in AppAppearanceProfile.uiFonts)
+                  DropdownMenuItem(
+                    value: family,
+                    child: Text(family, style: TextStyle(fontFamily: family)),
+                  ),
+              ],
+              onChanged: editable
+                  ? (value) {
+                      if (value == null) return;
+                      setState(() {
+                        _appearanceProfile = _appearanceProfile.copyWith(
+                          fontFamily: value,
+                        );
+                      });
+                    }
+                  : null,
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
         _appearanceColorSetting(
           l10n.d('Hoofdkleur en bovenbalk'),
           _appearanceProfile.primaryColor,

@@ -535,7 +535,10 @@ Implementation: `lib/services/markdown_validator.dart` (unit tests in
   Every colour can be picked from the presets or entered as a custom hex value. The
   Colours and Logo tabs show which profile you're editing. The bundled Marp theme
   is `assets/themes/ocideck.css`.
-- **App appearance** (including a dark interface) is configurable in settings.
+- **App appearance** (a dark interface, the accent and panel colours, and the
+  **interface font** — Roboto, Inter, Lora or EB Garamond, all bundled so the
+  choice also holds on the web build) is configurable in settings. Create a
+  custom app theme (the built-ins are read-only) to change them.
 - **Cockpit colour schemes** set the status colours of the cockpit instruments —
   *good* (green), *warning* (amber), *critical* (red) and *too low/cold* (blue,
   used below a meter's lower bound), plus the artificial horizon's *sky* (blue)

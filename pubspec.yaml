@@ -86,3 +86,12 @@ flutter:
     - family: Roboto
       fonts:
         - asset: assets/fonts/Roboto-Variable.ttf
+    # Extra interface fonts the user can pick for the app UI. Bundled (not
+    # system fonts) so the choice also works in the hardened web build and in
+    # PDF/PPTX export.
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Variable.ttf
+    - family: Lora
+      fonts:
+        - asset: assets/fonts/Lora-Variable.ttf

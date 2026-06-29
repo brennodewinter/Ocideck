@@ -19,6 +19,8 @@ Shipped inside the app and embedded into the **offline HTML export**
 | [MathJax](https://github.com/mathjax/MathJax) (`tex-svg.js`) | Math rendering in the export | Apache-2.0 |
 | [EB Garamond](https://github.com/octaviopardo/EBGaramond12) font | Bundled deck font | SIL Open Font License 1.1 |
 | [Roboto](https://github.com/googlefonts/roboto-classic) font | Bundled UI font (replaces the runtime fetch from fonts.gstatic.com) | SIL Open Font License 1.1 |
+| [Inter](https://github.com/rsms/inter) font | Bundled selectable interface font | SIL Open Font License 1.1 |
+| [Lora](https://github.com/cyrealtype/Lora-Cyrillic) font | Bundled selectable interface font | SIL Open Font License 1.1 |
 
 The exact pinned version, source URL and SHA-256 of every vendored JS bundle
 live in [`assets/web_export/MANIFEST.json`](assets/web_export/MANIFEST.json).

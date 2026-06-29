@@ -262,6 +262,11 @@ class AppAppearanceProfile {
   final String panelColor;
   final String panelTextColor;
 
+  /// The interface font family — one of [uiFonts], all bundled so the choice
+  /// renders on every platform (including the hardened web build). Default
+  /// Roboto.
+  final String fontFamily;
+
   const AppAppearanceProfile({
     required this.name,
     this.isBuiltIn = false,
@@ -274,7 +279,12 @@ class AppAppearanceProfile {
     required this.mutedTextColor,
     required this.panelColor,
     required this.panelTextColor,
+    this.fontFamily = 'Roboto',
   });
+
+  /// Interface fonts the user can pick for the app UI. All bundled in
+  /// pubspec.yaml so they work on desktop, the hardened web build, and export.
+  static const uiFonts = ['Roboto', 'Inter', 'Lora', 'EB Garamond'];
 
   static const basic = AppAppearanceProfile(
     name: 'Basic',
@@ -330,6 +340,7 @@ class AppAppearanceProfile {
     String? mutedTextColor,
     String? panelColor,
     String? panelTextColor,
+    String? fontFamily,
   }) {
     return AppAppearanceProfile(
       name: name ?? this.name,
@@ -343,6 +354,7 @@ class AppAppearanceProfile {
       mutedTextColor: mutedTextColor ?? this.mutedTextColor,
       panelColor: panelColor ?? this.panelColor,
       panelTextColor: panelTextColor ?? this.panelTextColor,
+      fontFamily: fontFamily ?? this.fontFamily,
     );
   }
 
@@ -359,6 +371,7 @@ class AppAppearanceProfile {
       'mutedTextColor': mutedTextColor,
       'panelColor': panelColor,
       'panelTextColor': panelTextColor,
+      'fontFamily': fontFamily,
     };
   }
 
@@ -376,6 +389,7 @@ class AppAppearanceProfile {
       mutedTextColor: json['mutedTextColor'] as String? ?? basic.mutedTextColor,
       panelColor: json['panelColor'] as String? ?? basic.panelColor,
       panelTextColor: json['panelTextColor'] as String? ?? basic.panelTextColor,
+      fontFamily: json['fontFamily'] as String? ?? 'Roboto',
     );
   }
 }

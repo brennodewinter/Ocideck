@@ -245,4 +245,52 @@ void main() {
       expect(n.state.exportDirectory, isNull);
     });
   });
+
+  group('app interface font', () {
+    const custom = AppAppearanceProfile(
+      name: 'Eigen',
+      primaryColor: '#000000',
+      accentColor: '#111111',
+      backgroundColor: '#222222',
+      surfaceColor: '#333333',
+      textColor: '#444444',
+      mutedTextColor: '#555555',
+      panelColor: '#666666',
+      panelTextColor: '#777777',
+      fontFamily: 'Inter',
+    );
+
+    test('offered UI fonts are the bundled families', () {
+      expect(
+        AppAppearanceProfile.uiFonts,
+        containsAll(<String>['Roboto', 'Inter', 'Lora', 'EB Garamond']),
+      );
+      expect(AppAppearanceProfile.basic.fontFamily, 'Roboto');
+    });
+
+    test('fontFamily round-trips and copyWith updates it', () {
+      expect(
+        AppAppearanceProfile.fromJson(custom.toJson()).fontFamily,
+        'Inter',
+      );
+      expect(custom.copyWith(fontFamily: 'Lora').fontFamily, 'Lora');
+      // Legacy JSON without the field falls back to Roboto.
+      final legacy = AppAppearanceProfile.fromJson(
+        Map<String, Object?>.from(custom.toJson())..remove('fontFamily'),
+      );
+      expect(legacy.fontFamily, 'Roboto');
+    });
+
+    test('saving a custom app theme persists its font', () async {
+      final notifier = await _loadedNotifier();
+      final created = await notifier.createAppAppearanceProfile(
+        base: AppAppearanceProfile.basic,
+      );
+      await notifier.saveAppAppearanceProfile(
+        created.copyWith(name: 'Lettertype-thema', fontFamily: 'Lora'),
+        previousName: created.name,
+      );
+      expect(notifier.state.appAppearanceProfile.fontFamily, 'Lora');
+    });
+  });
 }

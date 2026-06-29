@@ -982,6 +982,7 @@ const _dutchSourceStrings = {
     'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
         'This is a built-in theme. Create a copy to customize its colors.',
     'Donkere interface': 'Dark interface',
+    'Lettertype interface': 'Interface font',
     'Past contrast, invoervelden en systeemcomponenten aan.':
         'Adjusts contrast, input fields, and system components.',
     'Hoofdkleur en bovenbalk': 'Primary color and top bar',
@@ -1329,6 +1330,7 @@ const _dutchSourceStrings = {
     'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
         'Questo è un tema integrato. Crea una copia per personalizzare i colori.',
     'Donkere interface': 'Interfaccia scura',
+    'Lettertype interface': 'Carattere interfaccia',
     'Past contrast, invoervelden en systeemcomponenten aan.':
         'Adatta contrasto, campi di input e componenti di sistema.',
     'Hoofdkleur en bovenbalk': 'Colore principale e barra superiore',
@@ -1550,6 +1552,7 @@ const _dutchSourceStrings = {
     'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
         'Dies ist ein integriertes Design. Erstellen Sie eine Kopie, um die Farben anzupassen.',
     'Donkere interface': 'Dunkle Oberfläche',
+    'Lettertype interface': 'Schriftart der Oberfläche',
     'Past contrast, invoervelden en systeemcomponenten aan.':
         'Passt Kontrast, Eingabefelder und Systemkomponenten an.',
     'Hoofdkleur en bovenbalk': 'Hauptfarbe und obere Leiste',
@@ -1772,6 +1775,7 @@ const _dutchSourceStrings = {
     'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
         'Ce thème est intégré. Créez une copie pour personnaliser ses couleurs.',
     'Donkere interface': 'Interface sombre',
+    'Lettertype interface': 'Police de l’interface',
     'Past contrast, invoervelden en systeemcomponenten aan.':
         'Adapte le contraste, les champs de saisie et les composants système.',
     'Hoofdkleur en bovenbalk': 'Couleur principale et barre supérieure',
@@ -1993,6 +1997,7 @@ const _dutchSourceStrings = {
     'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
         'Este es un tema integrado. Crea una copia para personalizar los colores.',
     'Donkere interface': 'Interfaz oscura',
+    'Lettertype interface': 'Fuente de la interfaz',
     'Past contrast, invoervelden en systeemcomponenten aan.':
         'Ajusta el contraste, los campos de entrada y los componentes del sistema.',
     'Hoofdkleur en bovenbalk': 'Color principal y barra superior',
@@ -2214,6 +2219,7 @@ const _dutchSourceStrings = {
     'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
         'Dit is in ynboud tema. Meitsje in kopy om de kleuren oan te passen.',
     'Donkere interface': 'Donkere ynterface',
+    'Lettertype interface': 'Lettertype ynterface',
     'Past contrast, invoervelden en systeemcomponenten aan.':
         'Past kontrast, ynfierfjilden en systeemkomponinten oan.',
     'Hoofdkleur en bovenbalk': 'Haadkleur en boppebalke',
@@ -2445,6 +2451,7 @@ const _dutchSourceStrings = {
     'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
         'Esaki ta un tema integrá. Krea un kopia pa personalisá e kolónan.',
     'Donkere interface': 'Interfas skur',
+    'Lettertype interface': 'Lettertipo interfase',
     'Past contrast, invoervelden en systeemcomponenten aan.':
         'Ta adaptá kontraste, kamponan di entrada i komponentenan di sistema.',
     'Hoofdkleur en bovenbalk': 'Koló prinsipal i bara ariba',
