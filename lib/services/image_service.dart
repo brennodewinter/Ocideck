@@ -36,7 +36,8 @@ class ImageService {
       } finally {
         await raf.close();
       }
-    } catch (_) {
+    } catch (e) {
+      logWarning('ImageService: image signature probe failed', e);
       return false;
     }
   }
@@ -73,7 +74,8 @@ class ImageService {
     try {
       final len = await File(path).length();
       return len > 0 && len <= maxMediaBytes;
-    } catch (_) {
+    } catch (e) {
+      logWarning('ImageService: media size check failed', e);
       return false;
     }
   }

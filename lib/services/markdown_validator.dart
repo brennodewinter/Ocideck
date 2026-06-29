@@ -3,6 +3,7 @@ import 'dart:convert';
 import '../models/deck.dart';
 import '../models/markdown_validation.dart';
 import 'markdown_service.dart';
+import '../utils/log.dart';
 
 /// Validates deck markdown against what [MarkdownService] can parse reliably.
 class MarkdownValidator {
@@ -520,7 +521,8 @@ class MarkdownValidator {
           ),
         );
       }
-    } catch (_) {
+    } catch (e) {
+      logWarning('MarkdownValidator: chart JSON parse failed', e);
       issues.add(
         MarkdownValidationIssue(
           line: lineNo(openingIndex + 1),
@@ -603,7 +605,8 @@ class MarkdownValidator {
           ),
         );
       }
-    } catch (_) {
+    } catch (e) {
+      logWarning('MarkdownValidator: cockpit JSON parse failed', e);
       issues.add(
         MarkdownValidationIssue(
           line: lineNo(openingIndex + 1),
@@ -803,7 +806,8 @@ class MarkdownValidator {
       if (prefix.contains('_title')) return true;
       final raw = jsonDecode(decoded);
       return raw is List;
-    } catch (_) {
+    } catch (e) {
+      logWarning('MarkdownValidator: encoded payload is not valid', e);
       return false;
     }
   }

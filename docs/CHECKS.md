@@ -73,9 +73,10 @@ These three run on every push and pull request (and as `make check`).
 ### `make check-conventions`
 - **Runs:** `dart run tool/check_conventions.dart`
 - **Covers:** two project conventions in `lib/` — **no `print()`** (diagnostics
-  go through the logger in `lib/utils/log.dart`), and **no new bare `catch (_)`**
+  go through the logger in `lib/utils/log.dart`), and **no bare `catch (_)`**
   (silently swallowing errors). The bare-`catch (_)` rule is a **ratchet**: a
-  baseline count in the script that may shrink but never grow.
+  baseline count in the script that may shrink but never grow — currently **0**,
+  every swallow routes a named error through `logError`/`logWarning`.
 - **Failure means:** route the diagnostic through `logError`, or — if you removed
   a `catch (_)` — lower `catchUnderscoreBaseline` in the script to lock it in.
 

@@ -2,17 +2,16 @@
 // lib/utils/log.dart):
 //
 //   * No `print(` — diagnostics go through the logger, never stdout.
-//   * No NEW bare `catch (_)` — swallowing errors silently hides failures; catch
-//     a typed error and route it through `logError`. A handful of legacy sites
-//     remain, so this is a RATCHET: the count may not grow. Lower the baseline
-//     as you migrate the remaining ones; it must never be raised.
+//   * No bare `catch (_)` — swallowing errors silently hides failures; catch a
+//     named error and route it through `logError`/`logWarning`. This is a
+//     RATCHET: the count may not grow. It is currently 0 — keep it there.
 //
 // Exits non-zero (with the offending locations) when a rule is violated.
 
 import 'dart:io';
 
-/// Bare `catch (_)` sites still present in lib/. Ratchet only downwards.
-const int catchUnderscoreBaseline = 17;
+/// Bare `catch (_)` sites allowed in lib/. Ratchet only downwards (now 0).
+const int catchUnderscoreBaseline = 0;
 
 final _print = RegExp(r'(?<![\w.])print\(');
 final _catchUnderscore = RegExp(r'catch\s*\(\s*_\s*\)');
@@ -25,6 +24,9 @@ void main() {
     final lines = file.readAsLinesSync();
     for (var i = 0; i < lines.length; i++) {
       final line = lines[i];
+      // Skip full-line comments — the patterns are referenced in docs/comments
+      // (e.g. the logger's own docstring) but never appear as real code there.
+      if (line.trimLeft().startsWith('//')) continue;
       if (_print.hasMatch(line)) printHits.add('${file.path}:${i + 1}');
       if (_catchUnderscore.hasMatch(line)) catchCount++;
     }

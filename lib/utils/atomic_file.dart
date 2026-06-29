@@ -17,6 +17,8 @@ library;
 import 'dart:convert';
 import 'dart:io';
 
+import 'log.dart';
+
 /// Atomically write [bytes] to [target] via a sibling temp file + rename.
 Future<void> writeBytesAtomic(File target, List<int> bytes) async {
   final tmp = File('${target.path}.tmp');
@@ -35,13 +37,15 @@ Future<void> writeBytesAtomic(File target, List<int> bytes) async {
         rethrow;
       }
     }
-  } catch (_) {
-    // Never leave a stray temp file behind on failure.
+  } catch (e) {
+    // Log the write failure (we still rethrow) and never leave a stray temp.
+    logWarning('writeBytesAtomic: write failed', e);
     if (await tmp.exists()) {
       try {
         await tmp.delete();
-      } catch (_) {
+      } catch (e) {
         // Best effort; surfacing the original write error matters more.
+        logWarning('writeBytesAtomic: temp cleanup failed', e);
       }
     }
     rethrow;

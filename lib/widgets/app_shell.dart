@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 import 'package:window_manager/window_manager.dart';
+
+import '../utils/log.dart';
 import '../models/deck.dart';
 import '../models/slide.dart';
 import '../models/slide_quality.dart';
@@ -644,8 +646,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         if (imageIssues.isNotEmpty) {
           quality = SlideQualityResult([...syncQuality.issues, ...imageIssues]);
         }
-      } catch (_) {
+      } catch (e) {
         // Fall back to the sync result if the async pass fails.
+        logWarning('export: async image-contrast pass failed', e);
       }
       if (!context.mounted) return;
       await ExportDialog.show(

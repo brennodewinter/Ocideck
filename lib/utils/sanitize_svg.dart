@@ -1,5 +1,7 @@
 import 'package:xml/xml.dart';
 
+import 'log.dart';
+
 /// Strip dangerous elements/attributes from Mermaid SVG output before display.
 /// Returns null when the markup is empty or cannot be parsed safely.
 String? sanitizeMermaidSvg(String svg) {
@@ -8,7 +10,8 @@ String? sanitizeMermaidSvg(String svg) {
   final XmlDocument document;
   try {
     document = XmlDocument.parse(svg);
-  } catch (_) {
+  } catch (e) {
+    logWarning('sanitizeMermaidSvg: SVG parse failed', e);
     return null;
   }
 

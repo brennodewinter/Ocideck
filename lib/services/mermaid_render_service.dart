@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../utils/log.dart';
 import '../utils/lru_cache.dart';
 import '../utils/sanitize_svg.dart';
 
@@ -123,7 +124,8 @@ window.__renderMermaid = async function(source) {
       } else {
         job.completer.complete(null);
       }
-    } catch (_) {
+    } catch (e) {
+      logError('MermaidRender: render failed', e);
       job.completer.complete(null);
     } finally {
       _busy = false;
@@ -137,7 +139,9 @@ window.__renderMermaid = async function(source) {
     if (text.startsWith('"') && text.endsWith('"') && text.length >= 2) {
       try {
         text = jsonDecode(text) as String;
-      } catch (_) {}
+      } catch (e) {
+        logWarning('MermaidRender: JSON-string unwrap failed', e);
+      }
     }
     return text;
   }
@@ -154,7 +158,8 @@ bool get isFlutterTest {
   if (kIsWeb) return false;
   try {
     return Platform.environment.containsKey('FLUTTER_TEST');
-  } catch (_) {
+  } catch (e) {
+    logWarning('isFlutterTest: Platform.environment unavailable', e);
     return false;
   }
 }

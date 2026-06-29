@@ -4,6 +4,8 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 
+import 'log.dart';
+
 /// Average colour of a decoded image, cached by path + last-modified time +
 /// length so the quality pass can re-run cheaply on every edit. Used to
 /// estimate the background a title slide's text sits on (see
@@ -31,7 +33,8 @@ Future<Color?> averageImageColor(String resolvedPath) async {
     final stat = await file.stat();
     mtimeMs = stat.modified.millisecondsSinceEpoch;
     length = stat.size;
-  } catch (_) {
+  } catch (e) {
+    logWarning('averageImageColor: stat failed', e);
     return null;
   }
 
@@ -63,7 +66,8 @@ Future<Color?> averageImageColor(String resolvedPath) async {
     } finally {
       codec.dispose();
     }
-  } catch (_) {
+  } catch (e) {
+    logError('averageImageColor: decode failed', e);
     result = null;
   }
 
