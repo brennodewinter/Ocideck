@@ -70,12 +70,16 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
           ),
         ),
       ),
+      // Split the two actions to opposite ends. AlertDialog lays its actions out
+      // in an OverflowBar (not a Flex), so a Spacer/Expanded here throws a
+      // parentData subtype error at layout time (swallowed into the release
+      // ErrorWidget placeholder). actionsAlignment is the correct lever.
+      actionsAlignment: MainAxisAlignment.spaceBetween,
       actions: [
         TextButton(
           onPressed: () => PrivacyStatementContent.launchLicenseOnline(),
           child: Text(l10n.d('Volledige licentie online')),
         ),
-        const Spacer(),
         ElevatedButton(
           onPressed: () => _acceptConsent(ref),
           child: Text(l10n.d('Akkoord gaan')),
