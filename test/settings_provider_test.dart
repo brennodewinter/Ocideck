@@ -171,4 +171,78 @@ void main() {
       contains('Europa'),
     );
   });
+
+  group('simple settings setters', () {
+    test('export TLP bounds set and clear', () async {
+      final n = await _loadedNotifier();
+      await n.setMaxReleaseExportTlp('amber');
+      await n.setMinRequiredExportTlp('green');
+      expect(n.state.maxReleaseExportTlpKey, 'amber');
+      expect(n.state.minRequiredExportTlpKey, 'green');
+
+      await n.setMaxReleaseExportTlp(null);
+      await n.setMinRequiredExportTlp(null);
+      expect(n.state.maxReleaseExportTlpKey, isNull);
+      expect(n.state.minRequiredExportTlpKey, isNull);
+    });
+
+    test('classification and quality export toggles', () async {
+      final n = await _loadedNotifier();
+      await n.setRequireClassificationOnExport(true);
+      await n.setClassificationWatermarkEnabled(true);
+      await n.setQualityWarningsOnExport(false);
+      await n.setQualityBlockExportOnErrors(true);
+      expect(n.state.requireClassificationOnExport, isTrue);
+      expect(n.state.classificationWatermarkEnabled, isTrue);
+      expect(n.state.qualityWarningsOnExport, isFalse);
+      expect(n.state.qualityBlockExportOnErrors, isTrue);
+    });
+
+    test('uiTextScale is clamped to 1.0..2.0', () async {
+      final n = await _loadedNotifier();
+      await n.setUiTextScale(5);
+      expect(n.state.uiTextScale, 2.0);
+      await n.setUiTextScale(0.1);
+      expect(n.state.uiTextScale, 1.0);
+      await n.setUiTextScale(1.5);
+      expect(n.state.uiTextScale, 1.5);
+    });
+
+    test('allowRemoteMedia and languageCode persist', () async {
+      final n = await _loadedNotifier();
+      await n.setAllowRemoteMedia(true);
+      await n.setLanguageCode('fy');
+      expect(n.state.allowRemoteMedia, isTrue);
+      expect(n.state.languageCode, 'fy');
+    });
+
+    test(
+      'addRecentFile de-duplicates, keeps newest first, caps at 10',
+      () async {
+        final n = await _loadedNotifier();
+        for (var i = 0; i < 12; i++) {
+          await n.addRecentFile('/deck_$i.md');
+        }
+        // Re-adding an existing path moves it to the front without duplicating.
+        await n.addRecentFile('/deck_5.md');
+        final recent = n.state.recentFiles;
+        expect(recent, hasLength(10));
+        expect(recent.first, '/deck_5.md');
+        expect(recent.where((p) => p == '/deck_5.md'), hasLength(1));
+      },
+    );
+
+    test('home and export directories set and clear', () async {
+      final n = await _loadedNotifier();
+      await n.setHomeDirectory('/home/decks');
+      await n.setExportDirectory('/export');
+      expect(n.state.homeDirectory, '/home/decks');
+      expect(n.state.exportDirectory, '/export');
+
+      await n.setHomeDirectory(null);
+      await n.setExportDirectory(null);
+      expect(n.state.homeDirectory, isNull);
+      expect(n.state.exportDirectory, isNull);
+    });
+  });
 }
