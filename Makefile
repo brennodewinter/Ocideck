@@ -1,4 +1,4 @@
-.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check licenses build-web build-macos build-windows build-linux build-all check check-full help
+.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check licenses check-conventions build-web check-web build-macos build-windows build-linux build-all check check-full help
 
 help:
 	@echo "OciDeck quality targets:"
@@ -14,7 +14,9 @@ help:
 	@echo "  make deps-outdated   Advisory dependency freshness report."
 	@echo "  make deps-check      Verify vendored JS bundles vs manifest + OSV CVEs."
 	@echo "  make licenses        Verify all dependencies use open-source licences."
+	@echo "  make check-conventions  No print(); bare catch (_) may not grow (ratchet)."
 	@echo "  make build-web       Build the hardened web bundle (self-hosted CanvasKit + CSP-safe loader)."
+	@echo "  make check-web       Build the web bundle and assert its hardening (CSP, self-hosted, fonts)."
 	@echo "  make build-macos     Build the macOS .app (macOS only)."
 	@echo "  make build-windows   Build the Windows app (Windows only)."
 	@echo "  make build-linux     Build the Linux bundle (Linux only)."
@@ -40,21 +42,24 @@ format-check:
 	@echo "Failure means: at least one Dart file needs 'dart format .'."
 	dart format --output=none --set-exit-if-changed .
 
-# Static analysis.
+# Static analysis. --fatal-infos makes info-level diagnostics fail the build too,
+# so the strict-casts/strict-raw-types/strict-inference modes in
+# analysis_options.yaml are actually enforced.
 analyze:
 	@echo "== OciDeck check: static analysis =="
-	@echo "Command: flutter analyze"
-	@echo "Covers: analyzer/lint/type checks for the Flutter app and tests."
+	@echo "Command: flutter analyze --fatal-infos"
+	@echo "Covers: analyzer/lint/type checks (incl. strict inference) for the app and tests."
 	@echo "Failure means: inspect analyzer diagnostics above the final summary."
-	flutter analyze
+	flutter analyze --fatal-infos
 
-# Run the full unit/widget test suite.
+# Run the full unit/widget test suite. Ordering is randomised so a test can't
+# silently depend on another test running first.
 test:
 	@echo "== OciDeck check: tests =="
-	@echo "Command: flutter test"
+	@echo "Command: flutter test --test-randomize-ordering-seed random"
 	@echo "Covers: all unit/widget tests under test/, including markdown round-trip, preview, export, provider, footer, and presenter tests."
 	@echo "Failure means: inspect the named failing test file and test case in the Flutter output."
-	flutter test
+	flutter test --test-randomize-ordering-seed random
 
 # Run the full test suite with coverage and summarise line coverage. The floor
 # guards against large regressions; raise it as coverage improves.
@@ -63,7 +68,7 @@ coverage:
 	@echo "Command: flutter test --coverage && dart run tool/coverage_summary.dart --min=50"
 	@echo "Covers: line coverage across every lib/ file a test imports."
 	@echo "Failure means: overall line coverage dropped below the required floor."
-	flutter test --coverage
+	flutter test --coverage --test-randomize-ordering-seed random
 	dart run tool/coverage_summary.dart --min=50
 
 # Contract tests for persistence and parsing.
@@ -143,6 +148,15 @@ licenses:
 	@echo "Failure means: a dependency uses an unrecognised or non-open-source licence — review it."
 	dart run tool/check_licenses.dart
 
+# Project-convention guard: no print() (use the logger in lib/utils/log.dart) and
+# no NEW bare `catch (_)` (a downward-only ratchet; see the script's baseline).
+check-conventions:
+	@echo "== OciDeck check: conventions =="
+	@echo "Command: dart run tool/check_conventions.dart"
+	@echo "Covers: no print() in lib/, and the bare catch (_) count may not grow."
+	@echo "Failure means: route diagnostics through logError, or lower the baseline."
+	dart run tool/check_conventions.dart
+
 # Build the hardened web bundle. Two flags do the security work:
 #   --no-web-resources-cdn  Self-host CanvasKit instead of fetching it from the
 #                           gstatic CDN, so the running app pulls ZERO third-party
@@ -158,6 +172,16 @@ build-web:
 	@echo "Covers: self-hosted CanvasKit (no third-party CDN) and a CSP-safe loader."
 	@echo "Output: build/web — serve behind the CSP declared in web/index.html."
 	flutter build web --release --no-web-resources-cdn --csp
+
+# Build the web bundle, then assert it kept its hardening: a strict CSP, a
+# self-hosted CanvasKit, and the bundled UI font (no gstatic). Guards against a
+# future change silently re-introducing a third-party origin or weakening the CSP.
+check-web: build-web
+	@echo "== OciDeck check: web hardening =="
+	@echo "Command: dart run tool/check_web_hardening.dart"
+	@echo "Covers: build/web CSP strictness, self-hosted CanvasKit, bundled font."
+	@echo "Failure means: the web bundle lost a hardening invariant — see the list."
+	dart run tool/check_web_hardening.dart
 
 # Native desktop release builds. Each target only works on its own OS — Flutter
 # cannot cross-compile a desktop bundle (a macOS .app needs macOS, a Windows
@@ -195,11 +219,12 @@ build-all:
 	@echo "== OciDeck build-all complete =="
 
 # Full local quality gate. Intended for humans, CI logs, and LLM-assisted debugging.
-check: format-check analyze test
+check: format-check analyze check-conventions test
 	@echo "== OciDeck check complete =="
-	@echo "Validated: formatting, static analysis, and the full Flutter test suite."
+	@echo "Validated: formatting, static analysis, conventions, and the full Flutter test suite."
 
-# Extended local check with advisory dependency freshness after the required gate.
-check-full: check licenses deps-check deps-outdated
+# Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
+# web-hardening assertion (rebuilds the web bundle), and a freshness report.
+check-full: check licenses deps-check check-web deps-outdated
 	@echo "== OciDeck extended check complete =="
-	@echo "Validated: required quality gate, licence compliance, bundled-JS CVEs, and dependency freshness."
+	@echo "Validated: required quality gate, licence compliance, bundled-JS CVEs, web hardening, and dependency freshness."

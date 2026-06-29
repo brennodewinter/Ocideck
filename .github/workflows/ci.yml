@@ -25,14 +25,19 @@ jobs:
       - name: Flutter version
         run: flutter --version
 
+      # --enforce-lockfile fails if pubspec.lock is out of date, keeping the
+      # dependency set reproducible (supply-chain hygiene).
       - name: Install dependencies
-        run: flutter pub get
+        run: flutter pub get --enforce-lockfile
 
       - name: Format check
         run: make format-check
 
       - name: Analyze
         run: make analyze
+
+      - name: Conventions (make check-conventions)
+        run: make check-conventions
 
       # Runs the full suite with coverage and enforces a line-coverage floor.
       - name: Test + coverage (make coverage)
@@ -78,7 +83,45 @@ jobs:
           cache: true
 
       - name: Install dependencies
-        run: flutter pub get
+        run: flutter pub get --enforce-lockfile
 
       - name: Test
-        run: flutter test
+        run: flutter test --test-randomize-ordering-seed random
+
+  # Build the web bundle and assert it kept its hardening (strict CSP,
+  # self-hosted CanvasKit, bundled UI font) — so a change can't silently
+  # re-introduce a third-party origin or weaken the CSP.
+  web-hardening:
+    name: Web hardening
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.44.2
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get --enforce-lockfile
+
+      - name: Build + assert web hardening (make check-web)
+        run: make check-web
+
+  # Validate internal Markdown links (relative file links) across the repo.
+  # --offline skips external URLs so the check can't flake on third-party sites.
+  docs-links:
+    name: Docs links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check Markdown links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --offline --no-progress "./**/*.md"
+          fail: true
