@@ -5,6 +5,7 @@ help:
 	@echo "  make check           Format check + static analysis + full Flutter test suite."
 	@echo "  make check-full      make check + dependency outdated report."
 	@echo "  make coverage        Run the test suite with coverage and print a line-coverage summary."
+	@echo "  make mutate          Mutation check for dead/untested branch operands (manual; FILE/TESTS overridable)."
 	@echo "  make test-contracts  Markdown/save-load contract and parsing tests."
 	@echo "  make test-preview    Slide rendering, footer, TLP, inline markdown, and preview tests."
 	@echo "  make test-export     Export and file-service smoke tests."
@@ -70,6 +71,25 @@ coverage:
 	@echo "Failure means: overall line coverage dropped below the required floor."
 	flutter test --coverage --test-randomize-ordering-seed random
 	dart run tool/coverage_summary.dart --min=60
+
+# Mutation check for the "dead/untested boolean-operand" bug class that line
+# coverage and `dart analyze` both miss: an `||`/`&&` operand that can never be
+# true (e.g. a `startsWith('<!--')` on input whose comments were already
+# stripped). Coverage can't see it — the line is still hit via another operand.
+# Each String.startsWith/endsWith predicate is forced false and the tests rerun;
+# a SURVIVING mutant is a dead or untested predicate. Slow and the survivor list
+# needs triage (dead -> remove, untested -> add a test), so this is a manual
+# tool, NOT part of `check`. Override FILE/TESTS to target another parser:
+#   make mutate FILE=lib/services/markdown_service.dart \
+#     TESTS="test/markdown_round_trip_test.dart test/markdown_service_test.dart"
+FILE  ?= lib/services/markdown_validator.dart
+TESTS ?= test/markdown_validator_test.dart
+mutate:
+	@echo "== OciDeck check: mutation (dead-branch) =="
+	@echo "Command: dart run tool/mutation_check.dart $(FILE) $(TESTS)"
+	@echo "Covers: every String.startsWith/endsWith predicate in FILE, forced false."
+	@echo "Failure means: a predicate survived — it is dead or untested; review it."
+	dart run tool/mutation_check.dart $(FILE) $(TESTS)
 
 # Contract tests for persistence and parsing.
 test-contracts:
