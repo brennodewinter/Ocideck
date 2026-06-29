@@ -25,15 +25,22 @@ make check-full   # check + licenses + deps-check + deps-outdated
 | Check | Verifies | In `make check` | In `check-full` | In CI |
 | --- | --- | :---: | :---: | :---: |
 | [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ |
-| [`make analyze`](#make-analyze) | No analyzer/lint/type issues | ✅ | ✅ | ✅ |
-| [`make test`](#make-test) | Full unit/widget suite passes | ✅ | ✅ | ✅ |
+| [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ |
+| [`make check-conventions`](#make-check-conventions) | No `print()`; bare `catch (_)` ratchet | ✅ | ✅ | ✅ |
+| [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 50% floor | — | — | ✅ (gate) |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ |
+| [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ |
 | [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — |
 
-Enforced inside `make test`: **localization in all 8 languages** and the
-**path/SSRF guards** (see [below](#enforced-behaviours-worth-calling-out)). The
+CI additionally runs `flutter pub get --enforce-lockfile` (reproducible
+dependencies) and a **Markdown link check** (`lychee --offline`).
+
+Enforced inside `make test`: **localization in all 8 languages**, the
+**path/SSRF guards**, and the **HTML-export sanitisation** invariants (strict
+export CSP + injected-`</script>` neutralisation; see
+[below](#enforced-behaviours-worth-calling-out)). The
 [targeted test groups](#targeted-test-groups) (`make test-contracts`,
 `test-preview`, `test-export`, `test-state`, `test-services`, `test-presenter`)
 are subsets of `make test` for focused work — not separate gates.
@@ -55,17 +62,32 @@ These three run on every push and pull request (and as `make check`).
   whole tree.
 
 ### `make analyze`
-- **Runs:** `flutter analyze`
+- **Runs:** `flutter analyze --fatal-infos`
 - **Covers:** the analyzer, lints, and type checks for the app and tests, using
-  the rules in `analysis_options.yaml`.
-- **Failure means:** a warning, lint, or type error. **Zero analyzer warnings is
-  the bar** — read the diagnostics above the final summary and resolve each.
+  the rules in `analysis_options.yaml` — which enables `strict-casts`,
+  `strict-raw-types`, and `strict-inference`. `--fatal-infos` makes info-level
+  diagnostics fail the build, so those strict modes are actually enforced.
+- **Failure means:** a warning, lint, info, or type error. **Zero is the bar** —
+  read the diagnostics above the final summary and resolve each.
+
+### `make check-conventions`
+- **Runs:** `dart run tool/check_conventions.dart`
+- **Covers:** two project conventions in `lib/` — **no `print()`** (diagnostics
+  go through the logger in `lib/utils/log.dart`), and **no new bare `catch (_)`**
+  (silently swallowing errors). The bare-`catch (_)` rule is a **ratchet**: a
+  baseline count in the script that may shrink but never grow.
+- **Failure means:** route the diagnostic through `logError`, or — if you removed
+  a `catch (_)` — lower `catchUnderscoreBaseline` in the script to lock it in.
 
 ### `make test`
-- **Runs:** `flutter test` — the full unit/widget suite under `test/`.
+- **Runs:** `flutter test --test-randomize-ordering-seed random` — the full
+  unit/widget suite under `test/`, in a randomised order so no test can silently
+  depend on another running first.
 - **Covers:** Markdown round-trip, preview/rendering, export, providers/state,
   services, the presenter, localization, and more.
 - **Failure means:** inspect the named failing test file and case in the output.
+  If it only fails for some seeds, you have an order-dependent test — the seed is
+  printed at the top of the run so you can reproduce it.
 
 ### `make coverage`
 - **Runs:** `flutter test --coverage` then `dart run tool/coverage_summary.dart --min=50`.
@@ -98,6 +120,17 @@ These three run on every push and pull request (and as `make check`).
   manifest), or a pinned version now has a known vulnerability (upgrade it and
   refresh the manifest). This is the safe path to upgrade those bundles.
 
+### `make check-web`
+- **Runs:** `make build-web` then `dart run tool/check_web_hardening.dart`.
+- **Covers:** that the built `build/web` keeps its hardening — a strict CSP in
+  `index.html` (`script-src 'self' 'wasm-unsafe-eval'`, no `unsafe-inline`/
+  `unsafe-eval`, `connect-src 'self'`, `object-src 'none'`), CanvasKit
+  **self-hosted** (local wasm + the `useLocalCanvasKit` flag), and the UI font
+  **bundled** — so the running app pulls zero third-party origins.
+- **Failure means:** a change weakened the CSP or re-introduced a CDN/font fetch;
+  the script lists every broken invariant. See [`BUILD.md`](BUILD.md) for the
+  hardened build.
+
 ### `make deps-outdated` (advisory)
 - **Runs:** `flutter pub outdated`
 - **Covers:** dependency freshness only. **Advisory** — it may need network
@@ -117,6 +150,10 @@ These three run on every push and pull request (and as `make check`).
   `test/project_path_security_test.dart`, and the net-guard tests — they keep
   deck-supplied paths and URLs from escaping the project or reaching internal
   hosts.
+- **HTML-export sanitisation** is covered by `test/export_sanitization_test.dart`:
+  the export carries a strict, nonce-based CSP (no `unsafe-inline`/`unsafe-eval`,
+  `object-src 'none'`) and any `</script>` an untrusted deck injects is escaped
+  so it can't break out of the inert markdown data holder.
 
 ### Targeted test groups
 
@@ -136,16 +173,22 @@ For focused work, run only the relevant slice instead of the whole suite:
 ## Continuous integration
 
 ### `.github/workflows/ci.yml` — every push and pull request
-- **Gate (Linux)** — `runs-on: ubuntu-latest`: `make format-check`,
-  `make analyze`, `make coverage` (with the line-coverage floor), then
-  `make licenses` and `make deps-check`. Uploads the coverage report.
-- **Test matrix (macOS + Windows)** — runs `flutter test` on the other two
-  desktop OSes to catch platform-specific (path, `Platform.isX`) regressions the
-  Linux gate would miss. `make` is not reliably present on the Windows runner, so
-  this job calls Flutter directly.
+- **Gate (Linux)** — `runs-on: ubuntu-latest`: `flutter pub get
+  --enforce-lockfile`, then `make format-check`, `make analyze`,
+  `make check-conventions`, `make coverage` (with the line-coverage floor),
+  `make licenses`, and `make deps-check`. Uploads the coverage report.
+- **Test matrix (macOS + Windows)** — runs `flutter test
+  --test-randomize-ordering-seed random` on the other two desktop OSes to catch
+  platform-specific (path, `Platform.isX`) regressions the Linux gate would miss.
+  `make` is not reliably present on the Windows runner, so this job calls Flutter
+  directly.
+- **Web hardening (Linux)** — `make check-web`: builds the web bundle and asserts
+  its hardening invariants.
+- **Docs links (Linux)** — `lychee --offline` validates internal Markdown links
+  across the repo (external URLs are skipped so it can't flake).
 
 CI does **not** build native binaries here; it validates formatting, analysis,
-and tests, which are platform-independent.
+tests, and the web bundle's hardening, which are platform-independent.
 
 ### `.github/workflows/release.yml` — on a version tag (`v*`) or manual run
 Produces distributable artifacts. Desktop bundles cannot be cross-compiled, so
