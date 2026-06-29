@@ -172,7 +172,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _webdavRoot = TextEditingController(text: webdav?.rootPath ?? '');
     _webdavPassword = TextEditingController();
     _webdavTrusted = webdav?.trustedInternal ?? false;
-    _initialWebdavIdentity = '${webdav?.baseUrl ?? ''}|${webdav?.username ?? ''}';
+    _initialWebdavIdentity =
+        '${webdav?.baseUrl ?? ''}|${webdav?.username ?? ''}';
     if (webdav != null && webdav.isConfigured) {
       // Het wachtwoord staat in de keychain; laad het in zodat de gebruiker
       // ziet dat het er is en het niet opnieuw hoeft te typen.
@@ -383,7 +384,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   String _webdavErrorText(AppLocalizations l10n, WebdavError kind) {
     switch (kind) {
       case WebdavError.auth:
-        return l10n.d('Aanmelden mislukt — controleer gebruikersnaam en wachtwoord');
+        return l10n.d(
+          'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord',
+        );
       case WebdavError.blockedHost:
         return l10n.d(
           'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.',
@@ -2540,11 +2543,18 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             if (_webdavTestOk == true)
               Row(
                 children: [
-                  const Icon(Icons.check_circle, color: Color(0xFF2E7D64), size: 18),
+                  const Icon(
+                    Icons.check_circle,
+                    color: Color(0xFF2E7D64),
+                    size: 18,
+                  ),
                   const SizedBox(width: 6),
                   Text(
                     l10n.d('Verbinding gelukt'),
-                    style: const TextStyle(fontSize: 12, color: Color(0xFF2E7D64)),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF2E7D64),
+                    ),
                   ),
                 ],
               ),
@@ -2556,12 +2566,19 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.error_outline, color: Color(0xFFDC2626), size: 18),
+                const Icon(
+                  Icons.error_outline,
+                  color: Color(0xFFDC2626),
+                  size: 18,
+                ),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
                     testMsg,
-                    style: const TextStyle(fontSize: 12, color: Color(0xFFDC2626)),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFFDC2626),
+                    ),
                   ),
                 ),
               ],

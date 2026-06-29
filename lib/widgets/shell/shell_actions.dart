@@ -125,7 +125,9 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
         );
     if (!context.mounted) return;
     messenger.showSnackBar(
-      SnackBar(content: Text('${l10n.d('Opgeslagen op Nextcloud:')} /$targetPath')),
+      SnackBar(
+        content: Text('${l10n.d('Opgeslagen op Nextcloud:')} /$targetPath'),
+      ),
     );
   } on WebdavException catch (e) {
     messenger.showSnackBar(

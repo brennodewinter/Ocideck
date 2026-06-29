@@ -398,17 +398,20 @@ void main() {}
       return service.build(md, theme: theme);
     }
 
-    test('a paw theme tags bullet slides and emits the SVG marker CSS', () async {
-      final html = await exportHtml([
-        Slide.create(
-          SlideType.bullets,
-        ).copyWith(title: 'Punten', bullets: const ['Een', 'Twee']),
-      ], pawTheme);
+    test(
+      'a paw theme tags bullet slides and emits the SVG marker CSS',
+      () async {
+        final html = await exportHtml([
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Punten', bullets: const ['Een', 'Twee']),
+        ], pawTheme);
 
-      expect(html, contains('<section class="slide paw-bullets">'));
-      expect(html, contains('.slide.paw-bullets ul{list-style:none'));
-      expect(html, contains('data:image/svg+xml'));
-    });
+        expect(html, contains('<section class="slide paw-bullets">'));
+        expect(html, contains('.slide.paw-bullets ul{list-style:none'));
+        expect(html, contains('data:image/svg+xml'));
+      },
+    );
 
     test('a per-slide paw override beats a dot theme', () async {
       final html = await exportHtml([
@@ -454,15 +457,18 @@ void main() {}
       expect(numbered, isNot(contains('class="slide paw-bullets"')));
     });
 
-    test('a free-markdown slide with a "-" list never gets paws (parity)', () async {
-      final html = await exportHtml([
-        Slide.create(
-          SlideType.freeMarkdown,
-        ).copyWith(customMarkdown: '- Een\n- Twee'),
-      ], pawTheme);
+    test(
+      'a free-markdown slide with a "-" list never gets paws (parity)',
+      () async {
+        final html = await exportHtml([
+          Slide.create(
+            SlideType.freeMarkdown,
+          ).copyWith(customMarkdown: '- Een\n- Twee'),
+        ], pawTheme);
 
-      // The app renders this list without paws, so the export must not add them.
-      expect(html, isNot(contains('class="slide paw-bullets"')));
-    });
+        // The app renders this list without paws, so the export must not add them.
+        expect(html, isNot(contains('class="slide paw-bullets"')));
+      },
+    );
   });
 }

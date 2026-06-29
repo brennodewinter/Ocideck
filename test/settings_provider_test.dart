@@ -56,7 +56,8 @@ void main() {
     // the audience-window inline styles. An attacker-supplied value that breaks
     // out of the declaration must be discarded, not carried through.
     final back = ThemeProfile.fromJson(const {
-      'accentColor': "red}</style><meta http-equiv='refresh' "
+      'accentColor':
+          "red}</style><meta http-equiv='refresh' "
           "content='0;url=https://evil/phish'><style>",
       'slideBackgroundColor': 'url(http://evil/?leak)',
       'textColor': '#3366', // too short

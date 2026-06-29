@@ -260,7 +260,11 @@ class ThemeProfile {
       logoPath: json['logoPath'] as String?,
       logoPosition: json['logoPosition'] as String? ?? 'bottom-right',
       logoSize: (json['logoSize'] as num?)?.round() ?? 96,
-      fontFamily: _font(json['fontFamily'], AppSettings.availableFonts, 'Arial'),
+      fontFamily: _font(
+        json['fontFamily'],
+        AppSettings.availableFonts,
+        'Arial',
+      ),
       footerText: json['footerText'] as String? ?? '',
       footerShowPageNumbers: json['footerShowPageNumbers'] as bool? ?? false,
       footerPosition: json['footerPosition'] as String? ?? 'right',

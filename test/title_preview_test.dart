@@ -30,7 +30,9 @@ int _titleScrimCount(WidgetTester tester, ThemeProfile profile) {
     if (decoration is! BoxDecoration) return false;
     final gradient = decoration.gradient;
     return gradient is LinearGradient &&
-        gradient.colors.any((c) => (c.a > 0) && c.withValues(alpha: 1) == scrim);
+        gradient.colors.any(
+          (c) => (c.a > 0) && c.withValues(alpha: 1) == scrim,
+        );
   }).length;
 }
 

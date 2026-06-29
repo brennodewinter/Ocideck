@@ -85,45 +85,51 @@ void main() {
 
     String response(String href, {bool collection = false, int? size}) {
       final type = collection ? '<d:collection/>' : '';
-      final len = size == null ? '' : '<d:getcontentlength>$size</d:getcontentlength>';
+      final len = size == null
+          ? ''
+          : '<d:getcontentlength>$size</d:getcontentlength>';
       return '<d:response><d:href>$href</d:href><d:propstat><d:prop>'
           '<d:resourcetype>$type</d:resourcetype>$len'
           '</d:prop><d:status>HTTP/1.1 200 OK</d:status></d:propstat></d:response>';
     }
 
-    test('filters the collection itself and returns children relative to root', () {
-      final xml = body(
-        // The directory itself (href equals the listed path) — must be dropped.
-        response('/remote.php/dav/files/alice/Presentaties/', collection: true) +
-            response(
-              '/remote.php/dav/files/alice/Presentaties/sub/',
-              collection: true,
-            ) +
-            response(
-              '/remote.php/dav/files/alice/Presentaties/deck.ocideck',
-              size: 1234,
-            ),
-      );
-      final entries = WebdavService.parseMultistatus(
-        xml,
-        username: 'alice',
-        rootPath: '/Presentaties',
-      );
-      expect(entries.length, 2);
-      // Directories sort first.
-      expect(entries.first.isCollection, isTrue);
-      expect(entries.first.relativePath, 'sub');
-      final deck = entries[1];
-      expect(deck.name, 'deck.ocideck');
-      expect(deck.relativePath, 'deck.ocideck');
-      expect(deck.isOcideck, isTrue);
-      expect(deck.size, 1234);
-    });
+    test(
+      'filters the collection itself and returns children relative to root',
+      () {
+        final xml = body(
+          // The directory itself (href equals the listed path) — must be dropped.
+          response(
+                '/remote.php/dav/files/alice/Presentaties/',
+                collection: true,
+              ) +
+              response(
+                '/remote.php/dav/files/alice/Presentaties/sub/',
+                collection: true,
+              ) +
+              response(
+                '/remote.php/dav/files/alice/Presentaties/deck.ocideck',
+                size: 1234,
+              ),
+        );
+        final entries = WebdavService.parseMultistatus(
+          xml,
+          username: 'alice',
+          rootPath: '/Presentaties',
+        );
+        expect(entries.length, 2);
+        // Directories sort first.
+        expect(entries.first.isCollection, isTrue);
+        expect(entries.first.relativePath, 'sub');
+        final deck = entries[1];
+        expect(deck.name, 'deck.ocideck');
+        expect(deck.relativePath, 'deck.ocideck');
+        expect(deck.isOcideck, isTrue);
+        expect(deck.size, 1234);
+      },
+    );
 
     test('decodes percent-encoded hrefs', () {
-      final xml = body(
-        response('/remote.php/dav/files/alice/caf%C3%A9.md'),
-      );
+      final xml = body(response('/remote.php/dav/files/alice/caf%C3%A9.md'));
       final entries = WebdavService.parseMultistatus(
         xml,
         username: 'alice',
@@ -195,15 +201,17 @@ void main() {
       SharedPreferences.setMockInitialValues({});
     });
 
-    test('a failing keychain write is swallowed and reported, never thrown',
-        () async {
-      final notifier = SettingsNotifier(secretStore: _ThrowingSecretStore());
-      // Must complete normally (return false), not throw.
-      await expectLater(
-        notifier.setWebdavPassword('https://c.example.com', 'alice', 'pw'),
-        completion(isFalse),
-      );
-    });
+    test(
+      'a failing keychain write is swallowed and reported, never thrown',
+      () async {
+        final notifier = SettingsNotifier(secretStore: _ThrowingSecretStore());
+        // Must complete normally (return false), not throw.
+        await expectLater(
+          notifier.setWebdavPassword('https://c.example.com', 'alice', 'pw'),
+          completion(isFalse),
+        );
+      },
+    );
   });
 
   group('NetGuard.safeResolveTrusted', () {
@@ -219,15 +227,19 @@ void main() {
     });
 
     test('allows a private literal when explicitly trusted', () async {
-      final addrs =
-          await NetGuard.safeResolveTrusted('192.168.1.10', allowPrivate: true);
+      final addrs = await NetGuard.safeResolveTrusted(
+        '192.168.1.10',
+        allowPrivate: true,
+      );
       expect(addrs, isNotNull);
       expect(addrs!.single.address, '192.168.1.10');
     });
 
     test('a public literal resolves regardless of the trust flag', () async {
-      final untrusted =
-          await NetGuard.safeResolveTrusted('93.184.216.34', allowPrivate: false);
+      final untrusted = await NetGuard.safeResolveTrusted(
+        '93.184.216.34',
+        allowPrivate: false,
+      );
       expect(untrusted, isNotNull);
     });
   });

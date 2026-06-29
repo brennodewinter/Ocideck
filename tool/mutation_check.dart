@@ -94,8 +94,10 @@ Future<void> main(List<String> args) async {
     await Process.run('git', ['checkout', '--', target]);
   }
 
-  stdout.writeln('\n${survivors.length} survivor(s) to review '
-      '(dead or untested predicate):');
+  stdout.writeln(
+    '\n${survivors.length} survivor(s) to review '
+    '(dead or untested predicate):',
+  );
   for (final s in survivors) {
     stdout.writeln('  $s');
   }

@@ -30,10 +30,7 @@ class SecretStore {
     String password,
   ) async {
     try {
-      await _storage.write(
-        key: webdavKey(baseUrl, username),
-        value: password,
-      );
+      await _storage.write(key: webdavKey(baseUrl, username), value: password);
     } catch (e) {
       logError('SecretStore.writeWebdavPassword: keychain write failed', e);
       rethrow;

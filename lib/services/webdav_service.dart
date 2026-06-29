@@ -31,7 +31,8 @@ class WebdavEntry {
   });
 
   String get lowerName => name.toLowerCase();
-  bool get isOcideck => lowerName.endsWith('.ocideck') || lowerName.endsWith('.zip');
+  bool get isOcideck =>
+      lowerName.endsWith('.ocideck') || lowerName.endsWith('.zip');
   bool get isMarkdown => lowerName.endsWith('.md');
   bool get isImage =>
       lowerName.endsWith('.png') ||
@@ -44,7 +45,15 @@ class WebdavEntry {
 
 /// Reden waarom een WebDAV-bewerking faalde — zodat de UI een begrijpelijke
 /// melding kan tonen zonder de ruwe fout te lekken.
-enum WebdavError { config, blockedHost, network, auth, notFound, tooLarge, server }
+enum WebdavError {
+  config,
+  blockedHost,
+  network,
+  auth,
+  notFound,
+  tooLarge,
+  server,
+}
 
 class WebdavException implements Exception {
   final WebdavError kind;
@@ -150,9 +159,15 @@ class WebdavService {
     try {
       final request = await _openRequest(client, 'PROPFIND', uri);
       request.headers.set('Depth', '1');
-      request.headers.contentType = ContentType('application', 'xml', charset: 'utf-8');
+      request.headers.contentType = ContentType(
+        'application',
+        'xml',
+        charset: 'utf-8',
+      );
       request.add(utf8.encode(_propfindBody));
-      final response = await request.close().timeout(const Duration(seconds: 30));
+      final response = await request.close().timeout(
+        const Duration(seconds: 30),
+      );
       _checkStatus(response.statusCode);
       if (response.statusCode != 207) {
         throw WebdavException(
@@ -201,7 +216,9 @@ class WebdavService {
     }
     final base = _davBaseSegments(username, rootPath);
     final entries = <WebdavEntry>[];
-    final responses = doc.descendantElements.where((e) => e.localName == 'response');
+    final responses = doc.descendantElements.where(
+      (e) => e.localName == 'response',
+    );
     for (final resp in responses) {
       if (entries.length >= maxListingEntries) break;
       final href = resp.descendantElements
@@ -291,7 +308,9 @@ class WebdavService {
     final client = await _client();
     try {
       final request = await _openRequest(client, 'GET', uri);
-      final response = await request.close().timeout(const Duration(seconds: 60));
+      final response = await request.close().timeout(
+        const Duration(seconds: 60),
+      );
       _checkStatus(response.statusCode);
       if (response.statusCode != 200) {
         throw WebdavException(
@@ -335,7 +354,9 @@ class WebdavService {
       final request = await _openRequest(client, 'PUT', uri);
       request.headers.contentType = ContentType('application', 'octet-stream');
       request.add(bytes);
-      final response = await request.close().timeout(const Duration(seconds: 120));
+      final response = await request.close().timeout(
+        const Duration(seconds: 120),
+      );
       _checkStatus(response.statusCode);
       await response.drain<void>();
       if (response.statusCode != 200 &&
@@ -371,7 +392,9 @@ class WebdavService {
         throw WebdavException(WebdavError.config, 'Pad buiten de wortelmap');
       }
       final request = await _openRequest(client, 'MKCOL', uri);
-      final response = await request.close().timeout(const Duration(seconds: 30));
+      final response = await request.close().timeout(
+        const Duration(seconds: 30),
+      );
       await response.drain<void>();
       // 201 aangemaakt, 405 bestaat al — beide goed. 401/403/5xx → fout.
       if (response.statusCode == 401 || response.statusCode == 403) {
@@ -393,9 +416,15 @@ class WebdavService {
     try {
       final request = await _openRequest(client, 'PROPFIND', uri);
       request.headers.set('Depth', '0');
-      request.headers.contentType = ContentType('application', 'xml', charset: 'utf-8');
+      request.headers.contentType = ContentType(
+        'application',
+        'xml',
+        charset: 'utf-8',
+      );
       request.add(utf8.encode(_propfindBody));
-      final response = await request.close().timeout(const Duration(seconds: 20));
+      final response = await request.close().timeout(
+        const Duration(seconds: 20),
+      );
       _checkStatus(response.statusCode);
       await response.drain<void>();
       if (response.statusCode != 207) {

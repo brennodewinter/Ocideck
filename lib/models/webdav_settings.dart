@@ -29,7 +29,8 @@ class WebdavServer {
     this.trustedInternal = false,
   });
 
-  bool get isConfigured => baseUrl.trim().isNotEmpty && username.trim().isNotEmpty;
+  bool get isConfigured =>
+      baseUrl.trim().isNotEmpty && username.trim().isNotEmpty;
 
   /// De host van [baseUrl], of leeg wanneer onparseerbaar.
   String get host => Uri.tryParse(baseUrl.trim())?.host ?? '';
@@ -38,12 +39,17 @@ class WebdavServer {
   Uri? get origin {
     final uri = Uri.tryParse(baseUrl.trim());
     if (uri == null || !uri.hasScheme || !uri.hasAuthority) return null;
-    return Uri(scheme: uri.scheme, host: uri.host, port: uri.hasPort ? uri.port : null);
+    return Uri(
+      scheme: uri.scheme,
+      host: uri.host,
+      port: uri.hasPort ? uri.port : null,
+    );
   }
 
   /// Pad-prefix tot aan de gebruikersbestanden:
   /// `/remote.php/dav/files/<username>`.
-  String get davPrefix => '/remote.php/dav/files/${Uri.encodeComponent(username.trim())}';
+  String get davPrefix =>
+      '/remote.php/dav/files/${Uri.encodeComponent(username.trim())}';
 
   /// Normaliseer een door de UI gegeven (mogelijk lege) submap tot een pad dat
   /// met `/` begint en geen trailing slash heeft. Geen `..` toegestaan.
@@ -73,7 +79,8 @@ class WebdavServer {
       return null; // pad-traversal buiten de geconfigureerde wortel
     }
     final segments = scoped.split('/').where((s) => s.isNotEmpty).toList();
-    final encoded = '$davPrefix${segments.isEmpty ? '' : '/${segments.map(Uri.encodeComponent).join('/')}'}';
+    final encoded =
+        '$davPrefix${segments.isEmpty ? '' : '/${segments.map(Uri.encodeComponent).join('/')}'}';
     return base.replace(path: '$encoded${isCollection ? '/' : ''}');
   }
 
