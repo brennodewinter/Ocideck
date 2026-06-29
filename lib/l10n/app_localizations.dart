@@ -2562,6 +2562,9 @@ const _dutchSourceStringAdditions = {
     'Duur verlengen': 'Increase duration',
     'Afspelen': 'Play',
     'Pauzeren': 'Pause',
+    'Opsommingsteken': 'Bullet',
+    'Stip': 'Dot',
+    'Pootje': 'Paw',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Split in two',
     'Uitgevoerde controles': 'Checks performed',
@@ -3078,6 +3081,9 @@ const _dutchSourceStringAdditions = {
     'Duur verlengen': 'Aumenta durata',
     'Afspelen': 'Riproduci',
     'Pauzeren': 'Pausa',
+    'Opsommingsteken': 'Punto elenco',
+    'Stip': 'Punto',
+    'Pootje': 'Zampa',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Dividi in due',
     'Uitgevoerde controles': 'Controlli eseguiti',
@@ -3775,6 +3781,9 @@ const _dutchSourceStringAdditions = {
     'Duur verlengen': 'Dauer verlängern',
     'Afspelen': 'Abspielen',
     'Pauzeren': 'Pause',
+    'Opsommingsteken': 'Aufzählungszeichen',
+    'Stip': 'Punkt',
+    'Pootje': 'Pfötchen',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'In zwei teilen',
     'Uitgevoerde controles': 'Durchgeführte Prüfungen',
@@ -4471,6 +4480,9 @@ const _dutchSourceStringAdditions = {
     'Duur verlengen': 'Augmenter la durée',
     'Afspelen': 'Lire',
     'Pauzeren': 'Pause',
+    'Opsommingsteken': 'Puce',
+    'Stip': 'Point',
+    'Pootje': 'Patte',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Diviser en deux',
     'Uitgevoerde controles': 'Contrôles effectués',
@@ -5172,6 +5184,9 @@ const _dutchSourceStringAdditions = {
     'Duur verlengen': 'Aumentar duración',
     'Afspelen': 'Reproducir',
     'Pauzeren': 'Pausar',
+    'Opsommingsteken': 'Viñeta',
+    'Stip': 'Punto',
+    'Pootje': 'Patita',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Dividir en dos',
     'Uitgevoerde controles': 'Comprobaciones realizadas',
@@ -5871,6 +5886,9 @@ const _dutchSourceStringAdditions = {
     'Duur verlengen': 'Doer ferlingje',
     'Afspelen': 'Ofspylje',
     'Pauzeren': 'Skoftsje',
+    'Opsommingsteken': 'Opsommingsteken',
+    'Stip': 'Stip',
+    'Pootje': 'Poatsje',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Yn twaen splitse',
     'Uitgevoerde controles': 'Utfierde kontrôles',
@@ -6553,6 +6571,9 @@ const _dutchSourceStringAdditions = {
     'Duur verlengen': 'Oumentá durashon',
     'Afspelen': 'Toka',
     'Pauzeren': 'Pousa',
+    'Opsommingsteken': 'Punto di lista',
+    'Stip': 'Punto',
+    'Pootje': 'Pata',
     // Schijf-brede presentatiezoeker (bekende mappen).
     'In tweeën splitsen': 'Parti na dos',
     'Uitgevoerde controles': 'Chekeonan ehekutá',

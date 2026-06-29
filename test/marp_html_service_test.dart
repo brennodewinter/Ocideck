@@ -5,8 +5,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/cockpit.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/services/marp_html_service.dart';
+import 'package:ocideck/services/markdown_service.dart';
 
 /// Reads the vendored libraries straight from the repo (tests run at the root).
 Future<String> _diskLoader(String asset) => File(asset).readAsString();
@@ -377,5 +379,90 @@ void main() {}
     // The series legend is shown (not a pie legend).
     expect(html, contains('A'));
     expect(html, contains('B'));
+  });
+
+  group('cat-paw bullet markers in HTML export', () {
+    final service = MarpHtmlService(
+      loadAsset: _diskLoader,
+      loadBytes: _diskBytes,
+    );
+    const pawTheme = ThemeProfile(bulletMarker: BulletMarker.paw);
+
+    // Builds export-ready markdown exactly as the app does (forExport pins the
+    // effective marker), then renders it to HTML.
+    Future<String> exportHtml(List<Slide> slides, ThemeProfile theme) {
+      final md = MarkdownService().generateDeck(
+        Deck(title: 'D', slides: slides, themeProfile: theme),
+        forExport: true,
+      );
+      return service.build(md, theme: theme);
+    }
+
+    test('a paw theme tags bullet slides and emits the SVG marker CSS', () async {
+      final html = await exportHtml([
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Punten', bullets: const ['Een', 'Twee']),
+      ], pawTheme);
+
+      expect(html, contains('<section class="slide paw-bullets">'));
+      expect(html, contains('.slide.paw-bullets ul{list-style:none'));
+      expect(html, contains('data:image/svg+xml'));
+    });
+
+    test('a per-slide paw override beats a dot theme', () async {
+      final html = await exportHtml([
+        Slide.create(SlideType.bullets).copyWith(
+          title: 'Punten',
+          bullets: const ['Een'],
+          bulletMarkerOverride: BulletMarker.paw,
+        ),
+      ], const ThemeProfile());
+
+      expect(html, contains('<section class="slide paw-bullets">'));
+    });
+
+    test('a per-slide dot override beats a paw theme', () async {
+      final html = await exportHtml([
+        Slide.create(SlideType.bullets).copyWith(
+          title: 'Punten',
+          bullets: const ['Een'],
+          bulletMarkerOverride: BulletMarker.dot,
+        ),
+      ], pawTheme);
+
+      expect(html, isNot(contains('class="slide paw-bullets"')));
+    });
+
+    test('checklist and numbered slides never get paws', () async {
+      final checklist = await exportHtml([
+        Slide.create(SlideType.bullets).copyWith(
+          title: 'Taken',
+          listStyle: ListStyle.checklist,
+          bullets: const ['[ ] Een'],
+        ),
+      ], pawTheme);
+      final numbered = await exportHtml([
+        Slide.create(SlideType.bullets).copyWith(
+          title: 'Stappen',
+          listStyle: ListStyle.numbered,
+          bullets: const ['Een'],
+        ),
+      ], pawTheme);
+
+      expect(checklist, isNot(contains('class="slide paw-bullets"')));
+      expect(numbered, isNot(contains('class="slide paw-bullets"')));
+    });
+
+    test('a free-markdown slide with a "-" list never gets paws (parity)', () async {
+      final html = await exportHtml([
+        Slide.create(
+          SlideType.freeMarkdown,
+        ).copyWith(customMarkdown: '- Een\n- Twee'),
+      ], pawTheme);
+
+      // The app renders this list without paws, so the export must not add them.
+      expect(html, isNot(contains('class="slide paw-bullets"')));
+    });
   });
 }

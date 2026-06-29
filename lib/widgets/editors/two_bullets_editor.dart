@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
+import 'bullet_marker_selector.dart';
 import 'list_style_selector.dart';
 
 typedef _Mutate = void Function(VoidCallback fn);
@@ -30,6 +32,7 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
   late _BulletSet _left;
   late _BulletSet _right;
   late ListStyle _listStyle;
+  BulletMarker? _bulletMarkerOverride;
   late bool _showChecklistProgress;
 
   @override
@@ -44,6 +47,7 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
     _listStyle = widget.slide.listStyle == ListStyle.richText
         ? ListStyle.bullets
         : widget.slide.listStyle;
+    _bulletMarkerOverride = widget.slide.bulletMarkerOverride;
     _showChecklistProgress = widget.slide.showChecklistProgress;
     _left = _BulletSet(widget.slide.bullets, _emit);
     _right = _BulletSet(widget.slide.bullets2, _emit);
@@ -56,6 +60,8 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
         columnTitle1: _heading1.text,
         columnTitle2: _heading2.text,
         listStyle: _listStyle,
+        bulletMarkerOverride: _bulletMarkerOverride,
+        clearBulletMarkerOverride: _bulletMarkerOverride == null,
         showChecklistProgress: _showChecklistProgress,
         bullets: _left.values(_listStyle),
         bullets2: _right.values(_listStyle),
@@ -88,6 +94,16 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
             _emit();
           },
         ),
+        if (_listStyle == ListStyle.bullets) ...[
+          const SizedBox(height: 12),
+          BulletMarkerSelector(
+            value: _bulletMarkerOverride,
+            onChanged: (value) {
+              setState(() => _bulletMarkerOverride = value);
+              _emit();
+            },
+          ),
+        ],
         if (_listStyle == ListStyle.checklist)
           SwitchListTile(
             contentPadding: EdgeInsets.zero,

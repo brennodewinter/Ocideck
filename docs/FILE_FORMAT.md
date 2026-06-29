@@ -150,6 +150,7 @@ has these fields (with defaults):
 | `slideBackgroundColor` | `#FFFFFF` | Background for normal slides. |
 | `textColor` | `#222222` | Text color. |
 | `accentColor` | `#2E7D64` | Accent (bullet marker, table borders/header). |
+| `bulletMarker` | `dot` | Default bullet-list marker: `dot` or `paw` (a cat-paw drawn in the accent colour). A slide may override it (see §8). |
 | `tableTextColor` | = `textColor` | Text color in tables. |
 | `tableHeaderTextColor` | `#FFFFFF` | Table header text color. |
 | `titleBackgroundColor` | `#1C2B47` | Title-slide background. |
@@ -646,6 +647,7 @@ for presenter notes):
 | `<!-- _class: ... -->` | Slide type + behavior (§4). |
 | `<!-- _style: --image-width: N%; --split-text-scale: x; -->` | Layout of a `split` slide. |
 | `<!-- ocideck_two_bullets_left/right: <base64url> -->` | Canonical storage for the two bullet columns. |
+| `<!-- ocideck_bullet_marker: dot\|paw -->` | Per-slide bullet-marker override (bullets/two-bullets/bullets+image). Absent = inherit the theme's `bulletMarker` (§3.2). |
 | `<!-- advance: N.N -->` | Auto-advance after N.N seconds (0 = off). |
 | `<!-- skip -->` | Skip slide during both presenting and export. |
 | `<!-- tlp: <key> -->` | Per-slide TLP level (see §3.1). The slide is held back if the presentation TLP is lower. Written only when not `none`. |

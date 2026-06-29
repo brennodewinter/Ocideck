@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/image_service.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../markdown_editor/markdown_editor.dart';
 import '_editor_field.dart';
+import 'bullet_marker_selector.dart';
 import 'list_style_selector.dart';
 
 class BulletsImageEditor extends StatefulWidget {
@@ -37,6 +39,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   late List<bool> _checked;
   late List<FocusNode> _focusNodes;
   late ListStyle _listStyle;
+  BulletMarker? _bulletMarkerOverride;
   late bool _showChecklistProgress;
   late final TextEditingController _richText;
 
@@ -48,6 +51,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
     _title = TextEditingController(text: widget.slide.title);
     _title.addListener(_emit);
     _listStyle = widget.slide.listStyle;
+    _bulletMarkerOverride = widget.slide.bulletMarkerOverride;
     _showChecklistProgress = widget.slide.showChecklistProgress;
     _richText = TextEditingController(
       text: normalizeRichTextMarkdown(widget.slide.customMarkdown),
@@ -79,6 +83,8 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
       widget.slide.copyWith(
         title: _title.text,
         listStyle: _listStyle,
+        bulletMarkerOverride: _bulletMarkerOverride,
+        clearBulletMarkerOverride: _bulletMarkerOverride == null,
         showChecklistProgress: _showChecklistProgress,
         customMarkdown: _listStyle == ListStyle.richText
             ? normalizeRichTextMarkdown(_richText.text)
@@ -241,6 +247,16 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
             _emit();
           },
         ),
+        if (_listStyle == ListStyle.bullets) ...[
+          const SizedBox(height: 12),
+          BulletMarkerSelector(
+            value: _bulletMarkerOverride,
+            onChanged: (value) {
+              setState(() => _bulletMarkerOverride = value);
+              _emit();
+            },
+          ),
+        ],
         if (_listStyle == ListStyle.checklist)
           SwitchListTile(
             contentPadding: EdgeInsets.zero,

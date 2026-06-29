@@ -353,4 +353,83 @@ void main() {
     expect(deck.slides.single.audioPath, 'media/narration.mp3');
     expect(deck.slides.single.audioAutoplay, isTrue);
   });
+
+  test('round-trips a per-slide cat-paw bullet-marker override', () {
+    final service = MarkdownService();
+    final markdown = service.generateDeck(
+      Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.bullets).copyWith(
+            title: 'Punten',
+            bullets: const ['Een', 'Twee'],
+            bulletMarkerOverride: BulletMarker.paw,
+          ),
+        ],
+      ),
+    );
+
+    expect(markdown, contains('<!-- ocideck_bullet_marker: paw -->'));
+
+    final slide = service.parseDeck(markdown)!.slides.single;
+    expect(slide.type, SlideType.bullets);
+    expect(slide.bulletMarkerOverride, BulletMarker.paw);
+  });
+
+  test('writes no marker comment when the slide inherits the theme', () {
+    final service = MarkdownService();
+    final markdown = service.generateDeck(
+      Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Punten', bullets: const ['Een']),
+        ],
+      ),
+    );
+
+    expect(markdown, isNot(contains('ocideck_bullet_marker')));
+    expect(service.parseDeck(markdown)!.slides.single.bulletMarkerOverride,
+        isNull);
+  });
+
+  test('forExport pins the effective paw marker on bullet slides only', () {
+    const theme = ThemeProfile(bulletMarker: BulletMarker.paw);
+    final deck = Deck(
+      title: 'Demo',
+      themeProfile: theme,
+      slides: [
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Punten', bullets: const ['x']),
+        Slide.create(
+          SlideType.freeMarkdown,
+        ).copyWith(customMarkdown: '- y'),
+      ],
+    );
+
+    // Export pins the bullet slide's paw, but never the free-markdown list.
+    final exported = MarkdownService().generateDeck(deck, forExport: true);
+    expect(
+      'ocideck_bullet_marker: paw'.allMatches(exported).length,
+      1,
+    );
+
+    // A normal save leaves the inherited default implicit (no comment), so the
+    // override semantics — and the file — stay clean.
+    final saved = MarkdownService().generateDeck(deck);
+    expect(saved, isNot(contains('ocideck_bullet_marker')));
+  });
+
+  test('theme profile round-trips the default bullet marker through JSON', () {
+    const profile = ThemeProfile(bulletMarker: BulletMarker.paw);
+    final restored = ThemeProfile.fromJson(profile.toJson());
+    expect(restored.bulletMarker, BulletMarker.paw);
+    // Older files without the key fall back to a dot.
+    final legacy = ThemeProfile.fromJson(
+      profile.toJson()..remove('bulletMarker'),
+    );
+    expect(legacy.bulletMarker, BulletMarker.dot);
+  });
 }

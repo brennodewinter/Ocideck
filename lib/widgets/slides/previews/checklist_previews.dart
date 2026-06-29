@@ -169,6 +169,10 @@ class _ChecklistBulletRow extends StatelessWidget {
   final int itemIndex;
   final int column;
   final ListStyle listStyle;
+
+  /// Resolved marker for this slide (theme default + per-slide override). Only
+  /// affects plain [ListStyle.bullets]; numbered/checklist keep their glyphs.
+  final BulletMarker marker;
   final bool checked;
   final String text;
   final int level;
@@ -184,6 +188,7 @@ class _ChecklistBulletRow extends StatelessWidget {
     required this.itemIndex,
     required this.column,
     required this.listStyle,
+    this.marker = BulletMarker.dot,
     required this.checked,
     required this.text,
     required this.level,
@@ -224,14 +229,19 @@ class _ChecklistBulletRow extends StatelessWidget {
                       interaction?.enabled == true
                   ? SystemMouseCursors.click
                   : MouseCursor.defer,
-              child: Text(
-                '${bulletListMarker(bullets, itemIndex, listStyle)} ',
-                style: TextStyle(
-                  fontSize: fontSize,
-                  color: _hexColor(profile.accentColor),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              child: marker == BulletMarker.paw && listStyle == ListStyle.bullets
+                  ? _PawMarker(
+                      fontSize: fontSize,
+                      color: _hexColor(profile.accentColor),
+                    )
+                  : Text(
+                      '${bulletListMarker(bullets, itemIndex, listStyle)} ',
+                      style: TextStyle(
+                        fontSize: fontSize,
+                        color: _hexColor(profile.accentColor),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
             ),
           ),
           Expanded(
@@ -330,4 +340,93 @@ class _ChecklistInteractionScope extends InheritedWidget {
   @override
   bool updateShouldNotify(_ChecklistInteractionScope oldWidget) =>
       enabled != oldWidget.enabled || onToggle != oldWidget.onToggle;
+}
+
+/// A small cat-paw bullet marker, drawn in the accent [color]. It occupies the
+/// same horizontal advance as a '• ' bullet glyph (so indentation and the
+/// layout-fit measurement, which assumes a dot, stay aligned) and is centred on
+/// the first text line.
+class _PawMarker extends StatelessWidget {
+  final double fontSize;
+  final Color color;
+
+  const _PawMarker({required this.fontSize, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    final paw = fontSize * 0.66;
+    return Padding(
+      padding: EdgeInsets.only(right: fontSize * 0.30),
+      child: SizedBox(
+        width: paw,
+        height: fontSize * kBulletLineHeight,
+        child: Center(
+          child: CustomPaint(
+            size: Size(paw, paw),
+            painter: _PawPainter(color),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _PawPainter extends CustomPainter {
+  final Color color;
+
+  const _PawPainter(this.color);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..isAntiAlias = true
+      ..style = PaintingStyle.fill;
+    final w = size.width;
+    final h = size.height;
+
+    // Metacarpal pad: a smooth rounded triangle (apex down) — wider at the top,
+    // tapering to a soft point, which reads far more like a paw pad than a flat
+    // ellipse. Built by curving through the edge midpoints with the triangle's
+    // corners as control points.
+    final a = Offset(w * 0.21, h * 0.58); // top-left corner
+    final b = Offset(w * 0.79, h * 0.58); // top-right corner
+    final c = Offset(w * 0.50, h * 0.97); // bottom apex
+    final mAB = (a + b) / 2;
+    final mBC = (b + c) / 2;
+    final mCA = (c + a) / 2;
+    final pad = Path()
+      ..moveTo(mAB.dx, mAB.dy)
+      ..quadraticBezierTo(b.dx, b.dy, mBC.dx, mBC.dy)
+      ..quadraticBezierTo(c.dx, c.dy, mCA.dx, mCA.dy)
+      ..quadraticBezierTo(a.dx, a.dy, mAB.dx, mAB.dy)
+      ..close();
+    canvas.drawPath(pad, paint);
+
+    // Four teardrop toe beans fanned in an arc above the pad: the inner pair
+    // stand tall and upright, the outer pair are smaller and tilt outward.
+    void toe(double cx, double cy, double tw, double th, double rot) {
+      canvas
+        ..save()
+        ..translate(w * cx, h * cy)
+        ..rotate(rot);
+      canvas.drawOval(
+        Rect.fromCenter(
+          center: Offset.zero,
+          width: w * tw,
+          height: h * th,
+        ),
+        paint,
+      );
+      canvas.restore();
+    }
+
+    toe(0.16, 0.43, 0.22, 0.30, -0.55); // outer left
+    toe(0.39, 0.21, 0.24, 0.35, -0.18); // inner left
+    toe(0.61, 0.21, 0.24, 0.35, 0.18); // inner right
+    toe(0.84, 0.43, 0.22, 0.30, 0.55); // outer right
+  }
+
+  @override
+  bool shouldRepaint(_PawPainter oldDelegate) => oldDelegate.color != color;
 }

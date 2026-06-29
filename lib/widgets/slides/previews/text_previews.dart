@@ -17,58 +17,115 @@ class _TitlePreview extends StatelessWidget {
     required this.profile,
   });
 
-  Widget _content(BuildContext context) {
-    final pad = w * 0.08;
+  /// The title block itself: a short accent rule, the title and the subtitle,
+  /// left-aligned. Font sizes are proportional to the slide width, so the same
+  /// column works whether it floats over an image or sits in a solid band.
+  Widget _lockupColumn(BuildContext context) {
     final link = _hexColor(profile.accentColor);
+    final accent = _hexColor(profile.accentColor);
     final titleColor = _hexColor(
       slide.titleTextColorOverride.isNotEmpty
           ? slide.titleTextColorOverride
           : profile.titleTextColor,
     );
-    return FittedBox(
-      fit: BoxFit.scaleDown,
-      alignment: Alignment.center,
-      child: SizedBox(
-        width: w,
-        child: Padding(
-          padding: EdgeInsets.all(pad),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (slide.title.isNotEmpty)
-                _md(
-                  context,
-                  slide.title,
-                  _applyFont(
-                    font,
-                    TextStyle(
-                      color: titleColor,
-                      fontSize: w * 0.055,
-                      fontWeight: FontWeight.bold,
-                      height: 1.2,
-                    ),
-                  ),
-                  linkColor: link,
-                ),
-              if (slide.subtitle.isNotEmpty) ...[
-                SizedBox(height: w * 0.02),
-                _md(
-                  context,
-                  slide.subtitle,
-                  _applyFont(
-                    font,
-                    TextStyle(
-                      color: titleColor.withValues(alpha: 0.72),
-                      fontSize: w * 0.03,
-                      height: 1.3,
-                    ),
-                  ),
-                  linkColor: link,
-                ),
-              ],
-            ],
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: w * 0.07,
+          height: w * 0.0075,
+          margin: EdgeInsets.only(bottom: w * 0.024),
+          decoration: BoxDecoration(
+            color: accent,
+            borderRadius: BorderRadius.circular(w * 0.004),
           ),
+        ),
+        if (slide.title.isNotEmpty)
+          _md(
+            context,
+            slide.title,
+            _applyFont(
+              font,
+              TextStyle(
+                color: titleColor,
+                fontSize: w * 0.055,
+                fontWeight: FontWeight.bold,
+                height: 1.2,
+              ),
+            ),
+            linkColor: link,
+          ),
+        if (slide.subtitle.isNotEmpty) ...[
+          SizedBox(height: w * 0.02),
+          _md(
+            context,
+            slide.subtitle,
+            _applyFont(
+              font,
+              TextStyle(
+                color: titleColor.withValues(alpha: 0.72),
+                fontSize: w * 0.03,
+                height: 1.3,
+              ),
+            ),
+            linkColor: link,
+          ),
+        ],
+      ],
+    );
+  }
+
+  /// Title block anchored bottom-left across the whole slide (no image, or a
+  /// full-bleed image with the text overlaid). Scales down — never clips — when
+  /// the content is too tall.
+  Widget _lockup(BuildContext context) {
+    final pad = w * 0.08;
+    return Padding(
+      padding: EdgeInsets.all(pad),
+      child: Align(
+        alignment: Alignment.bottomLeft,
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.bottomLeft,
+          child: SizedBox(width: w - 2 * pad, child: _lockupColumn(context)),
+        ),
+      ),
+    );
+  }
+
+  /// Title block in a solid band sized to its content — used below a
+  /// non-full-bleed image so the picture stops at the band edge and text never
+  /// crosses it.
+  Widget _lockupBand(BuildContext context) {
+    final pad = w * 0.08;
+    return Container(
+      width: double.infinity,
+      color: _hexColor(profile.titleBackgroundColor),
+      padding: EdgeInsets.fromLTRB(pad, pad * 0.7, pad, pad * 0.7),
+      child: _lockupColumn(context),
+    );
+  }
+
+  /// Directional scrim drawn behind the bottom-left lockup over a background
+  /// image: opaque enough where the text sits (bottom) to guarantee legibility,
+  /// fading to nothing higher up so the image itself stays vivid. Replaces the
+  /// old flat full-surface haze. The alpha under the text stays at or above the
+  /// flat-wash value `title_contrast.dart` assumes, so its contrast check
+  /// remains a valid (slightly conservative) predictor of what is rendered.
+  Widget _scrim() {
+    final scrim = _hexColor(profile.titleBackgroundColor);
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+          colors: [
+            scrim.withValues(alpha: 0.95),
+            scrim.withValues(alpha: 0.90),
+            scrim.withValues(alpha: 0.0),
+          ],
+          stops: const [0.0, 0.45, 0.80],
         ),
       ),
     );
@@ -81,10 +138,41 @@ class _TitlePreview extends StatelessWidget {
     if (!hasBg) {
       return Container(
         color: _hexColor(profile.titleBackgroundColor),
-        child: SizedBox.expand(child: _content(context)),
+        child: SizedBox.expand(child: _lockup(context)),
       );
     }
 
+    // "Afbeelding vult hele slide" off (imageSize != 0): keep the picture in the
+    // top zone and put the title in a solid band below it, so the image never
+    // runs past the title's accent rule and no text crosses the picture.
+    if (slide.imageSize != 0) {
+      return Container(
+        color: _hexColor(profile.titleBackgroundColor),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  _zoomedImage(
+                    context,
+                    slide.imagePath,
+                    projectPath,
+                    slide.imageSize,
+                    bgColor: _hexColor(profile.titleBackgroundColor),
+                  ),
+                  _captionOverlay(context, slide.imageCaption, w),
+                ],
+              ),
+            ),
+            _lockupBand(context),
+          ],
+        ),
+      );
+    }
+
+    // Full-bleed image: title overlaid with a scrim for legibility.
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -95,13 +183,8 @@ class _TitlePreview extends StatelessWidget {
           slide.imageSize,
           bgColor: _hexColor(profile.titleBackgroundColor),
         ),
-        if (slide.titleImageOverlay)
-          Container(
-            color: _hexColor(
-              profile.titleBackgroundColor,
-            ).withValues(alpha: 0.62),
-          ),
-        _content(context),
+        if (slide.titleImageOverlay) _scrim(),
+        _lockup(context),
         _captionOverlay(context, slide.imageCaption, w),
       ],
     );

@@ -1,3 +1,9 @@
+/// Glyph used for unordered (bullet) list markers. [dot] is the classic
+/// typographic bullet; [paw] swaps in a small cat-paw drawn in the accent
+/// colour (OciDeck's mascot). The theme picks a default; a slide may override
+/// it (see `Slide.bulletMarkerOverride`).
+enum BulletMarker { dot, paw }
+
 class ThemeProfile {
   final String name;
   final String slideBackgroundColor;
@@ -6,6 +12,10 @@ class ThemeProfile {
   final String checklistCheckedColor;
   final String checklistUncheckedColor;
   final bool checklistStrikeThrough;
+
+  /// Default marker glyph for bullet lists across the deck. A slide can override
+  /// it per-slide. Defaults to [BulletMarker.dot].
+  final BulletMarker bulletMarker;
   final String tableTextColor;
   final String tableHeaderTextColor;
   final String tableHeaderBackgroundColor;
@@ -57,6 +67,7 @@ class ThemeProfile {
     this.checklistCheckedColor = '#2E7D64',
     this.checklistUncheckedColor = '#CBD5E1',
     this.checklistStrikeThrough = true,
+    this.bulletMarker = BulletMarker.dot,
     String? tableTextColor,
     this.tableHeaderTextColor = '#FFFFFF',
     String? tableHeaderBackgroundColor,
@@ -96,6 +107,7 @@ class ThemeProfile {
     String? checklistCheckedColor,
     String? checklistUncheckedColor,
     bool? checklistStrikeThrough,
+    BulletMarker? bulletMarker,
     String? tableTextColor,
     String? tableHeaderTextColor,
     String? tableHeaderBackgroundColor,
@@ -128,6 +140,7 @@ class ThemeProfile {
           checklistUncheckedColor ?? this.checklistUncheckedColor,
       checklistStrikeThrough:
           checklistStrikeThrough ?? this.checklistStrikeThrough,
+      bulletMarker: bulletMarker ?? this.bulletMarker,
       tableTextColor: tableTextColor ?? this.tableTextColor,
       tableHeaderTextColor: tableHeaderTextColor ?? this.tableHeaderTextColor,
       tableHeaderBackgroundColor:
@@ -162,6 +175,7 @@ class ThemeProfile {
       'checklistCheckedColor': checklistCheckedColor,
       'checklistUncheckedColor': checklistUncheckedColor,
       'checklistStrikeThrough': checklistStrikeThrough,
+      'bulletMarker': bulletMarker.name,
       'tableTextColor': tableTextColor,
       'tableHeaderTextColor': tableHeaderTextColor,
       'tableHeaderBackgroundColor': tableHeaderBackgroundColor,
@@ -198,6 +212,10 @@ class ThemeProfile {
       checklistUncheckedColor:
           json['checklistUncheckedColor'] as String? ?? '#CBD5E1',
       checklistStrikeThrough: json['checklistStrikeThrough'] as bool? ?? true,
+      bulletMarker: BulletMarker.values.firstWhere(
+        (m) => m.name == json['bulletMarker'],
+        orElse: () => BulletMarker.dot,
+      ),
       tableTextColor:
           json['tableTextColor'] as String? ??
           json['textColor'] as String? ??

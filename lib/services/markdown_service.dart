@@ -264,6 +264,7 @@ class MarkdownService {
       case SlideType.bullets:
         if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
         if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
+        _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);
         if (slide.listStyle == ListStyle.richText) {
           buf.writeln('<!-- ocideck_list_style: richText -->');
           buf.writeln();
@@ -283,6 +284,7 @@ class MarkdownService {
 
       case SlideType.twoBullets:
         if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
+        _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);
         buf.writeln();
         _writeTwoBulletColumns(
           buf,
@@ -311,6 +313,7 @@ class MarkdownService {
           );
           buf.writeln();
           if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
+          _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);
           if (slide.listStyle == ListStyle.richText) {
             buf.writeln('<!-- ocideck_list_style: richText -->');
             buf.writeln();
@@ -340,6 +343,7 @@ class MarkdownService {
           buf.writeln('</div>');
         } else {
           if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
+          _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);
           if (slide.listStyle == ListStyle.richText) {
             buf.writeln('<!-- ocideck_list_style: richText -->');
             buf.writeln();
@@ -607,6 +611,34 @@ class MarkdownService {
   static void _writeChecklistProgress(StringBuffer buf, Slide slide) {
     if (slide.showChecklistProgress) {
       buf.writeln('<!-- ocideck_checklist_progress: true -->');
+    }
+  }
+
+  /// Per-slide bullet-marker comment (dot/paw).
+  ///
+  /// On a normal save, only an explicit per-slide override is written; absence
+  /// means "inherit the theme default", keeping the override semantics intact.
+  ///
+  /// For [forExport], the *effective* paw marker (override **or** theme default)
+  /// is pinned on plain bullet slides as well, so the static HTML export can
+  /// match the app exactly without re-deriving the slide type — a free-markdown
+  /// slide that merely contains a `-` list never reaches this code, so it never
+  /// gets a paw. The hint is export-only and never written to saved files.
+  static void _writeBulletMarkerOverride(
+    StringBuffer buf,
+    Slide slide,
+    ThemeProfile? theme,
+    bool forExport,
+  ) {
+    final override = slide.bulletMarkerOverride;
+    if (override != null) {
+      buf.writeln('<!-- ocideck_bullet_marker: ${override.name} -->');
+      return;
+    }
+    if (forExport &&
+        slide.listStyle == ListStyle.bullets &&
+        theme?.bulletMarker == BulletMarker.paw) {
+      buf.writeln('<!-- ocideck_bullet_marker: paw -->');
     }
   }
 
@@ -1057,6 +1089,7 @@ class MarkdownService {
     var showChecklistProgress = false;
     var titleImageOverlay = true;
     var titleTextColorOverride = '';
+    BulletMarker? bulletMarkerOverride;
     var columnTitle1 = '';
     var columnTitle2 = '';
     // bulletsImage slides store their panel width in `<!-- _style:
@@ -1106,6 +1139,12 @@ class MarkdownService {
           titleTextColorOverride = content
               .substring('ocideck_title_text_color:'.length)
               .trim();
+        } else if (content.startsWith('ocideck_bullet_marker:')) {
+          final name = content
+              .substring('ocideck_bullet_marker:'.length)
+              .trim();
+          final match = BulletMarker.values.where((m) => m.name == name);
+          if (match.isNotEmpty) bulletMarkerOverride = match.first;
         } else if (!content.startsWith('_')) {
           notesBuffer.write(notesBuffer.isEmpty ? content : '\n$content');
         }
@@ -1448,6 +1487,7 @@ class MarkdownService {
       imageSize: imageSize,
       titleImageOverlay: titleImageOverlay,
       titleTextColorOverride: titleTextColorOverride,
+      bulletMarkerOverride: bulletMarkerOverride,
       videoPath: videoPath,
       videoAutoplay: videoAutoplay,
       videoStartMs: videoStartMs,

@@ -323,12 +323,29 @@ class _TablePreview extends StatelessWidget {
       );
     }
 
+    // Give each column a flex weight proportional to its longest cell, so a
+    // column with long text gets the room it needs instead of an equal share.
+    // This cuts down word-wrapping (and therefore the table's height), so a
+    // table is far more likely to fit the 16:9 slide at full width rather than
+    // being scaled down by the FittedBox — which is what left the width unused
+    // and made tables look oversized. The weights still flex to fill the width.
+    final columnWidths = <int, TableColumnWidth>{
+      for (var c = 0; c < colCount; c++)
+        c: FlexColumnWidth(
+          rows
+              .map((r) => c < r.length ? r[c].trim().length : 0)
+              .fold<int>(1, (longest, len) => len > longest ? len : longest)
+              .clamp(1, 32)
+              .toDouble(),
+        ),
+    };
+
     Widget tableWidget = Table(
       border: TableBorder.all(
         color: editing ? accent.withValues(alpha: 0.55) : borderColor,
         width: editing ? w * 0.002 : w * 0.0012,
       ),
-      defaultColumnWidth: const FlexColumnWidth(),
+      columnWidths: columnWidths,
       children: [
         buildRow(rows.first, header: true, rowIndex: 0),
         for (var i = 1; i < rows.length; i++)

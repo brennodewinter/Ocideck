@@ -377,6 +377,7 @@ class _TimelineCanvas extends StatelessWidget {
             child: Transform.translate(
               offset: Offset(0, (1 - r) * 10),
               child: _TimelineCard(
+                key: ValueKey('timeline-card-$i'),
                 event: events[i],
                 emphasized: i == events.length - 1,
                 w: w,
@@ -452,14 +453,26 @@ class _TimelineCanvas extends StatelessWidget {
     // apart, and a floor holds them only if a card plus a clear gap (the 1.25
     // breathing factor) fits in that span; otherwise climb to another floor.
     final baseCardW = (spacing * 1.7).clamp(aw * 0.17, aw * 0.27).toDouble();
-    final neededFloors = math.max(1, (baseCardW * 1.25 / (2 * spacing)).ceil());
+    final widthFloors = math.max(1, (baseCardW * 1.25 / (2 * spacing)).ceil());
+    // The first and last cards are clamped inward to stay on the slide, which
+    // shoves them toward their nearest same-side neighbour. With a single floor
+    // that neighbour is only 2·spacing away and they collide; a second floor
+    // puts it at a different height instead. So as soon as there are two cards
+    // per side (n >= 4) prefer two floors — when there is vertical room for it.
+    final neededFloors = math.max(n >= 4 ? 2 : 1, widthFloors);
     final floors = math.min(maxFloors, neededFloors);
     final pitch = (half - nearGap) / floors;
-    // Now widen the cards to use the horizontal room the floors afford
-    // (same-side-same-floor nodes are 2·floors·spacing apart), so the cards
-    // aren't needlessly narrow with empty space between them.
-    final cardW = (2 * floors * spacing * 0.8)
+    // Widen the cards to use the horizontal room the floors afford
+    // (same-side-same-floor nodes are 2·floors·spacing apart), but never so wide
+    // that an interior — or inward-clamped edge — card overlaps that neighbour.
+    // The edge term accounts for the clamp of the first/last card: it solves
+    // `span - cardW >= cardW/2 - startX`, with a little extra breathing room.
+    final sameFloorSpan = 2 * floors * spacing;
+    final edgeSafeW = (sameFloorSpan + startX) / 1.7;
+    final cardW = (sameFloorSpan * 0.8)
         .clamp(aw * 0.18, aw * 0.30)
+        .toDouble()
+        .clamp(0.0, edgeSafeW)
         .toDouble();
     final showDesc = pitch > w * 0.052;
     final fit = _fitCards(events, cardW, pitch, w, showDesc);
@@ -560,6 +573,7 @@ class _TimelineCard extends StatelessWidget {
   final String font;
 
   const _TimelineCard({
+    super.key,
     required this.event,
     required this.emphasized,
     required this.w,

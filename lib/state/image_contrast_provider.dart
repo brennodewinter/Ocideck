@@ -18,13 +18,16 @@ Future<List<SlideQualityIssue>> computeImageContrastIssues(Ref ref) async {
   if (deck == null) return const [];
   final theme = deck.themeProfile;
 
-  // Title slides whose text sits on a background image; everything else is
-  // irrelevant to this check.
+  // Title slides whose text actually sits on the background image; everything
+  // else is irrelevant. A non-full-bleed image (imageSize != 0) is confined to
+  // the top zone with the title in a solid band below it, so its text never
+  // crosses the picture and the image-contrast check does not apply.
   final indices = [
     for (var i = 0; i < deck.slides.length; i++)
       if (!deck.slides[i].skipped &&
           deck.slides[i].type == SlideType.title &&
           deck.slides[i].imagePath.isNotEmpty &&
+          deck.slides[i].imageSize == 0 &&
           (deck.slides[i].title.isNotEmpty ||
               deck.slides[i].subtitle.isNotEmpty))
         i,

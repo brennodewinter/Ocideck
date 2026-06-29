@@ -1633,6 +1633,40 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           (v) => _themeProfile = _themeProfile.copyWith(accentColor: v),
         ),
       ),
+      const SizedBox(height: 12),
+      Row(
+        children: [
+          Expanded(
+            child: Text(
+              l10n.d('Opsommingsteken'),
+              style: const TextStyle(fontSize: 13),
+            ),
+          ),
+          SegmentedButton<BulletMarker>(
+            segments: [
+              ButtonSegment(
+                value: BulletMarker.dot,
+                icon: const Icon(Icons.fiber_manual_record, size: 12),
+                label: Text(l10n.d('Stip')),
+              ),
+              ButtonSegment(
+                value: BulletMarker.paw,
+                icon: const Icon(Icons.pets, size: 16),
+                label: Text(l10n.d('Pootje')),
+              ),
+            ],
+            selected: {_themeProfile.bulletMarker},
+            showSelectedIcon: false,
+            style: const ButtonStyle(visualDensity: VisualDensity.compact),
+            onSelectionChanged: (selection) => setState(() {
+              _themeProfile = _themeProfile.copyWith(
+                bulletMarker: selection.first,
+              );
+              _profileTouched = true;
+            }),
+          ),
+        ],
+      ),
       const SizedBox(height: 24),
       _sectionTitle(l10n.d('Checklist')),
       _themeColorAnchor(
