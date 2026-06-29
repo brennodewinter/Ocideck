@@ -65,11 +65,11 @@ test:
 # guards against large regressions; raise it as coverage improves.
 coverage:
 	@echo "== OciDeck check: coverage =="
-	@echo "Command: flutter test --coverage && dart run tool/coverage_summary.dart --min=50"
+	@echo "Command: flutter test --coverage && dart run tool/coverage_summary.dart --min=55"
 	@echo "Covers: line coverage across every lib/ file a test imports."
 	@echo "Failure means: overall line coverage dropped below the required floor."
 	flutter test --coverage --test-randomize-ordering-seed random
-	dart run tool/coverage_summary.dart --min=50
+	dart run tool/coverage_summary.dart --min=55
 
 # Contract tests for persistence and parsing.
 test-contracts:
