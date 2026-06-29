@@ -20,8 +20,10 @@ lib/
               # export_metadata, image, caption,
               # description, image_dedup (md5 duplicates),
               # image_reference (.md rewrites), recovery, rasterizer,
-              # marp_html, annotation_codec, rehearsal_controller
-  state/      # Riverpod providers: deck, editor, settings, tabs, clipboard
+              # marp_html, annotation_codec, rehearsal_controller,
+              # webdav (Nextcloud source), secret_store (keychain)
+  state/      # Riverpod providers: deck, editor, settings, tabs, clipboard,
+              # webdav
   widgets/    # app shell, panels, dialogs, per-type editors, slides, presenter
   l10n/       # AppLocalizations (8 languages)
   theme/      # app theming

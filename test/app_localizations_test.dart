@@ -51,6 +51,7 @@ void main() {
       'Max',
       'Meter',
       'Min',
+      'Nextcloud',
       'Online',
       'Online media',
       'PREVIEW',

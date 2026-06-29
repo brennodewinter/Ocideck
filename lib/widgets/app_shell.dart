@@ -9,6 +9,7 @@ import '../utils/log.dart';
 import '../models/deck.dart';
 import '../models/slide.dart';
 import '../models/slide_quality.dart';
+import '../models/webdav_settings.dart';
 import '../services/caption_service.dart';
 import '../services/description_service.dart';
 import '../services/classification_enforcement_policy.dart';
@@ -19,12 +20,14 @@ import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
 import '../services/mermaid_render_service.dart';
 import '../services/slide_quality_analyzer.dart';
+import '../services/webdav_service.dart';
 import '../state/deck_provider.dart';
 import '../state/deck_quality_provider.dart';
 import '../state/image_contrast_provider.dart';
 import '../state/editor_provider.dart';
 import '../state/settings_provider.dart';
 import '../state/tabs_provider.dart';
+import '../state/webdav_provider.dart';
 import '../utils/project_path.dart';
 import '../theme/app_theme.dart';
 import '../l10n/app_localizations.dart';
@@ -37,6 +40,7 @@ import 'dialogs/open_presentation_dialog.dart';
 import 'dialogs/presentation_info_dialog.dart';
 import 'dialogs/scan_library_dialog.dart';
 import 'dialogs/settings_dialog.dart';
+import 'dialogs/webdav_browser_dialog.dart';
 import 'panels/editor_panel.dart';
 import 'panels/preview_panel.dart';
 import 'panels/slide_list_panel.dart';
@@ -958,6 +962,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                       newInTab();
                     case 'open':
                       _openWithSearch(context, ref, settings.homeDirectory);
+                    case 'open_nextcloud':
+                      _openFromNextcloud(context, ref);
+                    case 'save_nextcloud':
+                      _saveToNextcloud(context, ref);
                     case 'export_package':
                       exportPackage();
                     case 'import_package':
@@ -999,6 +1007,17 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                     l10n.t('importPackage'),
                   ),
                   menuItem('import_url', Icons.link, l10n.t('importUrl')),
+                  const PopupMenuDivider(),
+                  menuItem(
+                    'open_nextcloud',
+                    Icons.cloud_download_outlined,
+                    l10n.d('Openen vanaf Nextcloud'),
+                  ),
+                  menuItem(
+                    'save_nextcloud',
+                    Icons.cloud_upload_outlined,
+                    l10n.d('Opslaan naar Nextcloud'),
+                  ),
                   const PopupMenuDivider(),
                   menuItem('find', Icons.find_replace, l10n.t('findReplace')),
                   menuItem(

@@ -8,6 +8,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Nextcloud (WebDAV) as a file source** — browse a folder on your Nextcloud
+  and open `.ocideck` packages or Marp `.md` decks straight from it, and save a
+  deck back, either as a single `.ocideck` package or as a flat `.md` plus its
+  asset folders. Configure the server under *Settings → Nextcloud* (server URL,
+  username, app password, optional subfolder) with a **Test connection** button.
+  The **app password is stored encrypted in the OS keychain**, never in the
+  preferences file. A self-hosted server on a private/LAN address is only
+  reachable after ticking **Trusted internal server**; deck-supplied URLs stay
+  blocked by the SSRF guard. Downloads pass through the same safety gate and
+  size/zip limits as every other import. Entry points: the welcome screen, the
+  `…` menu (*Open from Nextcloud* / *Save to Nextcloud*).
 - **OciDeck logo on startup** — the welcome screen and the first-run consent
   dialog now show the OciDeck cat logo.
 - **One-command builds for every target** — `make build-web` (hardened),

@@ -2,11 +2,17 @@ import 'dart:convert';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/settings.dart';
+import '../services/secret_store.dart';
+import '../utils/log.dart';
 
 class SettingsNotifier extends StateNotifier<AppSettings> {
-  SettingsNotifier() : super(const AppSettings()) {
+  SettingsNotifier({SecretStore? secretStore})
+    : _secrets = secretStore ?? SecretStore(),
+      super(const AppSettings()) {
     _load();
   }
+
+  final SecretStore _secrets;
 
   Future<void> _load() async {
     final prefs = await SharedPreferences.getInstance();
@@ -54,6 +60,17 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     final cockpitSchemes = _mergeCockpitSchemes(loadedCockpitSchemes);
     final selectedCockpit =
         prefs.getString('selectedCockpitColorSchemeName') ?? 'Standaard';
+    final webdavJson = prefs.getString('webdavServer');
+    WebdavServer? webdav;
+    if (webdavJson != null) {
+      try {
+        webdav = WebdavServer.fromJson(
+          Map<String, Object?>.from(jsonDecode(webdavJson) as Map),
+        );
+      } catch (e) {
+        logWarning('SettingsNotifier: ongeldige webdavServer-prefs', e);
+      }
+    }
     state = AppSettings(
       languageCode: prefs.getString('languageCode') ?? 'nl',
       homeDirectory: prefs.getString('homeDirectory'),
@@ -84,7 +101,51 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           prefs.getBool('qualityBlockExportOnErrors') ?? false,
       allowRemoteMedia: prefs.getBool('allowRemoteMedia') ?? false,
       showRehearsalSummary: prefs.getBool('showRehearsalSummary') ?? true,
+      webdavServer: webdav,
     );
+  }
+
+  /// Bewaar de WebDAV/Nextcloud-serverconfiguratie (zonder wachtwoord) in
+  /// hetzelfde prefs-domein, of `null` om de bron te verwijderen. Wist enkel
+  /// deze key — nooit het hele domein (zie geheugen `ocideck-prefs-storage`).
+  Future<void> setWebdavServer(WebdavServer? server) async {
+    state = server == null
+        ? state.copyWith(clearWebdavServer: true)
+        : state.copyWith(webdavServer: server);
+    final prefs = await SharedPreferences.getInstance();
+    if (server == null) {
+      await prefs.remove('webdavServer');
+    } else {
+      await prefs.setString('webdavServer', jsonEncode(server.toJson()));
+    }
+  }
+
+  /// Schrijf het WebDAV-wachtwoord versleuteld naar de keychain (gekeyd op
+  /// server-URL + gebruikersnaam). Een leeg wachtwoord wist de entry. Geeft
+  /// `true` bij succes. Vangt keychain-fouten zelf af (en logt ze) zodat een
+  /// niet-afgewachte aanroep — zoals vanuit de settings-dialoog — nooit een
+  /// onafgevangen async-exceptie kan opleveren.
+  Future<bool> setWebdavPassword(
+    String baseUrl,
+    String username,
+    String password,
+  ) async {
+    try {
+      if (password.isEmpty) {
+        await _secrets.deleteWebdavPassword(baseUrl, username);
+      } else {
+        await _secrets.writeWebdavPassword(baseUrl, username, password);
+      }
+      return true;
+    } catch (e) {
+      logWarning('SettingsNotifier.setWebdavPassword: keychain mislukt', e);
+      return false;
+    }
+  }
+
+  /// Lees het opgeslagen WebDAV-wachtwoord uit de keychain, of `null`.
+  Future<String?> readWebdavPassword(String baseUrl, String username) {
+    return _secrets.readWebdavPassword(baseUrl, username);
   }
 
   /// Stel het vrijgaveplafond voor de export-gate in (een TLP-sleutel), of

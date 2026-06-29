@@ -1,3 +1,7 @@
+import 'webdav_settings.dart';
+
+export 'webdav_settings.dart';
+
 /// Glyph used for unordered (bullet) list markers. [dot] is the classic
 /// typographic bullet; [paw] swaps in a small cat-paw drawn in the accent
 /// colour (OciDeck's mascot). The theme picks a default; a slide may override
@@ -538,6 +542,10 @@ class AppSettings {
   /// verschijnt. Standaard aan — backward compatible met het oude gedrag.
   final bool showRehearsalSummary;
 
+  /// Geconfigureerde WebDAV/Nextcloud-bron, of `null` wanneer geen server is
+  /// ingesteld. Bevat nooit het wachtwoord (dat staat in de keychain).
+  final WebdavServer? webdavServer;
+
   const AppSettings({
     this.languageCode = 'nl',
     this.homeDirectory,
@@ -558,6 +566,7 @@ class AppSettings {
     this.qualityBlockExportOnErrors = false,
     this.allowRemoteMedia = false,
     this.showRehearsalSummary = true,
+    this.webdavServer,
   });
 
   ThemeProfile get themeProfile {
@@ -628,10 +637,12 @@ class AppSettings {
     bool? qualityBlockExportOnErrors,
     bool? allowRemoteMedia,
     bool? showRehearsalSummary,
+    WebdavServer? webdavServer,
     bool clearHomeDirectory = false,
     bool clearExportDirectory = false,
     bool clearMaxReleaseExportTlp = false,
     bool clearMinRequiredExportTlp = false,
+    bool clearWebdavServer = false,
   }) {
     final nextProfiles = themeProfiles ?? this.themeProfiles;
     return AppSettings(
@@ -683,6 +694,9 @@ class AppSettings {
           qualityBlockExportOnErrors ?? this.qualityBlockExportOnErrors,
       allowRemoteMedia: allowRemoteMedia ?? this.allowRemoteMedia,
       showRehearsalSummary: showRehearsalSummary ?? this.showRehearsalSummary,
+      webdavServer: clearWebdavServer
+          ? null
+          : (webdavServer ?? this.webdavServer),
     );
   }
 }
