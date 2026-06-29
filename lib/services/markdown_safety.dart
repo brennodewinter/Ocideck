@@ -181,7 +181,9 @@ class MarkdownSafetyScanner {
       if (code == null || code < 0 || code > 0x10FFFF) return m.group(0)!;
       try {
         return String.fromCharCode(code);
-      } catch (_) {
+      } on ArgumentError {
+        // [code] is already range-checked above; this is purely defensive
+        // against any remaining unrepresentable scalar.
         return m.group(0)!;
       }
     });

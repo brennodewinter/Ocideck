@@ -11,6 +11,7 @@ import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../state/consent_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/log.dart';
 import '../../l10n/app_localizations.dart';
 import '../privacy_statement_content.dart';
 
@@ -367,7 +368,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       await service.probe();
     } on WebdavException catch (e) {
       error = _webdavErrorText(l10n, e.kind);
-    } catch (_) {
+    } catch (e, st) {
+      logError('SettingsDialog: WebDAV-verbindingstest', e, st);
       error = l10n.d('Verbinding mislukt');
     }
     if (!mounted) return;

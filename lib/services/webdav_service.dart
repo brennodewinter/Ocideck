@@ -267,8 +267,8 @@ class WebdavService {
     final Uri parsed;
     try {
       parsed = Uri.parse(href);
-    } catch (_) {
-      return null;
+    } on FormatException {
+      return null; // malformed href → treat as outside the root
     }
     final segs = parsed.pathSegments.where((s) => s.isNotEmpty).toList();
     if (segs.length < base.length) return null;
