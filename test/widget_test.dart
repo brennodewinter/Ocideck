@@ -18,10 +18,7 @@ void main() {
   testWidgets('Welcome screen shows startup logo', (WidgetTester tester) async {
     await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
     await tester.pumpAndSettle();
-    expect(
-      find.bySemanticsLabel('De Winter Information Solutions'),
-      findsOneWidget,
-    );
+    expect(find.bySemanticsLabel('OciDeck'), findsOneWidget);
   });
 
   testWidgets('Welcome screen exposes settings', (WidgetTester tester) async {

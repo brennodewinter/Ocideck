@@ -18,7 +18,23 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
     final theme = Theme.of(context);
 
     return AlertDialog(
-      title: Text(l10n.d('Welkom bij OciDeck')),
+      title: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Semantics(
+            label: 'OciDeck',
+            image: true,
+            child: Image.asset(
+              'assets/images/ocideck-logo.png',
+              height: 72,
+              fit: BoxFit.contain,
+              filterQuality: FilterQuality.high,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(l10n.d('Welkom bij OciDeck')),
+        ],
+      ),
       content: SizedBox(
         width: 600,
         child: SingleChildScrollView(

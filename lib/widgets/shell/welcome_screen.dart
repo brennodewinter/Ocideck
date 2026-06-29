@@ -27,11 +27,11 @@ class _WelcomeScreen extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Semantics(
-                    label: 'De Winter Information Solutions',
+                    label: 'OciDeck',
                     image: true,
                     child: Image.asset(
-                      'assets/images/de-winter-wittegeheel.png',
-                      width: 320,
+                      'assets/images/ocideck-logo.png',
+                      width: 200,
                       fit: BoxFit.contain,
                       filterQuality: FilterQuality.high,
                     ),
