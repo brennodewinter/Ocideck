@@ -94,6 +94,16 @@ mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
       if (mounted) setState(() {});
       return;
     }
+    // SSRF gate for a remote media URL: resolve the host and refuse an internal
+    // target before VideoPlayerController.networkUrl, which would otherwise
+    // resolve+connect with no host check (see NetGuard.isAllowedMediaUrlResolved).
+    if (VideoSource.looksLikeUrl(path) &&
+        !await NetGuard.isAllowedMediaUrlResolved(path)) {
+      if (gen != _initGen) return;
+      if (mounted) setState(() {}); // keep the placeholder visible
+      return;
+    }
+    if (gen != _initGen) return; // superseded while resolving
     final controller = createMediaController(path);
     try {
       await controller.initialize();
@@ -942,18 +952,33 @@ Widget _resolvedImage(
   // bestanden), maar alleen als de remote-media-gate open staat én de URL door
   // de SSRF-gate komt. Anders een placeholder met de URL.
   if (VideoSource.looksLikeUrl(imagePath)) {
-    final allowed =
-        _SlideLinkScope.allowRemoteMediaOf(context) &&
-        VideoSource.isAllowedRemoteUrl(imagePath);
-    if (!allowed) return _remoteBlockedPlaceholder(context, imagePath);
-    return Image(
-      image: cappedNetworkImage(imagePath),
-      fit: fit,
-      width: double.infinity,
-      height: double.infinity,
-      gaplessPlayback: true,
-      semanticLabel: semanticLabel,
-      errorBuilder: (context, error, stackTrace) => _imagePlaceholder(context),
+    if (!_SlideLinkScope.allowRemoteMediaOf(context)) {
+      return _remoteBlockedPlaceholder(context, imagePath);
+    }
+    // Resolve the host before fetching: a remote image whose host maps to an
+    // internal address is an SSRF probe (NetGuard.isAllowedMediaUrlResolved),
+    // so gate the NetworkImage on the async result and show a placeholder
+    // while it resolves / when it is refused.
+    return FutureBuilder<bool>(
+      future: NetGuard.isAllowedMediaUrlResolved(imagePath),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return _imagePlaceholder(context);
+        }
+        if (snapshot.data != true) {
+          return _remoteBlockedPlaceholder(context, imagePath);
+        }
+        return Image(
+          image: cappedNetworkImage(imagePath),
+          fit: fit,
+          width: double.infinity,
+          height: double.infinity,
+          gaplessPlayback: true,
+          semanticLabel: semanticLabel,
+          errorBuilder: (context, error, stackTrace) =>
+              _imagePlaceholder(context),
+        );
+      },
     );
   }
 

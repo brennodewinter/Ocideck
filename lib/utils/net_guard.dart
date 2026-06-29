@@ -103,4 +103,35 @@ class NetGuard {
     if (scheme != 'http' && scheme != 'https') return false;
     return !isBlockedHost(uri.host);
   }
+
+  /// Per-host memo of the resolved media gate. Positive results stay cached for
+  /// the session (a legitimate CDN host resolves once); a negative is dropped so
+  /// a transient DNS blip can be retried and an internal host is re-checked
+  /// rather than wrongly cached as reachable.
+  static final Map<String, Future<bool>> _mediaHostResolveCache = {};
+
+  /// Connect-time SSRF gate for a deck-supplied media URL. Layers a DNS
+  /// resolution on top of the lexical [isAllowedMediaUrl]: a hostname that
+  /// resolves to a loopback/private/link-local address — or a non-dotted
+  /// encoding like `http://2130706433/` that the lexical check waves through —
+  /// is rejected here. Call this before handing the URL to `NetworkImage` /
+  /// `VideoPlayerController`, which otherwise resolve and connect with no host
+  /// check of their own.
+  ///
+  /// NOTE: those higher-level APIs re-resolve the host at fetch time, so this
+  /// does not pin the socket; a DNS rebind in the window between this check and
+  /// the fetch stays possible. It closes the static-internal and
+  /// resolves-to-internal cases, which are the realistic deck-driven attacks.
+  static Future<bool> isAllowedMediaUrlResolved(String url) {
+    if (!isAllowedMediaUrl(url)) return Future.value(false);
+    final host = Uri.parse(url.trim()).host;
+    final cached = _mediaHostResolveCache[host];
+    if (cached != null) return cached;
+    final future = safeResolve(host).then((addrs) => addrs != null);
+    _mediaHostResolveCache[host] = future;
+    future.then((allowed) {
+      if (!allowed) _mediaHostResolveCache.remove(host);
+    });
+    return future;
+  }
 }

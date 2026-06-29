@@ -231,4 +231,42 @@ void main() {
       expect(untrusted, isNotNull);
     });
   });
+
+  group('NetGuard.isAllowedMediaUrlResolved', () {
+    test('rejects a non-http(s) scheme', () async {
+      expect(
+        await NetGuard.isAllowedMediaUrlResolved('ftp://example.com/x.png'),
+        isFalse,
+      );
+      expect(
+        await NetGuard.isAllowedMediaUrlResolved('file:///etc/passwd'),
+        isFalse,
+      );
+    });
+
+    test('rejects a loopback / private / link-local literal host', () async {
+      expect(
+        await NetGuard.isAllowedMediaUrlResolved('http://127.0.0.1/x.png'),
+        isFalse,
+      );
+      expect(
+        await NetGuard.isAllowedMediaUrlResolved('http://10.0.0.5/x.png'),
+        isFalse,
+      );
+      // Cloud metadata endpoint — the realistic SSRF target.
+      expect(
+        await NetGuard.isAllowedMediaUrlResolved(
+          'http://169.254.169.254/latest/meta-data/',
+        ),
+        isFalse,
+      );
+    });
+
+    test('allows a public literal host (no DNS needed)', () async {
+      expect(
+        await NetGuard.isAllowedMediaUrlResolved('https://93.184.216.34/a.png'),
+        isTrue,
+      );
+    });
+  });
 }
