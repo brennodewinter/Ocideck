@@ -1,0 +1,312 @@
+// Part of the file_service library — see ../file_service.dart.
+// Split out for navigability (project (.md+assets) writing & theme CSS); all imports live in the main library
+// file. These are private FileService helpers — they relocate verbatim
+// into an extension on FileService, same library, no behaviour change.
+part of '../file_service.dart';
+
+extension _FileServiceProject on FileService {
+  Future<Deck> _writeProject(Deck deck, String filePath) async {
+    final dir = p.dirname(filePath);
+
+    final imagesDir = Directory(p.join(dir, 'images'));
+    final logosDir = Directory(p.join(dir, 'logos'));
+    final themesDir = Directory(p.join(dir, 'themes'));
+    await imagesDir.create(recursive: true);
+    await logosDir.create(recursive: true);
+    await themesDir.create(recursive: true);
+
+    final imageSlides = await _img.copyImagesToProject(deck.slides, dir);
+    final mediaSlides = await _img.copyMediaToProject(imageSlides, dir);
+    var updatedDeck = deck.copyWith(slides: mediaSlides, projectPath: dir);
+    final logoAsset = await _copyLogoToProject(updatedDeck.themeProfile, dir);
+    updatedDeck = updatedDeck.copyWith(themeProfile: logoAsset.profile);
+    await _writeImageCaptions(updatedDeck);
+
+    await _writeTheme(
+      themesDir.path,
+      updatedDeck.theme,
+      updatedDeck.themeProfile,
+      logoAsset.cssUrl,
+    );
+
+    // Bring linked chart CSVs along when saving to a new location.
+    await _copyChartData(deck, dir);
+
+    final markdown = _md.generateDeck(updatedDeck);
+    await writeStringAtomic(File(filePath), markdown);
+    // Annotations and user notes live in separate sidecars so the .md stays pure.
+    await _writeSidecar(updatedDeck, filePath);
+    await _writeUserNotesSidecar(updatedDeck, filePath);
+    return updatedDeck;
+  }
+
+  Future<Deck> _hydrateImageCaptions(Deck deck) async {
+    final slides = <Slide>[];
+    for (final slide in deck.slides) {
+      var next = slide;
+      if (slide.imagePath.isNotEmpty) {
+        final caption = await _captions.getCaption(
+          slide.imagePath,
+          basePath: deck.projectPath,
+        );
+        if (caption != null) next = next.copyWith(imageCaption: caption);
+      }
+      if (slide.imagePath2.isNotEmpty) {
+        final caption = await _captions.getCaption(
+          slide.imagePath2,
+          basePath: deck.projectPath,
+        );
+        if (caption != null) next = next.copyWith(imageCaption2: caption);
+      }
+      slides.add(next);
+    }
+    return deck.copyWith(slides: slides);
+  }
+
+  Future<void> _writeImageCaptions(Deck deck) async {
+    for (final slide in deck.slides) {
+      if (slide.imagePath.isNotEmpty && slide.imageCaption.trim().isNotEmpty) {
+        await _captions.saveCaption(
+          slide.imagePath,
+          slide.imageCaption,
+          basePath: deck.projectPath,
+        );
+      }
+      if (slide.imagePath2.isNotEmpty &&
+          slide.imageCaption2.trim().isNotEmpty) {
+        await _captions.saveCaption(
+          slide.imagePath2,
+          slide.imageCaption2,
+          basePath: deck.projectPath,
+        );
+      }
+    }
+  }
+
+  Future<void> _writeTheme(
+    String themesPath,
+    String themeName,
+    ThemeProfile profile,
+    String? logoUrl,
+  ) async {
+    final safeThemeName = themeName.trim().isEmpty ? 'ocideck' : themeName;
+    final dest = File(p.join(themesPath, '$safeThemeName.css'));
+    try {
+      final base = (await rootBundle.loadString(
+        'assets/themes/ocideck.css',
+      )).replaceFirst('@theme ocideck', '@theme $safeThemeName');
+      await writeStringAtomic(dest, _buildThemeCss(base, profile, logoUrl));
+    } catch (e) {
+      // Asset not bundled in this build context; skip
+      logWarning('FileService._writeTheme: theme asset not bundled', e);
+    }
+  }
+
+  Future<_LogoProjectAsset> _copyLogoToProject(
+    ThemeProfile profile,
+    String projectPath,
+  ) async {
+    final logoPath = profile.logoPath;
+    if (logoPath == null || logoPath.trim().isEmpty) {
+      return _LogoProjectAsset(profile, null);
+    }
+
+    final normalized = logoPath.replaceAll('\\', '/');
+    final relativeLogoPath = p.posix.isRelative(normalized)
+        ? p.posix.normalize(normalized)
+        : null;
+    if (relativeLogoPath != null && relativeLogoPath.startsWith('logos/')) {
+      return _LogoProjectAsset(
+        profile.copyWith(logoPath: relativeLogoPath),
+        '../$relativeLogoPath',
+      );
+    }
+
+    var sourcePath = p.isAbsolute(logoPath)
+        ? logoPath
+        : p.normalize(p.join(projectPath, logoPath));
+    var src = File(sourcePath);
+    if (!await src.exists()) {
+      final fallback = await _findExistingProjectLogo(projectPath, normalized);
+      if (fallback == null) {
+        return _LogoProjectAsset(profile, null);
+      }
+      sourcePath = fallback;
+      src = File(sourcePath);
+    }
+
+    final filename = p.posix.basename(normalized);
+    if (filename.isEmpty || filename == '.' || filename == '..') {
+      return _LogoProjectAsset(profile, null);
+    }
+
+    final relativePath = p.posix.join('logos', filename);
+    final dest = File(p.join(projectPath, relativePath));
+    if (!p.equals(src.path, dest.path)) {
+      await dest.parent.create(recursive: true);
+      await src.copy(dest.path);
+    }
+
+    return _LogoProjectAsset(
+      profile.copyWith(logoPath: relativePath),
+      '../$relativePath',
+    );
+  }
+
+  Future<String?> _findExistingProjectLogo(
+    String projectPath,
+    String normalizedLogoPath,
+  ) async {
+    final filename = p.posix.basename(normalizedLogoPath);
+    if (filename.isEmpty || filename == '.' || filename == '..') return null;
+
+    final candidates = [
+      p.join(projectPath, 'logos', filename),
+      p.join(projectPath, 'images', filename),
+      p.join(projectPath, 'images', 'logo_$filename'),
+    ];
+    for (final candidate in candidates) {
+      if (await File(candidate).exists()) return candidate;
+    }
+    return null;
+  }
+
+  String _buildThemeCss(String base, ThemeProfile profile, String? logoUrl) {
+    final logoCss = logoUrl == null
+        ? ''
+        : '''
+
+section.logo-safe {
+  ${_logoSafePaddingCss(profile)}
+}
+
+section.split.logo-safe {
+  padding: 48px 0 48px var(--split-margin);
+}
+
+${_splitLogoSafeCss(profile)}
+
+section::before {
+  content: "";
+  position: absolute;
+  width: ${profile.logoSize}px;
+  height: ${profile.logoSize}px;
+  background-image: url("$logoUrl");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.9;
+  ${_logoPositionCss(profile.logoPosition)}
+}
+
+section.no-logo::before {
+  display: none;
+}
+''';
+
+    return '''
+$base
+
+/* OciDeck style profile */
+section {
+  background: ${profile.slideBackgroundColor};
+  color: ${profile.textColor};
+  position: relative;
+}
+
+section h1,
+section h2,
+section h3,
+section strong {
+  color: ${profile.textColor};
+}
+
+section li::marker {
+  color: ${profile.accentColor};
+}
+
+section.title {
+  background: ${profile.titleBackgroundColor};
+  color: ${profile.titleTextColor};
+}
+
+section.title h1,
+section.title h2 {
+  color: ${profile.titleTextColor};
+}
+
+section.section {
+  background: ${profile.sectionBackgroundColor};
+  color: ${profile.titleTextColor};
+}
+
+section.section h1 {
+  color: ${profile.titleTextColor};
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.72em;
+}
+
+th, td {
+  border: 1px solid ${profile.accentColor};
+  padding: 0.22em 0.45em;
+  text-align: left;
+  color: ${profile.tableTextColor};
+}
+
+thead th, tr:first-child th {
+  background: ${profile.tableHeaderBackgroundColor};
+  color: ${profile.tableHeaderTextColor};
+}
+$logoCss
+''';
+  }
+
+  String _logoPositionCss(String position) {
+    switch (position) {
+      case 'top-left':
+        return 'top: 40px;\n  left: 28px;';
+      case 'top-right':
+        return 'top: 40px;\n  right: 28px;';
+      case 'bottom-left':
+        return 'bottom: 12px;\n  left: 28px;';
+      case 'bottom-right':
+      default:
+        return 'bottom: 12px;\n  right: 28px;';
+    }
+  }
+
+  String _logoSafePaddingCss(ThemeProfile profile) {
+    switch (profile.logoPosition) {
+      case 'top-left':
+      case 'top-right':
+        final reserved = profile.logoSize + 52;
+        return 'padding-top: ${reserved}px;';
+      case 'bottom-left':
+      case 'bottom-right':
+      default:
+        final reserved = profile.logoSize + 24;
+        return 'padding-bottom: ${reserved}px;';
+    }
+  }
+
+  String _splitLogoSafeCss(ThemeProfile profile) {
+    if (profile.logoPosition.endsWith('right')) return '';
+    final reserved = profile.logoSize + 24;
+    if (profile.logoPosition.startsWith('top')) {
+      return '''
+section.split.logo-safe .split-text {
+  padding-top: ${reserved}px;
+}
+''';
+    }
+    return '''
+section.split.logo-safe .split-text {
+  padding-bottom: ${reserved}px;
+}
+''';
+  }
+}
