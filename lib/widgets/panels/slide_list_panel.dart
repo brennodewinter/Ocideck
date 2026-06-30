@@ -774,144 +774,154 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
               ),
 
               // ── Add / Paste slide buttons ─────────────────────────────────
-              Container(
-                color: const Color(0xFF252830),
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 32,
-                      width: double.infinity,
-                      child: OutlinedButton.icon(
-                        onPressed: () async {
-                          final path = await ref
-                              .read(imageServiceProvider)
-                              .pasteImage(projectPath: deck.projectPath);
-                          if (path == null) {
-                            if (!context.mounted) return;
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  l10n.d(
-                                    'Geen afbeelding op het klembord gevonden.',
-                                  ),
-                                ),
-                              ),
-                            );
-                            return;
-                          }
-                          final idx = editor.selectedIndex;
-                          notifier.addSlide(SlideType.image, afterIndex: idx);
-                          final newIdx = idx + 1;
-                          notifier.updateSlide(
-                            newIdx,
-                            Slide.create(
-                              SlideType.image,
-                            ).copyWith(imagePath: path),
-                          );
-                          editorNotifier.select(newIdx);
-                        },
-                        icon: const Icon(Icons.image_outlined, size: 14),
-                        label: Text(l10n.d('Afbeelding plakken')),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: Colors.white70,
-                          side: const BorderSide(color: Color(0xFF4A4F5B)),
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          textStyle: const TextStyle(fontSize: 11),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    SizedBox(
-                      height: 36,
-                      width: double.infinity,
-                      child: ElevatedButton.icon(
-                        onPressed: () async {
-                          final type = await AddSlideDialog.show(context);
-                          if (type != null) {
-                            final idx = editor.selectedIndex;
-                            notifier.addSlide(type, afterIndex: idx);
-                            editorNotifier.select(idx + 1);
-                          }
-                        },
-                        icon: const Icon(Icons.add, size: 16),
-                        label: Text(l10n.d('Slide toevoegen')),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppTheme.accent,
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                          textStyle: const TextStyle(fontSize: 12),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    SizedBox(
-                      height: 32,
-                      width: double.infinity,
-                      child: OutlinedButton.icon(
-                        onPressed: () => _findSlides(context, ref, deckState),
-                        icon: const Icon(
-                          Icons.travel_explore_outlined,
-                          size: 14,
-                        ),
-                        label: Text(l10n.d('Slide zoeken')),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: Colors.white70,
-                          side: const BorderSide(color: Color(0xFF4A4F5B)),
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          textStyle: const TextStyle(fontSize: 11),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    SizedBox(
-                      height: 32,
-                      width: double.infinity,
-                      child: OutlinedButton.icon(
-                        onPressed: () => _importSlides(context, ref, deckState),
-                        icon: const Icon(Icons.library_add_outlined, size: 14),
-                        label: Text(l10n.d('Slides importeren')),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: Colors.white70,
-                          side: const BorderSide(color: Color(0xFF4A4F5B)),
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          textStyle: const TextStyle(fontSize: 11),
-                        ),
-                      ),
-                    ),
-                    if (clipboard != null) ...[
-                      const SizedBox(height: 6),
-                      SizedBox(
-                        height: 32,
-                        width: double.infinity,
-                        child: OutlinedButton.icon(
-                          onPressed: () {
-                            final idx = editor.selectedIndex;
-                            notifier.addSlide(clipboard.type, afterIndex: idx);
-                            // Replace the newly created blank slide with the copied one
-                            final newIdx = idx + 1;
-                            notifier.updateSlide(
-                              newIdx,
-                              Slide.duplicate(clipboard),
-                            );
-                            editorNotifier.select(newIdx);
-                          },
-                          icon: const Icon(Icons.content_paste, size: 14),
-                          label: Text(l10n.d('Slide plakken')),
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.white70,
-                            side: const BorderSide(color: Color(0xFF4A4F5B)),
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            textStyle: const TextStyle(fontSize: 11),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
+              _addPasteButtons(
+                context,
+                deck,
+                deckState,
+                editor,
+                clipboard,
+                l10n,
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _addPasteButtons(
+    BuildContext context,
+    Deck deck,
+    DeckState deckState,
+    EditorState editor,
+    Slide? clipboard,
+    AppLocalizations l10n,
+  ) {
+    final notifier = ref.read(deckProvider.notifier);
+    final editorNotifier = ref.read(editorProvider.notifier);
+    return Container(
+      color: const Color(0xFF252830),
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 32,
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              onPressed: () async {
+                final path = await ref
+                    .read(imageServiceProvider)
+                    .pasteImage(projectPath: deck.projectPath);
+                if (path == null) {
+                  if (!context.mounted) return;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        l10n.d('Geen afbeelding op het klembord gevonden.'),
+                      ),
+                    ),
+                  );
+                  return;
+                }
+                final idx = editor.selectedIndex;
+                notifier.addSlide(SlideType.image, afterIndex: idx);
+                final newIdx = idx + 1;
+                notifier.updateSlide(
+                  newIdx,
+                  Slide.create(SlideType.image).copyWith(imagePath: path),
+                );
+                editorNotifier.select(newIdx);
+              },
+              icon: const Icon(Icons.image_outlined, size: 14),
+              label: Text(l10n.d('Afbeelding plakken')),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.white70,
+                side: const BorderSide(color: Color(0xFF4A4F5B)),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                textStyle: const TextStyle(fontSize: 11),
+              ),
+            ),
+          ),
+          const SizedBox(height: 6),
+          SizedBox(
+            height: 36,
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: () async {
+                final type = await AddSlideDialog.show(context);
+                if (type != null) {
+                  final idx = editor.selectedIndex;
+                  notifier.addSlide(type, afterIndex: idx);
+                  editorNotifier.select(idx + 1);
+                }
+              },
+              icon: const Icon(Icons.add, size: 16),
+              label: Text(l10n.d('Slide toevoegen')),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppTheme.accent,
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                textStyle: const TextStyle(fontSize: 12),
+              ),
+            ),
+          ),
+          const SizedBox(height: 6),
+          SizedBox(
+            height: 32,
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              onPressed: () => _findSlides(context, ref, deckState),
+              icon: const Icon(Icons.travel_explore_outlined, size: 14),
+              label: Text(l10n.d('Slide zoeken')),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.white70,
+                side: const BorderSide(color: Color(0xFF4A4F5B)),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                textStyle: const TextStyle(fontSize: 11),
+              ),
+            ),
+          ),
+          const SizedBox(height: 6),
+          SizedBox(
+            height: 32,
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              onPressed: () => _importSlides(context, ref, deckState),
+              icon: const Icon(Icons.library_add_outlined, size: 14),
+              label: Text(l10n.d('Slides importeren')),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.white70,
+                side: const BorderSide(color: Color(0xFF4A4F5B)),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                textStyle: const TextStyle(fontSize: 11),
+              ),
+            ),
+          ),
+          if (clipboard != null) ...[
+            const SizedBox(height: 6),
+            SizedBox(
+              height: 32,
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: () {
+                  final idx = editor.selectedIndex;
+                  notifier.addSlide(clipboard.type, afterIndex: idx);
+                  // Replace the newly created blank slide with the copied one
+                  final newIdx = idx + 1;
+                  notifier.updateSlide(newIdx, Slide.duplicate(clipboard));
+                  editorNotifier.select(newIdx);
+                },
+                icon: const Icon(Icons.content_paste, size: 14),
+                label: Text(l10n.d('Slide plakken')),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.white70,
+                  side: const BorderSide(color: Color(0xFF4A4F5B)),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  textStyle: const TextStyle(fontSize: 11),
+                ),
+              ),
+            ),
+          ],
+        ],
       ),
     );
   }
