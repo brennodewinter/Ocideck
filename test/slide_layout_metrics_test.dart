@@ -87,4 +87,59 @@ void main() {
       expect(scale, lessThanOrEqualTo(2.5));
     });
   });
+
+  group('memoizedRenderLayout', () {
+    // Guards the slide-preview fit-scale cache: a hit must skip recompute, and
+    // every keyed input must invalidate it. If a future change makes the real
+    // fit depend on an input not in the key, this is the test that should fail
+    // — the golden tests only ever exercise the cold (first-compute) path.
+    test('a hit returns the cached value without recomputing', () {
+      final slide = Slide.create(SlideType.bullets);
+      var calls = 0;
+      double run() => memoizedRenderLayout<double>(
+        slide: slide,
+        font: 'Roboto',
+        width: 100,
+        availW: 80,
+        availH: 60,
+        compute: () {
+          calls++;
+          return 1.5;
+        },
+      );
+      expect(run(), 1.5);
+      expect(run(), 1.5);
+      expect(calls, 1, reason: 'second call must hit the cache');
+    });
+
+    test('each keyed input invalidates the cache', () {
+      final slide = Slide.create(SlideType.bullets);
+      final other = Slide.create(SlideType.bullets);
+      var calls = 0;
+      double run({
+        Slide? s,
+        String font = 'Roboto',
+        double width = 100,
+        double availW = 80,
+        double availH = 60,
+      }) => memoizedRenderLayout<double>(
+        slide: s ?? slide,
+        font: font,
+        width: width,
+        availW: availW,
+        availH: availH,
+        compute: () {
+          calls++;
+          return calls.toDouble();
+        },
+      );
+      run(); // 1: warm
+      run(s: other); // 2: different slide identity
+      run(font: 'Inter'); // 3: different font
+      run(width: 101); // 4: different width
+      run(availW: 81); // 5: different available width
+      run(availH: 61); // 6: different available height
+      expect(calls, 6, reason: 'every distinct key must miss and recompute');
+    });
+  });
 }
