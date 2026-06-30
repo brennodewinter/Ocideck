@@ -40,8 +40,6 @@ const Map<String, int> methodLengthBaseline = {
       240,
   'lib/widgets/panels/editor_panel.dart::EditorPanel.build': 154,
   'lib/widgets/panels/slide_list_panel.dart::_SlideListPanelState.build': 265,
-  'lib/widgets/panels/slide_quality_panel.dart::_SlideQualityPanelState.build':
-      201,
   'lib/widgets/presentation/parts/presenter_keys.dart::_PresenterKeys._handleKey':
       160,
 };
