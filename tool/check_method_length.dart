@@ -44,10 +44,6 @@ const Map<String, int> methodLengthBaseline = {
       234,
   'lib/widgets/dialogs/parts/settings_dialog_colors.dart::_SettingsColors._logoSectionChildren':
       173,
-  'lib/widgets/dialogs/parts/settings_dialog_general.dart::_SettingsGeneralTab._cockpitTab':
-      163,
-  'lib/widgets/dialogs/parts/settings_dialog_general.dart::_SettingsGeneralTab._generalTab':
-      210,
   'lib/widgets/editors/chart_editor.dart::_ChartEditorState._grid': 185,
   'lib/widgets/editors/chart_editor.dart::_ChartEditorState.build': 204,
   'lib/widgets/editors/cockpit_editor.dart::_MeterCard.build': 185,
