@@ -25,9 +25,7 @@ const int maxFileLines = 1000;
 /// number — the run prints a tip) but never grow. Add a new entry only with a
 /// deliberate reason; the goal is fewer and smaller entries over time.
 /// `lib/l10n/translations/*` is exempt — those files grow with every UI string.
-const Map<String, int> fileSizeBaseline = {
-  'lib/widgets/presentation/fullscreen_presenter.dart': 1274,
-};
+const Map<String, int> fileSizeBaseline = {};
 
 final _print = RegExp(r'(?<![\w.])print\(');
 final _catchUnderscore = RegExp(r'catch\s*\(\s*_\s*\)');
