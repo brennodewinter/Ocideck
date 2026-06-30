@@ -55,7 +55,6 @@ const Map<String, int> methodLengthBaseline = {
       171,
   'lib/widgets/editors/question_editor.dart::_QuestionEditorState.build': 193,
   'lib/widgets/panels/editor_panel.dart::EditorPanel.build': 154,
-  'lib/widgets/panels/preview_panel.dart::_PreviewPanelState.build': 313,
   'lib/widgets/panels/slide_list_panel.dart::_SlideListPanelState.build': 265,
   'lib/widgets/panels/slide_quality_panel.dart::_SlideQualityPanelState.build':
       201,

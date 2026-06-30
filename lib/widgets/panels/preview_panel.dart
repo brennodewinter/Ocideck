@@ -157,277 +157,305 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               // ── Header ──────────────────────────────────────────────────────
-              Container(
-                color: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 6,
-                ),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.preview_outlined,
-                      size: 16,
-                      color: Color(0xFF64748B),
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      l10n.d('Preview'),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 13,
-                        color: Color(0xFF334155),
-                      ),
-                    ),
-                    const Spacer(),
-                    // ── Zoom controls ──────────────────────────────────────
-                    Tooltip(
-                      message: l10n.d('Uitzoomen'),
-                      child: IconButton(
-                        icon: const Icon(Icons.remove, size: 16),
-                        onPressed: _zoom > _minZoom ? _zoomOut : null,
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(
-                          minWidth: 28,
-                          minHeight: 28,
-                        ),
-                        color: const Color(0xFF64748B),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: _zoom != _minZoom ? _resetZoom : null,
-                      child: Tooltip(
-                        message: l10n.d('Zoom resetten'),
-                        child: Text(
-                          '${(_zoom * 100).round()}%',
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: _zoom != _minZoom
-                                ? AppTheme.accent
-                                : const Color(0xFF94A3B8),
-                            fontWeight: _zoom != _minZoom
-                                ? FontWeight.w600
-                                : FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Tooltip(
-                      message: l10n.d('Inzoomen'),
-                      child: IconButton(
-                        icon: const Icon(Icons.add, size: 16),
-                        onPressed: _zoom < _maxZoom ? _zoomIn : null,
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(
-                          minWidth: 28,
-                          minHeight: 28,
-                        ),
-                        color: const Color(0xFF64748B),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      hasRichTextPages
-                          ? '${idx + 1} / ${deck.slides.length}'
-                                ' · ${l10n.d('Pagina')} ${richTextPage + 1} / $richTextPages'
-                          : '${idx + 1} / ${deck.slides.length}',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: hasRichTextPages
-                            ? AppTheme.accent
-                            : const Color(0xFF94A3B8),
-                        fontWeight: hasRichTextPages
-                            ? FontWeight.w600
-                            : FontWeight.normal,
-                      ),
-                    ),
-                    const SizedBox(width: 4),
-                    Tooltip(
-                      message: l10n.d('Preview inklappen'),
-                      child: IconButton(
-                        icon: const Icon(Icons.chevron_right, size: 18),
-                        onPressed: () =>
-                            ref.read(previewCollapsedProvider.notifier).state =
-                                true,
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(
-                          minWidth: 28,
-                          minHeight: 28,
-                        ),
-                        color: const Color(0xFF64748B),
-                      ),
-                    ),
-                  ],
-                ),
+              _header(
+                l10n,
+                deck,
+                idx,
+                richTextPage,
+                richTextPages,
+                hasRichTextPages,
               ),
               const Divider(height: 1),
 
               // ── Slide canvas ─────────────────────────────────────────────────
-              Expanded(
-                child: ClipRect(
-                  child: InteractiveViewer(
-                    transformationController: _transform,
-                    minScale: _minZoom,
-                    maxScale: _maxZoom,
-                    constrained: true,
-                    onInteractionUpdate: (details) {
-                      final scale = _transform.value.getMaxScaleOnAxis();
-                      if ((scale - _zoom).abs() > 0.01) {
-                        setState(() => _zoom = scale.clamp(_minZoom, _maxZoom));
-                      }
-                    },
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withValues(alpha: 0.15),
-                                blurRadius: 16,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                          child: SlidePreviewWidget(
-                            slide: slide,
-                            projectPath: deck.projectPath,
-                            themeProfile: deck.themeProfile,
-                            cockpitColorScheme: settings.cockpitColorScheme,
-                            onLinkTap: openExternalUrl,
-                            slideNumber: idx + 1,
-                            slideCount: deck.slides.length,
-                            richTextPage: richTextPage,
-                            showRichTextPageControls: hasRichTextPages,
-                            onRichTextPageChanged: hasRichTextPages
-                                ? (page) =>
-                                      ref
-                                              .read(
-                                                richTextPreviewPageProvider
-                                                    .notifier,
-                                              )
-                                              .state =
-                                          page
-                                : null,
-                            tlp: deck.tlp,
-                            organization: deck.organization,
-                            showClassificationWatermark:
-                                settings.classificationWatermarkEnabled,
-                            // In de editor mag audio/video bediend worden, maar
-                            // niet vanzelf starten (anders dreunt het door op
-                            // elke slide-wissel).
-                            enableMedia: true,
-                            autoplayMedia: false,
-                            allowRemoteMedia: settings.allowRemoteMedia,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+              _slideCanvas(
+                deck,
+                settings,
+                slide,
+                idx,
+                richTextPage,
+                hasRichTextPages,
               ),
 
               // ── Navigation footer ────────────────────────────────────────────
-              Container(
-                color: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 6,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: idx > 0 || richTextPage > 0
-                          ? () => _move(-1)
-                          : null,
-                      icon: const Icon(Icons.chevron_left),
-                      iconSize: 20,
-                      tooltip: hasRichTextPages && richTextPage > 0
-                          ? l10n.d('Vorige pagina')
-                          : l10n.d('Vorige slide'),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            l10n.d(slide.type.label),
-                            style: const TextStyle(
-                              fontSize: 11,
-                              color: Color(0xFF64748B),
-                            ),
-                          ),
-                          if (hasRichTextPages)
-                            Text(
-                              '${l10n.d('Pagina')} ${richTextPage + 1} / $richTextPages',
-                              style: const TextStyle(
-                                fontSize: 10,
-                                color: Color(0xFF94A3B8),
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                    IconButton(
-                      onPressed:
-                          idx < deck.slides.length - 1 ||
-                              (hasRichTextPages &&
-                                  richTextPage < richTextPages - 1)
-                          ? () => _move(1)
-                          : null,
-                      icon: const Icon(Icons.chevron_right),
-                      iconSize: 20,
-                      tooltip:
-                          hasRichTextPages && richTextPage < richTextPages - 1
-                          ? l10n.d('Volgende pagina')
-                          : l10n.d('Volgende slide'),
-                    ),
-                  ],
-                ),
+              _navFooter(
+                l10n,
+                deck,
+                slide,
+                idx,
+                richTextPage,
+                richTextPages,
+                hasRichTextPages,
               ),
 
               // ── Theme chip ───────────────────────────────────────────────────
-              Container(
-                color: const Color(0xFFF8FAFC),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 6,
-                ),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.palette_outlined,
-                      size: 12,
-                      color: Color(0xFF94A3B8),
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      '${l10n.d('Thema')}: ${deck.theme}',
-                      style: const TextStyle(
-                        fontSize: 10,
-                        color: Color(0xFF94A3B8),
-                      ),
-                    ),
-                    if (deck.paginate) ...[
-                      const SizedBox(width: 10),
-                      const Icon(Icons.tag, size: 12, color: Color(0xFF94A3B8)),
-                      const SizedBox(width: 2),
-                      Text(
-                        l10n.d('paginering aan'),
-                        style: const TextStyle(
-                          fontSize: 10,
-                          color: Color(0xFF94A3B8),
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
+              _themeChip(l10n, deck),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _header(
+    AppLocalizations l10n,
+    Deck deck,
+    int idx,
+    int richTextPage,
+    int richTextPages,
+    bool hasRichTextPages,
+  ) {
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.preview_outlined,
+            size: 16,
+            color: Color(0xFF64748B),
+          ),
+          const SizedBox(width: 6),
+          Text(
+            l10n.d('Preview'),
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 13,
+              color: Color(0xFF334155),
+            ),
+          ),
+          const Spacer(),
+          // ── Zoom controls ──────────────────────────────────────
+          Tooltip(
+            message: l10n.d('Uitzoomen'),
+            child: IconButton(
+              icon: const Icon(Icons.remove, size: 16),
+              onPressed: _zoom > _minZoom ? _zoomOut : null,
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+              color: const Color(0xFF64748B),
+            ),
+          ),
+          GestureDetector(
+            onTap: _zoom != _minZoom ? _resetZoom : null,
+            child: Tooltip(
+              message: l10n.d('Zoom resetten'),
+              child: Text(
+                '${(_zoom * 100).round()}%',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: _zoom != _minZoom
+                      ? AppTheme.accent
+                      : const Color(0xFF94A3B8),
+                  fontWeight: _zoom != _minZoom
+                      ? FontWeight.w600
+                      : FontWeight.normal,
+                ),
+              ),
+            ),
+          ),
+          Tooltip(
+            message: l10n.d('Inzoomen'),
+            child: IconButton(
+              icon: const Icon(Icons.add, size: 16),
+              onPressed: _zoom < _maxZoom ? _zoomIn : null,
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+              color: const Color(0xFF64748B),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            hasRichTextPages
+                ? '${idx + 1} / ${deck.slides.length}'
+                      ' · ${l10n.d('Pagina')} ${richTextPage + 1} / $richTextPages'
+                : '${idx + 1} / ${deck.slides.length}',
+            style: TextStyle(
+              fontSize: 12,
+              color: hasRichTextPages
+                  ? AppTheme.accent
+                  : const Color(0xFF94A3B8),
+              fontWeight: hasRichTextPages
+                  ? FontWeight.w600
+                  : FontWeight.normal,
+            ),
+          ),
+          const SizedBox(width: 4),
+          Tooltip(
+            message: l10n.d('Preview inklappen'),
+            child: IconButton(
+              icon: const Icon(Icons.chevron_right, size: 18),
+              onPressed: () =>
+                  ref.read(previewCollapsedProvider.notifier).state = true,
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+              color: const Color(0xFF64748B),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _slideCanvas(
+    Deck deck,
+    AppSettings settings,
+    Slide slide,
+    int idx,
+    int richTextPage,
+    bool hasRichTextPages,
+  ) {
+    return Expanded(
+      child: ClipRect(
+        child: InteractiveViewer(
+          transformationController: _transform,
+          minScale: _minZoom,
+          maxScale: _maxZoom,
+          constrained: true,
+          onInteractionUpdate: (details) {
+            final scale = _transform.value.getMaxScaleOnAxis();
+            if ((scale - _zoom).abs() > 0.01) {
+              setState(() => _zoom = scale.clamp(_minZoom, _maxZoom));
+            }
+          },
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.15),
+                      blurRadius: 16,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: SlidePreviewWidget(
+                  slide: slide,
+                  projectPath: deck.projectPath,
+                  themeProfile: deck.themeProfile,
+                  cockpitColorScheme: settings.cockpitColorScheme,
+                  onLinkTap: openExternalUrl,
+                  slideNumber: idx + 1,
+                  slideCount: deck.slides.length,
+                  richTextPage: richTextPage,
+                  showRichTextPageControls: hasRichTextPages,
+                  onRichTextPageChanged: hasRichTextPages
+                      ? (page) =>
+                            ref
+                                    .read(richTextPreviewPageProvider.notifier)
+                                    .state =
+                                page
+                      : null,
+                  tlp: deck.tlp,
+                  organization: deck.organization,
+                  showClassificationWatermark:
+                      settings.classificationWatermarkEnabled,
+                  // In de editor mag audio/video bediend worden, maar
+                  // niet vanzelf starten (anders dreunt het door op
+                  // elke slide-wissel).
+                  enableMedia: true,
+                  autoplayMedia: false,
+                  allowRemoteMedia: settings.allowRemoteMedia,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _navFooter(
+    AppLocalizations l10n,
+    Deck deck,
+    Slide slide,
+    int idx,
+    int richTextPage,
+    int richTextPages,
+    bool hasRichTextPages,
+  ) {
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconButton(
+            onPressed: idx > 0 || richTextPage > 0 ? () => _move(-1) : null,
+            icon: const Icon(Icons.chevron_left),
+            iconSize: 20,
+            tooltip: hasRichTextPages && richTextPage > 0
+                ? l10n.d('Vorige pagina')
+                : l10n.d('Vorige slide'),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  l10n.d(slide.type.label),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Color(0xFF64748B),
+                  ),
+                ),
+                if (hasRichTextPages)
+                  Text(
+                    '${l10n.d('Pagina')} ${richTextPage + 1} / $richTextPages',
+                    style: const TextStyle(
+                      fontSize: 10,
+                      color: Color(0xFF94A3B8),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          IconButton(
+            onPressed:
+                idx < deck.slides.length - 1 ||
+                    (hasRichTextPages && richTextPage < richTextPages - 1)
+                ? () => _move(1)
+                : null,
+            icon: const Icon(Icons.chevron_right),
+            iconSize: 20,
+            tooltip: hasRichTextPages && richTextPage < richTextPages - 1
+                ? l10n.d('Volgende pagina')
+                : l10n.d('Volgende slide'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _themeChip(AppLocalizations l10n, Deck deck) {
+    return Container(
+      color: const Color(0xFFF8FAFC),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.palette_outlined,
+            size: 12,
+            color: Color(0xFF94A3B8),
+          ),
+          const SizedBox(width: 4),
+          Text(
+            '${l10n.d('Thema')}: ${deck.theme}',
+            style: const TextStyle(fontSize: 10, color: Color(0xFF94A3B8)),
+          ),
+          if (deck.paginate) ...[
+            const SizedBox(width: 10),
+            const Icon(Icons.tag, size: 12, color: Color(0xFF94A3B8)),
+            const SizedBox(width: 2),
+            Text(
+              l10n.d('paginering aan'),
+              style: const TextStyle(fontSize: 10, color: Color(0xFF94A3B8)),
+            ),
+          ],
+        ],
       ),
     );
   }
