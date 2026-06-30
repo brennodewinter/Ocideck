@@ -1,0 +1,9 @@
+# Test tags.
+#
+# `golden` marks the slide-renderer visual-regression goldens (test/golden/).
+# Their PNGs are pixel- and platform-specific, so they are EXCLUDED from the
+# default suite (which CI runs on Linux, macOS and Windows) and run on a single
+# platform with `make test-golden`. Declared here so `flutter test` doesn't warn
+# about an unknown tag.
+tags:
+  golden:

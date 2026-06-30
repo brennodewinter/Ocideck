@@ -207,6 +207,17 @@ For focused work, run only the relevant slice instead of the whole suite:
   target file to false and reruns the given tests; a **surviving** mutant is a
   dead or untested predicate to review. Slow and triage-heavy, so it stays out of
   `make check`. Override the target: `make mutate FILE=lib/services/markdown_service.dart TESTS="test/markdown_round_trip_test.dart"`.
+- **`make test-golden`** — visual-regression goldens for the slide renderer
+  (`test/golden/`). Renders each slide type through `SlidePreviewWidget` (the
+  widget behind the editor preview, presenter, thumbnails and the PDF/PPTX
+  raster) with the default flutter-test font, so the PNGs catch layout /
+  structure / colour regressions (elements moving, resizing, disappearing, wrong
+  theme colours) without depending on glyph rendering. The PNGs are pixel- and
+  **platform-specific**, so they are tagged `golden` and **excluded from the
+  default suite** (CI runs it on Linux/macOS/Windows) — run them on **one**
+  platform. `make test-golden` compares; `make test-golden UPDATE=1` accepts an
+  intentional visual change. (To gate them in CI, add a single-platform job that
+  runs `make test-golden` and regenerate the PNGs on that platform.)
 
 ---
 

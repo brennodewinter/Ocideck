@@ -6,6 +6,7 @@ help:
 	@echo "  make check-full      make check + dependency outdated report."
 	@echo "  make coverage        Run the test suite with coverage and print a line-coverage summary."
 	@echo "  make mutate          Mutation check for dead/untested branch operands (manual; FILE/TESTS overridable)."
+	@echo "  make test-golden     Slide-renderer visual-regression goldens (single platform; UPDATE=1 to accept)."
 	@echo "  make test-contracts  Markdown/save-load contract and parsing tests."
 	@echo "  make test-preview    Slide rendering, footer, TLP, inline markdown, and preview tests."
 	@echo "  make test-export     Export and file-service smoke tests."
@@ -60,7 +61,7 @@ test:
 	@echo "Command: flutter test --test-randomize-ordering-seed random"
 	@echo "Covers: all unit/widget tests under test/, including markdown round-trip, preview, export, provider, footer, and presenter tests."
 	@echo "Failure means: inspect the named failing test file and test case in the Flutter output."
-	flutter test --test-randomize-ordering-seed random
+	flutter test --test-randomize-ordering-seed random --exclude-tags golden
 
 # Run the full test suite with coverage and summarise line coverage. The floor
 # guards against large regressions; raise it as coverage improves.
@@ -69,8 +70,22 @@ coverage:
 	@echo "Command: flutter test --coverage && dart run tool/coverage_summary.dart --min=60"
 	@echo "Covers: line coverage across every lib/ file a test imports."
 	@echo "Failure means: overall line coverage dropped below the required floor."
-	flutter test --coverage --test-randomize-ordering-seed random
+	flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden
 	dart run tool/coverage_summary.dart --min=60
+
+# Slide-renderer visual-regression goldens (test/golden/). Pixel- and
+# platform-specific (default flutter-test font, so they catch layout/structure/
+# colour regressions), hence excluded from the default suite and from CI. Run on
+# ONE platform; regenerate after an intentional visual change:
+#   make test-golden                 # compare against the committed PNGs
+#   make test-golden UPDATE=1        # accept the new rendering
+test-golden:
+	@echo "== OciDeck check: golden (visual regression) =="
+	@echo "Command: flutter test --tags golden $(if $(UPDATE),--update-goldens,)"
+	@echo "Covers: SlidePreviewWidget layout/structure/colour per slide type."
+	@echo "Failure means: a slide renders differently — inspect the *_testImage diff,"
+	@echo "        then re-run with UPDATE=1 if the change is intentional."
+	flutter test --tags golden $(if $(UPDATE),--update-goldens,)
 
 # Mutation check for the "dead/untested boolean-operand" bug class that line
 # coverage and `dart analyze` both miss: an `||`/`&&` operand that can never be
