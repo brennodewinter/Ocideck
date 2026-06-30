@@ -26,7 +26,6 @@ const int maxFileLines = 1000;
 /// deliberate reason; the goal is fewer and smaller entries over time.
 /// `lib/l10n/translations/*` is exempt — those files grow with every UI string.
 const Map<String, int> fileSizeBaseline = {
-  'lib/widgets/dialogs/image_carousel_picker.dart': 2093,
   'lib/services/markdown_service.dart': 1441,
   'lib/widgets/slides/previews/chart_preview.dart': 1567,
   'lib/services/file_service.dart': 1381,
