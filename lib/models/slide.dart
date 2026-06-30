@@ -50,80 +50,50 @@ String checklistBullet({
   required bool checked,
 }) => '${'\t' * level}[${checked ? 'x' : ' '}] $text';
 
-extension SlideTypeExtension on SlideType {
-  String get label {
-    switch (this) {
-      case SlideType.title:
-        return 'Titelpagina';
-      case SlideType.section:
-        return 'Tussentitel';
-      case SlideType.bullets:
-        return 'Alleen Bullets';
-      case SlideType.twoBullets:
-        return 'Twee Bulletkolommen';
-      case SlideType.bulletsImage:
-        return 'Bullets + Afbeelding';
-      case SlideType.twoImages:
-        return 'Twee Afbeeldingen';
-      case SlideType.image:
-        return 'Grote Afbeelding';
-      case SlideType.video:
-        return 'Video';
-      case SlideType.quote:
-        return 'Quote';
-      case SlideType.table:
-        return 'Tabel';
-      case SlideType.freeMarkdown:
-        return 'Vrije Markdown';
-      case SlideType.code:
-        return 'Broncode';
-      case SlideType.chart:
-        return 'Grafiek';
-      case SlideType.cockpit:
-        return 'Cockpit';
-      case SlideType.question:
-        return 'Vraag';
-      case SlideType.timeline:
-        return 'Tijdlijn';
-    }
-  }
+/// Pure-data metadata for a [SlideType], co-located with the enum so adding a
+/// type is one map entry instead of edits to several scattered switches. UI
+/// behaviour (editor, preview, picker icon) lives in the widget layer's
+/// registry — this layer stays Flutter-free.
+class SlideTypeMeta {
+  /// Dutch source label, localised via `l10n.d(...)` at the call site.
+  final String label;
 
-  String get marpClass {
-    switch (this) {
-      case SlideType.title:
-        return 'title';
-      case SlideType.section:
-        return 'section';
-      case SlideType.bullets:
-        return '';
-      case SlideType.twoBullets:
-        return 'two-bullets';
-      case SlideType.bulletsImage:
-        return 'split';
-      case SlideType.twoImages:
-        return '';
-      case SlideType.image:
-        return '';
-      case SlideType.video:
-        return 'video';
-      case SlideType.quote:
-        return 'quote';
-      case SlideType.table:
-        return 'table';
-      case SlideType.freeMarkdown:
-        return '';
-      case SlideType.code:
-        return 'code';
-      case SlideType.chart:
-        return 'chart';
-      case SlideType.cockpit:
-        return 'cockpit';
-      case SlideType.question:
-        return 'question';
-      case SlideType.timeline:
-        return 'timeline';
-    }
-  }
+  /// The Marp `_class` token written to the `.md` (empty = no class token).
+  final String marpClass;
+
+  const SlideTypeMeta({required this.label, required this.marpClass});
+}
+
+/// The single source of truth for per-type pure data. A guard test
+/// (`slide_type_meta_test.dart`) fails if any [SlideType] is missing here.
+const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
+  SlideType.title: SlideTypeMeta(label: 'Titelpagina', marpClass: 'title'),
+  SlideType.section: SlideTypeMeta(label: 'Tussentitel', marpClass: 'section'),
+  SlideType.bullets: SlideTypeMeta(label: 'Alleen Bullets', marpClass: ''),
+  SlideType.twoBullets: SlideTypeMeta(
+    label: 'Twee Bulletkolommen',
+    marpClass: 'two-bullets',
+  ),
+  SlideType.bulletsImage: SlideTypeMeta(
+    label: 'Bullets + Afbeelding',
+    marpClass: 'split',
+  ),
+  SlideType.twoImages: SlideTypeMeta(label: 'Twee Afbeeldingen', marpClass: ''),
+  SlideType.image: SlideTypeMeta(label: 'Grote Afbeelding', marpClass: ''),
+  SlideType.video: SlideTypeMeta(label: 'Video', marpClass: 'video'),
+  SlideType.quote: SlideTypeMeta(label: 'Quote', marpClass: 'quote'),
+  SlideType.table: SlideTypeMeta(label: 'Tabel', marpClass: 'table'),
+  SlideType.freeMarkdown: SlideTypeMeta(label: 'Vrije Markdown', marpClass: ''),
+  SlideType.code: SlideTypeMeta(label: 'Broncode', marpClass: 'code'),
+  SlideType.chart: SlideTypeMeta(label: 'Grafiek', marpClass: 'chart'),
+  SlideType.cockpit: SlideTypeMeta(label: 'Cockpit', marpClass: 'cockpit'),
+  SlideType.question: SlideTypeMeta(label: 'Vraag', marpClass: 'question'),
+  SlideType.timeline: SlideTypeMeta(label: 'Tijdlijn', marpClass: 'timeline'),
+};
+
+extension SlideTypeExtension on SlideType {
+  String get label => slideTypeMeta[this]!.label;
+  String get marpClass => slideTypeMeta[this]!.marpClass;
 }
 
 class Slide {
