@@ -288,6 +288,37 @@ class MarkdownValidator {
       }
     }
 
+    _validateBlockLines(
+      blockLines: blockLines,
+      classTokens: classTokens,
+      slideNumber: slideNumber,
+      startLine: startLine,
+      issues: issues,
+    );
+    if (classTokens.contains('cockpit')) {
+      _validateCockpitSlide(blockLines, slideNumber, lineNo, issues);
+    }
+    if (classTokens.contains('split')) {
+      _validateSplitSlide(blockLines, slideNumber, lineNo, issues);
+    }
+    if (classTokens.contains('two-bullets')) {
+      _validateTwoBulletsSlide(blockLines, slideNumber, lineNo, issues);
+    }
+    if (classTokens.contains('table')) {
+      _validateTableSlide(blockLines, slideNumber, lineNo, issues);
+    }
+
+    _validateDivBalance(blockLines, slideNumber, lineNo, issues);
+  }
+
+  void _validateBlockLines({
+    required List<String> blockLines,
+    required List<String> classTokens,
+    required int slideNumber,
+    required int startLine,
+    required List<MarkdownValidationIssue> issues,
+  }) {
+    int lineNo(int index) => startLine + index;
     for (var i = 0; i < blockLines.length; i++) {
       final line = blockLines[i];
       final trimmed = line.trim();
@@ -416,20 +447,6 @@ class MarkdownValidator {
     if (classTokens.contains('chart')) {
       _validateChartSlide(blockLines, slideNumber, lineNo, issues);
     }
-    if (classTokens.contains('cockpit')) {
-      _validateCockpitSlide(blockLines, slideNumber, lineNo, issues);
-    }
-    if (classTokens.contains('split')) {
-      _validateSplitSlide(blockLines, slideNumber, lineNo, issues);
-    }
-    if (classTokens.contains('two-bullets')) {
-      _validateTwoBulletsSlide(blockLines, slideNumber, lineNo, issues);
-    }
-    if (classTokens.contains('table')) {
-      _validateTableSlide(blockLines, slideNumber, lineNo, issues);
-    }
-
-    _validateDivBalance(blockLines, slideNumber, lineNo, issues);
   }
 
   void _validateCodeSlide(
