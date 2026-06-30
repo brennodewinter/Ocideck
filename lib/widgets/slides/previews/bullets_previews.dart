@@ -108,7 +108,7 @@ class _BulletsPreview extends StatelessWidget {
     final textAvailW = showProgress
         ? (contentW - progressGap - progressW).clamp(w * 0.12, contentW)
         : contentW;
-    final scale = memoizedRenderFitScale(
+    final scale = memoizedRenderLayout<double>(
       slide: slide,
       font: font,
       width: w,
@@ -668,69 +668,43 @@ class _TwoBulletsPreview extends StatelessWidget {
     required double spacing,
     required double bulletGap,
   }) {
-    final columnW = ((contentW - columnGap) / 2).clamp(w * 0.12, w);
-    var availH = layoutH;
-    if (hasTitle) {
-      availH -= measureTextHeight(
-        slide.title,
-        titleSize,
-        contentW,
-        bold: true,
-        fontFamily: font,
-      );
-      availH -= spacing;
-    }
-    double headingHeight(String t) => t.isEmpty
-        ? 0
-        : measureTextHeight(
-            t,
-            headingSize,
-            columnW,
+    return memoizedRenderLayout(
+      slide: slide,
+      font: font,
+      width: w,
+      availW: contentW,
+      availH: layoutH,
+      compute: () {
+        final columnW = ((contentW - columnGap) / 2).clamp(w * 0.12, w);
+        var availH = layoutH;
+        if (hasTitle) {
+          availH -= measureTextHeight(
+            slide.title,
+            titleSize,
+            contentW,
             bold: true,
             fontFamily: font,
           );
-    final maxHeadingH = math.max(
-      headingHeight(col1Title),
-      headingHeight(col2Title),
-    );
-    if (hasColumnTitles) availH -= maxHeadingH + headingGap;
+          availH -= spacing;
+        }
+        double headingHeight(String t) => t.isEmpty
+            ? 0
+            : measureTextHeight(
+                t,
+                headingSize,
+                columnW,
+                bold: true,
+                fontFamily: font,
+              );
+        final maxHeadingH = math.max(
+          headingHeight(col1Title),
+          headingHeight(col2Title),
+        );
+        if (hasColumnTitles) availH -= maxHeadingH + headingGap;
 
-    final leftScale = bulletsFitScale(
-      availW: columnW,
-      availH: availH,
-      hasTitle: false,
-      title: '',
-      bullets: leftBullets,
-      titleSize: titleSize,
-      bulletSize: bulletSize,
-      spacing: spacing,
-      bulletGap: bulletGap,
-      font: font,
-      maxScale: bulletScaleCap(w, bulletSize, kBulletsMaxScale),
-      listStyle: slide.listStyle,
-    );
-    final rightScale = bulletsFitScale(
-      availW: columnW,
-      availH: availH,
-      hasTitle: false,
-      title: '',
-      bullets: rightBullets,
-      titleSize: titleSize,
-      bulletSize: bulletSize,
-      spacing: spacing,
-      bulletGap: bulletGap,
-      font: font,
-      maxScale: bulletScaleCap(w, bulletSize, kBulletsMaxScale),
-      listStyle: slide.listStyle,
-    );
-    var columnScale = math.min(leftScale, rightScale);
-    columnScale = tightenVerticalFitScale(
-      scale: columnScale,
-      availH: availH,
-      measure: (s) => math.max(
-        bulletsBlockHeight(
-          scale: s,
+        final leftScale = bulletsFitScale(
           availW: columnW,
+          availH: availH,
           hasTitle: false,
           title: '',
           bullets: leftBullets,
@@ -739,11 +713,12 @@ class _TwoBulletsPreview extends StatelessWidget {
           spacing: spacing,
           bulletGap: bulletGap,
           font: font,
+          maxScale: bulletScaleCap(w, bulletSize, kBulletsMaxScale),
           listStyle: slide.listStyle,
-        ),
-        bulletsBlockHeight(
-          scale: s,
+        );
+        final rightScale = bulletsFitScale(
           availW: columnW,
+          availH: availH,
           hasTitle: false,
           title: '',
           bullets: rightBullets,
@@ -752,14 +727,48 @@ class _TwoBulletsPreview extends StatelessWidget {
           spacing: spacing,
           bulletGap: bulletGap,
           font: font,
+          maxScale: bulletScaleCap(w, bulletSize, kBulletsMaxScale),
           listStyle: slide.listStyle,
-        ),
-      ),
-    );
-    return (
-      columnW: columnW,
-      columnScale: columnScale,
-      maxHeadingH: maxHeadingH,
+        );
+        var columnScale = math.min(leftScale, rightScale);
+        columnScale = tightenVerticalFitScale(
+          scale: columnScale,
+          availH: availH,
+          measure: (s) => math.max(
+            bulletsBlockHeight(
+              scale: s,
+              availW: columnW,
+              hasTitle: false,
+              title: '',
+              bullets: leftBullets,
+              titleSize: titleSize,
+              bulletSize: bulletSize,
+              spacing: spacing,
+              bulletGap: bulletGap,
+              font: font,
+              listStyle: slide.listStyle,
+            ),
+            bulletsBlockHeight(
+              scale: s,
+              availW: columnW,
+              hasTitle: false,
+              title: '',
+              bullets: rightBullets,
+              titleSize: titleSize,
+              bulletSize: bulletSize,
+              spacing: spacing,
+              bulletGap: bulletGap,
+              font: font,
+              listStyle: slide.listStyle,
+            ),
+          ),
+        );
+        return (
+          columnW: columnW,
+          columnScale: columnScale,
+          maxHeadingH: maxHeadingH,
+        );
+      },
     );
   }
 }

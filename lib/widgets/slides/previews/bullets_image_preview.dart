@@ -104,36 +104,15 @@ class _BulletsImagePreview extends StatelessWidget {
                   1.0,
                   outerH,
                 );
-                var scale = bulletsFitScale(
+                final scale = _imageBulletsScale(
                   availW: availW,
                   availH: availH,
-                  hasTitle: hasTitle,
-                  title: slide.title,
                   bullets: bullets,
+                  hasTitle: hasTitle,
                   titleSize: titleSize,
                   bulletSize: bulletSize,
                   spacing: spacing,
                   bulletGap: bulletGap,
-                  font: font,
-                  maxScale: bulletScaleCap(w, bulletSize, kBulletsMaxScale),
-                  listStyle: slide.listStyle,
-                );
-                scale = tightenVerticalFitScale(
-                  scale: scale,
-                  availH: availH,
-                  measure: (s) => bulletsBlockHeight(
-                    scale: s,
-                    availW: availW,
-                    hasTitle: hasTitle,
-                    title: slide.title,
-                    bullets: bullets,
-                    titleSize: titleSize,
-                    bulletSize: bulletSize,
-                    spacing: spacing,
-                    bulletGap: bulletGap,
-                    font: font,
-                    listStyle: slide.listStyle,
-                  ),
                 );
 
                 return ClipRect(
@@ -166,6 +145,62 @@ class _BulletsImagePreview extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  /// Resolved vertical fit-scale for the text column, memoised across rebuilds
+  /// (see [memoizedRenderLayout]) so an unrelated edit doesn't re-measure this
+  /// slide's unchanged text.
+  double _imageBulletsScale({
+    required double availW,
+    required double availH,
+    required List<String> bullets,
+    required bool hasTitle,
+    required double titleSize,
+    required double bulletSize,
+    required double spacing,
+    required double bulletGap,
+  }) {
+    return memoizedRenderLayout<double>(
+      slide: slide,
+      font: font,
+      width: w,
+      availW: availW,
+      availH: availH,
+      compute: () {
+        var s = bulletsFitScale(
+          availW: availW,
+          availH: availH,
+          hasTitle: hasTitle,
+          title: slide.title,
+          bullets: bullets,
+          titleSize: titleSize,
+          bulletSize: bulletSize,
+          spacing: spacing,
+          bulletGap: bulletGap,
+          font: font,
+          maxScale: bulletScaleCap(w, bulletSize, kBulletsMaxScale),
+          listStyle: slide.listStyle,
+        );
+        s = tightenVerticalFitScale(
+          scale: s,
+          availH: availH,
+          measure: (m) => bulletsBlockHeight(
+            scale: m,
+            availW: availW,
+            hasTitle: hasTitle,
+            title: slide.title,
+            bullets: bullets,
+            titleSize: titleSize,
+            bulletSize: bulletSize,
+            spacing: spacing,
+            bulletGap: bulletGap,
+            font: font,
+            listStyle: slide.listStyle,
+          ),
+        );
+        return s;
+      },
     );
   }
 
