@@ -55,6 +55,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  # Drives tool/check_method_length.dart — a syntactic AST measures method
+  # bodies accurately (closures, multi-line signatures, getters) instead of a
+  # brittle brace heuristic. Pinned to the version Flutter already resolves.
+  analyzer: ^12.1.0
   # Deterministic Timer/Future control for the autosave/recovery timer tests.
   fake_async: ^1.3.3
   # A fake VideoPlayerPlatform drives the media-lifecycle tests without real

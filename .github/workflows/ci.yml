@@ -39,6 +39,9 @@ jobs:
       - name: Conventions (make check-conventions)
         run: make check-conventions
 
+      - name: Method length (make check-method-length)
+        run: make check-method-length
+
       # Runs the full suite with coverage and enforces a line-coverage floor.
       - name: Test + coverage (make coverage)
         run: make coverage

@@ -45,6 +45,7 @@ run locally and in CI, the number you see locally is the number CI gates on.
 | [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ |
 | [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ |
 | [`make check-conventions`](#make-check-conventions) | No `print()`; bare `catch (_)` & file-size ratchets | ✅ | ✅ | ✅ |
+| [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 60% floor | — | — | ✅ (gate) |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
@@ -104,6 +105,22 @@ These three run on every push and pull request (and as `make check`).
   oversized file (then lower its `fileSizeBaseline` entry — the run prints a
   tip), or deliberately raise the entry with a reason; **or** — if you removed a
   `catch (_)` — lower `catchUnderscoreBaseline` to lock it in.
+
+### `make check-method-length`
+- **Runs:** `dart run tool/check_method_length.dart`
+- **Covers:** a **per-method/function-length ratchet** — the per-declaration
+  sibling of the file-size ratchet. No method, top-level function or constructor
+  body may exceed **150** lines (signature through closing brace, excluding the
+  doc comment), except the declarations listed in `methodLengthBaseline` whose
+  ceiling is their length at ratchet time. A ceiling may shrink (split the
+  method) but never grow.
+- **How it measures:** the **`analyzer` package's AST**, not a text heuristic,
+  so closures, multi-line signatures and `=>` bodies are counted correctly.
+  Keys are `path::Enclosing.name`, stable across line edits. Local functions
+  count toward the method that holds them. `lib/l10n/translations/*` is exempt.
+- **Failure means:** extract helpers or sub-widgets to shrink the method (then
+  lower its `methodLengthBaseline` entry — the run prints a tip), or deliberately
+  add/raise the entry with a reason.
 
 ### `make test`
 - **Runs:** `flutter test --test-randomize-ordering-seed random` — the full

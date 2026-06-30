@@ -1,0 +1,210 @@
+// Guards against method/function-length creep — the per-method sibling of the
+// file-size ratchet in check_conventions.dart.
+//
+// A method, top-level function or constructor body may not exceed
+// [maxMethodLines] lines (signature through closing brace, excluding the doc
+// comment), EXCEPT the baselined declarations below whose ceiling is their
+// length when the ratchet was introduced. A ceiling may SHRINK (split the
+// method, then lower the number — the run prints a tip) but never grow, so long
+// methods trend smaller instead of creeping bigger.
+//
+// Measurement is AST-based (the `analyzer` package) rather than a brace
+// heuristic, so closures, multi-line signatures and `=>` bodies are counted
+// correctly. Keys are `path::Enclosing.name` (stable across line edits).
+//
+// Exits non-zero (with the offending locations) when a rule is violated.
+
+import 'dart:io';
+
+import 'package:analyzer/dart/analysis/features.dart';
+import 'package:analyzer/dart/analysis/utilities.dart';
+import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/ast/visitor.dart';
+import 'package:analyzer/source/line_info.dart';
+
+/// A non-baselined declaration may not exceed this many lines — split it first.
+const int maxMethodLines = 150;
+
+/// Declarations already above [maxMethodLines] when the ratchet was introduced.
+/// Each value is that declaration's ceiling: it may SHRINK (split it, then
+/// lower the number) but never grow. Add a new entry only with a deliberate
+/// reason; the goal is fewer and smaller entries over time.
+const Map<String, int> methodLengthBaseline = {
+  'lib/services/markdown_service.dart::MarkdownService.generateSlide': 341,
+  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 447,
+  'lib/services/markdown_validator.dart::MarkdownValidator._validateSlideBlock':
+      195,
+  'lib/widgets/app_shell_main_layout.dart::_MainLayoutState.build': 680,
+  'lib/widgets/dialogs/export_dialog.dart::_ExportDialogState._content': 183,
+  'lib/widgets/dialogs/parts/image_carousel_picker_preview.dart::_CarouselPreview._buildPreview':
+      240,
+  'lib/widgets/dialogs/parts/settings_dialog_appearance.dart::_SettingsAppearanceTab._appearanceTab':
+      242,
+  'lib/widgets/dialogs/parts/settings_dialog_colors.dart::_SettingsColors._colorsSectionChildren':
+      234,
+  'lib/widgets/dialogs/parts/settings_dialog_colors.dart::_SettingsColors._logoSectionChildren':
+      173,
+  'lib/widgets/dialogs/parts/settings_dialog_general.dart::_SettingsGeneralTab._cockpitTab':
+      163,
+  'lib/widgets/dialogs/parts/settings_dialog_general.dart::_SettingsGeneralTab._generalTab':
+      210,
+  'lib/widgets/editors/chart_editor.dart::_ChartEditorState._grid': 185,
+  'lib/widgets/editors/chart_editor.dart::_ChartEditorState.build': 204,
+  'lib/widgets/editors/cockpit_editor.dart::_MeterCard.build': 185,
+  'lib/widgets/editors/markdown_deck_editor.dart::_MarkdownDeckEditorState.build':
+      171,
+  'lib/widgets/editors/question_editor.dart::_QuestionEditorState.build': 193,
+  'lib/widgets/panels/editor_panel.dart::EditorPanel.build': 154,
+  'lib/widgets/panels/preview_panel.dart::_PreviewPanelState.build': 313,
+  'lib/widgets/panels/slide_list_panel.dart::_SlideListPanelState.build': 265,
+  'lib/widgets/panels/slide_quality_panel.dart::_SlideQualityPanelState.build':
+      201,
+  'lib/widgets/presentation/parts/presenter_keys.dart::_PresenterKeys._handleKey':
+      160,
+  'lib/widgets/shell/welcome_screen.dart::_WelcomeScreen.build': 192,
+  'lib/widgets/slides/previews/bullets_previews.dart::_BulletsPreview.build':
+      158,
+  'lib/widgets/slides/previews/bullets_previews.dart::_TwoBulletsPreview.build':
+      208,
+  'lib/widgets/slides/previews/chart_preview_radar.dart::_ChartPreviewRadar._radarChart':
+      203,
+  'lib/widgets/slides/previews/table_preview.dart::_TablePreview.build': 196,
+  'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
+      155,
+  'lib/widgets/slides/slide_thumbnail.dart::SlideThumbnail.build': 312,
+};
+
+bool _isTranslationData(String path) =>
+    path.replaceAll(r'\', '/').contains('lib/l10n/translations/');
+
+void main() {
+  final measured = <String, ({int length, String location})>{};
+
+  for (final file in _dartFiles(Directory('lib'))) {
+    final path = file.path.replaceAll(r'\', '/');
+    if (_isTranslationData(path)) continue;
+
+    final result = parseFile(
+      path: file.path,
+      featureSet: FeatureSet.latestLanguageVersion(),
+      throwIfDiagnostics: false,
+    );
+    final visitor = _DeclVisitor(path, result.lineInfo);
+    result.unit.visitChildren(visitor);
+    measured.addAll(visitor.found);
+  }
+
+  final oversize = <String>[];
+  final shrunk = <String>[];
+
+  measured.forEach((key, m) {
+    final ceiling = methodLengthBaseline[key];
+    if (ceiling != null) {
+      if (m.length > ceiling) {
+        oversize.add(
+          '${m.location}: $key is ${m.length} lines (ceiling $ceiling)',
+        );
+      } else if (m.length < ceiling) {
+        shrunk.add('$key: ${m.length} (ceiling $ceiling)');
+      }
+    } else if (m.length > maxMethodLines) {
+      oversize.add(
+        '${m.location}: $key is ${m.length} lines (max $maxMethodLines)',
+      );
+    }
+  });
+
+  if (oversize.isEmpty) {
+    stdout.writeln(
+      'Method length OK: every declaration within its ceiling '
+      '(max $maxMethodLines, ${methodLengthBaseline.length} baselined).',
+    );
+    if (shrunk.isNotEmpty) {
+      shrunk.sort();
+      stdout.writeln(
+        'Tip: ${shrunk.length} baselined declaration(s) shrank — lower their '
+        'methodLengthBaseline to lock in the win:\n    ${shrunk.join('\n    ')}',
+      );
+    }
+    exit(0);
+  }
+
+  oversize.sort();
+  stderr.writeln('Method length check FAILED:');
+  stderr.writeln(
+    '  ${oversize.length} declaration(s) over the limit — split into helpers, '
+    'or (deliberately) add/raise an entry in methodLengthBaseline '
+    '(tool/check_method_length.dart):\n    ${oversize.join('\n    ')}',
+  );
+  exit(1);
+}
+
+/// Collects named, body-bearing declarations at the top level of the unit or a
+/// type. Local functions are skipped — they count toward their enclosing
+/// declaration, which is measured as a whole.
+class _DeclVisitor extends RecursiveAstVisitor<void> {
+  _DeclVisitor(this.path, this.lineInfo);
+
+  final String path;
+  final LineInfo lineInfo;
+  final found = <String, ({int length, String location})>{};
+
+  @override
+  void visitMethodDeclaration(MethodDeclaration node) {
+    _record(node, node.body, _enclosing(node), node.name.lexeme);
+    super.visitMethodDeclaration(node);
+  }
+
+  @override
+  void visitConstructorDeclaration(ConstructorDeclaration node) {
+    final name = node.name?.lexeme;
+    final label = name == null ? '<new>' : 'new.$name';
+    _record(node, node.body, _enclosing(node), label);
+    super.visitConstructorDeclaration(node);
+  }
+
+  @override
+  void visitFunctionDeclaration(FunctionDeclaration node) {
+    // Only top-level functions; locals (parent is a statement) are part of the
+    // method that holds them.
+    if (node.parent is CompilationUnit) {
+      _record(node, node.functionExpression.body, '', node.name.lexeme);
+    }
+    super.visitFunctionDeclaration(node);
+  }
+
+  /// Nearest enclosing type name (class/extension/mixin/enum), or '' for a
+  /// top-level declaration.
+  String _enclosing(AstNode node) {
+    for (AstNode? p = node.parent; p != null; p = p.parent) {
+      // analyzer 12 exposes the name of class/enum declarations through
+      // `namePart` (augmentation-aware); mixin/extension still use `name`.
+      if (p is ClassDeclaration) return p.namePart.typeName.lexeme;
+      if (p is EnumDeclaration) return p.namePart.typeName.lexeme;
+      if (p is MixinDeclaration) return p.name.lexeme;
+      if (p is ExtensionDeclaration) return p.name?.lexeme ?? '<extension>';
+    }
+    return '';
+  }
+
+  void _record(AstNode node, FunctionBody body, String enclosing, String name) {
+    // Abstract/external declarations have no body to measure.
+    if (body is EmptyFunctionBody) return;
+    // Measure from the declaration itself (after its doc comment/metadata)
+    // through the end of the body.
+    final start = node is AnnotatedNode
+        ? node.firstTokenAfterCommentAndMetadata.offset
+        : node.offset;
+    final startLine = lineInfo.getLocation(start).lineNumber;
+    final endLine = lineInfo.getLocation(node.end).lineNumber;
+    final length = endLine - startLine + 1;
+    final qualified = enclosing.isEmpty ? name : '$enclosing.$name';
+    found['$path::$qualified'] = (length: length, location: '$path:$startLine');
+  }
+}
+
+Iterable<File> _dartFiles(Directory dir) sync* {
+  for (final e in dir.listSync(recursive: true, followLinks: false)) {
+    if (e is File && e.path.endsWith('.dart')) yield e;
+  }
+}

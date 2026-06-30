@@ -17,6 +17,7 @@ help:
 	@echo "  make deps-check      Verify vendored JS bundles vs manifest + OSV CVEs."
 	@echo "  make licenses        Verify all dependencies use open-source licences."
 	@echo "  make check-conventions  No print(); bare catch (_) & file-size ratchets."
+	@echo "  make check-method-length  Per-method length ratchet (AST-measured, max 150)."
 	@echo "  make build-web       Build the hardened web bundle (self-hosted CanvasKit + CSP-safe loader)."
 	@echo "  make check-web       Build the web bundle and assert its hardening (CSP, self-hosted, fonts)."
 	@echo "  make build-macos     Build the macOS .app (macOS only)."
@@ -194,6 +195,15 @@ check-conventions:
 	@echo "        or adjust the baseline in tool/check_conventions.dart."
 	dart run tool/check_conventions.dart
 
+check-method-length:
+	@echo "== OciDeck check: method length =="
+	@echo "Command: dart run tool/check_method_length.dart"
+	@echo "Covers: per-method/function-length ratchet (no declaration over 150 lines"
+	@echo "        except baselined ceilings, which may only shrink). AST-measured."
+	@echo "Failure means: extract helpers/sub-widgets to shrink the method, or adjust"
+	@echo "        the baseline in tool/check_method_length.dart."
+	dart run tool/check_method_length.dart
+
 # Build the hardened web bundle. Two flags do the security work:
 #   --no-web-resources-cdn  Self-host CanvasKit instead of fetching it from the
 #                           gstatic CDN, so the running app pulls ZERO third-party
@@ -256,9 +266,9 @@ build-all:
 	@echo "== OciDeck build-all complete =="
 
 # Full local quality gate. Intended for humans, CI logs, and LLM-assisted debugging.
-check: format-check analyze check-conventions test
+check: format-check analyze check-conventions check-method-length test
 	@echo "== OciDeck check complete =="
-	@echo "Validated: formatting, static analysis, conventions, and the full Flutter test suite."
+	@echo "Validated: formatting, static analysis, conventions, method length, and the full Flutter test suite."
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.
