@@ -108,40 +108,50 @@ class _BulletsPreview extends StatelessWidget {
     final textAvailW = showProgress
         ? (contentW - progressGap - progressW).clamp(w * 0.12, contentW)
         : contentW;
-    var scale = bulletsFitScale(
+    final scale = memoizedRenderFitScale(
+      slide: slide,
+      font: font,
+      width: w,
       availW: textAvailW,
       availH: availH,
-      hasTitle: hasTitle,
-      title: slide.title,
-      bullets: bullets,
-      titleSize: titleSize,
-      bulletSize: bulletSize,
-      spacing: spacing,
-      bulletGap: bulletGap,
-      font: font,
-      subtitle: subtitle,
-      subtitleSize: subtitleSize,
-      maxScale: bulletScaleCap(w, bulletSize, kSplitBulletsMaxScale),
-      listStyle: slide.listStyle,
-    );
-    scale = tightenVerticalFitScale(
-      scale: scale,
-      availH: availH,
-      measure: (s) => bulletsBlockHeight(
-        scale: s,
-        availW: textAvailW,
-        hasTitle: hasTitle,
-        title: slide.title,
-        bullets: bullets,
-        titleSize: titleSize,
-        bulletSize: bulletSize,
-        spacing: spacing,
-        bulletGap: bulletGap,
-        font: font,
-        subtitle: subtitle,
-        subtitleSize: subtitleSize,
-        listStyle: slide.listStyle,
-      ),
+      compute: () {
+        var s = bulletsFitScale(
+          availW: textAvailW,
+          availH: availH,
+          hasTitle: hasTitle,
+          title: slide.title,
+          bullets: bullets,
+          titleSize: titleSize,
+          bulletSize: bulletSize,
+          spacing: spacing,
+          bulletGap: bulletGap,
+          font: font,
+          subtitle: subtitle,
+          subtitleSize: subtitleSize,
+          maxScale: bulletScaleCap(w, bulletSize, kSplitBulletsMaxScale),
+          listStyle: slide.listStyle,
+        );
+        s = tightenVerticalFitScale(
+          scale: s,
+          availH: availH,
+          measure: (m) => bulletsBlockHeight(
+            scale: m,
+            availW: textAvailW,
+            hasTitle: hasTitle,
+            title: slide.title,
+            bullets: bullets,
+            titleSize: titleSize,
+            bulletSize: bulletSize,
+            spacing: spacing,
+            bulletGap: bulletGap,
+            font: font,
+            subtitle: subtitle,
+            subtitleSize: subtitleSize,
+            listStyle: slide.listStyle,
+          ),
+        );
+        return s;
+      },
     );
 
     return Column(
