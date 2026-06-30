@@ -32,12 +32,7 @@ const int maxMethodLines = 150;
 const Map<String, int> methodLengthBaseline = {
   'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBodyLines':
       229,
-  'lib/services/markdown_validator.dart::MarkdownValidator._validateSlideBlock':
-      195,
   'lib/widgets/app_shell_main_layout.dart::_MainLayoutState.build': 680,
-  'lib/widgets/dialogs/export_dialog.dart::_ExportDialogState._content': 183,
-  'lib/widgets/panels/editor_panel.dart::EditorPanel.build': 154,
-  'lib/widgets/panels/slide_list_panel.dart::_SlideListPanelState.build': 265,
 };
 
 bool _isTranslationData(String path) =>

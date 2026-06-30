@@ -52,18 +52,7 @@ class EditorPanel extends ConsumerWidget {
     ];
 
     if (editor.mode == EditorMode.markdown) {
-      return MarkdownDeckEditor(
-        // Verse instantie na undo/redo zodat de markdown opnieuw wordt geladen.
-        key: ValueKey('md-${deckState.revision}'),
-        initialContent: deckNotifier.generateMarkdown(),
-        onApply: (md) {
-          final ok = deckNotifier.applyMarkdown(md);
-          editorNotifier.setParseError(!ok);
-          return ok;
-        },
-        parseError: editor.parseError,
-        onExitMarkdown: () => editorNotifier.setMode(EditorMode.visual),
-      );
+      return _markdownEditor(ref, deckState, editor);
     }
 
     // De tekstvelden cachen hun inhoud in eigen controllers en verversen alleen
@@ -177,6 +166,27 @@ class EditorPanel extends ConsumerWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _markdownEditor(
+    WidgetRef ref,
+    DeckState deckState,
+    EditorState editor,
+  ) {
+    final deckNotifier = ref.read(deckProvider.notifier);
+    final editorNotifier = ref.read(editorProvider.notifier);
+    return MarkdownDeckEditor(
+      // Verse instantie na undo/redo zodat de markdown opnieuw wordt geladen.
+      key: ValueKey('md-${deckState.revision}'),
+      initialContent: deckNotifier.generateMarkdown(),
+      onApply: (md) {
+        final ok = deckNotifier.applyMarkdown(md);
+        editorNotifier.setParseError(!ok);
+        return ok;
+      },
+      parseError: editor.parseError,
+      onExitMarkdown: () => editorNotifier.setMode(EditorMode.visual),
     );
   }
 
