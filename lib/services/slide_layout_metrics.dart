@@ -6,6 +6,38 @@ import 'text_measurement.dart';
 
 export 'text_measurement.dart' show measureTextHeight, measureTextWidth;
 
+/// Caches a slide preview's fully-resolved vertical fit-scale, keyed by the
+/// slide's identity and the exact geometry it was laid out at. A preview
+/// recomputes this fit through several TextPainter layouts (a few milliseconds)
+/// on every rebuild, and editing one slide rebuilds every visible thumbnail in
+/// the rail even though their slides never changed — same object identity. The
+/// key is (slide, font, width, availW, availH); a changed slide is a new object
+/// (never a stale hit) and a resize misses on the geometry. Capped with FIFO
+/// eviction so a long session can't grow it without bound (mirrors the image
+/// average-colour cache).
+final Map<(Slide, String, double, double, double), double>
+_renderFitScaleCache = {};
+const int _maxRenderFitScaleEntries = 512;
+
+double memoizedRenderFitScale({
+  required Slide slide,
+  required String font,
+  required double width,
+  required double availW,
+  required double availH,
+  required double Function() compute,
+}) {
+  final key = (slide, font, width, availW, availH);
+  final cached = _renderFitScaleCache[key];
+  if (cached != null) return cached;
+  final scale = compute();
+  if (_renderFitScaleCache.length >= _maxRenderFitScaleEntries) {
+    _renderFitScaleCache.remove(_renderFitScaleCache.keys.first);
+  }
+  _renderFitScaleCache[key] = scale;
+  return scale;
+}
+
 /// Reference slide width (960pt) used for consistent quality metrics across
 /// deck sizes — matches the PowerPoint 16:9 canvas the previews emulate.
 const double kReferenceSlideWidth = 960.0;
