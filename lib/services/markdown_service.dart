@@ -1297,34 +1297,30 @@ class MarkdownService {
           }
           richTextHeaderPhase = false;
         }
-        if (t.startsWith('|')) {
-          tableLines.add(t);
-        } else if (t.startsWith('<video')) {
-          final v = _parseVideoLine(t);
-          videoPath = v.path;
-          videoStartMs = v.startMs;
-          videoEndMs = v.endMs;
-          videoAutoplay = v.autoplay;
-        } else if (t.startsWith('<iframe') && t.contains('ocideck-embed')) {
-          final e = _parseEmbedLine(t);
-          videoPath = e.path;
-          videoStartMs = e.startMs;
-          videoEndMs = e.endMs;
+        // A rich-text body IS markdown: an embedded table or <video> stays in
+        // the body verbatim. Lifting those out silently dropped a richText
+        // slide's table (kept only for type==table) and would lose user content
+        // (those fields aren't re-serialised for a bullets slide). EXCEPTIONS,
+        // which must round-trip: an <audio> attachment (written for every slide
+        // type by the common block after the type switch, so it is restored
+        // here), and the bulletsImage split-image structure (its image and
+        // caption). The image-caption check precedes the generic `<div>` skip,
+        // which previously shadowed it dead.
+        final isSplit = cssClass.split(RegExp(r'\s+')).contains('split');
+        if (isSplit && t.startsWith('<div class="image-caption">')) {
+          final captionParts = _splitTwoCaptions(_decodeImageCaption(t));
+          imageCaption = captionParts.isNotEmpty ? captionParts.first : '';
+        } else if (isSplit && RegExp(r'!\[[^\]]*\]\(([^)]+)\)').hasMatch(t)) {
+          final m = RegExp(r'!\[[^\]]*\]\(([^)]+)\)').firstMatch(t);
+          if (m != null && imagePath.isEmpty) {
+            imagePath = m.group(1) ?? '';
+          }
         } else if (t.startsWith('<audio')) {
           final m = RegExp(r'src="([^"]+)"').firstMatch(t);
           if (m != null) audioPath = m.group(1) ?? '';
           audioAutoplay = t.contains('autoplay');
         } else if (t.startsWith('<div') || t == '</div>') {
           // Split-slide structural markup; not part of the rich-text body.
-        } else if (cssClass.split(RegExp(r'\s+')).contains('split') &&
-            RegExp(r'!\[[^\]]*\]\(([^)]+)\)').hasMatch(t)) {
-          final m = RegExp(r'!\[[^\]]*\]\(([^)]+)\)').firstMatch(t);
-          if (m != null && imagePath.isEmpty) {
-            imagePath = m.group(1) ?? '';
-          }
-        } else if (t.startsWith('<div class="image-caption">')) {
-          final captionParts = _splitTwoCaptions(_decodeImageCaption(t));
-          imageCaption = captionParts.isNotEmpty ? captionParts.first : '';
         } else {
           richTextLines.add(line);
         }

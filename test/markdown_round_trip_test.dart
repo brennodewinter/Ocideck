@@ -1004,4 +1004,71 @@ void main() {
       expect(out.tableRows[2][0], 'regel1\nregel2');
     });
   });
+
+  // Coverage for the richText-slide parser branch (the `make mutate` survivors,
+  // which were latent bugs): a rich-text body is markdown, so an embedded table
+  // / <video> / <audio> must stay in the body — extracting them lost the content
+  // (the table outright; media on the next save). Only a bulletsImage (split)
+  // slide lifts its image and caption into typed fields.
+  group('richText slide keeps embedded markdown in the body', () {
+    Slide richTextBullets(String body) =>
+        Slide.create(SlideType.bullets).copyWith(
+          title: 'Rijk',
+          listStyle: ListStyle.richText,
+          customMarkdown: body,
+        );
+
+    test('keeps an embedded markdown table in the body', () {
+      const body = 'Inleiding\n\n| A | B |\n| --- | --- |\n| 1 | 2 |';
+      final out = _roundTrip(richTextBullets(body));
+      expect(out.type, SlideType.bullets);
+      expect(out.listStyle, ListStyle.richText);
+      expect(out.customMarkdown, contains('| A | B |'));
+      expect(out.customMarkdown, contains('| 1 | 2 |'));
+      expect(out.tableRows, isEmpty);
+    });
+
+    test('keeps an embedded <video> in the body', () {
+      final out = _roundTrip(
+        richTextBullets('Kijk:\n\n<video src="clip.mp4"></video>'),
+      );
+      expect(out.customMarkdown, contains('<video src="clip.mp4">'));
+      expect(out.videoPath, isEmpty);
+    });
+
+    test('round-trips an audio attachment (written for every slide type)', () {
+      // The audio attachment is offered on every non-video slide and serialised
+      // by the common <audio> block after the type switch, so a richText slide
+      // must read it back into audioPath (not leave it in the body).
+      final out = _roundTrip(
+        Slide.create(SlideType.bullets).copyWith(
+          title: 'Rijk',
+          listStyle: ListStyle.richText,
+          customMarkdown: 'Wat tekst',
+          audioPath: 'media/narration.mp3',
+          audioAutoplay: true,
+        ),
+      );
+      expect(out.audioPath, 'media/narration.mp3');
+      expect(out.audioAutoplay, isTrue);
+      expect(out.customMarkdown, contains('Wat tekst'));
+    });
+
+    test('lifts the image and caption of a richText bulletsImage slide', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.bulletsImage).copyWith(
+          title: 'Rijk met beeld',
+          listStyle: ListStyle.richText,
+          imagePath: 'images/foto.png',
+          imageCaption: 'Bron: archief',
+          customMarkdown: 'Wat begeleidende tekst',
+        ),
+      );
+      expect(out.type, SlideType.bulletsImage);
+      expect(out.listStyle, ListStyle.richText);
+      expect(out.imagePath, 'images/foto.png');
+      expect(out.imageCaption, 'Bron: archief');
+      expect(out.customMarkdown, contains('Wat begeleidende tekst'));
+    });
+  });
 }
