@@ -44,7 +44,7 @@ run locally and in CI, the number you see locally is the number CI gates on.
 | --- | --- | :---: | :---: | :---: |
 | [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ |
 | [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ |
-| [`make check-conventions`](#make-check-conventions) | No `print()`; bare `catch (_)` ratchet | ✅ | ✅ | ✅ |
+| [`make check-conventions`](#make-check-conventions) | No `print()`; bare `catch (_)` & file-size ratchets | ✅ | ✅ | ✅ |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 60% floor | — | — | ✅ (gate) |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
@@ -90,13 +90,20 @@ These three run on every push and pull request (and as `make check`).
 
 ### `make check-conventions`
 - **Runs:** `dart run tool/check_conventions.dart`
-- **Covers:** two project conventions in `lib/` — **no `print()`** (diagnostics
-  go through the logger in `lib/utils/log.dart`), and **no bare `catch (_)`**
-  (silently swallowing errors). The bare-`catch (_)` rule is a **ratchet**: a
-  baseline count in the script that may shrink but never grow — currently **0**,
-  every swallow routes a named error through `logError`/`logWarning`.
-- **Failure means:** route the diagnostic through `logError`, or — if you removed
-  a `catch (_)` — lower `catchUnderscoreBaseline` in the script to lock it in.
+- **Covers:** three project conventions in `lib/`:
+  - **no `print()`** (diagnostics go through the logger in `lib/utils/log.dart`);
+  - **no bare `catch (_)`** (silently swallowing errors) — a **ratchet**: a
+    baseline count that may shrink but never grow, currently **0**, so every
+    swallow routes a named error through `logError`/`logWarning`;
+  - **file-size ratchet** — no file may exceed **1000** lines, except the
+    files listed in `fileSizeBaseline` whose ceiling is their size at ratchet
+    time. A ceiling may shrink (split the file) but never grow, so large files
+    trend smaller instead of creeping bigger. `lib/l10n/translations/*` is
+    exempt (those grow with every UI string).
+- **Failure means:** route the diagnostic through `logError`; **or** split the
+  oversized file (then lower its `fileSizeBaseline` entry — the run prints a
+  tip), or deliberately raise the entry with a reason; **or** — if you removed a
+  `catch (_)` — lower `catchUnderscoreBaseline` to lock it in.
 
 ### `make test`
 - **Runs:** `flutter test --test-randomize-ordering-seed random` — the full

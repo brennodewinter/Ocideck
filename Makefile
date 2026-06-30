@@ -16,7 +16,7 @@ help:
 	@echo "  make deps-outdated   Advisory dependency freshness report."
 	@echo "  make deps-check      Verify vendored JS bundles vs manifest + OSV CVEs."
 	@echo "  make licenses        Verify all dependencies use open-source licences."
-	@echo "  make check-conventions  No print(); bare catch (_) may not grow (ratchet)."
+	@echo "  make check-conventions  No print(); bare catch (_) & file-size ratchets."
 	@echo "  make build-web       Build the hardened web bundle (self-hosted CanvasKit + CSP-safe loader)."
 	@echo "  make check-web       Build the web bundle and assert its hardening (CSP, self-hosted, fonts)."
 	@echo "  make build-macos     Build the macOS .app (macOS only)."
@@ -188,8 +188,10 @@ licenses:
 check-conventions:
 	@echo "== OciDeck check: conventions =="
 	@echo "Command: dart run tool/check_conventions.dart"
-	@echo "Covers: no print() in lib/, and the bare catch (_) count may not grow."
-	@echo "Failure means: route diagnostics through logError, or lower the baseline."
+	@echo "Covers: no print(); bare catch (_) ratchet; file-size ratchet (no file"
+	@echo "        over 1000 lines except baselined ceilings, which may only shrink)."
+	@echo "Failure means: route diagnostics through logError, split the oversized file,"
+	@echo "        or adjust the baseline in tool/check_conventions.dart."
 	dart run tool/check_conventions.dart
 
 # Build the hardened web bundle. Two flags do the security work:
