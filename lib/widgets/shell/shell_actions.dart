@@ -2,6 +2,25 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../app_shell.dart';
 
+/// Surface a failed open as a snackbar. `blocked` shows the security alarm
+/// elsewhere and `opened` needs nothing, so both are silent here.
+void _reportOpenFailure(
+  ScaffoldMessengerState messenger,
+  AppLocalizations l10n,
+  OpenResult result,
+) {
+  final message = switch (result) {
+    OpenResult.notAPresentation => l10n.d(
+      'Dit is geen Marp/OciDeck-presentatie.',
+    ),
+    OpenResult.unreadable => l10n.d('Kon dit bestand niet openen.'),
+    OpenResult.opened || OpenResult.blocked => null,
+  };
+  if (message != null) {
+    messenger.showSnackBar(SnackBar(content: Text(message)));
+  }
+}
+
 /// Open the search-based presentation picker and load the chosen file
 /// (optionally jumping to a matched slide).
 Future<void> _openWithSearch(
@@ -21,14 +40,9 @@ Future<void> _openWithSearch(
   final openResult = await ref
       .read(tabsProvider.notifier)
       .openFileByPath(result.path, selectIndex: result.slideIndex);
-  // A loose .md browsed from disk that isn't a Marp/OciDeck presentation (or is
-  // otherwise unreadable) is refused by openDeck — tell the user instead of
-  // silently doing nothing. OpenResult.blocked already shows the security alarm.
-  if (openResult == OpenResult.unreadable) {
-    messenger.showSnackBar(
-      SnackBar(content: Text(l10n.d('Kon dit bestand niet openen.'))),
-    );
-  }
+  // A loose file browsed from disk that isn't a presentation (or is otherwise
+  // unreadable) is refused — tell the user instead of doing nothing silently.
+  _reportOpenFailure(messenger, l10n, openResult);
 }
 
 /// Scan a fixed set of well-known folders for Marp presentations and open the
@@ -85,11 +99,7 @@ Future<void> _openFromNextcloud(BuildContext context, WidgetRef ref) async {
           entry,
           homeDir: ref.read(settingsProvider).homeDirectory,
         );
-    if (result == OpenResult.unreadable) {
-      messenger.showSnackBar(
-        SnackBar(content: Text(l10n.d('Kon dit bestand niet openen.'))),
-      );
-    }
+    _reportOpenFailure(messenger, l10n, result);
     // OpenResult.blocked toont al het veiligheidsalarm via de shell.
   } on WebdavException catch (e) {
     messenger.showSnackBar(

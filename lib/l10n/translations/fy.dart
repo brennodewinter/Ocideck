@@ -354,6 +354,8 @@ const _dutchSourceAddFy = {
   'Kon de map niet laden. Controleer je verbinding en instellingen.':
       'Koe de map net lade. Kontrolearje dyn ferbining en ynstellings.',
   'Kon dit bestand niet openen.': 'Koe dit bestân net iepenje.',
+  'Dit is geen Marp/OciDeck-presentatie.':
+      'Dit is gjin Marp/OciDeck-presintaasje.',
   'Downloaden mislukt:': 'Downloaden mislearre:',
   'Opgeslagen op Nextcloud:': 'Bewarre op Nextcloud:',
   'Opslaan mislukt:': 'Bewarjen mislearre:',
