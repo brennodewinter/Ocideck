@@ -45,10 +45,6 @@ const Map<String, int> methodLengthBaseline = {
   'lib/widgets/presentation/parts/presenter_keys.dart::_PresenterKeys._handleKey':
       160,
   'lib/widgets/shell/welcome_screen.dart::_WelcomeScreen.build': 192,
-  'lib/widgets/slides/previews/bullets_previews.dart::_BulletsPreview.build':
-      158,
-  'lib/widgets/slides/previews/bullets_previews.dart::_TwoBulletsPreview.build':
-      208,
   'lib/widgets/slides/previews/chart_preview_radar.dart::_ChartPreviewRadar._radarChart':
       203,
   'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
