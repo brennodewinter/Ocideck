@@ -44,95 +44,7 @@ extension _SettingsGeneralTab on _SettingsDialogState {
           ),
         ),
         const SizedBox(height: 16),
-        _sectionTitle(l10n.d('Toegankelijkheid')),
-        _uiTextScaleField(),
-        Padding(
-          padding: const EdgeInsets.only(top: 6),
-          child: Text(
-            l10n.d(
-              'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.',
-            ),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
-          ),
-        ),
-        const SizedBox(height: 8),
-        SwitchListTile(
-          contentPadding: EdgeInsets.zero,
-          title: Text(
-            l10n.d('Waarschuwing bij export'),
-            style: const TextStyle(fontSize: 13),
-          ),
-          subtitle: Text(
-            l10n.d(
-              'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.',
-            ),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
-          ),
-          value: ref.watch(
-            settingsProvider.select((s) => s.qualityWarningsOnExport),
-          ),
-          onChanged: (value) => ref
-              .read(settingsProvider.notifier)
-              .setQualityWarningsOnExport(value),
-        ),
-        SwitchListTile(
-          contentPadding: EdgeInsets.zero,
-          title: Text(
-            l10n.d('Blokkeer export bij ernstige kwaliteitsproblemen'),
-            style: const TextStyle(fontSize: 13),
-          ),
-          subtitle: Text(
-            l10n.d(
-              'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.',
-            ),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
-          ),
-          value: ref.watch(
-            settingsProvider.select((s) => s.qualityBlockExportOnErrors),
-          ),
-          onChanged: (value) => ref
-              .read(settingsProvider.notifier)
-              .setQualityBlockExportOnErrors(value),
-        ),
-        Builder(
-          builder: (context) {
-            const presets = <double>[4.5, 4.0, 3.5, 3.0];
-            final current = ref.watch(
-              settingsProvider.select((s) => s.contrastMinRatio),
-            );
-            // Keep the current value selectable even if it is not a preset.
-            final values = <double>{...presets, current}.toList()
-              ..sort((a, b) => b.compareTo(a));
-            return ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Text(
-                l10n.d('Minimale contrastverhouding'),
-                style: const TextStyle(fontSize: 13),
-              ),
-              subtitle: Text(
-                l10n.d(
-                  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.',
-                ),
-                style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
-              ),
-              trailing: DropdownButton<double>(
-                value: current,
-                items: [
-                  for (final v in values)
-                    DropdownMenuItem<double>(
-                      value: v,
-                      child: Text('${v.toStringAsFixed(1)} : 1'),
-                    ),
-                ],
-                onChanged: (v) {
-                  if (v != null) {
-                    ref.read(settingsProvider.notifier).setContrastMinRatio(v);
-                  }
-                },
-              ),
-            );
-          },
-        ),
+        ..._accessibilitySettings(),
         const SizedBox(height: 16),
         _sectionTitle(l10n.d('Presenteren')),
         SwitchListTile(
@@ -214,6 +126,101 @@ extension _SettingsGeneralTab on _SettingsDialogState {
         ),
       ],
     );
+  }
+
+  List<Widget> _accessibilitySettings() {
+    final l10n = context.l10n;
+    return [
+      _sectionTitle(l10n.d('Toegankelijkheid')),
+      _uiTextScaleField(),
+      Padding(
+        padding: const EdgeInsets.only(top: 6),
+        child: Text(
+          l10n.d(
+            'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.',
+          ),
+          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+        ),
+      ),
+      const SizedBox(height: 8),
+      SwitchListTile(
+        contentPadding: EdgeInsets.zero,
+        title: Text(
+          l10n.d('Waarschuwing bij export'),
+          style: const TextStyle(fontSize: 13),
+        ),
+        subtitle: Text(
+          l10n.d(
+            'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.',
+          ),
+          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+        ),
+        value: ref.watch(
+          settingsProvider.select((s) => s.qualityWarningsOnExport),
+        ),
+        onChanged: (value) => ref
+            .read(settingsProvider.notifier)
+            .setQualityWarningsOnExport(value),
+      ),
+      SwitchListTile(
+        contentPadding: EdgeInsets.zero,
+        title: Text(
+          l10n.d('Blokkeer export bij ernstige kwaliteitsproblemen'),
+          style: const TextStyle(fontSize: 13),
+        ),
+        subtitle: Text(
+          l10n.d(
+            'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.',
+          ),
+          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+        ),
+        value: ref.watch(
+          settingsProvider.select((s) => s.qualityBlockExportOnErrors),
+        ),
+        onChanged: (value) => ref
+            .read(settingsProvider.notifier)
+            .setQualityBlockExportOnErrors(value),
+      ),
+      Builder(
+        builder: (context) {
+          const presets = <double>[4.5, 4.0, 3.5, 3.0];
+          final current = ref.watch(
+            settingsProvider.select((s) => s.contrastMinRatio),
+          );
+          // Keep the current value selectable even if it is not a preset.
+          final values = <double>{...presets, current}.toList()
+            ..sort((a, b) => b.compareTo(a));
+          return ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(
+              l10n.d('Minimale contrastverhouding'),
+              style: const TextStyle(fontSize: 13),
+            ),
+            subtitle: Text(
+              l10n.d(
+                'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.',
+              ),
+              style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            ),
+            trailing: DropdownButton<double>(
+              value: current,
+              items: [
+                for (final v in values)
+                  DropdownMenuItem<double>(
+                    value: v,
+                    child: Text('${v.toStringAsFixed(1)} : 1'),
+                  ),
+              ],
+              onChanged: (v) {
+                if (v != null) {
+                  ref.read(settingsProvider.notifier).setContrastMinRatio(v);
+                }
+              },
+            ),
+          );
+        },
+      ),
+    ];
   }
 
   /// Dropdown with interface text-scale steps (WCAG 1.4.4 asks for up to
@@ -382,75 +389,7 @@ extension _SettingsGeneralTab on _SettingsDialogState {
           style: TextStyle(fontSize: 11, color: mutedText),
         ),
         const SizedBox(height: 12),
-        Row(
-          children: [
-            Expanded(
-              child: DropdownButtonFormField<String>(
-                initialValue: selectedName,
-                decoration: InputDecoration(
-                  labelText: l10n.d('Cockpit-kleurschema'),
-                  isDense: true,
-                ),
-                items: [
-                  for (final scheme in schemes)
-                    DropdownMenuItem(
-                      value: scheme.name,
-                      child: Row(
-                        children: [
-                          _appearanceDot(scheme.good),
-                          const SizedBox(width: 8),
-                          Text(scheme.name),
-                        ],
-                      ),
-                    ),
-                ],
-                onChanged: (name) {
-                  if (name == null) return;
-                  final scheme = schemes.firstWhere((s) => s.name == name);
-                  _rebuild(() {
-                    _cockpitScheme = scheme;
-                    _originalCockpitName = scheme.name;
-                    _cockpitName.text = scheme.name;
-                  });
-                },
-              ),
-            ),
-            const SizedBox(width: 8),
-            IconButton(
-              tooltip: l10n.d('Kopie maken en aanpassen'),
-              onPressed: () async {
-                final created = await ref
-                    .read(settingsProvider.notifier)
-                    .createCockpitColorScheme(base: _cockpitScheme);
-                if (!mounted) return;
-                _rebuild(() {
-                  _cockpitScheme = created;
-                  _originalCockpitName = created.name;
-                  _cockpitName.text = created.name;
-                });
-              },
-              icon: const Icon(Icons.add, size: 18),
-            ),
-            IconButton(
-              tooltip: l10n.d('Kleurschema verwijderen'),
-              onPressed: editable
-                  ? () async {
-                      await ref
-                          .read(settingsProvider.notifier)
-                          .deleteCockpitColorScheme(_cockpitScheme.name);
-                      if (!mounted) return;
-                      const scheme = CockpitColorScheme.standard;
-                      _rebuild(() {
-                        _cockpitScheme = scheme;
-                        _originalCockpitName = scheme.name;
-                        _cockpitName.text = scheme.name;
-                      });
-                    }
-                  : null,
-              icon: const Icon(Icons.delete_outline, size: 18),
-            ),
-          ],
-        ),
+        _cockpitSchemeSelector(schemes, selectedName, editable),
         const SizedBox(height: 12),
         TextField(
           controller: _cockpitName,
@@ -521,6 +460,83 @@ extension _SettingsGeneralTab on _SettingsDialogState {
           (v) => _rebuild(
             () => _cockpitScheme = _cockpitScheme.copyWith(ground: v),
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget _cockpitSchemeSelector(
+    List<CockpitColorScheme> schemes,
+    String selectedName,
+    bool editable,
+  ) {
+    final l10n = context.l10n;
+    return Row(
+      children: [
+        Expanded(
+          child: DropdownButtonFormField<String>(
+            initialValue: selectedName,
+            decoration: InputDecoration(
+              labelText: l10n.d('Cockpit-kleurschema'),
+              isDense: true,
+            ),
+            items: [
+              for (final scheme in schemes)
+                DropdownMenuItem(
+                  value: scheme.name,
+                  child: Row(
+                    children: [
+                      _appearanceDot(scheme.good),
+                      const SizedBox(width: 8),
+                      Text(scheme.name),
+                    ],
+                  ),
+                ),
+            ],
+            onChanged: (name) {
+              if (name == null) return;
+              final scheme = schemes.firstWhere((s) => s.name == name);
+              _rebuild(() {
+                _cockpitScheme = scheme;
+                _originalCockpitName = scheme.name;
+                _cockpitName.text = scheme.name;
+              });
+            },
+          ),
+        ),
+        const SizedBox(width: 8),
+        IconButton(
+          tooltip: l10n.d('Kopie maken en aanpassen'),
+          onPressed: () async {
+            final created = await ref
+                .read(settingsProvider.notifier)
+                .createCockpitColorScheme(base: _cockpitScheme);
+            if (!mounted) return;
+            _rebuild(() {
+              _cockpitScheme = created;
+              _originalCockpitName = created.name;
+              _cockpitName.text = created.name;
+            });
+          },
+          icon: const Icon(Icons.add, size: 18),
+        ),
+        IconButton(
+          tooltip: l10n.d('Kleurschema verwijderen'),
+          onPressed: editable
+              ? () async {
+                  await ref
+                      .read(settingsProvider.notifier)
+                      .deleteCockpitColorScheme(_cockpitScheme.name);
+                  if (!mounted) return;
+                  const scheme = CockpitColorScheme.standard;
+                  _rebuild(() {
+                    _cockpitScheme = scheme;
+                    _originalCockpitName = scheme.name;
+                    _cockpitName.text = scheme.name;
+                  });
+                }
+              : null,
+          icon: const Icon(Icons.delete_outline, size: 18),
         ),
       ],
     );

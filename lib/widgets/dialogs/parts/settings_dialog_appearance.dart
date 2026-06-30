@@ -18,77 +18,7 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _sectionTitle(l10n.d('Look-and-feel')),
-        Row(
-          children: [
-            Expanded(
-              child: DropdownButtonFormField<String>(
-                initialValue: selectedName,
-                decoration: InputDecoration(
-                  labelText: l10n.d('App-thema'),
-                  isDense: true,
-                ),
-                items: [
-                  for (final profile in profiles)
-                    DropdownMenuItem(
-                      value: profile.name,
-                      child: Row(
-                        children: [
-                          _appearanceDot(profile.primaryColor),
-                          const SizedBox(width: 8),
-                          Text(profile.name),
-                        ],
-                      ),
-                    ),
-                ],
-                onChanged: (name) {
-                  if (name == null) return;
-                  final profile = profiles.firstWhere(
-                    (item) => item.name == name,
-                  );
-                  _rebuild(() {
-                    _appearanceProfile = profile;
-                    _originalAppearanceName = profile.name;
-                    _appearanceName.text = profile.name;
-                  });
-                },
-              ),
-            ),
-            const SizedBox(width: 8),
-            IconButton(
-              tooltip: l10n.d('Kopie maken en aanpassen'),
-              onPressed: () async {
-                final created = await ref
-                    .read(settingsProvider.notifier)
-                    .createAppAppearanceProfile(base: _appearanceProfile);
-                if (!mounted) return;
-                _rebuild(() {
-                  _appearanceProfile = created;
-                  _originalAppearanceName = created.name;
-                  _appearanceName.text = created.name;
-                });
-              },
-              icon: const Icon(Icons.add, size: 18),
-            ),
-            IconButton(
-              tooltip: l10n.d('Thema verwijderen'),
-              onPressed: editable
-                  ? () async {
-                      await ref
-                          .read(settingsProvider.notifier)
-                          .deleteAppAppearanceProfile(_appearanceProfile.name);
-                      if (!mounted) return;
-                      const profile = AppAppearanceProfile.basic;
-                      _rebuild(() {
-                        _appearanceProfile = profile;
-                        _originalAppearanceName = profile.name;
-                        _appearanceName.text = profile.name;
-                      });
-                    }
-                  : null,
-              icon: const Icon(Icons.delete_outline, size: 18),
-            ),
-          ],
-        ),
+        _appearanceProfileSelector(profiles, selectedName, editable),
         const SizedBox(height: 12),
         TextField(
           controller: _appearanceName,
@@ -141,42 +71,7 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
           dense: true,
         ),
         const SizedBox(height: 8),
-        InputDecorator(
-          decoration: InputDecoration(
-            labelText: l10n.d('Lettertype interface'),
-            isDense: true,
-            prefixIcon: const Icon(Icons.font_download_outlined, size: 18),
-          ),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              value:
-                  AppAppearanceProfile.uiFonts.contains(
-                    _appearanceProfile.fontFamily,
-                  )
-                  ? _appearanceProfile.fontFamily
-                  : 'Roboto',
-              isExpanded: true,
-              isDense: true,
-              items: [
-                for (final family in AppAppearanceProfile.uiFonts)
-                  DropdownMenuItem(
-                    value: family,
-                    child: Text(family, style: TextStyle(fontFamily: family)),
-                  ),
-              ],
-              onChanged: editable
-                  ? (value) {
-                      if (value == null) return;
-                      _rebuild(() {
-                        _appearanceProfile = _appearanceProfile.copyWith(
-                          fontFamily: value,
-                        );
-                      });
-                    }
-                  : null,
-            ),
-          ),
-        ),
+        _appearanceFontField(editable),
         const SizedBox(height: 8),
         _appearanceColorSetting(
           l10n.d('Hoofdkleur en bovenbalk'),
@@ -245,6 +140,123 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
         const SizedBox(height: 8),
         _appearancePreview(),
       ],
+    );
+  }
+
+  Widget _appearanceProfileSelector(
+    List<AppAppearanceProfile> profiles,
+    String selectedName,
+    bool editable,
+  ) {
+    final l10n = context.l10n;
+    return Row(
+      children: [
+        Expanded(
+          child: DropdownButtonFormField<String>(
+            initialValue: selectedName,
+            decoration: InputDecoration(
+              labelText: l10n.d('App-thema'),
+              isDense: true,
+            ),
+            items: [
+              for (final profile in profiles)
+                DropdownMenuItem(
+                  value: profile.name,
+                  child: Row(
+                    children: [
+                      _appearanceDot(profile.primaryColor),
+                      const SizedBox(width: 8),
+                      Text(profile.name),
+                    ],
+                  ),
+                ),
+            ],
+            onChanged: (name) {
+              if (name == null) return;
+              final profile = profiles.firstWhere((item) => item.name == name);
+              _rebuild(() {
+                _appearanceProfile = profile;
+                _originalAppearanceName = profile.name;
+                _appearanceName.text = profile.name;
+              });
+            },
+          ),
+        ),
+        const SizedBox(width: 8),
+        IconButton(
+          tooltip: l10n.d('Kopie maken en aanpassen'),
+          onPressed: () async {
+            final created = await ref
+                .read(settingsProvider.notifier)
+                .createAppAppearanceProfile(base: _appearanceProfile);
+            if (!mounted) return;
+            _rebuild(() {
+              _appearanceProfile = created;
+              _originalAppearanceName = created.name;
+              _appearanceName.text = created.name;
+            });
+          },
+          icon: const Icon(Icons.add, size: 18),
+        ),
+        IconButton(
+          tooltip: l10n.d('Thema verwijderen'),
+          onPressed: editable
+              ? () async {
+                  await ref
+                      .read(settingsProvider.notifier)
+                      .deleteAppAppearanceProfile(_appearanceProfile.name);
+                  if (!mounted) return;
+                  const profile = AppAppearanceProfile.basic;
+                  _rebuild(() {
+                    _appearanceProfile = profile;
+                    _originalAppearanceName = profile.name;
+                    _appearanceName.text = profile.name;
+                  });
+                }
+              : null,
+          icon: const Icon(Icons.delete_outline, size: 18),
+        ),
+      ],
+    );
+  }
+
+  Widget _appearanceFontField(bool editable) {
+    final l10n = context.l10n;
+    return InputDecorator(
+      decoration: InputDecoration(
+        labelText: l10n.d('Lettertype interface'),
+        isDense: true,
+        prefixIcon: const Icon(Icons.font_download_outlined, size: 18),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          value:
+              AppAppearanceProfile.uiFonts.contains(
+                _appearanceProfile.fontFamily,
+              )
+              ? _appearanceProfile.fontFamily
+              : 'Roboto',
+          isExpanded: true,
+          isDense: true,
+          items: [
+            for (final family in AppAppearanceProfile.uiFonts)
+              DropdownMenuItem(
+                value: family,
+                child: Text(family, style: TextStyle(fontFamily: family)),
+              ),
+          ],
+          onChanged: editable
+              ? (value) {
+                  if (value == null) return;
+                  _rebuild(() {
+                    _appearanceProfile = _appearanceProfile.copyWith(
+                      fontFamily: value,
+                    );
+                  });
+                }
+              : null,
+        ),
+      ),
     );
   }
 
