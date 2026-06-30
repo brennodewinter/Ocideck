@@ -363,144 +363,137 @@ class _MeterCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                SizedBox(
-                  width: 210,
-                  child: DropdownButtonFormField<CockpitMeterType>(
-                    initialValue: type,
-                    isExpanded: true,
-                    decoration: InputDecoration(
-                      labelText: l10n.d('Type'),
-                      isDense: true,
-                      border: const OutlineInputBorder(),
-                    ),
-                    items: [
-                      for (final value in CockpitMeterType.values)
-                        DropdownMenuItem(
-                          value: value,
-                          child: Text(
-                            l10n.d(_meterTypeSourceLabel(value)),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                    ],
-                    onChanged: (value) {
-                      if (value != null) {
-                        onChanged(meter.copyWith(type: value));
-                      }
-                    },
-                  ),
-                ),
-                _TextField(
-                  width: 180,
-                  label: l10n.d('Label'),
-                  value: meter.label,
-                  onChanged: (value) => onChanged(meter.copyWith(label: value)),
-                ),
-                if (type != CockpitMeterType.horizon &&
-                    type != CockpitMeterType.heading)
-                  _NumberField(
-                    label: l10n.d('Waarde'),
-                    value: meter.value,
-                    onChanged: (value) =>
-                        onChanged(meter.copyWith(value: value)),
-                  ),
-                if (type != CockpitMeterType.horizon &&
-                    type != CockpitMeterType.heading)
-                  _TextField(
-                    width: 84,
-                    label: l10n.d('Eenheid'),
-                    value: meter.unit,
-                    onChanged: (value) =>
-                        onChanged(meter.copyWith(unit: value)),
-                  ),
-                if (type == CockpitMeterType.horizon) ...[
-                  _NumberField(
-                    label: l10n.d('Pitch'),
-                    value: meter.pitch,
-                    onChanged: (value) =>
-                        onChanged(meter.copyWith(pitch: value)),
-                  ),
-                  _NumberField(
-                    label: l10n.d('Bank'),
-                    value: meter.bank,
-                    onChanged: (value) =>
-                        onChanged(meter.copyWith(bank: value)),
-                  ),
-                ] else if (type == CockpitMeterType.heading) ...[
-                  _NumberField(
-                    label: l10n.d('Werkelijk'),
-                    value: meter.value,
-                    onChanged: (value) =>
-                        onChanged(meter.copyWith(value: value)),
-                  ),
-                  _NumberField(
-                    label: l10n.d('Doel'),
-                    value: meter.heading,
-                    onChanged: (value) =>
-                        onChanged(meter.copyWith(heading: value)),
-                  ),
-                  _TextField(
-                    width: 130,
-                    label: l10n.d('Markeringslabel'),
-                    value: meter.markerLabel,
-                    onChanged: (value) =>
-                        onChanged(meter.copyWith(markerLabel: value)),
-                  ),
-                ] else ...[
-                  _NumberField(
-                    label: l10n.d('Min'),
-                    value: meter.min,
-                    onChanged: (value) => onChanged(meter.copyWith(min: value)),
-                  ),
-                  _NumberField(
-                    label: l10n.d('Max'),
-                    value: meter.max,
-                    onChanged: (value) => onChanged(meter.copyWith(max: value)),
-                  ),
-                  if (type == CockpitMeterType.climbDescent) ...[
-                    _NumberField(
-                      label: l10n.d('Neutraal van'),
-                      value: meter.neutralFrom,
-                      onChanged: (value) =>
-                          onChanged(meter.copyWith(neutralFrom: value)),
-                    ),
-                    _NumberField(
-                      label: l10n.d('Neutraal tot'),
-                      value: meter.neutralTo,
-                      onChanged: (value) =>
-                          onChanged(meter.copyWith(neutralTo: value)),
-                    ),
-                  ] else ...[
-                    _NumberField(
-                      label: l10n.d('Groen van'),
-                      value: meter.greenFrom,
-                      onChanged: (value) =>
-                          onChanged(meter.copyWith(greenFrom: value)),
-                    ),
-                    _NumberField(
-                      label: l10n.d('Groen tot'),
-                      value: meter.greenTo,
-                      onChanged: (value) =>
-                          onChanged(meter.copyWith(greenTo: value)),
-                    ),
-                    _NumberField(
-                      label: l10n.d('Rood van'),
-                      value: meter.redFrom,
-                      onChanged: (value) =>
-                          onChanged(meter.copyWith(redFrom: value)),
-                    ),
-                  ],
-                ],
-              ],
-            ),
+            _meterFields(type, l10n),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _meterFields(CockpitMeterType type, AppLocalizations l10n) {
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        SizedBox(
+          width: 210,
+          child: DropdownButtonFormField<CockpitMeterType>(
+            initialValue: type,
+            isExpanded: true,
+            decoration: InputDecoration(
+              labelText: l10n.d('Type'),
+              isDense: true,
+              border: const OutlineInputBorder(),
+            ),
+            items: [
+              for (final value in CockpitMeterType.values)
+                DropdownMenuItem(
+                  value: value,
+                  child: Text(
+                    l10n.d(_meterTypeSourceLabel(value)),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+            ],
+            onChanged: (value) {
+              if (value != null) {
+                onChanged(meter.copyWith(type: value));
+              }
+            },
+          ),
+        ),
+        _TextField(
+          width: 180,
+          label: l10n.d('Label'),
+          value: meter.label,
+          onChanged: (value) => onChanged(meter.copyWith(label: value)),
+        ),
+        if (type != CockpitMeterType.horizon &&
+            type != CockpitMeterType.heading)
+          _NumberField(
+            label: l10n.d('Waarde'),
+            value: meter.value,
+            onChanged: (value) => onChanged(meter.copyWith(value: value)),
+          ),
+        if (type != CockpitMeterType.horizon &&
+            type != CockpitMeterType.heading)
+          _TextField(
+            width: 84,
+            label: l10n.d('Eenheid'),
+            value: meter.unit,
+            onChanged: (value) => onChanged(meter.copyWith(unit: value)),
+          ),
+        if (type == CockpitMeterType.horizon) ...[
+          _NumberField(
+            label: l10n.d('Pitch'),
+            value: meter.pitch,
+            onChanged: (value) => onChanged(meter.copyWith(pitch: value)),
+          ),
+          _NumberField(
+            label: l10n.d('Bank'),
+            value: meter.bank,
+            onChanged: (value) => onChanged(meter.copyWith(bank: value)),
+          ),
+        ] else if (type == CockpitMeterType.heading) ...[
+          _NumberField(
+            label: l10n.d('Werkelijk'),
+            value: meter.value,
+            onChanged: (value) => onChanged(meter.copyWith(value: value)),
+          ),
+          _NumberField(
+            label: l10n.d('Doel'),
+            value: meter.heading,
+            onChanged: (value) => onChanged(meter.copyWith(heading: value)),
+          ),
+          _TextField(
+            width: 130,
+            label: l10n.d('Markeringslabel'),
+            value: meter.markerLabel,
+            onChanged: (value) => onChanged(meter.copyWith(markerLabel: value)),
+          ),
+        ] else ...[
+          _NumberField(
+            label: l10n.d('Min'),
+            value: meter.min,
+            onChanged: (value) => onChanged(meter.copyWith(min: value)),
+          ),
+          _NumberField(
+            label: l10n.d('Max'),
+            value: meter.max,
+            onChanged: (value) => onChanged(meter.copyWith(max: value)),
+          ),
+          if (type == CockpitMeterType.climbDescent) ...[
+            _NumberField(
+              label: l10n.d('Neutraal van'),
+              value: meter.neutralFrom,
+              onChanged: (value) =>
+                  onChanged(meter.copyWith(neutralFrom: value)),
+            ),
+            _NumberField(
+              label: l10n.d('Neutraal tot'),
+              value: meter.neutralTo,
+              onChanged: (value) => onChanged(meter.copyWith(neutralTo: value)),
+            ),
+          ] else ...[
+            _NumberField(
+              label: l10n.d('Groen van'),
+              value: meter.greenFrom,
+              onChanged: (value) => onChanged(meter.copyWith(greenFrom: value)),
+            ),
+            _NumberField(
+              label: l10n.d('Groen tot'),
+              value: meter.greenTo,
+              onChanged: (value) => onChanged(meter.copyWith(greenTo: value)),
+            ),
+            _NumberField(
+              label: l10n.d('Rood van'),
+              value: meter.redFrom,
+              onChanged: (value) => onChanged(meter.copyWith(redFrom: value)),
+            ),
+          ],
+        ],
+      ],
     );
   }
 }
