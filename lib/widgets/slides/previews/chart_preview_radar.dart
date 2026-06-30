@@ -62,131 +62,7 @@ extension _ChartPreviewRadar on _ChartPreviewState {
                             clipBehavior: Clip.none,
                             children: [
                               Positioned.fill(
-                                child: RadarChart(
-                                  RadarChartData(
-                                    dataSets: [
-                                      for (
-                                        var si = 0;
-                                        si < spec.series.length;
-                                        si++
-                                      )
-                                        RadarDataSet(
-                                          dataEntries: [
-                                            for (
-                                              var xi = 0;
-                                              xi < spec.x.length;
-                                              xi++
-                                            )
-                                              RadarEntry(
-                                                value:
-                                                    xi <
-                                                        spec
-                                                            .series[si]
-                                                            .data
-                                                            .length
-                                                    ? spec.series[si].data[xi]
-                                                    : 0,
-                                              ),
-                                          ],
-                                          fillColor:
-                                              _seriesDisplayColor(
-                                                spec.series[si],
-                                                si,
-                                              ).withValues(
-                                                alpha: _dimmed(si)
-                                                    ? 0.04
-                                                    : 0.16,
-                                              ),
-                                          borderColor: _seriesDisplayColor(
-                                            spec.series[si],
-                                            si,
-                                          ),
-                                          borderWidth:
-                                              w *
-                                              (_hovered == si
-                                                  ? 0.0040
-                                                  : 0.0022),
-                                          entryRadius:
-                                              w *
-                                              (_hovered == si ? 0.006 : 0.004),
-                                        ),
-                                      // Invisible anchor pinning the scale to [lo, hi]
-                                      // so the rings represent a fixed scale.
-                                      RadarDataSet(
-                                        dataEntries: [
-                                          for (
-                                            var xi = 0;
-                                            xi < spec.x.length;
-                                            xi++
-                                          )
-                                            RadarEntry(
-                                              value: xi == 0
-                                                  ? scale.hi
-                                                  : scale.lo,
-                                            ),
-                                        ],
-                                        fillColor: Colors.transparent,
-                                        borderColor: Colors.transparent,
-                                        borderWidth: 0,
-                                        entryRadius: 0,
-                                      ),
-                                    ],
-                                    radarShape: RadarShape.polygon,
-                                    radarBackgroundColor: Colors.transparent,
-                                    radarBorderData: BorderSide(
-                                      color: grid,
-                                      width: 1,
-                                    ),
-                                    gridBorderData: BorderSide(
-                                      color: grid,
-                                      width: 1,
-                                    ),
-                                    tickBorderData: BorderSide(
-                                      color: grid,
-                                      width: 1,
-                                    ),
-                                    tickCount: scale.ticks,
-                                    isMinValueAtCenter: true,
-                                    // The scale now lives in a side legend, so hide
-                                    // fl_chart's in-chart ring numbers.
-                                    ticksTextStyle: const TextStyle(
-                                      color: Colors.transparent,
-                                      fontSize: 0.001,
-                                    ),
-                                    titlePositionPercentageOffset: 0,
-                                    getTitle: (index, angle) => RadarChartTitle(
-                                      text: index < spec.x.length
-                                          ? spec.x[index]
-                                          : '',
-                                    ),
-                                    // Labels are rendered as constrained widgets
-                                    // around the chart so long text can wrap.
-                                    titleTextStyle: const TextStyle(
-                                      color: Colors.transparent,
-                                      fontSize: 0.001,
-                                    ),
-                                    radarTouchData: RadarTouchData(
-                                      enabled: true,
-                                      touchSpotThreshold: (w * 0.02)
-                                          .clamp(8.0, 24.0)
-                                          .toDouble(),
-                                      mouseCursorResolver: (event, response) =>
-                                          _radarSpotFrom(response, spec) == null
-                                          ? SystemMouseCursors.basic
-                                          : SystemMouseCursors.click,
-                                      touchCallback: (event, response) {
-                                        final next =
-                                            event.isInterestedForInteractions
-                                            ? _radarSpotFrom(response, spec)
-                                            : null;
-                                        if (next != _radarTouch) {
-                                          _rebuild(() => _radarTouch = next);
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                  duration: Duration.zero,
-                                ),
+                                child: _radarChartCore(spec, grid, scale),
                               ),
                               if (_radarTouch != null)
                                 _radarTooltip(spec, chartSide, _radarTouch!),
@@ -206,6 +82,88 @@ extension _ChartPreviewRadar on _ChartPreviewState {
           );
         },
       ),
+    );
+  }
+
+  Widget _radarChartCore(
+    ChartSpec spec,
+    Color grid,
+    ({double lo, double hi, int ticks}) scale,
+  ) {
+    return RadarChart(
+      RadarChartData(
+        dataSets: [
+          for (var si = 0; si < spec.series.length; si++)
+            RadarDataSet(
+              dataEntries: [
+                for (var xi = 0; xi < spec.x.length; xi++)
+                  RadarEntry(
+                    value: xi < spec.series[si].data.length
+                        ? spec.series[si].data[xi]
+                        : 0,
+                  ),
+              ],
+              fillColor: _seriesDisplayColor(
+                spec.series[si],
+                si,
+              ).withValues(alpha: _dimmed(si) ? 0.04 : 0.16),
+              borderColor: _seriesDisplayColor(spec.series[si], si),
+              borderWidth: w * (_hovered == si ? 0.0040 : 0.0022),
+              entryRadius: w * (_hovered == si ? 0.006 : 0.004),
+            ),
+          // Invisible anchor pinning the scale to [lo, hi]
+          // so the rings represent a fixed scale.
+          RadarDataSet(
+            dataEntries: [
+              for (var xi = 0; xi < spec.x.length; xi++)
+                RadarEntry(value: xi == 0 ? scale.hi : scale.lo),
+            ],
+            fillColor: Colors.transparent,
+            borderColor: Colors.transparent,
+            borderWidth: 0,
+            entryRadius: 0,
+          ),
+        ],
+        radarShape: RadarShape.polygon,
+        radarBackgroundColor: Colors.transparent,
+        radarBorderData: BorderSide(color: grid, width: 1),
+        gridBorderData: BorderSide(color: grid, width: 1),
+        tickBorderData: BorderSide(color: grid, width: 1),
+        tickCount: scale.ticks,
+        isMinValueAtCenter: true,
+        // The scale now lives in a side legend, so hide
+        // fl_chart's in-chart ring numbers.
+        ticksTextStyle: const TextStyle(
+          color: Colors.transparent,
+          fontSize: 0.001,
+        ),
+        titlePositionPercentageOffset: 0,
+        getTitle: (index, angle) =>
+            RadarChartTitle(text: index < spec.x.length ? spec.x[index] : ''),
+        // Labels are rendered as constrained widgets
+        // around the chart so long text can wrap.
+        titleTextStyle: const TextStyle(
+          color: Colors.transparent,
+          fontSize: 0.001,
+        ),
+        radarTouchData: RadarTouchData(
+          enabled: true,
+          touchSpotThreshold: (w * 0.02).clamp(8.0, 24.0).toDouble(),
+          mouseCursorResolver: (event, response) =>
+              _radarSpotFrom(response, spec) == null
+              ? SystemMouseCursors.basic
+              : SystemMouseCursors.click,
+          touchCallback: (event, response) {
+            final next = event.isInterestedForInteractions
+                ? _radarSpotFrom(response, spec)
+                : null;
+            if (next != _radarTouch) {
+              _rebuild(() => _radarTouch = next);
+            }
+          },
+        ),
+      ),
+      duration: Duration.zero,
     );
   }
 
