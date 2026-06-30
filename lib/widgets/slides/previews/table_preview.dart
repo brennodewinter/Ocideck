@@ -323,29 +323,7 @@ class _TablePreview extends StatelessWidget {
       );
     }
 
-    // Give each column a flex weight proportional to its longest cell, so a
-    // column with long text gets the room it needs instead of an equal share.
-    // This cuts down word-wrapping (and therefore the table's height), so a
-    // table is far more likely to fit the 16:9 slide at full width rather than
-    // being scaled down by the FittedBox — which is what left the width unused
-    // and made tables look oversized. The weights still flex to fill the width.
-    //
-    // The upper clamp keeps one pathologically long cell from squashing the
-    // rest, but it was set so low (32) that ordinary long sentences hit the cap
-    // and kept wrapping: the column couldn't claim its fair share, the table
-    // grew tall, the FittedBox scaled it down and left width unused on the
-    // right. A higher cap lets full sentences breathe while still reining in
-    // paragraph-length outliers.
-    final columnWidths = <int, TableColumnWidth>{
-      for (var c = 0; c < colCount; c++)
-        c: FlexColumnWidth(
-          rows
-              .map((r) => c < r.length ? r[c].trim().length : 0)
-              .fold<int>(1, (longest, len) => len > longest ? len : longest)
-              .clamp(1, 80)
-              .toDouble(),
-        ),
-    };
+    final columnWidths = _columnWidths(rows, colCount);
 
     Widget tableWidget = Table(
       border: TableBorder.all(
@@ -386,6 +364,49 @@ class _TablePreview extends StatelessWidget {
       );
     }
 
+    return _outerLayout(
+      context,
+      tableWidget,
+      pad: pad,
+      safe: safe,
+      titleSize: titleSize,
+      rows: rows,
+      colCount: colCount,
+    );
+  }
+
+  /// Per-column flex weights proportional to each column's longest cell, so a
+  /// text-heavy column claims the room it needs (less wrapping → the table is
+  /// likelier to fit the 16:9 slide at full width instead of being scaled down
+  /// by the FittedBox). The upper clamp reins in paragraph-length outliers.
+  Map<int, TableColumnWidth> _columnWidths(
+    List<List<String>> rows,
+    int colCount,
+  ) {
+    return <int, TableColumnWidth>{
+      for (var c = 0; c < colCount; c++)
+        c: FlexColumnWidth(
+          rows
+              .map((r) => c < r.length ? r[c].trim().length : 0)
+              .fold<int>(1, (longest, len) => len > longest ? len : longest)
+              .clamp(1, 80)
+              .toDouble(),
+        ),
+    };
+  }
+
+  /// The slide frame around the built [tableWidget]: background, logo-safe
+  /// padding, optional title, and the FittedBox that scales an oversized table
+  /// down to fit.
+  Widget _outerLayout(
+    BuildContext context,
+    Widget tableWidget, {
+    required double pad,
+    required EdgeInsets safe,
+    required double titleSize,
+    required List<List<String>> rows,
+    required int colCount,
+  }) {
     return Container(
       color: _hexColor(profile.slideBackgroundColor),
       child: FittedBox(
