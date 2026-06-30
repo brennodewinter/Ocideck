@@ -6,36 +6,40 @@ import 'text_measurement.dart';
 
 export 'text_measurement.dart' show measureTextHeight, measureTextWidth;
 
-/// Caches a slide preview's fully-resolved vertical fit-scale, keyed by the
-/// slide's identity and the exact geometry it was laid out at. A preview
-/// recomputes this fit through several TextPainter layouts (a few milliseconds)
-/// on every rebuild, and editing one slide rebuilds every visible thumbnail in
-/// the rail even though their slides never changed — same object identity. The
-/// key is (slide, font, width, availW, availH); a changed slide is a new object
-/// (never a stale hit) and a resize misses on the geometry. Capped with FIFO
-/// eviction so a long session can't grow it without bound (mirrors the image
+/// Caches a slide preview's fully-resolved layout result (a fit-scale, or a
+/// record of scale + column geometry), keyed by the slide's identity and the
+/// exact geometry it was laid out at. A preview recomputes this fit through
+/// several TextPainter layouts (a few milliseconds) on every rebuild, and
+/// editing one slide rebuilds every visible thumbnail in the rail even though
+/// their slides never changed — same object identity. The key is
+/// (slide, font, width, availW, availH); a changed slide is a new object (never
+/// a stale hit) and a resize misses on the geometry. Capped with FIFO eviction
+/// so a long session can't grow it without bound (mirrors the image
 /// average-colour cache).
-final Map<(Slide, String, double, double, double), double>
-_renderFitScaleCache = {};
-const int _maxRenderFitScaleEntries = 512;
+///
+/// A given slide is rendered by exactly one preview type, so each key always
+/// maps to the same value type — the `as T` cast on a hit is sound.
+final Map<(Slide, String, double, double, double), Object> _renderLayoutCache =
+    {};
+const int _maxRenderLayoutEntries = 512;
 
-double memoizedRenderFitScale({
+T memoizedRenderLayout<T extends Object>({
   required Slide slide,
   required String font,
   required double width,
   required double availW,
   required double availH,
-  required double Function() compute,
+  required T Function() compute,
 }) {
   final key = (slide, font, width, availW, availH);
-  final cached = _renderFitScaleCache[key];
-  if (cached != null) return cached;
-  final scale = compute();
-  if (_renderFitScaleCache.length >= _maxRenderFitScaleEntries) {
-    _renderFitScaleCache.remove(_renderFitScaleCache.keys.first);
+  final cached = _renderLayoutCache[key];
+  if (cached != null) return cached as T;
+  final value = compute();
+  if (_renderLayoutCache.length >= _maxRenderLayoutEntries) {
+    _renderLayoutCache.remove(_renderLayoutCache.keys.first);
   }
-  _renderFitScaleCache[key] = scale;
-  return scale;
+  _renderLayoutCache[key] = value;
+  return value;
 }
 
 /// Reference slide width (960pt) used for consistent quality metrics across
