@@ -386,70 +386,7 @@ class _ChartEditorState extends State<ChartEditor> {
         children: [
           EditorField(label: 'Titel (optioneel)', controller: _title),
           const SizedBox(height: 16),
-          Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 12,
-            runSpacing: 8,
-            children: [
-              Text(
-                l10n.d('Type grafiek'),
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF64748B),
-                ),
-              ),
-              DropdownButton<ChartType>(
-                value: _type,
-                isDense: true,
-                borderRadius: BorderRadius.circular(6),
-                style: const TextStyle(fontSize: 12, color: Color(0xFF0F172A)),
-                items: [
-                  DropdownMenuItem(
-                    value: ChartType.bar,
-                    child: Text(l10n.d('Staaf')),
-                  ),
-                  DropdownMenuItem(
-                    value: ChartType.stackedBar,
-                    child: Text(l10n.d('Gestapelde staaf')),
-                  ),
-                  DropdownMenuItem(
-                    value: ChartType.line,
-                    child: Text(l10n.d('Lijn')),
-                  ),
-                  DropdownMenuItem(
-                    value: ChartType.pie,
-                    child: Text(l10n.d('Cirkel')),
-                  ),
-                  DropdownMenuItem(
-                    value: ChartType.radar,
-                    child: Text(l10n.d('Spider')),
-                  ),
-                  DropdownMenuItem(
-                    value: ChartType.scatter,
-                    child: Text(l10n.d('Spreiding')),
-                  ),
-                ],
-                onChanged: (v) {
-                  if (v == null) return;
-                  setState(() => _type = v);
-                  _emit();
-                },
-              ),
-              if (widget.onAddVariants != null)
-                TextButton.icon(
-                  key: const ValueKey('chart-create-variants'),
-                  onPressed: _createVariants,
-                  icon: const Icon(Icons.auto_awesome_motion, size: 16),
-                  label: Text(l10n.d('Varianten')),
-                ),
-              TextButton.icon(
-                onPressed: _importCsv,
-                icon: const Icon(Icons.upload_file, size: 16),
-                label: Text(l10n.d('CSV importeren')),
-              ),
-            ],
-          ),
+          _typeControls(l10n),
           if (_type == ChartType.pie)
             Padding(
               padding: const EdgeInsets.only(top: 8),
@@ -581,6 +518,73 @@ class _ChartEditorState extends State<ChartEditor> {
     );
   }
 
+  Widget _typeControls(AppLocalizations l10n) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 12,
+      runSpacing: 8,
+      children: [
+        Text(
+          l10n.d('Type grafiek'),
+          style: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: Color(0xFF64748B),
+          ),
+        ),
+        DropdownButton<ChartType>(
+          value: _type,
+          isDense: true,
+          borderRadius: BorderRadius.circular(6),
+          style: const TextStyle(fontSize: 12, color: Color(0xFF0F172A)),
+          items: [
+            DropdownMenuItem(
+              value: ChartType.bar,
+              child: Text(l10n.d('Staaf')),
+            ),
+            DropdownMenuItem(
+              value: ChartType.stackedBar,
+              child: Text(l10n.d('Gestapelde staaf')),
+            ),
+            DropdownMenuItem(
+              value: ChartType.line,
+              child: Text(l10n.d('Lijn')),
+            ),
+            DropdownMenuItem(
+              value: ChartType.pie,
+              child: Text(l10n.d('Cirkel')),
+            ),
+            DropdownMenuItem(
+              value: ChartType.radar,
+              child: Text(l10n.d('Spider')),
+            ),
+            DropdownMenuItem(
+              value: ChartType.scatter,
+              child: Text(l10n.d('Spreiding')),
+            ),
+          ],
+          onChanged: (v) {
+            if (v == null) return;
+            setState(() => _type = v);
+            _emit();
+          },
+        ),
+        if (widget.onAddVariants != null)
+          TextButton.icon(
+            key: const ValueKey('chart-create-variants'),
+            onPressed: _createVariants,
+            icon: const Icon(Icons.auto_awesome_motion, size: 16),
+            label: Text(l10n.d('Varianten')),
+          ),
+        TextButton.icon(
+          onPressed: _importCsv,
+          icon: const Icon(Icons.upload_file, size: 16),
+          label: Text(l10n.d('CSV importeren')),
+        ),
+      ],
+    );
+  }
+
   Widget _grid({required bool enabled, required double availableWidth}) {
     final cols = _seriesNames.length;
     const trailingWidth = 40.0;
@@ -683,84 +687,98 @@ class _ChartEditorState extends State<ChartEditor> {
           const SizedBox(height: 4),
           // Data rows.
           for (var r = 0; r < _xLabels.length; r++)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 4),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: labelWidth,
-                    child: Row(
-                      children: [
-                        IconButton(
-                          key: ValueKey('chart-row-color-$r'),
-                          onPressed: enabled ? () => _pickRowColor(r) : null,
-                          tooltip: context.l10n.d('Kleur van rij'),
-                          icon: _colorDot(
-                            _rowColors[r] ??
-                                chartColorPalette[r % chartColorPalette.length],
-                          ),
-                          visualDensity: VisualDensity.compact,
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(
-                            minWidth: 26,
-                            minHeight: 32,
-                          ),
-                        ),
-                        Expanded(
-                          child: _cell(
-                            key: ValueKey('x-$_rev-$r'),
-                            value: _xLabels[r],
-                            enabled: enabled,
-                            onChanged: (v) => _xLabels[r] = v,
-                          ),
-                        ),
-                        if (enabled) ...[
-                          _iconBtn(
-                            Icons.keyboard_arrow_up,
-                            r == 0 ? null : () => _moveRow(r, r - 1),
-                            key: ValueKey('chart-row-up-$r'),
-                            tooltip: context.l10n.d('Rij omhoog'),
-                          ),
-                          _iconBtn(
-                            Icons.keyboard_arrow_down,
-                            r == _xLabels.length - 1
-                                ? null
-                                : () => _moveRow(r, r + 1),
-                            key: ValueKey('chart-row-down-$r'),
-                            tooltip: context.l10n.d('Rij omlaag'),
-                          ),
-                        ],
-                      ],
-                    ),
+            _dataRow(
+              r,
+              enabled: enabled,
+              cols: cols,
+              labelWidth: labelWidth,
+              cellWidth: cellWidth,
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _dataRow(
+    int r, {
+    required bool enabled,
+    required int cols,
+    required double labelWidth,
+    required double cellWidth,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4),
+      child: Row(
+        children: [
+          SizedBox(
+            width: labelWidth,
+            child: Row(
+              children: [
+                IconButton(
+                  key: ValueKey('chart-row-color-$r'),
+                  onPressed: enabled ? () => _pickRowColor(r) : null,
+                  tooltip: context.l10n.d('Kleur van rij'),
+                  icon: _colorDot(
+                    _rowColors[r] ??
+                        chartColorPalette[r % chartColorPalette.length],
                   ),
-                  for (var c = 0; c < cols; c++)
-                    Container(
-                      width: cellWidth,
-                      color: _type == ChartType.pie && c >= 2
-                          ? const Color(0xFFE2E8F0)
-                          : null,
-                      child: _cell(
-                        key: ValueKey('v-$_rev-$r-$c'),
-                        value: c < _values[r].length ? _values[r][c] : '',
-                        enabled: enabled,
-                        number: true,
-                        muted: _type == ChartType.pie && c >= 2,
-                        onChanged: (v) {
-                          while (_values[r].length <= c) {
-                            _values[r].add('');
-                          }
-                          _values[r][c] = v;
-                        },
-                      ),
-                    ),
-                  if (enabled && _xLabels.length > 1)
-                    _iconBtn(
-                      Icons.close,
-                      () => _removeRow(r),
-                      tooltip: context.l10n.d('Rij verwijderen'),
-                    ),
+                  visualDensity: VisualDensity.compact,
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(
+                    minWidth: 26,
+                    minHeight: 32,
+                  ),
+                ),
+                Expanded(
+                  child: _cell(
+                    key: ValueKey('x-$_rev-$r'),
+                    value: _xLabels[r],
+                    enabled: enabled,
+                    onChanged: (v) => _xLabels[r] = v,
+                  ),
+                ),
+                if (enabled) ...[
+                  _iconBtn(
+                    Icons.keyboard_arrow_up,
+                    r == 0 ? null : () => _moveRow(r, r - 1),
+                    key: ValueKey('chart-row-up-$r'),
+                    tooltip: context.l10n.d('Rij omhoog'),
+                  ),
+                  _iconBtn(
+                    Icons.keyboard_arrow_down,
+                    r == _xLabels.length - 1 ? null : () => _moveRow(r, r + 1),
+                    key: ValueKey('chart-row-down-$r'),
+                    tooltip: context.l10n.d('Rij omlaag'),
+                  ),
                 ],
+              ],
+            ),
+          ),
+          for (var c = 0; c < cols; c++)
+            Container(
+              width: cellWidth,
+              color: _type == ChartType.pie && c >= 2
+                  ? const Color(0xFFE2E8F0)
+                  : null,
+              child: _cell(
+                key: ValueKey('v-$_rev-$r-$c'),
+                value: c < _values[r].length ? _values[r][c] : '',
+                enabled: enabled,
+                number: true,
+                muted: _type == ChartType.pie && c >= 2,
+                onChanged: (v) {
+                  while (_values[r].length <= c) {
+                    _values[r].add('');
+                  }
+                  _values[r][c] = v;
+                },
               ),
+            ),
+          if (enabled && _xLabels.length > 1)
+            _iconBtn(
+              Icons.close,
+              () => _removeRow(r),
+              tooltip: context.l10n.d('Rij verwijderen'),
             ),
         ],
       ),

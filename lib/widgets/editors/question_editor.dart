@@ -177,55 +177,13 @@ class _QuestionEditorState extends State<QuestionEditor> {
         const SizedBox(height: 16),
         if (isTrueFalse)
           ..._buildTrueFalseSection(l10n)
-        else ...[
-          const SectionLabel('Antwoorden'),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Text(
-              isMulti
-                  ? l10n.d(
-                      'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.',
-                    )
-                  : l10n.d(
-                      'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.',
-                    ),
-              style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
-            ),
+        else
+          ..._answersSection(
+            l10n,
+            isMulti: isMulti,
+            filledCorrect: filledCorrect,
+            filledWrong: filledWrong,
           ),
-          for (int i = 0; i < _answers.length; i++) _buildAnswerRow(i),
-          const SizedBox(height: 4),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: TextButton.icon(
-              onPressed: _addAnswer,
-              icon: const Icon(Icons.add, size: 16),
-              label: Text(l10n.d('Antwoord toevoegen')),
-            ),
-          ),
-          if (filledCorrect.isEmpty || filledWrong.isEmpty)
-            Padding(
-              padding: const EdgeInsets.only(top: 4),
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.warning_amber_rounded,
-                    size: 16,
-                    color: Color(0xFFB45309),
-                  ),
-                  const SizedBox(width: 6),
-                  Expanded(
-                    child: Text(
-                      l10n.d('Geef minstens één goed én één fout antwoord op.'),
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Color(0xFFB45309),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-        ],
         const SizedBox(height: 20),
         const SectionLabel('Weergave'),
         if (!isTrueFalse) ...[
@@ -271,50 +229,113 @@ class _QuestionEditorState extends State<QuestionEditor> {
           style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
         ),
         const SizedBox(height: 20),
-        const SectionLabel('Afbeelding (optioneel)'),
-        ImagePickerBar(
-          imagePath: widget.slide.imagePath,
-          imageCaption: widget.slide.imageCaption,
-          searchPaths: widget.searchPaths,
-          captionBasePath: widget.captionBasePath,
-          onPicked: (path, caption) => widget.onUpdate(
-            widget.slide.copyWith(imagePath: path, imageCaption: caption),
-          ),
-          onBrowse: () async {
-            final path = await widget.imageService.pickImage(
-              projectPath: widget.captionBasePath,
-            );
-            if (path != null) {
-              widget.onUpdate(widget.slide.copyWith(imagePath: path));
-            }
-          },
-          onPaste: () async {
-            final path = await widget.imageService.pasteImage(
-              projectPath: widget.captionBasePath,
-            );
-            if (path != null) {
-              widget.onUpdate(widget.slide.copyWith(imagePath: path));
-            }
-          },
-          onClear: widget.slide.imagePath.isNotEmpty
-              ? () => widget.onUpdate(
-                  widget.slide.copyWith(imagePath: '', imageCaption: ''),
-                )
-              : null,
-          onCaptionChanged: (caption) =>
-              widget.onUpdate(widget.slide.copyWith(imageCaption: caption)),
-        ),
-        if (widget.slide.imagePath.isNotEmpty) ...[
-          const SizedBox(height: 12),
-          const SectionLabel('Breedte afbeelding'),
-          ImageZoomControl(
-            value: widget.slide.imageSize,
-            onChanged: (v) =>
-                widget.onUpdate(widget.slide.copyWith(imageSize: v)),
-          ),
-        ],
+        ..._imageSection(),
       ],
     );
+  }
+
+  List<Widget> _answersSection(
+    AppLocalizations l10n, {
+    required bool isMulti,
+    required List<int> filledCorrect,
+    required List<int> filledWrong,
+  }) {
+    return [
+      const SectionLabel('Antwoorden'),
+      Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: Text(
+          isMulti
+              ? l10n.d(
+                  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.',
+                )
+              : l10n.d(
+                  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.',
+                ),
+          style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+        ),
+      ),
+      for (int i = 0; i < _answers.length; i++) _buildAnswerRow(i),
+      const SizedBox(height: 4),
+      Align(
+        alignment: Alignment.centerLeft,
+        child: TextButton.icon(
+          onPressed: _addAnswer,
+          icon: const Icon(Icons.add, size: 16),
+          label: Text(l10n.d('Antwoord toevoegen')),
+        ),
+      ),
+      if (filledCorrect.isEmpty || filledWrong.isEmpty)
+        Padding(
+          padding: const EdgeInsets.only(top: 4),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.warning_amber_rounded,
+                size: 16,
+                color: Color(0xFFB45309),
+              ),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  l10n.d('Geef minstens één goed én één fout antwoord op.'),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFFB45309),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+    ];
+  }
+
+  List<Widget> _imageSection() {
+    return [
+      const SectionLabel('Afbeelding (optioneel)'),
+      ImagePickerBar(
+        imagePath: widget.slide.imagePath,
+        imageCaption: widget.slide.imageCaption,
+        searchPaths: widget.searchPaths,
+        captionBasePath: widget.captionBasePath,
+        onPicked: (path, caption) => widget.onUpdate(
+          widget.slide.copyWith(imagePath: path, imageCaption: caption),
+        ),
+        onBrowse: () async {
+          final path = await widget.imageService.pickImage(
+            projectPath: widget.captionBasePath,
+          );
+          if (path != null) {
+            widget.onUpdate(widget.slide.copyWith(imagePath: path));
+          }
+        },
+        onPaste: () async {
+          final path = await widget.imageService.pasteImage(
+            projectPath: widget.captionBasePath,
+          );
+          if (path != null) {
+            widget.onUpdate(widget.slide.copyWith(imagePath: path));
+          }
+        },
+        onClear: widget.slide.imagePath.isNotEmpty
+            ? () => widget.onUpdate(
+                widget.slide.copyWith(imagePath: '', imageCaption: ''),
+              )
+            : null,
+        onCaptionChanged: (caption) =>
+            widget.onUpdate(widget.slide.copyWith(imageCaption: caption)),
+      ),
+      if (widget.slide.imagePath.isNotEmpty) ...[
+        const SizedBox(height: 12),
+        const SectionLabel('Breedte afbeelding'),
+        ImageZoomControl(
+          value: widget.slide.imageSize,
+          onChanged: (v) =>
+              widget.onUpdate(widget.slide.copyWith(imageSize: v)),
+        ),
+      ],
+    ];
   }
 
   List<Widget> _buildTrueFalseSection(AppLocalizations l10n) {
