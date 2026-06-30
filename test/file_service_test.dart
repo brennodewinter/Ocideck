@@ -397,4 +397,50 @@ void main() {
     expect(good.failure, isNull);
     expect(good.deck, isNotNull);
   });
+
+  test('scanPresentations skips hidden and ignored directories', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_scan_hidden_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+    const deck = '---\nmarp: true\ntitle: T\n---\n\n# Hi\n\n- a\n';
+    // A deck in a hidden subfolder must not be scanned.
+    final hidden = Directory(p.join(temp.path, '.cache'));
+    await hidden.create();
+    await File(p.join(hidden.path, 'secret.md')).writeAsString(deck);
+    // One in a normal folder is found.
+    await File(p.join(temp.path, 'visible.md')).writeAsString(deck);
+
+    final service = FileService(
+      MarkdownService(),
+      ImageService(),
+      () => const ThemeProfile(),
+    );
+    final names = (await service.scanPresentations(
+      temp.path,
+    )).map((r) => r.fileName).toList();
+    expect(names, contains('visible.md'));
+    expect(names, isNot(contains('secret.md')));
+  });
+
+  test('saveDeck keeps an already-relative logos/ logo path as-is', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_rellogo_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+    // The logo is already a project-relative logos/ path: it must be kept,
+    // not re-copied or mangled.
+    final service = FileService(
+      MarkdownService(),
+      ImageService(),
+      () => const ThemeProfile(logoPath: 'logos/client.png'),
+    );
+    final deck = Deck(
+      title: 'Rel logo',
+      themeProfile: const ThemeProfile(logoPath: 'logos/client.png'),
+      slides: [Slide.create(SlideType.title).copyWith(title: 'Rel logo')],
+    );
+    final saved = await service.saveDeck(deck, p.join(temp.path, 'deck.md'));
+    expect(saved.themeProfile.logoPath, 'logos/client.png');
+  });
 }
