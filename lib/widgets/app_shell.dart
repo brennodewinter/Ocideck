@@ -19,7 +19,6 @@ import '../services/export_service.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
 import '../services/mermaid_render_service.dart';
-import '../services/slide_quality_analyzer.dart';
 import '../services/webdav_service.dart';
 import '../state/deck_provider.dart';
 import '../state/deck_quality_provider.dart';
@@ -654,7 +653,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       // contrast check is asynchronous. Fold its findings in so the gate and
       // the quality panel agree (the panel keeps the provider warm, so this is
       // usually already resolved).
-      final syncQuality = const SlideQualityAnalyzer().analyze(deck);
+      final syncQuality = ref.read(slideQualityAnalyzerProvider).analyze(deck);
       var quality = syncQuality;
       try {
         final imageIssues = await ref.read(imageContrastIssuesProvider.future);

@@ -1010,6 +1010,9 @@ const _dutchSourceAddFy = {
   'Tweede afbeelding': 'Twadde ôfbylding',
   'Achtergrondafbeelding': 'Eftergrûnôfbylding',
   'Waarschuwing bij export': 'Warskôging by eksport',
+  'Minimale contrastverhouding': 'Minimale kontrastferhâlding',
+  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.':
+      'Tekst ûnder dizze ferhâlding wurdt markearre. 4.5 = WCAG AA, 3.0 = WCAG AA grutte tekst. Heger is strenger.',
   'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
       'Freeg befêstiging foardat jo eksportearje as der dia-kwaliteitsproblemen binne.',
   'Kwaliteitsproblemen gevonden': 'Kwaliteitsproblemen fûn',

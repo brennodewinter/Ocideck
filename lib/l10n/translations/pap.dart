@@ -1011,6 +1011,9 @@ const _dutchSourceAddPap = {
   'Tweede afbeelding': 'Segundo imágen',
   'Achtergrondafbeelding': 'Imágen di fondo',
   'Waarschuwing bij export': 'Advertensia na export',
+  'Minimale contrastverhouding': 'Proporshon di kontraste mínimo',
+  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.':
+      'Teksto bou di e proporshon aki ta wòrdu marká. 4.5 = WCAG AA, 3.0 = WCAG AA teksto grandi. Mas haltu ta mas strikto.',
   'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
       'Pidi konfirmashon promé ku exportá ora tin problema di kalidad di slide.',
   'Kwaliteitsproblemen gevonden': 'Problemanan di kalidad haña',

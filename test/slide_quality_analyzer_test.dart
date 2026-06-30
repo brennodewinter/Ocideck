@@ -29,6 +29,46 @@ void main() {
     });
   });
 
+  group('configurable contrast threshold', () {
+    // #808080 on white is ~3.9:1 — below WCAG AA (4.5) but above 3.0, exactly
+    // the band a user might accept by relaxing the threshold.
+    const theme = ThemeProfile(
+      textColor: '#808080',
+      slideBackgroundColor: '#FFFFFF',
+    );
+
+    bool flagsBodyText(double minRatio) =>
+        SlideQualityAnalyzer(minContrastRatio: minRatio)
+            .analyzeSlides(
+              slides: const [],
+              theme: theme,
+              font: theme.fontFamily,
+            )
+            .issues
+            .any(
+              (i) =>
+                  i.category == SlideQualityCategory.contrast &&
+                  i.field == 'textColor',
+            );
+
+    test('sanity: the pair is in the relaxable band', () {
+      final ratio = hexContrastRatio('#808080', '#FFFFFF')!;
+      expect(ratio, inInclusiveRange(3.0, 4.5));
+    });
+
+    test('default WCAG AA (4.5) flags the borderline body text', () {
+      expect(flagsBodyText(4.5), isTrue);
+    });
+
+    test('a relaxed threshold (3.0) accepts it', () {
+      expect(flagsBodyText(3.0), isFalse);
+    });
+
+    test('the analyzer defaults to WCAG AA', () {
+      expect(const SlideQualityAnalyzer().minContrastRatio, kWcagAaNormalText);
+    });
+  });
+
   group('SlideQualityAnalyzer', () {
     test('clean deck has no issues', () {
       final deck = Deck(

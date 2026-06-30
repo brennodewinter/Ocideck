@@ -948,6 +948,45 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
               .read(settingsProvider.notifier)
               .setQualityBlockExportOnErrors(value),
         ),
+        Builder(
+          builder: (context) {
+            const presets = <double>[4.5, 4.0, 3.5, 3.0];
+            final current = ref.watch(
+              settingsProvider.select((s) => s.contrastMinRatio),
+            );
+            // Keep the current value selectable even if it is not a preset.
+            final values = <double>{...presets, current}.toList()
+              ..sort((a, b) => b.compareTo(a));
+            return ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text(
+                l10n.d('Minimale contrastverhouding'),
+                style: const TextStyle(fontSize: 13),
+              ),
+              subtitle: Text(
+                l10n.d(
+                  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.',
+                ),
+                style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+              ),
+              trailing: DropdownButton<double>(
+                value: current,
+                items: [
+                  for (final v in values)
+                    DropdownMenuItem<double>(
+                      value: v,
+                      child: Text('${v.toStringAsFixed(1)} : 1'),
+                    ),
+                ],
+                onChanged: (v) {
+                  if (v != null) {
+                    ref.read(settingsProvider.notifier).setContrastMinRatio(v);
+                  }
+                },
+              ),
+            );
+          },
+        ),
         const SizedBox(height: 16),
         _sectionTitle(l10n.d('Presenteren')),
         SwitchListTile(
