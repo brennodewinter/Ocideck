@@ -47,6 +47,13 @@ extension _MarkdownSerialize on MarkdownService {
     if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
     if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
     _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);
+    _writeBulletBody(buf, slide);
+  }
+
+  /// Serialise a bullet slide body: a rich-text markdown block, or a
+  /// (possibly checklist/numbered) bullet list with its list-style marker.
+  /// Shared by the bullets and bullets+image serialisers.
+  void _writeBulletBody(StringBuffer buf, Slide slide) {
     if (slide.listStyle == ListStyle.richText) {
       buf.writeln('<!-- ocideck_list_style: richText -->');
       buf.writeln();
@@ -105,22 +112,7 @@ extension _MarkdownSerialize on MarkdownService {
       buf.writeln();
       if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
       _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);
-      if (slide.listStyle == ListStyle.richText) {
-        buf.writeln('<!-- ocideck_list_style: richText -->');
-        buf.writeln();
-        final body = escapeDeckMarkdownDashLines(slide.customMarkdown);
-        buf.write(body);
-        if (body.isNotEmpty && !body.endsWith('\n')) {
-          buf.writeln();
-        }
-      } else {
-        if (slide.listStyle != ListStyle.bullets) {
-          buf.writeln('<!-- ocideck_list_style: ${slide.listStyle.name} -->');
-        }
-        _writeChecklistProgress(buf, slide);
-        buf.writeln();
-        _writeList(buf, slide.bullets, slide.listStyle);
-      }
+      _writeBulletBody(buf, slide);
       buf.writeln();
       buf.writeln('</div>');
       buf.writeln();
@@ -133,22 +125,7 @@ extension _MarkdownSerialize on MarkdownService {
     } else {
       if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
       _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);
-      if (slide.listStyle == ListStyle.richText) {
-        buf.writeln('<!-- ocideck_list_style: richText -->');
-        buf.writeln();
-        final body = escapeDeckMarkdownDashLines(slide.customMarkdown);
-        buf.write(body);
-        if (body.isNotEmpty && !body.endsWith('\n')) {
-          buf.writeln();
-        }
-      } else {
-        if (slide.listStyle != ListStyle.bullets) {
-          buf.writeln('<!-- ocideck_list_style: ${slide.listStyle.name} -->');
-        }
-        _writeChecklistProgress(buf, slide);
-        buf.writeln();
-        _writeList(buf, slide.bullets, slide.listStyle);
-      }
+      _writeBulletBody(buf, slide);
     }
   }
 
