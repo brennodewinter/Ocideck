@@ -94,6 +94,10 @@ enum OpenResult {
   /// The file could not be read or parsed (missing, over-size, corrupt).
   unreadable,
 
+  /// The file is not a Marp/OciDeck presentation — readable, but not a deck.
+  /// Kept distinct from [unreadable] so the UI can say so specifically.
+  notAPresentation,
+
   /// The file was refused because it contains executable content; the security
   /// alarm has been raised via [importSecurityAlarmProvider].
   blocked,
@@ -297,8 +301,16 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // The scan above only drives the alarm; openDeck re-reads and re-scans the
     // exact bytes it parses, so a file swapped after this point is still caught
     // (it simply returns null here rather than loading unsafe content).
-    final deck = await _file.openDeck(path);
-    if (deck == null) return OpenResult.unreadable;
+    final outcome = await _file.openDeckDetailed(path);
+    final deck = outcome.deck;
+    if (deck == null) {
+      // A readable file that simply isn't a presentation gets its own result so
+      // the UI can say "not a Marp/OciDeck presentation" rather than a generic
+      // "couldn't open".
+      return outcome.failure == OpenFailure.notPresentation
+          ? OpenResult.notAPresentation
+          : OpenResult.unreadable;
+    }
     // notifier disposed during the await
     if (!mounted) return OpenResult.unreadable;
     final index = (selectIndex ?? 0).clamp(0, deck.slides.length - 1);
@@ -350,7 +362,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (mdPath == null) return false;
     final result = await openFileByPath(mdPath);
     if (result != OpenResult.opened) await _discardImportArtifacts(mdPath);
-    return result != OpenResult.unreadable;
+    return result == OpenResult.opened || result == OpenResult.blocked;
   }
 
   /// Haal een presentatie op via een URL (pakket of platte markdown) en open
@@ -361,7 +373,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (mdPath == null) return false;
     final result = await openFileByPath(mdPath);
     if (result != OpenResult.opened) await _discardImportArtifacts(mdPath);
-    return result != OpenResult.unreadable;
+    return result == OpenResult.opened || result == OpenResult.blocked;
   }
 
   /// Download [entry] van de WebDAV-bron, haal het door de bestaande

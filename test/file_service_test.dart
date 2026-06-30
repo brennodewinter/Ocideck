@@ -352,4 +352,49 @@ void main() {
     );
     expect(await service.openDeck(loose), isNotNull);
   });
+
+  test('openDeckDetailed reports why a file could not open', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_open_why_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+    final service = FileService(
+      MarkdownService(),
+      ImageService(),
+      () => const ThemeProfile(),
+    );
+    Future<OpenFailure?> failureFor(String name, String body) async {
+      final path = p.join(temp.path, name);
+      await File(path).writeAsString(body);
+      return (await service.openDeckDetailed(path)).failure;
+    }
+
+    expect(
+      (await service.openDeckDetailed(p.join(temp.path, 'gone.md'))).failure,
+      OpenFailure.notFound,
+    );
+    expect(
+      await failureFor('readme.md', '# Plain notes, not a deck\n'),
+      OpenFailure.notPresentation,
+    );
+    expect(
+      await failureFor('trunc.md', '---\nmarp: true\ntitle: X\n---\n'),
+      OpenFailure.corrupt,
+    );
+    expect(
+      await failureFor(
+        'unsafe.md',
+        '---\nmarp: true\n---\n\n# Hi\n\n<script>x()</script>\n',
+      ),
+      OpenFailure.unsafe,
+    );
+
+    final ok = p.join(temp.path, 'ok.md');
+    await File(
+      ok,
+    ).writeAsString('---\nmarp: true\ntitle: Y\n---\n\n# Hi\n\n- a\n');
+    final good = await service.openDeckDetailed(ok);
+    expect(good.failure, isNull);
+    expect(good.deck, isNotNull);
+  });
 }

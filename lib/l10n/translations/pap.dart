@@ -353,6 +353,8 @@ const _dutchSourceAddPap = {
   'Kon de map niet laden. Controleer je verbinding en instellingen.':
       'No por a karga e karpeta. Chèk bo konekshon i konfigurashon.',
   'Kon dit bestand niet openen.': 'No por a habri e dokumento aki.',
+  'Dit is geen Marp/OciDeck-presentatie.':
+      'Esaki no ta un presentashon Marp/OciDeck.',
   'Downloaden mislukt:': 'Download a faya:',
   'Opgeslagen op Nextcloud:': 'Wardá riba Nextcloud:',
   'Opslaan mislukt:': 'Warda a faya:',

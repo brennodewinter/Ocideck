@@ -78,6 +78,29 @@ class _LogoProjectAsset {
   const _LogoProjectAsset(this.profile, this.cssUrl);
 }
 
+/// Why [FileService.openDeckDetailed] could not open a file. Lets a caller tell
+/// the user *why* (e.g. "this isn't a presentation") instead of a single
+/// catch-all "couldn't open".
+enum OpenFailure {
+  /// The file does not exist.
+  notFound,
+
+  /// The file is larger than the deck-size cap.
+  tooLarge,
+
+  /// The file could not be read (stat failed, not valid UTF-8, …).
+  unreadable,
+
+  /// The file carries executable content and was refused (security).
+  unsafe,
+
+  /// The file is not a Marp/OciDeck presentation (no `marp: true`).
+  notPresentation,
+
+  /// The markdown is present but truncated or unparseable.
+  corrupt,
+}
+
 class FileService {
   final MarkdownService _md;
   final ImageService _img;
@@ -403,13 +426,25 @@ class FileService {
   /// could change behind, so no caller can be marked "trusted" to skip it. A
   /// disk file can be swapped between any two reads, so trust is never assumed;
   /// only the bytes in hand at parse time are authoritative.
-  Future<Deck?> openDeck(String filePath, {String? content}) async {
+  Future<Deck?> openDeck(String filePath, {String? content}) async =>
+      (await openDeckDetailed(filePath, content: content)).deck;
+
+  /// Like [openDeck], but reports *why* it could not open a file so callers can
+  /// tell the user (e.g. "this isn't a presentation") instead of a generic
+  /// failure. Returns `(deck: <deck>, failure: null)` on success, or
+  /// `(deck: null, failure: <reason>)` on any refusal.
+  Future<({Deck? deck, OpenFailure? failure})> openDeckDetailed(
+    String filePath, {
+    String? content,
+  }) async {
     String raw;
     if (content != null) {
       raw = content;
     } else {
       final file = File(filePath);
-      if (!await file.exists()) return null;
+      if (!await file.exists()) {
+        return (deck: null, failure: OpenFailure.notFound);
+      }
       // A deck is plain text (images/media are sidecar files), so a huge .md is
       // pathological. Cap it to avoid loading/parsing an attacker-sized file.
       try {
@@ -417,18 +452,18 @@ class FileService {
           logWarning(
             'FileService.openDeck: file exceeds ${maxDeckMarkdownBytes ~/ (1024 * 1024)} MiB cap',
           );
-          return null;
+          return (deck: null, failure: OpenFailure.tooLarge);
         }
       } catch (e) {
         logWarning('FileService.openDeck: cannot stat file', e);
-        return null;
+        return (deck: null, failure: OpenFailure.unreadable);
       }
       try {
         raw = await file.readAsString();
       } catch (e) {
         // Non-UTF8 / unreadable bytes must not crash the open flow.
         logWarning('FileService.openDeck: file not readable as UTF-8', e);
-        return null;
+        return (deck: null, failure: OpenFailure.unreadable);
       }
     }
     // Fail-closed: never parse/open a deck that carries executable content.
@@ -442,7 +477,7 @@ class FileService {
         '(${findings.length} finding(s))',
         filePath,
       );
-      return null;
+      return (deck: null, failure: OpenFailure.unsafe);
     }
     // Only open Marp/OciDeck presentations. Every deck declares `marp: true` in
     // its front matter (the serializer always writes it), so this rejects an
@@ -455,10 +490,10 @@ class FileService {
         '(no `marp: true` front matter)',
         filePath,
       );
-      return null;
+      return (deck: null, failure: OpenFailure.notPresentation);
     }
     final parsed = _md.parseDeck(raw, filePath: filePath);
-    if (parsed == null) return null;
+    if (parsed == null) return (deck: null, failure: OpenFailure.corrupt);
     // Guard against silently opening a truncated/corrupt file as a blank deck:
     // a valid save always emits at least one slide block after the frontmatter,
     // so a complete header with an empty body means the source was cut short.
@@ -467,7 +502,7 @@ class FileService {
         'FileService.openDeck: frontmatter present but no slide body',
         filePath,
       );
-      return null;
+      return (deck: null, failure: OpenFailure.corrupt);
     }
     // The file carries only content; apply the active style profile on open.
     final deck = parsed.copyWith(
@@ -502,7 +537,7 @@ class FileService {
         }
       }
     }
-    return hydrated;
+    return (deck: hydrated, failure: null);
   }
 
   /// True when [raw] opens with a complete frontmatter block but carries no

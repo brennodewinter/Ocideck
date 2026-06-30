@@ -542,6 +542,8 @@ const _dutchSourceAddEn = {
   'Kon de map niet laden. Controleer je verbinding en instellingen.':
       'Could not load the folder. Check your connection and settings.',
   'Kon dit bestand niet openen.': 'Could not open this file.',
+  'Dit is geen Marp/OciDeck-presentatie.':
+      'This isn\'t a Marp/OciDeck presentation.',
   'Downloaden mislukt:': 'Download failed:',
   'Opgeslagen op Nextcloud:': 'Saved to Nextcloud:',
   'Opslaan mislukt:': 'Save failed:',
