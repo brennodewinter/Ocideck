@@ -118,252 +118,264 @@ class SlideThumbnail extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               // Mini slide preview
-              ExcludeSemantics(
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(5),
-                  ),
-                  child: AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: Stack(
-                      fit: StackFit.expand,
+              _miniPreview(
+                ref,
+                l10n,
+                skipped: skipped,
+                showWatermark: showWatermark,
+                hasQualityWarnings: hasQualityWarnings,
+                hasQualityErrors: hasQualityErrors,
+              ),
+              // Footer: slide number, type label, action buttons
+              _footer(ref, l10n, skipped: skipped, canSplit: canSplit),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _miniPreview(
+    WidgetRef ref,
+    AppLocalizations l10n, {
+    required bool skipped,
+    required bool showWatermark,
+    required bool hasQualityWarnings,
+    required bool hasQualityErrors,
+  }) {
+    return ExcludeSemantics(
+      child: ClipRRect(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(5)),
+        child: AspectRatio(
+          aspectRatio: 16 / 9,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              // Overgeslagen slides worden gedimd weergegeven.
+              Opacity(
+                opacity: skipped ? 0.32 : 1,
+                child: SlidePreviewWidget(
+                  slide: slide,
+                  projectPath: projectPath,
+                  themeProfile: themeProfile,
+                  cockpitColorScheme: ref
+                      .watch(settingsProvider)
+                      .cockpitColorScheme,
+                  slideNumber: index + 1,
+                  slideCount: slideCount,
+                  tlp: tlp,
+                  organization: organization,
+                  showClassificationWatermark: showWatermark,
+                ),
+              ),
+              if (skipped)
+                Positioned(
+                  top: 4,
+                  left: 4,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0xCC8A6D3B),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        // Overgeslagen slides worden gedimd weergegeven.
-                        Opacity(
-                          opacity: skipped ? 0.32 : 1,
-                          child: SlidePreviewWidget(
-                            slide: slide,
-                            projectPath: projectPath,
-                            themeProfile: themeProfile,
-                            cockpitColorScheme: ref
-                                .watch(settingsProvider)
-                                .cockpitColorScheme,
-                            slideNumber: index + 1,
-                            slideCount: slideCount,
-                            tlp: tlp,
-                            organization: organization,
-                            showClassificationWatermark: showWatermark,
+                        const Icon(
+                          Icons.visibility_off_outlined,
+                          size: 10,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(width: 3),
+                        Text(
+                          l10n.d('Overgeslagen'),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 8,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                        if (skipped)
-                          Positioned(
-                            top: 4,
-                            left: 4,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 6,
-                                vertical: 2,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xCC8A6D3B),
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Icon(
-                                    Icons.visibility_off_outlined,
-                                    size: 10,
-                                    color: Colors.white,
-                                  ),
-                                  const SizedBox(width: 3),
-                                  Text(
-                                    l10n.d('Overgeslagen'),
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 8,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        if (hasUserNotes)
-                          Positioned(
-                            bottom: 4,
-                            left: 4,
-                            child: Tooltip(
-                              message: l10n.d('Gebruikersnotities'),
-                              child: Container(
-                                padding: const EdgeInsets.all(3),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xCC2563EB),
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                child: const Icon(
-                                  Icons.edit_note_outlined,
-                                  size: 10,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        if (hasQualityWarnings)
-                          Positioned(
-                            top: 4,
-                            right: 4,
-                            child: Tooltip(
-                              message: hasQualityErrors
-                                  ? l10n.d(
-                                      'Kwaliteitsproblemen (inclusief ernstige)',
-                                    )
-                                  : l10n.d('Kwaliteitsproblemen'),
-                              child: Container(
-                                padding: const EdgeInsets.all(3),
-                                decoration: BoxDecoration(
-                                  color: Color(
-                                    hasQualityErrors ? 0xCCD32F2F : 0xCCB45309,
-                                  ),
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                child: Icon(
-                                  Icons.accessibility_new_outlined,
-                                  size: 10,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
                       ],
                     ),
                   ),
                 ),
-              ),
-              // Footer: slide number, type label, action buttons
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 18,
-                      height: 18,
+              if (hasUserNotes)
+                Positioned(
+                  bottom: 4,
+                  left: 4,
+                  child: Tooltip(
+                    message: l10n.d('Gebruikersnotities'),
+                    child: Container(
+                      padding: const EdgeInsets.all(3),
                       decoration: BoxDecoration(
-                        color: isSelected
-                            ? AppTheme.accent
-                            : const Color(0xFF4A4F5B),
-                        borderRadius: BorderRadius.circular(9),
+                        color: const Color(0xCC2563EB),
+                        borderRadius: BorderRadius.circular(4),
                       ),
-                      child: Center(
-                        child: Text(
-                          '${index + 1}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 9,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                      child: const Icon(
+                        Icons.edit_note_outlined,
+                        size: 10,
+                        color: Colors.white,
                       ),
                     ),
-                    const SizedBox(width: 4),
-                    Expanded(
-                      child: Text(
-                        l10n.d(slide.type.label),
-                        style: const TextStyle(
-                          color: Color(0xFF94A3B8),
-                          fontSize: 9,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    // Drag handle
-                    ReorderableDragStartListener(
-                      index: index,
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 2),
-                        child: Icon(
-                          Icons.drag_handle,
-                          size: 14,
-                          color: Color(0xFF64748B),
-                        ),
-                      ),
-                    ),
-                    // Snelle overslaan-toggle
-                    SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: IconButton(
-                        padding: EdgeInsets.zero,
-                        iconSize: 14,
-                        splashRadius: 12,
-                        tooltip: skipped
-                            ? l10n.d('Weer tonen bij presenteren/exporteren')
-                            : l10n.d('Overslaan bij presenteren/exporteren'),
-                        icon: Icon(
-                          skipped
-                              ? Icons.visibility_off
-                              : Icons.visibility_outlined,
-                          color: skipped
-                              ? const Color(0xFFD4A24E)
-                              : const Color(0xFF64748B),
-                        ),
-                        onPressed: onToggleSkip,
-                      ),
-                    ),
-                    // Context menu
-                    SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: PopupMenuButton<String>(
-                        icon: const Icon(
-                          Icons.more_vert,
-                          color: Color(0xFF64748B),
-                          size: 14,
-                        ),
-                        padding: EdgeInsets.zero,
-                        itemBuilder: (_) => [
-                          PopupMenuItem(
-                            value: 'copy',
-                            child: Text(l10n.d('Kopiëren')),
-                          ),
-                          PopupMenuItem(
-                            value: 'copy_image',
-                            child: Text(l10n.d('Kopieer als afbeelding')),
-                          ),
-                          PopupMenuItem(
-                            value: 'duplicate',
-                            child: Text(l10n.d('Dupliceren')),
-                          ),
-                          if (canSplit)
-                            PopupMenuItem(
-                              value: 'split',
-                              child: Text(l10n.d('In tweeën splitsen')),
-                            ),
-                          PopupMenuItem(
-                            value: 'skip',
-                            child: Text(
-                              skipped
-                                  ? l10n.d('Niet meer overslaan')
-                                  : l10n.d('Overslaan'),
-                            ),
-                          ),
-                          PopupMenuItem(
-                            value: 'delete',
-                            child: Text(
-                              l10n.d('Verwijderen'),
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                        ],
-                        onSelected: (v) {
-                          if (v == 'copy') {
-                            ref.read(slideClipboardProvider.notifier).state =
-                                slide;
-                          }
-                          if (v == 'copy_image') onCopyImage();
-                          if (v == 'duplicate') onDuplicate();
-                          if (v == 'split') onSplit();
-                          if (v == 'skip') onToggleSkip();
-                          if (v == 'delete') onDelete();
-                        },
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+              if (hasQualityWarnings)
+                Positioned(
+                  top: 4,
+                  right: 4,
+                  child: Tooltip(
+                    message: hasQualityErrors
+                        ? l10n.d('Kwaliteitsproblemen (inclusief ernstige)')
+                        : l10n.d('Kwaliteitsproblemen'),
+                    child: Container(
+                      padding: const EdgeInsets.all(3),
+                      decoration: BoxDecoration(
+                        color: Color(
+                          hasQualityErrors ? 0xCCD32F2F : 0xCCB45309,
+                        ),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Icon(
+                        Icons.accessibility_new_outlined,
+                        size: 10,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _footer(
+    WidgetRef ref,
+    AppLocalizations l10n, {
+    required bool skipped,
+    required bool canSplit,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+      child: Row(
+        children: [
+          Container(
+            width: 18,
+            height: 18,
+            decoration: BoxDecoration(
+              color: isSelected ? AppTheme.accent : const Color(0xFF4A4F5B),
+              borderRadius: BorderRadius.circular(9),
+            ),
+            child: Center(
+              child: Text(
+                '${index + 1}',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 9,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 4),
+          Expanded(
+            child: Text(
+              l10n.d(slide.type.label),
+              style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 9),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          // Drag handle
+          ReorderableDragStartListener(
+            index: index,
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 2),
+              child: Icon(
+                Icons.drag_handle,
+                size: 14,
+                color: Color(0xFF64748B),
+              ),
+            ),
+          ),
+          // Snelle overslaan-toggle
+          SizedBox(
+            width: 20,
+            height: 20,
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              iconSize: 14,
+              splashRadius: 12,
+              tooltip: skipped
+                  ? l10n.d('Weer tonen bij presenteren/exporteren')
+                  : l10n.d('Overslaan bij presenteren/exporteren'),
+              icon: Icon(
+                skipped ? Icons.visibility_off : Icons.visibility_outlined,
+                color: skipped
+                    ? const Color(0xFFD4A24E)
+                    : const Color(0xFF64748B),
+              ),
+              onPressed: onToggleSkip,
+            ),
+          ),
+          // Context menu
+          SizedBox(
+            width: 20,
+            height: 20,
+            child: PopupMenuButton<String>(
+              icon: const Icon(
+                Icons.more_vert,
+                color: Color(0xFF64748B),
+                size: 14,
+              ),
+              padding: EdgeInsets.zero,
+              itemBuilder: (_) => [
+                PopupMenuItem(value: 'copy', child: Text(l10n.d('Kopiëren'))),
+                PopupMenuItem(
+                  value: 'copy_image',
+                  child: Text(l10n.d('Kopieer als afbeelding')),
+                ),
+                PopupMenuItem(
+                  value: 'duplicate',
+                  child: Text(l10n.d('Dupliceren')),
+                ),
+                if (canSplit)
+                  PopupMenuItem(
+                    value: 'split',
+                    child: Text(l10n.d('In tweeën splitsen')),
+                  ),
+                PopupMenuItem(
+                  value: 'skip',
+                  child: Text(
+                    skipped
+                        ? l10n.d('Niet meer overslaan')
+                        : l10n.d('Overslaan'),
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'delete',
+                  child: Text(
+                    l10n.d('Verwijderen'),
+                    style: const TextStyle(color: Colors.red),
+                  ),
+                ),
+              ],
+              onSelected: (v) {
+                if (v == 'copy') {
+                  ref.read(slideClipboardProvider.notifier).state = slide;
+                }
+                if (v == 'copy_image') onCopyImage();
+                if (v == 'duplicate') onDuplicate();
+                if (v == 'split') onSplit();
+                if (v == 'skip') onToggleSkip();
+                if (v == 'delete') onDelete();
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
