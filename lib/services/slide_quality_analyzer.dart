@@ -26,7 +26,8 @@ import 'slide_layout_metrics.dart';
 /// object — never a stale hit — and a font change misses via [_FitMemo.font].
 final Expando<_FitMemo> _fitScaleCache = Expando<_FitMemo>('slideFitScale');
 
-double _memoizedFitScale(Slide slide, String font, double Function() compute) {
+@visibleForTesting
+double memoizedFitScale(Slide slide, String font, double Function() compute) {
   final cached = _fitScaleCache[slide];
   if (cached != null && cached.font == font) return cached.scale;
   final scale = compute();
@@ -492,7 +493,7 @@ class SlideQualityAnalyzer {
         _addFitScaleIssue(
           issues,
           index,
-          _memoizedFitScale(
+          memoizedFitScale(
             slide,
             font,
             () => bulletsSlideFitScale(slide: slide, font: font),
@@ -508,7 +509,7 @@ class SlideQualityAnalyzer {
         _addFitScaleIssue(
           issues,
           index,
-          _memoizedFitScale(
+          memoizedFitScale(
             slide,
             font,
             () => twoBulletsSlideFitScale(slide: slide, font: font),
@@ -524,7 +525,7 @@ class SlideQualityAnalyzer {
         _addFitScaleIssue(
           issues,
           index,
-          _memoizedFitScale(
+          memoizedFitScale(
             slide,
             font,
             () => bulletsImageSlideFitScale(slide: slide, font: font),

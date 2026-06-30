@@ -711,4 +711,50 @@ void main() {
       );
     });
   });
+
+  group('memoizedFitScale (per-slide fit cache)', () {
+    // Pins the Expando cache the analyzer uses to avoid re-measuring unchanged
+    // slides on every deck edit. The behavioural contract — a hit skips
+    // recompute, and a change in either keyed input invalidates it — is not
+    // observable through analyze() in a headless test (text measurement is
+    // font-independent there), so it is pinned directly on the helper.
+    test('a hit returns the cached scale without recomputing', () {
+      final slide = Slide.create(SlideType.bullets);
+      var calls = 0;
+      double run() => memoizedFitScale(slide, 'Roboto', () {
+        calls++;
+        return 1.5;
+      });
+      expect(run(), 1.5);
+      expect(run(), 1.5);
+      expect(calls, 1, reason: 'second call must hit the cache');
+    });
+
+    test('a different font for the same slide recomputes', () {
+      final slide = Slide.create(SlideType.bullets);
+      var calls = 0;
+      double run(String font) => memoizedFitScale(slide, font, () {
+        calls++;
+        return calls.toDouble();
+      });
+      expect(run('Roboto'), 1);
+      expect(run('Roboto'), 1, reason: 'same font hits');
+      expect(run('Inter'), 2, reason: 'font change must miss and recompute');
+      expect(calls, 2);
+    });
+
+    test('a different slide identity recomputes', () {
+      final a = Slide.create(SlideType.bullets);
+      final b = Slide.create(SlideType.bullets);
+      var calls = 0;
+      double run(Slide s) => memoizedFitScale(s, 'Roboto', () {
+        calls++;
+        return calls.toDouble();
+      });
+      run(a);
+      run(b);
+      run(a); // a is still cached from the first call
+      expect(calls, 2, reason: 'distinct slide objects are distinct keys');
+    });
+  });
 }
