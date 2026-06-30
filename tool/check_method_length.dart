@@ -36,8 +36,6 @@ const Map<String, int> methodLengthBaseline = {
       195,
   'lib/widgets/app_shell_main_layout.dart::_MainLayoutState.build': 680,
   'lib/widgets/dialogs/export_dialog.dart::_ExportDialogState._content': 183,
-  'lib/widgets/dialogs/parts/image_carousel_picker_preview.dart::_CarouselPreview._buildPreview':
-      240,
   'lib/widgets/panels/editor_panel.dart::EditorPanel.build': 154,
   'lib/widgets/panels/slide_list_panel.dart::_SlideListPanelState.build': 265,
   'lib/widgets/presentation/parts/presenter_keys.dart::_PresenterKeys._handleKey':
