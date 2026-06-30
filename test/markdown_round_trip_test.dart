@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
+import 'package:ocideck/models/cockpit.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/question.dart';
 import 'package:ocideck/models/settings.dart';
@@ -1069,6 +1070,80 @@ void main() {
       expect(out.imagePath, 'images/foto.png');
       expect(out.imageCaption, 'Bron: archief');
       expect(out.customMarkdown, contains('Wat begeleidende tekst'));
+    });
+  });
+
+  // An <audio> attachment is offered on every non-video slide and serialised by
+  // a common block AFTER the type switch, so each specialised parser (code,
+  // chart, cockpit, question — the fenced-block parsers) must read it back. The
+  // `make mutate` run flagged those `<audio>` branches as untested; these pin
+  // them, so an audio attachment can't silently vanish on a save/load.
+  group('audio attachment round-trips on the fenced-block slide types', () {
+    Slide withAudio(Slide s) =>
+        s.copyWith(audioPath: 'media/clip.mp3', audioAutoplay: true);
+    void expectAudio(Slide out) {
+      expect(out.audioPath, 'media/clip.mp3');
+      expect(out.audioAutoplay, isTrue);
+    }
+
+    test('code slide', () {
+      final out = _roundTrip(
+        withAudio(
+          Slide.create(SlideType.code).copyWith(
+            title: 'Code',
+            codeLanguage: 'dart',
+            customMarkdown: 'void main() {}',
+          ),
+        ),
+      );
+      expect(out.type, SlideType.code);
+      expectAudio(out);
+    });
+
+    test('chart slide', () {
+      const block =
+          '{"type":"bar","x":["Q1"],"series":[{"name":"a","data":[1]}]}';
+      final out = _roundTrip(
+        withAudio(
+          Slide.create(SlideType.chart).copyWith(customMarkdown: block),
+        ),
+      );
+      expect(out.type, SlideType.chart);
+      expectAudio(out);
+    });
+
+    test('cockpit slide', () {
+      final out = _roundTrip(
+        withAudio(
+          Slide.create(SlideType.cockpit).copyWith(
+            title: 'Cockpit',
+            customMarkdown: CockpitSpec.pentestPreset().toBlock(),
+          ),
+        ),
+      );
+      expect(out.type, SlideType.cockpit);
+      expectAudio(out);
+    });
+
+    test('question slide', () {
+      const spec = QuestionSpec(
+        prompt: 'Vraag?',
+        answers: [
+          QuestionAnswer(text: 'A', correct: true),
+          QuestionAnswer(text: 'B'),
+          QuestionAnswer(text: 'C'),
+        ],
+        optionCount: 2,
+      );
+      final out = _roundTrip(
+        withAudio(
+          Slide.create(
+            SlideType.question,
+          ).copyWith(title: 'Quiz', customMarkdown: spec.toBlock()),
+        ),
+      );
+      expect(out.type, SlideType.question);
+      expectAudio(out);
     });
   });
 }

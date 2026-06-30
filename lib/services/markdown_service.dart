@@ -893,6 +893,15 @@ class MarkdownService {
       .replaceAll('&gt;', '>')
       .replaceAll('&amp;', '&');
 
+  /// Parses an `<audio src="…" [autoplay]>` line into `(path, autoplay)`. The
+  /// same `<audio>` attachment markup is read by every slide-type parser (the
+  /// element is written by a common block), so they share this instead of
+  /// repeating the regex.
+  static (String, bool) _parseAudioAttrs(String t) {
+    final m = RegExp(r'src="([^"]+)"').firstMatch(t);
+    return (m?.group(1) ?? '', t.contains('autoplay'));
+  }
+
   static int _secToMs(String s) {
     final v = double.tryParse(s.trim());
     if (v == null || v <= 0) return 0;
@@ -1316,9 +1325,7 @@ class MarkdownService {
             imagePath = m.group(1) ?? '';
           }
         } else if (t.startsWith('<audio')) {
-          final m = RegExp(r'src="([^"]+)"').firstMatch(t);
-          if (m != null) audioPath = m.group(1) ?? '';
-          audioAutoplay = t.contains('autoplay');
+          (audioPath, audioAutoplay) = _parseAudioAttrs(t);
         } else if (t.startsWith('<div') || t == '</div>') {
           // Split-slide structural markup; not part of the rich-text body.
         } else {
@@ -1434,9 +1441,7 @@ class MarkdownService {
         videoStartMs = e.startMs;
         videoEndMs = e.endMs;
       } else if (t.startsWith('<audio')) {
-        final m = RegExp(r'src="([^"]+)"').firstMatch(t);
-        if (m != null) audioPath = m.group(1) ?? '';
-        audioAutoplay = t.contains('autoplay');
+        (audioPath, audioAutoplay) = _parseAudioAttrs(t);
       } else if (t.isNotEmpty && h1.isNotEmpty && paragraph.isEmpty) {
         paragraph = t;
       }
@@ -1608,9 +1613,7 @@ class MarkdownService {
       if (t.startsWith('# ') && title.isEmpty) {
         title = t.substring(2);
       } else if (t.startsWith('<audio')) {
-        final m = RegExp(r'src="([^"]+)"').firstMatch(t);
-        if (m != null) audioPath = m.group(1) ?? '';
-        audioAutoplay = t.contains('autoplay');
+        (audioPath, audioAutoplay) = _parseAudioAttrs(t);
       }
     }
 
@@ -1675,9 +1678,7 @@ class MarkdownService {
       if (t.startsWith('# ') && title.isEmpty) {
         title = t.substring(2);
       } else if (t.startsWith('<audio')) {
-        final m = RegExp(r'src="([^"]+)"').firstMatch(t);
-        if (m != null) audioPath = m.group(1) ?? '';
-        audioAutoplay = t.contains('autoplay');
+        (audioPath, audioAutoplay) = _parseAudioAttrs(t);
       }
     }
 
@@ -1740,9 +1741,7 @@ class MarkdownService {
       if (t.startsWith('# ') && title.isEmpty) {
         title = t.substring(2).trim();
       } else if (t.startsWith('<audio')) {
-        final m = RegExp(r'src="([^"]+)"').firstMatch(t);
-        if (m != null) audioPath = m.group(1) ?? '';
-        audioAutoplay = t.contains('autoplay');
+        (audioPath, audioAutoplay) = _parseAudioAttrs(t);
       }
     }
 
@@ -1792,6 +1791,8 @@ class MarkdownService {
     String title = '';
     String imagePath = '';
     String imageCaption = '';
+    String audioPath = '';
+    bool audioAutoplay = false;
     bool inFence = false;
 
     for (final line in lines) {
@@ -1812,6 +1813,8 @@ class MarkdownService {
         if (m != null) imagePath = m.group(1) ?? '';
       } else if (t.startsWith('<div class="image-caption">')) {
         imageCaption = _decodeCaption(_decodeImageCaption(t));
+      } else if (t.startsWith('<audio')) {
+        (audioPath, audioAutoplay) = _parseAudioAttrs(t);
       }
     }
 
@@ -1834,6 +1837,8 @@ class MarkdownService {
       imagePath: imagePath,
       imageCaption: imageCaption,
       imageSize: imageSize,
+      audioPath: audioPath,
+      audioAutoplay: audioAutoplay,
       customMarkdown: QuestionSpec.parse(json.join('\n').trim()).toBlock(),
       cssClass: effectiveClass,
       notes: notes,
