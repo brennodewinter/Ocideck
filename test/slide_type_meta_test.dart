@@ -1,5 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/widgets/editors/slide_editor_registry.dart';
+import 'package:ocideck/widgets/panels/editor_panel.dart';
 
 /// Guard for the SlideType descriptor registry (the maintainability refactor):
 /// the `slideTypeMeta` map must cover every [SlideType], so a newly added type
@@ -12,6 +14,23 @@ void main() {
         slideTypeMeta[type],
         isNotNull,
         reason: 'Add a slideTypeMeta entry for SlideType.$type',
+      );
+    }
+  });
+
+  test('every SlideType has an editor builder and a toolbar icon', () {
+    // The dispatch registries trade Dart's compile-time switch exhaustiveness
+    // for a map, so this guard restores the "did you cover every type?" check.
+    for (final type in SlideType.values) {
+      expect(
+        slideEditorBuilders[type],
+        isNotNull,
+        reason: 'Add a slideEditorBuilders entry for SlideType.$type',
+      );
+      expect(
+        slideTypeIcons[type],
+        isNotNull,
+        reason: 'Add a slideTypeIcons entry for SlideType.$type',
       );
     }
   });
