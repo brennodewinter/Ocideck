@@ -32,7 +32,7 @@ double footerSafeInset({
   required ThemeProfile profile,
 }) {
   if (!slide.showFooter) return 0;
-  if (slide.type == SlideType.title || slide.type == SlideType.section) {
+  if (slide.type.isHeading) {
     return 0;
   }
   final footerText = profile.footerText.trim();

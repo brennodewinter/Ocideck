@@ -345,7 +345,7 @@ class SlidePreviewWidget extends StatelessWidget {
     return LayoutBuilder(
       builder: (_, constraints) {
         final w = constraints.maxWidth;
-        final splitImage = slide.type == SlideType.bulletsImage;
+        final splitImage = slide.type.splitWithImage;
         final richTextPages =
             showRichTextPageControls &&
                 onRichTextPageChanged != null &&

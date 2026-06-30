@@ -58,7 +58,7 @@ int richTextPageCount(Slide slide, ThemeProfile profile) {
   return richTextPageCountForSlide(
     slide: slide,
     profile: profile,
-    splitWithImage: slide.type == SlideType.bulletsImage,
+    splitWithImage: slide.type.splitWithImage,
   );
 }
 

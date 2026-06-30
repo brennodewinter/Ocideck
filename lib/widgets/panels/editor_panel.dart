@@ -10,23 +10,8 @@ import '../../state/editor_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
-import '../editors/bullets_editor.dart';
-import '../editors/bullets_image_editor.dart';
 import '../editors/audio_attachment_editor.dart';
-import '../editors/chart_editor.dart';
-import '../editors/code_editor.dart';
-import '../editors/cockpit_editor.dart';
-import '../editors/free_markdown_editor.dart';
-import '../editors/image_slide_editor.dart';
-import '../editors/question_editor.dart';
-import '../editors/quote_editor.dart';
-import '../editors/section_editor.dart';
-import '../editors/table_editor.dart';
-import '../editors/timeline_editor.dart';
-import '../editors/title_editor.dart';
-import '../editors/two_bullets_editor.dart';
-import '../editors/two_images_editor.dart';
-import '../editors/video_slide_editor.dart';
+import '../editors/slide_editor_registry.dart';
 import '../panels/slide_quality_panel.dart';
 import '../editors/markdown_deck_editor.dart';
 import '../../utils/page_scoped_notes.dart';
@@ -271,181 +256,42 @@ class EditorPanel extends ConsumerWidget {
     bool nestedInScrollView = false,
     void Function(int atMs)? onSplitVideo,
   }) {
-    switch (slide.type) {
-      case SlideType.title:
-        return TitleEditor(
-          key: ValueKey(slide.id),
-          slide: slide,
-          onUpdate: onUpdate,
-          searchPaths: searchPaths,
-          captionBasePath: captionBasePath,
-          nestedInScrollView: nestedInScrollView,
-        );
-      case SlideType.section:
-        return SectionEditor(
-          key: ValueKey(slide.id),
-          slide: slide,
-          onUpdate: onUpdate,
-          nestedInScrollView: nestedInScrollView,
-        );
-      case SlideType.bullets:
-        return BulletsEditor(
-          key: ValueKey(slide.id),
-          slide: slide,
-          onUpdate: onUpdate,
-          nestedInScrollView: nestedInScrollView,
-        );
-      case SlideType.twoBullets:
-        return TwoBulletsEditor(
-          key: ValueKey(slide.id),
-          slide: slide,
-          onUpdate: onUpdate,
-          nestedInScrollView: nestedInScrollView,
-        );
-      case SlideType.bulletsImage:
-        return BulletsImageEditor(
-          key: ValueKey(slide.id),
-          slide: slide,
-          onUpdate: onUpdate,
-          imageService: imgService,
-          searchPaths: searchPaths,
-          captionBasePath: captionBasePath,
-          nestedInScrollView: nestedInScrollView,
-        );
-      case SlideType.twoImages:
-        return TwoImagesEditor(
-          key: ValueKey(slide.id),
-          slide: slide,
-          onUpdate: onUpdate,
-          searchPaths: searchPaths,
-          captionBasePath: captionBasePath,
-          nestedInScrollView: nestedInScrollView,
-        );
-      case SlideType.image:
-        return ImageSlideEditor(
-          key: ValueKey(slide.id),
-          slide: slide,
-          onUpdate: onUpdate,
-          imageService: imgService,
-          searchPaths: searchPaths,
-          captionBasePath: captionBasePath,
-          nestedInScrollView: nestedInScrollView,
-        );
-      case SlideType.video:
-        return VideoSlideEditor(
-          key: ValueKey(slide.id),
-          slide: slide,
-          onUpdate: onUpdate,
-          imageService: imgService,
-          projectPath: captionBasePath,
-          nestedInScrollView: nestedInScrollView,
-          onSplit: onSplitVideo,
-        );
-      case SlideType.quote:
-        return QuoteEditor(
-          key: ValueKey(slide.id),
-          slide: slide,
-          onUpdate: onUpdate,
-          searchPaths: searchPaths,
-          captionBasePath: captionBasePath,
-          nestedInScrollView: nestedInScrollView,
-        );
-      case SlideType.table:
-        return TableEditor(
-          key: ValueKey(slide.id),
-          slide: slide,
-          onUpdate: onUpdate,
-          nestedInScrollView: nestedInScrollView,
-        );
-      case SlideType.freeMarkdown:
-        return FreeMarkdownEditor(
-          key: ValueKey(slide.id),
-          slide: slide,
-          onUpdate: onUpdate,
-          nestedInScrollView: nestedInScrollView,
-        );
-      case SlideType.code:
-        return CodeEditor(
-          key: ValueKey(slide.id),
-          slide: slide,
-          onUpdate: onUpdate,
-          nestedInScrollView: nestedInScrollView,
-        );
-      case SlideType.chart:
-        return ChartEditor(
-          key: ValueKey(slide.id),
-          slide: slide,
-          onUpdate: onUpdate,
-          onAddVariants: onAddChartVariants,
-          projectPath: captionBasePath,
-          nestedInScrollView: nestedInScrollView,
-        );
-      case SlideType.cockpit:
-        return CockpitEditor(
-          key: ValueKey(slide.id),
-          slide: slide,
-          onUpdate: onUpdate,
-          nestedInScrollView: nestedInScrollView,
-        );
-      case SlideType.question:
-        return QuestionEditor(
-          key: ValueKey(slide.id),
-          slide: slide,
-          onUpdate: onUpdate,
-          imageService: imgService,
-          searchPaths: searchPaths,
-          captionBasePath: captionBasePath,
-          nestedInScrollView: nestedInScrollView,
-        );
-      case SlideType.timeline:
-        return TimelineEditor(
-          key: ValueKey(slide.id),
-          slide: slide,
-          onUpdate: onUpdate,
-          nestedInScrollView: nestedInScrollView,
-        );
-    }
+    return slideEditorBuilders[slide.type]!(
+      SlideEditorContext(
+        slide: slide,
+        onUpdate: onUpdate,
+        imageService: imgService,
+        searchPaths: searchPaths,
+        captionBasePath: captionBasePath,
+        onAddChartVariants: onAddChartVariants,
+        nestedInScrollView: nestedInScrollView,
+        onSplitVideo: onSplitVideo,
+      ),
+    );
   }
 }
 
 // ── Editor toolbar: slide-type + stijlprofiel dropdowns ──────────────────────
 
-IconData _slideTypeIcon(SlideType type) {
-  switch (type) {
-    case SlideType.title:
-      return Icons.title;
-    case SlideType.section:
-      return Icons.bookmark_outline;
-    case SlideType.bullets:
-      return Icons.format_list_bulleted;
-    case SlideType.twoBullets:
-      return Icons.view_column_outlined;
-    case SlideType.bulletsImage:
-      return Icons.view_agenda_outlined;
-    case SlideType.twoImages:
-      return Icons.auto_stories_outlined;
-    case SlideType.image:
-      return Icons.image_outlined;
-    case SlideType.video:
-      return Icons.movie_outlined;
-    case SlideType.quote:
-      return Icons.format_quote_outlined;
-    case SlideType.table:
-      return Icons.table_chart_outlined;
-    case SlideType.freeMarkdown:
-      return Icons.code;
-    case SlideType.code:
-      return Icons.terminal;
-    case SlideType.chart:
-      return Icons.bar_chart;
-    case SlideType.cockpit:
-      return Icons.speed_outlined;
-    case SlideType.question:
-      return Icons.quiz_outlined;
-    case SlideType.timeline:
-      return Icons.timeline_outlined;
-  }
-}
+/// Toolbar icon per slide type. A guard test asserts every [SlideType] is here.
+const Map<SlideType, IconData> slideTypeIcons = {
+  SlideType.title: Icons.title,
+  SlideType.section: Icons.bookmark_outline,
+  SlideType.bullets: Icons.format_list_bulleted,
+  SlideType.twoBullets: Icons.view_column_outlined,
+  SlideType.bulletsImage: Icons.view_agenda_outlined,
+  SlideType.twoImages: Icons.auto_stories_outlined,
+  SlideType.image: Icons.image_outlined,
+  SlideType.video: Icons.movie_outlined,
+  SlideType.quote: Icons.format_quote_outlined,
+  SlideType.table: Icons.table_chart_outlined,
+  SlideType.freeMarkdown: Icons.code,
+  SlideType.code: Icons.terminal,
+  SlideType.chart: Icons.bar_chart,
+  SlideType.cockpit: Icons.speed_outlined,
+  SlideType.question: Icons.quiz_outlined,
+  SlideType.timeline: Icons.timeline_outlined,
+};
 
 class _EditorToolbar extends StatelessWidget {
   final Slide slide;
@@ -503,7 +349,7 @@ class _EditorToolbar extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(
-                              _slideTypeIcon(type),
+                              slideTypeIcons[type]!,
                               size: 14,
                               color: AppTheme.navy,
                             ),

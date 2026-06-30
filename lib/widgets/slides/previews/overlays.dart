@@ -182,7 +182,7 @@ class _FooterOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!slide.showFooter) return const SizedBox.shrink();
-    if (slide.type == SlideType.title || slide.type == SlideType.section) {
+    if (slide.type.isHeading) {
       return const SizedBox.shrink();
     }
 

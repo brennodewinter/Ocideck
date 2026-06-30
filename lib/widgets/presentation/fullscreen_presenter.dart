@@ -763,7 +763,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   RichTextLayoutPlan? _richTextPlanFor(Slide slide) {
     if (!slideUsesRichText(slide)) return null;
     const w = kReferenceSlideWidth;
-    final split = slide.type == SlideType.bulletsImage;
+    final split = slide.type.splitWithImage;
     final hPad = split ? w * 0.038 : w * 0.07;
     final imgFraction = split
         ? ((slide.imageSize > 0 ? slide.imageSize / 100.0 : 0.40).clamp(
