@@ -16,6 +16,7 @@ import '../utils/markdown_paste_cleanup.dart';
 part 'markdown_service_helpers.dart';
 part 'markdown_service_parse.dart';
 part 'markdown_service_fenced.dart';
+part 'markdown_service_serialize.dart';
 
 const _uuid = Uuid();
 
@@ -243,268 +244,37 @@ class MarkdownService {
 
     switch (slide.type) {
       case SlideType.title:
-        // Background image before headings so Marp treats it as a bg directive
-        if (slide.imagePath.isNotEmpty) {
-          final bgOptions = [
-            'bg',
-            if (slide.imageSize > 0) '${slide.imageSize}%',
-            if (slide.titleImageOverlay) 'opacity:.45',
-          ].join(' ');
-          buf.writeln('![$bgOptions](${slide.imagePath})');
-          if (!slide.titleImageOverlay) {
-            buf.writeln('<!-- ocideck_title_image_overlay: false -->');
-          }
-          _writeImageCaption(buf, slide.imageCaption);
-          buf.writeln();
-        }
-        if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
-        if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
-        if (slide.titleTextColorOverride.isNotEmpty) {
-          buf.writeln(
-            '<!-- ocideck_title_text_color: ${slide.titleTextColorOverride} -->',
-          );
-        }
-
+        _writeTitleSlide(buf, slide);
       case SlideType.section:
-        if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
-        if (slide.subtitle.isNotEmpty) {
-          buf.writeln();
-          buf.writeln(slide.subtitle);
-        }
-
+        _writeSectionSlide(buf, slide);
       case SlideType.bullets:
-        if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
-        if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
-        _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);
-        if (slide.listStyle == ListStyle.richText) {
-          buf.writeln('<!-- ocideck_list_style: richText -->');
-          buf.writeln();
-          final body = escapeDeckMarkdownDashLines(slide.customMarkdown);
-          buf.write(body);
-          if (body.isNotEmpty && !body.endsWith('\n')) {
-            buf.writeln();
-          }
-        } else {
-          if (slide.listStyle != ListStyle.bullets) {
-            buf.writeln('<!-- ocideck_list_style: ${slide.listStyle.name} -->');
-          }
-          _writeChecklistProgress(buf, slide);
-          buf.writeln();
-          _writeList(buf, slide.bullets, slide.listStyle);
-        }
-
+        _writeBulletsSlide(buf, slide, themeProfile, forExport);
       case SlideType.twoBullets:
-        if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
-        _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);
-        buf.writeln();
-        _writeTwoBulletColumns(
-          buf,
-          slide.bullets,
-          slide.bullets2,
-          slide.columnTitle1,
-          slide.columnTitle2,
-          slide.listStyle,
-          slide.showChecklistProgress,
-          themeProfile ?? const ThemeProfile(),
-        );
-
+        _writeTwoBulletsSlide(buf, slide, themeProfile, forExport);
       case SlideType.bulletsImage:
-        if (slide.imagePath.isNotEmpty) {
-          final pct = (slide.imageSize > 0 ? slide.imageSize : 40).clamp(
-            20,
-            70,
-          );
-          final textScale = _splitTextScale(slide);
-          buf.writeln(
-            '<!-- _style: --image-width: $pct%; --split-text-scale: ${textScale.toStringAsFixed(2)}; -->',
-          );
-          buf.writeln();
-          buf.writeln(
-            '<div class="split-text" style="font-size: ${textScale.toStringAsFixed(2)}em">',
-          );
-          buf.writeln();
-          if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
-          _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);
-          if (slide.listStyle == ListStyle.richText) {
-            buf.writeln('<!-- ocideck_list_style: richText -->');
-            buf.writeln();
-            final body = escapeDeckMarkdownDashLines(slide.customMarkdown);
-            buf.write(body);
-            if (body.isNotEmpty && !body.endsWith('\n')) {
-              buf.writeln();
-            }
-          } else {
-            if (slide.listStyle != ListStyle.bullets) {
-              buf.writeln(
-                '<!-- ocideck_list_style: ${slide.listStyle.name} -->',
-              );
-            }
-            _writeChecklistProgress(buf, slide);
-            buf.writeln();
-            _writeList(buf, slide.bullets, slide.listStyle);
-          }
-          buf.writeln();
-          buf.writeln('</div>');
-          buf.writeln();
-          buf.writeln('<div class="split-image">');
-          buf.writeln();
-          buf.writeln('![](${slide.imagePath})');
-          _writeImageCaption(buf, slide.imageCaption);
-          buf.writeln();
-          buf.writeln('</div>');
-        } else {
-          if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
-          _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);
-          if (slide.listStyle == ListStyle.richText) {
-            buf.writeln('<!-- ocideck_list_style: richText -->');
-            buf.writeln();
-            final body = escapeDeckMarkdownDashLines(slide.customMarkdown);
-            buf.write(body);
-            if (body.isNotEmpty && !body.endsWith('\n')) {
-              buf.writeln();
-            }
-          } else {
-            if (slide.listStyle != ListStyle.bullets) {
-              buf.writeln(
-                '<!-- ocideck_list_style: ${slide.listStyle.name} -->',
-              );
-            }
-            _writeChecklistProgress(buf, slide);
-            buf.writeln();
-            _writeList(buf, slide.bullets, slide.listStyle);
-          }
-        }
-
+        _writeBulletsImageSlide(buf, slide, themeProfile, forExport);
       case SlideType.twoImages:
-        final splitPct = slide.imageSize > 0 ? slide.imageSize : 50;
-        if (slide.imagePath.isNotEmpty) {
-          buf.writeln('![bg left:$splitPct%](${slide.imagePath})');
-        }
-        if (slide.imagePath2.isNotEmpty) {
-          buf.writeln('![bg right:${100 - splitPct}%](${slide.imagePath2})');
-        }
-        _writeCaptionDiv(
-          buf,
-          _joinTwoCaptions(slide.imageCaption, slide.imageCaption2),
-        );
-        if (slide.title.isNotEmpty) {
-          buf.writeln();
-          buf.writeln('# ${slide.title}');
-        }
-
+        _writeTwoImagesSlide(buf, slide);
       case SlideType.image:
-        if (slide.imagePath.isNotEmpty) {
-          final sizeSpec = slide.imageSize > 0 ? ' ${slide.imageSize}%' : '';
-          buf.writeln('![bg$sizeSpec](${slide.imagePath})');
-          _writeImageCaption(buf, slide.imageCaption);
-        }
-        if (slide.title.isNotEmpty) {
-          buf.writeln();
-          buf.writeln('# ${slide.title}');
-        }
-
+        _writeImageSlide(buf, slide);
       case SlideType.video:
-        if (slide.title.isNotEmpty) {
-          buf.writeln('# ${slide.title}');
-          buf.writeln();
-        }
-        if (slide.videoPath.isNotEmpty) {
-          _writeVideo(buf, slide, forExport: forExport);
-        }
-
+        _writeVideoSlide(buf, slide, forExport);
       case SlideType.quote:
-        if (slide.imagePath.isNotEmpty) {
-          final sizeSpec = slide.imageSize > 0 ? '${slide.imageSize}% ' : '';
-          buf.writeln('![bg ${sizeSpec}opacity:.45](${slide.imagePath})');
-          _writeImageCaption(buf, slide.imageCaption);
-          buf.writeln();
-        }
-        if (slide.quote.isNotEmpty) buf.writeln('> ${slide.quote}');
-        if (slide.quoteAuthor.isNotEmpty) {
-          buf.writeln();
-          buf.writeln('— ${slide.quoteAuthor}');
-        }
-
+        _writeQuoteSlide(buf, slide);
       case SlideType.table:
-        if (slide.title.isNotEmpty) {
-          buf.writeln('# ${slide.title}');
-          buf.writeln();
-        }
-        _writeTable(buf, slide.tableRows);
-
+        _writeTableSlide(buf, slide);
       case SlideType.freeMarkdown:
-        final body = escapeDeckMarkdownDashLines(slide.customMarkdown);
-        buf.write(body);
-        if (body.isNotEmpty && !body.endsWith('\n')) {
-          buf.writeln();
-        }
-
+        _writeFreeMarkdownSlide(buf, slide);
       case SlideType.code:
-        if (slide.title.isNotEmpty) {
-          buf.writeln('# ${slide.title}');
-          buf.writeln();
-        }
-        buf.writeln('```${slide.codeLanguage.trim()}');
-        buf.write(slide.customMarkdown);
-        if (slide.customMarkdown.isNotEmpty &&
-            !slide.customMarkdown.endsWith('\n')) {
-          buf.writeln();
-        }
-        buf.writeln('```');
-
+        _writeCodeSlide(buf, slide);
       case SlideType.chart:
-        // Re-serialize so inline data is dropped when the chart links a CSV
-        // (the .md keeps only the spec + source; the CSV stays the source).
-        final spec = ChartSpec.parse(slide.customMarkdown);
-        buf.writeln('```chart');
-        buf.writeln(spec.toBlock(forStorage: !inlineChartData));
-        buf.writeln('```');
-
+        _writeChartSlide(buf, slide, inlineChartData);
       case SlideType.cockpit:
-        final spec = CockpitSpec.parse(slide.customMarkdown);
-        if (slide.title.isNotEmpty) {
-          buf.writeln('# ${slide.title}');
-          buf.writeln();
-        }
-        buf.writeln('```cockpit');
-        buf.writeln(spec.toBlock());
-        buf.writeln('```');
-
+        _writeCockpitSlide(buf, slide);
       case SlideType.timeline:
-        // Events are a plain Markdown list (`- marker :: title :: desc`), so the
-        // slide stays a readable, Marp-compatible list. Layout/animation mode
-        // live in the `_class` tokens written above; the (non-default) draw-in
-        // duration round-trips in an HTML comment Marp ignores.
-        if (slide.title.isNotEmpty) {
-          buf.writeln('# ${slide.title}');
-          buf.writeln();
-        }
-        if (slide.timelineAnimationMs != timelineDefaultAnimationDurationMs) {
-          buf.writeln(
-            '<!-- ocideck_timeline_duration: ${slide.timelineAnimationMs} -->',
-          );
-        }
-        _writeList(buf, slide.bullets, ListStyle.bullets);
-
+        _writeTimelineSlide(buf, slide);
       case SlideType.question:
-        final spec = QuestionSpec.parse(slide.customMarkdown);
-        if (slide.title.isNotEmpty) {
-          buf.writeln('# ${slide.title}');
-          buf.writeln();
-        }
-        if (slide.imagePath.isNotEmpty) {
-          if (slide.imageSize > 0) {
-            // Reuse the shared split-width comment so it round-trips via the
-            // existing `_style` capture in _parseBlock.
-            buf.writeln('<!-- _style: --image-width: ${slide.imageSize}%; -->');
-          }
-          buf.writeln('![](${slide.imagePath})');
-          _writeImageCaption(buf, slide.imageCaption);
-          buf.writeln();
-        }
-        buf.writeln('```question');
-        buf.writeln(spec.toBlock());
-        buf.writeln('```');
+        _writeQuestionSlide(buf, slide);
     }
 
     if (slide.audioPath.isNotEmpty) {
