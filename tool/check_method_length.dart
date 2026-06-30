@@ -45,8 +45,6 @@ const Map<String, int> methodLengthBaseline = {
   'lib/widgets/presentation/parts/presenter_keys.dart::_PresenterKeys._handleKey':
       160,
   'lib/widgets/shell/welcome_screen.dart::_WelcomeScreen.build': 192,
-  'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
-      155,
 };
 
 bool _isTranslationData(String path) =>
