@@ -67,7 +67,6 @@ const Map<String, int> methodLengthBaseline = {
       208,
   'lib/widgets/slides/previews/chart_preview_radar.dart::_ChartPreviewRadar._radarChart':
       203,
-  'lib/widgets/slides/previews/table_preview.dart::_TablePreview.build': 196,
   'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
       155,
 };
