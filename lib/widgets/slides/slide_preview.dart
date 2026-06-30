@@ -43,6 +43,8 @@ part 'previews/table_preview.dart';
 part 'previews/media_previews.dart';
 part 'previews/code_preview.dart';
 part 'previews/chart_preview.dart';
+part 'previews/chart_preview_cartesian.dart';
+part 'previews/chart_preview_radar.dart';
 part 'previews/cockpit_preview.dart';
 part 'previews/question_preview.dart';
 part 'previews/timeline_preview.dart';
