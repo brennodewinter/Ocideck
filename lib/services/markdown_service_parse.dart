@@ -123,6 +123,159 @@ extension _MarkdownParse on MarkdownService {
   Slide? _parseBlock(String block) {
     if (block.isEmpty) return null;
 
+    final d = _parseBlockDirectives(block);
+
+    // Code/chart/cockpit/question slides carry a fenced block the generic line
+    // parser below would mangle; they are handled up front.
+    final fenced = _tryFencedSlide(
+      cssClass: d.cssClass,
+      remaining: d.remaining,
+      notes: d.notes,
+      advanceDuration: d.advanceDuration,
+      skipped: d.skipped,
+      tlp: d.tlp,
+      styleImageWidth: d.styleImageWidth,
+    );
+    if (fenced != null) return fenced;
+
+    // bullets may already hold the decoded two-column data; the line parser
+    // appends to the same list, so pass it through by reference.
+    final bullets = d.bullets;
+    final body = _parseBodyLines(
+      d.remaining.split('\n'),
+      d.cssClass,
+      d.listStyle,
+      bullets,
+    );
+
+    var imageSize = body.imageSize;
+    if (imageSize == 0 && d.styleImageWidth > 0) imageSize = d.styleImageWidth;
+
+    final tableRows = <List<String>>[];
+    for (final line in body.tableLines) {
+      final cells = _splitTableRow(line);
+      // Skip the GFM separator row (e.g. | --- | :---: |).
+      if (cells.isNotEmpty &&
+          cells.every((c) => RegExp(r'^:?-+:?$').hasMatch(c.trim()))) {
+        continue;
+      }
+      tableRows.add(cells);
+    }
+
+    final type = _inferSlideType(
+      cssClass: d.cssClass,
+      quote: body.quote,
+      imagePath: body.imagePath,
+      imagePath2: body.imagePath2,
+      bullets: bullets,
+      listStyle: body.listStyle,
+      videoPath: body.videoPath,
+      tableRows: tableRows,
+      h1: body.h1,
+      h2: body.h2,
+      paragraph: body.paragraph,
+    );
+
+    final classTokens = d.cssClass.split(RegExp(r'\s+'));
+    final showLogo = !classTokens.contains('no-logo');
+    final showFooter = !classTokens.contains('no-footer');
+
+    final effectiveClass = classTokens
+        .where(
+          (c) =>
+              c.isNotEmpty &&
+              c != type.marpClass &&
+              c != 'logo-safe' &&
+              c != 'no-logo' &&
+              c != 'no-footer' &&
+              c != 'table-editable' &&
+              !isTimelineOptionToken(c),
+        )
+        .join(' ');
+
+    return Slide(
+      id: _uuid.v4(),
+      type: type,
+      title: body.h1,
+      subtitle: type == SlideType.section ? body.paragraph : body.h2,
+      bullets: bullets,
+      bullets2: d.bullets2,
+      listStyle: body.listStyle,
+      showChecklistProgress: d.showChecklistProgress,
+      columnTitle1: d.columnTitle1,
+      columnTitle2: d.columnTitle2,
+      imagePath: body.imagePath,
+      imagePath2: body.imagePath2,
+      imageCaption: body.imageCaption,
+      imageCaption2: body.imageCaption2,
+      imageSize: imageSize,
+      titleImageOverlay: d.titleImageOverlay,
+      titleTextColorOverride: d.titleTextColorOverride,
+      bulletMarkerOverride: d.bulletMarkerOverride,
+      videoPath: body.videoPath,
+      videoAutoplay: body.videoAutoplay,
+      videoStartMs: body.videoStartMs,
+      videoEndMs: body.videoEndMs,
+      audioPath: body.audioPath,
+      audioAutoplay: body.audioAutoplay,
+      quote: body.quote,
+      quoteAuthor: body.quoteAuthor,
+      customMarkdown: type == SlideType.freeMarkdown
+          ? normalizeRichTextMarkdown(
+              unescapeDeckMarkdownDashLines(d.remaining),
+            )
+          : body.listStyle == ListStyle.richText
+          ? normalizeRichTextMarkdown(
+              unescapeDeckMarkdownDashLines(
+                body.richTextLines.join('\n').trim(),
+              ),
+            )
+          : '',
+      cssClass: effectiveClass,
+      notes: d.notes,
+      advanceDuration: d.advanceDuration,
+      showLogo: showLogo,
+      showFooter: showFooter,
+      skipped: d.skipped,
+      tlp: d.tlp,
+      tableRows: type == SlideType.table ? tableRows : const [],
+      tableEditable:
+          type == SlideType.table && classTokens.contains('table-editable'),
+      timelineLayout: type == SlideType.timeline
+          ? timelineLayoutFromTokens(classTokens)
+          : TimelineLayout.auto,
+      timelineReveal: type == SlideType.timeline
+          ? timelineRevealFromTokens(classTokens)
+          : TimelineReveal.onEnter,
+      timelineAnimationMs: d.timelineAnimationMs,
+    );
+  }
+
+  /// Parse the leading `<!-- _class -->` marker and every other `<!-- ... -->`
+  /// directive comment (advance/skip/tlp/_style/two-bullets/timeline/list-style/
+  /// checklist/title-image/title-colour/bullet-marker), accumulating presenter
+  /// notes from any non-directive comment. Returns the stripped body plus all
+  /// the decoded directive values.
+  ({
+    String cssClass,
+    String remaining,
+    String notes,
+    double advanceDuration,
+    bool skipped,
+    TlpLevel tlp,
+    List<String> bullets,
+    List<String> bullets2,
+    ListStyle listStyle,
+    int timelineAnimationMs,
+    bool showChecklistProgress,
+    bool titleImageOverlay,
+    String titleTextColorOverride,
+    BulletMarker? bulletMarkerOverride,
+    String columnTitle1,
+    String columnTitle2,
+    int styleImageWidth,
+  })
+  _parseBlockDirectives(String block) {
     String cssClass = '';
     String remaining = block;
 
@@ -210,55 +363,114 @@ extension _MarkdownParse on MarkdownService {
     ).trim();
     final notes = _unescapeNotes(notesBuffer.toString().trim());
 
-    // Code slides carry a fenced block that the generic line parser below would
-    // mangle (the body lines aren't markdown). Handle them up front.
-    if (cssClass.split(RegExp(r'\s+')).contains('code')) {
+    return (
+      cssClass: cssClass,
+      remaining: remaining,
+      notes: notes,
+      advanceDuration: advanceDuration,
+      skipped: skipped,
+      tlp: slideTlp,
+      bullets: bullets,
+      bullets2: bullets2,
+      listStyle: listStyle,
+      timelineAnimationMs: timelineAnimationMs,
+      showChecklistProgress: showChecklistProgress,
+      titleImageOverlay: titleImageOverlay,
+      titleTextColorOverride: titleTextColorOverride,
+      bulletMarkerOverride: bulletMarkerOverride,
+      columnTitle1: columnTitle1,
+      columnTitle2: columnTitle2,
+      styleImageWidth: styleImageWidth,
+    );
+  }
+
+  /// Fenced-block slide types (code/chart/cockpit/question) delegate to their
+  /// own parsers, which keep the fenced body verbatim. Returns the parsed slide,
+  /// or null when [d] is not one of those types.
+  Slide? _tryFencedSlide({
+    required String cssClass,
+    required String remaining,
+    required String notes,
+    required double advanceDuration,
+    required bool skipped,
+    required TlpLevel tlp,
+    required int styleImageWidth,
+  }) {
+    final tokens = cssClass.split(RegExp(r'\s+'));
+    if (tokens.contains('code')) {
       return _parseCodeBlock(
         remaining: remaining,
         cssClass: cssClass,
         notes: notes,
         advanceDuration: advanceDuration,
         skipped: skipped,
-        tlp: slideTlp,
+        tlp: tlp,
       );
     }
-
-    // Chart slides carry a fenced ```chart JSON block; handle up front too.
-    if (cssClass.split(RegExp(r'\s+')).contains('chart')) {
+    if (tokens.contains('chart')) {
       return _parseChartBlock(
         remaining: remaining,
         cssClass: cssClass,
         notes: notes,
         advanceDuration: advanceDuration,
         skipped: skipped,
-        tlp: slideTlp,
+        tlp: tlp,
       );
     }
-
-    if (cssClass.split(RegExp(r'\s+')).contains('cockpit')) {
+    if (tokens.contains('cockpit')) {
       return _parseCockpitBlock(
         remaining: remaining,
         cssClass: cssClass,
         notes: notes,
         advanceDuration: advanceDuration,
         skipped: skipped,
-        tlp: slideTlp,
+        tlp: tlp,
       );
     }
-
-    if (cssClass.split(RegExp(r'\s+')).contains('question')) {
+    if (tokens.contains('question')) {
       return _parseQuestionBlock(
         remaining: remaining,
         cssClass: cssClass,
         notes: notes,
         advanceDuration: advanceDuration,
         skipped: skipped,
-        tlp: slideTlp,
+        tlp: tlp,
         imageSize: styleImageWidth,
       );
     }
+    return null;
+  }
 
-    final lines = remaining.split('\n');
+  /// Walk the (non-fenced) body lines, accumulating headings, bullets, images,
+  /// captions, video/audio, quote and table content. [bullets] is appended in
+  /// place; [listStyle] may be refined (checklist/numbered) and is returned.
+  ({
+    String h1,
+    String h2,
+    String paragraph,
+    String imagePath,
+    String imagePath2,
+    String imageCaption,
+    String imageCaption2,
+    int imageSize,
+    String videoPath,
+    bool videoAutoplay,
+    int videoStartMs,
+    int videoEndMs,
+    String audioPath,
+    bool audioAutoplay,
+    String quote,
+    String quoteAuthor,
+    List<String> tableLines,
+    List<String> richTextLines,
+    ListStyle listStyle,
+  })
+  _parseBodyLines(
+    List<String> lines,
+    String cssClass,
+    ListStyle listStyle,
+    List<String> bullets,
+  ) {
     String h1 = '';
     String h2 = '';
     String paragraph = '';
@@ -439,100 +651,15 @@ extension _MarkdownParse on MarkdownService {
       }
     }
 
-    if (imageSize == 0 && styleImageWidth > 0) imageSize = styleImageWidth;
-
-    final tableRows = <List<String>>[];
-    for (final line in tableLines) {
-      final cells = _splitTableRow(line);
-      // Skip the GFM separator row (e.g. | --- | :---: |).
-      if (cells.isNotEmpty &&
-          cells.every((c) => RegExp(r'^:?-+:?$').hasMatch(c.trim()))) {
-        continue;
-      }
-      tableRows.add(cells);
-    }
-
-    SlideType type;
-    switch (cssClass) {
-      case final c when c.split(RegExp(r'\s+')).contains('title'):
-        type = SlideType.title;
-      case final c when c.split(RegExp(r'\s+')).contains('section'):
-        type = SlideType.section;
-      case final c when c.split(RegExp(r'\s+')).contains('timeline'):
-        type = SlideType.timeline;
-      case final c when c.split(RegExp(r'\s+')).contains('two-bullets'):
-        type = SlideType.twoBullets;
-      case final c when c.split(RegExp(r'\s+')).contains('split'):
-        type = SlideType.bulletsImage;
-      case final c when c.split(RegExp(r'\s+')).contains('quote'):
-        type = SlideType.quote;
-      case final c when c.split(RegExp(r'\s+')).contains('video'):
-        type = SlideType.video;
-      case final c when c.split(RegExp(r'\s+')).contains('table'):
-        type = SlideType.table;
-      default:
-        if (quote.isNotEmpty) {
-          type = SlideType.quote;
-        } else if (imagePath.isNotEmpty && imagePath2.isNotEmpty) {
-          type = SlideType.twoImages;
-        } else if (bullets.isNotEmpty && imagePath.isNotEmpty) {
-          type = SlideType.bulletsImage;
-        } else if (listStyle == ListStyle.richText) {
-          type = SlideType.bullets;
-        } else if (bullets.isNotEmpty) {
-          type = SlideType.bullets;
-        } else if (videoPath.isNotEmpty) {
-          type = SlideType.video;
-        } else if (imagePath.isNotEmpty) {
-          type = SlideType.image;
-        } else if (tableRows.isNotEmpty &&
-            bullets.isEmpty &&
-            h2.isEmpty &&
-            paragraph.isEmpty) {
-          type = SlideType.table;
-        } else if (h1.isEmpty && h2.isEmpty && bullets.isEmpty) {
-          type = SlideType.freeMarkdown;
-        } else {
-          type = SlideType.bullets;
-        }
-    }
-
-    final classTokens = cssClass.split(RegExp(r'\s+'));
-    final showLogo = !classTokens.contains('no-logo');
-    final showFooter = !classTokens.contains('no-footer');
-
-    final effectiveClass = classTokens
-        .where(
-          (c) =>
-              c.isNotEmpty &&
-              c != type.marpClass &&
-              c != 'logo-safe' &&
-              c != 'no-logo' &&
-              c != 'no-footer' &&
-              c != 'table-editable' &&
-              !isTimelineOptionToken(c),
-        )
-        .join(' ');
-
-    return Slide(
-      id: _uuid.v4(),
-      type: type,
-      title: h1,
-      subtitle: type == SlideType.section ? paragraph : h2,
-      bullets: bullets,
-      bullets2: bullets2,
-      listStyle: listStyle,
-      showChecklistProgress: showChecklistProgress,
-      columnTitle1: columnTitle1,
-      columnTitle2: columnTitle2,
+    return (
+      h1: h1,
+      h2: h2,
+      paragraph: paragraph,
       imagePath: imagePath,
       imagePath2: imagePath2,
       imageCaption: imageCaption,
       imageCaption2: imageCaption2,
       imageSize: imageSize,
-      titleImageOverlay: titleImageOverlay,
-      titleTextColorOverride: titleTextColorOverride,
-      bulletMarkerOverride: bulletMarkerOverride,
       videoPath: videoPath,
       videoAutoplay: videoAutoplay,
       videoStartMs: videoStartMs,
@@ -541,30 +668,69 @@ extension _MarkdownParse on MarkdownService {
       audioAutoplay: audioAutoplay,
       quote: quote,
       quoteAuthor: quoteAuthor,
-      customMarkdown: type == SlideType.freeMarkdown
-          ? normalizeRichTextMarkdown(unescapeDeckMarkdownDashLines(remaining))
-          : listStyle == ListStyle.richText
-          ? normalizeRichTextMarkdown(
-              unescapeDeckMarkdownDashLines(richTextLines.join('\n').trim()),
-            )
-          : '',
-      cssClass: effectiveClass,
-      notes: notes,
-      advanceDuration: advanceDuration,
-      showLogo: showLogo,
-      showFooter: showFooter,
-      skipped: skipped,
-      tlp: slideTlp,
-      tableRows: type == SlideType.table ? tableRows : const [],
-      tableEditable:
-          type == SlideType.table && classTokens.contains('table-editable'),
-      timelineLayout: type == SlideType.timeline
-          ? timelineLayoutFromTokens(classTokens)
-          : TimelineLayout.auto,
-      timelineReveal: type == SlideType.timeline
-          ? timelineRevealFromTokens(classTokens)
-          : TimelineReveal.onEnter,
-      timelineAnimationMs: timelineAnimationMs,
+      tableLines: tableLines,
+      richTextLines: richTextLines,
+      listStyle: listStyle,
     );
+  }
+
+  /// Decide the slide type from the class tokens, falling back to content
+  /// heuristics (quote/images/bullets/video/table) when no explicit token says.
+  SlideType _inferSlideType({
+    required String cssClass,
+    required String quote,
+    required String imagePath,
+    required String imagePath2,
+    required List<String> bullets,
+    required ListStyle listStyle,
+    required String videoPath,
+    required List<List<String>> tableRows,
+    required String h1,
+    required String h2,
+    required String paragraph,
+  }) {
+    switch (cssClass) {
+      case final c when c.split(RegExp(r'\s+')).contains('title'):
+        return SlideType.title;
+      case final c when c.split(RegExp(r'\s+')).contains('section'):
+        return SlideType.section;
+      case final c when c.split(RegExp(r'\s+')).contains('timeline'):
+        return SlideType.timeline;
+      case final c when c.split(RegExp(r'\s+')).contains('two-bullets'):
+        return SlideType.twoBullets;
+      case final c when c.split(RegExp(r'\s+')).contains('split'):
+        return SlideType.bulletsImage;
+      case final c when c.split(RegExp(r'\s+')).contains('quote'):
+        return SlideType.quote;
+      case final c when c.split(RegExp(r'\s+')).contains('video'):
+        return SlideType.video;
+      case final c when c.split(RegExp(r'\s+')).contains('table'):
+        return SlideType.table;
+      default:
+        if (quote.isNotEmpty) {
+          return SlideType.quote;
+        } else if (imagePath.isNotEmpty && imagePath2.isNotEmpty) {
+          return SlideType.twoImages;
+        } else if (bullets.isNotEmpty && imagePath.isNotEmpty) {
+          return SlideType.bulletsImage;
+        } else if (listStyle == ListStyle.richText) {
+          return SlideType.bullets;
+        } else if (bullets.isNotEmpty) {
+          return SlideType.bullets;
+        } else if (videoPath.isNotEmpty) {
+          return SlideType.video;
+        } else if (imagePath.isNotEmpty) {
+          return SlideType.image;
+        } else if (tableRows.isNotEmpty &&
+            bullets.isEmpty &&
+            h2.isEmpty &&
+            paragraph.isEmpty) {
+          return SlideType.table;
+        } else if (h1.isEmpty && h2.isEmpty && bullets.isEmpty) {
+          return SlideType.freeMarkdown;
+        } else {
+          return SlideType.bullets;
+        }
+    }
   }
 }
