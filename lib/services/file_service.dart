@@ -361,10 +361,14 @@ class FileService {
   }
 
   Future<String?> pickMarkdownFile({String? initialDirectory}) async {
+    // FileType.any, not a custom-extension filter: on macOS an
+    // `allowedExtensions: ['md']` filter greys out .md files in the native
+    // panel, so a loose presentation anywhere on disk can't be picked. Any file
+    // is selectable here; [openDeck] then validates that it is a Marp/OciDeck
+    // presentation (front matter `marp: true`) and refuses anything else.
     final result = await FilePicker.pickFiles(
       dialogTitle: _d('Presentatie openen'),
-      type: FileType.custom,
-      allowedExtensions: ['md'],
+      type: FileType.any,
       initialDirectory: initialDirectory,
     );
     return result?.files.single.path;
@@ -436,6 +440,19 @@ class FileService {
       logWarning(
         'FileService.openDeck: refused — executable content '
         '(${findings.length} finding(s))',
+        filePath,
+      );
+      return null;
+    }
+    // Only open Marp/OciDeck presentations. Every deck declares `marp: true` in
+    // its front matter (the serializer always writes it), so this rejects an
+    // arbitrary file picked via the now-unfiltered open dialog — a plain
+    // README.md, a renamed binary, etc. — instead of opening it as a blank or
+    // garbled deck.
+    if (!_md.sniffFrontmatter(raw).marp) {
+      logWarning(
+        'FileService.openDeck: not a Marp/OciDeck presentation '
+        '(no `marp: true` front matter)',
         filePath,
       );
       return null;
