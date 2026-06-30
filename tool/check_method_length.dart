@@ -30,8 +30,6 @@ const int maxMethodLines = 150;
 /// lower the number) but never grow. Add a new entry only with a deliberate
 /// reason; the goal is fewer and smaller entries over time.
 const Map<String, int> methodLengthBaseline = {
-  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBodyLines':
-      229,
   'lib/widgets/app_shell_main_layout.dart::_MainLayoutState.build': 680,
 };
 

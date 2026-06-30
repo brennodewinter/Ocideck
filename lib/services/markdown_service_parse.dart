@@ -4,6 +4,34 @@
 // an extension — same library, same members, no behaviour change.
 part of 'markdown_service.dart';
 
+/// Mutable accumulator for [_MarkdownParse._parseBodyLines]: the per-line
+/// handlers fill these fields as they walk a slide block's body.
+class _BodyParse {
+  _BodyParse(this.listStyle)
+    : richTextHeaderPhase = listStyle == ListStyle.richText;
+
+  String h1 = '';
+  String h2 = '';
+  String paragraph = '';
+  String imagePath = '';
+  String imagePath2 = '';
+  String imageCaption = '';
+  String imageCaption2 = '';
+  int imageSize = 0;
+  String videoPath = '';
+  bool videoAutoplay = false;
+  int videoStartMs = 0;
+  int videoEndMs = 0;
+  String audioPath = '';
+  bool audioAutoplay = false;
+  String quote = '';
+  String quoteAuthor = '';
+  final tableLines = <String>[];
+  final richTextLines = <String>[];
+  ListStyle listStyle;
+  bool richTextHeaderPhase;
+}
+
 extension _MarkdownParse on MarkdownService {
   Deck _doParse(String markdown, {String? filePath}) {
     String content = markdown;
@@ -471,207 +499,199 @@ extension _MarkdownParse on MarkdownService {
     ListStyle listStyle,
     List<String> bullets,
   ) {
-    String h1 = '';
-    String h2 = '';
-    String paragraph = '';
-    String imagePath = '';
-    String imagePath2 = '';
-    String imageCaption = '';
-    String imageCaption2 = '';
-    int imageSize = 0;
-    String videoPath = '';
-    bool videoAutoplay = false;
-    int videoStartMs = 0;
-    int videoEndMs = 0;
-    String audioPath = '';
-    bool audioAutoplay = false;
-    String quote = '';
-    String quoteAuthor = '';
-    final tableLines = <String>[];
-    final richTextLines = <String>[];
-    var richTextHeaderPhase = listStyle == ListStyle.richText;
+    final b = _BodyParse(listStyle);
     final isTwoBullets = cssClass.split(RegExp(r'\s+')).contains('two-bullets');
 
     for (final line in lines) {
-      if (listStyle == ListStyle.richText) {
-        final t = line.trim();
-        if (richTextHeaderPhase) {
-          if (t.isEmpty) continue;
-          if (t.startsWith('<div') || t == '</div>') {
-            continue;
-          }
-          if (t.startsWith('# ') && h1.isEmpty) {
-            h1 = t.substring(2);
-            continue;
-          }
-          if (t.startsWith('## ') && h2.isEmpty && h1.isNotEmpty) {
-            h2 = t.substring(3);
-            continue;
-          }
-          richTextHeaderPhase = false;
-        }
-        // A rich-text body IS markdown: an embedded table or <video> stays in
-        // the body verbatim. Lifting those out silently dropped a richText
-        // slide's table (kept only for type==table) and would lose user content
-        // (those fields aren't re-serialised for a bullets slide). EXCEPTIONS,
-        // which must round-trip: an <audio> attachment (written for every slide
-        // type by the common block after the type switch, so it is restored
-        // here), and the bulletsImage split-image structure (its image and
-        // caption). The image-caption check precedes the generic `<div>` skip,
-        // which previously shadowed it dead.
-        final isSplit = cssClass.split(RegExp(r'\s+')).contains('split');
-        if (isSplit && t.startsWith('<div class="image-caption">')) {
-          final captionParts = _splitTwoCaptions(_decodeImageCaption(t));
-          imageCaption = captionParts.isNotEmpty ? captionParts.first : '';
-        } else if (isSplit && RegExp(r'!\[[^\]]*\]\(([^)]+)\)').hasMatch(t)) {
-          final m = RegExp(r'!\[[^\]]*\]\(([^)]+)\)').firstMatch(t);
-          if (m != null && imagePath.isEmpty) {
-            imagePath = m.group(1) ?? '';
-          }
-        } else if (t.startsWith('<audio')) {
-          (audioPath, audioAutoplay) = _parseAudioAttrs(t);
-        } else if (t.startsWith('<div') || t == '</div>') {
-          // Split-slide structural markup; not part of the rich-text body.
-        } else {
-          richTextLines.add(line);
-        }
+      if (b.listStyle == ListStyle.richText) {
+        _consumeRichTextLine(line, cssClass, b);
         continue;
       }
-
       final t = line.trim();
       if (isTwoBullets) {
-        // Two-column bullets keep their canonical data in the
-        // ocideck_two_bullets_* comments (already decoded above). The visible
-        // <div> with its <li> items is display-only and must not be re-parsed
-        // into `bullets`, or the columns get duplicated on every round-trip.
-        // Only the heading lines still carry the title/subtitle.
         if (t.startsWith('# ')) {
-          h1 = t.substring(2);
+          b.h1 = t.substring(2);
         } else if (t.startsWith('## ')) {
-          h2 = t.substring(3);
+          b.h2 = t.substring(3);
         }
         continue;
       }
-      final htmlItems = RegExp(
-        r'<li[^>]*>(.*?)</li>',
-        caseSensitive: false,
-      ).allMatches(t).toList();
-      final bulletMatch = RegExp(
-        r'^([-*+•◦▪▫–]|\d+[.)])\s+(.+)$',
-      ).firstMatch(t);
-      if (htmlItems.isNotEmpty) {
-        for (final item in htmlItems) {
-          final body = _stripInlineHtml(item.group(1) ?? '');
-          if (body.trim().isNotEmpty) bullets.add(body.trim());
-        }
-      } else if (RegExp(
-        r'^</?(ul|ol)(?:\s[^>]*)?>$',
-        caseSensitive: false,
-      ).hasMatch(t)) {
-        // HTML list container; individual <li> items are handled above.
-      } else if (t.startsWith('|')) {
-        tableLines.add(t);
-      } else if (t.startsWith('# ')) {
-        h1 = t.substring(2);
-      } else if (t.startsWith('## ')) {
-        h2 = t.substring(3);
-      } else if (bulletMatch != null) {
-        // Count leading spaces (2 per level)
-        int spaces = 0;
-        for (final ch in line.characters) {
-          if (ch == ' ') {
-            spaces++;
-          } else if (ch == '\t') {
-            spaces += 2;
-          } else {
-            break;
-          }
-        }
-        final level = spaces ~/ 2;
-        final marker = bulletMatch.group(1) ?? '';
-        final body = bulletMatch.group(2) ?? '';
-        bullets.add('\t' * level + body);
-        if (RegExp(r'^\[[ xX]\]\s*').hasMatch(body)) {
-          listStyle = ListStyle.checklist;
-        } else if (RegExp(r'^\d+[.)]$').hasMatch(marker)) {
-          listStyle = ListStyle.numbered;
-        }
-      } else if (t.startsWith('> ')) {
-        quote = t.substring(2);
-      } else if (t.startsWith('— ')) {
-        quoteAuthor = t.substring(2);
-      } else if (RegExp(r'!\[bg').hasMatch(t)) {
-        final m = RegExp(r'!\[bg[^\]]*\]\(([^)]+)\)').firstMatch(t);
-        if (m != null) {
-          if (imagePath.isEmpty) {
-            imagePath = m.group(1) ?? '';
-          } else {
-            imagePath2 = m.group(1) ?? ''; // tweede afbeelding
-          }
-        }
-        // Parse size: ![bg 50%](...) or ![bg left:42%](...)
-        final sizeMatch = RegExp(r'!\[bg[^\]]*?(\d+)%[^\]]*\]').firstMatch(t);
-        if (sizeMatch != null && imageSize == 0) {
-          imageSize = int.tryParse(sizeMatch.group(1)!) ?? 0;
-        }
-      } else if (cssClass.split(RegExp(r'\s+')).contains('split') &&
-          RegExp(r'!\[[^\]]*\]\(([^)]+)\)').hasMatch(t)) {
-        // Plain markdown image, e.g. the `![](path)` used inside a
-        // bulletsImage `split-image` panel. Restricted to split slides so a
-        // plain image inside free markdown is not mistaken for an image slide.
-        final m = RegExp(r'!\[[^\]]*\]\(([^)]+)\)').firstMatch(t);
-        if (m != null) {
-          if (imagePath.isEmpty) {
-            imagePath = m.group(1) ?? '';
-          } else {
-            imagePath2 = m.group(1) ?? '';
-          }
-        }
-      } else if (t.startsWith('<div class="image-caption">')) {
-        final captionParts = _splitTwoCaptions(_decodeImageCaption(t));
-        imageCaption = captionParts.isNotEmpty ? captionParts.first : '';
-        imageCaption2 = captionParts.length > 1
-            ? captionParts.sublist(1).join(' | ')
-            : '';
-      } else if (t.startsWith('<video')) {
-        final v = _parseVideoLine(t);
-        videoPath = v.path;
-        videoStartMs = v.startMs;
-        videoEndMs = v.endMs;
-        videoAutoplay = v.autoplay;
-      } else if (t.startsWith('<iframe') && t.contains('ocideck-embed')) {
-        final e = _parseEmbedLine(t);
-        videoPath = e.path;
-        videoStartMs = e.startMs;
-        videoEndMs = e.endMs;
-      } else if (t.startsWith('<audio')) {
-        (audioPath, audioAutoplay) = _parseAudioAttrs(t);
-      } else if (t.isNotEmpty && h1.isNotEmpty && paragraph.isEmpty) {
-        paragraph = t;
-      }
+      _consumeContentLine(line, t, cssClass, bullets, b);
     }
 
     return (
-      h1: h1,
-      h2: h2,
-      paragraph: paragraph,
-      imagePath: imagePath,
-      imagePath2: imagePath2,
-      imageCaption: imageCaption,
-      imageCaption2: imageCaption2,
-      imageSize: imageSize,
-      videoPath: videoPath,
-      videoAutoplay: videoAutoplay,
-      videoStartMs: videoStartMs,
-      videoEndMs: videoEndMs,
-      audioPath: audioPath,
-      audioAutoplay: audioAutoplay,
-      quote: quote,
-      quoteAuthor: quoteAuthor,
-      tableLines: tableLines,
-      richTextLines: richTextLines,
-      listStyle: listStyle,
+      h1: b.h1,
+      h2: b.h2,
+      paragraph: b.paragraph,
+      imagePath: b.imagePath,
+      imagePath2: b.imagePath2,
+      imageCaption: b.imageCaption,
+      imageCaption2: b.imageCaption2,
+      imageSize: b.imageSize,
+      videoPath: b.videoPath,
+      videoAutoplay: b.videoAutoplay,
+      videoStartMs: b.videoStartMs,
+      videoEndMs: b.videoEndMs,
+      audioPath: b.audioPath,
+      audioAutoplay: b.audioAutoplay,
+      quote: b.quote,
+      quoteAuthor: b.quoteAuthor,
+      tableLines: b.tableLines,
+      richTextLines: b.richTextLines,
+      listStyle: b.listStyle,
     );
+  }
+
+  void _consumeRichTextLine(String line, String cssClass, _BodyParse b) {
+    final t = line.trim();
+    if (b.richTextHeaderPhase) {
+      if (t.isEmpty) return;
+      if (t.startsWith('<div') || t == '</div>') {
+        return;
+      }
+      if (t.startsWith('# ') && b.h1.isEmpty) {
+        b.h1 = t.substring(2);
+        return;
+      }
+      if (t.startsWith('## ') && b.h2.isEmpty && b.h1.isNotEmpty) {
+        b.h2 = t.substring(3);
+        return;
+      }
+      b.richTextHeaderPhase = false;
+    }
+    // A rich-text body IS markdown: an embedded table or <video> stays in
+    // the body verbatim. Lifting those out silently dropped a richText
+    // slide's table (kept only for type==table) and would lose user content
+    // (those fields aren't re-serialised for a bullets slide). EXCEPTIONS,
+    // which must round-trip: an <audio> attachment (written for every slide
+    // type by the common block after the type switch, so it is restored
+    // here), and the bulletsImage split-image structure (its image and
+    // caption). The image-caption check precedes the generic `<div>` skip,
+    // which previously shadowed it dead.
+    final isSplit = cssClass.split(RegExp(r'\s+')).contains('split');
+    if (isSplit && t.startsWith('<div class="image-caption">')) {
+      final captionParts = _splitTwoCaptions(_decodeImageCaption(t));
+      b.imageCaption = captionParts.isNotEmpty ? captionParts.first : '';
+    } else if (isSplit && RegExp(r'!\[[^\]]*\]\(([^)]+)\)').hasMatch(t)) {
+      final m = RegExp(r'!\[[^\]]*\]\(([^)]+)\)').firstMatch(t);
+      if (m != null && b.imagePath.isEmpty) {
+        b.imagePath = m.group(1) ?? '';
+      }
+    } else if (t.startsWith('<audio')) {
+      final audio = _parseAudioAttrs(t);
+      b.audioPath = audio.$1;
+      b.audioAutoplay = audio.$2;
+    } else if (t.startsWith('<div') || t == '</div>') {
+      // Split-slide structural markup; not part of the rich-text body.
+    } else {
+      b.richTextLines.add(line);
+    }
+  }
+
+  void _consumeContentLine(
+    String line,
+    String t,
+    String cssClass,
+    List<String> bullets,
+    _BodyParse b,
+  ) {
+    final htmlItems = RegExp(
+      r'<li[^>]*>(.*?)</li>',
+      caseSensitive: false,
+    ).allMatches(t).toList();
+    final bulletMatch = RegExp(r'^([-*+•◦▪▫–]|\d+[.)])\s+(.+)$').firstMatch(t);
+    if (htmlItems.isNotEmpty) {
+      for (final item in htmlItems) {
+        final body = _stripInlineHtml(item.group(1) ?? '');
+        if (body.trim().isNotEmpty) bullets.add(body.trim());
+      }
+    } else if (RegExp(
+      r'^</?(ul|ol)(?:\s[^>]*)?>$',
+      caseSensitive: false,
+    ).hasMatch(t)) {
+      // HTML list container; individual <li> items are handled above.
+    } else if (t.startsWith('|')) {
+      b.tableLines.add(t);
+    } else if (t.startsWith('# ')) {
+      b.h1 = t.substring(2);
+    } else if (t.startsWith('## ')) {
+      b.h2 = t.substring(3);
+    } else if (bulletMatch != null) {
+      // Count leading spaces (2 per level)
+      int spaces = 0;
+      for (final ch in line.characters) {
+        if (ch == ' ') {
+          spaces++;
+        } else if (ch == '\t') {
+          spaces += 2;
+        } else {
+          break;
+        }
+      }
+      final level = spaces ~/ 2;
+      final marker = bulletMatch.group(1) ?? '';
+      final body = bulletMatch.group(2) ?? '';
+      bullets.add('\t' * level + body);
+      if (RegExp(r'^\[[ xX]\]\s*').hasMatch(body)) {
+        b.listStyle = ListStyle.checklist;
+      } else if (RegExp(r'^\d+[.)]$').hasMatch(marker)) {
+        b.listStyle = ListStyle.numbered;
+      }
+    } else if (t.startsWith('> ')) {
+      b.quote = t.substring(2);
+    } else if (t.startsWith('— ')) {
+      b.quoteAuthor = t.substring(2);
+    } else if (RegExp(r'!\[bg').hasMatch(t)) {
+      final m = RegExp(r'!\[bg[^\]]*\]\(([^)]+)\)').firstMatch(t);
+      if (m != null) {
+        if (b.imagePath.isEmpty) {
+          b.imagePath = m.group(1) ?? '';
+        } else {
+          b.imagePath2 = m.group(1) ?? ''; // tweede afbeelding
+        }
+      }
+      // Parse size: ![bg 50%](...) or ![bg left:42%](...)
+      final sizeMatch = RegExp(r'!\[bg[^\]]*?(\d+)%[^\]]*\]').firstMatch(t);
+      if (sizeMatch != null && b.imageSize == 0) {
+        b.imageSize = int.tryParse(sizeMatch.group(1)!) ?? 0;
+      }
+    } else if (cssClass.split(RegExp(r'\s+')).contains('split') &&
+        RegExp(r'!\[[^\]]*\]\(([^)]+)\)').hasMatch(t)) {
+      // Plain markdown image, e.g. the `![](path)` used inside a
+      // bulletsImage `split-image` panel. Restricted to split slides so a
+      // plain image inside free markdown is not mistaken for an image slide.
+      final m = RegExp(r'!\[[^\]]*\]\(([^)]+)\)').firstMatch(t);
+      if (m != null) {
+        if (b.imagePath.isEmpty) {
+          b.imagePath = m.group(1) ?? '';
+        } else {
+          b.imagePath2 = m.group(1) ?? '';
+        }
+      }
+    } else if (t.startsWith('<div class="image-caption">')) {
+      final captionParts = _splitTwoCaptions(_decodeImageCaption(t));
+      b.imageCaption = captionParts.isNotEmpty ? captionParts.first : '';
+      b.imageCaption2 = captionParts.length > 1
+          ? captionParts.sublist(1).join(' | ')
+          : '';
+    } else if (t.startsWith('<video')) {
+      final v = _parseVideoLine(t);
+      b.videoPath = v.path;
+      b.videoStartMs = v.startMs;
+      b.videoEndMs = v.endMs;
+      b.videoAutoplay = v.autoplay;
+    } else if (t.startsWith('<iframe') && t.contains('ocideck-embed')) {
+      final e = _parseEmbedLine(t);
+      b.videoPath = e.path;
+      b.videoStartMs = e.startMs;
+      b.videoEndMs = e.endMs;
+    } else if (t.startsWith('<audio')) {
+      final audio = _parseAudioAttrs(t);
+      b.audioPath = audio.$1;
+      b.audioAutoplay = audio.$2;
+    } else if (t.isNotEmpty && b.h1.isNotEmpty && b.paragraph.isEmpty) {
+      b.paragraph = t;
+    }
   }
 
   /// Decide the slide type from the class tokens, falling back to content
