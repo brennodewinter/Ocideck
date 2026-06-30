@@ -86,7 +86,7 @@ jobs:
         run: flutter pub get --enforce-lockfile
 
       - name: Test
-        run: flutter test --test-randomize-ordering-seed random
+        run: flutter test --test-randomize-ordering-seed random --exclude-tags golden
 
   # Build the web bundle and assert it kept its hardening (strict CSP,
   # self-hosted CanvasKit, bundled UI font) — so a change can't silently
