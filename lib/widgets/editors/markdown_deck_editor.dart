@@ -301,40 +301,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              color: const Color(0xFFFFF9E6),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              child: Row(
-                children: [
-                  const Icon(Icons.code, size: 14, color: Color(0xFF92400E)),
-                  const SizedBox(width: 6),
-                  Expanded(
-                    child: Text(
-                      l10n.d(
-                        'Markdown modus — bewerk de volledige presentatie als Marp Markdown',
-                      ),
-                      style: const TextStyle(
-                        fontSize: 11,
-                        color: Color(0xFF92400E),
-                      ),
-                    ),
-                  ),
-                  TextButton.icon(
-                    onPressed: _runValidation,
-                    icon: const Icon(Icons.rule, size: 16),
-                    label: Text(l10n.d('Controleren')),
-                  ),
-                  TextButton(
-                    onPressed: _applyMarkdown,
-                    child: Text(l10n.d('Toepassen')),
-                  ),
-                  TextButton(
-                    onPressed: widget.onExitMarkdown,
-                    child: Text(l10n.t('cancel')),
-                  ),
-                ],
-              ),
-            ),
+            _modeBanner(l10n),
             if (_validation != null)
               _ValidationSummaryBar(
                 result: _validation!,
@@ -394,49 +361,90 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                 onClose: _closeFind,
               ),
             const Divider(height: 1),
-            Expanded(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  _LineNumberGutter(
-                    scrollController: _scrollController,
-                    lineCount: lineCount,
-                    issueLines: issueLines,
-                    onLineTap: _jumpToLine,
-                  ),
-                  Expanded(
-                    child: TextField(
-                      controller: _ctrl,
-                      scrollController: _scrollController,
-                      maxLines: null,
-                      expands: true,
-                      textAlignVertical: TextAlignVertical.top,
-                      style: const TextStyle(
-                        fontFamily: 'monospace',
-                        fontSize: 13,
-                        height: 1.5,
-                      ),
-                      decoration: const InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(8, 16, 16, 16),
-                        border: InputBorder.none,
-                        filled: true,
-                        fillColor: Color(0xFFF8FAFC),
-                      ),
-                      onChanged: (_) {
-                        setState(() {
-                          _validation = null;
-                        });
-                        if (_findVisible && _findQuery.isNotEmpty) {
-                          _recountMatches(selectFirst: false);
-                        }
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            _editorArea(lineCount, issueLines),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _modeBanner(AppLocalizations l10n) {
+    return Container(
+      color: const Color(0xFFFFF9E6),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      child: Row(
+        children: [
+          const Icon(Icons.code, size: 14, color: Color(0xFF92400E)),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              l10n.d(
+                'Markdown modus — bewerk de volledige presentatie als Marp Markdown',
+              ),
+              style: const TextStyle(fontSize: 11, color: Color(0xFF92400E)),
+            ),
+          ),
+          TextButton.icon(
+            onPressed: _runValidation,
+            icon: const Icon(Icons.rule, size: 16),
+            label: Text(l10n.d('Controleren')),
+          ),
+          TextButton(
+            onPressed: _applyMarkdown,
+            child: Text(l10n.d('Toepassen')),
+          ),
+          TextButton(
+            onPressed: widget.onExitMarkdown,
+            child: Text(l10n.t('cancel')),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _editorArea(
+    int lineCount,
+    Map<int, MarkdownValidationSeverity> issueLines,
+  ) {
+    return Expanded(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _LineNumberGutter(
+            scrollController: _scrollController,
+            lineCount: lineCount,
+            issueLines: issueLines,
+            onLineTap: _jumpToLine,
+          ),
+          Expanded(
+            child: TextField(
+              controller: _ctrl,
+              scrollController: _scrollController,
+              maxLines: null,
+              expands: true,
+              textAlignVertical: TextAlignVertical.top,
+              style: const TextStyle(
+                fontFamily: 'monospace',
+                fontSize: 13,
+                height: 1.5,
+              ),
+              decoration: const InputDecoration(
+                contentPadding: EdgeInsets.fromLTRB(8, 16, 16, 16),
+                border: InputBorder.none,
+                filled: true,
+                fillColor: Color(0xFFF8FAFC),
+              ),
+              onChanged: (_) {
+                setState(() {
+                  _validation = null;
+                });
+                if (_findVisible && _findQuery.isNotEmpty) {
+                  _recountMatches(selectFirst: false);
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
