@@ -35,7 +35,6 @@ const Map<String, int> methodLengthBaseline = {
   'lib/services/markdown_validator.dart::MarkdownValidator._validateSlideBlock':
       195,
   'lib/widgets/app_shell_main_layout.dart::_MainLayoutState.build': 680,
-  'lib/widgets/dialogs/export_dialog.dart::_ExportDialogState._content': 183,
   'lib/widgets/panels/slide_list_panel.dart::_SlideListPanelState.build': 265,
 };
 

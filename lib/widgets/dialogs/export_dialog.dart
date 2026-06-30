@@ -412,6 +412,10 @@ class _ExportDialogState extends State<ExportDialog> {
       );
     }
 
+    return _optionsContent(l10n);
+  }
+
+  Widget _optionsContent(AppLocalizations l10n) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
