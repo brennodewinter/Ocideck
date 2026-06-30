@@ -69,6 +69,14 @@ extension _SettingsColors on _SettingsDialogState {
           ),
         ],
       ),
+      ..._checklistTableColorSettings(),
+      ..._codeColorSettings(),
+    ];
+  }
+
+  List<Widget> _checklistTableColorSettings() {
+    final l10n = context.l10n;
+    return [
       const SizedBox(height: 24),
       _sectionTitle(l10n.d('Checklist')),
       _themeColorAnchor(
@@ -169,6 +177,12 @@ extension _SettingsColors on _SettingsDialogState {
               _themeProfile = _themeProfile.copyWith(sectionBackgroundColor: v),
         ),
       ),
+    ];
+  }
+
+  List<Widget> _codeColorSettings() {
+    final l10n = context.l10n;
+    return [
       const SizedBox(height: 24),
       _sectionTitle(l10n.d('Broncode')),
       _themeColorAnchor(
@@ -316,6 +330,14 @@ extension _SettingsColors on _SettingsDialogState {
           onChanged: (_) => _profileTouched = true,
         ),
       ),
+      ..._footerSettings(),
+      ..._closingSlideSettings(),
+    ];
+  }
+
+  List<Widget> _footerSettings() {
+    final l10n = context.l10n;
+    return [
       const SizedBox(height: 24),
       _sectionTitle('Footer'),
       TextField(
@@ -372,6 +394,12 @@ extension _SettingsColors on _SettingsDialogState {
         contentPadding: EdgeInsets.zero,
         dense: true,
       ),
+    ];
+  }
+
+  List<Widget> _closingSlideSettings() {
+    final l10n = context.l10n;
+    return [
       const SizedBox(height: 24),
       _sectionTitle(l10n.d('Laatste slide')),
       SwitchListTile(

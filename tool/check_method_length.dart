@@ -38,10 +38,6 @@ const Map<String, int> methodLengthBaseline = {
   'lib/widgets/dialogs/export_dialog.dart::_ExportDialogState._content': 183,
   'lib/widgets/dialogs/parts/image_carousel_picker_preview.dart::_CarouselPreview._buildPreview':
       240,
-  'lib/widgets/dialogs/parts/settings_dialog_colors.dart::_SettingsColors._colorsSectionChildren':
-      234,
-  'lib/widgets/dialogs/parts/settings_dialog_colors.dart::_SettingsColors._logoSectionChildren':
-      173,
   'lib/widgets/editors/chart_editor.dart::_ChartEditorState._grid': 185,
   'lib/widgets/editors/chart_editor.dart::_ChartEditorState.build': 204,
   'lib/widgets/editors/cockpit_editor.dart::_MeterCard.build': 185,
