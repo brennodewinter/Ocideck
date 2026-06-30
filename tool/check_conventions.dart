@@ -27,7 +27,6 @@ const int maxFileLines = 1000;
 /// `lib/l10n/translations/*` is exempt — those files grow with every UI string.
 const Map<String, int> fileSizeBaseline = {
   'lib/widgets/presentation/fullscreen_presenter.dart': 1274,
-  'lib/widgets/panels/editor_panel.dart': 1122,
   'lib/widgets/editors/chart_editor.dart': 1120,
   'lib/widgets/app_shell.dart': 1119,
   'lib/widgets/slides/previews/bullets_previews.dart': 1109,
