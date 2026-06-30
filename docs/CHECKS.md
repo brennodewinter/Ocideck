@@ -27,7 +27,7 @@ To give a sense of scale (point-in-time figures — they only grow):
 | Automated tests in the suite | **~900** |
 | Test files under `test/` | **~105** |
 | Source files under `lib/` | ~178 (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
-| Line coverage (enforced floor: 60%) | **~65%** |
+| Line coverage (enforced floor: 65%) | **~66%** |
 
 Every push runs the **entire** suite — there is no "smoke subset". The tests
 span unit (model/parsing/state), widget (every slide editor, the dialogs, the
@@ -47,7 +47,7 @@ run locally and in CI, the number you see locally is the number CI gates on.
 | [`make check-conventions`](#make-check-conventions) | No `print()`; bare `catch (_)` & file-size ratchets | ✅ | ✅ | ✅ |
 | [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ | ✅ | ✅ |
-| [`make coverage`](#make-coverage) | Line coverage ≥ 60% floor | — | — | ✅ (gate) |
+| [`make coverage`](#make-coverage) | Line coverage ≥ 65% floor | — | — | ✅ (gate) |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ |
 | [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ |
@@ -133,10 +133,10 @@ These three run on every push and pull request (and as `make check`).
   printed at the top of the run so you can reproduce it.
 
 ### `make coverage`
-- **Runs:** `flutter test --coverage` then `dart run tool/coverage_summary.dart --min=60`.
+- **Runs:** `flutter test --coverage` then `dart run tool/coverage_summary.dart --min=65`.
 - **Covers:** line coverage across every `lib/` file a test imports.
 - **Failure means:** overall line coverage dropped below the floor (currently
-  **60%**). The floor guards against large regressions; raise it as coverage
+  **65%**, with actual coverage ~66.5%). The floor guards against large regressions; raise it as coverage
   improves. This is the coverage form of the gate used in CI.
 
 ---
