@@ -25,9 +25,15 @@ class _CockpitPreviewState extends State<_CockpitPreview>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
 
+  /// Parsed cockpit spec, cached so rebuilds (and the per-frame animation)
+  /// don't re-parse the cockpit JSON. Re-parsed only when the slide's cockpit
+  /// markdown changes.
+  late CockpitSpec _spec;
+
   @override
   void initState() {
     super.initState();
+    _spec = CockpitSpec.parse(widget.slide.customMarkdown);
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: cockpitDefaultAnimationDurationMs),
@@ -42,12 +48,15 @@ class _CockpitPreviewState extends State<_CockpitPreview>
     if (oldWidget.slide.id != widget.slide.id ||
         oldWidget.slide.customMarkdown != widget.slide.customMarkdown ||
         oldWidget.presentationMode != widget.presentationMode) {
+      if (oldWidget.slide.customMarkdown != widget.slide.customMarkdown) {
+        _spec = CockpitSpec.parse(widget.slide.customMarkdown);
+      }
       _maybeStart();
     }
   }
 
   void _maybeStart() {
-    final spec = CockpitSpec.parse(widget.slide.customMarkdown);
+    final spec = _spec;
     _controller.duration = Duration(milliseconds: spec.animationDurationMs);
     if (widget.presentationMode && spec.animateOnEnter) {
       _controller.forward(from: 0);
@@ -64,7 +73,7 @@ class _CockpitPreviewState extends State<_CockpitPreview>
 
   @override
   Widget build(BuildContext context) {
-    final spec = CockpitSpec.parse(widget.slide.customMarkdown);
+    final spec = _spec;
     final meters = spec.meters.isEmpty
         ? CockpitSpec.pentestPreset().meters
         : spec.meters.take(cockpitMaxMeters).toList();

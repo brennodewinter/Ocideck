@@ -37,6 +37,25 @@ class _ChartPreviewState extends State<_ChartPreview> {
   /// hovering a point.
   ({int series, int entry, double value, Offset offset})? _radarTouch;
 
+  /// Parsed chart spec, cached so the per-pointer-move hover rebuilds don't
+  /// re-parse the chart JSON every frame. Re-parsed only when the slide's chart
+  /// markdown actually changes.
+  late ChartSpec _spec;
+
+  @override
+  void initState() {
+    super.initState();
+    _spec = ChartSpec.parse(widget.slide.customMarkdown);
+  }
+
+  @override
+  void didUpdateWidget(_ChartPreview oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.slide.customMarkdown != oldWidget.slide.customMarkdown) {
+      _spec = ChartSpec.parse(widget.slide.customMarkdown);
+    }
+  }
+
   void _setHover(int? index) {
     if (_hovered != index) setState(() => _hovered = index);
   }
@@ -99,7 +118,7 @@ class _ChartPreviewState extends State<_ChartPreview> {
 
   @override
   Widget build(BuildContext context) {
-    final spec = ChartSpec.parse(slide.customMarkdown);
+    final spec = _spec;
     final horizontalPad = w * 0.05;
     final verticalPad = w * 0.018;
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
