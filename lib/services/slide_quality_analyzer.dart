@@ -14,6 +14,26 @@ import '../utils/project_path.dart';
 import '../widgets/slides/inline_markdown.dart';
 import 'slide_layout_metrics.dart';
 
+/// Cached fit-scale per slide, so re-analysing a deck after an edit only
+/// re-measures the slide that actually changed. The quality provider re-runs
+/// [SlideQualityAnalyzer.analyze] on every deck edit, and a single bullet-slide
+/// fit-scale costs several milliseconds of TextPainter layout; for a deck of any
+/// size that recomputation dominated the analysis. Editing one slide replaces
+/// only that slide's object (see `DeckNotifier.updateSlide`), so the unchanged
+/// slides keep their identity and hit this cache. The [Expando] is weak-keyed:
+/// entries are collected once a slide is no longer referenced, so the cache
+/// never leaks. The key is (slide identity, font); a changed slide is a new
+/// object — never a stale hit — and a font change misses via [_FitMemo.font].
+final Expando<_FitMemo> _fitScaleCache = Expando<_FitMemo>('slideFitScale');
+
+double _memoizedFitScale(Slide slide, String font, double Function() compute) {
+  final cached = _fitScaleCache[slide];
+  if (cached != null && cached.font == font) return cached.scale;
+  final scale = compute();
+  _fitScaleCache[slide] = _FitMemo(font, scale);
+  return scale;
+}
+
 /// Maximum combined quote + author length before a density warning.
 const int kQuoteDensityCharThreshold = 750;
 
@@ -472,7 +492,11 @@ class SlideQualityAnalyzer {
         _addFitScaleIssue(
           issues,
           index,
-          bulletsSlideFitScale(slide: slide, font: font),
+          _memoizedFitScale(
+            slide,
+            font,
+            () => bulletsSlideFitScale(slide: slide, font: font),
+          ),
         );
         _checkBulletReadability(
           slide: slide,
@@ -484,7 +508,11 @@ class SlideQualityAnalyzer {
         _addFitScaleIssue(
           issues,
           index,
-          twoBulletsSlideFitScale(slide: slide, font: font),
+          _memoizedFitScale(
+            slide,
+            font,
+            () => twoBulletsSlideFitScale(slide: slide, font: font),
+          ),
         );
         _checkBulletReadability(
           slide: slide,
@@ -496,7 +524,11 @@ class SlideQualityAnalyzer {
         _addFitScaleIssue(
           issues,
           index,
-          bulletsImageSlideFitScale(slide: slide, font: font),
+          _memoizedFitScale(
+            slide,
+            font,
+            () => bulletsImageSlideFitScale(slide: slide, font: font),
+          ),
         );
         _checkBulletReadability(
           slide: slide,
@@ -902,4 +934,13 @@ class _BulletText {
   final int level;
 
   const _BulletText({required this.text, required this.level});
+}
+
+/// A memoised fit-scale together with the font it was measured for, so a font
+/// change invalidates the cached value without touching the [Expando] key.
+class _FitMemo {
+  final String font;
+  final double scale;
+
+  const _FitMemo(this.font, this.scale);
 }
