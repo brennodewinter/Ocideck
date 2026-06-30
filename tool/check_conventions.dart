@@ -28,7 +28,7 @@ const int maxFileLines = 1000;
 const Map<String, int> fileSizeBaseline = {
   'lib/widgets/dialogs/settings_dialog.dart': 2837,
   'lib/widgets/dialogs/image_carousel_picker.dart': 2093,
-  'lib/services/markdown_service.dart': 1858,
+  'lib/services/markdown_service.dart': 1441,
   'lib/widgets/slides/previews/chart_preview.dart': 1567,
   'lib/services/file_service.dart': 1381,
   'lib/services/marp_html_service.dart': 1331,
