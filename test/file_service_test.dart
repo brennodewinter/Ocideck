@@ -327,4 +327,29 @@ void main() {
       expect(await service.openDeck(safe), isNotNull);
     },
   );
+
+  test('openDeck only opens Marp/OciDeck presentations', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_marp_check_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+    final service = FileService(
+      MarkdownService(),
+      ImageService(),
+      () => const ThemeProfile(),
+    );
+
+    // A plain markdown file (no `marp: true`) picked from anywhere is refused,
+    // so it can't open as a blank/garbled deck.
+    final plain = p.join(temp.path, 'README.md');
+    await File(plain).writeAsString('# Just notes\n\nSome text, not a deck.\n');
+    expect(await service.openDeck(plain), isNull);
+
+    // A Marp presentation living outside any library folder opens fine.
+    final loose = p.join(temp.path, 'elders.md');
+    await File(loose).writeAsString(
+      '---\nmarp: true\ntitle: Elders\n---\n\n# Titel\n\n- punt\n',
+    );
+    expect(await service.openDeck(loose), isNotNull);
+  });
 }

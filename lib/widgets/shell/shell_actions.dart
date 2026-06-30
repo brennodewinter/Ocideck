@@ -15,10 +15,20 @@ Future<void> _openWithSearch(
     fileService: ref.read(fileServiceProvider),
     initialDirectory: initialDirectory ?? settings.homeDirectory,
   );
-  if (result == null) return;
-  await ref
+  if (result == null || !context.mounted) return;
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
+  final openResult = await ref
       .read(tabsProvider.notifier)
       .openFileByPath(result.path, selectIndex: result.slideIndex);
+  // A loose .md browsed from disk that isn't a Marp/OciDeck presentation (or is
+  // otherwise unreadable) is refused by openDeck — tell the user instead of
+  // silently doing nothing. OpenResult.blocked already shows the security alarm.
+  if (openResult == OpenResult.unreadable) {
+    messenger.showSnackBar(
+      SnackBar(content: Text(l10n.d('Kon dit bestand niet openen.'))),
+    );
+  }
 }
 
 /// Scan a fixed set of well-known folders for Marp presentations and open the
