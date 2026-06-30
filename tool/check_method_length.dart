@@ -36,23 +36,8 @@ const Map<String, int> methodLengthBaseline = {
       195,
   'lib/widgets/app_shell_main_layout.dart::_MainLayoutState.build': 680,
   'lib/widgets/dialogs/export_dialog.dart::_ExportDialogState._content': 183,
-  'lib/widgets/dialogs/parts/image_carousel_picker_preview.dart::_CarouselPreview._buildPreview':
-      240,
   'lib/widgets/panels/editor_panel.dart::EditorPanel.build': 154,
   'lib/widgets/panels/slide_list_panel.dart::_SlideListPanelState.build': 265,
-  'lib/widgets/panels/slide_quality_panel.dart::_SlideQualityPanelState.build':
-      201,
-  'lib/widgets/presentation/parts/presenter_keys.dart::_PresenterKeys._handleKey':
-      160,
-  'lib/widgets/shell/welcome_screen.dart::_WelcomeScreen.build': 192,
-  'lib/widgets/slides/previews/bullets_previews.dart::_BulletsPreview.build':
-      158,
-  'lib/widgets/slides/previews/bullets_previews.dart::_TwoBulletsPreview.build':
-      208,
-  'lib/widgets/slides/previews/chart_preview_radar.dart::_ChartPreviewRadar._radarChart':
-      203,
-  'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
-      155,
 };
 
 bool _isTranslationData(String path) =>

@@ -122,65 +122,8 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
               ),
             ),
           ),
-          if (!result.hasIssues && _expanded) ...[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '${l10n.d('Uitgevoerde controles')}:',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w600,
-                      color: iconColor,
-                    ),
-                  ),
-                  for (final check in slideQualityPerformedChecks(l10n))
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(Icons.check, size: 12, color: iconColor),
-                          const SizedBox(width: 6),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  check.title,
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
-                                    color: iconColor,
-                                  ),
-                                ),
-                                Text(
-                                  check.detail,
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: iconColor.withValues(alpha: 0.85),
-                                  ),
-                                ),
-                                Text(
-                                  check.params,
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontStyle: FontStyle.italic,
-                                    color: iconColor.withValues(alpha: 0.7),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          ],
+          if (!result.hasIssues && _expanded)
+            ..._performedChecksList(l10n, iconColor),
           if (result.hasIssues) ...[
             Padding(
               padding: const EdgeInsets.fromLTRB(12, 0, 12, 4),
@@ -255,6 +198,68 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
         ],
       ),
     );
+  }
+
+  List<Widget> _performedChecksList(AppLocalizations l10n, Color iconColor) {
+    return [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${l10n.d('Uitgevoerde controles')}:',
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color: iconColor,
+              ),
+            ),
+            for (final check in slideQualityPerformedChecks(l10n))
+              Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.check, size: 12, color: iconColor),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            check.title,
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              color: iconColor,
+                            ),
+                          ),
+                          Text(
+                            check.detail,
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: iconColor.withValues(alpha: 0.85),
+                            ),
+                          ),
+                          Text(
+                            check.params,
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontStyle: FontStyle.italic,
+                              color: iconColor.withValues(alpha: 0.7),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
+      ),
+    ];
   }
 }
 

@@ -112,88 +112,97 @@ class _WelcomeScreen extends ConsumerWidget {
           ),
           // ── Rechts: recente bestanden ──────────────────────────────────
           if (recentFiles.isNotEmpty)
-            Container(
-              width: 280,
-              decoration: BoxDecoration(
-                color: theme.colorScheme.surface,
-                border: Border(
-                  left: BorderSide(color: theme.colorScheme.outlineVariant),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 20, 16, 10),
-                    child: Text(
-                      l10n.t('recentPresentations'),
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w700,
-                        color: palette.mutedText,
-                        letterSpacing: 0.8,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      itemCount: recentFiles.length,
-                      itemBuilder: (_, i) {
-                        final path = recentFiles[i];
-                        final name = path.split('/').last.replaceAll('.md', '');
-                        return InkWell(
-                          onTap: () => ref
-                              .read(tabsProvider.notifier)
-                              .openFileByPath(path),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 10,
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.slideshow_outlined,
-                                  size: 16,
-                                  color: theme.colorScheme.onSurfaceVariant,
-                                ),
-                                const SizedBox(width: 10),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        name,
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500,
-                                          color: theme.colorScheme.onSurface,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Text(
-                                        path,
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          color: palette.mutedText,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
+            _recentFilesPanel(context, ref, theme, palette, l10n, recentFiles),
+        ],
+      ),
+    );
+  }
+
+  Widget _recentFilesPanel(
+    BuildContext context,
+    WidgetRef ref,
+    ThemeData theme,
+    AppPalette palette,
+    AppLocalizations l10n,
+    List<String> recentFiles,
+  ) {
+    return Container(
+      width: 280,
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surface,
+        border: Border(
+          left: BorderSide(color: theme.colorScheme.outlineVariant),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 20, 16, 10),
+            child: Text(
+              l10n.t('recentPresentations'),
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+                color: palette.mutedText,
+                letterSpacing: 0.8,
               ),
             ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.only(bottom: 16),
+              itemCount: recentFiles.length,
+              itemBuilder: (_, i) {
+                final path = recentFiles[i];
+                final name = path.split('/').last.replaceAll('.md', '');
+                return InkWell(
+                  onTap: () =>
+                      ref.read(tabsProvider.notifier).openFileByPath(path),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 10,
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.slideshow_outlined,
+                          size: 16,
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                name,
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500,
+                                  color: theme.colorScheme.onSurface,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Text(
+                                path,
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: palette.mutedText,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );

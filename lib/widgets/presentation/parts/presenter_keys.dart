@@ -55,6 +55,10 @@ extension _PresenterKeys on _FullscreenPresenterState {
       return KeyEventResult.handled;
     }
 
+    return _handleNavKey(key);
+  }
+
+  KeyEventResult _handleNavKey(LogicalKeyboardKey key) {
     final last = widget.slides.length - 1;
     switch (key) {
       case LogicalKeyboardKey.enter:

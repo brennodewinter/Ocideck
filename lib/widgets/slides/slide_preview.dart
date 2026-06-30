@@ -508,30 +508,7 @@ class SlidePreviewWidget extends StatelessWidget {
           profile: themeProfile,
         );
       case SlideType.video:
-        final source = VideoSource.parse(slide.videoPath);
-        if (source.isEmbed) {
-          return _VideoEmbedPreview(
-            slide: slide,
-            source: source,
-            w: w,
-            font: fontFamily,
-            profile: themeProfile,
-            autoplay: autoplayMedia && slide.videoAutoplay,
-            allowRemoteMedia: allowRemoteMedia,
-            onComplete: onVideoComplete,
-          );
-        }
-        return _VideoPreview(
-          slide: slide,
-          source: source,
-          w: w,
-          projectPath: projectPath,
-          font: fontFamily,
-          profile: themeProfile,
-          autoplay: autoplayMedia && slide.videoAutoplay,
-          allowRemoteMedia: allowRemoteMedia,
-          onComplete: onVideoComplete,
-        );
+        return _videoPreview(w);
       case SlideType.quote:
         return _QuotePreview(
           slide: slide,
@@ -600,6 +577,33 @@ class SlidePreviewWidget extends StatelessWidget {
           revealedCount: timelineRevealedCount,
         );
     }
+  }
+
+  Widget _videoPreview(double w) {
+    final source = VideoSource.parse(slide.videoPath);
+    if (source.isEmbed) {
+      return _VideoEmbedPreview(
+        slide: slide,
+        source: source,
+        w: w,
+        font: fontFamily,
+        profile: themeProfile,
+        autoplay: autoplayMedia && slide.videoAutoplay,
+        allowRemoteMedia: allowRemoteMedia,
+        onComplete: onVideoComplete,
+      );
+    }
+    return _VideoPreview(
+      slide: slide,
+      source: source,
+      w: w,
+      projectPath: projectPath,
+      font: fontFamily,
+      profile: themeProfile,
+      autoplay: autoplayMedia && slide.videoAutoplay,
+      allowRemoteMedia: allowRemoteMedia,
+      onComplete: onVideoComplete,
+    );
   }
 }
 
