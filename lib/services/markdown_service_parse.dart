@@ -4,6 +4,20 @@
 // an extension — same library, same members, no behaviour change.
 part of 'markdown_service.dart';
 
+// Hoisted hot-path regexes: compiled once at library load instead of on every
+// line/slide while parsing (they ran in the per-line body loop and the
+// slide-type inference, recompiling the same patterns thousands of times).
+final _reWhitespace = RegExp(r'\s+');
+final _reImageMd = RegExp(r'!\[[^\]]*\]\(([^)]+)\)');
+final _reLiItem = RegExp(r'<li[^>]*>(.*?)</li>', caseSensitive: false);
+final _reHtmlList = RegExp(r'^</?(ul|ol)(?:\s[^>]*)?>$', caseSensitive: false);
+final _reBullet = RegExp(r'^([-*+•◦▪▫–]|\d+[.)])\s+(.+)$');
+final _reChecklistMark = RegExp(r'^\[[ xX]\]\s*');
+final _reNumberedMark = RegExp(r'^\d+[.)]$');
+final _reBgImage = RegExp(r'!\[bg');
+final _reBgImageUrl = RegExp(r'!\[bg[^\]]*\]\(([^)]+)\)');
+final _reBgImageSize = RegExp(r'!\[bg[^\]]*?(\d+)%[^\]]*\]');
+
 /// Mutable accumulator for [_MarkdownParse._parseBodyLines]: the per-line
 /// handlers fill these fields as they walk a slide block's body.
 class _BodyParse {
@@ -204,7 +218,7 @@ extension _MarkdownParse on MarkdownService {
       paragraph: body.paragraph,
     );
 
-    final classTokens = d.cssClass.split(RegExp(r'\s+'));
+    final classTokens = d.cssClass.split(_reWhitespace);
     final showLogo = !classTokens.contains('no-logo');
     final showFooter = !classTokens.contains('no-footer');
 
@@ -424,7 +438,7 @@ extension _MarkdownParse on MarkdownService {
     required TlpLevel tlp,
     required int styleImageWidth,
   }) {
-    final tokens = cssClass.split(RegExp(r'\s+'));
+    final tokens = cssClass.split(_reWhitespace);
     if (tokens.contains('code')) {
       return _parseCodeBlock(
         remaining: remaining,
@@ -500,7 +514,7 @@ extension _MarkdownParse on MarkdownService {
     List<String> bullets,
   ) {
     final b = _BodyParse(listStyle);
-    final isTwoBullets = cssClass.split(RegExp(r'\s+')).contains('two-bullets');
+    final isTwoBullets = cssClass.split(_reWhitespace).contains('two-bullets');
 
     for (final line in lines) {
       if (b.listStyle == ListStyle.richText) {
@@ -568,12 +582,12 @@ extension _MarkdownParse on MarkdownService {
     // here), and the bulletsImage split-image structure (its image and
     // caption). The image-caption check precedes the generic `<div>` skip,
     // which previously shadowed it dead.
-    final isSplit = cssClass.split(RegExp(r'\s+')).contains('split');
+    final isSplit = cssClass.split(_reWhitespace).contains('split');
     if (isSplit && t.startsWith('<div class="image-caption">')) {
       final captionParts = _splitTwoCaptions(_decodeImageCaption(t));
       b.imageCaption = captionParts.isNotEmpty ? captionParts.first : '';
-    } else if (isSplit && RegExp(r'!\[[^\]]*\]\(([^)]+)\)').hasMatch(t)) {
-      final m = RegExp(r'!\[[^\]]*\]\(([^)]+)\)').firstMatch(t);
+    } else if (isSplit && _reImageMd.hasMatch(t)) {
+      final m = _reImageMd.firstMatch(t);
       if (m != null && b.imagePath.isEmpty) {
         b.imagePath = m.group(1) ?? '';
       }
@@ -595,20 +609,14 @@ extension _MarkdownParse on MarkdownService {
     List<String> bullets,
     _BodyParse b,
   ) {
-    final htmlItems = RegExp(
-      r'<li[^>]*>(.*?)</li>',
-      caseSensitive: false,
-    ).allMatches(t).toList();
-    final bulletMatch = RegExp(r'^([-*+•◦▪▫–]|\d+[.)])\s+(.+)$').firstMatch(t);
+    final htmlItems = _reLiItem.allMatches(t).toList();
+    final bulletMatch = _reBullet.firstMatch(t);
     if (htmlItems.isNotEmpty) {
       for (final item in htmlItems) {
         final body = _stripInlineHtml(item.group(1) ?? '');
         if (body.trim().isNotEmpty) bullets.add(body.trim());
       }
-    } else if (RegExp(
-      r'^</?(ul|ol)(?:\s[^>]*)?>$',
-      caseSensitive: false,
-    ).hasMatch(t)) {
+    } else if (_reHtmlList.hasMatch(t)) {
       // HTML list container; individual <li> items are handled above.
     } else if (t.startsWith('|')) {
       b.tableLines.add(t);
@@ -632,17 +640,17 @@ extension _MarkdownParse on MarkdownService {
       final marker = bulletMatch.group(1) ?? '';
       final body = bulletMatch.group(2) ?? '';
       bullets.add('\t' * level + body);
-      if (RegExp(r'^\[[ xX]\]\s*').hasMatch(body)) {
+      if (_reChecklistMark.hasMatch(body)) {
         b.listStyle = ListStyle.checklist;
-      } else if (RegExp(r'^\d+[.)]$').hasMatch(marker)) {
+      } else if (_reNumberedMark.hasMatch(marker)) {
         b.listStyle = ListStyle.numbered;
       }
     } else if (t.startsWith('> ')) {
       b.quote = t.substring(2);
     } else if (t.startsWith('— ')) {
       b.quoteAuthor = t.substring(2);
-    } else if (RegExp(r'!\[bg').hasMatch(t)) {
-      final m = RegExp(r'!\[bg[^\]]*\]\(([^)]+)\)').firstMatch(t);
+    } else if (_reBgImage.hasMatch(t)) {
+      final m = _reBgImageUrl.firstMatch(t);
       if (m != null) {
         if (b.imagePath.isEmpty) {
           b.imagePath = m.group(1) ?? '';
@@ -651,16 +659,16 @@ extension _MarkdownParse on MarkdownService {
         }
       }
       // Parse size: ![bg 50%](...) or ![bg left:42%](...)
-      final sizeMatch = RegExp(r'!\[bg[^\]]*?(\d+)%[^\]]*\]').firstMatch(t);
+      final sizeMatch = _reBgImageSize.firstMatch(t);
       if (sizeMatch != null && b.imageSize == 0) {
         b.imageSize = int.tryParse(sizeMatch.group(1)!) ?? 0;
       }
-    } else if (cssClass.split(RegExp(r'\s+')).contains('split') &&
-        RegExp(r'!\[[^\]]*\]\(([^)]+)\)').hasMatch(t)) {
+    } else if (cssClass.split(_reWhitespace).contains('split') &&
+        _reImageMd.hasMatch(t)) {
       // Plain markdown image, e.g. the `![](path)` used inside a
       // bulletsImage `split-image` panel. Restricted to split slides so a
       // plain image inside free markdown is not mistaken for an image slide.
-      final m = RegExp(r'!\[[^\]]*\]\(([^)]+)\)').firstMatch(t);
+      final m = _reImageMd.firstMatch(t);
       if (m != null) {
         if (b.imagePath.isEmpty) {
           b.imagePath = m.group(1) ?? '';
@@ -709,48 +717,37 @@ extension _MarkdownParse on MarkdownService {
     required String h2,
     required String paragraph,
   }) {
-    switch (cssClass) {
-      case final c when c.split(RegExp(r'\s+')).contains('title'):
-        return SlideType.title;
-      case final c when c.split(RegExp(r'\s+')).contains('section'):
-        return SlideType.section;
-      case final c when c.split(RegExp(r'\s+')).contains('timeline'):
-        return SlideType.timeline;
-      case final c when c.split(RegExp(r'\s+')).contains('two-bullets'):
-        return SlideType.twoBullets;
-      case final c when c.split(RegExp(r'\s+')).contains('split'):
-        return SlideType.bulletsImage;
-      case final c when c.split(RegExp(r'\s+')).contains('quote'):
-        return SlideType.quote;
-      case final c when c.split(RegExp(r'\s+')).contains('video'):
-        return SlideType.video;
-      case final c when c.split(RegExp(r'\s+')).contains('table'):
-        return SlideType.table;
-      default:
-        if (quote.isNotEmpty) {
-          return SlideType.quote;
-        } else if (imagePath.isNotEmpty && imagePath2.isNotEmpty) {
-          return SlideType.twoImages;
-        } else if (bullets.isNotEmpty && imagePath.isNotEmpty) {
-          return SlideType.bulletsImage;
-        } else if (listStyle == ListStyle.richText) {
-          return SlideType.bullets;
-        } else if (bullets.isNotEmpty) {
-          return SlideType.bullets;
-        } else if (videoPath.isNotEmpty) {
-          return SlideType.video;
-        } else if (imagePath.isNotEmpty) {
-          return SlideType.image;
-        } else if (tableRows.isNotEmpty &&
-            bullets.isEmpty &&
-            h2.isEmpty &&
-            paragraph.isEmpty) {
-          return SlideType.table;
-        } else if (h1.isEmpty && h2.isEmpty && bullets.isEmpty) {
-          return SlideType.freeMarkdown;
-        } else {
-          return SlideType.bullets;
-        }
+    final tokens = cssClass.split(_reWhitespace).toSet();
+    if (tokens.contains('title')) return SlideType.title;
+    if (tokens.contains('section')) return SlideType.section;
+    if (tokens.contains('timeline')) return SlideType.timeline;
+    if (tokens.contains('two-bullets')) return SlideType.twoBullets;
+    if (tokens.contains('split')) return SlideType.bulletsImage;
+    if (tokens.contains('quote')) return SlideType.quote;
+    if (tokens.contains('video')) return SlideType.video;
+    if (tokens.contains('table')) return SlideType.table;
+
+    // No explicit class token — fall back to content heuristics.
+    if (quote.isNotEmpty) return SlideType.quote;
+    if (imagePath.isNotEmpty && imagePath2.isNotEmpty) {
+      return SlideType.twoImages;
     }
+    if (bullets.isNotEmpty && imagePath.isNotEmpty) {
+      return SlideType.bulletsImage;
+    }
+    if (listStyle == ListStyle.richText) return SlideType.bullets;
+    if (bullets.isNotEmpty) return SlideType.bullets;
+    if (videoPath.isNotEmpty) return SlideType.video;
+    if (imagePath.isNotEmpty) return SlideType.image;
+    if (tableRows.isNotEmpty &&
+        bullets.isEmpty &&
+        h2.isEmpty &&
+        paragraph.isEmpty) {
+      return SlideType.table;
+    }
+    if (h1.isEmpty && h2.isEmpty && bullets.isEmpty) {
+      return SlideType.freeMarkdown;
+    }
+    return SlideType.bullets;
   }
 }

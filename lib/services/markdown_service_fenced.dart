@@ -46,7 +46,7 @@ extension _MarkdownFenced on MarkdownService {
       }
     }
 
-    final classTokens = cssClass.split(RegExp(r'\s+'));
+    final classTokens = cssClass.split(_reWhitespace);
     final effectiveClass = classTokens
         .where(
           (c) =>
@@ -111,7 +111,7 @@ extension _MarkdownFenced on MarkdownService {
       }
     }
 
-    final classTokens = cssClass.split(RegExp(r'\s+'));
+    final classTokens = cssClass.split(_reWhitespace);
     final effectiveClass = classTokens
         .where(
           (c) =>
@@ -174,7 +174,7 @@ extension _MarkdownFenced on MarkdownService {
       }
     }
 
-    final classTokens = cssClass.split(RegExp(r'\s+'));
+    final classTokens = cssClass.split(_reWhitespace);
     final effectiveClass = classTokens
         .where(
           (c) =>
@@ -247,7 +247,7 @@ extension _MarkdownFenced on MarkdownService {
       }
     }
 
-    final classTokens = cssClass.split(RegExp(r'\s+'));
+    final classTokens = cssClass.split(_reWhitespace);
     final effectiveClass = classTokens
         .where(
           (c) =>
@@ -282,6 +282,6 @@ extension _MarkdownFenced on MarkdownService {
   String _stripInlineHtml(String value) {
     return value
         .replaceAll(RegExp(r'<[^>]+>'), ' ')
-        .replaceAll(RegExp(r'\s+'), ' ');
+        .replaceAll(_reWhitespace, ' ');
   }
 }
