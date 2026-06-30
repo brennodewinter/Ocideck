@@ -56,7 +56,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
       final pages = richTextPageCountForSlide(
         slide: slide,
         profile: deck.themeProfile,
-        splitWithImage: slide.type == SlideType.bulletsImage,
+        splitWithImage: slide.type.splitWithImage,
       );
       final richTextPage = ref.read(richTextPreviewPageProvider);
       if (pages > 1) {
@@ -141,7 +141,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
         ? richTextPageCountForSlide(
             slide: slide,
             profile: deck.themeProfile,
-            splitWithImage: slide.type == SlideType.bulletsImage,
+            splitWithImage: slide.type.splitWithImage,
           )
         : 1;
     final hasRichTextPages = richTextPages > 1;

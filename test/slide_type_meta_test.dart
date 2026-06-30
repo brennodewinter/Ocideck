@@ -22,4 +22,19 @@ void main() {
     expect(SlideType.bullets.marpClass, isEmpty);
     expect(SlideType.bulletsImage.marpClass, 'split');
   });
+
+  test('capability flags match the types they replaced', () {
+    // splitWithImage replaced `type == SlideType.bulletsImage`.
+    expect(SlideType.values.where((t) => t.splitWithImage), [
+      SlideType.bulletsImage,
+    ]);
+    // isHeading replaced `type == title || type == section`.
+    expect(SlideType.title.isHeading, isTrue);
+    expect(SlideType.section.isHeading, isTrue);
+    expect(SlideType.bullets.isHeading, isFalse);
+    expect(SlideType.values.where((t) => t.isHeading).toSet(), {
+      SlideType.title,
+      SlideType.section,
+    });
+  });
 }

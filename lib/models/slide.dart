@@ -61,14 +61,35 @@ class SlideTypeMeta {
   /// The Marp `_class` token written to the `.md` (empty = no class token).
   final String marpClass;
 
-  const SlideTypeMeta({required this.label, required this.marpClass});
+  /// Renders its body beside an inline image (the bulletsImage split layout).
+  /// Replaces the `type == SlideType.bulletsImage` checks scattered across the
+  /// preview, presenter and notes code.
+  final bool splitWithImage;
+
+  /// A heading/divider slide (title or section) with no flowing body content.
+  final bool isHeading;
+
+  const SlideTypeMeta({
+    required this.label,
+    required this.marpClass,
+    this.splitWithImage = false,
+    this.isHeading = false,
+  });
 }
 
 /// The single source of truth for per-type pure data. A guard test
 /// (`slide_type_meta_test.dart`) fails if any [SlideType] is missing here.
 const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
-  SlideType.title: SlideTypeMeta(label: 'Titelpagina', marpClass: 'title'),
-  SlideType.section: SlideTypeMeta(label: 'Tussentitel', marpClass: 'section'),
+  SlideType.title: SlideTypeMeta(
+    label: 'Titelpagina',
+    marpClass: 'title',
+    isHeading: true,
+  ),
+  SlideType.section: SlideTypeMeta(
+    label: 'Tussentitel',
+    marpClass: 'section',
+    isHeading: true,
+  ),
   SlideType.bullets: SlideTypeMeta(label: 'Alleen Bullets', marpClass: ''),
   SlideType.twoBullets: SlideTypeMeta(
     label: 'Twee Bulletkolommen',
@@ -77,6 +98,7 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
   SlideType.bulletsImage: SlideTypeMeta(
     label: 'Bullets + Afbeelding',
     marpClass: 'split',
+    splitWithImage: true,
   ),
   SlideType.twoImages: SlideTypeMeta(label: 'Twee Afbeeldingen', marpClass: ''),
   SlideType.image: SlideTypeMeta(label: 'Grote Afbeelding', marpClass: ''),
@@ -94,6 +116,12 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
 extension SlideTypeExtension on SlideType {
   String get label => slideTypeMeta[this]!.label;
   String get marpClass => slideTypeMeta[this]!.marpClass;
+
+  /// True for the bulletsImage split layout (body beside an inline image).
+  bool get splitWithImage => slideTypeMeta[this]!.splitWithImage;
+
+  /// True for a title/section heading slide.
+  bool get isHeading => slideTypeMeta[this]!.isHeading;
 }
 
 class Slide {
