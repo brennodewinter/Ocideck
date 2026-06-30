@@ -48,6 +48,9 @@ void main() {
       allowedFiles: {
         'lib/utils/image_limits.dart', // cappedNetworkImage wrapper
         'lib/widgets/slides/previews/media_previews.dart', // gated callers
+        // media_previews.dart was split for size; its gated image sink now
+        // lives in this part of the same slide_preview library.
+        'lib/widgets/slides/previews/media_previews_image.dart',
       },
       guidance:
           'New remote-media fetch sink. Gate the URL on '

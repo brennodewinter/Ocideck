@@ -41,6 +41,8 @@ part 'previews/bullets_previews.dart';
 part 'previews/checklist_previews.dart';
 part 'previews/table_preview.dart';
 part 'previews/media_previews.dart';
+part 'previews/media_previews_video.dart';
+part 'previews/media_previews_image.dart';
 part 'previews/code_preview.dart';
 part 'previews/chart_preview.dart';
 part 'previews/chart_preview_cartesian.dart';
