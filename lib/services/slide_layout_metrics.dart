@@ -402,8 +402,12 @@ double tightenVerticalFitScale({
   double fillRatio = 0.96,
 }) {
   var s = scale;
-  while (measure(s) > availH * fillRatio && s > minScale + 0.005) {
+  // One measure() per iteration: `measure` is the expensive per-bullet
+  // TextPainter pass, and the old `while (measure(s) ...) { final h = measure(s)`
+  // form ran it twice each loop for the same scale.
+  while (s > minScale + 0.005) {
     final h = measure(s);
+    if (h <= availH * fillRatio) break;
     final next = (s * availH / h * fillRatio).clamp(minScale, s);
     if ((next - s).abs() < 0.001) break;
     s = next;
@@ -420,9 +424,10 @@ double growVerticalFitScale({
   double fillRatio = 0.96,
 }) {
   var s = scale;
-  while (measure(s) < availH * fillRatio && s < maxScale - 0.005) {
+  // One measure() per iteration (see tightenVerticalFitScale).
+  while (s < maxScale - 0.005) {
     final h = measure(s);
-    if (h <= 0) break;
+    if (h >= availH * fillRatio || h <= 0) break;
     final next = (s * availH / h * fillRatio).clamp(s, maxScale);
     if ((next - s).abs() < 0.001) break;
     s = next;
