@@ -38,6 +38,7 @@ import 'image_zoom_dialog.dart';
 // navigability. These parts share this library's imports and private scope.
 part 'previews/text_previews.dart';
 part 'previews/bullets_previews.dart';
+part 'previews/bullets_image_preview.dart';
 part 'previews/checklist_previews.dart';
 part 'previews/table_preview.dart';
 part 'previews/media_previews.dart';
