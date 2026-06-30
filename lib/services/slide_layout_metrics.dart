@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import '../models/slide.dart';
+import '../utils/lru_cache.dart';
 import 'markdown_body_blocks.dart' as md_body;
 import 'text_measurement.dart';
 
@@ -19,9 +20,13 @@ export 'text_measurement.dart' show measureTextHeight, measureTextWidth;
 ///
 /// A given slide is rendered by exactly one preview type, so each key always
 /// maps to the same value type — the `as T` cast on a hit is sound.
-final Map<(Slide, String, double, double, double), Object> _renderLayoutCache =
-    {};
-const int _maxRenderLayoutEntries = 512;
+///
+/// LRU rather than insertion-order eviction so the on-screen working set (the
+/// thumbnails the user is actually looking at, re-read every frame) stays warm
+/// even once a long session has cycled more than the cache's capacity of
+/// distinct slide/geometry combinations through it.
+final LruCache<(Slide, String, double, double, double), Object>
+_renderLayoutCache = LruCache(512);
 
 T memoizedRenderLayout<T extends Object>({
   required Slide slide,
@@ -35,9 +40,6 @@ T memoizedRenderLayout<T extends Object>({
   final cached = _renderLayoutCache[key];
   if (cached != null) return cached as T;
   final value = compute();
-  if (_renderLayoutCache.length >= _maxRenderLayoutEntries) {
-    _renderLayoutCache.remove(_renderLayoutCache.keys.first);
-  }
   _renderLayoutCache[key] = value;
   return value;
 }
