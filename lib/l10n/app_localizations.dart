@@ -19,6 +19,7 @@ part 'translations/da.dart';
 part 'translations/sv.dart';
 part 'translations/hr.dart';
 part 'translations/cs.dart';
+part 'translations/fi.dart';
 
 class AppLocalizations {
   final Locale locale;
@@ -44,6 +45,7 @@ class AppLocalizations {
     Locale('sv'),
     Locale('hr'),
     Locale('cs'),
+    Locale('fi'),
   ];
 
   static const languageNames = {
@@ -65,6 +67,7 @@ class AppLocalizations {
     'sv': 'Svenska',
     'hr': 'Hrvatski',
     'cs': 'Čeština',
+    'fi': 'Suomi',
   };
 
   /// A country flag (emoji) per language, shown in the language pickers. Some
@@ -90,6 +93,7 @@ class AppLocalizations {
     'sv': '🇸🇪',
     'hr': '🇭🇷',
     'cs': '🇨🇿',
+    'fi': '🇫🇮',
   };
 
   // Transliteration to a Latin sort key, so names in other scripts (Greek,
@@ -159,6 +163,7 @@ class AppLocalizations {
     'sv': Locale('sv'),
     'hr': Locale('hr'),
     'cs': Locale('cs'),
+    'fi': Locale('fi'),
   };
 
   static String _activeLanguageCode = 'nl';
@@ -259,6 +264,7 @@ const _strings = {
   'sv': _stringsSv,
   'hr': _stringsHr,
   'cs': _stringsCs,
+  'fi': _stringsFi,
 };
 
 const _dutchSourceStrings = {
@@ -279,6 +285,7 @@ const _dutchSourceStrings = {
   'sv': _dutchSourceSv,
   'hr': _dutchSourceHr,
   'cs': _dutchSourceCs,
+  'fi': _dutchSourceFi,
 };
 
 const _dutchSourceStringAdditions = {
