@@ -84,6 +84,43 @@ void main() {
       final back = AnnotationCodec.decode(json, [edited]);
       expect(back, isEmpty);
     });
+
+    test('round-trips per-page strokes on one rich-text slide', () {
+      final slide = Slide.create(
+        SlideType.bullets,
+      ).copyWith(title: 'Verhaal', listStyle: ListStyle.richText);
+      // Page 0 uses the bare id; later pages get a suffixed key.
+      final ann = {
+        slide.id: [stroke()],
+        annotationKey(slide.id, 1): [stroke(), stroke()],
+      };
+      final json = AnnotationCodec.encode([slide], ann)!;
+      final back = AnnotationCodec.decode(json, [slide]);
+      expect(back[slide.id]!, hasLength(1));
+      expect(back[annotationKey(slide.id, 1)]!, hasLength(2));
+    });
+
+    test('a legacy entry without a page decodes onto page 0', () {
+      final slide = Slide.create(SlideType.bullets).copyWith(title: 'A');
+      // A v1 sidecar never wrote a "page" field.
+      final legacy = AnnotationCodec.encode([slide], {
+        slide.id: [stroke()],
+      })!;
+      expect(legacy, isNot(contains('"page"')));
+      final back = AnnotationCodec.decode(legacy, [slide]);
+      expect(back.keys, [slide.id]);
+    });
+  });
+
+  group('annotationKey', () {
+    test('page 0 is the bare id; later pages are suffixed and reversible', () {
+      expect(annotationKey('abc', 0), 'abc');
+      expect(annotationKey('abc', 2), 'abc#p2');
+      expect(annotationPageForKey('abc', 'abc'), 0);
+      expect(annotationPageForKey('abc#p2', 'abc'), 2);
+      // A key for a different slide id does not match.
+      expect(annotationPageForKey('xyz#p1', 'abc'), isNull);
+    });
   });
 
   group('AnnotationLayer live stroke', () {

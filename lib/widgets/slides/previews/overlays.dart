@@ -17,9 +17,9 @@ class _LogoOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final horizontalInset = size * 0.28;
-    final topInset = size * 0.42;
-    final bottomInset = size * 0.12;
+    final horizontalInset = size * kLogoHorizontalInsetFraction;
+    final topInset = size * kLogoTopInsetFraction;
+    final bottomInset = size * kLogoBottomInsetFraction;
     return Positioned(
       top: position.startsWith('top') ? topInset : null,
       bottom: position.startsWith('bottom') ? bottomInset : null,

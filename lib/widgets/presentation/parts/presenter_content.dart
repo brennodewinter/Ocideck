@@ -19,7 +19,14 @@ extension _PresenterContent on _FullscreenPresenterState {
     final contentW = split
         ? (w - imgFraction * w - hPad * 2).clamp(w * 0.12, w)
         : w - hPad * 2;
-    final contentH = w * 9 / 16 - (split ? w * 0.042 * 2 : w * 0.05 * 2);
+    // Same body height the preview renders at (logo reserve + footer included),
+    // so navigation and the on-screen page badge agree on the page count.
+    final contentH = richTextBodyAvailH(
+      w,
+      slide,
+      widget.themeProfile,
+      splitWithImage: split,
+    );
     return planRichTextForSlide(
       slide: slide,
       profile: widget.themeProfile,
@@ -56,6 +63,9 @@ extension _PresenterContent on _FullscreenPresenterState {
     _rebuild(() => _richTextPage = page);
     _loadUserNoteIntoController();
     _syncAudience();
+    // Annotations are scoped per page, so push this page's strokes to the beamer
+    // — otherwise the audience keeps showing the previous page's marks.
+    _pushInk();
   }
 
   // ── Tijdlijn stap-voor-stap ──────────────────────────────────────────────

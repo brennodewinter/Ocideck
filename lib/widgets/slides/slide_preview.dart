@@ -139,9 +139,7 @@ Color _hexColor(String hex) {
 
 EdgeInsets _logoSafeInsets(double w, ThemeProfile profile) {
   if (profile.logoPath?.isEmpty ?? true) return EdgeInsets.zero;
-  // Reserve just enough to clear the logo plus a small margin (matching the
-  // split-layout reserve). A larger margin needlessly shrinks the text area.
-  final reserved = w * ((profile.logoSize + 24) / 1280);
+  final reserved = logoSafeReserve(w, profile);
   if (profile.logoPosition.startsWith('top')) {
     return EdgeInsets.only(top: reserved);
   }
@@ -156,7 +154,7 @@ double _logoAwareBottomPadding(double defaultPad, double safeBottom) {
 EdgeInsets _splitTextLogoSafeInsets(double w, ThemeProfile profile) {
   if (profile.logoPath?.isEmpty ?? true) return EdgeInsets.zero;
   if (profile.logoPosition.endsWith('right')) return EdgeInsets.zero;
-  final reserved = w * ((profile.logoSize + 24) / 1280);
+  final reserved = logoSafeReserve(w, profile);
   if (profile.logoPosition.startsWith('top')) {
     return EdgeInsets.only(top: reserved);
   }

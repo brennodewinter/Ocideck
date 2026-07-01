@@ -611,10 +611,16 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   double get _toolWidth =>
       _tool == InkTool.highlighter ? _highlighterWidth : _penWidth;
 
-  List<InkStroke> get _currentStrokes {
-    final id = widget.slides[_index.clamp(0, widget.slides.length - 1)].id;
-    return _ink[id] ?? const [];
+  /// The [_ink] key for the slide on screen, scoped to its rich-text page so
+  /// marks drawn on one page of a paginated text slide don't bleed onto the
+  /// next. Page 0 (and every non-paginated slide) keeps the bare slide id.
+  String _currentInkKey() {
+    final slide = widget.slides[_index.clamp(0, widget.slides.length - 1)];
+    final page = slideUsesRichText(slide) ? _richTextPage : 0;
+    return annotationKey(slide.id, page);
   }
+
+  List<InkStroke> get _currentStrokes => _ink[_currentInkKey()] ?? const [];
 
   /// Rebuild helper for the presenter's `part` extensions. Extension methods
   /// cannot call the protected [State.setState] directly, so they route through

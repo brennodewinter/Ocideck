@@ -217,7 +217,11 @@ void main() {
     final panelBottom = tester.getBottomLeft(find.byWidget(codePanel)).dy;
     final slideTop = tester.getTopLeft(find.byType(SlidePreviewWidget)).dy;
 
-    final logoReserve = 800 * ((profile.logoSize + 24) / 1280);
+    // Mirrors _logoReserveExtent: the logo's far edge (its height plus the
+    // 0.12*size bottom inset from _LogoOverlay) plus a small breathing gap, so
+    // the panel clears the whole logo and not just its height.
+    const logoW = 800 * (128 / 1280);
+    const logoReserve = logoW * 1.12 + 800 * 0.014;
     expect(panelBottom, greaterThan(slideTop + 450 - logoReserve - 2));
     expect(panelBottom, lessThanOrEqualTo(slideTop + 450 - logoReserve + 2));
     expect(tester.takeException(), isNull);
