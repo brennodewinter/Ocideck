@@ -81,6 +81,8 @@ flutter:
     - assets/images/de-winter-wittegeheel.png
     - assets/themes/ocideck.css
     - assets/web_export/
+    # Full EUPL 1.2 licence text, shown verbatim in the consent screen.
+    - LICENSE.md
   fonts:
     - family: EB Garamond
       fonts:
