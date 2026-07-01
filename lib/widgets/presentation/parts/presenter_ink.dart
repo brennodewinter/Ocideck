@@ -20,12 +20,12 @@ extension _PresenterInk on _FullscreenPresenterState {
   }
 
   void _onStrokesChanged(List<InkStroke> strokes) {
-    final id = widget.slides[_index.clamp(0, widget.slides.length - 1)].id;
+    final key = _currentInkKey();
     _rebuild(() {
       if (strokes.isEmpty) {
-        _ink.remove(id);
+        _ink.remove(key);
       } else {
-        _ink[id] = strokes;
+        _ink[key] = strokes;
       }
     });
     widget.onAnnotationsChanged?.call(_ink);
@@ -85,9 +85,9 @@ extension _PresenterInk on _FullscreenPresenterState {
   }
 
   void _clearCurrentInk() {
-    final id = widget.slides[_index.clamp(0, widget.slides.length - 1)].id;
-    if (!_ink.containsKey(id)) return;
-    _rebuild(() => _ink.remove(id));
+    final key = _currentInkKey();
+    if (!_ink.containsKey(key)) return;
+    _rebuild(() => _ink.remove(key));
     widget.onAnnotationsChanged?.call(_ink);
     _pushInk();
   }

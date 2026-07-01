@@ -35,6 +35,13 @@ extension _PresenterViews on _FullscreenPresenterState {
                   onLinkTap: openExternalUrl,
                   slideNumber: _index + 1,
                   slideCount: widget.slides.length,
+                  numberStart: numberedListStartFor(widget.slides, _index),
+                  fitScaleOverride: sharedSplitFitScale(
+                    widget.slides,
+                    _index,
+                    widget.themeProfile,
+                    widget.themeProfile.fontFamily,
+                  ),
                   richTextPage: _richTextPage,
                   showRichTextPageControls:
                       (_richTextPlanFor(slide)?.pageCount ?? 1) > 1,
@@ -81,10 +88,11 @@ extension _PresenterViews on _FullscreenPresenterState {
                 // Annotatielaag bovenop de dia. Laat klikken door wanneer er
                 // geen gereedschap actief is (zodat tikken blijft doorbladeren).
                 AnnotationLayer(
-                  // Keyed by slide so a slide change (e.g. auto-advance) while a
-                  // stroke is in progress resets the layer instead of committing
-                  // the half-drawn stroke onto the next slide.
-                  key: ValueKey(slide.id),
+                  // Keyed by slide *and* rich-text page so a slide change (e.g.
+                  // auto-advance) or a page turn while a stroke is in progress
+                  // resets the layer instead of committing the half-drawn stroke
+                  // onto the next slide/page.
+                  key: ValueKey(_currentInkKey()),
                   strokes: _currentStrokes,
                   tool: _tableEditMode ? null : _tool,
                   color: _inkColor,
@@ -204,6 +212,12 @@ extension _PresenterViews on _FullscreenPresenterState {
                               showClassificationWatermark:
                                   widget.showClassificationWatermark,
                               presentationMode: true,
+                              fitScaleOverride: sharedSplitFitScale(
+                                widget.slides,
+                                _index + 1,
+                                widget.themeProfile,
+                                widget.themeProfile.fontFamily,
+                              ),
                             ),
                           )
                         : Container(

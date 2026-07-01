@@ -73,7 +73,12 @@ const double kTextDensityCriticalScale = 0.20;
 double bulletScaleCap(double w, double bulletSize, double layoutMax) =>
     math.min(layoutMax, kBulletMaxFontFraction * w / bulletSize);
 
-String bulletListMarker(List<String> items, int index, ListStyle style) {
+String bulletListMarker(
+  List<String> items,
+  int index,
+  ListStyle style, {
+  int startNumber = 1,
+}) {
   int levelOf(String item) {
     var level = 0;
     while (level < item.length && item[level] == '\t') {
@@ -94,7 +99,35 @@ String bulletListMarker(List<String> items, int index, ListStyle style) {
     if (itemLevel == level) number++;
     if (itemLevel < level) number = 0;
   }
+  // Only the top level continues across slides ([startNumber]); nested levels
+  // always restart under their parent.
+  if (level == 0) number += startNumber - 1;
   return '$number.';
+}
+
+/// Whether [slide] renders a numbered list that can start/continue a chain.
+bool isNumberedListSlide(Slide slide) =>
+    (slide.type == SlideType.bullets ||
+        slide.type == SlideType.bulletsImage) &&
+    slide.listStyle == ListStyle.numbered;
+
+/// Number of top-level (non-indented, non-empty) items in [slide]'s list —
+/// the count that a following slide continues past.
+int _topLevelNumberedCount(Slide slide) => slide.bullets
+    .where((b) => b.trimLeft().isNotEmpty && !b.startsWith('\t'))
+    .length;
+
+/// The first number a numbered list should show on slide [index]. Returns 1
+/// unless the slide opts in via [Slide.continueNumbering] and the preceding
+/// slide is itself a numbered list, in which case it continues past that
+/// slide's last number (walking the whole chain of continued slides).
+int numberedListStartFor(List<Slide> slides, int index) {
+  if (index <= 0 || index >= slides.length) return 1;
+  final slide = slides[index];
+  if (!slide.continueNumbering || !isNumberedListSlide(slide)) return 1;
+  final prev = slides[index - 1];
+  if (!isNumberedListSlide(prev)) return 1;
+  return numberedListStartFor(slides, index - 1) + _topLevelNumberedCount(prev);
 }
 
 String _bulletMarkerForLevel(int level) {
@@ -351,6 +384,7 @@ double bulletsSlideFitScale({
   required Slide slide,
   required String font,
   bool includeChecklistProgress = true,
+  double extraVReserve = 0,
 }) {
   final w = kReferenceSlideWidth;
   final pad = w * 0.07;
@@ -374,7 +408,9 @@ double bulletsSlideFitScale({
   final textAvailW = showProgress
       ? (availW - progressGap - progressW).clamp(w * 0.12, availW)
       : availW;
-  final availH = slideHeight - vPad * 2;
+  // [extraVReserve] (e.g. a logo strip) is a fraction of [kReferenceSlideWidth],
+  // so it scales with the reference geometry like every other measure here.
+  final availH = (slideHeight - vPad * 2 - extraVReserve).clamp(1.0, slideHeight);
 
   return bulletsFitScale(
     availW: textAvailW,
@@ -395,7 +431,11 @@ double bulletsSlideFitScale({
 }
 
 /// Layout metrics for a two-column bullets slide.
-double twoBulletsSlideFitScale({required Slide slide, required String font}) {
+double twoBulletsSlideFitScale({
+  required Slide slide,
+  required String font,
+  double extraVReserve = 0,
+}) {
   final w = kReferenceSlideWidth;
   final pad = w * 0.07;
   final vPad = w * 0.05;
@@ -420,7 +460,7 @@ double twoBulletsSlideFitScale({required Slide slide, required String font}) {
   final slideHeight = w * 9 / 16;
   final contentW = (w - pad * 2).clamp(w * 0.12, w);
   final columnW = ((contentW - columnGap) / 2).clamp(w * 0.12, w);
-  var availH = slideHeight - vPad * 2;
+  var availH = slideHeight - vPad * 2 - extraVReserve;
   if (slide.title.isNotEmpty) {
     availH -= measureTextHeight(
       slide.title,

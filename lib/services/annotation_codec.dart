@@ -50,13 +50,26 @@ class AnnotationCodec {
   ) {
     final entries = <Map<String, dynamic>>[];
     for (var i = 0; i < slides.length; i++) {
-      final strokes = annotations[slides[i].id];
-      if (strokes == null || strokes.isEmpty) continue;
-      entries.add({
-        'index': i,
-        'fp': fingerprint(slides[i]),
-        'strokes': encodeStrokes(strokes),
-      });
+      final id = slides[i].id;
+      // A rich-text slide keys its strokes per page (id, id#p1, id#p2, …), so
+      // gather every page that belongs to this slide, not just the bare id.
+      final byPage = <int, List<InkStroke>>{};
+      for (final e in annotations.entries) {
+        final page = annotationPageForKey(e.key, id);
+        if (page != null && e.value.isNotEmpty) byPage[page] = e.value;
+      }
+      if (byPage.isEmpty) continue;
+      final fp = fingerprint(slides[i]);
+      final pages = byPage.keys.toList()..sort();
+      for (final page in pages) {
+        entries.add({
+          'index': i,
+          'fp': fp,
+          // Omit page 0 so a single-page deck round-trips byte-identically.
+          if (page > 0) 'page': page,
+          'strokes': encodeStrokes(byPage[page]!),
+        });
+      }
     }
     if (entries.isEmpty) return null;
     return jsonEncode({'version': version, 'slides': entries});
@@ -69,33 +82,47 @@ class AnnotationCodec {
     try {
       final data = jsonDecode(json);
       final raw = (data is Map ? data['slides'] : null) as List? ?? const [];
-      final used = <int>{};
+      // Track claimed (slide, page) keys — one slide legitimately carries
+      // several entries (one per rich-text page), so we disambiguate on the
+      // composite key rather than the slide index.
+      final used = <String>{};
       for (final e in raw) {
         final entry = Map<String, dynamic>.from(e as Map);
         final fp = entry['fp'] as String?;
         final index = (entry['index'] as num?)?.toInt() ?? -1;
+        final page = (entry['page'] as num?)?.toInt() ?? 0;
         final strokes = decodeStrokes((entry['strokes'] as List?) ?? const []);
         if (strokes.isEmpty) continue;
 
-        int target = -1;
+        // The free key for slide [i] at this entry's page, or null if taken.
+        String? keyFor(int i) {
+          final key = annotationKey(slides[i].id, page);
+          return used.contains(key) ? null : key;
+        }
+
+        String? target;
         // Prefer the same index when its fingerprint still matches.
         if (index >= 0 &&
             index < slides.length &&
-            !used.contains(index) &&
             fingerprint(slides[index]) == fp) {
-          target = index;
-        } else {
-          // Otherwise re-anchor to any unused slide with the same fingerprint.
+          target = keyFor(index);
+        }
+        if (target == null) {
+          // Otherwise re-anchor to any slide with the same fingerprint whose
+          // slot for this page is still free.
           for (var i = 0; i < slides.length; i++) {
-            if (!used.contains(i) && fingerprint(slides[i]) == fp) {
-              target = i;
-              break;
+            if (fingerprint(slides[i]) == fp) {
+              final key = keyFor(i);
+              if (key != null) {
+                target = key;
+                break;
+              }
             }
           }
         }
-        if (target < 0) continue; // slide gone/changed → drop these strokes
+        if (target == null) continue; // slide gone/changed → drop these strokes
         used.add(target);
-        result[slides[target].id] = strokes;
+        result[target] = strokes;
       }
     } catch (e, s) {
       logError('AnnotationCodec.decode: decode annotation sidecar JSON', e, s);

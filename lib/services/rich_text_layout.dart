@@ -259,63 +259,6 @@ RichTextLayoutPlan planRichTextLayout({
   );
 }
 
-/// Best scale for one paginated rich-text page, growing to fill [budget].
-double richTextScaleForPage({
-  required RichTextLayoutPlan plan,
-  required int pageIndex,
-  required double budget,
-  required double availW,
-  required double refW,
-  required bool hasTitle,
-  required String title,
-  required String subtitle,
-  required double titleSize,
-  required double subtitleSize,
-  required double spacing,
-  required double bodySize,
-  required String font,
-  required double maxScale,
-  bool titleOnFirstPageOnly = true,
-}) {
-  final blocks = parseMarkdownBodyBlocks(plan.markdownForPage(pageIndex));
-  final includeHeader = !titleOnFirstPageOnly || pageIndex == 0;
-
-  double measurePageAt(double scale) {
-    var h = 0.0;
-    if (includeHeader) {
-      h += _headerHeight(
-        scale: scale,
-        contentW: availW,
-        hasTitle: hasTitle,
-        title: title,
-        subtitle: subtitle,
-        titleSize: titleSize,
-        subtitleSize: subtitleSize,
-        spacing: spacing,
-        font: font,
-        hasBody: blocks.any((b) => b.markdown.trim().isNotEmpty),
-      );
-    }
-    h += measureMarkdownBlocksHeight(
-      blocks: blocks,
-      scale: scale,
-      contentW: availW,
-      refW: refW,
-      bodySize: bodySize,
-      font: font,
-    );
-    return h;
-  }
-
-  return maxVerticalFitScale(
-    availH: budget,
-    refW: refW,
-    measure: measurePageAt,
-    minScale: kTextDensityCriticalScale,
-    maxScale: maxScale,
-  );
-}
-
 RichTextLayoutPlan planRichTextForSlide({
   required Slide slide,
   required ThemeProfile profile,
@@ -364,6 +307,58 @@ bool slideUsesRichText(Slide slide) =>
         slide.type == SlideType.bulletsImage ||
         slide.type == SlideType.freeMarkdown);
 
+// Logo placement insets from the slide edge, as a fraction of the logo's own
+// size — the single source of truth shared by the logo overlay (which positions
+// it) and the safe-inset reserve below (which keeps text off it).
+const double kLogoHorizontalInsetFraction = 0.28;
+const double kLogoTopInsetFraction = 0.42;
+const double kLogoBottomInsetFraction = 0.12;
+
+/// Vertical space a shown logo reserves from its slide edge: the logo's far edge
+/// (its size plus the top/bottom inset) with a small breathing gap, so text
+/// clears the whole logo and not just its height. 0 when the profile has no logo.
+double logoSafeReserve(double w, ThemeProfile profile) {
+  if (profile.logoPath?.isEmpty ?? true) return 0;
+  final size = w * (profile.logoSize / 1280);
+  final edgeInset = profile.logoPosition.startsWith('top')
+      ? kLogoTopInsetFraction
+      : kLogoBottomInsetFraction;
+  return size * (1 + edgeInset) + w * 0.014;
+}
+
+/// The rich-text/bullets body height for [slide] at 16:9 width [w], after the
+/// top/bottom padding the preview applies — including the logo-safe reserve and
+/// footer clearance. Shared by the rendered pagination and the presenter's
+/// page-count/navigation math so they never disagree on how many pages a slide
+/// has (a disagreement would, e.g., render a "1 / 2" badge that navigation can't
+/// page past).
+double richTextBodyAvailH(
+  double w,
+  Slide slide,
+  ThemeProfile profile, {
+  required bool splitWithImage,
+}) {
+  final vPad = splitWithImage ? w * 0.042 : w * 0.05;
+  final reserve = slide.showLogo ? logoSafeReserve(w, profile) : 0.0;
+  // A split (text+image) layout puts the text column beside a right-hand image,
+  // so a right-side logo sits over the image and needs no text reserve (mirrors
+  // the preview's split-layout safe insets).
+  final effReserve =
+      (splitWithImage && profile.logoPosition.endsWith('right'))
+      ? 0.0
+      : reserve;
+  final isTop = profile.logoPosition.startsWith('top');
+  final topPad = vPad + (isTop ? effReserve : 0.0);
+  final bottomPad = bulletsSlideBottomInset(
+    w: w,
+    slide: slide,
+    profile: profile,
+    defaultBottomPad: vPad,
+    safeBottom: isTop ? 0.0 : effReserve,
+  );
+  return (w * 9 / 16 - topPad - bottomPad).clamp(1.0, w * 9 / 16);
+}
+
 /// Page count for a rich-text slide at reference slide dimensions.
 int richTextPageCountForSlide({
   required Slide slide,
@@ -382,14 +377,12 @@ int richTextPageCountForSlide({
   final contentW = splitWithImage
       ? (w - imgFraction * w - hPad * 2).clamp(w * 0.12, w)
       : w - hPad * 2;
-  final topPad = splitWithImage ? w * 0.042 : w * 0.05;
-  final bottomPad = bulletsSlideBottomInset(
-    w: w,
-    slide: slide,
-    profile: profile,
-    defaultBottomPad: topPad,
+  final contentH = richTextBodyAvailH(
+    w,
+    slide,
+    profile,
+    splitWithImage: splitWithImage,
   );
-  final contentH = w * 9 / 16 - topPad - bottomPad;
   return planRichTextForSlide(
     slide: slide,
     profile: profile,

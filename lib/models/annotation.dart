@@ -60,6 +60,22 @@ class InkStroke {
   }
 }
 
+/// The annotation-map key for one page of a slide. Page 0 (and every slide that
+/// doesn't paginate) keeps the bare slide id, so single-page annotations and
+/// older sidecars keep matching; later pages of a rich-text slide — which all
+/// share one slide id — get a distinct suffix so marks don't bleed across pages.
+String annotationKey(String slideId, int page) =>
+    page <= 0 ? slideId : '$slideId#p$page';
+
+/// The page a [key] refers to for slide [slideId], or null when the key belongs
+/// to a different slide. Inverse of [annotationKey]: `id` → 0, `id#pN` → N.
+int? annotationPageForKey(String key, String slideId) {
+  if (key == slideId) return 0;
+  final prefix = '$slideId#p';
+  if (!key.startsWith(prefix)) return null;
+  return int.tryParse(key.substring(prefix.length));
+}
+
 /// Encode/decode a per-slide map of strokes keyed by slide id.
 List<Map<String, dynamic>> encodeStrokes(List<InkStroke> strokes) => [
   for (final s in strokes) s.toJson(),

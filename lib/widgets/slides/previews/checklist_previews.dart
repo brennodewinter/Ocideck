@@ -183,6 +183,9 @@ class _ChecklistBulletRow extends StatelessWidget {
   final String font;
   final ThemeProfile profile;
 
+  /// First number for a numbered list (continues a chain across slides).
+  final int startNumber;
+
   const _ChecklistBulletRow({
     required this.bullets,
     required this.itemIndex,
@@ -198,6 +201,7 @@ class _ChecklistBulletRow extends StatelessWidget {
     required this.scale,
     required this.font,
     required this.profile,
+    this.startNumber = 1,
   });
 
   @override
@@ -236,7 +240,7 @@ class _ChecklistBulletRow extends StatelessWidget {
                       color: _hexColor(profile.accentColor),
                     )
                   : Text(
-                      '${bulletListMarker(bullets, itemIndex, listStyle)} ',
+                      '${bulletListMarker(bullets, itemIndex, listStyle, startNumber: startNumber)} ',
                       style: TextStyle(
                         fontSize: fontSize,
                         color: _hexColor(profile.accentColor),

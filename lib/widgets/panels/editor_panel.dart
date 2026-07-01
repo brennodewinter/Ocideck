@@ -5,6 +5,7 @@ import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../models/timeline.dart';
 import '../../services/image_service.dart';
+import '../../services/slide_layout_metrics.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/settings_provider.dart';
@@ -100,6 +101,8 @@ class EditorPanel extends ConsumerWidget {
                   },
                   themeAnimationDurationMs:
                       deck.themeProfile.animationDurationMs,
+                  previousSlideIsNumbered:
+                      idx > 0 && isNumberedListSlide(deck.slides[idx - 1]),
                   nestedInScrollView: true,
                   onSplitVideo: (atMs) {
                     deckNotifier.splitVideoSlide(idx, atMs);
@@ -269,6 +272,7 @@ class EditorPanel extends ConsumerWidget {
     String? captionBasePath,
     ValueChanged<List<Slide>> onAddChartVariants, {
     required int themeAnimationDurationMs,
+    bool previousSlideIsNumbered = false,
     bool nestedInScrollView = false,
     void Function(int atMs)? onSplitVideo,
   }) {
@@ -281,6 +285,7 @@ class EditorPanel extends ConsumerWidget {
         captionBasePath: captionBasePath,
         onAddChartVariants: onAddChartVariants,
         themeAnimationDurationMs: themeAnimationDurationMs,
+        previousSlideIsNumbered: previousSlideIsNumbered,
         nestedInScrollView: nestedInScrollView,
         onSplitVideo: onSplitVideo,
       ),

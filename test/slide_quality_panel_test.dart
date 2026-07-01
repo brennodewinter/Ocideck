@@ -75,6 +75,31 @@ void main() {
     expect(find.textContaining('waarschuwing(en)'), findsOneWidget);
   });
 
+  testWidgets('offers a Splits slide action that splits a dense bullet slide', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_host(overfullDeck()));
+    await tester.pump();
+    // Expand the panel so the issue tiles (and the split action) are shown.
+    await tester.tap(find.textContaining('Slidekwaliteit'));
+    await tester.pump();
+
+    final splitButton = find.widgetWithText(TextButton, 'Splits slide');
+    expect(splitButton, findsWidgets);
+
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(SlideQualityPanel)),
+    );
+    expect(container.read(deckProvider).deck!.slides.length, 1);
+
+    await tester.ensureVisible(splitButton.first);
+    await tester.tap(splitButton.first);
+    await tester.pump();
+
+    // The overfull slide is split into two.
+    expect(container.read(deckProvider).deck!.slides.length, 2);
+  });
+
   testWidgets('green bar lists the checks that were performed', (tester) async {
     final cleanDeck = Deck(
       title: 'Schoon',

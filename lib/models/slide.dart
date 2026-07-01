@@ -134,6 +134,20 @@ class Slide {
   final ListStyle listStyle;
   final bool showChecklistProgress;
 
+  /// For a numbered list: continue counting from where the previous slide's
+  /// numbered list left off (e.g. a list split across two slides runs 1–6 then
+  /// 7–9) instead of restarting at 1. Only meaningful on a numbered
+  /// bullets/bulletsImage slide whose previous slide is also numbered.
+  final bool continueNumbering;
+
+  /// Marks this slide as a continuation half produced by splitting a bullet
+  /// slide. All members of a split run (the original plus its continuations)
+  /// render their text at one shared font scale — the size of the fullest half
+  /// — so the reader never sees the same list change size across pages. Set on
+  /// every half after the first; round-trips as an `ocideck_continue_split`
+  /// comment. Independent of [continueNumbering] (numbering vs sizing).
+  final bool continuesSplit;
+
   /// Optional headings above the two bullet columns (twoBullets only). Empty =
   /// no heading for that column.
   final String columnTitle1;
@@ -210,6 +224,8 @@ class Slide {
     this.bullets2 = const [],
     this.listStyle = ListStyle.bullets,
     this.showChecklistProgress = false,
+    this.continueNumbering = false,
+    this.continuesSplit = false,
     this.columnTitle1 = '',
     this.columnTitle2 = '',
     this.imagePath = '',
@@ -282,6 +298,8 @@ class Slide {
       bullets2: List<String>.from(src.bullets2),
       listStyle: src.listStyle,
       showChecklistProgress: src.showChecklistProgress,
+      continueNumbering: src.continueNumbering,
+      continuesSplit: src.continuesSplit,
       columnTitle1: src.columnTitle1,
       columnTitle2: src.columnTitle2,
       imagePath: src.imagePath,
@@ -325,6 +343,8 @@ class Slide {
     List<String>? bullets2,
     ListStyle? listStyle,
     bool? showChecklistProgress,
+    bool? continueNumbering,
+    bool? continuesSplit,
     String? columnTitle1,
     String? columnTitle2,
     String? imagePath,
@@ -370,6 +390,8 @@ class Slide {
       listStyle: listStyle ?? this.listStyle,
       showChecklistProgress:
           showChecklistProgress ?? this.showChecklistProgress,
+      continueNumbering: continueNumbering ?? this.continueNumbering,
+      continuesSplit: continuesSplit ?? this.continuesSplit,
       columnTitle1: columnTitle1 ?? this.columnTitle1,
       columnTitle2: columnTitle2 ?? this.columnTitle2,
       imagePath: imagePath ?? this.imagePath,

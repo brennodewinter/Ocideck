@@ -11,6 +11,7 @@ Future<void> showSlideQualityDetailsDialog(
   required SlideQualityResult result,
   void Function(SlideQualityIssue issue)? onIssueTap,
   void Function(SlideQualityIssue issue)? onFix,
+  VoidCallback? Function(SlideQualityIssue issue)? splitActionFor,
 }) {
   final l10n = context.l10n;
   return showDialog<void>(
@@ -40,6 +41,7 @@ Future<void> showSlideQualityDetailsDialog(
                       issues: result.issuesWithSeverity(severity).toList(),
                       onIssueTap: onIssueTap,
                       onFix: onFix,
+                      splitActionFor: splitActionFor,
                     ),
               ],
             ),
@@ -62,6 +64,7 @@ class _SeveritySection extends StatelessWidget {
   final List<SlideQualityIssue> issues;
   final void Function(SlideQualityIssue issue)? onIssueTap;
   final void Function(SlideQualityIssue issue)? onFix;
+  final VoidCallback? Function(SlideQualityIssue issue)? splitActionFor;
 
   const _SeveritySection({
     required this.l10n,
@@ -69,6 +72,7 @@ class _SeveritySection extends StatelessWidget {
     required this.issues,
     this.onIssueTap,
     this.onFix,
+    this.splitActionFor,
   });
 
   @override
@@ -136,6 +140,28 @@ class _SeveritySection extends StatelessWidget {
                         },
                         icon: const Icon(Icons.auto_fix_high, size: 14),
                         label: Text(l10n.d('Herstel')),
+                        style: TextButton.styleFrom(
+                          foregroundColor: color,
+                          visualDensity: VisualDensity.compact,
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          minimumSize: const Size(0, 28),
+                          textStyle: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  if (splitActionFor?.call(issue) case final split?)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 6),
+                      child: TextButton.icon(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          split();
+                        },
+                        icon: const Icon(Icons.call_split, size: 14),
+                        label: Text(l10n.d('Splits slide')),
                         style: TextButton.styleFrom(
                           foregroundColor: color,
                           visualDensity: VisualDensity.compact,

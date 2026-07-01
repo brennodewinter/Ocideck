@@ -134,6 +134,59 @@ void main() {
       expect(markdown, contains('2. Daarna'));
     });
 
+    test('continue-numbering round-trips (default stays clean)', () {
+      final service = MarkdownService();
+      Slide roundTrip(bool cont) => service
+          .parseDeck(
+            service.generateDeck(
+              Deck(
+                title: 'Demo',
+                slides: [
+                  Slide.create(SlideType.bullets).copyWith(
+                    bullets: ['a'],
+                    listStyle: ListStyle.numbered,
+                    continueNumbering: cont,
+                  ),
+                ],
+              ),
+            ),
+          )!
+          .slides
+          .single;
+      // Off is the default and leaves no marker; on round-trips.
+      expect(roundTrip(false).continueNumbering, isFalse);
+      expect(roundTrip(true).continueNumbering, isTrue);
+    });
+
+    test('continue-split round-trips on bullets and two-column slides', () {
+      // Default off leaves no marker; the split continuation flag survives a
+      // save/open on both a plain bullets slide and a two-column slide.
+      expect(
+        _roundTrip(
+          Slide.create(SlideType.bullets).copyWith(bullets: ['a', 'b']),
+        ).continuesSplit,
+        isFalse,
+      );
+      expect(
+        _roundTrip(
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(bullets: ['a', 'b'], continuesSplit: true),
+        ).continuesSplit,
+        isTrue,
+      );
+      expect(
+        _roundTrip(
+          Slide.create(SlideType.twoBullets).copyWith(
+            bullets: ['a'],
+            bullets2: ['b'],
+            continuesSplit: true,
+          ),
+        ).continuesSplit,
+        isTrue,
+      );
+    });
+
     test('checklist style and checked items round-trip', () {
       final service = MarkdownService();
       final markdown = service.generateDeck(

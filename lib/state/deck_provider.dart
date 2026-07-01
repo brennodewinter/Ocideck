@@ -93,6 +93,21 @@ class DeckState {
   }
 }
 
+/// Whether [DeckNotifier.splitSlide] would actually split [slide]: a bullet
+/// slide type with at least two bullets to divide. Mirrors the guards in
+/// `_splitSlide`, so the UI can offer a "split" action exactly when it works.
+bool canSplitSlide(Slide slide) {
+  switch (slide.type) {
+    case SlideType.bullets:
+    case SlideType.bulletsImage:
+      return slide.bullets.length >= 2;
+    case SlideType.twoBullets:
+      return slide.bullets.length >= 2 || slide.bullets2.length >= 2;
+    default:
+      return false;
+  }
+}
+
 // ── DeckNotifier ─────────────────────────────────────────────────────────────
 
 class DeckNotifier extends StateNotifier<DeckState> {
@@ -359,9 +374,23 @@ class DeckNotifier extends StateNotifier<DeckState> {
             ? kChecklistBulletWarningCount
             : kSingleColumnBulletWarningCount;
         final at = keepFor(counts.left, bullets.length, limit);
+        var second = Slide.duplicate(
+          slide,
+        ).copyWith(bullets: bullets.sublist(at), continuesSplit: true);
+        // The image is the anchor of the first page only: a continuation page
+        // is pure text, so it drops the image and becomes a plain bullets slide
+        // (full width) rather than repeating the visual.
+        if (slide.type == SlideType.bulletsImage) {
+          second = second.copyWith(
+            type: SlideType.bullets,
+            imagePath: '',
+            imageCaption: '',
+            imageSize: 0,
+          );
+        }
         return (
           first: slide.copyWith(bullets: bullets.sublist(0, at)),
-          second: Slide.duplicate(slide).copyWith(bullets: bullets.sublist(at)),
+          second: second,
         );
       case SlideType.twoBullets:
         final left = slide.bullets;
@@ -379,6 +408,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
           second: Slide.duplicate(slide).copyWith(
             bullets: left.sublist(leftAt),
             bullets2: right.sublist(rightAt),
+            continuesSplit: true,
           ),
         );
       default:

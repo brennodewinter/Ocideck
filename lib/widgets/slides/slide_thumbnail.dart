@@ -34,6 +34,10 @@ class SlideThumbnail extends ConsumerWidget {
   /// Persoonlijke gebruikersnotities (sidecar), los van sprekersnotities.
   final bool hasUserNotes;
 
+  /// Shared font scale when this slide is one page of a split run, so the rail
+  /// matches the main preview (see [SlidePreviewWidget.fitScaleOverride]).
+  final double? fitScaleOverride;
+
   const SlideThumbnail({
     super.key,
     required this.slide,
@@ -52,6 +56,7 @@ class SlideThumbnail extends ConsumerWidget {
     this.slideCount = 1,
     this.tlp = TlpLevel.none,
     this.organization = '',
+    this.fitScaleOverride,
   });
 
   @override
@@ -163,6 +168,7 @@ class SlideThumbnail extends ConsumerWidget {
                       .cockpitColorScheme,
                   slideNumber: index + 1,
                   slideCount: slideCount,
+                  fitScaleOverride: fitScaleOverride,
                   tlp: tlp,
                   organization: organization,
                   showClassificationWatermark: showWatermark,

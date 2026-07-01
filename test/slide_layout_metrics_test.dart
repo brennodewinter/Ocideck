@@ -41,6 +41,57 @@ void main() {
       expect(bulletListMarker(items, 2, ListStyle.numbered), '1.');
       expect(bulletListMarker(items, 3, ListStyle.numbered), '3.');
     });
+
+    test('startNumber offsets only the top level, not nested items', () {
+      final items = ['een', '\tsub', 'twee'];
+      expect(bulletListMarker(items, 0, ListStyle.numbered, startNumber: 7),
+          '7.');
+      // Nested items keep their own 1-based count regardless of the offset.
+      expect(bulletListMarker(items, 1, ListStyle.numbered, startNumber: 7),
+          '1.');
+      expect(bulletListMarker(items, 2, ListStyle.numbered, startNumber: 7),
+          '8.');
+    });
+  });
+
+  group('numberedListStartFor', () {
+    Slide numbered(List<String> bullets, {bool continueNumbering = false}) =>
+        Slide.create(SlideType.bullets).copyWith(
+          listStyle: ListStyle.numbered,
+          continueNumbering: continueNumbering,
+          bullets: bullets,
+        );
+
+    test('first slide and non-continuing slides start at 1', () {
+      final slides = [numbered(['a', 'b']), numbered(['c'])];
+      expect(numberedListStartFor(slides, 0), 1);
+      expect(numberedListStartFor(slides, 1), 1); // continueNumbering is false
+    });
+
+    test('a continuing slide resumes past the previous slide count', () {
+      final slides = [
+        numbered(['a', 'b', 'c']),
+        numbered(['d', 'e'], continueNumbering: true),
+      ];
+      expect(numberedListStartFor(slides, 1), 4);
+    });
+
+    test('the offset accumulates along a chain of continuing slides', () {
+      final slides = [
+        numbered(['a', 'b']),
+        numbered(['c', 'd', 'e'], continueNumbering: true),
+        numbered(['f'], continueNumbering: true),
+      ];
+      expect(numberedListStartFor(slides, 2), 6); // 1 + 2 + 3
+    });
+
+    test('does not continue when the previous slide is not numbered', () {
+      final slides = [
+        Slide.create(SlideType.bullets).copyWith(bullets: ['a', 'b']),
+        numbered(['c'], continueNumbering: true),
+      ];
+      expect(numberedListStartFor(slides, 1), 1);
+    });
   });
 
   group('tableColumnFlexWeights', () {

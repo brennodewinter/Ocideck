@@ -112,6 +112,70 @@ void main() {
     });
   });
 
+  group('logo-safe geometry', () {
+    const w = kReferenceSlideWidth;
+    Slide richSlide(int paras) => Slide.create(SlideType.bullets).copyWith(
+      title: 'Titel',
+      listStyle: ListStyle.richText,
+      customMarkdown: List.generate(
+        paras,
+        (i) => 'Alinea $i met wat tekst om hoogte op te bouwen.',
+      ).join('\n\n'),
+    );
+    const noLogo = ThemeProfile();
+    const bottomLogo = ThemeProfile(
+      logoPath: 'logo.png',
+      logoPosition: 'bottom-right',
+      logoSize: 160,
+    );
+
+    test('logoSafeReserve clears the logo far edge, zero without a logo', () {
+      expect(logoSafeReserve(w, noLogo), 0);
+      // Bottom logo: size*(1+0.12) + w*0.014.
+      const size = w * (160 / 1280);
+      expect(logoSafeReserve(w, bottomLogo), closeTo(size * 1.12 + w * 0.014, 1e-6));
+    });
+
+    test('a shown logo shrinks the rich-text body height', () {
+      final slide = richSlide(6);
+      final withLogo = richTextBodyAvailH(
+        w,
+        slide,
+        bottomLogo,
+        splitWithImage: false,
+      );
+      final without = richTextBodyAvailH(
+        w,
+        slide,
+        noLogo,
+        splitWithImage: false,
+      );
+      expect(withLogo, lessThan(without));
+    });
+
+    test('page count accounts for the logo reserve', () {
+      // Content tuned to sit right at the one-page boundary: reserving logo
+      // space must push it onto a second page, matching what the preview draws.
+      Slide slide(int p) => richSlide(p);
+      var paras = 1;
+      // Find a paragraph count that still fits on one page without a logo.
+      while (paras < 40 &&
+          richTextPageCountForSlide(slide: slide(paras), profile: noLogo) == 1) {
+        paras++;
+      }
+      final borderline = slide(paras - 1); // fits on one page, no logo
+      expect(
+        richTextPageCountForSlide(slide: borderline, profile: noLogo),
+        1,
+      );
+      // The same slide with a large logo needs the reserved strip → 2 pages.
+      expect(
+        richTextPageCountForSlide(slide: borderline, profile: bottomLogo),
+        greaterThan(1),
+      );
+    });
+  });
+
   group('planRichTextForSlide', () {
     test('respects footer inset for bullets rich-text slides', () {
       const w = kReferenceSlideWidth;

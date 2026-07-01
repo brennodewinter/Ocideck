@@ -9,6 +9,7 @@ import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../services/rich_text_layout.dart';
+import '../../services/slide_layout_metrics.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
@@ -339,6 +340,13 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                   onLinkTap: openExternalUrl,
                   slideNumber: idx + 1,
                   slideCount: deck.slides.length,
+                  numberStart: numberedListStartFor(deck.slides, idx),
+                  fitScaleOverride: sharedSplitFitScale(
+                    deck.slides,
+                    idx,
+                    deck.themeProfile,
+                    deck.themeProfile.fontFamily,
+                  ),
                   richTextPage: richTextPage,
                   showRichTextPageControls: hasRichTextPages,
                   onRichTextPageChanged: hasRichTextPages

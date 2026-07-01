@@ -139,9 +139,7 @@ Color _hexColor(String hex) {
 
 EdgeInsets _logoSafeInsets(double w, ThemeProfile profile) {
   if (profile.logoPath?.isEmpty ?? true) return EdgeInsets.zero;
-  // Reserve just enough to clear the logo plus a small margin (matching the
-  // split-layout reserve). A larger margin needlessly shrinks the text area.
-  final reserved = w * ((profile.logoSize + 24) / 1280);
+  final reserved = logoSafeReserve(w, profile);
   if (profile.logoPosition.startsWith('top')) {
     return EdgeInsets.only(top: reserved);
   }
@@ -156,11 +154,77 @@ double _logoAwareBottomPadding(double defaultPad, double safeBottom) {
 EdgeInsets _splitTextLogoSafeInsets(double w, ThemeProfile profile) {
   if (profile.logoPath?.isEmpty ?? true) return EdgeInsets.zero;
   if (profile.logoPosition.endsWith('right')) return EdgeInsets.zero;
-  final reserved = w * ((profile.logoSize + 24) / 1280);
+  final reserved = logoSafeReserve(w, profile);
   if (profile.logoPosition.startsWith('top')) {
     return EdgeInsets.only(top: reserved);
   }
   return EdgeInsets.only(bottom: reserved);
+}
+
+/// The one font scale shared by every page of the split run that slide [index]
+/// belongs to, or null when the slide is not part of a multi-page split. A run
+/// is a maximal group of same-type, same-list-style bullet slides where every
+/// page after the first is a split continuation ([Slide.continuesSplit]). The
+/// shared scale is the group's smallest fit — the fullest page — so a list
+/// split across pages renders at one consistent size instead of each page
+/// growing to fill its own slide. Logo-aware, so the shared size still clears a
+/// reserved logo strip. Passed to [SlidePreviewWidget.fitScaleOverride] by
+/// callers that hold the whole deck (previews, presenter, audience, export).
+double? sharedSplitFitScale(
+  List<Slide> slides,
+  int index,
+  ThemeProfile profile,
+  String font,
+) {
+  if (index < 0 || index >= slides.length) return null;
+  bool splittable(SlideType t) =>
+      t == SlideType.bullets || t == SlideType.twoBullets;
+  if (!splittable(slides[index].type)) return null;
+  bool sameRun(Slide a, Slide b) =>
+      a.type == b.type && a.listStyle == b.listStyle;
+
+  var start = index;
+  while (start > 0 &&
+      slides[start].continuesSplit &&
+      sameRun(slides[start - 1], slides[start])) {
+    start--;
+  }
+  var end = index;
+  while (end + 1 < slides.length &&
+      slides[end + 1].continuesSplit &&
+      sameRun(slides[end], slides[end + 1])) {
+    end++;
+  }
+  if (start == end) return null; // a single page — nothing to share
+
+  var minScale = double.infinity;
+  for (var i = start; i <= end; i++) {
+    final s = _memberRenderScale(slides[i], profile, font);
+    if (s < minScale) minScale = s;
+  }
+  return minScale.isFinite ? minScale : null;
+}
+
+/// The reference-width fit scale one split-run member renders its text at,
+/// reserving the logo strip so the shared scale clears the logo just as the
+/// live layout does.
+double _memberRenderScale(Slide slide, ThemeProfile profile, String font) {
+  final safe = slide.showLogo
+      ? _logoSafeInsets(kReferenceSlideWidth, profile)
+      : EdgeInsets.zero;
+  final vReserve = safe.top + safe.bottom;
+  if (slide.type == SlideType.twoBullets) {
+    return twoBulletsSlideFitScale(
+      slide: slide,
+      font: font,
+      extraVReserve: vReserve,
+    );
+  }
+  return bulletsSlideFitScale(
+    slide: slide,
+    font: font,
+    extraVReserve: vReserve,
+  );
 }
 
 /// Renders a visual approximation of a Marp slide inside a 16:9 container.
@@ -262,6 +326,18 @@ class SlidePreviewWidget extends StatelessWidget {
   /// de tijdlijn toont alles (en tekent zichzelf in bij [presentationMode]).
   final int? timelineRevealedCount;
 
+  /// First number for this slide's numbered list. 1 restarts; a higher value
+  /// continues a numbered list from a previous slide (see [numberedListStartFor]).
+  /// Callers with the full deck compute it; standalone previews leave it at 1.
+  final int numberStart;
+
+  /// When this slide is one page of a multi-page split (see [Slide.continuesSplit]),
+  /// the one font scale shared by every page of that run — the size of the
+  /// fullest page — so the split list keeps a consistent size. Null → the
+  /// slide sizes its own text independently (the standalone default). Callers
+  /// with the full deck compute it via [sharedSplitFitScale].
+  final double? fitScaleOverride;
+
   const SlidePreviewWidget({
     super.key,
     required this.slide,
@@ -293,6 +369,8 @@ class SlidePreviewWidget extends StatelessWidget {
     this.onAnswerSelected,
     this.onAnswerSubmit,
     this.timelineRevealedCount,
+    this.numberStart = 1,
+    this.fitScaleOverride,
   });
 
   @override
@@ -472,6 +550,8 @@ class SlidePreviewWidget extends StatelessWidget {
           richTextPage: richTextPage,
           showRichTextPageControls: showRichTextPageControls,
           onRichTextPageChanged: onRichTextPageChanged,
+          numberStart: numberStart,
+          fitScaleOverride: fitScaleOverride,
         );
       case SlideType.twoBullets:
         return _TwoBulletsPreview(
@@ -479,6 +559,7 @@ class SlidePreviewWidget extends StatelessWidget {
           w: w,
           font: fontFamily,
           profile: themeProfile,
+          fitScaleOverride: fitScaleOverride,
         );
       case SlideType.bulletsImage:
         return _BulletsImagePreview(
@@ -490,6 +571,7 @@ class SlidePreviewWidget extends StatelessWidget {
           richTextPage: richTextPage,
           showRichTextPageControls: showRichTextPageControls,
           onRichTextPageChanged: onRichTextPageChanged,
+          numberStart: numberStart,
         );
       case SlideType.twoImages:
         return _TwoImagesPreview(

@@ -46,6 +46,12 @@ class _BulletsPreview extends StatelessWidget {
   final bool showRichTextPageControls;
   final ValueChanged<int>? onRichTextPageChanged;
 
+  /// First number for a numbered list (continues a chain across slides).
+  final int numberStart;
+
+  /// Shared font scale for a split run (see [SlidePreviewWidget.fitScaleOverride]).
+  final double? fitScaleOverride;
+
   const _BulletsPreview({
     required this.slide,
     required this.w,
@@ -54,6 +60,8 @@ class _BulletsPreview extends StatelessWidget {
     this.richTextPage = 0,
     this.showRichTextPageControls = false,
     this.onRichTextPageChanged,
+    this.numberStart = 1,
+    this.fitScaleOverride,
   });
 
   @override
@@ -154,6 +162,14 @@ class _BulletsPreview extends StatelessWidget {
       },
     );
 
+    // A split run shares one size: cap this page at the run's shared scale (the
+    // fullest page's fit). `min` keeps it safe — never larger than what fits
+    // this page — so a shared scale can only shrink an emptier page, not
+    // overflow a fuller one.
+    final resolvedScale = fitScaleOverride != null
+        ? math.min(fitScaleOverride!, scale)
+        : scale;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
@@ -165,7 +181,7 @@ class _BulletsPreview extends StatelessWidget {
             _applyFont(
               font,
               TextStyle(
-                fontSize: titleSize * scale,
+                fontSize: titleSize * resolvedScale,
                 fontWeight: FontWeight.bold,
                 color: _hexColor(profile.textColor),
               ),
@@ -173,14 +189,14 @@ class _BulletsPreview extends StatelessWidget {
             linkColor: _hexColor(profile.accentColor),
           ),
         if (hasSubtitle) ...[
-          SizedBox(height: spacing * scale * 0.4),
+          SizedBox(height: spacing * resolvedScale * 0.4),
           _md(
             context,
             subtitle,
             _applyFont(
               font,
               TextStyle(
-                fontSize: subtitleSize * scale,
+                fontSize: subtitleSize * resolvedScale,
                 fontWeight: FontWeight.w600,
                 color: _hexColor(profile.accentColor),
               ),
@@ -189,7 +205,7 @@ class _BulletsPreview extends StatelessWidget {
           ),
         ],
         if ((hasTitle || hasSubtitle) && bullets.isNotEmpty)
-          SizedBox(height: spacing * scale),
+          SizedBox(height: spacing * resolvedScale),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -202,8 +218,9 @@ class _BulletsPreview extends StatelessWidget {
                 profile: profile,
                 bulletSize: bulletSize,
                 bulletGap: bulletGap,
-                scale: scale,
+                scale: resolvedScale,
                 column: 0,
+                numberStart: numberStart,
               ),
             ),
             if (showProgress) ...[
@@ -280,9 +297,6 @@ Widget _richTextPaginatedContent({
   final subtitleSize = w * 0.030;
   final spacing = splitWithImage ? vPad * 0.32 : pad * 0.5;
   final bodySize = splitWithImage ? w * 0.031 : w * 0.026;
-  final footer = footerSafeInset(w: w, slide: slide, profile: profile);
-  final budget = richTextLayoutBudget(availH, footer);
-
   final plan = planRichTextForSlide(
     slide: slide,
     profile: profile,
@@ -294,27 +308,12 @@ Widget _richTextPaginatedContent({
   );
   final pageIndex = richTextPage.clamp(0, plan.pageCount - 1);
   final pageMarkdown = plan.markdownForPage(pageIndex);
-  final maxScale = bulletScaleCap(
-    w,
-    bodySize,
-    splitWithImage ? kBulletsMaxScale : kSplitBulletsMaxScale,
-  );
-  final scale = richTextScaleForPage(
-    plan: plan,
-    pageIndex: pageIndex,
-    budget: budget,
-    availW: contentW,
-    refW: w,
-    hasTitle: slide.title.isNotEmpty,
-    title: slide.title,
-    subtitle: slide.subtitle,
-    titleSize: titleSize,
-    subtitleSize: subtitleSize,
-    spacing: spacing,
-    bodySize: bodySize,
-    font: font,
-    maxScale: maxScale,
-  );
+  // Every page of a rich-text slide renders at the plan's single shared scale
+  // (sized to the fullest page), so paging through never changes the text size —
+  // the same principle as the split-bullets fix. The plan already grew this
+  // scale to the largest that fits the tallest page, so no page overflows and a
+  // sparse last page no longer swells larger than the rest.
+  final scale = plan.scale;
   final showTitle = pageIndex == 0 && slide.title.isNotEmpty;
   final subtitle = slide.subtitle;
   final showSubtitle = pageIndex == 0 && subtitle.isNotEmpty;
@@ -437,11 +436,15 @@ class _TwoBulletsPreview extends StatelessWidget {
   final String font;
   final ThemeProfile profile;
 
+  /// Shared font scale for a split run (see [SlidePreviewWidget.fitScaleOverride]).
+  final double? fitScaleOverride;
+
   const _TwoBulletsPreview({
     required this.slide,
     required this.w,
     required this.font,
     required this.profile,
+    this.fitScaleOverride,
   });
 
   /// One bullet column with an optional heading above it. When any column has a
@@ -576,7 +579,11 @@ class _TwoBulletsPreview extends StatelessWidget {
       bulletGap: bulletGap,
     );
     final columnW = layout.columnW;
-    final columnScale = layout.columnScale;
+    // A split run shares one size: cap at the run's shared scale (see
+    // _bulletsContent). `min` keeps it safe — never larger than what fits here.
+    final columnScale = fitScaleOverride != null
+        ? math.min(fitScaleOverride!, layout.columnScale)
+        : layout.columnScale;
     final maxHeadingH = layout.maxHeadingH;
 
     return Column(

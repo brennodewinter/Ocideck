@@ -521,6 +521,12 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                       organization: widget.organization,
                       showClassificationWatermark:
                           widget.showClassificationWatermark,
+                      fitScaleOverride: sharedSplitFitScale(
+                        widget.slides,
+                        i,
+                        widget.themeProfile,
+                        widget.themeProfile.fontFamily,
+                      ),
                     ),
                   ),
                 ),
