@@ -29,7 +29,7 @@ extension _SettingsGeneralTab on _SettingsDialogState {
                 for (final entry in AppLocalizations.languageOptions)
                   DropdownMenuItem(
                     value: entry.key,
-                    child: Text(AppLocalizations.flaggedName(entry.key)),
+                    child: languageOptionRow(entry.key, entry.value),
                   ),
               ],
               onChanged: (code) {

@@ -14,6 +14,11 @@ part 'translations/id.dart';
 part 'translations/pl.dart';
 part 'translations/uk.dart';
 part 'translations/gsw.dart';
+part 'translations/el.dart';
+part 'translations/da.dart';
+part 'translations/sv.dart';
+part 'translations/hr.dart';
+part 'translations/cs.dart';
 
 class AppLocalizations {
   final Locale locale;
@@ -34,6 +39,11 @@ class AppLocalizations {
     Locale('pl'),
     Locale('uk'),
     Locale('gsw'),
+    Locale('el'),
+    Locale('da'),
+    Locale('sv'),
+    Locale('hr'),
+    Locale('cs'),
   ];
 
   static const languageNames = {
@@ -50,6 +60,11 @@ class AppLocalizations {
     'pl': 'Polski',
     'uk': 'Українська',
     'gsw': 'Schwiizerdütsch',
+    'el': 'Ελληνικά',
+    'da': 'Dansk',
+    'sv': 'Svenska',
+    'hr': 'Hrvatski',
+    'cs': 'Čeština',
   };
 
   /// A country flag (emoji) per language, shown in the language pickers. Some
@@ -70,14 +85,12 @@ class AppLocalizations {
     'pl': '🇵🇱',
     'uk': '🇺🇦',
     'gsw': '🇨🇭',
+    'el': '🇬🇷',
+    'da': '🇩🇰',
+    'sv': '🇸🇪',
+    'hr': '🇭🇷',
+    'cs': '🇨🇿',
   };
-
-  /// The language's display name prefixed with its flag, for picker items.
-  static String flaggedName(String code) {
-    final flag = languageFlags[code];
-    final name = languageNames[code] ?? code;
-    return flag == null ? name : '$flag  $name';
-  }
 
   /// Language options sorted by display name, for pickers (the map itself keeps
   /// its own order for lookups). Locale-aware compare so accented names sort
@@ -104,6 +117,11 @@ class AppLocalizations {
     'uk': Locale('uk'),
     // Swiss German has no Material localization; borrow standard German.
     'gsw': Locale('de'),
+    'el': Locale('el'),
+    'da': Locale('da'),
+    'sv': Locale('sv'),
+    'hr': Locale('hr'),
+    'cs': Locale('cs'),
   };
 
   static String _activeLanguageCode = 'nl';
@@ -199,6 +217,11 @@ const _strings = {
   'pl': _stringsPl,
   'uk': _stringsUk,
   'gsw': _stringsGsw,
+  'el': _stringsEl,
+  'da': _stringsDa,
+  'sv': _stringsSv,
+  'hr': _stringsHr,
+  'cs': _stringsCs,
 };
 
 const _dutchSourceStrings = {
@@ -214,6 +237,11 @@ const _dutchSourceStrings = {
   'pl': _dutchSourcePl,
   'uk': _dutchSourceUk,
   'gsw': _dutchSourceGsw,
+  'el': _dutchSourceEl,
+  'da': _dutchSourceDa,
+  'sv': _dutchSourceSv,
+  'hr': _dutchSourceHr,
+  'cs': _dutchSourceCs,
 };
 
 const _dutchSourceStringAdditions = {

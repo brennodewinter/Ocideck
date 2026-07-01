@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../state/consent_provider.dart';
 import '../../state/settings_provider.dart';
+import '../language_flag.dart';
 import '../privacy_statement_content.dart';
 
 class ConsentDialog extends ConsumerStatefulWidget {
@@ -60,10 +61,7 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
                     for (final e in AppLocalizations.languageOptions)
                       DropdownMenuItem(
                         value: e.key,
-                        child: Text(
-                          AppLocalizations.flaggedName(e.key),
-                          style: const TextStyle(fontSize: 13),
-                        ),
+                        child: languageOptionRow(e.key, e.value, fontSize: 13),
                       ),
                   ],
                   onChanged: (code) {
@@ -83,10 +81,7 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
             ),
           ),
           const SizedBox(height: 10),
-          Text(
-            l10n.d('Welkom bij OciDeck'),
-            style: theme.textTheme.titleLarge,
-          ),
+          Text(l10n.d('Welkom bij OciDeck'), style: theme.textTheme.titleLarge),
         ],
       ),
       content: SizedBox(
@@ -119,8 +114,7 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
                     children: [
                       Checkbox(
                         value: _agreed,
-                        onChanged: (v) =>
-                            setState(() => _agreed = v ?? false),
+                        onChanged: (v) => setState(() => _agreed = v ?? false),
                         visualDensity: VisualDensity.compact,
                       ),
                       Expanded(
