@@ -93,6 +93,21 @@ class DeckState {
   }
 }
 
+/// Whether [DeckNotifier.splitSlide] would actually split [slide]: a bullet
+/// slide type with at least two bullets to divide. Mirrors the guards in
+/// `_splitSlide`, so the UI can offer a "split" action exactly when it works.
+bool canSplitSlide(Slide slide) {
+  switch (slide.type) {
+    case SlideType.bullets:
+    case SlideType.bulletsImage:
+      return slide.bullets.length >= 2;
+    case SlideType.twoBullets:
+      return slide.bullets.length >= 2 || slide.bullets2.length >= 2;
+    default:
+      return false;
+  }
+}
+
 // ── DeckNotifier ─────────────────────────────────────────────────────────────
 
 class DeckNotifier extends StateNotifier<DeckState> {
