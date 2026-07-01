@@ -50,6 +50,7 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
                 width: 210,
                 child: DropdownButtonFormField<String>(
                   initialValue: languageCode,
+                  isExpanded: true,
                   isDense: true,
                   decoration: InputDecoration(
                     labelText: l10n.t('applicationLanguage'),

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 
@@ -135,6 +136,71 @@ void main() {
     }
 
     expect(missingByLanguage, isEmpty);
+  });
+
+  group('language registration is consistent', () {
+    test('every language is a supported locale', () {
+      for (final code in AppLocalizations.languageNames.keys) {
+        expect(
+          AppLocalizations.supportedLocales.map((l) => l.languageCode),
+          contains(code),
+          reason: '$code missing from supportedLocales',
+        );
+      }
+      // ...and no stray supported locale lacks a name.
+      for (final locale in AppLocalizations.supportedLocales) {
+        expect(
+          AppLocalizations.languageNames.containsKey(locale.languageCode),
+          isTrue,
+          reason: '${locale.languageCode} supported but unnamed',
+        );
+      }
+    });
+
+    test('every language has a flag', () {
+      for (final code in AppLocalizations.languageNames.keys) {
+        final flag = AppLocalizations.languageFlags[code];
+        expect(
+          flag != null && flag.isNotEmpty,
+          isTrue,
+          reason: '$code has no flag',
+        );
+      }
+    });
+
+    test('every Material fallback locale is one Flutter can localize', () {
+      for (final code in AppLocalizations.languageNames.keys) {
+        final locale = AppLocalizations.materialLocaleFor(code);
+        expect(
+          GlobalMaterialLocalizations.delegate.isSupported(locale),
+          isTrue,
+          reason: '$code → $locale is not a Material-supported locale',
+        );
+      }
+    });
+  });
+
+  group('languageOptions ordering', () {
+    List<String> order() =>
+        AppLocalizations.languageOptions.map((e) => e.key).toList();
+
+    test('lists every language exactly once', () {
+      final keys = order();
+      expect(keys.length, AppLocalizations.languageNames.length);
+      expect(keys.toSet(), AppLocalizations.languageNames.keys.toSet());
+    });
+
+    test('non-Latin/diacritic names fold to their Latin position', () {
+      final keys = order();
+      int i(String c) => keys.indexOf(c);
+      // Greek "Ελληνικά" → "ellinika", between Deutsch and English.
+      expect(i('de'), lessThan(i('el')));
+      expect(i('el'), lessThan(i('en')));
+      // Czech "Čeština" → "cestina": near the front, before Dansk.
+      expect(i('cs'), lessThan(i('da')));
+      // Ukrainian "Українська" → "ukrainska": sorts to the very end.
+      expect(i('uk'), keys.length - 1);
+    });
   });
 }
 
