@@ -9,6 +9,9 @@ part 'translations/fr.dart';
 part 'translations/es.dart';
 part 'translations/fy.dart';
 part 'translations/pap.dart';
+part 'translations/la.dart';
+part 'translations/id.dart';
+part 'translations/pl.dart';
 
 class AppLocalizations {
   final Locale locale;
@@ -24,6 +27,9 @@ class AppLocalizations {
     Locale('es'),
     Locale('fy'),
     Locale('pap'),
+    Locale('la'),
+    Locale('id'),
+    Locale('pl'),
   ];
 
   static const languageNames = {
@@ -35,7 +41,18 @@ class AppLocalizations {
     'es': 'Español',
     'fy': 'Frysk',
     'pap': 'Papiamento',
+    'la': 'Latina',
+    'id': 'Bahasa Indonesia',
+    'pl': 'Polski',
   };
+
+  /// Language options sorted by display name, for pickers (the map itself keeps
+  /// its own order for lookups). Locale-aware compare so accented names sort
+  /// naturally.
+  static List<MapEntry<String, String>> get languageOptions =>
+      languageNames.entries.toList()..sort(
+        (a, b) => a.value.toLowerCase().compareTo(b.value.toLowerCase()),
+      );
 
   static const _materialLocaleFallbacks = {
     'nl': Locale('nl'),
@@ -46,6 +63,11 @@ class AppLocalizations {
     'es': Locale('es'),
     'fy': Locale('en'),
     'pap': Locale('en'),
+    // Indonesian and Polish have Material localizations; Latin does not, so it
+    // borrows English for the framework widgets while the app UI is Latin.
+    'la': Locale('en'),
+    'id': Locale('id'),
+    'pl': Locale('pl'),
   };
 
   static String _activeLanguageCode = 'nl';
@@ -136,6 +158,9 @@ const _strings = {
   'es': _stringsEs,
   'fy': _stringsFy,
   'pap': _stringsPap,
+  'la': _stringsLa,
+  'id': _stringsId,
+  'pl': _stringsPl,
 };
 
 const _dutchSourceStrings = {
@@ -146,6 +171,9 @@ const _dutchSourceStrings = {
   'es': _dutchSourceEs,
   'fy': _dutchSourceFy,
   'pap': _dutchSourcePap,
+  'la': _dutchSourceLa,
+  'id': _dutchSourceId,
+  'pl': _dutchSourcePl,
 };
 
 const _dutchSourceStringAdditions = {

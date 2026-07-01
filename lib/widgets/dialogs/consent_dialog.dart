@@ -57,7 +57,7 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
                     border: const OutlineInputBorder(),
                   ),
                   items: [
-                    for (final e in AppLocalizations.languageNames.entries)
+                    for (final e in AppLocalizations.languageOptions)
                       DropdownMenuItem(
                         value: e.key,
                         child: Text(
