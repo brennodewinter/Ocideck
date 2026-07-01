@@ -29,6 +29,22 @@ void main() {
     expect(back.codeFontFamily, 'Courier New');
   });
 
+  test('ThemeProfile round-trips and clamps the animation duration', () {
+    const profile = ThemeProfile(animationDurationMs: 7500);
+    expect(ThemeProfile.fromJson(profile.toJson()).animationDurationMs, 7500);
+    // Out-of-range values are clamped on load.
+    expect(
+      ThemeProfile.fromJson(const {'animationDurationMs': 999999})
+          .animationDurationMs,
+      kThemeMaxAnimationDurationMs,
+    );
+  });
+
+  test('ThemeProfile animation duration defaults for older decks', () {
+    final back = ThemeProfile.fromJson(const {'name': 'Legacy'});
+    expect(back.animationDurationMs, kThemeDefaultAnimationDurationMs);
+  });
+
   test('ThemeProfile round-trips checklist styling through JSON', () {
     const profile = ThemeProfile(
       checklistCheckedColor: '#00AA00',

@@ -120,6 +120,11 @@ class Deck {
   /// aftelling. Live aanpasbaar tijdens presenteren (toets K).
   final int presentationTargetSeconds;
 
+  /// Of het tijden-overzicht (oefenrun-samenvatting) ná deze presentatie
+  /// verschijnt. De tijd wordt ALTIJD gemeten; dit bepaalt enkel of het
+  /// eindscherm getoond wordt. Per presentatie ingesteld (presentatie-info).
+  final bool showRehearsalSummary;
+
   /// Annotatielaag: vrije-hand-tekeningen per slide, gekeyd op [Slide.id].
   /// Bewust géén onderdeel van de Marp-markdown — dit wordt los bewaard in een
   /// sidecar zodat het deck pure, uitwisselbare Marp blijft.
@@ -145,6 +150,7 @@ class Deck {
     this.keywords = '',
     this.tlp = TlpLevel.none,
     this.presentationTargetSeconds = 0,
+    this.showRehearsalSummary = true,
     this.annotations = const {},
     this.userNotes = const {},
   });
@@ -165,6 +171,7 @@ class Deck {
     String? keywords,
     TlpLevel? tlp,
     int? presentationTargetSeconds,
+    bool? showRehearsalSummary,
     Map<String, List<InkStroke>>? annotations,
     Map<String, String>? userNotes,
   }) {
@@ -184,6 +191,7 @@ class Deck {
       tlp: tlp ?? this.tlp,
       presentationTargetSeconds:
           presentationTargetSeconds ?? this.presentationTargetSeconds,
+      showRehearsalSummary: showRehearsalSummary ?? this.showRehearsalSummary,
       annotations: annotations ?? this.annotations,
       userNotes: userNotes ?? this.userNotes,
     );

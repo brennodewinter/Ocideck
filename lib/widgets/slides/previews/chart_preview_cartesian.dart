@@ -15,7 +15,7 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
             for (var si = 0; si < spec.series.length; si++)
               if (xi < spec.series[si].data.length)
                 BarChartRodData(
-                  toY: spec.series[si].data[xi],
+                  toY: spec.series[si].data[xi] * _grow,
                   color: _seriesDisplayColor(spec.series[si], si),
                   width: _barRodWidth(spec),
                   borderRadius: BorderRadius.vertical(
@@ -67,7 +67,7 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
           ),
         ),
       ),
-      duration: Duration.zero,
+      duration: _chartAnimDuration,
     );
   }
 
@@ -81,7 +81,7 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
       final stackItems = <BarChartRodStackItem>[];
       for (var si = 0; si < spec.series.length; si++) {
         if (xi >= spec.series[si].data.length) continue;
-        final value = spec.series[si].data[xi];
+        final value = spec.series[si].data[xi] * _grow;
         stackItems.add(
           BarChartRodStackItem(
             top,
@@ -122,7 +122,7 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
         extraLinesData: _boundLines(spec),
         barTouchData: BarTouchData(enabled: false),
       ),
-      duration: Duration.zero,
+      duration: _chartAnimDuration,
     );
   }
 
@@ -133,7 +133,7 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
         spots.add(
           ScatterSpot(
             xi.toDouble(),
-            spec.series[si].data[xi],
+            spec.series[si].data[xi] * _grow,
             dotPainter: FlDotCirclePainter(
               radius: w * 0.007,
               color: _seriesDisplayColor(spec.series[si], si),
@@ -154,7 +154,7 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
         borderData: FlBorderData(show: false),
         scatterTouchData: ScatterTouchData(enabled: false),
       ),
-      duration: Duration.zero,
+      duration: _chartAnimDuration,
     );
   }
 
@@ -165,7 +165,7 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
         LineChartBarData(
           spots: [
             for (var xi = 0; xi < spec.series[si].data.length; xi++)
-              FlSpot(xi.toDouble(), spec.series[si].data[xi]),
+              FlSpot(xi.toDouble(), spec.series[si].data[xi] * _grow),
           ],
           color: _seriesDisplayColor(spec.series[si], si),
           barWidth: w * (_hovered == si ? 0.0065 : 0.0045),
@@ -230,7 +230,7 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
           ),
         ),
       ),
-      duration: Duration.zero,
+      duration: _chartAnimDuration,
     );
   }
 

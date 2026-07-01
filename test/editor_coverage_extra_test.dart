@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/editors/chart_editor.dart';
 import 'package:ocideck/widgets/editors/markdown_deck_editor.dart';
@@ -37,7 +38,11 @@ Widget _chartHost(Slide slide, ValueChanged<Slide> onUpdate) {
       body: SizedBox(
         width: 1400,
         height: 2800,
-        child: ChartEditor(slide: slide, onUpdate: onUpdate),
+        child: ChartEditor(
+          slide: slide,
+          onUpdate: onUpdate,
+          themeAnimationDurationMs: kThemeDefaultAnimationDurationMs,
+        ),
       ),
     ),
   );

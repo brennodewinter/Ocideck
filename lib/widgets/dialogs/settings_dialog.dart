@@ -792,6 +792,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         _fontSection(),
         _presentationStyleDivider(l10n.t('settingsColors')),
         ..._colorsSectionChildren(),
+        _presentationStyleDivider(l10n.d('Animatie')),
+        ..._animationSettings(),
         _presentationStyleDivider(l10n.d('Logo en footer')),
         ..._logoSectionChildren(),
         const SizedBox(height: 18),

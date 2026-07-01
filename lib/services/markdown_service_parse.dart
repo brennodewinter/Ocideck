@@ -61,6 +61,7 @@ extension _MarkdownParse on MarkdownService {
     String keywords = '';
     TlpLevel tlp = TlpLevel.none;
     int presentationTargetSeconds = 0;
+    bool showRehearsalSummary = true;
 
     // Strip front matter
     if (content.startsWith('---\n')) {
@@ -100,6 +101,8 @@ extension _MarkdownParse on MarkdownService {
               tlp = TlpLevelX.fromKey(value);
             case 'ocideck_target_seconds':
               presentationTargetSeconds = int.tryParse(value) ?? 0;
+            case 'ocideck_show_rehearsal_summary':
+              showRehearsalSummary = value != 'false';
             case 'ocideck_style_profile':
               // Best-effort: a corrupt profile token must not fail the whole
               // parse (which would blank the audience window). Keep the default.
@@ -159,6 +162,7 @@ extension _MarkdownParse on MarkdownService {
       keywords: keywords,
       tlp: tlp,
       presentationTargetSeconds: presentationTargetSeconds.clamp(0, 86400),
+      showRehearsalSummary: showRehearsalSummary,
     );
   }
 
@@ -308,7 +312,7 @@ extension _MarkdownParse on MarkdownService {
     List<String> bullets,
     List<String> bullets2,
     ListStyle listStyle,
-    int timelineAnimationMs,
+    int? timelineAnimationMs,
     bool showChecklistProgress,
     bool titleImageOverlay,
     String titleTextColorOverride,
@@ -337,7 +341,7 @@ extension _MarkdownParse on MarkdownService {
     final bullets = <String>[];
     var bullets2 = <String>[];
     var listStyle = ListStyle.bullets;
-    var timelineAnimationMs = timelineDefaultAnimationDurationMs;
+    int? timelineAnimationMs;
     var showChecklistProgress = false;
     var titleImageOverlay = true;
     var titleTextColorOverride = '';

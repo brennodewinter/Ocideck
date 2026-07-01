@@ -242,10 +242,48 @@ class _TablePreview extends StatelessWidget {
     final rows = slide.tableRows.where((r) => r.isNotEmpty).toList();
     final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
 
-    final density = (rows.length + colCount).clamp(2, 24);
-    final cellSize = (w * 0.025 * (10 / (density + 6))).clamp(
-      w * 0.010,
-      w * 0.021,
+    // The density-based size is an upper bound; a text-heavy table then shrinks
+    // its font so it fits the slide height at full width, rather than letting
+    // the FittedBox scale the whole table down (which also narrows it and
+    // leaves the slide's right edge empty). availH mirrors _outerLayout's frame:
+    // the 16:9 box minus the logo-safe top/bottom padding and the title block.
+    final baseCell = tableCellFontSize(
+      w,
+      rowCount: rows.length,
+      colCount: colCount,
+    );
+    final minCell = tableCellFontMinimum(w);
+    final tableWidth = w - pad * 2;
+    final titleBlock = slide.title.isNotEmpty
+        ? measureTextHeight(
+                slide.title,
+                titleSize,
+                tableWidth,
+                bold: true,
+                fontFamily: font,
+              ) +
+              pad * 0.35
+        : 0.0;
+    final availH =
+        w * 9 / 16 -
+        (pad + safe.top) -
+        _logoAwareBottomPadding(pad, safe.bottom) -
+        titleBlock;
+    final cellSize = memoizedRenderLayout<double>(
+      slide: slide,
+      font: font,
+      width: w,
+      availW: tableWidth,
+      availH: availH,
+      compute: () => tableFitCellSize(
+        rows: rows,
+        colCount: colCount,
+        tableWidth: tableWidth,
+        availH: availH,
+        baseCellSize: baseCell,
+        minCellSize: minCell,
+        font: font,
+      ),
     );
 
     final accent = _hexColor(profile.accentColor);
@@ -383,15 +421,9 @@ class _TablePreview extends StatelessWidget {
     List<List<String>> rows,
     int colCount,
   ) {
+    final weights = tableColumnFlexWeights(rows, colCount);
     return <int, TableColumnWidth>{
-      for (var c = 0; c < colCount; c++)
-        c: FlexColumnWidth(
-          rows
-              .map((r) => c < r.length ? r[c].trim().length : 0)
-              .fold<int>(1, (longest, len) => len > longest ? len : longest)
-              .clamp(1, 80)
-              .toDouble(),
-        ),
+      for (var c = 0; c < colCount; c++) c: FlexColumnWidth(weights[c]),
     };
   }
 

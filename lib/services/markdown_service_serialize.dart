@@ -242,7 +242,7 @@ extension _MarkdownSerialize on MarkdownService {
       buf.writeln('# ${slide.title}');
       buf.writeln();
     }
-    if (slide.timelineAnimationMs != timelineDefaultAnimationDurationMs) {
+    if (slide.timelineAnimationMs != null) {
       buf.writeln(
         '<!-- ocideck_timeline_duration: ${slide.timelineAnimationMs} -->',
       );

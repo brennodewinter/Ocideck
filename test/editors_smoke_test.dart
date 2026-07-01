@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/widgets/editors/cockpit_editor.dart';
@@ -75,6 +76,7 @@ void main() {
         CockpitEditor(
           slide: Slide.create(SlideType.cockpit),
           onUpdate: (s) => updated = s,
+          themeAnimationDurationMs: kThemeDefaultAnimationDurationMs,
         ),
       ),
     );

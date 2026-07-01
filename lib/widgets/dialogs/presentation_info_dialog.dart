@@ -13,6 +13,7 @@ class PresentationInfo {
   final String description;
   final String keywords;
   final int presentationTargetSeconds;
+  final bool showRehearsalSummary;
 
   const PresentationInfo({
     required this.title,
@@ -23,6 +24,7 @@ class PresentationInfo {
     required this.description,
     required this.keywords,
     this.presentationTargetSeconds = 0,
+    this.showRehearsalSummary = true,
   });
 }
 
@@ -67,6 +69,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
   late final TextEditingController _description;
   late final TextEditingController _keywords;
   late int _presentationTargetSeconds;
+  late bool _showRehearsalSummary;
 
   @override
   void initState() {
@@ -79,6 +82,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
     _description = TextEditingController(text: widget.deck.description);
     _keywords = TextEditingController(text: widget.deck.keywords);
     _presentationTargetSeconds = widget.deck.presentationTargetSeconds;
+    _showRehearsalSummary = widget.deck.showRehearsalSummary;
   }
 
   @override
@@ -105,6 +109,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
         description: _description.text.trim(),
         keywords: _keywords.text.trim(),
         presentationTargetSeconds: _presentationTargetSeconds,
+        showRehearsalSummary: _showRehearsalSummary,
       ),
     );
   }
@@ -242,6 +247,21 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
                       color: Color(0xFF94A3B8),
                     ),
                   ),
+                ),
+                const SizedBox(height: 16),
+                SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  dense: true,
+                  secondary: const Icon(Icons.timeline_outlined, size: 20),
+                  title: Text(l10n.d('Tijden-overzicht tonen na afloop')),
+                  subtitle: Text(
+                    l10n.d(
+                      'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.',
+                    ),
+                    style: const TextStyle(fontSize: 11),
+                  ),
+                  value: _showRehearsalSummary,
+                  onChanged: (v) => setState(() => _showRehearsalSummary = v),
                 ),
                 const SizedBox(height: 8),
                 Text(

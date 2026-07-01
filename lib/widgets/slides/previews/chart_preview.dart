@@ -22,7 +22,8 @@ class _ChartPreview extends StatefulWidget {
   State<_ChartPreview> createState() => _ChartPreviewState();
 }
 
-class _ChartPreviewState extends State<_ChartPreview> {
+class _ChartPreviewState extends State<_ChartPreview>
+    with SingleTickerProviderStateMixin {
   Slide get slide => widget.slide;
   double get w => widget.w;
   String get font => widget.font;
@@ -42,10 +43,33 @@ class _ChartPreviewState extends State<_ChartPreview> {
   /// markdown actually changes.
   late ChartSpec _spec;
 
+  /// Entrance growth: plotted values multiply by [_grow] (0 then 1) while the
+  /// axis (minY/maxY, radar anchor) stays fixed. The 0 -> 1 swap is tweened by
+  /// fl_chart itself over [_chartAnimDuration] — far cheaper than rebuilding the
+  /// whole chart every frame, which (with several previews on screen at once in
+  /// presentation) made navigation feel sluggish.
+  double _grow = 1;
+
+  /// fl_chart's tween duration: the activation duration during the entrance,
+  /// [Duration.zero] once grown so hover/tooltip rebuilds never re-animate.
+  Duration _chartAnimDuration = Duration.zero;
+
+  /// Pure timer for the entrance: it just times when to freeze the duration and
+  /// drives the pie's scale/fade (the only per-frame work, and only one cheap
+  /// Transform). Disposed on unmount, so it never leaks a pending timer.
+  late final AnimationController _entrance;
+
   @override
   void initState() {
     super.initState();
     _spec = ChartSpec.parse(widget.slide.customMarkdown);
+    _entrance = AnimationController(vsync: this)
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed && mounted) {
+          setState(() => _chartAnimDuration = Duration.zero);
+        }
+      });
+    _maybeAnimateIn();
   }
 
   @override
@@ -53,7 +77,58 @@ class _ChartPreviewState extends State<_ChartPreview> {
     super.didUpdateWidget(oldWidget);
     if (widget.slide.customMarkdown != oldWidget.slide.customMarkdown) {
       _spec = ChartSpec.parse(widget.slide.customMarkdown);
+      _maybeAnimateIn();
     }
+  }
+
+  @override
+  void dispose() {
+    _entrance.dispose();
+    super.dispose();
+  }
+
+  /// Charts draw themselves in (values grow from the baseline) when a chart
+  /// slide is shown in presentation mode, over the theme's shared activation
+  /// duration. In the editor/thumbnails values are final and nothing animates.
+  void _maybeAnimateIn() {
+    _entrance.stop();
+    if (!presentationMode || !_spec.hasInlineData || !_spec.animateOnEnter) {
+      _grow = 1;
+      _chartAnimDuration = Duration.zero;
+      _entrance.value = 1;
+      return;
+    }
+    // null override = inherit the theme's shared activation duration.
+    final ms = clampThemeAnimationDuration(
+      _spec.animationDurationMs ?? profile.animationDurationMs,
+    );
+    _grow = 0;
+    _chartAnimDuration = Duration(milliseconds: ms);
+    _entrance.duration = Duration(milliseconds: ms);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      // Swap to the real values once: fl_chart tweens 0 -> value internally.
+      setState(() => _grow = 1);
+      _entrance.forward(from: 0);
+    });
+  }
+
+  /// Pie entrance: a scale-up + fade (a pie can't grow from a zero total the
+  /// way a bar grows from a zero height). Only this small Transform rebuilds per
+  /// frame — the pie itself (`child`) is built once.
+  Widget _pieEntrance(Widget pie) {
+    return AnimatedBuilder(
+      animation: _entrance,
+      child: pie,
+      builder: (context, child) {
+        if (_chartAnimDuration == Duration.zero) return child!;
+        final t = Curves.easeOutCubic.transform(_entrance.value);
+        return Opacity(
+          opacity: t.clamp(0.0, 1.0),
+          child: Transform.scale(scale: 0.6 + 0.4 * t, child: child),
+        );
+      },
+    );
   }
 
   void _setHover(int? index) {
@@ -384,7 +459,7 @@ class _ChartPreviewState extends State<_ChartPreview> {
       case ChartType.line:
         return _lineChart(spec, textColor);
       case ChartType.pie:
-        return _pieChart(spec, textColor);
+        return _pieEntrance(_pieChart(spec, textColor));
       case ChartType.radar:
         return _radarChart(spec, textColor);
       case ChartType.scatter:

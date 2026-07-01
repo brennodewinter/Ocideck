@@ -357,6 +357,8 @@ const _dutchSourceAddDe = {
   'Opslaan': 'Speichern',
   // Accessibility labels for icon-only buttons (screen readers).
   'Presenteren': 'Präsentieren',
+  'Tijden-overzicht tonen na afloop': 'Zeitenübersicht danach anzeigen',
+  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.': 'Die Zeit pro Folie wird immer gemessen; dies steuert nur, ob die Übersicht nach dieser Präsentation erscheint.',
   'Oefenoverzicht tonen na afloop': 'Übersicht des Probelaufs danach anzeigen',
   'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
       'Zeige nach einer Präsentation die Übersicht der pro Folie aufgewendeten Zeit. Die Zeit wird immer gemessen; dies legt nur fest, ob der Bildschirm erscheint.',
@@ -565,6 +567,8 @@ const _dutchSourceAddDe = {
   'Meter toevoegen': 'Instrument hinzufügen',
   'Animeren bij binnenkomst': 'Beim Einblenden animieren',
   'Activatieduur': 'Aktivierungsdauer',
+  'Volg thema-animatieduur': 'Animationsdauer des Themes folgen',
+  'Animatie bij openen': 'Beim Öffnen animieren',
   'Meter': 'Instrument',
   'Type': 'Typ',
   'Waarde': 'Wert',

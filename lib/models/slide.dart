@@ -195,7 +195,11 @@ class Slide {
   /// draw-in duration as an `ocideck_timeline_duration` comment.
   final TimelineLayout timelineLayout;
   final TimelineReveal timelineReveal;
-  final int timelineAnimationMs;
+
+  /// Per-slide draw-in duration override (ms). `null` = inherit the theme's
+  /// ThemeProfile.animationDurationMs. Only a non-null value round-trips as an
+  /// `ocideck_timeline_duration` comment.
+  final int? timelineAnimationMs;
 
   const Slide({
     required this.id,
@@ -237,7 +241,7 @@ class Slide {
     this.tableEditable = false,
     this.timelineLayout = TimelineLayout.auto,
     this.timelineReveal = TimelineReveal.onEnter,
-    this.timelineAnimationMs = timelineDefaultAnimationDurationMs,
+    this.timelineAnimationMs,
   });
 
   factory Slide.create(SlideType type) {
@@ -354,6 +358,7 @@ class Slide {
     TimelineLayout? timelineLayout,
     TimelineReveal? timelineReveal,
     int? timelineAnimationMs,
+    bool clearTimelineAnimation = false,
   }) {
     return Slide(
       id: id,
@@ -399,7 +404,9 @@ class Slide {
       tableEditable: tableEditable ?? this.tableEditable,
       timelineLayout: timelineLayout ?? this.timelineLayout,
       timelineReveal: timelineReveal ?? this.timelineReveal,
-      timelineAnimationMs: timelineAnimationMs ?? this.timelineAnimationMs,
+      timelineAnimationMs: clearTimelineAnimation
+          ? null
+          : (timelineAnimationMs ?? this.timelineAnimationMs),
     );
   }
 }

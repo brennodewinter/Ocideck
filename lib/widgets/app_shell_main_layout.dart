@@ -544,7 +544,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           .read(settingsProvider)
           .classificationWatermarkEnabled,
       allowRemoteMedia: ref.read(settingsProvider).allowRemoteMedia,
-      showRehearsalSummary: ref.read(settingsProvider).showRehearsalSummary,
+      showRehearsalSummary: deck.showRehearsalSummary,
       targetDuration: () {
         final secs = deck.presentationTargetSeconds;
         return secs > 0 ? Duration(seconds: secs) : null;
@@ -683,6 +683,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       description: info.description,
       keywords: info.keywords,
       presentationTargetSeconds: info.presentationTargetSeconds,
+      showRehearsalSummary: info.showRehearsalSummary,
     );
   }
 

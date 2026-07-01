@@ -910,6 +910,27 @@ void main() {
       expect(deck!.presentationTargetSeconds, 1500);
     });
 
+    test('deck-level show-rehearsal-summary round-trips (default stays clean)', () {
+      final service = MarkdownService();
+      Deck? roundTrip(bool show) => service.parseDeck(
+        service.generateDeck(
+          Deck(
+            title: 'Demo',
+            showRehearsalSummary: show,
+            slides: [Slide.create(SlideType.title).copyWith(title: 'Een')],
+          ),
+        ),
+      );
+      // Default (true) is not written to the front matter, but still parses true.
+      final onMarkdown = service.generateDeck(
+        Deck(title: 'Demo', slides: [Slide.create(SlideType.title)]),
+      );
+      expect(onMarkdown.contains('ocideck_show_rehearsal_summary'), isFalse);
+      expect(roundTrip(true)!.showRehearsalSummary, isTrue);
+      // Opt-out is persisted and round-trips.
+      expect(roundTrip(false)!.showRehearsalSummary, isFalse);
+    });
+
     test('timeline slide keeps title, events, layout and animation', () {
       final out = _roundTrip(
         Slide.create(SlideType.timeline).copyWith(
@@ -949,7 +970,9 @@ void main() {
       expect(out.type, SlideType.timeline);
       expect(out.timelineLayout, TimelineLayout.auto);
       expect(out.timelineReveal, TimelineReveal.onEnter);
-      expect(out.timelineAnimationMs, timelineDefaultAnimationDurationMs);
+      // No explicit duration: the slide inherits the theme's, so it round-trips
+      // as null (no ocideck_timeline_duration comment is written).
+      expect(out.timelineAnimationMs, isNull);
     });
   });
 

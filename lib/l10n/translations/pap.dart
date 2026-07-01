@@ -368,6 +368,8 @@ const _dutchSourceAddPap = {
   'Opslaan': 'Warda',
   // Accessibility labels for icon-only buttons (screen readers).
   'Presenteren': 'Presentá',
+  'Tijden-overzicht tonen na afloop': 'Mustra resúmen di tempo despues',
+  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.': 'E tempo pa slide ta wòrdu midí semper; esaki ta determiná solamente si e resúmen ta aparesé despues di e presentashon aki.',
   'Oefenoverzicht tonen na afloop': 'Mustra resúmen di práktika despues',
   'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
       'Despues di un presentashon, mustra e resúmen di tempu pasá pa slide. Semper ta midi tempu; esaki solamente ta determiná si e pantaya ta aparesé.',
@@ -576,6 +578,8 @@ const _dutchSourceAddPap = {
   'Meter toevoegen': 'Agregá meter',
   'Animeren bij binnenkomst': 'Animá na entrada',
   'Activatieduur': 'Durashon di aktivashon',
+  'Volg thema-animatieduur': 'Sigui durashon di animashon di tema',
+  'Animatie bij openen': 'Animá ora di habri',
   'Meter': 'Meter',
   'Type': 'Tipo',
   'Waarde': 'Balor',

@@ -74,6 +74,57 @@ extension _SettingsColors on _SettingsDialogState {
     ];
   }
 
+  /// Deck-wide default activation duration for animated slide types (timeline,
+  /// cockpit). A slide inherits this unless it sets its own duration.
+  List<Widget> _animationSettings() {
+    final l10n = context.l10n;
+    final ms = clampThemeAnimationDuration(_themeProfile.animationDurationMs);
+    final seconds = ms / 1000;
+    return [
+      const SizedBox(height: 12),
+      Row(
+        children: [
+          const Icon(Icons.timer_outlined, size: 18, color: Color(0xFF64748B)),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              l10n.d('Activatieduur'),
+              style: const TextStyle(fontSize: 13),
+            ),
+          ),
+          SizedBox(
+            width: 44,
+            child: Text(
+              '${seconds.toStringAsFixed(1)}s',
+              textAlign: TextAlign.right,
+              style: const TextStyle(
+                fontSize: 12,
+                color: Color(0xFF64748B),
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ],
+      ),
+      Slider(
+        min: kThemeMinAnimationDurationMs.toDouble(),
+        max: kThemeMaxAnimationDurationMs.toDouble(),
+        divisions:
+            (kThemeMaxAnimationDurationMs - kThemeMinAnimationDurationMs) ~/ 200,
+        label: '${seconds.toStringAsFixed(1)}s',
+        value: ms.toDouble(),
+        onChanged: (value) => _rebuild(() {
+          _themeProfile = _themeProfile.copyWith(
+            animationDurationMs: clampThemeAnimationDuration(
+              (value / 100).round() * 100,
+            ),
+          );
+          _profileTouched = true;
+        }),
+      ),
+    ];
+  }
+
   List<Widget> _checklistTableColorSettings() {
     final l10n = context.l10n;
     return [

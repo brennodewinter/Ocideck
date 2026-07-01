@@ -275,6 +275,58 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('bar chart animates its rods in (fl_chart tween) on enter', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.bar,
+      x: ['Januari'],
+      series: [
+        ChartSeries(name: 'Omzet', data: [42]),
+      ],
+    );
+
+    BarChart chart() => tester.widget<BarChart>(find.byType(BarChart));
+    double rodToY() => chart().data.barGroups.single.barRods.single.toY;
+
+    // Presentation mode: fl_chart is handed a non-zero tween duration so it
+    // lerps the rod 0 -> value internally, then the duration freezes to zero so
+    // later hover/tooltip rebuilds don't re-animate. The final value is 42.
+    await tester.pumpWidget(_host(spec, presentationMode: true));
+    await tester.pump(); // run the post-frame swap to the real values
+    expect(chart().duration, greaterThan(Duration.zero));
+    expect(rodToY(), 42);
+    await tester.pumpAndSettle();
+    expect(chart().duration, Duration.zero);
+    expect(rodToY(), 42);
+    expect(tester.takeException(), isNull);
+
+    // Editor/thumbnail (no presentation): no tween, final value immediately.
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+    expect(chart().duration, Duration.zero);
+    expect(rodToY(), 42);
+  });
+
+  testWidgets('a chart with animation off is static even in presentation', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.bar,
+      x: ['Januari'],
+      series: [
+        ChartSeries(name: 'Omzet', data: [42]),
+      ],
+      animateOnEnter: false,
+    );
+    await tester.pumpWidget(_host(spec, presentationMode: true));
+    await tester.pump();
+    final chart = tester.widget<BarChart>(find.byType(BarChart));
+    // No tween at all, and the final value on the first frame.
+    expect(chart.duration, Duration.zero);
+    expect(chart.data.barGroups.single.barRods.single.toY, 42);
+  });
+
   testWidgets('radar chart renders a polygon per series with axis labels', (
     tester,
   ) async {

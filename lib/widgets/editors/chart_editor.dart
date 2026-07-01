@@ -8,7 +8,9 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
+import '../../models/settings.dart';
 import '../../models/slide.dart';
+import 'animation_duration_control.dart';
 import '_editor_field.dart';
 
 part 'chart_editor_dialogs.dart';
@@ -21,6 +23,10 @@ class ChartEditor extends StatefulWidget {
   final ValueChanged<Slide> onUpdate;
   final ValueChanged<List<Slide>>? onAddVariants;
   final String? projectPath;
+
+  /// Theme's shared activation duration (ms), used as the inherited value when
+  /// the chart sets no own duration.
+  final int themeAnimationDurationMs;
   final bool nestedInScrollView;
 
   const ChartEditor({
@@ -29,6 +35,7 @@ class ChartEditor extends StatefulWidget {
     required this.onUpdate,
     this.onAddVariants,
     this.projectPath,
+    required this.themeAnimationDurationMs,
     this.nestedInScrollView = false,
   });
 
@@ -42,6 +49,10 @@ class _ChartEditorState extends State<ChartEditor> {
   late final TextEditingController _maxBound;
   late ChartType _type;
   String? _source;
+  late bool _animateOnEnter;
+
+  /// Per-slide duration override; null = inherit the theme's duration.
+  int? _animationOverrideMs;
 
   // Editable grid model (strings while editing).
   List<String> _xLabels = [];
@@ -62,6 +73,8 @@ class _ChartEditorState extends State<ChartEditor> {
     final spec = ChartSpec.parse(widget.slide.customMarkdown);
     _type = spec.type;
     _source = spec.source;
+    _animateOnEnter = spec.animateOnEnter;
+    _animationOverrideMs = spec.animationDurationMs;
     _title = TextEditingController(text: spec.title);
     _title.addListener(_emit);
     _minBound = TextEditingController(text: _fmtBound(spec.minBound));
@@ -143,6 +156,8 @@ class _ChartEditorState extends State<ChartEditor> {
       series: series,
       minBound: _supportsBounds ? _parseBound(_minBound.text) : null,
       maxBound: _supportsBounds ? _parseBound(_maxBound.text) : null,
+      animateOnEnter: _animateOnEnter,
+      animationDurationMs: _animationOverrideMs,
     );
   }
 
@@ -457,6 +472,46 @@ class _ChartEditorState extends State<ChartEditor> {
                     child: Text(l10n.d('Ontkoppelen')),
                   ),
                 ],
+              ),
+            ),
+          Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.auto_awesome,
+                  size: 18,
+                  color: Color(0xFF64748B),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    l10n.d('Animatie bij openen'),
+                    style: const TextStyle(fontSize: 13),
+                  ),
+                ),
+                Switch(
+                  value: _animateOnEnter,
+                  onChanged: (v) {
+                    setState(() => _animateOnEnter = v);
+                    _emit();
+                  },
+                ),
+              ],
+            ),
+          ),
+          if (_animateOnEnter)
+            Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: AnimationDurationControl(
+                overrideMs: _animationOverrideMs,
+                themeMs: widget.themeAnimationDurationMs,
+                minMs: kThemeMinAnimationDurationMs,
+                maxMs: kThemeMaxAnimationDurationMs,
+                onChanged: (value) {
+                  setState(() => _animationOverrideMs = value);
+                  _emit();
+                },
               ),
             ),
           const SizedBox(height: 12),

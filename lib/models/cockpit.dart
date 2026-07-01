@@ -5,7 +5,9 @@ import '../utils/log.dart';
 const int cockpitMaxMeters = 6;
 const int cockpitDefaultAnimationDurationMs = 2800;
 const int cockpitMinAnimationDurationMs = 600;
-const int cockpitMaxAnimationDurationMs = 15000;
+// Shared activation-duration ceiling across animated slide types (timeline,
+// cockpit): a build-up tops out at the same 30s regardless of slide type.
+const int cockpitMaxAnimationDurationMs = 30000;
 
 enum CockpitMeterType {
   speedometer,
@@ -215,13 +217,16 @@ class CockpitMeterSpec {
 class CockpitSpec {
   final String layout;
   final bool animateOnEnter;
-  final int animationDurationMs;
+
+  /// Per-slide activation duration override (ms). `null` = inherit the theme's
+  /// ThemeProfile.animationDurationMs. Only a non-null value is serialised.
+  final int? animationDurationMs;
   final List<CockpitMeterSpec> meters;
 
   const CockpitSpec({
     this.layout = 'auto',
     this.animateOnEnter = true,
-    this.animationDurationMs = cockpitDefaultAnimationDurationMs,
+    this.animationDurationMs,
     this.meters = const [],
   });
 
@@ -293,13 +298,16 @@ class CockpitSpec {
     String? layout,
     bool? animateOnEnter,
     int? animationDurationMs,
+    bool inheritAnimationDuration = false,
     List<CockpitMeterSpec>? meters,
   }) => CockpitSpec(
     layout: layout ?? this.layout,
     animateOnEnter: animateOnEnter ?? this.animateOnEnter,
-    animationDurationMs: _durationMs(
-      animationDurationMs ?? this.animationDurationMs,
-    ),
+    animationDurationMs: inheritAnimationDuration
+        ? null
+        : (animationDurationMs != null
+              ? _durationMs(animationDurationMs)
+              : this.animationDurationMs),
     meters: (meters ?? this.meters).take(cockpitMaxMeters).toList(),
   );
 
@@ -307,7 +315,9 @@ class CockpitSpec {
     final map = <String, dynamic>{
       'layout': layout,
       'animateOnEnter': animateOnEnter,
-      'animationDurationMs': animationDurationMs,
+      // Omitted when inheriting the theme's duration, so a clean slide stays
+      // clean and a theme change reaches it.
+      if (animationDurationMs != null) 'animationDurationMs': animationDurationMs,
       'meters': [
         for (final meter in meters.take(cockpitMaxMeters)) meter.toJson(),
       ],
@@ -315,12 +325,15 @@ class CockpitSpec {
     return const JsonEncoder.withIndent('  ').convert(map);
   }
 
-  static int _durationMs(Object? raw) {
+  /// Parses and clamps an explicit duration; `null` (absent or unparseable) =
+  /// inherit the theme's duration.
+  static int? _durationMs(Object? raw) {
     final parsed = switch (raw) {
       num value => value.round(),
       _ => int.tryParse(raw?.toString() ?? ''),
     };
-    return (parsed ?? cockpitDefaultAnimationDurationMs)
+    if (parsed == null) return null;
+    return parsed
         .clamp(cockpitMinAnimationDurationMs, cockpitMaxAnimationDurationMs)
         .toInt();
   }

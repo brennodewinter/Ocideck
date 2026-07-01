@@ -47,6 +47,8 @@ class _CockpitPreviewState extends State<_CockpitPreview>
     super.didUpdateWidget(oldWidget);
     if (oldWidget.slide.id != widget.slide.id ||
         oldWidget.slide.customMarkdown != widget.slide.customMarkdown ||
+        oldWidget.profile.animationDurationMs !=
+            widget.profile.animationDurationMs ||
         oldWidget.presentationMode != widget.presentationMode) {
       if (oldWidget.slide.customMarkdown != widget.slide.customMarkdown) {
         _spec = CockpitSpec.parse(widget.slide.customMarkdown);
@@ -57,7 +59,10 @@ class _CockpitPreviewState extends State<_CockpitPreview>
 
   void _maybeStart() {
     final spec = _spec;
-    _controller.duration = Duration(milliseconds: spec.animationDurationMs);
+    // null override = inherit the theme's shared activation duration.
+    final ms = (spec.animationDurationMs ?? widget.profile.animationDurationMs)
+        .clamp(cockpitMinAnimationDurationMs, cockpitMaxAnimationDurationMs);
+    _controller.duration = Duration(milliseconds: ms);
     if (widget.presentationMode && spec.animateOnEnter) {
       _controller.forward(from: 0);
     } else {

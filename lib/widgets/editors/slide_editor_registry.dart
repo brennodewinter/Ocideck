@@ -32,6 +32,10 @@ class SlideEditorContext {
   final bool nestedInScrollView;
   final void Function(int atMs)? onSplitVideo;
 
+  /// The active theme's shared activation duration (ms), shown by animated-slide
+  /// editors as the inherited value when the slide sets no own duration.
+  final int themeAnimationDurationMs;
+
   const SlideEditorContext({
     required this.slide,
     required this.onUpdate,
@@ -39,6 +43,7 @@ class SlideEditorContext {
     required this.searchPaths,
     required this.captionBasePath,
     required this.onAddChartVariants,
+    required this.themeAnimationDurationMs,
     this.nestedInScrollView = false,
     this.onSplitVideo,
   });
@@ -145,12 +150,14 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         onUpdate: c.onUpdate,
         onAddVariants: c.onAddChartVariants,
         projectPath: c.captionBasePath,
+        themeAnimationDurationMs: c.themeAnimationDurationMs,
         nestedInScrollView: c.nestedInScrollView,
       ),
       SlideType.cockpit: (c) => CockpitEditor(
         key: c._key,
         slide: c.slide,
         onUpdate: c.onUpdate,
+        themeAnimationDurationMs: c.themeAnimationDurationMs,
         nestedInScrollView: c.nestedInScrollView,
       ),
       SlideType.question: (c) => QuestionEditor(
@@ -166,6 +173,7 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         key: c._key,
         slide: c.slide,
         onUpdate: c.onUpdate,
+        themeAnimationDurationMs: c.themeAnimationDurationMs,
         nestedInScrollView: c.nestedInScrollView,
       ),
     };
