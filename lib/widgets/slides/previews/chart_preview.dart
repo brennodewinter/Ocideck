@@ -75,8 +75,21 @@ class _ChartPreviewState extends State<_ChartPreview>
   @override
   void didUpdateWidget(_ChartPreview oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.slide.customMarkdown != oldWidget.slide.customMarkdown) {
+    final markdownChanged =
+        widget.slide.customMarkdown != oldWidget.slide.customMarkdown;
+    if (markdownChanged) {
       _spec = ChartSpec.parse(widget.slide.customMarkdown);
+    }
+    // The preview widget is reused across slides (no key in the presenter), so
+    // re-run the entrance whenever this position now shows a different slide or
+    // the inherited theme duration changed — not only on a markdown edit. Two
+    // adjacent chart slides with identical chart markdown otherwise wouldn't
+    // animate, and a live theme-duration change wouldn't take effect (parity
+    // with cockpit_preview / timeline_preview).
+    if (markdownChanged ||
+        widget.slide.id != oldWidget.slide.id ||
+        widget.profile.animationDurationMs !=
+            oldWidget.profile.animationDurationMs) {
       _maybeAnimateIn();
     }
   }
@@ -105,6 +118,11 @@ class _ChartPreviewState extends State<_ChartPreview>
     _grow = 0;
     _chartAnimDuration = Duration(milliseconds: ms);
     _entrance.duration = Duration(milliseconds: ms);
+    // Reset synchronously (the controller is reused across slides) so the pie's
+    // scale/fade starts collapsed on this very frame; otherwise a reused
+    // controller still reads value 1 from the previous slide and the pie flashes
+    // full-size for one frame before snapping small.
+    _entrance.value = 0;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       // Swap to the real values once: fl_chart tweens 0 -> value internally.
