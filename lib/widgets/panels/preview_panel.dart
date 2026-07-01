@@ -341,6 +341,12 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                   slideNumber: idx + 1,
                   slideCount: deck.slides.length,
                   numberStart: numberedListStartFor(deck.slides, idx),
+                  fitScaleOverride: sharedSplitFitScale(
+                    deck.slides,
+                    idx,
+                    deck.themeProfile,
+                    deck.themeProfile.fontFamily,
+                  ),
                   richTextPage: richTextPage,
                   showRichTextPageControls: hasRichTextPages,
                   onRichTextPageChanged: hasRichTextPages

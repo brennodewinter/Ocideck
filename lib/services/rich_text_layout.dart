@@ -259,63 +259,6 @@ RichTextLayoutPlan planRichTextLayout({
   );
 }
 
-/// Best scale for one paginated rich-text page, growing to fill [budget].
-double richTextScaleForPage({
-  required RichTextLayoutPlan plan,
-  required int pageIndex,
-  required double budget,
-  required double availW,
-  required double refW,
-  required bool hasTitle,
-  required String title,
-  required String subtitle,
-  required double titleSize,
-  required double subtitleSize,
-  required double spacing,
-  required double bodySize,
-  required String font,
-  required double maxScale,
-  bool titleOnFirstPageOnly = true,
-}) {
-  final blocks = parseMarkdownBodyBlocks(plan.markdownForPage(pageIndex));
-  final includeHeader = !titleOnFirstPageOnly || pageIndex == 0;
-
-  double measurePageAt(double scale) {
-    var h = 0.0;
-    if (includeHeader) {
-      h += _headerHeight(
-        scale: scale,
-        contentW: availW,
-        hasTitle: hasTitle,
-        title: title,
-        subtitle: subtitle,
-        titleSize: titleSize,
-        subtitleSize: subtitleSize,
-        spacing: spacing,
-        font: font,
-        hasBody: blocks.any((b) => b.markdown.trim().isNotEmpty),
-      );
-    }
-    h += measureMarkdownBlocksHeight(
-      blocks: blocks,
-      scale: scale,
-      contentW: availW,
-      refW: refW,
-      bodySize: bodySize,
-      font: font,
-    );
-    return h;
-  }
-
-  return maxVerticalFitScale(
-    availH: budget,
-    refW: refW,
-    measure: measurePageAt,
-    minScale: kTextDensityCriticalScale,
-    maxScale: maxScale,
-  );
-}
-
 RichTextLayoutPlan planRichTextForSlide({
   required Slide slide,
   required ThemeProfile profile,

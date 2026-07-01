@@ -158,6 +158,35 @@ void main() {
       expect(roundTrip(true).continueNumbering, isTrue);
     });
 
+    test('continue-split round-trips on bullets and two-column slides', () {
+      // Default off leaves no marker; the split continuation flag survives a
+      // save/open on both a plain bullets slide and a two-column slide.
+      expect(
+        _roundTrip(
+          Slide.create(SlideType.bullets).copyWith(bullets: ['a', 'b']),
+        ).continuesSplit,
+        isFalse,
+      );
+      expect(
+        _roundTrip(
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(bullets: ['a', 'b'], continuesSplit: true),
+        ).continuesSplit,
+        isTrue,
+      );
+      expect(
+        _roundTrip(
+          Slide.create(SlideType.twoBullets).copyWith(
+            bullets: ['a'],
+            bullets2: ['b'],
+            continuesSplit: true,
+          ),
+        ).continuesSplit,
+        isTrue,
+      );
+    });
+
     test('checklist style and checked items round-trip', () {
       final service = MarkdownService();
       final markdown = service.generateDeck(

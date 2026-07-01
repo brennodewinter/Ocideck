@@ -384,6 +384,7 @@ double bulletsSlideFitScale({
   required Slide slide,
   required String font,
   bool includeChecklistProgress = true,
+  double extraVReserve = 0,
 }) {
   final w = kReferenceSlideWidth;
   final pad = w * 0.07;
@@ -407,7 +408,9 @@ double bulletsSlideFitScale({
   final textAvailW = showProgress
       ? (availW - progressGap - progressW).clamp(w * 0.12, availW)
       : availW;
-  final availH = slideHeight - vPad * 2;
+  // [extraVReserve] (e.g. a logo strip) is a fraction of [kReferenceSlideWidth],
+  // so it scales with the reference geometry like every other measure here.
+  final availH = (slideHeight - vPad * 2 - extraVReserve).clamp(1.0, slideHeight);
 
   return bulletsFitScale(
     availW: textAvailW,
@@ -428,7 +431,11 @@ double bulletsSlideFitScale({
 }
 
 /// Layout metrics for a two-column bullets slide.
-double twoBulletsSlideFitScale({required Slide slide, required String font}) {
+double twoBulletsSlideFitScale({
+  required Slide slide,
+  required String font,
+  double extraVReserve = 0,
+}) {
   final w = kReferenceSlideWidth;
   final pad = w * 0.07;
   final vPad = w * 0.05;
@@ -453,7 +460,7 @@ double twoBulletsSlideFitScale({required Slide slide, required String font}) {
   final slideHeight = w * 9 / 16;
   final contentW = (w - pad * 2).clamp(w * 0.12, w);
   final columnW = ((contentW - columnGap) / 2).clamp(w * 0.12, w);
-  var availH = slideHeight - vPad * 2;
+  var availH = slideHeight - vPad * 2 - extraVReserve;
   if (slide.title.isNotEmpty) {
     availH -= measureTextHeight(
       slide.title,

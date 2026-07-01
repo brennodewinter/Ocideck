@@ -20,6 +20,7 @@ import '../../utils/page_scoped_notes.dart';
 import '../dialogs/add_slide_dialog.dart';
 import '../dialogs/import_slides_dialog.dart';
 import '../dialogs/slide_finder_dialog.dart';
+import '../slides/slide_preview.dart';
 import '../slides/slide_thumbnail.dart';
 
 part 'slide_list_panel_bars.dart';
@@ -556,6 +557,12 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
           slideCount: deck.slides.length,
           tlp: deck.tlp,
           organization: deck.organization,
+          fitScaleOverride: sharedSplitFitScale(
+            deck.slides,
+            index,
+            deck.themeProfile,
+            deck.themeProfile.fontFamily,
+          ),
           onTap: () => _onSlideTap(index),
           onToggleSkip: () => notifier.toggleSkip(index),
           onCopyImage: () => _copySlideAsImage(slide),
@@ -628,6 +635,12 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
           slideCount: deck.slides.length,
           tlp: deck.tlp,
           organization: deck.organization,
+          fitScaleOverride: sharedSplitFitScale(
+            deck.slides,
+            i,
+            deck.themeProfile,
+            deck.themeProfile.fontFamily,
+          ),
           onTap: () => _onSlideTap(i),
           onToggleSkip: () => notifier.toggleSkip(i),
           onCopyImage: () => _copySlideAsImage(slide),

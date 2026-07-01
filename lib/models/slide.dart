@@ -140,6 +140,14 @@ class Slide {
   /// bullets/bulletsImage slide whose previous slide is also numbered.
   final bool continueNumbering;
 
+  /// Marks this slide as a continuation half produced by splitting a bullet
+  /// slide. All members of a split run (the original plus its continuations)
+  /// render their text at one shared font scale — the size of the fullest half
+  /// — so the reader never sees the same list change size across pages. Set on
+  /// every half after the first; round-trips as an `ocideck_continue_split`
+  /// comment. Independent of [continueNumbering] (numbering vs sizing).
+  final bool continuesSplit;
+
   /// Optional headings above the two bullet columns (twoBullets only). Empty =
   /// no heading for that column.
   final String columnTitle1;
@@ -217,6 +225,7 @@ class Slide {
     this.listStyle = ListStyle.bullets,
     this.showChecklistProgress = false,
     this.continueNumbering = false,
+    this.continuesSplit = false,
     this.columnTitle1 = '',
     this.columnTitle2 = '',
     this.imagePath = '',
@@ -290,6 +299,7 @@ class Slide {
       listStyle: src.listStyle,
       showChecklistProgress: src.showChecklistProgress,
       continueNumbering: src.continueNumbering,
+      continuesSplit: src.continuesSplit,
       columnTitle1: src.columnTitle1,
       columnTitle2: src.columnTitle2,
       imagePath: src.imagePath,
@@ -334,6 +344,7 @@ class Slide {
     ListStyle? listStyle,
     bool? showChecklistProgress,
     bool? continueNumbering,
+    bool? continuesSplit,
     String? columnTitle1,
     String? columnTitle2,
     String? imagePath,
@@ -380,6 +391,7 @@ class Slide {
       showChecklistProgress:
           showChecklistProgress ?? this.showChecklistProgress,
       continueNumbering: continueNumbering ?? this.continueNumbering,
+      continuesSplit: continuesSplit ?? this.continuesSplit,
       columnTitle1: columnTitle1 ?? this.columnTitle1,
       columnTitle2: columnTitle2 ?? this.columnTitle2,
       imagePath: imagePath ?? this.imagePath,

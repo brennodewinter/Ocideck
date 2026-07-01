@@ -36,6 +36,12 @@ extension _PresenterViews on _FullscreenPresenterState {
                   slideNumber: _index + 1,
                   slideCount: widget.slides.length,
                   numberStart: numberedListStartFor(widget.slides, _index),
+                  fitScaleOverride: sharedSplitFitScale(
+                    widget.slides,
+                    _index,
+                    widget.themeProfile,
+                    widget.themeProfile.fontFamily,
+                  ),
                   richTextPage: _richTextPage,
                   showRichTextPageControls:
                       (_richTextPlanFor(slide)?.pageCount ?? 1) > 1,
@@ -205,6 +211,12 @@ extension _PresenterViews on _FullscreenPresenterState {
                               showClassificationWatermark:
                                   widget.showClassificationWatermark,
                               presentationMode: true,
+                              fitScaleOverride: sharedSplitFitScale(
+                                widget.slides,
+                                _index + 1,
+                                widget.themeProfile,
+                                widget.themeProfile.fontFamily,
+                              ),
                             ),
                           )
                         : Container(

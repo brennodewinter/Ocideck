@@ -10,6 +10,7 @@ import '../models/settings.dart';
 import '../models/slide.dart';
 import '../utils/image_limits.dart';
 import '../utils/project_path.dart';
+import 'slide_layout_metrics.dart';
 import '../widgets/slides/slide_preview.dart';
 
 /// Renders the exact on-screen slide previews to PNG images so exports look
@@ -105,7 +106,17 @@ class SlideRasterizer {
 
       for (var i = 0; i < slides.length; i++) {
         onStage?.call('prepare', i, slides.length);
-        hostKey.currentState!.showSlide(slides[i], i + 1);
+        hostKey.currentState!.showSlide(
+          slides[i],
+          i + 1,
+          numberStart: numberedListStartFor(slides, i),
+          fitScaleOverride: sharedSplitFitScale(
+            slides,
+            i,
+            themeProfile,
+            themeProfile.fontFamily,
+          ),
+        );
         if (!context.mounted) break;
 
         onStage?.call('render', i, slides.length);
@@ -213,6 +224,8 @@ class _RasterSlideHost extends StatefulWidget {
 class _RasterSlideHostState extends State<_RasterSlideHost> {
   late Slide _slide;
   late int _slideNumber;
+  int _numberStart = 1;
+  double? _fitScaleOverride;
 
   @override
   void initState() {
@@ -221,11 +234,23 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
     _slideNumber = 1;
   }
 
-  void showSlide(Slide slide, int slideNumber) {
-    if (_slide.id == slide.id && _slideNumber == slideNumber) return;
+  void showSlide(
+    Slide slide,
+    int slideNumber, {
+    int numberStart = 1,
+    double? fitScaleOverride,
+  }) {
+    if (_slide.id == slide.id &&
+        _slideNumber == slideNumber &&
+        _numberStart == numberStart &&
+        _fitScaleOverride == fitScaleOverride) {
+      return;
+    }
     setState(() {
       _slide = slide;
       _slideNumber = slideNumber;
+      _numberStart = numberStart;
+      _fitScaleOverride = fitScaleOverride;
     });
   }
 
@@ -243,6 +268,8 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
           cockpitColorScheme: widget.cockpitColorScheme,
           slideNumber: _slideNumber,
           slideCount: widget.slideCount,
+          numberStart: _numberStart,
+          fitScaleOverride: _fitScaleOverride,
           tlp: widget.tlp,
           showClassificationWatermark: widget.showClassificationWatermark,
           organization: widget.organization,

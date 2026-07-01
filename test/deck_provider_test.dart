@@ -114,6 +114,30 @@ void main() {
     // fysieke maximum dat nog zou passen.
     expect(first.bullets.length, kSingleColumnBulletWarningCount);
     expect(second.bullets.length, 30 - kSingleColumnBulletWarningCount);
+    // Alleen de tweede helft is een vervolgpagina: die deelt straks de
+    // fontgrootte met de eerste; de eerste blijft een gewone (start)slide.
+    expect(first.continuesSplit, isFalse);
+    expect(second.continuesSplit, isTrue);
+  });
+
+  test('splitSlide marks the second column-split half as a continuation', () {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    final n = _notifier()..newDeck('D');
+    final left = List.generate(12, (i) => 'Links $i');
+    final right = List.generate(12, (i) => 'Rechts $i');
+    n.addSlide(SlideType.twoBullets, afterIndex: 0);
+    n.updateSlide(
+      1,
+      n.state.deck!.slides[1].copyWith(bullets: left, bullets2: right),
+    );
+
+    n.splitSlide(1);
+
+    final slides = n.state.deck!.slides;
+    expect(slides, hasLength(3));
+    expect(slides[1].continuesSplit, isFalse);
+    expect(slides[2].continuesSplit, isTrue);
+    expect(slides[2].type, SlideType.twoBullets);
   });
 
   test('splitSlide is a no-op for non-bullet slides', () {
@@ -139,8 +163,11 @@ void main() {
 
     final slides = n.state.deck!.slides;
     expect(slides, hasLength(3));
+    // The first half keeps the image; the continuation page is pure text.
     expect(slides[1].type, SlideType.bulletsImage);
-    expect(slides[2].type, SlideType.bulletsImage);
+    expect(slides[1].imagePath, 'foto.png');
+    expect(slides[2].type, SlideType.bullets);
+    expect(slides[2].imagePath, isEmpty);
     expect(slides[1].bullets, isNotEmpty);
     expect(slides[2].bullets, isNotEmpty);
     expect([...slides[1].bullets, ...slides[2].bullets], bullets);

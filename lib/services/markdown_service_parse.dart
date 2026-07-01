@@ -249,6 +249,7 @@ extension _MarkdownParse on MarkdownService {
       listStyle: body.listStyle,
       showChecklistProgress: d.showChecklistProgress,
       continueNumbering: d.continueNumbering,
+      continuesSplit: d.continuesSplit,
       columnTitle1: d.columnTitle1,
       columnTitle2: d.columnTitle2,
       imagePath: body.imagePath,
@@ -316,6 +317,7 @@ extension _MarkdownParse on MarkdownService {
     int? timelineAnimationMs,
     bool showChecklistProgress,
     bool continueNumbering,
+    bool continuesSplit,
     bool titleImageOverlay,
     String titleTextColorOverride,
     BulletMarker? bulletMarkerOverride,
@@ -346,6 +348,7 @@ extension _MarkdownParse on MarkdownService {
     int? timelineAnimationMs;
     var showChecklistProgress = false;
     var continueNumbering = false;
+    var continuesSplit = false;
     var titleImageOverlay = true;
     var titleTextColorOverride = '';
     BulletMarker? bulletMarkerOverride;
@@ -394,6 +397,10 @@ extension _MarkdownParse on MarkdownService {
           continueNumbering =
               content.substring('ocideck_continue_numbering:'.length).trim() ==
               'true';
+        } else if (content.startsWith('ocideck_continue_split:')) {
+          continuesSplit =
+              content.substring('ocideck_continue_split:'.length).trim() ==
+              'true';
         } else if (content.startsWith('ocideck_title_image_overlay:')) {
           titleImageOverlay =
               content.substring('ocideck_title_image_overlay:'.length).trim() !=
@@ -429,6 +436,7 @@ extension _MarkdownParse on MarkdownService {
       timelineAnimationMs: timelineAnimationMs,
       showChecklistProgress: showChecklistProgress,
       continueNumbering: continueNumbering,
+      continuesSplit: continuesSplit,
       titleImageOverlay: titleImageOverlay,
       titleTextColorOverride: titleTextColorOverride,
       bulletMarkerOverride: bulletMarkerOverride,

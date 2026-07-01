@@ -263,6 +263,12 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                   slideNumber: _index + 1,
                   slideCount: _slides.length,
                   numberStart: numberedListStartFor(_slides, _index),
+                  fitScaleOverride: sharedSplitFitScale(
+                    _slides,
+                    _index,
+                    _theme,
+                    _theme.fontFamily,
+                  ),
                   richTextPage: _richTextPage,
                   showRichTextPageControls: false,
                   timelineRevealedCount: _timelineRevealedFor(slide),

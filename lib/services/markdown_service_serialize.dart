@@ -69,6 +69,9 @@ extension _MarkdownSerialize on MarkdownService {
       if (slide.continueNumbering && slide.listStyle == ListStyle.numbered) {
         buf.writeln('<!-- ocideck_continue_numbering: true -->');
       }
+      if (slide.continuesSplit) {
+        buf.writeln('<!-- ocideck_continue_split: true -->');
+      }
       _writeChecklistProgress(buf, slide);
       buf.writeln();
       _writeList(buf, slide.bullets, slide.listStyle);
@@ -83,6 +86,9 @@ extension _MarkdownSerialize on MarkdownService {
   ) {
     if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
     _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);
+    if (slide.continuesSplit) {
+      buf.writeln('<!-- ocideck_continue_split: true -->');
+    }
     buf.writeln();
     _writeTwoBulletColumns(
       buf,

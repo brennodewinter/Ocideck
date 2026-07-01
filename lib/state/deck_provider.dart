@@ -374,9 +374,23 @@ class DeckNotifier extends StateNotifier<DeckState> {
             ? kChecklistBulletWarningCount
             : kSingleColumnBulletWarningCount;
         final at = keepFor(counts.left, bullets.length, limit);
+        var second = Slide.duplicate(
+          slide,
+        ).copyWith(bullets: bullets.sublist(at), continuesSplit: true);
+        // The image is the anchor of the first page only: a continuation page
+        // is pure text, so it drops the image and becomes a plain bullets slide
+        // (full width) rather than repeating the visual.
+        if (slide.type == SlideType.bulletsImage) {
+          second = second.copyWith(
+            type: SlideType.bullets,
+            imagePath: '',
+            imageCaption: '',
+            imageSize: 0,
+          );
+        }
         return (
           first: slide.copyWith(bullets: bullets.sublist(0, at)),
-          second: Slide.duplicate(slide).copyWith(bullets: bullets.sublist(at)),
+          second: second,
         );
       case SlideType.twoBullets:
         final left = slide.bullets;
@@ -394,6 +408,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
           second: Slide.duplicate(slide).copyWith(
             bullets: left.sublist(leftAt),
             bullets2: right.sublist(rightAt),
+            continuesSplit: true,
           ),
         );
       default:
