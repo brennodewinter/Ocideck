@@ -26,8 +26,11 @@ extension _SettingsGeneralTab on _SettingsDialogState {
               isExpanded: true,
               isDense: true,
               items: [
-                for (final entry in AppLocalizations.languageNames.entries)
-                  DropdownMenuItem(value: entry.key, child: Text(entry.value)),
+                for (final entry in AppLocalizations.languageOptions)
+                  DropdownMenuItem(
+                    value: entry.key,
+                    child: languageOptionRow(entry.key, entry.value),
+                  ),
               ],
               onChanged: (code) {
                 if (code == null) return;

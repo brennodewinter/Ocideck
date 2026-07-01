@@ -13,6 +13,7 @@ import '../../state/consent_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/log.dart';
 import '../../l10n/app_localizations.dart';
+import '../language_flag.dart';
 import '../privacy_statement_content.dart';
 
 part 'parts/settings_dialog_general.dart';
@@ -487,14 +488,33 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           const Spacer(),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 18),
-            child: Text(
-              'OciDeck',
-              style: TextStyle(
-                color: Colors.white.withValues(alpha: 0.32),
-                fontSize: 11,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 2.5,
-              ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // EU-yellow recolour of the logo, so it reads on the dark
+                // sidebar without a backing plate.
+                Semantics(
+                  label: 'OciDeck',
+                  image: true,
+                  child: Image.asset(
+                    'assets/images/ocideck-logo-eu.png',
+                    width: 30,
+                    height: 30,
+                    fit: BoxFit.contain,
+                    filterQuality: FilterQuality.high,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  'OciDeck',
+                  style: TextStyle(
+                    color: Colors.white.withValues(alpha: 0.32),
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 2.5,
+                  ),
+                ),
+              ],
             ),
           ),
         ],

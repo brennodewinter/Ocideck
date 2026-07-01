@@ -9,6 +9,16 @@ part 'translations/fr.dart';
 part 'translations/es.dart';
 part 'translations/fy.dart';
 part 'translations/pap.dart';
+part 'translations/la.dart';
+part 'translations/id.dart';
+part 'translations/pl.dart';
+part 'translations/uk.dart';
+part 'translations/gsw.dart';
+part 'translations/el.dart';
+part 'translations/da.dart';
+part 'translations/sv.dart';
+part 'translations/hr.dart';
+part 'translations/cs.dart';
 
 class AppLocalizations {
   final Locale locale;
@@ -24,6 +34,16 @@ class AppLocalizations {
     Locale('es'),
     Locale('fy'),
     Locale('pap'),
+    Locale('la'),
+    Locale('id'),
+    Locale('pl'),
+    Locale('uk'),
+    Locale('gsw'),
+    Locale('el'),
+    Locale('da'),
+    Locale('sv'),
+    Locale('hr'),
+    Locale('cs'),
   ];
 
   static const languageNames = {
@@ -35,7 +55,87 @@ class AppLocalizations {
     'es': 'Español',
     'fy': 'Frysk',
     'pap': 'Papiamento',
+    'la': 'Latina',
+    'id': 'Bahasa Indonesia',
+    'pl': 'Polski',
+    'uk': 'Українська',
+    'gsw': 'Schwiizerdütsch',
+    'el': 'Ελληνικά',
+    'da': 'Dansk',
+    'sv': 'Svenska',
+    'hr': 'Hrvatski',
+    'cs': 'Čeština',
   };
+
+  /// A country flag (emoji) per language, shown in the language pickers. Some
+  /// choices are by convention: English → United Kingdom, Latin → Vatican City,
+  /// Frisian → Netherlands (Friesland), Papiamento → Curaçao, Swiss German →
+  /// Switzerland.
+  static const languageFlags = {
+    'nl': '🇳🇱',
+    'en': '🇬🇧',
+    'it': '🇮🇹',
+    'de': '🇩🇪',
+    'fr': '🇫🇷',
+    'es': '🇪🇸',
+    'fy': '🇳🇱',
+    'pap': '🇨🇼',
+    'la': '🇻🇦',
+    'id': '🇮🇩',
+    'pl': '🇵🇱',
+    'uk': '🇺🇦',
+    'gsw': '🇨🇭',
+    'el': '🇬🇷',
+    'da': '🇩🇰',
+    'sv': '🇸🇪',
+    'hr': '🇭🇷',
+    'cs': '🇨🇿',
+  };
+
+  // Transliteration to a Latin sort key, so names in other scripts (Greek,
+  // Cyrillic) or with diacritics fold to where a reader expects them —
+  // Ελληνικά → "ellinika" (near E), Українська → "ukrainska" (near U), Čeština
+  // → "cestina" (near C) — instead of being dumped after all Latin names by
+  // raw Unicode code-point order.
+  static const _translitMap = {
+    'á': 'a', 'à': 'a', 'â': 'a', 'ä': 'a', 'ã': 'a', 'å': 'a', 'ą': 'a',
+    'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e', 'ě': 'e', 'ę': 'e',
+    'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i',
+    'ó': 'o', 'ò': 'o', 'ô': 'o', 'ö': 'o', 'õ': 'o', 'ø': 'o',
+    'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u', 'ů': 'u',
+    'ý': 'y', 'ÿ': 'y',
+    'ç': 'c', 'ć': 'c', 'č': 'c', 'ñ': 'n', 'ń': 'n',
+    'š': 's', 'ś': 's', 'ş': 's', 'ž': 'z', 'ź': 'z', 'ż': 'z',
+    'đ': 'd', 'ď': 'd', 'ł': 'l', 'ř': 'r', 'ť': 't', 'ň': 'n',
+    'æ': 'ae', 'ß': 'ss',
+    // Greek
+    'α': 'a', 'ά': 'a', 'β': 'v', 'γ': 'g', 'δ': 'd', 'ε': 'e', 'έ': 'e',
+    'ζ': 'z', 'η': 'i', 'ή': 'i', 'θ': 'th', 'ι': 'i', 'ί': 'i', 'ϊ': 'i',
+    'ΐ': 'i', 'κ': 'k', 'λ': 'l', 'μ': 'm', 'ν': 'n', 'ξ': 'x', 'ο': 'o',
+    'ό': 'o', 'π': 'p', 'ρ': 'r', 'σ': 's', 'ς': 's', 'τ': 't', 'υ': 'y',
+    'ύ': 'y', 'ϋ': 'y', 'φ': 'f', 'χ': 'ch', 'ψ': 'ps', 'ω': 'o', 'ώ': 'o',
+    // Cyrillic
+    'а': 'a', 'б': 'b', 'в': 'v', 'г': 'h', 'ґ': 'g', 'д': 'd', 'е': 'e',
+    'є': 'ie', 'ж': 'zh', 'з': 'z', 'и': 'y', 'і': 'i', 'ї': 'i', 'й': 'i',
+    'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r',
+    'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'ts', 'ч': 'ch',
+    'ш': 'sh', 'щ': 'shch', 'ю': 'iu', 'я': 'ia', 'ь': '', 'ъ': '', 'ы': 'y',
+    'э': 'e', 'ё': 'e',
+  };
+
+  static String _sortKey(String s) {
+    final buf = StringBuffer();
+    for (final ch in s.toLowerCase().split('')) {
+      buf.write(_translitMap[ch] ?? ch);
+    }
+    return buf.toString();
+  }
+
+  /// Language options sorted by a Latin-folded key of the display name, for
+  /// pickers (the map itself keeps its own order for lookups).
+  static List<MapEntry<String, String>> get languageOptions =>
+      languageNames.entries.toList()
+        ..sort((a, b) => _sortKey(a.value).compareTo(_sortKey(b.value)));
 
   static const _materialLocaleFallbacks = {
     'nl': Locale('nl'),
@@ -46,6 +146,19 @@ class AppLocalizations {
     'es': Locale('es'),
     'fy': Locale('en'),
     'pap': Locale('en'),
+    // Indonesian and Polish have Material localizations; Latin does not, so it
+    // borrows English for the framework widgets while the app UI is Latin.
+    'la': Locale('en'),
+    'id': Locale('id'),
+    'pl': Locale('pl'),
+    'uk': Locale('uk'),
+    // Swiss German has no Material localization; borrow standard German.
+    'gsw': Locale('de'),
+    'el': Locale('el'),
+    'da': Locale('da'),
+    'sv': Locale('sv'),
+    'hr': Locale('hr'),
+    'cs': Locale('cs'),
   };
 
   static String _activeLanguageCode = 'nl';
@@ -136,6 +249,16 @@ const _strings = {
   'es': _stringsEs,
   'fy': _stringsFy,
   'pap': _stringsPap,
+  'la': _stringsLa,
+  'id': _stringsId,
+  'pl': _stringsPl,
+  'uk': _stringsUk,
+  'gsw': _stringsGsw,
+  'el': _stringsEl,
+  'da': _stringsDa,
+  'sv': _stringsSv,
+  'hr': _stringsHr,
+  'cs': _stringsCs,
 };
 
 const _dutchSourceStrings = {
@@ -146,6 +269,16 @@ const _dutchSourceStrings = {
   'es': _dutchSourceEs,
   'fy': _dutchSourceFy,
   'pap': _dutchSourcePap,
+  'la': _dutchSourceLa,
+  'id': _dutchSourceId,
+  'pl': _dutchSourcePl,
+  'uk': _dutchSourceUk,
+  'gsw': _dutchSourceGsw,
+  'el': _dutchSourceEl,
+  'da': _dutchSourceDa,
+  'sv': _dutchSourceSv,
+  'hr': _dutchSourceHr,
+  'cs': _dutchSourceCs,
 };
 
 const _dutchSourceStringAdditions = {
