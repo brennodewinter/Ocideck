@@ -308,6 +308,32 @@ void main() {
     expect(rodToY(), 42);
   });
 
+  testWidgets('chart re-animates on slide change even with identical markdown', (
+    tester,
+  ) async {
+    // The presenter reuses the same preview State across slides (no key), so the
+    // entrance must re-arm on a slide change, not only on a markdown edit.
+    const spec = ChartSpec(
+      type: ChartType.bar,
+      x: ['Jan'],
+      series: [
+        ChartSeries(name: 'Omzet', data: [42]),
+      ],
+    );
+    Duration dur() =>
+        tester.widget<BarChart>(find.byType(BarChart)).duration;
+
+    // First slide: let the entrance play and freeze.
+    await tester.pumpWidget(_host(spec, presentationMode: true));
+    await tester.pumpAndSettle();
+    expect(dur(), Duration.zero);
+
+    // A different slide (fresh uuid) with the SAME chart markdown re-arms it.
+    await tester.pumpWidget(_host(spec, presentationMode: true));
+    await tester.pump();
+    expect(dur(), greaterThan(Duration.zero));
+  });
+
   testWidgets('a chart with animation off is static even in presentation', (
     tester,
   ) async {
