@@ -13,6 +13,9 @@ class _BulletsImagePreview extends StatelessWidget {
   final bool showRichTextPageControls;
   final ValueChanged<int>? onRichTextPageChanged;
 
+  /// First number for a numbered list (continues a chain across slides).
+  final int numberStart;
+
   const _BulletsImagePreview({
     required this.slide,
     required this.w,
@@ -22,6 +25,7 @@ class _BulletsImagePreview extends StatelessWidget {
     this.richTextPage = 0,
     this.showRichTextPageControls = false,
     this.onRichTextPageChanged,
+    this.numberStart = 1,
   });
 
   @override
@@ -370,6 +374,7 @@ class _BulletsImagePreview extends StatelessWidget {
               scale: scale,
               font: font,
               profile: profile,
+              startNumber: numberStart,
             );
           }),
         ],
@@ -389,6 +394,9 @@ class _BulletListColumn extends StatelessWidget {
   final double scale;
   final int column;
 
+  /// First number for a numbered list (continues a chain across slides).
+  final int numberStart;
+
   const _BulletListColumn({
     required this.bullets,
     required this.listStyle,
@@ -399,6 +407,7 @@ class _BulletListColumn extends StatelessWidget {
     required this.bulletGap,
     required this.scale,
     this.column = 0,
+    this.numberStart = 1,
   });
 
   @override
@@ -434,6 +443,7 @@ class _BulletListColumn extends StatelessWidget {
             scale: scale,
             font: font,
             profile: profile,
+            startNumber: numberStart,
           );
         }),
       ],

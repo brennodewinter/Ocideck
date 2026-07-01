@@ -248,6 +248,7 @@ extension _MarkdownParse on MarkdownService {
       bullets2: d.bullets2,
       listStyle: body.listStyle,
       showChecklistProgress: d.showChecklistProgress,
+      continueNumbering: d.continueNumbering,
       columnTitle1: d.columnTitle1,
       columnTitle2: d.columnTitle2,
       imagePath: body.imagePath,
@@ -314,6 +315,7 @@ extension _MarkdownParse on MarkdownService {
     ListStyle listStyle,
     int? timelineAnimationMs,
     bool showChecklistProgress,
+    bool continueNumbering,
     bool titleImageOverlay,
     String titleTextColorOverride,
     BulletMarker? bulletMarkerOverride,
@@ -343,6 +345,7 @@ extension _MarkdownParse on MarkdownService {
     var listStyle = ListStyle.bullets;
     int? timelineAnimationMs;
     var showChecklistProgress = false;
+    var continueNumbering = false;
     var titleImageOverlay = true;
     var titleTextColorOverride = '';
     BulletMarker? bulletMarkerOverride;
@@ -387,6 +390,10 @@ extension _MarkdownParse on MarkdownService {
           showChecklistProgress =
               content.substring('ocideck_checklist_progress:'.length).trim() ==
               'true';
+        } else if (content.startsWith('ocideck_continue_numbering:')) {
+          continueNumbering =
+              content.substring('ocideck_continue_numbering:'.length).trim() ==
+              'true';
         } else if (content.startsWith('ocideck_title_image_overlay:')) {
           titleImageOverlay =
               content.substring('ocideck_title_image_overlay:'.length).trim() !=
@@ -421,6 +428,7 @@ extension _MarkdownParse on MarkdownService {
       listStyle: listStyle,
       timelineAnimationMs: timelineAnimationMs,
       showChecklistProgress: showChecklistProgress,
+      continueNumbering: continueNumbering,
       titleImageOverlay: titleImageOverlay,
       titleTextColorOverride: titleTextColorOverride,
       bulletMarkerOverride: bulletMarkerOverride,

@@ -35,6 +35,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                   onLinkTap: openExternalUrl,
                   slideNumber: _index + 1,
                   slideCount: widget.slides.length,
+                  numberStart: numberedListStartFor(widget.slides, _index),
                   richTextPage: _richTextPage,
                   showRichTextPageControls:
                       (_richTextPlanFor(slide)?.pageCount ?? 1) > 1,

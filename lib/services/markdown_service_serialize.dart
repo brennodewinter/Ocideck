@@ -66,6 +66,9 @@ extension _MarkdownSerialize on MarkdownService {
       if (slide.listStyle != ListStyle.bullets) {
         buf.writeln('<!-- ocideck_list_style: ${slide.listStyle.name} -->');
       }
+      if (slide.continueNumbering && slide.listStyle == ListStyle.numbered) {
+        buf.writeln('<!-- ocideck_continue_numbering: true -->');
+      }
       _writeChecklistProgress(buf, slide);
       buf.writeln();
       _writeList(buf, slide.bullets, slide.listStyle);

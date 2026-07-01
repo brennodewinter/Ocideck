@@ -262,6 +262,11 @@ class SlidePreviewWidget extends StatelessWidget {
   /// de tijdlijn toont alles (en tekent zichzelf in bij [presentationMode]).
   final int? timelineRevealedCount;
 
+  /// First number for this slide's numbered list. 1 restarts; a higher value
+  /// continues a numbered list from a previous slide (see [numberedListStartFor]).
+  /// Callers with the full deck compute it; standalone previews leave it at 1.
+  final int numberStart;
+
   const SlidePreviewWidget({
     super.key,
     required this.slide,
@@ -293,6 +298,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.onAnswerSelected,
     this.onAnswerSubmit,
     this.timelineRevealedCount,
+    this.numberStart = 1,
   });
 
   @override
@@ -472,6 +478,7 @@ class SlidePreviewWidget extends StatelessWidget {
           richTextPage: richTextPage,
           showRichTextPageControls: showRichTextPageControls,
           onRichTextPageChanged: onRichTextPageChanged,
+          numberStart: numberStart,
         );
       case SlideType.twoBullets:
         return _TwoBulletsPreview(
@@ -490,6 +497,7 @@ class SlidePreviewWidget extends StatelessWidget {
           richTextPage: richTextPage,
           showRichTextPageControls: showRichTextPageControls,
           onRichTextPageChanged: onRichTextPageChanged,
+          numberStart: numberStart,
         );
       case SlideType.twoImages:
         return _TwoImagesPreview(

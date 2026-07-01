@@ -28,6 +28,36 @@ void main() {
     SlideType.bullets,
   ).copyWith(title: 'Punten', bullets: const ['Een', 'Twee']);
 
+  testWidgets('a numbered list continues from numberStart across slides', (
+    tester,
+  ) async {
+    final second = Slide.create(SlideType.bullets).copyWith(
+      title: 'Vervolg',
+      bullets: const ['Vier', 'Vijf'],
+      listStyle: ListStyle.numbered,
+      continueNumbering: true,
+    );
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: SizedBox(
+              width: 800,
+              height: 450,
+              // As if the previous slide ended at 3.
+              child: SlidePreviewWidget(slide: second, numberStart: 4),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.text('4. '), findsOneWidget);
+    expect(find.text('5. '), findsOneWidget);
+    expect(find.text('1. '), findsNothing);
+  });
+
   testWidgets('bullets show the dot marker by default (no paws)', (
     tester,
   ) async {

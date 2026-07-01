@@ -73,7 +73,12 @@ const double kTextDensityCriticalScale = 0.20;
 double bulletScaleCap(double w, double bulletSize, double layoutMax) =>
     math.min(layoutMax, kBulletMaxFontFraction * w / bulletSize);
 
-String bulletListMarker(List<String> items, int index, ListStyle style) {
+String bulletListMarker(
+  List<String> items,
+  int index,
+  ListStyle style, {
+  int startNumber = 1,
+}) {
   int levelOf(String item) {
     var level = 0;
     while (level < item.length && item[level] == '\t') {
@@ -94,7 +99,35 @@ String bulletListMarker(List<String> items, int index, ListStyle style) {
     if (itemLevel == level) number++;
     if (itemLevel < level) number = 0;
   }
+  // Only the top level continues across slides ([startNumber]); nested levels
+  // always restart under their parent.
+  if (level == 0) number += startNumber - 1;
   return '$number.';
+}
+
+/// Whether [slide] renders a numbered list that can start/continue a chain.
+bool isNumberedListSlide(Slide slide) =>
+    (slide.type == SlideType.bullets ||
+        slide.type == SlideType.bulletsImage) &&
+    slide.listStyle == ListStyle.numbered;
+
+/// Number of top-level (non-indented, non-empty) items in [slide]'s list —
+/// the count that a following slide continues past.
+int _topLevelNumberedCount(Slide slide) => slide.bullets
+    .where((b) => b.trimLeft().isNotEmpty && !b.startsWith('\t'))
+    .length;
+
+/// The first number a numbered list should show on slide [index]. Returns 1
+/// unless the slide opts in via [Slide.continueNumbering] and the preceding
+/// slide is itself a numbered list, in which case it continues past that
+/// slide's last number (walking the whole chain of continued slides).
+int numberedListStartFor(List<Slide> slides, int index) {
+  if (index <= 0 || index >= slides.length) return 1;
+  final slide = slides[index];
+  if (!slide.continueNumbering || !isNumberedListSlide(slide)) return 1;
+  final prev = slides[index - 1];
+  if (!isNumberedListSlide(prev)) return 1;
+  return numberedListStartFor(slides, index - 1) + _topLevelNumberedCount(prev);
 }
 
 String _bulletMarkerForLevel(int level) {

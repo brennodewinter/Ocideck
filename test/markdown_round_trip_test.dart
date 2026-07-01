@@ -134,6 +134,30 @@ void main() {
       expect(markdown, contains('2. Daarna'));
     });
 
+    test('continue-numbering round-trips (default stays clean)', () {
+      final service = MarkdownService();
+      Slide roundTrip(bool cont) => service
+          .parseDeck(
+            service.generateDeck(
+              Deck(
+                title: 'Demo',
+                slides: [
+                  Slide.create(SlideType.bullets).copyWith(
+                    bullets: ['a'],
+                    listStyle: ListStyle.numbered,
+                    continueNumbering: cont,
+                  ),
+                ],
+              ),
+            ),
+          )!
+          .slides
+          .single;
+      // Off is the default and leaves no marker; on round-trips.
+      expect(roundTrip(false).continueNumbering, isFalse);
+      expect(roundTrip(true).continueNumbering, isTrue);
+    });
+
     test('checklist style and checked items round-trip', () {
       final service = MarkdownService();
       final markdown = service.generateDeck(

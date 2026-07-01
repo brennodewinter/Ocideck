@@ -9,6 +9,7 @@ import '../../models/slide.dart';
 import '../../models/timeline.dart';
 import '../../services/markdown_service.dart';
 import '../../services/mermaid_render_service.dart';
+import '../../services/slide_layout_metrics.dart';
 import '../../utils/url_launcher_util.dart';
 import '../slides/slide_preview.dart';
 import 'annotation_overlay.dart';
@@ -261,6 +262,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                   onLinkTap: openExternalUrl,
                   slideNumber: _index + 1,
                   slideCount: _slides.length,
+                  numberStart: numberedListStartFor(_slides, _index),
                   richTextPage: _richTextPage,
                   showRichTextPageControls: false,
                   timelineRevealedCount: _timelineRevealedFor(slide),

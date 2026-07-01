@@ -46,6 +46,9 @@ class _BulletsPreview extends StatelessWidget {
   final bool showRichTextPageControls;
   final ValueChanged<int>? onRichTextPageChanged;
 
+  /// First number for a numbered list (continues a chain across slides).
+  final int numberStart;
+
   const _BulletsPreview({
     required this.slide,
     required this.w,
@@ -54,6 +57,7 @@ class _BulletsPreview extends StatelessWidget {
     this.richTextPage = 0,
     this.showRichTextPageControls = false,
     this.onRichTextPageChanged,
+    this.numberStart = 1,
   });
 
   @override
@@ -204,6 +208,7 @@ class _BulletsPreview extends StatelessWidget {
                 bulletGap: bulletGap,
                 scale: scale,
                 column: 0,
+                numberStart: numberStart,
               ),
             ),
             if (showProgress) ...[

@@ -36,6 +36,10 @@ class SlideEditorContext {
   /// editors as the inherited value when the slide sets no own duration.
   final int themeAnimationDurationMs;
 
+  /// Whether the slide before this one renders a numbered list — gates the
+  /// "continue numbering from the previous slide" option in the bullets editor.
+  final bool previousSlideIsNumbered;
+
   const SlideEditorContext({
     required this.slide,
     required this.onUpdate,
@@ -44,6 +48,7 @@ class SlideEditorContext {
     required this.captionBasePath,
     required this.onAddChartVariants,
     required this.themeAnimationDurationMs,
+    this.previousSlideIsNumbered = false,
     this.nestedInScrollView = false,
     this.onSplitVideo,
   });
@@ -75,6 +80,7 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         key: c._key,
         slide: c.slide,
         onUpdate: c.onUpdate,
+        previousSlideIsNumbered: c.previousSlideIsNumbered,
         nestedInScrollView: c.nestedInScrollView,
       ),
       SlideType.twoBullets: (c) => TwoBulletsEditor(
