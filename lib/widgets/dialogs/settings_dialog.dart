@@ -491,24 +491,17 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // The logo is black line art, so it needs a light backdrop to
-                // read on the dark sidebar.
-                Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.9),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Semantics(
-                    label: 'OciDeck',
-                    image: true,
-                    child: Image.asset(
-                      'assets/images/ocideck-logo.png',
-                      width: 24,
-                      height: 24,
-                      fit: BoxFit.contain,
-                      filterQuality: FilterQuality.high,
-                    ),
+                // EU-yellow recolour of the logo, so it reads on the dark
+                // sidebar without a backing plate.
+                Semantics(
+                  label: 'OciDeck',
+                  image: true,
+                  child: Image.asset(
+                    'assets/images/ocideck-logo-eu.png',
+                    width: 30,
+                    height: 30,
+                    fit: BoxFit.contain,
+                    filterQuality: FilterQuality.high,
                   ),
                 ),
                 const SizedBox(width: 10),
