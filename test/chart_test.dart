@@ -44,6 +44,41 @@ void main() {
       expect(back.hasInlineData, isTrue);
     });
 
+    test('animation defaults stay out of the block (on, inherit theme)', () {
+      const spec = ChartSpec(
+        type: ChartType.bar,
+        x: ['Q1'],
+        series: [ChartSeries(name: 'A', data: [1])],
+      );
+      expect(spec.animateOnEnter, isTrue);
+      expect(spec.animationDurationMs, isNull);
+      final block = spec.toBlock();
+      expect(block, isNot(contains('animateOnEnter')));
+      expect(block, isNot(contains('animationDurationMs')));
+    });
+
+    test('animation off + duration override round-trip through the block', () {
+      const spec = ChartSpec(
+        type: ChartType.bar,
+        x: ['Q1'],
+        series: [ChartSeries(name: 'A', data: [1])],
+        animateOnEnter: false,
+        animationDurationMs: 5000,
+      );
+      final back = ChartSpec.parse(spec.toBlock());
+      expect(back.animateOnEnter, isFalse);
+      expect(back.animationDurationMs, 5000);
+    });
+
+    test('inheritAnimationDuration resets the override to null', () {
+      const spec = ChartSpec(animationDurationMs: 5000);
+      expect(spec.copyWith().animationDurationMs, 5000);
+      expect(
+        spec.copyWith(inheritAnimationDuration: true).animationDurationMs,
+        isNull,
+      );
+    });
+
     test('storage form drops inline data when a source is linked', () {
       const spec = ChartSpec(
         type: ChartType.bar,

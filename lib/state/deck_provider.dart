@@ -607,6 +607,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
     String? keywords,
     TlpLevel? tlp,
     int? presentationTargetSeconds,
+    bool? showRehearsalSummary,
   }) {
     final deck = state.deck;
     if (deck == null) return;
@@ -621,6 +622,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
         keywords: keywords,
         tlp: tlp,
         presentationTargetSeconds: presentationTargetSeconds,
+        showRehearsalSummary: showRehearsalSummary,
       ),
       coalesceKey: 'info',
     );

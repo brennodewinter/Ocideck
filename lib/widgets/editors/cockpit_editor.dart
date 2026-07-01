@@ -4,6 +4,7 @@ import '../../l10n/app_localizations.dart';
 import '../../models/cockpit.dart';
 import '../../models/slide.dart';
 import '../../theme/app_theme.dart';
+import 'animation_duration_control.dart';
 
 /// Dutch source labels for the meter types; translated at display time via
 /// [AppLocalizations.d]. The model's [cockpitMeterTypeLabel] stays English for
@@ -30,12 +31,17 @@ String _meterTypeSourceLabel(CockpitMeterType type) {
 class CockpitEditor extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
+
+  /// Theme's shared activation duration (ms), used as the inherited value when
+  /// the cockpit sets no own duration.
+  final int themeAnimationDurationMs;
   final bool nestedInScrollView;
 
   const CockpitEditor({
     super.key,
     required this.slide,
     required this.onUpdate,
+    required this.themeAnimationDurationMs,
     this.nestedInScrollView = false,
   });
 
@@ -212,10 +218,16 @@ class _CockpitEditorState extends State<CockpitEditor> {
           ),
           if (_spec.animateOnEnter) ...[
             const SizedBox(height: 10),
-            _AnimationDurationControl(
-              durationMs: _spec.animationDurationMs,
-              onChanged: (value) =>
-                  _emit(_spec.copyWith(animationDurationMs: value)),
+            AnimationDurationControl(
+              overrideMs: _spec.animationDurationMs,
+              themeMs: widget.themeAnimationDurationMs,
+              minMs: cockpitMinAnimationDurationMs,
+              maxMs: cockpitMaxAnimationDurationMs,
+              onChanged: (value) => _emit(
+                value == null
+                    ? _spec.copyWith(inheritAnimationDuration: true)
+                    : _spec.copyWith(animationDurationMs: value),
+              ),
             ),
           ],
           const SizedBox(height: 14),
@@ -235,66 +247,6 @@ class _CockpitEditorState extends State<CockpitEditor> {
           ],
         ],
       ),
-    );
-  }
-}
-
-class _AnimationDurationControl extends StatelessWidget {
-  final int durationMs;
-  final ValueChanged<int> onChanged;
-
-  const _AnimationDurationControl({
-    required this.durationMs,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final seconds = durationMs / 1000;
-    return Row(
-      children: [
-        const Icon(Icons.timer_outlined, size: 18, color: Color(0xFF64748B)),
-        const SizedBox(width: 8),
-        Text(
-          context.l10n.d('Activatieduur'),
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w700,
-            color: AppTheme.navy,
-          ),
-        ),
-        const SizedBox(width: 10),
-        Expanded(
-          child: Slider(
-            min: cockpitMinAnimationDurationMs.toDouble(),
-            max: cockpitMaxAnimationDurationMs.toDouble(),
-            divisions:
-                (cockpitMaxAnimationDurationMs -
-                    cockpitMinAnimationDurationMs) ~/
-                200,
-            label: '${seconds.toStringAsFixed(1)}s',
-            value: durationMs
-                .clamp(
-                  cockpitMinAnimationDurationMs,
-                  cockpitMaxAnimationDurationMs,
-                )
-                .toDouble(),
-            onChanged: (value) => onChanged((value / 100).round() * 100),
-          ),
-        ),
-        SizedBox(
-          width: 42,
-          child: Text(
-            '${seconds.toStringAsFixed(1)}s',
-            textAlign: TextAlign.right,
-            style: const TextStyle(
-              fontSize: 12,
-              color: Color(0xFF64748B),
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

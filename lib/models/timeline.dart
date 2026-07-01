@@ -20,9 +20,11 @@ const int timelineMaxEvents = 12;
 /// Default draw-on-enter duration for the whole timeline.
 const int timelineDefaultAnimationDurationMs = 1600;
 
-/// Bounds on the configurable draw-on-enter duration (faster ↔ slower).
+/// Bounds on the configurable draw-on-enter duration (faster ↔ slower). The
+/// ceiling matches cockpitMaxAnimationDurationMs so a timeline can build up in
+/// the same maximum 30s as a cockpit.
 const int timelineMinAnimationDurationMs = 400;
-const int timelineMaxAnimationDurationMs = 6000;
+const int timelineMaxAnimationDurationMs = 30000;
 
 /// Clamp a stored/edited duration into the allowed range.
 int clampTimelineDuration(int ms) =>

@@ -369,6 +369,8 @@ const _dutchSourceAddFy = {
   'Opslaan': 'Bewarje',
   // Accessibility labels for icon-only buttons (screen readers).
   'Presenteren': 'Presintearje',
+  'Tijden-overzicht tonen na afloop': 'Tiidenoersjoch nei ôfrin toane',
+  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.': 'De tiid per slide wurdt altyd metten; dit bepaalt allinne oft it oersjoch nei dizze presintaasje ferskynt.',
   'Oefenoverzicht tonen na afloop': 'Oefenoersjoch nei ôfrin toane',
   'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
       'Lit nei in presintaasje it oersjoch sjen mei de bestede tiid de dia. De tiid wurdt altyd metten; dit bepaalt allinnich oft it skerm ferskynt.',
@@ -577,6 +579,8 @@ const _dutchSourceAddFy = {
   'Meter toevoegen': 'Meter tafoegje',
   'Animeren bij binnenkomst': 'Animearje by binnenkomst',
   'Activatieduur': 'Aktivaasjeduer',
+  'Volg thema-animatieduur': 'Folgje tema-animaasjeduer',
+  'Animatie bij openen': 'Animearje by it iepenjen',
   'Meter': 'Meter',
   'Type': 'Type',
   'Waarde': 'Wearde',

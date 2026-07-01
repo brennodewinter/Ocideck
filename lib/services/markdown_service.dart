@@ -70,6 +70,10 @@ class MarkdownService {
     if (deck.presentationTargetSeconds > 0) {
       buf.writeln('ocideck_target_seconds: ${deck.presentationTargetSeconds}');
     }
+    // Default (true) stays out of the front matter; only persist an opt-out.
+    if (!deck.showRehearsalSummary) {
+      buf.writeln('ocideck_show_rehearsal_summary: false');
+    }
     if (inlineStyleProfile) {
       buf.writeln(
         'ocideck_style_profile: ${base64Url.encode(utf8.encode(jsonEncode(deck.themeProfile.toJson())))}',

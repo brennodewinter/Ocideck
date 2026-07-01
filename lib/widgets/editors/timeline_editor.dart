@@ -12,12 +12,17 @@ import '_editor_field.dart';
 class TimelineEditor extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
+
+  /// Theme's shared activation duration (ms), used as the inherited value when
+  /// the slide sets no own duration.
+  final int themeAnimationDurationMs;
   final bool nestedInScrollView;
 
   const TimelineEditor({
     super.key,
     required this.slide,
     required this.onUpdate,
+    required this.themeAnimationDurationMs,
     this.nestedInScrollView = false,
   });
 
@@ -56,7 +61,13 @@ class _TimelineEditorState extends State<TimelineEditor> {
   late List<_EventRow> _rows;
   late TimelineLayout _layout;
   late TimelineReveal _reveal;
-  late int _animationMs;
+
+  /// Per-slide duration override; null = inherit the theme's duration.
+  int? _animationOverrideMs;
+
+  bool get _inheritsTheme => _animationOverrideMs == null;
+  int get _effectiveMs =>
+      _animationOverrideMs ?? widget.themeAnimationDurationMs;
 
   @override
   void initState() {
@@ -65,7 +76,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
     _title.addListener(_emit);
     _layout = widget.slide.timelineLayout;
     _reveal = widget.slide.timelineReveal;
-    _animationMs = clampTimelineDuration(widget.slide.timelineAnimationMs);
+    _animationOverrideMs = widget.slide.timelineAnimationMs;
     _initRows(parseTimelineEvents(widget.slide.bullets));
   }
 
@@ -100,7 +111,8 @@ class _TimelineEditorState extends State<TimelineEditor> {
         bullets: timelineEventsToBullets(events.toList()),
         timelineLayout: _layout,
         timelineReveal: _reveal,
-        timelineAnimationMs: _animationMs,
+        timelineAnimationMs: _animationOverrideMs,
+        clearTimelineAnimation: _animationOverrideMs == null,
       ),
     );
   }
@@ -287,8 +299,10 @@ class _TimelineEditorState extends State<TimelineEditor> {
   /// Draw-in duration slider, mirroring the cockpit animation control: the
   /// value is the duration itself (left = short/fast, right = long/slow), with a
   /// seconds readout, so it behaves like every other animation bar in the app.
+  /// When the slide inherits the theme's duration the readout is muted and the
+  /// reset button is disabled; dragging the slider starts a per-slide override.
   Widget _buildSpeedSlider() {
-    final seconds = _animationMs / 1000;
+    final seconds = _effectiveMs / 1000;
     return Padding(
       padding: const EdgeInsets.only(top: 12),
       child: Row(
@@ -313,7 +327,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
                       timelineMinAnimationDurationMs) ~/
                   200,
               label: '${seconds.toStringAsFixed(1)}s',
-              value: _animationMs
+              value: _effectiveMs
                   .clamp(
                     timelineMinAnimationDurationMs,
                     timelineMaxAnimationDurationMs,
@@ -321,7 +335,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
                   .toDouble(),
               onChanged: (value) {
                 setState(
-                  () => _animationMs = clampTimelineDuration(
+                  () => _animationOverrideMs = clampTimelineDuration(
                     (value / 100).round() * 100,
                   ),
                 );
@@ -334,12 +348,27 @@ class _TimelineEditorState extends State<TimelineEditor> {
             child: Text(
               '${seconds.toStringAsFixed(1)}s',
               textAlign: TextAlign.right,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
-                color: Color(0xFF64748B),
+                color: _inheritsTheme
+                    ? const Color(0xFF94A3B8)
+                    : const Color(0xFF64748B),
+                fontStyle: _inheritsTheme ? FontStyle.italic : FontStyle.normal,
                 fontWeight: FontWeight.w700,
               ),
             ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.restart_alt, size: 18),
+            visualDensity: VisualDensity.compact,
+            tooltip: context.l10n.d('Volg thema-animatieduur'),
+            color: AppTheme.navy,
+            onPressed: _inheritsTheme
+                ? null
+                : () {
+                    setState(() => _animationOverrideMs = null);
+                    _emit();
+                  },
           ),
         ],
       ),

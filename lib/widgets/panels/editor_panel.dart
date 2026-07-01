@@ -98,6 +98,8 @@ class EditorPanel extends ConsumerWidget {
                     );
                     if (first >= 0) editorNotifier.select(first);
                   },
+                  themeAnimationDurationMs:
+                      deck.themeProfile.animationDurationMs,
                   nestedInScrollView: true,
                   onSplitVideo: (atMs) {
                     deckNotifier.splitVideoSlide(idx, atMs);
@@ -266,6 +268,7 @@ class EditorPanel extends ConsumerWidget {
     List<String> searchPaths,
     String? captionBasePath,
     ValueChanged<List<Slide>> onAddChartVariants, {
+    required int themeAnimationDurationMs,
     bool nestedInScrollView = false,
     void Function(int atMs)? onSplitVideo,
   }) {
@@ -277,6 +280,7 @@ class EditorPanel extends ConsumerWidget {
         searchPaths: searchPaths,
         captionBasePath: captionBasePath,
         onAddChartVariants: onAddChartVariants,
+        themeAnimationDurationMs: themeAnimationDurationMs,
         nestedInScrollView: nestedInScrollView,
         onSplitVideo: onSplitVideo,
       ),

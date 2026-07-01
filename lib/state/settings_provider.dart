@@ -104,7 +104,6 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
         7.0,
       ),
       allowRemoteMedia: prefs.getBool('allowRemoteMedia') ?? false,
-      showRehearsalSummary: prefs.getBool('showRehearsalSummary') ?? true,
       webdavServer: webdav,
     );
   }
@@ -223,14 +222,6 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     state = state.copyWith(allowRemoteMedia: enabled);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('allowRemoteMedia', enabled);
-  }
-
-  /// Bepaal of het oefenoverzicht na een presentatie wordt getoond. De tijd
-  /// wordt los hiervan altijd gemeten; dit schakelt enkel het eindscherm.
-  Future<void> setShowRehearsalSummary(bool enabled) async {
-    state = state.copyWith(showRehearsalSummary: enabled);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('showRehearsalSummary', enabled);
   }
 
   Future<void> addRecentFile(String path) async {

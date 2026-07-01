@@ -89,6 +89,14 @@ class ChartSpec {
   final double? minBound;
   final double? maxBound;
 
+  /// Whether the chart draws itself in (values grow from the baseline) when the
+  /// slide is shown in presentation mode.
+  final bool animateOnEnter;
+
+  /// Per-slide activation-duration override (ms). `null` = inherit the theme's
+  /// ThemeProfile.animationDurationMs. Only serialised when set.
+  final int? animationDurationMs;
+
   const ChartSpec({
     this.type = ChartType.bar,
     this.title = '',
@@ -98,6 +106,8 @@ class ChartSpec {
     this.series = const [],
     this.minBound,
     this.maxBound,
+    this.animateOnEnter = true,
+    this.animationDurationMs,
   });
 
   bool get hasInlineData => x.isNotEmpty && series.isNotEmpty;
@@ -126,6 +136,9 @@ class ChartSpec {
     bool clearMinBound = false,
     double? maxBound,
     bool clearMaxBound = false,
+    bool? animateOnEnter,
+    int? animationDurationMs,
+    bool inheritAnimationDuration = false,
   }) => ChartSpec(
     type: type ?? this.type,
     title: title ?? this.title,
@@ -135,6 +148,10 @@ class ChartSpec {
     series: series ?? this.series,
     minBound: clearMinBound ? null : (minBound ?? this.minBound),
     maxBound: clearMaxBound ? null : (maxBound ?? this.maxBound),
+    animateOnEnter: animateOnEnter ?? this.animateOnEnter,
+    animationDurationMs: inheritAnimationDuration
+        ? null
+        : (animationDurationMs ?? this.animationDurationMs),
   );
 
   /// Parse the JSON content of a ```chart block. Tolerant: returns a default
@@ -150,6 +167,8 @@ class ChartSpec {
         source: (src == null || src.isEmpty) ? null : src,
         minBound: (data['minBound'] as num?)?.toDouble(),
         maxBound: (data['maxBound'] as num?)?.toDouble(),
+        animateOnEnter: data['animateOnEnter'] != false,
+        animationDurationMs: (data['animationDurationMs'] as num?)?.round(),
         x: [for (final v in (data['x'] as List? ?? const [])) v.toString()],
         rowColors: [
           for (final value in (data['rowColors'] as List? ?? const []))
@@ -176,6 +195,12 @@ class ChartSpec {
     if (supportsBounds) {
       if (minBound != null) map['minBound'] = minBound;
       if (maxBound != null) map['maxBound'] = maxBound;
+    }
+    // Animation: defaults (on, inherit theme duration) stay out of the block so
+    // a clean chart stays clean and follows the theme.
+    if (!animateOnEnter) map['animateOnEnter'] = false;
+    if (animationDurationMs != null) {
+      map['animationDurationMs'] = animationDurationMs;
     }
     final dropData = forStorage && source != null;
     if (rowColors.any((color) => color != null)) {

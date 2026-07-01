@@ -54,9 +54,27 @@ void main() {
       expect(back.meters.last.label, 'M5');
     });
 
+    test('inherits the theme duration when none is set (null)', () {
+      // A fresh spec has no own duration, so it omits the key and round-trips
+      // as null — meaning "inherit the theme's animationDurationMs".
+      const spec = CockpitSpec(meters: [CockpitMeterSpec(label: 'M')]);
+      expect(spec.animationDurationMs, isNull);
+      expect(spec.toBlock(), isNot(contains('animationDurationMs')));
+      expect(CockpitSpec.parse(spec.toBlock()).animationDurationMs, isNull);
+    });
+
+    test('inheritAnimationDuration resets an explicit override to null', () {
+      const spec = CockpitSpec(animationDurationMs: 4200);
+      expect(spec.copyWith().animationDurationMs, 4200);
+      expect(
+        spec.copyWith(inheritAnimationDuration: true).animationDurationMs,
+        isNull,
+      );
+    });
+
     test('clamps animation duration to supported range', () {
       final tooShort = CockpitSpec.parse('{"animationDurationMs": 100}');
-      final tooLong = CockpitSpec.parse('{"animationDurationMs": 20000}');
+      final tooLong = CockpitSpec.parse('{"animationDurationMs": 40000}');
 
       expect(tooShort.animationDurationMs, cockpitMinAnimationDurationMs);
       expect(tooLong.animationDurationMs, cockpitMaxAnimationDurationMs);

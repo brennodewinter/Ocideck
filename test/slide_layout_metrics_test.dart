@@ -43,6 +43,97 @@ void main() {
     });
   });
 
+  group('tableColumnFlexWeights', () {
+    test('weighs each column by its longest trimmed cell, clamped to [1,80]', () {
+      final weights = tableColumnFlexWeights([
+        ['Rol', 'Taken'],
+        ['CISO', 'x' * 200],
+        ['', ''],
+      ], 2);
+      expect(weights, hasLength(2));
+      expect(weights[0], 4); // 'CISO'
+      expect(weights[1], 80); // clamped from 200
+    });
+  });
+
+  group('tableFitCellSize', () {
+    const w = kReferenceSlideWidth;
+    final base = tableCellFontSize(w, rowCount: 6, colCount: 4);
+    final min = tableCellFontMinimum(w);
+
+    test('a sparse table keeps the density-based base size', () {
+      final size = tableFitCellSize(
+        rows: [
+          ['A', 'B'],
+          ['1', '2'],
+        ],
+        colCount: 2,
+        tableWidth: w * 0.88,
+        availH: w * 9 / 16,
+        baseCellSize: base,
+        minCellSize: min,
+        font: 'Roboto',
+      );
+      expect(size, base);
+    });
+
+    test('a text-heavy table shrinks below base to fit the height', () {
+      final paragraph = List.filled(6, 'lorem ipsum dolor sit amet').join(' ');
+      final rows = [
+        ['Rol', 'Taken', 'Verantwoordelijkheden', 'Bevoegdheden'],
+        for (var i = 0; i < 5; i++)
+          [paragraph, paragraph, paragraph, paragraph],
+      ];
+      final baseHeight = tableBlockHeight(
+        rows: rows,
+        colCount: 4,
+        tableWidth: w * 0.88,
+        cellSize: base,
+        font: 'Roboto',
+      );
+      // A budget tighter than the base layout but reachable by shrinking.
+      final availH = baseHeight * 0.7;
+      final size = tableFitCellSize(
+        rows: rows,
+        colCount: 4,
+        tableWidth: w * 0.88,
+        availH: availH,
+        baseCellSize: base,
+        minCellSize: min,
+        font: 'Roboto',
+      );
+      expect(size, lessThan(base));
+      expect(size, greaterThanOrEqualTo(min));
+      // The shrunk table actually fits the budget.
+      final h = tableBlockHeight(
+        rows: rows,
+        colCount: 4,
+        tableWidth: w * 0.88,
+        cellSize: size,
+        font: 'Roboto',
+      );
+      expect(h, lessThanOrEqualTo(availH));
+    });
+
+    test('never returns below the minimum even with an impossible budget', () {
+      final paragraph = 'x' * 400;
+      final size = tableFitCellSize(
+        rows: [
+          ['h', 'h'],
+          [paragraph, paragraph],
+        ],
+        colCount: 2,
+        tableWidth: w * 0.88,
+        availH: 1,
+        baseCellSize: base,
+        minCellSize: min,
+        font: 'Roboto',
+      );
+      expect(size, greaterThanOrEqualTo(min));
+      expect(size, lessThanOrEqualTo(base));
+    });
+  });
+
   group('tightenVerticalFitScale', () {
     test('shrinks an oversized block until it fits', () {
       // Linear height model: height == scale * 1000.

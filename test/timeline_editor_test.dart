@@ -8,7 +8,11 @@ import 'package:ocideck/widgets/editors/timeline_editor.dart';
 Widget _host(Slide slide, ValueChanged<Slide> onUpdate) => ProviderScope(
   child: MaterialApp(
     home: Scaffold(
-      body: TimelineEditor(slide: slide, onUpdate: onUpdate),
+      body: TimelineEditor(
+        slide: slide,
+        onUpdate: onUpdate,
+        themeAnimationDurationMs: timelineDefaultAnimationDurationMs,
+      ),
     ),
   ),
 );

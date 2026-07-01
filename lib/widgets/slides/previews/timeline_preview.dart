@@ -18,6 +18,11 @@ part of '../slide_preview.dart';
 /// * else, in [presentationMode] with [TimelineReveal.onEnter] → the line draws,
 ///   then events appear in sequence, on a one-shot controller.
 /// * otherwise everything is shown at once (editor, thumbnails, static mode).
+///
+/// The spine draw is a fixed, snappy [kTimelineLineDrawMs] regardless of the
+/// activation duration; only the per-event reveal stretches with the duration.
+const int kTimelineLineDrawMs = 450;
+
 class _TimelinePreview extends StatefulWidget {
   final Slide slide;
   final double w;
@@ -48,14 +53,25 @@ class _TimelinePreviewState extends State<_TimelinePreview>
       widget.revealedCount == null &&
       widget.slide.timelineReveal == TimelineReveal.onEnter;
 
+  /// Effective draw-in duration: the slide's override, or the theme's shared
+  /// activation duration when the slide inherits (null), clamped to range.
+  int get _durationMs => clampTimelineDuration(
+    widget.slide.timelineAnimationMs ?? widget.profile.animationDurationMs,
+  );
+
+  /// Share of the controller spent drawing the spine. Derived from a fixed
+  /// wall-clock budget so the line stays snappy (~[kTimelineLineDrawMs]) even
+  /// when the overall duration is long; capped at 0.45 so a very short duration
+  /// still leaves the events more than half the time.
+  double get _lineFraction =>
+      (kTimelineLineDrawMs / _durationMs).clamp(0.02, 0.45);
+
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(
-        milliseconds: clampTimelineDuration(widget.slide.timelineAnimationMs),
-      ),
+      duration: Duration(milliseconds: _durationMs),
       value: 1,
     );
     _maybeStart();
@@ -69,6 +85,8 @@ class _TimelinePreviewState extends State<_TimelinePreview>
         oldWidget.slide.timelineReveal != widget.slide.timelineReveal ||
         oldWidget.slide.timelineAnimationMs !=
             widget.slide.timelineAnimationMs ||
+        oldWidget.profile.animationDurationMs !=
+            widget.profile.animationDurationMs ||
         oldWidget.presentationMode != widget.presentationMode ||
         oldWidget.revealedCount != widget.revealedCount) {
       _maybeStart();
@@ -76,9 +94,7 @@ class _TimelinePreviewState extends State<_TimelinePreview>
   }
 
   void _maybeStart() {
-    _controller.duration = Duration(
-      milliseconds: clampTimelineDuration(widget.slide.timelineAnimationMs),
-    );
+    _controller.duration = Duration(milliseconds: _durationMs);
     if (_animatesOnEnter) {
       _controller.forward(from: 0);
     } else {
@@ -155,6 +171,7 @@ class _TimelinePreviewState extends State<_TimelinePreview>
                       w: widget.w,
                       horizontal: _effectiveHorizontal(events.length),
                       drawT: _controller.value,
+                      lineFraction: _lineFraction,
                       revealedCount: widget.revealedCount,
                       animating: _animatesOnEnter,
                       accent: accent,
@@ -296,7 +313,10 @@ class _TimelineCanvas extends StatelessWidget {
   final String font;
 
   /// Fraction of the animation spent drawing the line before events appear.
-  static const double _linePhase = 0.32;
+  /// Computed from a fixed wall-clock budget (see [kTimelineLineDrawMs]) so the
+  /// spine always snaps in quickly regardless of the overall activation
+  /// duration — only the event reveal stretches with a longer duration.
+  final double lineFraction;
 
   const _TimelineCanvas({
     required this.events,
@@ -311,6 +331,7 @@ class _TimelineCanvas extends StatelessWidget {
     required this.textColor,
     required this.muted,
     required this.font,
+    required this.lineFraction,
   });
 
   @override
@@ -406,7 +427,7 @@ class _TimelineCanvas extends StatelessWidget {
       return [for (var i = 0; i < n; i++) i < shown ? 1.0 : 0.0];
     }
     if (!animating) return List<double>.filled(n, 1.0);
-    final eventsT = ((drawT - _linePhase) / (1 - _linePhase)).clamp(0.0, 1.0);
+    final eventsT = ((drawT - lineFraction) / (1 - lineFraction)).clamp(0.0, 1.0);
     return [
       for (var i = 0; i < n; i++)
         Curves.easeOutBack.transform(_sequence(eventsT, i, n)).clamp(0.0, 1.0),
@@ -420,7 +441,7 @@ class _TimelineCanvas extends StatelessWidget {
     return ((eventsT - start) / window).clamp(0.0, 1.0);
   }
 
-  /// The line draws over the first [_linePhase] of the animation, then stays.
+  /// The line draws over the first [lineFraction] of the animation, then stays.
   double _spineProgress(int n) {
     if (revealedCount != null) {
       if (n <= 1) return revealedCount! > 0 ? 1.0 : 0.0;
@@ -429,7 +450,7 @@ class _TimelineCanvas extends StatelessWidget {
       return ((shown - 1) / (n - 1)).clamp(0.0, 1.0);
     }
     if (!animating) return 1.0;
-    return (drawT / _linePhase).clamp(0.0, 1.0);
+    return (drawT / lineFraction).clamp(0.0, 1.0);
   }
 
   /// Horizontal rail. Cards alternate above/below and, when crowded, climb to

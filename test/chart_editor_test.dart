@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/editors/chart_editor.dart';
 
@@ -18,6 +19,7 @@ Widget _host(
           slide: slide,
           onUpdate: onUpdate,
           onAddVariants: onAddVariants,
+          themeAnimationDurationMs: kThemeDefaultAnimationDurationMs,
         ),
       ),
     ),

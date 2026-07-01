@@ -9,6 +9,20 @@ export 'webdav_settings.dart';
 /// it (see `Slide.bulletMarkerOverride`).
 enum BulletMarker { dot, paw }
 
+/// Shared activation/animation duration (ms) that animated slide types
+/// (timeline, cockpit) inherit from the theme when a slide sets no own value.
+/// One knob drives both so a timeline builds up over the same span as a
+/// cockpit. The ceiling matches the per-type maxima (30s); a slide that wants
+/// different pacing overrides it (see `Slide.timelineAnimationMs` /
+/// `CockpitSpec.animationDurationMs`, both nullable = inherit this).
+const int kThemeDefaultAnimationDurationMs = 2000;
+const int kThemeMinAnimationDurationMs = 400;
+const int kThemeMaxAnimationDurationMs = 30000;
+
+/// Clamp a stored/edited theme animation duration into the allowed range.
+int clampThemeAnimationDuration(int ms) =>
+    ms.clamp(kThemeMinAnimationDurationMs, kThemeMaxAnimationDurationMs);
+
 class ThemeProfile {
   final String name;
   final String slideBackgroundColor;
@@ -64,6 +78,10 @@ class ThemeProfile {
   final bool closingSlideEnabled;
   final String closingSlideMarkdown;
 
+  /// Default activation/animation duration (ms) for animated slide types
+  /// (timeline, cockpit). A slide may override it; null override = inherit this.
+  final int animationDurationMs;
+
   const ThemeProfile({
     this.name = 'Standaard',
     this.slideBackgroundColor = '#FFFFFF',
@@ -92,6 +110,7 @@ class ThemeProfile {
     this.footerPosition = 'right',
     this.closingSlideEnabled = false,
     this.closingSlideMarkdown = '# Bedankt\n\nVragen?',
+    this.animationDurationMs = kThemeDefaultAnimationDurationMs,
   }) : tableTextColor = tableTextColor ?? textColor,
        tableHeaderBackgroundColor = tableHeaderBackgroundColor ?? accentColor;
 
@@ -132,6 +151,7 @@ class ThemeProfile {
     String? footerPosition,
     bool? closingSlideEnabled,
     String? closingSlideMarkdown,
+    int? animationDurationMs,
     bool clearLogo = false,
   }) {
     return ThemeProfile(
@@ -168,6 +188,7 @@ class ThemeProfile {
       footerPosition: footerPosition ?? this.footerPosition,
       closingSlideEnabled: closingSlideEnabled ?? this.closingSlideEnabled,
       closingSlideMarkdown: closingSlideMarkdown ?? this.closingSlideMarkdown,
+      animationDurationMs: animationDurationMs ?? this.animationDurationMs,
     );
   }
 
@@ -200,6 +221,7 @@ class ThemeProfile {
       'footerPosition': footerPosition,
       'closingSlideEnabled': closingSlideEnabled,
       'closingSlideMarkdown': closingSlideMarkdown,
+      'animationDurationMs': animationDurationMs,
     };
   }
 
@@ -271,6 +293,10 @@ class ThemeProfile {
       closingSlideEnabled: json['closingSlideEnabled'] as bool? ?? false,
       closingSlideMarkdown:
           json['closingSlideMarkdown'] as String? ?? '# Bedankt\n\nVragen?',
+      animationDurationMs: clampThemeAnimationDuration(
+        (json['animationDurationMs'] as num?)?.round() ??
+            kThemeDefaultAnimationDurationMs,
+      ),
     );
   }
 }
@@ -564,11 +590,6 @@ class AppSettings {
   /// derden laden. De gebruiker zet dit bewust aan in de instellingen.
   final bool allowRemoteMedia;
 
-  /// Toon na afloop van een presentatie het oefenoverzicht (bestede tijd per
-  /// slide). De tijd wordt altijd gemeten; dit bepaalt enkel of het scherm
-  /// verschijnt. Standaard aan — backward compatible met het oude gedrag.
-  final bool showRehearsalSummary;
-
   /// Geconfigureerde WebDAV/Nextcloud-bron, of `null` wanneer geen server is
   /// ingesteld. Bevat nooit het wachtwoord (dat staat in de keychain).
   final WebdavServer? webdavServer;
@@ -593,7 +614,6 @@ class AppSettings {
     this.qualityBlockExportOnErrors = false,
     this.contrastMinRatio = 4.5,
     this.allowRemoteMedia = false,
-    this.showRehearsalSummary = true,
     this.webdavServer,
   });
 
@@ -665,7 +685,6 @@ class AppSettings {
     bool? qualityBlockExportOnErrors,
     double? contrastMinRatio,
     bool? allowRemoteMedia,
-    bool? showRehearsalSummary,
     WebdavServer? webdavServer,
     bool clearHomeDirectory = false,
     bool clearExportDirectory = false,
@@ -723,7 +742,6 @@ class AppSettings {
           qualityBlockExportOnErrors ?? this.qualityBlockExportOnErrors,
       contrastMinRatio: contrastMinRatio ?? this.contrastMinRatio,
       allowRemoteMedia: allowRemoteMedia ?? this.allowRemoteMedia,
-      showRehearsalSummary: showRehearsalSummary ?? this.showRehearsalSummary,
       webdavServer: clearWebdavServer
           ? null
           : (webdavServer ?? this.webdavServer),

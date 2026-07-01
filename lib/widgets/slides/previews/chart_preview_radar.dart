@@ -98,9 +98,11 @@ extension _ChartPreviewRadar on _ChartPreviewState {
               dataEntries: [
                 for (var xi = 0; xi < spec.x.length; xi++)
                   RadarEntry(
-                    value: xi < spec.series[si].data.length
-                        ? spec.series[si].data[xi]
-                        : 0,
+                    value:
+                        (xi < spec.series[si].data.length
+                            ? spec.series[si].data[xi]
+                            : 0) *
+                        _grow,
                   ),
               ],
               fillColor: _seriesDisplayColor(
@@ -163,7 +165,7 @@ extension _ChartPreviewRadar on _ChartPreviewState {
           },
         ),
       ),
-      duration: Duration.zero,
+      duration: _chartAnimDuration,
     );
   }
 

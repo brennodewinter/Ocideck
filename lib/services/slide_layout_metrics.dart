@@ -252,6 +252,100 @@ double tableCellFontSize(
 /// Minimum table cell font fraction (lower clamp bound in previews).
 double tableCellFontMinimum(double w) => w * 0.010;
 
+/// Per-column flex weights: each column's longest cell length (trimmed),
+/// clamped so a single paragraph-length outlier can't starve its neighbours.
+/// Shared by the table preview's column sizing and the fit measurement below so
+/// both reason about the same geometry.
+List<double> tableColumnFlexWeights(List<List<String>> rows, int colCount) {
+  return <double>[
+    for (var c = 0; c < colCount; c++)
+      rows
+          .map((r) => c < r.length ? r[c].trim().length : 0)
+          .fold<int>(1, (longest, len) => len > longest ? len : longest)
+          .clamp(1, 80)
+          .toDouble(),
+  ];
+}
+
+/// Rendered height of the table body at [cellSize], laid out at [tableWidth]
+/// with columns proportioned by [tableColumnFlexWeights]. The per-cell padding
+/// mirrors table_preview.dart (h: cellSize*0.55, v: cellSize*0.36, line height
+/// 1.25) so the measured height matches what is drawn.
+double tableBlockHeight({
+  required List<List<String>> rows,
+  required int colCount,
+  required double tableWidth,
+  required double cellSize,
+  required String font,
+}) {
+  if (rows.isEmpty || colCount <= 0) return 0;
+  final weights = tableColumnFlexWeights(rows, colCount);
+  final sum = weights.fold<double>(0, (a, b) => a + b);
+  final colW = <double>[for (final wgt in weights) tableWidth * wgt / sum];
+  final hPad = cellSize * 0.55;
+  final vPad = cellSize * 0.36;
+  var height = 0.0;
+  for (var i = 0; i < rows.length; i++) {
+    final row = rows[i];
+    final header = i == 0;
+    var rowH = 0.0;
+    for (var c = 0; c < colCount; c++) {
+      final text = c < row.length ? row[c] : '';
+      final innerW = math.max(1.0, colW[c] - hPad * 2);
+      final h = measureTextHeight(
+        text.isEmpty ? ' ' : text,
+        cellSize,
+        innerW,
+        lineHeight: 1.25,
+        bold: header,
+        fontFamily: font,
+      );
+      if (h > rowH) rowH = h;
+    }
+    height += rowH + vPad * 2;
+  }
+  return height;
+}
+
+/// Largest cell font in [minCellSize, baseCellSize] whose table body fits
+/// [availH] at [tableWidth]. A text-heavy table shrinks its font so it fills
+/// the slide's full width, instead of being scaled down — and thereby narrowed
+/// — uniformly by the preview's FittedBox.
+double tableFitCellSize({
+  required List<List<String>> rows,
+  required int colCount,
+  required double tableWidth,
+  required double availH,
+  required double baseCellSize,
+  required double minCellSize,
+  required String font,
+  double fillRatio = 0.98,
+}) {
+  if (rows.isEmpty || colCount <= 0 || availH <= 0) return baseCellSize;
+  double measure(double size) => tableBlockHeight(
+    rows: rows,
+    colCount: colCount,
+    tableWidth: tableWidth,
+    cellSize: size,
+    font: font,
+  );
+  var size = baseCellSize;
+  // Shrinking the font also narrows each cell's text, so a row's height drops
+  // a little faster than linearly; the height-ratio step converges in a few
+  // passes. One measure() per iteration (mirrors tightenVerticalFitScale).
+  while (size > minCellSize + 0.05) {
+    final h = measure(size);
+    if (h <= availH * fillRatio) break;
+    final next = (size * availH / h * fillRatio).clamp(minCellSize, size);
+    if ((size - next).abs() < 0.05) {
+      size = next;
+      break;
+    }
+    size = next;
+  }
+  return size.clamp(minCellSize, baseCellSize);
+}
+
 /// Layout metrics for a standard bullets slide at [kReferenceSlideWidth].
 double bulletsSlideFitScale({
   required Slide slide,

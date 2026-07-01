@@ -778,13 +778,14 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     if (mounted) Navigator.pop(context);
   }
 
-  /// Toon na afloop de oefenrun-samenvatting, mits er genoeg gemeten is.
-  /// Sessie-only: niets wordt opgeslagen.
+  /// Toon na afloop de oefenrun-samenvatting wanneer de deck-schakelaar aan
+  /// staat. Sessie-only: niets wordt opgeslagen.
   Future<void> _maybeShowRehearsalSummary() async {
     // Tijd wordt altijd gemeten; deze schakelaar bepaalt enkel of het
     // eindscherm verschijnt (uit = stille modus, bv. bij een echte presentatie).
-    if (!widget.showRehearsalSummary) return;
-    if (!mounted || !_rehearsal.hasMeaningfulData) return;
+    // Staat de schakelaar aan, dan verschijnt het altijd — ook een korte run
+    // toont dan het overzicht (leeg = "Geen slides gemeten.").
+    if (!widget.showRehearsalSummary || !mounted) return;
     final run = _rehearsal.finish();
     await showRehearsalSummary(context, run: run, slides: widget.slides);
   }
