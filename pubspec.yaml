@@ -81,6 +81,7 @@ flutter:
     - assets/images/ocideck-logo-eu.png
     - assets/images/de-winter-wittegeheel.png
     - assets/images/flag_fy.png
+    - assets/images/flag_tlh.png
     - assets/themes/ocideck.css
     - assets/web_export/
     # Full EUPL 1.2 licence text, shown verbatim in the consent screen.
