@@ -52,6 +52,33 @@ class AppLocalizations {
     'gsw': 'Schwiizerdütsch',
   };
 
+  /// A country flag (emoji) per language, shown in the language pickers. Some
+  /// choices are by convention: English → United Kingdom, Latin → Vatican City,
+  /// Frisian → Netherlands (Friesland), Papiamento → Curaçao, Swiss German →
+  /// Switzerland.
+  static const languageFlags = {
+    'nl': '🇳🇱',
+    'en': '🇬🇧',
+    'it': '🇮🇹',
+    'de': '🇩🇪',
+    'fr': '🇫🇷',
+    'es': '🇪🇸',
+    'fy': '🇳🇱',
+    'pap': '🇨🇼',
+    'la': '🇻🇦',
+    'id': '🇮🇩',
+    'pl': '🇵🇱',
+    'uk': '🇺🇦',
+    'gsw': '🇨🇭',
+  };
+
+  /// The language's display name prefixed with its flag, for picker items.
+  static String flaggedName(String code) {
+    final flag = languageFlags[code];
+    final name = languageNames[code] ?? code;
+    return flag == null ? name : '$flag  $name';
+  }
+
   /// Language options sorted by display name, for pickers (the map itself keeps
   /// its own order for lookups). Locale-aware compare so accented names sort
   /// naturally.

@@ -61,7 +61,7 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
                       DropdownMenuItem(
                         value: e.key,
                         child: Text(
-                          e.value,
+                          AppLocalizations.flaggedName(e.key),
                           style: const TextStyle(fontSize: 13),
                         ),
                       ),
