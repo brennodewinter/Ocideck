@@ -12,6 +12,7 @@ part 'translations/pap.dart';
 part 'translations/la.dart';
 part 'translations/id.dart';
 part 'translations/pl.dart';
+part 'translations/uk.dart';
 
 class AppLocalizations {
   final Locale locale;
@@ -30,6 +31,7 @@ class AppLocalizations {
     Locale('la'),
     Locale('id'),
     Locale('pl'),
+    Locale('uk'),
   ];
 
   static const languageNames = {
@@ -44,6 +46,7 @@ class AppLocalizations {
     'la': 'Latina',
     'id': 'Bahasa Indonesia',
     'pl': 'Polski',
+    'uk': 'Українська',
   };
 
   /// Language options sorted by display name, for pickers (the map itself keeps
@@ -68,6 +71,7 @@ class AppLocalizations {
     'la': Locale('en'),
     'id': Locale('id'),
     'pl': Locale('pl'),
+    'uk': Locale('uk'),
   };
 
   static String _activeLanguageCode = 'nl';
@@ -161,6 +165,7 @@ const _strings = {
   'la': _stringsLa,
   'id': _stringsId,
   'pl': _stringsPl,
+  'uk': _stringsUk,
 };
 
 const _dutchSourceStrings = {
@@ -174,6 +179,7 @@ const _dutchSourceStrings = {
   'la': _dutchSourceLa,
   'id': _dutchSourceId,
   'pl': _dutchSourcePl,
+  'uk': _dutchSourceUk,
 };
 
 const _dutchSourceStringAdditions = {
