@@ -83,6 +83,8 @@ const _stringsTlh = {
 const _dutchSourceTlh = {
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'ngaSwI\'mey (.ocideck) wej DuH web mIwDaq.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'web mIwDaq .md qonwI\'mey neH poSmoHlu\'laH.',
   'Geen': 'pagh',
   'Nieuw': 'chu\'',
   'Verwijderen': 'Qaw\'',

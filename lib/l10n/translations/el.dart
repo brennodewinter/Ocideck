@@ -85,6 +85,8 @@ const _stringsEl = {
 const _dutchSourceEl = {
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Τα πακέτα (.ocideck) δεν υποστηρίζονται ακόμη στην έκδοση για τον ιστό.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Στην έκδοση για τον ιστό μπορούν να ανοιχτούν μόνο παρουσιάσεις .md.',
   'Geen': 'Κανένα',
   'Nieuw': 'Νέα',
   'Verwijderen': 'Διαγραφή',

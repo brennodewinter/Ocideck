@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:pasteboard/pasteboard.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
@@ -8,6 +9,7 @@ import '../l10n/app_localizations.dart';
 import '../models/slide.dart';
 import '../utils/log.dart';
 import '../utils/project_path.dart';
+import 'web_asset_store.dart';
 
 class ImageService {
   final String Function() _languageCode;
@@ -81,6 +83,28 @@ class ImageService {
   }
 
   Future<String?> pickImage({String? projectPath}) async {
+    // Web: de browser-picker levert bytes (geen pad); na dezelfde validatie
+    // als hieronder gaat de afbeelding de in-memory store in en krijgt de
+    // slide een mem:-pad (zie WebAssetStore).
+    if (kIsWeb) {
+      final result = await FilePicker.pickFiles(
+        type: FileType.image,
+        dialogTitle: _d('Kies een afbeelding'),
+        withData: true,
+      );
+      final file = result?.files.single;
+      final bytes = file?.bytes;
+      if (file == null || bytes == null) return null;
+      if (bytes.isEmpty ||
+          bytes.length > maxImageBytes ||
+          !_looksLikeImage(bytes)) {
+        logWarning(
+          'ImageService.pickImage: rejected (too large or not an image)',
+        );
+        return null;
+      }
+      return WebAssetStore.put(bytes, name: file.name);
+    }
     final result = await FilePicker.pickFiles(
       type: FileType.image,
       dialogTitle: _d('Kies een afbeelding'),
@@ -160,6 +184,12 @@ class ImageService {
       final bytes = await Pasteboard.image;
       if (bytes == null) return null;
       if (bytes.isEmpty || bytes.length > maxImageBytes) return null;
+      // Web: geen tijdelijke bestanden — de geplakte afbeelding gaat de
+      // in-memory store in, net als bij pickImage.
+      if (kIsWeb) {
+        if (!_looksLikeImage(bytes)) return null;
+        return WebAssetStore.put(bytes, name: 'geplakt.png');
+      }
       if (projectPath != null && projectPath.isNotEmpty) {
         final imagesDir = Directory(p.join(projectPath, 'images'));
         await imagesDir.create(recursive: true);

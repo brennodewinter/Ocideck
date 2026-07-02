@@ -318,29 +318,37 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           ),
           _menuItem('open', Icons.folder_open_outlined, l10n.t('openEllipsis')),
           const PopupMenuDivider(),
-          _menuItem(
-            'export_package',
-            Icons.inventory_2_outlined,
-            l10n.t('exportPackage'),
-          ),
-          _menuItem(
-            'import_package',
-            Icons.unarchive_outlined,
-            l10n.t('importPackage'),
-          ),
+          // Pakket-export/-import schrijft en leest lokale mappen en Nextcloud
+          // is op web bewust uit — verberg wat daar niet kan werken (zie
+          // platform_features.dart). URL-import werkt overal: op web via de
+          // browser (CORS + CSP) met dezelfde security-gate.
+          if (supportsLocalProjectFolders) ...[
+            _menuItem(
+              'export_package',
+              Icons.inventory_2_outlined,
+              l10n.t('exportPackage'),
+            ),
+            _menuItem(
+              'import_package',
+              Icons.unarchive_outlined,
+              l10n.t('importPackage'),
+            ),
+          ],
           _menuItem('import_url', Icons.link, l10n.t('importUrl')),
           const PopupMenuDivider(),
-          _menuItem(
-            'open_nextcloud',
-            Icons.cloud_download_outlined,
-            l10n.d('Openen vanaf Nextcloud'),
-          ),
-          _menuItem(
-            'save_nextcloud',
-            Icons.cloud_upload_outlined,
-            l10n.d('Opslaan naar Nextcloud'),
-          ),
-          const PopupMenuDivider(),
+          if (supportsNetworkDeckSources) ...[
+            _menuItem(
+              'open_nextcloud',
+              Icons.cloud_download_outlined,
+              l10n.d('Openen vanaf Nextcloud'),
+            ),
+            _menuItem(
+              'save_nextcloud',
+              Icons.cloud_upload_outlined,
+              l10n.d('Opslaan naar Nextcloud'),
+            ),
+            const PopupMenuDivider(),
+          ],
           _menuItem('find', Icons.find_replace, l10n.t('findReplace')),
           _menuItem(
             'clear_checklists',

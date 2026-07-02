@@ -86,6 +86,8 @@ const _stringsFr = {
 const _dutchSourceFr = {
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Les paquets (.ocideck) ne sont pas encore pris en charge dans la version web.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Seules les présentations .md peuvent être ouvertes dans la version web.',
   'Geen': 'Aucun',
   'Nieuw': 'Nouveau',
   'Verwijderen': 'Supprimer',

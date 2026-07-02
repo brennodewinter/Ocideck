@@ -85,6 +85,8 @@ const _stringsPap = {
 const _dutchSourcePap = {
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Paketnan (.ocideck) no ta sostené ainda den e vershon web.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Den e vershon web por habri solamente presentashonnan .md.',
   'Geen': 'Ningun',
   'Nieuw': 'Nobo',
   'Verwijderen': 'Kita',

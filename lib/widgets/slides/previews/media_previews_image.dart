@@ -81,6 +81,25 @@ Widget _resolvedImage(
 }) {
   if (imagePath.isEmpty) return _imagePlaceholder(context);
 
+  // In-memory afbeelding (webversie): een `mem:`-pad wijst naar bytes in de
+  // WebAssetStore in plaats van naar een bestand. Zelfde decode-cap; na een
+  // herlaad van de pagina is de store leeg en toont dit de placeholder.
+  final memBytes = WebAssetStore.isMemPath(imagePath)
+      ? WebAssetStore.bytesFor(imagePath)
+      : null;
+  if (memBytes != null) {
+    return Image(
+      image: cappedMemoryImage(memBytes),
+      fit: fit,
+      width: double.infinity,
+      height: double.infinity,
+      gaplessPlayback: true,
+      semanticLabel: semanticLabel,
+      errorBuilder: (context, error, stackTrace) => _imagePlaceholder(context),
+    );
+  }
+  if (WebAssetStore.isMemPath(imagePath)) return _imagePlaceholder(context);
+
   // Online afbeelding: render live via NetworkImage (zelfde decode-cap als
   // bestanden), maar alleen als de remote-media-gate open staat én de URL door
   // de SSRF-gate komt. Anders een placeholder met de URL.

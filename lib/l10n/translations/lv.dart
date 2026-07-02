@@ -85,6 +85,8 @@ const _stringsLv = {
 const _dutchSourceLv = {
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Pakotnes (.ocideck) tīmekļa versijā vēl netiek atbalstītas.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Tīmekļa versijā var atvērt tikai .md prezentācijas.',
   'Geen': 'Nav',
   'Nieuw': 'Jauns',
   'Verwijderen': 'Dzēst',

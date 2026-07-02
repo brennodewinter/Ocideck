@@ -86,6 +86,8 @@ const _stringsBg = {
 const _dutchSourceBg = {
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Пакетите (.ocideck) все още не се поддържат в уеб версията.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'В уеб версията могат да се отварят само .md презентации.',
   'Geen': 'Няма',
   'Nieuw': 'Нов',
   'Verwijderen': 'Изтриване',

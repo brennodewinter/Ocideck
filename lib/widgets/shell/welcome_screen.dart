@@ -67,6 +67,13 @@ class _WelcomeScreen extends ConsumerWidget {
                             label: Text(l10n.t('open')),
                           ),
                         ),
+                        // URL-import werkt overal: op desktop via het
+                        // gehardende dart:io-pad, op web via de browser
+                        // (CORS + CSP `connect-src https:`) met dezelfde
+                        // security-gate. Nextcloud blijft een netwerkbron
+                        // achter [supportsNetworkDeckSources]; de
+                        // bibliotheekscan doorzoekt het lokale
+                        // bestandssysteem en kan op web niet.
                         const SizedBox(height: 12),
                         SizedBox(
                           width: 220,
@@ -79,24 +86,28 @@ class _WelcomeScreen extends ConsumerWidget {
                             label: Text(l10n.t('importUrl')),
                           ),
                         ),
-                        const SizedBox(height: 12),
-                        SizedBox(
-                          width: 220,
-                          child: OutlinedButton.icon(
-                            onPressed: () => _scanLibrary(context, ref),
-                            icon: const Icon(Icons.travel_explore, size: 18),
-                            label: Text(l10n.d('Zoek op deze computer')),
+                        if (supportsLocalProjectFolders) ...[
+                          const SizedBox(height: 12),
+                          SizedBox(
+                            width: 220,
+                            child: OutlinedButton.icon(
+                              onPressed: () => _scanLibrary(context, ref),
+                              icon: const Icon(Icons.travel_explore, size: 18),
+                              label: Text(l10n.d('Zoek op deze computer')),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 12),
-                        SizedBox(
-                          width: 220,
-                          child: OutlinedButton.icon(
-                            onPressed: () => _openFromNextcloud(context, ref),
-                            icon: const Icon(Icons.cloud_outlined, size: 18),
-                            label: Text(l10n.d('Openen vanaf Nextcloud')),
+                        ],
+                        if (supportsNetworkDeckSources) ...[
+                          const SizedBox(height: 12),
+                          SizedBox(
+                            width: 220,
+                            child: OutlinedButton.icon(
+                              onPressed: () => _openFromNextcloud(context, ref),
+                              icon: const Icon(Icons.cloud_outlined, size: 18),
+                              label: Text(l10n.d('Openen vanaf Nextcloud')),
+                            ),
                           ),
-                        ),
+                        ],
                         const SizedBox(height: 8),
                         TextButton.icon(
                           onPressed: () => SettingsDialog.show(context),

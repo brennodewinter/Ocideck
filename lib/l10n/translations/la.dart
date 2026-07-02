@@ -87,6 +87,8 @@ const _stringsLa = {
 const _dutchSourceLa = {
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Fasciculi (.ocideck) in versione interretiali nondum sustinentur.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'In versione interretiali solae praesentationes .md aperiri possunt.',
   'Geen': 'Nullum',
   'Nieuw': 'Novum',
   'Verwijderen': 'Delere',

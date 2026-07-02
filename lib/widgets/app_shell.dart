@@ -19,6 +19,8 @@ import '../services/export_metadata.dart';
 import '../services/open_file_channel.dart';
 import '../services/export_service.dart';
 import '../services/file_service.dart';
+import '../services/image_service.dart';
+import '../services/web_asset_store.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
 import '../services/mermaid_render_service.dart';
@@ -282,6 +284,47 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     '.tif',
   };
 
+  /// Drag-drop op web: er is geen pad, alleen inhoud. Een `.md` wordt via het
+  /// in-memory pad geopend (zelfde security-gate); afbeeldingen gaan na
+  /// dezelfde validatie als pickImage de WebAssetStore in en worden slides
+  /// met een mem:-pad. Pakketten kunnen zonder bestandssysteem (nog) niet en
+  /// zeggen dat eerlijk; overige typen worden — net als op desktop — genegeerd.
+  Future<void> _onWebFilesDropped(List<DropItem> files) async {
+    final tabs = ref.read(tabsProvider.notifier);
+    final images = <String>[];
+    var packages = 0;
+    for (final file in files) {
+      final ext = p.extension(file.name.toLowerCase());
+      if (ext == '.md') {
+        final bytes = await file.readAsBytes();
+        await tabs.openDeckFromBytes(bytes, file.name);
+      } else if (ext == '.ocideck' || ext == '.zip') {
+        packages++;
+      } else if (_imageExtensions.contains(ext)) {
+        final bytes = await file.readAsBytes();
+        if (bytes.isEmpty ||
+            bytes.length > ImageService.maxImageBytes ||
+            !ImageService.looksLikeImage(bytes)) {
+          logWarning(
+            'AppShell._onWebFilesDropped: afbeelding geweigerd '
+            '(te groot of geen afbeelding)',
+            file.name,
+          );
+          continue;
+        }
+        images.add(WebAssetStore.put(bytes, name: file.name));
+      }
+    }
+    if (images.isNotEmpty) _addImagesToActiveDeck(images);
+    if (packages > 0 && mounted) {
+      _reportOpenFailure(
+        ScaffoldMessenger.of(context),
+        context.l10n,
+        OpenResult.packageUnsupported,
+      );
+    }
+  }
+
   /// Verwerk gesleepte bestanden: presentaties/pakketten openen, afbeeldingen
   /// als nieuwe slide(s) toevoegen aan het actieve deck.
   Future<void> _onFilesDropped(List<String> paths) async {
@@ -360,7 +403,11 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
           onDragExited: (_) => setState(() => _dragging = false),
           onDragDone: (detail) {
             setState(() => _dragging = false);
-            _onFilesDropped(detail.files.map((f) => f.path).toList());
+            if (isWebPlatform) {
+              _onWebFilesDropped(detail.files);
+            } else {
+              _onFilesDropped(detail.files.map((f) => f.path).toList());
+            }
           },
           child: Material(
             child: Stack(

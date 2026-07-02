@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import '../utils/log.dart';
 
@@ -18,7 +19,8 @@ class OpenFileChannel {
   OpenFileChannel(this.onOpenFiles);
 
   Future<void> start() async {
-    if (!Platform.isMacOS) return;
+    // kIsWeb eerst: Platform.isMacOS is op web een dart:io-stub die gooit.
+    if (kIsWeb || !Platform.isMacOS) return;
     _channel.setMethodCallHandler(_handle);
     try {
       final launch = await _channel.invokeMethod<List<dynamic>>(

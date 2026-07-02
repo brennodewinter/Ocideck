@@ -85,6 +85,8 @@ const _stringsFi = {
 const _dutchSourceFi = {
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Paketteja (.ocideck) ei vielä tueta verkkoversiossa.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Verkkoversiossa voi avata vain .md-esityksiä.',
   'Geen': 'Ei mitään',
   'Nieuw': 'Uusi',
   'Verwijderen': 'Poista',

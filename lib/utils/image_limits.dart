@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
 
@@ -31,6 +32,19 @@ ImageProvider cappedFileImage(File file) => ResizeImage(
 /// constructing this; the cap is the decode-bomb defence only.
 ImageProvider cappedNetworkImage(String url) => ResizeImage(
   NetworkImage(url),
+  width: kMaxImageDecodeDimension,
+  height: kMaxImageDecodeDimension,
+  policy: ResizeImagePolicy.fit,
+  allowUpscaling: false,
+);
+
+/// A [MemoryImage] whose decode is capped to [kMaxImageDecodeDimension], the
+/// in-memory twin of [cappedFileImage]. Gebruikt voor `mem:`-paden uit de
+/// WebAssetStore (webversie) — zelfde decode-bom-verdediging als bij
+/// bestanden. Geef steeds hetzélfde bytes-object door, dan deelt de
+/// image-cache één entry (MemoryImage vergelijkt op object-identiteit).
+ImageProvider cappedMemoryImage(Uint8List bytes) => ResizeImage(
+  MemoryImage(bytes),
   width: kMaxImageDecodeDimension,
   height: kMaxImageDecodeDimension,
   policy: ResizeImagePolicy.fit,
