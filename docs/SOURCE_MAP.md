@@ -42,6 +42,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `export_service.dart` — The single chokepoint that renders decks to PDF, PPTX, and HTML.
 - `file_service.dart` — Scans presentation files, opens decks (with the safety gate), and import/URL/package IO.
 - `image_dedup_service.dart` — Finds byte-identical image files by md5 to clean up libraries.
+- `image_sidecar_store.dart` — Shared read/mutate/atomic-write layer for the per-directory JSON sidecars of captions and descriptions.
 - `image_reference_service.dart` — Finds and rewrites image references in Marp markdown files.
 - `image_service.dart` — Validates and manages imported image and media asset files.
 - `markdown_body_blocks.dart` — Splits markdown into code blocks and paragraphs.
