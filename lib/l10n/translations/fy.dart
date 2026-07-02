@@ -1109,4 +1109,7 @@ const _dutchSourceAddFy = {
   'Inhoud': 'Ynhâld',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Fraach is net spylber: jou op syn minst ien goed én ien ferkeard antwurd op.',
+  'CSV-koppeling verbreken?': 'CSV-keppeling ferbrekke?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'De data bliuwt yn de slide stean, mar wizigingen yn it CSV-bestân komme net mear mei.',
 };

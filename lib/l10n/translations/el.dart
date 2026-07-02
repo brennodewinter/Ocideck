@@ -1134,4 +1134,7 @@ const _dutchSourceEl = {
   'Inhoud': 'Περιεχόμενο',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Η ερώτηση δεν μπορεί να παιχτεί: δώστε τουλάχιστον μία σωστή και μία λάθος απάντηση.',
+  'CSV-koppeling verbreken?': 'Αποσύνδεση του αρχείου CSV;',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Τα δεδομένα μένουν στη διαφάνεια, αλλά οι αλλαγές στο αρχείο CSV δεν θα περνούν πλέον.',
 };

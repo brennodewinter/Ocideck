@@ -1123,4 +1123,7 @@ const _dutchSourceSl = {
   'Inhoud': 'Vsebina',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Vprašanja ni mogoče igrati: navedite vsaj en pravilen in en napačen odgovor.',
+  'CSV-koppeling verbreken?': 'Prekinem povezavo s CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Podatki ostanejo v prosojnici, a spremembe v datoteki CSV se ne bodo več prenašale.',
 };

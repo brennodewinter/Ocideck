@@ -1121,4 +1121,7 @@ const _dutchSourceGsw = {
   'Inhoud': 'Inhalt',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'D Frag lauft nit: gib mindestens ei richtigi und ei falschi Antwort aa.',
+  'CSV-koppeling verbreken?': 'CSV-Verknüpfig trenne?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'D Date blibe in dr Folie, aber Änderige an dr CSV-Datei chöme nümme mit.',
 };

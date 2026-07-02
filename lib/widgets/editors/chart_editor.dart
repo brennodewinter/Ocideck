@@ -310,7 +310,32 @@ class _ChartEditorState extends State<ChartEditor> {
     _emit();
   }
 
-  void _unlink() {
+  /// Vraag bevestiging voor het verbreken van de CSV-koppeling: één klik zou
+  /// anders ongemerkt de live-link opgeven en de data vast in de slide zetten.
+  Future<void> _unlink() async {
+    final l10n = context.l10n;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.d('CSV-koppeling verbreken?')),
+        content: Text(
+          l10n.d(
+            'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.',
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(l10n.t('cancel')),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(l10n.d('Ontkoppelen')),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted) return;
     setState(() => _source = null);
     _emit();
   }
@@ -653,103 +678,111 @@ class _ChartEditorState extends State<ChartEditor> {
     return SizedBox(
       key: const ValueKey('chart-grid'),
       width: gridWidth,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header row: empty label cell + series name fields.
-          Row(
-            children: [
-              SizedBox(
-                width: labelWidth,
-                child: Row(
-                  children: [
-                    Expanded(child: _headerHint(context.l10n.d('Label'))),
-                    _sortButton(column: null, enabled: enabled),
-                  ],
-                ),
-              ),
-              for (var c = 0; c < cols; c++)
-                Container(
-                  key: ValueKey('chart-series-column-$c'),
-                  width: cellWidth,
-                  color: _type == ChartType.pie && c >= 2
-                      ? const Color(0xFFE2E8F0)
-                      : null,
+      // Tab volgt de leesvolgorde van het raster (cellen links-naar-rechts,
+      // rij voor rij) in plaats van de toevallige focusvolgorde van de tree.
+      child: FocusTraversalGroup(
+        policy: ReadingOrderTraversalPolicy(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header row: empty label cell + series name fields.
+            Row(
+              children: [
+                SizedBox(
+                  width: labelWidth,
                   child: Row(
                     children: [
-                      IconButton(
-                        onPressed: enabled ? () => _pickSeriesColor(c) : null,
-                        tooltip: context.l10n.d('Kleur van reeks'),
-                        icon: Container(
-                          width: 16,
-                          height: 16,
-                          decoration: BoxDecoration(
-                            color: Color(
-                              _type == ChartType.pie && c >= 2
-                                  ? 0xFF64748B
-                                  : int.parse(
-                                          chartSeriesColor(
-                                            ChartSeries(
-                                              name: '',
-                                              data: const [],
-                                              color: _seriesColors[c],
-                                            ),
-                                            c,
-                                          ).substring(1),
-                                          radix: 16,
-                                        ) |
-                                        0xFF000000,
-                            ),
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 1.5),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Color(0x330F172A),
-                                blurRadius: 2,
-                              ),
-                            ],
-                          ),
-                        ),
-                        visualDensity: VisualDensity.compact,
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(
-                          minWidth: 24,
-                          minHeight: 32,
-                        ),
-                      ),
-                      Expanded(
-                        child: _cell(
-                          key: ValueKey('s-$_rev-$c'),
-                          value: _seriesNames[c],
-                          enabled: enabled,
-                          onChanged: (v) => _seriesNames[c] = v,
-                          bold: true,
-                          muted: _type == ChartType.pie && c >= 2,
-                        ),
-                      ),
-                      _sortButton(column: c, enabled: enabled),
-                      if (enabled && cols > 1)
-                        _iconBtn(
-                          Icons.close,
-                          () => _removeColumn(c),
-                          tooltip: context.l10n.d('Kolom verwijderen'),
-                        ),
+                      Expanded(child: _headerHint(context.l10n.d('Label'))),
+                      _sortButton(column: null, enabled: enabled),
                     ],
                   ),
                 ),
-            ],
-          ),
-          const SizedBox(height: 4),
-          // Data rows.
-          for (var r = 0; r < _xLabels.length; r++)
-            _dataRow(
-              r,
-              enabled: enabled,
-              cols: cols,
-              labelWidth: labelWidth,
-              cellWidth: cellWidth,
+                for (var c = 0; c < cols; c++)
+                  Container(
+                    key: ValueKey('chart-series-column-$c'),
+                    width: cellWidth,
+                    color: _type == ChartType.pie && c >= 2
+                        ? const Color(0xFFE2E8F0)
+                        : null,
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: enabled ? () => _pickSeriesColor(c) : null,
+                          tooltip: context.l10n.d('Kleur van reeks'),
+                          icon: Container(
+                            width: 16,
+                            height: 16,
+                            decoration: BoxDecoration(
+                              color: Color(
+                                _type == ChartType.pie && c >= 2
+                                    ? 0xFF64748B
+                                    : int.parse(
+                                            chartSeriesColor(
+                                              ChartSeries(
+                                                name: '',
+                                                data: const [],
+                                                color: _seriesColors[c],
+                                              ),
+                                              c,
+                                            ).substring(1),
+                                            radix: 16,
+                                          ) |
+                                          0xFF000000,
+                              ),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 1.5,
+                              ),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color(0x330F172A),
+                                  blurRadius: 2,
+                                ),
+                              ],
+                            ),
+                          ),
+                          visualDensity: VisualDensity.compact,
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(
+                            minWidth: 24,
+                            minHeight: 32,
+                          ),
+                        ),
+                        Expanded(
+                          child: _cell(
+                            key: ValueKey('s-$_rev-$c'),
+                            value: _seriesNames[c],
+                            enabled: enabled,
+                            onChanged: (v) => _seriesNames[c] = v,
+                            bold: true,
+                            muted: _type == ChartType.pie && c >= 2,
+                          ),
+                        ),
+                        _sortButton(column: c, enabled: enabled),
+                        if (enabled && cols > 1)
+                          _iconBtn(
+                            Icons.close,
+                            () => _removeColumn(c),
+                            tooltip: context.l10n.d('Kolom verwijderen'),
+                          ),
+                      ],
+                    ),
+                  ),
+              ],
             ),
-        ],
+            const SizedBox(height: 4),
+            // Data rows.
+            for (var r = 0; r < _xLabels.length; r++)
+              _dataRow(
+                r,
+                enabled: enabled,
+                cols: cols,
+                labelWidth: labelWidth,
+                cellWidth: cellWidth,
+              ),
+          ],
+        ),
       ),
     );
   }

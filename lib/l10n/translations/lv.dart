@@ -1121,4 +1121,7 @@ const _dutchSourceLv = {
   'Inhoud': 'Saturs',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Jautājumu nevar izspēlēt: norādiet vismaz vienu pareizu un vienu nepareizu atbildi.',
+  'CSV-koppeling verbreken?': 'Atsaistīt CSV failu?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Dati paliek slaidā, bet CSV faila izmaiņas vairs netiks pārņemtas.',
 };

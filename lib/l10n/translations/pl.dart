@@ -1128,4 +1128,7 @@ const _dutchSourcePl = {
   'Inhoud': 'Treść',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Pytania nie da się rozegrać: podaj co najmniej jedną poprawną i jedną błędną odpowiedź.',
+  'CSV-koppeling verbreken?': 'Odłączyć plik CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Dane pozostaną w slajdzie, ale zmiany w pliku CSV nie będą już uwzględniane.',
 };

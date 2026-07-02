@@ -1126,4 +1126,7 @@ const _dutchSourceLt = {
   'Inhoud': 'Turinys',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Klausimo negalima žaisti: pateikite bent vieną teisingą ir vieną neteisingą atsakymą.',
+  'CSV-koppeling verbreken?': 'Atsieti CSV failą?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Duomenys lieka skaidrėje, bet CSV failo pakeitimai nebebus perimami.',
 };

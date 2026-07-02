@@ -1123,4 +1123,7 @@ const _dutchSourceHu = {
   'Inhoud': 'Tartalom',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'A kérdés nem játszható le: adj meg legalább egy helyes és egy helytelen választ.',
+  'CSV-koppeling verbreken?': 'Megszünteti a CSV-kapcsolatot?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Az adatok a dián maradnak, de a CSV-fájl változásai már nem érvényesülnek.',
 };

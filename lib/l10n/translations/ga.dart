@@ -1146,4 +1146,7 @@ const _dutchSourceGa = {
   'Inhoud': 'Ábhar',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Ní féidir an cheist a imirt: tabhair freagra ceart amháin agus freagra mícheart amháin ar a laghad.',
+  'CSV-koppeling verbreken?': 'An nasc CSV a bhriseadh?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Fanann na sonraí sa sleamhnán, ach ní thiocfaidh athruithe ar an gcomhad CSV tríd a thuilleadh.',
 };

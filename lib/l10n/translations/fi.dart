@@ -1123,4 +1123,7 @@ const _dutchSourceFi = {
   'Inhoud': 'Sisältö',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Kysymystä ei voi pelata: anna vähintään yksi oikea ja yksi väärä vastaus.',
+  'CSV-koppeling verbreken?': 'Puretaanko CSV-linkitys?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Tiedot pysyvät diassa, mutta CSV-tiedoston muutokset eivät enää välity.',
 };

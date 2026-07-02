@@ -1117,4 +1117,7 @@ const _dutchSourceDa = {
   'Inhoud': 'Indhold',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Spørgsmålet kan ikke afvikles: angiv mindst ét rigtigt og ét forkert svar.',
+  'CSV-koppeling verbreken?': 'Fjern CSV-tilknytningen?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Dataene bliver i sliden, men ændringer i CSV-filen kommer ikke længere med.',
 };

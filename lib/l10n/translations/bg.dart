@@ -1137,4 +1137,7 @@ const _dutchSourceBg = {
   'Inhoud': 'Съдържание',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Въпросът не може да се играе: посочете поне един верен и един грешен отговор.',
+  'CSV-koppeling verbreken?': 'Прекъсване на връзката с CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Данните остават в слайда, но промените в CSV файла вече няма да се отразяват.',
 };

@@ -1122,4 +1122,7 @@ const _dutchSourceCs = {
   'Inhoud': 'Obsah',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Otázku nelze hrát: zadejte alespoň jednu správnou a jednu špatnou odpověď.',
+  'CSV-koppeling verbreken?': 'Zrušit propojení s CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Data zůstanou ve snímku, ale změny v souboru CSV se už nepromítnou.',
 };

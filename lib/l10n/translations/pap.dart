@@ -1111,4 +1111,7 @@ const _dutchSourceAddPap = {
   'Inhoud': 'Kontenido',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'E pregunta no por wòrdu hungá: duna por lo ménos un kontesta bon i un robes.',
+  'CSV-koppeling verbreken?': 'Kita e konekshon CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'E datonan ta keda den e slide, pero kambionan den e archivo CSV lo no drenta mas.',
 };

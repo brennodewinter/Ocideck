@@ -1120,4 +1120,7 @@ const _dutchSourceSv = {
   'Inhoud': 'Innehåll',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Frågan kan inte spelas: ange minst ett rätt och ett fel svar.',
+  'CSV-koppeling verbreken?': 'Koppla bort CSV-filen?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Datan stannar i bilden, men ändringar i CSV-filen följer inte längre med.',
 };

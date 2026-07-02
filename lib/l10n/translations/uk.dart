@@ -1133,4 +1133,7 @@ const _dutchSourceUk = {
   'Inhoud': 'Вміст',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Питання не можна відтворити: вкажіть щонайменше одну правильну та одну неправильну відповідь.',
+  'CSV-koppeling verbreken?': 'Розірвати зв\'язок із CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Дані залишаться у слайді, але зміни у файлі CSV більше не підтягуватимуться.',
 };

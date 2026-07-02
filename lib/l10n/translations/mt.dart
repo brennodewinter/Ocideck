@@ -1134,4 +1134,7 @@ const _dutchSourceMt = {
   'Inhoud': 'Kontenut',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Il-mistoqsija ma tistax tintlagħab: agħti mill-inqas tweġiba waħda tajba u waħda ħażina.',
+  'CSV-koppeling verbreken?': 'Taqta\' r-rabta mas-CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Id-data tibqa\' fl-islajd, imma bidliet fil-fajl CSV ma jibqgħux jidħlu.',
 };

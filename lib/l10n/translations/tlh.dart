@@ -1109,4 +1109,7 @@ const _dutchSourceTlh = {
   'Inhoud': 'ngaSbogh',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'yu\'wI\' QujlaHbe\'lu\': wa\' jang lugh wa\' jang muj je yInob.',
+  'CSV-koppeling verbreken?': 'CSV rarwI\' bIteqqang\'a\'?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      '\'anghomDaq ratlh De\', \'ach CSV teHwI\' choHmey chel\'be\'lu\' \'e\' mev.',
 };

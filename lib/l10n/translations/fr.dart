@@ -1122,4 +1122,7 @@ const _dutchSourceAddFr = {
   'Inhoud': 'Contenu',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'La question ne peut pas être jouée : indiquez au moins une bonne et une mauvaise réponse.',
+  'CSV-koppeling verbreken?': 'Rompre le lien CSV ?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Les données restent dans la diapositive, mais les modifications du fichier CSV ne seront plus reprises.',
 };

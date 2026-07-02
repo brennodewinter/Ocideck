@@ -1131,4 +1131,7 @@ const _dutchSourceLa = {
   'Inhoud': 'Contentum',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Quaestio agi non potest: da saltem unum responsum rectum et unum falsum.',
+  'CSV-koppeling verbreken?': 'Vinculum CSV solvere?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Data in folio manent, sed mutationes in plica CSV non iam accipientur.',
 };

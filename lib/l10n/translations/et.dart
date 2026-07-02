@@ -1115,4 +1115,7 @@ const _dutchSourceEt = {
   'Inhoud': 'Sisu',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Küsimust ei saa mängida: sisesta vähemalt üks õige ja üks vale vastus.',
+  'CSV-koppeling verbreken?': 'Kas katkestada CSV-link?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Andmed jäävad slaidile, kuid CSV-faili muudatused enam kaasa ei tule.',
 };

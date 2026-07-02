@@ -1131,4 +1131,7 @@ const _dutchSourceRo = {
   'Inhoud': 'Conținut',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Întrebarea nu poate fi jucată: oferă cel puțin un răspuns corect și unul greșit.',
+  'CSV-koppeling verbreken?': 'Rupeți legătura cu CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Datele rămân în diapozitiv, dar modificările din fișierul CSV nu vor mai fi preluate.',
 };

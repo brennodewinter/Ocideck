@@ -1121,4 +1121,7 @@ const _dutchSourceId = {
   'Inhoud': 'Konten',
   'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
       'Pertanyaan tidak dapat dimainkan: berikan setidaknya satu jawaban benar dan satu salah.',
+  'CSV-koppeling verbreken?': 'Putuskan tautan CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Data tetap di slide, tetapi perubahan pada file CSV tidak akan ikut lagi.',
 };
