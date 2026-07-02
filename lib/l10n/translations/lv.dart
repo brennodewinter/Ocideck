@@ -1159,4 +1159,6 @@ const _dutchSourceLv = {
       'Imports noraidīts: pakotne pārsniedz drošības limitus.',
   'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
       'No šī URL neizdevās iegūt prezentāciju. Pārbaudiet URL un savienojumu.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Pieteikšanās neizdevās — pārbaudiet lietotājvārdu un paroli. Padoms: ar Nextcloud izmantojiet lietotnes paroli (Iestatījumi → Drošība), nevis konta paroli.',
 };

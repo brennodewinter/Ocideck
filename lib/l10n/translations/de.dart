@@ -1151,4 +1151,6 @@ const _dutchSourceAddDe = {
       'Import verweigert: das Paket überschreitet die Sicherheitslimits.',
   'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
       'Von dieser URL konnte keine Präsentation geholt werden. Prüfe die URL und deine Verbindung.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Anmeldung fehlgeschlagen — prüfe Benutzername und Passwort. Tipp: verwende bei Nextcloud ein App-Passwort (Einstellungen → Sicherheit), nicht dein Kontopasswort.',
 };

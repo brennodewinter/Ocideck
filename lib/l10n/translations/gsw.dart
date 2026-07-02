@@ -1160,4 +1160,6 @@ const _dutchSourceGsw = {
       'Import verweigeret: s Paket überschritet d Sicherheitslimite.',
   'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
       'Vo dere URL het kei Präsentation chönne gholt wärde. Lueg d URL und dini Verbindig aa.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Aamäldig fählgschlage — lueg Benutzername und Passwort aa. Tipp: bruch bi Nextcloud es App-Passwort (Iistellige → Sicherheit), nit dis Konto-Passwort.',
 };

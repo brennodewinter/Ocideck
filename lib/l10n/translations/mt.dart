@@ -1173,4 +1173,6 @@ const _dutchSourceMt = {
       'L-importazzjoni miċħuda: il-pakkett jaqbeż il-limiti tas-sigurtà.',
   'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
       'Ma setgħetx tinġab preżentazzjoni minn dan il-URL. Iċċekkja l-URL u l-konnessjoni.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Il-login falla — iċċekkja l-isem tal-utent u l-password. Suġġeriment: ma\' Nextcloud uża password tal-app (Settings → Sigurtà), mhux dik tal-kont.',
 };

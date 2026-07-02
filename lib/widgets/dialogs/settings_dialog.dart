@@ -227,8 +227,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
   /// Bouw een [WebdavServer] uit de huidige veldwaarden (zonder wachtwoord).
   WebdavServer _webdavServerFromFields() {
+    var url = _webdavUrl.text.trim();
+    // "cloud.example.com" zonder schema is de meest gemaakte invoerfout;
+    // vul https:// aan i.p.v. later op een ongeldige URL te stranden.
+    if (url.isNotEmpty && !url.contains('://')) url = 'https://$url';
     return WebdavServer(
-      baseUrl: _webdavUrl.text.trim(),
+      baseUrl: url,
       username: _webdavUser.text.trim(),
       rootPath: WebdavServer.normalizeRoot(_webdavRoot.text),
       trustedInternal: _webdavTrusted,

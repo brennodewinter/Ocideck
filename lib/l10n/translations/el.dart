@@ -1174,4 +1174,6 @@ const _dutchSourceEl = {
       'Η εισαγωγή απορρίφθηκε: το πακέτο υπερβαίνει τα όρια ασφαλείας.',
   'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
       'Δεν ήταν δυνατή η λήψη παρουσίασης από αυτό το URL. Ελέγξτε το URL και τη σύνδεσή σας.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Η σύνδεση απέτυχε — ελέγξτε όνομα χρήστη και κωδικό. Συμβουλή: με το Nextcloud χρησιμοποιήστε κωδικό εφαρμογής (Ρυθμίσεις → Ασφάλεια), όχι τον κωδικό του λογαριασμού.',
 };

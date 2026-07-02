@@ -1158,4 +1158,6 @@ const _dutchSourceSv = {
       'Importen nekades: paketet överskrider säkerhetsgränserna.',
   'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
       'Kunde inte hämta en presentation från denna URL. Kontrollera URL:en och din anslutning.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Inloggningen misslyckades — kontrollera användarnamn och lösenord. Tips: använd med Nextcloud ett applösenord (Inställningar → Säkerhet), inte ditt kontolösenord.',
 };

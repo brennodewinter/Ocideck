@@ -1162,4 +1162,6 @@ const _dutchSourceSl = {
       'Uvoz zavrnjen: paket presega varnostne omejitve.',
   'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
       'S tega URL-ja ni bilo mogoče pridobiti predstavitve. Preverite URL in povezavo.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Prijava ni uspela — preverite uporabniško ime in geslo. Namig: pri Nextcloudu uporabite geslo aplikacije (Nastavitve → Varnost), ne gesla računa.',
 };

@@ -1156,4 +1156,6 @@ const _dutchSourceDa = {
       'Import afvist: pakken overskrider sikkerhedsgrænserne.',
   'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
       'Kunne ikke hente en præsentation fra denne URL. Tjek URL\'en og din forbindelse.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Login mislykkedes — tjek brugernavn og adgangskode. Tip: brug med Nextcloud en app-adgangskode (Indstillinger → Sikkerhed), ikke din kontoadgangskode.',
 };

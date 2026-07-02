@@ -1154,4 +1154,6 @@ const _dutchSourceAddIt = {
       'Importazione rifiutata: il pacchetto supera i limiti di sicurezza.',
   'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
       'Impossibile recuperare una presentazione da questo URL. Controlla l\'URL e la connessione.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Accesso non riuscito — controlla nome utente e password. Suggerimento: con Nextcloud usa una password per app (Impostazioni → Sicurezza), non quella dell\'account.',
 };

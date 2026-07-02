@@ -1166,4 +1166,6 @@ const _dutchSourceSk = {
       'Import odmietnutý: balík prekračuje bezpečnostné limity.',
   'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
       'Z tejto URL sa nepodarilo získať prezentáciu. Skontrolujte URL a pripojenie.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Prihlásenie zlyhalo — skontrolujte meno a heslo. Tip: pri Nextcloude použite heslo aplikácie (Nastavenia → Zabezpečenie), nie heslo účtu.',
 };

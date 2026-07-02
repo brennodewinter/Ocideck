@@ -1165,4 +1165,6 @@ const _dutchSourceLt = {
       'Importas atmestas: paketas viršija saugumo ribas.',
   'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
       'Iš šio URL nepavyko gauti pristatymo. Patikrinkite URL ir ryšį.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Prisijungti nepavyko — patikrinkite naudotojo vardą ir slaptažodį. Patarimas: su Nextcloud naudokite programėlės slaptažodį (Nustatymai → Sauga), o ne paskyros.',
 };

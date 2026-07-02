@@ -1170,4 +1170,6 @@ const _dutchSourceRo = {
       'Import refuzat: pachetul depășește limitele de siguranță.',
   'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
       'Nu s-a putut prelua o prezentare de la acest URL. Verificați URL-ul și conexiunea.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Autentificarea a eșuat — verificați numele de utilizator și parola. Sfat: cu Nextcloud folosiți o parolă de aplicație (Setări → Securitate), nu parola contului.',
 };

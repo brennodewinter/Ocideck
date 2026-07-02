@@ -1172,4 +1172,6 @@ const _dutchSourceAddEn = {
       'Import refused: the package exceeds the safety limits.',
   'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
       'Could not fetch a presentation from this URL. Check the URL and your connection.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Sign-in failed — check the username and password. Tip: with Nextcloud, use an app password (Settings → Security), not your account password.',
 };

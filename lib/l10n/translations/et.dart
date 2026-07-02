@@ -1154,4 +1154,6 @@ const _dutchSourceEt = {
       'Import keelduti: pakett ületab turvapiiranguid.',
   'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
       'Sellelt URL-ilt ei õnnestunud esitlust laadida. Kontrolli URL-i ja ühendust.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Sisselogimine ebaõnnestus — kontrolli kasutajanime ja parooli. Vihje: Nextcloudiga kasuta rakenduse parooli (Seaded → Turvalisus), mitte konto parooli.',
 };

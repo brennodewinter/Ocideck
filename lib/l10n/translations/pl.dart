@@ -1167,4 +1167,6 @@ const _dutchSourcePl = {
       'Import odrzucony: pakiet przekracza limity bezpieczeństwa.',
   'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
       'Nie udało się pobrać prezentacji z tego adresu URL. Sprawdź adres i połączenie.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Logowanie nie powiodło się — sprawdź nazwę użytkownika i hasło. Wskazówka: w Nextcloud użyj hasła aplikacji (Ustawienia → Bezpieczeństwo), nie hasła konta.',
 };

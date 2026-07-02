@@ -1148,4 +1148,6 @@ const _dutchSourceAddFy = {
       'Ymport wegere: it pakket giet oer de feilichheidslimiten hinne.',
   'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
       'Koe fan dizze URL gjin presintaasje ophelje. Kontrolearje de URL en jo ferbining.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Oanmelden mislearre — kontrolearje brûkersnamme en wachtwurd. Tip: brûk by Nextcloud in app-wachtwurd (Ynstellingen → Feilichheid), net jo accountwachtwurd.',
 };
