@@ -1162,4 +1162,5 @@ const _dutchSourceAddIt = {
   'Opruimen…': 'Pulizia…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Impossibile leggere una o più cartelle della libreria; l\'elenco potrebbe essere incompleto.',
+  'Uit recente bestanden verwijderen': 'Rimuovi dai file recenti',
 };

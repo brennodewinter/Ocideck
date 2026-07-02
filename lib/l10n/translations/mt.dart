@@ -1181,4 +1181,5 @@ const _dutchSourceMt = {
   'Opruimen…': 'Tindif…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Ma setgħux jinqraw folder wieħed jew aktar tal-librerija; il-lista tista\' ma tkunx kompluta.',
+  'Uit recente bestanden verwijderen': 'Neħħi mill-fajls riċenti',
 };

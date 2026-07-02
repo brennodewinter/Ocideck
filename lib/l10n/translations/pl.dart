@@ -1175,4 +1175,5 @@ const _dutchSourcePl = {
   'Opruimen…': 'Porządkowanie…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Nie można odczytać co najmniej jednego folderu biblioteki; lista może być niekompletna.',
+  'Uit recente bestanden verwijderen': 'Usuń z ostatnich plików',
 };

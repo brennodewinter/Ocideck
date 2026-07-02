@@ -1178,4 +1178,5 @@ const _dutchSourceRo = {
   'Opruimen…': 'Se curăță…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Nu s-au putut citi unul sau mai multe dosare ale bibliotecii; lista poate fi incompletă.',
+  'Uit recente bestanden verwijderen': 'Elimină din fișierele recente',
 };

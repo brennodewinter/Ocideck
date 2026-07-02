@@ -1186,4 +1186,5 @@ const _dutchSourcePt = {
   'Opruimen…': 'A limpar…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Não foi possível ler uma ou mais pastas da biblioteca; a lista pode estar incompleta.',
+  'Uit recente bestanden verwijderen': 'Remover dos ficheiros recentes',
 };

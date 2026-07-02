@@ -1162,4 +1162,5 @@ const _dutchSourceEt = {
   'Opruimen…': 'Koristamine…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Ühte või mitut teegi kausta ei õnnestunud lugeda; loend võib olla poolik.',
+  'Uit recente bestanden verwijderen': 'Eemalda hiljutistest failidest',
 };

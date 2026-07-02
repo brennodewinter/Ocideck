@@ -1178,4 +1178,5 @@ const _dutchSourceLa = {
   'Opruimen…': 'Purgatur…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Unum aut plura scrinia bibliothecae legi non potuerunt; index incompletus esse potest.',
+  'Uit recente bestanden verwijderen': 'Ex plicis recentibus remove',
 };

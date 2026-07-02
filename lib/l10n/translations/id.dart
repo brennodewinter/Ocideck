@@ -1168,4 +1168,5 @@ const _dutchSourceId = {
   'Opruimen…': 'Membersihkan…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Tidak dapat membaca satu atau beberapa folder pustaka; daftar mungkin tidak lengkap.',
+  'Uit recente bestanden verwijderen': 'Hapus dari file terbaru',
 };

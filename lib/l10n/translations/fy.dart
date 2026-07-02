@@ -1156,4 +1156,5 @@ const _dutchSourceAddFy = {
   'Opruimen…': 'Opromje…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Koe ien of mear mappen fan de bibleteek net lêze; de list kin ûnfolslein wêze.',
+  'Uit recente bestanden verwijderen': 'Ut resinte bestannen fuortsmite',
 };

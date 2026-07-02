@@ -65,7 +65,7 @@ class _AppTabBar extends StatelessWidget {
   }
 }
 
-class _TabChip extends StatelessWidget {
+class _TabChip extends StatefulWidget {
   final TabInfo tab;
   final bool isActive;
   final bool showClose;
@@ -83,6 +83,44 @@ class _TabChip extends StatelessWidget {
     required this.panelText,
     required this.accent,
   });
+
+  @override
+  State<_TabChip> createState() => _TabChipState();
+}
+
+class _TabChipState extends State<_TabChip> {
+  TabInfo get tab => widget.tab;
+  bool get isActive => widget.isActive;
+  bool get showClose => widget.showClose;
+  Color get panelText => widget.panelText;
+  Color get accent => widget.accent;
+  VoidCallback get onTap => widget.onTap;
+  VoidCallback get onClose => widget.onClose;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.isActive) _scrollIntoView();
+  }
+
+  @override
+  void didUpdateWidget(_TabChip oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.isActive && !oldWidget.isActive) _scrollIntoView();
+  }
+
+  /// Houd de actieve tab in beeld: met veel open decks kan die anders buiten
+  /// het horizontaal scrollende deel van de balk vallen.
+  void _scrollIntoView() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      Scrollable.ensureVisible(
+        context,
+        alignment: 0.5,
+        duration: const Duration(milliseconds: 180),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

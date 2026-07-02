@@ -1174,4 +1174,5 @@ const _dutchSourceSk = {
   'Opruimen…': 'Upratovanie…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Nepodarilo sa prečítať jeden alebo viac priečinkov knižnice; zoznam môže byť neúplný.',
+  'Uit recente bestanden verwijderen': 'Odstrániť z nedávnych súborov',
 };

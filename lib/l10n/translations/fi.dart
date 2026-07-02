@@ -1170,4 +1170,5 @@ const _dutchSourceFi = {
   'Opruimen…': 'Siivotaan…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Yhtä tai useampaa kirjastokansiota ei voitu lukea; luettelo voi olla puutteellinen.',
+  'Uit recente bestanden verwijderen': 'Poista viimeisimmistä tiedostoista',
 };

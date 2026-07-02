@@ -234,6 +234,16 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await prefs.setStringList('recentFiles', updated);
   }
 
+  /// Haal een item uit de recente-bestandenlijst — handmatig (kruisje) of
+  /// automatisch wanneer openen mislukt omdat het bestand weg is.
+  Future<void> removeRecentFile(String path) async {
+    if (!state.recentFiles.contains(path)) return;
+    final updated = state.recentFiles.where((f) => f != path).toList();
+    state = state.copyWith(recentFiles: updated);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('recentFiles', updated);
+  }
+
   Future<void> setLanguageCode(String code) async {
     state = state.copyWith(languageCode: code);
     final prefs = await SharedPreferences.getInstance();

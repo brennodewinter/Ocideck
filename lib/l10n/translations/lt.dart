@@ -1173,4 +1173,5 @@ const _dutchSourceLt = {
   'Opruimen…': 'Tvarkoma…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Nepavyko perskaityti vieno ar kelių bibliotekos aplankų; sąrašas gali būti neišsamus.',
+  'Uit recente bestanden verwijderen': 'Pašalinti iš paskutinių failų',
 };

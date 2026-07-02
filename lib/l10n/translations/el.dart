@@ -1182,4 +1182,5 @@ const _dutchSourceEl = {
   'Opruimen…': 'Εκκαθάριση…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Δεν ήταν δυνατή η ανάγνωση ενός ή περισσότερων φακέλων της βιβλιοθήκης· η λίστα μπορεί να είναι ελλιπής.',
+  'Uit recente bestanden verwijderen': 'Αφαίρεση από τα πρόσφατα αρχεία',
 };

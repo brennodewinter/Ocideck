@@ -1183,4 +1183,5 @@ const _dutchSourceBg = {
   'Opruimen…': 'Почистване…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Една или повече папки на библиотеката не можаха да бъдат прочетени; списъкът може да е непълен.',
+  'Uit recente bestanden verwijderen': 'Премахни от скорошните файлове',
 };

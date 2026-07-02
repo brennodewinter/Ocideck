@@ -1164,4 +1164,5 @@ const _dutchSourceDa = {
   'Opruimen…': 'Rydder op…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Kunne ikke læse en eller flere biblioteksmapper; listen kan være ufuldstændig.',
+  'Uit recente bestanden verwijderen': 'Fjern fra seneste filer',
 };

@@ -1166,4 +1166,5 @@ const _dutchSourceSv = {
   'Opruimen…': 'Städar upp…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Kunde inte läsa en eller flera biblioteksmappar; listan kan vara ofullständig.',
+  'Uit recente bestanden verwijderen': 'Ta bort från senaste filer',
 };

@@ -1169,4 +1169,5 @@ const _dutchSourceCs = {
   'Opruimen…': 'Úklid…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Nelze přečíst jednu nebo více složek knihovny; seznam může být neúplný.',
+  'Uit recente bestanden verwijderen': 'Odebrat z posledních souborů',
 };

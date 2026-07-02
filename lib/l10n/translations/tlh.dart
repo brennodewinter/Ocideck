@@ -1156,4 +1156,5 @@ const _dutchSourceTlh = {
   'Opruimen…': 'Say\'moH…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'wa\' pagh law\' qach pa\'mey laDlaHbe\'lu\'; tetlh naQbe\'law\'.',
+  'Uit recente bestanden verwijderen': 'teHwI\'mey chu\'vo\' teq',
 };

@@ -153,12 +153,11 @@ class _WelcomeScreen extends ConsumerWidget {
             child: ListView.builder(
               padding: const EdgeInsets.only(bottom: 16),
               itemCount: recentFiles.length,
-              itemBuilder: (_, i) {
+              itemBuilder: (itemContext, i) {
                 final path = recentFiles[i];
                 final name = path.split('/').last.replaceAll('.md', '');
                 return InkWell(
-                  onTap: () =>
-                      ref.read(tabsProvider.notifier).openFileByPath(path),
+                  onTap: () => _openRecent(itemContext, ref, path),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
@@ -196,6 +195,23 @@ class _WelcomeScreen extends ConsumerWidget {
                             ],
                           ),
                         ),
+                        Tooltip(
+                          message: l10n.d('Uit recente bestanden verwijderen'),
+                          child: InkWell(
+                            onTap: () => ref
+                                .read(settingsProvider.notifier)
+                                .removeRecentFile(path),
+                            borderRadius: BorderRadius.circular(3),
+                            child: Padding(
+                              padding: const EdgeInsets.all(3),
+                              child: Icon(
+                                Icons.close,
+                                size: 13,
+                                color: palette.mutedText,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -212,6 +228,23 @@ class _WelcomeScreen extends ConsumerWidget {
     final title = await NewDeckDialog.show(context);
     if (title != null) {
       ref.read(tabsProvider.notifier).newDeckInCurrentTab(title);
+    }
+  }
+
+  /// Open een recent bestand met dezelfde nette foutafhandeling als het
+  /// openen-dialoog; een verdwenen bestand verdwijnt ook uit de lijst.
+  Future<void> _openRecent(
+    BuildContext context,
+    WidgetRef ref,
+    String path,
+  ) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final l10n = context.l10n;
+    final result = await ref.read(tabsProvider.notifier).openFileByPath(path);
+    _reportOpenFailure(messenger, l10n, result);
+    if (result == OpenResult.unreadable && !File(path).existsSync()) {
+      // Het bestand bestaat niet meer: opruimen i.p.v. blijven aanbieden.
+      await ref.read(settingsProvider.notifier).removeRecentFile(path);
     }
   }
 }

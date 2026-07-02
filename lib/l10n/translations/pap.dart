@@ -1157,4 +1157,5 @@ const _dutchSourceAddPap = {
   'Opruimen…': 'Limpiando…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'No por a lesa un òf mas map di e biblioteka; e lista por ta inkompletu.',
+  'Uit recente bestanden verwijderen': 'Kita for di archivonan resien',
 };

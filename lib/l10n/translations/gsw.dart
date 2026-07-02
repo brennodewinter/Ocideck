@@ -1168,4 +1168,5 @@ const _dutchSourceGsw = {
   'Opruimen…': 'Am Ufrume…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Ei oder mehreri Bibliotheks-Ordner hei nit chönne gläse wärde; d Lischte cha unvollständig sii.',
+  'Uit recente bestanden verwijderen': 'Us de letschte Dateie entferne',
 };

@@ -1193,4 +1193,5 @@ const _dutchSourceGa = {
   'Opruimen…': 'Á ghlanadh…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Níorbh fhéidir fillteán leabharlainne amháin nó níos mó a léamh; d\'fhéadfadh an liosta a bheith neamhiomlán.',
+  'Uit recente bestanden verwijderen': 'Bain de na comhaid le déanaí',
 };

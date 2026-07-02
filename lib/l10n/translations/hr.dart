@@ -1172,4 +1172,5 @@ const _dutchSourceHr = {
   'Opruimen…': 'Čišćenje…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Nije bilo moguće pročitati jednu ili više mapa knjižnice; popis može biti nepotpun.',
+  'Uit recente bestanden verwijderen': 'Ukloni iz nedavnih datoteka',
 };

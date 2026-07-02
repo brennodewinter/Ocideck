@@ -1180,4 +1180,5 @@ const _dutchSourceAddEn = {
   'Opruimen…': 'Cleaning up…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Could not read one or more library folders; the list may be incomplete.',
+  'Uit recente bestanden verwijderen': 'Remove from recent files',
 };

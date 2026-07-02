@@ -1170,4 +1170,5 @@ const _dutchSourceHu = {
   'Opruimen…': 'Takarítás…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Egy vagy több könyvtármappát nem sikerült beolvasni; a lista hiányos lehet.',
+  'Uit recente bestanden verwijderen': 'Eltávolítás a legutóbbi fájlok közül',
 };

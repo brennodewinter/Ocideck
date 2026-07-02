@@ -1164,4 +1164,5 @@ const _dutchSourceAddEs = {
   'Opruimen…': 'Limpiando…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'No se pudieron leer una o más carpetas de la biblioteca; la lista puede estar incompleta.',
+  'Uit recente bestanden verwijderen': 'Quitar de archivos recientes',
 };

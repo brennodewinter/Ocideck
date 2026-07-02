@@ -1167,4 +1167,5 @@ const _dutchSourceLv = {
   'Opruimen…': 'Uzkopšana…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Nevarēja nolasīt vienu vai vairākas bibliotēkas mapes; saraksts var būt nepilnīgs.',
+  'Uit recente bestanden verwijderen': 'Noņemt no nesenajiem failiem',
 };

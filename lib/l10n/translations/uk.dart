@@ -1180,4 +1180,5 @@ const _dutchSourceUk = {
   'Opruimen…': 'Очищення…',
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Не вдалося прочитати одну чи кілька тек бібліотеки; список може бути неповним.',
+  'Uit recente bestanden verwijderen': 'Прибрати з останніх файлів',
 };
