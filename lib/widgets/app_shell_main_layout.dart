@@ -30,14 +30,18 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
 
     final isMarkdownMode = editor.mode == EditorMode.markdown;
 
-    final canExport = deckState.filePath != null && !deckState.isDirty;
+    // "Eerst opslaan" bestaat om exports naast het deck-bestand te leggen; op
+    // web is er geen bestandssysteem en wordt de export een download, dus daar
+    // kan elk geopend deck direct geëxporteerd worden.
+    final canExport =
+        isWebPlatform || (deckState.filePath != null && !deckState.isDirty);
     final enforcement = ClassificationEnforcementPolicy.fromAppSettings(
       settings,
     );
     final classificationDecision = enforcement.evaluate(deck.tlp);
-    final exportTooltip = deckState.filePath == null
+    final exportTooltip = !isWebPlatform && deckState.filePath == null
         ? l10n.t('exportNeedsSave')
-        : deckState.isDirty
+        : !isWebPlatform && deckState.isDirty
         ? l10n.t('exportNeedsClean')
         : !classificationDecision.allowed
         ? classificationDecision.reason!
@@ -597,7 +601,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     if (!mounted) return;
     await ExportDialog.show(
       context,
-      deckPath: deckState.filePath!,
+      // Op web heeft een deck geen bestandspad; de deck-titel bepaalt dan de
+      // naam van het te downloaden bestand.
+      deckPath: deckState.filePath ?? '${_safeRemoteName(deck.title)}.md',
       slides: slides,
       themeProfile: deck.themeProfile,
       cockpitColorScheme: ref.read(settingsProvider).cockpitColorScheme,
