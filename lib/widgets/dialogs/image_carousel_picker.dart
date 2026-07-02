@@ -10,6 +10,7 @@ import '../../services/image_reference_service.dart';
 import '../../services/image_service.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/log.dart';
+import '../../theme/app_theme.dart';
 
 part 'parts/image_carousel_picker_actions.dart';
 part 'parts/image_carousel_picker_delete.dart';
@@ -270,7 +271,7 @@ class _FileSizeState extends State<_FileSize> {
     return Text(
       _size,
       style: const TextStyle(
-        color: Color(0xFF3B82F6),
+        color: AppTheme.blue500,
         fontSize: 11,
         fontWeight: FontWeight.w500,
       ),

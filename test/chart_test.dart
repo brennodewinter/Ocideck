@@ -48,7 +48,9 @@ void main() {
       const spec = ChartSpec(
         type: ChartType.bar,
         x: ['Q1'],
-        series: [ChartSeries(name: 'A', data: [1])],
+        series: [
+          ChartSeries(name: 'A', data: [1]),
+        ],
       );
       expect(spec.animateOnEnter, isTrue);
       expect(spec.animationDurationMs, isNull);
@@ -61,7 +63,9 @@ void main() {
       const spec = ChartSpec(
         type: ChartType.bar,
         x: ['Q1'],
-        series: [ChartSeries(name: 'A', data: [1])],
+        series: [
+          ChartSeries(name: 'A', data: [1]),
+        ],
         animateOnEnter: false,
         animationDurationMs: 5000,
       );

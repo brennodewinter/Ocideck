@@ -66,16 +66,19 @@ void main() {
       expect(s2, s0);
     });
 
-    test('a lone continuation with no same-type predecessor shares nothing', () {
-      // A bulletsImage page 1 splits into a plain bullets continuation: the
-      // types differ, so they do not form a shared-size run.
-      final slides = [
-        Slide.create(
-          SlideType.bulletsImage,
-        ).copyWith(bullets: ['a', 'b'], imagePath: 'x.png'),
-        bullets(['c', 'd'], continuesSplit: true),
-      ];
-      expect(sharedSplitFitScale(slides, 1, profile, font), isNull);
-    });
+    test(
+      'a lone continuation with no same-type predecessor shares nothing',
+      () {
+        // A bulletsImage page 1 splits into a plain bullets continuation: the
+        // types differ, so they do not form a shared-size run.
+        final slides = [
+          Slide.create(
+            SlideType.bulletsImage,
+          ).copyWith(bullets: ['a', 'b'], imagePath: 'x.png'),
+          bullets(['c', 'd'], continuesSplit: true),
+        ];
+        expect(sharedSplitFitScale(slides, 1, profile, font), isNull);
+      },
+    );
   });
 }

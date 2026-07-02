@@ -27,8 +27,10 @@ const _stringsGa = {
   'noFileYet': 'Níl aon chomhad ag an láithreoireacht seo fós',
   'slides': 'sleamhnáin',
   'skipped': 'ar lár',
-  'allSlidesIncluded': 'Cuirfear gach sleamhnán i láthair agus easpórtálfar iad',
-  'skippedSlidesExcluded': 'ní chuirfear sleamhnán(áin) i láthair ná ní easpórtálfar iad',
+  'allSlidesIncluded':
+      'Cuirfear gach sleamhnán i láthair agus easpórtálfar iad',
+  'skippedSlidesExcluded':
+      'ní chuirfear sleamhnán(áin) i láthair ná ní easpórtálfar iad',
   'styleProfile': 'Próifíl stíle',
   'classification': 'Aicmiú',
   'exportNextToDeck': 'Easpórtáil in aice leis an deic',
@@ -47,7 +49,8 @@ const _stringsGa = {
   'settingsLogo': 'Lógó',
   'language': 'Teanga',
   'applicationLanguage': 'Teanga an fheidhmchláir',
-  'languageHelp': 'Athraíonn teanga an chomhéadain láithreach. Fanann ábhar na láithreoireachta gan athrú.',
+  'languageHelp':
+      'Athraíonn teanga an chomhéadain láithreach. Fanann ábhar na láithreoireachta gan athrú.',
   'presentationFolder': 'Fillteán láithreoireachta',
   'exportFolderSetting': 'Fillteán easpórtála',
   'notSet': 'Gan socrú',
@@ -55,17 +58,20 @@ const _stringsGa = {
   'choose': 'Roghnaigh',
   'removeDefaultFolder': 'Bain an fillteán réamhshocraithe',
   'removeExportFolder': 'Bain an fillteán easpórtála',
-  'exportFolderHelp': 'Sábháiltear gach easpórtáil (PDF/PPTX) anseo. Mura bhfuil sé socraithe, sábháiltear easpórtálacha in aice le comhad na láithreoireachta.',
+  'exportFolderHelp':
+      'Sábháiltear gach easpórtáil (PDF/PPTX) anseo. Mura bhfuil sé socraithe, sábháiltear easpórtálacha in aice le comhad na láithreoireachta.',
   'cancel': 'Cealaigh',
   'close': 'Dún',
   'saveSettings': 'Sábháil',
   'exportDialogTitle': 'Easpórtáil',
   'exportAgain': 'Easpórtáil arís',
-  'exportIntro': 'Úsáideann an easpórtáil réamhamharc an eagarthóra go beacht, do phróifíl stíle san áireamh.',
+  'exportIntro':
+      'Úsáideann an easpórtáil réamhamharc an eagarthóra go beacht, do phróifíl stíle san áireamh.',
   'imageQualityPdf': 'Cáilíocht íomhá (PDF)',
   'normal': 'Gnáth',
   'compressed': 'Comhbhrúite',
-  'compressedHelp': 'JPEG ar thaifeach níos ísle, ceaptha mar bhileog láimhe, le comhad i bhfad níos lú (sábháilte ar leithligh mar “-compact”).',
+  'compressedHelp':
+      'JPEG ar thaifeach níos ísle, ceaptha mar bhileog láimhe, le comhad i bhfad níos lú (sábháilte ar leithligh mar “-compact”).',
   'losslessHelp': 'Íomhánna gan chailliúint ar lánthaifeach.',
   'exportAsPdf': 'Easpórtáil mar PDF',
   'exportAsPptx': 'Easpórtáil mar PPTX',
@@ -87,26 +93,40 @@ const _dutchSourceGa = {
   'Niet opslaan': 'Ná sábháil',
   'Niet-opgeslagen werk herstellen?': 'Athchóirigh obair neamhshábháilte?',
   'Niet-opgeslagen wijzigingen': 'Athruithe neamhshábháilte',
-  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'Aimsíodh cur i láthair le hathruithe neamhshábháilte ó sheisiún roimhe seo:',
+  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Aimsíodh cur i láthair le hathruithe neamhshábháilte ó sheisiún roimhe seo:',
   'Er zijn': 'Tá',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'cur i láthair le hathruithe neamhshábháilte aimsithe ó sheisiún roimhe seo:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.': 'Tá cuir i láthair le hathruithe neamhshábháilte ann. Sábháil iad sula ndúnann an aip.',
-  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.': 'Tá athruithe neamhshábháilte sa chur i láthair seo. Sábháil é sula ndúnann an cluaisín.',
+  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'cur i láthair le hathruithe neamhshábháilte aimsithe ó sheisiún roimhe seo:',
+  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Tá cuir i láthair le hathruithe neamhshábháilte ann. Sábháil iad sula ndúnann an aip.',
+  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+      'Tá athruithe neamhshábháilte sa chur i láthair seo. Sábháil é sula ndúnann an cluaisín.',
   'Importeren via URL': 'Iompórtáil ó URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.': 'Greamaigh an nasc chuig pacáiste .ocideck nó comhad Marp Markdown.',
+  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+      'Greamaigh an nasc chuig pacáiste .ocideck nó comhad Marp Markdown.',
   'Ophalen': 'Faigh',
   'Laat los om toe te voegen': 'Scaoil chun cur leis',
-  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen': 'Íomhánna → sleamhnáin nua · .md / .ocideck → oscail',
-  'Open eerst een presentatie om afbeeldingen toe te voegen.': 'Oscail cur i láthair sula gcuireann tú íomhánna leis.',
-  'Alle slides zijn overgeslagen — niets om te tonen.': 'Ligeadh thar bráid gach sleamhnán — níl aon rud le taispeáint.',
-  'Alle slides zijn overgeslagen — niets om te exporteren.': 'Ligeadh thar bráid gach sleamhnán — níl aon rud le heaspórtáil.',
-  'Kon dit pakket niet importeren.': 'Níorbh fhéidir an pacáiste seo a iompórtáil.',
+  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+      'Íomhánna → sleamhnáin nua · .md / .ocideck → oscail',
+  'Open eerst een presentatie om afbeeldingen toe te voegen.':
+      'Oscail cur i láthair sula gcuireann tú íomhánna leis.',
+  'Alle slides zijn overgeslagen — niets om te tonen.':
+      'Ligeadh thar bráid gach sleamhnán — níl aon rud le taispeáint.',
+  'Alle slides zijn overgeslagen — niets om te exporteren.':
+      'Ligeadh thar bráid gach sleamhnán — níl aon rud le heaspórtáil.',
+  'Kon dit pakket niet importeren.':
+      'Níorbh fhéidir an pacáiste seo a iompórtáil.',
   'Pakket geëxporteerd naar:': 'Pacáiste easpórtáilte chuig:',
   'Export mislukt:': 'Theip ar an easpórtáil:',
-  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.': 'Ní féidir leis an sleamhnán seo íomhá a ghlacadh. Roghnaigh sleamhnán íomhá ar dtús.',
-  'Kon van deze URL geen presentatie ophalen.': 'Níorbh fhéidir cur i láthair a fháil ón URL seo.',
-  'Sleep om de slide-preview breder of smaller te maken': 'Tarraing chun an réamhamharc sleamhnáin a leathnú nó a chúngú',
-  'TLP-classificatie (Traffic Light Protocol)': 'Aicmiú TLP (Traffic Light Protocol)',
+  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+      'Ní féidir leis an sleamhnán seo íomhá a ghlacadh. Roghnaigh sleamhnán íomhá ar dtús.',
+  'Kon van deze URL geen presentatie ophalen.':
+      'Níorbh fhéidir cur i láthair a fháil ón URL seo.',
+  'Sleep om de slide-preview breder of smaller te maken':
+      'Tarraing chun an réamhamharc sleamhnáin a leathnú nó a chúngú',
+  'TLP-classificatie (Traffic Light Protocol)':
+      'Aicmiú TLP (Traffic Light Protocol)',
   'Titelpagina': 'Sleamhnán teidil',
   'Tussentitel': 'Ceannteideal rannóige',
   'Alleen Bullets': 'Urchair amháin',
@@ -119,8 +139,10 @@ const _dutchSourceGa = {
   'Tabel': 'Tábla',
   'Vrije Markdown': 'Markdown saor',
   'Overgeslagen': 'Ligthe thar bráid',
-  'Weer tonen bij presenteren/exporteren': 'Taispeáin arís agus tú ag cur i láthair/ag easpórtáil',
-  'Overslaan bij presenteren/exporteren': 'Lig thar bráid agus tú ag cur i láthair/ag easpórtáil',
+  'Weer tonen bij presenteren/exporteren':
+      'Taispeáin arís agus tú ag cur i láthair/ag easpórtáil',
+  'Overslaan bij presenteren/exporteren':
+      'Lig thar bráid agus tú ag cur i láthair/ag easpórtáil',
   'Kopiëren': 'Cóipeáil',
   'Kopieer als afbeelding': 'Cóipeáil mar íomhá',
   'Dupliceren': 'Cóip a dhéanamh',
@@ -141,7 +163,8 @@ const _dutchSourceGa = {
   'Naam van de auteur': 'Ainm an údair',
   'Achtergrondafbeelding': 'Íomhá chúlra',
   'Achtergrondafbeelding (optioneel)': 'Íomhá chúlra (roghnach)',
-  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.': 'Taispeántar an íomhá ar an lánscáileán mar chúlra le doiléire laghdaithe ionas go bhfanann an téacs inléite.',
+  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+      'Taispeántar an íomhá ar an lánscáileán mar chúlra le doiléire laghdaithe ionas go bhfanann an téacs inléite.',
   'Zoom achtergrond': 'Zúmáil cúlra',
   'Zoom afbeelding': 'Zúmáil íomhá',
   'Afbeelding (rechts)': 'Íomhá (ar dheis)',
@@ -162,11 +185,14 @@ const _dutchSourceGa = {
   'Van computer…': 'Ón ríomhaire…',
   'Afbeelding plakken uit klembord': 'Greamaigh íomhá ón ghearrthaisce',
   'Kopieer afbeelding naar klembord': 'Cóipeáil íomhá chuig an ghearrthaisce',
-  'Afbeelding gekopieerd naar klembord.': 'Cóipeáladh an íomhá chuig an ghearrthaisce.',
-  'Kopiëren naar klembord mislukt.': 'Theip ar chóipeáil chuig an ghearrthaisce.',
+  'Afbeelding gekopieerd naar klembord.':
+      'Cóipeáladh an íomhá chuig an ghearrthaisce.',
+  'Kopiëren naar klembord mislukt.':
+      'Theip ar chóipeáil chuig an ghearrthaisce.',
   'Verwijder afbeelding': 'Bain an íomhá',
   'Geen afbeelding gekozen': 'Níor roghnaíodh aon íomhá',
-  'Caption / bronvermelding (bijv. © Naam Fotograaf)': 'Fotheideal / creidiúint (m.sh. © Ainm an Ghrianghrafadóra)',
+  'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+      'Fotheideal / creidiúint (m.sh. © Ainm an Ghrianghrafadóra)',
   'Caption / bronvermelding': 'Fotheideal / creidiúint',
   'Beschrijving (doorzoekbaar)': 'Cur síos (inchuardaithe)',
   'Markdown inhoud': 'Ábhar Markdown',
@@ -177,24 +203,29 @@ const _dutchSourceGa = {
   'verwijderen': 'bain',
   'Koprij verwijderen': 'Bain an ró ceanntásca',
   'Rij verwijderen': 'Bain an ró',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.': 'Leid: brúigh Enter laistigh de chill le haghaidh líne nua.',
+  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+      'Leid: brúigh Enter laistigh de chill le haghaidh líne nua.',
   'Presentatie openen': 'Oscail cur i láthair',
   'Opslaan als': 'Sábháil mar',
   'Pakket importeren': 'Iompórtáil pacáiste',
   'Pakket exporteren': 'Easpórtáil pacáiste',
   'Map met presentaties kiezen': 'Roghnaigh fillteán na gcur i láthair',
-  'Standaard map voor presentaties': 'Fillteán réamhshocraithe do chuir i láthair',
+  'Standaard map voor presentaties':
+      'Fillteán réamhshocraithe do chuir i láthair',
   'Map voor exports': 'Fillteán le haghaidh easpórtálacha',
   'Logo kiezen': 'Roghnaigh lógó',
   'Kies een afbeelding': 'Roghnaigh íomhá',
   'Kies een video': 'Roghnaigh físeán',
   'Kies een audiobestand': 'Roghnaigh comhad fuaime',
   'Bladeren…': 'Brabhsáil…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…': 'Cuardaigh de réir ainm comhaid, teideal nó téacs sna sleamhnáin…',
+  'Zoek op bestandsnaam, titel of tekst in de slides…':
+      'Cuardaigh de réir ainm comhaid, teideal nó téacs sna sleamhnáin…',
   'Geen map gekozen': 'Níor roghnaíodh aon fhillteán',
   'Map kiezen': 'Roghnaigh fillteán',
-  'Kies een map met presentaties om te beginnen.': 'Roghnaigh fillteán le cuir i láthair chun tosú.',
-  'Geen presentaties (.md) in deze map gevonden.': 'Níor aimsíodh aon chur i láthair (.md) san fhillteán seo.',
+  'Kies een map met presentaties om te beginnen.':
+      'Roghnaigh fillteán le cuir i láthair chun tosú.',
+  'Geen presentaties (.md) in deze map gevonden.':
+      'Níor aimsíodh aon chur i láthair (.md) san fhillteán seo.',
   'Geen presentaties gevonden voor': 'Níor aimsíodh aon chur i láthair do',
   'meer treffer(s)': 'tuilleadh torthaí',
   'Slide zoeken': 'Aimsigh sleamhnán',
@@ -205,11 +236,15 @@ const _dutchSourceGa = {
   'Toegevoegd': 'Curtha leis',
   'Selecteer alles': 'Roghnaigh gach rud',
   'Deselecteer alles': 'Díroghnaigh gach rud',
-  'Zoek slides op tekst, titel, onderschrift, pad…': 'Cuardaigh sleamhnáin de réir téacs, teideal, fotheideal, conair…',
-  'Zoek op presentatie, titel of tekst…': 'Cuardaigh de réir cur i láthair, teideal nó téacs…',
-  'Geen andere presentaties (.md) in deze map gevonden.': 'Níor aimsíodh aon chur i láthair eile (.md) san fhillteán seo.',
+  'Zoek slides op tekst, titel, onderschrift, pad…':
+      'Cuardaigh sleamhnáin de réir téacs, teideal, fotheideal, conair…',
+  'Zoek op presentatie, titel of tekst…':
+      'Cuardaigh de réir cur i láthair, teideal nó téacs…',
+  'Geen andere presentaties (.md) in deze map gevonden.':
+      'Níor aimsíodh aon chur i láthair eile (.md) san fhillteán seo.',
   'Geen slides gevonden voor': 'Níor aimsíodh aon sleamhnán do',
-  'Typ zoektermen om slides uit al je presentaties te vinden.': 'Clóscríobh téarmaí cuardaigh chun sleamhnáin a aimsiú ar fud do chuir i láthair.',
+  'Typ zoektermen om slides uit al je presentaties te vinden.':
+      'Clóscríobh téarmaí cuardaigh chun sleamhnáin a aimsiú ar fud do chuir i láthair.',
   'toegevoegd': 'curtha leis',
   'Eerste': 'Céad',
   'treffers — verfijn je zoekopdracht': 'torthaí — beachtaigh do chuardach',
@@ -245,19 +280,24 @@ const _dutchSourceGa = {
   'Bijv. Vigilis': 'm.sh. Vigilis',
   'Bijv. 2026-05-30': 'm.sh. 2026-05-30',
   'Beschrijving': 'Cur síos',
-  'Korte omschrijving van de presentatie': 'Cur síos gairid ar an gcur i láthair',
+  'Korte omschrijving van de presentatie':
+      'Cur síos gairid ar an gcur i láthair',
   'Trefwoorden': 'Eochairfhocail',
-  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026': 'Camóg-scartha, m.sh. ráithiúil, uimhreacha, 2026',
-  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.': 'Stóráiltear na sonraí seo sa Markdown agus tá siad inchuardaithe agus tú ag oscailt.',
+  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026':
+      'Camóg-scartha, m.sh. ráithiúil, uimhreacha, 2026',
+  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+      'Stóráiltear na sonraí seo sa Markdown agus tá siad inchuardaithe agus tú ag oscailt.',
   'App-thema': 'Téama na haipe',
   'Look-and-feel': 'Cuma agus mothú',
   'Kopie maken en aanpassen': 'Cruthaigh agus saincheap cóip',
   'Thema verwijderen': 'Scrios an téama',
   'Themanaam': 'Ainm an téama',
-  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.': 'Is téama ionsuite é seo. Cruthaigh cóip chun na dathanna a shaincheapadh.',
+  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+      'Is téama ionsuite é seo. Cruthaigh cóip chun na dathanna a shaincheapadh.',
   'Donkere interface': 'Comhéadan dorcha',
   'Lettertype interface': 'Cló an chomhéadain',
-  'Past contrast, invoervelden en systeemcomponenten aan.': 'Coigeartaíonn sé an codarsnacht, na réimsí ionchuir agus na comhpháirteanna córais.',
+  'Past contrast, invoervelden en systeemcomponenten aan.':
+      'Coigeartaíonn sé an codarsnacht, na réimsí ionchuir agus na comhpháirteanna córais.',
   'Hoofdkleur en bovenbalk': 'Príomhdhath agus barra uachtair',
   'Knoppen en accenten': 'Cnaipí agus aiceanna',
   'Schermachtergrond': 'Cúlra an scáileáin',
@@ -295,13 +335,16 @@ const _dutchSourceGa = {
   'Footertekst': 'Téacs buntásca',
   'bijv. Vertrouwelijk · {title} · {date}': 'm.sh. Faoi rún · {title} · {date}',
   'Footerpositie': 'Suíomh an bhuntásca',
-  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.': 'Comharthaí: {page}, {total}, {date}, {title}. Feictear an buntásc ar gach sleamhnán seachas sleamhnáin teidil agus rannóige, mura ndíchumasaíonn tú in aghaidh an tsleamhnáin é.',
+  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+      'Comharthaí: {page}, {total}, {date}, {title}. Feictear an buntásc ar gach sleamhnán seachas sleamhnáin teidil agus rannóige, mura ndíchumasaíonn tú in aghaidh an tsleamhnáin é.',
   'Links': 'Ar chlé',
   'Midden': 'Lár',
   'Rechts': 'Ar dheis',
-  'Paginanummers tonen (rechtsonder)': 'Taispeáin uimhreacha leathanaigh (bun ar dheis)',
+  'Paginanummers tonen (rechtsonder)':
+      'Taispeáin uimhreacha leathanaigh (bun ar dheis)',
   'Voorvertoning': 'Réamhamharc',
-  'De snelle bruine vos springt over de luie hond.': 'Léimeann an sionnach donn mear thar an madra leisciúil.',
+  'De snelle bruine vos springt over de luie hond.':
+      'Léimeann an sionnach donn mear thar an madra leisciúil.',
   'Preview': 'Réamhamharc',
   'Uitzoomen': 'Zúmáil amach',
   'Uitgezoomd': 'Zúmáilte amach',
@@ -309,9 +352,12 @@ const _dutchSourceGa = {
   'Ingezoomd': 'Zúmáilte isteach',
   'van de foto zichtbaar': 'den ghrianghraf le feiceáil',
   'Volledig zichtbaar (100%)': 'Le feiceáil go hiomlán (100%)',
-  'Uitzoomen (meer van de foto zichtbaar)': 'Zúmáil amach (níos mó den ghrianghraf le feiceáil)',
-  'Inzoomen (minder van de foto zichtbaar)': 'Zúmáil isteach (níos lú den ghrianghraf le feiceáil)',
-  'Terugzetten (volledige afbeelding zichtbaar)': 'Athshocraigh (íomhá iomlán le feiceáil)',
+  'Uitzoomen (meer van de foto zichtbaar)':
+      'Zúmáil amach (níos mó den ghrianghraf le feiceáil)',
+  'Inzoomen (minder van de foto zichtbaar)':
+      'Zúmáil isteach (níos lú den ghrianghraf le feiceáil)',
+  'Terugzetten (volledige afbeelding zichtbaar)':
+      'Athshocraigh (íomhá iomlán le feiceáil)',
   'Zoom resetten': 'Athshocraigh an zúmáil',
   'Preview inklappen': 'Cúlaigh an réamhamharc',
   'Preview uitklappen': 'Leathnaigh an réamhamharc',
@@ -326,19 +372,23 @@ const _dutchSourceGa = {
   'Terug naar standaardstijl': 'Ar ais go dtí an stíl réamhshocraithe',
   'Automatisch doorgaan na': 'Téigh ar aghaidh go huathoibríoch tar éis',
   'Logo tonen op deze slide': 'Taispeáin an lógó ar an sleamhnán seo',
-  'Tabel bewerkbaar tijdens presenteren': 'Tábla ineagarthóireachta agus tú ag cur i láthair',
+  'Tabel bewerkbaar tijdens presenteren':
+      'Tábla ineagarthóireachta agus tú ag cur i láthair',
   'Footer tonen op deze slide': 'Taispeáin an buntásc ar an sleamhnán seo',
   'Sprekersnotities...': 'Nótaí cainteora...',
   'Sprekersnotities': 'Nótaí cainteora',
   'Notities voor tijdens het presenteren': 'Nótaí le haghaidh cur i láthair',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown': 'Mód Markdown — cuir an cur i láthair iomlán in eagar mar Marp Markdown',
+  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+      'Mód Markdown — cuir an cur i láthair iomlán in eagar mar Marp Markdown',
   'Toepassen': 'Cuir i bhfeidhm',
-  'Markdown kon niet worden verwerkt. Controleer de syntax.': 'Níorbh fhéidir an Markdown a phróiseáil. Seiceáil an chomhréir.',
+  'Markdown kon niet worden verwerkt. Controleer de syntax.':
+      'Níorbh fhéidir an Markdown a phróiseáil. Seiceáil an chomhréir.',
   'Controleren': 'Seiceáil an chomhréir',
   'Syntaxproblemen gevonden': 'Aimsíodh fadhbanna comhréire',
   'De markdown bevat': 'Tá sa Markdown',
   'fout(en) en': 'earráid(í) agus',
-  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.': 'rabhadh/rabhaidh. D\'fhéadfadh na sleamhnáin a bheith léite go mícheart dá bharr.',
+  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+      'rabhadh/rabhaidh. D\'fhéadfadh na sleamhnáin a bheith léite go mícheart dá bharr.',
   'Terug naar editor': 'Ar ais chuig an eagarthóir',
   'Toch toepassen': 'Cuir i bhfeidhm mar sin féin',
   'Geen syntaxproblemen gevonden': 'Níor aimsíodh aon fhadhbanna comhréire',
@@ -352,33 +402,44 @@ const _dutchSourceGa = {
   'Coverflow': 'Coverflow',
   'Geen afbeeldingen gevonden': 'Níor aimsíodh aon íomhánna',
   'Geen resultaten voor': 'Gan torthaí do',
-  'Pas je zoekterm aan of voeg een beschrijving toe.': 'Coigeartaigh do théarma cuardaigh nó cuir cur síos leis.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.': 'Úsáid "Brabhsáil" chun íomhánna a roghnú ó áit ar bith.',
+  'Pas je zoekterm aan of voeg een beschrijving toe.':
+      'Coigeartaigh do théarma cuardaigh nó cuir cur síos leis.',
+  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+      'Úsáid "Brabhsáil" chun íomhánna a roghnú ó áit ar bith.',
   'Selecteer een\nafbeelding': 'Roghnaigh\níomhá',
   'Gekopieerd': 'Cóipeáilte',
   'Afbeelding verwijderen?': 'Scrios an íomhá?',
-  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.': 'Scriosfar an comhad go buan ón diosca. Ní féidir an gníomh seo a chur ar ceal.',
-  'Let op: deze afbeelding wordt nog gebruikt in': 'Rabhadh: úsáidtear an íomhá seo fós i',
-  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.': 'Fágfaidh scriosadh na sleamhnáin sin folamh. Ní féidir é seo a chur ar ceal.',
-  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert': '↑↓←→ nascleanúint  ·  Enter chun roghnú  ·  Cliceáil faoi dhó chun roghnú',
+  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+      'Scriosfar an comhad go buan ón diosca. Ní féidir an gníomh seo a chur ar ceal.',
+  'Let op: deze afbeelding wordt nog gebruikt in':
+      'Rabhadh: úsáidtear an íomhá seo fós i',
+  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+      'Fágfaidh scriosadh na sleamhnáin sin folamh. Ní féidir é seo a chur ar ceal.',
+  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+      '↑↓←→ nascleanúint  ·  Enter chun roghnú  ·  Cliceáil faoi dhó chun roghnú',
   'Sneltoetsen': 'Aicearraí méarchláir',
   'Toetsenlegenda': 'Eochairfhinscéal',
   'spatie': 'spás',
   'klik': 'cliceáil',
   'cijfers': 'uimhreacha',
-  'Klik of druk op ? / H / Esc om te sluiten': 'Cliceáil nó brúigh ? / H / Esc chun dúnadh',
-  'Klik of druk op H / Esc om te sluiten': 'Cliceáil nó brúigh H / Esc chun dúnadh',
+  'Klik of druk op ? / H / Esc om te sluiten':
+      'Cliceáil nó brúigh ? / H / Esc chun dúnadh',
+  'Klik of druk op H / Esc om te sluiten':
+      'Cliceáil nó brúigh H / Esc chun dúnadh',
   'Naar slidenummer': 'Go dtí uimhir sleabhráin',
   'Eerste · laatste slide': 'Céad · sleamhnán deireanach',
   'Slide-overzicht': 'Forbhreathnú sleamhnán',
-  'Slide-overzicht (pijltjes + Enter)': 'Forbhreathnú sleamhnán (saigheada + Enter)',
+  'Slide-overzicht (pijltjes + Enter)':
+      'Forbhreathnú sleamhnán (saigheada + Enter)',
   'Presenter view (notities, klok)': 'Amharc an láithreora (nótaí, clog)',
-  'Scherm wisselen (meerdere schermen)': 'Athraigh scáileán (scáileáin iomadúla)',
+  'Scherm wisselen (meerdere schermen)':
+      'Athraigh scáileán (scáileáin iomadúla)',
   'Zwart · wit scherm': 'Scáileán dubh · bán',
   'Verstreken tijd resetten': 'Athshocraigh am caite',
   'Automatische modus aan/uit': 'Mód uathoibríoch as/air',
   'Herhalen (loop) aan/uit': 'Athdhéan (lúb) as/air',
-  'Na audio automatisch doorgaan': 'Lean ar aghaidh go huathoibríoch tar éis fuaime',
+  'Na audio automatisch doorgaan':
+      'Lean ar aghaidh go huathoibríoch tar éis fuaime',
   'Dit overzicht': 'An forbhreathnú seo',
   'Deze legenda': 'An finscéal seo',
   'Terug / afsluiten': 'Ar ais / imigh',
@@ -399,24 +460,34 @@ const _dutchSourceGa = {
   'Geen notities voor deze slide.': 'Gan nótaí don sleamhnán seo.',
   'Mijn notities': 'Mo nótaí',
   'Gebruikersnotities': 'Nótaí úsáideora',
-  'Gebruikersnotities voor deze slide...': 'Nótaí úsáideora don sleamhnán seo...',
+  'Gebruikersnotities voor deze slide...':
+      'Nótaí úsáideora don sleamhnán seo...',
   'Notities weggooien': 'Caith nótaí i leataobh',
-  'Notities voor de ontvanger tijdens een cursus': 'Nótaí don fhaighteoir le linn cúrsa',
-  'Schakel naar Markdown-modus om notities toe te voegen.': 'Athraigh go mód Markdown chun nótaí a chur leis.',
+  'Notities voor de ontvanger tijdens een cursus':
+      'Nótaí don fhaighteoir le linn cúrsa',
+  'Schakel naar Markdown-modus om notities toe te voegen.':
+      'Athraigh go mód Markdown chun nótaí a chur leis.',
   'Mijn notities aan/uit': 'Scoránaigh mo nótaí as/air',
   'Wissel scherm (S)': 'Athraigh scáileán (S)',
   'Kon niet van scherm wisselen.': 'Níorbh fhéidir scáileáin a athrú.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P lucht féachana · G forbhreathnú · B/W dubh/bán · R am · Esc stad',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P lucht féachana · S scáileán · G forbhreathnú · B/W dubh/bán · R am · Esc stad',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P lucht féachana · H finscéal · G forbhreathnú · B/W dubh/bán · R am · Esc stad',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P lucht féachana · H finscéal · S scáileán · G forbhreathnú · B/W dubh/bán · R am · Esc stad',
-  'pijltjes + Enter of klik om te springen': 'saigheada + Enter nó cliceáil chun léim',
+  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P lucht féachana · G forbhreathnú · B/W dubh/bán · R am · Esc stad',
+  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P lucht féachana · S scáileán · G forbhreathnú · B/W dubh/bán · R am · Esc stad',
+  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P lucht féachana · H finscéal · G forbhreathnú · B/W dubh/bán · R am · Esc stad',
+  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P lucht féachana · H finscéal · S scáileán · G forbhreathnú · B/W dubh/bán · R am · Esc stad',
+  'pijltjes + Enter of klik om te springen':
+      'saigheada + Enter nó cliceáil chun léim',
   'Afsluiten (Escape)': 'Imigh (Escape)',
   'Sluiten (G of Esc)': 'Dún (G nó Esc)',
   'Slide renderen…': 'Sleamhnán á rindreáil…',
-  'Slide gekopieerd naar klembord.': 'Cóipeáladh an sleamhnán chuig an ngearrthaisce.',
+  'Slide gekopieerd naar klembord.':
+      'Cóipeáladh an sleamhnán chuig an ngearrthaisce.',
   'Kopiëren mislukt.': 'Theip ar an gcóipeáil.',
-  'Geen ander deck open. Open eerst een ander tabblad.': 'Níl aon deic eile ar oscailt. Oscail cluaisín eile ar dtús.',
+  'Geen ander deck open. Open eerst een ander tabblad.':
+      'Níl aon deic eile ar oscailt. Oscail cluaisín eile ar dtús.',
   '1 slide kopiëren naar…': 'Cóipeáil 1 sleamhnán chuig…',
   'slides kopiëren naar…': 'sleamhnán le cóipeáil chuig…',
   'slide(s) gekopieerd naar': 'sleamhnán/sleamhnáin cóipeáilte chuig',
@@ -431,11 +502,13 @@ const _dutchSourceGa = {
   'Tips': 'Leideanna',
   'Waarschuwingen': 'Rabhaidh',
   'Fouten': 'Earráidí',
-  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Leid: cuir alt-téacs / fotheideal leis ar mhaithe le hinrochtaineacht',
+  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Leid: cuir alt-téacs / fotheideal leis ar mhaithe le hinrochtaineacht',
   'Zoek in slides…': 'Cuardaigh sna sleamhnáin…',
   'Geen slides met': 'Gan sleamhnáin le',
   'SLIDES': 'SLEAMHNÁIN',
-  'Geen afbeelding op het klembord gevonden.': 'Níor aimsíodh aon íomhá ar an ngearrthaisce.',
+  'Geen afbeelding op het klembord gevonden.':
+      'Níor aimsíodh aon íomhá ar an ngearrthaisce.',
   'Afbeelding plakken': 'Greamaigh íomhá',
   'Slide toevoegen': 'Cuir sleamhnán leis',
   'Slide plakken': 'Greamaigh sleamhnán',
@@ -446,60 +519,87 @@ const _dutchSourceGa = {
   'Kopiëren naar ander deck': 'Cóipeáil chuig deic eile',
   'Weer tonen': 'Taispeáin arís',
   'Selectie opheffen': 'Glan an rogha',
-  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.': 'Glacaim le ceadúnas EUPL 1.2 agus léigh mé cé na sonraí a stórálann OciDeck.',
-  'Je keuze wordt de standaardtaal van de app.': 'Éiríonn do rogha ina teanga réamhshocraithe don aip.',
+  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
+      'Glacaim le ceadúnas EUPL 1.2 agus léigh mé cé na sonraí a stórálann OciDeck.',
+  'Je keuze wordt de standaardtaal van de app.':
+      'Éiríonn do rogha ina teanga réamhshocraithe don aip.',
   'Lees de volledige licentie': 'Léigh an ceadúnas iomlán',
-  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.': 'Is bogearra saor é OciDeck faoi cheadúnas EUPL 1.2. Sula dtosaíonn tú, iarraimid ort glacadh leis an gceadúnas. Thíos is féidir leat léamh freisin cé na sonraí a stórálann OciDeck ar an ngléas seo agus cathain a fhágann rud éigin do ghléas.',
-  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.': 'Ní bhailíonn OciDeck aon staitisticí agus ní sheolann sé aon rud amach as féin. De réir réamhshocraithe fanann gach rud ar an ngléas seo. Ní fhágann sonraí an gléas seo ach amháin nuair a roghnaíonn tú é:\n\n•  Nextcloud/WebDAV: nuair a cheanglaíonn tú le freastalaí, stóráiltear d\'ainm úsáideora agus do phasfhocal (an pasfhocal go slán i slabhra eochracha do chórais) agus seoltar na láithreoireachtaí a osclaíonn nó a shábhálann tú chuig an bhfreastalaí sin.\n•  Oscail trí URL: faigheann OciDeck an comhad ón seoladh a chuireann tú isteach.\n•  Meáin ar líne (as de réir réamhshocraithe): nuair atá sé cumasaithe, luchtaíonn OciDeck íomhánna agus físeáin ó na seoltaí i do shleamhnáin.\n•  Osclaíonn naisc sheachtracha (cosúil leis an gceadúnas ar líne) i do bhrabhsálaí.',
-  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.': 'Soláthraítear OciDeck faoi European Union Public Licence v1.2. Trí aontú glacann tú leis an gceadúnas seo. Féadfaidh tú OciDeck a úsáid, a chóipeáil, a mhodhnú agus a scaipeadh faoi théarmaí EUPL 1.2.',
-  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.': 'Chun oibriú agus chun do chuid oibre a choinneáil slán, stórálann OciDeck sonraí go háitiúil ar an ngléas seo:\n\n•  Do shocruithe agus do sháin (teanga, fillteáin, próifílí stíle agus cuma, comhaid le déanaí).\n•  D\'ábhair láithreoireachta: na láithreoireachtaí a shábhálann tú, cóipeanna aisghabhála uathoibríocha agus ceangaltáin ar nós cur síos íomhánna.\n•  An rogha toilithe seo.\n\nIs féidir leat é seo a bhaint trí na comhaid a scriosadh nó na socruithe a athshocrú.',
-  'Volledige licentie online (23 officiële taalversies)': 'Ceadúnas iomlán ar líne (23 leagan teanga oifigiúla)',
-  'Wat OciDeck op dit apparaat bewaart': 'Cad a stórálann OciDeck ar an ngléas seo',
+  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
+      'Is bogearra saor é OciDeck faoi cheadúnas EUPL 1.2. Sula dtosaíonn tú, iarraimid ort glacadh leis an gceadúnas. Thíos is féidir leat léamh freisin cé na sonraí a stórálann OciDeck ar an ngléas seo agus cathain a fhágann rud éigin do ghléas.',
+  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.':
+      'Ní bhailíonn OciDeck aon staitisticí agus ní sheolann sé aon rud amach as féin. De réir réamhshocraithe fanann gach rud ar an ngléas seo. Ní fhágann sonraí an gléas seo ach amháin nuair a roghnaíonn tú é:\n\n•  Nextcloud/WebDAV: nuair a cheanglaíonn tú le freastalaí, stóráiltear d\'ainm úsáideora agus do phasfhocal (an pasfhocal go slán i slabhra eochracha do chórais) agus seoltar na láithreoireachtaí a osclaíonn nó a shábhálann tú chuig an bhfreastalaí sin.\n•  Oscail trí URL: faigheann OciDeck an comhad ón seoladh a chuireann tú isteach.\n•  Meáin ar líne (as de réir réamhshocraithe): nuair atá sé cumasaithe, luchtaíonn OciDeck íomhánna agus físeáin ó na seoltaí i do shleamhnáin.\n•  Osclaíonn naisc sheachtracha (cosúil leis an gceadúnas ar líne) i do bhrabhsálaí.',
+  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.':
+      'Soláthraítear OciDeck faoi European Union Public Licence v1.2. Trí aontú glacann tú leis an gceadúnas seo. Féadfaidh tú OciDeck a úsáid, a chóipeáil, a mhodhnú agus a scaipeadh faoi théarmaí EUPL 1.2.',
+  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.':
+      'Chun oibriú agus chun do chuid oibre a choinneáil slán, stórálann OciDeck sonraí go háitiúil ar an ngléas seo:\n\n•  Do shocruithe agus do sháin (teanga, fillteáin, próifílí stíle agus cuma, comhaid le déanaí).\n•  D\'ábhair láithreoireachta: na láithreoireachtaí a shábhálann tú, cóipeanna aisghabhála uathoibríocha agus ceangaltáin ar nós cur síos íomhánna.\n•  An rogha toilithe seo.\n\nIs féidir leat é seo a bhaint trí na comhaid a scriosadh nó na socruithe a athshocrú.',
+  'Volledige licentie online (23 officiële taalversies)':
+      'Ceadúnas iomlán ar líne (23 leagan teanga oifigiúla)',
+  'Wat OciDeck op dit apparaat bewaart':
+      'Cad a stórálann OciDeck ar an ngléas seo',
   'Wat je apparaat verlaat': 'Cad a fhágann do ghléas',
-  'Vul server-URL en gebruikersnaam in': 'Cuir isteach URL an fhreastalaí agus ainm úsáideora',
+  'Vul server-URL en gebruikersnaam in':
+      'Cuir isteach URL an fhreastalaí agus ainm úsáideora',
   'Verbinding mislukt': 'Theip ar an nasc',
-  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord': 'Theip ar an síniú isteach — seiceáil d\'ainm úsáideora agus do phasfhocal',
-  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.': 'Tá an freastalaí ar sheoladh príobháideach. Tic "Freastalaí inmheánach iontaofa" chun an nasc a cheadú.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord':
+      'Theip ar an síniú isteach — seiceáil d\'ainm úsáideora agus do phasfhocal',
+  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.':
+      'Tá an freastalaí ar sheoladh príobháideach. Tic "Freastalaí inmheánach iontaofa" chun an nasc a cheadú.',
   'Map niet gevonden op de server': 'Fillteán gan aimsiú ar an bhfreastalaí',
   'Ongeldige server-URL': 'URL freastalaí neamhbhailí',
-  'Het antwoord van de server was te groot': 'Bhí freagra an fhreastalaí rómhór',
+  'Het antwoord van de server was te groot':
+      'Bhí freagra an fhreastalaí rómhór',
   'Nextcloud': 'Nextcloud',
   'Nextcloud-bron (WebDAV)': 'Foinse Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.': 'Oscail agus sábháil láithreoireachtaí i bhfillteán ar do Nextcloud. Stóráiltear an pasfhocal criptithe sa slabhra eochracha, ní in éineacht leis na socruithe eile.',
+  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Oscail agus sábháil láithreoireachtaí i bhfillteán ar do Nextcloud. Stóráiltear an pasfhocal criptithe sa slabhra eochracha, ní in éineacht leis na socruithe eile.',
   'Server-URL': 'URL freastalaí',
   'Gebruikersnaam': 'Ainm úsáideora',
   'App-wachtwoord': 'Pasfhocal aipe',
-  'Maak hiervoor een app-wachtwoord aan in Nextcloud': 'Cruthaigh pasfhocal aipe chuige seo i Nextcloud',
+  'Maak hiervoor een app-wachtwoord aan in Nextcloud':
+      'Cruthaigh pasfhocal aipe chuige seo i Nextcloud',
   'Submap (optioneel)': 'Fofhillteán (roghnach)',
   'Vertrouwde interne server': 'Freastalaí inmheánach iontaofa',
-  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.': 'De dhíth nuair a ritheann an freastalaí ar líonra príobháideach nó baile (LAN). Ná ceadaigh ach naisc chuig freastalaithe a bhfuil muinín agat astu féin.',
+  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'De dhíth nuair a ritheann an freastalaí ar líonra príobháideach nó baile (LAN). Ná ceadaigh ach naisc chuig freastalaithe a bhfuil muinín agat astu féin.',
   'Verbinding testen': 'Tástáil an nasc',
   'Verbinding gelukt': 'D\'éirigh leis an nasc',
-  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.': 'Sábháiltear athruithe nuair a chliceálann tú Sábháil.',
+  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
+      'Sábháiltear athruithe nuair a chliceálann tú Sábháil.',
   'Afbeelding kiezen op Nextcloud': 'Roghnaigh íomhá ar Nextcloud',
   'Openen vanaf Nextcloud': 'Oscail ó Nextcloud',
   'Vernieuwen': 'Athnuaigh',
   'Deze map is leeg': 'Tá an fillteán seo folamh',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.': 'Níl aon fhreastalaí Nextcloud socraithe. Socraigh ceann i Socruithe → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.': 'Níorbh fhéidir an fillteán a luchtú. Seiceáil do nasc agus do shocruithe.',
+  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
+      'Níl aon fhreastalaí Nextcloud socraithe. Socraigh ceann i Socruithe → Nextcloud.',
+  'Kon de map niet laden. Controleer je verbinding en instellingen.':
+      'Níorbh fhéidir an fillteán a luchtú. Seiceáil do nasc agus do shocruithe.',
   'Kon dit bestand niet openen.': 'Níorbh fhéidir an comhad seo a oscailt.',
-  'Dit is geen Marp/OciDeck-presentatie.': 'Ní láithreoireacht Marp/OciDeck é seo.',
+  'Dit is geen Marp/OciDeck-presentatie.':
+      'Ní láithreoireacht Marp/OciDeck é seo.',
   'Downloaden mislukt:': 'Theip ar an íoslódáil:',
   'Opgeslagen op Nextcloud:': 'Sábháilte chuig Nextcloud:',
   'Opslaan mislukt:': 'Theip ar an sábháil:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.': 'Socraigh freastalaí Nextcloud ar dtús i Socruithe → Nextcloud.',
+  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
+      'Socraigh freastalaí Nextcloud ar dtús i Socruithe → Nextcloud.',
   'Opslaan naar Nextcloud': 'Sábháil chuig Nextcloud',
   'Doelpad (zonder extensie)': 'Conair sprice (gan iarmhír)',
-  'Als .ocideck-pakket (één bestand, met assets)': 'Mar phacáiste .ocideck (comhad amháin, le sócmhainní)',
+  'Als .ocideck-pakket (één bestand, met assets)':
+      'Mar phacáiste .ocideck (comhad amháin, le sócmhainní)',
   'Als losse .md plus afbeeldingen': 'Mar .md ar leith móide íomhánna',
   'Opslaan': 'Sábháil',
   'Presenteren': 'Ag láithriú',
-  'Tijden-overzicht tonen na afloop': 'Taispeáin forbhreathnú amanna ina dhiaidh',
-  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.': 'Déantar an t-am in aghaidh an tsleamhnáin a thomhas i gcónaí; ní rialaíonn sé seo ach cé acu a fheictear an forbhreathnú tar éis na láithreoireachta seo.',
-  'Oefenoverzicht tonen na afloop': 'Taispeáin achoimre chleachtaidh ina dhiaidh',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.': 'Tar éis láithreoireachta, taispeáin an forbhreathnú ar an am a caitheadh in aghaidh an tsleamhnáin. Déantar an t-am a thomhas i gcónaí; ní rialaíonn sé seo ach cé acu a fheictear an scáileán.',
-  'Onveilige presentatie geblokkeerd': 'Cuireadh cosc ar láithreoireacht neamhshábháilte',
-  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.': 'Níor osclaíodh an láithreoireacht seo. Tá ábhar sa chomhad ar féidir leis cód a rith, agus níor cheart ach sonraí a bheith i láithreoireacht — gan aon rud inrite.',
+  'Tijden-overzicht tonen na afloop':
+      'Taispeáin forbhreathnú amanna ina dhiaidh',
+  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
+      'Déantar an t-am in aghaidh an tsleamhnáin a thomhas i gcónaí; ní rialaíonn sé seo ach cé acu a fheictear an forbhreathnú tar éis na láithreoireachta seo.',
+  'Oefenoverzicht tonen na afloop':
+      'Taispeáin achoimre chleachtaidh ina dhiaidh',
+  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+      'Tar éis láithreoireachta, taispeáin an forbhreathnú ar an am a caitheadh in aghaidh an tsleamhnáin. Déantar an t-am a thomhas i gcónaí; ní rialaíonn sé seo ach cé acu a fheictear an scáileán.',
+  'Onveilige presentatie geblokkeerd':
+      'Cuireadh cosc ar láithreoireacht neamhshábháilte',
+  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Níor osclaíodh an láithreoireacht seo. Tá ábhar sa chomhad ar féidir leis cód a rith, agus níor cheart ach sonraí a bheith i láithreoireacht — gan aon rud inrite.',
   'Gevonden:': 'Aimsíodh:',
   'Regel': 'Líne',
   'Scriptuitvoering': 'Rith scripte',
@@ -521,46 +621,67 @@ const _dutchSourceGa = {
   'Pootje': 'Lapa',
   'In tweeën splitsen': 'Roinn ina dhá chuid',
   'Uitgevoerde controles': 'Seiceálacha déanta',
-  'Contrast en leesbaarheid van tekstkleuren': 'Codarsnacht agus inléiteacht dathanna téacs',
-  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media': 'Alt-téacs agus fotheidil íomhánna, cairteacha agus meán',
-  'Aanwezigheid van gekoppelde mediabestanden': 'Láithreacht comhad meán nasctha',
-  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code': 'Dlús téacs: urchair, focail, athfhriotail, táblaí agus cód',
-  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).': 'Téama, sleamhnáin, buntásc, seicliosta agus teidil thar íomhánna, seiceáilte in aghaidh WCAG AA (4.5:1 do théacs, 3:1 do théacs mór).',
-  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.': 'Teastaíonn cur síos ó gach íomhá, cairt, físeán agus fuaim do léitheoirí scáileáin agus bileoga láimhe.',
-  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.': 'Seiceáiltear tagairtí d\'íomhánna, físeán agus fuaim le haghaidh comhad atá ann sa tionscadal.',
-  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.': 'Líon agus fad urchar, focail, neadú, cothromaíocht colún agus dlús athfhriotal, teideal, táblaí agus cód ionas go n-oireann gach rud go hinléite.',
-  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.': 'Cuntas mar earráid ar théacs coirp le codarsnacht faoi bhun {crit}:1; os a chionn sin suas go dtí an norm AA mar rabhadh.',
-  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.': 'Gan tairseach: tá cur síos neamhfholamh riachtanach.',
-  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.': 'Gan tairseach: caithfidh an comhad nasctha a bheith ann laistigh d\'fhillteán an tionscadail.',
-  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.': 'Rabhadh os cionn {b1} urchar (1 cholún), {bcl} (seicliosta) nó {b2} (2 cholún); criticiúil os cionn {bc1} nó {bc2}. Focail os cionn {w1}/{w2}, ar an meán os cionn {avg} in aghaidh an urchair. Athfhriotal os cionn {q} carachtar, teideal os cionn {t} carachtar. Neadú níos doimhne ná leibhéal {lvl}. Tugann téacs a chaithfidh crapadh faoi bhun {warn}% rabhadh, faoi bhun {crit}% tá sé criticiúil.',
+  'Contrast en leesbaarheid van tekstkleuren':
+      'Codarsnacht agus inléiteacht dathanna téacs',
+  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+      'Alt-téacs agus fotheidil íomhánna, cairteacha agus meán',
+  'Aanwezigheid van gekoppelde mediabestanden':
+      'Láithreacht comhad meán nasctha',
+  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+      'Dlús téacs: urchair, focail, athfhriotail, táblaí agus cód',
+  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+      'Téama, sleamhnáin, buntásc, seicliosta agus teidil thar íomhánna, seiceáilte in aghaidh WCAG AA (4.5:1 do théacs, 3:1 do théacs mór).',
+  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+      'Teastaíonn cur síos ó gach íomhá, cairt, físeán agus fuaim do léitheoirí scáileáin agus bileoga láimhe.',
+  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+      'Seiceáiltear tagairtí d\'íomhánna, físeán agus fuaim le haghaidh comhad atá ann sa tionscadal.',
+  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+      'Líon agus fad urchar, focail, neadú, cothromaíocht colún agus dlús athfhriotal, teideal, táblaí agus cód ionas go n-oireann gach rud go hinléite.',
+  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+      'Cuntas mar earráid ar théacs coirp le codarsnacht faoi bhun {crit}:1; os a chionn sin suas go dtí an norm AA mar rabhadh.',
+  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+      'Gan tairseach: tá cur síos neamhfholamh riachtanach.',
+  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+      'Gan tairseach: caithfidh an comhad nasctha a bheith ann laistigh d\'fhillteán an tionscadail.',
+  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+      'Rabhadh os cionn {b1} urchar (1 cholún), {bcl} (seicliosta) nó {b2} (2 cholún); criticiúil os cionn {bc1} nó {bc2}. Focail os cionn {w1}/{w2}, ar an meán os cionn {avg} in aghaidh an urchair. Athfhriotal os cionn {q} carachtar, teideal os cionn {t} carachtar. Neadú níos doimhne ná leibhéal {lvl}. Tugann téacs a chaithfidh crapadh faoi bhun {warn}% rabhadh, faoi bhun {crit}% tá sé criticiúil.',
   'Zoek op deze computer': 'Cuardaigh ar an ríomhaire seo',
-  'Presentaties zoeken op deze computer': 'Aimsigh láithreoireachtaí ar an ríomhaire seo',
+  'Presentaties zoeken op deze computer':
+      'Aimsigh láithreoireachtaí ar an ríomhaire seo',
   'Zoek op titel, pad of thema…': 'Cuardaigh de réir teidil, conaire nó téama…',
   'Bekende mappen worden doorzocht…': 'Fillteáin aitheanta á gcuardach…',
   'gevonden': 'aimsithe',
   'presentatie(s) gevonden': 'láithreoireacht(aí) aimsithe',
-  'Geen Marp-presentaties gevonden in de bekende mappen.': 'Níor aimsíodh aon láithreoireacht Marp sna fillteáin aitheanta.',
+  'Geen Marp-presentaties gevonden in de bekende mappen.':
+      'Níor aimsíodh aon láithreoireacht Marp sna fillteáin aitheanta.',
   'Geen thema': 'Gan téama',
   'Kopieer syntaxproblemen': 'Cóipeáil fadhbanna comhréire',
-  'Syntaxproblemen gekopieerd naar klembord.': 'Cóipeáladh fadhbanna comhréire chuig an ngearrthaisce.',
+  'Syntaxproblemen gekopieerd naar klembord.':
+      'Cóipeáladh fadhbanna comhréire chuig an ngearrthaisce.',
   'Online media': 'Meáin ar líne',
   'Online media staat uit': 'Tá meáin ar líne as',
   'Online media toestaan': 'Ceadaigh meáin ar líne',
-  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.': 'Ceadaigh d\'íomhánna agus físeáin luchtú beo trí URL agus ó leabuithe YouTube/Vimeo. As de réir réamhshocraithe ar mhaithe le do phríobháideacht agus do shlándáil.',
-  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)': 'Conair comhaid nó URL (YouTube, Vimeo, .mp4 …)',
+  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+      'Ceadaigh d\'íomhánna agus físeáin luchtú beo trí URL agus ó leabuithe YouTube/Vimeo. As de réir réamhshocraithe ar mhaithe le do phríobháideacht agus do shlándáil.',
+  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+      'Conair comhaid nó URL (YouTube, Vimeo, .mp4 …)',
   'Bestand kiezen': 'Roghnaigh comhad',
-  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.': 'Seinn deighleog an tsleamhnáin seo sa réamhamharc agus gearr ag an bpointe ar mhaith leat roinnt: téann an dara cuid ar shleamhnán nua.',
+  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+      'Seinn deighleog an tsleamhnáin seo sa réamhamharc agus gearr ag an bpointe ar mhaith leat roinnt: téann an dara cuid ar shleamhnán nua.',
   'Begin (sec)': 'Tús (soic)',
   'Einde (sec)': 'Deireadh (soic)',
   'einde': 'deireadh',
-  'Knip de video op het huidige afspeelpunt': 'Gearr an físeán ag an bpointe seinnte reatha',
-  'Speel de video eerst af in het voorbeeld': 'Seinn an físeán sa réamhamharc ar dtús',
+  'Knip de video op het huidige afspeelpunt':
+      'Gearr an físeán ag an bpointe seinnte reatha',
+  'Speel de video eerst af in het voorbeeld':
+      'Seinn an físeán sa réamhamharc ar dtús',
   'Knip hier': 'Gearr anseo',
   'Online': 'Ar líne',
   'Lokaal bestand': 'Comhad áitiúil',
   'Geen video': 'Gan físeán',
   'Vraag (meerkeuze)': 'Ceist (ilrogha)',
-  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding': 'Tá codarsnacht rólag ag téacs an teidil leis an íomhá chúlra',
+  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+      'Tá codarsnacht rólag ag téacs an teidil leis an íomhá chúlra',
   'Herstel': 'Deisigh',
   'Tijdlijn': 'Amlíne',
   'Indeling': 'Leagan amach',
@@ -585,19 +706,24 @@ const _dutchSourceGa = {
   'Vraag': 'Ceist',
   'Wat wil je vragen?': 'Cad ba mhaith leat a fhiafraí?',
   'Antwoorden': 'Freagraí',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.': 'Marcáil na freagraí cearta. Gan teorainn; agus tú ag láithriú, taispeántar ceann amháin ceart agus an chuid eile mícheart go randamach.',
+  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Marcáil na freagraí cearta. Gan teorainn; agus tú ag láithriú, taispeántar ceann amháin ceart agus an chuid eile mícheart go randamach.',
   'Antwoord': 'Freagra',
   'Antwoord toevoegen': 'Cuir freagra leis',
   'Goed antwoord': 'Freagra ceart',
-  'Geef minstens één goed én één fout antwoord op.': 'Tabhair freagra ceart amháin ar a laghad agus freagra mícheart amháin.',
+  'Geef minstens één goed én één fout antwoord op.':
+      'Tabhair freagra ceart amháin ar a laghad agus freagra mícheart amháin.',
   'Weergave': 'Taispeáint',
   'Aantal getoonde opties': 'Líon na roghanna a thaispeántar',
-  'Maximale antwoordtijd in seconden (0 = geen limiet)': 'Uastréimhse freagartha i soicindí (0 = gan teorainn)',
+  'Maximale antwoordtijd in seconden (0 = geen limiet)':
+      'Uastréimhse freagartha i soicindí (0 = gan teorainn)',
   'Bij een fout antwoord': 'Ar fhreagra mícheart',
   'Opnieuw proberen': 'Bain triail eile as',
   'Doorgaan toestaan': 'Ceadaigh leanúint ar aghaidh',
-  'Fout = niet doorgaan; de vraag moet opnieuw.': 'Mícheart = ní féidir leanúint ar aghaidh; caithfear an cheist a dhéanamh arís.',
-  'Fout = wel doorgaan, maar niet opnieuw doen.': 'Mícheart = féidir leanúint ar aghaidh, ach gan triail eile.',
+  'Fout = niet doorgaan; de vraag moet opnieuw.':
+      'Mícheart = ní féidir leanúint ar aghaidh; caithfear an cheist a dhéanamh arís.',
+  'Fout = wel doorgaan, maar niet opnieuw doen.':
+      'Mícheart = féidir leanúint ar aghaidh, ach gan triail eile.',
   'Afbeelding (optioneel)': 'Íomhá (roghnach)',
   'Breedte afbeelding': 'Leithead na híomhá',
   'Goed!': 'Ceart!',
@@ -612,46 +738,58 @@ const _dutchSourceGa = {
   'Juist / Onjuist': 'Fíor / Bréagach',
   'Meerdere juiste antwoorden': 'Freagraí cearta iomadúla',
   'Stelling': 'Ráiteas',
-  'Formuleer een stelling die juist of onjuist is': 'Cum ráiteas atá fíor nó bréagach',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.': 'Marcáil na freagraí cearta go léir. Agus tú ag láithriú, taispeántar tacar randamach le ceann ceart amháin ar a laghad agus ceann mícheart.',
+  'Formuleer een stelling die juist of onjuist is':
+      'Cum ráiteas atá fíor nó bréagach',
+  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+      'Marcáil na freagraí cearta go léir. Agus tú ag láithriú, taispeántar tacar randamach le ceann ceart amháin ar a laghad agus ceann mícheart.',
   'Juist': 'Fíor',
   'Onjuist': 'Bréagach',
-  'De stelling hierboven is juist of onjuist; kies welke.': 'Tá an ráiteas thuas fíor nó bréagach; roghnaigh cé acu.',
+  'De stelling hierboven is juist of onjuist; kies welke.':
+      'Tá an ráiteas thuas fíor nó bréagach; roghnaigh cé acu.',
   'Selecteer alle juiste antwoorden': 'Roghnaigh na freagraí cearta go léir',
   'Bevestig': 'Deimhnigh',
   'Het juiste antwoord': 'An freagra ceart',
-  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.': 'Taispeántar an íomhá mar chúlra ar an scáileán iomlán. Úsáid an geamhú nuair a theastaíonn níos mó suaimhnis nó codarsnachta ón teideal.',
+  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+      'Taispeántar an íomhá mar chúlra ar an scáileán iomlán. Úsáid an geamhú nuair a theastaíonn níos mó suaimhnis nó codarsnachta ón teideal.',
   'Cockpit-kleurschema': 'Scéim datha na cábáine',
-  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.': 'Dathanna stádais méadar na cábáine. Cruthaigh leaganacha ainmnithe; baineann an scéim roghnaithe le gach sleamhnán cábáine.',
+  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+      'Dathanna stádais méadar na cábáine. Cruthaigh leaganacha ainmnithe; baineann an scéim roghnaithe le gach sleamhnán cábáine.',
   'Standaard': 'Réamhshocrú',
   'Standaardkleuren gebruiken': 'Úsáid dathanna réamhshocraithe',
   'Kleurschema verwijderen': 'Scrios scéim datha',
   'Schemanaam': 'Ainm na scéime',
-  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.': 'Seo an scéim ionsuite. Déan cóip chun dathanna a choigeartú.',
+  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+      'Seo an scéim ionsuite. Déan cóip chun dathanna a choigeartú.',
   'Goed': 'Maith',
   'Waarschuwing': 'Rabhadh',
   'Kritiek': 'Criticiúil',
   'Te laag (koud)': 'Ró-íseal (fuar)',
   'Lucht (horizon)': 'Spéir (léaslíne)',
   'Grond (horizon)': 'Talamh (léaslíne)',
-  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.': 'Leanann na dathanna stádais scéim datha na cábáine; coigeartaigh í nó cruthaigh leaganacha trí Socruithe → Cábán.',
+  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+      'Leanann na dathanna stádais scéim datha na cábáine; coigeartaigh í nó cruthaigh leaganacha trí Socruithe → Cábán.',
   'Veel bullets op deze slide': 'Go leor urchar ar an sleamhnán seo',
   'bullets': 'urchair',
   'Overweeg de inhoud te splitsen.': 'Smaoinigh ar an ábhar a roinnt.',
   'Erg veel bullets op deze slide': 'An iomarca urchar ar an sleamhnán seo',
-  'Splits deze inhoud over meerdere slides.': 'Roinn an t-ábhar seo thar shleamhnáin iomadúla.',
+  'Splits deze inhoud over meerdere slides.':
+      'Roinn an t-ábhar seo thar shleamhnáin iomadúla.',
   'Veel woorden in bullets': 'Go leor focal in urchair',
   'woorden': 'focail',
-  'Maak bullets korter of splits de slide.': 'Déan na hurchair níos giorra nó roinn an sleamhnán.',
+  'Maak bullets korter of splits de slide.':
+      'Déan na hurchair níos giorra nó roinn an sleamhnán.',
   'Erg veel woorden in bullets': 'An iomarca focal in urchair',
   'Gemiddeld lange bullets': 'Urchair fhada ar an meán',
   'woorden per bullet': 'focail sa bhuillepointe',
   'Maak elke bullet kernachtiger.': 'Déan gach buillepointe níos gonta.',
-  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.': 'Buillepointe le hiliomad abairtí aimsithe. Déan na buillepointí níos gonta nó roinn an t-ábhar.',
+  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+      'Buillepointe le hiliomad abairtí aimsithe. Déan na buillepointí níos gonta nó roinn an t-ábhar.',
   'Diepe bulletniveaus gevonden': 'Leibhéil dhomhain buillepointí aimsithe',
   'niveau': 'leibhéal',
-  'Beperk nesting voor betere leesbaarheid.': 'Cuir teorainn le neadú ar mhaithe le hinléiteacht.',
-  'Twee kolommen zijn sterk uit balans': 'Tá an dá cholún go mór as cothromaíocht',
+  'Beperk nesting voor betere leesbaarheid.':
+      'Cuir teorainn le neadú ar mhaithe le hinléiteacht.',
+  'Twee kolommen zijn sterk uit balans':
+      'Tá an dá cholún go mór as cothromaíocht',
   'tegenover': 'in aghaidh',
   'Verdeel of splits de inhoud.': 'Athdháil nó roinn an t-ábhar.',
   'Slidetitel': 'Teideal sleamhnáin',
@@ -661,7 +799,8 @@ const _dutchSourceGa = {
   'Activatieduur': 'Fad gníomhachtaithe',
   'Splits slide': 'Roinn an sleamhnán',
   'Doornummeren vanaf vorige slide': 'Lean uimhriú ón sleamhnán roimhe seo',
-  'Begin de nummering waar de vorige slide ophield.': 'Tosaigh an t-uimhriú san áit ar stad an sleamhnán roimhe seo.',
+  'Begin de nummering waar de vorige slide ophield.':
+      'Tosaigh an t-uimhriú san áit ar stad an sleamhnán roimhe seo.',
   'Volg thema-animatieduur': 'Lean fad beochana an téama',
   'Animatie bij openen': 'Beoú ar theacht isteach',
   'Meter': 'Méadar',
@@ -689,7 +828,8 @@ const _dutchSourceGa = {
   'Koers': 'Cúrsa',
   'Ander profiel kiezen': 'Roghnaigh próifíl eile',
   'Cockpit': 'Painéal comhraic',
-  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Sprioc-am le haghaidh na comhairimh síos sa láithreoir. Le linn láithrithe is féidir é a mhionchoigeartú leis an eochair K.',
+  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Sprioc-am le haghaidh na comhairimh síos sa láithreoir. Le linn láithrithe is féidir é a mhionchoigeartú leis an eochair K.',
   'Logo en footer': 'Lógó agus buntásc',
   'Pagina': 'Leathanach',
   'Presentatiestijl': 'Stíl láithrithe',
@@ -706,10 +846,12 @@ const _dutchSourceGa = {
   'Doeltijd': 'Sprioc-am',
   'Doeltijd (aftellen)': 'Sprioc-am (comhaireamh síos)',
   'Geen aftelling': 'Gan chomhaireamh síos',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Sprioc-am réamhshocraithe le haghaidh na comhairimh síos sa láithreoir. Le linn láithrithe is féidir é a mhionchoigeartú leis an eochair K.',
+  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Sprioc-am réamhshocraithe le haghaidh na comhairimh síos sa láithreoir. Le linn láithrithe is féidir é a mhionchoigeartú leis an eochair K.',
   'uit': 'as',
   'Doeltijd / aftellen (K)': 'Sprioc / comhaireamh síos (K)',
-  'Doeltijd / aftellen instellen (MMSS)': 'Socraigh sprioc / comhaireamh síos (MMSS)',
+  'Doeltijd / aftellen instellen (MMSS)':
+      'Socraigh sprioc / comhaireamh síos (MMSS)',
   'Tijd & oefenrun resetten': 'Athshocraigh am agus cleachtadh',
   'Resterend': 'Fágtha',
   'Over de tijd': 'Thar am',
@@ -719,30 +861,39 @@ const _dutchSourceGa = {
   'Totaal': 'Iomlán',
   'Totale tijd': 'Am iomlán',
   'Geen slides gemeten.': 'Níor tomhaiseadh aon sleamhnán.',
-  'Tijden gekopieerd naar klembord.': 'Amanna cóipeáilte chuig an ngearrthaisce.',
+  'Tijden gekopieerd naar klembord.':
+      'Amanna cóipeáilte chuig an ngearrthaisce.',
   'Kopieer': 'Cóipeáil',
   'Sluiten': 'Dún',
   'Tekstgrootte van de interface': 'Méid téacs an chomhéadain',
-  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.': 'Méadaíonn téacs an eagarthóra go léir suas go 200%. Ní athraíonn na sleamhnáin féin.',
+  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+      'Méadaíonn téacs an eagarthóra go léir suas go 200%. Ní athraíonn na sleamhnáin féin.',
   'Breedte van het slidepaneel': 'Leithead an phainéil sleamhnán',
-  'Pijltjestoetsen passen de breedte aan': 'Coigeartaíonn na saigheadeochracha an leithead',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.': 'Leid: greamaigh tábla ó do scarbhileog isteach i gcill le Cmd/Ctrl+V chun an tábla iomlán a líonadh.',
+  'Pijltjestoetsen passen de breedte aan':
+      'Coigeartaíonn na saigheadeochracha an leithead',
+  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+      'Leid: greamaigh tábla ó do scarbhileog isteach i gcill le Cmd/Ctrl+V chun an tábla iomlán a líonadh.',
   'Annuleren': 'Cealaigh',
   'Checklist': 'Seicliosta tascanna',
   'Voortgangsgrafiek tonen': 'Taispeáin cairt dul chun cinn',
-  'Toont afgevinkt en niet afgevinkt als percentages.': 'Taispeánann míreanna ticeáilte agus neamhthiceáilte mar chéatadáin.',
+  'Toont afgevinkt en niet afgevinkt als percentages.':
+      'Taispeánann míreanna ticeáilte agus neamhthiceáilte mar chéatadáin.',
   'Afgevinkt': 'Ticeáilte',
   'Niet afgevinkt': 'Neamhthiceáilte',
-  'Er zijn geen aangevinkte checklist-items om te legen.': 'Níl aon mhír seicliosta ticeáilte le glanadh.',
+  'Er zijn geen aangevinkte checklist-items om te legen.':
+      'Níl aon mhír seicliosta ticeáilte le glanadh.',
   'Alle checkboxen legen?': 'Glan gach ticbhosca?',
   'Hiermee worden alle': 'Díthiceálfaidh sé seo gach',
-  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.': 'mír seicliosta ticeáilte sa láithreoireacht iomlán. Is féidir leat é seo a chur ar ceal le Ctrl/Cmd+Z.',
+  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+      'mír seicliosta ticeáilte sa láithreoireacht iomlán. Is féidir leat é seo a chur ar ceal le Ctrl/Cmd+Z.',
   'Alles legen': 'Glan uile',
   'checklist-items uitgevinkt.': 'mír seicliosta díthiceáilte.',
   'Alle checkboxen legen': 'Glan gach ticbhosca',
   'Afgevinkte tekst doorhalen': 'Líne trí théacs ticeáilte',
-  'Toont een streep door voltooide checklistitems.': 'Taispeánann míreanna seicliosta críochnaithe le líne tríd.',
-  'Na media automatisch doorgaan': 'Téigh ar aghaidh go huathoibríoch tar éis meán',
+  'Toont een streep door voltooide checklistitems.':
+      'Taispeánann míreanna seicliosta críochnaithe le líne tríd.',
+  'Na media automatisch doorgaan':
+      'Téigh ar aghaidh go huathoibríoch tar éis meán',
   'Opsomming': 'Buillepointí',
   'Nummering': 'Uimhriú',
   'Varianten': 'Leaganacha',
@@ -751,11 +902,13 @@ const _dutchSourceGa = {
   'Omhoog': 'Bog suas',
   'Omlaag': 'Bog síos',
   'Niet toevoegen': 'Ná cuir leis',
-  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.': 'Úsáideann na sleamhnáin seo na sonraí, na dathanna agus an teideal céanna. Úsáid na saigheada chun a n-ord a roghnú i ndiaidh an tsleamhnáin reatha.',
+  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+      'Úsáideann na sleamhnáin seo na sonraí, na dathanna agus an teideal céanna. Úsáid na saigheada chun a n-ord a roghnú i ndiaidh an tsleamhnáin reatha.',
   'Afbeelding': 'Íomhá',
   'Broncode': 'Cód foinseach',
   'Bullet': 'Buillepointe',
-  'Plak of typ hier je broncode...': 'Greamaigh nó clóscríobh do chód foinseach anseo...',
+  'Plak of typ hier je broncode...':
+      'Greamaigh nó clóscríobh do chód foinseach anseo...',
   'Programmeertaal': 'Teanga ríomhchláraithe',
   'TLP van deze slide': 'TLP an tsleamhnáin seo',
   'Wis annotaties (C)': 'Glan anótálacha (C)',
@@ -769,10 +922,12 @@ const _dutchSourceGa = {
   'Cirkel': 'Pióg',
   'Spider': 'Damhán alla',
   'CSV importeren': 'Iompórtáil CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)': 'Sonraí (CSV: an chéad ró = ainmneacha sraithe, an chéad cholún = lipéid)',
+  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+      'Sonraí (CSV: an chéad ró = ainmneacha sraithe, an chéad cholún = lipéid)',
   'Gekoppeld aan': 'Nasctha le',
   'Ontkoppelen': 'Dínasc',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?': 'Stóráil na sonraí sa sleamhnán, nó coinnigh mar chomhad CSV ar leithligh in aice leis an láithreoireacht?',
+  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+      'Stóráil na sonraí sa sleamhnán, nó coinnigh mar chomhad CSV ar leithligh in aice leis an láithreoireacht?',
   'In de slide': 'Sa sleamhnán',
   'Als CSV-bestand': 'Mar chomhad CSV',
   'Geen grafiekgegevens': 'Gan sonraí cairte',
@@ -785,9 +940,12 @@ const _dutchSourceGa = {
   'Sorteren': 'Sórtáil',
   'Oplopend sorteren': 'Sórtáil ardaitheach',
   'Aflopend sorteren': 'Sórtáil íslitheach',
-  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.': 'I gcairt phióige taispeántar an chéad dá shraith ar a mhéad; is iad na lipéid na slisníní.',
-  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.': 'Teastaíonn trí lipéad (aiseanna) ar a laghad ó chairt damháin alla; cruthaíonn gach sraith cruth.',
-  'Een spider-diagram heeft minstens drie labels nodig': 'Teastaíonn trí lipéad ar a laghad ó chairt damháin alla',
+  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+      'I gcairt phióige taispeántar an chéad dá shraith ar a mhéad; is iad na lipéid na slisníní.',
+  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+      'Teastaíonn trí lipéad (aiseanna) ar a laghad ó chairt damháin alla; cruthaíonn gach sraith cruth.',
+  'Een spider-diagram heeft minstens drie labels nodig':
+      'Teastaíonn trí lipéad ar a laghad ó chairt damháin alla',
   'Minimumlijn (optioneel)': 'Líne íosta (roghnach)',
   'Maximumlijn (optioneel)': 'Líne uasta (roghnach)',
   'Schaalminimum (optioneel)': 'Íosluach scála (roghnach)',
@@ -796,9 +954,11 @@ const _dutchSourceGa = {
   'Broncode achtergrond': 'Cúlra cóid',
   'Broncode tekst': 'Téacs cóid',
   'Syntaxkleuring': 'Dathú comhréire',
-  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).': 'As = gach rud in aon dath amháin (m.sh. glas ar dhubh do scáileán CRT).',
+  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+      'As = gach rud in aon dath amháin (m.sh. glas ar dhubh do scáileán CRT).',
   'Eigen kleur (hex)': 'Dath saincheaptha (heics)',
-  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.': 'Mar shampla #33FF33 do scáileán glas CRT.',
+  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+      'Mar shampla #33FF33 do scáileán glas CRT.',
   'Onderdeel van stijlprofiel ': 'Cuid de phróifíl stíle ',
   'Broncode lettertype': 'Cló cóid',
   'Kop (optioneel)': 'Ceannteideal (roghnach)',
@@ -806,38 +966,50 @@ const _dutchSourceGa = {
   'Subkop': 'Focheannteideal',
   'Systeem (monospace)': 'Córas (aonleithead)',
   'Platte tekst': 'Gnáth-théacs',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.': 'Osclaíonn HTML in aon bhrabhsálaí gan idirlíon agus rindreálann sé bloic chóid, matamaitic agus léaráidí Mermaid.',
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+      'Osclaíonn HTML in aon bhrabhsálaí gan idirlíon agus rindreálann sé bloic chóid, matamaitic agus léaráidí Mermaid.',
   'Laatste slide': 'Sleamhnán deiridh',
   'Logo px': 'Lógó px',
   'Markdown voor laatste slide': 'Markdown don sleamhnán deiridh',
   'PREVIEW': 'RÉAMHAMHARC',
   'Slides gerenderd.': 'Sleamhnáin rindreáilte.',
-  'Standaard laatste slide gebruiken': 'Úsáid an sleamhnán deiridh réamhshocraithe',
-  'Wordt automatisch toegevoegd bij presenteren en exporteren.': 'Cuirtear leis go huathoibríoch agus tú ag láithriú agus ag easpórtáil.',
+  'Standaard laatste slide gebruiken':
+      'Úsáid an sleamhnán deiridh réamhshocraithe',
+  'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+      'Cuirtear leis go huathoibríoch agus tú ag láithriú agus ag easpórtáil.',
   'gerenderd.': 'rindreáilte.',
   'renderen…': 'á rindreáil…',
   'voorbereiden…': 'á ullmhú…',
   'Duplicaten opruimen': 'Glan suas dúbailtí',
-  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën': 'Aimsigh íomhánna atá comhionann ó thaobh beart (md5), cumaisc clibeanna agus nótaí, agus bain na cóipeanna',
+  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+      'Aimsigh íomhánna atá comhionann ó thaobh beart (md5), cumaisc clibeanna agus nótaí, agus bain na cóipeanna',
   'Geen dubbele afbeeldingen gevonden.': 'Níor aimsíodh aon íomhá dhúblach.',
   'Dubbele afbeeldingen opruimen?': 'Glan suas íomhánna dúblacha?',
-  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.': 'Coinnítear comhad amháin in aghaidh gach grúpa. Cumaisctear clibeanna agus nótaí, agus tar éis sin díreoidh sleamhnáin a úsáideann cóip ar an gcomhad coinnithe — lena n-áirítear láithreoireachtaí nach bhfuil oscailte faoi láthair.',
+  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+      'Coinnítear comhad amháin in aghaidh gach grúpa. Cumaisctear clibeanna agus nótaí, agus tar éis sin díreoidh sleamhnáin a úsáideann cóip ar an gcomhad coinnithe — lena n-áirítear láithreoireachtaí nach bhfuil oscailte faoi láthair.',
   'Opruimen': 'Glan suas',
-  '1 presentatiebestand bijgewerkt.': '1 chomhad láithreoireachta nuashonraithe.',
+  '1 presentatiebestand bijgewerkt.':
+      '1 chomhad láithreoireachta nuashonraithe.',
   'presentatiebestanden bijgewerkt.': 'comhad láithreoireachta nuashonraithe.',
   'niet geopend': 'gan oscailt',
   '1 dubbele afbeelding verwijderd.': '1 íomhá dhúblach bainte.',
   'dubbele afbeeldingen verwijderd.': 'íomhá dhúblach bainte.',
-  'Alleen afbeeldingen zonder tags tonen': 'Ná taispeáin ach íomhánna gan chlibeanna',
+  'Alleen afbeeldingen zonder tags tonen':
+      'Ná taispeáin ach íomhánna gan chlibeanna',
   'Alle afbeeldingen hebben tags.': 'Tá clibeanna ar gach íomhá.',
-  'Zet het filter uit om alles weer te zien.': 'Múch an scagaire chun gach rud a fheiceáil arís.',
+  'Zet het filter uit om alles weer te zien.':
+      'Múch an scagaire chun gach rud a fheiceáil arís.',
   'Welkom bij OciDeck': 'Fáilte go OciDeck',
   'Privacy en gebruik': 'Príobháideacht agus úsáid',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'Is feidhmchlár deisce logánta é OciDeck. Stóráiltear do láithreoireachtaí agus do shonraí ar do ríomhaire féin amháin.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'Ní bhailíonn an aip aon sonraí pearsanta, aon staitisticí ná aon sonraí úsáide. Is í do phríobháideacht ár dtosaíocht.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Fanann gach sonra a chuireann tú isteach in OciDeck ar do chóras logánta agus ní sheoltar chuig freastalaithe seachtracha é.',
+  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
+      'Is feidhmchlár deisce logánta é OciDeck. Stóráiltear do láithreoireachtaí agus do shonraí ar do ríomhaire féin amháin.',
+  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
+      'Ní bhailíonn an aip aon sonraí pearsanta, aon staitisticí ná aon sonraí úsáide. Is í do phríobháideacht ár dtosaíocht.',
+  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
+      'Fanann gach sonra a chuireann tú isteach in OciDeck ar do chóras logánta agus ní sheoltar chuig freastalaithe seachtracha é.',
   'Licentie (EUPL 1.2)': 'Ceadúnas (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'Trí chliceáil ar "Aontaím", glacann tú leis na téarmaí seo agus toilíonn tú le húsáid OciDeck.',
+  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
+      'Trí chliceáil ar "Aontaím", glacann tú leis na téarmaí seo agus toilíonn tú le húsáid OciDeck.',
   'Volledige licentie online': 'Ceadúnas iomlán ar líne',
   'Akkoord gaan': 'Aontaím',
   'Privacy': 'Príobháideacht',
@@ -845,16 +1017,21 @@ const _dutchSourceGa = {
   'Toestemming intrekken': 'Tarraing toiliú siar',
   'Toestemming intrekken?': 'Tarraing toiliú siar?',
   'Intrekken': 'Tarraing siar',
-  'U hebt al toegestemd in het gebruik van OciDeck.': 'Tá toilithe agat cheana féin le húsáid OciDeck.',
-  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.': 'Is féidir leat do thoiliú a tharraingt siar am ar bith. Tar éis tarraingt siar caithfidh tú glacadh leis na téarmaí seo arís.',
-  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.': 'Má tharraingíonn tú do thoiliú siar, caithfidh tú glacadh leis na téarmaí seo arís nuair a atosaíonn tú OciDeck.',
+  'U hebt al toegestemd in het gebruik van OciDeck.':
+      'Tá toilithe agat cheana féin le húsáid OciDeck.',
+  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+      'Is féidir leat do thoiliú a tharraingt siar am ar bith. Tar éis tarraingt siar caithfidh tú glacadh leis na téarmaí seo arís.',
+  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+      'Má tharraingíonn tú do thoiliú siar, caithfidh tú glacadh leis na téarmaí seo arís nuair a atosaíonn tú OciDeck.',
   'Slidekwaliteit': 'Cáilíocht sleamhnáin',
   'Geen kwaliteitsproblemen gevonden': 'Níor aimsíodh aon fhadhb cháilíochta',
   'Thema (hele presentatie)': 'Téama (an láithreoireacht iomlán)',
   'Kwaliteitsprobleem': 'Fadhb cháilíochta',
   'Kwaliteitsproblemen': 'Fadhbanna cáilíochta',
-  'Kwaliteitsproblemen (inclusief ernstige)': 'Fadhbanna cáilíochta (lena n-áirítear cinn thromchúiseacha)',
-  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Cuir téacs malartach / fotheideal leis ar mhaithe le hinrochtaineacht',
+  'Kwaliteitsproblemen (inclusief ernstige)':
+      'Fadhbanna cáilíochta (lena n-áirítear cinn thromchúiseacha)',
+  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Cuir téacs malartach / fotheideal leis ar mhaithe le hinrochtaineacht',
   'Alt-tekst': 'Téacs malartach',
   'Tekstdichtheid': 'Dlús téacs',
   'Contrast': 'Codarsnacht',
@@ -864,22 +1041,32 @@ const _dutchSourceGa = {
   ':1 voor normale tekst).': ':1 do ghnáth-théacs).',
   ':1 voor grote tekst).': ':1 do théacs mór).',
   ':1).': ':1).',
-  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.': 'Ní féidir codarsnacht téacs ar nó thar íomhá a sheiceáil go huathoibríoch — deimhnigh go hamhairc é.',
-  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.': 'Níl teideal ná sonraí tuairisciúla ag an gcairt — cuir teideal nó ainmneacha sraithe leis.',
-  'heeft geen titel of sprekernotities die de inhoud beschrijven.': 'níl teideal ná nótaí cainteora aige a chuireann síos ar an ábhar.',
-  'Veel tekst op deze slide: het lettertype wordt verkleind tot ': 'Go leor téacs ar an sleamhnán seo: laghdaítear méid an chló go ',
+  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+      'Ní féidir codarsnacht téacs ar nó thar íomhá a sheiceáil go huathoibríoch — deimhnigh go hamhairc é.',
+  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+      'Níl teideal ná sonraí tuairisciúla ag an gcairt — cuir teideal nó ainmneacha sraithe leis.',
+  'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+      'níl teideal ná nótaí cainteora aige a chuireann síos ar an ábhar.',
+  'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+      'Go leor téacs ar an sleamhnán seo: laghdaítear méid an chló go ',
   ' van de ontwerpgrootte.': ' den mhéid deartha.',
-  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (': 'Go leor téacs ar an sleamhnán seo: laghdaítear méid an chló go mór (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.': 'den mhéid deartha). Smaoinigh ar an ábhar a roinnt.',
+  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+      'Go leor téacs ar an sleamhnán seo: laghdaítear méid an chló go mór (',
+  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      'den mhéid deartha). Smaoinigh ar an ábhar a roinnt.',
   'Grote tabel (': 'Tábla mór (',
   ' rijen, ': ' ró, ',
-  ' kolommen): celtekst staat op het minimumformaat.': ' colún): tá téacs na gcealla ag an íosmhéid.',
+  ' kolommen): celtekst staat op het minimumformaat.':
+      ' colún): tá téacs na gcealla ag an íosmhéid.',
   'Veel broncode (': 'Go leor cóid foinsigh (',
-  ' regels) — de tekst wordt sterk verkleind om te passen.': ' líne) — laghdaítear an téacs go mór le go n-oirfidh sé.',
+  ' regels) — de tekst wordt sterk verkleind om te passen.':
+      ' líne) — laghdaítear an téacs go mór le go n-oirfidh sé.',
   'Veel vrije markdown (': 'Go leor markdown saor (',
-  ' regels) — controleer of alles leesbaar blijft op de slide.': ' líne) — seiceáil go bhfanann gach rud inléite ar an sleamhnán.',
+  ' regels) — controleer of alles leesbaar blijft op de slide.':
+      ' líne) — seiceáil go bhfanann gach rud inléite ar an sleamhnán.',
   'Lange titelpagina (': 'Sleamhnán teidil fada (',
-  ' tekens) — de tekst wordt verkleind om te passen.': ' carachtar) — laghdaítear an téacs le go n-oirfidh sé.',
+  ' tekens) — de tekst wordt verkleind om te passen.':
+      ' carachtar) — laghdaítear an téacs le go n-oirfidh sé.',
   'Thema bodytekst': 'Téacs coirp an téama',
   'Thema titel': 'Teideal an téama',
   'Thema tabeltekst': 'Téacs tábla an téama',
@@ -890,34 +1077,46 @@ const _dutchSourceGa = {
   'Tweede afbeelding': 'An dara híomhá',
   'Waarschuwing bij export': 'Tabhair rabhadh agus tú ag easpórtáil',
   'Minimale contrastverhouding': 'Íoschóimheas codarsnachta',
-  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.': 'Cuirtear béim ar théacs faoin gcóimheas seo. 4.5 = WCAG AA, 3.0 = WCAG AA téacs mór. Bíonn níos airde níos déine.',
-  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.': 'Iarr deimhniú sula ndéanann tú easpórtáil nuair a bhíonn fadhbanna cáilíochta sleamhnáin ann.',
+  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.':
+      'Cuirtear béim ar théacs faoin gcóimheas seo. 4.5 = WCAG AA, 3.0 = WCAG AA téacs mór. Bíonn níos airde níos déine.',
+  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+      'Iarr deimhniú sula ndéanann tú easpórtáil nuair a bhíonn fadhbanna cáilíochta sleamhnáin ann.',
   'Kwaliteitsproblemen gevonden': 'Aimsíodh fadhbanna cáilíochta',
   'Toch exporteren': 'Easpórtáil mar sin féin',
   'ernstige probleem(en)': 'fadhb(anna) thromchúiseach(a)',
-  'De presentatie heeft kwaliteitsproblemen (': 'Tá fadhbanna cáilíochta ag an láithreoireacht (',
+  'De presentatie heeft kwaliteitsproblemen (':
+      'Tá fadhbanna cáilíochta ag an láithreoireacht (',
   'Lange quote (': 'Athfhriotal fada (',
   'Footer-tekst': 'Téacs buntásc',
   'Checklist (niet aangevinkt)': 'Seicliosta (neamhthiceáilte)',
   'Checklist (aangevinkt)': 'Seicliosta (ticeáilte)',
   ': bestand niet gevonden (': ': comhad gan aimsiú (',
-  'Blokkeer export bij ernstige kwaliteitsproblemen': 'Bac easpórtáil ar fhadhbanna cáilíochta tromchúiseacha',
-  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.': 'Ní féidir easpórtáil a dhéanamh fad is a thuairiscíonn na seiceálacha cáilíochta sleamhnáin earráidí.',
-  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.': 'Bacadh an t-easpórtáil de bharr fadhbanna cáilíochta tromchúiseacha.',
+  'Blokkeer export bij ernstige kwaliteitsproblemen':
+      'Bac easpórtáil ar fhadhbanna cáilíochta tromchúiseacha',
+  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+      'Ní féidir easpórtáil a dhéanamh fad is a thuairiscíonn na seiceálacha cáilíochta sleamhnáin earráidí.',
+  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+      'Bacadh an t-easpórtáil de bharr fadhbanna cáilíochta tromchúiseacha.',
   'Alle meldingen': 'Gach fadhb',
-  '… en meer problemen in het kwaliteitspaneel.': '… agus tuilleadh fadhbanna sa phainéal cáilíochta.',
+  '… en meer problemen in het kwaliteitspaneel.':
+      '… agus tuilleadh fadhbanna sa phainéal cáilíochta.',
   'Classificatie-handhaving': 'Forfheidhmiú aicmithe',
   'Vrijgaveplafond': 'Uasteorainn scaoilte',
-  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.': 'An leibhéal TLP is airde a cheadaítear a easpórtáil. Folamh = gan uasteorainn.',
+  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+      'An leibhéal TLP is airde a cheadaítear a easpórtáil. Folamh = gan uasteorainn.',
   'Vereist minimumniveau': 'Íosleibhéal riachtanach',
-  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.': 'An t-aicmiú is ísle a chaithfidh a bheith ag deic chun easpórtáil. Folamh = gan íosmhéid.',
+  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+      'An t-aicmiú is ísle a chaithfidh a bheith ag deic chun easpórtáil. Folamh = gan íosmhéid.',
   'Geen plafond': 'Gan uasteorainn',
   'Geen minimum': 'Gan íosmhéid',
   'Classificatie verplicht': 'Aicmiú riachtanach',
-  'Weiger export wanneer het deck geen TLP-niveau heeft.': 'Diúltaigh easpórtáil nuair nach bhfuil leibhéal TLP ag an deic.',
+  'Weiger export wanneer het deck geen TLP-niveau heeft.':
+      'Diúltaigh easpórtáil nuair nach bhfuil leibhéal TLP ag an deic.',
   'Classificatie-watermerk': 'Comhartha uisce aicmithe',
-  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.': 'Taispeáin comhartha uisce trasnánach le TLP agus eagraíocht ar gach sleamhnán.',
-  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.': 'Socraigh leibhéal TLP — tá easpórtáil bactha ag an mbeartas aicmithe.',
+  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+      'Taispeáin comhartha uisce trasnánach le TLP agus eagraíocht ar gach sleamhnán.',
+  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+      'Socraigh leibhéal TLP — tá easpórtáil bactha ag an mbeartas aicmithe.',
   'Tabel bewerken': 'Cuir tábla in eagar',
   'Pijltjes · Tab · Esc': 'Saigheada · Táb · Esc',
   'Tabel bewerken (op tabeldia)': 'Cuir tábla in eagar (ar shleamhnáin tábla)',

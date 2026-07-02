@@ -13,6 +13,7 @@ import '../../services/slide_rasterizer.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_localization.dart';
 import 'slide_quality_details_dialog.dart';
+import '../../theme/app_theme.dart';
 
 /// Exports the deck by rendering the on-screen slide previews to images and
 /// packing them into a PDF or PPTX (WYSIWYG — the export matches the preview).
@@ -322,7 +323,7 @@ class _ExportDialogState extends State<ExportDialog> {
         children: [
           Text(
             _phase,
-            style: const TextStyle(fontSize: 13, color: Color(0xFF334155)),
+            style: const TextStyle(fontSize: 13, color: AppTheme.slate700),
           ),
           const SizedBox(height: 12),
           ClipRRect(
@@ -333,7 +334,7 @@ class _ExportDialogState extends State<ExportDialog> {
             const SizedBox(height: 8),
             Text(
               counter,
-              style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+              style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
             ),
           ],
         ],
@@ -397,7 +398,7 @@ class _ExportDialogState extends State<ExportDialog> {
           Text(
             formatQualityExportReason(l10n, widget.qualityResult),
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+            style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
           ),
           const SizedBox(height: 12),
           OutlinedButton.icon(
@@ -425,7 +426,7 @@ class _ExportDialogState extends State<ExportDialog> {
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
             l10n.t('exportIntro'),
-            style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+            style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
           ),
         ),
         Padding(
@@ -435,7 +436,7 @@ class _ExportDialogState extends State<ExportDialog> {
             style: const TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF475569),
+              color: AppTheme.slate600,
             ),
           ),
         ),
@@ -461,7 +462,7 @@ class _ExportDialogState extends State<ExportDialog> {
           padding: const EdgeInsets.only(top: 4, bottom: 8),
           child: Text(
             _compress ? l10n.t('compressedHelp') : l10n.t('losslessHelp'),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
         _exportButton(
@@ -487,7 +488,7 @@ class _ExportDialogState extends State<ExportDialog> {
             l10n.d(
               'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.',
             ),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
       ],
@@ -512,7 +513,7 @@ class _ExportDialogState extends State<ExportDialog> {
         ? Colors.red.shade700
         : hasWarnings
         ? const Color(0xFF92400E)
-        : const Color(0xFF475569);
+        : AppTheme.slate600;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),

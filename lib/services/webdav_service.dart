@@ -8,6 +8,7 @@ import 'package:xml/xml.dart';
 import '../models/webdav_settings.dart';
 import '../utils/log.dart';
 import '../utils/net_guard.dart';
+import 'file_service.dart';
 
 /// Eén item in een WebDAV-maplisting.
 class WebdavEntry {
@@ -74,8 +75,9 @@ class WebdavService {
   final WebdavServer server;
   final String password;
 
-  /// Maximaal te downloaden bestand (gelijk aan de pakketlimiet van FileService).
-  static const int maxDownloadBytes = 512 * 1024 * 1024;
+  /// Maximaal te downloaden bestand — dezelfde limiet als het pakket dat we
+  /// downloaden; verwijst naar de bron zodat de twee niet kunnen divergeren.
+  static const int maxDownloadBytes = FileService.maxPackageBytes;
 
   /// Cap op de PROPFIND-respons zodat een vijandige server het geheugen niet
   /// kan laten vollopen.

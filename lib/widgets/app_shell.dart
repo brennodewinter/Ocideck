@@ -17,6 +17,7 @@ import '../services/classification_policy.dart';
 import '../services/export_metadata.dart';
 import '../services/open_file_channel.dart';
 import '../services/export_service.dart';
+import '../services/file_service.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
 import '../services/mermaid_render_service.dart';
@@ -117,7 +118,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                     '•  ${s.label}  ·  ${_formatWhen(s.savedAt)}',
                     style: const TextStyle(
                       fontSize: 12.5,
-                      color: Color(0xFF475569),
+                      color: AppTheme.slate600,
                     ),
                   ),
                 ),

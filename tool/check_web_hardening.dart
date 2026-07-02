@@ -90,7 +90,7 @@ void main() {
         require(
           !_hasRemoteOrigin(directives[d]),
           'CSP $d must not allow a remote origin (found: '
-              '${directives[d]?.join(' ')}).',
+          '${directives[d]?.join(' ')}).',
         );
       }
     }
@@ -146,10 +146,20 @@ Map<String, List<String>> _parseCsp(String csp) {
 /// `mediastream:`) are allowed.
 bool _hasRemoteOrigin(List<String>? tokens) {
   if (tokens == null) return false;
-  const localSchemes = {"'self'", 'data:', 'blob:', 'filesystem:', 'mediastream:', "'none'"};
+  const localSchemes = {
+    "'self'",
+    'data:',
+    'blob:',
+    'filesystem:',
+    'mediastream:',
+    "'none'",
+  };
   for (final t in tokens) {
     if (localSchemes.contains(t)) continue;
-    if (t == '*' || t.startsWith('http') || t.startsWith('//') || t.contains('.')) {
+    if (t == '*' ||
+        t.startsWith('http') ||
+        t.startsWith('//') ||
+        t.contains('.')) {
       return true;
     }
   }

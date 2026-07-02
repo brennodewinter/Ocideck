@@ -8,6 +8,7 @@ import '../../services/markdown_validator.dart';
 import '../../state/editor_provider.dart';
 import '../../utils/text_search.dart';
 import 'markdown_find_bar.dart';
+import '../../theme/app_theme.dart';
 
 class MarkdownDeckEditor extends ConsumerStatefulWidget {
   final String initialContent;
@@ -686,7 +687,7 @@ class _LineNumberCell extends StatelessWidget {
     final bg = switch (severity) {
       MarkdownValidationSeverity.error => const Color(0xFFFECACA),
       MarkdownValidationSeverity.warning => const Color(0xFFFDE68A),
-      MarkdownValidationSeverity.informational => const Color(0xFFE2E8F0),
+      MarkdownValidationSeverity.informational => AppTheme.slate200,
       null => Colors.transparent,
     };
     return GestureDetector(
@@ -706,7 +707,7 @@ class _LineNumberCell extends StatelessWidget {
                 ? Colors.red.shade700
                 : severity == MarkdownValidationSeverity.warning
                 ? const Color(0xFF92400E)
-                : const Color(0xFF94A3B8),
+                : AppTheme.slate400,
           ),
         ),
       ),

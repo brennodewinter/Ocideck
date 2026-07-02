@@ -126,6 +126,28 @@ void main() {
     expect(slide.bullets, ['Eerste punt', '\tGenest punt']);
   });
 
+  test('round-trips a caption containing a slash', () {
+    // HtmlEscape (unknown-mode) escapet ook `/` naar `&#47;`; de decoder moet
+    // die terugvertalen (regressie: eigen unescape-tabel miste &#47;).
+    final service = MarkdownService();
+    final markdown = service.generateDeck(
+      Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.image).copyWith(
+            imagePath: 'images/foto.png',
+            imageCaption: 'Bron: NOS/ANP & "archief"',
+          ),
+        ],
+      ),
+    );
+
+    final deck = service.parseDeck(markdown);
+
+    expect(deck, isNotNull);
+    expect(deck!.slides.single.imageCaption, 'Bron: NOS/ANP & "archief"');
+  });
+
   test('parses split text bullets from saved markdown', () {
     final service = MarkdownService();
     final markdown = [

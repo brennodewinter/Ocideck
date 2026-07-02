@@ -450,7 +450,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                     gradient: const LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [Color(0xFF3B82F6), AppTheme.accent],
+                      colors: [AppTheme.blue500, AppTheme.accent],
                     ),
                     borderRadius: BorderRadius.circular(11),
                     boxShadow: [
@@ -548,9 +548,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                   height: 18,
                   margin: const EdgeInsets.only(right: 11),
                   decoration: BoxDecoration(
-                    color: selected
-                        ? const Color(0xFF60A5FA)
-                        : Colors.transparent,
+                    color: selected ? AppTheme.blue400 : Colors.transparent,
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),
@@ -607,7 +605,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             tooltip: context.l10n.t('cancel'),
             onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.close, size: 20),
-            color: const Color(0xFF94A3B8),
+            color: AppTheme.slate400,
             splashRadius: 20,
           ),
         ],
@@ -842,7 +840,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         style: const TextStyle(
           fontSize: 10,
           fontWeight: FontWeight.w700,
-          color: Color(0xFF64748B),
+          color: AppTheme.slate500,
           letterSpacing: 1.2,
         ),
       ),
@@ -857,7 +855,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         text,
         style: TextStyle(
           fontSize: 12,
-          color: muted ? const Color(0xFF94A3B8) : const Color(0xFF334155),
+          color: muted ? AppTheme.slate400 : AppTheme.slate700,
         ),
         overflow: TextOverflow.ellipsis,
       ),
@@ -866,7 +864,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
   BoxDecoration _boxDecoration() {
     return BoxDecoration(
-      border: Border.all(color: const Color(0xFFCBD5E1)),
+      border: Border.all(color: AppTheme.slate300),
       borderRadius: BorderRadius.circular(6),
       color: Colors.white,
     );
@@ -924,7 +922,7 @@ class _HexColorDialogState extends State<_HexColorDialog> {
                 decoration: BoxDecoration(
                   color: _parseHexColor(normalized ?? '#FFFFFF'),
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: const Color(0xFFCBD5E1)),
+                  border: Border.all(color: AppTheme.slate300),
                 ),
               ),
               const SizedBox(width: 12),
@@ -954,7 +952,7 @@ class _HexColorDialogState extends State<_HexColorDialog> {
           const SizedBox(height: 8),
           Text(
             l10n.d('Bijvoorbeeld #33FF33 voor een CRT-groen scherm.'),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ],
       ),

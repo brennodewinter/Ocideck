@@ -426,14 +426,14 @@ List<String> _splitTwoCaptions(String decoded) =>
 String _escapeNotes(String notes) => notes.replaceAll('-->', r'--\>');
 String _unescapeNotes(String notes) => notes.replaceAll(r'--\>', '-->');
 
+// Deelt de unescape-tabel met [_unescapeAttr]: de caption wordt geschreven
+// met HtmlEscape (unknown-mode), die ook `/` naar `&#47;` escapet — de eigen
+// (gekopieerde) tabel hier miste die entry, waardoor een bijschrift met een
+// slash niet round-tripte.
 String _decodeImageCaption(String line) {
-  return line
-      .replaceFirst('<div class="image-caption">', '')
-      .replaceFirst('</div>', '')
-      .replaceAll('&lt;', '<')
-      .replaceAll('&gt;', '>')
-      .replaceAll('&quot;', '"')
-      .replaceAll('&#39;', "'")
-      .replaceAll('&amp;', '&')
-      .trim();
+  return _unescapeAttr(
+    line
+        .replaceFirst('<div class="image-caption">', '')
+        .replaceFirst('</div>', ''),
+  ).trim();
 }

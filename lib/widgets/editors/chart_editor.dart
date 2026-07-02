@@ -12,6 +12,7 @@ import '../../models/settings.dart';
 import '../../models/slide.dart';
 import 'animation_duration_control.dart';
 import '_editor_field.dart';
+import '../../theme/app_theme.dart';
 
 part 'chart_editor_dialogs.dart';
 
@@ -409,7 +410,7 @@ class _ChartEditorState extends State<ChartEditor> {
                 l10n.d(
                   'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.',
                 ),
-                style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+                style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
               ),
             ),
           if (_type == ChartType.radar)
@@ -419,137 +420,17 @@ class _ChartEditorState extends State<ChartEditor> {
                 l10n.d(
                   'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.',
                 ),
-                style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+                style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
               ),
             ),
-          if (_supportsBounds)
-            Padding(
-              padding: const EdgeInsets.only(top: 12),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: _boundField(
-                      key: const ValueKey('chart-min-bound'),
-                      controller: _minBound,
-                      label: _type == ChartType.radar
-                          ? l10n.d('Schaalminimum (optioneel)')
-                          : l10n.d('Minimumlijn (optioneel)'),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: _boundField(
-                      key: const ValueKey('chart-max-bound'),
-                      controller: _maxBound,
-                      label: _type == ChartType.radar
-                          ? l10n.d('Schaalmaximum (optioneel)')
-                          : l10n.d('Maximumlijn (optioneel)'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          if (linked)
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Row(
-                children: [
-                  const Icon(Icons.link, size: 14, color: Color(0xFF0369A1)),
-                  const SizedBox(width: 6),
-                  Expanded(
-                    child: Text(
-                      '${l10n.d('Gekoppeld aan')} $_source',
-                      style: const TextStyle(
-                        fontSize: 11,
-                        color: Color(0xFF0369A1),
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: _unlink,
-                    child: Text(l10n.d('Ontkoppelen')),
-                  ),
-                ],
-              ),
-            ),
-          Padding(
-            padding: const EdgeInsets.only(top: 12),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.auto_awesome,
-                  size: 18,
-                  color: Color(0xFF64748B),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    l10n.d('Animatie bij openen'),
-                    style: const TextStyle(fontSize: 13),
-                  ),
-                ),
-                Switch(
-                  value: _animateOnEnter,
-                  onChanged: (v) {
-                    setState(() => _animateOnEnter = v);
-                    _emit();
-                  },
-                ),
-              ],
-            ),
-          ),
-          if (_animateOnEnter)
-            Padding(
-              padding: const EdgeInsets.only(top: 4),
-              child: AnimationDurationControl(
-                overrideMs: _animationOverrideMs,
-                themeMs: widget.themeAnimationDurationMs,
-                minMs: kThemeMinAnimationDurationMs,
-                maxMs: kThemeMaxAnimationDurationMs,
-                onChanged: (value) {
-                  setState(() => _animationOverrideMs = value);
-                  _emit();
-                },
-              ),
-            ),
+          if (_supportsBounds) _boundControls(l10n),
+          if (linked) _linkedSourceRow(l10n),
+          _animationControls(l10n),
           const SizedBox(height: 12),
           if (widget.nestedInScrollView)
-            SizedBox(
-              height: 280,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final availableWidth = constraints.maxWidth;
-                  return SingleChildScrollView(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: _grid(
-                        enabled: !linked,
-                        availableWidth: availableWidth,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            )
+            SizedBox(height: 280, child: _scrollableGrid(linked))
           else
-            Expanded(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final availableWidth = constraints.maxWidth;
-                  return SingleChildScrollView(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: _grid(
-                        enabled: !linked,
-                        availableWidth: availableWidth,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+            Expanded(child: _scrollableGrid(linked)),
           if (!linked) ...[
             const SizedBox(height: 8),
             Row(
@@ -573,6 +454,123 @@ class _ChartEditorState extends State<ChartEditor> {
     );
   }
 
+  /// Min/max-grenzen (of schaalgrenzen bij radar) naast elkaar.
+  Widget _boundControls(AppLocalizations l10n) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: _boundField(
+              key: const ValueKey('chart-min-bound'),
+              controller: _minBound,
+              label: _type == ChartType.radar
+                  ? l10n.d('Schaalminimum (optioneel)')
+                  : l10n.d('Minimumlijn (optioneel)'),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: _boundField(
+              key: const ValueKey('chart-max-bound'),
+              controller: _maxBound,
+              label: _type == ChartType.radar
+                  ? l10n.d('Schaalmaximum (optioneel)')
+                  : l10n.d('Maximumlijn (optioneel)'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Indicator + ontkoppelknop wanneer de data aan een CSV is gekoppeld.
+  Widget _linkedSourceRow(AppLocalizations l10n) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Row(
+        children: [
+          const Icon(Icons.link, size: 14, color: Color(0xFF0369A1)),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              '${l10n.d('Gekoppeld aan')} $_source',
+              style: const TextStyle(fontSize: 11, color: Color(0xFF0369A1)),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          TextButton(onPressed: _unlink, child: Text(l10n.d('Ontkoppelen'))),
+        ],
+      ),
+    );
+  }
+
+  /// Animatie-schakelaar plus (indien aan) de duur-regelaar.
+  Widget _animationControls(AppLocalizations l10n) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 12),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.auto_awesome,
+                size: 18,
+                color: AppTheme.slate500,
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  l10n.d('Animatie bij openen'),
+                  style: const TextStyle(fontSize: 13),
+                ),
+              ),
+              Switch(
+                value: _animateOnEnter,
+                onChanged: (v) {
+                  setState(() => _animateOnEnter = v);
+                  _emit();
+                },
+              ),
+            ],
+          ),
+        ),
+        if (_animateOnEnter)
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: AnimationDurationControl(
+              overrideMs: _animationOverrideMs,
+              themeMs: widget.themeAnimationDurationMs,
+              minMs: kThemeMinAnimationDurationMs,
+              maxMs: kThemeMaxAnimationDurationMs,
+              onChanged: (value) {
+                setState(() => _animationOverrideMs = value);
+                _emit();
+              },
+            ),
+          ),
+      ],
+    );
+  }
+
+  /// Het datagrid in een tweerichtings-scroller; uitgeschakeld zolang de data
+  /// aan een CSV is gekoppeld.
+  Widget _scrollableGrid(bool linked) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final availableWidth = constraints.maxWidth;
+        return SingleChildScrollView(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: _grid(enabled: !linked, availableWidth: availableWidth),
+          ),
+        );
+      },
+    );
+  }
+
   Widget _typeControls(AppLocalizations l10n) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -584,7 +582,7 @@ class _ChartEditorState extends State<ChartEditor> {
           style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: Color(0xFF64748B),
+            color: AppTheme.slate500,
           ),
         ),
         DropdownButton<ChartType>(
@@ -673,7 +671,7 @@ class _ChartEditorState extends State<ChartEditor> {
                   key: ValueKey('chart-series-column-$c'),
                   width: cellWidth,
                   color: _type == ChartType.pie && c >= 2
-                      ? const Color(0xFFE2E8F0)
+                      ? AppTheme.slate200
                       : null,
                   child: Row(
                     children: [
@@ -813,7 +811,7 @@ class _ChartEditorState extends State<ChartEditor> {
             Container(
               width: cellWidth,
               color: _type == ChartType.pie && c >= 2
-                  ? const Color(0xFFE2E8F0)
+                  ? AppTheme.slate200
                   : null,
               child: _cell(
                 key: ValueKey('v-$_rev-$r-$c'),
@@ -855,7 +853,7 @@ class _ChartEditorState extends State<ChartEditor> {
     style: const TextStyle(fontSize: 12),
     decoration: InputDecoration(
       labelText: label,
-      labelStyle: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+      labelStyle: const TextStyle(fontSize: 12, color: AppTheme.slate500),
       hintText: context.l10n.d('geen'),
       isDense: true,
       contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
@@ -870,7 +868,7 @@ class _ChartEditorState extends State<ChartEditor> {
       style: const TextStyle(
         fontSize: 11,
         fontWeight: FontWeight.w600,
-        color: Color(0xFF64748B),
+        color: AppTheme.slate500,
       ),
     ),
   );
@@ -880,7 +878,7 @@ class _ChartEditorState extends State<ChartEditor> {
       key: ValueKey('chart-sort-${column ?? 'label'}'),
       enabled: enabled,
       tooltip: context.l10n.d('Sorteren'),
-      icon: const Icon(Icons.sort, size: 15, color: Color(0xFF64748B)),
+      icon: const Icon(Icons.sort, size: 15, color: AppTheme.slate500),
       padding: EdgeInsets.zero,
       constraints: const BoxConstraints(minWidth: 24, minHeight: 28),
       itemBuilder: (context) => [
@@ -937,7 +935,7 @@ class _ChartEditorState extends State<ChartEditor> {
         style: TextStyle(
           fontSize: 12,
           fontWeight: bold ? FontWeight.w600 : FontWeight.normal,
-          color: muted ? const Color(0xFF64748B) : null,
+          color: muted ? AppTheme.slate500 : null,
         ),
         decoration: InputDecoration(
           isDense: true,
@@ -963,7 +961,7 @@ class _ChartEditorState extends State<ChartEditor> {
     onPressed: onTap,
     tooltip: tooltip,
     icon: Icon(icon, size: 14),
-    color: const Color(0xFF64748B),
+    color: AppTheme.slate500,
     visualDensity: VisualDensity.compact,
     padding: EdgeInsets.zero,
     constraints: const BoxConstraints(minWidth: 24, minHeight: 24),

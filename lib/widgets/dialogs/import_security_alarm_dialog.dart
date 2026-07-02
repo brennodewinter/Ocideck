@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/markdown_safety.dart';
 import '../../state/tabs_provider.dart';
+import '../../theme/app_theme.dart';
 
 /// The "alarm screen" shown when an imported/opened deck is refused because it
 /// contains executable content. It is a hard stop: the deck was NOT opened, and
@@ -53,7 +54,7 @@ class ImportSecurityAlarmDialog {
                     ),
                     style: const TextStyle(
                       fontSize: 13,
-                      color: Color(0xFF334155),
+                      color: AppTheme.slate700,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -63,7 +64,7 @@ class ImportSecurityAlarmDialog {
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
                       letterSpacing: 0.6,
-                      color: Color(0xFF64748B),
+                      color: AppTheme.slate500,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -125,7 +126,7 @@ class _FindingRow extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
-                    color: Color(0xFF334155),
+                    color: AppTheme.slate700,
                   ),
                 ),
               ),
@@ -138,7 +139,7 @@ class _FindingRow extends StatelessWidget {
             decoration: BoxDecoration(
               color: const Color(0xFFF1F5F9),
               borderRadius: BorderRadius.circular(4),
-              border: Border.all(color: const Color(0xFFE2E8F0)),
+              border: Border.all(color: AppTheme.slate200),
             ),
             child: SelectableText(
               finding.evidence,
@@ -146,7 +147,7 @@ class _FindingRow extends StatelessWidget {
               style: const TextStyle(
                 fontFamily: 'monospace',
                 fontSize: 11.5,
-                color: Color(0xFF475569),
+                color: AppTheme.slate600,
               ),
             ),
           ),

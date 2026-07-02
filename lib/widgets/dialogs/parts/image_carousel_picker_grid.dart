@@ -60,7 +60,7 @@ extension _CarouselGrid on _ImageCarouselPickerState {
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
               color: isSelected
-                  ? const Color(0xFF3B82F6)
+                  ? AppTheme.blue500
                   : isHovered
                   ? const Color(0xFF58A6FF)
                   : const Color(0xFF21262D),
@@ -73,7 +73,7 @@ extension _CarouselGrid on _ImageCarouselPickerState {
             boxShadow: isSelected
                 ? [
                     BoxShadow(
-                      color: const Color(0xFF3B82F6).withValues(alpha: 0.35),
+                      color: AppTheme.blue500.withValues(alpha: 0.35),
                       blurRadius: 16,
                       spreadRadius: 1,
                     ),
@@ -148,7 +148,7 @@ extension _CarouselGrid on _ImageCarouselPickerState {
                       width: 22,
                       height: 22,
                       decoration: const BoxDecoration(
-                        color: Color(0xFF3B82F6),
+                        color: AppTheme.blue500,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(color: Color(0xFF1D4ED8), blurRadius: 6),
@@ -304,14 +304,14 @@ extension _CarouselGrid on _ImageCarouselPickerState {
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
                   color: isSelected
-                      ? const Color(0xFF3B82F6)
+                      ? AppTheme.blue500
                       : const Color(0xFF21262D),
                   width: isSelected ? 2.5 : 1,
                 ),
                 boxShadow: [
                   BoxShadow(
                     color: isSelected
-                        ? const Color(0xFF3B82F6).withValues(alpha: 0.45)
+                        ? AppTheme.blue500.withValues(alpha: 0.45)
                         : Colors.black.withValues(alpha: 0.55),
                     blurRadius: isSelected ? 40 : 24,
                     spreadRadius: isSelected ? 2 : 0,
@@ -431,7 +431,7 @@ extension _CarouselGrid on _ImageCarouselPickerState {
                     height: 3,
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [Color(0xFF3B82F6), Color(0xFF60A5FA)],
+                        colors: [AppTheme.blue500, AppTheme.blue400],
                       ),
                     ),
                   ),

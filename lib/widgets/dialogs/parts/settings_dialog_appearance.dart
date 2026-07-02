@@ -411,7 +411,7 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
                     : Colors.transparent,
                 border: Border(
                   bottom: BorderSide(
-                    color: const Color(0xFFE2E8F0),
+                    color: AppTheme.slate200,
                     width: font == AppSettings.availableFonts.last ? 0 : 1,
                   ),
                 ),
@@ -425,9 +425,7 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
                         font,
                         TextStyle(
                           fontSize: 15,
-                          color: selected
-                              ? AppTheme.accent
-                              : const Color(0xFF334155),
+                          color: selected ? AppTheme.accent : AppTheme.slate700,
                           fontWeight: selected
                               ? FontWeight.w600
                               : FontWeight.normal,
@@ -473,7 +471,7 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
                   ),
                 ],
               ),
-              style: const TextStyle(fontSize: 12, color: Color(0xFF334155)),
+              style: const TextStyle(fontSize: 12, color: AppTheme.slate700),
             ),
           ),
         ],

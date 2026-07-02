@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/deck.dart';
 import '../../l10n/app_localizations.dart';
+import '../../theme/app_theme.dart';
 
 /// The editable general metadata of a presentation.
 class PresentationInfo {
@@ -154,100 +155,9 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _field(_title, 'Titel', 'Titel van de presentatie'),
-                const SizedBox(height: 12),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: _field(_author, 'Auteur', 'Bijv. Jan Jansen'),
-                    ),
-                    const SizedBox(width: 12),
-                    SizedBox(
-                      width: 120,
-                      child: _field(_version, 'Versie', 'Bijv. 1.0'),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: _field(
-                        _organization,
-                        'Organisatie',
-                        'Bijv. Vigilis',
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    SizedBox(
-                      width: 120,
-                      child: _field(
-                        _date,
-                        'Datum',
-                        'Bijv. 2026-05-30',
-                        onDoubleTap: _setCurrentDate,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                _field(
-                  _description,
-                  'Beschrijving',
-                  'Korte omschrijving van de presentatie',
-                  maxLines: 3,
-                ),
-                const SizedBox(height: 12),
-                _field(
-                  _keywords,
-                  'Trefwoorden',
-                  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026',
-                ),
+                _metadataFields(),
                 const SizedBox(height: 16),
-                InputDecorator(
-                  decoration: InputDecoration(
-                    labelText: l10n.d('Doeltijd (aftellen)'),
-                    isDense: true,
-                    prefixIcon: const Icon(Icons.timer_outlined, size: 18),
-                    border: const OutlineInputBorder(),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<int>(
-                      value: _targetDropdownValue,
-                      isExpanded: true,
-                      isDense: true,
-                      items: [
-                        for (final step in _targetSteps)
-                          DropdownMenuItem(
-                            value: step,
-                            child: Text(
-                              step == 0
-                                  ? l10n.d('Geen aftelling')
-                                  : '${step ~/ 60} min',
-                            ),
-                          ),
-                      ],
-                      onChanged: (seconds) {
-                        if (seconds == null) return;
-                        setState(() => _presentationTargetSeconds = seconds);
-                      },
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 6),
-                  child: Text(
-                    l10n.d(
-                      'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.',
-                    ),
-                    style: const TextStyle(
-                      fontSize: 11,
-                      color: Color(0xFF94A3B8),
-                    ),
-                  ),
-                ),
+                _targetTimeControl(l10n),
                 const SizedBox(height: 16),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
@@ -270,7 +180,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
                   ),
                   style: const TextStyle(
                     fontSize: 11,
-                    color: Color(0xFF94A3B8),
+                    color: AppTheme.slate400,
                   ),
                 ),
               ],
@@ -285,6 +195,110 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
           ElevatedButton(onPressed: _save, child: Text(l10n.t('save'))),
         ],
       ),
+    );
+  }
+
+  /// De metadata-invoervelden (titel t/m trefwoorden) van het dialoog.
+  Widget _metadataFields() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _field(_title, 'Titel', 'Titel van de presentatie'),
+        const SizedBox(height: 12),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(child: _field(_author, 'Auteur', 'Bijv. Jan Jansen')),
+            const SizedBox(width: 12),
+            SizedBox(
+              width: 120,
+              child: _field(_version, 'Versie', 'Bijv. 1.0'),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: _field(_organization, 'Organisatie', 'Bijv. Vigilis'),
+            ),
+            const SizedBox(width: 12),
+            SizedBox(
+              width: 120,
+              child: _field(
+                _date,
+                'Datum',
+                'Bijv. 2026-05-30',
+                onDoubleTap: _setCurrentDate,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        _field(
+          _description,
+          'Beschrijving',
+          'Korte omschrijving van de presentatie',
+          maxLines: 3,
+        ),
+        const SizedBox(height: 12),
+        _field(
+          _keywords,
+          'Trefwoorden',
+          'Komma-gescheiden, bijv. kwartaal, cijfers, 2026',
+        ),
+      ],
+    );
+  }
+
+  /// De doeltijd-dropdown met toelichting (aftelling in de presenter).
+  Widget _targetTimeControl(AppLocalizations l10n) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        InputDecorator(
+          decoration: InputDecoration(
+            labelText: l10n.d('Doeltijd (aftellen)'),
+            isDense: true,
+            prefixIcon: const Icon(Icons.timer_outlined, size: 18),
+            border: const OutlineInputBorder(),
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<int>(
+              value: _targetDropdownValue,
+              isExpanded: true,
+              isDense: true,
+              items: [
+                for (final step in _targetSteps)
+                  DropdownMenuItem(
+                    value: step,
+                    child: Text(
+                      step == 0
+                          ? l10n.d('Geen aftelling')
+                          : '${step ~/ 60} min',
+                    ),
+                  ),
+              ],
+              onChanged: (seconds) {
+                if (seconds == null) return;
+                setState(() => _presentationTargetSeconds = seconds);
+              },
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 6),
+          child: Text(
+            l10n.d(
+              'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.',
+            ),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
+        ),
+      ],
     );
   }
 

@@ -316,15 +316,23 @@ const _dutchSourcePap = {
 
 const _dutchSourceAddPap = {
   // Consent / license screen (redesign).
-  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.': 'Mi ta aseptá e lisensia EUPL 1.2 i mi a lesa ki datos OciDeck ta warda.',
-  'Je keuze wordt de standaardtaal van de app.': 'Bo skohe ta bira e idioma standard di e app.',
+  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
+      'Mi ta aseptá e lisensia EUPL 1.2 i mi a lesa ki datos OciDeck ta warda.',
+  'Je keuze wordt de standaardtaal van de app.':
+      'Bo skohe ta bira e idioma standard di e app.',
   'Lees de volledige licentie': 'Lesa e lisensia kompleto',
-  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.': 'OciDeck ta software liber bou di e lisensia EUPL 1.2. Promé ku bo kuminsá, nos ta pidi bo aseptá e lisensia. Abou bo por lesa tambe ki datos OciDeck ta warda riba e aparato aki i ki ora algu ta sali for di bo aparato.',
-  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.': 'OciDeck no ta rekojé estadístika i no ta manda nada pa afó for di su mes. Standard tur kos ta keda riba e aparato aki. Datos ta sali for di e aparato aki solamente ora bo skohe esaki:\n\n•  Nextcloud/WebDAV: ora bo konektá ku un server, bo nòmber di usuario i bo kontraseña ta wòrdu wardá (e kontraseña sigur den e yabero di bo sistema) i e presentashonnan ku bo ta habri òf warda ta wòrdu mandá pa e server ei.\n•  Habri via URL: OciDeck ta buska e archivo for di e adres ku bo ta introdusí.\n•  Media online (ta pagá standard): si aktivá, OciDeck ta karga imágennan i vídeonan for di e adresnan den bo slide-nan.\n•  Enlacenan eksterno (manera e lisensia online) ta habri den bo navegador.',
-  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.': 'OciDeck ta wòrdu ofresí bou di e European Union Public Licence v1.2. Ora bo aseptá, bo ta akseptá e lisensia aki. Bo por usa, kopia, modifiká i distribuí OciDeck segun e términonan di EUPL 1.2.',
-  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.': 'Pa funshoná i pa no pèrdè bo trabou, OciDeck ta warda datos lokalmente riba e aparato aki:\n\n•  Bo konfigurashonnan i preferensianan (idioma, mapnan, profilnan di estilo i aparensia, archivonan resiente).\n•  Bo materialnan di presentashon: e presentashonnan ku bo ta warda, kopianan di rekuperashon outomátiko i anexonan manera deskripshonnan di imágen.\n•  E skohe di konsentimentu aki.\n\nBo por kita esaki dor di bora e archivonan òf resetiá e konfigurashonnan.',
-  'Volledige licentie online (23 officiële taalversies)': 'Lisensia kompleto online (23 vershon di idioma ofisial)',
-  'Wat OciDeck op dit apparaat bewaart': 'Kiko OciDeck ta warda riba e aparato aki',
+  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
+      'OciDeck ta software liber bou di e lisensia EUPL 1.2. Promé ku bo kuminsá, nos ta pidi bo aseptá e lisensia. Abou bo por lesa tambe ki datos OciDeck ta warda riba e aparato aki i ki ora algu ta sali for di bo aparato.',
+  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.':
+      'OciDeck no ta rekojé estadístika i no ta manda nada pa afó for di su mes. Standard tur kos ta keda riba e aparato aki. Datos ta sali for di e aparato aki solamente ora bo skohe esaki:\n\n•  Nextcloud/WebDAV: ora bo konektá ku un server, bo nòmber di usuario i bo kontraseña ta wòrdu wardá (e kontraseña sigur den e yabero di bo sistema) i e presentashonnan ku bo ta habri òf warda ta wòrdu mandá pa e server ei.\n•  Habri via URL: OciDeck ta buska e archivo for di e adres ku bo ta introdusí.\n•  Media online (ta pagá standard): si aktivá, OciDeck ta karga imágennan i vídeonan for di e adresnan den bo slide-nan.\n•  Enlacenan eksterno (manera e lisensia online) ta habri den bo navegador.',
+  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.':
+      'OciDeck ta wòrdu ofresí bou di e European Union Public Licence v1.2. Ora bo aseptá, bo ta akseptá e lisensia aki. Bo por usa, kopia, modifiká i distribuí OciDeck segun e términonan di EUPL 1.2.',
+  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.':
+      'Pa funshoná i pa no pèrdè bo trabou, OciDeck ta warda datos lokalmente riba e aparato aki:\n\n•  Bo konfigurashonnan i preferensianan (idioma, mapnan, profilnan di estilo i aparensia, archivonan resiente).\n•  Bo materialnan di presentashon: e presentashonnan ku bo ta warda, kopianan di rekuperashon outomátiko i anexonan manera deskripshonnan di imágen.\n•  E skohe di konsentimentu aki.\n\nBo por kita esaki dor di bora e archivonan òf resetiá e konfigurashonnan.',
+  'Volledige licentie online (23 officiële taalversies)':
+      'Lisensia kompleto online (23 vershon di idioma ofisial)',
+  'Wat OciDeck op dit apparaat bewaart':
+      'Kiko OciDeck ta warda riba e aparato aki',
   'Wat je apparaat verlaat': 'Kiko ta sali for di bo aparato',
   // Nextcloud/WebDAV-bron.
   'Vul server-URL en gebruikersnaam in':
@@ -380,7 +388,8 @@ const _dutchSourceAddPap = {
   // Accessibility labels for icon-only buttons (screen readers).
   'Presenteren': 'Presentá',
   'Tijden-overzicht tonen na afloop': 'Mustra resúmen di tempo despues',
-  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.': 'E tempo pa slide ta wòrdu midí semper; esaki ta determiná solamente si e resúmen ta aparesé despues di e presentashon aki.',
+  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
+      'E tempo pa slide ta wòrdu midí semper; esaki ta determiná solamente si e resúmen ta aparesé despues di e presentashon aki.',
   'Oefenoverzicht tonen na afloop': 'Mustra resúmen di práktika despues',
   'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
       'Despues di un presentashon, mustra e resúmen di tempu pasá pa slide. Semper ta midi tempu; esaki solamente ta determiná si e pantaya ta aparesé.',
@@ -591,7 +600,8 @@ const _dutchSourceAddPap = {
   'Activatieduur': 'Durashon di aktivashon',
   'Splits slide': 'Parti slide',
   'Doornummeren vanaf vorige slide': 'Sigui number for di slide anterior',
-  'Begin de nummering waar de vorige slide ophield.': 'Kuminsá number kaminda e slide anterior a stòp.',
+  'Begin de nummering waar de vorige slide ophield.':
+      'Kuminsá number kaminda e slide anterior a stòp.',
   'Volg thema-animatieduur': 'Sigui durashon di animashon di tema',
   'Animatie bij openen': 'Animá ora di habri',
   'Meter': 'Meter',

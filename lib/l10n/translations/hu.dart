@@ -47,7 +47,8 @@ const _stringsHu = {
   'settingsLogo': 'Logó',
   'language': 'Nyelv',
   'applicationLanguage': 'Alkalmazás nyelve',
-  'languageHelp': 'A felület azonnal nyelvet vált. A bemutató tartalma változatlan marad.',
+  'languageHelp':
+      'A felület azonnal nyelvet vált. A bemutató tartalma változatlan marad.',
   'presentationFolder': 'Bemutatók mappája',
   'exportFolderSetting': 'Export mappa',
   'notSet': 'Nincs beállítva',
@@ -55,17 +56,20 @@ const _stringsHu = {
   'choose': 'Kiválasztás',
   'removeDefaultFolder': 'Alapértelmezett mappa eltávolítása',
   'removeExportFolder': 'Export mappa eltávolítása',
-  'exportFolderHelp': 'Minden export (PDF/PPTX) ide mentődik. Ha nincs beállítva, az export a bemutatófájl mellé kerül.',
+  'exportFolderHelp':
+      'Minden export (PDF/PPTX) ide mentődik. Ha nincs beállítva, az export a bemutatófájl mellé kerül.',
   'cancel': 'Mégse',
   'close': 'Bezárás',
   'saveSettings': 'Mentés',
   'exportDialogTitle': 'Exportálás',
   'exportAgain': 'Újbóli exportálás',
-  'exportIntro': 'Az export pontosan a szerkesztő előnézetét használja, a stílusprofillal együtt.',
+  'exportIntro':
+      'Az export pontosan a szerkesztő előnézetét használja, a stílusprofillal együtt.',
   'imageQualityPdf': 'Képminőség (PDF)',
   'normal': 'Normál',
   'compressed': 'Tömörített',
-  'compressedHelp': 'Alacsonyabb felbontású JPEG, kiosztáshoz szánva, sokkal kisebb fájlmérettel (külön mentve „-compact” néven).',
+  'compressedHelp':
+      'Alacsonyabb felbontású JPEG, kiosztáshoz szánva, sokkal kisebb fájlmérettel (külön mentve „-compact” néven).',
   'losslessHelp': 'Veszteségmentes, teljes felbontású képek.',
   'exportAsPdf': 'Exportálás PDF-ként',
   'exportAsPptx': 'Exportálás PPTX-ként',
@@ -87,26 +91,39 @@ const _dutchSourceHu = {
   'Niet opslaan': 'Ne mentse',
   'Niet-opgeslagen werk herstellen?': 'Visszaállítja a nem mentett munkát?',
   'Niet-opgeslagen wijzigingen': 'Nem mentett módosítások',
-  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'Egy előző munkamenetből nem mentett módosításokat tartalmazó prezentáció található:',
+  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Egy előző munkamenetből nem mentett módosításokat tartalmazó prezentáció található:',
   'Er zijn': 'Van',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'nem mentett módosításokat tartalmazó prezentáció egy előző munkamenetből:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.': 'Vannak nem mentett módosításokat tartalmazó prezentációk. Mentse őket, mielőtt bezárja az alkalmazást.',
-  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.': 'Ez a prezentáció nem mentett módosításokat tartalmaz. Mentse, mielőtt bezárja a lapot.',
+  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'nem mentett módosításokat tartalmazó prezentáció egy előző munkamenetből:',
+  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Vannak nem mentett módosításokat tartalmazó prezentációk. Mentse őket, mielőtt bezárja az alkalmazást.',
+  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+      'Ez a prezentáció nem mentett módosításokat tartalmaz. Mentse, mielőtt bezárja a lapot.',
   'Importeren via URL': 'Importálás URL-ből',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.': 'Illessze be egy .ocideck csomag vagy egy Marp Markdown-fájl hivatkozását.',
+  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+      'Illessze be egy .ocideck csomag vagy egy Marp Markdown-fájl hivatkozását.',
   'Ophalen': 'Lekérés',
   'Laat los om toe te voegen': 'Engedje el a hozzáadáshoz',
-  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen': 'Képek → új diák · .md / .ocideck → megnyitás',
-  'Open eerst een presentatie om afbeeldingen toe te voegen.': 'Először nyisson meg egy prezentációt a képek hozzáadásához.',
-  'Alle slides zijn overgeslagen — niets om te tonen.': 'Minden dia ki van hagyva – nincs mit megjeleníteni.',
-  'Alle slides zijn overgeslagen — niets om te exporteren.': 'Minden dia ki van hagyva – nincs mit exportálni.',
+  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+      'Képek → új diák · .md / .ocideck → megnyitás',
+  'Open eerst een presentatie om afbeeldingen toe te voegen.':
+      'Először nyisson meg egy prezentációt a képek hozzáadásához.',
+  'Alle slides zijn overgeslagen — niets om te tonen.':
+      'Minden dia ki van hagyva – nincs mit megjeleníteni.',
+  'Alle slides zijn overgeslagen — niets om te exporteren.':
+      'Minden dia ki van hagyva – nincs mit exportálni.',
   'Kon dit pakket niet importeren.': 'Nem sikerült importálni ezt a csomagot.',
   'Pakket geëxporteerd naar:': 'Csomag exportálva ide:',
   'Export mislukt:': 'Az exportálás sikertelen:',
-  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.': 'Ez a dia nem fogadhat képet. Először válasszon egy képdiát.',
-  'Kon van deze URL geen presentatie ophalen.': 'Nem sikerült prezentációt lekérni erről az URL-ről.',
-  'Sleep om de slide-preview breder of smaller te maken': 'Húzza a diaelőnézet szélesebbre vagy keskenyebbre',
-  'TLP-classificatie (Traffic Light Protocol)': 'TLP-besorolás (Traffic Light Protocol)',
+  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+      'Ez a dia nem fogadhat képet. Először válasszon egy képdiát.',
+  'Kon van deze URL geen presentatie ophalen.':
+      'Nem sikerült prezentációt lekérni erről az URL-ről.',
+  'Sleep om de slide-preview breder of smaller te maken':
+      'Húzza a diaelőnézet szélesebbre vagy keskenyebbre',
+  'TLP-classificatie (Traffic Light Protocol)':
+      'TLP-besorolás (Traffic Light Protocol)',
   'Titelpagina': 'Címdia',
   'Tussentitel': 'Szakaszcím',
   'Alleen Bullets': 'Csak felsorolás',
@@ -119,7 +136,8 @@ const _dutchSourceHu = {
   'Tabel': 'Táblázat',
   'Vrije Markdown': 'Szabad Markdown',
   'Overgeslagen': 'Kihagyva',
-  'Weer tonen bij presenteren/exporteren': 'Ismét megjelenítés bemutatáskor/exportáláskor',
+  'Weer tonen bij presenteren/exporteren':
+      'Ismét megjelenítés bemutatáskor/exportáláskor',
   'Overslaan bij presenteren/exporteren': 'Kihagyás bemutatáskor/exportáláskor',
   'Kopiëren': 'Másolás',
   'Kopieer als afbeelding': 'Másolás képként',
@@ -141,7 +159,8 @@ const _dutchSourceHu = {
   'Naam van de auteur': 'A szerző neve',
   'Achtergrondafbeelding': 'Háttérkép',
   'Achtergrondafbeelding (optioneel)': 'Háttérkép (opcionális)',
-  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.': 'A kép teljes képernyőn, háttérként jelenik meg csökkentett átlátszatlansággal, hogy a szöveg olvasható maradjon.',
+  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+      'A kép teljes képernyőn, háttérként jelenik meg csökkentett átlátszatlansággal, hogy a szöveg olvasható maradjon.',
   'Zoom achtergrond': 'Háttér nagyítása',
   'Zoom afbeelding': 'Kép nagyítása',
   'Afbeelding (rechts)': 'Kép (jobbra)',
@@ -166,7 +185,8 @@ const _dutchSourceHu = {
   'Kopiëren naar klembord mislukt.': 'A vágólapra másolás sikertelen.',
   'Verwijder afbeelding': 'Kép eltávolítása',
   'Geen afbeelding gekozen': 'Nincs kiválasztott kép',
-  'Caption / bronvermelding (bijv. © Naam Fotograaf)': 'Felirat / forrásmegjelölés (pl. © Fényképész neve)',
+  'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+      'Felirat / forrásmegjelölés (pl. © Fényképész neve)',
   'Caption / bronvermelding': 'Felirat / forrásmegjelölés',
   'Beschrijving (doorzoekbaar)': 'Leírás (kereshető)',
   'Markdown inhoud': 'Markdown tartalom',
@@ -177,7 +197,8 @@ const _dutchSourceHu = {
   'verwijderen': 'eltávolítás',
   'Koprij verwijderen': 'Fejlécsor eltávolítása',
   'Rij verwijderen': 'Sor eltávolítása',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.': 'Tipp: nyomjon Entert egy cellán belül új sorért.',
+  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+      'Tipp: nyomjon Entert egy cellán belül új sorért.',
   'Presentatie openen': 'Prezentáció megnyitása',
   'Opslaan als': 'Mentés másként',
   'Pakket importeren': 'Csomag importálása',
@@ -190,11 +211,14 @@ const _dutchSourceHu = {
   'Kies een video': 'Válasszon egy videót',
   'Kies een audiobestand': 'Válasszon egy hangfájlt',
   'Bladeren…': 'Tallózás…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…': 'Keresés fájlnév, cím vagy diaszöveg alapján…',
+  'Zoek op bestandsnaam, titel of tekst in de slides…':
+      'Keresés fájlnév, cím vagy diaszöveg alapján…',
   'Geen map gekozen': 'Nincs kiválasztott mappa',
   'Map kiezen': 'Mappa kiválasztása',
-  'Kies een map met presentaties om te beginnen.': 'Válasszon egy prezentációkat tartalmazó mappát a kezdéshez.',
-  'Geen presentaties (.md) in deze map gevonden.': 'Nem található prezentáció (.md) ebben a mappában.',
+  'Kies een map met presentaties om te beginnen.':
+      'Válasszon egy prezentációkat tartalmazó mappát a kezdéshez.',
+  'Geen presentaties (.md) in deze map gevonden.':
+      'Nem található prezentáció (.md) ebben a mappában.',
   'Geen presentaties gevonden voor': 'Nem található prezentáció ehhez:',
   'meer treffer(s)': 'további találat',
   'Slide zoeken': 'Dia keresése',
@@ -205,11 +229,15 @@ const _dutchSourceHu = {
   'Toegevoegd': 'Hozzáadva',
   'Selecteer alles': 'Összes kijelölése',
   'Deselecteer alles': 'Kijelölés megszüntetése',
-  'Zoek slides op tekst, titel, onderschrift, pad…': 'Diák keresése szöveg, cím, felirat, elérési út alapján…',
-  'Zoek op presentatie, titel of tekst…': 'Keresés prezentáció, cím vagy szöveg alapján…',
-  'Geen andere presentaties (.md) in deze map gevonden.': 'Nem található más prezentáció (.md) ebben a mappában.',
+  'Zoek slides op tekst, titel, onderschrift, pad…':
+      'Diák keresése szöveg, cím, felirat, elérési út alapján…',
+  'Zoek op presentatie, titel of tekst…':
+      'Keresés prezentáció, cím vagy szöveg alapján…',
+  'Geen andere presentaties (.md) in deze map gevonden.':
+      'Nem található más prezentáció (.md) ebben a mappában.',
   'Geen slides gevonden voor': 'Nem található dia ehhez:',
-  'Typ zoektermen om slides uit al je presentaties te vinden.': 'Írjon be keresőkifejezéseket a diák megtalálásához az összes prezentációban.',
+  'Typ zoektermen om slides uit al je presentaties te vinden.':
+      'Írjon be keresőkifejezéseket a diák megtalálásához az összes prezentációban.',
   'toegevoegd': 'hozzáadva',
   'Eerste': 'Első',
   'treffers — verfijn je zoekopdracht': 'találat – finomítsa a keresést',
@@ -247,17 +275,21 @@ const _dutchSourceHu = {
   'Beschrijving': 'Leírás',
   'Korte omschrijving van de presentatie': 'A prezentáció rövid leírása',
   'Trefwoorden': 'Kulcsszavak',
-  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026': 'Vesszővel elválasztva, pl. negyedéves, számok, 2026',
-  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.': 'Ezek az adatok a Markdownban tárolódnak és megnyitáskor kereshetők.',
+  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026':
+      'Vesszővel elválasztva, pl. negyedéves, számok, 2026',
+  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+      'Ezek az adatok a Markdownban tárolódnak és megnyitáskor kereshetők.',
   'App-thema': 'Alkalmazás témája',
   'Look-and-feel': 'Megjelenés',
   'Kopie maken en aanpassen': 'Másolat létrehozása és testreszabása',
   'Thema verwijderen': 'Téma törlése',
   'Themanaam': 'Téma neve',
-  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.': 'Ez egy beépített téma. Készítsen másolatot a színek testreszabásához.',
+  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+      'Ez egy beépített téma. Készítsen másolatot a színek testreszabásához.',
   'Donkere interface': 'Sötét felület',
   'Lettertype interface': 'Felület betűtípusa',
-  'Past contrast, invoervelden en systeemcomponenten aan.': 'Beállítja a kontrasztot, a beviteli mezőket és a rendszerelemeket.',
+  'Past contrast, invoervelden en systeemcomponenten aan.':
+      'Beállítja a kontrasztot, a beviteli mezőket és a rendszerelemeket.',
   'Hoofdkleur en bovenbalk': 'Fő szín és felső sáv',
   'Knoppen en accenten': 'Gombok és kiemelések',
   'Schermachtergrond': 'Képernyőháttér',
@@ -295,13 +327,15 @@ const _dutchSourceHu = {
   'Footertekst': 'Lábléc szövege',
   'bijv. Vertrouwelijk · {title} · {date}': 'pl. Bizalmas · {title} · {date}',
   'Footerpositie': 'Lábléc helyzete',
-  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.': 'Tokenek: {page}, {total}, {date}, {title}. A lábléc minden dián megjelenik a cím- és szakaszdiák kivételével, hacsak diánként ki nem kapcsolja.',
+  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+      'Tokenek: {page}, {total}, {date}, {title}. A lábléc minden dián megjelenik a cím- és szakaszdiák kivételével, hacsak diánként ki nem kapcsolja.',
   'Links': 'Balra',
   'Midden': 'Középre',
   'Rechts': 'Jobbra',
   'Paginanummers tonen (rechtsonder)': 'Oldalszámok megjelenítése (jobb alul)',
   'Voorvertoning': 'Előnézet',
-  'De snelle bruine vos springt over de luie hond.': 'A gyors barna róka átugorja a lusta kutyát.',
+  'De snelle bruine vos springt over de luie hond.':
+      'A gyors barna róka átugorja a lusta kutyát.',
   'Preview': 'Előnézet',
   'Uitzoomen': 'Kicsinyítés',
   'Uitgezoomd': 'Kicsinyítve',
@@ -309,9 +343,12 @@ const _dutchSourceHu = {
   'Ingezoomd': 'Nagyítva',
   'van de foto zichtbaar': 'látható a fotóból',
   'Volledig zichtbaar (100%)': 'Teljesen látható (100%)',
-  'Uitzoomen (meer van de foto zichtbaar)': 'Kicsinyítés (a fotó nagyobb része látható)',
-  'Inzoomen (minder van de foto zichtbaar)': 'Nagyítás (a fotó kisebb része látható)',
-  'Terugzetten (volledige afbeelding zichtbaar)': 'Visszaállítás (a teljes kép látható)',
+  'Uitzoomen (meer van de foto zichtbaar)':
+      'Kicsinyítés (a fotó nagyobb része látható)',
+  'Inzoomen (minder van de foto zichtbaar)':
+      'Nagyítás (a fotó kisebb része látható)',
+  'Terugzetten (volledige afbeelding zichtbaar)':
+      'Visszaállítás (a teljes kép látható)',
   'Zoom resetten': 'Nagyítás visszaállítása',
   'Preview inklappen': 'Előnézet összecsukása',
   'Preview uitklappen': 'Előnézet kibontása',
@@ -326,19 +363,23 @@ const _dutchSourceHu = {
   'Terug naar standaardstijl': 'Vissza az alapértelmezett stílushoz',
   'Automatisch doorgaan na': 'Automatikus továbblépés ennyi után',
   'Logo tonen op deze slide': 'Logó megjelenítése ezen a dián',
-  'Tabel bewerkbaar tijdens presenteren': 'A táblázat szerkeszthető bemutatás közben',
+  'Tabel bewerkbaar tijdens presenteren':
+      'A táblázat szerkeszthető bemutatás közben',
   'Footer tonen op deze slide': 'Lábléc megjelenítése ezen a dián',
   'Sprekersnotities...': 'Előadói jegyzetek...',
   'Sprekersnotities': 'Előadói jegyzetek',
   'Notities voor tijdens het presenteren': 'Jegyzetek a bemutatáshoz',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown': 'Markdown mód — a teljes prezentáció szerkesztése Marp Markdownként',
+  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+      'Markdown mód — a teljes prezentáció szerkesztése Marp Markdownként',
   'Toepassen': 'Alkalmazás',
-  'Markdown kon niet worden verwerkt. Controleer de syntax.': 'A Markdownt nem sikerült feldolgozni. Ellenőrizze a szintaxist.',
+  'Markdown kon niet worden verwerkt. Controleer de syntax.':
+      'A Markdownt nem sikerült feldolgozni. Ellenőrizze a szintaxist.',
   'Controleren': 'Szintaxis ellenőrzése',
   'Syntaxproblemen gevonden': 'Szintaxisproblémák találhatók',
   'De markdown bevat': 'A markdown tartalmaz',
   'fout(en) en': 'hibát és',
-  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.': 'figyelmeztetést. Emiatt a diák hibásan olvasódhatnak be.',
+  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+      'figyelmeztetést. Emiatt a diák hibásan olvasódhatnak be.',
   'Terug naar editor': 'Vissza a szerkesztőhöz',
   'Toch toepassen': 'Alkalmazás mindenképp',
   'Geen syntaxproblemen gevonden': 'Nem található szintaxisprobléma',
@@ -352,22 +393,30 @@ const _dutchSourceHu = {
   'Coverflow': 'Coverflow',
   'Geen afbeeldingen gevonden': 'Nem található kép',
   'Geen resultaten voor': 'Nincs találat erre:',
-  'Pas je zoekterm aan of voeg een beschrijving toe.': 'Módosítsa a keresőkifejezést vagy adjon hozzá leírást.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.': 'Használja a „Tallózás” gombot képek bármely helyről történő kiválasztásához.',
+  'Pas je zoekterm aan of voeg een beschrijving toe.':
+      'Módosítsa a keresőkifejezést vagy adjon hozzá leírást.',
+  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+      'Használja a „Tallózás” gombot képek bármely helyről történő kiválasztásához.',
   'Selecteer een\nafbeelding': 'Válasszon egy\nképet',
   'Gekopieerd': 'Másolva',
   'Afbeelding verwijderen?': 'Törli a képet?',
-  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.': 'A fájl véglegesen törlődik a lemezről. Ez a művelet nem vonható vissza.',
-  'Let op: deze afbeelding wordt nog gebruikt in': 'Figyelem: ez a kép még használatban van itt:',
-  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.': 'A törlés kiüríti azokat a diákat. Ez nem vonható vissza.',
-  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert': '↑↓←→ navigálás  ·  Enter választ  ·  Dupla kattintás kijelöl',
+  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+      'A fájl véglegesen törlődik a lemezről. Ez a művelet nem vonható vissza.',
+  'Let op: deze afbeelding wordt nog gebruikt in':
+      'Figyelem: ez a kép még használatban van itt:',
+  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+      'A törlés kiüríti azokat a diákat. Ez nem vonható vissza.',
+  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+      '↑↓←→ navigálás  ·  Enter választ  ·  Dupla kattintás kijelöl',
   'Sneltoetsen': 'Billentyűparancsok',
   'Toetsenlegenda': 'Billentyűjelmagyarázat',
   'spatie': 'szóköz',
   'klik': 'kattintás',
   'cijfers': 'számok',
-  'Klik of druk op ? / H / Esc om te sluiten': 'Kattints vagy nyomd meg a ? / H / Esc gombot a bezáráshoz',
-  'Klik of druk op H / Esc om te sluiten': 'Kattints vagy nyomd meg a H / Esc gombot a bezáráshoz',
+  'Klik of druk op ? / H / Esc om te sluiten':
+      'Kattints vagy nyomd meg a ? / H / Esc gombot a bezáráshoz',
+  'Klik of druk op H / Esc om te sluiten':
+      'Kattints vagy nyomd meg a H / Esc gombot a bezáráshoz',
   'Naar slidenummer': 'Ugrás diaszámra',
   'Eerste · laatste slide': 'Első · utolsó dia',
   'Slide-overzicht': 'Diaáttekintés',
@@ -399,24 +448,33 @@ const _dutchSourceHu = {
   'Geen notities voor deze slide.': 'Nincs jegyzet ehhez a diához.',
   'Mijn notities': 'Saját jegyzeteim',
   'Gebruikersnotities': 'Felhasználói jegyzetek',
-  'Gebruikersnotities voor deze slide...': 'Felhasználói jegyzetek ehhez a diához...',
+  'Gebruikersnotities voor deze slide...':
+      'Felhasználói jegyzetek ehhez a diához...',
   'Notities weggooien': 'Jegyzetek elvetése',
-  'Notities voor de ontvanger tijdens een cursus': 'Jegyzetek a résztvevőnek egy tanfolyam során',
-  'Schakel naar Markdown-modus om notities toe te voegen.': 'Válts Markdown módra a jegyzetek hozzáadásához.',
+  'Notities voor de ontvanger tijdens een cursus':
+      'Jegyzetek a résztvevőnek egy tanfolyam során',
+  'Schakel naar Markdown-modus om notities toe te voegen.':
+      'Válts Markdown módra a jegyzetek hozzáadásához.',
   'Mijn notities aan/uit': 'Saját jegyzeteim be/ki',
   'Wissel scherm (S)': 'Képernyőváltás (S)',
   'Kon niet van scherm wisselen.': 'Nem sikerült képernyőt váltani.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P közönség · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P közönség · S képernyő · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P közönség · H jelmagyarázat · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P közönség · H jelmagyarázat · S képernyő · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
-  'pijltjes + Enter of klik om te springen': 'nyilak + Enter vagy kattintás az ugráshoz',
+  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P közönség · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
+  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P közönség · S képernyő · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
+  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P közönség · H jelmagyarázat · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
+  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P közönség · H jelmagyarázat · S képernyő · G áttekintés · B/W fekete/fehér · R idő · Esc leállítás',
+  'pijltjes + Enter of klik om te springen':
+      'nyilak + Enter vagy kattintás az ugráshoz',
   'Afsluiten (Escape)': 'Kilépés (Escape)',
   'Sluiten (G of Esc)': 'Bezárás (G vagy Esc)',
   'Slide renderen…': 'Dia renderelése…',
   'Slide gekopieerd naar klembord.': 'Dia a vágólapra másolva.',
   'Kopiëren mislukt.': 'A másolás nem sikerült.',
-  'Geen ander deck open. Open eerst een ander tabblad.': 'Nincs másik deck megnyitva. Nyiss meg előbb egy másik lapot.',
+  'Geen ander deck open. Open eerst een ander tabblad.':
+      'Nincs másik deck megnyitva. Nyiss meg előbb egy másik lapot.',
   '1 slide kopiëren naar…': '1 dia másolása ide…',
   'slides kopiëren naar…': 'dia másolása ide…',
   'slide(s) gekopieerd naar': 'dia másolva ide:',
@@ -431,7 +489,8 @@ const _dutchSourceHu = {
   'Tips': 'Tippek',
   'Waarschuwingen': 'Figyelmeztetések',
   'Fouten': 'Hibák',
-  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Tipp: adj alt-szöveget / feliratot a hozzáférhetőségért',
+  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Tipp: adj alt-szöveget / feliratot a hozzáférhetőségért',
   'Zoek in slides…': 'Keresés a diákban…',
   'Geen slides met': 'Nincs dia ezzel:',
   'SLIDES': 'DIÁK',
@@ -446,60 +505,83 @@ const _dutchSourceHu = {
   'Kopiëren naar ander deck': 'Másolás másik deckbe',
   'Weer tonen': 'Megjelenítés újra',
   'Selectie opheffen': 'Kijelölés törlése',
-  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.': 'Elfogadom az EUPL 1.2 licencet, és elolvastam, milyen adatokat tárol az OciDeck.',
-  'Je keuze wordt de standaardtaal van de app.': 'A választásod lesz az alkalmazás alapértelmezett nyelve.',
+  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
+      'Elfogadom az EUPL 1.2 licencet, és elolvastam, milyen adatokat tárol az OciDeck.',
+  'Je keuze wordt de standaardtaal van de app.':
+      'A választásod lesz az alkalmazás alapértelmezett nyelve.',
   'Lees de volledige licentie': 'Teljes licenc elolvasása',
-  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.': 'Az OciDeck szabad szoftver az EUPL 1.2 licenc alatt. Mielőtt elkezded, kérünk, hogy fogadd el a licencet. Alább azt is elolvashatod, milyen adatokat tárol az OciDeck ezen az eszközön, és mikor hagy el bármi az eszközödet.',
-  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.': 'Az OciDeck nem gyűjt statisztikát, és magától nem küld semmit kifelé. Alapból minden ezen az eszközön marad. Adatok csak akkor hagyják el az eszközt, ha te úgy döntesz:\n\n•  Nextcloud/WebDAV: ha csatlakozol egy szerverhez, a felhasználóneved és jelszavad tárolódik (a jelszó biztonságosan a rendszered kulcstartójában), és a megnyitott vagy mentett prezentációk arra a szerverre kerülnek.\n•  Megnyitás URL-en át: az OciDeck a megadott címről tölti le a fájlt.\n•  Online média (alapból ki van kapcsolva): ha be van kapcsolva, az OciDeck a diáidban lévő címekről tölt be képeket és videókat.\n•  Külső hivatkozások (például az online licenc) a böngésződben nyílnak meg.',
-  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.': 'Az OciDeck az European Union Public Licence v1.2 alatt érhető el. Az elfogadással elfogadod ezt a licencet. Az OciDeck-et az EUPL 1.2 feltételei szerint használhatod, másolhatod, módosíthatod és terjesztheted.',
-  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.': 'A működéshez és hogy ne veszítsd el a munkádat, az OciDeck helyben tárol adatokat ezen az eszközön:\n\n•  A beállításaid és preferenciáid (nyelv, mappák, stílus- és megjelenítési profilok, legutóbbi fájlok).\n•  A prezentációs anyagaid: a mentett prezentációk, automatikus helyreállítási másolatok és mellékletek, például képleírások.\n•  Ez a hozzájárulási döntés.\n\nEzt eltávolíthatod a fájlok törlésével vagy a beállítások visszaállításával.',
-  'Volledige licentie online (23 officiële taalversies)': 'Teljes licenc online (23 hivatalos nyelvi változat)',
-  'Wat OciDeck op dit apparaat bewaart': 'Mit tárol az OciDeck ezen az eszközön',
+  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
+      'Az OciDeck szabad szoftver az EUPL 1.2 licenc alatt. Mielőtt elkezded, kérünk, hogy fogadd el a licencet. Alább azt is elolvashatod, milyen adatokat tárol az OciDeck ezen az eszközön, és mikor hagy el bármi az eszközödet.',
+  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.':
+      'Az OciDeck nem gyűjt statisztikát, és magától nem küld semmit kifelé. Alapból minden ezen az eszközön marad. Adatok csak akkor hagyják el az eszközt, ha te úgy döntesz:\n\n•  Nextcloud/WebDAV: ha csatlakozol egy szerverhez, a felhasználóneved és jelszavad tárolódik (a jelszó biztonságosan a rendszered kulcstartójában), és a megnyitott vagy mentett prezentációk arra a szerverre kerülnek.\n•  Megnyitás URL-en át: az OciDeck a megadott címről tölti le a fájlt.\n•  Online média (alapból ki van kapcsolva): ha be van kapcsolva, az OciDeck a diáidban lévő címekről tölt be képeket és videókat.\n•  Külső hivatkozások (például az online licenc) a böngésződben nyílnak meg.',
+  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.':
+      'Az OciDeck az European Union Public Licence v1.2 alatt érhető el. Az elfogadással elfogadod ezt a licencet. Az OciDeck-et az EUPL 1.2 feltételei szerint használhatod, másolhatod, módosíthatod és terjesztheted.',
+  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.':
+      'A működéshez és hogy ne veszítsd el a munkádat, az OciDeck helyben tárol adatokat ezen az eszközön:\n\n•  A beállításaid és preferenciáid (nyelv, mappák, stílus- és megjelenítési profilok, legutóbbi fájlok).\n•  A prezentációs anyagaid: a mentett prezentációk, automatikus helyreállítási másolatok és mellékletek, például képleírások.\n•  Ez a hozzájárulási döntés.\n\nEzt eltávolíthatod a fájlok törlésével vagy a beállítások visszaállításával.',
+  'Volledige licentie online (23 officiële taalversies)':
+      'Teljes licenc online (23 hivatalos nyelvi változat)',
+  'Wat OciDeck op dit apparaat bewaart':
+      'Mit tárol az OciDeck ezen az eszközön',
   'Wat je apparaat verlaat': 'Mi hagyja el az eszközödet',
-  'Vul server-URL en gebruikersnaam in': 'Add meg a szerver URL-jét és a felhasználónevet',
+  'Vul server-URL en gebruikersnaam in':
+      'Add meg a szerver URL-jét és a felhasználónevet',
   'Verbinding mislukt': 'A kapcsolat nem sikerült',
-  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord': 'A bejelentkezés nem sikerült — ellenőrizd a felhasználónevet és a jelszót',
-  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.': 'A szerver privát címen van. Jelöld be a „Megbízható belső szerver” lehetőséget a kapcsolat engedélyezéséhez.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord':
+      'A bejelentkezés nem sikerült — ellenőrizd a felhasználónevet és a jelszót',
+  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.':
+      'A szerver privát címen van. Jelöld be a „Megbízható belső szerver” lehetőséget a kapcsolat engedélyezéséhez.',
   'Map niet gevonden op de server': 'A mappa nem található a szerveren',
   'Ongeldige server-URL': 'Érvénytelen szerver-URL',
   'Het antwoord van de server was te groot': 'A szerver válasza túl nagy volt',
   'Nextcloud': 'Nextcloud',
   'Nextcloud-bron (WebDAV)': 'Nextcloud-forrás (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.': 'Nyiss meg és ments prezentációkat egy mappában a Nextcloudon. A jelszó titkosítva a kulcstartóban tárolódik, nem a többi beállítás mellett.',
+  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Nyiss meg és ments prezentációkat egy mappában a Nextcloudon. A jelszó titkosítva a kulcstartóban tárolódik, nem a többi beállítás mellett.',
   'Server-URL': 'Szerver-URL',
   'Gebruikersnaam': 'Felhasználónév',
   'App-wachtwoord': 'App-jelszó',
-  'Maak hiervoor een app-wachtwoord aan in Nextcloud': 'Ehhez hozz létre egy app-jelszót a Nextcloudban',
+  'Maak hiervoor een app-wachtwoord aan in Nextcloud':
+      'Ehhez hozz létre egy app-jelszót a Nextcloudban',
   'Submap (optioneel)': 'Almappa (opcionális)',
   'Vertrouwde interne server': 'Megbízható belső szerver',
-  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.': 'Akkor szükséges, ha a szerver privát vagy otthoni hálózaton (LAN) fut. Csak olyan szerverekhez engedélyezz kapcsolatot, amelyekben magad megbízol.',
+  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Akkor szükséges, ha a szerver privát vagy otthoni hálózaton (LAN) fut. Csak olyan szerverekhez engedélyezz kapcsolatot, amelyekben magad megbízol.',
   'Verbinding testen': 'Kapcsolat tesztelése',
   'Verbinding gelukt': 'A kapcsolat sikeres',
-  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.': 'A módosítások a Mentés gombra kattintva mentődnek.',
+  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
+      'A módosítások a Mentés gombra kattintva mentődnek.',
   'Afbeelding kiezen op Nextcloud': 'Kép választása a Nextcloudon',
   'Openen vanaf Nextcloud': 'Megnyitás a Nextcloudról',
   'Vernieuwen': 'Frissítés',
   'Deze map is leeg': 'Ez a mappa üres',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.': 'Nincs beállítva Nextcloud-szerver. Állíts be egyet a Beállítások → Nextcloud alatt.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.': 'Nem sikerült betölteni a mappát. Ellenőrizd a kapcsolatot és a beállításokat.',
+  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
+      'Nincs beállítva Nextcloud-szerver. Állíts be egyet a Beállítások → Nextcloud alatt.',
+  'Kon de map niet laden. Controleer je verbinding en instellingen.':
+      'Nem sikerült betölteni a mappát. Ellenőrizd a kapcsolatot és a beállításokat.',
   'Kon dit bestand niet openen.': 'Nem sikerült megnyitni ezt a fájlt.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Ez nem Marp/OciDeck prezentáció.',
   'Downloaden mislukt:': 'A letöltés nem sikerült:',
   'Opgeslagen op Nextcloud:': 'Mentve a Nextcloudra:',
   'Opslaan mislukt:': 'A mentés nem sikerült:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.': 'Előbb állíts be egy Nextcloud-szervert a Beállítások → Nextcloud alatt.',
+  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
+      'Előbb állíts be egy Nextcloud-szervert a Beállítások → Nextcloud alatt.',
   'Opslaan naar Nextcloud': 'Mentés a Nextcloudra',
   'Doelpad (zonder extensie)': 'Célútvonal (kiterjesztés nélkül)',
-  'Als .ocideck-pakket (één bestand, met assets)': '.ocideck csomagként (egy fájl, eszközökkel)',
+  'Als .ocideck-pakket (één bestand, met assets)':
+      '.ocideck csomagként (egy fájl, eszközökkel)',
   'Als losse .md plus afbeeldingen': 'Külön .md fájlként képekkel',
   'Opslaan': 'Mentés',
   'Presenteren': 'Előadás',
   'Tijden-overzicht tonen na afloop': 'Idő-áttekintés megjelenítése a végén',
-  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.': 'A diánkénti idő mindig mérésre kerül; ez csak azt szabályozza, hogy megjelenik-e az áttekintés ezután a prezentáció után.',
-  'Oefenoverzicht tonen na afloop': 'Gyakorlási összegzés megjelenítése a végén',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.': 'Egy prezentáció után jelenítsd meg a diánként eltöltött időt tartalmazó áttekintést. Az idő mindig mérésre kerül; ez csak azt szabályozza, hogy megjelenik-e a képernyő.',
+  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
+      'A diánkénti idő mindig mérésre kerül; ez csak azt szabályozza, hogy megjelenik-e az áttekintés ezután a prezentáció után.',
+  'Oefenoverzicht tonen na afloop':
+      'Gyakorlási összegzés megjelenítése a végén',
+  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+      'Egy prezentáció után jelenítsd meg a diánként eltöltött időt tartalmazó áttekintést. Az idő mindig mérésre kerül; ez csak azt szabályozza, hogy megjelenik-e a képernyő.',
   'Onveilige presentatie geblokkeerd': 'Nem biztonságos prezentáció letiltva',
-  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.': 'Ez a prezentáció nem lett megnyitva. A fájl olyan tartalmat tartalmaz, amely kódot futtathat, márpedig egy prezentáció csak adatot tartalmazhat — semmi futtathatót.',
+  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Ez a prezentáció nem lett megnyitva. A fájl olyan tartalmat tartalmaz, amely kódot futtathat, márpedig egy prezentáció csak adatot tartalmazhat — semmi futtathatót.',
   'Gevonden:': 'Talált:',
   'Regel': 'Sor',
   'Scriptuitvoering': 'Szkriptfuttatás',
@@ -521,46 +603,66 @@ const _dutchSourceHu = {
   'Pootje': 'Mancs',
   'In tweeën splitsen': 'Kettéosztás',
   'Uitgevoerde controles': 'Elvégzett ellenőrzések',
-  'Contrast en leesbaarheid van tekstkleuren': 'A szövegszínek kontrasztja és olvashatósága',
-  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media': 'Képek, diagramok és média alt-szövegei és feliratai',
+  'Contrast en leesbaarheid van tekstkleuren':
+      'A szövegszínek kontrasztja és olvashatósága',
+  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+      'Képek, diagramok és média alt-szövegei és feliratai',
   'Aanwezigheid van gekoppelde mediabestanden': 'Csatolt médiafájlok megléte',
-  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code': 'Szövegsűrűség: felsoroláspontok, szavak, idézetek, táblázatok és kód',
-  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).': 'Téma, diák, lábléc, ellenőrzőlista és képek fölötti címek, a WCAG AA szerint ellenőrizve (4,5:1 szövegnél, 3:1 nagy szövegnél).',
-  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.': 'Minden képhez, diagramhoz, videóhoz és hanghoz leírás kell a képernyőolvasók és a segédletek számára.',
-  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.': 'A képekre, videókra és hangokra való hivatkozásokat ellenőrizzük, hogy létező fájlra mutatnak-e a projektben.',
-  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.': 'A felsoroláspontok száma és hossza, a szavak, a beágyazottság, az oszlopok egyensúlya, valamint az idézetek, címek, táblázatok és kód sűrűsége, hogy minden olvashatóan elférjen.',
-  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.': 'A {crit}:1 alatti kontrasztú törzsszöveg hibának számít; efölött az AA-normáig figyelmeztetésnek.',
-  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.': 'Nincs küszöbérték: egy nem üres leírás kötelező.',
-  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.': 'Nincs küszöbérték: a csatolt fájlnak léteznie kell a projektmappán belül.',
-  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.': 'Figyelmeztetés {b1} felsoroláspont (1 oszlop), {bcl} (ellenőrzőlista) vagy {b2} (2 oszlop) felett; kritikus {bc1} vagy {bc2} felett. Szavak {w1}/{w2} felett, átlagosan {avg} felett felsoroláspontonként. Idézet {q} karakter felett, cím {t} karakter felett. Beágyazottság a(z) {lvl}. szintnél mélyebben. A {warn}% alá zsugorodó szöveg figyelmeztet, {crit}% alatt kritikus.',
+  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+      'Szövegsűrűség: felsoroláspontok, szavak, idézetek, táblázatok és kód',
+  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+      'Téma, diák, lábléc, ellenőrzőlista és képek fölötti címek, a WCAG AA szerint ellenőrizve (4,5:1 szövegnél, 3:1 nagy szövegnél).',
+  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+      'Minden képhez, diagramhoz, videóhoz és hanghoz leírás kell a képernyőolvasók és a segédletek számára.',
+  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+      'A képekre, videókra és hangokra való hivatkozásokat ellenőrizzük, hogy létező fájlra mutatnak-e a projektben.',
+  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+      'A felsoroláspontok száma és hossza, a szavak, a beágyazottság, az oszlopok egyensúlya, valamint az idézetek, címek, táblázatok és kód sűrűsége, hogy minden olvashatóan elférjen.',
+  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+      'A {crit}:1 alatti kontrasztú törzsszöveg hibának számít; efölött az AA-normáig figyelmeztetésnek.',
+  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+      'Nincs küszöbérték: egy nem üres leírás kötelező.',
+  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+      'Nincs küszöbérték: a csatolt fájlnak léteznie kell a projektmappán belül.',
+  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+      'Figyelmeztetés {b1} felsoroláspont (1 oszlop), {bcl} (ellenőrzőlista) vagy {b2} (2 oszlop) felett; kritikus {bc1} vagy {bc2} felett. Szavak {w1}/{w2} felett, átlagosan {avg} felett felsoroláspontonként. Idézet {q} karakter felett, cím {t} karakter felett. Beágyazottság a(z) {lvl}. szintnél mélyebben. A {warn}% alá zsugorodó szöveg figyelmeztet, {crit}% alatt kritikus.',
   'Zoek op deze computer': 'Keresés ezen a számítógépen',
-  'Presentaties zoeken op deze computer': 'Prezentációk keresése ezen a számítógépen',
+  'Presentaties zoeken op deze computer':
+      'Prezentációk keresése ezen a számítógépen',
   'Zoek op titel, pad of thema…': 'Keresés cím, útvonal vagy téma szerint…',
   'Bekende mappen worden doorzocht…': 'Ismert mappák átvizsgálása…',
   'gevonden': 'találat',
   'presentatie(s) gevonden': 'prezentáció található',
-  'Geen Marp-presentaties gevonden in de bekende mappen.': 'Nem található Marp-prezentáció az ismert mappákban.',
+  'Geen Marp-presentaties gevonden in de bekende mappen.':
+      'Nem található Marp-prezentáció az ismert mappákban.',
   'Geen thema': 'Nincs téma',
   'Kopieer syntaxproblemen': 'Szintaxisproblémák másolása',
-  'Syntaxproblemen gekopieerd naar klembord.': 'Szintaxisproblémák a vágólapra másolva.',
+  'Syntaxproblemen gekopieerd naar klembord.':
+      'Szintaxisproblémák a vágólapra másolva.',
   'Online media': 'Online média',
   'Online media staat uit': 'Az online média ki van kapcsolva',
   'Online media toestaan': 'Online média engedélyezése',
-  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.': 'Engedélyezd a képek és videók élő betöltését URL-ről, valamint YouTube/Vimeo beágyazásokból. A magánélet és biztonság érdekében alapból ki van kapcsolva.',
-  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)': 'Fájlútvonal vagy URL (YouTube, Vimeo, .mp4 …)',
+  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+      'Engedélyezd a képek és videók élő betöltését URL-ről, valamint YouTube/Vimeo beágyazásokból. A magánélet és biztonság érdekében alapból ki van kapcsolva.',
+  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+      'Fájlútvonal vagy URL (YouTube, Vimeo, .mp4 …)',
   'Bestand kiezen': 'Fájl választása',
-  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.': 'Játszd le ennek a diának a szakaszát az előnézetben, és vágd el azon a ponton, ahol osztani szeretnél: a második rész új diára kerül.',
+  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+      'Játszd le ennek a diának a szakaszát az előnézetben, és vágd el azon a ponton, ahol osztani szeretnél: a második rész új diára kerül.',
   'Begin (sec)': 'Kezdet (mp)',
   'Einde (sec)': 'Vége (mp)',
   'einde': 'vége',
-  'Knip de video op het huidige afspeelpunt': 'Vágd el a videót az aktuális lejátszási pontnál',
-  'Speel de video eerst af in het voorbeeld': 'Előbb játszd le a videót az előnézetben',
+  'Knip de video op het huidige afspeelpunt':
+      'Vágd el a videót az aktuális lejátszási pontnál',
+  'Speel de video eerst af in het voorbeeld':
+      'Előbb játszd le a videót az előnézetben',
   'Knip hier': 'Vágás itt',
   'Online': 'Online',
   'Lokaal bestand': 'Helyi fájl',
   'Geen video': 'Nincs videó',
   'Vraag (meerkeuze)': 'Kérdés (feleletválasztós)',
-  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding': 'A címszöveg kontrasztja túl kicsi a háttérképpel',
+  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+      'A címszöveg kontrasztja túl kicsi a háttérképpel',
   'Herstel': 'Javítás',
   'Tijdlijn': 'Idővonal',
   'Indeling': 'Elrendezés',
@@ -585,19 +687,24 @@ const _dutchSourceHu = {
   'Vraag': 'Kérdés',
   'Wat wil je vragen?': 'Mit szeretnél kérdezni?',
   'Antwoorden': 'Válaszok',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.': 'Jelöld meg a helyes válaszokat. Nincs korlát; előadáskor véletlenszerűen egy helyes és a többi hibás jelenik meg.',
+  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Jelöld meg a helyes válaszokat. Nincs korlát; előadáskor véletlenszerűen egy helyes és a többi hibás jelenik meg.',
   'Antwoord': 'Válasz',
   'Antwoord toevoegen': 'Válasz hozzáadása',
   'Goed antwoord': 'Helyes válasz',
-  'Geef minstens één goed én één fout antwoord op.': 'Adj meg legalább egy helyes és egy hibás választ.',
+  'Geef minstens één goed én één fout antwoord op.':
+      'Adj meg legalább egy helyes és egy hibás választ.',
   'Weergave': 'Megjelenítés',
   'Aantal getoonde opties': 'Megjelenített opciók száma',
-  'Maximale antwoordtijd in seconden (0 = geen limiet)': 'Maximális válaszidő másodpercben (0 = nincs korlát)',
+  'Maximale antwoordtijd in seconden (0 = geen limiet)':
+      'Maximális válaszidő másodpercben (0 = nincs korlát)',
   'Bij een fout antwoord': 'Hibás válasz esetén',
   'Opnieuw proberen': 'Újrapróbálkozás',
   'Doorgaan toestaan': 'Továbblépés engedélyezése',
-  'Fout = niet doorgaan; de vraag moet opnieuw.': 'Hibás = nem lehet továbblépni; a kérdést újra kell próbálni.',
-  'Fout = wel doorgaan, maar niet opnieuw doen.': 'Hibás = lehet továbblépni, de újrapróbálkozás nélkül.',
+  'Fout = niet doorgaan; de vraag moet opnieuw.':
+      'Hibás = nem lehet továbblépni; a kérdést újra kell próbálni.',
+  'Fout = wel doorgaan, maar niet opnieuw doen.':
+      'Hibás = lehet továbblépni, de újrapróbálkozás nélkül.',
   'Afbeelding (optioneel)': 'Kép (opcionális)',
   'Breedte afbeelding': 'Kép szélessége',
   'Goed!': 'Helyes!',
@@ -612,46 +719,58 @@ const _dutchSourceHu = {
   'Juist / Onjuist': 'Igaz / Hamis',
   'Meerdere juiste antwoorden': 'Több helyes válasz',
   'Stelling': 'Állítás',
-  'Formuleer een stelling die juist of onjuist is': 'Fogalmazz meg egy állítást, amely igaz vagy hamis',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.': 'Jelöld meg az összes helyes választ. Előadáskor egy véletlenszerű halmaz jelenik meg, legalább egy helyessel és egy hibással.',
+  'Formuleer een stelling die juist of onjuist is':
+      'Fogalmazz meg egy állítást, amely igaz vagy hamis',
+  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+      'Jelöld meg az összes helyes választ. Előadáskor egy véletlenszerű halmaz jelenik meg, legalább egy helyessel és egy hibással.',
   'Juist': 'Igaz',
   'Onjuist': 'Hamis',
-  'De stelling hierboven is juist of onjuist; kies welke.': 'A fenti állítás igaz vagy hamis; válaszd ki, melyik.',
+  'De stelling hierboven is juist of onjuist; kies welke.':
+      'A fenti állítás igaz vagy hamis; válaszd ki, melyik.',
   'Selecteer alle juiste antwoorden': 'Válaszd ki az összes helyes választ',
   'Bevestig': 'Megerősítés',
   'Het juiste antwoord': 'A helyes válasz',
-  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.': 'A kép teljes képernyős háttérként jelenik meg. Használd az elmosást, ha a címnek több nyugalomra vagy kontrasztra van szüksége.',
+  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+      'A kép teljes képernyős háttérként jelenik meg. Használd az elmosást, ha a címnek több nyugalomra vagy kontrasztra van szüksége.',
   'Cockpit-kleurschema': 'Cockpit-színséma',
-  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.': 'A cockpit-mérők állapotszínei. Hozz létre elnevezett változatokat; a kiválasztott séma minden cockpit-diára érvényes.',
+  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+      'A cockpit-mérők állapotszínei. Hozz létre elnevezett változatokat; a kiválasztott séma minden cockpit-diára érvényes.',
   'Standaard': 'Alapértelmezett',
   'Standaardkleuren gebruiken': 'Alapértelmezett színek használata',
   'Kleurschema verwijderen': 'Színséma törlése',
   'Schemanaam': 'Séma neve',
-  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.': 'Ez a beépített séma. Készíts másolatot a színek módosításához.',
+  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+      'Ez a beépített séma. Készíts másolatot a színek módosításához.',
   'Goed': 'Jó',
   'Waarschuwing': 'Figyelmeztetés',
   'Kritiek': 'Kritikus',
   'Te laag (koud)': 'Túl alacsony (hideg)',
   'Lucht (horizon)': 'Ég (horizont)',
   'Grond (horizon)': 'Talaj (horizont)',
-  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.': 'Az állapotszínek a cockpit-színsémát követik; módosítsd, vagy hozz létre változatokat a Beállítások → Cockpit alatt.',
+  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+      'Az állapotszínek a cockpit-színsémát követik; módosítsd, vagy hozz létre változatokat a Beállítások → Cockpit alatt.',
   'Veel bullets op deze slide': 'Sok felsoroláspont ezen a dián',
   'bullets': 'felsoroláspont',
   'Overweeg de inhoud te splitsen.': 'Fontold meg a tartalom felosztását.',
   'Erg veel bullets op deze slide': 'Túl sok felsoroláspont ezen a dián',
-  'Splits deze inhoud over meerdere slides.': 'Oszd fel ezt a tartalmat több diára.',
+  'Splits deze inhoud over meerdere slides.':
+      'Oszd fel ezt a tartalmat több diára.',
   'Veel woorden in bullets': 'Sok szó a felsoroláspontokban',
   'woorden': 'szó',
-  'Maak bullets korter of splits de slide.': 'Rövidítsd a felsoroláspontokat, vagy oszd fel a diát.',
+  'Maak bullets korter of splits de slide.':
+      'Rövidítsd a felsoroláspontokat, vagy oszd fel a diát.',
   'Erg veel woorden in bullets': 'Túl sok szó a felsoroláspontokban',
   'Gemiddeld lange bullets': 'Átlagosan hosszú felsoroláspontok',
   'woorden per bullet': 'szó pontonként',
   'Maak elke bullet kernachtiger.': 'Tegye tömörebbé az egyes pontokat.',
-  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.': 'Több mondatot tartalmazó pont található. Tegye tömörebbé a pontokat, vagy ossza szét a tartalmat.',
+  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+      'Több mondatot tartalmazó pont található. Tegye tömörebbé a pontokat, vagy ossza szét a tartalmat.',
   'Diepe bulletniveaus gevonden': 'Mély felsorolásszintek találhatók',
   'niveau': 'szint',
-  'Beperk nesting voor betere leesbaarheid.': 'Korlátozza a beágyazást a jobb olvashatóság érdekében.',
-  'Twee kolommen zijn sterk uit balans': 'A két oszlop erősen kiegyensúlyozatlan',
+  'Beperk nesting voor betere leesbaarheid.':
+      'Korlátozza a beágyazást a jobb olvashatóság érdekében.',
+  'Twee kolommen zijn sterk uit balans':
+      'A két oszlop erősen kiegyensúlyozatlan',
   'tegenover': 'szemben',
   'Verdeel of splits de inhoud.': 'Ossza el vagy szét a tartalmat.',
   'Slidetitel': 'Diacím',
@@ -661,7 +780,8 @@ const _dutchSourceHu = {
   'Activatieduur': 'Aktiválási időtartam',
   'Splits slide': 'Dia szétosztása',
   'Doornummeren vanaf vorige slide': 'Számozás folytatása az előző diáról',
-  'Begin de nummering waar de vorige slide ophield.': 'Kezdje a számozást ott, ahol az előző dia abbamaradt.',
+  'Begin de nummering waar de vorige slide ophield.':
+      'Kezdje a számozást ott, ahol az előző dia abbamaradt.',
   'Volg thema-animatieduur': 'Téma animációs időtartamának követése',
   'Animatie bij openen': 'Animálás belépéskor',
   'Meter': 'Műszer',
@@ -689,7 +809,8 @@ const _dutchSourceHu = {
   'Koers': 'Irány',
   'Ander profiel kiezen': 'Másik profil kiválasztása',
   'Cockpit': 'Pilótafülke',
-  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'A visszaszámlálás céldeje a prezentálóban. Prezentálás közben a K billentyűvel finomhangolható.',
+  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'A visszaszámlálás céldeje a prezentálóban. Prezentálás közben a K billentyűvel finomhangolható.',
   'Logo en footer': 'Logó és lábléc',
   'Pagina': 'Oldal',
   'Presentatiestijl': 'Prezentációs stílus',
@@ -706,10 +827,12 @@ const _dutchSourceHu = {
   'Doeltijd': 'Célidő',
   'Doeltijd (aftellen)': 'Célidő (visszaszámlálás)',
   'Geen aftelling': 'Nincs visszaszámlálás',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Alapértelmezett céldő a prezentáló visszaszámlálásához. Prezentálás közben a K billentyűvel finomhangolható.',
+  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Alapértelmezett céldő a prezentáló visszaszámlálásához. Prezentálás közben a K billentyűvel finomhangolható.',
   'uit': 'ki',
   'Doeltijd / aftellen (K)': 'Célidő / visszaszámlálás (K)',
-  'Doeltijd / aftellen instellen (MMSS)': 'Célidő / visszaszámlálás beállítása (PPMM)',
+  'Doeltijd / aftellen instellen (MMSS)':
+      'Célidő / visszaszámlálás beállítása (PPMM)',
   'Tijd & oefenrun resetten': 'Idő és próbafutás visszaállítása',
   'Resterend': 'Hátralévő',
   'Over de tijd': 'Túllépve',
@@ -723,25 +846,32 @@ const _dutchSourceHu = {
   'Kopieer': 'Másolás',
   'Sluiten': 'Bezárás',
   'Tekstgrootte van de interface': 'A felület szövegmérete',
-  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.': 'A szerkesztőkörnyezet minden szövegét legfeljebb 200%-ra nagyítja. Maguk a diák nem változnak.',
+  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+      'A szerkesztőkörnyezet minden szövegét legfeljebb 200%-ra nagyítja. Maguk a diák nem változnak.',
   'Breedte van het slidepaneel': 'A diapanel szélessége',
-  'Pijltjestoetsen passen de breedte aan': 'A nyílbillentyűk állítják a szélességet',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.': 'Tipp: illesszen be egy táblázatot a táblázatkezelőből egy cellába a Cmd/Ctrl+V billentyűkkel az egész táblázat kitöltéséhez.',
+  'Pijltjestoetsen passen de breedte aan':
+      'A nyílbillentyűk állítják a szélességet',
+  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+      'Tipp: illesszen be egy táblázatot a táblázatkezelőből egy cellába a Cmd/Ctrl+V billentyűkkel az egész táblázat kitöltéséhez.',
   'Annuleren': 'Mégse',
   'Checklist': 'Feladatlista',
   'Voortgangsgrafiek tonen': 'Előrehaladási diagram megjelenítése',
-  'Toont afgevinkt en niet afgevinkt als percentages.': 'A bejelölt és be nem jelölt elemeket százalékban mutatja.',
+  'Toont afgevinkt en niet afgevinkt als percentages.':
+      'A bejelölt és be nem jelölt elemeket százalékban mutatja.',
   'Afgevinkt': 'Bejelölve',
   'Niet afgevinkt': 'Nincs bejelölve',
-  'Er zijn geen aangevinkte checklist-items om te legen.': 'Nincsenek bejelölt feladatlista-elemek a törléshez.',
+  'Er zijn geen aangevinkte checklist-items om te legen.':
+      'Nincsenek bejelölt feladatlista-elemek a törléshez.',
   'Alle checkboxen legen?': 'Törli az összes jelölőnégyzetet?',
   'Hiermee worden alle': 'Ezzel megszünteti az összes',
-  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.': 'bejelölt feladatlista-elem jelölését az egész prezentációban. Ezt a Ctrl/Cmd+Z billentyűkkel visszavonhatja.',
+  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+      'bejelölt feladatlista-elem jelölését az egész prezentációban. Ezt a Ctrl/Cmd+Z billentyűkkel visszavonhatja.',
   'Alles legen': 'Összes törlése',
   'checklist-items uitgevinkt.': 'feladatlista-elem jelölése megszüntetve.',
   'Alle checkboxen legen': 'Összes jelölőnégyzet törlése',
   'Afgevinkte tekst doorhalen': 'Bejelölt szöveg áthúzása',
-  'Toont een streep door voltooide checklistitems.': 'A befejezett feladatlista-elemeket áthúzva jeleníti meg.',
+  'Toont een streep door voltooide checklistitems.':
+      'A befejezett feladatlista-elemeket áthúzva jeleníti meg.',
   'Na media automatisch doorgaan': 'Automatikus továbblépés média után',
   'Opsomming': 'Felsorolás',
   'Nummering': 'Számozás',
@@ -751,11 +881,13 @@ const _dutchSourceHu = {
   'Omhoog': 'Felfelé',
   'Omlaag': 'Lefelé',
   'Niet toevoegen': 'Ne adja hozzá',
-  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.': 'Ezek a diák azonos adatokat, színeket és címet használnak. A nyilakkal válassza ki a sorrendjüket a jelenlegi dia után.',
+  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+      'Ezek a diák azonos adatokat, színeket és címet használnak. A nyilakkal válassza ki a sorrendjüket a jelenlegi dia után.',
   'Afbeelding': 'Kép',
   'Broncode': 'Forráskód',
   'Bullet': 'Felsoroláspont',
-  'Plak of typ hier je broncode...': 'Illessze be vagy írja ide a forráskódját...',
+  'Plak of typ hier je broncode...':
+      'Illessze be vagy írja ide a forráskódját...',
   'Programmeertaal': 'Programozási nyelv',
   'TLP van deze slide': 'A dia TLP-je',
   'Wis annotaties (C)': 'Jegyzetek törlése (C)',
@@ -769,10 +901,12 @@ const _dutchSourceHu = {
   'Cirkel': 'Kör',
   'Spider': 'Pók',
   'CSV importeren': 'CSV importálása',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)': 'Adatok (CSV: első sor = adatsorok nevei, első oszlop = címkék)',
+  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+      'Adatok (CSV: első sor = adatsorok nevei, első oszlop = címkék)',
   'Gekoppeld aan': 'Kapcsolva ehhez',
   'Ontkoppelen': 'Leválasztás',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?': 'Adatokat a diában tárolja, vagy külön CSV-fájlként őrizze meg a prezentáció mellett?',
+  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+      'Adatokat a diában tárolja, vagy külön CSV-fájlként őrizze meg a prezentáció mellett?',
   'In de slide': 'A diában',
   'Als CSV-bestand': 'CSV-fájlként',
   'Geen grafiekgegevens': 'Nincsenek diagramadatok',
@@ -785,9 +919,12 @@ const _dutchSourceHu = {
   'Sorteren': 'Rendezés',
   'Oplopend sorteren': 'Növekvő rendezés',
   'Aflopend sorteren': 'Csökkenő rendezés',
-  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.': 'Kördiagramnál legfeljebb az első két adatsor jelenik meg; a címkék alkotják a szeleteket.',
-  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.': 'A pókdiagramhoz legalább három címke (tengely) szükséges; minden adatsor egy alakzatot alkot.',
-  'Een spider-diagram heeft minstens drie labels nodig': 'A pókdiagramhoz legalább három címke szükséges',
+  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+      'Kördiagramnál legfeljebb az első két adatsor jelenik meg; a címkék alkotják a szeleteket.',
+  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+      'A pókdiagramhoz legalább három címke (tengely) szükséges; minden adatsor egy alakzatot alkot.',
+  'Een spider-diagram heeft minstens drie labels nodig':
+      'A pókdiagramhoz legalább három címke szükséges',
   'Minimumlijn (optioneel)': 'Minimumvonal (opcionális)',
   'Maximumlijn (optioneel)': 'Maximumvonal (opcionális)',
   'Schaalminimum (optioneel)': 'Skálaminimum (opcionális)',
@@ -796,9 +933,11 @@ const _dutchSourceHu = {
   'Broncode achtergrond': 'Forráskód háttere',
   'Broncode tekst': 'Forráskód szövege',
   'Syntaxkleuring': 'Szintaxiskiemelés',
-  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).': 'Ki = minden egy színben (pl. zöld feketén egy CRT-képernyőhöz).',
+  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+      'Ki = minden egy színben (pl. zöld feketén egy CRT-képernyőhöz).',
   'Eigen kleur (hex)': 'Egyéni szín (hex)',
-  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.': 'Például #33FF33 egy CRT-zöld képernyőhöz.',
+  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+      'Például #33FF33 egy CRT-zöld képernyőhöz.',
   'Onderdeel van stijlprofiel ': 'A stílusprofil része ',
   'Broncode lettertype': 'Forráskód betűtípusa',
   'Kop (optioneel)': 'Fejléc (opcionális)',
@@ -806,38 +945,48 @@ const _dutchSourceHu = {
   'Subkop': 'Alcím',
   'Systeem (monospace)': 'Rendszer (állandó szélességű)',
   'Platte tekst': 'Egyszerű szöveg',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.': 'A HTML internet nélkül bármely böngészőben megnyílik, és megjeleníti a kódblokkokat, matematikát és Mermaid-diagramokat.',
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+      'A HTML internet nélkül bármely böngészőben megnyílik, és megjeleníti a kódblokkokat, matematikát és Mermaid-diagramokat.',
   'Laatste slide': 'Utolsó dia',
   'Logo px': 'Logó px',
   'Markdown voor laatste slide': 'Markdown az utolsó diához',
   'PREVIEW': 'ELŐNÉZET',
   'Slides gerenderd.': 'Diák megjelenítve.',
   'Standaard laatste slide gebruiken': 'Alapértelmezett utolsó dia használata',
-  'Wordt automatisch toegevoegd bij presenteren en exporteren.': 'Prezentáláskor és exportáláskor automatikusan hozzáadódik.',
+  'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+      'Prezentáláskor és exportáláskor automatikusan hozzáadódik.',
   'gerenderd.': 'megjelenítve.',
   'renderen…': 'megjelenítés…',
   'voorbereiden…': 'előkészítés…',
   'Duplicaten opruimen': 'Duplikátumok tisztítása',
-  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën': 'Bájtazonos képek keresése (md5), címkék és megjegyzések egyesítése, majd a másolatok eltávolítása',
+  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+      'Bájtazonos képek keresése (md5), címkék és megjegyzések egyesítése, majd a másolatok eltávolítása',
   'Geen dubbele afbeeldingen gevonden.': 'Nem található duplikált kép.',
   'Dubbele afbeeldingen opruimen?': 'Tisztítja a duplikált képeket?',
-  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.': 'Csoportonként egy fájl marad meg. A címkék és megjegyzések egyesülnek, és a másolatot használó diák ezután a megtartott fájlra hivatkoznak — beleértve a jelenleg meg nem nyitott prezentációkat is.',
+  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+      'Csoportonként egy fájl marad meg. A címkék és megjegyzések egyesülnek, és a másolatot használó diák ezután a megtartott fájlra hivatkoznak — beleértve a jelenleg meg nem nyitott prezentációkat is.',
   'Opruimen': 'Tisztítás',
   '1 presentatiebestand bijgewerkt.': '1 prezentációfájl frissítve.',
   'presentatiebestanden bijgewerkt.': 'prezentációfájl frissítve.',
   'niet geopend': 'nincs megnyitva',
   '1 dubbele afbeelding verwijderd.': '1 duplikált kép eltávolítva.',
   'dubbele afbeeldingen verwijderd.': 'duplikált kép eltávolítva.',
-  'Alleen afbeeldingen zonder tags tonen': 'Csak a címke nélküli képek megjelenítése',
+  'Alleen afbeeldingen zonder tags tonen':
+      'Csak a címke nélküli képek megjelenítése',
   'Alle afbeeldingen hebben tags.': 'Minden képnek van címkéje.',
-  'Zet het filter uit om alles weer te zien.': 'Kapcsolja ki a szűrőt, hogy újra mindent lásson.',
+  'Zet het filter uit om alles weer te zien.':
+      'Kapcsolja ki a szűrőt, hogy újra mindent lásson.',
   'Welkom bij OciDeck': 'Üdvözli az OciDeck',
   'Privacy en gebruik': 'Adatvédelem és használat',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'Az OciDeck egy helyi asztali alkalmazás. A prezentációit és adatait kizárólag a számítógépén tárolja.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'Az alkalmazás nem gyűjt személyes adatokat, statisztikákat vagy használati adatokat. A magánélete a mi prioritásunk.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Minden adat, amelyet az OciDeckbe beír, a helyi rendszerén marad, és nem kerül külső szerverekre.',
+  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
+      'Az OciDeck egy helyi asztali alkalmazás. A prezentációit és adatait kizárólag a számítógépén tárolja.',
+  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
+      'Az alkalmazás nem gyűjt személyes adatokat, statisztikákat vagy használati adatokat. A magánélete a mi prioritásunk.',
+  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
+      'Minden adat, amelyet az OciDeckbe beír, a helyi rendszerén marad, és nem kerül külső szerverekre.',
   'Licentie (EUPL 1.2)': 'Licenc (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'Az „Elfogadom” gombra kattintva elfogadja ezeket a feltételeket, és hozzájárul az OciDeck használatához.',
+  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
+      'Az „Elfogadom” gombra kattintva elfogadja ezeket a feltételeket, és hozzájárul az OciDeck használatához.',
   'Volledige licentie online': 'Teljes licenc online',
   'Akkoord gaan': 'Elfogadom',
   'Privacy': 'Adatvédelem',
@@ -845,16 +994,21 @@ const _dutchSourceHu = {
   'Toestemming intrekken': 'Hozzájárulás visszavonása',
   'Toestemming intrekken?': 'Visszavonja a hozzájárulást?',
   'Intrekken': 'Visszavonás',
-  'U hebt al toegestemd in het gebruik van OciDeck.': 'Ön már hozzájárult az OciDeck használatához.',
-  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.': 'Hozzájárulását bármikor visszavonhatja. Visszavonás után újra el kell fogadnia ezeket a feltételeket.',
-  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.': 'Ha visszavonja hozzájárulását, az OciDeck újraindításakor újra el kell fogadnia ezeket a feltételeket.',
+  'U hebt al toegestemd in het gebruik van OciDeck.':
+      'Ön már hozzájárult az OciDeck használatához.',
+  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+      'Hozzájárulását bármikor visszavonhatja. Visszavonás után újra el kell fogadnia ezeket a feltételeket.',
+  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+      'Ha visszavonja hozzájárulását, az OciDeck újraindításakor újra el kell fogadnia ezeket a feltételeket.',
   'Slidekwaliteit': 'Diaminőség',
   'Geen kwaliteitsproblemen gevonden': 'Nem található minőségi probléma',
   'Thema (hele presentatie)': 'Téma (teljes prezentáció)',
   'Kwaliteitsprobleem': 'Minőségi probléma',
   'Kwaliteitsproblemen': 'Minőségi problémák',
-  'Kwaliteitsproblemen (inclusief ernstige)': 'Minőségi problémák (a súlyosakat is beleértve)',
-  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Adjon hozzá alt-szöveget / feliratot az akadálymentesség érdekében',
+  'Kwaliteitsproblemen (inclusief ernstige)':
+      'Minőségi problémák (a súlyosakat is beleértve)',
+  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Adjon hozzá alt-szöveget / feliratot az akadálymentesség érdekében',
   'Alt-tekst': 'Alt-szöveg',
   'Tekstdichtheid': 'Szövegsűrűség',
   'Contrast': 'Kontraszt',
@@ -864,22 +1018,32 @@ const _dutchSourceHu = {
   ':1 voor normale tekst).': ':1 normál szöveghez).',
   ':1 voor grote tekst).': ':1 nagy szöveghez).',
   ':1).': ':1).',
-  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.': 'A képen vagy kép fölött lévő szöveg kontrasztja nem ellenőrizhető automatikusan — ellenőrizze vizuálisan.',
-  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.': 'A diagramnak nincs címe vagy leíró adata — adjon hozzá címet vagy adatsornevet.',
-  'heeft geen titel of sprekernotities die de inhoud beschrijven.': 'nincs a tartalmat leíró címe vagy előadói jegyzete.',
-  'Veel tekst op deze slide: het lettertype wordt verkleind tot ': 'Sok szöveg ezen a dián: a betűméret csökken erre: ',
+  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+      'A képen vagy kép fölött lévő szöveg kontrasztja nem ellenőrizhető automatikusan — ellenőrizze vizuálisan.',
+  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+      'A diagramnak nincs címe vagy leíró adata — adjon hozzá címet vagy adatsornevet.',
+  'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+      'nincs a tartalmat leíró címe vagy előadói jegyzete.',
+  'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+      'Sok szöveg ezen a dián: a betűméret csökken erre: ',
   ' van de ontwerpgrootte.': ' a tervezési méretnek.',
-  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (': 'Sok szöveg ezen a dián: a betűméret erősen csökken (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.': 'a tervezési méretnek). Fontolja meg a tartalom szétosztását.',
+  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+      'Sok szöveg ezen a dián: a betűméret erősen csökken (',
+  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      'a tervezési méretnek). Fontolja meg a tartalom szétosztását.',
   'Grote tabel (': 'Nagy táblázat (',
   ' rijen, ': ' sor, ',
-  ' kolommen): celtekst staat op het minimumformaat.': ' oszlop): a cellaszöveg a minimális méreten van.',
+  ' kolommen): celtekst staat op het minimumformaat.':
+      ' oszlop): a cellaszöveg a minimális méreten van.',
   'Veel broncode (': 'Sok forráskód (',
-  ' regels) — de tekst wordt sterk verkleind om te passen.': ' sor) — a szöveg erősen csökken, hogy elférjen.',
+  ' regels) — de tekst wordt sterk verkleind om te passen.':
+      ' sor) — a szöveg erősen csökken, hogy elférjen.',
   'Veel vrije markdown (': 'Sok szabad markdown (',
-  ' regels) — controleer of alles leesbaar blijft op de slide.': ' sor) — ellenőrizze, hogy minden olvasható marad-e a dián.',
+  ' regels) — controleer of alles leesbaar blijft op de slide.':
+      ' sor) — ellenőrizze, hogy minden olvasható marad-e a dián.',
   'Lange titelpagina (': 'Hosszú címoldal (',
-  ' tekens) — de tekst wordt verkleind om te passen.': ' karakter) — a szöveg csökken, hogy elférjen.',
+  ' tekens) — de tekst wordt verkleind om te passen.':
+      ' karakter) — a szöveg csökken, hogy elférjen.',
   'Thema bodytekst': 'Téma törzsszövege',
   'Thema titel': 'Téma címe',
   'Thema tabeltekst': 'Téma táblázatszövege',
@@ -890,34 +1054,46 @@ const _dutchSourceHu = {
   'Tweede afbeelding': 'Második kép',
   'Waarschuwing bij export': 'Figyelmeztetés exportáláskor',
   'Minimale contrastverhouding': 'Minimális kontrasztarány',
-  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.': 'Az ez alatti arányú szöveg megjelölésre kerül. 4.5 = WCAG AA, 3.0 = WCAG AA nagy szöveg. Magasabb szigorúbb.',
-  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.': 'Kérjen megerősítést az exportálás előtt, ha diaminőségi problémák vannak.',
+  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.':
+      'Az ez alatti arányú szöveg megjelölésre kerül. 4.5 = WCAG AA, 3.0 = WCAG AA nagy szöveg. Magasabb szigorúbb.',
+  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+      'Kérjen megerősítést az exportálás előtt, ha diaminőségi problémák vannak.',
   'Kwaliteitsproblemen gevonden': 'Minőségi problémák találhatók',
   'Toch exporteren': 'Exportálás mindenképp',
   'ernstige probleem(en)': 'súlyos probléma',
-  'De presentatie heeft kwaliteitsproblemen (': 'A prezentációnak minőségi problémái vannak (',
+  'De presentatie heeft kwaliteitsproblemen (':
+      'A prezentációnak minőségi problémái vannak (',
   'Lange quote (': 'Hosszú idézet (',
   'Footer-tekst': 'Lábléc szövege',
   'Checklist (niet aangevinkt)': 'Feladatlista (nincs bejelölve)',
   'Checklist (aangevinkt)': 'Feladatlista (bejelölve)',
   ': bestand niet gevonden (': ': fájl nem található (',
-  'Blokkeer export bij ernstige kwaliteitsproblemen': 'Export letiltása súlyos minőségi problémák esetén',
-  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.': 'Az exportálás nem lehetséges, amíg a diaminőség-ellenőrzés hibákat jelez.',
-  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.': 'Az exportálás súlyos minőségi problémák miatt letiltva.',
+  'Blokkeer export bij ernstige kwaliteitsproblemen':
+      'Export letiltása súlyos minőségi problémák esetén',
+  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+      'Az exportálás nem lehetséges, amíg a diaminőség-ellenőrzés hibákat jelez.',
+  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+      'Az exportálás súlyos minőségi problémák miatt letiltva.',
   'Alle meldingen': 'Minden üzenet',
-  '… en meer problemen in het kwaliteitspaneel.': '… és további problémák a minőségpanelen.',
+  '… en meer problemen in het kwaliteitspaneel.':
+      '… és további problémák a minőségpanelen.',
   'Classificatie-handhaving': 'Osztályozás érvényesítése',
   'Vrijgaveplafond': 'Kiadási plafon',
-  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.': 'A legmagasabb exportálható TLP-szint. Üres = nincs plafon.',
+  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+      'A legmagasabb exportálható TLP-szint. Üres = nincs plafon.',
   'Vereist minimumniveau': 'Kötelező minimumszint',
-  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.': 'A legalacsonyabb osztályozás, amellyel egy deck exportálható. Üres = nincs minimum.',
+  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+      'A legalacsonyabb osztályozás, amellyel egy deck exportálható. Üres = nincs minimum.',
   'Geen plafond': 'Nincs plafon',
   'Geen minimum': 'Nincs minimum',
   'Classificatie verplicht': 'Osztályozás kötelező',
-  'Weiger export wanneer het deck geen TLP-niveau heeft.': 'Az exportálás megtagadása, ha a deck nem rendelkezik TLP-szinttel.',
+  'Weiger export wanneer het deck geen TLP-niveau heeft.':
+      'Az exportálás megtagadása, ha a deck nem rendelkezik TLP-szinttel.',
   'Classificatie-watermerk': 'Osztályozási vízjel',
-  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.': 'Átlós vízjel megjelenítése TLP-vel és szervezettel minden dián.',
-  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.': 'Állítson be egy TLP-szintet — az exportálást az osztályozási házirend letiltja.',
+  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+      'Átlós vízjel megjelenítése TLP-vel és szervezettel minden dián.',
+  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+      'Állítson be egy TLP-szintet — az exportálást az osztályozási házirend letiltja.',
   'Tabel bewerken': 'Táblázat szerkesztése',
   'Pijltjes · Tab · Esc': 'Nyilak · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Táblázat szerkesztése (táblázatos dián)',

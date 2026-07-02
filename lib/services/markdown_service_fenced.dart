@@ -1,15 +1,95 @@
 // Part of the markdown_service library — see markdown_service.dart.
 // Split out for navigability (fenced-block parsers: code/chart/cockpit/question); all imports live in the main library
-// file. These private MarkdownService parse methods relocate verbatim into
-// an extension — same library, same members, no behaviour change.
+// file.
 part of 'markdown_service.dart';
 
 // Hoisted hot-path regexes (zie markdown_service_parse.dart): deze draaien in
 // de per-regel lus van elke fenced-blok-parser.
 final _reFenceInfo = RegExp(r'^\s*```(.*)$');
-final _reFenceLine = RegExp(r'^\s*```');
 final _reImageMdAllowEmpty = RegExp(r'!\[[^\]]*\]\(([^)]*)\)');
 final _reHtmlTag = RegExp(r'<[^>]+>');
+
+/// Wat één pass over een fenced slide-blok oplevert. De vier fenced slidetypes
+/// (code/chart/cockpit/question) delen dezelfde structuur — optionele
+/// `# titel`, het fenced blok, optionele afbeelding+bijschrift en `<audio>` —
+/// en verschillen alleen in welke velden ze gebruiken en hoe de blok-inhoud
+/// wordt getransformeerd.
+class _FencedScan {
+  String title = '';
+
+  /// Infostring van de openende fence (bij code-slides de taal).
+  String fenceInfo = '';
+  final content = <String>[];
+  String imagePath = '';
+  String imageCaption = '';
+  String audioPath = '';
+  bool audioAutoplay = false;
+
+  String get contentJoined => content.join('\n');
+}
+
+/// Scant [remaining] regel voor regel: fence-inhoud gaat naar
+/// [_FencedScan.content], daarbuiten worden titel, afbeelding, bijschrift en
+/// audio herkend. Velden die een slidetype niet gebruikt, negeert de parser.
+_FencedScan _scanFencedBlock(String remaining) {
+  final scan = _FencedScan();
+  var inFence = false;
+  for (final line in remaining.split('\n')) {
+    final fence = _reFenceInfo.firstMatch(line);
+    if (fence != null) {
+      if (!inFence) {
+        inFence = true;
+        scan.fenceInfo = fence.group(1)!.trim();
+      } else {
+        inFence = false;
+      }
+      continue;
+    }
+    if (inFence) {
+      scan.content.add(line);
+      continue;
+    }
+    final t = line.trim();
+    if (t.startsWith('# ') && scan.title.isEmpty) {
+      scan.title = t.substring(2).trim();
+    } else if (t.startsWith('![')) {
+      final m = _reImageMdAllowEmpty.firstMatch(t);
+      if (m != null) scan.imagePath = m.group(1) ?? '';
+    } else if (t.startsWith('<div class="image-caption">')) {
+      scan.imageCaption = _decodeCaption(_decodeImageCaption(t));
+    } else if (t.startsWith('<audio')) {
+      final audio = _parseAudioAttrs(t);
+      scan.audioPath = audio.$1;
+      scan.audioAutoplay = audio.$2;
+    }
+  }
+  return scan;
+}
+
+/// De class-afgeleiden die elke fenced parser nodig heeft: de resterende
+/// css-class zonder het type-token en de presentatievlaggen, plus
+/// showLogo/showFooter uit de no-logo/no-footer-tokens.
+({String effectiveClass, bool showLogo, bool showFooter}) _classFlags(
+  String cssClass,
+  String typeToken,
+) {
+  final tokens = cssClass.split(_reWhitespace);
+  final effective = tokens
+      .where(
+        (c) =>
+            c.isNotEmpty &&
+            c != typeToken &&
+            c != 'logo-safe' &&
+            c != 'no-logo' &&
+            c != 'no-footer',
+      )
+      .join(' ');
+  return (
+    effectiveClass: effective,
+    showLogo: !tokens.contains('no-logo'),
+    showFooter: !tokens.contains('no-footer'),
+  );
+}
 
 extension _MarkdownFenced on MarkdownService {
   /// Parse a `<!-- _class: code -->` slide: an optional `# title`, the fenced
@@ -22,62 +102,21 @@ extension _MarkdownFenced on MarkdownService {
     required bool skipped,
     TlpLevel tlp = TlpLevel.none,
   }) {
-    final lines = remaining.split('\n');
-    String title = '';
-    String language = '';
-    String audioPath = '';
-    bool audioAutoplay = false;
-    final code = <String>[];
-    bool inFence = false;
-
-    for (final line in lines) {
-      final fence = _reFenceInfo.firstMatch(line);
-      if (fence != null) {
-        if (!inFence) {
-          inFence = true;
-          language = fence.group(1)!.trim();
-        } else {
-          inFence = false;
-        }
-        continue;
-      }
-      if (inFence) {
-        code.add(line);
-        continue;
-      }
-      final t = line.trim();
-      if (t.startsWith('# ') && title.isEmpty) {
-        title = t.substring(2);
-      } else if (t.startsWith('<audio')) {
-        (audioPath, audioAutoplay) = _parseAudioAttrs(t);
-      }
-    }
-
-    final classTokens = cssClass.split(_reWhitespace);
-    final effectiveClass = classTokens
-        .where(
-          (c) =>
-              c.isNotEmpty &&
-              c != 'code' &&
-              c != 'logo-safe' &&
-              c != 'no-logo' &&
-              c != 'no-footer',
-        )
-        .join(' ');
-
+    final scan = _scanFencedBlock(remaining);
+    final flags = _classFlags(cssClass, 'code');
     return Slide(
       id: _uuid.v4(),
       type: SlideType.code,
-      title: title,
-      customMarkdown: code.join('\n'),
-      codeLanguage: language,
-      audioPath: audioPath,
-      audioAutoplay: audioAutoplay,
-      cssClass: effectiveClass,
+      title: scan.title,
+      customMarkdown: scan.contentJoined,
+      codeLanguage: scan.fenceInfo,
+      audioPath: scan.audioPath,
+      audioAutoplay: scan.audioAutoplay,
+      cssClass: flags.effectiveClass,
       notes: notes,
       advanceDuration: advanceDuration,
-      showLogo: !classTokens.contains('no-logo'),
-      showFooter: !classTokens.contains('no-footer'),
+      showLogo: flags.showLogo,
+      showFooter: flags.showFooter,
       skipped: skipped,
       tlp: tlp,
     );
@@ -93,54 +132,19 @@ extension _MarkdownFenced on MarkdownService {
     required bool skipped,
     TlpLevel tlp = TlpLevel.none,
   }) {
-    final lines = remaining.split('\n');
-    final json = <String>[];
-    String title = '';
-    String audioPath = '';
-    bool audioAutoplay = false;
-    bool inFence = false;
-
-    for (final line in lines) {
-      final fence = _reFenceLine.hasMatch(line);
-      if (fence) {
-        inFence = !inFence;
-        continue;
-      }
-      if (inFence) {
-        json.add(line);
-        continue;
-      }
-      final t = line.trim();
-      if (t.startsWith('# ') && title.isEmpty) {
-        title = t.substring(2);
-      } else if (t.startsWith('<audio')) {
-        (audioPath, audioAutoplay) = _parseAudioAttrs(t);
-      }
-    }
-
-    final classTokens = cssClass.split(_reWhitespace);
-    final effectiveClass = classTokens
-        .where(
-          (c) =>
-              c.isNotEmpty &&
-              c != 'chart' &&
-              c != 'logo-safe' &&
-              c != 'no-logo' &&
-              c != 'no-footer',
-        )
-        .join(' ');
-
+    final scan = _scanFencedBlock(remaining);
+    final flags = _classFlags(cssClass, 'chart');
     return Slide(
       id: _uuid.v4(),
       type: SlideType.chart,
-      customMarkdown: json.join('\n').trim(),
-      audioPath: audioPath,
-      audioAutoplay: audioAutoplay,
-      cssClass: effectiveClass,
+      customMarkdown: scan.contentJoined.trim(),
+      audioPath: scan.audioPath,
+      audioAutoplay: scan.audioAutoplay,
+      cssClass: flags.effectiveClass,
       notes: notes,
       advanceDuration: advanceDuration,
-      showLogo: !classTokens.contains('no-logo'),
-      showFooter: !classTokens.contains('no-footer'),
+      showLogo: flags.showLogo,
+      showFooter: flags.showFooter,
       skipped: skipped,
       tlp: tlp,
     );
@@ -156,55 +160,20 @@ extension _MarkdownFenced on MarkdownService {
     required bool skipped,
     TlpLevel tlp = TlpLevel.none,
   }) {
-    final lines = remaining.split('\n');
-    final json = <String>[];
-    String title = '';
-    String audioPath = '';
-    bool audioAutoplay = false;
-    bool inFence = false;
-
-    for (final line in lines) {
-      final fence = _reFenceLine.hasMatch(line);
-      if (fence) {
-        inFence = !inFence;
-        continue;
-      }
-      if (inFence) {
-        json.add(line);
-        continue;
-      }
-      final t = line.trim();
-      if (t.startsWith('# ') && title.isEmpty) {
-        title = t.substring(2).trim();
-      } else if (t.startsWith('<audio')) {
-        (audioPath, audioAutoplay) = _parseAudioAttrs(t);
-      }
-    }
-
-    final classTokens = cssClass.split(_reWhitespace);
-    final effectiveClass = classTokens
-        .where(
-          (c) =>
-              c.isNotEmpty &&
-              c != 'cockpit' &&
-              c != 'logo-safe' &&
-              c != 'no-logo' &&
-              c != 'no-footer',
-        )
-        .join(' ');
-
+    final scan = _scanFencedBlock(remaining);
+    final flags = _classFlags(cssClass, 'cockpit');
     return Slide(
       id: _uuid.v4(),
       type: SlideType.cockpit,
-      title: title,
-      customMarkdown: CockpitSpec.parse(json.join('\n').trim()).toBlock(),
-      audioPath: audioPath,
-      audioAutoplay: audioAutoplay,
-      cssClass: effectiveClass,
+      title: scan.title,
+      customMarkdown: CockpitSpec.parse(scan.contentJoined.trim()).toBlock(),
+      audioPath: scan.audioPath,
+      audioAutoplay: scan.audioAutoplay,
+      cssClass: flags.effectiveClass,
       notes: notes,
       advanceDuration: advanceDuration,
-      showLogo: !classTokens.contains('no-logo'),
-      showFooter: !classTokens.contains('no-footer'),
+      showLogo: flags.showLogo,
+      showFooter: flags.showFooter,
       skipped: skipped,
       tlp: tlp,
     );
@@ -222,65 +191,23 @@ extension _MarkdownFenced on MarkdownService {
     TlpLevel tlp = TlpLevel.none,
     int imageSize = 0,
   }) {
-    final lines = remaining.split('\n');
-    final json = <String>[];
-    String title = '';
-    String imagePath = '';
-    String imageCaption = '';
-    String audioPath = '';
-    bool audioAutoplay = false;
-    bool inFence = false;
-
-    for (final line in lines) {
-      final fence = _reFenceLine.hasMatch(line);
-      if (fence) {
-        inFence = !inFence;
-        continue;
-      }
-      if (inFence) {
-        json.add(line);
-        continue;
-      }
-      final t = line.trim();
-      if (t.startsWith('# ') && title.isEmpty) {
-        title = t.substring(2).trim();
-      } else if (t.startsWith('![')) {
-        final m = _reImageMdAllowEmpty.firstMatch(t);
-        if (m != null) imagePath = m.group(1) ?? '';
-      } else if (t.startsWith('<div class="image-caption">')) {
-        imageCaption = _decodeCaption(_decodeImageCaption(t));
-      } else if (t.startsWith('<audio')) {
-        (audioPath, audioAutoplay) = _parseAudioAttrs(t);
-      }
-    }
-
-    final classTokens = cssClass.split(_reWhitespace);
-    final effectiveClass = classTokens
-        .where(
-          (c) =>
-              c.isNotEmpty &&
-              c != 'question' &&
-              c != 'logo-safe' &&
-              c != 'no-logo' &&
-              c != 'no-footer',
-        )
-        .join(' ');
-
+    final scan = _scanFencedBlock(remaining);
+    final flags = _classFlags(cssClass, 'question');
     return Slide(
       id: _uuid.v4(),
       type: SlideType.question,
-      title: title,
-      imagePath: imagePath,
-      imageCaption: imageCaption,
+      title: scan.title,
+      imagePath: scan.imagePath,
+      imageCaption: scan.imageCaption,
       imageSize: imageSize,
-      audioPath: audioPath,
-      audioAutoplay: audioAutoplay,
-      customMarkdown: QuestionSpec.parse(json.join('\n').trim()).toBlock(),
-      cssClass: effectiveClass,
+      audioPath: scan.audioPath,
+      audioAutoplay: scan.audioAutoplay,
+      customMarkdown: QuestionSpec.parse(scan.contentJoined.trim()).toBlock(),
+      cssClass: flags.effectiveClass,
       notes: notes,
       advanceDuration: advanceDuration,
-      showLogo: !classTokens.contains('no-logo'),
-      showFooter: !classTokens.contains('no-footer'),
+      showLogo: flags.showLogo,
+      showFooter: flags.showFooter,
       skipped: skipped,
       tlp: tlp,
     );

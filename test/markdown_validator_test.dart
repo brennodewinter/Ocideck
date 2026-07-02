@@ -296,10 +296,7 @@ marp: true
 ''';
     final result = validator.validate(markdown);
     expect(
-      result.issues.any(
-        (i) =>
-            i.message.contains('cockpit specification contains invalid JSON'),
-      ),
+      result.issues.any((i) => i.message.contains('cockpit-JSON is ongeldig')),
       isTrue,
     );
   });
@@ -318,7 +315,7 @@ marp: true
     final result = validator.validate(markdown);
     expect(
       result.issues.any(
-        (i) => i.message.contains('cockpit block is not closed'),
+        (i) => i.message.contains('```cockpit-blok is niet afgesloten'),
       ),
       isTrue,
     );
@@ -339,8 +336,7 @@ marp: true
     final result = validator.validate(markdown);
     expect(
       result.issues.any(
-        (i) =>
-            i.message.contains('cockpit specification must be a JSON object'),
+        (i) => i.message.contains('cockpit-JSON moet een object'),
       ),
       isTrue,
     );
@@ -474,7 +470,8 @@ marp: true
     });
 
     test('flags a <video> tag missing a src attribute', () {
-      const md = '---\nmarp: true\n---\n\n# Slide\n\n<video controls></video>\n';
+      const md =
+          '---\nmarp: true\n---\n\n# Slide\n\n<video controls></video>\n';
       final result = validator.validate(md);
       expect(
         result.issues.any((i) => i.message.contains('mist een `src')),

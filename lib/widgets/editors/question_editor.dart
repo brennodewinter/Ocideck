@@ -5,6 +5,7 @@ import '../../models/question.dart';
 import '../../models/slide.dart';
 import '../../services/image_service.dart';
 import '_editor_field.dart';
+import '../../theme/app_theme.dart';
 
 /// Editor for a question slide. Today only multiple choice is wired up; the
 /// `kind` dropdown is present so future question kinds slot in here.
@@ -226,7 +227,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
           _onWrong == QuestionOnWrong.retry
               ? l10n.d('Fout = niet doorgaan; de vraag moet opnieuw.')
               : l10n.d('Fout = wel doorgaan, maar niet opnieuw doen.'),
-          style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+          style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
         ),
         const SizedBox(height: 20),
         ..._imageSection(),
@@ -252,7 +253,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
               : l10n.d(
                   'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.',
                 ),
-          style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+          style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
         ),
       ),
       for (int i = 0; i < _answers.length; i++) _buildAnswerRow(i),
@@ -357,7 +358,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
       const SizedBox(height: 6),
       Text(
         l10n.d('De stelling hierboven is juist of onjuist; kies welke.'),
-        style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+        style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
       ),
     ];
   }
@@ -394,7 +395,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
             icon: const Icon(
               Icons.remove_circle_outline,
               size: 18,
-              color: Color(0xFF64748B),
+              color: AppTheme.slate500,
             ),
             onPressed: _answers.length > 1 ? () => _removeAnswer(i) : null,
             tooltip: l10n.d('Verwijder'),

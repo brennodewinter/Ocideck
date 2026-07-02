@@ -369,9 +369,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final bytes = await file.readAsBytes();
     final mdPath = await _file.importPackageBytes(bytes, dest);
     if (mdPath == null) return false;
-    final result = await openFileByPath(mdPath);
-    if (result != OpenResult.opened) await _discardImportArtifacts(mdPath);
-    return result == OpenResult.opened || result == OpenResult.blocked;
+    return _importHandled(await _openImported(mdPath));
   }
 
   /// Haal een presentatie op via een URL (pakket of platte markdown) en open
@@ -380,10 +378,22 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final dest = await _importDestDir(homeDir);
     final mdPath = await _file.importFromUrl(url, dest);
     if (mdPath == null) return false;
+    return _importHandled(await _openImported(mdPath));
+  }
+
+  /// Gedeelde staart van elke import-flow (pakket/URL/WebDAV): open het
+  /// geïmporteerde bestand en ruim de import-artefacten op wanneer dat niet
+  /// lukte.
+  Future<OpenResult> _openImported(String mdPath) async {
     final result = await openFileByPath(mdPath);
     if (result != OpenResult.opened) await _discardImportArtifacts(mdPath);
-    return result == OpenResult.opened || result == OpenResult.blocked;
+    return result;
   }
+
+  /// "Verwerkt" betekent voor de bool-imports: geopend, óf geblokkeerd door de
+  /// security-gate (de shell toont dan het alarm) — niet-leesbaar is `false`.
+  static bool _importHandled(OpenResult result) =>
+      result == OpenResult.opened || result == OpenResult.blocked;
 
   /// Download [entry] van de WebDAV-bron, haal het door de bestaande
   /// security-gate en open het in een tab. Het tabblad onthoudt zijn herkomst
@@ -407,11 +417,8 @@ class TabsNotifier extends StateNotifier<TabsState> {
         ? await _file.importMarkdownBytes(bytes, dest, entry.name)
         : await _file.importPackageBytes(bytes, dest);
     if (mdPath == null) return OpenResult.unreadable;
-    final result = await openFileByPath(mdPath);
-    if (result != OpenResult.opened) {
-      await _discardImportArtifacts(mdPath);
-      return result;
-    }
+    final result = await _openImported(mdPath);
+    if (result != OpenResult.opened) return result;
     // De zojuist geopende deck zit in het huidige tabblad (zie openFileByPath).
     state.current?.webdavOrigin = WebdavOrigin(
       baseUrl: service.server.baseUrl,

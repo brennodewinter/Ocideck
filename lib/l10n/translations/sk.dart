@@ -9,7 +9,8 @@ const _stringsSk = {
   'undo': 'Späť (Ctrl/Cmd+Z)',
   'redo': 'Znovu (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Knižnica obrázkov',
-  'presentFullscreen': 'Prezentovať (celá obrazovka) · P pre zobrazenie prednášajúceho',
+  'presentFullscreen':
+      'Prezentovať (celá obrazovka) · P pre zobrazenie prednášajúceho',
   'visualMode': 'Vizuálny režim',
   'markdownMode': 'Režim Markdown',
   'save': 'Uložiť',
@@ -47,7 +48,8 @@ const _stringsSk = {
   'settingsLogo': 'Logo',
   'language': 'Jazyk',
   'applicationLanguage': 'Jazyk aplikácie',
-  'languageHelp': 'Rozhranie okamžite zmení jazyk. Obsah prezentácie zostáva nezmenený.',
+  'languageHelp':
+      'Rozhranie okamžite zmení jazyk. Obsah prezentácie zostáva nezmenený.',
   'presentationFolder': 'Priečinok prezentácií',
   'exportFolderSetting': 'Priečinok exportov',
   'notSet': 'Nenastavené',
@@ -55,17 +57,20 @@ const _stringsSk = {
   'choose': 'Vybrať',
   'removeDefaultFolder': 'Odstrániť predvolený priečinok',
   'removeExportFolder': 'Odstrániť priečinok exportov',
-  'exportFolderHelp': 'Všetky exporty (PDF/PPTX) sa ukladajú sem. Ak nie je nastavené, exporty sa uložia vedľa súboru prezentácie.',
+  'exportFolderHelp':
+      'Všetky exporty (PDF/PPTX) sa ukladajú sem. Ak nie je nastavené, exporty sa uložia vedľa súboru prezentácie.',
   'cancel': 'Zrušiť',
   'close': 'Zavrieť',
   'saveSettings': 'Uložiť',
   'exportDialogTitle': 'Exportovať',
   'exportAgain': 'Exportovať znovu',
-  'exportIntro': 'Export používa presne náhľad z editora vrátane vášho štýlového profilu.',
+  'exportIntro':
+      'Export používa presne náhľad z editora vrátane vášho štýlového profilu.',
   'imageQualityPdf': 'Kvalita obrázkov (PDF)',
   'normal': 'Normálna',
   'compressed': 'Komprimované',
-  'compressedHelp': 'JPEG v nižšom rozlíšení – určené ako podklad, oveľa menší súbor (uložený samostatne ako „-compact“).',
+  'compressedHelp':
+      'JPEG v nižšom rozlíšení – určené ako podklad, oveľa menší súbor (uložený samostatne ako „-compact“).',
   'losslessHelp': 'Bezstratové obrázky v plnom rozlíšení.',
   'exportAsPdf': 'Exportovať ako PDF',
   'exportAsPptx': 'Exportovať ako PPTX',
@@ -87,26 +92,39 @@ const _dutchSourceSk = {
   'Niet opslaan': 'Neukladať',
   'Niet-opgeslagen werk herstellen?': 'Obnoviť neuloženú prácu?',
   'Niet-opgeslagen wijzigingen': 'Neuložené zmeny',
-  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'Našla sa prezentácia s neuloženými zmenami z predchádzajúcej relácie:',
+  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Našla sa prezentácia s neuloženými zmenami z predchádzajúcej relácie:',
   'Er zijn': 'Existuje',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'prezentácií s neuloženými zmenami z predchádzajúcej relácie:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.': 'Existujú prezentácie s neuloženými zmenami. Uložte ich pred zatvorením aplikácie.',
-  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.': 'Táto prezentácia má neuložené zmeny. Uložte ju pred zatvorením karty.',
+  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'prezentácií s neuloženými zmenami z predchádzajúcej relácie:',
+  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Existujú prezentácie s neuloženými zmenami. Uložte ich pred zatvorením aplikácie.',
+  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+      'Táto prezentácia má neuložené zmeny. Uložte ju pred zatvorením karty.',
   'Importeren via URL': 'Importovať z URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.': 'Vložte odkaz na balík .ocideck alebo súbor Marp Markdown.',
+  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+      'Vložte odkaz na balík .ocideck alebo súbor Marp Markdown.',
   'Ophalen': 'Načítať',
   'Laat los om toe te voegen': 'Pustite pre pridanie',
-  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen': 'Obrázky → nové snímky · .md / .ocideck → otvoriť',
-  'Open eerst een presentatie om afbeeldingen toe te voegen.': 'Pred pridaním obrázkov otvorte prezentáciu.',
-  'Alle slides zijn overgeslagen — niets om te tonen.': 'Všetky snímky sú preskočené — nie je čo zobraziť.',
-  'Alle slides zijn overgeslagen — niets om te exporteren.': 'Všetky snímky sú preskočené — nie je čo exportovať.',
+  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+      'Obrázky → nové snímky · .md / .ocideck → otvoriť',
+  'Open eerst een presentatie om afbeeldingen toe te voegen.':
+      'Pred pridaním obrázkov otvorte prezentáciu.',
+  'Alle slides zijn overgeslagen — niets om te tonen.':
+      'Všetky snímky sú preskočené — nie je čo zobraziť.',
+  'Alle slides zijn overgeslagen — niets om te exporteren.':
+      'Všetky snímky sú preskočené — nie je čo exportovať.',
   'Kon dit pakket niet importeren.': 'Tento balík sa nepodarilo importovať.',
   'Pakket geëxporteerd naar:': 'Balík exportovaný do:',
   'Export mislukt:': 'Export zlyhal:',
-  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.': 'Táto snímka nemôže prijať obrázok. Najprv zvoľte snímku s obrázkom.',
-  'Kon van deze URL geen presentatie ophalen.': 'Z tejto URL sa nepodarilo načítať prezentáciu.',
-  'Sleep om de slide-preview breder of smaller te maken': 'Ťahaním rozšírite alebo zúžite náhľad snímky',
-  'TLP-classificatie (Traffic Light Protocol)': 'Klasifikácia TLP (Traffic Light Protocol)',
+  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+      'Táto snímka nemôže prijať obrázok. Najprv zvoľte snímku s obrázkom.',
+  'Kon van deze URL geen presentatie ophalen.':
+      'Z tejto URL sa nepodarilo načítať prezentáciu.',
+  'Sleep om de slide-preview breder of smaller te maken':
+      'Ťahaním rozšírite alebo zúžite náhľad snímky',
+  'TLP-classificatie (Traffic Light Protocol)':
+      'Klasifikácia TLP (Traffic Light Protocol)',
   'Titelpagina': 'Titulná snímka',
   'Tussentitel': 'Nadpis sekcie',
   'Alleen Bullets': 'Len odrážky',
@@ -119,7 +137,8 @@ const _dutchSourceSk = {
   'Tabel': 'Tabuľka',
   'Vrije Markdown': 'Voľný Markdown',
   'Overgeslagen': 'Preskočené',
-  'Weer tonen bij presenteren/exporteren': 'Znova zobraziť pri prezentovaní/exporte',
+  'Weer tonen bij presenteren/exporteren':
+      'Znova zobraziť pri prezentovaní/exporte',
   'Overslaan bij presenteren/exporteren': 'Preskočiť pri prezentovaní/exporte',
   'Kopiëren': 'Kopírovať',
   'Kopieer als afbeelding': 'Kopírovať ako obrázok',
@@ -141,7 +160,8 @@ const _dutchSourceSk = {
   'Naam van de auteur': 'Meno autora',
   'Achtergrondafbeelding': 'Obrázok na pozadí',
   'Achtergrondafbeelding (optioneel)': 'Obrázok na pozadí (voliteľné)',
-  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.': 'Obrázok sa zobrazí na celú obrazovku ako pozadie so zníženou nepriehľadnosťou, aby text zostal čitateľný.',
+  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+      'Obrázok sa zobrazí na celú obrazovku ako pozadie so zníženou nepriehľadnosťou, aby text zostal čitateľný.',
   'Zoom achtergrond': 'Priblíženie pozadia',
   'Zoom afbeelding': 'Priblíženie obrázka',
   'Afbeelding (rechts)': 'Obrázok (vpravo)',
@@ -166,7 +186,8 @@ const _dutchSourceSk = {
   'Kopiëren naar klembord mislukt.': 'Kopírovanie do schránky zlyhalo.',
   'Verwijder afbeelding': 'Odstrániť obrázok',
   'Geen afbeelding gekozen': 'Nezvolený žiadny obrázok',
-  'Caption / bronvermelding (bijv. © Naam Fotograaf)': 'Popis / zdroj (napr. © Meno fotografa)',
+  'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+      'Popis / zdroj (napr. © Meno fotografa)',
   'Caption / bronvermelding': 'Popis / zdroj',
   'Beschrijving (doorzoekbaar)': 'Popis (vyhľadateľný)',
   'Markdown inhoud': 'Obsah Markdown',
@@ -177,7 +198,8 @@ const _dutchSourceSk = {
   'verwijderen': 'odstrániť',
   'Koprij verwijderen': 'Odstrániť riadok hlavičky',
   'Rij verwijderen': 'Odstrániť riadok',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.': 'Tip: stlačením Enter v bunke vložíte nový riadok.',
+  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+      'Tip: stlačením Enter v bunke vložíte nový riadok.',
   'Presentatie openen': 'Otvoriť prezentáciu',
   'Opslaan als': 'Uložiť ako',
   'Pakket importeren': 'Importovať balík',
@@ -190,11 +212,14 @@ const _dutchSourceSk = {
   'Kies een video': 'Zvoľte video',
   'Kies een audiobestand': 'Zvoľte zvukový súbor',
   'Bladeren…': 'Prehľadávať…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…': 'Hľadať podľa názvu súboru, nadpisu alebo textu v snímkach…',
+  'Zoek op bestandsnaam, titel of tekst in de slides…':
+      'Hľadať podľa názvu súboru, nadpisu alebo textu v snímkach…',
   'Geen map gekozen': 'Nezvolený žiadny priečinok',
   'Map kiezen': 'Zvoliť priečinok',
-  'Kies een map met presentaties om te beginnen.': 'Ak chcete začať, zvoľte priečinok s prezentáciami.',
-  'Geen presentaties (.md) in deze map gevonden.': 'V tomto priečinku sa nenašli žiadne prezentácie (.md).',
+  'Kies een map met presentaties om te beginnen.':
+      'Ak chcete začať, zvoľte priečinok s prezentáciami.',
+  'Geen presentaties (.md) in deze map gevonden.':
+      'V tomto priečinku sa nenašli žiadne prezentácie (.md).',
   'Geen presentaties gevonden voor': 'Nenašli sa žiadne prezentácie pre',
   'meer treffer(s)': 'ďalších zhôd',
   'Slide zoeken': 'Nájsť snímku',
@@ -205,11 +230,15 @@ const _dutchSourceSk = {
   'Toegevoegd': 'Pridané',
   'Selecteer alles': 'Vybrať všetko',
   'Deselecteer alles': 'Zrušiť výber všetkého',
-  'Zoek slides op tekst, titel, onderschrift, pad…': 'Hľadať snímky podľa textu, nadpisu, popisu, cesty…',
-  'Zoek op presentatie, titel of tekst…': 'Hľadať podľa prezentácie, nadpisu alebo textu…',
-  'Geen andere presentaties (.md) in deze map gevonden.': 'V tomto priečinku sa nenašli žiadne ďalšie prezentácie (.md).',
+  'Zoek slides op tekst, titel, onderschrift, pad…':
+      'Hľadať snímky podľa textu, nadpisu, popisu, cesty…',
+  'Zoek op presentatie, titel of tekst…':
+      'Hľadať podľa prezentácie, nadpisu alebo textu…',
+  'Geen andere presentaties (.md) in deze map gevonden.':
+      'V tomto priečinku sa nenašli žiadne ďalšie prezentácie (.md).',
   'Geen slides gevonden voor': 'Nenašli sa žiadne snímky pre',
-  'Typ zoektermen om slides uit al je presentaties te vinden.': 'Zadajte hľadané výrazy na nájdenie snímok naprieč prezentáciami.',
+  'Typ zoektermen om slides uit al je presentaties te vinden.':
+      'Zadajte hľadané výrazy na nájdenie snímok naprieč prezentáciami.',
   'toegevoegd': 'pridané',
   'Eerste': 'Prvých',
   'treffers — verfijn je zoekopdracht': 'zhôd — spresnite hľadanie',
@@ -247,17 +276,21 @@ const _dutchSourceSk = {
   'Beschrijving': 'Popis',
   'Korte omschrijving van de presentatie': 'Krátky popis prezentácie',
   'Trefwoorden': 'Kľúčové slová',
-  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026': 'Oddelené čiarkou, napr. štvrťrok, čísla, 2026',
-  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.': 'Tieto údaje sa uložia do Markdownu a sú vyhľadateľné pri otváraní.',
+  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026':
+      'Oddelené čiarkou, napr. štvrťrok, čísla, 2026',
+  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+      'Tieto údaje sa uložia do Markdownu a sú vyhľadateľné pri otváraní.',
   'App-thema': 'Motív aplikácie',
   'Look-and-feel': 'Vzhľad a dojem',
   'Kopie maken en aanpassen': 'Vytvoriť kópiu a upraviť',
   'Thema verwijderen': 'Odstrániť motív',
   'Themanaam': 'Názov motívu',
-  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.': 'Toto je vstavaný motív. Vytvorte kópiu na úpravu farieb.',
+  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+      'Toto je vstavaný motív. Vytvorte kópiu na úpravu farieb.',
   'Donkere interface': 'Tmavé rozhranie',
   'Lettertype interface': 'Písmo rozhrania',
-  'Past contrast, invoervelden en systeemcomponenten aan.': 'Upravuje kontrast, vstupné polia a systémové komponenty.',
+  'Past contrast, invoervelden en systeemcomponenten aan.':
+      'Upravuje kontrast, vstupné polia a systémové komponenty.',
   'Hoofdkleur en bovenbalk': 'Hlavná farba a horný panel',
   'Knoppen en accenten': 'Tlačidlá a akcenty',
   'Schermachtergrond': 'Pozadie obrazovky',
@@ -295,13 +328,15 @@ const _dutchSourceSk = {
   'Footertekst': 'Text päty',
   'bijv. Vertrouwelijk · {title} · {date}': 'napr. Dôverné · {title} · {date}',
   'Footerpositie': 'Poloha päty',
-  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.': 'Tokeny: {page}, {total}, {date}, {title}. Päta sa zobrazuje na všetkých snímkach okrem titulných a sekčných, pokiaľ ju nevypnete pre jednotlivú snímku.',
+  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+      'Tokeny: {page}, {total}, {date}, {title}. Päta sa zobrazuje na všetkých snímkach okrem titulných a sekčných, pokiaľ ju nevypnete pre jednotlivú snímku.',
   'Links': 'Vľavo',
   'Midden': 'Na stred',
   'Rechts': 'Vpravo',
   'Paginanummers tonen (rechtsonder)': 'Zobraziť čísla strán (vpravo dole)',
   'Voorvertoning': 'Náhľad',
-  'De snelle bruine vos springt over de luie hond.': 'Príliš žlťučký kôň úpel diabolské ódy.',
+  'De snelle bruine vos springt over de luie hond.':
+      'Príliš žlťučký kôň úpel diabolské ódy.',
   'Preview': 'Náhľad',
   'Uitzoomen': 'Oddialiť',
   'Uitgezoomd': 'Oddialené',
@@ -309,9 +344,12 @@ const _dutchSourceSk = {
   'Ingezoomd': 'Priblížené',
   'van de foto zichtbaar': 'z fotografie viditeľné',
   'Volledig zichtbaar (100%)': 'Plne viditeľné (100 %)',
-  'Uitzoomen (meer van de foto zichtbaar)': 'Oddialiť (viac z fotografie viditeľné)',
-  'Inzoomen (minder van de foto zichtbaar)': 'Priblížiť (menej z fotografie viditeľné)',
-  'Terugzetten (volledige afbeelding zichtbaar)': 'Obnoviť (celý obrázok viditeľný)',
+  'Uitzoomen (meer van de foto zichtbaar)':
+      'Oddialiť (viac z fotografie viditeľné)',
+  'Inzoomen (minder van de foto zichtbaar)':
+      'Priblížiť (menej z fotografie viditeľné)',
+  'Terugzetten (volledige afbeelding zichtbaar)':
+      'Obnoviť (celý obrázok viditeľný)',
   'Zoom resetten': 'Obnoviť priblíženie',
   'Preview inklappen': 'Zbaliť náhľad',
   'Preview uitklappen': 'Rozbaliť náhľad',
@@ -326,19 +364,24 @@ const _dutchSourceSk = {
   'Terug naar standaardstijl': 'Späť na predvolený štýl',
   'Automatisch doorgaan na': 'Automaticky pokračovať po',
   'Logo tonen op deze slide': 'Zobraziť logo na tejto snímke',
-  'Tabel bewerkbaar tijdens presenteren': 'Tabuľka upraviteľná počas prezentovania',
+  'Tabel bewerkbaar tijdens presenteren':
+      'Tabuľka upraviteľná počas prezentovania',
   'Footer tonen op deze slide': 'Zobraziť pätu na tejto snímke',
   'Sprekersnotities...': 'Poznámky rečníka...',
   'Sprekersnotities': 'Poznámky rečníka',
-  'Notities voor tijdens het presenteren': 'Poznámky na použitie počas prezentovania',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown': 'Režim Markdown — upravte celú prezentáciu ako Marp Markdown',
+  'Notities voor tijdens het presenteren':
+      'Poznámky na použitie počas prezentovania',
+  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+      'Režim Markdown — upravte celú prezentáciu ako Marp Markdown',
   'Toepassen': 'Použiť',
-  'Markdown kon niet worden verwerkt. Controleer de syntax.': 'Markdown sa nepodarilo spracovať. Skontrolujte syntax.',
+  'Markdown kon niet worden verwerkt. Controleer de syntax.':
+      'Markdown sa nepodarilo spracovať. Skontrolujte syntax.',
   'Controleren': 'Skontrolovať syntax',
   'Syntaxproblemen gevonden': 'Nájdené problémy so syntaxou',
   'De markdown bevat': 'Markdown obsahuje',
   'fout(en) en': 'chýb a',
-  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.': 'varovaní. Snímky sa preto môžu načítať nesprávne.',
+  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+      'varovaní. Snímky sa preto môžu načítať nesprávne.',
   'Terug naar editor': 'Späť do editora',
   'Toch toepassen': 'Napriek tomu použiť',
   'Geen syntaxproblemen gevonden': 'Nenašli sa žiadne problémy so syntaxou',
@@ -352,28 +395,38 @@ const _dutchSourceSk = {
   'Coverflow': 'Coverflow',
   'Geen afbeeldingen gevonden': 'Nenašli sa žiadne obrázky',
   'Geen resultaten voor': 'Žiadne výsledky pre',
-  'Pas je zoekterm aan of voeg een beschrijving toe.': 'Upravte hľadaný výraz alebo pridajte popis.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.': 'Použite „Prehľadávať“ na výber obrázkov z ľubovoľného miesta.',
+  'Pas je zoekterm aan of voeg een beschrijving toe.':
+      'Upravte hľadaný výraz alebo pridajte popis.',
+  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+      'Použite „Prehľadávať“ na výber obrázkov z ľubovoľného miesta.',
   'Selecteer een\nafbeelding': 'Vyberte\nobrázok',
   'Gekopieerd': 'Skopírované',
   'Afbeelding verwijderen?': 'Odstrániť obrázok?',
-  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.': 'Súbor sa natrvalo odstráni z disku. Túto akciu nemožno vrátiť späť.',
-  'Let op: deze afbeelding wordt nog gebruikt in': 'Upozornenie: tento obrázok sa stále používa v',
-  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.': 'Odstránením sa tieto snímky vyprázdnia. Túto akciu nemožno vrátiť späť.',
-  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert': '↑↓←→ navigácia  ·  Enter voľba  ·  Dvojklik vyberie',
+  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+      'Súbor sa natrvalo odstráni z disku. Túto akciu nemožno vrátiť späť.',
+  'Let op: deze afbeelding wordt nog gebruikt in':
+      'Upozornenie: tento obrázok sa stále používa v',
+  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+      'Odstránením sa tieto snímky vyprázdnia. Túto akciu nemožno vrátiť späť.',
+  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+      '↑↓←→ navigácia  ·  Enter voľba  ·  Dvojklik vyberie',
   'Sneltoetsen': 'Klávesové skratky',
   'Toetsenlegenda': 'Legenda klávesov',
   'spatie': 'medzerník',
   'klik': 'kliknutie',
   'cijfers': 'číslice',
-  'Klik of druk op ? / H / Esc om te sluiten': 'Kliknutím alebo stlačením ? / H / Esc zavriete',
-  'Klik of druk op H / Esc om te sluiten': 'Kliknutím alebo stlačením H / Esc zavriete',
+  'Klik of druk op ? / H / Esc om te sluiten':
+      'Kliknutím alebo stlačením ? / H / Esc zavriete',
+  'Klik of druk op H / Esc om te sluiten':
+      'Kliknutím alebo stlačením H / Esc zavriete',
   'Naar slidenummer': 'Prejsť na číslo snímky',
   'Eerste · laatste slide': 'Prvá · posledná snímka',
   'Slide-overzicht': 'Prehľad snímok',
   'Slide-overzicht (pijltjes + Enter)': 'Prehľad snímok (šípky + Enter)',
-  'Presenter view (notities, klok)': 'Zobrazenie prednášajúceho (poznámky, hodiny)',
-  'Scherm wisselen (meerdere schermen)': 'Prepnúť obrazovku (viacero obrazoviek)',
+  'Presenter view (notities, klok)':
+      'Zobrazenie prednášajúceho (poznámky, hodiny)',
+  'Scherm wisselen (meerdere schermen)':
+      'Prepnúť obrazovku (viacero obrazoviek)',
   'Zwart · wit scherm': 'Čierna · biela obrazovka',
   'Verstreken tijd resetten': 'Vynulovať uplynulý čas',
   'Automatische modus aan/uit': 'Automatický režim zap./vyp.',
@@ -399,24 +452,33 @@ const _dutchSourceSk = {
   'Geen notities voor deze slide.': 'Pre túto snímku nie sú žiadne poznámky.',
   'Mijn notities': 'Moje poznámky',
   'Gebruikersnotities': 'Poznámky používateľa',
-  'Gebruikersnotities voor deze slide...': 'Poznámky používateľa pre túto snímku...',
+  'Gebruikersnotities voor deze slide...':
+      'Poznámky používateľa pre túto snímku...',
   'Notities weggooien': 'Zahodiť poznámky',
-  'Notities voor de ontvanger tijdens een cursus': 'Poznámky pre príjemcu počas kurzu',
-  'Schakel naar Markdown-modus om notities toe te voegen.': 'Prepnite do režimu Markdown, ak chcete pridať poznámky.',
+  'Notities voor de ontvanger tijdens een cursus':
+      'Poznámky pre príjemcu počas kurzu',
+  'Schakel naar Markdown-modus om notities toe te voegen.':
+      'Prepnite do režimu Markdown, ak chcete pridať poznámky.',
   'Mijn notities aan/uit': 'Prepnúť moje poznámky zap./vyp.',
   'Wissel scherm (S)': 'Prepnúť obrazovku (S)',
   'Kon niet van scherm wisselen.': 'Nepodarilo sa prepnúť obrazovku.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P publikum · G prehľad · B/W čierna/biela · R čas · Esc stop',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P publikum · S obrazovka · G prehľad · B/W čierna/biela · R čas · Esc stop',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P publikum · H legenda · G prehľad · B/W čierna/biela · R čas · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P publikum · H legenda · S obrazovka · G prehľad · B/W čierna/biela · R čas · Esc stop',
-  'pijltjes + Enter of klik om te springen': 'šípky + Enter alebo kliknutím preskočíte',
+  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P publikum · G prehľad · B/W čierna/biela · R čas · Esc stop',
+  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P publikum · S obrazovka · G prehľad · B/W čierna/biela · R čas · Esc stop',
+  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P publikum · H legenda · G prehľad · B/W čierna/biela · R čas · Esc stop',
+  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P publikum · H legenda · S obrazovka · G prehľad · B/W čierna/biela · R čas · Esc stop',
+  'pijltjes + Enter of klik om te springen':
+      'šípky + Enter alebo kliknutím preskočíte',
   'Afsluiten (Escape)': 'Ukončiť (Escape)',
   'Sluiten (G of Esc)': 'Zavrieť (G alebo Esc)',
   'Slide renderen…': 'Vykresľuje sa snímka…',
   'Slide gekopieerd naar klembord.': 'Snímka skopírovaná do schránky.',
   'Kopiëren mislukt.': 'Kopírovanie zlyhalo.',
-  'Geen ander deck open. Open eerst een ander tabblad.': 'Nie je otvorený žiadny iný balík. Najprv otvorte inú kartu.',
+  'Geen ander deck open. Open eerst een ander tabblad.':
+      'Nie je otvorený žiadny iný balík. Najprv otvorte inú kartu.',
   '1 slide kopiëren naar…': 'Kopírovať 1 snímku do…',
   'slides kopiëren naar…': 'snímok kopírovať do…',
   'slide(s) gekopieerd naar': 'snímka(y) skopírovaná(é) do',
@@ -431,11 +493,13 @@ const _dutchSourceSk = {
   'Tips': 'Tipy',
   'Waarschuwingen': 'Upozornenia',
   'Fouten': 'Chyby',
-  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Tip: pridajte alt text / popis pre prístupnosť',
+  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Tip: pridajte alt text / popis pre prístupnosť',
   'Zoek in slides…': 'Hľadať v snímkach…',
   'Geen slides met': 'Žiadne snímky s',
   'SLIDES': 'SNÍMKY',
-  'Geen afbeelding op het klembord gevonden.': 'V schránke sa nenašiel žiadny obrázok.',
+  'Geen afbeelding op het klembord gevonden.':
+      'V schránke sa nenašiel žiadny obrázok.',
   'Afbeelding plakken': 'Prilepiť obrázok',
   'Slide toevoegen': 'Pridať snímku',
   'Slide plakken': 'Prilepiť snímku',
@@ -446,60 +510,84 @@ const _dutchSourceSk = {
   'Kopiëren naar ander deck': 'Kopírovať do iného balíka',
   'Weer tonen': 'Zobraziť znova',
   'Selectie opheffen': 'Zrušiť výber',
-  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.': 'Súhlasím s licenciou EUPL 1.2 a prečítal(a) som si, ktoré údaje OciDeck uchováva.',
-  'Je keuze wordt de standaardtaal van de app.': 'Váš výber sa stane predvoleným jazykom aplikácie.',
+  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
+      'Súhlasím s licenciou EUPL 1.2 a prečítal(a) som si, ktoré údaje OciDeck uchováva.',
+  'Je keuze wordt de standaardtaal van de app.':
+      'Váš výber sa stane predvoleným jazykom aplikácie.',
   'Lees de volledige licentie': 'Prečítať celú licenciu',
-  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.': 'OciDeck je slobodný softvér pod licenciou EUPL 1.2. Skôr než začnete, žiadame vás o prijatie licencie. Nižšie si tiež prečítate, ktoré údaje OciDeck uchováva na tomto zariadení a kedy niečo opúšťa vaše zariadenie.',
-  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.': 'OciDeck nezbiera žiadne štatistiky a sám od seba nič neodosiela von. Predvolene všetko zostáva na tomto zariadení. Údaje opúšťajú toto zariadenie iba vtedy, keď sa tak rozhodnete:\n\n•  Nextcloud/WebDAV: keď sa pripojíte k serveru, uloží sa vaše prihlasovacie meno a heslo (heslo bezpečne v kľúčenke vášho systému) a prezentácie, ktoré otvárate alebo ukladáte, sa odošlú na daný server.\n•  Otvorenie cez URL: OciDeck načíta súbor z adresy, ktorú zadáte.\n•  Online médiá (predvolene vypnuté): ak sú zapnuté, OciDeck načítava obrázky a videá z adries vo vašich snímkach.\n•  Externé odkazy (napríklad online licencia) sa otvárajú vo vašom prehliadači.',
-  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.': 'OciDeck sa poskytuje pod licenciou European Union Public Licence v1.2. Súhlasom prijímate túto licenciu. OciDeck môžete používať, kopírovať, upravovať a šíriť za podmienok EUPL 1.2.',
-  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.': 'Aby OciDeck fungoval a aby ste neprišli o svoju prácu, uchováva údaje lokálne na tomto zariadení:\n\n•  Vaše nastavenia a predvoľby (jazyk, priečinky, profily štýlu a zobrazenia, nedávne súbory).\n•  Vaše prezentačné materiály: prezentácie, ktoré ukladáte, automatické záložné kópie a prílohy ako popisy obrázkov.\n•  Túto voľbu súhlasu.\n\nToto môžete odstrániť zmazaním súborov alebo obnovením nastavení.',
-  'Volledige licentie online (23 officiële taalversies)': 'Celá licencia online (23 oficiálnych jazykových verzií)',
-  'Wat OciDeck op dit apparaat bewaart': 'Čo OciDeck uchováva na tomto zariadení',
+  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
+      'OciDeck je slobodný softvér pod licenciou EUPL 1.2. Skôr než začnete, žiadame vás o prijatie licencie. Nižšie si tiež prečítate, ktoré údaje OciDeck uchováva na tomto zariadení a kedy niečo opúšťa vaše zariadenie.',
+  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.':
+      'OciDeck nezbiera žiadne štatistiky a sám od seba nič neodosiela von. Predvolene všetko zostáva na tomto zariadení. Údaje opúšťajú toto zariadenie iba vtedy, keď sa tak rozhodnete:\n\n•  Nextcloud/WebDAV: keď sa pripojíte k serveru, uloží sa vaše prihlasovacie meno a heslo (heslo bezpečne v kľúčenke vášho systému) a prezentácie, ktoré otvárate alebo ukladáte, sa odošlú na daný server.\n•  Otvorenie cez URL: OciDeck načíta súbor z adresy, ktorú zadáte.\n•  Online médiá (predvolene vypnuté): ak sú zapnuté, OciDeck načítava obrázky a videá z adries vo vašich snímkach.\n•  Externé odkazy (napríklad online licencia) sa otvárajú vo vašom prehliadači.',
+  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.':
+      'OciDeck sa poskytuje pod licenciou European Union Public Licence v1.2. Súhlasom prijímate túto licenciu. OciDeck môžete používať, kopírovať, upravovať a šíriť za podmienok EUPL 1.2.',
+  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.':
+      'Aby OciDeck fungoval a aby ste neprišli o svoju prácu, uchováva údaje lokálne na tomto zariadení:\n\n•  Vaše nastavenia a predvoľby (jazyk, priečinky, profily štýlu a zobrazenia, nedávne súbory).\n•  Vaše prezentačné materiály: prezentácie, ktoré ukladáte, automatické záložné kópie a prílohy ako popisy obrázkov.\n•  Túto voľbu súhlasu.\n\nToto môžete odstrániť zmazaním súborov alebo obnovením nastavení.',
+  'Volledige licentie online (23 officiële taalversies)':
+      'Celá licencia online (23 oficiálnych jazykových verzií)',
+  'Wat OciDeck op dit apparaat bewaart':
+      'Čo OciDeck uchováva na tomto zariadení',
   'Wat je apparaat verlaat': 'Čo opúšťa vaše zariadenie',
-  'Vul server-URL en gebruikersnaam in': 'Zadajte URL servera a používateľské meno',
+  'Vul server-URL en gebruikersnaam in':
+      'Zadajte URL servera a používateľské meno',
   'Verbinding mislukt': 'Pripojenie zlyhalo',
-  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord': 'Prihlásenie zlyhalo — skontrolujte používateľské meno a heslo',
-  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.': 'Server je na súkromnej adrese. Zaškrtnite „Dôveryhodný interný server“, aby ste povolili pripojenie.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord':
+      'Prihlásenie zlyhalo — skontrolujte používateľské meno a heslo',
+  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.':
+      'Server je na súkromnej adrese. Zaškrtnite „Dôveryhodný interný server“, aby ste povolili pripojenie.',
   'Map niet gevonden op de server': 'Priečinok sa na serveri nenašiel',
   'Ongeldige server-URL': 'Neplatná URL servera',
-  'Het antwoord van de server was te groot': 'Odpoveď servera bola príliš veľká',
+  'Het antwoord van de server was te groot':
+      'Odpoveď servera bola príliš veľká',
   'Nextcloud': 'Nextcloud',
   'Nextcloud-bron (WebDAV)': 'Zdroj Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.': 'Otvárajte a ukladajte prezentácie v priečinku na vašom Nextcloude. Heslo sa uchováva šifrované v kľúčenke, nie spolu s ostatnými nastaveniami.',
+  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Otvárajte a ukladajte prezentácie v priečinku na vašom Nextcloude. Heslo sa uchováva šifrované v kľúčenke, nie spolu s ostatnými nastaveniami.',
   'Server-URL': 'URL servera',
   'Gebruikersnaam': 'Používateľské meno',
   'App-wachtwoord': 'Heslo aplikácie',
-  'Maak hiervoor een app-wachtwoord aan in Nextcloud': 'Vytvorte si na to heslo aplikácie v Nextcloude',
+  'Maak hiervoor een app-wachtwoord aan in Nextcloud':
+      'Vytvorte si na to heslo aplikácie v Nextcloude',
   'Submap (optioneel)': 'Podpriečinok (voliteľné)',
   'Vertrouwde interne server': 'Dôveryhodný interný server',
-  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.': 'Potrebné, keď server beží v súkromnej alebo domácej sieti (LAN). Povoľte iba pripojenia k serverom, ktorým sami dôverujete.',
+  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Potrebné, keď server beží v súkromnej alebo domácej sieti (LAN). Povoľte iba pripojenia k serverom, ktorým sami dôverujete.',
   'Verbinding testen': 'Otestovať pripojenie',
   'Verbinding gelukt': 'Pripojenie úspešné',
-  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.': 'Zmeny sa uložia po kliknutí na Uložiť.',
+  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
+      'Zmeny sa uložia po kliknutí na Uložiť.',
   'Afbeelding kiezen op Nextcloud': 'Vybrať obrázok na Nextcloude',
   'Openen vanaf Nextcloud': 'Otvoriť z Nextcloudu',
   'Vernieuwen': 'Obnoviť',
   'Deze map is leeg': 'Tento priečinok je prázdny',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.': 'Nie je nastavený žiadny server Nextcloud. Nastavte ho v Nastavenia → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.': 'Nepodarilo sa načítať priečinok. Skontrolujte pripojenie a nastavenia.',
+  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
+      'Nie je nastavený žiadny server Nextcloud. Nastavte ho v Nastavenia → Nextcloud.',
+  'Kon de map niet laden. Controleer je verbinding en instellingen.':
+      'Nepodarilo sa načítať priečinok. Skontrolujte pripojenie a nastavenia.',
   'Kon dit bestand niet openen.': 'Tento súbor sa nepodarilo otvoriť.',
-  'Dit is geen Marp/OciDeck-presentatie.': 'Toto nie je prezentácia Marp/OciDeck.',
+  'Dit is geen Marp/OciDeck-presentatie.':
+      'Toto nie je prezentácia Marp/OciDeck.',
   'Downloaden mislukt:': 'Sťahovanie zlyhalo:',
   'Opgeslagen op Nextcloud:': 'Uložené na Nextcloud:',
   'Opslaan mislukt:': 'Ukladanie zlyhalo:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.': 'Najprv nastavte server Nextcloud v Nastavenia → Nextcloud.',
+  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
+      'Najprv nastavte server Nextcloud v Nastavenia → Nextcloud.',
   'Opslaan naar Nextcloud': 'Uložiť na Nextcloud',
   'Doelpad (zonder extensie)': 'Cieľová cesta (bez prípony)',
-  'Als .ocideck-pakket (één bestand, met assets)': 'Ako balík .ocideck (jeden súbor, s aktívami)',
+  'Als .ocideck-pakket (één bestand, met assets)':
+      'Ako balík .ocideck (jeden súbor, s aktívami)',
   'Als losse .md plus afbeeldingen': 'Ako samostatný .md plus obrázky',
   'Opslaan': 'Uložiť',
   'Presenteren': 'Prezentovanie',
   'Tijden-overzicht tonen na afloop': 'Po skončení zobraziť prehľad časov',
-  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.': 'Čas na snímku sa meria vždy; toto určuje len to, či sa po tejto prezentácii zobrazí prehľad.',
+  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
+      'Čas na snímku sa meria vždy; toto určuje len to, či sa po tejto prezentácii zobrazí prehľad.',
   'Oefenoverzicht tonen na afloop': 'Po skončení zobraziť súhrn nácviku',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.': 'Po prezentácii zobrazte prehľad s časom stráveným na každej snímke. Čas sa meria vždy; toto určuje len to, či sa obrazovka zobrazí.',
+  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+      'Po prezentácii zobrazte prehľad s časom stráveným na každej snímke. Čas sa meria vždy; toto určuje len to, či sa obrazovka zobrazí.',
   'Onveilige presentatie geblokkeerd': 'Nebezpečná prezentácia zablokovaná',
-  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.': 'Táto prezentácia nebola otvorená. Súbor obsahuje obsah, ktorý môže spustiť kód, a prezentácia by mala obsahovať iba údaje — nič spustiteľné.',
+  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Táto prezentácia nebola otvorená. Súbor obsahuje obsah, ktorý môže spustiť kód, a prezentácia by mala obsahovať iba údaje — nič spustiteľné.',
   'Gevonden:': 'Nájdené:',
   'Regel': 'Riadok',
   'Scriptuitvoering': 'Spustenie skriptu',
@@ -521,46 +609,66 @@ const _dutchSourceSk = {
   'Pootje': 'Labka',
   'In tweeën splitsen': 'Rozdeliť na dve',
   'Uitgevoerde controles': 'Vykonané kontroly',
-  'Contrast en leesbaarheid van tekstkleuren': 'Kontrast a čitateľnosť farieb textu',
-  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media': 'Alt texty a popisy obrázkov, grafov a médií',
-  'Aanwezigheid van gekoppelde mediabestanden': 'Prítomnosť prepojených mediálnych súborov',
-  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code': 'Hustota textu: odrážky, slová, citáty, tabuľky a kód',
-  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).': 'Téma, snímky, päta, kontrolný zoznam a titulky nad obrázkami, overené voči WCAG AA (4,5:1 pre text, 3:1 pre veľký text).',
-  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.': 'Každý obrázok, graf, video a zvuk potrebuje popis pre čítačky obrazovky a podklady.',
-  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.': 'Odkazy na obrázky, video a zvuk sa kontrolujú na existujúci súbor v projekte.',
-  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.': 'Počet a dĺžka odrážok, slová, vnorenie, vyváženie stĺpcov a hustota citátov, titulkov, tabuliek a kódu, aby sa všetko čitateľne zmestilo.',
-  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.': 'Text tela s kontrastom pod {crit}:1 sa počíta ako chyba; nad tým až po normu AA ako upozornenie.',
-  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.': 'Žiadna prahová hodnota: neprázdny popis je povinný.',
-  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.': 'Žiadna prahová hodnota: prepojený súbor musí existovať v priečinku projektu.',
-  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.': 'Upozornenie nad {b1} odrážok (1 stĺpec), {bcl} (kontrolný zoznam) alebo {b2} (2 stĺpce); kritické nad {bc1} alebo {bc2}. Slová nad {w1}/{w2}, priemerne nad {avg} na odrážku. Citát nad {q} znakov, titulok nad {t} znakov. Vnorenie hlbšie ako úroveň {lvl}. Text, ktorý sa musí zmenšiť pod {warn} %, upozorňuje, pod {crit} % je kritický.',
+  'Contrast en leesbaarheid van tekstkleuren':
+      'Kontrast a čitateľnosť farieb textu',
+  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+      'Alt texty a popisy obrázkov, grafov a médií',
+  'Aanwezigheid van gekoppelde mediabestanden':
+      'Prítomnosť prepojených mediálnych súborov',
+  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+      'Hustota textu: odrážky, slová, citáty, tabuľky a kód',
+  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+      'Téma, snímky, päta, kontrolný zoznam a titulky nad obrázkami, overené voči WCAG AA (4,5:1 pre text, 3:1 pre veľký text).',
+  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+      'Každý obrázok, graf, video a zvuk potrebuje popis pre čítačky obrazovky a podklady.',
+  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+      'Odkazy na obrázky, video a zvuk sa kontrolujú na existujúci súbor v projekte.',
+  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+      'Počet a dĺžka odrážok, slová, vnorenie, vyváženie stĺpcov a hustota citátov, titulkov, tabuliek a kódu, aby sa všetko čitateľne zmestilo.',
+  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+      'Text tela s kontrastom pod {crit}:1 sa počíta ako chyba; nad tým až po normu AA ako upozornenie.',
+  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+      'Žiadna prahová hodnota: neprázdny popis je povinný.',
+  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+      'Žiadna prahová hodnota: prepojený súbor musí existovať v priečinku projektu.',
+  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+      'Upozornenie nad {b1} odrážok (1 stĺpec), {bcl} (kontrolný zoznam) alebo {b2} (2 stĺpce); kritické nad {bc1} alebo {bc2}. Slová nad {w1}/{w2}, priemerne nad {avg} na odrážku. Citát nad {q} znakov, titulok nad {t} znakov. Vnorenie hlbšie ako úroveň {lvl}. Text, ktorý sa musí zmenšiť pod {warn} %, upozorňuje, pod {crit} % je kritický.',
   'Zoek op deze computer': 'Hľadať v tomto počítači',
   'Presentaties zoeken op deze computer': 'Nájsť prezentácie v tomto počítači',
   'Zoek op titel, pad of thema…': 'Hľadať podľa názvu, cesty alebo témy…',
   'Bekende mappen worden doorzocht…': 'Prehľadávajú sa známe priečinky…',
   'gevonden': 'nájdené',
   'presentatie(s) gevonden': 'prezentácia(e) nájdená(é)',
-  'Geen Marp-presentaties gevonden in de bekende mappen.': 'V známych priečinkoch sa nenašli žiadne prezentácie Marp.',
+  'Geen Marp-presentaties gevonden in de bekende mappen.':
+      'V známych priečinkoch sa nenašli žiadne prezentácie Marp.',
   'Geen thema': 'Žiadna téma',
   'Kopieer syntaxproblemen': 'Kopírovať problémy so syntaxou',
-  'Syntaxproblemen gekopieerd naar klembord.': 'Problémy so syntaxou skopírované do schránky.',
+  'Syntaxproblemen gekopieerd naar klembord.':
+      'Problémy so syntaxou skopírované do schránky.',
   'Online media': 'Online médiá',
   'Online media staat uit': 'Online médiá sú vypnuté',
   'Online media toestaan': 'Povoliť online médiá',
-  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.': 'Povoľte živé načítavanie obrázkov a videí cez URL a z vložení YouTube/Vimeo. Predvolene vypnuté kvôli vášmu súkromiu a bezpečnosti.',
-  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)': 'Cesta k súboru alebo URL (YouTube, Vimeo, .mp4 …)',
+  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+      'Povoľte živé načítavanie obrázkov a videí cez URL a z vložení YouTube/Vimeo. Predvolene vypnuté kvôli vášmu súkromiu a bezpečnosti.',
+  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+      'Cesta k súboru alebo URL (YouTube, Vimeo, .mp4 …)',
   'Bestand kiezen': 'Vybrať súbor',
-  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.': 'Prehrajte segment tejto snímky v náhľade a strihnite v bode, kde chcete rozdeliť: druhá časť prejde na novú snímku.',
+  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+      'Prehrajte segment tejto snímky v náhľade a strihnite v bode, kde chcete rozdeliť: druhá časť prejde na novú snímku.',
   'Begin (sec)': 'Začiatok (sek)',
   'Einde (sec)': 'Koniec (sek)',
   'einde': 'koniec',
-  'Knip de video op het huidige afspeelpunt': 'Strihnúť video v aktuálnom bode prehrávania',
-  'Speel de video eerst af in het voorbeeld': 'Najprv prehrajte video v náhľade',
+  'Knip de video op het huidige afspeelpunt':
+      'Strihnúť video v aktuálnom bode prehrávania',
+  'Speel de video eerst af in het voorbeeld':
+      'Najprv prehrajte video v náhľade',
   'Knip hier': 'Strihnúť tu',
   'Online': 'Online',
   'Lokaal bestand': 'Lokálny súbor',
   'Geen video': 'Žiadne video',
   'Vraag (meerkeuze)': 'Otázka (výber z možností)',
-  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding': 'Text titulku má príliš malý kontrast s obrázkom na pozadí',
+  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+      'Text titulku má príliš malý kontrast s obrázkom na pozadí',
   'Herstel': 'Opraviť',
   'Tijdlijn': 'Časová os',
   'Indeling': 'Rozloženie',
@@ -585,19 +693,24 @@ const _dutchSourceSk = {
   'Vraag': 'Otázka',
   'Wat wil je vragen?': 'Na čo sa chcete opýtať?',
   'Antwoorden': 'Odpovede',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.': 'Označte správne odpovede. Bez limitu; pri prezentovaní sa náhodne zobrazí jedna správna a zvyšok nesprávnych.',
+  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Označte správne odpovede. Bez limitu; pri prezentovaní sa náhodne zobrazí jedna správna a zvyšok nesprávnych.',
   'Antwoord': 'Odpoveď',
   'Antwoord toevoegen': 'Pridať odpoveď',
   'Goed antwoord': 'Správna odpoveď',
-  'Geef minstens één goed én één fout antwoord op.': 'Zadajte aspoň jednu správnu a jednu nesprávnu odpoveď.',
+  'Geef minstens één goed én één fout antwoord op.':
+      'Zadajte aspoň jednu správnu a jednu nesprávnu odpoveď.',
   'Weergave': 'Zobrazenie',
   'Aantal getoonde opties': 'Počet zobrazených možností',
-  'Maximale antwoordtijd in seconden (0 = geen limiet)': 'Maximálny čas na odpoveď v sekundách (0 = bez limitu)',
+  'Maximale antwoordtijd in seconden (0 = geen limiet)':
+      'Maximálny čas na odpoveď v sekundách (0 = bez limitu)',
   'Bij een fout antwoord': 'Pri nesprávnej odpovedi',
   'Opnieuw proberen': 'Skúsiť znova',
   'Doorgaan toestaan': 'Povoliť pokračovanie',
-  'Fout = niet doorgaan; de vraag moet opnieuw.': 'Nesprávne = nemožno pokračovať; otázku treba zopakovať.',
-  'Fout = wel doorgaan, maar niet opnieuw doen.': 'Nesprávne = možno pokračovať, ale bez opakovania.',
+  'Fout = niet doorgaan; de vraag moet opnieuw.':
+      'Nesprávne = nemožno pokračovať; otázku treba zopakovať.',
+  'Fout = wel doorgaan, maar niet opnieuw doen.':
+      'Nesprávne = možno pokračovať, ale bez opakovania.',
   'Afbeelding (optioneel)': 'Obrázok (voliteľné)',
   'Breedte afbeelding': 'Šírka obrázka',
   'Goed!': 'Správne!',
@@ -612,45 +725,56 @@ const _dutchSourceSk = {
   'Juist / Onjuist': 'Pravda / Nepravda',
   'Meerdere juiste antwoorden': 'Viacero správnych odpovedí',
   'Stelling': 'Tvrdenie',
-  'Formuleer een stelling die juist of onjuist is': 'Sformulujte tvrdenie, ktoré je pravdivé alebo nepravdivé',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.': 'Označte všetky správne odpovede. Pri prezentovaní sa zobrazí náhodná sada s aspoň jednou správnou a jednou nesprávnou.',
+  'Formuleer een stelling die juist of onjuist is':
+      'Sformulujte tvrdenie, ktoré je pravdivé alebo nepravdivé',
+  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+      'Označte všetky správne odpovede. Pri prezentovaní sa zobrazí náhodná sada s aspoň jednou správnou a jednou nesprávnou.',
   'Juist': 'Pravda',
   'Onjuist': 'Nepravda',
-  'De stelling hierboven is juist of onjuist; kies welke.': 'Tvrdenie vyššie je pravdivé alebo nepravdivé; vyberte, ktoré.',
+  'De stelling hierboven is juist of onjuist; kies welke.':
+      'Tvrdenie vyššie je pravdivé alebo nepravdivé; vyberte, ktoré.',
   'Selecteer alle juiste antwoorden': 'Vyberte všetky správne odpovede',
   'Bevestig': 'Potvrdiť',
   'Het juiste antwoord': 'Správna odpoveď',
-  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.': 'Obrázok sa zobrazí na celú obrazovku ako pozadie. Rozmazanie použite, keď titulok potrebuje viac pokoja alebo kontrastu.',
+  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+      'Obrázok sa zobrazí na celú obrazovku ako pozadie. Rozmazanie použite, keď titulok potrebuje viac pokoja alebo kontrastu.',
   'Cockpit-kleurschema': 'Farebná schéma kokpitu',
-  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.': 'Stavové farby meračov kokpitu. Vytvorte pomenované varianty; vybraná schéma platí pre všetky snímky kokpitu.',
+  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+      'Stavové farby meračov kokpitu. Vytvorte pomenované varianty; vybraná schéma platí pre všetky snímky kokpitu.',
   'Standaard': 'Predvolené',
   'Standaardkleuren gebruiken': 'Použiť predvolené farby',
   'Kleurschema verwijderen': 'Odstrániť farebnú schému',
   'Schemanaam': 'Názov schémy',
-  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.': 'Toto je vstavaná schéma. Ak chcete upraviť farby, vytvorte kópiu.',
+  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+      'Toto je vstavaná schéma. Ak chcete upraviť farby, vytvorte kópiu.',
   'Goed': 'Dobré',
   'Waarschuwing': 'Upozornenie',
   'Kritiek': 'Kritické',
   'Te laag (koud)': 'Príliš nízke (studené)',
   'Lucht (horizon)': 'Obloha (horizont)',
   'Grond (horizon)': 'Zem (horizont)',
-  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.': 'Stavové farby sa riadia farebnou schémou kokpitu; upravte ju alebo vytvorte varianty cez Nastavenia → Kokpit.',
+  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+      'Stavové farby sa riadia farebnou schémou kokpitu; upravte ju alebo vytvorte varianty cez Nastavenia → Kokpit.',
   'Veel bullets op deze slide': 'Veľa odrážok na tejto snímke',
   'bullets': 'odrážok',
   'Overweeg de inhoud te splitsen.': 'Zvážte rozdelenie obsahu.',
   'Erg veel bullets op deze slide': 'Príliš veľa odrážok na tejto snímke',
-  'Splits deze inhoud over meerdere slides.': 'Rozdeľte tento obsah na viacero snímok.',
+  'Splits deze inhoud over meerdere slides.':
+      'Rozdeľte tento obsah na viacero snímok.',
   'Veel woorden in bullets': 'Veľa slov v odrážkach',
   'woorden': 'slov',
-  'Maak bullets korter of splits de slide.': 'Skráťte odrážky alebo rozdeľte snímku.',
+  'Maak bullets korter of splits de slide.':
+      'Skráťte odrážky alebo rozdeľte snímku.',
   'Erg veel woorden in bullets': 'Príliš veľa slov v odrážkach',
   'Gemiddeld lange bullets': 'V priemere dlhé odrážky',
   'woorden per bullet': 'slov na odrážku',
   'Maak elke bullet kernachtiger.': 'Sformulujte každú odrážku výstižnejšie.',
-  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.': 'Nájdená odrážka s viacerými vetami. Sformulujte odrážky výstižnejšie alebo rozdeľte obsah.',
+  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+      'Nájdená odrážka s viacerými vetami. Sformulujte odrážky výstižnejšie alebo rozdeľte obsah.',
   'Diepe bulletniveaus gevonden': 'Nájdené hlboké úrovne odrážok',
   'niveau': 'úroveň',
-  'Beperk nesting voor betere leesbaarheid.': 'Obmedzte vnorenie kvôli lepšej čitateľnosti.',
+  'Beperk nesting voor betere leesbaarheid.':
+      'Obmedzte vnorenie kvôli lepšej čitateľnosti.',
   'Twee kolommen zijn sterk uit balans': 'Dva stĺpce sú výrazne nevyvážené',
   'tegenover': 'oproti',
   'Verdeel of splits de inhoud.': 'Prerozdeľte alebo rozdeľte obsah.',
@@ -660,8 +784,10 @@ const _dutchSourceSk = {
   'Animeren bij binnenkomst': 'Animovať pri vstupe',
   'Activatieduur': 'Trvanie aktivácie',
   'Splits slide': 'Rozdeliť snímku',
-  'Doornummeren vanaf vorige slide': 'Pokračovať v číslovaní z predchádzajúcej snímky',
-  'Begin de nummering waar de vorige slide ophield.': 'Začať číslovanie tam, kde skončila predchádzajúca snímka.',
+  'Doornummeren vanaf vorige slide':
+      'Pokračovať v číslovaní z predchádzajúcej snímky',
+  'Begin de nummering waar de vorige slide ophield.':
+      'Začať číslovanie tam, kde skončila predchádzajúca snímka.',
   'Volg thema-animatieduur': 'Použiť trvanie animácie témy',
   'Animatie bij openen': 'Animovať pri vstupe',
   'Meter': 'Meradlo',
@@ -689,7 +815,8 @@ const _dutchSourceSk = {
   'Koers': 'Kurz',
   'Ander profiel kiezen': 'Vybrať iný profil',
   'Cockpit': 'Kokpit',
-  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Cieľový čas pre odpočet v prezentéri. Počas prezentovania sa dá doladiť klávesom K.',
+  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Cieľový čas pre odpočet v prezentéri. Počas prezentovania sa dá doladiť klávesom K.',
   'Logo en footer': 'Logo a päta',
   'Pagina': 'Strana',
   'Presentatiestijl': 'Štýl prezentácie',
@@ -706,7 +833,8 @@ const _dutchSourceSk = {
   'Doeltijd': 'Cieľový čas',
   'Doeltijd (aftellen)': 'Cieľový čas (odpočet)',
   'Geen aftelling': 'Bez odpočtu',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Predvolený cieľový čas pre odpočet v prezentéri. Počas prezentovania sa dá doladiť klávesom K.',
+  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Predvolený cieľový čas pre odpočet v prezentéri. Počas prezentovania sa dá doladiť klávesom K.',
   'uit': 'vyp',
   'Doeltijd / aftellen (K)': 'Cieľ / odpočet (K)',
   'Doeltijd / aftellen instellen (MMSS)': 'Nastaviť cieľ / odpočet (MMSS)',
@@ -723,25 +851,31 @@ const _dutchSourceSk = {
   'Kopieer': 'Kopírovať',
   'Sluiten': 'Zavrieť',
   'Tekstgrootte van de interface': 'Veľkosť textu rozhrania',
-  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.': 'Zväčší všetok text editora až na 200 %. Samotné snímky sa nezmenia.',
+  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+      'Zväčší všetok text editora až na 200 %. Samotné snímky sa nezmenia.',
   'Breedte van het slidepaneel': 'Šírka panela snímok',
   'Pijltjestoetsen passen de breedte aan': 'Šírku upravujú klávesy so šípkami',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.': 'Tip: vložte tabuľku z tabuľkového procesora do bunky pomocou Cmd/Ctrl+V a vyplňte celú tabuľku.',
+  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+      'Tip: vložte tabuľku z tabuľkového procesora do bunky pomocou Cmd/Ctrl+V a vyplňte celú tabuľku.',
   'Annuleren': 'Zrušiť',
   'Checklist': 'Kontrolný zoznam',
   'Voortgangsgrafiek tonen': 'Zobraziť graf priebehu',
-  'Toont afgevinkt en niet afgevinkt als percentages.': 'Zobrazuje zaškrtnuté a nezaškrtnuté položky v percentách.',
+  'Toont afgevinkt en niet afgevinkt als percentages.':
+      'Zobrazuje zaškrtnuté a nezaškrtnuté položky v percentách.',
   'Afgevinkt': 'Zaškrtnuté',
   'Niet afgevinkt': 'Nezaškrtnuté',
-  'Er zijn geen aangevinkte checklist-items om te legen.': 'Nie sú žiadne zaškrtnuté položky kontrolného zoznamu na vymazanie.',
+  'Er zijn geen aangevinkte checklist-items om te legen.':
+      'Nie sú žiadne zaškrtnuté položky kontrolného zoznamu na vymazanie.',
   'Alle checkboxen legen?': 'Vymazať všetky zaškrtávacie políčka?',
   'Hiermee worden alle': 'Týmto sa zrušia všetky',
-  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.': 'zaškrtnuté položky kontrolného zoznamu v celej prezentácii. Toto môžete vrátiť späť pomocou Ctrl/Cmd+Z.',
+  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+      'zaškrtnuté položky kontrolného zoznamu v celej prezentácii. Toto môžete vrátiť späť pomocou Ctrl/Cmd+Z.',
   'Alles legen': 'Vymazať všetko',
   'checklist-items uitgevinkt.': 'položky kontrolného zoznamu odškrtnuté.',
   'Alle checkboxen legen': 'Vymazať všetky zaškrtávacie políčka',
   'Afgevinkte tekst doorhalen': 'Prečiarknuť zaškrtnutý text',
-  'Toont een streep door voltooide checklistitems.': 'Zobrazuje dokončené položky kontrolného zoznamu prečiarknuté.',
+  'Toont een streep door voltooide checklistitems.':
+      'Zobrazuje dokončené položky kontrolného zoznamu prečiarknuté.',
   'Na media automatisch doorgaan': 'Automaticky pokračovať po médiu',
   'Opsomming': 'Odrážky',
   'Nummering': 'Číslovanie',
@@ -751,11 +885,13 @@ const _dutchSourceSk = {
   'Omhoog': 'Nahor',
   'Omlaag': 'Nadol',
   'Niet toevoegen': 'Nepridávať',
-  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.': 'Tieto snímky používajú rovnaké údaje, farby a názov. Pomocou šípok zvoľte ich poradie po aktuálnej snímke.',
+  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+      'Tieto snímky používajú rovnaké údaje, farby a názov. Pomocou šípok zvoľte ich poradie po aktuálnej snímke.',
   'Afbeelding': 'Obrázok',
   'Broncode': 'Zdrojový kód',
   'Bullet': 'Odrážka',
-  'Plak of typ hier je broncode...': 'Sem vložte alebo napíšte svoj zdrojový kód...',
+  'Plak of typ hier je broncode...':
+      'Sem vložte alebo napíšte svoj zdrojový kód...',
   'Programmeertaal': 'Programovací jazyk',
   'TLP van deze slide': 'TLP tejto snímky',
   'Wis annotaties (C)': 'Vymazať anotácie (C)',
@@ -769,10 +905,12 @@ const _dutchSourceSk = {
   'Cirkel': 'Koláčový',
   'Spider': 'Pavúkový',
   'CSV importeren': 'Importovať CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)': 'Údaje (CSV: prvý riadok = názvy sérií, prvý stĺpec = štítky)',
+  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+      'Údaje (CSV: prvý riadok = názvy sérií, prvý stĺpec = štítky)',
   'Gekoppeld aan': 'Prepojené s',
   'Ontkoppelen': 'Odpojiť',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?': 'Uložiť údaje do snímky, alebo ich ponechať ako samostatný súbor CSV vedľa prezentácie?',
+  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+      'Uložiť údaje do snímky, alebo ich ponechať ako samostatný súbor CSV vedľa prezentácie?',
   'In de slide': 'V snímke',
   'Als CSV-bestand': 'Ako súbor CSV',
   'Geen grafiekgegevens': 'Žiadne údaje grafu',
@@ -785,9 +923,12 @@ const _dutchSourceSk = {
   'Sorteren': 'Zoradiť',
   'Oplopend sorteren': 'Zoradiť vzostupne',
   'Aflopend sorteren': 'Zoradiť zostupne',
-  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.': 'V koláčovom grafe sa zobrazia najviac prvé dve série; štítky tvoria segmenty.',
-  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.': 'Pavúkový graf potrebuje aspoň tri štítky (osi); každá séria tvorí obrazec.',
-  'Een spider-diagram heeft minstens drie labels nodig': 'Pavúkový graf potrebuje aspoň tri štítky',
+  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+      'V koláčovom grafe sa zobrazia najviac prvé dve série; štítky tvoria segmenty.',
+  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+      'Pavúkový graf potrebuje aspoň tri štítky (osi); každá séria tvorí obrazec.',
+  'Een spider-diagram heeft minstens drie labels nodig':
+      'Pavúkový graf potrebuje aspoň tri štítky',
   'Minimumlijn (optioneel)': 'Minimálna čiara (voliteľné)',
   'Maximumlijn (optioneel)': 'Maximálna čiara (voliteľné)',
   'Schaalminimum (optioneel)': 'Minimum škály (voliteľné)',
@@ -796,9 +937,11 @@ const _dutchSourceSk = {
   'Broncode achtergrond': 'Pozadie kódu',
   'Broncode tekst': 'Text kódu',
   'Syntaxkleuring': 'Zvýraznenie syntaxe',
-  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).': 'Vyp = všetko v jednej farbe (napr. zelená na čiernej pre obrazovku CRT).',
+  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+      'Vyp = všetko v jednej farbe (napr. zelená na čiernej pre obrazovku CRT).',
   'Eigen kleur (hex)': 'Vlastná farba (hex)',
-  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.': 'Napríklad #33FF33 pre CRT-zelenú obrazovku.',
+  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+      'Napríklad #33FF33 pre CRT-zelenú obrazovku.',
   'Onderdeel van stijlprofiel ': 'Súčasť profilu štýlu ',
   'Broncode lettertype': 'Písmo kódu',
   'Kop (optioneel)': 'Nadpis (voliteľné)',
@@ -806,22 +949,27 @@ const _dutchSourceSk = {
   'Subkop': 'Podnadpis',
   'Systeem (monospace)': 'Systémové (monospace)',
   'Platte tekst': 'Obyčajný text',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.': 'HTML sa otvorí v ľubovoľnom prehliadači bez internetu a vykreslí bloky kódu, matematiku a diagramy Mermaid.',
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+      'HTML sa otvorí v ľubovoľnom prehliadači bez internetu a vykreslí bloky kódu, matematiku a diagramy Mermaid.',
   'Laatste slide': 'Posledná snímka',
   'Logo px': 'Logo px',
   'Markdown voor laatste slide': 'Markdown pre poslednú snímku',
   'PREVIEW': 'NÁHĽAD',
   'Slides gerenderd.': 'Snímky vykreslené.',
   'Standaard laatste slide gebruiken': 'Použiť predvolenú poslednú snímku',
-  'Wordt automatisch toegevoegd bij presenteren en exporteren.': 'Automaticky sa pridá pri prezentovaní a exporte.',
+  'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+      'Automaticky sa pridá pri prezentovaní a exporte.',
   'gerenderd.': 'vykreslené.',
   'renderen…': 'vykresľovanie…',
   'voorbereiden…': 'pripravovanie…',
   'Duplicaten opruimen': 'Vyčistiť duplikáty',
-  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën': 'Nájsť bajtovo identické obrázky (md5), zlúčiť štítky a poznámky a odstrániť kópie',
-  'Geen dubbele afbeeldingen gevonden.': 'Nenašli sa žiadne duplicitné obrázky.',
+  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+      'Nájsť bajtovo identické obrázky (md5), zlúčiť štítky a poznámky a odstrániť kópie',
+  'Geen dubbele afbeeldingen gevonden.':
+      'Nenašli sa žiadne duplicitné obrázky.',
   'Dubbele afbeeldingen opruimen?': 'Vyčistiť duplicitné obrázky?',
-  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.': 'Z každej skupiny ostane jeden súbor. Štítky a poznámky sa zlúčia a snímky, ktoré používajú kópiu, budú potom odkazovať na zachovaný súbor — vrátane prezentácií, ktoré nie sú momentálne otvorené.',
+  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+      'Z každej skupiny ostane jeden súbor. Štítky a poznámky sa zlúčia a snímky, ktoré používajú kópiu, budú potom odkazovať na zachovaný súbor — vrátane prezentácií, ktoré nie sú momentálne otvorené.',
   'Opruimen': 'Vyčistiť',
   '1 presentatiebestand bijgewerkt.': '1 súbor prezentácie aktualizovaný.',
   'presentatiebestanden bijgewerkt.': 'súbory prezentácií aktualizované.',
@@ -830,14 +978,19 @@ const _dutchSourceSk = {
   'dubbele afbeeldingen verwijderd.': 'duplicitné obrázky odstránené.',
   'Alleen afbeeldingen zonder tags tonen': 'Zobraziť iba obrázky bez štítkov',
   'Alle afbeeldingen hebben tags.': 'Všetky obrázky majú štítky.',
-  'Zet het filter uit om alles weer te zien.': 'Vypnite filter, aby ste znova videli všetko.',
+  'Zet het filter uit om alles weer te zien.':
+      'Vypnite filter, aby ste znova videli všetko.',
   'Welkom bij OciDeck': 'Vitajte v OciDeck',
   'Privacy en gebruik': 'Súkromie a použitie',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'OciDeck je lokálna desktopová aplikácia. Vaše prezentácie a údaje sa ukladajú výlučne vo vašom počítači.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'Aplikácia nezhromažďuje žiadne osobné údaje, žiadne štatistiky ani údaje o používaní. Vaše súkromie je našou prioritou.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Všetky údaje, ktoré zadáte v OciDeck, ostávajú vo vašom lokálnom systéme a neodosielajú sa na externé servery.',
+  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
+      'OciDeck je lokálna desktopová aplikácia. Vaše prezentácie a údaje sa ukladajú výlučne vo vašom počítači.',
+  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
+      'Aplikácia nezhromažďuje žiadne osobné údaje, žiadne štatistiky ani údaje o používaní. Vaše súkromie je našou prioritou.',
+  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
+      'Všetky údaje, ktoré zadáte v OciDeck, ostávajú vo vašom lokálnom systéme a neodosielajú sa na externé servery.',
   'Licentie (EUPL 1.2)': 'Licencia (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'Kliknutím na „Súhlasím“ prijímate tieto podmienky a dávate súhlas s používaním OciDeck.',
+  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
+      'Kliknutím na „Súhlasím“ prijímate tieto podmienky a dávate súhlas s používaním OciDeck.',
   'Volledige licentie online': 'Úplná licencia online',
   'Akkoord gaan': 'Súhlasím',
   'Privacy': 'Súkromie',
@@ -845,16 +998,21 @@ const _dutchSourceSk = {
   'Toestemming intrekken': 'Odvolať súhlas',
   'Toestemming intrekken?': 'Odvolať súhlas?',
   'Intrekken': 'Odvolať',
-  'U hebt al toegestemd in het gebruik van OciDeck.': 'Už ste dali súhlas s používaním OciDeck.',
-  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.': 'Svoj súhlas môžete kedykoľvek odvolať. Po odvolaní musíte tieto podmienky prijať znova.',
-  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.': 'Ak odvoláte svoj súhlas, musíte tieto podmienky prijať znova pri opätovnom spustení OciDeck.',
+  'U hebt al toegestemd in het gebruik van OciDeck.':
+      'Už ste dali súhlas s používaním OciDeck.',
+  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+      'Svoj súhlas môžete kedykoľvek odvolať. Po odvolaní musíte tieto podmienky prijať znova.',
+  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+      'Ak odvoláte svoj súhlas, musíte tieto podmienky prijať znova pri opätovnom spustení OciDeck.',
   'Slidekwaliteit': 'Kvalita snímky',
   'Geen kwaliteitsproblemen gevonden': 'Nenašli sa žiadne problémy s kvalitou',
   'Thema (hele presentatie)': 'Téma (celá prezentácia)',
   'Kwaliteitsprobleem': 'Problém s kvalitou',
   'Kwaliteitsproblemen': 'Problémy s kvalitou',
-  'Kwaliteitsproblemen (inclusief ernstige)': 'Problémy s kvalitou (vrátane vážnych)',
-  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Pridajte alt text / popis kvôli prístupnosti',
+  'Kwaliteitsproblemen (inclusief ernstige)':
+      'Problémy s kvalitou (vrátane vážnych)',
+  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Pridajte alt text / popis kvôli prístupnosti',
   'Alt-tekst': 'Alt text',
   'Tekstdichtheid': 'Hustota textu',
   'Contrast': 'Kontrast',
@@ -864,22 +1022,32 @@ const _dutchSourceSk = {
   ':1 voor normale tekst).': ':1 pre normálny text).',
   ':1 voor grote tekst).': ':1 pre veľký text).',
   ':1).': ':1).',
-  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.': 'Kontrast textu na obrázku alebo cez obrázok sa nedá skontrolovať automaticky — overte vizuálne.',
-  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.': 'Graf nemá názov ani popisné údaje — pridajte názov alebo názvy sérií.',
-  'heeft geen titel of sprekernotities die de inhoud beschrijven.': 'nemá názov ani poznámky rečníka, ktoré popisujú obsah.',
-  'Veel tekst op deze slide: het lettertype wordt verkleind tot ': 'Veľa textu na tejto snímke: veľkosť písma sa zmenší na ',
+  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+      'Kontrast textu na obrázku alebo cez obrázok sa nedá skontrolovať automaticky — overte vizuálne.',
+  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+      'Graf nemá názov ani popisné údaje — pridajte názov alebo názvy sérií.',
+  'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+      'nemá názov ani poznámky rečníka, ktoré popisujú obsah.',
+  'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+      'Veľa textu na tejto snímke: veľkosť písma sa zmenší na ',
   ' van de ontwerpgrootte.': ' návrhovej veľkosti.',
-  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (': 'Veľa textu na tejto snímke: veľkosť písma sa výrazne zmenší (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.': 'návrhovej veľkosti). Zvážte rozdelenie obsahu.',
+  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+      'Veľa textu na tejto snímke: veľkosť písma sa výrazne zmenší (',
+  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      'návrhovej veľkosti). Zvážte rozdelenie obsahu.',
   'Grote tabel (': 'Veľká tabuľka (',
   ' rijen, ': ' riadkov, ',
-  ' kolommen): celtekst staat op het minimumformaat.': ' stĺpcov): text buniek je na minimálnej veľkosti.',
+  ' kolommen): celtekst staat op het minimumformaat.':
+      ' stĺpcov): text buniek je na minimálnej veľkosti.',
   'Veel broncode (': 'Veľa zdrojového kódu (',
-  ' regels) — de tekst wordt sterk verkleind om te passen.': ' riadkov) — text sa výrazne zmenší, aby sa zmestil.',
+  ' regels) — de tekst wordt sterk verkleind om te passen.':
+      ' riadkov) — text sa výrazne zmenší, aby sa zmestil.',
   'Veel vrije markdown (': 'Veľa voľného markdownu (',
-  ' regels) — controleer of alles leesbaar blijft op de slide.': ' riadkov) — skontrolujte, či všetko ostane čitateľné na snímke.',
+  ' regels) — controleer of alles leesbaar blijft op de slide.':
+      ' riadkov) — skontrolujte, či všetko ostane čitateľné na snímke.',
   'Lange titelpagina (': 'Dlhá titulná snímka (',
-  ' tekens) — de tekst wordt verkleind om te passen.': ' znakov) — text sa zmenší, aby sa zmestil.',
+  ' tekens) — de tekst wordt verkleind om te passen.':
+      ' znakov) — text sa zmenší, aby sa zmestil.',
   'Thema bodytekst': 'Telo textu témy',
   'Thema titel': 'Názov témy',
   'Thema tabeltekst': 'Text tabuľky témy',
@@ -890,34 +1058,46 @@ const _dutchSourceSk = {
   'Tweede afbeelding': 'Druhý obrázok',
   'Waarschuwing bij export': 'Upozorniť pri exporte',
   'Minimale contrastverhouding': 'Minimálny pomer kontrastu',
-  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.': 'Text pod týmto pomerom sa označí. 4.5 = WCAG AA, 3.0 = WCAG AA veľký text. Vyššie je prísnejšie.',
-  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.': 'Požiadať o potvrdenie pred exportom, keď existujú problémy s kvalitou snímok.',
+  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.':
+      'Text pod týmto pomerom sa označí. 4.5 = WCAG AA, 3.0 = WCAG AA veľký text. Vyššie je prísnejšie.',
+  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+      'Požiadať o potvrdenie pred exportom, keď existujú problémy s kvalitou snímok.',
   'Kwaliteitsproblemen gevonden': 'Nájdené problémy s kvalitou',
   'Toch exporteren': 'Exportovať aj tak',
   'ernstige probleem(en)': 'vážne problémy',
-  'De presentatie heeft kwaliteitsproblemen (': 'Prezentácia má problémy s kvalitou (',
+  'De presentatie heeft kwaliteitsproblemen (':
+      'Prezentácia má problémy s kvalitou (',
   'Lange quote (': 'Dlhý citát (',
   'Footer-tekst': 'Text päty',
   'Checklist (niet aangevinkt)': 'Kontrolný zoznam (nezaškrtnuté)',
   'Checklist (aangevinkt)': 'Kontrolný zoznam (zaškrtnuté)',
   ': bestand niet gevonden (': ': súbor sa nenašiel (',
-  'Blokkeer export bij ernstige kwaliteitsproblemen': 'Blokovať export pri vážnych problémoch s kvalitou',
-  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.': 'Export nie je možný, kým kontrola kvality snímok hlási chyby.',
-  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.': 'Export zablokovaný kvôli vážnym problémom s kvalitou.',
+  'Blokkeer export bij ernstige kwaliteitsproblemen':
+      'Blokovať export pri vážnych problémoch s kvalitou',
+  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+      'Export nie je možný, kým kontrola kvality snímok hlási chyby.',
+  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+      'Export zablokovaný kvôli vážnym problémom s kvalitou.',
   'Alle meldingen': 'Všetky hlásenia',
-  '… en meer problemen in het kwaliteitspaneel.': '… a ďalšie problémy v paneli kvality.',
+  '… en meer problemen in het kwaliteitspaneel.':
+      '… a ďalšie problémy v paneli kvality.',
   'Classificatie-handhaving': 'Vynucovanie klasifikácie',
   'Vrijgaveplafond': 'Strop vydania',
-  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.': 'Najvyššia úroveň TLP, ktorú je povolené exportovať. Prázdne = žiadny strop.',
+  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+      'Najvyššia úroveň TLP, ktorú je povolené exportovať. Prázdne = žiadny strop.',
   'Vereist minimumniveau': 'Požadovaná minimálna úroveň',
-  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.': 'Najnižšia klasifikácia, ktorú musí mať prezentácia na export. Prázdne = žiadne minimum.',
+  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+      'Najnižšia klasifikácia, ktorú musí mať prezentácia na export. Prázdne = žiadne minimum.',
   'Geen plafond': 'Žiadny strop',
   'Geen minimum': 'Žiadne minimum',
   'Classificatie verplicht': 'Klasifikácia povinná',
-  'Weiger export wanneer het deck geen TLP-niveau heeft.': 'Odmietnuť export, keď prezentácia nemá úroveň TLP.',
+  'Weiger export wanneer het deck geen TLP-niveau heeft.':
+      'Odmietnuť export, keď prezentácia nemá úroveň TLP.',
   'Classificatie-watermerk': 'Vodoznak klasifikácie',
-  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.': 'Zobraziť diagonálny vodoznak s TLP a organizáciou na každej snímke.',
-  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.': 'Nastavte úroveň TLP — export je blokovaný zásadami klasifikácie.',
+  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+      'Zobraziť diagonálny vodoznak s TLP a organizáciou na každej snímke.',
+  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+      'Nastavte úroveň TLP — export je blokovaný zásadami klasifikácie.',
   'Tabel bewerken': 'Upraviť tabuľku',
   'Pijltjes · Tab · Esc': 'Šípky · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Upraviť tabuľku (na snímkach s tabuľkou)',

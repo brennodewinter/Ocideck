@@ -300,7 +300,7 @@ class SlideThumbnail extends ConsumerWidget {
           Expanded(
             child: Text(
               l10n.d(slide.type.label),
-              style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 9),
+              style: const TextStyle(color: AppTheme.slate400, fontSize: 9),
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -312,7 +312,7 @@ class SlideThumbnail extends ConsumerWidget {
               child: Icon(
                 Icons.drag_handle,
                 size: 14,
-                color: Color(0xFF64748B),
+                color: AppTheme.slate500,
               ),
             ),
           ),
@@ -329,9 +329,7 @@ class SlideThumbnail extends ConsumerWidget {
                   : l10n.d('Overslaan bij presenteren/exporteren'),
               icon: Icon(
                 skipped ? Icons.visibility_off : Icons.visibility_outlined,
-                color: skipped
-                    ? const Color(0xFFD4A24E)
-                    : const Color(0xFF64748B),
+                color: skipped ? const Color(0xFFD4A24E) : AppTheme.slate500,
               ),
               onPressed: onToggleSkip,
             ),
@@ -343,7 +341,7 @@ class SlideThumbnail extends ConsumerWidget {
             child: PopupMenuButton<String>(
               icon: const Icon(
                 Icons.more_vert,
-                color: Color(0xFF64748B),
+                color: AppTheme.slate500,
                 size: 14,
               ),
               padding: EdgeInsets.zero,

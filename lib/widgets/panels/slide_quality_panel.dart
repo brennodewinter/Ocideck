@@ -13,6 +13,7 @@ import '../../state/deck_quality_provider.dart';
 import '../../state/image_contrast_provider.dart';
 import '../../utils/title_contrast.dart';
 import '../dialogs/slide_quality_details_dialog.dart';
+import '../../theme/app_theme.dart';
 
 class SlideQualityPanel extends ConsumerStatefulWidget {
   const SlideQualityPanel({super.key});
@@ -113,7 +114,7 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
         ? Colors.red.shade700
         : hasWarnings
         ? const Color(0xFF92400E)
-        : const Color(0xFF475569);
+        : AppTheme.slate600;
 
     final summary = formatSlideQualityCountSummary(l10n, result);
 

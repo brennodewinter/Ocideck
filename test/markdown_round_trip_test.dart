@@ -191,11 +191,9 @@ void main() {
       );
       expect(
         _roundTrip(
-          Slide.create(SlideType.twoBullets).copyWith(
-            bullets: ['a'],
-            bullets2: ['b'],
-            continuesSplit: true,
-          ),
+          Slide.create(
+            SlideType.twoBullets,
+          ).copyWith(bullets: ['a'], bullets2: ['b'], continuesSplit: true),
         ).continuesSplit,
         isTrue,
       );
@@ -977,26 +975,29 @@ void main() {
       expect(deck!.presentationTargetSeconds, 1500);
     });
 
-    test('deck-level show-rehearsal-summary round-trips (default stays clean)', () {
-      final service = MarkdownService();
-      Deck? roundTrip(bool show) => service.parseDeck(
-        service.generateDeck(
-          Deck(
-            title: 'Demo',
-            showRehearsalSummary: show,
-            slides: [Slide.create(SlideType.title).copyWith(title: 'Een')],
+    test(
+      'deck-level show-rehearsal-summary round-trips (default stays clean)',
+      () {
+        final service = MarkdownService();
+        Deck? roundTrip(bool show) => service.parseDeck(
+          service.generateDeck(
+            Deck(
+              title: 'Demo',
+              showRehearsalSummary: show,
+              slides: [Slide.create(SlideType.title).copyWith(title: 'Een')],
+            ),
           ),
-        ),
-      );
-      // Default (true) is not written to the front matter, but still parses true.
-      final onMarkdown = service.generateDeck(
-        Deck(title: 'Demo', slides: [Slide.create(SlideType.title)]),
-      );
-      expect(onMarkdown.contains('ocideck_show_rehearsal_summary'), isFalse);
-      expect(roundTrip(true)!.showRehearsalSummary, isTrue);
-      // Opt-out is persisted and round-trips.
-      expect(roundTrip(false)!.showRehearsalSummary, isFalse);
-    });
+        );
+        // Default (true) is not written to the front matter, but still parses true.
+        final onMarkdown = service.generateDeck(
+          Deck(title: 'Demo', slides: [Slide.create(SlideType.title)]),
+        );
+        expect(onMarkdown.contains('ocideck_show_rehearsal_summary'), isFalse);
+        expect(roundTrip(true)!.showRehearsalSummary, isTrue);
+        // Opt-out is persisted and round-trips.
+        expect(roundTrip(false)!.showRehearsalSummary, isFalse);
+      },
+    );
 
     test('timeline slide keeps title, events, layout and animation', () {
       final out = _roundTrip(
@@ -1095,20 +1096,22 @@ void main() {
       expect(out.tableRows[2][0], 'regel1\nregel2');
     });
 
-    test('C5: literal escape sequence in notes is the one accepted collision', () {
-      // Documented in markdown_service_helpers.dart: notes escape `-->` as
-      // `--\>` inside the HTML comment. A note that already contains the literal
-      // escape `--\>` therefore round-trips back as `-->`. This is a known,
-      // negligible, accepted collision (private escape sequence in speaker
-      // notes); this test locks the behaviour so any change is intentional.
-      final out = _roundTrip(
-        Slide.create(SlideType.section).copyWith(
-          title: 'Deel',
-          notes: r'literal escape --\> here',
-        ),
-      );
-      expect(out.notes, 'literal escape --> here');
-    });
+    test(
+      'C5: literal escape sequence in notes is the one accepted collision',
+      () {
+        // Documented in markdown_service_helpers.dart: notes escape `-->` as
+        // `--\>` inside the HTML comment. A note that already contains the literal
+        // escape `--\>` therefore round-trips back as `-->`. This is a known,
+        // negligible, accepted collision (private escape sequence in speaker
+        // notes); this test locks the behaviour so any change is intentional.
+        final out = _roundTrip(
+          Slide.create(
+            SlideType.section,
+          ).copyWith(title: 'Deel', notes: r'literal escape --\> here'),
+        );
+        expect(out.notes, 'literal escape --> here');
+      },
+    );
   });
 
   // Coverage for the richText-slide parser branch (the `make mutate` survivors,

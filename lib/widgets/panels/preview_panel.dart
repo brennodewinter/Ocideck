@@ -214,7 +214,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
           const Icon(
             Icons.preview_outlined,
             size: 16,
-            color: Color(0xFF64748B),
+            color: AppTheme.slate500,
           ),
           const SizedBox(width: 6),
           Text(
@@ -222,7 +222,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
             style: const TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 13,
-              color: Color(0xFF334155),
+              color: AppTheme.slate700,
             ),
           ),
           const Spacer(),
@@ -234,7 +234,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
               onPressed: _zoom > _minZoom ? _zoomOut : null,
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
-              color: const Color(0xFF64748B),
+              color: AppTheme.slate500,
             ),
           ),
           GestureDetector(
@@ -247,7 +247,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                   fontSize: 11,
                   color: _zoom != _minZoom
                       ? AppTheme.accent
-                      : const Color(0xFF94A3B8),
+                      : AppTheme.slate400,
                   fontWeight: _zoom != _minZoom
                       ? FontWeight.w600
                       : FontWeight.normal,
@@ -262,7 +262,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
               onPressed: _zoom < _maxZoom ? _zoomIn : null,
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
-              color: const Color(0xFF64748B),
+              color: AppTheme.slate500,
             ),
           ),
           const SizedBox(width: 8),
@@ -273,9 +273,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                 : '${idx + 1} / ${deck.slides.length}',
             style: TextStyle(
               fontSize: 12,
-              color: hasRichTextPages
-                  ? AppTheme.accent
-                  : const Color(0xFF94A3B8),
+              color: hasRichTextPages ? AppTheme.accent : AppTheme.slate400,
               fontWeight: hasRichTextPages
                   ? FontWeight.w600
                   : FontWeight.normal,
@@ -290,7 +288,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                   ref.read(previewCollapsedProvider.notifier).state = true,
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
-              color: const Color(0xFF64748B),
+              color: AppTheme.slate500,
             ),
           ),
         ],
@@ -407,7 +405,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                   l10n.d(slide.type.label),
                   style: const TextStyle(
                     fontSize: 11,
-                    color: Color(0xFF64748B),
+                    color: AppTheme.slate500,
                   ),
                 ),
                 if (hasRichTextPages)
@@ -415,7 +413,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                     '${l10n.d('Pagina')} ${richTextPage + 1} / $richTextPages',
                     style: const TextStyle(
                       fontSize: 10,
-                      color: Color(0xFF94A3B8),
+                      color: AppTheme.slate400,
                     ),
                   ),
               ],
@@ -447,20 +445,20 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
           const Icon(
             Icons.palette_outlined,
             size: 12,
-            color: Color(0xFF94A3B8),
+            color: AppTheme.slate400,
           ),
           const SizedBox(width: 4),
           Text(
             '${l10n.d('Thema')}: ${deck.theme}',
-            style: const TextStyle(fontSize: 10, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 10, color: AppTheme.slate400),
           ),
           if (deck.paginate) ...[
             const SizedBox(width: 10),
-            const Icon(Icons.tag, size: 12, color: Color(0xFF94A3B8)),
+            const Icon(Icons.tag, size: 12, color: AppTheme.slate400),
             const SizedBox(width: 2),
             Text(
               l10n.d('paginering aan'),
-              style: const TextStyle(fontSize: 10, color: Color(0xFF94A3B8)),
+              style: const TextStyle(fontSize: 10, color: AppTheme.slate400),
             ),
           ],
         ],
@@ -510,7 +508,7 @@ class FullDeckPreview extends ConsumerWidget {
                 Text(
                   '${l10n.d('Slide')} ${i + 1}',
                   style: const TextStyle(
-                    color: Color(0xFF64748B),
+                    color: AppTheme.slate500,
                     fontSize: 11,
                   ),
                 ),
@@ -573,7 +571,7 @@ class CollapsedPreviewBar extends ConsumerWidget {
                   ref.read(previewCollapsedProvider.notifier).state = false,
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
-              color: const Color(0xFF64748B),
+              color: AppTheme.slate500,
             ),
           ),
           const SizedBox(height: 8),
@@ -586,7 +584,7 @@ class CollapsedPreviewBar extends ConsumerWidget {
                 fontSize: 10,
                 letterSpacing: 1.5,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF94A3B8),
+                color: AppTheme.slate400,
               ),
             ),
           ),

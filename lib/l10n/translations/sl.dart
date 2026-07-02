@@ -47,7 +47,8 @@ const _stringsSl = {
   'settingsLogo': 'Logotip',
   'language': 'Jezik',
   'applicationLanguage': 'Jezik aplikacije',
-  'languageHelp': 'Vmesnik takoj zamenja jezik. Vsebina predstavitve ostane nespremenjena.',
+  'languageHelp':
+      'Vmesnik takoj zamenja jezik. Vsebina predstavitve ostane nespremenjena.',
   'presentationFolder': 'Mapa predstavitev',
   'exportFolderSetting': 'Mapa za izvoz',
   'notSet': 'Ni nastavljeno',
@@ -55,17 +56,20 @@ const _stringsSl = {
   'choose': 'Izberi',
   'removeDefaultFolder': 'Odstrani privzeto mapo',
   'removeExportFolder': 'Odstrani mapo za izvoz',
-  'exportFolderHelp': 'Vsi izvozi (PDF/PPTX) se shranijo tukaj. Če ni nastavljeno, se izvoz shrani ob datoteki predstavitve.',
+  'exportFolderHelp':
+      'Vsi izvozi (PDF/PPTX) se shranijo tukaj. Če ni nastavljeno, se izvoz shrani ob datoteki predstavitve.',
   'cancel': 'Prekliči',
   'close': 'Zapri',
   'saveSettings': 'Shrani',
   'exportDialogTitle': 'Izvozi',
   'exportAgain': 'Znova izvozi',
-  'exportIntro': 'Izvoz uporablja natanko predogled iz urejevalnika, vključno z vašim slogovnim profilom.',
+  'exportIntro':
+      'Izvoz uporablja natanko predogled iz urejevalnika, vključno z vašim slogovnim profilom.',
   'imageQualityPdf': 'Kakovost slik (PDF)',
   'normal': 'Običajno',
   'compressed': 'Stisnjeno',
-  'compressedHelp': 'JPEG z nižjo ločljivostjo, namenjen izročkom, z veliko manjšo datoteko (shranjeno ločeno kot »-compact«).',
+  'compressedHelp':
+      'JPEG z nižjo ločljivostjo, namenjen izročkom, z veliko manjšo datoteko (shranjeno ločeno kot »-compact«).',
   'losslessHelp': 'Slike brez izgub v polni ločljivosti.',
   'exportAsPdf': 'Izvozi kot PDF',
   'exportAsPptx': 'Izvozi kot PPTX',
@@ -87,26 +91,39 @@ const _dutchSourceSl = {
   'Niet opslaan': 'Ne shrani',
   'Niet-opgeslagen werk herstellen?': 'Obnovim neshranjeno delo?',
   'Niet-opgeslagen wijzigingen': 'Neshranjene spremembe',
-  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'Najdena je bila predstavitev z neshranjenimi spremembami iz prejšnje seje:',
+  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Najdena je bila predstavitev z neshranjenimi spremembami iz prejšnje seje:',
   'Er zijn': 'Obstaja',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'predstavitev z neshranjenimi spremembami iz prejšnje seje:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.': 'Obstajajo predstavitve z neshranjenimi spremembami. Shranite jih pred zaprtjem aplikacije.',
-  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.': 'Ta predstavitev ima neshranjene spremembe. Shranite jo pred zaprtjem zavihka.',
+  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'predstavitev z neshranjenimi spremembami iz prejšnje seje:',
+  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Obstajajo predstavitve z neshranjenimi spremembami. Shranite jih pred zaprtjem aplikacije.',
+  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+      'Ta predstavitev ima neshranjene spremembe. Shranite jo pred zaprtjem zavihka.',
   'Importeren via URL': 'Uvoz iz URL-ja',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.': 'Prilepite povezavo do paketa .ocideck ali datoteke Marp Markdown.',
+  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+      'Prilepite povezavo do paketa .ocideck ali datoteke Marp Markdown.',
   'Ophalen': 'Pridobi',
   'Laat los om toe te voegen': 'Spustite za dodajanje',
-  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen': 'Slike → nove diapozitive · .md / .ocideck → odpri',
-  'Open eerst een presentatie om afbeeldingen toe te voegen.': 'Pred dodajanjem slik odprite predstavitev.',
-  'Alle slides zijn overgeslagen — niets om te tonen.': 'Vsi diapozitivi so preskočeni — ni kaj prikazati.',
-  'Alle slides zijn overgeslagen — niets om te exporteren.': 'Vsi diapozitivi so preskočeni — ni kaj izvoziti.',
+  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+      'Slike → nove diapozitive · .md / .ocideck → odpri',
+  'Open eerst een presentatie om afbeeldingen toe te voegen.':
+      'Pred dodajanjem slik odprite predstavitev.',
+  'Alle slides zijn overgeslagen — niets om te tonen.':
+      'Vsi diapozitivi so preskočeni — ni kaj prikazati.',
+  'Alle slides zijn overgeslagen — niets om te exporteren.':
+      'Vsi diapozitivi so preskočeni — ni kaj izvoziti.',
   'Kon dit pakket niet importeren.': 'Tega paketa ni bilo mogoče uvoziti.',
   'Pakket geëxporteerd naar:': 'Paket izvožen v:',
   'Export mislukt:': 'Izvoz ni uspel:',
-  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.': 'Ta diapozitiv ne more prejeti slike. Najprej izberite diapozitiv s sliko.',
-  'Kon van deze URL geen presentatie ophalen.': 'S tega URL-ja ni bilo mogoče pridobiti predstavitve.',
-  'Sleep om de slide-preview breder of smaller te maken': 'Povlecite, da predogled diapozitiva razširite ali zožite',
-  'TLP-classificatie (Traffic Light Protocol)': 'Klasifikacija TLP (Traffic Light Protocol)',
+  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+      'Ta diapozitiv ne more prejeti slike. Najprej izberite diapozitiv s sliko.',
+  'Kon van deze URL geen presentatie ophalen.':
+      'S tega URL-ja ni bilo mogoče pridobiti predstavitve.',
+  'Sleep om de slide-preview breder of smaller te maken':
+      'Povlecite, da predogled diapozitiva razširite ali zožite',
+  'TLP-classificatie (Traffic Light Protocol)':
+      'Klasifikacija TLP (Traffic Light Protocol)',
   'Titelpagina': 'Naslovni diapozitiv',
   'Tussentitel': 'Naslov razdelka',
   'Alleen Bullets': 'Samo alineje',
@@ -119,7 +136,8 @@ const _dutchSourceSl = {
   'Tabel': 'Tabela',
   'Vrije Markdown': 'Prosti Markdown',
   'Overgeslagen': 'Preskočeno',
-  'Weer tonen bij presenteren/exporteren': 'Znova prikaži pri predstavljanju/izvozu',
+  'Weer tonen bij presenteren/exporteren':
+      'Znova prikaži pri predstavljanju/izvozu',
   'Overslaan bij presenteren/exporteren': 'Preskoči pri predstavljanju/izvozu',
   'Kopiëren': 'Kopiraj',
   'Kopieer als afbeelding': 'Kopiraj kot sliko',
@@ -141,7 +159,8 @@ const _dutchSourceSl = {
   'Naam van de auteur': 'Ime avtorja',
   'Achtergrondafbeelding': 'Slika ozadja',
   'Achtergrondafbeelding (optioneel)': 'Slika ozadja (neobvezno)',
-  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.': 'Slika je prikazana čez cel zaslon kot ozadje z zmanjšano prosojnostjo, da ostane besedilo berljivo.',
+  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+      'Slika je prikazana čez cel zaslon kot ozadje z zmanjšano prosojnostjo, da ostane besedilo berljivo.',
   'Zoom achtergrond': 'Povečava ozadja',
   'Zoom afbeelding': 'Povečava slike',
   'Afbeelding (rechts)': 'Slika (desno)',
@@ -166,7 +185,8 @@ const _dutchSourceSl = {
   'Kopiëren naar klembord mislukt.': 'Kopiranje v odložišče ni uspelo.',
   'Verwijder afbeelding': 'Odstrani sliko',
   'Geen afbeelding gekozen': 'Slika ni izbrana',
-  'Caption / bronvermelding (bijv. © Naam Fotograaf)': 'Napis / navedba vira (npr. © Ime fotografa)',
+  'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+      'Napis / navedba vira (npr. © Ime fotografa)',
   'Caption / bronvermelding': 'Napis / navedba vira',
   'Beschrijving (doorzoekbaar)': 'Opis (za iskanje)',
   'Markdown inhoud': 'Vsebina Markdown',
@@ -177,7 +197,8 @@ const _dutchSourceSl = {
   'verwijderen': 'odstrani',
   'Koprij verwijderen': 'Odstrani glavo tabele',
   'Rij verwijderen': 'Odstrani vrstico',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.': 'Namig: za novo vrstico znotraj celice pritisnite Enter.',
+  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+      'Namig: za novo vrstico znotraj celice pritisnite Enter.',
   'Presentatie openen': 'Odpri predstavitev',
   'Opslaan als': 'Shrani kot',
   'Pakket importeren': 'Uvozi paket',
@@ -190,11 +211,14 @@ const _dutchSourceSl = {
   'Kies een video': 'Izberi video',
   'Kies een audiobestand': 'Izberi zvočno datoteko',
   'Bladeren…': 'Prebrskaj …',
-  'Zoek op bestandsnaam, titel of tekst in de slides…': 'Iščite po imenu datoteke, naslovu ali besedilu v diapozitivih …',
+  'Zoek op bestandsnaam, titel of tekst in de slides…':
+      'Iščite po imenu datoteke, naslovu ali besedilu v diapozitivih …',
   'Geen map gekozen': 'Mapa ni izbrana',
   'Map kiezen': 'Izberi mapo',
-  'Kies een map met presentaties om te beginnen.': 'Za začetek izberite mapo s predstavitvami.',
-  'Geen presentaties (.md) in deze map gevonden.': 'V tej mapi ni najdenih predstavitev (.md).',
+  'Kies een map met presentaties om te beginnen.':
+      'Za začetek izberite mapo s predstavitvami.',
+  'Geen presentaties (.md) in deze map gevonden.':
+      'V tej mapi ni najdenih predstavitev (.md).',
   'Geen presentaties gevonden voor': 'Ni najdenih predstavitev za',
   'meer treffer(s)': 'več zadetkov',
   'Slide zoeken': 'Poišči diapozitiv',
@@ -205,14 +229,19 @@ const _dutchSourceSl = {
   'Toegevoegd': 'Dodano',
   'Selecteer alles': 'Izberi vse',
   'Deselecteer alles': 'Prekliči izbor vseh',
-  'Zoek slides op tekst, titel, onderschrift, pad…': 'Iščite diapozitive po besedilu, naslovu, napisu, poti …',
-  'Zoek op presentatie, titel of tekst…': 'Iščite po predstavitvi, naslovu ali besedilu …',
-  'Geen andere presentaties (.md) in deze map gevonden.': 'V tej mapi ni najdenih drugih predstavitev (.md).',
+  'Zoek slides op tekst, titel, onderschrift, pad…':
+      'Iščite diapozitive po besedilu, naslovu, napisu, poti …',
+  'Zoek op presentatie, titel of tekst…':
+      'Iščite po predstavitvi, naslovu ali besedilu …',
+  'Geen andere presentaties (.md) in deze map gevonden.':
+      'V tej mapi ni najdenih drugih predstavitev (.md).',
   'Geen slides gevonden voor': 'Ni najdenih diapozitivov za',
-  'Typ zoektermen om slides uit al je presentaties te vinden.': 'Vnesite iskalne izraze za iskanje diapozitivov po vseh predstavitvah.',
+  'Typ zoektermen om slides uit al je presentaties te vinden.':
+      'Vnesite iskalne izraze za iskanje diapozitivov po vseh predstavitvah.',
   'toegevoegd': 'dodano',
   'Eerste': 'Prvih',
-  'treffers — verfijn je zoekopdracht': 'zadetkov — natančneje določite iskanje',
+  'treffers — verfijn je zoekopdracht':
+      'zadetkov — natančneje določite iskanje',
   'treffer(s)': 'zadetkov',
   'slide': 'diapozitiv',
   'Zoeken en vervangen': 'Poišči in zamenjaj',
@@ -247,17 +276,21 @@ const _dutchSourceSl = {
   'Beschrijving': 'Opis',
   'Korte omschrijving van de presentatie': 'Kratek opis predstavitve',
   'Trefwoorden': 'Ključne besede',
-  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026': 'Ločene z vejico, npr. četrtletje, številke, 2026',
-  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.': 'Ti podatki se shranijo v Markdown in jih je mogoče iskati pri odpiranju.',
+  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026':
+      'Ločene z vejico, npr. četrtletje, številke, 2026',
+  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+      'Ti podatki se shranijo v Markdown in jih je mogoče iskati pri odpiranju.',
   'App-thema': 'Tema aplikacije',
   'Look-and-feel': 'Videz in občutek',
   'Kopie maken en aanpassen': 'Ustvari in prilagodi kopijo',
   'Thema verwijderen': 'Izbriši temo',
   'Themanaam': 'Ime teme',
-  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.': 'To je vgrajena tema. Ustvarite kopijo za prilagoditev barv.',
+  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+      'To je vgrajena tema. Ustvarite kopijo za prilagoditev barv.',
   'Donkere interface': 'Temni vmesnik',
   'Lettertype interface': 'Pisava vmesnika',
-  'Past contrast, invoervelden en systeemcomponenten aan.': 'Prilagodi kontrast, vnosna polja in sistemske komponente.',
+  'Past contrast, invoervelden en systeemcomponenten aan.':
+      'Prilagodi kontrast, vnosna polja in sistemske komponente.',
   'Hoofdkleur en bovenbalk': 'Glavna barva in zgornja vrstica',
   'Knoppen en accenten': 'Gumbi in poudarki',
   'Schermachtergrond': 'Ozadje zaslona',
@@ -295,13 +328,15 @@ const _dutchSourceSl = {
   'Footertekst': 'Besedilo noge',
   'bijv. Vertrouwelijk · {title} · {date}': 'npr. Zaupno · {title} · {date}',
   'Footerpositie': 'Položaj noge',
-  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.': 'Žetoni: {page}, {total}, {date}, {title}. Noga se prikaže na vseh diapozitivih razen naslovnih in razdelkovih, razen če jo izklopite za posamezni diapozitiv.',
+  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+      'Žetoni: {page}, {total}, {date}, {title}. Noga se prikaže na vseh diapozitivih razen naslovnih in razdelkovih, razen če jo izklopite za posamezni diapozitiv.',
   'Links': 'Levo',
   'Midden': 'Sredina',
   'Rechts': 'Desno',
   'Paginanummers tonen (rechtsonder)': 'Prikaži številke strani (spodaj desno)',
   'Voorvertoning': 'Predogled',
-  'De snelle bruine vos springt over de luie hond.': 'Šumi, fijuk in cikcak žogice preženejo hudo lakoto.',
+  'De snelle bruine vos springt over de luie hond.':
+      'Šumi, fijuk in cikcak žogice preženejo hudo lakoto.',
   'Preview': 'Predogled',
   'Uitzoomen': 'Pomanjšaj',
   'Uitgezoomd': 'Pomanjšano',
@@ -311,7 +346,8 @@ const _dutchSourceSl = {
   'Volledig zichtbaar (100%)': 'Popolnoma vidno (100 %)',
   'Uitzoomen (meer van de foto zichtbaar)': 'Pomanjšaj (več fotografije vidne)',
   'Inzoomen (minder van de foto zichtbaar)': 'Povečaj (manj fotografije vidne)',
-  'Terugzetten (volledige afbeelding zichtbaar)': 'Ponastavi (celotna slika vidna)',
+  'Terugzetten (volledige afbeelding zichtbaar)':
+      'Ponastavi (celotna slika vidna)',
   'Zoom resetten': 'Ponastavi povečavo',
   'Preview inklappen': 'Strni predogled',
   'Preview uitklappen': 'Razširi predogled',
@@ -326,19 +362,23 @@ const _dutchSourceSl = {
   'Terug naar standaardstijl': 'Nazaj na privzeti slog',
   'Automatisch doorgaan na': 'Samodejno napreduj po',
   'Logo tonen op deze slide': 'Prikaži logotip na tem diapozitivu',
-  'Tabel bewerkbaar tijdens presenteren': 'Tabela urejljiva med predstavljanjem',
+  'Tabel bewerkbaar tijdens presenteren':
+      'Tabela urejljiva med predstavljanjem',
   'Footer tonen op deze slide': 'Prikaži nogo na tem diapozitivu',
   'Sprekersnotities...': 'Opombe govorca ...',
   'Sprekersnotities': 'Opombe govorca',
   'Notities voor tijdens het presenteren': 'Opombe za med predstavljanjem',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown': 'Način Markdown — uredite celotno predstavitev kot Marp Markdown',
+  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+      'Način Markdown — uredite celotno predstavitev kot Marp Markdown',
   'Toepassen': 'Uporabi',
-  'Markdown kon niet worden verwerkt. Controleer de syntax.': 'Markdown ni bilo mogoče obdelati. Preverite sintakso.',
+  'Markdown kon niet worden verwerkt. Controleer de syntax.':
+      'Markdown ni bilo mogoče obdelati. Preverite sintakso.',
   'Controleren': 'Preveri sintakso',
   'Syntaxproblemen gevonden': 'Najdene težave s sintakso',
   'De markdown bevat': 'Markdown vsebuje',
   'fout(en) en': 'napak in',
-  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.': 'opozoril. Zaradi tega se diapozitivi lahko napačno preberejo.',
+  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+      'opozoril. Zaradi tega se diapozitivi lahko napačno preberejo.',
   'Terug naar editor': 'Nazaj v urejevalnik',
   'Toch toepassen': 'Vseeno uporabi',
   'Geen syntaxproblemen gevonden': 'Ni najdenih težav s sintakso',
@@ -352,26 +392,35 @@ const _dutchSourceSl = {
   'Coverflow': 'Coverflow',
   'Geen afbeeldingen gevonden': 'Ni najdenih slik',
   'Geen resultaten voor': 'Ni rezultatov za',
-  'Pas je zoekterm aan of voeg een beschrijving toe.': 'Prilagodite iskalni izraz ali dodajte opis.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.': 'Uporabite »Prebrskaj« za izbiro slik s katere koli lokacije.',
+  'Pas je zoekterm aan of voeg een beschrijving toe.':
+      'Prilagodite iskalni izraz ali dodajte opis.',
+  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+      'Uporabite »Prebrskaj« za izbiro slik s katere koli lokacije.',
   'Selecteer een\nafbeelding': 'Izberite\nsliko',
   'Gekopieerd': 'Kopirano',
   'Afbeelding verwijderen?': 'Izbrišem sliko?',
-  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.': 'Datoteka bo trajno izbrisana z diska. Tega dejanja ni mogoče razveljaviti.',
-  'Let op: deze afbeelding wordt nog gebruikt in': 'Opozorilo: ta slika je še vedno v uporabi v',
-  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.': 'Z izbrisom se ti diapozitivi izpraznijo. Tega ni mogoče razveljaviti.',
-  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert': '↑↓←→ krmarjenje  ·  Enter izbere  ·  Dvoklik izbere',
+  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+      'Datoteka bo trajno izbrisana z diska. Tega dejanja ni mogoče razveljaviti.',
+  'Let op: deze afbeelding wordt nog gebruikt in':
+      'Opozorilo: ta slika je še vedno v uporabi v',
+  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+      'Z izbrisom se ti diapozitivi izpraznijo. Tega ni mogoče razveljaviti.',
+  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+      '↑↓←→ krmarjenje  ·  Enter izbere  ·  Dvoklik izbere',
   'Sneltoetsen': 'Bližnjice na tipkovnici',
   'Toetsenlegenda': 'Legenda tipk',
   'spatie': 'presledek',
   'klik': 'klik',
   'cijfers': 'številke',
-  'Klik of druk op ? / H / Esc om te sluiten': 'Kliknite ali pritisnite ? / H / Esc za zaprtje',
-  'Klik of druk op H / Esc om te sluiten': 'Kliknite ali pritisnite H / Esc za zaprtje',
+  'Klik of druk op ? / H / Esc om te sluiten':
+      'Kliknite ali pritisnite ? / H / Esc za zaprtje',
+  'Klik of druk op H / Esc om te sluiten':
+      'Kliknite ali pritisnite H / Esc za zaprtje',
   'Naar slidenummer': 'Na številko diapozitiva',
   'Eerste · laatste slide': 'Prvi · zadnji diapozitiv',
   'Slide-overzicht': 'Pregled diapozitivov',
-  'Slide-overzicht (pijltjes + Enter)': 'Pregled diapozitivov (puščice + Enter)',
+  'Slide-overzicht (pijltjes + Enter)':
+      'Pregled diapozitivov (puščice + Enter)',
   'Presenter view (notities, klok)': 'Pogled predavatelja (opombe, ura)',
   'Scherm wisselen (meerdere schermen)': 'Preklop zaslona (več zaslonov)',
   'Zwart · wit scherm': 'Črn · bel zaslon',
@@ -399,24 +448,33 @@ const _dutchSourceSl = {
   'Geen notities voor deze slide.': 'Za ta diapozitiv ni opomb.',
   'Mijn notities': 'Moje opombe',
   'Gebruikersnotities': 'Uporabniške opombe',
-  'Gebruikersnotities voor deze slide...': 'Uporabniške opombe za ta diapozitiv ...',
+  'Gebruikersnotities voor deze slide...':
+      'Uporabniške opombe za ta diapozitiv ...',
   'Notities weggooien': 'Zavrzi opombe',
-  'Notities voor de ontvanger tijdens een cursus': 'Opombe za prejemnika med tečajem',
-  'Schakel naar Markdown-modus om notities toe te voegen.': 'Preklopite v način Markdown za dodajanje opomb.',
+  'Notities voor de ontvanger tijdens een cursus':
+      'Opombe za prejemnika med tečajem',
+  'Schakel naar Markdown-modus om notities toe te voegen.':
+      'Preklopite v način Markdown za dodajanje opomb.',
   'Mijn notities aan/uit': 'Vklop/izklop mojih opomb',
   'Wissel scherm (S)': 'Preklop zaslona (S)',
   'Kon niet van scherm wisselen.': 'Zaslona ni bilo mogoče preklopiti.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P občinstvo · G pregled · B/W črno/belo · R čas · Esc stop',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P občinstvo · S zaslon · G pregled · B/W črno/belo · R čas · Esc stop',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P občinstvo · H legenda · G pregled · B/W črno/belo · R čas · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P občinstvo · H legenda · S zaslon · G pregled · B/W črno/belo · R čas · Esc stop',
-  'pijltjes + Enter of klik om te springen': 'puščice + Enter ali klik za preskok',
+  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P občinstvo · G pregled · B/W črno/belo · R čas · Esc stop',
+  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P občinstvo · S zaslon · G pregled · B/W črno/belo · R čas · Esc stop',
+  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P občinstvo · H legenda · G pregled · B/W črno/belo · R čas · Esc stop',
+  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P občinstvo · H legenda · S zaslon · G pregled · B/W črno/belo · R čas · Esc stop',
+  'pijltjes + Enter of klik om te springen':
+      'puščice + Enter ali klik za preskok',
   'Afsluiten (Escape)': 'Izhod (Escape)',
   'Sluiten (G of Esc)': 'Zapri (G ali Esc)',
   'Slide renderen…': 'Upodabljanje diapozitiva ...',
   'Slide gekopieerd naar klembord.': 'Diapozitiv kopiran v odložišče.',
   'Kopiëren mislukt.': 'Kopiranje ni uspelo.',
-  'Geen ander deck open. Open eerst een ander tabblad.': 'Noben drug deck ni odprt. Najprej odprite drug zavihek.',
+  'Geen ander deck open. Open eerst een ander tabblad.':
+      'Noben drug deck ni odprt. Najprej odprite drug zavihek.',
   '1 slide kopiëren naar…': 'Kopiraj 1 diapozitiv v ...',
   'slides kopiëren naar…': 'diapozitivov za kopiranje v ...',
   'slide(s) gekopieerd naar': 'diapozitiv(ov) kopiranih v',
@@ -431,11 +489,13 @@ const _dutchSourceSl = {
   'Tips': 'Namigi',
   'Waarschuwingen': 'Opozorila',
   'Fouten': 'Napake',
-  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Namig: dodajte nadomestno besedilo / napis za dostopnost',
+  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Namig: dodajte nadomestno besedilo / napis za dostopnost',
   'Zoek in slides…': 'Iskanje po diapozitivih ...',
   'Geen slides met': 'Ni diapozitivov z',
   'SLIDES': 'DIAPOZITIVI',
-  'Geen afbeelding op het klembord gevonden.': 'V odložišču ni bilo najdene slike.',
+  'Geen afbeelding op het klembord gevonden.':
+      'V odložišču ni bilo najdene slike.',
   'Afbeelding plakken': 'Prilepi sliko',
   'Slide toevoegen': 'Dodaj diapozitiv',
   'Slide plakken': 'Prilepi diapozitiv',
@@ -446,60 +506,82 @@ const _dutchSourceSl = {
   'Kopiëren naar ander deck': 'Kopiraj v drug deck',
   'Weer tonen': 'Pokaži znova',
   'Selectie opheffen': 'Počisti izbor',
-  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.': 'Sprejemam licenco EUPL 1.2 in sem prebral(a), katere podatke shranjuje OciDeck.',
-  'Je keuze wordt de standaardtaal van de app.': 'Vaša izbira postane privzeti jezik aplikacije.',
+  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
+      'Sprejemam licenco EUPL 1.2 in sem prebral(a), katere podatke shranjuje OciDeck.',
+  'Je keuze wordt de standaardtaal van de app.':
+      'Vaša izbira postane privzeti jezik aplikacije.',
   'Lees de volledige licentie': 'Preberi celotno licenco',
-  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.': 'OciDeck je prosto programje pod licenco EUPL 1.2. Preden začnete, vas prosimo, da sprejmete licenco. Spodaj lahko preberete tudi, katere podatke OciDeck shranjuje na tej napravi in kdaj kaj zapusti vašo napravo.',
-  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.': 'OciDeck ne zbira statistike in sam od sebe ne pošilja ničesar navzven. Privzeto vse ostane na tej napravi. Podatki zapustijo to napravo le, če se za to odločite:\n\n•  Nextcloud/WebDAV: ko se povežete s strežnikom, se shranita vaše uporabniško ime in geslo (geslo varno v ključavnici sistema), predstavitve, ki jih odprete ali shranite, pa se pošljejo na ta strežnik.\n•  Odpiranje prek URL: OciDeck pridobi datoteko z naslova, ki ga vnesete.\n•  Spletni mediji (privzeto izklopljeno): če je vklopljeno, OciDeck naloži slike in videoposnetke z naslovov v vaših diapozitivih.\n•  Zunanje povezave (kot je spletna licenca) se odprejo v vašem brskalniku.',
-  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.': 'OciDeck je na voljo pod licenco European Union Public Licence v1.2. S sprejetjem to licenco sprejemate. OciDeck lahko uporabljate, kopirate, prilagajate in razširjate pod pogoji licence EUPL 1.2.',
-  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.': 'Da lahko deluje in da ne izgubite svojega dela, OciDeck shranjuje podatke lokalno na tej napravi:\n\n•  Vaše nastavitve in preference (jezik, mape, slogovne in prikazne profile, nedavne datoteke).\n•  Vaše predstavitveno gradivo: predstavitve, ki jih shranite, samodejne obnovitvene kopije in priloge, kot so opisi slik.\n•  To izbiro soglasja.\n\nTo lahko odstranite z brisanjem datotek ali ponastavitvijo nastavitev.',
-  'Volledige licentie online (23 officiële taalversies)': 'Celotna licenca na spletu (23 uradnih jezikovnih različic)',
+  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
+      'OciDeck je prosto programje pod licenco EUPL 1.2. Preden začnete, vas prosimo, da sprejmete licenco. Spodaj lahko preberete tudi, katere podatke OciDeck shranjuje na tej napravi in kdaj kaj zapusti vašo napravo.',
+  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.':
+      'OciDeck ne zbira statistike in sam od sebe ne pošilja ničesar navzven. Privzeto vse ostane na tej napravi. Podatki zapustijo to napravo le, če se za to odločite:\n\n•  Nextcloud/WebDAV: ko se povežete s strežnikom, se shranita vaše uporabniško ime in geslo (geslo varno v ključavnici sistema), predstavitve, ki jih odprete ali shranite, pa se pošljejo na ta strežnik.\n•  Odpiranje prek URL: OciDeck pridobi datoteko z naslova, ki ga vnesete.\n•  Spletni mediji (privzeto izklopljeno): če je vklopljeno, OciDeck naloži slike in videoposnetke z naslovov v vaših diapozitivih.\n•  Zunanje povezave (kot je spletna licenca) se odprejo v vašem brskalniku.',
+  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.':
+      'OciDeck je na voljo pod licenco European Union Public Licence v1.2. S sprejetjem to licenco sprejemate. OciDeck lahko uporabljate, kopirate, prilagajate in razširjate pod pogoji licence EUPL 1.2.',
+  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.':
+      'Da lahko deluje in da ne izgubite svojega dela, OciDeck shranjuje podatke lokalno na tej napravi:\n\n•  Vaše nastavitve in preference (jezik, mape, slogovne in prikazne profile, nedavne datoteke).\n•  Vaše predstavitveno gradivo: predstavitve, ki jih shranite, samodejne obnovitvene kopije in priloge, kot so opisi slik.\n•  To izbiro soglasja.\n\nTo lahko odstranite z brisanjem datotek ali ponastavitvijo nastavitev.',
+  'Volledige licentie online (23 officiële taalversies)':
+      'Celotna licenca na spletu (23 uradnih jezikovnih različic)',
   'Wat OciDeck op dit apparaat bewaart': 'Kaj OciDeck shranjuje na tej napravi',
   'Wat je apparaat verlaat': 'Kaj zapusti vašo napravo',
-  'Vul server-URL en gebruikersnaam in': 'Vnesite URL strežnika in uporabniško ime',
+  'Vul server-URL en gebruikersnaam in':
+      'Vnesite URL strežnika in uporabniško ime',
   'Verbinding mislukt': 'Povezava ni uspela',
-  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord': 'Prijava ni uspela — preverite uporabniško ime in geslo',
-  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.': 'Strežnik je na zasebnem naslovu. Označite »Zaupanja vreden notranji strežnik«, da dovolite povezavo.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord':
+      'Prijava ni uspela — preverite uporabniško ime in geslo',
+  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.':
+      'Strežnik je na zasebnem naslovu. Označite »Zaupanja vreden notranji strežnik«, da dovolite povezavo.',
   'Map niet gevonden op de server': 'Mapa na strežniku ni bila najdena',
   'Ongeldige server-URL': 'Neveljaven URL strežnika',
-  'Het antwoord van de server was te groot': 'Odgovor strežnika je bil prevelik',
+  'Het antwoord van de server was te groot':
+      'Odgovor strežnika je bil prevelik',
   'Nextcloud': 'Nextcloud',
   'Nextcloud-bron (WebDAV)': 'Vir Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.': 'Odpirajte in shranjujte predstavitve v mapo na svojem Nextcloud. Geslo se shrani šifrirano v ključavnici, ne skupaj z ostalimi nastavitvami.',
+  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Odpirajte in shranjujte predstavitve v mapo na svojem Nextcloud. Geslo se shrani šifrirano v ključavnici, ne skupaj z ostalimi nastavitvami.',
   'Server-URL': 'URL strežnika',
   'Gebruikersnaam': 'Uporabniško ime',
   'App-wachtwoord': 'Geslo aplikacije',
-  'Maak hiervoor een app-wachtwoord aan in Nextcloud': 'Za to ustvarite geslo aplikacije v Nextcloud',
+  'Maak hiervoor een app-wachtwoord aan in Nextcloud':
+      'Za to ustvarite geslo aplikacije v Nextcloud',
   'Submap (optioneel)': 'Podmapa (izbirno)',
   'Vertrouwde interne server': 'Zaupanja vreden notranji strežnik',
-  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.': 'Potrebno, kadar strežnik teče v zasebnem ali domačem omrežju (LAN). Dovolite le povezave do strežnikov, ki jim sami zaupate.',
+  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Potrebno, kadar strežnik teče v zasebnem ali domačem omrežju (LAN). Dovolite le povezave do strežnikov, ki jim sami zaupate.',
   'Verbinding testen': 'Preizkusi povezavo',
   'Verbinding gelukt': 'Povezava uspela',
-  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.': 'Spremembe se shranijo, ko kliknete Shrani.',
+  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
+      'Spremembe se shranijo, ko kliknete Shrani.',
   'Afbeelding kiezen op Nextcloud': 'Izberi sliko na Nextcloud',
   'Openen vanaf Nextcloud': 'Odpri iz Nextcloud',
   'Vernieuwen': 'Osveži',
   'Deze map is leeg': 'Ta mapa je prazna',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.': 'Ni nastavljenega strežnika Nextcloud. Nastavite ga v Nastavitve → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.': 'Mape ni bilo mogoče naložiti. Preverite povezavo in nastavitve.',
+  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
+      'Ni nastavljenega strežnika Nextcloud. Nastavite ga v Nastavitve → Nextcloud.',
+  'Kon de map niet laden. Controleer je verbinding en instellingen.':
+      'Mape ni bilo mogoče naložiti. Preverite povezavo in nastavitve.',
   'Kon dit bestand niet openen.': 'Te datoteke ni bilo mogoče odpreti.',
   'Dit is geen Marp/OciDeck-presentatie.': 'To ni predstavitev Marp/OciDeck.',
   'Downloaden mislukt:': 'Prenos ni uspel:',
   'Opgeslagen op Nextcloud:': 'Shranjeno na Nextcloud:',
   'Opslaan mislukt:': 'Shranjevanje ni uspelo:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.': 'Najprej nastavite strežnik Nextcloud v Nastavitve → Nextcloud.',
+  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
+      'Najprej nastavite strežnik Nextcloud v Nastavitve → Nextcloud.',
   'Opslaan naar Nextcloud': 'Shrani na Nextcloud',
   'Doelpad (zonder extensie)': 'Ciljna pot (brez končnice)',
-  'Als .ocideck-pakket (één bestand, met assets)': 'Kot paket .ocideck (ena datoteka, s sredstvi)',
+  'Als .ocideck-pakket (één bestand, met assets)':
+      'Kot paket .ocideck (ena datoteka, s sredstvi)',
   'Als losse .md plus afbeeldingen': 'Kot ločen .md in slike',
   'Opslaan': 'Shrani',
   'Presenteren': 'Predstavljanje',
   'Tijden-overzicht tonen na afloop': 'Po koncu pokaži pregled časov',
-  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.': 'Čas na diapozitiv se vedno meri; to določa le, ali se po tej predstavitvi prikaže pregled.',
+  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
+      'Čas na diapozitiv se vedno meri; to določa le, ali se po tej predstavitvi prikaže pregled.',
   'Oefenoverzicht tonen na afloop': 'Po koncu pokaži povzetek vaje',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.': 'Po predstavitvi pokaži pregled porabljenega časa na diapozitiv. Čas se vedno meri; to določa le, ali se zaslon prikaže.',
+  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+      'Po predstavitvi pokaži pregled porabljenega časa na diapozitiv. Čas se vedno meri; to določa le, ali se zaslon prikaže.',
   'Onveilige presentatie geblokkeerd': 'Nevarna predstavitev blokirana',
-  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.': 'Ta predstavitev ni bila odprta. Datoteka vsebuje vsebino, ki lahko izvaja kodo, predstavitev pa naj vsebuje samo podatke — nič izvršljivega.',
+  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Ta predstavitev ni bila odprta. Datoteka vsebuje vsebino, ki lahko izvaja kodo, predstavitev pa naj vsebuje samo podatke — nič izvršljivega.',
   'Gevonden:': 'Najdeno:',
   'Regel': 'Vrstica',
   'Scriptuitvoering': 'Izvajanje skripta',
@@ -521,46 +603,67 @@ const _dutchSourceSl = {
   'Pootje': 'Tačka',
   'In tweeën splitsen': 'Razdeli na dvoje',
   'Uitgevoerde controles': 'Izvedena preverjanja',
-  'Contrast en leesbaarheid van tekstkleuren': 'Kontrast in berljivost barv besedila',
-  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media': 'Nadomestna besedila in napisi slik, grafikonov in medijev',
-  'Aanwezigheid van gekoppelde mediabestanden': 'Prisotnost povezanih medijskih datotek',
-  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code': 'Gostota besedila: alineje, besede, citati, tabele in koda',
-  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).': 'Tema, diapozitivi, noga, kontrolni seznam in naslovi čez slike, preverjeni po WCAG AA (4,5:1 za besedilo, 3:1 za veliko besedilo).',
-  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.': 'Vsaka slika, grafikon, video in zvok potrebuje opis za bralnike zaslona in izročke.',
-  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.': 'Sklici na slike, video in zvok se preverijo glede obstoječe datoteke v projektu.',
-  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.': 'Število in dolžina alinej, besede, gnezdenje, uravnoteženost stolpcev ter gostota citatov, naslovov, tabel in kode, da vse berljivo ustreza.',
-  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.': 'Besedilo telesa s kontrastom pod {crit}:1 šteje kot napaka; nad tem do norme AA kot opozorilo.',
-  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.': 'Brez pragovne vrednosti: neprazen opis je obvezen.',
-  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.': 'Brez pragovne vrednosti: povezana datoteka mora obstajati znotraj projektne mape.',
-  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.': 'Opozorilo nad {b1} alinejami (1 stolpec), {bcl} (kontrolni seznam) ali {b2} (2 stolpca); kritično nad {bc1} ali {bc2}. Besede nad {w1}/{w2}, povprečno nad {avg} na alinejo. Citat nad {q} znaki, naslov nad {t} znaki. Gnezdenje globlje od ravni {lvl}. Besedilo, ki se mora skrčiti pod {warn}%, opozarja, pod {crit}% je kritično.',
+  'Contrast en leesbaarheid van tekstkleuren':
+      'Kontrast in berljivost barv besedila',
+  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+      'Nadomestna besedila in napisi slik, grafikonov in medijev',
+  'Aanwezigheid van gekoppelde mediabestanden':
+      'Prisotnost povezanih medijskih datotek',
+  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+      'Gostota besedila: alineje, besede, citati, tabele in koda',
+  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+      'Tema, diapozitivi, noga, kontrolni seznam in naslovi čez slike, preverjeni po WCAG AA (4,5:1 za besedilo, 3:1 za veliko besedilo).',
+  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+      'Vsaka slika, grafikon, video in zvok potrebuje opis za bralnike zaslona in izročke.',
+  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+      'Sklici na slike, video in zvok se preverijo glede obstoječe datoteke v projektu.',
+  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+      'Število in dolžina alinej, besede, gnezdenje, uravnoteženost stolpcev ter gostota citatov, naslovov, tabel in kode, da vse berljivo ustreza.',
+  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+      'Besedilo telesa s kontrastom pod {crit}:1 šteje kot napaka; nad tem do norme AA kot opozorilo.',
+  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+      'Brez pragovne vrednosti: neprazen opis je obvezen.',
+  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+      'Brez pragovne vrednosti: povezana datoteka mora obstajati znotraj projektne mape.',
+  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+      'Opozorilo nad {b1} alinejami (1 stolpec), {bcl} (kontrolni seznam) ali {b2} (2 stolpca); kritično nad {bc1} ali {bc2}. Besede nad {w1}/{w2}, povprečno nad {avg} na alinejo. Citat nad {q} znaki, naslov nad {t} znaki. Gnezdenje globlje od ravni {lvl}. Besedilo, ki se mora skrčiti pod {warn}%, opozarja, pod {crit}% je kritično.',
   'Zoek op deze computer': 'Išči na tem računalniku',
-  'Presentaties zoeken op deze computer': 'Poišči predstavitve na tem računalniku',
+  'Presentaties zoeken op deze computer':
+      'Poišči predstavitve na tem računalniku',
   'Zoek op titel, pad of thema…': 'Išči po naslovu, poti ali temi ...',
   'Bekende mappen worden doorzocht…': 'Preiskovanje znanih map ...',
   'gevonden': 'najdeno',
   'presentatie(s) gevonden': 'predstavitev najdenih',
-  'Geen Marp-presentaties gevonden in de bekende mappen.': 'V znanih mapah ni bilo najdenih predstavitev Marp.',
+  'Geen Marp-presentaties gevonden in de bekende mappen.':
+      'V znanih mapah ni bilo najdenih predstavitev Marp.',
   'Geen thema': 'Brez teme',
   'Kopieer syntaxproblemen': 'Kopiraj težave s sintakso',
-  'Syntaxproblemen gekopieerd naar klembord.': 'Težave s sintakso kopirane v odložišče.',
+  'Syntaxproblemen gekopieerd naar klembord.':
+      'Težave s sintakso kopirane v odložišče.',
   'Online media': 'Spletni mediji',
   'Online media staat uit': 'Spletni mediji so izklopljeni',
   'Online media toestaan': 'Dovoli spletne medije',
-  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.': 'Dovoli sprotno nalaganje slik in videoposnetkov prek URL ter vdelav YouTube/Vimeo. Privzeto izklopljeno zaradi vaše zasebnosti in varnosti.',
-  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)': 'Pot datoteke ali URL (YouTube, Vimeo, .mp4 …)',
+  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+      'Dovoli sprotno nalaganje slik in videoposnetkov prek URL ter vdelav YouTube/Vimeo. Privzeto izklopljeno zaradi vaše zasebnosti in varnosti.',
+  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+      'Pot datoteke ali URL (YouTube, Vimeo, .mp4 …)',
   'Bestand kiezen': 'Izberi datoteko',
-  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.': 'Predvajajte segment tega diapozitiva v predogledu in prerežite na točki, kjer želite razdeliti: drugi del gre na nov diapozitiv.',
+  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+      'Predvajajte segment tega diapozitiva v predogledu in prerežite na točki, kjer želite razdeliti: drugi del gre na nov diapozitiv.',
   'Begin (sec)': 'Začetek (s)',
   'Einde (sec)': 'Konec (s)',
   'einde': 'konec',
-  'Knip de video op het huidige afspeelpunt': 'Prereži video na trenutni točki predvajanja',
-  'Speel de video eerst af in het voorbeeld': 'Najprej predvajajte video v predogledu',
+  'Knip de video op het huidige afspeelpunt':
+      'Prereži video na trenutni točki predvajanja',
+  'Speel de video eerst af in het voorbeeld':
+      'Najprej predvajajte video v predogledu',
   'Knip hier': 'Prereži tukaj',
   'Online': 'Splet',
   'Lokaal bestand': 'Lokalna datoteka',
   'Geen video': 'Ni videa',
   'Vraag (meerkeuze)': 'Vprašanje (izbirno)',
-  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding': 'Naslovno besedilo ima premalo kontrasta s sliko ozadja',
+  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+      'Naslovno besedilo ima premalo kontrasta s sliko ozadja',
   'Herstel': 'Popravi',
   'Tijdlijn': 'Časovnica',
   'Indeling': 'Postavitev',
@@ -585,19 +688,24 @@ const _dutchSourceSl = {
   'Vraag': 'Vprašanje',
   'Wat wil je vragen?': 'Kaj želite vprašati?',
   'Antwoorden': 'Odgovori',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.': 'Označite pravilne odgovore. Brez omejitve; pri predstavljanju se naključno prikaže en pravilen in ostali napačni.',
+  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Označite pravilne odgovore. Brez omejitve; pri predstavljanju se naključno prikaže en pravilen in ostali napačni.',
   'Antwoord': 'Odgovor',
   'Antwoord toevoegen': 'Dodaj odgovor',
   'Goed antwoord': 'Pravilen odgovor',
-  'Geef minstens één goed én één fout antwoord op.': 'Navedite vsaj en pravilen in en napačen odgovor.',
+  'Geef minstens één goed én één fout antwoord op.':
+      'Navedite vsaj en pravilen in en napačen odgovor.',
   'Weergave': 'Prikaz',
   'Aantal getoonde opties': 'Število prikazanih možnosti',
-  'Maximale antwoordtijd in seconden (0 = geen limiet)': 'Najdaljši čas za odgovor v sekundah (0 = brez omejitve)',
+  'Maximale antwoordtijd in seconden (0 = geen limiet)':
+      'Najdaljši čas za odgovor v sekundah (0 = brez omejitve)',
   'Bij een fout antwoord': 'Pri napačnem odgovoru',
   'Opnieuw proberen': 'Poskusi znova',
   'Doorgaan toestaan': 'Dovoli nadaljevanje',
-  'Fout = niet doorgaan; de vraag moet opnieuw.': 'Napačno = ni nadaljevanja; vprašanje je treba ponoviti.',
-  'Fout = wel doorgaan, maar niet opnieuw doen.': 'Napačno = lahko nadaljujete, a brez ponovnega poskusa.',
+  'Fout = niet doorgaan; de vraag moet opnieuw.':
+      'Napačno = ni nadaljevanja; vprašanje je treba ponoviti.',
+  'Fout = wel doorgaan, maar niet opnieuw doen.':
+      'Napačno = lahko nadaljujete, a brez ponovnega poskusa.',
   'Afbeelding (optioneel)': 'Slika (izbirno)',
   'Breedte afbeelding': 'Širina slike',
   'Goed!': 'Pravilno!',
@@ -612,45 +720,56 @@ const _dutchSourceSl = {
   'Juist / Onjuist': 'Prav / Narobe',
   'Meerdere juiste antwoorden': 'Več pravilnih odgovorov',
   'Stelling': 'Trditev',
-  'Formuleer een stelling die juist of onjuist is': 'Oblikujte trditev, ki je pravilna ali napačna',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.': 'Označite vse pravilne odgovore. Pri predstavljanju se prikaže naključen nabor z vsaj enim pravilnim in enim napačnim.',
+  'Formuleer een stelling die juist of onjuist is':
+      'Oblikujte trditev, ki je pravilna ali napačna',
+  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+      'Označite vse pravilne odgovore. Pri predstavljanju se prikaže naključen nabor z vsaj enim pravilnim in enim napačnim.',
   'Juist': 'Prav',
   'Onjuist': 'Narobe',
-  'De stelling hierboven is juist of onjuist; kies welke.': 'Trditev zgoraj je pravilna ali napačna; izberite, katero.',
+  'De stelling hierboven is juist of onjuist; kies welke.':
+      'Trditev zgoraj je pravilna ali napačna; izberite, katero.',
   'Selecteer alle juiste antwoorden': 'Izberite vse pravilne odgovore',
   'Bevestig': 'Potrdi',
   'Het juiste antwoord': 'Pravilni odgovor',
-  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.': 'Slika se prikaže čez celoten zaslon kot ozadje. Uporabite zameglitev, kadar naslov potrebuje več umirjenosti ali kontrasta.',
+  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+      'Slika se prikaže čez celoten zaslon kot ozadje. Uporabite zameglitev, kadar naslov potrebuje več umirjenosti ali kontrasta.',
   'Cockpit-kleurschema': 'Barvna shema kokpita',
-  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.': 'Statusne barve merilnikov kokpita. Ustvarite poimenovane različice; izbrana shema velja za vse diapozitive kokpita.',
+  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+      'Statusne barve merilnikov kokpita. Ustvarite poimenovane različice; izbrana shema velja za vse diapozitive kokpita.',
   'Standaard': 'Privzeto',
   'Standaardkleuren gebruiken': 'Uporabi privzete barve',
   'Kleurschema verwijderen': 'Izbriši barvno shemo',
   'Schemanaam': 'Ime sheme',
-  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.': 'To je vgrajena shema. Naredite kopijo za prilagajanje barv.',
+  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+      'To je vgrajena shema. Naredite kopijo za prilagajanje barv.',
   'Goed': 'Dobro',
   'Waarschuwing': 'Opozorilo',
   'Kritiek': 'Kritično',
   'Te laag (koud)': 'Prenizko (hladno)',
   'Lucht (horizon)': 'Nebo (obzorje)',
   'Grond (horizon)': 'Tla (obzorje)',
-  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.': 'Statusne barve sledijo barvni shemi kokpita; prilagodite jo ali ustvarite različice prek Nastavitve → Kokpit.',
+  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+      'Statusne barve sledijo barvni shemi kokpita; prilagodite jo ali ustvarite različice prek Nastavitve → Kokpit.',
   'Veel bullets op deze slide': 'Veliko alinej na tem diapozitivu',
   'bullets': 'alinej',
   'Overweeg de inhoud te splitsen.': 'Razmislite o razdelitvi vsebine.',
   'Erg veel bullets op deze slide': 'Preveč alinej na tem diapozitivu',
-  'Splits deze inhoud over meerdere slides.': 'Razdelite to vsebino čez več diapozitivov.',
+  'Splits deze inhoud over meerdere slides.':
+      'Razdelite to vsebino čez več diapozitivov.',
   'Veel woorden in bullets': 'Veliko besed v alinejah',
   'woorden': 'besed',
-  'Maak bullets korter of splits de slide.': 'Skrajšajte alineje ali razdelite diapozitiv.',
+  'Maak bullets korter of splits de slide.':
+      'Skrajšajte alineje ali razdelite diapozitiv.',
   'Erg veel woorden in bullets': 'Preveč besed v alinejah',
   'Gemiddeld lange bullets': 'V povprečju dolge alineje',
   'woorden per bullet': 'besed na alinejo',
   'Maak elke bullet kernachtiger.': 'Naredite vsako alinejo jedrnatejšo.',
-  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.': 'Najdena alineja z več stavki. Naredite alineje jedrnatejše ali razdelite vsebino.',
+  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+      'Najdena alineja z več stavki. Naredite alineje jedrnatejše ali razdelite vsebino.',
   'Diepe bulletniveaus gevonden': 'Najdene globoke ravni alinej',
   'niveau': 'raven',
-  'Beperk nesting voor betere leesbaarheid.': 'Omejite gnezdenje za boljšo berljivost.',
+  'Beperk nesting voor betere leesbaarheid.':
+      'Omejite gnezdenje za boljšo berljivost.',
   'Twee kolommen zijn sterk uit balans': 'Stolpca sta močno neuravnotežena',
   'tegenover': 'proti',
   'Verdeel of splits de inhoud.': 'Porazdelite ali razdelite vsebino.',
@@ -660,8 +779,10 @@ const _dutchSourceSl = {
   'Animeren bij binnenkomst': 'Animiraj ob vstopu',
   'Activatieduur': 'Trajanje aktivacije',
   'Splits slide': 'Razdeli prosojnico',
-  'Doornummeren vanaf vorige slide': 'Nadaljuj oštevilčenje s prejšnje prosojnice',
-  'Begin de nummering waar de vorige slide ophield.': 'Začni oštevilčenje tam, kjer se je prejšnja prosojnica končala.',
+  'Doornummeren vanaf vorige slide':
+      'Nadaljuj oštevilčenje s prejšnje prosojnice',
+  'Begin de nummering waar de vorige slide ophield.':
+      'Začni oštevilčenje tam, kjer se je prejšnja prosojnica končala.',
   'Volg thema-animatieduur': 'Sledi trajanju animacije teme',
   'Animatie bij openen': 'Animiraj ob vstopu',
   'Meter': 'Merilnik',
@@ -689,7 +810,8 @@ const _dutchSourceSl = {
   'Koers': 'Smer',
   'Ander profiel kiezen': 'Izberi drug profil',
   'Cockpit': 'Kokpit',
-  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Ciljni čas za odštevanje v predstavitvenem načinu. Med predstavljanjem ga natančno nastavite s tipko K.',
+  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Ciljni čas za odštevanje v predstavitvenem načinu. Med predstavljanjem ga natančno nastavite s tipko K.',
   'Logo en footer': 'Logotip in noga',
   'Pagina': 'Stran',
   'Presentatiestijl': 'Slog predstavitve',
@@ -706,10 +828,12 @@ const _dutchSourceSl = {
   'Doeltijd': 'Ciljni čas',
   'Doeltijd (aftellen)': 'Ciljni čas (odštevanje)',
   'Geen aftelling': 'Brez odštevanja',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Privzeti ciljni čas za odštevanje v predstavitvenem načinu. Med predstavljanjem ga natančno nastavite s tipko K.',
+  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Privzeti ciljni čas za odštevanje v predstavitvenem načinu. Med predstavljanjem ga natančno nastavite s tipko K.',
   'uit': 'izklop',
   'Doeltijd / aftellen (K)': 'Ciljni čas / odštevanje (K)',
-  'Doeltijd / aftellen instellen (MMSS)': 'Nastavi ciljni čas / odštevanje (MMSS)',
+  'Doeltijd / aftellen instellen (MMSS)':
+      'Nastavi ciljni čas / odštevanje (MMSS)',
   'Tijd & oefenrun resetten': 'Ponastavi čas in vajo',
   'Resterend': 'Preostalo',
   'Over de tijd': 'Prekoračitev časa',
@@ -723,26 +847,33 @@ const _dutchSourceSl = {
   'Kopieer': 'Kopiraj',
   'Sluiten': 'Zapri',
   'Tekstgrootte van de interface': 'Velikost besedila vmesnika',
-  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.': 'Poveča vse besedilo urejevalnika do 200 %. Same prosojnice se ne spremenijo.',
+  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+      'Poveča vse besedilo urejevalnika do 200 %. Same prosojnice se ne spremenijo.',
   'Breedte van het slidepaneel': 'Širina plošče s prosojnicami',
   'Pijltjestoetsen passen de breedte aan': 'Puščične tipke prilagodijo širino',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.': 'Namig: z Cmd/Ctrl+V prilepite tabelo iz preglednice v celico, da zapolnite celo tabelo.',
+  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+      'Namig: z Cmd/Ctrl+V prilepite tabelo iz preglednice v celico, da zapolnite celo tabelo.',
   'Annuleren': 'Prekliči',
   'Checklist': 'Kontrolni seznam',
   'Voortgangsgrafiek tonen': 'Prikaži graf napredka',
-  'Toont afgevinkt en niet afgevinkt als percentages.': 'Prikaže označene in neoznačene elemente v odstotkih.',
+  'Toont afgevinkt en niet afgevinkt als percentages.':
+      'Prikaže označene in neoznačene elemente v odstotkih.',
   'Afgevinkt': 'Označeno',
   'Niet afgevinkt': 'Neoznačeno',
-  'Er zijn geen aangevinkte checklist-items om te legen.': 'Ni označenih elementov kontrolnega seznama za izbris.',
+  'Er zijn geen aangevinkte checklist-items om te legen.':
+      'Ni označenih elementov kontrolnega seznama za izbris.',
   'Alle checkboxen legen?': 'Počistiti vsa potrditvena polja?',
   'Hiermee worden alle': 'S tem se odznačijo vsi',
-  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.': 'označeni elementi kontrolnega seznama v celotni predstavitvi. To lahko razveljavite s Ctrl/Cmd+Z.',
+  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+      'označeni elementi kontrolnega seznama v celotni predstavitvi. To lahko razveljavite s Ctrl/Cmd+Z.',
   'Alles legen': 'Počisti vse',
   'checklist-items uitgevinkt.': 'elementov kontrolnega seznama odznačenih.',
   'Alle checkboxen legen': 'Počisti vsa potrditvena polja',
   'Afgevinkte tekst doorhalen': 'Prečrtaj označeno besedilo',
-  'Toont een streep door voltooide checklistitems.': 'Dokončane elemente kontrolnega seznama prikaže prečrtane.',
-  'Na media automatisch doorgaan': 'Samodejno nadaljuj po predstavnostni vsebini',
+  'Toont een streep door voltooide checklistitems.':
+      'Dokončane elemente kontrolnega seznama prikaže prečrtane.',
+  'Na media automatisch doorgaan':
+      'Samodejno nadaljuj po predstavnostni vsebini',
   'Opsomming': 'Alineje',
   'Nummering': 'Oštevilčenje',
   'Varianten': 'Različice',
@@ -751,11 +882,13 @@ const _dutchSourceSl = {
   'Omhoog': 'Navzgor',
   'Omlaag': 'Navzdol',
   'Niet toevoegen': 'Ne dodaj',
-  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.': 'Te prosojnice uporabljajo iste podatke, barve in naslov. S puščicami izberite njihov vrstni red za trenutno prosojnico.',
+  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+      'Te prosojnice uporabljajo iste podatke, barve in naslov. S puščicami izberite njihov vrstni red za trenutno prosojnico.',
   'Afbeelding': 'Slika',
   'Broncode': 'Izvorna koda',
   'Bullet': 'Alineja',
-  'Plak of typ hier je broncode...': 'Prilepite ali vnesite izvorno kodo tukaj ...',
+  'Plak of typ hier je broncode...':
+      'Prilepite ali vnesite izvorno kodo tukaj ...',
   'Programmeertaal': 'Programski jezik',
   'TLP van deze slide': 'TLP te prosojnice',
   'Wis annotaties (C)': 'Počisti opombe (C)',
@@ -769,10 +902,12 @@ const _dutchSourceSl = {
   'Cirkel': 'Krog',
   'Spider': 'Pajek',
   'CSV importeren': 'Uvozi CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)': 'Podatki (CSV: prva vrstica = imena nizov, prvi stolpec = oznake)',
+  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+      'Podatki (CSV: prva vrstica = imena nizov, prvi stolpec = oznake)',
   'Gekoppeld aan': 'Povezano z',
   'Ontkoppelen': 'Prekini povezavo',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?': 'Podatke shraniti v prosojnico ali jih obdržati kot ločeno datoteko CSV ob predstavitvi?',
+  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+      'Podatke shraniti v prosojnico ali jih obdržati kot ločeno datoteko CSV ob predstavitvi?',
   'In de slide': 'V prosojnici',
   'Als CSV-bestand': 'Kot datoteka CSV',
   'Geen grafiekgegevens': 'Ni podatkov grafa',
@@ -785,9 +920,12 @@ const _dutchSourceSl = {
   'Sorteren': 'Razvrsti',
   'Oplopend sorteren': 'Razvrsti naraščajoče',
   'Aflopend sorteren': 'Razvrsti padajoče',
-  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.': 'Pri krogu se prikažeta največ prva dva niza; oznake tvorijo segmente.',
-  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.': 'Pajkov diagram potrebuje vsaj tri oznake (osi); vsak niz tvori lik.',
-  'Een spider-diagram heeft minstens drie labels nodig': 'Pajkov diagram potrebuje vsaj tri oznake',
+  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+      'Pri krogu se prikažeta največ prva dva niza; oznake tvorijo segmente.',
+  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+      'Pajkov diagram potrebuje vsaj tri oznake (osi); vsak niz tvori lik.',
+  'Een spider-diagram heeft minstens drie labels nodig':
+      'Pajkov diagram potrebuje vsaj tri oznake',
   'Minimumlijn (optioneel)': 'Najnižja črta (neobvezno)',
   'Maximumlijn (optioneel)': 'Najvišja črta (neobvezno)',
   'Schaalminimum (optioneel)': 'Najnižja vrednost skale (neobvezno)',
@@ -796,9 +934,11 @@ const _dutchSourceSl = {
   'Broncode achtergrond': 'Ozadje izvorne kode',
   'Broncode tekst': 'Besedilo izvorne kode',
   'Syntaxkleuring': 'Barvanje sintakse',
-  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).': 'Izklop = vse v eni barvi (npr. zeleno na črnem za zaslon CRT).',
+  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+      'Izklop = vse v eni barvi (npr. zeleno na črnem za zaslon CRT).',
   'Eigen kleur (hex)': 'Lastna barva (hex)',
-  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.': 'Na primer #33FF33 za zeleni zaslon CRT.',
+  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+      'Na primer #33FF33 za zeleni zaslon CRT.',
   'Onderdeel van stijlprofiel ': 'Del slogovnega profila ',
   'Broncode lettertype': 'Pisava izvorne kode',
   'Kop (optioneel)': 'Naslov (neobvezno)',
@@ -806,22 +946,26 @@ const _dutchSourceSl = {
   'Subkop': 'Podnaslov',
   'Systeem (monospace)': 'Sistemska (monospace)',
   'Platte tekst': 'Golo besedilo',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.': 'HTML se odpre v vsakem brskalniku brez interneta ter izriše kodne bloke, matematiko in diagrame Mermaid.',
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+      'HTML se odpre v vsakem brskalniku brez interneta ter izriše kodne bloke, matematiko in diagrame Mermaid.',
   'Laatste slide': 'Zadnja prosojnica',
   'Logo px': 'Logotip px',
   'Markdown voor laatste slide': 'Markdown za zadnjo prosojnico',
   'PREVIEW': 'PREDOGLED',
   'Slides gerenderd.': 'Prosojnice izrisane.',
   'Standaard laatste slide gebruiken': 'Uporabi privzeto zadnjo prosojnico',
-  'Wordt automatisch toegevoegd bij presenteren en exporteren.': 'Samodejno dodano pri predstavljanju in izvozu.',
+  'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+      'Samodejno dodano pri predstavljanju in izvozu.',
   'gerenderd.': 'izrisano.',
   'renderen…': 'izrisovanje ...',
   'voorbereiden…': 'priprava ...',
   'Duplicaten opruimen': 'Počisti dvojnike',
-  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën': 'Poišči bajtno enake slike (md5), združi oznake in opombe ter odstrani kopije',
+  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+      'Poišči bajtno enake slike (md5), združi oznake in opombe ter odstrani kopije',
   'Geen dubbele afbeeldingen gevonden.': 'Ni najdenih podvojenih slik.',
   'Dubbele afbeeldingen opruimen?': 'Počistiti podvojene slike?',
-  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.': 'Iz vsake skupine ostane ena datoteka. Oznake in opombe se združijo, prosojnice, ki uporabljajo kopijo, pa nato kažejo na ohranjeno datoteko — tudi v predstavitvah, ki trenutno niso odprte.',
+  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+      'Iz vsake skupine ostane ena datoteka. Oznake in opombe se združijo, prosojnice, ki uporabljajo kopijo, pa nato kažejo na ohranjeno datoteko — tudi v predstavitvah, ki trenutno niso odprte.',
   'Opruimen': 'Počisti',
   '1 presentatiebestand bijgewerkt.': '1 datoteka predstavitve posodobljena.',
   'presentatiebestanden bijgewerkt.': 'datotek predstavitev posodobljenih.',
@@ -830,14 +974,19 @@ const _dutchSourceSl = {
   'dubbele afbeeldingen verwijderd.': 'podvojenih slik odstranjenih.',
   'Alleen afbeeldingen zonder tags tonen': 'Prikaži samo slike brez oznak',
   'Alle afbeeldingen hebben tags.': 'Vse slike imajo oznake.',
-  'Zet het filter uit om alles weer te zien.': 'Izklopite filter, da spet vidite vse.',
+  'Zet het filter uit om alles weer te zien.':
+      'Izklopite filter, da spet vidite vse.',
   'Welkom bij OciDeck': 'Dobrodošli v OciDeck',
   'Privacy en gebruik': 'Zasebnost in uporaba',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'OciDeck je lokalna namizna aplikacija. Vaše predstavitve in podatki se shranjujejo izključno na vašem računalniku.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'Aplikacija ne zbira osebnih podatkov, statistik ali podatkov o uporabi. Vaša zasebnost je naša prednostna naloga.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Vsi podatki, ki jih vnesete v OciDeck, ostanejo v vašem lokalnem sistemu in se ne pošiljajo na zunanje strežnike.',
+  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
+      'OciDeck je lokalna namizna aplikacija. Vaše predstavitve in podatki se shranjujejo izključno na vašem računalniku.',
+  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
+      'Aplikacija ne zbira osebnih podatkov, statistik ali podatkov o uporabi. Vaša zasebnost je naša prednostna naloga.',
+  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
+      'Vsi podatki, ki jih vnesete v OciDeck, ostanejo v vašem lokalnem sistemu in se ne pošiljajo na zunanje strežnike.',
   'Licentie (EUPL 1.2)': 'Licenca (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'S klikom na »Sprejmem« sprejemate te pogoje in soglašate z uporabo OciDeck.',
+  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
+      'S klikom na »Sprejmem« sprejemate te pogoje in soglašate z uporabo OciDeck.',
   'Volledige licentie online': 'Celotna licenca na spletu',
   'Akkoord gaan': 'Sprejmem',
   'Privacy': 'Zasebnost',
@@ -845,16 +994,21 @@ const _dutchSourceSl = {
   'Toestemming intrekken': 'Prekliči soglasje',
   'Toestemming intrekken?': 'Preklicati soglasje?',
   'Intrekken': 'Prekliči',
-  'U hebt al toegestemd in het gebruik van OciDeck.': 'Uporabo OciDeck ste že odobrili.',
-  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.': 'Soglasje lahko kadar koli prekličete. Po preklicu morate te pogoje znova sprejeti.',
-  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.': 'Če prekličete soglasje, morate te pogoje znova sprejeti, ko OciDeck znova zaženete.',
+  'U hebt al toegestemd in het gebruik van OciDeck.':
+      'Uporabo OciDeck ste že odobrili.',
+  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+      'Soglasje lahko kadar koli prekličete. Po preklicu morate te pogoje znova sprejeti.',
+  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+      'Če prekličete soglasje, morate te pogoje znova sprejeti, ko OciDeck znova zaženete.',
   'Slidekwaliteit': 'Kakovost prosojnice',
   'Geen kwaliteitsproblemen gevonden': 'Ni najdenih težav s kakovostjo',
   'Thema (hele presentatie)': 'Tema (celotna predstavitev)',
   'Kwaliteitsprobleem': 'Težava s kakovostjo',
   'Kwaliteitsproblemen': 'Težave s kakovostjo',
-  'Kwaliteitsproblemen (inclusief ernstige)': 'Težave s kakovostjo (vključno z resnimi)',
-  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Dodajte nadomestno besedilo / napis za dostopnost',
+  'Kwaliteitsproblemen (inclusief ernstige)':
+      'Težave s kakovostjo (vključno z resnimi)',
+  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Dodajte nadomestno besedilo / napis za dostopnost',
   'Alt-tekst': 'Nadomestno besedilo',
   'Tekstdichtheid': 'Gostota besedila',
   'Contrast': 'Kontrast',
@@ -864,22 +1018,32 @@ const _dutchSourceSl = {
   ':1 voor normale tekst).': ':1 za navadno besedilo).',
   ':1 voor grote tekst).': ':1 za veliko besedilo).',
   ':1).': ':1).',
-  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.': 'Kontrasta besedila na sliki ali čez njo ni mogoče samodejno preveriti — preverite vizualno.',
-  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.': 'Graf nima naslova ali opisnih podatkov — dodajte naslov ali imena nizov.',
-  'heeft geen titel of sprekernotities die de inhoud beschrijven.': 'nima naslova ali opomb predstavljalca, ki opisujejo vsebino.',
-  'Veel tekst op deze slide: het lettertype wordt verkleind tot ': 'Veliko besedila na tej prosojnici: velikost pisave je zmanjšana na ',
+  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+      'Kontrasta besedila na sliki ali čez njo ni mogoče samodejno preveriti — preverite vizualno.',
+  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+      'Graf nima naslova ali opisnih podatkov — dodajte naslov ali imena nizov.',
+  'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+      'nima naslova ali opomb predstavljalca, ki opisujejo vsebino.',
+  'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+      'Veliko besedila na tej prosojnici: velikost pisave je zmanjšana na ',
   ' van de ontwerpgrootte.': ' glede na oblikovno velikost.',
-  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (': 'Veliko besedila na tej prosojnici: velikost pisave je močno zmanjšana (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.': 'glede na oblikovno velikost). Razmislite o delitvi vsebine.',
+  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+      'Veliko besedila na tej prosojnici: velikost pisave je močno zmanjšana (',
+  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      'glede na oblikovno velikost). Razmislite o delitvi vsebine.',
   'Grote tabel (': 'Velika tabela (',
   ' rijen, ': ' vrstic, ',
-  ' kolommen): celtekst staat op het minimumformaat.': ' stolpcev): besedilo v celicah je na najmanjši velikosti.',
+  ' kolommen): celtekst staat op het minimumformaat.':
+      ' stolpcev): besedilo v celicah je na najmanjši velikosti.',
   'Veel broncode (': 'Veliko izvorne kode (',
-  ' regels) — de tekst wordt sterk verkleind om te passen.': ' vrstic) — besedilo je močno zmanjšano, da se prilega.',
+  ' regels) — de tekst wordt sterk verkleind om te passen.':
+      ' vrstic) — besedilo je močno zmanjšano, da se prilega.',
   'Veel vrije markdown (': 'Veliko prostega markdowna (',
-  ' regels) — controleer of alles leesbaar blijft op de slide.': ' vrstic) — preverite, ali vse ostane berljivo na prosojnici.',
+  ' regels) — controleer of alles leesbaar blijft op de slide.':
+      ' vrstic) — preverite, ali vse ostane berljivo na prosojnici.',
   'Lange titelpagina (': 'Dolga naslovna prosojnica (',
-  ' tekens) — de tekst wordt verkleind om te passen.': ' znakov) — besedilo je zmanjšano, da se prilega.',
+  ' tekens) — de tekst wordt verkleind om te passen.':
+      ' znakov) — besedilo je zmanjšano, da se prilega.',
   'Thema bodytekst': 'Telo besedila teme',
   'Thema titel': 'Naslov teme',
   'Thema tabeltekst': 'Besedilo tabele teme',
@@ -890,34 +1054,46 @@ const _dutchSourceSl = {
   'Tweede afbeelding': 'Druga slika',
   'Waarschuwing bij export': 'Opozori pri izvozu',
   'Minimale contrastverhouding': 'Najmanjše razmerje kontrasta',
-  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.': 'Besedilo pod tem razmerjem je označeno. 4.5 = WCAG AA, 3.0 = WCAG AA veliko besedilo. Višje je strožje.',
-  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.': 'Pred izvozom zahtevaj potrditev, kadar so prisotne težave s kakovostjo prosojnic.',
+  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.':
+      'Besedilo pod tem razmerjem je označeno. 4.5 = WCAG AA, 3.0 = WCAG AA veliko besedilo. Višje je strožje.',
+  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+      'Pred izvozom zahtevaj potrditev, kadar so prisotne težave s kakovostjo prosojnic.',
   'Kwaliteitsproblemen gevonden': 'Najdene težave s kakovostjo',
   'Toch exporteren': 'Vseeno izvozi',
   'ernstige probleem(en)': 'resnih težav',
-  'De presentatie heeft kwaliteitsproblemen (': 'Predstavitev ima težave s kakovostjo (',
+  'De presentatie heeft kwaliteitsproblemen (':
+      'Predstavitev ima težave s kakovostjo (',
   'Lange quote (': 'Dolg citat (',
   'Footer-tekst': 'Besedilo noge',
   'Checklist (niet aangevinkt)': 'Kontrolni seznam (neoznačeno)',
   'Checklist (aangevinkt)': 'Kontrolni seznam (označeno)',
   ': bestand niet gevonden (': ': datoteka ni najdena (',
-  'Blokkeer export bij ernstige kwaliteitsproblemen': 'Blokiraj izvoz pri resnih težavah s kakovostjo',
-  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.': 'Izvoz ni mogoč, dokler preverjanja kakovosti prosojnic javljajo napake.',
-  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.': 'Izvoz blokiran zaradi resnih težav s kakovostjo.',
+  'Blokkeer export bij ernstige kwaliteitsproblemen':
+      'Blokiraj izvoz pri resnih težavah s kakovostjo',
+  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+      'Izvoz ni mogoč, dokler preverjanja kakovosti prosojnic javljajo napake.',
+  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+      'Izvoz blokiran zaradi resnih težav s kakovostjo.',
   'Alle meldingen': 'Vse težave',
-  '… en meer problemen in het kwaliteitspaneel.': '… in več težav v plošči kakovosti.',
+  '… en meer problemen in het kwaliteitspaneel.':
+      '… in več težav v plošči kakovosti.',
   'Classificatie-handhaving': 'Uveljavljanje klasifikacije',
   'Vrijgaveplafond': 'Zgornja meja objave',
-  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.': 'Najvišja raven TLP, ki jo je dovoljeno izvoziti. Prazno = brez meje.',
+  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+      'Najvišja raven TLP, ki jo je dovoljeno izvoziti. Prazno = brez meje.',
   'Vereist minimumniveau': 'Zahtevana najnižja raven',
-  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.': 'Najnižja klasifikacija, ki jo mora imeti komplet za izvoz. Prazno = brez minimuma.',
+  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+      'Najnižja klasifikacija, ki jo mora imeti komplet za izvoz. Prazno = brez minimuma.',
   'Geen plafond': 'Brez meje',
   'Geen minimum': 'Brez minimuma',
   'Classificatie verplicht': 'Klasifikacija obvezna',
-  'Weiger export wanneer het deck geen TLP-niveau heeft.': 'Zavrni izvoz, kadar komplet nima ravni TLP.',
+  'Weiger export wanneer het deck geen TLP-niveau heeft.':
+      'Zavrni izvoz, kadar komplet nima ravni TLP.',
   'Classificatie-watermerk': 'Vodni žig klasifikacije',
-  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.': 'Na vsaki prosojnici prikaži diagonalni vodni žig s TLP in organizacijo.',
-  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.': 'Nastavite raven TLP — izvoz je blokiran s pravilnikom o klasifikaciji.',
+  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+      'Na vsaki prosojnici prikaži diagonalni vodni žig s TLP in organizacijo.',
+  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+      'Nastavite raven TLP — izvoz je blokiran s pravilnikom o klasifikaciji.',
   'Tabel bewerken': 'Uredi tabelo',
   'Pijltjes · Tab · Esc': 'Puščice · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Uredi tabelo (na tabelnih prosojnicah)',

@@ -11,7 +11,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const CircularProgressIndicator(color: Color(0xFF3B82F6)),
+          const CircularProgressIndicator(color: AppTheme.blue500),
           const SizedBox(height: 16),
           Text(
             l10n.d('Afbeeldingen laden…'),
@@ -40,7 +40,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
             ),
             child: const Icon(
               Icons.photo_library_outlined,
-              color: Color(0xFF60A5FA),
+              color: AppTheme.blue400,
               size: 18,
             ),
           ),
@@ -133,7 +133,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(color: Color(0xFF3B82F6)),
+            borderSide: const BorderSide(color: AppTheme.blue500),
           ),
         ),
       ),
@@ -157,17 +157,13 @@ extension _CarouselChrome on _ImageCarouselPickerState {
                 : const Color(0xFF0D1117),
             borderRadius: BorderRadius.circular(9),
             border: Border.all(
-              color: _untaggedOnly
-                  ? const Color(0xFF3B82F6)
-                  : const Color(0xFF30363D),
+              color: _untaggedOnly ? AppTheme.blue500 : const Color(0xFF30363D),
             ),
           ),
           child: Icon(
             Icons.label_off_outlined,
             size: 17,
-            color: _untaggedOnly
-                ? const Color(0xFF60A5FA)
-                : const Color(0xFF6E7681),
+            color: _untaggedOnly ? AppTheme.blue400 : const Color(0xFF6E7681),
           ),
         ),
       ),
@@ -193,7 +189,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
             child: Icon(
               icon,
               size: 17,
-              color: active ? const Color(0xFF60A5FA) : const Color(0xFF6E7681),
+              color: active ? AppTheme.blue400 : const Color(0xFF6E7681),
             ),
           ),
         ),

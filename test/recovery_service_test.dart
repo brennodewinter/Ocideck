@@ -137,7 +137,9 @@ void main() {
 
     // Backdate one file's mtime well past the threshold.
     final oldFile = File('${tempDir.path}/old.json');
-    oldFile.setLastModifiedSync(DateTime.now().subtract(const Duration(days: 40)));
+    oldFile.setLastModifiedSync(
+      DateTime.now().subtract(const Duration(days: 40)),
+    );
 
     final removed = await service.pruneOlderThan(const Duration(days: 30));
     expect(removed, 1);

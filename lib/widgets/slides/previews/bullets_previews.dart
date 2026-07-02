@@ -73,17 +73,13 @@ class _BulletsPreview extends StatelessWidget {
     final pad = w * 0.07;
     final vPad = w * 0.05;
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
-    final padding = EdgeInsets.fromLTRB(
-      pad,
-      vPad + safe.top,
-      pad,
-      bulletsSlideBottomInset(
-        w: w,
-        slide: slide,
-        profile: profile,
-        defaultBottomPad: vPad,
-        safeBottom: safe.bottom,
-      ),
+    final padding = _bulletsPadding(
+      w: w,
+      slide: slide,
+      profile: profile,
+      safe: safe,
+      pad: pad,
+      vPad: vPad,
     );
 
     return _bulletsSlideShell(
@@ -247,17 +243,13 @@ class _BulletsPreview extends StatelessWidget {
     final pad = w * 0.07;
     final vPad = w * 0.05;
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
-    final padding = EdgeInsets.fromLTRB(
-      pad,
-      vPad + safe.top,
-      pad,
-      bulletsSlideBottomInset(
-        w: w,
-        slide: slide,
-        profile: profile,
-        defaultBottomPad: vPad,
-        safeBottom: safe.bottom,
-      ),
+    final padding = _bulletsPadding(
+      w: w,
+      slide: slide,
+      profile: profile,
+      safe: safe,
+      pad: pad,
+      vPad: vPad,
     );
 
     return _bulletsSlideShell(
@@ -512,17 +504,13 @@ class _TwoBulletsPreview extends StatelessWidget {
     final pad = w * 0.065;
     final vPad = w * 0.045;
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
-    final padding = EdgeInsets.fromLTRB(
-      pad,
-      vPad + safe.top,
-      pad,
-      bulletsSlideBottomInset(
-        w: w,
-        slide: slide,
-        profile: profile,
-        defaultBottomPad: vPad,
-        safeBottom: safe.bottom,
-      ),
+    final padding = _bulletsPadding(
+      w: w,
+      slide: slide,
+      profile: profile,
+      safe: safe,
+      pad: pad,
+      vPad: vPad,
     );
     return _bulletsSlideShell(
       background: _hexColor(profile.slideBackgroundColor),
