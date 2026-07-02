@@ -49,6 +49,24 @@ OciDeck is an offline desktop application. Areas of particular interest:
   'wasm-unsafe-eval'`, no `unsafe-inline`/`unsafe-eval`; media first-party). Any
   way to make the running app load third-party script or origins is in scope.
 
+### Vendored bundle currency
+
+`make deps-check` queries OSV for every pinned bundle in
+`assets/web_export/MANIFEST.json` on each push/PR. As of the last review all
+pins (marked 18.0.5, highlight.js 11.11.1, DOMPurify 3.4.11, mermaid 10.9.6,
+MathJax 3.2.2) carry **no known advisories**. Two tracked (non-urgent)
+maintenance items:
+
+- **mermaid 10.9.6 → 11.x** is a planned major upgrade, deferred until its
+  rendering can be validated (real offscreen WebView), as it fixes no known
+  advisory. Note mermaid bundles its **own** DOMPurify (3.4.2) internally,
+  independent of the pinned 3.4.11; a DOMPurify advisory is only caught via the
+  `mermaid@version` OSV query. This is mitigated in depth: mermaid runs with
+  `securityLevel: 'strict'` and `htmlLabels: false`, its SVG output is run
+  through `sanitizeMermaidSvg` and then the pinned DOMPurify (SVG profile).
+- **MathJax 3.2.2** — the only report against it is a disputed ReDoS
+  (CVE-2023-39663), impact bounded to DoS on crafted TeX; upgrade tracked.
+
 ## Untrusted deck handling
 
 A `.md` deck (and the assets it references) may come from an untrusted source.
@@ -114,7 +132,12 @@ OciDeck constrains what an opened deck can do:
   Live rendering (`NetworkImage` / `VideoPlayerController.networkUrl` / the embed
   WebView) does its own DNS, so it cannot pin the socket the way URL *import*
   does — this residual SSRF/rebind exposure is the reason the gate defaults off
-  and is scoped to user-enabled sessions. Remote images keep the decode-dimension
+  and is scoped to user-enabled sessions. The connect-time media check
+  (`NetGuard.isAllowedMediaUrlResolved`) also **caches a positive host
+  resolution for the session**, so a host that resolved externally once is not
+  re-validated later in that session; this is an accepted trade-off for the
+  higher-level Flutter media APIs, whereas the URL *import* path avoids it by
+  pinning the socket to the validated address. Remote images keep the decode-dimension
   cap (`cappedNetworkImage`); magic-byte validation does not apply to live
   streams (no pre-fetched bytes), a deliberate trade-off. The embed WebView
   restricts navigation to the player origins and refuses auth prompts/pop-ups.
@@ -122,6 +145,44 @@ OciDeck constrains what an opened deck can do:
 Known residual hardening: the render-path symlink cache is keyed by path for the
 session, so a symlink swapped *after* its first render isn't re-checked (a
 narrow TOCTOU on an already-open deck).
+
+## Crash-recovery snapshots
+
+Autosave writes each dirty tab's full markdown (and user notes) as **unencrypted
+JSON** to `<app-support>/recovery/<uuid>.json`, so work survives a crash. This
+means deck content — including a **classified** deck — sits in plaintext on disk
+until the tab is saved or discarded. Mitigations: the directory is the
+per-user, OS-permissioned app-support path; snapshots are deleted on save and on
+"tab became clean"; and orphaned snapshots older than 30 days are pruned on
+startup (`RecoveryService.pruneOlderThan`) so a forgotten crash file can't linger
+indefinitely. Encrypting these snapshots at rest (keyed via the keychain) is a
+known residual improvement, not yet implemented.
+
+## Platform sandboxing (macOS)
+
+The macOS build currently ships with the App Sandbox **disabled**
+(`com.apple.security.app-sandbox = false` in `macos/Runner/*.entitlements`). This
+is a deliberate, documented trade-off rather than an oversight:
+
+- OciDeck's desktop file model reads and writes a deck's **sibling asset
+  directories** (`images/`, `themes/`, linked CSVs) relative to the opened `.md`,
+  and **scans known locations** for decks. Under the sandbox, user selection
+  grants access only to the picked item (via security-scoped bookmarks), so both
+  flows would break without a substantial redesign toward a folder-picker-only
+  model with persisted bookmarks.
+- The custom `desktop_multi_window` plugin (dual-screen presenter) and the
+  offscreen Mermaid `WebView` would each need their access re-validated under the
+  sandbox.
+
+Enabling the sandbox is therefore tracked as a migration, not a one-line
+entitlement flip; doing it blindly would silently deny file access. The minimal
+target entitlement set, once the file model is bookmark-based, is
+`com.apple.security.app-sandbox`, `…network.client` (WebDAV),
+`…files.user-selected.read-write`, and `…files.downloads.read-write`. Until then,
+the app relies on the in-process defences documented above (SSRF guards, import
+size/entry caps, path containment, the executable-content scanner) rather than
+OS-level process isolation. The `com.apple.security.cs.allow-jit` entitlement in
+`DebugProfile.entitlements` is debug-only and is not present in release.
 
 ## Supported versions
 

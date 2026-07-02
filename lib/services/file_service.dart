@@ -574,6 +574,20 @@ class FileService {
     return cleaned.isEmpty ? 'presentatie' : cleaned;
   }
 
+  /// Sanitize a deck-supplied theme name before it becomes a file name. The
+  /// `theme:` front-matter value is attacker-controlled, so `../` and other
+  /// separators must be stripped or a write could escape the project's
+  /// `themes/` directory (p.join collapses `../` on join). Falls back to
+  /// `ocideck`. Strips the same characters as [_safeName]; `.` and `/` are not
+  /// in `[\w\s-]`, so any traversal sequence is flattened away.
+  String _safeThemeName(String themeName) {
+    final cleaned = themeName
+        .replaceAll(RegExp(r'[^\w\s-]'), '')
+        .replaceAll(RegExp(r'\s+'), '_')
+        .trim();
+    return cleaned.isEmpty ? 'ocideck' : cleaned;
+  }
+
   /// Schrijf een zelfstandig pakket (zip): de markdown + álle gebruikte assets
   /// (afbeeldingen, media, logo) en de thema-CSS, met onderling relatieve
   /// paden. Werkt ongeacht of het deck al is opgeslagen.
@@ -694,9 +708,7 @@ class FileService {
     final css = await _packageThemeCss(packDeck.theme, profile, logoRel);
     if (css != null) {
       final cssBytes = utf8.encode(css);
-      final themeName = packDeck.theme.trim().isEmpty
-          ? 'ocideck'
-          : packDeck.theme;
+      final themeName = _safeThemeName(packDeck.theme);
       archive.add(
         ArchiveFile('themes/$themeName.css', cssBytes.length, cssBytes),
       );
@@ -710,7 +722,7 @@ class FileService {
     ThemeProfile profile,
     String? logoRel,
   ) async {
-    final safe = themeName.trim().isEmpty ? 'ocideck' : themeName;
+    final safe = _safeThemeName(themeName);
     try {
       final base = (await rootBundle.loadString(
         'assets/themes/ocideck.css',
@@ -793,33 +805,40 @@ class FileService {
       if (f.name.length > maxZipEntryPathLength) continue;
       final outPath = safeOutPath(f.name);
       if (outPath == null) continue; // skip path-traversal entries
-      // Reject before inflating: an entry that declares a huge uncompressed
-      // size (zip bomb) must not be materialised into memory at all.
+      // Cheap early reject on the *declared* uncompressed size (a zip bomb can
+      // understate this, so it is only a fast path, not the real guard).
       if (f.size < 0 || extracted + f.size > maxBytes) {
         logWarning(
           'FileService.importPackageBytes: decompressed size exceeds limit',
         );
         return null;
       }
-      // Decompressing a corrupt entry can throw; skip it instead of aborting.
+      // Inflate into a capped stream that aborts the moment the entry exceeds
+      // the remaining budget. This bounds peak memory per entry: unlike
+      // `f.content` (which decodes the whole entry into memory before we can
+      // check its size), the underlying inflater writes incrementally, so a
+      // deflate bomb that understated its header size is stopped mid-inflation.
+      final remaining = maxBytes - extracted;
+      final capped = _CappedOutputStream(remaining);
       final List<int> content;
       try {
-        content = f.content;
+        f.writeContent(capped);
+        content = capped.getBytes();
+      } on _ExtractionLimitException {
+        logWarning(
+          'FileService.importPackageBytes: entry exceeds decompression limit '
+          '(possible zip bomb): ${f.name}',
+        );
+        return null;
       } catch (e) {
+        // Decompressing a corrupt entry can throw; skip it instead of aborting.
         logWarning(
           'FileService.importPackageBytes: unreadable entry skipped (${f.name})',
           e,
         );
         continue;
       }
-      // Backstop in case a header understated the real uncompressed size.
       extracted += content.length;
-      if (extracted > maxBytes) {
-        logWarning(
-          'FileService.importPackageBytes: decompressed size exceeds limit',
-        );
-        return null;
-      }
       final out = File(outPath);
       await out.parent.create(recursive: true);
       await out.writeAsBytes(content, flush: true);
@@ -954,5 +973,42 @@ class FileService {
       dialogTitle: _d('Pakket exporteren'),
       fileName: '${_safeName(deck.title)}.$packageExtension',
     );
+  }
+}
+
+/// Thrown by [_CappedOutputStream] when a decompressed entry would exceed its
+/// byte budget — the signal that a package entry is a decompression bomb.
+class _ExtractionLimitException implements Exception {
+  const _ExtractionLimitException();
+}
+
+/// An [OutputStream] that refuses to grow past [limit] bytes. The archive
+/// inflater writes decompressed output incrementally, so throwing here stops a
+/// zip bomb mid-inflation instead of after the whole entry is in memory.
+class _CappedOutputStream extends OutputMemoryStream {
+  _CappedOutputStream(this.limit);
+
+  final int limit;
+
+  void _guard(int add) {
+    if (length + add > limit) throw const _ExtractionLimitException();
+  }
+
+  @override
+  void writeByte(int value) {
+    _guard(1);
+    super.writeByte(value);
+  }
+
+  @override
+  void writeBytes(List<int> bytes, {int? length}) {
+    _guard(length ?? bytes.length);
+    super.writeBytes(bytes, length: length);
+  }
+
+  @override
+  void writeStream(InputStream stream) {
+    _guard(stream.length);
+    super.writeStream(stream);
   }
 }

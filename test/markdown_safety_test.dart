@@ -95,5 +95,55 @@ title: Kwartaalcijfers
         isTrue,
       );
     });
+
+    group("own <iframe class=\"ocideck-embed\"> video embeds", () {
+      const youtube =
+          '<iframe class="ocideck-embed" data-src="https://youtu.be/dQw4w9WgXcQ" '
+          'src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=0" '
+          'style="width:100%; aspect-ratio:16/9; border:0;" '
+          'allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+      const vimeo =
+          '<iframe class="ocideck-embed" data-src="https://vimeo.com/123456" '
+          'src="https://player.vimeo.com/video/123456" '
+          'style="width:100%; aspect-ratio:16/9;" allowfullscreen></iframe>';
+
+      test('YouTube embed passes the gate', () {
+        expect(MarkdownSafetyScanner.isSafe(youtube), isTrue);
+      });
+      test('Vimeo embed passes the gate', () {
+        expect(MarkdownSafetyScanner.isSafe(vimeo), isTrue);
+      });
+
+      test('embed pointing at a foreign host is still blocked', () {
+        const evil =
+            '<iframe class="ocideck-embed" src="https://evil.example.com/x"></iframe>';
+        expect(MarkdownSafetyScanner.isSafe(evil), isFalse);
+      });
+      test('embed with a javascript: src is still blocked', () {
+        const evil =
+            '<iframe class="ocideck-embed" src="javascript:alert(1)"></iframe>';
+        expect(MarkdownSafetyScanner.isSafe(evil), isFalse);
+      });
+      test('embed with an on… handler is still flagged', () {
+        const evil =
+            '<iframe class="ocideck-embed" onload="alert(1)" '
+            'src="https://www.youtube-nocookie.com/embed/x"></iframe>';
+        expect(MarkdownSafetyScanner.isSafe(evil), isFalse);
+      });
+      test('a plain foreign iframe without the class is still blocked', () {
+        expect(
+          MarkdownSafetyScanner.isSafe(
+            '<iframe src="https://www.youtube-nocookie.com/embed/x"></iframe>',
+          ),
+          isFalse,
+        );
+      });
+      test('the class alias does not whitelist object/embed', () {
+        expect(
+          MarkdownSafetyScanner.isSafe('<object class="ocideck-embed"></object>'),
+          isFalse,
+        );
+      });
+    });
   });
 }

@@ -344,7 +344,8 @@ class MarkdownValidator {
             .substring('<!-- advance:'.length)
             .replaceAll('-->', '')
             .trim();
-        if (double.tryParse(value) == null) {
+        final parsed = double.tryParse(value);
+        if (parsed == null || !parsed.isFinite) {
           issues.add(
             MarkdownValidationIssue(
               line: lineNo(i),

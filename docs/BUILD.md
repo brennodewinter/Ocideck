@@ -59,6 +59,26 @@ HTML export, and presenting in a single window. Dual-screen presenter mode and
 direct filesystem project folders are desktop-only; use **Open** / **Save** via
 the browser file picker on web.
 
+### Response headers the host must add
+
+The CSP in `web/index.html` is delivered via a `<meta>` tag, which covers most
+directives — but browsers **ignore `frame-ancestors` (and `sandbox`/`report-*`)
+when they arrive via `<meta>`**. To actually prevent clickjacking, the static
+host must send these as HTTP **response headers** for the app's HTML:
+
+```
+Content-Security-Policy: frame-ancestors 'none'
+X-Frame-Options: DENY
+```
+
+(When embedding the bundle inside Nextcloud, replace `'none'` with the host
+origin instead of dropping the header.) Ideally serve the **entire** CSP as a
+response header rather than relying on the meta tag. Example snippets:
+
+- **nginx**: `add_header Content-Security-Policy "frame-ancestors 'none'" always; add_header X-Frame-Options "DENY" always;`
+- **Caddy**: `header Content-Security-Policy "frame-ancestors 'none'"` and `header X-Frame-Options "DENY"`
+- **Apache**: `Header always set X-Frame-Options "DENY"` and `Header always set Content-Security-Policy "frame-ancestors 'none'"`
+
 > A plain `flutter build web` still works, but it falls back to the gstatic CDN
 > and an `unsafe-*` loader — use `make build-web` so the hardening stays pinned.
 

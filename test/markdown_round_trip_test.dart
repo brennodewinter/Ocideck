@@ -42,6 +42,20 @@ void main() {
       expect(out.imageCaption, 'Bron: archief');
     });
 
+    test('caption round-trips a pipe and a literal sentinel char', () {
+      // The pipe uses the private-use sentinel internally; a user-typed
+      // sentinel (U+E000) must not be mistaken for an encoded pipe on parse.
+      const tricky = 'a | b \u{E000} c';
+      final out = _roundTrip(
+        Slide.create(SlideType.title).copyWith(
+          title: 'T',
+          imagePath: 'images/cover.png',
+          imageCaption: tricky,
+        ),
+      );
+      expect(out.imageCaption, tricky);
+    });
+
     test('title slide round-trips a per-slide text colour override', () {
       final out = _roundTrip(
         Slide.create(SlideType.title).copyWith(
@@ -1079,6 +1093,21 @@ void main() {
       );
       expect(out.tableRows[1][0], 'gebruik de <br> tag');
       expect(out.tableRows[2][0], 'regel1\nregel2');
+    });
+
+    test('C5: literal escape sequence in notes is the one accepted collision', () {
+      // Documented in markdown_service_helpers.dart: notes escape `-->` as
+      // `--\>` inside the HTML comment. A note that already contains the literal
+      // escape `--\>` therefore round-trips back as `-->`. This is a known,
+      // negligible, accepted collision (private escape sequence in speaker
+      // notes); this test locks the behaviour so any change is intentional.
+      final out = _roundTrip(
+        Slide.create(SlideType.section).copyWith(
+          title: 'Deel',
+          notes: r'literal escape --\> here',
+        ),
+      );
+      expect(out.notes, 'literal escape --> here');
     });
   });
 

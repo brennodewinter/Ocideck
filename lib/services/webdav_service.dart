@@ -97,6 +97,20 @@ class WebdavService {
     if (host.isEmpty) {
       throw WebdavException(WebdavError.config, 'Ongeldige server-URL');
     }
+    // Basic-auth stuurt de Nextcloud-credentials in (base64) mee bij élke
+    // request. Over plain http gaan die in leesbare vorm over de lijn, dus
+    // eisen we https — tenzij de gebruiker de server bewust als vertrouwd
+    // intern (LAN) heeft gemarkeerd, waar een box zonder TLS gangbaar is.
+    final scheme = server.origin?.scheme.toLowerCase();
+    if (scheme != 'https' && !(scheme == 'http' && server.trustedInternal)) {
+      throw WebdavException(
+        WebdavError.config,
+        scheme == 'http'
+            ? 'Gebruik https of markeer de server als vertrouwd intern; '
+                  'anders gaat je wachtwoord onversleuteld over het netwerk.'
+            : 'Alleen https-servers worden ondersteund.',
+      );
+    }
     final addrs = await NetGuard.safeResolveTrusted(
       host,
       allowPrivate: server.trustedInternal,

@@ -26,10 +26,18 @@ jobs:
           cache: true
 
       - name: Install dependencies
-        run: flutter pub get
+        # --enforce-lockfile fails if pubspec.lock drifted, so a release can't
+        # silently pull a different (unvetted) dependency set than CI vetted.
+        run: flutter pub get --enforce-lockfile
 
-      - name: Build web
-        run: flutter build web --release --no-web-resources-cdn --csp
+      # Same security gates CI runs on every push — a tag must not ship an
+      # artifact that skipped them (pinned-bundle hash/OSV check, then the
+      # hardened build + CSP/self-hosted-CanvasKit assertion).
+      - name: Dependency CVE + bundle hash check (make deps-check)
+        run: make deps-check
+
+      - name: Build + verify web hardening (make check-web)
+        run: make check-web
 
       - name: Upload web bundle
         uses: actions/upload-artifact@v4
@@ -53,7 +61,7 @@ jobs:
           cache: true
 
       - name: Install dependencies
-        run: flutter pub get
+        run: flutter pub get --enforce-lockfile
 
       - name: Build macOS
         run: |
@@ -82,7 +90,7 @@ jobs:
           cache: true
 
       - name: Install dependencies
-        run: flutter pub get
+        run: flutter pub get --enforce-lockfile
 
       # `make` is not reliably present on the Windows runner, so call Flutter
       # directly (same convention as ci.yml's test-matrix).
@@ -120,7 +128,7 @@ jobs:
           cache: true
 
       - name: Install dependencies
-        run: flutter pub get
+        run: flutter pub get --enforce-lockfile
 
       - name: Build Linux
         run: |

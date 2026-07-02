@@ -37,6 +37,10 @@ Normal text.
     expect(csp, contains("object-src 'none'"));
     expect(csp, contains("frame-src 'none'"));
     expect(csp, contains("base-uri 'none'"));
+    // A surviving <img src="https://…"> or CSS url() must not beacon out.
+    expect(csp, contains("connect-src 'none'"));
+    expect(csp, contains('img-src'));
+    expect(csp, isNot(contains("img-src 'self' data: blob: file: https:")));
     expect(csp, isNot(contains("'unsafe-inline'")));
     expect(csp, isNot(contains("'unsafe-eval'")));
     expect(csp, isNot(contains("script-src 'self'")));

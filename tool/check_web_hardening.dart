@@ -67,6 +67,32 @@ void main() {
         _eq(directives['object-src'], ["'none'"]),
         "CSP should set object-src 'none'.",
       );
+      // default-src is the fallback for every unlisted fetch directive; keep it
+      // first-party so a future directive removal can't silently open a hole.
+      require(
+        _eq(directives['default-src'], ["'self'"]),
+        "CSP default-src must be exactly 'self'.",
+      );
+      // base-uri must stay 'self' (Flutter needs <base href>); a widened
+      // base-uri lets injected markup repoint relative URLs.
+      require(
+        _eq(directives['base-uri'], ["'self'"]),
+        "CSP base-uri must be exactly 'self'.",
+      );
+      // The media/frame axes may use 'self'/data:/blob: but must never gain a
+      // remote origin — that would re-open the web SSRF/beacon hole the bundle
+      // closes by being first-party only.
+      for (final d in ['img-src', 'media-src', 'frame-src', 'child-src']) {
+        require(
+          directives.containsKey(d),
+          'CSP must declare $d (first-party only).',
+        );
+        require(
+          !_hasRemoteOrigin(directives[d]),
+          'CSP $d must not allow a remote origin (found: '
+              '${directives[d]?.join(' ')}).',
+        );
+      }
     }
   }
 
@@ -112,6 +138,22 @@ Map<String, List<String>> _parseCsp(String csp) {
     out[tokens.first.toLowerCase()] = tokens.sublist(1);
   }
   return out;
+}
+
+/// True when any token is a remote origin — an `http(s):` scheme, a
+/// protocol-relative `//host`, a bare host, or the `*` wildcard. First-party
+/// keywords (`'self'`) and local schemes (`data:`, `blob:`, `filesystem:`,
+/// `mediastream:`) are allowed.
+bool _hasRemoteOrigin(List<String>? tokens) {
+  if (tokens == null) return false;
+  const localSchemes = {"'self'", 'data:', 'blob:', 'filesystem:', 'mediastream:', "'none'"};
+  for (final t in tokens) {
+    if (localSchemes.contains(t)) continue;
+    if (t == '*' || t.startsWith('http') || t.startsWith('//') || t.contains('.')) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /// True when [tokens] equals [expected] (order-independent).

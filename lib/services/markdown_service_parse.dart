@@ -196,6 +196,10 @@ extension _MarkdownParse on MarkdownService {
 
     var imageSize = body.imageSize;
     if (imageSize == 0 && d.styleImageWidth > 0) imageSize = d.styleImageWidth;
+    // 0 stays "auto"; a real value is capped so a crafted `![bg 900000%]`
+    // can't blow the layout box up (~maxWidth × 9000) and thrash rendering/
+    // rasterisation. 400% is well beyond any legitimate zoom.
+    if (imageSize > 400) imageSize = 400;
 
     final tableRows = <List<String>>[];
     for (final line in body.tableLines) {
@@ -362,7 +366,11 @@ extension _MarkdownParse on MarkdownService {
       (m) {
         final content = m.group(1)!.trim();
         if (content.startsWith('advance:')) {
-          advanceDuration = double.tryParse(content.substring(8).trim()) ?? 0;
+          // Clamp fail-closed: double.tryParse accepts Infinity/NaN/overflow
+          // literals, and `(Infinity * 1000).round()` throws in the auto-advance
+          // timer. Mirror the presentationTargetSeconds clamp (0..86400s).
+          final d = double.tryParse(content.substring(8).trim()) ?? 0;
+          advanceDuration = (d.isFinite && d > 0) ? d.clamp(0, 86400) : 0;
         } else if (content == 'skip') {
           skipped = true;
         } else if (content.startsWith('tlp:')) {

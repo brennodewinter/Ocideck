@@ -130,4 +130,28 @@ void main() {
     await Future.wait(ops);
     expect(await service.loadAll(), isEmpty);
   });
+
+  test('pruneOlderThan deletes stale snapshots but keeps fresh ones', () async {
+    await service.save(snap('old'));
+    await service.save(snap('fresh'));
+
+    // Backdate one file's mtime well past the threshold.
+    final oldFile = File('${tempDir.path}/old.json');
+    oldFile.setLastModifiedSync(DateTime.now().subtract(const Duration(days: 40)));
+
+    final removed = await service.pruneOlderThan(const Duration(days: 30));
+    expect(removed, 1);
+
+    final remaining = await service.loadAll();
+    expect(remaining.map((s) => s.id), ['fresh']);
+  });
+
+  test('loadAll prunes snapshots older than the default max age', () async {
+    await service.save(snap('ancient'));
+    File(
+      '${tempDir.path}/ancient.json',
+    ).setLastModifiedSync(DateTime.now().subtract(const Duration(days: 400)));
+
+    expect(await service.loadAll(), isEmpty);
+  });
 }
