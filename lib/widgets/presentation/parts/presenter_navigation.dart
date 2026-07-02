@@ -19,8 +19,10 @@ extension _PresenterNavigation on _FullscreenPresenterState {
     );
   }
 
-  void _next() {
-    if (_userNotesMode) return;
+  void _next({bool allowInUserNotes = false}) {
+    // Met het notitiepaneel open bladert alleen PgUp/PgDn expliciet door;
+    // klikken en overige toetsen blijven bij het tekstveld.
+    if (_userNotesMode && !allowInUserNotes) return;
     // Eerste toets/klik op een blanco scherm haalt het scherm terug.
     if (_blank != _Blank.none) {
       _rebuild(() => _blank = _Blank.none);
@@ -68,8 +70,8 @@ extension _PresenterNavigation on _FullscreenPresenterState {
     }
   }
 
-  void _prev() {
-    if (_userNotesMode) return;
+  void _prev({bool allowInUserNotes = false}) {
+    if (_userNotesMode && !allowInUserNotes) return;
     if (_blank != _Blank.none) {
       _rebuild(() => _blank = _Blank.none);
       return;

@@ -1100,4 +1100,5 @@ const _dutchSourceId = {
   'Pen · markeerstift · ⇧E': 'Pena · stabilo · ⇧E',
   'Gestapelde staaf': 'Batang bertumpuk',
   'Spreiding': 'Sebar',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn berpindah antar slide',
 };

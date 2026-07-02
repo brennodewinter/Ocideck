@@ -9,7 +9,8 @@ const _stringsMt = {
   'undo': 'Ħассар (Ctrl/Cmd+Z)',
   'redo': 'Erġa\' agħmel (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Librerija tal-immaġni',
-  'presentFullscreen': 'Ippreżenta (skrin sħiħ) · P għall-veduta tal-preżentatur',
+  'presentFullscreen':
+      'Ippreżenta (skrin sħiħ) · P għall-veduta tal-preżentatur',
   'visualMode': 'Modalità viżiva',
   'markdownMode': 'Modalità Markdown',
   'save': 'Issejvja',
@@ -47,7 +48,8 @@ const _stringsMt = {
   'settingsLogo': 'Logo',
   'language': 'Lingwa',
   'applicationLanguage': 'Lingwa tal-applikazzjoni',
-  'languageHelp': 'L-interfaċċa tbiddel il-lingwa minnufih. Il-kontenut tal-preżentazzjoni ma jinbidilx.',
+  'languageHelp':
+      'L-interfaċċa tbiddel il-lingwa minnufih. Il-kontenut tal-preżentazzjoni ma jinbidilx.',
   'presentationFolder': 'Folder tal-preżentazzjoni',
   'exportFolderSetting': 'Folder tal-esportazzjoni',
   'notSet': 'Mhux issettjat',
@@ -55,17 +57,20 @@ const _stringsMt = {
   'choose': 'Agħżel',
   'removeDefaultFolder': 'Neħħi l-folder default',
   'removeExportFolder': 'Neħħi l-folder tal-esportazzjoni',
-  'exportFolderHelp': 'L-esportazzjonijiet kollha (PDF/PPTX) jiġu ssejvjati hawn. Jekk mhux issettjat, l-esportazzjonijiet jiġu ssejvjati ħdejn il-fajl tal-preżentazzjoni.',
+  'exportFolderHelp':
+      'L-esportazzjonijiet kollha (PDF/PPTX) jiġu ssejvjati hawn. Jekk mhux issettjat, l-esportazzjonijiet jiġu ssejvjati ħdejn il-fajl tal-preżentazzjoni.',
   'cancel': 'Ikkanċella',
   'close': 'Agħlaq',
   'saveSettings': 'Issejvja',
   'exportDialogTitle': 'Esporta',
   'exportAgain': 'Esporta mill-ġdid',
-  'exportIntro': 'L-esportazzjoni tuża eżattament il-preview tal-editur, inkluż il-profil tal-istil tiegħek.',
+  'exportIntro':
+      'L-esportazzjoni tuża eżattament il-preview tal-editur, inkluż il-profil tal-istil tiegħek.',
   'imageQualityPdf': 'Kwalità tal-immaġni (PDF)',
   'normal': 'Normali',
   'compressed': 'Ikkompressat',
-  'compressedHelp': 'JPEG b\'reżoluzzjoni aktar baxxa, maħsub għal handouts, b\'fajl ħafna iżgħar (issejvjat separatament bħala “-compact”).',
+  'compressedHelp':
+      'JPEG b\'reżoluzzjoni aktar baxxa, maħsub għal handouts, b\'fajl ħafna iżgħar (issejvjat separatament bħala “-compact”).',
   'losslessHelp': 'Immaġni bla telf b\'reżoluzzjoni sħiħa.',
   'exportAsPdf': 'Esporta bħala PDF',
   'exportAsPptx': 'Esporta bħala PPTX',
@@ -87,26 +92,39 @@ const _dutchSourceMt = {
   'Niet opslaan': 'Taħżinx',
   'Niet-opgeslagen werk herstellen?': 'Tirkupra x-xogħol mhux maħżun?',
   'Niet-opgeslagen wijzigingen': 'Bidliet mhux maħżuna',
-  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'Instabet preżentazzjoni b\'bidliet mhux maħżuna minn sessjoni preċedenti:',
+  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Instabet preżentazzjoni b\'bidliet mhux maħżuna minn sessjoni preċedenti:',
   'Er zijn': 'Hemm',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'preżentazzjonijiet b\'bidliet mhux maħżuna minn sessjoni preċedenti:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.': 'Hemm preżentazzjonijiet b\'bidliet mhux maħżuna. Aħżinhom qabel ma tagħlaq l-app.',
-  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.': 'Din il-preżentazzjoni għandha bidliet mhux maħżuna. Aħżinha qabel ma tagħlaq it-tab.',
+  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'preżentazzjonijiet b\'bidliet mhux maħżuna minn sessjoni preċedenti:',
+  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Hemm preżentazzjonijiet b\'bidliet mhux maħżuna. Aħżinhom qabel ma tagħlaq l-app.',
+  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+      'Din il-preżentazzjoni għandha bidliet mhux maħżuna. Aħżinha qabel ma tagħlaq it-tab.',
   'Importeren via URL': 'Importa minn URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.': 'Waħħal il-link għal pakkett .ocideck jew fajl Markdown ta\' Marp.',
+  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+      'Waħħal il-link għal pakkett .ocideck jew fajl Markdown ta\' Marp.',
   'Ophalen': 'Ġib',
   'Laat los om toe te voegen': 'Erħi biex iżżid',
-  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen': 'Immaġni → slides ġodda · .md / .ocideck → iftaħ',
-  'Open eerst een presentatie om afbeeldingen toe te voegen.': 'Iftaħ preżentazzjoni qabel ma żżid immaġni.',
-  'Alle slides zijn overgeslagen — niets om te tonen.': 'Is-slides kollha nqabżu — m\'hemm xejn x\'juri.',
-  'Alle slides zijn overgeslagen — niets om te exporteren.': 'Is-slides kollha nqabżu — m\'hemm xejn x\'jiġi esportat.',
+  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+      'Immaġni → slides ġodda · .md / .ocideck → iftaħ',
+  'Open eerst een presentatie om afbeeldingen toe te voegen.':
+      'Iftaħ preżentazzjoni qabel ma żżid immaġni.',
+  'Alle slides zijn overgeslagen — niets om te tonen.':
+      'Is-slides kollha nqabżu — m\'hemm xejn x\'juri.',
+  'Alle slides zijn overgeslagen — niets om te exporteren.':
+      'Is-slides kollha nqabżu — m\'hemm xejn x\'jiġi esportat.',
   'Kon dit pakket niet importeren.': 'Ma stajniex nimportaw dan il-pakkett.',
   'Pakket geëxporteerd naar:': 'Pakkett esportat għal:',
   'Export mislukt:': 'L-esportazzjoni falliet:',
-  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.': 'Din is-slide ma tistax tirċievi immaġni. Agħżel l-ewwel slide ta\' immaġni.',
-  'Kon van deze URL geen presentatie ophalen.': 'Ma stajniex inġibu preżentazzjoni minn dan l-URL.',
-  'Sleep om de slide-preview breder of smaller te maken': 'Iġbed biex twessa\' jew tidjieq il-preview tas-slide',
-  'TLP-classificatie (Traffic Light Protocol)': 'Klassifikazzjoni TLP (Traffic Light Protocol)',
+  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+      'Din is-slide ma tistax tirċievi immaġni. Agħżel l-ewwel slide ta\' immaġni.',
+  'Kon van deze URL geen presentatie ophalen.':
+      'Ma stajniex inġibu preżentazzjoni minn dan l-URL.',
+  'Sleep om de slide-preview breder of smaller te maken':
+      'Iġbed biex twessa\' jew tidjieq il-preview tas-slide',
+  'TLP-classificatie (Traffic Light Protocol)':
+      'Klassifikazzjoni TLP (Traffic Light Protocol)',
   'Titelpagina': 'Slide tat-titlu',
   'Tussentitel': 'Intestatura tas-sezzjoni',
   'Alleen Bullets': 'Bullets biss',
@@ -119,8 +137,10 @@ const _dutchSourceMt = {
   'Tabel': 'Tabella',
   'Vrije Markdown': 'Markdown liberu',
   'Overgeslagen': 'Maqbuż',
-  'Weer tonen bij presenteren/exporteren': 'Uri mill-ġdid waqt il-preżentazzjoni/esportazzjoni',
-  'Overslaan bij presenteren/exporteren': 'Aqbeż waqt il-preżentazzjoni/esportazzjoni',
+  'Weer tonen bij presenteren/exporteren':
+      'Uri mill-ġdid waqt il-preżentazzjoni/esportazzjoni',
+  'Overslaan bij presenteren/exporteren':
+      'Aqbeż waqt il-preżentazzjoni/esportazzjoni',
   'Kopiëren': 'Ikkopja',
   'Kopieer als afbeelding': 'Ikkopja bħala immaġni',
   'Dupliceren': 'Idduplika',
@@ -141,7 +161,8 @@ const _dutchSourceMt = {
   'Naam van de auteur': 'Isem l-awtur',
   'Achtergrondafbeelding': 'Immaġni ta\' sfond',
   'Achtergrondafbeelding (optioneel)': 'Immaġni ta\' sfond (mhux obbligatorju)',
-  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.': 'L-immaġni tintwera fuq l-iskrin kollu bħala sfond b\'opaċità mnaqqsa biex it-test jibqa\' jinqara.',
+  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+      'L-immaġni tintwera fuq l-iskrin kollu bħala sfond b\'opaċità mnaqqsa biex it-test jibqa\' jinqara.',
   'Zoom achtergrond': 'Zoom tal-isfond',
   'Zoom afbeelding': 'Zoom tal-immaġni',
   'Afbeelding (rechts)': 'Immaġni (lemin)',
@@ -166,7 +187,8 @@ const _dutchSourceMt = {
   'Kopiëren naar klembord mislukt.': 'L-ikkupjar fil-clipboard falla.',
   'Verwijder afbeelding': 'Neħħi l-immaġni',
   'Geen afbeelding gekozen': 'L-ebda immaġni magħżula',
-  'Caption / bronvermelding (bijv. © Naam Fotograaf)': 'Kapzjon / attribuzzjoni (eż. © Isem il-Fotografu)',
+  'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+      'Kapzjon / attribuzzjoni (eż. © Isem il-Fotografu)',
   'Caption / bronvermelding': 'Kapzjon / attribuzzjoni',
   'Beschrijving (doorzoekbaar)': 'Deskrizzjoni (tista\' tfittixha)',
   'Markdown inhoud': 'Kontenut Markdown',
@@ -177,24 +199,29 @@ const _dutchSourceMt = {
   'verwijderen': 'neħħi',
   'Koprij verwijderen': 'Neħħi r-ringiela tal-intestatura',
   'Rij verwijderen': 'Neħħi r-ringiela',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.': 'Tip: agħfas Enter ġo ċella għal linja ġdida.',
+  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+      'Tip: agħfas Enter ġo ċella għal linja ġdida.',
   'Presentatie openen': 'Iftaħ preżentazzjoni',
   'Opslaan als': 'Ħażen bħala',
   'Pakket importeren': 'Importa pakkett',
   'Pakket exporteren': 'Esporta pakkett',
   'Map met presentaties kiezen': 'Agħżel il-folder tal-preżentazzjonijiet',
-  'Standaard map voor presentaties': 'Folder awtomatiku għall-preżentazzjonijiet',
+  'Standaard map voor presentaties':
+      'Folder awtomatiku għall-preżentazzjonijiet',
   'Map voor exports': 'Folder għall-esportazzjonijiet',
   'Logo kiezen': 'Agħżel logo',
   'Kies een afbeelding': 'Agħżel immaġni',
   'Kies een video': 'Agħżel vidjow',
   'Kies een audiobestand': 'Agħżel fajl awdjo',
   'Bladeren…': 'Fittex…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…': 'Fittex bl-isem tal-fajl, titlu jew test fis-slides…',
+  'Zoek op bestandsnaam, titel of tekst in de slides…':
+      'Fittex bl-isem tal-fajl, titlu jew test fis-slides…',
   'Geen map gekozen': 'L-ebda folder magħżul',
   'Map kiezen': 'Agħżel folder',
-  'Kies een map met presentaties om te beginnen.': 'Agħżel folder bil-preżentazzjonijiet biex tibda.',
-  'Geen presentaties (.md) in deze map gevonden.': 'Ma nstabet l-ebda preżentazzjoni (.md) f\'dan il-folder.',
+  'Kies een map met presentaties om te beginnen.':
+      'Agħżel folder bil-preżentazzjonijiet biex tibda.',
+  'Geen presentaties (.md) in deze map gevonden.':
+      'Ma nstabet l-ebda preżentazzjoni (.md) f\'dan il-folder.',
   'Geen presentaties gevonden voor': 'Ma nstabet l-ebda preżentazzjoni għal',
   'meer treffer(s)': 'riżultat(i) oħra',
   'Slide zoeken': 'Sib slide',
@@ -205,14 +232,19 @@ const _dutchSourceMt = {
   'Toegevoegd': 'Miżjud',
   'Selecteer alles': 'Agħżel kollox',
   'Deselecteer alles': 'Neħħi l-għażla ta\' kollox',
-  'Zoek slides op tekst, titel, onderschrift, pad…': 'Fittex slides bit-test, titlu, kapzjon, mogħdija…',
-  'Zoek op presentatie, titel of tekst…': 'Fittex bil-preżentazzjoni, titlu jew test…',
-  'Geen andere presentaties (.md) in deze map gevonden.': 'Ma nstabet l-ebda preżentazzjoni oħra (.md) f\'dan il-folder.',
+  'Zoek slides op tekst, titel, onderschrift, pad…':
+      'Fittex slides bit-test, titlu, kapzjon, mogħdija…',
+  'Zoek op presentatie, titel of tekst…':
+      'Fittex bil-preżentazzjoni, titlu jew test…',
+  'Geen andere presentaties (.md) in deze map gevonden.':
+      'Ma nstabet l-ebda preżentazzjoni oħra (.md) f\'dan il-folder.',
   'Geen slides gevonden voor': 'Ma nstabet l-ebda slide għal',
-  'Typ zoektermen om slides uit al je presentaties te vinden.': 'Ikteb termini ta\' tfittxija biex issib slides mill-preżentazzjonijiet kollha tiegħek.',
+  'Typ zoektermen om slides uit al je presentaties te vinden.':
+      'Ikteb termini ta\' tfittxija biex issib slides mill-preżentazzjonijiet kollha tiegħek.',
   'toegevoegd': 'miżjud',
   'Eerste': 'L-ewwel',
-  'treffers — verfijn je zoekopdracht': 'riżultati — irfina t-tfittxija tiegħek',
+  'treffers — verfijn je zoekopdracht':
+      'riżultati — irfina t-tfittxija tiegħek',
   'treffer(s)': 'riżultat(i)',
   'slide': 'slide',
   'Zoeken en vervangen': 'Fittex u ibdel',
@@ -245,19 +277,24 @@ const _dutchSourceMt = {
   'Bijv. Vigilis': 'Eż. Vigilis',
   'Bijv. 2026-05-30': 'Eż. 2026-05-30',
   'Beschrijving': 'Deskrizzjoni',
-  'Korte omschrijving van de presentatie': 'Deskrizzjoni qasira tal-preżentazzjoni',
+  'Korte omschrijving van de presentatie':
+      'Deskrizzjoni qasira tal-preżentazzjoni',
   'Trefwoorden': 'Kliem ċavetta',
-  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026': 'Separati bil-virgola, eż. kwartali, ċifri, 2026',
-  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.': 'Dawn id-dettalji jinħażnu fil-Markdown u jistgħu jitfittxu meta tiftaħ.',
+  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026':
+      'Separati bil-virgola, eż. kwartali, ċifri, 2026',
+  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+      'Dawn id-dettalji jinħażnu fil-Markdown u jistgħu jitfittxu meta tiftaħ.',
   'App-thema': 'Tema tal-app',
   'Look-and-feel': 'Dehra u sensazzjoni',
   'Kopie maken en aanpassen': 'Oħloq u ppersonalizza kopja',
   'Thema verwijderen': 'Ħassar it-tema',
   'Themanaam': 'Isem it-tema',
-  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.': 'Din hija tema inkorporata. Oħloq kopja biex tippersonalizza l-kuluri tagħha.',
+  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+      'Din hija tema inkorporata. Oħloq kopja biex tippersonalizza l-kuluri tagħha.',
   'Donkere interface': 'Interfaċċa skura',
   'Lettertype interface': 'Font tal-interfaċċa',
-  'Past contrast, invoervelden en systeemcomponenten aan.': 'Jaġġusta l-kuntrast, l-oqsma tal-input u l-komponenti tas-sistema.',
+  'Past contrast, invoervelden en systeemcomponenten aan.':
+      'Jaġġusta l-kuntrast, l-oqsma tal-input u l-komponenti tas-sistema.',
   'Hoofdkleur en bovenbalk': 'Kulur primarju u barra ta\' fuq',
   'Knoppen en accenten': 'Buttuni u aċċenti',
   'Schermachtergrond': 'Sfond tal-iskrin',
@@ -293,15 +330,18 @@ const _dutchSourceMt = {
   'Linksonder': 'Isfel ix-xellug',
   'Rechtsonder': 'Isfel il-lemin',
   'Footertekst': 'Test tal-footer',
-  'bijv. Vertrouwelijk · {title} · {date}': 'eż. Kunfidenzjali · {title} · {date}',
+  'bijv. Vertrouwelijk · {title} · {date}':
+      'eż. Kunfidenzjali · {title} · {date}',
   'Footerpositie': 'Pożizzjoni tal-footer',
-  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.': 'Tokens: {page}, {total}, {date}, {title}. Il-footer jidher fuq is-slides kollha ħlief is-slides tat-titlu u tas-sezzjoni, sakemm ma titfihx għal kull slide.',
+  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+      'Tokens: {page}, {total}, {date}, {title}. Il-footer jidher fuq is-slides kollha ħlief is-slides tat-titlu u tas-sezzjoni, sakemm ma titfihx għal kull slide.',
   'Links': 'Xellug',
   'Midden': 'Ċentru',
   'Rechts': 'Lemin',
   'Paginanummers tonen (rechtsonder)': 'Uri n-numri tal-paġni (isfel lemin)',
   'Voorvertoning': 'Preview',
-  'De snelle bruine vos springt over de luie hond.': 'Il-volpi kannella mgħaġġla taqbeż fuq il-kelb għażżien.',
+  'De snelle bruine vos springt over de luie hond.':
+      'Il-volpi kannella mgħaġġla taqbeż fuq il-kelb għażżien.',
   'Preview': 'Preview',
   'Uitzoomen': 'Naqqas iz-zoom',
   'Uitgezoomd': 'Zoom imnaqqas',
@@ -309,9 +349,12 @@ const _dutchSourceMt = {
   'Ingezoomd': 'Zoom miżjud',
   'van de foto zichtbaar': 'tar-ritratt viżibbli',
   'Volledig zichtbaar (100%)': 'Viżibbli kollu (100%)',
-  'Uitzoomen (meer van de foto zichtbaar)': 'Naqqas iz-zoom (aktar mir-ritratt viżibbli)',
-  'Inzoomen (minder van de foto zichtbaar)': 'Żid iz-zoom (inqas mir-ritratt viżibbli)',
-  'Terugzetten (volledige afbeelding zichtbaar)': 'Erġa\' lura (immaġni sħiħa viżibbli)',
+  'Uitzoomen (meer van de foto zichtbaar)':
+      'Naqqas iz-zoom (aktar mir-ritratt viżibbli)',
+  'Inzoomen (minder van de foto zichtbaar)':
+      'Żid iz-zoom (inqas mir-ritratt viżibbli)',
+  'Terugzetten (volledige afbeelding zichtbaar)':
+      'Erġa\' lura (immaġni sħiħa viżibbli)',
   'Zoom resetten': 'Irrisettja z-zoom',
   'Preview inklappen': 'Aqfel il-preview',
   'Preview uitklappen': 'Iftaħ il-preview',
@@ -326,19 +369,23 @@ const _dutchSourceMt = {
   'Terug naar standaardstijl': 'Lura għall-istil awtomatiku',
   'Automatisch doorgaan na': 'Mexxi awtomatikament wara',
   'Logo tonen op deze slide': 'Uri l-logo fuq din is-slide',
-  'Tabel bewerkbaar tijdens presenteren': 'Tabella li tista\' tiġi editjata waqt il-preżentazzjoni',
+  'Tabel bewerkbaar tijdens presenteren':
+      'Tabella li tista\' tiġi editjata waqt il-preżentazzjoni',
   'Footer tonen op deze slide': 'Uri l-footer fuq din is-slide',
   'Sprekersnotities...': 'Noti tal-kelliem...',
   'Sprekersnotities': 'Noti tal-kelliem',
   'Notities voor tijdens het presenteren': 'Noti għal waqt il-preżentazzjoni',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown': 'Modalità Markdown — editja l-preżentazzjoni sħiħa bħala Marp Markdown',
+  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+      'Modalità Markdown — editja l-preżentazzjoni sħiħa bħala Marp Markdown',
   'Toepassen': 'Applika',
-  'Markdown kon niet worden verwerkt. Controleer de syntax.': 'Il-Markdown ma setax jiġi pproċessat. Iċċekkja s-sintassi.',
+  'Markdown kon niet worden verwerkt. Controleer de syntax.':
+      'Il-Markdown ma setax jiġi pproċessat. Iċċekkja s-sintassi.',
   'Controleren': 'Iċċekkja s-sintassi',
   'Syntaxproblemen gevonden': 'Instabu problemi fis-sintassi',
   'De markdown bevat': 'Il-markdown fih',
   'fout(en) en': 'żball(i) u',
-  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.': 'twissija(iet). Is-slides jistgħu jinqraw ħażin minħabba f\'hekk.',
+  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+      'twissija(iet). Is-slides jistgħu jinqraw ħażin minħabba f\'hekk.',
   'Terug naar editor': 'Lura għall-editur',
   'Toch toepassen': 'Applika xorta',
   'Geen syntaxproblemen gevonden': 'Ma nstabet l-ebda problema fis-sintassi',
@@ -352,26 +399,35 @@ const _dutchSourceMt = {
   'Coverflow': 'Coverflow',
   'Geen afbeeldingen gevonden': 'Ma nstabet l-ebda immaġni',
   'Geen resultaten voor': 'L-ebda riżultat għal',
-  'Pas je zoekterm aan of voeg een beschrijving toe.': 'Aġġusta t-terminu ta\' tfittxija jew żid deskrizzjoni.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.': 'Uża "Fittex" biex tagħżel immaġni minn kwalunkwe post.',
+  'Pas je zoekterm aan of voeg een beschrijving toe.':
+      'Aġġusta t-terminu ta\' tfittxija jew żid deskrizzjoni.',
+  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+      'Uża "Fittex" biex tagħżel immaġni minn kwalunkwe post.',
   'Selecteer een\nafbeelding': 'Agħżel\nimmaġni',
   'Gekopieerd': 'Ikkupjat',
   'Afbeelding verwijderen?': 'Tħassar l-immaġni?',
-  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.': 'Il-fajl jitħassar b\'mod permanenti mid-disk. Din l-azzjoni ma tistax terġa\' lura.',
-  'Let op: deze afbeelding wordt nog gebruikt in': 'Attenzjoni: din l-immaġni għadha tintuża f\'',
-  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.': 'It-tħassir jiżvojta dawk is-slides. Dan ma jistax jerġa\' lura.',
-  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert': '↑↓←→ innaviga  ·  Enter jagħżel  ·  Klikk doppju jagħżel',
+  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+      'Il-fajl jitħassar b\'mod permanenti mid-disk. Din l-azzjoni ma tistax terġa\' lura.',
+  'Let op: deze afbeelding wordt nog gebruikt in':
+      'Attenzjoni: din l-immaġni għadha tintuża f\'',
+  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+      'It-tħassir jiżvojta dawk is-slides. Dan ma jistax jerġa\' lura.',
+  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+      '↑↓←→ innaviga  ·  Enter jagħżel  ·  Klikk doppju jagħżel',
   'Sneltoetsen': 'Xortkats tat-tastiera',
   'Toetsenlegenda': 'Leġġenda tal-buttuni',
   'spatie': 'spazju',
   'klik': 'klikk',
   'cijfers': 'numri',
-  'Klik of druk op ? / H / Esc om te sluiten': 'Ikklikkja jew agħfas ? / H / Esc biex tagħlaq',
-  'Klik of druk op H / Esc om te sluiten': 'Ikklikkja jew agħfas H / Esc biex tagħlaq',
+  'Klik of druk op ? / H / Esc om te sluiten':
+      'Ikklikkja jew agħfas ? / H / Esc biex tagħlaq',
+  'Klik of druk op H / Esc om te sluiten':
+      'Ikklikkja jew agħfas H / Esc biex tagħlaq',
   'Naar slidenummer': 'Mur għan-numru tas-slide',
   'Eerste · laatste slide': 'L-ewwel · l-aħħar slide',
   'Slide-overzicht': 'Ħarsa ġenerali tal-slides',
-  'Slide-overzicht (pijltjes + Enter)': 'Ħarsa ġenerali tal-slides (vleġeġ + Enter)',
+  'Slide-overzicht (pijltjes + Enter)':
+      'Ħarsa ġenerali tal-slides (vleġeġ + Enter)',
   'Presenter view (notities, klok)': 'Veduta tal-preżentatur (noti, arloġġ)',
   'Scherm wisselen (meerdere schermen)': 'Biddel l-iskrin (diversi skrins)',
   'Zwart · wit scherm': 'Skrin iswed · abjad',
@@ -399,24 +455,33 @@ const _dutchSourceMt = {
   'Geen notities voor deze slide.': 'L-ebda nota għal din is-slide.',
   'Mijn notities': 'In-noti tiegħi',
   'Gebruikersnotities': 'Noti tal-utent',
-  'Gebruikersnotities voor deze slide...': 'Noti tal-utent għal din is-slide...',
+  'Gebruikersnotities voor deze slide...':
+      'Noti tal-utent għal din is-slide...',
   'Notities weggooien': 'Warrab in-noti',
-  'Notities voor de ontvanger tijdens een cursus': 'Noti għar-riċevitur waqt kors',
-  'Schakel naar Markdown-modus om notities toe te voegen.': 'Aqleb għall-modalità Markdown biex iżżid noti.',
+  'Notities voor de ontvanger tijdens een cursus':
+      'Noti għar-riċevitur waqt kors',
+  'Schakel naar Markdown-modus om notities toe te voegen.':
+      'Aqleb għall-modalità Markdown biex iżżid noti.',
   'Mijn notities aan/uit': 'Ixgħel/itfi n-noti tiegħi',
   'Wissel scherm (S)': 'Biddel l-iskrin (S)',
   'Kon niet van scherm wisselen.': 'Ma stajniex naqilbu l-iskrins.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P pubbliku · G ħarsa · B/W iswed/abjad · R ħin · Esc waqqaf',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P pubbliku · S skrin · G ħarsa · B/W iswed/abjad · R ħin · Esc waqqaf',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P pubbliku · H leġġenda · G ħarsa · B/W iswed/abjad · R ħin · Esc waqqaf',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P pubbliku · H leġġenda · S skrin · G ħarsa · B/W iswed/abjad · R ħin · Esc waqqaf',
-  'pijltjes + Enter of klik om te springen': 'vleġeġ + Enter jew ikklikkja biex taqbeż',
+  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P pubbliku · G ħarsa · B/W iswed/abjad · R ħin · Esc waqqaf',
+  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P pubbliku · S skrin · G ħarsa · B/W iswed/abjad · R ħin · Esc waqqaf',
+  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P pubbliku · H leġġenda · G ħarsa · B/W iswed/abjad · R ħin · Esc waqqaf',
+  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P pubbliku · H leġġenda · S skrin · G ħarsa · B/W iswed/abjad · R ħin · Esc waqqaf',
+  'pijltjes + Enter of klik om te springen':
+      'vleġeġ + Enter jew ikklikkja biex taqbeż',
   'Afsluiten (Escape)': 'Oħroġ (Escape)',
   'Sluiten (G of Esc)': 'Agħlaq (G jew Esc)',
   'Slide renderen…': 'Qed jiġi renderjat is-slide…',
   'Slide gekopieerd naar klembord.': 'Is-slide ġie kkupjat fil-clipboard.',
   'Kopiëren mislukt.': 'L-ikkupjar falla.',
-  'Geen ander deck open. Open eerst een ander tabblad.': 'L-ebda deck ieħor miftuħ. L-ewwel iftaħ tab ieħor.',
+  'Geen ander deck open. Open eerst een ander tabblad.':
+      'L-ebda deck ieħor miftuħ. L-ewwel iftaħ tab ieħor.',
   '1 slide kopiëren naar…': 'Ikkupja slide 1 lejn…',
   'slides kopiëren naar…': 'slides x\'jiġu kkupjati lejn…',
   'slide(s) gekopieerd naar': 'slide(s) ikkupjati lejn',
@@ -431,11 +496,13 @@ const _dutchSourceMt = {
   'Tips': 'Pariri',
   'Waarschuwingen': 'Twissijiet',
   'Fouten': 'Żbalji',
-  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Parir: żid test alt / didaskalija għall-aċċessibbiltà',
+  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Parir: żid test alt / didaskalija għall-aċċessibbiltà',
   'Zoek in slides…': 'Fittex fis-slides…',
   'Geen slides met': 'L-ebda slide bi',
   'SLIDES': 'SLIDES',
-  'Geen afbeelding op het klembord gevonden.': 'L-ebda immaġni ma nstabet fil-clipboard.',
+  'Geen afbeelding op het klembord gevonden.':
+      'L-ebda immaġni ma nstabet fil-clipboard.',
   'Afbeelding plakken': 'Waħħal l-immaġni',
   'Slide toevoegen': 'Żid slide',
   'Slide plakken': 'Waħħal is-slide',
@@ -446,60 +513,84 @@ const _dutchSourceMt = {
   'Kopiëren naar ander deck': 'Ikkupja lejn deck ieħor',
   'Weer tonen': 'Uri mill-ġdid',
   'Selectie opheffen': 'Neħħi l-għażla',
-  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.': 'Naqbel mal-liċenzja EUPL 1.2 u qrajt liema data OciDeck iżomm.',
-  'Je keuze wordt de standaardtaal van de app.': 'L-għażla tiegħek issir il-lingwa awtomatika tal-app.',
+  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
+      'Naqbel mal-liċenzja EUPL 1.2 u qrajt liema data OciDeck iżomm.',
+  'Je keuze wordt de standaardtaal van de app.':
+      'L-għażla tiegħek issir il-lingwa awtomatika tal-app.',
   'Lees de volledige licentie': 'Aqra l-liċenzja sħiħa',
-  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.': 'OciDeck huwa software liberu taħt il-liċenzja EUPL 1.2. Qabel tibda, nitolbuk taċċetta l-liċenzja. Hawn taħt tista\' wkoll taqra liema data OciDeck iżomm fuq dan l-apparat u meta xi ħaġa titlaq mill-apparat tiegħek.',
-  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.': 'OciDeck ma jiġborx statistika u ma jibgħat xejn \'il barra waħdu. B\'mod awtomatiku kollox jibqa\' fuq dan l-apparat. Id-data titlaq minn dan l-apparat biss meta int tagħżel dan:\n\n•  Nextcloud/WebDAV: meta tikkonnettja ma\' server, l-isem tal-utent u l-password tiegħek jinżammu (il-password b\'mod sigur fis-sensiela taċ-ċwievet tas-sistema tiegħek) u l-preżentazzjonijiet li tiftaħ jew issalva jintbagħtu lejn dak is-server.\n•  Iftaħ permezz ta\' URL: OciDeck iġib il-fajl mill-indirizz li ddaħħal.\n•  Media online (mitfija b\'mod awtomatiku): meta mixgħula, OciDeck itella\' immaġni u vidjows mill-indirizzi fis-slides tiegħek.\n•  Links esterni (bħal-liċenzja online) jinfetħu fil-browser tiegħek.',
-  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.': 'OciDeck jiġi pprovdut taħt l-European Union Public Licence v1.2. Billi taqbel int taċċetta din il-liċenzja. Tista\' tuża, tikkupja, timmodifika u tqassam OciDeck taħt it-termini tal-EUPL 1.2.',
-  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.': 'Biex jaħdem u biex ma titlifx ix-xogħol tiegħek, OciDeck iżomm data lokalment fuq dan l-apparat:\n\n•  Is-settings u l-preferenzi tiegħek (lingwa, folders, profili ta\' stil u dehra, fajls reċenti).\n•  Il-materjali tal-preżentazzjoni tiegħek: il-preżentazzjonijiet li ssalva, kopji ta\' rkupru awtomatiċi u mehmużin bħal deskrizzjonijiet ta\' immaġni.\n•  Din l-għażla tal-kunsens.\n\nTista\' tneħħi dan billi tħassar il-fajls jew terġa\' ssettja s-settings.',
-  'Volledige licentie online (23 officiële taalversies)': 'Liċenzja sħiħa online (23 verżjoni lingwistika uffiċjali)',
+  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
+      'OciDeck huwa software liberu taħt il-liċenzja EUPL 1.2. Qabel tibda, nitolbuk taċċetta l-liċenzja. Hawn taħt tista\' wkoll taqra liema data OciDeck iżomm fuq dan l-apparat u meta xi ħaġa titlaq mill-apparat tiegħek.',
+  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.':
+      'OciDeck ma jiġborx statistika u ma jibgħat xejn \'il barra waħdu. B\'mod awtomatiku kollox jibqa\' fuq dan l-apparat. Id-data titlaq minn dan l-apparat biss meta int tagħżel dan:\n\n•  Nextcloud/WebDAV: meta tikkonnettja ma\' server, l-isem tal-utent u l-password tiegħek jinżammu (il-password b\'mod sigur fis-sensiela taċ-ċwievet tas-sistema tiegħek) u l-preżentazzjonijiet li tiftaħ jew issalva jintbagħtu lejn dak is-server.\n•  Iftaħ permezz ta\' URL: OciDeck iġib il-fajl mill-indirizz li ddaħħal.\n•  Media online (mitfija b\'mod awtomatiku): meta mixgħula, OciDeck itella\' immaġni u vidjows mill-indirizzi fis-slides tiegħek.\n•  Links esterni (bħal-liċenzja online) jinfetħu fil-browser tiegħek.',
+  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.':
+      'OciDeck jiġi pprovdut taħt l-European Union Public Licence v1.2. Billi taqbel int taċċetta din il-liċenzja. Tista\' tuża, tikkupja, timmodifika u tqassam OciDeck taħt it-termini tal-EUPL 1.2.',
+  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.':
+      'Biex jaħdem u biex ma titlifx ix-xogħol tiegħek, OciDeck iżomm data lokalment fuq dan l-apparat:\n\n•  Is-settings u l-preferenzi tiegħek (lingwa, folders, profili ta\' stil u dehra, fajls reċenti).\n•  Il-materjali tal-preżentazzjoni tiegħek: il-preżentazzjonijiet li ssalva, kopji ta\' rkupru awtomatiċi u mehmużin bħal deskrizzjonijiet ta\' immaġni.\n•  Din l-għażla tal-kunsens.\n\nTista\' tneħħi dan billi tħassar il-fajls jew terġa\' ssettja s-settings.',
+  'Volledige licentie online (23 officiële taalversies)':
+      'Liċenzja sħiħa online (23 verżjoni lingwistika uffiċjali)',
   'Wat OciDeck op dit apparaat bewaart': 'X\'iżomm OciDeck fuq dan l-apparat',
   'Wat je apparaat verlaat': 'X\'jitlaq mill-apparat tiegħek',
-  'Vul server-URL en gebruikersnaam in': 'Daħħal l-URL tas-server u l-isem tal-utent',
+  'Vul server-URL en gebruikersnaam in':
+      'Daħħal l-URL tas-server u l-isem tal-utent',
   'Verbinding mislukt': 'Il-konnessjoni falliet',
-  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord': 'L-illoggjar falla — iċċekkja l-isem tal-utent u l-password',
-  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.': 'Is-server jinsab fuq indirizz privat. Immarka "Server intern fdat" biex tippermetti l-konnessjoni.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord':
+      'L-illoggjar falla — iċċekkja l-isem tal-utent u l-password',
+  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.':
+      'Is-server jinsab fuq indirizz privat. Immarka "Server intern fdat" biex tippermetti l-konnessjoni.',
   'Map niet gevonden op de server': 'Il-folder ma nstabx fuq is-server',
   'Ongeldige server-URL': 'URL tas-server invalidu',
-  'Het antwoord van de server was te groot': 'It-tweġiba tas-server kienet kbira wisq',
+  'Het antwoord van de server was te groot':
+      'It-tweġiba tas-server kienet kbira wisq',
   'Nextcloud': 'Nextcloud',
   'Nextcloud-bron (WebDAV)': 'Sors Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.': 'Iftaħ u ssalva preżentazzjonijiet f\'folder fuq in-Nextcloud tiegħek. Il-password tinżamm kriptata fis-sensiela taċ-ċwievet, mhux flimkien mas-settings l-oħra.',
+  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Iftaħ u ssalva preżentazzjonijiet f\'folder fuq in-Nextcloud tiegħek. Il-password tinżamm kriptata fis-sensiela taċ-ċwievet, mhux flimkien mas-settings l-oħra.',
   'Server-URL': 'URL tas-server',
   'Gebruikersnaam': 'Isem tal-utent',
   'App-wachtwoord': 'Password tal-app',
-  'Maak hiervoor een app-wachtwoord aan in Nextcloud': 'Oħloq password tal-app għal dan f\'Nextcloud',
+  'Maak hiervoor een app-wachtwoord aan in Nextcloud':
+      'Oħloq password tal-app għal dan f\'Nextcloud',
   'Submap (optioneel)': 'Sottofolder (mhux obbligatorju)',
   'Vertrouwde interne server': 'Server intern fdat',
-  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.': 'Meħtieġ meta s-server jaħdem fuq network privat jew tad-dar (LAN). Ippermetti biss konnessjonijiet lejn servers li tafda int.',
+  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Meħtieġ meta s-server jaħdem fuq network privat jew tad-dar (LAN). Ippermetti biss konnessjonijiet lejn servers li tafda int.',
   'Verbinding testen': 'Ittestja l-konnessjoni',
   'Verbinding gelukt': 'Il-konnessjoni rnexxiet',
-  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.': 'Il-bidliet jinżammu meta tikklikkja Issalva.',
+  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
+      'Il-bidliet jinżammu meta tikklikkja Issalva.',
   'Afbeelding kiezen op Nextcloud': 'Agħżel immaġni fuq Nextcloud',
   'Openen vanaf Nextcloud': 'Iftaħ minn Nextcloud',
   'Vernieuwen': 'Aġġorna',
   'Deze map is leeg': 'Dan il-folder huwa vojt',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.': 'L-ebda server Nextcloud issettjat. Issettja wieħed f\'Settings → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.': 'Ma stajniex intellgħu l-folder. Iċċekkja l-konnessjoni u s-settings tiegħek.',
+  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
+      'L-ebda server Nextcloud issettjat. Issettja wieħed f\'Settings → Nextcloud.',
+  'Kon de map niet laden. Controleer je verbinding en instellingen.':
+      'Ma stajniex intellgħu l-folder. Iċċekkja l-konnessjoni u s-settings tiegħek.',
   'Kon dit bestand niet openen.': 'Ma stajniex niftħu dan il-fajl.',
-  'Dit is geen Marp/OciDeck-presentatie.': 'Din mhijiex preżentazzjoni Marp/OciDeck.',
+  'Dit is geen Marp/OciDeck-presentatie.':
+      'Din mhijiex preżentazzjoni Marp/OciDeck.',
   'Downloaden mislukt:': 'It-tniżżil falla:',
   'Opgeslagen op Nextcloud:': 'Salvat fuq Nextcloud:',
   'Opslaan mislukt:': 'L-issejvjar falla:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.': 'L-ewwel issettja server Nextcloud f\'Settings → Nextcloud.',
+  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
+      'L-ewwel issettja server Nextcloud f\'Settings → Nextcloud.',
   'Opslaan naar Nextcloud': 'Issalva fuq Nextcloud',
   'Doelpad (zonder extensie)': 'Path tad-destinazzjoni (mingħajr estensjoni)',
-  'Als .ocideck-pakket (één bestand, met assets)': 'Bħala pakkett .ocideck (fajl wieħed, bl-assets)',
+  'Als .ocideck-pakket (één bestand, met assets)':
+      'Bħala pakkett .ocideck (fajl wieħed, bl-assets)',
   'Als losse .md plus afbeeldingen': 'Bħala .md separat flimkien mal-immaġni',
   'Opslaan': 'Issalva',
   'Presenteren': 'Qed tippreżenta',
-  'Tijden-overzicht tonen na afloop': 'Uri l-ħarsa ġenerali tal-ħinijiet fl-aħħar',
-  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.': 'Il-ħin għal kull slide dejjem jitkejjel; dan jiddetermina biss jekk il-ħarsa ġenerali tidhirx wara din il-preżentazzjoni.',
+  'Tijden-overzicht tonen na afloop':
+      'Uri l-ħarsa ġenerali tal-ħinijiet fl-aħħar',
+  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
+      'Il-ħin għal kull slide dejjem jitkejjel; dan jiddetermina biss jekk il-ħarsa ġenerali tidhirx wara din il-preżentazzjoni.',
   'Oefenoverzicht tonen na afloop': 'Uri s-sommarju tal-prova fl-aħħar',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.': 'Wara preżentazzjoni, uri l-ħarsa ġenerali tal-ħin li ntefaq għal kull slide. Il-ħin dejjem jitkejjel; dan jiddetermina biss jekk l-iskrin jidhirx.',
+  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+      'Wara preżentazzjoni, uri l-ħarsa ġenerali tal-ħin li ntefaq għal kull slide. Il-ħin dejjem jitkejjel; dan jiddetermina biss jekk l-iskrin jidhirx.',
   'Onveilige presentatie geblokkeerd': 'Preżentazzjoni mhux sigura mblukkata',
-  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.': 'Din il-preżentazzjoni ma nfetħitx. Il-fajl fih kontenut li jista\' jesegwixxi kodiċi, u preżentazzjoni għandu jkun fiha biss data — xejn eżegwibbli.',
+  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Din il-preżentazzjoni ma nfetħitx. Il-fajl fih kontenut li jista\' jesegwixxi kodiċi, u preżentazzjoni għandu jkun fiha biss data — xejn eżegwibbli.',
   'Gevonden:': 'Instab:',
   'Regel': 'Linja',
   'Scriptuitvoering': 'Eżekuzzjoni ta\' script',
@@ -521,46 +612,67 @@ const _dutchSourceMt = {
   'Pootje': 'Rijqa',
   'In tweeën splitsen': 'Aqsam fi tnejn',
   'Uitgevoerde controles': 'Kontrolli mwettqin',
-  'Contrast en leesbaarheid van tekstkleuren': 'Kuntrast u leġibbiltà tal-kuluri tat-test',
-  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media': 'Testi alt u didaskaliji ta\' immaġni, graffs u media',
-  'Aanwezigheid van gekoppelde mediabestanden': 'Preżenza ta\' fajls tal-media marbutin',
-  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code': 'Densità tat-test: bullets, kliem, kwotazzjonijiet, tabelli u kodiċi',
-  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).': 'Tema, slides, footer, checklist u titli fuq immaġni, iċċekkjati skont WCAG AA (4,5:1 għat-test, 3:1 għat-test kbir).',
-  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.': 'Kull immaġni, graff, vidjo u awdjo jeħtieġu deskrizzjoni għall-qarrejja tal-iskrin u l-handouts.',
-  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.': 'Ir-referenzi għal immaġni, vidjo u awdjo jiġu ċċekkjati għal fajl eżistenti fil-proġett.',
-  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.': 'Numru u tul tal-bullets, kliem, nesting, bilanċ tal-kolonni u d-densità tal-kwotazzjonijiet, titli, tabelli u kodiċi biex kollox joqgħod b\'mod leġibbli.',
-  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.': 'Test tal-korp b\'kuntrast taħt {crit}:1 jgħodd bħala żball; \'il fuq minn hekk sal-istandard AA bħala twissija.',
-  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.': 'L-ebda limitu: deskrizzjoni mhux vojta hija obbligatorja.',
-  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.': 'L-ebda limitu: il-fajl marbut irid jeżisti fil-folder tal-proġett.',
-  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.': 'Twissija \'il fuq minn {b1} bullets (kolonna 1), {bcl} (checklist) jew {b2} (2 kolonni); kritiku \'il fuq minn {bc1} jew {bc2}. Kliem \'il fuq minn {w1}/{w2}, bħala medja \'il fuq minn {avg} kull bullet. Kwotazzjoni \'il fuq minn {q} karattri, titlu \'il fuq minn {t} karattri. Nesting aktar fond mil-livell {lvl}. Test li jrid jiċċekken taħt {warn}% iwissi, taħt {crit}% huwa kritiku.',
+  'Contrast en leesbaarheid van tekstkleuren':
+      'Kuntrast u leġibbiltà tal-kuluri tat-test',
+  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+      'Testi alt u didaskaliji ta\' immaġni, graffs u media',
+  'Aanwezigheid van gekoppelde mediabestanden':
+      'Preżenza ta\' fajls tal-media marbutin',
+  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+      'Densità tat-test: bullets, kliem, kwotazzjonijiet, tabelli u kodiċi',
+  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+      'Tema, slides, footer, checklist u titli fuq immaġni, iċċekkjati skont WCAG AA (4,5:1 għat-test, 3:1 għat-test kbir).',
+  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+      'Kull immaġni, graff, vidjo u awdjo jeħtieġu deskrizzjoni għall-qarrejja tal-iskrin u l-handouts.',
+  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+      'Ir-referenzi għal immaġni, vidjo u awdjo jiġu ċċekkjati għal fajl eżistenti fil-proġett.',
+  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+      'Numru u tul tal-bullets, kliem, nesting, bilanċ tal-kolonni u d-densità tal-kwotazzjonijiet, titli, tabelli u kodiċi biex kollox joqgħod b\'mod leġibbli.',
+  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+      'Test tal-korp b\'kuntrast taħt {crit}:1 jgħodd bħala żball; \'il fuq minn hekk sal-istandard AA bħala twissija.',
+  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+      'L-ebda limitu: deskrizzjoni mhux vojta hija obbligatorja.',
+  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+      'L-ebda limitu: il-fajl marbut irid jeżisti fil-folder tal-proġett.',
+  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+      'Twissija \'il fuq minn {b1} bullets (kolonna 1), {bcl} (checklist) jew {b2} (2 kolonni); kritiku \'il fuq minn {bc1} jew {bc2}. Kliem \'il fuq minn {w1}/{w2}, bħala medja \'il fuq minn {avg} kull bullet. Kwotazzjoni \'il fuq minn {q} karattri, titlu \'il fuq minn {t} karattri. Nesting aktar fond mil-livell {lvl}. Test li jrid jiċċekken taħt {warn}% iwissi, taħt {crit}% huwa kritiku.',
   'Zoek op deze computer': 'Fittex fuq dan il-kompjuter',
-  'Presentaties zoeken op deze computer': 'Sib preżentazzjonijiet fuq dan il-kompjuter',
+  'Presentaties zoeken op deze computer':
+      'Sib preżentazzjonijiet fuq dan il-kompjuter',
   'Zoek op titel, pad of thema…': 'Fittex skont titlu, path jew tema…',
   'Bekende mappen worden doorzocht…': 'Qed jiġu mfittxija l-folders magħrufa…',
   'gevonden': 'instabu',
   'presentatie(s) gevonden': 'preżentazzjoni(jiet) instabu',
-  'Geen Marp-presentaties gevonden in de bekende mappen.': 'L-ebda preżentazzjoni Marp ma nstabet fil-folders magħrufa.',
+  'Geen Marp-presentaties gevonden in de bekende mappen.':
+      'L-ebda preżentazzjoni Marp ma nstabet fil-folders magħrufa.',
   'Geen thema': 'L-ebda tema',
   'Kopieer syntaxproblemen': 'Ikkupja l-problemi tas-sintassi',
-  'Syntaxproblemen gekopieerd naar klembord.': 'Il-problemi tas-sintassi ġew ikkupjati fil-clipboard.',
+  'Syntaxproblemen gekopieerd naar klembord.':
+      'Il-problemi tas-sintassi ġew ikkupjati fil-clipboard.',
   'Online media': 'Media online',
   'Online media staat uit': 'Il-media online hija mitfija',
   'Online media toestaan': 'Ippermetti media online',
-  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.': 'Ippermetti li immaġni u vidjows jitgħabbew live minn URL u minn embeds YouTube/Vimeo. Mitfija b\'mod awtomatiku għall-privatezza u s-sigurtà tiegħek.',
-  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)': 'Path tal-fajl jew URL (YouTube, Vimeo, .mp4 …)',
+  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+      'Ippermetti li immaġni u vidjows jitgħabbew live minn URL u minn embeds YouTube/Vimeo. Mitfija b\'mod awtomatiku għall-privatezza u s-sigurtà tiegħek.',
+  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+      'Path tal-fajl jew URL (YouTube, Vimeo, .mp4 …)',
   'Bestand kiezen': 'Agħżel fajl',
-  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.': 'Ilgħab is-segment ta\' din is-slide fil-preview u aqta\' fil-punt fejn trid taqsam: it-tieni parti tmur fuq slide ġdid.',
+  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+      'Ilgħab is-segment ta\' din is-slide fil-preview u aqta\' fil-punt fejn trid taqsam: it-tieni parti tmur fuq slide ġdid.',
   'Begin (sec)': 'Bidu (sek)',
   'Einde (sec)': 'Tmiem (sek)',
   'einde': 'tmiem',
-  'Knip de video op het huidige afspeelpunt': 'Aqta\' l-vidjo fil-punt attwali tal-playback',
-  'Speel de video eerst af in het voorbeeld': 'L-ewwel ilgħab il-vidjo fil-preview',
+  'Knip de video op het huidige afspeelpunt':
+      'Aqta\' l-vidjo fil-punt attwali tal-playback',
+  'Speel de video eerst af in het voorbeeld':
+      'L-ewwel ilgħab il-vidjo fil-preview',
   'Knip hier': 'Aqta\' hawn',
   'Online': 'Online',
   'Lokaal bestand': 'Fajl lokali',
   'Geen video': 'L-ebda vidjo',
   'Vraag (meerkeuze)': 'Mistoqsija (għażla multipla)',
-  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding': 'It-test tat-titlu għandu kuntrast żgħir wisq mal-immaġni tal-isfond',
+  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+      'It-test tat-titlu għandu kuntrast żgħir wisq mal-immaġni tal-isfond',
   'Herstel': 'Irranġa',
   'Tijdlijn': 'Timeline',
   'Indeling': 'Tqassim',
@@ -585,19 +697,24 @@ const _dutchSourceMt = {
   'Vraag': 'Mistoqsija',
   'Wat wil je vragen?': 'X\'trid tistaqsi?',
   'Antwoorden': 'Tweġibiet',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.': 'Immarka t-tweġibiet korretti. L-ebda limitu; waqt il-preżentazzjoni tintwera b\'mod każwali waħda korretta u l-bqija ħażina.',
+  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Immarka t-tweġibiet korretti. L-ebda limitu; waqt il-preżentazzjoni tintwera b\'mod każwali waħda korretta u l-bqija ħażina.',
   'Antwoord': 'Tweġiba',
   'Antwoord toevoegen': 'Żid tweġiba',
   'Goed antwoord': 'Tweġiba korretta',
-  'Geef minstens één goed én één fout antwoord op.': 'Agħti mill-inqas tweġiba korretta waħda u waħda ħażina.',
+  'Geef minstens één goed én één fout antwoord op.':
+      'Agħti mill-inqas tweġiba korretta waħda u waħda ħażina.',
   'Weergave': 'Wiri',
   'Aantal getoonde opties': 'Numru ta\' għażliet murija',
-  'Maximale antwoordtijd in seconden (0 = geen limiet)': 'Ħin massimu ta\' tweġiba f\'sekondi (0 = l-ebda limitu)',
+  'Maximale antwoordtijd in seconden (0 = geen limiet)':
+      'Ħin massimu ta\' tweġiba f\'sekondi (0 = l-ebda limitu)',
   'Bij een fout antwoord': 'Ma\' tweġiba ħażina',
   'Opnieuw proberen': 'Erġa\' pprova',
   'Doorgaan toestaan': 'Ippermetti l-kontinwazzjoni',
-  'Fout = niet doorgaan; de vraag moet opnieuw.': 'Ħażin = ma tistax tkompli; il-mistoqsija trid terġa\' ssir.',
-  'Fout = wel doorgaan, maar niet opnieuw doen.': 'Ħażin = tista\' tkompli, iżda mingħajr ma terġa\' tipprova.',
+  'Fout = niet doorgaan; de vraag moet opnieuw.':
+      'Ħażin = ma tistax tkompli; il-mistoqsija trid terġa\' ssir.',
+  'Fout = wel doorgaan, maar niet opnieuw doen.':
+      'Ħażin = tista\' tkompli, iżda mingħajr ma terġa\' tipprova.',
   'Afbeelding (optioneel)': 'Immaġni (mhux obbligatorja)',
   'Breedte afbeelding': 'Wisa\' tal-immaġni',
   'Goed!': 'Korrett!',
@@ -606,52 +723,65 @@ const _dutchSourceMt = {
   'opties worden willekeurig getoond': 'għażliet jintwerew b\'mod każwali',
   'antwoordtijd': 'ħin tat-tweġiba',
   'bij fout: opnieuw proberen': 'jekk ħażin: erġa\' pprova',
-  'bij fout: door, niet opnieuw': 'jekk ħażin: kompli, mingħajr ma terġa\' tipprova',
+  'bij fout: door, niet opnieuw':
+      'jekk ħażin: kompli, mingħajr ma terġa\' tipprova',
   'Beantwoord eerst de vraag.': 'L-ewwel wieġeb il-mistoqsija.',
   'Klik om opnieuw te proberen': 'Ikklikkja biex terġa\' tipprova',
   'Juist / Onjuist': 'Veru / Falz',
   'Meerdere juiste antwoorden': 'Diversi tweġibiet korretti',
   'Stelling': 'Stqarrija',
-  'Formuleer een stelling die juist of onjuist is': 'Fformula stqarrija li tkun vera jew falza',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.': 'Immarka t-tweġibiet korretti kollha. Waqt il-preżentazzjoni jintwera sett każwali b\'mill-inqas waħda korretta u waħda ħażina.',
+  'Formuleer een stelling die juist of onjuist is':
+      'Fformula stqarrija li tkun vera jew falza',
+  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+      'Immarka t-tweġibiet korretti kollha. Waqt il-preżentazzjoni jintwera sett każwali b\'mill-inqas waħda korretta u waħda ħażina.',
   'Juist': 'Veru',
   'Onjuist': 'Falz',
-  'De stelling hierboven is juist of onjuist; kies welke.': 'L-istqarrija ta\' fuq hija vera jew falza; agħżel liema.',
+  'De stelling hierboven is juist of onjuist; kies welke.':
+      'L-istqarrija ta\' fuq hija vera jew falza; agħżel liema.',
   'Selecteer alle juiste antwoorden': 'Agħżel it-tweġibiet korretti kollha',
   'Bevestig': 'Ikkonferma',
   'Het juiste antwoord': 'It-tweġiba korretta',
-  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.': 'L-immaġni tintwera skrin sħiħ bħala sfond. Uża l-imċajpar meta t-titlu jeħtieġ aktar kalma jew kuntrast.',
+  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+      'L-immaġni tintwera skrin sħiħ bħala sfond. Uża l-imċajpar meta t-titlu jeħtieġ aktar kalma jew kuntrast.',
   'Cockpit-kleurschema': 'Skema tal-kuluri tal-cockpit',
-  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.': 'Il-kuluri tal-istatus tal-miters tal-cockpit. Oħloq varjanti bl-isem; l-iskema magħżula tapplika għas-slides tal-cockpit kollha.',
+  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+      'Il-kuluri tal-istatus tal-miters tal-cockpit. Oħloq varjanti bl-isem; l-iskema magħżula tapplika għas-slides tal-cockpit kollha.',
   'Standaard': 'Awtomatiku',
   'Standaardkleuren gebruiken': 'Uża l-kuluri awtomatiċi',
   'Kleurschema verwijderen': 'Ħassar l-iskema tal-kuluri',
   'Schemanaam': 'Isem tal-iskema',
-  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.': 'Din hija l-iskema inkorporata. Oħloq kopja biex taġġusta l-kuluri.',
+  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+      'Din hija l-iskema inkorporata. Oħloq kopja biex taġġusta l-kuluri.',
   'Goed': 'Tajjeb',
   'Waarschuwing': 'Twissija',
   'Kritiek': 'Kritiku',
   'Te laag (koud)': 'Baxx wisq (kiesaħ)',
   'Lucht (horizon)': 'Sema (orizzont)',
   'Grond (horizon)': 'Art (orizzont)',
-  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.': 'Il-kuluri tal-istatus isegwu l-iskema tal-kuluri tal-cockpit; aġġustaha jew oħloq varjanti permezz ta\' Settings → Cockpit.',
+  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+      'Il-kuluri tal-istatus isegwu l-iskema tal-kuluri tal-cockpit; aġġustaha jew oħloq varjanti permezz ta\' Settings → Cockpit.',
   'Veel bullets op deze slide': 'Ħafna bullets fuq din is-slide',
   'bullets': 'bullets',
   'Overweeg de inhoud te splitsen.': 'Ikkunsidra li taqsam il-kontenut.',
   'Erg veel bullets op deze slide': 'Wisq bullets fuq din is-slide',
-  'Splits deze inhoud over meerdere slides.': 'Aqsam dan il-kontenut fuq diversi slides.',
+  'Splits deze inhoud over meerdere slides.':
+      'Aqsam dan il-kontenut fuq diversi slides.',
   'Veel woorden in bullets': 'Ħafna kliem fil-bullets',
   'woorden': 'kliem',
-  'Maak bullets korter of splits de slide.': 'Qassar il-bullets jew aqsam is-slide.',
+  'Maak bullets korter of splits de slide.':
+      'Qassar il-bullets jew aqsam is-slide.',
   'Erg veel woorden in bullets': 'Wisq kliem fil-bullets',
   'Gemiddeld lange bullets': 'Bullets twal bħala medja',
   'woorden per bullet': 'kliem kull punt',
   'Maak elke bullet kernachtiger.': 'Agħmel kull punt aktar konċiż.',
-  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.': 'Instab punt b\'diversi sentenzi. Agħmel il-punti aktar konċiżi jew aqsam il-kontenut.',
+  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+      'Instab punt b\'diversi sentenzi. Agħmel il-punti aktar konċiżi jew aqsam il-kontenut.',
   'Diepe bulletniveaus gevonden': 'Instabu livelli ta\' punti fondi',
   'niveau': 'livell',
-  'Beperk nesting voor betere leesbaarheid.': 'Illimita t-tqannin għal aqra aħjar.',
-  'Twee kolommen zijn sterk uit balans': 'Iż-żewġ kolonni huma ferm żbilanċjati',
+  'Beperk nesting voor betere leesbaarheid.':
+      'Illimita t-tqannin għal aqra aħjar.',
+  'Twee kolommen zijn sterk uit balans':
+      'Iż-żewġ kolonni huma ferm żbilanċjati',
   'tegenover': 'kontra',
   'Verdeel of splits de inhoud.': 'Qassam mill-ġdid jew aqsam il-kontenut.',
   'Slidetitel': 'Titlu tal-islajd',
@@ -660,8 +790,10 @@ const _dutchSourceMt = {
   'Animeren bij binnenkomst': 'Anima mad-dħul',
   'Activatieduur': 'Tul tal-attivazzjoni',
   'Splits slide': 'Aqsam l-islajd',
-  'Doornummeren vanaf vorige slide': 'Kompli n-numerazzjoni mill-islajd preċedenti',
-  'Begin de nummering waar de vorige slide ophield.': 'Ibda n-numerazzjoni minn fejn waslet l-islajd preċedenti.',
+  'Doornummeren vanaf vorige slide':
+      'Kompli n-numerazzjoni mill-islajd preċedenti',
+  'Begin de nummering waar de vorige slide ophield.':
+      'Ibda n-numerazzjoni minn fejn waslet l-islajd preċedenti.',
   'Volg thema-animatieduur': 'Segwi t-tul tal-animazzjoni tat-tema',
   'Animatie bij openen': 'Anima mad-dħul',
   'Meter': 'Miter',
@@ -689,7 +821,8 @@ const _dutchSourceMt = {
   'Koers': 'Direzzjoni',
   'Ander profiel kiezen': 'Agħżel profil ieħor',
   'Cockpit': 'Dashboard tal-cockpit',
-  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Ħin fil-mira għall-għadd lura fil-presenter. Waqt il-preżentazzjoni tista\' tirfinah bit-tast K.',
+  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Ħin fil-mira għall-għadd lura fil-presenter. Waqt il-preżentazzjoni tista\' tirfinah bit-tast K.',
   'Logo en footer': 'Logo u footer',
   'Pagina': 'Paġna',
   'Presentatiestijl': 'Stil ta\' preżentazzjoni',
@@ -706,7 +839,8 @@ const _dutchSourceMt = {
   'Doeltijd': 'Ħin fil-mira',
   'Doeltijd (aftellen)': 'Ħin fil-mira (għadd lura)',
   'Geen aftelling': 'L-ebda għadd lura',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Ħin fil-mira awtomatiku għall-għadd lura fil-presenter. Waqt il-preżentazzjoni tista\' tirfinah bit-tast K.',
+  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Ħin fil-mira awtomatiku għall-għadd lura fil-presenter. Waqt il-preżentazzjoni tista\' tirfinah bit-tast K.',
   'uit': 'mitfi',
   'Doeltijd / aftellen (K)': 'Mira / għadd lura (K)',
   'Doeltijd / aftellen instellen (MMSS)': 'Issettja mira / għadd lura (MMSS)',
@@ -723,25 +857,31 @@ const _dutchSourceMt = {
   'Kopieer': 'Ikkopja',
   'Sluiten': 'Agħlaq',
   'Tekstgrootte van de interface': 'Daqs tat-test tal-interface',
-  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.': 'Ikabbar it-test kollu tal-editur sa 200%. L-islajds infushom ma jinbidlux.',
+  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+      'Ikabbar it-test kollu tal-editur sa 200%. L-islajds infushom ma jinbidlux.',
   'Breedte van het slidepaneel': 'Wisa\' tal-pannell tal-islajds',
   'Pijltjestoetsen passen de breedte aan': 'Il-vleġeġ jaġġustaw il-wisa\'',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.': 'Suġġeriment: waħħal tabella mill-ispreadsheet tiegħek f\'ċella b\'Cmd/Ctrl+V biex timla t-tabella kollha.',
+  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+      'Suġġeriment: waħħal tabella mill-ispreadsheet tiegħek f\'ċella b\'Cmd/Ctrl+V biex timla t-tabella kollha.',
   'Annuleren': 'Ikkanċella',
   'Checklist': 'Lista ta\' verifika',
   'Voortgangsgrafiek tonen': 'Uri l-grafika tal-progress',
-  'Toont afgevinkt en niet afgevinkt als percentages.': 'Turi l-oġġetti ivverifikati u mhux ivverifikati bħala perċentwali.',
+  'Toont afgevinkt en niet afgevinkt als percentages.':
+      'Turi l-oġġetti ivverifikati u mhux ivverifikati bħala perċentwali.',
   'Afgevinkt': 'Ivverifikat',
   'Niet afgevinkt': 'Mhux ivverifikat',
-  'Er zijn geen aangevinkte checklist-items om te legen.': 'M\'hemm l-ebda oġġett ivverifikat fil-lista biex jitnaddaf.',
+  'Er zijn geen aangevinkte checklist-items om te legen.':
+      'M\'hemm l-ebda oġġett ivverifikat fil-lista biex jitnaddaf.',
   'Alle checkboxen legen?': 'Neħħi l-marki minn kull kaxxa?',
   'Hiermee worden alle': 'Dan ineħħi l-marki minn kull',
-  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.': 'oġġett ivverifikat fil-preżentazzjoni kollha. Tista\' tħassar dan b\'Ctrl/Cmd+Z.',
+  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+      'oġġett ivverifikat fil-preżentazzjoni kollha. Tista\' tħassar dan b\'Ctrl/Cmd+Z.',
   'Alles legen': 'Neħħi kollox',
   'checklist-items uitgevinkt.': 'oġġetti tal-lista tneħħewlhom il-marki.',
   'Alle checkboxen legen': 'Neħħi l-marki minn kull kaxxa',
   'Afgevinkte tekst doorhalen': 'Ittajjar it-test ivverifikat',
-  'Toont een streep door voltooide checklistitems.': 'Juri l-oġġetti mlestija tal-lista b\'linja ttajra.',
+  'Toont een streep door voltooide checklistitems.':
+      'Juri l-oġġetti mlestija tal-lista b\'linja ttajra.',
   'Na media automatisch doorgaan': 'Kompli awtomatikament wara l-midja',
   'Opsomming': 'Punti',
   'Nummering': 'Numerazzjoni',
@@ -751,11 +891,13 @@ const _dutchSourceMt = {
   'Omhoog': 'Imxi \'l fuq',
   'Omlaag': 'Imxi \'l isfel',
   'Niet toevoegen': 'Iżżidx',
-  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.': 'Dawn l-islajds jużaw l-istess data, kuluri u titlu. Uża l-vleġeġ biex tagħżel l-ordni tagħhom wara l-islajd attwali.',
+  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+      'Dawn l-islajds jużaw l-istess data, kuluri u titlu. Uża l-vleġeġ biex tagħżel l-ordni tagħhom wara l-islajd attwali.',
   'Afbeelding': 'Immaġni',
   'Broncode': 'Kodiċi sors',
   'Bullet': 'Punt',
-  'Plak of typ hier je broncode...': 'Waħħal jew ikteb il-kodiċi sors tiegħek hawn...',
+  'Plak of typ hier je broncode...':
+      'Waħħal jew ikteb il-kodiċi sors tiegħek hawn...',
   'Programmeertaal': 'Lingwaġġ tal-ipprogrammar',
   'TLP van deze slide': 'TLP ta\' din l-islajd',
   'Wis annotaties (C)': 'Naddaf l-annotazzjonijiet (C)',
@@ -769,10 +911,12 @@ const _dutchSourceMt = {
   'Cirkel': 'Torta',
   'Spider': 'Spider',
   'CSV importeren': 'Importa CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)': 'Data (CSV: l-ewwel ringiela = ismijiet tas-serje, l-ewwel kolonna = tikketti)',
+  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+      'Data (CSV: l-ewwel ringiela = ismijiet tas-serje, l-ewwel kolonna = tikketti)',
   'Gekoppeld aan': 'Marbut ma\'',
   'Ontkoppelen': 'Aqla\' r-rabta',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?': 'Taħżen id-data fl-islajd, jew iżżommha bħala fajl CSV separat maġenb il-preżentazzjoni?',
+  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+      'Taħżen id-data fl-islajd, jew iżżommha bħala fajl CSV separat maġenb il-preżentazzjoni?',
   'In de slide': 'Fl-islajd',
   'Als CSV-bestand': 'Bħala fajl CSV',
   'Geen grafiekgegevens': 'L-ebda data tal-grafika',
@@ -785,9 +929,12 @@ const _dutchSourceMt = {
   'Sorteren': 'Issortja',
   'Oplopend sorteren': 'Issortja b\'mod axxendenti',
   'Aflopend sorteren': 'Issortja b\'mod dixxendenti',
-  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.': 'F\'torta jintwerew l-aktar l-ewwel żewġ serje; it-tikketti jiffurmaw is-segmenti.',
-  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.': 'Djagramma spider teħtieġ mill-inqas tliet tikketti (assi); kull serje tifforma forma.',
-  'Een spider-diagram heeft minstens drie labels nodig': 'Djagramma spider teħtieġ mill-inqas tliet tikketti',
+  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+      'F\'torta jintwerew l-aktar l-ewwel żewġ serje; it-tikketti jiffurmaw is-segmenti.',
+  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+      'Djagramma spider teħtieġ mill-inqas tliet tikketti (assi); kull serje tifforma forma.',
+  'Een spider-diagram heeft minstens drie labels nodig':
+      'Djagramma spider teħtieġ mill-inqas tliet tikketti',
   'Minimumlijn (optioneel)': 'Linja minima (fakultattiva)',
   'Maximumlijn (optioneel)': 'Linja massima (fakultattiva)',
   'Schaalminimum (optioneel)': 'Skala minima (fakultattiva)',
@@ -796,9 +943,11 @@ const _dutchSourceMt = {
   'Broncode achtergrond': 'Sfond tal-kodiċi',
   'Broncode tekst': 'Test tal-kodiċi',
   'Syntaxkleuring': 'Kulur tas-sintassi',
-  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).': 'Mitfi = kollox f\'kulur wieħed (eż. aħdar fuq iswed għal skrin CRT).',
+  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+      'Mitfi = kollox f\'kulur wieħed (eż. aħdar fuq iswed għal skrin CRT).',
   'Eigen kleur (hex)': 'Kulur personalizzat (hex)',
-  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.': 'Pereżempju #33FF33 għal skrin aħdar CRT.',
+  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+      'Pereżempju #33FF33 għal skrin aħdar CRT.',
   'Onderdeel van stijlprofiel ': 'Parti mill-profil tal-istil ',
   'Broncode lettertype': 'Font tal-kodiċi',
   'Kop (optioneel)': 'Intestatura (fakultattiva)',
@@ -806,38 +955,48 @@ const _dutchSourceMt = {
   'Subkop': 'Sottotitlu',
   'Systeem (monospace)': 'Sistema (monospace)',
   'Platte tekst': 'Test sempliċi',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.': 'HTML jinfetaħ f\'kull browser mingħajr internet u jirrendi blokki ta\' kodiċi, matematika u djagrammi Mermaid.',
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+      'HTML jinfetaħ f\'kull browser mingħajr internet u jirrendi blokki ta\' kodiċi, matematika u djagrammi Mermaid.',
   'Laatste slide': 'Islajd finali',
   'Logo px': 'Logo px',
   'Markdown voor laatste slide': 'Markdown għall-islajd finali',
   'PREVIEW': 'PREVIEW',
   'Slides gerenderd.': 'L-islajds ġew renderjati.',
   'Standaard laatste slide gebruiken': 'Uża l-islajd finali awtomatika',
-  'Wordt automatisch toegevoegd bij presenteren en exporteren.': 'Miżjuda awtomatikament mal-preżentazzjoni u l-esportazzjoni.',
+  'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+      'Miżjuda awtomatikament mal-preżentazzjoni u l-esportazzjoni.',
   'gerenderd.': 'renderjati.',
   'renderen…': 'qed jiġi renderjat…',
   'voorbereiden…': 'qed jiġi ppreparat…',
   'Duplicaten opruimen': 'Naddaf id-duplikati',
-  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën': 'Sib immaġnijiet identiċi bajt b\'bajt (md5), għaqqad it-tags u n-noti, u neħħi l-kopji',
+  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+      'Sib immaġnijiet identiċi bajt b\'bajt (md5), għaqqad it-tags u n-noti, u neħħi l-kopji',
   'Geen dubbele afbeeldingen gevonden.': 'Ma nstabet l-ebda immaġni duplikata.',
   'Dubbele afbeeldingen opruimen?': 'Naddaf l-immaġnijiet duplikati?',
-  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.': 'Minn kull grupp jibqa\' fajl wieħed. It-tags u n-noti jiġu magħquda u l-islajds li jużaw kopja mbagħad jippuntaw lejn il-fajl miżmum — inklużi preżentazzjonijiet li bħalissa mhumiex miftuħa.',
+  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+      'Minn kull grupp jibqa\' fajl wieħed. It-tags u n-noti jiġu magħquda u l-islajds li jużaw kopja mbagħad jippuntaw lejn il-fajl miżmum — inklużi preżentazzjonijiet li bħalissa mhumiex miftuħa.',
   'Opruimen': 'Naddaf',
   '1 presentatiebestand bijgewerkt.': '1 fajl ta\' preżentazzjoni aġġornat.',
   'presentatiebestanden bijgewerkt.': 'fajls ta\' preżentazzjoni aġġornati.',
   'niet geopend': 'mhux miftuħ',
   '1 dubbele afbeelding verwijderd.': '1 immaġni duplikata mneħħija.',
   'dubbele afbeeldingen verwijderd.': 'immaġnijiet duplikati mneħħija.',
-  'Alleen afbeeldingen zonder tags tonen': 'Uri biss l-immaġnijiet mingħajr tags',
+  'Alleen afbeeldingen zonder tags tonen':
+      'Uri biss l-immaġnijiet mingħajr tags',
   'Alle afbeeldingen hebben tags.': 'L-immaġnijiet kollha għandhom tags.',
-  'Zet het filter uit om alles weer te zien.': 'Itfi l-filtru biex tara kollox mill-ġdid.',
+  'Zet het filter uit om alles weer te zien.':
+      'Itfi l-filtru biex tara kollox mill-ġdid.',
   'Welkom bij OciDeck': 'Merħba f\'OciDeck',
   'Privacy en gebruik': 'Privatezza u użu',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'OciDeck hija applikazzjoni desktop lokali. Il-preżentazzjonijiet u d-data tiegħek jinħażnu biss fuq il-kompjuter tiegħek.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'L-app ma tiġbor l-ebda data personali, l-ebda statistika u l-ebda data ta\' użu. Il-privatezza tiegħek hija l-prijorità tagħna.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Id-data kollha li ddaħħal f\'OciDeck tibqa\' fuq is-sistema lokali tiegħek u ma tintbagħatx lil servers esterni.',
+  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
+      'OciDeck hija applikazzjoni desktop lokali. Il-preżentazzjonijiet u d-data tiegħek jinħażnu biss fuq il-kompjuter tiegħek.',
+  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
+      'L-app ma tiġbor l-ebda data personali, l-ebda statistika u l-ebda data ta\' użu. Il-privatezza tiegħek hija l-prijorità tagħna.',
+  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
+      'Id-data kollha li ddaħħal f\'OciDeck tibqa\' fuq is-sistema lokali tiegħek u ma tintbagħatx lil servers esterni.',
   'Licentie (EUPL 1.2)': 'Liċenzja (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'Billi tikklikkja fuq "Naqbel", taċċetta dawn it-termini u tagħti l-kunsens tiegħek għall-użu ta\' OciDeck.',
+  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
+      'Billi tikklikkja fuq "Naqbel", taċċetta dawn it-termini u tagħti l-kunsens tiegħek għall-użu ta\' OciDeck.',
   'Volledige licentie online': 'Liċenzja sħiħa online',
   'Akkoord gaan': 'Naqbel',
   'Privacy': 'Privatezza',
@@ -845,16 +1004,22 @@ const _dutchSourceMt = {
   'Toestemming intrekken': 'Irtira l-kunsens',
   'Toestemming intrekken?': 'Irtira l-kunsens?',
   'Intrekken': 'Irtira',
-  'U hebt al toegestemd in het gebruik van OciDeck.': 'Diġà tajt il-kunsens tiegħek għall-użu ta\' OciDeck.',
-  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.': 'Tista\' tirtira l-kunsens tiegħek fi kwalunkwe ħin. Wara l-irtirar trid taċċetta dawn it-termini mill-ġdid.',
-  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.': 'Jekk tirtira l-kunsens tiegħek, trid taċċetta dawn it-termini mill-ġdid meta terġa\' tibda OciDeck.',
+  'U hebt al toegestemd in het gebruik van OciDeck.':
+      'Diġà tajt il-kunsens tiegħek għall-użu ta\' OciDeck.',
+  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+      'Tista\' tirtira l-kunsens tiegħek fi kwalunkwe ħin. Wara l-irtirar trid taċċetta dawn it-termini mill-ġdid.',
+  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+      'Jekk tirtira l-kunsens tiegħek, trid taċċetta dawn it-termini mill-ġdid meta terġa\' tibda OciDeck.',
   'Slidekwaliteit': 'Kwalità tal-islajd',
-  'Geen kwaliteitsproblemen gevonden': 'Ma nstabet l-ebda problema ta\' kwalità',
+  'Geen kwaliteitsproblemen gevonden':
+      'Ma nstabet l-ebda problema ta\' kwalità',
   'Thema (hele presentatie)': 'Tema (preżentazzjoni sħiħa)',
   'Kwaliteitsprobleem': 'Problema ta\' kwalità',
   'Kwaliteitsproblemen': 'Problemi ta\' kwalità',
-  'Kwaliteitsproblemen (inclusief ernstige)': 'Problemi ta\' kwalità (inklużi dawk serji)',
-  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Żid test alt / didaskalija għall-aċċessibbiltà',
+  'Kwaliteitsproblemen (inclusief ernstige)':
+      'Problemi ta\' kwalità (inklużi dawk serji)',
+  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Żid test alt / didaskalija għall-aċċessibbiltà',
   'Alt-tekst': 'Test alt',
   'Tekstdichtheid': 'Densità tat-test',
   'Contrast': 'Kuntrast',
@@ -864,22 +1029,32 @@ const _dutchSourceMt = {
   ':1 voor normale tekst).': ':1 għal test normali).',
   ':1 voor grote tekst).': ':1 għal test kbir).',
   ':1).': ':1).',
-  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.': 'Il-kuntrast tat-test fuq jew fuq immaġni ma jistax jiġi vverifikat awtomatikament — ivverifika viżwalment.',
-  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.': 'Il-grafika m\'għandhiex titlu jew data deskrittiva — żid titlu jew ismijiet tas-serje.',
-  'heeft geen titel of sprekernotities die de inhoud beschrijven.': 'm\'għandux titlu jew noti tal-kelliem li jiddeskrivu l-kontenut.',
-  'Veel tekst op deze slide: het lettertype wordt verkleind tot ': 'Ħafna test fuq din l-islajd: id-daqs tal-font qed jitnaqqas sa ',
+  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+      'Il-kuntrast tat-test fuq jew fuq immaġni ma jistax jiġi vverifikat awtomatikament — ivverifika viżwalment.',
+  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+      'Il-grafika m\'għandhiex titlu jew data deskrittiva — żid titlu jew ismijiet tas-serje.',
+  'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+      'm\'għandux titlu jew noti tal-kelliem li jiddeskrivu l-kontenut.',
+  'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+      'Ħafna test fuq din l-islajd: id-daqs tal-font qed jitnaqqas sa ',
   ' van de ontwerpgrootte.': ' mid-daqs tad-disinn.',
-  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (': 'Ħafna test fuq din l-islajd: id-daqs tal-font qed jitnaqqas ħafna (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.': 'mid-daqs tad-disinn). Ikkunsidra li taqsam il-kontenut.',
+  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+      'Ħafna test fuq din l-islajd: id-daqs tal-font qed jitnaqqas ħafna (',
+  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      'mid-daqs tad-disinn). Ikkunsidra li taqsam il-kontenut.',
   'Grote tabel (': 'Tabella kbira (',
   ' rijen, ': ' ringieli, ',
-  ' kolommen): celtekst staat op het minimumformaat.': ' kolonni): it-test taċ-ċelel jinsab fid-daqs minimu.',
+  ' kolommen): celtekst staat op het minimumformaat.':
+      ' kolonni): it-test taċ-ċelel jinsab fid-daqs minimu.',
   'Veel broncode (': 'Ħafna kodiċi sors (',
-  ' regels) — de tekst wordt sterk verkleind om te passen.': ' linji) — it-test qed jitnaqqas ħafna biex jidħol.',
+  ' regels) — de tekst wordt sterk verkleind om te passen.':
+      ' linji) — it-test qed jitnaqqas ħafna biex jidħol.',
   'Veel vrije markdown (': 'Ħafna markdown ħieles (',
-  ' regels) — controleer of alles leesbaar blijft op de slide.': ' linji) — ivverifika li kollox jibqa\' jinqara fuq l-islajd.',
+  ' regels) — controleer of alles leesbaar blijft op de slide.':
+      ' linji) — ivverifika li kollox jibqa\' jinqara fuq l-islajd.',
   'Lange titelpagina (': 'Islajd tat-titlu twil (',
-  ' tekens) — de tekst wordt verkleind om te passen.': ' karattri) — it-test qed jitnaqqas biex jidħol.',
+  ' tekens) — de tekst wordt verkleind om te passen.':
+      ' karattri) — it-test qed jitnaqqas biex jidħol.',
   'Thema bodytekst': 'Test tal-korp tat-tema',
   'Thema titel': 'Titlu tat-tema',
   'Thema tabeltekst': 'Test tat-tabella tat-tema',
@@ -890,34 +1065,46 @@ const _dutchSourceMt = {
   'Tweede afbeelding': 'It-tieni immaġni',
   'Waarschuwing bij export': 'Wissi mal-esportazzjoni',
   'Minimale contrastverhouding': 'Proporzjon minimu ta\' kuntrast',
-  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.': 'It-test taħt dan il-proporzjon jiġi mmarkat. 4.5 = WCAG AA, 3.0 = WCAG AA test kbir. Ogħla huwa aktar strett.',
-  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.': 'Itlob konferma qabel ma tesporta meta jkun hemm problemi ta\' kwalità fl-islajd.',
+  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.':
+      'It-test taħt dan il-proporzjon jiġi mmarkat. 4.5 = WCAG AA, 3.0 = WCAG AA test kbir. Ogħla huwa aktar strett.',
+  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+      'Itlob konferma qabel ma tesporta meta jkun hemm problemi ta\' kwalità fl-islajd.',
   'Kwaliteitsproblemen gevonden': 'Instabu problemi ta\' kwalità',
   'Toch exporteren': 'Esporta xorta',
   'ernstige probleem(en)': 'problema/problemi serji',
-  'De presentatie heeft kwaliteitsproblemen (': 'Il-preżentazzjoni għandha problemi ta\' kwalità (',
+  'De presentatie heeft kwaliteitsproblemen (':
+      'Il-preżentazzjoni għandha problemi ta\' kwalità (',
   'Lange quote (': 'Kwotazzjoni twila (',
   'Footer-tekst': 'Test tal-footer',
   'Checklist (niet aangevinkt)': 'Lista ta\' verifika (mhux ivverifikata)',
   'Checklist (aangevinkt)': 'Lista ta\' verifika (ivverifikata)',
   ': bestand niet gevonden (': ': fajl ma nstabx (',
-  'Blokkeer export bij ernstige kwaliteitsproblemen': 'Imblokka l-esportazzjoni fejn hemm problemi serji ta\' kwalità',
-  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.': 'L-esportazzjoni mhijiex possibbli sakemm ikun hemm żbalji fil-verifika tal-kwalità tal-islajd.',
-  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.': 'Esportazzjoni mblukkata minħabba problemi serji ta\' kwalità.',
+  'Blokkeer export bij ernstige kwaliteitsproblemen':
+      'Imblokka l-esportazzjoni fejn hemm problemi serji ta\' kwalità',
+  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+      'L-esportazzjoni mhijiex possibbli sakemm ikun hemm żbalji fil-verifika tal-kwalità tal-islajd.',
+  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+      'Esportazzjoni mblukkata minħabba problemi serji ta\' kwalità.',
   'Alle meldingen': 'Il-messaġġi kollha',
-  '… en meer problemen in het kwaliteitspaneel.': '… u aktar problemi fil-pannell tal-kwalità.',
+  '… en meer problemen in het kwaliteitspaneel.':
+      '… u aktar problemi fil-pannell tal-kwalità.',
   'Classificatie-handhaving': 'Infurzar tal-klassifikazzjoni',
   'Vrijgaveplafond': 'Limitu tar-rilaxx',
-  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.': 'L-ogħla livell TLP permess li jiġi esportat. Vojt = l-ebda limitu.',
+  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+      'L-ogħla livell TLP permess li jiġi esportat. Vojt = l-ebda limitu.',
   'Vereist minimumniveau': 'Livell minimu meħtieġ',
-  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.': 'L-aktar klassifikazzjoni baxxa li deck irid ikollu biex jesporta. Vojt = l-ebda minimu.',
+  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+      'L-aktar klassifikazzjoni baxxa li deck irid ikollu biex jesporta. Vojt = l-ebda minimu.',
   'Geen plafond': 'L-ebda limitu',
   'Geen minimum': 'L-ebda minimu',
   'Classificatie verplicht': 'Klassifikazzjoni meħtieġa',
-  'Weiger export wanneer het deck geen TLP-niveau heeft.': 'Irrifjuta l-esportazzjoni meta d-deck m\'għandu l-ebda livell TLP.',
+  'Weiger export wanneer het deck geen TLP-niveau heeft.':
+      'Irrifjuta l-esportazzjoni meta d-deck m\'għandu l-ebda livell TLP.',
   'Classificatie-watermerk': 'Watermark tal-klassifikazzjoni',
-  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.': 'Uri watermark dijagonali bit-TLP u l-organizzazzjoni fuq kull islajd.',
-  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.': 'Issettja livell TLP — l-esportazzjoni hija mblukkata mill-politika tal-klassifikazzjoni.',
+  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+      'Uri watermark dijagonali bit-TLP u l-organizzazzjoni fuq kull islajd.',
+  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+      'Issettja livell TLP — l-esportazzjoni hija mblukkata mill-politika tal-klassifikazzjoni.',
   'Tabel bewerken': 'Editja t-tabella',
   'Pijltjes · Tab · Esc': 'Vleġeġ · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Editja t-tabella (fuq slajds tat-tabella)',
@@ -926,4 +1113,5 @@ const _dutchSourceMt = {
   'Pen · markeerstift · ⇧E': 'Pinna · markatur · ⇧E',
   'Gestapelde staaf': 'Bar stakkjat',
   'Spreiding': 'Scatter',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn iqalleb bejn l-islajds',
 };

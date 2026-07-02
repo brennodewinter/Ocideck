@@ -654,6 +654,35 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets('PgUp/PgDn navigates slides while user notes stay open', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_host(slides));
+    await tester.pump();
+
+    await sendControlKey(tester, LogicalKeyboardKey.keyN);
+    await tester.pump();
+    expect(find.text('Mijn notities'), findsOneWidget);
+    expect(find.text('Eerste'), findsOneWidget);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.pageDown);
+    await tester.pump();
+    expect(find.text('Tweede'), findsOneWidget);
+    expect(find.text('Mijn notities'), findsOneWidget);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.pageUp);
+    await tester.pump();
+    expect(find.text('Eerste'), findsOneWidget);
+    expect(find.text('Mijn notities'), findsOneWidget);
+
+    // Pijltjestoetsen blijven bij het tekstveld: geen slidewissel.
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+    await tester.pump();
+    expect(find.text('Eerste'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
   testWidgets('typing in user notes does not change speaker notes', (
     tester,
   ) async {

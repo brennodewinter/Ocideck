@@ -1110,4 +1110,5 @@ const _dutchSourceLa = {
   'Pen · markeerstift · ⇧E': 'Stilus · illuminator · ⇧E',
   'Gestapelde staaf': 'Columna cumulata',
   'Spreiding': 'Dispersio',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn folia percurrit',
 };

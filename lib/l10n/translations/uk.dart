@@ -1112,4 +1112,5 @@ const _dutchSourceUk = {
   'Pen · markeerstift · ⇧E': 'Ручка · маркер · ⇧E',
   'Gestapelde staaf': 'Стовпчикова з накопиченням',
   'Spreiding': 'Точкова',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn гортає слайди',
 };

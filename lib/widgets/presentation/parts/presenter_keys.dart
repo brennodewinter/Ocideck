@@ -20,7 +20,8 @@ extension _PresenterKeys on _FullscreenPresenterState {
     // Doeltijd-invoer vangt cijfers/Enter/Esc tot de invoer klaar is.
     if (_targetInput) return _handleTargetKey(key);
 
-    // Gebruikersnotities: alleen sluiten/togglen; overige toetsen naar het veld.
+    // Gebruikersnotities: sluiten/togglen en bladeren met PgUp/PgDn; overige
+    // toetsen (inclusief pijltjes, die de cursor besturen) naar het veld.
     if (_userNotesMode) {
       final keys = HardwareKeyboard.instance;
       if (key == LogicalKeyboardKey.escape) {
@@ -30,6 +31,14 @@ extension _PresenterKeys on _FullscreenPresenterState {
       if ((keys.isControlPressed || keys.isMetaPressed) &&
           key == LogicalKeyboardKey.keyN) {
         _toggleUserNotesMode();
+        return KeyEventResult.handled;
+      }
+      if (key == LogicalKeyboardKey.pageDown) {
+        _next(allowInUserNotes: true);
+        return KeyEventResult.handled;
+      }
+      if (key == LogicalKeyboardKey.pageUp) {
+        _prev(allowInUserNotes: true);
         return KeyEventResult.handled;
       }
       return KeyEventResult.ignored;

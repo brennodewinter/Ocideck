@@ -9,7 +9,8 @@ const _stringsPt = {
   'undo': 'Anular (Ctrl/Cmd+Z)',
   'redo': 'Refazer (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Biblioteca de imagens',
-  'presentFullscreen': 'Apresentar (ecrã inteiro) · P para vista do apresentador',
+  'presentFullscreen':
+      'Apresentar (ecrã inteiro) · P para vista do apresentador',
   'visualMode': 'Modo visual',
   'markdownMode': 'Modo Markdown',
   'save': 'Guardar',
@@ -47,7 +48,8 @@ const _stringsPt = {
   'settingsLogo': 'Logótipo',
   'language': 'Idioma',
   'applicationLanguage': 'Idioma da aplicação',
-  'languageHelp': 'A interface muda de idioma imediatamente. O conteúdo da apresentação não é alterado.',
+  'languageHelp':
+      'A interface muda de idioma imediatamente. O conteúdo da apresentação não é alterado.',
   'presentationFolder': 'Pasta de apresentações',
   'exportFolderSetting': 'Pasta de exportação',
   'notSet': 'Não definido',
@@ -55,17 +57,20 @@ const _stringsPt = {
   'choose': 'Escolher',
   'removeDefaultFolder': 'Remover pasta predefinida',
   'removeExportFolder': 'Remover pasta de exportação',
-  'exportFolderHelp': 'Todas as exportações (PDF/PPTX) são guardadas aqui. Se não estiver definido, as exportações ficam junto ao ficheiro da apresentação.',
+  'exportFolderHelp':
+      'Todas as exportações (PDF/PPTX) são guardadas aqui. Se não estiver definido, as exportações ficam junto ao ficheiro da apresentação.',
   'cancel': 'Cancelar',
   'close': 'Fechar',
   'saveSettings': 'Guardar',
   'exportDialogTitle': 'Exportar',
   'exportAgain': 'Exportar novamente',
-  'exportIntro': 'A exportação usa exatamente a pré-visualização do editor, incluindo o seu perfil de estilo.',
+  'exportIntro':
+      'A exportação usa exatamente a pré-visualização do editor, incluindo o seu perfil de estilo.',
   'imageQualityPdf': 'Qualidade de imagem (PDF)',
   'normal': 'Normal',
   'compressed': 'Comprimido',
-  'compressedHelp': 'JPEG de menor resolução, destinado a folhetos, com um ficheiro muito menor (guardado separadamente como “-compact”).',
+  'compressedHelp':
+      'JPEG de menor resolução, destinado a folhetos, com um ficheiro muito menor (guardado separadamente como “-compact”).',
   'losslessHelp': 'Imagens sem perdas em resolução total.',
   'exportAsPdf': 'Exportar como PDF',
   'exportAsPptx': 'Exportar como PPTX',
@@ -87,26 +92,39 @@ const _dutchSourcePt = {
   'Niet opslaan': 'Não guardar',
   'Niet-opgeslagen werk herstellen?': 'Restaurar trabalho não guardado?',
   'Niet-opgeslagen wijzigingen': 'Alterações não guardadas',
-  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'Foi encontrada uma apresentação com alterações não guardadas de uma sessão anterior:',
+  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Foi encontrada uma apresentação com alterações não guardadas de uma sessão anterior:',
   'Er zijn': 'Existem',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'apresentações com alterações não guardadas de uma sessão anterior:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.': 'Existem apresentações com alterações não guardadas. Guarde-as antes de fechar a aplicação.',
-  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.': 'Esta apresentação tem alterações não guardadas. Guarde-a antes de fechar o separador.',
+  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'apresentações com alterações não guardadas de uma sessão anterior:',
+  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Existem apresentações com alterações não guardadas. Guarde-as antes de fechar a aplicação.',
+  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+      'Esta apresentação tem alterações não guardadas. Guarde-a antes de fechar o separador.',
   'Importeren via URL': 'Importar a partir de URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.': 'Cole o link para um pacote .ocideck ou um ficheiro Markdown do Marp.',
+  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+      'Cole o link para um pacote .ocideck ou um ficheiro Markdown do Marp.',
   'Ophalen': 'Obter',
   'Laat los om toe te voegen': 'Solte para adicionar',
-  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen': 'Imagens → novos slides · .md / .ocideck → abrir',
-  'Open eerst een presentatie om afbeeldingen toe te voegen.': 'Abra uma apresentação antes de adicionar imagens.',
-  'Alle slides zijn overgeslagen — niets om te tonen.': 'Todos os slides estão ignorados — nada para mostrar.',
-  'Alle slides zijn overgeslagen — niets om te exporteren.': 'Todos os slides estão ignorados — nada para exportar.',
+  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+      'Imagens → novos slides · .md / .ocideck → abrir',
+  'Open eerst een presentatie om afbeeldingen toe te voegen.':
+      'Abra uma apresentação antes de adicionar imagens.',
+  'Alle slides zijn overgeslagen — niets om te tonen.':
+      'Todos os slides estão ignorados — nada para mostrar.',
+  'Alle slides zijn overgeslagen — niets om te exporteren.':
+      'Todos os slides estão ignorados — nada para exportar.',
   'Kon dit pakket niet importeren.': 'Não foi possível importar este pacote.',
   'Pakket geëxporteerd naar:': 'Pacote exportado para:',
   'Export mislukt:': 'Falha na exportação:',
-  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.': 'Este slide não pode receber uma imagem. Escolha primeiro um slide de imagem.',
-  'Kon van deze URL geen presentatie ophalen.': 'Não foi possível obter uma apresentação a partir deste URL.',
-  'Sleep om de slide-preview breder of smaller te maken': 'Arraste para tornar a pré-visualização do slide mais larga ou mais estreita',
-  'TLP-classificatie (Traffic Light Protocol)': 'Classificação TLP (Traffic Light Protocol)',
+  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+      'Este slide não pode receber uma imagem. Escolha primeiro um slide de imagem.',
+  'Kon van deze URL geen presentatie ophalen.':
+      'Não foi possível obter uma apresentação a partir deste URL.',
+  'Sleep om de slide-preview breder of smaller te maken':
+      'Arraste para tornar a pré-visualização do slide mais larga ou mais estreita',
+  'TLP-classificatie (Traffic Light Protocol)':
+      'Classificação TLP (Traffic Light Protocol)',
   'Titelpagina': 'Slide de título',
   'Tussentitel': 'Cabeçalho de secção',
   'Alleen Bullets': 'Só marcadores',
@@ -119,7 +137,8 @@ const _dutchSourcePt = {
   'Tabel': 'Tabela',
   'Vrije Markdown': 'Markdown livre',
   'Overgeslagen': 'Ignorado',
-  'Weer tonen bij presenteren/exporteren': 'Voltar a mostrar ao apresentar/exportar',
+  'Weer tonen bij presenteren/exporteren':
+      'Voltar a mostrar ao apresentar/exportar',
   'Overslaan bij presenteren/exporteren': 'Ignorar ao apresentar/exportar',
   'Kopiëren': 'Copiar',
   'Kopieer als afbeelding': 'Copiar como imagem',
@@ -141,7 +160,8 @@ const _dutchSourcePt = {
   'Naam van de auteur': 'Nome do autor',
   'Achtergrondafbeelding': 'Imagem de fundo',
   'Achtergrondafbeelding (optioneel)': 'Imagem de fundo (opcional)',
-  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.': 'A imagem é mostrada em ecrã inteiro como fundo com opacidade reduzida para que o texto continue legível.',
+  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+      'A imagem é mostrada em ecrã inteiro como fundo com opacidade reduzida para que o texto continue legível.',
   'Zoom achtergrond': 'Zoom do fundo',
   'Zoom afbeelding': 'Zoom da imagem',
   'Afbeelding (rechts)': 'Imagem (direita)',
@@ -161,12 +181,16 @@ const _dutchSourcePt = {
   'Uit bibliotheek…': 'Da biblioteca…',
   'Van computer…': 'Do computador…',
   'Afbeelding plakken uit klembord': 'Colar imagem da área de transferência',
-  'Kopieer afbeelding naar klembord': 'Copiar imagem para a área de transferência',
-  'Afbeelding gekopieerd naar klembord.': 'Imagem copiada para a área de transferência.',
-  'Kopiëren naar klembord mislukt.': 'Falha ao copiar para a área de transferência.',
+  'Kopieer afbeelding naar klembord':
+      'Copiar imagem para a área de transferência',
+  'Afbeelding gekopieerd naar klembord.':
+      'Imagem copiada para a área de transferência.',
+  'Kopiëren naar klembord mislukt.':
+      'Falha ao copiar para a área de transferência.',
   'Verwijder afbeelding': 'Remover imagem',
   'Geen afbeelding gekozen': 'Nenhuma imagem selecionada',
-  'Caption / bronvermelding (bijv. © Naam Fotograaf)': 'Legenda / crédito (ex.: © Nome do Fotógrafo)',
+  'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+      'Legenda / crédito (ex.: © Nome do Fotógrafo)',
   'Caption / bronvermelding': 'Legenda / crédito',
   'Beschrijving (doorzoekbaar)': 'Descrição (pesquisável)',
   'Markdown inhoud': 'Conteúdo Markdown',
@@ -177,7 +201,8 @@ const _dutchSourcePt = {
   'verwijderen': 'remover',
   'Koprij verwijderen': 'Remover linha de cabeçalho',
   'Rij verwijderen': 'Remover linha',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.': 'Dica: prima Enter dentro de uma célula para uma nova linha.',
+  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+      'Dica: prima Enter dentro de uma célula para uma nova linha.',
   'Presentatie openen': 'Abrir apresentação',
   'Opslaan als': 'Guardar como',
   'Pakket importeren': 'Importar pacote',
@@ -190,11 +215,14 @@ const _dutchSourcePt = {
   'Kies een video': 'Escolher um vídeo',
   'Kies een audiobestand': 'Escolher um ficheiro de áudio',
   'Bladeren…': 'Procurar…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…': 'Pesquisar por nome de ficheiro, título ou texto nos slides…',
+  'Zoek op bestandsnaam, titel of tekst in de slides…':
+      'Pesquisar por nome de ficheiro, título ou texto nos slides…',
   'Geen map gekozen': 'Nenhuma pasta selecionada',
   'Map kiezen': 'Escolher pasta',
-  'Kies een map met presentaties om te beginnen.': 'Escolha uma pasta com apresentações para começar.',
-  'Geen presentaties (.md) in deze map gevonden.': 'Não foram encontradas apresentações (.md) nesta pasta.',
+  'Kies een map met presentaties om te beginnen.':
+      'Escolha uma pasta com apresentações para começar.',
+  'Geen presentaties (.md) in deze map gevonden.':
+      'Não foram encontradas apresentações (.md) nesta pasta.',
   'Geen presentaties gevonden voor': 'Nenhuma apresentação encontrada para',
   'meer treffer(s)': 'resultado(s) a mais',
   'Slide zoeken': 'Localizar slide',
@@ -205,11 +233,15 @@ const _dutchSourcePt = {
   'Toegevoegd': 'Adicionado',
   'Selecteer alles': 'Selecionar tudo',
   'Deselecteer alles': 'Desmarcar tudo',
-  'Zoek slides op tekst, titel, onderschrift, pad…': 'Pesquisar slides por texto, título, legenda, caminho…',
-  'Zoek op presentatie, titel of tekst…': 'Pesquisar por apresentação, título ou texto…',
-  'Geen andere presentaties (.md) in deze map gevonden.': 'Não foram encontradas outras apresentações (.md) nesta pasta.',
+  'Zoek slides op tekst, titel, onderschrift, pad…':
+      'Pesquisar slides por texto, título, legenda, caminho…',
+  'Zoek op presentatie, titel of tekst…':
+      'Pesquisar por apresentação, título ou texto…',
+  'Geen andere presentaties (.md) in deze map gevonden.':
+      'Não foram encontradas outras apresentações (.md) nesta pasta.',
   'Geen slides gevonden voor': 'Nenhum slide encontrado para',
-  'Typ zoektermen om slides uit al je presentaties te vinden.': 'Escreva termos de pesquisa para encontrar slides em todas as suas apresentações.',
+  'Typ zoektermen om slides uit al je presentaties te vinden.':
+      'Escreva termos de pesquisa para encontrar slides em todas as suas apresentações.',
   'toegevoegd': 'adicionado',
   'Eerste': 'Primeiros',
   'treffers — verfijn je zoekopdracht': 'resultados — refine a sua pesquisa',
@@ -247,17 +279,21 @@ const _dutchSourcePt = {
   'Beschrijving': 'Descrição',
   'Korte omschrijving van de presentatie': 'Descrição breve da apresentação',
   'Trefwoorden': 'Palavras-chave',
-  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026': 'Separadas por vírgulas, ex.: trimestral, números, 2026',
-  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.': 'Estes dados são guardados no Markdown e ficam pesquisáveis ao abrir.',
+  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026':
+      'Separadas por vírgulas, ex.: trimestral, números, 2026',
+  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+      'Estes dados são guardados no Markdown e ficam pesquisáveis ao abrir.',
   'App-thema': 'Tema da aplicação',
   'Look-and-feel': 'Aspeto e comportamento',
   'Kopie maken en aanpassen': 'Criar e personalizar uma cópia',
   'Thema verwijderen': 'Eliminar tema',
   'Themanaam': 'Nome do tema',
-  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.': 'Este é um tema incorporado. Crie uma cópia para personalizar as cores.',
+  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+      'Este é um tema incorporado. Crie uma cópia para personalizar as cores.',
   'Donkere interface': 'Interface escura',
   'Lettertype interface': 'Tipo de letra da interface',
-  'Past contrast, invoervelden en systeemcomponenten aan.': 'Ajusta o contraste, os campos de entrada e os componentes do sistema.',
+  'Past contrast, invoervelden en systeemcomponenten aan.':
+      'Ajusta o contraste, os campos de entrada e os componentes do sistema.',
   'Hoofdkleur en bovenbalk': 'Cor principal e barra superior',
   'Knoppen en accenten': 'Botões e destaques',
   'Schermachtergrond': 'Fundo do ecrã',
@@ -293,15 +329,19 @@ const _dutchSourcePt = {
   'Linksonder': 'Inferior esquerdo',
   'Rechtsonder': 'Inferior direito',
   'Footertekst': 'Texto do rodapé',
-  'bijv. Vertrouwelijk · {title} · {date}': 'ex.: Confidencial · {title} · {date}',
+  'bijv. Vertrouwelijk · {title} · {date}':
+      'ex.: Confidencial · {title} · {date}',
   'Footerpositie': 'Posição do rodapé',
-  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.': 'Tokens: {page}, {total}, {date}, {title}. O rodapé aparece em todos os slides exceto nos de título e de secção, a menos que o desative por slide.',
+  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+      'Tokens: {page}, {total}, {date}, {title}. O rodapé aparece em todos os slides exceto nos de título e de secção, a menos que o desative por slide.',
   'Links': 'Esquerda',
   'Midden': 'Centro',
   'Rechts': 'Direita',
-  'Paginanummers tonen (rechtsonder)': 'Mostrar números de página (inferior direito)',
+  'Paginanummers tonen (rechtsonder)':
+      'Mostrar números de página (inferior direito)',
   'Voorvertoning': 'Pré-visualização',
-  'De snelle bruine vos springt over de luie hond.': 'À noite, vovô Kowalsky vê o ímã cair no pé do pinguim queixoso.',
+  'De snelle bruine vos springt over de luie hond.':
+      'À noite, vovô Kowalsky vê o ímã cair no pé do pinguim queixoso.',
   'Preview': 'Pré-visualização',
   'Uitzoomen': 'Reduzir zoom',
   'Uitgezoomd': 'Zoom reduzido',
@@ -309,9 +349,12 @@ const _dutchSourcePt = {
   'Ingezoomd': 'Zoom aumentado',
   'van de foto zichtbaar': 'da foto visível',
   'Volledig zichtbaar (100%)': 'Totalmente visível (100%)',
-  'Uitzoomen (meer van de foto zichtbaar)': 'Reduzir zoom (mais da foto visível)',
-  'Inzoomen (minder van de foto zichtbaar)': 'Aumentar zoom (menos da foto visível)',
-  'Terugzetten (volledige afbeelding zichtbaar)': 'Repor (imagem completa visível)',
+  'Uitzoomen (meer van de foto zichtbaar)':
+      'Reduzir zoom (mais da foto visível)',
+  'Inzoomen (minder van de foto zichtbaar)':
+      'Aumentar zoom (menos da foto visível)',
+  'Terugzetten (volledige afbeelding zichtbaar)':
+      'Repor (imagem completa visível)',
   'Zoom resetten': 'Repor zoom',
   'Preview inklappen': 'Recolher pré-visualização',
   'Preview uitklappen': 'Expandir pré-visualização',
@@ -326,19 +369,24 @@ const _dutchSourcePt = {
   'Terug naar standaardstijl': 'Voltar ao estilo predefinido',
   'Automatisch doorgaan na': 'Avançar automaticamente após',
   'Logo tonen op deze slide': 'Mostrar logótipo neste slide',
-  'Tabel bewerkbaar tijdens presenteren': 'Tabela editável durante a apresentação',
+  'Tabel bewerkbaar tijdens presenteren':
+      'Tabela editável durante a apresentação',
   'Footer tonen op deze slide': 'Mostrar rodapé neste slide',
   'Sprekersnotities...': 'Notas do orador...',
   'Sprekersnotities': 'Notas do orador',
-  'Notities voor tijdens het presenteren': 'Notas para usar durante a apresentação',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown': 'Modo Markdown — edite a apresentação completa como Markdown do Marp',
+  'Notities voor tijdens het presenteren':
+      'Notas para usar durante a apresentação',
+  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+      'Modo Markdown — edite a apresentação completa como Markdown do Marp',
   'Toepassen': 'Aplicar',
-  'Markdown kon niet worden verwerkt. Controleer de syntax.': 'Não foi possível processar o Markdown. Verifique a sintaxe.',
+  'Markdown kon niet worden verwerkt. Controleer de syntax.':
+      'Não foi possível processar o Markdown. Verifique a sintaxe.',
   'Controleren': 'Verificar sintaxe',
   'Syntaxproblemen gevonden': 'Foram encontrados problemas de sintaxe',
   'De markdown bevat': 'O Markdown contém',
   'fout(en) en': 'erro(s) e',
-  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.': 'aviso(s). Os slides podem, por isso, ser lidos incorretamente.',
+  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+      'aviso(s). Os slides podem, por isso, ser lidos incorretamente.',
   'Terug naar editor': 'Voltar ao editor',
   'Toch toepassen': 'Aplicar mesmo assim',
   'Geen syntaxproblemen gevonden': 'Não foram encontrados problemas de sintaxe',
@@ -352,26 +400,35 @@ const _dutchSourcePt = {
   'Coverflow': 'Coverflow',
   'Geen afbeeldingen gevonden': 'Nenhuma imagem encontrada',
   'Geen resultaten voor': 'Sem resultados para',
-  'Pas je zoekterm aan of voeg een beschrijving toe.': 'Ajuste o termo de pesquisa ou adicione uma descrição.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.': 'Use "Procurar" para escolher imagens de qualquer localização.',
+  'Pas je zoekterm aan of voeg een beschrijving toe.':
+      'Ajuste o termo de pesquisa ou adicione uma descrição.',
+  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+      'Use "Procurar" para escolher imagens de qualquer localização.',
   'Selecteer een\nafbeelding': 'Selecione uma\nimagem',
   'Gekopieerd': 'Copiado',
   'Afbeelding verwijderen?': 'Eliminar imagem?',
-  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.': 'O ficheiro será eliminado permanentemente do disco. Esta ação não pode ser anulada.',
-  'Let op: deze afbeelding wordt nog gebruikt in': 'Atenção: esta imagem ainda é usada em',
-  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.': 'Ao eliminar, esses slides ficam vazios. Isto não pode ser anulado.',
-  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert': '↑↓←→ navegar  ·  Enter escolhe  ·  Duplo clique seleciona',
+  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+      'O ficheiro será eliminado permanentemente do disco. Esta ação não pode ser anulada.',
+  'Let op: deze afbeelding wordt nog gebruikt in':
+      'Atenção: esta imagem ainda é usada em',
+  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+      'Ao eliminar, esses slides ficam vazios. Isto não pode ser anulado.',
+  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+      '↑↓←→ navegar  ·  Enter escolhe  ·  Duplo clique seleciona',
   'Sneltoetsen': 'Atalhos de teclado',
   'Toetsenlegenda': 'Legenda de teclas',
   'spatie': 'espaço',
   'klik': 'clique',
   'cijfers': 'números',
-  'Klik of druk op ? / H / Esc om te sluiten': 'Clique ou prima ? / H / Esc para fechar',
-  'Klik of druk op H / Esc om te sluiten': 'Clique ou prima H / Esc para fechar',
+  'Klik of druk op ? / H / Esc om te sluiten':
+      'Clique ou prima ? / H / Esc para fechar',
+  'Klik of druk op H / Esc om te sluiten':
+      'Clique ou prima H / Esc para fechar',
   'Naar slidenummer': 'Ir para o número do slide',
   'Eerste · laatste slide': 'Primeiro · último slide',
   'Slide-overzicht': 'Vista geral dos slides',
-  'Slide-overzicht (pijltjes + Enter)': 'Vista geral dos slides (setas + Enter)',
+  'Slide-overzicht (pijltjes + Enter)':
+      'Vista geral dos slides (setas + Enter)',
   'Presenter view (notities, klok)': 'Vista do apresentador (notas, relógio)',
   'Scherm wisselen (meerdere schermen)': 'Mudar de ecrã (vários ecrãs)',
   'Zwart · wit scherm': 'Ecrã preto · branco',
@@ -399,24 +456,34 @@ const _dutchSourcePt = {
   'Geen notities voor deze slide.': 'Sem notas para este slide.',
   'Mijn notities': 'As minhas notas',
   'Gebruikersnotities': 'Notas do utilizador',
-  'Gebruikersnotities voor deze slide...': 'Notas do utilizador para este slide...',
+  'Gebruikersnotities voor deze slide...':
+      'Notas do utilizador para este slide...',
   'Notities weggooien': 'Descartar notas',
-  'Notities voor de ontvanger tijdens een cursus': 'Notas para o destinatário durante um curso',
-  'Schakel naar Markdown-modus om notities toe te voegen.': 'Mude para o modo Markdown para adicionar notas.',
+  'Notities voor de ontvanger tijdens een cursus':
+      'Notas para o destinatário durante um curso',
+  'Schakel naar Markdown-modus om notities toe te voegen.':
+      'Mude para o modo Markdown para adicionar notas.',
   'Mijn notities aan/uit': 'Ativar/desativar as minhas notas',
   'Wissel scherm (S)': 'Mudar de ecrã (S)',
   'Kon niet van scherm wisselen.': 'Não foi possível mudar de ecrã.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P público · G vista geral · B/W preto/branco · R tempo · Esc parar',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P público · S ecrã · G vista geral · B/W preto/branco · R tempo · Esc parar',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P público · H legenda · G vista geral · B/W preto/branco · R tempo · Esc parar',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P público · H legenda · S ecrã · G vista geral · B/W preto/branco · R tempo · Esc parar',
-  'pijltjes + Enter of klik om te springen': 'setas + Enter ou clique para saltar',
+  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P público · G vista geral · B/W preto/branco · R tempo · Esc parar',
+  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P público · S ecrã · G vista geral · B/W preto/branco · R tempo · Esc parar',
+  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P público · H legenda · G vista geral · B/W preto/branco · R tempo · Esc parar',
+  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P público · H legenda · S ecrã · G vista geral · B/W preto/branco · R tempo · Esc parar',
+  'pijltjes + Enter of klik om te springen':
+      'setas + Enter ou clique para saltar',
   'Afsluiten (Escape)': 'Sair (Escape)',
   'Sluiten (G of Esc)': 'Fechar (G ou Esc)',
   'Slide renderen…': 'A processar slide…',
-  'Slide gekopieerd naar klembord.': 'Slide copiado para a área de transferência.',
+  'Slide gekopieerd naar klembord.':
+      'Slide copiado para a área de transferência.',
   'Kopiëren mislukt.': 'Falha ao copiar.',
-  'Geen ander deck open. Open eerst een ander tabblad.': 'Nenhum outro deck está aberto. Abra primeiro outro separador.',
+  'Geen ander deck open. Open eerst een ander tabblad.':
+      'Nenhum outro deck está aberto. Abra primeiro outro separador.',
   '1 slide kopiëren naar…': 'Copiar 1 slide para…',
   'slides kopiëren naar…': 'slides a copiar para…',
   'slide(s) gekopieerd naar': 'slide(s) copiado(s) para',
@@ -431,11 +498,13 @@ const _dutchSourcePt = {
   'Tips': 'Sugestões',
   'Waarschuwingen': 'Avisos',
   'Fouten': 'Erros',
-  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Sugestão: adicione texto alternativo / legenda para acessibilidade',
+  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Sugestão: adicione texto alternativo / legenda para acessibilidade',
   'Zoek in slides…': 'Procurar nos slides…',
   'Geen slides met': 'Nenhum slide com',
   'SLIDES': 'SLIDES',
-  'Geen afbeelding op het klembord gevonden.': 'Nenhuma imagem encontrada na área de transferência.',
+  'Geen afbeelding op het klembord gevonden.':
+      'Nenhuma imagem encontrada na área de transferência.',
   'Afbeelding plakken': 'Colar imagem',
   'Slide toevoegen': 'Adicionar slide',
   'Slide plakken': 'Colar slide',
@@ -446,60 +515,84 @@ const _dutchSourcePt = {
   'Kopiëren naar ander deck': 'Copiar para outro deck',
   'Weer tonen': 'Mostrar novamente',
   'Selectie opheffen': 'Limpar seleção',
-  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.': 'Aceito a licença EUPL 1.2 e li quais os dados que o OciDeck guarda.',
-  'Je keuze wordt de standaardtaal van de app.': 'A sua escolha torna-se o idioma predefinido da aplicação.',
+  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
+      'Aceito a licença EUPL 1.2 e li quais os dados que o OciDeck guarda.',
+  'Je keuze wordt de standaardtaal van de app.':
+      'A sua escolha torna-se o idioma predefinido da aplicação.',
   'Lees de volledige licentie': 'Ler a licença completa',
-  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.': 'O OciDeck é software livre sob a licença EUPL 1.2. Antes de começar, pedimos que aceite a licença. Em baixo pode também ler quais os dados que o OciDeck guarda neste dispositivo e quando algo sai do seu dispositivo.',
-  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.': 'O OciDeck não recolhe estatísticas nem envia nada por iniciativa própria. Por predefinição, tudo permanece neste dispositivo. Os dados só saem deste dispositivo quando você o escolhe:\n\n•  Nextcloud/WebDAV: ao ligar-se a um servidor, o seu nome de utilizador e palavra-passe são guardados (a palavra-passe em segurança no porta-chaves do sistema) e as apresentações que abre ou guarda são enviadas para esse servidor.\n•  Abrir por URL: o OciDeck obtém o ficheiro a partir do endereço que introduz.\n•  Multimédia online (desativado por predefinição): quando ativado, o OciDeck carrega imagens e vídeos a partir dos endereços nos seus slides.\n•  Ligações externas (como a licença online) abrem no seu navegador.',
-  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.': 'O OciDeck é fornecido sob a European Union Public Licence v1.2. Ao concordar, aceita esta licença. Pode usar, copiar, modificar e distribuir o OciDeck nos termos da EUPL 1.2.',
-  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.': 'Para funcionar e não perder o seu trabalho, o OciDeck guarda dados localmente neste dispositivo:\n\n•  As suas definições e preferências (idioma, pastas, perfis de estilo e de apresentação, ficheiros recentes).\n•  Os seus materiais de apresentação: as apresentações que guarda, cópias de recuperação automática e anexos como descrições de imagens.\n•  Esta escolha de consentimento.\n\nPode remover isto eliminando os ficheiros ou repondo as definições.',
-  'Volledige licentie online (23 officiële taalversies)': 'Licença completa online (23 versões oficiais em vários idiomas)',
-  'Wat OciDeck op dit apparaat bewaart': 'O que o OciDeck guarda neste dispositivo',
+  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
+      'O OciDeck é software livre sob a licença EUPL 1.2. Antes de começar, pedimos que aceite a licença. Em baixo pode também ler quais os dados que o OciDeck guarda neste dispositivo e quando algo sai do seu dispositivo.',
+  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.':
+      'O OciDeck não recolhe estatísticas nem envia nada por iniciativa própria. Por predefinição, tudo permanece neste dispositivo. Os dados só saem deste dispositivo quando você o escolhe:\n\n•  Nextcloud/WebDAV: ao ligar-se a um servidor, o seu nome de utilizador e palavra-passe são guardados (a palavra-passe em segurança no porta-chaves do sistema) e as apresentações que abre ou guarda são enviadas para esse servidor.\n•  Abrir por URL: o OciDeck obtém o ficheiro a partir do endereço que introduz.\n•  Multimédia online (desativado por predefinição): quando ativado, o OciDeck carrega imagens e vídeos a partir dos endereços nos seus slides.\n•  Ligações externas (como a licença online) abrem no seu navegador.',
+  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.':
+      'O OciDeck é fornecido sob a European Union Public Licence v1.2. Ao concordar, aceita esta licença. Pode usar, copiar, modificar e distribuir o OciDeck nos termos da EUPL 1.2.',
+  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.':
+      'Para funcionar e não perder o seu trabalho, o OciDeck guarda dados localmente neste dispositivo:\n\n•  As suas definições e preferências (idioma, pastas, perfis de estilo e de apresentação, ficheiros recentes).\n•  Os seus materiais de apresentação: as apresentações que guarda, cópias de recuperação automática e anexos como descrições de imagens.\n•  Esta escolha de consentimento.\n\nPode remover isto eliminando os ficheiros ou repondo as definições.',
+  'Volledige licentie online (23 officiële taalversies)':
+      'Licença completa online (23 versões oficiais em vários idiomas)',
+  'Wat OciDeck op dit apparaat bewaart':
+      'O que o OciDeck guarda neste dispositivo',
   'Wat je apparaat verlaat': 'O que sai do seu dispositivo',
-  'Vul server-URL en gebruikersnaam in': 'Introduza o URL do servidor e o nome de utilizador',
+  'Vul server-URL en gebruikersnaam in':
+      'Introduza o URL do servidor e o nome de utilizador',
   'Verbinding mislukt': 'Falha na ligação',
-  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord': 'Falha ao iniciar sessão — verifique o nome de utilizador e a palavra-passe',
-  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.': 'O servidor está num endereço privado. Marque "Servidor interno fidedigno" para permitir a ligação.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord':
+      'Falha ao iniciar sessão — verifique o nome de utilizador e a palavra-passe',
+  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.':
+      'O servidor está num endereço privado. Marque "Servidor interno fidedigno" para permitir a ligação.',
   'Map niet gevonden op de server': 'Pasta não encontrada no servidor',
   'Ongeldige server-URL': 'URL do servidor inválido',
-  'Het antwoord van de server was te groot': 'A resposta do servidor era demasiado grande',
+  'Het antwoord van de server was te groot':
+      'A resposta do servidor era demasiado grande',
   'Nextcloud': 'Nextcloud',
   'Nextcloud-bron (WebDAV)': 'Fonte Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.': 'Abra e guarde apresentações numa pasta no seu Nextcloud. A palavra-passe é guardada encriptada no porta-chaves, não junto das restantes definições.',
+  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Abra e guarde apresentações numa pasta no seu Nextcloud. A palavra-passe é guardada encriptada no porta-chaves, não junto das restantes definições.',
   'Server-URL': 'URL do servidor',
   'Gebruikersnaam': 'Nome de utilizador',
   'App-wachtwoord': 'Palavra-passe da aplicação',
-  'Maak hiervoor een app-wachtwoord aan in Nextcloud': 'Crie uma palavra-passe de aplicação para isto no Nextcloud',
+  'Maak hiervoor een app-wachtwoord aan in Nextcloud':
+      'Crie uma palavra-passe de aplicação para isto no Nextcloud',
   'Submap (optioneel)': 'Subpasta (opcional)',
   'Vertrouwde interne server': 'Servidor interno fidedigno',
-  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.': 'Necessário quando o servidor corre numa rede privada ou doméstica (LAN). Permita ligações apenas a servidores em que confie.',
+  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Necessário quando o servidor corre numa rede privada ou doméstica (LAN). Permita ligações apenas a servidores em que confie.',
   'Verbinding testen': 'Testar ligação',
   'Verbinding gelukt': 'Ligação bem-sucedida',
-  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.': 'As alterações são guardadas quando clica em Guardar.',
+  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
+      'As alterações são guardadas quando clica em Guardar.',
   'Afbeelding kiezen op Nextcloud': 'Escolher imagem no Nextcloud',
   'Openen vanaf Nextcloud': 'Abrir a partir do Nextcloud',
   'Vernieuwen': 'Atualizar',
   'Deze map is leeg': 'Esta pasta está vazia',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.': 'Nenhum servidor Nextcloud configurado. Configure um em Definições → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.': 'Não foi possível carregar a pasta. Verifique a sua ligação e definições.',
+  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
+      'Nenhum servidor Nextcloud configurado. Configure um em Definições → Nextcloud.',
+  'Kon de map niet laden. Controleer je verbinding en instellingen.':
+      'Não foi possível carregar a pasta. Verifique a sua ligação e definições.',
   'Kon dit bestand niet openen.': 'Não foi possível abrir este ficheiro.',
-  'Dit is geen Marp/OciDeck-presentatie.': 'Isto não é uma apresentação Marp/OciDeck.',
+  'Dit is geen Marp/OciDeck-presentatie.':
+      'Isto não é uma apresentação Marp/OciDeck.',
   'Downloaden mislukt:': 'Falha na transferência:',
   'Opgeslagen op Nextcloud:': 'Guardado no Nextcloud:',
   'Opslaan mislukt:': 'Falha ao guardar:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.': 'Configure primeiro um servidor Nextcloud em Definições → Nextcloud.',
+  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
+      'Configure primeiro um servidor Nextcloud em Definições → Nextcloud.',
   'Opslaan naar Nextcloud': 'Guardar no Nextcloud',
   'Doelpad (zonder extensie)': 'Caminho de destino (sem extensão)',
-  'Als .ocideck-pakket (één bestand, met assets)': 'Como pacote .ocideck (um ficheiro, com recursos)',
+  'Als .ocideck-pakket (één bestand, met assets)':
+      'Como pacote .ocideck (um ficheiro, com recursos)',
   'Als losse .md plus afbeeldingen': 'Como um .md separado mais imagens',
   'Opslaan': 'Guardar',
   'Presenteren': 'A apresentar',
   'Tijden-overzicht tonen na afloop': 'Mostrar resumo de tempos no final',
-  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.': 'O tempo por slide é sempre medido; isto apenas determina se o resumo aparece após esta apresentação.',
+  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
+      'O tempo por slide é sempre medido; isto apenas determina se o resumo aparece após esta apresentação.',
   'Oefenoverzicht tonen na afloop': 'Mostrar resumo do ensaio no final',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.': 'Após uma apresentação, mostrar o resumo do tempo gasto por slide. O tempo é sempre medido; isto apenas determina se o ecrã aparece.',
+  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+      'Após uma apresentação, mostrar o resumo do tempo gasto por slide. O tempo é sempre medido; isto apenas determina se o ecrã aparece.',
   'Onveilige presentatie geblokkeerd': 'Apresentação insegura bloqueada',
-  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.': 'Esta apresentação não foi aberta. O ficheiro contém conteúdo que pode executar código, e uma apresentação deve conter apenas dados — nada executável.',
+  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Esta apresentação não foi aberta. O ficheiro contém conteúdo que pode executar código, e uma apresentação deve conter apenas dados — nada executável.',
   'Gevonden:': 'Encontrado:',
   'Regel': 'Linha',
   'Scriptuitvoering': 'Execução de script',
@@ -521,46 +614,67 @@ const _dutchSourcePt = {
   'Pootje': 'Pata',
   'In tweeën splitsen': 'Dividir em dois',
   'Uitgevoerde controles': 'Verificações efetuadas',
-  'Contrast en leesbaarheid van tekstkleuren': 'Contraste e legibilidade das cores do texto',
-  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media': 'Textos alternativos e legendas de imagens, gráficos e multimédia',
-  'Aanwezigheid van gekoppelde mediabestanden': 'Presença de ficheiros de multimédia ligados',
-  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code': 'Densidade de texto: marcadores, palavras, citações, tabelas e código',
-  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).': 'Tema, slides, rodapé, checklist e títulos sobre imagens, verificados face às WCAG AA (4,5:1 para texto, 3:1 para texto grande).',
-  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.': 'Cada imagem, gráfico, vídeo e áudio precisa de uma descrição para leitores de ecrã e folhetos.',
-  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.': 'As referências a imagens, vídeo e áudio são verificadas quanto a um ficheiro existente no projeto.',
-  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.': 'Número e comprimento de marcadores, palavras, aninhamento, equilíbrio das colunas e a densidade de citações, títulos, tabelas e código, para que tudo caiba de forma legível.',
-  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.': 'Texto de corpo com contraste inferior a {crit}:1 conta como erro; acima disso, até à norma AA, como aviso.',
-  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.': 'Sem limiar: é obrigatória uma descrição não vazia.',
-  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.': 'Sem limiar: o ficheiro ligado deve existir dentro da pasta do projeto.',
-  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.': 'Aviso acima de {b1} marcadores (1 coluna), {bcl} (checklist) ou {b2} (2 colunas); crítico acima de {bc1} ou {bc2}. Palavras acima de {w1}/{w2}, em média acima de {avg} por marcador. Citação acima de {q} caracteres, título acima de {t} caracteres. Aninhamento mais profundo do que o nível {lvl}. Texto que tem de encolher abaixo de {warn}% avisa, abaixo de {crit}% é crítico.',
+  'Contrast en leesbaarheid van tekstkleuren':
+      'Contraste e legibilidade das cores do texto',
+  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+      'Textos alternativos e legendas de imagens, gráficos e multimédia',
+  'Aanwezigheid van gekoppelde mediabestanden':
+      'Presença de ficheiros de multimédia ligados',
+  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+      'Densidade de texto: marcadores, palavras, citações, tabelas e código',
+  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+      'Tema, slides, rodapé, checklist e títulos sobre imagens, verificados face às WCAG AA (4,5:1 para texto, 3:1 para texto grande).',
+  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+      'Cada imagem, gráfico, vídeo e áudio precisa de uma descrição para leitores de ecrã e folhetos.',
+  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+      'As referências a imagens, vídeo e áudio são verificadas quanto a um ficheiro existente no projeto.',
+  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+      'Número e comprimento de marcadores, palavras, aninhamento, equilíbrio das colunas e a densidade de citações, títulos, tabelas e código, para que tudo caiba de forma legível.',
+  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+      'Texto de corpo com contraste inferior a {crit}:1 conta como erro; acima disso, até à norma AA, como aviso.',
+  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+      'Sem limiar: é obrigatória uma descrição não vazia.',
+  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+      'Sem limiar: o ficheiro ligado deve existir dentro da pasta do projeto.',
+  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+      'Aviso acima de {b1} marcadores (1 coluna), {bcl} (checklist) ou {b2} (2 colunas); crítico acima de {bc1} ou {bc2}. Palavras acima de {w1}/{w2}, em média acima de {avg} por marcador. Citação acima de {q} caracteres, título acima de {t} caracteres. Aninhamento mais profundo do que o nível {lvl}. Texto que tem de encolher abaixo de {warn}% avisa, abaixo de {crit}% é crítico.',
   'Zoek op deze computer': 'Procurar neste computador',
-  'Presentaties zoeken op deze computer': 'Encontrar apresentações neste computador',
+  'Presentaties zoeken op deze computer':
+      'Encontrar apresentações neste computador',
   'Zoek op titel, pad of thema…': 'Procurar por título, caminho ou tema…',
   'Bekende mappen worden doorzocht…': 'A pesquisar nas pastas conhecidas…',
   'gevonden': 'encontrada(s)',
   'presentatie(s) gevonden': 'apresentação(ões) encontrada(s)',
-  'Geen Marp-presentaties gevonden in de bekende mappen.': 'Nenhuma apresentação Marp encontrada nas pastas conhecidas.',
+  'Geen Marp-presentaties gevonden in de bekende mappen.':
+      'Nenhuma apresentação Marp encontrada nas pastas conhecidas.',
   'Geen thema': 'Sem tema',
   'Kopieer syntaxproblemen': 'Copiar problemas de sintaxe',
-  'Syntaxproblemen gekopieerd naar klembord.': 'Problemas de sintaxe copiados para a área de transferência.',
+  'Syntaxproblemen gekopieerd naar klembord.':
+      'Problemas de sintaxe copiados para a área de transferência.',
   'Online media': 'Multimédia online',
   'Online media staat uit': 'Multimédia online está desativada',
   'Online media toestaan': 'Permitir multimédia online',
-  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.': 'Permita o carregamento em direto de imagens e vídeos através de um URL e de incorporações do YouTube/Vimeo. Desativado por predefinição para a sua privacidade e segurança.',
-  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)': 'Caminho do ficheiro ou URL (YouTube, Vimeo, .mp4 …)',
+  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+      'Permita o carregamento em direto de imagens e vídeos através de um URL e de incorporações do YouTube/Vimeo. Desativado por predefinição para a sua privacidade e segurança.',
+  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+      'Caminho do ficheiro ou URL (YouTube, Vimeo, .mp4 …)',
   'Bestand kiezen': 'Escolher ficheiro',
-  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.': 'Reproduza o segmento deste slide na pré-visualização e corte no ponto onde quer dividir: a segunda parte vai para um novo slide.',
+  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+      'Reproduza o segmento deste slide na pré-visualização e corte no ponto onde quer dividir: a segunda parte vai para um novo slide.',
   'Begin (sec)': 'Início (seg)',
   'Einde (sec)': 'Fim (seg)',
   'einde': 'fim',
-  'Knip de video op het huidige afspeelpunt': 'Cortar o vídeo no ponto de reprodução atual',
-  'Speel de video eerst af in het voorbeeld': 'Reproduza primeiro o vídeo na pré-visualização',
+  'Knip de video op het huidige afspeelpunt':
+      'Cortar o vídeo no ponto de reprodução atual',
+  'Speel de video eerst af in het voorbeeld':
+      'Reproduza primeiro o vídeo na pré-visualização',
   'Knip hier': 'Cortar aqui',
   'Online': 'Online',
   'Lokaal bestand': 'Ficheiro local',
   'Geen video': 'Sem vídeo',
   'Vraag (meerkeuze)': 'Pergunta (escolha múltipla)',
-  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding': 'O texto do título tem pouco contraste com a imagem de fundo',
+  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+      'O texto do título tem pouco contraste com a imagem de fundo',
   'Herstel': 'Corrigir',
   'Tijdlijn': 'Cronologia',
   'Indeling': 'Disposição',
@@ -585,19 +699,24 @@ const _dutchSourcePt = {
   'Vraag': 'Pergunta',
   'Wat wil je vragen?': 'O que quer perguntar?',
   'Antwoorden': 'Respostas',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.': 'Marque as respostas corretas. Sem limite; ao apresentar, é mostrada aleatoriamente uma correta e as restantes erradas.',
+  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Marque as respostas corretas. Sem limite; ao apresentar, é mostrada aleatoriamente uma correta e as restantes erradas.',
   'Antwoord': 'Resposta',
   'Antwoord toevoegen': 'Adicionar resposta',
   'Goed antwoord': 'Resposta correta',
-  'Geef minstens één goed én één fout antwoord op.': 'Indique pelo menos uma resposta correta e uma errada.',
+  'Geef minstens één goed én één fout antwoord op.':
+      'Indique pelo menos uma resposta correta e uma errada.',
   'Weergave': 'Apresentação',
   'Aantal getoonde opties': 'Número de opções mostradas',
-  'Maximale antwoordtijd in seconden (0 = geen limiet)': 'Tempo máximo de resposta em segundos (0 = sem limite)',
+  'Maximale antwoordtijd in seconden (0 = geen limiet)':
+      'Tempo máximo de resposta em segundos (0 = sem limite)',
   'Bij een fout antwoord': 'Numa resposta errada',
   'Opnieuw proberen': 'Tentar novamente',
   'Doorgaan toestaan': 'Permitir continuar',
-  'Fout = niet doorgaan; de vraag moet opnieuw.': 'Errada = não continuar; a pergunta tem de ser repetida.',
-  'Fout = wel doorgaan, maar niet opnieuw doen.': 'Errada = pode continuar, mas sem repetir.',
+  'Fout = niet doorgaan; de vraag moet opnieuw.':
+      'Errada = não continuar; a pergunta tem de ser repetida.',
+  'Fout = wel doorgaan, maar niet opnieuw doen.':
+      'Errada = pode continuar, mas sem repetir.',
   'Afbeelding (optioneel)': 'Imagem (opcional)',
   'Breedte afbeelding': 'Largura da imagem',
   'Goed!': 'Certo!',
@@ -612,46 +731,58 @@ const _dutchSourcePt = {
   'Juist / Onjuist': 'Verdadeiro / Falso',
   'Meerdere juiste antwoorden': 'Várias respostas corretas',
   'Stelling': 'Afirmação',
-  'Formuleer een stelling die juist of onjuist is': 'Formule uma afirmação verdadeira ou falsa',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.': 'Marque todas as respostas corretas. Ao apresentar, é mostrado um conjunto aleatório com pelo menos uma correta e uma errada.',
+  'Formuleer een stelling die juist of onjuist is':
+      'Formule uma afirmação verdadeira ou falsa',
+  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+      'Marque todas as respostas corretas. Ao apresentar, é mostrado um conjunto aleatório com pelo menos uma correta e uma errada.',
   'Juist': 'Verdadeiro',
   'Onjuist': 'Falso',
-  'De stelling hierboven is juist of onjuist; kies welke.': 'A afirmação acima é verdadeira ou falsa; escolha qual.',
+  'De stelling hierboven is juist of onjuist; kies welke.':
+      'A afirmação acima é verdadeira ou falsa; escolha qual.',
   'Selecteer alle juiste antwoorden': 'Selecione todas as respostas corretas',
   'Bevestig': 'Confirmar',
   'Het juiste antwoord': 'A resposta correta',
-  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.': 'A imagem é mostrada em ecrã inteiro como fundo. Use a desfocagem quando o título precisar de mais calma ou contraste.',
+  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+      'A imagem é mostrada em ecrã inteiro como fundo. Use a desfocagem quando o título precisar de mais calma ou contraste.',
   'Cockpit-kleurschema': 'Esquema de cores do cockpit',
-  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.': 'As cores de estado dos medidores do cockpit. Crie variantes com nome; o esquema escolhido aplica-se a todos os slides de cockpit.',
+  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+      'As cores de estado dos medidores do cockpit. Crie variantes com nome; o esquema escolhido aplica-se a todos os slides de cockpit.',
   'Standaard': 'Predefinição',
   'Standaardkleuren gebruiken': 'Usar as cores predefinidas',
   'Kleurschema verwijderen': 'Eliminar esquema de cores',
   'Schemanaam': 'Nome do esquema',
-  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.': 'Este é o esquema incorporado. Faça uma cópia para ajustar as cores.',
+  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+      'Este é o esquema incorporado. Faça uma cópia para ajustar as cores.',
   'Goed': 'Bom',
   'Waarschuwing': 'Aviso',
   'Kritiek': 'Crítico',
   'Te laag (koud)': 'Demasiado baixo (frio)',
   'Lucht (horizon)': 'Céu (horizonte)',
   'Grond (horizon)': 'Solo (horizonte)',
-  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.': 'As cores de estado seguem o esquema de cores do cockpit; ajuste-o ou crie variantes em Definições → Cockpit.',
+  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+      'As cores de estado seguem o esquema de cores do cockpit; ajuste-o ou crie variantes em Definições → Cockpit.',
   'Veel bullets op deze slide': 'Muitos marcadores neste slide',
   'bullets': 'marcadores',
   'Overweeg de inhoud te splitsen.': 'Considere dividir o conteúdo.',
   'Erg veel bullets op deze slide': 'Demasiados marcadores neste slide',
-  'Splits deze inhoud over meerdere slides.': 'Divida este conteúdo por vários slides.',
+  'Splits deze inhoud over meerdere slides.':
+      'Divida este conteúdo por vários slides.',
   'Veel woorden in bullets': 'Muitas palavras nos marcadores',
   'woorden': 'palavras',
-  'Maak bullets korter of splits de slide.': 'Encurte os marcadores ou divida o slide.',
+  'Maak bullets korter of splits de slide.':
+      'Encurte os marcadores ou divida o slide.',
   'Erg veel woorden in bullets': 'Demasiadas palavras nos marcadores',
   'Gemiddeld lange bullets': 'Marcadores longos em média',
   'woorden per bullet': 'palavras por tópico',
   'Maak elke bullet kernachtiger.': 'Torne cada tópico mais conciso.',
-  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.': 'Tópico com várias frases encontrado. Torne os tópicos mais concisos ou divida o conteúdo.',
+  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+      'Tópico com várias frases encontrado. Torne os tópicos mais concisos ou divida o conteúdo.',
   'Diepe bulletniveaus gevonden': 'Encontrados níveis de tópicos profundos',
   'niveau': 'nível',
-  'Beperk nesting voor betere leesbaarheid.': 'Limite o aninhamento para melhor legibilidade.',
-  'Twee kolommen zijn sterk uit balans': 'As duas colunas estão muito desequilibradas',
+  'Beperk nesting voor betere leesbaarheid.':
+      'Limite o aninhamento para melhor legibilidade.',
+  'Twee kolommen zijn sterk uit balans':
+      'As duas colunas estão muito desequilibradas',
   'tegenover': 'contra',
   'Verdeel of splits de inhoud.': 'Redistribua ou divida o conteúdo.',
   'Slidetitel': 'Título do diapositivo',
@@ -660,8 +791,10 @@ const _dutchSourcePt = {
   'Animeren bij binnenkomst': 'Animar à entrada',
   'Activatieduur': 'Duração de ativação',
   'Splits slide': 'Dividir diapositivo',
-  'Doornummeren vanaf vorige slide': 'Continuar a numeração do diapositivo anterior',
-  'Begin de nummering waar de vorige slide ophield.': 'Iniciar a numeração onde o diapositivo anterior terminou.',
+  'Doornummeren vanaf vorige slide':
+      'Continuar a numeração do diapositivo anterior',
+  'Begin de nummering waar de vorige slide ophield.':
+      'Iniciar a numeração onde o diapositivo anterior terminou.',
   'Volg thema-animatieduur': 'Seguir a duração de animação do tema',
   'Animatie bij openen': 'Animar à entrada',
   'Meter': 'Instrumento',
@@ -689,7 +822,8 @@ const _dutchSourcePt = {
   'Koers': 'Rumo',
   'Ander profiel kiezen': 'Escolher outro perfil',
   'Cockpit': 'Painel do cockpit',
-  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Tempo-alvo para a contagem decrescente no apresentador. Ajuste-o durante a apresentação com a tecla K.',
+  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Tempo-alvo para a contagem decrescente no apresentador. Ajuste-o durante a apresentação com a tecla K.',
   'Logo en footer': 'Logótipo e rodapé',
   'Pagina': 'Página',
   'Presentatiestijl': 'Estilo de apresentação',
@@ -706,10 +840,12 @@ const _dutchSourcePt = {
   'Doeltijd': 'Tempo-alvo',
   'Doeltijd (aftellen)': 'Tempo-alvo (contagem decrescente)',
   'Geen aftelling': 'Sem contagem decrescente',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Tempo-alvo predefinido para a contagem decrescente no apresentador. Ajuste-o durante a apresentação com a tecla K.',
+  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Tempo-alvo predefinido para a contagem decrescente no apresentador. Ajuste-o durante a apresentação com a tecla K.',
   'uit': 'desligado',
   'Doeltijd / aftellen (K)': 'Alvo / contagem decrescente (K)',
-  'Doeltijd / aftellen instellen (MMSS)': 'Definir alvo / contagem decrescente (MMSS)',
+  'Doeltijd / aftellen instellen (MMSS)':
+      'Definir alvo / contagem decrescente (MMSS)',
   'Tijd & oefenrun resetten': 'Repor tempo e ensaio',
   'Resterend': 'Restante',
   'Over de tijd': 'Fora do tempo',
@@ -719,29 +855,37 @@ const _dutchSourcePt = {
   'Totaal': 'Total',
   'Totale tijd': 'Tempo total',
   'Geen slides gemeten.': 'Nenhum diapositivo medido.',
-  'Tijden gekopieerd naar klembord.': 'Tempos copiados para a área de transferência.',
+  'Tijden gekopieerd naar klembord.':
+      'Tempos copiados para a área de transferência.',
   'Kopieer': 'Copiar',
   'Sluiten': 'Fechar',
   'Tekstgrootte van de interface': 'Tamanho do texto da interface',
-  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.': 'Amplia todo o texto do editor até 200%. Os diapositivos em si não são afetados.',
+  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+      'Amplia todo o texto do editor até 200%. Os diapositivos em si não são afetados.',
   'Breedte van het slidepaneel': 'Largura do painel de diapositivos',
-  'Pijltjestoetsen passen de breedte aan': 'As teclas de seta ajustam a largura',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.': 'Sugestão: cole uma tabela da sua folha de cálculo numa célula com Cmd/Ctrl+V para preencher a tabela inteira.',
+  'Pijltjestoetsen passen de breedte aan':
+      'As teclas de seta ajustam a largura',
+  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+      'Sugestão: cole uma tabela da sua folha de cálculo numa célula com Cmd/Ctrl+V para preencher a tabela inteira.',
   'Annuleren': 'Cancelar',
   'Checklist': 'Lista de tarefas',
   'Voortgangsgrafiek tonen': 'Mostrar gráfico de progresso',
-  'Toont afgevinkt en niet afgevinkt als percentages.': 'Mostra os itens assinalados e não assinalados em percentagem.',
+  'Toont afgevinkt en niet afgevinkt als percentages.':
+      'Mostra os itens assinalados e não assinalados em percentagem.',
   'Afgevinkt': 'Assinalado',
   'Niet afgevinkt': 'Não assinalado',
-  'Er zijn geen aangevinkte checklist-items om te legen.': 'Não há itens da lista assinalados para limpar.',
+  'Er zijn geen aangevinkte checklist-items om te legen.':
+      'Não há itens da lista assinalados para limpar.',
   'Alle checkboxen legen?': 'Limpar todas as caixas de verificação?',
   'Hiermee worden alle': 'Isto irá desmarcar todos os',
-  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.': 'itens assinalados da lista em toda a apresentação. Pode anular esta ação com Ctrl/Cmd+Z.',
+  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+      'itens assinalados da lista em toda a apresentação. Pode anular esta ação com Ctrl/Cmd+Z.',
   'Alles legen': 'Limpar tudo',
   'checklist-items uitgevinkt.': 'itens da lista desmarcados.',
   'Alle checkboxen legen': 'Limpar todas as caixas de verificação',
   'Afgevinkte tekst doorhalen': 'Riscar o texto assinalado',
-  'Toont een streep door voltooide checklistitems.': 'Mostra os itens concluídos da lista com um risco.',
+  'Toont een streep door voltooide checklistitems.':
+      'Mostra os itens concluídos da lista com um risco.',
   'Na media automatisch doorgaan': 'Avançar automaticamente após multimédia',
   'Opsomming': 'Tópicos',
   'Nummering': 'Numeração',
@@ -751,11 +895,13 @@ const _dutchSourcePt = {
   'Omhoog': 'Mover para cima',
   'Omlaag': 'Mover para baixo',
   'Niet toevoegen': 'Não adicionar',
-  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.': 'Estes diapositivos usam os mesmos dados, cores e título. Use as setas para escolher a ordem após o diapositivo atual.',
+  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+      'Estes diapositivos usam os mesmos dados, cores e título. Use as setas para escolher a ordem após o diapositivo atual.',
   'Afbeelding': 'Imagem',
   'Broncode': 'Código-fonte',
   'Bullet': 'Tópico',
-  'Plak of typ hier je broncode...': 'Cole ou escreva aqui o seu código-fonte...',
+  'Plak of typ hier je broncode...':
+      'Cole ou escreva aqui o seu código-fonte...',
   'Programmeertaal': 'Linguagem de programação',
   'TLP van deze slide': 'TLP deste diapositivo',
   'Wis annotaties (C)': 'Limpar anotações (C)',
@@ -769,10 +915,12 @@ const _dutchSourcePt = {
   'Cirkel': 'Circular',
   'Spider': 'Radar',
   'CSV importeren': 'Importar CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)': 'Dados (CSV: primeira linha = nomes das séries, primeira coluna = etiquetas)',
+  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+      'Dados (CSV: primeira linha = nomes das séries, primeira coluna = etiquetas)',
   'Gekoppeld aan': 'Ligado a',
   'Ontkoppelen': 'Desassociar',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?': 'Guardar os dados no diapositivo ou mantê-los como ficheiro CSV separado junto à apresentação?',
+  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+      'Guardar os dados no diapositivo ou mantê-los como ficheiro CSV separado junto à apresentação?',
   'In de slide': 'No diapositivo',
   'Als CSV-bestand': 'Como ficheiro CSV',
   'Geen grafiekgegevens': 'Sem dados de gráfico',
@@ -785,9 +933,12 @@ const _dutchSourcePt = {
   'Sorteren': 'Ordenar',
   'Oplopend sorteren': 'Ordenar ascendente',
   'Aflopend sorteren': 'Ordenar descendente',
-  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.': 'Num gráfico circular são mostradas no máximo as duas primeiras séries; as etiquetas formam os segmentos.',
-  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.': 'Um gráfico radar precisa de pelo menos três etiquetas (eixos); cada série forma uma área.',
-  'Een spider-diagram heeft minstens drie labels nodig': 'Um gráfico radar precisa de pelo menos três etiquetas',
+  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+      'Num gráfico circular são mostradas no máximo as duas primeiras séries; as etiquetas formam os segmentos.',
+  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+      'Um gráfico radar precisa de pelo menos três etiquetas (eixos); cada série forma uma área.',
+  'Een spider-diagram heeft minstens drie labels nodig':
+      'Um gráfico radar precisa de pelo menos três etiquetas',
   'Minimumlijn (optioneel)': 'Linha mínima (opcional)',
   'Maximumlijn (optioneel)': 'Linha máxima (opcional)',
   'Schaalminimum (optioneel)': 'Escala mínima (opcional)',
@@ -796,9 +947,11 @@ const _dutchSourcePt = {
   'Broncode achtergrond': 'Fundo do código-fonte',
   'Broncode tekst': 'Texto do código-fonte',
   'Syntaxkleuring': 'Coloração de sintaxe',
-  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).': 'Desligado = tudo numa só cor (por ex. verde sobre preto para um ecrã CRT).',
+  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+      'Desligado = tudo numa só cor (por ex. verde sobre preto para um ecrã CRT).',
   'Eigen kleur (hex)': 'Cor personalizada (hex)',
-  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.': 'Por exemplo #33FF33 para um ecrã verde CRT.',
+  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+      'Por exemplo #33FF33 para um ecrã verde CRT.',
   'Onderdeel van stijlprofiel ': 'Parte do perfil de estilo ',
   'Broncode lettertype': 'Tipo de letra do código-fonte',
   'Kop (optioneel)': 'Cabeçalho (opcional)',
@@ -806,38 +959,49 @@ const _dutchSourcePt = {
   'Subkop': 'Subcabeçalho',
   'Systeem (monospace)': 'Sistema (monoespaçado)',
   'Platte tekst': 'Texto simples',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.': 'O HTML abre em qualquer navegador sem internet e apresenta blocos de código, matemática e diagramas Mermaid.',
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+      'O HTML abre em qualquer navegador sem internet e apresenta blocos de código, matemática e diagramas Mermaid.',
   'Laatste slide': 'Diapositivo final',
   'Logo px': 'Logótipo px',
   'Markdown voor laatste slide': 'Markdown do diapositivo final',
   'PREVIEW': 'PRÉ-VISUALIZAÇÃO',
   'Slides gerenderd.': 'Diapositivos apresentados.',
   'Standaard laatste slide gebruiken': 'Usar o diapositivo final predefinido',
-  'Wordt automatisch toegevoegd bij presenteren en exporteren.': 'Adicionado automaticamente ao apresentar e exportar.',
+  'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+      'Adicionado automaticamente ao apresentar e exportar.',
   'gerenderd.': 'apresentados.',
   'renderen…': 'a apresentar…',
   'voorbereiden…': 'a preparar…',
   'Duplicaten opruimen': 'Limpar duplicados',
-  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën': 'Encontrar imagens byte-idênticas (md5), unir etiquetas e notas e remover as cópias',
-  'Geen dubbele afbeeldingen gevonden.': 'Não foram encontradas imagens duplicadas.',
+  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+      'Encontrar imagens byte-idênticas (md5), unir etiquetas e notas e remover as cópias',
+  'Geen dubbele afbeeldingen gevonden.':
+      'Não foram encontradas imagens duplicadas.',
   'Dubbele afbeeldingen opruimen?': 'Limpar imagens duplicadas?',
-  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.': 'É mantido um ficheiro por grupo. As etiquetas e notas são unidas, e os diapositivos que usam uma cópia passam a apontar para o ficheiro mantido — incluindo apresentações que não estão abertas neste momento.',
+  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+      'É mantido um ficheiro por grupo. As etiquetas e notas são unidas, e os diapositivos que usam uma cópia passam a apontar para o ficheiro mantido — incluindo apresentações que não estão abertas neste momento.',
   'Opruimen': 'Limpar',
   '1 presentatiebestand bijgewerkt.': '1 ficheiro de apresentação atualizado.',
   'presentatiebestanden bijgewerkt.': 'ficheiros de apresentação atualizados.',
   'niet geopend': 'não aberto',
   '1 dubbele afbeelding verwijderd.': '1 imagem duplicada removida.',
   'dubbele afbeeldingen verwijderd.': 'imagens duplicadas removidas.',
-  'Alleen afbeeldingen zonder tags tonen': 'Mostrar apenas imagens sem etiquetas',
+  'Alleen afbeeldingen zonder tags tonen':
+      'Mostrar apenas imagens sem etiquetas',
   'Alle afbeeldingen hebben tags.': 'Todas as imagens têm etiquetas.',
-  'Zet het filter uit om alles weer te zien.': 'Desligue o filtro para ver tudo novamente.',
+  'Zet het filter uit om alles weer te zien.':
+      'Desligue o filtro para ver tudo novamente.',
   'Welkom bij OciDeck': 'Bem-vindo ao OciDeck',
   'Privacy en gebruik': 'Privacidade e utilização',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'O OciDeck é uma aplicação de ambiente de trabalho local. As suas apresentações e dados são armazenados exclusivamente no seu computador.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'A aplicação não recolhe dados pessoais, nem estatísticas, nem dados de utilização. A sua privacidade é a nossa prioridade.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Todos os dados que introduzir no OciDeck permanecem no seu sistema local e não são enviados para servidores externos.',
+  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
+      'O OciDeck é uma aplicação de ambiente de trabalho local. As suas apresentações e dados são armazenados exclusivamente no seu computador.',
+  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
+      'A aplicação não recolhe dados pessoais, nem estatísticas, nem dados de utilização. A sua privacidade é a nossa prioridade.',
+  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
+      'Todos os dados que introduzir no OciDeck permanecem no seu sistema local e não são enviados para servidores externos.',
   'Licentie (EUPL 1.2)': 'Licença (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'Ao clicar em "Concordar", aceita estes termos e consente a utilização do OciDeck.',
+  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
+      'Ao clicar em "Concordar", aceita estes termos e consente a utilização do OciDeck.',
   'Volledige licentie online': 'Licença completa online',
   'Akkoord gaan': 'Concordar',
   'Privacy': 'Privacidade',
@@ -845,16 +1009,22 @@ const _dutchSourcePt = {
   'Toestemming intrekken': 'Retirar consentimento',
   'Toestemming intrekken?': 'Retirar consentimento?',
   'Intrekken': 'Retirar',
-  'U hebt al toegestemd in het gebruik van OciDeck.': 'Já consentiu a utilização do OciDeck.',
-  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.': 'Pode retirar o seu consentimento a qualquer momento. Após a retirada, terá de aceitar estes termos novamente.',
-  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.': 'Se retirar o seu consentimento, terá de aceitar estes termos novamente quando reiniciar o OciDeck.',
+  'U hebt al toegestemd in het gebruik van OciDeck.':
+      'Já consentiu a utilização do OciDeck.',
+  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+      'Pode retirar o seu consentimento a qualquer momento. Após a retirada, terá de aceitar estes termos novamente.',
+  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+      'Se retirar o seu consentimento, terá de aceitar estes termos novamente quando reiniciar o OciDeck.',
   'Slidekwaliteit': 'Qualidade do diapositivo',
-  'Geen kwaliteitsproblemen gevonden': 'Não foram encontrados problemas de qualidade',
+  'Geen kwaliteitsproblemen gevonden':
+      'Não foram encontrados problemas de qualidade',
   'Thema (hele presentatie)': 'Tema (apresentação inteira)',
   'Kwaliteitsprobleem': 'Problema de qualidade',
   'Kwaliteitsproblemen': 'Problemas de qualidade',
-  'Kwaliteitsproblemen (inclusief ernstige)': 'Problemas de qualidade (incluindo graves)',
-  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Adicione texto alternativo / legenda para acessibilidade',
+  'Kwaliteitsproblemen (inclusief ernstige)':
+      'Problemas de qualidade (incluindo graves)',
+  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Adicione texto alternativo / legenda para acessibilidade',
   'Alt-tekst': 'Texto alternativo',
   'Tekstdichtheid': 'Densidade de texto',
   'Contrast': 'Contraste',
@@ -864,22 +1034,32 @@ const _dutchSourcePt = {
   ':1 voor normale tekst).': ':1 para texto normal).',
   ':1 voor grote tekst).': ':1 para texto grande).',
   ':1).': ':1).',
-  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.': 'O contraste de texto sobre uma imagem não pode ser verificado automaticamente — verifique visualmente.',
-  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.': 'O gráfico não tem título nem dados descritivos — adicione um título ou nomes de séries.',
-  'heeft geen titel of sprekernotities die de inhoud beschrijven.': 'não tem título nem notas do orador que descrevam o conteúdo.',
-  'Veel tekst op deze slide: het lettertype wordt verkleind tot ': 'Muito texto neste diapositivo: o tamanho da letra é reduzido para ',
+  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+      'O contraste de texto sobre uma imagem não pode ser verificado automaticamente — verifique visualmente.',
+  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+      'O gráfico não tem título nem dados descritivos — adicione um título ou nomes de séries.',
+  'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+      'não tem título nem notas do orador que descrevam o conteúdo.',
+  'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+      'Muito texto neste diapositivo: o tamanho da letra é reduzido para ',
   ' van de ontwerpgrootte.': ' do tamanho de design.',
-  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (': 'Muito texto neste diapositivo: o tamanho da letra é fortemente reduzido (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.': 'do tamanho de design). Considere dividir o conteúdo.',
+  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+      'Muito texto neste diapositivo: o tamanho da letra é fortemente reduzido (',
+  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      'do tamanho de design). Considere dividir o conteúdo.',
   'Grote tabel (': 'Tabela grande (',
   ' rijen, ': ' linhas, ',
-  ' kolommen): celtekst staat op het minimumformaat.': ' colunas): o texto das células está no tamanho mínimo.',
+  ' kolommen): celtekst staat op het minimumformaat.':
+      ' colunas): o texto das células está no tamanho mínimo.',
   'Veel broncode (': 'Muito código-fonte (',
-  ' regels) — de tekst wordt sterk verkleind om te passen.': ' linhas) — o texto é fortemente reduzido para caber.',
+  ' regels) — de tekst wordt sterk verkleind om te passen.':
+      ' linhas) — o texto é fortemente reduzido para caber.',
   'Veel vrije markdown (': 'Muito markdown livre (',
-  ' regels) — controleer of alles leesbaar blijft op de slide.': ' linhas) — verifique se tudo continua legível no diapositivo.',
+  ' regels) — controleer of alles leesbaar blijft op de slide.':
+      ' linhas) — verifique se tudo continua legível no diapositivo.',
   'Lange titelpagina (': 'Diapositivo de título longo (',
-  ' tekens) — de tekst wordt verkleind om te passen.': ' carateres) — o texto é reduzido para caber.',
+  ' tekens) — de tekst wordt verkleind om te passen.':
+      ' carateres) — o texto é reduzido para caber.',
   'Thema bodytekst': 'Texto do corpo do tema',
   'Thema titel': 'Título do tema',
   'Thema tabeltekst': 'Texto de tabela do tema',
@@ -890,34 +1070,46 @@ const _dutchSourcePt = {
   'Tweede afbeelding': 'Segunda imagem',
   'Waarschuwing bij export': 'Avisar ao exportar',
   'Minimale contrastverhouding': 'Rácio de contraste mínimo',
-  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.': 'O texto abaixo deste rácio é assinalado. 4.5 = WCAG AA, 3.0 = WCAG AA texto grande. Mais alto é mais rigoroso.',
-  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.': 'Pedir confirmação antes de exportar quando existem problemas de qualidade nos diapositivos.',
+  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.':
+      'O texto abaixo deste rácio é assinalado. 4.5 = WCAG AA, 3.0 = WCAG AA texto grande. Mais alto é mais rigoroso.',
+  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+      'Pedir confirmação antes de exportar quando existem problemas de qualidade nos diapositivos.',
   'Kwaliteitsproblemen gevonden': 'Problemas de qualidade encontrados',
   'Toch exporteren': 'Exportar mesmo assim',
   'ernstige probleem(en)': 'problema(s) grave(s)',
-  'De presentatie heeft kwaliteitsproblemen (': 'A apresentação tem problemas de qualidade (',
+  'De presentatie heeft kwaliteitsproblemen (':
+      'A apresentação tem problemas de qualidade (',
   'Lange quote (': 'Citação longa (',
   'Footer-tekst': 'Texto do rodapé',
   'Checklist (niet aangevinkt)': 'Lista de tarefas (não assinalada)',
   'Checklist (aangevinkt)': 'Lista de tarefas (assinalada)',
   ': bestand niet gevonden (': ': ficheiro não encontrado (',
-  'Blokkeer export bij ernstige kwaliteitsproblemen': 'Bloquear a exportação em caso de problemas de qualidade graves',
-  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.': 'A exportação não é possível enquanto a verificação de qualidade dos diapositivos indicar erros.',
-  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.': 'Exportação bloqueada devido a problemas de qualidade graves.',
+  'Blokkeer export bij ernstige kwaliteitsproblemen':
+      'Bloquear a exportação em caso de problemas de qualidade graves',
+  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+      'A exportação não é possível enquanto a verificação de qualidade dos diapositivos indicar erros.',
+  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+      'Exportação bloqueada devido a problemas de qualidade graves.',
   'Alle meldingen': 'Todas as notificações',
-  '… en meer problemen in het kwaliteitspaneel.': '… e mais problemas no painel de qualidade.',
+  '… en meer problemen in het kwaliteitspaneel.':
+      '… e mais problemas no painel de qualidade.',
   'Classificatie-handhaving': 'Aplicação da classificação',
   'Vrijgaveplafond': 'Limite de divulgação',
-  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.': 'Nível TLP mais alto que pode ser exportado. Vazio = sem limite.',
+  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+      'Nível TLP mais alto que pode ser exportado. Vazio = sem limite.',
   'Vereist minimumniveau': 'Nível mínimo exigido',
-  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.': 'Classificação mais baixa que um deck deve ter para ser exportado. Vazio = sem mínimo.',
+  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+      'Classificação mais baixa que um deck deve ter para ser exportado. Vazio = sem mínimo.',
   'Geen plafond': 'Sem limite',
   'Geen minimum': 'Sem mínimo',
   'Classificatie verplicht': 'Classificação obrigatória',
-  'Weiger export wanneer het deck geen TLP-niveau heeft.': 'Recusar a exportação quando o deck não tem nível TLP.',
+  'Weiger export wanneer het deck geen TLP-niveau heeft.':
+      'Recusar a exportação quando o deck não tem nível TLP.',
   'Classificatie-watermerk': 'Marca de água de classificação',
-  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.': 'Mostrar uma marca de água diagonal com o TLP e a organização em cada diapositivo.',
-  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.': 'Defina um nível TLP — a exportação está bloqueada pela política de classificação.',
+  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+      'Mostrar uma marca de água diagonal com o TLP e a organização em cada diapositivo.',
+  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+      'Defina um nível TLP — a exportação está bloqueada pela política de classificação.',
   'Tabel bewerken': 'Editar tabela',
   'Pijltjes · Tab · Esc': 'Setas · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Editar tabela (em diapositivos de tabela)',
@@ -926,4 +1118,5 @@ const _dutchSourcePt = {
   'Pen · markeerstift · ⇧E': 'Caneta · marcador · ⇧E',
   'Gestapelde staaf': 'Barras empilhadas',
   'Spreiding': 'Dispersão',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn percorre os diapositivos',
 };

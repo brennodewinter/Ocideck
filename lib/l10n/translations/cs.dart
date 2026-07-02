@@ -1101,4 +1101,5 @@ const _dutchSourceCs = {
   'Pen · markeerstift · ⇧E': 'Pero · zvýrazňovač · ⇧E',
   'Gestapelde staaf': 'Skládaný sloupcový',
   'Spreiding': 'Bodový',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn listuje snímky',
 };

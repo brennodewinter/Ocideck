@@ -307,15 +307,23 @@ const _dutchSourceFr = {
 
 const _dutchSourceAddFr = {
   // Consent / license screen (redesign).
-  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.': 'J\'accepte la licence EUPL 1.2 et j\'ai lu quelles données OciDeck conserve.',
-  'Je keuze wordt de standaardtaal van de app.': 'Votre choix devient la langue par défaut de l\'application.',
+  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
+      'J\'accepte la licence EUPL 1.2 et j\'ai lu quelles données OciDeck conserve.',
+  'Je keuze wordt de standaardtaal van de app.':
+      'Votre choix devient la langue par défaut de l\'application.',
   'Lees de volledige licentie': 'Lire la licence complète',
-  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.': 'OciDeck est un logiciel libre sous licence EUPL 1.2. Avant de commencer, nous vous demandons d\'accepter la licence. Ci-dessous, vous pouvez aussi lire quelles données OciDeck conserve sur cet appareil et quand quelque chose quitte votre appareil.',
-  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.': 'OciDeck ne collecte aucune statistique et n\'envoie rien de lui-même vers l\'extérieur. Par défaut, tout reste sur cet appareil. Les données ne quittent cet appareil que si vous le choisissez :\n\n•  Nextcloud/WebDAV : lorsque vous vous connectez à un serveur, votre nom d\'utilisateur et votre mot de passe sont conservés (le mot de passe en sécurité dans le trousseau de votre système) et les présentations que vous ouvrez ou enregistrez sont envoyées à ce serveur.\n•  Ouvrir via URL : OciDeck récupère le fichier à l\'adresse que vous saisissez.\n•  Médias en ligne (désactivés par défaut) : s\'ils sont activés, OciDeck charge des images et des vidéos depuis les adresses de vos diapositives.\n•  Les liens externes (comme la licence en ligne) s\'ouvrent dans votre navigateur.',
-  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.': 'OciDeck est fourni sous la European Union Public Licence v1.2. En acceptant, vous adhérez à cette licence. Vous pouvez utiliser, copier, modifier et distribuer OciDeck selon les termes de l\'EUPL 1.2.',
-  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.': 'Pour fonctionner et ne pas perdre votre travail, OciDeck conserve des données localement sur cet appareil :\n\n•  Vos réglages et préférences (langue, dossiers, profils de style et d\'apparence, fichiers récents).\n•  Vos supports de présentation : les présentations que vous enregistrez, les copies de récupération automatiques et les pièces jointes telles que les descriptions d\'images.\n•  Ce choix de consentement.\n\nVous pouvez les supprimer en effaçant les fichiers ou en réinitialisant les réglages.',
-  'Volledige licentie online (23 officiële taalversies)': 'Licence complète en ligne (23 versions linguistiques officielles)',
-  'Wat OciDeck op dit apparaat bewaart': 'Ce qu\'OciDeck conserve sur cet appareil',
+  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
+      'OciDeck est un logiciel libre sous licence EUPL 1.2. Avant de commencer, nous vous demandons d\'accepter la licence. Ci-dessous, vous pouvez aussi lire quelles données OciDeck conserve sur cet appareil et quand quelque chose quitte votre appareil.',
+  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.':
+      'OciDeck ne collecte aucune statistique et n\'envoie rien de lui-même vers l\'extérieur. Par défaut, tout reste sur cet appareil. Les données ne quittent cet appareil que si vous le choisissez :\n\n•  Nextcloud/WebDAV : lorsque vous vous connectez à un serveur, votre nom d\'utilisateur et votre mot de passe sont conservés (le mot de passe en sécurité dans le trousseau de votre système) et les présentations que vous ouvrez ou enregistrez sont envoyées à ce serveur.\n•  Ouvrir via URL : OciDeck récupère le fichier à l\'adresse que vous saisissez.\n•  Médias en ligne (désactivés par défaut) : s\'ils sont activés, OciDeck charge des images et des vidéos depuis les adresses de vos diapositives.\n•  Les liens externes (comme la licence en ligne) s\'ouvrent dans votre navigateur.',
+  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.':
+      'OciDeck est fourni sous la European Union Public Licence v1.2. En acceptant, vous adhérez à cette licence. Vous pouvez utiliser, copier, modifier et distribuer OciDeck selon les termes de l\'EUPL 1.2.',
+  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.':
+      'Pour fonctionner et ne pas perdre votre travail, OciDeck conserve des données localement sur cet appareil :\n\n•  Vos réglages et préférences (langue, dossiers, profils de style et d\'apparence, fichiers récents).\n•  Vos supports de présentation : les présentations que vous enregistrez, les copies de récupération automatiques et les pièces jointes telles que les descriptions d\'images.\n•  Ce choix de consentement.\n\nVous pouvez les supprimer en effaçant les fichiers ou en réinitialisant les réglages.',
+  'Volledige licentie online (23 officiële taalversies)':
+      'Licence complète en ligne (23 versions linguistiques officielles)',
+  'Wat OciDeck op dit apparaat bewaart':
+      'Ce qu\'OciDeck conserve sur cet appareil',
   'Wat je apparaat verlaat': 'Ce qui quitte votre appareil',
   // Nextcloud/WebDAV-bron.
   'Vul server-URL en gebruikersnaam in':
@@ -370,8 +378,10 @@ const _dutchSourceAddFr = {
   'Opslaan': 'Enregistrer',
   // Accessibility labels for icon-only buttons (screen readers).
   'Presenteren': 'Présentation',
-  'Tijden-overzicht tonen na afloop': 'Afficher le récapitulatif des durées à la fin',
-  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.': 'Le temps par diapositive est toujours mesuré ; ceci détermine seulement si le récapitulatif apparaît après cette présentation.',
+  'Tijden-overzicht tonen na afloop':
+      'Afficher le récapitulatif des durées à la fin',
+  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
+      'Le temps par diapositive est toujours mesuré ; ceci détermine seulement si le récapitulatif apparaît après cette présentation.',
   'Oefenoverzicht tonen na afloop':
       'Afficher le récapitulatif de répétition à la fin',
   'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
@@ -582,8 +592,10 @@ const _dutchSourceAddFr = {
   'Animeren bij binnenkomst': 'Animer à l\'entrée',
   'Activatieduur': 'Durée d\'activation',
   'Splits slide': 'Diviser la diapositive',
-  'Doornummeren vanaf vorige slide': 'Poursuivre la numérotation depuis la diapositive précédente',
-  'Begin de nummering waar de vorige slide ophield.': 'Commence la numérotation là où la diapositive précédente s\'est arrêtée.',
+  'Doornummeren vanaf vorige slide':
+      'Poursuivre la numérotation depuis la diapositive précédente',
+  'Begin de nummering waar de vorige slide ophield.':
+      'Commence la numérotation là où la diapositive précédente s\'est arrêtée.',
   'Volg thema-animatieduur': 'Suivre la durée d\'animation du thème',
   'Animatie bij openen': 'Animer à l\'ouverture',
   'Meter': 'Instrument',
@@ -1089,4 +1101,5 @@ const _dutchSourceAddFr = {
   'Pen · markeerstift · ⇧E': 'Stylo · surligneur · ⇧E',
   'Gestapelde staaf': 'Barres empilées',
   'Spreiding': 'Nuage de points',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn parcourt les diapositives',
 };

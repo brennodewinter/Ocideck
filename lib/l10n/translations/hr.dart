@@ -1104,4 +1104,5 @@ const _dutchSourceHr = {
   'Pen · markeerstift · ⇧E': 'Olovka · marker · ⇧E',
   'Gestapelde staaf': 'Složeni stupčasti',
   'Spreiding': 'Raspršeni',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn lista slajdove',
 };

@@ -1107,4 +1107,5 @@ const _dutchSourcePl = {
   'Pen · markeerstift · ⇧E': 'Pióro · zakreślacz · ⇧E',
   'Gestapelde staaf': 'Słupkowy skumulowany',
   'Spreiding': 'Punktowy',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn przewija slajdy',
 };

@@ -1099,4 +1099,5 @@ const _dutchSourceSv = {
   'Pen · markeerstift · ⇧E': 'Penna · överstrykningspenna · ⇧E',
   'Gestapelde staaf': 'Staplad stapel',
   'Spreiding': 'Spridning',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn bläddrar bland bilderna',
 };

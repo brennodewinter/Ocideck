@@ -1096,4 +1096,5 @@ const _dutchSourceDa = {
   'Pen · markeerstift · ⇧E': 'Pen · overstregning · ⇧E',
   'Gestapelde staaf': 'Stablet søjle',
   'Spreiding': 'Spredning',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn bladrer gennem slides',
 };

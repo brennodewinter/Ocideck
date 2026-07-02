@@ -1102,4 +1102,5 @@ const _dutchSourceFi = {
   'Pen · markeerstift · ⇧E': 'Kynä · korostuskynä · ⇧E',
   'Gestapelde staaf': 'Pinottu pylväs',
   'Spreiding': 'Hajonta',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn selaa dioja',
 };

@@ -1100,4 +1100,5 @@ const _dutchSourceGsw = {
   'Pen · markeerstift · ⇧E': 'Schtift · Markierer · ⇧E',
   'Gestapelde staaf': 'Gschtaplete Balke',
   'Spreiding': 'Schtreuig',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn blätteret dur d Folie',
 };

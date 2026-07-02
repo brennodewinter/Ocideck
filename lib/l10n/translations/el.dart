@@ -1113,4 +1113,5 @@ const _dutchSourceEl = {
   'Pen · markeerstift · ⇧E': 'Πένα · μαρκαδόρος · ⇧E',
   'Gestapelde staaf': 'Στοιβαγμένες ράβδοι',
   'Spreiding': 'Διασπορά',
+  'PgUp/PgDn bladert door de slides': 'Το PgUp/PgDn ξεφυλλίζει τις διαφάνειες',
 };

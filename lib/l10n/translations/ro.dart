@@ -9,7 +9,8 @@ const _stringsRo = {
   'undo': 'Anulează (Ctrl/Cmd+Z)',
   'redo': 'Refă (Ctrl/Cmd+Shift+Z)',
   'imageLibrary': 'Bibliotecă de imagini',
-  'presentFullscreen': 'Prezintă (ecran complet) · P pentru vizualizarea prezentatorului',
+  'presentFullscreen':
+      'Prezintă (ecran complet) · P pentru vizualizarea prezentatorului',
   'visualMode': 'Mod vizual',
   'markdownMode': 'Mod Markdown',
   'save': 'Salvează',
@@ -47,7 +48,8 @@ const _stringsRo = {
   'settingsLogo': 'Logo',
   'language': 'Limbă',
   'applicationLanguage': 'Limba aplicației',
-  'languageHelp': 'Interfața își schimbă limba imediat. Conținutul prezentării rămâne neschimbat.',
+  'languageHelp':
+      'Interfața își schimbă limba imediat. Conținutul prezentării rămâne neschimbat.',
   'presentationFolder': 'Folder prezentări',
   'exportFolderSetting': 'Folder export',
   'notSet': 'Nesetat',
@@ -55,17 +57,20 @@ const _stringsRo = {
   'choose': 'Alege',
   'removeDefaultFolder': 'Elimină folderul implicit',
   'removeExportFolder': 'Elimină folderul de export',
-  'exportFolderHelp': 'Toate exporturile (PDF/PPTX) se salvează aici. Dacă nu e setat, exporturile se salvează lângă fișierul prezentării.',
+  'exportFolderHelp':
+      'Toate exporturile (PDF/PPTX) se salvează aici. Dacă nu e setat, exporturile se salvează lângă fișierul prezentării.',
   'cancel': 'Anulează',
   'close': 'Închide',
   'saveSettings': 'Salvează',
   'exportDialogTitle': 'Exportă',
   'exportAgain': 'Exportă din nou',
-  'exportIntro': 'Exportul folosește exact previzualizarea din editor, inclusiv profilul tău de stil.',
+  'exportIntro':
+      'Exportul folosește exact previzualizarea din editor, inclusiv profilul tău de stil.',
   'imageQualityPdf': 'Calitate imagine (PDF)',
   'normal': 'Normal',
   'compressed': 'Comprimat',
-  'compressedHelp': 'JPEG la rezoluție mai mică, destinat materialelor tipărite, cu un fișier mult mai mic (salvat separat ca „-compact”).',
+  'compressedHelp':
+      'JPEG la rezoluție mai mică, destinat materialelor tipărite, cu un fișier mult mai mic (salvat separat ca „-compact”).',
   'losslessHelp': 'Imagini fără pierderi, la rezoluție completă.',
   'exportAsPdf': 'Exportă ca PDF',
   'exportAsPptx': 'Exportă ca PPTX',
@@ -87,26 +92,39 @@ const _dutchSourceRo = {
   'Niet opslaan': 'Nu salva',
   'Niet-opgeslagen werk herstellen?': 'Restaurezi lucrul nesalvat?',
   'Niet-opgeslagen wijzigingen': 'Modificări nesalvate',
-  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'A fost găsită o prezentare cu modificări nesalvate dintr-o sesiune anterioară:',
+  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'A fost găsită o prezentare cu modificări nesalvate dintr-o sesiune anterioară:',
   'Er zijn': 'Există',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'prezentări cu modificări nesalvate găsite dintr-o sesiune anterioară:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.': 'Există prezentări cu modificări nesalvate. Salvează-le înainte de a închide aplicația.',
-  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.': 'Această prezentare are modificări nesalvate. Salveaz-o înainte de a închide fila.',
+  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'prezentări cu modificări nesalvate găsite dintr-o sesiune anterioară:',
+  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Există prezentări cu modificări nesalvate. Salvează-le înainte de a închide aplicația.',
+  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+      'Această prezentare are modificări nesalvate. Salveaz-o înainte de a închide fila.',
   'Importeren via URL': 'Importă din URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.': 'Lipește linkul către un pachet .ocideck sau un fișier Markdown Marp.',
+  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+      'Lipește linkul către un pachet .ocideck sau un fișier Markdown Marp.',
   'Ophalen': 'Preia',
   'Laat los om toe te voegen': 'Eliberează pentru a adăuga',
-  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen': 'Imagini → slide-uri noi · .md / .ocideck → deschide',
-  'Open eerst een presentatie om afbeeldingen toe te voegen.': 'Deschide o prezentare înainte de a adăuga imagini.',
-  'Alle slides zijn overgeslagen — niets om te tonen.': 'Toate slide-urile sunt omise — nimic de afișat.',
-  'Alle slides zijn overgeslagen — niets om te exporteren.': 'Toate slide-urile sunt omise — nimic de exportat.',
+  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+      'Imagini → slide-uri noi · .md / .ocideck → deschide',
+  'Open eerst een presentatie om afbeeldingen toe te voegen.':
+      'Deschide o prezentare înainte de a adăuga imagini.',
+  'Alle slides zijn overgeslagen — niets om te tonen.':
+      'Toate slide-urile sunt omise — nimic de afișat.',
+  'Alle slides zijn overgeslagen — niets om te exporteren.':
+      'Toate slide-urile sunt omise — nimic de exportat.',
   'Kon dit pakket niet importeren.': 'Acest pachet nu a putut fi importat.',
   'Pakket geëxporteerd naar:': 'Pachet exportat în:',
   'Export mislukt:': 'Export eșuat:',
-  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.': 'Acest slide nu poate primi o imagine. Alege mai întâi un slide cu imagine.',
-  'Kon van deze URL geen presentatie ophalen.': 'Nu s-a putut prelua o prezentare de la acest URL.',
-  'Sleep om de slide-preview breder of smaller te maken': 'Trage pentru a lărgi sau îngusta previzualizarea slide-ului',
-  'TLP-classificatie (Traffic Light Protocol)': 'Clasificare TLP (Traffic Light Protocol)',
+  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+      'Acest slide nu poate primi o imagine. Alege mai întâi un slide cu imagine.',
+  'Kon van deze URL geen presentatie ophalen.':
+      'Nu s-a putut prelua o prezentare de la acest URL.',
+  'Sleep om de slide-preview breder of smaller te maken':
+      'Trage pentru a lărgi sau îngusta previzualizarea slide-ului',
+  'TLP-classificatie (Traffic Light Protocol)':
+      'Clasificare TLP (Traffic Light Protocol)',
   'Titelpagina': 'Slide de titlu',
   'Tussentitel': 'Titlu de secțiune',
   'Alleen Bullets': 'Doar bullets',
@@ -119,7 +137,8 @@ const _dutchSourceRo = {
   'Tabel': 'Tabel',
   'Vrije Markdown': 'Markdown liber',
   'Overgeslagen': 'Omis',
-  'Weer tonen bij presenteren/exporteren': 'Afișează din nou la prezentare/export',
+  'Weer tonen bij presenteren/exporteren':
+      'Afișează din nou la prezentare/export',
   'Overslaan bij presenteren/exporteren': 'Omite la prezentare/export',
   'Kopiëren': 'Copiază',
   'Kopieer als afbeelding': 'Copiază ca imagine',
@@ -141,7 +160,8 @@ const _dutchSourceRo = {
   'Naam van de auteur': 'Numele autorului',
   'Achtergrondafbeelding': 'Imagine de fundal',
   'Achtergrondafbeelding (optioneel)': 'Imagine de fundal (opțional)',
-  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.': 'Imaginea este afișată pe tot ecranul ca fundal, cu opacitate redusă, astfel încât textul să rămână lizibil.',
+  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+      'Imaginea este afișată pe tot ecranul ca fundal, cu opacitate redusă, astfel încât textul să rămână lizibil.',
   'Zoom achtergrond': 'Zoom fundal',
   'Zoom afbeelding': 'Zoom imagine',
   'Afbeelding (rechts)': 'Imagine (dreapta)',
@@ -166,7 +186,8 @@ const _dutchSourceRo = {
   'Kopiëren naar klembord mislukt.': 'Copierea în clipboard a eșuat.',
   'Verwijder afbeelding': 'Elimină imaginea',
   'Geen afbeelding gekozen': 'Nicio imagine selectată',
-  'Caption / bronvermelding (bijv. © Naam Fotograaf)': 'Legendă / atribuire (ex. © Nume Fotograf)',
+  'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+      'Legendă / atribuire (ex. © Nume Fotograf)',
   'Caption / bronvermelding': 'Legendă / atribuire',
   'Beschrijving (doorzoekbaar)': 'Descriere (căutabilă)',
   'Markdown inhoud': 'Conținut Markdown',
@@ -177,7 +198,8 @@ const _dutchSourceRo = {
   'verwijderen': 'elimină',
   'Koprij verwijderen': 'Elimină rândul de antet',
   'Rij verwijderen': 'Elimină rândul',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.': 'Sfat: apasă Enter într-o celulă pentru un rând nou.',
+  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+      'Sfat: apasă Enter într-o celulă pentru un rând nou.',
   'Presentatie openen': 'Deschide prezentarea',
   'Opslaan als': 'Salvează ca',
   'Pakket importeren': 'Importă pachet',
@@ -190,11 +212,14 @@ const _dutchSourceRo = {
   'Kies een video': 'Alege un video',
   'Kies een audiobestand': 'Alege un fișier audio',
   'Bladeren…': 'Răsfoiește…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…': 'Caută după numele fișierului, titlu sau text din slide-uri…',
+  'Zoek op bestandsnaam, titel of tekst in de slides…':
+      'Caută după numele fișierului, titlu sau text din slide-uri…',
   'Geen map gekozen': 'Niciun folder selectat',
   'Map kiezen': 'Alege folder',
-  'Kies een map met presentaties om te beginnen.': 'Alege un folder cu prezentări pentru a începe.',
-  'Geen presentaties (.md) in deze map gevonden.': 'Nu s-au găsit prezentări (.md) în acest folder.',
+  'Kies een map met presentaties om te beginnen.':
+      'Alege un folder cu prezentări pentru a începe.',
+  'Geen presentaties (.md) in deze map gevonden.':
+      'Nu s-au găsit prezentări (.md) în acest folder.',
   'Geen presentaties gevonden voor': 'Nu s-au găsit prezentări pentru',
   'meer treffer(s)': 'potrivire/potriviri în plus',
   'Slide zoeken': 'Găsește slide',
@@ -205,11 +230,15 @@ const _dutchSourceRo = {
   'Toegevoegd': 'Adăugat',
   'Selecteer alles': 'Selectează tot',
   'Deselecteer alles': 'Deselectează tot',
-  'Zoek slides op tekst, titel, onderschrift, pad…': 'Caută slide-uri după text, titlu, legendă, cale…',
-  'Zoek op presentatie, titel of tekst…': 'Caută după prezentare, titlu sau text…',
-  'Geen andere presentaties (.md) in deze map gevonden.': 'Nu s-au găsit alte prezentări (.md) în acest folder.',
+  'Zoek slides op tekst, titel, onderschrift, pad…':
+      'Caută slide-uri după text, titlu, legendă, cale…',
+  'Zoek op presentatie, titel of tekst…':
+      'Caută după prezentare, titlu sau text…',
+  'Geen andere presentaties (.md) in deze map gevonden.':
+      'Nu s-au găsit alte prezentări (.md) în acest folder.',
   'Geen slides gevonden voor': 'Nu s-au găsit slide-uri pentru',
-  'Typ zoektermen om slides uit al je presentaties te vinden.': 'Introdu termeni de căutare pentru a găsi slide-uri din toate prezentările tale.',
+  'Typ zoektermen om slides uit al je presentaties te vinden.':
+      'Introdu termeni de căutare pentru a găsi slide-uri din toate prezentările tale.',
   'toegevoegd': 'adăugat',
   'Eerste': 'Primele',
   'treffers — verfijn je zoekopdracht': 'potriviri — rafinează căutarea',
@@ -247,17 +276,21 @@ const _dutchSourceRo = {
   'Beschrijving': 'Descriere',
   'Korte omschrijving van de presentatie': 'Descriere scurtă a prezentării',
   'Trefwoorden': 'Cuvinte cheie',
-  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026': 'Separate prin virgulă, ex. trimestrial, cifre, 2026',
-  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.': 'Aceste detalii sunt salvate în Markdown și pot fi căutate la deschidere.',
+  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026':
+      'Separate prin virgulă, ex. trimestrial, cifre, 2026',
+  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+      'Aceste detalii sunt salvate în Markdown și pot fi căutate la deschidere.',
   'App-thema': 'Tema aplicației',
   'Look-and-feel': 'Aspect și senzație',
   'Kopie maken en aanpassen': 'Creează și personalizează o copie',
   'Thema verwijderen': 'Șterge tema',
   'Themanaam': 'Nume temă',
-  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.': 'Aceasta este o temă încorporată. Creează o copie pentru a-i personaliza culorile.',
+  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+      'Aceasta este o temă încorporată. Creează o copie pentru a-i personaliza culorile.',
   'Donkere interface': 'Interfață întunecată',
   'Lettertype interface': 'Font interfață',
-  'Past contrast, invoervelden en systeemcomponenten aan.': 'Ajustează contrastul, câmpurile de intrare și componentele de sistem.',
+  'Past contrast, invoervelden en systeemcomponenten aan.':
+      'Ajustează contrastul, câmpurile de intrare și componentele de sistem.',
   'Hoofdkleur en bovenbalk': 'Culoare principală și bara de sus',
   'Knoppen en accenten': 'Butoane și accente',
   'Schermachtergrond': 'Fundal ecran',
@@ -293,15 +326,19 @@ const _dutchSourceRo = {
   'Linksonder': 'Stânga jos',
   'Rechtsonder': 'Dreapta jos',
   'Footertekst': 'Text subsol',
-  'bijv. Vertrouwelijk · {title} · {date}': 'ex. Confidențial · {title} · {date}',
+  'bijv. Vertrouwelijk · {title} · {date}':
+      'ex. Confidențial · {title} · {date}',
   'Footerpositie': 'Poziție subsol',
-  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.': 'Token-uri: {page}, {total}, {date}, {title}. Subsolul apare pe toate slide-urile, cu excepția celor de titlu și de secțiune, dacă nu îl dezactivezi pentru fiecare slide.',
+  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+      'Token-uri: {page}, {total}, {date}, {title}. Subsolul apare pe toate slide-urile, cu excepția celor de titlu și de secțiune, dacă nu îl dezactivezi pentru fiecare slide.',
   'Links': 'Stânga',
   'Midden': 'Centru',
   'Rechts': 'Dreapta',
-  'Paginanummers tonen (rechtsonder)': 'Afișează numerele de pagină (dreapta jos)',
+  'Paginanummers tonen (rechtsonder)':
+      'Afișează numerele de pagină (dreapta jos)',
   'Voorvertoning': 'Previzualizare',
-  'De snelle bruine vos springt over de luie hond.': 'Vulpea maro iute sare peste câinele leneș.',
+  'De snelle bruine vos springt over de luie hond.':
+      'Vulpea maro iute sare peste câinele leneș.',
   'Preview': 'Previzualizare',
   'Uitzoomen': 'Micșorează',
   'Uitgezoomd': 'Micșorat',
@@ -309,9 +346,12 @@ const _dutchSourceRo = {
   'Ingezoomd': 'Mărit',
   'van de foto zichtbaar': 'din fotografie vizibil',
   'Volledig zichtbaar (100%)': 'Complet vizibil (100%)',
-  'Uitzoomen (meer van de foto zichtbaar)': 'Micșorează (mai mult din fotografie vizibil)',
-  'Inzoomen (minder van de foto zichtbaar)': 'Mărește (mai puțin din fotografie vizibil)',
-  'Terugzetten (volledige afbeelding zichtbaar)': 'Resetează (imaginea completă vizibilă)',
+  'Uitzoomen (meer van de foto zichtbaar)':
+      'Micșorează (mai mult din fotografie vizibil)',
+  'Inzoomen (minder van de foto zichtbaar)':
+      'Mărește (mai puțin din fotografie vizibil)',
+  'Terugzetten (volledige afbeelding zichtbaar)':
+      'Resetează (imaginea completă vizibilă)',
   'Zoom resetten': 'Resetează zoom-ul',
   'Preview inklappen': 'Restrânge previzualizarea',
   'Preview uitklappen': 'Extinde previzualizarea',
@@ -326,19 +366,23 @@ const _dutchSourceRo = {
   'Terug naar standaardstijl': 'Înapoi la stilul implicit',
   'Automatisch doorgaan na': 'Avansează automat după',
   'Logo tonen op deze slide': 'Afișează logo pe acest slide',
-  'Tabel bewerkbaar tijdens presenteren': 'Tabel editabil în timpul prezentării',
+  'Tabel bewerkbaar tijdens presenteren':
+      'Tabel editabil în timpul prezentării',
   'Footer tonen op deze slide': 'Afișează subsol pe acest slide',
   'Sprekersnotities...': 'Note pentru vorbitor...',
   'Sprekersnotities': 'Note pentru vorbitor',
   'Notities voor tijdens het presenteren': 'Note pentru timpul prezentării',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown': 'Mod Markdown — editează întreaga prezentare ca Markdown Marp',
+  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+      'Mod Markdown — editează întreaga prezentare ca Markdown Marp',
   'Toepassen': 'Aplică',
-  'Markdown kon niet worden verwerkt. Controleer de syntax.': 'Markdown nu a putut fi procesat. Verifică sintaxa.',
+  'Markdown kon niet worden verwerkt. Controleer de syntax.':
+      'Markdown nu a putut fi procesat. Verifică sintaxa.',
   'Controleren': 'Verifică sintaxa',
   'Syntaxproblemen gevonden': 'Probleme de sintaxă găsite',
   'De markdown bevat': 'Markdown-ul conține',
   'fout(en) en': 'eroare/erori și',
-  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.': 'avertisment(e). Este posibil ca slide-urile să nu fie citite corect.',
+  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+      'avertisment(e). Este posibil ca slide-urile să nu fie citite corect.',
   'Terug naar editor': 'Înapoi la editor',
   'Toch toepassen': 'Aplică oricum',
   'Geen syntaxproblemen gevonden': 'Nu s-au găsit probleme de sintaxă',
@@ -352,26 +396,35 @@ const _dutchSourceRo = {
   'Coverflow': 'Coverflow',
   'Geen afbeeldingen gevonden': 'Nu s-au găsit imagini',
   'Geen resultaten voor': 'Niciun rezultat pentru',
-  'Pas je zoekterm aan of voeg een beschrijving toe.': 'Ajustează termenul de căutare sau adaugă o descriere.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.': 'Folosește „Răsfoiește” pentru a alege imagini din orice locație.',
+  'Pas je zoekterm aan of voeg een beschrijving toe.':
+      'Ajustează termenul de căutare sau adaugă o descriere.',
+  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+      'Folosește „Răsfoiește” pentru a alege imagini din orice locație.',
   'Selecteer een\nafbeelding': 'Selectează o\nimagine',
   'Gekopieerd': 'Copiat',
   'Afbeelding verwijderen?': 'Ștergi imaginea?',
-  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.': 'Fișierul va fi șters definitiv de pe disc. Această acțiune nu poate fi anulată.',
-  'Let op: deze afbeelding wordt nog gebruikt in': 'Atenție: această imagine este încă folosită în',
-  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.': 'Ștergerea va goli acele slide-uri. Aceasta nu poate fi anulată.',
-  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert': '↑↓←→ navighează  ·  Enter alege  ·  Dublu-clic selectează',
+  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+      'Fișierul va fi șters definitiv de pe disc. Această acțiune nu poate fi anulată.',
+  'Let op: deze afbeelding wordt nog gebruikt in':
+      'Atenție: această imagine este încă folosită în',
+  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+      'Ștergerea va goli acele slide-uri. Aceasta nu poate fi anulată.',
+  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+      '↑↓←→ navighează  ·  Enter alege  ·  Dublu-clic selectează',
   'Sneltoetsen': 'Comenzi rapide de la tastatură',
   'Toetsenlegenda': 'Legenda tastelor',
   'spatie': 'spațiu',
   'klik': 'clic',
   'cijfers': 'cifre',
-  'Klik of druk op ? / H / Esc om te sluiten': 'Fă clic sau apasă ? / H / Esc pentru a închide',
-  'Klik of druk op H / Esc om te sluiten': 'Fă clic sau apasă H / Esc pentru a închide',
+  'Klik of druk op ? / H / Esc om te sluiten':
+      'Fă clic sau apasă ? / H / Esc pentru a închide',
+  'Klik of druk op H / Esc om te sluiten':
+      'Fă clic sau apasă H / Esc pentru a închide',
   'Naar slidenummer': 'Salt la numărul slide-ului',
   'Eerste · laatste slide': 'Primul · ultimul slide',
   'Slide-overzicht': 'Prezentare generală a slide-urilor',
-  'Slide-overzicht (pijltjes + Enter)': 'Prezentare generală a slide-urilor (săgeți + Enter)',
+  'Slide-overzicht (pijltjes + Enter)':
+      'Prezentare generală a slide-urilor (săgeți + Enter)',
   'Presenter view (notities, klok)': 'Vizualizare prezentator (note, ceas)',
   'Scherm wisselen (meerdere schermen)': 'Schimbă ecranul (mai multe ecrane)',
   'Zwart · wit scherm': 'Ecran negru · alb',
@@ -399,24 +452,33 @@ const _dutchSourceRo = {
   'Geen notities voor deze slide.': 'Nicio notă pentru acest slide.',
   'Mijn notities': 'Notele mele',
   'Gebruikersnotities': 'Note de utilizator',
-  'Gebruikersnotities voor deze slide...': 'Note de utilizator pentru acest slide...',
+  'Gebruikersnotities voor deze slide...':
+      'Note de utilizator pentru acest slide...',
   'Notities weggooien': 'Renunță la note',
-  'Notities voor de ontvanger tijdens een cursus': 'Note pentru destinatar în timpul unui curs',
-  'Schakel naar Markdown-modus om notities toe te voegen.': 'Comută în modul Markdown pentru a adăuga note.',
+  'Notities voor de ontvanger tijdens een cursus':
+      'Note pentru destinatar în timpul unui curs',
+  'Schakel naar Markdown-modus om notities toe te voegen.':
+      'Comută în modul Markdown pentru a adăuga note.',
   'Mijn notities aan/uit': 'Comută notele mele',
   'Wissel scherm (S)': 'Schimbă ecranul (S)',
   'Kon niet van scherm wisselen.': 'Nu s-a putut schimba ecranul.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P public · G prezentare · B/W negru/alb · R timp · Esc stop',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P public · S ecran · G prezentare · B/W negru/alb · R timp · Esc stop',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P public · H legendă · G prezentare · B/W negru/alb · R timp · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P public · H legendă · S ecran · G prezentare · B/W negru/alb · R timp · Esc stop',
-  'pijltjes + Enter of klik om te springen': 'săgeți + Enter sau clic pentru a sări',
+  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P public · G prezentare · B/W negru/alb · R timp · Esc stop',
+  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P public · S ecran · G prezentare · B/W negru/alb · R timp · Esc stop',
+  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P public · H legendă · G prezentare · B/W negru/alb · R timp · Esc stop',
+  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P public · H legendă · S ecran · G prezentare · B/W negru/alb · R timp · Esc stop',
+  'pijltjes + Enter of klik om te springen':
+      'săgeți + Enter sau clic pentru a sări',
   'Afsluiten (Escape)': 'Ieșire (Escape)',
   'Sluiten (G of Esc)': 'Închide (G sau Esc)',
   'Slide renderen…': 'Se randează slide-ul…',
   'Slide gekopieerd naar klembord.': 'Slide copiat în clipboard.',
   'Kopiëren mislukt.': 'Copierea a eșuat.',
-  'Geen ander deck open. Open eerst een ander tabblad.': 'Niciun alt deck deschis. Deschide mai întâi o altă filă.',
+  'Geen ander deck open. Open eerst een ander tabblad.':
+      'Niciun alt deck deschis. Deschide mai întâi o altă filă.',
   '1 slide kopiëren naar…': 'Copiază 1 slide în…',
   'slides kopiëren naar…': 'slide-uri de copiat în…',
   'slide(s) gekopieerd naar': 'slide(-uri) copiat(e) în',
@@ -431,11 +493,13 @@ const _dutchSourceRo = {
   'Tips': 'Sugestii',
   'Waarschuwingen': 'Avertismente',
   'Fouten': 'Erori',
-  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Sfat: adaugă text alternativ / legendă pentru accesibilitate',
+  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Sfat: adaugă text alternativ / legendă pentru accesibilitate',
   'Zoek in slides…': 'Caută în slide-uri…',
   'Geen slides met': 'Niciun slide cu',
   'SLIDES': 'SLIDE-URI',
-  'Geen afbeelding op het klembord gevonden.': 'Nicio imagine găsită în clipboard.',
+  'Geen afbeelding op het klembord gevonden.':
+      'Nicio imagine găsită în clipboard.',
   'Afbeelding plakken': 'Lipește imaginea',
   'Slide toevoegen': 'Adaugă slide',
   'Slide plakken': 'Lipește slide',
@@ -446,60 +510,85 @@ const _dutchSourceRo = {
   'Kopiëren naar ander deck': 'Copiază în alt deck',
   'Weer tonen': 'Arată din nou',
   'Selectie opheffen': 'Anulează selecția',
-  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.': 'Accept licența EUPL 1.2 și am citit ce date păstrează OciDeck.',
-  'Je keuze wordt de standaardtaal van de app.': 'Alegerea ta devine limba implicită a aplicației.',
+  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
+      'Accept licența EUPL 1.2 și am citit ce date păstrează OciDeck.',
+  'Je keuze wordt de standaardtaal van de app.':
+      'Alegerea ta devine limba implicită a aplicației.',
   'Lees de volledige licentie': 'Citește licența completă',
-  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.': 'OciDeck este software liber sub licența EUPL 1.2. Înainte de a începe, îți cerem să accepți licența. Mai jos poți citi și ce date păstrează OciDeck pe acest dispozitiv și când ceva părăsește dispozitivul tău.',
-  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.': 'OciDeck nu colectează statistici și nu trimite nimic în afară din proprie inițiativă. În mod implicit, totul rămâne pe acest dispozitiv. Datele părăsesc acest dispozitiv doar dacă alegi tu:\n\n•  Nextcloud/WebDAV: când te conectezi la un server, numele de utilizator și parola sunt păstrate (parola în siguranță în inelul de chei al sistemului tău), iar prezentările pe care le deschizi sau le salvezi sunt trimise către acel server.\n•  Deschidere prin URL: OciDeck preia fișierul de la adresa pe care o introduci.\n•  Media online (dezactivat implicit): dacă este activat, OciDeck încarcă imagini și videoclipuri de la adresele din slide-urile tale.\n•  Linkuri externe (precum licența online) se deschid în browserul tău.',
-  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.': 'OciDeck este furnizat sub European Union Public Licence v1.2. Prin acceptare, accepți această licență. Poți folosi, copia, modifica și distribui OciDeck în condițiile EUPL 1.2.',
-  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.': 'Pentru a funcționa și pentru a nu-ți pierde munca, OciDeck păstrează date local pe acest dispozitiv:\n\n•  Setările și preferințele tale (limbă, foldere, profiluri de stil și afișare, fișiere recente).\n•  Materialele tale de prezentare: prezentările pe care le salvezi, copii automate de recuperare și atașamente precum descrieri de imagini.\n•  Această alegere de consimțământ.\n\nPoți șterge acestea prin eliminarea fișierelor sau resetarea setărilor.',
-  'Volledige licentie online (23 officiële taalversies)': 'Licența completă online (23 de versiuni lingvistice oficiale)',
-  'Wat OciDeck op dit apparaat bewaart': 'Ce păstrează OciDeck pe acest dispozitiv',
+  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
+      'OciDeck este software liber sub licența EUPL 1.2. Înainte de a începe, îți cerem să accepți licența. Mai jos poți citi și ce date păstrează OciDeck pe acest dispozitiv și când ceva părăsește dispozitivul tău.',
+  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.':
+      'OciDeck nu colectează statistici și nu trimite nimic în afară din proprie inițiativă. În mod implicit, totul rămâne pe acest dispozitiv. Datele părăsesc acest dispozitiv doar dacă alegi tu:\n\n•  Nextcloud/WebDAV: când te conectezi la un server, numele de utilizator și parola sunt păstrate (parola în siguranță în inelul de chei al sistemului tău), iar prezentările pe care le deschizi sau le salvezi sunt trimise către acel server.\n•  Deschidere prin URL: OciDeck preia fișierul de la adresa pe care o introduci.\n•  Media online (dezactivat implicit): dacă este activat, OciDeck încarcă imagini și videoclipuri de la adresele din slide-urile tale.\n•  Linkuri externe (precum licența online) se deschid în browserul tău.',
+  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.':
+      'OciDeck este furnizat sub European Union Public Licence v1.2. Prin acceptare, accepți această licență. Poți folosi, copia, modifica și distribui OciDeck în condițiile EUPL 1.2.',
+  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.':
+      'Pentru a funcționa și pentru a nu-ți pierde munca, OciDeck păstrează date local pe acest dispozitiv:\n\n•  Setările și preferințele tale (limbă, foldere, profiluri de stil și afișare, fișiere recente).\n•  Materialele tale de prezentare: prezentările pe care le salvezi, copii automate de recuperare și atașamente precum descrieri de imagini.\n•  Această alegere de consimțământ.\n\nPoți șterge acestea prin eliminarea fișierelor sau resetarea setărilor.',
+  'Volledige licentie online (23 officiële taalversies)':
+      'Licența completă online (23 de versiuni lingvistice oficiale)',
+  'Wat OciDeck op dit apparaat bewaart':
+      'Ce păstrează OciDeck pe acest dispozitiv',
   'Wat je apparaat verlaat': 'Ce părăsește dispozitivul tău',
-  'Vul server-URL en gebruikersnaam in': 'Introdu URL-ul serverului și numele de utilizator',
+  'Vul server-URL en gebruikersnaam in':
+      'Introdu URL-ul serverului și numele de utilizator',
   'Verbinding mislukt': 'Conexiune eșuată',
-  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord': 'Autentificare eșuată — verifică numele de utilizator și parola',
-  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.': 'Serverul se află pe o adresă privată. Bifează „Server intern de încredere” pentru a permite conexiunea.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord':
+      'Autentificare eșuată — verifică numele de utilizator și parola',
+  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.':
+      'Serverul se află pe o adresă privată. Bifează „Server intern de încredere” pentru a permite conexiunea.',
   'Map niet gevonden op de server': 'Folderul nu a fost găsit pe server',
   'Ongeldige server-URL': 'URL de server nevalid',
-  'Het antwoord van de server was te groot': 'Răspunsul serverului a fost prea mare',
+  'Het antwoord van de server was te groot':
+      'Răspunsul serverului a fost prea mare',
   'Nextcloud': 'Nextcloud',
   'Nextcloud-bron (WebDAV)': 'Sursă Nextcloud (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.': 'Deschide și salvează prezentări într-un folder de pe Nextcloud. Parola este păstrată criptată în inelul de chei, nu împreună cu celelalte setări.',
+  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Deschide și salvează prezentări într-un folder de pe Nextcloud. Parola este păstrată criptată în inelul de chei, nu împreună cu celelalte setări.',
   'Server-URL': 'URL server',
   'Gebruikersnaam': 'Nume de utilizator',
   'App-wachtwoord': 'Parolă de aplicație',
-  'Maak hiervoor een app-wachtwoord aan in Nextcloud': 'Creează o parolă de aplicație pentru aceasta în Nextcloud',
+  'Maak hiervoor een app-wachtwoord aan in Nextcloud':
+      'Creează o parolă de aplicație pentru aceasta în Nextcloud',
   'Submap (optioneel)': 'Subfolder (opțional)',
   'Vertrouwde interne server': 'Server intern de încredere',
-  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.': 'Necesar când serverul rulează pe o rețea privată sau de acasă (LAN). Permite doar conexiuni către servere în care ai încredere.',
+  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Necesar când serverul rulează pe o rețea privată sau de acasă (LAN). Permite doar conexiuni către servere în care ai încredere.',
   'Verbinding testen': 'Testează conexiunea',
   'Verbinding gelukt': 'Conexiune reușită',
-  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.': 'Modificările sunt salvate când faci clic pe Salvează.',
+  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
+      'Modificările sunt salvate când faci clic pe Salvează.',
   'Afbeelding kiezen op Nextcloud': 'Alege imaginea pe Nextcloud',
   'Openen vanaf Nextcloud': 'Deschide din Nextcloud',
   'Vernieuwen': 'Reîmprospătează',
   'Deze map is leeg': 'Acest folder este gol',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.': 'Niciun server Nextcloud configurat. Configurează unul în Setări → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.': 'Nu s-a putut încărca folderul. Verifică conexiunea și setările.',
+  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
+      'Niciun server Nextcloud configurat. Configurează unul în Setări → Nextcloud.',
+  'Kon de map niet laden. Controleer je verbinding en instellingen.':
+      'Nu s-a putut încărca folderul. Verifică conexiunea și setările.',
   'Kon dit bestand niet openen.': 'Nu s-a putut deschide acest fișier.',
-  'Dit is geen Marp/OciDeck-presentatie.': 'Aceasta nu este o prezentare Marp/OciDeck.',
+  'Dit is geen Marp/OciDeck-presentatie.':
+      'Aceasta nu este o prezentare Marp/OciDeck.',
   'Downloaden mislukt:': 'Descărcare eșuată:',
   'Opgeslagen op Nextcloud:': 'Salvat pe Nextcloud:',
   'Opslaan mislukt:': 'Salvare eșuată:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.': 'Configurează mai întâi un server Nextcloud în Setări → Nextcloud.',
+  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
+      'Configurează mai întâi un server Nextcloud în Setări → Nextcloud.',
   'Opslaan naar Nextcloud': 'Salvează pe Nextcloud',
   'Doelpad (zonder extensie)': 'Cale destinație (fără extensie)',
-  'Als .ocideck-pakket (één bestand, met assets)': 'Ca pachet .ocideck (un fișier, cu resurse)',
+  'Als .ocideck-pakket (één bestand, met assets)':
+      'Ca pachet .ocideck (un fișier, cu resurse)',
   'Als losse .md plus afbeeldingen': 'Ca .md separat plus imagini',
   'Opslaan': 'Salvează',
   'Presenteren': 'Prezentare',
-  'Tijden-overzicht tonen na afloop': 'Arată prezentarea generală a timpilor la final',
-  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.': 'Timpul pe slide este întotdeauna măsurat; aceasta controlează doar dacă prezentarea generală apare după această prezentare.',
+  'Tijden-overzicht tonen na afloop':
+      'Arată prezentarea generală a timpilor la final',
+  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
+      'Timpul pe slide este întotdeauna măsurat; aceasta controlează doar dacă prezentarea generală apare după această prezentare.',
   'Oefenoverzicht tonen na afloop': 'Arată rezumatul repetiției la final',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.': 'După o prezentare, arată prezentarea generală a timpului petrecut pe fiecare slide. Timpul este întotdeauna măsurat; aceasta controlează doar dacă apare ecranul.',
+  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+      'După o prezentare, arată prezentarea generală a timpului petrecut pe fiecare slide. Timpul este întotdeauna măsurat; aceasta controlează doar dacă apare ecranul.',
   'Onveilige presentatie geblokkeerd': 'Prezentare nesigură blocată',
-  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.': 'Această prezentare nu a fost deschisă. Fișierul conține conținut care poate executa cod, iar o prezentare ar trebui să conțină doar date — nimic executabil.',
+  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Această prezentare nu a fost deschisă. Fișierul conține conținut care poate executa cod, iar o prezentare ar trebui să conțină doar date — nimic executabil.',
   'Gevonden:': 'Găsit:',
   'Regel': 'Linia',
   'Scriptuitvoering': 'Execuție de script',
@@ -521,46 +610,67 @@ const _dutchSourceRo = {
   'Pootje': 'Lăbuță',
   'In tweeën splitsen': 'Împarte în două',
   'Uitgevoerde controles': 'Verificări efectuate',
-  'Contrast en leesbaarheid van tekstkleuren': 'Contrastul și lizibilitatea culorilor textului',
-  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media': 'Texte alternative și legende pentru imagini, grafice și media',
-  'Aanwezigheid van gekoppelde mediabestanden': 'Prezența fișierelor media legate',
-  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code': 'Densitatea textului: puncte, cuvinte, citate, tabele și cod',
-  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).': 'Tema, slide-urile, subsolul, lista de verificare și titlurile peste imagini, verificate conform WCAG AA (4,5:1 pentru text, 3:1 pentru text mare).',
-  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.': 'Fiecare imagine, grafic, video și audio are nevoie de o descriere pentru cititoarele de ecran și materialele tipărite.',
-  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.': 'Referințele la imagini, video și audio sunt verificate pentru un fișier existent în proiect.',
-  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.': 'Numărul și lungimea punctelor, cuvintelor, imbricarea, echilibrul coloanelor și densitatea citatelor, titlurilor, tabelelor și codului, astfel încât totul să încapă lizibil.',
-  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.': 'Textul de corp cu contrast sub {crit}:1 se consideră eroare; deasupra, până la norma AA, ca avertisment.',
-  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.': 'Fără valoare-prag: o descriere ne-goală este obligatorie.',
-  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.': 'Fără valoare-prag: fișierul legat trebuie să existe în folderul proiectului.',
-  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.': 'Avertisment peste {b1} puncte (1 coloană), {bcl} (listă de verificare) sau {b2} (2 coloane); critic peste {bc1} sau {bc2}. Cuvinte peste {w1}/{w2}, în medie peste {avg} pe punct. Citat peste {q} caractere, titlu peste {t} caractere. Imbricare mai adâncă de nivelul {lvl}. Textul care trebuie micșorat sub {warn}% avertizează, sub {crit}% este critic.',
+  'Contrast en leesbaarheid van tekstkleuren':
+      'Contrastul și lizibilitatea culorilor textului',
+  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+      'Texte alternative și legende pentru imagini, grafice și media',
+  'Aanwezigheid van gekoppelde mediabestanden':
+      'Prezența fișierelor media legate',
+  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+      'Densitatea textului: puncte, cuvinte, citate, tabele și cod',
+  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+      'Tema, slide-urile, subsolul, lista de verificare și titlurile peste imagini, verificate conform WCAG AA (4,5:1 pentru text, 3:1 pentru text mare).',
+  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+      'Fiecare imagine, grafic, video și audio are nevoie de o descriere pentru cititoarele de ecran și materialele tipărite.',
+  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+      'Referințele la imagini, video și audio sunt verificate pentru un fișier existent în proiect.',
+  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+      'Numărul și lungimea punctelor, cuvintelor, imbricarea, echilibrul coloanelor și densitatea citatelor, titlurilor, tabelelor și codului, astfel încât totul să încapă lizibil.',
+  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+      'Textul de corp cu contrast sub {crit}:1 se consideră eroare; deasupra, până la norma AA, ca avertisment.',
+  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+      'Fără valoare-prag: o descriere ne-goală este obligatorie.',
+  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+      'Fără valoare-prag: fișierul legat trebuie să existe în folderul proiectului.',
+  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+      'Avertisment peste {b1} puncte (1 coloană), {bcl} (listă de verificare) sau {b2} (2 coloane); critic peste {bc1} sau {bc2}. Cuvinte peste {w1}/{w2}, în medie peste {avg} pe punct. Citat peste {q} caractere, titlu peste {t} caractere. Imbricare mai adâncă de nivelul {lvl}. Textul care trebuie micșorat sub {warn}% avertizează, sub {crit}% este critic.',
   'Zoek op deze computer': 'Caută pe acest computer',
-  'Presentaties zoeken op deze computer': 'Găsește prezentări pe acest computer',
+  'Presentaties zoeken op deze computer':
+      'Găsește prezentări pe acest computer',
   'Zoek op titel, pad of thema…': 'Caută după titlu, cale sau temă…',
   'Bekende mappen worden doorzocht…': 'Se caută în folderele cunoscute…',
   'gevonden': 'găsit',
   'presentatie(s) gevonden': 'prezentare(-ări) găsit(e)',
-  'Geen Marp-presentaties gevonden in de bekende mappen.': 'Nicio prezentare Marp găsită în folderele cunoscute.',
+  'Geen Marp-presentaties gevonden in de bekende mappen.':
+      'Nicio prezentare Marp găsită în folderele cunoscute.',
   'Geen thema': 'Fără temă',
   'Kopieer syntaxproblemen': 'Copiază problemele de sintaxă',
-  'Syntaxproblemen gekopieerd naar klembord.': 'Probleme de sintaxă copiate în clipboard.',
+  'Syntaxproblemen gekopieerd naar klembord.':
+      'Probleme de sintaxă copiate în clipboard.',
   'Online media': 'Media online',
   'Online media staat uit': 'Media online este dezactivat',
   'Online media toestaan': 'Permite media online',
-  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.': 'Permite încărcarea live a imaginilor și videoclipurilor prin URL și a înglobărilor YouTube/Vimeo. Dezactivat implicit pentru confidențialitatea și securitatea ta.',
-  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)': 'Cale fișier sau URL (YouTube, Vimeo, .mp4 …)',
+  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+      'Permite încărcarea live a imaginilor și videoclipurilor prin URL și a înglobărilor YouTube/Vimeo. Dezactivat implicit pentru confidențialitatea și securitatea ta.',
+  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+      'Cale fișier sau URL (YouTube, Vimeo, .mp4 …)',
   'Bestand kiezen': 'Alege fișierul',
-  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.': 'Redă segmentul acestui slide în previzualizare și taie în punctul unde vrei să împarți: a doua parte ajunge pe un slide nou.',
+  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+      'Redă segmentul acestui slide în previzualizare și taie în punctul unde vrei să împarți: a doua parte ajunge pe un slide nou.',
   'Begin (sec)': 'Început (sec)',
   'Einde (sec)': 'Sfârșit (sec)',
   'einde': 'sfârșit',
-  'Knip de video op het huidige afspeelpunt': 'Taie videoclipul la punctul de redare curent',
-  'Speel de video eerst af in het voorbeeld': 'Redă mai întâi videoclipul în previzualizare',
+  'Knip de video op het huidige afspeelpunt':
+      'Taie videoclipul la punctul de redare curent',
+  'Speel de video eerst af in het voorbeeld':
+      'Redă mai întâi videoclipul în previzualizare',
   'Knip hier': 'Taie aici',
   'Online': 'Online',
   'Lokaal bestand': 'Fișier local',
   'Geen video': 'Fără video',
   'Vraag (meerkeuze)': 'Întrebare (alegere multiplă)',
-  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding': 'Textul titlului are prea puțin contrast cu imaginea de fundal',
+  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+      'Textul titlului are prea puțin contrast cu imaginea de fundal',
   'Herstel': 'Corectează',
   'Tijdlijn': 'Cronologie',
   'Indeling': 'Aranjare',
@@ -585,19 +695,24 @@ const _dutchSourceRo = {
   'Vraag': 'Întrebare',
   'Wat wil je vragen?': 'Ce vrei să întrebi?',
   'Antwoorden': 'Răspunsuri',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.': 'Marchează răspunsurile corecte. Fără limită; la prezentare, se afișează aleatoriu unul corect și restul greșite.',
+  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Marchează răspunsurile corecte. Fără limită; la prezentare, se afișează aleatoriu unul corect și restul greșite.',
   'Antwoord': 'Răspuns',
   'Antwoord toevoegen': 'Adaugă răspuns',
   'Goed antwoord': 'Răspuns corect',
-  'Geef minstens één goed én één fout antwoord op.': 'Oferă cel puțin un răspuns corect și unul greșit.',
+  'Geef minstens één goed én één fout antwoord op.':
+      'Oferă cel puțin un răspuns corect și unul greșit.',
   'Weergave': 'Afișare',
   'Aantal getoonde opties': 'Numărul de opțiuni afișate',
-  'Maximale antwoordtijd in seconden (0 = geen limiet)': 'Timp maxim de răspuns în secunde (0 = fără limită)',
+  'Maximale antwoordtijd in seconden (0 = geen limiet)':
+      'Timp maxim de răspuns în secunde (0 = fără limită)',
   'Bij een fout antwoord': 'La un răspuns greșit',
   'Opnieuw proberen': 'Încearcă din nou',
   'Doorgaan toestaan': 'Permite continuarea',
-  'Fout = niet doorgaan; de vraag moet opnieuw.': 'Greșit = nu se poate continua; întrebarea trebuie reluată.',
-  'Fout = wel doorgaan, maar niet opnieuw doen.': 'Greșit = se poate continua, dar fără reîncercare.',
+  'Fout = niet doorgaan; de vraag moet opnieuw.':
+      'Greșit = nu se poate continua; întrebarea trebuie reluată.',
+  'Fout = wel doorgaan, maar niet opnieuw doen.':
+      'Greșit = se poate continua, dar fără reîncercare.',
   'Afbeelding (optioneel)': 'Imagine (opțional)',
   'Breedte afbeelding': 'Lățimea imaginii',
   'Goed!': 'Corect!',
@@ -612,46 +727,59 @@ const _dutchSourceRo = {
   'Juist / Onjuist': 'Adevărat / Fals',
   'Meerdere juiste antwoorden': 'Mai multe răspunsuri corecte',
   'Stelling': 'Afirmație',
-  'Formuleer een stelling die juist of onjuist is': 'Formulează o afirmație care este adevărată sau falsă',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.': 'Marchează toate răspunsurile corecte. La prezentare, se afișează un set aleatoriu cu cel puțin unul corect și unul greșit.',
+  'Formuleer een stelling die juist of onjuist is':
+      'Formulează o afirmație care este adevărată sau falsă',
+  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+      'Marchează toate răspunsurile corecte. La prezentare, se afișează un set aleatoriu cu cel puțin unul corect și unul greșit.',
   'Juist': 'Adevărat',
   'Onjuist': 'Fals',
-  'De stelling hierboven is juist of onjuist; kies welke.': 'Afirmația de mai sus este adevărată sau falsă; alege care.',
+  'De stelling hierboven is juist of onjuist; kies welke.':
+      'Afirmația de mai sus este adevărată sau falsă; alege care.',
   'Selecteer alle juiste antwoorden': 'Selectează toate răspunsurile corecte',
   'Bevestig': 'Confirmă',
   'Het juiste antwoord': 'Răspunsul corect',
-  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.': 'Imaginea este afișată pe tot ecranul ca fundal. Folosește estomparea când titlul are nevoie de mai mult calm sau contrast.',
+  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+      'Imaginea este afișată pe tot ecranul ca fundal. Folosește estomparea când titlul are nevoie de mai mult calm sau contrast.',
   'Cockpit-kleurschema': 'Schema de culori a cabinei',
-  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.': 'Culorile de stare ale indicatoarelor cabinei. Creează variante denumite; schema aleasă se aplică tuturor slide-urilor cabinei.',
+  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+      'Culorile de stare ale indicatoarelor cabinei. Creează variante denumite; schema aleasă se aplică tuturor slide-urilor cabinei.',
   'Standaard': 'Implicit',
   'Standaardkleuren gebruiken': 'Folosește culorile implicite',
   'Kleurschema verwijderen': 'Șterge schema de culori',
   'Schemanaam': 'Numele schemei',
-  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.': 'Aceasta este schema încorporată. Fă o copie pentru a ajusta culorile.',
+  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+      'Aceasta este schema încorporată. Fă o copie pentru a ajusta culorile.',
   'Goed': 'Bun',
   'Waarschuwing': 'Avertisment',
   'Kritiek': 'Critic',
   'Te laag (koud)': 'Prea scăzut (rece)',
   'Lucht (horizon)': 'Cer (orizont)',
   'Grond (horizon)': 'Sol (orizont)',
-  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.': 'Culorile de stare urmează schema de culori a cabinei; ajusteaz-o sau creează variante prin Setări → Cabină.',
+  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+      'Culorile de stare urmează schema de culori a cabinei; ajusteaz-o sau creează variante prin Setări → Cabină.',
   'Veel bullets op deze slide': 'Multe puncte pe acest slide',
   'bullets': 'puncte',
-  'Overweeg de inhoud te splitsen.': 'Ia în considerare împărțirea conținutului.',
+  'Overweeg de inhoud te splitsen.':
+      'Ia în considerare împărțirea conținutului.',
   'Erg veel bullets op deze slide': 'Prea multe puncte pe acest slide',
-  'Splits deze inhoud over meerdere slides.': 'Împarte acest conținut pe mai multe slide-uri.',
+  'Splits deze inhoud over meerdere slides.':
+      'Împarte acest conținut pe mai multe slide-uri.',
   'Veel woorden in bullets': 'Multe cuvinte în puncte',
   'woorden': 'cuvinte',
-  'Maak bullets korter of splits de slide.': 'Scurtează punctele sau împarte slide-ul.',
+  'Maak bullets korter of splits de slide.':
+      'Scurtează punctele sau împarte slide-ul.',
   'Erg veel woorden in bullets': 'Prea multe cuvinte în puncte',
   'Gemiddeld lange bullets': 'Puncte lungi în medie',
   'woorden per bullet': 'cuvinte per punct',
   'Maak elke bullet kernachtiger.': 'Fă fiecare punct mai concis.',
-  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.': 'Punct cu mai multe propoziții găsit. Fă punctele mai concise sau împarte conținutul.',
+  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+      'Punct cu mai multe propoziții găsit. Fă punctele mai concise sau împarte conținutul.',
   'Diepe bulletniveaus gevonden': 'Niveluri de indentare prea adânci',
   'niveau': 'nivel',
-  'Beperk nesting voor betere leesbaarheid.': 'Limitează imbricarea pentru o lizibilitate mai bună.',
-  'Twee kolommen zijn sterk uit balans': 'Cele două coloane sunt puternic dezechilibrate',
+  'Beperk nesting voor betere leesbaarheid.':
+      'Limitează imbricarea pentru o lizibilitate mai bună.',
+  'Twee kolommen zijn sterk uit balans':
+      'Cele două coloane sunt puternic dezechilibrate',
   'tegenover': 'față de',
   'Verdeel of splits de inhoud.': 'Redistribuie sau împarte conținutul.',
   'Slidetitel': 'Titlul slide-ului',
@@ -660,8 +788,10 @@ const _dutchSourceRo = {
   'Animeren bij binnenkomst': 'Animează la intrare',
   'Activatieduur': 'Durata activării',
   'Splits slide': 'Împarte slide-ul',
-  'Doornummeren vanaf vorige slide': 'Continuă numerotarea din slide-ul anterior',
-  'Begin de nummering waar de vorige slide ophield.': 'Începe numerotarea de unde s-a oprit slide-ul anterior.',
+  'Doornummeren vanaf vorige slide':
+      'Continuă numerotarea din slide-ul anterior',
+  'Begin de nummering waar de vorige slide ophield.':
+      'Începe numerotarea de unde s-a oprit slide-ul anterior.',
   'Volg thema-animatieduur': 'Urmează durata de animație a temei',
   'Animatie bij openen': 'Animează la intrare',
   'Meter': 'Instrument',
@@ -689,7 +819,8 @@ const _dutchSourceRo = {
   'Koers': 'Cap compas',
   'Ander profiel kiezen': 'Alege alt profil',
   'Cockpit': 'Panou cockpit',
-  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Timpul-țintă pentru cronometrul invers din prezentator. Reglabil fin în timpul prezentării cu tasta K.',
+  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Timpul-țintă pentru cronometrul invers din prezentator. Reglabil fin în timpul prezentării cu tasta K.',
   'Logo en footer': 'Logo și subsol',
   'Pagina': 'Pagină',
   'Presentatiestijl': 'Stil de prezentare',
@@ -706,10 +837,12 @@ const _dutchSourceRo = {
   'Doeltijd': 'Timp-țintă',
   'Doeltijd (aftellen)': 'Timp-țintă (cronometru invers)',
   'Geen aftelling': 'Fără cronometru invers',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Timpul-țintă implicit pentru cronometrul invers din prezentator. Reglabil fin în timpul prezentării cu tasta K.',
+  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Timpul-țintă implicit pentru cronometrul invers din prezentator. Reglabil fin în timpul prezentării cu tasta K.',
   'uit': 'oprit',
   'Doeltijd / aftellen (K)': 'Timp-țintă / cronometru invers (K)',
-  'Doeltijd / aftellen instellen (MMSS)': 'Setează timp-țintă / cronometru invers (MMSS)',
+  'Doeltijd / aftellen instellen (MMSS)':
+      'Setează timp-țintă / cronometru invers (MMSS)',
   'Tijd & oefenrun resetten': 'Resetează timpul și repetiția',
   'Resterend': 'Rămas',
   'Over de tijd': 'Peste timp',
@@ -723,25 +856,31 @@ const _dutchSourceRo = {
   'Kopieer': 'Copiază',
   'Sluiten': 'Închide',
   'Tekstgrootte van de interface': 'Dimensiunea textului interfeței',
-  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.': 'Mărește tot textul din editor până la maximum 200%. Slide-urile în sine nu se modifică.',
+  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+      'Mărește tot textul din editor până la maximum 200%. Slide-urile în sine nu se modifică.',
   'Breedte van het slidepaneel': 'Lățimea panoului de slide-uri',
   'Pijltjestoetsen passen de breedte aan': 'Tastele săgeți ajustează lățimea',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.': 'Sfat: lipește o tabelă din foaia ta de calcul într-o celulă cu Cmd/Ctrl+V pentru a umple întreaga tabelă.',
+  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+      'Sfat: lipește o tabelă din foaia ta de calcul într-o celulă cu Cmd/Ctrl+V pentru a umple întreaga tabelă.',
   'Annuleren': 'Anulează',
   'Checklist': 'Listă de sarcini',
   'Voortgangsgrafiek tonen': 'Afișează graficul de progres',
-  'Toont afgevinkt en niet afgevinkt als percentages.': 'Afișează elementele bifate și nebifate ca procente.',
+  'Toont afgevinkt en niet afgevinkt als percentages.':
+      'Afișează elementele bifate și nebifate ca procente.',
   'Afgevinkt': 'Bifat',
   'Niet afgevinkt': 'Nebifat',
-  'Er zijn geen aangevinkte checklist-items om te legen.': 'Nu există elemente bifate în lista de sarcini care să fie golite.',
+  'Er zijn geen aangevinkte checklist-items om te legen.':
+      'Nu există elemente bifate în lista de sarcini care să fie golite.',
   'Alle checkboxen legen?': 'Golești toate casetele de bifare?',
   'Hiermee worden alle': 'Aceasta va debifa toate',
-  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.': 'elementele bifate din lista de sarcini din întreaga prezentare. Poți anula cu Ctrl/Cmd+Z.',
+  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+      'elementele bifate din lista de sarcini din întreaga prezentare. Poți anula cu Ctrl/Cmd+Z.',
   'Alles legen': 'Golește tot',
   'checklist-items uitgevinkt.': 'elemente din lista de sarcini debifate.',
   'Alle checkboxen legen': 'Golește toate casetele de bifare',
   'Afgevinkte tekst doorhalen': 'Taie textul bifat',
-  'Toont een streep door voltooide checklistitems.': 'Afișează elementele finalizate din lista de sarcini cu o linie tăiată.',
+  'Toont een streep door voltooide checklistitems.':
+      'Afișează elementele finalizate din lista de sarcini cu o linie tăiată.',
   'Na media automatisch doorgaan': 'Avansează automat după media',
   'Opsomming': 'Marcatori',
   'Nummering': 'Numerotare',
@@ -751,7 +890,8 @@ const _dutchSourceRo = {
   'Omhoog': 'Mută sus',
   'Omlaag': 'Mută jos',
   'Niet toevoegen': 'Nu adăuga',
-  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.': 'Aceste slide-uri folosesc aceleași date, culori și titlu. Folosește săgețile pentru a alege ordinea lor după slide-ul curent.',
+  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+      'Aceste slide-uri folosesc aceleași date, culori și titlu. Folosește săgețile pentru a alege ordinea lor după slide-ul curent.',
   'Afbeelding': 'Imagine',
   'Broncode': 'Cod sursă',
   'Bullet': 'Marcator',
@@ -769,10 +909,12 @@ const _dutchSourceRo = {
   'Cirkel': 'Cerc',
   'Spider': 'Spider',
   'CSV importeren': 'Importă CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)': 'Date (CSV: primul rând = nume serii, prima coloană = etichete)',
+  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+      'Date (CSV: primul rând = nume serii, prima coloană = etichete)',
   'Gekoppeld aan': 'Legat de',
   'Ontkoppelen': 'Deleagă',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?': 'Stochezi datele în slide sau le păstrezi ca fișier CSV separat lângă prezentare?',
+  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+      'Stochezi datele în slide sau le păstrezi ca fișier CSV separat lângă prezentare?',
   'In de slide': 'În slide',
   'Als CSV-bestand': 'Ca fișier CSV',
   'Geen grafiekgegevens': 'Fără date de grafic',
@@ -785,9 +927,12 @@ const _dutchSourceRo = {
   'Sorteren': 'Sortează',
   'Oplopend sorteren': 'Sortează crescător',
   'Aflopend sorteren': 'Sortează descrescător',
-  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.': 'La un cerc sunt afișate cel mult primele două serii; etichetele formează segmentele.',
-  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.': 'O diagramă spider are nevoie de cel puțin trei etichete (axe); fiecare serie formează o suprafață.',
-  'Een spider-diagram heeft minstens drie labels nodig': 'O diagramă spider are nevoie de cel puțin trei etichete',
+  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+      'La un cerc sunt afișate cel mult primele două serii; etichetele formează segmentele.',
+  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+      'O diagramă spider are nevoie de cel puțin trei etichete (axe); fiecare serie formează o suprafață.',
+  'Een spider-diagram heeft minstens drie labels nodig':
+      'O diagramă spider are nevoie de cel puțin trei etichete',
   'Minimumlijn (optioneel)': 'Linie minimă (opțional)',
   'Maximumlijn (optioneel)': 'Linie maximă (opțional)',
   'Schaalminimum (optioneel)': 'Minim scală (opțional)',
@@ -796,9 +941,11 @@ const _dutchSourceRo = {
   'Broncode achtergrond': 'Fundal cod sursă',
   'Broncode tekst': 'Text cod sursă',
   'Syntaxkleuring': 'Colorare sintaxă',
-  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).': 'Oprit = totul într-o singură culoare (de ex. verde pe negru pentru un ecran CRT).',
+  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+      'Oprit = totul într-o singură culoare (de ex. verde pe negru pentru un ecran CRT).',
   'Eigen kleur (hex)': 'Culoare proprie (hex)',
-  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.': 'De exemplu #33FF33 pentru un ecran verde CRT.',
+  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+      'De exemplu #33FF33 pentru un ecran verde CRT.',
   'Onderdeel van stijlprofiel ': 'Parte din profilul de stil ',
   'Broncode lettertype': 'Font cod sursă',
   'Kop (optioneel)': 'Titlu (opțional)',
@@ -806,38 +953,48 @@ const _dutchSourceRo = {
   'Subkop': 'Subtitlu',
   'Systeem (monospace)': 'Sistem (monospațiat)',
   'Platte tekst': 'Text simplu',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.': 'HTML se deschide în orice browser fără internet și randează blocuri de cod, formule matematice și diagrame Mermaid.',
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+      'HTML se deschide în orice browser fără internet și randează blocuri de cod, formule matematice și diagrame Mermaid.',
   'Laatste slide': 'Slide final',
   'Logo px': 'Logo px',
   'Markdown voor laatste slide': 'Markdown pentru slide-ul final',
   'PREVIEW': 'PREVIZUALIZARE',
   'Slides gerenderd.': 'Slide-uri randate.',
   'Standaard laatste slide gebruiken': 'Folosește slide-ul final implicit',
-  'Wordt automatisch toegevoegd bij presenteren en exporteren.': 'Adăugat automat la prezentare și export.',
+  'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+      'Adăugat automat la prezentare și export.',
   'gerenderd.': 'randate.',
   'renderen…': 'randare…',
   'voorbereiden…': 'pregătire…',
   'Duplicaten opruimen': 'Curăță duplicatele',
-  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën': 'Găsește imagini identice la nivel de octeți (md5), îmbină etichetele și notele și elimină copiile',
+  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+      'Găsește imagini identice la nivel de octeți (md5), îmbină etichetele și notele și elimină copiile',
   'Geen dubbele afbeeldingen gevonden.': 'Nu s-au găsit imagini duplicate.',
   'Dubbele afbeeldingen opruimen?': 'Cureți imaginile duplicate?',
-  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.': 'Din fiecare grup rămâne un singur fișier. Etichetele și notele se îmbină, iar slide-urile care folosesc o copie vor indica apoi fișierul păstrat — inclusiv prezentările care nu sunt deschise acum.',
+  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+      'Din fiecare grup rămâne un singur fișier. Etichetele și notele se îmbină, iar slide-urile care folosesc o copie vor indica apoi fișierul păstrat — inclusiv prezentările care nu sunt deschise acum.',
   'Opruimen': 'Curăță',
   '1 presentatiebestand bijgewerkt.': '1 fișier de prezentare actualizat.',
   'presentatiebestanden bijgewerkt.': 'fișiere de prezentare actualizate.',
   'niet geopend': 'nedeschisă',
   '1 dubbele afbeelding verwijderd.': '1 imagine duplicată eliminată.',
   'dubbele afbeeldingen verwijderd.': 'imagini duplicate eliminate.',
-  'Alleen afbeeldingen zonder tags tonen': 'Afișează doar imaginile fără etichete',
+  'Alleen afbeeldingen zonder tags tonen':
+      'Afișează doar imaginile fără etichete',
   'Alle afbeeldingen hebben tags.': 'Toate imaginile au etichete.',
-  'Zet het filter uit om alles weer te zien.': 'Dezactivează filtrul pentru a vedea din nou totul.',
+  'Zet het filter uit om alles weer te zien.':
+      'Dezactivează filtrul pentru a vedea din nou totul.',
   'Welkom bij OciDeck': 'Bun venit la OciDeck',
   'Privacy en gebruik': 'Confidențialitate și utilizare',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'OciDeck este o aplicație desktop locală. Prezentările și datele tale sunt stocate exclusiv pe computerul tău.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'Aplicația nu colectează date personale, statistici sau date de utilizare. Confidențialitatea ta este prioritatea noastră.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Toate datele pe care le introduci în OciDeck rămân pe sistemul tău local și nu sunt trimise către servere externe.',
+  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
+      'OciDeck este o aplicație desktop locală. Prezentările și datele tale sunt stocate exclusiv pe computerul tău.',
+  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
+      'Aplicația nu colectează date personale, statistici sau date de utilizare. Confidențialitatea ta este prioritatea noastră.',
+  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
+      'Toate datele pe care le introduci în OciDeck rămân pe sistemul tău local și nu sunt trimise către servere externe.',
   'Licentie (EUPL 1.2)': 'Licență (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'Făcând clic pe „Sunt de acord”, accepți acești termeni și consimți la utilizarea OciDeck.',
+  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
+      'Făcând clic pe „Sunt de acord”, accepți acești termeni și consimți la utilizarea OciDeck.',
   'Volledige licentie online': 'Licența completă online',
   'Akkoord gaan': 'Sunt de acord',
   'Privacy': 'Confidențialitate',
@@ -845,16 +1002,21 @@ const _dutchSourceRo = {
   'Toestemming intrekken': 'Retrage consimțământul',
   'Toestemming intrekken?': 'Retragi consimțământul?',
   'Intrekken': 'Retrage',
-  'U hebt al toegestemd in het gebruik van OciDeck.': 'Ai consimțit deja la utilizarea OciDeck.',
-  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.': 'Îți poți retrage consimțământul oricând. După retragere trebuie să accepți din nou acești termeni.',
-  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.': 'Dacă îți retragi consimțământul, va trebui să accepți din nou acești termeni când repornești OciDeck.',
+  'U hebt al toegestemd in het gebruik van OciDeck.':
+      'Ai consimțit deja la utilizarea OciDeck.',
+  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+      'Îți poți retrage consimțământul oricând. După retragere trebuie să accepți din nou acești termeni.',
+  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+      'Dacă îți retragi consimțământul, va trebui să accepți din nou acești termeni când repornești OciDeck.',
   'Slidekwaliteit': 'Calitatea slide-urilor',
   'Geen kwaliteitsproblemen gevonden': 'Nu s-au găsit probleme de calitate',
   'Thema (hele presentatie)': 'Temă (întreaga prezentare)',
   'Kwaliteitsprobleem': 'Problemă de calitate',
   'Kwaliteitsproblemen': 'Probleme de calitate',
-  'Kwaliteitsproblemen (inclusief ernstige)': 'Probleme de calitate (inclusiv grave)',
-  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Adaugă text alternativ / legendă pentru accesibilitate',
+  'Kwaliteitsproblemen (inclusief ernstige)':
+      'Probleme de calitate (inclusiv grave)',
+  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Adaugă text alternativ / legendă pentru accesibilitate',
   'Alt-tekst': 'Text alternativ',
   'Tekstdichtheid': 'Densitatea textului',
   'Contrast': 'Contrast',
@@ -864,22 +1026,32 @@ const _dutchSourceRo = {
   ':1 voor normale tekst).': ':1 pentru text normal).',
   ':1 voor grote tekst).': ':1 pentru text mare).',
   ':1).': ':1).',
-  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.': 'Contrastul textului pe sau peste o imagine nu poate fi verificat automat — verifică vizual.',
-  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.': 'Graficul nu are titlu sau date descriptive — adaugă un titlu sau nume de serii.',
-  'heeft geen titel of sprekernotities die de inhoud beschrijven.': 'nu are titlu sau note de vorbitor care să descrie conținutul.',
-  'Veel tekst op deze slide: het lettertype wordt verkleind tot ': 'Mult text pe acest slide: dimensiunea fontului este redusă la ',
+  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+      'Contrastul textului pe sau peste o imagine nu poate fi verificat automat — verifică vizual.',
+  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+      'Graficul nu are titlu sau date descriptive — adaugă un titlu sau nume de serii.',
+  'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+      'nu are titlu sau note de vorbitor care să descrie conținutul.',
+  'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+      'Mult text pe acest slide: dimensiunea fontului este redusă la ',
   ' van de ontwerpgrootte.': ' din dimensiunea de proiectare.',
-  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (': 'Mult text pe acest slide: dimensiunea fontului este redusă puternic (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.': 'din dimensiunea de proiectare). Ia în calcul împărțirea conținutului.',
+  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+      'Mult text pe acest slide: dimensiunea fontului este redusă puternic (',
+  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      'din dimensiunea de proiectare). Ia în calcul împărțirea conținutului.',
   'Grote tabel (': 'Tabelă mare (',
   ' rijen, ': ' rânduri, ',
-  ' kolommen): celtekst staat op het minimumformaat.': ' coloane): textul din celule este la dimensiunea minimă.',
+  ' kolommen): celtekst staat op het minimumformaat.':
+      ' coloane): textul din celule este la dimensiunea minimă.',
   'Veel broncode (': 'Mult cod sursă (',
-  ' regels) — de tekst wordt sterk verkleind om te passen.': ' linii) — textul este redus puternic pentru a încăpea.',
+  ' regels) — de tekst wordt sterk verkleind om te passen.':
+      ' linii) — textul este redus puternic pentru a încăpea.',
   'Veel vrije markdown (': 'Mult markdown liber (',
-  ' regels) — controleer of alles leesbaar blijft op de slide.': ' linii) — verifică dacă totul rămâne lizibil pe slide.',
+  ' regels) — controleer of alles leesbaar blijft op de slide.':
+      ' linii) — verifică dacă totul rămâne lizibil pe slide.',
   'Lange titelpagina (': 'Slide de titlu lung (',
-  ' tekens) — de tekst wordt verkleind om te passen.': ' caractere) — textul este redus pentru a încăpea.',
+  ' tekens) — de tekst wordt verkleind om te passen.':
+      ' caractere) — textul este redus pentru a încăpea.',
   'Thema bodytekst': 'Text corp temă',
   'Thema titel': 'Titlu temă',
   'Thema tabeltekst': 'Text tabel temă',
@@ -890,34 +1062,46 @@ const _dutchSourceRo = {
   'Tweede afbeelding': 'A doua imagine',
   'Waarschuwing bij export': 'Avertizează la export',
   'Minimale contrastverhouding': 'Raport minim de contrast',
-  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.': 'Textul sub acest raport este semnalat. 4.5 = WCAG AA, 3.0 = WCAG AA text mare. Mai mare este mai strict.',
-  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.': 'Cere confirmare înainte de export când există probleme de calitate ale slide-urilor.',
+  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.':
+      'Textul sub acest raport este semnalat. 4.5 = WCAG AA, 3.0 = WCAG AA text mare. Mai mare este mai strict.',
+  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+      'Cere confirmare înainte de export când există probleme de calitate ale slide-urilor.',
   'Kwaliteitsproblemen gevonden': 'Probleme de calitate găsite',
   'Toch exporteren': 'Exportă oricum',
   'ernstige probleem(en)': 'probleme grave',
-  'De presentatie heeft kwaliteitsproblemen (': 'Prezentarea are probleme de calitate (',
+  'De presentatie heeft kwaliteitsproblemen (':
+      'Prezentarea are probleme de calitate (',
   'Lange quote (': 'Citat lung (',
   'Footer-tekst': 'Text subsol',
   'Checklist (niet aangevinkt)': 'Listă de sarcini (nebifat)',
   'Checklist (aangevinkt)': 'Listă de sarcini (bifat)',
   ': bestand niet gevonden (': ': fișier negăsit (',
-  'Blokkeer export bij ernstige kwaliteitsproblemen': 'Blochează exportul la probleme grave de calitate',
-  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.': 'Exportul nu este posibil cât timp verificările de calitate ale slide-urilor raportează erori.',
-  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.': 'Export blocat din cauza problemelor grave de calitate.',
+  'Blokkeer export bij ernstige kwaliteitsproblemen':
+      'Blochează exportul la probleme grave de calitate',
+  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+      'Exportul nu este posibil cât timp verificările de calitate ale slide-urilor raportează erori.',
+  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+      'Export blocat din cauza problemelor grave de calitate.',
   'Alle meldingen': 'Toate mesajele',
-  '… en meer problemen in het kwaliteitspaneel.': '… și mai multe probleme în panoul de calitate.',
+  '… en meer problemen in het kwaliteitspaneel.':
+      '… și mai multe probleme în panoul de calitate.',
   'Classificatie-handhaving': 'Aplicarea clasificării',
   'Vrijgaveplafond': 'Plafon de eliberare',
-  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.': 'Cel mai înalt nivel TLP care poate fi exportat. Gol = fără plafon.',
+  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+      'Cel mai înalt nivel TLP care poate fi exportat. Gol = fără plafon.',
   'Vereist minimumniveau': 'Nivel minim necesar',
-  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.': 'Cea mai joasă clasificare pe care un deck trebuie să o aibă pentru a exporta. Gol = fără minim.',
+  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+      'Cea mai joasă clasificare pe care un deck trebuie să o aibă pentru a exporta. Gol = fără minim.',
   'Geen plafond': 'Fără plafon',
   'Geen minimum': 'Fără minim',
   'Classificatie verplicht': 'Clasificare obligatorie',
-  'Weiger export wanneer het deck geen TLP-niveau heeft.': 'Refuză exportul când deck-ul nu are un nivel TLP.',
+  'Weiger export wanneer het deck geen TLP-niveau heeft.':
+      'Refuză exportul când deck-ul nu are un nivel TLP.',
   'Classificatie-watermerk': 'Filigran de clasificare',
-  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.': 'Afișează un filigran diagonal cu TLP și organizație pe fiecare slide.',
-  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.': 'Setează un nivel TLP — exportul este blocat de politica de clasificare.',
+  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+      'Afișează un filigran diagonal cu TLP și organizație pe fiecare slide.',
+  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+      'Setează un nivel TLP — exportul este blocat de politica de clasificare.',
   'Tabel bewerken': 'Editează tabela',
   'Pijltjes · Tab · Esc': 'Săgeți · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Editează tabela (pe slide-uri cu tabelă)',
@@ -926,4 +1110,5 @@ const _dutchSourceRo = {
   'Pen · markeerstift · ⇧E': 'Stilou · marker · ⇧E',
   'Gestapelde staaf': 'Bare stivuite',
   'Spreiding': 'Dispersie',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn răsfoiește diapozitivele',
 };

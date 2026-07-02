@@ -156,6 +156,14 @@ extension _PresenterNotes on _FullscreenPresenterState {
                                     fontSize: 11,
                                   ),
                                 ),
+                              Text(
+                                l10n.d('PgUp/PgDn bladert door de slides'),
+                                style: TextStyle(
+                                  fontFamily: profile.fontFamily,
+                                  color: fg.withValues(alpha: 0.45),
+                                  fontSize: 11,
+                                ),
+                              ),
                             ],
                           ),
                         ),
