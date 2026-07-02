@@ -86,6 +86,8 @@ const _stringsBg = {
 const _dutchSourceBg = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'Импортирането чрез URL все още не е налично в уеб версията.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'В уеб версията могат да се отварят само .md презентации.',
   'Geen': 'Няма',
   'Nieuw': 'Нов',
   'Verwijderen': 'Изтриване',

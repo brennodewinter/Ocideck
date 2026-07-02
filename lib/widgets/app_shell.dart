@@ -282,6 +282,33 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     '.tif',
   };
 
+  /// Drag-drop op web: er is geen pad, alleen inhoud. Een `.md` wordt via het
+  /// in-memory pad geopend (zelfde security-gate); al het andere — pakketten,
+  /// afbeeldingen — kan zonder bestandssysteem (nog) niet en zegt dat eerlijk.
+  Future<void> _onWebFilesDropped(List<DropItem> files) async {
+    final tabs = ref.read(tabsProvider.notifier);
+    var unsupported = 0;
+    for (final file in files) {
+      if (file.name.toLowerCase().endsWith('.md')) {
+        final bytes = await file.readAsBytes();
+        await tabs.openDeckFromBytes(bytes, file.name);
+      } else {
+        unsupported++;
+      }
+    }
+    if (unsupported > 0 && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            context.l10n.d(
+              'Alleen .md-presentaties kunnen in de webversie worden geopend.',
+            ),
+          ),
+        ),
+      );
+    }
+  }
+
   /// Verwerk gesleepte bestanden: presentaties/pakketten openen, afbeeldingen
   /// als nieuwe slide(s) toevoegen aan het actieve deck.
   Future<void> _onFilesDropped(List<String> paths) async {
@@ -360,7 +387,11 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
           onDragExited: (_) => setState(() => _dragging = false),
           onDragDone: (detail) {
             setState(() => _dragging = false);
-            _onFilesDropped(detail.files.map((f) => f.path).toList());
+            if (isWebPlatform) {
+              _onWebFilesDropped(detail.files);
+            } else {
+              _onFilesDropped(detail.files.map((f) => f.path).toList());
+            }
           },
           child: Material(
             child: Stack(

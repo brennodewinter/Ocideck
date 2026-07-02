@@ -86,6 +86,8 @@ const _stringsCs = {
 const _dutchSourceCs = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'Import přes URL zatím není ve webové verzi k dispozici.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Ve webové verzi lze otevřít pouze prezentace .md.',
   'Geen': 'Žádné',
   'Nieuw': 'Nový',
   'Verwijderen': 'Smazat',

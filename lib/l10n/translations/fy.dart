@@ -85,6 +85,8 @@ const _stringsFy = {
 const _dutchSourceFy = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'Ymportearjen fia URL is noch net beskikber yn de webferzje.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Allinne .md-presintaasjes kinne yn de webferzje iepene wurde.',
   'Geen': 'Gjin',
   'Nieuw': 'Nij',
   'Verwijderen': 'Fuortsmite',

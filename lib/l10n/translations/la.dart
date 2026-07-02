@@ -87,6 +87,8 @@ const _stringsLa = {
 const _dutchSourceLa = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'Importatio per URL in versione interretiali nondum praesto est.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'In versione interretiali solae praesentationes .md aperiri possunt.',
   'Geen': 'Nullum',
   'Nieuw': 'Novum',
   'Verwijderen': 'Delere',

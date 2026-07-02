@@ -85,6 +85,8 @@ const _stringsPap = {
 const _dutchSourcePap = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'Importá via URL no ta disponibel ainda den e vershon web.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Den e vershon web por habri solamente presentashonnan .md.',
   'Geen': 'Ningun',
   'Nieuw': 'Nobo',
   'Verwijderen': 'Kita',

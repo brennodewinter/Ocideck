@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 
 /// [resolveSlideAssetPath] plus a symlink check: resolves the real (symlink-
@@ -87,6 +88,10 @@ String? resolveProjectAbsolute(String? basePath, String path) {
 /// When [projectPath] is null (unsaved tab), absolute paths from the current
 /// editing session are allowed.
 String? resolveSlideAssetPath(String path, String? projectPath) {
+  // Op web bestaat er geen lokaal bestandssysteem: elk lokaal pad is per
+  // definitie onvindbaar. Null → de callers tonen hun normale placeholder,
+  // in plaats van dat een dart:io-stub dieper in de keten gooit.
+  if (kIsWeb) return null;
   if (path.trim().isEmpty) return null;
 
   if (projectPath == null) {
@@ -110,6 +115,7 @@ String? resolveSlideAssetPath(String path, String? projectPath) {
 /// relative path still resolves inside the project (the profile loader has
 /// already made a found relative logo absolute via the home fallback).
 String? resolveTrustedAssetPath(String path, String? projectPath) {
+  if (kIsWeb) return null;
   if (path.trim().isEmpty) return null;
   if (p.isAbsolute(path)) return p.normalize(path);
   return resolveProjectRelative(projectPath, path);
@@ -117,6 +123,7 @@ String? resolveTrustedAssetPath(String path, String? projectPath) {
 
 /// Resolve an image path for editor/carousel use (may join relative paths).
 String? resolveEditorAssetPath(String path, String? basePath) {
+  if (kIsWeb) return null;
   if (path.trim().isEmpty) return null;
   if (basePath == null || basePath.isEmpty) {
     return p.isAbsolute(path) ? p.normalize(path) : path;

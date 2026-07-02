@@ -83,6 +83,8 @@ const _stringsTlh = {
 const _dutchSourceTlh = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'URLvo\' lI\'ghach wej DuH web mIwDaq.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'web mIwDaq .md qonwI\'mey neH poSmoHlu\'laH.',
   'Geen': 'pagh',
   'Nieuw': 'chu\'',
   'Verwijderen': 'Qaw\'',

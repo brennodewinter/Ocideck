@@ -87,6 +87,8 @@ const _stringsPl = {
 const _dutchSourcePl = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'Importowanie przez URL nie jest jeszcze dostępne w wersji internetowej.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'W wersji internetowej można otwierać tylko prezentacje .md.',
   'Geen': 'Brak',
   'Nieuw': 'Nowy',
   'Verwijderen': 'Usuń',

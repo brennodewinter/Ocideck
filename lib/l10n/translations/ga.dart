@@ -87,6 +87,8 @@ const _stringsGa = {
 const _dutchSourceGa = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'Níl iompórtáil trí URL ar fáil go fóill sa leagan gréasáin.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Ní féidir ach láithreoireachtaí .md a oscailt sa leagan gréasáin.',
   'Geen': 'Gan aon',
   'Nieuw': 'Nua',
   'Verwijderen': 'Scrios',

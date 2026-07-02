@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -89,7 +90,13 @@ class RecoveryService {
     return next;
   }
 
+  /// Op web is er geen app-supportmap (path_provider/dart:io ontbreken): elke
+  /// operatie is daar een stille no-op in plaats van een logregen aan
+  /// UnsupportedErrors uit de dart:io-stubs.
+  static bool get _unavailable => kIsWeb;
+
   Future<void> save(RecoverySnapshot snapshot) {
+    if (_unavailable) return Future.value();
     return _enqueue(snapshot.id, () async {
       try {
         final dir = await _dir();
@@ -105,6 +112,7 @@ class RecoveryService {
   }
 
   Future<void> discard(String id) {
+    if (_unavailable) return Future.value();
     return _enqueue(id, () async {
       try {
         final file = _file(await _dir(), id);
@@ -123,6 +131,7 @@ class RecoveryService {
   /// Delete recovery files last modified more than [maxAge] ago. Best-effort:
   /// failures are logged, never thrown. Returns the number of files removed.
   Future<int> pruneOlderThan(Duration maxAge) async {
+    if (_unavailable) return 0;
     var removed = 0;
     try {
       final dir = await _dir();
@@ -146,6 +155,7 @@ class RecoveryService {
   }
 
   Future<List<RecoverySnapshot>> loadAll() async {
+    if (_unavailable) return const [];
     // Bound plaintext residue: drop stale orphans before offering the rest.
     await pruneOlderThan(defaultMaxAge);
     try {
@@ -173,6 +183,7 @@ class RecoveryService {
   }
 
   Future<void> clearAll() async {
+    if (_unavailable) return;
     try {
       final dir = await _dir();
       for (final entry in dir.listSync()) {

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
@@ -44,6 +45,8 @@ class CaptionService {
   }
 
   String? _resolvePath(String imagePath, String? basePath) {
+    // Geen bestandssysteem op web: sidecars zijn daar per definitie onvindbaar.
+    if (kIsWeb) return null;
     if (imagePath.trim().isEmpty) return null;
     if (basePath == null || basePath.isEmpty) {
       return p.isAbsolute(imagePath) ? p.normalize(imagePath) : null;

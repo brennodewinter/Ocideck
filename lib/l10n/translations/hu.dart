@@ -85,6 +85,8 @@ const _stringsHu = {
 const _dutchSourceHu = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'Az URL-en keresztüli importálás még nem érhető el a webes verzióban.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'A webes verzióban csak .md-prezentációk nyithatók meg.',
   'Geen': 'Nincs',
   'Nieuw': 'Új',
   'Verwijderen': 'Törlés',

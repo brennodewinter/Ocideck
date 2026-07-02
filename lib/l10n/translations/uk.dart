@@ -86,6 +86,8 @@ const _stringsUk = {
 const _dutchSourceUk = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'Імпорт за URL поки недоступний у веб-версії.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'У веб-версії можна відкривати лише презентації .md.',
   'Geen': 'Немає',
   'Nieuw': 'Новий',
   'Verwijderen': 'Видалити',

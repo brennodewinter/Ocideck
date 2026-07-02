@@ -85,6 +85,8 @@ const _stringsHr = {
 const _dutchSourceHr = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'Uvoz putem URL-a još nije dostupan u web-verziji.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'U web-verziji mogu se otvoriti samo .md prezentacije.',
   'Geen': 'Nema',
   'Nieuw': 'Novo',
   'Verwijderen': 'Izbriši',

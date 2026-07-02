@@ -85,6 +85,8 @@ const _stringsFi = {
 const _dutchSourceFi = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'Tuonti URL-osoitteesta ei ole vielä käytettävissä verkkoversiossa.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Verkkoversiossa voi avata vain .md-esityksiä.',
   'Geen': 'Ei mitään',
   'Nieuw': 'Uusi',
   'Verwijderen': 'Poista',

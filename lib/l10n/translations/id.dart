@@ -85,6 +85,8 @@ const _stringsId = {
 const _dutchSourceId = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'Impor melalui URL belum tersedia di versi web.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Hanya presentasi .md yang dapat dibuka di versi web.',
   'Geen': 'Tidak ada',
   'Nieuw': 'Baru',
   'Verwijderen': 'Hapus',

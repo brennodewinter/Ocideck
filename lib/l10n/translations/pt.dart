@@ -86,6 +86,8 @@ const _stringsPt = {
 const _dutchSourcePt = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'A importação por URL ainda não está disponível na versão web.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Na versão web só podem ser abertas apresentações .md.',
   'Geen': 'Nenhum',
   'Nieuw': 'Novo',
   'Verwijderen': 'Eliminar',

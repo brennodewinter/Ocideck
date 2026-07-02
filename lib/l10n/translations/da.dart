@@ -85,6 +85,8 @@ const _stringsDa = {
 const _dutchSourceDa = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'Import via URL er endnu ikke tilgængelig i webversionen.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Kun .md-præsentationer kan åbnes i webversionen.',
   'Geen': 'Ingen',
   'Nieuw': 'Ny',
   'Verwijderen': 'Slet',

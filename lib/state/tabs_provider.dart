@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:path/path.dart' as p;
@@ -13,6 +15,7 @@ import '../services/markdown_service.dart';
 import '../services/recovery_service.dart';
 import '../services/user_notes_codec.dart';
 import '../services/webdav_service.dart';
+import '../platform/platform_features.dart';
 import '../utils/log.dart';
 import 'deck_provider.dart';
 import 'editor_provider.dart';
@@ -142,7 +145,14 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // Start with one empty tab
     final tab = _createTab();
     state = TabsState(tabs: [tab], selectedIndex: 0);
-    _autosaveTimer = Timer.periodic(_autosaveInterval, (_) => _autosaveTick());
+    // Zonder bestandssysteem (web) is er geen herstelmap; de tick zou elke
+    // 25s voor niets serialiseren, dus start hem daar helemaal niet.
+    if (supportsLocalProjectFolders) {
+      _autosaveTimer = Timer.periodic(
+        _autosaveInterval,
+        (_) => _autosaveTick(),
+      );
+    }
   }
 
   @override
@@ -330,20 +340,67 @@ class TabsNotifier extends StateNotifier<TabsState> {
     }
     // notifier disposed during the await
     if (!mounted) return OpenResult.unreadable;
+    _showDeckInTab(deck, filePath: path, selectIndex: selectIndex);
+    await _settings.addRecentFile(path);
+    return OpenResult.opened;
+  }
+
+  /// Toon een zojuist geopend deck: hergebruik een leeg huidig tabblad, anders
+  /// een nieuw tabblad. Gedeelde staart van pad- en bytes-opens.
+  void _showDeckInTab(Deck deck, {String? filePath, int? selectIndex}) {
     final index = (selectIndex ?? 0).clamp(0, deck.slides.length - 1);
     final current = state.current;
     if (current != null && !current.isOpen) {
-      current.deckNotifier.loadDeck(deck, filePath: path);
+      current.deckNotifier.loadDeck(deck, filePath: filePath);
       current.editorNotifier.select(index);
       state = state.copyWith(tabs: List.from(state.tabs));
     } else {
       final tab = _createTab();
-      tab.deckNotifier.loadDeck(deck, filePath: path);
+      tab.deckNotifier.loadDeck(deck, filePath: filePath);
       tab.editorNotifier.select(index);
       final newTabs = [...state.tabs, tab];
       state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
     }
-    await _settings.addRecentFile(path);
+  }
+
+  /// Open een deck uit in-memory bytes — het open-pad voor web, waar de
+  /// file-picker en drag-drop geen pad maar inhoud aanleveren. Dezelfde
+  /// fail-closed security-gate als [openFileByPath]; er is geen TOCTOU-gat,
+  /// want gescand en geparsed wordt exact dezelfde in-memory string. Het
+  /// tabblad krijgt geen [DeckState.filePath], dus opslaan wordt een download.
+  Future<OpenResult> openDeckFromBytes(Uint8List bytes, String name) async {
+    if (bytes.length > FileService.maxDeckMarkdownBytes) {
+      return OpenResult.unreadable;
+    }
+    final String raw;
+    try {
+      raw = utf8.decode(bytes);
+    } catch (e) {
+      logWarning('TabsNotifier.openDeckFromBytes: not valid UTF-8', e);
+      return OpenResult.unreadable;
+    }
+    final findings = MarkdownSafetyScanner.scan(raw);
+    if (findings.isNotEmpty) {
+      if (mounted) {
+        _ref.read(importSecurityAlarmProvider.notifier).state =
+            ImportSecurityAlarm(path: name, findings: findings);
+      }
+      return OpenResult.blocked;
+    }
+    // De kale bestandsnaam parseert zonder projectPath: assets op schijf zijn
+    // op web sowieso onbereikbaar en tonen als placeholder.
+    final outcome = await _file.openDeckDetailed(
+      p.basename(name),
+      content: raw,
+    );
+    final deck = outcome.deck;
+    if (deck == null) {
+      return outcome.failure == OpenFailure.notPresentation
+          ? OpenResult.notAPresentation
+          : OpenResult.unreadable;
+    }
+    if (!mounted) return OpenResult.unreadable;
+    _showDeckInTab(deck);
     return OpenResult.opened;
   }
 

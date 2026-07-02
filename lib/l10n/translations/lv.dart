@@ -85,6 +85,8 @@ const _stringsLv = {
 const _dutchSourceLv = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'Importēšana pēc URL tīmekļa versijā vēl nav pieejama.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Tīmekļa versijā var atvērt tikai .md prezentācijas.',
   'Geen': 'Nav',
   'Nieuw': 'Jauns',
   'Verwijderen': 'Dzēst',

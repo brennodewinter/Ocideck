@@ -85,6 +85,8 @@ const _stringsGsw = {
 const _dutchSourceGsw = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'Dr Import über en URL isch i dr Webversion no nid verfüegbar.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'I dr Webversion chöi nume .md-Präsentatione göffnet wärde.',
   'Geen': 'Kes',
   'Nieuw': 'Nöi',
   'Verwijderen': 'Lösche',

@@ -86,6 +86,8 @@ const _stringsRo = {
 const _dutchSourceRo = {
   'Importeren via URL is nog niet beschikbaar in de webversie.':
       'Importul prin URL nu este încă disponibil în versiunea web.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'În versiunea web pot fi deschise doar prezentări .md.',
   'Geen': 'Niciuna',
   'Nieuw': 'Nou',
   'Verwijderen': 'Șterge',
