@@ -1157,4 +1157,9 @@ const _dutchSourceEt = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Sisselogimine ebaõnnestus — kontrolli kasutajanime ja parooli. Vihje: Nextcloudiga kasuta rakenduse parooli (Seaded → Turvalisus), mitte konto parooli.',
   'Annuleren…': 'Tühistamine…',
+  'Afbeeldingen vergelijken…': 'Piltide võrdlemine…',
+  'Presentaties scannen…': 'Esitluste skannimine…',
+  'Opruimen…': 'Koristamine…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Ühte või mitut teegi kausta ei õnnestunud lugeda; loend võib olla poolik.',
 };

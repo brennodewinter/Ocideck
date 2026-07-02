@@ -1165,4 +1165,9 @@ const _dutchSourceHu = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'A bejelentkezés nem sikerült — ellenőrizd a felhasználónevet és a jelszót. Tipp: Nextcloudnál alkalmazásjelszót használj (Beállítások → Biztonság), ne a fiókjelszavadat.',
   'Annuleren…': 'Megszakítás…',
+  'Afbeeldingen vergelijken…': 'Képek összehasonlítása…',
+  'Presentaties scannen…': 'Prezentációk átvizsgálása…',
+  'Opruimen…': 'Takarítás…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Egy vagy több könyvtármappát nem sikerült beolvasni; a lista hiányos lehet.',
 };

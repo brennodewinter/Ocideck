@@ -1151,4 +1151,9 @@ const _dutchSourceTlh = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       '\'el Qapbe\' — lo\'wI\' pong mu\'wIj je yI\'ol. qeS: Nextcloud Daq app mu\'wIj yIlo\' (Settings → Hung), bo\'Degh mu\'wIj yIlo\'Qo\'.',
   'Annuleren…': 'qIlmeH…',
+  'Afbeeldingen vergelijken…': 'mIlloghmey Dun…',
+  'Presentaties scannen…': '\'anghom tetlhmey nej…',
+  'Opruimen…': 'Say\'moH…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'wa\' pagh law\' qach pa\'mey laDlaHbe\'lu\'; tetlh naQbe\'law\'.',
 };

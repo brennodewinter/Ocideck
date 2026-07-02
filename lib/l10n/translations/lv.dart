@@ -1162,4 +1162,9 @@ const _dutchSourceLv = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Pieteikšanās neizdevās — pārbaudiet lietotājvārdu un paroli. Padoms: ar Nextcloud izmantojiet lietotnes paroli (Iestatījumi → Drošība), nevis konta paroli.',
   'Annuleren…': 'Atceļ…',
+  'Afbeeldingen vergelijken…': 'Salīdzina attēlus…',
+  'Presentaties scannen…': 'Skenē prezentācijas…',
+  'Opruimen…': 'Uzkopšana…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Nevarēja nolasīt vienu vai vairākas bibliotēkas mapes; saraksts var būt nepilnīgs.',
 };

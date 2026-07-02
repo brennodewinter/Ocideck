@@ -1,7 +1,24 @@
 import 'dart:io';
+import 'dart:math' as math;
 import 'package:crypto/crypto.dart';
+import 'package:flutter/foundation.dart' show compute;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../utils/log.dart';
+
+/// Isolate-werkfunctie: md5 per pad. Onleesbare bestanden vallen stil weg
+/// (zelfde gedrag als voorheen); loggen kan niet vanuit een isolate.
+Future<Map<String, String>> _md5Worker(List<String> paths) async {
+  final result = <String, String>{};
+  for (final path in paths) {
+    try {
+      final digest = await md5.bind(File(path).openRead()).single;
+      result[path] = digest.toString();
+    } catch (_) {
+      // overslaan
+    }
+  }
+  return result;
+}
 
 /// Vindt exacte duplicaten tussen afbeeldingen op basis van hun md5-checksum,
 /// zodat de bibliotheek opgeschoond kan worden. Bestanden worden eerst op
@@ -13,8 +30,9 @@ class ImageDedupService {
   /// volgorde waarin ze in [imagePaths] stonden. Onleesbare bestanden worden
   /// stilletjes overgeslagen.
   Future<List<List<String>>> findDuplicateGroups(
-    Iterable<String> imagePaths,
-  ) async {
+    Iterable<String> imagePaths, {
+    void Function(int done, int total)? onProgress,
+  }) async {
     // Stap 1: op bestandsgrootte groeperen — verschillend groot is nooit gelijk.
     final bySize = <int, List<String>>{};
     for (final path in imagePaths) {
@@ -26,18 +44,30 @@ class ImageDedupService {
       }
     }
 
-    // Stap 2: alleen binnen gelijke groottes de md5 berekenen.
+    // Stap 2: alleen binnen gelijke groottes de md5 berekenen — in een
+    // isolate (compute), in porties zodat de voortgang zichtbaar blijft en
+    // een grote bibliotheek de UI niet bevriest.
+    final toHash = <String>[
+      for (final candidates in bySize.values)
+        if (candidates.length >= 2) ...candidates,
+    ];
+    onProgress?.call(0, toHash.length);
+    const chunkSize = 32;
+    final hashes = <String, String>{};
+    for (var i = 0; i < toHash.length; i += chunkSize) {
+      final end = math.min(i + chunkSize, toHash.length);
+      hashes.addAll(await compute(_md5Worker, toHash.sublist(i, end)));
+      onProgress?.call(end, toHash.length);
+    }
+
     final groups = <List<String>>[];
     for (final candidates in bySize.values) {
       if (candidates.length < 2) continue;
       final byHash = <String, List<String>>{};
       for (final path in candidates) {
-        try {
-          final digest = await md5.bind(File(path).openRead()).single;
-          byHash.putIfAbsent(digest.toString(), () => []).add(path);
-        } catch (e) {
-          logWarning('ImageDedupService.findDuplicateGroups: md5 hash', e);
-        }
+        final hash = hashes[path];
+        if (hash == null) continue; // onleesbaar: overgeslagen in de isolate
+        byHash.putIfAbsent(hash, () => []).add(path);
       }
       for (final group in byHash.values) {
         if (group.length >= 2) groups.add(group);

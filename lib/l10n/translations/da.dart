@@ -1159,4 +1159,9 @@ const _dutchSourceDa = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Login mislykkedes — tjek brugernavn og adgangskode. Tip: brug med Nextcloud en app-adgangskode (Indstillinger → Sikkerhed), ikke din kontoadgangskode.',
   'Annuleren…': 'Annullerer…',
+  'Afbeeldingen vergelijken…': 'Sammenligner billeder…',
+  'Presentaties scannen…': 'Scanner præsentationer…',
+  'Opruimen…': 'Rydder op…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Kunne ikke læse en eller flere biblioteksmapper; listen kan være ufuldstændig.',
 };

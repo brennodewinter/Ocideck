@@ -1167,4 +1167,9 @@ const _dutchSourceHr = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Prijava nije uspjela — provjerite korisničko ime i lozinku. Savjet: uz Nextcloud koristite lozinku aplikacije (Postavke → Sigurnost), ne lozinku računa.',
   'Annuleren…': 'Otkazivanje…',
+  'Afbeeldingen vergelijken…': 'Uspoređivanje slika…',
+  'Presentaties scannen…': 'Skeniranje prezentacija…',
+  'Opruimen…': 'Čišćenje…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Nije bilo moguće pročitati jednu ili više mapa knjižnice; popis može biti nepotpun.',
 };

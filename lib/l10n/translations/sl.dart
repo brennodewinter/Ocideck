@@ -1165,4 +1165,9 @@ const _dutchSourceSl = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Prijava ni uspela — preverite uporabniško ime in geslo. Namig: pri Nextcloudu uporabite geslo aplikacije (Nastavitve → Varnost), ne gesla računa.',
   'Annuleren…': 'Preklicevanje…',
+  'Afbeeldingen vergelijken…': 'Primerjanje slik…',
+  'Presentaties scannen…': 'Pregledovanje predstavitev…',
+  'Opruimen…': 'Pospravljanje…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Ene ali več map knjižnice ni bilo mogoče prebrati; seznam je lahko nepopoln.',
 };

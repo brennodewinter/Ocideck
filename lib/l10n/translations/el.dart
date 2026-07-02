@@ -1177,4 +1177,9 @@ const _dutchSourceEl = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Η σύνδεση απέτυχε — ελέγξτε όνομα χρήστη και κωδικό. Συμβουλή: με το Nextcloud χρησιμοποιήστε κωδικό εφαρμογής (Ρυθμίσεις → Ασφάλεια), όχι τον κωδικό του λογαριασμού.',
   'Annuleren…': 'Ακύρωση…',
+  'Afbeeldingen vergelijken…': 'Σύγκριση εικόνων…',
+  'Presentaties scannen…': 'Σάρωση παρουσιάσεων…',
+  'Opruimen…': 'Εκκαθάριση…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Δεν ήταν δυνατή η ανάγνωση ενός ή περισσότερων φακέλων της βιβλιοθήκης· η λίστα μπορεί να είναι ελλιπής.',
 };

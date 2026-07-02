@@ -1164,4 +1164,9 @@ const _dutchSourceCs = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Přihlášení se nezdařilo — zkontrolujte uživatelské jméno a heslo. Tip: u Nextcloudu použijte heslo aplikace (Nastavení → Zabezpečení), ne heslo účtu.',
   'Annuleren…': 'Rušení…',
+  'Afbeeldingen vergelijken…': 'Porovnávání obrázků…',
+  'Presentaties scannen…': 'Prohledávání prezentací…',
+  'Opruimen…': 'Úklid…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Nelze přečíst jednu nebo více složek knihovny; seznam může být neúplný.',
 };

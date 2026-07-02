@@ -1176,4 +1176,9 @@ const _dutchSourceMt = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Il-login falla — iċċekkja l-isem tal-utent u l-password. Suġġeriment: ma\' Nextcloud uża password tal-app (Settings → Sigurtà), mhux dik tal-kont.',
   'Annuleren…': 'Qed jitħassar…',
+  'Afbeeldingen vergelijken…': 'Qed jitqabblu l-istampi…',
+  'Presentaties scannen…': 'Qed jiġu skenjati l-preżentazzjonijiet…',
+  'Opruimen…': 'Tindif…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Ma setgħux jinqraw folder wieħed jew aktar tal-librerija; il-lista tista\' ma tkunx kompluta.',
 };

@@ -1159,4 +1159,9 @@ const _dutchSourceAddEs = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Error al iniciar sesión — comprueba el usuario y la contraseña. Consejo: con Nextcloud usa una contraseña de aplicación (Ajustes → Seguridad), no la de tu cuenta.',
   'Annuleren…': 'Cancelando…',
+  'Afbeeldingen vergelijken…': 'Comparando imágenes…',
+  'Presentaties scannen…': 'Analizando presentaciones…',
+  'Opruimen…': 'Limpiando…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'No se pudieron leer una o más carpetas de la biblioteca; la lista puede estar incompleta.',
 };

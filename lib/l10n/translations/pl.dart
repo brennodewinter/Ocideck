@@ -1170,4 +1170,9 @@ const _dutchSourcePl = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Logowanie nie powiodło się — sprawdź nazwę użytkownika i hasło. Wskazówka: w Nextcloud użyj hasła aplikacji (Ustawienia → Bezpieczeństwo), nie hasła konta.',
   'Annuleren…': 'Anulowanie…',
+  'Afbeeldingen vergelijken…': 'Porównywanie obrazów…',
+  'Presentaties scannen…': 'Skanowanie prezentacji…',
+  'Opruimen…': 'Porządkowanie…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Nie można odczytać co najmniej jednego folderu biblioteki; lista może być niekompletna.',
 };

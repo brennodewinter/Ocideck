@@ -1173,4 +1173,9 @@ const _dutchSourceLa = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Conatus intrandi defecit — nomen usoris et tesseram proba. Consilium: apud Nextcloud tessera applicationis utere (Optiones → Securitas), non tessera rationis tuae.',
   'Annuleren…': 'Abrogatur…',
+  'Afbeeldingen vergelijken…': 'Imagines comparantur…',
+  'Presentaties scannen…': 'Praesentationes perscrutantur…',
+  'Opruimen…': 'Purgatur…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Unum aut plura scrinia bibliothecae legi non potuerunt; index incompletus esse potest.',
 };

@@ -1152,4 +1152,9 @@ const _dutchSourceAddPap = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Login a faya — kontrolá e nòmber di usuario i e password. Tip: ku Nextcloud usa un app-password (Konfigurashon → Siguridat), no esun di bo kuenta.',
   'Annuleren…': 'Kanselando…',
+  'Afbeeldingen vergelijken…': 'Komparando imágennan…',
+  'Presentaties scannen…': 'Skaneando presentashonnan…',
+  'Opruimen…': 'Limpiando…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'No por a lesa un òf mas map di e biblioteka; e lista por ta inkompletu.',
 };

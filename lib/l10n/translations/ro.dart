@@ -1173,4 +1173,9 @@ const _dutchSourceRo = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Autentificarea a eșuat — verificați numele de utilizator și parola. Sfat: cu Nextcloud folosiți o parolă de aplicație (Setări → Securitate), nu parola contului.',
   'Annuleren…': 'Se anulează…',
+  'Afbeeldingen vergelijken…': 'Se compară imaginile…',
+  'Presentaties scannen…': 'Se scanează prezentările…',
+  'Opruimen…': 'Se curăță…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Nu s-au putut citi unul sau mai multe dosare ale bibliotecii; lista poate fi incompletă.',
 };

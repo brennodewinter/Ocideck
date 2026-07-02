@@ -130,6 +130,7 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
   bool _justCopied = false; // korte feedback na kopiëren naar klembord
   bool _untaggedOnly = false; // toon alleen afbeeldingen zonder tags
   bool _deduping = false; // duplicaten-opruimactie bezig
+  String? _dedupePhase; // huidige fase van de opruimactie, voor op de knop
   int _hoveredIndex = -1;
   _ViewMode _viewMode = _ViewMode.grid;
 

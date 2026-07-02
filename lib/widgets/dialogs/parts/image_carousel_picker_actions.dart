@@ -7,6 +7,7 @@ part of '../image_carousel_picker.dart';
 extension _CarouselActions on _ImageCarouselPickerState {
   Future<void> _loadImages() async {
     final found = <String>{};
+    var scanFailed = false;
 
     for (final path in widget.searchPaths) {
       if (path.isEmpty) continue;
@@ -23,6 +24,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
         }
       } catch (e) {
         logWarning('_ImageCarouselPickerState._loadImages: directory scan', e);
+        scanFailed = true;
       }
     }
 
@@ -55,6 +57,19 @@ extension _CarouselActions on _ImageCarouselPickerState {
     });
     await _loadCaptionForSelection();
     _loadDescriptionForSelection();
+    // Een mislukte scan (bijv. onbereikbare netwerkmap) zou anders stil een
+    // lege of onvolledige bibliotheek tonen.
+    if (scanFailed && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            context.l10n.d(
+              'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.',
+            ),
+          ),
+        ),
+      );
+    }
   }
 
   /// Recompute [_filtered] from [_images] and the current query. Matches on
@@ -160,13 +175,30 @@ extension _CarouselActions on _ImageCarouselPickerState {
   Future<void> _dedupe() async {
     await _persistDescription();
     if (!mounted) return;
-    _rebuild(() => _deduping = true);
+    final l10n = context.l10n;
+    _rebuild(() {
+      _deduping = true;
+      _dedupePhase = l10n.d('Afbeeldingen vergelijken…');
+    });
     final dedup = ImageDedupService();
     final refs = ImageReferenceService();
-    final groups = await dedup.findDuplicateGroups(_images);
+    final groups = await dedup.findDuplicateGroups(
+      _images,
+      onProgress: (done, total) {
+        if (!mounted || total == 0) return;
+        _rebuild(
+          () => _dedupePhase =
+              '${l10n.d('Afbeeldingen vergelijken…')} '
+              '$done/$total',
+        );
+      },
+    );
     if (!mounted) return;
     if (groups.isEmpty) {
-      _rebuild(() => _deduping = false);
+      _rebuild(() {
+        _deduping = false;
+        _dedupePhase = null;
+      });
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(context.l10n.d('Geen dubbele afbeeldingen gevonden.')),
@@ -178,6 +210,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
     // Ook presentaties op schijf tellen mee: zo blijft bij voorkeur het
     // bestand staan waar de meeste slides (open of niet) naar wijzen. Open
     // decks worden via usageOf geteld en hier overgeslagen.
+    _rebuild(() => _dedupePhase = l10n.d('Presentaties scannen…'));
     final deckFiles = await refs.findDeckFiles(widget.searchPaths);
     final diskCounts = await refs.countReferences(
       _withoutOpenDecks(deckFiles),
@@ -207,9 +240,13 @@ extension _CarouselActions on _ImageCarouselPickerState {
     final confirmed = await _showDedupeDialog(plan);
     if (!mounted) return;
     if (confirmed != true) {
-      _rebuild(() => _deduping = false);
+      _rebuild(() {
+        _deduping = false;
+        _dedupePhase = null;
+      });
       return;
     }
+    _rebuild(() => _dedupePhase = l10n.d('Opruimen…'));
 
     var removed = 0;
     final updatedDeckFiles = <String>{};
@@ -272,12 +309,12 @@ extension _CarouselActions on _ImageCarouselPickerState {
             .keeper;
       }
       _deduping = false;
+      _dedupePhase = null;
       _applyFilter();
     });
     await _loadCaptionForSelection();
     _loadDescriptionForSelection();
     if (!mounted) return;
-    final l10n = context.l10n;
     final removedText = removed == 1
         ? l10n.d('1 dubbele afbeelding verwijderd.')
         : '$removed ${l10n.d('dubbele afbeeldingen verwijderd.')}';

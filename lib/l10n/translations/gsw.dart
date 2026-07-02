@@ -1163,4 +1163,9 @@ const _dutchSourceGsw = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Aamäldig fählgschlage — lueg Benutzername und Passwort aa. Tipp: bruch bi Nextcloud es App-Passwort (Iistellige → Sicherheit), nit dis Konto-Passwort.',
   'Annuleren…': 'Am Abbräche…',
+  'Afbeeldingen vergelijken…': 'Bilder verglyche…',
+  'Presentaties scannen…': 'Präsentatione dursueche…',
+  'Opruimen…': 'Am Ufrume…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Ei oder mehreri Bibliotheks-Ordner hei nit chönne gläse wärde; d Lischte cha unvollständig sii.',
 };

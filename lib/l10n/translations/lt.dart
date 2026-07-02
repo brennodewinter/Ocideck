@@ -1168,4 +1168,9 @@ const _dutchSourceLt = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Prisijungti nepavyko — patikrinkite naudotojo vardą ir slaptažodį. Patarimas: su Nextcloud naudokite programėlės slaptažodį (Nustatymai → Sauga), o ne paskyros.',
   'Annuleren…': 'Atšaukiama…',
+  'Afbeeldingen vergelijken…': 'Lyginami vaizdai…',
+  'Presentaties scannen…': 'Skenuojami pristatymai…',
+  'Opruimen…': 'Tvarkoma…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Nepavyko perskaityti vieno ar kelių bibliotekos aplankų; sąrašas gali būti neišsamus.',
 };

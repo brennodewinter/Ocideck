@@ -1188,4 +1188,9 @@ const _dutchSourceGa = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Theip ar an síniú isteach — seiceáil an t-ainm úsáideora agus an pasfhocal. Leid: le Nextcloud, úsáid pasfhocal aipe (Socruithe → Slándáil), ní pasfhocal do chuntais.',
   'Annuleren…': 'Á chealú…',
+  'Afbeeldingen vergelijken…': 'Íomhánna á gcur i gcomparáid…',
+  'Presentaties scannen…': 'Cur i láthair á scanadh…',
+  'Opruimen…': 'Á ghlanadh…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Níorbh fhéidir fillteán leabharlainne amháin nó níos mó a léamh; d\'fhéadfadh an liosta a bheith neamhiomlán.',
 };

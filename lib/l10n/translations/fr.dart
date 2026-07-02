@@ -1164,4 +1164,9 @@ const _dutchSourceAddFr = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Échec de la connexion — vérifiez le nom d\'utilisateur et le mot de passe. Astuce : avec Nextcloud, utilisez un mot de passe d\'application (Paramètres → Sécurité), pas celui de votre compte.',
   'Annuleren…': 'Annulation…',
+  'Afbeeldingen vergelijken…': 'Comparaison des images…',
+  'Presentaties scannen…': 'Analyse des présentations…',
+  'Opruimen…': 'Nettoyage…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Impossible de lire un ou plusieurs dossiers de la bibliothèque ; la liste peut être incomplète.',
 };

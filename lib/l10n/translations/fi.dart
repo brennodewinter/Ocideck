@@ -1165,4 +1165,9 @@ const _dutchSourceFi = {
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Kirjautuminen epäonnistui — tarkista käyttäjätunnus ja salasana. Vinkki: käytä Nextcloudissa sovellussalasanaa (Asetukset → Turvallisuus), älä tilisi salasanaa.',
   'Annuleren…': 'Peruutetaan…',
+  'Afbeeldingen vergelijken…': 'Vertaillaan kuvia…',
+  'Presentaties scannen…': 'Selataan esityksiä…',
+  'Opruimen…': 'Siivotaan…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Yhtä tai useampaa kirjastokansiota ei voitu lukea; luettelo voi olla puutteellinen.',
 };
