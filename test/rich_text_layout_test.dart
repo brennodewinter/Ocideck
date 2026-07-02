@@ -133,7 +133,10 @@ void main() {
       expect(logoSafeReserve(w, noLogo), 0);
       // Bottom logo: size*(1+0.12) + w*0.014.
       const size = w * (160 / 1280);
-      expect(logoSafeReserve(w, bottomLogo), closeTo(size * 1.12 + w * 0.014, 1e-6));
+      expect(
+        logoSafeReserve(w, bottomLogo),
+        closeTo(size * 1.12 + w * 0.014, 1e-6),
+      );
     });
 
     test('a shown logo shrinks the rich-text body height', () {
@@ -160,14 +163,12 @@ void main() {
       var paras = 1;
       // Find a paragraph count that still fits on one page without a logo.
       while (paras < 40 &&
-          richTextPageCountForSlide(slide: slide(paras), profile: noLogo) == 1) {
+          richTextPageCountForSlide(slide: slide(paras), profile: noLogo) ==
+              1) {
         paras++;
       }
       final borderline = slide(paras - 1); // fits on one page, no logo
-      expect(
-        richTextPageCountForSlide(slide: borderline, profile: noLogo),
-        1,
-      );
+      expect(richTextPageCountForSlide(slide: borderline, profile: noLogo), 1);
       // The same slide with a large logo needs the reserved strip → 2 pages.
       expect(
         richTextPageCountForSlide(slide: borderline, profile: bottomLogo),

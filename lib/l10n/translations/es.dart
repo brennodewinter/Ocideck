@@ -1113,4 +1113,7 @@ const _dutchSourceAddEs = {
   'Gum (E / Shift+E)': 'Borrador (E / Shift+E)',
   'Laser (X)': 'Láser (X)',
   'Metriek': 'Métrica',
+  'Inhoud': 'Contenido',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'La pregunta no se puede jugar: indica al menos una respuesta correcta y una incorrecta.',
 };

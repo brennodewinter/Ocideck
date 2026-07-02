@@ -474,7 +474,8 @@ marp: true
     });
 
     test('flags a <video> tag missing a src attribute', () {
-      const md = '---\nmarp: true\n---\n\n# Slide\n\n<video controls></video>\n';
+      const md =
+          '---\nmarp: true\n---\n\n# Slide\n\n<video controls></video>\n';
       final result = validator.validate(md);
       expect(
         result.issues.any((i) => i.message.contains('mist een `src')),

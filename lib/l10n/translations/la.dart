@@ -1128,4 +1128,7 @@ const _dutchSourceLa = {
   'Gum (E / Shift+E)': 'Deletrix (E / Shift+E)',
   'Laser (X)': 'Radius (X)',
   'Metriek': 'Mensura',
+  'Inhoud': 'Contentum',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Quaestio agi non potest: da saltem unum responsum rectum et unum falsum.',
 };

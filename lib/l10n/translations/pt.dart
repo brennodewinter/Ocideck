@@ -1136,4 +1136,7 @@ const _dutchSourcePt = {
   'Gum (E / Shift+E)': 'Borracha (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Métrica',
+  'Inhoud': 'Conteúdo',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'A pergunta não pode ser jogada: indique pelo menos uma resposta certa e uma errada.',
 };

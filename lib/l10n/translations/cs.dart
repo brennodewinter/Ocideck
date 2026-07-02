@@ -1119,4 +1119,7 @@ const _dutchSourceCs = {
   'Gum (E / Shift+E)': 'Guma (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Metrika',
+  'Inhoud': 'Obsah',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Otázku nelze hrát: zadejte alespoň jednu správnou a jednu špatnou odpověď.',
 };

@@ -1114,4 +1114,7 @@ const _dutchSourceDa = {
   'Gum (E / Shift+E)': 'Viskelæder (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Metrik',
+  'Inhoud': 'Indhold',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Spørgsmålet kan ikke afvikles: angiv mindst ét rigtigt og ét forkert svar.',
 };

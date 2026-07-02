@@ -1112,4 +1112,7 @@ const _dutchSourceEt = {
   'Gum (E / Shift+E)': 'Kustukumm (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Mõõdik',
+  'Inhoud': 'Sisu',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Küsimust ei saa mängida: sisesta vähemalt üks õige ja üks vale vastus.',
 };

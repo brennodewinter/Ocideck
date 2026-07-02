@@ -1143,4 +1143,7 @@ const _dutchSourceGa = {
   'Gum (E / Shift+E)': 'Scriosán (E / Shift+E)',
   'Laser (X)': 'Léasar (X)',
   'Metriek': 'Méadracht',
+  'Inhoud': 'Ábhar',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Ní féidir an cheist a imirt: tabhair freagra ceart amháin agus freagra mícheart amháin ar a laghad.',
 };

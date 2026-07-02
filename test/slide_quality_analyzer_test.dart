@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/markdown_validation.dart';
+import 'package:ocideck/models/question.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/slide_quality.dart';
@@ -709,6 +710,34 @@ void main() {
         ),
         isTrue,
       );
+    });
+
+    test('flags a question slide without a correct/wrong answer pair', () {
+      final broken = Slide.create(SlideType.question).copyWith(
+        customMarkdown: const QuestionSpec(
+          prompt: 'Wat is het antwoord?',
+          answers: [QuestionAnswer(text: 'Enige optie', correct: false)],
+        ).toBlock(),
+      );
+      final playable = Slide.create(SlideType.question).copyWith(
+        customMarkdown: const QuestionSpec(
+          prompt: 'Wat is het antwoord?',
+          answers: [
+            QuestionAnswer(text: 'Goed', correct: true),
+            QuestionAnswer(text: 'Fout', correct: false),
+          ],
+        ).toBlock(),
+      );
+      final deck = Deck(title: 'Quiz', slides: [broken, playable]);
+
+      final issues = analyzer
+          .analyze(deck)
+          .issues
+          .where((i) => i.kind == SlideQualityIssueKind.questionNotAnswerable)
+          .toList();
+      expect(issues, hasLength(1));
+      expect(issues.single.slideIndex, 0);
+      expect(issues.single.severity, MarkdownValidationSeverity.warning);
     });
   });
 

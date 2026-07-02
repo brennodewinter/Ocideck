@@ -1123,4 +1123,7 @@ const _dutchSourceLt = {
   'Gum (E / Shift+E)': 'Trintukas (E / Shift+E)',
   'Laser (X)': 'Lazeris (X)',
   'Metriek': 'Metrika',
+  'Inhoud': 'Turinys',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Klausimo negalima žaisti: pateikite bent vieną teisingą ir vieną neteisingą atsakymą.',
 };

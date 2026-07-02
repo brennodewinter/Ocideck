@@ -1118,4 +1118,7 @@ const _dutchSourceLv = {
   'Gum (E / Shift+E)': 'Dzēšgumija (E / Shift+E)',
   'Laser (X)': 'Lāzers (X)',
   'Metriek': 'Metrika',
+  'Inhoud': 'Saturs',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Jautājumu nevar izspēlēt: norādiet vismaz vienu pareizu un vienu nepareizu atbildi.',
 };

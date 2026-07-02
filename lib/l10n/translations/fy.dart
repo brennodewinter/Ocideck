@@ -1106,4 +1106,7 @@ const _dutchSourceAddFy = {
   'Gum (E / Shift+E)': 'Gom (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Metryk',
+  'Inhoud': 'Ynhâld',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Fraach is net spylber: jou op syn minst ien goed én ien ferkeard antwurd op.',
 };

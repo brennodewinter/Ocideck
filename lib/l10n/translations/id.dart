@@ -1118,4 +1118,7 @@ const _dutchSourceId = {
   'Gum (E / Shift+E)': 'Penghapus (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Metrik',
+  'Inhoud': 'Konten',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Pertanyaan tidak dapat dimainkan: berikan setidaknya satu jawaban benar dan satu salah.',
 };

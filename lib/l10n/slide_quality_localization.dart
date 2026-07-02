@@ -176,6 +176,7 @@ String slideQualityCategoryLabel(
     SlideQualityCategory.altText => l10n.d('Alt-tekst'),
     SlideQualityCategory.contrast => l10n.d('Contrast'),
     SlideQualityCategory.textDensity => l10n.d('Tekstdichtheid'),
+    SlideQualityCategory.content => l10n.d('Inhoud'),
   };
 }
 
@@ -253,6 +254,9 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.missingMediaFile =>
       '${label('label')}${l10n.d(': bestand niet gevonden (')}'
           '${issue.args['path'] ?? ''}).',
+    SlideQualityIssueKind.questionNotAnswerable => l10n.d(
+      'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.',
+    ),
   };
 }
 

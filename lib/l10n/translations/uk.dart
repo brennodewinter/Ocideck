@@ -1130,4 +1130,7 @@ const _dutchSourceUk = {
   'Gum (E / Shift+E)': 'Гумка (E / Shift+E)',
   'Laser (X)': 'Лазер (X)',
   'Metriek': 'Метрика',
+  'Inhoud': 'Вміст',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Питання не можна відтворити: вкажіть щонайменше одну правильну та одну неправильну відповідь.',
 };

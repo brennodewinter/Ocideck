@@ -1119,4 +1119,7 @@ const _dutchSourceAddFr = {
   'Gum (E / Shift+E)': 'Gomme (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Métrique',
+  'Inhoud': 'Contenu',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'La question ne peut pas être jouée : indiquez au moins une bonne et une mauvaise réponse.',
 };

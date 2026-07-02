@@ -24,7 +24,8 @@ void main() {
     final projectDir = Directory(p.join(tmp.path, 'project'))
       ..createSync(recursive: true);
     // A canary the traversal payload ("../../evil") would target if it escaped.
-    final canary = File(p.join(tmp.path, 'evil.css'))..writeAsStringSync('SAFE');
+    final canary = File(p.join(tmp.path, 'evil.css'))
+      ..writeAsStringSync('SAFE');
 
     final fs = FileService(
       MarkdownService(),

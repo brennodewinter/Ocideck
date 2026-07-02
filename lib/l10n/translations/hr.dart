@@ -1122,4 +1122,7 @@ const _dutchSourceHr = {
   'Gum (E / Shift+E)': 'Gumica (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Metrika',
+  'Inhoud': 'Sadržaj',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Pitanje se ne može igrati: navedite barem jedan točan i jedan netočan odgovor.',
 };

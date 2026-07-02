@@ -1120,4 +1120,7 @@ const _dutchSourceFi = {
   'Gum (E / Shift+E)': 'Pyyhekumi (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Mittari',
+  'Inhoud': 'Sisältö',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Kysymystä ei voi pelata: anna vähintään yksi oikea ja yksi väärä vastaus.',
 };

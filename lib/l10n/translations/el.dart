@@ -1131,4 +1131,7 @@ const _dutchSourceEl = {
   'Gum (E / Shift+E)': 'Γόμα (E / Shift+E)',
   'Laser (X)': 'Λέιζερ (X)',
   'Metriek': 'Μετρική',
+  'Inhoud': 'Περιεχόμενο',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Η ερώτηση δεν μπορεί να παιχτεί: δώστε τουλάχιστον μία σωστή και μία λάθος απάντηση.',
 };

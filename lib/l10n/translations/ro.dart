@@ -1128,4 +1128,7 @@ const _dutchSourceRo = {
   'Gum (E / Shift+E)': 'Radieră (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Metrică',
+  'Inhoud': 'Conținut',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Întrebarea nu poate fi jucată: oferă cel puțin un răspuns corect și unul greșit.',
 };

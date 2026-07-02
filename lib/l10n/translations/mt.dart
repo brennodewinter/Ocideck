@@ -1131,4 +1131,7 @@ const _dutchSourceMt = {
   'Gum (E / Shift+E)': 'Gomma (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Metrika',
+  'Inhoud': 'Kontenut',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Il-mistoqsija ma tistax tintlagħab: agħti mill-inqas tweġiba waħda tajba u waħda ħażina.',
 };

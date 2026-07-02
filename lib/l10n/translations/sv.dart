@@ -1117,4 +1117,7 @@ const _dutchSourceSv = {
   'Gum (E / Shift+E)': 'Suddgummi (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Mätvärde',
+  'Inhoud': 'Innehåll',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Frågan kan inte spelas: ange minst ett rätt och ett fel svar.',
 };

@@ -320,8 +320,7 @@ void main() {
         ChartSeries(name: 'Omzet', data: [42]),
       ],
     );
-    Duration dur() =>
-        tester.widget<BarChart>(find.byType(BarChart)).duration;
+    Duration dur() => tester.widget<BarChart>(find.byType(BarChart)).duration;
 
     // First slide: let the entrance play and freeze.
     await tester.pumpWidget(_host(spec, presentationMode: true));

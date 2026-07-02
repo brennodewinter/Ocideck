@@ -1112,4 +1112,7 @@ const _dutchSourceAddIt = {
   'Gum (E / Shift+E)': 'Gomma (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Metrica',
+  'Inhoud': 'Contenuto',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'La domanda non è giocabile: fornisci almeno una risposta corretta e una sbagliata.',
 };

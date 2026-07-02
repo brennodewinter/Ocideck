@@ -1130,4 +1130,7 @@ const _dutchSourceAddEn = {
   'Gum (E / Shift+E)': 'Eraser (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Metric',
+  'Inhoud': 'Content',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Question cannot be played: provide at least one correct and one wrong answer.',
 };

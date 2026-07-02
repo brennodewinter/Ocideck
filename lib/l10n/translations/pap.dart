@@ -1108,4 +1108,7 @@ const _dutchSourceAddPap = {
   'Gum (E / Shift+E)': 'Borador (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Métrika',
+  'Inhoud': 'Kontenido',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'E pregunta no por wòrdu hungá: duna por lo ménos un kontesta bon i un robes.',
 };

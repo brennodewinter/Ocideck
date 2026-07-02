@@ -1120,4 +1120,7 @@ const _dutchSourceSl = {
   'Gum (E / Shift+E)': 'Radirka (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Metrika',
+  'Inhoud': 'Vsebina',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Vprašanja ni mogoče igrati: navedite vsaj en pravilen in en napačen odgovor.',
 };

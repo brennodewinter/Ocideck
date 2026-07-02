@@ -1106,4 +1106,7 @@ const _dutchSourceTlh = {
   'Gum (E / Shift+E)': 'teqwI\' (E / Shift+E)',
   'Laser (X)': 'laser (X)',
   'Metriek': 'juvwI\'',
+  'Inhoud': 'ngaSbogh',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'yu\'wI\' QujlaHbe\'lu\': wa\' jang lugh wa\' jang muj je yInob.',
 };

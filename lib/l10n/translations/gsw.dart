@@ -1118,4 +1118,7 @@ const _dutchSourceGsw = {
   'Gum (E / Shift+E)': 'Gummi (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Metrik',
+  'Inhoud': 'Inhalt',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'D Frag lauft nit: gib mindestens ei richtigi und ei falschi Antwort aa.',
 };

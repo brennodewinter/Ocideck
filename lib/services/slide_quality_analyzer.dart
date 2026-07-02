@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/markdown_validation.dart';
+import '../models/question.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../models/slide_quality.dart';
@@ -100,6 +101,7 @@ class SlideQualityAnalyzer {
       _checkSlideContrast(slide, i, theme, issues);
       _checkTextDensity(slide, i, font, issues);
       _checkMissingMedia(slide, i, projectPath, issues);
+      _checkQuestionAnswerable(slide, i, issues);
     }
     return SlideQualityResult(issues);
   }
@@ -847,6 +849,29 @@ class SlideQualityAnalyzer {
         category: SlideQualityCategory.textDensity,
         severity: MarkdownValidationSeverity.warning,
         args: {'chars': '${titleLen + subtitleLen}'},
+      ),
+    );
+  }
+
+  /// Een vraagslide zonder minstens één (ingevuld) goed én fout antwoord kan
+  /// tijdens het presenteren niet gespeeld worden. De editor waarschuwt al
+  /// inline; dit maakt het ook deck-breed zichtbaar in het kwaliteitspaneel,
+  /// zodat het niet pas live opvalt.
+  void _checkQuestionAnswerable(
+    Slide slide,
+    int index,
+    List<SlideQualityIssue> issues,
+  ) {
+    if (slide.type != SlideType.question) return;
+    final spec = QuestionSpec.parse(slide.customMarkdown);
+    if (spec.isPresentable) return;
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: index,
+        kind: SlideQualityIssueKind.questionNotAnswerable,
+        category: SlideQualityCategory.content,
+        severity: MarkdownValidationSeverity.warning,
+        field: 'customMarkdown',
       ),
     );
   }

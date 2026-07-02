@@ -1134,4 +1134,7 @@ const _dutchSourceBg = {
   'Gum (E / Shift+E)': 'Гума (E / Shift+E)',
   'Laser (X)': 'Лазер (X)',
   'Metriek': 'Метрика',
+  'Inhoud': 'Съдържание',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Въпросът не може да се играе: посочете поне един верен и един грешен отговор.',
 };

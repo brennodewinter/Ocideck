@@ -36,10 +36,7 @@ void main() {
   test('a large highly-compressible entry is refused, not inflated', () async {
     // 8 MiB of zeros compresses to a few KB but would inflate past a 1 MiB cap.
     final bomb = Uint8List(8 * 1024 * 1024);
-    final bytes = zipOf({
-      'deck.md': '# Hi\n'.codeUnits,
-      'big.bin': bomb,
-    });
+    final bytes = zipOf({'deck.md': '# Hi\n'.codeUnits, 'big.bin': bomb});
     expect(bytes.length, lessThan(1024 * 1024), reason: 'bomb must be tiny');
 
     final result = await file.importPackageBytes(
@@ -51,9 +48,7 @@ void main() {
   });
 
   test('a normal package within budget still imports', () async {
-    final bytes = zipOf({
-      'deck.md': '# Hallo wereld\n\n- punt\n'.codeUnits,
-    });
+    final bytes = zipOf({'deck.md': '# Hallo wereld\n\n- punt\n'.codeUnits});
     final result = await file.importPackageBytes(
       bytes,
       tmp.path,

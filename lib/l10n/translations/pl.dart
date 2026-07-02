@@ -1125,4 +1125,7 @@ const _dutchSourcePl = {
   'Gum (E / Shift+E)': 'Gumka (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Metryka',
+  'Inhoud': 'Treść',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Pytania nie da się rozegrać: podaj co najmniej jedną poprawną i jedną błędną odpowiedź.',
 };

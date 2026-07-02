@@ -1109,4 +1109,7 @@ const _dutchSourceAddDe = {
   'Gum (E / Shift+E)': 'Radierer (E / Shift+E)',
   'Laser (X)': 'Laser (X)',
   'Metriek': 'Metrik',
+  'Inhoud': 'Inhalt',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Frage ist nicht spielbar: gib mindestens eine richtige und eine falsche Antwort an.',
 };

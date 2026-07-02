@@ -1120,4 +1120,7 @@ const _dutchSourceHu = {
   'Gum (E / Shift+E)': 'Radír (E / Shift+E)',
   'Laser (X)': 'Lézer (X)',
   'Metriek': 'Metrika',
+  'Inhoud': 'Tartalom',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'A kérdés nem játszható le: adj meg legalább egy helyes és egy helytelen választ.',
 };
