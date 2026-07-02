@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 
 /// A small flag for a language code, for the language pickers. Most languages
-/// use a flag emoji (rendered by the platform); Frisian has no country-flag
-/// emoji, so it uses a bundled image of the Frisian flag.
+/// use a flag emoji (rendered by the platform); a few have no country-flag
+/// emoji and use a bundled image instead: Frisian (the Frisian flag) and
+/// Klingon (the Klingon-Empire emblem).
 Widget languageFlag(String code, {double size = 15}) {
-  if (code == 'fy') {
+  const bundled = {'fy': 'assets/images/flag_fy.png', 'tlh': 'assets/images/flag_tlh.png'};
+  final asset = bundled[code];
+  if (asset != null) {
     return Image.asset(
-      'assets/images/flag_fy.png',
+      asset,
       height: size * 0.92,
       fit: BoxFit.contain,
       filterQuality: FilterQuality.high,

@@ -19,6 +19,19 @@ part 'translations/da.dart';
 part 'translations/sv.dart';
 part 'translations/hr.dart';
 part 'translations/cs.dart';
+part 'translations/fi.dart';
+part 'translations/bg.dart';
+part 'translations/lv.dart';
+part 'translations/lt.dart';
+part 'translations/mt.dart';
+part 'translations/et.dart';
+part 'translations/hu.dart';
+part 'translations/ga.dart';
+part 'translations/pt.dart';
+part 'translations/ro.dart';
+part 'translations/sl.dart';
+part 'translations/sk.dart';
+part 'translations/tlh.dart';
 
 class AppLocalizations {
   final Locale locale;
@@ -44,6 +57,19 @@ class AppLocalizations {
     Locale('sv'),
     Locale('hr'),
     Locale('cs'),
+    Locale('fi'),
+    Locale('bg'),
+    Locale('lv'),
+    Locale('lt'),
+    Locale('mt'),
+    Locale('et'),
+    Locale('hu'),
+    Locale('ga'),
+    Locale('pt'),
+    Locale('ro'),
+    Locale('sl'),
+    Locale('sk'),
+    Locale('tlh'),
   ];
 
   static const languageNames = {
@@ -65,6 +91,19 @@ class AppLocalizations {
     'sv': 'Svenska',
     'hr': 'Hrvatski',
     'cs': 'Čeština',
+    'fi': 'Suomi',
+    'bg': 'Български',
+    'lv': 'Latviešu',
+    'lt': 'Lietuvių',
+    'mt': 'Malti',
+    'et': 'Eesti',
+    'hu': 'Magyar',
+    'ga': 'Gaeilge',
+    'pt': 'Português',
+    'ro': 'Română',
+    'sl': 'Slovenščina',
+    'sk': 'Slovenčina',
+    'tlh': 'tlhIngan Hol',
   };
 
   /// A country flag (emoji) per language, shown in the language pickers. Some
@@ -90,6 +129,21 @@ class AppLocalizations {
     'sv': '🇸🇪',
     'hr': '🇭🇷',
     'cs': '🇨🇿',
+    'fi': '🇫🇮',
+    'bg': '🇧🇬',
+    'lv': '🇱🇻',
+    'lt': '🇱🇹',
+    'mt': '🇲🇹',
+    'et': '🇪🇪',
+    'hu': '🇭🇺',
+    'ga': '🇮🇪',
+    'pt': '🇵🇹',
+    'ro': '🇷🇴',
+    'sl': '🇸🇮',
+    'sk': '🇸🇰',
+    // Klingon has no country flag; a bundled Klingon-Empire emblem is used
+    // instead (see languageFlag()). This emoji is only a text fallback.
+    'tlh': '🖖',
   };
 
   // Transliteration to a Latin sort key, so names in other scripts (Greek,
@@ -159,6 +213,21 @@ class AppLocalizations {
     'sv': Locale('sv'),
     'hr': Locale('hr'),
     'cs': Locale('cs'),
+    'fi': Locale('fi'),
+    'bg': Locale('bg'),
+    'lv': Locale('lv'),
+    'lt': Locale('lt'),
+    // Maltese, Irish and Klingon have no Material localization; borrow English
+    // for the framework widgets while the app UI is in the chosen language.
+    'mt': Locale('en'),
+    'et': Locale('et'),
+    'hu': Locale('hu'),
+    'ga': Locale('en'),
+    'pt': Locale('pt'),
+    'ro': Locale('ro'),
+    'sl': Locale('sl'),
+    'sk': Locale('sk'),
+    'tlh': Locale('en'),
   };
 
   static String _activeLanguageCode = 'nl';
@@ -259,6 +328,19 @@ const _strings = {
   'sv': _stringsSv,
   'hr': _stringsHr,
   'cs': _stringsCs,
+  'fi': _stringsFi,
+  'bg': _stringsBg,
+  'lv': _stringsLv,
+  'lt': _stringsLt,
+  'mt': _stringsMt,
+  'et': _stringsEt,
+  'hu': _stringsHu,
+  'ga': _stringsGa,
+  'pt': _stringsPt,
+  'ro': _stringsRo,
+  'sl': _stringsSl,
+  'sk': _stringsSk,
+  'tlh': _stringsTlh,
 };
 
 const _dutchSourceStrings = {
@@ -279,6 +361,19 @@ const _dutchSourceStrings = {
   'sv': _dutchSourceSv,
   'hr': _dutchSourceHr,
   'cs': _dutchSourceCs,
+  'fi': _dutchSourceFi,
+  'bg': _dutchSourceBg,
+  'lv': _dutchSourceLv,
+  'lt': _dutchSourceLt,
+  'mt': _dutchSourceMt,
+  'et': _dutchSourceEt,
+  'hu': _dutchSourceHu,
+  'ga': _dutchSourceGa,
+  'pt': _dutchSourcePt,
+  'ro': _dutchSourceRo,
+  'sl': _dutchSourceSl,
+  'sk': _dutchSourceSk,
+  'tlh': _dutchSourceTlh,
 };
 
 const _dutchSourceStringAdditions = {
