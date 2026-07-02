@@ -97,11 +97,15 @@ class MarpHtmlService {
         '<html lang="nl"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
         // Neutralise injected inline scripts (defence-in-depth behind DOMPurify)
-        // without over-restricting img/style/font, which would break locally
-        // opened exports that reference relative image files.
+        // without over-restricting style/font, which would break locally opened
+        // exports. img-src still permits self/data/blob/file so relative and
+        // inlined images render; connect-src 'none' stops a surviving
+        // <img src="https://…"> (or CSS url()) from beaconing home on open.
+        // No default-src: the inline <style> block must keep working.
         '<meta http-equiv="Content-Security-Policy" '
         'content="script-src \'nonce-$nonce\'; object-src \'none\'; '
-        'base-uri \'none\'; frame-src \'none\'">'
+        'base-uri \'none\'; frame-src \'none\'; '
+        'img-src \'self\' data: blob: file:; connect-src \'none\'">'
         '<title>$title</title>'
         '$headMeta'
         '<style>$css\n$hljsCss</style>'

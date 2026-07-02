@@ -6,6 +6,32 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
 
 void main() {
+  test('advance directive clamps Infinity/NaN/overflow to 0', () {
+    for (final v in ['Infinity', '-Infinity', 'NaN', '1e400']) {
+      final md = '---\nmarp: true\n---\n\n# Slide\n\n<!-- advance: $v -->\n';
+      final deck = MarkdownService().parseDeck(md)!;
+      expect(
+        deck.slides.single.advanceDuration,
+        0,
+        reason: 'advance: $v must not become a non-finite duration',
+      );
+    }
+  });
+
+  test('advance directive clamps huge finite values to 86400s', () {
+    const md = '---\nmarp: true\n---\n\n# Slide\n\n<!-- advance: 999999 -->\n';
+    final deck = MarkdownService().parseDeck(md)!;
+    expect(deck.slides.single.advanceDuration, 86400);
+  });
+
+  test('a huge background image size is clamped at parse (<=400%)', () {
+    const md =
+        '---\nmarp: true\n---\n\n# Titel\n\n![bg 900000%](images/x.png)\n';
+    final deck = MarkdownService().parseDeck(md)!;
+    expect(deck.slides.single.imageSize, lessThanOrEqualTo(400));
+    expect(deck.slides.single.imageSize, greaterThan(0));
+  });
+
   test('frontmatter tolerates indentation and missing spaces', () {
     const md =
         '---\n'

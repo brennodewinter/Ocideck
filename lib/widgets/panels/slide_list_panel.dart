@@ -10,6 +10,7 @@ import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
+import '../../services/classification_enforcement_policy.dart';
 import '../../services/image_service.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../state/slide_clipboard_provider.dart';
@@ -201,10 +202,28 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
 
   /// Render de hele slide naar een afbeelding en kopieer 'm naar het klembord,
   /// zodat je 'm elders kunt plakken.
+  /// Fail-closed classificatie-gate voor egress-paden buiten [ExportService].
+  /// Rasteren-naar-klembord is functioneel een export: het levert een volledige
+  /// render van (mogelijk geclassificeerde) slide-inhoud af op het systeem-
+  /// klembord. Zonder deze check zou het vrijgaveplafond omzeild kunnen worden.
+  /// Retourneert true als de actie door mag; toont anders de weigerreden.
+  bool _classificationAllowsEgress(Deck deck, ScaffoldMessengerState messenger) {
+    final policy = ClassificationEnforcementPolicy.fromAppSettings(
+      ref.read(settingsProvider),
+    );
+    final decision = policy.evaluate(deck.tlp);
+    if (!decision.allowed) {
+      messenger.showSnackBar(SnackBar(content: Text(decision.reason!)));
+      return false;
+    }
+    return true;
+  }
+
   Future<void> _copySlideAsImage(Slide slide) async {
     final deck = ref.read(deckProvider).deck;
     if (deck == null) return;
     final messenger = ScaffoldMessenger.of(context);
+    if (!_classificationAllowsEgress(deck, messenger)) return;
     messenger.showSnackBar(
       SnackBar(
         content: Text(context.l10n.d('Slide renderen…')),

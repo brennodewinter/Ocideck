@@ -41,6 +41,14 @@
       "sha256": "d4295dc33744836935c1399feece5159577b34c5c8ffb9f1c6324cd82e03a882",
       "source": "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js",
       "license": "Apache-2.0"
+    },
+    {
+      "_comment": "Integrity-only (no npm package to OSV-query): highlight.js GitHub theme CSS, inlined into every HTML export. The export CSP does not restrict CSS url(), so a tampered file could exfiltrate via a remote url() — hence the sha256 pin.",
+      "file": "highlight.css",
+      "version": "11.11.1",
+      "sha256": "3a9a5def8b9c311e5ae43abde85c63133185eed4f0d9f67fea4b00a8308cf066",
+      "source": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css",
+      "license": "BSD-3-Clause"
     }
   ]
 }

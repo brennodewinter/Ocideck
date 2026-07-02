@@ -121,6 +121,16 @@ class MarkdownSafetyScanner {
     void run(String text) {
       for (final rule in _rules) {
         for (final m in rule.pattern.allMatches(text)) {
+          // OciDeck serialises YouTube/Vimeo video slides as
+          // `<iframe class="ocideck-embed" … src="https://…/embed/…">`. That is
+          // the app's own, host-restricted output, so re-opening a deck the app
+          // just saved must not fail the gate. Any *other* danger inside the
+          // same tag (an `on…=` handler, a `javascript:` src) is still caught by
+          // its own rule, so this exception is safe.
+          if (rule.kind == MarkdownThreat.embeddedContent &&
+              _isSafeOcideckEmbed(text, m.start)) {
+            continue;
+          }
           final line = _lineAt(text, m.start);
           final evidence = _snippet(text, m.start);
           // Dedup on (kind, line, evidence) so the raw and normalized passes
@@ -150,6 +160,27 @@ class MarkdownSafetyScanner {
 
   /// Convenience: true when [markdown] carries no executable content.
   static bool isSafe(String markdown) => scan(markdown).isEmpty;
+
+  /// The embed hosts [VideoSource.embedUri] can produce. Kept in sync with
+  /// `video_source.dart`; a mismatch only means an embed is (safely) refused.
+  static final RegExp _safeEmbedSrc = RegExp(
+    r'''src\s*=\s*"https://(?:www\.youtube-nocookie\.com/embed/|player\.vimeo\.com/video/)''',
+    caseSensitive: false,
+  );
+
+  /// True when the `<iframe>` starting at [tagStart] is OciDeck's own
+  /// `class="ocideck-embed"` video embed pointing at an allowed host. Only the
+  /// tag itself (up to the first `>`) is inspected.
+  static bool _isSafeOcideckEmbed(String text, int tagStart) {
+    var end = text.indexOf('>', tagStart);
+    if (end == -1) end = text.length;
+    final tag = text.substring(tagStart, end);
+    if (!RegExp(r'<\s*iframe\b', caseSensitive: false).hasMatch(tag)) {
+      return false; // object/embed/applet are never whitelisted
+    }
+    if (!tag.contains('class="ocideck-embed"')) return false;
+    return _safeEmbedSrc.hasMatch(tag);
+  }
 
   static int _lineAt(String text, int index) {
     var line = 1;

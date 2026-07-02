@@ -57,8 +57,10 @@ Future<void> main(List<String> args) async {
 
   for (final b in bundles) {
     final file = b['file'] as String;
-    final npm = b['npm'] as String;
-    final version = b['version'] as String;
+    // A bundle without an `npm` package (e.g. a CSS theme file) is
+    // integrity-only: hash-pinned here but not something OSV can query.
+    final npm = b['npm'] as String?;
+    final version = b['version'] as String?;
     final expected = (b['sha256'] as String).toLowerCase();
     final path = '$_assetDir/$file';
 
@@ -84,7 +86,9 @@ Future<void> main(List<String> args) async {
 
     // --- 2. Known vulnerabilities (OSV) ------------------------------------
     String vulnStatus;
-    if (offline) {
+    if (npm == null || version == null) {
+      vulnStatus = 'n/a (integrity-only, no npm package)';
+    } else if (offline) {
       vulnStatus = 'skipped (--offline)';
     } else {
       final r = await _queryOsv(ecosystem, npm, version);
@@ -99,7 +103,8 @@ Future<void> main(List<String> args) async {
       }
     }
 
-    stdout.writeln('  $npm@$version  ($file)');
+    final label = npm == null ? file : '$npm@$version  ($file)';
+    stdout.writeln('  $label');
     stdout.writeln('      integrity : $integrity');
     stdout.writeln('      osv       : $vulnStatus');
   }

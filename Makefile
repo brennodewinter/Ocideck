@@ -1,4 +1,4 @@
-.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check licenses check-conventions build-web check-web build-macos build-windows build-linux build-all check check-full help
+.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline licenses check-conventions build-web check-web build-macos build-windows build-linux build-all check check-full help
 
 help:
 	@echo "OciDeck quality targets:"
@@ -213,7 +213,15 @@ check-method-length:
 #                           in the Flutter bootstrap, so script-src needs neither
 #                           'unsafe-eval' nor 'unsafe-inline'. Pairs with the
 #                           Content-Security-Policy meta tag in web/index.html.
-build-web:
+# Integrity-only variant of deps-check: verifies the vendored bundles still
+# match their manifest hashes without touching the network. Wired into
+# build-web so a locally tampered bundle can't be baked into a build even when
+# the full (online) deps-check hasn't run.
+deps-verify-offline:
+	@echo "== OciDeck check: bundled JavaScript integrity (offline) =="
+	dart run tool/check_bundled_js.dart --offline
+
+build-web: deps-verify-offline
 	@echo "== OciDeck build: hardened web bundle =="
 	@echo "Command: flutter build web --release --no-web-resources-cdn --csp"
 	@echo "Covers: self-hosted CanvasKit (no third-party CDN) and a CSP-safe loader."

@@ -26,7 +26,9 @@ Widget _zoomedImage(
       semanticLabel: semanticLabel,
     ); // BoxFit.cover standaard
   }
-  final scale = imageSize / 100.0;
+  // Defensive cap (parse already clamps): keep the scaled box bounded no matter
+  // how imageSize was set, so an extreme value can't produce a huge layout box.
+  final scale = imageSize.clamp(0, 400) / 100.0;
   // Size the image box to `scale` × the available area and let BoxFit.contain
   // fit the picture inside it. This produces the same visual result as a
   // Transform.scale but without a transform layer, which `RepaintBoundary

@@ -115,7 +115,39 @@ class RecoveryService {
     });
   }
 
+  /// Recovery snapshots hold full deck markdown (and notes) in plaintext, so an
+  /// orphaned one — left by a crash the user never followed up on — is a slow
+  /// leak of possibly-classified content on disk. Cap how long that can linger.
+  static const Duration defaultMaxAge = Duration(days: 30);
+
+  /// Delete recovery files last modified more than [maxAge] ago. Best-effort:
+  /// failures are logged, never thrown. Returns the number of files removed.
+  Future<int> pruneOlderThan(Duration maxAge) async {
+    var removed = 0;
+    try {
+      final dir = await _dir();
+      final now = DateTime.now();
+      for (final entry in dir.listSync()) {
+        if (entry is! File || !entry.path.endsWith('.json')) continue;
+        try {
+          final age = now.difference(entry.statSync().modified);
+          if (age > maxAge) {
+            await entry.delete();
+            removed++;
+          }
+        } catch (e) {
+          logWarning('RecoveryService.pruneOlderThan: stat/delete', e);
+        }
+      }
+    } catch (e) {
+      logWarning('RecoveryService.pruneOlderThan: list recovery dir', e);
+    }
+    return removed;
+  }
+
   Future<List<RecoverySnapshot>> loadAll() async {
+    // Bound plaintext residue: drop stale orphans before offering the rest.
+    await pruneOlderThan(defaultMaxAge);
     try {
       final dir = await _dir();
       final out = <RecoverySnapshot>[];

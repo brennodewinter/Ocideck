@@ -35,8 +35,13 @@
     - child-src/frame-src allow blob:/data: for the offscreen Mermaid render
       WebView (an iframe on web).
     - base-uri is 'self' (NOT 'none') because Flutter relies on <base href>.
-    - frame-ancestors 'none' prevents clickjacking standalone; relax to 'self'
-      (or the host origin) when embedding this bundle inside Nextcloud.
+    - frame-ancestors is present below but a <meta>-delivered CSP CANNOT enforce
+      it — browsers ignore frame-ancestors (and sandbox/report-*) outside an
+      HTTP header. It is kept here only as documentation of intent. To actually
+      stop clickjacking the STATIC HOST must send the CSP (and ideally
+      `X-Frame-Options: DENY`) as a response header. See docs/BUILD.md. When
+      embedding this bundle inside Nextcloud, set frame-ancestors to the host
+      origin in that header.
   -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; child-src 'self' blob: data:; frame-src 'self' blob: data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'">
 

@@ -214,6 +214,45 @@ void main() {
     );
   });
 
+  group('WebdavService TLS enforcement', () {
+    Future<Object?> errorFrom(WebdavServer server) async {
+      final svc = WebdavService(server: server, password: 'pw');
+      try {
+        await svc.list('');
+        return null;
+      } catch (e) {
+        return e;
+      }
+    }
+
+    test('rejects plain http when the server is not trusted-internal', () async {
+      final e = await errorFrom(
+        const WebdavServer(
+          baseUrl: 'http://cloud.example.com',
+          username: 'alice',
+        ),
+      );
+      expect(e, isA<WebdavException>());
+      expect((e as WebdavException).kind, WebdavError.config);
+      expect(e.message.toLowerCase(), contains('wachtwoord'));
+    });
+
+    test('rejects a non-http(s) scheme', () async {
+      final e = await errorFrom(
+        const WebdavServer(
+          baseUrl: 'ftp://cloud.example.com',
+          username: 'alice',
+        ),
+      );
+      expect(e, isA<WebdavException>());
+      expect((e as WebdavException).kind, WebdavError.config);
+    });
+
+    // Note: the "trusted-internal http is allowed past the TLS gate" case is
+    // not unit-tested because exercising it reaches the real network; the gate
+    // logic (`scheme == 'http' && trustedInternal`) is covered by reading.
+  });
+
   group('NetGuard.safeResolveTrusted', () {
     test('blocks a private literal when not trusted', () async {
       expect(

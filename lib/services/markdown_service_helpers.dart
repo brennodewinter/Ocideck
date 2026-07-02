@@ -381,11 +381,24 @@ String _msToSec(int ms) {
 const String _captionSeparator = ' | ';
 const String _captionPipeSentinel = '\u{E000}';
 
-String _encodeCaption(String caption) =>
-    caption.replaceAll('|', _captionPipeSentinel);
+/// Escapes a real (private-use) [_captionPipeSentinel] that the user actually
+/// typed, so it survives the round-trip instead of being mistaken for an
+/// encoded pipe on decode. U+E001 is likewise reserved.
+const String _captionLiteralSentinel = '\u{E001}';
 
-String _decodeCaption(String caption) =>
-    caption.replaceAll(_captionPipeSentinel, '|');
+String _encodeCaption(String caption) => caption
+    // Protect a user-typed sentinel FIRST (now no bare sentinels remain)…
+    .replaceAll(_captionPipeSentinel, _captionLiteralSentinel)
+    // …then stand in for real pipes with the sentinel.
+    .replaceAll('|', _captionPipeSentinel);
+
+String _decodeCaption(String caption) => caption
+    // Undo in reverse: sentinels are decoded pipes…
+    .replaceAll(_captionPipeSentinel, '|')
+    // …and the literal marker restores a user-typed sentinel. Files written by
+    // the older single-sentinel scheme have no literal marker, so they still
+    // decode correctly.
+    .replaceAll(_captionLiteralSentinel, _captionPipeSentinel);
 
 String _joinTwoCaptions(String first, String second) => [first, second]
     .where((caption) => caption.trim().isNotEmpty)

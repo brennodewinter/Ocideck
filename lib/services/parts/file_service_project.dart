@@ -89,7 +89,7 @@ extension _FileServiceProject on FileService {
     ThemeProfile profile,
     String? logoUrl,
   ) async {
-    final safeThemeName = themeName.trim().isEmpty ? 'ocideck' : themeName;
+    final safeThemeName = _safeThemeName(themeName);
     final dest = File(p.join(themesPath, '$safeThemeName.css'));
     try {
       final base = (await rootBundle.loadString(

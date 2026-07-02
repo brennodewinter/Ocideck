@@ -428,6 +428,18 @@ marp: true
       );
     });
 
+    test('flags Infinity/NaN advance values as non-numeric', () {
+      for (final v in ['Infinity', '-Infinity', 'NaN', '1e400']) {
+        final md = '---\nmarp: true\n---\n\n# Slide\n\n<!-- advance: $v -->\n';
+        final result = validator.validate(md);
+        expect(
+          result.issues.any((i) => i.message.contains('advance-waarde')),
+          isTrue,
+          reason: 'advance: $v should be rejected',
+        );
+      }
+    });
+
     test('flags an unknown list-style comment', () {
       const md =
           '---\nmarp: true\n---\n\n# Slide\n\n<!-- ocideck_list_style: bogus -->\n';

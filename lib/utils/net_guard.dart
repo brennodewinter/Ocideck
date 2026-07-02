@@ -31,17 +31,60 @@ class NetGuard {
     if (addr.isLoopback || addr.isLinkLocal || addr.isMulticast) return true;
     final raw = addr.rawAddress;
     if (addr.type == InternetAddressType.IPv4) {
-      final a = raw[0], b = raw[1];
-      if (a == 0 || a == 10 || a == 127) {
-        return true; // this-host/private/loopback
-      }
-      if (a == 172 && b >= 16 && b <= 31) return true; // 172.16.0.0/12
-      if (a == 192 && b == 168) return true; // 192.168.0.0/16
-      if (a == 169 && b == 254) return true; // 169.254.0.0/16 link-local
-    } else if ((raw[0] & 0xfe) == 0xfc) {
-      return true; // fc00::/7 unique-local
+      return _isBlockedIPv4(raw[0], raw[1]);
     }
+    // IPv6. First unwrap the IPv4 that an IPv6 literal can embed — Dart reports
+    // `::ffff:127.0.0.1` as an IPv6 address with `isLoopback == false`, so an
+    // embedded internal IPv4 would otherwise sail past every check below and
+    // let a deck URL like `http://[::ffff:169.254.169.254]/` reach the metadata
+    // service. Re-classify the embedded IPv4 via the same v4 rules.
+    final embeddedV4 = _embeddedIPv4(raw);
+    if (embeddedV4 != null) {
+      return _isBlockedIPv4(embeddedV4[0], embeddedV4[1]);
+    }
+    // `::` (unspecified) and `::1` (loopback, normally caught by isLoopback but
+    // guarded here too) must never be dialled.
+    if (raw.every((b) => b == 0)) return true; // ::
+    if ((raw[0] & 0xfe) == 0xfc) return true; // fc00::/7 unique-local
     return false;
+  }
+
+  /// RFC1918/loopback/link-local/CGNAT classification for an IPv4 given its
+  /// first two octets. Shared by the native-IPv4 and IPv4-in-IPv6 paths.
+  static bool _isBlockedIPv4(int a, int b) {
+    if (a == 0 || a == 10 || a == 127) {
+      return true; // this-host/private/loopback
+    }
+    if (a == 172 && b >= 16 && b <= 31) return true; // 172.16.0.0/12
+    if (a == 192 && b == 168) return true; // 192.168.0.0/16
+    if (a == 169 && b == 254) return true; // 169.254.0.0/16 link-local
+    if (a == 100 && b >= 64 && b <= 127) return true; // 100.64.0.0/10 CGNAT
+    return false;
+  }
+
+  /// Returns the four embedded IPv4 octets when [raw] (a 16-byte IPv6 address)
+  /// is an IPv4-mapped (`::ffff:0:0/96`), IPv4-compatible (`::/96`, non-zero
+  /// tail) or NAT64 well-known-prefix (`64:ff9b::/96`) address; otherwise null.
+  static List<int>? _embeddedIPv4(List<int> raw) {
+    if (raw.length != 16) return null;
+    // NAT64 well-known prefix 64:ff9b::/96.
+    const nat64 = [0x00, 0x64, 0xff, 0x9b, 0, 0, 0, 0, 0, 0, 0, 0];
+    var isNat64 = true;
+    for (var i = 0; i < 12; i++) {
+      if (raw[i] != nat64[i]) {
+        isNat64 = false;
+        break;
+      }
+    }
+    if (isNat64) return [raw[12], raw[13], raw[14], raw[15]];
+    // First 10 bytes zero → ::ffff:x.x.x.x (mapped) or ::x.x.x.x (compatible).
+    for (var i = 0; i < 10; i++) {
+      if (raw[i] != 0) return null;
+    }
+    final isMapped = raw[10] == 0xff && raw[11] == 0xff;
+    final isCompatible = raw[10] == 0 && raw[11] == 0;
+    if (!isMapped && !isCompatible) return null;
+    return [raw[12], raw[13], raw[14], raw[15]];
   }
 
   /// Resolves [host] to validated addresses, or null when the host (or ANY of
