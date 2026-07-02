@@ -53,17 +53,14 @@ class _BulletsImagePreview extends StatelessWidget {
         .where((b) => b.trimLeft().isNotEmpty)
         .toList();
     final hasTitle = slide.title.isNotEmpty;
-    final textPadding = EdgeInsets.fromLTRB(
-      leftPad,
-      verticalPad + safe.top,
-      0,
-      bulletsSlideBottomInset(
-        w: w,
-        slide: slide,
-        profile: profile,
-        defaultBottomPad: verticalPad,
-        safeBottom: safe.bottom,
-      ),
+    final textPadding = _bulletsPadding(
+      w: w,
+      slide: slide,
+      profile: profile,
+      safe: safe,
+      pad: leftPad,
+      vPad: verticalPad,
+      rightPad: 0,
     );
 
     return Container(
@@ -218,17 +215,14 @@ class _BulletsImagePreview extends StatelessWidget {
     final imgFraction = (slide.imageSize > 0 ? slide.imageSize / 100.0 : 0.40)
         .clamp(0.1, 0.70);
     final imgWidth = w * imgFraction;
-    final textPadding = EdgeInsets.fromLTRB(
-      leftPad,
-      verticalPad + safe.top,
-      0,
-      bulletsSlideBottomInset(
-        w: w,
-        slide: slide,
-        profile: profile,
-        defaultBottomPad: verticalPad,
-        safeBottom: safe.bottom,
-      ),
+    final textPadding = _bulletsPadding(
+      w: w,
+      slide: slide,
+      profile: profile,
+      safe: safe,
+      pad: leftPad,
+      vPad: verticalPad,
+      rightPad: 0,
     );
 
     return Container(

@@ -152,6 +152,34 @@ double _logoAwareBottomPadding(double defaultPad, double safeBottom) {
   return math.max(defaultPad, safeBottom);
 }
 
+/// Content-padding voor bulletslides: logo-safe bovenrand en de
+/// checklist/logo-bewuste onderrand uit [bulletsSlideBottomInset]. [safe]
+/// blijft bij de aanroeper (sommige previews hebben hem daarna nog nodig, en
+/// split-slides gebruiken andere insets). Stond in vijf previews als
+/// identiek blok uitgeschreven.
+EdgeInsets _bulletsPadding({
+  required double w,
+  required Slide slide,
+  required ThemeProfile profile,
+  required EdgeInsets safe,
+  required double pad,
+  required double vPad,
+  double? rightPad,
+}) {
+  return EdgeInsets.fromLTRB(
+    pad,
+    vPad + safe.top,
+    rightPad ?? pad,
+    bulletsSlideBottomInset(
+      w: w,
+      slide: slide,
+      profile: profile,
+      defaultBottomPad: vPad,
+      safeBottom: safe.bottom,
+    ),
+  );
+}
+
 EdgeInsets _splitTextLogoSafeInsets(double w, ThemeProfile profile) {
   if (profile.logoPath?.isEmpty ?? true) return EdgeInsets.zero;
   if (profile.logoPosition.endsWith('right')) return EdgeInsets.zero;

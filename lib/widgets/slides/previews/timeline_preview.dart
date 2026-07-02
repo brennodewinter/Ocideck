@@ -427,7 +427,10 @@ class _TimelineCanvas extends StatelessWidget {
       return [for (var i = 0; i < n; i++) i < shown ? 1.0 : 0.0];
     }
     if (!animating) return List<double>.filled(n, 1.0);
-    final eventsT = ((drawT - lineFraction) / (1 - lineFraction)).clamp(0.0, 1.0);
+    final eventsT = ((drawT - lineFraction) / (1 - lineFraction)).clamp(
+      0.0,
+      1.0,
+    );
     return [
       for (var i = 0; i < n; i++)
         Curves.easeOutBack.transform(_sequence(eventsT, i, n)).clamp(0.0, 1.0),
