@@ -4,6 +4,8 @@ import 'dart:isolate';
 import 'dart:typed_data';
 import 'package:archive/archive.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as p;
 import 'package:flutter/services.dart' show rootBundle;
 import '../models/deck.dart';
@@ -744,19 +746,87 @@ class FileService {
       return null;
     }
 
-    // Zip-magie 'PK\x03\x04' → pakket; anders als markdown behandelen.
-    final isZip =
-        bytes.length >= 4 &&
-        bytes[0] == 0x50 &&
-        bytes[1] == 0x4B &&
-        bytes[2] == 0x03 &&
-        bytes[3] == 0x04;
-    if (isZip) {
+    // Zip-magie → pakket; anders als markdown behandelen.
+    if (looksLikeZipBytes(bytes)) {
       return importPackageBytes(bytes, destParentDir);
     }
 
     // Platte markdown.
     return importMarkdownBytes(bytes, destParentDir, uri.path);
+  }
+
+  /// Zip-magie 'PK\x03\x04' — herkent een .ocideck/zip-pakket aan zijn kop.
+  static bool looksLikeZipBytes(List<int> bytes) =>
+      bytes.length >= 4 &&
+      bytes[0] == 0x50 &&
+      bytes[1] == 0x4B &&
+      bytes[2] == 0x03 &&
+      bytes[3] == 0x04;
+
+  /// Haal ruwe bytes op van [url] voor de web-URL-import. Op web bewaken de
+  /// browser (CORS, mixed content) en de pagina-CSP (`connect-src`) welke
+  /// hosts bereikbaar zijn — de dart:io SSRF-pinning van [importFromUrl]
+  /// bestaat daar niet en kan er ook niet draaien. Hier begrenzen we schema
+  /// en omvang. Retourneert null bij elke fout, net als [importFromUrl].
+  Future<List<int>?> fetchUrlBytes(
+    String url, {
+    int maxBytes = maxDeckMarkdownBytes,
+    @visibleForTesting http.Client? client,
+  }) async {
+    final uri = Uri.tryParse(url.trim());
+    if (uri == null || !uri.hasScheme) return null;
+    final scheme = uri.scheme.toLowerCase();
+    if (scheme != 'http' && scheme != 'https') return null;
+    final owned = client == null;
+    final c = client ?? http.Client();
+    try {
+      final response = await c.get(uri).timeout(const Duration(seconds: 30));
+      if (response.statusCode != 200) return null;
+      final bytes = response.bodyBytes;
+      if (bytes.length > maxBytes) return null;
+      return bytes;
+    } catch (e) {
+      logError('FileService.fetchUrlBytes: download failed', e);
+      return null;
+    } finally {
+      if (owned) c.close();
+    }
+  }
+
+  /// Open een deck puur uit in-memory markdown: dezelfde fail-closed volgorde
+  /// als [openDeckDetailed] (veiligheidsscan → marp-sniff → parse → actief
+  /// stijlprofiel), maar zonder enige bestandssysteemtoegang. Gebruikt door de
+  /// web-URL-import: achter een URL zitten geen sidecars, projectmap of
+  /// chart-CSV's, dus die hydratatie wordt bewust overgeslagen. [sourceName]
+  /// labelt alleen de logregels.
+  ({Deck? deck, OpenFailure? failure}) openDeckFromContent(
+    String raw, {
+    String? sourceName,
+  }) {
+    final findings = MarkdownSafetyScanner.scan(raw);
+    if (findings.isNotEmpty) {
+      logWarning(
+        'FileService.openDeckFromContent: refused — executable content '
+        '(${findings.length} finding(s))',
+        sourceName,
+      );
+      return (deck: null, failure: OpenFailure.unsafe);
+    }
+    if (!_md.sniffFrontmatter(raw).marp) {
+      logWarning(
+        'FileService.openDeckFromContent: not a Marp/OciDeck presentation '
+        '(no `marp: true` front matter)',
+        sourceName,
+      );
+      return (deck: null, failure: OpenFailure.notPresentation);
+    }
+    final parsed = _md.parseDeck(raw);
+    if (parsed == null) return (deck: null, failure: OpenFailure.corrupt);
+    // Inhoud draagt geen opmaak; pas het actieve stijlprofiel toe bij openen.
+    return (
+      deck: parsed.copyWith(themeProfile: activeProfileFor(projectPath: null)),
+      failure: null,
+    );
   }
 
   /// Sla losse markdown-bytes op als zelfstandig deck in een nieuwe submap van

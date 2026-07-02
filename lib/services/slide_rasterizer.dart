@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import '../models/deck.dart';
@@ -164,6 +165,10 @@ class SlideRasterizer {
     Iterable<String> paths, {
     void Function(int done, int total)? onProgress,
   }) async {
+    // Op web zijn er geen lokale bestandspaden om voor te laden — en alleen al
+    // het construeren van een dart:io File gooit daar. De render zelf toont
+    // dan de gewone ontbrekende-afbeelding-weergave.
+    if (kIsWeb) return;
     final list = paths.toList();
     if (list.isEmpty) return;
     const batchSize = 4;

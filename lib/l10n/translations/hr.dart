@@ -83,8 +83,8 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
-  'Importeren via URL is nog niet beschikbaar in de webversie.':
-      'Uvoz putem URL-a još nije dostupan u web-verziji.',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Paketi (.ocideck) još nisu podržani u web-verziji.',
   'Geen': 'Nema',
   'Nieuw': 'Novo',
   'Verwijderen': 'Izbriši',

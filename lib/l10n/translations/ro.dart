@@ -84,8 +84,8 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
-  'Importeren via URL is nog niet beschikbaar in de webversie.':
-      'Importul prin URL nu este încă disponibil în versiunea web.',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Pachetele (.ocideck) nu sunt încă acceptate în versiunea web.',
   'Geen': 'Niciuna',
   'Nieuw': 'Nou',
   'Verwijderen': 'Șterge',

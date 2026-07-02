@@ -84,8 +84,8 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
-  'Importeren via URL is nog niet beschikbaar in de webversie.':
-      'Import cez URL zatiaľ nie je vo webovej verzii k dispozícii.',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Balíky (.ocideck) zatiaľ nie sú vo webovej verzii podporované.',
   'Geen': 'Žiadne',
   'Nieuw': 'Nový',
   'Verwijderen': 'Odstrániť',

@@ -83,8 +83,8 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
-  'Importeren via URL is nog niet beschikbaar in de webversie.':
-      'Dr Import über en URL isch i dr Webversion no nid verfüegbar.',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Päckli (.ocideck) wärde i dr Webversion no nid understützt.',
   'Geen': 'Kes',
   'Nieuw': 'Nöi',
   'Verwijderen': 'Lösche',

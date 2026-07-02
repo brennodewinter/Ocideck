@@ -81,8 +81,8 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
-  'Importeren via URL is nog niet beschikbaar in de webversie.':
-      'URLvo\' lI\'ghach wej DuH web mIwDaq.',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'ngaSwI\'mey (.ocideck) wej DuH web mIwDaq.',
   'Geen': 'pagh',
   'Nieuw': 'chu\'',
   'Verwijderen': 'Qaw\'',

@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:path/path.dart' as p;
@@ -107,6 +109,11 @@ enum OpenResult {
   /// The file was refused because it contains executable content; the security
   /// alarm has been raised via [importSecurityAlarmProvider].
   blocked,
+
+  /// Web only: the URL pointed at a `.ocideck`/zip package. Packages carry
+  /// asset files that need a local filesystem to unpack into, which the web
+  /// version does not have (yet).
+  packageUnsupported,
 }
 
 /// A blocked import surfaced to the UI: the offending file plus what was found.
@@ -331,20 +338,26 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // notifier disposed during the await
     if (!mounted) return OpenResult.unreadable;
     final index = (selectIndex ?? 0).clamp(0, deck.slides.length - 1);
+    _placeDeckInTab(deck, filePath: path, index: index);
+    await _settings.addRecentFile(path);
+    return OpenResult.opened;
+  }
+
+  /// Zet een zojuist geopend deck in een tabblad: een leeg huidig tabblad
+  /// wordt hergebruikt, anders komt er een nieuw tabblad naast.
+  void _placeDeckInTab(Deck deck, {String? filePath, int index = 0}) {
     final current = state.current;
     if (current != null && !current.isOpen) {
-      current.deckNotifier.loadDeck(deck, filePath: path);
+      current.deckNotifier.loadDeck(deck, filePath: filePath);
       current.editorNotifier.select(index);
       state = state.copyWith(tabs: List.from(state.tabs));
     } else {
       final tab = _createTab();
-      tab.deckNotifier.loadDeck(deck, filePath: path);
+      tab.deckNotifier.loadDeck(deck, filePath: filePath);
       tab.editorNotifier.select(index);
       final newTabs = [...state.tabs, tab];
       state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
     }
-    await _settings.addRecentFile(path);
-    return OpenResult.opened;
   }
 
   /// Remove the unique folder an import extracted/downloaded into when the deck
@@ -387,6 +400,58 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final mdPath = await _file.importFromUrl(url, dest);
     if (mdPath == null) return false;
     return _importHandled(await _openImported(mdPath));
+  }
+
+  /// Web-variant van [importFromUrl]: haalt de presentatie in de browser op
+  /// (CORS en de pagina-CSP bewaken het verkeer) en opent haar volledig in
+  /// het geheugen — op web is er geen bestandssysteem om in uit te pakken.
+  /// Pakketten (.ocideck/zip) kunnen daar dus nog niet worden geopend en
+  /// krijgen hun eigen [OpenResult.packageUnsupported].
+  Future<OpenResult> importFromUrlWeb(String url) async {
+    final bytes = await _file.fetchUrlBytes(url);
+    if (bytes == null || !mounted) return OpenResult.unreadable;
+    return openFetchedDeckBytes(bytes, sourceUrl: url);
+  }
+
+  /// Beslislogica achter [importFromUrlWeb], losgekoppeld van het netwerk
+  /// zodat tests haar rechtstreeks met eigen bytes kunnen voeden. Zelfde
+  /// fail-closed volgorde als [openFileByPath]: eerst de veiligheidsscan
+  /// (met alarm), dan pas parsen en openen.
+  @visibleForTesting
+  Future<OpenResult> openFetchedDeckBytes(
+    List<int> bytes, {
+    required String sourceUrl,
+  }) async {
+    if (FileService.looksLikeZipBytes(bytes)) {
+      return OpenResult.packageUnsupported;
+    }
+    final String text;
+    try {
+      text = utf8.decode(bytes);
+    } on FormatException catch (e) {
+      logWarning('TabsNotifier.openFetchedDeckBytes: not UTF-8', e);
+      return OpenResult.unreadable;
+    }
+    final findings = MarkdownSafetyScanner.scan(text);
+    if (findings.isNotEmpty) {
+      if (mounted) {
+        _ref.read(importSecurityAlarmProvider.notifier).state =
+            ImportSecurityAlarm(path: sourceUrl, findings: findings);
+      }
+      return OpenResult.blocked;
+    }
+    final outcome = _file.openDeckFromContent(text, sourceName: sourceUrl);
+    final deck = outcome.deck;
+    if (deck == null) {
+      return outcome.failure == OpenFailure.notPresentation
+          ? OpenResult.notAPresentation
+          : OpenResult.unreadable;
+    }
+    if (!mounted) return OpenResult.unreadable;
+    // Zonder filePath: het deck hoort niet bij een lokaal bestand, dus
+    // opslaan vraagt bewust om een nieuwe bestemming.
+    _placeDeckInTab(deck);
+    return OpenResult.opened;
   }
 
   /// Gedeelde staart van elke import-flow (pakket/URL/WebDAV): open het
