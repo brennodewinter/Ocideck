@@ -215,8 +215,21 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     }
     _syncingMarkdown = true;
     _markdownSnapshot = markdown;
-    widget.controller.value = widget.controller.value.copyWith(text: markdown);
+    widget.controller.value = _valueWithClampedSelection(markdown);
     _syncingMarkdown = false;
+  }
+
+  /// Nieuwe tekst met de bestaande cursorpositie, begrensd op de nieuwe
+  /// lengte: `copyWith(text:)` zou een selectie buiten de tekst laten staan.
+  TextEditingValue _valueWithClampedSelection(String text) {
+    final sel = widget.controller.selection;
+    final offset = sel.isValid
+        ? sel.baseOffset.clamp(0, text.length)
+        : text.length;
+    return TextEditingValue(
+      text: text,
+      selection: TextSelection.collapsed(offset: offset),
+    );
   }
 
   void _onQuillChanged() {
@@ -227,7 +240,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (markdown == _markdownSnapshot) return;
     _syncingMarkdown = true;
     _markdownSnapshot = markdown;
-    widget.controller.value = widget.controller.value.copyWith(text: markdown);
+    widget.controller.value = _valueWithClampedSelection(markdown);
     _syncingMarkdown = false;
   }
 
