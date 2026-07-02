@@ -5,16 +5,16 @@ import 'package:flutter/foundation.dart' show compute;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../utils/log.dart';
 
-/// Isolate-werkfunctie: md5 per pad. Onleesbare bestanden vallen stil weg
-/// (zelfde gedrag als voorheen); loggen kan niet vanuit een isolate.
+/// Isolate-werkfunctie: md5 per pad. Onleesbare bestanden vallen weg
+/// (zelfde gedrag als voorheen); dart:developer-logging werkt ook in isolates.
 Future<Map<String, String>> _md5Worker(List<String> paths) async {
   final result = <String, String>{};
   for (final path in paths) {
     try {
       final digest = await md5.bind(File(path).openRead()).single;
       result[path] = digest.toString();
-    } catch (_) {
-      // overslaan
+    } catch (e) {
+      logWarning('ImageDedupService: md5 hash in isolate', e);
     }
   }
   return result;

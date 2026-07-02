@@ -226,3 +226,35 @@ class _ChartColorDialogState extends State<_ChartColorDialog> {
     );
   }
 }
+
+extension _ChartEditorUnlink on _ChartEditorState {
+  /// Vraag bevestiging voor het verbreken van de CSV-koppeling: één klik zou
+  /// anders ongemerkt de live-link opgeven en de data vast in de slide zetten.
+  Future<void> _unlink() async {
+    final l10n = context.l10n;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.d('CSV-koppeling verbreken?')),
+        content: Text(
+          l10n.d(
+            'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.',
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(l10n.t('cancel')),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(l10n.d('Ontkoppelen')),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted) return;
+    _rebuild(() => _source = null);
+    _emit();
+  }
+}

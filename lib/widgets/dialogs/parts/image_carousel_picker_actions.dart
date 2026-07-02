@@ -248,6 +248,55 @@ extension _CarouselActions on _ImageCarouselPickerState {
     }
     _rebuild(() => _dedupePhase = l10n.d('Opruimen…'));
 
+    final (removed, updatedDeckFiles) = await _applyDedupePlan(
+      plan,
+      dedup: dedup,
+      refs: refs,
+      deckFiles: deckFiles,
+    );
+
+    if (!mounted) return;
+    final removedSet = {for (final entry in plan) ...entry.remove};
+    _rebuild(() {
+      _images = [
+        for (final path in _images)
+          if (!removedSet.contains(path)) path,
+      ];
+      _descEditing = null;
+      if (_selected != null && removedSet.contains(_selected)) {
+        _selected = plan
+            .firstWhere((entry) => entry.remove.contains(_selected))
+            .keeper;
+      }
+      _deduping = false;
+      _dedupePhase = null;
+      _applyFilter();
+    });
+    await _loadCaptionForSelection();
+    _loadDescriptionForSelection();
+    if (!mounted) return;
+    final removedText = removed == 1
+        ? l10n.d('1 dubbele afbeelding verwijderd.')
+        : '$removed ${l10n.d('dubbele afbeeldingen verwijderd.')}';
+    final filesText = updatedDeckFiles.isEmpty
+        ? ''
+        : updatedDeckFiles.length == 1
+        ? '  ·  ${l10n.d('1 presentatiebestand bijgewerkt.')}'
+        : '  ·  ${updatedDeckFiles.length} ${l10n.d('presentatiebestanden bijgewerkt.')}';
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('$removedText$filesText')));
+  }
+
+  /// Voer het bevestigde opruimplan uit: metadata samenvoegen op de keeper,
+  /// verwijzingen (open én op schijf) omzetten en de kopieën wissen. Geeft
+  /// (aantal verwijderd, bijgewerkte deckbestanden) terug.
+  Future<(int, Set<String>)> _applyDedupePlan(
+    List<({String keeper, List<String> remove})> plan, {
+    required ImageDedupService dedup,
+    required ImageReferenceService refs,
+    required List<String> deckFiles,
+  }) async {
     var removed = 0;
     final updatedDeckFiles = <String>{};
     for (final entry in plan) {
@@ -294,38 +343,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
         removed++;
       }
     }
-
-    if (!mounted) return;
-    final removedSet = {for (final entry in plan) ...entry.remove};
-    _rebuild(() {
-      _images = [
-        for (final path in _images)
-          if (!removedSet.contains(path)) path,
-      ];
-      _descEditing = null;
-      if (_selected != null && removedSet.contains(_selected)) {
-        _selected = plan
-            .firstWhere((entry) => entry.remove.contains(_selected))
-            .keeper;
-      }
-      _deduping = false;
-      _dedupePhase = null;
-      _applyFilter();
-    });
-    await _loadCaptionForSelection();
-    _loadDescriptionForSelection();
-    if (!mounted) return;
-    final removedText = removed == 1
-        ? l10n.d('1 dubbele afbeelding verwijderd.')
-        : '$removed ${l10n.d('dubbele afbeeldingen verwijderd.')}';
-    final filesText = updatedDeckFiles.isEmpty
-        ? ''
-        : updatedDeckFiles.length == 1
-        ? '  ·  ${l10n.d('1 presentatiebestand bijgewerkt.')}'
-        : '  ·  ${updatedDeckFiles.length} ${l10n.d('presentatiebestanden bijgewerkt.')}';
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text('$removedText$filesText')));
+    return (removed, updatedDeckFiles);
   }
 
   Future<bool?> _showDedupeDialog(

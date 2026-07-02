@@ -64,7 +64,8 @@ void main() {
       sink: RegExp(r'HttpClient\('),
       allowedFiles: {
         'lib/utils/net_guard.dart',
-        'lib/services/file_service.dart', // importFromUrl: safeResolve + pin
+        // importFromUrl: safeResolve + pin (verhuisd naar het import-part).
+        'lib/services/parts/file_service_import.dart',
         'lib/services/webdav_service.dart', // safeResolveTrusted + pin
       },
       guidance:
