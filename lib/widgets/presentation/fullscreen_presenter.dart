@@ -582,6 +582,10 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// negeert berichten met een lager nummer dan het laatst verwerkte.
   int _syncSeq = 0;
 
+  /// Toegang tot de annotatielaag om een streek-in-uitvoering te committen
+  /// vóór een slide-/paginawissel.
+  final _annotationLayerKey = GlobalKey<AnnotationLayerState>();
+
   /// Pagina binnen een rich-text slide (0-gebaseerd).
   int _richTextPage = 0;
 

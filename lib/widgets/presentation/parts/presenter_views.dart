@@ -88,11 +88,12 @@ extension _PresenterViews on _FullscreenPresenterState {
                 // Annotatielaag bovenop de dia. Laat klikken door wanneer er
                 // geen gereedschap actief is (zodat tikken blijft doorbladeren).
                 AnnotationLayer(
-                  // Keyed by slide *and* rich-text page so a slide change (e.g.
-                  // auto-advance) or a page turn while a stroke is in progress
-                  // resets the layer instead of committing the half-drawn stroke
-                  // onto the next slide/page.
-                  key: ValueKey(_currentInkKey()),
+                  // Navigatiepaden committen een streek-in-uitvoering eerst
+                  // op de oude slide (via [_commitActiveInk]); de resetToken
+                  // is het vangnet dat halve streken nooit op een andere
+                  // slide/pagina laat belanden.
+                  key: _annotationLayerKey,
+                  resetToken: _currentInkKey(),
                   strokes: _currentStrokes,
                   tool: _tableEditMode ? null : _tool,
                   color: _inkColor,

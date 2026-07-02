@@ -52,6 +52,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       return;
     }
     if (_index < widget.slides.length - 1) {
+      _commitActiveInk();
       _persistUserNoteFromController();
       _rebuild(() {
         _index++;
@@ -89,6 +90,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       return;
     }
     if (_index > 0) {
+      _commitActiveInk();
       _persistUserNoteFromController();
       _rebuild(() {
         _index--;
@@ -104,6 +106,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
 
   /// Spring direct naar een slide (vanuit het rasteroverzicht).
   void _jumpTo(int index) {
+    _commitActiveInk();
     _persistUserNoteFromController();
     _rebuild(() {
       _index = index.clamp(0, widget.slides.length - 1);
@@ -128,6 +131,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
     }
     final target = index.clamp(0, widget.slides.length - 1);
     if (target == _index) return;
+    _commitActiveInk();
     _persistUserNoteFromController();
     _rebuild(() {
       _index = target;

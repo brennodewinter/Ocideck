@@ -78,6 +78,13 @@ extension _PresenterInk on _FullscreenPresenterState {
         });
   }
 
+  /// Commit een streek die nu getekend wordt op de huidige slide, vlak vóór
+  /// een slide- of paginawissel (handmatig én auto-advance), zodat een half
+  /// getekende lijn niet verloren gaat.
+  void _commitActiveInk() {
+    _annotationLayerKey.currentState?.commitActiveStroke();
+  }
+
   /// Select a tool, or toggle it off when it is already active.
   void _setTool(InkTool tool) {
     _rebuild(() => _tool = _tool == tool ? null : tool);

@@ -4,8 +4,10 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter/services.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/widgets/presentation/annotation_overlay.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
 
 Widget _host(
@@ -650,6 +652,53 @@ void main() {
     await tester.pump();
     expect(find.text('Mijn notities'), findsNothing);
     expect(find.text('Eerste'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('an in-progress stroke commits to the old slide on navigation', (
+    tester,
+  ) async {
+    Map<String, List<InkStroke>>? captured;
+    await tester.pumpWidget(
+      MaterialApp(
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          FlutterQuillLocalizations.delegate,
+        ],
+        home: FullscreenPresenter(
+          slides: slides,
+          projectPath: null,
+          themeProfile: const ThemeProfile(),
+          initialIndex: 0,
+          onAnnotationsChanged: (ink) => captured = ink,
+        ),
+      ),
+    );
+    await tester.pump();
+
+    // Pen aan en een streek beginnen zonder de muisknop los te laten.
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyD);
+    await tester.pump();
+    final center = tester.getCenter(find.byType(AnnotationLayer).first);
+    final gesture = await tester.startGesture(center);
+    await gesture.moveBy(const Offset(60, 20));
+    await gesture.moveBy(const Offset(40, 30));
+    await tester.pump();
+
+    // Navigeren terwijl de streek nog bezig is: de streek hoort op de
+    // oude slide te belanden in plaats van te verdwijnen.
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+    await tester.pump();
+    await gesture.up();
+    await tester.pump();
+
+    expect(captured, isNotNull);
+    final strokes = captured![annotationKey(slides.first.id, 0)];
+    expect(strokes, isNotNull);
+    expect(strokes, hasLength(1));
 
     await tester.pumpWidget(const SizedBox());
   });
