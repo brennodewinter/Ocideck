@@ -1111,4 +1111,5 @@ const _dutchSourceLa = {
   'Gestapelde staaf': 'Columna cumulata',
   'Spreiding': 'Dispersio',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn folia percurrit',
+  'Wacht op antwoord…': 'Responsum exspectatur…',
 };

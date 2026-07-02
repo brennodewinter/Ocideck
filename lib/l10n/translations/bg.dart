@@ -1117,4 +1117,5 @@ const _dutchSourceBg = {
   'Gestapelde staaf': 'Наслоена стълбовидна',
   'Spreiding': 'Разсейване',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn прелиства слайдовете',
+  'Wacht op antwoord…': 'Изчакване на отговор…',
 };

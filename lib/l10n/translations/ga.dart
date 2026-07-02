@@ -1126,4 +1126,5 @@ const _dutchSourceGa = {
   'Gestapelde staaf': 'Barra cruachta',
   'Spreiding': 'Scaipthe',
   'PgUp/PgDn bladert door de slides': 'Bogann PgUp/PgDn idir na sleamhnáin',
+  'Wacht op antwoord…': 'Ag fanacht le freagra…',
 };

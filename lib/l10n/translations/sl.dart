@@ -1103,4 +1103,5 @@ const _dutchSourceSl = {
   'Gestapelde staaf': 'Naložen stolpec',
   'Spreiding': 'Razpršenost',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn lista prosojnice',
+  'Wacht op antwoord…': 'Čakanje na odgovor…',
 };

@@ -1113,4 +1113,5 @@ const _dutchSourceAddEn = {
   'Gestapelde staaf': 'Stacked bar',
   'Spreiding': 'Scatter',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn moves between slides',
+  'Wacht op antwoord…': 'Waiting for an answer…',
 };

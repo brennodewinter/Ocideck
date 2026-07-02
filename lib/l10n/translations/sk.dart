@@ -1107,4 +1107,5 @@ const _dutchSourceSk = {
   'Gestapelde staaf': 'Skladaný stĺpcový',
   'Spreiding': 'Bodový',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn listuje snímky',
+  'Wacht op antwoord…': 'Čaká sa na odpoveď…',
 };

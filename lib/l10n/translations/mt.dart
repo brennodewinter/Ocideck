@@ -1114,4 +1114,5 @@ const _dutchSourceMt = {
   'Gestapelde staaf': 'Bar stakkjat',
   'Spreiding': 'Scatter',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn iqalleb bejn l-islajds',
+  'Wacht op antwoord…': 'Qed nistennew tweġiba…',
 };

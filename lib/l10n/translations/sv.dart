@@ -1100,4 +1100,5 @@ const _dutchSourceSv = {
   'Gestapelde staaf': 'Staplad stapel',
   'Spreiding': 'Spridning',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn bläddrar bland bilderna',
+  'Wacht op antwoord…': 'Väntar på svar…',
 };

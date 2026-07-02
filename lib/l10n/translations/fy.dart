@@ -1089,4 +1089,5 @@ const _dutchSourceAddFy = {
   'Gestapelde staaf': 'Stapele staven',
   'Spreiding': 'Sparring',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn blêdet troch de slides',
+  'Wacht op antwoord…': 'Wachtsje op antwurd…',
 };

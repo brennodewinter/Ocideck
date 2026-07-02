@@ -1106,4 +1106,5 @@ const _dutchSourceLt = {
   'Gestapelde staaf': 'Sukrauta stulpelinė',
   'Spreiding': 'Sklaida',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn verčia skaidres',
+  'Wacht op antwoord…': 'Laukiama atsakymo…',
 };

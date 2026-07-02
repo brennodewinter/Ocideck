@@ -1103,4 +1103,5 @@ const _dutchSourceHu = {
   'Gestapelde staaf': 'Halmozott oszlop',
   'Spreiding': 'Pontdiagram',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn lapoz a diák között',
+  'Wacht op antwoord…': 'Válaszra várunk…',
 };

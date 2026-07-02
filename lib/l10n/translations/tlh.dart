@@ -1089,4 +1089,5 @@ const _dutchSourceTlh = {
   'Spreiding': 'boch',
   'PgUp/PgDn bladert door de slides':
       'PgUp/PgDn lo\'lu\'chugh \'anghommey vegh leng',
+  'Wacht op antwoord…': 'jang loS…',
 };

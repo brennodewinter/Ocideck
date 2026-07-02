@@ -1097,4 +1097,5 @@ const _dutchSourceDa = {
   'Gestapelde staaf': 'Stablet søjle',
   'Spreiding': 'Spredning',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn bladrer gennem slides',
+  'Wacht op antwoord…': 'Venter på svar…',
 };

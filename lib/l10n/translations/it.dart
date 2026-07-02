@@ -1095,4 +1095,5 @@ const _dutchSourceAddIt = {
   'Gestapelde staaf': 'Barre impilate',
   'Spreiding': 'Dispersione',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn scorre le diapositive',
+  'Wacht op antwoord…': 'In attesa di una risposta…',
 };

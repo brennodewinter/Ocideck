@@ -1108,4 +1108,5 @@ const _dutchSourcePl = {
   'Gestapelde staaf': 'Słupkowy skumulowany',
   'Spreiding': 'Punktowy',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn przewija slajdy',
+  'Wacht op antwoord…': 'Oczekiwanie na odpowiedź…',
 };

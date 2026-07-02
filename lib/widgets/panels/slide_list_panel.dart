@@ -207,7 +207,10 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
   /// render van (mogelijk geclassificeerde) slide-inhoud af op het systeem-
   /// klembord. Zonder deze check zou het vrijgaveplafond omzeild kunnen worden.
   /// Retourneert true als de actie door mag; toont anders de weigerreden.
-  bool _classificationAllowsEgress(Deck deck, ScaffoldMessengerState messenger) {
+  bool _classificationAllowsEgress(
+    Deck deck,
+    ScaffoldMessengerState messenger,
+  ) {
     final policy = ClassificationEnforcementPolicy.fromAppSettings(
       ref.read(settingsProvider),
     );

@@ -1091,4 +1091,5 @@ const _dutchSourceAddPap = {
   'Gestapelde staaf': 'Baranan apilá',
   'Spreiding': 'Dispershon',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn ta pasa dor di e slidenan',
+  'Wacht op antwoord…': 'Ta warda un kontesta…',
 };

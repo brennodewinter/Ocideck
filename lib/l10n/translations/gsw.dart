@@ -1101,4 +1101,5 @@ const _dutchSourceGsw = {
   'Gestapelde staaf': 'Gschtaplete Balke',
   'Spreiding': 'Schtreuig',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn blätteret dur d Folie',
+  'Wacht op antwoord…': 'Warte uf e Antwort…',
 };

@@ -1113,4 +1113,5 @@ const _dutchSourceUk = {
   'Gestapelde staaf': 'Стовпчикова з накопиченням',
   'Spreiding': 'Точкова',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn гортає слайди',
+  'Wacht op antwoord…': 'Очікування відповіді…',
 };

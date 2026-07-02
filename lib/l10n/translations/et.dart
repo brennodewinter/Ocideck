@@ -1095,4 +1095,5 @@ const _dutchSourceEt = {
   'Gestapelde staaf': 'Virnastatud tulp',
   'Spreiding': 'Hajuvus',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn lehitseb slaide',
+  'Wacht op antwoord…': 'Ootab vastust…',
 };

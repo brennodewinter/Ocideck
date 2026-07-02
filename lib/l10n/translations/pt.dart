@@ -1119,4 +1119,5 @@ const _dutchSourcePt = {
   'Gestapelde staaf': 'Barras empilhadas',
   'Spreiding': 'Dispersão',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn percorre os diapositivos',
+  'Wacht op antwoord…': 'A aguardar resposta…',
 };

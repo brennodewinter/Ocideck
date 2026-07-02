@@ -1114,4 +1114,5 @@ const _dutchSourceEl = {
   'Gestapelde staaf': 'Στοιβαγμένες ράβδοι',
   'Spreiding': 'Διασπορά',
   'PgUp/PgDn bladert door de slides': 'Το PgUp/PgDn ξεφυλλίζει τις διαφάνειες',
+  'Wacht op antwoord…': 'Αναμονή απάντησης…',
 };

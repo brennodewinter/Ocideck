@@ -1092,4 +1092,5 @@ const _dutchSourceAddDe = {
   'Gestapelde staaf': 'Gestapelte Balken',
   'Spreiding': 'Streudiagramm',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn blättert durch die Folien',
+  'Wacht op antwoord…': 'Warte auf Antwort…',
 };

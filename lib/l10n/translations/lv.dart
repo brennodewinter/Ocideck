@@ -1101,4 +1101,5 @@ const _dutchSourceLv = {
   'Gestapelde staaf': 'Sakrauts stabiņš',
   'Spreiding': 'Izkliede',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn pāršķir slaidus',
+  'Wacht op antwoord…': 'Gaida atbildi…',
 };

@@ -123,7 +123,14 @@ extension _PresenterViews on _FullscreenPresenterState {
     return GestureDetector(
       onTap: _tableEditMode ? null : _next,
       onSecondaryTap: _tableEditMode ? null : _prev,
-      child: SizedBox.expand(child: _slideCanvas(slide)),
+      child: Stack(
+        children: [
+          SizedBox.expand(child: _slideCanvas(slide)),
+          // Bij een quiz is "we wachten op een antwoord" ook voor de zaal
+          // zinvolle informatie; zonder badge lijkt auto-play vastgelopen.
+          if (_showQuestionWaitBadge) _buildQuestionWaitBadge(context),
+        ],
+      ),
     );
   }
 
@@ -174,6 +181,8 @@ extension _PresenterViews on _FullscreenPresenterState {
                                 minHeight: 3,
                               ),
                             ),
+                          if (_showQuestionWaitBadge)
+                            _buildQuestionWaitBadge(context),
                         ],
                       ),
                     ),

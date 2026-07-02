@@ -1103,4 +1103,5 @@ const _dutchSourceFi = {
   'Gestapelde staaf': 'Pinottu pylväs',
   'Spreiding': 'Hajonta',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn selaa dioja',
+  'Wacht op antwoord…': 'Odotetaan vastausta…',
 };

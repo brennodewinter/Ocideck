@@ -1111,4 +1111,5 @@ const _dutchSourceRo = {
   'Gestapelde staaf': 'Bare stivuite',
   'Spreiding': 'Dispersie',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn răsfoiește diapozitivele',
+  'Wacht op antwoord…': 'Se așteaptă un răspuns…',
 };

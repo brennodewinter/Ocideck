@@ -1101,4 +1101,5 @@ const _dutchSourceId = {
   'Gestapelde staaf': 'Batang bertumpuk',
   'Spreiding': 'Sebar',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn berpindah antar slide',
+  'Wacht op antwoord…': 'Menunggu jawaban…',
 };

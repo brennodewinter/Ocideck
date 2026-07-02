@@ -1096,4 +1096,5 @@ const _dutchSourceAddEs = {
   'Gestapelde staaf': 'Barras apiladas',
   'Spreiding': 'Dispersión',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn recorre las diapositivas',
+  'Wacht op antwoord…': 'Esperando una respuesta…',
 };

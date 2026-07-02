@@ -110,7 +110,8 @@ extension _SettingsColors on _SettingsDialogState {
         min: kThemeMinAnimationDurationMs.toDouble(),
         max: kThemeMaxAnimationDurationMs.toDouble(),
         divisions:
-            (kThemeMaxAnimationDurationMs - kThemeMinAnimationDurationMs) ~/ 200,
+            (kThemeMaxAnimationDurationMs - kThemeMinAnimationDurationMs) ~/
+            200,
         label: '${seconds.toStringAsFixed(1)}s',
         value: ms.toDouble(),
         onChanged: (value) => _rebuild(() {
