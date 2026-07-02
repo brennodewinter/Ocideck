@@ -9,6 +9,7 @@ import 'package:flutter/rendering.dart';
 import '../models/deck.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import 'web_asset_store.dart';
 import '../utils/image_limits.dart';
 import '../utils/project_path.dart';
 import 'slide_layout_metrics.dart';
@@ -65,8 +66,8 @@ class SlideRasterizer {
     final allPaths = <String>{
       ?logo,
       for (final slide in slides) ...[
-        ?_resolve(slide.imagePath, projectPath),
-        ?_resolve(slide.imagePath2, projectPath),
+        ?_resolveOrMem(slide.imagePath, projectPath),
+        ?_resolveOrMem(slide.imagePath2, projectPath),
       ],
     };
 
@@ -165,24 +166,31 @@ class SlideRasterizer {
     Iterable<String> paths, {
     void Function(int done, int total)? onProgress,
   }) async {
-    // Op web zijn er geen lokale bestandspaden om voor te laden — en alleen al
-    // het construeren van een dart:io File gooit daar. De render zelf toont
-    // dan de gewone ontbrekende-afbeelding-weergave.
-    if (kIsWeb) return;
-    final list = paths.toList();
+    // Op web zijn er geen lokale bestandspaden — alleen al het construeren
+    // van een dart:io File gooit daar. `mem:`-paden (WebAssetStore) worden
+    // wél voorgeladen, zodat de capture niet vóór de eerste decode valt.
+    final list = paths
+        .where((path) => !kIsWeb || WebAssetStore.isMemPath(path))
+        .toList();
     if (list.isEmpty) return;
     const batchSize = 4;
     var done = 0;
+    ImageProvider providerFor(String path) {
+      final memBytes = WebAssetStore.isMemPath(path)
+          ? WebAssetStore.bytesFor(path)
+          : null;
+      return memBytes != null
+          ? cappedMemoryImage(memBytes)
+          : cappedFileImage(File(path));
+    }
+
     for (var i = 0; i < list.length; i += batchSize) {
       if (!context.mounted) return;
       final batch = list.skip(i).take(batchSize);
       await Future.wait(
         batch.map(
-          (path) => precacheImage(
-            cappedFileImage(File(path)),
-            context,
-            onError: (_, _) {},
-          ),
+          (path) =>
+              precacheImage(providerFor(path), context, onError: (_, _) {}),
         ),
       );
       done += batch.length;
@@ -193,9 +201,12 @@ class SlideRasterizer {
 
   // Route through the shared containment guard so an untrusted deck can't make
   // the export precache read files outside the project via absolute or `../`
-  // image paths.
-  static String? _resolve(String imagePath, String? projectPath) =>
-      resolveSlideAssetPath(imagePath, projectPath);
+  // image paths. `mem:`-paden (WebAssetStore) hebben geen bestandsresolutie
+  // nodig en gaan er ongewijzigd doorheen.
+  static String? _resolveOrMem(String imagePath, String? projectPath) =>
+      WebAssetStore.isMemPath(imagePath)
+      ? imagePath
+      : resolveSlideAssetPath(imagePath, projectPath);
 }
 
 class _RasterSlideHost extends StatefulWidget {
