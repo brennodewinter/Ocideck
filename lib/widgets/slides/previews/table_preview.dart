@@ -245,48 +245,12 @@ class _TablePreview extends StatelessWidget {
     final rows = slide.tableRows.where((r) => r.isNotEmpty).toList();
     final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
 
-    // The density-based size is an upper bound; a text-heavy table then shrinks
-    // its font so it fits the slide height at full width, rather than letting
-    // the FittedBox scale the whole table down (which also narrows it and
-    // leaves the slide's right edge empty). availH mirrors _outerLayout's frame:
-    // the 16:9 box minus the logo-safe top/bottom padding and the title block.
-    final baseCell = tableCellFontSize(
-      w,
-      rowCount: rows.length,
+    final cellSize = _fitCellSize(
+      rows: rows,
       colCount: colCount,
-    );
-    final minCell = tableCellFontMinimum(w);
-    final tableWidth = w - pad * 2;
-    final titleBlock = slide.title.isNotEmpty
-        ? measureTextHeight(
-                slide.title,
-                titleSize,
-                tableWidth,
-                bold: true,
-                fontFamily: font,
-              ) +
-              pad * 0.35
-        : 0.0;
-    final availH =
-        w * 9 / 16 -
-        (pad + safe.top) -
-        _logoAwareBottomPadding(pad, safe.bottom) -
-        titleBlock;
-    final cellSize = memoizedRenderLayout<double>(
-      slide: slide,
-      font: font,
-      width: w,
-      availW: tableWidth,
-      availH: availH,
-      compute: () => tableFitCellSize(
-        rows: rows,
-        colCount: colCount,
-        tableWidth: tableWidth,
-        availH: availH,
-        baseCellSize: baseCell,
-        minCellSize: minCell,
-        font: font,
-      ),
+      pad: pad,
+      safe: safe,
+      titleSize: titleSize,
     );
 
     final accent = _hexColor(profile.accentColor);
@@ -380,29 +344,7 @@ class _TablePreview extends StatelessWidget {
     );
 
     if (editing) {
-      tableWidget = TweenAnimationBuilder<double>(
-        tween: Tween(begin: 0.94, end: 1),
-        duration: const Duration(milliseconds: 320),
-        curve: Curves.easeOutCubic,
-        builder: (_, scale, child) =>
-            Transform.scale(scale: scale, child: child),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(w * 0.012),
-            boxShadow: [
-              BoxShadow(
-                color: accent.withValues(alpha: 0.22),
-                blurRadius: w * 0.028,
-                spreadRadius: w * 0.004,
-              ),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(w * 0.012),
-            child: tableWidget,
-          ),
-        ),
-      );
+      tableWidget = _editingGlow(tableWidget, accent);
     }
 
     return _outerLayout(
@@ -413,6 +355,84 @@ class _TablePreview extends StatelessWidget {
       titleSize: titleSize,
       rows: rows,
       colCount: colCount,
+    );
+  }
+
+  /// The density-based size is an upper bound; a text-heavy table then shrinks
+  /// its font so it fits the slide height at full width, rather than letting
+  /// the FittedBox scale the whole table down (which also narrows it and
+  /// leaves the slide's right edge empty). availH mirrors _outerLayout's frame:
+  /// the 16:9 box minus the logo-safe top/bottom padding and the title block.
+  double _fitCellSize({
+    required List<List<String>> rows,
+    required int colCount,
+    required double pad,
+    required EdgeInsets safe,
+    required double titleSize,
+  }) {
+    final baseCell = tableCellFontSize(
+      w,
+      rowCount: rows.length,
+      colCount: colCount,
+    );
+    final minCell = tableCellFontMinimum(w);
+    final tableWidth = w - pad * 2;
+    final titleBlock = slide.title.isNotEmpty
+        ? measureTextHeight(
+                slide.title,
+                titleSize,
+                tableWidth,
+                bold: true,
+                fontFamily: font,
+              ) +
+              pad * 0.35
+        : 0.0;
+    final availH =
+        w * 9 / 16 -
+        (pad + safe.top) -
+        _logoAwareBottomPadding(pad, safe.bottom) -
+        titleBlock;
+    return memoizedRenderLayout<double>(
+      slide: slide,
+      font: font,
+      width: w,
+      availW: tableWidth,
+      availH: availH,
+      compute: () => tableFitCellSize(
+        rows: rows,
+        colCount: colCount,
+        tableWidth: tableWidth,
+        availH: availH,
+        baseCellSize: baseCell,
+        minCellSize: minCell,
+        font: font,
+      ),
+    );
+  }
+
+  /// Schaal-in-animatie plus accentgloed rond de tabel in bewerkmodus.
+  Widget _editingGlow(Widget tableWidget, Color accent) {
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0.94, end: 1),
+      duration: const Duration(milliseconds: 320),
+      curve: Curves.easeOutCubic,
+      builder: (_, scale, child) => Transform.scale(scale: scale, child: child),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(w * 0.012),
+          boxShadow: [
+            BoxShadow(
+              color: accent.withValues(alpha: 0.22),
+              blurRadius: w * 0.028,
+              spreadRadius: w * 0.004,
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(w * 0.012),
+          child: tableWidget,
+        ),
+      ),
     );
   }
 
