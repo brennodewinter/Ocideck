@@ -25,6 +25,7 @@ import 'caption_service.dart';
 import 'image_service.dart';
 import 'markdown_safety.dart';
 import 'markdown_service.dart';
+import 'web_asset_store.dart';
 
 part 'parts/file_service_open.dart';
 part 'parts/file_service_package.dart';
@@ -86,6 +87,10 @@ class _LogoProjectAsset {
 
   const _LogoProjectAsset(this.profile, this.cssUrl);
 }
+
+/// Eén lid van een `.ocideck`-pakket: archiefnaam plus uitgepakte bytes.
+/// Het resultaat van de veilige zip-decodering ([FileService.decodePackageEntries]).
+typedef PackageEntry = ({String name, Uint8List bytes});
 
 /// Why [FileService.openDeckDetailed] could not open a file. Lets a caller tell
 /// the user *why* (e.g. "this isn't a presentation") instead of a single
@@ -612,6 +617,91 @@ class FileService {
   static const maxPackageEntries = 10000;
   static const maxZipEntryPathLength = 512;
 
+  /// Decodeer een pakket-zip veilig naar (naam → bytes)-leden, met dezelfde
+  /// verdediging als de schijf-import: totale omvang, aantal entries,
+  /// padlengte en een begrensde inflater die een zip-bom mid-decompressie
+  /// stopt. Retourneert null bij elke weigering. Gedeeld door de schijf-import
+  /// ([importPackageBytes]) en de in-memory pakket-open van de webversie.
+  List<PackageEntry>? decodePackageEntries(
+    List<int> zipBytes, {
+    int maxBytes = maxPackageBytes,
+  }) {
+    if (zipBytes.length > maxBytes) return null;
+
+    final Archive archive;
+    try {
+      archive = ZipDecoder().decodeBytes(zipBytes);
+    } catch (e, s) {
+      logError('FileService.decodePackageEntries: ZIP decode failed', e, s);
+      return null;
+    }
+
+    if (archive.files.length > maxPackageEntries) {
+      logWarning(
+        'FileService.decodePackageEntries: too many archive entries '
+        '(${archive.files.length})',
+      );
+      return null;
+    }
+
+    final entries = <PackageEntry>[];
+    var extracted = 0;
+    for (final f in archive.files) {
+      if (!f.isFile) continue;
+      if (f.name.length > maxZipEntryPathLength) continue;
+      // Cheap early reject on the *declared* uncompressed size (a zip bomb can
+      // understate this, so it is only a fast path, not the real guard).
+      if (f.size < 0 || extracted + f.size > maxBytes) {
+        logWarning(
+          'FileService.decodePackageEntries: decompressed size exceeds limit',
+        );
+        return null;
+      }
+      // Inflate into a capped stream that aborts the moment the entry exceeds
+      // the remaining budget. This bounds peak memory per entry: unlike
+      // `f.content` (which decodes the whole entry into memory before we can
+      // check its size), the underlying inflater writes incrementally, so a
+      // deflate bomb that understated its header size is stopped mid-inflation.
+      final remaining = maxBytes - extracted;
+      final capped = _CappedOutputStream(remaining);
+      final Uint8List content;
+      try {
+        f.writeContent(capped);
+        content = Uint8List.fromList(capped.getBytes());
+      } on _ExtractionLimitException {
+        logWarning(
+          'FileService.decodePackageEntries: entry exceeds decompression '
+          'limit (possible zip bomb): ${f.name}',
+        );
+        return null;
+      } catch (e) {
+        // Decompressing a corrupt entry can throw; skip it instead of aborting.
+        logWarning(
+          'FileService.decodePackageEntries: unreadable entry skipped '
+          '(${f.name})',
+          e,
+        );
+        continue;
+      }
+      extracted += content.length;
+      entries.add((name: f.name, bytes: content));
+    }
+    return entries;
+  }
+
+  /// De hoofd-markdown van een pakket: het `.md`-lid met het ondiepste pad.
+  static PackageEntry? mainMarkdownEntry(List<PackageEntry> entries) {
+    PackageEntry? mdEntry;
+    for (final e in entries) {
+      if (!e.name.toLowerCase().endsWith('.md')) continue;
+      if (mdEntry == null ||
+          '/'.allMatches(e.name).length < '/'.allMatches(mdEntry.name).length) {
+        mdEntry = e;
+      }
+    }
+    return mdEntry;
+  }
+
   /// Pak een pakket uit in een nieuwe submap onder [destParentDir]. Geeft het
   /// pad naar het uitgepakte markdown-bestand terug (om in een tab te openen).
   Future<String?> importPackageBytes(
@@ -619,33 +709,9 @@ class FileService {
     String destParentDir, {
     int maxBytes = maxPackageBytes,
   }) async {
-    if (zipBytes.length > maxBytes) return null;
-
-    final Archive archive;
-    try {
-      archive = ZipDecoder().decodeBytes(zipBytes);
-    } catch (e, s) {
-      logError('FileService.importPackageBytes: ZIP decode failed', e, s);
-      return null;
-    }
-
-    if (archive.files.length > maxPackageEntries) {
-      logWarning(
-        'FileService.importPackageBytes: too many archive entries '
-        '(${archive.files.length})',
-      );
-      return null;
-    }
-
-    // Kies de markdown met het ondiepste pad (de hoofd-md van het pakket).
-    ArchiveFile? mdEntry;
-    for (final f in archive.files) {
-      if (!f.isFile || !f.name.toLowerCase().endsWith('.md')) continue;
-      if (mdEntry == null ||
-          '/'.allMatches(f.name).length < '/'.allMatches(mdEntry.name).length) {
-        mdEntry = f;
-      }
-    }
+    final entries = decodePackageEntries(zipBytes, maxBytes: maxBytes);
+    if (entries == null) return null;
+    final mdEntry = mainMarkdownEntry(entries);
     if (mdEntry == null) return null;
 
     final folderName = p.basenameWithoutExtension(mdEntry.name);
@@ -662,54 +728,16 @@ class FileService {
       return resolved;
     }
 
-    var extracted = 0;
-    for (final f in archive.files) {
-      if (!f.isFile) continue;
-      if (f.name.length > maxZipEntryPathLength) continue;
-      final outPath = safeOutPath(f.name);
+    for (final entry in entries) {
+      final outPath = safeOutPath(entry.name);
       if (outPath == null) continue; // skip path-traversal entries
-      // Cheap early reject on the *declared* uncompressed size (a zip bomb can
-      // understate this, so it is only a fast path, not the real guard).
-      if (f.size < 0 || extracted + f.size > maxBytes) {
-        logWarning(
-          'FileService.importPackageBytes: decompressed size exceeds limit',
-        );
-        return null;
-      }
-      // Inflate into a capped stream that aborts the moment the entry exceeds
-      // the remaining budget. This bounds peak memory per entry: unlike
-      // `f.content` (which decodes the whole entry into memory before we can
-      // check its size), the underlying inflater writes incrementally, so a
-      // deflate bomb that understated its header size is stopped mid-inflation.
-      final remaining = maxBytes - extracted;
-      final capped = _CappedOutputStream(remaining);
-      final List<int> content;
-      try {
-        f.writeContent(capped);
-        content = capped.getBytes();
-      } on _ExtractionLimitException {
-        logWarning(
-          'FileService.importPackageBytes: entry exceeds decompression limit '
-          '(possible zip bomb): ${f.name}',
-        );
-        return null;
-      } catch (e) {
-        // Decompressing a corrupt entry can throw; skip it instead of aborting.
-        logWarning(
-          'FileService.importPackageBytes: unreadable entry skipped (${f.name})',
-          e,
-        );
-        continue;
-      }
-      extracted += content.length;
       final out = File(outPath);
       await out.parent.create(recursive: true);
-      await out.writeAsBytes(content, flush: true);
+      await out.writeAsBytes(entry.bytes, flush: true);
     }
 
     // The main markdown must itself resolve inside the extraction folder.
-    final mdPath = safeOutPath(mdEntry.name);
-    return mdPath;
+    return safeOutPath(mdEntry.name);
   }
 
   Directory _uniqueDir(String parent, String name) {
