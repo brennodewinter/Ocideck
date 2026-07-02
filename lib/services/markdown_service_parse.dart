@@ -206,6 +206,10 @@ extension _MarkdownParse on MarkdownService {
 
     var imageSize = body.imageSize;
     if (imageSize == 0 && d.styleImageWidth > 0) imageSize = d.styleImageWidth;
+    // 0 stays "auto"; a real value is capped so a crafted `![bg 900000%]`
+    // can't blow the layout box up (~maxWidth × 9000) and thrash rendering/
+    // rasterisation. 400% is well beyond any legitimate zoom.
+    if (imageSize > 400) imageSize = 400;
 
     final tableRows = <List<String>>[];
     for (final line in body.tableLines) {
