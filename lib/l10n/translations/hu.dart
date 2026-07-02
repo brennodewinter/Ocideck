@@ -1104,4 +1104,20 @@ const _dutchSourceHu = {
   'Spreiding': 'Pontdiagram',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn lapoz a diák között',
   'Wacht op antwoord…': 'Válaszra várunk…',
+  'Afbeelding slidevullend': 'A kép kitölti a diát',
+  'Vult de hele slide en snijdt de randen bij':
+      'Kitölti az egész diát és levágja a széleket',
+  'Afbeelding vult hele slide': 'A kép kitölti az egész diát',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Be: kitölti az egész diát, a cím fölötte (levágva). Ki: kép felül, cím egy sávban alatta.',
+  'Grijze waas over afbeelding': 'Szürke fátyol a képen',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Nyugodtabbá teszi a hátteret a cím és az alcím mögött.',
+  'Licht': 'Világos',
+  'Donker': 'Sötét',
+  'Pen (D)': 'Toll (D)',
+  'Markeerstift (T)': 'Szövegkiemelő (T)',
+  'Gum (E / Shift+E)': 'Radír (E / Shift+E)',
+  'Laser (X)': 'Lézer (X)',
+  'Metriek': 'Metrika',
 };

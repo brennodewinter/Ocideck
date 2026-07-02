@@ -1114,4 +1114,20 @@ const _dutchSourceUk = {
   'Spreiding': 'Точкова',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn гортає слайди',
   'Wacht op antwoord…': 'Очікування відповіді…',
+  'Afbeelding slidevullend': 'Зображення заповнює слайд',
+  'Vult de hele slide en snijdt de randen bij':
+      'Заповнює весь слайд і обрізає краї',
+  'Afbeelding vult hele slide': 'Зображення заповнює весь слайд',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Увімк.: заповнює весь слайд, заголовок зверху (обрізано). Вимк.: зображення вгорі, заголовок у смузі під ним.',
+  'Grijze waas over afbeelding': 'Сірий серпанок поверх зображення',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Робить тло спокійнішим за заголовком і підзаголовком.',
+  'Licht': 'Світлий',
+  'Donker': 'Темний',
+  'Pen (D)': 'Перо (D)',
+  'Markeerstift (T)': 'Маркер (T)',
+  'Gum (E / Shift+E)': 'Гумка (E / Shift+E)',
+  'Laser (X)': 'Лазер (X)',
+  'Metriek': 'Метрика',
 };

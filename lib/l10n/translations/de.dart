@@ -1093,4 +1093,20 @@ const _dutchSourceAddDe = {
   'Spreiding': 'Streudiagramm',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn blättert durch die Folien',
   'Wacht op antwoord…': 'Warte auf Antwort…',
+  'Afbeelding slidevullend': 'Bild füllt die Folie',
+  'Vult de hele slide en snijdt de randen bij':
+      'Füllt die ganze Folie und beschneidet die Ränder',
+  'Afbeelding vult hele slide': 'Bild füllt die ganze Folie',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'An: füllt die ganze Folie, Titel darüber (beschnitten). Aus: Bild oben, Titel in einem Band darunter.',
+  'Grijze waas over afbeelding': 'Grauer Schleier über dem Bild',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Beruhigt den Hintergrund hinter Titel und Untertitel.',
+  'Licht': 'Hell',
+  'Donker': 'Dunkel',
+  'Pen (D)': 'Stift (D)',
+  'Markeerstift (T)': 'Textmarker (T)',
+  'Gum (E / Shift+E)': 'Radierer (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metrik',
 };

@@ -1104,4 +1104,20 @@ const _dutchSourceSl = {
   'Spreiding': 'Razpršenost',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn lista prosojnice',
   'Wacht op antwoord…': 'Čakanje na odgovor…',
+  'Afbeelding slidevullend': 'Slika zapolni prosojnico',
+  'Vult de hele slide en snijdt de randen bij':
+      'Zapolni celotno prosojnico in obreže robove',
+  'Afbeelding vult hele slide': 'Slika zapolni celotno prosojnico',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Vklop: zapolni celotno prosojnico, naslov čez (obrezano). Izklop: slika zgoraj, naslov v pasu spodaj.',
+  'Grijze waas over afbeelding': 'Siva koprena čez sliko',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Umiri ozadje za naslovom in podnaslovom.',
+  'Licht': 'Svetlo',
+  'Donker': 'Temno',
+  'Pen (D)': 'Pero (D)',
+  'Markeerstift (T)': 'Označevalnik (T)',
+  'Gum (E / Shift+E)': 'Radirka (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metrika',
 };

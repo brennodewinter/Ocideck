@@ -135,14 +135,22 @@ extension _PresenterInk on _FullscreenPresenterState {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          toolBtn(InkTool.pen, Icons.edit, 'Pen (D)'),
-          toolBtn(InkTool.highlighter, Icons.brush, 'Markeerstift (T)'),
+          toolBtn(InkTool.pen, Icons.edit, context.l10n.d('Pen (D)')),
+          toolBtn(
+            InkTool.highlighter,
+            Icons.brush,
+            context.l10n.d('Markeerstift (T)'),
+          ),
           toolBtn(
             InkTool.eraser,
             Icons.cleaning_services_outlined,
-            'Gum (E / ⇧E)',
+            context.l10n.d('Gum (E / Shift+E)'),
           ),
-          toolBtn(InkTool.laser, Icons.my_location, 'Laser (X)'),
+          toolBtn(
+            InkTool.laser,
+            Icons.my_location,
+            context.l10n.d('Laser (X)'),
+          ),
           const SizedBox(width: 8),
           Container(width: 1, height: 22, color: Colors.white24),
           const SizedBox(width: 8),

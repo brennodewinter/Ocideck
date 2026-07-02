@@ -598,7 +598,7 @@ class _IssueTile extends StatelessWidget {
             const SizedBox(width: 6),
             Expanded(
               child: Text(
-                'Regel ${issue.line}: ${issue.message}',
+                '${context.l10n.d('Regel')} ${issue.line}: ${issue.message}',
                 style: TextStyle(
                   fontSize: 11,
                   color: isError

@@ -1112,4 +1112,20 @@ const _dutchSourceLa = {
   'Spreiding': 'Dispersio',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn folia percurrit',
   'Wacht op antwoord…': 'Responsum exspectatur…',
+  'Afbeelding slidevullend': 'Imago folium implet',
+  'Vult de hele slide en snijdt de randen bij':
+      'Totum folium implet et margines resecat',
+  'Afbeelding vult hele slide': 'Imago totum folium implet',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Accensum: totum folium implet, titulus superpositus (resectus). Exstinctum: imago supra, titulus in fascia infra.',
+  'Grijze waas over afbeelding': 'Velamen cinereum super imaginem',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Fundum post titulum et subtitulum tranquillius reddit.',
+  'Licht': 'Clarum',
+  'Donker': 'Obscurum',
+  'Pen (D)': 'Calamus (D)',
+  'Markeerstift (T)': 'Stilus notans (T)',
+  'Gum (E / Shift+E)': 'Deletrix (E / Shift+E)',
+  'Laser (X)': 'Radius (X)',
+  'Metriek': 'Mensura',
 };

@@ -1114,4 +1114,20 @@ const _dutchSourceAddEn = {
   'Spreiding': 'Scatter',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn moves between slides',
   'Wacht op antwoord…': 'Waiting for an answer…',
+  'Afbeelding slidevullend': 'Image fills the slide',
+  'Vult de hele slide en snijdt de randen bij':
+      'Fills the whole slide and crops the edges',
+  'Afbeelding vult hele slide': 'Image fills the whole slide',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'On: fills the whole slide, title on top (cropped). Off: image at the top, title in a band below it.',
+  'Grijze waas over afbeelding': 'Grey wash over the image',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Calms the background behind the title and subtitle.',
+  'Licht': 'Light',
+  'Donker': 'Dark',
+  'Pen (D)': 'Pen (D)',
+  'Markeerstift (T)': 'Highlighter (T)',
+  'Gum (E / Shift+E)': 'Eraser (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metric',
 };

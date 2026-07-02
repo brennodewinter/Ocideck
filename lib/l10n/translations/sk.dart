@@ -1108,4 +1108,20 @@ const _dutchSourceSk = {
   'Spreiding': 'Bodový',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn listuje snímky',
   'Wacht op antwoord…': 'Čaká sa na odpoveď…',
+  'Afbeelding slidevullend': 'Obrázok vyplní snímku',
+  'Vult de hele slide en snijdt de randen bij':
+      'Vyplní celú snímku a oreže okraje',
+  'Afbeelding vult hele slide': 'Obrázok vyplní celú snímku',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Zap.: vyplní celú snímku, titulok cez ňu (orezané). Vyp.: obrázok hore, titulok v páse pod ním.',
+  'Grijze waas over afbeelding': 'Sivý závoj cez obrázok',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Upokojí pozadie za titulkom a podtitulkom.',
+  'Licht': 'Svetlý',
+  'Donker': 'Tmavý',
+  'Pen (D)': 'Pero (D)',
+  'Markeerstift (T)': 'Zvýrazňovač (T)',
+  'Gum (E / Shift+E)': 'Guma (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metrika',
 };

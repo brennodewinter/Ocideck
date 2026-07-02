@@ -1098,4 +1098,20 @@ const _dutchSourceDa = {
   'Spreiding': 'Spredning',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn bladrer gennem slides',
   'Wacht op antwoord…': 'Venter på svar…',
+  'Afbeelding slidevullend': 'Billedet fylder sliden',
+  'Vult de hele slide en snijdt de randen bij':
+      'Fylder hele sliden og beskærer kanterne',
+  'Afbeelding vult hele slide': 'Billedet fylder hele sliden',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Til: fylder hele sliden, titel ovenpå (beskåret). Fra: billede øverst, titel i et bånd nedenunder.',
+  'Grijze waas over afbeelding': 'Gråt slør over billedet',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Gør baggrunden roligere bag titel og undertitel.',
+  'Licht': 'Lys',
+  'Donker': 'Mørk',
+  'Pen (D)': 'Pen (D)',
+  'Markeerstift (T)': 'Overstregningstusch (T)',
+  'Gum (E / Shift+E)': 'Viskelæder (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metrik',
 };

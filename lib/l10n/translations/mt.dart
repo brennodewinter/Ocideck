@@ -1115,4 +1115,20 @@ const _dutchSourceMt = {
   'Spreiding': 'Scatter',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn iqalleb bejn l-islajds',
   'Wacht op antwoord…': 'Qed nistennew tweġiba…',
+  'Afbeelding slidevullend': 'L-istampa timla l-islajd',
+  'Vult de hele slide en snijdt de randen bij':
+      'Timla l-islajd kollu u taqta\' t-truf',
+  'Afbeelding vult hele slide': 'L-istampa timla l-islajd kollu',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Mixgħul: timla l-islajd kollu, it-titlu fuqha (maqtugħ). Mitfi: l-istampa fuq, it-titlu f\'faxxa taħtha.',
+  'Grijze waas over afbeelding': 'Velu griż fuq l-istampa',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Tikkalma l-isfond wara t-titlu u s-sottotitlu.',
+  'Licht': 'Ċar',
+  'Donker': 'Skur',
+  'Pen (D)': 'Pinna (D)',
+  'Markeerstift (T)': 'Evidenzjatur (T)',
+  'Gum (E / Shift+E)': 'Gomma (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metrika',
 };

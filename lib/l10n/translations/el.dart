@@ -1115,4 +1115,20 @@ const _dutchSourceEl = {
   'Spreiding': 'Διασπορά',
   'PgUp/PgDn bladert door de slides': 'Το PgUp/PgDn ξεφυλλίζει τις διαφάνειες',
   'Wacht op antwoord…': 'Αναμονή απάντησης…',
+  'Afbeelding slidevullend': 'Η εικόνα γεμίζει τη διαφάνεια',
+  'Vult de hele slide en snijdt de randen bij':
+      'Γεμίζει όλη τη διαφάνεια και περικόπτει τις άκρες',
+  'Afbeelding vult hele slide': 'Η εικόνα γεμίζει όλη τη διαφάνεια',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Ενεργό: γεμίζει όλη τη διαφάνεια, τίτλος από πάνω (περικομμένο). Ανενεργό: εικόνα επάνω, τίτλος σε ζώνη από κάτω.',
+  'Grijze waas over afbeelding': 'Γκρίζο πέπλο πάνω στην εικόνα',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Ηρεμεί το φόντο πίσω από τον τίτλο και τον υπότιτλο.',
+  'Licht': 'Ανοιχτό',
+  'Donker': 'Σκούρο',
+  'Pen (D)': 'Πένα (D)',
+  'Markeerstift (T)': 'Μαρκαδόρος (T)',
+  'Gum (E / Shift+E)': 'Γόμα (E / Shift+E)',
+  'Laser (X)': 'Λέιζερ (X)',
+  'Metriek': 'Μετρική',
 };

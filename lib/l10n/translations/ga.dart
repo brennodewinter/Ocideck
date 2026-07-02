@@ -1127,4 +1127,20 @@ const _dutchSourceGa = {
   'Spreiding': 'Scaipthe',
   'PgUp/PgDn bladert door de slides': 'Bogann PgUp/PgDn idir na sleamhnáin',
   'Wacht op antwoord…': 'Ag fanacht le freagra…',
+  'Afbeelding slidevullend': 'Líonann an íomhá an sleamhnán',
+  'Vult de hele slide en snijdt de randen bij':
+      'Líonann sé an sleamhnán ar fad agus bearrann sé na himill',
+  'Afbeelding vult hele slide': 'Líonann an íomhá an sleamhnán ar fad',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Ann: líonann sé an sleamhnán ar fad, teideal anuas air (bearrtha). As: íomhá ag an mbarr, teideal i mbanda faoi.',
+  'Grijze waas over afbeelding': 'Scáil liath ar an íomhá',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Ciúnaíonn sé an cúlra taobh thiar den teideal agus den fhotheideal.',
+  'Licht': 'Geal',
+  'Donker': 'Dorcha',
+  'Pen (D)': 'Peann (D)',
+  'Markeerstift (T)': 'Aibhsitheoir (T)',
+  'Gum (E / Shift+E)': 'Scriosán (E / Shift+E)',
+  'Laser (X)': 'Léasar (X)',
+  'Metriek': 'Méadracht',
 };

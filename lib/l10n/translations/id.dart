@@ -1102,4 +1102,20 @@ const _dutchSourceId = {
   'Spreiding': 'Sebar',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn berpindah antar slide',
   'Wacht op antwoord…': 'Menunggu jawaban…',
+  'Afbeelding slidevullend': 'Gambar memenuhi slide',
+  'Vult de hele slide en snijdt de randen bij':
+      'Memenuhi seluruh slide dan memotong tepinya',
+  'Afbeelding vult hele slide': 'Gambar memenuhi seluruh slide',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Aktif: memenuhi seluruh slide, judul di atasnya (terpotong). Nonaktif: gambar di atas, judul di pita di bawahnya.',
+  'Grijze waas over afbeelding': 'Lapisan abu-abu di atas gambar',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Membuat latar belakang lebih tenang di belakang judul dan subjudul.',
+  'Licht': 'Terang',
+  'Donker': 'Gelap',
+  'Pen (D)': 'Pena (D)',
+  'Markeerstift (T)': 'Stabilo (T)',
+  'Gum (E / Shift+E)': 'Penghapus (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metrik',
 };

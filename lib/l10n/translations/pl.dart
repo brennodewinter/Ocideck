@@ -1109,4 +1109,20 @@ const _dutchSourcePl = {
   'Spreiding': 'Punktowy',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn przewija slajdy',
   'Wacht op antwoord…': 'Oczekiwanie na odpowiedź…',
+  'Afbeelding slidevullend': 'Obraz wypełnia slajd',
+  'Vult de hele slide en snijdt de randen bij':
+      'Wypełnia cały slajd i przycina krawędzie',
+  'Afbeelding vult hele slide': 'Obraz wypełnia cały slajd',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Wł.: wypełnia cały slajd, tytuł na wierzchu (przycięty). Wył.: obraz u góry, tytuł w pasku poniżej.',
+  'Grijze waas over afbeelding': 'Szara mgiełka na obrazie',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Uspokaja tło za tytułem i podtytułem.',
+  'Licht': 'Jasny',
+  'Donker': 'Ciemny',
+  'Pen (D)': 'Pióro (D)',
+  'Markeerstift (T)': 'Zakreślacz (T)',
+  'Gum (E / Shift+E)': 'Gumka (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metryka',
 };

@@ -1102,4 +1102,20 @@ const _dutchSourceGsw = {
   'Spreiding': 'Schtreuig',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn blätteret dur d Folie',
   'Wacht op antwoord…': 'Warte uf e Antwort…',
+  'Afbeelding slidevullend': 'Bild füllt d Folie',
+  'Vult de hele slide en snijdt de randen bij':
+      'Füllt di ganz Folie und schnidt d Ränder ab',
+  'Afbeelding vult hele slide': 'Bild füllt di ganz Folie',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Aa: füllt di ganz Folie, Titel drüber (abgschnitte). Us: Bild obe, Titel in eme Band drunter.',
+  'Grijze waas over afbeelding': 'Graue Schleier überem Bild',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Macht dr Hintergrund ruehiger hinterem Titel und Untertitel.',
+  'Licht': 'Hell',
+  'Donker': 'Dunkel',
+  'Pen (D)': 'Stift (D)',
+  'Markeerstift (T)': 'Leuchtstift (T)',
+  'Gum (E / Shift+E)': 'Gummi (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metrik',
 };

@@ -1102,4 +1102,20 @@ const _dutchSourceLv = {
   'Spreiding': 'Izkliede',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn pāršķir slaidus',
   'Wacht op antwoord…': 'Gaida atbildi…',
+  'Afbeelding slidevullend': 'Attēls aizpilda slaidu',
+  'Vult de hele slide en snijdt de randen bij':
+      'Aizpilda visu slaidu un apgriež malas',
+  'Afbeelding vult hele slide': 'Attēls aizpilda visu slaidu',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Ieslēgts: aizpilda visu slaidu, virsraksts pa virsu (apgriezts). Izslēgts: attēls augšā, virsraksts joslā zem tā.',
+  'Grijze waas over afbeelding': 'Pelēka plīvurs pār attēlu',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Nomierina fonu aiz virsraksta un apakšvirsraksta.',
+  'Licht': 'Gaišs',
+  'Donker': 'Tumšs',
+  'Pen (D)': 'Pildspalva (D)',
+  'Markeerstift (T)': 'Marķieris (T)',
+  'Gum (E / Shift+E)': 'Dzēšgumija (E / Shift+E)',
+  'Laser (X)': 'Lāzers (X)',
+  'Metriek': 'Metrika',
 };

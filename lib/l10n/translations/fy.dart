@@ -1090,4 +1090,20 @@ const _dutchSourceAddFy = {
   'Spreiding': 'Sparring',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn blêdet troch de slides',
   'Wacht op antwoord…': 'Wachtsje op antwurd…',
+  'Afbeelding slidevullend': 'Ofbylding slidefoljend',
+  'Vult de hele slide en snijdt de randen bij':
+      'Follet de hiele slide en snijt de rânen by',
+  'Afbeelding vult hele slide': 'Ofbylding follet de hiele slide',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Oan: follet de hiele slide, titel deroerhinne (bysnien). Ut: byld boppe-oan, titel yn in bân derûnder.',
+  'Grijze waas over afbeelding': 'Grize waas oer de ôfbylding',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Makket de eftergrûn rêstiger efter titel en subtitel.',
+  'Licht': 'Ljocht',
+  'Donker': 'Tsjuster',
+  'Pen (D)': 'Pinne (D)',
+  'Markeerstift (T)': 'Markearstift (T)',
+  'Gum (E / Shift+E)': 'Gom (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metryk',
 };

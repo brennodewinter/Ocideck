@@ -1120,4 +1120,20 @@ const _dutchSourcePt = {
   'Spreiding': 'Dispersão',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn percorre os diapositivos',
   'Wacht op antwoord…': 'A aguardar resposta…',
+  'Afbeelding slidevullend': 'A imagem preenche o diapositivo',
+  'Vult de hele slide en snijdt de randen bij':
+      'Preenche todo o diapositivo e corta as margens',
+  'Afbeelding vult hele slide': 'A imagem preenche todo o diapositivo',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Ligado: preenche todo o diapositivo, título por cima (cortado). Desligado: imagem em cima, título numa faixa por baixo.',
+  'Grijze waas over afbeelding': 'Véu cinzento sobre a imagem',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Torna o fundo mais calmo atrás do título e do subtítulo.',
+  'Licht': 'Claro',
+  'Donker': 'Escuro',
+  'Pen (D)': 'Caneta (D)',
+  'Markeerstift (T)': 'Marcador (T)',
+  'Gum (E / Shift+E)': 'Borracha (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Métrica',
 };

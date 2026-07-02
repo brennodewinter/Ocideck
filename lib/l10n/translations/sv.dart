@@ -1101,4 +1101,20 @@ const _dutchSourceSv = {
   'Spreiding': 'Spridning',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn bläddrar bland bilderna',
   'Wacht op antwoord…': 'Väntar på svar…',
+  'Afbeelding slidevullend': 'Bilden fyller bilden helt',
+  'Vult de hele slide en snijdt de randen bij':
+      'Fyller hela bilden och beskär kanterna',
+  'Afbeelding vult hele slide': 'Bilden fyller hela bilden',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'På: fyller hela bilden, titel ovanpå (beskuren). Av: bild överst, titel i ett band under.',
+  'Grijze waas over afbeelding': 'Grå slöja över bilden',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Gör bakgrunden lugnare bakom titel och undertitel.',
+  'Licht': 'Ljus',
+  'Donker': 'Mörk',
+  'Pen (D)': 'Penna (D)',
+  'Markeerstift (T)': 'Överstrykningspenna (T)',
+  'Gum (E / Shift+E)': 'Suddgummi (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Mätvärde',
 };

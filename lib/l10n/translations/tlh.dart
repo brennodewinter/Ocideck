@@ -1090,4 +1090,20 @@ const _dutchSourceTlh = {
   'PgUp/PgDn bladert door de slides':
       'PgUp/PgDn lo\'lu\'chugh \'anghommey vegh leng',
   'Wacht op antwoord…': 'jang loS…',
+  'Afbeelding slidevullend': '\'anghom buy\'moH mIllogh',
+  'Vult de hele slide en snijdt de randen bij':
+      'Hoch \'anghom buy\'moH \'ej HeHmey pe\'',
+  'Afbeelding vult hele slide': 'Hoch \'anghom buy\'moH mIllogh',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'chu\'lu\': Hoch \'anghom buy\'moH, pong Dung (pe\'lu\'). chu\'be\'lu\': mIllogh Dung, pong bIS\'ub tlhegh.',
+  'Grijze waas over afbeelding': 'mIllogh Dung SuD wov velqa\'',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'pong bIngDaq QIb jot law\'moH.',
+  'Licht': 'wov',
+  'Donker': 'Hurgh',
+  'Pen (D)': 'ghItlhwI\' (D)',
+  'Markeerstift (T)': 'wovmoHwI\' (T)',
+  'Gum (E / Shift+E)': 'teqwI\' (E / Shift+E)',
+  'Laser (X)': 'laser (X)',
+  'Metriek': 'juvwI\'',
 };

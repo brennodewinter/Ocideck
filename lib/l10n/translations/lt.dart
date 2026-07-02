@@ -1107,4 +1107,20 @@ const _dutchSourceLt = {
   'Spreiding': 'Sklaida',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn verčia skaidres',
   'Wacht op antwoord…': 'Laukiama atsakymo…',
+  'Afbeelding slidevullend': 'Vaizdas užpildo skaidrę',
+  'Vult de hele slide en snijdt de randen bij':
+      'Užpildo visą skaidrę ir apkarpo kraštus',
+  'Afbeelding vult hele slide': 'Vaizdas užpildo visą skaidrę',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Įjungta: užpildo visą skaidrę, pavadinimas viršuje (apkarpyta). Išjungta: vaizdas viršuje, pavadinimas juostoje po juo.',
+  'Grijze waas over afbeelding': 'Pilkas šydas ant vaizdo',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Nuramina foną už pavadinimo ir paantraštės.',
+  'Licht': 'Šviesus',
+  'Donker': 'Tamsus',
+  'Pen (D)': 'Rašiklis (D)',
+  'Markeerstift (T)': 'Žymeklis (T)',
+  'Gum (E / Shift+E)': 'Trintukas (E / Shift+E)',
+  'Laser (X)': 'Lazeris (X)',
+  'Metriek': 'Metrika',
 };

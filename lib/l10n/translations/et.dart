@@ -1096,4 +1096,20 @@ const _dutchSourceEt = {
   'Spreiding': 'Hajuvus',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn lehitseb slaide',
   'Wacht op antwoord…': 'Ootab vastust…',
+  'Afbeelding slidevullend': 'Pilt täidab slaidi',
+  'Vult de hele slide en snijdt de randen bij':
+      'Täidab kogu slaidi ja kärbib servi',
+  'Afbeelding vult hele slide': 'Pilt täidab kogu slaidi',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Sees: täidab kogu slaidi, pealkiri peal (kärbitud). Väljas: pilt üleval, pealkiri ribas selle all.',
+  'Grijze waas over afbeelding': 'Hall loor pildi peal',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Muudab tausta pealkirja ja alapealkirja taga rahulikumaks.',
+  'Licht': 'Hele',
+  'Donker': 'Tume',
+  'Pen (D)': 'Pliiats (D)',
+  'Markeerstift (T)': 'Markeri (T)',
+  'Gum (E / Shift+E)': 'Kustukumm (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Mõõdik',
 };

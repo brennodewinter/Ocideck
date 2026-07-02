@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/slide.dart';
 import '../../services/image_service.dart';
 import '_editor_field.dart';
@@ -102,8 +103,10 @@ class _ImageSlideEditorState extends State<ImageSlideEditor> {
           contentPadding: EdgeInsets.zero,
           controlAffinity: ListTileControlAffinity.leading,
           dense: true,
-          title: const Text('Afbeelding slidevullend'),
-          subtitle: const Text('Vult de hele slide en snijdt de randen bij'),
+          title: Text(context.l10n.d('Afbeelding slidevullend')),
+          subtitle: Text(
+            context.l10n.d('Vult de hele slide en snijdt de randen bij'),
+          ),
           value: widget.slide.imageSize == 0,
           onChanged: widget.slide.imagePath.isEmpty
               ? null

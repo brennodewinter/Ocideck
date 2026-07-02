@@ -1118,4 +1118,20 @@ const _dutchSourceBg = {
   'Spreiding': 'Разсейване',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn прелиства слайдовете',
   'Wacht op antwoord…': 'Изчакване на отговор…',
+  'Afbeelding slidevullend': 'Изображението запълва слайда',
+  'Vult de hele slide en snijdt de randen bij':
+      'Запълва целия слайд и изрязва краищата',
+  'Afbeelding vult hele slide': 'Изображението запълва целия слайд',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Вкл.: запълва целия слайд, заглавие отгоре (изрязано). Изкл.: изображение отгоре, заглавие в лента отдолу.',
+  'Grijze waas over afbeelding': 'Сив воал върху изображението',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Успокоява фона зад заглавието и подзаглавието.',
+  'Licht': 'Светъл',
+  'Donker': 'Тъмен',
+  'Pen (D)': 'Писалка (D)',
+  'Markeerstift (T)': 'Маркер (T)',
+  'Gum (E / Shift+E)': 'Гума (E / Shift+E)',
+  'Laser (X)': 'Лазер (X)',
+  'Metriek': 'Метрика',
 };

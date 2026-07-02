@@ -1092,4 +1092,20 @@ const _dutchSourceAddPap = {
   'Spreiding': 'Dispershon',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn ta pasa dor di e slidenan',
   'Wacht op antwoord…': 'Ta warda un kontesta…',
+  'Afbeelding slidevullend': 'Imágen ta yena e slide',
+  'Vult de hele slide en snijdt de randen bij':
+      'Ta yena henter e slide i ta kòrta e ramanan',
+  'Afbeelding vult hele slide': 'Imágen ta yena henter e slide',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Sendé: ta yena henter e slide, título riba dje (kòrtá). Pagá: imágen ariba, título den un banda bou di dje.',
+  'Grijze waas over afbeelding': 'Nubla shinishi riba e imágen',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Ta hasi e fondo mas trankil tras di título i subtítulo.',
+  'Licht': 'Kla',
+  'Donker': 'Skur',
+  'Pen (D)': 'Pèn (D)',
+  'Markeerstift (T)': 'Marker (T)',
+  'Gum (E / Shift+E)': 'Borador (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Métrika',
 };

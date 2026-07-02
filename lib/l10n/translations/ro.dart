@@ -1112,4 +1112,20 @@ const _dutchSourceRo = {
   'Spreiding': 'Dispersie',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn răsfoiește diapozitivele',
   'Wacht op antwoord…': 'Se așteaptă un răspuns…',
+  'Afbeelding slidevullend': 'Imaginea umple diapozitivul',
+  'Vult de hele slide en snijdt de randen bij':
+      'Umple tot diapozitivul și taie marginile',
+  'Afbeelding vult hele slide': 'Imaginea umple tot diapozitivul',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Pornit: umple tot diapozitivul, titlul deasupra (decupat). Oprit: imaginea sus, titlul într-o bandă dedesubt.',
+  'Grijze waas over afbeelding': 'Văl gri peste imagine',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Liniștește fundalul din spatele titlului și subtitlului.',
+  'Licht': 'Deschis',
+  'Donker': 'Închis',
+  'Pen (D)': 'Stilou (D)',
+  'Markeerstift (T)': 'Evidențiator (T)',
+  'Gum (E / Shift+E)': 'Radieră (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metrică',
 };

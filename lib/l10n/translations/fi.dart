@@ -1104,4 +1104,20 @@ const _dutchSourceFi = {
   'Spreiding': 'Hajonta',
   'PgUp/PgDn bladert door de slides': 'PgUp/PgDn selaa dioja',
   'Wacht op antwoord…': 'Odotetaan vastausta…',
+  'Afbeelding slidevullend': 'Kuva täyttää dian',
+  'Vult de hele slide en snijdt de randen bij':
+      'Täyttää koko dian ja rajaa reunat',
+  'Afbeelding vult hele slide': 'Kuva täyttää koko dian',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Päällä: täyttää koko dian, otsikko päällä (rajattu). Pois: kuva ylhäällä, otsikko palkissa sen alla.',
+  'Grijze waas over afbeelding': 'Harmaa huntu kuvan päällä',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Rauhoittaa taustan otsikon ja alaotsikon takana.',
+  'Licht': 'Vaalea',
+  'Donker': 'Tumma',
+  'Pen (D)': 'Kynä (D)',
+  'Markeerstift (T)': 'Korostuskynä (T)',
+  'Gum (E / Shift+E)': 'Pyyhekumi (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Mittari',
 };
