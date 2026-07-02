@@ -85,6 +85,8 @@ const _stringsHu = {
 const _dutchSourceHu = {
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'A csomagok (.ocideck) még nem támogatottak a webes verzióban.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'A webes verzióban csak .md-prezentációk nyithatók meg.',
   'Geen': 'Nincs',
   'Nieuw': 'Új',
   'Verwijderen': 'Törlés',

@@ -7,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as p;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart' show rootBundle;
 import '../models/deck.dart';
 import '../l10n/app_localizations.dart';
@@ -14,6 +15,7 @@ import '../models/settings.dart';
 import '../models/chart.dart';
 import '../models/slide.dart';
 import '../utils/atomic_file.dart';
+import '../utils/file_download.dart';
 import '../utils/log.dart';
 import '../utils/net_guard.dart';
 import '../utils/project_path.dart';
@@ -138,7 +140,12 @@ class FileService {
     String? projectPath,
   }) {
     final logoPath = profile.logoPath;
-    if (logoPath == null || logoPath.trim().isEmpty || p.isAbsolute(logoPath)) {
+    // Op web is er geen bestandssysteem om een relatief logopad in op te
+    // zoeken; laat het profiel ongemoeid (het logo rendert dan als afwezig).
+    if (kIsWeb ||
+        logoPath == null ||
+        logoPath.trim().isEmpty ||
+        p.isAbsolute(logoPath)) {
       return profile;
     }
 
@@ -402,6 +409,31 @@ class FileService {
       initialDirectory: initialDirectory,
     );
     return result?.files.single.path;
+  }
+
+  /// Kies een presentatiebestand en lever de inhoud als bytes — het open-pad
+  /// voor web, waar bestanden geen pad hebben. `withData` laat de browser de
+  /// gekozen file in het geheugen aanleveren; desktop werkt ook (leest de
+  /// bytes), maar gebruikt normaliter [pickMarkdownFile].
+  Future<({String name, Uint8List bytes})?> pickDeckFileBytes() async {
+    final result = await FilePicker.pickFiles(
+      dialogTitle: _d('Presentatie openen'),
+      type: FileType.any,
+      withData: true,
+    );
+    final file = result?.files.single;
+    final bytes = file?.bytes;
+    if (file == null || bytes == null) return null;
+    return (name: file.name, bytes: bytes);
+  }
+
+  /// Web-opslaan: serialiseer het deck en laat de browser het als `.md`
+  /// downloaden. Bewust alleen de markdown-inhoud — sidecars (annotaties,
+  /// sprekersnotities) en assets horen bij het desktop-projectmodel en gaan in
+  /// een download niet mee. Geeft `false` terug als de download niet startte.
+  bool downloadDeckAsFile(Deck deck) {
+    final markdown = _md.generateDeck(deck);
+    return downloadTextFile('${_safeName(deck.title)}.md', markdown);
   }
 
   /// Scan the `.md` at [filePath] for executable/dangerous content before it is
@@ -768,7 +800,7 @@ class FileService {
   /// hosts bereikbaar zijn — de dart:io SSRF-pinning van [importFromUrl]
   /// bestaat daar niet en kan er ook niet draaien. Hier begrenzen we schema
   /// en omvang. Retourneert null bij elke fout, net als [importFromUrl].
-  Future<List<int>?> fetchUrlBytes(
+  Future<Uint8List?> fetchUrlBytes(
     String url, {
     int maxBytes = maxDeckMarkdownBytes,
     @visibleForTesting http.Client? client,

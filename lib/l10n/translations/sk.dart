@@ -86,6 +86,8 @@ const _stringsSk = {
 const _dutchSourceSk = {
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Balíky (.ocideck) zatiaľ nie sú vo webovej verzii podporované.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Vo webovej verzii možno otvoriť iba prezentácie .md.',
   'Geen': 'Žiadne',
   'Nieuw': 'Nový',
   'Verwijderen': 'Odstrániť',

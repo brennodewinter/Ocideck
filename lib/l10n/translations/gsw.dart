@@ -85,6 +85,8 @@ const _stringsGsw = {
 const _dutchSourceGsw = {
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Päckli (.ocideck) wärde i dr Webversion no nid understützt.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'I dr Webversion chöi nume .md-Präsentatione göffnet wärde.',
   'Geen': 'Kes',
   'Nieuw': 'Nöi',
   'Verwijderen': 'Lösche',

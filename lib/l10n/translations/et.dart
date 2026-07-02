@@ -84,6 +84,8 @@ const _stringsEt = {
 const _dutchSourceEt = {
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Pakette (.ocideck) veebiversioonis veel ei toetata.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Veebiversioonis saab avada ainult .md-esitlusi.',
   'Geen': 'Puudub',
   'Nieuw': 'Uus',
   'Verwijderen': 'Kustuta',

@@ -67,36 +67,46 @@ class _WelcomeScreen extends ConsumerWidget {
                             label: Text(l10n.t('open')),
                           ),
                         ),
-                        const SizedBox(height: 12),
-                        SizedBox(
-                          width: 220,
-                          child: OutlinedButton.icon(
-                            onPressed: () => _importFromUrl(context, ref),
-                            icon: const Icon(
-                              Icons.cloud_download_outlined,
-                              size: 18,
+                        // URL-import en Nextcloud zijn netwerkbronnen; de
+                        // bibliotheekscan doorzoekt het lokale bestandssysteem.
+                        // Geen van drieën kan in de webversie werken, dus daar
+                        // tonen we ze niet (zie platform_features.dart).
+                        if (supportsNetworkDeckSources) ...[
+                          const SizedBox(height: 12),
+                          SizedBox(
+                            width: 220,
+                            child: OutlinedButton.icon(
+                              onPressed: () => _importFromUrl(context, ref),
+                              icon: const Icon(
+                                Icons.cloud_download_outlined,
+                                size: 18,
+                              ),
+                              label: Text(l10n.t('importUrl')),
                             ),
-                            label: Text(l10n.t('importUrl')),
                           ),
-                        ),
-                        const SizedBox(height: 12),
-                        SizedBox(
-                          width: 220,
-                          child: OutlinedButton.icon(
-                            onPressed: () => _scanLibrary(context, ref),
-                            icon: const Icon(Icons.travel_explore, size: 18),
-                            label: Text(l10n.d('Zoek op deze computer')),
+                        ],
+                        if (supportsLocalProjectFolders) ...[
+                          const SizedBox(height: 12),
+                          SizedBox(
+                            width: 220,
+                            child: OutlinedButton.icon(
+                              onPressed: () => _scanLibrary(context, ref),
+                              icon: const Icon(Icons.travel_explore, size: 18),
+                              label: Text(l10n.d('Zoek op deze computer')),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 12),
-                        SizedBox(
-                          width: 220,
-                          child: OutlinedButton.icon(
-                            onPressed: () => _openFromNextcloud(context, ref),
-                            icon: const Icon(Icons.cloud_outlined, size: 18),
-                            label: Text(l10n.d('Openen vanaf Nextcloud')),
+                        ],
+                        if (supportsNetworkDeckSources) ...[
+                          const SizedBox(height: 12),
+                          SizedBox(
+                            width: 220,
+                            child: OutlinedButton.icon(
+                              onPressed: () => _openFromNextcloud(context, ref),
+                              icon: const Icon(Icons.cloud_outlined, size: 18),
+                              label: Text(l10n.d('Openen vanaf Nextcloud')),
+                            ),
                           ),
-                        ),
+                        ],
                         const SizedBox(height: 8),
                         TextButton.icon(
                           onPressed: () => SettingsDialog.show(context),

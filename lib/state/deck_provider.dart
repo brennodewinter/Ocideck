@@ -15,6 +15,7 @@ import '../services/slide_quality_analyzer.dart'
         kSingleColumnBulletWarningCount,
         kTwoColumnBulletWarningCount;
 import '../services/user_notes_codec.dart';
+import '../platform/platform_features.dart';
 import '../utils/log.dart';
 import '../utils/page_scoped_notes.dart';
 import 'settings_provider.dart';
@@ -187,6 +188,9 @@ class DeckNotifier extends StateNotifier<DeckState> {
     if (_saving) return false;
     _saving = true;
     try {
+      // Web kent geen schrijfbaar bestandssysteem: opslaan is daar de
+      // gegenereerde markdown als bestand laten downloaden.
+      if (!supportsLocalProjectFolders) return _saveAsDownload();
       if (state.filePath != null) {
         return await _saveToPath(state.filePath!);
       } else {
@@ -195,6 +199,21 @@ class DeckNotifier extends StateNotifier<DeckState> {
     } finally {
       _saving = false;
     }
+  }
+
+  /// Web-opslagpad: start een browserdownload van de deck-markdown. Het deck
+  /// wordt daarna als schoon gemarkeerd — het bestand is aan de gebruiker
+  /// overhandigd; verdere wijzigingen maken het gewoon weer dirty. [filePath]
+  /// blijft null, zodat elke volgende save opnieuw een download start.
+  bool _saveAsDownload() {
+    final deck = state.deck;
+    if (deck == null) return false;
+    if (!_file.downloadDeckAsFile(deck)) {
+      state = state.copyWith(error: 'Opslaan als download mislukt.');
+      return false;
+    }
+    state = state.copyWith(isDirty: false);
+    return true;
   }
 
   Future<bool> saveAs({String? initialDirectory}) async {

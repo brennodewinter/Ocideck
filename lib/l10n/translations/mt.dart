@@ -86,6 +86,8 @@ const _stringsMt = {
 const _dutchSourceMt = {
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Il-pakketti (.ocideck) għadhom mhumiex appoġġjati fil-verżjoni tal-web.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Fil-verżjoni tal-web jistgħu jinfetħu biss preżentazzjonijiet .md.',
   'Geen': 'L-ebda',
   'Nieuw': 'Ġdid',
   'Verwijderen': 'Ħassar',

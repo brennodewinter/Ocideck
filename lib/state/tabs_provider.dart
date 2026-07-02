@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'dart:typed_data';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:path/path.dart' as p;
@@ -15,6 +15,7 @@ import '../services/markdown_service.dart';
 import '../services/recovery_service.dart';
 import '../services/user_notes_codec.dart';
 import '../services/webdav_service.dart';
+import '../platform/platform_features.dart';
 import '../utils/log.dart';
 import 'deck_provider.dart';
 import 'editor_provider.dart';
@@ -149,7 +150,14 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // Start with one empty tab
     final tab = _createTab();
     state = TabsState(tabs: [tab], selectedIndex: 0);
-    _autosaveTimer = Timer.periodic(_autosaveInterval, (_) => _autosaveTick());
+    // Zonder bestandssysteem (web) is er geen herstelmap; de tick zou elke
+    // 25s voor niets serialiseren, dus start hem daar helemaal niet.
+    if (supportsLocalProjectFolders) {
+      _autosaveTimer = Timer.periodic(
+        _autosaveInterval,
+        (_) => _autosaveTick(),
+      );
+    }
   }
 
   @override
@@ -344,7 +352,8 @@ class TabsNotifier extends StateNotifier<TabsState> {
   }
 
   /// Zet een zojuist geopend deck in een tabblad: een leeg huidig tabblad
-  /// wordt hergebruikt, anders komt er een nieuw tabblad naast.
+  /// wordt hergebruikt, anders komt er een nieuw tabblad naast. Gedeelde
+  /// staart van pad-, bytes- en URL-opens.
   void _placeDeckInTab(Deck deck, {String? filePath, int index = 0}) {
     final current = state.current;
     if (current != null && !current.isOpen) {
@@ -358,6 +367,50 @@ class TabsNotifier extends StateNotifier<TabsState> {
       final newTabs = [...state.tabs, tab];
       state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
     }
+  }
+
+  /// Open een deck uit in-memory bytes — het open-pad voor web, waar de
+  /// file-picker, drag-drop én URL-import geen pad maar inhoud aanleveren.
+  /// Dezelfde fail-closed security-gate als [openFileByPath]; er is geen
+  /// TOCTOU-gat, want gescand en geparsed wordt exact dezelfde in-memory
+  /// string. Het tabblad krijgt geen [DeckState.filePath], dus opslaan wordt
+  /// een download. [name] labelt het importalarm en de logregels (bestandsnaam
+  /// of URL).
+  Future<OpenResult> openDeckFromBytes(Uint8List bytes, String name) async {
+    if (FileService.looksLikeZipBytes(bytes)) {
+      return OpenResult.packageUnsupported;
+    }
+    if (bytes.length > FileService.maxDeckMarkdownBytes) {
+      return OpenResult.unreadable;
+    }
+    final String raw;
+    try {
+      raw = utf8.decode(bytes);
+    } on FormatException catch (e) {
+      logWarning('TabsNotifier.openDeckFromBytes: not valid UTF-8', e);
+      return OpenResult.unreadable;
+    }
+    final findings = MarkdownSafetyScanner.scan(raw);
+    if (findings.isNotEmpty) {
+      if (mounted) {
+        _ref.read(importSecurityAlarmProvider.notifier).state =
+            ImportSecurityAlarm(path: name, findings: findings);
+      }
+      return OpenResult.blocked;
+    }
+    // Zonder projectPath of sidecar-hydratatie: achter bytes zit geen map met
+    // assets, en op web is het bestandssysteem sowieso onbereikbaar —
+    // afbeeldingen tonen als placeholder.
+    final outcome = _file.openDeckFromContent(raw, sourceName: name);
+    final deck = outcome.deck;
+    if (deck == null) {
+      return outcome.failure == OpenFailure.notPresentation
+          ? OpenResult.notAPresentation
+          : OpenResult.unreadable;
+    }
+    if (!mounted) return OpenResult.unreadable;
+    _placeDeckInTab(deck);
+    return OpenResult.opened;
   }
 
   /// Remove the unique folder an import extracted/downloaded into when the deck
@@ -410,48 +463,8 @@ class TabsNotifier extends StateNotifier<TabsState> {
   Future<OpenResult> importFromUrlWeb(String url) async {
     final bytes = await _file.fetchUrlBytes(url);
     if (bytes == null || !mounted) return OpenResult.unreadable;
-    return openFetchedDeckBytes(bytes, sourceUrl: url);
-  }
-
-  /// Beslislogica achter [importFromUrlWeb], losgekoppeld van het netwerk
-  /// zodat tests haar rechtstreeks met eigen bytes kunnen voeden. Zelfde
-  /// fail-closed volgorde als [openFileByPath]: eerst de veiligheidsscan
-  /// (met alarm), dan pas parsen en openen.
-  @visibleForTesting
-  Future<OpenResult> openFetchedDeckBytes(
-    List<int> bytes, {
-    required String sourceUrl,
-  }) async {
-    if (FileService.looksLikeZipBytes(bytes)) {
-      return OpenResult.packageUnsupported;
-    }
-    final String text;
-    try {
-      text = utf8.decode(bytes);
-    } on FormatException catch (e) {
-      logWarning('TabsNotifier.openFetchedDeckBytes: not UTF-8', e);
-      return OpenResult.unreadable;
-    }
-    final findings = MarkdownSafetyScanner.scan(text);
-    if (findings.isNotEmpty) {
-      if (mounted) {
-        _ref.read(importSecurityAlarmProvider.notifier).state =
-            ImportSecurityAlarm(path: sourceUrl, findings: findings);
-      }
-      return OpenResult.blocked;
-    }
-    final outcome = _file.openDeckFromContent(text, sourceName: sourceUrl);
-    final deck = outcome.deck;
-    if (deck == null) {
-      return outcome.failure == OpenFailure.notPresentation
-          ? OpenResult.notAPresentation
-          : OpenResult.unreadable;
-    }
-    if (!mounted) return OpenResult.unreadable;
-    // Zonder filePath: het deck hoort niet bij een lokaal bestand, dus
-    // opslaan vraagt bewust om een nieuwe bestemming.
-    _placeDeckInTab(deck);
-    return OpenResult.opened;
+    // Zelfde kern als de web-picker en drag-drop: [openDeckFromBytes].
+    return openDeckFromBytes(bytes, url);
   }
 
   /// Gedeelde staart van elke import-flow (pakket/URL/WebDAV): open het

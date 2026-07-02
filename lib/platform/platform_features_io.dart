@@ -8,3 +8,5 @@ bool get isDesktopNative =>
 bool get supportsDualScreenPresenter => isDesktopNative;
 
 bool get supportsLocalProjectFolders => !kIsWeb;
+
+bool get supportsNetworkDeckSources => !kIsWeb;

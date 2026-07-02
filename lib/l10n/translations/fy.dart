@@ -85,6 +85,8 @@ const _stringsFy = {
 const _dutchSourceFy = {
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Pakketten (.ocideck) wurde yn de webferzje noch net stipe.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Allinne .md-presintaasjes kinne yn de webferzje iepene wurde.',
   'Geen': 'Gjin',
   'Nieuw': 'Nij',
   'Verwijderen': 'Fuortsmite',

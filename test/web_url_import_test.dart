@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -112,15 +113,15 @@ void main() {
     });
   });
 
-  group('TabsNotifier.openFetchedDeckBytes', () {
+  group('TabsNotifier.openDeckFromBytes (URL-import)', () {
     test(
       'opens a fetched Marp deck in the current empty tab, without a path',
       () async {
         final container = _container();
         final tabs = container.read(tabsProvider.notifier);
-        final result = await tabs.openFetchedDeckBytes(
+        final result = await tabs.openDeckFromBytes(
           utf8.encode(_goodDeck),
-          sourceUrl: 'https://example.org/deck.md',
+          'https://example.org/deck.md',
         );
         expect(result, OpenResult.opened);
         final tab = container.read(tabsProvider).current!;
@@ -136,15 +137,10 @@ void main() {
     test('detects a zip package and reports it unsupported', () async {
       final container = _container();
       final tabs = container.read(tabsProvider.notifier);
-      final result = await tabs.openFetchedDeckBytes([
-        0x50,
-        0x4B,
-        0x03,
-        0x04,
-        1,
-        2,
-        3,
-      ], sourceUrl: 'https://example.org/deck.ocideck');
+      final result = await tabs.openDeckFromBytes(
+        Uint8List.fromList([0x50, 0x4B, 0x03, 0x04, 1, 2, 3]),
+        'https://example.org/deck.ocideck',
+      );
       expect(result, OpenResult.packageUnsupported);
       expect(container.read(tabsProvider).current!.isOpen, isFalse);
     });
@@ -152,9 +148,9 @@ void main() {
     test('blocks executable content and raises the security alarm', () async {
       final container = _container();
       final tabs = container.read(tabsProvider.notifier);
-      final result = await tabs.openFetchedDeckBytes(
+      final result = await tabs.openDeckFromBytes(
         utf8.encode(_scriptDeck),
-        sourceUrl: 'https://example.org/kwaad.md',
+        'https://example.org/kwaad.md',
       );
       expect(result, OpenResult.blocked);
       final alarm = container.read(importSecurityAlarmProvider);
@@ -168,19 +164,17 @@ void main() {
       final container = _container();
       final tabs = container.read(tabsProvider.notifier);
       expect(
-        await tabs.openFetchedDeckBytes(
+        await tabs.openDeckFromBytes(
           utf8.encode('# Gewoon een README'),
-          sourceUrl: 'https://example.org/readme.md',
+          'https://example.org/readme.md',
         ),
         OpenResult.notAPresentation,
       );
       expect(
-        await tabs.openFetchedDeckBytes([
-          0xFF,
-          0xFE,
-          0x00,
-          0x88,
-        ], sourceUrl: 'https://example.org/binair.bin'),
+        await tabs.openDeckFromBytes(
+          Uint8List.fromList([0xFF, 0xFE, 0x00, 0x88]),
+          'https://example.org/binair.bin',
+        ),
         OpenResult.unreadable,
       );
     });

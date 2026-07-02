@@ -31,6 +31,11 @@ Future<void> _openWithSearch(
   WidgetRef ref,
   String? initialDirectory,
 ) async {
+  // Op web is er geen bestandssysteem om te doorzoeken; alle open-ingangen
+  // (welkomstscherm, menu, Ctrl/Cmd+O) lopen daar via de browser-picker.
+  if (isWebPlatform) {
+    return _openWithBytesPicker(context, ref);
+  }
   final settings = ref.read(settingsProvider);
   final result = await OpenPresentationDialog.show(
     context,
@@ -45,6 +50,32 @@ Future<void> _openWithSearch(
       .openFileByPath(result.path, selectIndex: result.slideIndex);
   // A loose file browsed from disk that isn't a presentation (or is otherwise
   // unreadable) is refused — tell the user instead of doing nothing silently.
+  _reportOpenFailure(messenger, l10n, openResult);
+}
+
+/// Open-pad voor web: de browser-picker levert de bestandsinhoud als bytes
+/// (er bestaat geen pad), waarna het deck in-memory wordt geopend. Opslaan
+/// van zo'n tabblad wordt automatisch een download (geen [DeckState.filePath]).
+Future<void> _openWithBytesPicker(BuildContext context, WidgetRef ref) async {
+  final picked = await ref.read(fileServiceProvider).pickDeckFileBytes();
+  if (picked == null || !context.mounted) return;
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
+  if (!picked.name.toLowerCase().endsWith('.md')) {
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(
+          l10n.d(
+            'Alleen .md-presentaties kunnen in de webversie worden geopend.',
+          ),
+        ),
+      ),
+    );
+    return;
+  }
+  final openResult = await ref
+      .read(tabsProvider.notifier)
+      .openDeckFromBytes(picked.bytes, picked.name);
   _reportOpenFailure(messenger, l10n, openResult);
 }
 

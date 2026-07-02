@@ -86,6 +86,8 @@ const _stringsRo = {
 const _dutchSourceRo = {
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Pachetele (.ocideck) nu sunt încă acceptate în versiunea web.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'În versiunea web pot fi deschise doar prezentări .md.',
   'Geen': 'Niciuna',
   'Nieuw': 'Nou',
   'Verwijderen': 'Șterge',
