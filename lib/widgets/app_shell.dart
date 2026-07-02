@@ -17,6 +17,7 @@ import '../services/classification_policy.dart';
 import '../services/export_metadata.dart';
 import '../services/open_file_channel.dart';
 import '../services/export_service.dart';
+import '../services/file_service.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
 import '../services/mermaid_render_service.dart';

@@ -1,0 +1,455 @@
+// Part of the slide_quality_analyzer library — see
+// slide_quality_analyzer.dart. Split out for navigability (tekst-dichtheids-
+// en leesbaarheidschecks); alle imports staan in het hoofdbestand. Deze
+// private methodes verhuizen ongewijzigd naar een extension — zelfde library,
+// zelfde members, geen gedragswijziging.
+part of '../slide_quality_analyzer.dart';
+
+extension _QualityDensityChecks on SlideQualityAnalyzer {
+  void _checkTextDensity(
+    Slide slide,
+    int index,
+    String font,
+    List<SlideQualityIssue> issues,
+  ) {
+    switch (slide.type) {
+      case SlideType.bullets:
+        _addFitScaleIssue(
+          issues,
+          index,
+          memoizedFitScale(
+            slide,
+            font,
+            () => bulletsSlideFitScale(slide: slide, font: font),
+          ),
+        );
+        _checkBulletReadability(
+          slide: slide,
+          index: index,
+          issues: issues,
+          twoColumn: false,
+        );
+      case SlideType.twoBullets:
+        _addFitScaleIssue(
+          issues,
+          index,
+          memoizedFitScale(
+            slide,
+            font,
+            () => twoBulletsSlideFitScale(slide: slide, font: font),
+          ),
+        );
+        _checkBulletReadability(
+          slide: slide,
+          index: index,
+          issues: issues,
+          twoColumn: true,
+        );
+      case SlideType.bulletsImage:
+        _addFitScaleIssue(
+          issues,
+          index,
+          memoizedFitScale(
+            slide,
+            font,
+            () => bulletsImageSlideFitScale(slide: slide, font: font),
+          ),
+        );
+        _checkBulletReadability(
+          slide: slide,
+          index: index,
+          issues: issues,
+          twoColumn: false,
+        );
+      case SlideType.table:
+        _checkTableDensity(slide, index, issues);
+      case SlideType.code:
+        _checkCodeDensity(slide, index, issues);
+      case SlideType.freeMarkdown:
+        _checkFreeMarkdownDensity(slide, index, issues);
+      case SlideType.title:
+        _checkTitleDensity(slide, index, issues);
+      case SlideType.quote:
+        _checkQuoteDensity(slide, index, issues);
+      case SlideType.section:
+      case SlideType.image:
+      case SlideType.twoImages:
+      case SlideType.video:
+      case SlideType.chart:
+      case SlideType.cockpit:
+      case SlideType.question:
+      case SlideType.timeline:
+        break;
+    }
+  }
+
+  void _checkBulletReadability({
+    required Slide slide,
+    required int index,
+    required List<SlideQualityIssue> issues,
+    required bool twoColumn,
+  }) {
+    final left = slide.listStyle == ListStyle.richText
+        ? _markdownBulletTexts(slide.customMarkdown)
+        : _visibleBulletTexts(slide.bullets, slide.listStyle);
+    final right = twoColumn
+        ? _visibleBulletTexts(slide.bullets2, slide.listStyle)
+        : const <_BulletText>[];
+    _checkBulletItemsReadability(
+      left: left,
+      right: right,
+      index: index,
+      issues: issues,
+      twoColumn: twoColumn,
+      listStyle: slide.listStyle,
+    );
+  }
+
+  void _checkBulletItemsReadability({
+    required List<_BulletText> left,
+    required List<_BulletText> right,
+    required int index,
+    required List<SlideQualityIssue> issues,
+    required bool twoColumn,
+    required ListStyle listStyle,
+  }) {
+    final all = [...left, ...right];
+    if (all.isEmpty) return;
+
+    final bulletCount = all.length;
+    // Enkelkoloms checklists krijgen een ruimere drempel (zie
+    // [kChecklistBulletWarningCount]); andere lijsten en twee kolommen niet.
+    final warningCount = twoColumn
+        ? kTwoColumnBulletWarningCount
+        : (listStyle == ListStyle.checklist
+              ? kChecklistBulletWarningCount
+              : kSingleColumnBulletWarningCount);
+    final criticalCount = twoColumn
+        ? kTwoColumnBulletCriticalCount
+        : kSingleColumnBulletCriticalCount;
+    if (bulletCount > criticalCount) {
+      _addBulletIssue(
+        issues,
+        index,
+        SlideQualityIssueKind.bulletCountCritical,
+        MarkdownValidationSeverity.error,
+        {'count': '$bulletCount', 'limit': '$criticalCount'},
+      );
+    } else if (bulletCount > warningCount) {
+      _addBulletIssue(
+        issues,
+        index,
+        SlideQualityIssueKind.bulletCountHigh,
+        MarkdownValidationSeverity.warning,
+        {'count': '$bulletCount', 'limit': '$warningCount'},
+      );
+    }
+
+    final wordCounts = all.map((b) => _wordCount(b.text)).toList();
+    final totalWords = wordCounts.fold<int>(0, (sum, value) => sum + value);
+    final warningWords = twoColumn
+        ? kTwoColumnWordWarningCount
+        : kSingleColumnWordWarningCount;
+    final criticalWords = twoColumn
+        ? kTwoColumnWordCriticalCount
+        : kSingleColumnWordCriticalCount;
+    if (totalWords > criticalWords) {
+      _addBulletIssue(
+        issues,
+        index,
+        SlideQualityIssueKind.bulletWordCountCritical,
+        MarkdownValidationSeverity.error,
+        {'words': '$totalWords', 'limit': '$criticalWords'},
+      );
+    } else if (totalWords > warningWords) {
+      _addBulletIssue(
+        issues,
+        index,
+        SlideQualityIssueKind.bulletWordCountHigh,
+        MarkdownValidationSeverity.warning,
+        {'words': '$totalWords', 'limit': '$warningWords'},
+      );
+    }
+
+    final averageWords = totalWords / bulletCount;
+    if (bulletCount >= 3 && averageWords >= kAverageBulletWordInfoCount) {
+      final severity = averageWords >= kAverageBulletWordWarningCount
+          ? MarkdownValidationSeverity.warning
+          : MarkdownValidationSeverity.informational;
+      _addBulletIssue(
+        issues,
+        index,
+        SlideQualityIssueKind.bulletAverageLengthHigh,
+        severity,
+        {'average': averageWords.round().toString()},
+      );
+    }
+
+    final multiSentenceBullets = all.where((b) {
+      final words = _wordCount(b.text);
+      return _sentenceLikeCount(b.text) > 1 &&
+          (words >= kLongMultiSentenceBulletWordCount || bulletCount >= 4);
+    }).length;
+    if (multiSentenceBullets > 0) {
+      _addBulletIssue(
+        issues,
+        index,
+        SlideQualityIssueKind.bulletMultiSentence,
+        MarkdownValidationSeverity.warning,
+        {'count': '$multiSentenceBullets'},
+      );
+    }
+
+    final maxDisplayLevel = all
+        .map((b) => b.level + 1)
+        .fold<int>(1, (max, value) => value > max ? value : max);
+    if (maxDisplayLevel >= kBulletDisplayLevelWarning) {
+      _addBulletIssue(
+        issues,
+        index,
+        SlideQualityIssueKind.bulletNestingDeep,
+        MarkdownValidationSeverity.warning,
+        {'level': '$maxDisplayLevel'},
+      );
+    }
+
+    if (twoColumn && left.isNotEmpty && right.isNotEmpty) {
+      final leftCount = left.length;
+      final rightCount = right.length;
+      final larger = leftCount > rightCount ? leftCount : rightCount;
+      final smaller = leftCount < rightCount ? leftCount : rightCount;
+      if (larger - smaller >= 4 && larger >= smaller * 2) {
+        _addBulletIssue(
+          issues,
+          index,
+          SlideQualityIssueKind.bulletColumnImbalance,
+          MarkdownValidationSeverity.warning,
+          {'left': '$leftCount', 'right': '$rightCount'},
+        );
+      }
+    }
+  }
+
+  void _addBulletIssue(
+    List<SlideQualityIssue> issues,
+    int index,
+    SlideQualityIssueKind kind,
+    MarkdownValidationSeverity severity,
+    Map<String, String> args,
+  ) {
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: index,
+        kind: kind,
+        category: SlideQualityCategory.textDensity,
+        severity: severity,
+        args: args,
+      ),
+    );
+  }
+
+  void _addFitScaleIssue(
+    List<SlideQualityIssue> issues,
+    int index,
+    double scale,
+  ) {
+    if (scale > kTextDensityWarningScale) return;
+
+    final critical = scale <= kTextDensityCriticalScale + 0.001;
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: index,
+        kind: critical
+            ? SlideQualityIssueKind.textDensityCritical
+            : SlideQualityIssueKind.textDensityWarning,
+        category: SlideQualityCategory.textDensity,
+        severity: critical
+            ? MarkdownValidationSeverity.error
+            : MarkdownValidationSeverity.warning,
+        args: {'percent': _percent(scale)},
+      ),
+    );
+  }
+
+  void _checkTableDensity(
+    Slide slide,
+    int index,
+    List<SlideQualityIssue> issues,
+  ) {
+    final rows = slide.tableRows.where((r) => r.isNotEmpty).toList();
+    if (rows.isEmpty) return;
+    final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
+    final w = kReferenceSlideWidth;
+    final cellSize = tableCellFontSize(
+      w,
+      rowCount: rows.length,
+      colCount: colCount,
+    );
+    final minimum = tableCellFontMinimum(w);
+    if (cellSize > minimum + 0.001) return;
+
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: index,
+        kind: SlideQualityIssueKind.tableDensityMinimum,
+        category: SlideQualityCategory.textDensity,
+        severity: MarkdownValidationSeverity.warning,
+        args: {'rows': '${rows.length}', 'cols': '$colCount'},
+      ),
+    );
+  }
+
+  void _checkCodeDensity(
+    Slide slide,
+    int index,
+    List<SlideQualityIssue> issues,
+  ) {
+    final code = slide.customMarkdown;
+    if (code.trim().isEmpty) return;
+    final lines = code.split('\n');
+    if (lines.length <= 28 && code.length <= 1800) return;
+
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: index,
+        kind: SlideQualityIssueKind.codeDensityHigh,
+        category: SlideQualityCategory.textDensity,
+        severity: MarkdownValidationSeverity.warning,
+        field: 'customMarkdown',
+        args: {'lines': '${lines.length}'},
+      ),
+    );
+  }
+
+  void _checkFreeMarkdownDensity(
+    Slide slide,
+    int index,
+    List<SlideQualityIssue> issues,
+  ) {
+    final md = slide.customMarkdown;
+    if (md.trim().isEmpty) return;
+    final markdownBullets = _markdownBulletTexts(md);
+    if (markdownBullets.isNotEmpty) {
+      _checkBulletItemsReadability(
+        left: markdownBullets,
+        right: const [],
+        index: index,
+        issues: issues,
+        twoColumn: false,
+        // Vrije markdown is geen checklist: gewone enkelkoloms drempel.
+        listStyle: ListStyle.bullets,
+      );
+    }
+    final lines = md.split('\n').where((l) => l.trim().isNotEmpty).length;
+    if (lines <= 18 && md.length <= 1200) return;
+
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: index,
+        kind: SlideQualityIssueKind.freeMarkdownDensityHigh,
+        category: SlideQualityCategory.textDensity,
+        severity: MarkdownValidationSeverity.warning,
+        field: 'customMarkdown',
+        args: {'lines': '$lines'},
+      ),
+    );
+  }
+
+  void _checkTitleDensity(
+    Slide slide,
+    int index,
+    List<SlideQualityIssue> issues,
+  ) {
+    final titleLen = stripInlineMarkdown(slide.title).length;
+    final subtitleLen = stripInlineMarkdown(slide.subtitle).length;
+    if (titleLen + subtitleLen <= kTitleDensityCharThreshold) return;
+
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: index,
+        kind: SlideQualityIssueKind.titleDensityHigh,
+        category: SlideQualityCategory.textDensity,
+        severity: MarkdownValidationSeverity.warning,
+        args: {'chars': '${titleLen + subtitleLen}'},
+      ),
+    );
+  }
+
+  void _checkQuoteDensity(
+    Slide slide,
+    int index,
+    List<SlideQualityIssue> issues,
+  ) {
+    final quoteLen = stripInlineMarkdown(slide.quote).length;
+    final authorLen = stripInlineMarkdown(slide.quoteAuthor).length;
+    if (quoteLen + authorLen <= kQuoteDensityCharThreshold) return;
+
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: index,
+        kind: SlideQualityIssueKind.quoteDensityHigh,
+        category: SlideQualityCategory.textDensity,
+        severity: MarkdownValidationSeverity.warning,
+        field: 'quote',
+        args: {'chars': '${quoteLen + authorLen}'},
+      ),
+    );
+  }
+
+  List<_BulletText> _visibleBulletTexts(List<String> bullets, ListStyle style) {
+    return bullets
+        .where((b) => b.trimLeft().isNotEmpty)
+        .map((b) {
+          final level = bulletLevel(b);
+          final text = style == ListStyle.checklist
+              ? checklistItemText(b)
+              : bulletText(b);
+          return _BulletText(text: stripInlineMarkdown(text), level: level);
+        })
+        .where((b) => b.text.trim().isNotEmpty)
+        .toList();
+  }
+
+  List<_BulletText> _markdownBulletTexts(String markdown) {
+    final bullets = <_BulletText>[];
+    final lines = markdown.split('\n');
+    final marker = RegExp(r'^(\s*)(?:[-*+•◦▪▫–]|\d+[.)])\s+(.+)$');
+    final htmlItem = RegExp(r'<li[^>]*>(.*?)</li>', caseSensitive: false);
+    for (final line in lines) {
+      for (final item in htmlItem.allMatches(line)) {
+        bullets.add(
+          _BulletText(text: _cleanInlineText(item.group(1) ?? ''), level: 0),
+        );
+      }
+      final match = marker.firstMatch(line);
+      if (match == null) continue;
+      final indent = match.group(1) ?? '';
+      final raw = match.group(2) ?? '';
+      final text = raw.replaceFirst(RegExp(r'^\[[ xX]\]\s*'), '');
+      bullets.add(
+        _BulletText(
+          text: _cleanInlineText(text),
+          level: (indent.replaceAll('\t', '  ').length / 2).floor(),
+        ),
+      );
+    }
+    return bullets.where((b) => b.text.trim().isNotEmpty).toList();
+  }
+
+  String _cleanInlineText(String value) {
+    final withoutTags = value.replaceAll(RegExp(r'<[^>]+>'), ' ');
+    return stripInlineMarkdown(withoutTags).replaceAll(RegExp(r'\s+'), ' ');
+  }
+
+  int _wordCount(String value) {
+    return RegExp(
+      r"[A-Za-zÀ-ÖØ-öø-ÿ0-9]+(?:[-'][A-Za-zÀ-ÖØ-öø-ÿ0-9]+)*",
+    ).allMatches(value).length;
+  }
+
+  int _sentenceLikeCount(String value) {
+    return RegExp(r'[.!?](?:\s+|$)').allMatches(value).length;
+  }
+
+  String _percent(double scale) => '${(scale * 100).round()}%';
+}
