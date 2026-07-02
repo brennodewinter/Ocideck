@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:url_launcher/url_launcher.dart';
 import '../../l10n/app_localizations.dart';
+import '../theme/app_theme.dart';
 
 /// Shared licence + privacy copy for the consent gate and the settings screen,
 /// so both stay in sync and truthful. Covers three things: the EUPL 1.2 licence
@@ -140,7 +141,7 @@ class PrivacyStatementContent extends StatelessWidget {
                                 style: const TextStyle(
                                   fontSize: 10.5,
                                   height: 1.35,
-                                  color: Color(0xFF475569),
+                                  color: AppTheme.slate600,
                                 ),
                               ),
                             );

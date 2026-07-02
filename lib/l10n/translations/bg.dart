@@ -28,7 +28,8 @@ const _stringsBg = {
   'slides': 'слайдове',
   'skipped': 'пропуснати',
   'allSlidesIncluded': 'Всички слайдове ще бъдат презентирани и експортирани',
-  'skippedSlidesExcluded': 'слайд(ове) няма да бъдат презентирани или експортирани',
+  'skippedSlidesExcluded':
+      'слайд(ове) няма да бъдат презентирани или експортирани',
   'styleProfile': 'Стилов профил',
   'classification': 'Класификация',
   'exportNextToDeck': 'Експорт до дека',
@@ -47,7 +48,8 @@ const _stringsBg = {
   'settingsLogo': 'Лого',
   'language': 'Език',
   'applicationLanguage': 'Език на приложението',
-  'languageHelp': 'Интерфейсът сменя езика веднага. Съдържанието на презентацията остава непроменено.',
+  'languageHelp':
+      'Интерфейсът сменя езика веднага. Съдържанието на презентацията остава непроменено.',
   'presentationFolder': 'Папка за презентации',
   'exportFolderSetting': 'Папка за експорт',
   'notSet': 'Не е зададено',
@@ -55,17 +57,20 @@ const _stringsBg = {
   'choose': 'Избор',
   'removeDefaultFolder': 'Премахване на папката по подразбиране',
   'removeExportFolder': 'Премахване на папката за експорт',
-  'exportFolderHelp': 'Всички експорти (PDF/PPTX) се запазват тук. Ако не е зададено, експортите се запазват до файла на презентацията.',
+  'exportFolderHelp':
+      'Всички експорти (PDF/PPTX) се запазват тук. Ако не е зададено, експортите се запазват до файла на презентацията.',
   'cancel': 'Отказ',
   'close': 'Затваряне',
   'saveSettings': 'Запазване',
   'exportDialogTitle': 'Експортиране',
   'exportAgain': 'Ново експортиране',
-  'exportIntro': 'Експортът използва точно прегледа от редактора, включително стиловия ви профил.',
+  'exportIntro':
+      'Експортът използва точно прегледа от редактора, включително стиловия ви профил.',
   'imageQualityPdf': 'Качество на изображенията (PDF)',
   'normal': 'Нормално',
   'compressed': 'Компресирано',
-  'compressedHelp': 'JPEG с по-ниска резолюция, предназначен за раздаване, с много по-малък файл (запазен отделно като „-compact“).',
+  'compressedHelp':
+      'JPEG с по-ниска резолюция, предназначен за раздаване, с много по-малък файл (запазен отделно като „-compact“).',
   'losslessHelp': 'Изображения без загуба на пълна резолюция.',
   'exportAsPdf': 'Експортиране като PDF',
   'exportAsPptx': 'Експортиране като PPTX',
@@ -87,26 +92,39 @@ const _dutchSourceBg = {
   'Niet opslaan': 'Без запазване',
   'Niet-opgeslagen werk herstellen?': 'Възстановяване на незапазена работа?',
   'Niet-opgeslagen wijzigingen': 'Незапазени промени',
-  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'Открита е презентация с незапазени промени от предишна сесия:',
+  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Открита е презентация с незапазени промени от предишна сесия:',
   'Er zijn': 'Има',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'презентации с незапазени промени от предишна сесия:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.': 'Има презентации с незапазени промени. Запазете ги, преди да затворите приложението.',
-  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.': 'Тази презентация има незапазени промени. Запазете я, преди да затворите раздела.',
+  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'презентации с незапазени промени от предишна сесия:',
+  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Има презентации с незапазени промени. Запазете ги, преди да затворите приложението.',
+  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+      'Тази презентация има незапазени промени. Запазете я, преди да затворите раздела.',
   'Importeren via URL': 'Импортиране от URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.': 'Поставете връзка към .ocideck пакет или Marp Markdown файл.',
+  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+      'Поставете връзка към .ocideck пакет или Marp Markdown файл.',
   'Ophalen': 'Извличане',
   'Laat los om toe te voegen': 'Пуснете за добавяне',
-  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen': 'Изображения → нови слайдове · .md / .ocideck → отваряне',
-  'Open eerst een presentatie om afbeeldingen toe te voegen.': 'Отворете презентация, преди да добавяте изображения.',
-  'Alle slides zijn overgeslagen — niets om te tonen.': 'Всички слайдове са пропуснати — няма какво да се покаже.',
-  'Alle slides zijn overgeslagen — niets om te exporteren.': 'Всички слайдове са пропуснати — няма какво да се експортира.',
+  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+      'Изображения → нови слайдове · .md / .ocideck → отваряне',
+  'Open eerst een presentatie om afbeeldingen toe te voegen.':
+      'Отворете презентация, преди да добавяте изображения.',
+  'Alle slides zijn overgeslagen — niets om te tonen.':
+      'Всички слайдове са пропуснати — няма какво да се покаже.',
+  'Alle slides zijn overgeslagen — niets om te exporteren.':
+      'Всички слайдове са пропуснати — няма какво да се експортира.',
   'Kon dit pakket niet importeren.': 'Този пакет не можа да бъде импортиран.',
   'Pakket geëxporteerd naar:': 'Пакетът е експортиран в:',
   'Export mislukt:': 'Експортирането е неуспешно:',
-  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.': 'Този слайд не може да получи изображение. Първо изберете слайд с изображение.',
-  'Kon van deze URL geen presentatie ophalen.': 'Не можа да се извлече презентация от този URL.',
-  'Sleep om de slide-preview breder of smaller te maken': 'Плъзнете, за да разширите или стесните прегледа на слайда',
-  'TLP-classificatie (Traffic Light Protocol)': 'TLP класификация (Traffic Light Protocol)',
+  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+      'Този слайд не може да получи изображение. Първо изберете слайд с изображение.',
+  'Kon van deze URL geen presentatie ophalen.':
+      'Не можа да се извлече презентация от този URL.',
+  'Sleep om de slide-preview breder of smaller te maken':
+      'Плъзнете, за да разширите или стесните прегледа на слайда',
+  'TLP-classificatie (Traffic Light Protocol)':
+      'TLP класификация (Traffic Light Protocol)',
   'Titelpagina': 'Заглавен слайд',
   'Tussentitel': 'Заглавие на секция',
   'Alleen Bullets': 'Само водещи символи',
@@ -119,8 +137,10 @@ const _dutchSourceBg = {
   'Tabel': 'Таблица',
   'Vrije Markdown': 'Свободен Markdown',
   'Overgeslagen': 'Пропуснат',
-  'Weer tonen bij presenteren/exporteren': 'Показвай отново при представяне/експортиране',
-  'Overslaan bij presenteren/exporteren': 'Пропускай при представяне/експортиране',
+  'Weer tonen bij presenteren/exporteren':
+      'Показвай отново при представяне/експортиране',
+  'Overslaan bij presenteren/exporteren':
+      'Пропускай при представяне/експортиране',
   'Kopiëren': 'Копиране',
   'Kopieer als afbeelding': 'Копиране като изображение',
   'Dupliceren': 'Дублиране',
@@ -141,12 +161,14 @@ const _dutchSourceBg = {
   'Naam van de auteur': 'Име на автора',
   'Achtergrondafbeelding': 'Фоново изображение',
   'Achtergrondafbeelding (optioneel)': 'Фоново изображение (по избор)',
-  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.': 'Изображението се показва на цял екран като фон с намалена непрозрачност, за да остане текстът четлив.',
+  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+      'Изображението се показва на цял екран като фон с намалена непрозрачност, за да остане текстът четлив.',
   'Zoom achtergrond': 'Мащаб на фона',
   'Zoom afbeelding': 'Мащаб на изображението',
   'Afbeelding (rechts)': 'Изображение (дясно)',
   'Bullets (links)': 'Водещи символи (ляво)',
-  'Breedte afbeeldingspaneel (rechts)': 'Ширина на панела с изображение (дясно)',
+  'Breedte afbeeldingspaneel (rechts)':
+      'Ширина на панела с изображение (дясно)',
   'Linker afbeelding': 'Ляво изображение',
   'Rechter afbeelding': 'Дясно изображение',
   'Verdeling (links / rechts)': 'Разделяне (ляво / дясно)',
@@ -162,11 +184,13 @@ const _dutchSourceBg = {
   'Van computer…': 'От компютъра…',
   'Afbeelding plakken uit klembord': 'Поставяне на изображение от клипборда',
   'Kopieer afbeelding naar klembord': 'Копиране на изображение в клипборда',
-  'Afbeelding gekopieerd naar klembord.': 'Изображението е копирано в клипборда.',
+  'Afbeelding gekopieerd naar klembord.':
+      'Изображението е копирано в клипборда.',
   'Kopiëren naar klembord mislukt.': 'Копирането в клипборда е неуспешно.',
   'Verwijder afbeelding': 'Премахване на изображение',
   'Geen afbeelding gekozen': 'Няма избрано изображение',
-  'Caption / bronvermelding (bijv. © Naam Fotograaf)': 'Надпис / източник (напр. © Име на фотографа)',
+  'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+      'Надпис / източник (напр. © Име на фотографа)',
   'Caption / bronvermelding': 'Надпис / източник',
   'Beschrijving (doorzoekbaar)': 'Описание (за търсене)',
   'Markdown inhoud': 'Markdown съдържание',
@@ -177,7 +201,8 @@ const _dutchSourceBg = {
   'verwijderen': 'премахване',
   'Koprij verwijderen': 'Премахване на заглавния ред',
   'Rij verwijderen': 'Премахване на ред',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.': 'Съвет: натиснете Enter в клетка за нов ред.',
+  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+      'Съвет: натиснете Enter в клетка за нов ред.',
   'Presentatie openen': 'Отваряне на презентация',
   'Opslaan als': 'Запазване като',
   'Pakket importeren': 'Импортиране на пакет',
@@ -190,11 +215,14 @@ const _dutchSourceBg = {
   'Kies een video': 'Изберете видео',
   'Kies een audiobestand': 'Изберете аудиофайл',
   'Bladeren…': 'Преглед…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…': 'Търсене по име на файл, заглавие или текст в слайдовете…',
+  'Zoek op bestandsnaam, titel of tekst in de slides…':
+      'Търсене по име на файл, заглавие или текст в слайдовете…',
   'Geen map gekozen': 'Няма избрана папка',
   'Map kiezen': 'Избор на папка',
-  'Kies een map met presentaties om te beginnen.': 'Изберете папка с презентации, за да започнете.',
-  'Geen presentaties (.md) in deze map gevonden.': 'Не са намерени презентации (.md) в тази папка.',
+  'Kies een map met presentaties om te beginnen.':
+      'Изберете папка с презентации, за да започнете.',
+  'Geen presentaties (.md) in deze map gevonden.':
+      'Не са намерени презентации (.md) в тази папка.',
   'Geen presentaties gevonden voor': 'Не са намерени презентации за',
   'meer treffer(s)': 'още съвпадение(я)',
   'Slide zoeken': 'Намиране на слайд',
@@ -205,11 +233,15 @@ const _dutchSourceBg = {
   'Toegevoegd': 'Добавено',
   'Selecteer alles': 'Избор на всички',
   'Deselecteer alles': 'Отмяна на избора',
-  'Zoek slides op tekst, titel, onderschrift, pad…': 'Търсене на слайдове по текст, заглавие, надпис, път…',
-  'Zoek op presentatie, titel of tekst…': 'Търсене по презентация, заглавие или текст…',
-  'Geen andere presentaties (.md) in deze map gevonden.': 'Не са намерени други презентации (.md) в тази папка.',
+  'Zoek slides op tekst, titel, onderschrift, pad…':
+      'Търсене на слайдове по текст, заглавие, надпис, път…',
+  'Zoek op presentatie, titel of tekst…':
+      'Търсене по презентация, заглавие или текст…',
+  'Geen andere presentaties (.md) in deze map gevonden.':
+      'Не са намерени други презентации (.md) в тази папка.',
   'Geen slides gevonden voor': 'Не са намерени слайдове за',
-  'Typ zoektermen om slides uit al je presentaties te vinden.': 'Въведете думи за търсене, за да намерите слайдове от вашите презентации.',
+  'Typ zoektermen om slides uit al je presentaties te vinden.':
+      'Въведете думи за търсене, за да намерите слайдове от вашите презентации.',
   'toegevoegd': 'добавено',
   'Eerste': 'Първи',
   'treffers — verfijn je zoekopdracht': 'съвпадения — уточнете търсенето',
@@ -247,17 +279,21 @@ const _dutchSourceBg = {
   'Beschrijving': 'Описание',
   'Korte omschrijving van de presentatie': 'Кратко описание на презентацията',
   'Trefwoorden': 'Ключови думи',
-  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026': 'Разделени със запетая, напр. тримесечие, числа, 2026',
-  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.': 'Тези данни се запазват в Markdown и могат да се търсят при отваряне.',
+  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026':
+      'Разделени със запетая, напр. тримесечие, числа, 2026',
+  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+      'Тези данни се запазват в Markdown и могат да се търсят при отваряне.',
   'App-thema': 'Тема на приложението',
   'Look-and-feel': 'Външен вид',
   'Kopie maken en aanpassen': 'Създаване и персонализиране на копие',
   'Thema verwijderen': 'Изтриване на тема',
   'Themanaam': 'Име на тема',
-  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.': 'Това е вградена тема. Създайте копие, за да персонализирате цветовете.',
+  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+      'Това е вградена тема. Създайте копие, за да персонализирате цветовете.',
   'Donkere interface': 'Тъмен интерфейс',
   'Lettertype interface': 'Шрифт на интерфейса',
-  'Past contrast, invoervelden en systeemcomponenten aan.': 'Настройва контраста, полетата за въвеждане и системните компоненти.',
+  'Past contrast, invoervelden en systeemcomponenten aan.':
+      'Настройва контраста, полетата за въвеждане и системните компоненти.',
   'Hoofdkleur en bovenbalk': 'Основен цвят и горна лента',
   'Knoppen en accenten': 'Бутони и акценти',
   'Schermachtergrond': 'Фон на екрана',
@@ -293,15 +329,19 @@ const _dutchSourceBg = {
   'Linksonder': 'Долу ляво',
   'Rechtsonder': 'Долу дясно',
   'Footertekst': 'Текст на долен колонтитул',
-  'bijv. Vertrouwelijk · {title} · {date}': 'напр. Поверително · {title} · {date}',
+  'bijv. Vertrouwelijk · {title} · {date}':
+      'напр. Поверително · {title} · {date}',
   'Footerpositie': 'Позиция на долния колонтитул',
-  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.': 'Токени: {page}, {total}, {date}, {title}. Долният колонтитул се появява на всички слайдове освен заглавните и секционните, освен ако не го изключите за отделен слайд.',
+  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+      'Токени: {page}, {total}, {date}, {title}. Долният колонтитул се появява на всички слайдове освен заглавните и секционните, освен ако не го изключите за отделен слайд.',
   'Links': 'Ляво',
   'Midden': 'Център',
   'Rechts': 'Дясно',
-  'Paginanummers tonen (rechtsonder)': 'Показвай номера на страници (долу вдясно)',
+  'Paginanummers tonen (rechtsonder)':
+      'Показвай номера на страници (долу вдясно)',
   'Voorvertoning': 'Преглед',
-  'De snelle bruine vos springt over de luie hond.': 'Бързата кафява лисица прескача мързеливото куче.',
+  'De snelle bruine vos springt over de luie hond.':
+      'Бързата кафява лисица прескача мързеливото куче.',
   'Preview': 'Преглед',
   'Uitzoomen': 'Намаляване на мащаба',
   'Uitgezoomd': 'Намален мащаб',
@@ -309,9 +349,12 @@ const _dutchSourceBg = {
   'Ingezoomd': 'Увеличен мащаб',
   'van de foto zichtbaar': 'от снимката видима',
   'Volledig zichtbaar (100%)': 'Напълно видима (100%)',
-  'Uitzoomen (meer van de foto zichtbaar)': 'Намаляване на мащаба (повече от снимката е видима)',
-  'Inzoomen (minder van de foto zichtbaar)': 'Увеличаване на мащаба (по-малко от снимката е видима)',
-  'Terugzetten (volledige afbeelding zichtbaar)': 'Нулиране (цялото изображение е видимо)',
+  'Uitzoomen (meer van de foto zichtbaar)':
+      'Намаляване на мащаба (повече от снимката е видима)',
+  'Inzoomen (minder van de foto zichtbaar)':
+      'Увеличаване на мащаба (по-малко от снимката е видима)',
+  'Terugzetten (volledige afbeelding zichtbaar)':
+      'Нулиране (цялото изображение е видимо)',
   'Zoom resetten': 'Нулиране на мащаба',
   'Preview inklappen': 'Свиване на прегледа',
   'Preview uitklappen': 'Разгъване на прегледа',
@@ -326,19 +369,24 @@ const _dutchSourceBg = {
   'Terug naar standaardstijl': 'Обратно към стил по подразбиране',
   'Automatisch doorgaan na': 'Автоматично напред след',
   'Logo tonen op deze slide': 'Показвай лого на този слайд',
-  'Tabel bewerkbaar tijdens presenteren': 'Таблица, редактируема по време на представяне',
+  'Tabel bewerkbaar tijdens presenteren':
+      'Таблица, редактируема по време на представяне',
   'Footer tonen op deze slide': 'Показвай долен колонтитул на този слайд',
   'Sprekersnotities...': 'Бележки за лектора...',
   'Sprekersnotities': 'Бележки за лектора',
-  'Notities voor tijdens het presenteren': 'Бележки за по време на представянето',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown': 'Markdown режим — редактирайте цялата презентация като Marp Markdown',
+  'Notities voor tijdens het presenteren':
+      'Бележки за по време на представянето',
+  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+      'Markdown режим — редактирайте цялата презентация като Marp Markdown',
   'Toepassen': 'Прилагане',
-  'Markdown kon niet worden verwerkt. Controleer de syntax.': 'Markdown не можа да бъде обработен. Проверете синтаксиса.',
+  'Markdown kon niet worden verwerkt. Controleer de syntax.':
+      'Markdown не можа да бъде обработен. Проверете синтаксиса.',
   'Controleren': 'Проверка на синтаксиса',
   'Syntaxproblemen gevonden': 'Открити са проблеми със синтаксиса',
   'De markdown bevat': 'Markdown съдържа',
   'fout(en) en': 'грешка(и) и',
-  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.': 'предупреждение(я). Слайдовете може да не се разчетат правилно.',
+  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+      'предупреждение(я). Слайдовете може да не се разчетат правилно.',
   'Terug naar editor': 'Обратно към редактора',
   'Toch toepassen': 'Приложи въпреки това',
   'Geen syntaxproblemen gevonden': 'Не са открити проблеми със синтаксиса',
@@ -352,26 +400,35 @@ const _dutchSourceBg = {
   'Coverflow': 'Coverflow',
   'Geen afbeeldingen gevonden': 'Не са намерени изображения',
   'Geen resultaten voor': 'Няма резултати за',
-  'Pas je zoekterm aan of voeg een beschrijving toe.': 'Коригирайте думата за търсене или добавете описание.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.': 'Използвайте „Преглед“, за да изберете изображения от всяко местоположение.',
+  'Pas je zoekterm aan of voeg een beschrijving toe.':
+      'Коригирайте думата за търсене или добавете описание.',
+  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+      'Използвайте „Преглед“, за да изберете изображения от всяко местоположение.',
   'Selecteer een\nafbeelding': 'Изберете\nизображение',
   'Gekopieerd': 'Копирано',
   'Afbeelding verwijderen?': 'Изтриване на изображение?',
-  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.': 'Файлът ще бъде изтрит завинаги от диска. Това действие не може да бъде отменено.',
-  'Let op: deze afbeelding wordt nog gebruikt in': 'Внимание: това изображение все още се използва в',
-  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.': 'Изтриването ще изпразни тези слайдове. Това не може да бъде отменено.',
-  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert': '↑↓←→ навигация  ·  Enter избор  ·  Двойно щракване избира',
+  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+      'Файлът ще бъде изтрит завинаги от диска. Това действие не може да бъде отменено.',
+  'Let op: deze afbeelding wordt nog gebruikt in':
+      'Внимание: това изображение все още се използва в',
+  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+      'Изтриването ще изпразни тези слайдове. Това не може да бъде отменено.',
+  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+      '↑↓←→ навигация  ·  Enter избор  ·  Двойно щракване избира',
   'Sneltoetsen': 'Клавишни комбинации',
   'Toetsenlegenda': 'Легенда на клавишите',
   'spatie': 'интервал',
   'klik': 'клик',
   'cijfers': 'цифри',
-  'Klik of druk op ? / H / Esc om te sluiten': 'Кликнете или натиснете ? / H / Esc за затваряне',
-  'Klik of druk op H / Esc om te sluiten': 'Кликнете или натиснете H / Esc за затваряне',
+  'Klik of druk op ? / H / Esc om te sluiten':
+      'Кликнете или натиснете ? / H / Esc за затваряне',
+  'Klik of druk op H / Esc om te sluiten':
+      'Кликнете или натиснете H / Esc за затваряне',
   'Naar slidenummer': 'Към номер на слайд',
   'Eerste · laatste slide': 'Първи · последен слайд',
   'Slide-overzicht': 'Преглед на слайдовете',
-  'Slide-overzicht (pijltjes + Enter)': 'Преглед на слайдовете (стрелки + Enter)',
+  'Slide-overzicht (pijltjes + Enter)':
+      'Преглед на слайдовете (стрелки + Enter)',
   'Presenter view (notities, klok)': 'Изглед за водещ (бележки, часовник)',
   'Scherm wisselen (meerdere schermen)': 'Смяна на екрана (няколко екрана)',
   'Zwart · wit scherm': 'Черен · бял екран',
@@ -399,24 +456,33 @@ const _dutchSourceBg = {
   'Geen notities voor deze slide.': 'Няма бележки за този слайд.',
   'Mijn notities': 'Моите бележки',
   'Gebruikersnotities': 'Потребителски бележки',
-  'Gebruikersnotities voor deze slide...': 'Потребителски бележки за този слайд...',
+  'Gebruikersnotities voor deze slide...':
+      'Потребителски бележки за този слайд...',
   'Notities weggooien': 'Отхвърляне на бележките',
-  'Notities voor de ontvanger tijdens een cursus': 'Бележки за получателя по време на курс',
-  'Schakel naar Markdown-modus om notities toe te voegen.': 'Превключете към режим Markdown, за да добавите бележки.',
+  'Notities voor de ontvanger tijdens een cursus':
+      'Бележки за получателя по време на курс',
+  'Schakel naar Markdown-modus om notities toe te voegen.':
+      'Превключете към режим Markdown, за да добавите бележки.',
   'Mijn notities aan/uit': 'Моите бележки вкл./изкл.',
   'Wissel scherm (S)': 'Смяна на екрана (S)',
   'Kon niet van scherm wisselen.': 'Не беше възможно да се сменят екраните.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P публика · G преглед · B/W черно/бяло · R време · Esc стоп',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P публика · S екран · G преглед · B/W черно/бяло · R време · Esc стоп',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P публика · H легенда · G преглед · B/W черно/бяло · R време · Esc стоп',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P публика · H легенда · S екран · G преглед · B/W черно/бяло · R време · Esc стоп',
-  'pijltjes + Enter of klik om te springen': 'стрелки + Enter или клик за прескачане',
+  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P публика · G преглед · B/W черно/бяло · R време · Esc стоп',
+  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P публика · S екран · G преглед · B/W черно/бяло · R време · Esc стоп',
+  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P публика · H легенда · G преглед · B/W черно/бяло · R време · Esc стоп',
+  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P публика · H легенда · S екран · G преглед · B/W черно/бяло · R време · Esc стоп',
+  'pijltjes + Enter of klik om te springen':
+      'стрелки + Enter или клик за прескачане',
   'Afsluiten (Escape)': 'Изход (Escape)',
   'Sluiten (G of Esc)': 'Затваряне (G или Esc)',
   'Slide renderen…': 'Рендиране на слайда…',
   'Slide gekopieerd naar klembord.': 'Слайдът е копиран в клипборда.',
   'Kopiëren mislukt.': 'Копирането не бе успешно.',
-  'Geen ander deck open. Open eerst een ander tabblad.': 'Няма друго отворено дек. Първо отворете друг раздел.',
+  'Geen ander deck open. Open eerst een ander tabblad.':
+      'Няма друго отворено дек. Първо отворете друг раздел.',
   '1 slide kopiëren naar…': 'Копиране на 1 слайд в…',
   'slides kopiëren naar…': 'слайда за копиране в…',
   'slide(s) gekopieerd naar': 'слайд(ове) копирани в',
@@ -431,11 +497,13 @@ const _dutchSourceBg = {
   'Tips': 'Съвети',
   'Waarschuwingen': 'Предупреждения',
   'Fouten': 'Грешки',
-  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Съвет: добавете алтернативен текст / надпис за достъпност',
+  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Съвет: добавете алтернативен текст / надпис за достъпност',
   'Zoek in slides…': 'Търсене в слайдовете…',
   'Geen slides met': 'Няма слайдове с',
   'SLIDES': 'СЛАЙДОВЕ',
-  'Geen afbeelding op het klembord gevonden.': 'Не е намерено изображение в клипборда.',
+  'Geen afbeelding op het klembord gevonden.':
+      'Не е намерено изображение в клипборда.',
   'Afbeelding plakken': 'Поставяне на изображение',
   'Slide toevoegen': 'Добавяне на слайд',
   'Slide plakken': 'Поставяне на слайд',
@@ -446,60 +514,86 @@ const _dutchSourceBg = {
   'Kopiëren naar ander deck': 'Копиране в друго дек',
   'Weer tonen': 'Показване отново',
   'Selectie opheffen': 'Изчистване на избора',
-  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.': 'Приемам лиценза EUPL 1.2 и прочетох какви данни съхранява OciDeck.',
-  'Je keuze wordt de standaardtaal van de app.': 'Вашият избор става езикът по подразбиране на приложението.',
+  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
+      'Приемам лиценза EUPL 1.2 и прочетох какви данни съхранява OciDeck.',
+  'Je keuze wordt de standaardtaal van de app.':
+      'Вашият избор става езикът по подразбиране на приложението.',
   'Lees de volledige licentie': 'Прочетете пълния лиценз',
-  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.': 'OciDeck е свободен софтуер под лиценза EUPL 1.2. Преди да започнете, ви молим да приемете лиценза. По-долу можете също да прочетете какви данни OciDeck съхранява на това устройство и кога нещо напуска вашето устройство.',
-  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.': 'OciDeck не събира статистика и не изпраща нищо навън по своя инициатива. По подразбиране всичко остава на това устройство. Данните напускат това устройство само когато вие изберете това:\n\n•  Nextcloud/WebDAV: когато се свържете със сървър, вашето потребителско име и парола се съхраняват (паролата — сигурно в системния ключодържател), а презентациите, които отваряте или запазвате, се изпращат до този сървър.\n•  Отваряне чрез URL: OciDeck изтегля файла от адреса, който въведете.\n•  Онлайн медия (по подразбиране изключена): ако е включена, OciDeck зарежда изображения и видеа от адресите във вашите слайдове.\n•  Външни връзки (като онлайн лиценза) се отварят в браузъра ви.',
-  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.': 'OciDeck се предоставя под European Union Public Licence v1.2. Съгласявайки се, приемате този лиценз. Можете да използвате, копирате, променяте и разпространявате OciDeck при условията на EUPL 1.2.',
-  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.': 'За да работи и за да не загубите работата си, OciDeck съхранява данни локално на това устройство:\n\n•  Вашите настройки и предпочитания (език, папки, профили за стил и изглед, скорошни файлове).\n•  Вашите презентационни материали: презентациите, които запазвате, автоматичните копия за възстановяване и прикачени файлове като описания на изображения.\n•  Този избор за съгласие.\n\nМожете да премахнете това, като изтриете файловете или нулирате настройките.',
-  'Volledige licentie online (23 officiële taalversies)': 'Пълен лиценз онлайн (23 официални езикови версии)',
-  'Wat OciDeck op dit apparaat bewaart': 'Какво съхранява OciDeck на това устройство',
+  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
+      'OciDeck е свободен софтуер под лиценза EUPL 1.2. Преди да започнете, ви молим да приемете лиценза. По-долу можете също да прочетете какви данни OciDeck съхранява на това устройство и кога нещо напуска вашето устройство.',
+  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.':
+      'OciDeck не събира статистика и не изпраща нищо навън по своя инициатива. По подразбиране всичко остава на това устройство. Данните напускат това устройство само когато вие изберете това:\n\n•  Nextcloud/WebDAV: когато се свържете със сървър, вашето потребителско име и парола се съхраняват (паролата — сигурно в системния ключодържател), а презентациите, които отваряте или запазвате, се изпращат до този сървър.\n•  Отваряне чрез URL: OciDeck изтегля файла от адреса, който въведете.\n•  Онлайн медия (по подразбиране изключена): ако е включена, OciDeck зарежда изображения и видеа от адресите във вашите слайдове.\n•  Външни връзки (като онлайн лиценза) се отварят в браузъра ви.',
+  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.':
+      'OciDeck се предоставя под European Union Public Licence v1.2. Съгласявайки се, приемате този лиценз. Можете да използвате, копирате, променяте и разпространявате OciDeck при условията на EUPL 1.2.',
+  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.':
+      'За да работи и за да не загубите работата си, OciDeck съхранява данни локално на това устройство:\n\n•  Вашите настройки и предпочитания (език, папки, профили за стил и изглед, скорошни файлове).\n•  Вашите презентационни материали: презентациите, които запазвате, автоматичните копия за възстановяване и прикачени файлове като описания на изображения.\n•  Този избор за съгласие.\n\nМожете да премахнете това, като изтриете файловете или нулирате настройките.',
+  'Volledige licentie online (23 officiële taalversies)':
+      'Пълен лиценз онлайн (23 официални езикови версии)',
+  'Wat OciDeck op dit apparaat bewaart':
+      'Какво съхранява OciDeck на това устройство',
   'Wat je apparaat verlaat': 'Какво напуска вашето устройство',
-  'Vul server-URL en gebruikersnaam in': 'Въведете URL на сървъра и потребителско име',
+  'Vul server-URL en gebruikersnaam in':
+      'Въведете URL на сървъра и потребителско име',
   'Verbinding mislukt': 'Връзката не бе успешна',
-  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord': 'Влизането не бе успешно — проверете потребителското име и паролата',
-  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.': 'Сървърът е на частен адрес. Отметнете „Доверен вътрешен сървър“, за да разрешите връзката.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord':
+      'Влизането не бе успешно — проверете потребителското име и паролата',
+  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.':
+      'Сървърът е на частен адрес. Отметнете „Доверен вътрешен сървър“, за да разрешите връзката.',
   'Map niet gevonden op de server': 'Папката не е намерена на сървъра',
   'Ongeldige server-URL': 'Невалиден URL на сървъра',
-  'Het antwoord van de server was te groot': 'Отговорът на сървъра беше твърде голям',
+  'Het antwoord van de server was te groot':
+      'Отговорът на сървъра беше твърде голям',
   'Nextcloud': 'Nextcloud',
   'Nextcloud-bron (WebDAV)': 'Nextcloud източник (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.': 'Отваряйте и запазвайте презентации в папка на вашия Nextcloud. Паролата се съхранява криптирана в ключодържателя, а не заедно с останалите настройки.',
+  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Отваряйте и запазвайте презентации в папка на вашия Nextcloud. Паролата се съхранява криптирана в ключодържателя, а не заедно с останалите настройки.',
   'Server-URL': 'URL на сървъра',
   'Gebruikersnaam': 'Потребителско име',
   'App-wachtwoord': 'Парола за приложение',
-  'Maak hiervoor een app-wachtwoord aan in Nextcloud': 'Създайте за целта парола за приложение в Nextcloud',
+  'Maak hiervoor een app-wachtwoord aan in Nextcloud':
+      'Създайте за целта парола за приложение в Nextcloud',
   'Submap (optioneel)': 'Подпапка (по избор)',
   'Vertrouwde interne server': 'Доверен вътрешен сървър',
-  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.': 'Необходимо е, когато сървърът работи в частна или домашна мрежа (LAN). Разрешавайте връзки само към сървъри, на които сами имате доверие.',
+  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Необходимо е, когато сървърът работи в частна или домашна мрежа (LAN). Разрешавайте връзки само към сървъри, на които сами имате доверие.',
   'Verbinding testen': 'Тест на връзката',
   'Verbinding gelukt': 'Връзката е успешна',
-  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.': 'Промените се запазват, когато щракнете върху Запазване.',
+  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
+      'Промените се запазват, когато щракнете върху Запазване.',
   'Afbeelding kiezen op Nextcloud': 'Избор на изображение в Nextcloud',
   'Openen vanaf Nextcloud': 'Отваряне от Nextcloud',
   'Vernieuwen': 'Опресняване',
   'Deze map is leeg': 'Тази папка е празна',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.': 'Няма зададен Nextcloud сървър. Настройте го от Настройки → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.': 'Папката не можа да се зареди. Проверете връзката и настройките си.',
+  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
+      'Няма зададен Nextcloud сървър. Настройте го от Настройки → Nextcloud.',
+  'Kon de map niet laden. Controleer je verbinding en instellingen.':
+      'Папката не можа да се зареди. Проверете връзката и настройките си.',
   'Kon dit bestand niet openen.': 'Този файл не можа да се отвори.',
-  'Dit is geen Marp/OciDeck-presentatie.': 'Това не е презентация на Marp/OciDeck.',
+  'Dit is geen Marp/OciDeck-presentatie.':
+      'Това не е презентация на Marp/OciDeck.',
   'Downloaden mislukt:': 'Изтеглянето не бе успешно:',
   'Opgeslagen op Nextcloud:': 'Запазено в Nextcloud:',
   'Opslaan mislukt:': 'Запазването не бе успешно:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.': 'Първо настройте Nextcloud сървър от Настройки → Nextcloud.',
+  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
+      'Първо настройте Nextcloud сървър от Настройки → Nextcloud.',
   'Opslaan naar Nextcloud': 'Запазване в Nextcloud',
   'Doelpad (zonder extensie)': 'Целеви път (без разширение)',
-  'Als .ocideck-pakket (één bestand, met assets)': 'Като .ocideck пакет (един файл, с ресурси)',
+  'Als .ocideck-pakket (één bestand, met assets)':
+      'Като .ocideck пакет (един файл, с ресурси)',
   'Als losse .md plus afbeeldingen': 'Като отделен .md плюс изображения',
   'Opslaan': 'Запазване',
   'Presenteren': 'Презентиране',
-  'Tijden-overzicht tonen na afloop': 'Показване на преглед на времената след края',
-  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.': 'Времето за всеки слайд винаги се измерва; това определя само дали прегледът се появява след тази презентация.',
-  'Oefenoverzicht tonen na afloop': 'Показване на обобщение на репетицията след края',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.': 'След презентация показвайте прегледа с прекараното време за всеки слайд. Времето винаги се измерва; това определя само дали екранът се появява.',
+  'Tijden-overzicht tonen na afloop':
+      'Показване на преглед на времената след края',
+  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
+      'Времето за всеки слайд винаги се измерва; това определя само дали прегледът се появява след тази презентация.',
+  'Oefenoverzicht tonen na afloop':
+      'Показване на обобщение на репетицията след края',
+  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+      'След презентация показвайте прегледа с прекараното време за всеки слайд. Времето винаги се измерва; това определя само дали екранът се появява.',
   'Onveilige presentatie geblokkeerd': 'Небезопасна презентация — блокирана',
-  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.': 'Тази презентация не беше отворена. Файлът съдържа съдържание, което може да изпълнява код, а презентацията трябва да съдържа само данни — нищо изпълнимо.',
+  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Тази презентация не беше отворена. Файлът съдържа съдържание, което може да изпълнява код, а презентацията трябва да съдържа само данни — нищо изпълнимо.',
   'Gevonden:': 'Намерено:',
   'Regel': 'Ред',
   'Scriptuitvoering': 'Изпълнение на скрипт',
@@ -521,46 +615,67 @@ const _dutchSourceBg = {
   'Pootje': 'Лапичка',
   'In tweeën splitsen': 'Разделяне на две',
   'Uitgevoerde controles': 'Извършени проверки',
-  'Contrast en leesbaarheid van tekstkleuren': 'Контраст и четимост на цветовете на текста',
-  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media': 'Алтернативни текстове и надписи на изображения, диаграми и медия',
-  'Aanwezigheid van gekoppelde mediabestanden': 'Наличие на свързани медийни файлове',
-  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code': 'Плътност на текста: водещи символи, думи, цитати, таблици и код',
-  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).': 'Тема, слайдове, долен колонтитул, чеклист и заглавия върху изображения, проверени спрямо WCAG AA (4,5:1 за текст, 3:1 за едър текст).',
-  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.': 'Всяко изображение, диаграма, видео и аудио се нуждае от описание за екранни четци и раздавателни материали.',
-  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.': 'Препратките към изображения, видео и аудио се проверяват за съществуващ файл в проекта.',
-  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.': 'Брой и дължина на водещите символи, думи, влагане, баланс на колоните и плътността на цитати, заглавия, таблици и код, така че всичко да се побира четимо.',
-  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.': 'Основен текст с контраст под {crit}:1 се брои за грешка; над това до нормата AA — за предупреждение.',
-  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.': 'Без прагова стойност: непразно описание е задължително.',
-  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.': 'Без прагова стойност: свързаният файл трябва да съществува в папката на проекта.',
-  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.': 'Предупреждение над {b1} водещи символа (1 колона), {bcl} (чеклист) или {b2} (2 колони); критично над {bc1} или {bc2}. Думи над {w1}/{w2}, средно над {avg} на водещ символ. Цитат над {q} знака, заглавие над {t} знака. Влагане по-дълбоко от ниво {lvl}. Текст, който трябва да се свие под {warn}%, предупреждава, под {crit}% е критично.',
+  'Contrast en leesbaarheid van tekstkleuren':
+      'Контраст и четимост на цветовете на текста',
+  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+      'Алтернативни текстове и надписи на изображения, диаграми и медия',
+  'Aanwezigheid van gekoppelde mediabestanden':
+      'Наличие на свързани медийни файлове',
+  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+      'Плътност на текста: водещи символи, думи, цитати, таблици и код',
+  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+      'Тема, слайдове, долен колонтитул, чеклист и заглавия върху изображения, проверени спрямо WCAG AA (4,5:1 за текст, 3:1 за едър текст).',
+  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+      'Всяко изображение, диаграма, видео и аудио се нуждае от описание за екранни четци и раздавателни материали.',
+  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+      'Препратките към изображения, видео и аудио се проверяват за съществуващ файл в проекта.',
+  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+      'Брой и дължина на водещите символи, думи, влагане, баланс на колоните и плътността на цитати, заглавия, таблици и код, така че всичко да се побира четимо.',
+  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+      'Основен текст с контраст под {crit}:1 се брои за грешка; над това до нормата AA — за предупреждение.',
+  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+      'Без прагова стойност: непразно описание е задължително.',
+  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+      'Без прагова стойност: свързаният файл трябва да съществува в папката на проекта.',
+  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+      'Предупреждение над {b1} водещи символа (1 колона), {bcl} (чеклист) или {b2} (2 колони); критично над {bc1} или {bc2}. Думи над {w1}/{w2}, средно над {avg} на водещ символ. Цитат над {q} знака, заглавие над {t} знака. Влагане по-дълбоко от ниво {lvl}. Текст, който трябва да се свие под {warn}%, предупреждава, под {crit}% е критично.',
   'Zoek op deze computer': 'Търсене на този компютър',
-  'Presentaties zoeken op deze computer': 'Намиране на презентации на този компютър',
+  'Presentaties zoeken op deze computer':
+      'Намиране на презентации на този компютър',
   'Zoek op titel, pad of thema…': 'Търсене по заглавие, път или тема…',
   'Bekende mappen worden doorzocht…': 'Известните папки се претърсват…',
   'gevonden': 'намерени',
   'presentatie(s) gevonden': 'презентация(и) намерени',
-  'Geen Marp-presentaties gevonden in de bekende mappen.': 'Не са намерени Marp презентации в известните папки.',
+  'Geen Marp-presentaties gevonden in de bekende mappen.':
+      'Не са намерени Marp презентации в известните папки.',
   'Geen thema': 'Без тема',
   'Kopieer syntaxproblemen': 'Копиране на синтактичните проблеми',
-  'Syntaxproblemen gekopieerd naar klembord.': 'Синтактичните проблеми са копирани в клипборда.',
+  'Syntaxproblemen gekopieerd naar klembord.':
+      'Синтактичните проблеми са копирани в клипборда.',
   'Online media': 'Онлайн медия',
   'Online media staat uit': 'Онлайн медията е изключена',
   'Online media toestaan': 'Разрешаване на онлайн медия',
-  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.': 'Разрешете зареждане на живо на изображения и видеа чрез URL и на вграждания от YouTube/Vimeo. По подразбиране изключено за вашата поверителност и сигурност.',
-  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)': 'Път до файл или URL (YouTube, Vimeo, .mp4 …)',
+  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+      'Разрешете зареждане на живо на изображения и видеа чрез URL и на вграждания от YouTube/Vimeo. По подразбиране изключено за вашата поверителност и сигурност.',
+  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+      'Път до файл или URL (YouTube, Vimeo, .mp4 …)',
   'Bestand kiezen': 'Избор на файл',
-  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.': 'Възпроизведете сегмента на този слайд в прегледа и отрежете в точката, където искате да разделите: втората част отива на нов слайд.',
+  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+      'Възпроизведете сегмента на този слайд в прегледа и отрежете в точката, където искате да разделите: втората част отива на нов слайд.',
   'Begin (sec)': 'Начало (сек)',
   'Einde (sec)': 'Край (сек)',
   'einde': 'край',
-  'Knip de video op het huidige afspeelpunt': 'Отрежете видеото в текущата точка на възпроизвеждане',
-  'Speel de video eerst af in het voorbeeld': 'Първо възпроизведете видеото в прегледа',
+  'Knip de video op het huidige afspeelpunt':
+      'Отрежете видеото в текущата точка на възпроизвеждане',
+  'Speel de video eerst af in het voorbeeld':
+      'Първо възпроизведете видеото в прегледа',
   'Knip hier': 'Отрежете тук',
   'Online': 'Онлайн',
   'Lokaal bestand': 'Локален файл',
   'Geen video': 'Без видео',
   'Vraag (meerkeuze)': 'Въпрос (с избор)',
-  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding': 'Заглавният текст има твърде малък контраст с фоновото изображение',
+  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+      'Заглавният текст има твърде малък контраст с фоновото изображение',
   'Herstel': 'Поправяне',
   'Tijdlijn': 'Времева линия',
   'Indeling': 'Оформление',
@@ -585,19 +700,24 @@ const _dutchSourceBg = {
   'Vraag': 'Въпрос',
   'Wat wil je vragen?': 'Какво искате да попитате?',
   'Antwoorden': 'Отговори',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.': 'Отбележете верните отговори. Без ограничение; при презентиране на случаен принцип се показват 1 верен и останалите грешни.',
+  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Отбележете верните отговори. Без ограничение; при презентиране на случаен принцип се показват 1 верен и останалите грешни.',
   'Antwoord': 'Отговор',
   'Antwoord toevoegen': 'Добавяне на отговор',
   'Goed antwoord': 'Верен отговор',
-  'Geef minstens één goed én één fout antwoord op.': 'Дайте поне един верен и един грешен отговор.',
+  'Geef minstens één goed én één fout antwoord op.':
+      'Дайте поне един верен и един грешен отговор.',
   'Weergave': 'Показване',
   'Aantal getoonde opties': 'Брой показани опции',
-  'Maximale antwoordtijd in seconden (0 = geen limiet)': 'Максимално време за отговор в секунди (0 = без ограничение)',
+  'Maximale antwoordtijd in seconden (0 = geen limiet)':
+      'Максимално време за отговор в секунди (0 = без ограничение)',
   'Bij een fout antwoord': 'При грешен отговор',
   'Opnieuw proberen': 'Опитайте отново',
   'Doorgaan toestaan': 'Разрешаване на продължаване',
-  'Fout = niet doorgaan; de vraag moet opnieuw.': 'Грешно = без продължаване; въпросът трябва да се повтори.',
-  'Fout = wel doorgaan, maar niet opnieuw doen.': 'Грешно = може да продължите, но без повторение.',
+  'Fout = niet doorgaan; de vraag moet opnieuw.':
+      'Грешно = без продължаване; въпросът трябва да се повтори.',
+  'Fout = wel doorgaan, maar niet opnieuw doen.':
+      'Грешно = може да продължите, но без повторение.',
   'Afbeelding (optioneel)': 'Изображение (по избор)',
   'Breedte afbeelding': 'Ширина на изображението',
   'Goed!': 'Вярно!',
@@ -612,45 +732,56 @@ const _dutchSourceBg = {
   'Juist / Onjuist': 'Вярно / Невярно',
   'Meerdere juiste antwoorden': 'Няколко верни отговора',
   'Stelling': 'Твърдение',
-  'Formuleer een stelling die juist of onjuist is': 'Формулирайте твърдение, което е вярно или невярно',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.': 'Отбележете всички верни отговори. При презентиране се показва случаен набор с поне един верен и един грешен.',
+  'Formuleer een stelling die juist of onjuist is':
+      'Формулирайте твърдение, което е вярно или невярно',
+  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+      'Отбележете всички верни отговори. При презентиране се показва случаен набор с поне един верен и един грешен.',
   'Juist': 'Вярно',
   'Onjuist': 'Невярно',
-  'De stelling hierboven is juist of onjuist; kies welke.': 'Твърдението по-горе е вярно или невярно; изберете кое.',
+  'De stelling hierboven is juist of onjuist; kies welke.':
+      'Твърдението по-горе е вярно или невярно; изберете кое.',
   'Selecteer alle juiste antwoorden': 'Изберете всички верни отговори',
   'Bevestig': 'Потвърждаване',
   'Het juiste antwoord': 'Верният отговор',
-  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.': 'Изображението се показва на цял екран като фон. Използвайте замъгляването, когато заглавието се нуждае от повече спокойствие или контраст.',
+  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+      'Изображението се показва на цял екран като фон. Използвайте замъгляването, когато заглавието се нуждае от повече спокойствие или контраст.',
   'Cockpit-kleurschema': 'Цветова схема на кокпита',
-  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.': 'Статусните цветове на измервателите на кокпита. Създайте наименувани варианти; избраната схема важи за всички слайдове с кокпит.',
+  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+      'Статусните цветове на измервателите на кокпита. Създайте наименувани варианти; избраната схема важи за всички слайдове с кокпит.',
   'Standaard': 'По подразбиране',
   'Standaardkleuren gebruiken': 'Използване на цветовете по подразбиране',
   'Kleurschema verwijderen': 'Изтриване на цветовата схема',
   'Schemanaam': 'Име на схемата',
-  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.': 'Това е вградената схема. Направете копие, за да коригирате цветовете.',
+  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+      'Това е вградената схема. Направете копие, за да коригирате цветовете.',
   'Goed': 'Добре',
   'Waarschuwing': 'Предупреждение',
   'Kritiek': 'Критично',
   'Te laag (koud)': 'Твърде ниско (студено)',
   'Lucht (horizon)': 'Небе (хоризонт)',
   'Grond (horizon)': 'Земя (хоризонт)',
-  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.': 'Статусните цветове следват цветовата схема на кокпита; коригирайте я или създайте варианти чрез Настройки → Кокпит.',
+  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+      'Статусните цветове следват цветовата схема на кокпита; коригирайте я или създайте варианти чрез Настройки → Кокпит.',
   'Veel bullets op deze slide': 'Много водещи символи на този слайд',
   'bullets': 'водещи символи',
   'Overweeg de inhoud te splitsen.': 'Обмислете разделяне на съдържанието.',
   'Erg veel bullets op deze slide': 'Твърде много водещи символи на този слайд',
-  'Splits deze inhoud over meerdere slides.': 'Разделете това съдържание на няколко слайда.',
+  'Splits deze inhoud over meerdere slides.':
+      'Разделете това съдържание на няколко слайда.',
   'Veel woorden in bullets': 'Много думи във водещите символи',
   'woorden': 'думи',
-  'Maak bullets korter of splits de slide.': 'Съкратете водещите символи или разделете слайда.',
+  'Maak bullets korter of splits de slide.':
+      'Съкратете водещите символи или разделете слайда.',
   'Erg veel woorden in bullets': 'Твърде много думи във водещите символи',
   'Gemiddeld lange bullets': 'Средно дълги водещи символи',
   'woorden per bullet': 'думи на водещ ред',
   'Maak elke bullet kernachtiger.': 'Направете всеки водещ ред по-стегнат.',
-  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.': 'Открит е водещ ред с няколко изречения. Направете водещите редове по-стегнати или разделете съдържанието.',
+  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+      'Открит е водещ ред с няколко изречения. Направете водещите редове по-стегнати или разделете съдържанието.',
   'Diepe bulletniveaus gevonden': 'Открити са дълбоки нива на водещи редове',
   'niveau': 'ниво',
-  'Beperk nesting voor betere leesbaarheid.': 'Ограничете влагането за по-добра четимост.',
+  'Beperk nesting voor betere leesbaarheid.':
+      'Ограничете влагането за по-добра четимост.',
   'Twee kolommen zijn sterk uit balans': 'Двете колони са силно небалансирани',
   'tegenover': 'спрямо',
   'Verdeel of splits de inhoud.': 'Преразпределете или разделете съдържанието.',
@@ -661,8 +792,10 @@ const _dutchSourceBg = {
   'Activatieduur': 'Продължителност на активиране',
   'Splits slide': 'Раздели слайда',
   'Doornummeren vanaf vorige slide': 'Продължи номерирането от предишния слайд',
-  'Begin de nummering waar de vorige slide ophield.': 'Започни номерирането оттам, докъдето стигна предишният слайд.',
-  'Volg thema-animatieduur': 'Следвай продължителността на анимацията от темата',
+  'Begin de nummering waar de vorige slide ophield.':
+      'Започни номерирането оттам, докъдето стигна предишният слайд.',
+  'Volg thema-animatieduur':
+      'Следвай продължителността на анимацията от темата',
   'Animatie bij openen': 'Анимиране при влизане',
   'Meter': 'Уред',
   'Type': 'Тип',
@@ -689,7 +822,8 @@ const _dutchSourceBg = {
   'Koers': 'Курс',
   'Ander profiel kiezen': 'Избери друг профил',
   'Cockpit': 'Табло на кокпита',
-  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Целево време за обратното броене в презентатора. По време на презентиране може да се донастрои с клавиша K.',
+  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Целево време за обратното броене в презентатора. По време на презентиране може да се донастрои с клавиша K.',
   'Logo en footer': 'Лого и долен колонтитул',
   'Pagina': 'Страница',
   'Presentatiestijl': 'Стил на презентация',
@@ -706,7 +840,8 @@ const _dutchSourceBg = {
   'Doeltijd': 'Целево време',
   'Doeltijd (aftellen)': 'Целево време (обратно броене)',
   'Geen aftelling': 'Без обратно броене',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Стандартно целево време за обратното броене в презентатора. По време на презентиране може да се донастрои с клавиша K.',
+  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Стандартно целево време за обратното броене в презентатора. По време на презентиране може да се донастрои с клавиша K.',
   'uit': 'изкл',
   'Doeltijd / aftellen (K)': 'Целево време / броене (K)',
   'Doeltijd / aftellen instellen (MMSS)': 'Задай целево време / броене (MMSS)',
@@ -723,25 +858,32 @@ const _dutchSourceBg = {
   'Kopieer': 'Копирай',
   'Sluiten': 'Затвори',
   'Tekstgrootte van de interface': 'Размер на текста на интерфейса',
-  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.': 'Уголемява целия текст на редактора до 200%. Самите слайдове не се променят.',
+  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+      'Уголемява целия текст на редактора до 200%. Самите слайдове не се променят.',
   'Breedte van het slidepaneel': 'Ширина на панела със слайдове',
-  'Pijltjestoetsen passen de breedte aan': 'Клавишите със стрелки регулират ширината',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.': 'Съвет: поставете таблица от електронната си таблица в клетка с Cmd/Ctrl+V, за да попълните цялата таблица.',
+  'Pijltjestoetsen passen de breedte aan':
+      'Клавишите със стрелки регулират ширината',
+  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+      'Съвет: поставете таблица от електронната си таблица в клетка с Cmd/Ctrl+V, за да попълните цялата таблица.',
   'Annuleren': 'Отказ',
   'Checklist': 'Списък със задачи',
   'Voortgangsgrafiek tonen': 'Показвай диаграма на напредъка',
-  'Toont afgevinkt en niet afgevinkt als percentages.': 'Показва отметнатите и неотметнатите елементи като проценти.',
+  'Toont afgevinkt en niet afgevinkt als percentages.':
+      'Показва отметнатите и неотметнатите елементи като проценти.',
   'Afgevinkt': 'Отметнато',
   'Niet afgevinkt': 'Неотметнато',
-  'Er zijn geen aangevinkte checklist-items om te legen.': 'Няма отметнати елементи от списъка за изчистване.',
+  'Er zijn geen aangevinkte checklist-items om te legen.':
+      'Няма отметнати елементи от списъка за изчистване.',
   'Alle checkboxen legen?': 'Да се изчистят ли всички отметки?',
   'Hiermee worden alle': 'Това ще премахне отметките от всички',
-  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.': 'отметнати елементи от списъка в цялата презентация. Може да отмените това с Ctrl/Cmd+Z.',
+  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+      'отметнати елементи от списъка в цялата презентация. Може да отмените това с Ctrl/Cmd+Z.',
   'Alles legen': 'Изчисти всичко',
   'checklist-items uitgevinkt.': 'елементи от списъка с премахнати отметки.',
   'Alle checkboxen legen': 'Изчисти всички отметки',
   'Afgevinkte tekst doorhalen': 'Зачерквай отметнатия текст',
-  'Toont een streep door voltooide checklistitems.': 'Показва завършените елементи от списъка със зачертаване.',
+  'Toont een streep door voltooide checklistitems.':
+      'Показва завършените елементи от списъка със зачертаване.',
   'Na media automatisch doorgaan': 'Автоматично продължаване след медия',
   'Opsomming': 'Водещи редове',
   'Nummering': 'Номериране',
@@ -751,11 +893,13 @@ const _dutchSourceBg = {
   'Omhoog': 'Нагоре',
   'Omlaag': 'Надолу',
   'Niet toevoegen': 'Не добавяй',
-  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.': 'Тези слайдове използват едни и същи данни, цветове и заглавие. Използвайте стрелките, за да изберете реда им след текущия слайд.',
+  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+      'Тези слайдове използват едни и същи данни, цветове и заглавие. Използвайте стрелките, за да изберете реда им след текущия слайд.',
   'Afbeelding': 'Изображение',
   'Broncode': 'Изходен код',
   'Bullet': 'Водещ ред',
-  'Plak of typ hier je broncode...': 'Поставете или напишете изходния си код тук...',
+  'Plak of typ hier je broncode...':
+      'Поставете или напишете изходния си код тук...',
   'Programmeertaal': 'Език за програмиране',
   'TLP van deze slide': 'TLP на този слайд',
   'Wis annotaties (C)': 'Изчисти анотациите (C)',
@@ -769,10 +913,12 @@ const _dutchSourceBg = {
   'Cirkel': 'Кръгова',
   'Spider': 'Радарна',
   'CSV importeren': 'Импортирай CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)': 'Данни (CSV: първи ред = имена на серии, първа колона = етикети)',
+  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+      'Данни (CSV: първи ред = имена на серии, първа колона = етикети)',
   'Gekoppeld aan': 'Свързано с',
   'Ontkoppelen': 'Прекъсни връзката',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?': 'Данните да се съхранят в слайда или да се запазят като отделен CSV файл до презентацията?',
+  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+      'Данните да се съхранят в слайда или да се запазят като отделен CSV файл до презентацията?',
   'In de slide': 'В слайда',
   'Als CSV-bestand': 'Като CSV файл',
   'Geen grafiekgegevens': 'Няма данни за диаграма',
@@ -785,9 +931,12 @@ const _dutchSourceBg = {
   'Sorteren': 'Сортиране',
   'Oplopend sorteren': 'Сортирай възходящо',
   'Aflopend sorteren': 'Сортирай низходящо',
-  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.': 'При кръгова диаграма се показват най-много първите две серии; етикетите образуват сегментите.',
-  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.': 'Радарната диаграма изисква поне три етикета (оси); всяка серия образува фигура.',
-  'Een spider-diagram heeft minstens drie labels nodig': 'Радарната диаграма изисква поне три етикета',
+  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+      'При кръгова диаграма се показват най-много първите две серии; етикетите образуват сегментите.',
+  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+      'Радарната диаграма изисква поне три етикета (оси); всяка серия образува фигура.',
+  'Een spider-diagram heeft minstens drie labels nodig':
+      'Радарната диаграма изисква поне три етикета',
   'Minimumlijn (optioneel)': 'Минимална линия (по избор)',
   'Maximumlijn (optioneel)': 'Максимална линия (по избор)',
   'Schaalminimum (optioneel)': 'Минимум на скалата (по избор)',
@@ -796,9 +945,11 @@ const _dutchSourceBg = {
   'Broncode achtergrond': 'Фон на изходния код',
   'Broncode tekst': 'Текст на изходния код',
   'Syntaxkleuring': 'Синтактично оцветяване',
-  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).': 'Изкл = всичко в един цвят (напр. зелено на черно за CRT екран).',
+  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+      'Изкл = всичко в един цвят (напр. зелено на черно за CRT екран).',
   'Eigen kleur (hex)': 'Собствен цвят (hex)',
-  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.': 'Например #33FF33 за CRT-зелен екран.',
+  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+      'Например #33FF33 за CRT-зелен екран.',
   'Onderdeel van stijlprofiel ': 'Част от стилов профил ',
   'Broncode lettertype': 'Шрифт на изходния код',
   'Kop (optioneel)': 'Заглавие (по избор)',
@@ -806,38 +957,49 @@ const _dutchSourceBg = {
   'Subkop': 'Подзаглавие',
   'Systeem (monospace)': 'Системен (моноширинен)',
   'Platte tekst': 'Обикновен текст',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.': 'HTML се отваря във всеки браузър без интернет и рендира кодови блокове, математика и Mermaid диаграми.',
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+      'HTML се отваря във всеки браузър без интернет и рендира кодови блокове, математика и Mermaid диаграми.',
   'Laatste slide': 'Последен слайд',
   'Logo px': 'Лого px',
   'Markdown voor laatste slide': 'Markdown за последния слайд',
   'PREVIEW': 'ПРЕГЛЕД',
   'Slides gerenderd.': 'Слайдовете са рендирани.',
   'Standaard laatste slide gebruiken': 'Използвай стандартен последен слайд',
-  'Wordt automatisch toegevoegd bij presenteren en exporteren.': 'Добавя се автоматично при презентиране и експортиране.',
+  'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+      'Добавя се автоматично при презентиране и експортиране.',
   'gerenderd.': 'рендирани.',
   'renderen…': 'рендиране…',
   'voorbereiden…': 'подготовка…',
   'Duplicaten opruimen': 'Изчисти дубликатите',
-  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën': 'Намери байт-идентични изображения (md5), обедини тагове и бележки и премахни копията',
+  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+      'Намери байт-идентични изображения (md5), обедини тагове и бележки и премахни копията',
   'Geen dubbele afbeeldingen gevonden.': 'Няма намерени дублирани изображения.',
-  'Dubbele afbeeldingen opruimen?': 'Да се изчистят ли дублираните изображения?',
-  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.': 'От всяка група остава един файл. Таговете и бележките се обединяват, а слайдовете, използващи копие, след това сочат към запазения файл — включително презентации, които в момента не са отворени.',
+  'Dubbele afbeeldingen opruimen?':
+      'Да се изчистят ли дублираните изображения?',
+  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+      'От всяка група остава един файл. Таговете и бележките се обединяват, а слайдовете, използващи копие, след това сочат към запазения файл — включително презентации, които в момента не са отворени.',
   'Opruimen': 'Изчисти',
   '1 presentatiebestand bijgewerkt.': '1 презентационен файл е обновен.',
   'presentatiebestanden bijgewerkt.': 'презентационни файла са обновени.',
   'niet geopend': 'не е отворена',
   '1 dubbele afbeelding verwijderd.': '1 дублирано изображение е премахнато.',
   'dubbele afbeeldingen verwijderd.': 'дублирани изображения са премахнати.',
-  'Alleen afbeeldingen zonder tags tonen': 'Показвай само изображения без тагове',
+  'Alleen afbeeldingen zonder tags tonen':
+      'Показвай само изображения без тагове',
   'Alle afbeeldingen hebben tags.': 'Всички изображения имат тагове.',
-  'Zet het filter uit om alles weer te zien.': 'Изключете филтъра, за да видите всичко отново.',
+  'Zet het filter uit om alles weer te zien.':
+      'Изключете филтъра, за да видите всичко отново.',
   'Welkom bij OciDeck': 'Добре дошли в OciDeck',
   'Privacy en gebruik': 'Поверителност и употреба',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'OciDeck е локално настолно приложение. Вашите презентации и данни се съхраняват единствено на вашия компютър.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'Приложението не събира лични данни, статистика или данни за употреба. Вашата поверителност е наш приоритет.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Всички данни, които въвеждате в OciDeck, остават на вашата локална система и не се изпращат към външни сървъри.',
+  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
+      'OciDeck е локално настолно приложение. Вашите презентации и данни се съхраняват единствено на вашия компютър.',
+  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
+      'Приложението не събира лични данни, статистика или данни за употреба. Вашата поверителност е наш приоритет.',
+  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
+      'Всички данни, които въвеждате в OciDeck, остават на вашата локална система и не се изпращат към външни сървъри.',
   'Licentie (EUPL 1.2)': 'Лиценз (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'С натискане на „Съгласявам се“ приемате тези условия и се съгласявате с използването на OciDeck.',
+  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
+      'С натискане на „Съгласявам се“ приемате тези условия и се съгласявате с използването на OciDeck.',
   'Volledige licentie online': 'Пълен лиценз онлайн',
   'Akkoord gaan': 'Съгласявам се',
   'Privacy': 'Поверителност',
@@ -845,16 +1007,21 @@ const _dutchSourceBg = {
   'Toestemming intrekken': 'Оттегляне на съгласието',
   'Toestemming intrekken?': 'Да се оттегли ли съгласието?',
   'Intrekken': 'Оттегли',
-  'U hebt al toegestemd in het gebruik van OciDeck.': 'Вече сте се съгласили с използването на OciDeck.',
-  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.': 'Можете да оттеглите съгласието си по всяко време. След оттегляне трябва да приемете тези условия отново.',
-  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.': 'Ако оттеглите съгласието си, трябва да приемете тези условия отново при следващо стартиране на OciDeck.',
+  'U hebt al toegestemd in het gebruik van OciDeck.':
+      'Вече сте се съгласили с използването на OciDeck.',
+  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+      'Можете да оттеглите съгласието си по всяко време. След оттегляне трябва да приемете тези условия отново.',
+  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+      'Ако оттеглите съгласието си, трябва да приемете тези условия отново при следващо стартиране на OciDeck.',
   'Slidekwaliteit': 'Качество на слайдовете',
   'Geen kwaliteitsproblemen gevonden': 'Няма намерени проблеми с качеството',
   'Thema (hele presentatie)': 'Тема (цялата презентация)',
   'Kwaliteitsprobleem': 'Проблем с качеството',
   'Kwaliteitsproblemen': 'Проблеми с качеството',
-  'Kwaliteitsproblemen (inclusief ernstige)': 'Проблеми с качеството (включително сериозни)',
-  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Добавете алтернативен текст / надпис за достъпност',
+  'Kwaliteitsproblemen (inclusief ernstige)':
+      'Проблеми с качеството (включително сериозни)',
+  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Добавете алтернативен текст / надпис за достъпност',
   'Alt-tekst': 'Алтернативен текст',
   'Tekstdichtheid': 'Плътност на текста',
   'Contrast': 'Контраст',
@@ -864,22 +1031,32 @@ const _dutchSourceBg = {
   ':1 voor normale tekst).': ':1 за нормален текст).',
   ':1 voor grote tekst).': ':1 за едър текст).',
   ':1).': ':1).',
-  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.': 'Контрастът на текст върху изображение не може да се провери автоматично — проверете визуално.',
-  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.': 'Диаграмата няма заглавие или описателни данни — добавете заглавие или имена на серии.',
-  'heeft geen titel of sprekernotities die de inhoud beschrijven.': 'няма заглавие или бележки на водещия, описващи съдържанието.',
-  'Veel tekst op deze slide: het lettertype wordt verkleind tot ': 'Много текст на този слайд: размерът на шрифта се намалява до ',
+  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+      'Контрастът на текст върху изображение не може да се провери автоматично — проверете визуално.',
+  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+      'Диаграмата няма заглавие или описателни данни — добавете заглавие или имена на серии.',
+  'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+      'няма заглавие или бележки на водещия, описващи съдържанието.',
+  'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+      'Много текст на този слайд: размерът на шрифта се намалява до ',
   ' van de ontwerpgrootte.': ' от проектния размер.',
-  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (': 'Много текст на този слайд: размерът на шрифта се намалява силно (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.': 'от проектния размер). Обмислете разделяне на съдържанието.',
+  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+      'Много текст на този слайд: размерът на шрифта се намалява силно (',
+  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      'от проектния размер). Обмислете разделяне на съдържанието.',
   'Grote tabel (': 'Голяма таблица (',
   ' rijen, ': ' реда, ',
-  ' kolommen): celtekst staat op het minimumformaat.': ' колони): текстът в клетките е с минимален размер.',
+  ' kolommen): celtekst staat op het minimumformaat.':
+      ' колони): текстът в клетките е с минимален размер.',
   'Veel broncode (': 'Много изходен код (',
-  ' regels) — de tekst wordt sterk verkleind om te passen.': ' реда) — текстът се намалява силно, за да се побере.',
+  ' regels) — de tekst wordt sterk verkleind om te passen.':
+      ' реда) — текстът се намалява силно, за да се побере.',
   'Veel vrije markdown (': 'Много свободен markdown (',
-  ' regels) — controleer of alles leesbaar blijft op de slide.': ' реда) — проверете дали всичко остава четимо на слайда.',
+  ' regels) — controleer of alles leesbaar blijft op de slide.':
+      ' реда) — проверете дали всичко остава четимо на слайда.',
   'Lange titelpagina (': 'Дълъг заглавен слайд (',
-  ' tekens) — de tekst wordt verkleind om te passen.': ' знака) — текстът се намалява, за да се побере.',
+  ' tekens) — de tekst wordt verkleind om te passen.':
+      ' знака) — текстът се намалява, за да се побере.',
   'Thema bodytekst': 'Тема основен текст',
   'Thema titel': 'Тема заглавие',
   'Thema tabeltekst': 'Тема текст на таблица',
@@ -890,37 +1067,50 @@ const _dutchSourceBg = {
   'Tweede afbeelding': 'Второ изображение',
   'Waarschuwing bij export': 'Предупреждавай при експорт',
   'Minimale contrastverhouding': 'Минимално съотношение на контраста',
-  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.': 'Текст под това съотношение се маркира. 4.5 = WCAG AA, 3.0 = WCAG AA едър текст. По-високо е по-строго.',
-  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.': 'Искай потвърждение преди експорт, когато има проблеми с качеството на слайдовете.',
+  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.':
+      'Текст под това съотношение се маркира. 4.5 = WCAG AA, 3.0 = WCAG AA едър текст. По-високо е по-строго.',
+  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+      'Искай потвърждение преди експорт, когато има проблеми с качеството на слайдовете.',
   'Kwaliteitsproblemen gevonden': 'Открити са проблеми с качеството',
   'Toch exporteren': 'Все пак експортирай',
   'ernstige probleem(en)': 'сериозни проблема',
-  'De presentatie heeft kwaliteitsproblemen (': 'Презентацията има проблеми с качеството (',
+  'De presentatie heeft kwaliteitsproblemen (':
+      'Презентацията има проблеми с качеството (',
   'Lange quote (': 'Дълъг цитат (',
   'Footer-tekst': 'Текст на долния колонтитул',
   'Checklist (niet aangevinkt)': 'Списък със задачи (неотметнато)',
   'Checklist (aangevinkt)': 'Списък със задачи (отметнато)',
   ': bestand niet gevonden (': ': файлът не е намерен (',
-  'Blokkeer export bij ernstige kwaliteitsproblemen': 'Блокирай експорта при сериозни проблеми с качеството',
-  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.': 'Експортът не е възможен, докато проверките за качество на слайдовете отчитат грешки.',
-  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.': 'Експортът е блокиран поради сериозни проблеми с качеството.',
+  'Blokkeer export bij ernstige kwaliteitsproblemen':
+      'Блокирай експорта при сериозни проблеми с качеството',
+  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+      'Експортът не е възможен, докато проверките за качество на слайдовете отчитат грешки.',
+  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+      'Експортът е блокиран поради сериозни проблеми с качеството.',
   'Alle meldingen': 'Всички съобщения',
-  '… en meer problemen in het kwaliteitspaneel.': '… и още проблеми в панела за качество.',
+  '… en meer problemen in het kwaliteitspaneel.':
+      '… и още проблеми в панела за качество.',
   'Classificatie-handhaving': 'Прилагане на класификацията',
   'Vrijgaveplafond': 'Таван за освобождаване',
-  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.': 'Най-високото TLP ниво, което може да се експортира. Празно = без таван.',
+  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+      'Най-високото TLP ниво, което може да се експортира. Празно = без таван.',
   'Vereist minimumniveau': 'Изисквано минимално ниво',
-  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.': 'Най-ниската класификация, която трябва да има един deck, за да се експортира. Празно = без минимум.',
+  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+      'Най-ниската класификация, която трябва да има един deck, за да се експортира. Празно = без минимум.',
   'Geen plafond': 'Без таван',
   'Geen minimum': 'Без минимум',
   'Classificatie verplicht': 'Класификацията е задължителна',
-  'Weiger export wanneer het deck geen TLP-niveau heeft.': 'Отказвай експорт, когато deck-ът няма TLP ниво.',
+  'Weiger export wanneer het deck geen TLP-niveau heeft.':
+      'Отказвай експорт, когато deck-ът няма TLP ниво.',
   'Classificatie-watermerk': 'Воден знак за класификация',
-  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.': 'Показвай диагонален воден знак с TLP и организация на всеки слайд.',
-  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.': 'Задайте TLP ниво — експортът е блокиран от политиката за класификация.',
+  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+      'Показвай диагонален воден знак с TLP и организация на всеки слайд.',
+  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+      'Задайте TLP ниво — експортът е блокиран от политиката за класификация.',
   'Tabel bewerken': 'Редактирай таблицата',
   'Pijltjes · Tab · Esc': 'Стрелки · Tab · Esc',
-  'Tabel bewerken (op tabeldia)': 'Редактиране на таблица (на слайдове с таблици)',
+  'Tabel bewerken (op tabeldia)':
+      'Редактиране на таблица (на слайдове с таблици)',
   'Tabel bewerken (E)': 'Редактирай таблицата (E)',
   'Tab wisselt cel · Esc sluit': 'Tab сменя клетката · Esc затваря',
   'Pen · markeerstift · ⇧E': 'Химикал · маркер · ⇧E',

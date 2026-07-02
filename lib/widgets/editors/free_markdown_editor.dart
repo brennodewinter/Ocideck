@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
+import '../../theme/app_theme.dart';
 
 class FreeMarkdownEditor extends StatefulWidget {
   final Slide slide;
@@ -64,7 +65,7 @@ class _FreeMarkdownEditorState extends State<FreeMarkdownEditor> {
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF64748B),
+              color: AppTheme.slate500,
             ),
           ),
           const SizedBox(height: 6),

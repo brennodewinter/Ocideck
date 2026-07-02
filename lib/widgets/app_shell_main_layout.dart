@@ -734,7 +734,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       value: value,
       child: Row(
         children: [
-          Icon(icon, size: 16, color: const Color(0xFF475569)),
+          Icon(icon, size: 16, color: AppTheme.slate600),
           const SizedBox(width: 10),
           Flexible(child: Text(label, overflow: TextOverflow.ellipsis)),
         ],

@@ -6,7 +6,10 @@ import '../l10n/app_localizations.dart';
 /// emoji and use a bundled image instead: Frisian (the Frisian flag) and
 /// Klingon (the Klingon-Empire emblem).
 Widget languageFlag(String code, {double size = 15}) {
-  const bundled = {'fy': 'assets/images/flag_fy.png', 'tlh': 'assets/images/flag_tlh.png'};
+  const bundled = {
+    'fy': 'assets/images/flag_fy.png',
+    'tlh': 'assets/images/flag_tlh.png',
+  };
   final asset = bundled[code];
   if (asset != null) {
     return Image.asset(

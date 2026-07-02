@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/deck.dart';
 import '../../l10n/app_localizations.dart';
+import '../../theme/app_theme.dart';
 
 /// The editable general metadata of a presentation.
 class PresentationInfo {
@@ -244,7 +245,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
                     ),
                     style: const TextStyle(
                       fontSize: 11,
-                      color: Color(0xFF94A3B8),
+                      color: AppTheme.slate400,
                     ),
                   ),
                 ),
@@ -270,7 +271,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
                   ),
                   style: const TextStyle(
                     fontSize: 11,
-                    color: Color(0xFF94A3B8),
+                    color: AppTheme.slate400,
                   ),
                 ),
               ],

@@ -33,6 +33,7 @@ import '../markdown_notes_editor.dart';
 import 'annotation_overlay.dart';
 import 'audience_window.dart';
 import 'rehearsal_summary.dart';
+import '../../theme/app_theme.dart';
 
 part 'parts/presenter_questions.dart';
 part 'parts/presenter_table.dart';

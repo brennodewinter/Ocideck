@@ -14,6 +14,7 @@ import '../../state/editor_provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/project_path.dart';
 import '../dialogs/image_carousel_picker.dart';
+import '../../theme/app_theme.dart';
 
 /// Shared layout helpers for slide editors.
 
@@ -140,7 +141,7 @@ class _EditorFieldState extends ConsumerState<EditorField> {
           style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: Color(0xFF64748B),
+            color: AppTheme.slate500,
           ),
         ),
         const SizedBox(height: 5),
@@ -250,7 +251,7 @@ class ImageZoomControl extends StatelessWidget {
               child: const Icon(
                 Icons.zoom_out,
                 size: 16,
-                color: Color(0xFF64748B),
+                color: AppTheme.slate500,
               ),
             ),
             Expanded(
@@ -274,7 +275,7 @@ class ImageZoomControl extends StatelessWidget {
               child: const Icon(
                 Icons.zoom_in,
                 size: 16,
-                color: Color(0xFF64748B),
+                color: AppTheme.slate500,
               ),
             ),
             const SizedBox(width: 8),
@@ -284,9 +285,7 @@ class ImageZoomControl extends StatelessWidget {
                 '$_effective%',
                 style: TextStyle(
                   fontSize: 12,
-                  color: zoomed
-                      ? const Color(0xFF2563EB)
-                      : const Color(0xFF64748B),
+                  color: zoomed ? AppTheme.accent : AppTheme.slate500,
                   fontWeight: zoomed ? FontWeight.w600 : FontWeight.normal,
                 ),
                 textAlign: TextAlign.right,
@@ -300,7 +299,7 @@ class ImageZoomControl extends StatelessWidget {
                 onPressed: zoomed ? () => onChanged(100) : null,
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
-                color: const Color(0xFF64748B),
+                color: AppTheme.slate500,
               ),
             ),
           ],
@@ -309,7 +308,7 @@ class ImageZoomControl extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8, bottom: 4),
           child: Text(
             _label(context),
-            style: const TextStyle(fontSize: 10, color: Color(0xFF64748B)),
+            style: const TextStyle(fontSize: 10, color: AppTheme.slate500),
           ),
         ),
       ],
@@ -465,7 +464,7 @@ class ImagePickerBar extends ConsumerWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xFFCBD5E1)),
+            border: Border.all(color: AppTheme.slate300),
             borderRadius: BorderRadius.circular(6),
             color: Colors.white,
           ),
@@ -473,9 +472,7 @@ class ImagePickerBar extends ConsumerWidget {
             imagePath.isEmpty ? l10n.d(label) : imagePath,
             style: TextStyle(
               fontSize: 12,
-              color: imagePath.isEmpty
-                  ? const Color(0xFF64748B)
-                  : const Color(0xFF334155),
+              color: imagePath.isEmpty ? AppTheme.slate500 : AppTheme.slate700,
             ),
             overflow: TextOverflow.ellipsis,
           ),
@@ -504,7 +501,7 @@ class ImagePickerBar extends ConsumerWidget {
                 child: IconButton(
                   onPressed: onPaste,
                   icon: const Icon(Icons.content_paste, size: 18),
-                  color: const Color(0xFF64748B),
+                  color: AppTheme.slate500,
                 ),
               ),
             if (imagePath.isNotEmpty)
@@ -528,7 +525,7 @@ class ImagePickerBar extends ConsumerWidget {
                     }
                   },
                   icon: const Icon(Icons.content_copy_outlined, size: 18),
-                  color: const Color(0xFF64748B),
+                  color: AppTheme.slate500,
                 ),
               ),
             if (onClear != null && imagePath.isNotEmpty)
@@ -537,7 +534,7 @@ class ImagePickerBar extends ConsumerWidget {
                 child: IconButton(
                   onPressed: onClear,
                   icon: const Icon(Icons.clear, size: 18),
-                  color: const Color(0xFF64748B),
+                  color: AppTheme.slate500,
                 ),
               ),
           ],
@@ -665,7 +662,7 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
         ? const Color(0xFFB45309)
         : isWarning
         ? const Color(0xFFB45309)
-        : const Color(0xFF64748B);
+        : AppTheme.slate500;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -681,7 +678,7 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
             prefixIcon: Icon(
               Icons.copyright_outlined,
               size: 16,
-              color: showHint ? hintColor : const Color(0xFF64748B),
+              color: showHint ? hintColor : AppTheme.slate500,
             ),
             isDense: true,
             contentPadding: const EdgeInsets.symmetric(
@@ -697,7 +694,7 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
               borderSide: BorderSide(
                 color: showHint && (isError || isWarning)
                     ? const Color(0xFFF59E0B)
-                    : const Color(0xFFCBD5E1),
+                    : AppTheme.slate300,
               ),
             ),
             focusedBorder: OutlineInputBorder(
@@ -705,12 +702,12 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
               borderSide: BorderSide(
                 color: showHint && (isError || isWarning)
                     ? const Color(0xFFD97706)
-                    : const Color(0xFF64748B),
+                    : AppTheme.slate500,
               ),
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
-              borderSide: const BorderSide(color: Color(0xFFCBD5E1)),
+              borderSide: const BorderSide(color: AppTheme.slate300),
             ),
           ),
           style: const TextStyle(fontSize: 12),
@@ -729,7 +726,7 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
               fontSize: 10,
               color: isError || isWarning
                   ? const Color(0xFFB45309)
-                  : const Color(0xFF64748B),
+                  : AppTheme.slate500,
             ),
           ),
         ],
@@ -752,7 +749,7 @@ class SectionLabel extends StatelessWidget {
         style: const TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w600,
-          color: Color(0xFF64748B),
+          color: AppTheme.slate500,
         ),
       ),
     );

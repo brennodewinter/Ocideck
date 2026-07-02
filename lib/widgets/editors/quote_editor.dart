@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
+import '../../theme/app_theme.dart';
 
 class QuoteEditor extends ConsumerStatefulWidget {
   final Slide slide;
@@ -80,7 +81,7 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor>
           l10n.d(
             'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.',
           ),
-          style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+          style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
         ),
         const SizedBox(height: 8),
         ImagePickerBar(

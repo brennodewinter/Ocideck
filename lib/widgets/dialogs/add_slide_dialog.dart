@@ -102,7 +102,7 @@ class _TypeCard extends StatelessWidget {
           width: 100,
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xFFCBD5E1)),
+            border: Border.all(color: AppTheme.slate300),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(
@@ -146,9 +146,9 @@ class SlideTypePreviewPainter extends CustomPainter {
 
   /// Wireframe palette: dark bars for titles, soft bars for body text.
   static const _canvas = Color(0xFFF8FAFC);
-  static const _ink = Color(0xFF334155);
+  static const _ink = AppTheme.slate700;
   static const _soft = Color(0xFFB6C2D2);
-  static const _fill = Color(0xFFE2E8F0);
+  static const _fill = AppTheme.slate200;
   static const _accent = AppTheme.accent;
 
   const SlideTypePreviewPainter({required this.type});

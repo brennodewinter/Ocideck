@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
+import '../../theme/app_theme.dart';
 
 /// Telt hoe vaak [query] voorkomt in de hele presentatie.
 typedef MatchCounter = int Function(String query, bool caseSensitive);
@@ -171,9 +172,7 @@ class _FindReplaceDialogState extends State<FindReplaceDialog> {
           : '$_matches ${l10n.d('resultaten')}',
       style: TextStyle(
         fontSize: 12,
-        color: _matches == 0
-            ? const Color(0xFF94A3B8)
-            : const Color(0xFF2563EB),
+        color: _matches == 0 ? AppTheme.slate400 : AppTheme.accent,
         fontWeight: FontWeight.w600,
       ),
     );

@@ -12,6 +12,7 @@ import '../../models/settings.dart';
 import '../../models/slide.dart';
 import 'animation_duration_control.dart';
 import '_editor_field.dart';
+import '../../theme/app_theme.dart';
 
 part 'chart_editor_dialogs.dart';
 
@@ -409,7 +410,7 @@ class _ChartEditorState extends State<ChartEditor> {
                 l10n.d(
                   'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.',
                 ),
-                style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+                style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
               ),
             ),
           if (_type == ChartType.radar)
@@ -419,7 +420,7 @@ class _ChartEditorState extends State<ChartEditor> {
                 l10n.d(
                   'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.',
                 ),
-                style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+                style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
               ),
             ),
           if (_supportsBounds)
@@ -481,7 +482,7 @@ class _ChartEditorState extends State<ChartEditor> {
                 const Icon(
                   Icons.auto_awesome,
                   size: 18,
-                  color: Color(0xFF64748B),
+                  color: AppTheme.slate500,
                 ),
                 const SizedBox(width: 8),
                 Expanded(
@@ -584,7 +585,7 @@ class _ChartEditorState extends State<ChartEditor> {
           style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: Color(0xFF64748B),
+            color: AppTheme.slate500,
           ),
         ),
         DropdownButton<ChartType>(
@@ -673,7 +674,7 @@ class _ChartEditorState extends State<ChartEditor> {
                   key: ValueKey('chart-series-column-$c'),
                   width: cellWidth,
                   color: _type == ChartType.pie && c >= 2
-                      ? const Color(0xFFE2E8F0)
+                      ? AppTheme.slate200
                       : null,
                   child: Row(
                     children: [
@@ -813,7 +814,7 @@ class _ChartEditorState extends State<ChartEditor> {
             Container(
               width: cellWidth,
               color: _type == ChartType.pie && c >= 2
-                  ? const Color(0xFFE2E8F0)
+                  ? AppTheme.slate200
                   : null,
               child: _cell(
                 key: ValueKey('v-$_rev-$r-$c'),
@@ -855,7 +856,7 @@ class _ChartEditorState extends State<ChartEditor> {
     style: const TextStyle(fontSize: 12),
     decoration: InputDecoration(
       labelText: label,
-      labelStyle: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+      labelStyle: const TextStyle(fontSize: 12, color: AppTheme.slate500),
       hintText: context.l10n.d('geen'),
       isDense: true,
       contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
@@ -870,7 +871,7 @@ class _ChartEditorState extends State<ChartEditor> {
       style: const TextStyle(
         fontSize: 11,
         fontWeight: FontWeight.w600,
-        color: Color(0xFF64748B),
+        color: AppTheme.slate500,
       ),
     ),
   );
@@ -880,7 +881,7 @@ class _ChartEditorState extends State<ChartEditor> {
       key: ValueKey('chart-sort-${column ?? 'label'}'),
       enabled: enabled,
       tooltip: context.l10n.d('Sorteren'),
-      icon: const Icon(Icons.sort, size: 15, color: Color(0xFF64748B)),
+      icon: const Icon(Icons.sort, size: 15, color: AppTheme.slate500),
       padding: EdgeInsets.zero,
       constraints: const BoxConstraints(minWidth: 24, minHeight: 28),
       itemBuilder: (context) => [
@@ -937,7 +938,7 @@ class _ChartEditorState extends State<ChartEditor> {
         style: TextStyle(
           fontSize: 12,
           fontWeight: bold ? FontWeight.w600 : FontWeight.normal,
-          color: muted ? const Color(0xFF64748B) : null,
+          color: muted ? AppTheme.slate500 : null,
         ),
         decoration: InputDecoration(
           isDense: true,
@@ -963,7 +964,7 @@ class _ChartEditorState extends State<ChartEditor> {
     onPressed: onTap,
     tooltip: tooltip,
     icon: Icon(icon, size: 14),
-    color: const Color(0xFF64748B),
+    color: AppTheme.slate500,
     visualDensity: VisualDensity.compact,
     padding: EdgeInsets.zero,
     constraints: const BoxConstraints(minWidth: 24, minHeight: 24),

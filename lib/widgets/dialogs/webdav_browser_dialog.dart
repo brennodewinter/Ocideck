@@ -145,7 +145,7 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
               _path.isEmpty ? '/' : '/$_path',
               style: const TextStyle(
                 fontSize: 12,
-                color: Color(0xFF475569),
+                color: AppTheme.slate600,
                 fontFamily: 'monospace',
               ),
               overflow: TextOverflow.ellipsis,
@@ -166,7 +166,7 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
       return Center(
         child: Text(
           l10n.d('Deze map is leeg'),
-          style: const TextStyle(color: Color(0xFF94A3B8)),
+          style: const TextStyle(color: AppTheme.slate400),
         ),
       );
     }
@@ -183,9 +183,7 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
                 : entry.isImage
                 ? Icons.image_outlined
                 : Icons.slideshow_outlined,
-            color: entry.isCollection
-                ? const Color(0xFF2563EB)
-                : const Color(0xFF475569),
+            color: entry.isCollection ? AppTheme.accent : AppTheme.slate600,
             size: 20,
           ),
           title: Text(entry.name, style: const TextStyle(fontSize: 13)),
@@ -212,7 +210,7 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.cloud_off, size: 40, color: Color(0xFF94A3B8)),
+            const Icon(Icons.cloud_off, size: 40, color: AppTheme.slate400),
             const SizedBox(height: 12),
             Text(
               isConfig
@@ -223,7 +221,7 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
                       'Kon de map niet laden. Controleer je verbinding en instellingen.',
                     ),
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 13, color: Color(0xFF64748B)),
+              style: const TextStyle(fontSize: 13, color: AppTheme.slate500),
             ),
             const SizedBox(height: 14),
             OutlinedButton.icon(

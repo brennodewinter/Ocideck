@@ -169,7 +169,7 @@ class _CockpitEditorState extends State<CockpitEditor> {
                 '${meters.length}/$cockpitMaxMeters',
                 style: const TextStyle(
                   fontSize: 12,
-                  color: Color(0xFF64748B),
+                  color: AppTheme.slate500,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -200,7 +200,7 @@ class _CockpitEditorState extends State<CockpitEditor> {
               const Icon(
                 Icons.palette_outlined,
                 size: 15,
-                color: Color(0xFF64748B),
+                color: AppTheme.slate500,
               ),
               const SizedBox(width: 6),
               Expanded(
@@ -210,7 +210,7 @@ class _CockpitEditorState extends State<CockpitEditor> {
                   ),
                   style: const TextStyle(
                     fontSize: 11,
-                    color: Color(0xFF64748B),
+                    color: AppTheme.slate500,
                   ),
                 ),
               ),
@@ -275,7 +275,7 @@ class _MeterCard extends StatelessWidget {
     final l10n = context.l10n;
     return DecoratedBox(
       decoration: BoxDecoration(
-        border: Border.all(color: const Color(0xFFCBD5E1)),
+        border: Border.all(color: AppTheme.slate300),
         borderRadius: BorderRadius.circular(8),
         color: Colors.white,
       ),

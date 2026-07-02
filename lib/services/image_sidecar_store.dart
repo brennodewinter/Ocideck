@@ -74,8 +74,7 @@ class ImageSidecarStore {
       final data = jsonDecode(await file.readAsString()) as Map;
       return {
         for (final entry in data.entries)
-          if (entry.value is String)
-            entry.key as String: entry.value as String,
+          if (entry.value is String) entry.key as String: entry.value as String,
       };
     } catch (e) {
       logWarning('$logLabel: read sidecar', e);

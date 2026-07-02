@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
+import '../../theme/app_theme.dart';
 
 class TitleEditor extends ConsumerStatefulWidget {
   final Slide slide;
@@ -85,7 +86,7 @@ class _TitleEditorState extends ConsumerState<TitleEditor>
           l10n.d(
             'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.',
           ),
-          style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+          style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
         ),
         const SizedBox(height: 8),
         ImagePickerBar(

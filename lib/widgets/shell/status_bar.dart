@@ -307,7 +307,7 @@ class _TlpChip extends StatelessWidget {
                     color: level == TlpLevel.none
                         ? Colors.transparent
                         : Color(level.foreground),
-                    border: Border.all(color: const Color(0xFF94A3B8)),
+                    border: Border.all(color: AppTheme.slate400),
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),
@@ -316,7 +316,7 @@ class _TlpChip extends StatelessWidget {
                 if (level == tlp) ...[
                   const SizedBox(width: 12),
                   const Spacer(),
-                  const Icon(Icons.check, size: 16, color: Color(0xFF475569)),
+                  const Icon(Icons.check, size: 16, color: AppTheme.slate600),
                 ],
               ],
             ),

@@ -4,6 +4,7 @@ import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_localization.dart';
 import '../../models/markdown_validation.dart';
 import '../../models/slide_quality.dart';
+import '../../theme/app_theme.dart';
 
 /// Shows slide quality issues grouped by severity with counts per group.
 Future<void> showSlideQualityDetailsDialog(
@@ -29,7 +30,7 @@ Future<void> showSlideQualityDetailsDialog(
                   formatSlideQualityCountSummary(l10n, result),
                   style: const TextStyle(
                     fontSize: 13,
-                    color: Color(0xFF334155),
+                    color: AppTheme.slate700,
                   ),
                 ),
                 const SizedBox(height: 14),

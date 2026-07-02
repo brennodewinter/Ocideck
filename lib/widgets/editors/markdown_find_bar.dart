@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../theme/app_theme.dart';
 
 /// In-editor find (and optional replace) bar for markdown mode.
 class MarkdownFindBar extends StatefulWidget {
@@ -121,7 +122,7 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
         l10n.d('Geen resultaten'),
         style: const TextStyle(
           fontSize: 11,
-          color: Color(0xFF94A3B8),
+          color: AppTheme.slate400,
           fontWeight: FontWeight.w600,
         ),
       );
@@ -131,7 +132,7 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
       '$current / ${widget.matchCount}',
       style: const TextStyle(
         fontSize: 11,
-        color: Color(0xFF2563EB),
+        color: AppTheme.accent,
         fontWeight: FontWeight.w600,
       ),
     );

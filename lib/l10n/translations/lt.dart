@@ -47,7 +47,8 @@ const _stringsLt = {
   'settingsLogo': 'Logotipas',
   'language': 'Kalba',
   'applicationLanguage': 'Programos kalba',
-  'languageHelp': 'Sąsajos kalba pasikeičia iškart. Prezentacijos turinys nekinta.',
+  'languageHelp':
+      'Sąsajos kalba pasikeičia iškart. Prezentacijos turinys nekinta.',
   'presentationFolder': 'Prezentacijų aplankas',
   'exportFolderSetting': 'Eksportų aplankas',
   'notSet': 'Nenustatyta',
@@ -55,17 +56,20 @@ const _stringsLt = {
   'choose': 'Pasirinkti',
   'removeDefaultFolder': 'Pašalinti numatytąjį aplanką',
   'removeExportFolder': 'Pašalinti eksportų aplanką',
-  'exportFolderHelp': 'Visi eksportai (PDF/PPTX) įrašomi čia. Jei nenustatyta, eksportai įrašomi šalia prezentacijos failo.',
+  'exportFolderHelp':
+      'Visi eksportai (PDF/PPTX) įrašomi čia. Jei nenustatyta, eksportai įrašomi šalia prezentacijos failo.',
   'cancel': 'Atsisakyti',
   'close': 'Užverti',
   'saveSettings': 'Įrašyti',
   'exportDialogTitle': 'Eksportuoti',
   'exportAgain': 'Eksportuoti dar kartą',
-  'exportIntro': 'Eksporte naudojamas tikslus redaktoriaus rodinys, įskaitant jūsų stiliaus profilį.',
+  'exportIntro':
+      'Eksporte naudojamas tikslus redaktoriaus rodinys, įskaitant jūsų stiliaus profilį.',
   'imageQualityPdf': 'Paveikslėlių kokybė (PDF)',
   'normal': 'Normali',
   'compressed': 'Suglaudinta',
-  'compressedHelp': 'Mažesnės raiškos JPEG, skirtas dalomajai medžiagai, gerokai mažesnis failas (įrašomas atskirai kaip „-compact“).',
+  'compressedHelp':
+      'Mažesnės raiškos JPEG, skirtas dalomajai medžiagai, gerokai mažesnis failas (įrašomas atskirai kaip „-compact“).',
   'losslessHelp': 'Be nuostolių, visos raiškos paveikslėliai.',
   'exportAsPdf': 'Eksportuoti kaip PDF',
   'exportAsPptx': 'Eksportuoti kaip PPTX',
@@ -87,26 +91,39 @@ const _dutchSourceLt = {
   'Niet opslaan': 'Neišsaugoti',
   'Niet-opgeslagen werk herstellen?': 'Atkurti neišsaugotą darbą?',
   'Niet-opgeslagen wijzigingen': 'Neišsaugoti pakeitimai',
-  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'Rasta ankstesnės sesijos pateiktis su neišsaugotais pakeitimais:',
+  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Rasta ankstesnės sesijos pateiktis su neišsaugotais pakeitimais:',
   'Er zijn': 'Yra',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'pateiktys su neišsaugotais pakeitimais iš ankstesnės sesijos:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.': 'Yra pateikčių su neišsaugotais pakeitimais. Išsaugokite jas prieš uždarydami programą.',
-  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.': 'Ši pateiktis turi neišsaugotų pakeitimų. Išsaugokite ją prieš uždarydami skirtuką.',
+  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'pateiktys su neišsaugotais pakeitimais iš ankstesnės sesijos:',
+  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Yra pateikčių su neišsaugotais pakeitimais. Išsaugokite jas prieš uždarydami programą.',
+  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+      'Ši pateiktis turi neišsaugotų pakeitimų. Išsaugokite ją prieš uždarydami skirtuką.',
   'Importeren via URL': 'Importuoti iš URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.': 'Įklijuokite nuorodą į .ocideck paketą arba Marp Markdown failą.',
+  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+      'Įklijuokite nuorodą į .ocideck paketą arba Marp Markdown failą.',
   'Ophalen': 'Gauti',
   'Laat los om toe te voegen': 'Paleiskite, kad pridėtumėte',
-  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen': 'Paveikslėliai → naujos skaidrės · .md / .ocideck → atidaryti',
-  'Open eerst een presentatie om afbeeldingen toe te voegen.': 'Prieš pridėdami paveikslėlius atidarykite pateiktį.',
-  'Alle slides zijn overgeslagen — niets om te tonen.': 'Visos skaidrės praleistos — nėra ką rodyti.',
-  'Alle slides zijn overgeslagen — niets om te exporteren.': 'Visos skaidrės praleistos — nėra ką eksportuoti.',
+  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+      'Paveikslėliai → naujos skaidrės · .md / .ocideck → atidaryti',
+  'Open eerst een presentatie om afbeeldingen toe te voegen.':
+      'Prieš pridėdami paveikslėlius atidarykite pateiktį.',
+  'Alle slides zijn overgeslagen — niets om te tonen.':
+      'Visos skaidrės praleistos — nėra ką rodyti.',
+  'Alle slides zijn overgeslagen — niets om te exporteren.':
+      'Visos skaidrės praleistos — nėra ką eksportuoti.',
   'Kon dit pakket niet importeren.': 'Nepavyko importuoti šio paketo.',
   'Pakket geëxporteerd naar:': 'Paketas eksportuotas į:',
   'Export mislukt:': 'Eksportuoti nepavyko:',
-  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.': 'Ši skaidrė negali priimti paveikslėlio. Pirmiausia pasirinkite paveikslėlio skaidrę.',
-  'Kon van deze URL geen presentatie ophalen.': 'Nepavyko gauti pateikties iš šio URL.',
-  'Sleep om de slide-preview breder of smaller te maken': 'Vilkite, kad skaidrės peržiūra būtų platesnė arba siauresnė',
-  'TLP-classificatie (Traffic Light Protocol)': 'TLP klasifikacija (Traffic Light Protocol)',
+  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+      'Ši skaidrė negali priimti paveikslėlio. Pirmiausia pasirinkite paveikslėlio skaidrę.',
+  'Kon van deze URL geen presentatie ophalen.':
+      'Nepavyko gauti pateikties iš šio URL.',
+  'Sleep om de slide-preview breder of smaller te maken':
+      'Vilkite, kad skaidrės peržiūra būtų platesnė arba siauresnė',
+  'TLP-classificatie (Traffic Light Protocol)':
+      'TLP klasifikacija (Traffic Light Protocol)',
   'Titelpagina': 'Titulinė skaidrė',
   'Tussentitel': 'Skyriaus antraštė',
   'Alleen Bullets': 'Tik ženklai',
@@ -119,8 +136,10 @@ const _dutchSourceLt = {
   'Tabel': 'Lentelė',
   'Vrije Markdown': 'Laisvas Markdown',
   'Overgeslagen': 'Praleista',
-  'Weer tonen bij presenteren/exporteren': 'Vėl rodyti pristatant / eksportuojant',
-  'Overslaan bij presenteren/exporteren': 'Praleisti pristatant / eksportuojant',
+  'Weer tonen bij presenteren/exporteren':
+      'Vėl rodyti pristatant / eksportuojant',
+  'Overslaan bij presenteren/exporteren':
+      'Praleisti pristatant / eksportuojant',
   'Kopiëren': 'Kopijuoti',
   'Kopieer als afbeelding': 'Kopijuoti kaip paveikslėlį',
   'Dupliceren': 'Dubliuoti',
@@ -141,12 +160,14 @@ const _dutchSourceLt = {
   'Naam van de auteur': 'Autoriaus vardas',
   'Achtergrondafbeelding': 'Fono paveikslėlis',
   'Achtergrondafbeelding (optioneel)': 'Fono paveikslėlis (nebūtinas)',
-  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.': 'Paveikslėlis rodomas visame ekrane kaip fonas su sumažintu nepermatomumu, kad tekstas liktų įskaitomas.',
+  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+      'Paveikslėlis rodomas visame ekrane kaip fonas su sumažintu nepermatomumu, kad tekstas liktų įskaitomas.',
   'Zoom achtergrond': 'Fono mastelis',
   'Zoom afbeelding': 'Paveikslėlio mastelis',
   'Afbeelding (rechts)': 'Paveikslėlis (dešinėje)',
   'Bullets (links)': 'Ženklai (kairėje)',
-  'Breedte afbeeldingspaneel (rechts)': 'Paveikslėlio srities plotis (dešinėje)',
+  'Breedte afbeeldingspaneel (rechts)':
+      'Paveikslėlio srities plotis (dešinėje)',
   'Linker afbeelding': 'Kairysis paveikslėlis',
   'Rechter afbeelding': 'Dešinysis paveikslėlis',
   'Verdeling (links / rechts)': 'Padalijimas (kairė / dešinė)',
@@ -162,11 +183,13 @@ const _dutchSourceLt = {
   'Van computer…': 'Iš kompiuterio…',
   'Afbeelding plakken uit klembord': 'Įklijuoti paveikslėlį iš iškarpinės',
   'Kopieer afbeelding naar klembord': 'Kopijuoti paveikslėlį į iškarpinę',
-  'Afbeelding gekopieerd naar klembord.': 'Paveikslėlis nukopijuotas į iškarpinę.',
+  'Afbeelding gekopieerd naar klembord.':
+      'Paveikslėlis nukopijuotas į iškarpinę.',
   'Kopiëren naar klembord mislukt.': 'Nepavyko nukopijuoti į iškarpinę.',
   'Verwijder afbeelding': 'Pašalinti paveikslėlį',
   'Geen afbeelding gekozen': 'Paveikslėlis nepasirinktas',
-  'Caption / bronvermelding (bijv. © Naam Fotograaf)': 'Antraštė / šaltinis (pvz. © Fotografo vardas)',
+  'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+      'Antraštė / šaltinis (pvz. © Fotografo vardas)',
   'Caption / bronvermelding': 'Antraštė / šaltinis',
   'Beschrijving (doorzoekbaar)': 'Aprašymas (galima ieškoti)',
   'Markdown inhoud': 'Markdown turinys',
@@ -177,7 +200,8 @@ const _dutchSourceLt = {
   'verwijderen': 'pašalinti',
   'Koprij verwijderen': 'Pašalinti antraštės eilutę',
   'Rij verwijderen': 'Pašalinti eilutę',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.': 'Patarimas: langelyje paspauskite Enter, kad būtų nauja eilutė.',
+  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+      'Patarimas: langelyje paspauskite Enter, kad būtų nauja eilutė.',
   'Presentatie openen': 'Atidaryti pateiktį',
   'Opslaan als': 'Išsaugoti kaip',
   'Pakket importeren': 'Importuoti paketą',
@@ -190,11 +214,14 @@ const _dutchSourceLt = {
   'Kies een video': 'Pasirinkite vaizdo įrašą',
   'Kies een audiobestand': 'Pasirinkite garso failą',
   'Bladeren…': 'Naršyti…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…': 'Ieškoti pagal failo pavadinimą, pavadinimą ar tekstą skaidrėse…',
+  'Zoek op bestandsnaam, titel of tekst in de slides…':
+      'Ieškoti pagal failo pavadinimą, pavadinimą ar tekstą skaidrėse…',
   'Geen map gekozen': 'Aplankas nepasirinktas',
   'Map kiezen': 'Pasirinkti aplanką',
-  'Kies een map met presentaties om te beginnen.': 'Norėdami pradėti pasirinkite aplanką su pateiktimis.',
-  'Geen presentaties (.md) in deze map gevonden.': 'Šiame aplanke nerasta pateikčių (.md).',
+  'Kies een map met presentaties om te beginnen.':
+      'Norėdami pradėti pasirinkite aplanką su pateiktimis.',
+  'Geen presentaties (.md) in deze map gevonden.':
+      'Šiame aplanke nerasta pateikčių (.md).',
   'Geen presentaties gevonden voor': 'Nerasta pateikčių pagal',
   'meer treffer(s)': 'dar atitikmenų',
   'Slide zoeken': 'Rasti skaidrę',
@@ -205,11 +232,15 @@ const _dutchSourceLt = {
   'Toegevoegd': 'Pridėta',
   'Selecteer alles': 'Pažymėti viską',
   'Deselecteer alles': 'Atžymėti viską',
-  'Zoek slides op tekst, titel, onderschrift, pad…': 'Ieškoti skaidrių pagal tekstą, pavadinimą, antraštę, kelią…',
-  'Zoek op presentatie, titel of tekst…': 'Ieškoti pagal pateiktį, pavadinimą ar tekstą…',
-  'Geen andere presentaties (.md) in deze map gevonden.': 'Šiame aplanke nerasta kitų pateikčių (.md).',
+  'Zoek slides op tekst, titel, onderschrift, pad…':
+      'Ieškoti skaidrių pagal tekstą, pavadinimą, antraštę, kelią…',
+  'Zoek op presentatie, titel of tekst…':
+      'Ieškoti pagal pateiktį, pavadinimą ar tekstą…',
+  'Geen andere presentaties (.md) in deze map gevonden.':
+      'Šiame aplanke nerasta kitų pateikčių (.md).',
   'Geen slides gevonden voor': 'Nerasta skaidrių pagal',
-  'Typ zoektermen om slides uit al je presentaties te vinden.': 'Įveskite paieškos terminus, kad rastumėte skaidres iš visų pateikčių.',
+  'Typ zoektermen om slides uit al je presentaties te vinden.':
+      'Įveskite paieškos terminus, kad rastumėte skaidres iš visų pateikčių.',
   'toegevoegd': 'pridėta',
   'Eerste': 'Pirmi',
   'treffers — verfijn je zoekopdracht': 'atitikmenų — patikslinkite paiešką',
@@ -247,17 +278,21 @@ const _dutchSourceLt = {
   'Beschrijving': 'Aprašymas',
   'Korte omschrijving van de presentatie': 'Trumpas pateikties aprašymas',
   'Trefwoorden': 'Raktažodžiai',
-  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026': 'Atskirti kableliais, pvz. ketvirtinis, skaičiai, 2026',
-  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.': 'Šie duomenys saugomi Markdown faile ir yra randami atidarant.',
+  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026':
+      'Atskirti kableliais, pvz. ketvirtinis, skaičiai, 2026',
+  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+      'Šie duomenys saugomi Markdown faile ir yra randami atidarant.',
   'App-thema': 'Programos tema',
   'Look-and-feel': 'Išvaizda',
   'Kopie maken en aanpassen': 'Sukurti ir pritaikyti kopiją',
   'Thema verwijderen': 'Ištrinti temą',
   'Themanaam': 'Temos pavadinimas',
-  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.': 'Tai integruota tema. Norėdami keisti spalvas, sukurkite kopiją.',
+  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+      'Tai integruota tema. Norėdami keisti spalvas, sukurkite kopiją.',
   'Donkere interface': 'Tamsi sąsaja',
   'Lettertype interface': 'Sąsajos šriftas',
-  'Past contrast, invoervelden en systeemcomponenten aan.': 'Koreguoja kontrastą, įvesties laukus ir sistemos komponentus.',
+  'Past contrast, invoervelden en systeemcomponenten aan.':
+      'Koreguoja kontrastą, įvesties laukus ir sistemos komponentus.',
   'Hoofdkleur en bovenbalk': 'Pagrindinė spalva ir viršutinė juosta',
   'Knoppen en accenten': 'Mygtukai ir akcentai',
   'Schermachtergrond': 'Ekrano fonas',
@@ -293,15 +328,19 @@ const _dutchSourceLt = {
   'Linksonder': 'Apačioje kairėje',
   'Rechtsonder': 'Apačioje dešinėje',
   'Footertekst': 'Poraštės tekstas',
-  'bijv. Vertrouwelijk · {title} · {date}': 'pvz. Konfidencialu · {title} · {date}',
+  'bijv. Vertrouwelijk · {title} · {date}':
+      'pvz. Konfidencialu · {title} · {date}',
   'Footerpositie': 'Poraštės padėtis',
-  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.': 'Žymenys: {page}, {total}, {date}, {title}. Poraštė rodoma visose skaidrėse, išskyrus titulines ir skyrių skaidres, nebent išjungsite ją kiekvienoje skaidrėje.',
+  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+      'Žymenys: {page}, {total}, {date}, {title}. Poraštė rodoma visose skaidrėse, išskyrus titulines ir skyrių skaidres, nebent išjungsite ją kiekvienoje skaidrėje.',
   'Links': 'Kairėje',
   'Midden': 'Centre',
   'Rechts': 'Dešinėje',
-  'Paginanummers tonen (rechtsonder)': 'Rodyti puslapių numerius (apačioje dešinėje)',
+  'Paginanummers tonen (rechtsonder)':
+      'Rodyti puslapių numerius (apačioje dešinėje)',
   'Voorvertoning': 'Peržiūra',
-  'De snelle bruine vos springt over de luie hond.': 'Greita ruda lapė peršoka per tingų šunį.',
+  'De snelle bruine vos springt over de luie hond.':
+      'Greita ruda lapė peršoka per tingų šunį.',
   'Preview': 'Peržiūra',
   'Uitzoomen': 'Mažinti mastelį',
   'Uitgezoomd': 'Sumažintas mastelis',
@@ -309,9 +348,12 @@ const _dutchSourceLt = {
   'Ingezoomd': 'Padidintas mastelis',
   'van de foto zichtbaar': 'nuotraukos matoma',
   'Volledig zichtbaar (100%)': 'Visiškai matoma (100%)',
-  'Uitzoomen (meer van de foto zichtbaar)': 'Mažinti mastelį (matoma daugiau nuotraukos)',
-  'Inzoomen (minder van de foto zichtbaar)': 'Didinti mastelį (matoma mažiau nuotraukos)',
-  'Terugzetten (volledige afbeelding zichtbaar)': 'Atstatyti (matomas visas paveikslėlis)',
+  'Uitzoomen (meer van de foto zichtbaar)':
+      'Mažinti mastelį (matoma daugiau nuotraukos)',
+  'Inzoomen (minder van de foto zichtbaar)':
+      'Didinti mastelį (matoma mažiau nuotraukos)',
+  'Terugzetten (volledige afbeelding zichtbaar)':
+      'Atstatyti (matomas visas paveikslėlis)',
   'Zoom resetten': 'Atstatyti mastelį',
   'Preview inklappen': 'Sutraukti peržiūrą',
   'Preview uitklappen': 'Išplėsti peržiūrą',
@@ -331,14 +373,17 @@ const _dutchSourceLt = {
   'Sprekersnotities...': 'Pranešėjo pastabos...',
   'Sprekersnotities': 'Pranešėjo pastabos',
   'Notities voor tijdens het presenteren': 'Pastabos pristatymo metu',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown': 'Markdown režimas — redaguokite visą pateiktį kaip Marp Markdown',
+  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+      'Markdown režimas — redaguokite visą pateiktį kaip Marp Markdown',
   'Toepassen': 'Taikyti',
-  'Markdown kon niet worden verwerkt. Controleer de syntax.': 'Nepavyko apdoroti Markdown. Patikrinkite sintaksę.',
+  'Markdown kon niet worden verwerkt. Controleer de syntax.':
+      'Nepavyko apdoroti Markdown. Patikrinkite sintaksę.',
   'Controleren': 'Tikrinti sintaksę',
   'Syntaxproblemen gevonden': 'Rasta sintaksės problemų',
   'De markdown bevat': 'Markdown turi',
   'fout(en) en': 'klaidą (-as) ir',
-  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.': 'įspėjimą (-us). Dėl to skaidrės gali būti nuskaitytos neteisingai.',
+  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+      'įspėjimą (-us). Dėl to skaidrės gali būti nuskaitytos neteisingai.',
   'Terug naar editor': 'Atgal į redaktorių',
   'Toch toepassen': 'Vis tiek taikyti',
   'Geen syntaxproblemen gevonden': 'Sintaksės problemų nerasta',
@@ -352,22 +397,30 @@ const _dutchSourceLt = {
   'Coverflow': 'Coverflow',
   'Geen afbeeldingen gevonden': 'Paveikslėlių nerasta',
   'Geen resultaten voor': 'Nėra rezultatų pagal',
-  'Pas je zoekterm aan of voeg een beschrijving toe.': 'Pakeiskite paieškos terminą arba pridėkite aprašymą.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.': 'Naudokite „Naršyti“, kad pasirinktumėte paveikslėlius iš bet kurios vietos.',
+  'Pas je zoekterm aan of voeg een beschrijving toe.':
+      'Pakeiskite paieškos terminą arba pridėkite aprašymą.',
+  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+      'Naudokite „Naršyti“, kad pasirinktumėte paveikslėlius iš bet kurios vietos.',
   'Selecteer een\nafbeelding': 'Pasirinkite\npaveikslėlį',
   'Gekopieerd': 'Nukopijuota',
   'Afbeelding verwijderen?': 'Ištrinti paveikslėlį?',
-  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.': 'Failas bus visam laikui ištrintas iš disko. Šio veiksmo negalima atšaukti.',
-  'Let op: deze afbeelding wordt nog gebruikt in': 'Dėmesio: šis paveikslėlis vis dar naudojamas',
-  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.': 'Ištrynus tos skaidrės bus ištuštintos. To negalima atšaukti.',
-  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert': '↑↓←→ naršyti  ·  Enter pasirinkti  ·  Dvigubas spustelėjimas pažymi',
+  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+      'Failas bus visam laikui ištrintas iš disko. Šio veiksmo negalima atšaukti.',
+  'Let op: deze afbeelding wordt nog gebruikt in':
+      'Dėmesio: šis paveikslėlis vis dar naudojamas',
+  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+      'Ištrynus tos skaidrės bus ištuštintos. To negalima atšaukti.',
+  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+      '↑↓←→ naršyti  ·  Enter pasirinkti  ·  Dvigubas spustelėjimas pažymi',
   'Sneltoetsen': 'Spartieji klavišai',
   'Toetsenlegenda': 'Klavišų legenda',
   'spatie': 'tarpas',
   'klik': 'spustelėti',
   'cijfers': 'skaičiai',
-  'Klik of druk op ? / H / Esc om te sluiten': 'Spustelėkite arba paspauskite ? / H / Esc, kad uždarytumėte',
-  'Klik of druk op H / Esc om te sluiten': 'Spustelėkite arba paspauskite H / Esc, kad uždarytumėte',
+  'Klik of druk op ? / H / Esc om te sluiten':
+      'Spustelėkite arba paspauskite ? / H / Esc, kad uždarytumėte',
+  'Klik of druk op H / Esc om te sluiten':
+      'Spustelėkite arba paspauskite H / Esc, kad uždarytumėte',
   'Naar slidenummer': 'Pereiti prie skaidrės numerio',
   'Eerste · laatste slide': 'Pirma · paskutinė skaidrė',
   'Slide-overzicht': 'Skaidrių apžvalga',
@@ -399,24 +452,33 @@ const _dutchSourceLt = {
   'Geen notities voor deze slide.': 'Šiai skaidrei pastabų nėra.',
   'Mijn notities': 'Mano pastabos',
   'Gebruikersnotities': 'Naudotojo pastabos',
-  'Gebruikersnotities voor deze slide...': 'Naudotojo pastabos šiai skaidrei...',
+  'Gebruikersnotities voor deze slide...':
+      'Naudotojo pastabos šiai skaidrei...',
   'Notities weggooien': 'Atmesti pastabas',
-  'Notities voor de ontvanger tijdens een cursus': 'Pastabos gavėjui kurso metu',
-  'Schakel naar Markdown-modus om notities toe te voegen.': 'Norėdami pridėti pastabų, perjunkite į Markdown režimą.',
+  'Notities voor de ontvanger tijdens een cursus':
+      'Pastabos gavėjui kurso metu',
+  'Schakel naar Markdown-modus om notities toe te voegen.':
+      'Norėdami pridėti pastabų, perjunkite į Markdown režimą.',
   'Mijn notities aan/uit': 'Įjungti/išjungti mano pastabas',
   'Wissel scherm (S)': 'Perjungti ekraną (S)',
   'Kon niet van scherm wisselen.': 'Nepavyko perjungti ekranų.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P auditorija · G apžvalga · B/W juoda/balta · R laikas · Esc stop',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P auditorija · S ekranas · G apžvalga · B/W juoda/balta · R laikas · Esc stop',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P auditorija · H legenda · G apžvalga · B/W juoda/balta · R laikas · Esc stop',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P auditorija · H legenda · S ekranas · G apžvalga · B/W juoda/balta · R laikas · Esc stop',
-  'pijltjes + Enter of klik om te springen': 'rodyklės + Enter arba spustelėkite, kad peršoktumėte',
+  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P auditorija · G apžvalga · B/W juoda/balta · R laikas · Esc stop',
+  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P auditorija · S ekranas · G apžvalga · B/W juoda/balta · R laikas · Esc stop',
+  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P auditorija · H legenda · G apžvalga · B/W juoda/balta · R laikas · Esc stop',
+  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P auditorija · H legenda · S ekranas · G apžvalga · B/W juoda/balta · R laikas · Esc stop',
+  'pijltjes + Enter of klik om te springen':
+      'rodyklės + Enter arba spustelėkite, kad peršoktumėte',
   'Afsluiten (Escape)': 'Išeiti (Escape)',
   'Sluiten (G of Esc)': 'Uždaryti (G arba Esc)',
   'Slide renderen…': 'Atvaizduojama skaidrė…',
   'Slide gekopieerd naar klembord.': 'Skaidrė nukopijuota į iškarpinę.',
   'Kopiëren mislukt.': 'Kopijuoti nepavyko.',
-  'Geen ander deck open. Open eerst een ander tabblad.': 'Nėra atverto kito rinkinio. Pirmiausia atverkite kitą kortelę.',
+  'Geen ander deck open. Open eerst een ander tabblad.':
+      'Nėra atverto kito rinkinio. Pirmiausia atverkite kitą kortelę.',
   '1 slide kopiëren naar…': 'Kopijuoti 1 skaidrę į…',
   'slides kopiëren naar…': 'skaidres kopijuoti į…',
   'slide(s) gekopieerd naar': 'skaidrė (-ės) nukopijuota (-os) į',
@@ -431,11 +493,13 @@ const _dutchSourceLt = {
   'Tips': 'Patarimai',
   'Waarschuwingen': 'Įspėjimai',
   'Fouten': 'Klaidos',
-  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Patarimas: pridėkite alt. tekstą / antraštę, kad būtų prieinamiau',
+  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Patarimas: pridėkite alt. tekstą / antraštę, kad būtų prieinamiau',
   'Zoek in slides…': 'Ieškoti skaidrėse…',
   'Geen slides met': 'Nėra skaidrių su',
   'SLIDES': 'SKAIDRĖS',
-  'Geen afbeelding op het klembord gevonden.': 'Iškarpinėje paveikslėlio nerasta.',
+  'Geen afbeelding op het klembord gevonden.':
+      'Iškarpinėje paveikslėlio nerasta.',
   'Afbeelding plakken': 'Įklijuoti paveikslėlį',
   'Slide toevoegen': 'Pridėti skaidrę',
   'Slide plakken': 'Įklijuoti skaidrę',
@@ -446,60 +510,82 @@ const _dutchSourceLt = {
   'Kopiëren naar ander deck': 'Kopijuoti į kitą rinkinį',
   'Weer tonen': 'Rodyti vėl',
   'Selectie opheffen': 'Panaikinti pasirinkimą',
-  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.': 'Sutinku su EUPL 1.2 licencija ir perskaičiau, kokius duomenis saugo OciDeck.',
-  'Je keuze wordt de standaardtaal van de app.': 'Jūsų pasirinkimas taps numatytąja programos kalba.',
+  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
+      'Sutinku su EUPL 1.2 licencija ir perskaičiau, kokius duomenis saugo OciDeck.',
+  'Je keuze wordt de standaardtaal van de app.':
+      'Jūsų pasirinkimas taps numatytąja programos kalba.',
   'Lees de volledige licentie': 'Skaityti visą licenciją',
-  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.': 'OciDeck yra laisva programinė įranga pagal EUPL 1.2 licenciją. Prieš pradedant prašome priimti licenciją. Toliau taip pat perskaitysite, kokius duomenis OciDeck saugo šiame įrenginyje ir kada kas nors išeina iš jūsų įrenginio.',
-  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.': 'OciDeck nerenka jokios statistikos ir savaime nieko neišsiunčia. Pagal numatymą viskas lieka šiame įrenginyje. Duomenys išeina iš šio įrenginio tik jums pasirinkus:\n\n•  Nextcloud/WebDAV: prisijungus prie serverio, jūsų prisijungimo vardas ir slaptažodis išsaugomi (slaptažodis saugiai jūsų sistemos raktinėje) ir jūsų atveriami ar išsaugomi pristatymai siunčiami į tą serverį.\n•  Atvėrimas per URL: OciDeck gauna failą iš jūsų įvesto adreso.\n•  Internetinė medija (pagal numatymą išjungta): įjungus OciDeck įkelia paveikslėlius ir vaizdo įrašus iš jūsų skaidrėse esančių adresų.\n•  Išorinės nuorodos (pvz., internetinė licencija) atsidaro jūsų naršyklėje.',
-  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.': 'OciDeck teikiamas pagal Europos Sąjungos viešąją licenciją v1.2. Sutikdami priimate šią licenciją. Galite naudoti, kopijuoti, keisti ir platinti OciDeck pagal EUPL 1.2 sąlygas.',
-  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.': 'Kad veiktų ir jūsų darbas nebūtų prarastas, OciDeck saugo duomenis vietoje šiame įrenginyje:\n\n•  Jūsų nustatymus ir parinktis (kalbą, aplankus, stiliaus ir rodymo profilius, naujausius failus).\n•  Jūsų pristatymo medžiagą: išsaugomus pristatymus, automatines atkūrimo kopijas ir priedus, pvz., paveikslėlių aprašymus.\n•  Šį sutikimo pasirinkimą.\n\nGalite tai pašalinti ištrindami failus arba atstatydami nustatymus.',
-  'Volledige licentie online (23 officiële taalversies)': 'Visa licencija internete (23 oficialios kalbų versijos)',
+  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
+      'OciDeck yra laisva programinė įranga pagal EUPL 1.2 licenciją. Prieš pradedant prašome priimti licenciją. Toliau taip pat perskaitysite, kokius duomenis OciDeck saugo šiame įrenginyje ir kada kas nors išeina iš jūsų įrenginio.',
+  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.':
+      'OciDeck nerenka jokios statistikos ir savaime nieko neišsiunčia. Pagal numatymą viskas lieka šiame įrenginyje. Duomenys išeina iš šio įrenginio tik jums pasirinkus:\n\n•  Nextcloud/WebDAV: prisijungus prie serverio, jūsų prisijungimo vardas ir slaptažodis išsaugomi (slaptažodis saugiai jūsų sistemos raktinėje) ir jūsų atveriami ar išsaugomi pristatymai siunčiami į tą serverį.\n•  Atvėrimas per URL: OciDeck gauna failą iš jūsų įvesto adreso.\n•  Internetinė medija (pagal numatymą išjungta): įjungus OciDeck įkelia paveikslėlius ir vaizdo įrašus iš jūsų skaidrėse esančių adresų.\n•  Išorinės nuorodos (pvz., internetinė licencija) atsidaro jūsų naršyklėje.',
+  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.':
+      'OciDeck teikiamas pagal Europos Sąjungos viešąją licenciją v1.2. Sutikdami priimate šią licenciją. Galite naudoti, kopijuoti, keisti ir platinti OciDeck pagal EUPL 1.2 sąlygas.',
+  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.':
+      'Kad veiktų ir jūsų darbas nebūtų prarastas, OciDeck saugo duomenis vietoje šiame įrenginyje:\n\n•  Jūsų nustatymus ir parinktis (kalbą, aplankus, stiliaus ir rodymo profilius, naujausius failus).\n•  Jūsų pristatymo medžiagą: išsaugomus pristatymus, automatines atkūrimo kopijas ir priedus, pvz., paveikslėlių aprašymus.\n•  Šį sutikimo pasirinkimą.\n\nGalite tai pašalinti ištrindami failus arba atstatydami nustatymus.',
+  'Volledige licentie online (23 officiële taalversies)':
+      'Visa licencija internete (23 oficialios kalbų versijos)',
   'Wat OciDeck op dit apparaat bewaart': 'Ką OciDeck saugo šiame įrenginyje',
   'Wat je apparaat verlaat': 'Kas išeina iš jūsų įrenginio',
-  'Vul server-URL en gebruikersnaam in': 'Įveskite serverio URL ir naudotojo vardą',
+  'Vul server-URL en gebruikersnaam in':
+      'Įveskite serverio URL ir naudotojo vardą',
   'Verbinding mislukt': 'Prisijungti nepavyko',
-  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord': 'Prisijungimas nepavyko — patikrinkite naudotojo vardą ir slaptažodį',
-  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.': 'Serveris yra privačiu adresu. Pažymėkite „Patikimas vidinis serveris“, kad leistumėte prisijungti.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord':
+      'Prisijungimas nepavyko — patikrinkite naudotojo vardą ir slaptažodį',
+  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.':
+      'Serveris yra privačiu adresu. Pažymėkite „Patikimas vidinis serveris“, kad leistumėte prisijungti.',
   'Map niet gevonden op de server': 'Aplankas serveryje nerastas',
   'Ongeldige server-URL': 'Neteisingas serverio URL',
-  'Het antwoord van de server was te groot': 'Serverio atsakymas buvo per didelis',
+  'Het antwoord van de server was te groot':
+      'Serverio atsakymas buvo per didelis',
   'Nextcloud': 'Nextcloud',
   'Nextcloud-bron (WebDAV)': 'Nextcloud šaltinis (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.': 'Atverkite ir išsaugokite pristatymus jūsų Nextcloud aplanke. Slaptažodis saugomas šifruotas raktinėje, o ne kartu su kitais nustatymais.',
+  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Atverkite ir išsaugokite pristatymus jūsų Nextcloud aplanke. Slaptažodis saugomas šifruotas raktinėje, o ne kartu su kitais nustatymais.',
   'Server-URL': 'Serverio URL',
   'Gebruikersnaam': 'Naudotojo vardas',
   'App-wachtwoord': 'Programos slaptažodis',
-  'Maak hiervoor een app-wachtwoord aan in Nextcloud': 'Tam sukurkite programos slaptažodį Nextcloud',
+  'Maak hiervoor een app-wachtwoord aan in Nextcloud':
+      'Tam sukurkite programos slaptažodį Nextcloud',
   'Submap (optioneel)': 'Poaplankis (nebūtina)',
   'Vertrouwde interne server': 'Patikimas vidinis serveris',
-  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.': 'Reikalingas, kai serveris veikia privačiame ar namų tinkle (LAN). Leiskite jungtis tik prie serverių, kuriais pasitikite.',
+  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Reikalingas, kai serveris veikia privačiame ar namų tinkle (LAN). Leiskite jungtis tik prie serverių, kuriais pasitikite.',
   'Verbinding testen': 'Tikrinti ryšį',
   'Verbinding gelukt': 'Ryšys pavyko',
-  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.': 'Pakeitimai išsaugomi paspaudus Išsaugoti.',
+  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
+      'Pakeitimai išsaugomi paspaudus Išsaugoti.',
   'Afbeelding kiezen op Nextcloud': 'Pasirinkti paveikslėlį Nextcloud',
   'Openen vanaf Nextcloud': 'Atverti iš Nextcloud',
   'Vernieuwen': 'Atnaujinti',
   'Deze map is leeg': 'Šis aplankas tuščias',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.': 'Nenustatytas Nextcloud serveris. Nustatykite jį per Nustatymai → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.': 'Nepavyko įkelti aplanko. Patikrinkite ryšį ir nustatymus.',
+  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
+      'Nenustatytas Nextcloud serveris. Nustatykite jį per Nustatymai → Nextcloud.',
+  'Kon de map niet laden. Controleer je verbinding en instellingen.':
+      'Nepavyko įkelti aplanko. Patikrinkite ryšį ir nustatymus.',
   'Kon dit bestand niet openen.': 'Nepavyko atverti šio failo.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Tai nėra Marp/OciDeck pristatymas.',
   'Downloaden mislukt:': 'Atsisiųsti nepavyko:',
   'Opgeslagen op Nextcloud:': 'Išsaugota į Nextcloud:',
   'Opslaan mislukt:': 'Išsaugoti nepavyko:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.': 'Pirmiausia nustatykite Nextcloud serverį per Nustatymai → Nextcloud.',
+  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
+      'Pirmiausia nustatykite Nextcloud serverį per Nustatymai → Nextcloud.',
   'Opslaan naar Nextcloud': 'Išsaugoti į Nextcloud',
   'Doelpad (zonder extensie)': 'Paskirties kelias (be plėtinio)',
-  'Als .ocideck-pakket (één bestand, met assets)': 'Kaip .ocideck paketą (vienas failas su ištekliais)',
+  'Als .ocideck-pakket (één bestand, met assets)':
+      'Kaip .ocideck paketą (vienas failas su ištekliais)',
   'Als losse .md plus afbeeldingen': 'Kaip atskirą .md su paveikslėliais',
   'Opslaan': 'Išsaugoti',
   'Presenteren': 'Pristatoma',
   'Tijden-overzicht tonen na afloop': 'Rodyti laikų apžvalgą pabaigoje',
-  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.': 'Laikas kiekvienai skaidrei visada matuojamas; tai tik nustato, ar apžvalga pasirodys po šio pristatymo.',
+  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
+      'Laikas kiekvienai skaidrei visada matuojamas; tai tik nustato, ar apžvalga pasirodys po šio pristatymo.',
   'Oefenoverzicht tonen na afloop': 'Rodyti repeticijos suvestinę pabaigoje',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.': 'Po pristatymo rodyti apžvalgą su kiekvienai skaidrei skirtu laiku. Laikas visada matuojamas; tai tik nustato, ar ekranas pasirodys.',
+  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+      'Po pristatymo rodyti apžvalgą su kiekvienai skaidrei skirtu laiku. Laikas visada matuojamas; tai tik nustato, ar ekranas pasirodys.',
   'Onveilige presentatie geblokkeerd': 'Nesaugus pristatymas užblokuotas',
-  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.': 'Šis pristatymas nebuvo atvertas. Faile yra turinio, galinčio vykdyti kodą, o pristatyme turi būti tik duomenys — nieko vykdomo.',
+  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Šis pristatymas nebuvo atvertas. Faile yra turinio, galinčio vykdyti kodą, o pristatyme turi būti tik duomenys — nieko vykdomo.',
   'Gevonden:': 'Rasta:',
   'Regel': 'Eilutė',
   'Scriptuitvoering': 'Skripto vykdymas',
@@ -521,46 +607,66 @@ const _dutchSourceLt = {
   'Pootje': 'Letenėlė',
   'In tweeën splitsen': 'Padalyti į dvi',
   'Uitgevoerde controles': 'Atliktos patikros',
-  'Contrast en leesbaarheid van tekstkleuren': 'Teksto spalvų kontrastas ir įskaitomumas',
-  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media': 'Paveikslėlių, diagramų ir medijos alt. tekstai ir antraštės',
+  'Contrast en leesbaarheid van tekstkleuren':
+      'Teksto spalvų kontrastas ir įskaitomumas',
+  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+      'Paveikslėlių, diagramų ir medijos alt. tekstai ir antraštės',
   'Aanwezigheid van gekoppelde mediabestanden': 'Susietų medijos failų buvimas',
-  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code': 'Teksto tankis: punktai, žodžiai, citatos, lentelės ir kodas',
-  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).': 'Tema, skaidrės, poraštė, kontrolinis sąrašas ir antraštės ant paveikslėlių, patikrinta pagal WCAG AA (4,5:1 tekstui, 3:1 dideliam tekstui).',
-  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.': 'Kiekvienam paveikslėliui, diagramai, vaizdo ir garso įrašui reikia aprašymo ekrano skaitytuvams ir dalomajai medžiagai.',
-  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.': 'Nuorodos į paveikslėlius, vaizdo ir garso įrašus tikrinamos, ar projekte yra esamas failas.',
-  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.': 'Punktų skaičius ir ilgis, žodžiai, įdėtis, stulpelių balansas ir citatų, antraščių, lentelių bei kodo tankis, kad viskas įskaitomai tilptų.',
-  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.': 'Pagrindinis tekstas, kurio kontrastas mažesnis nei {crit}:1, laikomas klaida; virš to iki AA normos — įspėjimu.',
-  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.': 'Jokios ribos: netuščias aprašymas privalomas.',
-  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.': 'Jokios ribos: susietas failas turi būti projekto aplanke.',
-  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.': 'Įspėjimas virš {b1} punktų (1 stulpelis), {bcl} (kontrolinis sąrašas) ar {b2} (2 stulpeliai); kritinis virš {bc1} ar {bc2}. Žodžiai virš {w1}/{w2}, vidutiniškai virš {avg} viename punkte. Citata virš {q} simbolių, antraštė virš {t} simbolių. Įdėtis gilesnė nei {lvl} lygis. Tekstas, kuris turi susitraukti žemiau {warn}%, įspėja, žemiau {crit}% — kritinis.',
+  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+      'Teksto tankis: punktai, žodžiai, citatos, lentelės ir kodas',
+  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+      'Tema, skaidrės, poraštė, kontrolinis sąrašas ir antraštės ant paveikslėlių, patikrinta pagal WCAG AA (4,5:1 tekstui, 3:1 dideliam tekstui).',
+  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+      'Kiekvienam paveikslėliui, diagramai, vaizdo ir garso įrašui reikia aprašymo ekrano skaitytuvams ir dalomajai medžiagai.',
+  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+      'Nuorodos į paveikslėlius, vaizdo ir garso įrašus tikrinamos, ar projekte yra esamas failas.',
+  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+      'Punktų skaičius ir ilgis, žodžiai, įdėtis, stulpelių balansas ir citatų, antraščių, lentelių bei kodo tankis, kad viskas įskaitomai tilptų.',
+  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+      'Pagrindinis tekstas, kurio kontrastas mažesnis nei {crit}:1, laikomas klaida; virš to iki AA normos — įspėjimu.',
+  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+      'Jokios ribos: netuščias aprašymas privalomas.',
+  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+      'Jokios ribos: susietas failas turi būti projekto aplanke.',
+  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+      'Įspėjimas virš {b1} punktų (1 stulpelis), {bcl} (kontrolinis sąrašas) ar {b2} (2 stulpeliai); kritinis virš {bc1} ar {bc2}. Žodžiai virš {w1}/{w2}, vidutiniškai virš {avg} viename punkte. Citata virš {q} simbolių, antraštė virš {t} simbolių. Įdėtis gilesnė nei {lvl} lygis. Tekstas, kuris turi susitraukti žemiau {warn}%, įspėja, žemiau {crit}% — kritinis.',
   'Zoek op deze computer': 'Ieškoti šiame kompiuteryje',
-  'Presentaties zoeken op deze computer': 'Rasti pristatymus šiame kompiuteryje',
+  'Presentaties zoeken op deze computer':
+      'Rasti pristatymus šiame kompiuteryje',
   'Zoek op titel, pad of thema…': 'Ieškoti pagal pavadinimą, kelią ar temą…',
   'Bekende mappen worden doorzocht…': 'Ieškoma žinomuose aplankuose…',
   'gevonden': 'rasta',
   'presentatie(s) gevonden': 'pristatymas (-ai) rastas (-i)',
-  'Geen Marp-presentaties gevonden in de bekende mappen.': 'Žinomuose aplankuose Marp pristatymų nerasta.',
+  'Geen Marp-presentaties gevonden in de bekende mappen.':
+      'Žinomuose aplankuose Marp pristatymų nerasta.',
   'Geen thema': 'Nėra temos',
   'Kopieer syntaxproblemen': 'Kopijuoti sintaksės problemas',
-  'Syntaxproblemen gekopieerd naar klembord.': 'Sintaksės problemos nukopijuotos į iškarpinę.',
+  'Syntaxproblemen gekopieerd naar klembord.':
+      'Sintaksės problemos nukopijuotos į iškarpinę.',
   'Online media': 'Internetinė medija',
   'Online media staat uit': 'Internetinė medija išjungta',
   'Online media toestaan': 'Leisti internetinę mediją',
-  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.': 'Leisti tiesiogiai įkelti paveikslėlius ir vaizdo įrašus per URL bei YouTube/Vimeo įterpimus. Pagal numatymą išjungta jūsų privatumui ir saugumui.',
-  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)': 'Failo kelias arba URL (YouTube, Vimeo, .mp4 …)',
+  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+      'Leisti tiesiogiai įkelti paveikslėlius ir vaizdo įrašus per URL bei YouTube/Vimeo įterpimus. Pagal numatymą išjungta jūsų privatumui ir saugumui.',
+  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+      'Failo kelias arba URL (YouTube, Vimeo, .mp4 …)',
   'Bestand kiezen': 'Pasirinkti failą',
-  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.': 'Peržiūroje paleiskite šios skaidrės segmentą ir iškirpkite ties tašku, kur norite padalyti: antra dalis atsidurs naujoje skaidrėje.',
+  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+      'Peržiūroje paleiskite šios skaidrės segmentą ir iškirpkite ties tašku, kur norite padalyti: antra dalis atsidurs naujoje skaidrėje.',
   'Begin (sec)': 'Pradžia (sek.)',
   'Einde (sec)': 'Pabaiga (sek.)',
   'einde': 'pabaiga',
-  'Knip de video op het huidige afspeelpunt': 'Iškirpti vaizdo įrašą ties dabartiniu leidimo tašku',
-  'Speel de video eerst af in het voorbeeld': 'Pirmiausia paleiskite vaizdo įrašą peržiūroje',
+  'Knip de video op het huidige afspeelpunt':
+      'Iškirpti vaizdo įrašą ties dabartiniu leidimo tašku',
+  'Speel de video eerst af in het voorbeeld':
+      'Pirmiausia paleiskite vaizdo įrašą peržiūroje',
   'Knip hier': 'Iškirpti čia',
   'Online': 'Internete',
   'Lokaal bestand': 'Vietinis failas',
   'Geen video': 'Nėra vaizdo įrašo',
   'Vraag (meerkeuze)': 'Klausimas (pasirenkamas)',
-  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding': 'Antraštės tekstas per mažai kontrastuoja su fono paveikslėliu',
+  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+      'Antraštės tekstas per mažai kontrastuoja su fono paveikslėliu',
   'Herstel': 'Taisyti',
   'Tijdlijn': 'Laiko juosta',
   'Indeling': 'Išdėstymas',
@@ -585,19 +691,24 @@ const _dutchSourceLt = {
   'Vraag': 'Klausimas',
   'Wat wil je vragen?': 'Ką norite paklausti?',
   'Antwoorden': 'Atsakymai',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.': 'Pažymėkite teisingus atsakymus. Ribos nėra; pristatant atsitiktinai rodomas 1 teisingas ir likę neteisingi.',
+  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Pažymėkite teisingus atsakymus. Ribos nėra; pristatant atsitiktinai rodomas 1 teisingas ir likę neteisingi.',
   'Antwoord': 'Atsakymas',
   'Antwoord toevoegen': 'Pridėti atsakymą',
   'Goed antwoord': 'Teisingas atsakymas',
-  'Geef minstens één goed én één fout antwoord op.': 'Nurodykite bent vieną teisingą ir vieną neteisingą atsakymą.',
+  'Geef minstens één goed én één fout antwoord op.':
+      'Nurodykite bent vieną teisingą ir vieną neteisingą atsakymą.',
   'Weergave': 'Rodymas',
   'Aantal getoonde opties': 'Rodomų parinkčių skaičius',
-  'Maximale antwoordtijd in seconden (0 = geen limiet)': 'Didžiausias atsakymo laikas sekundėmis (0 = be ribos)',
+  'Maximale antwoordtijd in seconden (0 = geen limiet)':
+      'Didžiausias atsakymo laikas sekundėmis (0 = be ribos)',
   'Bij een fout antwoord': 'Neteisingo atsakymo atveju',
   'Opnieuw proberen': 'Bandyti dar kartą',
   'Doorgaan toestaan': 'Leisti tęsti',
-  'Fout = niet doorgaan; de vraag moet opnieuw.': 'Neteisingas = negalima tęsti; klausimą reikia kartoti.',
-  'Fout = wel doorgaan, maar niet opnieuw doen.': 'Neteisingas = galima tęsti, bet be kartojimo.',
+  'Fout = niet doorgaan; de vraag moet opnieuw.':
+      'Neteisingas = negalima tęsti; klausimą reikia kartoti.',
+  'Fout = wel doorgaan, maar niet opnieuw doen.':
+      'Neteisingas = galima tęsti, bet be kartojimo.',
   'Afbeelding (optioneel)': 'Paveikslėlis (nebūtina)',
   'Breedte afbeelding': 'Paveikslėlio plotis',
   'Goed!': 'Teisingai!',
@@ -612,46 +723,58 @@ const _dutchSourceLt = {
   'Juist / Onjuist': 'Tiesa / Netiesa',
   'Meerdere juiste antwoorden': 'Keli teisingi atsakymai',
   'Stelling': 'Teiginys',
-  'Formuleer een stelling die juist of onjuist is': 'Suformuluokite teiginį, kuris yra tiesa arba netiesa',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.': 'Pažymėkite visus teisingus atsakymus. Pristatant rodomas atsitiktinis rinkinys su bent vienu teisingu ir vienu neteisingu.',
+  'Formuleer een stelling die juist of onjuist is':
+      'Suformuluokite teiginį, kuris yra tiesa arba netiesa',
+  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+      'Pažymėkite visus teisingus atsakymus. Pristatant rodomas atsitiktinis rinkinys su bent vienu teisingu ir vienu neteisingu.',
   'Juist': 'Tiesa',
   'Onjuist': 'Netiesa',
-  'De stelling hierboven is juist of onjuist; kies welke.': 'Teiginys viršuje yra tiesa arba netiesa; pasirinkite, kuris.',
+  'De stelling hierboven is juist of onjuist; kies welke.':
+      'Teiginys viršuje yra tiesa arba netiesa; pasirinkite, kuris.',
   'Selecteer alle juiste antwoorden': 'Pasirinkite visus teisingus atsakymus',
   'Bevestig': 'Patvirtinti',
   'Het juiste antwoord': 'Teisingas atsakymas',
-  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.': 'Paveikslėlis rodomas per visą ekraną kaip fonas. Naudokite suliejimą, kai antraštei reikia daugiau ramybės ar kontrasto.',
+  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+      'Paveikslėlis rodomas per visą ekraną kaip fonas. Naudokite suliejimą, kai antraštei reikia daugiau ramybės ar kontrasto.',
   'Cockpit-kleurschema': 'Kabinos spalvų schema',
-  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.': 'Kabinos matuoklių būsenos spalvos. Kurkite pavadintas variantas; pasirinkta schema taikoma visoms kabinos skaidrėms.',
+  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+      'Kabinos matuoklių būsenos spalvos. Kurkite pavadintas variantas; pasirinkta schema taikoma visoms kabinos skaidrėms.',
   'Standaard': 'Numatytoji',
   'Standaardkleuren gebruiken': 'Naudoti numatytąsias spalvas',
   'Kleurschema verwijderen': 'Ištrinti spalvų schemą',
   'Schemanaam': 'Schemos pavadinimas',
-  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.': 'Tai įtaisytoji schema. Norėdami keisti spalvas, padarykite kopiją.',
+  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+      'Tai įtaisytoji schema. Norėdami keisti spalvas, padarykite kopiją.',
   'Goed': 'Gerai',
   'Waarschuwing': 'Įspėjimas',
   'Kritiek': 'Kritinis',
   'Te laag (koud)': 'Per žemai (šalta)',
   'Lucht (horizon)': 'Dangus (horizontas)',
   'Grond (horizon)': 'Žemė (horizontas)',
-  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.': 'Būsenos spalvos atitinka kabinos spalvų schemą; keiskite ją arba kurkite variantus per Nustatymai → Kabina.',
+  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+      'Būsenos spalvos atitinka kabinos spalvų schemą; keiskite ją arba kurkite variantus per Nustatymai → Kabina.',
   'Veel bullets op deze slide': 'Daug punktų šioje skaidrėje',
   'bullets': 'punktai',
   'Overweeg de inhoud te splitsen.': 'Apsvarstykite turinio padalijimą.',
   'Erg veel bullets op deze slide': 'Per daug punktų šioje skaidrėje',
-  'Splits deze inhoud over meerdere slides.': 'Padalykite šį turinį per kelias skaidres.',
+  'Splits deze inhoud over meerdere slides.':
+      'Padalykite šį turinį per kelias skaidres.',
   'Veel woorden in bullets': 'Daug žodžių punktuose',
   'woorden': 'žodžiai',
-  'Maak bullets korter of splits de slide.': 'Sutrumpinkite punktus arba padalykite skaidrę.',
+  'Maak bullets korter of splits de slide.':
+      'Sutrumpinkite punktus arba padalykite skaidrę.',
   'Erg veel woorden in bullets': 'Per daug žodžių punktuose',
   'Gemiddeld lange bullets': 'Vidutiniškai ilgi punktai',
   'woorden per bullet': 'žodžiai punkte',
   'Maak elke bullet kernachtiger.': 'Padarykite kiekvieną punktą glaustesnį.',
-  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.': 'Rastas punktas su keliais sakiniais. Padarykite punktus glaustesnius arba padalykite turinį.',
+  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+      'Rastas punktas su keliais sakiniais. Padarykite punktus glaustesnius arba padalykite turinį.',
   'Diepe bulletniveaus gevonden': 'Rasti gilūs punktų lygiai',
   'niveau': 'lygis',
-  'Beperk nesting voor betere leesbaarheid.': 'Apribokite įterpimą, kad būtų geriau skaityti.',
-  'Twee kolommen zijn sterk uit balans': 'Du stulpeliai yra stipriai nesubalansuoti',
+  'Beperk nesting voor betere leesbaarheid.':
+      'Apribokite įterpimą, kad būtų geriau skaityti.',
+  'Twee kolommen zijn sterk uit balans':
+      'Du stulpeliai yra stipriai nesubalansuoti',
   'tegenover': 'palyginti su',
   'Verdeel of splits de inhoud.': 'Perskirstykite arba padalykite turinį.',
   'Slidetitel': 'Skaidrės pavadinimas',
@@ -661,7 +784,8 @@ const _dutchSourceLt = {
   'Activatieduur': 'Aktyvavimo trukmė',
   'Splits slide': 'Padalyti skaidrę',
   'Doornummeren vanaf vorige slide': 'Tęsti numeraciją nuo ankstesnės skaidrės',
-  'Begin de nummering waar de vorige slide ophield.': 'Pradėti numeraciją ten, kur baigėsi ankstesnė skaidrė.',
+  'Begin de nummering waar de vorige slide ophield.':
+      'Pradėti numeraciją ten, kur baigėsi ankstesnė skaidrė.',
   'Volg thema-animatieduur': 'Naudoti temos animacijos trukmę',
   'Animatie bij openen': 'Animuoti įėjus',
   'Meter': 'Matuoklis',
@@ -689,7 +813,8 @@ const _dutchSourceLt = {
   'Koers': 'Kursas',
   'Ander profiel kiezen': 'Pasirinkti kitą profilį',
   'Cockpit': 'Kabinos skydelis',
-  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Tikslinis laikas atgaliniam skaičiavimui pranešėjo rodinyje. Prezentacijos metu tiksliai koreguojama klavišu K.',
+  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Tikslinis laikas atgaliniam skaičiavimui pranešėjo rodinyje. Prezentacijos metu tiksliai koreguojama klavišu K.',
   'Logo en footer': 'Logotipas ir poraštė',
   'Pagina': 'Puslapis',
   'Presentatiestijl': 'Prezentacijos stilius',
@@ -706,10 +831,12 @@ const _dutchSourceLt = {
   'Doeltijd': 'Tikslinis laikas',
   'Doeltijd (aftellen)': 'Tikslinis laikas (atgalinis skaičiavimas)',
   'Geen aftelling': 'Be atgalinio skaičiavimo',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Numatytasis tikslinis laikas atgaliniam skaičiavimui pranešėjo rodinyje. Prezentacijos metu tiksliai koreguojama klavišu K.',
+  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Numatytasis tikslinis laikas atgaliniam skaičiavimui pranešėjo rodinyje. Prezentacijos metu tiksliai koreguojama klavišu K.',
   'uit': 'išjungta',
   'Doeltijd / aftellen (K)': 'Tikslas / atgalinis skaičiavimas (K)',
-  'Doeltijd / aftellen instellen (MMSS)': 'Nustatyti tikslą / atgalinį skaičiavimą (MMSS)',
+  'Doeltijd / aftellen instellen (MMSS)':
+      'Nustatyti tikslą / atgalinį skaičiavimą (MMSS)',
   'Tijd & oefenrun resetten': 'Atstatyti laiką ir repeticiją',
   'Resterend': 'Liko',
   'Over de tijd': 'Viršyta',
@@ -723,25 +850,31 @@ const _dutchSourceLt = {
   'Kopieer': 'Kopijuoti',
   'Sluiten': 'Uždaryti',
   'Tekstgrootte van de interface': 'Sąsajos teksto dydis',
-  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.': 'Padidina visą redaktoriaus tekstą iki 200 %. Pačios skaidrės nepasikeičia.',
+  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+      'Padidina visą redaktoriaus tekstą iki 200 %. Pačios skaidrės nepasikeičia.',
   'Breedte van het slidepaneel': 'Skaidrių skydelio plotis',
   'Pijltjestoetsen passen de breedte aan': 'Rodyklių klavišai koreguoja plotį',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.': 'Patarimas: įklijuokite lentelę iš skaičiuoklės į langelį naudodami Cmd/Ctrl+V, kad užpildytumėte visą lentelę.',
+  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+      'Patarimas: įklijuokite lentelę iš skaičiuoklės į langelį naudodami Cmd/Ctrl+V, kad užpildytumėte visą lentelę.',
   'Annuleren': 'Atšaukti',
   'Checklist': 'Užduočių kontrolinis sąrašas',
   'Voortgangsgrafiek tonen': 'Rodyti progreso diagramą',
-  'Toont afgevinkt en niet afgevinkt als percentages.': 'Rodo pažymėtus ir nepažymėtus elementus procentais.',
+  'Toont afgevinkt en niet afgevinkt als percentages.':
+      'Rodo pažymėtus ir nepažymėtus elementus procentais.',
   'Afgevinkt': 'Pažymėta',
   'Niet afgevinkt': 'Nepažymėta',
-  'Er zijn geen aangevinkte checklist-items om te legen.': 'Nėra pažymėtų kontrolinio sąrašo elementų, kuriuos būtų galima išvalyti.',
+  'Er zijn geen aangevinkte checklist-items om te legen.':
+      'Nėra pažymėtų kontrolinio sąrašo elementų, kuriuos būtų galima išvalyti.',
   'Alle checkboxen legen?': 'Išvalyti visus žymimuosius langelius?',
   'Hiermee worden alle': 'Tai atžymės visus',
-  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.': 'pažymėtus kontrolinio sąrašo elementus visoje prezentacijoje. Tai galite atšaukti su Ctrl/Cmd+Z.',
+  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+      'pažymėtus kontrolinio sąrašo elementus visoje prezentacijoje. Tai galite atšaukti su Ctrl/Cmd+Z.',
   'Alles legen': 'Išvalyti viską',
   'checklist-items uitgevinkt.': 'kontrolinio sąrašo elementai atžymėti.',
   'Alle checkboxen legen': 'Išvalyti visus žymimuosius langelius',
   'Afgevinkte tekst doorhalen': 'Perbraukti pažymėtą tekstą',
-  'Toont een streep door voltooide checklistitems.': 'Rodo užbaigtus kontrolinio sąrašo elementus perbrauktus.',
+  'Toont een streep door voltooide checklistitems.':
+      'Rodo užbaigtus kontrolinio sąrašo elementus perbrauktus.',
   'Na media automatisch doorgaan': 'Automatiškai pereiti po medijos',
   'Opsomming': 'Punktai',
   'Nummering': 'Numeracija',
@@ -751,11 +884,13 @@ const _dutchSourceLt = {
   'Omhoog': 'Aukštyn',
   'Omlaag': 'Žemyn',
   'Niet toevoegen': 'Nepridėti',
-  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.': 'Šios skaidrės naudoja tuos pačius duomenis, spalvas ir pavadinimą. Rodyklėmis pasirinkite jų tvarką po dabartinės skaidrės.',
+  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+      'Šios skaidrės naudoja tuos pačius duomenis, spalvas ir pavadinimą. Rodyklėmis pasirinkite jų tvarką po dabartinės skaidrės.',
   'Afbeelding': 'Paveikslėlis',
   'Broncode': 'Pirminis kodas',
   'Bullet': 'Punktas',
-  'Plak of typ hier je broncode...': 'Įklijuokite arba įveskite savo pirminį kodą čia...',
+  'Plak of typ hier je broncode...':
+      'Įklijuokite arba įveskite savo pirminį kodą čia...',
   'Programmeertaal': 'Programavimo kalba',
   'TLP van deze slide': 'Šios skaidrės TLP',
   'Wis annotaties (C)': 'Išvalyti anotacijas (C)',
@@ -769,10 +904,12 @@ const _dutchSourceLt = {
   'Cirkel': 'Skritulinė',
   'Spider': 'Voratinklinė',
   'CSV importeren': 'Importuoti CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)': 'Duomenys (CSV: pirma eilutė = serijų pavadinimai, pirmas stulpelis = etiketės)',
+  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+      'Duomenys (CSV: pirma eilutė = serijų pavadinimai, pirmas stulpelis = etiketės)',
   'Gekoppeld aan': 'Susieta su',
   'Ontkoppelen': 'Atsieti',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?': 'Saugoti duomenis skaidrėje ar laikyti juos kaip atskirą CSV failą šalia prezentacijos?',
+  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+      'Saugoti duomenis skaidrėje ar laikyti juos kaip atskirą CSV failą šalia prezentacijos?',
   'In de slide': 'Skaidrėje',
   'Als CSV-bestand': 'Kaip CSV failą',
   'Geen grafiekgegevens': 'Nėra diagramos duomenų',
@@ -785,9 +922,12 @@ const _dutchSourceLt = {
   'Sorteren': 'Rūšiuoti',
   'Oplopend sorteren': 'Rūšiuoti didėjančia tvarka',
   'Aflopend sorteren': 'Rūšiuoti mažėjančia tvarka',
-  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.': 'Skritulinėje diagramoje rodomos daugiausiai pirmosios dvi serijos; etiketės sudaro segmentus.',
-  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.': 'Voratinklinei diagramai reikia bent trijų etikečių (ašių); kiekviena serija sudaro figūrą.',
-  'Een spider-diagram heeft minstens drie labels nodig': 'Voratinklinei diagramai reikia bent trijų etikečių',
+  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+      'Skritulinėje diagramoje rodomos daugiausiai pirmosios dvi serijos; etiketės sudaro segmentus.',
+  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+      'Voratinklinei diagramai reikia bent trijų etikečių (ašių); kiekviena serija sudaro figūrą.',
+  'Een spider-diagram heeft minstens drie labels nodig':
+      'Voratinklinei diagramai reikia bent trijų etikečių',
   'Minimumlijn (optioneel)': 'Minimumo linija (nebūtina)',
   'Maximumlijn (optioneel)': 'Maksimumo linija (nebūtina)',
   'Schaalminimum (optioneel)': 'Skalės minimumas (nebūtina)',
@@ -796,9 +936,11 @@ const _dutchSourceLt = {
   'Broncode achtergrond': 'Kodo fonas',
   'Broncode tekst': 'Kodo tekstas',
   'Syntaxkleuring': 'Sintaksės spalvinimas',
-  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).': 'Išjungta = viskas viena spalva (pvz., žalia ant juodos CRT ekranui).',
+  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+      'Išjungta = viskas viena spalva (pvz., žalia ant juodos CRT ekranui).',
   'Eigen kleur (hex)': 'Sava spalva (šešioliktainė)',
-  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.': 'Pavyzdžiui, #33FF33 CRT žaliam ekranui.',
+  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+      'Pavyzdžiui, #33FF33 CRT žaliam ekranui.',
   'Onderdeel van stijlprofiel ': 'Stiliaus profilio dalis ',
   'Broncode lettertype': 'Kodo šriftas',
   'Kop (optioneel)': 'Antraštė (nebūtina)',
@@ -806,22 +948,26 @@ const _dutchSourceLt = {
   'Subkop': 'Paantraštė',
   'Systeem (monospace)': 'Sistema (vienodo pločio)',
   'Platte tekst': 'Grynasis tekstas',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.': 'HTML atsidaro bet kurioje naršyklėje be interneto ir atvaizduoja kodo blokus, matematiką ir Mermaid diagramas.',
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+      'HTML atsidaro bet kurioje naršyklėje be interneto ir atvaizduoja kodo blokus, matematiką ir Mermaid diagramas.',
   'Laatste slide': 'Paskutinė skaidrė',
   'Logo px': 'Logotipas px',
   'Markdown voor laatste slide': 'Markdown paskutinei skaidrei',
   'PREVIEW': 'PERŽIŪRA',
   'Slides gerenderd.': 'Skaidrės atvaizduotos.',
   'Standaard laatste slide gebruiken': 'Naudoti numatytąją paskutinę skaidrę',
-  'Wordt automatisch toegevoegd bij presenteren en exporteren.': 'Automatiškai pridedama pristatant ir eksportuojant.',
+  'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+      'Automatiškai pridedama pristatant ir eksportuojant.',
   'gerenderd.': 'atvaizduota.',
   'renderen…': 'atvaizduojama…',
   'voorbereiden…': 'ruošiama…',
   'Duplicaten opruimen': 'Išvalyti dublikatus',
-  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën': 'Rasti baitas į baitą identiškus paveikslėlius (md5), sujungti žymas ir pastabas bei pašalinti kopijas',
+  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+      'Rasti baitas į baitą identiškus paveikslėlius (md5), sujungti žymas ir pastabas bei pašalinti kopijas',
   'Geen dubbele afbeeldingen gevonden.': 'Dublikuotų paveikslėlių nerasta.',
   'Dubbele afbeeldingen opruimen?': 'Išvalyti dublikuotus paveikslėlius?',
-  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.': 'Iš kiekvienos grupės paliekamas vienas failas. Žymos ir pastabos sujungiamos, o skaidrės, naudojančios kopiją, po to nurodys į paliktą failą — įskaitant šiuo metu neatidarytas prezentacijas.',
+  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+      'Iš kiekvienos grupės paliekamas vienas failas. Žymos ir pastabos sujungiamos, o skaidrės, naudojančios kopiją, po to nurodys į paliktą failą — įskaitant šiuo metu neatidarytas prezentacijas.',
   'Opruimen': 'Išvalyti',
   '1 presentatiebestand bijgewerkt.': 'Atnaujintas 1 prezentacijos failas.',
   'presentatiebestanden bijgewerkt.': 'prezentacijos failai atnaujinti.',
@@ -830,14 +976,19 @@ const _dutchSourceLt = {
   'dubbele afbeeldingen verwijderd.': 'dublikuoti paveikslėliai pašalinti.',
   'Alleen afbeeldingen zonder tags tonen': 'Rodyti tik paveikslėlius be žymų',
   'Alle afbeeldingen hebben tags.': 'Visi paveikslėliai turi žymas.',
-  'Zet het filter uit om alles weer te zien.': 'Išjunkite filtrą, kad vėl matytumėte viską.',
+  'Zet het filter uit om alles weer te zien.':
+      'Išjunkite filtrą, kad vėl matytumėte viską.',
   'Welkom bij OciDeck': 'Sveiki atvykę į OciDeck',
   'Privacy en gebruik': 'Privatumas ir naudojimas',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'OciDeck yra vietinė darbalaukio programa. Jūsų prezentacijos ir duomenys saugomi tik jūsų kompiuteryje.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'Programa nerenka jokių asmens duomenų, jokios statistikos ir jokių naudojimo duomenų. Jūsų privatumas yra mūsų prioritetas.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Visi jūsų į OciDeck įvesti duomenys lieka jūsų vietinėje sistemoje ir nesiunčiami į išorinius serverius.',
+  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
+      'OciDeck yra vietinė darbalaukio programa. Jūsų prezentacijos ir duomenys saugomi tik jūsų kompiuteryje.',
+  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
+      'Programa nerenka jokių asmens duomenų, jokios statistikos ir jokių naudojimo duomenų. Jūsų privatumas yra mūsų prioritetas.',
+  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
+      'Visi jūsų į OciDeck įvesti duomenys lieka jūsų vietinėje sistemoje ir nesiunčiami į išorinius serverius.',
   'Licentie (EUPL 1.2)': 'Licencija (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'Spustelėdami „Sutinku“, jūs priimate šias sąlygas ir sutinkate naudoti OciDeck.',
+  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
+      'Spustelėdami „Sutinku“, jūs priimate šias sąlygas ir sutinkate naudoti OciDeck.',
   'Volledige licentie online': 'Visa licencija internete',
   'Akkoord gaan': 'Sutinku',
   'Privacy': 'Privatumas',
@@ -845,41 +996,57 @@ const _dutchSourceLt = {
   'Toestemming intrekken': 'Atšaukti sutikimą',
   'Toestemming intrekken?': 'Atšaukti sutikimą?',
   'Intrekken': 'Atšaukti',
-  'U hebt al toegestemd in het gebruik van OciDeck.': 'Jūs jau sutikote naudoti OciDeck.',
-  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.': 'Sutikimą galite atšaukti bet kada. Po atšaukimo turėsite iš naujo priimti šias sąlygas.',
-  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.': 'Jei atšauksite sutikimą, iš naujo paleidę OciDeck turėsite vėl priimti šias sąlygas.',
+  'U hebt al toegestemd in het gebruik van OciDeck.':
+      'Jūs jau sutikote naudoti OciDeck.',
+  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+      'Sutikimą galite atšaukti bet kada. Po atšaukimo turėsite iš naujo priimti šias sąlygas.',
+  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+      'Jei atšauksite sutikimą, iš naujo paleidę OciDeck turėsite vėl priimti šias sąlygas.',
   'Slidekwaliteit': 'Skaidrės kokybė',
   'Geen kwaliteitsproblemen gevonden': 'Kokybės problemų nerasta',
   'Thema (hele presentatie)': 'Tema (visa prezentacija)',
   'Kwaliteitsprobleem': 'Kokybės problema',
   'Kwaliteitsproblemen': 'Kokybės problemos',
-  'Kwaliteitsproblemen (inclusief ernstige)': 'Kokybės problemos (įskaitant rimtas)',
-  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Pridėkite alternatyvųjį tekstą / antraštę dėl prieinamumo',
+  'Kwaliteitsproblemen (inclusief ernstige)':
+      'Kokybės problemos (įskaitant rimtas)',
+  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Pridėkite alternatyvųjį tekstą / antraštę dėl prieinamumo',
   'Alt-tekst': 'Alternatyvusis tekstas',
   'Tekstdichtheid': 'Teksto tankis',
   'Contrast': 'Kontrastas',
-  'heeft geen bijschrift/alt-tekst.': 'neturi antraštės / alternatyviojo teksto.',
+  'heeft geen bijschrift/alt-tekst.':
+      'neturi antraštės / alternatyviojo teksto.',
   'contrastverhouding': 'kontrasto santykis',
   '(minimaal ': '(mažiausiai ',
   ':1 voor normale tekst).': ':1 normaliam tekstui).',
   ':1 voor grote tekst).': ':1 dideliam tekstui).',
   ':1).': ':1).',
-  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.': 'Teksto ant paveikslėlio arba virš jo kontrasto negalima patikrinti automatiškai — patikrinkite vizualiai.',
-  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.': 'Diagrama neturi pavadinimo ar aprašomųjų duomenų — pridėkite pavadinimą arba serijų pavadinimus.',
-  'heeft geen titel of sprekernotities die de inhoud beschrijven.': 'neturi pavadinimo ar pranešėjo pastabų, aprašančių turinį.',
-  'Veel tekst op deze slide: het lettertype wordt verkleind tot ': 'Daug teksto šioje skaidrėje: šrifto dydis sumažinamas iki ',
+  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+      'Teksto ant paveikslėlio arba virš jo kontrasto negalima patikrinti automatiškai — patikrinkite vizualiai.',
+  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+      'Diagrama neturi pavadinimo ar aprašomųjų duomenų — pridėkite pavadinimą arba serijų pavadinimus.',
+  'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+      'neturi pavadinimo ar pranešėjo pastabų, aprašančių turinį.',
+  'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+      'Daug teksto šioje skaidrėje: šrifto dydis sumažinamas iki ',
   ' van de ontwerpgrootte.': ' projektinio dydžio.',
-  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (': 'Daug teksto šioje skaidrėje: šrifto dydis stipriai sumažinamas (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.': 'projektinio dydžio). Apsvarstykite turinio padalijimą.',
+  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+      'Daug teksto šioje skaidrėje: šrifto dydis stipriai sumažinamas (',
+  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      'projektinio dydžio). Apsvarstykite turinio padalijimą.',
   'Grote tabel (': 'Didelė lentelė (',
   ' rijen, ': ' eilutės, ',
-  ' kolommen): celtekst staat op het minimumformaat.': ' stulpeliai): langelių tekstas yra mažiausio dydžio.',
+  ' kolommen): celtekst staat op het minimumformaat.':
+      ' stulpeliai): langelių tekstas yra mažiausio dydžio.',
   'Veel broncode (': 'Daug pirminio kodo (',
-  ' regels) — de tekst wordt sterk verkleind om te passen.': ' eilutės) — tekstas stipriai sumažinamas, kad tilptų.',
+  ' regels) — de tekst wordt sterk verkleind om te passen.':
+      ' eilutės) — tekstas stipriai sumažinamas, kad tilptų.',
   'Veel vrije markdown (': 'Daug laisvo markdown (',
-  ' regels) — controleer of alles leesbaar blijft op de slide.': ' eilutės) — patikrinkite, ar viskas lieka įskaitoma skaidrėje.',
+  ' regels) — controleer of alles leesbaar blijft op de slide.':
+      ' eilutės) — patikrinkite, ar viskas lieka įskaitoma skaidrėje.',
   'Lange titelpagina (': 'Ilga titulinė skaidrė (',
-  ' tekens) — de tekst wordt verkleind om te passen.': ' simboliai) — tekstas sumažinamas, kad tilptų.',
+  ' tekens) — de tekst wordt verkleind om te passen.':
+      ' simboliai) — tekstas sumažinamas, kad tilptų.',
   'Thema bodytekst': 'Temos pagrindinis tekstas',
   'Thema titel': 'Temos pavadinimas',
   'Thema tabeltekst': 'Temos lentelės tekstas',
@@ -890,34 +1057,46 @@ const _dutchSourceLt = {
   'Tweede afbeelding': 'Antrasis paveikslėlis',
   'Waarschuwing bij export': 'Įspėti eksportuojant',
   'Minimale contrastverhouding': 'Mažiausias kontrasto santykis',
-  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.': 'Tekstas žemiau šio santykio pažymimas. 4.5 = WCAG AA, 3.0 = WCAG AA didelis tekstas. Didesnis yra griežtesnis.',
-  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.': 'Prašyti patvirtinimo prieš eksportuojant, kai yra skaidrių kokybės problemų.',
+  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.':
+      'Tekstas žemiau šio santykio pažymimas. 4.5 = WCAG AA, 3.0 = WCAG AA didelis tekstas. Didesnis yra griežtesnis.',
+  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+      'Prašyti patvirtinimo prieš eksportuojant, kai yra skaidrių kokybės problemų.',
   'Kwaliteitsproblemen gevonden': 'Rasta kokybės problemų',
   'Toch exporteren': 'Vis tiek eksportuoti',
   'ernstige probleem(en)': 'rimta (-ų) problema (-ų)',
-  'De presentatie heeft kwaliteitsproblemen (': 'Prezentacija turi kokybės problemų (',
+  'De presentatie heeft kwaliteitsproblemen (':
+      'Prezentacija turi kokybės problemų (',
   'Lange quote (': 'Ilga citata (',
   'Footer-tekst': 'Poraštės tekstas',
   'Checklist (niet aangevinkt)': 'Kontrolinis sąrašas (nepažymėta)',
   'Checklist (aangevinkt)': 'Kontrolinis sąrašas (pažymėta)',
   ': bestand niet gevonden (': ': failas nerastas (',
-  'Blokkeer export bij ernstige kwaliteitsproblemen': 'Blokuoti eksportą esant rimtoms kokybės problemoms',
-  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.': 'Eksportuoti neįmanoma, kol skaidrių kokybės patikra praneša apie klaidas.',
-  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.': 'Eksportas užblokuotas dėl rimtų kokybės problemų.',
+  'Blokkeer export bij ernstige kwaliteitsproblemen':
+      'Blokuoti eksportą esant rimtoms kokybės problemoms',
+  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+      'Eksportuoti neįmanoma, kol skaidrių kokybės patikra praneša apie klaidas.',
+  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+      'Eksportas užblokuotas dėl rimtų kokybės problemų.',
   'Alle meldingen': 'Visos problemos',
-  '… en meer problemen in het kwaliteitspaneel.': '… ir daugiau problemų kokybės skydelyje.',
+  '… en meer problemen in het kwaliteitspaneel.':
+      '… ir daugiau problemų kokybės skydelyje.',
   'Classificatie-handhaving': 'Klasifikacijos vykdymas',
   'Vrijgaveplafond': 'Išleidimo riba',
-  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.': 'Aukščiausias TLP lygis, kurį leidžiama eksportuoti. Tuščia = be ribos.',
+  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+      'Aukščiausias TLP lygis, kurį leidžiama eksportuoti. Tuščia = be ribos.',
   'Vereist minimumniveau': 'Reikalaujamas mažiausias lygis',
-  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.': 'Žemiausia klasifikacija, kurią rinkinys turi turėti, kad būtų galima eksportuoti. Tuščia = be minimumo.',
+  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+      'Žemiausia klasifikacija, kurią rinkinys turi turėti, kad būtų galima eksportuoti. Tuščia = be minimumo.',
   'Geen plafond': 'Be ribos',
   'Geen minimum': 'Be minimumo',
   'Classificatie verplicht': 'Klasifikacija privaloma',
-  'Weiger export wanneer het deck geen TLP-niveau heeft.': 'Atsisakyti eksporto, kai rinkinys neturi TLP lygio.',
+  'Weiger export wanneer het deck geen TLP-niveau heeft.':
+      'Atsisakyti eksporto, kai rinkinys neturi TLP lygio.',
   'Classificatie-watermerk': 'Klasifikacijos vandenženklis',
-  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.': 'Rodyti įstrižą vandenženklį su TLP ir organizacija kiekvienoje skaidrėje.',
-  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.': 'Nustatykite TLP lygį — eksportas užblokuotas klasifikacijos politikos.',
+  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+      'Rodyti įstrižą vandenženklį su TLP ir organizacija kiekvienoje skaidrėje.',
+  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+      'Nustatykite TLP lygį — eksportas užblokuotas klasifikacijos politikos.',
   'Tabel bewerken': 'Redaguoti lentelę',
   'Pijltjes · Tab · Esc': 'Rodyklės · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Redaguoti lentelę (lentelės skaidrėse)',

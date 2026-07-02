@@ -47,7 +47,8 @@ const _stringsLv = {
   'settingsLogo': 'Logo',
   'language': 'Valoda',
   'applicationLanguage': 'Lietotnes valoda',
-  'languageHelp': 'Saskarne uzreiz maina valodu. Prezentācijas saturs paliek nemainīgs.',
+  'languageHelp':
+      'Saskarne uzreiz maina valodu. Prezentācijas saturs paliek nemainīgs.',
   'presentationFolder': 'Prezentāciju mape',
   'exportFolderSetting': 'Eksporta mape',
   'notSet': 'Nav iestatīts',
@@ -55,17 +56,20 @@ const _stringsLv = {
   'choose': 'Izvēlēties',
   'removeDefaultFolder': 'Noņemt noklusējuma mapi',
   'removeExportFolder': 'Noņemt eksporta mapi',
-  'exportFolderHelp': 'Visi eksporti (PDF/PPTX) tiek saglabāti šeit. Ja nav iestatīts, eksporti tiek saglabāti blakus prezentācijas failam.',
+  'exportFolderHelp':
+      'Visi eksporti (PDF/PPTX) tiek saglabāti šeit. Ja nav iestatīts, eksporti tiek saglabāti blakus prezentācijas failam.',
   'cancel': 'Atcelt',
   'close': 'Aizvērt',
   'saveSettings': 'Saglabāt',
   'exportDialogTitle': 'Eksportēt',
   'exportAgain': 'Eksportēt vēlreiz',
-  'exportIntro': 'Eksports izmanto tieši tādu skatu kā redaktorā, ieskaitot jūsu stila profilu.',
+  'exportIntro':
+      'Eksports izmanto tieši tādu skatu kā redaktorā, ieskaitot jūsu stila profilu.',
   'imageQualityPdf': 'Attēlu kvalitāte (PDF)',
   'normal': 'Parasta',
   'compressed': 'Saspiesta',
-  'compressedHelp': 'Zemākas izšķirtspējas JPEG, paredzēts izdales materiāliem, ar daudz mazāku failu (saglabāts atsevišķi kā “-compact”).',
+  'compressedHelp':
+      'Zemākas izšķirtspējas JPEG, paredzēts izdales materiāliem, ar daudz mazāku failu (saglabāts atsevišķi kā “-compact”).',
   'losslessHelp': 'Bezzudumu pilnas izšķirtspējas attēli.',
   'exportAsPdf': 'Eksportēt kā PDF',
   'exportAsPptx': 'Eksportēt kā PPTX',
@@ -87,26 +91,39 @@ const _dutchSourceLv = {
   'Niet opslaan': 'Nesaglabāt',
   'Niet-opgeslagen werk herstellen?': 'Atjaunot nesaglabāto darbu?',
   'Niet-opgeslagen wijzigingen': 'Nesaglabātas izmaiņas',
-  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'No iepriekšējās sesijas atrasta prezentācija ar nesaglabātām izmaiņām:',
+  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'No iepriekšējās sesijas atrasta prezentācija ar nesaglabātām izmaiņām:',
   'Er zijn': 'Ir',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'prezentācijas ar nesaglabātām izmaiņām atrastas no iepriekšējās sesijas:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.': 'Ir prezentācijas ar nesaglabātām izmaiņām. Saglabājiet tās pirms lietotnes aizvēršanas.',
-  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.': 'Šai prezentācijai ir nesaglabātas izmaiņas. Saglabājiet to pirms cilnes aizvēršanas.',
+  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'prezentācijas ar nesaglabātām izmaiņām atrastas no iepriekšējās sesijas:',
+  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'Ir prezentācijas ar nesaglabātām izmaiņām. Saglabājiet tās pirms lietotnes aizvēršanas.',
+  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+      'Šai prezentācijai ir nesaglabātas izmaiņas. Saglabājiet to pirms cilnes aizvēršanas.',
   'Importeren via URL': 'Importēt no URL',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.': 'Ielīmējiet saiti uz .ocideck pakotni vai Marp Markdown failu.',
+  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+      'Ielīmējiet saiti uz .ocideck pakotni vai Marp Markdown failu.',
   'Ophalen': 'Ielādēt',
   'Laat los om toe te voegen': 'Atlaidiet, lai pievienotu',
-  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen': 'Attēli → jauni slaidi · .md / .ocideck → atvērt',
-  'Open eerst een presentatie om afbeeldingen toe te voegen.': 'Atveriet prezentāciju, pirms pievienojat attēlus.',
-  'Alle slides zijn overgeslagen — niets om te tonen.': 'Visi slaidi ir izlaisti — nav ko rādīt.',
-  'Alle slides zijn overgeslagen — niets om te exporteren.': 'Visi slaidi ir izlaisti — nav ko eksportēt.',
+  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+      'Attēli → jauni slaidi · .md / .ocideck → atvērt',
+  'Open eerst een presentatie om afbeeldingen toe te voegen.':
+      'Atveriet prezentāciju, pirms pievienojat attēlus.',
+  'Alle slides zijn overgeslagen — niets om te tonen.':
+      'Visi slaidi ir izlaisti — nav ko rādīt.',
+  'Alle slides zijn overgeslagen — niets om te exporteren.':
+      'Visi slaidi ir izlaisti — nav ko eksportēt.',
   'Kon dit pakket niet importeren.': 'Neizdevās importēt šo pakotni.',
   'Pakket geëxporteerd naar:': 'Pakotne eksportēta uz:',
   'Export mislukt:': 'Eksportēšana neizdevās:',
-  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.': 'Šis slaids nevar saņemt attēlu. Vispirms izvēlieties attēla slaidu.',
-  'Kon van deze URL geen presentatie ophalen.': 'No šī URL neizdevās ielādēt prezentāciju.',
-  'Sleep om de slide-preview breder of smaller te maken': 'Velciet, lai padarītu slaida priekšskatījumu platāku vai šaurāku',
-  'TLP-classificatie (Traffic Light Protocol)': 'TLP klasifikācija (Traffic Light Protocol)',
+  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+      'Šis slaids nevar saņemt attēlu. Vispirms izvēlieties attēla slaidu.',
+  'Kon van deze URL geen presentatie ophalen.':
+      'No šī URL neizdevās ielādēt prezentāciju.',
+  'Sleep om de slide-preview breder of smaller te maken':
+      'Velciet, lai padarītu slaida priekšskatījumu platāku vai šaurāku',
+  'TLP-classificatie (Traffic Light Protocol)':
+      'TLP klasifikācija (Traffic Light Protocol)',
   'Titelpagina': 'Titullapa',
   'Tussentitel': 'Sadaļas virsraksts',
   'Alleen Bullets': 'Tikai aizzīmes',
@@ -119,7 +136,8 @@ const _dutchSourceLv = {
   'Tabel': 'Tabula',
   'Vrije Markdown': 'Brīvs Markdown',
   'Overgeslagen': 'Izlaists',
-  'Weer tonen bij presenteren/exporteren': 'Rādīt atkal prezentējot/eksportējot',
+  'Weer tonen bij presenteren/exporteren':
+      'Rādīt atkal prezentējot/eksportējot',
   'Overslaan bij presenteren/exporteren': 'Izlaist prezentējot/eksportējot',
   'Kopiëren': 'Kopēt',
   'Kopieer als afbeelding': 'Kopēt kā attēlu',
@@ -141,7 +159,8 @@ const _dutchSourceLv = {
   'Naam van de auteur': 'Autora vārds',
   'Achtergrondafbeelding': 'Fona attēls',
   'Achtergrondafbeelding (optioneel)': 'Fona attēls (neobligāts)',
-  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.': 'Attēls tiek rādīts pilnekrāna režīmā kā fons ar samazinātu necaurspīdīgumu, lai teksts paliktu salasāms.',
+  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+      'Attēls tiek rādīts pilnekrāna režīmā kā fons ar samazinātu necaurspīdīgumu, lai teksts paliktu salasāms.',
   'Zoom achtergrond': 'Fona tuvinājums',
   'Zoom afbeelding': 'Attēla tuvinājums',
   'Afbeelding (rechts)': 'Attēls (pa labi)',
@@ -166,7 +185,8 @@ const _dutchSourceLv = {
   'Kopiëren naar klembord mislukt.': 'Kopēšana uz starpliktuvi neizdevās.',
   'Verwijder afbeelding': 'Noņemt attēlu',
   'Geen afbeelding gekozen': 'Attēls nav izvēlēts',
-  'Caption / bronvermelding (bijv. © Naam Fotograaf)': 'Paraksts / avota norāde (piem., © Fotogrāfa vārds)',
+  'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+      'Paraksts / avota norāde (piem., © Fotogrāfa vārds)',
   'Caption / bronvermelding': 'Paraksts / avota norāde',
   'Beschrijving (doorzoekbaar)': 'Apraksts (meklējams)',
   'Markdown inhoud': 'Markdown saturs',
@@ -177,7 +197,8 @@ const _dutchSourceLv = {
   'verwijderen': 'noņemt',
   'Koprij verwijderen': 'Noņemt galvenes rindu',
   'Rij verwijderen': 'Noņemt rindu',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.': 'Padoms: nospiediet Enter šūnā, lai izveidotu jaunu rindiņu.',
+  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+      'Padoms: nospiediet Enter šūnā, lai izveidotu jaunu rindiņu.',
   'Presentatie openen': 'Atvērt prezentāciju',
   'Opslaan als': 'Saglabāt kā',
   'Pakket importeren': 'Importēt pakotni',
@@ -190,11 +211,14 @@ const _dutchSourceLv = {
   'Kies een video': 'Izvēlieties video',
   'Kies een audiobestand': 'Izvēlieties audio failu',
   'Bladeren…': 'Pārlūkot…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…': 'Meklēt pēc faila nosaukuma, virsraksta vai teksta slaidos…',
+  'Zoek op bestandsnaam, titel of tekst in de slides…':
+      'Meklēt pēc faila nosaukuma, virsraksta vai teksta slaidos…',
   'Geen map gekozen': 'Mape nav izvēlēta',
   'Map kiezen': 'Izvēlēties mapi',
-  'Kies een map met presentaties om te beginnen.': 'Izvēlieties mapi ar prezentācijām, lai sāktu.',
-  'Geen presentaties (.md) in deze map gevonden.': 'Šajā mapē nav atrasta neviena prezentācija (.md).',
+  'Kies een map met presentaties om te beginnen.':
+      'Izvēlieties mapi ar prezentācijām, lai sāktu.',
+  'Geen presentaties (.md) in deze map gevonden.':
+      'Šajā mapē nav atrasta neviena prezentācija (.md).',
   'Geen presentaties gevonden voor': 'Nav atrasta neviena prezentācija',
   'meer treffer(s)': 'vēl atbilstība(-as)',
   'Slide zoeken': 'Atrast slaidu',
@@ -205,11 +229,15 @@ const _dutchSourceLv = {
   'Toegevoegd': 'Pievienots',
   'Selecteer alles': 'Atlasīt visu',
   'Deselecteer alles': 'Noņemt atlasi no visa',
-  'Zoek slides op tekst, titel, onderschrift, pad…': 'Meklēt slaidus pēc teksta, virsraksta, paraksta, ceļa…',
-  'Zoek op presentatie, titel of tekst…': 'Meklēt pēc prezentācijas, virsraksta vai teksta…',
-  'Geen andere presentaties (.md) in deze map gevonden.': 'Šajā mapē nav atrasta cita prezentācija (.md).',
+  'Zoek slides op tekst, titel, onderschrift, pad…':
+      'Meklēt slaidus pēc teksta, virsraksta, paraksta, ceļa…',
+  'Zoek op presentatie, titel of tekst…':
+      'Meklēt pēc prezentācijas, virsraksta vai teksta…',
+  'Geen andere presentaties (.md) in deze map gevonden.':
+      'Šajā mapē nav atrasta cita prezentācija (.md).',
   'Geen slides gevonden voor': 'Nav atrasts neviens slaids',
-  'Typ zoektermen om slides uit al je presentaties te vinden.': 'Ierakstiet meklēšanas vārdus, lai atrastu slaidus visās prezentācijās.',
+  'Typ zoektermen om slides uit al je presentaties te vinden.':
+      'Ierakstiet meklēšanas vārdus, lai atrastu slaidus visās prezentācijās.',
   'toegevoegd': 'pievienots',
   'Eerste': 'Pirmās',
   'treffers — verfijn je zoekopdracht': 'atbilstības — precizējiet meklēšanu',
@@ -247,17 +275,21 @@ const _dutchSourceLv = {
   'Beschrijving': 'Apraksts',
   'Korte omschrijving van de presentatie': 'Īss prezentācijas apraksts',
   'Trefwoorden': 'Atslēgvārdi',
-  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026': 'Ar komatu atdalīti, piem., ceturksnis, skaitļi, 2026',
-  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.': 'Šie dati tiek saglabāti Markdown formātā un ir meklējami, atverot failu.',
+  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026':
+      'Ar komatu atdalīti, piem., ceturksnis, skaitļi, 2026',
+  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+      'Šie dati tiek saglabāti Markdown formātā un ir meklējami, atverot failu.',
   'App-thema': 'Lietotnes tēma',
   'Look-and-feel': 'Izskats un noskaņa',
   'Kopie maken en aanpassen': 'Izveidot kopiju un pielāgot',
   'Thema verwijderen': 'Dzēst tēmu',
   'Themanaam': 'Tēmas nosaukums',
-  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.': 'Šī ir iebūvēta tēma. Izveidojiet kopiju, lai pielāgotu krāsas.',
+  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+      'Šī ir iebūvēta tēma. Izveidojiet kopiju, lai pielāgotu krāsas.',
   'Donkere interface': 'Tumšs interfeiss',
   'Lettertype interface': 'Interfeisa fonts',
-  'Past contrast, invoervelden en systeemcomponenten aan.': 'Pielāgo kontrastu, ievades laukus un sistēmas komponentes.',
+  'Past contrast, invoervelden en systeemcomponenten aan.':
+      'Pielāgo kontrastu, ievades laukus un sistēmas komponentes.',
   'Hoofdkleur en bovenbalk': 'Pamatkrāsa un augšējā josla',
   'Knoppen en accenten': 'Pogas un akcenti',
   'Schermachtergrond': 'Ekrāna fons',
@@ -293,15 +325,18 @@ const _dutchSourceLv = {
   'Linksonder': 'Apakšā pa kreisi',
   'Rechtsonder': 'Apakšā pa labi',
   'Footertekst': 'Kājenes teksts',
-  'bijv. Vertrouwelijk · {title} · {date}': 'piem., Konfidenciāli · {title} · {date}',
+  'bijv. Vertrouwelijk · {title} · {date}':
+      'piem., Konfidenciāli · {title} · {date}',
   'Footerpositie': 'Kājenes pozīcija',
-  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.': 'Marķieri: {page}, {total}, {date}, {title}. Kājene parādās visos slaidos, izņemot titullapas un sadaļu slaidus, ja vien to neizslēdzat katram slaidam atsevišķi.',
+  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+      'Marķieri: {page}, {total}, {date}, {title}. Kājene parādās visos slaidos, izņemot titullapas un sadaļu slaidus, ja vien to neizslēdzat katram slaidam atsevišķi.',
   'Links': 'Pa kreisi',
   'Midden': 'Centrā',
   'Rechts': 'Pa labi',
   'Paginanummers tonen (rechtsonder)': 'Rādīt lappušu numurus (apakšā pa labi)',
   'Voorvertoning': 'Priekšskatījums',
-  'De snelle bruine vos springt over de luie hond.': 'Ātrā brūnā lapsa lec pāri slinkajam sunim.',
+  'De snelle bruine vos springt over de luie hond.':
+      'Ātrā brūnā lapsa lec pāri slinkajam sunim.',
   'Preview': 'Priekšskatījums',
   'Uitzoomen': 'Attālināt',
   'Uitgezoomd': 'Attālināts',
@@ -309,9 +344,12 @@ const _dutchSourceLv = {
   'Ingezoomd': 'Tuvināts',
   'van de foto zichtbaar': 'no fotoattēla redzams',
   'Volledig zichtbaar (100%)': 'Pilnībā redzams (100%)',
-  'Uitzoomen (meer van de foto zichtbaar)': 'Attālināt (redzams vairāk no fotoattēla)',
-  'Inzoomen (minder van de foto zichtbaar)': 'Tuvināt (redzams mazāk no fotoattēla)',
-  'Terugzetten (volledige afbeelding zichtbaar)': 'Atiestatīt (redzams pilns attēls)',
+  'Uitzoomen (meer van de foto zichtbaar)':
+      'Attālināt (redzams vairāk no fotoattēla)',
+  'Inzoomen (minder van de foto zichtbaar)':
+      'Tuvināt (redzams mazāk no fotoattēla)',
+  'Terugzetten (volledige afbeelding zichtbaar)':
+      'Atiestatīt (redzams pilns attēls)',
   'Zoom resetten': 'Atiestatīt tuvinājumu',
   'Preview inklappen': 'Sakļaut priekšskatījumu',
   'Preview uitklappen': 'Izvērst priekšskatījumu',
@@ -326,19 +364,23 @@ const _dutchSourceLv = {
   'Terug naar standaardstijl': 'Atpakaļ uz noklusējuma stilu',
   'Automatisch doorgaan na': 'Automātiski pāriet pēc',
   'Logo tonen op deze slide': 'Rādīt logotipu šajā slaidā',
-  'Tabel bewerkbaar tijdens presenteren': 'Tabula rediģējama prezentēšanas laikā',
+  'Tabel bewerkbaar tijdens presenteren':
+      'Tabula rediģējama prezentēšanas laikā',
   'Footer tonen op deze slide': 'Rādīt kājeni šajā slaidā',
   'Sprekersnotities...': 'Runātāja piezīmes...',
   'Sprekersnotities': 'Runātāja piezīmes',
   'Notities voor tijdens het presenteren': 'Piezīmes prezentēšanas laikam',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown': 'Markdown režīms — rediģējiet visu prezentāciju kā Marp Markdown',
+  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+      'Markdown režīms — rediģējiet visu prezentāciju kā Marp Markdown',
   'Toepassen': 'Lietot',
-  'Markdown kon niet worden verwerkt. Controleer de syntax.': 'Markdown neizdevās apstrādāt. Pārbaudiet sintaksi.',
+  'Markdown kon niet worden verwerkt. Controleer de syntax.':
+      'Markdown neizdevās apstrādāt. Pārbaudiet sintaksi.',
   'Controleren': 'Pārbaudīt sintaksi',
   'Syntaxproblemen gevonden': 'Atrastas sintakses problēmas',
   'De markdown bevat': 'Markdown satur',
   'fout(en) en': 'kļūdu(-as) un',
-  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.': 'brīdinājumu(-us). Tāpēc slaidi var tikt nolasīti nepareizi.',
+  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+      'brīdinājumu(-us). Tāpēc slaidi var tikt nolasīti nepareizi.',
   'Terug naar editor': 'Atpakaļ uz redaktoru',
   'Toch toepassen': 'Tomēr lietot',
   'Geen syntaxproblemen gevonden': 'Sintakses problēmas nav atrastas',
@@ -352,27 +394,36 @@ const _dutchSourceLv = {
   'Coverflow': 'Coverflow',
   'Geen afbeeldingen gevonden': 'Nav atrasts neviens attēls',
   'Geen resultaten voor': 'Nav rezultātu vaicājumam',
-  'Pas je zoekterm aan of voeg een beschrijving toe.': 'Pielāgojiet meklēšanas vārdu vai pievienojiet aprakstu.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.': 'Izmantojiet “Pārlūkot”, lai izvēlētos attēlus no jebkuras vietas.',
+  'Pas je zoekterm aan of voeg een beschrijving toe.':
+      'Pielāgojiet meklēšanas vārdu vai pievienojiet aprakstu.',
+  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+      'Izmantojiet “Pārlūkot”, lai izvēlētos attēlus no jebkuras vietas.',
   'Selecteer een\nafbeelding': 'Atlasiet\nattēlu',
   'Gekopieerd': 'Nokopēts',
   'Afbeelding verwijderen?': 'Dzēst attēlu?',
-  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.': 'Fails tiks neatgriezeniski dzēsts no diska. Šo darbību nevar atsaukt.',
-  'Let op: deze afbeelding wordt nog gebruikt in': 'Uzmanību: šis attēls joprojām tiek izmantots',
-  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.': 'Dzēšana atstās šos slaidus tukšus. To nevar atsaukt.',
-  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert': '↑↓←→ pārvietoties  ·  Enter izvēlēties  ·  Dubultklikšķis atlasa',
+  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+      'Fails tiks neatgriezeniski dzēsts no diska. Šo darbību nevar atsaukt.',
+  'Let op: deze afbeelding wordt nog gebruikt in':
+      'Uzmanību: šis attēls joprojām tiek izmantots',
+  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+      'Dzēšana atstās šos slaidus tukšus. To nevar atsaukt.',
+  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+      '↑↓←→ pārvietoties  ·  Enter izvēlēties  ·  Dubultklikšķis atlasa',
   'Sneltoetsen': 'Īsinājumtaustiņi',
   'Toetsenlegenda': 'Taustiņu leģenda',
   'spatie': 'atstarpe',
   'klik': 'klikšķis',
   'cijfers': 'cipari',
-  'Klik of druk op ? / H / Esc om te sluiten': 'Noklikšķiniet vai nospiediet ? / H / Esc, lai aizvērtu',
-  'Klik of druk op H / Esc om te sluiten': 'Noklikšķiniet vai nospiediet H / Esc, lai aizvērtu',
+  'Klik of druk op ? / H / Esc om te sluiten':
+      'Noklikšķiniet vai nospiediet ? / H / Esc, lai aizvērtu',
+  'Klik of druk op H / Esc om te sluiten':
+      'Noklikšķiniet vai nospiediet H / Esc, lai aizvērtu',
   'Naar slidenummer': 'Pāriet uz slaida numuru',
   'Eerste · laatste slide': 'Pirmais · pēdējais slaids',
   'Slide-overzicht': 'Slaidu pārskats',
   'Slide-overzicht (pijltjes + Enter)': 'Slaidu pārskats (bultiņas + Enter)',
-  'Presenter view (notities, klok)': 'Prezentētāja skats (piezīmes, pulkstenis)',
+  'Presenter view (notities, klok)':
+      'Prezentētāja skats (piezīmes, pulkstenis)',
   'Scherm wisselen (meerdere schermen)': 'Pārslēgt ekrānu (vairāki ekrāni)',
   'Zwart · wit scherm': 'Melns · balts ekrāns',
   'Verstreken tijd resetten': 'Atiestatīt pagājušo laiku',
@@ -401,22 +452,30 @@ const _dutchSourceLv = {
   'Gebruikersnotities': 'Lietotāja piezīmes',
   'Gebruikersnotities voor deze slide...': 'Lietotāja piezīmes šim slaidam...',
   'Notities weggooien': 'Atmest piezīmes',
-  'Notities voor de ontvanger tijdens een cursus': 'Piezīmes saņēmējam kursa laikā',
-  'Schakel naar Markdown-modus om notities toe te voegen.': 'Pārslēdzieties uz Markdown režīmu, lai pievienotu piezīmes.',
+  'Notities voor de ontvanger tijdens een cursus':
+      'Piezīmes saņēmējam kursa laikā',
+  'Schakel naar Markdown-modus om notities toe te voegen.':
+      'Pārslēdzieties uz Markdown režīmu, lai pievienotu piezīmes.',
   'Mijn notities aan/uit': 'Pārslēgt manas piezīmes ieslēgt/izslēgt',
   'Wissel scherm (S)': 'Pārslēgt ekrānu (S)',
   'Kon niet van scherm wisselen.': 'Neizdevās pārslēgt ekrānus.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P auditorija · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P auditorija · S ekrāns · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P auditorija · H leģenda · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P auditorija · H leģenda · S ekrāns · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
-  'pijltjes + Enter of klik om te springen': 'bultiņas + Enter vai klikšķis, lai pārlēktu',
+  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P auditorija · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
+  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P auditorija · S ekrāns · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
+  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P auditorija · H leģenda · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
+  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P auditorija · H leģenda · S ekrāns · G pārskats · B/W melns/balts · R laiks · Esc apturēt',
+  'pijltjes + Enter of klik om te springen':
+      'bultiņas + Enter vai klikšķis, lai pārlēktu',
   'Afsluiten (Escape)': 'Iziet (Escape)',
   'Sluiten (G of Esc)': 'Aizvērt (G vai Esc)',
   'Slide renderen…': 'Renderē slaidu…',
   'Slide gekopieerd naar klembord.': 'Slaids nokopēts starpliktuvē.',
   'Kopiëren mislukt.': 'Kopēšana neizdevās.',
-  'Geen ander deck open. Open eerst een ander tabblad.': 'Nav atvērts cits deks. Vispirms atveriet citu cilni.',
+  'Geen ander deck open. Open eerst een ander tabblad.':
+      'Nav atvērts cits deks. Vispirms atveriet citu cilni.',
   '1 slide kopiëren naar…': 'Kopēt 1 slaidu uz…',
   'slides kopiëren naar…': 'slaidus kopēt uz…',
   'slide(s) gekopieerd naar': 'slaids(-i) nokopēts(-i) uz',
@@ -431,11 +490,13 @@ const _dutchSourceLv = {
   'Tips': 'Padomi',
   'Waarschuwingen': 'Brīdinājumi',
   'Fouten': 'Kļūdas',
-  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Padoms: pievienojiet alt tekstu / parakstu pieejamībai',
+  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Padoms: pievienojiet alt tekstu / parakstu pieejamībai',
   'Zoek in slides…': 'Meklēt slaidos…',
   'Geen slides met': 'Nav slaidu ar',
   'SLIDES': 'SLAIDI',
-  'Geen afbeelding op het klembord gevonden.': 'Starpliktuvē nav atrasts attēls.',
+  'Geen afbeelding op het klembord gevonden.':
+      'Starpliktuvē nav atrasts attēls.',
   'Afbeelding plakken': 'Ielīmēt attēlu',
   'Slide toevoegen': 'Pievienot slaidu',
   'Slide plakken': 'Ielīmēt slaidu',
@@ -446,60 +507,81 @@ const _dutchSourceLv = {
   'Kopiëren naar ander deck': 'Kopēt uz citu deku',
   'Weer tonen': 'Rādīt atkal',
   'Selectie opheffen': 'Notīrīt atlasi',
-  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.': 'Es piekrītu EUPL 1.2 licencei un esmu izlasījis, kādus datus OciDeck saglabā.',
-  'Je keuze wordt de standaardtaal van de app.': 'Jūsu izvēle kļūst par lietotnes noklusējuma valodu.',
+  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
+      'Es piekrītu EUPL 1.2 licencei un esmu izlasījis, kādus datus OciDeck saglabā.',
+  'Je keuze wordt de standaardtaal van de app.':
+      'Jūsu izvēle kļūst par lietotnes noklusējuma valodu.',
   'Lees de volledige licentie': 'Lasīt pilnu licenci',
-  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.': 'OciDeck ir brīvā programmatūra ar EUPL 1.2 licenci. Pirms sākat, mēs lūdzam jūs pieņemt licenci. Zemāk varat arī izlasīt, kādus datus OciDeck saglabā šajā ierīcē un kad kaut kas atstāj jūsu ierīci.',
-  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.': 'OciDeck nevāc statistiku un pats no sevis neko nesūta ārā. Pēc noklusējuma viss paliek šajā ierīcē. Dati atstāj šo ierīci tikai tad, ja jūs to izvēlaties:\n\n•  Nextcloud/WebDAV: kad izveidojat savienojumu ar serveri, tiek saglabāts jūsu lietotājvārds un parole (parole droši sistēmas atslēgu saišķī) un prezentācijas, kuras atverat vai saglabājat, tiek nosūtītas uz šo serveri.\n•  Atvēršana caur URL: OciDeck ielādē failu no adreses, kuru ievadāt.\n•  Tiešsaistes multivide (pēc noklusējuma izslēgta): ja iespējota, OciDeck ielādē attēlus un video no adresēm jūsu slaidos.\n•  Ārējās saites (piemēram, tiešsaistes licence) atveras jūsu pārlūkā.',
-  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.': 'OciDeck tiek nodrošināts saskaņā ar European Union Public Licence v1.2. Piekrītot, jūs pieņemat šo licenci. Jūs varat lietot, kopēt, pielāgot un izplatīt OciDeck saskaņā ar EUPL 1.2 noteikumiem.',
-  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.': 'Lai strādātu un nezaudētu jūsu darbu, OciDeck saglabā datus lokāli šajā ierīcē:\n\n•  Jūsu iestatījumi un preferences (valoda, mapes, stila un attēlojuma profili, nesenie faili).\n•  Jūsu prezentācijas materiāli: prezentācijas, kuras saglabājat, automātiskās atkopšanas kopijas un pielikumi, piemēram, attēlu apraksti.\n•  Šī piekrišanas izvēle.\n\nTo varat noņemt, dzēšot failus vai atiestatot iestatījumus.',
-  'Volledige licentie online (23 officiële taalversies)': 'Pilna licence tiešsaistē (23 oficiālās valodu versijas)',
+  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
+      'OciDeck ir brīvā programmatūra ar EUPL 1.2 licenci. Pirms sākat, mēs lūdzam jūs pieņemt licenci. Zemāk varat arī izlasīt, kādus datus OciDeck saglabā šajā ierīcē un kad kaut kas atstāj jūsu ierīci.',
+  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.':
+      'OciDeck nevāc statistiku un pats no sevis neko nesūta ārā. Pēc noklusējuma viss paliek šajā ierīcē. Dati atstāj šo ierīci tikai tad, ja jūs to izvēlaties:\n\n•  Nextcloud/WebDAV: kad izveidojat savienojumu ar serveri, tiek saglabāts jūsu lietotājvārds un parole (parole droši sistēmas atslēgu saišķī) un prezentācijas, kuras atverat vai saglabājat, tiek nosūtītas uz šo serveri.\n•  Atvēršana caur URL: OciDeck ielādē failu no adreses, kuru ievadāt.\n•  Tiešsaistes multivide (pēc noklusējuma izslēgta): ja iespējota, OciDeck ielādē attēlus un video no adresēm jūsu slaidos.\n•  Ārējās saites (piemēram, tiešsaistes licence) atveras jūsu pārlūkā.',
+  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.':
+      'OciDeck tiek nodrošināts saskaņā ar European Union Public Licence v1.2. Piekrītot, jūs pieņemat šo licenci. Jūs varat lietot, kopēt, pielāgot un izplatīt OciDeck saskaņā ar EUPL 1.2 noteikumiem.',
+  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.':
+      'Lai strādātu un nezaudētu jūsu darbu, OciDeck saglabā datus lokāli šajā ierīcē:\n\n•  Jūsu iestatījumi un preferences (valoda, mapes, stila un attēlojuma profili, nesenie faili).\n•  Jūsu prezentācijas materiāli: prezentācijas, kuras saglabājat, automātiskās atkopšanas kopijas un pielikumi, piemēram, attēlu apraksti.\n•  Šī piekrišanas izvēle.\n\nTo varat noņemt, dzēšot failus vai atiestatot iestatījumus.',
+  'Volledige licentie online (23 officiële taalversies)':
+      'Pilna licence tiešsaistē (23 oficiālās valodu versijas)',
   'Wat OciDeck op dit apparaat bewaart': 'Ko OciDeck saglabā šajā ierīcē',
   'Wat je apparaat verlaat': 'Kas atstāj jūsu ierīci',
-  'Vul server-URL en gebruikersnaam in': 'Ievadiet servera URL un lietotājvārdu',
+  'Vul server-URL en gebruikersnaam in':
+      'Ievadiet servera URL un lietotājvārdu',
   'Verbinding mislukt': 'Savienojums neizdevās',
-  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord': 'Pieteikšanās neizdevās — pārbaudiet lietotājvārdu un paroli',
-  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.': 'Serveris atrodas privātā adresē. Atzīmējiet "Uzticams iekšējais serveris", lai atļautu savienojumu.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord':
+      'Pieteikšanās neizdevās — pārbaudiet lietotājvārdu un paroli',
+  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.':
+      'Serveris atrodas privātā adresē. Atzīmējiet "Uzticams iekšējais serveris", lai atļautu savienojumu.',
   'Map niet gevonden op de server': 'Mape serverī nav atrasta',
   'Ongeldige server-URL': 'Nederīgs servera URL',
   'Het antwoord van de server was te groot': 'Servera atbilde bija pārāk liela',
   'Nextcloud': 'Nextcloud',
   'Nextcloud-bron (WebDAV)': 'Nextcloud avots (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.': 'Atveriet un saglabājiet prezentācijas mapē jūsu Nextcloud. Parole tiek saglabāta šifrēta atslēgu saišķī, nevis kopā ar pārējiem iestatījumiem.',
+  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Atveriet un saglabājiet prezentācijas mapē jūsu Nextcloud. Parole tiek saglabāta šifrēta atslēgu saišķī, nevis kopā ar pārējiem iestatījumiem.',
   'Server-URL': 'Servera URL',
   'Gebruikersnaam': 'Lietotājvārds',
   'App-wachtwoord': 'Lietotnes parole',
-  'Maak hiervoor een app-wachtwoord aan in Nextcloud': 'Izveidojiet tam lietotnes paroli Nextcloud',
+  'Maak hiervoor een app-wachtwoord aan in Nextcloud':
+      'Izveidojiet tam lietotnes paroli Nextcloud',
   'Submap (optioneel)': 'Apakšmape (neobligāti)',
   'Vertrouwde interne server': 'Uzticams iekšējais serveris',
-  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.': 'Nepieciešams, ja serveris darbojas privātā vai mājas tīklā (LAN). Atļaujiet savienojumus tikai ar serveriem, kuriem pats uzticaties.',
+  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Nepieciešams, ja serveris darbojas privātā vai mājas tīklā (LAN). Atļaujiet savienojumus tikai ar serveriem, kuriem pats uzticaties.',
   'Verbinding testen': 'Pārbaudīt savienojumu',
   'Verbinding gelukt': 'Savienojums izdevās',
-  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.': 'Izmaiņas tiek saglabātas, kad noklikšķiniet uz Saglabāt.',
+  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
+      'Izmaiņas tiek saglabātas, kad noklikšķiniet uz Saglabāt.',
   'Afbeelding kiezen op Nextcloud': 'Izvēlēties attēlu Nextcloud',
   'Openen vanaf Nextcloud': 'Atvērt no Nextcloud',
   'Vernieuwen': 'Atsvaidzināt',
   'Deze map is leeg': 'Šī mape ir tukša',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.': 'Nav iestatīts Nextcloud serveris. Iestatiet to sadaļā Iestatījumi → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.': 'Neizdevās ielādēt mapi. Pārbaudiet savienojumu un iestatījumus.',
+  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
+      'Nav iestatīts Nextcloud serveris. Iestatiet to sadaļā Iestatījumi → Nextcloud.',
+  'Kon de map niet laden. Controleer je verbinding en instellingen.':
+      'Neizdevās ielādēt mapi. Pārbaudiet savienojumu un iestatījumus.',
   'Kon dit bestand niet openen.': 'Neizdevās atvērt šo failu.',
   'Dit is geen Marp/OciDeck-presentatie.': 'Šī nav Marp/OciDeck prezentācija.',
   'Downloaden mislukt:': 'Lejupielāde neizdevās:',
   'Opgeslagen op Nextcloud:': 'Saglabāts Nextcloud:',
   'Opslaan mislukt:': 'Saglabāšana neizdevās:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.': 'Vispirms iestatiet Nextcloud serveri sadaļā Iestatījumi → Nextcloud.',
+  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
+      'Vispirms iestatiet Nextcloud serveri sadaļā Iestatījumi → Nextcloud.',
   'Opslaan naar Nextcloud': 'Saglabāt Nextcloud',
   'Doelpad (zonder extensie)': 'Mērķa ceļš (bez paplašinājuma)',
-  'Als .ocideck-pakket (één bestand, met assets)': 'Kā .ocideck pakotni (viens fails, ar līdzekļiem)',
+  'Als .ocideck-pakket (één bestand, met assets)':
+      'Kā .ocideck pakotni (viens fails, ar līdzekļiem)',
   'Als losse .md plus afbeeldingen': 'Kā atsevišķu .md plus attēlus',
   'Opslaan': 'Saglabāt',
   'Presenteren': 'Prezentē',
   'Tijden-overzicht tonen na afloop': 'Rādīt laika pārskatu pēc beigām',
-  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.': 'Laiks katram slaidam vienmēr tiek mērīts; tas tikai nosaka, vai pārskats parādās pēc šīs prezentācijas.',
+  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
+      'Laiks katram slaidam vienmēr tiek mērīts; tas tikai nosaka, vai pārskats parādās pēc šīs prezentācijas.',
   'Oefenoverzicht tonen na afloop': 'Rādīt mēģinājuma kopsavilkumu pēc beigām',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.': 'Pēc prezentācijas rādīt pārskatu ar katram slaidam veltīto laiku. Laiks vienmēr tiek mērīts; tas tikai nosaka, vai ekrāns parādās.',
+  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+      'Pēc prezentācijas rādīt pārskatu ar katram slaidam veltīto laiku. Laiks vienmēr tiek mērīts; tas tikai nosaka, vai ekrāns parādās.',
   'Onveilige presentatie geblokkeerd': 'Nedroša prezentācija bloķēta',
-  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.': 'Šī prezentācija netika atvērta. Fails satur saturu, kas var izpildīt kodu, un prezentācijai jāsatur tikai dati — nekas izpildāms.',
+  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Šī prezentācija netika atvērta. Fails satur saturu, kas var izpildīt kodu, un prezentācijai jāsatur tikai dati — nekas izpildāms.',
   'Gevonden:': 'Atrasts:',
   'Regel': 'Rinda',
   'Scriptuitvoering': 'Skripta izpilde',
@@ -521,46 +603,66 @@ const _dutchSourceLv = {
   'Pootje': 'Ķepiņa',
   'In tweeën splitsen': 'Sadalīt divās daļās',
   'Uitgevoerde controles': 'Veiktās pārbaudes',
-  'Contrast en leesbaarheid van tekstkleuren': 'Teksta krāsu kontrasts un salasāmība',
-  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media': 'Attēlu, diagrammu un multivides alt teksti un paraksti',
-  'Aanwezigheid van gekoppelde mediabestanden': 'Saistīto multivides failu esamība',
-  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code': 'Teksta blīvums: aizzīmes, vārdi, citāti, tabulas un kods',
-  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).': 'Tēma, slaidi, kājene, kontrolsaraksts un virsraksti virs attēliem, pārbaudīti pret WCAG AA (4,5:1 tekstam, 3:1 lielam tekstam).',
-  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.': 'Katram attēlam, diagrammai, video un audio nepieciešams apraksts ekrānlasītājiem un izdales materiāliem.',
-  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.': 'Atsauces uz attēliem, video un audio tiek pārbaudītas, vai projektā pastāv fails.',
-  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.': 'Aizzīmju skaits un garums, vārdi, ligzdošana, kolonnu līdzsvars un citātu, virsrakstu, tabulu un koda blīvums, lai viss salasāmi ietilptu.',
-  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.': 'Pamatteksts ar kontrastu zem {crit}:1 tiek uzskatīts par kļūdu; virs tā līdz AA normai — par brīdinājumu.',
-  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.': 'Bez sliekšņa: nepieciešams neizsmelts apraksts.',
-  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.': 'Bez sliekšņa: saistītajam failam jāatrodas projekta mapē.',
-  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.': 'Brīdinājums virs {b1} aizzīmēm (1 kolonna), {bcl} (kontrolsaraksts) vai {b2} (2 kolonnas); kritiski virs {bc1} vai {bc2}. Vārdi virs {w1}/{w2}, vidēji virs {avg} uz aizzīmi. Citāts virs {q} rakstzīmēm, virsraksts virs {t} rakstzīmēm. Ligzdošana dziļāka par līmeni {lvl}. Teksts, kam jāsarūk zem {warn}%, brīdina, zem {crit}% ir kritiski.',
+  'Contrast en leesbaarheid van tekstkleuren':
+      'Teksta krāsu kontrasts un salasāmība',
+  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+      'Attēlu, diagrammu un multivides alt teksti un paraksti',
+  'Aanwezigheid van gekoppelde mediabestanden':
+      'Saistīto multivides failu esamība',
+  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+      'Teksta blīvums: aizzīmes, vārdi, citāti, tabulas un kods',
+  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+      'Tēma, slaidi, kājene, kontrolsaraksts un virsraksti virs attēliem, pārbaudīti pret WCAG AA (4,5:1 tekstam, 3:1 lielam tekstam).',
+  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+      'Katram attēlam, diagrammai, video un audio nepieciešams apraksts ekrānlasītājiem un izdales materiāliem.',
+  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+      'Atsauces uz attēliem, video un audio tiek pārbaudītas, vai projektā pastāv fails.',
+  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+      'Aizzīmju skaits un garums, vārdi, ligzdošana, kolonnu līdzsvars un citātu, virsrakstu, tabulu un koda blīvums, lai viss salasāmi ietilptu.',
+  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+      'Pamatteksts ar kontrastu zem {crit}:1 tiek uzskatīts par kļūdu; virs tā līdz AA normai — par brīdinājumu.',
+  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+      'Bez sliekšņa: nepieciešams neizsmelts apraksts.',
+  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+      'Bez sliekšņa: saistītajam failam jāatrodas projekta mapē.',
+  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+      'Brīdinājums virs {b1} aizzīmēm (1 kolonna), {bcl} (kontrolsaraksts) vai {b2} (2 kolonnas); kritiski virs {bc1} vai {bc2}. Vārdi virs {w1}/{w2}, vidēji virs {avg} uz aizzīmi. Citāts virs {q} rakstzīmēm, virsraksts virs {t} rakstzīmēm. Ligzdošana dziļāka par līmeni {lvl}. Teksts, kam jāsarūk zem {warn}%, brīdina, zem {crit}% ir kritiski.',
   'Zoek op deze computer': 'Meklēt šajā datorā',
   'Presentaties zoeken op deze computer': 'Atrast prezentācijas šajā datorā',
   'Zoek op titel, pad of thema…': 'Meklēt pēc nosaukuma, ceļa vai tēmas…',
   'Bekende mappen worden doorzocht…': 'Meklē zināmajās mapēs…',
   'gevonden': 'atrasts',
   'presentatie(s) gevonden': 'prezentācija(-s) atrasta(-s)',
-  'Geen Marp-presentaties gevonden in de bekende mappen.': 'Zināmajās mapēs nav atrastas Marp prezentācijas.',
+  'Geen Marp-presentaties gevonden in de bekende mappen.':
+      'Zināmajās mapēs nav atrastas Marp prezentācijas.',
   'Geen thema': 'Nav tēmas',
   'Kopieer syntaxproblemen': 'Kopēt sintakses problēmas',
-  'Syntaxproblemen gekopieerd naar klembord.': 'Sintakses problēmas nokopētas starpliktuvē.',
+  'Syntaxproblemen gekopieerd naar klembord.':
+      'Sintakses problēmas nokopētas starpliktuvē.',
   'Online media': 'Tiešsaistes multivide',
   'Online media staat uit': 'Tiešsaistes multivide ir izslēgta',
   'Online media toestaan': 'Atļaut tiešsaistes multividi',
-  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.': 'Atļaut attēlu un video ielādi tiešraidē no URL un no YouTube/Vimeo iegultnēm. Pēc noklusējuma izslēgts jūsu privātumam un drošībai.',
-  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)': 'Faila ceļš vai URL (YouTube, Vimeo, .mp4 …)',
+  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+      'Atļaut attēlu un video ielādi tiešraidē no URL un no YouTube/Vimeo iegultnēm. Pēc noklusējuma izslēgts jūsu privātumam un drošībai.',
+  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+      'Faila ceļš vai URL (YouTube, Vimeo, .mp4 …)',
   'Bestand kiezen': 'Izvēlēties failu',
-  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.': 'Atskaņojiet šī slaida segmentu priekšskatījumā un izgrieziet vietā, kur vēlaties sadalīt: otrā daļa nonāk jaunā slaidā.',
+  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+      'Atskaņojiet šī slaida segmentu priekšskatījumā un izgrieziet vietā, kur vēlaties sadalīt: otrā daļa nonāk jaunā slaidā.',
   'Begin (sec)': 'Sākums (sek)',
   'Einde (sec)': 'Beigas (sek)',
   'einde': 'beigas',
-  'Knip de video op het huidige afspeelpunt': 'Izgriezt video pašreizējā atskaņošanas punktā',
-  'Speel de video eerst af in het voorbeeld': 'Vispirms atskaņojiet video priekšskatījumā',
+  'Knip de video op het huidige afspeelpunt':
+      'Izgriezt video pašreizējā atskaņošanas punktā',
+  'Speel de video eerst af in het voorbeeld':
+      'Vispirms atskaņojiet video priekšskatījumā',
   'Knip hier': 'Izgriezt šeit',
   'Online': 'Tiešsaistē',
   'Lokaal bestand': 'Lokāls fails',
   'Geen video': 'Nav video',
   'Vraag (meerkeuze)': 'Jautājums (izvēles)',
-  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding': 'Virsraksta tekstam ir pārāk mazs kontrasts ar fona attēlu',
+  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+      'Virsraksta tekstam ir pārāk mazs kontrasts ar fona attēlu',
   'Herstel': 'Labot',
   'Tijdlijn': 'Laika līnija',
   'Indeling': 'Izkārtojums',
@@ -585,19 +687,24 @@ const _dutchSourceLv = {
   'Vraag': 'Jautājums',
   'Wat wil je vragen?': 'Ko vēlaties jautāt?',
   'Antwoorden': 'Atbildes',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.': 'Atzīmējiet pareizās atbildes. Bez ierobežojuma; prezentējot nejauši tiek rādīta viena pareizā un pārējās nepareizās.',
+  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Atzīmējiet pareizās atbildes. Bez ierobežojuma; prezentējot nejauši tiek rādīta viena pareizā un pārējās nepareizās.',
   'Antwoord': 'Atbilde',
   'Antwoord toevoegen': 'Pievienot atbildi',
   'Goed antwoord': 'Pareizā atbilde',
-  'Geef minstens één goed én één fout antwoord op.': 'Norādiet vismaz vienu pareizu un vienu nepareizu atbildi.',
+  'Geef minstens één goed én één fout antwoord op.':
+      'Norādiet vismaz vienu pareizu un vienu nepareizu atbildi.',
   'Weergave': 'Attēlojums',
   'Aantal getoonde opties': 'Rādīto opciju skaits',
-  'Maximale antwoordtijd in seconden (0 = geen limiet)': 'Maksimālais atbildes laiks sekundēs (0 = bez ierobežojuma)',
+  'Maximale antwoordtijd in seconden (0 = geen limiet)':
+      'Maksimālais atbildes laiks sekundēs (0 = bez ierobežojuma)',
   'Bij een fout antwoord': 'Nepareizas atbildes gadījumā',
   'Opnieuw proberen': 'Mēģināt vēlreiz',
   'Doorgaan toestaan': 'Atļaut turpināt',
-  'Fout = niet doorgaan; de vraag moet opnieuw.': 'Nepareizi = nevar turpināt; jautājums jāatkārto.',
-  'Fout = wel doorgaan, maar niet opnieuw doen.': 'Nepareizi = var turpināt, bet bez atkārtojuma.',
+  'Fout = niet doorgaan; de vraag moet opnieuw.':
+      'Nepareizi = nevar turpināt; jautājums jāatkārto.',
+  'Fout = wel doorgaan, maar niet opnieuw doen.':
+      'Nepareizi = var turpināt, bet bez atkārtojuma.',
   'Afbeelding (optioneel)': 'Attēls (neobligāti)',
   'Breedte afbeelding': 'Attēla platums',
   'Goed!': 'Pareizi!',
@@ -612,46 +719,58 @@ const _dutchSourceLv = {
   'Juist / Onjuist': 'Patiess / Nepatiess',
   'Meerdere juiste antwoorden': 'Vairākas pareizas atbildes',
   'Stelling': 'Apgalvojums',
-  'Formuleer een stelling die juist of onjuist is': 'Formulējiet apgalvojumu, kas ir patiess vai nepatiess',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.': 'Atzīmējiet visas pareizās atbildes. Prezentējot tiek rādīts nejaušs komplekts ar vismaz vienu pareizu un vienu nepareizu.',
+  'Formuleer een stelling die juist of onjuist is':
+      'Formulējiet apgalvojumu, kas ir patiess vai nepatiess',
+  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+      'Atzīmējiet visas pareizās atbildes. Prezentējot tiek rādīts nejaušs komplekts ar vismaz vienu pareizu un vienu nepareizu.',
   'Juist': 'Patiess',
   'Onjuist': 'Nepatiess',
-  'De stelling hierboven is juist of onjuist; kies welke.': 'Iepriekšējais apgalvojums ir patiess vai nepatiess; izvēlieties, kurš.',
+  'De stelling hierboven is juist of onjuist; kies welke.':
+      'Iepriekšējais apgalvojums ir patiess vai nepatiess; izvēlieties, kurš.',
   'Selecteer alle juiste antwoorden': 'Atlasiet visas pareizās atbildes',
   'Bevestig': 'Apstiprināt',
   'Het juiste antwoord': 'Pareizā atbilde',
-  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.': 'Attēls tiek rādīts pilnekrānā kā fons. Izmantojiet izplūdumu, kad virsrakstam nepieciešams vairāk miera vai kontrasta.',
+  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+      'Attēls tiek rādīts pilnekrānā kā fons. Izmantojiet izplūdumu, kad virsrakstam nepieciešams vairāk miera vai kontrasta.',
   'Cockpit-kleurschema': 'Cockpit krāsu shēma',
-  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.': 'Cockpit mērītāju statusa krāsas. Izveidojiet nosauktus variantus; izvēlētā shēma attiecas uz visiem cockpit slaidiem.',
+  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+      'Cockpit mērītāju statusa krāsas. Izveidojiet nosauktus variantus; izvēlētā shēma attiecas uz visiem cockpit slaidiem.',
   'Standaard': 'Noklusējums',
   'Standaardkleuren gebruiken': 'Izmantot noklusējuma krāsas',
   'Kleurschema verwijderen': 'Dzēst krāsu shēmu',
   'Schemanaam': 'Shēmas nosaukums',
-  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.': 'Šī ir iebūvētā shēma. Izveidojiet kopiju, lai pielāgotu krāsas.',
+  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+      'Šī ir iebūvētā shēma. Izveidojiet kopiju, lai pielāgotu krāsas.',
   'Goed': 'Labi',
   'Waarschuwing': 'Brīdinājums',
   'Kritiek': 'Kritiski',
   'Te laag (koud)': 'Pārāk zems (auksts)',
   'Lucht (horizon)': 'Debesis (horizonts)',
   'Grond (horizon)': 'Zeme (horizonts)',
-  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.': 'Statusa krāsas seko cockpit krāsu shēmai; pielāgojiet to vai izveidojiet variantus sadaļā Iestatījumi → Cockpit.',
+  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+      'Statusa krāsas seko cockpit krāsu shēmai; pielāgojiet to vai izveidojiet variantus sadaļā Iestatījumi → Cockpit.',
   'Veel bullets op deze slide': 'Daudz aizzīmju šajā slaidā',
   'bullets': 'aizzīmes',
   'Overweeg de inhoud te splitsen.': 'Apsveriet satura sadalīšanu.',
   'Erg veel bullets op deze slide': 'Pārāk daudz aizzīmju šajā slaidā',
-  'Splits deze inhoud over meerdere slides.': 'Sadaliet šo saturu pa vairākiem slaidiem.',
+  'Splits deze inhoud over meerdere slides.':
+      'Sadaliet šo saturu pa vairākiem slaidiem.',
   'Veel woorden in bullets': 'Daudz vārdu aizzīmēs',
   'woorden': 'vārdi',
-  'Maak bullets korter of splits de slide.': 'Saīsiniet aizzīmes vai sadaliet slaidu.',
+  'Maak bullets korter of splits de slide.':
+      'Saīsiniet aizzīmes vai sadaliet slaidu.',
   'Erg veel woorden in bullets': 'Pārāk daudz vārdu aizzīmēs',
   'Gemiddeld lange bullets': 'Vidēji garas aizzīmes',
   'woorden per bullet': 'vārdi vienā aizzīmē',
   'Maak elke bullet kernachtiger.': 'Padariet katru aizzīmi kodolīgāku.',
-  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.': 'Atrasta aizzīme ar vairākiem teikumiem. Padariet aizzīmes kodolīgākas vai sadaliet saturu.',
+  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+      'Atrasta aizzīme ar vairākiem teikumiem. Padariet aizzīmes kodolīgākas vai sadaliet saturu.',
   'Diepe bulletniveaus gevonden': 'Atrasti dziļi aizzīmju līmeņi',
   'niveau': 'līmenis',
-  'Beperk nesting voor betere leesbaarheid.': 'Ierobežojiet ligzdošanu labākai lasāmībai.',
-  'Twee kolommen zijn sterk uit balans': 'Divas kolonnas ir stipri nelīdzsvarotas',
+  'Beperk nesting voor betere leesbaarheid.':
+      'Ierobežojiet ligzdošanu labākai lasāmībai.',
+  'Twee kolommen zijn sterk uit balans':
+      'Divas kolonnas ir stipri nelīdzsvarotas',
   'tegenover': 'pret',
   'Verdeel of splits de inhoud.': 'Pārdaliet vai sadaliet saturu.',
   'Slidetitel': 'Slaida virsraksts',
@@ -660,8 +779,10 @@ const _dutchSourceLv = {
   'Animeren bij binnenkomst': 'Animēt ienākot',
   'Activatieduur': 'Aktivizēšanas ilgums',
   'Splits slide': 'Sadalīt slaidu',
-  'Doornummeren vanaf vorige slide': 'Turpināt numerāciju no iepriekšējā slaida',
-  'Begin de nummering waar de vorige slide ophield.': 'Sāciet numerāciju tur, kur beidzās iepriekšējais slaids.',
+  'Doornummeren vanaf vorige slide':
+      'Turpināt numerāciju no iepriekšējā slaida',
+  'Begin de nummering waar de vorige slide ophield.':
+      'Sāciet numerāciju tur, kur beidzās iepriekšējais slaids.',
   'Volg thema-animatieduur': 'Sekot tēmas animācijas ilgumam',
   'Animatie bij openen': 'Animēt ienākot',
   'Meter': 'Rādītājs',
@@ -689,7 +810,8 @@ const _dutchSourceLv = {
   'Koers': 'Kurss',
   'Ander profiel kiezen': 'Izvēlēties citu profilu',
   'Cockpit': 'Kabīne',
-  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Mērķa laiks prezentētāja atskaitei. Prezentējot to var precizēt ar taustiņu K.',
+  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Mērķa laiks prezentētāja atskaitei. Prezentējot to var precizēt ar taustiņu K.',
   'Logo en footer': 'Logotips un kājene',
   'Pagina': 'Lapa',
   'Presentatiestijl': 'Prezentācijas stils',
@@ -706,7 +828,8 @@ const _dutchSourceLv = {
   'Doeltijd': 'Mērķa laiks',
   'Doeltijd (aftellen)': 'Mērķa laiks (atskaite)',
   'Geen aftelling': 'Bez atskaites',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Noklusētais mērķa laiks prezentētāja atskaitei. Prezentējot to var precizēt ar taustiņu K.',
+  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Noklusētais mērķa laiks prezentētāja atskaitei. Prezentējot to var precizēt ar taustiņu K.',
   'uit': 'izsl.',
   'Doeltijd / aftellen (K)': 'Mērķis / atskaite (K)',
   'Doeltijd / aftellen instellen (MMSS)': 'Iestatīt mērķi / atskaiti (MMSS)',
@@ -723,25 +846,31 @@ const _dutchSourceLv = {
   'Kopieer': 'Kopēt',
   'Sluiten': 'Aizvērt',
   'Tekstgrootte van de interface': 'Saskarnes teksta izmērs',
-  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.': 'Palielina visu redaktora tekstu līdz 200%. Paši slaidi netiek mainīti.',
+  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+      'Palielina visu redaktora tekstu līdz 200%. Paši slaidi netiek mainīti.',
   'Breedte van het slidepaneel': 'Slaidu paneļa platums',
   'Pijltjestoetsen passen de breedte aan': 'Bulttaustiņi pielāgo platumu',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.': 'Padoms: ar Cmd/Ctrl+V ielīmējiet tabulu no izklājlapas šūnā, lai aizpildītu visu tabulu.',
+  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+      'Padoms: ar Cmd/Ctrl+V ielīmējiet tabulu no izklājlapas šūnā, lai aizpildītu visu tabulu.',
   'Annuleren': 'Atcelt',
   'Checklist': 'Kontrolsaraksts',
   'Voortgangsgrafiek tonen': 'Rādīt progresa diagrammu',
-  'Toont afgevinkt en niet afgevinkt als percentages.': 'Rāda atzīmētos un neatzīmētos vienumus procentos.',
+  'Toont afgevinkt en niet afgevinkt als percentages.':
+      'Rāda atzīmētos un neatzīmētos vienumus procentos.',
   'Afgevinkt': 'Atzīmēts',
   'Niet afgevinkt': 'Neatzīmēts',
-  'Er zijn geen aangevinkte checklist-items om te legen.': 'Nav atzīmētu kontrolsaraksta vienumu, ko notīrīt.',
+  'Er zijn geen aangevinkte checklist-items om te legen.':
+      'Nav atzīmētu kontrolsaraksta vienumu, ko notīrīt.',
   'Alle checkboxen legen?': 'Notīrīt visas izvēles rūtiņas?',
   'Hiermee worden alle': 'Tādējādi tiks noņemtas visas',
-  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.': 'atzīmētās kontrolsaraksta vienumu atzīmes visā prezentācijā. To var atsaukt ar Ctrl/Cmd+Z.',
+  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+      'atzīmētās kontrolsaraksta vienumu atzīmes visā prezentācijā. To var atsaukt ar Ctrl/Cmd+Z.',
   'Alles legen': 'Notīrīt visu',
   'checklist-items uitgevinkt.': 'kontrolsaraksta vienumu atzīmes noņemtas.',
   'Alle checkboxen legen': 'Notīrīt visas izvēles rūtiņas',
   'Afgevinkte tekst doorhalen': 'Pārsvītrot atzīmēto tekstu',
-  'Toont een streep door voltooide checklistitems.': 'Rāda pabeigtos kontrolsaraksta vienumus ar pārsvītrojumu.',
+  'Toont een streep door voltooide checklistitems.':
+      'Rāda pabeigtos kontrolsaraksta vienumus ar pārsvītrojumu.',
   'Na media automatisch doorgaan': 'Pēc multivides automātiski turpināt',
   'Opsomming': 'Aizzīmes',
   'Nummering': 'Numerācija',
@@ -751,11 +880,13 @@ const _dutchSourceLv = {
   'Omhoog': 'Uz augšu',
   'Omlaag': 'Uz leju',
   'Niet toevoegen': 'Nepievienot',
-  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.': 'Šie slaidi izmanto tos pašus datus, krāsas un virsrakstu. Ar bultiņām izvēlieties to secību pēc pašreizējā slaida.',
+  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+      'Šie slaidi izmanto tos pašus datus, krāsas un virsrakstu. Ar bultiņām izvēlieties to secību pēc pašreizējā slaida.',
   'Afbeelding': 'Attēls',
   'Broncode': 'Pirmkods',
   'Bullet': 'Aizzīme',
-  'Plak of typ hier je broncode...': 'Ielīmējiet vai ierakstiet savu pirmkodu šeit...',
+  'Plak of typ hier je broncode...':
+      'Ielīmējiet vai ierakstiet savu pirmkodu šeit...',
   'Programmeertaal': 'Programmēšanas valoda',
   'TLP van deze slide': 'Šī slaida TLP',
   'Wis annotaties (C)': 'Notīrīt anotācijas (C)',
@@ -769,10 +900,12 @@ const _dutchSourceLv = {
   'Cirkel': 'Apļa',
   'Spider': 'Zirnekļa',
   'CSV importeren': 'Importēt CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)': 'Dati (CSV: pirmā rinda = sēriju nosaukumi, pirmā kolonna = etiķetes)',
+  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+      'Dati (CSV: pirmā rinda = sēriju nosaukumi, pirmā kolonna = etiķetes)',
   'Gekoppeld aan': 'Saistīts ar',
   'Ontkoppelen': 'Atsaistīt',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?': 'Saglabāt datus slaidā vai glabāt kā atsevišķu CSV failu blakus prezentācijai?',
+  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+      'Saglabāt datus slaidā vai glabāt kā atsevišķu CSV failu blakus prezentācijai?',
   'In de slide': 'Slaidā',
   'Als CSV-bestand': 'Kā CSV failu',
   'Geen grafiekgegevens': 'Nav diagrammas datu',
@@ -785,9 +918,12 @@ const _dutchSourceLv = {
   'Sorteren': 'Kārtot',
   'Oplopend sorteren': 'Kārtot augoši',
   'Aflopend sorteren': 'Kārtot dilstoši',
-  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.': 'Apļa diagrammā tiek rādītas ne vairāk kā pirmās divas sērijas; etiķetes veido segmentus.',
-  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.': 'Zirnekļa diagrammai nepieciešamas vismaz trīs etiķetes (asis); katra sērija veido figūru.',
-  'Een spider-diagram heeft minstens drie labels nodig': 'Zirnekļa diagrammai nepieciešamas vismaz trīs etiķetes',
+  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+      'Apļa diagrammā tiek rādītas ne vairāk kā pirmās divas sērijas; etiķetes veido segmentus.',
+  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+      'Zirnekļa diagrammai nepieciešamas vismaz trīs etiķetes (asis); katra sērija veido figūru.',
+  'Een spider-diagram heeft minstens drie labels nodig':
+      'Zirnekļa diagrammai nepieciešamas vismaz trīs etiķetes',
   'Minimumlijn (optioneel)': 'Minimālā līnija (neobligāti)',
   'Maximumlijn (optioneel)': 'Maksimālā līnija (neobligāti)',
   'Schaalminimum (optioneel)': 'Skalas minimums (neobligāti)',
@@ -796,9 +932,11 @@ const _dutchSourceLv = {
   'Broncode achtergrond': 'Pirmkoda fons',
   'Broncode tekst': 'Pirmkoda teksts',
   'Syntaxkleuring': 'Sintakses iekrāsošana',
-  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).': 'Izslēgts = viss vienā krāsā (piem., zaļš uz melna CRT ekrānam).',
+  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+      'Izslēgts = viss vienā krāsā (piem., zaļš uz melna CRT ekrānam).',
   'Eigen kleur (hex)': 'Pielāgota krāsa (hex)',
-  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.': 'Piemēram, #33FF33 CRT zaļam ekrānam.',
+  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+      'Piemēram, #33FF33 CRT zaļam ekrānam.',
   'Onderdeel van stijlprofiel ': 'Stila profila daļa ',
   'Broncode lettertype': 'Pirmkoda fonts',
   'Kop (optioneel)': 'Virsraksts (neobligāti)',
@@ -806,22 +944,26 @@ const _dutchSourceLv = {
   'Subkop': 'Apakšvirsraksts',
   'Systeem (monospace)': 'Sistēmas (monospace)',
   'Platte tekst': 'Vienkāršs teksts',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.': 'HTML atveras jebkurā pārlūkā bez interneta un renderē koda blokus, matemātiku un Mermaid diagrammas.',
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+      'HTML atveras jebkurā pārlūkā bez interneta un renderē koda blokus, matemātiku un Mermaid diagrammas.',
   'Laatste slide': 'Pēdējais slaids',
   'Logo px': 'Logotips px',
   'Markdown voor laatste slide': 'Markdown pēdējam slaidam',
   'PREVIEW': 'PRIEKŠSKATĪJUMS',
   'Slides gerenderd.': 'Slaidi renderēti.',
   'Standaard laatste slide gebruiken': 'Izmantot noklusēto pēdējo slaidu',
-  'Wordt automatisch toegevoegd bij presenteren en exporteren.': 'Tiek automātiski pievienots prezentējot un eksportējot.',
+  'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+      'Tiek automātiski pievienots prezentējot un eksportējot.',
   'gerenderd.': 'renderēti.',
   'renderen…': 'renderē…',
   'voorbereiden…': 'sagatavo…',
   'Duplicaten opruimen': 'Notīrīt dublikātus',
-  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën': 'Atrast baitu ziņā identiskus attēlus (md5), apvienot tagus un piezīmes un noņemt kopijas',
+  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+      'Atrast baitu ziņā identiskus attēlus (md5), apvienot tagus un piezīmes un noņemt kopijas',
   'Geen dubbele afbeeldingen gevonden.': 'Nav atrasti dublēti attēli.',
   'Dubbele afbeeldingen opruimen?': 'Notīrīt dublētos attēlus?',
-  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.': 'No katras grupas paliek viens fails. Tagi un piezīmes tiek apvienotas, un slaidi, kas izmanto kopiju, pēc tam norādīs uz saglabāto failu — arī prezentācijās, kas pašlaik nav atvērtas.',
+  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+      'No katras grupas paliek viens fails. Tagi un piezīmes tiek apvienotas, un slaidi, kas izmanto kopiju, pēc tam norādīs uz saglabāto failu — arī prezentācijās, kas pašlaik nav atvērtas.',
   'Opruimen': 'Notīrīt',
   '1 presentatiebestand bijgewerkt.': '1 prezentācijas fails atjaunināts.',
   'presentatiebestanden bijgewerkt.': 'prezentācijas faili atjaunināti.',
@@ -830,14 +972,19 @@ const _dutchSourceLv = {
   'dubbele afbeeldingen verwijderd.': 'dublēti attēli noņemti.',
   'Alleen afbeeldingen zonder tags tonen': 'Rādīt tikai attēlus bez tagiem',
   'Alle afbeeldingen hebben tags.': 'Visiem attēliem ir tagi.',
-  'Zet het filter uit om alles weer te zien.': 'Izslēdziet filtru, lai atkal redzētu visu.',
+  'Zet het filter uit om alles weer te zien.':
+      'Izslēdziet filtru, lai atkal redzētu visu.',
   'Welkom bij OciDeck': 'Laipni lūdzam OciDeck',
   'Privacy en gebruik': 'Privātums un lietošana',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'OciDeck ir lokāla darbvirsmas lietotne. Jūsu prezentācijas un dati tiek glabāti tikai jūsu datorā.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'Lietotne nevāc personas datus, statistiku vai lietošanas datus. Jūsu privātums ir mūsu prioritāte.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Visi dati, ko ievadāt OciDeck, paliek jūsu lokālajā sistēmā un netiek sūtīti uz ārējiem serveriem.',
+  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
+      'OciDeck ir lokāla darbvirsmas lietotne. Jūsu prezentācijas un dati tiek glabāti tikai jūsu datorā.',
+  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
+      'Lietotne nevāc personas datus, statistiku vai lietošanas datus. Jūsu privātums ir mūsu prioritāte.',
+  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
+      'Visi dati, ko ievadāt OciDeck, paliek jūsu lokālajā sistēmā un netiek sūtīti uz ārējiem serveriem.',
   'Licentie (EUPL 1.2)': 'Licence (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'Noklikšķinot uz "Piekrītu", jūs pieņemat šos noteikumus un piekrītat OciDeck lietošanai.',
+  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
+      'Noklikšķinot uz "Piekrītu", jūs pieņemat šos noteikumus un piekrītat OciDeck lietošanai.',
   'Volledige licentie online': 'Pilna licence tiešsaistē',
   'Akkoord gaan': 'Piekrītu',
   'Privacy': 'Privātums',
@@ -845,16 +992,21 @@ const _dutchSourceLv = {
   'Toestemming intrekken': 'Atsaukt piekrišanu',
   'Toestemming intrekken?': 'Atsaukt piekrišanu?',
   'Intrekken': 'Atsaukt',
-  'U hebt al toegestemd in het gebruik van OciDeck.': 'Jūs jau esat piekritis OciDeck lietošanai.',
-  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.': 'Piekrišanu varat atsaukt jebkurā laikā. Pēc atsaukšanas šie noteikumi jāpieņem atkārtoti.',
-  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.': 'Ja atsaucat piekrišanu, šie noteikumi būs jāpieņem atkārtoti, kad no jauna palaidīsiet OciDeck.',
+  'U hebt al toegestemd in het gebruik van OciDeck.':
+      'Jūs jau esat piekritis OciDeck lietošanai.',
+  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+      'Piekrišanu varat atsaukt jebkurā laikā. Pēc atsaukšanas šie noteikumi jāpieņem atkārtoti.',
+  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+      'Ja atsaucat piekrišanu, šie noteikumi būs jāpieņem atkārtoti, kad no jauna palaidīsiet OciDeck.',
   'Slidekwaliteit': 'Slaida kvalitāte',
   'Geen kwaliteitsproblemen gevonden': 'Kvalitātes problēmas nav atrastas',
   'Thema (hele presentatie)': 'Tēma (visa prezentācija)',
   'Kwaliteitsprobleem': 'Kvalitātes problēma',
   'Kwaliteitsproblemen': 'Kvalitātes problēmas',
-  'Kwaliteitsproblemen (inclusief ernstige)': 'Kvalitātes problēmas (ieskaitot nopietnas)',
-  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Pievienojiet alt tekstu / parakstu pieejamībai',
+  'Kwaliteitsproblemen (inclusief ernstige)':
+      'Kvalitātes problēmas (ieskaitot nopietnas)',
+  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Pievienojiet alt tekstu / parakstu pieejamībai',
   'Alt-tekst': 'Alt teksts',
   'Tekstdichtheid': 'Teksta blīvums',
   'Contrast': 'Kontrasts',
@@ -864,22 +1016,32 @@ const _dutchSourceLv = {
   ':1 voor normale tekst).': ':1 parastam tekstam).',
   ':1 voor grote tekst).': ':1 lielam tekstam).',
   ':1).': ':1).',
-  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.': 'Teksta kontrastu uz attēla vai virs tā nevar pārbaudīt automātiski — pārbaudiet vizuāli.',
-  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.': 'Diagrammai nav virsraksta vai aprakstošu datu — pievienojiet virsrakstu vai sēriju nosaukumus.',
-  'heeft geen titel of sprekernotities die de inhoud beschrijven.': 'nav virsraksta vai runātāja piezīmju, kas apraksta saturu.',
-  'Veel tekst op deze slide: het lettertype wordt verkleind tot ': 'Daudz teksta šajā slaidā: fonta izmērs samazināts līdz ',
+  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+      'Teksta kontrastu uz attēla vai virs tā nevar pārbaudīt automātiski — pārbaudiet vizuāli.',
+  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+      'Diagrammai nav virsraksta vai aprakstošu datu — pievienojiet virsrakstu vai sēriju nosaukumus.',
+  'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+      'nav virsraksta vai runātāja piezīmju, kas apraksta saturu.',
+  'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+      'Daudz teksta šajā slaidā: fonta izmērs samazināts līdz ',
   ' van de ontwerpgrootte.': ' no dizaina izmēra.',
-  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (': 'Daudz teksta šajā slaidā: fonta izmērs stipri samazināts (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.': 'no dizaina izmēra). Apsveriet iespēju sadalīt saturu.',
+  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+      'Daudz teksta šajā slaidā: fonta izmērs stipri samazināts (',
+  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      'no dizaina izmēra). Apsveriet iespēju sadalīt saturu.',
   'Grote tabel (': 'Liela tabula (',
   ' rijen, ': ' rindas, ',
-  ' kolommen): celtekst staat op het minimumformaat.': ' kolonnas): šūnu teksts ir minimālajā izmērā.',
+  ' kolommen): celtekst staat op het minimumformaat.':
+      ' kolonnas): šūnu teksts ir minimālajā izmērā.',
   'Veel broncode (': 'Daudz pirmkoda (',
-  ' regels) — de tekst wordt sterk verkleind om te passen.': ' rindas) — teksts stipri samazināts, lai ietilptu.',
+  ' regels) — de tekst wordt sterk verkleind om te passen.':
+      ' rindas) — teksts stipri samazināts, lai ietilptu.',
   'Veel vrije markdown (': 'Daudz brīvā markdown (',
-  ' regels) — controleer of alles leesbaar blijft op de slide.': ' rindas) — pārbaudiet, vai viss paliek salasāms slaidā.',
+  ' regels) — controleer of alles leesbaar blijft op de slide.':
+      ' rindas) — pārbaudiet, vai viss paliek salasāms slaidā.',
   'Lange titelpagina (': 'Garš titulslaids (',
-  ' tekens) — de tekst wordt verkleind om te passen.': ' rakstzīmes) — teksts samazināts, lai ietilptu.',
+  ' tekens) — de tekst wordt verkleind om te passen.':
+      ' rakstzīmes) — teksts samazināts, lai ietilptu.',
   'Thema bodytekst': 'Tēmas pamatteksts',
   'Thema titel': 'Tēmas virsraksts',
   'Thema tabeltekst': 'Tēmas tabulas teksts',
@@ -890,34 +1052,46 @@ const _dutchSourceLv = {
   'Tweede afbeelding': 'Otrais attēls',
   'Waarschuwing bij export': 'Brīdināt eksportējot',
   'Minimale contrastverhouding': 'Minimālā kontrasta attiecība',
-  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.': 'Teksts zem šīs attiecības tiek atzīmēts. 4.5 = WCAG AA, 3.0 = WCAG AA liels teksts. Augstāks ir stingrāks.',
-  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.': 'Pirms eksportēšanas prasīt apstiprinājumu, ja ir slaidu kvalitātes problēmas.',
+  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.':
+      'Teksts zem šīs attiecības tiek atzīmēts. 4.5 = WCAG AA, 3.0 = WCAG AA liels teksts. Augstāks ir stingrāks.',
+  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+      'Pirms eksportēšanas prasīt apstiprinājumu, ja ir slaidu kvalitātes problēmas.',
   'Kwaliteitsproblemen gevonden': 'Atrastas kvalitātes problēmas',
   'Toch exporteren': 'Tomēr eksportēt',
   'ernstige probleem(en)': 'nopietna(-s) problēma(-s)',
-  'De presentatie heeft kwaliteitsproblemen (': 'Prezentācijai ir kvalitātes problēmas (',
+  'De presentatie heeft kwaliteitsproblemen (':
+      'Prezentācijai ir kvalitātes problēmas (',
   'Lange quote (': 'Garš citāts (',
   'Footer-tekst': 'Kājenes teksts',
   'Checklist (niet aangevinkt)': 'Kontrolsaraksts (neatzīmēts)',
   'Checklist (aangevinkt)': 'Kontrolsaraksts (atzīmēts)',
   ': bestand niet gevonden (': ': fails nav atrasts (',
-  'Blokkeer export bij ernstige kwaliteitsproblemen': 'Bloķēt eksportu nopietnu kvalitātes problēmu gadījumā',
-  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.': 'Eksports nav iespējams, kamēr slaidu kvalitātes pārbaudē ir kļūdas.',
-  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.': 'Eksports bloķēts nopietnu kvalitātes problēmu dēļ.',
+  'Blokkeer export bij ernstige kwaliteitsproblemen':
+      'Bloķēt eksportu nopietnu kvalitātes problēmu gadījumā',
+  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+      'Eksports nav iespējams, kamēr slaidu kvalitātes pārbaudē ir kļūdas.',
+  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+      'Eksports bloķēts nopietnu kvalitātes problēmu dēļ.',
   'Alle meldingen': 'Visi paziņojumi',
-  '… en meer problemen in het kwaliteitspaneel.': '… un vairāk problēmu kvalitātes panelī.',
+  '… en meer problemen in het kwaliteitspaneel.':
+      '… un vairāk problēmu kvalitātes panelī.',
   'Classificatie-handhaving': 'Klasifikācijas ieviešana',
   'Vrijgaveplafond': 'Izlaišanas griesti',
-  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.': 'Augstākais TLP līmenis, ko atļauts eksportēt. Tukšs = bez griestiem.',
+  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+      'Augstākais TLP līmenis, ko atļauts eksportēt. Tukšs = bez griestiem.',
   'Vereist minimumniveau': 'Nepieciešamais minimālais līmenis',
-  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.': 'Zemākā klasifikācija, kāda jābūt kolodai, lai eksportētu. Tukšs = bez minimuma.',
+  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+      'Zemākā klasifikācija, kāda jābūt kolodai, lai eksportētu. Tukšs = bez minimuma.',
   'Geen plafond': 'Bez griestiem',
   'Geen minimum': 'Bez minimuma',
   'Classificatie verplicht': 'Klasifikācija obligāta',
-  'Weiger export wanneer het deck geen TLP-niveau heeft.': 'Atteikt eksportu, ja kolodai nav TLP līmeņa.',
+  'Weiger export wanneer het deck geen TLP-niveau heeft.':
+      'Atteikt eksportu, ja kolodai nav TLP līmeņa.',
   'Classificatie-watermerk': 'Klasifikācijas ūdenszīme',
-  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.': 'Rādīt diagonālu ūdenszīmi ar TLP un organizāciju katrā slaidā.',
-  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.': 'Iestatiet TLP līmeni — eksportu bloķē klasifikācijas politika.',
+  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+      'Rādīt diagonālu ūdenszīmi ar TLP un organizāciju katrā slaidā.',
+  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+      'Iestatiet TLP līmeni — eksportu bloķē klasifikācijas politika.',
   'Tabel bewerken': 'Rediģēt tabulu',
   'Pijltjes · Tab · Esc': 'Bultiņas · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Rediģēt tabulu (tabulas slaidos)',

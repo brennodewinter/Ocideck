@@ -216,7 +216,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          border: Border.all(color: const Color(0xFFE2E8F0)),
+          border: Border.all(color: AppTheme.slate200),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -229,7 +229,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
                 child: const Icon(
                   Icons.drag_indicator,
                   size: 16,
-                  color: Color(0xFFCBD5E1),
+                  color: AppTheme.slate300,
                 ),
               ),
             ),
@@ -283,7 +283,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
               icon: const Icon(
                 Icons.remove_circle_outline,
                 size: 18,
-                color: Color(0xFF64748B),
+                color: AppTheme.slate500,
               ),
               onPressed: () => _removeEvent(i),
               tooltip: l10n.d('Verwijder'),
@@ -307,7 +307,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
       padding: const EdgeInsets.only(top: 12),
       child: Row(
         children: [
-          const Icon(Icons.timer_outlined, size: 18, color: Color(0xFF64748B)),
+          const Icon(Icons.timer_outlined, size: 18, color: AppTheme.slate500),
           const SizedBox(width: 8),
           Text(
             context.l10n.d('Activatieduur'),
@@ -350,9 +350,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 12,
-                color: _inheritsTheme
-                    ? const Color(0xFF94A3B8)
-                    : const Color(0xFF64748B),
+                color: _inheritsTheme ? AppTheme.slate400 : AppTheme.slate500,
                 fontStyle: _inheritsTheme ? FontStyle.italic : FontStyle.normal,
                 fontWeight: FontWeight.w700,
               ),

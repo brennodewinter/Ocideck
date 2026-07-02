@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/slide.dart';
 import '../../state/deck_provider.dart';
 import '_editor_field.dart';
+import '../../theme/app_theme.dart';
 
 class TwoImagesEditor extends ConsumerStatefulWidget {
   final Slide slide;
@@ -142,7 +143,7 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
           child: Text(
             'Links ${widget.slide.imageSize > 0 ? widget.slide.imageSize : 50}% — '
             'Rechts ${100 - (widget.slide.imageSize > 0 ? widget.slide.imageSize : 50)}%',
-            style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
           ),
         ),
       ],

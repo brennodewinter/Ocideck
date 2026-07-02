@@ -117,7 +117,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                     '•  ${s.label}  ·  ${_formatWhen(s.savedAt)}',
                     style: const TextStyle(
                       fontSize: 12.5,
-                      color: Color(0xFF475569),
+                      color: AppTheme.slate600,
                     ),
                   ),
                 ),

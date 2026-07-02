@@ -34,7 +34,7 @@ class AnimationDurationControl extends StatelessWidget {
     final seconds = effectiveMs / 1000;
     return Row(
       children: [
-        const Icon(Icons.timer_outlined, size: 18, color: Color(0xFF64748B)),
+        const Icon(Icons.timer_outlined, size: 18, color: AppTheme.slate500),
         const SizedBox(width: 8),
         Text(
           context.l10n.d('Activatieduur'),
@@ -62,9 +62,7 @@ class AnimationDurationControl extends StatelessWidget {
             textAlign: TextAlign.right,
             style: TextStyle(
               fontSize: 12,
-              color: inheritsTheme
-                  ? const Color(0xFF94A3B8)
-                  : const Color(0xFF64748B),
+              color: inheritsTheme ? AppTheme.slate400 : AppTheme.slate500,
               fontStyle: inheritsTheme ? FontStyle.italic : FontStyle.normal,
               fontWeight: FontWeight.w700,
             ),

@@ -139,7 +139,7 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
           Text(
             '${l10n.d('Bekende mappen worden doorzocht…')}'
             '$phase  ·  ${_hits.length} ${l10n.d('gevonden')}',
-            style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
             overflow: TextOverflow.ellipsis,
           ),
         ],
@@ -147,7 +147,7 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
     }
     return Text(
       '${_hits.length} ${l10n.d('presentatie(s) gevonden')}',
-      style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+      style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
     );
   }
 
@@ -183,12 +183,12 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 40, color: const Color(0xFF94A3B8)),
+          Icon(icon, size: 40, color: AppTheme.slate400),
           const SizedBox(height: 12),
           Text(
             message,
             textAlign: TextAlign.center,
-            style: const TextStyle(color: Color(0xFF64748B), fontSize: 13),
+            style: const TextStyle(color: AppTheme.slate500, fontSize: 13),
           ),
         ],
       ),
@@ -244,7 +244,7 @@ class _HitRow extends StatelessWidget {
                     hit.path,
                     style: const TextStyle(
                       fontSize: 11,
-                      color: Color(0xFF94A3B8),
+                      color: AppTheme.slate400,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -270,7 +270,7 @@ class _ThemeBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final isOci = hit.isOcideckTheme;
     final label = isOci ? 'OciDeck' : (hit.theme ?? l10n.d('Geen thema'));
-    final color = isOci ? AppTheme.accent : const Color(0xFF94A3B8);
+    final color = isOci ? AppTheme.accent : AppTheme.slate400;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
       decoration: BoxDecoration(

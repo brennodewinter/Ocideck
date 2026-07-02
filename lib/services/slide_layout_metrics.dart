@@ -107,8 +107,7 @@ String bulletListMarker(
 
 /// Whether [slide] renders a numbered list that can start/continue a chain.
 bool isNumberedListSlide(Slide slide) =>
-    (slide.type == SlideType.bullets ||
-        slide.type == SlideType.bulletsImage) &&
+    (slide.type == SlideType.bullets || slide.type == SlideType.bulletsImage) &&
     slide.listStyle == ListStyle.numbered;
 
 /// Number of top-level (non-indented, non-empty) items in [slide]'s list —
@@ -410,7 +409,10 @@ double bulletsSlideFitScale({
       : availW;
   // [extraVReserve] (e.g. a logo strip) is a fraction of [kReferenceSlideWidth],
   // so it scales with the reference geometry like every other measure here.
-  final availH = (slideHeight - vPad * 2 - extraVReserve).clamp(1.0, slideHeight);
+  final availH = (slideHeight - vPad * 2 - extraVReserve).clamp(
+    1.0,
+    slideHeight,
+  );
 
   return bulletsFitScale(
     availW: textAvailW,

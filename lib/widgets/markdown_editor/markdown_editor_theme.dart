@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../theme/app_theme.dart';
 
 /// Readable editor chrome independent of slide/panel background colors.
 class MarkdownEditorTheme {
@@ -76,14 +77,12 @@ class MarkdownEditorTheme {
     return MarkdownEditorTheme(
       surface: darkPanel ? const Color(0xFF242424) : Colors.white,
       text: darkPanel ? const Color(0xFFF3F4F6) : const Color(0xFF1E293B),
-      hint: darkPanel ? const Color(0xFF9CA3AF) : const Color(0xFF94A3B8),
+      hint: darkPanel ? const Color(0xFF9CA3AF) : AppTheme.slate400,
       link: accent,
       codeBackground: darkPanel
           ? const Color(0xFF374151)
           : const Color(0xFFF1F5F9),
-      toolbarIcon: darkPanel
-          ? const Color(0xFFD1D5DB)
-          : const Color(0xFF64748B),
+      toolbarIcon: darkPanel ? const Color(0xFFD1D5DB) : AppTheme.slate500,
       accent: accent,
       border: panelText.withValues(alpha: 0.2),
       fontSize: 15,

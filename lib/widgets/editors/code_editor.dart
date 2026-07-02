@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
+import '../../theme/app_theme.dart';
 
 /// Editor voor een broncode-slide: een optionele titel, een keuzelijst voor de
 /// programmeertaal (voor syntaxkleuring) en een monospace tekstveld voor de code.
@@ -98,7 +99,7 @@ class _CodeEditorState extends State<CodeEditor> {
                 style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF64748B),
+                  color: AppTheme.slate500,
                 ),
               ),
               const SizedBox(width: 12),
@@ -124,7 +125,7 @@ class _CodeEditorState extends State<CodeEditor> {
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF64748B),
+              color: AppTheme.slate500,
             ),
           ),
           const SizedBox(height: 6),

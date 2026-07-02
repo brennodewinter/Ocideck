@@ -283,12 +283,12 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 40, color: const Color(0xFF94A3B8)),
+          Icon(icon, size: 40, color: AppTheme.slate400),
           const SizedBox(height: 12),
           Text(
             message,
             textAlign: TextAlign.center,
-            style: const TextStyle(color: Color(0xFF64748B), fontSize: 13),
+            style: const TextStyle(color: AppTheme.slate500, fontSize: 13),
           ),
         ],
       ),
@@ -356,7 +356,7 @@ class _PresentationRow extends StatelessWidget {
                           '${presentation.fileName}  ·  ${deck.slides.length} ${l10n.t('slides')}',
                           style: const TextStyle(
                             fontSize: 11,
-                            color: Color(0xFF94A3B8),
+                            color: AppTheme.slate400,
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -401,7 +401,7 @@ class _PresentationRow extends StatelessWidget {
                                 hit.snippet,
                                 style: const TextStyle(
                                   fontSize: 12,
-                                  color: Color(0xFF475569),
+                                  color: AppTheme.slate600,
                                 ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -418,7 +418,7 @@ class _PresentationRow extends StatelessWidget {
                         '+ ${hits.length - 4} ${l10n.d('meer treffer(s)')}',
                         style: const TextStyle(
                           fontSize: 11,
-                          color: Color(0xFF94A3B8),
+                          color: AppTheme.slate400,
                         ),
                       ),
                     ),

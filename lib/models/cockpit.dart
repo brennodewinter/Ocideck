@@ -317,7 +317,8 @@ class CockpitSpec {
       'animateOnEnter': animateOnEnter,
       // Omitted when inheriting the theme's duration, so a clean slide stays
       // clean and a theme change reaches it.
-      if (animationDurationMs != null) 'animationDurationMs': animationDurationMs,
+      if (animationDurationMs != null)
+        'animationDurationMs': animationDurationMs,
       'meters': [
         for (final meter in meters.take(cockpitMaxMeters)) meter.toJson(),
       ],

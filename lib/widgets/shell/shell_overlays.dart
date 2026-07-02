@@ -18,7 +18,7 @@ class _DropOverlay extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: const Color(0xFF60A5FA), width: 2),
+              border: Border.all(color: AppTheme.blue400, width: 2),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -26,7 +26,7 @@ class _DropOverlay extends StatelessWidget {
                 const Icon(
                   Icons.file_download_outlined,
                   size: 40,
-                  color: Color(0xFF2563EB),
+                  color: AppTheme.accent,
                 ),
                 const SizedBox(height: 10),
                 Text(
@@ -44,7 +44,7 @@ class _DropOverlay extends StatelessWidget {
                   ),
                   style: const TextStyle(
                     fontSize: 12,
-                    color: Color(0xFF64748B),
+                    color: AppTheme.slate500,
                   ),
                 ),
               ],

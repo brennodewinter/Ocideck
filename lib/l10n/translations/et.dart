@@ -55,17 +55,20 @@ const _stringsEt = {
   'choose': 'Vali',
   'removeDefaultFolder': 'Eemalda vaikekaust',
   'removeExportFolder': 'Eemalda ekspordikaust',
-  'exportFolderHelp': 'Kõik ekspordid (PDF/PPTX) salvestatakse siia. Kui määramata, salvestatakse eksport esitlusfaili kõrvale.',
+  'exportFolderHelp':
+      'Kõik ekspordid (PDF/PPTX) salvestatakse siia. Kui määramata, salvestatakse eksport esitlusfaili kõrvale.',
   'cancel': 'Tühista',
   'close': 'Sulge',
   'saveSettings': 'Salvesta',
   'exportDialogTitle': 'Ekspordi',
   'exportAgain': 'Ekspordi uuesti',
-  'exportIntro': 'Eksport kasutab täpselt redaktori eelvaadet, sealhulgas sinu stiiliprofiili.',
+  'exportIntro':
+      'Eksport kasutab täpselt redaktori eelvaadet, sealhulgas sinu stiiliprofiili.',
   'imageQualityPdf': 'Pildikvaliteet (PDF)',
   'normal': 'Tavaline',
   'compressed': 'Tihendatud',
-  'compressedHelp': 'Madalama eraldusvõimega JPEG, mõeldud jaotusmaterjaliks, palju väiksem fail (salvestatakse eraldi kui „-compact“).',
+  'compressedHelp':
+      'Madalama eraldusvõimega JPEG, mõeldud jaotusmaterjaliks, palju väiksem fail (salvestatakse eraldi kui „-compact“).',
   'losslessHelp': 'Kadudeta täiseraldusvõimega pildid.',
   'exportAsPdf': 'Ekspordi PDF-ina',
   'exportAsPptx': 'Ekspordi PPTX-ina',
@@ -87,26 +90,39 @@ const _dutchSourceEt = {
   'Niet opslaan': 'Ära salvesta',
   'Niet-opgeslagen werk herstellen?': 'Kas taastada salvestamata töö?',
   'Niet-opgeslagen wijzigingen': 'Salvestamata muudatused',
-  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'Eelmisest seansist leiti esitlus salvestamata muudatustega:',
+  'Er is een presentatie met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'Eelmisest seansist leiti esitlus salvestamata muudatustega:',
   'Er zijn': 'Leiti',
-  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:': 'esitlust salvestamata muudatustega eelmisest seansist:',
-  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.': 'On esitlusi salvestamata muudatustega. Salvesta need enne rakenduse sulgemist.',
-  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.': 'Sellel esitlusel on salvestamata muudatused. Salvesta esitlus enne kaardi sulgemist.',
+  'presentaties met niet-opgeslagen wijzigingen gevonden van een vorige sessie:':
+      'esitlust salvestamata muudatustega eelmisest seansist:',
+  'Er zijn presentaties met niet-opgeslagen wijzigingen. Sla ze op voordat de app sluit.':
+      'On esitlusi salvestamata muudatustega. Salvesta need enne rakenduse sulgemist.',
+  'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.':
+      'Sellel esitlusel on salvestamata muudatused. Salvesta esitlus enne kaardi sulgemist.',
   'Importeren via URL': 'Impordi URL-ist',
-  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.': 'Kleebi link .ocideck-paketile või Marp Markdown -failile.',
+  'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.':
+      'Kleebi link .ocideck-paketile või Marp Markdown -failile.',
   'Ophalen': 'Too',
   'Laat los om toe te voegen': 'Vabasta lisamiseks',
-  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen': 'Pildid → uued slaidid · .md / .ocideck → ava',
-  'Open eerst een presentatie om afbeeldingen toe te voegen.': 'Ava esitlus enne piltide lisamist.',
-  'Alle slides zijn overgeslagen — niets om te tonen.': 'Kõik slaidid on vahele jäetud — pole midagi näidata.',
-  'Alle slides zijn overgeslagen — niets om te exporteren.': 'Kõik slaidid on vahele jäetud — pole midagi eksportida.',
+  'Afbeeldingen → nieuwe slides · .md / .ocideck → openen':
+      'Pildid → uued slaidid · .md / .ocideck → ava',
+  'Open eerst een presentatie om afbeeldingen toe te voegen.':
+      'Ava esitlus enne piltide lisamist.',
+  'Alle slides zijn overgeslagen — niets om te tonen.':
+      'Kõik slaidid on vahele jäetud — pole midagi näidata.',
+  'Alle slides zijn overgeslagen — niets om te exporteren.':
+      'Kõik slaidid on vahele jäetud — pole midagi eksportida.',
   'Kon dit pakket niet importeren.': 'Selle paketi importimine ebaõnnestus.',
   'Pakket geëxporteerd naar:': 'Pakett eksporditud asukohta:',
   'Export mislukt:': 'Eksport ebaõnnestus:',
-  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.': 'See slaid ei saa pilti vastu võtta. Vali kõigepealt pildislaid.',
-  'Kon van deze URL geen presentatie ophalen.': 'Sellest URL-ist ei õnnestunud esitlust tuua.',
-  'Sleep om de slide-preview breder of smaller te maken': 'Lohista slaidi eelvaate laiuse muutmiseks',
-  'TLP-classificatie (Traffic Light Protocol)': 'TLP-klassifikatsioon (Traffic Light Protocol)',
+  'Deze slide kan geen afbeelding ontvangen. Kies eerst een afbeeldingsslide.':
+      'See slaid ei saa pilti vastu võtta. Vali kõigepealt pildislaid.',
+  'Kon van deze URL geen presentatie ophalen.':
+      'Sellest URL-ist ei õnnestunud esitlust tuua.',
+  'Sleep om de slide-preview breder of smaller te maken':
+      'Lohista slaidi eelvaate laiuse muutmiseks',
+  'TLP-classificatie (Traffic Light Protocol)':
+      'TLP-klassifikatsioon (Traffic Light Protocol)',
   'Titelpagina': 'Tiitelslaid',
   'Tussentitel': 'Vahepealkiri',
   'Alleen Bullets': 'Ainult täpid',
@@ -119,8 +135,10 @@ const _dutchSourceEt = {
   'Tabel': 'Tabel',
   'Vrije Markdown': 'Vaba Markdown',
   'Overgeslagen': 'Vahele jäetud',
-  'Weer tonen bij presenteren/exporteren': 'Näita uuesti esitlemisel/eksportimisel',
-  'Overslaan bij presenteren/exporteren': 'Jäta vahele esitlemisel/eksportimisel',
+  'Weer tonen bij presenteren/exporteren':
+      'Näita uuesti esitlemisel/eksportimisel',
+  'Overslaan bij presenteren/exporteren':
+      'Jäta vahele esitlemisel/eksportimisel',
   'Kopiëren': 'Kopeeri',
   'Kopieer als afbeelding': 'Kopeeri pildina',
   'Dupliceren': 'Dubleeri',
@@ -141,7 +159,8 @@ const _dutchSourceEt = {
   'Naam van de auteur': 'Autori nimi',
   'Achtergrondafbeelding': 'Taustapilt',
   'Achtergrondafbeelding (optioneel)': 'Taustapilt (valikuline)',
-  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.': 'Pilt kuvatakse taustana üle ekraani vähendatud läbipaistmatusega, et tekst jääks loetavaks.',
+  'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
+      'Pilt kuvatakse taustana üle ekraani vähendatud läbipaistmatusega, et tekst jääks loetavaks.',
   'Zoom achtergrond': 'Tausta suum',
   'Zoom afbeelding': 'Pildi suum',
   'Afbeelding (rechts)': 'Pilt (paremal)',
@@ -166,7 +185,8 @@ const _dutchSourceEt = {
   'Kopiëren naar klembord mislukt.': 'Lõikelauale kopeerimine ebaõnnestus.',
   'Verwijder afbeelding': 'Eemalda pilt',
   'Geen afbeelding gekozen': 'Pilti pole valitud',
-  'Caption / bronvermelding (bijv. © Naam Fotograaf)': 'Pealdis / viide (nt © Fotograafi nimi)',
+  'Caption / bronvermelding (bijv. © Naam Fotograaf)':
+      'Pealdis / viide (nt © Fotograafi nimi)',
   'Caption / bronvermelding': 'Pealdis / viide',
   'Beschrijving (doorzoekbaar)': 'Kirjeldus (otsitav)',
   'Markdown inhoud': 'Markdown-sisu',
@@ -177,7 +197,8 @@ const _dutchSourceEt = {
   'verwijderen': 'eemalda',
   'Koprij verwijderen': 'Eemalda päiserida',
   'Rij verwijderen': 'Eemalda rida',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.': 'Nõuanne: uue rea saamiseks vajuta lahtris Enter.',
+  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
+      'Nõuanne: uue rea saamiseks vajuta lahtris Enter.',
   'Presentatie openen': 'Ava esitlus',
   'Opslaan als': 'Salvesta kui',
   'Pakket importeren': 'Impordi pakett',
@@ -190,11 +211,14 @@ const _dutchSourceEt = {
   'Kies een video': 'Vali video',
   'Kies een audiobestand': 'Vali helifail',
   'Bladeren…': 'Sirvi…',
-  'Zoek op bestandsnaam, titel of tekst in de slides…': 'Otsi failinime, pealkirja või slaidide teksti järgi…',
+  'Zoek op bestandsnaam, titel of tekst in de slides…':
+      'Otsi failinime, pealkirja või slaidide teksti järgi…',
   'Geen map gekozen': 'Kausta pole valitud',
   'Map kiezen': 'Vali kaust',
-  'Kies een map met presentaties om te beginnen.': 'Alustamiseks vali esitlustega kaust.',
-  'Geen presentaties (.md) in deze map gevonden.': 'Selles kaustas ei leitud esitlusi (.md).',
+  'Kies een map met presentaties om te beginnen.':
+      'Alustamiseks vali esitlustega kaust.',
+  'Geen presentaties (.md) in deze map gevonden.':
+      'Selles kaustas ei leitud esitlusi (.md).',
   'Geen presentaties gevonden voor': 'Esitlusi ei leitud otsingule',
   'meer treffer(s)': 'veel vaste(id)',
   'Slide zoeken': 'Otsi slaidi',
@@ -205,11 +229,15 @@ const _dutchSourceEt = {
   'Toegevoegd': 'Lisatud',
   'Selecteer alles': 'Vali kõik',
   'Deselecteer alles': 'Tühista kõigi valik',
-  'Zoek slides op tekst, titel, onderschrift, pad…': 'Otsi slaide teksti, pealkirja, pealdise, tee järgi…',
-  'Zoek op presentatie, titel of tekst…': 'Otsi esitluse, pealkirja või teksti järgi…',
-  'Geen andere presentaties (.md) in deze map gevonden.': 'Selles kaustas ei leitud teisi esitlusi (.md).',
+  'Zoek slides op tekst, titel, onderschrift, pad…':
+      'Otsi slaide teksti, pealkirja, pealdise, tee järgi…',
+  'Zoek op presentatie, titel of tekst…':
+      'Otsi esitluse, pealkirja või teksti järgi…',
+  'Geen andere presentaties (.md) in deze map gevonden.':
+      'Selles kaustas ei leitud teisi esitlusi (.md).',
   'Geen slides gevonden voor': 'Slaide ei leitud otsingule',
-  'Typ zoektermen om slides uit al je presentaties te vinden.': 'Kirjuta otsingusõnad, et leida slaide kõigist esitlustest.',
+  'Typ zoektermen om slides uit al je presentaties te vinden.':
+      'Kirjuta otsingusõnad, et leida slaide kõigist esitlustest.',
   'toegevoegd': 'lisatud',
   'Eerste': 'Esimesed',
   'treffers — verfijn je zoekopdracht': 'vastet — täpsusta otsingut',
@@ -247,17 +275,21 @@ const _dutchSourceEt = {
   'Beschrijving': 'Kirjeldus',
   'Korte omschrijving van de presentatie': 'Esitluse lühikirjeldus',
   'Trefwoorden': 'Märksõnad',
-  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026': 'Komadega eraldatud, nt kvartal, arvud, 2026',
-  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.': 'Need andmed salvestatakse Markdown-i ja on avamisel otsitavad.',
+  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026':
+      'Komadega eraldatud, nt kvartal, arvud, 2026',
+  'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
+      'Need andmed salvestatakse Markdown-i ja on avamisel otsitavad.',
   'App-thema': 'Rakenduse teema',
   'Look-and-feel': 'Välimus',
   'Kopie maken en aanpassen': 'Loo koopia ja kohanda',
   'Thema verwijderen': 'Kustuta teema',
   'Themanaam': 'Teema nimi',
-  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.': 'See on sisseehitatud teema. Värvide kohandamiseks loo koopia.',
+  'Dit is een ingebouwd thema. Maak een kopie om kleuren aan te passen.':
+      'See on sisseehitatud teema. Värvide kohandamiseks loo koopia.',
   'Donkere interface': 'Tume liides',
   'Lettertype interface': 'Liidese font',
-  'Past contrast, invoervelden en systeemcomponenten aan.': 'Reguleerib kontrasti, sisestusvälju ja süsteemikomponente.',
+  'Past contrast, invoervelden en systeemcomponenten aan.':
+      'Reguleerib kontrasti, sisestusvälju ja süsteemikomponente.',
   'Hoofdkleur en bovenbalk': 'Põhivärv ja ülariba',
   'Knoppen en accenten': 'Nupud ja aktsendid',
   'Schermachtergrond': 'Ekraani taust',
@@ -293,15 +325,18 @@ const _dutchSourceEt = {
   'Linksonder': 'All vasakul',
   'Rechtsonder': 'All paremal',
   'Footertekst': 'Jaluse tekst',
-  'bijv. Vertrouwelijk · {title} · {date}': 'nt Konfidentsiaalne · {title} · {date}',
+  'bijv. Vertrouwelijk · {title} · {date}':
+      'nt Konfidentsiaalne · {title} · {date}',
   'Footerpositie': 'Jaluse asukoht',
-  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.': 'Märgendid: {page}, {total}, {date}, {title}. Jalus ilmub kõigil slaididel peale tiitel- ja sektsioonislaidide, kui sa seda slaidi kaupa välja ei lülita.',
+  'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
+      'Märgendid: {page}, {total}, {date}, {title}. Jalus ilmub kõigil slaididel peale tiitel- ja sektsioonislaidide, kui sa seda slaidi kaupa välja ei lülita.',
   'Links': 'Vasak',
   'Midden': 'Keskel',
   'Rechts': 'Parem',
   'Paginanummers tonen (rechtsonder)': 'Näita lehenumbreid (all paremal)',
   'Voorvertoning': 'Eelvaade',
-  'De snelle bruine vos springt over de luie hond.': 'Kärme pruun rebane hüppab üle laisa koera.',
+  'De snelle bruine vos springt over de luie hond.':
+      'Kärme pruun rebane hüppab üle laisa koera.',
   'Preview': 'Eelvaade',
   'Uitzoomen': 'Vähenda suumi',
   'Uitgezoomd': 'Suum vähendatud',
@@ -309,9 +344,12 @@ const _dutchSourceEt = {
   'Ingezoomd': 'Suum suurendatud',
   'van de foto zichtbaar': 'fotost nähtaval',
   'Volledig zichtbaar (100%)': 'Täielikult nähtaval (100%)',
-  'Uitzoomen (meer van de foto zichtbaar)': 'Vähenda suumi (rohkem fotost nähtaval)',
-  'Inzoomen (minder van de foto zichtbaar)': 'Suurenda suumi (vähem fotost nähtaval)',
-  'Terugzetten (volledige afbeelding zichtbaar)': 'Lähtesta (kogu pilt nähtaval)',
+  'Uitzoomen (meer van de foto zichtbaar)':
+      'Vähenda suumi (rohkem fotost nähtaval)',
+  'Inzoomen (minder van de foto zichtbaar)':
+      'Suurenda suumi (vähem fotost nähtaval)',
+  'Terugzetten (volledige afbeelding zichtbaar)':
+      'Lähtesta (kogu pilt nähtaval)',
   'Zoom resetten': 'Lähtesta suum',
   'Preview inklappen': 'Ahenda eelvaade',
   'Preview uitklappen': 'Laienda eelvaade',
@@ -331,14 +369,17 @@ const _dutchSourceEt = {
   'Sprekersnotities...': 'Esineja märkmed...',
   'Sprekersnotities': 'Esineja märkmed',
   'Notities voor tijdens het presenteren': 'Märkmed esitlemise ajaks',
-  'Markdown modus — bewerk de volledige presentatie als Marp Markdown': 'Markdown-režiim — muuda kogu esitlust Marp Markdown -ina',
+  'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
+      'Markdown-režiim — muuda kogu esitlust Marp Markdown -ina',
   'Toepassen': 'Rakenda',
-  'Markdown kon niet worden verwerkt. Controleer de syntax.': 'Markdown-i ei õnnestunud töödelda. Kontrolli süntaksit.',
+  'Markdown kon niet worden verwerkt. Controleer de syntax.':
+      'Markdown-i ei õnnestunud töödelda. Kontrolli süntaksit.',
   'Controleren': 'Kontrolli süntaksit',
   'Syntaxproblemen gevonden': 'Leiti süntaksiprobleeme',
   'De markdown bevat': 'Markdown sisaldab',
   'fout(en) en': 'viga/vigu ja',
-  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.': 'hoiatus(t). Slaidid võivad seetõttu valesti sisse loetud saada.',
+  'waarschuwing(en). Slides kunnen daardoor verkeerd worden ingelezen.':
+      'hoiatus(t). Slaidid võivad seetõttu valesti sisse loetud saada.',
   'Terug naar editor': 'Tagasi redaktorisse',
   'Toch toepassen': 'Rakenda ikkagi',
   'Geen syntaxproblemen gevonden': 'Süntaksiprobleeme ei leitud',
@@ -352,22 +393,30 @@ const _dutchSourceEt = {
   'Coverflow': 'Coverflow',
   'Geen afbeeldingen gevonden': 'Pilte ei leitud',
   'Geen resultaten voor': 'Tulemusi pole otsingule',
-  'Pas je zoekterm aan of voeg een beschrijving toe.': 'Kohanda otsingusõna või lisa kirjeldus.',
-  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.': 'Kasuta „Sirvi”, et valida pilte mis tahes asukohast.',
+  'Pas je zoekterm aan of voeg een beschrijving toe.':
+      'Kohanda otsingusõna või lisa kirjeldus.',
+  'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.':
+      'Kasuta „Sirvi”, et valida pilte mis tahes asukohast.',
   'Selecteer een\nafbeelding': 'Vali\npilt',
   'Gekopieerd': 'Kopeeritud',
   'Afbeelding verwijderen?': 'Kas kustutada pilt?',
-  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.': 'Fail kustutatakse kettalt jäädavalt. Seda toimingut ei saa tagasi võtta.',
-  'Let op: deze afbeelding wordt nog gebruikt in': 'Tähelepanu: seda pilti kasutatakse veel',
-  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.': 'Kustutamine tühjendab need slaidid. Seda ei saa tagasi võtta.',
-  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert': '↑↓←→ liikumine  ·  Enter valik  ·  Topeltklõps valib',
+  'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.':
+      'Fail kustutatakse kettalt jäädavalt. Seda toimingut ei saa tagasi võtta.',
+  'Let op: deze afbeelding wordt nog gebruikt in':
+      'Tähelepanu: seda pilti kasutatakse veel',
+  'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.':
+      'Kustutamine tühjendab need slaidid. Seda ei saa tagasi võtta.',
+  '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert':
+      '↑↓←→ liikumine  ·  Enter valik  ·  Topeltklõps valib',
   'Sneltoetsen': 'Klaviatuuri otseteed',
   'Toetsenlegenda': 'Klahvide legend',
   'spatie': 'tühik',
   'klik': 'klõps',
   'cijfers': 'numbrid',
-  'Klik of druk op ? / H / Esc om te sluiten': 'Sulgemiseks klõpsa või vajuta ? / H / Esc',
-  'Klik of druk op H / Esc om te sluiten': 'Sulgemiseks klõpsa või vajuta H / Esc',
+  'Klik of druk op ? / H / Esc om te sluiten':
+      'Sulgemiseks klõpsa või vajuta ? / H / Esc',
+  'Klik of druk op H / Esc om te sluiten':
+      'Sulgemiseks klõpsa või vajuta H / Esc',
   'Naar slidenummer': 'Mine slaidi numbrile',
   'Eerste · laatste slide': 'Esimene · viimane slaid',
   'Slide-overzicht': 'Slaidide ülevaade',
@@ -399,24 +448,33 @@ const _dutchSourceEt = {
   'Geen notities voor deze slide.': 'Sellel slaidil pole märkmeid.',
   'Mijn notities': 'Minu märkmed',
   'Gebruikersnotities': 'Kasutaja märkmed',
-  'Gebruikersnotities voor deze slide...': 'Kasutaja märkmed sellele slaidile...',
+  'Gebruikersnotities voor deze slide...':
+      'Kasutaja märkmed sellele slaidile...',
   'Notities weggooien': 'Loobu märkmetest',
-  'Notities voor de ontvanger tijdens een cursus': 'Märkmed vastuvõtjale kursuse ajal',
-  'Schakel naar Markdown-modus om notities toe te voegen.': 'Märkmete lisamiseks lülitu Markdown-režiimi.',
+  'Notities voor de ontvanger tijdens een cursus':
+      'Märkmed vastuvõtjale kursuse ajal',
+  'Schakel naar Markdown-modus om notities toe te voegen.':
+      'Märkmete lisamiseks lülitu Markdown-režiimi.',
   'Mijn notities aan/uit': 'Minu märkmed sees/väljas',
   'Wissel scherm (S)': 'Vaheta ekraani (S)',
   'Kon niet van scherm wisselen.': 'Ekraani ei õnnestunud vahetada.',
-  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P publik · G ülevaade · B/W must/valge · R aeg · Esc stopp',
-  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P publik · S ekraan · G ülevaade · B/W must/valge · R aeg · Esc stopp',
-  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P publik · H legend · G ülevaade · B/W must/valge · R aeg · Esc stopp',
-  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop': 'P publik · H legend · S ekraan · G ülevaade · B/W must/valge · R aeg · Esc stopp',
-  'pijltjes + Enter of klik om te springen': 'nooled + Enter või klõps hüppamiseks',
+  'P publiek · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P publik · G ülevaade · B/W must/valge · R aeg · Esc stopp',
+  'P publiek · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P publik · S ekraan · G ülevaade · B/W must/valge · R aeg · Esc stopp',
+  'P publiek · H legenda · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P publik · H legend · G ülevaade · B/W must/valge · R aeg · Esc stopp',
+  'P publiek · H legenda · S scherm · G overzicht · B/W zwart/wit · R tijd · Esc stop':
+      'P publik · H legend · S ekraan · G ülevaade · B/W must/valge · R aeg · Esc stopp',
+  'pijltjes + Enter of klik om te springen':
+      'nooled + Enter või klõps hüppamiseks',
   'Afsluiten (Escape)': 'Välju (Escape)',
   'Sluiten (G of Esc)': 'Sulge (G või Esc)',
   'Slide renderen…': 'Slaidi renderdamine…',
   'Slide gekopieerd naar klembord.': 'Slaid kopeeritud lõikelauale.',
   'Kopiëren mislukt.': 'Kopeerimine ebaõnnestus.',
-  'Geen ander deck open. Open eerst een ander tabblad.': 'Ükski teine deck pole avatud. Ava esmalt teine vaheleht.',
+  'Geen ander deck open. Open eerst een ander tabblad.':
+      'Ükski teine deck pole avatud. Ava esmalt teine vaheleht.',
   '1 slide kopiëren naar…': 'Kopeeri 1 slaid asukohta…',
   'slides kopiëren naar…': 'slaidi kopeerida asukohta…',
   'slide(s) gekopieerd naar': 'slaid(i) kopeeritud asukohta',
@@ -431,11 +489,13 @@ const _dutchSourceEt = {
   'Tips': 'Näpunäited',
   'Waarschuwingen': 'Hoiatused',
   'Fouten': 'Vead',
-  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Näpunäide: lisa juurdepääsetavuse jaoks alt-tekst / pealkiri',
+  'Tip: voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Näpunäide: lisa juurdepääsetavuse jaoks alt-tekst / pealkiri',
   'Zoek in slides…': 'Otsi slaididest…',
   'Geen slides met': 'Ühtki slaidi pole otsinguga',
   'SLIDES': 'SLAIDID',
-  'Geen afbeelding op het klembord gevonden.': 'Lõikelaualt ei leitud ühtki pilti.',
+  'Geen afbeelding op het klembord gevonden.':
+      'Lõikelaualt ei leitud ühtki pilti.',
   'Afbeelding plakken': 'Kleebi pilt',
   'Slide toevoegen': 'Lisa slaid',
   'Slide plakken': 'Kleebi slaid',
@@ -446,60 +506,80 @@ const _dutchSourceEt = {
   'Kopiëren naar ander deck': 'Kopeeri teise deck\'i',
   'Weer tonen': 'Näita uuesti',
   'Selectie opheffen': 'Tühista valik',
-  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.': 'Nõustun EUPL 1.2 litsentsiga ja olen lugenud, milliseid andmeid OciDeck säilitab.',
-  'Je keuze wordt de standaardtaal van de app.': 'Sinu valikust saab rakenduse vaikekeel.',
+  'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
+      'Nõustun EUPL 1.2 litsentsiga ja olen lugenud, milliseid andmeid OciDeck säilitab.',
+  'Je keuze wordt de standaardtaal van de app.':
+      'Sinu valikust saab rakenduse vaikekeel.',
   'Lees de volledige licentie': 'Loe kogu litsentsi',
-  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.': 'OciDeck on vaba tarkvara EUPL 1.2 litsentsi all. Enne alustamist palume sul litsentsiga nõustuda. Allpool saad lugeda ka, milliseid andmeid OciDeck sellel seadmel säilitab ja millal miski su seadmest lahkub.',
-  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.': 'OciDeck ei kogu statistikat ega saada iseseisvalt midagi välja. Vaikimisi jääb kõik sellele seadmele. Andmed lahkuvad sellelt seadmelt ainult siis, kui sina seda valid:\n\n•  Nextcloud/WebDAV: kui ühendud serveriga, säilitatakse su kasutajanimi ja parool (parool turvaliselt su süsteemi võtmehoidlas) ning sinu avatavad või salvestatavad esitlused saadetakse sellesse serverisse.\n•  Avamine URL-i kaudu: OciDeck laadib faili sinu sisestatud aadressilt.\n•  Veebimeedia (vaikimisi väljas): kui lubatud, laadib OciDeck pildid ja videod su slaididel olevatelt aadressidelt.\n•  Välised lingid (nagu veebilitsents) avanevad su brauseris.',
-  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.': 'OciDeck on antud välja Euroopa Liidu avaliku litsentsi v1.2 all. Nõustudes aktsepteerid seda litsentsi. Sa võid OciDeck\'i kasutada, kopeerida, muuta ja levitada EUPL 1.2 tingimustel.',
-  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.': 'Töötamiseks ja su töö säilitamiseks salvestab OciDeck andmed lokaalselt sellele seadmele:\n\n•  Sinu seaded ja eelistused (keel, kaustad, stiili- ja kuvaprofiilid, hiljutised failid).\n•  Sinu esitlusmaterjalid: salvestatavad esitlused, automaatsed taastekoopiad ja manused nagu pildikirjeldused.\n•  See nõusolekuvalik.\n\nSaad selle eemaldada, kustutades failid või lähtestades seaded.',
-  'Volledige licentie online (23 officiële taalversies)': 'Kogu litsents veebis (23 ametlikku keeleversiooni)',
+  'OciDeck is vrije software onder de EUPL 1.2-licentie. Voordat je begint, vragen we je de licentie te accepteren. Hieronder lees je ook welke gegevens OciDeck op dit apparaat bewaart en wanneer er iets je apparaat verlaat.':
+      'OciDeck on vaba tarkvara EUPL 1.2 litsentsi all. Enne alustamist palume sul litsentsiga nõustuda. Allpool saad lugeda ka, milliseid andmeid OciDeck sellel seadmel säilitab ja millal miski su seadmest lahkub.',
+  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.':
+      'OciDeck ei kogu statistikat ega saada iseseisvalt midagi välja. Vaikimisi jääb kõik sellele seadmele. Andmed lahkuvad sellelt seadmelt ainult siis, kui sina seda valid:\n\n•  Nextcloud/WebDAV: kui ühendud serveriga, säilitatakse su kasutajanimi ja parool (parool turvaliselt su süsteemi võtmehoidlas) ning sinu avatavad või salvestatavad esitlused saadetakse sellesse serverisse.\n•  Avamine URL-i kaudu: OciDeck laadib faili sinu sisestatud aadressilt.\n•  Veebimeedia (vaikimisi väljas): kui lubatud, laadib OciDeck pildid ja videod su slaididel olevatelt aadressidelt.\n•  Välised lingid (nagu veebilitsents) avanevad su brauseris.',
+  'OciDeck wordt geleverd onder de European Union Public Licence v1.2. Door akkoord te gaan aanvaard je deze licentie. Je mag OciDeck gebruiken, kopiëren, aanpassen en verspreiden onder de voorwaarden van de EUPL 1.2.':
+      'OciDeck on antud välja Euroopa Liidu avaliku litsentsi v1.2 all. Nõustudes aktsepteerid seda litsentsi. Sa võid OciDeck\'i kasutada, kopeerida, muuta ja levitada EUPL 1.2 tingimustel.',
+  'Om te werken en je werk niet te verliezen, bewaart OciDeck gegevens lokaal op dit apparaat:\n\n•  Je instellingen en voorkeuren (taal, mappen, stijl- en weergaveprofielen, recente bestanden).\n•  Je presentatiematerialen: de presentaties die je opslaat, automatische herstelkopieën en bijlagen zoals afbeeldingsbeschrijvingen.\n•  Deze toestemmingskeuze.\n\nJe kunt dit verwijderen door de bestanden te wissen of de instellingen te resetten.':
+      'Töötamiseks ja su töö säilitamiseks salvestab OciDeck andmed lokaalselt sellele seadmele:\n\n•  Sinu seaded ja eelistused (keel, kaustad, stiili- ja kuvaprofiilid, hiljutised failid).\n•  Sinu esitlusmaterjalid: salvestatavad esitlused, automaatsed taastekoopiad ja manused nagu pildikirjeldused.\n•  See nõusolekuvalik.\n\nSaad selle eemaldada, kustutades failid või lähtestades seaded.',
+  'Volledige licentie online (23 officiële taalversies)':
+      'Kogu litsents veebis (23 ametlikku keeleversiooni)',
   'Wat OciDeck op dit apparaat bewaart': 'Mida OciDeck sellel seadmel säilitab',
   'Wat je apparaat verlaat': 'Mis su seadmest lahkub',
   'Vul server-URL en gebruikersnaam in': 'Sisesta serveri URL ja kasutajanimi',
   'Verbinding mislukt': 'Ühendus ebaõnnestus',
-  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord': 'Sisselogimine ebaõnnestus — kontrolli kasutajanime ja parooli',
-  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.': 'Server on privaatsel aadressil. Ühenduse lubamiseks märgi "Usaldusväärne sisevõrgu server".',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord':
+      'Sisselogimine ebaõnnestus — kontrolli kasutajanime ja parooli',
+  'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.':
+      'Server on privaatsel aadressil. Ühenduse lubamiseks märgi "Usaldusväärne sisevõrgu server".',
   'Map niet gevonden op de server': 'Kausta ei leitud serverist',
   'Ongeldige server-URL': 'Vigane serveri URL',
   'Het antwoord van de server was te groot': 'Serveri vastus oli liiga suur',
   'Nextcloud': 'Nextcloud',
   'Nextcloud-bron (WebDAV)': 'Nextcloud-allikas (WebDAV)',
-  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.': 'Ava ja salvesta esitlused oma Nextcloud\'i kausta. Parool säilitatakse krüpteeritult võtmehoidlas, mitte muude seadete kõrval.',
+  'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Ava ja salvesta esitlused oma Nextcloud\'i kausta. Parool säilitatakse krüpteeritult võtmehoidlas, mitte muude seadete kõrval.',
   'Server-URL': 'Serveri URL',
   'Gebruikersnaam': 'Kasutajanimi',
   'App-wachtwoord': 'Rakenduse parool',
-  'Maak hiervoor een app-wachtwoord aan in Nextcloud': 'Loo selleks Nextcloud\'is rakenduse parool',
+  'Maak hiervoor een app-wachtwoord aan in Nextcloud':
+      'Loo selleks Nextcloud\'is rakenduse parool',
   'Submap (optioneel)': 'Alamkaust (valikuline)',
   'Vertrouwde interne server': 'Usaldusväärne sisevõrgu server',
-  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.': 'Vajalik, kui server töötab privaat- või koduvõrgus (LAN). Luba ühendused ainult serveritega, mida sa ise usaldad.',
+  'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Vajalik, kui server töötab privaat- või koduvõrgus (LAN). Luba ühendused ainult serveritega, mida sa ise usaldad.',
   'Verbinding testen': 'Testi ühendust',
   'Verbinding gelukt': 'Ühendus õnnestus',
-  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.': 'Muudatused salvestatakse, kui klõpsad Salvesta.',
+  'Wijzigingen worden bewaard wanneer je op Opslaan klikt.':
+      'Muudatused salvestatakse, kui klõpsad Salvesta.',
   'Afbeelding kiezen op Nextcloud': 'Vali pilt Nextcloud\'ist',
   'Openen vanaf Nextcloud': 'Ava Nextcloud\'ist',
   'Vernieuwen': 'Värskenda',
   'Deze map is leeg': 'See kaust on tühi',
-  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.': 'Ühtegi Nextcloud-serverit pole seadistatud. Seadista see kaudu Seaded → Nextcloud.',
-  'Kon de map niet laden. Controleer je verbinding en instellingen.': 'Kausta ei õnnestunud laadida. Kontrolli oma ühendust ja seadeid.',
+  'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.':
+      'Ühtegi Nextcloud-serverit pole seadistatud. Seadista see kaudu Seaded → Nextcloud.',
+  'Kon de map niet laden. Controleer je verbinding en instellingen.':
+      'Kausta ei õnnestunud laadida. Kontrolli oma ühendust ja seadeid.',
   'Kon dit bestand niet openen.': 'Seda faili ei õnnestunud avada.',
   'Dit is geen Marp/OciDeck-presentatie.': 'See pole Marp/OciDeck esitlus.',
   'Downloaden mislukt:': 'Allalaadimine ebaõnnestus:',
   'Opgeslagen op Nextcloud:': 'Salvestatud Nextcloud\'i:',
   'Opslaan mislukt:': 'Salvestamine ebaõnnestus:',
-  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.': 'Seadista esmalt Nextcloud-server kaudu Seaded → Nextcloud.',
+  'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.':
+      'Seadista esmalt Nextcloud-server kaudu Seaded → Nextcloud.',
   'Opslaan naar Nextcloud': 'Salvesta Nextcloud\'i',
   'Doelpad (zonder extensie)': 'Sihttee (ilma laiendita)',
-  'Als .ocideck-pakket (één bestand, met assets)': 'Kui .ocideck-pakett (üks fail, koos assetitega)',
+  'Als .ocideck-pakket (één bestand, met assets)':
+      'Kui .ocideck-pakett (üks fail, koos assetitega)',
   'Als losse .md plus afbeeldingen': 'Kui eraldi .md koos piltidega',
   'Opslaan': 'Salvesta',
   'Presenteren': 'Esitamine',
   'Tijden-overzicht tonen na afloop': 'Näita aegade ülevaadet lõpus',
-  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.': 'Aeg slaidi kohta mõõdetakse alati; see määrab vaid, kas ülevaade ilmub pärast seda esitlust.',
+  'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.':
+      'Aeg slaidi kohta mõõdetakse alati; see määrab vaid, kas ülevaade ilmub pärast seda esitlust.',
   'Oefenoverzicht tonen na afloop': 'Näita harjutuse kokkuvõtet lõpus',
-  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.': 'Näita pärast esitlust ülevaadet slaidi kohta kulunud ajast. Aega mõõdetakse alati; see määrab vaid, kas ekraan ilmub.',
+  'Toon na een presentatie het overzicht met de bestede tijd per slide. De tijd wordt altijd gemeten; dit bepaalt alleen of het scherm verschijnt.':
+      'Näita pärast esitlust ülevaadet slaidi kohta kulunud ajast. Aega mõõdetakse alati; see määrab vaid, kas ekraan ilmub.',
   'Onveilige presentatie geblokkeerd': 'Ebaturvaline esitlus blokeeritud',
-  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.': 'Seda esitlust ei avatud. Fail sisaldab sisu, mis võib koodi käivitada, kuid esitlus tohib sisaldada ainult andmeid — mitte midagi käivitatavat.',
+  'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.':
+      'Seda esitlust ei avatud. Fail sisaldab sisu, mis võib koodi käivitada, kuid esitlus tohib sisaldada ainult andmeid — mitte midagi käivitatavat.',
   'Gevonden:': 'Leitud:',
   'Regel': 'Rida',
   'Scriptuitvoering': 'Skripti käivitamine',
@@ -521,46 +601,65 @@ const _dutchSourceEt = {
   'Pootje': 'Käpp',
   'In tweeën splitsen': 'Poolita kaheks',
   'Uitgevoerde controles': 'Tehtud kontrollid',
-  'Contrast en leesbaarheid van tekstkleuren': 'Tekstivärvide kontrast ja loetavus',
-  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media': 'Piltide, graafikute ja meedia alt-tekstid ja pealkirjad',
-  'Aanwezigheid van gekoppelde mediabestanden': 'Lingitud meediafailide olemasolu',
-  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code': 'Tekstitihedus: täpid, sõnad, tsitaadid, tabelid ja kood',
-  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).': 'Teema, slaidid, jalus, kontrollnimekiri ja pealkirjad piltidel, kontrollitud WCAG AA järgi (4,5:1 tekstile, 3:1 suurele tekstile).',
-  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.': 'Iga pilt, graafik, video ja heli vajab kirjeldust ekraanilugejatele ja jaotusmaterjalidele.',
-  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.': 'Viiteid piltidele, videole ja helile kontrollitakse projektis oleva faili olemasolu suhtes.',
-  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.': 'Täppide arv ja pikkus, sõnad, pesastamine, veergude tasakaal ning tsitaatide, pealkirjade, tabelite ja koodi tihedus, et kõik mahuks loetavalt.',
-  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.': 'Põhitekst kontrastiga alla {crit}:1 loeb veaks; sellest kõrgemal kuni AA-normini hoiatuseks.',
-  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.': 'Ilma lävendita: mittetühi kirjeldus on kohustuslik.',
-  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.': 'Ilma lävendita: lingitud fail peab olema projektikaustas olemas.',
-  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.': 'Hoiatus üle {b1} täpi (1 veerg), {bcl} (kontrollnimekiri) või {b2} (2 veergu); kriitiline üle {bc1} või {bc2}. Sõnu üle {w1}/{w2}, keskmiselt üle {avg} täpi kohta. Tsitaat üle {q} märgi, pealkiri üle {t} märgi. Pesastamine sügavamal kui tase {lvl}. Tekst, mis peab kahanema alla {warn}%, hoiatab, alla {crit}% on kriitiline.',
+  'Contrast en leesbaarheid van tekstkleuren':
+      'Tekstivärvide kontrast ja loetavus',
+  'Alt-teksten en bijschriften van afbeeldingen, grafieken en media':
+      'Piltide, graafikute ja meedia alt-tekstid ja pealkirjad',
+  'Aanwezigheid van gekoppelde mediabestanden':
+      'Lingitud meediafailide olemasolu',
+  'Tekstdichtheid: bullets, woorden, quotes, tabellen en code':
+      'Tekstitihedus: täpid, sõnad, tsitaadid, tabelid ja kood',
+  'Thema, slides, footer, checklist en titels over afbeeldingen, getoetst aan WCAG AA (4,5:1 voor tekst, 3:1 voor grote tekst).':
+      'Teema, slaidid, jalus, kontrollnimekiri ja pealkirjad piltidel, kontrollitud WCAG AA järgi (4,5:1 tekstile, 3:1 suurele tekstile).',
+  'Elke afbeelding, grafiek, video en audio heeft een beschrijving nodig voor schermlezers en bijsluiters.':
+      'Iga pilt, graafik, video ja heli vajab kirjeldust ekraanilugejatele ja jaotusmaterjalidele.',
+  'Verwijzingen naar afbeeldingen, video en audio worden gecontroleerd op een bestaand bestand in het project.':
+      'Viiteid piltidele, videole ja helile kontrollitakse projektis oleva faili olemasolu suhtes.',
+  'Aantal en lengte van bullets, woorden, nesting, kolombalans en de dichtheid van quotes, titels, tabellen en code zodat alles leesbaar past.':
+      'Täppide arv ja pikkus, sõnad, pesastamine, veergude tasakaal ning tsitaatide, pealkirjade, tabelite ja koodi tihedus, et kõik mahuks loetavalt.',
+  'Bodytekst met contrast onder {crit}:1 telt als fout; daarboven tot de AA-norm als waarschuwing.':
+      'Põhitekst kontrastiga alla {crit}:1 loeb veaks; sellest kõrgemal kuni AA-normini hoiatuseks.',
+  'Geen drempelwaarde: een niet-lege beschrijving is verplicht.':
+      'Ilma lävendita: mittetühi kirjeldus on kohustuslik.',
+  'Geen drempelwaarde: het gekoppelde bestand moet binnen de projectmap bestaan.':
+      'Ilma lävendita: lingitud fail peab olema projektikaustas olemas.',
+  'Waarschuwing boven {b1} bullets (1 kolom), {bcl} (checklist) of {b2} (2 kolommen); kritiek boven {bc1} of {bc2}. Woorden boven {w1}/{w2}, gemiddeld boven {avg} per bullet. Quote boven {q} tekens, titel boven {t} tekens. Nesting dieper dan niveau {lvl}. Tekst die tot onder {warn}% moet krimpen waarschuwt, onder {crit}% is kritiek.':
+      'Hoiatus üle {b1} täpi (1 veerg), {bcl} (kontrollnimekiri) või {b2} (2 veergu); kriitiline üle {bc1} või {bc2}. Sõnu üle {w1}/{w2}, keskmiselt üle {avg} täpi kohta. Tsitaat üle {q} märgi, pealkiri üle {t} märgi. Pesastamine sügavamal kui tase {lvl}. Tekst, mis peab kahanema alla {warn}%, hoiatab, alla {crit}% on kriitiline.',
   'Zoek op deze computer': 'Otsi sellest arvutist',
   'Presentaties zoeken op deze computer': 'Leia esitlused sellest arvutist',
   'Zoek op titel, pad of thema…': 'Otsi pealkirja, tee või teema järgi…',
   'Bekende mappen worden doorzocht…': 'Tuntud kaustu otsitakse…',
   'gevonden': 'leitud',
   'presentatie(s) gevonden': 'esitlust leitud',
-  'Geen Marp-presentaties gevonden in de bekende mappen.': 'Tuntud kaustadest ei leitud ühtki Marp-esitlust.',
+  'Geen Marp-presentaties gevonden in de bekende mappen.':
+      'Tuntud kaustadest ei leitud ühtki Marp-esitlust.',
   'Geen thema': 'Teemata',
   'Kopieer syntaxproblemen': 'Kopeeri süntaksiprobleemid',
-  'Syntaxproblemen gekopieerd naar klembord.': 'Süntaksiprobleemid kopeeritud lõikelauale.',
+  'Syntaxproblemen gekopieerd naar klembord.':
+      'Süntaksiprobleemid kopeeritud lõikelauale.',
   'Online media': 'Veebimeedia',
   'Online media staat uit': 'Veebimeedia on väljas',
   'Online media toestaan': 'Luba veebimeedia',
-  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.': 'Luba piltide ja videote reaalajas laadimine URL-i kaudu ning YouTube/Vimeo manuste kaudu. Vaikimisi väljas su privaatsuse ja turvalisuse huvides.',
-  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)': 'Faili tee või URL (YouTube, Vimeo, .mp4 …)',
+  'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.':
+      'Luba piltide ja videote reaalajas laadimine URL-i kaudu ning YouTube/Vimeo manuste kaudu. Vaikimisi väljas su privaatsuse ja turvalisuse huvides.',
+  'Bestandspad of URL (YouTube, Vimeo, .mp4 …)':
+      'Faili tee või URL (YouTube, Vimeo, .mp4 …)',
   'Bestand kiezen': 'Vali fail',
-  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.': 'Esita selle slaidi segment eelvaates ja lõika kohas, kus soovid poolitada: teine osa läheb uuele slaidile.',
+  'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.':
+      'Esita selle slaidi segment eelvaates ja lõika kohas, kus soovid poolitada: teine osa läheb uuele slaidile.',
   'Begin (sec)': 'Algus (sek)',
   'Einde (sec)': 'Lõpp (sek)',
   'einde': 'lõpp',
-  'Knip de video op het huidige afspeelpunt': 'Lõika video praeguses esituspunktis',
+  'Knip de video op het huidige afspeelpunt':
+      'Lõika video praeguses esituspunktis',
   'Speel de video eerst af in het voorbeeld': 'Esita video esmalt eelvaates',
   'Knip hier': 'Lõika siit',
   'Online': 'Veebis',
   'Lokaal bestand': 'Lokaalne fail',
   'Geen video': 'Videot pole',
   'Vraag (meerkeuze)': 'Küsimus (valikvastused)',
-  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding': 'Pealkirja tekstil on taustapildiga liiga vähe kontrasti',
+  'Titeltekst heeft te weinig contrast met de achtergrondafbeelding':
+      'Pealkirja tekstil on taustapildiga liiga vähe kontrasti',
   'Herstel': 'Paranda',
   'Tijdlijn': 'Ajajoon',
   'Indeling': 'Paigutus',
@@ -585,19 +684,24 @@ const _dutchSourceEt = {
   'Vraag': 'Küsimus',
   'Wat wil je vragen?': 'Mida soovid küsida?',
   'Antwoorden': 'Vastused',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.': 'Märgi õiged vastused. Piirangut pole; esitamisel näidatakse juhuslikult 1 õige ja ülejäänud valed.',
+  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Märgi õiged vastused. Piirangut pole; esitamisel näidatakse juhuslikult 1 õige ja ülejäänud valed.',
   'Antwoord': 'Vastus',
   'Antwoord toevoegen': 'Lisa vastus',
   'Goed antwoord': 'Õige vastus',
-  'Geef minstens één goed én één fout antwoord op.': 'Anna vähemalt üks õige ja üks vale vastus.',
+  'Geef minstens één goed én één fout antwoord op.':
+      'Anna vähemalt üks õige ja üks vale vastus.',
   'Weergave': 'Kuva',
   'Aantal getoonde opties': 'Näidatavate valikute arv',
-  'Maximale antwoordtijd in seconden (0 = geen limiet)': 'Maksimaalne vastamisaeg sekundites (0 = piiranguta)',
+  'Maximale antwoordtijd in seconden (0 = geen limiet)':
+      'Maksimaalne vastamisaeg sekundites (0 = piiranguta)',
   'Bij een fout antwoord': 'Vale vastuse korral',
   'Opnieuw proberen': 'Proovi uuesti',
   'Doorgaan toestaan': 'Luba jätkata',
-  'Fout = niet doorgaan; de vraag moet opnieuw.': 'Vale = ei saa jätkata; küsimus tuleb uuesti läbida.',
-  'Fout = wel doorgaan, maar niet opnieuw doen.': 'Vale = tohib jätkata, kuid uuesti proovida ei saa.',
+  'Fout = niet doorgaan; de vraag moet opnieuw.':
+      'Vale = ei saa jätkata; küsimus tuleb uuesti läbida.',
+  'Fout = wel doorgaan, maar niet opnieuw doen.':
+      'Vale = tohib jätkata, kuid uuesti proovida ei saa.',
   'Afbeelding (optioneel)': 'Pilt (valikuline)',
   'Breedte afbeelding': 'Pildi laius',
   'Goed!': 'Õige!',
@@ -612,34 +716,42 @@ const _dutchSourceEt = {
   'Juist / Onjuist': 'Õige / Vale',
   'Meerdere juiste antwoorden': 'Mitu õiget vastust',
   'Stelling': 'Väide',
-  'Formuleer een stelling die juist of onjuist is': 'Sõnasta väide, mis on õige või vale',
-  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.': 'Märgi kõik õiged vastused. Esitamisel näidatakse juhuslikku komplekti vähemalt ühe õige ja ühe valega.',
+  'Formuleer een stelling die juist of onjuist is':
+      'Sõnasta väide, mis on õige või vale',
+  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.':
+      'Märgi kõik õiged vastused. Esitamisel näidatakse juhuslikku komplekti vähemalt ühe õige ja ühe valega.',
   'Juist': 'Õige',
   'Onjuist': 'Vale',
-  'De stelling hierboven is juist of onjuist; kies welke.': 'Ülaltoodud väide on õige või vale; vali kumb.',
+  'De stelling hierboven is juist of onjuist; kies welke.':
+      'Ülaltoodud väide on õige või vale; vali kumb.',
   'Selecteer alle juiste antwoorden': 'Vali kõik õiged vastused',
   'Bevestig': 'Kinnita',
   'Het juiste antwoord': 'Õige vastus',
-  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.': 'Pilti näidatakse taustana ekraani suuruses. Kasuta hägustust, kui pealkiri vajab rohkem rahu või kontrasti.',
+  'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
+      'Pilti näidatakse taustana ekraani suuruses. Kasuta hägustust, kui pealkiri vajab rohkem rahu või kontrasti.',
   'Cockpit-kleurschema': 'Cockpiti värviskeem',
-  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.': 'Cockpiti mõõdikute olekuvärvid. Loo nimega variante; valitud skeem kehtib kõigile cockpiti slaididele.',
+  'De statuskleuren van de cockpit-meters. Maak benoemde varianten; het gekozen schema geldt voor alle cockpit-slides.':
+      'Cockpiti mõõdikute olekuvärvid. Loo nimega variante; valitud skeem kehtib kõigile cockpiti slaididele.',
   'Standaard': 'Vaikimisi',
   'Standaardkleuren gebruiken': 'Kasuta vaikevärve',
   'Kleurschema verwijderen': 'Kustuta värviskeem',
   'Schemanaam': 'Skeemi nimi',
-  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.': 'See on sisseehitatud skeem. Värvide muutmiseks tee koopia.',
+  'Dit is het ingebouwde schema. Maak een kopie om kleuren aan te passen.':
+      'See on sisseehitatud skeem. Värvide muutmiseks tee koopia.',
   'Goed': 'Hea',
   'Waarschuwing': 'Hoiatus',
   'Kritiek': 'Kriitiline',
   'Te laag (koud)': 'Liiga madal (külm)',
   'Lucht (horizon)': 'Taevas (horisont)',
   'Grond (horizon)': 'Maapind (horisont)',
-  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.': 'Olekuvärvid järgivad cockpiti värviskeemi; muuda seda või loo variante kaudu Seaded → Cockpit.',
+  'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.':
+      'Olekuvärvid järgivad cockpiti värviskeemi; muuda seda või loo variante kaudu Seaded → Cockpit.',
   'Veel bullets op deze slide': 'Sellel slaidil on palju täppe',
   'bullets': 'täppi',
   'Overweeg de inhoud te splitsen.': 'Kaalu sisu poolitamist.',
   'Erg veel bullets op deze slide': 'Sellel slaidil on liiga palju täppe',
-  'Splits deze inhoud over meerdere slides.': 'Poolita see sisu mitmele slaidile.',
+  'Splits deze inhoud over meerdere slides.':
+      'Poolita see sisu mitmele slaidile.',
   'Veel woorden in bullets': 'Palju sõnu täppides',
   'woorden': 'sõna',
   'Maak bullets korter of splits de slide.': 'Lühenda täppe või poolita slaid.',
@@ -647,11 +759,14 @@ const _dutchSourceEt = {
   'Gemiddeld lange bullets': 'Keskmiselt pikad täpid',
   'woorden per bullet': 'sõna täpi kohta',
   'Maak elke bullet kernachtiger.': 'Tee iga täpp tabavamaks.',
-  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.': 'Leiti mitmelauseline täpp. Tee täpid tabavamaks või jaga sisu.',
+  'Bullet met meerdere zinnen gevonden. Maak bullets kernachtiger of splits de inhoud.':
+      'Leiti mitmelauseline täpp. Tee täpid tabavamaks või jaga sisu.',
   'Diepe bulletniveaus gevonden': 'Leiti sügavad täpitasemed',
   'niveau': 'tase',
-  'Beperk nesting voor betere leesbaarheid.': 'Piira pesastust parema loetavuse huvides.',
-  'Twee kolommen zijn sterk uit balans': 'Kaks veergu on tugevalt tasakaalust väljas',
+  'Beperk nesting voor betere leesbaarheid.':
+      'Piira pesastust parema loetavuse huvides.',
+  'Twee kolommen zijn sterk uit balans':
+      'Kaks veergu on tugevalt tasakaalust väljas',
   'tegenover': 'vs',
   'Verdeel of splits de inhoud.': 'Jaota sisu ümber või tükelda.',
   'Slidetitel': 'Slaidi pealkiri',
@@ -661,7 +776,8 @@ const _dutchSourceEt = {
   'Activatieduur': 'Aktiveerimise kestus',
   'Splits slide': 'Jaga slaid',
   'Doornummeren vanaf vorige slide': 'Jätka nummerdamist eelmiselt slaidilt',
-  'Begin de nummering waar de vorige slide ophield.': 'Alusta nummerdamist sealt, kus eelmine slaid pooleli jäi.',
+  'Begin de nummering waar de vorige slide ophield.':
+      'Alusta nummerdamist sealt, kus eelmine slaid pooleli jäi.',
   'Volg thema-animatieduur': 'Järgi teema animatsioonikestust',
   'Animatie bij openen': 'Animeeri sisenemisel',
   'Meter': 'Mõõdik',
@@ -689,7 +805,8 @@ const _dutchSourceEt = {
   'Koers': 'Kurss',
   'Ander profiel kiezen': 'Vali muu profiil',
   'Cockpit': 'Kokpit',
-  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Sihtaeg esitleja loenduse jaoks. Esitlemise ajal saab peenhäälestada klahviga K.',
+  'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Sihtaeg esitleja loenduse jaoks. Esitlemise ajal saab peenhäälestada klahviga K.',
   'Logo en footer': 'Logo ja jalus',
   'Pagina': 'Lehekülg',
   'Presentatiestijl': 'Esitlusstiil',
@@ -706,7 +823,8 @@ const _dutchSourceEt = {
   'Doeltijd': 'Sihtaeg',
   'Doeltijd (aftellen)': 'Sihtaeg (loendus)',
   'Geen aftelling': 'Loenduseta',
-  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.': 'Vaikimisi sihtaeg esitleja loenduse jaoks. Esitlemise ajal saab peenhäälestada klahviga K.',
+  'Standaard doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.':
+      'Vaikimisi sihtaeg esitleja loenduse jaoks. Esitlemise ajal saab peenhäälestada klahviga K.',
   'uit': 'väljas',
   'Doeltijd / aftellen (K)': 'Sihtaeg / loendus (K)',
   'Doeltijd / aftellen instellen (MMSS)': 'Sea sihtaeg / loendus (MMSS)',
@@ -723,25 +841,31 @@ const _dutchSourceEt = {
   'Kopieer': 'Kopeeri',
   'Sluiten': 'Sulge',
   'Tekstgrootte van de interface': 'Liidese teksti suurus',
-  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.': 'Suurendab kogu redaktori teksti kuni 200%. Slaidid ise ei muutu.',
+  'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.':
+      'Suurendab kogu redaktori teksti kuni 200%. Slaidid ise ei muutu.',
   'Breedte van het slidepaneel': 'Slaidipaneeli laius',
   'Pijltjestoetsen passen de breedte aan': 'Nooleklahvid muudavad laiust',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.': 'Näpunäide: kleebi tabelit tabelarvutusest lahtrisse klahvidega Cmd/Ctrl+V, et täita kogu tabel.',
+  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
+      'Näpunäide: kleebi tabelit tabelarvutusest lahtrisse klahvidega Cmd/Ctrl+V, et täita kogu tabel.',
   'Annuleren': 'Tühista',
   'Checklist': 'Kontrollnimekiri',
   'Voortgangsgrafiek tonen': 'Näita edenemisgraafikut',
-  'Toont afgevinkt en niet afgevinkt als percentages.': 'Näitab märgitud ja märkimata kirjeid protsentides.',
+  'Toont afgevinkt en niet afgevinkt als percentages.':
+      'Näitab märgitud ja märkimata kirjeid protsentides.',
   'Afgevinkt': 'Märgitud',
   'Niet afgevinkt': 'Märkimata',
-  'Er zijn geen aangevinkte checklist-items om te legen.': 'Puuduvad märgitud kontrollnimekirja kirjed tühjendamiseks.',
+  'Er zijn geen aangevinkte checklist-items om te legen.':
+      'Puuduvad märgitud kontrollnimekirja kirjed tühjendamiseks.',
   'Alle checkboxen legen?': 'Tühjendada kõik märkeruudud?',
   'Hiermee worden alle': 'See tühistab kõik',
-  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.': 'märgitud kontrollnimekirja kirjed kogu esitluses. Selle saab tagasi võtta klahvidega Ctrl/Cmd+Z.',
+  'aangevinkte checklist-items in de hele presentatie uitgevinkt. Dit kun je ongedaan maken met Ctrl/Cmd+Z.':
+      'märgitud kontrollnimekirja kirjed kogu esitluses. Selle saab tagasi võtta klahvidega Ctrl/Cmd+Z.',
   'Alles legen': 'Tühjenda kõik',
   'checklist-items uitgevinkt.': 'kontrollnimekirja kirjet tühjendatud.',
   'Alle checkboxen legen': 'Tühjenda kõik märkeruudud',
   'Afgevinkte tekst doorhalen': 'Tõmba märgitud tekst maha',
-  'Toont een streep door voltooide checklistitems.': 'Näitab lõpetatud kontrollnimekirja kirjeid mahatõmbamisega.',
+  'Toont een streep door voltooide checklistitems.':
+      'Näitab lõpetatud kontrollnimekirja kirjeid mahatõmbamisega.',
   'Na media automatisch doorgaan': 'Edene automaatselt pärast meediat',
   'Opsomming': 'Täpploend',
   'Nummering': 'Nummerdus',
@@ -751,7 +875,8 @@ const _dutchSourceEt = {
   'Omhoog': 'Üles',
   'Omlaag': 'Alla',
   'Niet toevoegen': 'Ära lisa',
-  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.': 'Need slaidid kasutavad sama andmeid, värve ja pealkirja. Vali nooltega nende järjekord pärast praegust slaidi.',
+  'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.':
+      'Need slaidid kasutavad sama andmeid, värve ja pealkirja. Vali nooltega nende järjekord pärast praegust slaidi.',
   'Afbeelding': 'Pilt',
   'Broncode': 'Lähtekood',
   'Bullet': 'Täpp',
@@ -769,10 +894,12 @@ const _dutchSourceEt = {
   'Cirkel': 'Sektor',
   'Spider': 'Ämblik',
   'CSV importeren': 'Impordi CSV',
-  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)': 'Andmed (CSV: esimene rida = seeriate nimed, esimene veerg = sildid)',
+  'Data (CSV: eerste rij = reeksnamen, eerste kolom = labels)':
+      'Andmed (CSV: esimene rida = seeriate nimed, esimene veerg = sildid)',
   'Gekoppeld aan': 'Seotud',
   'Ontkoppelen': 'Eemalda seos',
-  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?': 'Salvestada andmed slaidile või hoida eraldi CSV-failina esitluse kõrval?',
+  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?':
+      'Salvestada andmed slaidile või hoida eraldi CSV-failina esitluse kõrval?',
   'In de slide': 'Slaidile',
   'Als CSV-bestand': 'CSV-failina',
   'Geen grafiekgegevens': 'Graafiku andmed puuduvad',
@@ -785,9 +912,12 @@ const _dutchSourceEt = {
   'Sorteren': 'Sorteeri',
   'Oplopend sorteren': 'Sorteeri kasvavalt',
   'Aflopend sorteren': 'Sorteeri kahanevalt',
-  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.': 'Sektordiagrammil näidatakse kõige rohkem kahte esimest seeriat; sildid moodustavad sektorid.',
-  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.': 'Ämblikdiagramm vajab vähemalt kolme silti (telge); iga seeria moodustab kujundi.',
-  'Een spider-diagram heeft minstens drie labels nodig': 'Ämblikdiagramm vajab vähemalt kolme silti',
+  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.':
+      'Sektordiagrammil näidatakse kõige rohkem kahte esimest seeriat; sildid moodustavad sektorid.',
+  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.':
+      'Ämblikdiagramm vajab vähemalt kolme silti (telge); iga seeria moodustab kujundi.',
+  'Een spider-diagram heeft minstens drie labels nodig':
+      'Ämblikdiagramm vajab vähemalt kolme silti',
   'Minimumlijn (optioneel)': 'Miinimumjoon (valikuline)',
   'Maximumlijn (optioneel)': 'Maksimumjoon (valikuline)',
   'Schaalminimum (optioneel)': 'Skaala miinimum (valikuline)',
@@ -796,9 +926,11 @@ const _dutchSourceEt = {
   'Broncode achtergrond': 'Lähtekoodi taust',
   'Broncode tekst': 'Lähtekoodi tekst',
   'Syntaxkleuring': 'Süntaksivärvimine',
-  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).': 'Väljas = kõik ühes värvis (nt roheline mustal CRT-ekraani jaoks).',
+  'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).':
+      'Väljas = kõik ühes värvis (nt roheline mustal CRT-ekraani jaoks).',
   'Eigen kleur (hex)': 'Oma värv (hex)',
-  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.': 'Näiteks #33FF33 CRT-rohelise ekraani jaoks.',
+  'Bijvoorbeeld #33FF33 voor een CRT-groen scherm.':
+      'Näiteks #33FF33 CRT-rohelise ekraani jaoks.',
   'Onderdeel van stijlprofiel ': 'Stiiliprofiili osa ',
   'Broncode lettertype': 'Lähtekoodi font',
   'Kop (optioneel)': 'Pealkiri (valikuline)',
@@ -806,22 +938,26 @@ const _dutchSourceEt = {
   'Subkop': 'Alapealkiri',
   'Systeem (monospace)': 'Süsteem (monospace)',
   'Platte tekst': 'Lihttekst',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.': 'HTML avaneb igas brauseris ilma internetita ning renderdab koodiplokid, matemaatika ja Mermaid-diagrammid.',
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.':
+      'HTML avaneb igas brauseris ilma internetita ning renderdab koodiplokid, matemaatika ja Mermaid-diagrammid.',
   'Laatste slide': 'Viimane slaid',
   'Logo px': 'Logo px',
   'Markdown voor laatste slide': 'Markdown viimase slaidi jaoks',
   'PREVIEW': 'EELVAADE',
   'Slides gerenderd.': 'Slaidid renderdatud.',
   'Standaard laatste slide gebruiken': 'Kasuta vaikimisi viimast slaidi',
-  'Wordt automatisch toegevoegd bij presenteren en exporteren.': 'Lisatakse automaatselt esitlemisel ja eksportimisel.',
+  'Wordt automatisch toegevoegd bij presenteren en exporteren.':
+      'Lisatakse automaatselt esitlemisel ja eksportimisel.',
   'gerenderd.': 'renderdatud.',
   'renderen…': 'renderdamine…',
   'voorbereiden…': 'ettevalmistamine…',
   'Duplicaten opruimen': 'Koristada duplikaadid',
-  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën': 'Leia baithaaval identsed pildid (md5), ühenda sildid ja märkused ning eemalda koopiad',
+  'Zoek byte-identieke afbeeldingen (md5), voeg tags en opmerkingen samen en verwijder de kopieën':
+      'Leia baithaaval identsed pildid (md5), ühenda sildid ja märkused ning eemalda koopiad',
   'Geen dubbele afbeeldingen gevonden.': 'Duplikaatpilte ei leitud.',
   'Dubbele afbeeldingen opruimen?': 'Koristada dubleerivad pildid?',
-  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.': 'Igast rühmast jääb alles üks fail. Sildid ja märkused ühendatakse ning koopiat kasutavad slaidid viitavad edaspidi säilitatud failile — sealhulgas esitlused, mis pole hetkel avatud.',
+  'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.':
+      'Igast rühmast jääb alles üks fail. Sildid ja märkused ühendatakse ning koopiat kasutavad slaidid viitavad edaspidi säilitatud failile — sealhulgas esitlused, mis pole hetkel avatud.',
   'Opruimen': 'Korista',
   '1 presentatiebestand bijgewerkt.': '1 esitlusfail uuendatud.',
   'presentatiebestanden bijgewerkt.': 'esitlusfaili uuendatud.',
@@ -830,14 +966,19 @@ const _dutchSourceEt = {
   'dubbele afbeeldingen verwijderd.': 'dubleerivat pilti eemaldatud.',
   'Alleen afbeeldingen zonder tags tonen': 'Näita ainult siltideta pilte',
   'Alle afbeeldingen hebben tags.': 'Kõigil piltidel on sildid.',
-  'Zet het filter uit om alles weer te zien.': 'Lülita filter välja, et kõike uuesti näha.',
+  'Zet het filter uit om alles weer te zien.':
+      'Lülita filter välja, et kõike uuesti näha.',
   'Welkom bij OciDeck': 'Tere tulemast OciDecki',
   'Privacy en gebruik': 'Privaatsus ja kasutus',
-  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.': 'OciDeck on kohalik töölauarakendus. Teie esitlused ja andmed salvestatakse ainult teie arvutisse.',
-  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.': 'Rakendus ei kogu isikuandmeid, statistikat ega kasutusandmeid. Teie privaatsus on meie prioriteet.',
-  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.': 'Kõik andmed, mille sisestate OciDecki, jäävad teie kohalikku süsteemi ega saadeta välisserveritesse.',
+  'OciDeck is een lokale desktop-applicatie. Uw presentaties en gegevens worden uitsluitend op uw computer opgeslagen.':
+      'OciDeck on kohalik töölauarakendus. Teie esitlused ja andmed salvestatakse ainult teie arvutisse.',
+  'De app verzamelt geen persoonlijke gegevens, geen statistieken en geen gebruiksgegevens. Uw privacy is onze prioriteit.':
+      'Rakendus ei kogu isikuandmeid, statistikat ega kasutusandmeid. Teie privaatsus on meie prioriteet.',
+  'Alle gegevens die u in OciDeck invoert, blijven op uw lokale systeem en worden niet naar externe servers gestuurd.':
+      'Kõik andmed, mille sisestate OciDecki, jäävad teie kohalikku süsteemi ega saadeta välisserveritesse.',
   'Licentie (EUPL 1.2)': 'Litsents (EUPL 1.2)',
-  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.': 'Klõpsates "Nõustun", aktsepteerite need tingimused ja nõustute OciDecki kasutamisega.',
+  'Door op "Akkoord gaan" te klikken, accepteert u deze voorwaarden en gaat u akkoord met het gebruik van OciDeck.':
+      'Klõpsates "Nõustun", aktsepteerite need tingimused ja nõustute OciDecki kasutamisega.',
   'Volledige licentie online': 'Täislitsents veebis',
   'Akkoord gaan': 'Nõustun',
   'Privacy': 'Privaatsus',
@@ -845,16 +986,21 @@ const _dutchSourceEt = {
   'Toestemming intrekken': 'Võta nõusolek tagasi',
   'Toestemming intrekken?': 'Võtta nõusolek tagasi?',
   'Intrekken': 'Võta tagasi',
-  'U hebt al toegestemd in het gebruik van OciDeck.': 'Olete juba nõustunud OciDecki kasutamisega.',
-  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.': 'Võite oma nõusoleku igal ajal tagasi võtta. Pärast tagasivõtmist peate need tingimused uuesti aktsepteerima.',
-  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.': 'Kui võtate oma nõusoleku tagasi, peate need tingimused uuesti aktsepteerima OciDecki taaskäivitamisel.',
+  'U hebt al toegestemd in het gebruik van OciDeck.':
+      'Olete juba nõustunud OciDecki kasutamisega.',
+  'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.':
+      'Võite oma nõusoleku igal ajal tagasi võtta. Pärast tagasivõtmist peate need tingimused uuesti aktsepteerima.',
+  'Als u uw toestemming intrekt, moet u deze voorwaarden opnieuw accepteren wanneer u OciDeck opnieuw start.':
+      'Kui võtate oma nõusoleku tagasi, peate need tingimused uuesti aktsepteerima OciDecki taaskäivitamisel.',
   'Slidekwaliteit': 'Slaidi kvaliteet',
   'Geen kwaliteitsproblemen gevonden': 'Kvaliteediprobleeme ei leitud',
   'Thema (hele presentatie)': 'Teema (kogu esitlus)',
   'Kwaliteitsprobleem': 'Kvaliteediprobleem',
   'Kwaliteitsproblemen': 'Kvaliteediprobleemid',
-  'Kwaliteitsproblemen (inclusief ernstige)': 'Kvaliteediprobleemid (sh tõsised)',
-  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid': 'Lisa ligipääsetavuse jaoks alt-tekst / pildiallkiri',
+  'Kwaliteitsproblemen (inclusief ernstige)':
+      'Kvaliteediprobleemid (sh tõsised)',
+  'Voeg alt-tekst / bijschrift toe voor toegankelijkheid':
+      'Lisa ligipääsetavuse jaoks alt-tekst / pildiallkiri',
   'Alt-tekst': 'Alt-tekst',
   'Tekstdichtheid': 'Tekstitihedus',
   'Contrast': 'Kontrast',
@@ -864,22 +1010,32 @@ const _dutchSourceEt = {
   ':1 voor normale tekst).': ':1 tavateksti puhul).',
   ':1 voor grote tekst).': ':1 suure teksti puhul).',
   ':1).': ':1).',
-  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.': 'Pildil või pildi kohal oleva teksti kontrasti ei saa automaatselt kontrollida — kontrolli visuaalselt.',
-  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.': 'Graafikul puudub pealkiri või kirjeldav andmestik — lisa pealkiri või seeriate nimed.',
-  'heeft geen titel of sprekernotities die de inhoud beschrijven.': 'puuduvad sisu kirjeldav pealkiri või esineja märkmed.',
-  'Veel tekst op deze slide: het lettertype wordt verkleind tot ': 'Sellel slaidil on palju teksti: fondi suurust vähendatakse kuni ',
+  'Contrast van tekst op of over een afbeelding kan niet automatisch worden gecontroleerd — controleer visueel.':
+      'Pildil või pildi kohal oleva teksti kontrasti ei saa automaatselt kontrollida — kontrolli visuaalselt.',
+  'Grafiek heeft geen titel of beschrijvende data — voeg een titel of seriesnamen toe.':
+      'Graafikul puudub pealkiri või kirjeldav andmestik — lisa pealkiri või seeriate nimed.',
+  'heeft geen titel of sprekernotities die de inhoud beschrijven.':
+      'puuduvad sisu kirjeldav pealkiri või esineja märkmed.',
+  'Veel tekst op deze slide: het lettertype wordt verkleind tot ':
+      'Sellel slaidil on palju teksti: fondi suurust vähendatakse kuni ',
   ' van de ontwerpgrootte.': ' kavandatud suurusest.',
-  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (': 'Sellel slaidil on palju teksti: fondi suurust vähendatakse tugevalt (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.': 'kavandatud suurusest). Kaalu sisu jagamist.',
+  'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
+      'Sellel slaidil on palju teksti: fondi suurust vähendatakse tugevalt (',
+  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      'kavandatud suurusest). Kaalu sisu jagamist.',
   'Grote tabel (': 'Suur tabel (',
   ' rijen, ': ' rida, ',
-  ' kolommen): celtekst staat op het minimumformaat.': ' veergu): lahtriteksti on miinimumsuuruses.',
+  ' kolommen): celtekst staat op het minimumformaat.':
+      ' veergu): lahtriteksti on miinimumsuuruses.',
   'Veel broncode (': 'Palju lähtekoodi (',
-  ' regels) — de tekst wordt sterk verkleind om te passen.': ' rida) — teksti vähendatakse tugevalt mahutamiseks.',
+  ' regels) — de tekst wordt sterk verkleind om te passen.':
+      ' rida) — teksti vähendatakse tugevalt mahutamiseks.',
   'Veel vrije markdown (': 'Palju vaba markdowni (',
-  ' regels) — controleer of alles leesbaar blijft op de slide.': ' rida) — kontrolli, et kõik jääks slaidil loetavaks.',
+  ' regels) — controleer of alles leesbaar blijft op de slide.':
+      ' rida) — kontrolli, et kõik jääks slaidil loetavaks.',
   'Lange titelpagina (': 'Pikk tiitelslaid (',
-  ' tekens) — de tekst wordt verkleind om te passen.': ' tähemärki) — teksti vähendatakse mahutamiseks.',
+  ' tekens) — de tekst wordt verkleind om te passen.':
+      ' tähemärki) — teksti vähendatakse mahutamiseks.',
   'Thema bodytekst': 'Teema kehatekst',
   'Thema titel': 'Teema pealkiri',
   'Thema tabeltekst': 'Teema tabeltekst',
@@ -890,34 +1046,46 @@ const _dutchSourceEt = {
   'Tweede afbeelding': 'Teine pilt',
   'Waarschuwing bij export': 'Hoiata eksportimisel',
   'Minimale contrastverhouding': 'Minimaalne kontrastisuhe',
-  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.': 'Sellest suhtest väiksem tekst märgistatakse. 4.5 = WCAG AA, 3.0 = WCAG AA suur tekst. Kõrgem on rangem.',
-  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.': 'Küsi enne eksportimist kinnitust, kui esineb slaidi kvaliteediprobleeme.',
+  'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.':
+      'Sellest suhtest väiksem tekst märgistatakse. 4.5 = WCAG AA, 3.0 = WCAG AA suur tekst. Kõrgem on rangem.',
+  'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.':
+      'Küsi enne eksportimist kinnitust, kui esineb slaidi kvaliteediprobleeme.',
   'Kwaliteitsproblemen gevonden': 'Leiti kvaliteediprobleeme',
   'Toch exporteren': 'Ekspordi ikkagi',
   'ernstige probleem(en)': 'tõsist probleemi',
-  'De presentatie heeft kwaliteitsproblemen (': 'Esitlusel on kvaliteediprobleeme (',
+  'De presentatie heeft kwaliteitsproblemen (':
+      'Esitlusel on kvaliteediprobleeme (',
   'Lange quote (': 'Pikk tsitaat (',
   'Footer-tekst': 'Jaluse tekst',
   'Checklist (niet aangevinkt)': 'Kontrollnimekiri (märkimata)',
   'Checklist (aangevinkt)': 'Kontrollnimekiri (märgitud)',
   ': bestand niet gevonden (': ': faili ei leitud (',
-  'Blokkeer export bij ernstige kwaliteitsproblemen': 'Blokeeri eksport tõsiste kvaliteediprobleemide korral',
-  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.': 'Eksport pole võimalik, kuni slaidi kvaliteedikontrollis on vigu.',
-  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.': 'Eksport blokeeritud tõsiste kvaliteediprobleemide tõttu.',
+  'Blokkeer export bij ernstige kwaliteitsproblemen':
+      'Blokeeri eksport tõsiste kvaliteediprobleemide korral',
+  'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.':
+      'Eksport pole võimalik, kuni slaidi kvaliteedikontrollis on vigu.',
+  'Export geblokkeerd vanwege ernstige kwaliteitsproblemen.':
+      'Eksport blokeeritud tõsiste kvaliteediprobleemide tõttu.',
   'Alle meldingen': 'Kõik teated',
-  '… en meer problemen in het kwaliteitspaneel.': '… ja veel probleeme kvaliteedipaneelis.',
+  '… en meer problemen in het kwaliteitspaneel.':
+      '… ja veel probleeme kvaliteedipaneelis.',
   'Classificatie-handhaving': 'Klassifikatsiooni jõustamine',
   'Vrijgaveplafond': 'Vabastuse lagi',
-  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.': 'Kõrgeim eksportida lubatud TLP-tase. Tühi = lagi puudub.',
+  'Hoogste TLP-niveau dat geëxporteerd mag worden. Leeg = geen plafond.':
+      'Kõrgeim eksportida lubatud TLP-tase. Tühi = lagi puudub.',
   'Vereist minimumniveau': 'Nõutav miinimumtase',
-  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.': 'Madalaim klassifikatsioon, mis deckil peab eksportimiseks olema. Tühi = miinimum puudub.',
+  'Laagste classificatie die een deck moet hebben om te exporteren. Leeg = geen minimum.':
+      'Madalaim klassifikatsioon, mis deckil peab eksportimiseks olema. Tühi = miinimum puudub.',
   'Geen plafond': 'Lagi puudub',
   'Geen minimum': 'Miinimum puudub',
   'Classificatie verplicht': 'Klassifikatsioon kohustuslik',
-  'Weiger export wanneer het deck geen TLP-niveau heeft.': 'Keeldu ekspordist, kui deckil pole TLP-taset.',
+  'Weiger export wanneer het deck geen TLP-niveau heeft.':
+      'Keeldu ekspordist, kui deckil pole TLP-taset.',
   'Classificatie-watermerk': 'Klassifikatsiooni vesimärk',
-  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.': 'Näita igal slaidil diagonaalset vesimärki TLP ja organisatsiooniga.',
-  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.': 'Sea TLP-tase — eksport on klassifikatsioonipoliitika tõttu blokeeritud.',
+  'Toon een diagonaal watermerk met TLP en organisatie op elke slide.':
+      'Näita igal slaidil diagonaalset vesimärki TLP ja organisatsiooniga.',
+  'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.':
+      'Sea TLP-tase — eksport on klassifikatsioonipoliitika tõttu blokeeritud.',
   'Tabel bewerken': 'Redigeeri tabelit',
   'Pijltjes · Tab · Esc': 'Nooled · Tab · Esc',
   'Tabel bewerken (op tabeldia)': 'Redigeeri tabelit (tabelislaididel)',

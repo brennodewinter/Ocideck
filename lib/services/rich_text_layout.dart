@@ -343,8 +343,7 @@ double richTextBodyAvailH(
   // A split (text+image) layout puts the text column beside a right-hand image,
   // so a right-side logo sits over the image and needs no text reserve (mirrors
   // the preview's split-layout safe insets).
-  final effReserve =
-      (splitWithImage && profile.logoPosition.endsWith('right'))
+  final effReserve = (splitWithImage && profile.logoPosition.endsWith('right'))
       ? 0.0
       : reserve;
   final isTop = profile.logoPosition.startsWith('top');

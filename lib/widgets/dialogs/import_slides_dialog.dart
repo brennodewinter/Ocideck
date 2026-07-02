@@ -292,12 +292,12 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 40, color: const Color(0xFF94A3B8)),
+          Icon(icon, size: 40, color: AppTheme.slate400),
           const SizedBox(height: 12),
           Text(
             message,
             textAlign: TextAlign.center,
-            style: const TextStyle(color: Color(0xFF64748B), fontSize: 13),
+            style: const TextStyle(color: AppTheme.slate500, fontSize: 13),
           ),
         ],
       ),
@@ -360,7 +360,7 @@ class _PresentationSection extends StatelessWidget {
                         text: '   ${presentation.fileName}',
                         style: const TextStyle(
                           fontSize: 11,
-                          color: Color(0xFF94A3B8),
+                          color: AppTheme.slate400,
                         ),
                       ),
                     ],
@@ -432,7 +432,7 @@ class _SlideCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
                 border: Border.all(
-                  color: selected ? AppTheme.accent : const Color(0xFFCBD5E1),
+                  color: selected ? AppTheme.accent : AppTheme.slate300,
                   width: selected ? 2.5 : 1,
                 ),
               ),
