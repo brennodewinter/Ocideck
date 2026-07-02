@@ -16,10 +16,12 @@ bool get supportsDualScreenPresenter => impl.supportsDualScreenPresenter;
 /// Full filesystem access for project folders and sidecars.
 bool get supportsLocalProjectFolders => impl.supportsLocalProjectFolders;
 
-/// Netwerkbronnen voor decks (URL-import, Nextcloud/WebDAV).
+/// Nextcloud/WebDAV als deck-bron (bladeren, openen, terugschrijven).
 ///
-/// Op web staat dit bewust uit: de CSP van de webbundel is `connect-src
-/// 'self'` én de SSRF-checks van net_guard (dart:io) bestaan daar niet.
-/// Cross-origin ophalen op web verruimen is een security-designkeuze die
-/// expliciet moet worden afgestemd — niet iets om stilletjes aan te zetten.
+/// Op web staat dit bewust uit: de WebDAV-client draait op dart:io met eigen
+/// SSRF-pinning, en vanuit de browser vergt WebDAV bovendien CORS-instellingen
+/// op de server — een designkeuze die expliciet met de beheerder afgestemd
+/// moet worden. URL-import valt hier bewust NIET onder: die werkt op web via
+/// de browser (CORS + CSP `connect-src 'self' https:`) met dezelfde
+/// security-gate als op desktop.
 bool get supportsNetworkDeckSources => impl.supportsNetworkDeckSources;

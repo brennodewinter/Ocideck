@@ -67,24 +67,25 @@ class _WelcomeScreen extends ConsumerWidget {
                             label: Text(l10n.t('open')),
                           ),
                         ),
-                        // URL-import en Nextcloud zijn netwerkbronnen; de
-                        // bibliotheekscan doorzoekt het lokale bestandssysteem.
-                        // Geen van drieën kan in de webversie werken, dus daar
-                        // tonen we ze niet (zie platform_features.dart).
-                        if (supportsNetworkDeckSources) ...[
-                          const SizedBox(height: 12),
-                          SizedBox(
-                            width: 220,
-                            child: OutlinedButton.icon(
-                              onPressed: () => _importFromUrl(context, ref),
-                              icon: const Icon(
-                                Icons.cloud_download_outlined,
-                                size: 18,
-                              ),
-                              label: Text(l10n.t('importUrl')),
+                        // URL-import werkt overal: op desktop via het
+                        // gehardende dart:io-pad, op web via de browser
+                        // (CORS + CSP `connect-src https:`) met dezelfde
+                        // security-gate. Nextcloud blijft een netwerkbron
+                        // achter [supportsNetworkDeckSources]; de
+                        // bibliotheekscan doorzoekt het lokale
+                        // bestandssysteem en kan op web niet.
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          width: 220,
+                          child: OutlinedButton.icon(
+                            onPressed: () => _importFromUrl(context, ref),
+                            icon: const Icon(
+                              Icons.cloud_download_outlined,
+                              size: 18,
                             ),
+                            label: Text(l10n.t('importUrl')),
                           ),
-                        ],
+                        ),
                         if (supportsLocalProjectFolders) ...[
                           const SizedBox(height: 12),
                           SizedBox(

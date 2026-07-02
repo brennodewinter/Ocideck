@@ -318,9 +318,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           ),
           _menuItem('open', Icons.folder_open_outlined, l10n.t('openEllipsis')),
           const PopupMenuDivider(),
-          // Pakket-export/-import schrijft en leest lokale mappen en de
-          // netwerkbronnen (URL, Nextcloud) zijn op web bewust uit — verberg
-          // wat daar niet kan werken (zie platform_features.dart).
+          // Pakket-export/-import schrijft en leest lokale mappen en Nextcloud
+          // is op web bewust uit — verberg wat daar niet kan werken (zie
+          // platform_features.dart). URL-import werkt overal: op web via de
+          // browser (CORS + CSP) met dezelfde security-gate.
           if (supportsLocalProjectFolders) ...[
             _menuItem(
               'export_package',
@@ -333,10 +334,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               l10n.t('importPackage'),
             ),
           ],
-          if (supportsNetworkDeckSources)
-            _menuItem('import_url', Icons.link, l10n.t('importUrl')),
-          if (supportsLocalProjectFolders || supportsNetworkDeckSources)
-            const PopupMenuDivider(),
+          _menuItem('import_url', Icons.link, l10n.t('importUrl')),
+          const PopupMenuDivider(),
           if (supportsNetworkDeckSources) ...[
             _menuItem(
               'open_nextcloud',
