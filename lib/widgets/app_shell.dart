@@ -19,6 +19,8 @@ import '../services/export_metadata.dart';
 import '../services/open_file_channel.dart';
 import '../services/export_service.dart';
 import '../services/file_service.dart';
+import '../services/image_service.dart';
+import '../services/web_asset_store.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
 import '../services/mermaid_render_service.dart';
@@ -283,28 +285,42 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   };
 
   /// Drag-drop op web: er is geen pad, alleen inhoud. Een `.md` wordt via het
-  /// in-memory pad geopend (zelfde security-gate); al het andere — pakketten,
-  /// afbeeldingen — kan zonder bestandssysteem (nog) niet en zegt dat eerlijk.
+  /// in-memory pad geopend (zelfde security-gate); afbeeldingen gaan na
+  /// dezelfde validatie als pickImage de WebAssetStore in en worden slides
+  /// met een mem:-pad. Pakketten kunnen zonder bestandssysteem (nog) niet en
+  /// zeggen dat eerlijk; overige typen worden — net als op desktop — genegeerd.
   Future<void> _onWebFilesDropped(List<DropItem> files) async {
     final tabs = ref.read(tabsProvider.notifier);
-    var unsupported = 0;
+    final images = <String>[];
+    var packages = 0;
     for (final file in files) {
-      if (file.name.toLowerCase().endsWith('.md')) {
+      final ext = p.extension(file.name.toLowerCase());
+      if (ext == '.md') {
         final bytes = await file.readAsBytes();
         await tabs.openDeckFromBytes(bytes, file.name);
-      } else {
-        unsupported++;
+      } else if (ext == '.ocideck' || ext == '.zip') {
+        packages++;
+      } else if (_imageExtensions.contains(ext)) {
+        final bytes = await file.readAsBytes();
+        if (bytes.isEmpty ||
+            bytes.length > ImageService.maxImageBytes ||
+            !ImageService.looksLikeImage(bytes)) {
+          logWarning(
+            'AppShell._onWebFilesDropped: afbeelding geweigerd '
+            '(te groot of geen afbeelding)',
+            file.name,
+          );
+          continue;
+        }
+        images.add(WebAssetStore.put(bytes, name: file.name));
       }
     }
-    if (unsupported > 0 && mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            context.l10n.d(
-              'Alleen .md-presentaties kunnen in de webversie worden geopend.',
-            ),
-          ),
-        ),
+    if (images.isNotEmpty) _addImagesToActiveDeck(images);
+    if (packages > 0 && mounted) {
+      _reportOpenFailure(
+        ScaffoldMessenger.of(context),
+        context.l10n,
+        OpenResult.packageUnsupported,
       );
     }
   }
