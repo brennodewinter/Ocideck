@@ -1142,4 +1142,28 @@ const _dutchSourceUk = {
   'Kon de afbeelding niet opslaan.': 'Не вдалося зберегти зображення.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Не вдалося видалити зображення. Перевірте, чи файл не використовується і чи маєте ви права на запис.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Немає прав на запис у цьому місці. Виберіть іншу теку.',
+  'De schijf is vol.': 'Диск заповнений.',
+  'Bestand of map niet gevonden.': 'Файл або теку не знайдено.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Не вдалося прочитати або записати файл.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Помилка мережі — перевірте з\'єднання і спробуйте ще раз.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Сталася неочікувана помилка. Подробиці в журналі.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud не налаштовано (правильно) — перевірте дані сервера в Налаштування → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Цей сервер не дозволено. Спочатку позначте приватний/LAN-сервер як довірений у Налаштування → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Сервер недоступний — перевірте з\'єднання та URL сервера.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Не вдалося увійти. Перевірте ім\'я користувача та пароль; для Nextcloud використовуйте пароль застосунку, а не пароль облікового запису.',
+  'Bestand of map niet gevonden op de server.':
+      'Файл або теку не знайдено на сервері.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Файл перевищує дозволений ліміт.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Сервер повернув помилку. Спробуйте пізніше.',
 };

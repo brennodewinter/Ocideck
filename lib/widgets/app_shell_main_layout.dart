@@ -702,9 +702,14 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         ),
       );
     } catch (e) {
+      logError('AppShell: pakketexport mislukt', e);
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('${l10n.d('Export mislukt:')} $e')),
+        SnackBar(
+          content: Text(
+            '${l10n.d('Export mislukt:')} ${userFacingError(l10n, e)}',
+          ),
+        ),
       );
     }
   }

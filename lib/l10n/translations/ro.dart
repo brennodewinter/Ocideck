@@ -1140,4 +1140,28 @@ const _dutchSourceRo = {
   'Kon de afbeelding niet opslaan.': 'Imaginea nu a putut fi salvată.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Imaginea nu a putut fi ștearsă. Verificați dacă fișierul nu este în uz și dacă aveți drepturi de scriere.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Fără drepturi de scriere în această locație. Alegeți alt dosar.',
+  'De schijf is vol.': 'Discul este plin.',
+  'Bestand of map niet gevonden.': 'Fișierul sau dosarul nu a fost găsit.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Fișierul nu a putut fi citit sau scris.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Eroare de rețea — verificați conexiunea și încercați din nou.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Ceva a mers neașteptat de prost. Vedeți jurnalul pentru detalii.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud nu este configurat (corect) — verificați datele serverului la Setări → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Acest server nu este permis. Marcați mai întâi un server privat/LAN ca de încredere la Setări → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Serverul nu poate fi contactat — verificați conexiunea și URL-ul serverului.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Autentificarea a eșuat. Verificați numele de utilizator și parola; cu Nextcloud folosiți o parolă de aplicație, nu parola contului.',
+  'Bestand of map niet gevonden op de server.':
+      'Fișierul sau dosarul nu a fost găsit pe server.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Fișierul depășește limita permisă.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Serverul a returnat o eroare. Încercați din nou mai târziu.',
 };

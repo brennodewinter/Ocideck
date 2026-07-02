@@ -1137,4 +1137,28 @@ const _dutchSourcePl = {
   'Kon de afbeelding niet opslaan.': 'Nie można zapisać obrazu.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Nie można usunąć obrazu. Sprawdź, czy plik nie jest w użyciu i czy masz uprawnienia do zapisu.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Brak uprawnień do zapisu w tej lokalizacji. Wybierz inny folder.',
+  'De schijf is vol.': 'Dysk jest pełny.',
+  'Bestand of map niet gevonden.': 'Nie znaleziono pliku lub folderu.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Nie można odczytać ani zapisać pliku.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Błąd sieci — sprawdź połączenie i spróbuj ponownie.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Coś poszło nieoczekiwanie nie tak. Szczegóły w dzienniku.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud nie jest (poprawnie) skonfigurowany — sprawdź dane serwera w Ustawienia → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Ten serwer nie jest dozwolony. Najpierw oznacz serwer prywatny/LAN jako zaufany w Ustawienia → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Serwer nieosiągalny — sprawdź połączenie i adres URL serwera.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Logowanie nie powiodło się. Sprawdź nazwę użytkownika i hasło; w Nextcloud użyj hasła aplikacji, nie hasła konta.',
+  'Bestand of map niet gevonden op de server.':
+      'Nie znaleziono pliku lub folderu na serwerze.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Plik przekracza dozwolony limit.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Serwer zwrócił błąd. Spróbuj ponownie później.',
 };

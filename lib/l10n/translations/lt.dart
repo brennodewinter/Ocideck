@@ -1135,4 +1135,28 @@ const _dutchSourceLt = {
   'Kon de afbeelding niet opslaan.': 'Nepavyko išsaugoti vaizdo.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Nepavyko ištrinti vaizdo. Patikrinkite, ar failas nenaudojamas ir ar turite rašymo teises.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Šioje vietoje nėra rašymo teisių. Pasirinkite kitą aplanką.',
+  'De schijf is vol.': 'Diskas pilnas.',
+  'Bestand of map niet gevonden.': 'Failas arba aplankas nerastas.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Nepavyko perskaityti arba įrašyti failo.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Tinklo klaida — patikrinkite ryšį ir bandykite dar kartą.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Kažkas netikėtai nepavyko. Išsamiau žurnale.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud nesukonfigūruotas (teisingai) — patikrinkite serverio duomenis skiltyje Nustatymai → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Šis serveris neleidžiamas. Pirmiausia pažymėkite privatų/LAN serverį kaip patikimą skiltyje Nustatymai → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Serveris nepasiekiamas — patikrinkite ryšį ir serverio URL.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Prisijungti nepavyko. Patikrinkite naudotojo vardą ir slaptažodį; su Nextcloud naudokite programėlės slaptažodį, o ne paskyros.',
+  'Bestand of map niet gevonden op de server.':
+      'Failas arba aplankas serveryje nerastas.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Failas didesnis už leidžiamą limitą.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Serveris grąžino klaidą. Bandykite vėliau.',
 };

@@ -1142,4 +1142,28 @@ const _dutchSourceAddEn = {
   'Kon de afbeelding niet opslaan.': 'Could not save the image.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Could not delete the image. Check that the file is not in use and that you have write permissions.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'No write permission at this location. Choose another folder.',
+  'De schijf is vol.': 'The disk is full.',
+  'Bestand of map niet gevonden.': 'File or folder not found.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Could not read or write the file.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Network error — check your connection and try again.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Something went unexpectedly wrong. See the log for details.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud is not set up (correctly) — check the server details under Settings → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'This server is not allowed. Mark a private/LAN server as trusted first under Settings → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server unreachable — check your connection and the server URL.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Sign-in failed. Check the username and password; with Nextcloud, use an app password, not your account password.',
+  'Bestand of map niet gevonden op de server.':
+      'File or folder not found on the server.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'The file is larger than the allowed limit.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'The server returned an error. Try again later.',
 };

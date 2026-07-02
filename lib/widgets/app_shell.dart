@@ -29,6 +29,7 @@ import '../state/settings_provider.dart';
 import '../state/tabs_provider.dart';
 import '../state/webdav_provider.dart';
 import '../utils/project_path.dart';
+import '../utils/user_facing_error.dart';
 import '../theme/app_theme.dart';
 import '../l10n/app_localizations.dart';
 import 'dialogs/export_dialog.dart';

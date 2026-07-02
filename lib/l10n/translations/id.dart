@@ -1130,4 +1130,28 @@ const _dutchSourceId = {
   'Kon de afbeelding niet opslaan.': 'Tidak dapat menyimpan gambar.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Tidak dapat menghapus gambar. Pastikan file tidak sedang digunakan dan Anda memiliki izin menulis.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Tidak ada izin menulis di lokasi ini. Pilih folder lain.',
+  'De schijf is vol.': 'Disk penuh.',
+  'Bestand of map niet gevonden.': 'File atau folder tidak ditemukan.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Tidak dapat membaca atau menulis file.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Kesalahan jaringan — periksa koneksi Anda dan coba lagi.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Terjadi kesalahan tak terduga. Lihat log untuk detailnya.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud belum diatur (dengan benar) — periksa detail server di Pengaturan → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Server ini tidak diizinkan. Tandai server privat/LAN sebagai tepercaya dulu di Pengaturan → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server tidak terjangkau — periksa koneksi dan URL server.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Gagal masuk. Periksa nama pengguna dan kata sandi; dengan Nextcloud gunakan kata sandi aplikasi, bukan kata sandi akun.',
+  'Bestand of map niet gevonden op de server.':
+      'File atau folder tidak ditemukan di server.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'File lebih besar dari batas yang diizinkan.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Server mengembalikan kesalahan. Coba lagi nanti.',
 };

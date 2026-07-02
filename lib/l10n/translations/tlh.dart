@@ -1118,4 +1118,28 @@ const _dutchSourceTlh = {
   'Kon de afbeelding niet opslaan.': 'mIllogh polqu\'be\'lu\'.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'mIllogh teqlaHbe\'lu\'. teHwI\' lo\'lu\'be\' \'ej ghItlh chaw\' Daghaj \'e\' yI\'ol.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'naDev ghItlh chaw\' Daghajbe\'. latlh teHwI\' pa\' yIwIv.',
+  'De schijf is vol.': 'buy\' jonta\'.',
+  'Bestand of map niet gevonden.': 'teHwI\' pagh pa\' tu\'lu\'be\'.',
+  'Kon het bestand niet lezen of schrijven.':
+      'teHwI\' laDlaHbe\'lu\' pagh ghItlhlaHbe\'lu\'.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'mIr Qagh — rarwI\' yI\'ol \'ej yInIDqa\'.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'vay\' Qagh net pIHbe\'. QIn tetlh yIlegh.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud lIjchoHbe\'lu\' — Settings → Nextcloud Daq jabwI\' De\' yI\'ol.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'jabwI\'vam chaw\'be\'lu\'. Settings → Nextcloud Daq jabwI\' pegh/LAN voqmoH \'e\' yIper.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'jabwI\' SIchlaHbe\'lu\' — rarwI\' jabwI\' URL je yI\'ol.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      '\'el Qapbe\'. lo\'wI\' pong mu\'wIj je yI\'ol; Nextcloud Daq app mu\'wIj yIlo\', bo\'Degh mu\'wIj yIlo\'Qo\'.',
+  'Bestand of map niet gevonden op de server.':
+      'jabwI\'Daq teHwI\' pagh pa\' tu\'lu\'be\'.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'chaw\'lu\'bogh \'aqroS tIn law\' teHwI\' tIn puS.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Qagh chegh jabwI\'. tugh yInIDqa\'.',
 };

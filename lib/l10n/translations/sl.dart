@@ -1132,4 +1132,28 @@ const _dutchSourceSl = {
   'Kon de afbeelding niet opslaan.': 'Slike ni bilo mogoče shraniti.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Slike ni bilo mogoče izbrisati. Preverite, da datoteka ni v uporabi in da imate pravice za pisanje.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Na tem mestu ni pravic za pisanje. Izberite drugo mapo.',
+  'De schijf is vol.': 'Disk je poln.',
+  'Bestand of map niet gevonden.': 'Datoteke ali mape ni mogoče najti.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Datoteke ni bilo mogoče prebrati ali zapisati.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Omrežna napaka — preverite povezavo in poskusite znova.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Nekaj je nepričakovano šlo narobe. Podrobnosti so v dnevniku.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud ni (pravilno) nastavljen — preverite podatke strežnika v Nastavitve → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Ta strežnik ni dovoljen. Zasebni/LAN strežnik najprej označite kot zaupanja vreden v Nastavitve → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Strežnik ni dosegljiv — preverite povezavo in URL strežnika.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Prijava ni uspela. Preverite uporabniško ime in geslo; pri Nextcloudu uporabite geslo aplikacije, ne gesla računa.',
+  'Bestand of map niet gevonden op de server.':
+      'Datoteke ali mape na strežniku ni mogoče najti.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Datoteka je večja od dovoljene omejitve.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Strežnik je vrnil napako. Poskusite znova pozneje.',
 };

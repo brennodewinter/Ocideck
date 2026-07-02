@@ -1132,4 +1132,28 @@ const _dutchSourceHu = {
   'Kon de afbeelding niet opslaan.': 'A képet nem sikerült menteni.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'A képet nem sikerült törölni. Ellenőrizd, hogy a fájl nincs-e használatban, és van-e írási jogod.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Nincs írási jog ezen a helyen. Válassz másik mappát.',
+  'De schijf is vol.': 'A lemez megtelt.',
+  'Bestand of map niet gevonden.': 'A fájl vagy mappa nem található.',
+  'Kon het bestand niet lezen of schrijven.':
+      'A fájlt nem sikerült olvasni vagy írni.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Hálózati hiba — ellenőrizd a kapcsolatot, és próbáld újra.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Váratlan hiba történt. Részletek a naplóban.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'A Nextcloud nincs (jól) beállítva — ellenőrizd a szerveradatokat a Beállítások → Nextcloud alatt.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Ez a szerver nem engedélyezett. Először jelöld megbízhatónak a privát/LAN szervert a Beállítások → Nextcloud alatt.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'A szerver nem érhető el — ellenőrizd a kapcsolatot és a szerver URL-jét.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'A bejelentkezés nem sikerült. Ellenőrizd a felhasználónevet és a jelszót; Nextcloudnál alkalmazásjelszót használj, ne a fiókjelszavadat.',
+  'Bestand of map niet gevonden op de server.':
+      'A fájl vagy mappa nem található a szerveren.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'A fájl nagyobb a megengedett korlátnál.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'A szerver hibát adott vissza. Próbáld újra később.',
 };

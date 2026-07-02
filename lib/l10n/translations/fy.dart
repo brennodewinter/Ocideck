@@ -1118,4 +1118,28 @@ const _dutchSourceAddFy = {
   'Kon de afbeelding niet opslaan.': 'Koe de ôfbylding net bewarje.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Koe de ôfbylding net fuortsmite. Kontrolearje oft it bestân net yn gebrûk is en oft jo skriuwrjochten hawwe.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Gjin skriuwrjochten op dit plak. Kies in oare map.',
+  'De schijf is vol.': 'De skiif is fol.',
+  'Bestand of map niet gevonden.': 'Bestân of map net fûn.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Koe it bestân net lêze of skriuwe.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Netwurkflater — kontrolearje jo ferbining en besykje it nochris.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Der gie ûnferwachts wat mis. Sjoch yn it lochboek foar details.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud is net (goed) ynsteld — kontrolearje de servergegevens by Ynstellingen → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Dizze server is net tastien. Markearje in privee/LAN-server earst as fertroud by Ynstellingen → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server net berikber — kontrolearje jo ferbining en de server-URL.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Oanmelden mislearre. Kontrolearje brûkersnamme en wachtwurd; brûk by Nextcloud in app-wachtwurd, net jo accountwachtwurd.',
+  'Bestand of map niet gevonden op de server.':
+      'Bestân of map net fûn op de server.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'It bestân is grutter as de tastiene limyt.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'De server joech in flater. Besykje it letter nochris.',
 };

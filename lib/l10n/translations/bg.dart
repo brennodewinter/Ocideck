@@ -1146,4 +1146,28 @@ const _dutchSourceBg = {
   'Kon de afbeelding niet opslaan.': 'Изображението не можа да бъде запазено.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Изображението не можа да бъде изтрито. Проверете дали файлът не се използва и дали имате права за запис.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Няма права за запис на това място. Изберете друга папка.',
+  'De schijf is vol.': 'Дискът е пълен.',
+  'Bestand of map niet gevonden.': 'Файлът или папката не е намерена.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Файлът не можа да бъде прочетен или записан.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Мрежова грешка — проверете връзката и опитайте отново.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Нещо се обърка неочаквано. Вижте дневника за подробности.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud не е настроен (правилно) — проверете данните за сървъра в Настройки → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Този сървър не е разрешен. Първо отбележете частен/LAN сървър като доверен в Настройки → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Сървърът е недостъпен — проверете връзката и URL адреса на сървъра.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Влизането не успя. Проверете потребителското име и паролата; с Nextcloud използвайте парола за приложение, а не паролата на акаунта.',
+  'Bestand of map niet gevonden op de server.':
+      'Файлът или папката не е намерена на сървъра.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Файлът е по-голям от разрешения лимит.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Сървърът върна грешка. Опитайте отново по-късно.',
 };

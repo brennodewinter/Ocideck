@@ -1143,4 +1143,28 @@ const _dutchSourceMt = {
   'Kon de afbeelding niet opslaan.': 'Ma setgħetx tiġi salvata l-istampa.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Ma setgħetx titħassar l-istampa. Iċċekkja li l-fajl mhux qed jintuża u li għandek permessi tal-kitba.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'L-ebda permess tal-kitba f\'dan il-post. Agħżel folder ieħor.',
+  'De schijf is vol.': 'Id-diska mimlija.',
+  'Bestand of map niet gevonden.': 'Il-fajl jew il-folder ma nstabx.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Ma setax jinqara jew jinkiteb il-fajl.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Żball tan-netwerk — iċċekkja l-konnessjoni u erġa\' pprova.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Xi ħaġa marret ħażin bla mistenni. Ara l-log għad-dettalji.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud mhux issettjat (sew) — iċċekkja d-dettalji tas-server taħt Settings → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Dan is-server mhux permess. L-ewwel immarka server privat/LAN bħala fdat taħt Settings → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Is-server mhux jintlaħaq — iċċekkja l-konnessjoni u l-URL tas-server.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Il-login falla. Iċċekkja l-isem tal-utent u l-password; ma\' Nextcloud uża password tal-app, mhux dik tal-kont.',
+  'Bestand of map niet gevonden op de server.':
+      'Il-fajl jew il-folder ma nstabx fuq is-server.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Il-fajl akbar mil-limitu permess.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Is-server ta żball. Erġa\' pprova aktar tard.',
 };

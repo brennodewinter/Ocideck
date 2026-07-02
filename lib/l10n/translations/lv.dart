@@ -1130,4 +1130,28 @@ const _dutchSourceLv = {
   'Kon de afbeelding niet opslaan.': 'Neizdevās saglabāt attēlu.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Neizdevās izdzēst attēlu. Pārbaudiet, vai fails netiek lietots un vai jums ir rakstīšanas tiesības.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Šajā vietā nav rakstīšanas tiesību. Izvēlieties citu mapi.',
+  'De schijf is vol.': 'Disks ir pilns.',
+  'Bestand of map niet gevonden.': 'Fails vai mape nav atrasta.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Failu neizdevās nolasīt vai ierakstīt.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Tīkla kļūda — pārbaudiet savienojumu un mēģiniet vēlreiz.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Kaut kas negaidīti nogāja greizi. Sīkāku informāciju skatiet žurnālā.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud nav (pareizi) iestatīts — pārbaudiet servera datus sadaļā Iestatījumi → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Šis serveris nav atļauts. Vispirms atzīmējiet privātu/LAN serveri kā uzticamu sadaļā Iestatījumi → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Serveris nav sasniedzams — pārbaudiet savienojumu un servera URL.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Pieteikšanās neizdevās. Pārbaudiet lietotājvārdu un paroli; ar Nextcloud izmantojiet lietotnes paroli, nevis konta paroli.',
+  'Bestand of map niet gevonden op de server.':
+      'Fails vai mape serverī nav atrasta.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Fails ir lielāks par atļauto limitu.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Serveris atgrieza kļūdu. Mēģiniet vēlāk vēlreiz.',
 };

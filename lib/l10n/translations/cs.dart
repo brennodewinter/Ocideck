@@ -1131,4 +1131,28 @@ const _dutchSourceCs = {
   'Kon de afbeelding niet opslaan.': 'Obrázek se nepodařilo uložit.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Obrázek se nepodařilo smazat. Zkontrolujte, že soubor není používán a že máte práva k zápisu.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'V tomto umístění nemáte práva k zápisu. Zvolte jinou složku.',
+  'De schijf is vol.': 'Disk je plný.',
+  'Bestand of map niet gevonden.': 'Soubor nebo složka nenalezena.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Soubor nelze přečíst ani zapsat.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Chyba sítě — zkontrolujte připojení a zkuste to znovu.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Něco se nečekaně pokazilo. Podrobnosti najdete v protokolu.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud není (správně) nastaven — zkontrolujte údaje serveru v Nastavení → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Tento server není povolen. Nejprve označte privátní/LAN server jako důvěryhodný v Nastavení → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server je nedostupný — zkontrolujte připojení a URL serveru.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Přihlášení se nezdařilo. Zkontrolujte uživatelské jméno a heslo; u Nextcloudu použijte heslo aplikace, ne heslo účtu.',
+  'Bestand of map niet gevonden op de server.':
+      'Soubor nebo složka na serveru nenalezena.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Soubor je větší než povolený limit.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Server vrátil chybu. Zkuste to později znovu.',
 };

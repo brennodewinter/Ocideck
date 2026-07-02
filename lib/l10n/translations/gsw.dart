@@ -1130,4 +1130,28 @@ const _dutchSourceGsw = {
   'Kon de afbeelding niet opslaan.': 'Bild het nit chönne gspycheret wärde.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Bild het nit chönne glöscht wärde. Lueg, dass d Datei nit bruucht wird und dass du Schriibrächt hesch.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Kei Schriibrächt an däm Ort. Wähl en andere Ordner.',
+  'De schijf is vol.': 'D Festplatte isch voll.',
+  'Bestand of map niet gevonden.': 'Datei oder Ordner nit gfunde.',
+  'Kon het bestand niet lezen of schrijven.':
+      'D Datei het nit chönne gläse oder gschribe wärde.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Netzwärkfähler — lueg dini Verbindig aa und probier\'s nomol.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Öppis isch unerwartet schiefgloffe. Details stöhn im Protokoll.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud isch nit (richtig) iigrichtet — lueg d Serverdate under Iistellige → Nextcloud aa.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Dä Server isch nit erlaubt. Markier en private/LAN-Server zerscht als vertraut under Iistellige → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server nit erreichbar — lueg dini Verbindig und d Server-URL aa.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Aamäldig fählgschlage. Lueg Benutzername und Passwort aa; bruch bi Nextcloud es App-Passwort, nit dis Konto-Passwort.',
+  'Bestand of map niet gevonden op de server.':
+      'Datei oder Ordner uf em Server nit gfunde.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'D Datei isch grösser als s erlaubte Limit.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Dr Server het en Fähler gmäldet. Probier\'s spöter nomol.',
 };

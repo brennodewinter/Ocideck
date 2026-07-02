@@ -102,8 +102,13 @@ Future<void> _openFromNextcloud(BuildContext context, WidgetRef ref) async {
     _reportOpenFailure(messenger, l10n, result);
     // OpenResult.blocked toont al het veiligheidsalarm via de shell.
   } on WebdavException catch (e) {
+    logWarning('shell: WebDAV-download mislukt', e);
     messenger.showSnackBar(
-      SnackBar(content: Text('${l10n.d('Downloaden mislukt:')} ${e.message}')),
+      SnackBar(
+        content: Text(
+          '${l10n.d('Downloaden mislukt:')} ${webdavErrorMessage(l10n, e)}',
+        ),
+      ),
     );
   }
 }
@@ -150,8 +155,13 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
       ),
     );
   } on WebdavException catch (e) {
+    logWarning('shell: WebDAV-opslaan mislukt', e);
     messenger.showSnackBar(
-      SnackBar(content: Text('${l10n.d('Opslaan mislukt:')} ${e.message}')),
+      SnackBar(
+        content: Text(
+          '${l10n.d('Opslaan mislukt:')} ${webdavErrorMessage(l10n, e)}',
+        ),
+      ),
     );
   }
 }

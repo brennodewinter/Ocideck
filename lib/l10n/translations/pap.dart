@@ -1120,4 +1120,28 @@ const _dutchSourceAddPap = {
   'Kon de afbeelding niet opslaan.': 'No por a warda e imágen.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'No por a eliminá e imágen. Kontrolá si e archivo no ta den uso i si bo tin derecho di skibi.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'No tin derecho di skibi na e lugá aki. Skohe un otro map.',
+  'De schijf is vol.': 'E disko ta yen.',
+  'Bestand of map niet gevonden.': 'Archivo òf map no a wòrdu hañá.',
+  'Kon het bestand niet lezen of schrijven.':
+      'No por a lesa òf skibi e archivo.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Eror di rèt — kontrolá bo konekshon i purba atrobe.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Algu a bai robes inesperadamente. Wak e log pa detaye.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud no ta konfigurá (bon) — kontrolá e datonan di server na Konfigurashon → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'E server aki no ta permití. Marka un server privá/LAN promé komo konfiabel na Konfigurashon → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server no ta alkansabel — kontrolá bo konekshon i e URL di server.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Login a faya. Kontrolá e nòmber di usuario i e password; ku Nextcloud usa un app-password, no esun di bo kuenta.',
+  'Bestand of map niet gevonden op de server.':
+      'Archivo òf map no a wòrdu hañá riba e server.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'E archivo ta mas grandi ku e límite permití.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'E server a duna un eror. Purba atrobe despues.',
 };

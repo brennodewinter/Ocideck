@@ -1144,4 +1144,28 @@ const _dutchSourceEl = {
       'Δεν ήταν δυνατή η αποθήκευση της εικόνας.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Δεν ήταν δυνατή η διαγραφή της εικόνας. Ελέγξτε ότι το αρχείο δεν χρησιμοποιείται και ότι έχετε δικαιώματα εγγραφής.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Δεν υπάρχουν δικαιώματα εγγραφής σε αυτήν τη θέση. Επιλέξτε άλλον φάκελο.',
+  'De schijf is vol.': 'Ο δίσκος είναι γεμάτος.',
+  'Bestand of map niet gevonden.': 'Το αρχείο ή ο φάκελος δεν βρέθηκε.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Δεν ήταν δυνατή η ανάγνωση ή εγγραφή του αρχείου.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Σφάλμα δικτύου — ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Κάτι πήγε απρόσμενα στραβά. Δείτε το αρχείο καταγραφής για λεπτομέρειες.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Το Nextcloud δεν έχει ρυθμιστεί (σωστά) — ελέγξτε τα στοιχεία διακομιστή στις Ρυθμίσεις → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Αυτός ο διακομιστής δεν επιτρέπεται. Επισημάνετε πρώτα έναν ιδιωτικό/LAN διακομιστή ως αξιόπιστο στις Ρυθμίσεις → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Ο διακομιστής δεν είναι προσβάσιμος — ελέγξτε τη σύνδεση και το URL του διακομιστή.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Η σύνδεση απέτυχε. Ελέγξτε όνομα χρήστη και κωδικό· με το Nextcloud χρησιμοποιήστε κωδικό εφαρμογής, όχι τον κωδικό του λογαριασμού.',
+  'Bestand of map niet gevonden op de server.':
+      'Το αρχείο ή ο φάκελος δεν βρέθηκε στον διακομιστή.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Το αρχείο υπερβαίνει το επιτρεπόμενο όριο.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Ο διακομιστής επέστρεψε σφάλμα. Δοκιμάστε ξανά αργότερα.',
 };

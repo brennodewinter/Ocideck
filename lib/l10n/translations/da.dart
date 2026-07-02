@@ -1126,4 +1126,28 @@ const _dutchSourceDa = {
   'Kon de afbeelding niet opslaan.': 'Kunne ikke gemme billedet.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Kunne ikke slette billedet. Tjek at filen ikke er i brug, og at du har skriverettigheder.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Ingen skriverettigheder på denne placering. Vælg en anden mappe.',
+  'De schijf is vol.': 'Disken er fuld.',
+  'Bestand of map niet gevonden.': 'Fil eller mappe blev ikke fundet.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Kunne ikke læse eller skrive filen.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Netværksfejl — tjek din forbindelse og prøv igen.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Noget gik uventet galt. Se loggen for detaljer.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud er ikke sat (korrekt) op — tjek serveroplysningerne under Indstillinger → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Denne server er ikke tilladt. Markér først en privat/LAN-server som betroet under Indstillinger → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Serveren kan ikke nås — tjek din forbindelse og serverens URL.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Login mislykkedes. Tjek brugernavn og adgangskode; brug med Nextcloud en app-adgangskode, ikke din kontoadgangskode.',
+  'Bestand of map niet gevonden op de server.':
+      'Fil eller mappe blev ikke fundet på serveren.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Filen er større end den tilladte grænse.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Serveren returnerede en fejl. Prøv igen senere.',
 };

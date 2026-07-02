@@ -1129,4 +1129,28 @@ const _dutchSourceSv = {
   'Kon de afbeelding niet opslaan.': 'Kunde inte spara bilden.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Kunde inte ta bort bilden. Kontrollera att filen inte används och att du har skrivrättigheter.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Inga skrivrättigheter på den här platsen. Välj en annan mapp.',
+  'De schijf is vol.': 'Disken är full.',
+  'Bestand of map niet gevonden.': 'Filen eller mappen hittades inte.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Kunde inte läsa eller skriva filen.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Nätverksfel — kontrollera din anslutning och försök igen.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Något gick oväntat fel. Se loggen för detaljer.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud är inte (korrekt) inställt — kontrollera serveruppgifterna under Inställningar → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Den här servern är inte tillåten. Markera först en privat/LAN-server som betrodd under Inställningar → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Servern kan inte nås — kontrollera din anslutning och serverns URL.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Inloggningen misslyckades. Kontrollera användarnamn och lösenord; använd med Nextcloud ett applösenord, inte ditt kontolösenord.',
+  'Bestand of map niet gevonden op de server.':
+      'Filen eller mappen hittades inte på servern.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Filen är större än den tillåtna gränsen.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Servern returnerade ett fel. Försök igen senare.',
 };

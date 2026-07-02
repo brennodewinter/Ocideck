@@ -1148,4 +1148,28 @@ const _dutchSourcePt = {
   'Kon de afbeelding niet opslaan.': 'Não foi possível guardar a imagem.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Não foi possível eliminar a imagem. Verifique se o ficheiro não está em uso e se tem permissões de escrita.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Sem permissões de escrita nesta localização. Escolha outra pasta.',
+  'De schijf is vol.': 'O disco está cheio.',
+  'Bestand of map niet gevonden.': 'Ficheiro ou pasta não encontrados.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Não foi possível ler ou escrever o ficheiro.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Erro de rede — verifique a ligação e tente novamente.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Algo correu mal inesperadamente. Consulte o registo para detalhes.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'O Nextcloud não está (bem) configurado — verifique os dados do servidor em Definições → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Este servidor não é permitido. Marque primeiro um servidor privado/LAN como fiável em Definições → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Servidor inacessível — verifique a ligação e o URL do servidor.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Falha ao iniciar sessão. Verifique o utilizador e a palavra-passe; com o Nextcloud use uma palavra-passe de aplicação, não a da conta.',
+  'Bestand of map niet gevonden op de server.':
+      'Ficheiro ou pasta não encontrados no servidor.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'O ficheiro é maior do que o limite permitido.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'O servidor devolveu um erro. Tente novamente mais tarde.',
 };

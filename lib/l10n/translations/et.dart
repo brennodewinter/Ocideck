@@ -1124,4 +1124,28 @@ const _dutchSourceEt = {
   'Kon de afbeelding niet opslaan.': 'Pilti ei õnnestunud salvestada.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Pilti ei õnnestunud kustutada. Kontrolli, et fail poleks kasutuses ja et sul oleks kirjutusõigused.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Selles asukohas pole kirjutusõigusi. Vali teine kaust.',
+  'De schijf is vol.': 'Ketas on täis.',
+  'Bestand of map niet gevonden.': 'Faili või kausta ei leitud.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Faili ei õnnestunud lugeda ega kirjutada.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Võrguviga — kontrolli ühendust ja proovi uuesti.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Midagi läks ootamatult valesti. Üksikasjad leiad logist.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud pole (õigesti) seadistatud — kontrolli serveri andmeid jaotises Seaded → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'See server pole lubatud. Märgi privaatne/LAN-server esmalt usaldusväärseks jaotises Seaded → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server pole kättesaadav — kontrolli ühendust ja serveri URL-i.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Sisselogimine ebaõnnestus. Kontrolli kasutajanime ja parooli; Nextcloudiga kasuta rakenduse parooli, mitte konto parooli.',
+  'Bestand of map niet gevonden op de server.':
+      'Faili või kausta serverist ei leitud.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Fail on lubatud piirist suurem.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Server tagastas vea. Proovi hiljem uuesti.',
 };

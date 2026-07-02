@@ -1140,4 +1140,28 @@ const _dutchSourceLa = {
   'Kon de afbeelding niet opslaan.': 'Imago servari non potuit.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Imago deleri non potuit. Vide num plica in usu sit et num ius scribendi habeas.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Nullum ius scribendi hoc loco. Aliud scrinium elige.',
+  'De schijf is vol.': 'Discus plenus est.',
+  'Bestand of map niet gevonden.': 'Plica aut scrinium non inventum.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Plica legi aut scribi non potuit.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Error retis — nexum tuum proba et iterum conare.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Aliquid inopinatum accidit. Acta pro singulis inspice.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud non (recte) constitutum est — indicia moderatri in Optionibus → Nextcloud proba.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Hic moderatrus non permittitur. Moderatrum privatum/LAN primum ut fidum in Optionibus → Nextcloud designa.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Moderatrus attingi non potest — nexum tuum et URL moderatri proba.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Conatus intrandi defecit. Nomen usoris et tesseram proba; apud Nextcloud tessera applicationis utere, non tessera rationis tuae.',
+  'Bestand of map niet gevonden op de server.':
+      'Plica aut scrinium in moderatro non inventum.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Plica maior est quam finis permissus.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Moderatrus errorem reddidit. Postea iterum conare.',
 };

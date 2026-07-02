@@ -1155,4 +1155,28 @@ const _dutchSourceGa = {
   'Kon de afbeelding niet opslaan.': 'Níorbh fhéidir an íomhá a shábháil.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Níorbh fhéidir an íomhá a scriosadh. Seiceáil nach bhfuil an comhad in úsáid agus go bhfuil ceadanna scríofa agat.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Níl cead scríofa agat san áit seo. Roghnaigh fillteán eile.',
+  'De schijf is vol.': 'Tá an diosca lán.',
+  'Bestand of map niet gevonden.': 'Níor aimsíodh an comhad nó an fillteán.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Níorbh fhéidir an comhad a léamh nó a scríobh.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Earráid líonra — seiceáil do nasc agus bain triail eile as.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Chuaigh rud éigin amú gan choinne. Féach an logchomhad le haghaidh sonraí.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Níl Nextcloud socraithe (i gceart) — seiceáil sonraí an fhreastalaí faoi Socruithe → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Ní cheadaítear an freastalaí seo. Marcáil freastalaí príobháideach/LAN mar iontaofa ar dtús faoi Socruithe → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Ní féidir an freastalaí a shroicheadh — seiceáil do nasc agus URL an fhreastalaí.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Theip ar an síniú isteach. Seiceáil an t-ainm úsáideora agus an pasfhocal; le Nextcloud, úsáid pasfhocal aipe, ní pasfhocal do chuntais.',
+  'Bestand of map niet gevonden op de server.':
+      'Níor aimsíodh an comhad nó an fillteán ar an bhfreastalaí.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Tá an comhad níos mó ná an teorainn cheadaithe.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'D\'fhill an freastalaí earráid. Bain triail eile as ar ball.',
 };

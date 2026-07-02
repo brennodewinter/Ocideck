@@ -1132,4 +1132,28 @@ const _dutchSourceFi = {
   'Kon de afbeelding niet opslaan.': 'Kuvaa ei voitu tallentaa.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Kuvaa ei voitu poistaa. Tarkista, ettei tiedosto ole käytössä ja että sinulla on kirjoitusoikeudet.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Ei kirjoitusoikeuksia tähän sijaintiin. Valitse toinen kansio.',
+  'De schijf is vol.': 'Levy on täynnä.',
+  'Bestand of map niet gevonden.': 'Tiedostoa tai kansiota ei löytynyt.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Tiedostoa ei voitu lukea tai kirjoittaa.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Verkkovirhe — tarkista yhteys ja yritä uudelleen.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Jokin meni odottamatta pieleen. Katso lisätiedot lokista.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloudia ei ole määritetty (oikein) — tarkista palvelimen tiedot kohdasta Asetukset → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Tämä palvelin ei ole sallittu. Merkitse yksityinen/LAN-palvelin ensin luotetuksi kohdassa Asetukset → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Palvelin ei ole tavoitettavissa — tarkista yhteys ja palvelimen URL.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Kirjautuminen epäonnistui. Tarkista käyttäjätunnus ja salasana; käytä Nextcloudissa sovellussalasanaa, älä tilisi salasanaa.',
+  'Bestand of map niet gevonden op de server.':
+      'Tiedostoa tai kansiota ei löytynyt palvelimelta.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Tiedosto on sallittua rajaa suurempi.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Palvelin palautti virheen. Yritä myöhemmin uudelleen.',
 };

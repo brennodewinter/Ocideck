@@ -1121,4 +1121,28 @@ const _dutchSourceAddDe = {
   'Kon de afbeelding niet opslaan.': 'Bild konnte nicht gespeichert werden.',
   'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
       'Bild konnte nicht gelöscht werden. Prüfe, ob die Datei nicht in Gebrauch ist und ob du Schreibrechte hast.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Keine Schreibrechte an diesem Ort. Wähle einen anderen Ordner.',
+  'De schijf is vol.': 'Die Festplatte ist voll.',
+  'Bestand of map niet gevonden.': 'Datei oder Ordner nicht gefunden.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Datei konnte nicht gelesen oder geschrieben werden.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Netzwerkfehler — prüfe deine Verbindung und versuche es erneut.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Etwas ist unerwartet schiefgelaufen. Details stehen im Protokoll.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud ist nicht (richtig) eingerichtet — prüfe die Serverdaten unter Einstellungen → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Dieser Server ist nicht erlaubt. Markiere einen privaten/LAN-Server zuerst als vertrauenswürdig unter Einstellungen → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server nicht erreichbar — prüfe deine Verbindung und die Server-URL.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Anmeldung fehlgeschlagen. Prüfe Benutzername und Passwort; verwende bei Nextcloud ein App-Passwort, nicht dein Kontopasswort.',
+  'Bestand of map niet gevonden op de server.':
+      'Datei oder Ordner auf dem Server nicht gefunden.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Die Datei ist größer als das erlaubte Limit.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Der Server hat einen Fehler gemeldet. Versuche es später erneut.',
 };
