@@ -225,17 +225,20 @@ void main() {
       }
     }
 
-    test('rejects plain http when the server is not trusted-internal', () async {
-      final e = await errorFrom(
-        const WebdavServer(
-          baseUrl: 'http://cloud.example.com',
-          username: 'alice',
-        ),
-      );
-      expect(e, isA<WebdavException>());
-      expect((e as WebdavException).kind, WebdavError.config);
-      expect(e.message.toLowerCase(), contains('wachtwoord'));
-    });
+    test(
+      'rejects plain http when the server is not trusted-internal',
+      () async {
+        final e = await errorFrom(
+          const WebdavServer(
+            baseUrl: 'http://cloud.example.com',
+            username: 'alice',
+          ),
+        );
+        expect(e, isA<WebdavException>());
+        expect((e as WebdavException).kind, WebdavError.config);
+        expect(e.message.toLowerCase(), contains('wachtwoord'));
+      },
+    );
 
     test('rejects a non-http(s) scheme', () async {
       final e = await errorFrom(

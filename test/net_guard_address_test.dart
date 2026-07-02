@@ -49,7 +49,11 @@ void main() {
       });
     }
 
-    for (final ip in ['::ffff:8.8.8.8', '64:ff9b::808:808', '2001:4860:4860::8888']) {
+    for (final ip in [
+      '::ffff:8.8.8.8',
+      '64:ff9b::808:808',
+      '2001:4860:4860::8888',
+    ]) {
       test('allows public-mapped $ip', () {
         final addr = InternetAddress.tryParse(ip)!;
         expect(NetGuard.isBlockedAddress(addr), isFalse);
@@ -57,7 +61,10 @@ void main() {
     }
 
     test('blocks fc00::/7 unique-local', () {
-      expect(NetGuard.isBlockedAddress(InternetAddress.tryParse('fd12::1')!), isTrue);
+      expect(
+        NetGuard.isBlockedAddress(InternetAddress.tryParse('fd12::1')!),
+        isTrue,
+      );
     });
   });
 

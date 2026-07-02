@@ -140,7 +140,9 @@ title: Kwartaalcijfers
       });
       test('the class alias does not whitelist object/embed', () {
         expect(
-          MarkdownSafetyScanner.isSafe('<object class="ocideck-embed"></object>'),
+          MarkdownSafetyScanner.isSafe(
+            '<object class="ocideck-embed"></object>',
+          ),
           isFalse,
         );
       });

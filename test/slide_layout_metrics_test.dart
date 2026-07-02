@@ -44,13 +44,19 @@ void main() {
 
     test('startNumber offsets only the top level, not nested items', () {
       final items = ['een', '\tsub', 'twee'];
-      expect(bulletListMarker(items, 0, ListStyle.numbered, startNumber: 7),
-          '7.');
+      expect(
+        bulletListMarker(items, 0, ListStyle.numbered, startNumber: 7),
+        '7.',
+      );
       // Nested items keep their own 1-based count regardless of the offset.
-      expect(bulletListMarker(items, 1, ListStyle.numbered, startNumber: 7),
-          '1.');
-      expect(bulletListMarker(items, 2, ListStyle.numbered, startNumber: 7),
-          '8.');
+      expect(
+        bulletListMarker(items, 1, ListStyle.numbered, startNumber: 7),
+        '1.',
+      );
+      expect(
+        bulletListMarker(items, 2, ListStyle.numbered, startNumber: 7),
+        '8.',
+      );
     });
   });
 
@@ -63,7 +69,10 @@ void main() {
         );
 
     test('first slide and non-continuing slides start at 1', () {
-      final slides = [numbered(['a', 'b']), numbered(['c'])];
+      final slides = [
+        numbered(['a', 'b']),
+        numbered(['c']),
+      ];
       expect(numberedListStartFor(slides, 0), 1);
       expect(numberedListStartFor(slides, 1), 1); // continueNumbering is false
     });
@@ -95,16 +104,19 @@ void main() {
   });
 
   group('tableColumnFlexWeights', () {
-    test('weighs each column by its longest trimmed cell, clamped to [1,80]', () {
-      final weights = tableColumnFlexWeights([
-        ['Rol', 'Taken'],
-        ['CISO', 'x' * 200],
-        ['', ''],
-      ], 2);
-      expect(weights, hasLength(2));
-      expect(weights[0], 4); // 'CISO'
-      expect(weights[1], 80); // clamped from 200
-    });
+    test(
+      'weighs each column by its longest trimmed cell, clamped to [1,80]',
+      () {
+        final weights = tableColumnFlexWeights([
+          ['Rol', 'Taken'],
+          ['CISO', 'x' * 200],
+          ['', ''],
+        ], 2);
+        expect(weights, hasLength(2));
+        expect(weights[0], 4); // 'CISO'
+        expect(weights[1], 80); // clamped from 200
+      },
+    );
   });
 
   group('tableFitCellSize', () {

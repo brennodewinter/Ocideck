@@ -103,9 +103,12 @@ void main() {
     test('a legacy entry without a page decodes onto page 0', () {
       final slide = Slide.create(SlideType.bullets).copyWith(title: 'A');
       // A v1 sidecar never wrote a "page" field.
-      final legacy = AnnotationCodec.encode([slide], {
-        slide.id: [stroke()],
-      })!;
+      final legacy = AnnotationCodec.encode(
+        [slide],
+        {
+          slide.id: [stroke()],
+        },
+      )!;
       expect(legacy, isNot(contains('"page"')));
       final back = AnnotationCodec.decode(legacy, [slide]);
       expect(back.keys, [slide.id]);

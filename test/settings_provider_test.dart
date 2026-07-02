@@ -34,8 +34,9 @@ void main() {
     expect(ThemeProfile.fromJson(profile.toJson()).animationDurationMs, 7500);
     // Out-of-range values are clamped on load.
     expect(
-      ThemeProfile.fromJson(const {'animationDurationMs': 999999})
-          .animationDurationMs,
+      ThemeProfile.fromJson(const {
+        'animationDurationMs': 999999,
+      }).animationDurationMs,
       kThemeMaxAnimationDurationMs,
     );
   });
