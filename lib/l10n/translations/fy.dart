@@ -1157,4 +1157,11 @@ const _dutchSourceAddFy = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Koe ien of mear mappen fan de bibleteek net lêze; de list kin ûnfolslein wêze.',
   'Uit recente bestanden verwijderen': 'Ut resinte bestannen fuortsmite',
+  'OciDeck wordt gestart…': 'OciDeck wurdt start…',
+  'Herstelbestanden': 'Werstelbestannen',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Crash-werstelbestannen befetsje de folsleine ynhâld fan jo presintaasjes yn platte tekst. Se wurde nei 7 dagen automatysk oprêden; hjir kinne jo se daliks wiskje.',
+  'Herstelbestanden nu wissen': 'Werstelbestannen no wiskje',
+  'Er waren geen herstelbestanden.': 'Der wiene gjin werstelbestannen.',
+  'herstelbestand(en) gewist.': 'werstelbestân(nen) wiske.',
 };

@@ -1157,4 +1157,11 @@ const _dutchSourceTlh = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'wa\' pagh law\' qach pa\'mey laDlaHbe\'lu\'; tetlh naQbe\'law\'.',
   'Uit recente bestanden verwijderen': 'teHwI\'mey chu\'vo\' teq',
+  'OciDeck wordt gestart…': 'OciDeck taghlu\'…',
+  'Herstelbestanden': 'qa\'meH teHwI\'mey',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'qa\'meH teHwI\'mey Hoch \'anghom ngaS, ghItlh nIt. 7 jaj tlhoch Say\'moHlu\' \'e\' ngoq; naDev SIbI\' bIteqlaH.',
+  'Herstelbestanden nu wissen': 'DaH qa\'meH teHwI\'mey teq',
+  'Er waren geen herstelbestanden.': 'qa\'meH teHwI\'mey tu\'lu\'be\'.',
+  'herstelbestand(en) gewist.': 'qa\'meH teHwI\'(mey) teqlu\'ta\'.',
 };

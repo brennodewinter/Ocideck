@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
+import '../../services/recovery_service.dart';
 import '../../services/webdav_service.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';

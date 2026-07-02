@@ -1168,4 +1168,11 @@ const _dutchSourceLv = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Nevarēja nolasīt vienu vai vairākas bibliotēkas mapes; saraksts var būt nepilnīgs.',
   'Uit recente bestanden verwijderen': 'Noņemt no nesenajiem failiem',
+  'OciDeck wordt gestart…': 'Startē OciDeck…',
+  'Herstelbestanden': 'Atkopšanas faili',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Atkopšanas faili satur visu jūsu prezentāciju saturu vienkāršā tekstā. Tie tiek automātiski iztīrīti pēc 7 dienām; šeit tos var izdzēst uzreiz.',
+  'Herstelbestanden nu wissen': 'Izdzēst atkopšanas failus tagad',
+  'Er waren geen herstelbestanden.': 'Atkopšanas failu nebija.',
+  'herstelbestand(en) gewist.': 'atkopšanas fails(-i) izdzēsti.',
 };

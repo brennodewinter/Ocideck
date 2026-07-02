@@ -1182,4 +1182,11 @@ const _dutchSourceMt = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Ma setgħux jinqraw folder wieħed jew aktar tal-librerija; il-lista tista\' ma tkunx kompluta.',
   'Uit recente bestanden verwijderen': 'Neħħi mill-fajls riċenti',
+  'OciDeck wordt gestart…': 'OciDeck qed jinbeda…',
+  'Herstelbestanden': 'Fajls tal-irkupru',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Il-fajls tal-irkupru fihom il-kontenut sħiħ tal-preżentazzjonijiet tiegħek f\'test sempliċi. Jitnaddfu awtomatikament wara 7 ijiem; hawnhekk tista\' tħassarhom minnufih.',
+  'Herstelbestanden nu wissen': 'Ħassar il-fajls tal-irkupru issa',
+  'Er waren geen herstelbestanden.': 'Ma kienx hemm fajls tal-irkupru.',
+  'herstelbestand(en) gewist.': 'fajl(s) tal-irkupru mħassra.',
 };

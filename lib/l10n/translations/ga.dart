@@ -1194,4 +1194,11 @@ const _dutchSourceGa = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Níorbh fhéidir fillteán leabharlainne amháin nó níos mó a léamh; d\'fhéadfadh an liosta a bheith neamhiomlán.',
   'Uit recente bestanden verwijderen': 'Bain de na comhaid le déanaí',
+  'OciDeck wordt gestart…': 'OciDeck á thosú…',
+  'Herstelbestanden': 'Comhaid athshlánaithe',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Bíonn ábhar iomlán do chur i láthair i ngnáth-théacs sna comhaid athshlánaithe. Glantar go huathoibríoch iad tar éis 7 lá; is féidir leat iad a scriosadh láithreach anseo.',
+  'Herstelbestanden nu wissen': 'Scrios comhaid athshlánaithe anois',
+  'Er waren geen herstelbestanden.': 'Ní raibh aon chomhaid athshlánaithe ann.',
+  'herstelbestand(en) gewist.': 'comhad/comhaid athshlánaithe scriosta.',
 };

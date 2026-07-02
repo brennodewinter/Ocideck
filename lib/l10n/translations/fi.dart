@@ -1171,4 +1171,11 @@ const _dutchSourceFi = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Yhtä tai useampaa kirjastokansiota ei voitu lukea; luettelo voi olla puutteellinen.',
   'Uit recente bestanden verwijderen': 'Poista viimeisimmistä tiedostoista',
+  'OciDeck wordt gestart…': 'Käynnistetään OciDeckiä…',
+  'Herstelbestanden': 'Palautustiedostot',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Palautustiedostot sisältävät esitystesi koko sisällön selkokielisenä tekstinä. Ne siivotaan automaattisesti 7 päivän jälkeen; täällä voit pyyhkiä ne heti.',
+  'Herstelbestanden nu wissen': 'Pyyhi palautustiedostot nyt',
+  'Er waren geen herstelbestanden.': 'Palautustiedostoja ei ollut.',
+  'herstelbestand(en) gewist.': 'palautustiedosto(a) pyyhitty.',
 };

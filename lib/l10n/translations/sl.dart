@@ -1171,4 +1171,11 @@ const _dutchSourceSl = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Ene ali več map knjižnice ni bilo mogoče prebrati; seznam je lahko nepopoln.',
   'Uit recente bestanden verwijderen': 'Odstrani iz nedavnih datotek',
+  'OciDeck wordt gestart…': 'Zagon OciDecka…',
+  'Herstelbestanden': 'Obnovitvene datoteke',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Obnovitvene datoteke vsebujejo celotno vsebino vaših predstavitev v navadnem besedilu. Samodejno se počistijo po 7 dneh; tukaj jih lahko izbrišete takoj.',
+  'Herstelbestanden nu wissen': 'Izbriši obnovitvene datoteke zdaj',
+  'Er waren geen herstelbestanden.': 'Obnovitvenih datotek ni bilo.',
+  'herstelbestand(en) gewist.': 'obnovitvenih datotek izbrisanih.',
 };

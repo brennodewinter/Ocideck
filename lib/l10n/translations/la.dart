@@ -1179,4 +1179,11 @@ const _dutchSourceLa = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Unum aut plura scrinia bibliothecae legi non potuerunt; index incompletus esse potest.',
   'Uit recente bestanden verwijderen': 'Ex plicis recentibus remove',
+  'OciDeck wordt gestart…': 'OciDeck incipitur…',
+  'Herstelbestanden': 'Plicae recuperationis',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Plicae recuperationis totum contentum praesentationum tuarum in textu plano continent. Post 7 dies automatice purgantur; hic eas statim delere potes.',
+  'Herstelbestanden nu wissen': 'Plicas recuperationis nunc dele',
+  'Er waren geen herstelbestanden.': 'Nullae plicae recuperationis erant.',
+  'herstelbestand(en) gewist.': 'plicae recuperationis deletae.',
 };

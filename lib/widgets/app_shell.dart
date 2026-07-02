@@ -113,17 +113,30 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                 style: const TextStyle(fontSize: 13),
               ),
               const SizedBox(height: 10),
-              for (final s in snapshots)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 3),
-                  child: Text(
-                    '•  ${s.label}  ·  ${_formatWhen(s.savedAt)}',
-                    style: const TextStyle(
-                      fontSize: 12.5,
-                      color: Color(0xFF475569),
-                    ),
+              // Scrollbaar en begrensd: bij veel snapshots mag de lijst de
+              // dialoogknoppen niet uit beeld drukken.
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 240),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      for (final s in snapshots)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 3),
+                          child: Text(
+                            '•  ${s.label}  ·  ${_formatWhen(s.savedAt)}',
+                            style: const TextStyle(
+                              fontSize: 12.5,
+                              color: Color(0xFF475569),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                 ),
+              ),
             ],
           ),
           actions: [

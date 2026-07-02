@@ -1174,4 +1174,11 @@ const _dutchSourceLt = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Nepavyko perskaityti vieno ar kelių bibliotekos aplankų; sąrašas gali būti neišsamus.',
   'Uit recente bestanden verwijderen': 'Pašalinti iš paskutinių failų',
+  'OciDeck wordt gestart…': 'Paleidžiama OciDeck…',
+  'Herstelbestanden': 'Atkūrimo failai',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Atkūrimo failuose yra visas jūsų pristatymų turinys paprastu tekstu. Jie automatiškai išvalomi po 7 dienų; čia galite juos ištrinti iš karto.',
+  'Herstelbestanden nu wissen': 'Ištrinti atkūrimo failus dabar',
+  'Er waren geen herstelbestanden.': 'Atkūrimo failų nebuvo.',
+  'herstelbestand(en) gewist.': 'atkūrimo failas(-ai) ištrinti.',
 };

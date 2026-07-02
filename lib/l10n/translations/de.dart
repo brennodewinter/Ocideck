@@ -1161,4 +1161,11 @@ const _dutchSourceAddDe = {
       'Ein oder mehrere Bibliotheksordner konnten nicht gelesen werden; die Liste kann unvollständig sein.',
   'Uit recente bestanden verwijderen':
       'Aus zuletzt geöffneten Dateien entfernen',
+  'OciDeck wordt gestart…': 'OciDeck wird gestartet…',
+  'Herstelbestanden': 'Wiederherstellungsdateien',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Absturz-Wiederherstellungsdateien enthalten den vollständigen Inhalt deiner Präsentationen im Klartext. Sie werden nach 7 Tagen automatisch aufgeräumt; hier kannst du sie sofort löschen.',
+  'Herstelbestanden nu wissen': 'Wiederherstellungsdateien jetzt löschen',
+  'Er waren geen herstelbestanden.': 'Es gab keine Wiederherstellungsdateien.',
+  'herstelbestand(en) gewist.': 'Wiederherstellungsdatei(en) gelöscht.',
 };

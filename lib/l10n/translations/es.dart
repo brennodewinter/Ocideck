@@ -1165,4 +1165,11 @@ const _dutchSourceAddEs = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'No se pudieron leer una o más carpetas de la biblioteca; la lista puede estar incompleta.',
   'Uit recente bestanden verwijderen': 'Quitar de archivos recientes',
+  'OciDeck wordt gestart…': 'Iniciando OciDeck…',
+  'Herstelbestanden': 'Archivos de recuperación',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Los archivos de recuperación contienen el contenido completo de tus presentaciones en texto plano. Se limpian automáticamente a los 7 días; aquí puedes borrarlos de inmediato.',
+  'Herstelbestanden nu wissen': 'Borrar los archivos de recuperación ahora',
+  'Er waren geen herstelbestanden.': 'No había archivos de recuperación.',
+  'herstelbestand(en) gewist.': 'archivo(s) de recuperación borrado(s).',
 };

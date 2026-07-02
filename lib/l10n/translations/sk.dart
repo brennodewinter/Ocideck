@@ -1175,4 +1175,11 @@ const _dutchSourceSk = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Nepodarilo sa prečítať jeden alebo viac priečinkov knižnice; zoznam môže byť neúplný.',
   'Uit recente bestanden verwijderen': 'Odstrániť z nedávnych súborov',
+  'OciDeck wordt gestart…': 'Spúšťa sa OciDeck…',
+  'Herstelbestanden': 'Súbory obnovenia',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Súbory obnovenia obsahujú úplný obsah vašich prezentácií v čistom texte. Automaticky sa vyčistia po 7 dňoch; tu ich môžete vymazať okamžite.',
+  'Herstelbestanden nu wissen': 'Vymazať súbory obnovenia teraz',
+  'Er waren geen herstelbestanden.': 'Neboli žiadne súbory obnovenia.',
+  'herstelbestand(en) gewist.': 'súbor(y) obnovenia vymazané.',
 };

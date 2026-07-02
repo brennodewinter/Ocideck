@@ -1163,4 +1163,11 @@ const _dutchSourceEt = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Ühte või mitut teegi kausta ei õnnestunud lugeda; loend võib olla poolik.',
   'Uit recente bestanden verwijderen': 'Eemalda hiljutistest failidest',
+  'OciDeck wordt gestart…': 'OciDecki käivitamine…',
+  'Herstelbestanden': 'Taastefailid',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Taastefailid sisaldavad sinu esitluste kogu sisu lihttekstina. Need koristatakse automaatselt 7 päeva pärast; siin saad need kohe kustutada.',
+  'Herstelbestanden nu wissen': 'Kustuta taastefailid kohe',
+  'Er waren geen herstelbestanden.': 'Taastefaile polnud.',
+  'herstelbestand(en) gewist.': 'taastefail(i) kustutatud.',
 };

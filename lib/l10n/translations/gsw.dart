@@ -1169,4 +1169,11 @@ const _dutchSourceGsw = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Ei oder mehreri Bibliotheks-Ordner hei nit chönne gläse wärde; d Lischte cha unvollständig sii.',
   'Uit recente bestanden verwijderen': 'Us de letschte Dateie entferne',
+  'OciDeck wordt gestart…': 'OciDeck wird gstartet…',
+  'Herstelbestanden': 'Wiederherstelligs-Dateie',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Absturz-Wiederherstelligs-Dateie enthalte dr ganz Inhalt vo dine Präsentatione im Klartext. Si wärde nach 7 Täg automatisch ufgruumt; do chasch si sofort lösche.',
+  'Herstelbestanden nu wissen': 'Wiederherstelligs-Dateie jetz lösche',
+  'Er waren geen herstelbestanden.': 'Es het kei Wiederherstelligs-Dateie gha.',
+  'herstelbestand(en) gewist.': 'Wiederherstelligs-Datei(e) glöscht.',
 };

@@ -1173,4 +1173,11 @@ const _dutchSourceHr = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Nije bilo moguće pročitati jednu ili više mapa knjižnice; popis može biti nepotpun.',
   'Uit recente bestanden verwijderen': 'Ukloni iz nedavnih datoteka',
+  'OciDeck wordt gestart…': 'Pokretanje OciDecka…',
+  'Herstelbestanden': 'Datoteke za oporavak',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Datoteke za oporavak sadrže cjelokupan sadržaj vaših prezentacija u običnom tekstu. Automatski se čiste nakon 7 dana; ovdje ih možete odmah izbrisati.',
+  'Herstelbestanden nu wissen': 'Izbriši datoteke za oporavak sada',
+  'Er waren geen herstelbestanden.': 'Nije bilo datoteka za oporavak.',
+  'herstelbestand(en) gewist.': 'datoteka za oporavak izbrisano.',
 };

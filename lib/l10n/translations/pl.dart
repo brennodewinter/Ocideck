@@ -1176,4 +1176,11 @@ const _dutchSourcePl = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Nie można odczytać co najmniej jednego folderu biblioteki; lista może być niekompletna.',
   'Uit recente bestanden verwijderen': 'Usuń z ostatnich plików',
+  'OciDeck wordt gestart…': 'Uruchamianie OciDeck…',
+  'Herstelbestanden': 'Pliki odzyskiwania',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Pliki odzyskiwania zawierają pełną treść prezentacji w postaci zwykłego tekstu. Są automatycznie czyszczone po 7 dniach; tutaj możesz je usunąć od razu.',
+  'Herstelbestanden nu wissen': 'Usuń pliki odzyskiwania teraz',
+  'Er waren geen herstelbestanden.': 'Nie było plików odzyskiwania.',
+  'herstelbestand(en) gewist.': 'plik(i) odzyskiwania usunięto.',
 };

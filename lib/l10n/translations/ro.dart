@@ -1179,4 +1179,11 @@ const _dutchSourceRo = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Nu s-au putut citi unul sau mai multe dosare ale bibliotecii; lista poate fi incompletă.',
   'Uit recente bestanden verwijderen': 'Elimină din fișierele recente',
+  'OciDeck wordt gestart…': 'Se pornește OciDeck…',
+  'Herstelbestanden': 'Fișiere de recuperare',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Fișierele de recuperare conțin întregul conținut al prezentărilor în text simplu. Sunt curățate automat după 7 zile; aici le puteți șterge imediat.',
+  'Herstelbestanden nu wissen': 'Șterge fișierele de recuperare acum',
+  'Er waren geen herstelbestanden.': 'Nu existau fișiere de recuperare.',
+  'herstelbestand(en) gewist.': 'fișier(e) de recuperare șterse.',
 };

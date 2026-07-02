@@ -1163,4 +1163,11 @@ const _dutchSourceAddIt = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Impossibile leggere una o più cartelle della libreria; l\'elenco potrebbe essere incompleto.',
   'Uit recente bestanden verwijderen': 'Rimuovi dai file recenti',
+  'OciDeck wordt gestart…': 'Avvio di OciDeck…',
+  'Herstelbestanden': 'File di ripristino',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'I file di ripristino contengono l\'intero contenuto delle tue presentazioni in testo semplice. Vengono ripuliti automaticamente dopo 7 giorni; qui puoi cancellarli subito.',
+  'Herstelbestanden nu wissen': 'Cancella subito i file di ripristino',
+  'Er waren geen herstelbestanden.': 'Non c\'erano file di ripristino.',
+  'herstelbestand(en) gewist.': 'file di ripristino cancellati.',
 };

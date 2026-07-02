@@ -1169,4 +1169,11 @@ const _dutchSourceId = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Tidak dapat membaca satu atau beberapa folder pustaka; daftar mungkin tidak lengkap.',
   'Uit recente bestanden verwijderen': 'Hapus dari file terbaru',
+  'OciDeck wordt gestart…': 'Memulai OciDeck…',
+  'Herstelbestanden': 'File pemulihan',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'File pemulihan berisi seluruh isi presentasi Anda dalam teks biasa. Dibersihkan otomatis setelah 7 hari; di sini Anda dapat menghapusnya langsung.',
+  'Herstelbestanden nu wissen': 'Hapus file pemulihan sekarang',
+  'Er waren geen herstelbestanden.': 'Tidak ada file pemulihan.',
+  'herstelbestand(en) gewist.': 'file pemulihan dihapus.',
 };

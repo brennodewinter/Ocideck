@@ -1183,4 +1183,11 @@ const _dutchSourceEl = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Δεν ήταν δυνατή η ανάγνωση ενός ή περισσότερων φακέλων της βιβλιοθήκης· η λίστα μπορεί να είναι ελλιπής.',
   'Uit recente bestanden verwijderen': 'Αφαίρεση από τα πρόσφατα αρχεία',
+  'OciDeck wordt gestart…': 'Εκκίνηση του OciDeck…',
+  'Herstelbestanden': 'Αρχεία ανάκτησης',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Τα αρχεία ανάκτησης περιέχουν το πλήρες περιεχόμενο των παρουσιάσεών σας σε απλό κείμενο. Καθαρίζονται αυτόματα μετά από 7 ημέρες· εδώ μπορείτε να τα σβήσετε αμέσως.',
+  'Herstelbestanden nu wissen': 'Σβήσιμο αρχείων ανάκτησης τώρα',
+  'Er waren geen herstelbestanden.': 'Δεν υπήρχαν αρχεία ανάκτησης.',
+  'herstelbestand(en) gewist.': 'αρχείο(-α) ανάκτησης σβήστηκαν.',
 };

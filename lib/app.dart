@@ -64,7 +64,21 @@ class _ConsentGate extends ConsumerWidget {
     final consent = ref.watch(consentProvider);
 
     if (consent.isLoading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircularProgressIndicator(),
+              const SizedBox(height: 16),
+              Text(
+                context.l10n.d('OciDeck wordt gestart…'),
+                style: const TextStyle(fontSize: 13, color: Color(0xFF64748B)),
+              ),
+            ],
+          ),
+        ),
+      );
     }
 
     if (!consent.hasAccepted) {

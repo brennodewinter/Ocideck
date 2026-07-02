@@ -1171,4 +1171,11 @@ const _dutchSourceHu = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Egy vagy több könyvtármappát nem sikerült beolvasni; a lista hiányos lehet.',
   'Uit recente bestanden verwijderen': 'Eltávolítás a legutóbbi fájlok közül',
+  'OciDeck wordt gestart…': 'Az OciDeck indítása…',
+  'Herstelbestanden': 'Helyreállítási fájlok',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'A helyreállítási fájlok a prezentációid teljes tartalmát tartalmazzák egyszerű szövegként. 7 nap után automatikusan törlődnek; itt azonnal törölheted őket.',
+  'Herstelbestanden nu wissen': 'Helyreállítási fájlok törlése most',
+  'Er waren geen herstelbestanden.': 'Nem voltak helyreállítási fájlok.',
+  'herstelbestand(en) gewist.': 'helyreállítási fájl törölve.',
 };

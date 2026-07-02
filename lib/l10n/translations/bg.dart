@@ -1184,4 +1184,11 @@ const _dutchSourceBg = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Една или повече папки на библиотеката не можаха да бъдат прочетени; списъкът може да е непълен.',
   'Uit recente bestanden verwijderen': 'Премахни от скорошните файлове',
+  'OciDeck wordt gestart…': 'Стартиране на OciDeck…',
+  'Herstelbestanden': 'Файлове за възстановяване',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Файловете за възстановяване съдържат цялото съдържание на презентациите ви в обикновен текст. Изчистват се автоматично след 7 дни; тук можете да ги изтриете веднага.',
+  'Herstelbestanden nu wissen': 'Изтрий файловете за възстановяване сега',
+  'Er waren geen herstelbestanden.': 'Нямаше файлове за възстановяване.',
+  'herstelbestand(en) gewist.': 'файл(а) за възстановяване изтрити.',
 };

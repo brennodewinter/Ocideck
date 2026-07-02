@@ -1165,4 +1165,11 @@ const _dutchSourceDa = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Kunne ikke læse en eller flere biblioteksmapper; listen kan være ufuldstændig.',
   'Uit recente bestanden verwijderen': 'Fjern fra seneste filer',
+  'OciDeck wordt gestart…': 'Starter OciDeck…',
+  'Herstelbestanden': 'Gendannelsesfiler',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Gendannelsesfiler indeholder hele indholdet af dine præsentationer i klartekst. De ryddes automatisk op efter 7 dage; her kan du slette dem med det samme.',
+  'Herstelbestanden nu wissen': 'Slet gendannelsesfiler nu',
+  'Er waren geen herstelbestanden.': 'Der var ingen gendannelsesfiler.',
+  'herstelbestand(en) gewist.': 'gendannelsesfil(er) slettet.',
 };

@@ -1158,4 +1158,11 @@ const _dutchSourceAddPap = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'No por a lesa un òf mas map di e biblioteka; e lista por ta inkompletu.',
   'Uit recente bestanden verwijderen': 'Kita for di archivonan resien',
+  'OciDeck wordt gestart…': 'OciDeck ta ser inisiá…',
+  'Herstelbestanden': 'Archivonan di rekuperashon',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Archivonan di rekuperashon ta kontené henter e kontenido di bo presentashonnan den teksto simpel. Nan ta ser limpiá outomátikamente despues di 7 dia; akinan bo por wisa nan mesora.',
+  'Herstelbestanden nu wissen': 'Wisa archivonan di rekuperashon awor',
+  'Er waren geen herstelbestanden.': 'No tabatin archivo di rekuperashon.',
+  'herstelbestand(en) gewist.': 'archivo(nan) di rekuperashon wisá.',
 };

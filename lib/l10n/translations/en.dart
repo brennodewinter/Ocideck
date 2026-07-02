@@ -1181,4 +1181,11 @@ const _dutchSourceAddEn = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Could not read one or more library folders; the list may be incomplete.',
   'Uit recente bestanden verwijderen': 'Remove from recent files',
+  'OciDeck wordt gestart…': 'Starting OciDeck…',
+  'Herstelbestanden': 'Recovery files',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Crash-recovery files contain the full content of your presentations in plain text. They are cleaned up automatically after 7 days; here you can wipe them immediately.',
+  'Herstelbestanden nu wissen': 'Wipe recovery files now',
+  'Er waren geen herstelbestanden.': 'There were no recovery files.',
+  'herstelbestand(en) gewist.': 'recovery file(s) wiped.',
 };

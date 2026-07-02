@@ -117,8 +117,14 @@ class RecoveryService {
 
   /// Recovery snapshots hold full deck markdown (and notes) in plaintext, so an
   /// orphaned one — left by a crash the user never followed up on — is a slow
-  /// leak of possibly-classified content on disk. Cap how long that can linger.
-  static const Duration defaultMaxAge = Duration(days: 30);
+  /// leak of possibly-classified content on disk. Cap how long that can
+  /// linger: zeven dagen dekt "vorige week gecrasht, pas na het weekend weer
+  /// geopend" ruim, zonder geclassificeerde restanten een maand te bewaren.
+  static const Duration defaultMaxAge = Duration(days: 7);
+
+  /// Wis álle herstelbestanden, ongeacht leeftijd (knop in Instellingen →
+  /// Privacy). Best-effort; geeft het aantal verwijderde bestanden terug.
+  Future<int> discardAll() => pruneOlderThan(Duration.zero);
 
   /// Delete recovery files last modified more than [maxAge] ago. Best-effort:
   /// failures are logged, never thrown. Returns the number of files removed.

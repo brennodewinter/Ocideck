@@ -1170,4 +1170,11 @@ const _dutchSourceCs = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Nelze přečíst jednu nebo více složek knihovny; seznam může být neúplný.',
   'Uit recente bestanden verwijderen': 'Odebrat z posledních souborů',
+  'OciDeck wordt gestart…': 'Spouštění OciDecku…',
+  'Herstelbestanden': 'Soubory obnovení',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Soubory obnovení obsahují úplný obsah vašich prezentací v prostém textu. Automaticky se mažou po 7 dnech; zde je můžete smazat hned.',
+  'Herstelbestanden nu wissen': 'Smazat soubory obnovení nyní',
+  'Er waren geen herstelbestanden.': 'Žádné soubory obnovení nebyly.',
+  'herstelbestand(en) gewist.': 'soubor(y) obnovení smazány.',
 };

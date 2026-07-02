@@ -1167,4 +1167,11 @@ const _dutchSourceSv = {
   'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
       'Kunde inte läsa en eller flera biblioteksmappar; listan kan vara ofullständig.',
   'Uit recente bestanden verwijderen': 'Ta bort från senaste filer',
+  'OciDeck wordt gestart…': 'Startar OciDeck…',
+  'Herstelbestanden': 'Återställningsfiler',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Återställningsfiler innehåller hela innehållet i dina presentationer i klartext. De rensas automatiskt efter 7 dagar; här kan du radera dem direkt.',
+  'Herstelbestanden nu wissen': 'Radera återställningsfiler nu',
+  'Er waren geen herstelbestanden.': 'Det fanns inga återställningsfiler.',
+  'herstelbestand(en) gewist.': 'återställningsfil(er) raderade.',
 };
