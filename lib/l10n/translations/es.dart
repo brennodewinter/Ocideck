@@ -1158,4 +1158,5 @@ const _dutchSourceAddEs = {
       'No se pudo obtener una presentación de esta URL. Comprueba la URL y tu conexión.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Error al iniciar sesión — comprueba el usuario y la contraseña. Consejo: con Nextcloud usa una contraseña de aplicación (Ajustes → Seguridad), no la de tu cuenta.',
+  'Annuleren…': 'Cancelando…',
 };

@@ -1151,4 +1151,5 @@ const _dutchSourceAddPap = {
       'No por a haña un presentashon di e URL aki. Kontrolá e URL i bo konekshon.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Login a faya — kontrolá e nòmber di usuario i e password. Tip: ku Nextcloud usa un app-password (Konfigurashon → Siguridat), no esun di bo kuenta.',
+  'Annuleren…': 'Kanselando…',
 };

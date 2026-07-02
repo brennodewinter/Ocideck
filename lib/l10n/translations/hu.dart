@@ -1164,4 +1164,5 @@ const _dutchSourceHu = {
       'Erről az URL-ről nem sikerült prezentációt letölteni. Ellenőrizd az URL-t és a kapcsolatot.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'A bejelentkezés nem sikerült — ellenőrizd a felhasználónevet és a jelszót. Tipp: Nextcloudnál alkalmazásjelszót használj (Beállítások → Biztonság), ne a fiókjelszavadat.',
+  'Annuleren…': 'Megszakítás…',
 };

@@ -1153,4 +1153,5 @@ const _dutchSourceAddDe = {
       'Von dieser URL konnte keine Präsentation geholt werden. Prüfe die URL und deine Verbindung.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Anmeldung fehlgeschlagen — prüfe Benutzername und Passwort. Tipp: verwende bei Nextcloud ein App-Passwort (Einstellungen → Sicherheit), nicht dein Kontopasswort.',
+  'Annuleren…': 'Abbrechen…',
 };

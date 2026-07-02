@@ -1180,4 +1180,5 @@ const _dutchSourcePt = {
       'Não foi possível obter uma apresentação deste URL. Verifique o URL e a ligação.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Falha ao iniciar sessão — verifique o utilizador e a palavra-passe. Dica: com o Nextcloud use uma palavra-passe de aplicação (Definições → Segurança), não a da conta.',
+  'Annuleren…': 'A cancelar…',
 };

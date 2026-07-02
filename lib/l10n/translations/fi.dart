@@ -1164,4 +1164,5 @@ const _dutchSourceFi = {
       'Tästä URL-osoitteesta ei voitu hakea esitystä. Tarkista osoite ja yhteys.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Kirjautuminen epäonnistui — tarkista käyttäjätunnus ja salasana. Vinkki: käytä Nextcloudissa sovellussalasanaa (Asetukset → Turvallisuus), älä tilisi salasanaa.',
+  'Annuleren…': 'Peruutetaan…',
 };

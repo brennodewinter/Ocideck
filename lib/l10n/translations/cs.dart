@@ -1163,4 +1163,5 @@ const _dutchSourceCs = {
       'Z této URL se nepodařilo stáhnout prezentaci. Zkontrolujte URL a připojení.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Přihlášení se nezdařilo — zkontrolujte uživatelské jméno a heslo. Tip: u Nextcloudu použijte heslo aplikace (Nastavení → Zabezpečení), ne heslo účtu.',
+  'Annuleren…': 'Rušení…',
 };

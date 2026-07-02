@@ -1150,4 +1150,5 @@ const _dutchSourceTlh = {
       'URLvamvo\' \'anghom suqlaHbe\'lu\'. URL rarwI\' je yI\'ol.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       '\'el Qapbe\' — lo\'wI\' pong mu\'wIj je yI\'ol. qeS: Nextcloud Daq app mu\'wIj yIlo\' (Settings → Hung), bo\'Degh mu\'wIj yIlo\'Qo\'.',
+  'Annuleren…': 'qIlmeH…',
 };

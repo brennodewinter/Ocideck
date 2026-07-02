@@ -1162,4 +1162,5 @@ const _dutchSourceId = {
       'Tidak dapat mengambil presentasi dari URL ini. Periksa URL dan koneksi Anda.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Gagal masuk — periksa nama pengguna dan kata sandi. Tips: dengan Nextcloud gunakan kata sandi aplikasi (Pengaturan → Keamanan), bukan kata sandi akun.',
+  'Annuleren…': 'Membatalkan…',
 };

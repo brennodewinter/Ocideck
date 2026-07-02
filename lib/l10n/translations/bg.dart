@@ -1177,4 +1177,5 @@ const _dutchSourceBg = {
       'От този URL не можа да се изтегли презентация. Проверете URL адреса и връзката.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Влизането не успя — проверете потребителското име и паролата. Съвет: с Nextcloud използвайте парола за приложение (Настройки → Сигурност), а не паролата на акаунта.',
+  'Annuleren…': 'Отказване…',
 };

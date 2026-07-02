@@ -1174,4 +1174,5 @@ const _dutchSourceUk = {
       'Не вдалося отримати презентацію за цією URL-адресою. Перевірте URL і з\'єднання.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Не вдалося увійти — перевірте ім\'я користувача та пароль. Порада: для Nextcloud використовуйте пароль застосунку (Налаштування → Безпека), а не пароль облікового запису.',
+  'Annuleren…': 'Скасування…',
 };

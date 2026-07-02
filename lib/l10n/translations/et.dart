@@ -1156,4 +1156,5 @@ const _dutchSourceEt = {
       'Sellelt URL-ilt ei õnnestunud esitlust laadida. Kontrolli URL-i ja ühendust.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Sisselogimine ebaõnnestus — kontrolli kasutajanime ja parooli. Vihje: Nextcloudiga kasuta rakenduse parooli (Seaded → Turvalisus), mitte konto parooli.',
+  'Annuleren…': 'Tühistamine…',
 };

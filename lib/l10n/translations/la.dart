@@ -1172,4 +1172,5 @@ const _dutchSourceLa = {
       'Ex hac URL praesentatio peti non potuit. URL et nexum tuum proba.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Conatus intrandi defecit — nomen usoris et tesseram proba. Consilium: apud Nextcloud tessera applicationis utere (Optiones → Securitas), non tessera rationis tuae.',
+  'Annuleren…': 'Abrogatur…',
 };

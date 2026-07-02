@@ -1158,4 +1158,5 @@ const _dutchSourceDa = {
       'Kunne ikke hente en præsentation fra denne URL. Tjek URL\'en og din forbindelse.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Login mislykkedes — tjek brugernavn og adgangskode. Tip: brug med Nextcloud en app-adgangskode (Indstillinger → Sikkerhed), ikke din kontoadgangskode.',
+  'Annuleren…': 'Annullerer…',
 };

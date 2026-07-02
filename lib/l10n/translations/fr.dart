@@ -1163,4 +1163,5 @@ const _dutchSourceAddFr = {
       'Impossible de récupérer une présentation depuis cette URL. Vérifiez l\'URL et votre connexion.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Échec de la connexion — vérifiez le nom d\'utilisateur et le mot de passe. Astuce : avec Nextcloud, utilisez un mot de passe d\'application (Paramètres → Sécurité), pas celui de votre compte.',
+  'Annuleren…': 'Annulation…',
 };

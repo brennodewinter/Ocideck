@@ -1166,4 +1166,5 @@ const _dutchSourceHr = {
       'S ovog URL-a nije bilo moguće dohvatiti prezentaciju. Provjerite URL i vezu.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Prijava nije uspjela — provjerite korisničko ime i lozinku. Savjet: uz Nextcloud koristite lozinku aplikacije (Postavke → Sigurnost), ne lozinku računa.',
+  'Annuleren…': 'Otkazivanje…',
 };

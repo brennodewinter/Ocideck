@@ -1187,4 +1187,5 @@ const _dutchSourceGa = {
       'Níorbh fhéidir cur i láthair a fháil ón URL seo. Seiceáil an URL agus do nasc.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Theip ar an síniú isteach — seiceáil an t-ainm úsáideora agus an pasfhocal. Leid: le Nextcloud, úsáid pasfhocal aipe (Socruithe → Slándáil), ní pasfhocal do chuntais.',
+  'Annuleren…': 'Á chealú…',
 };

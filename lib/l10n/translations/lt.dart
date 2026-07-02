@@ -1167,4 +1167,5 @@ const _dutchSourceLt = {
       'Iš šio URL nepavyko gauti pristatymo. Patikrinkite URL ir ryšį.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Prisijungti nepavyko — patikrinkite naudotojo vardą ir slaptažodį. Patarimas: su Nextcloud naudokite programėlės slaptažodį (Nustatymai → Sauga), o ne paskyros.',
+  'Annuleren…': 'Atšaukiama…',
 };

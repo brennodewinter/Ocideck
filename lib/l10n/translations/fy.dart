@@ -1150,4 +1150,5 @@ const _dutchSourceAddFy = {
       'Koe fan dizze URL gjin presintaasje ophelje. Kontrolearje de URL en jo ferbining.',
   'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
       'Oanmelden mislearre — kontrolearje brûkersnamme en wachtwurd. Tip: brûk by Nextcloud in app-wachtwurd (Ynstellingen → Feilichheid), net jo accountwachtwurd.',
+  'Annuleren…': 'Annulearje…',
 };
