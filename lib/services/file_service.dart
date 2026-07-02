@@ -104,6 +104,35 @@ enum OpenFailure {
   corrupt,
 }
 
+/// Waarom een import (URL, pakket, WebDAV) geen deck opleverde — voor een
+/// gerichte melding in plaats van een generiek "kon niet importeren".
+enum ImportFailure {
+  /// Bestand of pakket is groter dan de toegestane limiet.
+  tooLarge,
+
+  /// ZIP of tekst is beschadigd/onleesbaar.
+  corrupt,
+
+  /// Wel opgehaald, maar geen Marp/OciDeck-presentatie.
+  unsupported,
+
+  /// Veiligheidslimiet geraakt (zip-bomb, te veel entries).
+  limitExceeded,
+
+  /// Ophalen zelf mislukte (URL, verbinding, statuscode).
+  network,
+}
+
+/// Uitkomst van een import: het pad naar de hoofd-markdown bij succes, anders
+/// een [failure] met de reden.
+class ImportOutcome {
+  final String? mdPath;
+  final ImportFailure? failure;
+
+  const ImportOutcome.ok(this.mdPath) : failure = null;
+  const ImportOutcome.failed(this.failure) : mdPath = null;
+}
+
 class FileService {
   final MarkdownService _md;
   final ImageService _img;
@@ -755,15 +784,30 @@ class FileService {
     List<int> zipBytes,
     String destParentDir, {
     int maxBytes = maxPackageBytes,
+  }) async => (await importPackageBytesDetailed(
+    zipBytes,
+    destParentDir,
+    maxBytes: maxBytes,
+  )).mdPath;
+
+  /// Als [importPackageBytes], maar met de weiger-reden zodat de UI kan
+  /// uitleggen wát er mis was (te groot, kapot, geen deck, limiet) in plaats
+  /// van een generiek "kon niet importeren".
+  Future<ImportOutcome> importPackageBytesDetailed(
+    List<int> zipBytes,
+    String destParentDir, {
+    int maxBytes = maxPackageBytes,
   }) async {
-    if (zipBytes.length > maxBytes) return null;
+    if (zipBytes.length > maxBytes) {
+      return const ImportOutcome.failed(ImportFailure.tooLarge);
+    }
 
     final Archive archive;
     try {
       archive = ZipDecoder().decodeBytes(zipBytes);
     } catch (e, s) {
       logError('FileService.importPackageBytes: ZIP decode failed', e, s);
-      return null;
+      return const ImportOutcome.failed(ImportFailure.corrupt);
     }
 
     if (archive.files.length > maxPackageEntries) {
@@ -771,7 +815,7 @@ class FileService {
         'FileService.importPackageBytes: too many archive entries '
         '(${archive.files.length})',
       );
-      return null;
+      return const ImportOutcome.failed(ImportFailure.limitExceeded);
     }
 
     // Kies de markdown met het ondiepste pad (de hoofd-md van het pakket).
@@ -783,11 +827,27 @@ class FileService {
         mdEntry = f;
       }
     }
-    if (mdEntry == null) return null;
+    if (mdEntry == null) {
+      return const ImportOutcome.failed(ImportFailure.unsupported);
+    }
 
     final folderName = p.basenameWithoutExtension(mdEntry.name);
     final destDir = _uniqueDir(destParentDir, folderName);
     await destDir.create(recursive: true);
+
+    // Een afgebroken extractie laat geen half uitgepakte map achter: die zou
+    // stil schijfruimte opsnoepen en bij een zip-bomb juist het doelwit zijn.
+    Future<ImportOutcome> abortAndClean(ImportFailure failure) async {
+      try {
+        await destDir.delete(recursive: true);
+      } catch (e) {
+        logWarning(
+          'FileService.importPackageBytes: partial extract cleanup failed',
+          e,
+        );
+      }
+      return ImportOutcome.failed(failure);
+    }
 
     // Resolve an archive entry name to a path strictly inside [destDir], or
     // null when it would escape (zip-slip: `../`, absolute paths, …).
@@ -811,7 +871,7 @@ class FileService {
         logWarning(
           'FileService.importPackageBytes: decompressed size exceeds limit',
         );
-        return null;
+        return abortAndClean(ImportFailure.limitExceeded);
       }
       // Inflate into a capped stream that aborts the moment the entry exceeds
       // the remaining budget. This bounds peak memory per entry: unlike
@@ -829,7 +889,7 @@ class FileService {
           'FileService.importPackageBytes: entry exceeds decompression limit '
           '(possible zip bomb): ${f.name}',
         );
-        return null;
+        return abortAndClean(ImportFailure.limitExceeded);
       } catch (e) {
         // Decompressing a corrupt entry can throw; skip it instead of aborting.
         logWarning(
@@ -846,7 +906,8 @@ class FileService {
 
     // The main markdown must itself resolve inside the extraction folder.
     final mdPath = safeOutPath(mdEntry.name);
-    return mdPath;
+    if (mdPath == null) return abortAndClean(ImportFailure.unsupported);
+    return ImportOutcome.ok(mdPath);
   }
 
   Directory _uniqueDir(String parent, String name) {
@@ -870,16 +931,31 @@ class FileService {
   static Future<List<InternetAddress>?> _safeResolve(String host) =>
       NetGuard.safeResolve(host);
 
-  Future<String?> importFromUrl(String url, String destParentDir) async {
+  Future<String?> importFromUrl(String url, String destParentDir) async =>
+      (await importFromUrlDetailed(url, destParentDir)).mdPath;
+
+  /// Als [importFromUrl], maar met de weiger-reden voor een gerichte melding.
+  Future<ImportOutcome> importFromUrlDetailed(
+    String url,
+    String destParentDir,
+  ) async {
     final uri = Uri.tryParse(url.trim());
-    if (uri == null || !uri.hasScheme) return null;
+    if (uri == null || !uri.hasScheme) {
+      return const ImportOutcome.failed(ImportFailure.network);
+    }
     // Only fetch over web schemes, and never reach private/loopback hosts.
     final scheme = uri.scheme.toLowerCase();
-    if (scheme != 'http' && scheme != 'https') return null;
-    if (_isBlockedHost(uri.host)) return null;
+    if (scheme != 'http' && scheme != 'https') {
+      return const ImportOutcome.failed(ImportFailure.network);
+    }
+    if (_isBlockedHost(uri.host)) {
+      return const ImportOutcome.failed(ImportFailure.network);
+    }
     // Resolve the hostname up front and reject internal addresses.
     final safeAddrs = await _safeResolve(uri.host);
-    if (safeAddrs == null) return null;
+    if (safeAddrs == null) {
+      return const ImportOutcome.failed(ImportFailure.network);
+    }
     final pinned = safeAddrs.first;
 
     final List<int> bytes;
@@ -899,12 +975,18 @@ class FileService {
         final response = await request.close().timeout(
           const Duration(seconds: 30),
         );
-        if (response.statusCode != 200) return null;
-        if (response.contentLength > maxPackageBytes) return null;
+        if (response.statusCode != 200) {
+          return const ImportOutcome.failed(ImportFailure.network);
+        }
+        if (response.contentLength > maxPackageBytes) {
+          return const ImportOutcome.failed(ImportFailure.tooLarge);
+        }
         final builder = BytesBuilder(copy: false);
         await for (final chunk in response) {
           builder.add(chunk);
-          if (builder.length > maxPackageBytes) return null; // runaway body
+          if (builder.length > maxPackageBytes) {
+            return const ImportOutcome.failed(ImportFailure.tooLarge);
+          }
         }
         bytes = builder.takeBytes();
       } finally {
@@ -912,7 +994,7 @@ class FileService {
       }
     } catch (e) {
       logError('FileService.importFromUrl: download failed', e);
-      return null;
+      return const ImportOutcome.failed(ImportFailure.network);
     }
 
     // Zip-magie 'PK\x03\x04' → pakket; anders als markdown behandelen.
@@ -923,11 +1005,11 @@ class FileService {
         bytes[2] == 0x03 &&
         bytes[3] == 0x04;
     if (isZip) {
-      return importPackageBytes(bytes, destParentDir);
+      return importPackageBytesDetailed(bytes, destParentDir);
     }
 
     // Platte markdown.
-    return importMarkdownBytes(bytes, destParentDir, uri.path);
+    return importMarkdownBytesDetailed(bytes, destParentDir, uri.path);
   }
 
   /// Sla losse markdown-bytes op als zelfstandig deck in een nieuwe submap van
@@ -938,16 +1020,32 @@ class FileService {
     List<int> bytes,
     String destParentDir,
     String suggestedName,
+  ) async => (await importMarkdownBytesDetailed(
+    bytes,
+    destParentDir,
+    suggestedName,
+  )).mdPath;
+
+  /// Als [importMarkdownBytes], maar met de weiger-reden voor een gerichte
+  /// melding (te groot, geen UTF-8, geen Marp-deck).
+  Future<ImportOutcome> importMarkdownBytesDetailed(
+    List<int> bytes,
+    String destParentDir,
+    String suggestedName,
   ) async {
-    if (bytes.length > maxDeckMarkdownBytes) return null;
+    if (bytes.length > maxDeckMarkdownBytes) {
+      return const ImportOutcome.failed(ImportFailure.tooLarge);
+    }
     final String markdown;
     try {
       markdown = utf8.decode(bytes);
     } catch (e, s) {
       logError('FileService.importMarkdownBytes: UTF-8 decode failed', e, s);
-      return null;
+      return const ImportOutcome.failed(ImportFailure.corrupt);
     }
-    if (!markdown.contains('marp') && !markdown.contains('---')) return null;
+    if (!markdown.contains('marp') && !markdown.contains('---')) {
+      return const ImportOutcome.failed(ImportFailure.unsupported);
+    }
 
     var base = p.basenameWithoutExtension(suggestedName);
     if (base.isEmpty) base = 'presentatie';
@@ -955,7 +1053,7 @@ class FileService {
     await destDir.create(recursive: true);
     final mdPath = p.join(destDir.path, '$base.md');
     await writeStringAtomic(File(mdPath), markdown);
-    return mdPath;
+    return ImportOutcome.ok(mdPath);
   }
 
   Future<String?> pickPackageFile({String? initialDirectory}) async {

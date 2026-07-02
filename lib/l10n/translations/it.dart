@@ -1148,4 +1148,10 @@ const _dutchSourceAddIt = {
       'Il file supera il limite consentito.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Il server ha restituito un errore. Riprova più tardi.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Il file è danneggiato o illeggibile.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Importazione rifiutata: il pacchetto supera i limiti di sicurezza.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Impossibile recuperare una presentazione da questo URL. Controlla l\'URL e la connessione.',
 };

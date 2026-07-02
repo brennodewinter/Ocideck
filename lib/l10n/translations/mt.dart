@@ -1167,4 +1167,10 @@ const _dutchSourceMt = {
       'Il-fajl akbar mil-limitu permess.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Is-server ta żball. Erġa\' pprova aktar tard.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Il-fajl bil-ħsara jew ma jinqarax.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'L-importazzjoni miċħuda: il-pakkett jaqbeż il-limiti tas-sigurtà.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Ma setgħetx tinġab preżentazzjoni minn dan il-URL. Iċċekkja l-URL u l-konnessjoni.',
 };

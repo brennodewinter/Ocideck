@@ -1150,4 +1150,10 @@ const _dutchSourceAddEs = {
       'El archivo supera el límite permitido.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'El servidor devolvió un error. Inténtalo más tarde.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'El archivo está dañado o es ilegible.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Importación rechazada: el paquete supera los límites de seguridad.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'No se pudo obtener una presentación de esta URL. Comprueba la URL y tu conexión.',
 };

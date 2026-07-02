@@ -1168,4 +1168,10 @@ const _dutchSourceEl = {
       'Το αρχείο υπερβαίνει το επιτρεπόμενο όριο.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Ο διακομιστής επέστρεψε σφάλμα. Δοκιμάστε ξανά αργότερα.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Το αρχείο είναι κατεστραμμένο ή μη αναγνώσιμο.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Η εισαγωγή απορρίφθηκε: το πακέτο υπερβαίνει τα όρια ασφαλείας.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Δεν ήταν δυνατή η λήψη παρουσίασης από αυτό το URL. Ελέγξτε το URL και τη σύνδεσή σας.',
 };

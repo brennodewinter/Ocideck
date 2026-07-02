@@ -1155,4 +1155,10 @@ const _dutchSourceCs = {
       'Soubor je větší než povolený limit.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Server vrátil chybu. Zkuste to později znovu.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Soubor je poškozený nebo nečitelný.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Import odmítnut: balíček překračuje bezpečnostní limity.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Z této URL se nepodařilo stáhnout prezentaci. Zkontrolujte URL a připojení.',
 };

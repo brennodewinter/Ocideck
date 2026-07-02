@@ -1145,4 +1145,10 @@ const _dutchSourceAddDe = {
       'Die Datei ist größer als das erlaubte Limit.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Der Server hat einen Fehler gemeldet. Versuche es später erneut.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Die Datei ist beschädigt oder unlesbar.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Import verweigert: das Paket überschreitet die Sicherheitslimits.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Von dieser URL konnte keine Präsentation geholt werden. Prüfe die URL und deine Verbindung.',
 };

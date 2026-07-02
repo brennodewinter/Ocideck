@@ -350,30 +350,41 @@ class TabsNotifier extends StateNotifier<TabsState> {
 
   /// Importeer een `.ocideck`-pakket (zip) en open het in een tab.
   ///
-  /// Retourneert `true` wanneer het pakket is opgehaald én verwerkt — ook als de
-  /// veiligheidscontrole de inhoud blokkeert (dan toont de shell het alarm).
-  /// `false` betekent dat het pakket niet kon worden gelezen/uitgepakt.
-  Future<bool> importPackageFile(String zipPath, {String? homeDir}) async {
+  /// Retourneert `null` wanneer het pakket is opgehaald én verwerkt — ook als
+  /// de veiligheidscontrole de inhoud blokkeert (dan toont de shell het alarm).
+  /// Anders de reden waarom het pakket niet kon worden gelezen/uitgepakt.
+  Future<ImportFailure?> importPackageFile(
+    String zipPath, {
+    String? homeDir,
+  }) async {
     final dest = await _importDestDir(homeDir);
     final file = File(zipPath);
-    if (await file.length() > FileService.maxPackageBytes) return false;
+    if (await file.length() > FileService.maxPackageBytes) {
+      return ImportFailure.tooLarge;
+    }
     final bytes = await file.readAsBytes();
-    final mdPath = await _file.importPackageBytes(bytes, dest);
-    if (mdPath == null) return false;
+    final outcome = await _file.importPackageBytesDetailed(bytes, dest);
+    final mdPath = outcome.mdPath;
+    if (mdPath == null) return outcome.failure;
     final result = await openFileByPath(mdPath);
     if (result != OpenResult.opened) await _discardImportArtifacts(mdPath);
-    return result == OpenResult.opened || result == OpenResult.blocked;
+    return result == OpenResult.opened || result == OpenResult.blocked
+        ? null
+        : ImportFailure.unsupported;
   }
 
   /// Haal een presentatie op via een URL (pakket of platte markdown) en open
   /// het in een tab. Zie [importPackageFile] voor de betekenis van de retour.
-  Future<bool> importFromUrl(String url, {String? homeDir}) async {
+  Future<ImportFailure?> importFromUrl(String url, {String? homeDir}) async {
     final dest = await _importDestDir(homeDir);
-    final mdPath = await _file.importFromUrl(url, dest);
-    if (mdPath == null) return false;
+    final outcome = await _file.importFromUrlDetailed(url, dest);
+    final mdPath = outcome.mdPath;
+    if (mdPath == null) return outcome.failure;
     final result = await openFileByPath(mdPath);
     if (result != OpenResult.opened) await _discardImportArtifacts(mdPath);
-    return result == OpenResult.opened || result == OpenResult.blocked;
+    return result == OpenResult.opened || result == OpenResult.blocked
+        ? null
+        : ImportFailure.unsupported;
   }
 
   /// Download [entry] van de WebDAV-bron, haal het door de bestaande

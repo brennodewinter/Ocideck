@@ -292,7 +292,14 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       if (ext == '.md') {
         await tabs.openFileByPath(path);
       } else if (ext == '.ocideck' || ext == '.zip') {
-        await tabs.importPackageFile(path, homeDir: homeDir);
+        final failure = await tabs.importPackageFile(path, homeDir: homeDir);
+        if (failure != null && mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(importFailureMessage(context.l10n, failure)),
+            ),
+          );
+        }
       } else if (_imageExtensions.contains(ext)) {
         images.add(path);
       }

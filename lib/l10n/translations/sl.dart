@@ -1156,4 +1156,10 @@ const _dutchSourceSl = {
       'Datoteka je večja od dovoljene omejitve.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Strežnik je vrnil napako. Poskusite znova pozneje.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Datoteka je poškodovana ali neberljiva.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Uvoz zavrnjen: paket presega varnostne omejitve.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'S tega URL-ja ni bilo mogoče pridobiti predstavitve. Preverite URL in povezavo.',
 };

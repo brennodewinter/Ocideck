@@ -1164,4 +1164,10 @@ const _dutchSourceRo = {
       'Fișierul depășește limita permisă.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Serverul a returnat o eroare. Încercați din nou mai târziu.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Fișierul este deteriorat sau ilizibil.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Import refuzat: pachetul depășește limitele de siguranță.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Nu s-a putut prelua o prezentare de la acest URL. Verificați URL-ul și conexiunea.',
 };

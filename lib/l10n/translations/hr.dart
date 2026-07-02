@@ -1158,4 +1158,10 @@ const _dutchSourceHr = {
       'Datoteka je veća od dopuštenog ograničenja.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Poslužitelj je vratio pogrešku. Pokušajte ponovno kasnije.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Datoteka je oštećena ili nečitljiva.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Uvoz odbijen: paket premašuje sigurnosna ograničenja.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'S ovog URL-a nije bilo moguće dohvatiti prezentaciju. Provjerite URL i vezu.',
 };

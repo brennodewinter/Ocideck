@@ -1166,4 +1166,10 @@ const _dutchSourceAddEn = {
       'The file is larger than the allowed limit.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'The server returned an error. Try again later.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'The file is damaged or unreadable.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Import refused: the package exceeds the safety limits.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Could not fetch a presentation from this URL. Check the URL and your connection.',
 };

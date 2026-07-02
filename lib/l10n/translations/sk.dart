@@ -1160,4 +1160,10 @@ const _dutchSourceSk = {
       'Súbor je väčší ako povolený limit.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Server vrátil chybu. Skúste to neskôr znova.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Súbor je poškodený alebo nečitateľný.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Import odmietnutý: balík prekračuje bezpečnostné limity.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Z tejto URL sa nepodarilo získať prezentáciu. Skontrolujte URL a pripojenie.',
 };

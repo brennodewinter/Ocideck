@@ -1144,4 +1144,9 @@ const _dutchSourceAddPap = {
       'E archivo ta mas grandi ku e límite permití.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'E server a duna un eror. Purba atrobe despues.',
+  'Het bestand is beschadigd of onleesbaar.': 'E archivo ta daña òf ilegibel.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Importashon rechasá: e paket ta surpasá e límitenan di siguridat.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'No por a haña un presentashon di e URL aki. Kontrolá e URL i bo konekshon.',
 };

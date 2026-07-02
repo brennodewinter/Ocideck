@@ -722,12 +722,17 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       initialDirectory: settings.homeDirectory,
     );
     if (path == null) return;
-    final ok = await ref
+    final failure = await ref
         .read(tabsProvider.notifier)
         .importPackageFile(path, homeDir: settings.homeDirectory);
-    if (!ok && mounted) {
+    if (failure != null && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.d('Kon dit pakket niet importeren.'))),
+        SnackBar(
+          content: Text(
+            '${l10n.d('Kon dit pakket niet importeren.')} '
+            '${importFailureMessage(l10n, failure)}',
+          ),
+        ),
       );
     }
   }

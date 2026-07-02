@@ -1142,4 +1142,10 @@ const _dutchSourceTlh = {
       'chaw\'lu\'bogh \'aqroS tIn law\' teHwI\' tIn puS.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Qagh chegh jabwI\'. tugh yInIDqa\'.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'teHwI\' Qaw\'lu\'pu\' pagh laDlaHbe\'lu\'.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'lIqmeH Qatlh: Qatlh chaw\' \'aqroSmey juS ngaSwI\'.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'URLvamvo\' \'anghom suqlaHbe\'lu\'. URL rarwI\' je yI\'ol.',
 };

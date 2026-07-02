@@ -1179,4 +1179,10 @@ const _dutchSourceGa = {
       'Tá an comhad níos mó ná an teorainn cheadaithe.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'D\'fhill an freastalaí earráid. Bain triail eile as ar ball.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Tá an comhad damáiste nó doléite.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Diúltaíodh don iompórtáil: sáraíonn an pacáiste na teorainneacha slándála.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Níorbh fhéidir cur i láthair a fháil ón URL seo. Seiceáil an URL agus do nasc.',
 };

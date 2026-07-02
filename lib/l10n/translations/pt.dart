@@ -1172,4 +1172,10 @@ const _dutchSourcePt = {
       'O ficheiro é maior do que o limite permitido.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'O servidor devolveu um erro. Tente novamente mais tarde.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'O ficheiro está danificado ou ilegível.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Importação recusada: o pacote excede os limites de segurança.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Não foi possível obter uma apresentação deste URL. Verifique o URL e a ligação.',
 };

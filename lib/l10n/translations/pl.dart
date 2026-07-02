@@ -1161,4 +1161,10 @@ const _dutchSourcePl = {
       'Plik przekracza dozwolony limit.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Serwer zwrócił błąd. Spróbuj ponownie później.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Plik jest uszkodzony lub nieczytelny.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Import odrzucony: pakiet przekracza limity bezpieczeństwa.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Nie udało się pobrać prezentacji z tego adresu URL. Sprawdź adres i połączenie.',
 };

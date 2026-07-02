@@ -1154,4 +1154,9 @@ const _dutchSourceLv = {
       'Fails ir lielāks par atļauto limitu.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Serveris atgrieza kļūdu. Mēģiniet vēlāk vēlreiz.',
+  'Het bestand is beschadigd of onleesbaar.': 'Fails ir bojāts vai nenolasāms.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Imports noraidīts: pakotne pārsniedz drošības limitus.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'No šī URL neizdevās iegūt prezentāciju. Pārbaudiet URL un savienojumu.',
 };

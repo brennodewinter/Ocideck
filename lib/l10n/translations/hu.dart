@@ -1156,4 +1156,10 @@ const _dutchSourceHu = {
       'A fájl nagyobb a megengedett korlátnál.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'A szerver hibát adott vissza. Próbáld újra később.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'A fájl sérült vagy olvashatatlan.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Az importálás elutasítva: a csomag túllépi a biztonsági korlátokat.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Erről az URL-ről nem sikerült prezentációt letölteni. Ellenőrizd az URL-t és a kapcsolatot.',
 };

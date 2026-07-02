@@ -1164,4 +1164,10 @@ const _dutchSourceLa = {
       'Plica maior est quam finis permissus.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Moderatrus errorem reddidit. Postea iterum conare.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Plica corrupta aut illegibilis est.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Importatio recusata: fasciculus fines securitatis excedit.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Ex hac URL praesentatio peti non potuit. URL et nexum tuum proba.',
 };

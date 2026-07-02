@@ -1170,4 +1170,9 @@ const _dutchSourceBg = {
       'Файлът е по-голям от разрешения лимит.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Сървърът върна грешка. Опитайте отново по-късно.',
+  'Het bestand is beschadigd of onleesbaar.': 'Файлът е повреден или нечетлив.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Импортът е отказан: пакетът надвишава ограниченията за сигурност.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'От този URL не можа да се изтегли презентация. Проверете URL адреса и връзката.',
 };

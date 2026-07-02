@@ -1156,4 +1156,10 @@ const _dutchSourceFi = {
       'Tiedosto on sallittua rajaa suurempi.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Palvelin palautti virheen. Yritä myöhemmin uudelleen.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Tiedosto on vaurioitunut tai lukukelvoton.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Tuonti hylättiin: paketti ylittää turvarajat.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Tästä URL-osoitteesta ei voitu hakea esitystä. Tarkista osoite ja yhteys.',
 };

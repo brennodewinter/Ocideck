@@ -1150,4 +1150,10 @@ const _dutchSourceDa = {
       'Filen er større end den tilladte grænse.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Serveren returnerede en fejl. Prøv igen senere.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Filen er beskadiget eller ulæselig.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Import afvist: pakken overskrider sikkerhedsgrænserne.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Kunne ikke hente en præsentation fra denne URL. Tjek URL\'en og din forbindelse.',
 };

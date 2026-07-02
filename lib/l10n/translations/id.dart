@@ -1154,4 +1154,10 @@ const _dutchSourceId = {
       'File lebih besar dari batas yang diizinkan.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Server mengembalikan kesalahan. Coba lagi nanti.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'File rusak atau tidak dapat dibaca.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Impor ditolak: paket melebihi batas keamanan.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Tidak dapat mengambil presentasi dari URL ini. Periksa URL dan koneksi Anda.',
 };

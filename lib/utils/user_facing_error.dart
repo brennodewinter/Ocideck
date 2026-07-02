@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import '../l10n/app_localizations.dart';
+import '../services/file_service.dart';
 import '../services/webdav_service.dart';
 
 /// Vertaal een gevangen [error] naar een korte melding met
@@ -31,6 +32,26 @@ String userFacingError(AppLocalizations l10n, Object error) {
   return l10n.d(
     'Er ging onverwacht iets mis. Kijk in het logboek voor details.',
   );
+}
+
+/// Begrijpelijke melding per import-weigerreden, zodat de gebruiker weet of
+/// het bestand te groot, kapot, geen presentatie of onbereikbaar was.
+String importFailureMessage(AppLocalizations l10n, ImportFailure failure) {
+  return switch (failure) {
+    ImportFailure.tooLarge => l10n.d(
+      'Het bestand is groter dan de toegestane limiet.',
+    ),
+    ImportFailure.corrupt => l10n.d('Het bestand is beschadigd of onleesbaar.'),
+    ImportFailure.unsupported => l10n.d(
+      'Dit is geen Marp/OciDeck-presentatie.',
+    ),
+    ImportFailure.limitExceeded => l10n.d(
+      'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.',
+    ),
+    ImportFailure.network => l10n.d(
+      'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.',
+    ),
+  };
 }
 
 /// Begrijpelijke melding per WebDAV-foutsoort, met bij aanmeldfouten de

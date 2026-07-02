@@ -1153,4 +1153,9 @@ const _dutchSourceSv = {
       'Filen är större än den tillåtna gränsen.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Servern returnerade ett fel. Försök igen senare.',
+  'Het bestand is beschadigd of onleesbaar.': 'Filen är skadad eller oläslig.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Importen nekades: paketet överskrider säkerhetsgränserna.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Kunde inte hämta en presentation från denna URL. Kontrollera URL:en och din anslutning.',
 };

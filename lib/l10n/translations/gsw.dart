@@ -1154,4 +1154,10 @@ const _dutchSourceGsw = {
       'D Datei isch grösser als s erlaubte Limit.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Dr Server het en Fähler gmäldet. Probier\'s spöter nomol.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'D Datei isch kaputt oder nit läsbar.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Import verweigeret: s Paket überschritet d Sicherheitslimite.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Vo dere URL het kei Präsentation chönne gholt wärde. Lueg d URL und dini Verbindig aa.',
 };

@@ -1166,4 +1166,10 @@ const _dutchSourceUk = {
       'Файл перевищує дозволений ліміт.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Сервер повернув помилку. Спробуйте пізніше.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Файл пошкоджений або нечитабельний.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Імпорт відхилено: пакет перевищує межі безпеки.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Не вдалося отримати презентацію за цією URL-адресою. Перевірте URL і з\'єднання.',
 };

@@ -1148,4 +1148,10 @@ const _dutchSourceEt = {
       'Fail on lubatud piirist suurem.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'Server tagastas vea. Proovi hiljem uuesti.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Fail on kahjustatud või loetamatu.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Import keelduti: pakett ületab turvapiiranguid.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Sellelt URL-ilt ei õnnestunud esitlust laadida. Kontrolli URL-i ja ühendust.',
 };

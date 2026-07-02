@@ -1142,4 +1142,10 @@ const _dutchSourceAddFy = {
       'It bestân is grutter as de tastiene limyt.',
   'De server gaf een fout. Probeer het later opnieuw.':
       'De server joech in flater. Besykje it letter nochris.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'It bestân is skansearre of net te lêzen.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Ymport wegere: it pakket giet oer de feilichheidslimiten hinne.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Koe fan dizze URL gjin presintaasje ophelje. Kontrolearje de URL en jo ferbining.',
 };
