@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 import 'package:window_manager/window_manager.dart';
 
+import '../platform/platform_features.dart';
 import '../utils/log.dart';
 import '../models/deck.dart';
 import '../models/slide.dart';

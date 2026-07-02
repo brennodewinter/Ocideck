@@ -84,6 +84,8 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Importeren via URL is nog niet beschikbaar in de webversie.':
+      'Import cez URL zatiaľ nie je vo webovej verzii k dispozícii.',
   'Geen': 'Žiadne',
   'Nieuw': 'Nový',
   'Verwijderen': 'Odstrániť',

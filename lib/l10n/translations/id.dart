@@ -83,6 +83,8 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Importeren via URL is nog niet beschikbaar in de webversie.':
+      'Impor melalui URL belum tersedia di versi web.',
   'Geen': 'Tidak ada',
   'Nieuw': 'Baru',
   'Verwijderen': 'Hapus',

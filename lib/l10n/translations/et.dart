@@ -82,6 +82,8 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Importeren via URL is nog niet beschikbaar in de webversie.':
+      'URL-i kaudu importimine pole veebiversioonis veel saadaval.',
   'Geen': 'Puudub',
   'Nieuw': 'Uus',
   'Verwijderen': 'Kustuta',

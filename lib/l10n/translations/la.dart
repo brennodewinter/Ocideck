@@ -85,6 +85,8 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Importeren via URL is nog niet beschikbaar in de webversie.':
+      'Importatio per URL in versione interretiali nondum praesto est.',
   'Geen': 'Nullum',
   'Nieuw': 'Novum',
   'Verwijderen': 'Delere',

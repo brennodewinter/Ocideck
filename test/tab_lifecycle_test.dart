@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ocideck/app.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/state/deck_provider.dart';
+import 'package:ocideck/state/editor_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,5 +56,35 @@ void main() {
     expect(container.read(tabsProvider).tabs.length, 1);
     expect(closing.mounted, isFalse, reason: 'closed deck must be disposed');
     expect(survivor.mounted, isTrue, reason: 'surviving deck must stay alive');
+  });
+
+  // Regression: while a tab (or the window) is closing, Riverpod can dispose
+  // the tab's DeckNotifier one rebuild before the TabInfo leaves the tab bar.
+  // Reading label/isDirty/isOpen then threw "Tried to use DeckNotifier after
+  // `dispose` was called" from _AppTabBar.build. The getters must be
+  // dispose-safe instead of assuming a live notifier.
+  test('TabInfo getters survive a disposed deck notifier', () {
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+    final notifier = DeckNotifier(
+      container.read(markdownServiceProvider),
+      container.read(fileServiceProvider),
+    );
+    notifier.newDeck('Test');
+    final tab = TabInfo(
+      id: 1,
+      recoveryId: 'r1',
+      deckNotifier: notifier,
+      editorNotifier: EditorNotifier(),
+    );
+    expect(tab.isOpen, isTrue);
+    expect(tab.isDirty, isTrue);
+    expect(tab.label, 'Test');
+
+    notifier.dispose();
+
+    expect(tab.isOpen, isFalse);
+    expect(tab.isDirty, isFalse);
+    expect(tab.label, 'Nieuw');
   });
 }

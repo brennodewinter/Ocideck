@@ -228,6 +228,11 @@ build-web: deps-verify-offline
 	@echo "Covers: self-hosted CanvasKit (no third-party CDN) and a CSP-safe loader."
 	@echo "Output: build/web — serve behind the CSP declared in web/index.html."
 	flutter build web --release --no-web-resources-cdn --csp
+	@# Flutter kopieert assets mét hun bronpermissies. Een bestand dat lokaal
+	@# 600 staat wordt dan op de webserver onleesbaar (stil 403 → "onzichtbaar"
+	@# logo). Normaliseer daarom de hele bundel naar world-readable.
+	find build/web -type d -exec chmod 755 {} +
+	find build/web -type f -exec chmod 644 {} +
 
 # Build the web bundle, then assert it kept its hardening: a strict CSP, a
 # self-hosted CanvasKit, and the bundled UI font (no gstatic). Guards against a
