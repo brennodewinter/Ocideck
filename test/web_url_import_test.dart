@@ -134,14 +134,17 @@ void main() {
       },
     );
 
-    test('detects a zip package and reports it unsupported', () async {
+    test('a corrupt zip package is refused, nothing opens', () async {
       final container = _container();
       final tabs = container.read(tabsProvider.notifier);
       final result = await tabs.openDeckFromBytes(
         Uint8List.fromList([0x50, 0x4B, 0x03, 0x04, 1, 2, 3]),
         'https://example.org/deck.ocideck',
       );
-      expect(result, OpenResult.packageUnsupported);
+      // De zip-decoder is coulant: een kapotte zip levert een leeg archief
+      // (→ geen presentatie) of een decodeerfout (→ onleesbaar) op. Beide
+      // weigeren; er mag alleen nooit iets openen.
+      expect(result, anyOf(OpenResult.notAPresentation, OpenResult.unreadable));
       expect(container.read(tabsProvider).current!.isOpen, isFalse);
     });
 

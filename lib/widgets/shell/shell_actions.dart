@@ -14,9 +14,6 @@ void _reportOpenFailure(
       'Dit is geen Marp/OciDeck-presentatie.',
     ),
     OpenResult.unreadable => l10n.d('Kon dit bestand niet openen.'),
-    OpenResult.packageUnsupported => l10n.d(
-      'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.',
-    ),
     OpenResult.opened || OpenResult.blocked => null,
   };
   if (message != null) {
@@ -54,25 +51,16 @@ Future<void> _openWithSearch(
 }
 
 /// Open-pad voor web: de browser-picker levert de bestandsinhoud als bytes
-/// (er bestaat geen pad), waarna het deck in-memory wordt geopend. Opslaan
-/// van zo'n tabblad wordt automatisch een download (geen [DeckState.filePath]).
+/// (er bestaat geen pad), waarna het deck in-memory wordt geopend — een
+/// `.ocideck`-pakket wordt daarbij in het geheugen uitgepakt. Opslaan van
+/// zo'n tabblad wordt automatisch een download (geen [DeckState.filePath]).
 Future<void> _openWithBytesPicker(BuildContext context, WidgetRef ref) async {
   final picked = await ref.read(fileServiceProvider).pickDeckFileBytes();
   if (picked == null || !context.mounted) return;
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
-  if (!picked.name.toLowerCase().endsWith('.md')) {
-    messenger.showSnackBar(
-      SnackBar(
-        content: Text(
-          l10n.d(
-            'Alleen .md-presentaties kunnen in de webversie worden geopend.',
-          ),
-        ),
-      ),
-    );
-    return;
-  }
+  // Geen extensie-check: de bytes-poort herkent pakketten aan hun zip-kop en
+  // weigert al het andere met een gerichte melding via _reportOpenFailure.
   final openResult = await ref
       .read(tabsProvider.notifier)
       .openDeckFromBytes(picked.bytes, picked.name);
@@ -109,8 +97,7 @@ Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
       final result = await ref
           .read(tabsProvider.notifier)
           .importFromUrlWeb(url);
-      if (result == OpenResult.packageUnsupported ||
-          result == OpenResult.notAPresentation) {
+      if (result == OpenResult.notAPresentation) {
         _reportOpenFailure(messenger, l10n, result);
         return;
       }

@@ -9,11 +9,14 @@ import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 import '../models/deck.dart';
 import '../models/webdav_settings.dart';
+import '../services/annotation_codec.dart';
 import '../services/file_service.dart';
+import '../services/image_service.dart';
 import '../services/markdown_safety.dart';
 import '../services/markdown_service.dart';
 import '../services/recovery_service.dart';
 import '../services/user_notes_codec.dart';
+import '../services/web_asset_store.dart';
 import '../services/webdav_service.dart';
 import '../platform/platform_features.dart';
 import '../utils/log.dart';
@@ -110,11 +113,6 @@ enum OpenResult {
   /// The file was refused because it contains executable content; the security
   /// alarm has been raised via [importSecurityAlarmProvider].
   blocked,
-
-  /// Web only: the URL pointed at a `.ocideck`/zip package. Packages carry
-  /// asset files that need a local filesystem to unpack into, which the web
-  /// version does not have (yet).
-  packageUnsupported,
 }
 
 /// A blocked import surfaced to the UI: the offending file plus what was found.
@@ -371,14 +369,16 @@ class TabsNotifier extends StateNotifier<TabsState> {
 
   /// Open een deck uit in-memory bytes — het open-pad voor web, waar de
   /// file-picker, drag-drop én URL-import geen pad maar inhoud aanleveren.
-  /// Dezelfde fail-closed security-gate als [openFileByPath]; er is geen
-  /// TOCTOU-gat, want gescand en geparsed wordt exact dezelfde in-memory
-  /// string. Het tabblad krijgt geen [DeckState.filePath], dus opslaan wordt
-  /// een download. [name] labelt het importalarm en de logregels (bestandsnaam
+  /// Een `.ocideck`/zip-pakket wordt volledig in het geheugen uitgepakt
+  /// ([_openPackageFromBytes]); platte markdown gaat door dezelfde
+  /// fail-closed security-gate als [openFileByPath]. Er is geen TOCTOU-gat,
+  /// want gescand en geparsed wordt exact dezelfde in-memory string. Het
+  /// tabblad krijgt geen [DeckState.filePath], dus opslaan wordt een
+  /// download. [name] labelt het importalarm en de logregels (bestandsnaam
   /// of URL).
   Future<OpenResult> openDeckFromBytes(Uint8List bytes, String name) async {
     if (FileService.looksLikeZipBytes(bytes)) {
-      return OpenResult.packageUnsupported;
+      return _openPackageFromBytes(bytes, name);
     }
     if (bytes.length > FileService.maxDeckMarkdownBytes) {
       return OpenResult.unreadable;
@@ -390,27 +390,166 @@ class TabsNotifier extends StateNotifier<TabsState> {
       logWarning('TabsNotifier.openDeckFromBytes: not valid UTF-8', e);
       return OpenResult.unreadable;
     }
+    final gated = _gateAndParseContent(raw, sourceName: name);
+    final deck = gated.deck;
+    if (deck == null) return gated.failure;
+    if (!mounted) return OpenResult.unreadable;
+    _placeDeckInTab(deck);
+    return OpenResult.opened;
+  }
+
+  /// Pak een `.ocideck`/zip-pakket volledig in het geheugen uit en open het:
+  /// de hoofd-markdown gaat door dezelfde security-gate als elk bytes-open,
+  /// afbeeldings-leden gaan (na de pickImage-validatie) de [WebAssetStore] in
+  /// en de slidepaden worden naar hun mem:-pad herschreven, en de sidecars
+  /// (annotaties, sprekersnotities) reizen mee. Er raakt geen bestandssysteem
+  /// aan te pas, dus dit werkt ook in de webversie.
+  Future<OpenResult> _openPackageFromBytes(Uint8List bytes, String name) async {
+    final entries = _file.decodePackageEntries(bytes);
+    if (entries == null) return OpenResult.unreadable;
+    final mdEntry = FileService.mainMarkdownEntry(entries);
+    if (mdEntry == null) return OpenResult.notAPresentation;
+    final String raw;
+    try {
+      raw = utf8.decode(mdEntry.bytes);
+    } on FormatException catch (e) {
+      logWarning('TabsNotifier._openPackageFromBytes: md not UTF-8', e);
+      return OpenResult.unreadable;
+    }
+    final gated = _gateAndParseContent(
+      raw,
+      sourceName: '$name → ${mdEntry.name}',
+    );
+    var deck = gated.deck;
+    if (deck == null) return gated.failure;
+
+    deck = _attachPackageAssets(deck, entries, mdEntry.name);
+    deck = _attachPackageSidecars(deck, entries, mdEntry.name);
+    if (!mounted) return OpenResult.unreadable;
+    _placeDeckInTab(deck);
+    return OpenResult.opened;
+  }
+
+  /// Zet de afbeeldings-leden van een pakket in de [WebAssetStore] en
+  /// herschrijf de slidepaden die ernaar verwijzen naar hun mem:-pad.
+  /// Verwijzingen zijn relatief aan de hoofd-markdown ([mdName]). Alleen
+  /// leden die de afbeeldingsvalidatie (magic bytes + cap) doorstaan doen mee.
+  Deck _attachPackageAssets(
+    Deck deck,
+    List<PackageEntry> entries,
+    String mdName,
+  ) {
+    final mdDir = p.posix.dirname(mdName);
+    final byName = {
+      for (final e in entries) p.posix.normalize(e.name): e.bytes,
+    };
+    final memFor = <String, String>{};
+    String? memPath(String ref) {
+      if (ref.trim().isEmpty || WebAssetStore.isMemPath(ref)) return null;
+      final resolved = p.posix.normalize(
+        mdDir == '.' ? ref : p.posix.join(mdDir, ref),
+      );
+      if (resolved.startsWith('..')) return null; // buiten het pakket
+      final cached = memFor[resolved];
+      if (cached != null) return cached;
+      final bytes = byName[resolved];
+      if (bytes == null ||
+          bytes.isEmpty ||
+          bytes.length > ImageService.maxImageBytes ||
+          !ImageService.looksLikeImage(bytes)) {
+        return null;
+      }
+      final mem = WebAssetStore.put(bytes, name: p.posix.basename(resolved));
+      memFor[resolved] = mem;
+      return mem;
+    }
+
+    final slides = [
+      for (final s in deck.slides)
+        s.copyWith(
+          imagePath: memPath(s.imagePath) ?? s.imagePath,
+          imagePath2: memPath(s.imagePath2) ?? s.imagePath2,
+        ),
+    ];
+    return deck.copyWith(slides: slides);
+  }
+
+  /// Herstel de sidecar-lagen (ink-annotaties en sprekersnotities) uit de
+  /// pakket-leden naast de hoofd-markdown — dezelfde bestandsnamen als de
+  /// schijfvariant in [FileService.openDeckDetailed].
+  Deck _attachPackageSidecars(
+    Deck deck,
+    List<PackageEntry> entries,
+    String mdName,
+  ) {
+    final base = mdName.replaceAll(RegExp(r'\.md$', caseSensitive: false), '');
+    String? textFor(String memberName) {
+      for (final e in entries) {
+        if (p.posix.normalize(e.name) == p.posix.normalize(memberName)) {
+          try {
+            return utf8.decode(e.bytes);
+          } on FormatException catch (err) {
+            logWarning(
+              'TabsNotifier._attachPackageSidecars: sidecar not UTF-8',
+              err,
+            );
+            return null;
+          }
+        }
+      }
+      return null;
+    }
+
+    var result = deck;
+    final ink = textFor('$base.ink.json');
+    if (ink != null) {
+      try {
+        final map = AnnotationCodec.decode(ink, result.slides);
+        if (map.isNotEmpty) result = result.copyWith(annotations: map);
+      } catch (e) {
+        // Een kapotte sidecar mag het openen nooit blokkeren.
+        logWarning('TabsNotifier._attachPackageSidecars: ink unreadable', e);
+      }
+    }
+    final notes = textFor('$base.user-notes.json');
+    if (notes != null) {
+      try {
+        final map = UserNotesCodec.decode(notes, result.slides);
+        if (map.isNotEmpty) result = result.copyWith(userNotes: map);
+      } catch (e) {
+        logWarning('TabsNotifier._attachPackageSidecars: notes unreadable', e);
+      }
+    }
+    return result;
+  }
+
+  /// Gedeelde poort van elk bytes-open: veiligheidsscan (met alarm bij
+  /// treffers, dan [OpenResult.blocked]) en daarna de contentpoort van
+  /// [FileService]. Bij succes draagt het record het deck; anders het
+  /// [OpenResult] dat de UI moet melden.
+  ({Deck? deck, OpenResult failure}) _gateAndParseContent(
+    String raw, {
+    required String sourceName,
+  }) {
     final findings = MarkdownSafetyScanner.scan(raw);
     if (findings.isNotEmpty) {
       if (mounted) {
         _ref.read(importSecurityAlarmProvider.notifier).state =
-            ImportSecurityAlarm(path: name, findings: findings);
+            ImportSecurityAlarm(path: sourceName, findings: findings);
       }
-      return OpenResult.blocked;
+      return (deck: null, failure: OpenResult.blocked);
     }
-    // Zonder projectPath of sidecar-hydratatie: achter bytes zit geen map met
-    // assets, en op web is het bestandssysteem sowieso onbereikbaar —
-    // afbeeldingen tonen als placeholder.
-    final outcome = _file.openDeckFromContent(raw, sourceName: name);
+    final outcome = _file.openDeckFromContent(raw, sourceName: sourceName);
     final deck = outcome.deck;
     if (deck == null) {
-      return outcome.failure == OpenFailure.notPresentation
-          ? OpenResult.notAPresentation
-          : OpenResult.unreadable;
+      return (
+        deck: null,
+        failure: outcome.failure == OpenFailure.notPresentation
+            ? OpenResult.notAPresentation
+            : OpenResult.unreadable,
+      );
     }
-    if (!mounted) return OpenResult.unreadable;
-    _placeDeckInTab(deck);
-    return OpenResult.opened;
+    return (deck: deck, failure: OpenResult.opened);
   }
 
   /// Remove the unique folder an import extracted/downloaded into when the deck
@@ -457,11 +596,13 @@ class TabsNotifier extends StateNotifier<TabsState> {
 
   /// Web-variant van [importFromUrl]: haalt de presentatie in de browser op
   /// (CORS en de pagina-CSP bewaken het verkeer) en opent haar volledig in
-  /// het geheugen — op web is er geen bestandssysteem om in uit te pakken.
-  /// Pakketten (.ocideck/zip) kunnen daar dus nog niet worden geopend en
-  /// krijgen hun eigen [OpenResult.packageUnsupported].
+  /// het geheugen — een `.ocideck`/zip-pakket wordt daarbij in het geheugen
+  /// uitgepakt, met dezelfde omvangslimiet als de desktop-import.
   Future<OpenResult> importFromUrlWeb(String url) async {
-    final bytes = await _file.fetchUrlBytes(url);
+    final bytes = await _file.fetchUrlBytes(
+      url,
+      maxBytes: FileService.maxPackageBytes,
+    );
     if (bytes == null || !mounted) return OpenResult.unreadable;
     // Zelfde kern als de web-picker en drag-drop: [openDeckFromBytes].
     return openDeckFromBytes(bytes, url);

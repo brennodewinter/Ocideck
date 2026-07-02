@@ -284,22 +284,20 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     '.tif',
   };
 
-  /// Drag-drop op web: er is geen pad, alleen inhoud. Een `.md` wordt via het
-  /// in-memory pad geopend (zelfde security-gate); afbeeldingen gaan na
-  /// dezelfde validatie als pickImage de WebAssetStore in en worden slides
-  /// met een mem:-pad. Pakketten kunnen zonder bestandssysteem (nog) niet en
-  /// zeggen dat eerlijk; overige typen worden — net als op desktop — genegeerd.
+  /// Drag-drop op web: er is geen pad, alleen inhoud. Een `.md` of
+  /// `.ocideck`-pakket wordt via het in-memory pad geopend (zelfde
+  /// security-gate; pakketten worden in het geheugen uitgepakt);
+  /// afbeeldingen gaan na dezelfde validatie als pickImage de WebAssetStore
+  /// in en worden slides met een mem:-pad. Overige typen worden — net als op
+  /// desktop — genegeerd.
   Future<void> _onWebFilesDropped(List<DropItem> files) async {
     final tabs = ref.read(tabsProvider.notifier);
     final images = <String>[];
-    var packages = 0;
     for (final file in files) {
       final ext = p.extension(file.name.toLowerCase());
-      if (ext == '.md') {
+      if (ext == '.md' || ext == '.ocideck' || ext == '.zip') {
         final bytes = await file.readAsBytes();
         await tabs.openDeckFromBytes(bytes, file.name);
-      } else if (ext == '.ocideck' || ext == '.zip') {
-        packages++;
       } else if (_imageExtensions.contains(ext)) {
         final bytes = await file.readAsBytes();
         if (bytes.isEmpty ||
@@ -316,13 +314,6 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       }
     }
     if (images.isNotEmpty) _addImagesToActiveDeck(images);
-    if (packages > 0 && mounted) {
-      _reportOpenFailure(
-        ScaffoldMessenger.of(context),
-        context.l10n,
-        OpenResult.packageUnsupported,
-      );
-    }
   }
 
   /// Verwerk gesleepte bestanden: presentaties/pakketten openen, afbeeldingen
