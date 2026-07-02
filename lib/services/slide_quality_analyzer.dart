@@ -36,6 +36,18 @@ double memoizedFitScale(Slide slide, String font, double Function() compute) {
   return scale;
 }
 
+/// Cached per-slide issue list, same weak-keyed identity idea as
+/// [_fitScaleCache] but for de volledige per-slide analyse. Die omvat naast de
+/// (al gememoiseerde) fit-scale ook `File.existsSync` voor media,
+/// `ChartSpec.parse` en regex-scans over bullets — werk dat anders bij elke
+/// toetsaanslag voor élke slide opnieuw draait. Een edit vervangt alleen het
+/// object van de bewerkte slide, dus ongewijzigde slides hiten deze cache.
+/// Kanttekening: of een mediabestand bestaat wordt voor een slide dus pas
+/// opnieuw op schijf gecheckt wanneer die slide (of thema/instelling) wijzigt.
+final Expando<_SlideIssuesMemo> _slideIssuesCache = Expando<_SlideIssuesMemo>(
+  'slideQualityIssues',
+);
+
 /// Maximum combined quote + author length before a density warning.
 const int kQuoteDensityCharThreshold = 750;
 
@@ -97,13 +109,57 @@ class SlideQualityAnalyzer {
     for (var i = 0; i < slides.length; i++) {
       final slide = slides[i];
       if (slide.skipped) continue;
-      _checkMediaDescriptions(slide, i, issues);
-      _checkSlideContrast(slide, i, theme, issues);
-      _checkTextDensity(slide, i, font, issues);
-      _checkMissingMedia(slide, i, projectPath, issues);
-      _checkQuestionAnswerable(slide, i, issues);
+      issues.addAll(_memoizedSlideIssues(slide, i, theme, font, projectPath));
     }
     return SlideQualityResult(issues);
+  }
+
+  List<SlideQualityIssue> _memoizedSlideIssues(
+    Slide slide,
+    int index,
+    ThemeProfile theme,
+    String font,
+    String? projectPath,
+  ) {
+    final memo = _slideIssuesCache[slide];
+    if (memo != null &&
+        identical(memo.theme, theme) &&
+        memo.font == font &&
+        memo.projectPath == projectPath &&
+        memo.minContrastRatio == minContrastRatio) {
+      if (memo.index == index) return memo.issues;
+      // Slide is verschoven (invoegen/verwijderen elders): alleen de index in
+      // de issues herschrijven, de analyse zelf blijft geldig.
+      final reindexed = [
+        for (final issue in memo.issues)
+          SlideQualityIssue(
+            slideIndex: index,
+            kind: issue.kind,
+            category: issue.category,
+            severity: issue.severity,
+            field: issue.field,
+            args: issue.args,
+          ),
+      ];
+      _slideIssuesCache[slide] = memo.withIndex(index, reindexed);
+      return reindexed;
+    }
+    final issues = <SlideQualityIssue>[];
+    _checkMediaDescriptions(slide, index, issues);
+    _checkSlideContrast(slide, index, theme, issues);
+    _checkTextDensity(slide, index, font, issues);
+    _checkMissingMedia(slide, index, projectPath, issues);
+    // Hangt alleen van de slide-inhoud af, dus veilig per slide te cachen.
+    _checkQuestionAnswerable(slide, index, issues);
+    _slideIssuesCache[slide] = _SlideIssuesMemo(
+      theme: theme,
+      font: font,
+      projectPath: projectPath,
+      minContrastRatio: minContrastRatio,
+      index: index,
+      issues: issues,
+    );
+    return issues;
   }
 
   void _checkThemeContrast(ThemeProfile theme, List<SlideQualityIssue> issues) {
@@ -969,4 +1025,35 @@ class _FitMemo {
   final double scale;
 
   const _FitMemo(this.font, this.scale);
+}
+
+/// Gememoiseerde per-slide issues plus alles waarvan de analyse afhangt, zodat
+/// een gewijzigd thema, lettertype, projectpad of contrastdrempel de cache
+/// laat missen. [theme] wordt op identiteit vergeleken (immutable model).
+class _SlideIssuesMemo {
+  final ThemeProfile theme;
+  final String font;
+  final String? projectPath;
+  final double minContrastRatio;
+  final int index;
+  final List<SlideQualityIssue> issues;
+
+  const _SlideIssuesMemo({
+    required this.theme,
+    required this.font,
+    required this.projectPath,
+    required this.minContrastRatio,
+    required this.index,
+    required this.issues,
+  });
+
+  _SlideIssuesMemo withIndex(int newIndex, List<SlideQualityIssue> reindexed) =>
+      _SlideIssuesMemo(
+        theme: theme,
+        font: font,
+        projectPath: projectPath,
+        minContrastRatio: minContrastRatio,
+        index: newIndex,
+        issues: reindexed,
+      );
 }

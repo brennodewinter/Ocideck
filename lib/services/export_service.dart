@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:isolate';
 import 'dart:typed_data';
 import 'dart:ui' show Locale;
 
@@ -171,11 +172,13 @@ class ExportService {
             compress: compress,
           );
         case ExportFormat.pptx:
-          bytes = _buildPptx(
-            images,
-            metadata: docMeta,
-            fallbackTitle: fallbackTitle,
-            notes: notes,
+          bytes = await Isolate.run(
+            () => _buildPptx(
+              images,
+              metadata: docMeta,
+              fallbackTitle: fallbackTitle,
+              notes: notes,
+            ),
           );
         case ExportFormat.html:
           bytes = Uint8List.fromList(
@@ -203,40 +206,44 @@ class ExportService {
 
   // ── PDF ───────────────────────────────────────────────────────────────────
 
-  Future<Uint8List> _buildPdf(
+  // JPEG-hercompressie en PDF-assemblage zijn CPU-zwaar (honderden ms per
+  // slide); in een eigen isolate blijft de UI responsief tijdens export.
+  static Future<Uint8List> _buildPdf(
     List<Uint8List> images, {
     required ExportDocumentMetadata metadata,
     required String fallbackTitle,
     bool compress = false,
-  }) async {
-    final doc = pw.Document(
-      title: metadata.displayTitle(fallbackTitle),
-      author: metadata.documentAuthor,
-      subject: metadata.subject(fallbackTitle),
-      keywords: metadata.exportKeywords(),
-      creator: metadata.creator,
-      producer: metadata.producer,
-    );
-    // Page size in points; only the ratio matters for a full-bleed image.
-    const format = PdfPageFormat(1280, 720, marginAll: 0);
-    for (final png in images) {
-      // MemoryImage auto-detects PNG vs JPEG from the byte header, so a
-      // compressed (JPEG) slide embeds just like the lossless one.
-      final image = pw.MemoryImage(compress ? _toJpeg(png) : png);
-      doc.addPage(
-        pw.Page(
-          pageFormat: format,
-          build: (_) => pw.Image(image, fit: pw.BoxFit.fill),
-        ),
+  }) {
+    return Isolate.run(() async {
+      final doc = pw.Document(
+        title: metadata.displayTitle(fallbackTitle),
+        author: metadata.documentAuthor,
+        subject: metadata.subject(fallbackTitle),
+        keywords: metadata.exportKeywords(),
+        creator: metadata.creator,
+        producer: metadata.producer,
       );
-    }
-    return doc.save();
+      // Page size in points; only the ratio matters for a full-bleed image.
+      const format = PdfPageFormat(1280, 720, marginAll: 0);
+      for (final png in images) {
+        // MemoryImage auto-detects PNG vs JPEG from the byte header, so a
+        // compressed (JPEG) slide embeds just like the lossless one.
+        final image = pw.MemoryImage(compress ? _toJpeg(png) : png);
+        doc.addPage(
+          pw.Page(
+            pageFormat: format,
+            build: (_) => pw.Image(image, fit: pw.BoxFit.fill),
+          ),
+        );
+      }
+      return doc.save();
+    });
   }
 
   /// Downscale a rendered slide PNG to [_compressedMaxWidth] and re-encode it as
   /// JPEG at [_compressedJpegQuality]. Slides are full-bleed (no transparency),
   /// so dropping the alpha channel is safe.
-  Uint8List _toJpeg(Uint8List png) {
+  static Uint8List _toJpeg(Uint8List png) {
     final decoded = img.decodePng(png);
     if (decoded == null) return png; // Unexpected; keep the original bytes.
     final resized = decoded.width > _compressedMaxWidth
@@ -251,7 +258,7 @@ class ExportService {
 
   // ── PPTX (Office Open XML) ─────────────────────────────────────────────────
 
-  Uint8List _buildPptx(
+  static Uint8List _buildPptx(
     List<Uint8List> images, {
     required ExportDocumentMetadata metadata,
     required String fallbackTitle,
@@ -332,7 +339,7 @@ class ExportService {
 
   /// A notesSlide whose body placeholder carries the speaker notes. Newlines in
   /// [note] become separate paragraphs.
-  String _notesSlideXml(String note) {
+  static String _notesSlideXml(String note) {
     final paras = StringBuffer();
     for (final line in note.split('\n')) {
       paras.write('<a:p><a:r><a:t>${_xmlEscape(line)}</a:t></a:r></a:p>');
@@ -357,7 +364,7 @@ class ExportService {
         '</p:notes>';
   }
 
-  String _notesSlideRels(int n) {
+  static String _notesSlideRels(int n) {
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
         '<Relationship Id="rId1" '
@@ -369,7 +376,7 @@ class ExportService {
         '</Relationships>';
   }
 
-  String _notesMaster() {
+  static String _notesMaster() {
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<p:notesMaster xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
         'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" '
@@ -385,7 +392,7 @@ class ExportService {
         '</p:notesMaster>';
   }
 
-  String _notesMasterRels() {
+  static String _notesMasterRels() {
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
         '<Relationship Id="rId1" '
@@ -396,7 +403,7 @@ class ExportService {
 
   static List<int> utf8Bytes(String s) => utf8.encode(s);
 
-  String _contentTypes(int count, Iterable<int> noteIndices) {
+  static String _contentTypes(int count, Iterable<int> noteIndices) {
     final overrides = StringBuffer();
     for (var i = 1; i <= count; i++) {
       overrides.write(
@@ -433,7 +440,7 @@ class ExportService {
         '</Types>';
   }
 
-  String _rootRels() {
+  static String _rootRels() {
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
         '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="ppt/presentation.xml"/>'
@@ -442,7 +449,7 @@ class ExportService {
         '</Relationships>';
   }
 
-  String _coreProps(
+  static String _coreProps(
     ExportDocumentMetadata metadata, {
     required String fallbackTitle,
   }) {
@@ -473,7 +480,7 @@ class ExportService {
         '</cp:coreProperties>';
   }
 
-  String _appProps(ExportDocumentMetadata metadata) {
+  static String _appProps(ExportDocumentMetadata metadata) {
     final company = metadata.organization.trim();
     final companyXml = company.isEmpty
         ? ''
@@ -486,7 +493,7 @@ class ExportService {
         '</Properties>';
   }
 
-  String _presentationXml(int count, bool hasNotes) {
+  static String _presentationXml(int count, bool hasNotes) {
     final sldIds = StringBuffer();
     for (var i = 0; i < count; i++) {
       // Slide relationship ids start at rId2 (rId1 = master).
@@ -510,7 +517,7 @@ class ExportService {
         '</p:presentation>';
   }
 
-  String _presentationRels(int count, bool hasNotes) {
+  static String _presentationRels(int count, bool hasNotes) {
     final rels = StringBuffer();
     rels.write(
       '<Relationship Id="rId1" '
@@ -551,14 +558,14 @@ class ExportService {
         '</Relationships>';
   }
 
-  String _presProps() {
+  static String _presProps() {
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<p:presentationPr xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
         'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" '
         'xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main"/>';
   }
 
-  String _slideMaster() {
+  static String _slideMaster() {
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<p:sldMaster xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
         'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" '
@@ -575,7 +582,7 @@ class ExportService {
         '</p:sldMaster>';
   }
 
-  String _slideMasterRels() {
+  static String _slideMasterRels() {
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
         '<Relationship Id="rId1" '
@@ -587,7 +594,7 @@ class ExportService {
         '</Relationships>';
   }
 
-  String _slideLayout() {
+  static String _slideLayout() {
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<p:sldLayout xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
         'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" '
@@ -598,7 +605,7 @@ class ExportService {
         '</p:sldLayout>';
   }
 
-  String _slideLayoutRels() {
+  static String _slideLayoutRels() {
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
         '<Relationship Id="rId1" '
@@ -607,7 +614,7 @@ class ExportService {
         '</Relationships>';
   }
 
-  String _slideXml() {
+  static String _slideXml() {
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<p:sld xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
         'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" '
@@ -629,7 +636,7 @@ class ExportService {
         '</p:sld>';
   }
 
-  String _slideRels(int n, bool hasNote) {
+  static String _slideRels(int n, bool hasNote) {
     final notesRel = hasNote
         ? '<Relationship Id="rId3" '
               'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide" '
@@ -647,7 +654,7 @@ class ExportService {
         '</Relationships>';
   }
 
-  String _emptySpTree() {
+  static String _emptySpTree() {
     return '<p:spTree>'
         '<p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr>'
         '<p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/>'
@@ -655,7 +662,7 @@ class ExportService {
         '</p:spTree>';
   }
 
-  String _theme1() {
+  static String _theme1() {
     return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<a:theme xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" name="Office">'
         '<a:themeElements>'

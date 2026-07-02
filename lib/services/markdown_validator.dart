@@ -7,6 +7,30 @@ import '../utils/log.dart';
 
 /// Validates deck markdown against what [MarkdownService] can parse reliably.
 class MarkdownValidator {
+  // Hoisted regexes: de validator draait per validatiepass over elke regel van
+  // elk slide-blok; inline `RegExp(...)` hercompileerde dezelfde patronen
+  // honderden keren per pass.
+  static final _reSlideDivider = RegExp(r'\n---\n');
+  static final _reClassLikeComment = RegExp(r'<!--\s*([^_][^>]*?)-->');
+  static final _reTlpComment = RegExp(r'^tlp:\s*\S');
+  static final _reAdvanceComment = RegExp(r'^advance:\s*[\d.]+');
+  static final _reFence = RegExp(r'^\s*```');
+  static final _reClassDirective = RegExp(r'<!--\s*_class:\s*([^>]+?)\s*-->');
+  static final _reClassOpen = RegExp(r'<!--\s*_class:');
+  static final _reWhitespace = RegExp(r'\s+');
+  static final _reUnclosedImage = RegExp(r'!\[[^\]]*\]\([^)]*$');
+  static final _reVideoSrc = RegExp(r'src="([^"]+)"');
+  static final _reChartFenceLoose = RegExp(r'^\s*```chart\s*$');
+  static final _reChartFence = RegExp(r'^```chart\s*$');
+  static final _reCockpitFenceLoose = RegExp(r'^\s*```cockpit\s*$');
+  static final _reCockpitFence = RegExp(r'^```cockpit\s*$');
+  static final _reFenceClose = RegExp(r'^```\s*$');
+  static final _reLeadingPipe = RegExp(r'^\|');
+  static final _reTrailingPipe = RegExp(r'\|$');
+  static final _reSeparatorCell = RegExp(r'^:?-+:?$');
+  static final _reDivOpen = RegExp(r'<div\b');
+  static final _reDivClose = RegExp(r'</div>');
+
   static const _knownClassTokens = {
     'title',
     'section',
@@ -62,7 +86,7 @@ class MarkdownValidator {
               .length
         : 1;
 
-    final blocks = body.split(RegExp(r'\n---\n'));
+    final blocks = body.split(_reSlideDivider);
     if (blocks.every((block) => block.trim().isEmpty)) {
       issues.add(
         MarkdownValidationIssue(
@@ -192,14 +216,14 @@ class MarkdownValidator {
         );
       }
 
-      final classLike = RegExp(r'<!--\s*([^_][^>]*?)-->').firstMatch(line);
+      final classLike = _reClassLikeComment.firstMatch(line);
       if (classLike != null &&
           !line.contains('_class:') &&
           !line.contains('ocideck_') &&
           !line.contains('_style:') &&
           classLike.group(1)?.trim() != 'skip' &&
-          !RegExp(r'^tlp:\s*\S').hasMatch(classLike.group(1)!.trim()) &&
-          !RegExp(r'^advance:\s*[\d.]+').hasMatch(classLike.group(1)!.trim())) {
+          !_reTlpComment.hasMatch(classLike.group(1)!.trim()) &&
+          !_reAdvanceComment.hasMatch(classLike.group(1)!.trim())) {
         issues.add(
           MarkdownValidationIssue(
             line: i + 1,
@@ -220,7 +244,7 @@ class MarkdownValidator {
     var fenceCount = 0;
     int? firstFenceLine;
     for (var i = 0; i < lines.length; i++) {
-      if (RegExp(r'^\s*```').hasMatch(lines[i])) {
+      if (_reFence.hasMatch(lines[i])) {
         fenceCount++;
         firstFenceLine ??= lineOffset + i + 1;
       }
@@ -245,11 +269,9 @@ class MarkdownValidator {
     final blockLines = block.split('\n');
     int lineNo(int index) => startLine + index;
 
-    final classMatch = RegExp(
-      r'<!--\s*_class:\s*([^>]+?)\s*-->',
-    ).firstMatch(block);
+    final classMatch = _reClassDirective.firstMatch(block);
     if (classMatch == null &&
-        RegExp(r'<!--\s*_class:').hasMatch(block) &&
+        _reClassOpen.hasMatch(block) &&
         classMatch == null) {
       final badLine = blockLines.indexWhere(
         (line) => line.contains('<!--') && line.contains('_class:'),
@@ -268,7 +290,7 @@ class MarkdownValidator {
 
     final cssClass = classMatch?.group(1)?.trim() ?? '';
     final classTokens = cssClass
-        .split(RegExp(r'\s+'))
+        .split(_reWhitespace)
         .where((token) => token.isNotEmpty)
         .toList();
 
@@ -398,7 +420,7 @@ class MarkdownValidator {
         }
       }
 
-      if (RegExp(r'!\[[^\]]*\]\([^)]*$').hasMatch(trimmed)) {
+      if (_reUnclosedImage.hasMatch(trimmed)) {
         issues.add(
           MarkdownValidationIssue(
             line: lineNo(i),
@@ -419,7 +441,7 @@ class MarkdownValidator {
           ),
         );
       } else if (trimmed.startsWith('<video') &&
-          RegExp(r'src="([^"]+)"').firstMatch(trimmed) == null) {
+          _reVideoSrc.firstMatch(trimmed) == null) {
         issues.add(
           MarkdownValidationIssue(
             line: lineNo(i),
@@ -456,12 +478,10 @@ class MarkdownValidator {
     int Function(int) lineNo,
     List<MarkdownValidationIssue> issues,
   ) {
-    final fences = blockLines
-        .where((line) => RegExp(r'^\s*```').hasMatch(line))
-        .toList();
+    final fences = blockLines.where((line) => _reFence.hasMatch(line)).toList();
     if (fences.length < 2) {
       final firstFence = blockLines.indexWhere(
-        (line) => RegExp(r'^\s*```').hasMatch(line),
+        (line) => _reFence.hasMatch(line),
       );
       issues.add(
         MarkdownValidationIssue(
@@ -481,7 +501,7 @@ class MarkdownValidator {
     List<MarkdownValidationIssue> issues,
   ) {
     final openingIndex = blockLines.indexWhere(
-      (line) => RegExp(r'^\s*```chart\s*$').hasMatch(line.trim()),
+      (line) => _reChartFenceLoose.hasMatch(line.trim()),
     );
     if (openingIndex < 0) {
       issues.add(
@@ -500,11 +520,11 @@ class MarkdownValidator {
     var closingIndex = -1;
     for (var i = 0; i < blockLines.length; i++) {
       final trimmed = blockLines[i].trim();
-      if (RegExp(r'^```chart\s*$').hasMatch(trimmed)) {
+      if (_reChartFence.hasMatch(trimmed)) {
         inFence = true;
         continue;
       }
-      if (inFence && RegExp(r'^```\s*$').hasMatch(trimmed)) {
+      if (inFence && _reFenceClose.hasMatch(trimmed)) {
         closingIndex = i;
         break;
       }
@@ -565,7 +585,7 @@ class MarkdownValidator {
     List<MarkdownValidationIssue> issues,
   ) {
     final openingIndex = blockLines.indexWhere(
-      (line) => RegExp(r'^\s*```cockpit\s*$').hasMatch(line.trim()),
+      (line) => _reCockpitFenceLoose.hasMatch(line.trim()),
     );
     if (openingIndex < 0) {
       issues.add(
@@ -584,11 +604,11 @@ class MarkdownValidator {
     var closingIndex = -1;
     for (var i = 0; i < blockLines.length; i++) {
       final trimmed = blockLines[i].trim();
-      if (RegExp(r'^```cockpit\s*$').hasMatch(trimmed)) {
+      if (_reCockpitFence.hasMatch(trimmed)) {
         inFence = true;
         continue;
       }
-      if (inFence && RegExp(r'^```\s*$').hasMatch(trimmed)) {
+      if (inFence && _reFenceClose.hasMatch(trimmed)) {
         closingIndex = i;
         break;
       }
@@ -764,12 +784,12 @@ class MarkdownValidator {
     final separatorIndex = tableLineIndexes[1];
     final cells = blockLines[separatorIndex]
         .trim()
-        .replaceFirst(RegExp(r'^\|'), '')
-        .replaceFirst(RegExp(r'\|$'), '')
+        .replaceFirst(_reLeadingPipe, '')
+        .replaceFirst(_reTrailingPipe, '')
         .split('|')
         .map((cell) => cell.trim())
         .toList();
-    if (!cells.every((cell) => RegExp(r'^:?-+:?$').hasMatch(cell))) {
+    if (!cells.every((cell) => _reSeparatorCell.hasMatch(cell))) {
       issues.add(
         MarkdownValidationIssue(
           line: lineNo(separatorIndex),
@@ -791,8 +811,8 @@ class MarkdownValidator {
     int? firstOpenLine;
     for (var i = 0; i < blockLines.length; i++) {
       final line = blockLines[i];
-      final opens = RegExp(r'<div\b').allMatches(line).length;
-      final closes = RegExp(r'</div>').allMatches(line).length;
+      final opens = _reDivOpen.allMatches(line).length;
+      final closes = _reDivClose.allMatches(line).length;
       if (opens > 0 && firstOpenLine == null) firstOpenLine = i;
       depth += opens - closes;
       if (depth < 0) {

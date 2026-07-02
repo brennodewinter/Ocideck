@@ -5,6 +5,12 @@ part of 'markdown_service.dart';
 // private functions they share the library's imports and are called by bare
 // name from the service's generate/parse methods.
 
+// Hoisted hot-path regexes (zie markdown_service_parse.dart); [_attrRegexes]
+// cachet de per-attribuutnaam gebouwde patronen van [_parseEmbedLine].
+final _reSrcAttr = RegExp(r'src="([^"]+)"');
+final _reTrailingZeros = RegExp(r'0+$');
+final _attrRegexes = <String, RegExp>{};
+
 void _writeList(StringBuffer buf, List<String> items, ListStyle style) {
   final counters = <int>[];
   for (final item in items) {
@@ -302,7 +308,7 @@ void _writeVideo(StringBuffer buf, Slide slide, {required bool forExport}) {
 ({String path, int startMs, int endMs, bool autoplay}) _parseVideoLine(
   String t,
 ) {
-  final m = RegExp(r'src="([^"]+)"').firstMatch(t);
+  final m = _reSrcAttr.firstMatch(t);
   var src = _unescapeAttr(m?.group(1) ?? '');
   var startMs = 0;
   var endMs = 0;
@@ -326,8 +332,13 @@ void _writeVideo(StringBuffer buf, Slide slide, {required bool forExport}) {
 /// trim-grenzen. `data-src` (de originele URL) gaat vóór `src`; `data-start`/
 /// `data-end` (seconden) bevatten de knip-grenzen.
 ({String path, int startMs, int endMs}) _parseEmbedLine(String t) {
-  String attr(String name) =>
-      _unescapeAttr(RegExp('$name="([^"]*)"').firstMatch(t)?.group(1) ?? '');
+  String attr(String name) => _unescapeAttr(
+    _attrRegexes
+            .putIfAbsent(name, () => RegExp('$name="([^"]*)"'))
+            .firstMatch(t)
+            ?.group(1) ??
+        '',
+  );
   final dataSrc = attr('data-src');
   final src = dataSrc.isNotEmpty ? dataSrc : attr('src');
   return (
@@ -351,7 +362,7 @@ String _unescapeAttr(String s) => s
 /// element is written by a common block), so they share this instead of
 /// repeating the regex.
 (String, bool) _parseAudioAttrs(String t) {
-  final m = RegExp(r'src="([^"]+)"').firstMatch(t);
+  final m = _reSrcAttr.firstMatch(t);
   return (m?.group(1) ?? '', t.contains('autoplay'));
 }
 
@@ -367,7 +378,7 @@ int _secToMs(String s) {
 String _msToSec(int ms) {
   final seconds = ms / 1000;
   if (seconds == seconds.roundToDouble()) return seconds.toStringAsFixed(0);
-  return seconds.toStringAsFixed(3).replaceFirst(RegExp(r'0+$'), '');
+  return seconds.toStringAsFixed(3).replaceFirst(_reTrailingZeros, '');
 }
 
 /// Captions live in a `<div class="image-caption">`; a split-image slide puts

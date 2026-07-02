@@ -19,14 +19,22 @@ class _CodePreview extends StatelessWidget {
     required this.profile,
   });
 
+  /// Meetresultaten per (tekst, stijl): de meting draait in de LayoutBuilder
+  /// en dus bij elke layout-pass; TextPainter.layout over een heel codeblok
+  /// kost al snel milliseconden per frame bij resizen of scrollen.
+  static final _measureCache = LruCache<String, Size>(64);
+
   /// Natural (unwrapped) size of [text] in [style]: width is the longest line,
   /// height the full block. Used to scale code to the available space.
   static Size _measureMono(String text, TextStyle style) {
+    final key = '${style.fontSize}|${style.fontFamily}|$text';
+    final cached = _measureCache[key];
+    if (cached != null) return cached;
     final painter = TextPainter(
       text: TextSpan(text: text.isEmpty ? ' ' : text, style: style),
       textDirection: TextDirection.ltr,
     )..layout();
-    return painter.size;
+    return _measureCache[key] = painter.size;
   }
 
   @override

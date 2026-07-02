@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
+import '../models/deck.dart';
 import '../models/webdav_settings.dart';
 import '../services/file_service.dart';
 import '../services/markdown_safety.dart';
@@ -120,6 +121,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
   final SettingsNotifier _settings;
   final RecoveryService _recovery;
   final Map<int, StreamSubscription<DeckState>> _subs = {};
+
+  /// Laatst ge-autosavede deck per tab (op identiteit): het deck is immutable,
+  /// dus zolang het object hetzelfde is, is er niets gewijzigd en kan de tick
+  /// de volledige serialisatie + schrijfbeurt overslaan.
+  final Map<int, Deck> _lastAutosavedDeck = {};
   Timer? _autosaveTimer;
   int _nextId = 0;
 
@@ -158,6 +164,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// simply garbage-collected on close.
   void _disposeTab(TabInfo tab) {
     _subs.remove(tab.id)?.cancel();
+    _lastAutosavedDeck.remove(tab.id);
   }
 
   TabInfo _createTab() {
@@ -189,6 +196,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
       final st = tab.deckNotifier.currentState;
       if (st.isOpen && st.isDirty) {
         final deck = st.deck!;
+        if (identical(_lastAutosavedDeck[tab.id], deck)) continue;
         _recovery.save(
           RecoverySnapshot(
             id: tab.recoveryId,
@@ -199,6 +207,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
             userNotes: UserNotesCodec.encode(deck.slides, deck.userNotes),
           ),
         );
+        _lastAutosavedDeck[tab.id] = deck;
       }
     }
   }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:isolate';
 import 'dart:typed_data';
 import 'package:archive/archive.dart';
 import 'package:file_picker/file_picker.dart';
@@ -629,8 +630,12 @@ class FileService {
   /// Bouw de bytes van een zelfstandig `.ocideck`-pakket (zie [exportPackage]),
   /// zonder ze weg te schrijven. Gebruikt om hetzelfde pakket te uploaden naar
   /// een WebDAV-bron in plaats van naar schijf.
-  Future<List<int>> buildPackageBytes(Deck deck) async =>
-      ZipEncoder().encodeBytes(await _buildPackageArchive(deck));
+  Future<List<int>> buildPackageBytes(Deck deck) async {
+    final archive = await _buildPackageArchive(deck);
+    // Zip-compressie is CPU-zwaar (media-assets kunnen honderden MB zijn);
+    // in een eigen isolate blijft de UI responsief tijdens het pakken.
+    return Isolate.run(() => ZipEncoder().encodeBytes(archive));
+  }
 
   /// Pakket-leden (pad → bytes) zonder ze te zippen, zodat elk bestand los naar
   /// een WebDAV-map kan worden geüpload — een "platte" spiegel van het deck met
@@ -649,7 +654,7 @@ class FileService {
 
     /// Resolve [path] (relatief t.o.v. projectPath of absoluut), voeg het
     /// bestand toe onder `<subdir>/<bestandsnaam>` en geef dat pad terug.
-    String? addAsset(String path, String subdir) {
+    Future<String?> addAsset(String path, String subdir) async {
       if (path.trim().isEmpty) return null;
       final String abs;
       if (p.isAbsolute(path)) {
@@ -664,10 +669,10 @@ class FileService {
         abs = path;
       }
       final file = File(abs);
-      if (!file.existsSync()) return null;
+      if (!await file.exists()) return null;
       final rel = p.posix.join(subdir, p.basename(abs));
       if (!added.contains(rel)) {
-        final bytes = file.readAsBytesSync();
+        final bytes = await file.readAsBytes();
         archive.add(ArchiveFile(rel, bytes.length, bytes));
         added.add(rel);
       }
@@ -677,10 +682,10 @@ class FileService {
     final slides = [
       for (final s in deck.slides)
         s.copyWith(
-          imagePath: addAsset(s.imagePath, 'images') ?? s.imagePath,
-          imagePath2: addAsset(s.imagePath2, 'images') ?? s.imagePath2,
-          videoPath: addAsset(s.videoPath, 'media') ?? s.videoPath,
-          audioPath: addAsset(s.audioPath, 'media') ?? s.audioPath,
+          imagePath: await addAsset(s.imagePath, 'images') ?? s.imagePath,
+          imagePath2: await addAsset(s.imagePath2, 'images') ?? s.imagePath2,
+          videoPath: await addAsset(s.videoPath, 'media') ?? s.videoPath,
+          audioPath: await addAsset(s.audioPath, 'media') ?? s.audioPath,
         ),
     ];
 
@@ -688,10 +693,13 @@ class FileService {
     // the file along under data/ and rewrite the path to match.
     final packedSlides = [
       for (final s in slides)
-        if (s.type == SlideType.chart) _packChartSlide(s, addAsset) else s,
+        if (s.type == SlideType.chart)
+          await _packChartSlide(s, addAsset)
+        else
+          s,
     ];
 
-    final logoRel = addAsset(deck.themeProfile.logoPath ?? '', 'logos');
+    final logoRel = await addAsset(deck.themeProfile.logoPath ?? '', 'logos');
     final profile = logoRel != null
         ? deck.themeProfile.copyWith(logoPath: logoRel)
         : deck.themeProfile;

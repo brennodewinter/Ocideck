@@ -17,6 +17,11 @@ final _reNumberedMark = RegExp(r'^\d+[.)]$');
 final _reBgImage = RegExp(r'!\[bg');
 final _reBgImageUrl = RegExp(r'!\[bg[^\]]*\]\(([^)]+)\)');
 final _reBgImageSize = RegExp(r'!\[bg[^\]]*?(\d+)%[^\]]*\]');
+final _reSlideDivider = RegExp(r'\n---\n');
+final _reSeparatorCell = RegExp(r'^:?-+:?$');
+final _reClassDirective = RegExp(r'<!--\s*_class:\s*([^>]+?)\s*-->');
+final _reHtmlComment = RegExp(r'<!--([\s\S]*?)-->', multiLine: true);
+final _reImageWidthStyle = RegExp(r'--image-width:\s*(\d+)%');
 
 /// Mutable accumulator for [_MarkdownParse._parseBodyLines]: the per-line
 /// handlers fill these fields as they walk a slide block's body.
@@ -44,6 +49,11 @@ class _BodyParse {
   final richTextLines = <String>[];
   ListStyle listStyle;
   bool richTextHeaderPhase;
+
+  /// Of het blok de `split`-class draagt; één keer bepaald in
+  /// [_MarkdownParse._parseBodyLines] zodat de per-regel handlers niet elke
+  /// regel opnieuw de cssClass hoeven te splitsen.
+  bool isSplit = false;
 }
 
 extension _MarkdownParse on MarkdownService {
@@ -125,7 +135,7 @@ extension _MarkdownParse on MarkdownService {
       }
     }
 
-    final blocks = content.split(RegExp(r'\n---\n'));
+    final blocks = content.split(_reSlideDivider);
     final slides = <Slide>[];
     for (final block in blocks) {
       final slide = _parseBlock(block.trim());
@@ -206,7 +216,7 @@ extension _MarkdownParse on MarkdownService {
       final cells = _splitTableRow(line);
       // Skip the GFM separator row (e.g. | --- | :---: |).
       if (cells.isNotEmpty &&
-          cells.every((c) => RegExp(r'^:?-+:?$').hasMatch(c.trim()))) {
+          cells.every((c) => _reSeparatorCell.hasMatch(c.trim()))) {
         continue;
       }
       tableRows.add(cells);
@@ -333,9 +343,7 @@ extension _MarkdownParse on MarkdownService {
     String cssClass = '';
     String remaining = block;
 
-    final classMatch = RegExp(
-      r'<!--\s*_class:\s*([^>]+?)\s*-->',
-    ).firstMatch(block);
+    final classMatch = _reClassDirective.firstMatch(block);
     if (classMatch != null) {
       cssClass = classMatch.group(1) ?? '';
       remaining = block.replaceFirst(classMatch.group(0)!, '').trim();
@@ -361,74 +369,69 @@ extension _MarkdownParse on MarkdownService {
     // bulletsImage slides store their panel width in `<!-- _style:
     // --image-width: N%; -->`; capture it before the comment is stripped.
     int styleImageWidth = 0;
-    remaining = remaining.replaceAllMapped(
-      RegExp(r'<!--([\s\S]*?)-->', multiLine: true),
-      (m) {
-        final content = m.group(1)!.trim();
-        if (content.startsWith('advance:')) {
-          // Clamp fail-closed: double.tryParse accepts Infinity/NaN/overflow
-          // literals, and `(Infinity * 1000).round()` throws in the auto-advance
-          // timer. Mirror the presentationTargetSeconds clamp (0..86400s).
-          final d = double.tryParse(content.substring(8).trim()) ?? 0;
-          advanceDuration = (d.isFinite && d > 0) ? d.clamp(0, 86400) : 0;
-        } else if (content == 'skip') {
-          skipped = true;
-        } else if (content.startsWith('tlp:')) {
-          slideTlp = TlpLevelX.fromKey(content.substring(4));
-        } else if (content.startsWith('_style:')) {
-          final w = RegExp(r'--image-width:\s*(\d+)%').firstMatch(content);
-          if (w != null) styleImageWidth = int.tryParse(w.group(1)!) ?? 0;
-        } else if (content.startsWith('ocideck_two_bullets_left:')) {
-          bullets
-            ..clear()
-            ..addAll(_decodeBullets(content.substring(25)));
-        } else if (content.startsWith('ocideck_two_bullets_left_title:')) {
-          columnTitle1 = _decodeText(content.substring(31));
-        } else if (content.startsWith('ocideck_two_bullets_right_title:')) {
-          columnTitle2 = _decodeText(content.substring(32));
-        } else if (content.startsWith('ocideck_two_bullets_right:')) {
-          bullets2 = _decodeBullets(content.substring(26));
-        } else if (content.startsWith('ocideck_timeline_duration:')) {
-          final ms = int.tryParse(content.substring(26).trim());
-          if (ms != null) timelineAnimationMs = clampTimelineDuration(ms);
-        } else if (content.startsWith('ocideck_list_style:')) {
-          final name = content.substring(19).trim();
-          listStyle = ListStyle.values.firstWhere(
-            (style) => style.name == name,
-            orElse: () => ListStyle.bullets,
-          );
-        } else if (content.startsWith('ocideck_checklist_progress:')) {
-          showChecklistProgress =
-              content.substring('ocideck_checklist_progress:'.length).trim() ==
-              'true';
-        } else if (content.startsWith('ocideck_continue_numbering:')) {
-          continueNumbering =
-              content.substring('ocideck_continue_numbering:'.length).trim() ==
-              'true';
-        } else if (content.startsWith('ocideck_continue_split:')) {
-          continuesSplit =
-              content.substring('ocideck_continue_split:'.length).trim() ==
-              'true';
-        } else if (content.startsWith('ocideck_title_image_overlay:')) {
-          titleImageOverlay =
-              content.substring('ocideck_title_image_overlay:'.length).trim() !=
-              'false';
-        } else if (content.startsWith('ocideck_title_text_color:')) {
-          titleTextColorOverride = content
-              .substring('ocideck_title_text_color:'.length)
-              .trim();
-        } else if (content.startsWith('ocideck_bullet_marker:')) {
-          final name = content
-              .substring('ocideck_bullet_marker:'.length)
-              .trim();
-          final match = BulletMarker.values.where((m) => m.name == name);
-          if (match.isNotEmpty) bulletMarkerOverride = match.first;
-        } else if (!content.startsWith('_')) {
-          notesBuffer.write(notesBuffer.isEmpty ? content : '\n$content');
-        }
-        return '';
-      },
-    ).trim();
+    remaining = remaining.replaceAllMapped(_reHtmlComment, (m) {
+      final content = m.group(1)!.trim();
+      if (content.startsWith('advance:')) {
+        // Clamp fail-closed: double.tryParse accepts Infinity/NaN/overflow
+        // literals, and `(Infinity * 1000).round()` throws in the auto-advance
+        // timer. Mirror the presentationTargetSeconds clamp (0..86400s).
+        final d = double.tryParse(content.substring(8).trim()) ?? 0;
+        advanceDuration = (d.isFinite && d > 0) ? d.clamp(0, 86400) : 0;
+      } else if (content == 'skip') {
+        skipped = true;
+      } else if (content.startsWith('tlp:')) {
+        slideTlp = TlpLevelX.fromKey(content.substring(4));
+      } else if (content.startsWith('_style:')) {
+        final w = _reImageWidthStyle.firstMatch(content);
+        if (w != null) styleImageWidth = int.tryParse(w.group(1)!) ?? 0;
+      } else if (content.startsWith('ocideck_two_bullets_left:')) {
+        bullets
+          ..clear()
+          ..addAll(_decodeBullets(content.substring(25)));
+      } else if (content.startsWith('ocideck_two_bullets_left_title:')) {
+        columnTitle1 = _decodeText(content.substring(31));
+      } else if (content.startsWith('ocideck_two_bullets_right_title:')) {
+        columnTitle2 = _decodeText(content.substring(32));
+      } else if (content.startsWith('ocideck_two_bullets_right:')) {
+        bullets2 = _decodeBullets(content.substring(26));
+      } else if (content.startsWith('ocideck_timeline_duration:')) {
+        final ms = int.tryParse(content.substring(26).trim());
+        if (ms != null) timelineAnimationMs = clampTimelineDuration(ms);
+      } else if (content.startsWith('ocideck_list_style:')) {
+        final name = content.substring(19).trim();
+        listStyle = ListStyle.values.firstWhere(
+          (style) => style.name == name,
+          orElse: () => ListStyle.bullets,
+        );
+      } else if (content.startsWith('ocideck_checklist_progress:')) {
+        showChecklistProgress =
+            content.substring('ocideck_checklist_progress:'.length).trim() ==
+            'true';
+      } else if (content.startsWith('ocideck_continue_numbering:')) {
+        continueNumbering =
+            content.substring('ocideck_continue_numbering:'.length).trim() ==
+            'true';
+      } else if (content.startsWith('ocideck_continue_split:')) {
+        continuesSplit =
+            content.substring('ocideck_continue_split:'.length).trim() ==
+            'true';
+      } else if (content.startsWith('ocideck_title_image_overlay:')) {
+        titleImageOverlay =
+            content.substring('ocideck_title_image_overlay:'.length).trim() !=
+            'false';
+      } else if (content.startsWith('ocideck_title_text_color:')) {
+        titleTextColorOverride = content
+            .substring('ocideck_title_text_color:'.length)
+            .trim();
+      } else if (content.startsWith('ocideck_bullet_marker:')) {
+        final name = content.substring('ocideck_bullet_marker:'.length).trim();
+        final match = BulletMarker.values.where((m) => m.name == name);
+        if (match.isNotEmpty) bulletMarkerOverride = match.first;
+      } else if (!content.startsWith('_')) {
+        notesBuffer.write(notesBuffer.isEmpty ? content : '\n$content');
+      }
+      return '';
+    }).trim();
     final notes = _unescapeNotes(notesBuffer.toString().trim());
 
     return (
@@ -542,11 +545,13 @@ extension _MarkdownParse on MarkdownService {
     List<String> bullets,
   ) {
     final b = _BodyParse(listStyle);
-    final isTwoBullets = cssClass.split(_reWhitespace).contains('two-bullets');
+    final classTokens = cssClass.split(_reWhitespace);
+    final isTwoBullets = classTokens.contains('two-bullets');
+    b.isSplit = classTokens.contains('split');
 
     for (final line in lines) {
       if (b.listStyle == ListStyle.richText) {
-        _consumeRichTextLine(line, cssClass, b);
+        _consumeRichTextLine(line, b);
         continue;
       }
       final t = line.trim();
@@ -558,7 +563,7 @@ extension _MarkdownParse on MarkdownService {
         }
         continue;
       }
-      _consumeContentLine(line, t, cssClass, bullets, b);
+      _consumeContentLine(line, t, bullets, b);
     }
 
     return (
@@ -584,7 +589,7 @@ extension _MarkdownParse on MarkdownService {
     );
   }
 
-  void _consumeRichTextLine(String line, String cssClass, _BodyParse b) {
+  void _consumeRichTextLine(String line, _BodyParse b) {
     final t = line.trim();
     if (b.richTextHeaderPhase) {
       if (t.isEmpty) return;
@@ -610,7 +615,7 @@ extension _MarkdownParse on MarkdownService {
     // here), and the bulletsImage split-image structure (its image and
     // caption). The image-caption check precedes the generic `<div>` skip,
     // which previously shadowed it dead.
-    final isSplit = cssClass.split(_reWhitespace).contains('split');
+    final isSplit = b.isSplit;
     if (isSplit && t.startsWith('<div class="image-caption">')) {
       final captionParts = _splitTwoCaptions(_decodeImageCaption(t));
       b.imageCaption = captionParts.isNotEmpty ? captionParts.first : '';
@@ -633,7 +638,6 @@ extension _MarkdownParse on MarkdownService {
   void _consumeContentLine(
     String line,
     String t,
-    String cssClass,
     List<String> bullets,
     _BodyParse b,
   ) {
@@ -691,8 +695,7 @@ extension _MarkdownParse on MarkdownService {
       if (sizeMatch != null && b.imageSize == 0) {
         b.imageSize = int.tryParse(sizeMatch.group(1)!) ?? 0;
       }
-    } else if (cssClass.split(_reWhitespace).contains('split') &&
-        _reImageMd.hasMatch(t)) {
+    } else if (b.isSplit && _reImageMd.hasMatch(t)) {
       // Plain markdown image, e.g. the `![](path)` used inside a
       // bulletsImage `split-image` panel. Restricted to split slides so a
       // plain image inside free markdown is not mistaken for an image slide.
