@@ -423,134 +423,14 @@ class _ChartEditorState extends State<ChartEditor> {
                 style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
               ),
             ),
-          if (_supportsBounds)
-            Padding(
-              padding: const EdgeInsets.only(top: 12),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: _boundField(
-                      key: const ValueKey('chart-min-bound'),
-                      controller: _minBound,
-                      label: _type == ChartType.radar
-                          ? l10n.d('Schaalminimum (optioneel)')
-                          : l10n.d('Minimumlijn (optioneel)'),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: _boundField(
-                      key: const ValueKey('chart-max-bound'),
-                      controller: _maxBound,
-                      label: _type == ChartType.radar
-                          ? l10n.d('Schaalmaximum (optioneel)')
-                          : l10n.d('Maximumlijn (optioneel)'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          if (linked)
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Row(
-                children: [
-                  const Icon(Icons.link, size: 14, color: Color(0xFF0369A1)),
-                  const SizedBox(width: 6),
-                  Expanded(
-                    child: Text(
-                      '${l10n.d('Gekoppeld aan')} $_source',
-                      style: const TextStyle(
-                        fontSize: 11,
-                        color: Color(0xFF0369A1),
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: _unlink,
-                    child: Text(l10n.d('Ontkoppelen')),
-                  ),
-                ],
-              ),
-            ),
-          Padding(
-            padding: const EdgeInsets.only(top: 12),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.auto_awesome,
-                  size: 18,
-                  color: AppTheme.slate500,
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    l10n.d('Animatie bij openen'),
-                    style: const TextStyle(fontSize: 13),
-                  ),
-                ),
-                Switch(
-                  value: _animateOnEnter,
-                  onChanged: (v) {
-                    setState(() => _animateOnEnter = v);
-                    _emit();
-                  },
-                ),
-              ],
-            ),
-          ),
-          if (_animateOnEnter)
-            Padding(
-              padding: const EdgeInsets.only(top: 4),
-              child: AnimationDurationControl(
-                overrideMs: _animationOverrideMs,
-                themeMs: widget.themeAnimationDurationMs,
-                minMs: kThemeMinAnimationDurationMs,
-                maxMs: kThemeMaxAnimationDurationMs,
-                onChanged: (value) {
-                  setState(() => _animationOverrideMs = value);
-                  _emit();
-                },
-              ),
-            ),
+          if (_supportsBounds) _boundControls(l10n),
+          if (linked) _linkedSourceRow(l10n),
+          _animationControls(l10n),
           const SizedBox(height: 12),
           if (widget.nestedInScrollView)
-            SizedBox(
-              height: 280,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final availableWidth = constraints.maxWidth;
-                  return SingleChildScrollView(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: _grid(
-                        enabled: !linked,
-                        availableWidth: availableWidth,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            )
+            SizedBox(height: 280, child: _scrollableGrid(linked))
           else
-            Expanded(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final availableWidth = constraints.maxWidth;
-                  return SingleChildScrollView(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: _grid(
-                        enabled: !linked,
-                        availableWidth: availableWidth,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+            Expanded(child: _scrollableGrid(linked)),
           if (!linked) ...[
             const SizedBox(height: 8),
             Row(
@@ -571,6 +451,123 @@ class _ChartEditorState extends State<ChartEditor> {
           ],
         ],
       ),
+    );
+  }
+
+  /// Min/max-grenzen (of schaalgrenzen bij radar) naast elkaar.
+  Widget _boundControls(AppLocalizations l10n) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: _boundField(
+              key: const ValueKey('chart-min-bound'),
+              controller: _minBound,
+              label: _type == ChartType.radar
+                  ? l10n.d('Schaalminimum (optioneel)')
+                  : l10n.d('Minimumlijn (optioneel)'),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: _boundField(
+              key: const ValueKey('chart-max-bound'),
+              controller: _maxBound,
+              label: _type == ChartType.radar
+                  ? l10n.d('Schaalmaximum (optioneel)')
+                  : l10n.d('Maximumlijn (optioneel)'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Indicator + ontkoppelknop wanneer de data aan een CSV is gekoppeld.
+  Widget _linkedSourceRow(AppLocalizations l10n) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Row(
+        children: [
+          const Icon(Icons.link, size: 14, color: Color(0xFF0369A1)),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              '${l10n.d('Gekoppeld aan')} $_source',
+              style: const TextStyle(fontSize: 11, color: Color(0xFF0369A1)),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          TextButton(onPressed: _unlink, child: Text(l10n.d('Ontkoppelen'))),
+        ],
+      ),
+    );
+  }
+
+  /// Animatie-schakelaar plus (indien aan) de duur-regelaar.
+  Widget _animationControls(AppLocalizations l10n) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 12),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.auto_awesome,
+                size: 18,
+                color: AppTheme.slate500,
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  l10n.d('Animatie bij openen'),
+                  style: const TextStyle(fontSize: 13),
+                ),
+              ),
+              Switch(
+                value: _animateOnEnter,
+                onChanged: (v) {
+                  setState(() => _animateOnEnter = v);
+                  _emit();
+                },
+              ),
+            ],
+          ),
+        ),
+        if (_animateOnEnter)
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: AnimationDurationControl(
+              overrideMs: _animationOverrideMs,
+              themeMs: widget.themeAnimationDurationMs,
+              minMs: kThemeMinAnimationDurationMs,
+              maxMs: kThemeMaxAnimationDurationMs,
+              onChanged: (value) {
+                setState(() => _animationOverrideMs = value);
+                _emit();
+              },
+            ),
+          ),
+      ],
+    );
+  }
+
+  /// Het datagrid in een tweerichtings-scroller; uitgeschakeld zolang de data
+  /// aan een CSV is gekoppeld.
+  Widget _scrollableGrid(bool linked) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final availableWidth = constraints.maxWidth;
+        return SingleChildScrollView(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: _grid(enabled: !linked, availableWidth: availableWidth),
+          ),
+        );
+      },
     );
   }
 
