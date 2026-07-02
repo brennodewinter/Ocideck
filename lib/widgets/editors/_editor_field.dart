@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 import '../../services/caption_service.dart';
 import '../../services/description_service.dart';
+import '../../models/slide.dart';
 import '../../services/image_service.dart';
+import '../../state/deck_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../l10n/slide_quality_localization.dart';
 import '../../models/markdown_validation.dart';
@@ -14,6 +16,59 @@ import '../../utils/project_path.dart';
 import '../dialogs/image_carousel_picker.dart';
 
 /// Shared layout helpers for slide editors.
+
+/// Beheert de tekstcontrollers van een slide-editor: [newController] maakt er
+/// één met beginwaarde en emit-listener, en dispose ruimt ze allemaal op —
+/// de init/emit/dispose-boilerplate die elke editor per veld herhaalde.
+mixin EditorTextControllers<T extends StatefulWidget> on State<T> {
+  final List<TextEditingController> _editorControllers = [];
+
+  TextEditingController newController(String text, VoidCallback onChanged) {
+    final controller = TextEditingController(text: text)
+      ..addListener(onChanged);
+    _editorControllers.add(controller);
+    return controller;
+  }
+
+  @override
+  void dispose() {
+    for (final controller in _editorControllers) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
+}
+
+/// Gedeelde handlers voor editors met één achtergrondafbeelding (titel,
+/// citaat): kiezen, plakken en wissen. Kiezen/plakken/wissen reset ook het
+/// bijschrift, want dat hoort bij de vorige afbeelding.
+mixin BgImageHandlers<T extends ConsumerStatefulWidget> on ConsumerState<T> {
+  Slide get editorSlide;
+  ValueChanged<Slide> get onSlideUpdate;
+  String? get bgImageBasePath;
+
+  Future<void> pasteBgImage() async {
+    final path = await ref
+        .read(imageServiceProvider)
+        .pasteImage(projectPath: bgImageBasePath);
+    if (path != null) {
+      onSlideUpdate(editorSlide.copyWith(imagePath: path, imageCaption: ''));
+    }
+  }
+
+  Future<void> pickBgImage() async {
+    final path = await ref
+        .read(imageServiceProvider)
+        .pickImage(projectPath: bgImageBasePath);
+    if (path != null) {
+      onSlideUpdate(editorSlide.copyWith(imagePath: path, imageCaption: ''));
+    }
+  }
+
+  void clearBgImage() {
+    onSlideUpdate(editorSlide.copyWith(imagePath: '', imageCaption: ''));
+  }
+}
 
 class EditorField extends ConsumerStatefulWidget {
   final String label;

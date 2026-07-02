@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/slide.dart';
-import '../../state/deck_provider.dart';
 import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
 
@@ -25,54 +24,29 @@ class QuoteEditor extends ConsumerStatefulWidget {
   ConsumerState<QuoteEditor> createState() => _QuoteEditorState();
 }
 
-class _QuoteEditorState extends ConsumerState<QuoteEditor> {
+class _QuoteEditorState extends ConsumerState<QuoteEditor>
+    with EditorTextControllers, BgImageHandlers {
   late final TextEditingController _quote;
   late final TextEditingController _author;
 
   @override
+  Slide get editorSlide => widget.slide;
+  @override
+  ValueChanged<Slide> get onSlideUpdate => widget.onUpdate;
+  @override
+  String? get bgImageBasePath => widget.captionBasePath;
+
+  @override
   void initState() {
     super.initState();
-    _quote = TextEditingController(text: widget.slide.quote);
-    _author = TextEditingController(text: widget.slide.quoteAuthor);
-    _quote.addListener(_emit);
-    _author.addListener(_emit);
+    _quote = newController(widget.slide.quote, _emit);
+    _author = newController(widget.slide.quoteAuthor, _emit);
   }
 
   void _emit() {
     widget.onUpdate(
       widget.slide.copyWith(quote: _quote.text, quoteAuthor: _author.text),
     );
-  }
-
-  Future<void> _pasteBgImage() async {
-    final imgService = ref.read(imageServiceProvider);
-    final path = await imgService.pasteImage(
-      projectPath: widget.captionBasePath,
-    );
-    if (path != null) {
-      widget.onUpdate(widget.slide.copyWith(imagePath: path, imageCaption: ''));
-    }
-  }
-
-  Future<void> _pickBgImage() async {
-    final imgService = ref.read(imageServiceProvider);
-    final path = await imgService.pickImage(
-      projectPath: widget.captionBasePath,
-    );
-    if (path != null) {
-      widget.onUpdate(widget.slide.copyWith(imagePath: path, imageCaption: ''));
-    }
-  }
-
-  void _clearBgImage() {
-    widget.onUpdate(widget.slide.copyWith(imagePath: '', imageCaption: ''));
-  }
-
-  @override
-  void dispose() {
-    _quote.dispose();
-    _author.dispose();
-    super.dispose();
   }
 
   @override
@@ -117,9 +91,9 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor> {
           onPicked: (path, caption) => widget.onUpdate(
             widget.slide.copyWith(imagePath: path, imageCaption: caption),
           ),
-          onBrowse: _pickBgImage,
-          onPaste: _pasteBgImage,
-          onClear: imagePath.isNotEmpty ? _clearBgImage : null,
+          onBrowse: pickBgImage,
+          onPaste: pasteBgImage,
+          onClear: imagePath.isNotEmpty ? clearBgImage : null,
           onCaptionChanged: (caption) =>
               widget.onUpdate(widget.slide.copyWith(imageCaption: caption)),
           label: 'Geen achtergrondafbeelding',
