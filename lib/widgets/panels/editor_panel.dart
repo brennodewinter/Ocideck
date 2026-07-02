@@ -27,10 +27,13 @@ class EditorPanel extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final deckState = ref.watch(deckProvider);
+    // Alleen de deck-velden die dit paneel echt gebruikt (deck + revision):
+    // wissels in isDirty/canUndo/canRedo hoeven de hele editorkolom niet te
+    // herbouwen.
+    final deck = ref.watch(deckProvider.select((s) => s.deck))!;
+    final revision = ref.watch(deckProvider.select((s) => s.revision));
     final editor = ref.watch(editorProvider);
 
-    final deck = deckState.deck!;
     final idx = editor.selectedIndex.clamp(0, deck.slides.length - 1);
     final slide = deck.slides[idx];
 
@@ -53,14 +56,14 @@ class EditorPanel extends ConsumerWidget {
     ];
 
     if (editor.mode == EditorMode.markdown) {
-      return _markdownEditor(ref, deckState, editor);
+      return _markdownEditor(ref, revision, editor);
     }
 
     // De tekstvelden cachen hun inhoud in eigen controllers en verversen alleen
     // op slide-id. Bij undo/redo verandert [revision], waardoor deze subtree
     // remount en de velden de teruggedraaide inhoud tonen.
     return KeyedSubtree(
-      key: ValueKey('editor-rev-${deckState.revision}'),
+      key: ValueKey('editor-rev-$revision'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -174,16 +177,12 @@ class EditorPanel extends ConsumerWidget {
     );
   }
 
-  Widget _markdownEditor(
-    WidgetRef ref,
-    DeckState deckState,
-    EditorState editor,
-  ) {
+  Widget _markdownEditor(WidgetRef ref, int revision, EditorState editor) {
     final deckNotifier = ref.read(deckProvider.notifier);
     final editorNotifier = ref.read(editorProvider.notifier);
     return MarkdownDeckEditor(
       // Verse instantie na undo/redo zodat de markdown opnieuw wordt geladen.
-      key: ValueKey('md-${deckState.revision}'),
+      key: ValueKey('md-$revision'),
       initialContent: deckNotifier.generateMarkdown(),
       onApply: (md) {
         final ok = deckNotifier.applyMarkdown(md);

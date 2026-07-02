@@ -121,8 +121,9 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final deckState = ref.watch(deckProvider);
-    final deck = deckState.deck!;
+    // Alleen het deck zelf: wissels in isDirty/canUndo/canRedo horen de
+    // preview niet te herbouwen.
+    final deck = ref.watch(deckProvider.select((s) => s.deck))!;
     final editor = ref.watch(editorProvider);
     final settings = ref.watch(settingsProvider);
 
