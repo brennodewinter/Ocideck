@@ -35,7 +35,18 @@ extension _CarouselDelete on _ImageCarouselPickerState {
       if (file.existsSync()) await file.delete();
       deleted = true;
     } catch (e) {
-      debugPrint('Kon afbeelding niet verwijderen: $e');
+      logWarning('ImageCarouselPicker: kon afbeelding niet verwijderen', e);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              context.l10n.d(
+                'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.',
+              ),
+            ),
+          ),
+        );
+      }
     }
     // Only drop the sidecar metadata and the carousel entry once the file is
     // actually gone; otherwise the image would disappear from the UI while it

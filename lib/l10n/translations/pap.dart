@@ -1114,4 +1114,10 @@ const _dutchSourceAddPap = {
   'CSV-koppeling verbreken?': 'Kita e konekshon CSV?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'E datonan ta keda den e slide, pero kambionan den e archivo CSV lo no drenta mas.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Imágen rechasá: muchu grandi (máks. 64 MB) òf formato no sostené.',
+  'Geen afbeelding op het klembord.': 'No tin imágen riba e klèmbort.',
+  'Kon de afbeelding niet opslaan.': 'No por a warda e imágen.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'No por a eliminá e imágen. Kontrolá si e archivo no ta den uso i si bo tin derecho di skibi.',
 };

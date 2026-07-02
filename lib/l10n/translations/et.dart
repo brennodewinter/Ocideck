@@ -1118,4 +1118,10 @@ const _dutchSourceEt = {
   'CSV-koppeling verbreken?': 'Kas katkestada CSV-link?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Andmed jäävad slaidile, kuid CSV-faili muudatused enam kaasa ei tule.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Pilt lükati tagasi: liiga suur (max 64 MB) või toetamata vorming.',
+  'Geen afbeelding op het klembord.': 'Lõikelaual pole pilti.',
+  'Kon de afbeelding niet opslaan.': 'Pilti ei õnnestunud salvestada.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Pilti ei õnnestunud kustutada. Kontrolli, et fail poleks kasutuses ja et sul oleks kirjutusõigused.',
 };

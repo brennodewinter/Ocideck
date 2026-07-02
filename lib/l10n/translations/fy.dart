@@ -1112,4 +1112,10 @@ const _dutchSourceAddFy = {
   'CSV-koppeling verbreken?': 'CSV-keppeling ferbrekke?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'De data bliuwt yn de slide stean, mar wizigingen yn it CSV-bestân komme net mear mei.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Ofbylding wegere: te grut (maks. 64 MB) of gjin stipe formaat.',
+  'Geen afbeelding op het klembord.': 'Gjin ôfbylding op it klamboerd.',
+  'Kon de afbeelding niet opslaan.': 'Koe de ôfbylding net bewarje.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Koe de ôfbylding net fuortsmite. Kontrolearje oft it bestân net yn gebrûk is en oft jo skriuwrjochten hawwe.',
 };

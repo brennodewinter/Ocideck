@@ -1112,4 +1112,10 @@ const _dutchSourceTlh = {
   'CSV-koppeling verbreken?': 'CSV rarwI\' bIteqqang\'a\'?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       '\'anghomDaq ratlh De\', \'ach CSV teHwI\' choHmey chel\'be\'lu\' \'e\' mev.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'mIllogh lajQo\'lu\': tIn law\' (64 MB HoS) pagh Segh Qotlhbe\'lu\'.',
+  'Geen afbeelding op het klembord.': 'poSlogh Daq mIllogh tu\'lu\'be\'.',
+  'Kon de afbeelding niet opslaan.': 'mIllogh polqu\'be\'lu\'.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'mIllogh teqlaHbe\'lu\'. teHwI\' lo\'lu\'be\' \'ej ghItlh chaw\' Daghaj \'e\' yI\'ol.',
 };

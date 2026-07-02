@@ -1126,4 +1126,10 @@ const _dutchSourceHu = {
   'CSV-koppeling verbreken?': 'Megszünteti a CSV-kapcsolatot?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Az adatok a dián maradnak, de a CSV-fájl változásai már nem érvényesülnek.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'A kép elutasítva: túl nagy (max. 64 MB) vagy nem támogatott formátum.',
+  'Geen afbeelding op het klembord.': 'Nincs kép a vágólapon.',
+  'Kon de afbeelding niet opslaan.': 'A képet nem sikerült menteni.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'A képet nem sikerült törölni. Ellenőrizd, hogy a fájl nincs-e használatban, és van-e írási jogod.',
 };

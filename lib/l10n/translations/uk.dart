@@ -1136,4 +1136,10 @@ const _dutchSourceUk = {
   'CSV-koppeling verbreken?': 'Розірвати зв\'язок із CSV?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Дані залишаться у слайді, але зміни у файлі CSV більше не підтягуватимуться.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Зображення відхилено: завелике (макс. 64 МБ) або непідтримуваний формат.',
+  'Geen afbeelding op het klembord.': 'У буфері обміну немає зображення.',
+  'Kon de afbeelding niet opslaan.': 'Не вдалося зберегти зображення.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Не вдалося видалити зображення. Перевірте, чи файл не використовується і чи маєте ви права на запис.',
 };

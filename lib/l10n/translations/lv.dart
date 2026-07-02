@@ -1124,4 +1124,10 @@ const _dutchSourceLv = {
   'CSV-koppeling verbreken?': 'Atsaistīt CSV failu?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Dati paliek slaidā, bet CSV faila izmaiņas vairs netiks pārņemtas.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Attēls noraidīts: pārāk liels (maks. 64 MB) vai neatbalstīts formāts.',
+  'Geen afbeelding op het klembord.': 'Starpliktuvē nav attēla.',
+  'Kon de afbeelding niet opslaan.': 'Neizdevās saglabāt attēlu.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Neizdevās izdzēst attēlu. Pārbaudiet, vai fails netiek lietots un vai jums ir rakstīšanas tiesības.',
 };

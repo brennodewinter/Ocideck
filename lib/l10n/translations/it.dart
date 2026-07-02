@@ -1118,4 +1118,10 @@ const _dutchSourceAddIt = {
   'CSV-koppeling verbreken?': 'Scollegare il file CSV?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'I dati restano nella diapositiva, ma le modifiche al file CSV non verranno più recepite.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Immagine rifiutata: troppo grande (max 64 MB) o formato non supportato.',
+  'Geen afbeelding op het klembord.': 'Nessuna immagine negli appunti.',
+  'Kon de afbeelding niet opslaan.': 'Impossibile salvare l\'immagine.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Impossibile eliminare l\'immagine. Verifica che il file non sia in uso e di avere i permessi di scrittura.',
 };

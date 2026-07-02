@@ -1137,4 +1137,11 @@ const _dutchSourceEl = {
   'CSV-koppeling verbreken?': 'Αποσύνδεση του αρχείου CSV;',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Τα δεδομένα μένουν στη διαφάνεια, αλλά οι αλλαγές στο αρχείο CSV δεν θα περνούν πλέον.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Η εικόνα απορρίφθηκε: πολύ μεγάλη (μέγ. 64 MB) ή μη υποστηριζόμενη μορφή.',
+  'Geen afbeelding op het klembord.': 'Δεν υπάρχει εικόνα στο πρόχειρο.',
+  'Kon de afbeelding niet opslaan.':
+      'Δεν ήταν δυνατή η αποθήκευση της εικόνας.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Δεν ήταν δυνατή η διαγραφή της εικόνας. Ελέγξτε ότι το αρχείο δεν χρησιμοποιείται και ότι έχετε δικαιώματα εγγραφής.',
 };

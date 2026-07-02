@@ -1137,4 +1137,10 @@ const _dutchSourceMt = {
   'CSV-koppeling verbreken?': 'Taqta\' r-rabta mas-CSV?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Id-data tibqa\' fl-islajd, imma bidliet fil-fajl CSV ma jibqgħux jidħlu.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'L-istampa ġiet miċħuda: kbira wisq (mass. 64 MB) jew format mhux appoġġat.',
+  'Geen afbeelding op het klembord.': 'L-ebda stampa fil-clipboard.',
+  'Kon de afbeelding niet opslaan.': 'Ma setgħetx tiġi salvata l-istampa.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Ma setgħetx titħassar l-istampa. Iċċekkja li l-fajl mhux qed jintuża u li għandek permessi tal-kitba.',
 };

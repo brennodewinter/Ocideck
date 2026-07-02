@@ -1149,4 +1149,10 @@ const _dutchSourceGa = {
   'CSV-koppeling verbreken?': 'An nasc CSV a bhriseadh?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Fanann na sonraí sa sleamhnán, ach ní thiocfaidh athruithe ar an gcomhad CSV tríd a thuilleadh.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Diúltaíodh don íomhá: rómhór (uas. 64 MB) nó formáid nach dtacaítear léi.',
+  'Geen afbeelding op het klembord.': 'Níl aon íomhá ar an ngearrthaisce.',
+  'Kon de afbeelding niet opslaan.': 'Níorbh fhéidir an íomhá a shábháil.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Níorbh fhéidir an íomhá a scriosadh. Seiceáil nach bhfuil an comhad in úsáid agus go bhfuil ceadanna scríofa agat.',
 };

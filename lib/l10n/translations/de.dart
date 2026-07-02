@@ -1115,4 +1115,10 @@ const _dutchSourceAddDe = {
   'CSV-koppeling verbreken?': 'CSV-Verknüpfung trennen?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Die Daten bleiben in der Folie, aber Änderungen an der CSV-Datei kommen nicht mehr mit.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Bild abgelehnt: zu groß (max. 64 MB) oder kein unterstütztes Format.',
+  'Geen afbeelding op het klembord.': 'Kein Bild in der Zwischenablage.',
+  'Kon de afbeelding niet opslaan.': 'Bild konnte nicht gespeichert werden.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Bild konnte nicht gelöscht werden. Prüfe, ob die Datei nicht in Gebrauch ist und ob du Schreibrechte hast.',
 };

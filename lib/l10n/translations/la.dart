@@ -1134,4 +1134,10 @@ const _dutchSourceLa = {
   'CSV-koppeling verbreken?': 'Vinculum CSV solvere?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Data in folio manent, sed mutationes in plica CSV non iam accipientur.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Imago reiecta: nimis magna (max. 64 MB) aut forma non sustenta.',
+  'Geen afbeelding op het klembord.': 'Nulla imago in tabula interposita.',
+  'Kon de afbeelding niet opslaan.': 'Imago servari non potuit.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Imago deleri non potuit. Vide num plica in usu sit et num ius scribendi habeas.',
 };

@@ -1126,4 +1126,10 @@ const _dutchSourceSl = {
   'CSV-koppeling verbreken?': 'Prekinem povezavo s CSV?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Podatki ostanejo v prosojnici, a spremembe v datoteki CSV se ne bodo več prenašale.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Slika zavrnjena: prevelika (najv. 64 MB) ali nepodprta oblika.',
+  'Geen afbeelding op het klembord.': 'V odložišču ni slike.',
+  'Kon de afbeelding niet opslaan.': 'Slike ni bilo mogoče shraniti.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Slike ni bilo mogoče izbrisati. Preverite, da datoteka ni v uporabi in da imate pravice za pisanje.',
 };

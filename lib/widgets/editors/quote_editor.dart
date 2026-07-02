@@ -46,7 +46,9 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor> {
 
   Future<void> _pasteBgImage() async {
     final imgService = ref.read(imageServiceProvider);
-    final path = await imgService.pasteImage(
+    final path = await pasteImageWithFeedback(
+      context,
+      imgService,
       projectPath: widget.captionBasePath,
     );
     if (path != null) {
@@ -56,7 +58,9 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor> {
 
   Future<void> _pickBgImage() async {
     final imgService = ref.read(imageServiceProvider);
-    final path = await imgService.pickImage(
+    final path = await pickImageWithFeedback(
+      context,
+      imgService,
       projectPath: widget.captionBasePath,
     );
     if (path != null) {

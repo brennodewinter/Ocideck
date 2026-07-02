@@ -1123,4 +1123,10 @@ const _dutchSourceSv = {
   'CSV-koppeling verbreken?': 'Koppla bort CSV-filen?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Datan stannar i bilden, men ändringar i CSV-filen följer inte längre med.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Bilden avvisades: för stor (max 64 MB) eller inte ett format som stöds.',
+  'Geen afbeelding op het klembord.': 'Ingen bild i urklipp.',
+  'Kon de afbeelding niet opslaan.': 'Kunde inte spara bilden.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Kunde inte ta bort bilden. Kontrollera att filen inte används och att du har skrivrättigheter.',
 };

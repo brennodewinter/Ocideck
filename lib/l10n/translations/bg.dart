@@ -1140,4 +1140,10 @@ const _dutchSourceBg = {
   'CSV-koppeling verbreken?': 'Прекъсване на връзката с CSV?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Данните остават в слайда, но промените в CSV файла вече няма да се отразяват.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Изображението е отхвърлено: твърде голямо (макс. 64 MB) или неподдържан формат.',
+  'Geen afbeelding op het klembord.': 'Няма изображение в клипборда.',
+  'Kon de afbeelding niet opslaan.': 'Изображението не можа да бъде запазено.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Изображението не можа да бъде изтрито. Проверете дали файлът не се използва и дали имате права за запис.',
 };

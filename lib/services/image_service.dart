@@ -9,6 +9,21 @@ import '../models/slide.dart';
 import '../utils/log.dart';
 import '../utils/project_path.dart';
 
+/// Waarom een afbeelding kiezen/plakken géén pad opleverde. [cancelled] is een
+/// bewuste keuze van de gebruiker (geen melding tonen); de overige redenen
+/// verdienen uitleg in de UI in plaats van een stil mislukken.
+enum ImageImportFailure { cancelled, rejected, noClipboardImage, writeFailed }
+
+/// Uitkomst van een afbeelding kiezen/plakken: een [path] bij succes, anders
+/// een [failure] met de reden.
+class ImageImportOutcome {
+  final String? path;
+  final ImageImportFailure? failure;
+
+  const ImageImportOutcome.success(this.path) : failure = null;
+  const ImageImportOutcome.failed(this.failure) : path = null;
+}
+
 class ImageService {
   final String Function() _languageCode;
 
@@ -80,20 +95,35 @@ class ImageService {
     }
   }
 
-  Future<String?> pickImage({String? projectPath}) async {
+  Future<String?> pickImage({String? projectPath}) async =>
+      (await pickImageDetailed(projectPath: projectPath)).path;
+
+  /// Als [pickImage], maar met de reden waarom er geen pad kwam, zodat de UI
+  /// een afwijzing kan uitleggen i.p.v. stil niets te doen.
+  Future<ImageImportOutcome> pickImageDetailed({String? projectPath}) async {
     final result = await FilePicker.pickFiles(
       type: FileType.image,
       dialogTitle: _d('Kies een afbeelding'),
     );
     final path = result?.files.single.path;
-    if (path == null) return null;
+    if (path == null) {
+      return const ImageImportOutcome.failed(ImageImportFailure.cancelled);
+    }
     if (!await _isAcceptableImageFile(path)) {
       logWarning(
         'ImageService.pickImage: rejected (too large or not an image)',
       );
-      return null;
+      return const ImageImportOutcome.failed(ImageImportFailure.rejected);
     }
-    return _importIntoProject(path, projectPath, subdir: 'images');
+    final imported = await _importIntoProject(
+      path,
+      projectPath,
+      subdir: 'images',
+    );
+    if (imported == null) {
+      return const ImageImportOutcome.failed(ImageImportFailure.writeFailed);
+    }
+    return ImageImportOutcome.success(imported);
   }
 
   Future<String?> pickVideo({String? projectPath}) async {
@@ -155,11 +185,23 @@ class ImageService {
   /// Read an image from the system clipboard and save it to a temp file.
   /// Returns the absolute path to the temp file, or null if no image is on
   /// the clipboard.
-  Future<String?> pasteImage({String? projectPath}) async {
+  Future<String?> pasteImage({String? projectPath}) async =>
+      (await pasteImageDetailed(projectPath: projectPath)).path;
+
+  /// Als [pasteImage], maar met de reden waarom er geen pad kwam (leeg
+  /// klembord, te groot, schrijffout), zodat de UI die kan melden.
+  Future<ImageImportOutcome> pasteImageDetailed({String? projectPath}) async {
     try {
       final bytes = await Pasteboard.image;
-      if (bytes == null) return null;
-      if (bytes.isEmpty || bytes.length > maxImageBytes) return null;
+      if (bytes == null || bytes.isEmpty) {
+        return const ImageImportOutcome.failed(
+          ImageImportFailure.noClipboardImage,
+        );
+      }
+      if (bytes.length > maxImageBytes) {
+        logWarning('ImageService.pasteImage: rejected (too large)');
+        return const ImageImportOutcome.failed(ImageImportFailure.rejected);
+      }
       if (projectPath != null && projectPath.isNotEmpty) {
         final imagesDir = Directory(p.join(projectPath, 'images'));
         await imagesDir.create(recursive: true);
@@ -170,7 +212,9 @@ class ImageService {
           ),
         );
         await file.writeAsBytes(bytes, flush: true);
-        return p.relative(file.path, from: projectPath);
+        return ImageImportOutcome.success(
+          p.relative(file.path, from: projectPath),
+        );
       }
       final cacheDir = await getTemporaryDirectory();
       final dir = Directory(p.join(cacheDir.path, 'pasted_images'));
@@ -179,9 +223,10 @@ class ImageService {
         p.join(dir.path, 'pasted_${DateTime.now().millisecondsSinceEpoch}.png'),
       );
       await file.writeAsBytes(bytes, flush: true);
-      return file.path;
-    } on FileSystemException {
-      return null;
+      return ImageImportOutcome.success(file.path);
+    } on FileSystemException catch (e) {
+      logWarning('ImageService.pasteImage: write failed', e);
+      return const ImageImportOutcome.failed(ImageImportFailure.writeFailed);
     }
   }
 

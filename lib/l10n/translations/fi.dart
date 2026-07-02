@@ -1126,4 +1126,10 @@ const _dutchSourceFi = {
   'CSV-koppeling verbreken?': 'Puretaanko CSV-linkitys?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Tiedot pysyvät diassa, mutta CSV-tiedoston muutokset eivät enää välity.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Kuva hylättiin: liian suuri (enint. 64 Mt) tai muoto ei ole tuettu.',
+  'Geen afbeelding op het klembord.': 'Leikepöydällä ei ole kuvaa.',
+  'Kon de afbeelding niet opslaan.': 'Kuvaa ei voitu tallentaa.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Kuvaa ei voitu poistaa. Tarkista, ettei tiedosto ole käytössä ja että sinulla on kirjoitusoikeudet.',
 };

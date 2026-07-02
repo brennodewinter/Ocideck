@@ -1131,4 +1131,10 @@ const _dutchSourcePl = {
   'CSV-koppeling verbreken?': 'Odłączyć plik CSV?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Dane pozostaną w slajdzie, ale zmiany w pliku CSV nie będą już uwzględniane.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Obraz odrzucony: za duży (maks. 64 MB) lub nieobsługiwany format.',
+  'Geen afbeelding op het klembord.': 'Brak obrazu w schowku.',
+  'Kon de afbeelding niet opslaan.': 'Nie można zapisać obrazu.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Nie można usunąć obrazu. Sprawdź, czy plik nie jest w użyciu i czy masz uprawnienia do zapisu.',
 };

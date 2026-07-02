@@ -1125,4 +1125,10 @@ const _dutchSourceCs = {
   'CSV-koppeling verbreken?': 'Zrušit propojení s CSV?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Data zůstanou ve snímku, ale změny v souboru CSV se už nepromítnou.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Obrázek odmítnut: příliš velký (max. 64 MB) nebo nepodporovaný formát.',
+  'Geen afbeelding op het klembord.': 'Ve schránce není žádný obrázek.',
+  'Kon de afbeelding niet opslaan.': 'Obrázek se nepodařilo uložit.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Obrázek se nepodařilo smazat. Zkontrolujte, že soubor není používán a že máte práva k zápisu.',
 };

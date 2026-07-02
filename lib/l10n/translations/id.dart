@@ -1124,4 +1124,10 @@ const _dutchSourceId = {
   'CSV-koppeling verbreken?': 'Putuskan tautan CSV?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Data tetap di slide, tetapi perubahan pada file CSV tidak akan ikut lagi.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Gambar ditolak: terlalu besar (maks 64 MB) atau format tidak didukung.',
+  'Geen afbeelding op het klembord.': 'Tidak ada gambar di papan klip.',
+  'Kon de afbeelding niet opslaan.': 'Tidak dapat menyimpan gambar.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Tidak dapat menghapus gambar. Pastikan file tidak sedang digunakan dan Anda memiliki izin menulis.',
 };

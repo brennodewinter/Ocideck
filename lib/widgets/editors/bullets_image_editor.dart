@@ -200,7 +200,9 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   }
 
   Future<void> _pasteImage() async {
-    final path = await widget.imageService.pasteImage(
+    final path = await pasteImageWithFeedback(
+      context,
+      widget.imageService,
       projectPath: widget.captionBasePath,
     );
     if (path != null) {
@@ -209,7 +211,9 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   }
 
   Future<void> _pickImage() async {
-    final path = await widget.imageService.pickImage(
+    final path = await pickImageWithFeedback(
+      context,
+      widget.imageService,
       projectPath: widget.captionBasePath,
     );
     if (path != null) {

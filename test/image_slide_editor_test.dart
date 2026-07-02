@@ -12,7 +12,10 @@ class _FakeImageService extends ImageService {
   _FakeImageService({this.pastedPath});
 
   @override
-  Future<String?> pasteImage({String? projectPath}) async => pastedPath;
+  Future<ImageImportOutcome> pasteImageDetailed({String? projectPath}) async =>
+      pastedPath == null
+      ? const ImageImportOutcome.failed(ImageImportFailure.noClipboardImage)
+      : ImageImportOutcome.success(pastedPath);
 }
 
 Widget _host(

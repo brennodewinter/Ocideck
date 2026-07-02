@@ -1142,4 +1142,10 @@ const _dutchSourcePt = {
   'CSV-koppeling verbreken?': 'Desligar o ficheiro CSV?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'Os dados permanecem no diapositivo, mas as alterações ao ficheiro CSV deixam de ser refletidas.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Imagem rejeitada: demasiado grande (máx. 64 MB) ou formato não suportado.',
+  'Geen afbeelding op het klembord.': 'Não há imagem na área de transferência.',
+  'Kon de afbeelding niet opslaan.': 'Não foi possível guardar a imagem.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Não foi possível eliminar a imagem. Verifique se o ficheiro não está em uso e se tem permissões de escrita.',
 };

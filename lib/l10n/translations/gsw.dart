@@ -1124,4 +1124,10 @@ const _dutchSourceGsw = {
   'CSV-koppeling verbreken?': 'CSV-Verknüpfig trenne?',
   'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
       'D Date blibe in dr Folie, aber Änderige an dr CSV-Datei chöme nümme mit.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Bild abglehnt: z gross (max. 64 MB) oder kei unterstützts Format.',
+  'Geen afbeelding op het klembord.': 'Kei Bild in dr Zwischenablag.',
+  'Kon de afbeelding niet opslaan.': 'Bild het nit chönne gspycheret wärde.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Bild het nit chönne glöscht wärde. Lueg, dass d Datei nit bruucht wird und dass du Schriibrächt hesch.',
 };
