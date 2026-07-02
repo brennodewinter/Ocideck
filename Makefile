@@ -1,4 +1,4 @@
-.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline licenses check-conventions build-web check-web build-macos build-windows build-linux build-all check check-full help
+.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline licenses check-conventions build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 help:
 	@echo "OciDeck quality targets:"
@@ -24,6 +24,7 @@ help:
 	@echo "  make build-windows   Build the Windows app (Windows only)."
 	@echo "  make build-linux     Build the Linux bundle (Linux only)."
 	@echo "  make build-all       Build web + this OS's native desktop target."
+	@echo "  make build-release   Build verified web + macOS release artifacts."
 
 # Install Flutter/Dart dependencies.
 setup:
@@ -272,6 +273,13 @@ build-all:
 	  *) echo "No native desktop build for '$$(uname -s)' here — run 'make build-windows' on Windows." ;; \
 	esac
 	@echo "== OciDeck build-all complete =="
+
+# Human release build for the two artifacts currently published by hand:
+# the hardened web bundle (with post-build hardening verification) and the
+# macOS .app. Prefer this over running raw `flutter build ...` commands.
+build-release:
+	@echo "== OciDeck release build: web + macOS =="
+	scripts/build_release.sh
 
 # Full local quality gate. Intended for humans, CI logs, and LLM-assisted debugging.
 check: format-check analyze check-conventions check-method-length test

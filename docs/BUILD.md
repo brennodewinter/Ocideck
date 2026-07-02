@@ -94,12 +94,18 @@ Each platform has a `make` target (each only builds on its own OS — Flutter
 cannot cross-compile a desktop bundle):
 
 ```sh
+make build-release  # verified web bundle + macOS .app
 make build-macos     # flutter build macos --release    → build/macos/Build/Products/Release/*.app
 make build-windows   # flutter build windows --release  → build/windows/x64/runner/Release
 make build-linux     # flutter build linux --release    → build/linux/x64/release/bundle
 make build-web       # hardened web bundle              → build/web
 make build-all       # web + this machine's native desktop target
 ```
+
+Use `make build-release` for the normal manual release path on macOS. It runs
+`make check-web` first, so the browser bundle is built with
+`--no-web-resources-cdn --csp` and then verified for the strict CSP,
+self-hosted CanvasKit, and bundled UI font before the macOS app is built.
 
 `make build-all` builds the web bundle plus whichever desktop target matches the
 host OS (web + macOS on a Mac, web + Linux on Linux). Windows and Linux bundles
