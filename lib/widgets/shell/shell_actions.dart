@@ -306,9 +306,25 @@ class _UrlImportDialogState extends State<_UrlImportDialog> {
   final _controller = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    // Herbouw bij elke wijziging zodat de Ophalen-knop live aan/uit gaat.
+    _controller.addListener(() => setState(() {}));
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  /// Alleen een http(s)-URL met host is op te halen; alles daarbuiten laat
+  /// de knop uit staan i.p.v. stil te falen na het klikken.
+  bool get _isFetchable {
+    final uri = Uri.tryParse(_controller.text.trim());
+    if (uri == null || uri.host.isEmpty) return false;
+    final scheme = uri.scheme.toLowerCase();
+    return scheme == 'http' || scheme == 'https';
   }
 
   @override
@@ -339,7 +355,9 @@ class _UrlImportDialogState extends State<_UrlImportDialog> {
                 isDense: true,
                 border: OutlineInputBorder(),
               ),
-              onSubmitted: (v) => Navigator.pop(context, v),
+              onSubmitted: (v) {
+                if (_isFetchable) Navigator.pop(context, v);
+              },
             ),
           ],
         ),
@@ -350,7 +368,9 @@ class _UrlImportDialogState extends State<_UrlImportDialog> {
           child: Text(l10n.t('cancel')),
         ),
         ElevatedButton.icon(
-          onPressed: () => Navigator.pop(context, _controller.text),
+          onPressed: _isFetchable
+              ? () => Navigator.pop(context, _controller.text)
+              : null,
           icon: const Icon(Icons.download, size: 16),
           label: Text(l10n.d('Ophalen')),
         ),
