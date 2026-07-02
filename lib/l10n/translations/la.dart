@@ -85,8 +85,8 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
-  'Importeren via URL is nog niet beschikbaar in de webversie.':
-      'Importatio per URL in versione interretiali nondum praesto est.',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Fasciculi (.ocideck) in versione interretiali nondum sustinentur.',
   'Geen': 'Nullum',
   'Nieuw': 'Novum',
   'Verwijderen': 'Delere',

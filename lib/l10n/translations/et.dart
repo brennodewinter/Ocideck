@@ -82,8 +82,8 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
-  'Importeren via URL is nog niet beschikbaar in de webversie.':
-      'URL-i kaudu importimine pole veebiversioonis veel saadaval.',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Pakette (.ocideck) veebiversioonis veel ei toetata.',
   'Geen': 'Puudub',
   'Nieuw': 'Uus',
   'Verwijderen': 'Kustuta',

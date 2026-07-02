@@ -85,8 +85,8 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
-  'Importeren via URL is nog niet beschikbaar in de webversie.':
-      'Níl iompórtáil trí URL ar fáil go fóill sa leagan gréasáin.',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Ní thacaítear le pacáistí (.ocideck) go fóill sa leagan gréasáin.',
   'Geen': 'Gan aon',
   'Nieuw': 'Nua',
   'Verwijderen': 'Scrios',

@@ -83,8 +83,8 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
-  'Importeren via URL is nog niet beschikbaar in de webversie.':
-      'Ymportearjen fia URL is noch net beskikber yn de webferzje.',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Pakketten (.ocideck) wurde yn de webferzje noch net stipe.',
   'Geen': 'Gjin',
   'Nieuw': 'Nij',
   'Verwijderen': 'Fuortsmite',

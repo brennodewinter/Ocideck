@@ -83,8 +83,8 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
-  'Importeren via URL is nog niet beschikbaar in de webversie.':
-      'Import via URL er endnu ikke tilgængelig i webversionen.',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Pakker (.ocideck) understøttes endnu ikke i webversionen.',
   'Geen': 'Ingen',
   'Nieuw': 'Ny',
   'Verwijderen': 'Slet',

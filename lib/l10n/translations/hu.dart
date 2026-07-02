@@ -83,8 +83,8 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
-  'Importeren via URL is nog niet beschikbaar in de webversie.':
-      'Az URL-en keresztüli importálás még nem érhető el a webes verzióban.',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'A csomagok (.ocideck) még nem támogatottak a webes verzióban.',
   'Geen': 'Nincs',
   'Nieuw': 'Új',
   'Verwijderen': 'Törlés',

@@ -83,8 +83,8 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
-  'Importeren via URL is nog niet beschikbaar in de webversie.':
-      'Importēšana pēc URL tīmekļa versijā vēl nav pieejama.',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Pakotnes (.ocideck) tīmekļa versijā vēl netiek atbalstītas.',
   'Geen': 'Nav',
   'Nieuw': 'Jauns',
   'Verwijderen': 'Dzēst',

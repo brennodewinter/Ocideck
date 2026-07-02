@@ -14,6 +14,9 @@ void _reportOpenFailure(
       'Dit is geen Marp/OciDeck-presentatie.',
     ),
     OpenResult.unreadable => l10n.d('Kon dit bestand niet openen.'),
+    OpenResult.packageUnsupported => l10n.d(
+      'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.',
+    ),
     OpenResult.opened || OpenResult.blocked => null,
   };
   if (message != null) {
@@ -62,29 +65,33 @@ Future<void> _scanLibrary(BuildContext context, WidgetRef ref) async {
 /// Gedeeld door het hoofdmenu én het openscherm, zodat je ook bij het openen
 /// online een presentatie kunt ophalen.
 Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
-  // Op web kan deze flow structureel niet werken: het downloadpad draait op
-  // dart:io + het lokale bestandssysteem, en de CSP van de webbundel staat
-  // alleen first-party verkeer toe. Zeg dat eerlijk in plaats van stil te
-  // falen op een UnsupportedError diep in de import.
-  if (isWebPlatform) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          context.l10n.d(
-            'Importeren via URL is nog niet beschikbaar in de webversie.',
-          ),
-        ),
-      ),
-    );
-    return;
-  }
   final url = await _showUrlDialog(context);
-  if (url == null || url.trim().isEmpty) return;
+  if (url == null || url.trim().isEmpty || !context.mounted) return;
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
   bool ok;
   try {
-    ok = await ref
-        .read(tabsProvider.notifier)
-        .importFromUrl(url, homeDir: ref.read(settingsProvider).homeDirectory);
+    if (isWebPlatform) {
+      // Web: de browser haalt het bestand op (CORS + CSP bewaken het verkeer)
+      // en het deck wordt volledig in het geheugen geopend — het dart:io-
+      // downloadpad hieronder bestaat op web niet.
+      final result = await ref
+          .read(tabsProvider.notifier)
+          .importFromUrlWeb(url);
+      if (result == OpenResult.packageUnsupported ||
+          result == OpenResult.notAPresentation) {
+        _reportOpenFailure(messenger, l10n, result);
+        return;
+      }
+      ok = result == OpenResult.opened || result == OpenResult.blocked;
+    } else {
+      ok = await ref
+          .read(tabsProvider.notifier)
+          .importFromUrl(
+            url,
+            homeDir: ref.read(settingsProvider).homeDirectory,
+          );
+    }
   } catch (e, s) {
     // Een platform- of IO-fout mag nooit als stilte eindigen: de gebruiker
     // heeft net een URL ingetikt en verwacht óf een tab óf een melding.
@@ -92,11 +99,9 @@ Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
     ok = false;
   }
   if (!ok && context.mounted) {
-    ScaffoldMessenger.of(context).showSnackBar(
+    messenger.showSnackBar(
       SnackBar(
-        content: Text(
-          context.l10n.d('Kon van deze URL geen presentatie ophalen.'),
-        ),
+        content: Text(l10n.d('Kon van deze URL geen presentatie ophalen.')),
       ),
     );
   }

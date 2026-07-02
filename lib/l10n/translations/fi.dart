@@ -83,8 +83,8 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
-  'Importeren via URL is nog niet beschikbaar in de webversie.':
-      'Tuonti URL-osoitteesta ei ole vielä käytettävissä verkkoversiossa.',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Paketteja (.ocideck) ei vielä tueta verkkoversiossa.',
   'Geen': 'Ei mitään',
   'Nieuw': 'Uusi',
   'Verwijderen': 'Poista',

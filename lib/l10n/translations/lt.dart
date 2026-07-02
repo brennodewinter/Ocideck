@@ -83,8 +83,8 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
-  'Importeren via URL is nog niet beschikbaar in de webversie.':
-      'Importavimas pagal URL žiniatinklio versijoje dar negalimas.',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Paketai (.ocideck) žiniatinklio versijoje dar nepalaikomi.',
   'Geen': 'Nėra',
   'Nieuw': 'Naujas',
   'Verwijderen': 'Ištrinti',

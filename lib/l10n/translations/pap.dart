@@ -83,8 +83,8 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
-  'Importeren via URL is nog niet beschikbaar in de webversie.':
-      'Importá via URL no ta disponibel ainda den e vershon web.',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Paketnan (.ocideck) no ta sostené ainda den e vershon web.',
   'Geen': 'Ningun',
   'Nieuw': 'Nobo',
   'Verwijderen': 'Kita',
