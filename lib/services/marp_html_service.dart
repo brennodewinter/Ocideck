@@ -34,10 +34,28 @@ class MarpHtmlService {
   MarpHtmlService({
     Future<String> Function(String asset)? loadAsset,
     Future<Uint8List> Function(String asset)? loadBytes,
-  }) : loadAsset = loadAsset ?? rootBundle.loadString,
-       loadBytes =
-           loadBytes ??
-           ((a) async => (await rootBundle.load(a)).buffer.asUint8List());
+  }) : loadAsset = loadAsset ?? _cachedLoadString,
+       loadBytes = loadBytes ?? _cachedLoadBytes,
+       _usesDefaultBytesLoader = loadBytes == null;
+
+  /// Of [loadBytes] de default (rootBundle) is; alleen dan mag de statische
+  /// font-face-cache worden gebruikt, zodat tests met een geïnjecteerde loader
+  /// geen resultaat van een eerdere run terugkrijgen.
+  final bool _usesDefaultBytesLoader;
+
+  // Bundel-assets zijn immutable; cache ze over exports heen (de service wordt
+  // per export opnieuw geconstrueerd, dus dit moet static). Alleen de default
+  // loaders cachen — geïnjecteerde testloaders blijven elke keer draaien.
+  static final _assetTextCache = <String, String>{};
+  static final _assetBytesCache = <String, Uint8List>{};
+
+  static Future<String> _cachedLoadString(String asset) async =>
+      _assetTextCache[asset] ??= await rootBundle.loadString(asset);
+
+  static Future<Uint8List> _cachedLoadBytes(String asset) async =>
+      _assetBytesCache[asset] ??= (await rootBundle.load(
+        asset,
+      )).buffer.asUint8List();
 
   static const _assetDir = 'assets/web_export';
 
@@ -50,13 +68,25 @@ class MarpHtmlService {
     ExportDocumentMetadata? metadata,
     String fallbackTitle = 'Presentatie',
   }) async {
-    final marked = await loadAsset('$_assetDir/marked.min.js');
-    final purify = await loadAsset('$_assetDir/purify.min.js');
-    final hljs = await loadAsset('$_assetDir/highlight.min.js');
-    final hljsCss = await loadAsset('$_assetDir/highlight.css');
-    final mathjax = await loadAsset('$_assetDir/tex-svg.js');
-    final mermaid = await loadAsset('$_assetDir/mermaid.min.js');
-    final css = theme == null ? _baseCss : await _themedCss(theme);
+    // De zes bundel-assets en de themed CSS zijn onafhankelijk; sequentieel
+    // wachten stapelde hun laadtijden op.
+    final [
+      marked,
+      purify,
+      hljs,
+      hljsCss,
+      mathjax,
+      mermaid,
+      css,
+    ] = await Future.wait([
+      loadAsset('$_assetDir/marked.min.js'),
+      loadAsset('$_assetDir/purify.min.js'),
+      loadAsset('$_assetDir/highlight.min.js'),
+      loadAsset('$_assetDir/highlight.css'),
+      loadAsset('$_assetDir/tex-svg.js'),
+      loadAsset('$_assetDir/mermaid.min.js'),
+      theme == null ? Future.value(_baseCss) : _themedCss(theme),
+    ]);
 
     // Per-export CSP nonce. Every executable <script> we emit carries it; the
     // CSP then allows only nonce'd scripts, so an injected inline <script> that
@@ -292,16 +322,26 @@ class MarpHtmlService {
     return "'$font', $generic";
   }
 
+  /// Gecachte @font-face (de base64 van ~0,5 MB font liep anders bij elke
+  /// export opnieuw); alleen gevuld via de default loader, zie
+  /// [_usesDefaultBytesLoader].
+  static String? _ebGaramondFaceCache;
+
   /// Embed the bundled EB Garamond variable font as base64 so it works offline.
   /// Returns an empty string for any other (system) font.
   Future<String> _ebGaramondFontFace(String font) async {
     if (font != 'EB Garamond') return '';
+    final cached = _usesDefaultBytesLoader ? _ebGaramondFaceCache : null;
+    if (cached != null) return cached;
     try {
       final bytes = await loadBytes('assets/fonts/EBGaramond-Variable.ttf');
       final b64 = base64Encode(bytes);
-      return "@font-face{font-family:'EB Garamond';font-weight:400 800;"
+      final face =
+          "@font-face{font-family:'EB Garamond';font-weight:400 800;"
           "font-style:normal;src:url(data:font/ttf;base64,$b64) "
           "format('truetype');}";
+      if (_usesDefaultBytesLoader) _ebGaramondFaceCache = face;
+      return face;
     } catch (e) {
       logWarning('MarpHtmlService._ebGaramondFontFace: load font asset', e);
       return ''; // Fall back to the CSS font stack if the asset is missing.

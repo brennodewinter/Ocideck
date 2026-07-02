@@ -4,6 +4,13 @@
 // an extension — same library, same members, no behaviour change.
 part of 'markdown_service.dart';
 
+// Hoisted hot-path regexes (zie markdown_service_parse.dart): deze draaien in
+// de per-regel lus van elke fenced-blok-parser.
+final _reFenceInfo = RegExp(r'^\s*```(.*)$');
+final _reFenceLine = RegExp(r'^\s*```');
+final _reImageMdAllowEmpty = RegExp(r'!\[[^\]]*\]\(([^)]*)\)');
+final _reHtmlTag = RegExp(r'<[^>]+>');
+
 extension _MarkdownFenced on MarkdownService {
   /// Parse a `<!-- _class: code -->` slide: an optional `# title`, the fenced
   /// code block (its info string is the language) and an optional `<audio>`.
@@ -24,7 +31,7 @@ extension _MarkdownFenced on MarkdownService {
     bool inFence = false;
 
     for (final line in lines) {
-      final fence = RegExp(r'^\s*```(.*)$').firstMatch(line);
+      final fence = _reFenceInfo.firstMatch(line);
       if (fence != null) {
         if (!inFence) {
           inFence = true;
@@ -94,7 +101,7 @@ extension _MarkdownFenced on MarkdownService {
     bool inFence = false;
 
     for (final line in lines) {
-      final fence = RegExp(r'^\s*```').hasMatch(line);
+      final fence = _reFenceLine.hasMatch(line);
       if (fence) {
         inFence = !inFence;
         continue;
@@ -157,7 +164,7 @@ extension _MarkdownFenced on MarkdownService {
     bool inFence = false;
 
     for (final line in lines) {
-      final fence = RegExp(r'^\s*```').hasMatch(line);
+      final fence = _reFenceLine.hasMatch(line);
       if (fence) {
         inFence = !inFence;
         continue;
@@ -225,7 +232,7 @@ extension _MarkdownFenced on MarkdownService {
     bool inFence = false;
 
     for (final line in lines) {
-      final fence = RegExp(r'^\s*```').hasMatch(line);
+      final fence = _reFenceLine.hasMatch(line);
       if (fence) {
         inFence = !inFence;
         continue;
@@ -238,7 +245,7 @@ extension _MarkdownFenced on MarkdownService {
       if (t.startsWith('# ') && title.isEmpty) {
         title = t.substring(2).trim();
       } else if (t.startsWith('![')) {
-        final m = RegExp(r'!\[[^\]]*\]\(([^)]*)\)').firstMatch(t);
+        final m = _reImageMdAllowEmpty.firstMatch(t);
         if (m != null) imagePath = m.group(1) ?? '';
       } else if (t.startsWith('<div class="image-caption">')) {
         imageCaption = _decodeCaption(_decodeImageCaption(t));
@@ -280,8 +287,6 @@ extension _MarkdownFenced on MarkdownService {
   }
 
   String _stripInlineHtml(String value) {
-    return value
-        .replaceAll(RegExp(r'<[^>]+>'), ' ')
-        .replaceAll(_reWhitespace, ' ');
+    return value.replaceAll(_reHtmlTag, ' ').replaceAll(_reWhitespace, ' ');
   }
 }

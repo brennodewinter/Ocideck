@@ -89,11 +89,14 @@ extension _FileServiceOpen on FileService {
 
   /// For packaging: add a chart's linked CSV under data/ and rewrite its source
   /// path; if the CSV is missing, fall back to keeping the data inline.
-  Slide _packChartSlide(Slide s, String? Function(String, String) addAsset) {
+  Future<Slide> _packChartSlide(
+    Slide s,
+    Future<String?> Function(String, String) addAsset,
+  ) async {
     final spec = ChartSpec.parse(s.customMarkdown);
     final src = spec.source;
     if (src == null) return s;
-    final rel = addAsset(src, chartDataDirName);
+    final rel = await addAsset(src, chartDataDirName);
     if (rel == null) {
       return s.copyWith(
         customMarkdown: spec.copyWith(clearSource: true).toBlock(),

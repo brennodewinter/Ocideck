@@ -32,7 +32,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
 
     final canExport = deckState.filePath != null && !deckState.isDirty;
     final enforcement = ClassificationEnforcementPolicy.fromAppSettings(
-      ref.watch(settingsProvider),
+      settings,
     );
     final classificationDecision = enforcement.evaluate(deck.tlp);
     final exportTooltip = deckState.filePath == null

@@ -20,6 +20,12 @@ part 'markdown_service_serialize.dart';
 
 const _uuid = Uuid();
 
+// Hoisted regexes (zie markdown_service_parse.dart voor het patroon):
+// _reUnescapedPipe draait per tabelrij, de YAML-checks per frontmatter-veld.
+final _reYamlSpecial = RegExp(r'[:#"\n]');
+final _reYamlLeadingSigil = RegExp(r'''^[\[\]{}>|*&!%@`,?-]''');
+final _reUnescapedPipe = RegExp(r'(?<!\\)\|');
+
 class MarkdownService {
   // ── Generation ──────────────────────────────────────────────────────────────
 
@@ -105,8 +111,8 @@ class MarkdownService {
     final needsQuote =
         v.isEmpty ||
         v != v.trim() ||
-        RegExp(r'[:#"\n]').hasMatch(v) ||
-        RegExp(r'''^[\[\]{}>|*&!%@`,?-]''').hasMatch(v);
+        _reYamlSpecial.hasMatch(v) ||
+        _reYamlLeadingSigil.hasMatch(v);
     if (!needsQuote) return v;
     final escaped = v
         .replaceAll('\\', r'\\')
@@ -181,7 +187,7 @@ class MarkdownService {
     if (s.startsWith('|')) s = s.substring(1);
     if (s.endsWith('|')) s = s.substring(0, s.length - 1);
     return s
-        .split(RegExp(r'(?<!\\)\|'))
+        .split(_reUnescapedPipe)
         .map((c) => _unescapeCell(c.trim()))
         .toList();
   }

@@ -63,12 +63,17 @@ class SlideThumbnail extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final skipped = slide.skipped;
-    final slideIssues = ref.watch(deckQualityProvider).forSlide(index);
-    final showWatermark = ref
-        .watch(settingsProvider)
-        .classificationWatermarkEnabled;
-    final hasQualityErrors = slideIssues.any(
-      (i) => i.severity == MarkdownValidationSeverity.error,
+    // Selects op booleans i.p.v. het hele kwaliteitsresultaat: anders rebuildt
+    // élke thumbnail bij elke wijziging waar dan ook in het deck.
+    final hasQualityErrors = ref.watch(
+      deckQualityProvider.select(
+        (r) => r
+            .forSlide(index)
+            .any((i) => i.severity == MarkdownValidationSeverity.error),
+      ),
+    );
+    final showWatermark = ref.watch(
+      settingsProvider.select((s) => s.classificationWatermarkEnabled),
     );
     // "In tweeën splitsen" is beschikbaar op elke bulletslide met genoeg bullets
     // om te verdelen — óók bullets-met-afbeelding, waar het tekstvlak maar de
@@ -81,8 +86,12 @@ class SlideThumbnail extends ConsumerWidget {
         slide.bullets.length >= 2 || slide.bullets2.length >= 2,
       _ => false,
     };
-    final hasQualityWarnings = slideIssues.any(
-      (i) => i.severity == MarkdownValidationSeverity.warning,
+    final hasQualityWarnings = ref.watch(
+      deckQualityProvider.select(
+        (r) => r
+            .forSlide(index)
+            .any((i) => i.severity == MarkdownValidationSeverity.warning),
+      ),
     );
     final hasActionableQualityIssues = hasQualityErrors || hasQualityWarnings;
     final borderColor = isSelected
