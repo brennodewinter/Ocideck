@@ -23,6 +23,9 @@ extension _PresenterNavigation on _FullscreenPresenterState {
     // Met het notitiepaneel open bladert alleen PgUp/PgDn expliciet door;
     // klikken en overige toetsen blijven bij het tekstveld.
     if (_userNotesMode && !allowInUserNotes) return;
+    // Navigeren maakt een half getypt slidenummer irrelevant: meteen wissen
+    // i.p.v. de badge nog 2,5 s te laten staan.
+    _clearTyped();
     // Eerste toets/klik op een blanco scherm haalt het scherm terug.
     if (_blank != _Blank.none) {
       _rebuild(() => _blank = _Blank.none);
@@ -73,6 +76,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
 
   void _prev({bool allowInUserNotes = false}) {
     if (_userNotesMode && !allowInUserNotes) return;
+    _clearTyped();
     if (_blank != _Blank.none) {
       _rebuild(() => _blank = _Blank.none);
       return;
