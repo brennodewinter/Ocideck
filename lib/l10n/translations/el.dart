@@ -83,6 +83,8 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Importeren via URL is nog niet beschikbaar in de webversie.':
+      'Η εισαγωγή μέσω URL δεν είναι ακόμη διαθέσιμη στην έκδοση για τον ιστό.',
   'Geen': 'Κανένα',
   'Nieuw': 'Νέα',
   'Verwijderen': 'Διαγραφή',

@@ -84,6 +84,8 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Importeren via URL is nog niet beschikbaar in de webversie.':
+      'L-importazzjoni permezz ta\' URL għadha mhix disponibbli fil-verżjoni tal-web.',
   'Geen': 'L-ebda',
   'Nieuw': 'Ġdid',
   'Verwijderen': 'Ħassar',

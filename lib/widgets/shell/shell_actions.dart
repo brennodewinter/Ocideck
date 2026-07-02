@@ -62,11 +62,35 @@ Future<void> _scanLibrary(BuildContext context, WidgetRef ref) async {
 /// Gedeeld door het hoofdmenu én het openscherm, zodat je ook bij het openen
 /// online een presentatie kunt ophalen.
 Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
+  // Op web kan deze flow structureel niet werken: het downloadpad draait op
+  // dart:io + het lokale bestandssysteem, en de CSP van de webbundel staat
+  // alleen first-party verkeer toe. Zeg dat eerlijk in plaats van stil te
+  // falen op een UnsupportedError diep in de import.
+  if (isWebPlatform) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d(
+            'Importeren via URL is nog niet beschikbaar in de webversie.',
+          ),
+        ),
+      ),
+    );
+    return;
+  }
   final url = await _showUrlDialog(context);
   if (url == null || url.trim().isEmpty) return;
-  final ok = await ref
-      .read(tabsProvider.notifier)
-      .importFromUrl(url, homeDir: ref.read(settingsProvider).homeDirectory);
+  bool ok;
+  try {
+    ok = await ref
+        .read(tabsProvider.notifier)
+        .importFromUrl(url, homeDir: ref.read(settingsProvider).homeDirectory);
+  } catch (e, s) {
+    // Een platform- of IO-fout mag nooit als stilte eindigen: de gebruiker
+    // heeft net een URL ingetikt en verwacht óf een tab óf een melding.
+    logError('_importFromUrl: import failed', e, s);
+    ok = false;
+  }
   if (!ok && context.mounted) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

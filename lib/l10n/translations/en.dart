@@ -83,6 +83,8 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'Importeren via URL is nog niet beschikbaar in de webversie.':
+      'Importing via URL is not yet available in the web version.',
   'Geen': 'None',
   'Nieuw': 'New',
   'Verwijderen': 'Delete',

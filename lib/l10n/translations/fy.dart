@@ -83,6 +83,8 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Importeren via URL is nog niet beschikbaar in de webversie.':
+      'Ymportearjen fia URL is noch net beskikber yn de webferzje.',
   'Geen': 'Gjin',
   'Nieuw': 'Nij',
   'Verwijderen': 'Fuortsmite',

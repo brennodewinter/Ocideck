@@ -83,6 +83,8 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Importeren via URL is nog niet beschikbaar in de webversie.':
+      'Tuonti URL-osoitteesta ei ole vielä käytettävissä verkkoversiossa.',
   'Geen': 'Ei mitään',
   'Nieuw': 'Uusi',
   'Verwijderen': 'Poista',

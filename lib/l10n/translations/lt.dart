@@ -83,6 +83,8 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Importeren via URL is nog niet beschikbaar in de webversie.':
+      'Importavimas pagal URL žiniatinklio versijoje dar negalimas.',
   'Geen': 'Nėra',
   'Nieuw': 'Naujas',
   'Verwijderen': 'Ištrinti',

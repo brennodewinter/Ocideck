@@ -83,6 +83,8 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Importeren via URL is nog niet beschikbaar in de webversie.':
+      'Importēšana pēc URL tīmekļa versijā vēl nav pieejama.',
   'Geen': 'Nav',
   'Nieuw': 'Jauns',
   'Verwijderen': 'Dzēst',

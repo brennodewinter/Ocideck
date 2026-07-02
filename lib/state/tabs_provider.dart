@@ -44,6 +44,11 @@ class TabInfo {
   });
 
   String get label {
+    // Rond het sluiten van een tab of het venster kan Riverpod de notifier al
+    // hebben opgeruimd (de ProviderScope van de tab is dan ontmanteld) terwijl
+    // dit TabInfo nog één rebuild lang in beeld is. Lezen van een gedisposede
+    // StateNotifier gooit; val dan terug op neutrale waarden.
+    if (!deckNotifier.mounted) return 'Nieuw';
     final st = deckNotifier.currentState;
     // A saved deck is identified by its file name — that is what the user
     // recognises, not the parsed first-slide title (which falls back to the
@@ -57,8 +62,8 @@ class TabInfo {
     return deck?.title.isNotEmpty == true ? deck!.title : 'Nieuw';
   }
 
-  bool get isDirty => deckNotifier.currentState.isDirty;
-  bool get isOpen => deckNotifier.currentState.isOpen;
+  bool get isDirty => deckNotifier.mounted && deckNotifier.currentState.isDirty;
+  bool get isOpen => deckNotifier.mounted && deckNotifier.currentState.isOpen;
 }
 
 // ── Tabs state ────────────────────────────────────────────────────────────────
@@ -193,6 +198,9 @@ class TabsNotifier extends StateNotifier<TabsState> {
   void _autosaveTick() {
     if (!mounted) return;
     for (final tab in state.tabs) {
+      // Zie TabInfo.label: een tab kan kortstondig een al-gedisposede
+      // notifier dragen; die heeft niets meer te autosaven.
+      if (!tab.deckNotifier.mounted) continue;
       final st = tab.deckNotifier.currentState;
       if (st.isOpen && st.isDirty) {
         final deck = st.deck!;
