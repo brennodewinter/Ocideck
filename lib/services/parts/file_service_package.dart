@@ -38,12 +38,24 @@ extension FileServicePackage on FileService {
 
   /// Bouw de bytes van een zelfstandig `.ocideck`-pakket (zie [exportPackage]),
   /// zonder ze weg te schrijven. Gebruikt om hetzelfde pakket te uploaden naar
-  /// een WebDAV-bron in plaats van naar schijf.
-  Future<List<int>> buildPackageBytes(Deck deck) async {
+  /// een WebDAV-bron of (op web) als download aan te bieden.
+  Future<Uint8List> buildPackageBytes(Deck deck) async {
     final archive = await _buildPackageArchive(deck);
     // Zip-compressie is CPU-zwaar (media-assets kunnen honderden MB zijn);
-    // in een eigen isolate blijft de UI responsief tijdens het pakken.
+    // in een eigen isolate blijft de UI responsief tijdens het pakken. Op web
+    // bestaan isolates niet en pakt de main thread — merkbaar, maar werkend.
+    if (kIsWeb) return ZipEncoder().encodeBytes(archive);
     return Isolate.run(() => ZipEncoder().encodeBytes(archive));
+  }
+
+  /// Web: bouw het pakket in het geheugen en bied het de browser als download
+  /// aan. Retourneert de gebruikte bestandsnaam. In tegenstelling tot de kale
+  /// `.md`-download reizen de afbeeldingen (mem:-assets) en sidecars hier mee.
+  Future<String> downloadPackage(Deck deck) async {
+    final bytes = await buildPackageBytes(deck);
+    final name = '${_safeName(deck.title)}.${FileService.packageExtension}';
+    await FilePicker.saveFile(fileName: name, bytes: bytes);
+    return name;
   }
 
   /// Pakket-leden (pad → bytes) zonder ze te zippen, zodat elk bestand los naar
@@ -60,11 +72,41 @@ extension FileServicePackage on FileService {
   Future<Archive> _buildPackageArchive(Deck deck) async {
     final archive = Archive();
     final added = <String>{};
+    // Stabiel lidpad per mem:-asset, zodat imagePath en imagePath2 die
+    // dezelfde afbeelding delen ook hetzelfde pakket-lid krijgen.
+    final memRels = <String, String>{};
 
-    /// Resolve [path] (relatief t.o.v. projectPath of absoluut), voeg het
-    /// bestand toe onder `<subdir>/<bestandsnaam>` en geef dat pad terug.
+    /// Voeg een in-memory asset (mem:-pad uit de WebAssetStore) toe onder een
+    /// unieke naam in [subdir]. Naamconflicten tussen verschillende assets
+    /// krijgen een volgnummer.
+    String? addMemAsset(String path, String subdir) {
+      final existing = memRels[path];
+      if (existing != null) return existing;
+      final bytes = WebAssetStore.bytesFor(path);
+      // Store leeg (bv. pagina herladen): niets om in te pakken.
+      if (bytes == null) return null;
+      final original = WebAssetStore.nameFor(path) ?? 'afbeelding.png';
+      final base = _safeName(p.basenameWithoutExtension(original));
+      final ext = p.extension(original).toLowerCase();
+      final safeExt = RegExp(r'^\.[a-z0-9]{1,5}$').hasMatch(ext) ? ext : '.png';
+      var rel = p.posix.join(subdir, '$base$safeExt');
+      var i = 2;
+      while (added.contains(rel)) {
+        rel = p.posix.join(subdir, '$base (${i++})$safeExt');
+      }
+      archive.add(ArchiveFile(rel, bytes.length, bytes));
+      added.add(rel);
+      memRels[path] = rel;
+      return rel;
+    }
+
+    /// Resolve [path] (relatief t.o.v. projectPath, absoluut, of mem:), voeg
+    /// het bestand toe onder `<subdir>/<bestandsnaam>` en geef dat pad terug.
     Future<String?> addAsset(String path, String subdir) async {
       if (path.trim().isEmpty) return null;
+      if (WebAssetStore.isMemPath(path)) return addMemAsset(path, subdir);
+      // Zonder bestandssysteem (web) valt hier niets meer te lezen.
+      if (kIsWeb) return null;
       final String abs;
       if (p.isAbsolute(path)) {
         // Absolute paths come from the picker (the user explicitly chose them).

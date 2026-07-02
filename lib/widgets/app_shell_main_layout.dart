@@ -30,22 +30,15 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
 
     final isMarkdownMode = editor.mode == EditorMode.markdown;
 
-    // "Eerst opslaan" bestaat om exports naast het deck-bestand te leggen; op
-    // web is er geen bestandssysteem en wordt de export een download, dus daar
-    // kan elk geopend deck direct geëxporteerd worden.
-    final canExport =
-        isWebPlatform || (deckState.filePath != null && !deckState.isDirty);
     final enforcement = ClassificationEnforcementPolicy.fromAppSettings(
       settings,
     );
     final classificationDecision = enforcement.evaluate(deck.tlp);
-    final exportTooltip = !isWebPlatform && deckState.filePath == null
-        ? l10n.t('exportNeedsSave')
-        : !isWebPlatform && deckState.isDirty
-        ? l10n.t('exportNeedsClean')
-        : !classificationDecision.allowed
-        ? classificationDecision.reason!
-        : l10n.t('exportReady');
+    final (:canExport, :exportTooltip) = _exportGate(
+      deckState,
+      classificationDecision,
+      l10n,
+    );
 
     return Focus(
       canRequestFocus: false,
@@ -171,6 +164,27 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         ),
       ),
     );
+  }
+
+  /// Of exporteren nu kan, plus de tooltip die uitlegt waarom (niet).
+  /// "Eerst opslaan" bestaat om exports naast het deck-bestand te leggen; op
+  /// web is er geen bestandssysteem en wordt de export een download, dus daar
+  /// kan elk geopend deck direct geëxporteerd worden.
+  ({bool canExport, String exportTooltip}) _exportGate(
+    DeckState deckState,
+    ExportDecision classificationDecision,
+    AppLocalizations l10n,
+  ) {
+    final canExport =
+        isWebPlatform || (deckState.filePath != null && !deckState.isDirty);
+    final exportTooltip = !isWebPlatform && deckState.filePath == null
+        ? l10n.t('exportNeedsSave')
+        : !isWebPlatform && deckState.isDirty
+        ? l10n.t('exportNeedsClean')
+        : !classificationDecision.allowed
+        ? classificationDecision.reason!
+        : l10n.t('exportReady');
+    return (canExport: canExport, exportTooltip: exportTooltip);
   }
 
   PreferredSizeWidget _appBar(
@@ -318,22 +332,20 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           ),
           _menuItem('open', Icons.folder_open_outlined, l10n.t('openEllipsis')),
           const PopupMenuDivider(),
-          // Pakket-export/-import schrijft en leest lokale mappen en Nextcloud
-          // is op web bewust uit — verberg wat daar niet kan werken (zie
-          // platform_features.dart). URL-import werkt overal: op web via de
-          // browser (CORS + CSP) met dezelfde security-gate.
-          if (supportsLocalProjectFolders) ...[
-            _menuItem(
-              'export_package',
-              Icons.inventory_2_outlined,
-              l10n.t('exportPackage'),
-            ),
-            _menuItem(
-              'import_package',
-              Icons.unarchive_outlined,
-              l10n.t('importPackage'),
-            ),
-          ],
+          // Pakketten en URL-import werken overal: op web volledig in het
+          // geheugen (pakket als download, import via de browser met dezelfde
+          // security-gate). Alleen Nextcloud is op web bewust uit (zie
+          // platform_features.dart).
+          _menuItem(
+            'export_package',
+            Icons.inventory_2_outlined,
+            l10n.t('exportPackage'),
+          ),
+          _menuItem(
+            'import_package',
+            Icons.unarchive_outlined,
+            l10n.t('importPackage'),
+          ),
           _menuItem('import_url', Icons.link, l10n.t('importUrl')),
           const PopupMenuDivider(),
           if (supportsNetworkDeckSources) ...[
@@ -705,10 +717,18 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     final deck = ref.read(deckProvider).deck!;
     final l10n = context.l10n;
     final fileService = ref.read(fileServiceProvider);
-    final dest = await fileService.pickPackageDestination(deck);
-    if (dest == null) return;
     try {
-      await fileService.exportPackage(deck, dest);
+      // Web: geen doelmap — het pakket wordt in het geheugen gebouwd (met de
+      // mem:-assets uit de WebAssetStore) en als download aangeboden.
+      final String dest;
+      if (isWebPlatform) {
+        dest = await fileService.downloadPackage(deck);
+      } else {
+        final picked = await fileService.pickPackageDestination(deck);
+        if (picked == null) return;
+        await fileService.exportPackage(deck, picked);
+        dest = picked;
+      }
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -724,6 +744,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
   }
 
   Future<void> _importPackage() async {
+    // Web: hetzelfde bytes-pad als "Openen..." — de picker levert inhoud en
+    // openDeckFromBytes pakt het pakket in het geheugen uit.
+    if (isWebPlatform) {
+      return _openWithBytesPicker(context, ref);
+    }
     final settings = ref.read(settingsProvider);
     final l10n = context.l10n;
     final fileService = ref.read(fileServiceProvider);
