@@ -1145,4 +1145,47 @@ const _dutchSourceGa = {
   'Nog opslaan nodig': 'Ní mór sábháil ar dtús',
   'TLP blokkeert export': 'Cuireann TLP bac ar an easpórtáil',
   'Kwaliteit blokkeert export': 'Cuireann an cháilíocht bac ar an easpórtáil',
+  'Leeg deck': 'Deic fholamh',
+  'Korte briefing': 'Faisnéisiú gearr',
+  'Status-briefing': 'Faisnéisiú stádais',
+  'Projectstart / kick-off': 'Tús tionscadail / kick-off',
+  'Voorbespreking communicatie': 'Réamhphlé cumarsáide',
+  'Projecttijdlijn': 'Amlíne an tionscadail',
+  'Informatiebeveiliging: RASCI / TVB': 'Slándáil faisnéise: RASCI / TVB',
+  'Security-takenplan': 'Plean tascanna slándála',
+  'Certificering voortgang': 'Dul chun cinn an deimhniúcháin',
+  'Training / workshop': 'Oiliúint / ceardlann',
+  'Rapportage': 'Tuairisciú',
+  'Onderzoeksverhaal': 'Scéal taighde',
+  'Technische uitleg': 'Míniú teicniúil',
+  'Interactieve quiz': 'Quiz idirghníomhach',
+  'Alleen een titelpagina en een agenda.':
+      'Leathanach teidil agus clár oibre amháin.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Cás, fíricí agus an cinneadh atá á iarraidh i sé shleamhnán.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Painéal stádais, dul chun cinn de réir sruth oibre agus cinntí.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Cén fáth, sprioc, scóip, páirtithe leasmhara agus amlíne.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Spriocghrúpaí, príomhtheachtaireacht, cainéil agus urlabhraíocht.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Céimeanna, garspriocanna, spleáchais agus pointí cinnidh.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Róil, maitrís RASCI agus socruithe tascanna a thaifeadadh.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Tascanna, tosaíochtaí, úinéirí agus fianaise.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Dul chun cinn de réir fearainn, rialuithe agus pleanáil iniúchta.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Spriocanna foghlama, príomhchoincheapa, cleachtadh agus ceist quiz.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Achoimre, painéal KPI, treocht agus gníomhartha.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Ceist, modh, amlíne na dtorthaí agus conclúidí.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Ailtireacht, comhpháirteanna, sampla cóid agus seicliosta.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Trí chineál ceiste le míniú agus plé ina dhiaidh.',
+  'Sjabloon': 'Teimpléad',
 };

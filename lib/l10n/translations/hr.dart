@@ -1124,4 +1124,47 @@ const _dutchSourceHr = {
   'Nog opslaan nodig': 'Prvo je potrebno spremiti',
   'TLP blokkeert export': 'TLP blokira izvoz',
   'Kwaliteit blokkeert export': 'Kvaliteta blokira izvoz',
+  'Leeg deck': 'Prazan deck',
+  'Korte briefing': 'Kratki brifing',
+  'Status-briefing': 'Statusni brifing',
+  'Projectstart / kick-off': 'Početak projekta / kick-off',
+  'Voorbespreking communicatie': 'Pripremni sastanak o komunikaciji',
+  'Projecttijdlijn': 'Vremenska crta projekta',
+  'Informatiebeveiliging: RASCI / TVB': 'Informacijska sigurnost: RASCI / TVB',
+  'Security-takenplan': 'Plan sigurnosnih zadataka',
+  'Certificering voortgang': 'Napredak certifikacije',
+  'Training / workshop': 'Trening / radionica',
+  'Rapportage': 'Izvještaj',
+  'Onderzoeksverhaal': 'Istraživačka priča',
+  'Technische uitleg': 'Tehničko objašnjenje',
+  'Interactieve quiz': 'Interaktivni kviz',
+  'Alleen een titelpagina en een agenda.':
+      'Samo naslovna stranica i dnevni red.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situacija, činjenice i tražena odluka u šest slajdova.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Statusna nadzorna ploča, napredak po radnim tokovima i odluke.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Zašto, cilj, opseg, dionici i vremenska crta.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Ciljne skupine, ključna poruka, kanali i glasnogovorništvo.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Faze, prekretnice, ovisnosti i točke odluke.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Utvrđivanje uloga, RASCI matrice i dogovora o zadacima.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Zadaci, prioriteti, vlasnici i dokazi.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Napredak po domenama, kontrole i planiranje audita.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Ciljevi učenja, ključni koncepti, vježba i pitanje za kviz.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Sažetak, KPI nadzorna ploča, trend i akcije.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Pitanje, metoda, vremenska crta nalaza i zaključci.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arhitektura, komponente, primjer koda i kontrolni popis.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Tri oblika pitanja s objašnjenjem i završnom raspravom.',
+  'Sjabloon': 'Predložak',
 };

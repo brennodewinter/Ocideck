@@ -1125,4 +1125,47 @@ const _dutchSourceLt = {
   'Nog opslaan nodig': 'Pirmiausia reikia išsaugoti',
   'TLP blokkeert export': 'TLP blokuoja eksportą',
   'Kwaliteit blokkeert export': 'Kokybė blokuoja eksportą',
+  'Leeg deck': 'Tuščias rinkinys',
+  'Korte briefing': 'Trumpas brifingas',
+  'Status-briefing': 'Būsenos brifingas',
+  'Projectstart / kick-off': 'Projekto pradžia / kick-off',
+  'Voorbespreking communicatie': 'Išankstinis komunikacijos aptarimas',
+  'Projecttijdlijn': 'Projekto laiko juosta',
+  'Informatiebeveiliging: RASCI / TVB': 'Informacijos sauga: RASCI / TVB',
+  'Security-takenplan': 'Saugumo užduočių planas',
+  'Certificering voortgang': 'Sertifikavimo pažanga',
+  'Training / workshop': 'Mokymai / dirbtuvės',
+  'Rapportage': 'Ataskaita',
+  'Onderzoeksverhaal': 'Tyrimo pasakojimas',
+  'Technische uitleg': 'Techninis paaiškinimas',
+  'Interactieve quiz': 'Interaktyvi viktorina',
+  'Alleen een titelpagina en een agenda.':
+      'Tik titulinis puslapis ir darbotvarkė.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situacija, faktai ir prašomas sprendimas šešiose skaidrėse.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Būsenos skydelis, pažanga pagal darbo srautus ir sprendimai.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Kodėl, tikslas, apimtis, suinteresuotosios šalys ir laiko juosta.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Tikslinės grupės, pagrindinė žinutė, kanalai ir atstovavimas spaudai.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fazės, gairės, priklausomybės ir sprendimų momentai.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Užfiksuoti vaidmenis, RASCI matricą ir susitarimus dėl užduočių.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Užduotys, prioritetai, atsakingieji ir įrodymai.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Pažanga pagal sritis, kontrolės priemonės ir auditų planavimas.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Mokymosi tikslai, pagrindinės sąvokos, pratimas ir viktorinos klausimas.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Santrauka, KPI skydelis, tendencija ir veiksmai.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Klausimas, metodas, radinių laiko juosta ir išvados.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architektūra, komponentai, kodo pavyzdys ir kontrolinis sąrašas.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Trys klausimų tipai su paaiškinimu ir aptarimu.',
+  'Sjabloon': 'Šablonas',
 };

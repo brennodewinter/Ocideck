@@ -1129,4 +1129,46 @@ const _dutchSourceLa = {
   'Nog opslaan nodig': 'Primum servandum est',
   'TLP blokkeert export': 'TLP exportationem impedit',
   'Kwaliteit blokkeert export': 'Qualitas exportationem impedit',
+  'Leeg deck': 'Acervus vacuus',
+  'Korte briefing': 'Instructio brevis',
+  'Status-briefing': 'Instructio status',
+  'Projectstart / kick-off': 'Initium proiecti / kick-off',
+  'Voorbespreking communicatie': 'Colloquium praevium communicationis',
+  'Projecttijdlijn': 'Linea temporis proiecti',
+  'Informatiebeveiliging: RASCI / TVB': 'Securitas informationis: RASCI / TVB',
+  'Security-takenplan': 'Consilium operum securitatis',
+  'Certificering voortgang': 'Progressus certificationis',
+  'Training / workshop': 'Exercitatio / officina',
+  'Rapportage': 'Relatio',
+  'Onderzoeksverhaal': 'Narratio investigationis',
+  'Technische uitleg': 'Explicatio technica',
+  'Interactieve quiz': 'Quiz interactivum',
+  'Alleen een titelpagina en een agenda.': 'Solum pagina tituli et agenda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situatio, facta et decretum petitum in sex paginis.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Tabula status, progressus per fluxum operis et decreta.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Cur, propositum, ambitus, participes et linea temporis.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Auditores destinati, nuntius praecipuus, canales et locutio publica.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Phases, lapides miliarii, dependentiae et momenta decernendi.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Partes, matricem RASCI et pacta operum consignare.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Opera, prioritates, domini et documenta probantia.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Progressus per dominium, moderamina et consilium inspectionis.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Proposita discendi, notiones praecipuae, exercitium et quaestio quiz.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Summarium, tabula KPI, inclinatio et actiones.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Quaestio, methodus, linea temporis inventorum et conclusiones.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architectura, partes, exemplum codicis et index probationis.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Tres formae quaestionum cum explicatione et colloquio postero.',
+  'Sjabloon': 'Exemplar',
 };

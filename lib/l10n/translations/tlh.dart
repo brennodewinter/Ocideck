@@ -1106,4 +1106,46 @@ const _dutchSourceTlh = {
   'Nog opslaan nodig': 'wa\'DIch yIchoq',
   'TLP blokkeert export': 'ngeH bot TLP',
   'Kwaliteit blokkeert export': 'ngeH bot Dun',
+  'Leeg deck': 'deck chIm',
+  'Korte briefing': 'SoQ ngaj',
+  'Status-briefing': 'Dotlh SoQ',
+  'Projectstart / kick-off': 'Qu\' tagh',
+  'Voorbespreking communicatie': 'QIn qepHom',
+  'Projecttijdlijn': 'Qu\' poH He',
+  'Informatiebeveiliging: RASCI / TVB': 'De\' Hung: RASCI / TVB',
+  'Security-takenplan': 'Hung Qu\'mey nab',
+  'Certificering voortgang': 'chaw\' Duv',
+  'Training / workshop': 'qeq / qepHom',
+  'Rapportage': 'ja\'ghach',
+  'Onderzoeksverhaal': 'Qul lut',
+  'Technische uitleg': 'cham QIjghach',
+  'Interactieve quiz': 'yu\'meH Quj',
+  'Alleen een titelpagina en een agenda.': 'pong nav qep nab je neH.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'wanI\', ngoDmey, wuqghach poQlu\'bogh je, jav \'echletHommeyDaq.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Dotlh jIH, Hoch Qu\' HeDaq Duv, wuqghachmey je.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'qatlh, ngoQ, veH, SaHwI\'pu\', poH He je.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'DoS ghommey, botlh QIn, QIn Hemey, jatlhwI\' je.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'mIwmey, potlh DoSmey, wuvghachmey, wuqmeH poHmey je.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Qu\' patlhmey, RASCI raS, Qu\' mabmey je qon.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Qu\'mey, potlhmey, ghajwI\'pu\', tobmeH De\' je.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Hoch SepDaq Duv, SeH mIwmey, juv nab je.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'ghojmeH ngoQmey, botlh qechmey, qeq, Quj ghelghach je.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'De\' ngaj, KPI jIH, He, ta\'mey je.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'ghelghach, mIw, tu\'ghachmey poH He, meqmey je.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'chenmoHmeH nab, \'ay\'mey, ngoq \'angghach, cham je.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'wej ghelghach Seghmey, QIjghach ja\'chuq je.',
+  'Sjabloon': 'ghantoH',
 };

@@ -1132,4 +1132,47 @@ const _dutchSourceUk = {
   'Nog opslaan nodig': 'Спершу збережіть',
   'TLP blokkeert export': 'TLP блокує експорт',
   'Kwaliteit blokkeert export': 'Якість блокує експорт',
+  'Leeg deck': 'Порожня презентація',
+  'Korte briefing': 'Короткий брифінг',
+  'Status-briefing': 'Статус-брифінг',
+  'Projectstart / kick-off': 'Старт проєкту / kick-off',
+  'Voorbespreking communicatie': 'Підготовча нарада з комунікації',
+  'Projecttijdlijn': 'Часова шкала проєкту',
+  'Informatiebeveiliging: RASCI / TVB': 'Інформаційна безпека: RASCI / TVB',
+  'Security-takenplan': 'План завдань з безпеки',
+  'Certificering voortgang': 'Прогрес сертифікації',
+  'Training / workshop': 'Тренінг / воркшоп',
+  'Rapportage': 'Звіт',
+  'Onderzoeksverhaal': 'Дослідницька розповідь',
+  'Technische uitleg': 'Технічне пояснення',
+  'Interactieve quiz': 'Інтерактивна вікторина',
+  'Alleen een titelpagina en een agenda.':
+      'Лише титульна сторінка та порядок денний.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Ситуація, факти та запитуване рішення на шести слайдах.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Статус-дашборд, прогрес за робочими потоками та рішення.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Чому, мета, обсяг, стейкхолдери та часова шкала.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Цільові аудиторії, ключове повідомлення, канали та речництво.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Фази, віхи, залежності та моменти ухвалення рішень.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Зафіксувати ролі, матрицю RASCI та домовленості щодо завдань.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Завдання, пріоритети, власники та докази.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Прогрес за доменами, контролі та планування аудитів.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Навчальні цілі, ключові концепції, вправа та питання вікторини.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Підсумок, KPI-дашборд, тренд та дії.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Питання, метод, хронологія результатів і висновки.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Архітектура, компоненти, приклад коду та контрольний список.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Три типи питань з поясненням та обговоренням.',
+  'Sjabloon': 'Шаблон',
 };

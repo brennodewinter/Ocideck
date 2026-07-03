@@ -1126,4 +1126,46 @@ const _dutchSourceSk = {
   'Nog opslaan nodig': 'Najprv je potrebné uložiť',
   'TLP blokkeert export': 'TLP blokuje export',
   'Kwaliteit blokkeert export': 'Kvalita blokuje export',
+  'Leeg deck': 'Prázdna prezentácia',
+  'Korte briefing': 'Krátky briefing',
+  'Status-briefing': 'Statusový briefing',
+  'Projectstart / kick-off': 'Štart projektu / kick-off',
+  'Voorbespreking communicatie': 'Predbežná porada o komunikácii',
+  'Projecttijdlijn': 'Časová os projektu',
+  'Informatiebeveiliging: RASCI / TVB': 'Informačná bezpečnosť: RASCI / TVB',
+  'Security-takenplan': 'Plán bezpečnostných úloh',
+  'Certificering voortgang': 'Postup certifikácie',
+  'Training / workshop': 'Školenie / workshop',
+  'Rapportage': 'Správa',
+  'Onderzoeksverhaal': 'Výskumný príbeh',
+  'Technische uitleg': 'Technické vysvetlenie',
+  'Interactieve quiz': 'Interaktívny kvíz',
+  'Alleen een titelpagina en een agenda.': 'Iba titulná strana a program.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situácia, fakty a požadované rozhodnutie na šiestich snímkach.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Prehľad stavu, postup podľa pracovných prúdov a rozhodnutia.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Prečo, cieľ, rozsah, zainteresované strany a časová os.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Cieľové skupiny, kľúčové posolstvo, kanály a hovorcovia.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fázy, míľniky, závislosti a rozhodovacie body.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Zaznamenanie rolí, matice RASCI a dohôd o úlohách.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Úlohy, priority, vlastníci a doklady.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Postup podľa domén, kontroly a plánovanie auditu.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Vzdelávacie ciele, kľúčové koncepty, cvičenie a kvízová otázka.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Zhrnutie, prehľad KPI, trend a akcie.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Otázka, metóda, časová os zistení a závery.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architektúra, komponenty, ukážka kódu a kontrolný zoznam.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Tri typy otázok s vysvetlením a záverečnou diskusiou.',
+  'Sjabloon': 'Šablóna',
 };

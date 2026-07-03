@@ -1132,4 +1132,47 @@ const _dutchSourceAddEn = {
   'Nog opslaan nodig': 'Save needed first',
   'TLP blokkeert export': 'TLP blocks export',
   'Kwaliteit blokkeert export': 'Quality blocks export',
+  'Leeg deck': 'Empty deck',
+  'Korte briefing': 'Short briefing',
+  'Status-briefing': 'Status briefing',
+  'Projectstart / kick-off': 'Project start / kick-off',
+  'Voorbespreking communicatie': 'Communications pre-brief',
+  'Projecttijdlijn': 'Project timeline',
+  'Informatiebeveiliging: RASCI / TVB':
+      'Information security: RASCI / responsibilities',
+  'Security-takenplan': 'Security task plan',
+  'Certificering voortgang': 'Certification progress',
+  'Training / workshop': 'Training / workshop',
+  'Rapportage': 'Report',
+  'Onderzoeksverhaal': 'Research narrative',
+  'Technische uitleg': 'Technical explainer',
+  'Interactieve quiz': 'Interactive quiz',
+  'Alleen een titelpagina en een agenda.': 'Just a title page and an agenda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situation, facts and requested decision in six slides.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Status dashboard, progress per workstream and decisions.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Why, goal, scope, stakeholders and timeline.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Audiences, key message, channels and spokespersons.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Phases, milestones, dependencies and decision points.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Record roles, a RASCI matrix and task agreements.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Tasks, priorities, owners and evidence.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Progress per domain, controls and audit planning.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Learning goals, key concepts, an exercise and a quiz question.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Summary, KPI dashboard, trend and actions.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Question, method, timeline of findings and conclusions.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architecture, components, a code example and a checklist.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Three question types with explanation and debrief.',
+  'Sjabloon': 'Template',
 };

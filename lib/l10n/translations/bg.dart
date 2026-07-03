@@ -1136,4 +1136,47 @@ const _dutchSourceBg = {
   'Nog opslaan nodig': 'Първо е нужно запазване',
   'TLP blokkeert export': 'TLP блокира експорта',
   'Kwaliteit blokkeert export': 'Качеството блокира експорта',
+  'Leeg deck': 'Празен дек',
+  'Korte briefing': 'Кратък брифинг',
+  'Status-briefing': 'Статус брифинг',
+  'Projectstart / kick-off': 'Старт на проекта / kick-off',
+  'Voorbespreking communicatie': 'Предварително обсъждане на комуникацията',
+  'Projecttijdlijn': 'Времева линия на проекта',
+  'Informatiebeveiliging: RASCI / TVB': 'Информационна сигурност: RASCI / TVB',
+  'Security-takenplan': 'План на задачите по сигурността',
+  'Certificering voortgang': 'Напредък по сертификацията',
+  'Training / workshop': 'Обучение / уъркшоп',
+  'Rapportage': 'Отчет',
+  'Onderzoeksverhaal': 'Изследователски разказ',
+  'Technische uitleg': 'Техническо обяснение',
+  'Interactieve quiz': 'Интерактивен куиз',
+  'Alleen een titelpagina en een agenda.':
+      'Само заглавна страница и дневен ред.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Ситуация, факти и искано решение в шест слайда.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Статус табло, напредък по работни потоци и решения.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Защо, цел, обхват, заинтересовани страни и времева линия.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Целеви групи, ключово послание, канали и говорителство.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Фази, ключови етапи, зависимости и моменти за решения.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Записване на роли, RASCI матрица и договорености за задачите.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Задачи, приоритети, отговорници и доказателства.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Напредък по домейни, контроли и планиране на одити.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Учебни цели, ключови концепции, упражнение и куиз въпрос.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Резюме, KPI табло, тенденция и действия.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Въпрос, метод, времева линия на констатациите и заключения.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Архитектура, компоненти, примерен код и контролен списък.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Три вида въпроси с обяснение и обсъждане.',
+  'Sjabloon': 'Шаблон',
 };

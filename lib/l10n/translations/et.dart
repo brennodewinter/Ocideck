@@ -1114,4 +1114,46 @@ const _dutchSourceEt = {
   'Nog opslaan nodig': 'Enne tuleb salvestada',
   'TLP blokkeert export': 'TLP blokeerib ekspordi',
   'Kwaliteit blokkeert export': 'Kvaliteet blokeerib ekspordi',
+  'Leeg deck': 'Tühi esitlus',
+  'Korte briefing': 'Lühike briifing',
+  'Status-briefing': 'Staatuse briifing',
+  'Projectstart / kick-off': 'Projekti algus / kick-off',
+  'Voorbespreking communicatie': 'Kommunikatsiooni eelarutelu',
+  'Projecttijdlijn': 'Projekti ajajoon',
+  'Informatiebeveiliging: RASCI / TVB': 'Infoturve: RASCI / TVB',
+  'Security-takenplan': 'Turbeülesannete plaan',
+  'Certificering voortgang': 'Sertifitseerimise edenemine',
+  'Training / workshop': 'Koolitus / töötuba',
+  'Rapportage': 'Aruanne',
+  'Onderzoeksverhaal': 'Uurimislugu',
+  'Technische uitleg': 'Tehniline selgitus',
+  'Interactieve quiz': 'Interaktiivne viktoriin',
+  'Alleen een titelpagina en een agenda.': 'Ainult tiitelleht ja päevakord.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Olukord, faktid ja soovitud otsus kuuel slaidil.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Staatuse töölaud, edenemine töövoogude kaupa ja otsused.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Miks, eesmärk, ulatus, huvirühmad ja ajajoon.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Sihtrühmad, põhisõnum, kanalid ja pressiesindus.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Faasid, verstapostid, sõltuvused ja otsustushetked.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Rollide, RASCI-maatriksi ja ülesandekokkulepete fikseerimine.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Ülesanded, prioriteedid, vastutajad ja tõendusmaterjal.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Edenemine valdkonniti, kontrollid ja auditite planeerimine.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Õpieesmärgid, põhimõisted, harjutus ja viktoriiniküsimus.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Kokkuvõte, KPI-töölaud, trend ja tegevused.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Küsimus, meetod, leidude ajajoon ja järeldused.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arhitektuur, komponendid, koodinäide ja kontrollnimekiri.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Kolm küsimusetüüpi selgituse ja järelaruteluga.',
+  'Sjabloon': 'Mall',
 };

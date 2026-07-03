@@ -1133,4 +1133,47 @@ const _dutchSourceEl = {
   'Nog opslaan nodig': 'Απαιτείται πρώτα αποθήκευση',
   'TLP blokkeert export': 'Το TLP μπλοκάρει την εξαγωγή',
   'Kwaliteit blokkeert export': 'Η ποιότητα μπλοκάρει την εξαγωγή',
+  'Leeg deck': 'Κενό deck',
+  'Korte briefing': 'Σύντομη ενημέρωση',
+  'Status-briefing': 'Ενημέρωση κατάστασης',
+  'Projectstart / kick-off': 'Έναρξη έργου / kick-off',
+  'Voorbespreking communicatie': 'Προκαταρκτική συζήτηση επικοινωνίας',
+  'Projecttijdlijn': 'Χρονοδιάγραμμα έργου',
+  'Informatiebeveiliging: RASCI / TVB': 'Ασφάλεια πληροφοριών: RASCI / TVB',
+  'Security-takenplan': 'Σχέδιο εργασιών ασφάλειας',
+  'Certificering voortgang': 'Πρόοδος πιστοποίησης',
+  'Training / workshop': 'Εκπαίδευση / workshop',
+  'Rapportage': 'Αναφορά',
+  'Onderzoeksverhaal': 'Ερευνητική αφήγηση',
+  'Technische uitleg': 'Τεχνική επεξήγηση',
+  'Interactieve quiz': 'Διαδραστικό κουίζ',
+  'Alleen een titelpagina en een agenda.':
+      'Μόνο μια σελίδα τίτλου και μια ατζέντα.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Κατάσταση, γεγονότα και ζητούμενη απόφαση σε έξι διαφάνειες.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Πίνακας κατάστασης, πρόοδος ανά ροή εργασίας και αποφάσεις.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Γιατί, στόχος, εύρος, ενδιαφερόμενοι και χρονοδιάγραμμα.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Ομάδες-στόχοι, βασικό μήνυμα, κανάλια και εκπροσώπηση.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Φάσεις, ορόσημα, εξαρτήσεις και σημεία απόφασης.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Καταγραφή ρόλων, πίνακα RASCI και συμφωνιών εργασιών.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Εργασίες, προτεραιότητες, υπεύθυνοι και αποδεικτικά στοιχεία.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Πρόοδος ανά τομέα, μέτρα ελέγχου και προγραμματισμός audit.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Μαθησιακοί στόχοι, βασικές έννοιες, άσκηση και ερώτηση κουίζ.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Σύνοψη, πίνακας KPI, τάση και ενέργειες.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Ερώτημα, μέθοδος, χρονολόγιο ευρημάτων και συμπεράσματα.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Αρχιτεκτονική, στοιχεία, παράδειγμα κώδικα και λίστα ελέγχου.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Τρεις τύποι ερωτήσεων με επεξήγηση και ανασκόπηση.',
+  'Sjabloon': 'Πρότυπο',
 };

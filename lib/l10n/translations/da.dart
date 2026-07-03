@@ -1116,4 +1116,46 @@ const _dutchSourceDa = {
   'Nog opslaan nodig': 'Skal gemmes først',
   'TLP blokkeert export': 'TLP blokerer eksporten',
   'Kwaliteit blokkeert export': 'Kvaliteten blokerer eksporten',
+  'Leeg deck': 'Tomt deck',
+  'Korte briefing': 'Kort briefing',
+  'Status-briefing': 'Statusbriefing',
+  'Projectstart / kick-off': 'Projektstart / kick-off',
+  'Voorbespreking communicatie': 'Formøde om kommunikation',
+  'Projecttijdlijn': 'Projekttidslinje',
+  'Informatiebeveiliging: RASCI / TVB': 'Informationssikkerhed: RASCI / TVB',
+  'Security-takenplan': 'Plan for sikkerhedsopgaver',
+  'Certificering voortgang': 'Certificeringsfremdrift',
+  'Training / workshop': 'Træning / workshop',
+  'Rapportage': 'Rapportering',
+  'Onderzoeksverhaal': 'Undersøgelsesfortælling',
+  'Technische uitleg': 'Teknisk forklaring',
+  'Interactieve quiz': 'Interaktiv quiz',
+  'Alleen een titelpagina en een agenda.': 'Kun en titelside og en dagsorden.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situation, fakta og ønsket beslutning på seks slides.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Statusdashboard, fremdrift pr. arbejdsstrøm og beslutninger.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Hvorfor, mål, omfang, interessenter og tidslinje.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Målgrupper, kernebudskab, kanaler og talspersonrolle.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Faser, milepæle, afhængigheder og beslutningspunkter.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Fastlæg roller, RASCI-matrix og opgaveaftaler.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Opgaver, prioriteter, ejere og dokumentation.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Fremdrift pr. domæne, kontroller og auditplanlægning.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Læringsmål, kernebegreber, øvelse og quizspørgsmål.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Resumé, KPI-dashboard, trend og handlinger.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Spørgsmål, metode, tidslinje over fund og konklusioner.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arkitektur, komponenter, kodeeksempel og tjekliste.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Tre spørgsmålsformer med forklaring og opsamling.',
+  'Sjabloon': 'Skabelon',
 };

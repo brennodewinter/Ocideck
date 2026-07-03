@@ -1108,4 +1108,47 @@ const _dutchSourceAddFy = {
   'Nog opslaan nodig': 'Earst bewarje nedich',
   'TLP blokkeert export': 'TLP blokkearret eksport',
   'Kwaliteit blokkeert export': 'Kwaliteit blokkearret eksport',
+  'Leeg deck': 'Leech deck',
+  'Korte briefing': 'Koarte briefing',
+  'Status-briefing': 'Status-briefing',
+  'Projectstart / kick-off': 'Projektstart / kick-off',
+  'Voorbespreking communicatie': 'Foaroerlis kommunikaasje',
+  'Projecttijdlijn': 'Projekttiidline',
+  'Informatiebeveiliging: RASCI / TVB': 'Ynformaasjefeiligens: RASCI / TVB',
+  'Security-takenplan': 'Security-takenplan',
+  'Certificering voortgang': 'Sertifisearring fuortgong',
+  'Training / workshop': 'Training / workshop',
+  'Rapportage': 'Rapportaazje',
+  'Onderzoeksverhaal': 'Ûndersyksferhaal',
+  'Technische uitleg': 'Technyske útlis',
+  'Interactieve quiz': 'Ynteraktive quiz',
+  'Alleen een titelpagina en een agenda.':
+      'Allinnich in titelside en in aginda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Sitewaasje, feiten en frege beslút yn seis slides.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Statusdashboard, fuortgong per wurkstream en besluten.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Wêrom, doel, omfang, stakeholders en tiidline.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Doelgroepen, kearnboadskip, kanalen en wurdfiering.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fazen, mylpealen, ôfhinklikheden en beslismominten.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Rollen, RASCI-matrix en taakôfspraken fêstlizze.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Taken, prioriteiten, eigners en bewiisstikken.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Fuortgong per domein, controls en auditplanning.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Leardoelen, kearnkonsepten, oefening en quizfraach.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Gearfetting, KPI-dashboard, trend en aksjes.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Fraach, metoade, tiidline fan befiningen en konklúzjes.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arsjitektuer, komponinten, koadefoarbyld en checklist.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Trije fraachfoarmen mei útlis en neipetear.',
+  'Sjabloon': 'Sjabloan',
 };

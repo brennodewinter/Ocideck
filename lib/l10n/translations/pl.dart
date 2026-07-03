@@ -1127,4 +1127,47 @@ const _dutchSourcePl = {
   'Nog opslaan nodig': 'Najpierw zapisz',
   'TLP blokkeert export': 'TLP blokuje eksport',
   'Kwaliteit blokkeert export': 'Jakość blokuje eksport',
+  'Leeg deck': 'Pusta talia',
+  'Korte briefing': 'Krótki briefing',
+  'Status-briefing': 'Briefing statusowy',
+  'Projectstart / kick-off': 'Start projektu / kick-off',
+  'Voorbespreking communicatie': 'Wstępne omówienie komunikacji',
+  'Projecttijdlijn': 'Oś czasu projektu',
+  'Informatiebeveiliging: RASCI / TVB':
+      'Bezpieczeństwo informacji: RASCI / TVB',
+  'Security-takenplan': 'Plan zadań bezpieczeństwa',
+  'Certificering voortgang': 'Postęp certyfikacji',
+  'Training / workshop': 'Szkolenie / warsztat',
+  'Rapportage': 'Raport',
+  'Onderzoeksverhaal': 'Opowieść badawcza',
+  'Technische uitleg': 'Wyjaśnienie techniczne',
+  'Interactieve quiz': 'Interaktywny quiz',
+  'Alleen een titelpagina en een agenda.': 'Tylko strona tytułowa i agenda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Sytuacja, fakty i oczekiwana decyzja w sześciu slajdach.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Pulpit statusu, postęp według strumieni pracy i decyzje.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Dlaczego, cel, zakres, interesariusze i oś czasu.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Grupy docelowe, kluczowy przekaz, kanały i rzecznictwo.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fazy, kamienie milowe, zależności i punkty decyzyjne.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Utrwalenie ról, macierzy RASCI i ustaleń dotyczących zadań.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Zadania, priorytety, właściciele i dowody.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Postęp według domen, kontrole i planowanie audytu.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Cele nauczania, kluczowe pojęcia, ćwiczenie i pytanie quizowe.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Podsumowanie, pulpit KPI, trend i działania.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Pytanie, metoda, oś czasu ustaleń i wnioski.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architektura, komponenty, przykład kodu i lista kontrolna.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Trzy formy pytań z wyjaśnieniem i omówieniem.',
+  'Sjabloon': 'Szablon',
 };

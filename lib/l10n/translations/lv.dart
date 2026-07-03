@@ -1120,4 +1120,46 @@ const _dutchSourceLv = {
   'Nog opslaan nodig': 'Vispirms jāsaglabā',
   'TLP blokkeert export': 'TLP bloķē eksportu',
   'Kwaliteit blokkeert export': 'Kvalitāte bloķē eksportu',
+  'Leeg deck': 'Tukšs deks',
+  'Korte briefing': 'Īss brīfings',
+  'Status-briefing': 'Statusa brīfings',
+  'Projectstart / kick-off': 'Projekta sākums / kick-off',
+  'Voorbespreking communicatie': 'Komunikācijas priekšapspriede',
+  'Projecttijdlijn': 'Projekta laika grafiks',
+  'Informatiebeveiliging: RASCI / TVB': 'Informācijas drošība: RASCI / TVB',
+  'Security-takenplan': 'Drošības uzdevumu plāns',
+  'Certificering voortgang': 'Sertifikācijas progress',
+  'Training / workshop': 'Apmācība / darbseminārs',
+  'Rapportage': 'Pārskats',
+  'Onderzoeksverhaal': 'Pētījuma stāsts',
+  'Technische uitleg': 'Tehnisks skaidrojums',
+  'Interactieve quiz': 'Interaktīva viktorīna',
+  'Alleen een titelpagina en een agenda.': 'Tikai titullapa un darba kārtība.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situācija, fakti un pieprasītais lēmums sešos slaidos.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Statusa panelis, progress pa darba plūsmām un lēmumi.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Kāpēc, mērķis, tvērums, ieinteresētās puses un laika grafiks.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Mērķauditorijas, galvenais vēstījums, kanāli un runaspersonas.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fāzes, atskaites punkti, atkarības un lēmumu pieņemšanas brīži.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Fiksēt lomas, RASCI matricu un vienošanās par uzdevumiem.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Uzdevumi, prioritātes, atbildīgie un pierādījumi.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Progress pa jomām, kontroles un auditu plānošana.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Mācību mērķi, pamatjēdzieni, vingrinājums un viktorīnas jautājums.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Kopsavilkums, KPI panelis, tendence un darbības.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Jautājums, metode, atzinumu laika grafiks un secinājumi.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arhitektūra, komponenti, koda piemērs un kontrolsaraksts.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Trīs jautājumu veidi ar skaidrojumu un pēcapspriedi.',
+  'Sjabloon': 'Veidne',
 };

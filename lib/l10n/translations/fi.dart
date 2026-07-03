@@ -1122,4 +1122,46 @@ const _dutchSourceFi = {
   'Nog opslaan nodig': 'Tallenna ensin',
   'TLP blokkeert export': 'TLP estää viennin',
   'Kwaliteit blokkeert export': 'Laatu estää viennin',
+  'Leeg deck': 'Tyhjä deck',
+  'Korte briefing': 'Lyhyt briiffi',
+  'Status-briefing': 'Tilannekatsaus',
+  'Projectstart / kick-off': 'Projektin aloitus / kick-off',
+  'Voorbespreking communicatie': 'Viestinnän ennakkopalaveri',
+  'Projecttijdlijn': 'Projektin aikajana',
+  'Informatiebeveiliging: RASCI / TVB': 'Tietoturva: RASCI / TVB',
+  'Security-takenplan': 'Turvallisuustehtävien suunnitelma',
+  'Certificering voortgang': 'Sertifioinnin eteneminen',
+  'Training / workshop': 'Koulutus / työpaja',
+  'Rapportage': 'Raportointi',
+  'Onderzoeksverhaal': 'Tutkimustarina',
+  'Technische uitleg': 'Tekninen selitys',
+  'Interactieve quiz': 'Interaktiivinen tietovisa',
+  'Alleen een titelpagina en een agenda.': 'Vain otsikkosivu ja esityslista.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Tilanne, faktat ja pyydetty päätös kuudella dialla.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Tilannenäkymä, eteneminen työvirroittain ja päätökset.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Miksi, tavoite, laajuus, sidosryhmät ja aikajana.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Kohderyhmät, ydinviesti, kanavat ja tiedottaminen.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Vaiheet, virstanpylväät, riippuvuudet ja päätöskohdat.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Roolien, RASCI-matriisin ja tehtäväsopimusten kirjaaminen.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Tehtävät, prioriteetit, omistajat ja todisteet.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Eteneminen aihealueittain, kontrollit ja auditointien suunnittelu.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Oppimistavoitteet, ydinkäsitteet, harjoitus ja tietovisakysymys.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Yhteenveto, KPI-mittaristo, trendi ja toimenpiteet.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Kysymys, menetelmä, havaintojen aikajana ja johtopäätökset.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arkkitehtuuri, komponentit, koodiesimerkki ja tarkistuslista.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Kolme kysymystyyppiä selityksineen ja loppukeskustelu.',
+  'Sjabloon': 'Mallipohja',
 };

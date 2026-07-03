@@ -1133,4 +1133,47 @@ const _dutchSourceMt = {
   'Nog opslaan nodig': 'L-ewwel trid tissejvja',
   'TLP blokkeert export': 'It-TLP jimblokka l-esportazzjoni',
   'Kwaliteit blokkeert export': 'Il-kwalità timblokka l-esportazzjoni',
+  'Leeg deck': 'Deck vojt',
+  'Korte briefing': 'Briefing qasir',
+  'Status-briefing': 'Briefing tal-istatus',
+  'Projectstart / kick-off': 'Bidu tal-proġett / kick-off',
+  'Voorbespreking communicatie': 'Diskussjoni preliminari tal-komunikazzjoni',
+  'Projecttijdlijn': 'Kronoloġija tal-proġett',
+  'Informatiebeveiliging: RASCI / TVB':
+      'Sigurtà tal-informazzjoni: RASCI / TVB',
+  'Security-takenplan': 'Pjan tal-kompiti tas-sigurtà',
+  'Certificering voortgang': 'Progress taċ-ċertifikazzjoni',
+  'Training / workshop': 'Taħriġ / workshop',
+  'Rapportage': 'Rappurtar',
+  'Onderzoeksverhaal': 'Storja ta\' riċerka',
+  'Technische uitleg': 'Spjegazzjoni teknika',
+  'Interactieve quiz': 'Kwiżż interattiv',
+  'Alleen een titelpagina en een agenda.': 'Paġna tat-titlu u aġenda biss.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Sitwazzjoni, fatti u d-deċiżjoni mitluba f\'sitt slajds.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Dashboard tal-istatus, progress għal kull fluss ta\' xogħol u deċiżjonijiet.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Għaliex, għan, ambitu, partijiet interessati u kronoloġija.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Udjenzi fil-mira, messaġġ ewlieni, kanali u kelliema.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fażijiet, stadji importanti, dipendenzi u mumenti ta\' deċiżjoni.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Irreġistra r-rwoli, il-matriċi RASCI u l-ftehimiet tal-kompiti.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Kompiti, prijoritajiet, sidien u evidenza.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Progress għal kull qasam, kontrolli u ppjanar tal-awditjar.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Għanijiet ta\' tagħlim, kunċetti ewlenin, eżerċizzju u mistoqsija tal-kwiżż.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Sommarju, dashboard tal-KPI, xejra u azzjonijiet.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Mistoqsija, metodu, kronoloġija tas-sejbiet u konklużjonijiet.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arkitettura, komponenti, eżempju ta\' kodiċi u checklist.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Tliet tipi ta\' mistoqsijiet bi spjegazzjoni u diskussjoni finali.',
+  'Sjabloon': 'Mudell',
 };

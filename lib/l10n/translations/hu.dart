@@ -1122,4 +1122,46 @@ const _dutchSourceHu = {
   'Nog opslaan nodig': 'Előbb menteni kell',
   'TLP blokkeert export': 'A TLP blokkolja az exportot',
   'Kwaliteit blokkeert export': 'A minőség blokkolja az exportot',
+  'Leeg deck': 'Üres deck',
+  'Korte briefing': 'Rövid tájékoztató',
+  'Status-briefing': 'Státusztájékoztató',
+  'Projectstart / kick-off': 'Projektindítás / kick-off',
+  'Voorbespreking communicatie': 'Kommunikációs előkészítő megbeszélés',
+  'Projecttijdlijn': 'Projekt-idővonal',
+  'Informatiebeveiliging: RASCI / TVB': 'Információbiztonság: RASCI / TVB',
+  'Security-takenplan': 'Biztonsági feladatterv',
+  'Certificering voortgang': 'Tanúsítás előrehaladása',
+  'Training / workshop': 'Képzés / workshop',
+  'Rapportage': 'Beszámoló',
+  'Onderzoeksverhaal': 'Kutatási történet',
+  'Technische uitleg': 'Műszaki magyarázat',
+  'Interactieve quiz': 'Interaktív kvíz',
+  'Alleen een titelpagina en een agenda.': 'Csak egy címoldal és egy napirend.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Helyzet, tények és a kért döntés hat dián.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Állapot-irányítópult, munkafolyamatonkénti előrehaladás és döntések.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Miért, cél, hatókör, érintettek és idővonal.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Célcsoportok, kulcsüzenet, csatornák és szóvivői feladatok.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fázisok, mérföldkövek, függőségek és döntési pontok.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Szerepek, RASCI-mátrix és feladatmegállapodások rögzítése.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Feladatok, prioritások, felelősök és bizonyítékok.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Előrehaladás területenként, kontrollok és audittervezés.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Tanulási célok, kulcsfogalmak, gyakorlat és kvízkérdés.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Összefoglaló, KPI-irányítópult, trend és teendők.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Kérdés, módszer, a megállapítások idővonala és következtetések.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architektúra, komponensek, kódpélda és ellenőrzőlista.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Három kérdéstípus magyarázattal és utólagos megbeszéléssel.',
+  'Sjabloon': 'Sablon',
 };

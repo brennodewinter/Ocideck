@@ -1130,4 +1130,48 @@ const _dutchSourceRo = {
   'Nog opslaan nodig': 'Mai întâi trebuie salvat',
   'TLP blokkeert export': 'TLP blochează exportul',
   'Kwaliteit blokkeert export': 'Calitatea blochează exportul',
+  'Leeg deck': 'Deck gol',
+  'Korte briefing': 'Briefing scurt',
+  'Status-briefing': 'Briefing de stare',
+  'Projectstart / kick-off': 'Start de proiect / kick-off',
+  'Voorbespreking communicatie': 'Discuție preliminară de comunicare',
+  'Projecttijdlijn': 'Cronologia proiectului',
+  'Informatiebeveiliging: RASCI / TVB':
+      'Securitatea informațiilor: RASCI / TVB',
+  'Security-takenplan': 'Plan de sarcini de securitate',
+  'Certificering voortgang': 'Progresul certificării',
+  'Training / workshop': 'Instruire / workshop',
+  'Rapportage': 'Raportare',
+  'Onderzoeksverhaal': 'Poveste de investigație',
+  'Technische uitleg': 'Explicație tehnică',
+  'Interactieve quiz': 'Quiz interactiv',
+  'Alleen een titelpagina en een agenda.':
+      'Doar o pagină de titlu și o agendă.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situație, fapte și decizia cerută în șase slide-uri.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Tablou de stare, progres pe fiecare flux de lucru și decizii.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'De ce, obiectiv, domeniu, părți interesate și cronologie.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Grupuri-țintă, mesaj central, canale și purtători de cuvânt.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Faze, jaloane, dependențe și momente de decizie.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Consemnarea rolurilor, a matricei RASCI și a acordurilor de sarcini.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Sarcini, priorități, responsabili și dovezi.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Progres pe domenii, controale și planificarea auditului.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Obiective de învățare, concepte-cheie, exercițiu și întrebare de quiz.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Rezumat, tablou KPI, tendință și acțiuni.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Întrebare, metodă, cronologia constatărilor și concluzii.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arhitectură, componente, exemplu de cod și listă de verificare.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Trei tipuri de întrebări cu explicații și discuție finală.',
+  'Sjabloon': 'Șablon',
 };

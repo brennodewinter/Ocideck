@@ -1120,4 +1120,46 @@ const _dutchSourceId = {
   'Nog opslaan nodig': 'Perlu disimpan dulu',
   'TLP blokkeert export': 'TLP memblokir ekspor',
   'Kwaliteit blokkeert export': 'Kualitas memblokir ekspor',
+  'Leeg deck': 'Dek kosong',
+  'Korte briefing': 'Briefing singkat',
+  'Status-briefing': 'Briefing status',
+  'Projectstart / kick-off': 'Awal proyek / kick-off',
+  'Voorbespreking communicatie': 'Diskusi awal komunikasi',
+  'Projecttijdlijn': 'Linimasa proyek',
+  'Informatiebeveiliging: RASCI / TVB': 'Keamanan informasi: RASCI / TVB',
+  'Security-takenplan': 'Rencana tugas keamanan',
+  'Certificering voortgang': 'Kemajuan sertifikasi',
+  'Training / workshop': 'Pelatihan / workshop',
+  'Rapportage': 'Laporan',
+  'Onderzoeksverhaal': 'Narasi penelitian',
+  'Technische uitleg': 'Penjelasan teknis',
+  'Interactieve quiz': 'Kuis interaktif',
+  'Alleen een titelpagina en een agenda.': 'Hanya halaman judul dan agenda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situasi, fakta, dan keputusan yang diminta dalam enam slide.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Dasbor status, kemajuan per alur kerja, dan keputusan.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Alasan, tujuan, cakupan, pemangku kepentingan, dan linimasa.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Kelompok sasaran, pesan utama, kanal, dan juru bicara.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fase, tonggak pencapaian, ketergantungan, dan momen keputusan.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Mencatat peran, matriks RASCI, dan kesepakatan tugas.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Tugas, prioritas, pemilik, dan bukti pendukung.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Kemajuan per domain, kontrol, dan perencanaan audit.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Tujuan pembelajaran, konsep utama, latihan, dan pertanyaan kuis.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Ringkasan, dasbor KPI, tren, dan tindakan.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Pertanyaan, metode, linimasa temuan, dan kesimpulan.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arsitektur, komponen, contoh kode, dan daftar periksa.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Tiga bentuk pertanyaan dengan penjelasan dan pembahasan.',
+  'Sjabloon': 'Templat',
 };

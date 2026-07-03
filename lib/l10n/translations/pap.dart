@@ -1110,4 +1110,47 @@ const _dutchSourceAddPap = {
   'Nog opslaan nodig': 'Mester warda promé',
   'TLP blokkeert export': 'TLP ta blokia eksportashon',
   'Kwaliteit blokkeert export': 'Kalidat ta blokia eksportashon',
+  'Leeg deck': 'Deck bashí',
+  'Korte briefing': 'Briefing kòrtiku',
+  'Status-briefing': 'Briefing di status',
+  'Projectstart / kick-off': 'Inisio di proyekto / kick-off',
+  'Voorbespreking communicatie': 'Preparashon di komunikashon',
+  'Projecttijdlijn': 'Liña di tempu di proyekto',
+  'Informatiebeveiliging: RASCI / TVB': 'Seguridat di informashon: RASCI / TVB',
+  'Security-takenplan': 'Plan di tarea di seguridat',
+  'Certificering voortgang': 'Progreso di sertifikashon',
+  'Training / workshop': 'Entrenamentu / workshop',
+  'Rapportage': 'Rapòrt',
+  'Onderzoeksverhaal': 'Historia di investigashon',
+  'Technische uitleg': 'Splikashon tékniko',
+  'Interactieve quiz': 'Quiz interaktivo',
+  'Alleen een titelpagina en een agenda.':
+      'Solamente un página di título i un agenda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situashon, echonan i e desishon pidí den seis slide.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Dashboard di status, progreso pa liña di trabou i desishonnan.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Pakiko, meta, alkanse, stakeholdernan i liña di tempu.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Gruponan meta, mensahe klave, kanalnan i portavos.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fasenan, hitonan, dependensianan i momentonan di desishon.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Registrá rolnan, matriks RASCI i akuerdonan di tarea.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Tareanan, prioridatnan, doñonan i evidensianan.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Progreso pa dominio, kontrolnan i planifikashon di audit.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Metanan di siñansa, konseptonan klave, ehersisio i pregunta di quiz.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Resúmen, dashboard di KPI, tendensia i akshonnan.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Pregunta, método, liña di tempu di resultadonan i konklushonnan.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arkitektura, komponentenan, ehèmpel di kódigo i checklist.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Tres tipo di pregunta ku splikashon i diskushon despues.',
+  'Sjabloon': 'Modelo',
 };

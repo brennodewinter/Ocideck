@@ -1121,4 +1121,48 @@ const _dutchSourceAddFr = {
   'Nog opslaan nodig': 'Enregistrement requis d\'abord',
   'TLP blokkeert export': 'Le TLP bloque l\'export',
   'Kwaliteit blokkeert export': 'La qualité bloque l\'export',
+  'Leeg deck': 'Deck vide',
+  'Korte briefing': 'Briefing court',
+  'Status-briefing': 'Briefing de statut',
+  'Projectstart / kick-off': 'Lancement de projet / kick-off',
+  'Voorbespreking communicatie': 'Pré-briefing communication',
+  'Projecttijdlijn': 'Chronologie du projet',
+  'Informatiebeveiliging: RASCI / TVB':
+      'Sécurité de l\'information : RASCI / responsabilités',
+  'Security-takenplan': 'Plan des tâches de sécurité',
+  'Certificering voortgang': 'Avancement de la certification',
+  'Training / workshop': 'Formation / atelier',
+  'Rapportage': 'Rapport',
+  'Onderzoeksverhaal': 'Récit d\'enquête',
+  'Technische uitleg': 'Explication technique',
+  'Interactieve quiz': 'Quiz interactif',
+  'Alleen een titelpagina en een agenda.':
+      'Uniquement une page de titre et un agenda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situation, faits et décision demandée en six diapositives.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Tableau de bord d\'état, avancement par chantier et décisions.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Pourquoi, objectif, périmètre, parties prenantes et calendrier.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Publics cibles, message clé, canaux et porte-parole.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Phases, jalons, dépendances et points de décision.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Consigner les rôles, la matrice RASCI et les accords de tâches.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Tâches, priorités, responsables et pièces justificatives.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Avancement par domaine, contrôles et planification des audits.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Objectifs pédagogiques, concepts clés, exercice et question de quiz.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Synthèse, tableau de bord KPI, tendance et actions.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Question, méthode, chronologie des constats et conclusions.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architecture, composants, exemple de code et checklist.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Trois formes de questions avec explication et débriefing.',
+  'Sjabloon': 'Modèle',
 };

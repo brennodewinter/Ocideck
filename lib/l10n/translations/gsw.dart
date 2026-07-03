@@ -1120,4 +1120,47 @@ const _dutchSourceGsw = {
   'Nog opslaan nodig': 'Zerscht spychere',
   'TLP blokkeert export': 's TLP blockiert dr Export',
   'Kwaliteit blokkeert export': 'D Qualität blockiert dr Export',
+  'Leeg deck': 'Leers Deck',
+  'Korte briefing': 'Churzes Briefing',
+  'Status-briefing': 'Status-Briefing',
+  'Projectstart / kick-off': 'Projäktschtart / Kick-off',
+  'Voorbespreking communicatie': 'Vorbeschprächig Kommunikation',
+  'Projecttijdlijn': 'Projäkt-Ziitlinie',
+  'Informatiebeveiliging: RASCI / TVB': 'Informationssicherheit: RASCI / TVB',
+  'Security-takenplan': 'Security-Ufgabeplan',
+  'Certificering voortgang': 'Zertifizierigs-Fortschritt',
+  'Training / workshop': 'Training / Workshop',
+  'Rapportage': 'Bricht',
+  'Onderzoeksverhaal': 'Untersuechigs-Gschicht',
+  'Technische uitleg': 'Technischi Erklärig',
+  'Interactieve quiz': 'Interaktivs Quiz',
+  'Alleen een titelpagina en een agenda.':
+      'Nur e Titelsiite und e Traktandeliste.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situation, Fakte und dr verlangti Entscheid in sächs Folie.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Status-Dashboard, Fortschritt pro Arbetsschtrom und Entscheid.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Warum, Ziel, Umfang, Stakeholder und Ziitlinie.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Zielgruppe, Chärnbotschaft, Kanäl und Wortfüehrig.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Phase, Meilestei, Abhängigkeite und Entscheidigsmomänt.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Rolle, RASCI-Matrix und Ufgabe-Abmachige feschthalte.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Ufgabe, Prioritäte, Owner und Nachwiis.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Fortschritt pro Domäne, Controls und Auditplanig.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Lernziel, Chärnkonzäpt, Üebig und Quizfrag.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Zämefassig, KPI-Dashboard, Tränd und Massnahme.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Frag, Method, Ziitlinie vo de Befund und Schlussfolgerige.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architektur, Komponänte, Codebiispiel und Checklischte.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Drei Fragforme mit Erklärig und Nachbeschprächig.',
+  'Sjabloon': 'Vorlag',
 };

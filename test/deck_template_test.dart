@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/question.dart';
@@ -178,6 +179,29 @@ void main() {
         QuestionKind.trueFalse,
         QuestionKind.multipleCorrect,
       ]);
+    });
+  });
+
+  group('l10n coverage', () {
+    // Titles/descriptions reach l10n.d() via the model, not as literals, so
+    // the grep-based coverage test in app_localizations_test.dart cannot see
+    // them; this guard enforces the same rule for the template registry.
+    test('titles and descriptions are translated in every language', () {
+      final missing = <String>[];
+      for (final code in AppLocalizations.languageNames.keys) {
+        if (code == 'nl') continue;
+        for (final template in deckTemplates) {
+          for (final source in [template.title, template.description]) {
+            if (!AppLocalizations.hasDirectDutchSourceTranslation(
+              code,
+              source,
+            )) {
+              missing.add('$code: $source');
+            }
+          }
+        }
+      }
+      expect(missing, isEmpty);
     });
   });
 
