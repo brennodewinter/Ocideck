@@ -1122,4 +1122,5 @@ const _dutchSourceSk = {
   'Voeg alt-tekst toe': 'Pridať alternatívny text',
   'Voeg beschrijving toe': 'Pridať popis',
   'Zinnen naar losse bullets': 'Vety na samostatné odrážky',
+  'Laatst geëxporteerd als': 'Naposledy exportované ako',
 };

@@ -1110,4 +1110,5 @@ const _dutchSourceEt = {
   'Voeg alt-tekst toe': 'Lisa alt-tekst',
   'Voeg beschrijving toe': 'Lisa kirjeldus',
   'Zinnen naar losse bullets': 'Laused eraldi punktideks',
+  'Laatst geëxporteerd als': 'Viimati eksporditud kui',
 };

@@ -1118,4 +1118,5 @@ const _dutchSourceFi = {
   'Voeg alt-tekst toe': 'Lisää alt-teksti',
   'Voeg beschrijving toe': 'Lisää kuvaus',
   'Zinnen naar losse bullets': 'Virkkeet erillisiksi luettelokohdiksi',
+  'Laatst geëxporteerd als': 'Viimeksi viety muodossa',
 };

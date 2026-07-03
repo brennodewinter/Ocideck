@@ -1129,4 +1129,5 @@ const _dutchSourceMt = {
   'Voeg alt-tekst toe': 'Żid test alternattiv',
   'Voeg beschrijving toe': 'Żid deskrizzjoni',
   'Zinnen naar losse bullets': 'Sentenzi f\'punti separati',
+  'Laatst geëxporteerd als': 'L-aħħar esportat bħala',
 };

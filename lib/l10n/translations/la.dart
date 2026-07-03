@@ -1126,4 +1126,5 @@ const _dutchSourceLa = {
   'Voeg alt-tekst toe': 'Adde textum alternum',
   'Voeg beschrijving toe': 'Adde descriptionem',
   'Zinnen naar losse bullets': 'Sententiae in puncta separata',
+  'Laatst geëxporteerd als': 'Postremum exportatum ut',
 };

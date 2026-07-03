@@ -1111,4 +1111,5 @@ const _dutchSourceAddEs = {
   'Voeg alt-tekst toe': 'Añadir texto alternativo',
   'Voeg beschrijving toe': 'Añadir descripción',
   'Zinnen naar losse bullets': 'Frases en viñetas separadas',
+  'Laatst geëxporteerd als': 'Última exportación como',
 };

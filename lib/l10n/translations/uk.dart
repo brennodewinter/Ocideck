@@ -1128,4 +1128,5 @@ const _dutchSourceUk = {
   'Voeg alt-tekst toe': 'Додати альтернативний текст',
   'Voeg beschrijving toe': 'Додати опис',
   'Zinnen naar losse bullets': 'Речення в окремі пункти',
+  'Laatst geëxporteerd als': 'Востаннє експортовано як',
 };

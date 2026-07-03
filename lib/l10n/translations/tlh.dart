@@ -1103,4 +1103,5 @@ const _dutchSourceTlh = {
   'Voeg alt-tekst toe': 'mu\'mey latlh yIchel',
   'Voeg beschrijving toe': 'QIj mu\'mey yIchel',
   'Zinnen naar losse bullets': 'mu\'tlheghmey mob moHmoH',
+  'Laatst geëxporteerd als': 'Qav ngeHlu\' \'e\'',
 };

@@ -1106,4 +1106,5 @@ const _dutchSourceAddPap = {
   'Voeg alt-tekst toe': 'Agregá teksto alternativo',
   'Voeg beschrijving toe': 'Agregá deskripshon',
   'Zinnen naar losse bullets': 'Frasenan den bullet separá',
+  'Laatst geëxporteerd als': 'Último eksportá komo',
 };

@@ -1120,4 +1120,5 @@ const _dutchSourceHr = {
   'Voeg alt-tekst toe': 'Dodaj alternativni tekst',
   'Voeg beschrijving toe': 'Dodaj opis',
   'Zinnen naar losse bullets': 'Rečenice u zasebne natuknice',
+  'Laatst geëxporteerd als': 'Zadnji izvoz kao',
 };

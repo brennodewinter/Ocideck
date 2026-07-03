@@ -1110,4 +1110,5 @@ const _dutchSourceAddIt = {
   'Voeg alt-tekst toe': 'Aggiungi testo alternativo',
   'Voeg beschrijving toe': 'Aggiungi descrizione',
   'Zinnen naar losse bullets': 'Frasi in elenchi separati',
+  'Laatst geëxporteerd als': 'Ultima esportazione come',
 };

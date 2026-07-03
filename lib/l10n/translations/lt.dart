@@ -1121,4 +1121,5 @@ const _dutchSourceLt = {
   'Voeg alt-tekst toe': 'Pridėti alternatyvųjį tekstą',
   'Voeg beschrijving toe': 'Pridėti aprašymą',
   'Zinnen naar losse bullets': 'Sakiniai į atskirus punktus',
+  'Laatst geëxporteerd als': 'Paskutinį kartą eksportuota kaip',
 };

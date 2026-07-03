@@ -1116,4 +1116,5 @@ const _dutchSourceId = {
   'Voeg alt-tekst toe': 'Tambahkan teks alternatif',
   'Voeg beschrijving toe': 'Tambahkan deskripsi',
   'Zinnen naar losse bullets': 'Kalimat menjadi butir terpisah',
+  'Laatst geëxporteerd als': 'Terakhir diekspor sebagai',
 };

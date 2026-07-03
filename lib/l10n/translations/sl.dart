@@ -1118,4 +1118,5 @@ const _dutchSourceSl = {
   'Voeg alt-tekst toe': 'Dodaj nadomestno besedilo',
   'Voeg beschrijving toe': 'Dodaj opis',
   'Zinnen naar losse bullets': 'Stavki v ločene alineje',
+  'Laatst geëxporteerd als': 'Nazadnje izvoženo kot',
 };

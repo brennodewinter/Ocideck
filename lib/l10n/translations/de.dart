@@ -1107,4 +1107,5 @@ const _dutchSourceAddDe = {
   'Voeg alt-tekst toe': 'Alt-Text hinzufügen',
   'Voeg beschrijving toe': 'Beschreibung hinzufügen',
   'Zinnen naar losse bullets': 'Sätze in einzelne Punkte',
+  'Laatst geëxporteerd als': 'Zuletzt exportiert als',
 };

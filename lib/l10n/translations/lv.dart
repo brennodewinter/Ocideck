@@ -1116,4 +1116,5 @@ const _dutchSourceLv = {
   'Voeg alt-tekst toe': 'Pievienot alternatīvo tekstu',
   'Voeg beschrijving toe': 'Pievienot aprakstu',
   'Zinnen naar losse bullets': 'Teikumi atsevišķos punktos',
+  'Laatst geëxporteerd als': 'Pēdējoreiz eksportēts kā',
 };

@@ -1141,4 +1141,5 @@ const _dutchSourceGa = {
   'Voeg alt-tekst toe': 'Cuir alt-téacs leis',
   'Voeg beschrijving toe': 'Cuir cur síos leis',
   'Zinnen naar losse bullets': 'Abairtí ina bpointí ar leith',
+  'Laatst geëxporteerd als': 'Easpórtáladh go deireanach mar',
 };

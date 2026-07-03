@@ -1128,4 +1128,5 @@ const _dutchSourceAddEn = {
   'Voeg alt-tekst toe': 'Add alt text',
   'Voeg beschrijving toe': 'Add description',
   'Zinnen naar losse bullets': 'Sentences to separate bullets',
+  'Laatst geëxporteerd als': 'Last exported as',
 };

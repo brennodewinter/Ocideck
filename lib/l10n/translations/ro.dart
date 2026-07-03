@@ -1126,4 +1126,5 @@ const _dutchSourceRo = {
   'Voeg alt-tekst toe': 'Adaugă text alternativ',
   'Voeg beschrijving toe': 'Adaugă descriere',
   'Zinnen naar losse bullets': 'Propoziții în puncte separate',
+  'Laatst geëxporteerd als': 'Ultimul export ca',
 };

@@ -1112,4 +1112,5 @@ const _dutchSourceDa = {
   'Voeg alt-tekst toe': 'Tilføj alt-tekst',
   'Voeg beschrijving toe': 'Tilføj beskrivelse',
   'Zinnen naar losse bullets': 'Sætninger til separate punkter',
+  'Laatst geëxporteerd als': 'Senest eksporteret som',
 };

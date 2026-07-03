@@ -1116,4 +1116,5 @@ const _dutchSourceGsw = {
   'Voeg alt-tekst toe': 'Alt-Text dezuetue',
   'Voeg beschrijving toe': 'Beschriibig dezuetue',
   'Zinnen naar losse bullets': 'Sätz in einzelni Pünkt',
+  'Laatst geëxporteerd als': 'Zletscht exportiert als',
 };

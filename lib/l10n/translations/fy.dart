@@ -1104,4 +1104,5 @@ const _dutchSourceAddFy = {
   'Voeg alt-tekst toe': 'Foegje alt-tekst ta',
   'Voeg beschrijving toe': 'Foegje beskriuwing ta',
   'Zinnen naar losse bullets': 'Sinnen nei losse bullets',
+  'Laatst geëxporteerd als': 'Lêst eksportearre as',
 };

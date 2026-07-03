@@ -1118,4 +1118,5 @@ const _dutchSourceHu = {
   'Voeg alt-tekst toe': 'Alternatív szöveg hozzáadása',
   'Voeg beschrijving toe': 'Leírás hozzáadása',
   'Zinnen naar losse bullets': 'Mondatok külön pontokba',
+  'Laatst geëxporteerd als': 'Utoljára exportálva mint',
 };

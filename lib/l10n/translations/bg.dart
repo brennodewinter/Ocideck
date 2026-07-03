@@ -1132,4 +1132,5 @@ const _dutchSourceBg = {
   'Voeg alt-tekst toe': 'Добави алтернативен текст',
   'Voeg beschrijving toe': 'Добави описание',
   'Zinnen naar losse bullets': 'Изречения в отделни точки',
+  'Laatst geëxporteerd als': 'Последно експортирано като',
 };

@@ -1115,4 +1115,5 @@ const _dutchSourceSv = {
   'Voeg alt-tekst toe': 'Lägg till alt-text',
   'Voeg beschrijving toe': 'Lägg till beskrivning',
   'Zinnen naar losse bullets': 'Meningar till separata punkter',
+  'Laatst geëxporteerd als': 'Senast exporterad som',
 };

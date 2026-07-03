@@ -1129,4 +1129,5 @@ const _dutchSourceEl = {
   'Voeg alt-tekst toe': 'Προσθήκη εναλλακτικού κειμένου',
   'Voeg beschrijving toe': 'Προσθήκη περιγραφής',
   'Zinnen naar losse bullets': 'Προτάσεις σε χωριστές κουκκίδες',
+  'Laatst geëxporteerd als': 'Τελευταία εξαγωγή ως',
 };

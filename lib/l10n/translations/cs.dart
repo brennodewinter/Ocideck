@@ -1117,4 +1117,5 @@ const _dutchSourceCs = {
   'Voeg alt-tekst toe': 'Přidat alternativní text',
   'Voeg beschrijving toe': 'Přidat popis',
   'Zinnen naar losse bullets': 'Věty na samostatné odrážky',
+  'Laatst geëxporteerd als': 'Naposledy exportováno jako',
 };

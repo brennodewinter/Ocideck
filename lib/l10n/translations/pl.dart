@@ -1123,4 +1123,5 @@ const _dutchSourcePl = {
   'Voeg alt-tekst toe': 'Dodaj tekst alternatywny',
   'Voeg beschrijving toe': 'Dodaj opis',
   'Zinnen naar losse bullets': 'Zdania na osobne punkty',
+  'Laatst geëxporteerd als': 'Ostatnio wyeksportowano jako',
 };

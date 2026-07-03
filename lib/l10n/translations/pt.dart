@@ -1134,4 +1134,5 @@ const _dutchSourcePt = {
   'Voeg alt-tekst toe': 'Adicionar texto alternativo',
   'Voeg beschrijving toe': 'Adicionar descrição',
   'Zinnen naar losse bullets': 'Frases em marcadores separados',
+  'Laatst geëxporteerd als': 'Última exportação como',
 };
