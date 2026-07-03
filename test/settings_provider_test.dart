@@ -186,19 +186,26 @@ void main() {
     }
   });
 
-  test('starts with a single default profile', () async {
+  test('starts with the built-in profiles, LibreKAT selected', () async {
     final notifier = await _loadedNotifier();
-    expect(notifier.state.themeProfiles, hasLength(1));
+    expect(notifier.state.themeProfiles, hasLength(2));
     expect(
-      notifier.state.selectedThemeProfileName,
-      notifier.state.themeProfiles.single.name,
+      notifier.state.themeProfiles.map((p) => p.name),
+      containsAll(['LibreKAT', 'Standaard']),
+    );
+    expect(notifier.state.selectedThemeProfileName, 'LibreKAT');
+    // Het LibreKAT-logo is een gebundelde asset zodat het overal (ook web)
+    // rendert en mee kan in pakket-exports.
+    expect(
+      notifier.state.themeProfile.logoPath,
+      'asset:assets/images/librekat-logo.png',
     );
   });
 
   test('createThemeProfile adds and selects a new profile', () async {
     final notifier = await _loadedNotifier();
     final created = await notifier.createThemeProfile();
-    expect(notifier.state.themeProfiles, hasLength(2));
+    expect(notifier.state.themeProfiles, hasLength(3));
     expect(notifier.state.selectedThemeProfileName, created.name);
   });
 
@@ -218,13 +225,13 @@ void main() {
       isNot(contains(created.name)),
       reason: 'The old name should be replaced, not duplicated',
     );
-    expect(notifier.state.themeProfiles, hasLength(2));
+    expect(notifier.state.themeProfiles, hasLength(3));
     expect(notifier.state.selectedThemeProfileName, 'Mijn stijl');
   });
 
   test('renaming to an existing name gets a unique suffix', () async {
     final notifier = await _loadedNotifier();
-    final defaultName = notifier.state.themeProfiles.single.name;
+    final defaultName = notifier.state.themeProfiles.first.name;
     final created = await notifier.createThemeProfile();
 
     await notifier.saveThemeProfile(
@@ -257,20 +264,22 @@ void main() {
   test('deleteThemeProfile removes it and selects another', () async {
     final notifier = await _loadedNotifier();
     final created = await notifier.createThemeProfile();
-    expect(notifier.state.themeProfiles, hasLength(2));
+    expect(notifier.state.themeProfiles, hasLength(3));
 
     await notifier.deleteThemeProfile(created.name);
 
     final names = notifier.state.themeProfiles.map((p) => p.name).toList();
     expect(names, isNot(contains(created.name)));
-    expect(notifier.state.themeProfiles, hasLength(1));
-    expect(notifier.state.selectedThemeProfileName, names.single);
+    expect(notifier.state.themeProfiles, hasLength(2));
+    expect(notifier.state.selectedThemeProfileName, names.first);
   });
 
   test('never deletes the last remaining profile', () async {
     final notifier = await _loadedNotifier();
-    final only = notifier.state.themeProfiles.single.name;
-    await notifier.deleteThemeProfile(only);
+    for (final name
+        in notifier.state.themeProfiles.map((p) => p.name).toList()) {
+      await notifier.deleteThemeProfile(name);
+    }
     expect(notifier.state.themeProfiles, hasLength(1));
   });
 
