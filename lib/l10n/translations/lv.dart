@@ -677,6 +677,8 @@ const _dutchSourceLv = {
   'Verticaal': 'Vertikāli',
   'Animatie': 'Animācija',
   'Intekenen bij openen': 'Ievilkt atverot',
+  'Markeer als huidig punt': 'Atzīmēt kā pašreizējo punktu',
+  'Huidig punt weghalen': 'Noņemt pašreizējo punktu',
   'Stap voor stap': 'Soli pa solim',
   'Geen animatie': 'Bez animācijas',
   'Animatiesnelheid': 'Animācijas ātrums',

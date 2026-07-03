@@ -676,6 +676,8 @@ const _dutchSourceFi = {
   'Verticaal': 'Pystysuora',
   'Animatie': 'Animaatio',
   'Intekenen bij openen': 'Piirrä avattaessa',
+  'Markeer als huidig punt': 'Merkitse nykyiseksi pisteeksi',
+  'Huidig punt weghalen': 'Poista nykyinen piste',
   'Stap voor stap': 'Vaihe vaiheelta',
   'Geen animatie': 'Ei animaatiota',
   'Animatiesnelheid': 'Animaationopeus',

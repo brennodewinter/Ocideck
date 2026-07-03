@@ -679,6 +679,8 @@ const _dutchSourceCs = {
   'Verticaal': 'Svisle',
   'Animatie': 'Animace',
   'Intekenen bij openen': 'Zakreslit při otevření',
+  'Markeer als huidig punt': 'Označit jako aktuální bod',
+  'Huidig punt weghalen': 'Odebrat aktuální bod',
   'Stap voor stap': 'Krok za krokem',
   'Geen animatie': 'Bez animace',
   'Animatiesnelheid': 'Rychlost animace',

@@ -678,6 +678,8 @@ const _dutchSourceSl = {
   'Verticaal': 'Navpično',
   'Animatie': 'Animacija',
   'Intekenen bij openen': 'Vrisovanje ob odprtju',
+  'Markeer als huidig punt': 'Označi kot trenutno točko',
+  'Huidig punt weghalen': 'Odstrani trenutno točko',
   'Stap voor stap': 'Korak za korakom',
   'Geen animatie': 'Brez animacije',
   'Animatiesnelheid': 'Hitrost animacije',

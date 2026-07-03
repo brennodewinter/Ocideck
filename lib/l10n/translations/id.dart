@@ -678,6 +678,8 @@ const _dutchSourceId = {
   'Verticaal': 'Vertikal',
   'Animatie': 'Animasi',
   'Intekenen bij openen': 'Gambar saat dibuka',
+  'Markeer als huidig punt': 'Tandai sebagai titik saat ini',
+  'Huidig punt weghalen': 'Hapus titik saat ini',
   'Stap voor stap': 'Langkah demi langkah',
   'Geen animatie': 'Tanpa animasi',
   'Animatiesnelheid': 'Kecepatan animasi',

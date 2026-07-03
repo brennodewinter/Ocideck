@@ -490,6 +490,8 @@ const _dutchSourceAddEs = {
   'Verticaal': 'Vertical',
   'Animatie': 'Animación',
   'Intekenen bij openen': 'Dibujar al abrir',
+  'Markeer als huidig punt': 'Marcar como punto actual',
+  'Huidig punt weghalen': 'Quitar el punto actual',
   'Stap voor stap': 'Paso a paso',
   'Geen animatie': 'Sin animación',
   'Animatiesnelheid': 'Velocidad de animación',

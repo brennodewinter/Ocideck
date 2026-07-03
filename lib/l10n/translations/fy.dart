@@ -498,6 +498,8 @@ const _dutchSourceAddFy = {
   'Verticaal': 'Fertikaal',
   'Animatie': 'Animaasje',
   'Intekenen bij openen': 'Yntekenje by it iepenjen',
+  'Markeer als huidig punt': 'Markearje as aktueel punt',
+  'Huidig punt weghalen': 'Aktueel punt fuorthelje',
   'Stap voor stap': 'Stap foar stap',
   'Geen animatie': 'Gjin animaasje',
   'Animatiesnelheid': 'Animaasjesnelheid',

@@ -681,6 +681,8 @@ const _dutchSourceHr = {
   'Verticaal': 'Okomito',
   'Animatie': 'Animacija',
   'Intekenen bij openen': 'Iscrtaj pri otvaranju',
+  'Markeer als huidig punt': 'Označi kao trenutačnu točku',
+  'Huidig punt weghalen': 'Ukloni trenutačnu točku',
   'Stap voor stap': 'Korak po korak',
   'Geen animatie': 'Bez animacije',
   'Animatiesnelheid': 'Brzina animacije',

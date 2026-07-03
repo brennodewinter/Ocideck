@@ -667,6 +667,8 @@ const _dutchSourceTlh = {
   'Verticaal': 'nge\'',
   'Animatie': 'lolal',
   'Intekenen bij openen': 'poSmoHDI\' ghItlh',
+  'Markeer als huidig punt': 'DaH Daq per',
+  'Huidig punt weghalen': 'DaH Daq teq',
   'Stap voor stap': 'vangtaH vangtaH',
   'Geen animatie': 'lolal pagh',
   'Animatiesnelheid': 'lolal Do',

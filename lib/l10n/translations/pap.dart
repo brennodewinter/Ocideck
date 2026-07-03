@@ -498,6 +498,8 @@ const _dutchSourceAddPap = {
   'Verticaal': 'Vertikal',
   'Animatie': 'Animashon',
   'Intekenen bij openen': 'Dibuhá ora di habri',
+  'Markeer als huidig punt': 'Marka komo punto aktual',
+  'Huidig punt weghalen': 'Kita punto aktual',
   'Stap voor stap': 'Paso pa paso',
   'Geen animatie': 'Sin animashon',
   'Animatiesnelheid': 'Velosidat di animashon',

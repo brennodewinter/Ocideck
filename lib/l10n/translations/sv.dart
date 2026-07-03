@@ -677,6 +677,8 @@ const _dutchSourceSv = {
   'Verticaal': 'Vertikal',
   'Animatie': 'Animation',
   'Intekenen bij openen': 'Rita in vid öppning',
+  'Markeer als huidig punt': 'Markera som nuvarande punkt',
+  'Huidig punt weghalen': 'Ta bort nuvarande punkt',
   'Stap voor stap': 'Steg för steg',
   'Geen animatie': 'Ingen animation',
   'Animatiesnelheid': 'Animationshastighet',

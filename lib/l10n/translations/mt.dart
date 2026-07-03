@@ -687,6 +687,8 @@ const _dutchSourceMt = {
   'Verticaal': 'Vertikali',
   'Animatie': 'Animazzjoni',
   'Intekenen bij openen': 'Iddisinja mad-daħla',
+  'Markeer als huidig punt': 'Immarka bħala l-punt attwali',
+  'Huidig punt weghalen': 'Neħħi l-punt attwali',
   'Stap voor stap': 'Pass pass',
   'Geen animatie': 'L-ebda animazzjoni',
   'Animatiesnelheid': 'Veloċità tal-animazzjoni',

@@ -685,6 +685,8 @@ const _dutchSourceAddEn = {
   'Verticaal': 'Vertical',
   'Animatie': 'Animation',
   'Intekenen bij openen': 'Draw in on open',
+  'Markeer als huidig punt': 'Mark as current point',
+  'Huidig punt weghalen': 'Remove current point',
   'Stap voor stap': 'Step by step',
   'Geen animatie': 'No animation',
   'Animatiesnelheid': 'Animation speed',

@@ -685,6 +685,8 @@ const _dutchSourceRo = {
   'Verticaal': 'Vertical',
   'Animatie': 'Animație',
   'Intekenen bij openen': 'Desenează la deschidere',
+  'Markeer als huidig punt': 'Marchează ca punct curent',
+  'Huidig punt weghalen': 'Elimină punctul curent',
   'Stap voor stap': 'Pas cu pas',
   'Geen animatie': 'Fără animație',
   'Animatiesnelheid': 'Viteza animației',

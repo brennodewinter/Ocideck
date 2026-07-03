@@ -674,6 +674,8 @@ const _dutchSourceEt = {
   'Verticaal': 'Vertikaalne',
   'Animatie': 'Animatsioon',
   'Intekenen bij openen': 'Joonista sisse avamisel',
+  'Markeer als huidig punt': 'Märgi praeguseks punktiks',
+  'Huidig punt weghalen': 'Eemalda praegune punkt',
   'Stap voor stap': 'Samm-sammult',
   'Geen animatie': 'Animatsioonita',
   'Animatiesnelheid': 'Animatsiooni kiirus',

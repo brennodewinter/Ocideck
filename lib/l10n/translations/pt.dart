@@ -689,6 +689,8 @@ const _dutchSourcePt = {
   'Verticaal': 'Vertical',
   'Animatie': 'Animação',
   'Intekenen bij openen': 'Desenhar ao abrir',
+  'Markeer als huidig punt': 'Marcar como ponto atual',
+  'Huidig punt weghalen': 'Remover o ponto atual',
   'Stap voor stap': 'Passo a passo',
   'Geen animatie': 'Sem animação',
   'Animatiesnelheid': 'Velocidade da animação',

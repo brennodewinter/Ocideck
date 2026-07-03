@@ -685,6 +685,8 @@ const _dutchSourceUk = {
   'Verticaal': 'Вертикально',
   'Animatie': 'Анімація',
   'Intekenen bij openen': 'Промальовувати під час відкриття',
+  'Markeer als huidig punt': 'Позначити як поточну точку',
+  'Huidig punt weghalen': 'Прибрати поточну точку',
   'Stap voor stap': 'Крок за кроком',
   'Geen animatie': 'Без анімації',
   'Animatiesnelheid': 'Швидкість анімації',

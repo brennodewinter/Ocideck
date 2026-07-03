@@ -686,6 +686,8 @@ const _dutchSourceEl = {
   'Verticaal': 'Κατακόρυφα',
   'Animatie': 'Κίνηση',
   'Intekenen bij openen': 'Σχεδίαση κατά το άνοιγμα',
+  'Markeer als huidig punt': 'Επισήμανση ως τρέχον σημείο',
+  'Huidig punt weghalen': 'Αφαίρεση τρέχοντος σημείου',
   'Stap voor stap': 'Βήμα προς βήμα',
   'Geen animatie': 'Χωρίς κίνηση',
   'Animatiesnelheid': 'Ταχύτητα κίνησης',

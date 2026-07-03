@@ -681,6 +681,8 @@ const _dutchSourceLt = {
   'Verticaal': 'Vertikalus',
   'Animatie': 'Animacija',
   'Intekenen bij openen': 'Piešti atveriant',
+  'Markeer als huidig punt': 'Pažymėti kaip dabartinį tašką',
+  'Huidig punt weghalen': 'Pašalinti dabartinį tašką',
   'Stap voor stap': 'Žingsnis po žingsnio',
   'Geen animatie': 'Be animacijos',
   'Animatiesnelheid': 'Animacijos greitis',

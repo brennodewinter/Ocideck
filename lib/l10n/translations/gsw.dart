@@ -679,6 +679,8 @@ const _dutchSourceGsw = {
   'Verticaal': 'Vertikal',
   'Animatie': 'Animation',
   'Intekenen bij openen': 'Bim Öffne iizeichne',
+  'Markeer als huidig punt': 'Als aktuelle Punkt markiere',
+  'Huidig punt weghalen': 'Aktuelle Punkt ewegneh',
   'Stap voor stap': 'Schritt für Schritt',
   'Geen animatie': 'Kei Animation',
   'Animatiesnelheid': 'Animationsgschwindigkeit',

@@ -676,6 +676,8 @@ const _dutchSourceDa = {
   'Verticaal': 'Lodret',
   'Animatie': 'Animation',
   'Intekenen bij openen': 'Tegn ind ved åbning',
+  'Markeer als huidig punt': 'Markér som nuværende punkt',
+  'Huidig punt weghalen': 'Fjern nuværende punkt',
   'Stap voor stap': 'Trin for trin',
   'Geen animatie': 'Ingen animation',
   'Animatiesnelheid': 'Animationshastighed',

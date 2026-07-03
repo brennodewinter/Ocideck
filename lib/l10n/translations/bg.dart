@@ -690,6 +690,8 @@ const _dutchSourceBg = {
   'Verticaal': 'Вертикално',
   'Animatie': 'Анимация',
   'Intekenen bij openen': 'Изчертаване при отваряне',
+  'Markeer als huidig punt': 'Отбележи като текуща точка',
+  'Huidig punt weghalen': 'Премахни текущата точка',
   'Stap voor stap': 'Стъпка по стъпка',
   'Geen animatie': 'Без анимация',
   'Animatiesnelheid': 'Скорост на анимацията',

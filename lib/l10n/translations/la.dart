@@ -686,6 +686,8 @@ const _dutchSourceLa = {
   'Verticaal': 'Verticaliter',
   'Animatie': 'Animatio',
   'Intekenen bij openen': 'Delineare in apertione',
+  'Markeer als huidig punt': 'Punctum praesens notare',
+  'Huidig punt weghalen': 'Punctum praesens removere',
   'Stap voor stap': 'Gradatim',
   'Geen animatie': 'Nulla animatio',
   'Animatiesnelheid': 'Celeritas animationis',

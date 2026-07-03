@@ -677,6 +677,8 @@ const _dutchSourceHu = {
   'Verticaal': 'Függőleges',
   'Animatie': 'Animáció',
   'Intekenen bij openen': 'Berajzolás megnyitáskor',
+  'Markeer als huidig punt': 'Megjelölés aktuális pontként',
+  'Huidig punt weghalen': 'Aktuális pont eltávolítása',
   'Stap voor stap': 'Lépésről lépésre',
   'Geen animatie': 'Nincs animáció',
   'Animatiesnelheid': 'Animációsebesség',

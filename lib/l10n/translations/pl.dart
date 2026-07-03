@@ -682,6 +682,8 @@ const _dutchSourcePl = {
   'Verticaal': 'Pionowo',
   'Animatie': 'Animacja',
   'Intekenen bij openen': 'Rysuj przy otwarciu',
+  'Markeer als huidig punt': 'Oznacz jako punkt bieżący',
+  'Huidig punt weghalen': 'Usuń punkt bieżący',
   'Stap voor stap': 'Krok po kroku',
   'Geen animatie': 'Bez animacji',
   'Animatiesnelheid': 'Szybkość animacji',

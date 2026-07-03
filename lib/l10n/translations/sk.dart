@@ -683,6 +683,8 @@ const _dutchSourceSk = {
   'Verticaal': 'Zvisle',
   'Animatie': 'Animácia',
   'Intekenen bij openen': 'Nakresliť pri otvorení',
+  'Markeer als huidig punt': 'Označiť ako aktuálny bod',
+  'Huidig punt weghalen': 'Odstrániť aktuálny bod',
   'Stap voor stap': 'Krok za krokom',
   'Geen animatie': 'Žiadna animácia',
   'Animatiesnelheid': 'Rýchlosť animácie',

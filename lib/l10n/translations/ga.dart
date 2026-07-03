@@ -696,6 +696,8 @@ const _dutchSourceGa = {
   'Verticaal': 'Ingearach',
   'Animatie': 'Beochan',
   'Intekenen bij openen': 'Tarraing isteach ar oscailt',
+  'Markeer als huidig punt': 'Marcáil mar phointe reatha',
+  'Huidig punt weghalen': 'Bain an pointe reatha',
   'Stap voor stap': 'Céim ar chéim',
   'Geen animatie': 'Gan beochan',
   'Animatiesnelheid': 'Luas beochana',
