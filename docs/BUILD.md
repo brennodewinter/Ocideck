@@ -82,6 +82,15 @@ response header rather than relying on the meta tag. Example snippets:
 > A plain `flutter build web` still works, but it falls back to the gstatic CDN
 > and an `unsafe-*` loader — use `make build-web` so the hardening stays pinned.
 
+### Fetch-hulppunt voor URL-import (optioneel, aanbevolen)
+
+"Importeren via URL" werkt in de browser alleen direct voor bronnen die CORS
+toestaan. Om een deck van **elke** URL te kunnen openen, deploy je naast de
+statische bundel het SSRF-bewaakte fetch-hulppunt: zie
+[`server/fetch-proxy/README.md`](../server/fetch-proxy/README.md). De webapp
+valt automatisch terug op het same-origin pad `/fetch-proxy?url=…`; zonder
+hulppunt blijft alles werken en legt de foutmelding de CORS-beperking uit.
+
 ## Quality gate
 
 ```sh

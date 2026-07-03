@@ -62,6 +62,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `slide_rasterizer.dart` — Renders on-screen slide previews to PNG for WYSIWYG PDF/PPTX export.
 - `text_measurement.dart` — `measureTextHeight`/`measureTextWidth` for rendered text dimensions.
 - `user_notes_codec.dart` — Serializes per-slide user notes with content fingerprints.
+- `web_asset_store.dart` — In-memory afbeeldingsopslag (`mem:`-paden) voor de webversie; per-pagina levensduur.
 - `webdav_service.dart` — Talks WebDAV (Nextcloud) over a pinned, redirect-free `HttpClient`.
 
 ## `lib/state/` — Riverpod providers
@@ -79,8 +80,10 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 ## `lib/utils/` — small shared helpers
 
 - `atomic_file.dart` — Atomic writes (temp file + rename) to prevent data loss on crash.
+- `bundled_asset.dart` — `asset:`-schema voor méégebundelde logo's van ingebouwde stijlprofielen.
 - `color_contrast.dart` — WCAG 2.1 contrast-ratio calculation and hex colour parsing.
 - `deck_markdown_dashes.dart` — Escapes standalone dash lines so the deck parser can't misread them.
+- `file_download.dart` — Browserdownload (blob + anker) voor web-opslaan; conditional import met stub.
 - `image_limits.dart` — Caps decoded image dimensions (and `cappedNetworkImage`) to prevent OOM.
 - `image_luminance.dart` — Computes average image colour, cached by mtime/size.
 - `log.dart` — Fail-soft logging to DevTools without exposing sensitive data (`logError`/`logWarning`).
