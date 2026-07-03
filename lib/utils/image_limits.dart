@@ -50,3 +50,15 @@ ImageProvider cappedMemoryImage(Uint8List bytes) => ResizeImage(
   policy: ResizeImagePolicy.fit,
   allowUpscaling: false,
 );
+
+/// An [AssetImage] whose decode is capped to [kMaxImageDecodeDimension] —
+/// voor `asset:`-paden (méégebundelde logo's van ingebouwde stijlprofielen).
+/// Gebundelde assets zijn vertrouwd, maar de cap houdt alle logopaden
+/// uniform en gratis veilig.
+ImageProvider cappedBundledAssetImage(String assetKey) => ResizeImage(
+  AssetImage(assetKey),
+  width: kMaxImageDecodeDimension,
+  height: kMaxImageDecodeDimension,
+  policy: ResizeImagePolicy.fit,
+  allowUpscaling: false,
+);

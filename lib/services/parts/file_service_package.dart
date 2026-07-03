@@ -100,11 +100,15 @@ extension FileServicePackage on FileService {
       return rel;
     }
 
-    /// Resolve [path] (relatief t.o.v. projectPath, absoluut, of mem:), voeg
-    /// het bestand toe onder `<subdir>/<bestandsnaam>` en geef dat pad terug.
+    /// Resolve [path] (relatief t.o.v. projectPath, absoluut, mem: of
+    /// asset:), voeg het bestand toe onder `<subdir>/<bestandsnaam>` en geef
+    /// dat pad terug.
     Future<String?> addAsset(String path, String subdir) async {
       if (path.trim().isEmpty) return null;
       if (WebAssetStore.isMemPath(path)) return addMemAsset(path, subdir);
+      if (isBundledAssetPath(path)) {
+        return _addBundledAssetTo(archive, added, path, subdir);
+      }
       // Zonder bestandssysteem (web) valt hier niets meer te lezen.
       if (kIsWeb) return null;
       final String abs;
@@ -204,6 +208,29 @@ extension FileServicePackage on FileService {
     }
 
     return archive;
+  }
+
+  /// Voeg een méégebundelde asset (asset:-pad, bv. het logo van een ingebouwd
+  /// profiel) vanuit de rootBundle toe aan het pakket-archief.
+  Future<String?> _addBundledAssetTo(
+    Archive archive,
+    Set<String> added,
+    String path,
+    String subdir,
+  ) async {
+    final key = bundledAssetKey(path);
+    final rel = p.posix.join(subdir, p.basename(key));
+    if (!added.contains(rel)) {
+      try {
+        final bytes = (await rootBundle.load(key)).buffer.asUint8List();
+        archive.add(ArchiveFile(rel, bytes.length, bytes));
+        added.add(rel);
+      } catch (e) {
+        logWarning('FileService._addBundledAssetTo: asset niet gebundeld', e);
+        return null;
+      }
+    }
+    return rel;
   }
 
   Future<String?> _packageThemeCss(

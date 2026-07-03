@@ -10,6 +10,7 @@ import '../models/deck.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import 'web_asset_store.dart';
+import '../utils/bundled_asset.dart';
 import '../utils/image_limits.dart';
 import '../utils/project_path.dart';
 import 'slide_layout_metrics.dart';
@@ -59,10 +60,11 @@ class SlideRasterizer {
 
     // The logo is trusted style-profile config (not deck content), so it may
     // live outside the project — unlike slide images, which stay contained.
-    final logo = resolveTrustedAssetPath(
-      themeProfile.logoPath ?? '',
-      projectPath,
-    );
+    // Een `asset:`-logo (ingebouwd profiel) heeft geen bestandsresolutie.
+    final rawLogo = themeProfile.logoPath ?? '';
+    final logo = isBundledAssetPath(rawLogo)
+        ? rawLogo
+        : resolveTrustedAssetPath(rawLogo, projectPath);
     final allPaths = <String>{
       ?logo,
       for (final slide in slides) ...[
@@ -167,15 +169,24 @@ class SlideRasterizer {
     void Function(int done, int total)? onProgress,
   }) async {
     // Op web zijn er geen lokale bestandspaden — alleen al het construeren
-    // van een dart:io File gooit daar. `mem:`-paden (WebAssetStore) worden
-    // wél voorgeladen, zodat de capture niet vóór de eerste decode valt.
+    // van een dart:io File gooit daar. `mem:`-paden (WebAssetStore) en
+    // `asset:`-paden (gebundelde logo's) worden wél voorgeladen, zodat de
+    // capture niet vóór de eerste decode valt.
     final list = paths
-        .where((path) => !kIsWeb || WebAssetStore.isMemPath(path))
+        .where(
+          (path) =>
+              !kIsWeb ||
+              WebAssetStore.isMemPath(path) ||
+              isBundledAssetPath(path),
+        )
         .toList();
     if (list.isEmpty) return;
     const batchSize = 4;
     var done = 0;
     ImageProvider providerFor(String path) {
+      if (isBundledAssetPath(path)) {
+        return cappedBundledAssetImage(bundledAssetKey(path));
+      }
       final memBytes = WebAssetStore.isMemPath(path)
           ? WebAssetStore.bytesFor(path)
           : null;

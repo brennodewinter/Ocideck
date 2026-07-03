@@ -25,6 +25,24 @@ extension _PresenterPlayback on _FullscreenPresenterState {
   }
 
   void _precachePath(String path, {bool trusted = false}) {
+    // Gebundelde (asset:) en in-memory (mem:) paden hebben geen
+    // bestandsresolutie; op web bestaan File-paden sowieso niet.
+    if (isBundledAssetPath(path)) {
+      precacheImage(
+        cappedBundledAssetImage(bundledAssetKey(path)),
+        context,
+        onError: (_, _) {},
+      );
+      return;
+    }
+    final memBytes = WebAssetStore.isMemPath(path)
+        ? WebAssetStore.bytesFor(path)
+        : null;
+    if (memBytes != null) {
+      precacheImage(cappedMemoryImage(memBytes), context, onError: (_, _) {});
+      return;
+    }
+    if (kIsWeb) return;
     final resolved = trusted
         ? resolveTrustedAssetPath(path, widget.projectPath)
         : resolveSlideAssetPath(path, widget.projectPath);
