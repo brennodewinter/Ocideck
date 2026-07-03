@@ -65,10 +65,14 @@ class _DeckStatusBar extends StatelessWidget {
               onTap: () => onSave(),
             ),
             const _StatusDivider(),
-            _StatusItem(
-              icon: Icons.description_outlined,
-              label: fileLabel,
-              tooltip: deckState.filePath ?? l10n.t('noFileYet'),
+            // Flexibel: bij een smal venster krimpen de tekstitems (ellipsis)
+            // in plaats van dat de balk overloopt.
+            Flexible(
+              child: _StatusItem(
+                icon: Icons.description_outlined,
+                label: fileLabel,
+                tooltip: deckState.filePath ?? l10n.t('noFileYet'),
+              ),
             ),
             const _StatusDivider(),
             _StatusItem(
@@ -82,10 +86,12 @@ class _DeckStatusBar extends StatelessWidget {
               color: skipped == 0 ? null : const Color(0xFF8A6D3B),
             ),
             const _StatusDivider(),
-            _StatusItem(
-              icon: Icons.palette_outlined,
-              label: deck.themeProfile.name,
-              tooltip: '${l10n.t('styleProfile')}: ${deck.themeProfile.name}',
+            Flexible(
+              child: _StatusItem(
+                icon: Icons.palette_outlined,
+                label: deck.themeProfile.name,
+                tooltip: '${l10n.t('styleProfile')}: ${deck.themeProfile.name}',
+              ),
             ),
             if (deck.tlp != TlpLevel.none) ...[
               const _StatusDivider(),
@@ -97,10 +103,12 @@ class _DeckStatusBar extends StatelessWidget {
               ),
             ],
             const Spacer(),
-            _StatusItem(
-              icon: Icons.folder_outlined,
-              label: exportLabel,
-              tooltip: exportDirectory ?? l10n.t('exportsNextToDeck'),
+            Flexible(
+              child: _StatusItem(
+                icon: Icons.folder_outlined,
+                label: exportLabel,
+                tooltip: exportDirectory ?? l10n.t('exportsNextToDeck'),
+              ),
             ),
             const _StatusDivider(),
             _ExportReadinessChip(
@@ -251,15 +259,21 @@ class _StatusItem extends StatelessWidget {
         children: [
           Icon(icon, size: 13, color: fg),
           const SizedBox(width: 4),
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 210),
-            child: Text(
-              label,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 11,
-                color: fg,
-                fontWeight: color == null ? FontWeight.normal : FontWeight.w600,
+          // Loose flex: krimpt (met ellipsis) mee wanneer de statusbalk smal
+          // wordt, in plaats van de balk te laten overlopen.
+          Flexible(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 210),
+              child: Text(
+                label,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 11,
+                  color: fg,
+                  fontWeight: color == null
+                      ? FontWeight.normal
+                      : FontWeight.w600,
+                ),
               ),
             ),
           ),
