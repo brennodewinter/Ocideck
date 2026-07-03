@@ -135,7 +135,7 @@ class _WelcomeScreen extends ConsumerWidget {
     ThemeData theme,
     AppPalette palette,
     AppLocalizations l10n,
-    List<String> recentFiles,
+    List<RecentFile> recentFiles,
   ) {
     return Container(
       width: 280,
@@ -164,54 +164,12 @@ class _WelcomeScreen extends ConsumerWidget {
             child: ListView.builder(
               padding: const EdgeInsets.only(bottom: 16),
               itemCount: recentFiles.length,
-              itemBuilder: (_, i) {
-                final path = recentFiles[i];
-                final name = path.split('/').last.replaceAll('.md', '');
-                return InkWell(
-                  onTap: () =>
-                      ref.read(tabsProvider.notifier).openFileByPath(path),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 10,
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.slideshow_outlined,
-                          size: 16,
-                          color: theme.colorScheme.onSurfaceVariant,
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                name,
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w500,
-                                  color: theme.colorScheme.onSurface,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Text(
-                                path,
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: palette.mutedText,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
+              itemBuilder: (_, i) => _RecentFileTile(
+                file: recentFiles[i],
+                onTap: () => ref
+                    .read(tabsProvider.notifier)
+                    .openFileByPath(recentFiles[i].path),
+              ),
             ),
           ),
         ],
@@ -228,3 +186,144 @@ class _WelcomeScreen extends ConsumerWidget {
 }
 
 // ── Main 2-panel layout ───────────────────────────────────────────────────────
+
+/// Eén rij in de recente-bestandenlijst: naam plus een metadataregel met
+/// datum, aantal slides, TLP-badge en het laatst geëxporteerde formaat —
+/// zodat terugvinden niet op naam alleen hoeft. Het volledige pad (en de
+/// exportdatum) staat in de tooltip, zodat de rij zelf rustig blijft.
+class _RecentFileTile extends StatelessWidget {
+  final RecentFile file;
+  final VoidCallback onTap;
+
+  const _RecentFileTile({required this.file, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    final palette = theme.extension<AppPalette>()!;
+    final material = MaterialLocalizations.of(context);
+    final name = p.basename(file.path).replaceAll('.md', '');
+
+    final tooltip = StringBuffer(file.path);
+    if (file.lastExportFormat != null) {
+      tooltip.write(
+        '\n${l10n.d('Laatst geëxporteerd als')} ${file.lastExportFormat}',
+      );
+      if (file.lastExportAt != null) {
+        tooltip.write(' · ${material.formatShortDate(file.lastExportAt!)}');
+      }
+    }
+
+    final metaText = [
+      if (file.openedAt != null) material.formatShortDate(file.openedAt!),
+      if (file.slideCount > 0) '${file.slideCount} ${l10n.t('slides')}',
+    ].join(' · ');
+
+    return Tooltip(
+      message: tooltip.toString(),
+      waitDuration: const Duration(milliseconds: 600),
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 2),
+                child: Icon(
+                  Icons.slideshow_outlined,
+                  size: 16,
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                        color: theme.colorScheme.onSurface,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 2),
+                    Wrap(
+                      spacing: 6,
+                      runSpacing: 2,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        if (metaText.isNotEmpty)
+                          Text(
+                            metaText,
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: palette.mutedText,
+                            ),
+                          ),
+                        if (file.tlp != TlpLevel.none)
+                          _RecentBadge(
+                            label: file.tlp.label,
+                            foreground: Color(file.tlp.foreground),
+                            background: Colors.black,
+                          ),
+                        if (file.lastExportFormat != null)
+                          _RecentBadge(
+                            label: file.lastExportFormat!,
+                            foreground: theme.colorScheme.onSurfaceVariant,
+                            background:
+                                theme.colorScheme.surfaceContainerHighest,
+                          ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Klein badge-blokje in de metadataregel (TLP in officiële kleuren op
+/// zwart, exportformaat in neutrale tint).
+class _RecentBadge extends StatelessWidget {
+  final String label;
+  final Color foreground;
+  final Color background;
+
+  const _RecentBadge({
+    required this.label,
+    required this.foreground,
+    required this.background,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(3),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: 8.5,
+          fontWeight: FontWeight.w700,
+          color: foreground,
+          fontFamily: 'monospace',
+          fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
+          letterSpacing: 0.3,
+        ),
+      ),
+    );
+  }
+}

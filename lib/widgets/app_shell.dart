@@ -9,6 +9,7 @@ import '../platform/launch_files.dart';
 import '../platform/platform_features.dart';
 import '../utils/log.dart';
 import '../models/deck.dart';
+import '../models/recent_file.dart';
 import '../models/slide.dart';
 import '../models/slide_quality.dart';
 import '../models/webdav_settings.dart';
