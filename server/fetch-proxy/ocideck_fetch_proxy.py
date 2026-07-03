@@ -36,7 +36,7 @@ import socket
 import ssl
 import sys
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, quote, urlparse
 
 BIND = os.environ.get("OCIDECK_PROXY_BIND", "127.0.0.1")
 PORT = int(os.environ.get("OCIDECK_PROXY_PORT", "8123"))
@@ -158,10 +158,19 @@ class Handler(BaseHTTPRequestHandler):
         return False
 
     def do_GET(self):  # noqa: N802 (http.server-conventie)
-        if not self._origin_allowed():
-            return self._refuse(403, "origin niet toegestaan")
         query = parse_qs(urlparse(self.path).query)
         target = (query.get("url") or [""])[0].strip()
+        if not self._origin_allowed():
+            # Handmatig geopend (of vanaf een andere site): leg uit hoe het
+            # wél moet, in plaats van een kale weigering. De app-origin uit de
+            # allowlist levert meteen de juiste deeplink op.
+            hint = "dit adres is alleen voor de OciDeck-app zelf"
+            if ALLOWED_ORIGINS and target:
+                hint += (
+                    ": open de presentatie via %s/?deck=%s"
+                    % (ALLOWED_ORIGINS[0], quote(target, safe=""))
+                )
+            return self._refuse(403, hint)
         parsed = urlparse(target)
         if parsed.scheme not in ("http", "https") or not parsed.hostname:
             return self._refuse(400, "alleen http(s)-URL's")
