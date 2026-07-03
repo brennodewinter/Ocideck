@@ -83,6 +83,8 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Bemærk: webversionen kan kun hente fra servere, der tillader det (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Pakker (.ocideck) understøttes endnu ikke i webversionen.',
   'Alleen .md-presentaties kunnen in de webversie worden geopend.':

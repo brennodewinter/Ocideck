@@ -84,6 +84,8 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Pozor: webová verzia môže sťahovať len zo serverov, ktoré to povoľujú (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Balíky (.ocideck) zatiaľ nie sú vo webovej verzii podporované.',
   'Alleen .md-presentaties kunnen in de webversie worden geopend.':

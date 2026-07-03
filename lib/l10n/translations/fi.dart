@@ -83,6 +83,8 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Huomio: verkkoversio voi noutaa vain palvelimilta, jotka sallivat sen (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Paketteja (.ocideck) ei vielä tueta verkkoversiossa.',
   'Alleen .md-presentaties kunnen in de webversie worden geopend.':
