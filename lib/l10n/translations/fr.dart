@@ -1118,4 +1118,7 @@ const _dutchSourceAddFr = {
   'Voeg beschrijving toe': 'Ajouter une description',
   'Zinnen naar losse bullets': 'Phrases en puces séparées',
   'Laatst geëxporteerd als': 'Dernier export en',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Détermine les couleurs, la police et le logo. Modifiable plus tard via les propriétés de la présentation ou les réglages.',
+  'Stijlprofielen beheren…': 'Gérer les profils de style…',
 };

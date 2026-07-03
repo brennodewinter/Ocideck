@@ -1117,4 +1117,7 @@ const _dutchSourceId = {
   'Voeg beschrijving toe': 'Tambahkan deskripsi',
   'Zinnen naar losse bullets': 'Kalimat menjadi butir terpisah',
   'Laatst geëxporteerd als': 'Terakhir diekspor sebagai',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Menentukan warna, huruf, dan logo. Dapat diubah nanti lewat properti presentasi atau pengaturan.',
+  'Stijlprofielen beheren…': 'Kelola profil gaya…',
 };

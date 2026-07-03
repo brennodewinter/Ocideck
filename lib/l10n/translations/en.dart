@@ -1129,4 +1129,7 @@ const _dutchSourceAddEn = {
   'Voeg beschrijving toe': 'Add description',
   'Zinnen naar losse bullets': 'Sentences to separate bullets',
   'Laatst geëxporteerd als': 'Last exported as',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Determines colors, font and logo. Can be changed later via the presentation properties or settings.',
+  'Stijlprofielen beheren…': 'Manage style profiles…',
 };

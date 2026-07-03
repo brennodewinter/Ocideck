@@ -1113,4 +1113,7 @@ const _dutchSourceDa = {
   'Voeg beschrijving toe': 'Tilføj beskrivelse',
   'Zinnen naar losse bullets': 'Sætninger til separate punkter',
   'Laatst geëxporteerd als': 'Senest eksporteret som',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Bestemmer farver, skrifttype og logo. Kan ændres senere via præsentationsegenskaberne eller indstillingerne.',
+  'Stijlprofielen beheren…': 'Administrer stilprofiler…',
 };

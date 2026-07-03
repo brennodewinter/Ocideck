@@ -1105,4 +1105,7 @@ const _dutchSourceAddFy = {
   'Voeg beschrijving toe': 'Foegje beskriuwing ta',
   'Zinnen naar losse bullets': 'Sinnen nei losse bullets',
   'Laatst geëxporteerd als': 'Lêst eksportearre as',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Bepaalt kleuren, lettertype en logo. Letter oan te passen fia de presintaasje-eigenskippen of ynstellingen.',
+  'Stijlprofielen beheren…': 'Stylprofilen beheare…',
 };

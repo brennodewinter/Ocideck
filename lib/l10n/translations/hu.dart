@@ -1119,4 +1119,7 @@ const _dutchSourceHu = {
   'Voeg beschrijving toe': 'Leírás hozzáadása',
   'Zinnen naar losse bullets': 'Mondatok külön pontokba',
   'Laatst geëxporteerd als': 'Utoljára exportálva mint',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Meghatározza a színeket, a betűtípust és a logót. Később módosítható a bemutató tulajdonságaiban vagy a beállításokban.',
+  'Stijlprofielen beheren…': 'Stílusprofilok kezelése…',
 };

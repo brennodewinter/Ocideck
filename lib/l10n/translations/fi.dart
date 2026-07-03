@@ -1119,4 +1119,7 @@ const _dutchSourceFi = {
   'Voeg beschrijving toe': 'Lisää kuvaus',
   'Zinnen naar losse bullets': 'Virkkeet erillisiksi luettelokohdiksi',
   'Laatst geëxporteerd als': 'Viimeksi viety muodossa',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Määrittää värit, fontin ja logon. Voi muuttaa myöhemmin esityksen ominaisuuksista tai asetuksista.',
+  'Stijlprofielen beheren…': 'Hallitse tyyliprofiileja…',
 };

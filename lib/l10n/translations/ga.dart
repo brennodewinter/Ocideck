@@ -1142,4 +1142,7 @@ const _dutchSourceGa = {
   'Voeg beschrijving toe': 'Cuir cur síos leis',
   'Zinnen naar losse bullets': 'Abairtí ina bpointí ar leith',
   'Laatst geëxporteerd als': 'Easpórtáladh go deireanach mar',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Socraíonn sé dathanna, cló agus lógó. Is féidir é a athrú níos déanaí trí airíonna an chur i láthair nó na socruithe.',
+  'Stijlprofielen beheren…': 'Bainistigh próifílí stíle…',
 };

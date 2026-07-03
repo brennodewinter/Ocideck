@@ -1112,4 +1112,7 @@ const _dutchSourceAddEs = {
   'Voeg beschrijving toe': 'Añadir descripción',
   'Zinnen naar losse bullets': 'Frases en viñetas separadas',
   'Laatst geëxporteerd als': 'Última exportación como',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Determina colores, tipografía y logotipo. Se puede cambiar más tarde en las propiedades de la presentación o en los ajustes.',
+  'Stijlprofielen beheren…': 'Gestionar perfiles de estilo…',
 };

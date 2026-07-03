@@ -1124,4 +1124,7 @@ const _dutchSourcePl = {
   'Voeg beschrijving toe': 'Dodaj opis',
   'Zinnen naar losse bullets': 'Zdania na osobne punkty',
   'Laatst geëxporteerd als': 'Ostatnio wyeksportowano jako',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Określa kolory, czcionkę i logo. Można to później zmienić we właściwościach prezentacji lub w ustawieniach.',
+  'Stijlprofielen beheren…': 'Zarządzaj profilami stylu…',
 };

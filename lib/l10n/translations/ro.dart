@@ -1127,4 +1127,7 @@ const _dutchSourceRo = {
   'Voeg beschrijving toe': 'Adaugă descriere',
   'Zinnen naar losse bullets': 'Propoziții în puncte separate',
   'Laatst geëxporteerd als': 'Ultimul export ca',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Stabilește culorile, fontul și sigla. Se poate schimba ulterior din proprietățile prezentării sau din setări.',
+  'Stijlprofielen beheren…': 'Gestionează profilurile de stil…',
 };

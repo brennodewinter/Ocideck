@@ -1129,4 +1129,7 @@ const _dutchSourceUk = {
   'Voeg beschrijving toe': 'Додати опис',
   'Zinnen naar losse bullets': 'Речення в окремі пункти',
   'Laatst geëxporteerd als': 'Востаннє експортовано як',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Визначає кольори, шрифт і логотип. Пізніше можна змінити у властивостях презентації або налаштуваннях.',
+  'Stijlprofielen beheren…': 'Керувати профілями стилю…',
 };

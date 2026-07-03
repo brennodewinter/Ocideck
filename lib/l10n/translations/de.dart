@@ -1108,4 +1108,7 @@ const _dutchSourceAddDe = {
   'Voeg beschrijving toe': 'Beschreibung hinzufügen',
   'Zinnen naar losse bullets': 'Sätze in einzelne Punkte',
   'Laatst geëxporteerd als': 'Zuletzt exportiert als',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Bestimmt Farben, Schrift und Logo. Später über die Präsentationseigenschaften oder Einstellungen änderbar.',
+  'Stijlprofielen beheren…': 'Stilprofile verwalten…',
 };

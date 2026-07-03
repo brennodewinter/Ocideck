@@ -1121,4 +1121,7 @@ const _dutchSourceHr = {
   'Voeg beschrijving toe': 'Dodaj opis',
   'Zinnen naar losse bullets': 'Rečenice u zasebne natuknice',
   'Laatst geëxporteerd als': 'Zadnji izvoz kao',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Određuje boje, font i logotip. Kasnije se može promijeniti u svojstvima prezentacije ili postavkama.',
+  'Stijlprofielen beheren…': 'Upravljaj profilima stila…',
 };

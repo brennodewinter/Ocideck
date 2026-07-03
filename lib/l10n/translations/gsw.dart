@@ -1117,4 +1117,7 @@ const _dutchSourceGsw = {
   'Voeg beschrijving toe': 'Beschriibig dezuetue',
   'Zinnen naar losse bullets': 'Sätz in einzelni Pünkt',
   'Laatst geëxporteerd als': 'Zletscht exportiert als',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Bestimmt Farbe, Schrift und Logo. Chasch spöter über d Präsentations-Eigeschafte oder d Iischtellige ändere.',
+  'Stijlprofielen beheren…': 'Stilprofil verwalte…',
 };

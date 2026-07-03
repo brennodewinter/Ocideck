@@ -1119,4 +1119,7 @@ const _dutchSourceSl = {
   'Voeg beschrijving toe': 'Dodaj opis',
   'Zinnen naar losse bullets': 'Stavki v ločene alineje',
   'Laatst geëxporteerd als': 'Nazadnje izvoženo kot',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Določa barve, pisavo in logotip. Pozneje ga lahko spremenite v lastnostih predstavitve ali nastavitvah.',
+  'Stijlprofielen beheren…': 'Upravljaj slogovne profile…',
 };

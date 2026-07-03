@@ -1133,4 +1133,7 @@ const _dutchSourceBg = {
   'Voeg beschrijving toe': 'Добави описание',
   'Zinnen naar losse bullets': 'Изречения в отделни точки',
   'Laatst geëxporteerd als': 'Последно експортирано като',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Определя цветовете, шрифта и логото. По-късно може да се промени през свойствата на презентацията или настройките.',
+  'Stijlprofielen beheren…': 'Управление на стиловите профили…',
 };

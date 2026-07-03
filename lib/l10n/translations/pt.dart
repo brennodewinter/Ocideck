@@ -1135,4 +1135,7 @@ const _dutchSourcePt = {
   'Voeg beschrijving toe': 'Adicionar descrição',
   'Zinnen naar losse bullets': 'Frases em marcadores separados',
   'Laatst geëxporteerd als': 'Última exportação como',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Determina cores, tipo de letra e logótipo. Pode ser alterado mais tarde nas propriedades da apresentação ou nas definições.',
+  'Stijlprofielen beheren…': 'Gerir perfis de estilo…',
 };

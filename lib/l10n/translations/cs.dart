@@ -1118,4 +1118,7 @@ const _dutchSourceCs = {
   'Voeg beschrijving toe': 'Přidat popis',
   'Zinnen naar losse bullets': 'Věty na samostatné odrážky',
   'Laatst geëxporteerd als': 'Naposledy exportováno jako',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Určuje barvy, písmo a logo. Později lze změnit ve vlastnostech prezentace nebo v nastavení.',
+  'Stijlprofielen beheren…': 'Spravovat profily stylu…',
 };

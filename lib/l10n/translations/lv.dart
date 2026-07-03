@@ -1117,4 +1117,7 @@ const _dutchSourceLv = {
   'Voeg beschrijving toe': 'Pievienot aprakstu',
   'Zinnen naar losse bullets': 'Teikumi atsevišķos punktos',
   'Laatst geëxporteerd als': 'Pēdējoreiz eksportēts kā',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Nosaka krāsas, fontu un logotipu. Vēlāk maināms prezentācijas rekvizītos vai iestatījumos.',
+  'Stijlprofielen beheren…': 'Pārvaldīt stila profilus…',
 };

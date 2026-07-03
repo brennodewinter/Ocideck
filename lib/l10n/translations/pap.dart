@@ -1107,4 +1107,7 @@ const _dutchSourceAddPap = {
   'Voeg beschrijving toe': 'Agregá deskripshon',
   'Zinnen naar losse bullets': 'Frasenan den bullet separá',
   'Laatst geëxporteerd als': 'Último eksportá komo',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Ta determiná koló, tipo di lèter i logo. Por kambia despues via e propiedatnan di presentashon òf ajustenan.',
+  'Stijlprofielen beheren…': 'Maneha perfilnan di estilo…',
 };

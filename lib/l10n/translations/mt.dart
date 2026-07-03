@@ -1130,4 +1130,7 @@ const _dutchSourceMt = {
   'Voeg beschrijving toe': 'Żid deskrizzjoni',
   'Zinnen naar losse bullets': 'Sentenzi f\'punti separati',
   'Laatst geëxporteerd als': 'L-aħħar esportat bħala',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Jiddetermina l-kuluri, il-font u l-logo. Jista\' jinbidel aktar tard mill-proprjetajiet tal-preżentazzjoni jew mis-settings.',
+  'Stijlprofielen beheren…': 'Immaniġġja l-profili tal-istil…',
 };

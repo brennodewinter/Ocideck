@@ -1116,4 +1116,7 @@ const _dutchSourceSv = {
   'Voeg beschrijving toe': 'Lägg till beskrivning',
   'Zinnen naar losse bullets': 'Meningar till separata punkter',
   'Laatst geëxporteerd als': 'Senast exporterad som',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Bestämmer färger, typsnitt och logotyp. Kan ändras senare via presentationsegenskaperna eller inställningarna.',
+  'Stijlprofielen beheren…': 'Hantera stilprofiler…',
 };

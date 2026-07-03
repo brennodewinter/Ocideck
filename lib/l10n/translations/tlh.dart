@@ -1104,4 +1104,7 @@ const _dutchSourceTlh = {
   'Voeg beschrijving toe': 'QIj mu\'mey yIchel',
   'Zinnen naar losse bullets': 'mu\'tlheghmey mob moHmoH',
   'Laatst geëxporteerd als': 'Qav ngeHlu\' \'e\'',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'rItlh, ngutlh Segh, Degh je \'oS. tugh \'ang-nItlhmey pagh SeHlaw lo\'lu\' \'e\' choHlaH.',
+  'Stijlprofielen beheren…': 'Segh mIwmey yISeH…',
 };

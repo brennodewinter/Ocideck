@@ -1111,4 +1111,7 @@ const _dutchSourceEt = {
   'Voeg beschrijving toe': 'Lisa kirjeldus',
   'Zinnen naar losse bullets': 'Laused eraldi punktideks',
   'Laatst geëxporteerd als': 'Viimati eksporditud kui',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Määrab värvid, fondi ja logo. Hiljem muudetav esitluse omaduste või seadete kaudu.',
+  'Stijlprofielen beheren…': 'Halda stiiliprofiile…',
 };

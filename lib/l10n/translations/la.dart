@@ -1127,4 +1127,7 @@ const _dutchSourceLa = {
   'Voeg beschrijving toe': 'Adde descriptionem',
   'Zinnen naar losse bullets': 'Sententiae in puncta separata',
   'Laatst geëxporteerd als': 'Postremum exportatum ut',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Colores, litteras et insigne statuit. Postea per proprietates monstrationis aut optiones mutari potest.',
+  'Stijlprofielen beheren…': 'Formas styli administrare…',
 };

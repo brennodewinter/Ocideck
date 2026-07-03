@@ -1123,4 +1123,7 @@ const _dutchSourceSk = {
   'Voeg beschrijving toe': 'Pridať popis',
   'Zinnen naar losse bullets': 'Vety na samostatné odrážky',
   'Laatst geëxporteerd als': 'Naposledy exportované ako',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Určuje farby, písmo a logo. Neskôr sa dá zmeniť vo vlastnostiach prezentácie alebo v nastaveniach.',
+  'Stijlprofielen beheren…': 'Spravovať profily štýlu…',
 };
