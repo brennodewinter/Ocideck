@@ -170,6 +170,9 @@ class _WelcomeScreen extends ConsumerWidget {
                 final origin = ref.watch(
                   settingsProvider.select((s) => s.recentFileOrigins[path]),
                 );
+                final recentsHomeDir = ref.watch(
+                  settingsProvider.select((s) => s.homeDirectory),
+                );
                 return InkWell(
                   onTap: () =>
                       ref.read(tabsProvider.notifier).openFileByPath(path),
@@ -219,13 +222,23 @@ class _WelcomeScreen extends ConsumerWidget {
                                   ],
                                 ],
                               ),
-                              Text(
-                                path,
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: palette.mutedText,
+                              // De vindplaats kort en betekenisvol (thuismap-
+                              // relatief); het volledige pad zit in de tooltip.
+                              Tooltip(
+                                message: path,
+                                waitDuration: const Duration(milliseconds: 400),
+                                child: Text(
+                                  displayFolder(
+                                    path,
+                                    homeDir: recentsHomeDir,
+                                    osHome: osHomeDirectory,
+                                  ),
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: palette.mutedText,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                overflow: TextOverflow.ellipsis,
                               ),
                             ],
                           ),
