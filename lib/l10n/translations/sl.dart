@@ -1108,4 +1108,18 @@ const _dutchSourceSl = {
   'Pen · markeerstift · ⇧E': 'Pero · označevalnik · ⇧E',
   'Gestapelde staaf': 'Naložen stolpec',
   'Spreiding': 'Razpršenost',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identične kopije',
+  'Zelfde titel, andere inhoud': 'Isti naslov, drugačna vsebina',
+  'Dubbele presentaties opruimen': 'Počisti podvojene predstavitve',
+  'Naar de prullenbak verplaatst:': 'Premaknjeno v smetnjak:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Ni bilo mogoče premakniti v smetnjak.',
+  'Geen dubbele presentaties gevonden.': 'Ni najdenih podvojenih predstavitev.',
+  'Laatste kopie blijft behouden': 'Zadnja kopija se ohrani',
+  'Nog geopend in een tabblad': 'Še vedno odprta v zavihku',
+  'Naar prullenbak': 'V smetnjak',
+  'Deze presentatie staat ook op een andere plek:':
+      'Ta predstavitev obstaja tudi na drugem mestu:',
+  'Opruimen…': 'Počisti…',
 };

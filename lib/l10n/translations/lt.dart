@@ -1111,4 +1111,17 @@ const _dutchSourceLt = {
   'Pen · markeerstift · ⇧E': 'Rašiklis · žymeklis · ⇧E',
   'Gestapelde staaf': 'Sukrauta stulpelinė',
   'Spreiding': 'Sklaida',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identiškos kopijos',
+  'Zelfde titel, andere inhoud': 'Tas pats pavadinimas, skirtingas turinys',
+  'Dubbele presentaties opruimen': 'Sutvarkyti pasikartojančias pateiktis',
+  'Naar de prullenbak verplaatst:': 'Perkelta į šiukšlinę:',
+  'Kon niet naar de prullenbak verplaatsen.': 'Nepavyko perkelti į šiukšlinę.',
+  'Geen dubbele presentaties gevonden.': 'Pasikartojančių pateikčių nerasta.',
+  'Laatste kopie blijft behouden': 'Paskutinė kopija išsaugoma',
+  'Nog geopend in een tabblad': 'Vis dar atidaryta kortelėje',
+  'Naar prullenbak': 'Į šiukšlinę',
+  'Deze presentatie staat ook op een andere plek:':
+      'Ši pateiktis yra ir kitoje vietoje:',
+  'Opruimen…': 'Sutvarkyti…',
 };

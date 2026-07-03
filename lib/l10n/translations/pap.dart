@@ -318,6 +318,20 @@ const _dutchSourcePap = {
       'Bo mester akseptá e termino di privacidad i uso antes bo por usa OciDeck.',
   'Volledige licentie online': 'Lisencia kompleto online',
   'Welkom bij OciDeck': 'Bienvenido na OciDeck',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Kopia idéntiko',
+  'Zelfde titel, andere inhoud': 'Mesun título, kontenido diferente',
+  'Dubbele presentaties opruimen': 'Limpia presentashonnan duplá',
+  'Naar de prullenbak verplaatst:': 'Movi pa e baki di sushi:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'No por a movi pa e baki di sushi.',
+  'Geen dubbele presentaties gevonden.': 'No a haña presentashon duplá.',
+  'Laatste kopie blijft behouden': 'E último kopia ta keda wardá',
+  'Nog geopend in een tabblad': 'Ainda habrí den un tab',
+  'Naar prullenbak': 'Pa e baki di sushi',
+  'Deze presentatie staat ook op een andere plek:':
+      'E presentashon aki ta eksistí tambe na otro lugá:',
+  'Opruimen…': 'Limpia…',
 };
 
 const _dutchSourceAddPap = {

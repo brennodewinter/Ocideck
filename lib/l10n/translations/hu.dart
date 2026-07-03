@@ -1108,4 +1108,17 @@ const _dutchSourceHu = {
   'Pen · markeerstift · ⇧E': 'Toll · szövegkiemelő · ⇧E',
   'Gestapelde staaf': 'Halmozott oszlop',
   'Spreiding': 'Pontdiagram',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Azonos másolatok',
+  'Zelfde titel, andere inhoud': 'Azonos cím, eltérő tartalom',
+  'Dubbele presentaties opruimen': 'Duplikált prezentációk rendbetétele',
+  'Naar de prullenbak verplaatst:': 'Áthelyezve a kukába:',
+  'Kon niet naar de prullenbak verplaatsen.': 'Nem sikerült a kukába helyezni.',
+  'Geen dubbele presentaties gevonden.': 'Nem található duplikált prezentáció.',
+  'Laatste kopie blijft behouden': 'Az utolsó másolat megmarad',
+  'Nog geopend in een tabblad': 'Még nyitva egy lapon',
+  'Naar prullenbak': 'A kukába',
+  'Deze presentatie staat ook op een andere plek:':
+      'Ez a prezentáció máshol is létezik:',
+  'Opruimen…': 'Rendbetétel…',
 };

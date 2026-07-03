@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import '../../platform/platform_features.dart';
+import '../../services/duplicate_service.dart';
 import '../../services/file_service.dart';
+import '../../services/trash_service.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/display_path.dart';
+import '../duplicate_badges.dart';
+import 'duplicate_cleanup_dialog.dart';
 
 /// Dialog that scans a fixed set of well-known locations (recent-file folders
 /// plus the user's Documents/Desktop/Downloads/iCloud) for Marp presentations
@@ -49,6 +53,10 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
   bool _scanning = true;
   bool _cancelled = false;
   List<ScanHit> _hits = const [];
+
+  /// Treffers gebundeld op identieke inhoud: één zichtbare vermelding per
+  /// unieke presentatie, met haar andere vindplaatsen eronder gehangen.
+  List<DuplicateInfo<ScanHit>> _groups = const [];
   String _phase = '';
   String _query = '';
 
@@ -74,21 +82,28 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
       },
     );
     if (!mounted) return;
+    final groups = await DuplicateService().groupScanHits(results);
+    if (!mounted) return;
     setState(() {
       _hits = results;
+      _groups = groups;
       _scanning = false;
     });
   }
 
-  List<ScanHit> _visible() {
+  List<DuplicateInfo<ScanHit>> _visible() {
     final q = _query.trim().toLowerCase();
-    if (q.isEmpty) return _hits;
+    if (q.isEmpty) return _groups;
     final terms = q.split(RegExp(r'\s+')).where((t) => t.isNotEmpty).toList();
     bool matchesAll(String hay) => terms.every(hay.contains);
-    return _hits.where((h) {
+    return _groups.where((info) {
+      // De vindplaatsen van identieke kopieën zoeken mee, zodat een pad van
+      // een samengevouwen kopie de groep gewoon vindt.
+      final h = info.primary;
       final hay =
           '${h.displayTitle.toLowerCase()} '
           '${h.path.toLowerCase()} '
+          '${info.identical.map((c) => c.path.toLowerCase()).join(' ')} '
           '${h.theme?.toLowerCase() ?? ''}';
       return matchesAll(hay);
     }).toList();
@@ -131,11 +146,20 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
         ),
       ),
       actions: [
+        if (!_scanning &&
+            TrashService().isSupported &&
+            _groups.any((info) => info.hasIdenticalCopies))
+          OutlinedButton.icon(
+            onPressed: _openCleanup,
+            icon: const Icon(Icons.cleaning_services_outlined, size: 16),
+            label: Text(l10n.d('Dubbele presentaties opruimen')),
+          ),
         TextButton(
           onPressed: () => Navigator.pop(context),
           child: Text(l10n.t('cancel')),
         ),
       ],
+      actionsAlignment: MainAxisAlignment.spaceBetween,
     );
   }
 
@@ -162,7 +186,7 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
     );
   }
 
-  Widget _body(List<ScanHit> visible) {
+  Widget _body(List<DuplicateInfo<ScanHit>> visible) {
     final l10n = context.l10n;
     if (_scanning && _hits.isEmpty) {
       return const Center(child: CircularProgressIndicator());
@@ -183,11 +207,39 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
       itemCount: visible.length,
       separatorBuilder: (_, _) => const Divider(height: 1),
       itemBuilder: (_, i) => _HitRow(
-        hit: visible[i],
+        info: visible[i],
         homeDir: widget.homeDir,
-        onOpen: () => Navigator.pop(context, visible[i].path),
+        onOpen: (path) => Navigator.pop(context, path),
       ),
     );
+  }
+
+  /// Groepen met échte kopieën, klaar voor de opruimdialoog.
+  List<CleanupGroup> _cleanupGroups() {
+    return [
+      for (final info in _groups)
+        if (info.hasIdenticalCopies)
+          CleanupGroup(
+            title: info.primary.displayTitle,
+            paths: [for (final hit in info.all) hit.path],
+          ),
+    ];
+  }
+
+  Future<void> _openCleanup() async {
+    final changed = await DuplicateCleanupDialog.show(
+      context,
+      groups: _cleanupGroups(),
+      homeDir: widget.homeDir,
+    );
+    if (changed && mounted) {
+      setState(() {
+        _scanning = true;
+        _hits = const [];
+        _groups = const [];
+      });
+      await _scan();
+    }
   }
 
   Widget _empty(IconData icon, String message) {
@@ -209,21 +261,23 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
 }
 
 class _HitRow extends StatelessWidget {
-  final ScanHit hit;
+  final DuplicateInfo<ScanHit> info;
   final String? homeDir;
-  final VoidCallback onOpen;
+  final ValueChanged<String> onOpen;
 
   const _HitRow({
-    required this.hit,
+    required this.info,
     required this.homeDir,
     required this.onOpen,
   });
+
+  ScanHit get hit => info.primary;
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return InkWell(
-      onTap: onOpen,
+      onTap: () => onOpen(hit.path),
       borderRadius: BorderRadius.circular(6),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
@@ -254,6 +308,16 @@ class _HitRow extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       _ThemeBadge(hit: hit, l10n: l10n),
+                      if (info.hasIdenticalCopies) ...[
+                        const SizedBox(width: 6),
+                        IdenticalCopiesChip(
+                          otherPaths: [
+                            for (final copy in info.identical) copy.path,
+                          ],
+                          homeDir: homeDir,
+                          onOpen: onOpen,
+                        ),
+                      ],
                     ],
                   ),
                   const SizedBox(height: 2),
@@ -272,6 +336,10 @@ class _HitRow extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
+                  if (info.hasTitleConflict) ...[
+                    const SizedBox(height: 2),
+                    TitleConflictMarker(modified: hit.modified),
+                  ],
                 ],
               ),
             ),

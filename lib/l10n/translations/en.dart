@@ -508,6 +508,19 @@ const _dutchSourceEn = {
   'Kopiëren naar ander deck': 'Copy to another deck',
   'Weer tonen': 'Show again',
   'Selectie opheffen': 'Clear selection',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identical copies',
+  'Zelfde titel, andere inhoud': 'Same title, different content',
+  'Dubbele presentaties opruimen': 'Clean up duplicate presentations',
+  'Naar de prullenbak verplaatst:': 'Moved to the trash:',
+  'Kon niet naar de prullenbak verplaatsen.': 'Could not move to the trash.',
+  'Geen dubbele presentaties gevonden.': 'No duplicate presentations found.',
+  'Laatste kopie blijft behouden': 'The last copy is kept',
+  'Nog geopend in een tabblad': 'Still open in a tab',
+  'Naar prullenbak': 'Move to trash',
+  'Deze presentatie staat ook op een andere plek:':
+      'This presentation also exists somewhere else:',
+  'Opruimen…': 'Clean up…',
 };
 
 const _dutchSourceAddEn = {

@@ -1105,4 +1105,19 @@ const _dutchSourceSv = {
   'Pen · markeerstift · ⇧E': 'Penna · överstrykningspenna · ⇧E',
   'Gestapelde staaf': 'Staplad stapel',
   'Spreiding': 'Spridning',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identiska kopior',
+  'Zelfde titel, andere inhoud': 'Samma titel, olika innehåll',
+  'Dubbele presentaties opruimen': 'Rensa dubblerade presentationer',
+  'Naar de prullenbak verplaatst:': 'Flyttad till papperskorgen:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Kunde inte flyttas till papperskorgen.',
+  'Geen dubbele presentaties gevonden.':
+      'Inga dubblerade presentationer hittades.',
+  'Laatste kopie blijft behouden': 'Den sista kopian behålls',
+  'Nog geopend in een tabblad': 'Fortfarande öppen i en flik',
+  'Naar prullenbak': 'Till papperskorgen',
+  'Deze presentatie staat ook op een andere plek:':
+      'Den här presentationen finns även på en annan plats:',
+  'Opruimen…': 'Rensa…',
 };

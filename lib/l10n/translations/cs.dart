@@ -1107,4 +1107,19 @@ const _dutchSourceCs = {
   'Pen · markeerstift · ⇧E': 'Pero · zvýrazňovač · ⇧E',
   'Gestapelde staaf': 'Skládaný sloupcový',
   'Spreiding': 'Bodový',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identické kopie',
+  'Zelfde titel, andere inhoud': 'Stejný název, jiný obsah',
+  'Dubbele presentaties opruimen': 'Uklidit duplicitní prezentace',
+  'Naar de prullenbak verplaatst:': 'Přesunuto do koše:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Nepodařilo se přesunout do koše.',
+  'Geen dubbele presentaties gevonden.':
+      'Žádné duplicitní prezentace nenalezeny.',
+  'Laatste kopie blijft behouden': 'Poslední kopie zůstává zachována',
+  'Nog geopend in een tabblad': 'Stále otevřená na kartě',
+  'Naar prullenbak': 'Do koše',
+  'Deze presentatie staat ook op een andere plek:':
+      'Tato prezentace existuje i na jiném místě:',
+  'Opruimen…': 'Uklidit…',
 };
