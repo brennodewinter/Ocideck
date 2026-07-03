@@ -479,7 +479,7 @@ The layout and animation are **presentation options**, not content, so they
 round-trip as extra `_class` tokens alongside the base `timeline` token:
 
 - `timeline-horizontal` / `timeline-vertical` — force a layout; absent = *auto*
-  (horizontal for ≤ 5 events, vertical otherwise).
+  (horizontal for ≤ 14 events, vertical otherwise).
 - `timeline-steps` — reveal one event per click while presenting; absent = the
   whole timeline draws itself in when the slide opens.
 - `timeline-static` — no animation; everything is shown at once.
@@ -492,7 +492,7 @@ token, and only when it differs from the 1600 ms default:
 <!-- ocideck_timeline_duration: 2600 -->
 ```
 
-It is the full draw-in duration in milliseconds, clamped to 400–6000 ms.
+It is the full draw-in duration in milliseconds, clamped to 400–30000 ms.
 
 One event can be highlighted as the **current point** ("where we are now", e.g.
 a project's present phase): its card gets a solid accent border and glow, and
