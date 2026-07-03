@@ -749,6 +749,22 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       presentationTargetSeconds: info.presentationTargetSeconds,
       showRehearsalSummary: info.showRehearsalSummary,
     );
+    // Een hier gekozen stijlprofiel geldt app-breed (profielen zijn globaal)
+    // en wordt meteen op het open deck toegepast.
+    final profileName = info.styleProfileName;
+    final settings = ref.read(settingsProvider);
+    if (profileName != null &&
+        profileName != ref.read(deckProvider).deck?.themeProfile.name) {
+      final profile = settings.themeProfiles
+          .where((p) => p.name == profileName)
+          .firstOrNull;
+      if (profile != null) {
+        await ref
+            .read(settingsProvider.notifier)
+            .selectThemeProfile(profileName);
+        deckNotifier.updateThemeProfile(profile);
+      }
+    }
   }
 
   Future<void> _exportPackage() async {
