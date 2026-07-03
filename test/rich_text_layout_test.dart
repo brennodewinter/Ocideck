@@ -296,6 +296,12 @@ void main() {
         if (h > tallest) tallest = h;
       }
       expect(tallest / budget, greaterThan(0.85));
+      // Elke pagina houdt de render-marge vrij: een tot op de pixel volle
+      // pagina knipt zijn onderste regel af op de logo-/footergrens.
+      expect(
+        tallest,
+        lessThanOrEqualTo(budget - w * kRichTextRenderSlopFraction + 0.5),
+      );
     });
   });
 }
