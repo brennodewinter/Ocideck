@@ -421,7 +421,12 @@ class _ExportDialogState extends State<ExportDialog> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (widget.qualityResult.hasIssues) _qualityBanner(l10n),
+        // Alle gates staan open en er is niets te melden: zeg dat dan ook,
+        // zodat de laatste stap met vertrouwen begint in plaats van stilte.
+        if (widget.qualityResult.hasIssues)
+          _qualityBanner(l10n)
+        else
+          _readyBanner(l10n),
         Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
@@ -492,6 +497,31 @@ class _ExportDialogState extends State<ExportDialog> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _readyBanner(AppLocalizations l10n) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      decoration: BoxDecoration(
+        color: const Color(0xFFECFDF5),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: const Color(0xFFA7F3D0)),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.task_alt, size: 16, color: Color(0xFF047857)),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              '${l10n.d('Klaar voor export')} — '
+              '${l10n.d('Geen kwaliteitsproblemen gevonden')}',
+              style: const TextStyle(fontSize: 11, color: Color(0xFF047857)),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
