@@ -591,7 +591,12 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final dest = await _importDestDir(homeDir);
     final mdPath = await _file.importFromUrl(url, dest);
     if (mdPath == null) return false;
-    return _importHandled(await _openImported(mdPath));
+    final result = await _openImported(mdPath);
+    if (result == OpenResult.opened && mounted) {
+      // Herkomst voor de wolk-badge in recente presentaties.
+      await _settings.setRecentFileOrigin(mdPath, url);
+    }
+    return _importHandled(result);
   }
 
   /// Web-variant van [importFromUrl]: haalt de presentatie in de browser op
@@ -651,6 +656,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
       baseUrl: service.server.baseUrl,
       username: service.server.username,
       remotePath: entry.relativePath,
+    );
+    // Herkomst voor de wolk-badge in recente presentaties.
+    await _settings.setRecentFileOrigin(
+      mdPath,
+      '${service.server.baseUrl} · ${entry.relativePath}',
     );
     if (mounted) state = state.copyWith(tabs: List.from(state.tabs));
     return OpenResult.opened;
