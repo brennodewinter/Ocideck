@@ -8,10 +8,10 @@ import '../../theme/app_theme.dart';
 /// van [SectionLabel] — ExpansionTile sleept dividers en Material-marges mee
 /// die in de compacte editors uit de toon vallen.
 ///
-/// [title] is een reeds gelokaliseerde tekst (geef `l10n.d('…')` mee, zodat
-/// de l10n-test de bronstring ziet). Zet [initiallyExpanded] op true wanneer
-/// een geavanceerde optie al een niet-standaardwaarde heeft — dan is
-/// verstoppen juist verwarrend.
+/// [title] is een reeds gelokaliseerde tekst — geef hem via de d-helper van
+/// de call-site mee, zodat de l10n-test de bronstring daar ziet. Zet
+/// [initiallyExpanded] op true wanneer een geavanceerde optie al een
+/// niet-standaardwaarde heeft — dan is verstoppen juist verwarrend.
 class AdvancedSection extends StatefulWidget {
   final String title;
   final List<Widget> children;
