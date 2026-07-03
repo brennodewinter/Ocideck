@@ -190,10 +190,13 @@ licenses:
 check-conventions:
 	@echo "== OciDeck check: conventions =="
 	@echo "Command: dart run tool/check_conventions.dart"
-	@echo "Covers: no print(); bare catch (_) ratchet; file-size ratchet (no file"
-	@echo "        over 1000 lines except baselined ceilings, which may only shrink)."
-	@echo "Failure means: route diagnostics through logError, split the oversized file,"
-	@echo "        or adjust the baseline in tool/check_conventions.dart."
+	@echo "Covers: no print(); no plain writeAsString/writeAsBytes (use the atomic"
+	@echo "        helpers in lib/utils/atomic_file.dart); bare catch (_) ratchet;"
+	@echo "        file-size ratchet (no file over 1000 lines except baselined"
+	@echo "        ceilings, which may only shrink)."
+	@echo "Failure means: route diagnostics through logError, use writeStringAtomic/"
+	@echo "        writeBytesAtomic, split the oversized file, or adjust the baseline"
+	@echo "        in tool/check_conventions.dart."
 	dart run tool/check_conventions.dart
 
 check-method-length:
