@@ -156,6 +156,46 @@ void main() {
       expect(blanks.isPresentable, isFalse);
     });
 
+    test('toBlock → parse round-trips an ordering spec', () {
+      const original = QuestionSpec(
+        kind: QuestionKind.ordering,
+        prompt: 'Zet de stappen in volgorde',
+        answers: [
+          QuestionAnswer(text: 'Eerst'),
+          QuestionAnswer(text: 'Dan'),
+          QuestionAnswer(text: 'Tot slot'),
+        ],
+        optionCount: 3,
+      );
+      final back = QuestionSpec.parse(original.toBlock());
+      expect(back.kind, QuestionKind.ordering);
+      // De lijstvolgorde ís het juiste antwoord en moet exact bewaard blijven.
+      expect(back.filledAnswers.map((a) => a.text), [
+        'Eerst',
+        'Dan',
+        'Tot slot',
+      ]);
+    });
+
+    test('ordering isPresentable needs at least two filled answers', () {
+      const one = QuestionSpec(
+        kind: QuestionKind.ordering,
+        answers: [
+          QuestionAnswer(text: 'a'),
+          QuestionAnswer(text: '  '),
+        ],
+      );
+      expect(one.isPresentable, isFalse);
+      const two = QuestionSpec(
+        kind: QuestionKind.ordering,
+        answers: [
+          QuestionAnswer(text: 'a'),
+          QuestionAnswer(text: 'b'),
+        ],
+      );
+      expect(two.isPresentable, isTrue);
+    });
+
     test('copyWith re-clamps the numeric fields', () {
       final spec = QuestionSpec.defaultMultipleChoice().copyWith(
         optionCount: 100,
@@ -222,6 +262,41 @@ void main() {
       expect(v.locked, isTrue);
       expect(v.result, QuestionResult.wrong);
       expect(v.options, view.options); // untouched
+    });
+  });
+
+  group('QuestionView ordering', () {
+    // Juiste volgorde: b (optie 1), a (optie 0), c (optie 2).
+    const base = QuestionView(
+      options: ['a', 'b', 'c'],
+      correctIndices: [1, 0, 2],
+      multi: true,
+      ordering: true,
+    );
+
+    test('selectedPositionOf follows the tap sequence', () {
+      final v = base.copyWith(selectedIndices: [2, 0]);
+      expect(v.selectedPositionOf(2), 1);
+      expect(v.selectedPositionOf(0), 2);
+      expect(v.selectedPositionOf(1), isNull);
+      expect(v.orderComplete, isFalse);
+    });
+
+    test('orderMatches requires the exact sequence, not the set', () {
+      expect(base.copyWith(selectedIndices: [1, 0, 2]).orderMatches, isTrue);
+      // Zelfde verzameling, verkeerde volgorde: fout.
+      expect(base.copyWith(selectedIndices: [0, 1, 2]).orderMatches, isFalse);
+      // Onvolledig: fout.
+      expect(base.copyWith(selectedIndices: [1, 0]).orderMatches, isFalse);
+      expect(base.copyWith(selectedIndices: [1, 0, 2]).orderComplete, isTrue);
+    });
+
+    test('ordering flag round-trips through JSON', () {
+      final back = QuestionView.fromJson(base.toJson());
+      expect(back.ordering, isTrue);
+      expect(back.correctIndices, [1, 0, 2]);
+      // En blijft standaard uit voor bestaande (oude) payloads.
+      expect(QuestionView.fromJson(const {}).ordering, isFalse);
     });
   });
 }

@@ -130,4 +130,106 @@ void main() {
     }
     expect(tester.takeException(), isNull);
   });
+
+  QuestionSpec orderingSpec() => const QuestionSpec(
+    kind: QuestionKind.ordering,
+    prompt: 'Zet de stappen in de juiste volgorde',
+    answers: [
+      QuestionAnswer(text: 'Stap een'),
+      QuestionAnswer(text: 'Stap twee'),
+      QuestionAnswer(text: 'Stap drie'),
+    ],
+    optionCount: 3,
+  );
+
+  Future<void> pumpWithView(
+    WidgetTester tester,
+    QuestionView view, {
+    ValueChanged<int>? onSelected,
+    VoidCallback? onSubmit,
+  }) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: SizedBox(
+              width: 800,
+              height: 450,
+              child: SlidePreviewWidget(
+                slide: _questionSlide(orderingSpec()),
+                presentationMode: true,
+                questionView: view,
+                onAnswerSelected: onSelected ?? (_) {},
+                onAnswerSubmit: onSubmit ?? () {},
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  testWidgets('ordering authoring view shows the answers numbered in order', (
+    tester,
+  ) async {
+    await _pump(tester, _questionSlide(orderingSpec()));
+    for (final t in ['Stap een', 'Stap twee', 'Stap drie']) {
+      expect(find.textContaining(t), findsOneWidget, reason: t);
+    }
+    // De badges tonen de juiste volgorde als nummers in plaats van letters.
+    for (final n in ['1', '2', '3']) {
+      expect(find.text(n), findsOneWidget, reason: 'badge $n');
+    }
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('ordering presentation shows instruction and position badges', (
+    tester,
+  ) async {
+    // Getoond als: Stap twee, Stap drie, Stap een; 'Stap drie' is aangetikt
+    // als eerste keuze.
+    const view = QuestionView(
+      options: ['Stap twee', 'Stap drie', 'Stap een'],
+      correctIndices: [2, 0, 1],
+      selectedIndices: [1],
+      multi: true,
+      ordering: true,
+    );
+    await pumpWithView(tester, view);
+
+    expect(
+      find.text('Tik de antwoorden aan in de juiste volgorde'),
+      findsOneWidget,
+    );
+    // Aangetikte optie draagt positienummer 1; de rest een bullet.
+    expect(find.text('1'), findsOneWidget);
+    expect(find.text('•'), findsNWidgets(2));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('ordering reveal lists the correct order with clear feedback', (
+    tester,
+  ) async {
+    // Juiste volgorde: een (idx 2), twee (idx 0), drie (idx 1). De kijker
+    // tikte: twee, een, drie → alleen 'Stap drie' stond goed (positie 3).
+    const view = QuestionView(
+      options: ['Stap twee', 'Stap drie', 'Stap een'],
+      correctIndices: [2, 0, 1],
+      selectedIndices: [0, 2, 1],
+      multi: true,
+      ordering: true,
+      result: QuestionResult.wrong,
+      revealed: true,
+      locked: true,
+    );
+    await pumpWithView(tester, view);
+
+    // Fout geplaatste opties melden expliciet de eigen (foute) plek.
+    expect(find.text('Jouw volgorde: 2'), findsOneWidget); // Stap een
+    expect(find.text('Jouw volgorde: 1'), findsOneWidget); // Stap twee
+    // De goed geplaatste optie krijgt geen feedbackregel.
+    expect(find.textContaining('Jouw volgorde'), findsNWidgets(2));
+    expect(find.text('Helaas, fout'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 }
