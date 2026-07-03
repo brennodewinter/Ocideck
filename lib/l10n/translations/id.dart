@@ -736,6 +736,13 @@ const _dutchSourceId = {
       'Pernyataan di atas benar atau salah; pilih yang mana.',
   'Selecteer alle juiste antwoorden': 'Pilih semua jawaban benar',
   'Bevestig': 'Konfirmasi',
+  'Volgorde': 'Urutan',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Susun jawaban di sini dalam urutan yang benar. Saat presentasi, jawaban ditampilkan teracak.',
+  'Geef minstens twee antwoorden op.': 'Berikan setidaknya dua jawaban.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Ketuk jawaban dalam urutan yang benar',
+  'Jouw volgorde': 'Urutan Anda',
   'Het juiste antwoord': 'Jawaban yang benar',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Gambar ditampilkan layar penuh sebagai latar belakang. Gunakan efek buram saat judul membutuhkan lebih banyak ketenangan atau kontras.',

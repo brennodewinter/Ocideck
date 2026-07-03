@@ -740,6 +740,13 @@ const _dutchSourcePl = {
       'Powyższe twierdzenie jest prawdziwe lub fałszywe; wybierz które.',
   'Selecteer alle juiste antwoorden': 'Zaznacz wszystkie poprawne odpowiedzi',
   'Bevestig': 'Potwierdź',
+  'Volgorde': 'Kolejność',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Ułóż tutaj odpowiedzi we właściwej kolejności. Podczas prezentacji są pokazywane wymieszane.',
+  'Geef minstens twee antwoorden op.': 'Podaj co najmniej dwie odpowiedzi.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Dotknij odpowiedzi we właściwej kolejności',
+  'Jouw volgorde': 'Twoja kolejność',
   'Het juiste antwoord': 'Poprawna odpowiedź',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Obraz jest wyświetlany na pełnym ekranie jako tło. Użyj rozmycia, gdy tytuł wymaga więcej spokoju lub kontrastu.',

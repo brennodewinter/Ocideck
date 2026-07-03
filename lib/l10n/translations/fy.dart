@@ -556,6 +556,13 @@ const _dutchSourceAddFy = {
       'De stelling hjirboppe is wier of net wier; kies hokker.',
   'Selecteer alle juiste antwoorden': 'Selektearje alle juste antwurden',
   'Bevestig': 'Befêstigje',
+  'Volgorde': 'Folchoarder',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Set de antwurden hjir yn de goede folchoarder. By presintearjen wurde se troch elkoar toand.',
+  'Geef minstens twee antwoorden op.': 'Jou op syn minst twa antwurden op.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Tik de antwurden oan yn de goede folchoarder',
+  'Jouw volgorde': 'Dyn folchoarder',
   'Het juiste antwoord': 'It juste antwurd',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'De ôfbylding wurdt skermfoljend as eftergrûn toand. Brûk de waas as de titel mear rêst of kontrast nedich hat.',

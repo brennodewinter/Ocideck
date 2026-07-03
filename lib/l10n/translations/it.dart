@@ -548,6 +548,13 @@ const _dutchSourceAddIt = {
       'L\'affermazione qui sopra è vera o falsa; scegli quale.',
   'Selecteer alle juiste antwoorden': 'Seleziona tutte le risposte corrette',
   'Bevestig': 'Conferma',
+  'Volgorde': 'Ordine',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Metti qui le risposte nell\'ordine giusto. Durante la presentazione vengono mostrate mescolate.',
+  'Geef minstens twee antwoorden op.': 'Fornisci almeno due risposte.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Tocca le risposte nell\'ordine giusto',
+  'Jouw volgorde': 'Il tuo ordine',
   'Het juiste antwoord': 'La risposta corretta',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'L\'immagine viene mostrata a schermo intero come sfondo. Usa la sfocatura quando il titolo ha bisogno di più calma o contrasto.',

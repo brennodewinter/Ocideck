@@ -744,6 +744,13 @@ const _dutchSourceEl = {
       'Η παραπάνω δήλωση είναι σωστή ή λανθασμένη· επιλέξτε ποιο.',
   'Selecteer alle juiste antwoorden': 'Επιλέξτε όλες τις σωστές απαντήσεις',
   'Bevestig': 'Επιβεβαίωση',
+  'Volgorde': 'Σειρά',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Βάλτε εδώ τις απαντήσεις στη σωστή σειρά. Κατά την παρουσίαση εμφανίζονται ανακατεμένες.',
+  'Geef minstens twee antwoorden op.': 'Δώστε τουλάχιστον δύο απαντήσεις.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Πατήστε τις απαντήσεις με τη σωστή σειρά',
+  'Jouw volgorde': 'Η σειρά σας',
   'Het juiste antwoord': 'Η σωστή απάντηση',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Η εικόνα εμφανίζεται σε πλήρη οθόνη ως φόντο. Χρησιμοποιήστε το θόλωμα όταν ο τίτλος χρειάζεται περισσότερη ηρεμία ή αντίθεση.',

@@ -747,6 +747,13 @@ const _dutchSourcePt = {
       'A afirmação acima é verdadeira ou falsa; escolha qual.',
   'Selecteer alle juiste antwoorden': 'Selecione todas as respostas corretas',
   'Bevestig': 'Confirmar',
+  'Volgorde': 'Ordem',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Coloque aqui as respostas na ordem correta. Ao apresentar, são mostradas baralhadas.',
+  'Geef minstens twee antwoorden op.': 'Indique pelo menos duas respostas.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Toque nas respostas na ordem correta',
+  'Jouw volgorde': 'A sua ordem',
   'Het juiste antwoord': 'A resposta correta',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'A imagem é mostrada em ecrã inteiro como fundo. Use a desfocagem quando o título precisar de mais calma ou contraste.',

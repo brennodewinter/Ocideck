@@ -556,6 +556,13 @@ const _dutchSourceAddPap = {
       'E deklarashon ariba ta bèrdat òf falsu; skohe kua.',
   'Selecteer alle juiste antwoorden': 'Selektá tur e kontestanan korekto',
   'Bevestig': 'Konfirmá',
+  'Volgorde': 'Órden',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Pone e kontestanan aki den e órden korekto. Ora di presentá nan ta wòrdu mustrá bruhá.',
+  'Geef minstens twee antwoorden op.': 'Duna por lo ménos dos kontesta.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Primi e kontestanan den e órden korekto',
+  'Jouw volgorde': 'Bo órden',
   'Het juiste antwoord': 'E kontesta korekto',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'E imagen ta wòrdu mustrá na pantaya kompleto komo fondo. Usa e waas ora e título mester di mas trankilidat òf kontraste.',

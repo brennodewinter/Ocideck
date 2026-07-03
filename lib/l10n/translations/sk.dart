@@ -741,6 +741,13 @@ const _dutchSourceSk = {
       'Tvrdenie vyššie je pravdivé alebo nepravdivé; vyberte, ktoré.',
   'Selecteer alle juiste antwoorden': 'Vyberte všetky správne odpovede',
   'Bevestig': 'Potvrdiť',
+  'Volgorde': 'Poradie',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Usporiadajte tu odpovede do správneho poradia. Pri prezentovaní sa zobrazia premiešané.',
+  'Geef minstens twee antwoorden op.': 'Zadajte aspoň dve odpovede.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Ťuknite na odpovede v správnom poradí',
+  'Jouw volgorde': 'Vaše poradie',
   'Het juiste antwoord': 'Správna odpoveď',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Obrázok sa zobrazí na celú obrazovku ako pozadie. Rozmazanie použite, keď titulok potrebuje viac pokoja alebo kontrastu.',

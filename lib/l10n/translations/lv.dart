@@ -735,6 +735,13 @@ const _dutchSourceLv = {
       'Iepriekšējais apgalvojums ir patiess vai nepatiess; izvēlieties, kurš.',
   'Selecteer alle juiste antwoorden': 'Atlasiet visas pareizās atbildes',
   'Bevestig': 'Apstiprināt',
+  'Volgorde': 'Secība',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Sakārtojiet šeit atbildes pareizā secībā. Prezentējot tās tiek rādītas sajauktas.',
+  'Geef minstens twee antwoorden op.': 'Norādiet vismaz divas atbildes.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Pieskarieties atbildēm pareizā secībā',
+  'Jouw volgorde': 'Jūsu secība',
   'Het juiste antwoord': 'Pareizā atbilde',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Attēls tiek rādīts pilnekrānā kā fons. Izmantojiet izplūdumu, kad virsrakstam nepieciešams vairāk miera vai kontrasta.',

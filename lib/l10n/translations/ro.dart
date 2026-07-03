@@ -743,6 +743,13 @@ const _dutchSourceRo = {
       'Afirmația de mai sus este adevărată sau falsă; alege care.',
   'Selecteer alle juiste antwoorden': 'Selectează toate răspunsurile corecte',
   'Bevestig': 'Confirmă',
+  'Volgorde': 'Ordine',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Așază aici răspunsurile în ordinea corectă. La prezentare sunt afișate amestecate.',
+  'Geef minstens twee antwoorden op.': 'Oferă cel puțin două răspunsuri.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Atinge răspunsurile în ordinea corectă',
+  'Jouw volgorde': 'Ordinea ta',
   'Het juiste antwoord': 'Răspunsul corect',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Imaginea este afișată pe tot ecranul ca fundal. Folosește estomparea când titlul are nevoie de mai mult calm sau contrast.',

@@ -739,6 +739,13 @@ const _dutchSourceLt = {
       'Teiginys viršuje yra tiesa arba netiesa; pasirinkite, kuris.',
   'Selecteer alle juiste antwoorden': 'Pasirinkite visus teisingus atsakymus',
   'Bevestig': 'Patvirtinti',
+  'Volgorde': 'Eiliškumas',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Čia išdėstykite atsakymus teisinga tvarka. Pristatant jie rodomi sumaišyti.',
+  'Geef minstens twee antwoorden op.': 'Nurodykite bent du atsakymus.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Bakstelėkite atsakymus teisinga tvarka',
+  'Jouw volgorde': 'Jūsų tvarka',
   'Het juiste antwoord': 'Teisingas atsakymas',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Paveikslėlis rodomas per visą ekraną kaip fonas. Naudokite suliejimą, kai antraštei reikia daugiau ramybės ar kontrasto.',

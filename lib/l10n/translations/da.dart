@@ -734,6 +734,13 @@ const _dutchSourceDa = {
       'Udsagnet ovenfor er sandt eller falsk; vælg hvilket.',
   'Selecteer alle juiste antwoorden': 'Vælg alle rigtige svar',
   'Bevestig': 'Bekræft',
+  'Volgorde': 'Rækkefølge',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Sæt svarene her i den rigtige rækkefølge. Ved præsentation vises de blandet.',
+  'Geef minstens twee antwoorden op.': 'Angiv mindst to svar.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Tryk på svarene i den rigtige rækkefølge',
+  'Jouw volgorde': 'Din rækkefølge',
   'Het juiste antwoord': 'Det rigtige svar',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Billedet vises fuldskærms som baggrund. Brug sløringen, når titlen har brug for mere ro eller kontrast.',

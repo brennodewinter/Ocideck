@@ -736,6 +736,13 @@ const _dutchSourceSl = {
       'Trditev zgoraj je pravilna ali napačna; izberite, katero.',
   'Selecteer alle juiste antwoorden': 'Izberite vse pravilne odgovore',
   'Bevestig': 'Potrdi',
+  'Volgorde': 'Vrstni red',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Tukaj razvrstite odgovore v pravilni vrstni red. Pri predstavitvi so prikazani premešani.',
+  'Geef minstens twee antwoorden op.': 'Navedite vsaj dva odgovora.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Tapnite odgovore v pravilnem vrstnem redu',
+  'Jouw volgorde': 'Vaš vrstni red',
   'Het juiste antwoord': 'Pravilni odgovor',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Slika se prikaže čez celoten zaslon kot ozadje. Uporabite zameglitev, kadar naslov potrebuje več umirjenosti ali kontrasta.',

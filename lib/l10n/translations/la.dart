@@ -744,6 +744,12 @@ const _dutchSourceLa = {
       'Enuntiatio supra vera aut falsa est; elige utrum.',
   'Selecteer alle juiste antwoorden': 'Selige omnia responsa recta',
   'Bevestig': 'Confirma',
+  'Volgorde': 'Ordo',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Responsa hic in ordinem rectum dispone. In monstrando permixta ostenduntur.',
+  'Geef minstens twee antwoorden op.': 'Praebe saltem duo responsa.',
+  'Tik de antwoorden aan in de juiste volgorde': 'Responsa ordine recto tange',
+  'Jouw volgorde': 'Ordo tuus',
   'Het juiste antwoord': 'Responsum rectum',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Imago tota per schema ut fundus ostenditur. Utere caligine cum titulus plus quietis aut contrarii eget.',

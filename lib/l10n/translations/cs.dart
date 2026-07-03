@@ -737,6 +737,13 @@ const _dutchSourceCs = {
       'Tvrzení výše je pravdivé nebo nepravdivé; vyberte které.',
   'Selecteer alle juiste antwoorden': 'Vyberte všechny správné odpovědi',
   'Bevestig': 'Potvrdit',
+  'Volgorde': 'Pořadí',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Seřaďte zde odpovědi do správného pořadí. Při prezentaci se zobrazí zamíchané.',
+  'Geef minstens twee antwoorden op.': 'Zadejte alespoň dvě odpovědi.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Klepněte na odpovědi ve správném pořadí',
+  'Jouw volgorde': 'Vaše pořadí',
   'Het juiste antwoord': 'Správná odpověď',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Obrázek se zobrazuje na celou obrazovku jako pozadí. Rozostření použijte, když titulek potřebuje více klidu nebo kontrastu.',

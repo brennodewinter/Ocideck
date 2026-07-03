@@ -734,6 +734,13 @@ const _dutchSourceFi = {
       'Yllä oleva väittämä on tosi tai epätosi; valitse kumpi.',
   'Selecteer alle juiste antwoorden': 'Valitse kaikki oikeat vastaukset',
   'Bevestig': 'Vahvista',
+  'Volgorde': 'Järjestys',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Laita vastaukset tässä oikeaan järjestykseen. Esitettäessä ne näytetään sekoitettuina.',
+  'Geef minstens twee antwoorden op.': 'Anna vähintään kaksi vastausta.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Napauta vastauksia oikeassa järjestyksessä',
+  'Jouw volgorde': 'Sinun järjestyksesi',
   'Het juiste antwoord': 'Oikea vastaus',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Kuva näytetään koko näytön taustana. Käytä sumennusta, kun otsikko tarvitsee lisää rauhaa tai kontrastia.',

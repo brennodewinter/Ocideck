@@ -737,6 +737,13 @@ const _dutchSourceGsw = {
       'D Uussag do obe isch richtig oder falsch; wähl welchi.',
   'Selecteer alle juiste antwoorden': 'Wähl alli richtige Antworte us',
   'Bevestig': 'Bestätige',
+  'Volgorde': 'Reihefolg',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Bring d Antworte da i di richtig Reihefolg. Bim Präsentiere werded si gmischt aazeigt.',
+  'Geef minstens twee antwoorden op.': 'Gib mindeschtens zwei Antworte a.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Tipp d Antworte i de richtige Reihefolg aa',
+  'Jouw volgorde': 'Dini Reihefolg',
   'Het juiste antwoord': 'Di richtig Antwort',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'S Bild wird schermfüllend als Hintergrund aazeigt. Bruuch de Unschärfe, wenn de Titel meh Rueh oder Kontrascht bruucht.',

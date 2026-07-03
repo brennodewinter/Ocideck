@@ -746,6 +746,13 @@ const _dutchSourceMt = {
       'L-istqarrija ta\' fuq hija vera jew falza; agħżel liema.',
   'Selecteer alle juiste antwoorden': 'Agħżel it-tweġibiet korretti kollha',
   'Bevestig': 'Ikkonferma',
+  'Volgorde': 'Ordni',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Poġġi t-tweġibiet hawn fl-ordni t-tajba. Waqt il-preżentazzjoni jintwerew imħallta.',
+  'Geef minstens twee antwoorden op.': 'Agħti mill-inqas żewġ tweġibiet.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Għafas it-tweġibiet fl-ordni t-tajba',
+  'Jouw volgorde': 'L-ordni tiegħek',
   'Het juiste antwoord': 'It-tweġiba korretta',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'L-immaġni tintwera skrin sħiħ bħala sfond. Uża l-imċajpar meta t-titlu jeħtieġ aktar kalma jew kuntrast.',

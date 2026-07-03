@@ -744,6 +744,13 @@ const _dutchSourceUk = {
       'Твердження вище є правдивим або неправдивим; оберіть, яке саме.',
   'Selecteer alle juiste antwoorden': 'Виберіть усі правильні відповіді',
   'Bevestig': 'Підтвердити',
+  'Volgorde': 'Порядок',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Розташуйте тут відповіді в правильному порядку. Під час презентації вони показуються перемішаними.',
+  'Geef minstens twee antwoorden op.': 'Укажіть щонайменше дві відповіді.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Торкніться відповідей у правильному порядку',
+  'Jouw volgorde': 'Ваш порядок',
   'Het juiste antwoord': 'Правильна відповідь',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Зображення показується на весь екран як тло. Використовуйте розмиття, коли заголовку потрібно більше спокою або контрасту.',

@@ -725,6 +725,12 @@ const _dutchSourceTlh = {
       '\'el Dung lugh pagh Qagh; nuq yIwIv.',
   'Selecteer alle juiste antwoorden': 'Hoch lughbogh jangmey yIwIv',
   'Bevestig': 'toblu\'moH',
+  'Volgorde': 'mIr',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'naDev jangmey mIr lugh yIlan. maqlu\'DI\' DuDlu\'bogh jangmey lu\'anglu\'.',
+  'Geef minstens twee antwoorden op.': 'puS cha\' jang yInob.',
+  'Tik de antwoorden aan in de juiste volgorde': 'jangmey mIr lugh yI\'uy',
+  'Jouw volgorde': 'mIrlIj',
   'Het juiste antwoord': 'lughbogh jang',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'HaSta buy\' rur mIllogh cha\'lu\' bIng. per jotHa\' pagh pIm poQqu\'DI\' \'echmoH yIlo\'.',

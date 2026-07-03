@@ -735,6 +735,13 @@ const _dutchSourceSv = {
       'Påståendet ovan är sant eller falskt; välj vilket.',
   'Selecteer alle juiste antwoorden': 'Välj alla rätta svar',
   'Bevestig': 'Bekräfta',
+  'Volgorde': 'Ordningsföljd',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Lägg svaren här i rätt ordning. Vid presentation visas de blandade.',
+  'Geef minstens twee antwoorden op.': 'Ange minst två svar.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Tryck på svaren i rätt ordning',
+  'Jouw volgorde': 'Din ordning',
   'Het juiste antwoord': 'Det rätta svaret',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Bilden visas i helskärm som bakgrund. Använd oskärpan när titeln behöver mer lugn eller kontrast.',

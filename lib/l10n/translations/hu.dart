@@ -735,6 +735,13 @@ const _dutchSourceHu = {
       'A fenti állítás igaz vagy hamis; válaszd ki, melyik.',
   'Selecteer alle juiste antwoorden': 'Válaszd ki az összes helyes választ',
   'Bevestig': 'Megerősítés',
+  'Volgorde': 'Sorrend',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Itt tedd a válaszokat a helyes sorrendbe. Bemutatáskor összekeverve jelennek meg.',
+  'Geef minstens twee antwoorden op.': 'Adj meg legalább két választ.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Koppints a válaszokra a helyes sorrendben',
+  'Jouw volgorde': 'A te sorrended',
   'Het juiste antwoord': 'A helyes válasz',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'A kép teljes képernyős háttérként jelenik meg. Használd az elmosást, ha a címnek több nyugalomra vagy kontrasztra van szüksége.',

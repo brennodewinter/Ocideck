@@ -732,6 +732,13 @@ const _dutchSourceEt = {
       'Ülaltoodud väide on õige või vale; vali kumb.',
   'Selecteer alle juiste antwoorden': 'Vali kõik õiged vastused',
   'Bevestig': 'Kinnita',
+  'Volgorde': 'Järjekord',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Sea vastused siin õigesse järjekorda. Esitlemisel kuvatakse need segatuna.',
+  'Geef minstens twee antwoorden op.': 'Anna vähemalt kaks vastust.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Puuduta vastuseid õiges järjekorras',
+  'Jouw volgorde': 'Sinu järjekord',
   'Het juiste antwoord': 'Õige vastus',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Pilti näidatakse taustana ekraani suuruses. Kasuta hägustust, kui pealkiri vajab rohkem rahu või kontrasti.',

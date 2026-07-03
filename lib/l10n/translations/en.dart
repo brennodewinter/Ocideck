@@ -743,6 +743,13 @@ const _dutchSourceAddEn = {
       'The statement above is true or false; choose which.',
   'Selecteer alle juiste antwoorden': 'Select all correct answers',
   'Bevestig': 'Confirm',
+  'Volgorde': 'Ordering',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Put the answers in the correct order here. When presenting they are shown shuffled.',
+  'Geef minstens twee antwoorden op.': 'Provide at least two answers.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Tap the answers in the correct order',
+  'Jouw volgorde': 'Your order',
   'Het juiste antwoord': 'The correct answer',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'The image is shown full-screen as a background. Use the blur when the title needs more calm or contrast.',

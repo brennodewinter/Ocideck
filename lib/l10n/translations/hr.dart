@@ -739,6 +739,13 @@ const _dutchSourceHr = {
       'Tvrdnja iznad je točna ili netočna; odaberite koja.',
   'Selecteer alle juiste antwoorden': 'Odaberite sve točne odgovore',
   'Bevestig': 'Potvrdi',
+  'Volgorde': 'Redoslijed',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Ovdje posložite odgovore u ispravan redoslijed. Pri prezentiranju prikazuju se izmiješani.',
+  'Geef minstens twee antwoorden op.': 'Navedite barem dva odgovora.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Dodirnite odgovore ispravnim redoslijedom',
+  'Jouw volgorde': 'Vaš redoslijed',
   'Het juiste antwoord': 'Točan odgovor',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Slika se prikazuje preko cijelog zaslona kao pozadina. Koristite zamućenje kada naslovu treba više smirenosti ili kontrasta.',

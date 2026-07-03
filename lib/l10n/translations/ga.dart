@@ -754,6 +754,13 @@ const _dutchSourceGa = {
       'Tá an ráiteas thuas fíor nó bréagach; roghnaigh cé acu.',
   'Selecteer alle juiste antwoorden': 'Roghnaigh na freagraí cearta go léir',
   'Bevestig': 'Deimhnigh',
+  'Volgorde': 'Ord',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Cuir na freagraí san ord ceart anseo. Agus iad á gcur i láthair, taispeántar iad measctha.',
+  'Geef minstens twee antwoorden op.': 'Tabhair dhá fhreagra ar a laghad.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Tapáil na freagraí san ord ceart',
+  'Jouw volgorde': 'D\'ord',
   'Het juiste antwoord': 'An freagra ceart',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Taispeántar an íomhá mar chúlra ar an scáileán iomlán. Úsáid an geamhú nuair a theastaíonn níos mó suaimhnis nó codarsnachta ón teideal.',

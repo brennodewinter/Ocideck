@@ -748,6 +748,13 @@ const _dutchSourceBg = {
       'Твърдението по-горе е вярно или невярно; изберете кое.',
   'Selecteer alle juiste antwoorden': 'Изберете всички верни отговори',
   'Bevestig': 'Потвърждаване',
+  'Volgorde': 'Подредба',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Подредете отговорите тук в правилния ред. При представяне се показват разбъркани.',
+  'Geef minstens twee antwoorden op.': 'Дайте поне два отговора.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Докоснете отговорите в правилния ред',
+  'Jouw volgorde': 'Вашият ред',
   'Het juiste antwoord': 'Верният отговор',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Изображението се показва на цял екран като фон. Използвайте замъгляването, когато заглавието се нуждае от повече спокойствие или контраст.',

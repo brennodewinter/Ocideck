@@ -549,6 +549,13 @@ const _dutchSourceAddEs = {
   'Selecteer alle juiste antwoorden':
       'Selecciona todas las respuestas correctas',
   'Bevestig': 'Confirmar',
+  'Volgorde': 'Orden',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Coloca aquí las respuestas en el orden correcto. Al presentar se muestran mezcladas.',
+  'Geef minstens twee antwoorden op.': 'Indica al menos dos respuestas.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Toca las respuestas en el orden correcto',
+  'Jouw volgorde': 'Tu orden',
   'Het juiste antwoord': 'La respuesta correcta',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'La imagen se muestra a pantalla completa como fondo. Usa el desenfoque cuando el título necesite más calma o contraste.',
