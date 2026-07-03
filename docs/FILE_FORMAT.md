@@ -423,7 +423,7 @@ is present. The block is the round-trip source of truth.
 ````markdown
 ```question
 {
-  "kind": "multipleChoice",      // multipleChoice | trueFalse | multipleCorrect
+  "kind": "multipleChoice",      // multipleChoice | trueFalse | multipleCorrect | ordering
   "prompt": "What is the capital of the Netherlands?",
   "optionCount": 4,              // total options shown (random pick)
   "timeLimitSeconds": 0,         // 0 = no limit
@@ -440,11 +440,15 @@ is present. The block is the round-trip source of truth.
 Fields:
 
 - `kind` — `multipleChoice` (one correct + a random pick of wrong ones; pick one),
-  `trueFalse` (the prompt is a statement; pick true/false), or `multipleCorrect`
-  (several may be correct; pick all). Defaults to `multipleChoice`.
+  `trueFalse` (the prompt is a statement; pick true/false), `multipleCorrect`
+  (several may be correct; pick all), or `ordering` (put the options in the
+  right order). Defaults to `multipleChoice`.
 - `prompt` — the question, or the statement for `trueFalse`.
 - `answers` — the full pool; each has `text` and `correct`. Ignored for
-  `trueFalse`. The presentation draws a random subset from it.
+  `trueFalse`. The presentation draws a random subset from it. For `ordering`
+  the **list order is the correct order** and the `correct` flags are ignored;
+  the drawn subset keeps its relative order as the right answer and is shown
+  shuffled.
 - `optionCount` — how many options are shown (2–8, default 4). Not used by
   `trueFalse`.
 - `timeLimitSeconds` — optional countdown; running out counts as wrong.
