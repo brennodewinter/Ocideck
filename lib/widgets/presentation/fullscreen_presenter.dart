@@ -5,6 +5,7 @@ import 'dart:math' as math;
 
 import '../../platform/platform_features.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
@@ -22,6 +23,9 @@ import '../../services/mermaid_render_service.dart';
 import '../../services/rehearsal_controller.dart';
 import '../../services/rich_text_layout.dart';
 import '../../services/slide_layout_metrics.dart';
+import '../../services/web_asset_store.dart';
+import '../../utils/bundled_asset.dart';
+import '../../utils/image_limits.dart';
 import '../../utils/log.dart';
 import '../../utils/page_scoped_notes.dart';
 import '../../utils/project_path.dart';

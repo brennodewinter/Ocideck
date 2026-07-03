@@ -84,6 +84,8 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Nota: il-verżjoni tal-web tista\' ġġib biss minn servers li jippermettuh (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Il-pakketti (.ocideck) għadhom mhumiex appoġġjati fil-verżjoni tal-web.',
   'Alleen .md-presentaties kunnen in de webversie worden geopend.':

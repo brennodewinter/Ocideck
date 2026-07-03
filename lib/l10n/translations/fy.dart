@@ -83,6 +83,8 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Tink derom: de webferzje kin allinnich ophelje fan servers dy\'t dat tastean (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Pakketten (.ocideck) wurde yn de webferzje noch net stipe.',
   'Alleen .md-presentaties kunnen in de webversie worden geopend.':

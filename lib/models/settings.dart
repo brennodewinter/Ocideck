@@ -123,6 +123,40 @@ class ThemeProfile {
 
   static const footerPositions = ['left', 'center', 'right'];
 
+  /// Ingebouwd LibreKAT-profiel: de huisstijl (EU-blauw op wit, EB Garamond,
+  /// gebundeld logo) die als standaard wordt uitgerold. Het logo is een
+  /// `asset:`-pad zodat het op elk platform — ook web — rendert en mee kan in
+  /// pakket-exports.
+  static const libreKat = ThemeProfile(
+    name: 'LibreKAT',
+    slideBackgroundColor: '#FFFFFF',
+    textColor: '#003399',
+    accentColor: '#003399',
+    checklistCheckedColor: '#003399',
+    checklistUncheckedColor: '#DC2626',
+    checklistStrikeThrough: true,
+    bulletMarker: BulletMarker.dot,
+    tableTextColor: '#003399',
+    tableHeaderTextColor: '#FFCC00',
+    tableHeaderBackgroundColor: '#003399',
+    titleBackgroundColor: '#FFFFFF',
+    titleTextColor: '#003399',
+    sectionBackgroundColor: '#FFFFFF',
+    codeBackgroundColor: '#111827',
+    codeTextColor: '#2E7D64',
+    codeHighlightSyntax: true,
+    codeFontFamily: 'monospace',
+    logoPath: 'asset:assets/images/librekat-logo.png',
+    logoPosition: 'bottom-left',
+    logoSize: 96,
+    fontFamily: 'EB Garamond',
+  );
+
+  /// Ingebouwde stijlprofielen voor een verse installatie: LibreKAT voorop
+  /// (en dus de standaardselectie), met het neutrale 'Standaard' ernaast.
+  /// Bestaande installaties behouden hun eigen opgeslagen profielenlijst.
+  static const builtIns = [libreKat, ThemeProfile()];
+
   ThemeProfile copyWith({
     String? name,
     String? slideBackgroundColor,
@@ -598,8 +632,8 @@ class AppSettings {
     this.languageCode = 'nl',
     this.homeDirectory,
     this.exportDirectory,
-    this.themeProfiles = const [ThemeProfile()],
-    this.selectedThemeProfileName = 'Standaard',
+    this.themeProfiles = ThemeProfile.builtIns,
+    this.selectedThemeProfileName = 'LibreKAT',
     this.appAppearanceProfiles = AppAppearanceProfile.builtIns,
     this.selectedAppAppearanceProfileName = 'Basic',
     this.cockpitColorSchemes = CockpitColorScheme.builtIns,

@@ -18,13 +18,17 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     final prefs = await SharedPreferences.getInstance();
     final themeJson = prefs.getString('themeProfile');
     final profilesJson = prefs.getString('themeProfiles');
+    // Verse installatie (geen opgeslagen profielen): de ingebouwde profielen
+    // met LibreKAT voorop als standaardselectie. Bestaande prefs — ook het
+    // legacy enkelvoudige 'themeProfile' — winnen altijd.
     final loadedProfiles = profilesJson == null
         ? [
-            themeJson == null
-                ? const ThemeProfile()
-                : ThemeProfile.fromJson(
-                    Map<String, Object?>.from(jsonDecode(themeJson) as Map),
-                  ),
+            if (themeJson == null)
+              ...ThemeProfile.builtIns
+            else
+              ThemeProfile.fromJson(
+                Map<String, Object?>.from(jsonDecode(themeJson) as Map),
+              ),
           ]
         : (jsonDecode(profilesJson) as List)
               .map(
@@ -75,7 +79,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       languageCode: prefs.getString('languageCode') ?? 'nl',
       homeDirectory: prefs.getString('homeDirectory'),
       exportDirectory: prefs.getString('exportDirectory'),
-      themeProfiles: profiles.isEmpty ? const [ThemeProfile()] : profiles,
+      themeProfiles: profiles.isEmpty ? ThemeProfile.builtIns : profiles,
       selectedThemeProfileName:
           prefs.getString('selectedThemeProfileName') ?? profiles.first.name,
       appAppearanceProfiles: appearances,

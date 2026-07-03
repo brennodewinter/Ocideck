@@ -83,6 +83,8 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Megjegyzés: a webes verzió csak olyan szerverekről tölthet le, amelyek ezt engedélyezik (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'A csomagok (.ocideck) még nem támogatottak a webes verzióban.',
   'Alleen .md-presentaties kunnen in de webversie worden geopend.':

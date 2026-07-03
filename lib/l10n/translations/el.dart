@@ -83,6 +83,8 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Σημείωση: η έκδοση για τον ιστό μπορεί να αντλεί μόνο από διακομιστές που το επιτρέπουν (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Τα πακέτα (.ocideck) δεν υποστηρίζονται ακόμη στην έκδοση για τον ιστό.',
   'Alleen .md-presentaties kunnen in de webversie worden geopend.':

@@ -83,6 +83,8 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Obs: webbversionen kan bara hämta från servrar som tillåter det (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Paket (.ocideck) stöds ännu inte i webbversionen.',
   'Alleen .md-presentaties kunnen in de webversie worden geopend.':
