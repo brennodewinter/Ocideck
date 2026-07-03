@@ -99,18 +99,18 @@ style profile, sidecars, and the package format — is documented in
 
 | Document | What it covers |
 | --- | --- |
-| [User Guide](docs/USER_GUIDE.md) | Using the app: slide types, charts, presenting, exporting, theming |
-| [Keyboard shortcuts](docs/SHORTCUTS.md) | Editor and presenter shortcuts |
-| [File format](docs/FILE_FORMAT.md) | The Marp Markdown, front matter, sidecars, and `.ocideck` package |
 | [Architecture](docs/ARCHITECTURE.md) | How the code fits together (for contributors) |
-| [Source map](docs/SOURCE_MAP.md) | One-line description of every file under `lib/` |
 | [Build & release](docs/BUILD.md) | Building from source and producing distributables |
+| [Changelog](CHANGELOG.md) | Notable changes per version |
 | [Checks & CI](docs/CHECKS.md) | Every automated check, what it covers, and how CI runs it |
 | [Contributing](CONTRIBUTING.md) | Setup, the quality gate, and how to propose changes |
-| [Security policy](SECURITY.md) | How to report a vulnerability |
-| [Changelog](CHANGELOG.md) | Notable changes per version |
-| [Third-party notices](THIRD_PARTY_NOTICES.md) | Bundled components and their licences |
+| [File format](docs/FILE_FORMAT.md) | The Marp Markdown, front matter, sidecars, and `.ocideck` package |
+| [Keyboard shortcuts](docs/SHORTCUTS.md) | Editor and presenter shortcuts |
 | [Licence compliance](docs/LICENSE_COMPLIANCE.md) | Open-source policy and the `make licenses` check |
+| [Security policy](SECURITY.md) | How to report a vulnerability |
+| [Source map](docs/SOURCE_MAP.md) | One-line description of every file under `lib/` |
+| [Third-party notices](THIRD_PARTY_NOTICES.md) | Bundled components and their licences |
+| [User Guide](docs/USER_GUIDE.md) | Using the app: slide types, charts, presenting, exporting, theming |
 
 ## Contributing
 
