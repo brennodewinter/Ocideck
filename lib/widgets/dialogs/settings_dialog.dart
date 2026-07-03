@@ -505,10 +505,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                   ),
                 ),
                 const SizedBox(width: 10),
-                Text(
+                const Text(
                   'OciDeck',
                   style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.32),
+                    // EU-vlaggeel: leesbaar op de donkere/EU-blauwe zijbalk,
+                    // passend bij het geel-hertinte logo erboven.
+                    color: Color(0xFFFFCC00),
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
                     letterSpacing: 2.5,
