@@ -42,12 +42,26 @@ class ScannedPresentation {
   /// The raw markdown source, kept for maximal full-text search.
   final String content;
 
+  /// Laatst-gewijzigd volgens het bestandssysteem, of null wanneer de stat
+  /// mislukte. Toont bij naamgenoten met afwijkende inhoud welke kopie de
+  /// recentste bewerking draagt.
+  final DateTime? modified;
+
   const ScannedPresentation({
     required this.path,
     required this.fileName,
     required this.deck,
     this.content = '',
+    this.modified,
   });
+
+  /// A display label: the deck title, falling back to the file name without
+  /// its extension. Mirrors [ScanHit.displayTitle].
+  String get displayTitle {
+    final t = deck.title.trim();
+    if (t.isNotEmpty) return t;
+    return p.basenameWithoutExtension(fileName);
+  }
 }
 
 /// A Marp presentation found by the disk-wide scan. Unlike [ScannedPresentation]
@@ -66,12 +80,24 @@ class ScanHit {
   /// True when [theme] is the OciDeck theme (sorted/marked first in the UI).
   final bool isOcideckTheme;
 
+  /// Bestandsgrootte in bytes; voorfilter voor duplicaatdetectie (alleen
+  /// even grote bestanden kúnnen identiek zijn, dus alleen die worden
+  /// volledig gelezen en gehasht).
+  final int size;
+
+  /// Laatst-gewijzigd volgens het bestandssysteem, of null wanneer de stat
+  /// mislukte. Toont bij naamgenoten met afwijkende inhoud welke kopie de
+  /// recentste bewerking draagt.
+  final DateTime? modified;
+
   const ScanHit({
     required this.path,
     required this.fileName,
     required this.title,
     required this.theme,
     required this.isOcideckTheme,
+    this.size = 0,
+    this.modified,
   });
 
   /// A display label: the frontmatter title, falling back to the file name
@@ -219,12 +245,19 @@ class FileService {
           }
           final deck = await openDeck(entity.path, content: content);
           if (deck != null && deck.slides.isNotEmpty) {
+            DateTime? modified;
+            try {
+              modified = (await entity.stat()).modified;
+            } catch (e) {
+              logWarning('FileService.scanPresentations: stat failed', e);
+            }
             results.add(
               ScannedPresentation(
                 path: entity.path,
                 fileName: p.basename(entity.path),
                 deck: deck,
                 content: content,
+                modified: modified,
               ),
             );
           }
@@ -358,12 +391,15 @@ class FileService {
       final fm = _md.sniffFrontmatter(head);
       if (!fm.marp) return null;
       final theme = fm.theme?.trim();
+      final stat = await file.stat();
       return ScanHit(
         path: file.path,
         fileName: p.basename(file.path),
         title: fm.title,
         theme: (theme == null || theme.isEmpty) ? null : theme,
         isOcideckTheme: theme == 'ocideck',
+        size: length,
+        modified: stat.modified,
       );
     } catch (e) {
       logWarning('FileService.scanKnownLocations: file probe failed', e);
