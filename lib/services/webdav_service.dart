@@ -240,7 +240,7 @@ class WebdavService {
       final href = resp.descendantElements
           .firstWhere(
             (e) => e.localName == 'href',
-            orElse: () => XmlElement(XmlName('href')),
+            orElse: () => XmlElement(const XmlName.parts('href')),
           )
           .innerText;
       if (href.isEmpty) continue;
