@@ -469,7 +469,10 @@ class DeckNotifier extends StateNotifier<DeckState> {
     _mutate(deck.copyWith(slides: slides));
   }
 
-  void updateSlide(int index, Slide updated) {
+  /// [bumpRevision] dwingt een editor-remount af; nodig wanneer de wijziging
+  /// niet uit de editor zelf komt (zoals een kwaliteits-quick-fix) en de
+  /// tekstvelden de nieuwe slide-inhoud moeten laden.
+  void updateSlide(int index, Slide updated, {bool bumpRevision = false}) {
     final deck = state.deck;
     if (deck == null || index < 0 || index >= deck.slides.length) return;
     final slides = List<Slide>.from(deck.slides);
@@ -477,7 +480,11 @@ class DeckNotifier extends StateNotifier<DeckState> {
     // Snel typen op dezelfde slide telt als één ongedaan-maken-stap. Sleutel op
     // de stabiele slide-id, niet de index: na verwijderen/herordenen mag een
     // bewerking op een ándere slide (zelfde index) niet meecoalescen.
-    _mutate(deck.copyWith(slides: slides), coalesceKey: 'slide:${updated.id}');
+    _mutate(
+      deck.copyWith(slides: slides),
+      coalesceKey: bumpRevision ? null : 'slide:${updated.id}',
+      bumpRevision: bumpRevision,
+    );
   }
 
   /// Zet de "overslaan"-status van een slide aan/uit. Overgeslagen slides
