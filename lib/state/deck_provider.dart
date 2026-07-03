@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import '../models/annotation.dart';
 import '../models/deck.dart';
+import '../models/deck_template.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../services/annotation_codec.dart';
@@ -146,12 +147,21 @@ class DeckNotifier extends StateNotifier<DeckState> {
     _lastCoalesceKey = null;
   }
 
-  void newDeck(String title, {String theme = 'ocideck'}) {
+  /// Start a fresh deck. With a [template] the deck opens with that template's
+  /// example slides (the first is always a title slide carrying [title]);
+  /// without one it is the classic single title slide.
+  void newDeck(
+    String title, {
+    String theme = 'ocideck',
+    DeckTemplate? template,
+  }) {
     final deck = Deck(
       title: title,
       theme: theme,
       themeProfile: _file.currentThemeProfile,
-      slides: [Slide.create(SlideType.title).copyWith(title: title)],
+      slides:
+          template?.buildSlides(title) ??
+          [Slide.create(SlideType.title).copyWith(title: title)],
     );
     _clearHistory();
     state = DeckState(deck: deck, isDirty: true);
