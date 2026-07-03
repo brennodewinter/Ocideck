@@ -86,6 +86,9 @@ List<InlineRun> parseInlineRuns(String text) {
   return merged;
 }
 
+/// Of [text] opmaaktekens bevat die [parseInlineRuns] zou verwerken.
+bool hasInlineMarkdown(String text) => _hasMarker(text);
+
 /// De kale tekst zonder opmaaktekens (linktekst blijft, de URL valt weg).
 String stripInlineMarkdown(String text) {
   if (!_hasMarker(text)) return text;

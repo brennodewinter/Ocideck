@@ -177,6 +177,44 @@ void main() {
     });
   });
 
+  group('bulletsSlideBottomInset', () {
+    test('reserves the footer band plus a cushion under the text column', () {
+      const w = kReferenceSlideWidth;
+      final slide = Slide.create(SlideType.bullets).copyWith(showFooter: true);
+      final profile = ThemeProfile(
+        footerText: 'Confidentieel',
+        footerShowPageNumbers: true,
+      );
+      final footer = footerSafeInset(w: w, slide: slide, profile: profile);
+      expect(footer, greaterThan(0));
+      final inset = bulletsSlideBottomInset(
+        w: w,
+        slide: slide,
+        profile: profile,
+        defaultBottomPad: w * 0.05,
+      );
+      // De onderste tekstregel moet boven de footerband blijven, niet erachter.
+      expect(inset, greaterThan(footer));
+    });
+
+    test('a larger bottom-logo reserve wins over the footer band', () {
+      const w = kReferenceSlideWidth;
+      final slide = Slide.create(SlideType.bullets).copyWith(showFooter: true);
+      final profile = ThemeProfile(
+        footerText: 'Confidentieel',
+        footerShowPageNumbers: true,
+      );
+      final inset = bulletsSlideBottomInset(
+        w: w,
+        slide: slide,
+        profile: profile,
+        defaultBottomPad: w * 0.05,
+        safeBottom: w * 0.2,
+      );
+      expect(inset, w * 0.2);
+    });
+  });
+
   group('planRichTextForSlide', () {
     test('respects footer inset for bullets rich-text slides', () {
       const w = kReferenceSlideWidth;
@@ -258,6 +296,12 @@ void main() {
         if (h > tallest) tallest = h;
       }
       expect(tallest / budget, greaterThan(0.85));
+      // Elke pagina houdt de render-marge vrij: een tot op de pixel volle
+      // pagina knipt zijn onderste regel af op de logo-/footergrens.
+      expect(
+        tallest,
+        lessThanOrEqualTo(budget - w * kRichTextRenderSlopFraction + 0.5),
+      );
     });
   });
 }
