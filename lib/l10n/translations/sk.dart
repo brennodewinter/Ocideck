@@ -1112,4 +1112,9 @@ const _dutchSourceSk = {
   'Pen · markeerstift · ⇧E': 'Pero · zvýrazňovač · ⇧E',
   'Gestapelde staaf': 'Skladaný stĺpcový',
   'Spreiding': 'Bodový',
+  'Klaar voor export': 'Pripravené na export',
+  'kwaliteitswaarschuwing(en)': 'upozornenie(-ia) na kvalitu',
+  'Nog opslaan nodig': 'Najprv je potrebné uložiť',
+  'TLP blokkeert export': 'TLP blokuje export',
+  'Kwaliteit blokkeert export': 'Kvalita blokuje export',
 };

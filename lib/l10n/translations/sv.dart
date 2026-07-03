@@ -1105,4 +1105,9 @@ const _dutchSourceSv = {
   'Pen · markeerstift · ⇧E': 'Penna · överstrykningspenna · ⇧E',
   'Gestapelde staaf': 'Staplad stapel',
   'Spreiding': 'Spridning',
+  'Klaar voor export': 'Klar för export',
+  'kwaliteitswaarschuwing(en)': 'kvalitetsvarning(ar)',
+  'Nog opslaan nodig': 'Behöver sparas först',
+  'TLP blokkeert export': 'TLP blockerar exporten',
+  'Kwaliteit blokkeert export': 'Kvaliteten blockerar exporten',
 };

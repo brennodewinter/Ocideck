@@ -1093,4 +1093,9 @@ const _dutchSourceTlh = {
   'Pen · markeerstift · ⇧E': 'ghItlhwI\' · boch \'ang · ⇧E',
   'Gestapelde staaf': 'SIrgh muvlu\'bogh',
   'Spreiding': 'boch',
+  'Klaar voor export': 'ngeHrup',
+  'kwaliteitswaarschuwing(en)': 'Dun ghuHmoHmey',
+  'Nog opslaan nodig': 'wa\'DIch yIchoq',
+  'TLP blokkeert export': 'ngeH bot TLP',
+  'Kwaliteit blokkeert export': 'ngeH bot Dun',
 };

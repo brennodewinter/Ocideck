@@ -1106,4 +1106,9 @@ const _dutchSourceLv = {
   'Pen · markeerstift · ⇧E': 'Pildspalva · marķieris · ⇧E',
   'Gestapelde staaf': 'Sakrauts stabiņš',
   'Spreiding': 'Izkliede',
+  'Klaar voor export': 'Gatavs eksportam',
+  'kwaliteitswaarschuwing(en)': 'kvalitātes brīdinājums(-i)',
+  'Nog opslaan nodig': 'Vispirms jāsaglabā',
+  'TLP blokkeert export': 'TLP bloķē eksportu',
+  'Kwaliteit blokkeert export': 'Kvalitāte bloķē eksportu',
 };

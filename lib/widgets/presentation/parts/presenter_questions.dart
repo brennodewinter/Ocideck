@@ -45,6 +45,8 @@ extension _PresenterQuestions on _FullscreenPresenterState {
         );
       case QuestionKind.multipleCorrect:
         return _drawMultiCorrect(spec, base);
+      case QuestionKind.ordering:
+        return _drawOrdering(spec, base);
       case QuestionKind.multipleChoice:
         return _drawSingleChoice(spec, base);
     }
@@ -116,6 +118,40 @@ extension _PresenterQuestions on _FullscreenPresenterState {
           if (correctSet.contains(shown[i])) i,
       ],
       multi: true,
+    );
+  }
+
+  /// Volgorde-vraag: trek een willekeurige greep van [QuestionSpec.optionCount]
+  /// antwoorden (hun onderlinge auteursvolgorde is de juiste volgorde) en toon
+  /// ze geschud — nooit toevallig al in de juiste volgorde.
+  QuestionView _drawOrdering(QuestionSpec spec, QuestionView base) {
+    final pool = spec.filledAnswers;
+    if (pool.length < 2) {
+      // Niet presenteerbaar: toon wat er is, zonder timer, en blokkeer niet.
+      return QuestionView(
+        options: pool.map((a) => a.text).toList(),
+        correctIndices: [for (var i = 0; i < pool.length; i++) i],
+        multi: true,
+        ordering: true,
+      );
+    }
+    final rng = math.Random();
+    final count = spec.optionCount.clamp(2, pool.length);
+    // Greep uit de pool; sorteren herstelt de (juiste) auteursvolgorde.
+    final chosen =
+        (([for (var i = 0; i < pool.length; i++) i]..shuffle(rng))
+              .take(count)
+              .toList()
+            ..sort());
+    final display = [...chosen];
+    do {
+      display.shuffle(rng);
+    } while (listEquals(display, chosen));
+    return base.copyWith(
+      options: [for (final i in display) pool[i].text],
+      correctIndices: [for (final i in chosen) display.indexOf(i)],
+      multi: true,
+      ordering: true,
     );
   }
 

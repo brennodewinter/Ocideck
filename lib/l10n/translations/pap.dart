@@ -1096,4 +1096,9 @@ const _dutchSourceAddPap = {
   'Pen · markeerstift · ⇧E': 'Pèn · marker · ⇧E',
   'Gestapelde staaf': 'Baranan apilá',
   'Spreiding': 'Dispershon',
+  'Klaar voor export': 'Kla pa eksportá',
+  'kwaliteitswaarschuwing(en)': 'atvertensia(nan) di kalidat',
+  'Nog opslaan nodig': 'Mester warda promé',
+  'TLP blokkeert export': 'TLP ta blokia eksportashon',
+  'Kwaliteit blokkeert export': 'Kalidat ta blokia eksportashon',
 };

@@ -1100,4 +1100,9 @@ const _dutchSourceAddIt = {
   'Pen · markeerstift · ⇧E': 'Penna · evidenziatore · ⇧E',
   'Gestapelde staaf': 'Barre impilate',
   'Spreiding': 'Dispersione',
+  'Klaar voor export': 'Pronto per l\'esportazione',
+  'kwaliteitswaarschuwing(en)': 'avviso/i di qualità',
+  'Nog opslaan nodig': 'Prima è necessario salvare',
+  'TLP blokkeert export': 'Il TLP blocca l\'esportazione',
+  'Kwaliteit blokkeert export': 'La qualità blocca l\'esportazione',
 };
