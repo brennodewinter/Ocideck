@@ -38,9 +38,9 @@ class _EventRow {
 
   /// Whether this event is the timeline's current point ("you are here").
   /// Lives on the row (not as an index) so it travels along with reorders.
-  bool current;
+  bool current = false;
 
-  _EventRow(TimelineEvent e, {this.current = false})
+  _EventRow(TimelineEvent e)
     : marker = TextEditingController(text: e.marker),
       title = TextEditingController(text: e.title),
       description = TextEditingController(text: e.description),

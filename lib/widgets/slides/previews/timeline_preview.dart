@@ -847,7 +847,8 @@ class _TimelineRailPainter extends CustomPainter {
         rad * 2.1,
         Paint()
           ..color = accent.withValues(
-            alpha: (current
+            alpha:
+                (current
                     ? 0.24
                     : last
                     ? 0.18
