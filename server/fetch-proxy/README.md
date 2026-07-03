@@ -90,7 +90,7 @@ Een server-side fetcher is per definitie een SSRF-doelwit. De regels spiegelen
 | `OCIDECK_PROXY_BIND` | `127.0.0.1` | Bind-adres (achter de webserver laten) |
 | `OCIDECK_PROXY_PORT` | `8123` | Poort |
 | `OCIDECK_PROXY_MAX_BYTES` | `536870912` | Harde bytecap per opvraag |
-| `OCIDECK_PROXY_ALLOWED_ORIGINS` | *(leeg = geen check)* | Komma-lijst; indien gezet moet `Origin` of `Referer` ermee beginnen |
+| `OCIDECK_PROXY_ALLOWED_ORIGINS` | *(leeg = geen check)* | Komma-lijst. Indien gezet volstaat `Sec-Fetch-Site: same-origin` (stuurt elke moderne browser automatisch mee), anders moet `Origin` of `Referer` met een item beginnen. Direct ingetikte adressen en andere sites blijven geweigerd. |
 
 Zonder gedeployd hulppunt blijft de webversie gewoon werken: direct fetchen
 dekt same-origin en CORS-vriendelijke bronnen, en de foutmelding legt de
