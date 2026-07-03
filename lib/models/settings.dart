@@ -395,7 +395,8 @@ class AppAppearanceProfile {
     surfaceColor: '#FFFFFF',
     textColor: '#003399',
     mutedTextColor: '#5D6B85',
-    panelColor: '#00266F',
+    // Zelfde EU-vlagblauw als de bovenbalk-keuze in het Basic-profiel.
+    panelColor: '#003399',
     panelTextColor: '#FFFFFF',
   );
 
@@ -636,7 +637,7 @@ class AppSettings {
     this.themeProfiles = ThemeProfile.builtIns,
     this.selectedThemeProfileName = 'LibreKAT',
     this.appAppearanceProfiles = AppAppearanceProfile.builtIns,
-    this.selectedAppAppearanceProfileName = 'Basic',
+    this.selectedAppAppearanceProfileName = 'Europa',
     this.cockpitColorSchemes = CockpitColorScheme.builtIns,
     this.selectedCockpitColorSchemeName = 'Standaard',
     this.recentFiles = const [],

@@ -289,7 +289,7 @@ void main() {
       notifier.state.appAppearanceProfiles.map((profile) => profile.name),
       containsAll(['Basic', 'Europa', 'Donker']),
     );
-    expect(notifier.state.selectedAppAppearanceProfileName, 'Basic');
+    expect(notifier.state.selectedAppAppearanceProfileName, 'Europa');
   });
 
   test('creates, edits and selects a custom app theme', () async {

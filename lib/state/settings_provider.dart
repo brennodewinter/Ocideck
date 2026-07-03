@@ -50,7 +50,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
               .toList();
     final appearances = _mergeAppearanceProfiles(loadedAppearances);
     final selectedAppearance =
-        prefs.getString('selectedAppAppearanceProfileName') ?? 'Basic';
+        prefs.getString('selectedAppAppearanceProfileName') ?? 'Europa';
     final cockpitJson = prefs.getString('cockpitColorSchemes');
     final loadedCockpitSchemes = cockpitJson == null
         ? const <CockpitColorScheme>[]
@@ -86,7 +86,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       selectedAppAppearanceProfileName:
           appearances.any((profile) => profile.name == selectedAppearance)
           ? selectedAppearance
-          : 'Basic',
+          : 'Europa',
       cockpitColorSchemes: cockpitSchemes,
       selectedCockpitColorSchemeName:
           cockpitSchemes.any((scheme) => scheme.name == selectedCockpit)
@@ -381,7 +381,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
         .toList();
     state = state.copyWith(
       appAppearanceProfiles: profiles,
-      selectedAppAppearanceProfileName: 'Basic',
+      selectedAppAppearanceProfileName: 'Europa',
     );
     await _saveAppearanceProfiles();
   }
