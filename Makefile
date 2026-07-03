@@ -1,4 +1,4 @@
-.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline licenses check-conventions build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
+.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline licenses check-conventions mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 help:
 	@echo "OciDeck quality targets:"
@@ -6,6 +6,7 @@ help:
 	@echo "  make check-full      make check + dependency outdated report."
 	@echo "  make coverage        Run the test suite with coverage and print a line-coverage summary."
 	@echo "  make mutate          Mutation check for dead/untested branch operands (manual; FILE/TESTS overridable)."
+	@echo "  make mutate-parsers  Mutation sweep over all markdown parsers/serializers (manual, slow)."
 	@echo "  make test-golden     Slide-renderer visual-regression goldens (single platform; UPDATE=1 to accept)."
 	@echo "  make test-contracts  Markdown/save-load contract and parsing tests."
 	@echo "  make test-preview    Slide rendering, footer, TLP, inline markdown, and preview tests."
@@ -107,6 +108,19 @@ mutate:
 	@echo "Covers: every String.startsWith/endsWith predicate in FILE, forced false."
 	@echo "Failure means: a predicate survived — it is dead or untested; review it."
 	dart run tool/mutation_check.dart $(FILE) $(TESTS)
+
+# The full parser sweep: every parser/serializer with startsWith/endsWith
+# predicates, each against its fastest relevant test set. Still manual (slow:
+# one test run per predicate), but one command instead of five.
+mutate-parsers:
+	@echo "== OciDeck check: mutation sweep over the parsers =="
+	@echo "Command: tool/mutation_check.dart over parse/serialize/body-blocks/inline/validator."
+	@echo "Failure means: a predicate survived — it is dead or untested; review it."
+	dart run tool/mutation_check.dart lib/services/markdown_service_parse.dart test/markdown_round_trip_test.dart test/markdown_service_test.dart
+	dart run tool/mutation_check.dart lib/services/markdown_service_serialize.dart test/markdown_round_trip_test.dart test/markdown_service_test.dart
+	dart run tool/mutation_check.dart lib/services/markdown_body_blocks.dart test/markdown_body_blocks_test.dart test/rich_text_layout_test.dart
+	dart run tool/mutation_check.dart lib/widgets/slides/inline_markdown.dart test/inline_markdown_test.dart
+	dart run tool/mutation_check.dart lib/services/markdown_validator.dart test/markdown_validator_test.dart
 
 # Contract tests for persistence and parsing.
 test-contracts:

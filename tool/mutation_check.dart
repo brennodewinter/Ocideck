@@ -15,7 +15,15 @@
 //   dart run tool/mutation_check.dart lib/services/markdown_validator.dart \
 //     test/markdown_validator_test.dart
 //
-// The target file is always restored (finally + git checkout safety net).
+// A predicate with a `// mutation: equivalent` comment on its own line or the
+// line directly below is skipped: that marks a REVIEWED survivor whose mutant
+// is provably indistinguishable under the test environment (explain why in a
+// comment nearby). Use sparingly — an annotation without a reason is a
+// survivor swept under the rug.
+//
+// The target file is always restored to its pre-run working-tree content;
+// `git checkout` is only the fallback when that restore itself fails (it
+// resets to HEAD and would otherwise discard uncommitted edits).
 
 import 'dart:io';
 
@@ -49,13 +57,26 @@ List<_Mutant> _mutants(String src) {
     final open = m.end - 1;
     final close = _matchingParen(src, open);
     if (close < 0) continue;
-    final mutated =
-        src.substring(0, open + 1) + _sentinel + src.substring(close);
-    final line = '\n'.allMatches(src.substring(0, m.start)).length + 1;
     final lineStart = src.lastIndexOf('\n', m.start) + 1;
     var lineEnd = src.indexOf('\n', m.start);
     if (lineEnd < 0) lineEnd = src.length;
-    out.add(_Mutant(mutated, line, src.substring(lineStart, lineEnd).trim()));
+    final lineText = src.substring(lineStart, lineEnd);
+    // Reviewed-equivalent predicate: mutant not distinguishable in tests. The
+    // marker sits on the predicate's own line or the line right below (dart
+    // format moves a trailing comment after `{` to its own line).
+    var nextEnd = lineEnd < src.length ? src.indexOf('\n', lineEnd + 1) : -1;
+    if (nextEnd < 0) nextEnd = src.length;
+    final nextLine = lineEnd < src.length
+        ? src.substring(lineEnd + 1, nextEnd)
+        : '';
+    if (lineText.contains('mutation: equivalent') ||
+        nextLine.trim().startsWith('// mutation: equivalent')) {
+      continue;
+    }
+    final mutated =
+        src.substring(0, open + 1) + _sentinel + src.substring(close);
+    final line = '\n'.allMatches(src.substring(0, m.start)).length + 1;
+    out.add(_Mutant(mutated, line, lineText.trim()));
   }
   return out;
 }
@@ -90,8 +111,17 @@ Future<void> main(List<String> args) async {
     }
   } finally {
     file.writeAsStringSync(original);
-    // Safety net in case the in-memory restore was bypassed by a crash.
-    await Process.run('git', ['checkout', '--', target]);
+    // Safety net ONLY when the restore verifiably failed: a blind
+    // `git checkout` here would also wipe legitimate uncommitted edits to the
+    // target (the file's pre-run content is the working-tree version, not
+    // necessarily HEAD).
+    if (file.readAsStringSync() != original) {
+      await Process.run('git', ['checkout', '--', target]);
+      stderr.writeln(
+        'WARNING: in-memory restore failed; $target reset to git HEAD — '
+        'uncommitted edits to it (if any) are lost.',
+      );
+    }
   }
 
   stdout.writeln(
