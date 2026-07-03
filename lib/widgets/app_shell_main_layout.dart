@@ -725,10 +725,12 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
   }
 
   Future<void> _newInTab() async {
-    final title = await NewDeckDialog.show(context);
-    if (title != null) {
-      ref.read(tabsProvider.notifier).newDeckInNewTab(title);
-    }
+    final choice = await NewDeckDialog.show(context);
+    if (choice == null) return;
+    await ref
+        .read(settingsProvider.notifier)
+        .selectThemeProfile(choice.profileName);
+    ref.read(tabsProvider.notifier).newDeckInNewTab(choice.title);
   }
 
   Future<void> _openProperties() async {

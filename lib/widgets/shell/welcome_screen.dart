@@ -178,10 +178,14 @@ class _WelcomeScreen extends ConsumerWidget {
   }
 
   Future<void> _newDeck(BuildContext context, WidgetRef ref) async {
-    final title = await NewDeckDialog.show(context);
-    if (title != null) {
-      ref.read(tabsProvider.notifier).newDeckInCurrentTab(title);
-    }
+    final choice = await NewDeckDialog.show(context);
+    if (choice == null) return;
+    // Profielkeuze is globaal (het actieve profiel bepaalt de stijl van elk
+    // deck); eerst selecteren, dan aanmaken zodat het nieuwe deck hem erft.
+    await ref
+        .read(settingsProvider.notifier)
+        .selectThemeProfile(choice.profileName);
+    ref.read(tabsProvider.notifier).newDeckInCurrentTab(choice.title);
   }
 }
 
