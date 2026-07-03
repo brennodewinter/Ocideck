@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
+import '../../services/classification_enforcement_policy.dart';
 import '../../services/webdav_service.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
@@ -13,6 +14,7 @@ import '../../state/consent_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/log.dart';
 import '../../l10n/app_localizations.dart';
+import '../editors/advanced_section.dart';
 import '../language_flag.dart';
 import '../privacy_statement_content.dart';
 
