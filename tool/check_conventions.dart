@@ -5,6 +5,9 @@
 //   * No bare `catch (_)` — swallowing errors silently hides failures; catch a
 //     named error and route it through `logError`/`logWarning`. This is a
 //     RATCHET: the count may not grow. It is currently 0 — keep it there.
+//   * No plain `.writeAsString(`/`.writeAsBytes(` — those truncate the target
+//     first, so a crash midway corrupts the file. Use `writeStringAtomic`/
+//     `writeBytesAtomic` (lib/utils/atomic_file.dart), which alone is exempt.
 //   * File-size RATCHET — a file may not exceed [maxFileLines], except the
 //     baselined files below whose ceiling is their size at ratchet time. A
 //     ceiling may shrink (split the file) but never grow, so big files trend
@@ -29,12 +32,19 @@ const Map<String, int> fileSizeBaseline = {};
 
 final _print = RegExp(r'(?<![\w.])print\(');
 final _catchUnderscore = RegExp(r'catch\s*\(\s*_\s*\)');
+final _plainWrite = RegExp(r'\.writeAs(String|Bytes)(Sync)?\(');
+
+/// The atomic-write helpers themselves are the only place a plain write may
+/// live: everything else goes through them.
+bool _isAtomicFileLib(String path) =>
+    path.replaceAll(r'\', '/') == 'lib/utils/atomic_file.dart';
 
 bool _isTranslationData(String path) =>
     path.replaceAll(r'\', '/').contains('lib/l10n/translations/');
 
 void main() {
   final printHits = <String>[];
+  final plainWriteHits = <String>[];
   var catchCount = 0;
   final oversize = <String>[];
   final shrunk = <String>[];
@@ -48,6 +58,9 @@ void main() {
       if (line.trimLeft().startsWith('//')) continue;
       if (_print.hasMatch(line)) printHits.add('${file.path}:${i + 1}');
       if (_catchUnderscore.hasMatch(line)) catchCount++;
+      if (_plainWrite.hasMatch(line) && !_isAtomicFileLib(file.path)) {
+        plainWriteHits.add('${file.path}:${i + 1}');
+      }
     }
 
     final path = file.path.replaceAll(r'\', '/');
@@ -75,6 +88,15 @@ void main() {
     );
   }
 
+  if (plainWriteHits.isNotEmpty) {
+    failures.add(
+      'Found ${plainWriteHits.length} plain `.writeAsString`/`.writeAsBytes` '
+      'call(s) — a crash midway leaves a truncated file. Use '
+      'writeStringAtomic/writeBytesAtomic (lib/utils/atomic_file.dart):\n'
+      '    ${plainWriteHits.join('\n    ')}',
+    );
+  }
+
   if (catchCount > catchUnderscoreBaseline) {
     failures.add(
       'Bare `catch (_)` count rose to $catchCount (baseline '
@@ -93,8 +115,9 @@ void main() {
 
   if (failures.isEmpty) {
     stdout.writeln(
-      'Conventions OK: no print(); bare catch (_) at $catchCount '
-      '(baseline $catchUnderscoreBaseline); file sizes within ceilings.',
+      'Conventions OK: no print(); no plain writeAs*; bare catch (_) at '
+      '$catchCount (baseline $catchUnderscoreBaseline); file sizes within '
+      'ceilings.',
     );
     if (catchCount < catchUnderscoreBaseline) {
       stdout.writeln(

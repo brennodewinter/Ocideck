@@ -156,4 +156,38 @@ void main() {
 
     expect(await service.loadAll(), isEmpty);
   });
+
+  test('save leaves no .tmp residue behind', () async {
+    await service.save(snap('a'));
+    final leftovers = tempDir.listSync().whereType<File>().where(
+      (f) => f.path.endsWith('.tmp'),
+    );
+    expect(leftovers, isEmpty);
+  });
+
+  test('prune and clearAll also remove crashed .json.tmp leftovers', () async {
+    // Een .json.tmp is het restant van een atomaire write die een crash niet
+    // haalde: plaintext deck-inhoud, dus dezelfde houdbaarheid en opruiming.
+    final stale = File('${tempDir.path}/crashed.json.tmp')
+      ..writeAsStringSync('{"half":')
+      ..setLastModifiedSync(DateTime.now().subtract(const Duration(days: 40)));
+    expect(await service.pruneOlderThan(const Duration(days: 30)), 1);
+    expect(stale.existsSync(), isFalse);
+
+    File('${tempDir.path}/fresh.json.tmp').writeAsStringSync('{"half":');
+    await service.clearAll();
+    expect(
+      tempDir.listSync().whereType<File>().where(
+        (f) => f.path.endsWith('.json.tmp'),
+      ),
+      isEmpty,
+    );
+  });
+
+  test('loadAll skips a corrupt snapshot and keeps the healthy ones', () async {
+    await service.save(snap('goed'));
+    File('${tempDir.path}/kapot.json').writeAsStringSync('{"id": "kapo');
+    final all = await service.loadAll();
+    expect(all.map((s) => s.id), ['goed']);
+  });
 }

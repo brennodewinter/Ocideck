@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 import '../l10n/app_localizations.dart';
 import '../models/slide.dart';
+import '../utils/atomic_file.dart';
 import '../utils/log.dart';
 import '../utils/project_path.dart';
 import 'web_asset_store.dart';
@@ -199,7 +200,7 @@ class ImageService {
             'pasted_${DateTime.now().millisecondsSinceEpoch}.png',
           ),
         );
-        await file.writeAsBytes(bytes, flush: true);
+        await writeBytesAtomic(file, bytes);
         return p.relative(file.path, from: projectPath);
       }
       final cacheDir = await getTemporaryDirectory();
@@ -208,7 +209,7 @@ class ImageService {
       final file = File(
         p.join(dir.path, 'pasted_${DateTime.now().millisecondsSinceEpoch}.png'),
       );
-      await file.writeAsBytes(bytes, flush: true);
+      await writeBytesAtomic(file, bytes);
       return file.path;
     } on FileSystemException {
       return null;

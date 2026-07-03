@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
+import '../../utils/atomic_file.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import 'animation_duration_control.dart';
@@ -276,7 +277,8 @@ class _ChartEditorState extends State<ChartEditor> {
       final name = p.basename(file.name);
       final dir = Directory(p.join(widget.projectPath!, chartDataDirName));
       await dir.create(recursive: true);
-      await File(p.join(dir.path, name)).writeAsString(text, flush: true);
+      // Atomair: kan een bestaand databestand met dezelfde naam overschrijven.
+      await writeStringAtomic(File(p.join(dir.path, name)), text);
       source = '$chartDataDirName/$name';
     }
 
