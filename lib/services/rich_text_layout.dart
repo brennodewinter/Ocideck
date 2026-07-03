@@ -43,9 +43,9 @@ double footerSafeInset({
 }
 
 /// Bottom padding for bullets / rich-text slides.
-/// When a footer overlay is active the footer band is reserved in layout
-/// ([footerSafeInset]); only a minimal cushion is applied here so no empty
-/// strip appears under the text column.
+/// When a footer overlay is active its band ([footerSafeInset]) plus a small
+/// cushion is reserved here, so the text column stops above the footer instead
+/// of running on behind it; a bottom logo reserve wins when it is larger.
 double bulletsSlideBottomInset({
   required double w,
   required Slide slide,
@@ -57,8 +57,8 @@ double bulletsSlideBottomInset({
   if (footer <= 0) {
     return safeBottom > defaultBottomPad ? safeBottom : defaultBottomPad;
   }
-  final footerCushion = w * 0.004;
-  return safeBottom > footerCushion ? safeBottom : footerCushion;
+  final reserved = footer + w * 0.004;
+  return safeBottom > reserved ? safeBottom : reserved;
 }
 
 double _richTextBudget(double availH, double footerInset) =>
@@ -267,7 +267,6 @@ RichTextLayoutPlan planRichTextForSlide({
   required double availH,
   required String font,
   bool splitWithImage = false,
-  bool footerReservedExternally = false,
 }) {
   final pad = splitWithImage ? w * 0.038 : w * 0.07;
   final vPad = splitWithImage ? w * 0.042 : w * 0.05;
@@ -275,9 +274,8 @@ RichTextLayoutPlan planRichTextForSlide({
   final subtitleSize = w * 0.030;
   final spacing = splitWithImage ? vPad * 0.32 : pad * 0.5;
   final bodySize = splitWithImage ? w * 0.031 : w * 0.026;
-  final footer = footerReservedExternally
-      ? 0.0
-      : footerSafeInset(w: w, slide: slide, profile: profile);
+  // [availH] komt bij elke aanroeper uit [bulletsSlideBottomInset]-geometrie,
+  // die de footerband al reserveert — hier niet nogmaals aftrekken.
 
   return planRichTextLayout(
     markdown: normalizeRichTextMarkdown(slide.customMarkdown),
@@ -292,7 +290,7 @@ RichTextLayoutPlan planRichTextForSlide({
     spacing: spacing,
     bodySize: bodySize,
     font: font,
-    footerInset: footer,
+    footerInset: 0,
     maxScale: bulletScaleCap(
       w,
       bodySize,
