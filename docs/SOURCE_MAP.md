@@ -108,6 +108,9 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `platform_features.dart` — Feature detection: desktop, dual-screen, local projects.
 - `platform_features_io.dart` — Desktop feature availability (part of `platform_features`).
 - `platform_features_web.dart` — Web platform: no desktop features (part of `platform_features`).
+- `presenter_fullscreen.dart` — Export selector: volledig scherm voor de presentatiemodus (desktop-venster of browser-API).
+- `presenter_fullscreen_io.dart` — Desktop: window_manager fullscreen (part of `presenter_fullscreen`).
+- `presenter_fullscreen_web.dart` — Web: browser-Fullscreen-API (part of `presenter_fullscreen`).
 - `runtime_flags.dart` — Export selector for platform-specific runtime detection.
 - `runtime_flags_io.dart` — Detects the flutter-test environment (part of `runtime_flags`).
 - `runtime_flags_web.dart` — No test detection on web (part of `runtime_flags`).

@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:screen_retriever/screen_retriever.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
+import '../../platform/presenter_fullscreen.dart';
 import '../../models/annotation.dart';
 import '../../models/deck.dart';
 import '../../models/question.dart';
@@ -272,7 +273,10 @@ class FullscreenPresenter extends StatefulWidget {
     final hadWakeLock = await _wakeLockEnabled();
     await _enableWakeLock();
     try {
-      await windowManager.setFullScreen(true);
+      // Volledig scherm is best-effort: op web kan de browser weigeren en op
+      // een onbekend platform ontbreekt het venster. Nooit blokkerend — de
+      // presenter-route wordt hoe dan ook geopend.
+      await setPresenterFullscreen(true);
       if (context.mounted) {
         await Navigator.push(
           context,
@@ -784,7 +788,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       // the audience window (once — double-close crashes the Linux embedder).
       await aw.close();
     } else {
-      await windowManager.setFullScreen(false);
+      await setPresenterFullscreen(false);
     }
     if (mounted) Navigator.pop(context);
   }
