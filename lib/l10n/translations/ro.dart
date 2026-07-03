@@ -1116,4 +1116,9 @@ const _dutchSourceRo = {
   'Pen · markeerstift · ⇧E': 'Stilou · marker · ⇧E',
   'Gestapelde staaf': 'Bare stivuite',
   'Spreiding': 'Dispersie',
+  'Klaar voor export': 'Gata de export',
+  'kwaliteitswaarschuwing(en)': 'avertisment(e) de calitate',
+  'Nog opslaan nodig': 'Mai întâi trebuie salvat',
+  'TLP blokkeert export': 'TLP blochează exportul',
+  'Kwaliteit blokkeert export': 'Calitatea blochează exportul',
 };

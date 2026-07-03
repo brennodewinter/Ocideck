@@ -1118,4 +1118,9 @@ const _dutchSourceUk = {
   'Pen · markeerstift · ⇧E': 'Ручка · маркер · ⇧E',
   'Gestapelde staaf': 'Стовпчикова з накопиченням',
   'Spreiding': 'Точкова',
+  'Klaar voor export': 'Готово до експорту',
+  'kwaliteitswaarschuwing(en)': 'попередження щодо якості',
+  'Nog opslaan nodig': 'Спершу збережіть',
+  'TLP blokkeert export': 'TLP блокує експорт',
+  'Kwaliteit blokkeert export': 'Якість блокує експорт',
 };

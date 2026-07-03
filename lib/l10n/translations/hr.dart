@@ -1110,4 +1110,9 @@ const _dutchSourceHr = {
   'Pen · markeerstift · ⇧E': 'Olovka · marker · ⇧E',
   'Gestapelde staaf': 'Složeni stupčasti',
   'Spreiding': 'Raspršeni',
+  'Klaar voor export': 'Spremno za izvoz',
+  'kwaliteitswaarschuwing(en)': 'upozorenje(a) o kvaliteti',
+  'Nog opslaan nodig': 'Prvo je potrebno spremiti',
+  'TLP blokkeert export': 'TLP blokira izvoz',
+  'Kwaliteit blokkeert export': 'Kvaliteta blokira izvoz',
 };

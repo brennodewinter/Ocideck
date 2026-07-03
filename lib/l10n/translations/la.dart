@@ -1116,4 +1116,9 @@ const _dutchSourceLa = {
   'Pen · markeerstift · ⇧E': 'Stilus · illuminator · ⇧E',
   'Gestapelde staaf': 'Columna cumulata',
   'Spreiding': 'Dispersio',
+  'Klaar voor export': 'Paratum ad exportandum',
+  'kwaliteitswaarschuwing(en)': 'monitum(a) qualitatis',
+  'Nog opslaan nodig': 'Primum servandum est',
+  'TLP blokkeert export': 'TLP exportationem impedit',
+  'Kwaliteit blokkeert export': 'Qualitas exportationem impedit',
 };

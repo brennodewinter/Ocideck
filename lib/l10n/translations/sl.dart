@@ -1108,4 +1108,9 @@ const _dutchSourceSl = {
   'Pen · markeerstift · ⇧E': 'Pero · označevalnik · ⇧E',
   'Gestapelde staaf': 'Naložen stolpec',
   'Spreiding': 'Razpršenost',
+  'Klaar voor export': 'Pripravljeno za izvoz',
+  'kwaliteitswaarschuwing(en)': 'opozorilo(-a) o kakovosti',
+  'Nog opslaan nodig': 'Najprej je treba shraniti',
+  'TLP blokkeert export': 'TLP blokira izvoz',
+  'Kwaliteit blokkeert export': 'Kakovost blokira izvoz',
 };

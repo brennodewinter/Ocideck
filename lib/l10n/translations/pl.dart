@@ -1113,4 +1113,9 @@ const _dutchSourcePl = {
   'Pen · markeerstift · ⇧E': 'Pióro · zakreślacz · ⇧E',
   'Gestapelde staaf': 'Słupkowy skumulowany',
   'Spreiding': 'Punktowy',
+  'Klaar voor export': 'Gotowe do eksportu',
+  'kwaliteitswaarschuwing(en)': 'ostrzeżenie(-a) dot. jakości',
+  'Nog opslaan nodig': 'Najpierw zapisz',
+  'TLP blokkeert export': 'TLP blokuje eksport',
+  'Kwaliteit blokkeert export': 'Jakość blokuje eksport',
 };

@@ -1107,4 +1107,9 @@ const _dutchSourceCs = {
   'Pen · markeerstift · ⇧E': 'Pero · zvýrazňovač · ⇧E',
   'Gestapelde staaf': 'Skládaný sloupcový',
   'Spreiding': 'Bodový',
+  'Klaar voor export': 'Připraveno k exportu',
+  'kwaliteitswaarschuwing(en)': 'upozornění na kvalitu',
+  'Nog opslaan nodig': 'Nejprve je nutné uložit',
+  'TLP blokkeert export': 'TLP blokuje export',
+  'Kwaliteit blokkeert export': 'Kvalita blokuje export',
 };

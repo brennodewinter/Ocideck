@@ -1122,4 +1122,9 @@ const _dutchSourceBg = {
   'Pen · markeerstift · ⇧E': 'Химикал · маркер · ⇧E',
   'Gestapelde staaf': 'Наслоена стълбовидна',
   'Spreiding': 'Разсейване',
+  'Klaar voor export': 'Готово за експорт',
+  'kwaliteitswaarschuwing(en)': 'предупреждение(я) за качество',
+  'Nog opslaan nodig': 'Първо е нужно запазване',
+  'TLP blokkeert export': 'TLP блокира експорта',
+  'Kwaliteit blokkeert export': 'Качеството блокира експорта',
 };

@@ -1100,4 +1100,9 @@ const _dutchSourceEt = {
   'Pen · markeerstift · ⇧E': 'Pliiats · marker · ⇧E',
   'Gestapelde staaf': 'Virnastatud tulp',
   'Spreiding': 'Hajuvus',
+  'Klaar voor export': 'Ekspordiks valmis',
+  'kwaliteitswaarschuwing(en)': 'kvaliteedihoiatus(t)',
+  'Nog opslaan nodig': 'Enne tuleb salvestada',
+  'TLP blokkeert export': 'TLP blokeerib ekspordi',
+  'Kwaliteit blokkeert export': 'Kvaliteet blokeerib ekspordi',
 };

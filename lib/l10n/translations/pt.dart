@@ -1124,4 +1124,9 @@ const _dutchSourcePt = {
   'Pen · markeerstift · ⇧E': 'Caneta · marcador · ⇧E',
   'Gestapelde staaf': 'Barras empilhadas',
   'Spreiding': 'Dispersão',
+  'Klaar voor export': 'Pronto para exportar',
+  'kwaliteitswaarschuwing(en)': 'aviso(s) de qualidade',
+  'Nog opslaan nodig': 'É preciso guardar primeiro',
+  'TLP blokkeert export': 'O TLP bloqueia a exportação',
+  'Kwaliteit blokkeert export': 'A qualidade bloqueia a exportação',
 };

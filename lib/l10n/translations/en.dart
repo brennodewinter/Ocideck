@@ -1118,4 +1118,9 @@ const _dutchSourceAddEn = {
   'Pen · markeerstift · ⇧E': 'Pen · highlighter · ⇧E',
   'Gestapelde staaf': 'Stacked bar',
   'Spreiding': 'Scatter',
+  'Klaar voor export': 'Ready to export',
+  'kwaliteitswaarschuwing(en)': 'quality warning(s)',
+  'Nog opslaan nodig': 'Save needed first',
+  'TLP blokkeert export': 'TLP blocks export',
+  'Kwaliteit blokkeert export': 'Quality blocks export',
 };

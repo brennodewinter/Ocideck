@@ -1094,4 +1094,9 @@ const _dutchSourceAddFy = {
   'Pen · markeerstift · ⇧E': 'Pen · markearstift · ⇧E',
   'Gestapelde staaf': 'Stapele staven',
   'Spreiding': 'Sparring',
+  'Klaar voor export': 'Klear foar eksport',
+  'kwaliteitswaarschuwing(en)': 'kwaliteitswarskôging(en)',
+  'Nog opslaan nodig': 'Earst bewarje nedich',
+  'TLP blokkeert export': 'TLP blokkearret eksport',
+  'Kwaliteit blokkeert export': 'Kwaliteit blokkearret eksport',
 };

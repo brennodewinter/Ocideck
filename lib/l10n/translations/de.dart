@@ -1097,4 +1097,9 @@ const _dutchSourceAddDe = {
   'Pen · markeerstift · ⇧E': 'Stift · Marker · ⇧E',
   'Gestapelde staaf': 'Gestapelte Balken',
   'Spreiding': 'Streudiagramm',
+  'Klaar voor export': 'Bereit zum Export',
+  'kwaliteitswaarschuwing(en)': 'Qualitätswarnung(en)',
+  'Nog opslaan nodig': 'Zuerst speichern',
+  'TLP blokkeert export': 'TLP blockiert den Export',
+  'Kwaliteit blokkeert export': 'Qualität blockiert den Export',
 };

@@ -1131,4 +1131,9 @@ const _dutchSourceGa = {
   'Pen · markeerstift · ⇧E': 'Peann · aibhsitheoir · ⇧E',
   'Gestapelde staaf': 'Barra cruachta',
   'Spreiding': 'Scaipthe',
+  'Klaar voor export': 'Réidh le heaspórtáil',
+  'kwaliteitswaarschuwing(en)': 'rabhadh (rabhaidh) cáilíochta',
+  'Nog opslaan nodig': 'Ní mór sábháil ar dtús',
+  'TLP blokkeert export': 'Cuireann TLP bac ar an easpórtáil',
+  'Kwaliteit blokkeert export': 'Cuireann an cháilíocht bac ar an easpórtáil',
 };

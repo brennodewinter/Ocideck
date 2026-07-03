@@ -1102,4 +1102,9 @@ const _dutchSourceDa = {
   'Pen · markeerstift · ⇧E': 'Pen · overstregning · ⇧E',
   'Gestapelde staaf': 'Stablet søjle',
   'Spreiding': 'Spredning',
+  'Klaar voor export': 'Klar til eksport',
+  'kwaliteitswaarschuwing(en)': 'kvalitetsadvarsel/-advarsler',
+  'Nog opslaan nodig': 'Skal gemmes først',
+  'TLP blokkeert export': 'TLP blokerer eksporten',
+  'Kwaliteit blokkeert export': 'Kvaliteten blokerer eksporten',
 };

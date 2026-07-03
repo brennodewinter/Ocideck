@@ -1108,4 +1108,9 @@ const _dutchSourceFi = {
   'Pen · markeerstift · ⇧E': 'Kynä · korostuskynä · ⇧E',
   'Gestapelde staaf': 'Pinottu pylväs',
   'Spreiding': 'Hajonta',
+  'Klaar voor export': 'Valmis vientiin',
+  'kwaliteitswaarschuwing(en)': 'laatuvaroitus(ta)',
+  'Nog opslaan nodig': 'Tallenna ensin',
+  'TLP blokkeert export': 'TLP estää viennin',
+  'Kwaliteit blokkeert export': 'Laatu estää viennin',
 };

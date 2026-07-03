@@ -1106,4 +1106,9 @@ const _dutchSourceId = {
   'Pen · markeerstift · ⇧E': 'Pena · stabilo · ⇧E',
   'Gestapelde staaf': 'Batang bertumpuk',
   'Spreiding': 'Sebar',
+  'Klaar voor export': 'Siap diekspor',
+  'kwaliteitswaarschuwing(en)': 'peringatan kualitas',
+  'Nog opslaan nodig': 'Perlu disimpan dulu',
+  'TLP blokkeert export': 'TLP memblokir ekspor',
+  'Kwaliteit blokkeert export': 'Kualitas memblokir ekspor',
 };

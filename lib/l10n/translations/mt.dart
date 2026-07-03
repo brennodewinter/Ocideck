@@ -1119,4 +1119,9 @@ const _dutchSourceMt = {
   'Pen · markeerstift · ⇧E': 'Pinna · markatur · ⇧E',
   'Gestapelde staaf': 'Bar stakkjat',
   'Spreiding': 'Scatter',
+  'Klaar voor export': 'Lest għall-esportazzjoni',
+  'kwaliteitswaarschuwing(en)': 'twissija(iet) tal-kwalità',
+  'Nog opslaan nodig': 'L-ewwel trid tissejvja',
+  'TLP blokkeert export': 'It-TLP jimblokka l-esportazzjoni',
+  'Kwaliteit blokkeert export': 'Il-kwalità timblokka l-esportazzjoni',
 };

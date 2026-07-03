@@ -1111,4 +1111,9 @@ const _dutchSourceLt = {
   'Pen · markeerstift · ⇧E': 'Rašiklis · žymeklis · ⇧E',
   'Gestapelde staaf': 'Sukrauta stulpelinė',
   'Spreiding': 'Sklaida',
+  'Klaar voor export': 'Paruošta eksportuoti',
+  'kwaliteitswaarschuwing(en)': 'kokybės įspėjimas(-ai)',
+  'Nog opslaan nodig': 'Pirmiausia reikia išsaugoti',
+  'TLP blokkeert export': 'TLP blokuoja eksportą',
+  'Kwaliteit blokkeert export': 'Kokybė blokuoja eksportą',
 };

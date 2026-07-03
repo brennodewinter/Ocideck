@@ -1107,4 +1107,9 @@ const _dutchSourceAddFr = {
   'Pen · markeerstift · ⇧E': 'Stylo · surligneur · ⇧E',
   'Gestapelde staaf': 'Barres empilées',
   'Spreiding': 'Nuage de points',
+  'Klaar voor export': 'Prêt à exporter',
+  'kwaliteitswaarschuwing(en)': 'avertissement(s) de qualité',
+  'Nog opslaan nodig': 'Enregistrement requis d\'abord',
+  'TLP blokkeert export': 'Le TLP bloque l\'export',
+  'Kwaliteit blokkeert export': 'La qualité bloque l\'export',
 };

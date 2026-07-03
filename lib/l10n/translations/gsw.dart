@@ -1106,4 +1106,9 @@ const _dutchSourceGsw = {
   'Pen · markeerstift · ⇧E': 'Schtift · Markierer · ⇧E',
   'Gestapelde staaf': 'Gschtaplete Balke',
   'Spreiding': 'Schtreuig',
+  'Klaar voor export': 'Parat zum Exportiere',
+  'kwaliteitswaarschuwing(en)': 'Qualitätswarnig(e)',
+  'Nog opslaan nodig': 'Zerscht spychere',
+  'TLP blokkeert export': 's TLP blockiert dr Export',
+  'Kwaliteit blokkeert export': 'D Qualität blockiert dr Export',
 };

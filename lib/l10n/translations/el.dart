@@ -1119,4 +1119,9 @@ const _dutchSourceEl = {
   'Pen · markeerstift · ⇧E': 'Πένα · μαρκαδόρος · ⇧E',
   'Gestapelde staaf': 'Στοιβαγμένες ράβδοι',
   'Spreiding': 'Διασπορά',
+  'Klaar voor export': 'Έτοιμο για εξαγωγή',
+  'kwaliteitswaarschuwing(en)': 'προειδοποίηση(-εις) ποιότητας',
+  'Nog opslaan nodig': 'Απαιτείται πρώτα αποθήκευση',
+  'TLP blokkeert export': 'Το TLP μπλοκάρει την εξαγωγή',
+  'Kwaliteit blokkeert export': 'Η ποιότητα μπλοκάρει την εξαγωγή',
 };

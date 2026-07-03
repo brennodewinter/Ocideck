@@ -1108,4 +1108,9 @@ const _dutchSourceHu = {
   'Pen · markeerstift · ⇧E': 'Toll · szövegkiemelő · ⇧E',
   'Gestapelde staaf': 'Halmozott oszlop',
   'Spreiding': 'Pontdiagram',
+  'Klaar voor export': 'Exportra kész',
+  'kwaliteitswaarschuwing(en)': 'minőségi figyelmeztetés(ek)',
+  'Nog opslaan nodig': 'Előbb menteni kell',
+  'TLP blokkeert export': 'A TLP blokkolja az exportot',
+  'Kwaliteit blokkeert export': 'A minőség blokkolja az exportot',
 };
