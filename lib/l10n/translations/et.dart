@@ -1100,4 +1100,18 @@ const _dutchSourceEt = {
   'Pen · markeerstift · ⇧E': 'Pliiats · marker · ⇧E',
   'Gestapelde staaf': 'Virnastatud tulp',
   'Spreiding': 'Hajuvus',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identsed koopiad',
+  'Zelfde titel, andere inhoud': 'Sama pealkiri, erinev sisu',
+  'Dubbele presentaties opruimen': 'Korista topeltesitlused',
+  'Naar de prullenbak verplaatst:': 'Teisaldatud prügikasti:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Prügikasti teisaldamine ebaõnnestus.',
+  'Geen dubbele presentaties gevonden.': 'Topeltesitlusi ei leitud.',
+  'Laatste kopie blijft behouden': 'Viimane koopia säilitatakse',
+  'Nog geopend in een tabblad': 'Veel avatud vahekaardil',
+  'Naar prullenbak': 'Prügikasti',
+  'Deze presentatie staat ook op een andere plek:':
+      'See esitlus on olemas ka teises kohas:',
+  'Opruimen…': 'Korista…',
 };

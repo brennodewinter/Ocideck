@@ -1102,4 +1102,19 @@ const _dutchSourceDa = {
   'Pen · markeerstift · ⇧E': 'Pen · overstregning · ⇧E',
   'Gestapelde staaf': 'Stablet søjle',
   'Spreiding': 'Spredning',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identiske kopier',
+  'Zelfde titel, andere inhoud': 'Samme titel, forskelligt indhold',
+  'Dubbele presentaties opruimen': 'Ryd op i dublerede præsentationer',
+  'Naar de prullenbak verplaatst:': 'Flyttet til papirkurven:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Kunne ikke flyttes til papirkurven.',
+  'Geen dubbele presentaties gevonden.':
+      'Ingen dublerede præsentationer fundet.',
+  'Laatste kopie blijft behouden': 'Den sidste kopi bevares',
+  'Nog geopend in een tabblad': 'Stadig åben i en fane',
+  'Naar prullenbak': 'Til papirkurven',
+  'Deze presentatie staat ook op een andere plek:':
+      'Denne præsentation findes også et andet sted:',
+  'Opruimen…': 'Ryd op…',
 };

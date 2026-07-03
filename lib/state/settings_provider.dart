@@ -250,6 +250,18 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await prefs.setString('recentFileOrigins', jsonEncode(origins));
   }
 
+  /// Haal een pad uit de recente lijst (bijv. omdat het bestand naar de
+  /// prullenbak is verplaatst); de herkomst gaat mee.
+  Future<void> removeRecentFile(String path) async {
+    if (!state.recentFiles.contains(path)) return;
+    final updated = state.recentFiles.where((f) => f != path).toList();
+    final origins = {...state.recentFileOrigins}..remove(path);
+    state = state.copyWith(recentFiles: updated, recentFileOrigins: origins);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('recentFiles', updated);
+    await prefs.setString('recentFileOrigins', jsonEncode(origins));
+  }
+
   /// Leg vast waar een recent bestand vandaan is gehaald (Nextcloud-server of
   /// import-URL). Aan te roepen ná [addRecentFile]; alleen paden die in de
   /// recente lijst staan krijgen een herkomst, zodat de map niet meegroeit

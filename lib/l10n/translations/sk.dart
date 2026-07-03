@@ -1112,4 +1112,18 @@ const _dutchSourceSk = {
   'Pen · markeerstift · ⇧E': 'Pero · zvýrazňovač · ⇧E',
   'Gestapelde staaf': 'Skladaný stĺpcový',
   'Spreiding': 'Bodový',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identické kópie',
+  'Zelfde titel, andere inhoud': 'Rovnaký názov, iný obsah',
+  'Dubbele presentaties opruimen': 'Upratať duplicitné prezentácie',
+  'Naar de prullenbak verplaatst:': 'Presunuté do koša:',
+  'Kon niet naar de prullenbak verplaatsen.': 'Nepodarilo sa presunúť do koša.',
+  'Geen dubbele presentaties gevonden.':
+      'Nenašli sa žiadne duplicitné prezentácie.',
+  'Laatste kopie blijft behouden': 'Posledná kópia zostáva zachovaná',
+  'Nog geopend in een tabblad': 'Stále otvorená na karte',
+  'Naar prullenbak': 'Do koša',
+  'Deze presentatie staat ook op een andere plek:':
+      'Táto prezentácia existuje aj na inom mieste:',
+  'Opruimen…': 'Upratať…',
 };

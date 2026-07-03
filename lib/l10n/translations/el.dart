@@ -1119,4 +1119,19 @@ const _dutchSourceEl = {
   'Pen · markeerstift · ⇧E': 'Πένα · μαρκαδόρος · ⇧E',
   'Gestapelde staaf': 'Στοιβαγμένες ράβδοι',
   'Spreiding': 'Διασπορά',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Πανομοιότυπα αντίγραφα',
+  'Zelfde titel, andere inhoud': 'Ίδιος τίτλος, διαφορετικό περιεχόμενο',
+  'Dubbele presentaties opruimen': 'Εκκαθάριση διπλότυπων παρουσιάσεων',
+  'Naar de prullenbak verplaatst:': 'Μεταφέρθηκε στα απορρίμματα:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Δεν ήταν δυνατή η μεταφορά στα απορρίμματα.',
+  'Geen dubbele presentaties gevonden.':
+      'Δεν βρέθηκαν διπλότυπες παρουσιάσεις.',
+  'Laatste kopie blijft behouden': 'Το τελευταίο αντίγραφο διατηρείται',
+  'Nog geopend in een tabblad': 'Ακόμη ανοιχτή σε καρτέλα',
+  'Naar prullenbak': 'Στα απορρίμματα',
+  'Deze presentatie staat ook op een andere plek:':
+      'Αυτή η παρουσίαση υπάρχει και σε άλλη θέση:',
+  'Opruimen…': 'Εκκαθάριση…',
 };

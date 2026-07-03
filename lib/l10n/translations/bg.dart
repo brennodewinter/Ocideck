@@ -1122,4 +1122,19 @@ const _dutchSourceBg = {
   'Pen · markeerstift · ⇧E': 'Химикал · маркер · ⇧E',
   'Gestapelde staaf': 'Наслоена стълбовидна',
   'Spreiding': 'Разсейване',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Идентични копия',
+  'Zelfde titel, andere inhoud': 'Едно и също заглавие, различно съдържание',
+  'Dubbele presentaties opruimen': 'Разчистване на дублирани презентации',
+  'Naar de prullenbak verplaatst:': 'Преместено в кошчето:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Неуспешно преместване в кошчето.',
+  'Geen dubbele presentaties gevonden.':
+      'Не са намерени дублирани презентации.',
+  'Laatste kopie blijft behouden': 'Последното копие се запазва',
+  'Nog geopend in een tabblad': 'Все още отворена в раздел',
+  'Naar prullenbak': 'В кошчето',
+  'Deze presentatie staat ook op een andere plek:':
+      'Тази презентация съществува и на друго място:',
+  'Opruimen…': 'Разчистване…',
 };

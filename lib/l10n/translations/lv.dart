@@ -1106,4 +1106,18 @@ const _dutchSourceLv = {
   'Pen · markeerstift · ⇧E': 'Pildspalva · marķieris · ⇧E',
   'Gestapelde staaf': 'Sakrauts stabiņš',
   'Spreiding': 'Izkliede',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identiskas kopijas',
+  'Zelfde titel, andere inhoud': 'Tāds pats nosaukums, atšķirīgs saturs',
+  'Dubbele presentaties opruimen': 'Sakārtot dublētās prezentācijas',
+  'Naar de prullenbak verplaatst:': 'Pārvietots uz atkritni:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Neizdevās pārvietot uz atkritni.',
+  'Geen dubbele presentaties gevonden.': 'Dublētas prezentācijas nav atrastas.',
+  'Laatste kopie blijft behouden': 'Pēdējā kopija tiek saglabāta',
+  'Nog geopend in een tabblad': 'Vēl atvērta cilnē',
+  'Naar prullenbak': 'Uz atkritni',
+  'Deze presentatie staat ook op een andere plek:':
+      'Šī prezentācija pastāv arī citā vietā:',
+  'Opruimen…': 'Sakārtot…',
 };

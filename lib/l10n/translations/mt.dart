@@ -1119,4 +1119,19 @@ const _dutchSourceMt = {
   'Pen · markeerstift · ⇧E': 'Pinna · markatur · ⇧E',
   'Gestapelde staaf': 'Bar stakkjat',
   'Spreiding': 'Scatter',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Kopji identiċi',
+  'Zelfde titel, andere inhoud': 'L-istess titlu, kontenut differenti',
+  'Dubbele presentaties opruimen': 'Naddaf il-preżentazzjonijiet duplikati',
+  'Naar de prullenbak verplaatst:': 'Imċaqlaq lejn l-iskart:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Ma setax jiġi mċaqlaq lejn l-iskart.',
+  'Geen dubbele presentaties gevonden.':
+      'Ma nstabu l-ebda preżentazzjonijiet duplikati.',
+  'Laatste kopie blijft behouden': 'L-aħħar kopja tinżamm',
+  'Nog geopend in een tabblad': 'Għadha miftuħa f’tab',
+  'Naar prullenbak': 'Lejn l-iskart',
+  'Deze presentatie staat ook op een andere plek:':
+      'Din il-preżentazzjoni teżisti wkoll x’imkien ieħor:',
+  'Opruimen…': 'Naddaf…',
 };

@@ -1118,4 +1118,18 @@ const _dutchSourceUk = {
   'Pen · markeerstift · ⇧E': 'Ручка · маркер · ⇧E',
   'Gestapelde staaf': 'Стовпчикова з накопиченням',
   'Spreiding': 'Точкова',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Ідентичні копії',
+  'Zelfde titel, andere inhoud': 'Однакова назва, різний вміст',
+  'Dubbele presentaties opruimen': 'Прибрати дубльовані презентації',
+  'Naar de prullenbak verplaatst:': 'Переміщено в смітник:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Не вдалося перемістити в смітник.',
+  'Geen dubbele presentaties gevonden.': 'Дубльованих презентацій не знайдено.',
+  'Laatste kopie blijft behouden': 'Остання копія зберігається',
+  'Nog geopend in een tabblad': 'Ще відкрита у вкладці',
+  'Naar prullenbak': 'У смітник',
+  'Deze presentatie staat ook op een andere plek:':
+      'Ця презентація існує також в іншому місці:',
+  'Opruimen…': 'Прибрати…',
 };

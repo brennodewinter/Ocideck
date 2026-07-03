@@ -1093,4 +1093,17 @@ const _dutchSourceTlh = {
   'Pen · markeerstift · ⇧E': 'ghItlhwI\' · boch \'ang · ⇧E',
   'Gestapelde staaf': 'SIrgh muvlu\'bogh',
   'Spreiding': 'boch',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'velmey nIb',
+  'Zelfde titel, andere inhoud': 'per rap, pIm ghItlh',
+  'Dubbele presentaties opruimen': 'cha\'nobmey nIb Say\'moH',
+  'Naar de prullenbak verplaatst:': 'veQDaq vIHmoHlu\'pu\':',
+  'Kon niet naar de prullenbak verplaatsen.': 'veQDaq vIHmoHlaHbe\'lu\'.',
+  'Geen dubbele presentaties gevonden.': 'cha\'nobmey nIb tu\'be\'lu\'.',
+  'Laatste kopie blijft behouden': 'vel Qav pollu\'',
+  'Nog geopend in een tabblad': '\'echletDaq poStaH',
+  'Naar prullenbak': 'veQDaq',
+  'Deze presentatie staat ook op een andere plek:':
+      'latlh DaqDaq je tu\'lu\' cha\'nobvam:',
+  'Opruimen…': 'Say\'moH…',
 };
