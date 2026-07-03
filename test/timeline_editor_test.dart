@@ -32,6 +32,41 @@ void main() {
     expect(find.byType(Slider), findsNothing);
   });
 
+  testWidgets('the place-pin toggles the current point on and off', (
+    tester,
+  ) async {
+    // Tall surface so all four event rows (and their pins) are tappable.
+    await tester.binding.setSurfaceSize(const Size(900, 1800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    Slide? out;
+    await tester.pumpWidget(
+      _host(Slide.create(SlideType.timeline), (s) => out = s),
+    );
+    await tester.pump();
+
+    // A fresh timeline has no current point: four outlined pins.
+    expect(find.byIcon(Icons.place_outlined), findsNWidgets(4));
+
+    // Marking the second event stores its (0-based) index.
+    await tester.tap(find.byIcon(Icons.place_outlined).at(1));
+    await tester.pump();
+    expect(out!.timelineCurrentIndex, 1);
+    expect(find.byIcon(Icons.place), findsOneWidget);
+
+    // Marking another event moves the single current point there.
+    await tester.tap(find.byIcon(Icons.place_outlined).at(2));
+    await tester.pump();
+    expect(out!.timelineCurrentIndex, 3);
+    expect(find.byIcon(Icons.place), findsOneWidget);
+
+    // Tapping the active pin clears the current point again.
+    await tester.tap(find.byIcon(Icons.place));
+    await tester.pump();
+    expect(out!.timelineCurrentIndex, isNull);
+    expect(find.byIcon(Icons.place_outlined), findsNWidgets(4));
+  });
+
   testWidgets('dragging the speed slider changes the draw-in duration', (
     tester,
   ) async {
