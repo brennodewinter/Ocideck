@@ -494,6 +494,21 @@ token, and only when it differs from the 1600 ms default:
 
 It is the full draw-in duration in milliseconds, clamped to 400–6000 ms.
 
+One event can be highlighted as the **current point** ("where we are now", e.g.
+a project's present phase): its card gets a solid accent border and glow, and
+its node grows with a halo ring. It round-trips as an HTML comment holding the
+**1-based** event number (the Nth list item), and only when a current point is
+set:
+
+```markdown
+<!-- ocideck_timeline_current: 2 -->
+```
+
+A number that does not point at an existing event is ignored (no highlight).
+Without a current point the *last* event carries a subtle emphasis by default;
+an explicit current point takes that highlight over, so exactly one "you are
+here" shows.
+
 > The reveal step (how many events are currently shown in step mode) is
 > **session-only** and never written to the file.
 
