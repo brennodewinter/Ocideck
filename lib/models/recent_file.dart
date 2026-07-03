@@ -57,8 +57,7 @@ class RecentFile {
     'slideCount': slideCount,
     'tlp': tlp.key,
     if (lastExportFormat != null) 'lastExportFormat': lastExportFormat,
-    if (lastExportAt != null)
-      'lastExportAt': lastExportAt!.toIso8601String(),
+    if (lastExportAt != null) 'lastExportAt': lastExportAt!.toIso8601String(),
   };
 
   factory RecentFile.fromJson(Map<String, Object?> json) {
@@ -89,8 +88,7 @@ class RecentFile {
       if (decoded is! List) return const [];
       return [
         for (final item in decoded)
-          if (item is Map)
-            RecentFile.fromJson(Map<String, Object?>.from(item)),
+          if (item is Map) RecentFile.fromJson(Map<String, Object?>.from(item)),
       ].where((f) => f.path.isNotEmpty).toList();
     } catch (e) {
       logWarning('RecentFile.decodeList: onleesbare recente-lijst', e);

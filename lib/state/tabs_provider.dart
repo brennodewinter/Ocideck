@@ -312,7 +312,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
       final newTabs = [...state.tabs, tab];
       state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
     }
-    await _settings.addRecentFile(path);
+    await _settings.addRecentFile(
+      path,
+      slideCount: deck.slides.length,
+      tlp: deck.tlp,
+    );
   }
 
   Future<OpenResult> openFileByPath(String path, {int? selectIndex}) async {
@@ -345,7 +349,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (!mounted) return OpenResult.unreadable;
     final index = (selectIndex ?? 0).clamp(0, deck.slides.length - 1);
     _placeDeckInTab(deck, filePath: path, index: index);
-    await _settings.addRecentFile(path);
+    await _settings.addRecentFile(
+      path,
+      slideCount: deck.slides.length,
+      tlp: deck.tlp,
+    );
     return OpenResult.opened;
   }
 

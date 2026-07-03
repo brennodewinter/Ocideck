@@ -1,6 +1,8 @@
 import 'chart.dart' show normalizeChartColor;
+import 'recent_file.dart';
 import 'webdav_settings.dart';
 
+export 'recent_file.dart';
 export 'webdav_settings.dart';
 
 /// Glyph used for unordered (bullet) list markers. [dot] is the classic
@@ -583,7 +585,7 @@ class AppSettings {
   /// colours are styling and live here, not in the deck `.md`.
   final List<CockpitColorScheme> cockpitColorSchemes;
   final String selectedCockpitColorSchemeName;
-  final List<String> recentFiles;
+  final List<RecentFile> recentFiles;
 
   /// Optioneel vrijgaveplafond voor de classificatie-gate, opgeslagen als
   /// TLP-sleutel (zie `TlpLevelX.key`). `null` = geen plafond, alles mag worden
@@ -711,7 +713,7 @@ class AppSettings {
     String? selectedAppAppearanceProfileName,
     List<CockpitColorScheme>? cockpitColorSchemes,
     String? selectedCockpitColorSchemeName,
-    List<String>? recentFiles,
+    List<RecentFile>? recentFiles,
     String? maxReleaseExportTlpKey,
     String? minRequiredExportTlpKey,
     bool? requireClassificationOnExport,

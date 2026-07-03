@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../models/deck.dart' show TlpLevel;
 import '../models/settings.dart';
 import '../services/secret_store.dart';
 import '../utils/log.dart';
@@ -92,7 +93,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           cockpitSchemes.any((scheme) => scheme.name == selectedCockpit)
           ? selectedCockpit
           : 'Standaard',
-      recentFiles: prefs.getStringList('recentFiles') ?? [],
+      recentFiles: _loadRecentFiles(prefs),
       maxReleaseExportTlpKey: prefs.getString('maxReleaseExportTlp'),
       minRequiredExportTlpKey: prefs.getString('minRequiredExportTlp'),
       requireClassificationOnExport:
@@ -228,14 +229,57 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await prefs.setBool('allowRemoteMedia', enabled);
   }
 
-  Future<void> addRecentFile(String path) async {
-    final updated = [
-      path,
-      ...state.recentFiles.where((f) => f != path),
-    ].take(10).toList();
-    state = state.copyWith(recentFiles: updated);
+  /// Recente lijst: de nieuwe JSON-opslag ('recentFilesV2') wint; de oude
+  /// paden-lijst ('recentFiles') wordt eenmalig als metadata-loze entries
+  /// gemigreerd en daarna alleen nog overschreven bij het wegschrijven.
+  List<RecentFile> _loadRecentFiles(SharedPreferences prefs) {
+    final v2 = RecentFile.decodeList(prefs.getString('recentFilesV2'));
+    if (v2.isNotEmpty) return v2;
+    return RecentFile.fromLegacyPaths(prefs.getStringList('recentFiles') ?? []);
+  }
+
+  Future<void> _persistRecentFiles(List<RecentFile> files) async {
+    state = state.copyWith(recentFiles: files);
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList('recentFiles', updated);
+    await prefs.setString('recentFilesV2', RecentFile.encodeList(files));
+  }
+
+  /// Zet [path] bovenaan de recente lijst en ververs de metadata die bij het
+  /// openen bekend is. Eerder geregistreerde export-info blijft bewaard.
+  Future<void> addRecentFile(
+    String path, {
+    int? slideCount,
+    TlpLevel? tlp,
+  }) async {
+    final existing = state.recentFiles.where((f) => f.path == path).firstOrNull;
+    final entry = (existing ?? RecentFile(path: path)).copyWith(
+      openedAt: DateTime.now(),
+      slideCount: slideCount,
+      tlp: tlp,
+    );
+    final updated = [
+      entry,
+      ...state.recentFiles.where((f) => f.path != path),
+    ].take(10).toList();
+    await _persistRecentFiles(updated);
+  }
+
+  /// Onthoud dat [path] zojuist als [formatLabel] ("PDF", "PPTX", "HTML") is
+  /// geëxporteerd, zodat de recente lijst dat kan tonen. Alleen bestanden die
+  /// al in de lijst staan worden bijgewerkt — exporteren maakt een bestand
+  /// niet "recent geopend".
+  Future<void> recordRecentFileExport(String path, String formatLabel) async {
+    if (!state.recentFiles.any((f) => f.path == path)) return;
+    final updated = [
+      for (final f in state.recentFiles)
+        f.path == path
+            ? f.copyWith(
+                lastExportFormat: formatLabel,
+                lastExportAt: DateTime.now(),
+              )
+            : f,
+    ];
+    await _persistRecentFiles(updated);
   }
 
   Future<void> setLanguageCode(String code) async {
