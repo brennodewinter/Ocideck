@@ -28,6 +28,7 @@ import 'markdown_safety.dart';
 import 'markdown_service.dart';
 import 'web_asset_store.dart';
 
+part 'parts/file_service_net.dart';
 part 'parts/file_service_open.dart';
 part 'parts/file_service_package.dart';
 part 'parts/file_service_project.dart';
@@ -753,71 +754,6 @@ class FileService {
     return dir;
   }
 
-  /// Download een presentatie vanaf [url]. Een zip-pakket wordt uitgepakt;
-  /// platte markdown wordt als losse `.md` opgeslagen. Geeft het pad naar het
-  /// markdown-bestand terug.
-
-  /// SSRF host/address guards live in [NetGuard] so the URL-import path and the
-  /// live remote-media path share exactly the same rules.
-  static bool _isBlockedHost(String host) => NetGuard.isBlockedHost(host);
-
-  static Future<List<InternetAddress>?> _safeResolve(String host) =>
-      NetGuard.safeResolve(host);
-
-  Future<String?> importFromUrl(String url, String destParentDir) async {
-    final uri = Uri.tryParse(url.trim());
-    if (uri == null || !uri.hasScheme) return null;
-    // Only fetch over web schemes, and never reach private/loopback hosts.
-    final scheme = uri.scheme.toLowerCase();
-    if (scheme != 'http' && scheme != 'https') return null;
-    if (_isBlockedHost(uri.host)) return null;
-    // Resolve the hostname up front and reject internal addresses.
-    final safeAddrs = await _safeResolve(uri.host);
-    if (safeAddrs == null) return null;
-    final pinned = safeAddrs.first;
-
-    final List<int> bytes;
-    try {
-      final client = HttpClient()
-        ..connectionTimeout = const Duration(seconds: 15)
-        // Pin the socket to the validated address so a DNS rebind between the
-        // check above and the actual connect can't point us at an internal IP.
-        // TLS (for https) still validates against the original hostname.
-        ..connectionFactory = (u, proxyHost, proxyPort) =>
-            Socket.startConnect(pinned, u.port);
-      try {
-        final request = await client.getUrl(uri);
-        // Don't auto-follow redirects: a 3xx could point at a private host and
-        // bypass the SSRF check above.
-        request.followRedirects = false;
-        final response = await request.close().timeout(
-          const Duration(seconds: 30),
-        );
-        if (response.statusCode != 200) return null;
-        if (response.contentLength > maxPackageBytes) return null;
-        final builder = BytesBuilder(copy: false);
-        await for (final chunk in response) {
-          builder.add(chunk);
-          if (builder.length > maxPackageBytes) return null; // runaway body
-        }
-        bytes = builder.takeBytes();
-      } finally {
-        client.close(force: true);
-      }
-    } catch (e) {
-      logError('FileService.importFromUrl: download failed', e);
-      return null;
-    }
-
-    // Zip-magie → pakket; anders als markdown behandelen.
-    if (looksLikeZipBytes(bytes)) {
-      return importPackageBytes(bytes, destParentDir);
-    }
-
-    // Platte markdown.
-    return importMarkdownBytes(bytes, destParentDir, uri.path);
-  }
-
   /// Zip-magie 'PK\x03\x04' — herkent een .ocideck/zip-pakket aan zijn kop.
   static bool looksLikeZipBytes(List<int> bytes) =>
       bytes.length >= 4 &&
@@ -826,35 +762,8 @@ class FileService {
       bytes[2] == 0x03 &&
       bytes[3] == 0x04;
 
-  /// Haal ruwe bytes op van [url] voor de web-URL-import. Op web bewaken de
-  /// browser (CORS, mixed content) en de pagina-CSP (`connect-src`) welke
-  /// hosts bereikbaar zijn — de dart:io SSRF-pinning van [importFromUrl]
-  /// bestaat daar niet en kan er ook niet draaien. Hier begrenzen we schema
-  /// en omvang. Retourneert null bij elke fout, net als [importFromUrl].
-  Future<Uint8List?> fetchUrlBytes(
-    String url, {
-    int maxBytes = maxDeckMarkdownBytes,
-    @visibleForTesting http.Client? client,
-  }) async {
-    final uri = Uri.tryParse(url.trim());
-    if (uri == null || !uri.hasScheme) return null;
-    final scheme = uri.scheme.toLowerCase();
-    if (scheme != 'http' && scheme != 'https') return null;
-    final owned = client == null;
-    final c = client ?? http.Client();
-    try {
-      final response = await c.get(uri).timeout(const Duration(seconds: 30));
-      if (response.statusCode != 200) return null;
-      final bytes = response.bodyBytes;
-      if (bytes.length > maxBytes) return null;
-      return bytes;
-    } catch (e) {
-      logError('FileService.fetchUrlBytes: download failed', e);
-      return null;
-    } finally {
-      if (owned) c.close();
-    }
-  }
+  // ── Netwerk ── zie parts/file_service_net.dart voor de URL-import
+  // (desktop, met SSRF-pinning) en de web-fetch met hulppunt-terugval.
 
   /// Open een deck puur uit in-memory markdown: dezelfde fail-closed volgorde
   /// als [openDeckDetailed] (veiligheidsscan → marp-sniff → parse → actief

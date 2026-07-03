@@ -77,6 +77,46 @@ void main() {
       );
     });
 
+    test('valt op web terug op het same-origin fetch-hulppunt', () async {
+      // Direct fetchen "faalt" zoals bij een bron zonder CORS; de tweede
+      // poging moet naar het same-origin hulppunt gaan met de doel-URL als
+      // query, en die bytes horen gewoon door te komen.
+      const target = 'https://elders.example/deck.md';
+      final client = MockClient((req) async {
+        if (req.url.host == 'elders.example') {
+          throw http.ClientException('CORS-weigering');
+        }
+        expect(req.url.path, endsWith('fetch-proxy'));
+        expect(req.url.queryParameters['url'], target);
+        return http.Response(_goodDeck, 200);
+      });
+      final bytes = await fileService().fetchUrlBytes(
+        target,
+        client: client,
+        viaProxyFallback: true,
+      );
+      expect(bytes, isNotNull);
+      expect(utf8.decode(bytes!), _goodDeck);
+    });
+
+    test('slaat het hulppunt over wanneer direct fetchen slaagt', () async {
+      var proxyCalls = 0;
+      final client = MockClient((req) async {
+        if (req.url.path.endsWith('fetch-proxy')) {
+          proxyCalls++;
+          return http.Response('nee', 500);
+        }
+        return http.Response(_goodDeck, 200);
+      });
+      final bytes = await fileService().fetchUrlBytes(
+        'https://example.org/deck.md',
+        client: client,
+        viaProxyFallback: true,
+      );
+      expect(bytes, isNotNull);
+      expect(proxyCalls, 0);
+    });
+
     test('refuses non-web schemes without fetching', () async {
       final client = MockClient((req) async => fail('mag niet fetchen'));
       expect(
