@@ -1,0 +1,26 @@
+Windows Registry Editor Version 5.00
+
+; OciDeck-bestandsassociaties (per gebruiker, geen beheerdersrechten nodig).
+; Pas de drie paden naar ocideck.exe aan naar de eigen installatiemap en
+; dubbelklik dit bestand, of neem dezelfde sleutels op in een installer.
+;
+; - .ocideck: OciDeck is de standaard (dubbelklik opent direct).
+; - .md: OciDeck verschijnt als optie onder "Openen met…", maar neemt de
+;   standaard niet over.
+;
+; De app opent het meegegeven pad bij het starten (commandoregel-argument).
+
+[HKEY_CURRENT_USER\Software\Classes\OciDeck.Package]
+@="OciDeck presentation package"
+
+[HKEY_CURRENT_USER\Software\Classes\OciDeck.Package\DefaultIcon]
+@="\"C:\\Program Files\\OciDeck\\ocideck.exe\",0"
+
+[HKEY_CURRENT_USER\Software\Classes\OciDeck.Package\shell\open\command]
+@="\"C:\\Program Files\\OciDeck\\ocideck.exe\" \"%1\""
+
+[HKEY_CURRENT_USER\Software\Classes\.ocideck]
+@="OciDeck.Package"
+
+[HKEY_CURRENT_USER\Software\Classes\.md\OpenWithProgids]
+"OciDeck.Package"=hex(0):

@@ -77,12 +77,15 @@ extension FileServiceNet on FileService {
     int maxBytes = FileService.maxDeckMarkdownBytes,
     @visibleForTesting http.Client? client,
     @visibleForTesting bool? viaProxyFallback,
+    @visibleForTesting bool closeInjectedClient = false,
   }) async {
     final uri = Uri.tryParse(url.trim());
     if (uri == null || !uri.hasScheme) return null;
     final scheme = uri.scheme.toLowerCase();
     if (scheme != 'http' && scheme != 'https') return null;
-    final owned = client == null;
+    // Een zelf-gemaakte client sluiten we; een geïnjecteerde (test) client
+    // niet — tenzij de test de owned-close-race expliciet wil reproduceren.
+    final owned = client == null || closeInjectedClient;
     final c = client ?? http.Client();
     try {
       final direct = await _fetchCapped(c, uri, maxBytes);
@@ -96,7 +99,10 @@ extension FileServiceNet on FileService {
         final proxied = Uri.base.resolve(
           'fetch-proxy?url=${Uri.encodeComponent(url.trim())}',
         );
-        return _fetchCapped(
+        // `await` is essentieel: zonder wacht het finally-blok niet en sluit
+        // het de HttpClient terwijl deze fetch nog loopt, waardoor die stil
+        // afbreekt en de terugval altijd faalt.
+        return await _fetchCapped(
           c,
           proxied,
           maxBytes,

@@ -16,6 +16,35 @@ const _goodDeck = '---\nmarp: true\ntitle: Webdeck\n---\n\n# Hallo web\n';
 const _scriptDeck =
     '---\nmarp: true\ntitle: X\n---\n\n# Hi\n\n<script>steal()</script>\n';
 
+/// Een [http.Client] die na [close] geen request meer toestaat — zo valt de
+/// owned-close-race (finally sluit de client vóór de fetch af is) hard om in
+/// plaats van stil.
+class _CloseAwareClient extends http.BaseClient {
+  _CloseAwareClient(this._handler);
+
+  final Future<http.Response> Function(http.Request request) _handler;
+  bool closed = false;
+
+  @override
+  Future<http.StreamedResponse> send(http.BaseRequest request) async {
+    if (closed) {
+      throw http.ClientException('client is al gesloten', request.url);
+    }
+    final res = await _handler(request as http.Request);
+    if (closed) {
+      throw http.ClientException('client sloot tijdens de fetch', request.url);
+    }
+    return http.StreamedResponse(
+      Stream.value(res.bodyBytes),
+      res.statusCode,
+      request: request,
+    );
+  }
+
+  @override
+  void close() => closed = true;
+}
+
 /// Zelfde opzet als state_providers_extra_test: wegwerp-herstelmap zodat de
 /// autosave-plumbing nooit het echte app-support-pad (platformkanaal) raakt.
 ProviderContainer _container() {
@@ -97,6 +126,31 @@ void main() {
       );
       expect(bytes, isNotNull);
       expect(utf8.decode(bytes!), _goodDeck);
+    });
+
+    test('terugval overleeft het sluiten van de eigen client', () async {
+      // Regressie: de proxy-fetch werd met `return` (zonder await) gedaan,
+      // waardoor het finally-blok de client sloot terwijl de fetch nog liep en
+      // de terugval altijd faalde. Deze client antwoordt op de proxy pas na een
+      // async gap en gooit zodra hij gesloten is — zonder de await zou de bytes
+      // dus nooit compleet doorkomen.
+      const target = 'https://elders.example/deck.md';
+      final client = _CloseAwareClient((req) async {
+        if (req.url.host == 'elders.example') {
+          throw http.ClientException('CORS-weigering');
+        }
+        await Future<void>.delayed(const Duration(milliseconds: 20));
+        return http.Response(_goodDeck, 200);
+      });
+      final bytes = await fileService().fetchUrlBytes(
+        target,
+        client: client,
+        viaProxyFallback: true,
+        closeInjectedClient: true,
+      );
+      expect(bytes, isNotNull);
+      expect(utf8.decode(bytes!), _goodDeck);
+      expect(client.closed, isTrue, reason: 'client hoort na afloop dicht');
     });
 
     test('slaat het hulppunt over wanneer direct fetchen slaagt', () async {

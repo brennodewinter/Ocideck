@@ -86,30 +86,19 @@ Future<void> _scanLibrary(BuildContext context, WidgetRef ref) async {
 Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
   final url = await _showUrlDialog(context);
   if (url == null || url.trim().isEmpty || !context.mounted) return;
+  if (isWebPlatform) {
+    // Web: de browser haalt het bestand op (CORS + CSP bewaken het verkeer)
+    // en het deck wordt volledig in het geheugen geopend — het dart:io-
+    // downloadpad hieronder bestaat op web niet.
+    return _importUrlWeb(context, ref, url);
+  }
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
   bool ok;
   try {
-    if (isWebPlatform) {
-      // Web: de browser haalt het bestand op (CORS + CSP bewaken het verkeer)
-      // en het deck wordt volledig in het geheugen geopend — het dart:io-
-      // downloadpad hieronder bestaat op web niet.
-      final result = await ref
-          .read(tabsProvider.notifier)
-          .importFromUrlWeb(url);
-      if (result == OpenResult.notAPresentation) {
-        _reportOpenFailure(messenger, l10n, result);
-        return;
-      }
-      ok = result == OpenResult.opened || result == OpenResult.blocked;
-    } else {
-      ok = await ref
-          .read(tabsProvider.notifier)
-          .importFromUrl(
-            url,
-            homeDir: ref.read(settingsProvider).homeDirectory,
-          );
-    }
+    ok = await ref
+        .read(tabsProvider.notifier)
+        .importFromUrl(url, homeDir: ref.read(settingsProvider).homeDirectory);
   } catch (e, s) {
     // Een platform- of IO-fout mag nooit als stilte eindigen: de gebruiker
     // heeft net een URL ingetikt en verwacht óf een tab óf een melding.
@@ -117,14 +106,47 @@ Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
     ok = false;
   }
   if (!ok && context.mounted) {
-    // Op web is de meest voorkomende oorzaak geen tikfout maar CORS: de
-    // browser mag alleen lezen van servers die dat expliciet toestaan.
-    final message = isWebPlatform
-        ? '${l10n.d('Kon van deze URL geen presentatie ophalen.')}\n'
-              '${l10n.d('Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).')}'
-        : l10n.d('Kon van deze URL geen presentatie ophalen.');
-    messenger.showSnackBar(SnackBar(content: Text(message)));
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(l10n.d('Kon van deze URL geen presentatie ophalen.')),
+      ),
+    );
   }
+}
+
+/// Web-kern van de URL-import: ophalen (met hulppunt-terugval), dezelfde
+/// security-gate, en de juiste melding. Gedeeld door de importdialoog en de
+/// `?deck=`-deeplink waarmee een link OciDeck én een presentatie tegelijk
+/// opent.
+Future<void> _importUrlWeb(
+  BuildContext context,
+  WidgetRef ref,
+  String url,
+) async {
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
+  OpenResult result;
+  try {
+    result = await ref.read(tabsProvider.notifier).importFromUrlWeb(url);
+  } catch (e, s) {
+    logError('_importUrlWeb: import failed', e, s);
+    result = OpenResult.unreadable;
+  }
+  if (result == OpenResult.notAPresentation) {
+    _reportOpenFailure(messenger, l10n, result);
+    return;
+  }
+  if (result == OpenResult.opened || result == OpenResult.blocked) return;
+  // Op web is de meest voorkomende oorzaak geen tikfout maar CORS: de
+  // browser mag alleen lezen van servers die dat expliciet toestaan.
+  messenger.showSnackBar(
+    SnackBar(
+      content: Text(
+        '${l10n.d('Kon van deze URL geen presentatie ophalen.')}\n'
+        '${l10n.d('Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).')}',
+      ),
+    ),
+  );
 }
 
 /// Blader door de Nextcloud/WebDAV-bron, download het gekozen deck, haal het

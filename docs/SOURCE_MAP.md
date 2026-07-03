@@ -101,6 +101,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 
 ## `lib/platform/` — platform abstraction (conditional imports)
 
+- `launch_files.dart` — Launch-argumenten (Windows/Linux-bestandsassociaties) en de `?deck=`-deeplink-parser.
 - `native_window.dart` — Export selector for platform-specific window configuration.
 - `native_window_io.dart` — Initialises native desktop window options (size, title, focus).
 - `native_window_stub.dart` — No-op window stub for web (part of `native_window`).
