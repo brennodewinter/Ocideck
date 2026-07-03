@@ -289,6 +289,19 @@ void main() {
       expect(out.bullets2, ['Rechts punt', '\t\tRechts diep']);
     });
 
+    test('twoBullets slide keeps its subtitle', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.twoBullets).copyWith(
+          title: 'Vergelijking',
+          subtitle: 'Een ondertitel',
+          bullets: ['Links'],
+          bullets2: ['Rechts'],
+        ),
+      );
+      expect(out.type, SlideType.twoBullets);
+      expect(out.subtitle, 'Een ondertitel');
+    });
+
     test('twoBullets slide keeps optional column headings', () {
       final out = _roundTrip(
         Slide.create(SlideType.twoBullets).copyWith(
@@ -420,6 +433,21 @@ void main() {
       expect(out.imagePath, 'images/big.png');
       expect(out.imageSize, 70);
       expect(out.imageCaption, 'Foto');
+    });
+
+    test('YouTube embed keeps its source and trim window', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.video).copyWith(
+          title: 'Embed',
+          videoPath: 'https://www.youtube.com/watch?v=abc12345678',
+          videoStartMs: 1500,
+          videoEndMs: 30000,
+        ),
+      );
+      expect(out.type, SlideType.video);
+      expect(out.videoPath, 'https://www.youtube.com/watch?v=abc12345678');
+      expect(out.videoStartMs, 1500);
+      expect(out.videoEndMs, 30000);
     });
 
     test('video slide keeps video and audio with autoplay flags', () {
