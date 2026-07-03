@@ -125,7 +125,12 @@ double _measureBlock({
         lineHeight: kRichTextBodyLineHeight,
         fontFamily: font,
       );
+      // Bullets meten met het '• '-prefix waarmee de render ze tekent. In het
+      // testfont meet '•' even breed als '-', dus voor de mutatie-check is dit
+      // predicaat daar niet te onderscheiden — alleen proportionele
+      // productiefonts laten het verschil zien.
     } else if (line.startsWith('- ')) {
+      // mutation: equivalent
       height += measureTextHeight(
         '• ${line.substring(2)}',
         bodySize * scale,

@@ -85,6 +85,9 @@ extension _MarkdownSerialize on MarkdownService {
     bool forExport,
   ) {
     if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
+    // De parser leest `## ` als ondertitel (ook uit handgeschreven decks);
+    // zonder terugschrijven verdween die stilletjes bij de eerste keer opslaan.
+    if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
     _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);
     if (slide.continuesSplit) {
       buf.writeln('<!-- ocideck_continue_split: true -->');

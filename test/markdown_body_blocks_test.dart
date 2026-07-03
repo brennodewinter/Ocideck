@@ -41,6 +41,11 @@ void main() {
       final blocks = parseMarkdownBodyBlocks('a\n\nb');
       expect(blocks.map((b) => b.markdown), ['a', '', 'b']);
     });
+
+    test('a level-1 heading after text starts a new block', () {
+      final blocks = parseMarkdownBodyBlocks('alpha\n# Kop\ngamma');
+      expect(blocks.map((b) => b.markdown), ['alpha', '# Kop\ngamma']);
+    });
   });
 
   group('markdownBodyHeight', () {
@@ -68,6 +73,26 @@ void main() {
         'Line one.\n\nLine two.\n\nLine three with several more words that wrap.',
       );
       expect(many, greaterThan(one));
+    });
+
+    // Koppen meten op hun eigen (grotere) korpsgrootte, niet op bodygrootte —
+    // anders denkt de paginering dat een kop-rijke pagina past terwijl de
+    // render hem groter tekent. bodySize 16 < kop2 (0.03*800=24) < kop1
+    // (0.04*800=32), dus beide relaties zijn strikt.
+    double measureSmallBody(String md) => markdownBodyHeight(
+      markdown: md,
+      contentW: 400,
+      refW: 800,
+      bodySize: 16,
+      font: 'Roboto',
+    );
+
+    test('a level-1 heading measures taller than the same text as body', () {
+      expect(measureSmallBody('# Kop'), greaterThan(measureSmallBody('Kop')));
+    });
+
+    test('a level-2 heading measures taller than the same text as body', () {
+      expect(measureSmallBody('## Kop'), greaterThan(measureSmallBody('Kop')));
     });
   });
 }
