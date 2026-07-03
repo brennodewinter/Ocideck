@@ -1119,4 +1119,7 @@ const _dutchSourceSv = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Bestämmer färger, typsnitt och logotyp. Kan ändras senare via presentationsegenskaperna eller inställningarna.',
   'Stijlprofielen beheren…': 'Hantera stilprofiler…',
+  'Geavanceerd': 'Avancerat',
+  'Knippen en audio': 'Klippning och ljud',
+  'Bereik en kleurzones': 'Intervall och färgzoner',
 };

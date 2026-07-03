@@ -1127,4 +1127,7 @@ const _dutchSourcePl = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Określa kolory, czcionkę i logo. Można to później zmienić we właściwościach prezentacji lub w ustawieniach.',
   'Stijlprofielen beheren…': 'Zarządzaj profilami stylu…',
+  'Geavanceerd': 'Zaawansowane',
+  'Knippen en audio': 'Przycinanie i dźwięk',
+  'Bereik en kleurzones': 'Zakres i strefy kolorów',
 };

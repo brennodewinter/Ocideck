@@ -1108,4 +1108,7 @@ const _dutchSourceAddFy = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Bepaalt kleuren, lettertype en logo. Letter oan te passen fia de presintaasje-eigenskippen of ynstellingen.',
   'Stijlprofielen beheren…': 'Stylprofilen beheare…',
+  'Geavanceerd': 'Avansearre',
+  'Knippen en audio': 'Knippe en audio',
+  'Bereik en kleurzones': 'Berik en kleursônes',
 };

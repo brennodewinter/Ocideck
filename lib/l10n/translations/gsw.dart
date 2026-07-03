@@ -1120,4 +1120,7 @@ const _dutchSourceGsw = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Bestimmt Farbe, Schrift und Logo. Chasch spöter über d Präsentations-Eigeschafte oder d Iischtellige ändere.',
   'Stijlprofielen beheren…': 'Stilprofil verwalte…',
+  'Geavanceerd': 'Erwiitert',
+  'Knippen en audio': 'Schniide und Audio',
+  'Bereik en kleurzones': 'Beriich und Farbzone',
 };

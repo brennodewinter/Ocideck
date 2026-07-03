@@ -1130,4 +1130,7 @@ const _dutchSourceRo = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Stabilește culorile, fontul și sigla. Se poate schimba ulterior din proprietățile prezentării sau din setări.',
   'Stijlprofielen beheren…': 'Gestionează profilurile de stil…',
+  'Geavanceerd': 'Avansat',
+  'Knippen en audio': 'Decupare și audio',
+  'Bereik en kleurzones': 'Interval și zone de culoare',
 };

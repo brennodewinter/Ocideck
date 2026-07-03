@@ -1132,4 +1132,7 @@ const _dutchSourceUk = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Визначає кольори, шрифт і логотип. Пізніше можна змінити у властивостях презентації або налаштуваннях.',
   'Stijlprofielen beheren…': 'Керувати профілями стилю…',
+  'Geavanceerd': 'Розширені',
+  'Knippen en audio': 'Обрізання та звук',
+  'Bereik en kleurzones': 'Діапазон і кольорові зони',
 };

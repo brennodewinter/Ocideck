@@ -1133,4 +1133,7 @@ const _dutchSourceMt = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Jiddetermina l-kuluri, il-font u l-logo. Jista\' jinbidel aktar tard mill-proprjetajiet tal-preżentazzjoni jew mis-settings.',
   'Stijlprofielen beheren…': 'Immaniġġja l-profili tal-istil…',
+  'Geavanceerd': 'Avvanzat',
+  'Knippen en audio': 'Qtugħ u awdjo',
+  'Bereik en kleurzones': 'Firxa u żoni tal-kulur',
 };

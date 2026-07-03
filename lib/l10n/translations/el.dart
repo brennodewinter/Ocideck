@@ -1133,4 +1133,7 @@ const _dutchSourceEl = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Καθορίζει χρώματα, γραμματοσειρά και λογότυπο. Αλλάζει αργότερα από τις ιδιότητες της παρουσίασης ή τις ρυθμίσεις.',
   'Stijlprofielen beheren…': 'Διαχείριση προφίλ στυλ…',
+  'Geavanceerd': 'Για προχωρημένους',
+  'Knippen en audio': 'Κόψιμο και ήχος',
+  'Bereik en kleurzones': 'Εύρος και ζώνες χρωμάτων',
 };

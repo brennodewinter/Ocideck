@@ -1136,4 +1136,7 @@ const _dutchSourceBg = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Определя цветовете, шрифта и логото. По-късно може да се промени през свойствата на презентацията или настройките.',
   'Stijlprofielen beheren…': 'Управление на стиловите профили…',
+  'Geavanceerd': 'Разширени',
+  'Knippen en audio': 'Изрязване и звук',
+  'Bereik en kleurzones': 'Обхват и цветови зони',
 };

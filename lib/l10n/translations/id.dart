@@ -1120,4 +1120,7 @@ const _dutchSourceId = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Menentukan warna, huruf, dan logo. Dapat diubah nanti lewat properti presentasi atau pengaturan.',
   'Stijlprofielen beheren…': 'Kelola profil gaya…',
+  'Geavanceerd': 'Lanjutan',
+  'Knippen en audio': 'Pemotongan dan audio',
+  'Bereik en kleurzones': 'Rentang dan zona warna',
 };

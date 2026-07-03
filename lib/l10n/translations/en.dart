@@ -1132,4 +1132,7 @@ const _dutchSourceAddEn = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Determines colors, font and logo. Can be changed later via the presentation properties or settings.',
   'Stijlprofielen beheren…': 'Manage style profiles…',
+  'Geavanceerd': 'Advanced',
+  'Knippen en audio': 'Trimming and audio',
+  'Bereik en kleurzones': 'Range and color zones',
 };

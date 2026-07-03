@@ -1122,4 +1122,7 @@ const _dutchSourceHu = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Meghatározza a színeket, a betűtípust és a logót. Később módosítható a bemutató tulajdonságaiban vagy a beállításokban.',
   'Stijlprofielen beheren…': 'Stílusprofilok kezelése…',
+  'Geavanceerd': 'Speciális',
+  'Knippen en audio': 'Vágás és hang',
+  'Bereik en kleurzones': 'Tartomány és színzónák',
 };

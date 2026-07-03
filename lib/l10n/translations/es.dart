@@ -1115,4 +1115,7 @@ const _dutchSourceAddEs = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Determina colores, tipografía y logotipo. Se puede cambiar más tarde en las propiedades de la presentación o en los ajustes.',
   'Stijlprofielen beheren…': 'Gestionar perfiles de estilo…',
+  'Geavanceerd': 'Avanzado',
+  'Knippen en audio': 'Recorte y audio',
+  'Bereik en kleurzones': 'Rango y zonas de color',
 };

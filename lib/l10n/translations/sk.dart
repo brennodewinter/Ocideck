@@ -1126,4 +1126,7 @@ const _dutchSourceSk = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Určuje farby, písmo a logo. Neskôr sa dá zmeniť vo vlastnostiach prezentácie alebo v nastaveniach.',
   'Stijlprofielen beheren…': 'Spravovať profily štýlu…',
+  'Geavanceerd': 'Rozšírené',
+  'Knippen en audio': 'Strih a zvuk',
+  'Bereik en kleurzones': 'Rozsah a farebné zóny',
 };

@@ -1145,4 +1145,7 @@ const _dutchSourceGa = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Socraíonn sé dathanna, cló agus lógó. Is féidir é a athrú níos déanaí trí airíonna an chur i láthair nó na socruithe.',
   'Stijlprofielen beheren…': 'Bainistigh próifílí stíle…',
+  'Geavanceerd': 'Casta',
+  'Knippen en audio': 'Bearradh agus fuaim',
+  'Bereik en kleurzones': 'Raon agus criosanna datha',
 };

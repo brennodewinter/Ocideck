@@ -1122,4 +1122,7 @@ const _dutchSourceSl = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Določa barve, pisavo in logotip. Pozneje ga lahko spremenite v lastnostih predstavitve ali nastavitvah.',
   'Stijlprofielen beheren…': 'Upravljaj slogovne profile…',
+  'Geavanceerd': 'Napredno',
+  'Knippen en audio': 'Rezanje in zvok',
+  'Bereik en kleurzones': 'Obseg in barvna območja',
 };

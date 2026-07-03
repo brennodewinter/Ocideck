@@ -1121,4 +1121,7 @@ const _dutchSourceCs = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Určuje barvy, písmo a logo. Později lze změnit ve vlastnostech prezentace nebo v nastavení.',
   'Stijlprofielen beheren…': 'Spravovat profily stylu…',
+  'Geavanceerd': 'Pokročilé',
+  'Knippen en audio': 'Střih a zvuk',
+  'Bereik en kleurzones': 'Rozsah a barevné zóny',
 };

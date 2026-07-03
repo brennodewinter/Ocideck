@@ -1138,4 +1138,7 @@ const _dutchSourcePt = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Determina cores, tipo de letra e logótipo. Pode ser alterado mais tarde nas propriedades da apresentação ou nas definições.',
   'Stijlprofielen beheren…': 'Gerir perfis de estilo…',
+  'Geavanceerd': 'Avançado',
+  'Knippen en audio': 'Corte e áudio',
+  'Bereik en kleurzones': 'Intervalo e zonas de cor',
 };

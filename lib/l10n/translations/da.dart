@@ -1116,4 +1116,7 @@ const _dutchSourceDa = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Bestemmer farver, skrifttype og logo. Kan ændres senere via præsentationsegenskaberne eller indstillingerne.',
   'Stijlprofielen beheren…': 'Administrer stilprofiler…',
+  'Geavanceerd': 'Avanceret',
+  'Knippen en audio': 'Klipning og lyd',
+  'Bereik en kleurzones': 'Interval og farvezoner',
 };

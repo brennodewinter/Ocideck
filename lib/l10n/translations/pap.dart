@@ -1110,4 +1110,7 @@ const _dutchSourceAddPap = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Ta determiná koló, tipo di lèter i logo. Por kambia despues via e propiedatnan di presentashon òf ajustenan.',
   'Stijlprofielen beheren…': 'Maneha perfilnan di estilo…',
+  'Geavanceerd': 'Avansá',
+  'Knippen en audio': 'Kòrta i oudio',
+  'Bereik en kleurzones': 'Rango i zonanan di koló',
 };

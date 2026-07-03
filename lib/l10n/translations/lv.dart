@@ -1120,4 +1120,7 @@ const _dutchSourceLv = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Nosaka krāsas, fontu un logotipu. Vēlāk maināms prezentācijas rekvizītos vai iestatījumos.',
   'Stijlprofielen beheren…': 'Pārvaldīt stila profilus…',
+  'Geavanceerd': 'Papildu',
+  'Knippen en audio': 'Griešana un audio',
+  'Bereik en kleurzones': 'Diapazons un krāsu zonas',
 };

@@ -1114,4 +1114,7 @@ const _dutchSourceEt = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Määrab värvid, fondi ja logo. Hiljem muudetav esitluse omaduste või seadete kaudu.',
   'Stijlprofielen beheren…': 'Halda stiiliprofiile…',
+  'Geavanceerd': 'Täpsemad',
+  'Knippen en audio': 'Lõikamine ja heli',
+  'Bereik en kleurzones': 'Vahemik ja värvitsoonid',
 };

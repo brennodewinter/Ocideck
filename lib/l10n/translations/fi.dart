@@ -1122,4 +1122,7 @@ const _dutchSourceFi = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Määrittää värit, fontin ja logon. Voi muuttaa myöhemmin esityksen ominaisuuksista tai asetuksista.',
   'Stijlprofielen beheren…': 'Hallitse tyyliprofiileja…',
+  'Geavanceerd': 'Lisäasetukset',
+  'Knippen en audio': 'Leikkaus ja ääni',
+  'Bereik en kleurzones': 'Alue ja värivyöhykkeet',
 };

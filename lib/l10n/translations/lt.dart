@@ -1125,4 +1125,7 @@ const _dutchSourceLt = {
   'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
       'Nustato spalvas, šriftą ir logotipą. Vėliau galima keisti pristatymo savybėse arba nustatymuose.',
   'Stijlprofielen beheren…': 'Tvarkyti stiliaus profilius…',
+  'Geavanceerd': 'Išplėstiniai',
+  'Knippen en audio': 'Kirpimas ir garsas',
+  'Bereik en kleurzones': 'Diapazonas ir spalvų zonos',
 };
