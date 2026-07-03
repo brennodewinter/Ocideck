@@ -84,6 +84,8 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Nota: a versão web só pode obter de servidores que o permitam (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Os pacotes (.ocideck) ainda não são suportados na versão web.',
   'Alleen .md-presentaties kunnen in de webversie worden geopend.':

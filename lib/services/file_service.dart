@@ -15,6 +15,7 @@ import '../models/settings.dart';
 import '../models/chart.dart';
 import '../models/slide.dart';
 import '../utils/atomic_file.dart';
+import '../utils/bundled_asset.dart';
 import '../utils/file_download.dart';
 import '../utils/log.dart';
 import '../utils/net_guard.dart';
@@ -145,11 +146,13 @@ class FileService {
     String? projectPath,
   }) {
     final logoPath = profile.logoPath;
-    // Op web is er geen bestandssysteem om een relatief logopad in op te
-    // zoeken; laat het profiel ongemoeid (het logo rendert dan als afwezig).
-    if (kIsWeb ||
-        logoPath == null ||
+    // Een asset:-logo (ingebouwd profiel) is al overal laadbaar; op web is er
+    // verder geen bestandssysteem om een relatief logopad in op te zoeken —
+    // laat het profiel dan ongemoeid (het logo rendert als afwezig).
+    if (logoPath == null ||
         logoPath.trim().isEmpty ||
+        isBundledAssetPath(logoPath) ||
+        kIsWeb ||
         p.isAbsolute(logoPath)) {
       return profile;
     }

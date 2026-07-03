@@ -83,6 +83,8 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Piezīme: tīmekļa versija var ielādēt tikai no serveriem, kas to atļauj (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Pakotnes (.ocideck) tīmekļa versijā vēl netiek atbalstītas.',
   'Alleen .md-presentaties kunnen in de webversie worden geopend.':

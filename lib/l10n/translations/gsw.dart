@@ -83,6 +83,8 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Achtig: d Webversion cha nume vo Server abhole, wo das erlaube (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Päckli (.ocideck) wärde i dr Webversion no nid understützt.',
   'Alleen .md-presentaties kunnen in de webversie worden geopend.':

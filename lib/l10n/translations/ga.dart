@@ -85,6 +85,8 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Tabhair faoi deara: ní féidir leis an leagan gréasáin íoslódáil ach ó fhreastalaithe a cheadaíonn é (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Ní thacaítear le pacáistí (.ocideck) go fóill sa leagan gréasáin.',
   'Alleen .md-presentaties kunnen in de webversie worden geopend.':

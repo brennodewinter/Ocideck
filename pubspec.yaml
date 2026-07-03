@@ -80,6 +80,7 @@ flutter:
   assets:
     - assets/images/ocideck-logo.png
     - assets/images/ocideck-logo-eu.png
+    - assets/images/librekat-logo.png
     - assets/images/de-winter-wittegeheel.png
     - assets/images/flag_fy.png
     - assets/images/flag_tlh.png

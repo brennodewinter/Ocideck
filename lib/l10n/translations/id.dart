@@ -83,6 +83,8 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Catatan: versi web hanya dapat mengambil dari server yang mengizinkannya (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Paket (.ocideck) belum didukung di versi web.',
   'Alleen .md-presentaties kunnen in de webversie worden geopend.':

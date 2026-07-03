@@ -85,6 +85,8 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Nota: versio interretialis solum a servis id permittentibus accersere potest (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Fasciculi (.ocideck) in versione interretiali nondum sustinentur.',
   'Alleen .md-presentaties kunnen in de webversie worden geopend.':

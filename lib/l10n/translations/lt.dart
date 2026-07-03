@@ -83,6 +83,8 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Pastaba: žiniatinklio versija gali parsisiųsti tik iš serverių, kurie tai leidžia (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
       'Paketai (.ocideck) žiniatinklio versijoje dar nepalaikomi.',
   'Alleen .md-presentaties kunnen in de webversie worden geopend.':

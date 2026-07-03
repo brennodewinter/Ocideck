@@ -81,6 +81,20 @@ Widget _resolvedImage(
 }) {
   if (imagePath.isEmpty) return _imagePlaceholder(context);
 
+  // Méégebundelde asset (ingebouwde stijlprofielen, bv. het LibreKAT-logo):
+  // rendert op elk platform, ook op web waar geen bestandssysteem bestaat.
+  if (isBundledAssetPath(imagePath)) {
+    return Image(
+      image: cappedBundledAssetImage(bundledAssetKey(imagePath)),
+      fit: fit,
+      width: double.infinity,
+      height: double.infinity,
+      gaplessPlayback: true,
+      semanticLabel: semanticLabel,
+      errorBuilder: (context, error, stackTrace) => _imagePlaceholder(context),
+    );
+  }
+
   // In-memory afbeelding (webversie): een `mem:`-pad wijst naar bytes in de
   // WebAssetStore in plaats van naar een bestand. Zelfde decode-cap; na een
   // herlaad van de pagina is de store leeg en toont dit de placeholder.

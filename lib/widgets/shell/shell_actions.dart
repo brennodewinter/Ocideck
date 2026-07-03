@@ -117,11 +117,13 @@ Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
     ok = false;
   }
   if (!ok && context.mounted) {
-    messenger.showSnackBar(
-      SnackBar(
-        content: Text(l10n.d('Kon van deze URL geen presentatie ophalen.')),
-      ),
-    );
+    // Op web is de meest voorkomende oorzaak geen tikfout maar CORS: de
+    // browser mag alleen lezen van servers die dat expliciet toestaan.
+    final message = isWebPlatform
+        ? '${l10n.d('Kon van deze URL geen presentatie ophalen.')}\n'
+              '${l10n.d('Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).')}'
+        : l10n.d('Kon van deze URL geen presentatie ophalen.');
+    messenger.showSnackBar(SnackBar(content: Text(message)));
   }
 }
 
