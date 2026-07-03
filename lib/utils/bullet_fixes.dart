@@ -13,8 +13,7 @@ final _checklistPrefix = RegExp(r'^\[[ xX]\]\s*');
 /// Of [slide] bullets heeft die [splitSentencesInBullets] daadwerkelijk zou
 /// opknippen — zodat de UI de actie alleen aanbiedt als die iets doet.
 bool canSplitSentenceBullets(Slide slide) =>
-    slide.bullets.any(_isMultiSentence) ||
-    slide.bullets2.any(_isMultiSentence);
+    slide.bullets.any(_isMultiSentence) || slide.bullets2.any(_isMultiSentence);
 
 bool _isMultiSentence(String bullet) =>
     _splitSentences(_plainText(bullet)).length > 1;
