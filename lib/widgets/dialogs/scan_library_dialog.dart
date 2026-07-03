@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../platform/platform_features.dart';
 import '../../services/file_service.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
+import '../../utils/display_path.dart';
 
 /// Dialog that scans a fixed set of well-known locations (recent-file folders
 /// plus the user's Documents/Desktop/Downloads/iCloud) for Marp presentations
@@ -12,21 +14,30 @@ class ScanLibraryDialog extends StatefulWidget {
   final FileService fileService;
   final List<String> recentFiles;
 
+  /// De thuismap voor presentaties (instelling); vindplaatsen daaronder
+  /// worden er compact tegen afgezet in plaats van als volledig pad.
+  final String? homeDir;
+
   const ScanLibraryDialog({
     super.key,
     required this.fileService,
     required this.recentFiles,
+    this.homeDir,
   });
 
   static Future<String?> show(
     BuildContext context, {
     required FileService fileService,
     required List<String> recentFiles,
+    String? homeDir,
   }) {
     return showDialog<String>(
       context: context,
-      builder: (_) =>
-          ScanLibraryDialog(fileService: fileService, recentFiles: recentFiles),
+      builder: (_) => ScanLibraryDialog(
+        fileService: fileService,
+        recentFiles: recentFiles,
+        homeDir: homeDir,
+      ),
     );
   }
 
@@ -173,6 +184,7 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
       separatorBuilder: (_, _) => const Divider(height: 1),
       itemBuilder: (_, i) => _HitRow(
         hit: visible[i],
+        homeDir: widget.homeDir,
         onOpen: () => Navigator.pop(context, visible[i].path),
       ),
     );
@@ -198,9 +210,14 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
 
 class _HitRow extends StatelessWidget {
   final ScanHit hit;
+  final String? homeDir;
   final VoidCallback onOpen;
 
-  const _HitRow({required this.hit, required this.onOpen});
+  const _HitRow({
+    required this.hit,
+    required this.homeDir,
+    required this.onOpen,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -240,13 +257,20 @@ class _HitRow extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 2),
-                  Text(
-                    hit.path,
-                    style: const TextStyle(
-                      fontSize: 11,
-                      color: AppTheme.slate400,
+                  // Vindplaats compact (thuismap-relatief of ~-afgekort);
+                  // het volledige pad zit in de tooltip.
+                  Tooltip(
+                    message: hit.path,
+                    waitDuration: const Duration(milliseconds: 400),
+                    child: Text(
+                      '${displayFolder(hit.path, homeDir: homeDir, osHome: osHomeDirectory)}'
+                      '  ·  ${hit.fileName}',
+                      style: const TextStyle(
+                        fontSize: 11,
+                        color: AppTheme.slate400,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),

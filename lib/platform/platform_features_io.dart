@@ -10,3 +10,7 @@ bool get supportsDualScreenPresenter => isDesktopNative;
 bool get supportsLocalProjectFolders => !kIsWeb;
 
 bool get supportsNetworkDeckSources => !kIsWeb;
+
+String? get osHomeDirectory => kIsWeb
+    ? null
+    : (Platform.environment['HOME'] ?? Platform.environment['USERPROFILE']);

@@ -7,6 +7,7 @@ import 'package:window_manager/window_manager.dart';
 
 import '../platform/launch_files.dart';
 import '../platform/platform_features.dart';
+import '../utils/display_path.dart';
 import '../utils/log.dart';
 import '../models/deck.dart';
 import '../models/slide.dart';

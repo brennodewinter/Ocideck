@@ -2,7 +2,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 import '../../models/slide.dart';
+import '../../platform/platform_features.dart';
 import '../../services/file_service.dart';
+import '../../utils/display_path.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 
@@ -267,6 +269,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
         final (pres, hits) = visible[i];
         return _PresentationRow(
           presentation: pres,
+          scanRoot: _directory,
           hits: hits,
           onOpen: () => Navigator.pop(context, OpenSearchResult(pres.path)),
           onOpenAt: (index) => Navigator.pop(
@@ -304,12 +307,17 @@ class _SlideHit {
 
 class _PresentationRow extends StatelessWidget {
   final ScannedPresentation presentation;
+
+  /// De gescande map; de rij toont de vindplaats relatief hieraan zodat in
+  /// een boom met submappen zichtbaar is wáár elk bestand staat.
+  final String? scanRoot;
   final List<_SlideHit> hits;
   final VoidCallback onOpen;
   final ValueChanged<int> onOpenAt;
 
   const _PresentationRow({
     required this.presentation,
+    required this.scanRoot,
     required this.hits,
     required this.onOpen,
     required this.onOpenAt,
@@ -352,13 +360,22 @@ class _PresentationRow extends StatelessWidget {
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
-                        Text(
-                          '${presentation.fileName}  ·  ${deck.slides.length} ${l10n.t('slides')}',
-                          style: const TextStyle(
-                            fontSize: 11,
-                            color: AppTheme.slate400,
+                        // Vindplaats relatief aan de gescande map, zodat bij
+                        // submappen zichtbaar is wáár het bestand staat; het
+                        // volledige pad zit in de tooltip.
+                        Tooltip(
+                          message: presentation.path,
+                          waitDuration: const Duration(milliseconds: 400),
+                          child: Text(
+                            '${displayFolder(presentation.path, homeDir: scanRoot, osHome: osHomeDirectory)}'
+                            '  ·  ${presentation.fileName}'
+                            '  ·  ${deck.slides.length} ${l10n.t('slides')}',
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: AppTheme.slate400,
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
