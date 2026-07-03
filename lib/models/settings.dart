@@ -381,8 +381,9 @@ class AppAppearanceProfile {
     surfaceColor: '#FFFFFF',
     textColor: '#1E293B',
     mutedTextColor: '#64748B',
-    panelColor: '#1E2028',
-    panelTextColor: '#E2E8F0',
+    // EU-vlagblauw voor de bovenbalk/panelen (huisstijl), i.p.v. near-black.
+    panelColor: '#003399',
+    panelTextColor: '#FFFFFF',
   );
 
   static const europa = AppAppearanceProfile(
