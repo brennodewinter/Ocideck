@@ -18,6 +18,17 @@ class PrivacyStatementContent extends StatelessWidget {
 
   static const _bodyStyle = TextStyle(fontSize: 12, height: 1.4);
 
+  /// Testhaak: gooi de licentie-memo weg. Nodig omdat een widgettest de
+  /// future in zijn (fake-async) zone kan starten; die completeert daarna
+  /// nooit meer en zou elke latere lezer laten hangen.
+  @visibleForTesting
+  static void resetLicenseCacheForTest() {
+    _fullLicense = null;
+    // Ook de rootBundle-cache: die memoïseert dezelfde load en is dan met
+    // dezelfde dode zone-future vergiftigd.
+    rootBundle.evict('LICENSE.md');
+  }
+
   /// The full EUPL 1.2 text, loaded once from the bundled `LICENSE.md` with its
   /// leading SPDX/HTML-comment header stripped.
   static Future<String> loadFullLicense() {
