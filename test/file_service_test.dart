@@ -124,6 +124,104 @@ void main() {
     expect(await asset.readAsBytes(), png);
   });
 
+  test('importPackageBytes reuses an earlier identical import', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_zip_reuse_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+
+    final archive = Archive();
+    final md = utf8.encode('---\nmarp: true\n---\n# Hi');
+    archive.addFile(ArchiveFile('deck.md', md.length, md));
+    final png = utf8.encode('fake-png-bytes');
+    archive.addFile(ArchiveFile('images/pic.png', png.length, png));
+    final zipBytes = ZipEncoder().encode(archive);
+
+    final service = FileService(
+      MarkdownService(),
+      ImageService(),
+      () => const ThemeProfile(),
+    );
+    final first = await service.importPackageBytes(zipBytes, temp.path);
+    final second = await service.importPackageBytes(zipBytes, temp.path);
+
+    // Same package again: same extraction folder, no "deck (2)" copy.
+    expect(second, first);
+    final dirs = temp.listSync().whereType<Directory>().toList();
+    expect(dirs, hasLength(1));
+
+    // Sidecars the app writes next to the markdown (annotations, notes) do
+    // not block reuse: nothing gets overwritten by reusing the folder.
+    final sidecar = File(p.join(p.dirname(first!), 'deck.ink.json'));
+    await sidecar.writeAsString('{"strokes":[]}');
+    final third = await service.importPackageBytes(zipBytes, temp.path);
+    expect(third, first);
+    expect(await sidecar.exists(), isTrue);
+  });
+
+  test('importPackageBytes keeps an edited copy and extracts fresh', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_zip_edit_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+
+    final archive = Archive();
+    final md = utf8.encode('---\nmarp: true\n---\n# Hi');
+    archive.addFile(ArchiveFile('deck.md', md.length, md));
+    final zipBytes = ZipEncoder().encode(archive);
+
+    final service = FileService(
+      MarkdownService(),
+      ImageService(),
+      () => const ThemeProfile(),
+    );
+    final first = await service.importPackageBytes(zipBytes, temp.path);
+    // The user edited the extracted copy; a re-import must not clobber it.
+    await File(first!).writeAsString('---\nmarp: true\n---\n# Edited');
+    final second = await service.importPackageBytes(zipBytes, temp.path);
+
+    expect(second, isNot(first));
+    expect(p.basename(p.dirname(second!)), 'deck (2)');
+    expect(await File(first).readAsString(), '---\nmarp: true\n---\n# Edited');
+  });
+
+  test(
+    'importMarkdownBytes reuses identical markdown, copies on change',
+    () async {
+      final temp = await Directory.systemTemp.createTemp('ocideck_md_reuse_');
+      addTearDown(() async {
+        if (await temp.exists()) await temp.delete(recursive: true);
+      });
+
+      final service = FileService(
+        MarkdownService(),
+        ImageService(),
+        () => const ThemeProfile(),
+      );
+      final bytes = utf8.encode('---\nmarp: true\n---\n# Hi');
+      final first = await service.importMarkdownBytes(
+        bytes,
+        temp.path,
+        'Demo.md',
+      );
+      final second = await service.importMarkdownBytes(
+        bytes,
+        temp.path,
+        'Demo.md',
+      );
+      expect(second, first);
+
+      final changed = utf8.encode('---\nmarp: true\n---\n# Changed');
+      final third = await service.importMarkdownBytes(
+        changed,
+        temp.path,
+        'Demo.md',
+      );
+      expect(third, isNot(first));
+      expect(p.basename(p.dirname(third!)), 'Demo (2)');
+    },
+  );
+
   test('importPackageBytes rejects archives with too many entries', () async {
     final temp = await Directory.systemTemp.createTemp('ocideck_zip_entries_');
     addTearDown(() async {
