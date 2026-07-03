@@ -688,6 +688,14 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         keywords: deck.keywords,
         tlp: deck.tlp,
       ),
+      // Noteer een geslaagde export bij het recente bestand, zodat de
+      // welkomstlijst "laatst geëxporteerd als …" kan tonen. Alleen zinvol
+      // met een echt bestandspad (op web is een deck een download).
+      onExported: deckState.filePath == null
+          ? null
+          : (formatLabel) => ref
+                .read(settingsProvider.notifier)
+                .recordRecentFileExport(deckState.filePath!, formatLabel),
     );
   }
 

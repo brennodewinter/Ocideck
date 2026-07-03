@@ -45,6 +45,10 @@ class ExportDialog extends StatefulWidget {
   final bool showClassificationWatermark;
   final ExportDocumentMetadata documentMetadata;
 
+  /// Na een geslaagde export aangeroepen met het formaat-label ("PDF",
+  /// "PPTX", "HTML") — bijv. om het bij de recente bestanden te noteren.
+  final void Function(String formatLabel)? onExported;
+
   const ExportDialog({
     super.key,
     required this.deckPath,
@@ -62,6 +66,7 @@ class ExportDialog extends StatefulWidget {
     this.organization = '',
     this.showClassificationWatermark = false,
     this.documentMetadata = const ExportDocumentMetadata(),
+    this.onExported,
   });
 
   static Future<void> show(
@@ -82,6 +87,7 @@ class ExportDialog extends StatefulWidget {
     String organization = '',
     bool showClassificationWatermark = false,
     ExportDocumentMetadata documentMetadata = const ExportDocumentMetadata(),
+    void Function(String formatLabel)? onExported,
   }) {
     return showDialog(
       context: context,
@@ -102,6 +108,7 @@ class ExportDialog extends StatefulWidget {
         organization: organization,
         showClassificationWatermark: showClassificationWatermark,
         documentMetadata: documentMetadata,
+        onExported: onExported,
       ),
     );
   }
@@ -256,6 +263,7 @@ class _ExportDialogState extends State<ExportDialog> {
     );
 
     if (!mounted) return;
+    if (r.success) widget.onExported?.call(format.label);
     setState(() {
       _loading = false;
       _success = r.success;
