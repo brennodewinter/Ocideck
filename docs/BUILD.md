@@ -82,6 +82,17 @@ response header rather than relying on the meta tag. Example snippets:
 > A plain `flutter build web` still works, but it falls back to the gstatic CDN
 > and an `unsafe-*` loader — use `make build-web` so the hardening stays pinned.
 
+### Deeplink: app + presentatie in één URL
+
+`https://<host>/?deck=<url>` opent OciDeck én haalt direct de presentatie op
+het meegegeven adres op (URL-encoderen!). Dezelfde importpoort geldt als bij
+"Importeren via URL": veiligheidsscan, marp-controle en de CORS-regels
+hieronder. Voorbeeld:
+
+```
+https://ocideck.librekat.nl/?deck=https%3A%2F%2Fexample.org%2Fdeck.ocideck
+```
+
 ### Fetch-hulppunt voor URL-import (optioneel, aanbevolen)
 
 "Importeren via URL" werkt in de browser alleen direct voor bronnen die CORS
@@ -148,6 +159,13 @@ machine. Artifacts land under `build/<platform>/`.
 
 - Windows: distribute the contents of `build/windows/x64/runner/Release/` (or
   package with MSIX/an installer).
+- **Windows-bestandsassociaties**: importeer
+  [`windows/file-associations.reg`](../windows/file-associations.reg) (paden
+  aanpassen) of neem de sleutels op in de installer. `.ocideck` opent dan
+  direct met OciDeck; `.md` krijgt OciDeck als "Openen met…"-optie zonder de
+  standaard over te nemen. De app opent het meegegeven pad bij het starten.
+  macOS regelt hetzelfde via `CFBundleDocumentTypes` in `Info.plist`
+  (`.ocideck` = Owner, `.md` = Alternate) — dat zit al in de app-bundel.
 - Linux: distribute `build/linux/x64/release/bundle/` (or package as a
   Flatpak/AppImage/Snap as you prefer).
 

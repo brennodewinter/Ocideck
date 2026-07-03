@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 import 'package:window_manager/window_manager.dart';
 
+import '../platform/launch_files.dart';
 import '../platform/platform_features.dart';
 import '../utils/log.dart';
 import '../models/deck.dart';
@@ -85,7 +86,31 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       // Open any file the app was launched with, and start listening for files
       // opened from Finder while the app is running.
       _openFileChannel.start();
+      // Windows/Linux: bestandsassociatie-argumenten van deze start.
+      _openLaunchFiles();
+      // Web: ?deck=<url>-deeplink die OciDeck én een presentatie tegelijk
+      // opent (zelfde security-gate als de importdialoog).
+      _openDeckDeepLink();
     });
+  }
+
+  /// Open de bestanden waarmee de app via commandoregel-argumenten is gestart
+  /// (Windows/Linux-bestandsassociaties; zie [pendingLaunchFiles]).
+  Future<void> _openLaunchFiles() async {
+    if (pendingLaunchFiles.isEmpty) return;
+    final paths = List<String>.from(pendingLaunchFiles);
+    pendingLaunchFiles.clear();
+    await _onFilesDropped(paths);
+  }
+
+  /// Web-deeplink: `?deck=<url>` haalt de presentatie op en opent haar —
+  /// één link deelt zo de app én de inhoud. De volledige importpoort
+  /// (CORS/hulppunt, veiligheidsscan met alarm, marp-controle) blijft gelden.
+  Future<void> _openDeckDeepLink() async {
+    if (!isWebPlatform || !mounted) return;
+    final deckUrl = deckDeepLinkFrom(Uri.base);
+    if (deckUrl == null) return;
+    await _importUrlWeb(context, ref, deckUrl);
   }
 
   /// Bij opstart: zijn er herstelbestanden van een vorige (gecrashte) sessie?
