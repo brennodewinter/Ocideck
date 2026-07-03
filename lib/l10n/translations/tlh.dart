@@ -1098,4 +1098,9 @@ const _dutchSourceTlh = {
   'Nog opslaan nodig': 'wa\'DIch yIchoq',
   'TLP blokkeert export': 'ngeH bot TLP',
   'Kwaliteit blokkeert export': 'ngeH bot Dun',
+  'Verhoog contrast': 'pIm law\'moH',
+  'Open kleurinstellingen': 'rItlh SeHlaw yIpoSmoH',
+  'Voeg alt-tekst toe': 'mu\'mey latlh yIchel',
+  'Voeg beschrijving toe': 'QIj mu\'mey yIchel',
+  'Zinnen naar losse bullets': 'mu\'tlheghmey mob moHmoH',
 };

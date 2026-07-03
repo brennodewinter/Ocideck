@@ -1107,4 +1107,9 @@ const _dutchSourceDa = {
   'Nog opslaan nodig': 'Skal gemmes først',
   'TLP blokkeert export': 'TLP blokerer eksporten',
   'Kwaliteit blokkeert export': 'Kvaliteten blokerer eksporten',
+  'Verhoog contrast': 'Øg kontrasten',
+  'Open kleurinstellingen': 'Åbn farveindstillinger',
+  'Voeg alt-tekst toe': 'Tilføj alt-tekst',
+  'Voeg beschrijving toe': 'Tilføj beskrivelse',
+  'Zinnen naar losse bullets': 'Sætninger til separate punkter',
 };

@@ -1111,4 +1111,9 @@ const _dutchSourceId = {
   'Nog opslaan nodig': 'Perlu disimpan dulu',
   'TLP blokkeert export': 'TLP memblokir ekspor',
   'Kwaliteit blokkeert export': 'Kualitas memblokir ekspor',
+  'Verhoog contrast': 'Tingkatkan kontras',
+  'Open kleurinstellingen': 'Buka pengaturan warna',
+  'Voeg alt-tekst toe': 'Tambahkan teks alternatif',
+  'Voeg beschrijving toe': 'Tambahkan deskripsi',
+  'Zinnen naar losse bullets': 'Kalimat menjadi butir terpisah',
 };

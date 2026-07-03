@@ -1115,4 +1115,9 @@ const _dutchSourceHr = {
   'Nog opslaan nodig': 'Prvo je potrebno spremiti',
   'TLP blokkeert export': 'TLP blokira izvoz',
   'Kwaliteit blokkeert export': 'Kvaliteta blokira izvoz',
+  'Verhoog contrast': 'Povećaj kontrast',
+  'Open kleurinstellingen': 'Otvori postavke boja',
+  'Voeg alt-tekst toe': 'Dodaj alternativni tekst',
+  'Voeg beschrijving toe': 'Dodaj opis',
+  'Zinnen naar losse bullets': 'Rečenice u zasebne natuknice',
 };

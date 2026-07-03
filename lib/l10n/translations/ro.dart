@@ -1121,4 +1121,9 @@ const _dutchSourceRo = {
   'Nog opslaan nodig': 'Mai întâi trebuie salvat',
   'TLP blokkeert export': 'TLP blochează exportul',
   'Kwaliteit blokkeert export': 'Calitatea blochează exportul',
+  'Verhoog contrast': 'Mărește contrastul',
+  'Open kleurinstellingen': 'Deschide setările de culori',
+  'Voeg alt-tekst toe': 'Adaugă text alternativ',
+  'Voeg beschrijving toe': 'Adaugă descriere',
+  'Zinnen naar losse bullets': 'Propoziții în puncte separate',
 };

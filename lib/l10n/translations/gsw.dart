@@ -1111,4 +1111,9 @@ const _dutchSourceGsw = {
   'Nog opslaan nodig': 'Zerscht spychere',
   'TLP blokkeert export': 's TLP blockiert dr Export',
   'Kwaliteit blokkeert export': 'D Qualität blockiert dr Export',
+  'Verhoog contrast': 'Kontrascht erhöche',
+  'Open kleurinstellingen': 'Farbiischtellige uftue',
+  'Voeg alt-tekst toe': 'Alt-Text dezuetue',
+  'Voeg beschrijving toe': 'Beschriibig dezuetue',
+  'Zinnen naar losse bullets': 'Sätz in einzelni Pünkt',
 };

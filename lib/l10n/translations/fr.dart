@@ -1112,4 +1112,9 @@ const _dutchSourceAddFr = {
   'Nog opslaan nodig': 'Enregistrement requis d\'abord',
   'TLP blokkeert export': 'Le TLP bloque l\'export',
   'Kwaliteit blokkeert export': 'La qualité bloque l\'export',
+  'Verhoog contrast': 'Augmenter le contraste',
+  'Open kleurinstellingen': 'Ouvrir les réglages de couleurs',
+  'Voeg alt-tekst toe': 'Ajouter un texte alternatif',
+  'Voeg beschrijving toe': 'Ajouter une description',
+  'Zinnen naar losse bullets': 'Phrases en puces séparées',
 };

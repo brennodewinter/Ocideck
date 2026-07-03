@@ -1113,4 +1113,9 @@ const _dutchSourceHu = {
   'Nog opslaan nodig': 'Előbb menteni kell',
   'TLP blokkeert export': 'A TLP blokkolja az exportot',
   'Kwaliteit blokkeert export': 'A minőség blokkolja az exportot',
+  'Verhoog contrast': 'Kontraszt növelése',
+  'Open kleurinstellingen': 'Színbeállítások megnyitása',
+  'Voeg alt-tekst toe': 'Alternatív szöveg hozzáadása',
+  'Voeg beschrijving toe': 'Leírás hozzáadása',
+  'Zinnen naar losse bullets': 'Mondatok külön pontokba',
 };

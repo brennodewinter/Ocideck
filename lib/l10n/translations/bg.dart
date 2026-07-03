@@ -1127,4 +1127,9 @@ const _dutchSourceBg = {
   'Nog opslaan nodig': 'Първо е нужно запазване',
   'TLP blokkeert export': 'TLP блокира експорта',
   'Kwaliteit blokkeert export': 'Качеството блокира експорта',
+  'Verhoog contrast': 'Увеличи контраста',
+  'Open kleurinstellingen': 'Отвори настройките за цветове',
+  'Voeg alt-tekst toe': 'Добави алтернативен текст',
+  'Voeg beschrijving toe': 'Добави описание',
+  'Zinnen naar losse bullets': 'Изречения в отделни точки',
 };

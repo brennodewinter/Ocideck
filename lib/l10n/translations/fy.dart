@@ -1099,4 +1099,9 @@ const _dutchSourceAddFy = {
   'Nog opslaan nodig': 'Earst bewarje nedich',
   'TLP blokkeert export': 'TLP blokkearret eksport',
   'Kwaliteit blokkeert export': 'Kwaliteit blokkearret eksport',
+  'Verhoog contrast': 'Ferheegje kontrast',
+  'Open kleurinstellingen': 'Iepenje kleurynstellingen',
+  'Voeg alt-tekst toe': 'Foegje alt-tekst ta',
+  'Voeg beschrijving toe': 'Foegje beskriuwing ta',
+  'Zinnen naar losse bullets': 'Sinnen nei losse bullets',
 };

@@ -1105,4 +1105,9 @@ const _dutchSourceEt = {
   'Nog opslaan nodig': 'Enne tuleb salvestada',
   'TLP blokkeert export': 'TLP blokeerib ekspordi',
   'Kwaliteit blokkeert export': 'Kvaliteet blokeerib ekspordi',
+  'Verhoog contrast': 'Suurenda kontrasti',
+  'Open kleurinstellingen': 'Ava värviseaded',
+  'Voeg alt-tekst toe': 'Lisa alt-tekst',
+  'Voeg beschrijving toe': 'Lisa kirjeldus',
+  'Zinnen naar losse bullets': 'Laused eraldi punktideks',
 };

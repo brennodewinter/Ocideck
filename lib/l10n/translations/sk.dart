@@ -1117,4 +1117,9 @@ const _dutchSourceSk = {
   'Nog opslaan nodig': 'Najprv je potrebné uložiť',
   'TLP blokkeert export': 'TLP blokuje export',
   'Kwaliteit blokkeert export': 'Kvalita blokuje export',
+  'Verhoog contrast': 'Zvýšiť kontrast',
+  'Open kleurinstellingen': 'Otvoriť nastavenia farieb',
+  'Voeg alt-tekst toe': 'Pridať alternatívny text',
+  'Voeg beschrijving toe': 'Pridať popis',
+  'Zinnen naar losse bullets': 'Vety na samostatné odrážky',
 };

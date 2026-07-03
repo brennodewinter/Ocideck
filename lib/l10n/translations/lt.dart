@@ -1116,4 +1116,9 @@ const _dutchSourceLt = {
   'Nog opslaan nodig': 'Pirmiausia reikia išsaugoti',
   'TLP blokkeert export': 'TLP blokuoja eksportą',
   'Kwaliteit blokkeert export': 'Kokybė blokuoja eksportą',
+  'Verhoog contrast': 'Padidinti kontrastą',
+  'Open kleurinstellingen': 'Atverti spalvų nustatymus',
+  'Voeg alt-tekst toe': 'Pridėti alternatyvųjį tekstą',
+  'Voeg beschrijving toe': 'Pridėti aprašymą',
+  'Zinnen naar losse bullets': 'Sakiniai į atskirus punktus',
 };

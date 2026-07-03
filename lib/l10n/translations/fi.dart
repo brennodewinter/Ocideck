@@ -1113,4 +1113,9 @@ const _dutchSourceFi = {
   'Nog opslaan nodig': 'Tallenna ensin',
   'TLP blokkeert export': 'TLP estää viennin',
   'Kwaliteit blokkeert export': 'Laatu estää viennin',
+  'Verhoog contrast': 'Lisää kontrastia',
+  'Open kleurinstellingen': 'Avaa väriasetukset',
+  'Voeg alt-tekst toe': 'Lisää alt-teksti',
+  'Voeg beschrijving toe': 'Lisää kuvaus',
+  'Zinnen naar losse bullets': 'Virkkeet erillisiksi luettelokohdiksi',
 };

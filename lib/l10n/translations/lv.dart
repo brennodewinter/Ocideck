@@ -1111,4 +1111,9 @@ const _dutchSourceLv = {
   'Nog opslaan nodig': 'Vispirms jāsaglabā',
   'TLP blokkeert export': 'TLP bloķē eksportu',
   'Kwaliteit blokkeert export': 'Kvalitāte bloķē eksportu',
+  'Verhoog contrast': 'Palielināt kontrastu',
+  'Open kleurinstellingen': 'Atvērt krāsu iestatījumus',
+  'Voeg alt-tekst toe': 'Pievienot alternatīvo tekstu',
+  'Voeg beschrijving toe': 'Pievienot aprakstu',
+  'Zinnen naar losse bullets': 'Teikumi atsevišķos punktos',
 };

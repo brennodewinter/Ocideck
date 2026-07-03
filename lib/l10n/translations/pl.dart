@@ -1118,4 +1118,9 @@ const _dutchSourcePl = {
   'Nog opslaan nodig': 'Najpierw zapisz',
   'TLP blokkeert export': 'TLP blokuje eksport',
   'Kwaliteit blokkeert export': 'Jakość blokuje eksport',
+  'Verhoog contrast': 'Zwiększ kontrast',
+  'Open kleurinstellingen': 'Otwórz ustawienia kolorów',
+  'Voeg alt-tekst toe': 'Dodaj tekst alternatywny',
+  'Voeg beschrijving toe': 'Dodaj opis',
+  'Zinnen naar losse bullets': 'Zdania na osobne punkty',
 };

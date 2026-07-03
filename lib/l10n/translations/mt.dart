@@ -1124,4 +1124,9 @@ const _dutchSourceMt = {
   'Nog opslaan nodig': 'L-ewwel trid tissejvja',
   'TLP blokkeert export': 'It-TLP jimblokka l-esportazzjoni',
   'Kwaliteit blokkeert export': 'Il-kwalità timblokka l-esportazzjoni',
+  'Verhoog contrast': 'Żid il-kuntrast',
+  'Open kleurinstellingen': 'Iftaħ is-settings tal-kuluri',
+  'Voeg alt-tekst toe': 'Żid test alternattiv',
+  'Voeg beschrijving toe': 'Żid deskrizzjoni',
+  'Zinnen naar losse bullets': 'Sentenzi f\'punti separati',
 };

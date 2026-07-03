@@ -1123,4 +1123,9 @@ const _dutchSourceUk = {
   'Nog opslaan nodig': 'Спершу збережіть',
   'TLP blokkeert export': 'TLP блокує експорт',
   'Kwaliteit blokkeert export': 'Якість блокує експорт',
+  'Verhoog contrast': 'Збільшити контраст',
+  'Open kleurinstellingen': 'Відкрити налаштування кольорів',
+  'Voeg alt-tekst toe': 'Додати альтернативний текст',
+  'Voeg beschrijving toe': 'Додати опис',
+  'Zinnen naar losse bullets': 'Речення в окремі пункти',
 };

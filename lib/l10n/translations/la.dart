@@ -1121,4 +1121,9 @@ const _dutchSourceLa = {
   'Nog opslaan nodig': 'Primum servandum est',
   'TLP blokkeert export': 'TLP exportationem impedit',
   'Kwaliteit blokkeert export': 'Qualitas exportationem impedit',
+  'Verhoog contrast': 'Contrarietatem auge',
+  'Open kleurinstellingen': 'Aperi colorum optiones',
+  'Voeg alt-tekst toe': 'Adde textum alternum',
+  'Voeg beschrijving toe': 'Adde descriptionem',
+  'Zinnen naar losse bullets': 'Sententiae in puncta separata',
 };

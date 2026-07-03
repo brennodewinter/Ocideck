@@ -1101,4 +1101,9 @@ const _dutchSourceAddPap = {
   'Nog opslaan nodig': 'Mester warda promé',
   'TLP blokkeert export': 'TLP ta blokia eksportashon',
   'Kwaliteit blokkeert export': 'Kalidat ta blokia eksportashon',
+  'Verhoog contrast': 'Oumentá kontraste',
+  'Open kleurinstellingen': 'Habri ajustenan di koló',
+  'Voeg alt-tekst toe': 'Agregá teksto alternativo',
+  'Voeg beschrijving toe': 'Agregá deskripshon',
+  'Zinnen naar losse bullets': 'Frasenan den bullet separá',
 };

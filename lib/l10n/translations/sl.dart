@@ -1113,4 +1113,9 @@ const _dutchSourceSl = {
   'Nog opslaan nodig': 'Najprej je treba shraniti',
   'TLP blokkeert export': 'TLP blokira izvoz',
   'Kwaliteit blokkeert export': 'Kakovost blokira izvoz',
+  'Verhoog contrast': 'Povečaj kontrast',
+  'Open kleurinstellingen': 'Odpri nastavitve barv',
+  'Voeg alt-tekst toe': 'Dodaj nadomestno besedilo',
+  'Voeg beschrijving toe': 'Dodaj opis',
+  'Zinnen naar losse bullets': 'Stavki v ločene alineje',
 };

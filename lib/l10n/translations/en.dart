@@ -1123,4 +1123,9 @@ const _dutchSourceAddEn = {
   'Nog opslaan nodig': 'Save needed first',
   'TLP blokkeert export': 'TLP blocks export',
   'Kwaliteit blokkeert export': 'Quality blocks export',
+  'Verhoog contrast': 'Increase contrast',
+  'Open kleurinstellingen': 'Open color settings',
+  'Voeg alt-tekst toe': 'Add alt text',
+  'Voeg beschrijving toe': 'Add description',
+  'Zinnen naar losse bullets': 'Sentences to separate bullets',
 };

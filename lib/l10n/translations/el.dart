@@ -1124,4 +1124,9 @@ const _dutchSourceEl = {
   'Nog opslaan nodig': 'Απαιτείται πρώτα αποθήκευση',
   'TLP blokkeert export': 'Το TLP μπλοκάρει την εξαγωγή',
   'Kwaliteit blokkeert export': 'Η ποιότητα μπλοκάρει την εξαγωγή',
+  'Verhoog contrast': 'Αύξηση αντίθεσης',
+  'Open kleurinstellingen': 'Άνοιγμα ρυθμίσεων χρωμάτων',
+  'Voeg alt-tekst toe': 'Προσθήκη εναλλακτικού κειμένου',
+  'Voeg beschrijving toe': 'Προσθήκη περιγραφής',
+  'Zinnen naar losse bullets': 'Προτάσεις σε χωριστές κουκκίδες',
 };

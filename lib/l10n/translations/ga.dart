@@ -1136,4 +1136,9 @@ const _dutchSourceGa = {
   'Nog opslaan nodig': 'Ní mór sábháil ar dtús',
   'TLP blokkeert export': 'Cuireann TLP bac ar an easpórtáil',
   'Kwaliteit blokkeert export': 'Cuireann an cháilíocht bac ar an easpórtáil',
+  'Verhoog contrast': 'Méadaigh an chodarsnacht',
+  'Open kleurinstellingen': 'Oscail socruithe datha',
+  'Voeg alt-tekst toe': 'Cuir alt-téacs leis',
+  'Voeg beschrijving toe': 'Cuir cur síos leis',
+  'Zinnen naar losse bullets': 'Abairtí ina bpointí ar leith',
 };

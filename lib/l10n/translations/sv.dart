@@ -1110,4 +1110,9 @@ const _dutchSourceSv = {
   'Nog opslaan nodig': 'Behöver sparas först',
   'TLP blokkeert export': 'TLP blockerar exporten',
   'Kwaliteit blokkeert export': 'Kvaliteten blockerar exporten',
+  'Verhoog contrast': 'Öka kontrasten',
+  'Open kleurinstellingen': 'Öppna färginställningar',
+  'Voeg alt-tekst toe': 'Lägg till alt-text',
+  'Voeg beschrijving toe': 'Lägg till beskrivning',
+  'Zinnen naar losse bullets': 'Meningar till separata punkter',
 };

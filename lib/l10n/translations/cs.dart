@@ -1112,4 +1112,9 @@ const _dutchSourceCs = {
   'Nog opslaan nodig': 'Nejprve je nutné uložit',
   'TLP blokkeert export': 'TLP blokuje export',
   'Kwaliteit blokkeert export': 'Kvalita blokuje export',
+  'Verhoog contrast': 'Zvýšit kontrast',
+  'Open kleurinstellingen': 'Otevřít nastavení barev',
+  'Voeg alt-tekst toe': 'Přidat alternativní text',
+  'Voeg beschrijving toe': 'Přidat popis',
+  'Zinnen naar losse bullets': 'Věty na samostatné odrážky',
 };
