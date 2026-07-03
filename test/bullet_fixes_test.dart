@@ -5,31 +5,32 @@ import 'package:ocideck/utils/bullet_fixes.dart';
 void main() {
   group('splitSentencesInBullets', () {
     test('knipt een meerzinnige bullet op zinsgrenzen', () {
-      expect(
-        splitSentencesInBullets(['Eerste zin. Tweede zin! Derde zin?']),
-        ['Eerste zin.', 'Tweede zin!', 'Derde zin?'],
-      );
+      expect(splitSentencesInBullets(['Eerste zin. Tweede zin! Derde zin?']), [
+        'Eerste zin.',
+        'Tweede zin!',
+        'Derde zin?',
+      ]);
     });
 
     test('laat enkelzinnige bullets ongemoeid', () {
-      expect(
-        splitSentencesInBullets(['Eén zin.', 'Zonder leesteken']),
-        ['Eén zin.', 'Zonder leesteken'],
-      );
+      expect(splitSentencesInBullets(['Eén zin.', 'Zonder leesteken']), [
+        'Eén zin.',
+        'Zonder leesteken',
+      ]);
     });
 
     test('behoudt inspring-niveau', () {
-      expect(
-        splitSentencesInBullets(['\t\tDiep. Genest.']),
-        ['\t\tDiep.', '\t\tGenest.'],
-      );
+      expect(splitSentencesInBullets(['\t\tDiep. Genest.']), [
+        '\t\tDiep.',
+        '\t\tGenest.',
+      ]);
     });
 
     test('behoudt restzin zonder afsluitend leesteken', () {
-      expect(
-        splitSentencesInBullets(['Af. En nog wat lopends']),
-        ['Af.', 'En nog wat lopends'],
-      );
+      expect(splitSentencesInBullets(['Af. En nog wat lopends']), [
+        'Af.',
+        'En nog wat lopends',
+      ]);
     });
 
     test('checklist-items behouden hun status per deel', () {
@@ -40,10 +41,9 @@ void main() {
     });
 
     test('een punt midden in een woord splitst niet', () {
-      expect(
-        splitSentencesInBullets(['Versie 1.2 van het plan']),
-        ['Versie 1.2 van het plan'],
-      );
+      expect(splitSentencesInBullets(['Versie 1.2 van het plan']), [
+        'Versie 1.2 van het plan',
+      ]);
     });
   });
 
