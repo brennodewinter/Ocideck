@@ -59,6 +59,10 @@ void main() {
     await openDialog(tester);
 
     expect(find.byType(ExportDialog), findsOneWidget);
+    // De kwaliteitskeuze is ingeklapt tot de kop wordt aangetikt.
+    expect(find.byType(SegmentedButton<bool>), findsNothing);
+    await tester.tap(find.text('Afbeeldingskwaliteit (PDF)'));
+    await tester.pumpAndSettle();
     expect(find.byType(SegmentedButton<bool>), findsOneWidget);
   });
 
@@ -70,6 +74,8 @@ void main() {
 
     await openDialog(tester);
 
+    await tester.tap(find.text('Afbeeldingskwaliteit (PDF)'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Gecomprimeerd'));
     await tester.pumpAndSettle();
 

@@ -51,6 +51,10 @@ void main() {
     );
 
     expect(find.text('Afbeeldingskwaliteit (PDF)'), findsOneWidget);
+    // De kwaliteitskeuze zit achter de inklapbare kop (progressive
+    // disclosure); openklappen toont de segmentknop.
+    await tester.tap(find.text('Afbeeldingskwaliteit (PDF)'));
+    await tester.pumpAndSettle();
     expect(
       find.widgetWithText(SegmentedButton<bool>, 'Normaal'),
       findsOneWidget,
