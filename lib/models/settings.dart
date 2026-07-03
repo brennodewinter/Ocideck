@@ -585,6 +585,13 @@ class AppSettings {
   final String selectedCockpitColorSchemeName;
   final List<String> recentFiles;
 
+  /// Herkomst van remote opgehaalde recente bestanden: lokaal pad → bron
+  /// (Nextcloud-server + pad, of de import-URL). Alleen paden uit
+  /// [recentFiles] staan erin; lokale bestanden ontbreken bewust. De welkom-
+  /// lijst markeert deze vermeldingen met een wolk-badge zodat direct
+  /// zichtbaar is welke presentaties van buiten komen.
+  final Map<String, String> recentFileOrigins;
+
   /// Optioneel vrijgaveplafond voor de classificatie-gate, opgeslagen als
   /// TLP-sleutel (zie `TlpLevelX.key`). `null` = geen plafond, alles mag worden
   /// geëxporteerd (standaard). Classificeren blijft optioneel; dit plafond
@@ -641,6 +648,7 @@ class AppSettings {
     this.cockpitColorSchemes = CockpitColorScheme.builtIns,
     this.selectedCockpitColorSchemeName = 'Standaard',
     this.recentFiles = const [],
+    this.recentFileOrigins = const {},
     this.maxReleaseExportTlpKey,
     this.minRequiredExportTlpKey,
     this.requireClassificationOnExport = false,
@@ -712,6 +720,7 @@ class AppSettings {
     List<CockpitColorScheme>? cockpitColorSchemes,
     String? selectedCockpitColorSchemeName,
     List<String>? recentFiles,
+    Map<String, String>? recentFileOrigins,
     String? maxReleaseExportTlpKey,
     String? minRequiredExportTlpKey,
     bool? requireClassificationOnExport,
@@ -761,6 +770,7 @@ class AppSettings {
       selectedCockpitColorSchemeName:
           selectedCockpitColorSchemeName ?? this.selectedCockpitColorSchemeName,
       recentFiles: recentFiles ?? this.recentFiles,
+      recentFileOrigins: recentFileOrigins ?? this.recentFileOrigins,
       maxReleaseExportTlpKey: clearMaxReleaseExportTlp
           ? null
           : (maxReleaseExportTlpKey ?? this.maxReleaseExportTlpKey),
