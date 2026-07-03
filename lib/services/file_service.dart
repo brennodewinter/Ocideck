@@ -737,7 +737,7 @@ class FileService {
       if (outPath == null) continue; // skip path-traversal entries
       final out = File(outPath);
       await out.parent.create(recursive: true);
-      await out.writeAsBytes(entry.bytes, flush: true);
+      await writeBytesAtomic(out, entry.bytes);
     }
 
     // The main markdown must itself resolve inside the extraction folder.
