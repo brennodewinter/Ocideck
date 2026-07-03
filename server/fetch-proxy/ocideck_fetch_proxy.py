@@ -141,6 +141,14 @@ class Handler(BaseHTTPRequestHandler):
     def _origin_allowed(self) -> bool:
         if not ALLOWED_ORIGINS:
             return True
+        # `Sec-Fetch-Site: same-origin` sturen browsers bij elk verzoek
+        # automatisch mee en is niet door (cross-site) pagina's te zetten:
+        # het bewijst dat het verzoek van de app-pagina zelf komt — óók
+        # wanneer een privacy-instelling of extensie de Referer stript.
+        # Een direct ingetikt adres heeft Sec-Fetch-Site "none" en een
+        # andere site "cross-site"; beide blijven geweigerd.
+        if (self.headers.get("Sec-Fetch-Site") or "").lower() == "same-origin":
+            return True
         for header in ("Origin", "Referer"):
             value = (self.headers.get(header) or "").rstrip("/")
             if any(
