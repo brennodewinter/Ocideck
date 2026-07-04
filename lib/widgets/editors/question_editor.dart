@@ -101,6 +101,22 @@ class _QuestionEditorState extends State<QuestionEditor> {
     _emit();
   }
 
+  /// Wissel antwoord [i] met zijn buur ([delta] = -1 of 1) — de lijstvolgorde
+  /// is bij een volgorde-vraag het juiste antwoord.
+  void _moveAnswer(int i, int delta) {
+    final j = i + delta;
+    if (j < 0 || j >= _answers.length) return;
+    setState(() {
+      final ctrl = _answers[i];
+      _answers[i] = _answers[j];
+      _answers[j] = ctrl;
+      final flag = _correct[i];
+      _correct[i] = _correct[j];
+      _correct[j] = flag;
+    });
+    _emit();
+  }
+
   void _removeAnswer(int i) {
     if (_answers.length <= 1) return;
     setState(() {
@@ -128,6 +144,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
     final l10n = context.l10n;
     final isTrueFalse = _kind == QuestionKind.trueFalse;
     final isMulti = _kind == QuestionKind.multipleCorrect;
+    final isOrdering = _kind == QuestionKind.ordering;
     final filledCorrect = [
       for (var i = 0; i < _answers.length; i++)
         if (_correct[i] && _answers[i].text.trim().isNotEmpty) i,
@@ -159,6 +176,10 @@ class _QuestionEditorState extends State<QuestionEditor> {
               value: QuestionKind.multipleCorrect,
               child: Text(l10n.d('Meerdere juiste antwoorden')),
             ),
+            DropdownMenuItem(
+              value: QuestionKind.ordering,
+              child: Text(l10n.d('Volgorde')),
+            ),
           ],
           onChanged: (value) {
             if (value == null) return;
@@ -178,6 +199,8 @@ class _QuestionEditorState extends State<QuestionEditor> {
         const SizedBox(height: 16),
         if (isTrueFalse)
           ..._buildTrueFalseSection(l10n)
+        else if (isOrdering)
+          ..._orderingSection(l10n)
         else
           ..._answersSection(
             l10n,
@@ -290,6 +313,124 @@ class _QuestionEditorState extends State<QuestionEditor> {
           ),
         ),
     ];
+  }
+
+  /// Antwoorden voor een volgorde-vraag: geen goed/fout-vinkjes, maar
+  /// omhoog/omlaag-knoppen — de lijstvolgorde hier ís de juiste volgorde.
+  List<Widget> _orderingSection(AppLocalizations l10n) {
+    final filledCount = _answers.where((c) => c.text.trim().isNotEmpty).length;
+    return [
+      const SectionLabel('Antwoorden'),
+      Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: Text(
+          l10n.d(
+            'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.',
+          ),
+          style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
+        ),
+      ),
+      for (int i = 0; i < _answers.length; i++) _buildOrderingRow(i),
+      const SizedBox(height: 4),
+      Align(
+        alignment: Alignment.centerLeft,
+        child: TextButton.icon(
+          onPressed: _addAnswer,
+          icon: const Icon(Icons.add, size: 16),
+          label: Text(l10n.d('Antwoord toevoegen')),
+        ),
+      ),
+      if (filledCount < 2)
+        Padding(
+          padding: const EdgeInsets.only(top: 4),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.warning_amber_rounded,
+                size: 16,
+                color: Color(0xFFB45309),
+              ),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  l10n.d('Geef minstens twee antwoorden op.'),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFFB45309),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+    ];
+  }
+
+  Widget _buildOrderingRow(int i) {
+    final l10n = context.l10n;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 24,
+            child: Text(
+              '${i + 1}.',
+              textAlign: TextAlign.right,
+              style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: AppTheme.slate500,
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: TextField(
+              controller: _answers[i],
+              decoration: InputDecoration(
+                hintText: '${l10n.d('Antwoord')} ${i + 1}',
+                isDense: true,
+              ),
+            ),
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.arrow_upward,
+              size: 18,
+              color: AppTheme.slate500,
+            ),
+            onPressed: i > 0 ? () => _moveAnswer(i, -1) : null,
+            tooltip: l10n.d('Omhoog'),
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            constraints: const BoxConstraints(minWidth: 28),
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.arrow_downward,
+              size: 18,
+              color: AppTheme.slate500,
+            ),
+            onPressed: i < _answers.length - 1 ? () => _moveAnswer(i, 1) : null,
+            tooltip: l10n.d('Omlaag'),
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            constraints: const BoxConstraints(minWidth: 28),
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.remove_circle_outline,
+              size: 18,
+              color: AppTheme.slate500,
+            ),
+            onPressed: _answers.length > 1 ? () => _removeAnswer(i) : null,
+            tooltip: l10n.d('Verwijder'),
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            constraints: const BoxConstraints(minWidth: 28),
+          ),
+        ],
+      ),
+    );
   }
 
   List<Widget> _imageSection() {

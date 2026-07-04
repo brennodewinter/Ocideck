@@ -173,6 +173,7 @@ class _TimelinePreviewState extends State<_TimelinePreview>
                       drawT: _controller.value,
                       lineFraction: _lineFraction,
                       revealedCount: widget.revealedCount,
+                      currentIndex: _validCurrentIndex(events.length),
                       animating: _animatesOnEnter,
                       accent: accent,
                       onAccent: onAccent,
@@ -186,6 +187,13 @@ class _TimelinePreviewState extends State<_TimelinePreview>
         ],
       ),
     );
+  }
+
+  /// The slide's current-point index, but only when it actually points at one
+  /// of the parsed events — a stale (hand-edited) index highlights nothing.
+  int? _validCurrentIndex(int count) {
+    final i = widget.slide.timelineCurrentIndex;
+    return (i != null && i >= 0 && i < count) ? i : null;
   }
 
   /// Auto uses the horizontal multi-floor rail (it tiles cards across heights,
@@ -304,6 +312,11 @@ class _TimelineCanvas extends StatelessWidget {
   final bool horizontal;
   final double drawT;
   final int? revealedCount;
+
+  /// Index of the event marked as the current point (validated by the caller);
+  /// null = none. When set, it takes over the highlight the last event gets by
+  /// default, so the deck shows exactly one "you are here".
+  final int? currentIndex;
   final bool animating;
   final Color accent;
   final Color onAccent;
@@ -324,6 +337,7 @@ class _TimelineCanvas extends StatelessWidget {
     required this.horizontal,
     required this.drawT,
     required this.revealedCount,
+    required this.currentIndex,
     required this.animating,
     required this.accent,
     required this.onAccent,
@@ -358,6 +372,7 @@ class _TimelineCanvas extends StatelessWidget {
                   spineEnd: nodes.last.pos,
                   spineProgress: _spineProgress(n),
                   nodeRadius: layout.nodeRadius,
+                  currentIndex: currentIndex,
                   accent: accent,
                   bg: bg,
                 ),
@@ -400,7 +415,10 @@ class _TimelineCanvas extends StatelessWidget {
               child: _TimelineCard(
                 key: ValueKey('timeline-card-$i'),
                 event: events[i],
-                emphasized: i == events.length - 1,
+                // With an explicit current point that card carries the (strong)
+                // highlight; otherwise the last event keeps its subtle default.
+                emphasized: currentIndex == null && i == events.length - 1,
+                isCurrent: i == currentIndex,
                 w: w,
                 scale: scale,
                 showDescription:
@@ -586,6 +604,10 @@ class _TimelineCanvas extends StatelessWidget {
 class _TimelineCard extends StatelessWidget {
   final TimelineEvent event;
   final bool emphasized;
+
+  /// Marks the explicit current point ("you are here"): a stronger tint, a
+  /// solid accent border and a soft glow, one visual step above [emphasized].
+  final bool isCurrent;
   final double w;
   final double scale;
   final bool showDescription;
@@ -600,6 +622,7 @@ class _TimelineCard extends StatelessWidget {
     super.key,
     required this.event,
     required this.emphasized,
+    required this.isCurrent,
     required this.w,
     required this.scale,
     required this.showDescription,
@@ -628,14 +651,28 @@ class _TimelineCard extends StatelessWidget {
       // Surfaces are tinted with the profile accent so the timeline visibly
       // belongs to the presentation's colour scheme rather than a neutral grey.
       decoration: BoxDecoration(
-        color: accent.withValues(alpha: 0.08),
+        color: accent.withValues(alpha: isCurrent ? 0.16 : 0.08),
         borderRadius: BorderRadius.circular(w * 0.009),
         border: Border.all(
-          color: emphasized
+          color: isCurrent
+              ? accent
+              : emphasized
               ? accent.withValues(alpha: 0.7)
               : accent.withValues(alpha: 0.22),
-          width: emphasized ? 1.6 : 1.0,
+          width: isCurrent
+              ? 2.0
+              : emphasized
+              ? 1.6
+              : 1.0,
         ),
+        boxShadow: isCurrent
+            ? [
+                BoxShadow(
+                  color: accent.withValues(alpha: 0.30),
+                  blurRadius: w * 0.014,
+                ),
+              ]
+            : null,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -722,6 +759,10 @@ class _TimelineRailPainter extends CustomPainter {
   final Offset spineEnd;
   final double spineProgress;
   final double nodeRadius;
+
+  /// Node of the explicit current point; null = none. That node grows and gets
+  /// a halo ring, replacing the size bump the last node gets by default.
+  final int? currentIndex;
   final Color accent;
   final Color bg;
 
@@ -732,6 +773,7 @@ class _TimelineRailPainter extends CustomPainter {
     required this.spineEnd,
     required this.spineProgress,
     required this.nodeRadius,
+    required this.currentIndex,
     required this.accent,
     required this.bg,
   });
@@ -789,13 +831,42 @@ class _TimelineRailPainter extends CustomPainter {
       final r = reveal[i];
       if (r <= 0.01) continue;
       final node = nodes[i];
-      final last = i == nodes.length - 1;
-      final rad = nodeRadius * (0.55 + 0.45 * r) * (last ? 1.18 : 1.0);
+      final current = i == currentIndex;
+      // Without an explicit current point the last node keeps its subtle bump.
+      final last = currentIndex == null && i == nodes.length - 1;
+      final rad =
+          nodeRadius *
+          (0.55 + 0.45 * r) *
+          (current
+              ? 1.35
+              : last
+              ? 1.18
+              : 1.0);
       canvas.drawCircle(
         node.pos,
         rad * 2.1,
-        Paint()..color = accent.withValues(alpha: (last ? 0.18 : 0.12) * r),
+        Paint()
+          ..color = accent.withValues(
+            alpha:
+                (current
+                    ? 0.24
+                    : last
+                    ? 0.18
+                    : 0.12) *
+                r,
+          ),
       );
+      if (current) {
+        // Halo ring: the "you are here" marker around the current node.
+        canvas.drawCircle(
+          node.pos,
+          rad * 1.9,
+          Paint()
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = math.max(1.2, rad * 0.28)
+            ..color = accent.withValues(alpha: 0.55 * r),
+        );
+      }
       canvas.drawCircle(node.pos, rad, Paint()..color = accent);
       canvas.drawCircle(
         node.pos,
@@ -814,6 +885,7 @@ class _TimelineRailPainter extends CustomPainter {
       old.spineProgress != spineProgress ||
       !listEquals(old.reveal, reveal) ||
       old.nodeRadius != nodeRadius ||
+      old.currentIndex != currentIndex ||
       old.accent != accent ||
       old.bg != bg ||
       old.nodes.length != nodes.length;

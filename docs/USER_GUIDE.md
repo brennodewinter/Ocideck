@@ -129,6 +129,15 @@ the chooser, then choose the **kind** in the editor:
 - **Multiple correct answers** — several answers may be correct. The viewer ticks
   **all** correct ones and presses **Confirm**; it is only right when exactly the
   correct set is selected.
+- **Ordering** — enter the answers **in the correct order** in the editor (the
+  up/down arrows rearrange them). At presentation time a random subset is drawn
+  (keeping its relative order as the right answer) and shown shuffled — never
+  accidentally already in the right order. The viewer taps the options in the
+  order they think is correct — each tap assigns the next position number,
+  tapping again removes it — and presses **Confirm** once every option has a
+  place. On a wrong answer the options are revealed **in the correct order**:
+  correctly placed ones turn green, misplaced ones turn red with an explicit
+  *Your order: n* line showing where the viewer had put them.
 
 Common options for every kind:
 

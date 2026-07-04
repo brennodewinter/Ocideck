@@ -512,6 +512,8 @@ const _dutchSourceAddPap = {
   'Verticaal': 'Vertikal',
   'Animatie': 'Animashon',
   'Intekenen bij openen': 'Dibuhá ora di habri',
+  'Markeer als huidig punt': 'Marka komo punto aktual',
+  'Huidig punt weghalen': 'Kita punto aktual',
   'Stap voor stap': 'Paso pa paso',
   'Geen animatie': 'Sin animashon',
   'Animatiesnelheid': 'Velosidat di animashon',
@@ -570,6 +572,13 @@ const _dutchSourceAddPap = {
       'E deklarashon ariba ta bèrdat òf falsu; skohe kua.',
   'Selecteer alle juiste antwoorden': 'Selektá tur e kontestanan korekto',
   'Bevestig': 'Konfirmá',
+  'Volgorde': 'Órden',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Pone e kontestanan aki den e órden korekto. Ora di presentá nan ta wòrdu mustrá bruhá.',
+  'Geef minstens twee antwoorden op.': 'Duna por lo ménos dos kontesta.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Primi e kontestanan den e órden korekto',
+  'Jouw volgorde': 'Bo órden',
   'Het juiste antwoord': 'E kontesta korekto',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'E imagen ta wòrdu mustrá na pantaya kompleto komo fondo. Usa e waas ora e título mester di mas trankilidat òf kontraste.',
@@ -1110,4 +1119,109 @@ const _dutchSourceAddPap = {
   'Pen · markeerstift · ⇧E': 'Pèn · marker · ⇧E',
   'Gestapelde staaf': 'Baranan apilá',
   'Spreiding': 'Dispershon',
+  'Klaar voor export': 'Kla pa eksportá',
+  'kwaliteitswaarschuwing(en)': 'atvertensia(nan) di kalidat',
+  'Nog opslaan nodig': 'Mester warda promé',
+  'TLP blokkeert export': 'TLP ta blokia eksportashon',
+  'Kwaliteit blokkeert export': 'Kalidat ta blokia eksportashon',
+  'Leeg deck': 'Deck bashí',
+  'Korte briefing': 'Briefing kòrtiku',
+  'Status-briefing': 'Briefing di status',
+  'Projectstart / kick-off': 'Inisio di proyekto / kick-off',
+  'Voorbespreking communicatie': 'Preparashon di komunikashon',
+  'Projecttijdlijn': 'Liña di tempu di proyekto',
+  'Informatiebeveiliging: RASCI / TVB': 'Seguridat di informashon: RASCI / TVB',
+  'Security-takenplan': 'Plan di tarea di seguridat',
+  'Certificering voortgang': 'Progreso di sertifikashon',
+  'Training / workshop': 'Entrenamentu / workshop',
+  'Rapportage': 'Rapòrt',
+  'Onderzoeksverhaal': 'Historia di investigashon',
+  'Technische uitleg': 'Splikashon tékniko',
+  'Interactieve quiz': 'Quiz interaktivo',
+  'Alleen een titelpagina en een agenda.':
+      'Solamente un página di título i un agenda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situashon, echonan i e desishon pidí den seis slide.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Dashboard di status, progreso pa liña di trabou i desishonnan.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Pakiko, meta, alkanse, stakeholdernan i liña di tempu.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Gruponan meta, mensahe klave, kanalnan i portavos.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fasenan, hitonan, dependensianan i momentonan di desishon.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Registrá rolnan, matriks RASCI i akuerdonan di tarea.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Tareanan, prioridatnan, doñonan i evidensianan.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Progreso pa dominio, kontrolnan i planifikashon di audit.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Metanan di siñansa, konseptonan klave, ehersisio i pregunta di quiz.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Resúmen, dashboard di KPI, tendensia i akshonnan.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Pregunta, método, liña di tempu di resultadonan i konklushonnan.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arkitektura, komponentenan, ehèmpel di kódigo i checklist.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Tres tipo di pregunta ku splikashon i diskushon despues.',
+  'Sjabloon': 'Modelo',
+  'Post-incident review / lessons learned':
+      'Post-incident review / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Fuga di dato / evaluashon di insidente di privasidat',
+  'DPIA / privacy impact assessment': 'DPIA / privacy impact assessment',
+  'Risicoanalyse / risk register': 'Análisis di riesgo / risk register',
+  'Business continuity / DR-test': 'Business continuity / test di DR',
+  'Tabletop-oefening / crisisoefening':
+      'Ehersisio tabletop / ehersisio di krisis',
+  'BOB-crisisrapportage': 'Rapòrt di krisis BOB',
+  'CAB / release readiness': 'CAB / release readiness',
+  'Stuurgroep / project board update':
+      'Grupo di direkshon / update di project board',
+  'Auditbevindingen en opvolging': 'Resultadonan di audit i seguimentu',
+  'Leveranciersbeoordeling / vendor risk':
+      'Evaluashon di proveedó / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Desishon di arkitektura / presentashon ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Introdusí polítika / plan di implementashon',
+  'Overdracht / handover': 'Traspaso / handover',
+  'Retrospective / teamverbetering': 'Retrospective / mehorashon di tim',
+  'PPL Vluchtvoorbereiding': 'Preparashon di buelo PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Liña di tempu, impakto, kousanan i akshonnan di mehora despues di un insidente.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Evaluá datonan, riesgo, obligashon di notifikashon i komunikashon.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Prosesamentu, base legal, riesgonan di privasidat i medidanan.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Registrá riesgonan, probabilidat, impakto, medidanan i doñonan.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Senario, metanan di rekuperashon, resultadonan di test i puntonan di mehora.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Senario, injects, desishonnan, opservashonnan i evaluashon.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Guia un tim di krisis dor di formashon di imágen, formashon di huisio i tuma di desishon, ku bista di situashon live, preguntanan di informashon, dilemanan, log di desishon i lista di akshon.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Kambio, impakto, testnan, rollback, komunikashon i go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Progreso, planifikashon, presupuesto, riesgonan i desishonnan pidí.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Resultadonan, root cause, medidanan, evidensia i status.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Servisio, dato, dependensia, eksigensianan, riesgonan i desishon.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Konteksto, opshonnan, trade-offs, desishon i konsekuensianan.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Grupo meta, planifikashon, komunikashon, entrenamentu i adopshon.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Status, akshonnan habrí, riesgonan, kontaktonan i promé pasonan.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Echonan, patronnan, start-stop-continue i akshonnan di mehora.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Prepará un buelo VFR ku ruta, wèr, NOTAMs, prestashon, weight & balance, kombustibel, alternates i cheknan go/no-go personal.',
+  'Zoek een sjabloon': 'Buska un modelo',
+  'Geen sjablonen gevonden': 'No a haña ningun modelo',
 };

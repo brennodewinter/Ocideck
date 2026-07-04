@@ -506,6 +506,8 @@ const _dutchSourceAddFr = {
   'Verticaal': 'Vertical',
   'Animatie': 'Animation',
   'Intekenen bij openen': 'Tracer à l\'ouverture',
+  'Markeer als huidig punt': 'Marquer comme point actuel',
+  'Huidig punt weghalen': 'Retirer le point actuel',
   'Stap voor stap': 'Étape par étape',
   'Geen animatie': 'Aucune animation',
   'Animatiesnelheid': 'Vitesse d\'animation',
@@ -564,6 +566,13 @@ const _dutchSourceAddFr = {
       'L\'affirmation ci-dessus est vraie ou fausse ; choisissez.',
   'Selecteer alle juiste antwoorden': 'Sélectionnez toutes les bonnes réponses',
   'Bevestig': 'Confirmer',
+  'Volgorde': 'Ordre',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Placez ici les réponses dans le bon ordre. Lors de la présentation, elles sont affichées mélangées.',
+  'Geef minstens twee antwoorden op.': 'Indiquez au moins deux réponses.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Touchez les réponses dans le bon ordre',
+  'Jouw volgorde': 'Votre ordre',
   'Het juiste antwoord': 'La bonne réponse',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'L\'image est affichée en plein écran en arrière-plan. Utilisez le flou lorsque le titre a besoin de plus de calme ou de contraste.',
@@ -1122,4 +1131,111 @@ const _dutchSourceAddFr = {
   'Pen · markeerstift · ⇧E': 'Stylo · surligneur · ⇧E',
   'Gestapelde staaf': 'Barres empilées',
   'Spreiding': 'Nuage de points',
+  'Klaar voor export': 'Prêt à exporter',
+  'kwaliteitswaarschuwing(en)': 'avertissement(s) de qualité',
+  'Nog opslaan nodig': 'Enregistrement requis d\'abord',
+  'TLP blokkeert export': 'Le TLP bloque l\'export',
+  'Kwaliteit blokkeert export': 'La qualité bloque l\'export',
+  'Leeg deck': 'Deck vide',
+  'Korte briefing': 'Briefing court',
+  'Status-briefing': 'Briefing de statut',
+  'Projectstart / kick-off': 'Lancement de projet / kick-off',
+  'Voorbespreking communicatie': 'Pré-briefing communication',
+  'Projecttijdlijn': 'Chronologie du projet',
+  'Informatiebeveiliging: RASCI / TVB':
+      'Sécurité de l\'information : RASCI / responsabilités',
+  'Security-takenplan': 'Plan des tâches de sécurité',
+  'Certificering voortgang': 'Avancement de la certification',
+  'Training / workshop': 'Formation / atelier',
+  'Rapportage': 'Rapport',
+  'Onderzoeksverhaal': 'Récit d\'enquête',
+  'Technische uitleg': 'Explication technique',
+  'Interactieve quiz': 'Quiz interactif',
+  'Alleen een titelpagina en een agenda.':
+      'Uniquement une page de titre et un agenda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situation, faits et décision demandée en six diapositives.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Tableau de bord d\'état, avancement par chantier et décisions.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Pourquoi, objectif, périmètre, parties prenantes et calendrier.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Publics cibles, message clé, canaux et porte-parole.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Phases, jalons, dépendances et points de décision.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Consigner les rôles, la matrice RASCI et les accords de tâches.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Tâches, priorités, responsables et pièces justificatives.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Avancement par domaine, contrôles et planification des audits.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Objectifs pédagogiques, concepts clés, exercice et question de quiz.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Synthèse, tableau de bord KPI, tendance et actions.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Question, méthode, chronologie des constats et conclusions.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architecture, composants, exemple de code et checklist.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Trois formes de questions avec explication et débriefing.',
+  'Sjabloon': 'Modèle',
+  'Post-incident review / lessons learned':
+      'Revue post-incident / retour d\'expérience',
+  'Datalek / privacy-incident beoordeling':
+      'Violation de données / évaluation d\'incident de confidentialité',
+  'DPIA / privacy impact assessment':
+      'DPIA / analyse d\'impact sur la vie privée',
+  'Risicoanalyse / risk register': 'Analyse de risques / registre des risques',
+  'Business continuity / DR-test': 'Continuité d\'activité / test DR',
+  'Tabletop-oefening / crisisoefening':
+      'Exercice sur table / exercice de crise',
+  'BOB-crisisrapportage': 'Rapport de crise BOB',
+  'CAB / release readiness': 'CAB / préparation à la mise en production',
+  'Stuurgroep / project board update':
+      'Comité de pilotage / point d\'avancement projet',
+  'Auditbevindingen en opvolging': 'Constats d\'audit et suivi',
+  'Leveranciersbeoordeling / vendor risk':
+      'Évaluation des fournisseurs / risque fournisseur',
+  'Architectuurbesluit / ADR-presentatie':
+      'Décision d\'architecture / présentation ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Déploiement d\'une politique / plan de mise en œuvre',
+  'Overdracht / handover': 'Transfert / passation',
+  'Retrospective / teamverbetering': 'Rétrospective / amélioration d\'équipe',
+  'PPL Vluchtvoorbereiding': 'Préparation de vol PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Chronologie, impact, causes et actions d\'amélioration après un incident.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Évaluer les données, le risque, l\'obligation de notification et la communication.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Traitement, base légale, risques pour la vie privée et mesures.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Consigner les risques, la probabilité, l\'impact, les mesures et les responsables.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scénario, objectifs de reprise, constats de test et points d\'amélioration.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scénario, injects, décisions, observations et évaluation.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Guider une cellule de crise à travers l\'analyse de la situation, le jugement et la prise de décision, avec image de situation en direct, demandes d\'information, dilemmes, journal des décisions et liste d\'actions.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Changement, impact, tests, rollback, communication et go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Avancement, planning, budget, risques et décisions demandées.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Constats, cause racine, mesures, preuves et statut.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Service, données, dépendance, exigences, risques et décision.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Contexte, options, arbitrages, décision et conséquences.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Public cible, planning, communication, formation et adoption.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Statut, actions ouvertes, risques, contacts et premières étapes.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Faits, tendances, start-stop-continue et actions d\'amélioration.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Préparer un vol VFR avec route, météo, NOTAM, performances, masse et centrage, carburant, terrains de dégagement et checks go/no-go personnels.',
+  'Zoek een sjabloon': 'Rechercher un modèle',
+  'Geen sjablonen gevonden': 'Aucun modèle trouvé',
 };

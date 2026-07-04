@@ -676,6 +676,8 @@ const _dutchSourceFi = {
   'Verticaal': 'Pystysuora',
   'Animatie': 'Animaatio',
   'Intekenen bij openen': 'Piirrä avattaessa',
+  'Markeer als huidig punt': 'Merkitse nykyiseksi pisteeksi',
+  'Huidig punt weghalen': 'Poista nykyinen piste',
   'Stap voor stap': 'Vaihe vaiheelta',
   'Geen animatie': 'Ei animaatiota',
   'Animatiesnelheid': 'Animaationopeus',
@@ -734,6 +736,13 @@ const _dutchSourceFi = {
       'Yllä oleva väittämä on tosi tai epätosi; valitse kumpi.',
   'Selecteer alle juiste antwoorden': 'Valitse kaikki oikeat vastaukset',
   'Bevestig': 'Vahvista',
+  'Volgorde': 'Järjestys',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Laita vastaukset tässä oikeaan järjestykseen. Esitettäessä ne näytetään sekoitettuina.',
+  'Geef minstens twee antwoorden op.': 'Anna vähintään kaksi vastausta.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Napauta vastauksia oikeassa järjestyksessä',
+  'Jouw volgorde': 'Sinun järjestyksesi',
   'Het juiste antwoord': 'Oikea vastaus',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Kuva näytetään koko näytön taustana. Käytä sumennusta, kun otsikko tarvitsee lisää rauhaa tai kontrastia.',
@@ -1108,6 +1117,106 @@ const _dutchSourceFi = {
   'Pen · markeerstift · ⇧E': 'Kynä · korostuskynä · ⇧E',
   'Gestapelde staaf': 'Pinottu pylväs',
   'Spreiding': 'Hajonta',
+  'Klaar voor export': 'Valmis vientiin',
+  'kwaliteitswaarschuwing(en)': 'laatuvaroitus(ta)',
+  'Nog opslaan nodig': 'Tallenna ensin',
+  'TLP blokkeert export': 'TLP estää viennin',
+  'Kwaliteit blokkeert export': 'Laatu estää viennin',
+  'Leeg deck': 'Tyhjä deck',
+  'Korte briefing': 'Lyhyt briiffi',
+  'Status-briefing': 'Tilannekatsaus',
+  'Projectstart / kick-off': 'Projektin aloitus / kick-off',
+  'Voorbespreking communicatie': 'Viestinnän ennakkopalaveri',
+  'Projecttijdlijn': 'Projektin aikajana',
+  'Informatiebeveiliging: RASCI / TVB': 'Tietoturva: RASCI / TVB',
+  'Security-takenplan': 'Turvallisuustehtävien suunnitelma',
+  'Certificering voortgang': 'Sertifioinnin eteneminen',
+  'Training / workshop': 'Koulutus / työpaja',
+  'Rapportage': 'Raportointi',
+  'Onderzoeksverhaal': 'Tutkimustarina',
+  'Technische uitleg': 'Tekninen selitys',
+  'Interactieve quiz': 'Interaktiivinen tietovisa',
+  'Alleen een titelpagina en een agenda.': 'Vain otsikkosivu ja esityslista.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Tilanne, faktat ja pyydetty päätös kuudella dialla.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Tilannenäkymä, eteneminen työvirroittain ja päätökset.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Miksi, tavoite, laajuus, sidosryhmät ja aikajana.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Kohderyhmät, ydinviesti, kanavat ja tiedottaminen.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Vaiheet, virstanpylväät, riippuvuudet ja päätöskohdat.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Roolien, RASCI-matriisin ja tehtäväsopimusten kirjaaminen.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Tehtävät, prioriteetit, omistajat ja todisteet.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Eteneminen aihealueittain, kontrollit ja auditointien suunnittelu.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Oppimistavoitteet, ydinkäsitteet, harjoitus ja tietovisakysymys.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Yhteenveto, KPI-mittaristo, trendi ja toimenpiteet.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Kysymys, menetelmä, havaintojen aikajana ja johtopäätökset.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arkkitehtuuri, komponentit, koodiesimerkki ja tarkistuslista.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Kolme kysymystyyppiä selityksineen ja loppukeskustelu.',
+  'Sjabloon': 'Mallipohja',
+  'Post-incident review / lessons learned':
+      'Post-incident review / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Tietovuoto / tietosuojapoikkeaman arviointi',
+  'DPIA / privacy impact assessment': 'DPIA / tietosuojan vaikutustenarviointi',
+  'Risicoanalyse / risk register': 'Riskianalyysi / riskirekisteri',
+  'Business continuity / DR-test': 'Business continuity / DR-testi',
+  'Tabletop-oefening / crisisoefening': 'Tabletop-harjoitus / kriisiharjoitus',
+  'BOB-crisisrapportage': 'BOB-kriisiraportointi',
+  'CAB / release readiness': 'CAB / julkaisuvalmius',
+  'Stuurgroep / project board update': 'Ohjausryhmä / project board -katsaus',
+  'Auditbevindingen en opvolging': 'Auditointihavainnot ja jatkotoimet',
+  'Leveranciersbeoordeling / vendor risk': 'Toimittaja-arviointi / vendor risk',
+  'Architectuurbesluit / ADR-presentatie': 'Arkkitehtuuripäätös / ADR-esitys',
+  'Beleid uitrollen / implementatieplan':
+      'Politiikan käyttöönotto / toteutussuunnitelma',
+  'Overdracht / handover': 'Luovutus / handover',
+  'Retrospective / teamverbetering': 'Retrospektiivi / tiimin kehittäminen',
+  'PPL Vluchtvoorbereiding': 'PPL-lennonvalmistelu',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Aikajana, vaikutukset, syyt ja parannustoimet häiriötilanteen jälkeen.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Arvioi tiedot, riski, ilmoitusvelvollisuus ja viestintä.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Käsittely, oikeusperuste, tietosuojariskit ja toimenpiteet.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Kirjaa riskit, todennäköisyys, vaikutus, toimenpiteet ja omistajat.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Skenaario, palautumistavoitteet, testihavainnot ja parannuskohteet.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Skenaario, injectit, päätökset, havainnot ja arviointi.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Ohjaa kriisiryhmä tilannekuvan muodostamisen, arvioinnin ja päätöksenteon läpi reaaliaikaisen tilannekuvan, tietopyyntöjen, dilemmojen, päätöslokin ja toimenpidelistan avulla.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Muutos, vaikutus, testit, rollback, viestintä ja go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Eteneminen, aikataulu, budjetti, riskit ja pyydetyt päätökset.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Havainnot, root cause, toimenpiteet, todisteet ja tila.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Palvelu, tiedot, riippuvuus, vaatimukset, riskit ja päätös.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Konteksti, vaihtoehdot, trade-offit, päätös ja seuraukset.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Kohderyhmä, aikataulu, viestintä, koulutus ja käyttöönotto.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Tila, avoimet toimenpiteet, riskit, yhteyshenkilöt ja ensimmäiset askeleet.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Faktat, toistuvat kaavat, start-stop-continue ja parannustoimet.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Valmistele VFR-lento: reitti, sää, NOTAMit, suorituskyky, weight & balance, polttoaine, varakentät ja henkilökohtaiset go/no-go-tarkistukset.',
+  'Zoek een sjabloon': 'Etsi mallipohjaa',
+  'Geen sjablonen gevonden': 'Mallipohjia ei löytynyt',
   // Duplicaatdetectie & opruimen (open-lijsten).
   'Identieke kopieën': 'Identtiset kopiot',
   'Zelfde titel, andere inhoud': 'Sama otsikko, eri sisältö',

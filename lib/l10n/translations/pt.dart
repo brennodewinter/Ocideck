@@ -689,6 +689,8 @@ const _dutchSourcePt = {
   'Verticaal': 'Vertical',
   'Animatie': 'Animação',
   'Intekenen bij openen': 'Desenhar ao abrir',
+  'Markeer als huidig punt': 'Marcar como ponto atual',
+  'Huidig punt weghalen': 'Remover o ponto atual',
   'Stap voor stap': 'Passo a passo',
   'Geen animatie': 'Sem animação',
   'Animatiesnelheid': 'Velocidade da animação',
@@ -747,6 +749,13 @@ const _dutchSourcePt = {
       'A afirmação acima é verdadeira ou falsa; escolha qual.',
   'Selecteer alle juiste antwoorden': 'Selecione todas as respostas corretas',
   'Bevestig': 'Confirmar',
+  'Volgorde': 'Ordem',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Coloque aqui as respostas na ordem correta. Ao apresentar, são mostradas baralhadas.',
+  'Geef minstens twee antwoorden op.': 'Indique pelo menos duas respostas.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Toque nas respostas na ordem correta',
+  'Jouw volgorde': 'A sua ordem',
   'Het juiste antwoord': 'A resposta correta',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'A imagem é mostrada em ecrã inteiro como fundo. Use a desfocagem quando o título precisar de mais calma ou contraste.',
@@ -1124,6 +1133,112 @@ const _dutchSourcePt = {
   'Pen · markeerstift · ⇧E': 'Caneta · marcador · ⇧E',
   'Gestapelde staaf': 'Barras empilhadas',
   'Spreiding': 'Dispersão',
+  'Klaar voor export': 'Pronto para exportar',
+  'kwaliteitswaarschuwing(en)': 'aviso(s) de qualidade',
+  'Nog opslaan nodig': 'É preciso guardar primeiro',
+  'TLP blokkeert export': 'O TLP bloqueia a exportação',
+  'Kwaliteit blokkeert export': 'A qualidade bloqueia a exportação',
+  'Leeg deck': 'Deck vazio',
+  'Korte briefing': 'Briefing curto',
+  'Status-briefing': 'Briefing de estado',
+  'Projectstart / kick-off': 'Início de projeto / kick-off',
+  'Voorbespreking communicatie': 'Reunião prévia de comunicação',
+  'Projecttijdlijn': 'Cronograma do projeto',
+  'Informatiebeveiliging: RASCI / TVB': 'Segurança da informação: RASCI / TVB',
+  'Security-takenplan': 'Plano de tarefas de segurança',
+  'Certificering voortgang': 'Progresso da certificação',
+  'Training / workshop': 'Formação / workshop',
+  'Rapportage': 'Relatório',
+  'Onderzoeksverhaal': 'Narrativa de investigação',
+  'Technische uitleg': 'Explicação técnica',
+  'Interactieve quiz': 'Quiz interativo',
+  'Alleen een titelpagina en een agenda.':
+      'Apenas uma página de título e uma agenda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situação, factos e decisão pedida em seis diapositivos.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Painel de estado, progresso por fluxo de trabalho e decisões.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Porquê, objetivo, âmbito, partes interessadas e cronograma.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Públicos-alvo, mensagem central, canais e porta-vozes.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fases, marcos, dependências e momentos de decisão.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Registar papéis, matriz RASCI e acordos de tarefas.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Tarefas, prioridades, responsáveis e comprovativos.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Progresso por domínio, controlos e planeamento de auditoria.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Objetivos de aprendizagem, conceitos-chave, exercício e pergunta de quiz.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Resumo, painel de KPI, tendência e ações.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Pergunta, método, cronologia das constatações e conclusões.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arquitetura, componentes, exemplo de código e lista de verificação.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Três formatos de pergunta com explicação e discussão final.',
+  'Sjabloon': 'Modelo',
+  'Post-incident review / lessons learned':
+      'Revisão pós-incidente / lições aprendidas',
+  'Datalek / privacy-incident beoordeling':
+      'Avaliação de violação de dados / incidente de privacidade',
+  'DPIA / privacy impact assessment':
+      'DPIA / avaliação de impacto sobre a privacidade',
+  'Risicoanalyse / risk register': 'Análise de risco / registo de riscos',
+  'Business continuity / DR-test': 'Continuidade de negócio / teste de DR',
+  'Tabletop-oefening / crisisoefening':
+      'Exercício tabletop / exercício de crise',
+  'BOB-crisisrapportage': 'Relatório de crise BOB',
+  'CAB / release readiness': 'CAB / prontidão para release',
+  'Stuurgroep / project board update':
+      'Atualização do comité de direção / project board',
+  'Auditbevindingen en opvolging': 'Constatações de auditoria e seguimento',
+  'Leveranciersbeoordeling / vendor risk':
+      'Avaliação de fornecedores / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Decisão de arquitetura / apresentação de ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Implementar uma política / plano de implementação',
+  'Overdracht / handover': 'Transferência / handover',
+  'Retrospective / teamverbetering': 'Retrospetiva / melhoria da equipa',
+  'PPL Vluchtvoorbereiding': 'Preparação de voo PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Cronologia, impacto, causas e ações de melhoria após um incidente.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Avalie os dados, o risco, o dever de notificação e a comunicação.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Tratamento, fundamento jurídico, riscos de privacidade e medidas.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Registe riscos, probabilidade, impacto, medidas e responsáveis.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Cenário, objetivos de recuperação, resultados dos testes e pontos de melhoria.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Cenário, injects, decisões, observações e avaliação.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Conduza uma equipa de crise pela formação de imagem, formação de juízo e tomada de decisão, com quadro de situação ao vivo, pedidos de informação, dilemas, registo de decisões e lista de ações.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Alteração, impacto, testes, rollback, comunicação e go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Progresso, planeamento, orçamento, riscos e decisões pedidas.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Constatações, root cause, medidas, provas e estado.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Serviço, dados, dependência, requisitos, riscos e decisão.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Contexto, opções, trade-offs, decisão e consequências.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Público-alvo, planeamento, comunicação, formação e adoção.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Estado, ações em aberto, riscos, contactos e primeiros passos.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Factos, padrões, start-stop-continue e ações de melhoria.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Prepare um voo VFR com rota, meteorologia, NOTAMs, desempenho, weight & balance, combustível, alternates e verificações pessoais de go/no-go.',
+  'Zoek een sjabloon': 'Procurar um modelo',
+  'Geen sjablonen gevonden': 'Nenhum modelo encontrado',
   // Duplicaatdetectie & opruimen (open-lijsten).
   'Identieke kopieën': 'Cópias idênticas',
   'Zelfde titel, andere inhoud': 'Mesmo título, conteúdo diferente',

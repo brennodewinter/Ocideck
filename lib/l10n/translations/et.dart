@@ -674,6 +674,8 @@ const _dutchSourceEt = {
   'Verticaal': 'Vertikaalne',
   'Animatie': 'Animatsioon',
   'Intekenen bij openen': 'Joonista sisse avamisel',
+  'Markeer als huidig punt': 'Märgi praeguseks punktiks',
+  'Huidig punt weghalen': 'Eemalda praegune punkt',
   'Stap voor stap': 'Samm-sammult',
   'Geen animatie': 'Animatsioonita',
   'Animatiesnelheid': 'Animatsiooni kiirus',
@@ -732,6 +734,13 @@ const _dutchSourceEt = {
       'Ülaltoodud väide on õige või vale; vali kumb.',
   'Selecteer alle juiste antwoorden': 'Vali kõik õiged vastused',
   'Bevestig': 'Kinnita',
+  'Volgorde': 'Järjekord',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Sea vastused siin õigesse järjekorda. Esitlemisel kuvatakse need segatuna.',
+  'Geef minstens twee antwoorden op.': 'Anna vähemalt kaks vastust.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Puuduta vastuseid õiges järjekorras',
+  'Jouw volgorde': 'Sinu järjekord',
   'Het juiste antwoord': 'Õige vastus',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Pilti näidatakse taustana ekraani suuruses. Kasuta hägustust, kui pealkiri vajab rohkem rahu või kontrasti.',
@@ -1100,6 +1109,106 @@ const _dutchSourceEt = {
   'Pen · markeerstift · ⇧E': 'Pliiats · marker · ⇧E',
   'Gestapelde staaf': 'Virnastatud tulp',
   'Spreiding': 'Hajuvus',
+  'Klaar voor export': 'Ekspordiks valmis',
+  'kwaliteitswaarschuwing(en)': 'kvaliteedihoiatus(t)',
+  'Nog opslaan nodig': 'Enne tuleb salvestada',
+  'TLP blokkeert export': 'TLP blokeerib ekspordi',
+  'Kwaliteit blokkeert export': 'Kvaliteet blokeerib ekspordi',
+  'Leeg deck': 'Tühi esitlus',
+  'Korte briefing': 'Lühike briifing',
+  'Status-briefing': 'Staatuse briifing',
+  'Projectstart / kick-off': 'Projekti algus / kick-off',
+  'Voorbespreking communicatie': 'Kommunikatsiooni eelarutelu',
+  'Projecttijdlijn': 'Projekti ajajoon',
+  'Informatiebeveiliging: RASCI / TVB': 'Infoturve: RASCI / TVB',
+  'Security-takenplan': 'Turbeülesannete plaan',
+  'Certificering voortgang': 'Sertifitseerimise edenemine',
+  'Training / workshop': 'Koolitus / töötuba',
+  'Rapportage': 'Aruanne',
+  'Onderzoeksverhaal': 'Uurimislugu',
+  'Technische uitleg': 'Tehniline selgitus',
+  'Interactieve quiz': 'Interaktiivne viktoriin',
+  'Alleen een titelpagina en een agenda.': 'Ainult tiitelleht ja päevakord.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Olukord, faktid ja soovitud otsus kuuel slaidil.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Staatuse töölaud, edenemine töövoogude kaupa ja otsused.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Miks, eesmärk, ulatus, huvirühmad ja ajajoon.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Sihtrühmad, põhisõnum, kanalid ja pressiesindus.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Faasid, verstapostid, sõltuvused ja otsustushetked.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Rollide, RASCI-maatriksi ja ülesandekokkulepete fikseerimine.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Ülesanded, prioriteedid, vastutajad ja tõendusmaterjal.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Edenemine valdkonniti, kontrollid ja auditite planeerimine.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Õpieesmärgid, põhimõisted, harjutus ja viktoriiniküsimus.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Kokkuvõte, KPI-töölaud, trend ja tegevused.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Küsimus, meetod, leidude ajajoon ja järeldused.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arhitektuur, komponendid, koodinäide ja kontrollnimekiri.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Kolm küsimusetüüpi selgituse ja järelaruteluga.',
+  'Sjabloon': 'Mall',
+  'Post-incident review / lessons learned':
+      'Intsidendijärgne ülevaade / saadud õppetunnid',
+  'Datalek / privacy-incident beoordeling':
+      'Andmelekke / privaatsusintsidendi hindamine',
+  'DPIA / privacy impact assessment': 'DPIA / privaatsuse mõjuhinnang',
+  'Risicoanalyse / risk register': 'Riskianalüüs / riskiregister',
+  'Business continuity / DR-test': 'Talitluspidevus / DR-test',
+  'Tabletop-oefening / crisisoefening': 'Lauaõppus / kriisiõppus',
+  'BOB-crisisrapportage': 'BOB-kriisiraport',
+  'CAB / release readiness': 'CAB / väljalaske valmidus',
+  'Stuurgroep / project board update': 'Juhtrühm / projektinõukogu ülevaade',
+  'Auditbevindingen en opvolging': 'Auditileiud ja järeltegevused',
+  'Leveranciersbeoordeling / vendor risk': 'Tarnija hindamine / vendor risk',
+  'Architectuurbesluit / ADR-presentatie': 'Arhitektuuriotsus / ADR-esitlus',
+  'Beleid uitrollen / implementatieplan':
+      'Poliitika juurutamine / rakendusplaan',
+  'Overdracht / handover': 'Üleandmine / handover',
+  'Retrospective / teamverbetering': 'Retrospektiiv / meeskonna täiustamine',
+  'PPL Vluchtvoorbereiding': 'PPL lennuettevalmistus',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Ajajoon, mõju, põhjused ja parendustegevused pärast intsidenti.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Hinnake andmeid, riski, teavitamiskohustust ja kommunikatsiooni.',
+  "Verwerking, grondslag, privacyrisico's en maatregelen.":
+      'Töötlemine, õiguslik alus, privaatsusriskid ja meetmed.',
+  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
+      'Fikseerige riskid, tõenäosus, mõju, meetmed ja vastutajad.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Stsenaarium, taaste-eesmärgid, testileiud ja parenduskohad.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Stsenaarium, injects, otsused, tähelepanekud ja hindamine.',
+  "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
+      'Juhtige kriisimeeskonda läbi olukorrapildi loomise, hinnangu kujundamise ja otsustamise, koos reaalajas olukorrapildi, infopäringute, dilemmade, otsuste logi ja tegevuste loendiga.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Muudatus, mõju, testid, rollback, kommunikatsioon ja go/no-go.',
+  "Voortgang, planning, budget, risico's en besluiten gevraagd.":
+      'Edenemine, planeerimine, eelarve, riskid ja soovitud otsused.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Leiud, root cause, meetmed, tõendid ja staatus.',
+  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
+      'Teenus, andmed, sõltuvus, nõuded, riskid ja otsus.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontekst, valikud, kompromissid, otsus ja tagajärjed.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Sihtrühm, planeerimine, kommunikatsioon, koolitus ja omaksvõtt.',
+  "Status, open acties, risico's, contacten en eerste stappen.":
+      'Staatus, avatud tegevused, riskid, kontaktid ja esimesed sammud.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Faktid, mustrid, start-stop-continue ja parendustegevused.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Valmistage ette VFR-lend: marsruut, ilm, NOTAMid, sooritusvõime, weight & balance, kütus, varulennuväljad ja isiklikud go/no-go kontrollid.',
+  'Zoek een sjabloon': 'Otsi malli',
+  'Geen sjablonen gevonden': 'Ühtegi malli ei leitud',
   // Duplicaatdetectie & opruimen (open-lijsten).
   'Identieke kopieën': 'Identsed koopiad',
   'Zelfde titel, andere inhoud': 'Sama pealkiri, erinev sisu',

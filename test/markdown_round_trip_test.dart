@@ -1069,6 +1069,35 @@ void main() {
       // No explicit duration: the slide inherits the theme's, so it round-trips
       // as null (no ocideck_timeline_duration comment is written).
       expect(out.timelineAnimationMs, isNull);
+      // No current point marked either: no ocideck_timeline_current comment.
+      expect(out.timelineCurrentIndex, isNull);
+    });
+
+    test('timeline slide keeps the current-point highlight', () {
+      final slide = Slide.create(SlideType.timeline).copyWith(
+        title: 'Projectfasen',
+        bullets: [
+          '2024 :: Start :: Kickoff met het team.',
+          '2025 :: Bouw :: Realisatie in sprints.',
+          '2026 :: Livegang',
+        ],
+        timelineCurrentIndex: 1,
+      );
+      // The comment stores the human-friendly 1-based event number.
+      final markdown = MarkdownService().generateDeck(
+        Deck(title: 'Demo', slides: [slide]),
+      );
+      expect(markdown, contains('<!-- ocideck_timeline_current: 2 -->'));
+      final out = _roundTrip(slide);
+      expect(out.timelineCurrentIndex, 1);
+      // An out-of-range hand-edited number is ignored (fail-safe: no highlight).
+      final hacked = MarkdownService().parseDeck(
+        markdown.replaceFirst(
+          'ocideck_timeline_current: 2',
+          'ocideck_timeline_current: 99',
+        ),
+      );
+      expect(hacked!.slides.single.timelineCurrentIndex, isNull);
     });
   });
 

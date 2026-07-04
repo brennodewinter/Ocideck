@@ -677,6 +677,8 @@ const _dutchSourceLv = {
   'Verticaal': 'Vertikāli',
   'Animatie': 'Animācija',
   'Intekenen bij openen': 'Ievilkt atverot',
+  'Markeer als huidig punt': 'Atzīmēt kā pašreizējo punktu',
+  'Huidig punt weghalen': 'Noņemt pašreizējo punktu',
   'Stap voor stap': 'Soli pa solim',
   'Geen animatie': 'Bez animācijas',
   'Animatiesnelheid': 'Animācijas ātrums',
@@ -735,6 +737,13 @@ const _dutchSourceLv = {
       'Iepriekšējais apgalvojums ir patiess vai nepatiess; izvēlieties, kurš.',
   'Selecteer alle juiste antwoorden': 'Atlasiet visas pareizās atbildes',
   'Bevestig': 'Apstiprināt',
+  'Volgorde': 'Secība',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Sakārtojiet šeit atbildes pareizā secībā. Prezentējot tās tiek rādītas sajauktas.',
+  'Geef minstens twee antwoorden op.': 'Norādiet vismaz divas atbildes.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Pieskarieties atbildēm pareizā secībā',
+  'Jouw volgorde': 'Jūsu secība',
   'Het juiste antwoord': 'Pareizā atbilde',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Attēls tiek rādīts pilnekrānā kā fons. Izmantojiet izplūdumu, kad virsrakstam nepieciešams vairāk miera vai kontrasta.',
@@ -1106,6 +1115,109 @@ const _dutchSourceLv = {
   'Pen · markeerstift · ⇧E': 'Pildspalva · marķieris · ⇧E',
   'Gestapelde staaf': 'Sakrauts stabiņš',
   'Spreiding': 'Izkliede',
+  'Klaar voor export': 'Gatavs eksportam',
+  'kwaliteitswaarschuwing(en)': 'kvalitātes brīdinājums(-i)',
+  'Nog opslaan nodig': 'Vispirms jāsaglabā',
+  'TLP blokkeert export': 'TLP bloķē eksportu',
+  'Kwaliteit blokkeert export': 'Kvalitāte bloķē eksportu',
+  'Leeg deck': 'Tukšs deks',
+  'Korte briefing': 'Īss brīfings',
+  'Status-briefing': 'Statusa brīfings',
+  'Projectstart / kick-off': 'Projekta sākums / kick-off',
+  'Voorbespreking communicatie': 'Komunikācijas priekšapspriede',
+  'Projecttijdlijn': 'Projekta laika grafiks',
+  'Informatiebeveiliging: RASCI / TVB': 'Informācijas drošība: RASCI / TVB',
+  'Security-takenplan': 'Drošības uzdevumu plāns',
+  'Certificering voortgang': 'Sertifikācijas progress',
+  'Training / workshop': 'Apmācība / darbseminārs',
+  'Rapportage': 'Pārskats',
+  'Onderzoeksverhaal': 'Pētījuma stāsts',
+  'Technische uitleg': 'Tehnisks skaidrojums',
+  'Interactieve quiz': 'Interaktīva viktorīna',
+  'Alleen een titelpagina en een agenda.': 'Tikai titullapa un darba kārtība.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situācija, fakti un pieprasītais lēmums sešos slaidos.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Statusa panelis, progress pa darba plūsmām un lēmumi.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Kāpēc, mērķis, tvērums, ieinteresētās puses un laika grafiks.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Mērķauditorijas, galvenais vēstījums, kanāli un runaspersonas.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fāzes, atskaites punkti, atkarības un lēmumu pieņemšanas brīži.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Fiksēt lomas, RASCI matricu un vienošanās par uzdevumiem.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Uzdevumi, prioritātes, atbildīgie un pierādījumi.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Progress pa jomām, kontroles un auditu plānošana.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Mācību mērķi, pamatjēdzieni, vingrinājums un viktorīnas jautājums.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Kopsavilkums, KPI panelis, tendence un darbības.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Jautājums, metode, atzinumu laika grafiks un secinājumi.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arhitektūra, komponenti, koda piemērs un kontrolsaraksts.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Trīs jautājumu veidi ar skaidrojumu un pēcapspriedi.',
+  'Sjabloon': 'Veidne',
+  'Post-incident review / lessons learned':
+      'Pēcincidenta pārskats / gūtās atziņas',
+  'Datalek / privacy-incident beoordeling':
+      'Datu noplūdes / privātuma incidenta izvērtējums',
+  'DPIA / privacy impact assessment': 'DPIA / privātuma ietekmes novērtējums',
+  'Risicoanalyse / risk register': 'Risku analīze / risku reģistrs',
+  'Business continuity / DR-test': 'Darbības nepārtrauktība / DR tests',
+  'Tabletop-oefening / crisisoefening': 'Galda mācības / krīzes mācības',
+  'BOB-crisisrapportage': 'BOB krīzes ziņojums',
+  'CAB / release readiness': 'CAB / gatavība laidienam',
+  'Stuurgroep / project board update':
+      'Vadības grupa / projekta valdes atjauninājums',
+  'Auditbevindingen en opvolging': 'Audita konstatējumi un turpmākie pasākumi',
+  'Leveranciersbeoordeling / vendor risk':
+      'Piegādātāju izvērtējums / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Arhitektūras lēmums / ADR prezentācija',
+  'Beleid uitrollen / implementatieplan':
+      'Politikas ieviešana / ieviešanas plāns',
+  'Overdracht / handover': 'Nodošana / handover',
+  'Retrospective / teamverbetering': 'Retrospektīva / komandas pilnveide',
+  'PPL Vluchtvoorbereiding': 'PPL lidojuma sagatavošana',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Laika grafiks, ietekme, cēloņi un uzlabojumu darbības pēc incidenta.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Izvērtējiet datus, risku, ziņošanas pienākumu un komunikāciju.',
+  "Verwerking, grondslag, privacyrisico's en maatregelen.":
+      'Apstrāde, tiesiskais pamats, privātuma riski un pasākumi.',
+  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
+      'Fiksējiet riskus, varbūtību, ietekmi, pasākumus un atbildīgos.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scenārijs, atkopšanas mērķi, testa konstatējumi un uzlabojumu punkti.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scenārijs, injects, lēmumi, novērojumi un izvērtējums.',
+  "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
+      'Vadiet krīzes komandu cauri situācijas apzināšanai, vērtējuma veidošanai un lēmumu pieņemšanai, ar reāllaika situācijas ainu, informācijas pieprasījumiem, dilemmām, lēmumu žurnālu un darbību sarakstu.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Izmaiņa, ietekme, testi, rollback, komunikācija un go/no-go.',
+  "Voortgang, planning, budget, risico's en besluiten gevraagd.":
+      'Progress, plānošana, budžets, riski un pieprasītie lēmumi.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Konstatējumi, root cause, pasākumi, pierādījumi un statuss.',
+  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
+      'Pakalpojums, dati, atkarība, prasības, riski un lēmums.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Konteksts, opcijas, kompromisi, lēmums un sekas.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Mērķauditorija, plānošana, komunikācija, apmācība un ieviešana.',
+  "Status, open acties, risico's, contacten en eerste stappen.":
+      'Statuss, atvērtās darbības, riski, kontakti un pirmie soļi.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fakti, modeļi, start-stop-continue un uzlabojumu darbības.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Sagatavojiet VFR lidojumu ar maršrutu, laikapstākļiem, NOTAMs, veiktspēju, weight & balance, degvielu, rezerves lidlaukiem un personīgajām go/no-go pārbaudēm.',
+  'Zoek een sjabloon': 'Meklēt veidni',
+  'Geen sjablonen gevonden': 'Nav atrasta neviena veidne',
   // Duplicaatdetectie & opruimen (open-lijsten).
   'Identieke kopieën': 'Identiskas kopijas',
   'Zelfde titel, andere inhoud': 'Tāds pats nosaukums, atšķirīgs saturs',

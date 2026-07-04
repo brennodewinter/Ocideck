@@ -256,9 +256,11 @@ class _WelcomeScreen extends ConsumerWidget {
   }
 
   Future<void> _newDeck(BuildContext context, WidgetRef ref) async {
-    final title = await NewDeckDialog.show(context);
-    if (title != null) {
-      ref.read(tabsProvider.notifier).newDeckInCurrentTab(title);
+    final choice = await NewDeckDialog.show(context);
+    if (choice != null) {
+      ref
+          .read(tabsProvider.notifier)
+          .newDeckInCurrentTab(choice.title, template: choice.template);
     }
   }
 }

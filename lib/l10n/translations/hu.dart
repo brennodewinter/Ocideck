@@ -677,6 +677,8 @@ const _dutchSourceHu = {
   'Verticaal': 'Függőleges',
   'Animatie': 'Animáció',
   'Intekenen bij openen': 'Berajzolás megnyitáskor',
+  'Markeer als huidig punt': 'Megjelölés aktuális pontként',
+  'Huidig punt weghalen': 'Aktuális pont eltávolítása',
   'Stap voor stap': 'Lépésről lépésre',
   'Geen animatie': 'Nincs animáció',
   'Animatiesnelheid': 'Animációsebesség',
@@ -735,6 +737,13 @@ const _dutchSourceHu = {
       'A fenti állítás igaz vagy hamis; válaszd ki, melyik.',
   'Selecteer alle juiste antwoorden': 'Válaszd ki az összes helyes választ',
   'Bevestig': 'Megerősítés',
+  'Volgorde': 'Sorrend',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Itt tedd a válaszokat a helyes sorrendbe. Bemutatáskor összekeverve jelennek meg.',
+  'Geef minstens twee antwoorden op.': 'Adj meg legalább két választ.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Koppints a válaszokra a helyes sorrendben',
+  'Jouw volgorde': 'A te sorrended',
   'Het juiste antwoord': 'A helyes válasz',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'A kép teljes képernyős háttérként jelenik meg. Használd az elmosást, ha a címnek több nyugalomra vagy kontrasztra van szüksége.',
@@ -1108,6 +1117,109 @@ const _dutchSourceHu = {
   'Pen · markeerstift · ⇧E': 'Toll · szövegkiemelő · ⇧E',
   'Gestapelde staaf': 'Halmozott oszlop',
   'Spreiding': 'Pontdiagram',
+  'Klaar voor export': 'Exportra kész',
+  'kwaliteitswaarschuwing(en)': 'minőségi figyelmeztetés(ek)',
+  'Nog opslaan nodig': 'Előbb menteni kell',
+  'TLP blokkeert export': 'A TLP blokkolja az exportot',
+  'Kwaliteit blokkeert export': 'A minőség blokkolja az exportot',
+  'Leeg deck': 'Üres deck',
+  'Korte briefing': 'Rövid tájékoztató',
+  'Status-briefing': 'Státusztájékoztató',
+  'Projectstart / kick-off': 'Projektindítás / kick-off',
+  'Voorbespreking communicatie': 'Kommunikációs előkészítő megbeszélés',
+  'Projecttijdlijn': 'Projekt-idővonal',
+  'Informatiebeveiliging: RASCI / TVB': 'Információbiztonság: RASCI / TVB',
+  'Security-takenplan': 'Biztonsági feladatterv',
+  'Certificering voortgang': 'Tanúsítás előrehaladása',
+  'Training / workshop': 'Képzés / workshop',
+  'Rapportage': 'Beszámoló',
+  'Onderzoeksverhaal': 'Kutatási történet',
+  'Technische uitleg': 'Műszaki magyarázat',
+  'Interactieve quiz': 'Interaktív kvíz',
+  'Alleen een titelpagina en een agenda.': 'Csak egy címoldal és egy napirend.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Helyzet, tények és a kért döntés hat dián.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Állapot-irányítópult, munkafolyamatonkénti előrehaladás és döntések.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Miért, cél, hatókör, érintettek és idővonal.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Célcsoportok, kulcsüzenet, csatornák és szóvivői feladatok.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fázisok, mérföldkövek, függőségek és döntési pontok.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Szerepek, RASCI-mátrix és feladatmegállapodások rögzítése.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Feladatok, prioritások, felelősök és bizonyítékok.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Előrehaladás területenként, kontrollok és audittervezés.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Tanulási célok, kulcsfogalmak, gyakorlat és kvízkérdés.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Összefoglaló, KPI-irányítópult, trend és teendők.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Kérdés, módszer, a megállapítások idővonala és következtetések.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architektúra, komponensek, kódpélda és ellenőrzőlista.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Három kérdéstípus magyarázattal és utólagos megbeszéléssel.',
+  'Sjabloon': 'Sablon',
+  'Post-incident review / lessons learned':
+      'Incidens utáni értékelés / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Adatszivárgás / adatvédelmi incidens értékelése',
+  'DPIA / privacy impact assessment': 'DPIA / adatvédelmi hatásvizsgálat',
+  'Risicoanalyse / risk register': 'Kockázatelemzés / kockázati nyilvántartás',
+  'Business continuity / DR-test': 'Üzletmenet-folytonosság / DR-teszt',
+  'Tabletop-oefening / crisisoefening': 'Tabletop-gyakorlat / válsággyakorlat',
+  'BOB-crisisrapportage': 'BOB-válságjelentés',
+  'CAB / release readiness': 'CAB / release readiness',
+  'Stuurgroep / project board update':
+      'Irányítóbizottság / project board beszámoló',
+  'Auditbevindingen en opvolging': 'Auditmegállapítások és nyomon követés',
+  'Leveranciersbeoordeling / vendor risk':
+      'Beszállítói értékelés / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Architektúradöntés / ADR-prezentáció',
+  'Beleid uitrollen / implementatieplan':
+      'Szabályzat bevezetése / megvalósítási terv',
+  'Overdracht / handover': 'Átadás-átvétel / handover',
+  'Retrospective / teamverbetering': 'Retrospektív / csapatfejlesztés',
+  'PPL Vluchtvoorbereiding': 'PPL repülés-előkészítés',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Idővonal, hatás, okok és javító intézkedések egy incidens után.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Értékelje az adatokat, a kockázatot, a bejelentési kötelezettséget és a kommunikációt.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Adatkezelés, jogalap, adatvédelmi kockázatok és intézkedések.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Rögzítse a kockázatokat, a valószínűséget, a hatást, az intézkedéseket és a felelősöket.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Forgatókönyv, helyreállítási célok, tesztmegállapítások és fejlesztési pontok.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Forgatókönyv, injectek, döntések, megfigyelések és értékelés.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Vezessen végig egy válságstábot a helyzetkép kialakításán, a mérlegelésen és a döntéshozatalon, élő helyzetképpel, információs kérdésekkel, dilemmákkal, döntésnaplóval és feladatlistával.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Változtatás, hatás, tesztek, rollback, kommunikáció és go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Előrehaladás, ütemezés, költségvetés, kockázatok és kért döntések.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Megállapítások, root cause, intézkedések, bizonyítékok és állapot.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Szolgáltatás, adatok, függőség, követelmények, kockázatok és döntés.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontextus, opciók, trade-offok, döntés és következmények.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Célcsoport, ütemezés, kommunikáció, képzés és bevezetés.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Állapot, nyitott teendők, kockázatok, kapcsolattartók és első lépések.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Tények, mintázatok, start-stop-continue és javító intézkedések.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Készítsen elő egy VFR-repülést: útvonal, időjárás, NOTAM-ok, teljesítmény, weight & balance, üzemanyag, kitérő repülőterek és személyes go/no-go ellenőrzések.',
+  'Zoek een sjabloon': 'Sablon keresése',
+  'Geen sjablonen gevonden': 'Nem található sablon',
   // Duplicaatdetectie & opruimen (open-lijsten).
   'Identieke kopieën': 'Azonos másolatok',
   'Zelfde titel, andere inhoud': 'Azonos cím, eltérő tartalom',

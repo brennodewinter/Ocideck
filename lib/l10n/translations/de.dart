@@ -502,6 +502,8 @@ const _dutchSourceAddDe = {
   'Verticaal': 'Vertikal',
   'Animatie': 'Animation',
   'Intekenen bij openen': 'Beim Öffnen einzeichnen',
+  'Markeer als huidig punt': 'Als aktuellen Punkt markieren',
+  'Huidig punt weghalen': 'Aktuellen Punkt entfernen',
   'Stap voor stap': 'Schritt für Schritt',
   'Geen animatie': 'Keine Animation',
   'Animatiesnelheid': 'Animationsgeschwindigkeit',
@@ -560,6 +562,13 @@ const _dutchSourceAddDe = {
       'Die Aussage oben ist wahr oder falsch; wähle, was zutrifft.',
   'Selecteer alle juiste antwoorden': 'Wähle alle richtigen Antworten',
   'Bevestig': 'Bestätigen',
+  'Volgorde': 'Reihenfolge',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Bringe die Antworten hier in die richtige Reihenfolge. Beim Präsentieren werden sie gemischt angezeigt.',
+  'Geef minstens twee antwoorden op.': 'Gib mindestens zwei Antworten an.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Tippe die Antworten in der richtigen Reihenfolge an',
+  'Jouw volgorde': 'Deine Reihenfolge',
   'Het juiste antwoord': 'Die richtige Antwort',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Das Bild wird bildschirmfüllend als Hintergrund angezeigt. Nutze die Unschärfe, wenn der Titel mehr Ruhe oder Kontrast braucht.',
@@ -1112,4 +1121,108 @@ const _dutchSourceAddDe = {
   'Pen · markeerstift · ⇧E': 'Stift · Marker · ⇧E',
   'Gestapelde staaf': 'Gestapelte Balken',
   'Spreiding': 'Streudiagramm',
+  'Klaar voor export': 'Bereit zum Export',
+  'kwaliteitswaarschuwing(en)': 'Qualitätswarnung(en)',
+  'Nog opslaan nodig': 'Zuerst speichern',
+  'TLP blokkeert export': 'TLP blockiert den Export',
+  'Kwaliteit blokkeert export': 'Qualität blockiert den Export',
+  'Leeg deck': 'Leeres Deck',
+  'Korte briefing': 'Kurzbriefing',
+  'Status-briefing': 'Status-Briefing',
+  'Projectstart / kick-off': 'Projektstart / Kick-off',
+  'Voorbespreking communicatie': 'Vorbesprechung Kommunikation',
+  'Projecttijdlijn': 'Projektzeitplan',
+  'Informatiebeveiliging: RASCI / TVB':
+      'Informationssicherheit: RASCI / Verantwortlichkeiten',
+  'Security-takenplan': 'Sicherheits-Aufgabenplan',
+  'Certificering voortgang': 'Zertifizierungsfortschritt',
+  'Training / workshop': 'Training / Workshop',
+  'Rapportage': 'Bericht',
+  'Onderzoeksverhaal': 'Untersuchungsstory',
+  'Technische uitleg': 'Technische Erläuterung',
+  'Interactieve quiz': 'Interaktives Quiz',
+  'Alleen een titelpagina en een agenda.':
+      'Nur eine Titelseite und eine Agenda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situation, Fakten und erbetene Entscheidung auf sechs Folien.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Status-Dashboard, Fortschritt je Arbeitsstrang und Entscheidungen.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Warum, Ziel, Scope, Stakeholder und Zeitplan.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Zielgruppen, Kernbotschaft, Kanäle und Sprecherregelung.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Phasen, Meilensteine, Abhängigkeiten und Entscheidungspunkte.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Rollen, RASCI-Matrix und Aufgabenvereinbarungen festhalten.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Aufgaben, Prioritäten, Verantwortliche und Nachweise.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Fortschritt je Domäne, Controls und Auditplanung.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Lernziele, Kernkonzepte, Übung und Quizfrage.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Zusammenfassung, KPI-Dashboard, Trend und Maßnahmen.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Frage, Methode, Zeitverlauf der Befunde und Schlussfolgerungen.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architektur, Komponenten, Codebeispiel und Checkliste.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Drei Fragetypen mit Erklärung und Nachbesprechung.',
+  'Sjabloon': 'Vorlage',
+  'Post-incident review / lessons learned':
+      'Post-Incident-Review / Lessons Learned',
+  'Datalek / privacy-incident beoordeling':
+      'Datenpanne / Bewertung eines Datenschutzvorfalls',
+  'DPIA / privacy impact assessment': 'DPIA / Datenschutz-Folgenabschätzung',
+  'Risicoanalyse / risk register': 'Risikoanalyse / Risikoregister',
+  'Business continuity / DR-test': 'Business Continuity / DR-Test',
+  'Tabletop-oefening / crisisoefening': 'Tabletop-Übung / Krisenübung',
+  'BOB-crisisrapportage': 'BOB-Krisenbericht',
+  'CAB / release readiness': 'CAB / Release-Readiness',
+  'Stuurgroep / project board update':
+      'Lenkungsausschuss / Project-Board-Update',
+  'Auditbevindingen en opvolging': 'Auditfeststellungen und Nachverfolgung',
+  'Leveranciersbeoordeling / vendor risk': 'Lieferantenbewertung / Vendor Risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Architekturentscheidung / ADR-Präsentation',
+  'Beleid uitrollen / implementatieplan':
+      'Richtlinie ausrollen / Umsetzungsplan',
+  'Overdracht / handover': 'Übergabe / Handover',
+  'Retrospective / teamverbetering': 'Retrospektive / Teamverbesserung',
+  'PPL Vluchtvoorbereiding': 'PPL-Flugvorbereitung',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Zeitverlauf, Auswirkungen, Ursachen und Verbesserungsmaßnahmen nach einem Vorfall.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Daten, Risiko, Meldepflicht und Kommunikation bewerten.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Verarbeitung, Rechtsgrundlage, Datenschutzrisiken und Maßnahmen.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Risiken, Wahrscheinlichkeit, Auswirkungen, Maßnahmen und Verantwortliche festhalten.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Szenario, Wiederherstellungsziele, Testbefunde und Verbesserungspunkte.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Szenario, Injects, Entscheidungen, Beobachtungen und Auswertung.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Ein Krisenteam durch Lagebild, Beurteilung und Entscheidungsfindung führen, mit Live-Lagebild, Informationsfragen, Dilemmata, Entscheidungsprotokoll und Aktionsliste.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Änderung, Auswirkungen, Tests, Rollback, Kommunikation und Go/No-Go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Fortschritt, Planung, Budget, Risiken und erbetene Entscheidungen.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Feststellungen, Root Cause, Maßnahmen, Nachweise und Status.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Dienst, Daten, Abhängigkeit, Anforderungen, Risiken und Entscheidung.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontext, Optionen, Trade-offs, Entscheidung und Folgen.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Zielgruppe, Planung, Kommunikation, Training und Adoption.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Status, offene Maßnahmen, Risiken, Kontakte und erste Schritte.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fakten, Muster, Start-Stop-Continue und Verbesserungsmaßnahmen.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Einen VFR-Flug vorbereiten mit Route, Wetter, NOTAMs, Flugleistung, Weight & Balance, Kraftstoff, Alternates und persönlichen Go/No-Go-Checks.',
+  'Zoek een sjabloon': 'Vorlage suchen',
+  'Geen sjablonen gevonden': 'Keine Vorlagen gefunden',
 };

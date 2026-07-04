@@ -512,6 +512,8 @@ const _dutchSourceAddFy = {
   'Verticaal': 'Fertikaal',
   'Animatie': 'Animaasje',
   'Intekenen bij openen': 'Yntekenje by it iepenjen',
+  'Markeer als huidig punt': 'Markearje as aktueel punt',
+  'Huidig punt weghalen': 'Aktueel punt fuorthelje',
   'Stap voor stap': 'Stap foar stap',
   'Geen animatie': 'Gjin animaasje',
   'Animatiesnelheid': 'Animaasjesnelheid',
@@ -570,6 +572,13 @@ const _dutchSourceAddFy = {
       'De stelling hjirboppe is wier of net wier; kies hokker.',
   'Selecteer alle juiste antwoorden': 'Selektearje alle juste antwurden',
   'Bevestig': 'Befêstigje',
+  'Volgorde': 'Folchoarder',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Set de antwurden hjir yn de goede folchoarder. By presintearjen wurde se troch elkoar toand.',
+  'Geef minstens twee antwoorden op.': 'Jou op syn minst twa antwurden op.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Tik de antwurden oan yn de goede folchoarder',
+  'Jouw volgorde': 'Dyn folchoarder',
   'Het juiste antwoord': 'It juste antwurd',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'De ôfbylding wurdt skermfoljend as eftergrûn toand. Brûk de waas as de titel mear rêst of kontrast nedich hat.',
@@ -1108,4 +1117,106 @@ const _dutchSourceAddFy = {
   'Pen · markeerstift · ⇧E': 'Pen · markearstift · ⇧E',
   'Gestapelde staaf': 'Stapele staven',
   'Spreiding': 'Sparring',
+  'Klaar voor export': 'Klear foar eksport',
+  'kwaliteitswaarschuwing(en)': 'kwaliteitswarskôging(en)',
+  'Nog opslaan nodig': 'Earst bewarje nedich',
+  'TLP blokkeert export': 'TLP blokkearret eksport',
+  'Kwaliteit blokkeert export': 'Kwaliteit blokkearret eksport',
+  'Leeg deck': 'Leech deck',
+  'Korte briefing': 'Koarte briefing',
+  'Status-briefing': 'Status-briefing',
+  'Projectstart / kick-off': 'Projektstart / kick-off',
+  'Voorbespreking communicatie': 'Foaroerlis kommunikaasje',
+  'Projecttijdlijn': 'Projekttiidline',
+  'Informatiebeveiliging: RASCI / TVB': 'Ynformaasjefeiligens: RASCI / TVB',
+  'Security-takenplan': 'Security-takenplan',
+  'Certificering voortgang': 'Sertifisearring fuortgong',
+  'Training / workshop': 'Training / workshop',
+  'Rapportage': 'Rapportaazje',
+  'Onderzoeksverhaal': 'Ûndersyksferhaal',
+  'Technische uitleg': 'Technyske útlis',
+  'Interactieve quiz': 'Ynteraktive quiz',
+  'Alleen een titelpagina en een agenda.':
+      'Allinnich in titelside en in aginda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Sitewaasje, feiten en frege beslút yn seis slides.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Statusdashboard, fuortgong per wurkstream en besluten.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Wêrom, doel, omfang, stakeholders en tiidline.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Doelgroepen, kearnboadskip, kanalen en wurdfiering.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fazen, mylpealen, ôfhinklikheden en beslismominten.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Rollen, RASCI-matrix en taakôfspraken fêstlizze.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Taken, prioriteiten, eigners en bewiisstikken.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Fuortgong per domein, controls en auditplanning.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Leardoelen, kearnkonsepten, oefening en quizfraach.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Gearfetting, KPI-dashboard, trend en aksjes.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Fraach, metoade, tiidline fan befiningen en konklúzjes.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arsjitektuer, komponinten, koadefoarbyld en checklist.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Trije fraachfoarmen mei útlis en neipetear.',
+  'Sjabloon': 'Sjabloan',
+  'Post-incident review / lessons learned':
+      'Post-incident review / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Datalek / beoardieling privacy-ynsidint',
+  'DPIA / privacy impact assessment': 'DPIA / privacy impact assessment',
+  'Risicoanalyse / risk register': 'Risiko-analyze / risk register',
+  'Business continuity / DR-test': 'Business continuity / DR-test',
+  'Tabletop-oefening / crisisoefening': 'Tabletop-oefening / krisisoefening',
+  'BOB-crisisrapportage': 'BOB-krisisrapportaazje',
+  'CAB / release readiness': 'CAB / release readiness',
+  'Stuurgroep / project board update': 'Stjoergroep / project board update',
+  'Auditbevindingen en opvolging': 'Auditbefiningen en opfolging',
+  'Leveranciersbeoordeling / vendor risk':
+      'Leveransiersbeoardieling / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Arsjitektuerbeslút / ADR-presintaasje',
+  'Beleid uitrollen / implementatieplan': 'Belied útrolje / ymplemintaasjeplan',
+  'Overdracht / handover': 'Oerdracht / handover',
+  'Retrospective / teamverbetering': 'Retrospective / teamferbettering',
+  'PPL Vluchtvoorbereiding': 'PPL Flechttarieding',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Tiidline, ympakt, oarsaken en ferbetteraksjes nei in ynsidint.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Beoardielje gegevens, risiko, meldplicht en kommunikaasje.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Ferwurking, grûnslach, privacyrisiko\'s en maatregels.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Lis risiko\'s, kâns, ympakt, maatregels en eigners fêst.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Senario, wersteldoelen, testbefiningen en ferbetterpunten.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Senario, injects, besluten, waarnimmingen en evaluaasje.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Lied in krisisteam troch byldfoarming, oardielsfoarming en beslútfoarming, mei live sitewaasjebyld, ynformaasjefragen, dilemma\'s, beslutelog en aksjelist.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Wiziging, ympakt, tests, rollback, kommunikaasje en go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Fuortgong, planning, budzjet, risiko\'s en besluten frege.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Befiningen, root cause, maatregels, bewiis en status.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Tsjinst, data, ôfhinklikheid, easken, risiko\'s en beslút.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontekst, opsjes, trade-offs, beslút en gefolgen.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Doelgroep, planning, kommunikaasje, training en adopsje.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Status, iepen aksjes, risiko\'s, kontakten en earste stappen.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Feiten, patroanen, start-stop-continue en ferbetteraksjes.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Ried in VFR-flecht ta mei rûte, waar, NOTAMs, prestaasjes, weight & balance, brânstof, alternates en persoanlike go/no-go-checks.',
+  'Zoek een sjabloon': 'Sykje in sjabloan',
+  'Geen sjablonen gevonden': 'Gjin sjabloanen fûn',
 };

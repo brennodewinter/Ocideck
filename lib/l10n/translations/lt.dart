@@ -681,6 +681,8 @@ const _dutchSourceLt = {
   'Verticaal': 'Vertikalus',
   'Animatie': 'Animacija',
   'Intekenen bij openen': 'Piešti atveriant',
+  'Markeer als huidig punt': 'Pažymėti kaip dabartinį tašką',
+  'Huidig punt weghalen': 'Pašalinti dabartinį tašką',
   'Stap voor stap': 'Žingsnis po žingsnio',
   'Geen animatie': 'Be animacijos',
   'Animatiesnelheid': 'Animacijos greitis',
@@ -739,6 +741,13 @@ const _dutchSourceLt = {
       'Teiginys viršuje yra tiesa arba netiesa; pasirinkite, kuris.',
   'Selecteer alle juiste antwoorden': 'Pasirinkite visus teisingus atsakymus',
   'Bevestig': 'Patvirtinti',
+  'Volgorde': 'Eiliškumas',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Čia išdėstykite atsakymus teisinga tvarka. Pristatant jie rodomi sumaišyti.',
+  'Geef minstens twee antwoorden op.': 'Nurodykite bent du atsakymus.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Bakstelėkite atsakymus teisinga tvarka',
+  'Jouw volgorde': 'Jūsų tvarka',
   'Het juiste antwoord': 'Teisingas atsakymas',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Paveikslėlis rodomas per visą ekraną kaip fonas. Naudokite suliejimą, kai antraštei reikia daugiau ramybės ar kontrasto.',
@@ -1111,6 +1120,109 @@ const _dutchSourceLt = {
   'Pen · markeerstift · ⇧E': 'Rašiklis · žymeklis · ⇧E',
   'Gestapelde staaf': 'Sukrauta stulpelinė',
   'Spreiding': 'Sklaida',
+  'Klaar voor export': 'Paruošta eksportuoti',
+  'kwaliteitswaarschuwing(en)': 'kokybės įspėjimas(-ai)',
+  'Nog opslaan nodig': 'Pirmiausia reikia išsaugoti',
+  'TLP blokkeert export': 'TLP blokuoja eksportą',
+  'Kwaliteit blokkeert export': 'Kokybė blokuoja eksportą',
+  'Leeg deck': 'Tuščias rinkinys',
+  'Korte briefing': 'Trumpas brifingas',
+  'Status-briefing': 'Būsenos brifingas',
+  'Projectstart / kick-off': 'Projekto pradžia / kick-off',
+  'Voorbespreking communicatie': 'Išankstinis komunikacijos aptarimas',
+  'Projecttijdlijn': 'Projekto laiko juosta',
+  'Informatiebeveiliging: RASCI / TVB': 'Informacijos sauga: RASCI / TVB',
+  'Security-takenplan': 'Saugumo užduočių planas',
+  'Certificering voortgang': 'Sertifikavimo pažanga',
+  'Training / workshop': 'Mokymai / dirbtuvės',
+  'Rapportage': 'Ataskaita',
+  'Onderzoeksverhaal': 'Tyrimo pasakojimas',
+  'Technische uitleg': 'Techninis paaiškinimas',
+  'Interactieve quiz': 'Interaktyvi viktorina',
+  'Alleen een titelpagina en een agenda.':
+      'Tik titulinis puslapis ir darbotvarkė.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situacija, faktai ir prašomas sprendimas šešiose skaidrėse.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Būsenos skydelis, pažanga pagal darbo srautus ir sprendimai.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Kodėl, tikslas, apimtis, suinteresuotosios šalys ir laiko juosta.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Tikslinės grupės, pagrindinė žinutė, kanalai ir atstovavimas spaudai.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fazės, gairės, priklausomybės ir sprendimų momentai.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Užfiksuoti vaidmenis, RASCI matricą ir susitarimus dėl užduočių.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Užduotys, prioritetai, atsakingieji ir įrodymai.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Pažanga pagal sritis, kontrolės priemonės ir auditų planavimas.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Mokymosi tikslai, pagrindinės sąvokos, pratimas ir viktorinos klausimas.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Santrauka, KPI skydelis, tendencija ir veiksmai.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Klausimas, metodas, radinių laiko juosta ir išvados.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architektūra, komponentai, kodo pavyzdys ir kontrolinis sąrašas.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Trys klausimų tipai su paaiškinimu ir aptarimu.',
+  'Sjabloon': 'Šablonas',
+  'Post-incident review / lessons learned':
+      'Peržiūra po incidento / išmoktos pamokos',
+  'Datalek / privacy-incident beoordeling':
+      'Duomenų nutekėjimo / privatumo incidento vertinimas',
+  'DPIA / privacy impact assessment': 'DPIA / poveikio privatumui vertinimas',
+  'Risicoanalyse / risk register': 'Rizikos analizė / rizikos registras',
+  'Business continuity / DR-test': 'Veiklos tęstinumas / DR testas',
+  'Tabletop-oefening / crisisoefening': 'Stalo pratybos / krizių pratybos',
+  'BOB-crisisrapportage': 'BOB krizės ataskaita',
+  'CAB / release readiness': 'CAB / pasirengimas leidimui',
+  'Stuurgroep / project board update':
+      'Valdymo grupė / projekto valdybos atnaujinimas',
+  'Auditbevindingen en opvolging': 'Audito išvados ir tolesni veiksmai',
+  'Leveranciersbeoordeling / vendor risk': 'Tiekėjų vertinimas / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Architektūros sprendimas / ADR pristatymas',
+  'Beleid uitrollen / implementatieplan':
+      'Politikos diegimas / įgyvendinimo planas',
+  'Overdracht / handover': 'Perdavimas / handover',
+  'Retrospective / teamverbetering': 'Retrospektyva / komandos tobulinimas',
+  'PPL Vluchtvoorbereiding': 'PPL pasirengimas skrydžiui',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Laiko juosta, poveikis, priežastys ir tobulinimo veiksmai po incidento.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Įvertinkite duomenis, riziką, pareigą pranešti ir komunikaciją.',
+  "Verwerking, grondslag, privacyrisico's en maatregelen.":
+      'Tvarkymas, teisinis pagrindas, privatumo rizikos ir priemonės.',
+  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
+      'Užfiksuokite rizikas, tikimybę, poveikį, priemones ir atsakinguosius.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scenarijus, atkūrimo tikslai, testo išvados ir tobulintini punktai.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scenarijus, injects, sprendimai, stebėjimai ir įvertinimas.',
+  "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
+      'Veskite krizių komandą per situacijos vaizdo formavimą, vertinimą ir sprendimų priėmimą, su tiesioginiu situacijos vaizdu, informacijos užklausomis, dilemomis, sprendimų žurnalu ir veiksmų sąrašu.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Pakeitimas, poveikis, testai, rollback, komunikacija ir go/no-go.',
+  "Voortgang, planning, budget, risico's en besluiten gevraagd.":
+      'Pažanga, planavimas, biudžetas, rizikos ir prašomi sprendimai.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Išvados, root cause, priemonės, įrodymai ir būsena.',
+  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
+      'Paslauga, duomenys, priklausomybė, reikalavimai, rizikos ir sprendimas.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontekstas, variantai, kompromisai, sprendimas ir pasekmės.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Tikslinė grupė, planavimas, komunikacija, mokymai ir įsisavinimas.',
+  "Status, open acties, risico's, contacten en eerste stappen.":
+      'Būsena, atviri veiksmai, rizikos, kontaktai ir pirmieji žingsniai.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Faktai, dėsningumai, start-stop-continue ir tobulinimo veiksmai.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Parenkite VFR skrydį su maršrutu, orais, NOTAMs, charakteristikomis, weight & balance, degalais, atsarginiais aerodromais ir asmeninėmis go/no-go patikromis.',
+  'Zoek een sjabloon': 'Ieškoti šablono',
+  'Geen sjablonen gevonden': 'Šablonų nerasta',
   // Duplicaatdetectie & opruimen (open-lijsten).
   'Identieke kopieën': 'Identiškos kopijos',
   'Zelfde titel, andere inhoud': 'Tas pats pavadinimas, skirtingas turinys',

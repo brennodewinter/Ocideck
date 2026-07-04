@@ -9,13 +9,16 @@ const int questionDefaultOptionCount = 4;
 const int questionMaxTimeLimitSeconds = 3600;
 
 /// The concrete kind of question. The `question` slide carries one [QuestionKind]
-/// (chosen in the editor); more kinds (open answer, ordering, …) slot in here
-/// without a model rebuild.
+/// (chosen in the editor); more kinds (open answer, …) slot in here without a
+/// model rebuild.
 ///
 /// - [multipleChoice]: one correct answer + a random pick of wrong ones; pick 1.
 /// - [trueFalse]: the prompt is a statement; pick Juist/Onjuist.
 /// - [multipleCorrect]: several answers may be correct; pick all correct ones.
-enum QuestionKind { multipleChoice, trueFalse, multipleCorrect }
+/// - [ordering]: the authored order of the answers is the correct order; the
+///   viewer taps the shuffled options into that order. `correct` flags are
+///   ignored for this kind.
+enum QuestionKind { multipleChoice, trueFalse, multipleCorrect, ordering }
 
 QuestionKind _kindFromName(String? name) => QuestionKind.values.firstWhere(
   (k) => k.name == name,
@@ -137,18 +140,22 @@ class QuestionSpec {
     statementIsTrue: statementIsTrue ?? this.statementIsTrue,
   );
 
-  /// Answers with non-empty text, partitioned for quick access.
-  List<QuestionAnswer> get _filled =>
+  /// Answers with non-empty text, partitioned for quick access. For
+  /// [QuestionKind.ordering], [filledAnswers] in list order IS the correct
+  /// order.
+  List<QuestionAnswer> get filledAnswers =>
       answers.where((a) => a.text.trim().isNotEmpty).toList();
   List<QuestionAnswer> get correctAnswers =>
-      _filled.where((a) => a.correct).toList();
+      filledAnswers.where((a) => a.correct).toList();
   List<QuestionAnswer> get wrongAnswers =>
-      _filled.where((a) => !a.correct).toList();
+      filledAnswers.where((a) => !a.correct).toList();
 
-  /// Whether the spec can actually be presented. True/false always can; the
-  /// answer-based kinds need at least one correct and one wrong answer.
+  /// Whether the spec can actually be presented. True/false always can;
+  /// ordering needs at least two answers to order; the other kinds need at
+  /// least one correct and one wrong answer.
   bool get isPresentable {
     if (kind == QuestionKind.trueFalse) return true;
+    if (kind == QuestionKind.ordering) return filledAnswers.length >= 2;
     return correctAnswers.isNotEmpty && wrongAnswers.isNotEmpty;
   }
 
@@ -206,17 +213,24 @@ class QuestionView {
   final List<String> options;
 
   /// Indices into [options] of the correct answer(s). One entry for single-pick
-  /// kinds (multiple choice, true/false); one or more for [multi].
+  /// kinds (multiple choice, true/false); one or more for [multi]. For
+  /// [ordering] this is the correct sequence: entry k is the index in [options]
+  /// of the item that belongs at position k.
   final List<int> correctIndices;
 
   /// The option(s) the viewer picked. Empty while unanswered. For single-pick
-  /// kinds this holds at most one index.
+  /// kinds this holds at most one index. For [ordering] the tap order is the
+  /// answer: entry k is the option the viewer put at position k.
   final List<int> selectedIndices;
 
-  /// Whether several options may be selected before submitting (multipleCorrect).
-  /// Single-pick kinds reveal immediately on tap; [multi] toggles and waits for
-  /// an explicit submit.
+  /// Whether several options may be selected before submitting (multipleCorrect
+  /// and ordering). Single-pick kinds reveal immediately on tap; [multi]
+  /// toggles and waits for an explicit submit.
   final bool multi;
+
+  /// Whether this is an ordering question: [selectedIndices] must match
+  /// [correctIndices] as a sequence, not as a set.
+  final bool ordering;
 
   final QuestionResult result;
 
@@ -239,6 +253,7 @@ class QuestionView {
     this.correctIndices = const [],
     this.selectedIndices = const [],
     this.multi = false,
+    this.ordering = false,
     this.result = QuestionResult.none,
     this.revealed = false,
     this.locked = false,
@@ -252,6 +267,25 @@ class QuestionView {
   bool isSelected(int i) => selectedIndices.contains(i);
   bool get hasSelection => selectedIndices.isNotEmpty;
 
+  /// Ordering: the 1-based position the viewer gave option [i], or null when
+  /// the option has not been placed yet.
+  int? selectedPositionOf(int i) {
+    final k = selectedIndices.indexOf(i);
+    return k >= 0 ? k + 1 : null;
+  }
+
+  /// Ordering: whether every option has been given a position.
+  bool get orderComplete => selectedIndices.length == options.length;
+
+  /// Ordering: whether the viewer's sequence matches the correct one exactly.
+  bool get orderMatches {
+    if (selectedIndices.length != correctIndices.length) return false;
+    for (var k = 0; k < correctIndices.length; k++) {
+      if (selectedIndices[k] != correctIndices[k]) return false;
+    }
+    return true;
+  }
+
   /// Whether navigation past this slide is permitted: a correct answer, or a
   /// wrong answer that is locked (the "lock & continue" path).
   bool get passed =>
@@ -263,6 +297,7 @@ class QuestionView {
     List<int>? correctIndices,
     List<int>? selectedIndices,
     bool? multi,
+    bool? ordering,
     QuestionResult? result,
     bool? revealed,
     bool? locked,
@@ -273,6 +308,7 @@ class QuestionView {
     correctIndices: correctIndices ?? this.correctIndices,
     selectedIndices: selectedIndices ?? this.selectedIndices,
     multi: multi ?? this.multi,
+    ordering: ordering ?? this.ordering,
     result: result ?? this.result,
     revealed: revealed ?? this.revealed,
     locked: locked ?? this.locked,
@@ -285,6 +321,7 @@ class QuestionView {
     'correctIndices': correctIndices,
     'selectedIndices': selectedIndices,
     'multi': multi,
+    'ordering': ordering,
     'result': result.name,
     'revealed': revealed,
     'locked': locked,
@@ -303,6 +340,7 @@ class QuestionView {
         (i as num).toInt(),
     ],
     multi: json['multi'] == true,
+    ordering: json['ordering'] == true,
     result: QuestionResult.values.firstWhere(
       (r) => r.name == json['result'],
       orElse: () => QuestionResult.none,

@@ -10,6 +10,11 @@ class _DeckStatusBar extends StatelessWidget {
   final VoidCallback? onExport;
   final String exportTooltip;
 
+  /// De samengevatte exportstatus plus de onderliggende kwaliteitsmeldingen
+  /// (voor de tooltip-tekst van de statuschip).
+  final ExportReadiness readiness;
+  final SlideQualityResult quality;
+
   const _DeckStatusBar({
     required this.deck,
     required this.deckState,
@@ -17,6 +22,8 @@ class _DeckStatusBar extends StatelessWidget {
     required this.onSave,
     required this.onExport,
     required this.exportTooltip,
+    required this.readiness,
+    required this.quality,
   });
 
   @override
@@ -44,56 +51,77 @@ class _DeckStatusBar extends StatelessWidget {
         ),
         child: Row(
           children: [
-            _StatusAction(
-              icon: deckState.isDirty
-                  ? Icons.radio_button_checked
-                  : Icons.check_circle_outline,
-              label: saveLabel,
-              tooltip: deckState.isDirty
-                  ? l10n.t('unsavedChanges')
-                  : l10n.t('noUnsavedChanges'),
-              color: deckState.isDirty
-                  ? const Color(0xFFD97706)
-                  : const Color(0xFF15803D),
-              onTap: () => onSave(),
-            ),
-            const _StatusDivider(),
-            _StatusItem(
-              icon: Icons.description_outlined,
-              label: fileLabel,
-              tooltip: deckState.filePath ?? l10n.t('noFileYet'),
-            ),
-            const _StatusDivider(),
-            _StatusItem(
-              icon: Icons.slideshow_outlined,
-              label: skipped == 0
-                  ? '${deck.slides.length} ${l10n.t('slides')}'
-                  : '${deck.slides.length} ${l10n.t('slides')} · $skipped ${l10n.t('skipped')}',
-              tooltip: skipped == 0
-                  ? l10n.t('allSlidesIncluded')
-                  : '$skipped ${l10n.t('skippedSlidesExcluded')}',
-              color: skipped == 0 ? null : const Color(0xFF8A6D3B),
-            ),
-            const _StatusDivider(),
-            _StatusItem(
-              icon: Icons.palette_outlined,
-              label: deck.themeProfile.name,
-              tooltip: '${l10n.t('styleProfile')}: ${deck.themeProfile.name}',
-            ),
-            if (deck.tlp != TlpLevel.none) ...[
-              const _StatusDivider(),
-              _StatusItem(
-                icon: Icons.shield_outlined,
-                label: deck.tlp.label,
-                tooltip: '${l10n.t('classification')}: ${deck.tlp.label}',
-                color: Color(deck.tlp.foreground),
+            // De linkergroep vangt al het ruimtetekort op: bij een smal
+            // venster krimpen de tekstlabels (ellipsis) in plaats van dat de
+            // balk overloopt; de rechtergroep blijft rechts uitgelijnd.
+            Expanded(
+              child: Row(
+                children: [
+                  _StatusAction(
+                    icon: deckState.isDirty
+                        ? Icons.radio_button_checked
+                        : Icons.check_circle_outline,
+                    label: saveLabel,
+                    tooltip: deckState.isDirty
+                        ? l10n.t('unsavedChanges')
+                        : l10n.t('noUnsavedChanges'),
+                    color: deckState.isDirty
+                        ? const Color(0xFFD97706)
+                        : const Color(0xFF15803D),
+                    onTap: () => onSave(),
+                  ),
+                  const _StatusDivider(),
+                  Flexible(
+                    child: _StatusItem(
+                      icon: Icons.description_outlined,
+                      label: fileLabel,
+                      tooltip: deckState.filePath ?? l10n.t('noFileYet'),
+                    ),
+                  ),
+                  const _StatusDivider(),
+                  _StatusItem(
+                    icon: Icons.slideshow_outlined,
+                    label: skipped == 0
+                        ? '${deck.slides.length} ${l10n.t('slides')}'
+                        : '${deck.slides.length} ${l10n.t('slides')} · $skipped ${l10n.t('skipped')}',
+                    tooltip: skipped == 0
+                        ? l10n.t('allSlidesIncluded')
+                        : '$skipped ${l10n.t('skippedSlidesExcluded')}',
+                    color: skipped == 0 ? null : const Color(0xFF8A6D3B),
+                  ),
+                  const _StatusDivider(),
+                  Flexible(
+                    child: _StatusItem(
+                      icon: Icons.palette_outlined,
+                      label: deck.themeProfile.name,
+                      tooltip:
+                          '${l10n.t('styleProfile')}: ${deck.themeProfile.name}',
+                    ),
+                  ),
+                  if (deck.tlp != TlpLevel.none) ...[
+                    const _StatusDivider(),
+                    _StatusItem(
+                      icon: Icons.shield_outlined,
+                      label: deck.tlp.label,
+                      tooltip: '${l10n.t('classification')}: ${deck.tlp.label}',
+                      color: Color(deck.tlp.foreground),
+                    ),
+                  ],
+                ],
               ),
-            ],
-            const Spacer(),
+            ),
             _StatusItem(
               icon: Icons.folder_outlined,
               label: exportLabel,
               tooltip: exportDirectory ?? l10n.t('exportsNextToDeck'),
+            ),
+            const _StatusDivider(),
+            _ExportReadinessChip(
+              readiness: readiness,
+              quality: quality,
+              deckState: deckState,
+              onSave: onSave,
+              onExport: onExport,
             ),
             const SizedBox(width: 6),
             _StatusAction(
@@ -103,6 +131,110 @@ class _DeckStatusBar extends StatelessWidget {
               onTap: onExport,
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// De exportstatus in één oogopslag: "Klaar voor export", "Nog opslaan
+/// nodig", "N kwaliteitswaarschuwing(en)" of "TLP/kwaliteit blokkeert
+/// export". Klikken doet het meest logische vervolg: opslaan wanneer dat de
+/// blokkade is, anders de exportdialoog openen (die toont de details).
+class _ExportReadinessChip extends StatelessWidget {
+  final ExportReadiness readiness;
+  final SlideQualityResult quality;
+  final DeckState deckState;
+  final Future<void> Function() onSave;
+  final VoidCallback? onExport;
+
+  const _ExportReadinessChip({
+    required this.readiness,
+    required this.quality,
+    required this.deckState,
+    required this.onSave,
+    required this.onExport,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    const green = Color(0xFF15803D);
+    const amber = Color(0xFFD97706);
+    const red = Color(0xFFB91C1C);
+    final issueCount = readiness.errorCount + readiness.warningCount;
+
+    final (
+      String label,
+      IconData icon,
+      Color color,
+      String tooltip,
+    ) = switch (readiness.status) {
+      ExportReadinessStatus.ready => (
+        l10n.d('Klaar voor export'),
+        Icons.task_alt,
+        green,
+        l10n.t('exportReady'),
+      ),
+      ExportReadinessStatus.qualityWarnings => (
+        '$issueCount ${l10n.d('kwaliteitswaarschuwing(en)')}',
+        Icons.warning_amber_outlined,
+        amber,
+        formatQualityExportReason(l10n, quality),
+      ),
+      ExportReadinessStatus.needsSave => (
+        l10n.d('Nog opslaan nodig'),
+        Icons.save_outlined,
+        amber,
+        deckState.filePath == null
+            ? l10n.t('exportNeedsSave')
+            : l10n.t('exportNeedsClean'),
+      ),
+      ExportReadinessStatus.blockedByClassification => (
+        l10n.d('TLP blokkeert export'),
+        Icons.shield_outlined,
+        red,
+        readiness.blockReason ?? '',
+      ),
+      ExportReadinessStatus.blockedByQuality => (
+        l10n.d('Kwaliteit blokkeert export'),
+        Icons.block,
+        red,
+        formatQualityExportReason(l10n, quality),
+      ),
+    };
+
+    final onTap = readiness.status == ExportReadinessStatus.needsSave
+        ? () => onSave()
+        : onExport;
+
+    return Tooltip(
+      message: tooltip,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(10),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+          decoration: BoxDecoration(
+            color: color.withValues(alpha: 0.12),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: color.withValues(alpha: 0.45)),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, size: 12, color: color),
+              const SizedBox(width: 4),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 11,
+                  color: color,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -132,15 +264,21 @@ class _StatusItem extends StatelessWidget {
         children: [
           Icon(icon, size: 13, color: fg),
           const SizedBox(width: 4),
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 210),
-            child: Text(
-              label,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 11,
-                color: fg,
-                fontWeight: color == null ? FontWeight.normal : FontWeight.w600,
+          // Flexible zodat het label meekrimpt (ellipsis) wanneer de
+          // statusbalk het item begrenst; los daarvan blijft 210 het maximum.
+          Flexible(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 210),
+              child: Text(
+                label,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 11,
+                  color: fg,
+                  fontWeight: color == null
+                      ? FontWeight.normal
+                      : FontWeight.w600,
+                ),
               ),
             ),
           ),

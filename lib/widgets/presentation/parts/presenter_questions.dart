@@ -45,6 +45,8 @@ extension _PresenterQuestions on _FullscreenPresenterState {
         );
       case QuestionKind.multipleCorrect:
         return _drawMultiCorrect(spec, base);
+      case QuestionKind.ordering:
+        return _drawOrdering(spec, base);
       case QuestionKind.multipleChoice:
         return _drawSingleChoice(spec, base);
     }
@@ -119,6 +121,38 @@ extension _PresenterQuestions on _FullscreenPresenterState {
     );
   }
 
+  /// Volgorde-vraag: trek een willekeurige greep van [QuestionSpec.optionCount]
+  /// antwoorden (hun onderlinge auteursvolgorde is de juiste volgorde) en toon
+  /// ze geschud — nooit toevallig al in de juiste volgorde.
+  QuestionView _drawOrdering(QuestionSpec spec, QuestionView base) {
+    final pool = spec.filledAnswers;
+    if (pool.length < 2) {
+      // Niet presenteerbaar: toon wat er is, zonder timer, en blokkeer niet.
+      return QuestionView(
+        options: pool.map((a) => a.text).toList(),
+        correctIndices: [for (var i = 0; i < pool.length; i++) i],
+        multi: true,
+        ordering: true,
+      );
+    }
+    final rng = math.Random();
+    final count = spec.optionCount.clamp(2, pool.length);
+    // Greep uit de pool; sorteren herstelt de (juiste) auteursvolgorde.
+    final chosen = (([
+      for (var i = 0; i < pool.length; i++) i,
+    ]..shuffle(rng)).take(count).toList()..sort());
+    final display = [...chosen];
+    do {
+      display.shuffle(rng);
+    } while (listEquals(display, chosen));
+    return base.copyWith(
+      options: [for (final i in display) pool[i].text],
+      correctIndices: [for (final i in chosen) display.indexOf(i)],
+      multi: true,
+      ordering: true,
+    );
+  }
+
   void _startQuestionTimer(String slideId) {
     _questionTimer?.cancel();
     _questionTimer = Timer.periodic(
@@ -182,8 +216,9 @@ extension _PresenterQuestions on _FullscreenPresenterState {
     }
   }
 
-  /// Bevestig de selectie bij een meerdere-juiste-vraag: goed wanneer precies de
-  /// juiste verzameling is aangevinkt.
+  /// Bevestig de selectie bij een meervoudige vraag: goed wanneer precies de
+  /// juiste verzameling is aangevinkt (meerdere-juiste) of wanneer de aangetikte
+  /// volgorde exact klopt (volgorde-vraag).
   void _onAnswerSubmit({int? slideIndex}) {
     if (slideIndex != null && slideIndex != _index) return;
     final slide = _currentSlide;
@@ -191,11 +226,14 @@ extension _PresenterQuestions on _FullscreenPresenterState {
     final view = _questionViews[slide.id];
     if (view == null || !view.multi || view.revealed || view.locked) return;
     if (view.selectedIndices.isEmpty) return;
+    // Een volgorde-antwoord telt pas als álle opties een plek hebben.
+    if (view.ordering && !view.orderComplete) return;
     _questionTimer?.cancel();
     final selected = view.selectedIndices.toSet();
     final correct = view.correctIndices.toSet();
-    final ok =
-        selected.length == correct.length && selected.containsAll(correct);
+    final ok = view.ordering
+        ? view.orderMatches
+        : selected.length == correct.length && selected.containsAll(correct);
     if (ok) {
       _rebuild(() {
         _questionViews[slide.id] = view.copyWith(

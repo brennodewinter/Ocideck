@@ -8,6 +8,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Ordering questions** — a fourth question kind next to multiple choice,
+  true/false and multiple-correct: the answers as entered in the editor are the
+  correct order (rearranged with up/down arrows). Presenting draws a random
+  subset, keeps its relative order as the right answer and shows it shuffled
+  (never accidentally already correct); the viewer taps the options into order
+  and confirms. A wrong answer reveals the options **in the correct order**,
+  marking each misplaced one in red with an explicit *Your order: n* line —
+  correctly placed ones turn green. Timer, on-wrong policy (retry with a fresh
+  draw, or lock-and-continue) and the interactive audience window work exactly
+  as for the other kinds. Round-trips in the ```` ```question ```` JSON block
+  as `"kind": "ordering"`; translated in all 30 non-Dutch languages.
 - **Nextcloud (WebDAV) as a file source** — browse a folder on your Nextcloud
   and open `.ocideck` packages or Marp `.md` decks straight from it, and save a
   deck back, either as a single `.ocideck` package or as a flat `.md` plus its

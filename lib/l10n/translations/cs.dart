@@ -679,6 +679,8 @@ const _dutchSourceCs = {
   'Verticaal': 'Svisle',
   'Animatie': 'Animace',
   'Intekenen bij openen': 'Zakreslit při otevření',
+  'Markeer als huidig punt': 'Označit jako aktuální bod',
+  'Huidig punt weghalen': 'Odebrat aktuální bod',
   'Stap voor stap': 'Krok za krokem',
   'Geen animatie': 'Bez animace',
   'Animatiesnelheid': 'Rychlost animace',
@@ -737,6 +739,13 @@ const _dutchSourceCs = {
       'Tvrzení výše je pravdivé nebo nepravdivé; vyberte které.',
   'Selecteer alle juiste antwoorden': 'Vyberte všechny správné odpovědi',
   'Bevestig': 'Potvrdit',
+  'Volgorde': 'Pořadí',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Seřaďte zde odpovědi do správného pořadí. Při prezentaci se zobrazí zamíchané.',
+  'Geef minstens twee antwoorden op.': 'Zadejte alespoň dvě odpovědi.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Klepněte na odpovědi ve správném pořadí',
+  'Jouw volgorde': 'Vaše pořadí',
   'Het juiste antwoord': 'Správná odpověď',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Obrázek se zobrazuje na celou obrazovku jako pozadí. Rozostření použijte, když titulek potřebuje více klidu nebo kontrastu.',
@@ -1107,6 +1116,108 @@ const _dutchSourceCs = {
   'Pen · markeerstift · ⇧E': 'Pero · zvýrazňovač · ⇧E',
   'Gestapelde staaf': 'Skládaný sloupcový',
   'Spreiding': 'Bodový',
+  'Klaar voor export': 'Připraveno k exportu',
+  'kwaliteitswaarschuwing(en)': 'upozornění na kvalitu',
+  'Nog opslaan nodig': 'Nejprve je nutné uložit',
+  'TLP blokkeert export': 'TLP blokuje export',
+  'Kwaliteit blokkeert export': 'Kvalita blokuje export',
+  'Leeg deck': 'Prázdný deck',
+  'Korte briefing': 'Krátký briefing',
+  'Status-briefing': 'Statusový briefing',
+  'Projectstart / kick-off': 'Zahájení projektu / kick-off',
+  'Voorbespreking communicatie': 'Předběžná porada o komunikaci',
+  'Projecttijdlijn': 'Časová osa projektu',
+  'Informatiebeveiliging: RASCI / TVB': 'Bezpečnost informací: RASCI / TVB',
+  'Security-takenplan': 'Plán bezpečnostních úkolů',
+  'Certificering voortgang': 'Postup certifikace',
+  'Training / workshop': 'Školení / workshop',
+  'Rapportage': 'Zpráva',
+  'Onderzoeksverhaal': 'Výzkumný příběh',
+  'Technische uitleg': 'Technické vysvětlení',
+  'Interactieve quiz': 'Interaktivní kvíz',
+  'Alleen een titelpagina en een agenda.': 'Pouze titulní strana a program.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situace, fakta a požadované rozhodnutí na šesti snímcích.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Stavový přehled, postup podle pracovních proudů a rozhodnutí.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Proč, cíl, rozsah, zainteresované strany a časová osa.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Cílové skupiny, klíčové sdělení, kanály a mluvčí.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fáze, milníky, závislosti a rozhodovací body.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Zaznamenání rolí, matice RASCI a dohod o úkolech.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Úkoly, priority, vlastníci a doklady.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Postup podle domén, kontroly a plánování auditu.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Výukové cíle, klíčové koncepty, cvičení a kvízová otázka.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Shrnutí, přehled KPI, trend a akce.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Otázka, metoda, časová osa zjištění a závěry.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architektura, komponenty, ukázka kódu a kontrolní seznam.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Tři typy otázek s vysvětlením a závěrečnou diskusí.',
+  'Sjabloon': 'Šablona',
+  'Post-incident review / lessons learned':
+      'Přezkoumání po incidentu / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Posouzení úniku dat / incidentu soukromí',
+  'DPIA / privacy impact assessment': 'DPIA / posouzení vlivu na soukromí',
+  'Risicoanalyse / risk register': 'Analýza rizik / registr rizik',
+  'Business continuity / DR-test': 'Business continuity / test DR',
+  'Tabletop-oefening / crisisoefening': 'Cvičení tabletop / krizové cvičení',
+  'BOB-crisisrapportage': 'Krizová zpráva BOB',
+  'CAB / release readiness': 'CAB / připravenost k vydání',
+  'Stuurgroep / project board update':
+      'Řídicí výbor / aktualizace pro project board',
+  'Auditbevindingen en opvolging': 'Zjištění auditu a následná opatření',
+  'Leveranciersbeoordeling / vendor risk': 'Hodnocení dodavatele / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Architektonické rozhodnutí / prezentace ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Zavedení politiky / implementační plán',
+  'Overdracht / handover': 'Předání / handover',
+  'Retrospective / teamverbetering': 'Retrospektiva / zlepšování týmu',
+  'PPL Vluchtvoorbereiding': 'Předletová příprava PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Časová osa, dopad, příčiny a nápravná opatření po incidentu.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Posuďte data, riziko, ohlašovací povinnost a komunikaci.',
+  "Verwerking, grondslag, privacyrisico's en maatregelen.":
+      'Zpracování, právní základ, rizika pro soukromí a opatření.',
+  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
+      'Zaznamenejte rizika, pravděpodobnost, dopad, opatření a vlastníky.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scénář, cíle obnovy, zjištění z testů a body ke zlepšení.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scénář, injects, rozhodnutí, pozorování a vyhodnocení.',
+  "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
+      'Proveďte krizový tým fázemi vytváření obrazu situace, posouzení situace a rozhodování, se živým obrazem situace, informačními otázkami, dilematy, protokolem rozhodnutí a seznamem akcí.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Změna, dopad, testy, rollback, komunikace a go/no-go.',
+  "Voortgang, planning, budget, risico's en besluiten gevraagd.":
+      'Postup, plánování, rozpočet, rizika a požadovaná rozhodnutí.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Zjištění, root cause, opatření, důkazy a status.',
+  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
+      'Služba, data, závislosti, požadavky, rizika a rozhodnutí.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontext, možnosti, trade-offs, rozhodnutí a důsledky.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Cílová skupina, plánování, komunikace, školení a přijetí.',
+  "Status, open acties, risico's, contacten en eerste stappen.":
+      'Status, otevřené akce, rizika, kontakty a první kroky.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fakta, vzorce, start-stop-continue a zlepšovací akce.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Připravte let VFR s trasou, počasím, NOTAMy, výkony, weight & balance, palivem, náhradními letišti a osobními kontrolami go/no-go.',
+  'Zoek een sjabloon': 'Vyhledat šablonu',
+  'Geen sjablonen gevonden': 'Nebyly nalezeny žádné šablony',
   // Duplicaatdetectie & opruimen (open-lijsten).
   'Identieke kopieën': 'Identické kopie',
   'Zelfde titel, andere inhoud': 'Stejný název, jiný obsah',

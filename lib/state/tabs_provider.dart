@@ -8,6 +8,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 import '../models/deck.dart';
+import '../models/deck_template.dart';
 import '../models/webdav_settings.dart';
 import '../services/annotation_codec.dart';
 import '../services/duplicate_service.dart';
@@ -277,18 +278,18 @@ class TabsNotifier extends StateNotifier<TabsState> {
     state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
   }
 
-  void newDeckInCurrentTab(String title) {
+  void newDeckInCurrentTab(String title, {DeckTemplate? template}) {
     final tab = state.current;
     if (tab == null) return;
-    tab.deckNotifier.newDeck(title);
+    tab.deckNotifier.newDeck(title, template: template);
     tab.editorNotifier.select(0);
     // Force rebuild by copying state (label may have changed)
     state = state.copyWith(tabs: List.from(state.tabs));
   }
 
-  void newDeckInNewTab(String title) {
+  void newDeckInNewTab(String title, {DeckTemplate? template}) {
     final tab = _createTab();
-    tab.deckNotifier.newDeck(title);
+    tab.deckNotifier.newDeck(title, template: template);
     tab.editorNotifier.select(0);
     final newTabs = [...state.tabs, tab];
     state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);

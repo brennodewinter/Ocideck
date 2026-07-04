@@ -34,9 +34,29 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       settings,
     );
     final classificationDecision = enforcement.evaluate(deck.tlp);
+    // Dezelfde samenvoeging als het kwaliteitspaneel: sync-analyse plus de
+    // asynchrone titel-afbeeldingcontrastcheck, zodat statusbalk en paneel
+    // dezelfde tellingen tonen.
+    final syncQuality = ref.watch(deckQualityProvider);
+    final imageIssues =
+        ref.watch(imageContrastIssuesProvider).value ??
+        const <SlideQualityIssue>[];
+    final quality = imageIssues.isEmpty
+        ? syncQuality
+        : SlideQualityResult([...syncQuality.issues, ...imageIssues]);
+    final readiness = evaluateExportReadiness(
+      needsSave:
+          !isWebPlatform && (deckState.filePath == null || deckState.isDirty),
+      classificationDecision: classificationDecision,
+      qualityDecision: QualityExportPolicy.fromAppSettings(
+        warningsEnabled: settings.qualityWarningsOnExport,
+        blockOnErrors: settings.qualityBlockExportOnErrors,
+      ).evaluate(quality),
+    );
     final (:canExport, :exportTooltip) = _exportGate(
       deckState,
-      classificationDecision,
+      readiness,
+      quality,
       l10n,
     );
 
@@ -100,6 +120,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             onSave: _saveDeck,
             onExport: canExport ? _exportDeck : null,
             exportTooltip: exportTooltip,
+            readiness: readiness,
+            quality: quality,
           ),
           body: Builder(
             builder: (ctx) {
@@ -172,19 +194,25 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
   /// kan elk geopend deck direct geëxporteerd worden.
   ({bool canExport, String exportTooltip}) _exportGate(
     DeckState deckState,
-    ExportDecision classificationDecision,
+    ExportReadiness readiness,
+    SlideQualityResult quality,
     AppLocalizations l10n,
   ) {
-    final canExport =
-        isWebPlatform || (deckState.filePath != null && !deckState.isDirty);
-    final exportTooltip = !isWebPlatform && deckState.filePath == null
-        ? l10n.t('exportNeedsSave')
-        : !isWebPlatform && deckState.isDirty
-        ? l10n.t('exportNeedsClean')
-        : !classificationDecision.allowed
-        ? classificationDecision.reason!
-        : l10n.t('exportReady');
-    return (canExport: canExport, exportTooltip: exportTooltip);
+    final exportTooltip = switch (readiness.status) {
+      ExportReadinessStatus.needsSave =>
+        deckState.filePath == null
+            ? l10n.t('exportNeedsSave')
+            : l10n.t('exportNeedsClean'),
+      ExportReadinessStatus.blockedByClassification =>
+        readiness.blockReason ?? l10n.t('exportReady'),
+      ExportReadinessStatus.blockedByQuality ||
+      ExportReadinessStatus.qualityWarnings => formatQualityExportReason(
+        l10n,
+        quality,
+      ),
+      ExportReadinessStatus.ready => l10n.t('exportReady'),
+    };
+    return (canExport: readiness.canOpenExport, exportTooltip: exportTooltip);
   }
 
   PreferredSizeWidget _appBar(
@@ -689,9 +717,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
   }
 
   Future<void> _newInTab() async {
-    final title = await NewDeckDialog.show(context);
-    if (title != null) {
-      ref.read(tabsProvider.notifier).newDeckInNewTab(title);
+    final choice = await NewDeckDialog.show(context);
+    if (choice != null) {
+      ref
+          .read(tabsProvider.notifier)
+          .newDeckInNewTab(choice.title, template: choice.template);
     }
   }
 
