@@ -84,6 +84,7 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Instelling opslaan is mislukt.': 'No se pudo guardar el ajuste.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: la versión web solo puede descargar de servidores que lo permitan (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':

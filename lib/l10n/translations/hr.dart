@@ -83,6 +83,7 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Instelling opslaan is mislukt.': 'Spremanje postavke nije uspjelo.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Napomena: web-verzija može dohvaćati samo s poslužitelja koji to dopuštaju (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':

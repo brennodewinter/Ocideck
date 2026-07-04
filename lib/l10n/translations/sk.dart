@@ -84,6 +84,7 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Instelling opslaan is mislukt.': 'Uloženie nastavenia zlyhalo.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Pozor: webová verzia môže sťahovať len zo serverov, ktoré to povoľujú (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':

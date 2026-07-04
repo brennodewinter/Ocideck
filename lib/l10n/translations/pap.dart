@@ -83,6 +83,7 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Instelling opslaan is mislukt.': 'Warda di konfigurashon a faya.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: e vershon web por baha solamente for di servernan ku ta permití esaki (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':

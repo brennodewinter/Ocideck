@@ -84,6 +84,7 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Instelling opslaan is mislukt.': 'Запазването на настройката е неуспешно.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Забележка: уеб версията може да изтегля само от сървъри, които го позволяват (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':

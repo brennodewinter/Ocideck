@@ -85,6 +85,7 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Instelling opslaan is mislukt.': 'Optio servari non potuit.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: versio interretialis solum a servis id permittentibus accersere potest (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':

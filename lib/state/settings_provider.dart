@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/deck.dart' show TlpLevel;
@@ -14,6 +16,23 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   }
 
   final SecretStore _secrets;
+
+  /// Broadcast: één event (een oplopend volgnummer) per mislukte prefs-schrijf,
+  /// zie [_persist]. De app-shell luistert hierop en toont een niet-blokkerende
+  /// melding. Het volgnummer garandeert dat opeenvolgende fouten distinct zijn,
+  /// zodat de [settingsPersistErrorProvider] ze niet als "ongewijzigd" samenvouwt.
+  final StreamController<int> _persistErrors =
+      StreamController<int>.broadcast();
+  int _persistErrorSeq = 0;
+
+  /// Stroom van persist-fouten voor de UI. Zie [settingsPersistErrorProvider].
+  Stream<int> get persistErrors => _persistErrors.stream;
+
+  @override
+  void dispose() {
+    _persistErrors.close();
+    super.dispose();
+  }
 
   Future<void> _load() async {
     final prefs = await SharedPreferences.getInstance();
@@ -131,6 +150,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       await write(prefs);
     } catch (e, s) {
       logError('SettingsNotifier.$label: prefs-schrijf mislukt', e, s);
+      if (!_persistErrors.isClosed) _persistErrors.add(++_persistErrorSeq);
     }
   }
 
@@ -740,3 +760,10 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
 final settingsProvider = StateNotifierProvider<SettingsNotifier, AppSettings>(
   (_) => SettingsNotifier(),
 );
+
+/// Zendt een oplopend volgnummer uit telkens als een prefs-schrijf in
+/// [SettingsNotifier] faalt. De app-shell luistert hierop en meldt het
+/// niet-blokkerend aan de gebruiker (de wijziging geldt wel voor deze sessie).
+final settingsPersistErrorProvider = StreamProvider<int>((ref) {
+  return ref.watch(settingsProvider.notifier).persistErrors;
+});

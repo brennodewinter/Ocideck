@@ -84,6 +84,7 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Instelling opslaan is mislukt.': 'L-issejvjar tas-setting falla.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: il-verżjoni tal-web tista\' ġġib biss minn servers li jippermettuh (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':

@@ -83,6 +83,7 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Instelling opslaan is mislukt.': 'Ynstelling bewarje is mislearre.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Tink derom: de webferzje kin allinnich ophelje fan servers dy\'t dat tastean (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':

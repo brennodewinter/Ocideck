@@ -85,6 +85,7 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Instelling opslaan is mislukt.': 'Theip ar an socrú a shábháil.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Tabhair faoi deara: ní féidir leis an leagan gréasáin íoslódáil ach ó fhreastalaithe a cheadaíonn é (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
