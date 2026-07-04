@@ -29,16 +29,7 @@ const int maxMethodLines = 150;
 /// Each value is that declaration's ceiling: it may SHRINK (split it, then
 /// lower the number) but never grow. Add a new entry only with a deliberate
 /// reason; the goal is fewer and smaller entries over time.
-const Map<String, int> methodLengthBaseline = {
-  // Geërfd van vóór de ratchet (deze builds waren al te lang toen de check
-  // werd geïntroduceerd); ceilings mogen alleen omlaag.
-  'lib/widgets/dialogs/presentation_info_dialog.dart::_PresentationInfoDialogState.build':
-      155,
-  'lib/widgets/editors/chart_editor.dart::_ChartEditorState.build': 181,
-  'lib/widgets/privacy_statement_content.dart::PrivacyStatementContent.build':
-      168,
-  'lib/widgets/slides/previews/table_preview.dart::_TablePreview.build': 183,
-};
+const Map<String, int> methodLengthBaseline = {};
 
 bool _isTranslationData(String path) =>
     path.replaceAll(r'\', '/').contains('lib/l10n/translations/');
