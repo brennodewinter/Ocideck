@@ -1161,4 +1161,59 @@ const _dutchSourceSv = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Tre frågetyper med förklaring och uppföljning.',
   'Sjabloon': 'Mall',
+  'Post-incident review / lessons learned':
+      'Post-incident review / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Dataläcka / bedömning av integritetsincident',
+  'DPIA / privacy impact assessment':
+      'DPIA / konsekvensbedömning för dataskydd',
+  'Risicoanalyse / risk register': 'Riskanalys / riskregister',
+  'Business continuity / DR-test': 'Business continuity / DR-test',
+  'Tabletop-oefening / crisisoefening': 'Tabletop-övning / krisövning',
+  'BOB-crisisrapportage': 'BOB-krisrapportering',
+  'CAB / release readiness': 'CAB / release readiness',
+  'Stuurgroep / project board update': 'Styrgrupp / project board-uppdatering',
+  'Auditbevindingen en opvolging': 'Revisionsfynd och uppföljning',
+  'Leveranciersbeoordeling / vendor risk': 'Leverantörsbedömning / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Arkitekturbeslut / ADR-presentation',
+  'Beleid uitrollen / implementatieplan':
+      'Utrullning av policy / genomförandeplan',
+  'Overdracht / handover': 'Överlämning / handover',
+  'Retrospective / teamverbetering': 'Retrospektiv / teamförbättring',
+  'PPL Vluchtvoorbereiding': 'PPL-flygförberedelse',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Tidslinje, påverkan, orsaker och förbättringsåtgärder efter en incident.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Bedöm uppgifter, risk, anmälningsplikt och kommunikation.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Behandling, rättslig grund, integritetsrisker och åtgärder.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Dokumentera risker, sannolikhet, påverkan, åtgärder och ägare.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scenario, återställningsmål, testfynd och förbättringspunkter.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scenario, injects, beslut, observationer och utvärdering.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Led ett kristeam genom lägesbild, bedömning och beslutsfattande, med lägesbild i realtid, informationsfrågor, dilemman, beslutslogg och åtgärdslista.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Ändring, påverkan, tester, rollback, kommunikation och go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Framsteg, planering, budget, risker och begärda beslut.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Fynd, root cause, åtgärder, underlag och status.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Tjänst, data, beroende, krav, risker och beslut.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontext, alternativ, trade-offs, beslut och konsekvenser.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Målgrupp, planering, kommunikation, utbildning och införande.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Status, öppna åtgärder, risker, kontakter och första steg.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fakta, mönster, start-stop-continue och förbättringsåtgärder.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Förbered en VFR-flygning med rutt, väder, NOTAM, prestanda, weight & balance, bränsle, alternates och personliga go/no-go-kontroller.',
+  'Zoek een sjabloon': 'Sök efter en mall',
+  'Geen sjablonen gevonden': 'Inga mallar hittades',
 };

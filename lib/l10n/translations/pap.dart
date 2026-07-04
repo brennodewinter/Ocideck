@@ -1153,4 +1153,61 @@ const _dutchSourceAddPap = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Tres tipo di pregunta ku splikashon i diskushon despues.',
   'Sjabloon': 'Modelo',
+  'Post-incident review / lessons learned':
+      'Post-incident review / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Fuga di dato / evaluashon di insidente di privasidat',
+  'DPIA / privacy impact assessment': 'DPIA / privacy impact assessment',
+  'Risicoanalyse / risk register': 'Análisis di riesgo / risk register',
+  'Business continuity / DR-test': 'Business continuity / test di DR',
+  'Tabletop-oefening / crisisoefening':
+      'Ehersisio tabletop / ehersisio di krisis',
+  'BOB-crisisrapportage': 'Rapòrt di krisis BOB',
+  'CAB / release readiness': 'CAB / release readiness',
+  'Stuurgroep / project board update':
+      'Grupo di direkshon / update di project board',
+  'Auditbevindingen en opvolging': 'Resultadonan di audit i seguimentu',
+  'Leveranciersbeoordeling / vendor risk':
+      'Evaluashon di proveedó / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Desishon di arkitektura / presentashon ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Introdusí polítika / plan di implementashon',
+  'Overdracht / handover': 'Traspaso / handover',
+  'Retrospective / teamverbetering': 'Retrospective / mehorashon di tim',
+  'PPL Vluchtvoorbereiding': 'Preparashon di buelo PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Liña di tempu, impakto, kousanan i akshonnan di mehora despues di un insidente.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Evaluá datonan, riesgo, obligashon di notifikashon i komunikashon.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Prosesamentu, base legal, riesgonan di privasidat i medidanan.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Registrá riesgonan, probabilidat, impakto, medidanan i doñonan.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Senario, metanan di rekuperashon, resultadonan di test i puntonan di mehora.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Senario, injects, desishonnan, opservashonnan i evaluashon.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Guia un tim di krisis dor di formashon di imágen, formashon di huisio i tuma di desishon, ku bista di situashon live, preguntanan di informashon, dilemanan, log di desishon i lista di akshon.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Kambio, impakto, testnan, rollback, komunikashon i go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Progreso, planifikashon, presupuesto, riesgonan i desishonnan pidí.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Resultadonan, root cause, medidanan, evidensia i status.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Servisio, dato, dependensia, eksigensianan, riesgonan i desishon.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Konteksto, opshonnan, trade-offs, desishon i konsekuensianan.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Grupo meta, planifikashon, komunikashon, entrenamentu i adopshon.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Status, akshonnan habrí, riesgonan, kontaktonan i promé pasonan.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Echonan, patronnan, start-stop-continue i akshonnan di mehora.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Prepará un buelo VFR ku ruta, wèr, NOTAMs, prestashon, weight & balance, kombustibel, alternates i cheknan go/no-go personal.',
+  'Zoek een sjabloon': 'Buska un modelo',
+  'Geen sjablonen gevonden': 'No a haña ningun modelo',
 };

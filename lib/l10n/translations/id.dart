@@ -1162,4 +1162,59 @@ const _dutchSourceId = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Tiga bentuk pertanyaan dengan penjelasan dan pembahasan.',
   'Sjabloon': 'Templat',
+  'Post-incident review / lessons learned':
+      'Tinjauan pasca-insiden / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Kebocoran data / penilaian insiden privasi',
+  'DPIA / privacy impact assessment': 'DPIA / penilaian dampak privasi',
+  'Risicoanalyse / risk register': 'Analisis risiko / risk register',
+  'Business continuity / DR-test': 'Kelangsungan bisnis / uji DR',
+  'Tabletop-oefening / crisisoefening': 'Latihan tabletop / latihan krisis',
+  'BOB-crisisrapportage': 'Pelaporan krisis BOB',
+  'CAB / release readiness': 'CAB / kesiapan rilis',
+  'Stuurgroep / project board update':
+      'Komite pengarah / pembaruan project board',
+  'Auditbevindingen en opvolging': 'Temuan audit dan tindak lanjut',
+  'Leveranciersbeoordeling / vendor risk': 'Penilaian pemasok / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Keputusan arsitektur / presentasi ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Peluncuran kebijakan / rencana implementasi',
+  'Overdracht / handover': 'Serah terima / handover',
+  'Retrospective / teamverbetering': 'Retrospektif / perbaikan tim',
+  'PPL Vluchtvoorbereiding': 'Persiapan penerbangan PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Linimasa, dampak, penyebab, dan tindakan perbaikan setelah insiden.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Menilai data, risiko, kewajiban lapor, dan komunikasi.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Pemrosesan, dasar hukum, risiko privasi, dan langkah penanganan.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Mencatat risiko, kemungkinan, dampak, langkah penanganan, dan pemilik.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Skenario, target pemulihan, temuan pengujian, dan poin perbaikan.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Skenario, inject, keputusan, pengamatan, dan evaluasi.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Memandu tim krisis melalui pembentukan gambaran, penilaian, dan pengambilan keputusan, dengan gambaran situasi langsung, pertanyaan informasi, dilema, log keputusan, dan daftar tindakan.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Perubahan, dampak, pengujian, rollback, komunikasi, dan go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Kemajuan, perencanaan, anggaran, risiko, dan keputusan yang diminta.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Temuan, root cause, langkah penanganan, bukti, dan status.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Layanan, data, ketergantungan, persyaratan, risiko, dan keputusan.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Konteks, opsi, trade-off, keputusan, dan konsekuensi.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Kelompok sasaran, perencanaan, komunikasi, pelatihan, dan adopsi.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Status, tindakan terbuka, risiko, kontak, dan langkah awal.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fakta, pola, start-stop-continue, dan tindakan perbaikan.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Siapkan penerbangan VFR dengan rute, cuaca, NOTAM, performa, weight & balance, bahan bakar, alternate, dan pemeriksaan go/no-go pribadi.',
+  'Zoek een sjabloon': 'Cari templat',
+  'Geen sjablonen gevonden': 'Tidak ada templat yang ditemukan',
 };

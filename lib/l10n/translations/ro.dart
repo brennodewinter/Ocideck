@@ -1174,4 +1174,62 @@ const _dutchSourceRo = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Trei tipuri de întrebări cu explicații și discuție finală.',
   'Sjabloon': 'Șablon',
+  'Post-incident review / lessons learned':
+      'Analiză post-incident / lecții învățate',
+  'Datalek / privacy-incident beoordeling':
+      'Evaluarea unei breșe de date / a unui incident de confidențialitate',
+  'DPIA / privacy impact assessment':
+      'DPIA / evaluarea impactului asupra confidențialității',
+  'Risicoanalyse / risk register': 'Analiză de risc / registru de riscuri',
+  'Business continuity / DR-test': 'Continuitatea activității / test DR',
+  'Tabletop-oefening / crisisoefening':
+      'Exercițiu tabletop / exercițiu de criză',
+  'BOB-crisisrapportage': 'Raportare de criză BOB',
+  'CAB / release readiness': 'CAB / pregătirea lansării',
+  'Stuurgroep / project board update':
+      'Actualizare pentru comitetul de coordonare / project board',
+  'Auditbevindingen en opvolging': 'Constatări de audit și urmărire',
+  'Leveranciersbeoordeling / vendor risk':
+      'Evaluarea furnizorilor / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Decizie de arhitectură / prezentare ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Lansarea unei politici / plan de implementare',
+  'Overdracht / handover': 'Predare / handover',
+  'Retrospective / teamverbetering': 'Retrospectivă / îmbunătățirea echipei',
+  'PPL Vluchtvoorbereiding': 'Pregătirea zborului PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Cronologie, impact, cauze și acțiuni de îmbunătățire după un incident.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Evaluați datele, riscul, obligația de notificare și comunicarea.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Prelucrare, temei juridic, riscuri de confidențialitate și măsuri.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Consemnați riscurile, probabilitatea, impactul, măsurile și responsabilii.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scenariu, obiective de recuperare, constatările testelor și puncte de îmbunătățire.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scenariu, injects, decizii, observații și evaluare.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Conduceți o echipă de criză prin formarea imaginii, formarea judecății și luarea deciziilor, cu imagine de situație în timp real, cereri de informații, dileme, jurnal de decizii și listă de acțiuni.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Modificare, impact, teste, rollback, comunicare și go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Progres, planificare, buget, riscuri și decizii solicitate.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Constatări, root cause, măsuri, dovezi și stare.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Serviciu, date, dependență, cerințe, riscuri și decizie.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Context, opțiuni, trade-off-uri, decizie și consecințe.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Grup-țintă, planificare, comunicare, instruire și adoptare.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Stare, acțiuni deschise, riscuri, contacte și primii pași.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fapte, tipare, start-stop-continue și acțiuni de îmbunătățire.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Pregătiți un zbor VFR cu rută, vreme, NOTAM-uri, performanțe, weight & balance, combustibil, alternates și verificări personale go/no-go.',
+  'Zoek een sjabloon': 'Căutați un șablon',
+  'Geen sjablonen gevonden': 'Nu s-au găsit șabloane',
 };

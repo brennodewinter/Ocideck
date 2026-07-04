@@ -1179,4 +1179,60 @@ const _dutchSourceBg = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Три вида въпроси с обяснение и обсъждане.',
   'Sjabloon': 'Шаблон',
+  'Post-incident review / lessons learned':
+      'Преглед след инцидент / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Оценка на изтичане на данни / инцидент с лични данни',
+  'DPIA / privacy impact assessment':
+      'DPIA / оценка на въздействието върху личните данни',
+  'Risicoanalyse / risk register': 'Анализ на риска / регистър на рисковете',
+  'Business continuity / DR-test': 'Непрекъснатост на бизнеса / DR тест',
+  'Tabletop-oefening / crisisoefening': 'Настолно учение / кризисно учение',
+  'BOB-crisisrapportage': 'BOB кризисен доклад',
+  'CAB / release readiness': 'CAB / готовност за релийз',
+  'Stuurgroep / project board update':
+      'Управителен комитет / актуализация за проектния съвет',
+  'Auditbevindingen en opvolging': 'Одитни констатации и последващи действия',
+  'Leveranciersbeoordeling / vendor risk': 'Оценка на доставчици / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Архитектурно решение / ADR презентация',
+  'Beleid uitrollen / implementatieplan':
+      'Внедряване на политика / план за изпълнение',
+  'Overdracht / handover': 'Предаване / handover',
+  'Retrospective / teamverbetering': 'Ретроспектива / подобряване на екипа',
+  'PPL Vluchtvoorbereiding': 'PPL подготовка за полет',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Времева линия, въздействие, причини и действия за подобрение след инцидент.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Оценете данните, риска, задължението за уведомяване и комуникацията.',
+  "Verwerking, grondslag, privacyrisico's en maatregelen.":
+      'Обработка, правно основание, рискове за поверителността и мерки.',
+  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
+      'Запишете рискове, вероятност, въздействие, мерки и отговорници.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Сценарий, цели за възстановяване, резултати от теста и точки за подобрение.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Сценарий, injects, решения, наблюдения и оценка.',
+  "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
+      'Преведете кризисния екип през изграждане на картина, преценка и вземане на решения, с картина на ситуацията на живо, информационни въпроси, дилеми, дневник на решенията и списък с действия.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Промяна, въздействие, тестове, rollback, комуникация и go/no-go.',
+  "Voortgang, planning, budget, risico's en besluiten gevraagd.":
+      'Напредък, планиране, бюджет, рискове и искани решения.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Констатации, root cause, мерки, доказателства и статус.',
+  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
+      'Услуга, данни, зависимост, изисквания, рискове и решение.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Контекст, опции, компромиси, решение и последици.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Целева група, планиране, комуникация, обучение и възприемане.',
+  "Status, open acties, risico's, contacten en eerste stappen.":
+      'Статус, отворени действия, рискове, контакти и първи стъпки.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Факти, модели, start-stop-continue и действия за подобрение.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Подгответе VFR полет с маршрут, време, NOTAMs, летателни характеристики, weight & balance, гориво, резервни летища и лични go/no-go проверки.',
+  'Zoek een sjabloon': 'Търсене на шаблон',
+  'Geen sjablonen gevonden': 'Няма намерени шаблони',
 };

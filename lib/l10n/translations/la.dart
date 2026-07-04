@@ -1171,4 +1171,63 @@ const _dutchSourceLa = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Tres formae quaestionum cum explicatione et colloquio postero.',
   'Sjabloon': 'Exemplar',
+  'Post-incident review / lessons learned':
+      'Recognitio post incidens / lectiones acceptae',
+  'Datalek / privacy-incident beoordeling':
+      'Aestimatio fugae datorum / incidentis vitae privatae',
+  'DPIA / privacy impact assessment':
+      'DPIA / aestimatio effectus in vitam privatam',
+  'Risicoanalyse / risk register':
+      'Analysis periculorum / registrum periculorum',
+  'Business continuity / DR-test': 'Continuitas negotii / probatio DR',
+  'Tabletop-oefening / crisisoefening':
+      'Exercitatio tabletop / exercitatio crisis',
+  'BOB-crisisrapportage': 'Relatio crisis BOB',
+  'CAB / release readiness': 'CAB / promptitudo emissionis',
+  'Stuurgroep / project board update':
+      'Renovatio coetus gubernantis / project board',
+  'Auditbevindingen en opvolging': 'Inventa inspectionis et prosecutio',
+  'Leveranciersbeoordeling / vendor risk':
+      'Aestimatio praebitorum / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Decretum architecturae / expositio ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Rationem agendi evolvere / consilium exsecutionis',
+  'Overdracht / handover': 'Traditio / handover',
+  'Retrospective / teamverbetering': 'Retrospectiva / emendatio turmae',
+  'PPL Vluchtvoorbereiding': 'Praeparatio volatus PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Linea temporis, effectus, causae et actiones emendandi post incidens.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Aestima data, periculum, officium nuntiandi et communicationem.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Tractatio, fundamentum iuris, pericula vitae privatae et remedia.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Pericula, probabilitatem, effectum, remedia et dominos consigna.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scenarium, proposita restitutionis, inventa probationum et puncta emendanda.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scenarium, injects, decreta, observationes et aestimatio.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Duc turmam crisis per formationem imaginis, iudicii et decreti, cum imagine situationis viva, quaestionibus informationis, dilemmatibus, registro decretorum et indice actionum.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Mutatio, effectus, probationes, rollback, communicatio et go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Progressus, ordinatio, ratio sumptuum, pericula et decreta petita.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Inventa, root cause, remedia, documenta probantia et status.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Ministerium, data, dependentia, postulata, pericula et decretum.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Contextus, optiones, trade-offs, decretum et consequentiae.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Auditores destinati, ordinatio, communicatio, exercitatio et adoptio.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Status, actiones apertae, pericula, contactus et primi gradus.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Facta, exempla, start-stop-continue et actiones emendandi.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Para volatum VFR cum itinere, tempestate, NOTAMs, praestationibus, weight & balance, combustibili, alternates et probationibus personalibus go/no-go.',
+  'Zoek een sjabloon': 'Quaere exemplar',
+  'Geen sjablonen gevonden': 'Nulla exemplaria inventa',
 };

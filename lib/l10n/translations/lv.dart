@@ -1162,4 +1162,60 @@ const _dutchSourceLv = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Trīs jautājumu veidi ar skaidrojumu un pēcapspriedi.',
   'Sjabloon': 'Veidne',
+  'Post-incident review / lessons learned':
+      'Pēcincidenta pārskats / gūtās atziņas',
+  'Datalek / privacy-incident beoordeling':
+      'Datu noplūdes / privātuma incidenta izvērtējums',
+  'DPIA / privacy impact assessment': 'DPIA / privātuma ietekmes novērtējums',
+  'Risicoanalyse / risk register': 'Risku analīze / risku reģistrs',
+  'Business continuity / DR-test': 'Darbības nepārtrauktība / DR tests',
+  'Tabletop-oefening / crisisoefening': 'Galda mācības / krīzes mācības',
+  'BOB-crisisrapportage': 'BOB krīzes ziņojums',
+  'CAB / release readiness': 'CAB / gatavība laidienam',
+  'Stuurgroep / project board update':
+      'Vadības grupa / projekta valdes atjauninājums',
+  'Auditbevindingen en opvolging': 'Audita konstatējumi un turpmākie pasākumi',
+  'Leveranciersbeoordeling / vendor risk':
+      'Piegādātāju izvērtējums / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Arhitektūras lēmums / ADR prezentācija',
+  'Beleid uitrollen / implementatieplan':
+      'Politikas ieviešana / ieviešanas plāns',
+  'Overdracht / handover': 'Nodošana / handover',
+  'Retrospective / teamverbetering': 'Retrospektīva / komandas pilnveide',
+  'PPL Vluchtvoorbereiding': 'PPL lidojuma sagatavošana',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Laika grafiks, ietekme, cēloņi un uzlabojumu darbības pēc incidenta.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Izvērtējiet datus, risku, ziņošanas pienākumu un komunikāciju.',
+  "Verwerking, grondslag, privacyrisico's en maatregelen.":
+      'Apstrāde, tiesiskais pamats, privātuma riski un pasākumi.',
+  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
+      'Fiksējiet riskus, varbūtību, ietekmi, pasākumus un atbildīgos.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scenārijs, atkopšanas mērķi, testa konstatējumi un uzlabojumu punkti.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scenārijs, injects, lēmumi, novērojumi un izvērtējums.',
+  "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
+      'Vadiet krīzes komandu cauri situācijas apzināšanai, vērtējuma veidošanai un lēmumu pieņemšanai, ar reāllaika situācijas ainu, informācijas pieprasījumiem, dilemmām, lēmumu žurnālu un darbību sarakstu.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Izmaiņa, ietekme, testi, rollback, komunikācija un go/no-go.',
+  "Voortgang, planning, budget, risico's en besluiten gevraagd.":
+      'Progress, plānošana, budžets, riski un pieprasītie lēmumi.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Konstatējumi, root cause, pasākumi, pierādījumi un statuss.',
+  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
+      'Pakalpojums, dati, atkarība, prasības, riski un lēmums.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Konteksts, opcijas, kompromisi, lēmums un sekas.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Mērķauditorija, plānošana, komunikācija, apmācība un ieviešana.',
+  "Status, open acties, risico's, contacten en eerste stappen.":
+      'Statuss, atvērtās darbības, riski, kontakti un pirmie soļi.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fakti, modeļi, start-stop-continue un uzlabojumu darbības.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Sagatavojiet VFR lidojumu ar maršrutu, laikapstākļiem, NOTAMs, veiktspēju, weight & balance, degvielu, rezerves lidlaukiem un personīgajām go/no-go pārbaudēm.',
+  'Zoek een sjabloon': 'Meklēt veidni',
+  'Geen sjablonen gevonden': 'Nav atrasta neviena veidne',
 };

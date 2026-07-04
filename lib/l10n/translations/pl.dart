@@ -1170,4 +1170,60 @@ const _dutchSourcePl = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Trzy formy pytań z wyjaśnieniem i omówieniem.',
   'Sjabloon': 'Szablon',
+  'Post-incident review / lessons learned':
+      'Przegląd po incydencie / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Ocena wycieku danych / incydentu prywatności',
+  'DPIA / privacy impact assessment': 'DPIA / ocena skutków dla prywatności',
+  'Risicoanalyse / risk register': 'Analiza ryzyka / rejestr ryzyk',
+  'Business continuity / DR-test': 'Ciągłość działania / test DR',
+  'Tabletop-oefening / crisisoefening':
+      'Ćwiczenie tabletop / ćwiczenie kryzysowe',
+  'BOB-crisisrapportage': 'Raport kryzysowy BOB',
+  'CAB / release readiness': 'CAB / gotowość do wydania',
+  'Stuurgroep / project board update':
+      'Komitet sterujący / aktualizacja project board',
+  'Auditbevindingen en opvolging': 'Ustalenia audytu i działania następcze',
+  'Leveranciersbeoordeling / vendor risk': 'Ocena dostawcy / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Decyzja architektoniczna / prezentacja ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Wdrażanie polityki / plan implementacji',
+  'Overdracht / handover': 'Przekazanie / handover',
+  'Retrospective / teamverbetering': 'Retrospektywa / doskonalenie zespołu',
+  'PPL Vluchtvoorbereiding': 'Przygotowanie do lotu PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Oś czasu, wpływ, przyczyny i działania naprawcze po incydencie.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Oceń dane, ryzyko, obowiązek zgłoszenia i komunikację.',
+  "Verwerking, grondslag, privacyrisico's en maatregelen.":
+      'Przetwarzanie, podstawa prawna, ryzyka prywatności i środki.',
+  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
+      'Zapisz ryzyka, prawdopodobieństwo, wpływ, środki i właścicieli.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scenariusz, cele odtworzenia, wyniki testów i punkty do poprawy.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scenariusz, injects, decyzje, obserwacje i ewaluacja.',
+  "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
+      'Przeprowadź zespół kryzysowy przez tworzenie obrazu sytuacji, ocenę sytuacji i podejmowanie decyzji, z bieżącym obrazem sytuacji, pytaniami informacyjnymi, dylematami, rejestrem decyzji i listą działań.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Zmiana, wpływ, testy, rollback, komunikacja i go/no-go.',
+  "Voortgang, planning, budget, risico's en besluiten gevraagd.":
+      'Postęp, planowanie, budżet, ryzyka i oczekiwane decyzje.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Ustalenia, root cause, środki, dowody i status.',
+  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
+      'Usługa, dane, zależności, wymagania, ryzyka i decyzja.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontekst, opcje, trade-offs, decyzja i konsekwencje.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Grupa docelowa, planowanie, komunikacja, szkolenie i adopcja.',
+  "Status, open acties, risico's, contacten en eerste stappen.":
+      'Status, otwarte działania, ryzyka, kontakty i pierwsze kroki.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fakty, wzorce, start-stop-continue i działania doskonalące.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Przygotuj lot VFR z trasą, pogodą, NOTAM-ami, osiągami, weight & balance, paliwem, lotniskami zapasowymi i osobistymi kontrolami go/no-go.',
+  'Zoek een sjabloon': 'Wyszukaj szablon',
+  'Geen sjablonen gevonden': 'Nie znaleziono szablonów',
 };

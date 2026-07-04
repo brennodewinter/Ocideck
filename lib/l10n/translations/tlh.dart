@@ -1148,4 +1148,57 @@ const _dutchSourceTlh = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'wej ghelghach Seghmey, QIjghach ja\'chuq je.',
   'Sjabloon': 'ghantoH',
+  'Post-incident review / lessons learned':
+      'wanI\' tlha\' nudghach / ghojmeH De\'',
+  'Datalek / privacy-incident beoordeling':
+      'De\' Haw\'ghach / pegh wanI\' noHghach',
+  'DPIA / privacy impact assessment': 'DPIA / pegh SIghghach noHghach',
+  'Risicoanalyse / risk register': 'Qob pojghach / Qob tetlh',
+  'Business continuity / DR-test': 'malja\' taHghach / DR chov',
+  'Tabletop-oefening / crisisoefening': 'raS qeq / Seng qeq',
+  'BOB-crisisrapportage': 'BOB Seng ja\'ghach',
+  'CAB / release readiness': 'CAB / lab ghuSghach',
+  'Stuurgroep / project board update': 'SeH ghom / Qu\' yej De\' chu\'',
+  'Auditbevindingen en opvolging': 'juv tu\'ghachmey tlha\'ghach je',
+  'Leveranciersbeoordeling / vendor risk': 'ngevwI\' noHghach / ngevwI\' Qob',
+  'Architectuurbesluit / ADR-presentatie':
+      'chenmoHmeH nab wuqghach / ADR muchghach',
+  'Beleid uitrollen / implementatieplan': 'chut langhach / lo\'choHmeH nab',
+  'Overdracht / handover': 'Qu\' nobghach',
+  'Retrospective / teamverbetering': 'tlha\' leghghach / ghom Dubghach',
+  'PPL Vluchtvoorbereiding': 'PPL puv ghuSghach',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'wanI\' tlha\' poH He, SIghghach, meqmey, Dub ta\'mey je.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'De\', Qob, ja\'nISghach, QIn je yInoH.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'De\' lo\'ghach, chut mung, pegh Qobmey, ta\'mey je.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Qobmey, DuH, SIghghach, ta\'mey, ghajwI\'pu\' je qon.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'wanI\' nab, qa\'meH ngoQmey, chov tu\'ghachmey, Dub DoSmey je.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'wanI\' nab, wanI\' chu\'mey, wuqghachmey, leghghachmey, noHghach je.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Seng ghom yIDev: wanI\' yajghach, noHghach, wuqghach je; yIn wanI\' Dotlh, De\' ghelghachmey, qay\' wIvmey, wuqghach tetlh, ta\' tetlh je.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'choHghach, SIghghach, chovmey, cheghmeH mIw, QIn, ghoS/ghoSbe\' je.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Duv, nab, Huch nab, Qobmey, wuqghachmey poQlu\'bogh je.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'tu\'ghachmey, Qagh Hal, ta\'mey, tobmeH De\', Dotlh je.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'toy\'ghach, De\', wuvghach, poQghachmey, Qobmey, wuqghach je.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'wanI\' Dotlh, DuHmey, tam wIvmey, wuqghach, qaSbogh wanI\'mey je.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'DoS ghom, nab, QIn, qeq, lo\'choHghach je.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Dotlh, rInbe\'bogh ta\'mey, Qobmey, rarwI\'pu\', wa\'DIch mIwmey je.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'ngoDmey, motlh mIwmey, tagh-mev-taH, Dub ta\'mey je.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'VFR puvghach yIghuSmoH: He, muD Dotlh, NOTAMmey, laH, ngI\'ghach lolghach je, nIn, latlh puvDaqmey, ghoS/ghoSbe\' chovmey je.',
+  'Zoek een sjabloon': 'ghantoH yInej',
+  'Geen sjablonen gevonden': 'ghantoH tu\'be\'lu\'',
 };

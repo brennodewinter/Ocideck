@@ -1164,4 +1164,58 @@ const _dutchSourceSl = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Tri oblike vprašanj z razlago in zaključno razpravo.',
   'Sjabloon': 'Predloga',
+  'Post-incident review / lessons learned':
+      'Pregled po incidentu / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Ocena uhajanja podatkov / incidenta zasebnosti',
+  'DPIA / privacy impact assessment': 'DPIA / ocena učinka na zasebnost',
+  'Risicoanalyse / risk register': 'Analiza tveganj / register tveganj',
+  'Business continuity / DR-test': 'Neprekinjeno poslovanje / test DR',
+  'Tabletop-oefening / crisisoefening': 'Vaja tabletop / krizna vaja',
+  'BOB-crisisrapportage': 'Krizno poročilo BOB',
+  'CAB / release readiness': 'CAB / pripravljenost na izdajo',
+  'Stuurgroep / project board update':
+      'Usmerjevalni odbor / posodobitev za project board',
+  'Auditbevindingen en opvolging': 'Revizijske ugotovitve in nadaljnji ukrepi',
+  'Leveranciersbeoordeling / vendor risk': 'Ocena dobavitelja / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Arhitekturna odločitev / predstavitev ADR',
+  'Beleid uitrollen / implementatieplan': 'Uvajanje politike / izvedbeni načrt',
+  'Overdracht / handover': 'Predaja / handover',
+  'Retrospective / teamverbetering': 'Retrospektiva / izboljševanje ekipe',
+  'PPL Vluchtvoorbereiding': 'Priprava na let PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Časovnica, vpliv, vzroki in izboljševalni ukrepi po incidentu.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Ocenite podatke, tveganje, obveznost prijave in komunikacijo.',
+  "Verwerking, grondslag, privacyrisico's en maatregelen.":
+      'Obdelava, pravna podlaga, tveganja za zasebnost in ukrepi.',
+  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
+      'Zabeležite tveganja, verjetnost, vpliv, ukrepe in lastnike.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scenarij, cilji obnovitve, ugotovitve testov in točke za izboljšave.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scenarij, injects, odločitve, opažanja in evalvacija.',
+  "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
+      'Vodite krizno ekipo skozi oblikovanje slike stanja, presojo in odločanje, z živo sliko stanja, informacijskimi vprašanji, dilemami, dnevnikom odločitev in seznamom ukrepov.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Sprememba, vpliv, testi, rollback, komunikacija in go/no-go.',
+  "Voortgang, planning, budget, risico's en besluiten gevraagd.":
+      'Napredek, načrtovanje, proračun, tveganja in zahtevane odločitve.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Ugotovitve, root cause, ukrepi, dokazi in status.',
+  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
+      'Storitev, podatki, odvisnosti, zahteve, tveganja in odločitev.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontekst, možnosti, trade-offs, odločitev in posledice.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Ciljna skupina, načrtovanje, komunikacija, usposabljanje in sprejetje.',
+  "Status, open acties, risico's, contacten en eerste stappen.":
+      'Status, odprti ukrepi, tveganja, kontakti in prvi koraki.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Dejstva, vzorci, start-stop-continue in izboljševalni ukrepi.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Pripravite let VFR s potjo, vremenom, NOTAM-i, zmogljivostmi, weight & balance, gorivom, nadomestnimi letališči in osebnimi preverjanji go/no-go.',
+  'Zoek een sjabloon': 'Poišči predlogo',
+  'Geen sjablonen gevonden': 'Ni najdenih predlog',
 };

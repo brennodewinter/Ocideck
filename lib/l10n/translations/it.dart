@@ -1158,4 +1158,62 @@ const _dutchSourceAddIt = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Tre tipi di domanda con spiegazione e debriefing.',
   'Sjabloon': 'Modello',
+  'Post-incident review / lessons learned':
+      'Revisione post-incidente / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Data breach / valutazione incidente privacy',
+  'DPIA / privacy impact assessment':
+      'DPIA / valutazione d\'impatto sulla privacy',
+  'Risicoanalyse / risk register': 'Analisi dei rischi / registro dei rischi',
+  'Business continuity / DR-test': 'Business continuity / test DR',
+  'Tabletop-oefening / crisisoefening':
+      'Esercitazione tabletop / esercitazione di crisi',
+  'BOB-crisisrapportage': 'Report di crisi BOB',
+  'CAB / release readiness': 'CAB / release readiness',
+  'Stuurgroep / project board update':
+      'Comitato guida / aggiornamento di progetto',
+  'Auditbevindingen en opvolging': 'Rilievi di audit e follow-up',
+  'Leveranciersbeoordeling / vendor risk':
+      'Valutazione dei fornitori / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Decisione architetturale / presentazione ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Rollout di una policy / piano di attuazione',
+  'Overdracht / handover': 'Passaggio di consegne / handover',
+  'Retrospective / teamverbetering': 'Retrospettiva / miglioramento del team',
+  'PPL Vluchtvoorbereiding': 'Preparazione volo PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Cronologia, impatto, cause e azioni di miglioramento dopo un incidente.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Valutare dati, rischio, obbligo di notifica e comunicazione.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Trattamento, base giuridica, rischi privacy e misure.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Registrare rischi, probabilità, impatto, misure e responsabili.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scenario, obiettivi di ripristino, esiti dei test e punti di miglioramento.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scenario, injects, decisioni, osservazioni e valutazione.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Guida un team di crisi attraverso analisi della situazione, valutazione e processo decisionale, con quadro della situazione in tempo reale, richieste di informazioni, dilemmi, registro delle decisioni ed elenco delle azioni.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Modifica, impatto, test, rollback, comunicazione e go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Avanzamento, pianificazione, budget, rischi e decisioni richieste.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Rilievi, root cause, misure, evidenze e stato.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Servizio, dati, dipendenza, requisiti, rischi e decisione.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Contesto, opzioni, trade-off, decisione e conseguenze.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Destinatari, pianificazione, comunicazione, formazione e adozione.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Stato, azioni aperte, rischi, contatti e primi passi.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fatti, pattern, start-stop-continue e azioni di miglioramento.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Prepara un volo VFR con rotta, meteo, NOTAM, prestazioni, weight & balance, carburante, alternati e check go/no-go personali.',
+  'Zoek een sjabloon': 'Cerca un modello',
+  'Geen sjablonen gevonden': 'Nessun modello trovato',
 };

@@ -1156,4 +1156,57 @@ const _dutchSourceEt = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Kolm küsimusetüüpi selgituse ja järelaruteluga.',
   'Sjabloon': 'Mall',
+  'Post-incident review / lessons learned':
+      'Intsidendijärgne ülevaade / saadud õppetunnid',
+  'Datalek / privacy-incident beoordeling':
+      'Andmelekke / privaatsusintsidendi hindamine',
+  'DPIA / privacy impact assessment': 'DPIA / privaatsuse mõjuhinnang',
+  'Risicoanalyse / risk register': 'Riskianalüüs / riskiregister',
+  'Business continuity / DR-test': 'Talitluspidevus / DR-test',
+  'Tabletop-oefening / crisisoefening': 'Lauaõppus / kriisiõppus',
+  'BOB-crisisrapportage': 'BOB-kriisiraport',
+  'CAB / release readiness': 'CAB / väljalaske valmidus',
+  'Stuurgroep / project board update': 'Juhtrühm / projektinõukogu ülevaade',
+  'Auditbevindingen en opvolging': 'Auditileiud ja järeltegevused',
+  'Leveranciersbeoordeling / vendor risk': 'Tarnija hindamine / vendor risk',
+  'Architectuurbesluit / ADR-presentatie': 'Arhitektuuriotsus / ADR-esitlus',
+  'Beleid uitrollen / implementatieplan':
+      'Poliitika juurutamine / rakendusplaan',
+  'Overdracht / handover': 'Üleandmine / handover',
+  'Retrospective / teamverbetering': 'Retrospektiiv / meeskonna täiustamine',
+  'PPL Vluchtvoorbereiding': 'PPL lennuettevalmistus',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Ajajoon, mõju, põhjused ja parendustegevused pärast intsidenti.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Hinnake andmeid, riski, teavitamiskohustust ja kommunikatsiooni.',
+  "Verwerking, grondslag, privacyrisico's en maatregelen.":
+      'Töötlemine, õiguslik alus, privaatsusriskid ja meetmed.',
+  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
+      'Fikseerige riskid, tõenäosus, mõju, meetmed ja vastutajad.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Stsenaarium, taaste-eesmärgid, testileiud ja parenduskohad.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Stsenaarium, injects, otsused, tähelepanekud ja hindamine.',
+  "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
+      'Juhtige kriisimeeskonda läbi olukorrapildi loomise, hinnangu kujundamise ja otsustamise, koos reaalajas olukorrapildi, infopäringute, dilemmade, otsuste logi ja tegevuste loendiga.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Muudatus, mõju, testid, rollback, kommunikatsioon ja go/no-go.',
+  "Voortgang, planning, budget, risico's en besluiten gevraagd.":
+      'Edenemine, planeerimine, eelarve, riskid ja soovitud otsused.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Leiud, root cause, meetmed, tõendid ja staatus.',
+  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
+      'Teenus, andmed, sõltuvus, nõuded, riskid ja otsus.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontekst, valikud, kompromissid, otsus ja tagajärjed.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Sihtrühm, planeerimine, kommunikatsioon, koolitus ja omaksvõtt.',
+  "Status, open acties, risico's, contacten en eerste stappen.":
+      'Staatus, avatud tegevused, riskid, kontaktid ja esimesed sammud.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Faktid, mustrid, start-stop-continue ja parendustegevused.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Valmistage ette VFR-lend: marsruut, ilm, NOTAMid, sooritusvõime, weight & balance, kütus, varulennuväljad ja isiklikud go/no-go kontrollid.',
+  'Zoek een sjabloon': 'Otsi malli',
+  'Geen sjablonen gevonden': 'Ühtegi malli ei leitud',
 };

@@ -1158,4 +1158,62 @@ const _dutchSourceAddEs = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Tres tipos de pregunta con explicación y análisis posterior.',
   'Sjabloon': 'Plantilla',
+  'Post-incident review / lessons learned':
+      'Revisión post-incidente / lecciones aprendidas',
+  'Datalek / privacy-incident beoordeling':
+      'Brecha de datos / evaluación de incidente de privacidad',
+  'DPIA / privacy impact assessment':
+      'DPIA / evaluación de impacto en la privacidad',
+  'Risicoanalyse / risk register': 'Análisis de riesgos / registro de riesgos',
+  'Business continuity / DR-test': 'Continuidad de negocio / prueba de DR',
+  'Tabletop-oefening / crisisoefening':
+      'Ejercicio tabletop / simulacro de crisis',
+  'BOB-crisisrapportage': 'Informe de crisis BOB',
+  'CAB / release readiness': 'CAB / preparación de la release',
+  'Stuurgroep / project board update':
+      'Comité de dirección / actualización del proyecto',
+  'Auditbevindingen en opvolging': 'Hallazgos de auditoría y seguimiento',
+  'Leveranciersbeoordeling / vendor risk':
+      'Evaluación de proveedores / riesgo de proveedor',
+  'Architectuurbesluit / ADR-presentatie':
+      'Decisión de arquitectura / presentación ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Despliegue de política / plan de implantación',
+  'Overdracht / handover': 'Traspaso / handover',
+  'Retrospective / teamverbetering': 'Retrospectiva / mejora del equipo',
+  'PPL Vluchtvoorbereiding': 'Preparación de vuelo PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Cronología, impacto, causas y acciones de mejora tras un incidente.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Evaluar datos, riesgo, obligación de notificación y comunicación.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Tratamiento, base jurídica, riesgos de privacidad y medidas.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Registrar riesgos, probabilidad, impacto, medidas y responsables.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Escenario, objetivos de recuperación, hallazgos de las pruebas y puntos de mejora.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Escenario, injects, decisiones, observaciones y evaluación.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Guía a un equipo de crisis por el análisis de la situación, la valoración y la toma de decisiones, con imagen de situación en vivo, peticiones de información, dilemas, registro de decisiones y lista de acciones.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Cambio, impacto, pruebas, rollback, comunicación y go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Avance, planificación, presupuesto, riesgos y decisiones solicitadas.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Hallazgos, causa raíz, medidas, evidencias y estado.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Servicio, datos, dependencia, requisitos, riesgos y decisión.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Contexto, opciones, trade-offs, decisión y consecuencias.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Público objetivo, planificación, comunicación, formación y adopción.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Estado, acciones abiertas, riesgos, contactos y primeros pasos.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Hechos, patrones, start-stop-continue y acciones de mejora.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Prepara un vuelo VFR con ruta, meteorología, NOTAMs, prestaciones, peso y centrado, combustible, alternativos y checks go/no-go personales.',
+  'Zoek een sjabloon': 'Buscar una plantilla',
+  'Geen sjablonen gevonden': 'No se encontraron plantillas',
 };

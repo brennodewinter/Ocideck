@@ -1164,4 +1164,60 @@ const _dutchSourceHu = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Három kérdéstípus magyarázattal és utólagos megbeszéléssel.',
   'Sjabloon': 'Sablon',
+  'Post-incident review / lessons learned':
+      'Incidens utáni értékelés / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Adatszivárgás / adatvédelmi incidens értékelése',
+  'DPIA / privacy impact assessment': 'DPIA / adatvédelmi hatásvizsgálat',
+  'Risicoanalyse / risk register': 'Kockázatelemzés / kockázati nyilvántartás',
+  'Business continuity / DR-test': 'Üzletmenet-folytonosság / DR-teszt',
+  'Tabletop-oefening / crisisoefening': 'Tabletop-gyakorlat / válsággyakorlat',
+  'BOB-crisisrapportage': 'BOB-válságjelentés',
+  'CAB / release readiness': 'CAB / release readiness',
+  'Stuurgroep / project board update':
+      'Irányítóbizottság / project board beszámoló',
+  'Auditbevindingen en opvolging': 'Auditmegállapítások és nyomon követés',
+  'Leveranciersbeoordeling / vendor risk':
+      'Beszállítói értékelés / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Architektúradöntés / ADR-prezentáció',
+  'Beleid uitrollen / implementatieplan':
+      'Szabályzat bevezetése / megvalósítási terv',
+  'Overdracht / handover': 'Átadás-átvétel / handover',
+  'Retrospective / teamverbetering': 'Retrospektív / csapatfejlesztés',
+  'PPL Vluchtvoorbereiding': 'PPL repülés-előkészítés',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Idővonal, hatás, okok és javító intézkedések egy incidens után.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Értékelje az adatokat, a kockázatot, a bejelentési kötelezettséget és a kommunikációt.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Adatkezelés, jogalap, adatvédelmi kockázatok és intézkedések.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Rögzítse a kockázatokat, a valószínűséget, a hatást, az intézkedéseket és a felelősöket.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Forgatókönyv, helyreállítási célok, tesztmegállapítások és fejlesztési pontok.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Forgatókönyv, injectek, döntések, megfigyelések és értékelés.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Vezessen végig egy válságstábot a helyzetkép kialakításán, a mérlegelésen és a döntéshozatalon, élő helyzetképpel, információs kérdésekkel, dilemmákkal, döntésnaplóval és feladatlistával.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Változtatás, hatás, tesztek, rollback, kommunikáció és go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Előrehaladás, ütemezés, költségvetés, kockázatok és kért döntések.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Megállapítások, root cause, intézkedések, bizonyítékok és állapot.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Szolgáltatás, adatok, függőség, követelmények, kockázatok és döntés.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontextus, opciók, trade-offok, döntés és következmények.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Célcsoport, ütemezés, kommunikáció, képzés és bevezetés.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Állapot, nyitott teendők, kockázatok, kapcsolattartók és első lépések.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Tények, mintázatok, start-stop-continue és javító intézkedések.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Készítsen elő egy VFR-repülést: útvonal, időjárás, NOTAM-ok, teljesítmény, weight & balance, üzemanyag, kitérő repülőterek és személyes go/no-go ellenőrzések.',
+  'Zoek een sjabloon': 'Sablon keresése',
+  'Geen sjablonen gevonden': 'Nem található sablon',
 };

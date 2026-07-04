@@ -1188,4 +1188,61 @@ const _dutchSourceGa = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Trí chineál ceiste le míniú agus plé ina dhiaidh.',
   'Sjabloon': 'Teimpléad',
+  'Post-incident review / lessons learned':
+      'Athbhreithniú iar-theagmhais / ceachtanna foghlamtha',
+  'Datalek / privacy-incident beoordeling':
+      'Measúnú ar sceitheadh sonraí / teagmhas príobháideachais',
+  'DPIA / privacy impact assessment':
+      'DPIA / measúnú tionchair ar phríobháideachas',
+  'Risicoanalyse / risk register': 'Anailís riosca / clár rioscaí',
+  'Business continuity / DR-test': 'Leanúnachas gnó / tástáil DR',
+  'Tabletop-oefening / crisisoefening':
+      'Cleachtadh tabletop / cleachtadh géarchéime',
+  'BOB-crisisrapportage': 'Tuairisciú géarchéime BOB',
+  'CAB / release readiness': 'CAB / ullmhacht don scaoileadh',
+  'Stuurgroep / project board update':
+      'Nuashonrú don ghrúpa stiúrtha / project board',
+  'Auditbevindingen en opvolging': 'Torthaí iniúchta agus obair leantach',
+  'Leveranciersbeoordeling / vendor risk': 'Measúnú soláthraithe / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Cinneadh ailtireachta / cur i láthair ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Beartas a chur i bhfeidhm / plean forfheidhmithe',
+  'Overdracht / handover': 'Aistriú / handover',
+  'Retrospective / teamverbetering': 'Retrospective / feabhsú foirne',
+  'PPL Vluchtvoorbereiding': 'Ullmhúchán eitilte PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Amlíne, tionchar, cúiseanna agus gníomhartha feabhais tar éis teagmhais.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Déan measúnú ar shonraí, riosca, dualgas tuairiscithe agus cumarsáid.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Próiseáil, bunús dlí, rioscaí príobháideachais agus bearta.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Taifead rioscaí, dóchúlacht, tionchar, bearta agus úinéirí.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Cás, spriocanna athshlánaithe, torthaí tástála agus pointí feabhais.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Cás, injects, cinntí, breathnuithe agus meastóireacht.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Treoraigh foireann ghéarchéime trí léargas a fhorbairt, breithiúnas a dhéanamh agus cinntí a ghlacadh, le pictiúr beo den staid, ceisteanna faisnéise, aincheisteanna, loga cinntí agus liosta gníomhartha.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Athrú, tionchar, tástálacha, rollback, cumarsáid agus go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Dul chun cinn, pleanáil, buiséad, rioscaí agus cinntí á n-iarraidh.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Torthaí, root cause, bearta, fianaise agus stádas.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Seirbhís, sonraí, spleáchas, riachtanais, rioscaí agus cinneadh.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Comhthéacs, roghanna, trade-offs, cinneadh agus iarmhairtí.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Spriocghrúpa, pleanáil, cumarsáid, oiliúint agus glacadh.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Stádas, gníomhartha oscailte, rioscaí, teagmhálaithe agus na chéad chéimeanna.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fíricí, patrúin, start-stop-continue agus gníomhartha feabhais.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Ullmhaigh eitilt VFR le bealach, aimsir, NOTAMs, feidhmíocht, weight & balance, breosla, alternates agus seiceálacha pearsanta go/no-go.',
+  'Zoek een sjabloon': 'Cuardaigh teimpléad',
+  'Geen sjablonen gevonden': 'Níor aimsíodh aon teimpléid',
 };

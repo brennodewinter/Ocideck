@@ -1176,4 +1176,62 @@ const _dutchSourceMt = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Tliet tipi ta\' mistoqsijiet bi spjegazzjoni u diskussjoni finali.',
   'Sjabloon': 'Mudell',
+  'Post-incident review / lessons learned':
+      'Reviżjoni wara inċident / tagħlimiet miksuba',
+  'Datalek / privacy-incident beoordeling':
+      'Valutazzjoni ta\' ksur ta\' data / inċident ta\' privatezza',
+  'DPIA / privacy impact assessment':
+      'DPIA / valutazzjoni tal-impatt fuq il-privatezza',
+  'Risicoanalyse / risk register': 'Analiżi tar-riskju / reġistru tar-riskji',
+  'Business continuity / DR-test': 'Kontinwità tan-negozju / test DR',
+  'Tabletop-oefening / crisisoefening':
+      'Eżerċizzju tabletop / eżerċizzju ta\' kriżi',
+  'BOB-crisisrapportage': 'Rappurtar ta\' kriżi BOB',
+  'CAB / release readiness': 'CAB / tħejjija għar-rilaxx',
+  'Stuurgroep / project board update':
+      'Aġġornament għall-grupp ta\' tmexxija / project board',
+  'Auditbevindingen en opvolging': 'Sejbiet tal-awditjar u segwitu',
+  'Leveranciersbeoordeling / vendor risk':
+      'Valutazzjoni tal-fornituri / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Deċiżjoni ta\' arkitettura / preżentazzjoni ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Tnedija ta\' politika / pjan ta\' implimentazzjoni',
+  'Overdracht / handover': 'Trasferiment / handover',
+  'Retrospective / teamverbetering': 'Retrospettiva / titjib tat-tim',
+  'PPL Vluchtvoorbereiding': 'Tħejjija tat-titjira PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Kronoloġija, impatt, kawżi u azzjonijiet ta\' titjib wara inċident.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Ivvaluta d-data, ir-riskju, l-obbligu ta\' notifika u l-komunikazzjoni.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Ipproċessar, bażi legali, riskji ta\' privatezza u miżuri.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Irreġistra r-riskji, il-probabbiltà, l-impatt, il-miżuri u s-sidien.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Xenarju, għanijiet ta\' rkupru, sejbiet tat-testijiet u punti ta\' titjib.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Xenarju, injects, deċiżjonijiet, osservazzjonijiet u evalwazzjoni.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Mexxi tim ta\' kriżi mill-formazzjoni tal-istampa, il-formazzjoni tal-ġudizzju u t-teħid tad-deċiżjonijiet, bi stampa tas-sitwazzjoni ħajja, talbiet għal informazzjoni, dilemmi, reġistru tad-deċiżjonijiet u lista ta\' azzjonijiet.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Bidla, impatt, testijiet, rollback, komunikazzjoni u go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Progress, ippjanar, baġit, riskji u deċiżjonijiet mitluba.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Sejbiet, root cause, miżuri, evidenza u status.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Servizz, data, dipendenza, rekwiżiti, riskji u deċiżjoni.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kuntest, għażliet, trade-offs, deċiżjoni u konsegwenzi.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Udjenza fil-mira, ippjanar, komunikazzjoni, taħriġ u adozzjoni.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Status, azzjonijiet miftuħa, riskji, kuntatti u l-ewwel passi.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fatti, xejriet, start-stop-continue u azzjonijiet ta\' titjib.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Ħejji titjira VFR b\'rotta, temp, NOTAMs, prestazzjoni, weight & balance, fjuwil, alternates u kontrolli personali go/no-go.',
+  'Zoek een sjabloon': 'Fittex mudell',
+  'Geen sjablonen gevonden': 'Ma nstab l-ebda mudell',
 };

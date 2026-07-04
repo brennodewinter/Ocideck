@@ -1164,4 +1164,57 @@ const _dutchSourceFi = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Kolme kysymystyyppiä selityksineen ja loppukeskustelu.',
   'Sjabloon': 'Mallipohja',
+  'Post-incident review / lessons learned':
+      'Post-incident review / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Tietovuoto / tietosuojapoikkeaman arviointi',
+  'DPIA / privacy impact assessment': 'DPIA / tietosuojan vaikutustenarviointi',
+  'Risicoanalyse / risk register': 'Riskianalyysi / riskirekisteri',
+  'Business continuity / DR-test': 'Business continuity / DR-testi',
+  'Tabletop-oefening / crisisoefening': 'Tabletop-harjoitus / kriisiharjoitus',
+  'BOB-crisisrapportage': 'BOB-kriisiraportointi',
+  'CAB / release readiness': 'CAB / julkaisuvalmius',
+  'Stuurgroep / project board update': 'Ohjausryhmä / project board -katsaus',
+  'Auditbevindingen en opvolging': 'Auditointihavainnot ja jatkotoimet',
+  'Leveranciersbeoordeling / vendor risk': 'Toimittaja-arviointi / vendor risk',
+  'Architectuurbesluit / ADR-presentatie': 'Arkkitehtuuripäätös / ADR-esitys',
+  'Beleid uitrollen / implementatieplan':
+      'Politiikan käyttöönotto / toteutussuunnitelma',
+  'Overdracht / handover': 'Luovutus / handover',
+  'Retrospective / teamverbetering': 'Retrospektiivi / tiimin kehittäminen',
+  'PPL Vluchtvoorbereiding': 'PPL-lennonvalmistelu',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Aikajana, vaikutukset, syyt ja parannustoimet häiriötilanteen jälkeen.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Arvioi tiedot, riski, ilmoitusvelvollisuus ja viestintä.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Käsittely, oikeusperuste, tietosuojariskit ja toimenpiteet.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Kirjaa riskit, todennäköisyys, vaikutus, toimenpiteet ja omistajat.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Skenaario, palautumistavoitteet, testihavainnot ja parannuskohteet.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Skenaario, injectit, päätökset, havainnot ja arviointi.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Ohjaa kriisiryhmä tilannekuvan muodostamisen, arvioinnin ja päätöksenteon läpi reaaliaikaisen tilannekuvan, tietopyyntöjen, dilemmojen, päätöslokin ja toimenpidelistan avulla.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Muutos, vaikutus, testit, rollback, viestintä ja go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Eteneminen, aikataulu, budjetti, riskit ja pyydetyt päätökset.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Havainnot, root cause, toimenpiteet, todisteet ja tila.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Palvelu, tiedot, riippuvuus, vaatimukset, riskit ja päätös.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Konteksti, vaihtoehdot, trade-offit, päätös ja seuraukset.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Kohderyhmä, aikataulu, viestintä, koulutus ja käyttöönotto.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Tila, avoimet toimenpiteet, riskit, yhteyshenkilöt ja ensimmäiset askeleet.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Faktat, toistuvat kaavat, start-stop-continue ja parannustoimet.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Valmistele VFR-lento: reitti, sää, NOTAMit, suorituskyky, weight & balance, polttoaine, varakentät ja henkilökohtaiset go/no-go-tarkistukset.',
+  'Zoek een sjabloon': 'Etsi mallipohjaa',
+  'Geen sjablonen gevonden': 'Mallipohjia ei löytynyt',
 };

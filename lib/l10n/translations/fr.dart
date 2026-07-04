@@ -1165,4 +1165,62 @@ const _dutchSourceAddFr = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Trois formes de questions avec explication et débriefing.',
   'Sjabloon': 'Modèle',
+  'Post-incident review / lessons learned':
+      'Revue post-incident / retour d\'expérience',
+  'Datalek / privacy-incident beoordeling':
+      'Violation de données / évaluation d\'incident de confidentialité',
+  'DPIA / privacy impact assessment':
+      'DPIA / analyse d\'impact sur la vie privée',
+  'Risicoanalyse / risk register': 'Analyse de risques / registre des risques',
+  'Business continuity / DR-test': 'Continuité d\'activité / test DR',
+  'Tabletop-oefening / crisisoefening':
+      'Exercice sur table / exercice de crise',
+  'BOB-crisisrapportage': 'Rapport de crise BOB',
+  'CAB / release readiness': 'CAB / préparation à la mise en production',
+  'Stuurgroep / project board update':
+      'Comité de pilotage / point d\'avancement projet',
+  'Auditbevindingen en opvolging': 'Constats d\'audit et suivi',
+  'Leveranciersbeoordeling / vendor risk':
+      'Évaluation des fournisseurs / risque fournisseur',
+  'Architectuurbesluit / ADR-presentatie':
+      'Décision d\'architecture / présentation ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Déploiement d\'une politique / plan de mise en œuvre',
+  'Overdracht / handover': 'Transfert / passation',
+  'Retrospective / teamverbetering': 'Rétrospective / amélioration d\'équipe',
+  'PPL Vluchtvoorbereiding': 'Préparation de vol PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Chronologie, impact, causes et actions d\'amélioration après un incident.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Évaluer les données, le risque, l\'obligation de notification et la communication.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Traitement, base légale, risques pour la vie privée et mesures.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Consigner les risques, la probabilité, l\'impact, les mesures et les responsables.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scénario, objectifs de reprise, constats de test et points d\'amélioration.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scénario, injects, décisions, observations et évaluation.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Guider une cellule de crise à travers l\'analyse de la situation, le jugement et la prise de décision, avec image de situation en direct, demandes d\'information, dilemmes, journal des décisions et liste d\'actions.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Changement, impact, tests, rollback, communication et go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Avancement, planning, budget, risques et décisions demandées.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Constats, cause racine, mesures, preuves et statut.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Service, données, dépendance, exigences, risques et décision.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Contexte, options, arbitrages, décision et conséquences.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Public cible, planning, communication, formation et adoption.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Statut, actions ouvertes, risques, contacts et premières étapes.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Faits, tendances, start-stop-continue et actions d\'amélioration.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Préparer un vol VFR avec route, météo, NOTAM, performances, masse et centrage, carburant, terrains de dégagement et checks go/no-go personnels.',
+  'Zoek een sjabloon': 'Rechercher un modèle',
+  'Geen sjablonen gevonden': 'Aucun modèle trouvé',
 };

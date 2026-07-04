@@ -1163,4 +1163,58 @@ const _dutchSourceGsw = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Drei Fragforme mit Erklärig und Nachbeschprächig.',
   'Sjabloon': 'Vorlag',
+  'Post-incident review / lessons learned':
+      'Post-Incident-Review / Lessons Learned',
+  'Datalek / privacy-incident beoordeling':
+      'Dateläck / Privacy-Vorfall-Beurteilig',
+  'DPIA / privacy impact assessment': 'DPIA / Privacy Impact Assessment',
+  'Risicoanalyse / risk register': 'Risikoanalyse / Risk Register',
+  'Business continuity / DR-test': 'Business Continuity / DR-Test',
+  'Tabletop-oefening / crisisoefening': 'Tabletop-Üebig / Chriseüebig',
+  'BOB-crisisrapportage': 'BOB-Chrisebricht',
+  'CAB / release readiness': 'CAB / Release Readiness',
+  'Stuurgroep / project board update': 'Stüürgruppe / Project-Board-Update',
+  'Auditbevindingen en opvolging': 'Audit-Befund und Nachverfolgig',
+  'Leveranciersbeoordeling / vendor risk':
+      'Lieferante-Beurteilig / Vendor Risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Architekturentscheid / ADR-Präsentation',
+  'Beleid uitrollen / implementatieplan': 'Richtlinie uusrolle / Umsetzigsplan',
+  'Overdracht / handover': 'Übergab / Handover',
+  'Retrospective / teamverbetering': 'Retrospektive / Teamverbesserig',
+  'PPL Vluchtvoorbereiding': 'PPL Flugvorbereitig',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Ziitlinie, Uuswirkig, Ursache und Verbesserige nach eme Vorfall.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Beurteil d Date, s Risiko, d Mäldpflicht und d Kommunikation.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Verarbeitig, Rächtsgrundlag, Privacy-Risike und Massnahme.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Halt Risike, Wahrschiinlichkeit, Uuswirkig, Massnahme und Owner fescht.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Szenario, Wiederherstelligsziel, Testbefund und Verbesserigspünkt.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Szenario, Injects, Entscheid, Beobachtige und Evaluation.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Füehr es Chriseteam dur Lagebildig, Urteilsbildig und Entscheidsfindig, mit livem Lagebild, Informationsfrage, Dilemma, Entscheidigslog und Aktionslischte.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Änderig, Uuswirkig, Tests, Rollback, Kommunikation und Go/No-Go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Fortschritt, Planig, Budget, Risike und verlangti Entscheid.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Befund, Root Cause, Massnahme, Nachwiis und Status.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Dienscht, Date, Abhängigkeite, Aforderige, Risike und Entscheid.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontext, Optione, Trade-offs, Entscheid und Folge.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Zielgruppe, Planig, Kommunikation, Training und Adoption.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Status, offni Aktione, Risike, Kontäkt und die erschte Schritt.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fakte, Muschter, Start-Stop-Continue und Verbesserige.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Bereit en VFR-Flug vor mit Route, Wätter, NOTAMs, Leischtig, Weight & Balance, Triibstoff, Alternates und persönliche Go/No-Go-Checks.',
+  'Zoek een sjabloon': 'Suech e Vorlag',
+  'Geen sjablonen gevonden': 'Kei Vorlage gfunde',
 };

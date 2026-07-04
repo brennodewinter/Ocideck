@@ -1151,4 +1151,58 @@ const _dutchSourceAddFy = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Trije fraachfoarmen mei útlis en neipetear.',
   'Sjabloon': 'Sjabloan',
+  'Post-incident review / lessons learned':
+      'Post-incident review / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Datalek / beoardieling privacy-ynsidint',
+  'DPIA / privacy impact assessment': 'DPIA / privacy impact assessment',
+  'Risicoanalyse / risk register': 'Risiko-analyze / risk register',
+  'Business continuity / DR-test': 'Business continuity / DR-test',
+  'Tabletop-oefening / crisisoefening': 'Tabletop-oefening / krisisoefening',
+  'BOB-crisisrapportage': 'BOB-krisisrapportaazje',
+  'CAB / release readiness': 'CAB / release readiness',
+  'Stuurgroep / project board update': 'Stjoergroep / project board update',
+  'Auditbevindingen en opvolging': 'Auditbefiningen en opfolging',
+  'Leveranciersbeoordeling / vendor risk':
+      'Leveransiersbeoardieling / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Arsjitektuerbeslút / ADR-presintaasje',
+  'Beleid uitrollen / implementatieplan': 'Belied útrolje / ymplemintaasjeplan',
+  'Overdracht / handover': 'Oerdracht / handover',
+  'Retrospective / teamverbetering': 'Retrospective / teamferbettering',
+  'PPL Vluchtvoorbereiding': 'PPL Flechttarieding',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Tiidline, ympakt, oarsaken en ferbetteraksjes nei in ynsidint.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Beoardielje gegevens, risiko, meldplicht en kommunikaasje.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Ferwurking, grûnslach, privacyrisiko\'s en maatregels.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Lis risiko\'s, kâns, ympakt, maatregels en eigners fêst.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Senario, wersteldoelen, testbefiningen en ferbetterpunten.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Senario, injects, besluten, waarnimmingen en evaluaasje.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Lied in krisisteam troch byldfoarming, oardielsfoarming en beslútfoarming, mei live sitewaasjebyld, ynformaasjefragen, dilemma\'s, beslutelog en aksjelist.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Wiziging, ympakt, tests, rollback, kommunikaasje en go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Fuortgong, planning, budzjet, risiko\'s en besluten frege.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Befiningen, root cause, maatregels, bewiis en status.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Tsjinst, data, ôfhinklikheid, easken, risiko\'s en beslút.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontekst, opsjes, trade-offs, beslút en gefolgen.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Doelgroep, planning, kommunikaasje, training en adopsje.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Status, iepen aksjes, risiko\'s, kontakten en earste stappen.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Feiten, patroanen, start-stop-continue en ferbetteraksjes.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Ried in VFR-flecht ta mei rûte, waar, NOTAMs, prestaasjes, weight & balance, brânstof, alternates en persoanlike go/no-go-checks.',
+  'Zoek een sjabloon': 'Sykje in sjabloan',
+  'Geen sjablonen gevonden': 'Gjin sjabloanen fûn',
 };

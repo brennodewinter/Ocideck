@@ -1175,4 +1175,60 @@ const _dutchSourceUk = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Три типи питань з поясненням та обговоренням.',
   'Sjabloon': 'Шаблон',
+  'Post-incident review / lessons learned':
+      'Пост-інцидентний огляд / засвоєні уроки',
+  'Datalek / privacy-incident beoordeling':
+      'Оцінка витоку даних / інциденту приватності',
+  'DPIA / privacy impact assessment': 'DPIA / оцінка впливу на приватність',
+  'Risicoanalyse / risk register': 'Аналіз ризиків / реєстр ризиків',
+  'Business continuity / DR-test': 'Безперервність бізнесу / DR-тест',
+  'Tabletop-oefening / crisisoefening': 'Штабні навчання / кризові навчання',
+  'BOB-crisisrapportage': 'BOB-кризовий звіт',
+  'CAB / release readiness': 'CAB / готовність до релізу',
+  'Stuurgroep / project board update':
+      'Керівний комітет / звіт для ради проєкту',
+  'Auditbevindingen en opvolging': 'Аудиторські висновки та подальші дії',
+  'Leveranciersbeoordeling / vendor risk':
+      'Оцінка постачальників / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Архітектурне рішення / ADR-презентація',
+  'Beleid uitrollen / implementatieplan':
+      'Впровадження політики / план реалізації',
+  'Overdracht / handover': 'Передавання справ / handover',
+  'Retrospective / teamverbetering': 'Ретроспектива / вдосконалення команди',
+  'PPL Vluchtvoorbereiding': 'PPL підготовка до польоту',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Часова шкала, вплив, причини та заходи з покращення після інциденту.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      "Оцініть дані, ризик, обов'язок повідомлення та комунікацію.",
+  "Verwerking, grondslag, privacyrisico's en maatregelen.":
+      'Обробка, правова підстава, ризики приватності та заходи.',
+  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
+      'Зафіксуйте ризики, ймовірність, вплив, заходи та власників.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Сценарій, цілі відновлення, результати тестування та точки покращення.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Сценарій, injects, рішення, спостереження та оцінка.',
+  "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
+      'Проведіть кризову команду через формування картини, оцінювання та ухвалення рішень, з живою картиною ситуації, інформаційними запитами, дилемами, журналом рішень та списком дій.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Зміна, вплив, тести, rollback, комунікація та go/no-go.',
+  "Voortgang, planning, budget, risico's en besluiten gevraagd.":
+      'Прогрес, планування, бюджет, ризики та запитувані рішення.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Висновки, root cause, заходи, докази та статус.',
+  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
+      'Сервіс, дані, залежність, вимоги, ризики та рішення.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Контекст, опції, компроміси, рішення та наслідки.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Цільова аудиторія, планування, комунікація, навчання та впровадження.',
+  "Status, open acties, risico's, contacten en eerste stappen.":
+      'Статус, відкриті дії, ризики, контакти та перші кроки.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Факти, патерни, start-stop-continue та заходи з покращення.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Підготуйте VFR-політ з маршрутом, погодою, NOTAMs, льотними характеристиками, weight & balance, паливом, запасними аеродромами та особистими go/no-go перевірками.',
+  'Zoek een sjabloon': 'Пошук шаблону',
+  'Geen sjablonen gevonden': 'Шаблонів не знайдено',
 };

@@ -1163,4 +1163,59 @@ const _dutchSourceCs = {
   'Drie vraagvormen met uitleg en nabespreking.':
       'Tři typy otázek s vysvětlením a závěrečnou diskusí.',
   'Sjabloon': 'Šablona',
+  'Post-incident review / lessons learned':
+      'Přezkoumání po incidentu / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Posouzení úniku dat / incidentu soukromí',
+  'DPIA / privacy impact assessment': 'DPIA / posouzení vlivu na soukromí',
+  'Risicoanalyse / risk register': 'Analýza rizik / registr rizik',
+  'Business continuity / DR-test': 'Business continuity / test DR',
+  'Tabletop-oefening / crisisoefening': 'Cvičení tabletop / krizové cvičení',
+  'BOB-crisisrapportage': 'Krizová zpráva BOB',
+  'CAB / release readiness': 'CAB / připravenost k vydání',
+  'Stuurgroep / project board update':
+      'Řídicí výbor / aktualizace pro project board',
+  'Auditbevindingen en opvolging': 'Zjištění auditu a následná opatření',
+  'Leveranciersbeoordeling / vendor risk': 'Hodnocení dodavatele / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Architektonické rozhodnutí / prezentace ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Zavedení politiky / implementační plán',
+  'Overdracht / handover': 'Předání / handover',
+  'Retrospective / teamverbetering': 'Retrospektiva / zlepšování týmu',
+  'PPL Vluchtvoorbereiding': 'Předletová příprava PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Časová osa, dopad, příčiny a nápravná opatření po incidentu.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Posuďte data, riziko, ohlašovací povinnost a komunikaci.',
+  "Verwerking, grondslag, privacyrisico's en maatregelen.":
+      'Zpracování, právní základ, rizika pro soukromí a opatření.',
+  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
+      'Zaznamenejte rizika, pravděpodobnost, dopad, opatření a vlastníky.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scénář, cíle obnovy, zjištění z testů a body ke zlepšení.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scénář, injects, rozhodnutí, pozorování a vyhodnocení.',
+  "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
+      'Proveďte krizový tým fázemi vytváření obrazu situace, posouzení situace a rozhodování, se živým obrazem situace, informačními otázkami, dilematy, protokolem rozhodnutí a seznamem akcí.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Změna, dopad, testy, rollback, komunikace a go/no-go.',
+  "Voortgang, planning, budget, risico's en besluiten gevraagd.":
+      'Postup, plánování, rozpočet, rizika a požadovaná rozhodnutí.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Zjištění, root cause, opatření, důkazy a status.',
+  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
+      'Služba, data, závislosti, požadavky, rizika a rozhodnutí.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontext, možnosti, trade-offs, rozhodnutí a důsledky.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Cílová skupina, plánování, komunikace, školení a přijetí.',
+  "Status, open acties, risico's, contacten en eerste stappen.":
+      'Status, otevřené akce, rizika, kontakty a první kroky.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fakta, vzorce, start-stop-continue a zlepšovací akce.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Připravte let VFR s trasou, počasím, NOTAMy, výkony, weight & balance, palivem, náhradními letišti a osobními kontrolami go/no-go.',
+  'Zoek een sjabloon': 'Vyhledat šablonu',
+  'Geen sjablonen gevonden': 'Nebyly nalezeny žádné šablony',
 };
