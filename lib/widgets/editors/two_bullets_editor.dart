@@ -6,6 +6,7 @@ import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
 import 'bullet_marker_selector.dart';
 import 'list_style_selector.dart';
+import '../../theme/app_theme.dart';
 
 typedef _Mutate = void Function(VoidCallback fn);
 
@@ -369,7 +370,7 @@ class _BulletColumnState extends State<_BulletColumn> {
           else
             Text(
               _markerForItem(i),
-              style: const TextStyle(fontSize: 16, color: Color(0xFF64748B)),
+              style: const TextStyle(fontSize: 16, color: AppTheme.slate500),
             ),
           const SizedBox(width: 8),
           Expanded(
@@ -420,7 +421,7 @@ class _BulletColumnState extends State<_BulletColumn> {
             icon: const Icon(
               Icons.remove_circle_outline,
               size: 18,
-              color: Color(0xFF64748B),
+              color: AppTheme.slate500,
             ),
             onPressed: () => set.removeAndFocus((fn) => setState(fn), i),
             tooltip: l10n.d('Verwijder'),

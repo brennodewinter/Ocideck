@@ -22,7 +22,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `cockpit.dart` — `CockpitSpec`/`CockpitMeterSpec` for instrumentation gauges (speedometer, voltmeter, etc.).
 - `deck.dart` — `Deck` with metadata, TLP classification, slides list, annotations, and user notes.
 - `markdown_validation.dart` — `MarkdownValidationResult`/`MarkdownValidationIssue` for linting markdown content.
-- `question.dart` — `QuestionSpec`/`QuestionView` for interactive quiz slides (multiple-choice/true-false).
+- `question.dart` — `QuestionSpec`/`QuestionView` for interactive quiz slides (multiple-choice/true-false/multiple-correct/ordering).
 - `rehearsal.dart` — `RehearsalRun`/`SlideTiming` for tracking presentation-practice durations per slide.
 - `settings.dart` — `AppSettings`, `ThemeProfile`, `AppAppearanceProfile`, `CockpitColorScheme` config.
 - `slide.dart` — `Slide` model with typed fields; `SlideType` enum for the slide layout variants.
@@ -42,6 +42,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `export_service.dart` — The single chokepoint that renders decks to PDF, PPTX, and HTML.
 - `file_service.dart` — Scans presentation files, opens decks (with the safety gate), and import/URL/package IO.
 - `image_dedup_service.dart` — Finds byte-identical image files by md5 to clean up libraries.
+- `image_sidecar_store.dart` — Shared read/mutate/atomic-write layer for the per-directory JSON sidecars of captions and descriptions.
 - `image_reference_service.dart` — Finds and rewrites image references in Marp markdown files.
 - `image_service.dart` — Validates and manages imported image and media asset files.
 - `markdown_body_blocks.dart` — Splits markdown into code blocks and paragraphs.
@@ -61,6 +62,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `slide_rasterizer.dart` — Renders on-screen slide previews to PNG for WYSIWYG PDF/PPTX export.
 - `text_measurement.dart` — `measureTextHeight`/`measureTextWidth` for rendered text dimensions.
 - `user_notes_codec.dart` — Serializes per-slide user notes with content fingerprints.
+- `web_asset_store.dart` — In-memory afbeeldingsopslag (`mem:`-paden) voor de webversie; per-pagina levensduur.
 - `webdav_service.dart` — Talks WebDAV (Nextcloud) over a pinned, redirect-free `HttpClient`.
 
 ## `lib/state/` — Riverpod providers
@@ -78,8 +80,10 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 ## `lib/utils/` — small shared helpers
 
 - `atomic_file.dart` — Atomic writes (temp file + rename) to prevent data loss on crash.
+- `bundled_asset.dart` — `asset:`-schema voor méégebundelde logo's van ingebouwde stijlprofielen.
 - `color_contrast.dart` — WCAG 2.1 contrast-ratio calculation and hex colour parsing.
 - `deck_markdown_dashes.dart` — Escapes standalone dash lines so the deck parser can't misread them.
+- `file_download.dart` — Browserdownload (blob + anker) voor web-opslaan; conditional import met stub.
 - `image_limits.dart` — Caps decoded image dimensions (and `cappedNetworkImage`) to prevent OOM.
 - `image_luminance.dart` — Computes average image colour, cached by mtime/size.
 - `log.dart` — Fail-soft logging to DevTools without exposing sensitive data (`logError`/`logWarning`).
@@ -97,12 +101,16 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 
 ## `lib/platform/` — platform abstraction (conditional imports)
 
+- `launch_files.dart` — Launch-argumenten (Windows/Linux-bestandsassociaties) en de `?deck=`-deeplink-parser.
 - `native_window.dart` — Export selector for platform-specific window configuration.
 - `native_window_io.dart` — Initialises native desktop window options (size, title, focus).
 - `native_window_stub.dart` — No-op window stub for web (part of `native_window`).
 - `platform_features.dart` — Feature detection: desktop, dual-screen, local projects.
 - `platform_features_io.dart` — Desktop feature availability (part of `platform_features`).
 - `platform_features_web.dart` — Web platform: no desktop features (part of `platform_features`).
+- `presenter_fullscreen.dart` — Export selector: volledig scherm voor de presentatiemodus (desktop-venster of browser-API).
+- `presenter_fullscreen_io.dart` — Desktop: window_manager fullscreen (part of `presenter_fullscreen`).
+- `presenter_fullscreen_web.dart` — Web: browser-Fullscreen-API (part of `presenter_fullscreen`).
 - `runtime_flags.dart` — Export selector for platform-specific runtime detection.
 - `runtime_flags_io.dart` — Detects the flutter-test environment (part of `runtime_flags`).
 - `runtime_flags_web.dart` — No test detection on web (part of `runtime_flags`).

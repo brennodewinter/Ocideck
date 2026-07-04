@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import '../models/annotation.dart';
 import '../models/deck.dart';
+import '../models/deck_template.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../services/annotation_codec.dart';
@@ -15,6 +16,7 @@ import '../services/slide_quality_analyzer.dart'
         kSingleColumnBulletWarningCount,
         kTwoColumnBulletWarningCount;
 import '../services/user_notes_codec.dart';
+import '../platform/platform_features.dart';
 import '../utils/log.dart';
 import '../utils/page_scoped_notes.dart';
 import 'settings_provider.dart';
@@ -145,12 +147,21 @@ class DeckNotifier extends StateNotifier<DeckState> {
     _lastCoalesceKey = null;
   }
 
-  void newDeck(String title, {String theme = 'ocideck'}) {
+  /// Start a fresh deck. With a [template] the deck opens with that template's
+  /// example slides (the first is always a title slide carrying [title]);
+  /// without one it is the classic single title slide.
+  void newDeck(
+    String title, {
+    String theme = 'ocideck',
+    DeckTemplate? template,
+  }) {
     final deck = Deck(
       title: title,
       theme: theme,
       themeProfile: _file.currentThemeProfile,
-      slides: [Slide.create(SlideType.title).copyWith(title: title)],
+      slides:
+          template?.buildSlides(title) ??
+          [Slide.create(SlideType.title).copyWith(title: title)],
     );
     _clearHistory();
     state = DeckState(deck: deck, isDirty: true);
@@ -187,6 +198,9 @@ class DeckNotifier extends StateNotifier<DeckState> {
     if (_saving) return false;
     _saving = true;
     try {
+      // Web kent geen schrijfbaar bestandssysteem: opslaan is daar de
+      // gegenereerde markdown als bestand laten downloaden.
+      if (!supportsLocalProjectFolders) return _saveAsDownload();
       if (state.filePath != null) {
         return await _saveToPath(state.filePath!);
       } else {
@@ -195,6 +209,21 @@ class DeckNotifier extends StateNotifier<DeckState> {
     } finally {
       _saving = false;
     }
+  }
+
+  /// Web-opslagpad: start een browserdownload van de deck-markdown. Het deck
+  /// wordt daarna als schoon gemarkeerd — het bestand is aan de gebruiker
+  /// overhandigd; verdere wijzigingen maken het gewoon weer dirty. [filePath]
+  /// blijft null, zodat elke volgende save opnieuw een download start.
+  bool _saveAsDownload() {
+    final deck = state.deck;
+    if (deck == null) return false;
+    if (!_file.downloadDeckAsFile(deck)) {
+      state = state.copyWith(error: 'Opslaan als download mislukt.');
+      return false;
+    }
+    state = state.copyWith(isDirty: false);
+    return true;
   }
 
   Future<bool> saveAs({String? initialDirectory}) async {
@@ -450,7 +479,10 @@ class DeckNotifier extends StateNotifier<DeckState> {
     _mutate(deck.copyWith(slides: slides));
   }
 
-  void updateSlide(int index, Slide updated) {
+  /// [bumpRevision] dwingt een editor-remount af; nodig wanneer de wijziging
+  /// niet uit de editor zelf komt (zoals een kwaliteits-quick-fix) en de
+  /// tekstvelden de nieuwe slide-inhoud moeten laden.
+  void updateSlide(int index, Slide updated, {bool bumpRevision = false}) {
     final deck = state.deck;
     if (deck == null || index < 0 || index >= deck.slides.length) return;
     final slides = List<Slide>.from(deck.slides);
@@ -458,7 +490,11 @@ class DeckNotifier extends StateNotifier<DeckState> {
     // Snel typen op dezelfde slide telt als één ongedaan-maken-stap. Sleutel op
     // de stabiele slide-id, niet de index: na verwijderen/herordenen mag een
     // bewerking op een ándere slide (zelfde index) niet meecoalescen.
-    _mutate(deck.copyWith(slides: slides), coalesceKey: 'slide:${updated.id}');
+    _mutate(
+      deck.copyWith(slides: slides),
+      coalesceKey: bumpRevision ? null : 'slide:${updated.id}',
+      bumpRevision: bumpRevision,
+    );
   }
 
   /// Zet de "overslaan"-status van een slide aan/uit. Overgeslagen slides

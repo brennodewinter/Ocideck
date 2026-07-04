@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
+import '../utils/atomic_file.dart';
 import '../utils/log.dart';
 
 /// Vindt en herschrijft afbeeldingsverwijzingen (`![…](pad)`) in
@@ -154,7 +155,8 @@ class ImageReferenceService {
     });
     if (!changed) return false;
     try {
-      await file.writeAsString(updated);
+      // Atomair: dit herschrijft het deck-bestand van de gebruiker in situ.
+      await writeStringAtomic(file, updated);
     } catch (e) {
       logWarning('ImageReferenceService.replaceReferences: write deck file', e);
       return false;

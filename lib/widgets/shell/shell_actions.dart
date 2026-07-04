@@ -28,6 +28,11 @@ Future<void> _openWithSearch(
   WidgetRef ref,
   String? initialDirectory,
 ) async {
+  // Op web is er geen bestandssysteem om te doorzoeken; alle open-ingangen
+  // (welkomstscherm, menu, Ctrl/Cmd+O) lopen daar via de browser-picker.
+  if (isWebPlatform) {
+    return _openWithBytesPicker(context, ref);
+  }
   final settings = ref.read(settingsProvider);
   final result = await OpenPresentationDialog.show(
     context,
@@ -45,13 +50,33 @@ Future<void> _openWithSearch(
   _reportOpenFailure(messenger, l10n, openResult);
 }
 
+/// Open-pad voor web: de browser-picker levert de bestandsinhoud als bytes
+/// (er bestaat geen pad), waarna het deck in-memory wordt geopend — een
+/// `.ocideck`-pakket wordt daarbij in het geheugen uitgepakt. Opslaan van
+/// zo'n tabblad wordt automatisch een download (geen [DeckState.filePath]).
+Future<void> _openWithBytesPicker(BuildContext context, WidgetRef ref) async {
+  final picked = await ref.read(fileServiceProvider).pickDeckFileBytes();
+  if (picked == null || !context.mounted) return;
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
+  // Geen extensie-check: de bytes-poort herkent pakketten aan hun zip-kop en
+  // weigert al het andere met een gerichte melding via _reportOpenFailure.
+  final openResult = await ref
+      .read(tabsProvider.notifier)
+      .openDeckFromBytes(picked.bytes, picked.name);
+  _reportOpenFailure(messenger, l10n, openResult);
+}
+
 /// Scan a fixed set of well-known folders for Marp presentations and open the
 /// chosen one. Complements [_openWithSearch], which scans a single folder.
 Future<void> _scanLibrary(BuildContext context, WidgetRef ref) async {
   final path = await ScanLibraryDialog.show(
     context,
     fileService: ref.read(fileServiceProvider),
-    recentFiles: ref.read(settingsProvider).recentFiles,
+    recentFiles: [
+      for (final f in ref.read(settingsProvider).recentFiles) f.path,
+    ],
+    homeDir: ref.read(settingsProvider).homeDirectory,
   );
   if (path == null) return;
   await ref.read(tabsProvider.notifier).openFileByPath(path);
@@ -63,15 +88,66 @@ Future<void> _scanLibrary(BuildContext context, WidgetRef ref) async {
 /// online een presentatie kunt ophalen.
 Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
   final url = await _showUrlDialog(context);
-  if (url == null || url.trim().isEmpty) return;
-  final failure = await ref
-      .read(tabsProvider.notifier)
-      .importFromUrl(url, homeDir: ref.read(settingsProvider).homeDirectory);
+  if (url == null || url.trim().isEmpty || !context.mounted) return;
+  if (isWebPlatform) {
+    // Web: de browser haalt het bestand op (CORS + CSP bewaken het verkeer)
+    // en het deck wordt volledig in het geheugen geopend — het dart:io-
+    // downloadpad hieronder bestaat op web niet.
+    return _importUrlWeb(context, ref, url);
+  }
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
+  ImportFailure? failure;
+  try {
+    failure = await ref
+        .read(tabsProvider.notifier)
+        .importFromUrl(url, homeDir: ref.read(settingsProvider).homeDirectory);
+  } catch (e, s) {
+    // Een platform- of IO-fout mag nooit als stilte eindigen: de gebruiker
+    // heeft net een URL ingetikt en verwacht óf een tab óf een melding.
+    logError('_importFromUrl: import failed', e, s);
+    failure = ImportFailure.network;
+  }
   if (failure != null && context.mounted) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(importFailureMessage(context.l10n, failure))),
+    messenger.showSnackBar(
+      SnackBar(content: Text(importFailureMessage(l10n, failure))),
     );
   }
+}
+
+/// Web-kern van de URL-import: ophalen (met hulppunt-terugval), dezelfde
+/// security-gate, en de juiste melding. Gedeeld door de importdialoog en de
+/// `?deck=`-deeplink waarmee een link OciDeck én een presentatie tegelijk
+/// opent.
+Future<void> _importUrlWeb(
+  BuildContext context,
+  WidgetRef ref,
+  String url,
+) async {
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
+  OpenResult result;
+  try {
+    result = await ref.read(tabsProvider.notifier).importFromUrlWeb(url);
+  } catch (e, s) {
+    logError('_importUrlWeb: import failed', e, s);
+    result = OpenResult.unreadable;
+  }
+  if (result == OpenResult.notAPresentation) {
+    _reportOpenFailure(messenger, l10n, result);
+    return;
+  }
+  if (result == OpenResult.opened || result == OpenResult.blocked) return;
+  // Op web is de meest voorkomende oorzaak geen tikfout maar CORS: de
+  // browser mag alleen lezen van servers die dat expliciet toestaan.
+  messenger.showSnackBar(
+    SnackBar(
+      content: Text(
+        '${l10n.d('Kon van deze URL geen presentatie ophalen.')}\n'
+        '${l10n.d('Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).')}',
+      ),
+    ),
+  );
 }
 
 /// Blader door de Nextcloud/WebDAV-bron, download het gekozen deck, haal het
@@ -342,7 +418,7 @@ class _UrlImportDialogState extends State<_UrlImportDialog> {
               l10n.d(
                 'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.',
               ),
-              style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+              style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
             ),
             const SizedBox(height: 12),
             TextField(

@@ -5,12 +5,14 @@ import 'dart:math' as math;
 
 import '../../platform/platform_features.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
+import 'package:flutter/foundation.dart' show kIsWeb, listEquals;
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:screen_retriever/screen_retriever.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
+import '../../platform/presenter_fullscreen.dart';
 import '../../models/annotation.dart';
 import '../../models/deck.dart';
 import '../../models/question.dart';
@@ -22,6 +24,9 @@ import '../../services/mermaid_render_service.dart';
 import '../../services/rehearsal_controller.dart';
 import '../../services/rich_text_layout.dart';
 import '../../services/slide_layout_metrics.dart';
+import '../../services/web_asset_store.dart';
+import '../../utils/bundled_asset.dart';
+import '../../utils/image_limits.dart';
 import '../../utils/log.dart';
 import '../../utils/page_scoped_notes.dart';
 import '../../utils/project_path.dart';
@@ -33,6 +38,7 @@ import '../markdown_notes_editor.dart';
 import 'annotation_overlay.dart';
 import 'audience_window.dart';
 import 'rehearsal_summary.dart';
+import '../../theme/app_theme.dart';
 
 part 'parts/presenter_questions.dart';
 part 'parts/presenter_table.dart';
@@ -267,7 +273,10 @@ class FullscreenPresenter extends StatefulWidget {
     final hadWakeLock = await _wakeLockEnabled();
     await _enableWakeLock();
     try {
-      await windowManager.setFullScreen(true);
+      // Volledig scherm is best-effort: op web kan de browser weigeren en op
+      // een onbekend platform ontbreekt het venster. Nooit blokkerend — de
+      // presenter-route wordt hoe dan ook geopend.
+      await setPresenterFullscreen(true);
       if (context.mounted) {
         await Navigator.push(
           context,
@@ -789,7 +798,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       // the audience window (once — double-close crashes the Linux embedder).
       await aw.close();
     } else {
-      await windowManager.setFullScreen(false);
+      await setPresenterFullscreen(false);
     }
     if (mounted) Navigator.pop(context);
   }

@@ -255,7 +255,7 @@ class _UserNotesFieldState extends State<_UserNotesField> {
           leading: const Icon(
             Icons.edit_note_outlined,
             size: 18,
-            color: Color(0xFF2563EB),
+            color: AppTheme.accent,
           ),
           title: Row(
             children: [
@@ -273,7 +273,7 @@ class _UserNotesFieldState extends State<_UserNotesField> {
                 key: ValueKey('discard-user-notes-${widget.slide.id}'),
                 controller: _ctrl,
                 onDiscard: _discardNotes,
-                color: const Color(0xFF2563EB),
+                color: AppTheme.accent,
               ),
             ],
           ),
@@ -283,7 +283,7 @@ class _UserNotesFieldState extends State<_UserNotesField> {
             pageCount: widget.richTextPageCount,
             emptyHint: l10n.d('Notities voor de ontvanger tijdens een cursus'),
             hasContent: widget.note.trim().isNotEmpty,
-            accent: const Color(0xFF60A5FA),
+            accent: AppTheme.blue400,
           ),
           children: [
             SizedBox(
@@ -299,7 +299,7 @@ class _UserNotesFieldState extends State<_UserNotesField> {
                   color: Color(0xFF1E3A8A),
                   height: 1.45,
                 ),
-                linkColor: const Color(0xFF2563EB),
+                linkColor: AppTheme.accent,
                 codeBackground: const Color(0xFFEFF6FF),
                 hintText: l10n.d('Gebruikersnotities voor deze slide...'),
                 minLines: 10,
@@ -322,7 +322,7 @@ class _UserNotesFieldState extends State<_UserNotesField> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6),
-                    borderSide: const BorderSide(color: Color(0xFF3B82F6)),
+                    borderSide: const BorderSide(color: AppTheme.blue500),
                   ),
                   isDense: true,
                   contentPadding: const EdgeInsets.all(10),

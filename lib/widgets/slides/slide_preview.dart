@@ -26,6 +26,8 @@ import '../../models/video_source.dart';
 import '../../theme/app_theme.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../services/rich_text_layout.dart';
+import '../../services/web_asset_store.dart';
+import '../../utils/bundled_asset.dart';
 import '../../utils/image_limits.dart';
 import '../../utils/log.dart';
 import '../../utils/lru_cache.dart';
@@ -150,6 +152,34 @@ EdgeInsets _logoSafeInsets(double w, ThemeProfile profile) {
 double _logoAwareBottomPadding(double defaultPad, double safeBottom) {
   if (safeBottom <= 0) return defaultPad;
   return math.max(defaultPad, safeBottom);
+}
+
+/// Content-padding voor bulletslides: logo-safe bovenrand en de
+/// checklist/logo-bewuste onderrand uit [bulletsSlideBottomInset]. [safe]
+/// blijft bij de aanroeper (sommige previews hebben hem daarna nog nodig, en
+/// split-slides gebruiken andere insets). Stond in vijf previews als
+/// identiek blok uitgeschreven.
+EdgeInsets _bulletsPadding({
+  required double w,
+  required Slide slide,
+  required ThemeProfile profile,
+  required EdgeInsets safe,
+  required double pad,
+  required double vPad,
+  double? rightPad,
+}) {
+  return EdgeInsets.fromLTRB(
+    pad,
+    vPad + safe.top,
+    rightPad ?? pad,
+    bulletsSlideBottomInset(
+      w: w,
+      slide: slide,
+      profile: profile,
+      defaultBottomPad: vPad,
+      safeBottom: safe.bottom,
+    ),
+  );
 }
 
 EdgeInsets _splitTextLogoSafeInsets(double w, ThemeProfile profile) {

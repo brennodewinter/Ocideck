@@ -43,14 +43,21 @@ extension _SettingsGeneralTab on _SettingsDialogState {
           padding: const EdgeInsets.only(top: 6),
           child: Text(
             l10n.t('languageHelp'),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
         const SizedBox(height: 16),
         ..._accessibilitySettings(),
         const SizedBox(height: 16),
-        _sectionTitle(l10n.d('Classificatie-handhaving')),
-        _classificationEnforcementSection(l10n),
+        // Handhavingsbeleid is voor de meeste gebruikers niet aan de orde;
+        // ingeklapt tenzij er al een regel actief is (die verstop je niet).
+        AdvancedSection(
+          title: l10n.d('Classificatie-handhaving'),
+          initiallyExpanded: ClassificationEnforcementPolicy.fromAppSettings(
+            ref.read(settingsProvider),
+          ).hasGate,
+          children: [_classificationEnforcementSection(l10n)],
+        ),
         const SizedBox(height: 16),
         _sectionTitle(l10n.t('presentationFolder')),
         Row(
@@ -103,7 +110,7 @@ extension _SettingsGeneralTab on _SettingsDialogState {
           padding: const EdgeInsets.only(top: 6),
           child: Text(
             l10n.t('exportFolderHelp'),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
       ],
@@ -121,7 +128,7 @@ extension _SettingsGeneralTab on _SettingsDialogState {
           l10n.d(
             'Vergroot alle tekst van de bewerkomgeving tot maximaal 200%. De slides zelf veranderen niet mee.',
           ),
-          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
         ),
       ),
       const SizedBox(height: 8),
@@ -135,7 +142,7 @@ extension _SettingsGeneralTab on _SettingsDialogState {
           l10n.d(
             'Vraag bevestiging voordat je exporteert wanneer er slide-kwaliteitsproblemen zijn.',
           ),
-          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
         ),
         value: ref.watch(
           settingsProvider.select((s) => s.qualityWarningsOnExport),
@@ -154,7 +161,7 @@ extension _SettingsGeneralTab on _SettingsDialogState {
           l10n.d(
             'Export is niet mogelijk zolang er fouten in de slide-kwaliteitscontrole staan.',
           ),
-          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
         ),
         value: ref.watch(
           settingsProvider.select((s) => s.qualityBlockExportOnErrors),
@@ -182,7 +189,7 @@ extension _SettingsGeneralTab on _SettingsDialogState {
               l10n.d(
                 'Tekst onder deze verhouding wordt gemarkeerd. 4.5 = WCAG AA, 3.0 = WCAG AA grote tekst. Hoger is strenger.',
               ),
-              style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+              style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
             ),
             trailing: DropdownButton<double>(
               value: current,
@@ -278,7 +285,7 @@ extension _SettingsGeneralTab on _SettingsDialogState {
           ),
           subtitle: Text(
             l10n.d('Weiger export wanneer het deck geen TLP-niveau heeft.'),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
           value: settings.requireClassificationOnExport,
           onChanged: (value) => ref
@@ -295,7 +302,7 @@ extension _SettingsGeneralTab on _SettingsDialogState {
             l10n.d(
               'Toon een diagonaal watermerk met TLP en organisatie op elke slide.',
             ),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
           value: settings.classificationWatermarkEnabled,
           onChanged: (value) => ref
@@ -344,7 +351,7 @@ extension _SettingsGeneralTab on _SettingsDialogState {
           padding: const EdgeInsets.only(top: 6),
           child: Text(
             help,
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
       ],

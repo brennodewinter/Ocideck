@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../l10n/app_localizations.dart';
 import '../../models/slide.dart';
 import '../../state/deck_provider.dart';
 import '_editor_field.dart';
+import '../../theme/app_theme.dart';
 
 class TwoImagesEditor extends ConsumerStatefulWidget {
   final Slide slide;
@@ -145,9 +145,9 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
         Padding(
           padding: const EdgeInsets.only(left: 8),
           child: Text(
-            '${context.l10n.d('Links')} ${widget.slide.imageSize > 0 ? widget.slide.imageSize : 50}% — '
-            '${context.l10n.d('Rechts')} ${100 - (widget.slide.imageSize > 0 ? widget.slide.imageSize : 50)}%',
-            style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+            'Links ${widget.slide.imageSize > 0 ? widget.slide.imageSize : 50}% — '
+            'Rechts ${100 - (widget.slide.imageSize > 0 ? widget.slide.imageSize : 50)}%',
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
           ),
         ),
       ],

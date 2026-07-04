@@ -6,6 +6,41 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
 
 void main() {
+  test('unknown underscore comment-directives do not become notes', () {
+    // Marp-directives als `_paginate` zijn geen sprekersnotities; alleen
+    // niet-directive-commentaren horen in notes te belanden.
+    const md =
+        '---\nmarp: true\n---\n\n# Titel\n\n- punt\n\n'
+        '<!-- _paginate: false -->\n<!-- Echte notitie -->\n';
+    final deck = MarkdownService().parseDeck(md)!;
+    expect(deck.slides.single.notes, 'Echte notitie');
+  });
+
+  test('a body already ending in a newline gets no extra blank line', () {
+    final service = MarkdownService();
+    String gen(Slide s) => service.generateDeck(Deck(title: 'D', slides: [s]));
+
+    final code = gen(
+      Slide.create(
+        SlideType.code,
+      ).copyWith(customMarkdown: 'regel1\n', codeLanguage: 'dart'),
+    );
+    expect(code, contains('regel1\n```'));
+    expect(code, isNot(contains('regel1\n\n```')));
+
+    final free = gen(
+      Slide.create(SlideType.freeMarkdown).copyWith(customMarkdown: 'alinea\n'),
+    );
+    expect(free, isNot(contains('alinea\n\n\n')));
+
+    final rich = gen(
+      Slide.create(
+        SlideType.bullets,
+      ).copyWith(listStyle: ListStyle.richText, customMarkdown: 'tekst\n'),
+    );
+    expect(rich, isNot(contains('tekst\n\n\n')));
+  });
+
   test('advance directive clamps Infinity/NaN/overflow to 0', () {
     for (final v in ['Infinity', '-Infinity', 'NaN', '1e400']) {
       final md = '---\nmarp: true\n---\n\n# Slide\n\n<!-- advance: $v -->\n';
@@ -124,6 +159,28 @@ void main() {
     expect(slide.imageCaption, 'Een onderschrift');
     expect(slide.imageSize, 45);
     expect(slide.bullets, ['Eerste punt', '\tGenest punt']);
+  });
+
+  test('round-trips a caption containing a slash', () {
+    // HtmlEscape (unknown-mode) escapet ook `/` naar `&#47;`; de decoder moet
+    // die terugvertalen (regressie: eigen unescape-tabel miste &#47;).
+    final service = MarkdownService();
+    final markdown = service.generateDeck(
+      Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.image).copyWith(
+            imagePath: 'images/foto.png',
+            imageCaption: 'Bron: NOS/ANP & "archief"',
+          ),
+        ],
+      ),
+    );
+
+    final deck = service.parseDeck(markdown);
+
+    expect(deck, isNotNull);
+    expect(deck!.slides.single.imageCaption, 'Bron: NOS/ANP & "archief"');
   });
 
   test('parses split text bullets from saved markdown', () {

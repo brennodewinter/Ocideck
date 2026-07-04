@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../services/recovery_service.dart';
+import '../../services/classification_enforcement_policy.dart';
 import '../../services/webdav_service.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
@@ -14,6 +15,7 @@ import '../../state/consent_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/log.dart';
 import '../../l10n/app_localizations.dart';
+import '../editors/advanced_section.dart';
 import '../language_flag.dart';
 import '../privacy_statement_content.dart';
 
@@ -455,7 +457,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                     gradient: const LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [Color(0xFF3B82F6), AppTheme.accent],
+                      colors: [AppTheme.blue500, AppTheme.accent],
                     ),
                     borderRadius: BorderRadius.circular(11),
                     boxShadow: [
@@ -510,10 +512,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                   ),
                 ),
                 const SizedBox(width: 10),
-                Text(
+                const Text(
                   'OciDeck',
                   style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.32),
+                    // EU-vlaggeel: leesbaar op de donkere/EU-blauwe zijbalk,
+                    // passend bij het geel-hertinte logo erboven.
+                    color: Color(0xFFFFCC00),
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
                     letterSpacing: 2.5,
@@ -553,9 +557,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                   height: 18,
                   margin: const EdgeInsets.only(right: 11),
                   decoration: BoxDecoration(
-                    color: selected
-                        ? const Color(0xFF60A5FA)
-                        : Colors.transparent,
+                    color: selected ? AppTheme.blue400 : Colors.transparent,
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),
@@ -612,7 +614,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             tooltip: context.l10n.t('cancel'),
             onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.close, size: 20),
-            color: const Color(0xFF94A3B8),
+            color: AppTheme.slate400,
             splashRadius: 20,
           ),
         ],
@@ -847,7 +849,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         style: const TextStyle(
           fontSize: 10,
           fontWeight: FontWeight.w700,
-          color: Color(0xFF64748B),
+          color: AppTheme.slate500,
           letterSpacing: 1.2,
         ),
       ),
@@ -862,7 +864,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         text,
         style: TextStyle(
           fontSize: 12,
-          color: muted ? const Color(0xFF94A3B8) : const Color(0xFF334155),
+          color: muted ? AppTheme.slate400 : AppTheme.slate700,
         ),
         overflow: TextOverflow.ellipsis,
       ),
@@ -871,7 +873,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
   BoxDecoration _boxDecoration() {
     return BoxDecoration(
-      border: Border.all(color: const Color(0xFFCBD5E1)),
+      border: Border.all(color: AppTheme.slate300),
       borderRadius: BorderRadius.circular(6),
       color: Colors.white,
     );
@@ -929,7 +931,7 @@ class _HexColorDialogState extends State<_HexColorDialog> {
                 decoration: BoxDecoration(
                   color: _parseHexColor(normalized ?? '#FFFFFF'),
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: const Color(0xFFCBD5E1)),
+                  border: Border.all(color: AppTheme.slate300),
                 ),
               ),
               const SizedBox(width: 12),
@@ -959,7 +961,7 @@ class _HexColorDialogState extends State<_HexColorDialog> {
           const SizedBox(height: 8),
           Text(
             l10n.d('Bijvoorbeeld #33FF33 voor een CRT-groen scherm.'),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ],
       ),

@@ -116,7 +116,7 @@ extension _PresenterInk on _FullscreenPresenterState {
         child: IconButton(
           onPressed: () => _setTool(tool),
           icon: Icon(icon, size: 20),
-          color: active ? const Color(0xFF60A5FA) : Colors.white70,
+          color: active ? AppTheme.blue400 : Colors.white70,
           style: IconButton.styleFrom(
             backgroundColor: active ? Colors.white10 : Colors.transparent,
           ),

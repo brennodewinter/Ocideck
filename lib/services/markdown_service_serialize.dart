@@ -85,6 +85,9 @@ extension _MarkdownSerialize on MarkdownService {
     bool forExport,
   ) {
     if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
+    // De parser leest `## ` als ondertitel (ook uit handgeschreven decks);
+    // zonder terugschrijven verdween die stilletjes bij de eerste keer opslaan.
+    if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
     _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);
     if (slide.continuesSplit) {
       buf.writeln('<!-- ocideck_continue_split: true -->');
@@ -254,6 +257,12 @@ extension _MarkdownSerialize on MarkdownService {
     if (slide.timelineAnimationMs != null) {
       buf.writeln(
         '<!-- ocideck_timeline_duration: ${slide.timelineAnimationMs} -->',
+      );
+    }
+    if (slide.timelineCurrentIndex != null) {
+      // Written 1-based so the comment reads as "the Nth event" in the raw .md.
+      buf.writeln(
+        '<!-- ocideck_timeline_current: ${slide.timelineCurrentIndex! + 1} -->',
       );
     }
     _writeList(buf, slide.bullets, ListStyle.bullets);

@@ -84,6 +84,12 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Забележка: уеб версията може да изтегля само от сървъри, които го позволяват (CORS).',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Пакетите (.ocideck) все още не се поддържат в уеб версията.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'В уеб версията могат да се отварят само .md презентации.',
   'Geen': 'Няма',
   'Nieuw': 'Нов',
   'Verwijderen': 'Изтриване',
@@ -684,6 +690,8 @@ const _dutchSourceBg = {
   'Verticaal': 'Вертикално',
   'Animatie': 'Анимация',
   'Intekenen bij openen': 'Изчертаване при отваряне',
+  'Markeer als huidig punt': 'Отбележи като текуща точка',
+  'Huidig punt weghalen': 'Премахни текущата точка',
   'Stap voor stap': 'Стъпка по стъпка',
   'Geen animatie': 'Без анимация',
   'Animatiesnelheid': 'Скорост на анимацията',
@@ -742,6 +750,13 @@ const _dutchSourceBg = {
       'Твърдението по-горе е вярно или невярно; изберете кое.',
   'Selecteer alle juiste antwoorden': 'Изберете всички верни отговори',
   'Bevestig': 'Потвърждаване',
+  'Volgorde': 'Подредба',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Подредете отговорите тук в правилния ред. При представяне се показват разбъркани.',
+  'Geef minstens twee antwoorden op.': 'Дайте поне два отговора.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Докоснете отговорите в правилния ред',
+  'Jouw volgorde': 'Вашият ред',
   'Het juiste antwoord': 'Верният отговор',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Изображението се показва на цял екран като фон. Използвайте замъгляването, когато заглавието се нуждае от повече спокойствие или контраст.',
@@ -1191,4 +1206,134 @@ const _dutchSourceBg = {
   'Herstelbestanden nu wissen': 'Изтрий файловете за възстановяване сега',
   'Er waren geen herstelbestanden.': 'Нямаше файлове за възстановяване.',
   'herstelbestand(en) gewist.': 'файл(а) за възстановяване изтрити.',
+  'Klaar voor export': 'Готово за експорт',
+  'kwaliteitswaarschuwing(en)': 'предупреждение(я) за качество',
+  'Nog opslaan nodig': 'Първо е нужно запазване',
+  'TLP blokkeert export': 'TLP блокира експорта',
+  'Kwaliteit blokkeert export': 'Качеството блокира експорта',
+  'Verhoog contrast': 'Увеличи контраста',
+  'Open kleurinstellingen': 'Отвори настройките за цветове',
+  'Voeg alt-tekst toe': 'Добави алтернативен текст',
+  'Voeg beschrijving toe': 'Добави описание',
+  'Zinnen naar losse bullets': 'Изречения в отделни точки',
+  'Laatst geëxporteerd als': 'Последно експортирано като',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Определя цветовете, шрифта и логото. По-късно може да се промени през свойствата на презентацията или настройките.',
+  'Stijlprofielen beheren…': 'Управление на стиловите профили…',
+  'Geavanceerd': 'Разширени',
+  'Knippen en audio': 'Изрязване и звук',
+  'Bereik en kleurzones': 'Обхват и цветови зони',
+  'Leeg deck': 'Празен дек',
+  'Korte briefing': 'Кратък брифинг',
+  'Status-briefing': 'Статус брифинг',
+  'Projectstart / kick-off': 'Старт на проекта / kick-off',
+  'Voorbespreking communicatie': 'Предварително обсъждане на комуникацията',
+  'Projecttijdlijn': 'Времева линия на проекта',
+  'Informatiebeveiliging: RASCI / TVB': 'Информационна сигурност: RASCI / TVB',
+  'Security-takenplan': 'План на задачите по сигурността',
+  'Certificering voortgang': 'Напредък по сертификацията',
+  'Training / workshop': 'Обучение / уъркшоп',
+  'Rapportage': 'Отчет',
+  'Onderzoeksverhaal': 'Изследователски разказ',
+  'Technische uitleg': 'Техническо обяснение',
+  'Interactieve quiz': 'Интерактивен куиз',
+  'Alleen een titelpagina en een agenda.':
+      'Само заглавна страница и дневен ред.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Ситуация, факти и искано решение в шест слайда.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Статус табло, напредък по работни потоци и решения.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Защо, цел, обхват, заинтересовани страни и времева линия.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Целеви групи, ключово послание, канали и говорителство.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Фази, ключови етапи, зависимости и моменти за решения.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Записване на роли, RASCI матрица и договорености за задачите.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Задачи, приоритети, отговорници и доказателства.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Напредък по домейни, контроли и планиране на одити.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Учебни цели, ключови концепции, упражнение и куиз въпрос.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Резюме, KPI табло, тенденция и действия.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Въпрос, метод, времева линия на констатациите и заключения.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Архитектура, компоненти, примерен код и контролен списък.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Три вида въпроси с обяснение и обсъждане.',
+  'Sjabloon': 'Шаблон',
+  'Post-incident review / lessons learned':
+      'Преглед след инцидент / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Оценка на изтичане на данни / инцидент с лични данни',
+  'DPIA / privacy impact assessment':
+      'DPIA / оценка на въздействието върху личните данни',
+  'Risicoanalyse / risk register': 'Анализ на риска / регистър на рисковете',
+  'Business continuity / DR-test': 'Непрекъснатост на бизнеса / DR тест',
+  'Tabletop-oefening / crisisoefening': 'Настолно учение / кризисно учение',
+  'BOB-crisisrapportage': 'BOB кризисен доклад',
+  'CAB / release readiness': 'CAB / готовност за релийз',
+  'Stuurgroep / project board update':
+      'Управителен комитет / актуализация за проектния съвет',
+  'Auditbevindingen en opvolging': 'Одитни констатации и последващи действия',
+  'Leveranciersbeoordeling / vendor risk': 'Оценка на доставчици / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Архитектурно решение / ADR презентация',
+  'Beleid uitrollen / implementatieplan':
+      'Внедряване на политика / план за изпълнение',
+  'Overdracht / handover': 'Предаване / handover',
+  'Retrospective / teamverbetering': 'Ретроспектива / подобряване на екипа',
+  'PPL Vluchtvoorbereiding': 'PPL подготовка за полет',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Времева линия, въздействие, причини и действия за подобрение след инцидент.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Оценете данните, риска, задължението за уведомяване и комуникацията.',
+  "Verwerking, grondslag, privacyrisico's en maatregelen.":
+      'Обработка, правно основание, рискове за поверителността и мерки.',
+  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
+      'Запишете рискове, вероятност, въздействие, мерки и отговорници.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Сценарий, цели за възстановяване, резултати от теста и точки за подобрение.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Сценарий, injects, решения, наблюдения и оценка.',
+  "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
+      'Преведете кризисния екип през изграждане на картина, преценка и вземане на решения, с картина на ситуацията на живо, информационни въпроси, дилеми, дневник на решенията и списък с действия.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Промяна, въздействие, тестове, rollback, комуникация и go/no-go.',
+  "Voortgang, planning, budget, risico's en besluiten gevraagd.":
+      'Напредък, планиране, бюджет, рискове и искани решения.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Констатации, root cause, мерки, доказателства и статус.',
+  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
+      'Услуга, данни, зависимост, изисквания, рискове и решение.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Контекст, опции, компромиси, решение и последици.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Целева група, планиране, комуникация, обучение и възприемане.',
+  "Status, open acties, risico's, contacten en eerste stappen.":
+      'Статус, отворени действия, рискове, контакти и първи стъпки.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Факти, модели, start-stop-continue и действия за подобрение.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Подгответе VFR полет с маршрут, време, NOTAMs, летателни характеристики, weight & balance, гориво, резервни летища и лични go/no-go проверки.',
+  'Zoek een sjabloon': 'Търсене на шаблон',
+  'Geen sjablonen gevonden': 'Няма намерени шаблони',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Идентични копия',
+  'Zelfde titel, andere inhoud': 'Едно и също заглавие, различно съдържание',
+  'Dubbele presentaties opruimen': 'Разчистване на дублирани презентации',
+  'Naar de prullenbak verplaatst:': 'Преместено в кошчето:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Неуспешно преместване в кошчето.',
+  'Geen dubbele presentaties gevonden.':
+      'Не са намерени дублирани презентации.',
+  'Laatste kopie blijft behouden': 'Последното копие се запазва',
+  'Nog geopend in een tabblad': 'Все още отворена в раздел',
+  'Naar prullenbak': 'В кошчето',
+  'Deze presentatie staat ook op een andere plek:':
+      'Тази презентация съществува и на друго място:',
 };

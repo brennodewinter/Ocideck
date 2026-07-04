@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/slide.dart';
-import '../../state/deck_provider.dart';
 import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
+import '../../theme/app_theme.dart';
 
 class TitleEditor extends ConsumerStatefulWidget {
   final Slide slide;
@@ -25,7 +25,8 @@ class TitleEditor extends ConsumerStatefulWidget {
   ConsumerState<TitleEditor> createState() => _TitleEditorState();
 }
 
-class _TitleEditorState extends ConsumerState<TitleEditor> {
+class _TitleEditorState extends ConsumerState<TitleEditor>
+    with EditorTextControllers, BgImageHandlers {
   late final TextEditingController _title;
   late final TextEditingController _subtitle;
 
@@ -35,12 +36,17 @@ class _TitleEditorState extends ConsumerState<TitleEditor> {
   int _zoomBeforeFill = 100;
 
   @override
+  Slide get editorSlide => widget.slide;
+  @override
+  ValueChanged<Slide> get onSlideUpdate => widget.onUpdate;
+  @override
+  String? get bgImageBasePath => widget.captionBasePath;
+
+  @override
   void initState() {
     super.initState();
-    _title = TextEditingController(text: widget.slide.title);
-    _subtitle = TextEditingController(text: widget.slide.subtitle);
-    _title.addListener(_emit);
-    _subtitle.addListener(_emit);
+    _title = newController(widget.slide.title, _emit);
+    _subtitle = newController(widget.slide.subtitle, _emit);
     if (widget.slide.imageSize > 0) _zoomBeforeFill = widget.slide.imageSize;
   }
 
@@ -48,41 +54,6 @@ class _TitleEditorState extends ConsumerState<TitleEditor> {
     widget.onUpdate(
       widget.slide.copyWith(title: _title.text, subtitle: _subtitle.text),
     );
-  }
-
-  Future<void> _pasteBgImage() async {
-    final imgService = ref.read(imageServiceProvider);
-    final path = await pasteImageWithFeedback(
-      context,
-      imgService,
-      projectPath: widget.captionBasePath,
-    );
-    if (path != null) {
-      widget.onUpdate(widget.slide.copyWith(imagePath: path, imageCaption: ''));
-    }
-  }
-
-  Future<void> _pickBgImage() async {
-    final imgService = ref.read(imageServiceProvider);
-    final path = await pickImageWithFeedback(
-      context,
-      imgService,
-      projectPath: widget.captionBasePath,
-    );
-    if (path != null) {
-      widget.onUpdate(widget.slide.copyWith(imagePath: path, imageCaption: ''));
-    }
-  }
-
-  void _clearBgImage() {
-    widget.onUpdate(widget.slide.copyWith(imagePath: '', imageCaption: ''));
-  }
-
-  @override
-  void dispose() {
-    _title.dispose();
-    _subtitle.dispose();
-    super.dispose();
   }
 
   @override
@@ -115,7 +86,7 @@ class _TitleEditorState extends ConsumerState<TitleEditor> {
           l10n.d(
             'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.',
           ),
-          style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+          style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
         ),
         const SizedBox(height: 8),
         ImagePickerBar(
@@ -126,9 +97,9 @@ class _TitleEditorState extends ConsumerState<TitleEditor> {
           onPicked: (path, caption) => widget.onUpdate(
             widget.slide.copyWith(imagePath: path, imageCaption: caption),
           ),
-          onBrowse: _pickBgImage,
-          onPaste: _pasteBgImage,
-          onClear: imagePath.isNotEmpty ? _clearBgImage : null,
+          onBrowse: pickBgImage,
+          onPaste: pasteBgImage,
+          onClear: imagePath.isNotEmpty ? clearBgImage : null,
           onCaptionChanged: (caption) =>
               widget.onUpdate(widget.slide.copyWith(imageCaption: caption)),
           label: 'Geen achtergrondafbeelding',

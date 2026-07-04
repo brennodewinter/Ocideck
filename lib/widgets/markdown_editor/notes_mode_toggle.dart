@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
 import 'markdown_editor_theme.dart';
 import 'notes_editor_mode.dart';
+import '../../theme/app_theme.dart';
 
 enum NotesModeToggleStyle { standard, compact }
 
@@ -25,8 +26,8 @@ class NotesModeToggle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final fg = foregroundColor ?? const Color(0xFF64748B);
-    final accent = accentColor ?? const Color(0xFF2563EB);
+    final fg = foregroundColor ?? AppTheme.slate500;
+    final accent = accentColor ?? AppTheme.accent;
     final compact = style == NotesModeToggleStyle.compact;
     final fontSize = compact ? 11.0 : 12.0;
     final padding = compact

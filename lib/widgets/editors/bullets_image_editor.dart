@@ -9,6 +9,7 @@ import '../markdown_editor/markdown_editor.dart';
 import '_editor_field.dart';
 import 'bullet_marker_selector.dart';
 import 'list_style_selector.dart';
+import '../../theme/app_theme.dart';
 
 class BulletsImageEditor extends StatefulWidget {
   final Slide slide;
@@ -282,7 +283,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
             child: MarkdownNotesEditor.legacy(
               controller: _richText,
               baseStyle: const TextStyle(fontSize: 14, height: 1.45),
-              linkColor: const Color(0xFF2563EB),
+              linkColor: AppTheme.accent,
               hintText: l10n.d('Tekst...'),
               expand: true,
               minLines: 8,
@@ -357,7 +358,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
             child: const Icon(
               Icons.drag_indicator,
               size: 16,
-              color: Color(0xFFCBD5E1),
+              color: AppTheme.slate300,
             ),
           ),
           const SizedBox(width: 4),
@@ -378,7 +379,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
           else
             Text(
               _markerForItem(i),
-              style: const TextStyle(fontSize: 16, color: Color(0xFF64748B)),
+              style: const TextStyle(fontSize: 16, color: AppTheme.slate500),
             ),
           const SizedBox(width: 8),
           Expanded(
@@ -428,7 +429,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
             icon: const Icon(
               Icons.remove_circle_outline,
               size: 18,
-              color: Color(0xFF64748B),
+              color: AppTheme.slate500,
             ),
             onPressed: () => _removeBulletAndFocus(i),
             padding: const EdgeInsets.symmetric(horizontal: 4),

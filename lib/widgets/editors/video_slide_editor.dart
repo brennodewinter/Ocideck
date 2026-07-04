@@ -5,7 +5,9 @@ import '../../services/image_service.dart';
 import '../../l10n/app_localizations.dart';
 import '../slides/video_playhead_bus.dart';
 import '_editor_field.dart';
+import 'advanced_section.dart';
 import 'audio_attachment_editor.dart';
+import '../../theme/app_theme.dart';
 
 class VideoSlideEditor extends StatefulWidget {
   final Slide slide;
@@ -166,54 +168,65 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
           ),
         ),
         const SizedBox(height: 16),
-        const SectionLabel('Knippen'),
-        Text(
-          // eén regel: de l10n-test leest de brontekst, niet de runtime-waarde.
-          l10n.d(
-            'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.',
-          ),
-          style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
-        ),
-        const SizedBox(height: 8),
-        Row(
+        // Knippen en audio-bijsluiting zijn verdieping; ingeklapt tenzij er
+        // al een knippunt of audiobestand op deze slide staat.
+        AdvancedSection(
+          title: l10n.d('Knippen en audio'),
+          initiallyExpanded:
+              widget.slide.videoStartMs > 0 ||
+              widget.slide.videoEndMs > 0 ||
+              widget.slide.audioPath.isNotEmpty,
           children: [
-            Expanded(
-              child: TextField(
-                controller: _start,
-                keyboardType: TextInputType.number,
-                onChanged: (_) => _emitTrim(),
-                decoration: InputDecoration(
-                  isDense: true,
-                  labelText: l10n.d('Begin (sec)'),
-                  border: const OutlineInputBorder(),
-                ),
-                style: const TextStyle(fontSize: 12),
+            const SectionLabel('Knippen'),
+            Text(
+              // eén regel: de l10n-test leest de brontekst, niet de runtime-waarde.
+              l10n.d(
+                'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.',
               ),
+              style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
             ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: TextField(
-                controller: _end,
-                keyboardType: TextInputType.number,
-                onChanged: (_) => _emitTrim(),
-                decoration: InputDecoration(
-                  isDense: true,
-                  labelText: l10n.d('Einde (sec)'),
-                  hintText: l10n.d('einde'),
-                  border: const OutlineInputBorder(),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _start,
+                    keyboardType: TextInputType.number,
+                    onChanged: (_) => _emitTrim(),
+                    decoration: InputDecoration(
+                      isDense: true,
+                      labelText: l10n.d('Begin (sec)'),
+                      border: const OutlineInputBorder(),
+                    ),
+                    style: const TextStyle(fontSize: 12),
+                  ),
                 ),
-                style: const TextStyle(fontSize: 12),
-              ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: TextField(
+                    controller: _end,
+                    keyboardType: TextInputType.number,
+                    onChanged: (_) => _emitTrim(),
+                    decoration: InputDecoration(
+                      isDense: true,
+                      labelText: l10n.d('Einde (sec)'),
+                      hintText: l10n.d('einde'),
+                      border: const OutlineInputBorder(),
+                    ),
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            _CutHereButton(slideId: widget.slide.id, onSplit: widget.onSplit),
+            const SizedBox(height: 16),
+            AudioAttachmentEditor(
+              slide: widget.slide,
+              imageService: widget.imageService,
+              onUpdate: widget.onUpdate,
             ),
           ],
-        ),
-        const SizedBox(height: 8),
-        _CutHereButton(slideId: widget.slide.id, onSplit: widget.onSplit),
-        const SizedBox(height: 16),
-        AudioAttachmentEditor(
-          slide: widget.slide,
-          imageService: widget.imageService,
-          onUpdate: widget.onUpdate,
         ),
       ],
     );
@@ -278,9 +291,9 @@ class _SourceKindChip extends StatelessWidget {
       VideoSourceKind.remoteFile => (l10n.d('Online'), const Color(0xFF2E7D64)),
       VideoSourceKind.localFile => (
         l10n.d('Lokaal bestand'),
-        const Color(0xFF64748B),
+        AppTheme.slate500,
       ),
-      VideoSourceKind.none => (l10n.d('Geen video'), const Color(0xFF94A3B8)),
+      VideoSourceKind.none => (l10n.d('Geen video'), AppTheme.slate400),
     };
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),

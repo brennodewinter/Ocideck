@@ -43,9 +43,9 @@ double footerSafeInset({
 }
 
 /// Bottom padding for bullets / rich-text slides.
-/// When a footer overlay is active the footer band is reserved in layout
-/// ([footerSafeInset]); only a minimal cushion is applied here so no empty
-/// strip appears under the text column.
+/// When a footer overlay is active its band ([footerSafeInset]) plus a small
+/// cushion is reserved here, so the text column stops above the footer instead
+/// of running on behind it; a bottom logo reserve wins when it is larger.
 double bulletsSlideBottomInset({
   required double w,
   required Slide slide,
@@ -57,8 +57,8 @@ double bulletsSlideBottomInset({
   if (footer <= 0) {
     return safeBottom > defaultBottomPad ? safeBottom : defaultBottomPad;
   }
-  final footerCushion = w * 0.004;
-  return safeBottom > footerCushion ? safeBottom : footerCushion;
+  final reserved = footer + w * 0.004;
+  return safeBottom > reserved ? safeBottom : reserved;
 }
 
 double _richTextBudget(double availH, double footerInset) =>
@@ -110,6 +110,42 @@ double _headerHeight({
   return h;
 }
 
+/// Verdeel [blocks] over pagina's: elk blok gaat bij de huidige pagina tot de
+/// gemeten paginahoogte [packTarget] zou overschrijden, dan begint een nieuwe.
+List<List<MarkdownBodyBlock>> _packBlocksIntoPages({
+  required List<MarkdownBodyBlock> blocks,
+  required double scale,
+  required double packTarget,
+  required bool titleOnFirstPageOnly,
+  required double Function({
+    required double scale,
+    required bool includeHeader,
+    required List<MarkdownBodyBlock> slice,
+  })
+  measurePage,
+}) {
+  final pages = <List<MarkdownBodyBlock>>[];
+  var current = <MarkdownBodyBlock>[];
+  var pageIndex = 0;
+
+  for (final block in blocks) {
+    final trial = [...current, block];
+    final includeHeader = !titleOnFirstPageOnly || pageIndex == 0;
+    if (current.isNotEmpty &&
+        measurePage(scale: scale, includeHeader: includeHeader, slice: trial) >
+            packTarget) {
+      pages.add(current);
+      current = [block];
+      pageIndex++;
+    } else {
+      current = trial;
+    }
+  }
+  if (current.isNotEmpty) pages.add(current);
+  if (pages.isEmpty) pages.add(blocks);
+  return pages;
+}
+
 RichTextLayoutPlan planRichTextLayout({
   required String markdown,
   required double availW,
@@ -131,6 +167,11 @@ RichTextLayoutPlan planRichTextLayout({
   final blocks = parseMarkdownBodyBlocks(markdown);
   final hasBody = blocks.any((b) => b.markdown.trim().isNotEmpty);
   final budget = _richTextBudget(availH, footerInset);
+  // Pagina's indelen tegen dezelfde render-marge als de fit-zoekers: een
+  // pagina die tot op de laatste pixel van het budget vol zit heeft geen
+  // ruimte voor meet-/renderafronding, en de onderste regel wordt dan half
+  // afgeknipt op de logo-/footergrens.
+  final packTarget = richTextFitTargetHeight(budget, refW);
 
   double measureBody(double scale, List<MarkdownBodyBlock> slice) =>
       measureMarkdownBlocksHeight(
@@ -198,7 +239,8 @@ RichTextLayoutPlan planRichTextLayout({
     fillRatio: kRichTextVerticalFill,
   );
 
-  if (measurePage(scale: scale, includeHeader: true, slice: blocks) <= budget) {
+  if (measurePage(scale: scale, includeHeader: true, slice: blocks) <=
+      packTarget) {
     return RichTextLayoutPlan(
       scale: scale,
       pageCount: 1,
@@ -207,25 +249,13 @@ RichTextLayoutPlan planRichTextLayout({
   }
 
   scale = paginationScale;
-  final pages = <List<MarkdownBodyBlock>>[];
-  var current = <MarkdownBodyBlock>[];
-  var pageIndex = 0;
-
-  for (final block in blocks) {
-    final trial = [...current, block];
-    final includeHeader = !titleOnFirstPageOnly || pageIndex == 0;
-    if (current.isNotEmpty &&
-        measurePage(scale: scale, includeHeader: includeHeader, slice: trial) >
-            budget) {
-      pages.add(current);
-      current = [block];
-      pageIndex++;
-    } else {
-      current = trial;
-    }
-  }
-  if (current.isNotEmpty) pages.add(current);
-  if (pages.isEmpty) pages.add(blocks);
+  final pages = _packBlocksIntoPages(
+    blocks: blocks,
+    scale: scale,
+    packTarget: packTarget,
+    titleOnFirstPageOnly: titleOnFirstPageOnly,
+    measurePage: measurePage,
+  );
 
   double tallestPageHeight(double s) {
     var maxH = 0.0;
@@ -250,11 +280,15 @@ RichTextLayoutPlan planRichTextLayout({
     maxScale: maxScale,
   );
 
+  // Lege regels zijn zelf blokken, dus '\n' reconstrueert de oorspronkelijke
+  // regelstructuur; '\n\n' zou per alinea-overgang twee extra witregels
+  // toevoegen die de paginameting nooit heeft gezien (en de onderste regel
+  // voorbij de logo-/footergrens duwen).
   return RichTextLayoutPlan(
     scale: scale,
     pageCount: pages.length,
     pageMarkdown: pages
-        .map((p) => p.map((b) => b.markdown).join('\n\n'))
+        .map((p) => p.map((b) => b.markdown).join('\n'))
         .toList(),
   );
 }
@@ -267,7 +301,6 @@ RichTextLayoutPlan planRichTextForSlide({
   required double availH,
   required String font,
   bool splitWithImage = false,
-  bool footerReservedExternally = false,
 }) {
   final pad = splitWithImage ? w * 0.038 : w * 0.07;
   final vPad = splitWithImage ? w * 0.042 : w * 0.05;
@@ -275,9 +308,8 @@ RichTextLayoutPlan planRichTextForSlide({
   final subtitleSize = w * 0.030;
   final spacing = splitWithImage ? vPad * 0.32 : pad * 0.5;
   final bodySize = splitWithImage ? w * 0.031 : w * 0.026;
-  final footer = footerReservedExternally
-      ? 0.0
-      : footerSafeInset(w: w, slide: slide, profile: profile);
+  // [availH] komt bij elke aanroeper uit [bulletsSlideBottomInset]-geometrie,
+  // die de footerband al reserveert — hier niet nogmaals aftrekken.
 
   return planRichTextLayout(
     markdown: normalizeRichTextMarkdown(slide.customMarkdown),
@@ -292,7 +324,7 @@ RichTextLayoutPlan planRichTextForSlide({
     spacing: spacing,
     bodySize: bodySize,
     font: font,
-    footerInset: footer,
+    footerInset: 0,
     maxScale: bulletScaleCap(
       w,
       bodySize,

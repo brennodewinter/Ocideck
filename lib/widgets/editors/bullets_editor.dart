@@ -8,6 +8,7 @@ import '../markdown_editor/markdown_editor.dart';
 import '_editor_field.dart';
 import 'bullet_marker_selector.dart';
 import 'list_style_selector.dart';
+import '../../theme/app_theme.dart';
 
 class BulletsEditor extends StatefulWidget {
   final Slide slide;
@@ -299,7 +300,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
             child: MarkdownNotesEditor.legacy(
               controller: _richText,
               baseStyle: const TextStyle(fontSize: 14, height: 1.45),
-              linkColor: const Color(0xFF2563EB),
+              linkColor: AppTheme.accent,
               hintText: l10n.d('Tekst...'),
               expand: true,
               minLines: 8,
@@ -345,7 +346,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
             child: const Icon(
               Icons.drag_indicator,
               size: 16,
-              color: Color(0xFFCBD5E1),
+              color: AppTheme.slate300,
             ),
           ),
           const SizedBox(width: 4),
@@ -366,7 +367,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
           else
             Text(
               _markerForItem(i),
-              style: const TextStyle(fontSize: 16, color: Color(0xFF64748B)),
+              style: const TextStyle(fontSize: 16, color: AppTheme.slate500),
             ),
           const SizedBox(width: 8),
           Expanded(
@@ -419,7 +420,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
             icon: const Icon(
               Icons.remove_circle_outline,
               size: 18,
-              color: Color(0xFF64748B),
+              color: AppTheme.slate500,
             ),
             onPressed: () => _removeBulletAndFocus(i),
             tooltip: l10n.d('Verwijder'),

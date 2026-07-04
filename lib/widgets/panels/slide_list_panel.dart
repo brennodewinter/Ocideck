@@ -552,7 +552,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
               Text(
                 '${l10n.d('Geen slides met')} "$query"',
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 12),
+                style: const TextStyle(color: AppTheme.slate400, fontSize: 12),
               ),
             ],
           ),
@@ -744,7 +744,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                         Text(
                           l10n.d('SLIDES'),
                           style: const TextStyle(
-                            color: Color(0xFF94A3B8),
+                            color: AppTheme.slate400,
                             fontSize: 10,
                             fontWeight: FontWeight.w700,
                             letterSpacing: 1.2,
@@ -756,7 +756,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                               ? '$matchCount / ${deck.slides.length}'
                               : '${deck.slides.length}',
                           style: const TextStyle(
-                            color: Color(0xFF64748B),
+                            color: AppTheme.slate500,
                             fontSize: 10,
                           ),
                         ),

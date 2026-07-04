@@ -54,7 +54,7 @@ class _ChartVariantsDialogState extends State<_ChartVariantsDialog> {
               l10n.d(
                 'Deze slides gebruiken dezelfde data, kleuren en titel. Kies met de pijlen de volgorde na de huidige slide.',
               ),
-              style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+              style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
             ),
             const SizedBox(height: 12),
             for (var i = 0; i < _types.length; i++)
@@ -215,7 +215,7 @@ class _ChartColorDialogState extends State<_ChartColorDialog> {
           color: color,
           shape: BoxShape.circle,
           border: Border.all(
-            color: selected ? Colors.black : const Color(0xFFE2E8F0),
+            color: selected ? Colors.black : AppTheme.slate200,
             width: selected ? 3 : 1,
           ),
         ),

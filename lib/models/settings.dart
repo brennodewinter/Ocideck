@@ -1,6 +1,8 @@
 import 'chart.dart' show normalizeChartColor;
+import 'recent_file.dart';
 import 'webdav_settings.dart';
 
+export 'recent_file.dart';
 export 'webdav_settings.dart';
 
 /// Glyph used for unordered (bullet) list markers. [dot] is the classic
@@ -122,6 +124,40 @@ class ThemeProfile {
   ];
 
   static const footerPositions = ['left', 'center', 'right'];
+
+  /// Ingebouwd LibreKAT-profiel: de huisstijl (EU-blauw op wit, EB Garamond,
+  /// gebundeld logo) die als standaard wordt uitgerold. Het logo is een
+  /// `asset:`-pad zodat het op elk platform — ook web — rendert en mee kan in
+  /// pakket-exports.
+  static const libreKat = ThemeProfile(
+    name: 'LibreKAT',
+    slideBackgroundColor: '#FFFFFF',
+    textColor: '#003399',
+    accentColor: '#003399',
+    checklistCheckedColor: '#003399',
+    checklistUncheckedColor: '#DC2626',
+    checklistStrikeThrough: true,
+    bulletMarker: BulletMarker.dot,
+    tableTextColor: '#003399',
+    tableHeaderTextColor: '#FFCC00',
+    tableHeaderBackgroundColor: '#003399',
+    titleBackgroundColor: '#FFFFFF',
+    titleTextColor: '#003399',
+    sectionBackgroundColor: '#FFFFFF',
+    codeBackgroundColor: '#111827',
+    codeTextColor: '#2E7D64',
+    codeHighlightSyntax: true,
+    codeFontFamily: 'monospace',
+    logoPath: 'asset:assets/images/librekat-logo.png',
+    logoPosition: 'bottom-left',
+    logoSize: 96,
+    fontFamily: 'EB Garamond',
+  );
+
+  /// Ingebouwde stijlprofielen voor een verse installatie: LibreKAT voorop
+  /// (en dus de standaardselectie), met het neutrale 'Standaard' ernaast.
+  /// Bestaande installaties behouden hun eigen opgeslagen profielenlijst.
+  static const builtIns = [libreKat, ThemeProfile()];
 
   ThemeProfile copyWith({
     String? name,
@@ -347,8 +383,9 @@ class AppAppearanceProfile {
     surfaceColor: '#FFFFFF',
     textColor: '#1E293B',
     mutedTextColor: '#64748B',
-    panelColor: '#1E2028',
-    panelTextColor: '#E2E8F0',
+    // EU-vlagblauw voor de bovenbalk/panelen (huisstijl), i.p.v. near-black.
+    panelColor: '#003399',
+    panelTextColor: '#FFFFFF',
   );
 
   static const europa = AppAppearanceProfile(
@@ -360,7 +397,8 @@ class AppAppearanceProfile {
     surfaceColor: '#FFFFFF',
     textColor: '#003399',
     mutedTextColor: '#5D6B85',
-    panelColor: '#00266F',
+    // Zelfde EU-vlagblauw als de bovenbalk-keuze in het Basic-profiel.
+    panelColor: '#003399',
     panelTextColor: '#FFFFFF',
   );
 
@@ -547,7 +585,14 @@ class AppSettings {
   /// colours are styling and live here, not in the deck `.md`.
   final List<CockpitColorScheme> cockpitColorSchemes;
   final String selectedCockpitColorSchemeName;
-  final List<String> recentFiles;
+  final List<RecentFile> recentFiles;
+
+  /// Herkomst van remote opgehaalde recente bestanden: lokaal pad → bron
+  /// (Nextcloud-server + pad, of de import-URL). Alleen paden uit
+  /// [recentFiles] staan erin; lokale bestanden ontbreken bewust. De welkom-
+  /// lijst markeert deze vermeldingen met een wolk-badge zodat direct
+  /// zichtbaar is welke presentaties van buiten komen.
+  final Map<String, String> recentFileOrigins;
 
   /// Optioneel vrijgaveplafond voor de classificatie-gate, opgeslagen als
   /// TLP-sleutel (zie `TlpLevelX.key`). `null` = geen plafond, alles mag worden
@@ -598,13 +643,14 @@ class AppSettings {
     this.languageCode = 'nl',
     this.homeDirectory,
     this.exportDirectory,
-    this.themeProfiles = const [ThemeProfile()],
-    this.selectedThemeProfileName = 'Standaard',
+    this.themeProfiles = ThemeProfile.builtIns,
+    this.selectedThemeProfileName = 'LibreKAT',
     this.appAppearanceProfiles = AppAppearanceProfile.builtIns,
-    this.selectedAppAppearanceProfileName = 'Basic',
+    this.selectedAppAppearanceProfileName = 'Europa',
     this.cockpitColorSchemes = CockpitColorScheme.builtIns,
     this.selectedCockpitColorSchemeName = 'Standaard',
     this.recentFiles = const [],
+    this.recentFileOrigins = const {},
     this.maxReleaseExportTlpKey,
     this.minRequiredExportTlpKey,
     this.requireClassificationOnExport = false,
@@ -675,7 +721,8 @@ class AppSettings {
     String? selectedAppAppearanceProfileName,
     List<CockpitColorScheme>? cockpitColorSchemes,
     String? selectedCockpitColorSchemeName,
-    List<String>? recentFiles,
+    List<RecentFile>? recentFiles,
+    Map<String, String>? recentFileOrigins,
     String? maxReleaseExportTlpKey,
     String? minRequiredExportTlpKey,
     bool? requireClassificationOnExport,
@@ -725,6 +772,7 @@ class AppSettings {
       selectedCockpitColorSchemeName:
           selectedCockpitColorSchemeName ?? this.selectedCockpitColorSchemeName,
       recentFiles: recentFiles ?? this.recentFiles,
+      recentFileOrigins: recentFileOrigins ?? this.recentFileOrigins,
       maxReleaseExportTlpKey: clearMaxReleaseExportTlp
           ? null
           : (maxReleaseExportTlpKey ?? this.maxReleaseExportTlpKey),

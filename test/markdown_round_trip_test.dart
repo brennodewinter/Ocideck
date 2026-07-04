@@ -289,6 +289,19 @@ void main() {
       expect(out.bullets2, ['Rechts punt', '\t\tRechts diep']);
     });
 
+    test('twoBullets slide keeps its subtitle', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.twoBullets).copyWith(
+          title: 'Vergelijking',
+          subtitle: 'Een ondertitel',
+          bullets: ['Links'],
+          bullets2: ['Rechts'],
+        ),
+      );
+      expect(out.type, SlideType.twoBullets);
+      expect(out.subtitle, 'Een ondertitel');
+    });
+
     test('twoBullets slide keeps optional column headings', () {
       final out = _roundTrip(
         Slide.create(SlideType.twoBullets).copyWith(
@@ -420,6 +433,21 @@ void main() {
       expect(out.imagePath, 'images/big.png');
       expect(out.imageSize, 70);
       expect(out.imageCaption, 'Foto');
+    });
+
+    test('YouTube embed keeps its source and trim window', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.video).copyWith(
+          title: 'Embed',
+          videoPath: 'https://www.youtube.com/watch?v=abc12345678',
+          videoStartMs: 1500,
+          videoEndMs: 30000,
+        ),
+      );
+      expect(out.type, SlideType.video);
+      expect(out.videoPath, 'https://www.youtube.com/watch?v=abc12345678');
+      expect(out.videoStartMs, 1500);
+      expect(out.videoEndMs, 30000);
     });
 
     test('video slide keeps video and audio with autoplay flags', () {
@@ -1041,6 +1069,35 @@ void main() {
       // No explicit duration: the slide inherits the theme's, so it round-trips
       // as null (no ocideck_timeline_duration comment is written).
       expect(out.timelineAnimationMs, isNull);
+      // No current point marked either: no ocideck_timeline_current comment.
+      expect(out.timelineCurrentIndex, isNull);
+    });
+
+    test('timeline slide keeps the current-point highlight', () {
+      final slide = Slide.create(SlideType.timeline).copyWith(
+        title: 'Projectfasen',
+        bullets: [
+          '2024 :: Start :: Kickoff met het team.',
+          '2025 :: Bouw :: Realisatie in sprints.',
+          '2026 :: Livegang',
+        ],
+        timelineCurrentIndex: 1,
+      );
+      // The comment stores the human-friendly 1-based event number.
+      final markdown = MarkdownService().generateDeck(
+        Deck(title: 'Demo', slides: [slide]),
+      );
+      expect(markdown, contains('<!-- ocideck_timeline_current: 2 -->'));
+      final out = _roundTrip(slide);
+      expect(out.timelineCurrentIndex, 1);
+      // An out-of-range hand-edited number is ignored (fail-safe: no highlight).
+      final hacked = MarkdownService().parseDeck(
+        markdown.replaceFirst(
+          'ocideck_timeline_current: 2',
+          'ocideck_timeline_current: 99',
+        ),
+      );
+      expect(hacked!.slides.single.timelineCurrentIndex, isNull);
     });
   });
 

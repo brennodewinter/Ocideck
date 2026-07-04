@@ -28,12 +28,12 @@ extension _PresenterOverlays on _FullscreenPresenterState {
       decoration: BoxDecoration(
         color: Colors.black.withValues(alpha: 0.82),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF60A5FA), width: 1.5),
+        border: Border.all(color: AppTheme.blue400, width: 1.5),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.south_east, color: Color(0xFF60A5FA), size: 20),
+          const Icon(Icons.south_east, color: AppTheme.blue400, size: 20),
           const SizedBox(width: 10),
           Text(
             '$_typed / $total',
@@ -169,7 +169,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                             child: Text(
                               keys,
                               style: const TextStyle(
-                                color: Color(0xFF60A5FA),
+                                color: AppTheme.blue400,
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -479,7 +479,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
       borderColor = Colors.white;
       borderWidth = 3;
     } else if (isCurrent) {
-      borderColor = const Color(0xFF60A5FA);
+      borderColor = AppTheme.blue400;
       borderWidth = 2;
     } else {
       borderColor = const Color(0xFF3A3A3A);
@@ -553,7 +553,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                   const Icon(
                     Icons.play_arrow_rounded,
                     size: 13,
-                    color: Color(0xFF60A5FA),
+                    color: AppTheme.blue400,
                   ),
                 ],
               ],

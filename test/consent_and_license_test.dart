@@ -12,6 +12,10 @@ void main() {
 
   group('bundled EUPL licence', () {
     test('loads and strips its SPDX/comment header', () async {
+      // Reset: een eerder (gerandomiseerd) gedraaide widgettest kan de memo
+      // in een fake-async-zone gestart hebben; die future completeert hier
+      // nooit meer. Vers laden maakt deze test volgorde-onafhankelijk.
+      PrivacyStatementContent.resetLicenseCacheForTest();
       final text = await PrivacyStatementContent.loadFullLicense();
       // The HTML-comment header (with the SPDX line) is removed…
       expect(text.contains('SPDX-License-Identifier'), isFalse);

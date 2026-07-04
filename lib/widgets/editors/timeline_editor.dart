@@ -36,6 +36,10 @@ class _EventRow {
   final TextEditingController description;
   final FocusNode titleFocus;
 
+  /// Whether this event is the timeline's current point ("you are here").
+  /// Lives on the row (not as an index) so it travels along with reorders.
+  bool current = false;
+
   _EventRow(TimelineEvent e)
     : marker = TextEditingController(text: e.marker),
       title = TextEditingController(text: e.title),
@@ -84,6 +88,10 @@ class _TimelineEditorState extends State<TimelineEditor> {
     _rows = (events.isEmpty ? [const TimelineEvent()] : events)
         .map(_makeRow)
         .toList();
+    final current = widget.slide.timelineCurrentIndex;
+    if (current != null && current >= 0 && current < _rows.length) {
+      _rows[current].current = true;
+    }
   }
 
   _EventRow _makeRow(TimelineEvent e) {
@@ -104,17 +112,37 @@ class _TimelineEditorState extends State<TimelineEditor> {
   }
 
   void _emit() {
-    final events = _rows.map((r) => r.toEvent()).where((e) => !e.isEmpty);
+    // The stored current index counts only the non-empty events (empty rows
+    // are dropped from the bullets), so pair each event with its row's flag
+    // and locate the current one after filtering.
+    final entries = _rows
+        .map((r) => (event: r.toEvent(), current: r.current))
+        .where((x) => !x.event.isEmpty)
+        .toList();
+    final currentIndex = entries.indexWhere((x) => x.current);
     widget.onUpdate(
       widget.slide.copyWith(
         title: _title.text,
-        bullets: timelineEventsToBullets(events.toList()),
+        bullets: timelineEventsToBullets([for (final x in entries) x.event]),
         timelineLayout: _layout,
         timelineReveal: _reveal,
         timelineAnimationMs: _animationOverrideMs,
         clearTimelineAnimation: _animationOverrideMs == null,
+        timelineCurrentIndex: currentIndex >= 0 ? currentIndex : null,
+        clearTimelineCurrent: currentIndex < 0,
       ),
     );
+  }
+
+  void _toggleCurrent(int i) {
+    setState(() {
+      final wasCurrent = _rows[i].current;
+      for (final row in _rows) {
+        row.current = false;
+      }
+      _rows[i].current = !wasCurrent;
+    });
+    _emit();
   }
 
   void _addEvent() {
@@ -216,7 +244,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          border: Border.all(color: const Color(0xFFE2E8F0)),
+          border: Border.all(color: AppTheme.slate200),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -229,7 +257,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
                 child: const Icon(
                   Icons.drag_indicator,
                   size: 16,
-                  color: Color(0xFFCBD5E1),
+                  color: AppTheme.slate300,
                 ),
               ),
             ),
@@ -280,10 +308,23 @@ class _TimelineEditorState extends State<TimelineEditor> {
               ),
             ),
             IconButton(
+              icon: Icon(
+                row.current ? Icons.place : Icons.place_outlined,
+                size: 18,
+                color: row.current ? AppTheme.navy : AppTheme.slate500,
+              ),
+              onPressed: () => _toggleCurrent(i),
+              tooltip: row.current
+                  ? l10n.d('Huidig punt weghalen')
+                  : l10n.d('Markeer als huidig punt'),
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              constraints: const BoxConstraints(minWidth: 28),
+            ),
+            IconButton(
               icon: const Icon(
                 Icons.remove_circle_outline,
                 size: 18,
-                color: Color(0xFF64748B),
+                color: AppTheme.slate500,
               ),
               onPressed: () => _removeEvent(i),
               tooltip: l10n.d('Verwijder'),
@@ -307,7 +348,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
       padding: const EdgeInsets.only(top: 12),
       child: Row(
         children: [
-          const Icon(Icons.timer_outlined, size: 18, color: Color(0xFF64748B)),
+          const Icon(Icons.timer_outlined, size: 18, color: AppTheme.slate500),
           const SizedBox(width: 8),
           Text(
             context.l10n.d('Activatieduur'),
@@ -350,9 +391,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 12,
-                color: _inheritsTheme
-                    ? const Color(0xFF94A3B8)
-                    : const Color(0xFF64748B),
+                color: _inheritsTheme ? AppTheme.slate400 : AppTheme.slate500,
                 fontStyle: _inheritsTheme ? FontStyle.italic : FontStyle.normal,
                 fontWeight: FontWeight.w700,
               ),

@@ -27,6 +27,35 @@ void main() {
     expect(find.byIcon(Icons.settings_outlined), findsOneWidget);
   });
 
+  testWidgets('recent list marks remote-fetched files with a cloud badge', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({
+      'app_consent_accepted': true,
+      'recentFiles': ['/decks/remote.md', '/decks/lokaal.md'],
+      'recentFileOrigins':
+          '{"/decks/remote.md":"https://cloud.example · pres/remote.md"}',
+    });
+    await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+    await tester.pumpAndSettle();
+
+    // Alleen de remote opgehaalde vermelding draagt de wolk-badge (de
+    // Nextcloud-knop links gebruikt hetzelfde icoon, maar zonder tooltip);
+    // de tooltip toont de bron zodat de gebruiker ziet wáár die vandaan komt.
+    final badge = find.descendant(
+      of: find.byType(Tooltip),
+      matching: find.byIcon(Icons.cloud_outlined),
+    );
+    expect(badge, findsOneWidget);
+    // Sinds de metadata-tegel heeft de badge twee Tooltip-ancestors (de
+    // herkomst-tooltip en de tegel-tooltip); de dichtstbijzijnde draagt de
+    // bron.
+    final tooltip = tester.widget<Tooltip>(
+      find.ancestor(of: badge, matching: find.byType(Tooltip)).first,
+    );
+    expect(tooltip.message, 'https://cloud.example · pres/remote.md');
+  });
+
   testWidgets('the only open presentation can be closed', (tester) async {
     await tester.binding.setSurfaceSize(const Size(1600, 1000));
     addTearDown(() => tester.binding.setSurfaceSize(null));

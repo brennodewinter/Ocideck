@@ -2,9 +2,13 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 import '../../models/slide.dart';
+import '../../platform/platform_features.dart';
+import '../../services/duplicate_service.dart';
 import '../../services/file_service.dart';
+import '../../utils/display_path.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
+import '../duplicate_badges.dart';
 
 /// What the open dialog returns: a presentation path and, optionally, the
 /// index of a slide to jump to (when the user picked a search hit).
@@ -49,6 +53,10 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   String? _directory;
   bool _loading = false;
   List<ScannedPresentation> _presentations = const [];
+
+  /// Gevonden presentaties gebundeld op identieke inhoud (de markdown is bij
+  /// het scannen al ingelezen, dus dit is puur rekenwerk).
+  List<DuplicateInfo<ScannedPresentation>> _groups = const [];
   String _query = '';
 
   @override
@@ -66,6 +74,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     if (!mounted) return;
     setState(() {
       _presentations = results;
+      _groups = DuplicateService().groupScanned(results);
       _loading = false;
     });
   }
@@ -123,12 +132,12 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
 
   /// Per visible presentation: the matching slide hits for the current query
   /// (empty when the match was on the file name / title, or no query).
-  List<(ScannedPresentation, List<_SlideHit>)> _visible() {
+  List<(DuplicateInfo<ScannedPresentation>, List<_SlideHit>)> _visible() {
     final q = _query.trim().toLowerCase();
-    final out = <(ScannedPresentation, List<_SlideHit>)>[];
+    final out = <(DuplicateInfo<ScannedPresentation>, List<_SlideHit>)>[];
     if (q.isEmpty) {
-      for (final pres in _presentations) {
-        out.add((pres, const []));
+      for (final info in _groups) {
+        out.add((info, const []));
       }
       return out;
     }
@@ -138,12 +147,15 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     final first = terms.first;
     bool matchesAll(String hay) => terms.every(hay.contains);
 
-    for (final pres in _presentations) {
+    for (final info in _groups) {
+      final pres = info.primary;
       // A file qualifies on its name/title or anywhere in the raw markdown
-      // (front matter, comments, image paths, …) — maximal reach.
+      // (front matter, comments, image paths, …) — maximal reach. Paden van
+      // samengevouwen identieke kopieën zoeken mee.
       final fileHay =
           '${pres.fileName.toLowerCase()} '
           '${pres.deck.title.toLowerCase()} '
+          '${info.identical.map((c) => c.path.toLowerCase()).join(' ')} '
           '${pres.content.toLowerCase()}';
       final fileMatch = matchesAll(fileHay);
       final hits = <_SlideHit>[];
@@ -153,7 +165,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
           hits.add(_SlideHit(i, _snippet(text, first)));
         }
       }
-      if (fileMatch || hits.isNotEmpty) out.add((pres, hits));
+      if (fileMatch || hits.isNotEmpty) out.add((info, hits));
     }
     return out;
   }
@@ -236,7 +248,9 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
     );
   }
 
-  Widget _body(List<(ScannedPresentation, List<_SlideHit>)> visible) {
+  Widget _body(
+    List<(DuplicateInfo<ScannedPresentation>, List<_SlideHit>)> visible,
+  ) {
     final l10n = context.l10n;
     if (_loading) {
       return const Center(child: CircularProgressIndicator());
@@ -264,14 +278,15 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
       itemCount: visible.length,
       separatorBuilder: (_, _) => const Divider(height: 1),
       itemBuilder: (_, i) {
-        final (pres, hits) = visible[i];
+        final (info, hits) = visible[i];
         return _PresentationRow(
-          presentation: pres,
+          info: info,
+          scanRoot: _directory,
           hits: hits,
-          onOpen: () => Navigator.pop(context, OpenSearchResult(pres.path)),
+          onOpen: (path) => Navigator.pop(context, OpenSearchResult(path)),
           onOpenAt: (index) => Navigator.pop(
             context,
-            OpenSearchResult(pres.path, slideIndex: index),
+            OpenSearchResult(info.primary.path, slideIndex: index),
           ),
         );
       },
@@ -283,12 +298,12 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 40, color: const Color(0xFF94A3B8)),
+          Icon(icon, size: 40, color: AppTheme.slate400),
           const SizedBox(height: 12),
           Text(
             message,
             textAlign: TextAlign.center,
-            style: const TextStyle(color: Color(0xFF64748B), fontSize: 13),
+            style: const TextStyle(color: AppTheme.slate500, fontSize: 13),
           ),
         ],
       ),
@@ -303,17 +318,24 @@ class _SlideHit {
 }
 
 class _PresentationRow extends StatelessWidget {
-  final ScannedPresentation presentation;
+  final DuplicateInfo<ScannedPresentation> info;
+
+  /// De gescande map; de rij toont de vindplaats relatief hieraan zodat in
+  /// een boom met submappen zichtbaar is wáár elk bestand staat.
+  final String? scanRoot;
   final List<_SlideHit> hits;
-  final VoidCallback onOpen;
+  final ValueChanged<String> onOpen;
   final ValueChanged<int> onOpenAt;
 
   const _PresentationRow({
-    required this.presentation,
+    required this.info,
+    required this.scanRoot,
     required this.hits,
     required this.onOpen,
     required this.onOpenAt,
   });
+
+  ScannedPresentation get presentation => info.primary;
 
   @override
   Widget build(BuildContext context) {
@@ -327,7 +349,7 @@ class _PresentationRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: onOpen,
+            onTap: () => onOpen(presentation.path),
             borderRadius: BorderRadius.circular(6),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
@@ -343,23 +365,52 @@ class _PresentationRow extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          title,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            color: Color(0xFF1E293B),
-                          ),
-                          overflow: TextOverflow.ellipsis,
+                        Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                title,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF1E293B),
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            if (info.hasIdenticalCopies) ...[
+                              const SizedBox(width: 6),
+                              IdenticalCopiesChip(
+                                otherPaths: [
+                                  for (final copy in info.identical) copy.path,
+                                ],
+                                homeDir: scanRoot,
+                                onOpen: onOpen,
+                              ),
+                            ],
+                          ],
                         ),
-                        Text(
-                          '${presentation.fileName}  ·  ${deck.slides.length} ${l10n.t('slides')}',
-                          style: const TextStyle(
-                            fontSize: 11,
-                            color: Color(0xFF94A3B8),
+                        // Vindplaats relatief aan de gescande map, zodat bij
+                        // submappen zichtbaar is wáár het bestand staat; het
+                        // volledige pad zit in de tooltip.
+                        Tooltip(
+                          message: presentation.path,
+                          waitDuration: const Duration(milliseconds: 400),
+                          child: Text(
+                            '${displayFolder(presentation.path, homeDir: scanRoot, osHome: osHomeDirectory)}'
+                            '  ·  ${presentation.fileName}'
+                            '  ·  ${deck.slides.length} ${l10n.t('slides')}',
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: AppTheme.slate400,
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          overflow: TextOverflow.ellipsis,
                         ),
+                        if (info.hasTitleConflict) ...[
+                          const SizedBox(height: 2),
+                          TitleConflictMarker(modified: presentation.modified),
+                        ],
                       ],
                     ),
                   ),
@@ -401,7 +452,7 @@ class _PresentationRow extends StatelessWidget {
                                 hit.snippet,
                                 style: const TextStyle(
                                   fontSize: 12,
-                                  color: Color(0xFF475569),
+                                  color: AppTheme.slate600,
                                 ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -418,7 +469,7 @@ class _PresentationRow extends StatelessWidget {
                         '+ ${hits.length - 4} ${l10n.d('meer treffer(s)')}',
                         style: const TextStyle(
                           fontSize: 11,
-                          color: Color(0xFF94A3B8),
+                          color: AppTheme.slate400,
                         ),
                       ),
                     ),

@@ -82,6 +82,26 @@ response header rather than relying on the meta tag. Example snippets:
 > A plain `flutter build web` still works, but it falls back to the gstatic CDN
 > and an `unsafe-*` loader — use `make build-web` so the hardening stays pinned.
 
+### Deeplink: app + presentatie in één URL
+
+`https://<host>/?deck=<url>` opent OciDeck én haalt direct de presentatie op
+het meegegeven adres op (URL-encoderen!). Dezelfde importpoort geldt als bij
+"Importeren via URL": veiligheidsscan, marp-controle en de CORS-regels
+hieronder. Voorbeeld:
+
+```
+https://ocideck.librekat.nl/?deck=https%3A%2F%2Fexample.org%2Fdeck.ocideck
+```
+
+### Fetch-hulppunt voor URL-import (optioneel, aanbevolen)
+
+"Importeren via URL" werkt in de browser alleen direct voor bronnen die CORS
+toestaan. Om een deck van **elke** URL te kunnen openen, deploy je naast de
+statische bundel het SSRF-bewaakte fetch-hulppunt: zie
+[`server/fetch-proxy/README.md`](../server/fetch-proxy/README.md). De webapp
+valt automatisch terug op het same-origin pad `/fetch-proxy?url=…`; zonder
+hulppunt blijft alles werken en legt de foutmelding de CORS-beperking uit.
+
 ## Quality gate
 
 ```sh
@@ -94,12 +114,18 @@ Each platform has a `make` target (each only builds on its own OS — Flutter
 cannot cross-compile a desktop bundle):
 
 ```sh
+make build-release  # verified web bundle + macOS .app
 make build-macos     # flutter build macos --release    → build/macos/Build/Products/Release/*.app
 make build-windows   # flutter build windows --release  → build/windows/x64/runner/Release
 make build-linux     # flutter build linux --release    → build/linux/x64/release/bundle
 make build-web       # hardened web bundle              → build/web
 make build-all       # web + this machine's native desktop target
 ```
+
+Use `make build-release` for the normal manual release path on macOS. It runs
+`make check-web` first, so the browser bundle is built with
+`--no-web-resources-cdn --csp` and then verified for the strict CSP,
+self-hosted CanvasKit, and bundled UI font before the macOS app is built.
 
 `make build-all` builds the web bundle plus whichever desktop target matches the
 host OS (web + macOS on a Mac, web + Linux on Linux). Windows and Linux bundles
@@ -133,6 +159,13 @@ machine. Artifacts land under `build/<platform>/`.
 
 - Windows: distribute the contents of `build/windows/x64/runner/Release/` (or
   package with MSIX/an installer).
+- **Windows-bestandsassociaties**: importeer
+  [`windows/file-associations.reg`](../windows/file-associations.reg) (paden
+  aanpassen) of neem de sleutels op in de installer. `.ocideck` opent dan
+  direct met OciDeck; `.md` krijgt OciDeck als "Openen met…"-optie zonder de
+  standaard over te nemen. De app opent het meegegeven pad bij het starten.
+  macOS regelt hetzelfde via `CFBundleDocumentTypes` in `Info.plist`
+  (`.ocideck` = Owner, `.md` = Alternate) — dat zit al in de app-bundel.
 - Linux: distribute `build/linux/x64/release/bundle/` (or package as a
   Flatpak/AppImage/Snap as you prefer).
 

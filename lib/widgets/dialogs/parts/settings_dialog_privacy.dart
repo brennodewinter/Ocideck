@@ -23,7 +23,7 @@ extension _SettingsPrivacy on _SettingsDialogState {
             l10n.d(
               'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.',
             ),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
           value: ref.watch(settingsProvider.select((s) => s.allowRemoteMedia)),
           onChanged: (value) =>
@@ -72,7 +72,7 @@ extension _SettingsPrivacy on _SettingsDialogState {
                 l10n.d(
                   'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.',
                 ),
-                style: const TextStyle(fontSize: 11, color: Color(0xFF475569)),
+                style: const TextStyle(fontSize: 11, color: AppTheme.slate600),
               ),
             ],
           ),

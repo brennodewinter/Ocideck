@@ -11,8 +11,10 @@ import '../../services/export_service.dart';
 import '../../services/quality_export_policy.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../l10n/app_localizations.dart';
+import '../editors/advanced_section.dart';
 import '../../l10n/slide_quality_localization.dart';
 import 'slide_quality_details_dialog.dart';
+import '../../theme/app_theme.dart';
 
 /// Exports the deck by rendering the on-screen slide previews to images and
 /// packing them into a PDF or PPTX (WYSIWYG — the export matches the preview).
@@ -44,6 +46,10 @@ class ExportDialog extends StatefulWidget {
   final bool showClassificationWatermark;
   final ExportDocumentMetadata documentMetadata;
 
+  /// Na een geslaagde export aangeroepen met het formaat-label ("PDF",
+  /// "PPTX", "HTML") — bijv. om het bij de recente bestanden te noteren.
+  final void Function(String formatLabel)? onExported;
+
   const ExportDialog({
     super.key,
     required this.deckPath,
@@ -61,6 +67,7 @@ class ExportDialog extends StatefulWidget {
     this.organization = '',
     this.showClassificationWatermark = false,
     this.documentMetadata = const ExportDocumentMetadata(),
+    this.onExported,
   });
 
   static Future<void> show(
@@ -81,6 +88,7 @@ class ExportDialog extends StatefulWidget {
     String organization = '',
     bool showClassificationWatermark = false,
     ExportDocumentMetadata documentMetadata = const ExportDocumentMetadata(),
+    void Function(String formatLabel)? onExported,
   }) {
     return showDialog(
       context: context,
@@ -101,6 +109,7 @@ class ExportDialog extends StatefulWidget {
         organization: organization,
         showClassificationWatermark: showClassificationWatermark,
         documentMetadata: documentMetadata,
+        onExported: onExported,
       ),
     );
   }
@@ -270,6 +279,7 @@ class _ExportDialogState extends State<ExportDialog> {
     );
 
     if (!mounted) return;
+    if (r.success) widget.onExported?.call(format.label);
     setState(() {
       _loading = false;
       _success = r.success;
@@ -347,7 +357,7 @@ class _ExportDialogState extends State<ExportDialog> {
         children: [
           Text(
             _phase,
-            style: const TextStyle(fontSize: 13, color: Color(0xFF334155)),
+            style: const TextStyle(fontSize: 13, color: AppTheme.slate700),
           ),
           const SizedBox(height: 12),
           ClipRRect(
@@ -358,7 +368,7 @@ class _ExportDialogState extends State<ExportDialog> {
             const SizedBox(height: 8),
             Text(
               counter,
-              style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+              style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
             ),
           ],
         ],
@@ -432,7 +442,7 @@ class _ExportDialogState extends State<ExportDialog> {
           Text(
             formatQualityExportReason(l10n, widget.qualityResult),
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+            style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
           ),
           const SizedBox(height: 12),
           OutlinedButton.icon(
@@ -455,48 +465,17 @@ class _ExportDialogState extends State<ExportDialog> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (widget.qualityResult.hasIssues) _qualityBanner(l10n),
+        // Alle gates staan open en er is niets te melden: zeg dat dan ook,
+        // zodat de laatste stap met vertrouwen begint in plaats van stilte.
+        if (widget.qualityResult.hasIssues)
+          _qualityBanner(l10n)
+        else
+          _readyBanner(l10n),
         Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
             l10n.t('exportIntro'),
-            style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 6),
-          child: Text(
-            l10n.t('imageQualityPdf'),
-            style: const TextStyle(
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF475569),
-            ),
-          ),
-        ),
-        SegmentedButton<bool>(
-          segments: [
-            ButtonSegment(
-              value: false,
-              icon: const Icon(Icons.image_outlined),
-              label: Text(l10n.t('normal')),
-            ),
-            ButtonSegment(
-              value: true,
-              icon: const Icon(Icons.compress),
-              label: Text(l10n.t('compressed')),
-            ),
-          ],
-          selected: {_compress},
-          onSelectionChanged: (s) => setState(() => _compress = s.first),
-          showSelectedIcon: false,
-          style: const ButtonStyle(visualDensity: VisualDensity.compact),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 4, bottom: 8),
-          child: Text(
-            _compress ? l10n.t('compressedHelp') : l10n.t('losslessHelp'),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
           ),
         ),
         _exportButton(
@@ -522,10 +501,70 @@ class _ExportDialogState extends State<ExportDialog> {
             l10n.d(
               'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.',
             ),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
+        const SizedBox(height: 8),
+        // De formaatknoppen zijn de hoofdactie; de beeldkwaliteit is een
+        // verfijning en staat daarom achter een inklapbare kop (open zodra
+        // er gecomprimeerd wordt, zodat de keuze zichtbaar blijft).
+        AdvancedSection(
+          title: l10n.t('imageQualityPdf'),
+          initiallyExpanded: _compress,
+          children: [
+            SegmentedButton<bool>(
+              segments: [
+                ButtonSegment(
+                  value: false,
+                  icon: const Icon(Icons.image_outlined),
+                  label: Text(l10n.t('normal')),
+                ),
+                ButtonSegment(
+                  value: true,
+                  icon: const Icon(Icons.compress),
+                  label: Text(l10n.t('compressed')),
+                ),
+              ],
+              selected: {_compress},
+              onSelectionChanged: (s) => setState(() => _compress = s.first),
+              showSelectedIcon: false,
+              style: const ButtonStyle(visualDensity: VisualDensity.compact),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: Text(
+                _compress ? l10n.t('compressedHelp') : l10n.t('losslessHelp'),
+                style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
+              ),
+            ),
+          ],
+        ),
       ],
+    );
+  }
+
+  Widget _readyBanner(AppLocalizations l10n) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      decoration: BoxDecoration(
+        color: const Color(0xFFECFDF5),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: const Color(0xFFA7F3D0)),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.task_alt, size: 16, color: Color(0xFF047857)),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              '${l10n.d('Klaar voor export')} — '
+              '${l10n.d('Geen kwaliteitsproblemen gevonden')}',
+              style: const TextStyle(fontSize: 11, color: Color(0xFF047857)),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -547,7 +586,7 @@ class _ExportDialogState extends State<ExportDialog> {
         ? Colors.red.shade700
         : hasWarnings
         ? const Color(0xFF92400E)
-        : const Color(0xFF475569);
+        : AppTheme.slate600;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),

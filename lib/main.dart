@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app.dart';
+import 'platform/launch_files.dart';
 import 'platform/native_window.dart';
 import 'utils/log.dart';
 import 'widgets/presentation/audience_window.dart';
@@ -25,6 +26,13 @@ void main(List<String> args) {
       final map = Map<String, dynamic>.from(parsed as Map);
       runApp(AudienceWindowApp(args: map));
       return;
+    }
+
+    // Windows/Linux: een bestandsassociatie start de app met het pad als
+    // argument. Bewaar het; de shell opent het bij de eerste frame (macOS
+    // levert open-events via het ocideck/open_file-kanaal, niet via args).
+    if (!kIsWeb) {
+      pendingLaunchFiles.addAll(args.where(looksLikeDeckLaunchArg));
     }
 
     await configureNativeWindow();

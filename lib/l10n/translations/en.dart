@@ -83,6 +83,12 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Note: the web version can only fetch from servers that allow it (CORS).',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Packages (.ocideck) are not yet supported in the web version.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Only .md presentations can be opened in the web version.',
   'Geen': 'None',
   'Nieuw': 'New',
   'Verwijderen': 'Delete',
@@ -502,6 +508,19 @@ const _dutchSourceEn = {
   'Kopiëren naar ander deck': 'Copy to another deck',
   'Weer tonen': 'Show again',
   'Selectie opheffen': 'Clear selection',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identical copies',
+  'Zelfde titel, andere inhoud': 'Same title, different content',
+  'Dubbele presentaties opruimen': 'Clean up duplicate presentations',
+  'Naar de prullenbak verplaatst:': 'Moved to the trash:',
+  'Kon niet naar de prullenbak verplaatsen.': 'Could not move to the trash.',
+  'Geen dubbele presentaties gevonden.': 'No duplicate presentations found.',
+  'Laatste kopie blijft behouden': 'The last copy is kept',
+  'Nog geopend in een tabblad': 'Still open in a tab',
+  'Naar prullenbak': 'Move to trash',
+  'Deze presentatie staat ook op een andere plek:':
+      'This presentation also exists somewhere else:',
+  'Opruimen…': 'Clean up…',
 };
 
 const _dutchSourceAddEn = {
@@ -679,6 +698,8 @@ const _dutchSourceAddEn = {
   'Verticaal': 'Vertical',
   'Animatie': 'Animation',
   'Intekenen bij openen': 'Draw in on open',
+  'Markeer als huidig punt': 'Mark as current point',
+  'Huidig punt weghalen': 'Remove current point',
   'Stap voor stap': 'Step by step',
   'Geen animatie': 'No animation',
   'Animatiesnelheid': 'Animation speed',
@@ -737,6 +758,13 @@ const _dutchSourceAddEn = {
       'The statement above is true or false; choose which.',
   'Selecteer alle juiste antwoorden': 'Select all correct answers',
   'Bevestig': 'Confirm',
+  'Volgorde': 'Ordering',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Put the answers in the correct order here. When presenting they are shown shuffled.',
+  'Geef minstens twee antwoorden op.': 'Provide at least two answers.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Tap the answers in the correct order',
+  'Jouw volgorde': 'Your order',
   'Het juiste antwoord': 'The correct answer',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'The image is shown full-screen as a background. Use the blur when the title needs more calm or contrast.',
@@ -1188,4 +1216,119 @@ const _dutchSourceAddEn = {
   'Herstelbestanden nu wissen': 'Wipe recovery files now',
   'Er waren geen herstelbestanden.': 'There were no recovery files.',
   'herstelbestand(en) gewist.': 'recovery file(s) wiped.',
+  'Klaar voor export': 'Ready to export',
+  'kwaliteitswaarschuwing(en)': 'quality warning(s)',
+  'Nog opslaan nodig': 'Save needed first',
+  'TLP blokkeert export': 'TLP blocks export',
+  'Kwaliteit blokkeert export': 'Quality blocks export',
+  'Verhoog contrast': 'Increase contrast',
+  'Open kleurinstellingen': 'Open color settings',
+  'Voeg alt-tekst toe': 'Add alt text',
+  'Voeg beschrijving toe': 'Add description',
+  'Zinnen naar losse bullets': 'Sentences to separate bullets',
+  'Laatst geëxporteerd als': 'Last exported as',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Determines colors, font and logo. Can be changed later via the presentation properties or settings.',
+  'Stijlprofielen beheren…': 'Manage style profiles…',
+  'Geavanceerd': 'Advanced',
+  'Knippen en audio': 'Trimming and audio',
+  'Bereik en kleurzones': 'Range and color zones',
+  'Leeg deck': 'Empty deck',
+  'Korte briefing': 'Short briefing',
+  'Status-briefing': 'Status briefing',
+  'Projectstart / kick-off': 'Project start / kick-off',
+  'Voorbespreking communicatie': 'Communications pre-brief',
+  'Projecttijdlijn': 'Project timeline',
+  'Informatiebeveiliging: RASCI / TVB':
+      'Information security: RASCI / responsibilities',
+  'Security-takenplan': 'Security task plan',
+  'Certificering voortgang': 'Certification progress',
+  'Training / workshop': 'Training / workshop',
+  'Rapportage': 'Report',
+  'Onderzoeksverhaal': 'Research narrative',
+  'Technische uitleg': 'Technical explainer',
+  'Interactieve quiz': 'Interactive quiz',
+  'Alleen een titelpagina en een agenda.': 'Just a title page and an agenda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situation, facts and requested decision in six slides.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Status dashboard, progress per workstream and decisions.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Why, goal, scope, stakeholders and timeline.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Audiences, key message, channels and spokespersons.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Phases, milestones, dependencies and decision points.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Record roles, a RASCI matrix and task agreements.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Tasks, priorities, owners and evidence.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Progress per domain, controls and audit planning.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Learning goals, key concepts, an exercise and a quiz question.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Summary, KPI dashboard, trend and actions.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Question, method, timeline of findings and conclusions.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architecture, components, a code example and a checklist.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Three question types with explanation and debrief.',
+  'Sjabloon': 'Template',
+  'Post-incident review / lessons learned':
+      'Post-incident review / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Data breach / privacy incident assessment',
+  'DPIA / privacy impact assessment': 'DPIA / privacy impact assessment',
+  'Risicoanalyse / risk register': 'Risk analysis / risk register',
+  'Business continuity / DR-test': 'Business continuity / DR test',
+  'Tabletop-oefening / crisisoefening': 'Tabletop exercise / crisis drill',
+  'BOB-crisisrapportage': 'BOB crisis report',
+  'CAB / release readiness': 'CAB / release readiness',
+  'Stuurgroep / project board update':
+      'Steering committee / project board update',
+  'Auditbevindingen en opvolging': 'Audit findings and follow-up',
+  'Leveranciersbeoordeling / vendor risk': 'Supplier assessment / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Architecture decision / ADR presentation',
+  'Beleid uitrollen / implementatieplan':
+      'Policy rollout / implementation plan',
+  'Overdracht / handover': 'Handover / transition',
+  'Retrospective / teamverbetering': 'Retrospective / team improvement',
+  'PPL Vluchtvoorbereiding': 'PPL flight preparation',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Timeline, impact, causes and improvement actions after an incident.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Assess data, risk, notification duty and communication.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Processing, legal basis, privacy risks and measures.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Record risks, likelihood, impact, measures and owners.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scenario, recovery objectives, test findings and improvement points.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scenario, injects, decisions, observations and evaluation.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Lead a crisis team through situational awareness, assessment and decision-making, with a live situation picture, information requests, dilemmas, a decision log and an action list.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Change, impact, tests, rollback, communication and go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Progress, planning, budget, risks and decisions requested.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Findings, root cause, measures, evidence and status.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Service, data, dependency, requirements, risks and decision.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Context, options, trade-offs, decision and consequences.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Audience, planning, communication, training and adoption.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Status, open actions, risks, contacts and first steps.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Facts, patterns, start-stop-continue and improvement actions.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Prepare a VFR flight with route, weather, NOTAMs, performance, weight & balance, fuel, alternates and personal go/no-go checks.',
+  'Zoek een sjabloon': 'Search for a template',
+  'Geen sjablonen gevonden': 'No templates found',
 };

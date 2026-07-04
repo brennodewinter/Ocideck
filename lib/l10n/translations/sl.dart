@@ -83,6 +83,12 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Opomba: spletna različica lahko prenaša le s strežnikov, ki to dovoljujejo (CORS).',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Paketi (.ocideck) v spletni različici še niso podprti.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'V spletni različici je mogoče odpreti samo predstavitve .md.',
   'Geen': 'Brez',
   'Nieuw': 'Nova',
   'Verwijderen': 'Izbriši',
@@ -672,6 +678,8 @@ const _dutchSourceSl = {
   'Verticaal': 'Navpično',
   'Animatie': 'Animacija',
   'Intekenen bij openen': 'Vrisovanje ob odprtju',
+  'Markeer als huidig punt': 'Označi kot trenutno točko',
+  'Huidig punt weghalen': 'Odstrani trenutno točko',
   'Stap voor stap': 'Korak za korakom',
   'Geen animatie': 'Brez animacije',
   'Animatiesnelheid': 'Hitrost animacije',
@@ -730,6 +738,13 @@ const _dutchSourceSl = {
       'Trditev zgoraj je pravilna ali napačna; izberite, katero.',
   'Selecteer alle juiste antwoorden': 'Izberite vse pravilne odgovore',
   'Bevestig': 'Potrdi',
+  'Volgorde': 'Vrstni red',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Tukaj razvrstite odgovore v pravilni vrstni red. Pri predstavitvi so prikazani premešani.',
+  'Geef minstens twee antwoorden op.': 'Navedite vsaj dva odgovora.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Tapnite odgovore v pravilnem vrstnem redu',
+  'Jouw volgorde': 'Vaš vrstni red',
   'Het juiste antwoord': 'Pravilni odgovor',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Slika se prikaže čez celoten zaslon kot ozadje. Uporabite zameglitev, kadar naslov potrebuje več umirjenosti ali kontrasta.',
@@ -1178,4 +1193,130 @@ const _dutchSourceSl = {
   'Herstelbestanden nu wissen': 'Izbriši obnovitvene datoteke zdaj',
   'Er waren geen herstelbestanden.': 'Obnovitvenih datotek ni bilo.',
   'herstelbestand(en) gewist.': 'obnovitvenih datotek izbrisanih.',
+  'Klaar voor export': 'Pripravljeno za izvoz',
+  'kwaliteitswaarschuwing(en)': 'opozorilo(-a) o kakovosti',
+  'Nog opslaan nodig': 'Najprej je treba shraniti',
+  'TLP blokkeert export': 'TLP blokira izvoz',
+  'Kwaliteit blokkeert export': 'Kakovost blokira izvoz',
+  'Verhoog contrast': 'Povečaj kontrast',
+  'Open kleurinstellingen': 'Odpri nastavitve barv',
+  'Voeg alt-tekst toe': 'Dodaj nadomestno besedilo',
+  'Voeg beschrijving toe': 'Dodaj opis',
+  'Zinnen naar losse bullets': 'Stavki v ločene alineje',
+  'Laatst geëxporteerd als': 'Nazadnje izvoženo kot',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Določa barve, pisavo in logotip. Pozneje ga lahko spremenite v lastnostih predstavitve ali nastavitvah.',
+  'Stijlprofielen beheren…': 'Upravljaj slogovne profile…',
+  'Geavanceerd': 'Napredno',
+  'Knippen en audio': 'Rezanje in zvok',
+  'Bereik en kleurzones': 'Obseg in barvna območja',
+  'Leeg deck': 'Prazen komplet',
+  'Korte briefing': 'Kratek brifing',
+  'Status-briefing': 'Statusni brifing',
+  'Projectstart / kick-off': 'Začetek projekta / kick-off',
+  'Voorbespreking communicatie': 'Predhodni posvet o komunikaciji',
+  'Projecttijdlijn': 'Časovnica projekta',
+  'Informatiebeveiliging: RASCI / TVB': 'Informacijska varnost: RASCI / TVB',
+  'Security-takenplan': 'Načrt varnostnih nalog',
+  'Certificering voortgang': 'Napredek certificiranja',
+  'Training / workshop': 'Usposabljanje / delavnica',
+  'Rapportage': 'Poročilo',
+  'Onderzoeksverhaal': 'Raziskovalna zgodba',
+  'Technische uitleg': 'Tehnična razlaga',
+  'Interactieve quiz': 'Interaktivni kviz',
+  'Alleen een titelpagina en een agenda.': 'Samo naslovna stran in dnevni red.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Stanje, dejstva in zahtevana odločitev na šestih prosojnicah.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Statusna nadzorna plošča, napredek po delovnih tokovih in odločitve.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Zakaj, cilj, obseg, deležniki in časovnica.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Ciljne skupine, ključno sporočilo, kanali in govorci.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Faze, mejniki, odvisnosti in odločitvene točke.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Zapis vlog, matrike RASCI in dogovorov o nalogah.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Naloge, prioritete, lastniki in dokazila.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Napredek po domenah, kontrole in načrtovanje revizij.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Učni cilji, ključni koncepti, vaja in kvizno vprašanje.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Povzetek, nadzorna plošča KPI, trend in ukrepi.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Vprašanje, metoda, časovnica ugotovitev in sklepi.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arhitektura, komponente, primer kode in kontrolni seznam.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Tri oblike vprašanj z razlago in zaključno razpravo.',
+  'Sjabloon': 'Predloga',
+  'Post-incident review / lessons learned':
+      'Pregled po incidentu / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Ocena uhajanja podatkov / incidenta zasebnosti',
+  'DPIA / privacy impact assessment': 'DPIA / ocena učinka na zasebnost',
+  'Risicoanalyse / risk register': 'Analiza tveganj / register tveganj',
+  'Business continuity / DR-test': 'Neprekinjeno poslovanje / test DR',
+  'Tabletop-oefening / crisisoefening': 'Vaja tabletop / krizna vaja',
+  'BOB-crisisrapportage': 'Krizno poročilo BOB',
+  'CAB / release readiness': 'CAB / pripravljenost na izdajo',
+  'Stuurgroep / project board update':
+      'Usmerjevalni odbor / posodobitev za project board',
+  'Auditbevindingen en opvolging': 'Revizijske ugotovitve in nadaljnji ukrepi',
+  'Leveranciersbeoordeling / vendor risk': 'Ocena dobavitelja / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Arhitekturna odločitev / predstavitev ADR',
+  'Beleid uitrollen / implementatieplan': 'Uvajanje politike / izvedbeni načrt',
+  'Overdracht / handover': 'Predaja / handover',
+  'Retrospective / teamverbetering': 'Retrospektiva / izboljševanje ekipe',
+  'PPL Vluchtvoorbereiding': 'Priprava na let PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Časovnica, vpliv, vzroki in izboljševalni ukrepi po incidentu.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Ocenite podatke, tveganje, obveznost prijave in komunikacijo.',
+  "Verwerking, grondslag, privacyrisico's en maatregelen.":
+      'Obdelava, pravna podlaga, tveganja za zasebnost in ukrepi.',
+  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
+      'Zabeležite tveganja, verjetnost, vpliv, ukrepe in lastnike.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scenarij, cilji obnovitve, ugotovitve testov in točke za izboljšave.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scenarij, injects, odločitve, opažanja in evalvacija.',
+  "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
+      'Vodite krizno ekipo skozi oblikovanje slike stanja, presojo in odločanje, z živo sliko stanja, informacijskimi vprašanji, dilemami, dnevnikom odločitev in seznamom ukrepov.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Sprememba, vpliv, testi, rollback, komunikacija in go/no-go.',
+  "Voortgang, planning, budget, risico's en besluiten gevraagd.":
+      'Napredek, načrtovanje, proračun, tveganja in zahtevane odločitve.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Ugotovitve, root cause, ukrepi, dokazi in status.',
+  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
+      'Storitev, podatki, odvisnosti, zahteve, tveganja in odločitev.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontekst, možnosti, trade-offs, odločitev in posledice.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Ciljna skupina, načrtovanje, komunikacija, usposabljanje in sprejetje.',
+  "Status, open acties, risico's, contacten en eerste stappen.":
+      'Status, odprti ukrepi, tveganja, kontakti in prvi koraki.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Dejstva, vzorci, start-stop-continue in izboljševalni ukrepi.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Pripravite let VFR s potjo, vremenom, NOTAM-i, zmogljivostmi, weight & balance, gorivom, nadomestnimi letališči in osebnimi preverjanji go/no-go.',
+  'Zoek een sjabloon': 'Poišči predlogo',
+  'Geen sjablonen gevonden': 'Ni najdenih predlog',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identične kopije',
+  'Zelfde titel, andere inhoud': 'Isti naslov, drugačna vsebina',
+  'Dubbele presentaties opruimen': 'Počisti podvojene predstavitve',
+  'Naar de prullenbak verplaatst:': 'Premaknjeno v smetnjak:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Ni bilo mogoče premakniti v smetnjak.',
+  'Geen dubbele presentaties gevonden.': 'Ni najdenih podvojenih predstavitev.',
+  'Laatste kopie blijft behouden': 'Zadnja kopija se ohrani',
+  'Nog geopend in een tabblad': 'Še vedno odprta v zavihku',
+  'Naar prullenbak': 'V smetnjak',
+  'Deze presentatie staat ook op een andere plek:':
+      'Ta predstavitev obstaja tudi na drugem mestu:',
 };

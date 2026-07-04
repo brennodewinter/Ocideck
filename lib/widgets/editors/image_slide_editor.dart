@@ -26,14 +26,14 @@ class ImageSlideEditor extends StatefulWidget {
   State<ImageSlideEditor> createState() => _ImageSlideEditorState();
 }
 
-class _ImageSlideEditorState extends State<ImageSlideEditor> {
+class _ImageSlideEditorState extends State<ImageSlideEditor>
+    with EditorTextControllers {
   late final TextEditingController _title;
 
   @override
   void initState() {
     super.initState();
-    _title = TextEditingController(text: widget.slide.title);
-    _title.addListener(_emit);
+    _title = newController(widget.slide.title, _emit);
   }
 
   void _emit() => widget.onUpdate(widget.slide.copyWith(title: _title.text));
@@ -69,12 +69,6 @@ class _ImageSlideEditorState extends State<ImageSlideEditor> {
     if (path != null) {
       _setImage(path);
     }
-  }
-
-  @override
-  void dispose() {
-    _title.dispose();
-    super.dispose();
   }
 
   @override

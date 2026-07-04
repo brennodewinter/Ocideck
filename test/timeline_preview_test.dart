@@ -195,6 +195,47 @@ void main() {
     }
   });
 
+  testWidgets(
+    'the current point takes over the highlight from the last event',
+    (tester) async {
+      BoxDecoration cardDecoration(int i) {
+        final container = tester.widget<Container>(
+          find
+              .descendant(
+                of: find.byKey(ValueKey('timeline-card-$i')),
+                matching: find.byType(Container),
+              )
+              .first,
+        );
+        return container.decoration! as BoxDecoration;
+      }
+
+      // Without a current point the last card carries the subtle emphasis.
+      await tester.pumpWidget(_host(_timeline()));
+      await tester.pump();
+      expect(cardDecoration(3).border!.top.width, 1.6);
+      expect(cardDecoration(1).border!.top.width, 1.0);
+
+      // Marking event 2 as current moves the (stronger) highlight there.
+      await tester.pumpWidget(
+        _host(_timeline().copyWith(timelineCurrentIndex: 1)),
+      );
+      await tester.pump();
+      expect(cardDecoration(1).border!.top.width, 2.0);
+      expect(cardDecoration(1).boxShadow, isNotNull);
+      expect(cardDecoration(3).border!.top.width, 1.0);
+
+      // A stale index beyond the event list highlights nothing extra: the last
+      // card keeps its default emphasis.
+      await tester.pumpWidget(
+        _host(_timeline().copyWith(timelineCurrentIndex: 9)),
+      );
+      await tester.pump();
+      expect(cardDecoration(3).border!.top.width, 1.6);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
   testWidgets('empty timeline renders just the title without crashing', (
     tester,
   ) async {

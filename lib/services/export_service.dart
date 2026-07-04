@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:isolate';
@@ -5,6 +6,8 @@ import 'dart:typed_data';
 import 'dart:ui' show Locale;
 
 import 'package:archive/archive.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:image/image.dart' as img;
 import 'package:path/path.dart' as p;
 import 'package:pdf/pdf.dart';
@@ -14,6 +17,7 @@ import '../l10n/app_localizations.dart';
 import '../l10n/slide_quality_localization.dart';
 import '../utils/log.dart';
 import '../utils/user_facing_error.dart';
+import '../utils/atomic_file.dart';
 import '../models/deck.dart';
 import '../models/settings.dart';
 import 'classification_enforcement_policy.dart';
@@ -161,7 +165,6 @@ class ExportService {
         '$prefix${p.basenameWithoutExtension(deckPath)}$compactSuffix${format.extension}';
     final outputPath = p.join(dir, fileName);
     try {
-      await Directory(dir).create(recursive: true);
       final Uint8List bytes;
       switch (format) {
         case ExportFormat.pdf:
@@ -172,7 +175,7 @@ class ExportService {
             compress: compress,
           );
         case ExportFormat.pptx:
-          bytes = await Isolate.run(
+          bytes = await _offload(
             () => _buildPptx(
               images,
               metadata: docMeta,
@@ -193,7 +196,16 @@ class ExportService {
             ),
           );
       }
-      await File(outputPath).writeAsBytes(bytes, flush: true);
+      if (kIsWeb) {
+        // Web: geen bestandssysteem — file_picker maakt van de bytes een
+        // browser-download (Blob + anker). De bestandsnaam is het resultaat.
+        await FilePicker.saveFile(fileName: fileName, bytes: bytes);
+        return ExportResult.ok(fileName);
+      }
+      await Directory(dir).create(recursive: true);
+      // Atomair: exporteren over een bestaand bestand mag dat bij een crash
+      // niet half-geschreven achterlaten.
+      await writeBytesAtomic(File(outputPath), bytes);
       return ExportResult.ok(outputPath);
     } catch (e) {
       // Technische details naar het log; de gebruiker krijgt een korte,
@@ -202,6 +214,14 @@ class ExportService {
       const l10n = AppLocalizations(Locale('nl'));
       return ExportResult.fail(userFacingError(l10n, e));
     }
+  }
+
+  /// Zware bouwstappen draaien op desktop in een eigen isolate zodat de UI
+  /// responsief blijft; op web bestaan isolates niet en draait dezelfde stap
+  /// op de main thread — de export duurt daar merkbaar, maar werkt.
+  static Future<R> _offload<R>(FutureOr<R> Function() body) {
+    if (kIsWeb) return Future.sync(body);
+    return Isolate.run(body);
   }
 
   // ── PDF ───────────────────────────────────────────────────────────────────
@@ -214,7 +234,7 @@ class ExportService {
     required String fallbackTitle,
     bool compress = false,
   }) {
-    return Isolate.run(() async {
+    return _offload(() async {
       final doc = pw.Document(
         title: metadata.displayTitle(fallbackTitle),
         author: metadata.documentAuthor,

@@ -273,7 +273,7 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
             hits.length >= _maxResults
                 ? '${l10n.d('Eerste')} $_maxResults ${l10n.d('treffers — verfijn je zoekopdracht')}'
                 : '${hits.length} ${l10n.d('treffer(s)')}',
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
         Expanded(
@@ -301,12 +301,12 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 40, color: const Color(0xFF94A3B8)),
+          Icon(icon, size: 40, color: AppTheme.slate400),
           const SizedBox(height: 12),
           Text(
             message,
             textAlign: TextAlign.center,
-            style: const TextStyle(color: Color(0xFF64748B), fontSize: 13),
+            style: const TextStyle(color: AppTheme.slate500, fontSize: 13),
           ),
         ],
       ),
@@ -342,7 +342,7 @@ class _SlideHitCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
               border: Border.all(
-                color: added ? AppTheme.accent : const Color(0xFFCBD5E1),
+                color: added ? AppTheme.accent : AppTheme.slate300,
                 width: added ? 2 : 1,
               ),
             ),
@@ -362,7 +362,7 @@ class _SlideHitCard extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           '$sourceName · ${l10n.d('slide')} ${hit.slideIndex + 1}',
-          style: const TextStyle(fontSize: 10.5, color: Color(0xFF94A3B8)),
+          style: const TextStyle(fontSize: 10.5, color: AppTheme.slate400),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),

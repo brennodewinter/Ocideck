@@ -85,6 +85,12 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Nota: versio interretialis solum a servis id permittentibus accersere potest (CORS).',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Fasciculi (.ocideck) in versione interretiali nondum sustinentur.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'In versione interretiali solae praesentationes .md aperiri possunt.',
   'Geen': 'Nullum',
   'Nieuw': 'Novum',
   'Verwijderen': 'Delere',
@@ -680,6 +686,8 @@ const _dutchSourceLa = {
   'Verticaal': 'Verticaliter',
   'Animatie': 'Animatio',
   'Intekenen bij openen': 'Delineare in apertione',
+  'Markeer als huidig punt': 'Punctum praesens notare',
+  'Huidig punt weghalen': 'Punctum praesens removere',
   'Stap voor stap': 'Gradatim',
   'Geen animatie': 'Nulla animatio',
   'Animatiesnelheid': 'Celeritas animationis',
@@ -738,6 +746,12 @@ const _dutchSourceLa = {
       'Enuntiatio supra vera aut falsa est; elige utrum.',
   'Selecteer alle juiste antwoorden': 'Selige omnia responsa recta',
   'Bevestig': 'Confirma',
+  'Volgorde': 'Ordo',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Responsa hic in ordinem rectum dispone. In monstrando permixta ostenduntur.',
+  'Geef minstens twee antwoorden op.': 'Praebe saltem duo responsa.',
+  'Tik de antwoorden aan in de juiste volgorde': 'Responsa ordine recto tange',
+  'Jouw volgorde': 'Ordo tuus',
   'Het juiste antwoord': 'Responsum rectum',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Imago tota per schema ut fundus ostenditur. Utere caligine cum titulus plus quietis aut contrarii eget.',
@@ -1186,4 +1200,136 @@ const _dutchSourceLa = {
   'Herstelbestanden nu wissen': 'Plicas recuperationis nunc dele',
   'Er waren geen herstelbestanden.': 'Nullae plicae recuperationis erant.',
   'herstelbestand(en) gewist.': 'plicae recuperationis deletae.',
+  'Klaar voor export': 'Paratum ad exportandum',
+  'kwaliteitswaarschuwing(en)': 'monitum(a) qualitatis',
+  'Nog opslaan nodig': 'Primum servandum est',
+  'TLP blokkeert export': 'TLP exportationem impedit',
+  'Kwaliteit blokkeert export': 'Qualitas exportationem impedit',
+  'Verhoog contrast': 'Contrarietatem auge',
+  'Open kleurinstellingen': 'Aperi colorum optiones',
+  'Voeg alt-tekst toe': 'Adde textum alternum',
+  'Voeg beschrijving toe': 'Adde descriptionem',
+  'Zinnen naar losse bullets': 'Sententiae in puncta separata',
+  'Laatst geëxporteerd als': 'Postremum exportatum ut',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Colores, litteras et insigne statuit. Postea per proprietates monstrationis aut optiones mutari potest.',
+  'Stijlprofielen beheren…': 'Formas styli administrare…',
+  'Geavanceerd': 'Provectiora',
+  'Knippen en audio': 'Sectio et sonus',
+  'Bereik en kleurzones': 'Ambitus et zonae colorum',
+  'Leeg deck': 'Acervus vacuus',
+  'Korte briefing': 'Instructio brevis',
+  'Status-briefing': 'Instructio status',
+  'Projectstart / kick-off': 'Initium proiecti / kick-off',
+  'Voorbespreking communicatie': 'Colloquium praevium communicationis',
+  'Projecttijdlijn': 'Linea temporis proiecti',
+  'Informatiebeveiliging: RASCI / TVB': 'Securitas informationis: RASCI / TVB',
+  'Security-takenplan': 'Consilium operum securitatis',
+  'Certificering voortgang': 'Progressus certificationis',
+  'Training / workshop': 'Exercitatio / officina',
+  'Rapportage': 'Relatio',
+  'Onderzoeksverhaal': 'Narratio investigationis',
+  'Technische uitleg': 'Explicatio technica',
+  'Interactieve quiz': 'Quiz interactivum',
+  'Alleen een titelpagina en een agenda.': 'Solum pagina tituli et agenda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situatio, facta et decretum petitum in sex paginis.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Tabula status, progressus per fluxum operis et decreta.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Cur, propositum, ambitus, participes et linea temporis.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Auditores destinati, nuntius praecipuus, canales et locutio publica.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Phases, lapides miliarii, dependentiae et momenta decernendi.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Partes, matricem RASCI et pacta operum consignare.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Opera, prioritates, domini et documenta probantia.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Progressus per dominium, moderamina et consilium inspectionis.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Proposita discendi, notiones praecipuae, exercitium et quaestio quiz.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Summarium, tabula KPI, inclinatio et actiones.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Quaestio, methodus, linea temporis inventorum et conclusiones.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architectura, partes, exemplum codicis et index probationis.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Tres formae quaestionum cum explicatione et colloquio postero.',
+  'Sjabloon': 'Exemplar',
+  'Post-incident review / lessons learned':
+      'Recognitio post incidens / lectiones acceptae',
+  'Datalek / privacy-incident beoordeling':
+      'Aestimatio fugae datorum / incidentis vitae privatae',
+  'DPIA / privacy impact assessment':
+      'DPIA / aestimatio effectus in vitam privatam',
+  'Risicoanalyse / risk register':
+      'Analysis periculorum / registrum periculorum',
+  'Business continuity / DR-test': 'Continuitas negotii / probatio DR',
+  'Tabletop-oefening / crisisoefening':
+      'Exercitatio tabletop / exercitatio crisis',
+  'BOB-crisisrapportage': 'Relatio crisis BOB',
+  'CAB / release readiness': 'CAB / promptitudo emissionis',
+  'Stuurgroep / project board update':
+      'Renovatio coetus gubernantis / project board',
+  'Auditbevindingen en opvolging': 'Inventa inspectionis et prosecutio',
+  'Leveranciersbeoordeling / vendor risk':
+      'Aestimatio praebitorum / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Decretum architecturae / expositio ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Rationem agendi evolvere / consilium exsecutionis',
+  'Overdracht / handover': 'Traditio / handover',
+  'Retrospective / teamverbetering': 'Retrospectiva / emendatio turmae',
+  'PPL Vluchtvoorbereiding': 'Praeparatio volatus PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Linea temporis, effectus, causae et actiones emendandi post incidens.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Aestima data, periculum, officium nuntiandi et communicationem.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Tractatio, fundamentum iuris, pericula vitae privatae et remedia.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Pericula, probabilitatem, effectum, remedia et dominos consigna.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scenarium, proposita restitutionis, inventa probationum et puncta emendanda.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scenarium, injects, decreta, observationes et aestimatio.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Duc turmam crisis per formationem imaginis, iudicii et decreti, cum imagine situationis viva, quaestionibus informationis, dilemmatibus, registro decretorum et indice actionum.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Mutatio, effectus, probationes, rollback, communicatio et go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Progressus, ordinatio, ratio sumptuum, pericula et decreta petita.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Inventa, root cause, remedia, documenta probantia et status.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Ministerium, data, dependentia, postulata, pericula et decretum.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Contextus, optiones, trade-offs, decretum et consequentiae.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Auditores destinati, ordinatio, communicatio, exercitatio et adoptio.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Status, actiones apertae, pericula, contactus et primi gradus.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Facta, exempla, start-stop-continue et actiones emendandi.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Para volatum VFR cum itinere, tempestate, NOTAMs, praestationibus, weight & balance, combustibili, alternates et probationibus personalibus go/no-go.',
+  'Zoek een sjabloon': 'Quaere exemplar',
+  'Geen sjablonen gevonden': 'Nulla exemplaria inventa',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Exemplaria identica',
+  'Zelfde titel, andere inhoud': 'Idem titulus, contentum diversum',
+  'Dubbele presentaties opruimen': 'Praesentationes duplicatas purgare',
+  'Naar de prullenbak verplaatst:': 'In scrinium purgamentorum motum:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'In scrinium purgamentorum moveri non potuit.',
+  'Geen dubbele presentaties gevonden.':
+      'Nullae praesentationes duplicatae inventae sunt.',
+  'Laatste kopie blijft behouden': 'Exemplar ultimum servatur',
+  'Nog geopend in een tabblad': 'Adhuc in tabula apertum',
+  'Naar prullenbak': 'In scrinium purgamentorum',
+  'Deze presentatie staat ook op een andere plek:':
+      'Haec praesentatio etiam alio loco est:',
 };

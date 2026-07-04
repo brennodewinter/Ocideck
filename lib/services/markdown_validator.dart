@@ -500,82 +500,16 @@ class MarkdownValidator {
     int Function(int) lineNo,
     List<MarkdownValidationIssue> issues,
   ) {
-    final openingIndex = blockLines.indexWhere(
-      (line) => _reChartFenceLoose.hasMatch(line.trim()),
+    _validateFencedJson(
+      blockLines: blockLines,
+      slideNumber: slideNumber,
+      lineNo: lineNo,
+      issues: issues,
+      fence: 'chart',
+      label: 'grafiek',
+      fenceOpenLoose: _reChartFenceLoose,
+      fenceOpen: _reChartFence,
     );
-    if (openingIndex < 0) {
-      issues.add(
-        MarkdownValidationIssue(
-          line: lineNo(0),
-          severity: MarkdownValidationSeverity.error,
-          message:
-              'Slide $slideNumber: grafiek-slide vereist een ```chart-blok.',
-        ),
-      );
-      return;
-    }
-
-    final jsonLines = <String>[];
-    var inFence = false;
-    var closingIndex = -1;
-    for (var i = 0; i < blockLines.length; i++) {
-      final trimmed = blockLines[i].trim();
-      if (_reChartFence.hasMatch(trimmed)) {
-        inFence = true;
-        continue;
-      }
-      if (inFence && _reFenceClose.hasMatch(trimmed)) {
-        closingIndex = i;
-        break;
-      }
-      if (inFence) jsonLines.add(blockLines[i]);
-    }
-
-    if (closingIndex < 0) {
-      issues.add(
-        MarkdownValidationIssue(
-          line: lineNo(openingIndex),
-          severity: MarkdownValidationSeverity.error,
-          message: 'Slide $slideNumber: ```chart-blok is niet afgesloten.',
-        ),
-      );
-      return;
-    }
-
-    final raw = jsonLines.join('\n').trim();
-    if (raw.isEmpty) {
-      issues.add(
-        MarkdownValidationIssue(
-          line: lineNo(openingIndex + 1),
-          severity: MarkdownValidationSeverity.warning,
-          message: 'Slide $slideNumber: grafiek-specificatie is leeg.',
-        ),
-      );
-      return;
-    }
-
-    try {
-      final decoded = jsonDecode(raw);
-      if (decoded is! Map) {
-        issues.add(
-          MarkdownValidationIssue(
-            line: lineNo(openingIndex + 1),
-            severity: MarkdownValidationSeverity.error,
-            message:
-                'Slide $slideNumber: grafiek-JSON moet een object `{…}` zijn.',
-          ),
-        );
-      }
-    } catch (e) {
-      logWarning('MarkdownValidator: chart JSON parse failed', e);
-      issues.add(
-        MarkdownValidationIssue(
-          line: lineNo(openingIndex + 1),
-          severity: MarkdownValidationSeverity.error,
-          message: 'Slide $slideNumber: grafiek-JSON is ongeldig.',
-        ),
-      );
-    }
   }
 
   void _validateCockpitSlide(
@@ -584,8 +518,34 @@ class MarkdownValidator {
     int Function(int) lineNo,
     List<MarkdownValidationIssue> issues,
   ) {
+    _validateFencedJson(
+      blockLines: blockLines,
+      slideNumber: slideNumber,
+      lineNo: lineNo,
+      issues: issues,
+      fence: 'cockpit',
+      label: 'cockpit',
+      fenceOpenLoose: _reCockpitFenceLoose,
+      fenceOpen: _reCockpitFence,
+    );
+  }
+
+  /// Gedeelde controle voor slides met een verplicht fenced JSON-blok
+  /// (```chart / ```cockpit): blok aanwezig, afgesloten, niet leeg en geldige
+  /// JSON-map. [fence] is de fence-infostring, [label] het woord in de
+  /// Nederlandse meldingen ('grafiek', 'cockpit').
+  void _validateFencedJson({
+    required List<String> blockLines,
+    required int slideNumber,
+    required int Function(int) lineNo,
+    required List<MarkdownValidationIssue> issues,
+    required String fence,
+    required String label,
+    required RegExp fenceOpenLoose,
+    required RegExp fenceOpen,
+  }) {
     final openingIndex = blockLines.indexWhere(
-      (line) => _reCockpitFenceLoose.hasMatch(line.trim()),
+      (line) => fenceOpenLoose.hasMatch(line.trim()),
     );
     if (openingIndex < 0) {
       issues.add(
@@ -593,7 +553,7 @@ class MarkdownValidator {
           line: lineNo(0),
           severity: MarkdownValidationSeverity.error,
           message:
-              'Slide $slideNumber: cockpit slide requires a ```cockpit block.',
+              'Slide $slideNumber: $label-slide vereist een ```$fence-blok.',
         ),
       );
       return;
@@ -604,7 +564,7 @@ class MarkdownValidator {
     var closingIndex = -1;
     for (var i = 0; i < blockLines.length; i++) {
       final trimmed = blockLines[i].trim();
-      if (_reCockpitFence.hasMatch(trimmed)) {
+      if (fenceOpen.hasMatch(trimmed)) {
         inFence = true;
         continue;
       }
@@ -620,7 +580,7 @@ class MarkdownValidator {
         MarkdownValidationIssue(
           line: lineNo(openingIndex),
           severity: MarkdownValidationSeverity.error,
-          message: 'Slide $slideNumber: ```cockpit block is not closed.',
+          message: 'Slide $slideNumber: ```$fence-blok is niet afgesloten.',
         ),
       );
       return;
@@ -632,7 +592,7 @@ class MarkdownValidator {
         MarkdownValidationIssue(
           line: lineNo(openingIndex + 1),
           severity: MarkdownValidationSeverity.warning,
-          message: 'Slide $slideNumber: cockpit specification is empty.',
+          message: 'Slide $slideNumber: $label-specificatie is leeg.',
         ),
       );
       return;
@@ -646,18 +606,17 @@ class MarkdownValidator {
             line: lineNo(openingIndex + 1),
             severity: MarkdownValidationSeverity.error,
             message:
-                'Slide $slideNumber: cockpit specification must be a JSON object.',
+                'Slide $slideNumber: $label-JSON moet een object `{…}` zijn.',
           ),
         );
       }
     } catch (e) {
-      logWarning('MarkdownValidator: cockpit JSON parse failed', e);
+      logWarning('MarkdownValidator: $fence JSON parse failed', e);
       issues.add(
         MarkdownValidationIssue(
           line: lineNo(openingIndex + 1),
           severity: MarkdownValidationSeverity.error,
-          message:
-              'Slide $slideNumber: cockpit specification contains invalid JSON.',
+          message: 'Slide $slideNumber: $label-JSON is ongeldig.',
         ),
       );
     }

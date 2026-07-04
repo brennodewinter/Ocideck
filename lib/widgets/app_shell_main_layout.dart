@@ -30,18 +30,21 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
 
     final isMarkdownMode = editor.mode == EditorMode.markdown;
 
-    final canExport = deckState.filePath != null && !deckState.isDirty;
-    final enforcement = ClassificationEnforcementPolicy.fromAppSettings(
+    final classificationDecision =
+        ClassificationEnforcementPolicy.fromAppSettings(
+          settings,
+        ).evaluate(deck.tlp);
+    final (:readiness, :quality) = _exportReadiness(
+      deckState,
       settings,
+      classificationDecision,
     );
-    final classificationDecision = enforcement.evaluate(deck.tlp);
-    final exportTooltip = deckState.filePath == null
-        ? l10n.t('exportNeedsSave')
-        : deckState.isDirty
-        ? l10n.t('exportNeedsClean')
-        : !classificationDecision.allowed
-        ? classificationDecision.reason!
-        : l10n.t('exportReady');
+    final (:canExport, :exportTooltip) = _exportGate(
+      deckState,
+      readiness,
+      quality,
+      l10n,
+    );
 
     return Focus(
       canRequestFocus: false,
@@ -57,36 +60,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         return KeyEventResult.ignored;
       },
       child: CallbackShortcuts(
-        bindings: {
-          const SingleActivator(LogicalKeyboardKey.keyS, control: true):
-              _saveDeck,
-          const SingleActivator(LogicalKeyboardKey.keyS, meta: true): _saveDeck,
-          // Ongedaan maken / opnieuw. Vuren alleen wanneer de focus niet in een
-          // tekstveld zit (dat handelt z'n eigen undo af), dus geen conflict.
-          const SingleActivator(LogicalKeyboardKey.keyZ, control: true):
-              deckNotifier.undo,
-          const SingleActivator(LogicalKeyboardKey.keyZ, meta: true):
-              deckNotifier.undo,
-          const SingleActivator(
-            LogicalKeyboardKey.keyZ,
-            control: true,
-            shift: true,
-          ): deckNotifier.redo,
-          const SingleActivator(
-            LogicalKeyboardKey.keyZ,
-            meta: true,
-            shift: true,
-          ): deckNotifier.redo,
-          const SingleActivator(LogicalKeyboardKey.keyY, control: true):
-              deckNotifier.redo,
-          const SingleActivator(LogicalKeyboardKey.keyF, control: true):
-              _openFind,
-          const SingleActivator(LogicalKeyboardKey.keyF, meta: true): _openFind,
-          const SingleActivator(LogicalKeyboardKey.keyH, control: true):
-              _openFindReplace,
-          const SingleActivator(LogicalKeyboardKey.keyH, meta: true):
-              _openFindReplace,
-        },
+        bindings: _shortcutBindings(deckNotifier),
         child: Scaffold(
           appBar: _appBar(
             deck,
@@ -103,6 +77,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             onSave: _saveDeck,
             onExport: canExport ? _exportDeck : null,
             exportTooltip: exportTooltip,
+            readiness: readiness,
+            quality: quality,
           ),
           body: Builder(
             builder: (ctx) {
@@ -167,6 +143,92 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         ),
       ),
     );
+  }
+
+  /// Sneltoetsen van het hoofdscherm (opslaan, undo/redo, zoeken).
+  Map<ShortcutActivator, VoidCallback> _shortcutBindings(
+    DeckNotifier deckNotifier,
+  ) {
+    return {
+      const SingleActivator(LogicalKeyboardKey.keyS, control: true): _saveDeck,
+      const SingleActivator(LogicalKeyboardKey.keyS, meta: true): _saveDeck,
+      // Ongedaan maken / opnieuw. Vuren alleen wanneer de focus niet in een
+      // tekstveld zit (dat handelt z'n eigen undo af), dus geen conflict.
+      const SingleActivator(LogicalKeyboardKey.keyZ, control: true):
+          deckNotifier.undo,
+      const SingleActivator(LogicalKeyboardKey.keyZ, meta: true):
+          deckNotifier.undo,
+      const SingleActivator(
+        LogicalKeyboardKey.keyZ,
+        control: true,
+        shift: true,
+      ): deckNotifier.redo,
+      const SingleActivator(LogicalKeyboardKey.keyZ, meta: true, shift: true):
+          deckNotifier.redo,
+      const SingleActivator(LogicalKeyboardKey.keyY, control: true):
+          deckNotifier.redo,
+      const SingleActivator(LogicalKeyboardKey.keyF, control: true): _openFind,
+      const SingleActivator(LogicalKeyboardKey.keyF, meta: true): _openFind,
+      const SingleActivator(LogicalKeyboardKey.keyH, control: true):
+          _openFindReplace,
+      const SingleActivator(LogicalKeyboardKey.keyH, meta: true):
+          _openFindReplace,
+    };
+  }
+
+  /// De samengevatte exportstatus plus de onderliggende kwaliteitsmeldingen.
+  /// Dezelfde samenvoeging als het kwaliteitspaneel: sync-analyse plus de
+  /// asynchrone titel-afbeeldingcontrastcheck, zodat statusbalk en paneel
+  /// dezelfde tellingen tonen.
+  ({ExportReadiness readiness, SlideQualityResult quality}) _exportReadiness(
+    DeckState deckState,
+    AppSettings settings,
+    ExportDecision classificationDecision,
+  ) {
+    final syncQuality = ref.watch(deckQualityProvider);
+    final imageIssues =
+        ref.watch(imageContrastIssuesProvider).value ??
+        const <SlideQualityIssue>[];
+    final quality = imageIssues.isEmpty
+        ? syncQuality
+        : SlideQualityResult([...syncQuality.issues, ...imageIssues]);
+    final readiness = evaluateExportReadiness(
+      needsSave:
+          !isWebPlatform && (deckState.filePath == null || deckState.isDirty),
+      classificationDecision: classificationDecision,
+      qualityDecision: QualityExportPolicy.fromAppSettings(
+        warningsEnabled: settings.qualityWarningsOnExport,
+        blockOnErrors: settings.qualityBlockExportOnErrors,
+      ).evaluate(quality),
+    );
+    return (readiness: readiness, quality: quality);
+  }
+
+  /// Of exporteren nu kan, plus de tooltip die uitlegt waarom (niet).
+  /// "Eerst opslaan" bestaat om exports naast het deck-bestand te leggen; op
+  /// web is er geen bestandssysteem en wordt de export een download, dus daar
+  /// kan elk geopend deck direct geëxporteerd worden.
+  ({bool canExport, String exportTooltip}) _exportGate(
+    DeckState deckState,
+    ExportReadiness readiness,
+    SlideQualityResult quality,
+    AppLocalizations l10n,
+  ) {
+    final exportTooltip = switch (readiness.status) {
+      ExportReadinessStatus.needsSave =>
+        deckState.filePath == null
+            ? l10n.t('exportNeedsSave')
+            : l10n.t('exportNeedsClean'),
+      ExportReadinessStatus.blockedByClassification =>
+        readiness.blockReason ?? l10n.t('exportReady'),
+      ExportReadinessStatus.blockedByQuality ||
+      ExportReadinessStatus.qualityWarnings => formatQualityExportReason(
+        l10n,
+        quality,
+      ),
+      ExportReadinessStatus.ready => l10n.t('exportReady'),
+    };
+    return (canExport: readiness.canOpenExport, exportTooltip: exportTooltip);
   }
 
   PreferredSizeWidget _appBar(
@@ -314,6 +376,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           ),
           _menuItem('open', Icons.folder_open_outlined, l10n.t('openEllipsis')),
           const PopupMenuDivider(),
+          // Pakketten en URL-import werken overal: op web volledig in het
+          // geheugen (pakket als download, import via de browser met dezelfde
+          // security-gate). Alleen Nextcloud is op web bewust uit (zie
+          // platform_features.dart).
           _menuItem(
             'export_package',
             Icons.inventory_2_outlined,
@@ -326,17 +392,19 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           ),
           _menuItem('import_url', Icons.link, l10n.t('importUrl')),
           const PopupMenuDivider(),
-          _menuItem(
-            'open_nextcloud',
-            Icons.cloud_download_outlined,
-            l10n.d('Openen vanaf Nextcloud'),
-          ),
-          _menuItem(
-            'save_nextcloud',
-            Icons.cloud_upload_outlined,
-            l10n.d('Opslaan naar Nextcloud'),
-          ),
-          const PopupMenuDivider(),
+          if (supportsNetworkDeckSources) ...[
+            _menuItem(
+              'open_nextcloud',
+              Icons.cloud_download_outlined,
+              l10n.d('Openen vanaf Nextcloud'),
+            ),
+            _menuItem(
+              'save_nextcloud',
+              Icons.cloud_upload_outlined,
+              l10n.d('Opslaan naar Nextcloud'),
+            ),
+            const PopupMenuDivider(),
+          ],
           _menuItem('find', Icons.find_replace, l10n.t('findReplace')),
           _menuItem(
             'clear_checklists',
@@ -597,7 +665,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     if (!mounted) return;
     await ExportDialog.show(
       context,
-      deckPath: deckState.filePath!,
+      // Op web heeft een deck geen bestandspad; de deck-titel bepaalt dan de
+      // naam van het te downloaden bestand.
+      deckPath: deckState.filePath ?? '${_safeRemoteName(deck.title)}.md',
       slides: slides,
       themeProfile: deck.themeProfile,
       cockpitColorScheme: ref.read(settingsProvider).cockpitColorScheme,
@@ -634,6 +704,14 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         keywords: deck.keywords,
         tlp: deck.tlp,
       ),
+      // Noteer een geslaagde export bij het recente bestand, zodat de
+      // welkomstlijst "laatst geëxporteerd als …" kan tonen. Alleen zinvol
+      // met een echt bestandspad (op web is een deck een download).
+      onExported: deckState.filePath == null
+          ? null
+          : (formatLabel) => ref
+                .read(settingsProvider.notifier)
+                .recordRecentFileExport(deckState.filePath!, formatLabel),
     );
   }
 
@@ -663,10 +741,14 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
   }
 
   Future<void> _newInTab() async {
-    final title = await NewDeckDialog.show(context);
-    if (title != null) {
-      ref.read(tabsProvider.notifier).newDeckInNewTab(title);
-    }
+    final choice = await NewDeckDialog.show(context);
+    if (choice == null) return;
+    await ref
+        .read(settingsProvider.notifier)
+        .selectThemeProfile(choice.profileName);
+    ref
+        .read(tabsProvider.notifier)
+        .newDeckInNewTab(choice.title, template: choice.template);
   }
 
   Future<void> _openProperties() async {
@@ -685,16 +767,40 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       presentationTargetSeconds: info.presentationTargetSeconds,
       showRehearsalSummary: info.showRehearsalSummary,
     );
+    // Een hier gekozen stijlprofiel geldt app-breed (profielen zijn globaal)
+    // en wordt meteen op het open deck toegepast.
+    final profileName = info.styleProfileName;
+    final settings = ref.read(settingsProvider);
+    if (profileName != null &&
+        profileName != ref.read(deckProvider).deck?.themeProfile.name) {
+      final profile = settings.themeProfiles
+          .where((p) => p.name == profileName)
+          .firstOrNull;
+      if (profile != null) {
+        await ref
+            .read(settingsProvider.notifier)
+            .selectThemeProfile(profileName);
+        deckNotifier.updateThemeProfile(profile);
+      }
+    }
   }
 
   Future<void> _exportPackage() async {
     final deck = ref.read(deckProvider).deck!;
     final l10n = context.l10n;
     final fileService = ref.read(fileServiceProvider);
-    final dest = await fileService.pickPackageDestination(deck);
-    if (dest == null) return;
     try {
-      await fileService.exportPackage(deck, dest);
+      // Web: geen doelmap — het pakket wordt in het geheugen gebouwd (met de
+      // mem:-assets uit de WebAssetStore) en als download aangeboden.
+      final String dest;
+      if (isWebPlatform) {
+        dest = await fileService.downloadPackage(deck);
+      } else {
+        final picked = await fileService.pickPackageDestination(deck);
+        if (picked == null) return;
+        await fileService.exportPackage(deck, picked);
+        dest = picked;
+      }
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -715,6 +821,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
   }
 
   Future<void> _importPackage() async {
+    // Web: hetzelfde bytes-pad als "Openen..." — de picker levert inhoud en
+    // openDeckFromBytes pakt het pakket in het geheugen uit.
+    if (isWebPlatform) {
+      return _openWithBytesPicker(context, ref);
+    }
     final settings = ref.read(settingsProvider);
     final l10n = context.l10n;
     final fileService = ref.read(fileServiceProvider);
@@ -744,7 +855,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       value: value,
       child: Row(
         children: [
-          Icon(icon, size: 16, color: const Color(0xFF475569)),
+          Icon(icon, size: 16, color: AppTheme.slate600),
           const SizedBox(width: 10),
           Flexible(child: Text(label, overflow: TextOverflow.ellipsis)),
         ],

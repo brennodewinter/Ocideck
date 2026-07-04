@@ -1,13 +1,16 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:pasteboard/pasteboard.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 import '../l10n/app_localizations.dart';
 import '../models/slide.dart';
+import '../utils/atomic_file.dart';
 import '../utils/log.dart';
 import '../utils/project_path.dart';
+import 'web_asset_store.dart';
 
 /// Waarom een afbeelding kiezen/plakken géén pad opleverde. [cancelled] is een
 /// bewuste keuze van de gebruiker (geen melding tonen); de overige redenen
@@ -101,6 +104,32 @@ class ImageService {
   /// Als [pickImage], maar met de reden waarom er geen pad kwam, zodat de UI
   /// een afwijzing kan uitleggen i.p.v. stil niets te doen.
   Future<ImageImportOutcome> pickImageDetailed({String? projectPath}) async {
+    // Web: de browser-picker levert bytes (geen pad); na dezelfde validatie
+    // als hieronder gaat de afbeelding de in-memory store in en krijgt de
+    // slide een mem:-pad (zie WebAssetStore).
+    if (kIsWeb) {
+      final result = await FilePicker.pickFiles(
+        type: FileType.image,
+        dialogTitle: _d('Kies een afbeelding'),
+        withData: true,
+      );
+      final file = result?.files.single;
+      final bytes = file?.bytes;
+      if (file == null || bytes == null) {
+        return const ImageImportOutcome.failed(ImageImportFailure.cancelled);
+      }
+      if (bytes.isEmpty ||
+          bytes.length > maxImageBytes ||
+          !_looksLikeImage(bytes)) {
+        logWarning(
+          'ImageService.pickImage: rejected (too large or not an image)',
+        );
+        return const ImageImportOutcome.failed(ImageImportFailure.rejected);
+      }
+      return ImageImportOutcome.success(
+        WebAssetStore.put(bytes, name: file.name),
+      );
+    }
     final result = await FilePicker.pickFiles(
       type: FileType.image,
       dialogTitle: _d('Kies een afbeelding'),
@@ -202,6 +231,16 @@ class ImageService {
         logWarning('ImageService.pasteImage: rejected (too large)');
         return const ImageImportOutcome.failed(ImageImportFailure.rejected);
       }
+      // Web: geen tijdelijke bestanden — de geplakte afbeelding gaat de
+      // in-memory store in, net als bij pickImage.
+      if (kIsWeb) {
+        if (!_looksLikeImage(bytes)) {
+          return const ImageImportOutcome.failed(ImageImportFailure.rejected);
+        }
+        return ImageImportOutcome.success(
+          WebAssetStore.put(bytes, name: 'geplakt.png'),
+        );
+      }
       if (projectPath != null && projectPath.isNotEmpty) {
         final imagesDir = Directory(p.join(projectPath, 'images'));
         await imagesDir.create(recursive: true);
@@ -211,7 +250,7 @@ class ImageService {
             'pasted_${DateTime.now().millisecondsSinceEpoch}.png',
           ),
         );
-        await file.writeAsBytes(bytes, flush: true);
+        await writeBytesAtomic(file, bytes);
         return ImageImportOutcome.success(
           p.relative(file.path, from: projectPath),
         );
@@ -222,7 +261,7 @@ class ImageService {
       final file = File(
         p.join(dir.path, 'pasted_${DateTime.now().millisecondsSinceEpoch}.png'),
       );
-      await file.writeAsBytes(bytes, flush: true);
+      await writeBytesAtomic(file, bytes);
       return ImageImportOutcome.success(file.path);
     } on FileSystemException catch (e) {
       logWarning('ImageService.pasteImage: write failed', e);

@@ -1,18 +1,26 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 import '../models/deck.dart';
+import '../models/deck_template.dart';
 import '../models/webdav_settings.dart';
+import '../services/annotation_codec.dart';
+import '../services/duplicate_service.dart';
 import '../services/file_service.dart';
+import '../services/image_service.dart';
 import '../services/markdown_safety.dart';
 import '../services/markdown_service.dart';
 import '../services/recovery_service.dart';
 import '../services/user_notes_codec.dart';
+import '../services/web_asset_store.dart';
 import '../services/webdav_service.dart';
+import '../platform/platform_features.dart';
 import '../utils/log.dart';
 import 'deck_provider.dart';
 import 'editor_provider.dart';
@@ -44,6 +52,11 @@ class TabInfo {
   });
 
   String get label {
+    // Rond het sluiten van een tab of het venster kan Riverpod de notifier al
+    // hebben opgeruimd (de ProviderScope van de tab is dan ontmanteld) terwijl
+    // dit TabInfo nog één rebuild lang in beeld is. Lezen van een gedisposede
+    // StateNotifier gooit; val dan terug op neutrale waarden.
+    if (!deckNotifier.mounted) return 'Nieuw';
     final st = deckNotifier.currentState;
     // A saved deck is identified by its file name — that is what the user
     // recognises, not the parsed first-slide title (which falls back to the
@@ -57,8 +70,8 @@ class TabInfo {
     return deck?.title.isNotEmpty == true ? deck!.title : 'Nieuw';
   }
 
-  bool get isDirty => deckNotifier.currentState.isDirty;
-  bool get isOpen => deckNotifier.currentState.isOpen;
+  bool get isDirty => deckNotifier.mounted && deckNotifier.currentState.isDirty;
+  bool get isOpen => deckNotifier.mounted && deckNotifier.currentState.isOpen;
 }
 
 // ── Tabs state ────────────────────────────────────────────────────────────────
@@ -126,6 +139,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// dus zolang het object hetzelfde is, is er niets gewijzigd en kan de tick
   /// de volledige serialisatie + schrijfbeurt overslaan.
   final Map<int, Deck> _lastAutosavedDeck = {};
+
+  /// Duplicaat-melding maximaal één keer per paar per sessie, anders wordt
+  /// elke her-open van hetzelfde bestand een herhaalde snackbar.
+  final Set<String> _noticedDuplicatePairs = {};
+  final DuplicateService _duplicates = DuplicateService();
   Timer? _autosaveTimer;
   int _nextId = 0;
 
@@ -137,7 +155,14 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // Start with one empty tab
     final tab = _createTab();
     state = TabsState(tabs: [tab], selectedIndex: 0);
-    _autosaveTimer = Timer.periodic(_autosaveInterval, (_) => _autosaveTick());
+    // Zonder bestandssysteem (web) is er geen herstelmap; de tick zou elke
+    // 25s voor niets serialiseren, dus start hem daar helemaal niet.
+    if (supportsLocalProjectFolders) {
+      _autosaveTimer = Timer.periodic(
+        _autosaveInterval,
+        (_) => _autosaveTick(),
+      );
+    }
   }
 
   @override
@@ -193,6 +218,9 @@ class TabsNotifier extends StateNotifier<TabsState> {
   void _autosaveTick() {
     if (!mounted) return;
     for (final tab in state.tabs) {
+      // Zie TabInfo.label: een tab kan kortstondig een al-gedisposede
+      // notifier dragen; die heeft niets meer te autosaven.
+      if (!tab.deckNotifier.mounted) continue;
       final st = tab.deckNotifier.currentState;
       if (st.isOpen && st.isDirty) {
         final deck = st.deck!;
@@ -250,18 +278,18 @@ class TabsNotifier extends StateNotifier<TabsState> {
     state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
   }
 
-  void newDeckInCurrentTab(String title) {
+  void newDeckInCurrentTab(String title, {DeckTemplate? template}) {
     final tab = state.current;
     if (tab == null) return;
-    tab.deckNotifier.newDeck(title);
+    tab.deckNotifier.newDeck(title, template: template);
     tab.editorNotifier.select(0);
     // Force rebuild by copying state (label may have changed)
     state = state.copyWith(tabs: List.from(state.tabs));
   }
 
-  void newDeckInNewTab(String title) {
+  void newDeckInNewTab(String title, {DeckTemplate? template}) {
     final tab = _createTab();
-    tab.deckNotifier.newDeck(title);
+    tab.deckNotifier.newDeck(title, template: template);
     tab.editorNotifier.select(0);
     final newTabs = [...state.tabs, tab];
     state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
@@ -291,7 +319,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
       final newTabs = [...state.tabs, tab];
       state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
     }
-    await _settings.addRecentFile(path);
+    await _settings.addRecentFile(
+      path,
+      slideCount: deck.slides.length,
+      tlp: deck.tlp,
+    );
   }
 
   Future<OpenResult> openFileByPath(String path, {int? selectIndex}) async {
@@ -323,20 +355,238 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // notifier disposed during the await
     if (!mounted) return OpenResult.unreadable;
     final index = (selectIndex ?? 0).clamp(0, deck.slides.length - 1);
+    _placeDeckInTab(deck, filePath: path, index: index);
+    await _settings.addRecentFile(
+      path,
+      slideCount: deck.slides.length,
+      tlp: deck.tlp,
+    );
+    // Los van het open-pad: een byte-identieke kopie elders in de recente
+    // lijst is het melden waard, maar mag het openen nooit vertragen.
+    unawaited(_noticeIdenticalCopy(path));
+    return OpenResult.opened;
+  }
+
+  /// Zoek een byte-identieke kopie van het zojuist geopende bestand in de
+  /// recente lijst en meld die eenmalig via [duplicateCopyNoticeProvider];
+  /// de shell toont daarop een snackbar met een opruim-ingang.
+  Future<void> _noticeIdenticalCopy(String openedPath) async {
+    try {
+      final recents = [
+        for (final f in _ref.read(settingsProvider).recentFiles) f.path,
+      ];
+      final copy = await _duplicates.findIdenticalCopy(openedPath, recents);
+      if (copy == null || !mounted) return;
+      final pair = ([openedPath, copy]..sort()).join(' ');
+      if (!_noticedDuplicatePairs.add(pair)) return;
+      _ref.read(duplicateCopyNoticeProvider.notifier).state =
+          DuplicateCopyNotice(openedPath: openedPath, copyPath: copy);
+    } catch (e) {
+      logWarning('TabsNotifier._noticeIdenticalCopy', e);
+    }
+  }
+
+  /// Zet een zojuist geopend deck in een tabblad: een leeg huidig tabblad
+  /// wordt hergebruikt, anders komt er een nieuw tabblad naast. Gedeelde
+  /// staart van pad-, bytes- en URL-opens.
+  void _placeDeckInTab(Deck deck, {String? filePath, int index = 0}) {
     final current = state.current;
     if (current != null && !current.isOpen) {
-      current.deckNotifier.loadDeck(deck, filePath: path);
+      current.deckNotifier.loadDeck(deck, filePath: filePath);
       current.editorNotifier.select(index);
       state = state.copyWith(tabs: List.from(state.tabs));
     } else {
       final tab = _createTab();
-      tab.deckNotifier.loadDeck(deck, filePath: path);
+      tab.deckNotifier.loadDeck(deck, filePath: filePath);
       tab.editorNotifier.select(index);
       final newTabs = [...state.tabs, tab];
       state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
     }
-    await _settings.addRecentFile(path);
+  }
+
+  /// Open een deck uit in-memory bytes — het open-pad voor web, waar de
+  /// file-picker, drag-drop én URL-import geen pad maar inhoud aanleveren.
+  /// Een `.ocideck`/zip-pakket wordt volledig in het geheugen uitgepakt
+  /// ([_openPackageFromBytes]); platte markdown gaat door dezelfde
+  /// fail-closed security-gate als [openFileByPath]. Er is geen TOCTOU-gat,
+  /// want gescand en geparsed wordt exact dezelfde in-memory string. Het
+  /// tabblad krijgt geen [DeckState.filePath], dus opslaan wordt een
+  /// download. [name] labelt het importalarm en de logregels (bestandsnaam
+  /// of URL).
+  Future<OpenResult> openDeckFromBytes(Uint8List bytes, String name) async {
+    if (FileService.looksLikeZipBytes(bytes)) {
+      return _openPackageFromBytes(bytes, name);
+    }
+    if (bytes.length > FileService.maxDeckMarkdownBytes) {
+      return OpenResult.unreadable;
+    }
+    final String raw;
+    try {
+      raw = utf8.decode(bytes);
+    } on FormatException catch (e) {
+      logWarning('TabsNotifier.openDeckFromBytes: not valid UTF-8', e);
+      return OpenResult.unreadable;
+    }
+    final gated = _gateAndParseContent(raw, sourceName: name);
+    final deck = gated.deck;
+    if (deck == null) return gated.failure;
+    if (!mounted) return OpenResult.unreadable;
+    _placeDeckInTab(deck);
     return OpenResult.opened;
+  }
+
+  /// Pak een `.ocideck`/zip-pakket volledig in het geheugen uit en open het:
+  /// de hoofd-markdown gaat door dezelfde security-gate als elk bytes-open,
+  /// afbeeldings-leden gaan (na de pickImage-validatie) de [WebAssetStore] in
+  /// en de slidepaden worden naar hun mem:-pad herschreven, en de sidecars
+  /// (annotaties, sprekersnotities) reizen mee. Er raakt geen bestandssysteem
+  /// aan te pas, dus dit werkt ook in de webversie.
+  Future<OpenResult> _openPackageFromBytes(Uint8List bytes, String name) async {
+    final entries = _file.decodePackageEntries(bytes);
+    if (entries == null) return OpenResult.unreadable;
+    final mdEntry = FileService.mainMarkdownEntry(entries);
+    if (mdEntry == null) return OpenResult.notAPresentation;
+    final String raw;
+    try {
+      raw = utf8.decode(mdEntry.bytes);
+    } on FormatException catch (e) {
+      logWarning('TabsNotifier._openPackageFromBytes: md not UTF-8', e);
+      return OpenResult.unreadable;
+    }
+    final gated = _gateAndParseContent(
+      raw,
+      sourceName: '$name → ${mdEntry.name}',
+    );
+    var deck = gated.deck;
+    if (deck == null) return gated.failure;
+
+    deck = _attachPackageAssets(deck, entries, mdEntry.name);
+    deck = _attachPackageSidecars(deck, entries, mdEntry.name);
+    if (!mounted) return OpenResult.unreadable;
+    _placeDeckInTab(deck);
+    return OpenResult.opened;
+  }
+
+  /// Zet de afbeeldings-leden van een pakket in de [WebAssetStore] en
+  /// herschrijf de slidepaden die ernaar verwijzen naar hun mem:-pad.
+  /// Verwijzingen zijn relatief aan de hoofd-markdown ([mdName]). Alleen
+  /// leden die de afbeeldingsvalidatie (magic bytes + cap) doorstaan doen mee.
+  Deck _attachPackageAssets(
+    Deck deck,
+    List<PackageEntry> entries,
+    String mdName,
+  ) {
+    final mdDir = p.posix.dirname(mdName);
+    final byName = {
+      for (final e in entries) p.posix.normalize(e.name): e.bytes,
+    };
+    final memFor = <String, String>{};
+    String? memPath(String ref) {
+      if (ref.trim().isEmpty || WebAssetStore.isMemPath(ref)) return null;
+      final resolved = p.posix.normalize(
+        mdDir == '.' ? ref : p.posix.join(mdDir, ref),
+      );
+      if (resolved.startsWith('..')) return null; // buiten het pakket
+      final cached = memFor[resolved];
+      if (cached != null) return cached;
+      final bytes = byName[resolved];
+      if (bytes == null ||
+          bytes.isEmpty ||
+          bytes.length > ImageService.maxImageBytes ||
+          !ImageService.looksLikeImage(bytes)) {
+        return null;
+      }
+      final mem = WebAssetStore.put(bytes, name: p.posix.basename(resolved));
+      memFor[resolved] = mem;
+      return mem;
+    }
+
+    final slides = [
+      for (final s in deck.slides)
+        s.copyWith(
+          imagePath: memPath(s.imagePath) ?? s.imagePath,
+          imagePath2: memPath(s.imagePath2) ?? s.imagePath2,
+        ),
+    ];
+    return deck.copyWith(slides: slides);
+  }
+
+  /// Herstel de sidecar-lagen (ink-annotaties en sprekersnotities) uit de
+  /// pakket-leden naast de hoofd-markdown — dezelfde bestandsnamen als de
+  /// schijfvariant in [FileService.openDeckDetailed].
+  Deck _attachPackageSidecars(
+    Deck deck,
+    List<PackageEntry> entries,
+    String mdName,
+  ) {
+    final base = mdName.replaceAll(RegExp(r'\.md$', caseSensitive: false), '');
+    String? textFor(String memberName) {
+      for (final e in entries) {
+        if (p.posix.normalize(e.name) == p.posix.normalize(memberName)) {
+          try {
+            return utf8.decode(e.bytes);
+          } on FormatException catch (err) {
+            logWarning(
+              'TabsNotifier._attachPackageSidecars: sidecar not UTF-8',
+              err,
+            );
+            return null;
+          }
+        }
+      }
+      return null;
+    }
+
+    var result = deck;
+    final ink = textFor('$base.ink.json');
+    if (ink != null) {
+      try {
+        final map = AnnotationCodec.decode(ink, result.slides);
+        if (map.isNotEmpty) result = result.copyWith(annotations: map);
+      } catch (e) {
+        // Een kapotte sidecar mag het openen nooit blokkeren.
+        logWarning('TabsNotifier._attachPackageSidecars: ink unreadable', e);
+      }
+    }
+    final notes = textFor('$base.user-notes.json');
+    if (notes != null) {
+      try {
+        final map = UserNotesCodec.decode(notes, result.slides);
+        if (map.isNotEmpty) result = result.copyWith(userNotes: map);
+      } catch (e) {
+        logWarning('TabsNotifier._attachPackageSidecars: notes unreadable', e);
+      }
+    }
+    return result;
+  }
+
+  /// Gedeelde poort van elk bytes-open: veiligheidsscan (met alarm bij
+  /// treffers, dan [OpenResult.blocked]) en daarna de contentpoort van
+  /// [FileService]. Bij succes draagt het record het deck; anders het
+  /// [OpenResult] dat de UI moet melden.
+  ({Deck? deck, OpenResult failure}) _gateAndParseContent(
+    String raw, {
+    required String sourceName,
+  }) {
+    final findings = MarkdownSafetyScanner.scan(raw);
+    if (findings.isNotEmpty) {
+      if (mounted) {
+        _ref.read(importSecurityAlarmProvider.notifier).state =
+            ImportSecurityAlarm(path: sourceName, findings: findings);
+      }
+      return (deck: null, failure: OpenResult.blocked);
+    }
+    final outcome = _file.openDeckFromContent(raw, sourceName: sourceName);
+    final deck = outcome.deck;
+    if (deck == null) {
+      return (
+        deck: null,
+        failure: outcome.failure == OpenFailure.notPresentation
+            ? OpenResult.notAPresentation
+            : OpenResult.unreadable,
+      );
+    }
+    return (deck: deck, failure: OpenResult.opened);
   }
 
   /// Remove the unique folder an import extracted/downloaded into when the deck
@@ -375,11 +625,8 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final outcome = await _file.importPackageBytesDetailed(bytes, dest);
     final mdPath = outcome.mdPath;
     if (mdPath == null) return outcome.failure;
-    final result = await openFileByPath(mdPath);
-    if (result != OpenResult.opened) await _discardImportArtifacts(mdPath);
-    return result == OpenResult.opened || result == OpenResult.blocked
-        ? null
-        : ImportFailure.unsupported;
+    final result = await _openImported(mdPath);
+    return _importHandled(result) ? null : ImportFailure.unsupported;
   }
 
   /// Haal een presentatie op via een URL (pakket of platte markdown) en open
@@ -389,12 +636,41 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final outcome = await _file.importFromUrlDetailed(url, dest);
     final mdPath = outcome.mdPath;
     if (mdPath == null) return outcome.failure;
+    final result = await _openImported(mdPath);
+    if (result == OpenResult.opened && mounted) {
+      // Herkomst voor de wolk-badge in recente presentaties.
+      await _settings.setRecentFileOrigin(mdPath, url);
+    }
+    return _importHandled(result) ? null : ImportFailure.unsupported;
+  }
+
+  /// Web-variant van [importFromUrl]: haalt de presentatie in de browser op
+  /// (CORS en de pagina-CSP bewaken het verkeer) en opent haar volledig in
+  /// het geheugen — een `.ocideck`/zip-pakket wordt daarbij in het geheugen
+  /// uitgepakt, met dezelfde omvangslimiet als de desktop-import.
+  Future<OpenResult> importFromUrlWeb(String url) async {
+    final bytes = await _file.fetchUrlBytes(
+      url,
+      maxBytes: FileService.maxPackageBytes,
+    );
+    if (bytes == null || !mounted) return OpenResult.unreadable;
+    // Zelfde kern als de web-picker en drag-drop: [openDeckFromBytes].
+    return openDeckFromBytes(bytes, url);
+  }
+
+  /// Gedeelde staart van elke import-flow (pakket/URL/WebDAV): open het
+  /// geïmporteerde bestand en ruim de import-artefacten op wanneer dat niet
+  /// lukte.
+  Future<OpenResult> _openImported(String mdPath) async {
     final result = await openFileByPath(mdPath);
     if (result != OpenResult.opened) await _discardImportArtifacts(mdPath);
-    return result == OpenResult.opened || result == OpenResult.blocked
-        ? null
-        : ImportFailure.unsupported;
+    return result;
   }
+
+  /// "Verwerkt" betekent voor de bool-imports: geopend, óf geblokkeerd door de
+  /// security-gate (de shell toont dan het alarm) — niet-leesbaar is `false`.
+  static bool _importHandled(OpenResult result) =>
+      result == OpenResult.opened || result == OpenResult.blocked;
 
   /// Download [entry] van de WebDAV-bron, haal het door de bestaande
   /// security-gate en open het in een tab. Het tabblad onthoudt zijn herkomst
@@ -418,16 +694,18 @@ class TabsNotifier extends StateNotifier<TabsState> {
         ? await _file.importMarkdownBytes(bytes, dest, entry.name)
         : await _file.importPackageBytes(bytes, dest);
     if (mdPath == null) return OpenResult.unreadable;
-    final result = await openFileByPath(mdPath);
-    if (result != OpenResult.opened) {
-      await _discardImportArtifacts(mdPath);
-      return result;
-    }
+    final result = await _openImported(mdPath);
+    if (result != OpenResult.opened) return result;
     // De zojuist geopende deck zit in het huidige tabblad (zie openFileByPath).
     state.current?.webdavOrigin = WebdavOrigin(
       baseUrl: service.server.baseUrl,
       username: service.server.username,
       remotePath: entry.relativePath,
+    );
+    // Herkomst voor de wolk-badge in recente presentaties.
+    await _settings.setRecentFileOrigin(
+      mdPath,
+      '${service.server.baseUrl} · ${entry.relativePath}',
     );
     if (mounted) state = state.copyWith(tabs: List.from(state.tabs));
     return OpenResult.opened;
@@ -512,5 +790,18 @@ final tabsProvider = StateNotifierProvider<TabsNotifier, TabsState>((ref) {
 /// this and shows [ImportSecurityAlarmDialog] when it becomes non-null, then
 /// resets it to null. Set by [TabsNotifier.openFileByPath].
 final importSecurityAlarmProvider = StateProvider<ImportSecurityAlarm?>(
+  (ref) => null,
+);
+
+/// Een zojuist geopend bestand blijkt elders een byte-identieke kopie te
+/// hebben. De shell toont hierop een snackbar met opruim-ingang (zelfde
+/// luister-patroon als [importSecurityAlarmProvider]).
+class DuplicateCopyNotice {
+  final String openedPath;
+  final String copyPath;
+  const DuplicateCopyNotice({required this.openedPath, required this.copyPath});
+}
+
+final duplicateCopyNoticeProvider = StateProvider<DuplicateCopyNotice?>(
   (ref) => null,
 );

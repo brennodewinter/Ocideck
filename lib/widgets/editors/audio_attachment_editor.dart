@@ -3,6 +3,7 @@ import '../../models/slide.dart';
 import '../../services/image_service.dart';
 import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
+import '../../theme/app_theme.dart';
 
 class AudioAttachmentEditor extends StatelessWidget {
   final Slide slide;
@@ -39,7 +40,7 @@ class AudioAttachmentEditor extends StatelessWidget {
                   vertical: 8,
                 ),
                 decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xFFCBD5E1)),
+                  border: Border.all(color: AppTheme.slate300),
                   borderRadius: BorderRadius.circular(6),
                   color: Colors.white,
                 ),
@@ -50,8 +51,8 @@ class AudioAttachmentEditor extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     color: slide.audioPath.isEmpty
-                        ? const Color(0xFF64748B)
-                        : const Color(0xFF334155),
+                        ? AppTheme.slate500
+                        : AppTheme.slate700,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),

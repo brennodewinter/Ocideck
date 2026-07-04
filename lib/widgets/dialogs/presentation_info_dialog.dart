@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../l10n/app_localizations.dart';
+import '../../state/settings_provider.dart';
+import '../../theme/app_theme.dart';
+import 'new_deck_dialog.dart' show ThemeProfileSwatch;
+import 'settings_dialog.dart';
 
 /// The editable general metadata of a presentation.
 class PresentationInfo {
@@ -15,6 +20,9 @@ class PresentationInfo {
   final int presentationTargetSeconds;
   final bool showRehearsalSummary;
 
+  /// Naam van het gekozen stijlprofiel (null = ongewijzigd laten).
+  final String? styleProfileName;
+
   const PresentationInfo({
     required this.title,
     required this.author,
@@ -25,13 +33,14 @@ class PresentationInfo {
     required this.keywords,
     this.presentationTargetSeconds = 0,
     this.showRehearsalSummary = true,
+    this.styleProfileName,
   });
 }
 
 /// Dialog to view and edit a presentation's general metadata (author, version,
 /// organization, date, description, keywords). These are stored in the
 /// markdown front matter and are therefore also full-text searchable.
-class PresentationInfoDialog extends StatefulWidget {
+class PresentationInfoDialog extends ConsumerStatefulWidget {
   final Deck deck;
 
   const PresentationInfoDialog({super.key, required this.deck});
@@ -44,10 +53,12 @@ class PresentationInfoDialog extends StatefulWidget {
   }
 
   @override
-  State<PresentationInfoDialog> createState() => _PresentationInfoDialogState();
+  ConsumerState<PresentationInfoDialog> createState() =>
+      _PresentationInfoDialogState();
 }
 
-class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
+class _PresentationInfoDialogState
+    extends ConsumerState<PresentationInfoDialog> {
   static const _targetSteps = [
     0,
     300,
@@ -70,6 +81,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
   late final TextEditingController _keywords;
   late int _presentationTargetSeconds;
   late bool _showRehearsalSummary;
+  late String _profileName;
 
   @override
   void initState() {
@@ -83,6 +95,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
     _keywords = TextEditingController(text: widget.deck.keywords);
     _presentationTargetSeconds = widget.deck.presentationTargetSeconds;
     _showRehearsalSummary = widget.deck.showRehearsalSummary;
+    _profileName = widget.deck.themeProfile.name;
   }
 
   @override
@@ -110,6 +123,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
         keywords: _keywords.text.trim(),
         presentationTargetSeconds: _presentationTargetSeconds,
         showRehearsalSummary: _showRehearsalSummary,
+        styleProfileName: _profileName,
       ),
     );
   }
@@ -154,100 +168,11 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _field(_title, 'Titel', 'Titel van de presentatie'),
-                const SizedBox(height: 12),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: _field(_author, 'Auteur', 'Bijv. Jan Jansen'),
-                    ),
-                    const SizedBox(width: 12),
-                    SizedBox(
-                      width: 120,
-                      child: _field(_version, 'Versie', 'Bijv. 1.0'),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: _field(
-                        _organization,
-                        'Organisatie',
-                        'Bijv. Vigilis',
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    SizedBox(
-                      width: 120,
-                      child: _field(
-                        _date,
-                        'Datum',
-                        'Bijv. 2026-05-30',
-                        onDoubleTap: _setCurrentDate,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                _field(
-                  _description,
-                  'Beschrijving',
-                  'Korte omschrijving van de presentatie',
-                  maxLines: 3,
-                ),
-                const SizedBox(height: 12),
-                _field(
-                  _keywords,
-                  'Trefwoorden',
-                  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026',
-                ),
+                _metadataFields(),
                 const SizedBox(height: 16),
-                InputDecorator(
-                  decoration: InputDecoration(
-                    labelText: l10n.d('Doeltijd (aftellen)'),
-                    isDense: true,
-                    prefixIcon: const Icon(Icons.timer_outlined, size: 18),
-                    border: const OutlineInputBorder(),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<int>(
-                      value: _targetDropdownValue,
-                      isExpanded: true,
-                      isDense: true,
-                      items: [
-                        for (final step in _targetSteps)
-                          DropdownMenuItem(
-                            value: step,
-                            child: Text(
-                              step == 0
-                                  ? l10n.d('Geen aftelling')
-                                  : '${step ~/ 60} min',
-                            ),
-                          ),
-                      ],
-                      onChanged: (seconds) {
-                        if (seconds == null) return;
-                        setState(() => _presentationTargetSeconds = seconds);
-                      },
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 6),
-                  child: Text(
-                    l10n.d(
-                      'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.',
-                    ),
-                    style: const TextStyle(
-                      fontSize: 11,
-                      color: Color(0xFF94A3B8),
-                    ),
-                  ),
-                ),
+                _styleProfileControl(l10n),
+                const SizedBox(height: 16),
+                _targetTimeControl(l10n),
                 const SizedBox(height: 16),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
@@ -270,7 +195,7 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
                   ),
                   style: const TextStyle(
                     fontSize: 11,
-                    color: Color(0xFF94A3B8),
+                    color: AppTheme.slate400,
                   ),
                 ),
               ],
@@ -285,6 +210,178 @@ class _PresentationInfoDialogState extends State<PresentationInfoDialog> {
           ElevatedButton(onPressed: _save, child: Text(l10n.t('save'))),
         ],
       ),
+    );
+  }
+
+  /// De metadata-invoervelden (titel t/m trefwoorden) van het dialoog.
+  Widget _metadataFields() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _field(_title, 'Titel', 'Titel van de presentatie'),
+        const SizedBox(height: 12),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(child: _field(_author, 'Auteur', 'Bijv. Jan Jansen')),
+            const SizedBox(width: 12),
+            SizedBox(
+              width: 120,
+              child: _field(_version, 'Versie', 'Bijv. 1.0'),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: _field(_organization, 'Organisatie', 'Bijv. Vigilis'),
+            ),
+            const SizedBox(width: 12),
+            SizedBox(
+              width: 120,
+              child: _field(
+                _date,
+                'Datum',
+                'Bijv. 2026-05-30',
+                onDoubleTap: _setCurrentDate,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        _field(
+          _description,
+          'Beschrijving',
+          'Korte omschrijving van de presentatie',
+          maxLines: 3,
+        ),
+        const SizedBox(height: 12),
+        _field(
+          _keywords,
+          'Trefwoorden',
+          'Komma-gescheiden, bijv. kwartaal, cijfers, 2026',
+        ),
+      ],
+    );
+  }
+
+  /// Stijlprofielkeuze, hier zichtbaar naast de metadata: veel gebruikers
+  /// zoeken "de look" bij de presentatie-eigenschappen, niet in instellingen.
+  /// De beheerknop opent het instellingen-tabblad Presentatiestijl.
+  Widget _styleProfileControl(AppLocalizations l10n) {
+    final profiles = ref.watch(settingsProvider.select((s) => s.themeProfiles));
+    final value = profiles.any((p) => p.name == _profileName)
+        ? _profileName
+        : profiles.first.name;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: InputDecorator(
+                decoration: InputDecoration(
+                  labelText: l10n.t('styleProfile'),
+                  isDense: true,
+                  prefixIcon: const Icon(Icons.palette_outlined, size: 18),
+                  border: const OutlineInputBorder(),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: value,
+                    isExpanded: true,
+                    isDense: true,
+                    items: [
+                      for (final profile in profiles)
+                        DropdownMenuItem(
+                          value: profile.name,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ThemeProfileSwatch(profile: profile),
+                              const SizedBox(width: 8),
+                              Flexible(
+                                child: Text(
+                                  profile.name,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                    ],
+                    onChanged: (name) {
+                      if (name != null) setState(() => _profileName = name);
+                    },
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Tooltip(
+              message: l10n.d('Stijlprofielen beheren…'),
+              child: IconButton(
+                icon: const Icon(Icons.tune, size: 18),
+                onPressed: () => SettingsDialog.show(context, initialTab: 2),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  /// De doeltijd-dropdown met toelichting (aftelling in de presenter).
+  Widget _targetTimeControl(AppLocalizations l10n) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        InputDecorator(
+          decoration: InputDecoration(
+            labelText: l10n.d('Doeltijd (aftellen)'),
+            isDense: true,
+            prefixIcon: const Icon(Icons.timer_outlined, size: 18),
+            border: const OutlineInputBorder(),
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<int>(
+              value: _targetDropdownValue,
+              isExpanded: true,
+              isDense: true,
+              items: [
+                for (final step in _targetSteps)
+                  DropdownMenuItem(
+                    value: step,
+                    child: Text(
+                      step == 0
+                          ? l10n.d('Geen aftelling')
+                          : '${step ~/ 60} min',
+                    ),
+                  ),
+              ],
+              onChanged: (seconds) {
+                if (seconds == null) return;
+                setState(() => _presentationTargetSeconds = seconds);
+              },
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 6),
+          child: Text(
+            l10n.d(
+              'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.',
+            ),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
+        ),
+      ],
     );
   }
 

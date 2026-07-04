@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
+import '../utils/atomic_file.dart';
 import '../utils/log.dart';
 
 /// Eén automatisch bewaard herstelbestand voor een (nog) niet-opgeslagen deck.
@@ -89,14 +91,22 @@ class RecoveryService {
     return next;
   }
 
+  /// Op web is er geen app-supportmap (path_provider/dart:io ontbreken): elke
+  /// operatie is daar een stille no-op in plaats van een logregen aan
+  /// UnsupportedErrors uit de dart:io-stubs.
+  static bool get _unavailable => kIsWeb;
+
   Future<void> save(RecoverySnapshot snapshot) {
+    if (_unavailable) return Future.value();
     return _enqueue(snapshot.id, () async {
       try {
         final dir = await _dir();
-        await _file(
-          dir,
-          snapshot.id,
-        ).writeAsString(jsonEncode(snapshot.toJson()), flush: true);
+        // Atomair: een crash midden in de autosave — precies het moment
+        // waarvoor recovery bestaat — mag het vorige snapshot niet slopen.
+        await writeStringAtomic(
+          _file(dir, snapshot.id),
+          jsonEncode(snapshot.toJson()),
+        );
       } catch (e) {
         logWarning('RecoveryService.save: write recovery snapshot', e);
         // Autosave mag nooit de app verstoren.
@@ -105,6 +115,7 @@ class RecoveryService {
   }
 
   Future<void> discard(String id) {
+    if (_unavailable) return Future.value();
     return _enqueue(id, () async {
       try {
         final file = _file(await _dir(), id);
@@ -129,12 +140,19 @@ class RecoveryService {
   /// Delete recovery files last modified more than [maxAge] ago. Best-effort:
   /// failures are logged, never thrown. Returns the number of files removed.
   Future<int> pruneOlderThan(Duration maxAge) async {
+    if (_unavailable) return 0;
     var removed = 0;
     try {
       final dir = await _dir();
       final now = DateTime.now();
       for (final entry in dir.listSync()) {
-        if (entry is! File || !entry.path.endsWith('.json')) continue;
+        // `.json.tmp` = restant van een atomaire write die een crash niet
+        // haalde; net zo goed plaintext-residu, dus dezelfde houdbaarheid.
+        if (entry is! File ||
+            !(entry.path.endsWith('.json') ||
+                entry.path.endsWith('.json.tmp'))) {
+          continue;
+        }
         try {
           final age = now.difference(entry.statSync().modified);
           if (age > maxAge) {
@@ -152,6 +170,7 @@ class RecoveryService {
   }
 
   Future<List<RecoverySnapshot>> loadAll() async {
+    if (_unavailable) return const [];
     // Bound plaintext residue: drop stale orphans before offering the rest.
     await pruneOlderThan(defaultMaxAge);
     try {
@@ -179,10 +198,13 @@ class RecoveryService {
   }
 
   Future<void> clearAll() async {
+    if (_unavailable) return;
     try {
       final dir = await _dir();
       for (final entry in dir.listSync()) {
-        if (entry is File && entry.path.endsWith('.json')) {
+        if (entry is File &&
+            (entry.path.endsWith('.json') ||
+                entry.path.endsWith('.json.tmp'))) {
           try {
             await entry.delete();
           } catch (e) {

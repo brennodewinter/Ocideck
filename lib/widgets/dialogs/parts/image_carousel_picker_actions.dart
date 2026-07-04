@@ -360,7 +360,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
             children: [
               const Icon(
                 Icons.layers_clear_outlined,
-                color: Color(0xFF60A5FA),
+                color: AppTheme.blue400,
                 size: 20,
               ),
               const SizedBox(width: 10),

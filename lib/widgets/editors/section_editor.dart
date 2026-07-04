@@ -18,30 +18,22 @@ class SectionEditor extends StatefulWidget {
   State<SectionEditor> createState() => _SectionEditorState();
 }
 
-class _SectionEditorState extends State<SectionEditor> {
+class _SectionEditorState extends State<SectionEditor>
+    with EditorTextControllers {
   late final TextEditingController _title;
   late final TextEditingController _subtitle;
 
   @override
   void initState() {
     super.initState();
-    _title = TextEditingController(text: widget.slide.title);
-    _subtitle = TextEditingController(text: widget.slide.subtitle);
-    _title.addListener(_emit);
-    _subtitle.addListener(_emit);
+    _title = newController(widget.slide.title, _emit);
+    _subtitle = newController(widget.slide.subtitle, _emit);
   }
 
   void _emit() {
     widget.onUpdate(
       widget.slide.copyWith(title: _title.text, subtitle: _subtitle.text),
     );
-  }
-
-  @override
-  void dispose() {
-    _title.dispose();
-    _subtitle.dispose();
-    super.dispose();
   }
 
   @override

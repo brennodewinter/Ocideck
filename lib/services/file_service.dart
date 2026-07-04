@@ -4,7 +4,10 @@ import 'dart:isolate';
 import 'dart:typed_data';
 import 'package:archive/archive.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as p;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart' show rootBundle;
 import '../models/deck.dart';
 import '../l10n/app_localizations.dart';
@@ -12,6 +15,8 @@ import '../models/settings.dart';
 import '../models/chart.dart';
 import '../models/slide.dart';
 import '../utils/atomic_file.dart';
+import '../utils/bundled_asset.dart';
+import '../utils/file_download.dart';
 import '../utils/log.dart';
 import '../utils/net_guard.dart';
 import '../utils/project_path.dart';
@@ -21,8 +26,11 @@ import 'caption_service.dart';
 import 'image_service.dart';
 import 'markdown_safety.dart';
 import 'markdown_service.dart';
+import 'web_asset_store.dart';
 
+part 'parts/file_service_net.dart';
 part 'parts/file_service_open.dart';
+part 'parts/file_service_package.dart';
 part 'parts/file_service_project.dart';
 part 'parts/file_service_import.dart';
 
@@ -35,12 +43,26 @@ class ScannedPresentation {
   /// The raw markdown source, kept for maximal full-text search.
   final String content;
 
+  /// Laatst-gewijzigd volgens het bestandssysteem, of null wanneer de stat
+  /// mislukte. Toont bij naamgenoten met afwijkende inhoud welke kopie de
+  /// recentste bewerking draagt.
+  final DateTime? modified;
+
   const ScannedPresentation({
     required this.path,
     required this.fileName,
     required this.deck,
     this.content = '',
+    this.modified,
   });
+
+  /// A display label: the deck title, falling back to the file name without
+  /// its extension. Mirrors [ScanHit.displayTitle].
+  String get displayTitle {
+    final t = deck.title.trim();
+    if (t.isNotEmpty) return t;
+    return p.basenameWithoutExtension(fileName);
+  }
 }
 
 /// A Marp presentation found by the disk-wide scan. Unlike [ScannedPresentation]
@@ -59,12 +81,24 @@ class ScanHit {
   /// True when [theme] is the OciDeck theme (sorted/marked first in the UI).
   final bool isOcideckTheme;
 
+  /// Bestandsgrootte in bytes; voorfilter voor duplicaatdetectie (alleen
+  /// even grote bestanden kúnnen identiek zijn, dus alleen die worden
+  /// volledig gelezen en gehasht).
+  final int size;
+
+  /// Laatst-gewijzigd volgens het bestandssysteem, of null wanneer de stat
+  /// mislukte. Toont bij naamgenoten met afwijkende inhoud welke kopie de
+  /// recentste bewerking draagt.
+  final DateTime? modified;
+
   const ScanHit({
     required this.path,
     required this.fileName,
     required this.title,
     required this.theme,
     required this.isOcideckTheme,
+    this.size = 0,
+    this.modified,
   });
 
   /// A display label: the frontmatter title, falling back to the file name
@@ -82,6 +116,10 @@ class _LogoProjectAsset {
 
   const _LogoProjectAsset(this.profile, this.cssUrl);
 }
+
+/// Eén lid van een `.ocideck`-pakket: archiefnaam plus uitgepakte bytes.
+/// Het resultaat van de veilige zip-decodering ([FileService.decodePackageEntries]).
+typedef PackageEntry = ({String name, Uint8List bytes});
 
 /// Why [FileService.openDeckDetailed] could not open a file. Lets a caller tell
 /// the user *why* (e.g. "this isn't a presentation") instead of a single
@@ -165,7 +203,14 @@ class FileService {
     String? projectPath,
   }) {
     final logoPath = profile.logoPath;
-    if (logoPath == null || logoPath.trim().isEmpty || p.isAbsolute(logoPath)) {
+    // Een asset:-logo (ingebouwd profiel) is al overal laadbaar; op web is er
+    // verder geen bestandssysteem om een relatief logopad in op te zoeken —
+    // laat het profiel dan ongemoeid (het logo rendert als afwezig).
+    if (logoPath == null ||
+        logoPath.trim().isEmpty ||
+        isBundledAssetPath(logoPath) ||
+        kIsWeb ||
+        p.isAbsolute(logoPath)) {
       return profile;
     }
 
@@ -230,12 +275,19 @@ class FileService {
           }
           final deck = await openDeck(entity.path, content: content);
           if (deck != null && deck.slides.isNotEmpty) {
+            DateTime? modified;
+            try {
+              modified = (await entity.stat()).modified;
+            } catch (e) {
+              logWarning('FileService.scanPresentations: stat failed', e);
+            }
             results.add(
               ScannedPresentation(
                 path: entity.path,
                 fileName: p.basename(entity.path),
                 deck: deck,
                 content: content,
+                modified: modified,
               ),
             );
           }
@@ -369,12 +421,15 @@ class FileService {
       final fm = _md.sniffFrontmatter(head);
       if (!fm.marp) return null;
       final theme = fm.theme?.trim();
+      final stat = await file.stat();
       return ScanHit(
         path: file.path,
         fileName: p.basename(file.path),
         title: fm.title,
         theme: (theme == null || theme.isEmpty) ? null : theme,
         isOcideckTheme: theme == 'ocideck',
+        size: length,
+        modified: stat.modified,
       );
     } catch (e) {
       logWarning('FileService.scanKnownLocations: file probe failed', e);
@@ -429,6 +484,31 @@ class FileService {
       initialDirectory: initialDirectory,
     );
     return result?.files.single.path;
+  }
+
+  /// Kies een presentatiebestand en lever de inhoud als bytes — het open-pad
+  /// voor web, waar bestanden geen pad hebben. `withData` laat de browser de
+  /// gekozen file in het geheugen aanleveren; desktop werkt ook (leest de
+  /// bytes), maar gebruikt normaliter [pickMarkdownFile].
+  Future<({String name, Uint8List bytes})?> pickDeckFileBytes() async {
+    final result = await FilePicker.pickFiles(
+      dialogTitle: _d('Presentatie openen'),
+      type: FileType.any,
+      withData: true,
+    );
+    final file = result?.files.single;
+    final bytes = file?.bytes;
+    if (file == null || bytes == null) return null;
+    return (name: file.name, bytes: bytes);
+  }
+
+  /// Web-opslaan: serialiseer het deck en laat de browser het als `.md`
+  /// downloaden. Bewust alleen de markdown-inhoud — sidecars (annotaties,
+  /// sprekersnotities) en assets horen bij het desktop-projectmodel en gaan in
+  /// een download niet mee. Geeft `false` terug als de download niet startte.
+  bool downloadDeckAsFile(Deck deck) {
+    final markdown = _md.generateDeck(deck);
+    return downloadTextFile('${_safeName(deck.title)}.md', markdown);
   }
 
   /// Scan the `.md` at [filePath] for executable/dangerous content before it is
@@ -593,191 +673,11 @@ class FileService {
     return _writeProject(deck, filePath);
   }
 
-  // ── Draagbaar pakket (uitwisselen / op een ander systeem draaien) ──────────
+  // ── Draagbaar pakket ── zie parts/file_service_package.dart voor de
+  // pakket-bouw (exportPackage/buildPackageBytes/buildPackageMembers).
 
   static const packageExtension = 'ocideck';
 
-  String _safeName(String title) {
-    final cleaned = title
-        .replaceAll(RegExp(r'[^\w\s-]'), '')
-        .replaceAll(RegExp(r'\s+'), '_')
-        .trim();
-    return cleaned.isEmpty ? 'presentatie' : cleaned;
-  }
-
-  /// Sanitize a deck-supplied theme name before it becomes a file name. The
-  /// `theme:` front-matter value is attacker-controlled, so `../` and other
-  /// separators must be stripped or a write could escape the project's
-  /// `themes/` directory (p.join collapses `../` on join). Falls back to
-  /// `ocideck`. Strips the same characters as [_safeName]; `.` and `/` are not
-  /// in `[\w\s-]`, so any traversal sequence is flattened away.
-  String _safeThemeName(String themeName) {
-    final cleaned = themeName
-        .replaceAll(RegExp(r'[^\w\s-]'), '')
-        .replaceAll(RegExp(r'\s+'), '_')
-        .trim();
-    return cleaned.isEmpty ? 'ocideck' : cleaned;
-  }
-
-  /// Schrijf een zelfstandig pakket (zip): de markdown + álle gebruikte assets
-  /// (afbeeldingen, media, logo) en de thema-CSS, met onderling relatieve
-  /// paden. Werkt ongeacht of het deck al is opgeslagen.
-  Future<void> exportPackage(Deck deck, String destPath) async {
-    final bytes = await buildPackageBytes(deck);
-    await writeBytesAtomic(File(destPath), bytes);
-  }
-
-  /// Bouw de bytes van een zelfstandig `.ocideck`-pakket (zie [exportPackage]),
-  /// zonder ze weg te schrijven. Gebruikt om hetzelfde pakket te uploaden naar
-  /// een WebDAV-bron in plaats van naar schijf.
-  Future<List<int>> buildPackageBytes(Deck deck) async {
-    final archive = await _buildPackageArchive(deck);
-    // Zip-compressie is CPU-zwaar (media-assets kunnen honderden MB zijn);
-    // in een eigen isolate blijft de UI responsief tijdens het pakken.
-    return Isolate.run(() => ZipEncoder().encodeBytes(archive));
-  }
-
-  /// Pakket-leden (pad → bytes) zonder ze te zippen, zodat elk bestand los naar
-  /// een WebDAV-map kan worden geüpload — een "platte" spiegel van het deck met
-  /// dezelfde asset-mappen en herschreven relatieve paden als het pakket.
-  Future<Map<String, List<int>>> buildPackageMembers(Deck deck) async {
-    final archive = await _buildPackageArchive(deck);
-    return {
-      for (final f in archive.files)
-        if (f.isFile) f.name: f.content,
-    };
-  }
-
-  Future<Archive> _buildPackageArchive(Deck deck) async {
-    final archive = Archive();
-    final added = <String>{};
-
-    /// Resolve [path] (relatief t.o.v. projectPath of absoluut), voeg het
-    /// bestand toe onder `<subdir>/<bestandsnaam>` en geef dat pad terug.
-    Future<String?> addAsset(String path, String subdir) async {
-      if (path.trim().isEmpty) return null;
-      final String abs;
-      if (p.isAbsolute(path)) {
-        // Absolute paths come from the picker (the user explicitly chose them).
-        abs = path;
-      } else if (deck.projectPath != null) {
-        // A relative asset must not escape the project via `../`.
-        final resolved = resolveProjectRelative(deck.projectPath, path);
-        if (resolved == null) return null;
-        abs = resolved;
-      } else {
-        abs = path;
-      }
-      final file = File(abs);
-      if (!await file.exists()) return null;
-      final rel = p.posix.join(subdir, p.basename(abs));
-      if (!added.contains(rel)) {
-        final bytes = await file.readAsBytes();
-        archive.add(ArchiveFile(rel, bytes.length, bytes));
-        added.add(rel);
-      }
-      return rel;
-    }
-
-    final slides = [
-      for (final s in deck.slides)
-        s.copyWith(
-          imagePath: await addAsset(s.imagePath, 'images') ?? s.imagePath,
-          imagePath2: await addAsset(s.imagePath2, 'images') ?? s.imagePath2,
-          videoPath: await addAsset(s.videoPath, 'media') ?? s.videoPath,
-          audioPath: await addAsset(s.audioPath, 'media') ?? s.audioPath,
-        ),
-    ];
-
-    // Chart slides link their data via a CSV path inside the JSON block; bring
-    // the file along under data/ and rewrite the path to match.
-    final packedSlides = [
-      for (final s in slides)
-        if (s.type == SlideType.chart)
-          await _packChartSlide(s, addAsset)
-        else
-          s,
-    ];
-
-    final logoRel = await addAsset(deck.themeProfile.logoPath ?? '', 'logos');
-    final profile = logoRel != null
-        ? deck.themeProfile.copyWith(logoPath: logoRel)
-        : deck.themeProfile;
-
-    final packDeck = deck.copyWith(slides: packedSlides, themeProfile: profile);
-
-    // Markdown.
-    final markdown = _md.generateDeck(packDeck);
-    final mdBytes = utf8.encode(markdown);
-    archive.add(
-      ArchiveFile('${_safeName(deck.title)}.md', mdBytes.length, mdBytes),
-    );
-
-    // Annotation layer travels as a separate sidecar (same base name as the
-    // markdown), so the .md inside the package stays pure Marp.
-    final ink = AnnotationCodec.encode(packDeck.slides, packDeck.annotations);
-    if (ink != null) {
-      final inkBytes = utf8.encode(ink);
-      archive.add(
-        ArchiveFile(
-          '${_safeName(deck.title)}.ink.json',
-          inkBytes.length,
-          inkBytes,
-        ),
-      );
-    }
-
-    final userNotes = UserNotesCodec.encode(
-      packDeck.slides,
-      packDeck.userNotes,
-    );
-    if (userNotes != null) {
-      final userNotesBytes = utf8.encode(userNotes);
-      archive.add(
-        ArchiveFile(
-          '${_safeName(deck.title)}.user-notes.json',
-          userNotesBytes.length,
-          userNotesBytes,
-        ),
-      );
-    }
-
-    // Thema-CSS (zodat het pakket ook in Marp/CLI bruikbaar is).
-    final css = await _packageThemeCss(packDeck.theme, profile, logoRel);
-    if (css != null) {
-      final cssBytes = utf8.encode(css);
-      final themeName = _safeThemeName(packDeck.theme);
-      archive.add(
-        ArchiveFile('themes/$themeName.css', cssBytes.length, cssBytes),
-      );
-    }
-
-    return archive;
-  }
-
-  Future<String?> _packageThemeCss(
-    String themeName,
-    ThemeProfile profile,
-    String? logoRel,
-  ) async {
-    final safe = _safeThemeName(themeName);
-    try {
-      final base = (await rootBundle.loadString(
-        'assets/themes/ocideck.css',
-      )).replaceFirst('@theme ocideck', '@theme $safe');
-      return _buildThemeCss(
-        base,
-        profile,
-        logoRel == null ? null : '../$logoRel',
-      );
-    } catch (e) {
-      logWarning('FileService._packageThemeCss: theme asset not bundled', e);
-      return null;
-    }
-  }
-
-  /// Cap on how much we download / extract, to bound memory and disk use.
-  ///
   /// Image-heavy decks routinely exceed 64 MiB, so keep the safety guard high
   /// enough for real presentation exchange while still bounding abuse.
   /// A deck's markdown is plain text; cap it so a crafted oversized `.md`
@@ -787,7 +687,195 @@ class FileService {
   static const maxPackageEntries = 10000;
   static const maxZipEntryPathLength = 512;
 
-  // Import (URL/pakket/markdown) leeft in parts/file_service_import.dart.
+  // Import (URL/pakket/markdown) leeft in parts/file_service_import.dart;
+  // hieronder staat alleen de gedeelde decode-/hergebruik-infrastructuur.
+
+  /// Decodeer een pakket-zip veilig naar (naam → bytes)-leden, met dezelfde
+  /// verdediging als de schijf-import: totale omvang, aantal entries,
+  /// padlengte en een begrensde inflater die een zip-bom mid-decompressie
+  /// stopt. Retourneert null bij elke weigering. Gedeeld door de schijf-import
+  /// ([importPackageBytes]) en de in-memory pakket-open van de webversie.
+  List<PackageEntry>? decodePackageEntries(
+    List<int> zipBytes, {
+    int maxBytes = maxPackageBytes,
+  }) {
+    if (zipBytes.length > maxBytes) return null;
+
+    final Archive archive;
+    try {
+      archive = ZipDecoder().decodeBytes(zipBytes);
+    } catch (e, s) {
+      logError('FileService.decodePackageEntries: ZIP decode failed', e, s);
+      return null;
+    }
+
+    if (archive.files.length > maxPackageEntries) {
+      logWarning(
+        'FileService.decodePackageEntries: too many archive entries '
+        '(${archive.files.length})',
+      );
+      return null;
+    }
+
+    final entries = <PackageEntry>[];
+    var extracted = 0;
+    for (final f in archive.files) {
+      if (!f.isFile) continue;
+      if (f.name.length > maxZipEntryPathLength) continue;
+      // Cheap early reject on the *declared* uncompressed size (a zip bomb can
+      // understate this, so it is only a fast path, not the real guard).
+      if (f.size < 0 || extracted + f.size > maxBytes) {
+        logWarning(
+          'FileService.decodePackageEntries: decompressed size exceeds limit',
+        );
+        return null;
+      }
+      // Inflate into a capped stream that aborts the moment the entry exceeds
+      // the remaining budget. This bounds peak memory per entry: unlike
+      // `f.content` (which decodes the whole entry into memory before we can
+      // check its size), the underlying inflater writes incrementally, so a
+      // deflate bomb that understated its header size is stopped mid-inflation.
+      final remaining = maxBytes - extracted;
+      final capped = _CappedOutputStream(remaining);
+      final Uint8List content;
+      try {
+        f.writeContent(capped);
+        content = Uint8List.fromList(capped.getBytes());
+      } on _ExtractionLimitException {
+        logWarning(
+          'FileService.decodePackageEntries: entry exceeds decompression '
+          'limit (possible zip bomb): ${f.name}',
+        );
+        return null;
+      } catch (e) {
+        // Decompressing a corrupt entry can throw; skip it instead of aborting.
+        logWarning(
+          'FileService.decodePackageEntries: unreadable entry skipped '
+          '(${f.name})',
+          e,
+        );
+        continue;
+      }
+      extracted += content.length;
+      entries.add((name: f.name, bytes: content));
+    }
+    return entries;
+  }
+
+  /// De hoofd-markdown van een pakket: het `.md`-lid met het ondiepste pad.
+  static PackageEntry? mainMarkdownEntry(List<PackageEntry> entries) {
+    PackageEntry? mdEntry;
+    for (final e in entries) {
+      if (!e.name.toLowerCase().endsWith('.md')) continue;
+      if (mdEntry == null ||
+          '/'.allMatches(e.name).length < '/'.allMatches(mdEntry.name).length) {
+        mdEntry = e;
+      }
+    }
+    return mdEntry;
+  }
+
+  Directory _uniqueDir(String parent, String name) {
+    var dir = Directory(p.join(parent, name));
+    var i = 2;
+    while (dir.existsSync()) {
+      dir = Directory(p.join(parent, '$name ($i)'));
+      i++;
+    }
+    return dir;
+  }
+
+  /// De bestaande importmappen zoals [_uniqueDir] ze aanmaakt: `naam`,
+  /// `naam (2)`, … — in aanmaakvolgorde, stoppend bij het eerste gat.
+  Iterable<Directory> _importDirCandidates(String parent, String name) sync* {
+    var dir = Directory(p.join(parent, name));
+    var i = 2;
+    while (dir.existsSync()) {
+      yield dir;
+      dir = Directory(p.join(parent, '$name ($i)'));
+      i++;
+    }
+  }
+
+  /// Of [dir] alle pakketleden [entries] byte-identiek bevat (traversal-leden
+  /// tellen niet mee, die worden ook nooit geschreven). Een gewijzigd of
+  /// ontbrekend lid — een lokaal bewerkte kopie — valt af. Extra lokale
+  /// bestanden zijn juist toegestaan: de app schrijft sidecars (annotaties,
+  /// notities) naast de markdown, en hergebruik schrijft zelf niets, dus die
+  /// kunnen nooit worden overschreven.
+  Future<bool> _dirMatchesEntries(
+    Directory dir,
+    List<PackageEntry> entries,
+  ) async {
+    final expected = <String, List<int>>{};
+    for (final entry in entries) {
+      final resolved = p.normalize(p.join(dir.path, entry.name));
+      if (resolved == dir.path || !p.isWithin(dir.path, resolved)) continue;
+      expected[resolved] = entry.bytes;
+    }
+    for (final e in expected.entries) {
+      final file = File(e.key);
+      if (!file.existsSync()) return false;
+      if (!await _fileHasBytes(file, e.value)) return false;
+    }
+    return true;
+  }
+
+  Future<bool> _fileHasBytes(File file, List<int> bytes) async {
+    if (await file.length() != bytes.length) return false;
+    final onDisk = await file.readAsBytes();
+    for (var i = 0; i < bytes.length; i++) {
+      if (onDisk[i] != bytes[i]) return false;
+    }
+    return true;
+  }
+
+  /// Zip-magie 'PK\x03\x04' — herkent een .ocideck/zip-pakket aan zijn kop.
+  static bool looksLikeZipBytes(List<int> bytes) =>
+      bytes.length >= 4 &&
+      bytes[0] == 0x50 &&
+      bytes[1] == 0x4B &&
+      bytes[2] == 0x03 &&
+      bytes[3] == 0x04;
+
+  // ── Netwerk ── zie parts/file_service_net.dart voor de URL-import
+  // (desktop, met SSRF-pinning) en de web-fetch met hulppunt-terugval.
+
+  /// Open een deck puur uit in-memory markdown: dezelfde fail-closed volgorde
+  /// als [openDeckDetailed] (veiligheidsscan → marp-sniff → parse → actief
+  /// stijlprofiel), maar zonder enige bestandssysteemtoegang. Gebruikt door de
+  /// web-URL-import: achter een URL zitten geen sidecars, projectmap of
+  /// chart-CSV's, dus die hydratatie wordt bewust overgeslagen. [sourceName]
+  /// labelt alleen de logregels.
+  ({Deck? deck, OpenFailure? failure}) openDeckFromContent(
+    String raw, {
+    String? sourceName,
+  }) {
+    final findings = MarkdownSafetyScanner.scan(raw);
+    if (findings.isNotEmpty) {
+      logWarning(
+        'FileService.openDeckFromContent: refused — executable content '
+        '(${findings.length} finding(s))',
+        sourceName,
+      );
+      return (deck: null, failure: OpenFailure.unsafe);
+    }
+    if (!_md.sniffFrontmatter(raw).marp) {
+      logWarning(
+        'FileService.openDeckFromContent: not a Marp/OciDeck presentation '
+        '(no `marp: true` front matter)',
+        sourceName,
+      );
+      return (deck: null, failure: OpenFailure.notPresentation);
+    }
+    final parsed = _md.parseDeck(raw);
+    if (parsed == null) return (deck: null, failure: OpenFailure.corrupt);
+    // Inhoud draagt geen opmaak; pas het actieve stijlprofiel toe bij openen.
+    return (
+      deck: parsed.copyWith(themeProfile: activeProfileFor(projectPath: null)),
+      failure: null,
+    );
+  }
 
   Future<String?> pickPackageFile({String? initialDirectory}) async {
     final result = await FilePicker.pickFiles(

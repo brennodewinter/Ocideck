@@ -32,6 +32,11 @@
       therefore blocked on web by design — on web there is no net_guard SSRF
       check, so this closes that hole. To allow remote media, add `https:` to
       img-src AND media-src.
+    - connect-src additionally allows https: for the user-initiated URL-import
+      (fetching a deck the user pastes a link to). The browser's CORS policy
+      gates every cross-origin read, so a non-cooperating (e.g. internal) host
+      cannot be read through this; keep it https:-only so plaintext hosts stay
+      unreachable.
     - child-src/frame-src allow blob:/data: for the offscreen Mermaid render
       WebView (an iframe on web).
     - base-uri is 'self' (NOT 'none') because Flutter relies on <base href>.
@@ -43,20 +48,20 @@
       embedding this bundle inside Nextcloud, set frame-ancestors to the host
       origin in that header.
   -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; child-src 'self' blob: data:; frame-src 'self' blob: data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https:; worker-src 'self' blob:; child-src 'self' blob: data:; frame-src 'self' blob: data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'">
 
-  <meta name="description" content="A new Flutter project.">
+  <meta name="description" content="Feline and human friendly presentations">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="ocideck">
+  <meta name="apple-mobile-web-app-title" content="OciDeck">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>ocideck</title>
+  <title>OciDeck — Feline and human friendly presentations</title>
   <link rel="manifest" href="manifest.json">
 </head>
 <body>

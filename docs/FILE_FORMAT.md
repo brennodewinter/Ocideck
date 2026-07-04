@@ -423,7 +423,7 @@ is present. The block is the round-trip source of truth.
 ````markdown
 ```question
 {
-  "kind": "multipleChoice",      // multipleChoice | trueFalse | multipleCorrect
+  "kind": "multipleChoice",      // multipleChoice | trueFalse | multipleCorrect | ordering
   "prompt": "What is the capital of the Netherlands?",
   "optionCount": 4,              // total options shown (random pick)
   "timeLimitSeconds": 0,         // 0 = no limit
@@ -440,11 +440,15 @@ is present. The block is the round-trip source of truth.
 Fields:
 
 - `kind` — `multipleChoice` (one correct + a random pick of wrong ones; pick one),
-  `trueFalse` (the prompt is a statement; pick true/false), or `multipleCorrect`
-  (several may be correct; pick all). Defaults to `multipleChoice`.
+  `trueFalse` (the prompt is a statement; pick true/false), `multipleCorrect`
+  (several may be correct; pick all), or `ordering` (put the options in the
+  right order). Defaults to `multipleChoice`.
 - `prompt` — the question, or the statement for `trueFalse`.
 - `answers` — the full pool; each has `text` and `correct`. Ignored for
-  `trueFalse`. The presentation draws a random subset from it.
+  `trueFalse`. The presentation draws a random subset from it. For `ordering`
+  the **list order is the correct order** and the `correct` flags are ignored;
+  the drawn subset keeps its relative order as the right answer and is shown
+  shuffled.
 - `optionCount` — how many options are shown (2–8, default 4). Not used by
   `trueFalse`.
 - `timeLimitSeconds` — optional countdown; running out counts as wrong.
@@ -475,7 +479,7 @@ The layout and animation are **presentation options**, not content, so they
 round-trip as extra `_class` tokens alongside the base `timeline` token:
 
 - `timeline-horizontal` / `timeline-vertical` — force a layout; absent = *auto*
-  (horizontal for ≤ 5 events, vertical otherwise).
+  (horizontal for ≤ 14 events, vertical otherwise).
 - `timeline-steps` — reveal one event per click while presenting; absent = the
   whole timeline draws itself in when the slide opens.
 - `timeline-static` — no animation; everything is shown at once.
@@ -488,7 +492,22 @@ token, and only when it differs from the 1600 ms default:
 <!-- ocideck_timeline_duration: 2600 -->
 ```
 
-It is the full draw-in duration in milliseconds, clamped to 400–6000 ms.
+It is the full draw-in duration in milliseconds, clamped to 400–30000 ms.
+
+One event can be highlighted as the **current point** ("where we are now", e.g.
+a project's present phase): its card gets a solid accent border and glow, and
+its node grows with a halo ring. It round-trips as an HTML comment holding the
+**1-based** event number (the Nth list item), and only when a current point is
+set:
+
+```markdown
+<!-- ocideck_timeline_current: 2 -->
+```
+
+A number that does not point at an existing event is ignored (no highlight).
+Without a current point the *last* event carries a subtle emphasis by default;
+an explicit current point takes that highlight over, so exactly one "you are
+here" shows.
 
 > The reveal step (how many events are currently shown in step mode) is
 > **session-only** and never written to the file.

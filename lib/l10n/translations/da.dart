@@ -83,6 +83,12 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Bemærk: webversionen kan kun hente fra servere, der tillader det (CORS).',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Pakker (.ocideck) understøttes endnu ikke i webversionen.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Kun .md-præsentationer kan åbnes i webversionen.',
   'Geen': 'Ingen',
   'Nieuw': 'Ny',
   'Verwijderen': 'Slet',
@@ -670,6 +676,8 @@ const _dutchSourceDa = {
   'Verticaal': 'Lodret',
   'Animatie': 'Animation',
   'Intekenen bij openen': 'Tegn ind ved åbning',
+  'Markeer als huidig punt': 'Markér som nuværende punkt',
+  'Huidig punt weghalen': 'Fjern nuværende punkt',
   'Stap voor stap': 'Trin for trin',
   'Geen animatie': 'Ingen animation',
   'Animatiesnelheid': 'Animationshastighed',
@@ -728,6 +736,13 @@ const _dutchSourceDa = {
       'Udsagnet ovenfor er sandt eller falsk; vælg hvilket.',
   'Selecteer alle juiste antwoorden': 'Vælg alle rigtige svar',
   'Bevestig': 'Bekræft',
+  'Volgorde': 'Rækkefølge',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Sæt svarene her i den rigtige rækkefølge. Ved præsentation vises de blandet.',
+  'Geef minstens twee antwoorden op.': 'Angiv mindst to svar.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Tryk på svarene i den rigtige rækkefølge',
+  'Jouw volgorde': 'Din rækkefølge',
   'Het juiste antwoord': 'Det rigtige svar',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Billedet vises fuldskærms som baggrund. Brug sløringen, når titlen har brug for mere ro eller kontrast.',
@@ -1172,4 +1187,132 @@ const _dutchSourceDa = {
   'Herstelbestanden nu wissen': 'Slet gendannelsesfiler nu',
   'Er waren geen herstelbestanden.': 'Der var ingen gendannelsesfiler.',
   'herstelbestand(en) gewist.': 'gendannelsesfil(er) slettet.',
+  'Klaar voor export': 'Klar til eksport',
+  'kwaliteitswaarschuwing(en)': 'kvalitetsadvarsel/-advarsler',
+  'Nog opslaan nodig': 'Skal gemmes først',
+  'TLP blokkeert export': 'TLP blokerer eksporten',
+  'Kwaliteit blokkeert export': 'Kvaliteten blokerer eksporten',
+  'Verhoog contrast': 'Øg kontrasten',
+  'Open kleurinstellingen': 'Åbn farveindstillinger',
+  'Voeg alt-tekst toe': 'Tilføj alt-tekst',
+  'Voeg beschrijving toe': 'Tilføj beskrivelse',
+  'Zinnen naar losse bullets': 'Sætninger til separate punkter',
+  'Laatst geëxporteerd als': 'Senest eksporteret som',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Bestemmer farver, skrifttype og logo. Kan ændres senere via præsentationsegenskaberne eller indstillingerne.',
+  'Stijlprofielen beheren…': 'Administrer stilprofiler…',
+  'Geavanceerd': 'Avanceret',
+  'Knippen en audio': 'Klipning og lyd',
+  'Bereik en kleurzones': 'Interval og farvezoner',
+  'Leeg deck': 'Tomt deck',
+  'Korte briefing': 'Kort briefing',
+  'Status-briefing': 'Statusbriefing',
+  'Projectstart / kick-off': 'Projektstart / kick-off',
+  'Voorbespreking communicatie': 'Formøde om kommunikation',
+  'Projecttijdlijn': 'Projekttidslinje',
+  'Informatiebeveiliging: RASCI / TVB': 'Informationssikkerhed: RASCI / TVB',
+  'Security-takenplan': 'Plan for sikkerhedsopgaver',
+  'Certificering voortgang': 'Certificeringsfremdrift',
+  'Training / workshop': 'Træning / workshop',
+  'Rapportage': 'Rapportering',
+  'Onderzoeksverhaal': 'Undersøgelsesfortælling',
+  'Technische uitleg': 'Teknisk forklaring',
+  'Interactieve quiz': 'Interaktiv quiz',
+  'Alleen een titelpagina en een agenda.': 'Kun en titelside og en dagsorden.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situation, fakta og ønsket beslutning på seks slides.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Statusdashboard, fremdrift pr. arbejdsstrøm og beslutninger.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Hvorfor, mål, omfang, interessenter og tidslinje.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Målgrupper, kernebudskab, kanaler og talspersonrolle.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Faser, milepæle, afhængigheder og beslutningspunkter.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Fastlæg roller, RASCI-matrix og opgaveaftaler.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Opgaver, prioriteter, ejere og dokumentation.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Fremdrift pr. domæne, kontroller og auditplanlægning.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Læringsmål, kernebegreber, øvelse og quizspørgsmål.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Resumé, KPI-dashboard, trend og handlinger.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Spørgsmål, metode, tidslinje over fund og konklusioner.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arkitektur, komponenter, kodeeksempel og tjekliste.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Tre spørgsmålsformer med forklaring og opsamling.',
+  'Sjabloon': 'Skabelon',
+  'Post-incident review / lessons learned':
+      'Post-incident review / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Databrud / vurdering af privatlivshændelse',
+  'DPIA / privacy impact assessment':
+      'DPIA / konsekvensanalyse for databeskyttelse',
+  'Risicoanalyse / risk register': 'Risikoanalyse / risikoregister',
+  'Business continuity / DR-test': 'Business continuity / DR-test',
+  'Tabletop-oefening / crisisoefening': 'Tabletop-øvelse / kriseøvelse',
+  'BOB-crisisrapportage': 'BOB-kriserapportering',
+  'CAB / release readiness': 'CAB / release readiness',
+  'Stuurgroep / project board update': 'Styregruppe / project board-update',
+  'Auditbevindingen en opvolging': 'Auditfund og opfølgning',
+  'Leveranciersbeoordeling / vendor risk': 'Leverandørvurdering / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Arkitekturbeslutning / ADR-præsentation',
+  'Beleid uitrollen / implementatieplan':
+      'Udrulning af politik / implementeringsplan',
+  'Overdracht / handover': 'Overdragelse / handover',
+  'Retrospective / teamverbetering': 'Retrospektiv / teamforbedring',
+  'PPL Vluchtvoorbereiding': 'PPL-flyveforberedelse',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Tidslinje, konsekvenser, årsager og forbedringstiltag efter en hændelse.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Vurdér data, risiko, anmeldelsespligt og kommunikation.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Behandling, retsgrundlag, privatlivsrisici og foranstaltninger.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Fastlæg risici, sandsynlighed, konsekvens, foranstaltninger og ejere.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scenarie, genopretningsmål, testfund og forbedringspunkter.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scenarie, injects, beslutninger, observationer og evaluering.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Før et kriseteam gennem situationsforståelse, vurdering og beslutningstagning, med live situationsbillede, informationsspørgsmål, dilemmaer, beslutningslog og handlingsliste.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Ændring, konsekvenser, tests, rollback, kommunikation og go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Fremdrift, planlægning, budget, risici og ønskede beslutninger.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Fund, root cause, foranstaltninger, dokumentation og status.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Tjeneste, data, afhængighed, krav, risici og beslutning.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontekst, muligheder, trade-offs, beslutning og konsekvenser.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Målgruppe, planlægning, kommunikation, træning og adoption.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Status, åbne handlinger, risici, kontakter og første skridt.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fakta, mønstre, start-stop-continue og forbedringstiltag.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Forbered en VFR-flyvning med rute, vejr, NOTAMs, præstationer, weight & balance, brændstof, alternates og personlige go/no-go-tjek.',
+  'Zoek een sjabloon': 'Søg efter en skabelon',
+  'Geen sjablonen gevonden': 'Ingen skabeloner fundet',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identiske kopier',
+  'Zelfde titel, andere inhoud': 'Samme titel, forskelligt indhold',
+  'Dubbele presentaties opruimen': 'Ryd op i dublerede præsentationer',
+  'Naar de prullenbak verplaatst:': 'Flyttet til papirkurven:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Kunne ikke flyttes til papirkurven.',
+  'Geen dubbele presentaties gevonden.':
+      'Ingen dublerede præsentationer fundet.',
+  'Laatste kopie blijft behouden': 'Den sidste kopi bevares',
+  'Nog geopend in een tabblad': 'Stadig åben i en fane',
+  'Naar prullenbak': 'Til papirkurven',
+  'Deze presentatie staat ook op een andere plek:':
+      'Denne præsentation findes også et andet sted:',
 };

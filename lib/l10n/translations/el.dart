@@ -83,6 +83,12 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Σημείωση: η έκδοση για τον ιστό μπορεί να αντλεί μόνο από διακομιστές που το επιτρέπουν (CORS).',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Τα πακέτα (.ocideck) δεν υποστηρίζονται ακόμη στην έκδοση για τον ιστό.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Στην έκδοση για τον ιστό μπορούν να ανοιχτούν μόνο παρουσιάσεις .md.',
   'Geen': 'Κανένα',
   'Nieuw': 'Νέα',
   'Verwijderen': 'Διαγραφή',
@@ -680,6 +686,8 @@ const _dutchSourceEl = {
   'Verticaal': 'Κατακόρυφα',
   'Animatie': 'Κίνηση',
   'Intekenen bij openen': 'Σχεδίαση κατά το άνοιγμα',
+  'Markeer als huidig punt': 'Επισήμανση ως τρέχον σημείο',
+  'Huidig punt weghalen': 'Αφαίρεση τρέχοντος σημείου',
   'Stap voor stap': 'Βήμα προς βήμα',
   'Geen animatie': 'Χωρίς κίνηση',
   'Animatiesnelheid': 'Ταχύτητα κίνησης',
@@ -738,6 +746,13 @@ const _dutchSourceEl = {
       'Η παραπάνω δήλωση είναι σωστή ή λανθασμένη· επιλέξτε ποιο.',
   'Selecteer alle juiste antwoorden': 'Επιλέξτε όλες τις σωστές απαντήσεις',
   'Bevestig': 'Επιβεβαίωση',
+  'Volgorde': 'Σειρά',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Βάλτε εδώ τις απαντήσεις στη σωστή σειρά. Κατά την παρουσίαση εμφανίζονται ανακατεμένες.',
+  'Geef minstens twee antwoorden op.': 'Δώστε τουλάχιστον δύο απαντήσεις.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Πατήστε τις απαντήσεις με τη σωστή σειρά',
+  'Jouw volgorde': 'Η σειρά σας',
   'Het juiste antwoord': 'Η σωστή απάντηση',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Η εικόνα εμφανίζεται σε πλήρη οθόνη ως φόντο. Χρησιμοποιήστε το θόλωμα όταν ο τίτλος χρειάζεται περισσότερη ηρεμία ή αντίθεση.',
@@ -1190,4 +1205,135 @@ const _dutchSourceEl = {
   'Herstelbestanden nu wissen': 'Σβήσιμο αρχείων ανάκτησης τώρα',
   'Er waren geen herstelbestanden.': 'Δεν υπήρχαν αρχεία ανάκτησης.',
   'herstelbestand(en) gewist.': 'αρχείο(-α) ανάκτησης σβήστηκαν.',
+  'Klaar voor export': 'Έτοιμο για εξαγωγή',
+  'kwaliteitswaarschuwing(en)': 'προειδοποίηση(-εις) ποιότητας',
+  'Nog opslaan nodig': 'Απαιτείται πρώτα αποθήκευση',
+  'TLP blokkeert export': 'Το TLP μπλοκάρει την εξαγωγή',
+  'Kwaliteit blokkeert export': 'Η ποιότητα μπλοκάρει την εξαγωγή',
+  'Verhoog contrast': 'Αύξηση αντίθεσης',
+  'Open kleurinstellingen': 'Άνοιγμα ρυθμίσεων χρωμάτων',
+  'Voeg alt-tekst toe': 'Προσθήκη εναλλακτικού κειμένου',
+  'Voeg beschrijving toe': 'Προσθήκη περιγραφής',
+  'Zinnen naar losse bullets': 'Προτάσεις σε χωριστές κουκκίδες',
+  'Laatst geëxporteerd als': 'Τελευταία εξαγωγή ως',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Καθορίζει χρώματα, γραμματοσειρά και λογότυπο. Αλλάζει αργότερα από τις ιδιότητες της παρουσίασης ή τις ρυθμίσεις.',
+  'Stijlprofielen beheren…': 'Διαχείριση προφίλ στυλ…',
+  'Geavanceerd': 'Για προχωρημένους',
+  'Knippen en audio': 'Κόψιμο και ήχος',
+  'Bereik en kleurzones': 'Εύρος και ζώνες χρωμάτων',
+  'Leeg deck': 'Κενό deck',
+  'Korte briefing': 'Σύντομη ενημέρωση',
+  'Status-briefing': 'Ενημέρωση κατάστασης',
+  'Projectstart / kick-off': 'Έναρξη έργου / kick-off',
+  'Voorbespreking communicatie': 'Προκαταρκτική συζήτηση επικοινωνίας',
+  'Projecttijdlijn': 'Χρονοδιάγραμμα έργου',
+  'Informatiebeveiliging: RASCI / TVB': 'Ασφάλεια πληροφοριών: RASCI / TVB',
+  'Security-takenplan': 'Σχέδιο εργασιών ασφάλειας',
+  'Certificering voortgang': 'Πρόοδος πιστοποίησης',
+  'Training / workshop': 'Εκπαίδευση / workshop',
+  'Rapportage': 'Αναφορά',
+  'Onderzoeksverhaal': 'Ερευνητική αφήγηση',
+  'Technische uitleg': 'Τεχνική επεξήγηση',
+  'Interactieve quiz': 'Διαδραστικό κουίζ',
+  'Alleen een titelpagina en een agenda.':
+      'Μόνο μια σελίδα τίτλου και μια ατζέντα.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Κατάσταση, γεγονότα και ζητούμενη απόφαση σε έξι διαφάνειες.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Πίνακας κατάστασης, πρόοδος ανά ροή εργασίας και αποφάσεις.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Γιατί, στόχος, εύρος, ενδιαφερόμενοι και χρονοδιάγραμμα.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Ομάδες-στόχοι, βασικό μήνυμα, κανάλια και εκπροσώπηση.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Φάσεις, ορόσημα, εξαρτήσεις και σημεία απόφασης.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Καταγραφή ρόλων, πίνακα RASCI και συμφωνιών εργασιών.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Εργασίες, προτεραιότητες, υπεύθυνοι και αποδεικτικά στοιχεία.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Πρόοδος ανά τομέα, μέτρα ελέγχου και προγραμματισμός audit.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Μαθησιακοί στόχοι, βασικές έννοιες, άσκηση και ερώτηση κουίζ.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Σύνοψη, πίνακας KPI, τάση και ενέργειες.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Ερώτημα, μέθοδος, χρονολόγιο ευρημάτων και συμπεράσματα.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Αρχιτεκτονική, στοιχεία, παράδειγμα κώδικα και λίστα ελέγχου.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Τρεις τύποι ερωτήσεων με επεξήγηση και ανασκόπηση.',
+  'Sjabloon': 'Πρότυπο',
+  'Post-incident review / lessons learned':
+      'Ανασκόπηση μετά το περιστατικό / διδάγματα',
+  'Datalek / privacy-incident beoordeling':
+      'Διαρροή δεδομένων / αξιολόγηση περιστατικού ιδιωτικότητας',
+  'DPIA / privacy impact assessment':
+      'DPIA / εκτίμηση αντικτύπου στην προστασία δεδομένων',
+  'Risicoanalyse / risk register': 'Ανάλυση κινδύνων / μητρώο κινδύνων',
+  'Business continuity / DR-test': 'Επιχειρησιακή συνέχεια / δοκιμή DR',
+  'Tabletop-oefening / crisisoefening': 'Άσκηση tabletop / άσκηση κρίσης',
+  'BOB-crisisrapportage': 'Αναφορά κρίσης BOB',
+  'CAB / release readiness': 'CAB / ετοιμότητα έκδοσης',
+  'Stuurgroep / project board update':
+      'Συντονιστική επιτροπή / ενημέρωση project board',
+  'Auditbevindingen en opvolging': 'Ευρήματα audit και παρακολούθηση',
+  'Leveranciersbeoordeling / vendor risk':
+      'Αξιολόγηση προμηθευτών / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Απόφαση αρχιτεκτονικής / παρουσίαση ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Εφαρμογή πολιτικής / σχέδιο υλοποίησης',
+  'Overdracht / handover': 'Παράδοση / handover',
+  'Retrospective / teamverbetering': 'Retrospective / βελτίωση ομάδας',
+  'PPL Vluchtvoorbereiding': 'Προετοιμασία πτήσης PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Χρονολόγιο, επιπτώσεις, αίτια και ενέργειες βελτίωσης μετά από περιστατικό.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Αξιολογήστε δεδομένα, κίνδυνο, υποχρέωση γνωστοποίησης και επικοινωνία.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Επεξεργασία, νομική βάση, κίνδυνοι ιδιωτικότητας και μέτρα.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Καταγράψτε κινδύνους, πιθανότητα, επιπτώσεις, μέτρα και υπευθύνους.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Σενάριο, στόχοι ανάκαμψης, ευρήματα δοκιμών και σημεία βελτίωσης.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Σενάριο, injects, αποφάσεις, παρατηρήσεις και αξιολόγηση.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Καθοδηγήστε μια ομάδα κρίσης στη διαμόρφωση εικόνας, την αξιολόγηση και τη λήψη αποφάσεων, με ζωντανή εικόνα κατάστασης, ερωτήματα πληροφόρησης, διλήμματα, ημερολόγιο αποφάσεων και λίστα ενεργειών.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Αλλαγή, επιπτώσεις, δοκιμές, rollback, επικοινωνία και go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Πρόοδος, χρονοδιάγραμμα, προϋπολογισμός, κίνδυνοι και ζητούμενες αποφάσεις.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Ευρήματα, root cause, μέτρα, αποδεικτικά στοιχεία και κατάσταση.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Υπηρεσία, δεδομένα, εξάρτηση, απαιτήσεις, κίνδυνοι και απόφαση.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Πλαίσιο, επιλογές, trade-offs, απόφαση και συνέπειες.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Κοινό-στόχος, χρονοδιάγραμμα, επικοινωνία, εκπαίδευση και υιοθέτηση.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Κατάσταση, ανοιχτές ενέργειες, κίνδυνοι, επαφές και πρώτα βήματα.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Γεγονότα, μοτίβα, start-stop-continue και ενέργειες βελτίωσης.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Προετοιμάστε μια πτήση VFR με διαδρομή, καιρό, NOTAM, επιδόσεις, weight & balance, καύσιμα, εναλλακτικά αεροδρόμια και προσωπικούς ελέγχους go/no-go.',
+  'Zoek een sjabloon': 'Αναζήτηση προτύπου',
+  'Geen sjablonen gevonden': 'Δεν βρέθηκαν πρότυπα',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Πανομοιότυπα αντίγραφα',
+  'Zelfde titel, andere inhoud': 'Ίδιος τίτλος, διαφορετικό περιεχόμενο',
+  'Dubbele presentaties opruimen': 'Εκκαθάριση διπλότυπων παρουσιάσεων',
+  'Naar de prullenbak verplaatst:': 'Μεταφέρθηκε στα απορρίμματα:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Δεν ήταν δυνατή η μεταφορά στα απορρίμματα.',
+  'Geen dubbele presentaties gevonden.':
+      'Δεν βρέθηκαν διπλότυπες παρουσιάσεις.',
+  'Laatste kopie blijft behouden': 'Το τελευταίο αντίγραφο διατηρείται',
+  'Nog geopend in een tabblad': 'Ακόμη ανοιχτή σε καρτέλα',
+  'Naar prullenbak': 'Στα απορρίμματα',
+  'Deze presentatie staat ook op een andere plek:':
+      'Αυτή η παρουσίαση υπάρχει και σε άλλη θέση:',
 };

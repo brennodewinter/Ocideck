@@ -83,6 +83,12 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Achtig: d Webversion cha nume vo Server abhole, wo das erlaube (CORS).',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Päckli (.ocideck) wärde i dr Webversion no nid understützt.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'I dr Webversion chöi nume .md-Präsentatione göffnet wärde.',
   'Geen': 'Kes',
   'Nieuw': 'Nöi',
   'Verwijderen': 'Lösche',
@@ -673,6 +679,8 @@ const _dutchSourceGsw = {
   'Verticaal': 'Vertikal',
   'Animatie': 'Animation',
   'Intekenen bij openen': 'Bim Öffne iizeichne',
+  'Markeer als huidig punt': 'Als aktuelle Punkt markiere',
+  'Huidig punt weghalen': 'Aktuelle Punkt ewegneh',
   'Stap voor stap': 'Schritt für Schritt',
   'Geen animatie': 'Kei Animation',
   'Animatiesnelheid': 'Animationsgschwindigkeit',
@@ -731,6 +739,13 @@ const _dutchSourceGsw = {
       'D Uussag do obe isch richtig oder falsch; wähl welchi.',
   'Selecteer alle juiste antwoorden': 'Wähl alli richtige Antworte us',
   'Bevestig': 'Bestätige',
+  'Volgorde': 'Reihefolg',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Bring d Antworte da i di richtig Reihefolg. Bim Präsentiere werded si gmischt aazeigt.',
+  'Geef minstens twee antwoorden op.': 'Gib mindeschtens zwei Antworte a.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Tipp d Antworte i de richtige Reihefolg aa',
+  'Jouw volgorde': 'Dini Reihefolg',
   'Het juiste antwoord': 'Di richtig Antwort',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'S Bild wird schermfüllend als Hintergrund aazeigt. Bruuch de Unschärfe, wenn de Titel meh Rueh oder Kontrascht bruucht.',
@@ -1176,4 +1191,131 @@ const _dutchSourceGsw = {
   'Herstelbestanden nu wissen': 'Wiederherstelligs-Dateie jetz lösche',
   'Er waren geen herstelbestanden.': 'Es het kei Wiederherstelligs-Dateie gha.',
   'herstelbestand(en) gewist.': 'Wiederherstelligs-Datei(e) glöscht.',
+  'Klaar voor export': 'Parat zum Exportiere',
+  'kwaliteitswaarschuwing(en)': 'Qualitätswarnig(e)',
+  'Nog opslaan nodig': 'Zerscht spychere',
+  'TLP blokkeert export': 's TLP blockiert dr Export',
+  'Kwaliteit blokkeert export': 'D Qualität blockiert dr Export',
+  'Verhoog contrast': 'Kontrascht erhöche',
+  'Open kleurinstellingen': 'Farbiischtellige uftue',
+  'Voeg alt-tekst toe': 'Alt-Text dezuetue',
+  'Voeg beschrijving toe': 'Beschriibig dezuetue',
+  'Zinnen naar losse bullets': 'Sätz in einzelni Pünkt',
+  'Laatst geëxporteerd als': 'Zletscht exportiert als',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Bestimmt Farbe, Schrift und Logo. Chasch spöter über d Präsentations-Eigeschafte oder d Iischtellige ändere.',
+  'Stijlprofielen beheren…': 'Stilprofil verwalte…',
+  'Geavanceerd': 'Erwiitert',
+  'Knippen en audio': 'Schniide und Audio',
+  'Bereik en kleurzones': 'Beriich und Farbzone',
+  'Leeg deck': 'Leers Deck',
+  'Korte briefing': 'Churzes Briefing',
+  'Status-briefing': 'Status-Briefing',
+  'Projectstart / kick-off': 'Projäktschtart / Kick-off',
+  'Voorbespreking communicatie': 'Vorbeschprächig Kommunikation',
+  'Projecttijdlijn': 'Projäkt-Ziitlinie',
+  'Informatiebeveiliging: RASCI / TVB': 'Informationssicherheit: RASCI / TVB',
+  'Security-takenplan': 'Security-Ufgabeplan',
+  'Certificering voortgang': 'Zertifizierigs-Fortschritt',
+  'Training / workshop': 'Training / Workshop',
+  'Rapportage': 'Bricht',
+  'Onderzoeksverhaal': 'Untersuechigs-Gschicht',
+  'Technische uitleg': 'Technischi Erklärig',
+  'Interactieve quiz': 'Interaktivs Quiz',
+  'Alleen een titelpagina en een agenda.':
+      'Nur e Titelsiite und e Traktandeliste.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situation, Fakte und dr verlangti Entscheid in sächs Folie.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Status-Dashboard, Fortschritt pro Arbetsschtrom und Entscheid.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Warum, Ziel, Umfang, Stakeholder und Ziitlinie.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Zielgruppe, Chärnbotschaft, Kanäl und Wortfüehrig.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Phase, Meilestei, Abhängigkeite und Entscheidigsmomänt.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Rolle, RASCI-Matrix und Ufgabe-Abmachige feschthalte.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Ufgabe, Prioritäte, Owner und Nachwiis.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Fortschritt pro Domäne, Controls und Auditplanig.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Lernziel, Chärnkonzäpt, Üebig und Quizfrag.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Zämefassig, KPI-Dashboard, Tränd und Massnahme.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Frag, Method, Ziitlinie vo de Befund und Schlussfolgerige.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architektur, Komponänte, Codebiispiel und Checklischte.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Drei Fragforme mit Erklärig und Nachbeschprächig.',
+  'Sjabloon': 'Vorlag',
+  'Post-incident review / lessons learned':
+      'Post-Incident-Review / Lessons Learned',
+  'Datalek / privacy-incident beoordeling':
+      'Dateläck / Privacy-Vorfall-Beurteilig',
+  'DPIA / privacy impact assessment': 'DPIA / Privacy Impact Assessment',
+  'Risicoanalyse / risk register': 'Risikoanalyse / Risk Register',
+  'Business continuity / DR-test': 'Business Continuity / DR-Test',
+  'Tabletop-oefening / crisisoefening': 'Tabletop-Üebig / Chriseüebig',
+  'BOB-crisisrapportage': 'BOB-Chrisebricht',
+  'CAB / release readiness': 'CAB / Release Readiness',
+  'Stuurgroep / project board update': 'Stüürgruppe / Project-Board-Update',
+  'Auditbevindingen en opvolging': 'Audit-Befund und Nachverfolgig',
+  'Leveranciersbeoordeling / vendor risk':
+      'Lieferante-Beurteilig / Vendor Risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Architekturentscheid / ADR-Präsentation',
+  'Beleid uitrollen / implementatieplan': 'Richtlinie uusrolle / Umsetzigsplan',
+  'Overdracht / handover': 'Übergab / Handover',
+  'Retrospective / teamverbetering': 'Retrospektive / Teamverbesserig',
+  'PPL Vluchtvoorbereiding': 'PPL Flugvorbereitig',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Ziitlinie, Uuswirkig, Ursache und Verbesserige nach eme Vorfall.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Beurteil d Date, s Risiko, d Mäldpflicht und d Kommunikation.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Verarbeitig, Rächtsgrundlag, Privacy-Risike und Massnahme.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Halt Risike, Wahrschiinlichkeit, Uuswirkig, Massnahme und Owner fescht.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Szenario, Wiederherstelligsziel, Testbefund und Verbesserigspünkt.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Szenario, Injects, Entscheid, Beobachtige und Evaluation.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Füehr es Chriseteam dur Lagebildig, Urteilsbildig und Entscheidsfindig, mit livem Lagebild, Informationsfrage, Dilemma, Entscheidigslog und Aktionslischte.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Änderig, Uuswirkig, Tests, Rollback, Kommunikation und Go/No-Go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Fortschritt, Planig, Budget, Risike und verlangti Entscheid.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Befund, Root Cause, Massnahme, Nachwiis und Status.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Dienscht, Date, Abhängigkeite, Aforderige, Risike und Entscheid.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontext, Optione, Trade-offs, Entscheid und Folge.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Zielgruppe, Planig, Kommunikation, Training und Adoption.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Status, offni Aktione, Risike, Kontäkt und die erschte Schritt.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fakte, Muschter, Start-Stop-Continue und Verbesserige.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Bereit en VFR-Flug vor mit Route, Wätter, NOTAMs, Leischtig, Weight & Balance, Triibstoff, Alternates und persönliche Go/No-Go-Checks.',
+  'Zoek een sjabloon': 'Suech e Vorlag',
+  'Geen sjablonen gevonden': 'Kei Vorlage gfunde',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identischi Kopie',
+  'Zelfde titel, andere inhoud': 'Gliiche Titel, andere Inhalt',
+  'Dubbele presentaties opruimen': 'Doppleti Präsentatione uufruume',
+  'Naar de prullenbak verplaatst:': 'In Papierchorb verschobe:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Het nöd in Papierchorb chöne verschobe werde.',
+  'Geen dubbele presentaties gevonden.': 'Kei doppleti Präsentatione gfunde.',
+  'Laatste kopie blijft behouden': 'Di letschti Kopie bliibt erhalte',
+  'Nog geopend in een tabblad': 'No offe imene Tab',
+  'Naar prullenbak': 'In Papierchorb',
+  'Deze presentatie staat ook op een andere plek:':
+      'Die Präsentation git s au an eme andere Ort:',
 };

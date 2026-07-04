@@ -84,7 +84,7 @@ extension _SettingsColors on _SettingsDialogState {
       const SizedBox(height: 12),
       Row(
         children: [
-          const Icon(Icons.timer_outlined, size: 18, color: Color(0xFF64748B)),
+          const Icon(Icons.timer_outlined, size: 18, color: AppTheme.slate500),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
@@ -99,7 +99,7 @@ extension _SettingsColors on _SettingsDialogState {
               textAlign: TextAlign.right,
               style: const TextStyle(
                 fontSize: 12,
-                color: Color(0xFF64748B),
+                color: AppTheme.slate500,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -164,7 +164,7 @@ extension _SettingsColors on _SettingsDialogState {
         ),
         subtitle: Text(
           l10n.d('Toont een streep door voltooide checklistitems.'),
-          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
         ),
         controlAffinity: ListTileControlAffinity.leading,
         contentPadding: EdgeInsets.zero,
@@ -269,7 +269,7 @@ extension _SettingsColors on _SettingsDialogState {
           l10n.d(
             'Uit = alles in één kleur (bijv. groen op zwart voor een CRT-scherm).',
           ),
-          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
         ),
         controlAffinity: ListTileControlAffinity.leading,
         contentPadding: EdgeInsets.zero,
@@ -406,7 +406,7 @@ extension _SettingsColors on _SettingsDialogState {
         l10n.d(
           'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.',
         ),
-        style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+        style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
       ),
       const SizedBox(height: 14),
       DropdownButtonFormField<String>(
@@ -469,7 +469,7 @@ extension _SettingsColors on _SettingsDialogState {
         ),
         subtitle: Text(
           l10n.d('Wordt automatisch toegevoegd bij presenteren en exporteren.'),
-          style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+          style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
         ),
         contentPadding: EdgeInsets.zero,
         dense: true,
@@ -507,7 +507,7 @@ extension _SettingsColors on _SettingsDialogState {
           style: const TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w600,
-            color: Color(0xFF334155),
+            color: AppTheme.slate700,
           ),
         ),
         const SizedBox(height: 6),
@@ -552,9 +552,9 @@ extension _SettingsColors on _SettingsDialogState {
           height: 34,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: const Color(0xFFCBD5E1)),
+            border: Border.all(color: AppTheme.slate300),
           ),
-          child: const Icon(Icons.tune, size: 18, color: Color(0xFF64748B)),
+          child: const Icon(Icons.tune, size: 18, color: AppTheme.slate500),
         ),
       ),
     );
@@ -604,7 +604,7 @@ extension _SettingsColors on _SettingsDialogState {
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: selected ? AppTheme.accent : const Color(0xFFCBD5E1),
+              color: selected ? AppTheme.accent : AppTheme.slate300,
               width: selected ? 2 : 1,
             ),
           ),

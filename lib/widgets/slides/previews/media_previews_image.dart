@@ -81,6 +81,39 @@ Widget _resolvedImage(
 }) {
   if (imagePath.isEmpty) return _imagePlaceholder(context);
 
+  // Méégebundelde asset (ingebouwde stijlprofielen, bv. het LibreKAT-logo):
+  // rendert op elk platform, ook op web waar geen bestandssysteem bestaat.
+  if (isBundledAssetPath(imagePath)) {
+    return Image(
+      image: cappedBundledAssetImage(bundledAssetKey(imagePath)),
+      fit: fit,
+      width: double.infinity,
+      height: double.infinity,
+      gaplessPlayback: true,
+      semanticLabel: semanticLabel,
+      errorBuilder: (context, error, stackTrace) => _imagePlaceholder(context),
+    );
+  }
+
+  // In-memory afbeelding (webversie): een `mem:`-pad wijst naar bytes in de
+  // WebAssetStore in plaats van naar een bestand. Zelfde decode-cap; na een
+  // herlaad van de pagina is de store leeg en toont dit de placeholder.
+  final memBytes = WebAssetStore.isMemPath(imagePath)
+      ? WebAssetStore.bytesFor(imagePath)
+      : null;
+  if (memBytes != null) {
+    return Image(
+      image: cappedMemoryImage(memBytes),
+      fit: fit,
+      width: double.infinity,
+      height: double.infinity,
+      gaplessPlayback: true,
+      semanticLabel: semanticLabel,
+      errorBuilder: (context, error, stackTrace) => _imagePlaceholder(context),
+    );
+  }
+  if (WebAssetStore.isMemPath(imagePath)) return _imagePlaceholder(context);
+
   // Online afbeelding: render live via NetworkImage (zelfde decode-cap als
   // bestanden), maar alleen als de remote-media-gate open staat én de URL door
   // de SSRF-gate komt. Anders een placeholder met de URL.
@@ -190,7 +223,7 @@ Widget _captionOverlay(
 /// waar de media vandaan zou komen, plus een hint dat online media uit staat.
 Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
   return Container(
-    color: const Color(0xFFE2E8F0),
+    color: AppTheme.slate200,
     padding: const EdgeInsets.all(16),
     child: Center(
       child: Column(
@@ -198,14 +231,14 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
         children: [
           const Icon(
             Icons.cloud_off_outlined,
-            color: Color(0xFF94A3B8),
+            color: AppTheme.slate400,
             size: 32,
           ),
           const SizedBox(height: 8),
           Text(
             context.l10n.d('Online media staat uit'),
             style: const TextStyle(
-              color: Color(0xFF64748B),
+              color: AppTheme.slate500,
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),
@@ -214,7 +247,7 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
           const SizedBox(height: 4),
           Text(
             url,
-            style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 10),
+            style: const TextStyle(color: AppTheme.slate400, fontSize: 10),
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -227,16 +260,16 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
 
 Widget _mediaPlaceholder(IconData icon, String label) {
   return Container(
-    color: const Color(0xFFE2E8F0),
+    color: AppTheme.slate200,
     child: Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: const Color(0xFF94A3B8), size: 32),
+          Icon(icon, color: AppTheme.slate400, size: 32),
           const SizedBox(height: 6),
           Text(
             label,
-            style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 12),
+            style: const TextStyle(color: AppTheme.slate400, fontSize: 12),
           ),
         ],
       ),
@@ -246,7 +279,7 @@ Widget _mediaPlaceholder(IconData icon, String label) {
 
 Widget _imagePlaceholder(BuildContext context) {
   return ColoredBox(
-    color: const Color(0xFFE2E8F0),
+    color: AppTheme.slate200,
     child: LayoutBuilder(
       builder: (context, constraints) {
         final shortestSide = constraints.biggest.shortestSide;
@@ -254,7 +287,7 @@ Widget _imagePlaceholder(BuildContext context) {
           return Center(
             child: Icon(
               Icons.image_outlined,
-              color: const Color(0xFF94A3B8),
+              color: AppTheme.slate400,
               size: shortestSide * 0.65,
             ),
           );
@@ -266,13 +299,13 @@ Widget _imagePlaceholder(BuildContext context) {
             children: [
               const Icon(
                 Icons.image_outlined,
-                color: Color(0xFF94A3B8),
+                color: AppTheme.slate400,
                 size: 24,
               ),
               const SizedBox(height: 4),
               Text(
                 context.l10n.d('Afbeelding'),
-                style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 10),
+                style: const TextStyle(color: AppTheme.slate400, fontSize: 10),
               ),
             ],
           ),

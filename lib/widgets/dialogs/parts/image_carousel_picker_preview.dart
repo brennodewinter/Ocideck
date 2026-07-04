@@ -131,7 +131,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: Color(0xFF3B82F6)),
+                  borderSide: const BorderSide(color: AppTheme.blue500),
                 ),
               ),
             ),
@@ -166,7 +166,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: Color(0xFF3B82F6)),
+                  borderSide: const BorderSide(color: AppTheme.blue500),
                 ),
               ),
             ),

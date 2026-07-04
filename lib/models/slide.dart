@@ -215,6 +215,12 @@ class Slide {
   /// `ocideck_timeline_duration` comment.
   final int? timelineAnimationMs;
 
+  /// Timeline slides only: 0-based index of the event highlighted as the
+  /// "current point" (where we are now, e.g. a project's present phase).
+  /// `null` = no current point. Round-trips as a 1-based
+  /// `ocideck_timeline_current` comment so the `.md` reads as an event number.
+  final int? timelineCurrentIndex;
+
   const Slide({
     required this.id,
     required this.type,
@@ -258,6 +264,7 @@ class Slide {
     this.timelineLayout = TimelineLayout.auto,
     this.timelineReveal = TimelineReveal.onEnter,
     this.timelineAnimationMs,
+    this.timelineCurrentIndex,
   });
 
   factory Slide.create(SlideType type) {
@@ -332,6 +339,7 @@ class Slide {
       timelineLayout: src.timelineLayout,
       timelineReveal: src.timelineReveal,
       timelineAnimationMs: src.timelineAnimationMs,
+      timelineCurrentIndex: src.timelineCurrentIndex,
     );
   }
 
@@ -379,6 +387,8 @@ class Slide {
     TimelineReveal? timelineReveal,
     int? timelineAnimationMs,
     bool clearTimelineAnimation = false,
+    int? timelineCurrentIndex,
+    bool clearTimelineCurrent = false,
   }) {
     return Slide(
       id: id,
@@ -429,6 +439,9 @@ class Slide {
       timelineAnimationMs: clearTimelineAnimation
           ? null
           : (timelineAnimationMs ?? this.timelineAnimationMs),
+      timelineCurrentIndex: clearTimelineCurrent
+          ? null
+          : (timelineCurrentIndex ?? this.timelineCurrentIndex),
     );
   }
 }

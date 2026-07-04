@@ -41,7 +41,7 @@ extension _SettingsWebdav on _SettingsDialogState {
             l10n.d(
               'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.',
             ),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
         _webdavField(
@@ -78,7 +78,7 @@ extension _SettingsWebdav on _SettingsDialogState {
             l10n.d(
               'Nodig wanneer de server op een privé- of thuisnetwerk (LAN) draait. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.',
             ),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
           value: _webdavTrusted,
           onChanged: (value) => _rebuild(() {
@@ -149,7 +149,7 @@ extension _SettingsWebdav on _SettingsDialogState {
         const SizedBox(height: 8),
         Text(
           l10n.d('Wijzigingen worden bewaard wanneer je op Opslaan klikt.'),
-          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+          style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
         ),
       ],
     );

@@ -1,4 +1,4 @@
-.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline licenses check-conventions build-web check-web build-macos build-windows build-linux build-all check check-full help
+.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline licenses check-conventions mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 help:
 	@echo "OciDeck quality targets:"
@@ -6,6 +6,7 @@ help:
 	@echo "  make check-full      make check + dependency outdated report."
 	@echo "  make coverage        Run the test suite with coverage and print a line-coverage summary."
 	@echo "  make mutate          Mutation check for dead/untested branch operands (manual; FILE/TESTS overridable)."
+	@echo "  make mutate-parsers  Mutation sweep over all markdown parsers/serializers (manual, slow)."
 	@echo "  make test-golden     Slide-renderer visual-regression goldens (single platform; UPDATE=1 to accept)."
 	@echo "  make test-contracts  Markdown/save-load contract and parsing tests."
 	@echo "  make test-preview    Slide rendering, footer, TLP, inline markdown, and preview tests."
@@ -24,6 +25,7 @@ help:
 	@echo "  make build-windows   Build the Windows app (Windows only)."
 	@echo "  make build-linux     Build the Linux bundle (Linux only)."
 	@echo "  make build-all       Build web + this OS's native desktop target."
+	@echo "  make build-release   Build verified web + macOS release artifacts."
 
 # Install Flutter/Dart dependencies.
 setup:
@@ -107,6 +109,19 @@ mutate:
 	@echo "Failure means: a predicate survived — it is dead or untested; review it."
 	dart run tool/mutation_check.dart $(FILE) $(TESTS)
 
+# The full parser sweep: every parser/serializer with startsWith/endsWith
+# predicates, each against its fastest relevant test set. Still manual (slow:
+# one test run per predicate), but one command instead of five.
+mutate-parsers:
+	@echo "== OciDeck check: mutation sweep over the parsers =="
+	@echo "Command: tool/mutation_check.dart over parse/serialize/body-blocks/inline/validator."
+	@echo "Failure means: a predicate survived — it is dead or untested; review it."
+	dart run tool/mutation_check.dart lib/services/markdown_service_parse.dart test/markdown_round_trip_test.dart test/markdown_service_test.dart
+	dart run tool/mutation_check.dart lib/services/markdown_service_serialize.dart test/markdown_round_trip_test.dart test/markdown_service_test.dart
+	dart run tool/mutation_check.dart lib/services/markdown_body_blocks.dart test/markdown_body_blocks_test.dart test/rich_text_layout_test.dart
+	dart run tool/mutation_check.dart lib/widgets/slides/inline_markdown.dart test/inline_markdown_test.dart
+	dart run tool/mutation_check.dart lib/services/markdown_validator.dart test/markdown_validator_test.dart
+
 # Contract tests for persistence and parsing.
 test-contracts:
 	@echo "== OciDeck targeted check: contracts =="
@@ -189,10 +204,13 @@ licenses:
 check-conventions:
 	@echo "== OciDeck check: conventions =="
 	@echo "Command: dart run tool/check_conventions.dart"
-	@echo "Covers: no print(); bare catch (_) ratchet; file-size ratchet (no file"
-	@echo "        over 1000 lines except baselined ceilings, which may only shrink)."
-	@echo "Failure means: route diagnostics through logError, split the oversized file,"
-	@echo "        or adjust the baseline in tool/check_conventions.dart."
+	@echo "Covers: no print(); no plain writeAsString/writeAsBytes (use the atomic"
+	@echo "        helpers in lib/utils/atomic_file.dart); bare catch (_) ratchet;"
+	@echo "        file-size ratchet (no file over 1000 lines except baselined"
+	@echo "        ceilings, which may only shrink)."
+	@echo "Failure means: route diagnostics through logError, use writeStringAtomic/"
+	@echo "        writeBytesAtomic, split the oversized file, or adjust the baseline"
+	@echo "        in tool/check_conventions.dart."
 	dart run tool/check_conventions.dart
 
 check-method-length:
@@ -227,6 +245,11 @@ build-web: deps-verify-offline
 	@echo "Covers: self-hosted CanvasKit (no third-party CDN) and a CSP-safe loader."
 	@echo "Output: build/web — serve behind the CSP declared in web/index.html."
 	flutter build web --release --no-web-resources-cdn --csp
+	@# Flutter kopieert assets mét hun bronpermissies. Een bestand dat lokaal
+	@# 600 staat wordt dan op de webserver onleesbaar (stil 403 → "onzichtbaar"
+	@# logo). Normaliseer daarom de hele bundel naar world-readable.
+	find build/web -type d -exec chmod 755 {} +
+	find build/web -type f -exec chmod 644 {} +
 
 # Build the web bundle, then assert it kept its hardening: a strict CSP, a
 # self-hosted CanvasKit, and the bundled UI font (no gstatic). Guards against a
@@ -272,6 +295,13 @@ build-all:
 	  *) echo "No native desktop build for '$$(uname -s)' here — run 'make build-windows' on Windows." ;; \
 	esac
 	@echo "== OciDeck build-all complete =="
+
+# Human release build for the two artifacts currently published by hand:
+# the hardened web bundle (with post-build hardening verification) and the
+# macOS .app. Prefer this over running raw `flutter build ...` commands.
+build-release:
+	@echo "== OciDeck release build: web + macOS =="
+	scripts/build_release.sh
 
 # Full local quality gate. Intended for humans, CI logs, and LLM-assisted debugging.
 check: format-check analyze check-conventions check-method-length test

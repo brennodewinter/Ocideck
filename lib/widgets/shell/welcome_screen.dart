@@ -67,6 +67,13 @@ class _WelcomeScreen extends ConsumerWidget {
                             label: Text(l10n.t('open')),
                           ),
                         ),
+                        // URL-import werkt overal: op desktop via het
+                        // gehardende dart:io-pad, op web via de browser
+                        // (CORS + CSP `connect-src https:`) met dezelfde
+                        // security-gate. Nextcloud blijft een netwerkbron
+                        // achter [supportsNetworkDeckSources]; de
+                        // bibliotheekscan doorzoekt het lokale
+                        // bestandssysteem en kan op web niet.
                         const SizedBox(height: 12),
                         SizedBox(
                           width: 220,
@@ -79,24 +86,28 @@ class _WelcomeScreen extends ConsumerWidget {
                             label: Text(l10n.t('importUrl')),
                           ),
                         ),
-                        const SizedBox(height: 12),
-                        SizedBox(
-                          width: 220,
-                          child: OutlinedButton.icon(
-                            onPressed: () => _scanLibrary(context, ref),
-                            icon: const Icon(Icons.travel_explore, size: 18),
-                            label: Text(l10n.d('Zoek op deze computer')),
+                        if (supportsLocalProjectFolders) ...[
+                          const SizedBox(height: 12),
+                          SizedBox(
+                            width: 220,
+                            child: OutlinedButton.icon(
+                              onPressed: () => _scanLibrary(context, ref),
+                              icon: const Icon(Icons.travel_explore, size: 18),
+                              label: Text(l10n.d('Zoek op deze computer')),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 12),
-                        SizedBox(
-                          width: 220,
-                          child: OutlinedButton.icon(
-                            onPressed: () => _openFromNextcloud(context, ref),
-                            icon: const Icon(Icons.cloud_outlined, size: 18),
-                            label: Text(l10n.d('Openen vanaf Nextcloud')),
+                        ],
+                        if (supportsNetworkDeckSources) ...[
+                          const SizedBox(height: 12),
+                          SizedBox(
+                            width: 220,
+                            child: OutlinedButton.icon(
+                              onPressed: () => _openFromNextcloud(context, ref),
+                              icon: const Icon(Icons.cloud_outlined, size: 18),
+                              label: Text(l10n.d('Openen vanaf Nextcloud')),
+                            ),
                           ),
-                        ),
+                        ],
                         const SizedBox(height: 8),
                         TextButton.icon(
                           onPressed: () => SettingsDialog.show(context),
@@ -124,7 +135,7 @@ class _WelcomeScreen extends ConsumerWidget {
     ThemeData theme,
     AppPalette palette,
     AppLocalizations l10n,
-    List<String> recentFiles,
+    List<RecentFile> recentFiles,
   ) {
     return Container(
       width: 280,
@@ -153,70 +164,21 @@ class _WelcomeScreen extends ConsumerWidget {
             child: ListView.builder(
               padding: const EdgeInsets.only(bottom: 16),
               itemCount: recentFiles.length,
-              itemBuilder: (itemContext, i) {
-                final path = recentFiles[i];
-                final name = path.split('/').last.replaceAll('.md', '');
-                return InkWell(
-                  onTap: () => _openRecent(itemContext, ref, path),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 10,
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.slideshow_outlined,
-                          size: 16,
-                          color: theme.colorScheme.onSurfaceVariant,
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                name,
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w500,
-                                  color: theme.colorScheme.onSurface,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Text(
-                                path,
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: palette.mutedText,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Tooltip(
-                          message: l10n.d('Uit recente bestanden verwijderen'),
-                          child: InkWell(
-                            onTap: () => ref
-                                .read(settingsProvider.notifier)
-                                .removeRecentFile(path),
-                            borderRadius: BorderRadius.circular(3),
-                            child: Padding(
-                              padding: const EdgeInsets.all(3),
-                              child: Icon(
-                                Icons.close,
-                                size: 13,
-                                color: palette.mutedText,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+              itemBuilder: (itemContext, i) => _RecentFileTile(
+                file: recentFiles[i],
+                origin: ref.watch(
+                  settingsProvider.select(
+                    (s) => s.recentFileOrigins[recentFiles[i].path],
                   ),
-                );
-              },
+                ),
+                homeDir: ref.watch(
+                  settingsProvider.select((s) => s.homeDirectory),
+                ),
+                onTap: () => _openRecent(itemContext, ref, recentFiles[i].path),
+                onRemove: () => ref
+                    .read(settingsProvider.notifier)
+                    .removeRecentFile(recentFiles[i].path),
+              ),
             ),
           ),
         ],
@@ -225,10 +187,16 @@ class _WelcomeScreen extends ConsumerWidget {
   }
 
   Future<void> _newDeck(BuildContext context, WidgetRef ref) async {
-    final title = await NewDeckDialog.show(context);
-    if (title != null) {
-      ref.read(tabsProvider.notifier).newDeckInCurrentTab(title);
-    }
+    final choice = await NewDeckDialog.show(context);
+    if (choice == null) return;
+    // Profielkeuze is globaal (het actieve profiel bepaalt de stijl van elk
+    // deck); eerst selecteren, dan aanmaken zodat het nieuwe deck hem erft.
+    await ref
+        .read(settingsProvider.notifier)
+        .selectThemeProfile(choice.profileName);
+    ref
+        .read(tabsProvider.notifier)
+        .newDeckInCurrentTab(choice.title, template: choice.template);
   }
 
   /// Open een recent bestand met dezelfde nette foutafhandeling als het
@@ -250,3 +218,203 @@ class _WelcomeScreen extends ConsumerWidget {
 }
 
 // ── Main 2-panel layout ───────────────────────────────────────────────────────
+
+/// Eén rij in de recente-bestandenlijst: naam plus de vindplaats en een
+/// metadataregel met datum, aantal slides, TLP-badge en het laatst
+/// geëxporteerde formaat — zodat terugvinden niet op naam alleen hoeft. Het
+/// volledige pad (en de exportdatum) staat in de tooltip, zodat de rij zelf
+/// rustig blijft.
+class _RecentFileTile extends StatelessWidget {
+  final RecentFile file;
+
+  /// Herkomst van een remote opgehaald bestand (Nextcloud-server of
+  /// import-URL); null voor lokale bestanden.
+  final String? origin;
+  final String? homeDir;
+  final VoidCallback onTap;
+  final VoidCallback onRemove;
+
+  const _RecentFileTile({
+    required this.file,
+    required this.origin,
+    required this.homeDir,
+    required this.onTap,
+    required this.onRemove,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    final palette = theme.extension<AppPalette>()!;
+    final material = MaterialLocalizations.of(context);
+    final name = p.basename(file.path).replaceAll('.md', '');
+
+    final tooltip = StringBuffer(file.path);
+    if (file.lastExportFormat != null) {
+      tooltip.write(
+        '\n${l10n.d('Laatst geëxporteerd als')} ${file.lastExportFormat}',
+      );
+      if (file.lastExportAt != null) {
+        tooltip.write(' · ${material.formatShortDate(file.lastExportAt!)}');
+      }
+    }
+
+    final metaText = [
+      if (file.openedAt != null) material.formatShortDate(file.openedAt!),
+      if (file.slideCount > 0) '${file.slideCount} ${l10n.t('slides')}',
+    ].join(' · ');
+
+    return Tooltip(
+      message: tooltip.toString(),
+      waitDuration: const Duration(milliseconds: 600),
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 2),
+                child: Icon(
+                  Icons.slideshow_outlined,
+                  size: 16,
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            name,
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: theme.colorScheme.onSurface,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        if (origin != null) ...[
+                          const SizedBox(width: 6),
+                          // Remote opgehaald (Nextcloud/URL): de tooltip
+                          // toont de bron zelf, dus die heeft geen vertaling
+                          // nodig.
+                          Tooltip(
+                            message: origin!,
+                            child: Icon(
+                              Icons.cloud_outlined,
+                              size: 13,
+                              color: theme.colorScheme.primary,
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                    // De vindplaats kort en betekenisvol (thuismap-relatief);
+                    // het volledige pad zit in de tooltip.
+                    Text(
+                      displayFolder(
+                        file.path,
+                        homeDir: homeDir,
+                        osHome: osHomeDirectory,
+                      ),
+                      style: TextStyle(fontSize: 10, color: palette.mutedText),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 2),
+                    Wrap(
+                      spacing: 6,
+                      runSpacing: 2,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        if (metaText.isNotEmpty)
+                          Text(
+                            metaText,
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: palette.mutedText,
+                            ),
+                          ),
+                        if (file.tlp != TlpLevel.none)
+                          _RecentBadge(
+                            label: file.tlp.label,
+                            foreground: Color(file.tlp.foreground),
+                            background: Colors.black,
+                          ),
+                        if (file.lastExportFormat != null)
+                          _RecentBadge(
+                            label: file.lastExportFormat!,
+                            foreground: theme.colorScheme.onSurfaceVariant,
+                            background:
+                                theme.colorScheme.surfaceContainerHighest,
+                          ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Tooltip(
+                message: l10n.d('Uit recente bestanden verwijderen'),
+                child: InkWell(
+                  onTap: onRemove,
+                  borderRadius: BorderRadius.circular(3),
+                  child: Padding(
+                    padding: const EdgeInsets.all(3),
+                    child: Icon(
+                      Icons.close,
+                      size: 13,
+                      color: palette.mutedText,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Klein badge-blokje in de metadataregel (TLP in officiële kleuren op
+/// zwart, exportformaat in neutrale tint).
+class _RecentBadge extends StatelessWidget {
+  final String label;
+  final Color foreground;
+  final Color background;
+
+  const _RecentBadge({
+    required this.label,
+    required this.foreground,
+    required this.background,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(3),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: 8.5,
+          fontWeight: FontWeight.w700,
+          color: foreground,
+          fontFamily: 'monospace',
+          fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
+          letterSpacing: 0.3,
+        ),
+      ),
+    );
+  }
+}

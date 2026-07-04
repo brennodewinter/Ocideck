@@ -96,7 +96,7 @@ class _BulkActionBar extends StatelessWidget {
             child: Text(
               '$count ${l10n.d('geselecteerd')}',
               style: const TextStyle(
-                color: Color(0xFFE2E8F0),
+                color: AppTheme.slate200,
                 fontSize: 11,
                 fontWeight: FontWeight.w600,
               ),
@@ -154,7 +154,7 @@ class _BulkIcon extends StatelessWidget {
       child: IconButton(
         icon: Icon(icon, size: 16),
         onPressed: onTap,
-        color: color ?? const Color(0xFFCBD5E1),
+        color: color ?? AppTheme.slate300,
         padding: EdgeInsets.zero,
         constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
         visualDensity: VisualDensity.compact,

@@ -4,6 +4,7 @@ import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/table_clipboard.dart';
 import '_editor_field.dart';
+import '../../theme/app_theme.dart';
 
 /// Editor for a table slide. Stores cells as a rectangular grid of
 /// [TextEditingController]s where the first row is the header.
@@ -204,7 +205,7 @@ class _TableEditorState extends State<TableEditor> {
           child: Text(
             '${l10n.d('Tip: druk op Enter binnen een cel voor een nieuwe regel.')}\n'
             '${l10n.d('Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.')}',
-            style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+            style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
           ),
         ),
         _buildColumnControls(),
@@ -242,7 +243,7 @@ class _TableEditorState extends State<TableEditor> {
                   icon: const Icon(
                     Icons.delete_outline,
                     size: 16,
-                    color: Color(0xFF64748B),
+                    color: AppTheme.slate500,
                   ),
                   onPressed: _colCount > 1 ? () => _removeColumn(c) : null,
                   tooltip:
@@ -313,7 +314,7 @@ class _TableEditorState extends State<TableEditor> {
               icon: const Icon(
                 Icons.remove_circle_outline,
                 size: 18,
-                color: Color(0xFF64748B),
+                color: AppTheme.slate500,
               ),
               onPressed: _cells.length > 1 ? () => _removeRow(r) : null,
               tooltip: isHeader

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../services/web_asset_store.dart';
 import '../../utils/image_limits.dart';
 import '../../utils/project_path.dart';
 
@@ -15,20 +16,30 @@ Future<void> showImageZoomDialog(
   String? projectPath,
   String caption = '',
 }) {
-  final resolved = resolveSlideAssetPath(imagePath, projectPath);
-  if (resolved == null) return Future<void>.value();
+  // `mem:`-pad (webversie): bytes uit de WebAssetStore i.p.v. een bestand.
+  final memBytes = WebAssetStore.isMemPath(imagePath)
+      ? WebAssetStore.bytesFor(imagePath)
+      : null;
+  final ImageProvider provider;
+  if (memBytes != null) {
+    provider = cappedMemoryImage(memBytes);
+  } else {
+    final resolved = resolveSlideAssetPath(imagePath, projectPath);
+    if (resolved == null) return Future<void>.value();
+    provider = cappedFileImage(File(resolved));
+  }
   return showDialog<void>(
     context: context,
     barrierColor: Colors.black.withValues(alpha: 0.92),
-    builder: (_) => _ImageZoomView(file: File(resolved), caption: caption),
+    builder: (_) => _ImageZoomView(image: provider, caption: caption),
   );
 }
 
 class _ImageZoomView extends StatelessWidget {
-  final File file;
+  final ImageProvider image;
   final String caption;
 
-  const _ImageZoomView({required this.file, required this.caption});
+  const _ImageZoomView({required this.image, required this.caption});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +65,7 @@ class _ImageZoomView extends StatelessWidget {
                 maxScale: 6,
                 child: Center(
                   child: Image(
-                    image: cappedFileImage(file),
+                    image: image,
                     fit: BoxFit.contain,
                     errorBuilder: (_, _, _) => const Icon(
                       Icons.broken_image_outlined,

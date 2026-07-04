@@ -84,6 +84,12 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
+      'Nota: il-verżjoni tal-web tista\' ġġib biss minn servers li jippermettuh (CORS).',
+  'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
+      'Il-pakketti (.ocideck) għadhom mhumiex appoġġjati fil-verżjoni tal-web.',
+  'Alleen .md-presentaties kunnen in de webversie worden geopend.':
+      'Fil-verżjoni tal-web jistgħu jinfetħu biss preżentazzjonijiet .md.',
   'Geen': 'L-ebda',
   'Nieuw': 'Ġdid',
   'Verwijderen': 'Ħassar',
@@ -681,6 +687,8 @@ const _dutchSourceMt = {
   'Verticaal': 'Vertikali',
   'Animatie': 'Animazzjoni',
   'Intekenen bij openen': 'Iddisinja mad-daħla',
+  'Markeer als huidig punt': 'Immarka bħala l-punt attwali',
+  'Huidig punt weghalen': 'Neħħi l-punt attwali',
   'Stap voor stap': 'Pass pass',
   'Geen animatie': 'L-ebda animazzjoni',
   'Animatiesnelheid': 'Veloċità tal-animazzjoni',
@@ -740,6 +748,13 @@ const _dutchSourceMt = {
       'L-istqarrija ta\' fuq hija vera jew falza; agħżel liema.',
   'Selecteer alle juiste antwoorden': 'Agħżel it-tweġibiet korretti kollha',
   'Bevestig': 'Ikkonferma',
+  'Volgorde': 'Ordni',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Poġġi t-tweġibiet hawn fl-ordni t-tajba. Waqt il-preżentazzjoni jintwerew imħallta.',
+  'Geef minstens twee antwoorden op.': 'Agħti mill-inqas żewġ tweġibiet.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Għafas it-tweġibiet fl-ordni t-tajba',
+  'Jouw volgorde': 'L-ordni tiegħek',
   'Het juiste antwoord': 'It-tweġiba korretta',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'L-immaġni tintwera skrin sħiħ bħala sfond. Uża l-imċajpar meta t-titlu jeħtieġ aktar kalma jew kuntrast.',
@@ -1189,4 +1204,136 @@ const _dutchSourceMt = {
   'Herstelbestanden nu wissen': 'Ħassar il-fajls tal-irkupru issa',
   'Er waren geen herstelbestanden.': 'Ma kienx hemm fajls tal-irkupru.',
   'herstelbestand(en) gewist.': 'fajl(s) tal-irkupru mħassra.',
+  'Klaar voor export': 'Lest għall-esportazzjoni',
+  'kwaliteitswaarschuwing(en)': 'twissija(iet) tal-kwalità',
+  'Nog opslaan nodig': 'L-ewwel trid tissejvja',
+  'TLP blokkeert export': 'It-TLP jimblokka l-esportazzjoni',
+  'Kwaliteit blokkeert export': 'Il-kwalità timblokka l-esportazzjoni',
+  'Verhoog contrast': 'Żid il-kuntrast',
+  'Open kleurinstellingen': 'Iftaħ is-settings tal-kuluri',
+  'Voeg alt-tekst toe': 'Żid test alternattiv',
+  'Voeg beschrijving toe': 'Żid deskrizzjoni',
+  'Zinnen naar losse bullets': 'Sentenzi f\'punti separati',
+  'Laatst geëxporteerd als': 'L-aħħar esportat bħala',
+  'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.':
+      'Jiddetermina l-kuluri, il-font u l-logo. Jista\' jinbidel aktar tard mill-proprjetajiet tal-preżentazzjoni jew mis-settings.',
+  'Stijlprofielen beheren…': 'Immaniġġja l-profili tal-istil…',
+  'Geavanceerd': 'Avvanzat',
+  'Knippen en audio': 'Qtugħ u awdjo',
+  'Bereik en kleurzones': 'Firxa u żoni tal-kulur',
+  'Leeg deck': 'Deck vojt',
+  'Korte briefing': 'Briefing qasir',
+  'Status-briefing': 'Briefing tal-istatus',
+  'Projectstart / kick-off': 'Bidu tal-proġett / kick-off',
+  'Voorbespreking communicatie': 'Diskussjoni preliminari tal-komunikazzjoni',
+  'Projecttijdlijn': 'Kronoloġija tal-proġett',
+  'Informatiebeveiliging: RASCI / TVB':
+      'Sigurtà tal-informazzjoni: RASCI / TVB',
+  'Security-takenplan': 'Pjan tal-kompiti tas-sigurtà',
+  'Certificering voortgang': 'Progress taċ-ċertifikazzjoni',
+  'Training / workshop': 'Taħriġ / workshop',
+  'Rapportage': 'Rappurtar',
+  'Onderzoeksverhaal': 'Storja ta\' riċerka',
+  'Technische uitleg': 'Spjegazzjoni teknika',
+  'Interactieve quiz': 'Kwiżż interattiv',
+  'Alleen een titelpagina en een agenda.': 'Paġna tat-titlu u aġenda biss.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Sitwazzjoni, fatti u d-deċiżjoni mitluba f\'sitt slajds.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Dashboard tal-istatus, progress għal kull fluss ta\' xogħol u deċiżjonijiet.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Għaliex, għan, ambitu, partijiet interessati u kronoloġija.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Udjenzi fil-mira, messaġġ ewlieni, kanali u kelliema.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fażijiet, stadji importanti, dipendenzi u mumenti ta\' deċiżjoni.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Irreġistra r-rwoli, il-matriċi RASCI u l-ftehimiet tal-kompiti.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Kompiti, prijoritajiet, sidien u evidenza.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Progress għal kull qasam, kontrolli u ppjanar tal-awditjar.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Għanijiet ta\' tagħlim, kunċetti ewlenin, eżerċizzju u mistoqsija tal-kwiżż.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Sommarju, dashboard tal-KPI, xejra u azzjonijiet.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Mistoqsija, metodu, kronoloġija tas-sejbiet u konklużjonijiet.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arkitettura, komponenti, eżempju ta\' kodiċi u checklist.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Tliet tipi ta\' mistoqsijiet bi spjegazzjoni u diskussjoni finali.',
+  'Sjabloon': 'Mudell',
+  'Post-incident review / lessons learned':
+      'Reviżjoni wara inċident / tagħlimiet miksuba',
+  'Datalek / privacy-incident beoordeling':
+      'Valutazzjoni ta\' ksur ta\' data / inċident ta\' privatezza',
+  'DPIA / privacy impact assessment':
+      'DPIA / valutazzjoni tal-impatt fuq il-privatezza',
+  'Risicoanalyse / risk register': 'Analiżi tar-riskju / reġistru tar-riskji',
+  'Business continuity / DR-test': 'Kontinwità tan-negozju / test DR',
+  'Tabletop-oefening / crisisoefening':
+      'Eżerċizzju tabletop / eżerċizzju ta\' kriżi',
+  'BOB-crisisrapportage': 'Rappurtar ta\' kriżi BOB',
+  'CAB / release readiness': 'CAB / tħejjija għar-rilaxx',
+  'Stuurgroep / project board update':
+      'Aġġornament għall-grupp ta\' tmexxija / project board',
+  'Auditbevindingen en opvolging': 'Sejbiet tal-awditjar u segwitu',
+  'Leveranciersbeoordeling / vendor risk':
+      'Valutazzjoni tal-fornituri / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Deċiżjoni ta\' arkitettura / preżentazzjoni ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Tnedija ta\' politika / pjan ta\' implimentazzjoni',
+  'Overdracht / handover': 'Trasferiment / handover',
+  'Retrospective / teamverbetering': 'Retrospettiva / titjib tat-tim',
+  'PPL Vluchtvoorbereiding': 'Tħejjija tat-titjira PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Kronoloġija, impatt, kawżi u azzjonijiet ta\' titjib wara inċident.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Ivvaluta d-data, ir-riskju, l-obbligu ta\' notifika u l-komunikazzjoni.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Ipproċessar, bażi legali, riskji ta\' privatezza u miżuri.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Irreġistra r-riskji, il-probabbiltà, l-impatt, il-miżuri u s-sidien.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Xenarju, għanijiet ta\' rkupru, sejbiet tat-testijiet u punti ta\' titjib.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Xenarju, injects, deċiżjonijiet, osservazzjonijiet u evalwazzjoni.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Mexxi tim ta\' kriżi mill-formazzjoni tal-istampa, il-formazzjoni tal-ġudizzju u t-teħid tad-deċiżjonijiet, bi stampa tas-sitwazzjoni ħajja, talbiet għal informazzjoni, dilemmi, reġistru tad-deċiżjonijiet u lista ta\' azzjonijiet.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Bidla, impatt, testijiet, rollback, komunikazzjoni u go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Progress, ippjanar, baġit, riskji u deċiżjonijiet mitluba.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Sejbiet, root cause, miżuri, evidenza u status.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Servizz, data, dipendenza, rekwiżiti, riskji u deċiżjoni.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kuntest, għażliet, trade-offs, deċiżjoni u konsegwenzi.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Udjenza fil-mira, ippjanar, komunikazzjoni, taħriġ u adozzjoni.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Status, azzjonijiet miftuħa, riskji, kuntatti u l-ewwel passi.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fatti, xejriet, start-stop-continue u azzjonijiet ta\' titjib.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Ħejji titjira VFR b\'rotta, temp, NOTAMs, prestazzjoni, weight & balance, fjuwil, alternates u kontrolli personali go/no-go.',
+  'Zoek een sjabloon': 'Fittex mudell',
+  'Geen sjablonen gevonden': 'Ma nstab l-ebda mudell',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Kopji identiċi',
+  'Zelfde titel, andere inhoud': 'L-istess titlu, kontenut differenti',
+  'Dubbele presentaties opruimen': 'Naddaf il-preżentazzjonijiet duplikati',
+  'Naar de prullenbak verplaatst:': 'Imċaqlaq lejn l-iskart:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Ma setax jiġi mċaqlaq lejn l-iskart.',
+  'Geen dubbele presentaties gevonden.':
+      'Ma nstabu l-ebda preżentazzjonijiet duplikati.',
+  'Laatste kopie blijft behouden': 'L-aħħar kopja tinżamm',
+  'Nog geopend in een tabblad': 'Għadha miftuħa f’tab',
+  'Naar prullenbak': 'Lejn l-iskart',
+  'Deze presentatie staat ook op een andere plek:':
+      'Din il-preżentazzjoni teżisti wkoll x’imkien ieħor:',
 };

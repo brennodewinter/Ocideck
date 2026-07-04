@@ -1,12 +1,13 @@
 // Part of the file_service library — see ../file_service.dart.
 // Split out for navigability (URL/pakket/markdown-import); all imports live in
-// the main library file. Instance methods relocate verbatim into an extension
-// on FileService — same library, same members, no behaviour change.
+// the main library file. De gedeelde decode-/hergebruik-infrastructuur
+// (decodePackageEntries, _importDirCandidates, _dirMatchesEntries, _uniqueDir)
+// leeft in het hoofdbestand; hier staat de import-API met weiger-redenen.
 part of '../file_service.dart';
 
 extension FileServiceImport on FileService {
-  /// Pak een pakket uit in een nieuwe submap onder [destParentDir]. Geeft het
-  /// pad naar het uitgepakte markdown-bestand terug (om in een tab te openen).
+  /// Pak een pakket uit in een submap onder [destParentDir]. Geeft het pad
+  /// naar het uitgepakte markdown-bestand terug (om in een tab te openen).
   Future<String?> importPackageBytes(
     List<int> zipBytes,
     String destParentDir, {
@@ -20,6 +21,13 @@ extension FileServiceImport on FileService {
   /// Als [importPackageBytes], maar met de weiger-reden zodat de UI kan
   /// uitleggen wát er mis was (te groot, kapot, geen deck, limiet) in plaats
   /// van een generiek "kon niet importeren".
+  ///
+  /// Een eerdere import met exact dezelfde inhoud wordt hergebruikt in plaats
+  /// van een nieuwe kopie-map "naam (n)" te maken: wie hetzelfde deck nogmaals
+  /// opent (URL/WebDAV/zip) kreeg anders bij elke keer een extra kopie en dus
+  /// dubbele vermeldingen in recente presentaties. Wijkt de inhoud af (lokaal
+  /// bewerkt, of de bron is veranderd) dan blijft de kopie-map bestaan zodat
+  /// er nooit iets wordt overschreven.
   Future<ImportOutcome> importPackageBytesDetailed(
     List<int> zipBytes,
     String destParentDir, {
@@ -29,6 +37,9 @@ extension FileServiceImport on FileService {
       return const ImportOutcome.failed(ImportFailure.tooLarge);
     }
 
+    // Alleen voor de weiger-reden: decodeBytes leest de zip-inhoudsopgave
+    // (goedkoop, nog geen inflatie) zodat "kapot" en "te veel leden" een
+    // eigen melding krijgen vóór de echte begrensde decode hieronder.
     final Archive archive;
     try {
       archive = ZipDecoder().decodeBytes(zipBytes);
@@ -36,7 +47,6 @@ extension FileServiceImport on FileService {
       logError('FileService.importPackageBytes: ZIP decode failed', e, s);
       return const ImportOutcome.failed(ImportFailure.corrupt);
     }
-
     if (archive.files.length > FileService.maxPackageEntries) {
       logWarning(
         'FileService.importPackageBytes: too many archive entries '
@@ -45,25 +55,30 @@ extension FileServiceImport on FileService {
       return const ImportOutcome.failed(ImportFailure.limitExceeded);
     }
 
-    // Kies de markdown met het ondiepste pad (de hoofd-md van het pakket).
-    ArchiveFile? mdEntry;
-    for (final f in archive.files) {
-      if (!f.isFile || !f.name.toLowerCase().endsWith('.md')) continue;
-      if (mdEntry == null ||
-          '/'.allMatches(f.name).length < '/'.allMatches(mdEntry.name).length) {
-        mdEntry = f;
-      }
+    // De echte verdediging: begrensde inflater die een zip-bom
+    // mid-decompressie stopt (gedeeld met de in-memory web-open).
+    final entries = decodePackageEntries(zipBytes, maxBytes: maxBytes);
+    if (entries == null) {
+      return const ImportOutcome.failed(ImportFailure.limitExceeded);
     }
+    final mdEntry = FileService.mainMarkdownEntry(entries);
     if (mdEntry == null) {
       return const ImportOutcome.failed(ImportFailure.unsupported);
     }
 
     final folderName = p.basenameWithoutExtension(mdEntry.name);
+    for (final existing in _importDirCandidates(destParentDir, folderName)) {
+      final resolvedMd = p.normalize(p.join(existing.path, mdEntry.name));
+      if (!p.isWithin(existing.path, resolvedMd)) break;
+      if (await _dirMatchesEntries(existing, entries)) {
+        return ImportOutcome.ok(resolvedMd);
+      }
+    }
     final destDir = _uniqueDir(destParentDir, folderName);
     await destDir.create(recursive: true);
 
     // Een afgebroken extractie laat geen half uitgepakte map achter: die zou
-    // stil schijfruimte opsnoepen en bij een zip-bomb juist het doelwit zijn.
+    // stil schijfruimte opsnoepen en verweesde kopie-mappen achterlaten.
     Future<ImportOutcome> abortAndClean(ImportFailure failure) async {
       try {
         await destDir.delete(recursive: true);
@@ -86,49 +101,12 @@ extension FileServiceImport on FileService {
       return resolved;
     }
 
-    var extracted = 0;
-    for (final f in archive.files) {
-      if (!f.isFile) continue;
-      if (f.name.length > FileService.maxZipEntryPathLength) continue;
-      final outPath = safeOutPath(f.name);
+    for (final entry in entries) {
+      final outPath = safeOutPath(entry.name);
       if (outPath == null) continue; // skip path-traversal entries
-      // Cheap early reject on the *declared* uncompressed size (a zip bomb can
-      // understate this, so it is only a fast path, not the real guard).
-      if (f.size < 0 || extracted + f.size > maxBytes) {
-        logWarning(
-          'FileService.importPackageBytes: decompressed size exceeds limit',
-        );
-        return abortAndClean(ImportFailure.limitExceeded);
-      }
-      // Inflate into a capped stream that aborts the moment the entry exceeds
-      // the remaining budget. This bounds peak memory per entry: unlike
-      // `f.content` (which decodes the whole entry into memory before we can
-      // check its size), the underlying inflater writes incrementally, so a
-      // deflate bomb that understated its header size is stopped mid-inflation.
-      final remaining = maxBytes - extracted;
-      final capped = _CappedOutputStream(remaining);
-      final List<int> content;
-      try {
-        f.writeContent(capped);
-        content = capped.getBytes();
-      } on _ExtractionLimitException {
-        logWarning(
-          'FileService.importPackageBytes: entry exceeds decompression limit '
-          '(possible zip bomb): ${f.name}',
-        );
-        return abortAndClean(ImportFailure.limitExceeded);
-      } catch (e) {
-        // Decompressing a corrupt entry can throw; skip it instead of aborting.
-        logWarning(
-          'FileService.importPackageBytes: unreadable entry skipped (${f.name})',
-          e,
-        );
-        continue;
-      }
-      extracted += content.length;
       final out = File(outPath);
       await out.parent.create(recursive: true);
-      await out.writeAsBytes(content, flush: true);
+      await writeBytesAtomic(out, entry.bytes);
     }
 
     // The main markdown must itself resolve inside the extraction folder.
@@ -137,20 +115,6 @@ extension FileServiceImport on FileService {
     return ImportOutcome.ok(mdPath);
   }
 
-  Directory _uniqueDir(String parent, String name) {
-    var dir = Directory(p.join(parent, name));
-    var i = 2;
-    while (dir.existsSync()) {
-      dir = Directory(p.join(parent, '$name ($i)'));
-      i++;
-    }
-    return dir;
-  }
-
-  /// Download een presentatie vanaf [url]. Een zip-pakket wordt uitgepakt;
-  /// platte markdown wordt als losse `.md` opgeslagen. Geeft het pad naar het
-  /// markdown-bestand terug.
-
   /// SSRF host/address guards live in [NetGuard] so the URL-import path and the
   /// live remote-media path share exactly the same rules.
   static bool _isBlockedHost(String host) => NetGuard.isBlockedHost(host);
@@ -158,6 +122,9 @@ extension FileServiceImport on FileService {
   static Future<List<InternetAddress>?> _safeResolve(String host) =>
       NetGuard.safeResolve(host);
 
+  /// Download een presentatie vanaf [url]. Een zip-pakket wordt uitgepakt;
+  /// platte markdown wordt als losse `.md` opgeslagen. Geeft het pad naar het
+  /// markdown-bestand terug.
   Future<String?> importFromUrl(String url, String destParentDir) async =>
       (await importFromUrlDetailed(url, destParentDir)).mdPath;
 
@@ -224,14 +191,8 @@ extension FileServiceImport on FileService {
       return const ImportOutcome.failed(ImportFailure.network);
     }
 
-    // Zip-magie 'PK\x03\x04' → pakket; anders als markdown behandelen.
-    final isZip =
-        bytes.length >= 4 &&
-        bytes[0] == 0x50 &&
-        bytes[1] == 0x4B &&
-        bytes[2] == 0x03 &&
-        bytes[3] == 0x04;
-    if (isZip) {
+    // Zip-magie → pakket; anders als markdown behandelen.
+    if (FileService.looksLikeZipBytes(bytes)) {
       return importPackageBytesDetailed(bytes, destParentDir);
     }
 
@@ -254,7 +215,10 @@ extension FileServiceImport on FileService {
   )).mdPath;
 
   /// Als [importMarkdownBytes], maar met de weiger-reden voor een gerichte
-  /// melding (te groot, geen UTF-8, geen Marp-deck).
+  /// melding (te groot, geen UTF-8, geen Marp-deck). Net als bij
+  /// [importPackageBytesDetailed] wordt een eerdere import met identieke
+  /// markdown hergebruikt, zodat hetzelfde deck nogmaals openen geen
+  /// kopie-map en geen dubbele vermelding in recente presentaties oplevert.
   Future<ImportOutcome> importMarkdownBytesDetailed(
     List<int> bytes,
     String destParentDir,
@@ -276,6 +240,17 @@ extension FileServiceImport on FileService {
 
     var base = p.basenameWithoutExtension(suggestedName);
     if (base.isEmpty) base = 'presentatie';
+    // Vergelijk als bytes zoals writeStringAtomic ze schreef (utf8), zodat
+    // een niet-UTF-8-bestand in een kandidaatmap gewoon "anders" is in
+    // plaats van een decodeerfout.
+    final encoded = utf8.encode(markdown);
+    for (final existing in _importDirCandidates(destParentDir, base)) {
+      final existingMd = File(p.join(existing.path, '$base.md'));
+      if (!existingMd.existsSync()) continue;
+      if (await _fileHasBytes(existingMd, encoded)) {
+        return ImportOutcome.ok(existingMd.path);
+      }
+    }
     final destDir = _uniqueDir(destParentDir, base);
     await destDir.create(recursive: true);
     final mdPath = p.join(destDir.path, '$base.md');

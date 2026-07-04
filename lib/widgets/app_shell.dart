@@ -7,8 +7,13 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 import 'package:window_manager/window_manager.dart';
 
+import '../platform/launch_files.dart';
+import '../platform/platform_features.dart';
+import '../utils/display_path.dart';
 import '../utils/log.dart';
 import '../models/deck.dart';
+import '../models/recent_file.dart';
+import '../models/settings.dart' show AppSettings;
 import '../models/slide.dart';
 import '../models/slide_quality.dart';
 import '../models/webdav_settings.dart';
@@ -17,8 +22,12 @@ import '../services/description_service.dart';
 import '../services/classification_enforcement_policy.dart';
 import '../services/classification_policy.dart';
 import '../services/export_metadata.dart';
+import '../services/export_readiness.dart';
 import '../services/open_file_channel.dart';
 import '../services/export_service.dart';
+import '../services/file_service.dart';
+import '../services/image_service.dart';
+import '../services/web_asset_store.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
 import '../services/mermaid_render_service.dart';
@@ -34,6 +43,8 @@ import '../utils/project_path.dart';
 import '../utils/user_facing_error.dart';
 import '../theme/app_theme.dart';
 import '../l10n/app_localizations.dart';
+import '../l10n/slide_quality_localization.dart';
+import 'dialogs/duplicate_cleanup_dialog.dart';
 import 'dialogs/export_dialog.dart';
 import 'dialogs/find_replace_dialog.dart';
 import 'dialogs/image_carousel_picker.dart';
@@ -44,6 +55,7 @@ import 'dialogs/presentation_info_dialog.dart';
 import 'dialogs/scan_library_dialog.dart';
 import 'dialogs/settings_dialog.dart';
 import 'dialogs/webdav_browser_dialog.dart';
+import '../services/trash_service.dart';
 import 'panels/editor_panel.dart';
 import 'panels/preview_panel.dart';
 import 'panels/slide_list_panel.dart';
@@ -84,7 +96,31 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       // Open any file the app was launched with, and start listening for files
       // opened from Finder while the app is running.
       _openFileChannel.start();
+      // Windows/Linux: bestandsassociatie-argumenten van deze start.
+      _openLaunchFiles();
+      // Web: ?deck=<url>-deeplink die OciDeck én een presentatie tegelijk
+      // opent (zelfde security-gate als de importdialoog).
+      _openDeckDeepLink();
     });
+  }
+
+  /// Open de bestanden waarmee de app via commandoregel-argumenten is gestart
+  /// (Windows/Linux-bestandsassociaties; zie [pendingLaunchFiles]).
+  Future<void> _openLaunchFiles() async {
+    if (pendingLaunchFiles.isEmpty) return;
+    final paths = List<String>.from(pendingLaunchFiles);
+    pendingLaunchFiles.clear();
+    await _onFilesDropped(paths);
+  }
+
+  /// Web-deeplink: `?deck=<url>` haalt de presentatie op en opent haar —
+  /// één link deelt zo de app én de inhoud. De volledige importpoort
+  /// (CORS/hulppunt, veiligheidsscan met alarm, marp-controle) blijft gelden.
+  Future<void> _openDeckDeepLink() async {
+    if (!isWebPlatform || !mounted) return;
+    final deckUrl = deckDeepLinkFrom(Uri.base);
+    if (deckUrl == null) return;
+    await _importUrlWeb(context, ref, deckUrl);
   }
 
   /// Bij opstart: zijn er herstelbestanden van een vorige (gecrashte) sessie?
@@ -129,7 +165,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                             '•  ${s.label}  ·  ${_formatWhen(s.savedAt)}',
                             style: const TextStyle(
                               fontSize: 12.5,
-                              color: Color(0xFF475569),
+                              color: AppTheme.slate600,
                             ),
                           ),
                         ),
@@ -296,6 +332,38 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     '.tif',
   };
 
+  /// Drag-drop op web: er is geen pad, alleen inhoud. Een `.md` of
+  /// `.ocideck`-pakket wordt via het in-memory pad geopend (zelfde
+  /// security-gate; pakketten worden in het geheugen uitgepakt);
+  /// afbeeldingen gaan na dezelfde validatie als pickImage de WebAssetStore
+  /// in en worden slides met een mem:-pad. Overige typen worden — net als op
+  /// desktop — genegeerd.
+  Future<void> _onWebFilesDropped(List<DropItem> files) async {
+    final tabs = ref.read(tabsProvider.notifier);
+    final images = <String>[];
+    for (final file in files) {
+      final ext = p.extension(file.name.toLowerCase());
+      if (ext == '.md' || ext == '.ocideck' || ext == '.zip') {
+        final bytes = await file.readAsBytes();
+        await tabs.openDeckFromBytes(bytes, file.name);
+      } else if (_imageExtensions.contains(ext)) {
+        final bytes = await file.readAsBytes();
+        if (bytes.isEmpty ||
+            bytes.length > ImageService.maxImageBytes ||
+            !ImageService.looksLikeImage(bytes)) {
+          logWarning(
+            'AppShell._onWebFilesDropped: afbeelding geweigerd '
+            '(te groot of geen afbeelding)',
+            file.name,
+          );
+          continue;
+        }
+        images.add(WebAssetStore.put(bytes, name: file.name));
+      }
+    }
+    if (images.isNotEmpty) _addImagesToActiveDeck(images);
+  }
+
   /// Verwerk gesleepte bestanden: presentaties/pakketten openen, afbeeldingen
   /// als nieuwe slide(s) toevoegen aan het actieve deck.
   Future<void> _onFilesDropped(List<String> paths) async {
@@ -365,6 +433,40 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       ref.read(importSecurityAlarmProvider.notifier).state = null;
     });
 
+    // Een zojuist geopend bestand heeft elders een byte-identieke kopie:
+    // niet-blokkerend melden (de gebruiker wilde gewoon openen), met de
+    // opruimdialoog als directe ingang.
+    ref.listen<DuplicateCopyNotice?>(duplicateCopyNoticeProvider, (_, notice) {
+      if (notice == null) return;
+      ref.read(duplicateCopyNoticeProvider.notifier).state = null;
+      final l10n = context.l10n;
+      final homeDir = ref.read(settingsProvider).homeDirectory;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 7),
+          content: Text(
+            '${l10n.d('Deze presentatie staat ook op een andere plek:')} '
+            '${displayFolder(notice.copyPath, homeDir: homeDir, osHome: osHomeDirectory)}',
+          ),
+          action: TrashService().isSupported
+              ? SnackBarAction(
+                  label: l10n.d('Opruimen…'),
+                  onPressed: () => DuplicateCleanupDialog.show(
+                    context,
+                    groups: [
+                      CleanupGroup(
+                        title: p.basenameWithoutExtension(notice.openedPath),
+                        paths: [notice.openedPath, notice.copyPath],
+                      ),
+                    ],
+                    homeDir: homeDir,
+                  ),
+                )
+              : null,
+        ),
+      );
+    });
+
     return CallbackShortcuts(
       bindings: {
         const SingleActivator(LogicalKeyboardKey.keyS, control: true):
@@ -381,7 +483,11 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
           onDragExited: (_) => setState(() => _dragging = false),
           onDragDone: (detail) {
             setState(() => _dragging = false);
-            _onFilesDropped(detail.files.map((f) => f.path).toList());
+            if (isWebPlatform) {
+              _onWebFilesDropped(detail.files);
+            } else {
+              _onFilesDropped(detail.files.map((f) => f.path).toList());
+            }
           },
           child: Material(
             child: Stack(

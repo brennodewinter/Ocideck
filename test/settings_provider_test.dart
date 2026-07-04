@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart' show TlpLevel;
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -186,19 +187,26 @@ void main() {
     }
   });
 
-  test('starts with a single default profile', () async {
+  test('starts with the built-in profiles, LibreKAT selected', () async {
     final notifier = await _loadedNotifier();
-    expect(notifier.state.themeProfiles, hasLength(1));
+    expect(notifier.state.themeProfiles, hasLength(2));
     expect(
-      notifier.state.selectedThemeProfileName,
-      notifier.state.themeProfiles.single.name,
+      notifier.state.themeProfiles.map((p) => p.name),
+      containsAll(['LibreKAT', 'Standaard']),
+    );
+    expect(notifier.state.selectedThemeProfileName, 'LibreKAT');
+    // Het LibreKAT-logo is een gebundelde asset zodat het overal (ook web)
+    // rendert en mee kan in pakket-exports.
+    expect(
+      notifier.state.themeProfile.logoPath,
+      'asset:assets/images/librekat-logo.png',
     );
   });
 
   test('createThemeProfile adds and selects a new profile', () async {
     final notifier = await _loadedNotifier();
     final created = await notifier.createThemeProfile();
-    expect(notifier.state.themeProfiles, hasLength(2));
+    expect(notifier.state.themeProfiles, hasLength(3));
     expect(notifier.state.selectedThemeProfileName, created.name);
   });
 
@@ -218,13 +226,13 @@ void main() {
       isNot(contains(created.name)),
       reason: 'The old name should be replaced, not duplicated',
     );
-    expect(notifier.state.themeProfiles, hasLength(2));
+    expect(notifier.state.themeProfiles, hasLength(3));
     expect(notifier.state.selectedThemeProfileName, 'Mijn stijl');
   });
 
   test('renaming to an existing name gets a unique suffix', () async {
     final notifier = await _loadedNotifier();
-    final defaultName = notifier.state.themeProfiles.single.name;
+    final defaultName = notifier.state.themeProfiles.first.name;
     final created = await notifier.createThemeProfile();
 
     await notifier.saveThemeProfile(
@@ -257,20 +265,22 @@ void main() {
   test('deleteThemeProfile removes it and selects another', () async {
     final notifier = await _loadedNotifier();
     final created = await notifier.createThemeProfile();
-    expect(notifier.state.themeProfiles, hasLength(2));
+    expect(notifier.state.themeProfiles, hasLength(3));
 
     await notifier.deleteThemeProfile(created.name);
 
     final names = notifier.state.themeProfiles.map((p) => p.name).toList();
     expect(names, isNot(contains(created.name)));
-    expect(notifier.state.themeProfiles, hasLength(1));
-    expect(notifier.state.selectedThemeProfileName, names.single);
+    expect(notifier.state.themeProfiles, hasLength(2));
+    expect(notifier.state.selectedThemeProfileName, names.first);
   });
 
   test('never deletes the last remaining profile', () async {
     final notifier = await _loadedNotifier();
-    final only = notifier.state.themeProfiles.single.name;
-    await notifier.deleteThemeProfile(only);
+    for (final name
+        in notifier.state.themeProfiles.map((p) => p.name).toList()) {
+      await notifier.deleteThemeProfile(name);
+    }
     expect(notifier.state.themeProfiles, hasLength(1));
   });
 
@@ -280,7 +290,7 @@ void main() {
       notifier.state.appAppearanceProfiles.map((profile) => profile.name),
       containsAll(['Basic', 'Europa', 'Donker']),
     );
-    expect(notifier.state.selectedAppAppearanceProfileName, 'Basic');
+    expect(notifier.state.selectedAppAppearanceProfileName, 'Europa');
   });
 
   test('creates, edits and selects a custom app theme', () async {
@@ -374,8 +384,67 @@ void main() {
         await n.addRecentFile('/deck_5.md');
         final recent = n.state.recentFiles;
         expect(recent, hasLength(10));
-        expect(recent.first, '/deck_5.md');
-        expect(recent.where((p) => p == '/deck_5.md'), hasLength(1));
+        expect(recent.first.path, '/deck_5.md');
+        expect(recent.where((f) => f.path == '/deck_5.md'), hasLength(1));
+      },
+    );
+
+    test('addRecentFile ververst metadata en bewaart export-info', () async {
+      final n = await _loadedNotifier();
+      await n.addRecentFile('/deck.md', slideCount: 12, tlp: TlpLevel.amber);
+      await n.recordRecentFileExport('/deck.md', 'PDF');
+      // Opnieuw openen: metadata vers, export-registratie blijft staan.
+      await n.addRecentFile('/deck.md', slideCount: 14, tlp: TlpLevel.green);
+      final entry = n.state.recentFiles.single;
+      expect(entry.slideCount, 14);
+      expect(entry.tlp, TlpLevel.green);
+      expect(entry.openedAt, isNotNull);
+      expect(entry.lastExportFormat, 'PDF');
+      expect(entry.lastExportAt, isNotNull);
+    });
+
+    test('recordRecentFileExport negeert onbekende paden', () async {
+      final n = await _loadedNotifier();
+      await n.recordRecentFileExport('/onbekend.md', 'PDF');
+      expect(n.state.recentFiles, isEmpty);
+    });
+
+    test('legacy paden-lijst migreert bij laden', () async {
+      SharedPreferences.setMockInitialValues({
+        'recentFiles': ['/oud.md', '/ouder.md'],
+      });
+      final n = SettingsNotifier();
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      expect(n.state.recentFiles.map((f) => f.path), ['/oud.md', '/ouder.md']);
+      expect(n.state.recentFiles.first.slideCount, 0);
+    });
+
+    test(
+      'recent file origins stick to their path and prune with the list',
+      () async {
+        final n = await _loadedNotifier();
+        await n.addRecentFile('/remote.md');
+        await n.setRecentFileOrigin('/remote.md', 'https://server · pad.md');
+
+        // Herkomst blijft staan wanneer hetzelfde pad opnieuw wordt geopend
+        // (lokaal her-openen maakt een remote bestand niet lokaal).
+        await n.addRecentFile('/ander.md');
+        await n.addRecentFile('/remote.md');
+        expect(
+          n.state.recentFileOrigins['/remote.md'],
+          'https://server · pad.md',
+        );
+
+        // Een pad buiten de recente lijst krijgt geen herkomst.
+        await n.setRecentFileOrigin('/onbekend.md', 'https://elders');
+        expect(n.state.recentFileOrigins.containsKey('/onbekend.md'), isFalse);
+
+        // Rolt het pad uit de top-10, dan verdwijnt zijn herkomst mee.
+        for (var i = 0; i < 10; i++) {
+          await n.addRecentFile('/deck_$i.md');
+        }
+        expect(n.state.recentFiles.any((f) => f.path == '/remote.md'), isFalse);
+        expect(n.state.recentFileOrigins, isEmpty);
       },
     );
 
