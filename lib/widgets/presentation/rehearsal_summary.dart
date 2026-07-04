@@ -76,9 +76,12 @@ class _RehearsalSummaryDialog extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  l10n.d('Totale tijd'),
-                  style: const TextStyle(fontWeight: FontWeight.w600),
+                Flexible(
+                  child: Text(
+                    l10n.d('Totale tijd'),
+                    style: const TextStyle(fontWeight: FontWeight.w600),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 Text(
                   _fmt(run.total),
@@ -94,7 +97,12 @@ class _RehearsalSummaryDialog extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(l10n.d('Doeltijd')),
+                  Flexible(
+                    child: Text(
+                      l10n.d('Doeltijd'),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                   Text(
                     _fmt(run.target!),
                     style: const TextStyle(
@@ -108,10 +116,13 @@ class _RehearsalSummaryDialog extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      delta.isNegative
-                          ? l10n.d('Binnen de tijd')
-                          : l10n.d('Over de tijd'),
+                    Flexible(
+                      child: Text(
+                        delta.isNegative
+                            ? l10n.d('Binnen de tijd')
+                            : l10n.d('Over de tijd'),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                     Text(
                       _fmt(delta),

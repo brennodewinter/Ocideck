@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/deck.dart' show TlpLevel;
@@ -14,6 +16,23 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   }
 
   final SecretStore _secrets;
+
+  /// Broadcast: één event (een oplopend volgnummer) per mislukte prefs-schrijf,
+  /// zie [_persist]. De app-shell luistert hierop en toont een niet-blokkerende
+  /// melding. Het volgnummer garandeert dat opeenvolgende fouten distinct zijn,
+  /// zodat de [settingsPersistErrorProvider] ze niet als "ongewijzigd" samenvouwt.
+  final StreamController<int> _persistErrors =
+      StreamController<int>.broadcast();
+  int _persistErrorSeq = 0;
+
+  /// Stroom van persist-fouten voor de UI. Zie [settingsPersistErrorProvider].
+  Stream<int> get persistErrors => _persistErrors.stream;
+
+  @override
+  void dispose() {
+    _persistErrors.close();
+    super.dispose();
+  }
 
   Future<void> _load() async {
     final prefs = await SharedPreferences.getInstance();
@@ -116,6 +135,25 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     );
   }
 
+  /// Persisteer een prefs-mutatie. Vangt schrijffouten af en logt ze, zodat een
+  /// niet-afgewachte setter-aanroep (zoals een dropdown-`onChanged` in de
+  /// settings-dialoog) nooit een onafgevangen async-exceptie oplevert. De state
+  /// is op dat punt al bijgewerkt — de UI klopt voor deze sessie; bij een
+  /// schrijffout gaat enkel de persistentie verloren (gelogd). Zelfde rationale
+  /// als [setWebdavPassword] voor de keychain.
+  Future<void> _persist(
+    String label,
+    Future<void> Function(SharedPreferences prefs) write,
+  ) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await write(prefs);
+    } catch (e, s) {
+      logError('SettingsNotifier.$label: prefs-schrijf mislukt', e, s);
+      if (!_persistErrors.isClosed) _persistErrors.add(++_persistErrorSeq);
+    }
+  }
+
   /// Bewaar de WebDAV/Nextcloud-serverconfiguratie (zonder wachtwoord) in
   /// hetzelfde prefs-domein, of `null` om de bron te verwijderen. Wist enkel
   /// deze key — nooit het hele domein (zie geheugen `ocideck-prefs-storage`).
@@ -123,12 +161,13 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     state = server == null
         ? state.copyWith(clearWebdavServer: true)
         : state.copyWith(webdavServer: server);
-    final prefs = await SharedPreferences.getInstance();
-    if (server == null) {
-      await prefs.remove('webdavServer');
-    } else {
-      await prefs.setString('webdavServer', jsonEncode(server.toJson()));
-    }
+    await _persist('setWebdavServer', (prefs) async {
+      if (server == null) {
+        await prefs.remove('webdavServer');
+      } else {
+        await prefs.setString('webdavServer', jsonEncode(server.toJson()));
+      }
+    });
   }
 
   /// Schrijf het WebDAV-wachtwoord versleuteld naar de keychain (gekeyd op
@@ -165,12 +204,13 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     state = key == null
         ? state.copyWith(clearMaxReleaseExportTlp: true)
         : state.copyWith(maxReleaseExportTlpKey: key);
-    final prefs = await SharedPreferences.getInstance();
-    if (key == null) {
-      await prefs.remove('maxReleaseExportTlp');
-    } else {
-      await prefs.setString('maxReleaseExportTlp', key);
-    }
+    await _persist('setMaxReleaseExportTlp', (prefs) async {
+      if (key == null) {
+        await prefs.remove('maxReleaseExportTlp');
+      } else {
+        await prefs.setString('maxReleaseExportTlp', key);
+      }
+    });
   }
 
   /// Stel het vereiste minimumniveau voor export in, of `null` om uit te zetten.
@@ -178,58 +218,73 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     state = key == null
         ? state.copyWith(clearMinRequiredExportTlp: true)
         : state.copyWith(minRequiredExportTlpKey: key);
-    final prefs = await SharedPreferences.getInstance();
-    if (key == null) {
-      await prefs.remove('minRequiredExportTlp');
-    } else {
-      await prefs.setString('minRequiredExportTlp', key);
-    }
+    await _persist('setMinRequiredExportTlp', (prefs) async {
+      if (key == null) {
+        await prefs.remove('minRequiredExportTlp');
+      } else {
+        await prefs.setString('minRequiredExportTlp', key);
+      }
+    });
   }
 
   Future<void> setRequireClassificationOnExport(bool enabled) async {
     state = state.copyWith(requireClassificationOnExport: enabled);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('requireClassificationOnExport', enabled);
+    await _persist(
+      'setRequireClassificationOnExport',
+      (prefs) => prefs.setBool('requireClassificationOnExport', enabled),
+    );
   }
 
   Future<void> setClassificationWatermarkEnabled(bool enabled) async {
     state = state.copyWith(classificationWatermarkEnabled: enabled);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('classificationWatermarkEnabled', enabled);
+    await _persist(
+      'setClassificationWatermarkEnabled',
+      (prefs) => prefs.setBool('classificationWatermarkEnabled', enabled),
+    );
   }
 
   Future<void> setUiTextScale(double scale) async {
     final clamped = scale.clamp(1.0, 2.0).toDouble();
     state = state.copyWith(uiTextScale: clamped);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setDouble('uiTextScale', clamped);
+    await _persist(
+      'setUiTextScale',
+      (prefs) => prefs.setDouble('uiTextScale', clamped),
+    );
   }
 
   Future<void> setQualityWarningsOnExport(bool enabled) async {
     state = state.copyWith(qualityWarningsOnExport: enabled);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('qualityWarningsOnExport', enabled);
+    await _persist(
+      'setQualityWarningsOnExport',
+      (prefs) => prefs.setBool('qualityWarningsOnExport', enabled),
+    );
   }
 
   Future<void> setQualityBlockExportOnErrors(bool enabled) async {
     state = state.copyWith(qualityBlockExportOnErrors: enabled);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('qualityBlockExportOnErrors', enabled);
+    await _persist(
+      'setQualityBlockExportOnErrors',
+      (prefs) => prefs.setBool('qualityBlockExportOnErrors', enabled),
+    );
   }
 
   Future<void> setContrastMinRatio(double ratio) async {
     final clamped = ratio.clamp(1.0, 7.0).toDouble();
     state = state.copyWith(contrastMinRatio: clamped);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setDouble('contrastMinRatio', clamped);
+    await _persist(
+      'setContrastMinRatio',
+      (prefs) => prefs.setDouble('contrastMinRatio', clamped),
+    );
   }
 
   /// Sta live laden van online media (URL-afbeeldingen/-video's en embeds) toe,
   /// of zet het uit (fail-closed). Persisteert in hetzelfde prefs-domein.
   Future<void> setAllowRemoteMedia(bool enabled) async {
     state = state.copyWith(allowRemoteMedia: enabled);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('allowRemoteMedia', enabled);
+    await _persist(
+      'setAllowRemoteMedia',
+      (prefs) => prefs.setBool('allowRemoteMedia', enabled),
+    );
   }
 
   /// Recente lijst: de nieuwe JSON-opslag ('recentFilesV2') wint; de oude
@@ -252,9 +307,10 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
         if (paths.contains(e.key)) e.key: e.value,
     };
     state = state.copyWith(recentFiles: files, recentFileOrigins: origins);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('recentFilesV2', RecentFile.encodeList(files));
-    await prefs.setString('recentFileOrigins', jsonEncode(origins));
+    await _persist('_persistRecentFiles', (prefs) async {
+      await prefs.setString('recentFilesV2', RecentFile.encodeList(files));
+      await prefs.setString('recentFileOrigins', jsonEncode(origins));
+    });
   }
 
   /// Zet [path] bovenaan de recente lijst en ververs de metadata die bij het
@@ -312,8 +368,10 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     if (!state.recentFiles.any((f) => f.path == path)) return;
     final origins = {...state.recentFileOrigins, path: origin};
     state = state.copyWith(recentFileOrigins: origins);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('recentFileOrigins', jsonEncode(origins));
+    await _persist(
+      'setRecentFileOrigin',
+      (prefs) => prefs.setString('recentFileOrigins', jsonEncode(origins)),
+    );
   }
 
   static Map<String, String> _decodeRecentFileOrigins(String? raw) {
@@ -330,32 +388,36 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
 
   Future<void> setLanguageCode(String code) async {
     state = state.copyWith(languageCode: code);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('languageCode', code);
+    await _persist(
+      'setLanguageCode',
+      (prefs) => prefs.setString('languageCode', code),
+    );
   }
 
   Future<void> setHomeDirectory(String? path) async {
     state = path == null
         ? state.copyWith(clearHomeDirectory: true)
         : state.copyWith(homeDirectory: path);
-    final prefs = await SharedPreferences.getInstance();
-    if (path == null) {
-      await prefs.remove('homeDirectory');
-    } else {
-      await prefs.setString('homeDirectory', path);
-    }
+    await _persist('setHomeDirectory', (prefs) async {
+      if (path == null) {
+        await prefs.remove('homeDirectory');
+      } else {
+        await prefs.setString('homeDirectory', path);
+      }
+    });
   }
 
   Future<void> setExportDirectory(String? path) async {
     state = path == null
         ? state.copyWith(clearExportDirectory: true)
         : state.copyWith(exportDirectory: path);
-    final prefs = await SharedPreferences.getInstance();
-    if (path == null) {
-      await prefs.remove('exportDirectory');
-    } else {
-      await prefs.setString('exportDirectory', path);
-    }
+    await _persist('setExportDirectory', (prefs) async {
+      if (path == null) {
+        await prefs.remove('exportDirectory');
+      } else {
+        await prefs.setString('exportDirectory', path);
+      }
+    });
   }
 
   /// Persist edits to the profile currently identified by [previousName],
@@ -384,8 +446,10 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
 
   Future<void> selectThemeProfile(String name) async {
     state = state.copyWith(selectedThemeProfileName: name);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selectedThemeProfileName', name);
+    await _persist(
+      'selectThemeProfile',
+      (prefs) => prefs.setString('selectedThemeProfileName', name),
+    );
   }
 
   /// Create a brand-new profile (optionally based on [base]), add it to the
@@ -418,8 +482,10 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       return;
     }
     state = state.copyWith(selectedAppAppearanceProfileName: name);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selectedAppAppearanceProfileName', name);
+    await _persist(
+      'selectAppAppearanceProfile',
+      (prefs) => prefs.setString('selectedAppAppearanceProfileName', name),
+    );
   }
 
   Future<AppAppearanceProfile> createAppAppearanceProfile({
@@ -481,8 +547,10 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       return;
     }
     state = state.copyWith(selectedCockpitColorSchemeName: name);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selectedCockpitColorSchemeName', name);
+    await _persist(
+      'selectCockpitColorScheme',
+      (prefs) => prefs.setString('selectedCockpitColorSchemeName', name),
+    );
   }
 
   Future<CockpitColorScheme> createCockpitColorScheme({
@@ -543,16 +611,17 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   }
 
   Future<void> _saveCockpitSchemes() async {
-    final prefs = await SharedPreferences.getInstance();
     final customSchemes = state.cockpitColorSchemes
         .where((scheme) => !scheme.isBuiltIn)
         .map((scheme) => scheme.toJson())
         .toList();
-    await prefs.setString('cockpitColorSchemes', jsonEncode(customSchemes));
-    await prefs.setString(
-      'selectedCockpitColorSchemeName',
-      state.selectedCockpitColorSchemeName,
-    );
+    await _persist('_saveCockpitSchemes', (prefs) async {
+      await prefs.setString('cockpitColorSchemes', jsonEncode(customSchemes));
+      await prefs.setString(
+        'selectedCockpitColorSchemeName',
+        state.selectedCockpitColorSchemeName,
+      );
+    });
   }
 
   List<CockpitColorScheme> _mergeCockpitSchemes(
@@ -590,33 +659,38 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   }
 
   Future<void> _saveAppearanceProfiles() async {
-    final prefs = await SharedPreferences.getInstance();
     final customProfiles = state.appAppearanceProfiles
         .where((profile) => !profile.isBuiltIn)
         .map((profile) => profile.toJson())
         .toList();
-    await prefs.setString('appAppearanceProfiles', jsonEncode(customProfiles));
-    await prefs.setString(
-      'selectedAppAppearanceProfileName',
-      state.selectedAppAppearanceProfileName,
-    );
+    await _persist('_saveAppearanceProfiles', (prefs) async {
+      await prefs.setString(
+        'appAppearanceProfiles',
+        jsonEncode(customProfiles),
+      );
+      await prefs.setString(
+        'selectedAppAppearanceProfileName',
+        state.selectedAppAppearanceProfileName,
+      );
+    });
   }
 
   Future<void> _saveProfiles() async {
     state = state.copyWith(themeProfiles: _uniqueProfiles(state.themeProfiles));
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(
-      'themeProfiles',
-      jsonEncode(state.themeProfiles.map((p) => p.toJson()).toList()),
-    );
-    await prefs.setString(
-      'selectedThemeProfileName',
-      state.selectedThemeProfileName,
-    );
-    await prefs.setString(
-      'themeProfile',
-      jsonEncode(state.themeProfile.toJson()),
-    );
+    await _persist('_saveProfiles', (prefs) async {
+      await prefs.setString(
+        'themeProfiles',
+        jsonEncode(state.themeProfiles.map((p) => p.toJson()).toList()),
+      );
+      await prefs.setString(
+        'selectedThemeProfileName',
+        state.selectedThemeProfileName,
+      );
+      await prefs.setString(
+        'themeProfile',
+        jsonEncode(state.themeProfile.toJson()),
+      );
+    });
   }
 
   List<ThemeProfile> _uniqueProfiles(List<ThemeProfile> profiles) {
@@ -686,3 +760,10 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
 final settingsProvider = StateNotifierProvider<SettingsNotifier, AppSettings>(
   (_) => SettingsNotifier(),
 );
+
+/// Zendt een oplopend volgnummer uit telkens als een prefs-schrijf in
+/// [SettingsNotifier] faalt. De app-shell luistert hierop en meldt het
+/// niet-blokkerend aan de gebruiker (de wijziging geldt wel voor deze sessie).
+final settingsPersistErrorProvider = StreamProvider<int>((ref) {
+  return ref.watch(settingsProvider.notifier).persistErrors;
+});

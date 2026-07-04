@@ -83,6 +83,7 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Instelling opslaan is mislukt.': 'Η αποθήκευση της ρύθμισης απέτυχε.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Σημείωση: η έκδοση για τον ιστό μπορεί να αντλεί μόνο από διακομιστές που το επιτρέπουν (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':

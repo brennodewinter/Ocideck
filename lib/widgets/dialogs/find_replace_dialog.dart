@@ -122,9 +122,12 @@ class _FindReplaceDialogState extends State<FindReplaceDialog> {
                     _recount();
                   },
                 ),
-                Text(
-                  l10n.d('Hoofdlettergevoelig'),
-                  style: const TextStyle(fontSize: 13),
+                Flexible(
+                  child: Text(
+                    l10n.d('Hoofdlettergevoelig'),
+                    style: const TextStyle(fontSize: 13),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 const Spacer(),
                 _statusText(hasQuery),

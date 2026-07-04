@@ -285,6 +285,13 @@ class AppLocalizations {
             true ||
         _dutchSourceStrings[languageCode]?.containsKey(dutchText) == true;
   }
+
+  /// Whether [languageCode] carries its own [key] in the keyed `t()` table
+  /// (no fall-through to English/Dutch). A guard test uses this to enforce
+  /// that every `t()` key used in the app is present in every language.
+  static bool hasTranslationKey(String languageCode, String key) {
+    return _strings[languageCode]?.containsKey(key) == true;
+  }
 }
 
 extension AppLocalizationsX on BuildContext {

@@ -154,6 +154,10 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
         Expanded(
           child: DropdownButtonFormField<String>(
             initialValue: selectedName,
+            // isExpanded laat het item een begrensde breedte krijgen zodat de
+            // Flexible-naam kan ellipsen — en voorkomt de onbegrensde
+            // intrinsieke meting die anders op de Flexible zou crashen.
+            isExpanded: true,
             decoration: InputDecoration(
               labelText: l10n.d('App-thema'),
               isDense: true,
@@ -166,7 +170,12 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
                     children: [
                       _appearanceDot(profile.primaryColor),
                       const SizedBox(width: 8),
-                      Text(profile.name),
+                      Flexible(
+                        child: Text(
+                          profile.name,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     ],
                   ),
                 ),

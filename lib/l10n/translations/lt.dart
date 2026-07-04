@@ -83,6 +83,7 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Instelling opslaan is mislukt.': 'Nepavyko išsaugoti nustatymo.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Pastaba: žiniatinklio versija gali parsisiųsti tik iš serverių, kurie tai leidžia (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':

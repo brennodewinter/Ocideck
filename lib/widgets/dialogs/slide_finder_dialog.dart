@@ -170,7 +170,12 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
         children: [
           const Icon(Icons.travel_explore_outlined, size: 20),
           const SizedBox(width: 8),
-          Text(l10n.d('Slide zoeken')),
+          Flexible(
+            child: Text(
+              l10n.d('Slide zoeken'),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
           const Spacer(),
           if (_addedCount > 0)
             Text(

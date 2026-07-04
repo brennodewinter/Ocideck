@@ -88,12 +88,15 @@ class _SeveritySection extends StatelessWidget {
             children: [
               Icon(slideQualitySeverityIcon(severity), size: 15, color: color),
               const SizedBox(width: 6),
-              Text(
-                '${slideQualitySeverityLabel(l10n, severity)} (${issues.length})',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                  color: color,
+              Flexible(
+                child: Text(
+                  '${slideQualitySeverityLabel(l10n, severity)} (${issues.length})',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: color,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],

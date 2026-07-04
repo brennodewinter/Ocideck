@@ -83,6 +83,7 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Instelling opslaan is mislukt.': 'Asetuksen tallennus epäonnistui.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Huomio: verkkoversio voi noutaa vain palvelimilta, jotka sallivat sen (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':

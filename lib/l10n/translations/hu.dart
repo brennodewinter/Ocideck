@@ -83,6 +83,7 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Instelling opslaan is mislukt.': 'A beállítás mentése sikertelen.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Megjegyzés: a webes verzió csak olyan szerverekről tölthet le, amelyek ezt engedélyezik (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':

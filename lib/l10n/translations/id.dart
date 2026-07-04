@@ -83,6 +83,7 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Instelling opslaan is mislukt.': 'Gagal menyimpan pengaturan.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Catatan: versi web hanya dapat mengambil dari server yang mengizinkannya (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':

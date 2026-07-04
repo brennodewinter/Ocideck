@@ -159,7 +159,12 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
         children: [
           const Icon(Icons.library_add_outlined, size: 20),
           const SizedBox(width: 8),
-          Text(l10n.d('Slides importeren')),
+          Flexible(
+            child: Text(
+              l10n.d('Slides importeren'),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
           const Spacer(),
           if (selectedCount > 0)
             Text(

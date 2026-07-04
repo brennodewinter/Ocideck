@@ -433,6 +433,18 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       ref.read(importSecurityAlarmProvider.notifier).state = null;
     });
 
+    // Een instelling kon niet naar schijf worden weggeschreven: niet-blokkerend
+    // melden. De wijziging geldt wel voor deze sessie (de state is al
+    // bijgewerkt), maar ging mogelijk verloren voor de volgende start.
+    ref.listen(settingsPersistErrorProvider, (_, next) {
+      if (!next.hasValue) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(context.l10n.d('Instelling opslaan is mislukt.')),
+        ),
+      );
+    });
+
     // Een zojuist geopend bestand heeft elders een byte-identieke kopie:
     // niet-blokkerend melden (de gebruiker wilde gewoon openen), met de
     // opruimdialoog als directe ingang.

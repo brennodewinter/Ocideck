@@ -84,6 +84,7 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Instelling opslaan is mislukt.': 'Salvarea setării a eșuat.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Notă: versiunea web poate prelua doar de la servere care permit acest lucru (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':

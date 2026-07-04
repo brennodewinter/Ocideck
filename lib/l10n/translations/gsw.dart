@@ -83,6 +83,7 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Instelling opslaan is mislukt.': 'Iistellig spychere isch fehlgschlage.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Achtig: d Webversion cha nume vo Server abhole, wo das erlaube (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':

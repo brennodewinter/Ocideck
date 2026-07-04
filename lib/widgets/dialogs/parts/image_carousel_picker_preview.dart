@@ -171,7 +171,11 @@ extension _CarouselPreview on _ImageCarouselPickerState {
               ),
             ),
             const SizedBox(height: 10),
-            Row(
+            // Wrap i.p.v. Row: op de smalle previewkolom stapelen de knoppen
+            // netjes onder elkaar in plaats van de Row te laten overlopen.
+            Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              runSpacing: 4,
               children: [
                 TextButton.icon(
                   onPressed: _justCopied ? null : _copySelectedToClipboard,
@@ -193,7 +197,6 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                     ),
                   ),
                 ),
-                const Spacer(),
                 TextButton.icon(
                   onPressed: _deleteSelected,
                   icon: const Icon(Icons.delete_outline, size: 16),
@@ -269,10 +272,15 @@ extension _CarouselPreview on _ImageCarouselPickerState {
             ),
           ),
           const SizedBox(width: 8),
-          // Hint
-          Text(
-            l10n.d('↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert'),
-            style: const TextStyle(color: Color(0xFF484F58), fontSize: 11),
+          // Hint — mag inkorten op smalle vensters zodat de Row niet overloopt.
+          Flexible(
+            child: Text(
+              l10n.d(
+                '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert',
+              ),
+              style: const TextStyle(color: Color(0xFF484F58), fontSize: 11),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           const Spacer(),
           // Annuleren

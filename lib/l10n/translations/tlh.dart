@@ -81,6 +81,7 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Instelling opslaan is mislukt.': 'choqmeH luj.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'yIqIm: chaw\'bogh jabwI\'meyvo\' neH SuqlaH web mIw (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':

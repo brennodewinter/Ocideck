@@ -83,6 +83,7 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Instelling opslaan is mislukt.': 'Det gick inte att spara inställningen.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Obs: webbversionen kan bara hämta från servrar som tillåter det (CORS).',
   'Pakketten (.ocideck) worden in de webversie nog niet ondersteund.':
