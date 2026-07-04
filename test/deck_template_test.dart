@@ -38,8 +38,9 @@ void main() {
           'empty', 'briefing', 'status', 'kickoff', 'communication',
           'projectTimeline', 'rasci', 'securityTasks', 'certification',
           'training', 'report', 'research', 'technical', 'quiz',
-          // De veertien werkdecks.
+          // De veertien werkdecks plus de twee sessiedecks.
           ...werkdeckIds,
+          'bobCrisis', 'pplFlightPrep',
         ]),
       );
     });
@@ -267,6 +268,81 @@ void main() {
           isTrue,
           reason: id,
         );
+      }
+    });
+  });
+
+  group('BOB-crisisrapportage', () {
+    List<Slide> slides() => deckTemplateById('bobCrisis')!.buildSlides('BOB');
+
+    test('exists and starts with a title slide', () {
+      expect(deckTemplateById('bobCrisis')!.title, 'BOB-crisisrapportage');
+      expect(slides().length, greaterThanOrEqualTo(12));
+      expect(slides().first.type, SlideType.title);
+    });
+
+    test('has the B/O/B section dividers', () {
+      final sections = slides()
+          .where((s) => s.type == SlideType.section)
+          .map((s) => s.title)
+          .toList();
+      expect(sections, ['Beeldvorming', 'Oordeelsvorming', 'Besluitvorming']);
+    });
+
+    test('work tables are live-editable', () {
+      final editableTables = slides().where(
+        (s) => s.type == SlideType.table && s.tableEditable,
+      );
+      expect(editableTables.length, greaterThanOrEqualTo(2));
+    });
+
+    test('the action list is a checklist with progress', () {
+      final actionList = slides().firstWhere((s) => s.title == 'Actielijst');
+      expect(actionList.listStyle, ListStyle.checklist);
+      expect(actionList.showChecklistProgress, isTrue);
+    });
+  });
+
+  group('PPL Vluchtvoorbereiding', () {
+    List<Slide> slides() =>
+        deckTemplateById('pplFlightPrep')!.buildSlides('Vlucht');
+
+    test('exists, is large enough and starts with a title slide', () {
+      expect(deckTemplateById('pplFlightPrep'), isNotNull);
+      expect(slides().length, greaterThanOrEqualTo(18));
+      expect(slides().first.type, SlideType.title);
+    });
+
+    test('shows the mandatory-preparation warning visibly', () {
+      expect(
+        slides().any(
+          (s) => s.customMarkdown.contains(
+            'vervangt geen verplichte vluchtvoorbereiding',
+          ),
+        ),
+        isTrue,
+      );
+    });
+
+    test('planning tables are live-editable', () {
+      final editableTables = slides().where(
+        (s) => s.type == SlideType.table && s.tableEditable,
+      );
+      expect(editableTables.length, greaterThanOrEqualTo(5));
+    });
+
+    test('has at least three checklists', () {
+      final checklists = slides().where(
+        (s) => s.listStyle == ListStyle.checklist,
+      );
+      expect(checklists.length, greaterThanOrEqualTo(3));
+    });
+
+    test('go/no-go and final decision show checklist progress', () {
+      for (final title in ['Go / No-Go Samenvatting', 'Laatste Besluit']) {
+        final slide = slides().firstWhere((s) => s.title == title);
+        expect(slide.listStyle, ListStyle.checklist, reason: title);
+        expect(slide.showChecklistProgress, isTrue, reason: title);
       }
     });
   });

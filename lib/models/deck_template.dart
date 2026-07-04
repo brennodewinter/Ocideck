@@ -9,6 +9,7 @@ import 'timeline.dart';
 part 'deck_template_general.dart';
 part 'deck_template_work_a.dart';
 part 'deck_template_work_b.dart';
+part 'deck_template_sessions.dart';
 
 /// A starting-point recipe for a new presentation: a title page plus a set of
 /// example slides the user overwrites with real content. Templates are pure
@@ -166,6 +167,16 @@ final List<DeckTemplate> deckTemplates = [
     buildSlides: _buildTabletopExercise,
   ),
   DeckTemplate(
+    id: 'bobCrisis',
+    title: 'BOB-crisisrapportage',
+    description:
+        'Leid een crisisteam door beeldvorming, oordeelsvorming en '
+        'besluitvorming, met live situatiebeeld, informatievragen, '
+        "dilemma's, besluitenlog en actielijst.",
+    icon: 'bobCrisis',
+    buildSlides: _buildBobCrisis,
+  ),
+  DeckTemplate(
     id: 'releaseReadiness',
     title: 'CAB / release readiness',
     description:
@@ -242,6 +253,16 @@ final List<DeckTemplate> deckTemplates = [
     description: 'Drie vraagvormen met uitleg en nabespreking.',
     icon: 'quiz',
     buildSlides: _buildQuiz,
+  ),
+  DeckTemplate(
+    id: 'pplFlightPrep',
+    title: 'PPL Vluchtvoorbereiding',
+    description:
+        'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, '
+        'weight & balance, brandstof, alternates en persoonlijke '
+        'go/no-go checks.',
+    icon: 'pplFlightPrep',
+    buildSlides: _buildPplFlightPrep,
   ),
 ];
 
