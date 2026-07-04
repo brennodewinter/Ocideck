@@ -67,7 +67,14 @@ void main() {
   testWidgets('shows the template picker with title field', (tester) async {
     await _Harness().open(tester);
     expect(find.text('Sjabloon'), findsOneWidget);
+    // "Leeg deck" staat vastgepind bovenaan, dus altijd in de eerste viewport.
     expect(find.text('Leeg deck'), findsOneWidget);
+    // Een niet-bovenaan sjabloon is via scrollen bereikbaar.
+    await tester.scrollUntilVisible(
+      find.text('Korte briefing'),
+      60,
+      scrollable: find.byType(Scrollable).last,
+    );
     expect(find.text('Korte briefing'), findsOneWidget);
     expect(find.byType(TextFormField), findsOneWidget);
   });
@@ -91,6 +98,10 @@ void main() {
       60,
       scrollable: find.byType(Scrollable).last,
     );
+    // Volledig in beeld brengen: scrollUntilVisible kan de tegel aan de rand
+    // laten staan, waar een tap net naast zou vallen.
+    await tester.ensureVisible(find.text('Projectstart / kick-off'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Projectstart / kick-off'));
     await tester.pump();
     await tester.tap(find.text('Aanmaken'));
@@ -115,7 +126,12 @@ void main() {
     tester,
   ) async {
     await _Harness().open(tester);
-    for (final template in deckTemplates) {
+    // In weergavevolgorde itereren zodat het scrollen monotoon omlaag gaat —
+    // scrollUntilVisible scrolt maar één richting op.
+    for (final template in sortTemplatesForDisplay(
+      deckTemplates,
+      (t) => t.title,
+    )) {
       await tester.scrollUntilVisible(
         find.text(template.title),
         60,
@@ -133,6 +149,26 @@ void main() {
         reason: '${template.id} mist een icoon in templatePickerIcons',
       );
     }
+  });
+
+  test('sortTemplatesForDisplay pins the empty deck, then sorts by title', () {
+    final sorted = sortTemplatesForDisplay(deckTemplates, (t) => t.title);
+    // Volledige catalogus, niets verloren of gedupliceerd.
+    expect(
+      sorted.map((t) => t.id).toSet(),
+      deckTemplates.map((t) => t.id).toSet(),
+    );
+    expect(sorted, hasLength(deckTemplates.length));
+    // "Leeg deck" bovenaan als startpunt-vanaf-nul.
+    expect(sorted.first.id, 'empty');
+    // De rest alfabetisch op de gevouwen titelsleutel (diacriet-ongevoelig).
+    final restTitles = sorted.skip(1).map((t) => t.title).toList();
+    final expected = [...restTitles]
+      ..sort(
+        (a, b) =>
+            AppLocalizations.sortKey(a).compareTo(AppLocalizations.sortKey(b)),
+      );
+    expect(restTitles, expected);
   });
 
   final searchField = find.byKey(const ValueKey('templateSearchField'));
