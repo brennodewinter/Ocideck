@@ -148,12 +148,15 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                         size: 20,
                       ),
                       const SizedBox(width: 10),
-                      Text(
-                        l10n.d('Toetsenlegenda'),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
+                      Flexible(
+                        child: Text(
+                          l10n.d('Toetsenlegenda'),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],

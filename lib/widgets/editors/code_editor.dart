@@ -94,12 +94,15 @@ class _CodeEditorState extends State<CodeEditor> {
           const SizedBox(height: 16),
           Row(
             children: [
-              Text(
-                l10n.d('Programmeertaal'),
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  color: AppTheme.slate500,
+              Flexible(
+                child: Text(
+                  l10n.d('Programmeertaal'),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: AppTheme.slate500,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               const SizedBox(width: 12),
