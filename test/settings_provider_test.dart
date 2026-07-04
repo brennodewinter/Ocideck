@@ -419,6 +419,35 @@ void main() {
       expect(n.state.recentFiles.first.slideCount, 0);
     });
 
+    test(
+      'recent file origins stick to their path and prune with the list',
+      () async {
+        final n = await _loadedNotifier();
+        await n.addRecentFile('/remote.md');
+        await n.setRecentFileOrigin('/remote.md', 'https://server · pad.md');
+
+        // Herkomst blijft staan wanneer hetzelfde pad opnieuw wordt geopend
+        // (lokaal her-openen maakt een remote bestand niet lokaal).
+        await n.addRecentFile('/ander.md');
+        await n.addRecentFile('/remote.md');
+        expect(
+          n.state.recentFileOrigins['/remote.md'],
+          'https://server · pad.md',
+        );
+
+        // Een pad buiten de recente lijst krijgt geen herkomst.
+        await n.setRecentFileOrigin('/onbekend.md', 'https://elders');
+        expect(n.state.recentFileOrigins.containsKey('/onbekend.md'), isFalse);
+
+        // Rolt het pad uit de top-10, dan verdwijnt zijn herkomst mee.
+        for (var i = 0; i < 10; i++) {
+          await n.addRecentFile('/deck_$i.md');
+        }
+        expect(n.state.recentFiles.any((f) => f.path == '/remote.md'), isFalse);
+        expect(n.state.recentFileOrigins, isEmpty);
+      },
+    );
+
     test('home and export directories set and clear', () async {
       final n = await _loadedNotifier();
       await n.setHomeDirectory('/home/decks');

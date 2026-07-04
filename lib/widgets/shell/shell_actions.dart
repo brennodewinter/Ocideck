@@ -76,6 +76,7 @@ Future<void> _scanLibrary(BuildContext context, WidgetRef ref) async {
     recentFiles: [
       for (final f in ref.read(settingsProvider).recentFiles) f.path,
     ],
+    homeDir: ref.read(settingsProvider).homeDirectory,
   );
   if (path == null) return;
   await ref.read(tabsProvider.notifier).openFileByPath(path);

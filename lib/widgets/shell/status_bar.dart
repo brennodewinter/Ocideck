@@ -51,64 +51,69 @@ class _DeckStatusBar extends StatelessWidget {
         ),
         child: Row(
           children: [
-            _StatusAction(
-              icon: deckState.isDirty
-                  ? Icons.radio_button_checked
-                  : Icons.check_circle_outline,
-              label: saveLabel,
-              tooltip: deckState.isDirty
-                  ? l10n.t('unsavedChanges')
-                  : l10n.t('noUnsavedChanges'),
-              color: deckState.isDirty
-                  ? const Color(0xFFD97706)
-                  : const Color(0xFF15803D),
-              onTap: () => onSave(),
-            ),
-            const _StatusDivider(),
-            // Flexibel: bij een smal venster krimpen de tekstitems (ellipsis)
-            // in plaats van dat de balk overloopt.
-            Flexible(
-              child: _StatusItem(
-                icon: Icons.description_outlined,
-                label: fileLabel,
-                tooltip: deckState.filePath ?? l10n.t('noFileYet'),
+            // De linkergroep vangt al het ruimtetekort op: bij een smal
+            // venster krimpen de tekstlabels (ellipsis) in plaats van dat de
+            // balk overloopt; de rechtergroep blijft rechts uitgelijnd.
+            Expanded(
+              child: Row(
+                children: [
+                  _StatusAction(
+                    icon: deckState.isDirty
+                        ? Icons.radio_button_checked
+                        : Icons.check_circle_outline,
+                    label: saveLabel,
+                    tooltip: deckState.isDirty
+                        ? l10n.t('unsavedChanges')
+                        : l10n.t('noUnsavedChanges'),
+                    color: deckState.isDirty
+                        ? const Color(0xFFD97706)
+                        : const Color(0xFF15803D),
+                    onTap: () => onSave(),
+                  ),
+                  const _StatusDivider(),
+                  Flexible(
+                    child: _StatusItem(
+                      icon: Icons.description_outlined,
+                      label: fileLabel,
+                      tooltip: deckState.filePath ?? l10n.t('noFileYet'),
+                    ),
+                  ),
+                  const _StatusDivider(),
+                  _StatusItem(
+                    icon: Icons.slideshow_outlined,
+                    label: skipped == 0
+                        ? '${deck.slides.length} ${l10n.t('slides')}'
+                        : '${deck.slides.length} ${l10n.t('slides')} · $skipped ${l10n.t('skipped')}',
+                    tooltip: skipped == 0
+                        ? l10n.t('allSlidesIncluded')
+                        : '$skipped ${l10n.t('skippedSlidesExcluded')}',
+                    color: skipped == 0 ? null : const Color(0xFF8A6D3B),
+                  ),
+                  const _StatusDivider(),
+                  Flexible(
+                    child: _StatusItem(
+                      icon: Icons.palette_outlined,
+                      label: deck.themeProfile.name,
+                      tooltip:
+                          '${l10n.t('styleProfile')}: ${deck.themeProfile.name}',
+                    ),
+                  ),
+                  if (deck.tlp != TlpLevel.none) ...[
+                    const _StatusDivider(),
+                    _StatusItem(
+                      icon: Icons.shield_outlined,
+                      label: deck.tlp.label,
+                      tooltip: '${l10n.t('classification')}: ${deck.tlp.label}',
+                      color: Color(deck.tlp.foreground),
+                    ),
+                  ],
+                ],
               ),
             ),
-            const _StatusDivider(),
             _StatusItem(
-              icon: Icons.slideshow_outlined,
-              label: skipped == 0
-                  ? '${deck.slides.length} ${l10n.t('slides')}'
-                  : '${deck.slides.length} ${l10n.t('slides')} · $skipped ${l10n.t('skipped')}',
-              tooltip: skipped == 0
-                  ? l10n.t('allSlidesIncluded')
-                  : '$skipped ${l10n.t('skippedSlidesExcluded')}',
-              color: skipped == 0 ? null : const Color(0xFF8A6D3B),
-            ),
-            const _StatusDivider(),
-            Flexible(
-              child: _StatusItem(
-                icon: Icons.palette_outlined,
-                label: deck.themeProfile.name,
-                tooltip: '${l10n.t('styleProfile')}: ${deck.themeProfile.name}',
-              ),
-            ),
-            if (deck.tlp != TlpLevel.none) ...[
-              const _StatusDivider(),
-              _StatusItem(
-                icon: Icons.shield_outlined,
-                label: deck.tlp.label,
-                tooltip: '${l10n.t('classification')}: ${deck.tlp.label}',
-                color: Color(deck.tlp.foreground),
-              ),
-            ],
-            const Spacer(),
-            Flexible(
-              child: _StatusItem(
-                icon: Icons.folder_outlined,
-                label: exportLabel,
-                tooltip: exportDirectory ?? l10n.t('exportsNextToDeck'),
-              ),
+              icon: Icons.folder_outlined,
+              label: exportLabel,
+              tooltip: exportDirectory ?? l10n.t('exportsNextToDeck'),
             ),
             const _StatusDivider(),
             _ExportReadinessChip(
@@ -259,8 +264,8 @@ class _StatusItem extends StatelessWidget {
         children: [
           Icon(icon, size: 13, color: fg),
           const SizedBox(width: 4),
-          // Loose flex: krimpt (met ellipsis) mee wanneer de statusbalk smal
-          // wordt, in plaats van de balk te laten overlopen.
+          // Flexible zodat het label meekrimpt (ellipsis) wanneer de
+          // statusbalk het item begrenst; los daarvan blijft 210 het maximum.
           Flexible(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 210),

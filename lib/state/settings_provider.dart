@@ -94,6 +94,9 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           ? selectedCockpit
           : 'Standaard',
       recentFiles: _loadRecentFiles(prefs),
+      recentFileOrigins: _decodeRecentFileOrigins(
+        prefs.getString('recentFileOrigins'),
+      ),
       maxReleaseExportTlpKey: prefs.getString('maxReleaseExportTlp'),
       minRequiredExportTlpKey: prefs.getString('minRequiredExportTlp'),
       requireClassificationOnExport:
@@ -239,9 +242,19 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   }
 
   Future<void> _persistRecentFiles(List<RecentFile> files) async {
-    state = state.copyWith(recentFiles: files);
+    // Herkomsten volgen de lijst: wat eruit rolt, raakt ook zijn bron kwijt.
+    // Een pad dat opnieuw wordt geopend behoudt zijn herkomst — remote
+    // opgehaald blijft remote, ook wanneer de lokale kopie later via
+    // "Openen…" of de recente lijst wordt geopend.
+    final paths = {for (final f in files) f.path};
+    final origins = {
+      for (final e in state.recentFileOrigins.entries)
+        if (paths.contains(e.key)) e.key: e.value,
+    };
+    state = state.copyWith(recentFiles: files, recentFileOrigins: origins);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('recentFilesV2', RecentFile.encodeList(files));
+    await prefs.setString('recentFileOrigins', jsonEncode(origins));
   }
 
   /// Zet [path] bovenaan de recente lijst en ververs de metadata die bij het
@@ -280,6 +293,39 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
             : f,
     ];
     await _persistRecentFiles(updated);
+  }
+
+  /// Haal een pad uit de recente lijst (bijv. omdat het bestand naar de
+  /// prullenbak is verplaatst); de herkomst gaat mee.
+  Future<void> removeRecentFile(String path) async {
+    if (!state.recentFiles.any((f) => f.path == path)) return;
+    await _persistRecentFiles(
+      state.recentFiles.where((f) => f.path != path).toList(),
+    );
+  }
+
+  /// Leg vast waar een recent bestand vandaan is gehaald (Nextcloud-server of
+  /// import-URL). Aan te roepen ná [addRecentFile]; alleen paden die in de
+  /// recente lijst staan krijgen een herkomst, zodat de map niet meegroeit
+  /// met verdwenen vermeldingen.
+  Future<void> setRecentFileOrigin(String path, String origin) async {
+    if (!state.recentFiles.any((f) => f.path == path)) return;
+    final origins = {...state.recentFileOrigins, path: origin};
+    state = state.copyWith(recentFileOrigins: origins);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('recentFileOrigins', jsonEncode(origins));
+  }
+
+  static Map<String, String> _decodeRecentFileOrigins(String? raw) {
+    if (raw == null || raw.isEmpty) return const {};
+    try {
+      final decoded = jsonDecode(raw);
+      if (decoded is! Map) return const {};
+      return decoded.map((k, v) => MapEntry(k.toString(), v.toString()));
+    } catch (e) {
+      logWarning('SettingsNotifier: recentFileOrigins decode failed', e);
+      return const {};
+    }
   }
 
   Future<void> setLanguageCode(String code) async {

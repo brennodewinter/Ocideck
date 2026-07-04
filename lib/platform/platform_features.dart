@@ -16,6 +16,10 @@ bool get supportsDualScreenPresenter => impl.supportsDualScreenPresenter;
 /// Full filesystem access for project folders and sidecars.
 bool get supportsLocalProjectFolders => impl.supportsLocalProjectFolders;
 
+/// De thuismap van de gebruiker volgens het OS (`$HOME`/`%USERPROFILE%`), of
+/// null op web. Voor leesbare padweergave (`~`-afkorting) in open-lijsten.
+String? get osHomeDirectory => impl.osHomeDirectory;
+
 /// Nextcloud/WebDAV als deck-bron (bladeren, openen, terugschrijven).
 ///
 /// Op web staat dit bewust uit: de WebDAV-client draait op dart:io met eigen

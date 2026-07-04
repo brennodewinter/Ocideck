@@ -685,6 +685,8 @@ const _dutchSourceRo = {
   'Verticaal': 'Vertical',
   'Animatie': 'Animație',
   'Intekenen bij openen': 'Desenează la deschidere',
+  'Markeer als huidig punt': 'Marchează ca punct curent',
+  'Huidig punt weghalen': 'Elimină punctul curent',
   'Stap voor stap': 'Pas cu pas',
   'Geen animatie': 'Fără animație',
   'Animatiesnelheid': 'Viteza animației',
@@ -743,6 +745,13 @@ const _dutchSourceRo = {
       'Afirmația de mai sus este adevărată sau falsă; alege care.',
   'Selecteer alle juiste antwoorden': 'Selectează toate răspunsurile corecte',
   'Bevestig': 'Confirmă',
+  'Volgorde': 'Ordine',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Așază aici răspunsurile în ordinea corectă. La prezentare sunt afișate amestecate.',
+  'Geef minstens twee antwoorden op.': 'Oferă cel puțin două răspunsuri.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Atinge răspunsurile în ordinea corectă',
+  'Jouw volgorde': 'Ordinea ta',
   'Het juiste antwoord': 'Răspunsul corect',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Imaginea este afișată pe tot ecranul ca fundal. Folosește estomparea când titlul are nevoie de mai mult calm sau contrast.',
@@ -1133,4 +1142,120 @@ const _dutchSourceRo = {
   'Geavanceerd': 'Avansat',
   'Knippen en audio': 'Decupare și audio',
   'Bereik en kleurzones': 'Interval și zone de culoare',
+  'Leeg deck': 'Deck gol',
+  'Korte briefing': 'Briefing scurt',
+  'Status-briefing': 'Briefing de stare',
+  'Projectstart / kick-off': 'Start de proiect / kick-off',
+  'Voorbespreking communicatie': 'Discuție preliminară de comunicare',
+  'Projecttijdlijn': 'Cronologia proiectului',
+  'Informatiebeveiliging: RASCI / TVB':
+      'Securitatea informațiilor: RASCI / TVB',
+  'Security-takenplan': 'Plan de sarcini de securitate',
+  'Certificering voortgang': 'Progresul certificării',
+  'Training / workshop': 'Instruire / workshop',
+  'Rapportage': 'Raportare',
+  'Onderzoeksverhaal': 'Poveste de investigație',
+  'Technische uitleg': 'Explicație tehnică',
+  'Interactieve quiz': 'Quiz interactiv',
+  'Alleen een titelpagina en een agenda.':
+      'Doar o pagină de titlu și o agendă.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situație, fapte și decizia cerută în șase slide-uri.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Tablou de stare, progres pe fiecare flux de lucru și decizii.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'De ce, obiectiv, domeniu, părți interesate și cronologie.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Grupuri-țintă, mesaj central, canale și purtători de cuvânt.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Faze, jaloane, dependențe și momente de decizie.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Consemnarea rolurilor, a matricei RASCI și a acordurilor de sarcini.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Sarcini, priorități, responsabili și dovezi.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Progres pe domenii, controale și planificarea auditului.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Obiective de învățare, concepte-cheie, exercițiu și întrebare de quiz.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Rezumat, tablou KPI, tendință și acțiuni.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Întrebare, metodă, cronologia constatărilor și concluzii.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arhitectură, componente, exemplu de cod și listă de verificare.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Trei tipuri de întrebări cu explicații și discuție finală.',
+  'Sjabloon': 'Șablon',
+  'Post-incident review / lessons learned':
+      'Analiză post-incident / lecții învățate',
+  'Datalek / privacy-incident beoordeling':
+      'Evaluarea unei breșe de date / a unui incident de confidențialitate',
+  'DPIA / privacy impact assessment':
+      'DPIA / evaluarea impactului asupra confidențialității',
+  'Risicoanalyse / risk register': 'Analiză de risc / registru de riscuri',
+  'Business continuity / DR-test': 'Continuitatea activității / test DR',
+  'Tabletop-oefening / crisisoefening':
+      'Exercițiu tabletop / exercițiu de criză',
+  'BOB-crisisrapportage': 'Raportare de criză BOB',
+  'CAB / release readiness': 'CAB / pregătirea lansării',
+  'Stuurgroep / project board update':
+      'Actualizare pentru comitetul de coordonare / project board',
+  'Auditbevindingen en opvolging': 'Constatări de audit și urmărire',
+  'Leveranciersbeoordeling / vendor risk':
+      'Evaluarea furnizorilor / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Decizie de arhitectură / prezentare ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Lansarea unei politici / plan de implementare',
+  'Overdracht / handover': 'Predare / handover',
+  'Retrospective / teamverbetering': 'Retrospectivă / îmbunătățirea echipei',
+  'PPL Vluchtvoorbereiding': 'Pregătirea zborului PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Cronologie, impact, cauze și acțiuni de îmbunătățire după un incident.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Evaluați datele, riscul, obligația de notificare și comunicarea.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Prelucrare, temei juridic, riscuri de confidențialitate și măsuri.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Consemnați riscurile, probabilitatea, impactul, măsurile și responsabilii.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scenariu, obiective de recuperare, constatările testelor și puncte de îmbunătățire.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scenariu, injects, decizii, observații și evaluare.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Conduceți o echipă de criză prin formarea imaginii, formarea judecății și luarea deciziilor, cu imagine de situație în timp real, cereri de informații, dileme, jurnal de decizii și listă de acțiuni.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Modificare, impact, teste, rollback, comunicare și go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Progres, planificare, buget, riscuri și decizii solicitate.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Constatări, root cause, măsuri, dovezi și stare.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Serviciu, date, dependență, cerințe, riscuri și decizie.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Context, opțiuni, trade-off-uri, decizie și consecințe.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Grup-țintă, planificare, comunicare, instruire și adoptare.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Stare, acțiuni deschise, riscuri, contacte și primii pași.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fapte, tipare, start-stop-continue și acțiuni de îmbunătățire.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Pregătiți un zbor VFR cu rută, vreme, NOTAM-uri, performanțe, weight & balance, combustibil, alternates și verificări personale go/no-go.',
+  'Zoek een sjabloon': 'Căutați un șablon',
+  'Geen sjablonen gevonden': 'Nu s-au găsit șabloane',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Copii identice',
+  'Zelfde titel, andere inhoud': 'Același titlu, conținut diferit',
+  'Dubbele presentaties opruimen': 'Curăță prezentările duplicate',
+  'Naar de prullenbak verplaatst:': 'Mutat la coșul de gunoi:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Nu s-a putut muta la coșul de gunoi.',
+  'Geen dubbele presentaties gevonden.': 'Nu s-au găsit prezentări duplicate.',
+  'Laatste kopie blijft behouden': 'Ultima copie este păstrată',
+  'Nog geopend in een tabblad': 'Încă deschisă într-o filă',
+  'Naar prullenbak': 'La coșul de gunoi',
+  'Deze presentatie staat ook op een andere plek:':
+      'Această prezentare există și în alt loc:',
+  'Opruimen…': 'Curăță…',
 };

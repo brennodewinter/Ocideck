@@ -3,6 +3,15 @@ part of '../slide_preview.dart';
 /// Visual state of a single answer tile.
 enum _OptionVisual { neutral, selected, correct, wrong, dim, authorCorrect }
 
+/// One answer tile to render: [badge] vervangt de standaard letter (A, B, …);
+/// [trailing] is een kleine feedbackregel onder de optietekst.
+typedef _OptionRow = ({
+  String text,
+  _OptionVisual visual,
+  String? badge,
+  String? trailing,
+});
+
 /// Renders a question slide. In the editor (when [view] is null) it shows the
 /// authoring view: the prompt plus every answer with the correct ones marked,
 /// and a hint summarising how it will be presented. During a presentation
@@ -142,19 +151,25 @@ class _QuestionPreview extends StatelessWidget {
   static const _badgeF = 0.044;
   static const _badgeGapF = 0.022;
   static const _optTextF = 0.03;
+  static const _trailTextF = 0.022;
+  static const _trailGapF = 0.008;
   static const _tileGapF = 0.018;
   static const _timerGapF = 0.02;
   static const _footerGapF = 0.02;
 
-  Widget _content(BuildContext context, QuestionSpec spec) {
-    final accent = _hexColor(profile.accentColor);
-    final textColor = _hexColor(profile.textColor);
-
-    // Verzamel de te tonen opties (tekst + visuele staat).
-    final options = <({String text, _OptionVisual visual})>[];
-    if (view != null) {
+  /// Verzamel de te tonen opties (tekst + visuele staat + badge/feedback).
+  List<_OptionRow> _collectOptions(BuildContext context, QuestionSpec spec) {
+    final options = <_OptionRow>[];
+    if (view != null && view!.ordering) {
+      _collectOrderingPresentOptions(context, options);
+    } else if (view != null) {
       for (var i = 0; i < view!.options.length; i++) {
-        options.add((text: view!.options[i], visual: _presentVisual(i)));
+        options.add((
+          text: view!.options[i],
+          visual: _presentVisual(i),
+          badge: null,
+          trailing: null,
+        ));
       }
     } else if (spec.kind == QuestionKind.trueFalse) {
       // Auteursweergave juist/onjuist: toon beide met de juiste gemarkeerd.
@@ -166,21 +181,42 @@ class _QuestionPreview extends StatelessWidget {
           visual: i == correctIdx
               ? _OptionVisual.authorCorrect
               : _OptionVisual.neutral,
+          badge: null,
+          trailing: null,
+        ));
+      }
+    } else if (spec.kind == QuestionKind.ordering) {
+      // Auteursweergave volgorde: de lijstvolgorde ís de juiste volgorde.
+      final answers = spec.filledAnswers;
+      for (var k = 0; k < answers.length; k++) {
+        options.add((
+          text: answers[k].text,
+          visual: _OptionVisual.authorCorrect,
+          badge: '${k + 1}',
+          trailing: null,
         ));
       }
     } else {
-      final answers = spec.answers
-          .where((a) => a.text.trim().isNotEmpty)
-          .toList();
+      final answers = spec.filledAnswers;
       for (final a in answers) {
         options.add((
           text: a.text,
           visual: a.correct
               ? _OptionVisual.authorCorrect
               : _OptionVisual.neutral,
+          badge: null,
+          trailing: null,
         ));
       }
     }
+    return options;
+  }
+
+  Widget _content(BuildContext context, QuestionSpec spec) {
+    final accent = _hexColor(profile.accentColor);
+    final textColor = _hexColor(profile.textColor);
+
+    final options = _collectOptions(context, spec);
     final prompt = spec.prompt.isEmpty ? '—' : spec.prompt;
     final hasTimer = view != null && view!.hasTimer;
     final isMulti = view != null && view!.multi;
@@ -216,13 +252,25 @@ class _QuestionPreview extends StatelessWidget {
                 w * _badgeGapF * s,
           );
           for (var i = 0; i < options.length; i++) {
-            final textH = measureTextHeight(
+            var textH = measureTextHeight(
               options[i].text.isEmpty ? '—' : options[i].text,
               w * _optTextF * s,
               optTextW,
               lineHeight: 1.2,
               fontFamily: font,
             );
+            final trailing = options[i].trailing;
+            if (trailing != null) {
+              textH +=
+                  w * _trailGapF * s +
+                  measureTextHeight(
+                    trailing,
+                    w * _trailTextF * s,
+                    optTextW,
+                    lineHeight: 1.2,
+                    fontFamily: font,
+                  );
+            }
             final rowH = math.max(w * _badgeF * s, textH);
             h += rowH + w * _tileVPadF * 2 * s;
             if (i < options.length - 1) h += w * _tileGapF * s;
@@ -264,6 +312,8 @@ class _QuestionPreview extends StatelessWidget {
                 i,
                 options[i].visual,
                 scale,
+                badge: options[i].badge,
+                trailing: options[i].trailing,
               ),
               if (i < options.length - 1)
                 SizedBox(height: w * _tileGapF * scale),
@@ -296,6 +346,43 @@ class _QuestionPreview extends StatelessWidget {
     );
   }
 
+  /// Opties van een volgorde-vraag tijdens presenteren. Vóór onthullen: de
+  /// geschudde lijst met een •-badge, of het gekozen plaatsnummer na aantikken.
+  /// Ná onthullen: de rijen herschikt naar de júiste volgorde, met het
+  /// positienummer als badge; groen waar de kijker het item op die plek had,
+  /// rood met de eigen (foute) plek als feedbackregel eronder.
+  void _collectOrderingPresentOptions(
+    BuildContext context,
+    List<_OptionRow> options,
+  ) {
+    final v = view!;
+    if (!v.revealed) {
+      for (var i = 0; i < v.options.length; i++) {
+        final pos = v.selectedPositionOf(i);
+        options.add((
+          text: v.options[i],
+          visual: pos != null ? _OptionVisual.selected : _OptionVisual.neutral,
+          badge: pos != null ? '$pos' : '•',
+          trailing: null,
+        ));
+      }
+      return;
+    }
+    for (var k = 0; k < v.correctIndices.length; k++) {
+      final optIdx = v.correctIndices[k];
+      final userPos = v.selectedPositionOf(optIdx);
+      final placedRight = userPos == k + 1;
+      options.add((
+        text: v.options[optIdx],
+        visual: placedRight ? _OptionVisual.correct : _OptionVisual.wrong,
+        badge: '${k + 1}',
+        trailing: placedRight
+            ? null
+            : '${context.l10n.d('Jouw volgorde')}: ${userPos ?? '—'}',
+      ));
+    }
+  }
+
   _OptionVisual _presentVisual(int i) {
     final v = view!;
     if (!v.revealed) {
@@ -306,17 +393,23 @@ class _QuestionPreview extends StatelessWidget {
     return _OptionVisual.dim;
   }
 
-  /// Instructie + 'Bevestig'-knop voor een meerdere-juiste-antwoorden-vraag.
+  /// Instructie + 'Bevestig'-knop voor een meervoudige vraag (meerdere-juiste
+  /// of volgorde). Bij volgorde kan er pas bevestigd worden als álle opties een
+  /// plek hebben.
   Widget _submitRow(BuildContext context, double scale) {
     final l10n = context.l10n;
     final accent = _hexColor(profile.accentColor);
     final textColor = _hexColor(profile.textColor);
-    final canSubmit = view!.hasSelection && onAnswerSubmit != null;
+    final canSubmit =
+        onAnswerSubmit != null &&
+        (view!.ordering ? view!.orderComplete : view!.hasSelection);
     return Row(
       children: [
         Expanded(
           child: Text(
-            l10n.d('Selecteer alle juiste antwoorden'),
+            view!.ordering
+                ? l10n.d('Tik de antwoorden aan in de juiste volgorde')
+                : l10n.d('Selecteer alle juiste antwoorden'),
             style: TextStyle(
               fontFamily: font,
               fontSize: w * 0.024 * scale,
@@ -362,8 +455,10 @@ class _QuestionPreview extends StatelessWidget {
     String text,
     int index,
     _OptionVisual visual,
-    double scale,
-  ) {
+    double scale, {
+    String? badge,
+    String? trailing,
+  }) {
     const green = Color(0xFF2E7D32);
     const red = Color(0xFFC62828);
     final accent = _hexColor(profile.accentColor);
@@ -415,9 +510,10 @@ class _QuestionPreview extends StatelessWidget {
         child: Row(
           children: [
             // De badge links toont normaal de letter (A, B, C, …) en ná het
-            // antwoorden het ✓/✗. Hij staat er altijd en is altijd even breed,
-            // zodat de tekst rechts de volle resterende breedte houdt — geen
-            // reflow bij het aanklikken en de horizontale ruimte blijft benut.
+            // antwoorden het ✓/✗. Bij een volgorde-vraag toont hij het
+            // positienummer (of •). Hij staat er altijd en is altijd even
+            // breed, zodat de tekst rechts de volle resterende breedte houdt —
+            // geen reflow bij het aanklikken.
             Container(
               width: w * _badgeF * scale,
               height: w * _badgeF * scale,
@@ -426,7 +522,17 @@ class _QuestionPreview extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: border.withValues(alpha: 0.18),
               ),
-              child: icon == null
+              child: badge != null
+                  ? Text(
+                      badge,
+                      style: TextStyle(
+                        fontFamily: font,
+                        fontSize: w * 0.024 * scale,
+                        fontWeight: FontWeight.w700,
+                        color: border,
+                      ),
+                    )
+                  : icon == null
                   ? Text(
                       String.fromCharCode(65 + index), // A, B, C, …
                       style: TextStyle(
@@ -440,16 +546,35 @@ class _QuestionPreview extends StatelessWidget {
             ),
             SizedBox(width: w * _badgeGapF * scale),
             Expanded(
-              child: _md(
-                context,
-                text,
-                TextStyle(
-                  fontFamily: font,
-                  fontSize: w * _optTextF * scale,
-                  color: fg,
-                  height: 1.2,
-                ),
-                linkColor: accent,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _md(
+                    context,
+                    text,
+                    TextStyle(
+                      fontFamily: font,
+                      fontSize: w * _optTextF * scale,
+                      color: fg,
+                      height: 1.2,
+                    ),
+                    linkColor: accent,
+                  ),
+                  if (trailing != null) ...[
+                    SizedBox(height: w * _trailGapF * scale),
+                    Text(
+                      trailing,
+                      style: TextStyle(
+                        fontFamily: font,
+                        fontSize: w * _trailTextF * scale,
+                        fontWeight: FontWeight.w600,
+                        color: border,
+                        height: 1.2,
+                      ),
+                    ),
+                  ],
+                ],
               ),
             ),
           ],

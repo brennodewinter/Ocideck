@@ -166,6 +166,14 @@ class _WelcomeScreen extends ConsumerWidget {
               itemCount: recentFiles.length,
               itemBuilder: (_, i) => _RecentFileTile(
                 file: recentFiles[i],
+                origin: ref.watch(
+                  settingsProvider.select(
+                    (s) => s.recentFileOrigins[recentFiles[i].path],
+                  ),
+                ),
+                homeDir: ref.watch(
+                  settingsProvider.select((s) => s.homeDirectory),
+                ),
                 onTap: () => ref
                     .read(tabsProvider.notifier)
                     .openFileByPath(recentFiles[i].path),
@@ -185,21 +193,34 @@ class _WelcomeScreen extends ConsumerWidget {
     await ref
         .read(settingsProvider.notifier)
         .selectThemeProfile(choice.profileName);
-    ref.read(tabsProvider.notifier).newDeckInCurrentTab(choice.title);
+    ref
+        .read(tabsProvider.notifier)
+        .newDeckInCurrentTab(choice.title, template: choice.template);
   }
 }
 
 // ── Main 2-panel layout ───────────────────────────────────────────────────────
 
-/// Eén rij in de recente-bestandenlijst: naam plus een metadataregel met
-/// datum, aantal slides, TLP-badge en het laatst geëxporteerde formaat —
-/// zodat terugvinden niet op naam alleen hoeft. Het volledige pad (en de
-/// exportdatum) staat in de tooltip, zodat de rij zelf rustig blijft.
+/// Eén rij in de recente-bestandenlijst: naam plus de vindplaats en een
+/// metadataregel met datum, aantal slides, TLP-badge en het laatst
+/// geëxporteerde formaat — zodat terugvinden niet op naam alleen hoeft. Het
+/// volledige pad (en de exportdatum) staat in de tooltip, zodat de rij zelf
+/// rustig blijft.
 class _RecentFileTile extends StatelessWidget {
   final RecentFile file;
+
+  /// Herkomst van een remote opgehaald bestand (Nextcloud-server of
+  /// import-URL); null voor lokale bestanden.
+  final String? origin;
+  final String? homeDir;
   final VoidCallback onTap;
 
-  const _RecentFileTile({required this.file, required this.onTap});
+  const _RecentFileTile({
+    required this.file,
+    required this.origin,
+    required this.homeDir,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -247,13 +268,44 @@ class _RecentFileTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            name,
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: theme.colorScheme.onSurface,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        if (origin != null) ...[
+                          const SizedBox(width: 6),
+                          // Remote opgehaald (Nextcloud/URL): de tooltip
+                          // toont de bron zelf, dus die heeft geen vertaling
+                          // nodig.
+                          Tooltip(
+                            message: origin!,
+                            child: Icon(
+                              Icons.cloud_outlined,
+                              size: 13,
+                              color: theme.colorScheme.primary,
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                    // De vindplaats kort en betekenisvol (thuismap-relatief);
+                    // het volledige pad zit in de tooltip.
                     Text(
-                      name,
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                        color: theme.colorScheme.onSurface,
+                      displayFolder(
+                        file.path,
+                        homeDir: homeDir,
+                        osHome: osHomeDirectory,
                       ),
+                      style: TextStyle(fontSize: 10, color: palette.mutedText),
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 2),

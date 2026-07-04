@@ -678,6 +678,8 @@ const _dutchSourceId = {
   'Verticaal': 'Vertikal',
   'Animatie': 'Animasi',
   'Intekenen bij openen': 'Gambar saat dibuka',
+  'Markeer als huidig punt': 'Tandai sebagai titik saat ini',
+  'Huidig punt weghalen': 'Hapus titik saat ini',
   'Stap voor stap': 'Langkah demi langkah',
   'Geen animatie': 'Tanpa animasi',
   'Animatiesnelheid': 'Kecepatan animasi',
@@ -736,6 +738,13 @@ const _dutchSourceId = {
       'Pernyataan di atas benar atau salah; pilih yang mana.',
   'Selecteer alle juiste antwoorden': 'Pilih semua jawaban benar',
   'Bevestig': 'Konfirmasi',
+  'Volgorde': 'Urutan',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Susun jawaban di sini dalam urutan yang benar. Saat presentasi, jawaban ditampilkan teracak.',
+  'Geef minstens twee antwoorden op.': 'Berikan setidaknya dua jawaban.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Ketuk jawaban dalam urutan yang benar',
+  'Jouw volgorde': 'Urutan Anda',
   'Het juiste antwoord': 'Jawaban yang benar',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Gambar ditampilkan layar penuh sebagai latar belakang. Gunakan efek buram saat judul membutuhkan lebih banyak ketenangan atau kontras.',
@@ -1123,4 +1132,116 @@ const _dutchSourceId = {
   'Geavanceerd': 'Lanjutan',
   'Knippen en audio': 'Pemotongan dan audio',
   'Bereik en kleurzones': 'Rentang dan zona warna',
+  'Leeg deck': 'Dek kosong',
+  'Korte briefing': 'Briefing singkat',
+  'Status-briefing': 'Briefing status',
+  'Projectstart / kick-off': 'Awal proyek / kick-off',
+  'Voorbespreking communicatie': 'Diskusi awal komunikasi',
+  'Projecttijdlijn': 'Linimasa proyek',
+  'Informatiebeveiliging: RASCI / TVB': 'Keamanan informasi: RASCI / TVB',
+  'Security-takenplan': 'Rencana tugas keamanan',
+  'Certificering voortgang': 'Kemajuan sertifikasi',
+  'Training / workshop': 'Pelatihan / workshop',
+  'Rapportage': 'Laporan',
+  'Onderzoeksverhaal': 'Narasi penelitian',
+  'Technische uitleg': 'Penjelasan teknis',
+  'Interactieve quiz': 'Kuis interaktif',
+  'Alleen een titelpagina en een agenda.': 'Hanya halaman judul dan agenda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situasi, fakta, dan keputusan yang diminta dalam enam slide.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Dasbor status, kemajuan per alur kerja, dan keputusan.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Alasan, tujuan, cakupan, pemangku kepentingan, dan linimasa.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Kelompok sasaran, pesan utama, kanal, dan juru bicara.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fase, tonggak pencapaian, ketergantungan, dan momen keputusan.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Mencatat peran, matriks RASCI, dan kesepakatan tugas.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Tugas, prioritas, pemilik, dan bukti pendukung.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Kemajuan per domain, kontrol, dan perencanaan audit.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Tujuan pembelajaran, konsep utama, latihan, dan pertanyaan kuis.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Ringkasan, dasbor KPI, tren, dan tindakan.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Pertanyaan, metode, linimasa temuan, dan kesimpulan.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arsitektur, komponen, contoh kode, dan daftar periksa.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Tiga bentuk pertanyaan dengan penjelasan dan pembahasan.',
+  'Sjabloon': 'Templat',
+  'Post-incident review / lessons learned':
+      'Tinjauan pasca-insiden / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Kebocoran data / penilaian insiden privasi',
+  'DPIA / privacy impact assessment': 'DPIA / penilaian dampak privasi',
+  'Risicoanalyse / risk register': 'Analisis risiko / risk register',
+  'Business continuity / DR-test': 'Kelangsungan bisnis / uji DR',
+  'Tabletop-oefening / crisisoefening': 'Latihan tabletop / latihan krisis',
+  'BOB-crisisrapportage': 'Pelaporan krisis BOB',
+  'CAB / release readiness': 'CAB / kesiapan rilis',
+  'Stuurgroep / project board update':
+      'Komite pengarah / pembaruan project board',
+  'Auditbevindingen en opvolging': 'Temuan audit dan tindak lanjut',
+  'Leveranciersbeoordeling / vendor risk': 'Penilaian pemasok / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Keputusan arsitektur / presentasi ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Peluncuran kebijakan / rencana implementasi',
+  'Overdracht / handover': 'Serah terima / handover',
+  'Retrospective / teamverbetering': 'Retrospektif / perbaikan tim',
+  'PPL Vluchtvoorbereiding': 'Persiapan penerbangan PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Linimasa, dampak, penyebab, dan tindakan perbaikan setelah insiden.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Menilai data, risiko, kewajiban lapor, dan komunikasi.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Pemrosesan, dasar hukum, risiko privasi, dan langkah penanganan.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Mencatat risiko, kemungkinan, dampak, langkah penanganan, dan pemilik.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Skenario, target pemulihan, temuan pengujian, dan poin perbaikan.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Skenario, inject, keputusan, pengamatan, dan evaluasi.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Memandu tim krisis melalui pembentukan gambaran, penilaian, dan pengambilan keputusan, dengan gambaran situasi langsung, pertanyaan informasi, dilema, log keputusan, dan daftar tindakan.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Perubahan, dampak, pengujian, rollback, komunikasi, dan go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Kemajuan, perencanaan, anggaran, risiko, dan keputusan yang diminta.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Temuan, root cause, langkah penanganan, bukti, dan status.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Layanan, data, ketergantungan, persyaratan, risiko, dan keputusan.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Konteks, opsi, trade-off, keputusan, dan konsekuensi.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Kelompok sasaran, perencanaan, komunikasi, pelatihan, dan adopsi.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Status, tindakan terbuka, risiko, kontak, dan langkah awal.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fakta, pola, start-stop-continue, dan tindakan perbaikan.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Siapkan penerbangan VFR dengan rute, cuaca, NOTAM, performa, weight & balance, bahan bakar, alternate, dan pemeriksaan go/no-go pribadi.',
+  'Zoek een sjabloon': 'Cari templat',
+  'Geen sjablonen gevonden': 'Tidak ada templat yang ditemukan',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Salinan identik',
+  'Zelfde titel, andere inhoud': 'Judul sama, isi berbeda',
+  'Dubbele presentaties opruimen': 'Bersihkan presentasi duplikat',
+  'Naar de prullenbak verplaatst:': 'Dipindahkan ke tempat sampah:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Tidak dapat dipindahkan ke tempat sampah.',
+  'Geen dubbele presentaties gevonden.':
+      'Tidak ada presentasi duplikat yang ditemukan.',
+  'Laatste kopie blijft behouden': 'Salinan terakhir dipertahankan',
+  'Nog geopend in een tabblad': 'Masih terbuka di tab',
+  'Naar prullenbak': 'Ke tempat sampah',
+  'Deze presentatie staat ook op een andere plek:':
+      'Presentasi ini juga ada di tempat lain:',
+  'Opruimen…': 'Bersihkan…',
 };

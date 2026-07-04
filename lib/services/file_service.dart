@@ -42,12 +42,26 @@ class ScannedPresentation {
   /// The raw markdown source, kept for maximal full-text search.
   final String content;
 
+  /// Laatst-gewijzigd volgens het bestandssysteem, of null wanneer de stat
+  /// mislukte. Toont bij naamgenoten met afwijkende inhoud welke kopie de
+  /// recentste bewerking draagt.
+  final DateTime? modified;
+
   const ScannedPresentation({
     required this.path,
     required this.fileName,
     required this.deck,
     this.content = '',
+    this.modified,
   });
+
+  /// A display label: the deck title, falling back to the file name without
+  /// its extension. Mirrors [ScanHit.displayTitle].
+  String get displayTitle {
+    final t = deck.title.trim();
+    if (t.isNotEmpty) return t;
+    return p.basenameWithoutExtension(fileName);
+  }
 }
 
 /// A Marp presentation found by the disk-wide scan. Unlike [ScannedPresentation]
@@ -66,12 +80,24 @@ class ScanHit {
   /// True when [theme] is the OciDeck theme (sorted/marked first in the UI).
   final bool isOcideckTheme;
 
+  /// Bestandsgrootte in bytes; voorfilter voor duplicaatdetectie (alleen
+  /// even grote bestanden kúnnen identiek zijn, dus alleen die worden
+  /// volledig gelezen en gehasht).
+  final int size;
+
+  /// Laatst-gewijzigd volgens het bestandssysteem, of null wanneer de stat
+  /// mislukte. Toont bij naamgenoten met afwijkende inhoud welke kopie de
+  /// recentste bewerking draagt.
+  final DateTime? modified;
+
   const ScanHit({
     required this.path,
     required this.fileName,
     required this.title,
     required this.theme,
     required this.isOcideckTheme,
+    this.size = 0,
+    this.modified,
   });
 
   /// A display label: the frontmatter title, falling back to the file name
@@ -219,12 +245,19 @@ class FileService {
           }
           final deck = await openDeck(entity.path, content: content);
           if (deck != null && deck.slides.isNotEmpty) {
+            DateTime? modified;
+            try {
+              modified = (await entity.stat()).modified;
+            } catch (e) {
+              logWarning('FileService.scanPresentations: stat failed', e);
+            }
             results.add(
               ScannedPresentation(
                 path: entity.path,
                 fileName: p.basename(entity.path),
                 deck: deck,
                 content: content,
+                modified: modified,
               ),
             );
           }
@@ -358,12 +391,15 @@ class FileService {
       final fm = _md.sniffFrontmatter(head);
       if (!fm.marp) return null;
       final theme = fm.theme?.trim();
+      final stat = await file.stat();
       return ScanHit(
         path: file.path,
         fileName: p.basename(file.path),
         title: fm.title,
         theme: (theme == null || theme.isEmpty) ? null : theme,
         isOcideckTheme: theme == 'ocideck',
+        size: length,
+        modified: stat.modified,
       );
     } catch (e) {
       logWarning('FileService.scanKnownLocations: file probe failed', e);
@@ -706,8 +742,14 @@ class FileService {
     return mdEntry;
   }
 
-  /// Pak een pakket uit in een nieuwe submap onder [destParentDir]. Geeft het
-  /// pad naar het uitgepakte markdown-bestand terug (om in een tab te openen).
+  /// Pak een pakket uit in een submap onder [destParentDir]. Geeft het pad
+  /// naar het uitgepakte markdown-bestand terug (om in een tab te openen).
+  /// Een eerdere import met exact dezelfde inhoud wordt hergebruikt in plaats
+  /// van een nieuwe kopie-map "naam (n)" te maken: wie hetzelfde deck nogmaals
+  /// opent (URL/WebDAV/zip) kreeg anders bij elke keer een extra kopie en dus
+  /// dubbele vermeldingen in recente presentaties. Wijkt de inhoud af (lokaal
+  /// bewerkt, of de bron is veranderd) dan blijft de kopie-map bestaan zodat
+  /// er nooit iets wordt overschreven.
   Future<String?> importPackageBytes(
     List<int> zipBytes,
     String destParentDir, {
@@ -719,6 +761,11 @@ class FileService {
     if (mdEntry == null) return null;
 
     final folderName = p.basenameWithoutExtension(mdEntry.name);
+    for (final existing in _importDirCandidates(destParentDir, folderName)) {
+      final resolvedMd = p.normalize(p.join(existing.path, mdEntry.name));
+      if (!p.isWithin(existing.path, resolvedMd)) break;
+      if (await _dirMatchesEntries(existing, entries)) return resolvedMd;
+    }
     final destDir = _uniqueDir(destParentDir, folderName);
     await destDir.create(recursive: true);
 
@@ -752,6 +799,51 @@ class FileService {
       i++;
     }
     return dir;
+  }
+
+  /// De bestaande importmappen zoals [_uniqueDir] ze aanmaakt: `naam`,
+  /// `naam (2)`, … — in aanmaakvolgorde, stoppend bij het eerste gat.
+  Iterable<Directory> _importDirCandidates(String parent, String name) sync* {
+    var dir = Directory(p.join(parent, name));
+    var i = 2;
+    while (dir.existsSync()) {
+      yield dir;
+      dir = Directory(p.join(parent, '$name ($i)'));
+      i++;
+    }
+  }
+
+  /// Of [dir] alle pakketleden [entries] byte-identiek bevat (traversal-leden
+  /// tellen niet mee, die worden ook nooit geschreven). Een gewijzigd of
+  /// ontbrekend lid — een lokaal bewerkte kopie — valt af. Extra lokale
+  /// bestanden zijn juist toegestaan: de app schrijft sidecars (annotaties,
+  /// notities) naast de markdown, en hergebruik schrijft zelf niets, dus die
+  /// kunnen nooit worden overschreven.
+  Future<bool> _dirMatchesEntries(
+    Directory dir,
+    List<PackageEntry> entries,
+  ) async {
+    final expected = <String, List<int>>{};
+    for (final entry in entries) {
+      final resolved = p.normalize(p.join(dir.path, entry.name));
+      if (resolved == dir.path || !p.isWithin(dir.path, resolved)) continue;
+      expected[resolved] = entry.bytes;
+    }
+    for (final e in expected.entries) {
+      final file = File(e.key);
+      if (!file.existsSync()) return false;
+      if (!await _fileHasBytes(file, e.value)) return false;
+    }
+    return true;
+  }
+
+  Future<bool> _fileHasBytes(File file, List<int> bytes) async {
+    if (await file.length() != bytes.length) return false;
+    final onDisk = await file.readAsBytes();
+    for (var i = 0; i < bytes.length; i++) {
+      if (onDisk[i] != bytes[i]) return false;
+    }
+    return true;
   }
 
   /// Zip-magie 'PK\x03\x04' — herkent een .ocideck/zip-pakket aan zijn kop.
@@ -801,10 +893,13 @@ class FileService {
     );
   }
 
-  /// Sla losse markdown-bytes op als zelfstandig deck in een nieuwe submap van
+  /// Sla losse markdown-bytes op als zelfstandig deck in een submap van
   /// [destParentDir] en geef het pad naar het `.md`-bestand terug. Weigert
   /// inhoud die niet op een Marp-deck lijkt of niet als UTF-8 te lezen is.
-  /// Gedeeld door de URL-import en de WebDAV-bron.
+  /// Gedeeld door de URL-import en de WebDAV-bron. Net als bij
+  /// [importPackageBytes] wordt een eerdere import met identieke markdown
+  /// hergebruikt, zodat hetzelfde deck nogmaals openen geen kopie-map en geen
+  /// dubbele vermelding in recente presentaties oplevert.
   Future<String?> importMarkdownBytes(
     List<int> bytes,
     String destParentDir,
@@ -822,6 +917,15 @@ class FileService {
 
     var base = p.basenameWithoutExtension(suggestedName);
     if (base.isEmpty) base = 'presentatie';
+    // Vergelijk als bytes zoals writeStringAtomic ze schreef (utf8), zodat
+    // een niet-UTF-8-bestand in een kandidaatmap gewoon "anders" is in
+    // plaats van een decodeerfout.
+    final encoded = utf8.encode(markdown);
+    for (final existing in _importDirCandidates(destParentDir, base)) {
+      final existingMd = File(p.join(existing.path, '$base.md'));
+      if (!existingMd.existsSync()) continue;
+      if (await _fileHasBytes(existingMd, encoded)) return existingMd.path;
+    }
     final destDir = _uniqueDir(destParentDir, base);
     await destDir.create(recursive: true);
     final mdPath = p.join(destDir.path, '$base.md');

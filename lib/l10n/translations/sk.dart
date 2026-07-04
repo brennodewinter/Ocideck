@@ -683,6 +683,8 @@ const _dutchSourceSk = {
   'Verticaal': 'Zvisle',
   'Animatie': 'Animácia',
   'Intekenen bij openen': 'Nakresliť pri otvorení',
+  'Markeer als huidig punt': 'Označiť ako aktuálny bod',
+  'Huidig punt weghalen': 'Odstrániť aktuálny bod',
   'Stap voor stap': 'Krok za krokom',
   'Geen animatie': 'Žiadna animácia',
   'Animatiesnelheid': 'Rýchlosť animácie',
@@ -741,6 +743,13 @@ const _dutchSourceSk = {
       'Tvrdenie vyššie je pravdivé alebo nepravdivé; vyberte, ktoré.',
   'Selecteer alle juiste antwoorden': 'Vyberte všetky správne odpovede',
   'Bevestig': 'Potvrdiť',
+  'Volgorde': 'Poradie',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Usporiadajte tu odpovede do správneho poradia. Pri prezentovaní sa zobrazia premiešané.',
+  'Geef minstens twee antwoorden op.': 'Zadajte aspoň dve odpovede.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Ťuknite na odpovede v správnom poradí',
+  'Jouw volgorde': 'Vaše poradie',
   'Het juiste antwoord': 'Správna odpoveď',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Obrázok sa zobrazí na celú obrazovku ako pozadie. Rozmazanie použite, keď titulok potrebuje viac pokoja alebo kontrastu.',
@@ -1129,4 +1138,116 @@ const _dutchSourceSk = {
   'Geavanceerd': 'Rozšírené',
   'Knippen en audio': 'Strih a zvuk',
   'Bereik en kleurzones': 'Rozsah a farebné zóny',
+  'Leeg deck': 'Prázdna prezentácia',
+  'Korte briefing': 'Krátky briefing',
+  'Status-briefing': 'Statusový briefing',
+  'Projectstart / kick-off': 'Štart projektu / kick-off',
+  'Voorbespreking communicatie': 'Predbežná porada o komunikácii',
+  'Projecttijdlijn': 'Časová os projektu',
+  'Informatiebeveiliging: RASCI / TVB': 'Informačná bezpečnosť: RASCI / TVB',
+  'Security-takenplan': 'Plán bezpečnostných úloh',
+  'Certificering voortgang': 'Postup certifikácie',
+  'Training / workshop': 'Školenie / workshop',
+  'Rapportage': 'Správa',
+  'Onderzoeksverhaal': 'Výskumný príbeh',
+  'Technische uitleg': 'Technické vysvetlenie',
+  'Interactieve quiz': 'Interaktívny kvíz',
+  'Alleen een titelpagina en een agenda.': 'Iba titulná strana a program.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situácia, fakty a požadované rozhodnutie na šiestich snímkach.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Prehľad stavu, postup podľa pracovných prúdov a rozhodnutia.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Prečo, cieľ, rozsah, zainteresované strany a časová os.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Cieľové skupiny, kľúčové posolstvo, kanály a hovorcovia.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fázy, míľniky, závislosti a rozhodovacie body.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Zaznamenanie rolí, matice RASCI a dohôd o úlohách.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Úlohy, priority, vlastníci a doklady.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Postup podľa domén, kontroly a plánovanie auditu.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Vzdelávacie ciele, kľúčové koncepty, cvičenie a kvízová otázka.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Zhrnutie, prehľad KPI, trend a akcie.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Otázka, metóda, časová os zistení a závery.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architektúra, komponenty, ukážka kódu a kontrolný zoznam.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Tri typy otázok s vysvetlením a záverečnou diskusiou.',
+  'Sjabloon': 'Šablóna',
+  'Post-incident review / lessons learned':
+      'Preskúmanie po incidente / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Posúdenie úniku údajov / incidentu súkromia',
+  'DPIA / privacy impact assessment': 'DPIA / posúdenie vplyvu na súkromie',
+  'Risicoanalyse / risk register': 'Analýza rizík / register rizík',
+  'Business continuity / DR-test': 'Business continuity / test DR',
+  'Tabletop-oefening / crisisoefening': 'Cvičenie tabletop / krízové cvičenie',
+  'BOB-crisisrapportage': 'Krízová správa BOB',
+  'CAB / release readiness': 'CAB / pripravenosť na vydanie',
+  'Stuurgroep / project board update':
+      'Riadiaci výbor / aktualizácia pre project board',
+  'Auditbevindingen en opvolging': 'Zistenia auditu a následné opatrenia',
+  'Leveranciersbeoordeling / vendor risk':
+      'Hodnotenie dodávateľa / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Architektonické rozhodnutie / prezentácia ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Zavedenie politiky / implementačný plán',
+  'Overdracht / handover': 'Odovzdanie / handover',
+  'Retrospective / teamverbetering': 'Retrospektíva / zlepšovanie tímu',
+  'PPL Vluchtvoorbereiding': 'Predletová príprava PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Časová os, dopad, príčiny a nápravné opatrenia po incidente.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Posúďte údaje, riziko, ohlasovaciu povinnosť a komunikáciu.',
+  "Verwerking, grondslag, privacyrisico's en maatregelen.":
+      'Spracúvanie, právny základ, riziká pre súkromie a opatrenia.',
+  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
+      'Zaznamenajte riziká, pravdepodobnosť, dopad, opatrenia a vlastníkov.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scenár, ciele obnovy, zistenia z testov a body na zlepšenie.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scenár, injects, rozhodnutia, pozorovania a vyhodnotenie.',
+  "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
+      'Preveďte krízový tím fázami vytvárania obrazu situácie, posúdenia situácie a rozhodovania, so živým obrazom situácie, informačnými otázkami, dilemami, protokolom rozhodnutí a zoznamom akcií.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Zmena, dopad, testy, rollback, komunikácia a go/no-go.',
+  "Voortgang, planning, budget, risico's en besluiten gevraagd.":
+      'Postup, plánovanie, rozpočet, riziká a požadované rozhodnutia.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Zistenia, root cause, opatrenia, dôkazy a status.',
+  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
+      'Služba, údaje, závislosti, požiadavky, riziká a rozhodnutie.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontext, možnosti, trade-offs, rozhodnutie a dôsledky.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Cieľová skupina, plánovanie, komunikácia, školenie a prijatie.',
+  "Status, open acties, risico's, contacten en eerste stappen.":
+      'Status, otvorené akcie, riziká, kontakty a prvé kroky.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fakty, vzorce, start-stop-continue a zlepšovacie akcie.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Pripravte let VFR s trasou, počasím, NOTAM-mi, výkonmi, weight & balance, palivom, náhradnými letiskami a osobnými kontrolami go/no-go.',
+  'Zoek een sjabloon': 'Vyhľadať šablónu',
+  'Geen sjablonen gevonden': 'Nenašli sa žiadne šablóny',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identické kópie',
+  'Zelfde titel, andere inhoud': 'Rovnaký názov, iný obsah',
+  'Dubbele presentaties opruimen': 'Upratať duplicitné prezentácie',
+  'Naar de prullenbak verplaatst:': 'Presunuté do koša:',
+  'Kon niet naar de prullenbak verplaatsen.': 'Nepodarilo sa presunúť do koša.',
+  'Geen dubbele presentaties gevonden.':
+      'Nenašli sa žiadne duplicitné prezentácie.',
+  'Laatste kopie blijft behouden': 'Posledná kópia zostáva zachovaná',
+  'Nog geopend in een tabblad': 'Stále otvorená na karte',
+  'Naar prullenbak': 'Do koša',
+  'Deze presentatie staat ook op een andere plek:':
+      'Táto prezentácia existuje aj na inom mieste:',
+  'Opruimen…': 'Upratať…',
 };

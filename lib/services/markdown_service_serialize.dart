@@ -259,6 +259,12 @@ extension _MarkdownSerialize on MarkdownService {
         '<!-- ocideck_timeline_duration: ${slide.timelineAnimationMs} -->',
       );
     }
+    if (slide.timelineCurrentIndex != null) {
+      // Written 1-based so the comment reads as "the Nth event" in the raw .md.
+      buf.writeln(
+        '<!-- ocideck_timeline_current: ${slide.timelineCurrentIndex! + 1} -->',
+      );
+    }
     _writeList(buf, slide.bullets, ListStyle.bullets);
   }
 

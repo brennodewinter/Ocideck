@@ -8,8 +8,10 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 import '../models/deck.dart';
+import '../models/deck_template.dart';
 import '../models/webdav_settings.dart';
 import '../services/annotation_codec.dart';
+import '../services/duplicate_service.dart';
 import '../services/file_service.dart';
 import '../services/image_service.dart';
 import '../services/markdown_safety.dart';
@@ -137,6 +139,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// dus zolang het object hetzelfde is, is er niets gewijzigd en kan de tick
   /// de volledige serialisatie + schrijfbeurt overslaan.
   final Map<int, Deck> _lastAutosavedDeck = {};
+
+  /// Duplicaat-melding maximaal één keer per paar per sessie, anders wordt
+  /// elke her-open van hetzelfde bestand een herhaalde snackbar.
+  final Set<String> _noticedDuplicatePairs = {};
+  final DuplicateService _duplicates = DuplicateService();
   Timer? _autosaveTimer;
   int _nextId = 0;
 
@@ -271,18 +278,18 @@ class TabsNotifier extends StateNotifier<TabsState> {
     state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
   }
 
-  void newDeckInCurrentTab(String title) {
+  void newDeckInCurrentTab(String title, {DeckTemplate? template}) {
     final tab = state.current;
     if (tab == null) return;
-    tab.deckNotifier.newDeck(title);
+    tab.deckNotifier.newDeck(title, template: template);
     tab.editorNotifier.select(0);
     // Force rebuild by copying state (label may have changed)
     state = state.copyWith(tabs: List.from(state.tabs));
   }
 
-  void newDeckInNewTab(String title) {
+  void newDeckInNewTab(String title, {DeckTemplate? template}) {
     final tab = _createTab();
-    tab.deckNotifier.newDeck(title);
+    tab.deckNotifier.newDeck(title, template: template);
     tab.editorNotifier.select(0);
     final newTabs = [...state.tabs, tab];
     state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
@@ -354,7 +361,29 @@ class TabsNotifier extends StateNotifier<TabsState> {
       slideCount: deck.slides.length,
       tlp: deck.tlp,
     );
+    // Los van het open-pad: een byte-identieke kopie elders in de recente
+    // lijst is het melden waard, maar mag het openen nooit vertragen.
+    unawaited(_noticeIdenticalCopy(path));
     return OpenResult.opened;
+  }
+
+  /// Zoek een byte-identieke kopie van het zojuist geopende bestand in de
+  /// recente lijst en meld die eenmalig via [duplicateCopyNoticeProvider];
+  /// de shell toont daarop een snackbar met een opruim-ingang.
+  Future<void> _noticeIdenticalCopy(String openedPath) async {
+    try {
+      final recents = [
+        for (final f in _ref.read(settingsProvider).recentFiles) f.path,
+      ];
+      final copy = await _duplicates.findIdenticalCopy(openedPath, recents);
+      if (copy == null || !mounted) return;
+      final pair = ([openedPath, copy]..sort()).join(' ');
+      if (!_noticedDuplicatePairs.add(pair)) return;
+      _ref.read(duplicateCopyNoticeProvider.notifier).state =
+          DuplicateCopyNotice(openedPath: openedPath, copyPath: copy);
+    } catch (e) {
+      logWarning('TabsNotifier._noticeIdenticalCopy', e);
+    }
   }
 
   /// Zet een zojuist geopend deck in een tabblad: een leeg huidig tabblad
@@ -599,7 +628,12 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final dest = await _importDestDir(homeDir);
     final mdPath = await _file.importFromUrl(url, dest);
     if (mdPath == null) return false;
-    return _importHandled(await _openImported(mdPath));
+    final result = await _openImported(mdPath);
+    if (result == OpenResult.opened && mounted) {
+      // Herkomst voor de wolk-badge in recente presentaties.
+      await _settings.setRecentFileOrigin(mdPath, url);
+    }
+    return _importHandled(result);
   }
 
   /// Web-variant van [importFromUrl]: haalt de presentatie in de browser op
@@ -659,6 +693,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
       baseUrl: service.server.baseUrl,
       username: service.server.username,
       remotePath: entry.relativePath,
+    );
+    // Herkomst voor de wolk-badge in recente presentaties.
+    await _settings.setRecentFileOrigin(
+      mdPath,
+      '${service.server.baseUrl} · ${entry.relativePath}',
     );
     if (mounted) state = state.copyWith(tabs: List.from(state.tabs));
     return OpenResult.opened;
@@ -743,5 +782,18 @@ final tabsProvider = StateNotifierProvider<TabsNotifier, TabsState>((ref) {
 /// this and shows [ImportSecurityAlarmDialog] when it becomes non-null, then
 /// resets it to null. Set by [TabsNotifier.openFileByPath].
 final importSecurityAlarmProvider = StateProvider<ImportSecurityAlarm?>(
+  (ref) => null,
+);
+
+/// Een zojuist geopend bestand blijkt elders een byte-identieke kopie te
+/// hebben. De shell toont hierop een snackbar met opruim-ingang (zelfde
+/// luister-patroon als [importSecurityAlarmProvider]).
+class DuplicateCopyNotice {
+  final String openedPath;
+  final String copyPath;
+  const DuplicateCopyNotice({required this.openedPath, required this.copyPath});
+}
+
+final duplicateCopyNoticeProvider = StateProvider<DuplicateCopyNotice?>(
   (ref) => null,
 );

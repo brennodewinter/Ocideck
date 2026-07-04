@@ -696,6 +696,8 @@ const _dutchSourceGa = {
   'Verticaal': 'Ingearach',
   'Animatie': 'Beochan',
   'Intekenen bij openen': 'Tarraing isteach ar oscailt',
+  'Markeer als huidig punt': 'Marcáil mar phointe reatha',
+  'Huidig punt weghalen': 'Bain an pointe reatha',
   'Stap voor stap': 'Céim ar chéim',
   'Geen animatie': 'Gan beochan',
   'Animatiesnelheid': 'Luas beochana',
@@ -754,6 +756,13 @@ const _dutchSourceGa = {
       'Tá an ráiteas thuas fíor nó bréagach; roghnaigh cé acu.',
   'Selecteer alle juiste antwoorden': 'Roghnaigh na freagraí cearta go léir',
   'Bevestig': 'Deimhnigh',
+  'Volgorde': 'Ord',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Cuir na freagraí san ord ceart anseo. Agus iad á gcur i láthair, taispeántar iad measctha.',
+  'Geef minstens twee antwoorden op.': 'Tabhair dhá fhreagra ar a laghad.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Tapáil na freagraí san ord ceart',
+  'Jouw volgorde': 'D\'ord',
   'Het juiste antwoord': 'An freagra ceart',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Taispeántar an íomhá mar chúlra ar an scáileán iomlán. Úsáid an geamhú nuair a theastaíonn níos mó suaimhnis nó codarsnachta ón teideal.',
@@ -1148,4 +1157,119 @@ const _dutchSourceGa = {
   'Geavanceerd': 'Casta',
   'Knippen en audio': 'Bearradh agus fuaim',
   'Bereik en kleurzones': 'Raon agus criosanna datha',
+  'Leeg deck': 'Deic fholamh',
+  'Korte briefing': 'Faisnéisiú gearr',
+  'Status-briefing': 'Faisnéisiú stádais',
+  'Projectstart / kick-off': 'Tús tionscadail / kick-off',
+  'Voorbespreking communicatie': 'Réamhphlé cumarsáide',
+  'Projecttijdlijn': 'Amlíne an tionscadail',
+  'Informatiebeveiliging: RASCI / TVB': 'Slándáil faisnéise: RASCI / TVB',
+  'Security-takenplan': 'Plean tascanna slándála',
+  'Certificering voortgang': 'Dul chun cinn an deimhniúcháin',
+  'Training / workshop': 'Oiliúint / ceardlann',
+  'Rapportage': 'Tuairisciú',
+  'Onderzoeksverhaal': 'Scéal taighde',
+  'Technische uitleg': 'Míniú teicniúil',
+  'Interactieve quiz': 'Quiz idirghníomhach',
+  'Alleen een titelpagina en een agenda.':
+      'Leathanach teidil agus clár oibre amháin.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Cás, fíricí agus an cinneadh atá á iarraidh i sé shleamhnán.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Painéal stádais, dul chun cinn de réir sruth oibre agus cinntí.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Cén fáth, sprioc, scóip, páirtithe leasmhara agus amlíne.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Spriocghrúpaí, príomhtheachtaireacht, cainéil agus urlabhraíocht.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Céimeanna, garspriocanna, spleáchais agus pointí cinnidh.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Róil, maitrís RASCI agus socruithe tascanna a thaifeadadh.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Tascanna, tosaíochtaí, úinéirí agus fianaise.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Dul chun cinn de réir fearainn, rialuithe agus pleanáil iniúchta.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Spriocanna foghlama, príomhchoincheapa, cleachtadh agus ceist quiz.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Achoimre, painéal KPI, treocht agus gníomhartha.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Ceist, modh, amlíne na dtorthaí agus conclúidí.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Ailtireacht, comhpháirteanna, sampla cóid agus seicliosta.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Trí chineál ceiste le míniú agus plé ina dhiaidh.',
+  'Sjabloon': 'Teimpléad',
+  'Post-incident review / lessons learned':
+      'Athbhreithniú iar-theagmhais / ceachtanna foghlamtha',
+  'Datalek / privacy-incident beoordeling':
+      'Measúnú ar sceitheadh sonraí / teagmhas príobháideachais',
+  'DPIA / privacy impact assessment':
+      'DPIA / measúnú tionchair ar phríobháideachas',
+  'Risicoanalyse / risk register': 'Anailís riosca / clár rioscaí',
+  'Business continuity / DR-test': 'Leanúnachas gnó / tástáil DR',
+  'Tabletop-oefening / crisisoefening':
+      'Cleachtadh tabletop / cleachtadh géarchéime',
+  'BOB-crisisrapportage': 'Tuairisciú géarchéime BOB',
+  'CAB / release readiness': 'CAB / ullmhacht don scaoileadh',
+  'Stuurgroep / project board update':
+      'Nuashonrú don ghrúpa stiúrtha / project board',
+  'Auditbevindingen en opvolging': 'Torthaí iniúchta agus obair leantach',
+  'Leveranciersbeoordeling / vendor risk': 'Measúnú soláthraithe / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Cinneadh ailtireachta / cur i láthair ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Beartas a chur i bhfeidhm / plean forfheidhmithe',
+  'Overdracht / handover': 'Aistriú / handover',
+  'Retrospective / teamverbetering': 'Retrospective / feabhsú foirne',
+  'PPL Vluchtvoorbereiding': 'Ullmhúchán eitilte PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Amlíne, tionchar, cúiseanna agus gníomhartha feabhais tar éis teagmhais.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Déan measúnú ar shonraí, riosca, dualgas tuairiscithe agus cumarsáid.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Próiseáil, bunús dlí, rioscaí príobháideachais agus bearta.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Taifead rioscaí, dóchúlacht, tionchar, bearta agus úinéirí.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Cás, spriocanna athshlánaithe, torthaí tástála agus pointí feabhais.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Cás, injects, cinntí, breathnuithe agus meastóireacht.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Treoraigh foireann ghéarchéime trí léargas a fhorbairt, breithiúnas a dhéanamh agus cinntí a ghlacadh, le pictiúr beo den staid, ceisteanna faisnéise, aincheisteanna, loga cinntí agus liosta gníomhartha.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Athrú, tionchar, tástálacha, rollback, cumarsáid agus go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Dul chun cinn, pleanáil, buiséad, rioscaí agus cinntí á n-iarraidh.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Torthaí, root cause, bearta, fianaise agus stádas.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Seirbhís, sonraí, spleáchas, riachtanais, rioscaí agus cinneadh.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Comhthéacs, roghanna, trade-offs, cinneadh agus iarmhairtí.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Spriocghrúpa, pleanáil, cumarsáid, oiliúint agus glacadh.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Stádas, gníomhartha oscailte, rioscaí, teagmhálaithe agus na chéad chéimeanna.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fíricí, patrúin, start-stop-continue agus gníomhartha feabhais.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Ullmhaigh eitilt VFR le bealach, aimsir, NOTAMs, feidhmíocht, weight & balance, breosla, alternates agus seiceálacha pearsanta go/no-go.',
+  'Zoek een sjabloon': 'Cuardaigh teimpléad',
+  'Geen sjablonen gevonden': 'Níor aimsíodh aon teimpléid',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Cóipeanna comhionanna',
+  'Zelfde titel, andere inhoud': 'An teideal céanna, ábhar difriúil',
+  'Dubbele presentaties opruimen': 'Glan suas láithreoireachtaí dúbailte',
+  'Naar de prullenbak verplaatst:': 'Bogtha go dtí an bruscar:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Níorbh fhéidir é a bhogadh go dtí an bruscar.',
+  'Geen dubbele presentaties gevonden.':
+      'Níor aimsíodh láithreoireachtaí dúbailte.',
+  'Laatste kopie blijft behouden': 'Coinnítear an chóip dheireanach',
+  'Nog geopend in een tabblad': 'Fós ar oscailt i gcluaisín',
+  'Naar prullenbak': 'Go dtí an bruscar',
+  'Deze presentatie staat ook op een andere plek:':
+      'Tá an láithreoireacht seo ann in áit eile freisin:',
+  'Opruimen…': 'Glan suas…',
 };

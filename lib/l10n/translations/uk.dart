@@ -685,6 +685,8 @@ const _dutchSourceUk = {
   'Verticaal': 'Вертикально',
   'Animatie': 'Анімація',
   'Intekenen bij openen': 'Промальовувати під час відкриття',
+  'Markeer als huidig punt': 'Позначити як поточну точку',
+  'Huidig punt weghalen': 'Прибрати поточну точку',
   'Stap voor stap': 'Крок за кроком',
   'Geen animatie': 'Без анімації',
   'Animatiesnelheid': 'Швидкість анімації',
@@ -744,6 +746,13 @@ const _dutchSourceUk = {
       'Твердження вище є правдивим або неправдивим; оберіть, яке саме.',
   'Selecteer alle juiste antwoorden': 'Виберіть усі правильні відповіді',
   'Bevestig': 'Підтвердити',
+  'Volgorde': 'Порядок',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Розташуйте тут відповіді в правильному порядку. Під час презентації вони показуються перемішаними.',
+  'Geef minstens twee antwoorden op.': 'Укажіть щонайменше дві відповіді.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Торкніться відповідей у правильному порядку',
+  'Jouw volgorde': 'Ваш порядок',
   'Het juiste antwoord': 'Правильна відповідь',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Зображення показується на весь екран як тло. Використовуйте розмиття, коли заголовку потрібно більше спокою або контрасту.',
@@ -1135,4 +1144,117 @@ const _dutchSourceUk = {
   'Geavanceerd': 'Розширені',
   'Knippen en audio': 'Обрізання та звук',
   'Bereik en kleurzones': 'Діапазон і кольорові зони',
+  'Leeg deck': 'Порожня презентація',
+  'Korte briefing': 'Короткий брифінг',
+  'Status-briefing': 'Статус-брифінг',
+  'Projectstart / kick-off': 'Старт проєкту / kick-off',
+  'Voorbespreking communicatie': 'Підготовча нарада з комунікації',
+  'Projecttijdlijn': 'Часова шкала проєкту',
+  'Informatiebeveiliging: RASCI / TVB': 'Інформаційна безпека: RASCI / TVB',
+  'Security-takenplan': 'План завдань з безпеки',
+  'Certificering voortgang': 'Прогрес сертифікації',
+  'Training / workshop': 'Тренінг / воркшоп',
+  'Rapportage': 'Звіт',
+  'Onderzoeksverhaal': 'Дослідницька розповідь',
+  'Technische uitleg': 'Технічне пояснення',
+  'Interactieve quiz': 'Інтерактивна вікторина',
+  'Alleen een titelpagina en een agenda.':
+      'Лише титульна сторінка та порядок денний.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Ситуація, факти та запитуване рішення на шести слайдах.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Статус-дашборд, прогрес за робочими потоками та рішення.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Чому, мета, обсяг, стейкхолдери та часова шкала.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Цільові аудиторії, ключове повідомлення, канали та речництво.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Фази, віхи, залежності та моменти ухвалення рішень.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Зафіксувати ролі, матрицю RASCI та домовленості щодо завдань.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Завдання, пріоритети, власники та докази.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Прогрес за доменами, контролі та планування аудитів.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Навчальні цілі, ключові концепції, вправа та питання вікторини.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Підсумок, KPI-дашборд, тренд та дії.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Питання, метод, хронологія результатів і висновки.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Архітектура, компоненти, приклад коду та контрольний список.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Три типи питань з поясненням та обговоренням.',
+  'Sjabloon': 'Шаблон',
+  'Post-incident review / lessons learned':
+      'Пост-інцидентний огляд / засвоєні уроки',
+  'Datalek / privacy-incident beoordeling':
+      'Оцінка витоку даних / інциденту приватності',
+  'DPIA / privacy impact assessment': 'DPIA / оцінка впливу на приватність',
+  'Risicoanalyse / risk register': 'Аналіз ризиків / реєстр ризиків',
+  'Business continuity / DR-test': 'Безперервність бізнесу / DR-тест',
+  'Tabletop-oefening / crisisoefening': 'Штабні навчання / кризові навчання',
+  'BOB-crisisrapportage': 'BOB-кризовий звіт',
+  'CAB / release readiness': 'CAB / готовність до релізу',
+  'Stuurgroep / project board update':
+      'Керівний комітет / звіт для ради проєкту',
+  'Auditbevindingen en opvolging': 'Аудиторські висновки та подальші дії',
+  'Leveranciersbeoordeling / vendor risk':
+      'Оцінка постачальників / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Архітектурне рішення / ADR-презентація',
+  'Beleid uitrollen / implementatieplan':
+      'Впровадження політики / план реалізації',
+  'Overdracht / handover': 'Передавання справ / handover',
+  'Retrospective / teamverbetering': 'Ретроспектива / вдосконалення команди',
+  'PPL Vluchtvoorbereiding': 'PPL підготовка до польоту',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Часова шкала, вплив, причини та заходи з покращення після інциденту.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      "Оцініть дані, ризик, обов'язок повідомлення та комунікацію.",
+  "Verwerking, grondslag, privacyrisico's en maatregelen.":
+      'Обробка, правова підстава, ризики приватності та заходи.',
+  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
+      'Зафіксуйте ризики, ймовірність, вплив, заходи та власників.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Сценарій, цілі відновлення, результати тестування та точки покращення.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Сценарій, injects, рішення, спостереження та оцінка.',
+  "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
+      'Проведіть кризову команду через формування картини, оцінювання та ухвалення рішень, з живою картиною ситуації, інформаційними запитами, дилемами, журналом рішень та списком дій.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Зміна, вплив, тести, rollback, комунікація та go/no-go.',
+  "Voortgang, planning, budget, risico's en besluiten gevraagd.":
+      'Прогрес, планування, бюджет, ризики та запитувані рішення.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Висновки, root cause, заходи, докази та статус.',
+  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
+      'Сервіс, дані, залежність, вимоги, ризики та рішення.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Контекст, опції, компроміси, рішення та наслідки.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Цільова аудиторія, планування, комунікація, навчання та впровадження.',
+  "Status, open acties, risico's, contacten en eerste stappen.":
+      'Статус, відкриті дії, ризики, контакти та перші кроки.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Факти, патерни, start-stop-continue та заходи з покращення.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Підготуйте VFR-політ з маршрутом, погодою, NOTAMs, льотними характеристиками, weight & balance, паливом, запасними аеродромами та особистими go/no-go перевірками.',
+  'Zoek een sjabloon': 'Пошук шаблону',
+  'Geen sjablonen gevonden': 'Шаблонів не знайдено',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Ідентичні копії',
+  'Zelfde titel, andere inhoud': 'Однакова назва, різний вміст',
+  'Dubbele presentaties opruimen': 'Прибрати дубльовані презентації',
+  'Naar de prullenbak verplaatst:': 'Переміщено в смітник:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Не вдалося перемістити в смітник.',
+  'Geen dubbele presentaties gevonden.': 'Дубльованих презентацій не знайдено.',
+  'Laatste kopie blijft behouden': 'Остання копія зберігається',
+  'Nog geopend in een tabblad': 'Ще відкрита у вкладці',
+  'Naar prullenbak': 'У смітник',
+  'Deze presentatie staat ook op een andere plek:':
+      'Ця презентація існує також в іншому місці:',
+  'Opruimen…': 'Прибрати…',
 };

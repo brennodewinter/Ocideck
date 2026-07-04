@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
@@ -26,6 +27,17 @@ void main() {
     expect(n.state.deck!.slides, hasLength(1));
     expect(n.state.deck!.slides.single.type, SlideType.title);
     expect(n.state.deck!.slides.single.title, 'Mijn deck');
+    expect(n.state.isDirty, isTrue);
+  });
+
+  test('newDeck with a template opens with its example slides', () {
+    final n = _notifier();
+    n.newDeck('Mijn briefing', template: deckTemplateById('briefing'));
+    final slides = n.state.deck!.slides;
+    expect(slides, hasLength(6));
+    expect(slides.first.type, SlideType.title);
+    expect(slides.first.title, 'Mijn briefing');
+    expect(slides.skip(1).map((s) => s.type), everyElement(SlideType.bullets));
     expect(n.state.isDirty, isTrue);
   });
 

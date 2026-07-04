@@ -14,7 +14,7 @@ class PrivacyStatementContent extends StatelessWidget {
   static const licenseUrl =
       'https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12';
 
-  static Future<String>? _fullLicense;
+  static String? _fullLicense;
 
   static const _bodyStyle = TextStyle(fontSize: 12, height: 1.4);
 
@@ -30,13 +30,18 @@ class PrivacyStatementContent extends StatelessWidget {
   }
 
   /// The full EUPL 1.2 text, loaded once from the bundled `LICENSE.md` with its
-  /// leading SPDX/HTML-comment header stripped.
-  static Future<String> loadFullLicense() {
-    return _fullLicense ??= rootBundle.loadString('LICENSE.md').then((raw) {
-      final end = raw.indexOf('-->');
-      final body = end >= 0 ? raw.substring(end + 3) : raw;
-      return body.trim();
-    });
+  /// leading SPDX/HTML-comment header stripped. Cache het résultaat, niet de
+  /// Future: een Future die in een test-/FakeAsync-zone ontstond en daar nooit
+  /// voltooide bleef anders voorgoed gecachet en liet elke volgende lezer
+  /// hangen (volgorde-afhankelijke testflake); een load die niets opleverde
+  /// mag gewoon opnieuw.
+  static Future<String> loadFullLicense() async {
+    final cached = _fullLicense;
+    if (cached != null) return cached;
+    final raw = await rootBundle.loadString('LICENSE.md');
+    final end = raw.indexOf('-->');
+    final body = end >= 0 ? raw.substring(end + 3) : raw;
+    return _fullLicense = body.trim();
   }
 
   static Future<void> launchLicenseOnline() async {

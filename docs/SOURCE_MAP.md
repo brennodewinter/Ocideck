@@ -22,7 +22,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `cockpit.dart` — `CockpitSpec`/`CockpitMeterSpec` for instrumentation gauges (speedometer, voltmeter, etc.).
 - `deck.dart` — `Deck` with metadata, TLP classification, slides list, annotations, and user notes.
 - `markdown_validation.dart` — `MarkdownValidationResult`/`MarkdownValidationIssue` for linting markdown content.
-- `question.dart` — `QuestionSpec`/`QuestionView` for interactive quiz slides (multiple-choice/true-false).
+- `question.dart` — `QuestionSpec`/`QuestionView` for interactive quiz slides (multiple-choice/true-false/multiple-correct/ordering).
 - `rehearsal.dart` — `RehearsalRun`/`SlideTiming` for tracking presentation-practice durations per slide.
 - `settings.dart` — `AppSettings`, `ThemeProfile`, `AppAppearanceProfile`, `CockpitColorScheme` config.
 - `slide.dart` — `Slide` model with typed fields; `SlideType` enum for the slide layout variants.

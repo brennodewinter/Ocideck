@@ -682,6 +682,8 @@ const _dutchSourcePl = {
   'Verticaal': 'Pionowo',
   'Animatie': 'Animacja',
   'Intekenen bij openen': 'Rysuj przy otwarciu',
+  'Markeer als huidig punt': 'Oznacz jako punkt bieżący',
+  'Huidig punt weghalen': 'Usuń punkt bieżący',
   'Stap voor stap': 'Krok po kroku',
   'Geen animatie': 'Bez animacji',
   'Animatiesnelheid': 'Szybkość animacji',
@@ -740,6 +742,13 @@ const _dutchSourcePl = {
       'Powyższe twierdzenie jest prawdziwe lub fałszywe; wybierz które.',
   'Selecteer alle juiste antwoorden': 'Zaznacz wszystkie poprawne odpowiedzi',
   'Bevestig': 'Potwierdź',
+  'Volgorde': 'Kolejność',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Ułóż tutaj odpowiedzi we właściwej kolejności. Podczas prezentacji są pokazywane wymieszane.',
+  'Geef minstens twee antwoorden op.': 'Podaj co najmniej dwie odpowiedzi.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Dotknij odpowiedzi we właściwej kolejności',
+  'Jouw volgorde': 'Twoja kolejność',
   'Het juiste antwoord': 'Poprawna odpowiedź',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'Obraz jest wyświetlany na pełnym ekranie jako tło. Użyj rozmycia, gdy tytuł wymaga więcej spokoju lub kontrastu.',
@@ -1130,4 +1139,118 @@ const _dutchSourcePl = {
   'Geavanceerd': 'Zaawansowane',
   'Knippen en audio': 'Przycinanie i dźwięk',
   'Bereik en kleurzones': 'Zakres i strefy kolorów',
+  'Leeg deck': 'Pusta talia',
+  'Korte briefing': 'Krótki briefing',
+  'Status-briefing': 'Briefing statusowy',
+  'Projectstart / kick-off': 'Start projektu / kick-off',
+  'Voorbespreking communicatie': 'Wstępne omówienie komunikacji',
+  'Projecttijdlijn': 'Oś czasu projektu',
+  'Informatiebeveiliging: RASCI / TVB':
+      'Bezpieczeństwo informacji: RASCI / TVB',
+  'Security-takenplan': 'Plan zadań bezpieczeństwa',
+  'Certificering voortgang': 'Postęp certyfikacji',
+  'Training / workshop': 'Szkolenie / warsztat',
+  'Rapportage': 'Raport',
+  'Onderzoeksverhaal': 'Opowieść badawcza',
+  'Technische uitleg': 'Wyjaśnienie techniczne',
+  'Interactieve quiz': 'Interaktywny quiz',
+  'Alleen een titelpagina en een agenda.': 'Tylko strona tytułowa i agenda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Sytuacja, fakty i oczekiwana decyzja w sześciu slajdach.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Pulpit statusu, postęp według strumieni pracy i decyzje.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Dlaczego, cel, zakres, interesariusze i oś czasu.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Grupy docelowe, kluczowy przekaz, kanały i rzecznictwo.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fazy, kamienie milowe, zależności i punkty decyzyjne.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Utrwalenie ról, macierzy RASCI i ustaleń dotyczących zadań.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Zadania, priorytety, właściciele i dowody.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Postęp według domen, kontrole i planowanie audytu.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Cele nauczania, kluczowe pojęcia, ćwiczenie i pytanie quizowe.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Podsumowanie, pulpit KPI, trend i działania.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Pytanie, metoda, oś czasu ustaleń i wnioski.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Architektura, komponenty, przykład kodu i lista kontrolna.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Trzy formy pytań z wyjaśnieniem i omówieniem.',
+  'Sjabloon': 'Szablon',
+  'Post-incident review / lessons learned':
+      'Przegląd po incydencie / lessons learned',
+  'Datalek / privacy-incident beoordeling':
+      'Ocena wycieku danych / incydentu prywatności',
+  'DPIA / privacy impact assessment': 'DPIA / ocena skutków dla prywatności',
+  'Risicoanalyse / risk register': 'Analiza ryzyka / rejestr ryzyk',
+  'Business continuity / DR-test': 'Ciągłość działania / test DR',
+  'Tabletop-oefening / crisisoefening':
+      'Ćwiczenie tabletop / ćwiczenie kryzysowe',
+  'BOB-crisisrapportage': 'Raport kryzysowy BOB',
+  'CAB / release readiness': 'CAB / gotowość do wydania',
+  'Stuurgroep / project board update':
+      'Komitet sterujący / aktualizacja project board',
+  'Auditbevindingen en opvolging': 'Ustalenia audytu i działania następcze',
+  'Leveranciersbeoordeling / vendor risk': 'Ocena dostawcy / vendor risk',
+  'Architectuurbesluit / ADR-presentatie':
+      'Decyzja architektoniczna / prezentacja ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Wdrażanie polityki / plan implementacji',
+  'Overdracht / handover': 'Przekazanie / handover',
+  'Retrospective / teamverbetering': 'Retrospektywa / doskonalenie zespołu',
+  'PPL Vluchtvoorbereiding': 'Przygotowanie do lotu PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Oś czasu, wpływ, przyczyny i działania naprawcze po incydencie.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Oceń dane, ryzyko, obowiązek zgłoszenia i komunikację.',
+  "Verwerking, grondslag, privacyrisico's en maatregelen.":
+      'Przetwarzanie, podstawa prawna, ryzyka prywatności i środki.',
+  "Leg risico's, kans, impact, maatregelen en eigenaren vast.":
+      'Zapisz ryzyka, prawdopodobieństwo, wpływ, środki i właścicieli.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Scenariusz, cele odtworzenia, wyniki testów i punkty do poprawy.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Scenariusz, injects, decyzje, obserwacje i ewaluacja.',
+  "Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma's, besluitenlog en actielijst.":
+      'Przeprowadź zespół kryzysowy przez tworzenie obrazu sytuacji, ocenę sytuacji i podejmowanie decyzji, z bieżącym obrazem sytuacji, pytaniami informacyjnymi, dylematami, rejestrem decyzji i listą działań.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Zmiana, wpływ, testy, rollback, komunikacja i go/no-go.',
+  "Voortgang, planning, budget, risico's en besluiten gevraagd.":
+      'Postęp, planowanie, budżet, ryzyka i oczekiwane decyzje.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Ustalenia, root cause, środki, dowody i status.',
+  "Dienst, data, afhankelijkheid, eisen, risico's en besluit.":
+      'Usługa, dane, zależności, wymagania, ryzyka i decyzja.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Kontekst, opcje, trade-offs, decyzja i konsekwencje.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Grupa docelowa, planowanie, komunikacja, szkolenie i adopcja.',
+  "Status, open acties, risico's, contacten en eerste stappen.":
+      'Status, otwarte działania, ryzyka, kontakty i pierwsze kroki.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Fakty, wzorce, start-stop-continue i działania doskonalące.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Przygotuj lot VFR z trasą, pogodą, NOTAM-ami, osiągami, weight & balance, paliwem, lotniskami zapasowymi i osobistymi kontrolami go/no-go.',
+  'Zoek een sjabloon': 'Wyszukaj szablon',
+  'Geen sjablonen gevonden': 'Nie znaleziono szablonów',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identyczne kopie',
+  'Zelfde titel, andere inhoud': 'Ten sam tytuł, inna treść',
+  'Dubbele presentaties opruimen': 'Uporządkuj zduplikowane prezentacje',
+  'Naar de prullenbak verplaatst:': 'Przeniesiono do kosza:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Nie udało się przenieść do kosza.',
+  'Geen dubbele presentaties gevonden.':
+      'Nie znaleziono zduplikowanych prezentacji.',
+  'Laatste kopie blijft behouden': 'Ostatnia kopia zostaje zachowana',
+  'Nog geopend in een tabblad': 'Nadal otwarta w karcie',
+  'Naar prullenbak': 'Do kosza',
+  'Deze presentatie staat ook op een andere plek:':
+      'Ta prezentacja istnieje też w innym miejscu:',
+  'Opruimen…': 'Uporządkuj…',
 };

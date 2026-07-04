@@ -746,7 +746,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     await ref
         .read(settingsProvider.notifier)
         .selectThemeProfile(choice.profileName);
-    ref.read(tabsProvider.notifier).newDeckInNewTab(choice.title);
+    ref
+        .read(tabsProvider.notifier)
+        .newDeckInNewTab(choice.title, template: choice.template);
   }
 
   Future<void> _openProperties() async {

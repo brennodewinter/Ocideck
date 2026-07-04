@@ -309,6 +309,20 @@ const _dutchSourceEs = {
       'Debe aceptar los términos de privacidad y uso antes de poder usar OciDeck.',
   'Volledige licentie online': 'Licencia completa en línea',
   'Welkom bij OciDeck': 'Bienvenido a OciDeck',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Copias idénticas',
+  'Zelfde titel, andere inhoud': 'Mismo título, contenido distinto',
+  'Dubbele presentaties opruimen': 'Limpiar presentaciones duplicadas',
+  'Naar de prullenbak verplaatst:': 'Movido a la papelera:',
+  'Kon niet naar de prullenbak verplaatsen.': 'No se pudo mover a la papelera.',
+  'Geen dubbele presentaties gevonden.':
+      'No se encontraron presentaciones duplicadas.',
+  'Laatste kopie blijft behouden': 'La última copia se conserva',
+  'Nog geopend in een tabblad': 'Aún abierta en una pestaña',
+  'Naar prullenbak': 'Mover a la papelera',
+  'Deze presentatie staat ook op een andere plek:':
+      'Esta presentación también existe en otro lugar:',
+  'Opruimen…': 'Limpiar…',
 };
 
 const _dutchSourceAddEs = {
@@ -490,6 +504,8 @@ const _dutchSourceAddEs = {
   'Verticaal': 'Vertical',
   'Animatie': 'Animación',
   'Intekenen bij openen': 'Dibujar al abrir',
+  'Markeer als huidig punt': 'Marcar como punto actual',
+  'Huidig punt weghalen': 'Quitar el punto actual',
   'Stap voor stap': 'Paso a paso',
   'Geen animatie': 'Sin animación',
   'Animatiesnelheid': 'Velocidad de animación',
@@ -549,6 +565,13 @@ const _dutchSourceAddEs = {
   'Selecteer alle juiste antwoorden':
       'Selecciona todas las respuestas correctas',
   'Bevestig': 'Confirmar',
+  'Volgorde': 'Orden',
+  'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.':
+      'Coloca aquí las respuestas en el orden correcto. Al presentar se muestran mezcladas.',
+  'Geef minstens twee antwoorden op.': 'Indica al menos dos respuestas.',
+  'Tik de antwoorden aan in de juiste volgorde':
+      'Toca las respuestas en el orden correcto',
+  'Jouw volgorde': 'Tu orden',
   'Het juiste antwoord': 'La respuesta correcta',
   'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.':
       'La imagen se muestra a pantalla completa como fondo. Usa el desenfoque cuando el título necesite más calma o contraste.',
@@ -1118,4 +1141,105 @@ const _dutchSourceAddEs = {
   'Geavanceerd': 'Avanzado',
   'Knippen en audio': 'Recorte y audio',
   'Bereik en kleurzones': 'Rango y zonas de color',
+  'Leeg deck': 'Deck vacío',
+  'Korte briefing': 'Briefing breve',
+  'Status-briefing': 'Briefing de estado',
+  'Projectstart / kick-off': 'Inicio de proyecto / kick-off',
+  'Voorbespreking communicatie': 'Preparación de la comunicación',
+  'Projecttijdlijn': 'Cronograma del proyecto',
+  'Informatiebeveiliging: RASCI / TVB':
+      'Seguridad de la información: RASCI / responsabilidades',
+  'Security-takenplan': 'Plan de tareas de seguridad',
+  'Certificering voortgang': 'Avance de la certificación',
+  'Training / workshop': 'Formación / taller',
+  'Rapportage': 'Informe',
+  'Onderzoeksverhaal': 'Relato de investigación',
+  'Technische uitleg': 'Explicación técnica',
+  'Interactieve quiz': 'Quiz interactivo',
+  'Alleen een titelpagina en een agenda.': 'Solo una portada y una agenda.',
+  'Situatie, feiten en gevraagd besluit in zes slides.':
+      'Situación, hechos y decisión solicitada en seis diapositivas.',
+  'Statusdashboard, voortgang per werkstroom en besluiten.':
+      'Panel de estado, avance por línea de trabajo y decisiones.',
+  'Waarom, doel, scope, stakeholders en tijdlijn.':
+      'Por qué, objetivo, alcance, stakeholders y cronograma.',
+  'Doelgroepen, kernboodschap, kanalen en woordvoering.':
+      'Públicos objetivo, mensaje clave, canales y portavocía.',
+  'Fases, mijlpalen, afhankelijkheden en beslismomenten.':
+      'Fases, hitos, dependencias y momentos de decisión.',
+  'Rollen, RASCI-matrix en taakafspraken vastleggen.':
+      'Registrar roles, matriz RASCI y acuerdos de tareas.',
+  'Taken, prioriteiten, eigenaren en bewijsstukken.':
+      'Tareas, prioridades, responsables y evidencias.',
+  'Voortgang per domein, controls en auditplanning.':
+      'Avance por dominio, controles y planificación de auditorías.',
+  'Leerdoelen, kernconcepten, oefening en quizvraag.':
+      'Objetivos de aprendizaje, conceptos clave, ejercicio y pregunta de quiz.',
+  'Samenvatting, KPI-dashboard, trend en acties.':
+      'Resumen, panel de KPI, tendencia y acciones.',
+  'Vraag, methode, tijdlijn van bevindingen en conclusies.':
+      'Pregunta, método, cronología de hallazgos y conclusiones.',
+  'Architectuur, componenten, codevoorbeeld en checklist.':
+      'Arquitectura, componentes, ejemplo de código y checklist.',
+  'Drie vraagvormen met uitleg en nabespreking.':
+      'Tres tipos de pregunta con explicación y análisis posterior.',
+  'Sjabloon': 'Plantilla',
+  'Post-incident review / lessons learned':
+      'Revisión post-incidente / lecciones aprendidas',
+  'Datalek / privacy-incident beoordeling':
+      'Brecha de datos / evaluación de incidente de privacidad',
+  'DPIA / privacy impact assessment':
+      'DPIA / evaluación de impacto en la privacidad',
+  'Risicoanalyse / risk register': 'Análisis de riesgos / registro de riesgos',
+  'Business continuity / DR-test': 'Continuidad de negocio / prueba de DR',
+  'Tabletop-oefening / crisisoefening':
+      'Ejercicio tabletop / simulacro de crisis',
+  'BOB-crisisrapportage': 'Informe de crisis BOB',
+  'CAB / release readiness': 'CAB / preparación de la release',
+  'Stuurgroep / project board update':
+      'Comité de dirección / actualización del proyecto',
+  'Auditbevindingen en opvolging': 'Hallazgos de auditoría y seguimiento',
+  'Leveranciersbeoordeling / vendor risk':
+      'Evaluación de proveedores / riesgo de proveedor',
+  'Architectuurbesluit / ADR-presentatie':
+      'Decisión de arquitectura / presentación ADR',
+  'Beleid uitrollen / implementatieplan':
+      'Despliegue de política / plan de implantación',
+  'Overdracht / handover': 'Traspaso / handover',
+  'Retrospective / teamverbetering': 'Retrospectiva / mejora del equipo',
+  'PPL Vluchtvoorbereiding': 'Preparación de vuelo PPL',
+  'Tijdlijn, impact, oorzaken en verbeteracties na een incident.':
+      'Cronología, impacto, causas y acciones de mejora tras un incidente.',
+  'Beoordeel gegevens, risico, meldplicht en communicatie.':
+      'Evaluar datos, riesgo, obligación de notificación y comunicación.',
+  'Verwerking, grondslag, privacyrisico\'s en maatregelen.':
+      'Tratamiento, base jurídica, riesgos de privacidad y medidas.',
+  'Leg risico\'s, kans, impact, maatregelen en eigenaren vast.':
+      'Registrar riesgos, probabilidad, impacto, medidas y responsables.',
+  'Scenario, hersteldoelen, testbevindingen en verbeterpunten.':
+      'Escenario, objetivos de recuperación, hallazgos de las pruebas y puntos de mejora.',
+  'Scenario, injects, besluiten, waarnemingen en evaluatie.':
+      'Escenario, injects, decisiones, observaciones y evaluación.',
+  'Leid een crisisteam door beeldvorming, oordeelsvorming en besluitvorming, met live situatiebeeld, informatievragen, dilemma\'s, besluitenlog en actielijst.':
+      'Guía a un equipo de crisis por el análisis de la situación, la valoración y la toma de decisiones, con imagen de situación en vivo, peticiones de información, dilemas, registro de decisiones y lista de acciones.',
+  'Wijziging, impact, tests, rollback, communicatie en go/no-go.':
+      'Cambio, impacto, pruebas, rollback, comunicación y go/no-go.',
+  'Voortgang, planning, budget, risico\'s en besluiten gevraagd.':
+      'Avance, planificación, presupuesto, riesgos y decisiones solicitadas.',
+  'Bevindingen, root cause, maatregelen, bewijs en status.':
+      'Hallazgos, causa raíz, medidas, evidencias y estado.',
+  'Dienst, data, afhankelijkheid, eisen, risico\'s en besluit.':
+      'Servicio, datos, dependencia, requisitos, riesgos y decisión.',
+  'Context, opties, trade-offs, besluit en gevolgen.':
+      'Contexto, opciones, trade-offs, decisión y consecuencias.',
+  'Doelgroep, planning, communicatie, training en adoptie.':
+      'Público objetivo, planificación, comunicación, formación y adopción.',
+  'Status, open acties, risico\'s, contacten en eerste stappen.':
+      'Estado, acciones abiertas, riesgos, contactos y primeros pasos.',
+  'Feiten, patronen, start-stop-continue en verbeteracties.':
+      'Hechos, patrones, start-stop-continue y acciones de mejora.',
+  'Bereid een VFR-vlucht voor met route, weer, NOTAMs, prestaties, weight & balance, brandstof, alternates en persoonlijke go/no-go checks.':
+      'Prepara un vuelo VFR con ruta, meteorología, NOTAMs, prestaciones, peso y centrado, combustible, alternativos y checks go/no-go personales.',
+  'Zoek een sjabloon': 'Buscar una plantilla',
+  'Geen sjablonen gevonden': 'No se encontraron plantillas',
 };

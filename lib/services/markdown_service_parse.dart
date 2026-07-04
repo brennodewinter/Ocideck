@@ -310,6 +310,7 @@ extension _MarkdownParse on MarkdownService {
           ? timelineRevealFromTokens(classTokens)
           : TimelineReveal.onEnter,
       timelineAnimationMs: d.timelineAnimationMs,
+      timelineCurrentIndex: d.timelineCurrentIndex,
     );
   }
 
@@ -329,6 +330,7 @@ extension _MarkdownParse on MarkdownService {
     List<String> bullets2,
     ListStyle listStyle,
     int? timelineAnimationMs,
+    int? timelineCurrentIndex,
     bool showChecklistProgress,
     bool continueNumbering,
     bool continuesSplit,
@@ -358,6 +360,7 @@ extension _MarkdownParse on MarkdownService {
     var bullets2 = <String>[];
     var listStyle = ListStyle.bullets;
     int? timelineAnimationMs;
+    int? timelineCurrentIndex;
     var showChecklistProgress = false;
     var continueNumbering = false;
     var continuesSplit = false;
@@ -397,6 +400,15 @@ extension _MarkdownParse on MarkdownService {
       } else if (content.startsWith('ocideck_timeline_duration:')) {
         final ms = int.tryParse(content.substring(26).trim());
         if (ms != null) timelineAnimationMs = clampTimelineDuration(ms);
+      } else if (content.startsWith('ocideck_timeline_current:')) {
+        // The file stores the human-friendly 1-based event number; anything
+        // out of range is ignored (fail-safe: no highlight).
+        final n = int.tryParse(
+          content.substring('ocideck_timeline_current:'.length).trim(),
+        );
+        if (n != null && n >= 1 && n <= timelineMaxEvents) {
+          timelineCurrentIndex = n - 1;
+        }
       } else if (content.startsWith('ocideck_list_style:')) {
         final name = content.substring(19).trim();
         listStyle = ListStyle.values.firstWhere(
@@ -445,6 +457,7 @@ extension _MarkdownParse on MarkdownService {
       bullets2: bullets2,
       listStyle: listStyle,
       timelineAnimationMs: timelineAnimationMs,
+      timelineCurrentIndex: timelineCurrentIndex,
       showChecklistProgress: showChecklistProgress,
       continueNumbering: continueNumbering,
       continuesSplit: continuesSplit,
