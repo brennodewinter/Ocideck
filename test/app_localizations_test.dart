@@ -140,6 +140,43 @@ void main() {
     expect(missingByLanguage, isEmpty);
   });
 
+  test('every t() key used in lib is present in every language', () {
+    // Keyed t() strings reach the table by a string literal; scan the source
+    // the same way the d() coverage tests do. A key missing in a language
+    // would silently fall back to English/Dutch instead of the chosen
+    // language — the one gap the d() tests could not catch.
+    final expression = RegExp(r'''\.t\(\s*('[A-Za-z0-9_]+'|"[A-Za-z0-9_]+")''');
+    final files = Directory('lib')
+        .listSync(recursive: true)
+        .whereType<File>()
+        .where((file) => file.path.endsWith('.dart'));
+    final keys = <String>{};
+
+    for (final file in files) {
+      final content = file.readAsStringSync();
+      for (final match in expression.allMatches(content)) {
+        keys.add(_unquoteDartString(match.group(1)!));
+      }
+    }
+
+    // Guard against a broken scan silently passing (empty keys → no misses).
+    expect(keys, isNotEmpty);
+
+    final missingByLanguage = <String, List<String>>{};
+    for (final languageCode in AppLocalizations.languageNames.keys) {
+      final missing =
+          keys
+              .where(
+                (key) => !AppLocalizations.hasTranslationKey(languageCode, key),
+              )
+              .toList()
+            ..sort();
+      if (missing.isNotEmpty) missingByLanguage[languageCode] = missing;
+    }
+
+    expect(missingByLanguage, isEmpty);
+  });
+
   group('language registration is consistent', () {
     test('every language is a supported locale', () {
       for (final code in AppLocalizations.languageNames.keys) {
