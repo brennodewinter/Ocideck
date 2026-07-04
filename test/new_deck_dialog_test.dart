@@ -82,4 +82,57 @@ void main() {
       expect(find.text(template.title), findsOneWidget);
     }
   });
+
+  testWidgets('every template has a picker icon', (tester) async {
+    for (final template in deckTemplates) {
+      expect(
+        templatePickerIcons.containsKey(template.icon),
+        isTrue,
+        reason: '${template.id} mist een icoon in templatePickerIcons',
+      );
+    }
+  });
+
+  final searchField = find.byKey(const ValueKey('templateSearchField'));
+
+  testWidgets('searching narrows the list to matching templates', (
+    tester,
+  ) async {
+    await _Harness().open(tester);
+    await tester.enterText(searchField, 'quiz');
+    await tester.pumpAndSettle();
+    expect(find.text('Interactieve quiz'), findsOneWidget);
+    expect(find.text('Leeg deck'), findsNothing);
+  });
+
+  testWidgets('search matches descriptions too', (tester) async {
+    await _Harness().open(tester);
+    await tester.enterText(searchField, 'kernboodschap');
+    await tester.pumpAndSettle();
+    expect(find.text('Voorbespreking communicatie'), findsOneWidget);
+    expect(find.text('Rapportage'), findsNothing);
+  });
+
+  testWidgets('a search without matches explains itself', (tester) async {
+    await _Harness().open(tester);
+    await tester.enterText(searchField, 'xyzzy-bestaat-niet');
+    await tester.pumpAndSettle();
+    expect(find.text('Geen sjablonen gevonden'), findsOneWidget);
+  });
+
+  testWidgets('selection follows the filter and lands in the result', (
+    tester,
+  ) async {
+    final harness = _Harness();
+    await harness.open(tester);
+    await tester.enterText(searchField, 'BOB');
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextFormField).first, 'Crisis 12:00');
+    await tester.tap(find.text('Aanmaken'));
+    await tester.pumpAndSettle();
+
+    expect(harness.choice, isNotNull);
+    expect(harness.choice!.template.id, 'bobCrisis');
+    expect(harness.choice!.title, 'Crisis 12:00');
+  });
 }

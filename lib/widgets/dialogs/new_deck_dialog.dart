@@ -31,7 +31,8 @@ class NewDeckDialog extends StatefulWidget {
 
 /// Picker icons per [DeckTemplate.icon] key. Lives here (not in the model) so
 /// the model layer stays Flutter-free, mirroring the slide-type registry.
-const Map<String, IconData> _templateIcons = {
+/// Public zodat een guardtest kan afdwingen dat elk sjabloon een icoon heeft.
+const Map<String, IconData> templatePickerIcons = {
   'empty': Icons.crop_landscape_outlined,
   'briefing': Icons.summarize_outlined,
   'status': Icons.speed_outlined,
@@ -43,20 +44,66 @@ const Map<String, IconData> _templateIcons = {
   'certification': Icons.verified_outlined,
   'training': Icons.school_outlined,
   'report': Icons.insert_chart_outlined,
+  'postIncidentReview': Icons.manage_history,
+  'privacyIncident': Icons.privacy_tip_outlined,
+  'dpia': Icons.policy_outlined,
+  'riskRegister': Icons.warning_amber_outlined,
+  'continuityTest': Icons.settings_backup_restore,
+  'tabletopExercise': Icons.groups_outlined,
+  'bobCrisis': Icons.crisis_alert,
+  'releaseReadiness': Icons.fact_check_outlined,
+  'steeringUpdate': Icons.gavel,
+  'auditFollowup': Icons.rule,
+  'vendorRisk': Icons.handshake_outlined,
+  'architectureDecision': Icons.account_tree_outlined,
+  'policyRollout': Icons.campaign_outlined,
+  'handover': Icons.swap_horiz_outlined,
+  'retrospective': Icons.replay,
   'research': Icons.travel_explore_outlined,
   'technical': Icons.code_outlined,
   'quiz': Icons.quiz_outlined,
+  'pplFlightPrep': Icons.flight_takeoff,
 };
 
 class _NewDeckDialogState extends State<NewDeckDialog> {
   final _ctrl = TextEditingController();
+  final _searchCtrl = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   DeckTemplate _template = deckTemplates.first;
 
   @override
   void dispose() {
     _ctrl.dispose();
+    _searchCtrl.dispose();
     super.dispose();
+  }
+
+  /// The catalogue narrowed by the search box. Matches the localised title
+  /// and description, plus the Dutch source strings, so a term in either
+  /// language finds the template.
+  List<DeckTemplate> _filtered(AppLocalizations l10n) {
+    final query = _searchCtrl.text.trim().toLowerCase();
+    if (query.isEmpty) return deckTemplates;
+    bool matches(DeckTemplate t) => [
+      l10n.d(t.title),
+      l10n.d(t.description),
+      t.title,
+      t.description,
+    ].any((text) => text.toLowerCase().contains(query));
+    return deckTemplates.where(matches).toList();
+  }
+
+  void _onSearchChanged() {
+    setState(() {
+      final l10n = context.l10n;
+      final visible = _filtered(l10n);
+      // Houd de selectie zichtbaar: verdwijnt die uit het filter, verspring
+      // dan naar het eerste resultaat (bij nul resultaten blijft de oude
+      // selectie gelden, zodat aanmaken altijd een geldig sjabloon oplevert).
+      if (visible.isNotEmpty && !visible.contains(_template)) {
+        _template = visible.first;
+      }
+    });
   }
 
   @override
@@ -95,6 +142,26 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
                 const SizedBox(height: 6),
+                TextField(
+                  key: const ValueKey('templateSearchField'),
+                  controller: _searchCtrl,
+                  onChanged: (_) => _onSearchChanged(),
+                  decoration: InputDecoration(
+                    isDense: true,
+                    prefixIcon: const Icon(Icons.search, size: 18),
+                    hintText: l10n.d('Zoek een sjabloon'),
+                    suffixIcon: _searchCtrl.text.isEmpty
+                        ? null
+                        : IconButton(
+                            icon: const Icon(Icons.clear, size: 16),
+                            onPressed: () {
+                              _searchCtrl.clear();
+                              _onSearchChanged();
+                            },
+                          ),
+                  ),
+                ),
+                const SizedBox(height: 6),
                 // Flexible met een plafond: op kleine vensters krimpt de
                 // lijst mee in plaats van de dialoog te laten overlopen.
                 Flexible(
@@ -108,12 +175,7 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
                     // fully keyboard-operable (mirrors the slide-type dialog).
                     child: FocusTraversalGroup(
                       policy: ReadingOrderTraversalPolicy(),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: deckTemplates.length,
-                        itemBuilder: (context, i) =>
-                            _templateTile(deckTemplates[i]),
-                      ),
+                      child: _templateList(l10n),
                     ),
                   ),
                 ),
@@ -129,6 +191,26 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
           ElevatedButton(onPressed: _submit, child: Text(l10n.d('Aanmaken'))),
         ],
       ),
+    );
+  }
+
+  Widget _templateList(AppLocalizations l10n) {
+    final visible = _filtered(l10n);
+    if (visible.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.all(24),
+        child: Center(
+          child: Text(
+            l10n.d('Geen sjablonen gevonden'),
+            style: TextStyle(color: Theme.of(context).hintColor),
+          ),
+        ),
+      );
+    }
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: visible.length,
+      itemBuilder: (context, i) => _templateTile(visible[i]),
     );
   }
 
@@ -148,7 +230,8 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
           child: Row(
             children: [
               Icon(
-                _templateIcons[template.icon] ?? Icons.crop_landscape_outlined,
+                templatePickerIcons[template.icon] ??
+                    Icons.crop_landscape_outlined,
                 size: 22,
                 color: AppTheme.accent,
               ),
