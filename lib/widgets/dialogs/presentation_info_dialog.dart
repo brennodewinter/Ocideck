@@ -158,7 +158,12 @@ class _PresentationInfoDialogState
           children: [
             const Icon(Icons.info_outline, size: 20),
             const SizedBox(width: 8),
-            Text(l10n.d('Presentatie-eigenschappen')),
+            Flexible(
+              child: Text(
+                l10n.d('Presentatie-eigenschappen'),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ],
         ),
         content: SizedBox(

@@ -180,7 +180,12 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
         children: [
           const Icon(Icons.folder_open_outlined, size: 20),
           const SizedBox(width: 8),
-          Text(l10n.d('Presentatie openen')),
+          Flexible(
+            child: Text(
+              l10n.d('Presentatie openen'),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ],
       ),
       contentPadding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
