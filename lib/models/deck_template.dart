@@ -7,6 +7,8 @@ import 'timeline.dart';
 // The builder bodies live in part files, grouped by theme, so no single file
 // outgrows the repo's line ratchet as the template catalogue grows.
 part 'deck_template_general.dart';
+part 'deck_template_work_a.dart';
+part 'deck_template_work_b.dart';
 
 /// A starting-point recipe for a new presentation: a title page plus a set of
 /// example slides the user overwrites with real content. Templates are pure
@@ -119,6 +121,106 @@ final List<DeckTemplate> deckTemplates = [
     description: 'Samenvatting, KPI-dashboard, trend en acties.',
     icon: 'report',
     buildSlides: _buildReport,
+  ),
+  DeckTemplate(
+    id: 'postIncidentReview',
+    title: 'Post-incident review / lessons learned',
+    description:
+        'Tijdlijn, impact, oorzaken en verbeteracties na een incident.',
+    icon: 'postIncidentReview',
+    buildSlides: _buildPostIncidentReview,
+  ),
+  DeckTemplate(
+    id: 'privacyIncident',
+    title: 'Datalek / privacy-incident beoordeling',
+    description: 'Beoordeel gegevens, risico, meldplicht en communicatie.',
+    icon: 'privacyIncident',
+    buildSlides: _buildPrivacyIncident,
+  ),
+  DeckTemplate(
+    id: 'dpia',
+    title: 'DPIA / privacy impact assessment',
+    description: "Verwerking, grondslag, privacyrisico's en maatregelen.",
+    icon: 'dpia',
+    buildSlides: _buildDpia,
+  ),
+  DeckTemplate(
+    id: 'riskRegister',
+    title: 'Risicoanalyse / risk register',
+    description: "Leg risico's, kans, impact, maatregelen en eigenaren vast.",
+    icon: 'riskRegister',
+    buildSlides: _buildRiskRegister,
+  ),
+  DeckTemplate(
+    id: 'continuityTest',
+    title: 'Business continuity / DR-test',
+    description: 'Scenario, hersteldoelen, testbevindingen en verbeterpunten.',
+    icon: 'continuityTest',
+    buildSlides: _buildContinuityTest,
+  ),
+  DeckTemplate(
+    id: 'tabletopExercise',
+    title: 'Tabletop-oefening / crisisoefening',
+    description: 'Scenario, injects, besluiten, waarnemingen en evaluatie.',
+    icon: 'tabletopExercise',
+    buildSlides: _buildTabletopExercise,
+  ),
+  DeckTemplate(
+    id: 'releaseReadiness',
+    title: 'CAB / release readiness',
+    description:
+        'Wijziging, impact, tests, rollback, communicatie en go/no-go.',
+    icon: 'releaseReadiness',
+    buildSlides: _buildReleaseReadiness,
+  ),
+  DeckTemplate(
+    id: 'steeringUpdate',
+    title: 'Stuurgroep / project board update',
+    description: "Voortgang, planning, budget, risico's en besluiten gevraagd.",
+    icon: 'steeringUpdate',
+    buildSlides: _buildSteeringUpdate,
+  ),
+  DeckTemplate(
+    id: 'auditFollowup',
+    title: 'Auditbevindingen en opvolging',
+    description: 'Bevindingen, root cause, maatregelen, bewijs en status.',
+    icon: 'auditFollowup',
+    buildSlides: _buildAuditFollowup,
+  ),
+  DeckTemplate(
+    id: 'vendorRisk',
+    title: 'Leveranciersbeoordeling / vendor risk',
+    description: "Dienst, data, afhankelijkheid, eisen, risico's en besluit.",
+    icon: 'vendorRisk',
+    buildSlides: _buildVendorRisk,
+  ),
+  DeckTemplate(
+    id: 'architectureDecision',
+    title: 'Architectuurbesluit / ADR-presentatie',
+    description: 'Context, opties, trade-offs, besluit en gevolgen.',
+    icon: 'architectureDecision',
+    buildSlides: _buildArchitectureDecision,
+  ),
+  DeckTemplate(
+    id: 'policyRollout',
+    title: 'Beleid uitrollen / implementatieplan',
+    description: 'Doelgroep, planning, communicatie, training en adoptie.',
+    icon: 'policyRollout',
+    buildSlides: _buildPolicyRollout,
+  ),
+  DeckTemplate(
+    id: 'handover',
+    title: 'Overdracht / handover',
+    description: "Status, open acties, risico's, contacten en eerste stappen.",
+    icon: 'handover',
+    buildSlides: _buildHandover,
+  ),
+  DeckTemplate(
+    id: 'retrospective',
+    title: 'Retrospective / teamverbetering',
+    description: 'Feiten, patronen, start-stop-continue en verbeteracties.',
+    icon: 'retrospective',
+    buildSlides: _buildRetrospective,
   ),
   DeckTemplate(
     id: 'research',

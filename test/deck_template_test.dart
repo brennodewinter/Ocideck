@@ -7,13 +7,41 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/timeline.dart';
 import 'package:ocideck/services/markdown_service.dart';
 
+/// De veertien invulbare werkdeck-sjablonen voor terugkerende werkprocessen.
+const werkdeckIds = [
+  'postIncidentReview',
+  'privacyIncident',
+  'dpia',
+  'riskRegister',
+  'continuityTest',
+  'tabletopExercise',
+  'releaseReadiness',
+  'steeringUpdate',
+  'auditFollowup',
+  'vendorRisk',
+  'architectureDecision',
+  'policyRollout',
+  'handover',
+  'retrospective',
+];
+
 void main() {
   group('deckTemplates registry', () {
-    test('offers all fourteen templates with unique ids', () {
-      expect(deckTemplates, hasLength(14));
-      final ids = deckTemplates.map((t) => t.id).toSet();
-      expect(ids, hasLength(deckTemplates.length));
+    test('offers the full catalogue with unique ids', () {
+      final ids = deckTemplates.map((t) => t.id).toList();
+      expect(ids.toSet(), hasLength(ids.length));
       expect(deckTemplates.first.id, 'empty');
+      expect(
+        ids,
+        containsAll([
+          // De oorspronkelijke veertien.
+          'empty', 'briefing', 'status', 'kickoff', 'communication',
+          'projectTimeline', 'rasci', 'securityTasks', 'certification',
+          'training', 'report', 'research', 'technical', 'quiz',
+          // De veertien werkdecks.
+          ...werkdeckIds,
+        ]),
+      );
     });
 
     test('every template has a title, description and icon key', () {
@@ -179,6 +207,67 @@ void main() {
         QuestionKind.trueFalse,
         QuestionKind.multipleCorrect,
       ]);
+    });
+  });
+
+  group('werkdeck templates', () {
+    test('every werkdeck yields at least eight slides and a table', () {
+      for (final id in werkdeckIds) {
+        final slides = deckTemplateById(id)!.buildSlides('T');
+        expect(slides.length, greaterThanOrEqualTo(8), reason: id);
+        expect(
+          slides.any((s) => s.type == SlideType.table),
+          isTrue,
+          reason: id,
+        );
+      }
+    });
+
+    test('every werkdeck is live-invulbaar: editable table or checklist', () {
+      for (final id in werkdeckIds) {
+        final slides = deckTemplateById(id)!.buildSlides('T');
+        final editable = slides.any(
+          (s) => s.type == SlideType.table && s.tableEditable,
+        );
+        final checklist = slides.any((s) => s.listStyle == ListStyle.checklist);
+        expect(editable || checklist, isTrue, reason: id);
+      }
+    });
+
+    test('central action and go/no-go lists show checklist progress', () {
+      const withProgressList = [
+        'privacyIncident',
+        'dpia',
+        'riskRegister',
+        'continuityTest',
+        'tabletopExercise',
+        'releaseReadiness',
+        'vendorRisk',
+        'handover',
+        'retrospective',
+      ];
+      for (final id in withProgressList) {
+        final slides = deckTemplateById(id)!.buildSlides('T');
+        expect(
+          slides.any(
+            (s) =>
+                s.listStyle == ListStyle.checklist && s.showChecklistProgress,
+          ),
+          isTrue,
+          reason: id,
+        );
+      }
+      // De overige werkdecks leggen acties vast in een invulbare tabel.
+      for (final id in werkdeckIds.where(
+        (id) => !withProgressList.contains(id),
+      )) {
+        final slides = deckTemplateById(id)!.buildSlides('T');
+        expect(
+          slides.any((s) => s.type == SlideType.table && s.tableEditable),
+          isTrue,
+          reason: id,
+        );
+      }
     });
   });
 
