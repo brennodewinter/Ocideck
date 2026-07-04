@@ -7,6 +7,7 @@ import 'package:window_manager/window_manager.dart';
 
 import '../platform/launch_files.dart';
 import '../platform/platform_features.dart';
+import '../utils/display_path.dart';
 import '../utils/log.dart';
 import '../models/deck.dart';
 import '../models/slide.dart';
@@ -38,6 +39,7 @@ import '../utils/project_path.dart';
 import '../theme/app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/slide_quality_localization.dart';
+import 'dialogs/duplicate_cleanup_dialog.dart';
 import 'dialogs/export_dialog.dart';
 import 'dialogs/find_replace_dialog.dart';
 import 'dialogs/image_carousel_picker.dart';
@@ -48,6 +50,7 @@ import 'dialogs/presentation_info_dialog.dart';
 import 'dialogs/scan_library_dialog.dart';
 import 'dialogs/settings_dialog.dart';
 import 'dialogs/webdav_browser_dialog.dart';
+import '../services/trash_service.dart';
 import 'panels/editor_panel.dart';
 import 'panels/preview_panel.dart';
 import 'panels/slide_list_panel.dart';
@@ -403,6 +406,40 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       if (alarm == null) return;
       ImportSecurityAlarmDialog.show(context, alarm);
       ref.read(importSecurityAlarmProvider.notifier).state = null;
+    });
+
+    // Een zojuist geopend bestand heeft elders een byte-identieke kopie:
+    // niet-blokkerend melden (de gebruiker wilde gewoon openen), met de
+    // opruimdialoog als directe ingang.
+    ref.listen<DuplicateCopyNotice?>(duplicateCopyNoticeProvider, (_, notice) {
+      if (notice == null) return;
+      ref.read(duplicateCopyNoticeProvider.notifier).state = null;
+      final l10n = context.l10n;
+      final homeDir = ref.read(settingsProvider).homeDirectory;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 7),
+          content: Text(
+            '${l10n.d('Deze presentatie staat ook op een andere plek:')} '
+            '${displayFolder(notice.copyPath, homeDir: homeDir, osHome: osHomeDirectory)}',
+          ),
+          action: TrashService().isSupported
+              ? SnackBarAction(
+                  label: l10n.d('Opruimen…'),
+                  onPressed: () => DuplicateCleanupDialog.show(
+                    context,
+                    groups: [
+                      CleanupGroup(
+                        title: p.basenameWithoutExtension(notice.openedPath),
+                        paths: [notice.openedPath, notice.copyPath],
+                      ),
+                    ],
+                    homeDir: homeDir,
+                  ),
+                )
+              : null,
+        ),
+      );
     });
 
     return CallbackShortcuts(

@@ -1239,4 +1239,19 @@ const _dutchSourcePt = {
       'Prepare um voo VFR com rota, meteorologia, NOTAMs, desempenho, weight & balance, combustível, alternates e verificações pessoais de go/no-go.',
   'Zoek een sjabloon': 'Procurar um modelo',
   'Geen sjablonen gevonden': 'Nenhum modelo encontrado',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Cópias idênticas',
+  'Zelfde titel, andere inhoud': 'Mesmo título, conteúdo diferente',
+  'Dubbele presentaties opruimen': 'Limpar apresentações duplicadas',
+  'Naar de prullenbak verplaatst:': 'Movido para o lixo:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Não foi possível mover para o lixo.',
+  'Geen dubbele presentaties gevonden.':
+      'Nenhuma apresentação duplicada encontrada.',
+  'Laatste kopie blijft behouden': 'A última cópia é mantida',
+  'Nog geopend in een tabblad': 'Ainda aberta numa aba',
+  'Naar prullenbak': 'Mover para o lixo',
+  'Deze presentatie staat ook op een andere plek:':
+      'Esta apresentação também existe noutro local:',
+  'Opruimen…': 'Limpar…',
 };

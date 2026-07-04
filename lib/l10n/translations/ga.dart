@@ -1245,4 +1245,19 @@ const _dutchSourceGa = {
       'Ullmhaigh eitilt VFR le bealach, aimsir, NOTAMs, feidhmíocht, weight & balance, breosla, alternates agus seiceálacha pearsanta go/no-go.',
   'Zoek een sjabloon': 'Cuardaigh teimpléad',
   'Geen sjablonen gevonden': 'Níor aimsíodh aon teimpléid',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Cóipeanna comhionanna',
+  'Zelfde titel, andere inhoud': 'An teideal céanna, ábhar difriúil',
+  'Dubbele presentaties opruimen': 'Glan suas láithreoireachtaí dúbailte',
+  'Naar de prullenbak verplaatst:': 'Bogtha go dtí an bruscar:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Níorbh fhéidir é a bhogadh go dtí an bruscar.',
+  'Geen dubbele presentaties gevonden.':
+      'Níor aimsíodh láithreoireachtaí dúbailte.',
+  'Laatste kopie blijft behouden': 'Coinnítear an chóip dheireanach',
+  'Nog geopend in een tabblad': 'Fós ar oscailt i gcluaisín',
+  'Naar prullenbak': 'Go dtí an bruscar',
+  'Deze presentatie staat ook op een andere plek:':
+      'Tá an láithreoireacht seo ann in áit eile freisin:',
+  'Opruimen…': 'Glan suas…',
 };

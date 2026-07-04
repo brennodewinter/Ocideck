@@ -309,6 +309,20 @@ const _dutchSourceEs = {
       'Debe aceptar los términos de privacidad y uso antes de poder usar OciDeck.',
   'Volledige licentie online': 'Licencia completa en línea',
   'Welkom bij OciDeck': 'Bienvenido a OciDeck',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Copias idénticas',
+  'Zelfde titel, andere inhoud': 'Mismo título, contenido distinto',
+  'Dubbele presentaties opruimen': 'Limpiar presentaciones duplicadas',
+  'Naar de prullenbak verplaatst:': 'Movido a la papelera:',
+  'Kon niet naar de prullenbak verplaatsen.': 'No se pudo mover a la papelera.',
+  'Geen dubbele presentaties gevonden.':
+      'No se encontraron presentaciones duplicadas.',
+  'Laatste kopie blijft behouden': 'La última copia se conserva',
+  'Nog geopend in een tabblad': 'Aún abierta en una pestaña',
+  'Naar prullenbak': 'Mover a la papelera',
+  'Deze presentatie staat ook op een andere plek:':
+      'Esta presentación también existe en otro lugar:',
+  'Opruimen…': 'Limpiar…',
 };
 
 const _dutchSourceAddEs = {

@@ -1230,4 +1230,19 @@ const _dutchSourceLa = {
       'Para volatum VFR cum itinere, tempestate, NOTAMs, praestationibus, weight & balance, combustibili, alternates et probationibus personalibus go/no-go.',
   'Zoek een sjabloon': 'Quaere exemplar',
   'Geen sjablonen gevonden': 'Nulla exemplaria inventa',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Exemplaria identica',
+  'Zelfde titel, andere inhoud': 'Idem titulus, contentum diversum',
+  'Dubbele presentaties opruimen': 'Praesentationes duplicatas purgare',
+  'Naar de prullenbak verplaatst:': 'In scrinium purgamentorum motum:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'In scrinium purgamentorum moveri non potuit.',
+  'Geen dubbele presentaties gevonden.':
+      'Nullae praesentationes duplicatae inventae sunt.',
+  'Laatste kopie blijft behouden': 'Exemplar ultimum servatur',
+  'Nog geopend in een tabblad': 'Adhuc in tabula apertum',
+  'Naar prullenbak': 'In scrinium purgamentorum',
+  'Deze presentatie staat ook op een andere plek:':
+      'Haec praesentatio etiam alio loco est:',
+  'Opruimen…': 'Purgare…',
 };

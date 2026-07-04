@@ -1217,4 +1217,18 @@ const _dutchSourceGsw = {
       'Bereit en VFR-Flug vor mit Route, Wätter, NOTAMs, Leischtig, Weight & Balance, Triibstoff, Alternates und persönliche Go/No-Go-Checks.',
   'Zoek een sjabloon': 'Suech e Vorlag',
   'Geen sjablonen gevonden': 'Kei Vorlage gfunde',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identischi Kopie',
+  'Zelfde titel, andere inhoud': 'Gliiche Titel, andere Inhalt',
+  'Dubbele presentaties opruimen': 'Doppleti Präsentatione uufruume',
+  'Naar de prullenbak verplaatst:': 'In Papierchorb verschobe:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Het nöd in Papierchorb chöne verschobe werde.',
+  'Geen dubbele presentaties gevonden.': 'Kei doppleti Präsentatione gfunde.',
+  'Laatste kopie blijft behouden': 'Di letschti Kopie bliibt erhalte',
+  'Nog geopend in een tabblad': 'No offe imene Tab',
+  'Naar prullenbak': 'In Papierchorb',
+  'Deze presentatie staat ook op een andere plek:':
+      'Die Präsentation git s au an eme andere Ort:',
+  'Opruimen…': 'Uufruume…',
 };

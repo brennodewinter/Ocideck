@@ -1217,4 +1217,19 @@ const _dutchSourceId = {
       'Siapkan penerbangan VFR dengan rute, cuaca, NOTAM, performa, weight & balance, bahan bakar, alternate, dan pemeriksaan go/no-go pribadi.',
   'Zoek een sjabloon': 'Cari templat',
   'Geen sjablonen gevonden': 'Tidak ada templat yang ditemukan',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Salinan identik',
+  'Zelfde titel, andere inhoud': 'Judul sama, isi berbeda',
+  'Dubbele presentaties opruimen': 'Bersihkan presentasi duplikat',
+  'Naar de prullenbak verplaatst:': 'Dipindahkan ke tempat sampah:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Tidak dapat dipindahkan ke tempat sampah.',
+  'Geen dubbele presentaties gevonden.':
+      'Tidak ada presentasi duplikat yang ditemukan.',
+  'Laatste kopie blijft behouden': 'Salinan terakhir dipertahankan',
+  'Nog geopend in een tabblad': 'Masih terbuka di tab',
+  'Naar prullenbak': 'Ke tempat sampah',
+  'Deze presentatie staat ook op een andere plek:':
+      'Presentasi ini juga ada di tempat lain:',
+  'Opruimen…': 'Bersihkan…',
 };

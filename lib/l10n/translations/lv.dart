@@ -1218,4 +1218,18 @@ const _dutchSourceLv = {
       'Sagatavojiet VFR lidojumu ar maršrutu, laikapstākļiem, NOTAMs, veiktspēju, weight & balance, degvielu, rezerves lidlaukiem un personīgajām go/no-go pārbaudēm.',
   'Zoek een sjabloon': 'Meklēt veidni',
   'Geen sjablonen gevonden': 'Nav atrasta neviena veidne',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identiskas kopijas',
+  'Zelfde titel, andere inhoud': 'Tāds pats nosaukums, atšķirīgs saturs',
+  'Dubbele presentaties opruimen': 'Sakārtot dublētās prezentācijas',
+  'Naar de prullenbak verplaatst:': 'Pārvietots uz atkritni:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Neizdevās pārvietot uz atkritni.',
+  'Geen dubbele presentaties gevonden.': 'Dublētas prezentācijas nav atrastas.',
+  'Laatste kopie blijft behouden': 'Pēdējā kopija tiek saglabāta',
+  'Nog geopend in een tabblad': 'Vēl atvērta cilnē',
+  'Naar prullenbak': 'Uz atkritni',
+  'Deze presentatie staat ook op een andere plek:':
+      'Šī prezentācija pastāv arī citā vietā:',
+  'Opruimen…': 'Sakārtot…',
 };

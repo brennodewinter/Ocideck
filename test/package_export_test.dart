@@ -96,26 +96,30 @@ void main() {
     expect(imported!.userNotes.values, contains('Cursusnotitie'));
   });
 
-  test(
-    'importing the same package twice does not overwrite the first',
-    () async {
-      final deck = Deck(
-        title: 'Deck',
-        slides: [
-          Slide.create(SlideType.bullets).copyWith(bullets: ['x']),
-        ],
-      );
-      final zipPath = p.join(tmp.path, 'deck.ocideck');
-      await file.exportPackage(deck, zipPath);
-      final bytes = File(zipPath).readAsBytesSync();
-      final out = Directory(p.join(tmp.path, 'out'))..createSync();
+  test('importing the same package twice never loses local edits', () async {
+    final deck = Deck(
+      title: 'Deck',
+      slides: [
+        Slide.create(SlideType.bullets).copyWith(bullets: ['x']),
+      ],
+    );
+    final zipPath = p.join(tmp.path, 'deck.ocideck');
+    await file.exportPackage(deck, zipPath);
+    final bytes = File(zipPath).readAsBytesSync();
+    final out = Directory(p.join(tmp.path, 'out'))..createSync();
 
-      final first = await file.importPackageBytes(bytes, out.path);
-      final second = await file.importPackageBytes(bytes, out.path);
+    final first = await file.importPackageBytes(bytes, out.path);
+    // Ongewijzigde kopie: dezelfde import wordt hergebruikt (geen "map (2)"
+    // en dus geen dubbele vermelding in recente presentaties).
+    final second = await file.importPackageBytes(bytes, out.path);
+    expect(second, first);
 
-      expect(first, isNotNull);
-      expect(second, isNotNull);
-      expect(p.dirname(first!), isNot(p.dirname(second!))); // aparte mappen
-    },
-  );
+    // Maar een lokaal bewerkte kopie wordt nooit overschreven: de derde
+    // import krijgt een eigen map.
+    await File(first!).writeAsString('---\nmarp: true\n---\n# Bewerkt');
+    final third = await file.importPackageBytes(bytes, out.path);
+    expect(third, isNotNull);
+    expect(p.dirname(third!), isNot(p.dirname(first))); // aparte mappen
+    expect(await File(first).readAsString(), '---\nmarp: true\n---\n# Bewerkt');
+  });
 }

@@ -1213,4 +1213,19 @@ const _dutchSourceDa = {
       'Forbered en VFR-flyvning med rute, vejr, NOTAMs, præstationer, weight & balance, brændstof, alternates og personlige go/no-go-tjek.',
   'Zoek een sjabloon': 'Søg efter en skabelon',
   'Geen sjablonen gevonden': 'Ingen skabeloner fundet',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identiske kopier',
+  'Zelfde titel, andere inhoud': 'Samme titel, forskelligt indhold',
+  'Dubbele presentaties opruimen': 'Ryd op i dublerede præsentationer',
+  'Naar de prullenbak verplaatst:': 'Flyttet til papirkurven:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Kunne ikke flyttes til papirkurven.',
+  'Geen dubbele presentaties gevonden.':
+      'Ingen dublerede præsentationer fundet.',
+  'Laatste kopie blijft behouden': 'Den sidste kopi bevares',
+  'Nog geopend in een tabblad': 'Stadig åben i en fane',
+  'Naar prullenbak': 'Til papirkurven',
+  'Deze presentatie staat ook op een andere plek:':
+      'Denne præsentation findes også et andet sted:',
+  'Opruimen…': 'Ryd op…',
 };

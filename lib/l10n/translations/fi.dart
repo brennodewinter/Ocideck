@@ -1217,4 +1217,17 @@ const _dutchSourceFi = {
       'Valmistele VFR-lento: reitti, sää, NOTAMit, suorituskyky, weight & balance, polttoaine, varakentät ja henkilökohtaiset go/no-go-tarkistukset.',
   'Zoek een sjabloon': 'Etsi mallipohjaa',
   'Geen sjablonen gevonden': 'Mallipohjia ei löytynyt',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identtiset kopiot',
+  'Zelfde titel, andere inhoud': 'Sama otsikko, eri sisältö',
+  'Dubbele presentaties opruimen': 'Siivoa päällekkäiset esitykset',
+  'Naar de prullenbak verplaatst:': 'Siirretty roskakoriin:',
+  'Kon niet naar de prullenbak verplaatsen.': 'Ei voitu siirtää roskakoriin.',
+  'Geen dubbele presentaties gevonden.': 'Päällekkäisiä esityksiä ei löytynyt.',
+  'Laatste kopie blijft behouden': 'Viimeinen kopio säilytetään',
+  'Nog geopend in een tabblad': 'Vielä auki välilehdellä',
+  'Naar prullenbak': 'Siirrä roskakoriin',
+  'Deze presentatie staat ook op een andere plek:':
+      'Tämä esitys on myös toisessa paikassa:',
+  'Opruimen…': 'Siivoa…',
 };

@@ -1226,4 +1226,19 @@ const _dutchSourcePl = {
       'Przygotuj lot VFR z trasą, pogodą, NOTAM-ami, osiągami, weight & balance, paliwem, lotniskami zapasowymi i osobistymi kontrolami go/no-go.',
   'Zoek een sjabloon': 'Wyszukaj szablon',
   'Geen sjablonen gevonden': 'Nie znaleziono szablonów',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identyczne kopie',
+  'Zelfde titel, andere inhoud': 'Ten sam tytuł, inna treść',
+  'Dubbele presentaties opruimen': 'Uporządkuj zduplikowane prezentacje',
+  'Naar de prullenbak verplaatst:': 'Przeniesiono do kosza:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Nie udało się przenieść do kosza.',
+  'Geen dubbele presentaties gevonden.':
+      'Nie znaleziono zduplikowanych prezentacji.',
+  'Laatste kopie blijft behouden': 'Ostatnia kopia zostaje zachowana',
+  'Nog geopend in een tabblad': 'Nadal otwarta w karcie',
+  'Naar prullenbak': 'Do kosza',
+  'Deze presentatie staat ook op een andere plek:':
+      'Ta prezentacja istnieje też w innym miejscu:',
+  'Opruimen…': 'Uporządkuj…',
 };

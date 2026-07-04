@@ -167,6 +167,12 @@ class _WelcomeScreen extends ConsumerWidget {
               itemBuilder: (_, i) {
                 final path = recentFiles[i];
                 final name = path.split('/').last.replaceAll('.md', '');
+                final origin = ref.watch(
+                  settingsProvider.select((s) => s.recentFileOrigins[path]),
+                );
+                final recentsHomeDir = ref.watch(
+                  settingsProvider.select((s) => s.homeDirectory),
+                );
                 return InkWell(
                   onTap: () =>
                       ref.read(tabsProvider.notifier).openFileByPath(path),
@@ -187,22 +193,52 @@ class _WelcomeScreen extends ConsumerWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                name,
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w500,
-                                  color: theme.colorScheme.onSurface,
-                                ),
-                                overflow: TextOverflow.ellipsis,
+                              Row(
+                                children: [
+                                  Flexible(
+                                    child: Text(
+                                      name,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: theme.colorScheme.onSurface,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  if (origin != null) ...[
+                                    const SizedBox(width: 6),
+                                    // Remote opgehaald (Nextcloud/URL): de
+                                    // tooltip toont de bron zelf, dus die
+                                    // heeft geen vertaling nodig.
+                                    Tooltip(
+                                      message: origin,
+                                      child: Icon(
+                                        Icons.cloud_outlined,
+                                        size: 13,
+                                        color: theme.colorScheme.primary,
+                                      ),
+                                    ),
+                                  ],
+                                ],
                               ),
-                              Text(
-                                path,
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: palette.mutedText,
+                              // De vindplaats kort en betekenisvol (thuismap-
+                              // relatief); het volledige pad zit in de tooltip.
+                              Tooltip(
+                                message: path,
+                                waitDuration: const Duration(milliseconds: 400),
+                                child: Text(
+                                  displayFolder(
+                                    path,
+                                    homeDir: recentsHomeDir,
+                                    osHome: osHomeDirectory,
+                                  ),
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: palette.mutedText,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                overflow: TextOverflow.ellipsis,
                               ),
                             ],
                           ),

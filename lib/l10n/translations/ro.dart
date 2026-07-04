@@ -1232,4 +1232,18 @@ const _dutchSourceRo = {
       'Pregătiți un zbor VFR cu rută, vreme, NOTAM-uri, performanțe, weight & balance, combustibil, alternates și verificări personale go/no-go.',
   'Zoek een sjabloon': 'Căutați un șablon',
   'Geen sjablonen gevonden': 'Nu s-au găsit șabloane',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Copii identice',
+  'Zelfde titel, andere inhoud': 'Același titlu, conținut diferit',
+  'Dubbele presentaties opruimen': 'Curăță prezentările duplicate',
+  'Naar de prullenbak verplaatst:': 'Mutat la coșul de gunoi:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Nu s-a putut muta la coșul de gunoi.',
+  'Geen dubbele presentaties gevonden.': 'Nu s-au găsit prezentări duplicate.',
+  'Laatste kopie blijft behouden': 'Ultima copie este păstrată',
+  'Nog geopend in een tabblad': 'Încă deschisă într-o filă',
+  'Naar prullenbak': 'La coșul de gunoi',
+  'Deze presentatie staat ook op een andere plek:':
+      'Această prezentare există și în alt loc:',
+  'Opruimen…': 'Curăță…',
 };

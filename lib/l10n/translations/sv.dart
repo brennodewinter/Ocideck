@@ -1216,4 +1216,19 @@ const _dutchSourceSv = {
       'Förbered en VFR-flygning med rutt, väder, NOTAM, prestanda, weight & balance, bränsle, alternates och personliga go/no-go-kontroller.',
   'Zoek een sjabloon': 'Sök efter en mall',
   'Geen sjablonen gevonden': 'Inga mallar hittades',
+  // Duplicaatdetectie & opruimen (open-lijsten).
+  'Identieke kopieën': 'Identiska kopior',
+  'Zelfde titel, andere inhoud': 'Samma titel, olika innehåll',
+  'Dubbele presentaties opruimen': 'Rensa dubblerade presentationer',
+  'Naar de prullenbak verplaatst:': 'Flyttad till papperskorgen:',
+  'Kon niet naar de prullenbak verplaatsen.':
+      'Kunde inte flyttas till papperskorgen.',
+  'Geen dubbele presentaties gevonden.':
+      'Inga dubblerade presentationer hittades.',
+  'Laatste kopie blijft behouden': 'Den sista kopian behålls',
+  'Nog geopend in een tabblad': 'Fortfarande öppen i en flik',
+  'Naar prullenbak': 'Till papperskorgen',
+  'Deze presentatie staat ook op een andere plek:':
+      'Den här presentationen finns även på en annan plats:',
+  'Opruimen…': 'Rensa…',
 };
