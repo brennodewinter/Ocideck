@@ -1131,6 +1131,81 @@ const _dutchSourceBg = {
   'Pen · markeerstift · ⇧E': 'Химикал · маркер · ⇧E',
   'Gestapelde staaf': 'Наслоена стълбовидна',
   'Spreiding': 'Разсейване',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn прелиства слайдовете',
+  'Wacht op antwoord…': 'Изчакване на отговор…',
+  'Afbeelding slidevullend': 'Изображението запълва слайда',
+  'Vult de hele slide en snijdt de randen bij':
+      'Запълва целия слайд и изрязва краищата',
+  'Afbeelding vult hele slide': 'Изображението запълва целия слайд',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Вкл.: запълва целия слайд, заглавие отгоре (изрязано). Изкл.: изображение отгоре, заглавие в лента отдолу.',
+  'Grijze waas over afbeelding': 'Сив воал върху изображението',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Успокоява фона зад заглавието и подзаглавието.',
+  'Licht': 'Светъл',
+  'Donker': 'Тъмен',
+  'Pen (D)': 'Писалка (D)',
+  'Markeerstift (T)': 'Маркер (T)',
+  'Gum (E / Shift+E)': 'Гума (E / Shift+E)',
+  'Laser (X)': 'Лазер (X)',
+  'Metriek': 'Метрика',
+  'Inhoud': 'Съдържание',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Въпросът не може да се играе: посочете поне един верен и един грешен отговор.',
+  'CSV-koppeling verbreken?': 'Прекъсване на връзката с CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Данните остават в слайда, но промените в CSV файла вече няма да се отразяват.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Изображението е отхвърлено: твърде голямо (макс. 64 MB) или неподдържан формат.',
+  'Geen afbeelding op het klembord.': 'Няма изображение в клипборда.',
+  'Kon de afbeelding niet opslaan.': 'Изображението не можа да бъде запазено.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Изображението не можа да бъде изтрито. Проверете дали файлът не се използва и дали имате права за запис.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Няма права за запис на това място. Изберете друга папка.',
+  'De schijf is vol.': 'Дискът е пълен.',
+  'Bestand of map niet gevonden.': 'Файлът или папката не е намерена.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Файлът не можа да бъде прочетен или записан.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Мрежова грешка — проверете връзката и опитайте отново.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Нещо се обърка неочаквано. Вижте дневника за подробности.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud не е настроен (правилно) — проверете данните за сървъра в Настройки → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Този сървър не е разрешен. Първо отбележете частен/LAN сървър като доверен в Настройки → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Сървърът е недостъпен — проверете връзката и URL адреса на сървъра.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Влизането не успя. Проверете потребителското име и паролата; с Nextcloud използвайте парола за приложение, а не паролата на акаунта.',
+  'Bestand of map niet gevonden op de server.':
+      'Файлът или папката не е намерена на сървъра.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Файлът е по-голям от разрешения лимит.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Сървърът върна грешка. Опитайте отново по-късно.',
+  'Het bestand is beschadigd of onleesbaar.': 'Файлът е повреден или нечетлив.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Импортът е отказан: пакетът надвишава ограниченията за сигурност.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'От този URL не можа да се изтегли презентация. Проверете URL адреса и връзката.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Влизането не успя — проверете потребителското име и паролата. Съвет: с Nextcloud използвайте парола за приложение (Настройки → Сигурност), а не паролата на акаунта.',
+  'Annuleren…': 'Отказване…',
+  'Afbeeldingen vergelijken…': 'Сравняване на изображения…',
+  'Presentaties scannen…': 'Сканиране на презентации…',
+  'Opruimen…': 'Почистване…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Една или повече папки на библиотеката не можаха да бъдат прочетени; списъкът може да е непълен.',
+  'Uit recente bestanden verwijderen': 'Премахни от скорошните файлове',
+  'OciDeck wordt gestart…': 'Стартиране на OciDeck…',
+  'Herstelbestanden': 'Файлове за възстановяване',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Файловете за възстановяване съдържат цялото съдържание на презентациите ви в обикновен текст. Изчистват се автоматично след 7 дни; тук можете да ги изтриете веднага.',
+  'Herstelbestanden nu wissen': 'Изтрий файловете за възстановяване сега',
+  'Er waren geen herstelbestanden.': 'Нямаше файлове за възстановяване.',
+  'herstelbestand(en) gewist.': 'файл(а) за възстановяване изтрити.',
   'Klaar voor export': 'Готово за експорт',
   'kwaliteitswaarschuwing(en)': 'предупреждение(я) за качество',
   'Nog opslaan nodig': 'Първо е нужно запазване',
@@ -1261,5 +1336,4 @@ const _dutchSourceBg = {
   'Naar prullenbak': 'В кошчето',
   'Deze presentatie staat ook op een andere plek:':
       'Тази презентация съществува и на друго място:',
-  'Opruimen…': 'Разчистване…',
 };

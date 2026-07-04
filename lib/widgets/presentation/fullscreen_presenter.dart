@@ -586,6 +586,15 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   int? _lastSentRichTextPage;
   int? _lastSentTimelineStep;
 
+  /// Monotone teller op 'update'-berichten: method-channel-aanroepen zijn
+  /// fire-and-forget en niet gegarandeerd in volgorde, dus het publieksvenster
+  /// negeert berichten met een lager nummer dan het laatst verwerkte.
+  int _syncSeq = 0;
+
+  /// Toegang tot de annotatielaag om een streek-in-uitvoering te committen
+  /// vóór een slide-/paginawissel.
+  final _annotationLayerKey = GlobalKey<AnnotationLayerState>();
+
   /// Pagina binnen een rich-text slide (0-gebaseerd).
   int _richTextPage = 0;
 
@@ -741,6 +750,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _lastSentTimelineStep = _timelineStep;
     audienceChannel
         .invokeMethod('update', {
+          'seq': ++_syncSeq,
           'index': _index,
           'blank': blank,
           'richTextPage': _richTextPage,

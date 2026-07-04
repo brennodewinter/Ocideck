@@ -1121,6 +1121,83 @@ const _dutchSourceAddDe = {
   'Pen · markeerstift · ⇧E': 'Stift · Marker · ⇧E',
   'Gestapelde staaf': 'Gestapelte Balken',
   'Spreiding': 'Streudiagramm',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn blättert durch die Folien',
+  'Wacht op antwoord…': 'Warte auf Antwort…',
+  'Afbeelding slidevullend': 'Bild füllt die Folie',
+  'Vult de hele slide en snijdt de randen bij':
+      'Füllt die ganze Folie und beschneidet die Ränder',
+  'Afbeelding vult hele slide': 'Bild füllt die ganze Folie',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'An: füllt die ganze Folie, Titel darüber (beschnitten). Aus: Bild oben, Titel in einem Band darunter.',
+  'Grijze waas over afbeelding': 'Grauer Schleier über dem Bild',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Beruhigt den Hintergrund hinter Titel und Untertitel.',
+  'Licht': 'Hell',
+  'Donker': 'Dunkel',
+  'Pen (D)': 'Stift (D)',
+  'Markeerstift (T)': 'Textmarker (T)',
+  'Gum (E / Shift+E)': 'Radierer (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metrik',
+  'Inhoud': 'Inhalt',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Frage ist nicht spielbar: gib mindestens eine richtige und eine falsche Antwort an.',
+  'CSV-koppeling verbreken?': 'CSV-Verknüpfung trennen?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Die Daten bleiben in der Folie, aber Änderungen an der CSV-Datei kommen nicht mehr mit.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Bild abgelehnt: zu groß (max. 64 MB) oder kein unterstütztes Format.',
+  'Geen afbeelding op het klembord.': 'Kein Bild in der Zwischenablage.',
+  'Kon de afbeelding niet opslaan.': 'Bild konnte nicht gespeichert werden.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Bild konnte nicht gelöscht werden. Prüfe, ob die Datei nicht in Gebrauch ist und ob du Schreibrechte hast.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Keine Schreibrechte an diesem Ort. Wähle einen anderen Ordner.',
+  'De schijf is vol.': 'Die Festplatte ist voll.',
+  'Bestand of map niet gevonden.': 'Datei oder Ordner nicht gefunden.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Datei konnte nicht gelesen oder geschrieben werden.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Netzwerkfehler — prüfe deine Verbindung und versuche es erneut.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Etwas ist unerwartet schiefgelaufen. Details stehen im Protokoll.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud ist nicht (richtig) eingerichtet — prüfe die Serverdaten unter Einstellungen → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Dieser Server ist nicht erlaubt. Markiere einen privaten/LAN-Server zuerst als vertrauenswürdig unter Einstellungen → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server nicht erreichbar — prüfe deine Verbindung und die Server-URL.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Anmeldung fehlgeschlagen. Prüfe Benutzername und Passwort; verwende bei Nextcloud ein App-Passwort, nicht dein Kontopasswort.',
+  'Bestand of map niet gevonden op de server.':
+      'Datei oder Ordner auf dem Server nicht gefunden.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Die Datei ist größer als das erlaubte Limit.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Der Server hat einen Fehler gemeldet. Versuche es später erneut.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Die Datei ist beschädigt oder unlesbar.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Import verweigert: das Paket überschreitet die Sicherheitslimits.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Von dieser URL konnte keine Präsentation geholt werden. Prüfe die URL und deine Verbindung.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Anmeldung fehlgeschlagen — prüfe Benutzername und Passwort. Tipp: verwende bei Nextcloud ein App-Passwort (Einstellungen → Sicherheit), nicht dein Kontopasswort.',
+  'Annuleren…': 'Abbrechen…',
+  'Afbeeldingen vergelijken…': 'Bilder vergleichen…',
+  'Presentaties scannen…': 'Präsentationen durchsuchen…',
+  'Opruimen…': 'Aufräumen…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Ein oder mehrere Bibliotheksordner konnten nicht gelesen werden; die Liste kann unvollständig sein.',
+  'Uit recente bestanden verwijderen':
+      'Aus zuletzt geöffneten Dateien entfernen',
+  'OciDeck wordt gestart…': 'OciDeck wird gestartet…',
+  'Herstelbestanden': 'Wiederherstellungsdateien',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Absturz-Wiederherstellungsdateien enthalten den vollständigen Inhalt deiner Präsentationen im Klartext. Sie werden nach 7 Tagen automatisch aufgeräumt; hier kannst du sie sofort löschen.',
+  'Herstelbestanden nu wissen': 'Wiederherstellungsdateien jetzt löschen',
+  'Er waren geen herstelbestanden.': 'Es gab keine Wiederherstellungsdateien.',
+  'herstelbestand(en) gewist.': 'Wiederherstellungsdatei(en) gelöscht.',
   'Klaar voor export': 'Bereit zum Export',
   'kwaliteitswaarschuwing(en)': 'Qualitätswarnung(en)',
   'Nog opslaan nodig': 'Zuerst speichern',

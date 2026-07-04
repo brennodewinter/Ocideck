@@ -253,7 +253,11 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                       ),
                     )
                   : const Icon(Icons.layers_clear_outlined, size: 16),
-              label: Text(l10n.d('Duplicaten opruimen')),
+              label: Text(
+                _deduping && _dedupePhase != null
+                    ? _dedupePhase!
+                    : l10n.d('Duplicaten opruimen'),
+              ),
               style: OutlinedButton.styleFrom(
                 foregroundColor: const Color(0xFF8B949E),
                 side: const BorderSide(color: Color(0xFF30363D)),

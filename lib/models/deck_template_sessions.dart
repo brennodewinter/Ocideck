@@ -134,6 +134,14 @@ List<Slide> _buildPplFlightPrep(String deckTitle) => [
     ['Personen aan boord', '…', '…'],
     ['Bijzonderheden', '…', '…'],
   ], editable: true),
+  ..._pplPlanningSlides(),
+  ..._pplPerformanceSlides(),
+  ..._pplBriefingSlides(),
+];
+
+/// Route, luchtruim, weer en NOTAMs — het planningsdeel van de
+/// PPL-vluchtvoorbereiding.
+List<Slide> _pplPlanningSlides() => [
   _table('Route en navigatiepunten', [
     [
       'Leg',
@@ -185,6 +193,10 @@ List<Slide> _buildPplFlightPrep(String deckTitle) => [
     ['…', '…', '…', '…', '…'],
     ['…', '…', '…', '…', '…'],
   ], editable: true),
+];
+
+/// Prestatie, massa & zwaartepunt, brandstof en alternates.
+List<Slide> _pplPerformanceSlides() => [
   _table('Start- en landingsprestatie', [
     [
       'Veld/baan',
@@ -235,6 +247,10 @@ List<Slide> _buildPplFlightPrep(String deckTitle) => [
     ['…', '…', '…', '…', '…', '…', '…'],
     ['…', '…', '…', '…', '…', '…', '…'],
   ], editable: true),
+];
+
+/// Threat & error management, briefings en het laatste GO/NO-GO-besluit.
+List<Slide> _pplBriefingSlides() => [
   _table('Threat & Error Management', [
     ['Threat', 'Wanneer', 'Mogelijke fout', 'Preventie', 'Herstelactie'],
     ['Lage wolkenbasis', '…', '…', '…', '…'],

@@ -1133,6 +1133,82 @@ const _dutchSourcePt = {
   'Pen · markeerstift · ⇧E': 'Caneta · marcador · ⇧E',
   'Gestapelde staaf': 'Barras empilhadas',
   'Spreiding': 'Dispersão',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn percorre os diapositivos',
+  'Wacht op antwoord…': 'A aguardar resposta…',
+  'Afbeelding slidevullend': 'A imagem preenche o diapositivo',
+  'Vult de hele slide en snijdt de randen bij':
+      'Preenche todo o diapositivo e corta as margens',
+  'Afbeelding vult hele slide': 'A imagem preenche todo o diapositivo',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Ligado: preenche todo o diapositivo, título por cima (cortado). Desligado: imagem em cima, título numa faixa por baixo.',
+  'Grijze waas over afbeelding': 'Véu cinzento sobre a imagem',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Torna o fundo mais calmo atrás do título e do subtítulo.',
+  'Licht': 'Claro',
+  'Donker': 'Escuro',
+  'Pen (D)': 'Caneta (D)',
+  'Markeerstift (T)': 'Marcador (T)',
+  'Gum (E / Shift+E)': 'Borracha (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Métrica',
+  'Inhoud': 'Conteúdo',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'A pergunta não pode ser jogada: indique pelo menos uma resposta certa e uma errada.',
+  'CSV-koppeling verbreken?': 'Desligar o ficheiro CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Os dados permanecem no diapositivo, mas as alterações ao ficheiro CSV deixam de ser refletidas.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Imagem rejeitada: demasiado grande (máx. 64 MB) ou formato não suportado.',
+  'Geen afbeelding op het klembord.': 'Não há imagem na área de transferência.',
+  'Kon de afbeelding niet opslaan.': 'Não foi possível guardar a imagem.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Não foi possível eliminar a imagem. Verifique se o ficheiro não está em uso e se tem permissões de escrita.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Sem permissões de escrita nesta localização. Escolha outra pasta.',
+  'De schijf is vol.': 'O disco está cheio.',
+  'Bestand of map niet gevonden.': 'Ficheiro ou pasta não encontrados.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Não foi possível ler ou escrever o ficheiro.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Erro de rede — verifique a ligação e tente novamente.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Algo correu mal inesperadamente. Consulte o registo para detalhes.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'O Nextcloud não está (bem) configurado — verifique os dados do servidor em Definições → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Este servidor não é permitido. Marque primeiro um servidor privado/LAN como fiável em Definições → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Servidor inacessível — verifique a ligação e o URL do servidor.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Falha ao iniciar sessão. Verifique o utilizador e a palavra-passe; com o Nextcloud use uma palavra-passe de aplicação, não a da conta.',
+  'Bestand of map niet gevonden op de server.':
+      'Ficheiro ou pasta não encontrados no servidor.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'O ficheiro é maior do que o limite permitido.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'O servidor devolveu um erro. Tente novamente mais tarde.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'O ficheiro está danificado ou ilegível.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Importação recusada: o pacote excede os limites de segurança.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Não foi possível obter uma apresentação deste URL. Verifique o URL e a ligação.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Falha ao iniciar sessão — verifique o utilizador e a palavra-passe. Dica: com o Nextcloud use uma palavra-passe de aplicação (Definições → Segurança), não a da conta.',
+  'Annuleren…': 'A cancelar…',
+  'Afbeeldingen vergelijken…': 'A comparar imagens…',
+  'Presentaties scannen…': 'A analisar apresentações…',
+  'Opruimen…': 'A limpar…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Não foi possível ler uma ou mais pastas da biblioteca; a lista pode estar incompleta.',
+  'Uit recente bestanden verwijderen': 'Remover dos ficheiros recentes',
+  'OciDeck wordt gestart…': 'A iniciar o OciDeck…',
+  'Herstelbestanden': 'Ficheiros de recuperação',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Os ficheiros de recuperação contêm todo o conteúdo das suas apresentações em texto simples. São limpos automaticamente após 7 dias; aqui pode apagá-los de imediato.',
+  'Herstelbestanden nu wissen': 'Apagar ficheiros de recuperação agora',
+  'Er waren geen herstelbestanden.': 'Não havia ficheiros de recuperação.',
+  'herstelbestand(en) gewist.': 'ficheiro(s) de recuperação apagado(s).',
   'Klaar voor export': 'Pronto para exportar',
   'kwaliteitswaarschuwing(en)': 'aviso(s) de qualidade',
   'Nog opslaan nodig': 'É preciso guardar primeiro',
@@ -1265,5 +1341,4 @@ const _dutchSourcePt = {
   'Naar prullenbak': 'Mover para o lixo',
   'Deze presentatie staat ook op een andere plek:':
       'Esta apresentação também existe noutro local:',
-  'Opruimen…': 'Limpar…',
 };

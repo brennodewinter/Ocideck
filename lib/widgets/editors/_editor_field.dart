@@ -49,18 +49,22 @@ mixin BgImageHandlers<T extends ConsumerStatefulWidget> on ConsumerState<T> {
   String? get bgImageBasePath;
 
   Future<void> pasteBgImage() async {
-    final path = await ref
-        .read(imageServiceProvider)
-        .pasteImage(projectPath: bgImageBasePath);
+    final path = await pasteImageWithFeedback(
+      context,
+      ref.read(imageServiceProvider),
+      projectPath: bgImageBasePath,
+    );
     if (path != null) {
       onSlideUpdate(editorSlide.copyWith(imagePath: path, imageCaption: ''));
     }
   }
 
   Future<void> pickBgImage() async {
-    final path = await ref
-        .read(imageServiceProvider)
-        .pickImage(projectPath: bgImageBasePath);
+    final path = await pickImageWithFeedback(
+      context,
+      ref.read(imageServiceProvider),
+      projectPath: bgImageBasePath,
+    );
     if (path != null) {
       onSlideUpdate(editorSlide.copyWith(imagePath: path, imageCaption: ''));
     }
@@ -754,4 +758,50 @@ class SectionLabel extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Kies een afbeelding via de bestandskiezer en meld een afwijzing (te groot,
+/// geen ondersteund formaat, schrijffout) aan de gebruiker; annuleren blijft
+/// stil. Geeft het geïmporteerde pad terug, of null.
+Future<String?> pickImageWithFeedback(
+  BuildContext context,
+  ImageService service, {
+  String? projectPath,
+}) async {
+  final outcome = await service.pickImageDetailed(projectPath: projectPath);
+  if (context.mounted) reportImageImportFailure(context, outcome.failure);
+  return outcome.path;
+}
+
+/// Plak een afbeelding van het klembord en meld waarom het niet lukte (geen
+/// afbeelding op het klembord, te groot, schrijffout) i.p.v. stil niets doen.
+Future<String?> pasteImageWithFeedback(
+  BuildContext context,
+  ImageService service, {
+  String? projectPath,
+}) async {
+  final outcome = await service.pasteImageDetailed(projectPath: projectPath);
+  if (context.mounted) reportImageImportFailure(context, outcome.failure);
+  return outcome.path;
+}
+
+/// Toon een SnackBar voor een mislukte afbeeldingsimport. Annuleren (of
+/// succes) toont niets.
+void reportImageImportFailure(
+  BuildContext context,
+  ImageImportFailure? failure,
+) {
+  if (failure == null || failure == ImageImportFailure.cancelled) return;
+  final l10n = context.l10n;
+  final message = switch (failure) {
+    ImageImportFailure.cancelled => '',
+    ImageImportFailure.rejected => l10n.d(
+      'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.',
+    ),
+    ImageImportFailure.noClipboardImage => l10n.d(
+      'Geen afbeelding op het klembord.',
+    ),
+    ImageImportFailure.writeFailed => l10n.d('Kon de afbeelding niet opslaan.'),
+  };
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
 }

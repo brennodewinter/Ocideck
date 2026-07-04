@@ -1117,6 +1117,82 @@ const _dutchSourceAddFy = {
   'Pen · markeerstift · ⇧E': 'Pen · markearstift · ⇧E',
   'Gestapelde staaf': 'Stapele staven',
   'Spreiding': 'Sparring',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn blêdet troch de slides',
+  'Wacht op antwoord…': 'Wachtsje op antwurd…',
+  'Afbeelding slidevullend': 'Ofbylding slidefoljend',
+  'Vult de hele slide en snijdt de randen bij':
+      'Follet de hiele slide en snijt de rânen by',
+  'Afbeelding vult hele slide': 'Ofbylding follet de hiele slide',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Oan: follet de hiele slide, titel deroerhinne (bysnien). Ut: byld boppe-oan, titel yn in bân derûnder.',
+  'Grijze waas over afbeelding': 'Grize waas oer de ôfbylding',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Makket de eftergrûn rêstiger efter titel en subtitel.',
+  'Licht': 'Ljocht',
+  'Donker': 'Tsjuster',
+  'Pen (D)': 'Pinne (D)',
+  'Markeerstift (T)': 'Markearstift (T)',
+  'Gum (E / Shift+E)': 'Gom (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metryk',
+  'Inhoud': 'Ynhâld',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Fraach is net spylber: jou op syn minst ien goed én ien ferkeard antwurd op.',
+  'CSV-koppeling verbreken?': 'CSV-keppeling ferbrekke?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'De data bliuwt yn de slide stean, mar wizigingen yn it CSV-bestân komme net mear mei.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Ofbylding wegere: te grut (maks. 64 MB) of gjin stipe formaat.',
+  'Geen afbeelding op het klembord.': 'Gjin ôfbylding op it klamboerd.',
+  'Kon de afbeelding niet opslaan.': 'Koe de ôfbylding net bewarje.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Koe de ôfbylding net fuortsmite. Kontrolearje oft it bestân net yn gebrûk is en oft jo skriuwrjochten hawwe.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Gjin skriuwrjochten op dit plak. Kies in oare map.',
+  'De schijf is vol.': 'De skiif is fol.',
+  'Bestand of map niet gevonden.': 'Bestân of map net fûn.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Koe it bestân net lêze of skriuwe.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Netwurkflater — kontrolearje jo ferbining en besykje it nochris.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Der gie ûnferwachts wat mis. Sjoch yn it lochboek foar details.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud is net (goed) ynsteld — kontrolearje de servergegevens by Ynstellingen → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Dizze server is net tastien. Markearje in privee/LAN-server earst as fertroud by Ynstellingen → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server net berikber — kontrolearje jo ferbining en de server-URL.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Oanmelden mislearre. Kontrolearje brûkersnamme en wachtwurd; brûk by Nextcloud in app-wachtwurd, net jo accountwachtwurd.',
+  'Bestand of map niet gevonden op de server.':
+      'Bestân of map net fûn op de server.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'It bestân is grutter as de tastiene limyt.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'De server joech in flater. Besykje it letter nochris.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'It bestân is skansearre of net te lêzen.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Ymport wegere: it pakket giet oer de feilichheidslimiten hinne.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Koe fan dizze URL gjin presintaasje ophelje. Kontrolearje de URL en jo ferbining.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Oanmelden mislearre — kontrolearje brûkersnamme en wachtwurd. Tip: brûk by Nextcloud in app-wachtwurd (Ynstellingen → Feilichheid), net jo accountwachtwurd.',
+  'Annuleren…': 'Annulearje…',
+  'Afbeeldingen vergelijken…': 'Ofbyldingen ferlykje…',
+  'Presentaties scannen…': 'Presintaasjes skenne…',
+  'Opruimen…': 'Opromje…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Koe ien of mear mappen fan de bibleteek net lêze; de list kin ûnfolslein wêze.',
+  'Uit recente bestanden verwijderen': 'Ut resinte bestannen fuortsmite',
+  'OciDeck wordt gestart…': 'OciDeck wurdt start…',
+  'Herstelbestanden': 'Werstelbestannen',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Crash-werstelbestannen befetsje de folsleine ynhâld fan jo presintaasjes yn platte tekst. Se wurde nei 7 dagen automatysk oprêden; hjir kinne jo se daliks wiskje.',
+  'Herstelbestanden nu wissen': 'Werstelbestannen no wiskje',
+  'Er waren geen herstelbestanden.': 'Der wiene gjin werstelbestannen.',
+  'herstelbestand(en) gewist.': 'werstelbestân(nen) wiske.',
   'Klaar voor export': 'Klear foar eksport',
   'kwaliteitswaarschuwing(en)': 'kwaliteitswarskôging(en)',
   'Nog opslaan nodig': 'Earst bewarje nedich',

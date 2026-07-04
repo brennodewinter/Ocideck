@@ -106,4 +106,16 @@ void main() {
 
     await tester.pumpWidget(const SizedBox());
   });
+
+  test('stale update sequence numbers are rejected, unnumbered accepted', () {
+    // Nieuwere en gelijk-oplopende nummers verwerken.
+    expect(isStaleUpdateSeq(5, 4), isFalse);
+    expect(isStaleUpdateSeq(1, -1), isFalse);
+    // Verouderd of duplicaat: negeren, zodat een trage aanroep een snellere
+    // nooit overschrijft.
+    expect(isStaleUpdateSeq(4, 5), isTrue);
+    expect(isStaleUpdateSeq(5, 5), isTrue);
+    // Berichten van een oudere presenter zonder nummer blijven werken.
+    expect(isStaleUpdateSeq(null, 99), isFalse);
+  });
 }

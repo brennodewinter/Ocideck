@@ -32,6 +32,7 @@ part 'parts/file_service_net.dart';
 part 'parts/file_service_open.dart';
 part 'parts/file_service_package.dart';
 part 'parts/file_service_project.dart';
+part 'parts/file_service_import.dart';
 
 /// A presentation found on disk while scanning a directory.
 class ScannedPresentation {
@@ -141,6 +142,35 @@ enum OpenFailure {
 
   /// The markdown is present but truncated or unparseable.
   corrupt,
+}
+
+/// Waarom een import (URL, pakket, WebDAV) geen deck opleverde — voor een
+/// gerichte melding in plaats van een generiek "kon niet importeren".
+enum ImportFailure {
+  /// Bestand of pakket is groter dan de toegestane limiet.
+  tooLarge,
+
+  /// ZIP of tekst is beschadigd/onleesbaar.
+  corrupt,
+
+  /// Wel opgehaald, maar geen Marp/OciDeck-presentatie.
+  unsupported,
+
+  /// Veiligheidslimiet geraakt (zip-bomb, te veel entries).
+  limitExceeded,
+
+  /// Ophalen zelf mislukte (URL, verbinding, statuscode).
+  network,
+}
+
+/// Uitkomst van een import: het pad naar de hoofd-markdown bij succes, anders
+/// een [failure] met de reden.
+class ImportOutcome {
+  final String? mdPath;
+  final ImportFailure? failure;
+
+  const ImportOutcome.ok(this.mdPath) : failure = null;
+  const ImportOutcome.failed(this.failure) : mdPath = null;
 }
 
 class FileService {
@@ -657,6 +687,9 @@ class FileService {
   static const maxPackageEntries = 10000;
   static const maxZipEntryPathLength = 512;
 
+  // Import (URL/pakket/markdown) leeft in parts/file_service_import.dart;
+  // hieronder staat alleen de gedeelde decode-/hergebruik-infrastructuur.
+
   /// Decodeer een pakket-zip veilig naar (naam → bytes)-leden, met dezelfde
   /// verdediging als de schijf-import: totale omvang, aantal entries,
   /// padlengte en een begrensde inflater die een zip-bom mid-decompressie
@@ -740,55 +773,6 @@ class FileService {
       }
     }
     return mdEntry;
-  }
-
-  /// Pak een pakket uit in een submap onder [destParentDir]. Geeft het pad
-  /// naar het uitgepakte markdown-bestand terug (om in een tab te openen).
-  /// Een eerdere import met exact dezelfde inhoud wordt hergebruikt in plaats
-  /// van een nieuwe kopie-map "naam (n)" te maken: wie hetzelfde deck nogmaals
-  /// opent (URL/WebDAV/zip) kreeg anders bij elke keer een extra kopie en dus
-  /// dubbele vermeldingen in recente presentaties. Wijkt de inhoud af (lokaal
-  /// bewerkt, of de bron is veranderd) dan blijft de kopie-map bestaan zodat
-  /// er nooit iets wordt overschreven.
-  Future<String?> importPackageBytes(
-    List<int> zipBytes,
-    String destParentDir, {
-    int maxBytes = maxPackageBytes,
-  }) async {
-    final entries = decodePackageEntries(zipBytes, maxBytes: maxBytes);
-    if (entries == null) return null;
-    final mdEntry = mainMarkdownEntry(entries);
-    if (mdEntry == null) return null;
-
-    final folderName = p.basenameWithoutExtension(mdEntry.name);
-    for (final existing in _importDirCandidates(destParentDir, folderName)) {
-      final resolvedMd = p.normalize(p.join(existing.path, mdEntry.name));
-      if (!p.isWithin(existing.path, resolvedMd)) break;
-      if (await _dirMatchesEntries(existing, entries)) return resolvedMd;
-    }
-    final destDir = _uniqueDir(destParentDir, folderName);
-    await destDir.create(recursive: true);
-
-    // Resolve an archive entry name to a path strictly inside [destDir], or
-    // null when it would escape (zip-slip: `../`, absolute paths, …).
-    String? safeOutPath(String entryName) {
-      final resolved = p.normalize(p.join(destDir.path, entryName));
-      if (resolved != destDir.path && !p.isWithin(destDir.path, resolved)) {
-        return null;
-      }
-      return resolved;
-    }
-
-    for (final entry in entries) {
-      final outPath = safeOutPath(entry.name);
-      if (outPath == null) continue; // skip path-traversal entries
-      final out = File(outPath);
-      await out.parent.create(recursive: true);
-      await writeBytesAtomic(out, entry.bytes);
-    }
-
-    // The main markdown must itself resolve inside the extraction folder.
-    return safeOutPath(mdEntry.name);
   }
 
   Directory _uniqueDir(String parent, String name) {
@@ -891,46 +875,6 @@ class FileService {
       deck: parsed.copyWith(themeProfile: activeProfileFor(projectPath: null)),
       failure: null,
     );
-  }
-
-  /// Sla losse markdown-bytes op als zelfstandig deck in een submap van
-  /// [destParentDir] en geef het pad naar het `.md`-bestand terug. Weigert
-  /// inhoud die niet op een Marp-deck lijkt of niet als UTF-8 te lezen is.
-  /// Gedeeld door de URL-import en de WebDAV-bron. Net als bij
-  /// [importPackageBytes] wordt een eerdere import met identieke markdown
-  /// hergebruikt, zodat hetzelfde deck nogmaals openen geen kopie-map en geen
-  /// dubbele vermelding in recente presentaties oplevert.
-  Future<String?> importMarkdownBytes(
-    List<int> bytes,
-    String destParentDir,
-    String suggestedName,
-  ) async {
-    if (bytes.length > maxDeckMarkdownBytes) return null;
-    final String markdown;
-    try {
-      markdown = utf8.decode(bytes);
-    } catch (e, s) {
-      logError('FileService.importMarkdownBytes: UTF-8 decode failed', e, s);
-      return null;
-    }
-    if (!markdown.contains('marp') && !markdown.contains('---')) return null;
-
-    var base = p.basenameWithoutExtension(suggestedName);
-    if (base.isEmpty) base = 'presentatie';
-    // Vergelijk als bytes zoals writeStringAtomic ze schreef (utf8), zodat
-    // een niet-UTF-8-bestand in een kandidaatmap gewoon "anders" is in
-    // plaats van een decodeerfout.
-    final encoded = utf8.encode(markdown);
-    for (final existing in _importDirCandidates(destParentDir, base)) {
-      final existingMd = File(p.join(existing.path, '$base.md'));
-      if (!existingMd.existsSync()) continue;
-      if (await _fileHasBytes(existingMd, encoded)) return existingMd.path;
-    }
-    final destDir = _uniqueDir(destParentDir, base);
-    await destDir.create(recursive: true);
-    final mdPath = p.join(destDir.path, '$base.md');
-    await writeStringAtomic(File(mdPath), markdown);
-    return mdPath;
   }
 
   Future<String?> pickPackageFile({String? initialDirectory}) async {

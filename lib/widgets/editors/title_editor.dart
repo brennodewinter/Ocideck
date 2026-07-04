@@ -127,10 +127,13 @@ class _TitleEditorState extends ConsumerState<TitleEditor>
             contentPadding: EdgeInsets.zero,
             dense: true,
             controlAffinity: ListTileControlAffinity.leading,
-            title: const Text('Afbeelding vult hele slide'),
-            subtitle: const Text(
-              'Aan: vult de hele slide, titel eroverheen (bijgesneden). '
-              'Uit: beeld bovenaan, titel in een band eronder.',
+            title: Text(context.l10n.d('Afbeelding vult hele slide')),
+            subtitle: Text(
+              // Eén letterlijke string: de l10n-test herkent geen
+              // aaneengeplakte stringdelen als één bronsleutel.
+              context.l10n.d(
+                'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.',
+              ),
             ),
           ),
           if (widget.slide.imageSize != 0) ...[
@@ -151,9 +154,11 @@ class _TitleEditorState extends ConsumerState<TitleEditor>
             contentPadding: EdgeInsets.zero,
             dense: true,
             controlAffinity: ListTileControlAffinity.leading,
-            title: const Text('Grijze waas over afbeelding'),
-            subtitle: const Text(
-              'Maakt de achtergrond rustiger achter titel en subtitel.',
+            title: Text(context.l10n.d('Grijze waas over afbeelding')),
+            subtitle: Text(
+              context.l10n.d(
+                'Maakt de achtergrond rustiger achter titel en subtitel.',
+              ),
             ),
           ),
           const SizedBox(height: 12),
@@ -163,14 +168,14 @@ class _TitleEditorState extends ConsumerState<TitleEditor>
             spacing: 8,
             children: [
               ChoiceChip(
-                label: const Text('Thema'),
+                label: Text(context.l10n.d('Thema')),
                 selected: widget.slide.titleTextColorOverride.isEmpty,
                 onSelected: (_) => widget.onUpdate(
                   widget.slide.copyWith(titleTextColorOverride: ''),
                 ),
               ),
               ChoiceChip(
-                label: const Text('Licht'),
+                label: Text(context.l10n.d('Licht')),
                 selected:
                     widget.slide.titleTextColorOverride.toUpperCase() ==
                     '#FFFFFF',
@@ -179,7 +184,7 @@ class _TitleEditorState extends ConsumerState<TitleEditor>
                 ),
               ),
               ChoiceChip(
-                label: const Text('Donker'),
+                label: Text(context.l10n.d('Donker')),
                 selected:
                     widget.slide.titleTextColorOverride.toUpperCase() ==
                     '#111827',

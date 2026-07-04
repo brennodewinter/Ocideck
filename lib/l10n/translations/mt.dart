@@ -1128,6 +1128,82 @@ const _dutchSourceMt = {
   'Pen · markeerstift · ⇧E': 'Pinna · markatur · ⇧E',
   'Gestapelde staaf': 'Bar stakkjat',
   'Spreiding': 'Scatter',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn iqalleb bejn l-islajds',
+  'Wacht op antwoord…': 'Qed nistennew tweġiba…',
+  'Afbeelding slidevullend': 'L-istampa timla l-islajd',
+  'Vult de hele slide en snijdt de randen bij':
+      'Timla l-islajd kollu u taqta\' t-truf',
+  'Afbeelding vult hele slide': 'L-istampa timla l-islajd kollu',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Mixgħul: timla l-islajd kollu, it-titlu fuqha (maqtugħ). Mitfi: l-istampa fuq, it-titlu f\'faxxa taħtha.',
+  'Grijze waas over afbeelding': 'Velu griż fuq l-istampa',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Tikkalma l-isfond wara t-titlu u s-sottotitlu.',
+  'Licht': 'Ċar',
+  'Donker': 'Skur',
+  'Pen (D)': 'Pinna (D)',
+  'Markeerstift (T)': 'Evidenzjatur (T)',
+  'Gum (E / Shift+E)': 'Gomma (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metrika',
+  'Inhoud': 'Kontenut',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Il-mistoqsija ma tistax tintlagħab: agħti mill-inqas tweġiba waħda tajba u waħda ħażina.',
+  'CSV-koppeling verbreken?': 'Taqta\' r-rabta mas-CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Id-data tibqa\' fl-islajd, imma bidliet fil-fajl CSV ma jibqgħux jidħlu.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'L-istampa ġiet miċħuda: kbira wisq (mass. 64 MB) jew format mhux appoġġat.',
+  'Geen afbeelding op het klembord.': 'L-ebda stampa fil-clipboard.',
+  'Kon de afbeelding niet opslaan.': 'Ma setgħetx tiġi salvata l-istampa.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Ma setgħetx titħassar l-istampa. Iċċekkja li l-fajl mhux qed jintuża u li għandek permessi tal-kitba.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'L-ebda permess tal-kitba f\'dan il-post. Agħżel folder ieħor.',
+  'De schijf is vol.': 'Id-diska mimlija.',
+  'Bestand of map niet gevonden.': 'Il-fajl jew il-folder ma nstabx.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Ma setax jinqara jew jinkiteb il-fajl.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Żball tan-netwerk — iċċekkja l-konnessjoni u erġa\' pprova.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Xi ħaġa marret ħażin bla mistenni. Ara l-log għad-dettalji.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud mhux issettjat (sew) — iċċekkja d-dettalji tas-server taħt Settings → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Dan is-server mhux permess. L-ewwel immarka server privat/LAN bħala fdat taħt Settings → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Is-server mhux jintlaħaq — iċċekkja l-konnessjoni u l-URL tas-server.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Il-login falla. Iċċekkja l-isem tal-utent u l-password; ma\' Nextcloud uża password tal-app, mhux dik tal-kont.',
+  'Bestand of map niet gevonden op de server.':
+      'Il-fajl jew il-folder ma nstabx fuq is-server.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Il-fajl akbar mil-limitu permess.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Is-server ta żball. Erġa\' pprova aktar tard.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Il-fajl bil-ħsara jew ma jinqarax.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'L-importazzjoni miċħuda: il-pakkett jaqbeż il-limiti tas-sigurtà.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Ma setgħetx tinġab preżentazzjoni minn dan il-URL. Iċċekkja l-URL u l-konnessjoni.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Il-login falla — iċċekkja l-isem tal-utent u l-password. Suġġeriment: ma\' Nextcloud uża password tal-app (Settings → Sigurtà), mhux dik tal-kont.',
+  'Annuleren…': 'Qed jitħassar…',
+  'Afbeeldingen vergelijken…': 'Qed jitqabblu l-istampi…',
+  'Presentaties scannen…': 'Qed jiġu skenjati l-preżentazzjonijiet…',
+  'Opruimen…': 'Tindif…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Ma setgħux jinqraw folder wieħed jew aktar tal-librerija; il-lista tista\' ma tkunx kompluta.',
+  'Uit recente bestanden verwijderen': 'Neħħi mill-fajls riċenti',
+  'OciDeck wordt gestart…': 'OciDeck qed jinbeda…',
+  'Herstelbestanden': 'Fajls tal-irkupru',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Il-fajls tal-irkupru fihom il-kontenut sħiħ tal-preżentazzjonijiet tiegħek f\'test sempliċi. Jitnaddfu awtomatikament wara 7 ijiem; hawnhekk tista\' tħassarhom minnufih.',
+  'Herstelbestanden nu wissen': 'Ħassar il-fajls tal-irkupru issa',
+  'Er waren geen herstelbestanden.': 'Ma kienx hemm fajls tal-irkupru.',
+  'herstelbestand(en) gewist.': 'fajl(s) tal-irkupru mħassra.',
   'Klaar voor export': 'Lest għall-esportazzjoni',
   'kwaliteitswaarschuwing(en)': 'twissija(iet) tal-kwalità',
   'Nog opslaan nodig': 'L-ewwel trid tissejvja',
@@ -1260,5 +1336,4 @@ const _dutchSourceMt = {
   'Naar prullenbak': 'Lejn l-iskart',
   'Deze presentatie staat ook op een andere plek:':
       'Din il-preżentazzjoni teżisti wkoll x’imkien ieħor:',
-  'Opruimen…': 'Naddaf…',
 };

@@ -41,6 +41,9 @@ class SlideRasterizer {
     int targetWidth = 1920,
     void Function(int done, int total)? onProgress,
     void Function(String phase, int done, int total)? onStage,
+    // Polled tussen slides: true = stoppen. De aanroeper krijgt dan een
+    // onvolledige lijst terug en hoort die weg te gooien.
+    bool Function()? isCancelled,
   }) async {
     if (slides.isEmpty) return const [];
 
@@ -109,6 +112,7 @@ class SlideRasterizer {
       if (!context.mounted) return results;
 
       for (var i = 0; i < slides.length; i++) {
+        if (isCancelled?.call() ?? false) break;
         onStage?.call('prepare', i, slides.length);
         hostKey.currentState!.showSlide(
           slides[i],

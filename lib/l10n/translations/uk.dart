@@ -1127,6 +1127,82 @@ const _dutchSourceUk = {
   'Pen · markeerstift · ⇧E': 'Ручка · маркер · ⇧E',
   'Gestapelde staaf': 'Стовпчикова з накопиченням',
   'Spreiding': 'Точкова',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn гортає слайди',
+  'Wacht op antwoord…': 'Очікування відповіді…',
+  'Afbeelding slidevullend': 'Зображення заповнює слайд',
+  'Vult de hele slide en snijdt de randen bij':
+      'Заповнює весь слайд і обрізає краї',
+  'Afbeelding vult hele slide': 'Зображення заповнює весь слайд',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Увімк.: заповнює весь слайд, заголовок зверху (обрізано). Вимк.: зображення вгорі, заголовок у смузі під ним.',
+  'Grijze waas over afbeelding': 'Сірий серпанок поверх зображення',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Робить тло спокійнішим за заголовком і підзаголовком.',
+  'Licht': 'Світлий',
+  'Donker': 'Темний',
+  'Pen (D)': 'Перо (D)',
+  'Markeerstift (T)': 'Маркер (T)',
+  'Gum (E / Shift+E)': 'Гумка (E / Shift+E)',
+  'Laser (X)': 'Лазер (X)',
+  'Metriek': 'Метрика',
+  'Inhoud': 'Вміст',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Питання не можна відтворити: вкажіть щонайменше одну правильну та одну неправильну відповідь.',
+  'CSV-koppeling verbreken?': 'Розірвати зв\'язок із CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Дані залишаться у слайді, але зміни у файлі CSV більше не підтягуватимуться.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Зображення відхилено: завелике (макс. 64 МБ) або непідтримуваний формат.',
+  'Geen afbeelding op het klembord.': 'У буфері обміну немає зображення.',
+  'Kon de afbeelding niet opslaan.': 'Не вдалося зберегти зображення.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Не вдалося видалити зображення. Перевірте, чи файл не використовується і чи маєте ви права на запис.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Немає прав на запис у цьому місці. Виберіть іншу теку.',
+  'De schijf is vol.': 'Диск заповнений.',
+  'Bestand of map niet gevonden.': 'Файл або теку не знайдено.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Не вдалося прочитати або записати файл.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Помилка мережі — перевірте з\'єднання і спробуйте ще раз.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Сталася неочікувана помилка. Подробиці в журналі.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud не налаштовано (правильно) — перевірте дані сервера в Налаштування → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Цей сервер не дозволено. Спочатку позначте приватний/LAN-сервер як довірений у Налаштування → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Сервер недоступний — перевірте з\'єднання та URL сервера.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Не вдалося увійти. Перевірте ім\'я користувача та пароль; для Nextcloud використовуйте пароль застосунку, а не пароль облікового запису.',
+  'Bestand of map niet gevonden op de server.':
+      'Файл або теку не знайдено на сервері.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Файл перевищує дозволений ліміт.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Сервер повернув помилку. Спробуйте пізніше.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Файл пошкоджений або нечитабельний.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Імпорт відхилено: пакет перевищує межі безпеки.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Не вдалося отримати презентацію за цією URL-адресою. Перевірте URL і з\'єднання.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Не вдалося увійти — перевірте ім\'я користувача та пароль. Порада: для Nextcloud використовуйте пароль застосунку (Налаштування → Безпека), а не пароль облікового запису.',
+  'Annuleren…': 'Скасування…',
+  'Afbeeldingen vergelijken…': 'Порівняння зображень…',
+  'Presentaties scannen…': 'Сканування презентацій…',
+  'Opruimen…': 'Очищення…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Не вдалося прочитати одну чи кілька тек бібліотеки; список може бути неповним.',
+  'Uit recente bestanden verwijderen': 'Прибрати з останніх файлів',
+  'OciDeck wordt gestart…': 'Запуск OciDeck…',
+  'Herstelbestanden': 'Файли відновлення',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Файли відновлення містять увесь вміст ваших презентацій у відкритому тексті. Вони автоматично очищуються через 7 днів; тут їх можна стерти одразу.',
+  'Herstelbestanden nu wissen': 'Стерти файли відновлення зараз',
+  'Er waren geen herstelbestanden.': 'Файлів відновлення не було.',
+  'herstelbestand(en) gewist.': 'файл(и) відновлення стерто.',
   'Klaar voor export': 'Готово до експорту',
   'kwaliteitswaarschuwing(en)': 'попередження щодо якості',
   'Nog opslaan nodig': 'Спершу збережіть',
@@ -1256,5 +1332,4 @@ const _dutchSourceUk = {
   'Naar prullenbak': 'У смітник',
   'Deze presentatie staat ook op een andere plek:':
       'Ця презентація існує також в іншому місці:',
-  'Opruimen…': 'Прибрати…',
 };

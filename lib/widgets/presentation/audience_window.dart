@@ -28,6 +28,11 @@ const presenterChannel = WindowMethodChannel(
   mode: ChannelMode.unidirectional,
 );
 
+/// True wanneer een 'update'-bericht met [seq] ouder is dan het laatst
+/// verwerkte nummer [lastSeq]. Berichten zonder nummer (oudere presenter)
+/// worden altijd verwerkt.
+bool isStaleUpdateSeq(int? seq, int lastSeq) => seq != null && seq <= lastSeq;
+
 /// The app that runs inside the secondary (beamer) window. It only renders the
 /// current slide fullscreen; the presenter window drives it via [audienceChannel].
 class AudienceWindowApp extends StatefulWidget {
@@ -52,6 +57,8 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   int _richTextPage = 0;
   int _timelineStep = 0;
   int _blank = 0; // 0 = none, 1 = black, 2 = white
+  // Hoogst verwerkte 'update'-sequencenummer; oudere berichten worden genegeerd.
+  int _lastUpdateSeq = -1;
 
   // Annotation layer, keyed by slide index (the beamer has no stable ids).
   final Map<int, List<InkStroke>> _ink = {};
@@ -109,6 +116,12 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
       case 'update':
         final m = Map<String, dynamic>.from(call.arguments as Map);
         if (!mounted) return null;
+        // Verwerp verouderde updates: aanroepen komen niet gegarandeerd in
+        // volgorde binnen, en bij snel navigeren mag een oudere slide een
+        // nieuwere nooit overschrijven.
+        final seq = (m['seq'] as num?)?.toInt();
+        if (isStaleUpdateSeq(seq, _lastUpdateSeq)) return null;
+        if (seq != null) _lastUpdateSeq = seq;
         setState(() {
           _index = (m['index'] as num?)?.toInt() ?? _index;
           _richTextPage = (m['richTextPage'] as num?)?.toInt() ?? 0;

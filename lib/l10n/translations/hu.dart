@@ -1117,6 +1117,82 @@ const _dutchSourceHu = {
   'Pen · markeerstift · ⇧E': 'Toll · szövegkiemelő · ⇧E',
   'Gestapelde staaf': 'Halmozott oszlop',
   'Spreiding': 'Pontdiagram',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn lapoz a diák között',
+  'Wacht op antwoord…': 'Válaszra várunk…',
+  'Afbeelding slidevullend': 'A kép kitölti a diát',
+  'Vult de hele slide en snijdt de randen bij':
+      'Kitölti az egész diát és levágja a széleket',
+  'Afbeelding vult hele slide': 'A kép kitölti az egész diát',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Be: kitölti az egész diát, a cím fölötte (levágva). Ki: kép felül, cím egy sávban alatta.',
+  'Grijze waas over afbeelding': 'Szürke fátyol a képen',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Nyugodtabbá teszi a hátteret a cím és az alcím mögött.',
+  'Licht': 'Világos',
+  'Donker': 'Sötét',
+  'Pen (D)': 'Toll (D)',
+  'Markeerstift (T)': 'Szövegkiemelő (T)',
+  'Gum (E / Shift+E)': 'Radír (E / Shift+E)',
+  'Laser (X)': 'Lézer (X)',
+  'Metriek': 'Metrika',
+  'Inhoud': 'Tartalom',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'A kérdés nem játszható le: adj meg legalább egy helyes és egy helytelen választ.',
+  'CSV-koppeling verbreken?': 'Megszünteti a CSV-kapcsolatot?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Az adatok a dián maradnak, de a CSV-fájl változásai már nem érvényesülnek.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'A kép elutasítva: túl nagy (max. 64 MB) vagy nem támogatott formátum.',
+  'Geen afbeelding op het klembord.': 'Nincs kép a vágólapon.',
+  'Kon de afbeelding niet opslaan.': 'A képet nem sikerült menteni.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'A képet nem sikerült törölni. Ellenőrizd, hogy a fájl nincs-e használatban, és van-e írási jogod.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Nincs írási jog ezen a helyen. Válassz másik mappát.',
+  'De schijf is vol.': 'A lemez megtelt.',
+  'Bestand of map niet gevonden.': 'A fájl vagy mappa nem található.',
+  'Kon het bestand niet lezen of schrijven.':
+      'A fájlt nem sikerült olvasni vagy írni.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Hálózati hiba — ellenőrizd a kapcsolatot, és próbáld újra.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Váratlan hiba történt. Részletek a naplóban.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'A Nextcloud nincs (jól) beállítva — ellenőrizd a szerveradatokat a Beállítások → Nextcloud alatt.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Ez a szerver nem engedélyezett. Először jelöld megbízhatónak a privát/LAN szervert a Beállítások → Nextcloud alatt.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'A szerver nem érhető el — ellenőrizd a kapcsolatot és a szerver URL-jét.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'A bejelentkezés nem sikerült. Ellenőrizd a felhasználónevet és a jelszót; Nextcloudnál alkalmazásjelszót használj, ne a fiókjelszavadat.',
+  'Bestand of map niet gevonden op de server.':
+      'A fájl vagy mappa nem található a szerveren.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'A fájl nagyobb a megengedett korlátnál.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'A szerver hibát adott vissza. Próbáld újra később.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'A fájl sérült vagy olvashatatlan.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Az importálás elutasítva: a csomag túllépi a biztonsági korlátokat.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Erről az URL-ről nem sikerült prezentációt letölteni. Ellenőrizd az URL-t és a kapcsolatot.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'A bejelentkezés nem sikerült — ellenőrizd a felhasználónevet és a jelszót. Tipp: Nextcloudnál alkalmazásjelszót használj (Beállítások → Biztonság), ne a fiókjelszavadat.',
+  'Annuleren…': 'Megszakítás…',
+  'Afbeeldingen vergelijken…': 'Képek összehasonlítása…',
+  'Presentaties scannen…': 'Prezentációk átvizsgálása…',
+  'Opruimen…': 'Takarítás…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Egy vagy több könyvtármappát nem sikerült beolvasni; a lista hiányos lehet.',
+  'Uit recente bestanden verwijderen': 'Eltávolítás a legutóbbi fájlok közül',
+  'OciDeck wordt gestart…': 'Az OciDeck indítása…',
+  'Herstelbestanden': 'Helyreállítási fájlok',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'A helyreállítási fájlok a prezentációid teljes tartalmát tartalmazzák egyszerű szövegként. 7 nap után automatikusan törlődnek; itt azonnal törölheted őket.',
+  'Herstelbestanden nu wissen': 'Helyreállítási fájlok törlése most',
+  'Er waren geen herstelbestanden.': 'Nem voltak helyreállítási fájlok.',
+  'herstelbestand(en) gewist.': 'helyreállítási fájl törölve.',
   'Klaar voor export': 'Exportra kész',
   'kwaliteitswaarschuwing(en)': 'minőségi figyelmeztetés(ek)',
   'Nog opslaan nodig': 'Előbb menteni kell',
@@ -1244,5 +1320,4 @@ const _dutchSourceHu = {
   'Naar prullenbak': 'A kukába',
   'Deze presentatie staat ook op een andere plek:':
       'Ez a prezentáció máshol is létezik:',
-  'Opruimen…': 'Rendbetétel…',
 };

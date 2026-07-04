@@ -284,16 +284,63 @@ void main() {
         () => const ThemeProfile(),
       );
       expect(huge.length + md.length, greaterThan(maxBytes));
-      expect(
-        await service.importPackageBytes(
-          zipBytes,
-          temp.path,
-          maxBytes: maxBytes,
-        ),
-        isNull,
+      final outcome = await service.importPackageBytesDetailed(
+        zipBytes,
+        temp.path,
+        maxBytes: maxBytes,
       );
+      expect(outcome.mdPath, isNull);
+      expect(outcome.failure, ImportFailure.limitExceeded);
+      // Een afgebroken extractie ruimt de half uitgepakte map weer op.
+      expect(temp.listSync(), isEmpty);
     },
   );
+
+  test('importPackageBytesDetailed names the refusal reason', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_zip_reason_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+    final service = FileService(
+      MarkdownService(),
+      ImageService(),
+      () => const ThemeProfile(),
+    );
+
+    // Een pseudo-zip levert bij de tolerante decoder een leeg archief op:
+    // geen markdown → unsupported.
+    final notAZip = await service.importPackageBytesDetailed(
+      utf8.encode('PK\x03\x04not-a-zip'),
+      temp.path,
+    );
+    expect(notAZip.failure, ImportFailure.unsupported);
+
+    // Ongeldig UTF-8 in een los markdownbestand → corrupt.
+    final badUtf8 = await service.importMarkdownBytesDetailed(
+      [0xC3, 0x28, 0xA0, 0xA1],
+      temp.path,
+      'kapot.md',
+    );
+    expect(badUtf8.failure, ImportFailure.corrupt);
+
+    // Zip zonder markdown → unsupported.
+    final archive = Archive();
+    final png = utf8.encode('bytes');
+    archive.addFile(ArchiveFile('images/pic.png', png.length, png));
+    final noMd = await service.importPackageBytesDetailed(
+      ZipEncoder().encode(archive),
+      temp.path,
+    );
+    expect(noMd.failure, ImportFailure.unsupported);
+
+    // Te groot → tooLarge.
+    final tooBig = await service.importPackageBytesDetailed(
+      List<int>.filled(17, 0),
+      temp.path,
+      maxBytes: 16,
+    );
+    expect(tooBig.failure, ImportFailure.tooLarge);
+  });
 
   test(
     'importFromUrl refuses non-web schemes and private/loopback hosts',

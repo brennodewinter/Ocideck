@@ -97,22 +97,20 @@ Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
   }
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
-  bool ok;
+  ImportFailure? failure;
   try {
-    ok = await ref
+    failure = await ref
         .read(tabsProvider.notifier)
         .importFromUrl(url, homeDir: ref.read(settingsProvider).homeDirectory);
   } catch (e, s) {
     // Een platform- of IO-fout mag nooit als stilte eindigen: de gebruiker
     // heeft net een URL ingetikt en verwacht óf een tab óf een melding.
     logError('_importFromUrl: import failed', e, s);
-    ok = false;
+    failure = ImportFailure.network;
   }
-  if (!ok && context.mounted) {
+  if (failure != null && context.mounted) {
     messenger.showSnackBar(
-      SnackBar(
-        content: Text(l10n.d('Kon van deze URL geen presentatie ophalen.')),
-      ),
+      SnackBar(content: Text(importFailureMessage(l10n, failure))),
     );
   }
 }
@@ -176,8 +174,13 @@ Future<void> _openFromNextcloud(BuildContext context, WidgetRef ref) async {
     _reportOpenFailure(messenger, l10n, result);
     // OpenResult.blocked toont al het veiligheidsalarm via de shell.
   } on WebdavException catch (e) {
+    logWarning('shell: WebDAV-download mislukt', e);
     messenger.showSnackBar(
-      SnackBar(content: Text('${l10n.d('Downloaden mislukt:')} ${e.message}')),
+      SnackBar(
+        content: Text(
+          '${l10n.d('Downloaden mislukt:')} ${webdavErrorMessage(l10n, e)}',
+        ),
+      ),
     );
   }
 }
@@ -224,8 +227,13 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
       ),
     );
   } on WebdavException catch (e) {
+    logWarning('shell: WebDAV-opslaan mislukt', e);
     messenger.showSnackBar(
-      SnackBar(content: Text('${l10n.d('Opslaan mislukt:')} ${e.message}')),
+      SnackBar(
+        content: Text(
+          '${l10n.d('Opslaan mislukt:')} ${webdavErrorMessage(l10n, e)}',
+        ),
+      ),
     );
   }
 }
@@ -374,9 +382,25 @@ class _UrlImportDialogState extends State<_UrlImportDialog> {
   final _controller = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    // Herbouw bij elke wijziging zodat de Ophalen-knop live aan/uit gaat.
+    _controller.addListener(() => setState(() {}));
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  /// Alleen een http(s)-URL met host is op te halen; alles daarbuiten laat
+  /// de knop uit staan i.p.v. stil te falen na het klikken.
+  bool get _isFetchable {
+    final uri = Uri.tryParse(_controller.text.trim());
+    if (uri == null || uri.host.isEmpty) return false;
+    final scheme = uri.scheme.toLowerCase();
+    return scheme == 'http' || scheme == 'https';
   }
 
   @override
@@ -407,7 +431,9 @@ class _UrlImportDialogState extends State<_UrlImportDialog> {
                 isDense: true,
                 border: OutlineInputBorder(),
               ),
-              onSubmitted: (v) => Navigator.pop(context, v),
+              onSubmitted: (v) {
+                if (_isFetchable) Navigator.pop(context, v);
+              },
             ),
           ],
         ),
@@ -418,7 +444,9 @@ class _UrlImportDialogState extends State<_UrlImportDialog> {
           child: Text(l10n.t('cancel')),
         ),
         ElevatedButton.icon(
-          onPressed: () => Navigator.pop(context, _controller.text),
+          onPressed: _isFetchable
+              ? () => Navigator.pop(context, _controller.text)
+              : null,
           icon: const Icon(Icons.download, size: 16),
           label: Text(l10n.d('Ophalen')),
         ),

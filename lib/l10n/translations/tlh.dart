@@ -1101,6 +1101,83 @@ const _dutchSourceTlh = {
   'Pen · markeerstift · ⇧E': 'ghItlhwI\' · boch \'ang · ⇧E',
   'Gestapelde staaf': 'SIrgh muvlu\'bogh',
   'Spreiding': 'boch',
+  'PgUp/PgDn bladert door de slides':
+      'PgUp/PgDn lo\'lu\'chugh \'anghommey vegh leng',
+  'Wacht op antwoord…': 'jang loS…',
+  'Afbeelding slidevullend': '\'anghom buy\'moH mIllogh',
+  'Vult de hele slide en snijdt de randen bij':
+      'Hoch \'anghom buy\'moH \'ej HeHmey pe\'',
+  'Afbeelding vult hele slide': 'Hoch \'anghom buy\'moH mIllogh',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'chu\'lu\': Hoch \'anghom buy\'moH, pong Dung (pe\'lu\'). chu\'be\'lu\': mIllogh Dung, pong bIS\'ub tlhegh.',
+  'Grijze waas over afbeelding': 'mIllogh Dung SuD wov velqa\'',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'pong bIngDaq QIb jot law\'moH.',
+  'Licht': 'wov',
+  'Donker': 'Hurgh',
+  'Pen (D)': 'ghItlhwI\' (D)',
+  'Markeerstift (T)': 'wovmoHwI\' (T)',
+  'Gum (E / Shift+E)': 'teqwI\' (E / Shift+E)',
+  'Laser (X)': 'laser (X)',
+  'Metriek': 'juvwI\'',
+  'Inhoud': 'ngaSbogh',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'yu\'wI\' QujlaHbe\'lu\': wa\' jang lugh wa\' jang muj je yInob.',
+  'CSV-koppeling verbreken?': 'CSV rarwI\' bIteqqang\'a\'?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      '\'anghomDaq ratlh De\', \'ach CSV teHwI\' choHmey chel\'be\'lu\' \'e\' mev.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'mIllogh lajQo\'lu\': tIn law\' (64 MB HoS) pagh Segh Qotlhbe\'lu\'.',
+  'Geen afbeelding op het klembord.': 'poSlogh Daq mIllogh tu\'lu\'be\'.',
+  'Kon de afbeelding niet opslaan.': 'mIllogh polqu\'be\'lu\'.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'mIllogh teqlaHbe\'lu\'. teHwI\' lo\'lu\'be\' \'ej ghItlh chaw\' Daghaj \'e\' yI\'ol.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'naDev ghItlh chaw\' Daghajbe\'. latlh teHwI\' pa\' yIwIv.',
+  'De schijf is vol.': 'buy\' jonta\'.',
+  'Bestand of map niet gevonden.': 'teHwI\' pagh pa\' tu\'lu\'be\'.',
+  'Kon het bestand niet lezen of schrijven.':
+      'teHwI\' laDlaHbe\'lu\' pagh ghItlhlaHbe\'lu\'.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'mIr Qagh — rarwI\' yI\'ol \'ej yInIDqa\'.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'vay\' Qagh net pIHbe\'. QIn tetlh yIlegh.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud lIjchoHbe\'lu\' — Settings → Nextcloud Daq jabwI\' De\' yI\'ol.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'jabwI\'vam chaw\'be\'lu\'. Settings → Nextcloud Daq jabwI\' pegh/LAN voqmoH \'e\' yIper.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'jabwI\' SIchlaHbe\'lu\' — rarwI\' jabwI\' URL je yI\'ol.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      '\'el Qapbe\'. lo\'wI\' pong mu\'wIj je yI\'ol; Nextcloud Daq app mu\'wIj yIlo\', bo\'Degh mu\'wIj yIlo\'Qo\'.',
+  'Bestand of map niet gevonden op de server.':
+      'jabwI\'Daq teHwI\' pagh pa\' tu\'lu\'be\'.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'chaw\'lu\'bogh \'aqroS tIn law\' teHwI\' tIn puS.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Qagh chegh jabwI\'. tugh yInIDqa\'.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'teHwI\' Qaw\'lu\'pu\' pagh laDlaHbe\'lu\'.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'lIqmeH Qatlh: Qatlh chaw\' \'aqroSmey juS ngaSwI\'.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'URLvamvo\' \'anghom suqlaHbe\'lu\'. URL rarwI\' je yI\'ol.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      '\'el Qapbe\' — lo\'wI\' pong mu\'wIj je yI\'ol. qeS: Nextcloud Daq app mu\'wIj yIlo\' (Settings → Hung), bo\'Degh mu\'wIj yIlo\'Qo\'.',
+  'Annuleren…': 'qIlmeH…',
+  'Afbeeldingen vergelijken…': 'mIlloghmey Dun…',
+  'Presentaties scannen…': '\'anghom tetlhmey nej…',
+  'Opruimen…': 'Say\'moH…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'wa\' pagh law\' qach pa\'mey laDlaHbe\'lu\'; tetlh naQbe\'law\'.',
+  'Uit recente bestanden verwijderen': 'teHwI\'mey chu\'vo\' teq',
+  'OciDeck wordt gestart…': 'OciDeck taghlu\'…',
+  'Herstelbestanden': 'qa\'meH teHwI\'mey',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'qa\'meH teHwI\'mey Hoch \'anghom ngaS, ghItlh nIt. 7 jaj tlhoch Say\'moHlu\' \'e\' ngoq; naDev SIbI\' bIteqlaH.',
+  'Herstelbestanden nu wissen': 'DaH qa\'meH teHwI\'mey teq',
+  'Er waren geen herstelbestanden.': 'qa\'meH teHwI\'mey tu\'lu\'be\'.',
+  'herstelbestand(en) gewist.': 'qa\'meH teHwI\'(mey) teqlu\'ta\'.',
   'Klaar voor export': 'ngeHrup',
   'kwaliteitswaarschuwing(en)': 'Dun ghuHmoHmey',
   'Nog opslaan nodig': 'wa\'DIch yIchoq',
@@ -1225,5 +1302,4 @@ const _dutchSourceTlh = {
   'Naar prullenbak': 'veQDaq',
   'Deze presentatie staat ook op een andere plek:':
       'latlh DaqDaq je tu\'lu\' cha\'nobvam:',
-  'Opruimen…': 'Say\'moH…',
 };

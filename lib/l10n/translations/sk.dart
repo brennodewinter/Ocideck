@@ -1121,6 +1121,82 @@ const _dutchSourceSk = {
   'Pen · markeerstift · ⇧E': 'Pero · zvýrazňovač · ⇧E',
   'Gestapelde staaf': 'Skladaný stĺpcový',
   'Spreiding': 'Bodový',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn listuje snímky',
+  'Wacht op antwoord…': 'Čaká sa na odpoveď…',
+  'Afbeelding slidevullend': 'Obrázok vyplní snímku',
+  'Vult de hele slide en snijdt de randen bij':
+      'Vyplní celú snímku a oreže okraje',
+  'Afbeelding vult hele slide': 'Obrázok vyplní celú snímku',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Zap.: vyplní celú snímku, titulok cez ňu (orezané). Vyp.: obrázok hore, titulok v páse pod ním.',
+  'Grijze waas over afbeelding': 'Sivý závoj cez obrázok',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Upokojí pozadie za titulkom a podtitulkom.',
+  'Licht': 'Svetlý',
+  'Donker': 'Tmavý',
+  'Pen (D)': 'Pero (D)',
+  'Markeerstift (T)': 'Zvýrazňovač (T)',
+  'Gum (E / Shift+E)': 'Guma (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metrika',
+  'Inhoud': 'Obsah',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Otázku nemožno hrať: zadajte aspoň jednu správnu a jednu nesprávnu odpoveď.',
+  'CSV-koppeling verbreken?': 'Zrušiť prepojenie s CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Dáta zostanú v snímke, ale zmeny v súbore CSV sa už nepremietnu.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Obrázok odmietnutý: príliš veľký (max. 64 MB) alebo nepodporovaný formát.',
+  'Geen afbeelding op het klembord.': 'V schránke nie je žiadny obrázok.',
+  'Kon de afbeelding niet opslaan.': 'Obrázok sa nepodarilo uložiť.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Obrázok sa nepodarilo odstrániť. Skontrolujte, či sa súbor nepoužíva a či máte práva na zápis.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Na tomto mieste nemáte práva na zápis. Vyberte iný priečinok.',
+  'De schijf is vol.': 'Disk je plný.',
+  'Bestand of map niet gevonden.': 'Súbor alebo priečinok sa nenašiel.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Súbor sa nepodarilo prečítať ani zapísať.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Chyba siete — skontrolujte pripojenie a skúste to znova.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Niečo sa nečakane pokazilo. Podrobnosti nájdete v denníku.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud nie je (správne) nastavený — skontrolujte údaje servera v Nastavenia → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Tento server nie je povolený. Najprv označte privátny/LAN server ako dôveryhodný v Nastavenia → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server je nedostupný — skontrolujte pripojenie a URL servera.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Prihlásenie zlyhalo. Skontrolujte meno a heslo; pri Nextcloude použite heslo aplikácie, nie heslo účtu.',
+  'Bestand of map niet gevonden op de server.':
+      'Súbor alebo priečinok sa na serveri nenašiel.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Súbor je väčší ako povolený limit.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Server vrátil chybu. Skúste to neskôr znova.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Súbor je poškodený alebo nečitateľný.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Import odmietnutý: balík prekračuje bezpečnostné limity.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Z tejto URL sa nepodarilo získať prezentáciu. Skontrolujte URL a pripojenie.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Prihlásenie zlyhalo — skontrolujte meno a heslo. Tip: pri Nextcloude použite heslo aplikácie (Nastavenia → Zabezpečenie), nie heslo účtu.',
+  'Annuleren…': 'Ruší sa…',
+  'Afbeeldingen vergelijken…': 'Porovnávanie obrázkov…',
+  'Presentaties scannen…': 'Prehľadávanie prezentácií…',
+  'Opruimen…': 'Upratovanie…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Nepodarilo sa prečítať jeden alebo viac priečinkov knižnice; zoznam môže byť neúplný.',
+  'Uit recente bestanden verwijderen': 'Odstrániť z nedávnych súborov',
+  'OciDeck wordt gestart…': 'Spúšťa sa OciDeck…',
+  'Herstelbestanden': 'Súbory obnovenia',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Súbory obnovenia obsahujú úplný obsah vašich prezentácií v čistom texte. Automaticky sa vyčistia po 7 dňoch; tu ich môžete vymazať okamžite.',
+  'Herstelbestanden nu wissen': 'Vymazať súbory obnovenia teraz',
+  'Er waren geen herstelbestanden.': 'Neboli žiadne súbory obnovenia.',
+  'herstelbestand(en) gewist.': 'súbor(y) obnovenia vymazané.',
   'Klaar voor export': 'Pripravené na export',
   'kwaliteitswaarschuwing(en)': 'upozornenie(-ia) na kvalitu',
   'Nog opslaan nodig': 'Najprv je potrebné uložiť',
@@ -1249,5 +1325,4 @@ const _dutchSourceSk = {
   'Naar prullenbak': 'Do koša',
   'Deze presentatie staat ook op een andere plek:':
       'Táto prezentácia existuje aj na inom mieste:',
-  'Opruimen…': 'Upratať…',
 };

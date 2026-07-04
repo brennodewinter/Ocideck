@@ -103,7 +103,7 @@ class _CockpitEditorState extends State<CockpitEditor> {
         meters: [
           ..._spec.meters,
           CockpitMeterSpec(
-            label: 'Metric ${_spec.meters.length + 1}',
+            label: '${context.l10n.d('Metriek')} ${_spec.meters.length + 1}',
             value: 50,
           ),
         ],

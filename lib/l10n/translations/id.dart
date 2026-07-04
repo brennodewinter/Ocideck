@@ -1115,6 +1115,82 @@ const _dutchSourceId = {
   'Pen · markeerstift · ⇧E': 'Pena · stabilo · ⇧E',
   'Gestapelde staaf': 'Batang bertumpuk',
   'Spreiding': 'Sebar',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn berpindah antar slide',
+  'Wacht op antwoord…': 'Menunggu jawaban…',
+  'Afbeelding slidevullend': 'Gambar memenuhi slide',
+  'Vult de hele slide en snijdt de randen bij':
+      'Memenuhi seluruh slide dan memotong tepinya',
+  'Afbeelding vult hele slide': 'Gambar memenuhi seluruh slide',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Aktif: memenuhi seluruh slide, judul di atasnya (terpotong). Nonaktif: gambar di atas, judul di pita di bawahnya.',
+  'Grijze waas over afbeelding': 'Lapisan abu-abu di atas gambar',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Membuat latar belakang lebih tenang di belakang judul dan subjudul.',
+  'Licht': 'Terang',
+  'Donker': 'Gelap',
+  'Pen (D)': 'Pena (D)',
+  'Markeerstift (T)': 'Stabilo (T)',
+  'Gum (E / Shift+E)': 'Penghapus (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metrik',
+  'Inhoud': 'Konten',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Pertanyaan tidak dapat dimainkan: berikan setidaknya satu jawaban benar dan satu salah.',
+  'CSV-koppeling verbreken?': 'Putuskan tautan CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Data tetap di slide, tetapi perubahan pada file CSV tidak akan ikut lagi.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Gambar ditolak: terlalu besar (maks 64 MB) atau format tidak didukung.',
+  'Geen afbeelding op het klembord.': 'Tidak ada gambar di papan klip.',
+  'Kon de afbeelding niet opslaan.': 'Tidak dapat menyimpan gambar.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Tidak dapat menghapus gambar. Pastikan file tidak sedang digunakan dan Anda memiliki izin menulis.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Tidak ada izin menulis di lokasi ini. Pilih folder lain.',
+  'De schijf is vol.': 'Disk penuh.',
+  'Bestand of map niet gevonden.': 'File atau folder tidak ditemukan.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Tidak dapat membaca atau menulis file.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Kesalahan jaringan — periksa koneksi Anda dan coba lagi.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Terjadi kesalahan tak terduga. Lihat log untuk detailnya.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud belum diatur (dengan benar) — periksa detail server di Pengaturan → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Server ini tidak diizinkan. Tandai server privat/LAN sebagai tepercaya dulu di Pengaturan → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server tidak terjangkau — periksa koneksi dan URL server.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Gagal masuk. Periksa nama pengguna dan kata sandi; dengan Nextcloud gunakan kata sandi aplikasi, bukan kata sandi akun.',
+  'Bestand of map niet gevonden op de server.':
+      'File atau folder tidak ditemukan di server.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'File lebih besar dari batas yang diizinkan.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Server mengembalikan kesalahan. Coba lagi nanti.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'File rusak atau tidak dapat dibaca.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Impor ditolak: paket melebihi batas keamanan.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Tidak dapat mengambil presentasi dari URL ini. Periksa URL dan koneksi Anda.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Gagal masuk — periksa nama pengguna dan kata sandi. Tips: dengan Nextcloud gunakan kata sandi aplikasi (Pengaturan → Keamanan), bukan kata sandi akun.',
+  'Annuleren…': 'Membatalkan…',
+  'Afbeeldingen vergelijken…': 'Membandingkan gambar…',
+  'Presentaties scannen…': 'Memindai presentasi…',
+  'Opruimen…': 'Membersihkan…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Tidak dapat membaca satu atau beberapa folder pustaka; daftar mungkin tidak lengkap.',
+  'Uit recente bestanden verwijderen': 'Hapus dari file terbaru',
+  'OciDeck wordt gestart…': 'Memulai OciDeck…',
+  'Herstelbestanden': 'File pemulihan',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'File pemulihan berisi seluruh isi presentasi Anda dalam teks biasa. Dibersihkan otomatis setelah 7 hari; di sini Anda dapat menghapusnya langsung.',
+  'Herstelbestanden nu wissen': 'Hapus file pemulihan sekarang',
+  'Er waren geen herstelbestanden.': 'Tidak ada file pemulihan.',
+  'herstelbestand(en) gewist.': 'file pemulihan dihapus.',
   'Klaar voor export': 'Siap diekspor',
   'kwaliteitswaarschuwing(en)': 'peringatan kualitas',
   'Nog opslaan nodig': 'Perlu disimpan dulu',
@@ -1243,5 +1319,4 @@ const _dutchSourceId = {
   'Naar prullenbak': 'Ke tempat sampah',
   'Deze presentatie staat ook op een andere plek:':
       'Presentasi ini juga ada di tempat lain:',
-  'Opruimen…': 'Bersihkan…',
 };

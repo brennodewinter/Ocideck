@@ -1114,6 +1114,81 @@ const _dutchSourceSv = {
   'Pen · markeerstift · ⇧E': 'Penna · överstrykningspenna · ⇧E',
   'Gestapelde staaf': 'Staplad stapel',
   'Spreiding': 'Spridning',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn bläddrar bland bilderna',
+  'Wacht op antwoord…': 'Väntar på svar…',
+  'Afbeelding slidevullend': 'Bilden fyller bilden helt',
+  'Vult de hele slide en snijdt de randen bij':
+      'Fyller hela bilden och beskär kanterna',
+  'Afbeelding vult hele slide': 'Bilden fyller hela bilden',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'På: fyller hela bilden, titel ovanpå (beskuren). Av: bild överst, titel i ett band under.',
+  'Grijze waas over afbeelding': 'Grå slöja över bilden',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Gör bakgrunden lugnare bakom titel och undertitel.',
+  'Licht': 'Ljus',
+  'Donker': 'Mörk',
+  'Pen (D)': 'Penna (D)',
+  'Markeerstift (T)': 'Överstrykningspenna (T)',
+  'Gum (E / Shift+E)': 'Suddgummi (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Mätvärde',
+  'Inhoud': 'Innehåll',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Frågan kan inte spelas: ange minst ett rätt och ett fel svar.',
+  'CSV-koppeling verbreken?': 'Koppla bort CSV-filen?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Datan stannar i bilden, men ändringar i CSV-filen följer inte längre med.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Bilden avvisades: för stor (max 64 MB) eller inte ett format som stöds.',
+  'Geen afbeelding op het klembord.': 'Ingen bild i urklipp.',
+  'Kon de afbeelding niet opslaan.': 'Kunde inte spara bilden.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Kunde inte ta bort bilden. Kontrollera att filen inte används och att du har skrivrättigheter.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Inga skrivrättigheter på den här platsen. Välj en annan mapp.',
+  'De schijf is vol.': 'Disken är full.',
+  'Bestand of map niet gevonden.': 'Filen eller mappen hittades inte.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Kunde inte läsa eller skriva filen.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Nätverksfel — kontrollera din anslutning och försök igen.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Något gick oväntat fel. Se loggen för detaljer.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud är inte (korrekt) inställt — kontrollera serveruppgifterna under Inställningar → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Den här servern är inte tillåten. Markera först en privat/LAN-server som betrodd under Inställningar → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Servern kan inte nås — kontrollera din anslutning och serverns URL.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Inloggningen misslyckades. Kontrollera användarnamn och lösenord; använd med Nextcloud ett applösenord, inte ditt kontolösenord.',
+  'Bestand of map niet gevonden op de server.':
+      'Filen eller mappen hittades inte på servern.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Filen är större än den tillåtna gränsen.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Servern returnerade ett fel. Försök igen senare.',
+  'Het bestand is beschadigd of onleesbaar.': 'Filen är skadad eller oläslig.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Importen nekades: paketet överskrider säkerhetsgränserna.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Kunde inte hämta en presentation från denna URL. Kontrollera URL:en och din anslutning.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Inloggningen misslyckades — kontrollera användarnamn och lösenord. Tips: använd med Nextcloud ett applösenord (Inställningar → Säkerhet), inte ditt kontolösenord.',
+  'Annuleren…': 'Avbryter…',
+  'Afbeeldingen vergelijken…': 'Jämför bilder…',
+  'Presentaties scannen…': 'Skannar presentationer…',
+  'Opruimen…': 'Städar upp…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Kunde inte läsa en eller flera biblioteksmappar; listan kan vara ofullständig.',
+  'Uit recente bestanden verwijderen': 'Ta bort från senaste filer',
+  'OciDeck wordt gestart…': 'Startar OciDeck…',
+  'Herstelbestanden': 'Återställningsfiler',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Återställningsfiler innehåller hela innehållet i dina presentationer i klartext. De rensas automatiskt efter 7 dagar; här kan du radera dem direkt.',
+  'Herstelbestanden nu wissen': 'Radera återställningsfiler nu',
+  'Er waren geen herstelbestanden.': 'Det fanns inga återställningsfiler.',
+  'herstelbestand(en) gewist.': 'återställningsfil(er) raderade.',
   'Klaar voor export': 'Klar för export',
   'kwaliteitswaarschuwing(en)': 'kvalitetsvarning(ar)',
   'Nog opslaan nodig': 'Behöver sparas först',
@@ -1242,5 +1317,4 @@ const _dutchSourceSv = {
   'Naar prullenbak': 'Till papperskorgen',
   'Deze presentatie staat ook op een andere plek:':
       'Den här presentationen finns även på en annan plats:',
-  'Opruimen…': 'Rensa…',
 };

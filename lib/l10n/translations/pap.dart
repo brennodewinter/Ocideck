@@ -1119,6 +1119,81 @@ const _dutchSourceAddPap = {
   'Pen · markeerstift · ⇧E': 'Pèn · marker · ⇧E',
   'Gestapelde staaf': 'Baranan apilá',
   'Spreiding': 'Dispershon',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn ta pasa dor di e slidenan',
+  'Wacht op antwoord…': 'Ta warda un kontesta…',
+  'Afbeelding slidevullend': 'Imágen ta yena e slide',
+  'Vult de hele slide en snijdt de randen bij':
+      'Ta yena henter e slide i ta kòrta e ramanan',
+  'Afbeelding vult hele slide': 'Imágen ta yena henter e slide',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Sendé: ta yena henter e slide, título riba dje (kòrtá). Pagá: imágen ariba, título den un banda bou di dje.',
+  'Grijze waas over afbeelding': 'Nubla shinishi riba e imágen',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Ta hasi e fondo mas trankil tras di título i subtítulo.',
+  'Licht': 'Kla',
+  'Donker': 'Skur',
+  'Pen (D)': 'Pèn (D)',
+  'Markeerstift (T)': 'Marker (T)',
+  'Gum (E / Shift+E)': 'Borador (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Métrika',
+  'Inhoud': 'Kontenido',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'E pregunta no por wòrdu hungá: duna por lo ménos un kontesta bon i un robes.',
+  'CSV-koppeling verbreken?': 'Kita e konekshon CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'E datonan ta keda den e slide, pero kambionan den e archivo CSV lo no drenta mas.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Imágen rechasá: muchu grandi (máks. 64 MB) òf formato no sostené.',
+  'Geen afbeelding op het klembord.': 'No tin imágen riba e klèmbort.',
+  'Kon de afbeelding niet opslaan.': 'No por a warda e imágen.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'No por a eliminá e imágen. Kontrolá si e archivo no ta den uso i si bo tin derecho di skibi.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'No tin derecho di skibi na e lugá aki. Skohe un otro map.',
+  'De schijf is vol.': 'E disko ta yen.',
+  'Bestand of map niet gevonden.': 'Archivo òf map no a wòrdu hañá.',
+  'Kon het bestand niet lezen of schrijven.':
+      'No por a lesa òf skibi e archivo.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Eror di rèt — kontrolá bo konekshon i purba atrobe.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Algu a bai robes inesperadamente. Wak e log pa detaye.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud no ta konfigurá (bon) — kontrolá e datonan di server na Konfigurashon → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'E server aki no ta permití. Marka un server privá/LAN promé komo konfiabel na Konfigurashon → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server no ta alkansabel — kontrolá bo konekshon i e URL di server.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Login a faya. Kontrolá e nòmber di usuario i e password; ku Nextcloud usa un app-password, no esun di bo kuenta.',
+  'Bestand of map niet gevonden op de server.':
+      'Archivo òf map no a wòrdu hañá riba e server.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'E archivo ta mas grandi ku e límite permití.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'E server a duna un eror. Purba atrobe despues.',
+  'Het bestand is beschadigd of onleesbaar.': 'E archivo ta daña òf ilegibel.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Importashon rechasá: e paket ta surpasá e límitenan di siguridat.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'No por a haña un presentashon di e URL aki. Kontrolá e URL i bo konekshon.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Login a faya — kontrolá e nòmber di usuario i e password. Tip: ku Nextcloud usa un app-password (Konfigurashon → Siguridat), no esun di bo kuenta.',
+  'Annuleren…': 'Kanselando…',
+  'Afbeeldingen vergelijken…': 'Komparando imágennan…',
+  'Presentaties scannen…': 'Skaneando presentashonnan…',
+  'Opruimen…': 'Limpiando…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'No por a lesa un òf mas map di e biblioteka; e lista por ta inkompletu.',
+  'Uit recente bestanden verwijderen': 'Kita for di archivonan resien',
+  'OciDeck wordt gestart…': 'OciDeck ta ser inisiá…',
+  'Herstelbestanden': 'Archivonan di rekuperashon',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Archivonan di rekuperashon ta kontené henter e kontenido di bo presentashonnan den teksto simpel. Nan ta ser limpiá outomátikamente despues di 7 dia; akinan bo por wisa nan mesora.',
+  'Herstelbestanden nu wissen': 'Wisa archivonan di rekuperashon awor',
+  'Er waren geen herstelbestanden.': 'No tabatin archivo di rekuperashon.',
+  'herstelbestand(en) gewist.': 'archivo(nan) di rekuperashon wisá.',
   'Klaar voor export': 'Kla pa eksportá',
   'kwaliteitswaarschuwing(en)': 'atvertensia(nan) di kalidat',
   'Nog opslaan nodig': 'Mester warda promé',

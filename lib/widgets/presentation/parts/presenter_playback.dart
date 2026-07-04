@@ -106,6 +106,7 @@ extension _PresenterPlayback on _FullscreenPresenterState {
     // Niet automatisch voorbij een onbeantwoorde vraag schuiven.
     if (_questionBlocksAdvance) return;
     if (_index < widget.slides.length - 1) {
+      _commitActiveInk();
       _persistUserNoteFromController();
       _rebuild(() {
         _index++;
@@ -115,6 +116,7 @@ extension _PresenterPlayback on _FullscreenPresenterState {
       _loadUserNoteIntoController();
       _scheduleAdvance();
     } else if (_loop) {
+      _commitActiveInk();
       _persistUserNoteFromController();
       _rebuild(() {
         _index = 0;

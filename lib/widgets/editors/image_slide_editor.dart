@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/slide.dart';
 import '../../services/image_service.dart';
 import '_editor_field.dart';
@@ -49,7 +50,9 @@ class _ImageSlideEditorState extends State<ImageSlideEditor>
   }
 
   Future<void> _pasteImage() async {
-    final path = await widget.imageService.pasteImage(
+    final path = await pasteImageWithFeedback(
+      context,
+      widget.imageService,
       projectPath: widget.captionBasePath,
     );
     if (path != null) {
@@ -58,7 +61,9 @@ class _ImageSlideEditorState extends State<ImageSlideEditor>
   }
 
   Future<void> _pickImage() async {
-    final path = await widget.imageService.pickImage(
+    final path = await pickImageWithFeedback(
+      context,
+      widget.imageService,
       projectPath: widget.captionBasePath,
     );
     if (path != null) {
@@ -96,8 +101,10 @@ class _ImageSlideEditorState extends State<ImageSlideEditor>
           contentPadding: EdgeInsets.zero,
           controlAffinity: ListTileControlAffinity.leading,
           dense: true,
-          title: const Text('Afbeelding slidevullend'),
-          subtitle: const Text('Vult de hele slide en snijdt de randen bij'),
+          title: Text(context.l10n.d('Afbeelding slidevullend')),
+          subtitle: Text(
+            context.l10n.d('Vult de hele slide en snijdt de randen bij'),
+          ),
           value: widget.slide.imageSize == 0,
           onChanged: widget.slide.imagePath.isEmpty
               ? null

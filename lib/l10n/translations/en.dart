@@ -1140,6 +1140,82 @@ const _dutchSourceAddEn = {
   'Pen · markeerstift · ⇧E': 'Pen · highlighter · ⇧E',
   'Gestapelde staaf': 'Stacked bar',
   'Spreiding': 'Scatter',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn moves between slides',
+  'Wacht op antwoord…': 'Waiting for an answer…',
+  'Afbeelding slidevullend': 'Image fills the slide',
+  'Vult de hele slide en snijdt de randen bij':
+      'Fills the whole slide and crops the edges',
+  'Afbeelding vult hele slide': 'Image fills the whole slide',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'On: fills the whole slide, title on top (cropped). Off: image at the top, title in a band below it.',
+  'Grijze waas over afbeelding': 'Grey wash over the image',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Calms the background behind the title and subtitle.',
+  'Licht': 'Light',
+  'Donker': 'Dark',
+  'Pen (D)': 'Pen (D)',
+  'Markeerstift (T)': 'Highlighter (T)',
+  'Gum (E / Shift+E)': 'Eraser (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metric',
+  'Inhoud': 'Content',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Question cannot be played: provide at least one correct and one wrong answer.',
+  'CSV-koppeling verbreken?': 'Unlink the CSV file?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'The data stays in the slide, but changes to the CSV file will no longer come through.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Image rejected: too large (max 64 MB) or not a supported format.',
+  'Geen afbeelding op het klembord.': 'No image on the clipboard.',
+  'Kon de afbeelding niet opslaan.': 'Could not save the image.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Could not delete the image. Check that the file is not in use and that you have write permissions.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'No write permission at this location. Choose another folder.',
+  'De schijf is vol.': 'The disk is full.',
+  'Bestand of map niet gevonden.': 'File or folder not found.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Could not read or write the file.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Network error — check your connection and try again.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Something went unexpectedly wrong. See the log for details.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud is not set up (correctly) — check the server details under Settings → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'This server is not allowed. Mark a private/LAN server as trusted first under Settings → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server unreachable — check your connection and the server URL.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Sign-in failed. Check the username and password; with Nextcloud, use an app password, not your account password.',
+  'Bestand of map niet gevonden op de server.':
+      'File or folder not found on the server.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'The file is larger than the allowed limit.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'The server returned an error. Try again later.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'The file is damaged or unreadable.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Import refused: the package exceeds the safety limits.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Could not fetch a presentation from this URL. Check the URL and your connection.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Sign-in failed — check the username and password. Tip: with Nextcloud, use an app password (Settings → Security), not your account password.',
+  'Annuleren…': 'Cancelling…',
+  'Afbeeldingen vergelijken…': 'Comparing images…',
+  'Presentaties scannen…': 'Scanning presentations…',
+  'Opruimen…': 'Cleaning up…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Could not read one or more library folders; the list may be incomplete.',
+  'Uit recente bestanden verwijderen': 'Remove from recent files',
+  'OciDeck wordt gestart…': 'Starting OciDeck…',
+  'Herstelbestanden': 'Recovery files',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Crash-recovery files contain the full content of your presentations in plain text. They are cleaned up automatically after 7 days; here you can wipe them immediately.',
+  'Herstelbestanden nu wissen': 'Wipe recovery files now',
+  'Er waren geen herstelbestanden.': 'There were no recovery files.',
+  'herstelbestand(en) gewist.': 'recovery file(s) wiped.',
   'Klaar voor export': 'Ready to export',
   'kwaliteitswaarschuwing(en)': 'quality warning(s)',
   'Nog opslaan nodig': 'Save needed first',

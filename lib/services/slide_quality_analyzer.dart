@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/markdown_validation.dart';
+import '../models/question.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../models/slide_quality.dart';
@@ -150,6 +151,8 @@ class SlideQualityAnalyzer {
     _checkSlideContrast(slide, index, theme, issues);
     _checkTextDensity(slide, index, font, issues);
     _checkMissingMedia(slide, index, projectPath, issues);
+    // Hangt alleen van de slide-inhoud af, dus veilig per slide te cachen.
+    _checkQuestionAnswerable(slide, index, issues);
     _slideIssuesCache[slide] = _SlideIssuesMemo(
       theme: theme,
       font: font,
@@ -538,6 +541,28 @@ class SlideQualityAnalyzer {
   // outside the project via absolute or `../` references.
   String? _resolveAssetPath(String path, String? projectPath) =>
       resolveSlideAssetPath(path, projectPath);
+
+  /// Waarschuw voor vraagslides die tijdens het presenteren niet speelbaar
+  /// zijn (geen geldige vraagspecificatie), vóórdat de presentator er live
+  /// tegenaan loopt.
+  void _checkQuestionAnswerable(
+    Slide slide,
+    int index,
+    List<SlideQualityIssue> issues,
+  ) {
+    if (slide.type != SlideType.question) return;
+    final spec = QuestionSpec.parse(slide.customMarkdown);
+    if (spec.isPresentable) return;
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: index,
+        kind: SlideQualityIssueKind.questionNotAnswerable,
+        category: SlideQualityCategory.content,
+        severity: MarkdownValidationSeverity.warning,
+        field: 'customMarkdown',
+      ),
+    );
+  }
 }
 
 class _BulletText {

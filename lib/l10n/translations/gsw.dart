@@ -1115,6 +1115,82 @@ const _dutchSourceGsw = {
   'Pen · markeerstift · ⇧E': 'Schtift · Markierer · ⇧E',
   'Gestapelde staaf': 'Gschtaplete Balke',
   'Spreiding': 'Schtreuig',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn blätteret dur d Folie',
+  'Wacht op antwoord…': 'Warte uf e Antwort…',
+  'Afbeelding slidevullend': 'Bild füllt d Folie',
+  'Vult de hele slide en snijdt de randen bij':
+      'Füllt di ganz Folie und schnidt d Ränder ab',
+  'Afbeelding vult hele slide': 'Bild füllt di ganz Folie',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Aa: füllt di ganz Folie, Titel drüber (abgschnitte). Us: Bild obe, Titel in eme Band drunter.',
+  'Grijze waas over afbeelding': 'Graue Schleier überem Bild',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Macht dr Hintergrund ruehiger hinterem Titel und Untertitel.',
+  'Licht': 'Hell',
+  'Donker': 'Dunkel',
+  'Pen (D)': 'Stift (D)',
+  'Markeerstift (T)': 'Leuchtstift (T)',
+  'Gum (E / Shift+E)': 'Gummi (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metrik',
+  'Inhoud': 'Inhalt',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'D Frag lauft nit: gib mindestens ei richtigi und ei falschi Antwort aa.',
+  'CSV-koppeling verbreken?': 'CSV-Verknüpfig trenne?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'D Date blibe in dr Folie, aber Änderige an dr CSV-Datei chöme nümme mit.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Bild abglehnt: z gross (max. 64 MB) oder kei unterstützts Format.',
+  'Geen afbeelding op het klembord.': 'Kei Bild in dr Zwischenablag.',
+  'Kon de afbeelding niet opslaan.': 'Bild het nit chönne gspycheret wärde.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Bild het nit chönne glöscht wärde. Lueg, dass d Datei nit bruucht wird und dass du Schriibrächt hesch.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Kei Schriibrächt an däm Ort. Wähl en andere Ordner.',
+  'De schijf is vol.': 'D Festplatte isch voll.',
+  'Bestand of map niet gevonden.': 'Datei oder Ordner nit gfunde.',
+  'Kon het bestand niet lezen of schrijven.':
+      'D Datei het nit chönne gläse oder gschribe wärde.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Netzwärkfähler — lueg dini Verbindig aa und probier\'s nomol.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Öppis isch unerwartet schiefgloffe. Details stöhn im Protokoll.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud isch nit (richtig) iigrichtet — lueg d Serverdate under Iistellige → Nextcloud aa.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Dä Server isch nit erlaubt. Markier en private/LAN-Server zerscht als vertraut under Iistellige → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server nit erreichbar — lueg dini Verbindig und d Server-URL aa.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Aamäldig fählgschlage. Lueg Benutzername und Passwort aa; bruch bi Nextcloud es App-Passwort, nit dis Konto-Passwort.',
+  'Bestand of map niet gevonden op de server.':
+      'Datei oder Ordner uf em Server nit gfunde.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'D Datei isch grösser als s erlaubte Limit.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Dr Server het en Fähler gmäldet. Probier\'s spöter nomol.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'D Datei isch kaputt oder nit läsbar.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Import verweigeret: s Paket überschritet d Sicherheitslimite.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Vo dere URL het kei Präsentation chönne gholt wärde. Lueg d URL und dini Verbindig aa.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Aamäldig fählgschlage — lueg Benutzername und Passwort aa. Tipp: bruch bi Nextcloud es App-Passwort (Iistellige → Sicherheit), nit dis Konto-Passwort.',
+  'Annuleren…': 'Am Abbräche…',
+  'Afbeeldingen vergelijken…': 'Bilder verglyche…',
+  'Presentaties scannen…': 'Präsentatione dursueche…',
+  'Opruimen…': 'Am Ufrume…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Ei oder mehreri Bibliotheks-Ordner hei nit chönne gläse wärde; d Lischte cha unvollständig sii.',
+  'Uit recente bestanden verwijderen': 'Us de letschte Dateie entferne',
+  'OciDeck wordt gestart…': 'OciDeck wird gstartet…',
+  'Herstelbestanden': 'Wiederherstelligs-Dateie',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Absturz-Wiederherstelligs-Dateie enthalte dr ganz Inhalt vo dine Präsentatione im Klartext. Si wärde nach 7 Täg automatisch ufgruumt; do chasch si sofort lösche.',
+  'Herstelbestanden nu wissen': 'Wiederherstelligs-Dateie jetz lösche',
+  'Er waren geen herstelbestanden.': 'Es het kei Wiederherstelligs-Dateie gha.',
+  'herstelbestand(en) gewist.': 'Wiederherstelligs-Datei(e) glöscht.',
   'Klaar voor export': 'Parat zum Exportiere',
   'kwaliteitswaarschuwing(en)': 'Qualitätswarnig(e)',
   'Nog opslaan nodig': 'Zerscht spychere',
@@ -1242,5 +1318,4 @@ const _dutchSourceGsw = {
   'Naar prullenbak': 'In Papierchorb',
   'Deze presentatie staat ook op een andere plek:':
       'Die Präsentation git s au an eme andere Ort:',
-  'Opruimen…': 'Uufruume…',
 };

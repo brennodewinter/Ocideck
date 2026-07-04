@@ -1124,6 +1124,82 @@ const _dutchSourceAddIt = {
   'Pen · markeerstift · ⇧E': 'Penna · evidenziatore · ⇧E',
   'Gestapelde staaf': 'Barre impilate',
   'Spreiding': 'Dispersione',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn scorre le diapositive',
+  'Wacht op antwoord…': 'In attesa di una risposta…',
+  'Afbeelding slidevullend': 'Immagine a tutta diapositiva',
+  'Vult de hele slide en snijdt de randen bij':
+      'Riempie l\'intera diapositiva e ritaglia i bordi',
+  'Afbeelding vult hele slide': 'L\'immagine riempie l\'intera diapositiva',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Attivo: riempie l\'intera diapositiva, titolo sopra (ritagliato). Disattivo: immagine in alto, titolo in una fascia sotto.',
+  'Grijze waas over afbeelding': 'Velatura grigia sull\'immagine',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Rende lo sfondo più calmo dietro titolo e sottotitolo.',
+  'Licht': 'Chiaro',
+  'Donker': 'Scuro',
+  'Pen (D)': 'Penna (D)',
+  'Markeerstift (T)': 'Evidenziatore (T)',
+  'Gum (E / Shift+E)': 'Gomma (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metrica',
+  'Inhoud': 'Contenuto',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'La domanda non è giocabile: fornisci almeno una risposta corretta e una sbagliata.',
+  'CSV-koppeling verbreken?': 'Scollegare il file CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'I dati restano nella diapositiva, ma le modifiche al file CSV non verranno più recepite.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Immagine rifiutata: troppo grande (max 64 MB) o formato non supportato.',
+  'Geen afbeelding op het klembord.': 'Nessuna immagine negli appunti.',
+  'Kon de afbeelding niet opslaan.': 'Impossibile salvare l\'immagine.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Impossibile eliminare l\'immagine. Verifica che il file non sia in uso e di avere i permessi di scrittura.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Nessun permesso di scrittura in questa posizione. Scegli un\'altra cartella.',
+  'De schijf is vol.': 'Il disco è pieno.',
+  'Bestand of map niet gevonden.': 'File o cartella non trovati.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Impossibile leggere o scrivere il file.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Errore di rete — controlla la connessione e riprova.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Qualcosa è andato storto in modo inatteso. Vedi il log per i dettagli.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud non è configurato (correttamente) — controlla i dati del server in Impostazioni → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Questo server non è consentito. Contrassegna prima un server privato/LAN come attendibile in Impostazioni → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server non raggiungibile — controlla la connessione e l\'URL del server.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Accesso non riuscito. Controlla nome utente e password; con Nextcloud usa una password per app, non quella dell\'account.',
+  'Bestand of map niet gevonden op de server.':
+      'File o cartella non trovati sul server.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Il file supera il limite consentito.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Il server ha restituito un errore. Riprova più tardi.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Il file è danneggiato o illeggibile.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Importazione rifiutata: il pacchetto supera i limiti di sicurezza.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Impossibile recuperare una presentazione da questo URL. Controlla l\'URL e la connessione.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Accesso non riuscito — controlla nome utente e password. Suggerimento: con Nextcloud usa una password per app (Impostazioni → Sicurezza), non quella dell\'account.',
+  'Annuleren…': 'Annullamento…',
+  'Afbeeldingen vergelijken…': 'Confronto immagini…',
+  'Presentaties scannen…': 'Scansione delle presentazioni…',
+  'Opruimen…': 'Pulizia…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Impossibile leggere una o più cartelle della libreria; l\'elenco potrebbe essere incompleto.',
+  'Uit recente bestanden verwijderen': 'Rimuovi dai file recenti',
+  'OciDeck wordt gestart…': 'Avvio di OciDeck…',
+  'Herstelbestanden': 'File di ripristino',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'I file di ripristino contengono l\'intero contenuto delle tue presentazioni in testo semplice. Vengono ripuliti automaticamente dopo 7 giorni; qui puoi cancellarli subito.',
+  'Herstelbestanden nu wissen': 'Cancella subito i file di ripristino',
+  'Er waren geen herstelbestanden.': 'Non c\'erano file di ripristino.',
+  'herstelbestand(en) gewist.': 'file di ripristino cancellati.',
   'Klaar voor export': 'Pronto per l\'esportazione',
   'kwaliteitswaarschuwing(en)': 'avviso/i di qualità',
   'Nog opslaan nodig': 'Prima è necessario salvare',

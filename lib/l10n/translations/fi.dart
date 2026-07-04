@@ -1117,6 +1117,82 @@ const _dutchSourceFi = {
   'Pen · markeerstift · ⇧E': 'Kynä · korostuskynä · ⇧E',
   'Gestapelde staaf': 'Pinottu pylväs',
   'Spreiding': 'Hajonta',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn selaa dioja',
+  'Wacht op antwoord…': 'Odotetaan vastausta…',
+  'Afbeelding slidevullend': 'Kuva täyttää dian',
+  'Vult de hele slide en snijdt de randen bij':
+      'Täyttää koko dian ja rajaa reunat',
+  'Afbeelding vult hele slide': 'Kuva täyttää koko dian',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Päällä: täyttää koko dian, otsikko päällä (rajattu). Pois: kuva ylhäällä, otsikko palkissa sen alla.',
+  'Grijze waas over afbeelding': 'Harmaa huntu kuvan päällä',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Rauhoittaa taustan otsikon ja alaotsikon takana.',
+  'Licht': 'Vaalea',
+  'Donker': 'Tumma',
+  'Pen (D)': 'Kynä (D)',
+  'Markeerstift (T)': 'Korostuskynä (T)',
+  'Gum (E / Shift+E)': 'Pyyhekumi (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Mittari',
+  'Inhoud': 'Sisältö',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Kysymystä ei voi pelata: anna vähintään yksi oikea ja yksi väärä vastaus.',
+  'CSV-koppeling verbreken?': 'Puretaanko CSV-linkitys?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Tiedot pysyvät diassa, mutta CSV-tiedoston muutokset eivät enää välity.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Kuva hylättiin: liian suuri (enint. 64 Mt) tai muoto ei ole tuettu.',
+  'Geen afbeelding op het klembord.': 'Leikepöydällä ei ole kuvaa.',
+  'Kon de afbeelding niet opslaan.': 'Kuvaa ei voitu tallentaa.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Kuvaa ei voitu poistaa. Tarkista, ettei tiedosto ole käytössä ja että sinulla on kirjoitusoikeudet.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Ei kirjoitusoikeuksia tähän sijaintiin. Valitse toinen kansio.',
+  'De schijf is vol.': 'Levy on täynnä.',
+  'Bestand of map niet gevonden.': 'Tiedostoa tai kansiota ei löytynyt.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Tiedostoa ei voitu lukea tai kirjoittaa.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Verkkovirhe — tarkista yhteys ja yritä uudelleen.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Jokin meni odottamatta pieleen. Katso lisätiedot lokista.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloudia ei ole määritetty (oikein) — tarkista palvelimen tiedot kohdasta Asetukset → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Tämä palvelin ei ole sallittu. Merkitse yksityinen/LAN-palvelin ensin luotetuksi kohdassa Asetukset → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Palvelin ei ole tavoitettavissa — tarkista yhteys ja palvelimen URL.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Kirjautuminen epäonnistui. Tarkista käyttäjätunnus ja salasana; käytä Nextcloudissa sovellussalasanaa, älä tilisi salasanaa.',
+  'Bestand of map niet gevonden op de server.':
+      'Tiedostoa tai kansiota ei löytynyt palvelimelta.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Tiedosto on sallittua rajaa suurempi.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Palvelin palautti virheen. Yritä myöhemmin uudelleen.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Tiedosto on vaurioitunut tai lukukelvoton.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Tuonti hylättiin: paketti ylittää turvarajat.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Tästä URL-osoitteesta ei voitu hakea esitystä. Tarkista osoite ja yhteys.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Kirjautuminen epäonnistui — tarkista käyttäjätunnus ja salasana. Vinkki: käytä Nextcloudissa sovellussalasanaa (Asetukset → Turvallisuus), älä tilisi salasanaa.',
+  'Annuleren…': 'Peruutetaan…',
+  'Afbeeldingen vergelijken…': 'Vertaillaan kuvia…',
+  'Presentaties scannen…': 'Selataan esityksiä…',
+  'Opruimen…': 'Siivotaan…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Yhtä tai useampaa kirjastokansiota ei voitu lukea; luettelo voi olla puutteellinen.',
+  'Uit recente bestanden verwijderen': 'Poista viimeisimmistä tiedostoista',
+  'OciDeck wordt gestart…': 'Käynnistetään OciDeckiä…',
+  'Herstelbestanden': 'Palautustiedostot',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Palautustiedostot sisältävät esitystesi koko sisällön selkokielisenä tekstinä. Ne siivotaan automaattisesti 7 päivän jälkeen; täällä voit pyyhkiä ne heti.',
+  'Herstelbestanden nu wissen': 'Pyyhi palautustiedostot nyt',
+  'Er waren geen herstelbestanden.': 'Palautustiedostoja ei ollut.',
+  'herstelbestand(en) gewist.': 'palautustiedosto(a) pyyhitty.',
   'Klaar voor export': 'Valmis vientiin',
   'kwaliteitswaarschuwing(en)': 'laatuvaroitus(ta)',
   'Nog opslaan nodig': 'Tallenna ensin',
@@ -1241,5 +1317,4 @@ const _dutchSourceFi = {
   'Naar prullenbak': 'Siirrä roskakoriin',
   'Deze presentatie staat ook op een andere plek:':
       'Tämä esitys on myös toisessa paikassa:',
-  'Opruimen…': 'Siivoa…',
 };

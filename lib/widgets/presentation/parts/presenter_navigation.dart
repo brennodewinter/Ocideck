@@ -19,8 +19,13 @@ extension _PresenterNavigation on _FullscreenPresenterState {
     );
   }
 
-  void _next() {
-    if (_userNotesMode) return;
+  void _next({bool allowInUserNotes = false}) {
+    // Met het notitiepaneel open bladert alleen PgUp/PgDn expliciet door;
+    // klikken en overige toetsen blijven bij het tekstveld.
+    if (_userNotesMode && !allowInUserNotes) return;
+    // Navigeren maakt een half getypt slidenummer irrelevant: meteen wissen
+    // i.p.v. de badge nog 2,5 s te laten staan.
+    _clearTyped();
     // Eerste toets/klik op een blanco scherm haalt het scherm terug.
     if (_blank != _Blank.none) {
       _rebuild(() => _blank = _Blank.none);
@@ -50,6 +55,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       return;
     }
     if (_index < widget.slides.length - 1) {
+      _commitActiveInk();
       _persistUserNoteFromController();
       _rebuild(() {
         _index++;
@@ -68,8 +74,9 @@ extension _PresenterNavigation on _FullscreenPresenterState {
     }
   }
 
-  void _prev() {
-    if (_userNotesMode) return;
+  void _prev({bool allowInUserNotes = false}) {
+    if (_userNotesMode && !allowInUserNotes) return;
+    _clearTyped();
     if (_blank != _Blank.none) {
       _rebuild(() => _blank = _Blank.none);
       return;
@@ -87,6 +94,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       return;
     }
     if (_index > 0) {
+      _commitActiveInk();
       _persistUserNoteFromController();
       _rebuild(() {
         _index--;
@@ -102,6 +110,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
 
   /// Spring direct naar een slide (vanuit het rasteroverzicht).
   void _jumpTo(int index) {
+    _commitActiveInk();
     _persistUserNoteFromController();
     _rebuild(() {
       _index = index.clamp(0, widget.slides.length - 1);
@@ -126,6 +135,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
     }
     final target = index.clamp(0, widget.slides.length - 1);
     if (target == _index) return;
+    _commitActiveInk();
     _persistUserNoteFromController();
     _rebuild(() {
       _index = target;

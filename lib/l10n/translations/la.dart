@@ -1124,6 +1124,82 @@ const _dutchSourceLa = {
   'Pen · markeerstift · ⇧E': 'Stilus · illuminator · ⇧E',
   'Gestapelde staaf': 'Columna cumulata',
   'Spreiding': 'Dispersio',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn folia percurrit',
+  'Wacht op antwoord…': 'Responsum exspectatur…',
+  'Afbeelding slidevullend': 'Imago folium implet',
+  'Vult de hele slide en snijdt de randen bij':
+      'Totum folium implet et margines resecat',
+  'Afbeelding vult hele slide': 'Imago totum folium implet',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Accensum: totum folium implet, titulus superpositus (resectus). Exstinctum: imago supra, titulus in fascia infra.',
+  'Grijze waas over afbeelding': 'Velamen cinereum super imaginem',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Fundum post titulum et subtitulum tranquillius reddit.',
+  'Licht': 'Clarum',
+  'Donker': 'Obscurum',
+  'Pen (D)': 'Calamus (D)',
+  'Markeerstift (T)': 'Stilus notans (T)',
+  'Gum (E / Shift+E)': 'Deletrix (E / Shift+E)',
+  'Laser (X)': 'Radius (X)',
+  'Metriek': 'Mensura',
+  'Inhoud': 'Contentum',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Quaestio agi non potest: da saltem unum responsum rectum et unum falsum.',
+  'CSV-koppeling verbreken?': 'Vinculum CSV solvere?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Data in folio manent, sed mutationes in plica CSV non iam accipientur.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Imago reiecta: nimis magna (max. 64 MB) aut forma non sustenta.',
+  'Geen afbeelding op het klembord.': 'Nulla imago in tabula interposita.',
+  'Kon de afbeelding niet opslaan.': 'Imago servari non potuit.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Imago deleri non potuit. Vide num plica in usu sit et num ius scribendi habeas.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Nullum ius scribendi hoc loco. Aliud scrinium elige.',
+  'De schijf is vol.': 'Discus plenus est.',
+  'Bestand of map niet gevonden.': 'Plica aut scrinium non inventum.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Plica legi aut scribi non potuit.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Error retis — nexum tuum proba et iterum conare.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Aliquid inopinatum accidit. Acta pro singulis inspice.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud non (recte) constitutum est — indicia moderatri in Optionibus → Nextcloud proba.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Hic moderatrus non permittitur. Moderatrum privatum/LAN primum ut fidum in Optionibus → Nextcloud designa.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Moderatrus attingi non potest — nexum tuum et URL moderatri proba.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Conatus intrandi defecit. Nomen usoris et tesseram proba; apud Nextcloud tessera applicationis utere, non tessera rationis tuae.',
+  'Bestand of map niet gevonden op de server.':
+      'Plica aut scrinium in moderatro non inventum.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Plica maior est quam finis permissus.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Moderatrus errorem reddidit. Postea iterum conare.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Plica corrupta aut illegibilis est.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Importatio recusata: fasciculus fines securitatis excedit.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Ex hac URL praesentatio peti non potuit. URL et nexum tuum proba.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Conatus intrandi defecit — nomen usoris et tesseram proba. Consilium: apud Nextcloud tessera applicationis utere (Optiones → Securitas), non tessera rationis tuae.',
+  'Annuleren…': 'Abrogatur…',
+  'Afbeeldingen vergelijken…': 'Imagines comparantur…',
+  'Presentaties scannen…': 'Praesentationes perscrutantur…',
+  'Opruimen…': 'Purgatur…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Unum aut plura scrinia bibliothecae legi non potuerunt; index incompletus esse potest.',
+  'Uit recente bestanden verwijderen': 'Ex plicis recentibus remove',
+  'OciDeck wordt gestart…': 'OciDeck incipitur…',
+  'Herstelbestanden': 'Plicae recuperationis',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Plicae recuperationis totum contentum praesentationum tuarum in textu plano continent. Post 7 dies automatice purgantur; hic eas statim delere potes.',
+  'Herstelbestanden nu wissen': 'Plicas recuperationis nunc dele',
+  'Er waren geen herstelbestanden.': 'Nullae plicae recuperationis erant.',
+  'herstelbestand(en) gewist.': 'plicae recuperationis deletae.',
   'Klaar voor export': 'Paratum ad exportandum',
   'kwaliteitswaarschuwing(en)': 'monitum(a) qualitatis',
   'Nog opslaan nodig': 'Primum servandum est',
@@ -1256,5 +1332,4 @@ const _dutchSourceLa = {
   'Naar prullenbak': 'In scrinium purgamentorum',
   'Deze presentatie staat ook op een andere plek:':
       'Haec praesentatio etiam alio loco est:',
-  'Opruimen…': 'Purgare…',
 };

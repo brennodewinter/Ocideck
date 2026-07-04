@@ -15,6 +15,8 @@ import 'package:pdf/widgets.dart' as pw;
 
 import '../l10n/app_localizations.dart';
 import '../l10n/slide_quality_localization.dart';
+import '../utils/log.dart';
+import '../utils/user_facing_error.dart';
 import '../utils/atomic_file.dart';
 import '../models/deck.dart';
 import '../models/settings.dart';
@@ -206,7 +208,11 @@ class ExportService {
       await writeBytesAtomic(File(outputPath), bytes);
       return ExportResult.ok(outputPath);
     } catch (e) {
-      return ExportResult.fail('Export fout: $e');
+      // Technische details naar het log; de gebruiker krijgt een korte,
+      // vertaalde melding met handelingsperspectief i.p.v. een rauwe exception.
+      logError('ExportService.export: export failed', e);
+      const l10n = AppLocalizations(Locale('nl'));
+      return ExportResult.fail(userFacingError(l10n, e));
     }
   }
 

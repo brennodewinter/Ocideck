@@ -1109,6 +1109,82 @@ const _dutchSourceEt = {
   'Pen · markeerstift · ⇧E': 'Pliiats · marker · ⇧E',
   'Gestapelde staaf': 'Virnastatud tulp',
   'Spreiding': 'Hajuvus',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn lehitseb slaide',
+  'Wacht op antwoord…': 'Ootab vastust…',
+  'Afbeelding slidevullend': 'Pilt täidab slaidi',
+  'Vult de hele slide en snijdt de randen bij':
+      'Täidab kogu slaidi ja kärbib servi',
+  'Afbeelding vult hele slide': 'Pilt täidab kogu slaidi',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Sees: täidab kogu slaidi, pealkiri peal (kärbitud). Väljas: pilt üleval, pealkiri ribas selle all.',
+  'Grijze waas over afbeelding': 'Hall loor pildi peal',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Muudab tausta pealkirja ja alapealkirja taga rahulikumaks.',
+  'Licht': 'Hele',
+  'Donker': 'Tume',
+  'Pen (D)': 'Pliiats (D)',
+  'Markeerstift (T)': 'Markeri (T)',
+  'Gum (E / Shift+E)': 'Kustukumm (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Mõõdik',
+  'Inhoud': 'Sisu',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Küsimust ei saa mängida: sisesta vähemalt üks õige ja üks vale vastus.',
+  'CSV-koppeling verbreken?': 'Kas katkestada CSV-link?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Andmed jäävad slaidile, kuid CSV-faili muudatused enam kaasa ei tule.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Pilt lükati tagasi: liiga suur (max 64 MB) või toetamata vorming.',
+  'Geen afbeelding op het klembord.': 'Lõikelaual pole pilti.',
+  'Kon de afbeelding niet opslaan.': 'Pilti ei õnnestunud salvestada.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Pilti ei õnnestunud kustutada. Kontrolli, et fail poleks kasutuses ja et sul oleks kirjutusõigused.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Selles asukohas pole kirjutusõigusi. Vali teine kaust.',
+  'De schijf is vol.': 'Ketas on täis.',
+  'Bestand of map niet gevonden.': 'Faili või kausta ei leitud.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Faili ei õnnestunud lugeda ega kirjutada.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Võrguviga — kontrolli ühendust ja proovi uuesti.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Midagi läks ootamatult valesti. Üksikasjad leiad logist.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud pole (õigesti) seadistatud — kontrolli serveri andmeid jaotises Seaded → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'See server pole lubatud. Märgi privaatne/LAN-server esmalt usaldusväärseks jaotises Seaded → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Server pole kättesaadav — kontrolli ühendust ja serveri URL-i.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Sisselogimine ebaõnnestus. Kontrolli kasutajanime ja parooli; Nextcloudiga kasuta rakenduse parooli, mitte konto parooli.',
+  'Bestand of map niet gevonden op de server.':
+      'Faili või kausta serverist ei leitud.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Fail on lubatud piirist suurem.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Server tagastas vea. Proovi hiljem uuesti.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Fail on kahjustatud või loetamatu.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Import keelduti: pakett ületab turvapiiranguid.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Sellelt URL-ilt ei õnnestunud esitlust laadida. Kontrolli URL-i ja ühendust.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Sisselogimine ebaõnnestus — kontrolli kasutajanime ja parooli. Vihje: Nextcloudiga kasuta rakenduse parooli (Seaded → Turvalisus), mitte konto parooli.',
+  'Annuleren…': 'Tühistamine…',
+  'Afbeeldingen vergelijken…': 'Piltide võrdlemine…',
+  'Presentaties scannen…': 'Esitluste skannimine…',
+  'Opruimen…': 'Koristamine…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Ühte või mitut teegi kausta ei õnnestunud lugeda; loend võib olla poolik.',
+  'Uit recente bestanden verwijderen': 'Eemalda hiljutistest failidest',
+  'OciDeck wordt gestart…': 'OciDecki käivitamine…',
+  'Herstelbestanden': 'Taastefailid',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Taastefailid sisaldavad sinu esitluste kogu sisu lihttekstina. Need koristatakse automaatselt 7 päeva pärast; siin saad need kohe kustutada.',
+  'Herstelbestanden nu wissen': 'Kustuta taastefailid kohe',
+  'Er waren geen herstelbestanden.': 'Taastefaile polnud.',
+  'herstelbestand(en) gewist.': 'taastefail(i) kustutatud.',
   'Klaar voor export': 'Ekspordiks valmis',
   'kwaliteitswaarschuwing(en)': 'kvaliteedihoiatus(t)',
   'Nog opslaan nodig': 'Enne tuleb salvestada',
@@ -1234,5 +1310,4 @@ const _dutchSourceEt = {
   'Naar prullenbak': 'Prügikasti',
   'Deze presentatie staat ook op een andere plek:':
       'See esitlus on olemas ka teises kohas:',
-  'Opruimen…': 'Korista…',
 };

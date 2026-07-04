@@ -23,6 +23,44 @@ extension _PresenterQuestions on _FullscreenPresenterState {
     return !view.passed;
   }
 
+  /// Badge die uitlegt waarom auto-advance stilstaat op een vraagslide;
+  /// zonder dit leek de voortgang gewoon "kapot" te zijn.
+  Widget _buildQuestionWaitBadge(BuildContext context) {
+    return Positioned(
+      left: 16,
+      bottom: 16,
+      child: IgnorePointer(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+          decoration: BoxDecoration(
+            color: Colors.black.withValues(alpha: 0.72),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.hourglass_top_outlined,
+                size: 15,
+                color: Colors.white70,
+              ),
+              const SizedBox(width: 7),
+              Text(
+                context.l10n.d('Wacht op antwoord…'),
+                style: const TextStyle(color: Colors.white70, fontSize: 13),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// True wanneer de wacht-op-antwoord-badge getoond moet worden: alleen als
+  /// auto-play aan staat en een onbeantwoorde vraag het doorschakelen tegenhoudt.
+  bool get _showQuestionWaitBadge =>
+      _autoPlay && _questionBlocksAdvance && _blank == _Blank.none;
+
   /// Trek een nieuwe willekeurige set antwoorden voor [slide] en start de timer.
   void _startQuestionRound(Slide slide) {
     final spec = QuestionSpec.parse(slide.customMarkdown);

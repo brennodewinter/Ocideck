@@ -59,6 +59,7 @@ extension _PresenterContent on _FullscreenPresenterState {
       '';
 
   void _setRichTextPage(int page) {
+    _commitActiveInk();
     _persistUserNoteFromController();
     _rebuild(() => _richTextPage = page);
     _loadUserNoteIntoController();

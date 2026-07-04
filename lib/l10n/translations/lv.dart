@@ -1115,6 +1115,81 @@ const _dutchSourceLv = {
   'Pen · markeerstift · ⇧E': 'Pildspalva · marķieris · ⇧E',
   'Gestapelde staaf': 'Sakrauts stabiņš',
   'Spreiding': 'Izkliede',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn pāršķir slaidus',
+  'Wacht op antwoord…': 'Gaida atbildi…',
+  'Afbeelding slidevullend': 'Attēls aizpilda slaidu',
+  'Vult de hele slide en snijdt de randen bij':
+      'Aizpilda visu slaidu un apgriež malas',
+  'Afbeelding vult hele slide': 'Attēls aizpilda visu slaidu',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Ieslēgts: aizpilda visu slaidu, virsraksts pa virsu (apgriezts). Izslēgts: attēls augšā, virsraksts joslā zem tā.',
+  'Grijze waas over afbeelding': 'Pelēka plīvurs pār attēlu',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Nomierina fonu aiz virsraksta un apakšvirsraksta.',
+  'Licht': 'Gaišs',
+  'Donker': 'Tumšs',
+  'Pen (D)': 'Pildspalva (D)',
+  'Markeerstift (T)': 'Marķieris (T)',
+  'Gum (E / Shift+E)': 'Dzēšgumija (E / Shift+E)',
+  'Laser (X)': 'Lāzers (X)',
+  'Metriek': 'Metrika',
+  'Inhoud': 'Saturs',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Jautājumu nevar izspēlēt: norādiet vismaz vienu pareizu un vienu nepareizu atbildi.',
+  'CSV-koppeling verbreken?': 'Atsaistīt CSV failu?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Dati paliek slaidā, bet CSV faila izmaiņas vairs netiks pārņemtas.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Attēls noraidīts: pārāk liels (maks. 64 MB) vai neatbalstīts formāts.',
+  'Geen afbeelding op het klembord.': 'Starpliktuvē nav attēla.',
+  'Kon de afbeelding niet opslaan.': 'Neizdevās saglabāt attēlu.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Neizdevās izdzēst attēlu. Pārbaudiet, vai fails netiek lietots un vai jums ir rakstīšanas tiesības.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Šajā vietā nav rakstīšanas tiesību. Izvēlieties citu mapi.',
+  'De schijf is vol.': 'Disks ir pilns.',
+  'Bestand of map niet gevonden.': 'Fails vai mape nav atrasta.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Failu neizdevās nolasīt vai ierakstīt.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Tīkla kļūda — pārbaudiet savienojumu un mēģiniet vēlreiz.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Kaut kas negaidīti nogāja greizi. Sīkāku informāciju skatiet žurnālā.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud nav (pareizi) iestatīts — pārbaudiet servera datus sadaļā Iestatījumi → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Šis serveris nav atļauts. Vispirms atzīmējiet privātu/LAN serveri kā uzticamu sadaļā Iestatījumi → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Serveris nav sasniedzams — pārbaudiet savienojumu un servera URL.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Pieteikšanās neizdevās. Pārbaudiet lietotājvārdu un paroli; ar Nextcloud izmantojiet lietotnes paroli, nevis konta paroli.',
+  'Bestand of map niet gevonden op de server.':
+      'Fails vai mape serverī nav atrasta.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Fails ir lielāks par atļauto limitu.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Serveris atgrieza kļūdu. Mēģiniet vēlāk vēlreiz.',
+  'Het bestand is beschadigd of onleesbaar.': 'Fails ir bojāts vai nenolasāms.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Imports noraidīts: pakotne pārsniedz drošības limitus.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'No šī URL neizdevās iegūt prezentāciju. Pārbaudiet URL un savienojumu.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Pieteikšanās neizdevās — pārbaudiet lietotājvārdu un paroli. Padoms: ar Nextcloud izmantojiet lietotnes paroli (Iestatījumi → Drošība), nevis konta paroli.',
+  'Annuleren…': 'Atceļ…',
+  'Afbeeldingen vergelijken…': 'Salīdzina attēlus…',
+  'Presentaties scannen…': 'Skenē prezentācijas…',
+  'Opruimen…': 'Uzkopšana…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Nevarēja nolasīt vienu vai vairākas bibliotēkas mapes; saraksts var būt nepilnīgs.',
+  'Uit recente bestanden verwijderen': 'Noņemt no nesenajiem failiem',
+  'OciDeck wordt gestart…': 'Startē OciDeck…',
+  'Herstelbestanden': 'Atkopšanas faili',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Atkopšanas faili satur visu jūsu prezentāciju saturu vienkāršā tekstā. Tie tiek automātiski iztīrīti pēc 7 dienām; šeit tos var izdzēst uzreiz.',
+  'Herstelbestanden nu wissen': 'Izdzēst atkopšanas failus tagad',
+  'Er waren geen herstelbestanden.': 'Atkopšanas failu nebija.',
+  'herstelbestand(en) gewist.': 'atkopšanas fails(-i) izdzēsti.',
   'Klaar voor export': 'Gatavs eksportam',
   'kwaliteitswaarschuwing(en)': 'kvalitātes brīdinājums(-i)',
   'Nog opslaan nodig': 'Vispirms jāsaglabā',
@@ -1243,5 +1318,4 @@ const _dutchSourceLv = {
   'Naar prullenbak': 'Uz atkritni',
   'Deze presentatie staat ook op een andere plek:':
       'Šī prezentācija pastāv arī citā vietā:',
-  'Opruimen…': 'Sakārtot…',
 };

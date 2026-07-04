@@ -108,6 +108,17 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
 
   KeyEventResult _handleReplaceKey(FocusNode node, KeyEvent event) {
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
+    // Enter vervangt de huidige match (Shift+Enter: alles) — dezelfde
+    // verwachting als in andere editors, i.p.v. een toets die niets doet.
+    if (event.logicalKey == LogicalKeyboardKey.enter ||
+        event.logicalKey == LogicalKeyboardKey.numpadEnter) {
+      if (HardwareKeyboard.instance.isShiftPressed) {
+        widget.onReplaceAll();
+      } else {
+        widget.onReplaceCurrent();
+      }
+      return KeyEventResult.handled;
+    }
     if (event.logicalKey == LogicalKeyboardKey.escape) {
       widget.onClose();
       return KeyEventResult.handled;

@@ -36,6 +36,13 @@ class AnnotationLayer extends StatefulWidget {
   /// the current partial stroke, or null when it commits or is cancelled.
   final ValueChanged<InkStroke?>? onActiveStrokeChanged;
 
+  /// Identifies the surface being drawn on (slide + page). When it changes,
+  /// any in-progress stroke and laser point are dropped as a safety net, so a
+  /// half-drawn line can never end up on the wrong slide. Navigation paths
+  /// call [AnnotationLayerState.commitActiveStroke] first, which commits the
+  /// stroke to the old slide instead of losing it.
+  final Object? resetToken;
+
   const AnnotationLayer({
     super.key,
     required this.strokes,
@@ -47,16 +54,34 @@ class AnnotationLayer extends StatefulWidget {
     this.onStrokesChanged,
     this.onLaserMove,
     this.onActiveStrokeChanged,
+    this.resetToken,
   });
 
   @override
-  State<AnnotationLayer> createState() => _AnnotationLayerState();
+  State<AnnotationLayer> createState() => AnnotationLayerState();
 }
 
-class _AnnotationLayerState extends State<AnnotationLayer> {
+class AnnotationLayerState extends State<AnnotationLayer> {
   List<Offset> _active = const [];
   Offset? _laser;
   Size _size = Size.zero;
+
+  /// Rond een streek-in-uitvoering nu af (bijv. vlak vóór een slidewissel),
+  /// zodat auto-advance of navigatie een half getekende lijn niet weggooit.
+  void commitActiveStroke() {
+    if (_drawing && _active.isNotEmpty) _commitActive();
+  }
+
+  @override
+  void didUpdateWidget(AnnotationLayer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.resetToken != widget.resetToken) {
+      // Vangnet: op een nieuwe slide/pagina nooit doortekenen met de oude
+      // punten. De beamer wist zijn live-preview zelf bij het 'update'-bericht.
+      _active = const [];
+      _laser = null;
+    }
+  }
 
   bool get _drawing =>
       widget.tool == InkTool.pen || widget.tool == InkTool.highlighter;
@@ -271,5 +296,14 @@ class _InkPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_InkPainter old) => true;
+  bool shouldRepaint(_InkPainter old) =>
+      // Streken- en puntenlijsten worden bij elke wijziging vervangen (nooit
+      // in-place gemuteerd), dus een identiteitsvergelijking volstaat en
+      // voorkomt hertekenen bij elke onafhankelijke rebuild of laser-tick.
+      old.strokes != strokes ||
+      old.active != active ||
+      old.activeTool != activeTool ||
+      old.activeColor != activeColor ||
+      old.activeWidth != activeWidth ||
+      old.laser != laser;
 }

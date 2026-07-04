@@ -1140,6 +1140,82 @@ const _dutchSourceGa = {
   'Pen · markeerstift · ⇧E': 'Peann · aibhsitheoir · ⇧E',
   'Gestapelde staaf': 'Barra cruachta',
   'Spreiding': 'Scaipthe',
+  'PgUp/PgDn bladert door de slides': 'Bogann PgUp/PgDn idir na sleamhnáin',
+  'Wacht op antwoord…': 'Ag fanacht le freagra…',
+  'Afbeelding slidevullend': 'Líonann an íomhá an sleamhnán',
+  'Vult de hele slide en snijdt de randen bij':
+      'Líonann sé an sleamhnán ar fad agus bearrann sé na himill',
+  'Afbeelding vult hele slide': 'Líonann an íomhá an sleamhnán ar fad',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Ann: líonann sé an sleamhnán ar fad, teideal anuas air (bearrtha). As: íomhá ag an mbarr, teideal i mbanda faoi.',
+  'Grijze waas over afbeelding': 'Scáil liath ar an íomhá',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Ciúnaíonn sé an cúlra taobh thiar den teideal agus den fhotheideal.',
+  'Licht': 'Geal',
+  'Donker': 'Dorcha',
+  'Pen (D)': 'Peann (D)',
+  'Markeerstift (T)': 'Aibhsitheoir (T)',
+  'Gum (E / Shift+E)': 'Scriosán (E / Shift+E)',
+  'Laser (X)': 'Léasar (X)',
+  'Metriek': 'Méadracht',
+  'Inhoud': 'Ábhar',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Ní féidir an cheist a imirt: tabhair freagra ceart amháin agus freagra mícheart amháin ar a laghad.',
+  'CSV-koppeling verbreken?': 'An nasc CSV a bhriseadh?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Fanann na sonraí sa sleamhnán, ach ní thiocfaidh athruithe ar an gcomhad CSV tríd a thuilleadh.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Diúltaíodh don íomhá: rómhór (uas. 64 MB) nó formáid nach dtacaítear léi.',
+  'Geen afbeelding op het klembord.': 'Níl aon íomhá ar an ngearrthaisce.',
+  'Kon de afbeelding niet opslaan.': 'Níorbh fhéidir an íomhá a shábháil.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Níorbh fhéidir an íomhá a scriosadh. Seiceáil nach bhfuil an comhad in úsáid agus go bhfuil ceadanna scríofa agat.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Níl cead scríofa agat san áit seo. Roghnaigh fillteán eile.',
+  'De schijf is vol.': 'Tá an diosca lán.',
+  'Bestand of map niet gevonden.': 'Níor aimsíodh an comhad nó an fillteán.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Níorbh fhéidir an comhad a léamh nó a scríobh.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Earráid líonra — seiceáil do nasc agus bain triail eile as.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Chuaigh rud éigin amú gan choinne. Féach an logchomhad le haghaidh sonraí.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Níl Nextcloud socraithe (i gceart) — seiceáil sonraí an fhreastalaí faoi Socruithe → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Ní cheadaítear an freastalaí seo. Marcáil freastalaí príobháideach/LAN mar iontaofa ar dtús faoi Socruithe → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Ní féidir an freastalaí a shroicheadh — seiceáil do nasc agus URL an fhreastalaí.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Theip ar an síniú isteach. Seiceáil an t-ainm úsáideora agus an pasfhocal; le Nextcloud, úsáid pasfhocal aipe, ní pasfhocal do chuntais.',
+  'Bestand of map niet gevonden op de server.':
+      'Níor aimsíodh an comhad nó an fillteán ar an bhfreastalaí.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Tá an comhad níos mó ná an teorainn cheadaithe.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'D\'fhill an freastalaí earráid. Bain triail eile as ar ball.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Tá an comhad damáiste nó doléite.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Diúltaíodh don iompórtáil: sáraíonn an pacáiste na teorainneacha slándála.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Níorbh fhéidir cur i láthair a fháil ón URL seo. Seiceáil an URL agus do nasc.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Theip ar an síniú isteach — seiceáil an t-ainm úsáideora agus an pasfhocal. Leid: le Nextcloud, úsáid pasfhocal aipe (Socruithe → Slándáil), ní pasfhocal do chuntais.',
+  'Annuleren…': 'Á chealú…',
+  'Afbeeldingen vergelijken…': 'Íomhánna á gcur i gcomparáid…',
+  'Presentaties scannen…': 'Cur i láthair á scanadh…',
+  'Opruimen…': 'Á ghlanadh…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Níorbh fhéidir fillteán leabharlainne amháin nó níos mó a léamh; d\'fhéadfadh an liosta a bheith neamhiomlán.',
+  'Uit recente bestanden verwijderen': 'Bain de na comhaid le déanaí',
+  'OciDeck wordt gestart…': 'OciDeck á thosú…',
+  'Herstelbestanden': 'Comhaid athshlánaithe',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Bíonn ábhar iomlán do chur i láthair i ngnáth-théacs sna comhaid athshlánaithe. Glantar go huathoibríoch iad tar éis 7 lá; is féidir leat iad a scriosadh láithreach anseo.',
+  'Herstelbestanden nu wissen': 'Scrios comhaid athshlánaithe anois',
+  'Er waren geen herstelbestanden.': 'Ní raibh aon chomhaid athshlánaithe ann.',
+  'herstelbestand(en) gewist.': 'comhad/comhaid athshlánaithe scriosta.',
   'Klaar voor export': 'Réidh le heaspórtáil',
   'kwaliteitswaarschuwing(en)': 'rabhadh (rabhaidh) cáilíochta',
   'Nog opslaan nodig': 'Ní mór sábháil ar dtús',
@@ -1271,5 +1347,4 @@ const _dutchSourceGa = {
   'Naar prullenbak': 'Go dtí an bruscar',
   'Deze presentatie staat ook op een andere plek:':
       'Tá an láithreoireacht seo ann in áit eile freisin:',
-  'Opruimen…': 'Glan suas…',
 };

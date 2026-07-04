@@ -57,6 +57,9 @@ extension _PresenterDisplays on _FullscreenPresenterState {
   Future<void> _cycleDisplay() async {
     if (_displays.isEmpty) await _loadDisplays();
     if (_displays.length < 2) return;
+    // Doof de laser op de beamer: het venster verhuist en zou anders een
+    // achtergebleven stip laten staan tot de muis weer beweegt.
+    _onLaserMove(null);
     await _moveToDisplay((_displayIndex + 1) % _displays.length);
   }
 }

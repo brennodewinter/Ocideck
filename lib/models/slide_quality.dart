@@ -3,7 +3,7 @@ import 'markdown_validation.dart';
 /// Sentinel index for deck-wide issues (theme contrast, etc.).
 const int kDeckWideSlideIndex = -1;
 
-enum SlideQualityCategory { altText, contrast, textDensity }
+enum SlideQualityCategory { altText, contrast, textDensity, content }
 
 enum SlideQualityIssueKind {
   missingAltCaption,
@@ -31,6 +31,7 @@ enum SlideQualityIssueKind {
   bulletMultiSentence,
   bulletNestingDeep,
   bulletColumnImbalance,
+  questionNotAnswerable,
 }
 
 class SlideQualityIssue {

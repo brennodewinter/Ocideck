@@ -195,7 +195,7 @@ extension _SettingsWebdav on _SettingsDialogState {
     switch (kind) {
       case WebdavError.auth:
         return l10n.d(
-          'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord',
+          'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.',
         );
       case WebdavError.blockedHost:
         return l10n.d(

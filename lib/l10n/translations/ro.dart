@@ -1125,6 +1125,82 @@ const _dutchSourceRo = {
   'Pen · markeerstift · ⇧E': 'Stilou · marker · ⇧E',
   'Gestapelde staaf': 'Bare stivuite',
   'Spreiding': 'Dispersie',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn răsfoiește diapozitivele',
+  'Wacht op antwoord…': 'Se așteaptă un răspuns…',
+  'Afbeelding slidevullend': 'Imaginea umple diapozitivul',
+  'Vult de hele slide en snijdt de randen bij':
+      'Umple tot diapozitivul și taie marginile',
+  'Afbeelding vult hele slide': 'Imaginea umple tot diapozitivul',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Pornit: umple tot diapozitivul, titlul deasupra (decupat). Oprit: imaginea sus, titlul într-o bandă dedesubt.',
+  'Grijze waas over afbeelding': 'Văl gri peste imagine',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Liniștește fundalul din spatele titlului și subtitlului.',
+  'Licht': 'Deschis',
+  'Donker': 'Închis',
+  'Pen (D)': 'Stilou (D)',
+  'Markeerstift (T)': 'Evidențiator (T)',
+  'Gum (E / Shift+E)': 'Radieră (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metrică',
+  'Inhoud': 'Conținut',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Întrebarea nu poate fi jucată: oferă cel puțin un răspuns corect și unul greșit.',
+  'CSV-koppeling verbreken?': 'Rupeți legătura cu CSV?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Datele rămân în diapozitiv, dar modificările din fișierul CSV nu vor mai fi preluate.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Imagine respinsă: prea mare (max. 64 MB) sau format neacceptat.',
+  'Geen afbeelding op het klembord.': 'Nicio imagine în clipboard.',
+  'Kon de afbeelding niet opslaan.': 'Imaginea nu a putut fi salvată.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Imaginea nu a putut fi ștearsă. Verificați dacă fișierul nu este în uz și dacă aveți drepturi de scriere.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Fără drepturi de scriere în această locație. Alegeți alt dosar.',
+  'De schijf is vol.': 'Discul este plin.',
+  'Bestand of map niet gevonden.': 'Fișierul sau dosarul nu a fost găsit.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Fișierul nu a putut fi citit sau scris.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Eroare de rețea — verificați conexiunea și încercați din nou.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Ceva a mers neașteptat de prost. Vedeți jurnalul pentru detalii.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud nu este configurat (corect) — verificați datele serverului la Setări → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Acest server nu este permis. Marcați mai întâi un server privat/LAN ca de încredere la Setări → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Serverul nu poate fi contactat — verificați conexiunea și URL-ul serverului.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Autentificarea a eșuat. Verificați numele de utilizator și parola; cu Nextcloud folosiți o parolă de aplicație, nu parola contului.',
+  'Bestand of map niet gevonden op de server.':
+      'Fișierul sau dosarul nu a fost găsit pe server.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Fișierul depășește limita permisă.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Serverul a returnat o eroare. Încercați din nou mai târziu.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Fișierul este deteriorat sau ilizibil.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Import refuzat: pachetul depășește limitele de siguranță.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Nu s-a putut prelua o prezentare de la acest URL. Verificați URL-ul și conexiunea.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Autentificarea a eșuat — verificați numele de utilizator și parola. Sfat: cu Nextcloud folosiți o parolă de aplicație (Setări → Securitate), nu parola contului.',
+  'Annuleren…': 'Se anulează…',
+  'Afbeeldingen vergelijken…': 'Se compară imaginile…',
+  'Presentaties scannen…': 'Se scanează prezentările…',
+  'Opruimen…': 'Se curăță…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Nu s-au putut citi unul sau mai multe dosare ale bibliotecii; lista poate fi incompletă.',
+  'Uit recente bestanden verwijderen': 'Elimină din fișierele recente',
+  'OciDeck wordt gestart…': 'Se pornește OciDeck…',
+  'Herstelbestanden': 'Fișiere de recuperare',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Fișierele de recuperare conțin întregul conținut al prezentărilor în text simplu. Sunt curățate automat după 7 zile; aici le puteți șterge imediat.',
+  'Herstelbestanden nu wissen': 'Șterge fișierele de recuperare acum',
+  'Er waren geen herstelbestanden.': 'Nu existau fișiere de recuperare.',
+  'herstelbestand(en) gewist.': 'fișier(e) de recuperare șterse.',
   'Klaar voor export': 'Gata de export',
   'kwaliteitswaarschuwing(en)': 'avertisment(e) de calitate',
   'Nog opslaan nodig': 'Mai întâi trebuie salvat',
@@ -1257,5 +1333,4 @@ const _dutchSourceRo = {
   'Naar prullenbak': 'La coșul de gunoi',
   'Deze presentatie staat ook op een andere plek:':
       'Această prezentare există și în alt loc:',
-  'Opruimen…': 'Curăță…',
 };

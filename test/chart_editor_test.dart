@@ -207,4 +207,36 @@ void main() {
     expect(specs.first.series.single.data, [10, 20]);
     expect(specs.first.series.single.color, '#003399');
   });
+
+  testWidgets('unlinking a CSV source asks for confirmation first', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      x: ['A', 'B'],
+      series: [
+        ChartSeries(name: 'Waarde', data: [10, 20]),
+      ],
+      source: 'data/cijfers.csv',
+    );
+    var updated = Slide.create(
+      SlideType.chart,
+    ).copyWith(customMarkdown: spec.toBlock());
+
+    await tester.pumpWidget(_host(updated, (slide) => updated = slide));
+    await tester.pump();
+
+    // Annuleren laat de koppeling intact.
+    await tester.tap(find.text('Ontkoppelen'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Annuleren'));
+    await tester.pumpAndSettle();
+    expect(ChartSpec.parse(updated.customMarkdown).source, 'data/cijfers.csv');
+
+    // Bevestigen verbreekt de koppeling echt.
+    await tester.tap(find.text('Ontkoppelen').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Ontkoppelen').last);
+    await tester.pumpAndSettle();
+    expect(ChartSpec.parse(updated.customMarkdown).source, isNull);
+  });
 }

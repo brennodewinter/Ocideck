@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
+import '../../services/recovery_service.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/webdav_service.dart';
 import '../../state/settings_provider.dart';
@@ -229,8 +230,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
   /// Bouw een [WebdavServer] uit de huidige veldwaarden (zonder wachtwoord).
   WebdavServer _webdavServerFromFields() {
+    var url = _webdavUrl.text.trim();
+    // "cloud.example.com" zonder schema is de meest gemaakte invoerfout;
+    // vul https:// aan i.p.v. later op een ongeldige URL te stranden.
+    if (url.isNotEmpty && !url.contains('://')) url = 'https://$url';
     return WebdavServer(
-      baseUrl: _webdavUrl.text.trim(),
+      baseUrl: url,
       username: _webdavUser.text.trim(),
       rootPath: WebdavServer.normalizeRoot(_webdavRoot.text),
       trustedInternal: _webdavTrusted,

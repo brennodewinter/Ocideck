@@ -164,7 +164,7 @@ class _WelcomeScreen extends ConsumerWidget {
             child: ListView.builder(
               padding: const EdgeInsets.only(bottom: 16),
               itemCount: recentFiles.length,
-              itemBuilder: (_, i) => _RecentFileTile(
+              itemBuilder: (itemContext, i) => _RecentFileTile(
                 file: recentFiles[i],
                 origin: ref.watch(
                   settingsProvider.select(
@@ -174,9 +174,10 @@ class _WelcomeScreen extends ConsumerWidget {
                 homeDir: ref.watch(
                   settingsProvider.select((s) => s.homeDirectory),
                 ),
-                onTap: () => ref
-                    .read(tabsProvider.notifier)
-                    .openFileByPath(recentFiles[i].path),
+                onTap: () => _openRecent(itemContext, ref, recentFiles[i].path),
+                onRemove: () => ref
+                    .read(settingsProvider.notifier)
+                    .removeRecentFile(recentFiles[i].path),
               ),
             ),
           ),
@@ -197,6 +198,23 @@ class _WelcomeScreen extends ConsumerWidget {
         .read(tabsProvider.notifier)
         .newDeckInCurrentTab(choice.title, template: choice.template);
   }
+
+  /// Open een recent bestand met dezelfde nette foutafhandeling als het
+  /// openen-dialoog; een verdwenen bestand verdwijnt ook uit de lijst.
+  Future<void> _openRecent(
+    BuildContext context,
+    WidgetRef ref,
+    String path,
+  ) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final l10n = context.l10n;
+    final result = await ref.read(tabsProvider.notifier).openFileByPath(path);
+    _reportOpenFailure(messenger, l10n, result);
+    if (result == OpenResult.unreadable && !File(path).existsSync()) {
+      // Het bestand bestaat niet meer: opruimen i.p.v. blijven aanbieden.
+      await ref.read(settingsProvider.notifier).removeRecentFile(path);
+    }
+  }
 }
 
 // ── Main 2-panel layout ───────────────────────────────────────────────────────
@@ -214,12 +232,14 @@ class _RecentFileTile extends StatelessWidget {
   final String? origin;
   final String? homeDir;
   final VoidCallback onTap;
+  final VoidCallback onRemove;
 
   const _RecentFileTile({
     required this.file,
     required this.origin,
     required this.homeDir,
     required this.onTap,
+    required this.onRemove,
   });
 
   @override
@@ -338,6 +358,21 @@ class _RecentFileTile extends StatelessWidget {
                       ],
                     ),
                   ],
+                ),
+              ),
+              Tooltip(
+                message: l10n.d('Uit recente bestanden verwijderen'),
+                child: InkWell(
+                  onTap: onRemove,
+                  borderRadius: BorderRadius.circular(3),
+                  child: Padding(
+                    padding: const EdgeInsets.all(3),
+                    child: Icon(
+                      Icons.close,
+                      size: 13,
+                      color: palette.mutedText,
+                    ),
+                  ),
                 ),
               ),
             ],

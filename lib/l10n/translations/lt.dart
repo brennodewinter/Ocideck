@@ -1120,6 +1120,82 @@ const _dutchSourceLt = {
   'Pen · markeerstift · ⇧E': 'Rašiklis · žymeklis · ⇧E',
   'Gestapelde staaf': 'Sukrauta stulpelinė',
   'Spreiding': 'Sklaida',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn verčia skaidres',
+  'Wacht op antwoord…': 'Laukiama atsakymo…',
+  'Afbeelding slidevullend': 'Vaizdas užpildo skaidrę',
+  'Vult de hele slide en snijdt de randen bij':
+      'Užpildo visą skaidrę ir apkarpo kraštus',
+  'Afbeelding vult hele slide': 'Vaizdas užpildo visą skaidrę',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Įjungta: užpildo visą skaidrę, pavadinimas viršuje (apkarpyta). Išjungta: vaizdas viršuje, pavadinimas juostoje po juo.',
+  'Grijze waas over afbeelding': 'Pilkas šydas ant vaizdo',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Nuramina foną už pavadinimo ir paantraštės.',
+  'Licht': 'Šviesus',
+  'Donker': 'Tamsus',
+  'Pen (D)': 'Rašiklis (D)',
+  'Markeerstift (T)': 'Žymeklis (T)',
+  'Gum (E / Shift+E)': 'Trintukas (E / Shift+E)',
+  'Laser (X)': 'Lazeris (X)',
+  'Metriek': 'Metrika',
+  'Inhoud': 'Turinys',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Klausimo negalima žaisti: pateikite bent vieną teisingą ir vieną neteisingą atsakymą.',
+  'CSV-koppeling verbreken?': 'Atsieti CSV failą?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Duomenys lieka skaidrėje, bet CSV failo pakeitimai nebebus perimami.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Vaizdas atmestas: per didelis (maks. 64 MB) arba nepalaikomas formatas.',
+  'Geen afbeelding op het klembord.': 'Iškarpinėje nėra vaizdo.',
+  'Kon de afbeelding niet opslaan.': 'Nepavyko išsaugoti vaizdo.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Nepavyko ištrinti vaizdo. Patikrinkite, ar failas nenaudojamas ir ar turite rašymo teises.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Šioje vietoje nėra rašymo teisių. Pasirinkite kitą aplanką.',
+  'De schijf is vol.': 'Diskas pilnas.',
+  'Bestand of map niet gevonden.': 'Failas arba aplankas nerastas.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Nepavyko perskaityti arba įrašyti failo.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Tinklo klaida — patikrinkite ryšį ir bandykite dar kartą.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Kažkas netikėtai nepavyko. Išsamiau žurnale.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud nesukonfigūruotas (teisingai) — patikrinkite serverio duomenis skiltyje Nustatymai → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Šis serveris neleidžiamas. Pirmiausia pažymėkite privatų/LAN serverį kaip patikimą skiltyje Nustatymai → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Serveris nepasiekiamas — patikrinkite ryšį ir serverio URL.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Prisijungti nepavyko. Patikrinkite naudotojo vardą ir slaptažodį; su Nextcloud naudokite programėlės slaptažodį, o ne paskyros.',
+  'Bestand of map niet gevonden op de server.':
+      'Failas arba aplankas serveryje nerastas.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Failas didesnis už leidžiamą limitą.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Serveris grąžino klaidą. Bandykite vėliau.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Failas sugadintas arba neperskaitomas.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Importas atmestas: paketas viršija saugumo ribas.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Iš šio URL nepavyko gauti pristatymo. Patikrinkite URL ir ryšį.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Prisijungti nepavyko — patikrinkite naudotojo vardą ir slaptažodį. Patarimas: su Nextcloud naudokite programėlės slaptažodį (Nustatymai → Sauga), o ne paskyros.',
+  'Annuleren…': 'Atšaukiama…',
+  'Afbeeldingen vergelijken…': 'Lyginami vaizdai…',
+  'Presentaties scannen…': 'Skenuojami pristatymai…',
+  'Opruimen…': 'Tvarkoma…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Nepavyko perskaityti vieno ar kelių bibliotekos aplankų; sąrašas gali būti neišsamus.',
+  'Uit recente bestanden verwijderen': 'Pašalinti iš paskutinių failų',
+  'OciDeck wordt gestart…': 'Paleidžiama OciDeck…',
+  'Herstelbestanden': 'Atkūrimo failai',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Atkūrimo failuose yra visas jūsų pristatymų turinys paprastu tekstu. Jie automatiškai išvalomi po 7 dienų; čia galite juos ištrinti iš karto.',
+  'Herstelbestanden nu wissen': 'Ištrinti atkūrimo failus dabar',
+  'Er waren geen herstelbestanden.': 'Atkūrimo failų nebuvo.',
+  'herstelbestand(en) gewist.': 'atkūrimo failas(-ai) ištrinti.',
   'Klaar voor export': 'Paruošta eksportuoti',
   'kwaliteitswaarschuwing(en)': 'kokybės įspėjimas(-ai)',
   'Nog opslaan nodig': 'Pirmiausia reikia išsaugoti',
@@ -1247,5 +1323,4 @@ const _dutchSourceLt = {
   'Naar prullenbak': 'Į šiukšlinę',
   'Deze presentatie staat ook op een andere plek:':
       'Ši pateiktis yra ir kitoje vietoje:',
-  'Opruimen…': 'Sutvarkyti…',
 };

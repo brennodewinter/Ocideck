@@ -445,7 +445,9 @@ class _QuestionEditorState extends State<QuestionEditor> {
           widget.slide.copyWith(imagePath: path, imageCaption: caption),
         ),
         onBrowse: () async {
-          final path = await widget.imageService.pickImage(
+          final path = await pickImageWithFeedback(
+            context,
+            widget.imageService,
             projectPath: widget.captionBasePath,
           );
           if (path != null) {
@@ -453,7 +455,9 @@ class _QuestionEditorState extends State<QuestionEditor> {
           }
         },
         onPaste: () async {
-          final path = await widget.imageService.pasteImage(
+          final path = await pasteImageWithFeedback(
+            context,
+            widget.imageService,
             projectPath: widget.captionBasePath,
           );
           if (path != null) {

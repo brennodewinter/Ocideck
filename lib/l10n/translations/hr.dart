@@ -1119,6 +1119,82 @@ const _dutchSourceHr = {
   'Pen · markeerstift · ⇧E': 'Olovka · marker · ⇧E',
   'Gestapelde staaf': 'Složeni stupčasti',
   'Spreiding': 'Raspršeni',
+  'PgUp/PgDn bladert door de slides': 'PgUp/PgDn lista slajdove',
+  'Wacht op antwoord…': 'Čeka se odgovor…',
+  'Afbeelding slidevullend': 'Slika ispunjava slajd',
+  'Vult de hele slide en snijdt de randen bij':
+      'Ispunjava cijeli slajd i obrezuje rubove',
+  'Afbeelding vult hele slide': 'Slika ispunjava cijeli slajd',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Uklj.: ispunjava cijeli slajd, naslov preko (obrezano). Isklj.: slika gore, naslov u traci ispod.',
+  'Grijze waas over afbeelding': 'Sivi veo preko slike',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Smiruje pozadinu iza naslova i podnaslova.',
+  'Licht': 'Svijetlo',
+  'Donker': 'Tamno',
+  'Pen (D)': 'Olovka (D)',
+  'Markeerstift (T)': 'Marker (T)',
+  'Gum (E / Shift+E)': 'Gumica (E / Shift+E)',
+  'Laser (X)': 'Laser (X)',
+  'Metriek': 'Metrika',
+  'Inhoud': 'Sadržaj',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Pitanje se ne može igrati: navedite barem jedan točan i jedan netočan odgovor.',
+  'CSV-koppeling verbreken?': 'Prekinuti vezu s CSV-om?',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Podaci ostaju u slajdu, ali promjene u CSV datoteci više se neće preuzimati.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Slika odbijena: prevelika (maks. 64 MB) ili nepodržani format.',
+  'Geen afbeelding op het klembord.': 'Nema slike u međuspremniku.',
+  'Kon de afbeelding niet opslaan.': 'Sliku nije bilo moguće spremiti.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Sliku nije bilo moguće izbrisati. Provjerite da datoteka nije u upotrebi i da imate prava pisanja.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Nema prava pisanja na ovoj lokaciji. Odaberite drugu mapu.',
+  'De schijf is vol.': 'Disk je pun.',
+  'Bestand of map niet gevonden.': 'Datoteka ili mapa nije pronađena.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Datoteku nije bilo moguće pročitati ili zapisati.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Mrežna pogreška — provjerite vezu i pokušajte ponovno.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Nešto je neočekivano pošlo po zlu. Detalji su u zapisniku.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Nextcloud nije (ispravno) postavljen — provjerite podatke poslužitelja u Postavke → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Ovaj poslužitelj nije dopušten. Prvo označite privatni/LAN poslužitelj kao pouzdan u Postavke → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Poslužitelj nedostupan — provjerite vezu i URL poslužitelja.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Prijava nije uspjela. Provjerite korisničko ime i lozinku; uz Nextcloud koristite lozinku aplikacije, ne lozinku računa.',
+  'Bestand of map niet gevonden op de server.':
+      'Datoteka ili mapa nije pronađena na poslužitelju.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Datoteka je veća od dopuštenog ograničenja.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Poslužitelj je vratio pogrešku. Pokušajte ponovno kasnije.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Datoteka je oštećena ili nečitljiva.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Uvoz odbijen: paket premašuje sigurnosna ograničenja.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'S ovog URL-a nije bilo moguće dohvatiti prezentaciju. Provjerite URL i vezu.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Prijava nije uspjela — provjerite korisničko ime i lozinku. Savjet: uz Nextcloud koristite lozinku aplikacije (Postavke → Sigurnost), ne lozinku računa.',
+  'Annuleren…': 'Otkazivanje…',
+  'Afbeeldingen vergelijken…': 'Uspoređivanje slika…',
+  'Presentaties scannen…': 'Skeniranje prezentacija…',
+  'Opruimen…': 'Čišćenje…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Nije bilo moguće pročitati jednu ili više mapa knjižnice; popis može biti nepotpun.',
+  'Uit recente bestanden verwijderen': 'Ukloni iz nedavnih datoteka',
+  'OciDeck wordt gestart…': 'Pokretanje OciDecka…',
+  'Herstelbestanden': 'Datoteke za oporavak',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Datoteke za oporavak sadrže cjelokupan sadržaj vaših prezentacija u običnom tekstu. Automatski se čiste nakon 7 dana; ovdje ih možete odmah izbrisati.',
+  'Herstelbestanden nu wissen': 'Izbriši datoteke za oporavak sada',
+  'Er waren geen herstelbestanden.': 'Nije bilo datoteka za oporavak.',
+  'herstelbestand(en) gewist.': 'datoteka za oporavak izbrisano.',
   'Klaar voor export': 'Spremno za izvoz',
   'kwaliteitswaarschuwing(en)': 'upozorenje(a) o kvaliteti',
   'Nog opslaan nodig': 'Prvo je potrebno spremiti',
@@ -1248,5 +1324,4 @@ const _dutchSourceHr = {
   'Naar prullenbak': 'U smeće',
   'Deze presentatie staat ook op een andere plek:':
       'Ova prezentacija postoji i na drugom mjestu:',
-  'Opruimen…': 'Počisti…',
 };

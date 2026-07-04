@@ -106,7 +106,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
       ('Ctrl+N', l10n.d('Mijn notities aan/uit')),
       ('S', l10n.d('Scherm wisselen (meerdere schermen)')),
       ('B · W', l10n.d('Zwart · wit scherm')),
-      ('D · T · ⇧E', l10n.d('Pen · markeerstift · gum')),
+      ('D · T · Shift+E', l10n.d('Pen · markeerstift · gum')),
       ('E', l10n.d('Tabel bewerken (op tabeldia)')),
       ('X · C', l10n.d('Laser · annotaties wissen')),
       ('K', l10n.d('Doeltijd / aftellen instellen (MMSS)')),

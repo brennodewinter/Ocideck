@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,6 +40,7 @@ import '../state/settings_provider.dart';
 import '../state/tabs_provider.dart';
 import '../state/webdav_provider.dart';
 import '../utils/project_path.dart';
+import '../utils/user_facing_error.dart';
 import '../theme/app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/slide_quality_localization.dart';
@@ -146,17 +149,30 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                 style: const TextStyle(fontSize: 13),
               ),
               const SizedBox(height: 10),
-              for (final s in snapshots)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 3),
-                  child: Text(
-                    '•  ${s.label}  ·  ${_formatWhen(s.savedAt)}',
-                    style: const TextStyle(
-                      fontSize: 12.5,
-                      color: AppTheme.slate600,
-                    ),
+              // Scrollbaar en begrensd: bij veel snapshots mag de lijst de
+              // dialoogknoppen niet uit beeld drukken.
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 240),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      for (final s in snapshots)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 3),
+                          child: Text(
+                            '•  ${s.label}  ·  ${_formatWhen(s.savedAt)}',
+                            style: const TextStyle(
+                              fontSize: 12.5,
+                              color: AppTheme.slate600,
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                 ),
+              ),
             ],
           ),
           actions: [
@@ -359,7 +375,14 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       if (ext == '.md') {
         await tabs.openFileByPath(path);
       } else if (ext == '.ocideck' || ext == '.zip') {
-        await tabs.importPackageFile(path, homeDir: homeDir);
+        final failure = await tabs.importPackageFile(path, homeDir: homeDir);
+        if (failure != null && mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(importFailureMessage(context.l10n, failure)),
+            ),
+          );
+        }
       } else if (_imageExtensions.contains(ext)) {
         images.add(path);
       }

@@ -1128,6 +1128,83 @@ const _dutchSourceEl = {
   'Pen · markeerstift · ⇧E': 'Πένα · μαρκαδόρος · ⇧E',
   'Gestapelde staaf': 'Στοιβαγμένες ράβδοι',
   'Spreiding': 'Διασπορά',
+  'PgUp/PgDn bladert door de slides': 'Το PgUp/PgDn ξεφυλλίζει τις διαφάνειες',
+  'Wacht op antwoord…': 'Αναμονή απάντησης…',
+  'Afbeelding slidevullend': 'Η εικόνα γεμίζει τη διαφάνεια',
+  'Vult de hele slide en snijdt de randen bij':
+      'Γεμίζει όλη τη διαφάνεια και περικόπτει τις άκρες',
+  'Afbeelding vult hele slide': 'Η εικόνα γεμίζει όλη τη διαφάνεια',
+  'Aan: vult de hele slide, titel eroverheen (bijgesneden). Uit: beeld bovenaan, titel in een band eronder.':
+      'Ενεργό: γεμίζει όλη τη διαφάνεια, τίτλος από πάνω (περικομμένο). Ανενεργό: εικόνα επάνω, τίτλος σε ζώνη από κάτω.',
+  'Grijze waas over afbeelding': 'Γκρίζο πέπλο πάνω στην εικόνα',
+  'Maakt de achtergrond rustiger achter titel en subtitel.':
+      'Ηρεμεί το φόντο πίσω από τον τίτλο και τον υπότιτλο.',
+  'Licht': 'Ανοιχτό',
+  'Donker': 'Σκούρο',
+  'Pen (D)': 'Πένα (D)',
+  'Markeerstift (T)': 'Μαρκαδόρος (T)',
+  'Gum (E / Shift+E)': 'Γόμα (E / Shift+E)',
+  'Laser (X)': 'Λέιζερ (X)',
+  'Metriek': 'Μετρική',
+  'Inhoud': 'Περιεχόμενο',
+  'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.':
+      'Η ερώτηση δεν μπορεί να παιχτεί: δώστε τουλάχιστον μία σωστή και μία λάθος απάντηση.',
+  'CSV-koppeling verbreken?': 'Αποσύνδεση του αρχείου CSV;',
+  'De data blijft in de slide staan, maar wijzigingen in het CSV-bestand komen niet meer mee.':
+      'Τα δεδομένα μένουν στη διαφάνεια, αλλά οι αλλαγές στο αρχείο CSV δεν θα περνούν πλέον.',
+  'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.':
+      'Η εικόνα απορρίφθηκε: πολύ μεγάλη (μέγ. 64 MB) ή μη υποστηριζόμενη μορφή.',
+  'Geen afbeelding op het klembord.': 'Δεν υπάρχει εικόνα στο πρόχειρο.',
+  'Kon de afbeelding niet opslaan.':
+      'Δεν ήταν δυνατή η αποθήκευση της εικόνας.',
+  'Kon de afbeelding niet verwijderen. Controleer of het bestand niet in gebruik is en of je schrijfrechten hebt.':
+      'Δεν ήταν δυνατή η διαγραφή της εικόνας. Ελέγξτε ότι το αρχείο δεν χρησιμοποιείται και ότι έχετε δικαιώματα εγγραφής.',
+  'Geen schrijfrechten op deze locatie. Kies een andere map.':
+      'Δεν υπάρχουν δικαιώματα εγγραφής σε αυτήν τη θέση. Επιλέξτε άλλον φάκελο.',
+  'De schijf is vol.': 'Ο δίσκος είναι γεμάτος.',
+  'Bestand of map niet gevonden.': 'Το αρχείο ή ο φάκελος δεν βρέθηκε.',
+  'Kon het bestand niet lezen of schrijven.':
+      'Δεν ήταν δυνατή η ανάγνωση ή εγγραφή του αρχείου.',
+  'Netwerkfout — controleer je verbinding en probeer het opnieuw.':
+      'Σφάλμα δικτύου — ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά.',
+  'Er ging onverwacht iets mis. Kijk in het logboek voor details.':
+      'Κάτι πήγε απρόσμενα στραβά. Δείτε το αρχείο καταγραφής για λεπτομέρειες.',
+  'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.':
+      'Το Nextcloud δεν έχει ρυθμιστεί (σωστά) — ελέγξτε τα στοιχεία διακομιστή στις Ρυθμίσεις → Nextcloud.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.':
+      'Αυτός ο διακομιστής δεν επιτρέπεται. Επισημάνετε πρώτα έναν ιδιωτικό/LAN διακομιστή ως αξιόπιστο στις Ρυθμίσεις → Nextcloud.',
+  'Server niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Ο διακομιστής δεν είναι προσβάσιμος — ελέγξτε τη σύνδεση και το URL του διακομιστή.',
+  'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.':
+      'Η σύνδεση απέτυχε. Ελέγξτε όνομα χρήστη και κωδικό· με το Nextcloud χρησιμοποιήστε κωδικό εφαρμογής, όχι τον κωδικό του λογαριασμού.',
+  'Bestand of map niet gevonden op de server.':
+      'Το αρχείο ή ο φάκελος δεν βρέθηκε στον διακομιστή.',
+  'Het bestand is groter dan de toegestane limiet.':
+      'Το αρχείο υπερβαίνει το επιτρεπόμενο όριο.',
+  'De server gaf een fout. Probeer het later opnieuw.':
+      'Ο διακομιστής επέστρεψε σφάλμα. Δοκιμάστε ξανά αργότερα.',
+  'Het bestand is beschadigd of onleesbaar.':
+      'Το αρχείο είναι κατεστραμμένο ή μη αναγνώσιμο.',
+  'Import geweigerd: het pakket overschrijdt de veiligheidslimieten.':
+      'Η εισαγωγή απορρίφθηκε: το πακέτο υπερβαίνει τα όρια ασφαλείας.',
+  'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.':
+      'Δεν ήταν δυνατή η λήψη παρουσίασης από αυτό το URL. Ελέγξτε το URL και τη σύνδεσή σας.',
+  'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.':
+      'Η σύνδεση απέτυχε — ελέγξτε όνομα χρήστη και κωδικό. Συμβουλή: με το Nextcloud χρησιμοποιήστε κωδικό εφαρμογής (Ρυθμίσεις → Ασφάλεια), όχι τον κωδικό του λογαριασμού.',
+  'Annuleren…': 'Ακύρωση…',
+  'Afbeeldingen vergelijken…': 'Σύγκριση εικόνων…',
+  'Presentaties scannen…': 'Σάρωση παρουσιάσεων…',
+  'Opruimen…': 'Εκκαθάριση…',
+  'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.':
+      'Δεν ήταν δυνατή η ανάγνωση ενός ή περισσότερων φακέλων της βιβλιοθήκης· η λίστα μπορεί να είναι ελλιπής.',
+  'Uit recente bestanden verwijderen': 'Αφαίρεση από τα πρόσφατα αρχεία',
+  'OciDeck wordt gestart…': 'Εκκίνηση του OciDeck…',
+  'Herstelbestanden': 'Αρχεία ανάκτησης',
+  'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.':
+      'Τα αρχεία ανάκτησης περιέχουν το πλήρες περιεχόμενο των παρουσιάσεών σας σε απλό κείμενο. Καθαρίζονται αυτόματα μετά από 7 ημέρες· εδώ μπορείτε να τα σβήσετε αμέσως.',
+  'Herstelbestanden nu wissen': 'Σβήσιμο αρχείων ανάκτησης τώρα',
+  'Er waren geen herstelbestanden.': 'Δεν υπήρχαν αρχεία ανάκτησης.',
+  'herstelbestand(en) gewist.': 'αρχείο(-α) ανάκτησης σβήστηκαν.',
   'Klaar voor export': 'Έτοιμο για εξαγωγή',
   'kwaliteitswaarschuwing(en)': 'προειδοποίηση(-εις) ποιότητας',
   'Nog opslaan nodig': 'Απαιτείται πρώτα αποθήκευση',
@@ -1259,5 +1336,4 @@ const _dutchSourceEl = {
   'Naar prullenbak': 'Στα απορρίμματα',
   'Deze presentatie staat ook op een andere plek:':
       'Αυτή η παρουσίαση υπάρχει και σε άλλη θέση:',
-  'Opruimen…': 'Εκκαθάριση…',
 };

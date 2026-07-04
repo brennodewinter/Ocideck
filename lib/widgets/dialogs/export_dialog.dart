@@ -126,6 +126,10 @@ class _ExportDialogState extends State<ExportDialog> {
   int _done = 0;
   int _total = 0;
 
+  /// Door de gebruiker gevraagd om de lopende export af te breken; het
+  /// rasteren stopt dan tussen twee slides en er wordt niets weggeschreven.
+  bool _cancelRequested = false;
+
   /// Image quality for PDF export: false = full-resolution PNG, true = a smaller
   /// downscaled JPEG handout.
   bool _compress = false;
@@ -187,6 +191,7 @@ class _ExportDialogState extends State<ExportDialog> {
     // quality gate or the first heavy raster pass runs.
     setState(() {
       _loading = true;
+      _cancelRequested = false;
       _result = null;
       _phase = l10n.d('Export wordt voorbereid…');
       _done = 0;
@@ -233,10 +238,20 @@ class _ExportDialogState extends State<ExportDialog> {
                 _total = total;
               });
             },
+            isCancelled: () => _cancelRequested,
           )
         : const <Uint8List>[];
 
     if (!mounted) return;
+    if (_cancelRequested) {
+      // Geannuleerd: gooi het (onvolledige) rasterresultaat weg en toon de
+      // exportopties opnieuw; er is niets weggeschreven.
+      setState(() {
+        _loading = false;
+        _result = null;
+      });
+      return;
+    }
     setState(() {
       _phase = '${format.label} ${l10n.t('buildingExport')}';
       _done = needsRaster ? widget.slides.length : 0;
@@ -303,6 +318,16 @@ class _ExportDialogState extends State<ExportDialog> {
       title: Text(l10n.t('exportDialogTitle')),
       content: SizedBox(width: 380, child: _content()),
       actions: [
+        if (_loading)
+          TextButton(
+            onPressed: _cancelRequested
+                ? null
+                : () => setState(() {
+                    _cancelRequested = true;
+                    _phase = l10n.d('Annuleren…');
+                  }),
+            child: Text(l10n.t('cancel')),
+          ),
         if (_result != null && _success)
           TextButton(
             onPressed: () => setState(() => _result = null),
@@ -386,6 +411,16 @@ class _ExportDialogState extends State<ExportDialog> {
             decision.reason!,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 13, color: Colors.red[800]),
+          ),
+          const SizedBox(height: 10),
+          // Wijs de weg naar de oplossing: het TLP-niveau zit op de
+          // TLP-knop in de werkbalk (die licht bij een blokkade ook op).
+          Text(
+            l10n.d(
+              'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.',
+            ),
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
           ),
         ],
       );
