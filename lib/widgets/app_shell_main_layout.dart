@@ -30,28 +30,14 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
 
     final isMarkdownMode = editor.mode == EditorMode.markdown;
 
-    final enforcement = ClassificationEnforcementPolicy.fromAppSettings(
+    final classificationDecision =
+        ClassificationEnforcementPolicy.fromAppSettings(
+          settings,
+        ).evaluate(deck.tlp);
+    final (:readiness, :quality) = _exportReadiness(
+      deckState,
       settings,
-    );
-    final classificationDecision = enforcement.evaluate(deck.tlp);
-    // Dezelfde samenvoeging als het kwaliteitspaneel: sync-analyse plus de
-    // asynchrone titel-afbeeldingcontrastcheck, zodat statusbalk en paneel
-    // dezelfde tellingen tonen.
-    final syncQuality = ref.watch(deckQualityProvider);
-    final imageIssues =
-        ref.watch(imageContrastIssuesProvider).value ??
-        const <SlideQualityIssue>[];
-    final quality = imageIssues.isEmpty
-        ? syncQuality
-        : SlideQualityResult([...syncQuality.issues, ...imageIssues]);
-    final readiness = evaluateExportReadiness(
-      needsSave:
-          !isWebPlatform && (deckState.filePath == null || deckState.isDirty),
-      classificationDecision: classificationDecision,
-      qualityDecision: QualityExportPolicy.fromAppSettings(
-        warningsEnabled: settings.qualityWarningsOnExport,
-        blockOnErrors: settings.qualityBlockExportOnErrors,
-      ).evaluate(quality),
+      classificationDecision,
     );
     final (:canExport, :exportTooltip) = _exportGate(
       deckState,
@@ -74,36 +60,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         return KeyEventResult.ignored;
       },
       child: CallbackShortcuts(
-        bindings: {
-          const SingleActivator(LogicalKeyboardKey.keyS, control: true):
-              _saveDeck,
-          const SingleActivator(LogicalKeyboardKey.keyS, meta: true): _saveDeck,
-          // Ongedaan maken / opnieuw. Vuren alleen wanneer de focus niet in een
-          // tekstveld zit (dat handelt z'n eigen undo af), dus geen conflict.
-          const SingleActivator(LogicalKeyboardKey.keyZ, control: true):
-              deckNotifier.undo,
-          const SingleActivator(LogicalKeyboardKey.keyZ, meta: true):
-              deckNotifier.undo,
-          const SingleActivator(
-            LogicalKeyboardKey.keyZ,
-            control: true,
-            shift: true,
-          ): deckNotifier.redo,
-          const SingleActivator(
-            LogicalKeyboardKey.keyZ,
-            meta: true,
-            shift: true,
-          ): deckNotifier.redo,
-          const SingleActivator(LogicalKeyboardKey.keyY, control: true):
-              deckNotifier.redo,
-          const SingleActivator(LogicalKeyboardKey.keyF, control: true):
-              _openFind,
-          const SingleActivator(LogicalKeyboardKey.keyF, meta: true): _openFind,
-          const SingleActivator(LogicalKeyboardKey.keyH, control: true):
-              _openFindReplace,
-          const SingleActivator(LogicalKeyboardKey.keyH, meta: true):
-              _openFindReplace,
-        },
+        bindings: _shortcutBindings(deckNotifier),
         child: Scaffold(
           appBar: _appBar(
             deck,
@@ -186,6 +143,65 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         ),
       ),
     );
+  }
+
+  /// Sneltoetsen van het hoofdscherm (opslaan, undo/redo, zoeken).
+  Map<ShortcutActivator, VoidCallback> _shortcutBindings(
+    DeckNotifier deckNotifier,
+  ) {
+    return {
+      const SingleActivator(LogicalKeyboardKey.keyS, control: true): _saveDeck,
+      const SingleActivator(LogicalKeyboardKey.keyS, meta: true): _saveDeck,
+      // Ongedaan maken / opnieuw. Vuren alleen wanneer de focus niet in een
+      // tekstveld zit (dat handelt z'n eigen undo af), dus geen conflict.
+      const SingleActivator(LogicalKeyboardKey.keyZ, control: true):
+          deckNotifier.undo,
+      const SingleActivator(LogicalKeyboardKey.keyZ, meta: true):
+          deckNotifier.undo,
+      const SingleActivator(
+        LogicalKeyboardKey.keyZ,
+        control: true,
+        shift: true,
+      ): deckNotifier.redo,
+      const SingleActivator(LogicalKeyboardKey.keyZ, meta: true, shift: true):
+          deckNotifier.redo,
+      const SingleActivator(LogicalKeyboardKey.keyY, control: true):
+          deckNotifier.redo,
+      const SingleActivator(LogicalKeyboardKey.keyF, control: true): _openFind,
+      const SingleActivator(LogicalKeyboardKey.keyF, meta: true): _openFind,
+      const SingleActivator(LogicalKeyboardKey.keyH, control: true):
+          _openFindReplace,
+      const SingleActivator(LogicalKeyboardKey.keyH, meta: true):
+          _openFindReplace,
+    };
+  }
+
+  /// De samengevatte exportstatus plus de onderliggende kwaliteitsmeldingen.
+  /// Dezelfde samenvoeging als het kwaliteitspaneel: sync-analyse plus de
+  /// asynchrone titel-afbeeldingcontrastcheck, zodat statusbalk en paneel
+  /// dezelfde tellingen tonen.
+  ({ExportReadiness readiness, SlideQualityResult quality}) _exportReadiness(
+    DeckState deckState,
+    AppSettings settings,
+    ExportDecision classificationDecision,
+  ) {
+    final syncQuality = ref.watch(deckQualityProvider);
+    final imageIssues =
+        ref.watch(imageContrastIssuesProvider).value ??
+        const <SlideQualityIssue>[];
+    final quality = imageIssues.isEmpty
+        ? syncQuality
+        : SlideQualityResult([...syncQuality.issues, ...imageIssues]);
+    final readiness = evaluateExportReadiness(
+      needsSave:
+          !isWebPlatform && (deckState.filePath == null || deckState.isDirty),
+      classificationDecision: classificationDecision,
+      qualityDecision: QualityExportPolicy.fromAppSettings(
+        warningsEnabled: settings.qualityWarningsOnExport,
+        blockOnErrors: settings.qualityBlockExportOnErrors,
+      ).evaluate(quality),
+    );
+    return (readiness: readiness, quality: quality);
   }
 
   /// Of exporteren nu kan, plus de tooltip die uitlegt waarom (niet).
@@ -688,6 +704,14 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         keywords: deck.keywords,
         tlp: deck.tlp,
       ),
+      // Noteer een geslaagde export bij het recente bestand, zodat de
+      // welkomstlijst "laatst geëxporteerd als …" kan tonen. Alleen zinvol
+      // met een echt bestandspad (op web is een deck een download).
+      onExported: deckState.filePath == null
+          ? null
+          : (formatLabel) => ref
+                .read(settingsProvider.notifier)
+                .recordRecentFileExport(deckState.filePath!, formatLabel),
     );
   }
 
@@ -718,11 +742,13 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
 
   Future<void> _newInTab() async {
     final choice = await NewDeckDialog.show(context);
-    if (choice != null) {
-      ref
-          .read(tabsProvider.notifier)
-          .newDeckInNewTab(choice.title, template: choice.template);
-    }
+    if (choice == null) return;
+    await ref
+        .read(settingsProvider.notifier)
+        .selectThemeProfile(choice.profileName);
+    ref
+        .read(tabsProvider.notifier)
+        .newDeckInNewTab(choice.title, template: choice.template);
   }
 
   Future<void> _openProperties() async {
@@ -741,6 +767,22 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       presentationTargetSeconds: info.presentationTargetSeconds,
       showRehearsalSummary: info.showRehearsalSummary,
     );
+    // Een hier gekozen stijlprofiel geldt app-breed (profielen zijn globaal)
+    // en wordt meteen op het open deck toegepast.
+    final profileName = info.styleProfileName;
+    final settings = ref.read(settingsProvider);
+    if (profileName != null &&
+        profileName != ref.read(deckProvider).deck?.themeProfile.name) {
+      final profile = settings.themeProfiles
+          .where((p) => p.name == profileName)
+          .firstOrNull;
+      if (profile != null) {
+        await ref
+            .read(settingsProvider.notifier)
+            .selectThemeProfile(profileName);
+        deckNotifier.updateThemeProfile(profile);
+      }
+    }
   }
 
   Future<void> _exportPackage() async {

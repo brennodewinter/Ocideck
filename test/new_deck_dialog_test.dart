@@ -1,32 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/widgets/dialogs/new_deck_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-/// Pumps a host with an "open" button and opens the dialog. The eventual
-/// dialog result lands in [_Harness.choice] once the dialog is popped.
+/// Pompt een minimale app met een "open"-knop en opent de dialoog. De
+/// uiteindelijke uitkomst landt in [_Harness.choice] zodra de dialoog sluit.
 class _Harness {
   NewDeckChoice? choice;
 
   Future<void> open(WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
-        home: Builder(
-          builder: (context) => Center(
-            child: ElevatedButton(
-              onPressed: () async => choice = await NewDeckDialog.show(context),
-              child: const Text('open'),
+      ProviderScope(
+        child: MaterialApp(
+          localizationsDelegates: const [AppLocalizations.delegate],
+          home: Builder(
+            builder: (context) => Center(
+              child: ElevatedButton(
+                onPressed: () async =>
+                    choice = await NewDeckDialog.show(context),
+                child: const Text('open'),
+              ),
             ),
           ),
         ),
       ),
     );
+    await tester.pumpAndSettle();
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
   }
 }
 
 void main() {
+  setUp(() => SharedPreferences.setMockInitialValues({}));
+
+  testWidgets('titel + standaardprofiel bij aanmaken', (tester) async {
+    final harness = _Harness();
+    await harness.open(tester);
+    await tester.enterText(find.byType(TextFormField), 'Mijn briefing');
+    await tester.tap(find.text('Aanmaken'));
+    await tester.pumpAndSettle();
+    expect(harness.choice, isNotNull);
+    expect(harness.choice!.title, 'Mijn briefing');
+    // Standaard = het globaal geselecteerde profiel (LibreKAT op een verse
+    // installatie).
+    expect(harness.choice!.profileName, 'LibreKAT');
+  });
+
+  testWidgets('stijlprofiel is in de dialoog te kiezen', (tester) async {
+    final harness = _Harness();
+    await harness.open(tester);
+    expect(find.byType(DropdownButtonFormField<String>), findsOneWidget);
+    await tester.enterText(find.byType(TextFormField), 'Titel');
+    await tester.tap(find.byType(DropdownButtonFormField<String>));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Standaard').last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Aanmaken'));
+    await tester.pumpAndSettle();
+    expect(harness.choice!.profileName, 'Standaard');
+  });
+
   testWidgets('shows the template picker with title field', (tester) async {
     await _Harness().open(tester);
     expect(find.text('Sjabloon'), findsOneWidget);
@@ -49,6 +86,11 @@ void main() {
     final harness = _Harness();
     await harness.open(tester);
     await tester.enterText(find.byType(TextFormField), '  Kick-off Q3  ');
+    await tester.scrollUntilVisible(
+      find.text('Projectstart / kick-off'),
+      60,
+      scrollable: find.byType(Scrollable).last,
+    );
     await tester.tap(find.text('Projectstart / kick-off'));
     await tester.pump();
     await tester.tap(find.text('Aanmaken'));

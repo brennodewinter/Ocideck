@@ -47,8 +47,11 @@ void main() {
       matching: find.byIcon(Icons.cloud_outlined),
     );
     expect(badge, findsOneWidget);
+    // Sinds de metadata-tegel heeft de badge twee Tooltip-ancestors (de
+    // herkomst-tooltip en de tegel-tooltip); de dichtstbijzijnde draagt de
+    // bron.
     final tooltip = tester.widget<Tooltip>(
-      find.ancestor(of: badge, matching: find.byType(Tooltip)),
+      find.ancestor(of: badge, matching: find.byType(Tooltip)).first,
     );
     expect(tooltip.message, 'https://cloud.example · pres/remote.md');
   });

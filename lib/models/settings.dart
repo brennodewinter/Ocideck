@@ -1,6 +1,8 @@
 import 'chart.dart' show normalizeChartColor;
+import 'recent_file.dart';
 import 'webdav_settings.dart';
 
+export 'recent_file.dart';
 export 'webdav_settings.dart';
 
 /// Glyph used for unordered (bullet) list markers. [dot] is the classic
@@ -583,7 +585,7 @@ class AppSettings {
   /// colours are styling and live here, not in the deck `.md`.
   final List<CockpitColorScheme> cockpitColorSchemes;
   final String selectedCockpitColorSchemeName;
-  final List<String> recentFiles;
+  final List<RecentFile> recentFiles;
 
   /// Herkomst van remote opgehaalde recente bestanden: lokaal pad → bron
   /// (Nextcloud-server + pad, of de import-URL). Alleen paden uit
@@ -719,7 +721,7 @@ class AppSettings {
     String? selectedAppAppearanceProfileName,
     List<CockpitColorScheme>? cockpitColorSchemes,
     String? selectedCockpitColorSchemeName,
-    List<String>? recentFiles,
+    List<RecentFile>? recentFiles,
     Map<String, String>? recentFileOrigins,
     String? maxReleaseExportTlpKey,
     String? minRequiredExportTlpKey,

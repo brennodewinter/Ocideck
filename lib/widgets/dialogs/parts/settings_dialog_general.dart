@@ -49,8 +49,15 @@ extension _SettingsGeneralTab on _SettingsDialogState {
         const SizedBox(height: 16),
         ..._accessibilitySettings(),
         const SizedBox(height: 16),
-        _sectionTitle(l10n.d('Classificatie-handhaving')),
-        _classificationEnforcementSection(l10n),
+        // Handhavingsbeleid is voor de meeste gebruikers niet aan de orde;
+        // ingeklapt tenzij er al een regel actief is (die verstop je niet).
+        AdvancedSection(
+          title: l10n.d('Classificatie-handhaving'),
+          initiallyExpanded: ClassificationEnforcementPolicy.fromAppSettings(
+            ref.read(settingsProvider),
+          ).hasGate,
+          children: [_classificationEnforcementSection(l10n)],
+        ),
         const SizedBox(height: 16),
         _sectionTitle(l10n.t('presentationFolder')),
         Row(

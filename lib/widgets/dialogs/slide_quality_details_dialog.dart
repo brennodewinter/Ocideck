@@ -4,15 +4,18 @@ import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_localization.dart';
 import '../../models/markdown_validation.dart';
 import '../../models/slide_quality.dart';
+import '../panels/slide_quality_actions.dart';
 import '../../theme/app_theme.dart';
 
 /// Shows slide quality issues grouped by severity with counts per group.
+/// [actionsFor] supplies the assistant's quick-fix buttons per issue
+/// ("Splits slide", "Verhoog contrast", "Voeg alt-tekst toe", …); running
+/// an action closes the dialog first so the result is visible.
 Future<void> showSlideQualityDetailsDialog(
   BuildContext context, {
   required SlideQualityResult result,
   void Function(SlideQualityIssue issue)? onIssueTap,
-  void Function(SlideQualityIssue issue)? onFix,
-  VoidCallback? Function(SlideQualityIssue issue)? splitActionFor,
+  List<SlideQualityAction> Function(SlideQualityIssue issue)? actionsFor,
 }) {
   final l10n = context.l10n;
   return showDialog<void>(
@@ -41,8 +44,7 @@ Future<void> showSlideQualityDetailsDialog(
                       severity: severity,
                       issues: result.issuesWithSeverity(severity).toList(),
                       onIssueTap: onIssueTap,
-                      onFix: onFix,
-                      splitActionFor: splitActionFor,
+                      actionsFor: actionsFor,
                     ),
               ],
             ),
@@ -64,16 +66,14 @@ class _SeveritySection extends StatelessWidget {
   final MarkdownValidationSeverity severity;
   final List<SlideQualityIssue> issues;
   final void Function(SlideQualityIssue issue)? onIssueTap;
-  final void Function(SlideQualityIssue issue)? onFix;
-  final VoidCallback? Function(SlideQualityIssue issue)? splitActionFor;
+  final List<SlideQualityAction> Function(SlideQualityIssue issue)? actionsFor;
 
   const _SeveritySection({
     required this.l10n,
     required this.severity,
     required this.issues,
     this.onIssueTap,
-    this.onFix,
-    this.splitActionFor,
+    this.actionsFor,
   });
 
   @override
@@ -128,41 +128,18 @@ class _SeveritySection extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if (onFix != null &&
-                      issue.kind == SlideQualityIssueKind.titleImageContrast &&
-                      issue.args['fix'] != null &&
-                      issue.args['fix'] != 'none')
+                  for (final action
+                      in actionsFor?.call(issue) ??
+                          const <SlideQualityAction>[])
                     Padding(
                       padding: const EdgeInsets.only(left: 6),
                       child: TextButton.icon(
                         onPressed: () {
                           Navigator.pop(context);
-                          onFix!(issue);
+                          action.run();
                         },
-                        icon: const Icon(Icons.auto_fix_high, size: 14),
-                        label: Text(l10n.d('Herstel')),
-                        style: TextButton.styleFrom(
-                          foregroundColor: color,
-                          visualDensity: VisualDensity.compact,
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          minimumSize: const Size(0, 28),
-                          textStyle: const TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  if (splitActionFor?.call(issue) case final split?)
-                    Padding(
-                      padding: const EdgeInsets.only(left: 6),
-                      child: TextButton.icon(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          split();
-                        },
-                        icon: const Icon(Icons.call_split, size: 14),
-                        label: Text(l10n.d('Splits slide')),
+                        icon: Icon(action.icon, size: 14),
+                        label: Text(action.label),
                         style: TextButton.styleFrom(
                           foregroundColor: color,
                           visualDensity: VisualDensity.compact,

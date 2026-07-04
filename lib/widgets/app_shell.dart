@@ -10,6 +10,8 @@ import '../platform/platform_features.dart';
 import '../utils/display_path.dart';
 import '../utils/log.dart';
 import '../models/deck.dart';
+import '../models/recent_file.dart';
+import '../models/settings.dart' show AppSettings;
 import '../models/slide.dart';
 import '../models/slide_quality.dart';
 import '../models/webdav_settings.dart';

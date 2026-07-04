@@ -4,6 +4,7 @@ import '../../l10n/app_localizations.dart';
 import '../../models/cockpit.dart';
 import '../../models/slide.dart';
 import '../../theme/app_theme.dart';
+import 'advanced_section.dart';
 import 'animation_duration_control.dart';
 
 /// Dutch source labels for the meter types; translated at display time via
@@ -323,6 +324,36 @@ class _MeterCard extends StatelessWidget {
   }
 
   Widget _meterFields(CockpitMeterType type, AppLocalizations l10n) {
+    final isGauge =
+        type != CockpitMeterType.horizon && type != CockpitMeterType.heading;
+    // Bereik en kleurzones zijn verfijning per meter; ingeklapt zolang de
+    // standaardwaarden gelden, open zodra er iets is aangepast.
+    final hasCustomRange =
+        meter.min != 0 ||
+        meter.max != 100 ||
+        (type == CockpitMeterType.climbDescent
+            ? (meter.neutralFrom != -5 || meter.neutralTo != 5)
+            : (meter.greenFrom != 0 ||
+                  meter.greenTo != 40 ||
+                  meter.redFrom != 70));
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _basicMeterFields(type, l10n),
+        if (isGauge)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: AdvancedSection(
+              title: l10n.d('Bereik en kleurzones'),
+              initiallyExpanded: hasCustomRange,
+              children: [_rangeMeterFields(type, l10n)],
+            ),
+          ),
+      ],
+    );
+  }
+
+  Widget _basicMeterFields(CockpitMeterType type, AppLocalizations l10n) {
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -404,46 +435,53 @@ class _MeterCard extends StatelessWidget {
             value: meter.markerLabel,
             onChanged: (value) => onChanged(meter.copyWith(markerLabel: value)),
           ),
+        ],
+      ],
+    );
+  }
+
+  Widget _rangeMeterFields(CockpitMeterType type, AppLocalizations l10n) {
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        _NumberField(
+          label: l10n.d('Min'),
+          value: meter.min,
+          onChanged: (value) => onChanged(meter.copyWith(min: value)),
+        ),
+        _NumberField(
+          label: l10n.d('Max'),
+          value: meter.max,
+          onChanged: (value) => onChanged(meter.copyWith(max: value)),
+        ),
+        if (type == CockpitMeterType.climbDescent) ...[
+          _NumberField(
+            label: l10n.d('Neutraal van'),
+            value: meter.neutralFrom,
+            onChanged: (value) => onChanged(meter.copyWith(neutralFrom: value)),
+          ),
+          _NumberField(
+            label: l10n.d('Neutraal tot'),
+            value: meter.neutralTo,
+            onChanged: (value) => onChanged(meter.copyWith(neutralTo: value)),
+          ),
         ] else ...[
           _NumberField(
-            label: l10n.d('Min'),
-            value: meter.min,
-            onChanged: (value) => onChanged(meter.copyWith(min: value)),
+            label: l10n.d('Groen van'),
+            value: meter.greenFrom,
+            onChanged: (value) => onChanged(meter.copyWith(greenFrom: value)),
           ),
           _NumberField(
-            label: l10n.d('Max'),
-            value: meter.max,
-            onChanged: (value) => onChanged(meter.copyWith(max: value)),
+            label: l10n.d('Groen tot'),
+            value: meter.greenTo,
+            onChanged: (value) => onChanged(meter.copyWith(greenTo: value)),
           ),
-          if (type == CockpitMeterType.climbDescent) ...[
-            _NumberField(
-              label: l10n.d('Neutraal van'),
-              value: meter.neutralFrom,
-              onChanged: (value) =>
-                  onChanged(meter.copyWith(neutralFrom: value)),
-            ),
-            _NumberField(
-              label: l10n.d('Neutraal tot'),
-              value: meter.neutralTo,
-              onChanged: (value) => onChanged(meter.copyWith(neutralTo: value)),
-            ),
-          ] else ...[
-            _NumberField(
-              label: l10n.d('Groen van'),
-              value: meter.greenFrom,
-              onChanged: (value) => onChanged(meter.copyWith(greenFrom: value)),
-            ),
-            _NumberField(
-              label: l10n.d('Groen tot'),
-              value: meter.greenTo,
-              onChanged: (value) => onChanged(meter.copyWith(greenTo: value)),
-            ),
-            _NumberField(
-              label: l10n.d('Rood van'),
-              value: meter.redFrom,
-              onChanged: (value) => onChanged(meter.copyWith(redFrom: value)),
-            ),
-          ],
+          _NumberField(
+            label: l10n.d('Rood van'),
+            value: meter.redFrom,
+            onChanged: (value) => onChanged(meter.copyWith(redFrom: value)),
+          ),
         ],
       ],
     );

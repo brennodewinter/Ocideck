@@ -11,6 +11,7 @@ import '../../services/export_service.dart';
 import '../../services/quality_export_policy.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../l10n/app_localizations.dart';
+import '../editors/advanced_section.dart';
 import '../../l10n/slide_quality_localization.dart';
 import 'slide_quality_details_dialog.dart';
 import '../../theme/app_theme.dart';
@@ -45,6 +46,10 @@ class ExportDialog extends StatefulWidget {
   final bool showClassificationWatermark;
   final ExportDocumentMetadata documentMetadata;
 
+  /// Na een geslaagde export aangeroepen met het formaat-label ("PDF",
+  /// "PPTX", "HTML") — bijv. om het bij de recente bestanden te noteren.
+  final void Function(String formatLabel)? onExported;
+
   const ExportDialog({
     super.key,
     required this.deckPath,
@@ -62,6 +67,7 @@ class ExportDialog extends StatefulWidget {
     this.organization = '',
     this.showClassificationWatermark = false,
     this.documentMetadata = const ExportDocumentMetadata(),
+    this.onExported,
   });
 
   static Future<void> show(
@@ -82,6 +88,7 @@ class ExportDialog extends StatefulWidget {
     String organization = '',
     bool showClassificationWatermark = false,
     ExportDocumentMetadata documentMetadata = const ExportDocumentMetadata(),
+    void Function(String formatLabel)? onExported,
   }) {
     return showDialog(
       context: context,
@@ -102,6 +109,7 @@ class ExportDialog extends StatefulWidget {
         organization: organization,
         showClassificationWatermark: showClassificationWatermark,
         documentMetadata: documentMetadata,
+        onExported: onExported,
       ),
     );
   }
@@ -256,6 +264,7 @@ class _ExportDialogState extends State<ExportDialog> {
     );
 
     if (!mounted) return;
+    if (r.success) widget.onExported?.call(format.label);
     setState(() {
       _loading = false;
       _success = r.success;
@@ -434,42 +443,6 @@ class _ExportDialogState extends State<ExportDialog> {
             style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 6),
-          child: Text(
-            l10n.t('imageQualityPdf'),
-            style: const TextStyle(
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-              color: AppTheme.slate600,
-            ),
-          ),
-        ),
-        SegmentedButton<bool>(
-          segments: [
-            ButtonSegment(
-              value: false,
-              icon: const Icon(Icons.image_outlined),
-              label: Text(l10n.t('normal')),
-            ),
-            ButtonSegment(
-              value: true,
-              icon: const Icon(Icons.compress),
-              label: Text(l10n.t('compressed')),
-            ),
-          ],
-          selected: {_compress},
-          onSelectionChanged: (s) => setState(() => _compress = s.first),
-          showSelectedIcon: false,
-          style: const ButtonStyle(visualDensity: VisualDensity.compact),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 4, bottom: 8),
-          child: Text(
-            _compress ? l10n.t('compressedHelp') : l10n.t('losslessHelp'),
-            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
-          ),
-        ),
         _exportButton(
           icon: _formatIcon(ExportFormat.pdf),
           label: l10n.t('exportAsPdf'),
@@ -495,6 +468,41 @@ class _ExportDialogState extends State<ExportDialog> {
             ),
             style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
+        ),
+        const SizedBox(height: 8),
+        // De formaatknoppen zijn de hoofdactie; de beeldkwaliteit is een
+        // verfijning en staat daarom achter een inklapbare kop (open zodra
+        // er gecomprimeerd wordt, zodat de keuze zichtbaar blijft).
+        AdvancedSection(
+          title: l10n.t('imageQualityPdf'),
+          initiallyExpanded: _compress,
+          children: [
+            SegmentedButton<bool>(
+              segments: [
+                ButtonSegment(
+                  value: false,
+                  icon: const Icon(Icons.image_outlined),
+                  label: Text(l10n.t('normal')),
+                ),
+                ButtonSegment(
+                  value: true,
+                  icon: const Icon(Icons.compress),
+                  label: Text(l10n.t('compressed')),
+                ),
+              ],
+              selected: {_compress},
+              onSelectionChanged: (s) => setState(() => _compress = s.first),
+              showSelectedIcon: false,
+              style: const ButtonStyle(visualDensity: VisualDensity.compact),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: Text(
+                _compress ? l10n.t('compressedHelp') : l10n.t('losslessHelp'),
+                style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
+              ),
+            ),
+          ],
         ),
       ],
     );

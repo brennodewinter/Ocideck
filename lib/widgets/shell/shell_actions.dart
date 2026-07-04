@@ -73,7 +73,9 @@ Future<void> _scanLibrary(BuildContext context, WidgetRef ref) async {
   final path = await ScanLibraryDialog.show(
     context,
     fileService: ref.read(fileServiceProvider),
-    recentFiles: ref.read(settingsProvider).recentFiles,
+    recentFiles: [
+      for (final f in ref.read(settingsProvider).recentFiles) f.path,
+    ],
     homeDir: ref.read(settingsProvider).homeDirectory,
   );
   if (path == null) return;

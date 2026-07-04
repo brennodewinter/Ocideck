@@ -1,20 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/deck_template.dart';
+import '../../models/settings.dart';
+import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 
-/// The wizard's outcome: the deck title plus the chosen starting template.
+/// Uitkomst van de nieuwe-presentatie-wizard: titel, het gekozen
+/// stijlprofiel en het startsjabloon. Het profiel staat hier bewust naast de
+/// titel — veel gebruikers denken in vormen ("een nette briefing"), niet in
+/// een instellingenscherm.
 class NewDeckChoice {
   final String title;
+  final String profileName;
   final DeckTemplate template;
 
-  const NewDeckChoice({required this.title, required this.template});
+  const NewDeckChoice({
+    required this.title,
+    required this.profileName,
+    required this.template,
+  });
 }
 
-/// The new-presentation wizard: asks for a title and lets the user pick a
-/// [DeckTemplate] whose example slides seed the fresh deck.
-class NewDeckDialog extends StatefulWidget {
+/// De nieuwe-presentatie-wizard: vraagt een titel, laat een stijlprofiel
+/// kiezen en een [DeckTemplate] waarvan de voorbeeldslides het verse deck
+/// vullen.
+class NewDeckDialog extends ConsumerStatefulWidget {
   const NewDeckDialog({super.key});
 
   static Future<NewDeckChoice?> show(BuildContext context) {
@@ -26,7 +38,7 @@ class NewDeckDialog extends StatefulWidget {
   }
 
   @override
-  State<NewDeckDialog> createState() => _NewDeckDialogState();
+  ConsumerState<NewDeckDialog> createState() => _NewDeckDialogState();
 }
 
 /// Picker icons per [DeckTemplate.icon] key. Lives here (not in the model) so
@@ -65,10 +77,11 @@ const Map<String, IconData> templatePickerIcons = {
   'pplFlightPrep': Icons.flight_takeoff,
 };
 
-class _NewDeckDialogState extends State<NewDeckDialog> {
+class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
   final _ctrl = TextEditingController();
   final _searchCtrl = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  String? _profileName;
   DeckTemplate _template = deckTemplates.first;
 
   @override
@@ -109,6 +122,10 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final settings = ref.watch(settingsProvider);
+    final profiles = settings.themeProfiles;
+    final selected = _profileName ?? settings.selectedThemeProfileName;
+
     return CallbackShortcuts(
       bindings: {
         const SingleActivator(LogicalKeyboardKey.escape): () =>
@@ -135,6 +152,45 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
                       ? l10n.d('Vul een titel in')
                       : null,
                   onFieldSubmitted: (_) => _submit(),
+                ),
+                const SizedBox(height: 16),
+                DropdownButtonFormField<String>(
+                  initialValue: profiles.any((p) => p.name == selected)
+                      ? selected
+                      : profiles.first.name,
+                  decoration: InputDecoration(
+                    labelText: l10n.t('styleProfile'),
+                  ),
+                  items: [
+                    for (final profile in profiles)
+                      DropdownMenuItem(
+                        value: profile.name,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ThemeProfileSwatch(profile: profile),
+                            const SizedBox(width: 8),
+                            Flexible(
+                              child: Text(
+                                profile.name,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                  ],
+                  onChanged: (name) => setState(() => _profileName = name),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  l10n.d(
+                    'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.',
+                  ),
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 const SizedBox(height: 16),
                 Text(
@@ -276,10 +332,54 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
 
   void _submit() {
     if (_formKey.currentState!.validate()) {
+      final settings = ref.read(settingsProvider);
       Navigator.pop(
         context,
-        NewDeckChoice(title: _ctrl.text.trim(), template: _template),
+        NewDeckChoice(
+          title: _ctrl.text.trim(),
+          profileName: _profileName ?? settings.selectedThemeProfileName,
+          template: _template,
+        ),
       );
     }
   }
+}
+
+/// Mini-voorproef van een stijlprofiel: titelbalk-, accent- en
+/// achtergrondkleur als drie blokjes. Genoeg om profielen op gevoel uit
+/// elkaar te houden zonder de dialoog te verzwaren.
+class ThemeProfileSwatch extends StatelessWidget {
+  final ThemeProfile profile;
+
+  const ThemeProfileSwatch({super.key, required this.profile});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        for (final hex in [
+          profile.titleBackgroundColor,
+          profile.accentColor,
+          profile.slideBackgroundColor,
+        ])
+          Container(
+            width: 12,
+            height: 12,
+            margin: const EdgeInsets.only(right: 2),
+            decoration: BoxDecoration(
+              color: _parseHexColor(hex),
+              borderRadius: BorderRadius.circular(2),
+              border: Border.all(color: Colors.black26, width: 0.5),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+Color _parseHexColor(String hex) {
+  final cleaned = hex.replaceFirst('#', '');
+  final value = int.tryParse(cleaned, radix: 16) ?? 0xFFFFFF;
+  return Color(0xFF000000 | value);
 }

@@ -11,6 +11,7 @@ import '../../models/chart.dart';
 import '../../utils/atomic_file.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import 'advanced_section.dart';
 import 'animation_duration_control.dart';
 import '_editor_field.dart';
 import '../../theme/app_theme.dart';
@@ -425,9 +426,23 @@ class _ChartEditorState extends State<ChartEditor> {
                 style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
               ),
             ),
-          if (_supportsBounds) _boundControls(l10n),
           if (linked) _linkedSourceRow(l10n),
-          _animationControls(l10n),
+          // Grenzen en animatie zijn verfijning; ingeklapt tenzij er al iets
+          // is ingesteld (dan mag het niet uit beeld verdwijnen).
+          Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: AdvancedSection(
+              title: l10n.d('Geavanceerd'),
+              initiallyExpanded:
+                  _animateOnEnter ||
+                  _minBound.text.isNotEmpty ||
+                  _maxBound.text.isNotEmpty,
+              children: [
+                if (_supportsBounds) _boundControls(l10n),
+                _animationControls(l10n),
+              ],
+            ),
+          ),
           const SizedBox(height: 12),
           if (widget.nestedInScrollView)
             SizedBox(height: 280, child: _scrollableGrid(linked))

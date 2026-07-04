@@ -5,14 +5,11 @@ import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_localization.dart';
 import '../../l10n/slide_quality_navigation.dart';
 import '../../models/markdown_validation.dart';
-import '../../models/slide.dart';
 import '../../models/slide_quality.dart';
-import '../../state/deck_provider.dart';
-import '../../state/editor_provider.dart';
 import '../../state/deck_quality_provider.dart';
 import '../../state/image_contrast_provider.dart';
-import '../../utils/title_contrast.dart';
 import '../dialogs/slide_quality_details_dialog.dart';
+import 'slide_quality_actions.dart';
 import '../../theme/app_theme.dart';
 
 class SlideQualityPanel extends ConsumerStatefulWidget {
@@ -30,52 +27,11 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
     navigateToSlideQualityIssue(context: context, ref: ref, issue: issue);
   }
 
-  /// Applies the recommended contrast fix carried in the issue's args to the
-  /// slide, then re-analyses (the providers rebuild automatically).
-  void _handleFix(SlideQualityIssue issue) {
-    final fix = TitleContrastFix.values.firstWhere(
-      (f) => f.name == issue.args['fix'],
-      orElse: () => TitleContrastFix.none,
-    );
-    if (fix == TitleContrastFix.none) return;
-    final deck = ref.read(deckProvider).deck;
-    if (deck == null ||
-        issue.slideIndex < 0 ||
-        issue.slideIndex >= deck.slides.length) {
-      return;
-    }
-    final slide = deck.slides[issue.slideIndex];
-    ref
-        .read(deckProvider.notifier)
-        .updateSlide(issue.slideIndex, applyTitleContrastFix(slide, fix));
-  }
-
-  /// The slide an issue points at, or null when the issue is deck-wide or the
-  /// index is stale.
-  Slide? _slideFor(SlideQualityIssue issue) {
-    final deck = ref.read(deckProvider).deck;
-    if (deck == null ||
-        issue.isDeckWide ||
-        issue.slideIndex < 0 ||
-        issue.slideIndex >= deck.slides.length) {
-      return null;
-    }
-    return deck.slides[issue.slideIndex];
-  }
-
-  /// A "split this slide" action for a too-dense bullet slide, or null when the
-  /// slide can't be split — so the density advice carries the fix that resolves
-  /// it, without digging into the thumbnail's overflow menu.
-  VoidCallback? _splitActionFor(SlideQualityIssue issue) {
-    if (issue.category != SlideQualityCategory.textDensity) return null;
-    final slide = _slideFor(issue);
-    if (slide == null || !canSplitSlide(slide)) return null;
-    final index = issue.slideIndex;
-    return () {
-      ref.read(deckProvider.notifier).splitSlide(index);
-      ref.read(editorProvider.notifier).select(index + 1);
-    };
-  }
+  /// De assistent-acties die deze melding direct oplossen of de gebruiker
+  /// naar de juiste plek brengen ("Splits slide", "Verhoog contrast",
+  /// "Voeg alt-tekst toe", …).
+  List<SlideQualityAction> _actionsFor(SlideQualityIssue issue) =>
+      buildSlideQualityActions(context: context, ref: ref, issue: issue);
 
   List<SlideQualityIssue> _filteredIssues(SlideQualityResult result) {
     if (_severityFilter == null) return result.issues;
@@ -164,8 +120,7 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
                     context,
                     result: result,
                     onIssueTap: _handleIssueTap,
-                    onFix: _handleFix,
-                    splitActionFor: _splitActionFor,
+                    actionsFor: _actionsFor,
                   ),
                   icon: const Icon(Icons.list_alt_outlined, size: 13),
                   label: Text(l10n.d('Bekijk meldingen…')),
@@ -220,7 +175,7 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
                   return _QualityIssueTile(
                     issue: issue,
                     onTap: () => _handleIssueTap(issue),
-                    onSplit: _splitActionFor(issue),
+                    actions: _actionsFor(issue),
                     showThemeHint: issue.isDeckWide,
                   );
                 },
@@ -299,15 +254,15 @@ class _QualityIssueTile extends StatelessWidget {
   final SlideQualityIssue issue;
   final VoidCallback? onTap;
 
-  /// When non-null, a "Splits slide" action is shown that resolves a
-  /// too-dense-content advice in one click (redundant with the thumbnail menu).
-  final VoidCallback? onSplit;
+  /// Assistent-acties die deze melding in één klik oplossen (splitsen,
+  /// contrast verhogen, alt-tekst toevoegen, …).
+  final List<SlideQualityAction> actions;
   final bool showThemeHint;
 
   const _QualityIssueTile({
     required this.issue,
     this.onTap,
-    this.onSplit,
+    this.actions = const [],
     this.showThemeHint = false,
   });
 
@@ -349,24 +304,32 @@ class _QualityIssueTile extends StatelessWidget {
                     formatSlideQualityIssue(l10n, issue),
                     style: TextStyle(fontSize: 10, color: color),
                   ),
-                  if (onSplit != null)
+                  if (actions.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
-                      child: TextButton.icon(
-                        onPressed: onSplit,
-                        icon: const Icon(Icons.call_split, size: 13),
-                        label: Text(l10n.d('Splits slide')),
-                        style: TextButton.styleFrom(
-                          foregroundColor: color,
-                          visualDensity: VisualDensity.compact,
-                          padding: const EdgeInsets.symmetric(horizontal: 4),
-                          minimumSize: Size.zero,
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          textStyle: const TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
+                      child: Wrap(
+                        spacing: 8,
+                        children: [
+                          for (final action in actions)
+                            TextButton.icon(
+                              onPressed: action.run,
+                              icon: Icon(action.icon, size: 13),
+                              label: Text(action.label),
+                              style: TextButton.styleFrom(
+                                foregroundColor: color,
+                                visualDensity: VisualDensity.compact,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 4,
+                                ),
+                                minimumSize: Size.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                textStyle: const TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
                     ),
                 ],
