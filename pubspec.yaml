@@ -81,6 +81,9 @@ flutter:
     - assets/images/de-winter-wittegeheel.png
     - assets/images/flag_fy.png
     - assets/images/flag_tlh.png
+    - assets/images/cat-branie.jpg
+    - assets/images/cat-keiko.jpg
+    - assets/images/cat-otis.jpg
     - assets/themes/ocideck.css
     - assets/web_export/
     # Full EUPL 1.2 licence text, shown verbatim in the consent screen.
