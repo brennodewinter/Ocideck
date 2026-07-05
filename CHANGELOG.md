@@ -320,6 +320,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   behavioural change; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ### Fixed
+- **Code-colour contrast is judged against the large-text threshold.** The
+  theme quality check treated the code text/background pair as normal body text
+  (WCAG AA 4.5:1), so the LibreKAT house-style green on the dark code panel
+  (~3.6:1) drew a spurious "too little contrast" warning even though code on a
+  slide renders at display size. It is now checked against the large-text
+  threshold (3.0:1), consistent with the title and table-header pairs; code that
+  is dense enough to render small is still caught separately by the density
+  check.
 - **Web: a saved deck no longer reads as "not saved yet".** On the web build,
   saving is a browser download, which returns no file path, so the status bar's
   filename slot stayed on "Not saved yet" right next to the green "Saved" chip.
