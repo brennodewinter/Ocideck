@@ -1352,4 +1352,6 @@ const _dutchSourceLv = {
       'Kārtīgas prezentācijas no vienkārša teksta — brīvi, pārbaudāmi un ar taviem datiem tavā paša ierīcē.',
   'Waar komt de naam vandaan?': 'No kurienes cēlies nosaukums?',
   'Website van de stichting': 'Nodibinājuma tīmekļa vietne',
+  'Opgeslagen als download in je map met downloads.':
+      'Saglabāts kā lejupielāde jūsu lejupielāžu mapē.',
 };

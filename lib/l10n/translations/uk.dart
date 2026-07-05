@@ -1367,4 +1367,6 @@ const _dutchSourceUk = {
       'Охайні презентації з простого тексту — вільні, перевірювані та з твоїми даними на твоєму власному пристрої.',
   'Waar komt de naam vandaan?': 'Звідки походить назва?',
   'Website van de stichting': 'Вебсайт фундації',
+  'Opgeslagen als download in je map met downloads.':
+      'Збережено як завантаження в теку завантажень.',
 };

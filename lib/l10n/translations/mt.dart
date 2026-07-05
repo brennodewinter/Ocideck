@@ -1370,4 +1370,6 @@ const _dutchSourceMt = {
       'Preżentazzjonijiet raffinati minn test sempliċi — liberi, verifikabbli u bid-data tiegħek fuq l-apparat tiegħek stess.',
   'Waar komt de naam vandaan?': 'Minn fejn ġej l-isem?',
   'Website van de stichting': 'Il-websajt tal-fondazzjoni',
+  'Opgeslagen als download in je map met downloads.':
+      'Issejvjat bħala download fil-folder tad-downloads tiegħek.',
 };

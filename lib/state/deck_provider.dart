@@ -49,6 +49,12 @@ class DeckState {
   final String? filePath;
   final String? error;
 
+  /// Op web (geen schrijfbaar bestandssysteem) is opslaan een download; de
+  /// browser geeft geen pad terug. We onthouden hier de bestandsnaam die we
+  /// lieten downloaden, zodat de statusbalk die kan tonen i.p.v. "nog niet
+  /// opgeslagen". Op desktop blijft dit null en telt [filePath].
+  final String? downloadName;
+
   /// Of er een ongedaan-maken- resp. opnieuw-uitvoeren-stap beschikbaar is.
   /// Onderdeel van de state zodat de toolbarknoppen vanzelf mee-enabelen.
   final bool canUndo;
@@ -64,6 +70,7 @@ class DeckState {
     this.isDirty = false,
     this.filePath,
     this.error,
+    this.downloadName,
     this.canUndo = false,
     this.canRedo = false,
     this.revision = 0,
@@ -77,6 +84,7 @@ class DeckState {
     bool? isDirty,
     String? filePath,
     String? error,
+    String? downloadName,
     bool? canUndo,
     bool? canRedo,
     int? revision,
@@ -88,6 +96,7 @@ class DeckState {
       isDirty: isDirty ?? this.isDirty,
       filePath: clearFilePath ? null : (filePath ?? this.filePath),
       error: clearError ? null : (error ?? this.error),
+      downloadName: downloadName ?? this.downloadName,
       canUndo: canUndo ?? this.canUndo,
       canRedo: canRedo ?? this.canRedo,
       revision: revision ?? this.revision,
@@ -214,15 +223,17 @@ class DeckNotifier extends StateNotifier<DeckState> {
   /// Web-opslagpad: start een browserdownload van de deck-markdown. Het deck
   /// wordt daarna als schoon gemarkeerd — het bestand is aan de gebruiker
   /// overhandigd; verdere wijzigingen maken het gewoon weer dirty. [filePath]
-  /// blijft null, zodat elke volgende save opnieuw een download start.
+  /// blijft null, zodat elke volgende save opnieuw een download start; de
+  /// gedownloade bestandsnaam onthouden we wél voor de statusbalk.
   bool _saveAsDownload() {
     final deck = state.deck;
     if (deck == null) return false;
-    if (!_file.downloadDeckAsFile(deck)) {
+    final name = _file.downloadDeckAsFile(deck);
+    if (name == null) {
       state = state.copyWith(error: 'Opslaan als download mislukt.');
       return false;
     }
-    state = state.copyWith(isDirty: false);
+    state = state.copyWith(isDirty: false, downloadName: name);
     return true;
   }
 

@@ -1351,4 +1351,6 @@ const _dutchSourceFi = {
       'Huoliteltuja esityksiä yksinkertaisesta tekstistä — vapaasti, tarkistettavasti ja tietosi omalla laitteellasi.',
   'Waar komt de naam vandaan?': 'Mistä nimi tulee?',
   'Website van de stichting': 'Säätiön verkkosivusto',
+  'Opgeslagen als download in je map met downloads.':
+      'Tallennettu latauksena lataukset-kansioosi.',
 };

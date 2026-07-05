@@ -1357,4 +1357,6 @@ const _dutchSourceLt = {
       'Tvarkingi pristatymai iš paprasto teksto — laisvai, tikrinamai ir su tavo duomenimis tavo paties įrenginyje.',
   'Waar komt de naam vandaan?': 'Iš kur kilo pavadinimas?',
   'Website van de stichting': 'Fondo svetainė',
+  'Opgeslagen als download in je map met downloads.':
+      'Įrašyta kaip atsisiuntimas į jūsų atsisiuntimų aplanką.',
 };

@@ -505,10 +505,13 @@ class FileService {
   /// Web-opslaan: serialiseer het deck en laat de browser het als `.md`
   /// downloaden. Bewust alleen de markdown-inhoud — sidecars (annotaties,
   /// sprekersnotities) en assets horen bij het desktop-projectmodel en gaan in
-  /// een download niet mee. Geeft `false` terug als de download niet startte.
-  bool downloadDeckAsFile(Deck deck) {
+  /// een download niet mee. Geeft de gebruikte bestandsnaam terug als de
+  /// download startte, of `null` als dat mislukte. De statusbalk toont die naam
+  /// zodat het deck na een download niet als "nog niet opgeslagen" oogt.
+  String? downloadDeckAsFile(Deck deck) {
     final markdown = _md.generateDeck(deck);
-    return downloadTextFile('${_safeName(deck.title)}.md', markdown);
+    final name = '${_safeName(deck.title)}.md';
+    return downloadTextFile(name, markdown) ? name : null;
   }
 
   /// Scan the `.md` at [filePath] for executable/dangerous content before it is

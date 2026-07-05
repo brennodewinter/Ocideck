@@ -1366,4 +1366,6 @@ const _dutchSourceLa = {
       'Expolitae narrationes ex textu simplici — liberae, examinabiles et cum datis tuis in tuo ipsius instrumento manentibus.',
   'Waar komt de naam vandaan?': 'Unde nomen venit?',
   'Website van de stichting': 'Situs interretialis fundationis',
+  'Opgeslagen als download in je map met downloads.':
+      'Servatum ut receptum in tuo plicae receptorum.',
 };

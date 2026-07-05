@@ -1358,4 +1358,6 @@ const _dutchSourceHr = {
       'Dotjerane prezentacije od jednostavnog teksta — slobodne, provjerljive i s tvojim podacima na tvom vlastitom uređaju.',
   'Waar komt de naam vandaan?': 'Odakle dolazi ime?',
   'Website van de stichting': 'Web-mjesto zaklade',
+  'Opgeslagen als download in je map met downloads.':
+      'Spremljeno kao preuzimanje u mapu preuzimanja.',
 };

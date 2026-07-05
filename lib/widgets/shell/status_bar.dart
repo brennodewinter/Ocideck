@@ -2,6 +2,31 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../app_shell.dart';
 
+/// Label and tooltip for the status bar's filename slot, in order of
+/// preference: the on-disk file name (desktop), the name we last let the
+/// browser download (web has no writable path, so a saved deck would otherwise
+/// keep reading as "not saved yet" next to the green "Saved" chip), or the
+/// never-saved-yet placeholder. Public and pure so the web-vs-desktop
+/// precedence can be unit-tested without the platform gate that drives it.
+({String label, String tooltip}) deckFileStatusLabel(
+  DeckState deckState,
+  AppLocalizations l10n,
+) {
+  if (deckState.filePath != null) {
+    return (
+      label: p.basename(deckState.filePath!),
+      tooltip: deckState.filePath!,
+    );
+  }
+  if (deckState.downloadName != null) {
+    return (
+      label: deckState.downloadName!,
+      tooltip: l10n.d('Opgeslagen als download in je map met downloads.'),
+    );
+  }
+  return (label: l10n.t('notSavedYet'), tooltip: l10n.t('noFileYet'));
+}
+
 class _DeckStatusBar extends StatelessWidget {
   final Deck deck;
   final DeckState deckState;
@@ -30,9 +55,7 @@ class _DeckStatusBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final skipped = deck.slides.where((s) => s.skipped).length;
-    final fileLabel = deckState.filePath == null
-        ? l10n.t('notSavedYet')
-        : p.basename(deckState.filePath!);
+    final fileStatus = deckFileStatusLabel(deckState, l10n);
     final saveLabel = deckState.isDirty ? l10n.t('unsaved') : l10n.t('saved');
     final exportLabel = exportDirectory == null
         ? l10n.t('exportNextToDeck')
@@ -74,8 +97,8 @@ class _DeckStatusBar extends StatelessWidget {
                   Flexible(
                     child: _StatusItem(
                       icon: Icons.description_outlined,
-                      label: fileLabel,
-                      tooltip: deckState.filePath ?? l10n.t('noFileYet'),
+                      label: fileStatus.label,
+                      tooltip: fileStatus.tooltip,
                     ),
                   ),
                   const _StatusDivider(),

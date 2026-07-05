@@ -1362,4 +1362,6 @@ const _dutchSourcePl = {
       'Dopracowane prezentacje z prostego tekstu — wolne, weryfikowalne i z Twoimi danymi na własnym urządzeniu.',
   'Waar komt de naam vandaan?': 'Skąd pochodzi nazwa?',
   'Website van de stichting': 'Strona internetowa fundacji',
+  'Opgeslagen als download in je map met downloads.':
+      'Zapisano jako pobrany plik w folderze pobierania.',
 };

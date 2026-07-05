@@ -1349,4 +1349,6 @@ const _dutchSourceDa = {
       'Velformede præsentationer ud af enkel tekst — frit, kontrollerbart og med dine data på din egen enhed.',
   'Waar komt de naam vandaan?': 'Hvor kommer navnet fra?',
   'Website van de stichting': 'Fondens websted',
+  'Opgeslagen als download in je map met downloads.':
+      'Gemt som en download i din mappe med downloads.',
 };

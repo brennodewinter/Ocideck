@@ -555,6 +555,8 @@ const _dutchSourceEn = {
       'Polished presentations from simple text — free, verifiable and with your data on your own device.',
   'Waar komt de naam vandaan?': 'Where does the name come from?',
   'Website van de stichting': 'Foundation website',
+  'Opgeslagen als download in je map met downloads.':
+      'Saved as a download to your downloads folder.',
 };
 
 const _dutchSourceAddEn = {

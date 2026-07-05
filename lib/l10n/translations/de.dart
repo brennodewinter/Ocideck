@@ -359,6 +359,8 @@ const _dutchSourceDe = {
       'Ansprechende Präsentationen aus einfachem Text — frei, überprüfbar und mit deinen Daten auf deinem eigenen Gerät.',
   'Waar komt de naam vandaan?': 'Woher kommt der Name?',
   'Website van de stichting': 'Website der Stiftung',
+  'Opgeslagen als download in je map met downloads.':
+      'Als Download in deinem Download-Ordner gespeichert.',
 };
 
 const _dutchSourceAddDe = {
