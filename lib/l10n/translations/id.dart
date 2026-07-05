@@ -83,6 +83,47 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Kwaliteit': 'Kualitas',
+  'Slide-instellingen': 'Pengaturan slide',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Slide pembuka dengan judul dan subjudul besar. Tambahkan gambar latar dari pustaka gambar.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Subjudul bagian yang mengumumkan bagian baru presentasi. Buat singkat.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Daftar berpoin. Indentasikan baris dengan spasi untuk subpoin; awali dengan "[ ]" untuk item yang dapat dicentang.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Dua kolom poin berdampingan — praktis untuk membandingkan dua hal.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Poin di kiri, gambar di kanan. Pilih gambar dari pustaka atau seret ke dalam.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Dua gambar berdampingan, masing-masing dengan keterangannya sendiri.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Satu gambar besar memenuhi layar dengan keterangan opsional.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Setel waktu mulai dan akhir dalam detik untuk memotong, atau potong langsung pada titik pemutaran di pratinjau.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Kutipan yang disorot dengan atribusi sumber.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Tempel pilihan dari lembar kerja dengan Ctrl/Cmd+V, atau ketik per sel. Centang "dapat diedit saat presentasi" untuk mengubahnya secara langsung.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Markdown mentah dengan judul, kode, rumus LaTeX matematis, dan diagram mermaid.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Blok kode dengan penyorotan sintaks. Pilih bahasa pemrograman untuk pemformatan yang tepat.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Impor angka dari berkas CSV atau ketik di kisi. Pilih batang, garis, pai, atau radar.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Dasbor pengukur. Beri setiap pengukur nilai, rentang, dan label.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Pertanyaan kuis interaktif. Pilih jenisnya (pilihan ganda, benar/salah, beberapa benar, atau urutan) dan isi jawabannya.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Lini masa peristiwa bertanggal. Pilih tata letak dan bagaimana peristiwa muncul.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'Klasifikasi TLP menentukan siapa yang boleh melihat slide. Slide dengan tingkat lebih tinggi dari deck dihilangkan saat presentasi dan ekspor.',
+  'Wat kan ik hier?': 'Apa yang bisa saya lakukan di sini?',
+  'Uitvoeren': 'Jalankan',
+  'Nieuwe grafiek': 'Bagan baru',
+  'Commandopalet': 'Palet perintah',
+  'Typ een commando…': 'Ketik perintah…',
   'Instelling opslaan is mislukt.': 'Gagal menyimpan pengaturan.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Catatan: versi web hanya dapat mengambil dari server yang mengizinkannya (CORS).',

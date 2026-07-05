@@ -135,3 +135,22 @@ jobs:
         with:
           args: --offline --no-progress "./**/*.md"
           fail: true
+
+  # Advisory supply-chain scan (Trivy): Dart-package CVEs from pubspec.lock plus
+  # a committed-secret sweep. Scanners and scope live in trivy.yaml. Kept
+  # advisory (exit-code 0) so it surfaces findings without blocking merges —
+  # Dart/pub advisory coverage is still thin. Mirrors `make trivy` locally.
+  supply-chain:
+    name: Supply-chain (Trivy · advisory)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Trivy filesystem scan (advisory)
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          trivy-config: trivy.yaml
+          exit-code: "0"

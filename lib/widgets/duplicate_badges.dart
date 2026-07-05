@@ -81,7 +81,7 @@ class TitleConflictMarker extends StatelessWidget {
 
   const TitleConflictMarker({super.key, required this.modified});
 
-  static const _amber = Color(0xFFB45309);
+  static const _amber = AppTheme.amber700;
 
   @override
   Widget build(BuildContext context) {

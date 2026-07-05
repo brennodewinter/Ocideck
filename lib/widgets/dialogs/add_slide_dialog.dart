@@ -145,10 +145,10 @@ class SlideTypePreviewPainter extends CustomPainter {
   final SlideType type;
 
   /// Wireframe palette: dark bars for titles, soft bars for body text.
-  static const _canvas = Color(0xFFF8FAFC);
-  static const _ink = AppTheme.slate700;
-  static const _soft = Color(0xFFB6C2D2);
-  static const _fill = AppTheme.slate200;
+  static Color get _canvas => AppTheme.slate50;
+  static Color get _ink => AppTheme.slate700;
+  static const _soft = AppTheme.blueGray;
+  static Color get _fill => AppTheme.slate200;
   static const _accent = AppTheme.accent;
 
   const SlideTypePreviewPainter({required this.type});
@@ -267,11 +267,11 @@ class SlideTypePreviewPainter extends CustomPainter {
           );
         }
       case SlideType.code:
-        _bar(canvas, 10, 10, 140, 70, const Color(0xFF1E293B), radius: 4);
-        _bar(canvas, 20, 22, 44, 6, const Color(0xFF7DD3A7), radius: 3);
-        _bar(canvas, 30, 34, 64, 6, const Color(0xFF93B8F8), radius: 3);
-        _bar(canvas, 30, 46, 50, 6, const Color(0xFFE2C08D), radius: 3);
-        _bar(canvas, 20, 58, 32, 6, const Color(0xFF7DD3A7), radius: 3);
+        _bar(canvas, 10, 10, 140, 70, AppTheme.slate800, radius: 4);
+        _bar(canvas, 20, 22, 44, 6, AppTheme.successSoft, radius: 3);
+        _bar(canvas, 30, 34, 64, 6, AppTheme.paleBlue, radius: 3);
+        _bar(canvas, 30, 46, 50, 6, AppTheme.goldSoft2, radius: 3);
+        _bar(canvas, 20, 58, 32, 6, AppTheme.successSoft, radius: 3);
       case SlideType.freeMarkdown:
         _bar(canvas, 14, 12, 10, 9, _accent, radius: 2);
         _bar(canvas, 28, 12, 62, 9, _ink);

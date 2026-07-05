@@ -83,6 +83,47 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Kwaliteit': 'Qualität',
+  'Slide-instellingen': 'Slide-Iistellige',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'D Titelfolie mit eme grosse Titel und Undertitel. Über d Bildbibliothek chasch es Hintergrundbild derzuetue.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'E Zwüschetitel wo en neue Teil vo de Präsentation aakündigt. Halt en churz.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'En Ufzählig. Rugg e Zile mit Läärzeiche ii für en Underpunkt; fang mit "[ ]" aa für en abhaggbare Iitrag.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Zwoo Ufzähligsschpalte näbedra — praktisch zum zwoo Sache verglyche.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Ufzählig links, Bild rächts. Wähl es Bild us de Bibliothek oder zieh eis ine.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Zwoo Bilder näbedra, jedes mit eme eigene Bildtext.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Es grosses, bildfüllends Bild mit eme optionale Bildtext.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Setz Aafangs- und Ändzyt i Sekunde zum schnyde, oder schnyd live am Abschpilpunkt i de Vorschau.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Es useghobes Zitat mit Quelleaagab.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Chläb e Uswahl us ere Tabälle mit Ctrl/Cmd+V ii oder tipp pro Zäle. Chrüzli "bearbeitbar bim Präsentiere" aa zum live ändere.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Rohs Markdown mit Titel, Code, mathematischi LaTeX-Formle und mermaid-Diagramm.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'En Codeblock mit Syntaxfärbig. Wähl d Programmierschprooch für di richtig Formatierig.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Importier Zahle us ere CSV-Datei oder tipp si is Rooschter. Wähl Balke, Linie, Torte oder Radar.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Es Dashboard vo Messaazeige. Gib jedere Aazeig en Wärt, es Beryych und es Label.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'En interaktivi Quizfroog. Wähl d Art (Mehrfachuswahl, wahr/falsch, mehreri richtig oder Reihefolg) und füll d Antworte ii.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'E Zytleiste vo datierte Ereignis. Wähl s Layout und wie d Ereignis erschyned.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'D TLP-Klassifizierig bestimmt, wer d Folie gseh dörf. Folie mit eme höchere Niveau als s Deck wärded bim Präsentiere und Exportiere weggloo.',
+  'Wat kan ik hier?': 'Was cha ich do mache?',
+  'Uitvoeren': 'Uusfüere',
+  'Nieuwe grafiek': 'Neus Diagramm',
+  'Commandopalet': 'Befählspalette',
+  'Typ een commando…': 'Befähl iigää…',
   'Instelling opslaan is mislukt.': 'Iistellig spychere isch fehlgschlage.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Achtig: d Webversion cha nume vo Server abhole, wo das erlaube (CORS).',

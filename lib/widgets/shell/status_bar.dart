@@ -89,8 +89,8 @@ class _DeckStatusBar extends StatelessWidget {
                         ? l10n.t('unsavedChanges')
                         : l10n.t('noUnsavedChanges'),
                     color: deckState.isDirty
-                        ? const Color(0xFFD97706)
-                        : const Color(0xFF15803D),
+                        ? AppTheme.amber600
+                        : AppTheme.success700,
                     onTap: () => onSave(),
                   ),
                   const _StatusDivider(),
@@ -110,7 +110,7 @@ class _DeckStatusBar extends StatelessWidget {
                     tooltip: skipped == 0
                         ? l10n.t('allSlidesIncluded')
                         : '$skipped ${l10n.t('skippedSlidesExcluded')}',
-                    color: skipped == 0 ? null : const Color(0xFF8A6D3B),
+                    color: skipped == 0 ? null : AppTheme.goldDark,
                   ),
                   const _StatusDivider(),
                   Flexible(
@@ -182,9 +182,9 @@ class _ExportReadinessChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    const green = Color(0xFF15803D);
-    const amber = Color(0xFFD97706);
-    const red = Color(0xFFB91C1C);
+    const green = AppTheme.success700;
+    const amber = AppTheme.amber600;
+    const red = AppTheme.danger700;
     final issueCount = readiness.errorCount + readiness.warningCount;
 
     final (
@@ -409,7 +409,7 @@ class _TlpChip extends StatelessWidget {
     final isSet = tlp != TlpLevel.none;
     final fg = Color(tlp.foreground);
     final borderColor = warnUnset
-        ? const Color(0xFFF59E0B)
+        ? AppTheme.amber500
         : (isSet ? fg.withValues(alpha: 0.7) : Colors.white24);
 
     final child = Container(
@@ -477,7 +477,7 @@ class _TlpChip extends StatelessWidget {
                 if (level == tlp) ...[
                   const SizedBox(width: 12),
                   const Spacer(),
-                  const Icon(Icons.check, size: 16, color: AppTheme.slate600),
+                  Icon(Icons.check, size: 16, color: AppTheme.slate600),
                 ],
               ],
             ),

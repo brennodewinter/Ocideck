@@ -240,9 +240,9 @@ extension _PresenterNotes on _FullscreenPresenterState {
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFF161616),
+        color: PresenterPalette.bg2,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: const Color(0xFF262626)),
+        border: Border.all(color: PresenterPalette.surface2),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -276,7 +276,7 @@ extension _PresenterNotes on _FullscreenPresenterState {
                     child: Text(
                       notes,
                       style: const TextStyle(
-                        color: Color(0xFFE5E5E5),
+                        color: PresenterPalette.text,
                         fontSize: 17,
                         height: 1.5,
                       ),

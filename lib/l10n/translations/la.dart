@@ -85,6 +85,47 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Kwaliteit': 'Qualitas',
+  'Slide-instellingen': 'Optiones paginae',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Prima tabella cum titulo magno et subtitulo. Ex bibliotheca imaginum imaginem fundi adde.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Titulus partis qui novam praesentationis partem nuntiat. Brevem serva.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Index rerum enumeratarum. Lineam spatiis induc ut subpunctum fiat; ab "[ ]" incipe ut res notari possit.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Duae columnae enumerationum iuxta positae — utiles ad duas res comparandas.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Enumeratio ad sinistram, imago ad dexteram. Imaginem ex bibliotheca elige aut hic trahe.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Duae imagines iuxta positae, unaquaeque cum propria inscriptione.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Una imago magna, totam paginam implens, cum inscriptione ad libitum.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Initium et finem in secundis pone ad resecandum, aut vivo modo ad punctum lectionis in exemplo reseca.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Sententia insignis cum fontis testimonio.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Selectionem ex tabula calculatoria Ctrl/Cmd+V insere, aut per cellulas scribe. "Mutabile dum praesentatur" nota ut vivo modo mutetur.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Rudis Markdown cum titulis, codice, formulis mathematicis LaTeX et mermaid diagrammatibus.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Codicis pars cum syntaxis coloribus. Linguam programmandi elige ad rectam formam.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Numeros ex CSV tabella importa aut in reticulo scribe. Virgas, lineam, placentam aut radar elige.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Tabula gnomonum. Cuique gnomoni valorem, intervallum et titulum da.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Interrogatio quaestionarii interactiva. Genus elige (electio multiplex, verum/falsum, plures verae aut ordo) et responsa comple.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Temporum series eventuum ad diem notatorum. Formam et modum quo eventus appareant elige.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'Classificatio TLP statuit quis tabellam videre possit. Tabellae gradu altiore quam fasciculus in praesentatione et exportatione omittuntur.',
+  'Wat kan ik hier?': 'Quid hic facere possum?',
+  'Uitvoeren': 'Exsequi',
+  'Nieuwe grafiek': 'Novum diagramma',
+  'Commandopalet': 'Tabula mandatorum',
+  'Typ een commando…': 'Mandatum inscribe…',
   'Instelling opslaan is mislukt.': 'Optio servari non potuit.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: versio interretialis solum a servis id permittentibus accersere potest (CORS).',

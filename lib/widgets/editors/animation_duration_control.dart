@@ -34,7 +34,7 @@ class AnimationDurationControl extends StatelessWidget {
     final seconds = effectiveMs / 1000;
     return Row(
       children: [
-        const Icon(Icons.timer_outlined, size: 18, color: AppTheme.slate500),
+        Icon(Icons.timer_outlined, size: 18, color: AppTheme.slate500),
         const SizedBox(width: 8),
         Text(
           context.l10n.d('Activatieduur'),

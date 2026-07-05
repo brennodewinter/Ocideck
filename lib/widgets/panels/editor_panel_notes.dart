@@ -92,24 +92,24 @@ class _NotesFieldState extends State<_NotesField> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Material(
-      color: const Color(0xFFFFFBEB),
+      color: AppTheme.notesBg,
       child: Theme(
-        data: Theme.of(context).copyWith(dividerColor: const Color(0xFFFCD34D)),
+        data: Theme.of(context).copyWith(dividerColor: AppTheme.notesBorder),
         child: ExpansionTile(
           initiallyExpanded: _expanded,
           onExpansionChanged: (open) => setState(() => _expanded = open),
           tilePadding: const EdgeInsets.symmetric(horizontal: 12),
           childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
-          leading: const Icon(Icons.notes, size: 18, color: Color(0xFFB45309)),
+          leading: const Icon(Icons.notes, size: 18, color: AppTheme.amber700),
           title: Row(
             children: [
               Expanded(
                 child: Text(
                   l10n.d('Sprekersnotities'),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF92400E),
+                    color: AppTheme.warningFg,
                   ),
                 ),
               ),
@@ -117,7 +117,7 @@ class _NotesFieldState extends State<_NotesField> {
                 key: ValueKey('discard-speaker-notes-${widget.slide.id}'),
                 controller: _ctrl,
                 onDiscard: _discardNotes,
-                color: const Color(0xFFB45309),
+                color: AppTheme.amber700,
               ),
             ],
           ),
@@ -127,7 +127,7 @@ class _NotesFieldState extends State<_NotesField> {
             pageCount: widget.richTextPageCount,
             emptyHint: l10n.d('Notities voor tijdens het presenteren'),
             hasContent: _noteText().isNotEmpty,
-            accent: const Color(0xFFD97706),
+            accent: AppTheme.amber600,
           ),
           children: [
             SizedBox(
@@ -138,13 +138,13 @@ class _NotesFieldState extends State<_NotesField> {
                 ),
                 controller: _ctrl,
                 expand: true,
-                baseStyle: const TextStyle(
+                baseStyle: TextStyle(
                   fontSize: 12,
-                  color: Color(0xFF78350F),
+                  color: AppTheme.notesText,
                   height: 1.45,
                 ),
-                linkColor: const Color(0xFFB45309),
-                codeBackground: const Color(0xFFFFF7ED),
+                linkColor: AppTheme.amber700,
+                codeBackground: AppTheme.notesCodeBg,
                 hintText: l10n.d('Sprekersnotities...'),
                 minLines: 10,
                 contentPadding: const EdgeInsets.all(10),
@@ -152,21 +152,21 @@ class _NotesFieldState extends State<_NotesField> {
                   hintText: l10n.d('Sprekersnotities...'),
                   hintStyle: const TextStyle(
                     fontSize: 12,
-                    color: Color(0xFFD97706),
+                    color: AppTheme.amber600,
                   ),
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: AppTheme.paper,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6),
-                    borderSide: const BorderSide(color: Color(0xFFFCD34D)),
+                    borderSide: const BorderSide(color: AppTheme.notesBorder),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6),
-                    borderSide: const BorderSide(color: Color(0xFFFCD34D)),
+                    borderSide: const BorderSide(color: AppTheme.notesBorder),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6),
-                    borderSide: const BorderSide(color: Color(0xFFF59E0B)),
+                    borderSide: const BorderSide(color: AppTheme.amber500),
                   ),
                   isDense: true,
                   contentPadding: const EdgeInsets.all(10),
@@ -244,9 +244,11 @@ class _UserNotesFieldState extends State<_UserNotesField> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Material(
-      color: const Color(0xFFEFF6FF),
+      color: AppTheme.infoBg,
       child: Theme(
-        data: Theme.of(context).copyWith(dividerColor: const Color(0xFFBFDBFE)),
+        data: Theme.of(
+          context,
+        ).copyWith(dividerColor: AppTheme.userNotesBorder),
         child: ExpansionTile(
           initiallyExpanded: _expanded,
           onExpansionChanged: (open) => setState(() => _expanded = open),
@@ -265,7 +267,7 @@ class _UserNotesFieldState extends State<_UserNotesField> {
                   style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF1D4ED8),
+                    color: AppTheme.userNotesAccent,
                   ),
                 ),
               ),
@@ -296,11 +298,11 @@ class _UserNotesFieldState extends State<_UserNotesField> {
                 expand: true,
                 baseStyle: const TextStyle(
                   fontSize: 12,
-                  color: Color(0xFF1E3A8A),
+                  color: AppTheme.userNotesText,
                   height: 1.45,
                 ),
                 linkColor: AppTheme.accent,
-                codeBackground: const Color(0xFFEFF6FF),
+                codeBackground: AppTheme.infoBg,
                 hintText: l10n.d('Gebruikersnotities voor deze slide...'),
                 minLines: 10,
                 contentPadding: const EdgeInsets.all(10),
@@ -308,17 +310,21 @@ class _UserNotesFieldState extends State<_UserNotesField> {
                   hintText: l10n.d('Gebruikersnotities voor deze slide...'),
                   hintStyle: const TextStyle(
                     fontSize: 12,
-                    color: Color(0xFF93C5FD),
+                    color: AppTheme.userNotesBorderFocus,
                   ),
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: AppTheme.paper,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6),
-                    borderSide: const BorderSide(color: Color(0xFFBFDBFE)),
+                    borderSide: const BorderSide(
+                      color: AppTheme.userNotesBorder,
+                    ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6),
-                    borderSide: const BorderSide(color: Color(0xFFBFDBFE)),
+                    borderSide: const BorderSide(
+                      color: AppTheme.userNotesBorder,
+                    ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6),

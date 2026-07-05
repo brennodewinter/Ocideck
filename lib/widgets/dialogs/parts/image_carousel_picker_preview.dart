@@ -10,7 +10,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
     return SizedBox(
       width: 300,
       child: Container(
-        color: const Color(0xFF080D14),
+        color: ImagePickerPalette.bgDeepest,
         child: _selected == null
             ? Center(
                 child: Column(
@@ -19,14 +19,14 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                     const Icon(
                       Icons.touch_app_outlined,
                       size: 40,
-                      color: Color(0xFF30363D),
+                      color: ImagePickerPalette.border,
                     ),
                     const SizedBox(height: 12),
                     Text(
                       l10n.d('Selecteer een\nafbeelding'),
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                        color: Color(0xFF6E7681),
+                        color: ImagePickerPalette.textDim,
                         fontSize: 13,
                         height: 1.5,
                       ),
@@ -52,7 +52,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                               const Center(
                                 child: Icon(
                                   Icons.broken_image,
-                                  color: Color(0xFF30363D),
+                                  color: ImagePickerPalette.border,
                                   size: 48,
                                 ),
                               ),
@@ -74,9 +74,9 @@ extension _CarouselPreview on _ImageCarouselPickerState {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: const Color(0xFF161B22),
+          color: ImagePickerPalette.surface1,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xFF21262D), width: 1),
+          border: Border.all(color: ImagePickerPalette.surface2, width: 1),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +84,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
             Text(
               p.basename(_selected!),
               style: const TextStyle(
-                color: Color(0xFFCDD9E5),
+                color: ImagePickerPalette.text,
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
               ),
@@ -94,81 +94,28 @@ extension _CarouselPreview on _ImageCarouselPickerState {
             const SizedBox(height: 6),
             Text(
               _formatPath(_selected!),
-              style: const TextStyle(color: Color(0xFF6E7681), fontSize: 10.5),
+              style: const TextStyle(
+                color: ImagePickerPalette.textDim,
+                fontSize: 10.5,
+              ),
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(height: 6),
             _FileSize(path: _selected!),
             const SizedBox(height: 12),
-            TextField(
+            _metaField(
               controller: _captionController,
-              minLines: 1,
-              maxLines: 3,
+              hint: l10n.d('Caption / bronvermelding'),
+              icon: Icons.copyright_outlined,
               onChanged: (value) => _caption = value,
-              style: const TextStyle(color: Color(0xFFCDD9E5), fontSize: 12),
-              decoration: InputDecoration(
-                hintText: l10n.d('Caption / bronvermelding'),
-                hintStyle: const TextStyle(
-                  color: Color(0xFF6E7681),
-                  fontSize: 12,
-                ),
-                prefixIcon: const Icon(
-                  Icons.copyright_outlined,
-                  color: Color(0xFF6E7681),
-                  size: 16,
-                ),
-                isDense: true,
-                filled: true,
-                fillColor: const Color(0xFF0D1117),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: Color(0xFF30363D)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: Color(0xFF30363D)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: AppTheme.blue500),
-                ),
-              ),
             ),
             const SizedBox(height: 8),
-            TextField(
+            _metaField(
               controller: _descriptionController,
-              minLines: 1,
-              maxLines: 3,
+              hint: l10n.d('Beschrijving (doorzoekbaar)'),
+              icon: Icons.sell_outlined,
               onChanged: (value) => _descriptions[_selected!] = value.trim(),
-              style: const TextStyle(color: Color(0xFFCDD9E5), fontSize: 12),
-              decoration: InputDecoration(
-                hintText: l10n.d('Beschrijving (doorzoekbaar)'),
-                hintStyle: const TextStyle(
-                  color: Color(0xFF6E7681),
-                  fontSize: 12,
-                ),
-                prefixIcon: const Icon(
-                  Icons.sell_outlined,
-                  color: Color(0xFF6E7681),
-                  size: 16,
-                ),
-                isDense: true,
-                filled: true,
-                fillColor: const Color(0xFF0D1117),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: Color(0xFF30363D)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: Color(0xFF30363D)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: AppTheme.blue500),
-                ),
-              ),
             ),
             const SizedBox(height: 10),
             // Wrap i.p.v. Row: op de smalle previewkolom stapelen de knoppen
@@ -188,9 +135,9 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                   ),
                   style: TextButton.styleFrom(
                     foregroundColor: _justCopied
-                        ? const Color(0xFF22C55E)
-                        : const Color(0xFF8B949E),
-                    disabledForegroundColor: const Color(0xFF22C55E),
+                        ? ImagePickerPalette.success
+                        : ImagePickerPalette.textMuted,
+                    disabledForegroundColor: ImagePickerPalette.success,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 8,
                       vertical: 4,
@@ -202,7 +149,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                   icon: const Icon(Icons.delete_outline, size: 16),
                   label: Text(l10n.d('Verwijderen')),
                   style: TextButton.styleFrom(
-                    foregroundColor: const Color(0xFFE5746E),
+                    foregroundColor: ImagePickerPalette.dangerSoft,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 8,
                       vertical: 4,
@@ -217,13 +164,53 @@ extension _CarouselPreview on _ImageCarouselPickerState {
     );
   }
 
+  /// Een metadata-tekstveld (caption/beschrijving) in de donkere previewstijl.
+  /// De twee velden verschilden alleen in controller, hint, icoon en handler.
+  Widget _metaField({
+    required TextEditingController controller,
+    required String hint,
+    required IconData icon,
+    required ValueChanged<String> onChanged,
+  }) {
+    return TextField(
+      controller: controller,
+      minLines: 1,
+      maxLines: 3,
+      onChanged: onChanged,
+      style: const TextStyle(color: ImagePickerPalette.text, fontSize: 12),
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: const TextStyle(
+          color: ImagePickerPalette.textDim,
+          fontSize: 12,
+        ),
+        prefixIcon: Icon(icon, color: ImagePickerPalette.textDim, size: 16),
+        isDense: true,
+        filled: true,
+        fillColor: ImagePickerPalette.bg,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: ImagePickerPalette.border),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: ImagePickerPalette.border),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: AppTheme.blue500),
+        ),
+      ),
+    );
+  }
+
   Widget _buildFooter() {
     final l10n = context.l10n;
     return Container(
       height: 64,
       padding: const EdgeInsets.symmetric(horizontal: 24),
       decoration: const BoxDecoration(
-        border: Border(top: BorderSide(color: Color(0xFF21262D))),
+        border: Border(top: BorderSide(color: ImagePickerPalette.surface2)),
       ),
       child: Row(
         children: [
@@ -233,8 +220,8 @@ extension _CarouselPreview on _ImageCarouselPickerState {
             icon: const Icon(Icons.folder_open_outlined, size: 16),
             label: Text(l10n.d('Bladeren…')),
             style: OutlinedButton.styleFrom(
-              foregroundColor: const Color(0xFF8B949E),
-              side: const BorderSide(color: Color(0xFF30363D)),
+              foregroundColor: ImagePickerPalette.textMuted,
+              side: const BorderSide(color: ImagePickerPalette.border),
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
             ),
           ),
@@ -252,7 +239,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                       height: 14,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
-                        color: Color(0xFF8B949E),
+                        color: ImagePickerPalette.textMuted,
                       ),
                     )
                   : const Icon(Icons.layers_clear_outlined, size: 16),
@@ -262,8 +249,8 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                     : l10n.d('Duplicaten opruimen'),
               ),
               style: OutlinedButton.styleFrom(
-                foregroundColor: const Color(0xFF8B949E),
-                side: const BorderSide(color: Color(0xFF30363D)),
+                foregroundColor: ImagePickerPalette.textMuted,
+                side: const BorderSide(color: ImagePickerPalette.border),
                 padding: const EdgeInsets.symmetric(
                   horizontal: 14,
                   vertical: 10,
@@ -278,7 +265,10 @@ extension _CarouselPreview on _ImageCarouselPickerState {
               l10n.d(
                 '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert',
               ),
-              style: const TextStyle(color: Color(0xFF484F58), fontSize: 11),
+              style: const TextStyle(
+                color: ImagePickerPalette.borderStrong,
+                fontSize: 11,
+              ),
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -287,7 +277,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
           TextButton(
             onPressed: () => _close(),
             style: TextButton.styleFrom(
-              foregroundColor: const Color(0xFF8B949E),
+              foregroundColor: ImagePickerPalette.textMuted,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             ),
             child: Text(l10n.t('cancel')),
@@ -299,10 +289,10 @@ extension _CarouselPreview on _ImageCarouselPickerState {
             icon: const Icon(Icons.check_circle_outline, size: 17),
             label: Text(l10n.d('Kiezen')),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF238636),
+              backgroundColor: ImagePickerPalette.successStrong,
               foregroundColor: Colors.white,
-              disabledBackgroundColor: const Color(0xFF21262D),
-              disabledForegroundColor: const Color(0xFF484F58),
+              disabledBackgroundColor: ImagePickerPalette.surface2,
+              disabledForegroundColor: ImagePickerPalette.borderStrong,
               padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
               textStyle: const TextStyle(
                 fontWeight: FontWeight.w600,

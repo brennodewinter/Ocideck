@@ -155,6 +155,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 ### `lib/widgets/dialogs/`
 
 - `add_slide_dialog.dart` — Selects a slide type when adding a slide.
+- `command_palette.dart` — Searchable command overlay (Ctrl/Cmd+K); filters actions, keyboard-navigable.
 - `consent_dialog.dart` — Initial consent/welcome dialog (privacy and license).
 - `export_dialog.dart` — WYSIWYG export dialog for PDF/PPTX/HTML.
 - `find_replace_dialog.dart` — Full-text find-and-replace across all slides.
@@ -165,7 +166,9 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `open_presentation_dialog.dart` — Full-text searchable presentation picker with directory scanning.
 - `presentation_info_dialog.dart` — Edits title/author/organization/description metadata.
 - `scan_library_dialog.dart` — Scans well-known locations for presentations.
-- `settings_dialog.dart` — Tabbed settings (theme colours, fonts, WebDAV, consent).
+- `settings_dialog.dart` — Sidebar settings (theme colours, fonts, cockpit,
+  Licentie en Privacy, Beveiliging, Nextcloud, and an "Over OciDeck" screen);
+  tab bodies live in `parts/settings_dialog_*.dart`.
 - `slide_finder_dialog.dart` — Stay-open searcher for gathering slides from many presentations.
 - `slide_quality_details_dialog.dart` — Issues grouped by severity with counts and navigation.
 - `webdav_browser_dialog.dart` — Browses WebDAV/Nextcloud folders to pick a deck or images.
@@ -188,6 +191,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `question_editor.dart` — Edits a question slide (answers, options).
 - `quote_editor.dart` — Edits a quote slide (text, author, background image).
 - `section_editor.dart` — Edits a section-divider slide (title, subtitle).
+- `slide_type_help.dart` — Collapsible "what can I do here?" hint per slide type (and the TLP hint); exhaustive switch guarantees every type has one.
 - `table_editor.dart` — Edits a table slide (grid of cells, header row).
 - `timeline_editor.dart` — Edits a timeline slide (reorderable events, layout).
 - `title_editor.dart` — Edits a title slide (title, subtitle, image, zoom).

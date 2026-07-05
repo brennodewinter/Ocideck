@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import '../../theme/image_picker_palette.dart';
 import 'package:flutter/services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:path/path.dart' as p;
@@ -195,9 +196,12 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
               borderRadius: BorderRadius.circular(20),
               child: Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFF0D1117),
+                  color: ImagePickerPalette.bg,
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: const Color(0xFF21262D), width: 1),
+                  border: Border.all(
+                    color: ImagePickerPalette.surface2,
+                    width: 1,
+                  ),
                 ),
                 child: Column(
                   children: [

@@ -83,6 +83,47 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Kwaliteit': 'Kvalitāte',
+  'Slide-instellingen': 'Slaida iestatījumi',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Sākuma slaids ar lielu virsrakstu un apakšvirsrakstu. Pievienojiet fona attēlu no attēlu bibliotēkas.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Sadaļas virsraksts, kas paziņo par jaunu prezentācijas daļu. Turiet to īsu.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Aizzīmju saraksts. Atkāpieties rindā ar atstarpēm apakšpunktam; sāciet ar "[ ]", lai izveidotu atzīmējamu vienumu.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Divas aizzīmju kolonnas blakus — ērti, lai salīdzinātu divas lietas.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Aizzīmes pa kreisi, attēls pa labi. Izvēlieties attēlu no bibliotēkas vai ievelciet to iekšā.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Divi attēli blakus, katrs ar savu parakstu.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Viens liels, ekrānu aizpildošs attēls ar neobligātu parakstu.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Iestatiet sākuma un beigu laiku sekundēs, lai apgrieztu, vai apgrieziet tiešraidē atskaņošanas punktā priekšskatījumā.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Izcelts citāts ar avota norādi.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Ielīmējiet atlasi no izklājlapas ar Ctrl/Cmd+V vai rakstiet pa šūnām. Atzīmējiet "rediģējams prezentēšanas laikā", lai to mainītu tiešraidē.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Neapstrādāts Markdown ar virsrakstiem, kodu, matemātiskām LaTeX formulām un mermaid diagrammām.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Koda bloks ar sintakses iekrāsojumu. Izvēlieties programmēšanas valodu pareizai formatēšanai.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Importējiet skaitļus no CSV faila vai ievadiet tos režģī. Izvēlieties stabiņu, līniju, riņķa vai radara.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Mērītāju informācijas panelis. Piešķiriet katram mērītājam vērtību, diapazonu un etiķeti.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Interaktīvs viktorīnas jautājums. Izvēlieties veidu (izvēles, pareizi/nepareizi, vairākas pareizas vai secība) un aizpildiet atbildes.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Datētu notikumu laika skala. Izvēlieties izkārtojumu un to, kā notikumi parādās.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'TLP klasifikācija nosaka, kurš drīkst redzēt slaidu. Slaidi ar augstāku līmeni nekā klājam tiek izlaisti prezentējot un eksportējot.',
+  'Wat kan ik hier?': 'Ko es šeit varu darīt?',
+  'Uitvoeren': 'Izpildīt',
+  'Nieuwe grafiek': 'Jauna diagramma',
+  'Commandopalet': 'Komandu palete',
+  'Typ een commando…': 'Ievadiet komandu…',
   'Instelling opslaan is mislukt.': 'Neizdevās saglabāt iestatījumu.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Piezīme: tīmekļa versija var ielādēt tikai no serveriem, kas to atļauj (CORS).',

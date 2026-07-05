@@ -51,7 +51,7 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
           touchTooltipData: BarTouchTooltipData(
             fitInsideHorizontally: true,
             fitInsideVertically: true,
-            getTooltipColor: (_) => const Color(0xFF0F172A),
+            getTooltipColor: (_) => AppTheme.ink,
             getTooltipItem: (group, groupIndex, rod, rodIndex) {
               final label = group.x >= 0 && group.x < spec.x.length
                   ? spec.x[group.x]
@@ -212,7 +212,7 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
           touchTooltipData: LineTouchTooltipData(
             fitInsideHorizontally: true,
             fitInsideVertically: true,
-            getTooltipColor: (_) => const Color(0xFF0F172A),
+            getTooltipColor: (_) => AppTheme.ink,
             // Show every dot near the cursor. When several dots sit on (almost)
             // the same spot they all appear; the font shrinks to keep them
             // readable when stacked.

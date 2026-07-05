@@ -84,6 +84,47 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Kwaliteit': 'Якість',
+  'Slide-instellingen': 'Налаштування слайда',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Титульний слайд із великим заголовком і підзаголовком. Додайте фонове зображення з бібліотеки зображень.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Підзаголовок розділу, що оголошує нову частину презентації. Тримайте його коротким.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Маркований список. Зробіть відступ пробілами для підпункту; почніть з "[ ]" для елемента з прапорцем.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Дві колонки маркерів поруч — зручно для порівняння двох речей.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Маркери ліворуч, зображення праворуч. Оберіть зображення з бібліотеки або перетягніть його сюди.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Два зображення поруч, кожне з власним підписом.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Одне велике зображення на весь екран із необов\'язковим підписом.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Задайте час початку та кінця в секундах для обрізання, або обріжте наживо в точці відтворення в попередньому перегляді.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Виділена цитата із зазначенням джерела.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Вставте виділення з електронної таблиці за допомогою Ctrl/Cmd+V або вводьте по клітинках. Позначте "редаговане під час презентації", щоб змінювати наживо.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Необроблений Markdown із заголовками, кодом, математичними формулами LaTeX і діаграмами mermaid.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Блок коду з підсвічуванням синтаксису. Оберіть мову програмування для правильного форматування.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Імпортуйте числа з файлу CSV або введіть їх у сітку. Оберіть стовпчикову, лінійну, кругову діаграму чи радар.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Панель приладів. Задайте кожному приладу значення, діапазон і мітку.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Інтерактивне запитання вікторини. Оберіть тип (кілька варіантів, правда/неправда, кілька правильних чи послідовність) і заповніть відповіді.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Хронологія датованих подій. Оберіть оформлення та спосіб появи подій.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'Класифікація TLP визначає, хто може бачити слайд. Слайди з рівнем вищим за колоду пропускаються під час презентації та експорту.',
+  'Wat kan ik hier?': 'Що я можу тут робити?',
+  'Uitvoeren': 'Виконати',
+  'Nieuwe grafiek': 'Нова діаграма',
+  'Commandopalet': 'Палітра команд',
+  'Typ een commando…': 'Введіть команду…',
   'Instelling opslaan is mislukt.': 'Не вдалося зберегти налаштування.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Увага: веб-версія може завантажувати лише із серверів, які це дозволяють (CORS).',

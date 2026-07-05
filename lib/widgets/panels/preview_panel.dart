@@ -154,7 +154,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
       child: GestureDetector(
         onTap: _focusNode.requestFocus,
         child: Container(
-          color: const Color(0xFFF1F5F9),
+          color: AppTheme.slate100,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -208,19 +208,15 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
     bool hasRichTextPages,
   ) {
     return Container(
-      color: Colors.white,
+      color: AppTheme.paper,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: Row(
         children: [
-          const Icon(
-            Icons.preview_outlined,
-            size: 16,
-            color: AppTheme.slate500,
-          ),
+          Icon(Icons.preview_outlined, size: 16, color: AppTheme.slate500),
           const SizedBox(width: 6),
           Text(
             l10n.d('Preview'),
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 13,
               color: AppTheme.slate700,
@@ -384,7 +380,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
     bool hasRichTextPages,
   ) {
     return Container(
-      color: Colors.white,
+      color: AppTheme.paper,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -404,18 +400,12 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
               children: [
                 Text(
                   l10n.d(slide.type.label),
-                  style: const TextStyle(
-                    fontSize: 11,
-                    color: AppTheme.slate500,
-                  ),
+                  style: TextStyle(fontSize: 11, color: AppTheme.slate500),
                 ),
                 if (hasRichTextPages)
                   Text(
                     '${l10n.d('Pagina')} ${richTextPage + 1} / $richTextPages',
-                    style: const TextStyle(
-                      fontSize: 10,
-                      color: AppTheme.slate400,
-                    ),
+                    style: TextStyle(fontSize: 10, color: AppTheme.slate400),
                   ),
               ],
             ),
@@ -439,27 +429,23 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
 
   Widget _themeChip(AppLocalizations l10n, Deck deck) {
     return Container(
-      color: const Color(0xFFF8FAFC),
+      color: AppTheme.slate50,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: Row(
         children: [
-          const Icon(
-            Icons.palette_outlined,
-            size: 12,
-            color: AppTheme.slate400,
-          ),
+          Icon(Icons.palette_outlined, size: 12, color: AppTheme.slate400),
           const SizedBox(width: 4),
           Text(
             '${l10n.d('Thema')}: ${deck.theme}',
-            style: const TextStyle(fontSize: 10, color: AppTheme.slate400),
+            style: TextStyle(fontSize: 10, color: AppTheme.slate400),
           ),
           if (deck.paginate) ...[
             const SizedBox(width: 10),
-            const Icon(Icons.tag, size: 12, color: AppTheme.slate400),
+            Icon(Icons.tag, size: 12, color: AppTheme.slate400),
             const SizedBox(width: 2),
             Text(
               l10n.d('paginering aan'),
-              style: const TextStyle(fontSize: 10, color: AppTheme.slate400),
+              style: TextStyle(fontSize: 10, color: AppTheme.slate400),
             ),
           ],
         ],
@@ -487,7 +473,7 @@ class FullDeckPreview extends ConsumerWidget {
         .watch(settingsProvider)
         .classificationWatermarkEnabled;
     return Scaffold(
-      backgroundColor: const Color(0xFF1E2028),
+      backgroundColor: AppTheme.panelBg,
       appBar: AppBar(
         title: Text('${deck.title} — ${l10n.d('volledig deck')}'),
         backgroundColor: AppTheme.navy,
@@ -508,10 +494,7 @@ class FullDeckPreview extends ConsumerWidget {
               children: [
                 Text(
                   '${l10n.d('Slide')} ${i + 1}',
-                  style: const TextStyle(
-                    color: AppTheme.slate500,
-                    fontSize: 11,
-                  ),
+                  style: TextStyle(color: AppTheme.slate500, fontSize: 11),
                 ),
                 const SizedBox(height: 4),
                 Container(
@@ -560,7 +543,7 @@ class CollapsedPreviewBar extends ConsumerWidget {
     final l10n = context.l10n;
     return Container(
       width: 34,
-      color: Colors.white,
+      color: AppTheme.paper,
       child: Column(
         children: [
           const SizedBox(height: 6),

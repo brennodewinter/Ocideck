@@ -214,7 +214,7 @@ class PrivacyStatementContent extends StatelessWidget {
           return SingleChildScrollView(
             child: SelectableText(
               snap.data!,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 10.5,
                 height: 1.35,
                 color: AppTheme.slate600,

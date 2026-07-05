@@ -84,6 +84,47 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Kwaliteit': 'Kwalità',
+  'Slide-instellingen': 'Settings tas-slajd',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Is-slide tal-ftuħ b\'titlu kbir u sottotitlu. Żid immaġni ta\' sfond mil-librerija tal-immaġini.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Intestatura ta\' taqsima li tħabbar parti ġdida tal-preżentazzjoni. Żommha qasira.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Lista bil-punti. Indenta linja bi spazji għal sottopunt; ibda b\'"[ ]" għal element li jista\' jiġi mmarkat.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Żewġ kolonni ta\' punti ħdejn xulxin — utli biex tqabbel żewġ affarijiet.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Punti fuq ix-xellug, immaġni fuq il-lemin. Agħżel immaġni mil-librerija jew iġborha ġewwa.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Żewġ immaġini ħdejn xulxin, kull waħda bit-titlu tagħha.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Immaġni waħda kbira li timla l-iskrin b\'titlu fakultattiv.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Issettja l-ħin tal-bidu u tat-tmiem f\'sekondi biex taqta\', jew aqta\' fil-ħin ħaj fuq il-punt tad-daqq fl-anteprima.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Kwotazzjoni enfasizzata b\'attribuzzjoni.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Waħħal għażla minn spreadsheet b\'Ctrl/Cmd+V, jew ittajpja ċellula b\'ċellula. Immarka "editabbli waqt il-preżentazzjoni" biex tibdilha ħaj.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Markdown mhux ipproċessat b\'intestaturi, kodiċi, formuli matematiċi LaTeX u dijagrammi mermaid.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Blokk ta\' kodiċi bil-kuluri tas-sintassi. Agħżel il-lingwaġġ tal-programmar għall-formattazzjoni t-tajba.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Importa n-numri minn fajl CSV jew ittajpjahom fil-grilja. Agħżel bar, linja, torta jew radar.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Dashboard ta\' arloġġi. Agħti lil kull arloġġ valur, medda u tikketta.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Mistoqsija interattiva ta\' kwiżż. Agħżel it-tip (għażla multipla, veru/falz, aktar minn waħda korretta jew ordni) u imla t-tweġibiet.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Linja taż-żmien ta\' avvenimenti bid-data. Agħżel il-format u kif jidhru l-avvenimenti.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'Il-klassifikazzjoni TLP tiddetermina min jista\' jara l-slide. Slides b\'livell ogħla mid-deck jitħallew barra waqt il-preżentazzjoni u l-esportazzjoni.',
+  'Wat kan ik hier?': 'X\'nista\' nagħmel hawn?',
+  'Uitvoeren': 'Esegwixxi',
+  'Nieuwe grafiek': 'Grafika ġdida',
+  'Commandopalet': 'Paletta tal-kmandi',
+  'Typ een commando…': 'Ikteb kmand…',
   'Instelling opslaan is mislukt.': 'L-issejvjar tas-setting falla.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: il-verżjoni tal-web tista\' ġġib biss minn servers li jippermettuh (CORS).',

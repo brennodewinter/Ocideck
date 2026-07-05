@@ -83,6 +83,47 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Kwaliteit': 'Ποιότητα',
+  'Slide-instellingen': 'Ρυθμίσεις διαφάνειας',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Η αρχική διαφάνεια με μεγάλο τίτλο και υπότιτλο. Προσθέστε μια εικόνα φόντου από τη βιβλιοθήκη εικόνων.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Μια επικεφαλίδα ενότητας που ανακοινώνει ένα νέο μέρος της παρουσίασης. Κρατήστε την σύντομη.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Μια λίστα με κουκκίδες. Κάντε εσοχή σε μια γραμμή με κενά για υποσημείο· ξεκινήστε με "[ ]" για στοιχείο με πλαίσιο ελέγχου.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Δύο στήλες κουκκίδων δίπλα δίπλα — βολικό για σύγκριση δύο πραγμάτων.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Κουκκίδες αριστερά, εικόνα δεξιά. Επιλέξτε μια εικόνα από τη βιβλιοθήκη ή σύρετέ την μέσα.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Δύο εικόνες δίπλα δίπλα, καθεμία με τη δική της λεζάντα.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Μία μεγάλη εικόνα που καλύπτει όλη την οθόνη με προαιρετική λεζάντα.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Ορίστε χρόνο έναρξης και λήξης σε δευτερόλεπτα για περικοπή ή κόψτε ζωντανά στο σημείο αναπαραγωγής στην προεπισκόπηση.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Ένα τονισμένο απόσπασμα με αναφορά πηγής.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Επικολλήστε μια επιλογή από υπολογιστικό φύλλο με Ctrl/Cmd+V ή πληκτρολογήστε ανά κελί. Επιλέξτε "επεξεργάσιμο κατά την παρουσίαση" για να το αλλάζετε ζωντανά.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Ακατέργαστο Markdown με επικεφαλίδες, κώδικα, μαθηματικούς τύπους LaTeX και διαγράμματα mermaid.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Ένα μπλοκ κώδικα με επισήμανση σύνταξης. Επιλέξτε τη γλώσσα προγραμματισμού για σωστή μορφοποίηση.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Εισαγάγετε αριθμούς από αρχείο CSV ή πληκτρολογήστε τους στο πλέγμα. Επιλέξτε ράβδους, γραμμή, πίτα ή ραντάρ.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Ένας πίνακας μετρητών. Δώστε σε κάθε μετρητή τιμή, εύρος και ετικέτα.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Μια διαδραστική ερώτηση κουίζ. Επιλέξτε το είδος (πολλαπλής επιλογής, σωστό/λάθος, πολλά σωστά ή σειρά) και συμπληρώστε τις απαντήσεις.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Ένα χρονολόγιο χρονολογημένων γεγονότων. Επιλέξτε τη διάταξη και το πώς εμφανίζονται τα γεγονότα.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'Η ταξινόμηση TLP καθορίζει ποιος μπορεί να δει τη διαφάνεια. Οι διαφάνειες με υψηλότερο επίπεδο από το ντεκ παραλείπονται κατά την παρουσίαση και την εξαγωγή.',
+  'Wat kan ik hier?': 'Τι μπορώ να κάνω εδώ;',
+  'Uitvoeren': 'Εκτέλεση',
+  'Nieuwe grafiek': 'Νέο γράφημα',
+  'Commandopalet': 'Παλέτα εντολών',
+  'Typ een commando…': 'Πληκτρολογήστε εντολή…',
   'Instelling opslaan is mislukt.': 'Η αποθήκευση της ρύθμισης απέτυχε.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Σημείωση: η έκδοση για τον ιστό μπορεί να αντλεί μόνο από διακομιστές που το επιτρέπουν (CORS).',

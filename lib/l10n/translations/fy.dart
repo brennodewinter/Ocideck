@@ -83,6 +83,47 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Kwaliteit': 'Kwaliteit',
+  'Slide-instellingen': 'Slide-ynstellingen',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'De iepeningsslide mei in grutte titel en ûndertitel. Foegje fia de ôfbyldingsbibleteek in eftergrûnbyld ta.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'In tuskenkop dy\'t in nij diel fan de presintaasje oankundiget. Hâld it koart.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'In opsomming. Lit in rigel mei spaasjes ynspringe foar in subpunt; begjin mei "[ ]" foar in ôffinkber item.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Twa opsommingskolommen njonken inoar — handich om twa dingen te ferlykjen.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Opsomming lofts, ôfbylding rjochts. Kies in byld út de bibleteek of sleep it deryn.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Twa ôfbyldings njonken inoar, elk mei in eigen ûnderskrift.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Ien grut, byldfoljend ôfbylding mei in opsjoneel ûnderskrift.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Set begjin- en eintiid yn sekonden om te knippen, of knip live op it ôfspylpunt yn it foarbyld.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'In útljochte sitaat mei boarnefermelding.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Plak in seleksje út in rekkenblêd mei Ctrl/Cmd+V, of typ per sel. Finkje "bewurkber ûnder it presintearjen" oan om live te feroarjen.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Rûge Markdown mei koppen, koade, matematyske LaTeX-formules en mermaid-diagrammen.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'In koadeblok mei syntaksiskleuring. Kies de programmeartaal foar de goede opmaak.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Ymportearje sifers út in CSV-bestân of typ se yn it roaster. Kies steaf, line, taart of radar.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'In dashboard fan mjitters. Jou elke mjitter in wearde, berik en label.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'In ynteraktive kwisfraach. Kies de soarte (mearkar, goed/ferkeard, meardere goed of folchoarder) en folje de antwurden yn.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'In tiidline fan datearre barrens. Kies de opmaak en hoe\'t de barrens ferskine.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'De TLP-klassifikaasje bepaalt wa\'t de slide sjen mei. Slides mei in heger nivo as it deck wurde by it presintearjen en eksportearjen weilitten.',
+  'Wat kan ik hier?': 'Wat kin ik hjir?',
+  'Uitvoeren': 'Útfiere',
+  'Nieuwe grafiek': 'Nije grafyk',
+  'Commandopalet': 'Kommandopalet',
+  'Typ een commando…': 'Typ in kommando…',
   'Instelling opslaan is mislukt.': 'Ynstelling bewarje is mislearre.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Tink derom: de webferzje kin allinnich ophelje fan servers dy\'t dat tastean (CORS).',

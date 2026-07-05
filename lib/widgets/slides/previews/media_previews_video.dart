@@ -278,7 +278,7 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
         : 'vimeo';
     final controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0xFF000000))
+      ..setBackgroundColor(Colors.black)
       ..addJavaScriptChannel('OciDeck', onMessageReceived: _onJsMessage)
       ..setNavigationDelegate(
         NavigationDelegate(
@@ -374,7 +374,7 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
   Widget build(BuildContext context) {
     final controller = _controller;
     return Container(
-      color: const Color(0xFF000000),
+      color: Colors.black,
       child: Stack(
         fit: StackFit.expand,
         children: [

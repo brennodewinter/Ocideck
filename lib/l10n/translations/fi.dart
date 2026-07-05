@@ -83,6 +83,47 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Kwaliteit': 'Laatu',
+  'Slide-instellingen': 'Dian asetukset',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Avausdia, jossa on suuri otsikko ja alaotsikko. Lisää taustakuva kuvakirjastosta.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Osion väliotsikko, joka ilmoittaa esityksen uudesta osasta. Pidä se lyhyenä.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Luettelo. Sisennä rivi välilyönneillä alakohtaa varten; aloita merkinnällä "[ ]", jos kohta on ruksittavissa.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Kaksi luettelosaraketta vierekkäin — kätevä kahden asian vertailuun.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Luettelo vasemmalla, kuva oikealla. Valitse kuva kirjastosta tai raahaa se sisään.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Kaksi kuvaa vierekkäin, kummallakin oma kuvateksti.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Yksi suuri, koko alan täyttävä kuva ja valinnainen kuvateksti.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Aseta alku- ja loppuaika sekunneissa leikataksesi, tai leikkaa suorana toistokohdasta esikatselussa.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Korostettu sitaatti lähdemerkinnällä.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Liitä valinta taulukkolaskennasta näppäimillä Ctrl/Cmd+V tai kirjoita solu kerrallaan. Rastita "muokattavissa esityksen aikana" muuttaaksesi sitä suorana.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Raakaa Markdownia otsikoineen, koodeineen, matemaattisine LaTeX-kaavoineen ja mermaid-kaavioineen.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Koodilohko syntaksikorostuksella. Valitse ohjelmointikieli oikeaa muotoilua varten.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Tuo luvut CSV-tiedostosta tai kirjoita ne ruudukkoon. Valitse pylväs, viiva, ympyrä tai tutka.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Mittareiden koontinäyttö. Anna kullekin mittarille arvo, alue ja nimike.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Interaktiivinen tietovisakysymys. Valitse tyyppi (monivalinta, oikein/väärin, useita oikein tai järjestys) ja täytä vastaukset.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Aikajana päivätyistä tapahtumista. Valitse asettelu ja se, miten tapahtumat ilmestyvät.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'TLP-luokitus määrää, kuka saa nähdä dian. Diat, joiden taso on korkeampi kuin deckin, jätetään pois esitettäessä ja vietäessä.',
+  'Wat kan ik hier?': 'Mitä voin tehdä täällä?',
+  'Uitvoeren': 'Suorita',
+  'Nieuwe grafiek': 'Uusi kaavio',
+  'Commandopalet': 'Komentopaletti',
+  'Typ een commando…': 'Kirjoita komento…',
   'Instelling opslaan is mislukt.': 'Asetuksen tallennus epäonnistui.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Huomio: verkkoversio voi noutaa vain palvelimilta, jotka sallivat sen (CORS).',

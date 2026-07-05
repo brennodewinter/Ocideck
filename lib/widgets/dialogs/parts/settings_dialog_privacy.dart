@@ -16,8 +16,8 @@ extension _SettingsPrivacy on _SettingsDialogState {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: const Color(0xFFF0F9FF),
-            border: Border.all(color: const Color(0xFFBFDBFE)),
+            color: AppTheme.infoSurface,
+            border: Border.all(color: AppTheme.userNotesBorder),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(
@@ -35,7 +35,7 @@ extension _SettingsPrivacy on _SettingsDialogState {
                 l10n.d(
                   'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.',
                 ),
-                style: const TextStyle(fontSize: 11, color: AppTheme.slate600),
+                style: TextStyle(fontSize: 11, color: AppTheme.slate600),
               ),
             ],
           ),

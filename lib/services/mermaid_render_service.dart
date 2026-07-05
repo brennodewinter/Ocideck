@@ -206,7 +206,7 @@ class _MermaidRenderHostState extends State<MermaidRenderHost> {
     if (!mounted || _controller != null) return;
     final controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0xFFFFFFFF))
+      ..setBackgroundColor(Colors.white)
       ..setNavigationDelegate(
         NavigationDelegate(
           onNavigationRequest: (request) {

@@ -81,7 +81,7 @@ class _HexColorDialogState extends State<_HexColorDialog> {
           const SizedBox(height: 8),
           Text(
             l10n.d('Bijvoorbeeld #33FF33 voor een CRT-groen scherm.'),
-            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ],
       ),

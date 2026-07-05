@@ -15,7 +15,10 @@ extension _CarouselChrome on _ImageCarouselPickerState {
           const SizedBox(height: 16),
           Text(
             l10n.d('Afbeeldingen laden…'),
-            style: const TextStyle(color: Color(0xFF8B949E), fontSize: 14),
+            style: const TextStyle(
+              color: ImagePickerPalette.textMuted,
+              fontSize: 14,
+            ),
           ),
         ],
       ),
@@ -28,14 +31,14 @@ extension _CarouselChrome on _ImageCarouselPickerState {
       height: 60,
       padding: const EdgeInsets.symmetric(horizontal: 24),
       decoration: const BoxDecoration(
-        border: Border(bottom: BorderSide(color: Color(0xFF21262D))),
+        border: Border(bottom: BorderSide(color: ImagePickerPalette.surface2)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: const Color(0xFF1D2433),
+              color: ImagePickerPalette.surfaceAlt,
               borderRadius: BorderRadius.circular(8),
             ),
             child: const Icon(
@@ -58,7 +61,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
             decoration: BoxDecoration(
-              color: const Color(0xFF21262D),
+              color: ImagePickerPalette.surface2,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
@@ -66,7 +69,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
                   ? '${_images.length}'
                   : '${_filtered.length} / ${_images.length}',
               style: const TextStyle(
-                color: Color(0xFF8B949E),
+                color: ImagePickerPalette.textMuted,
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),
@@ -80,7 +83,11 @@ extension _CarouselChrome on _ImageCarouselPickerState {
           _buildViewToggle(),
           const SizedBox(width: 12),
           IconButton(
-            icon: const Icon(Icons.close, color: Color(0xFF6E7681), size: 20),
+            icon: const Icon(
+              Icons.close,
+              color: ImagePickerPalette.textDim,
+              size: 20,
+            ),
             onPressed: () => _close(),
             tooltip: l10n.d('Sluiten (Esc)'),
           ),
@@ -96,13 +103,16 @@ extension _CarouselChrome on _ImageCarouselPickerState {
       child: TextField(
         controller: _searchController,
         onChanged: _onSearchChanged,
-        style: const TextStyle(color: Color(0xFFCDD9E5), fontSize: 13),
+        style: const TextStyle(color: ImagePickerPalette.text, fontSize: 13),
         decoration: InputDecoration(
           hintText: l10n.d('Zoek op naam of beschrijving…'),
-          hintStyle: const TextStyle(color: Color(0xFF6E7681), fontSize: 13),
+          hintStyle: const TextStyle(
+            color: ImagePickerPalette.textDim,
+            fontSize: 13,
+          ),
           prefixIcon: const Icon(
             Icons.search,
-            color: Color(0xFF6E7681),
+            color: ImagePickerPalette.textDim,
             size: 18,
           ),
           suffixIcon: _query.isEmpty
@@ -111,7 +121,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
                   tooltip: l10n.d('Zoekopdracht wissen'),
                   icon: const Icon(
                     Icons.clear,
-                    color: Color(0xFF6E7681),
+                    color: ImagePickerPalette.textDim,
                     size: 16,
                   ),
                   onPressed: () {
@@ -121,15 +131,15 @@ extension _CarouselChrome on _ImageCarouselPickerState {
                 ),
           isDense: true,
           filled: true,
-          fillColor: const Color(0xFF0D1117),
+          fillColor: ImagePickerPalette.bg,
           contentPadding: const EdgeInsets.symmetric(vertical: 0),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(color: Color(0xFF30363D)),
+            borderSide: const BorderSide(color: ImagePickerPalette.border),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(color: Color(0xFF30363D)),
+            borderSide: const BorderSide(color: ImagePickerPalette.border),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
@@ -153,17 +163,21 @@ extension _CarouselChrome on _ImageCarouselPickerState {
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           decoration: BoxDecoration(
             color: _untaggedOnly
-                ? const Color(0xFF1D2433)
-                : const Color(0xFF0D1117),
+                ? ImagePickerPalette.surfaceAlt
+                : ImagePickerPalette.bg,
             borderRadius: BorderRadius.circular(9),
             border: Border.all(
-              color: _untaggedOnly ? AppTheme.blue500 : const Color(0xFF30363D),
+              color: _untaggedOnly
+                  ? AppTheme.blue500
+                  : ImagePickerPalette.border,
             ),
           ),
           child: Icon(
             Icons.label_off_outlined,
             size: 17,
-            color: _untaggedOnly ? AppTheme.blue400 : const Color(0xFF6E7681),
+            color: _untaggedOnly
+                ? AppTheme.blue400
+                : ImagePickerPalette.textDim,
           ),
         ),
       ),
@@ -183,13 +197,15 @@ extension _CarouselChrome on _ImageCarouselPickerState {
             duration: const Duration(milliseconds: 150),
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             decoration: BoxDecoration(
-              color: active ? const Color(0xFF1D2433) : Colors.transparent,
+              color: active
+                  ? ImagePickerPalette.surfaceAlt
+                  : Colors.transparent,
               borderRadius: BorderRadius.circular(7),
             ),
             child: Icon(
               icon,
               size: 17,
-              color: active ? AppTheme.blue400 : const Color(0xFF6E7681),
+              color: active ? AppTheme.blue400 : ImagePickerPalette.textDim,
             ),
           ),
         ),
@@ -199,9 +215,9 @@ extension _CarouselChrome on _ImageCarouselPickerState {
     return Container(
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
-        color: const Color(0xFF0D1117),
+        color: ImagePickerPalette.bg,
         borderRadius: BorderRadius.circular(9),
-        border: Border.all(color: const Color(0xFF30363D)),
+        border: Border.all(color: ImagePickerPalette.border),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -231,13 +247,13 @@ extension _CarouselChrome on _ImageCarouselPickerState {
               const Icon(
                 Icons.verified_outlined,
                 size: 56,
-                color: Color(0xFF22C55E),
+                color: ImagePickerPalette.success,
               ),
               const SizedBox(height: 20),
               Text(
                 l10n.d('Alle afbeeldingen hebben tags.'),
                 style: const TextStyle(
-                  color: Color(0xFFCDD9E5),
+                  color: ImagePickerPalette.text,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
@@ -245,7 +261,10 @@ extension _CarouselChrome on _ImageCarouselPickerState {
               const SizedBox(height: 8),
               Text(
                 l10n.d('Zet het filter uit om alles weer te zien.'),
-                style: const TextStyle(color: Color(0xFF6E7681), fontSize: 13),
+                style: const TextStyle(
+                  color: ImagePickerPalette.textDim,
+                  fontSize: 13,
+                ),
               ),
             ],
           ),
@@ -262,13 +281,13 @@ extension _CarouselChrome on _ImageCarouselPickerState {
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: const Color(0xFF161B22),
+                color: ImagePickerPalette.surface1,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: const Icon(
                 Icons.image_search_outlined,
                 size: 56,
-                color: Color(0xFF30363D),
+                color: ImagePickerPalette.border,
               ),
             ),
             const SizedBox(height: 20),
@@ -277,7 +296,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
                   ? '${l10n.d('Geen resultaten voor')} "${_query.trim()}"'
                   : l10n.d('Geen afbeeldingen gevonden'),
               style: const TextStyle(
-                color: Color(0xFFCDD9E5),
+                color: ImagePickerPalette.text,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
@@ -289,7 +308,10 @@ extension _CarouselChrome on _ImageCarouselPickerState {
                   : l10n.d(
                       'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.',
                     ),
-              style: const TextStyle(color: Color(0xFF6E7681), fontSize: 13),
+              style: const TextStyle(
+                color: ImagePickerPalette.textDim,
+                fontSize: 13,
+              ),
             ),
           ],
         ),

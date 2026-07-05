@@ -157,10 +157,15 @@ void main() {
     container.read(tabsProvider).current!.deckNotifier.loadDeck(overfullDeck());
     await tester.pumpAndSettle();
 
+    // Quality now lives behind the compact "Kwaliteit" chip in the editor
+    // header; open it to reveal the counts and issues.
     expect(
       find.textContaining('Geen kwaliteitsproblemen gevonden'),
       findsNothing,
     );
+    await tester.tap(find.text('Kwaliteit'));
+    await tester.pumpAndSettle();
+
     expect(find.textContaining('fout(en)'), findsOneWidget);
     expect(find.textContaining('waarschuwing(en)'), findsOneWidget);
   });

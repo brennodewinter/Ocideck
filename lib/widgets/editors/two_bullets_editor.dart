@@ -370,7 +370,7 @@ class _BulletColumnState extends State<_BulletColumn> {
           else
             Text(
               _markerForItem(i),
-              style: const TextStyle(fontSize: 16, color: AppTheme.slate500),
+              style: TextStyle(fontSize: 16, color: AppTheme.slate500),
             ),
           const SizedBox(width: 8),
           Expanded(
@@ -418,7 +418,7 @@ class _BulletColumnState extends State<_BulletColumn> {
           ),
           IconButton(
             key: ValueKey('remove-bullet-${widget.label}-$i'),
-            icon: const Icon(
+            icon: Icon(
               Icons.remove_circle_outline,
               size: 18,
               color: AppTheme.slate500,

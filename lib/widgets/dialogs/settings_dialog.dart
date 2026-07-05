@@ -426,7 +426,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
               // paint their ink/selected state onto this surface instead of a
               // hidden ancestor behind an opaque box.
               child: Material(
-                color: const Color(0xFFF8FAFC),
+                color: AppTheme.slate50,
                 child: Column(
                   children: [
                     _contentHeader(labels[_selectedTab]),
@@ -455,7 +455,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [Color(0xFF273A60), AppTheme.navy],
+          colors: [AppTheme.navySoft, AppTheme.navy],
         ),
       ),
       child: Column(
@@ -562,7 +562,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                       style: TextStyle(
                         // EU-vlaggeel: leesbaar op de donkere/EU-blauwe
                         // zijbalk, passend bij het geel-hertinte logo ernaast.
-                        color: Color(0xFFFFCC00),
+                        color: AppTheme.amberVivid,
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 2.5,
@@ -647,19 +647,19 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   Widget _contentHeader(String title) {
     return Container(
       padding: const EdgeInsets.fromLTRB(28, 18, 14, 16),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        border: Border(bottom: BorderSide(color: Color(0xFFE9EEF5))),
+      decoration: BoxDecoration(
+        color: AppTheme.paper,
+        border: const Border(bottom: BorderSide(color: AppTheme.iceBlue)),
       ),
       child: Row(
         children: [
           Expanded(
             child: Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                color: Color(0xFF1E293B),
+                color: AppTheme.slate800,
                 letterSpacing: 0.1,
               ),
             ),
@@ -679,9 +679,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   Widget _footerBar(AppLocalizations l10n) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: Color(0xFFE9EEF5))),
+      decoration: BoxDecoration(
+        color: AppTheme.paper,
+        border: const Border(top: BorderSide(color: AppTheme.iceBlue)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -900,7 +900,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       padding: const EdgeInsets.only(bottom: 8),
       child: Text(
         text.toUpperCase(),
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 10,
           fontWeight: FontWeight.w700,
           color: AppTheme.slate500,
@@ -929,7 +929,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     return BoxDecoration(
       border: Border.all(color: AppTheme.slate300),
       borderRadius: BorderRadius.circular(6),
-      color: Colors.white,
+      color: AppTheme.paper,
     );
   }
 

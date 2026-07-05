@@ -198,10 +198,7 @@ class _PresentationInfoDialogState
                   l10n.d(
                     'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.',
                   ),
-                  style: const TextStyle(
-                    fontSize: 11,
-                    color: AppTheme.slate400,
-                  ),
+                  style: TextStyle(fontSize: 11, color: AppTheme.slate400),
                 ),
               ],
             ),
@@ -383,7 +380,7 @@ class _PresentationInfoDialogState
             l10n.d(
               'Doeltijd voor de aftelling in de presenter. Tijdens presenteren fijn af te stellen met de toets K.',
             ),
-            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
       ],

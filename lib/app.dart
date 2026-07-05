@@ -24,6 +24,9 @@ class OciDeckApp extends ConsumerWidget {
       settingsProvider.select((s) => s.uiTextScale),
     );
     AppLocalizations.setActiveLanguageCode(languageCode);
+    // Laat de hardcoded chrome-tokens (AppTheme.slateX, surface, …) meeschakelen
+    // met het gekozen app-appearance-profiel, net als de Material-ThemeData.
+    AppTheme.isDark = appearance.isDark;
     return MaterialApp(
       title: 'OciDeck',
       theme: AppTheme.fromProfile(appearance),
@@ -73,7 +76,7 @@ class _ConsentGate extends ConsumerWidget {
               const SizedBox(height: 16),
               Text(
                 context.l10n.d('OciDeck wordt gestart…'),
-                style: const TextStyle(fontSize: 13, color: Color(0xFF64748B)),
+                style: TextStyle(fontSize: 13, color: AppTheme.slate500),
               ),
             ],
           ),

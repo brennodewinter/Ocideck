@@ -44,6 +44,7 @@ import '../utils/user_facing_error.dart';
 import '../theme/app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/slide_quality_localization.dart';
+import 'dialogs/command_palette.dart';
 import 'dialogs/duplicate_cleanup_dialog.dart';
 import 'dialogs/export_dialog.dart';
 import 'dialogs/find_replace_dialog.dart';
@@ -163,7 +164,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                           padding: const EdgeInsets.only(bottom: 3),
                           child: Text(
                             '•  ${s.label}  ·  ${_formatWhen(s.savedAt)}',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 12.5,
                               color: AppTheme.slate600,
                             ),

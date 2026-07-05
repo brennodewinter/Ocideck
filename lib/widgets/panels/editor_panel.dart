@@ -13,6 +13,7 @@ import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../editors/audio_attachment_editor.dart';
 import '../editors/slide_editor_registry.dart';
+import '../editors/slide_type_help.dart';
 import '../panels/slide_quality_panel.dart';
 import '../editors/markdown_deck_editor.dart';
 import '../../utils/page_scoped_notes.dart';
@@ -67,8 +68,8 @@ class EditorPanel extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // ── Toolbar: slide-type + stijlprofiel ─────────────────────────────
-          _EditorToolbar(
+          // ── Kopregel: type, stijl, hulp en slidekwaliteit op één regel ─────
+          _EditorHeaderBar(
             slide: slide,
             profiles: settings.themeProfiles,
             activeProfile: deck.themeProfile,
@@ -81,14 +82,15 @@ class EditorPanel extends ConsumerWidget {
                 deckNotifier.updateThemeProfile(profile),
             onDefaultProfileRequested: () =>
                 deckNotifier.updateThemeProfile(settings.themeProfile),
+            onUpdate: update,
+            imageService: imgService,
+            deck: deck,
           ),
           const Divider(height: 1),
           Expanded(
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
-                const SlideQualityPanel(),
-                const Divider(height: 1),
                 _buildEditor(
                   slide,
                   update,
@@ -113,61 +115,13 @@ class EditorPanel extends ConsumerWidget {
                     editorNotifier.select(idx + 1);
                   },
                 ),
-                if (slide.type != SlideType.video) ...[
-                  const Divider(height: 1),
-                  Container(
-                    color: const Color(0xFFF8FAFC),
-                    padding: const EdgeInsets.all(12),
-                    child: AudioAttachmentEditor(
-                      slide: slide,
-                      imageService: imgService,
-                      onUpdate: update,
-                      projectPath: deck.projectPath,
-                    ),
-                  ),
-                ],
-                if (deck.themeProfile.logoPath?.isNotEmpty == true) ...[
-                  const Divider(height: 1),
-                  _SlideLogoControl(slide: slide, onUpdate: update),
-                ],
-                if (deck.themeProfile.footerText.trim().isNotEmpty ||
-                    deck.themeProfile.footerShowPageNumbers) ...[
-                  const Divider(height: 1),
-                  _SlideFooterControl(slide: slide, onUpdate: update),
-                ],
-                if (slide.type == SlideType.table) ...[
-                  const Divider(height: 1),
-                  _SlideTableEditControl(slide: slide, onUpdate: update),
-                ],
-                const Divider(height: 1),
-                _SlideTimingControl(slide: slide, onUpdate: update),
-                const Divider(height: 1),
-                _SlideTlpControl(slide: slide, onUpdate: update),
-                const Divider(height: 1),
-                _NotesField(
+                ..._belowEditorControls(
                   slide: slide,
+                  update: update,
+                  deckNotifier: deckNotifier,
                   richTextPage: richTextPage,
-                  richTextPageCount: richTextPages,
-                  onUpdate: update,
-                ),
-                const Divider(height: 1),
-                _UserNotesField(
-                  slide: slide,
-                  note:
-                      deckNotifier.userNoteForSlide(
-                        slide.id,
-                        pageIndex: richTextPage,
-                        multiPage: multiPageNotes,
-                      ) ??
-                      '',
-                  richTextPage: richTextPage,
-                  richTextPageCount: richTextPages,
-                  onChanged: (text) => deckNotifier.setUserNoteForSlide(
-                    slide.id,
-                    text,
-                    pageIndex: richTextPage,
-                    multiPage: multiPageNotes,
-                  ),
+                  richTextPages: richTextPages,
+                  multiPageNotes: multiPageNotes,
                 ),
               ],
             ),
@@ -175,6 +129,50 @@ class EditorPanel extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  /// De controls onder de type-specifieke editor (audio, logo, footer, tabel,
+  /// timing, TLP, notities). Losgetrokken uit [build] om die binnen de
+  /// lengtegrens te houden.
+  List<Widget> _belowEditorControls({
+    required Slide slide,
+    required ValueChanged<Slide> update,
+    required DeckNotifier deckNotifier,
+    required int richTextPage,
+    required int richTextPages,
+    required bool multiPageNotes,
+  }) {
+    // De secundaire controls (audio, logo, footer, timing, TLP) zitten nu achter
+    // de "Slide-instellingen"-schakelaar in de kopregel; hier alleen de
+    // notitievelden.
+    return [
+      const Divider(height: 1),
+      _NotesField(
+        slide: slide,
+        richTextPage: richTextPage,
+        richTextPageCount: richTextPages,
+        onUpdate: update,
+      ),
+      const Divider(height: 1),
+      _UserNotesField(
+        slide: slide,
+        note:
+            deckNotifier.userNoteForSlide(
+              slide.id,
+              pageIndex: richTextPage,
+              multiPage: multiPageNotes,
+            ) ??
+            '',
+        richTextPage: richTextPage,
+        richTextPageCount: richTextPages,
+        onChanged: (text) => deckNotifier.setUserNoteForSlide(
+          slide.id,
+          text,
+          pageIndex: richTextPage,
+          multiPage: multiPageNotes,
+        ),
+      ),
+    ];
   }
 
   Widget _markdownEditor(WidgetRef ref, int revision, EditorState editor) {

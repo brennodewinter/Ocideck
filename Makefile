@@ -1,4 +1,4 @@
-.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline licenses sbom sbom-verify check-conventions mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
+.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy licenses sbom sbom-verify check-conventions mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 help:
 	@echo "OciDeck quality targets:"
@@ -16,6 +16,7 @@ help:
 	@echo "  make test-presenter  Fullscreen presenter interaction tests."
 	@echo "  make deps-outdated   Advisory dependency freshness report."
 	@echo "  make deps-check      Verify vendored JS bundles vs manifest + OSV CVEs."
+	@echo "  make trivy           Advisory supply-chain scan: Dart-dep CVEs + committed secrets (needs trivy)."
 	@echo "  make licenses        Verify all dependencies use open-source licences."
 	@echo "  make sbom            Generate the SBOM (CycloneDX + SPDX) in sbom/."
 	@echo "  make sbom-verify     Fail if the committed SBOM is stale (CRA staleness gate)."
@@ -180,6 +181,22 @@ deps-outdated:
 	@echo "Covers: dependency freshness only. This is advisory and may require network access."
 	@echo "Failure means: inspect network/tooling first; outdated packages are not necessarily regressions."
 	flutter pub outdated
+
+# Advisory supply-chain scan with Trivy (github.com/aquasecurity/trivy). Scans
+# the resolved Dart packages (pubspec.lock) for known CVEs and sweeps the repo
+# for committed secrets — see trivy.yaml for the enabled scanners and rationale.
+# Advisory, and NOT wired into `check`/`check-full`, because (a) it needs the
+# external `trivy` binary which the gate can't assume, and (b) Dart/pub advisory
+# coverage is still thin, so a finding is a prompt to review, not a build break.
+# Container/IaC scanners are omitted: OciDeck ships no images or IaC.
+trivy:
+	@echo "== OciDeck advisory check: Trivy supply-chain =="
+	@echo "Command: trivy fs --config trivy.yaml ."
+	@echo "Covers: Dart package CVEs (pubspec.lock) + committed secrets across the repo."
+	@echo "Failure means: trivy is missing or the scan errored — reported"
+	@echo "        vulnerabilities/secrets are advisory; triage them by hand."
+	@command -v trivy >/dev/null 2>&1 || { echo "trivy not found — install it (macOS: brew install trivy; docs: https://trivy.dev/latest/getting-started/installation/)"; exit 2; }
+	trivy fs --config trivy.yaml .
 
 # Security gate for the vendored JS bundles inlined into the HTML export.
 # Verifies each file still matches assets/web_export/MANIFEST.json (sha256) and

@@ -557,9 +557,9 @@ class _ChartPreviewState extends State<_ChartPreview>
     return ExtraLinesData(
       horizontalLines: [
         if (spec.minBound != null)
-          line(spec.minBound!, const Color(0xFFF59E0B), 'min'),
+          line(spec.minBound!, AppTheme.amber500, 'min'),
         if (spec.maxBound != null)
-          line(spec.maxBound!, const Color(0xFFEF4444), 'max'),
+          line(spec.maxBound!, AppTheme.danger500, 'max'),
       ],
     );
   }
@@ -804,10 +804,10 @@ class _HoverPieChartState extends State<_HoverPieChart> {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF0F172A),
+                    color: AppTheme.ink,
                     borderRadius: BorderRadius.circular(8),
                     boxShadow: const [
-                      BoxShadow(color: Color(0x33000000), blurRadius: 6),
+                      BoxShadow(color: AppTheme.shadow20, blurRadius: 6),
                     ],
                   ),
                   child: Text(

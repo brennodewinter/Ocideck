@@ -459,8 +459,8 @@ class _QuestionPreview extends StatelessWidget {
     String? badge,
     String? trailing,
   }) {
-    const green = Color(0xFF2E7D32);
-    const red = Color(0xFFC62828);
+    const green = AppTheme.success600;
+    const red = AppTheme.danger800;
     final accent = _hexColor(profile.accentColor);
     final textColor = _hexColor(profile.textColor);
 
@@ -606,9 +606,7 @@ class _QuestionPreview extends StatelessWidget {
             alignment: Alignment.centerLeft,
             widthFactor: fraction,
             child: Container(
-              color: low
-                  ? const Color(0xFFC62828)
-                  : _hexColor(profile.accentColor),
+              color: low ? AppTheme.danger800 : _hexColor(profile.accentColor),
             ),
           ),
         ],
@@ -619,7 +617,7 @@ class _QuestionPreview extends StatelessWidget {
   Widget _resultChip(BuildContext context, double scale) {
     final v = view!;
     final correct = v.result == QuestionResult.correct;
-    final color = correct ? const Color(0xFF2E7D32) : const Color(0xFFC62828);
+    final color = correct ? AppTheme.success600 : AppTheme.danger800;
     final label = correct ? 'Goed!' : 'Helaas, fout';
     // Fout + niet vergrendeld = retry-modus: een klik start een nieuwe poging.
     final retryPending =

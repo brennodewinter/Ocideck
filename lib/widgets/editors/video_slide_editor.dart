@@ -183,7 +183,7 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
               l10n.d(
                 'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.',
               ),
-              style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
+              style: TextStyle(fontSize: 11, color: AppTheme.slate500),
             ),
             const SizedBox(height: 8),
             Row(
@@ -286,9 +286,9 @@ class _SourceKindChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final (label, color) = switch (source.kind) {
-      VideoSourceKind.youtube => ('YouTube', const Color(0xFFCC0000)),
-      VideoSourceKind.vimeo => ('Vimeo', const Color(0xFF1AB7EA)),
-      VideoSourceKind.remoteFile => (l10n.d('Online'), const Color(0xFF2E7D64)),
+      VideoSourceKind.youtube => ('YouTube', AppTheme.dangerPlain),
+      VideoSourceKind.vimeo => ('Vimeo', AppTheme.cyan),
+      VideoSourceKind.remoteFile => (l10n.d('Online'), AppTheme.teal),
       VideoSourceKind.localFile => (
         l10n.d('Lokaal bestand'),
         AppTheme.slate500,

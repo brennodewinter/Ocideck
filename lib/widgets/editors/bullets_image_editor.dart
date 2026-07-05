@@ -355,7 +355,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
         children: [
           ReorderableDragStartListener(
             index: i,
-            child: const Icon(
+            child: Icon(
               Icons.drag_indicator,
               size: 16,
               color: AppTheme.slate300,
@@ -379,7 +379,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
           else
             Text(
               _markerForItem(i),
-              style: const TextStyle(fontSize: 16, color: AppTheme.slate500),
+              style: TextStyle(fontSize: 16, color: AppTheme.slate500),
             ),
           const SizedBox(width: 8),
           Expanded(
@@ -426,7 +426,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
           IconButton(
             key: ValueKey('remove-bullet-$i'),
             tooltip: l10n.d('Bullet verwijderen'),
-            icon: const Icon(
+            icon: Icon(
               Icons.remove_circle_outline,
               size: 18,
               color: AppTheme.slate500,

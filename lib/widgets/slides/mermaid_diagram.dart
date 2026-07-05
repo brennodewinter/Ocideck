@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../theme/app_theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../services/mermaid_render_service.dart';
@@ -46,9 +47,9 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
               margin: EdgeInsets.symmetric(vertical: widget.width * 0.008),
               padding: EdgeInsets.all(widget.width * 0.012),
               decoration: BoxDecoration(
-                color: const Color(0xFFFAFBFC),
+                color: AppTheme.nearWhite,
                 borderRadius: BorderRadius.circular(widget.width * 0.008),
-                border: Border.all(color: const Color(0xFFE1E4E8)),
+                border: Border.all(color: AppTheme.ghBorder),
               ),
               child: SvgPicture.string(
                 safe,
@@ -81,9 +82,9 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
       margin: EdgeInsets.symmetric(vertical: widget.width * 0.008),
       padding: EdgeInsets.all(widget.width * 0.018),
       decoration: BoxDecoration(
-        color: const Color(0xFFF6F8FA),
+        color: AppTheme.ghSurface,
         borderRadius: BorderRadius.circular(widget.width * 0.008),
-        border: Border.all(color: const Color(0xFFE1E4E8)),
+        border: Border.all(color: AppTheme.ghBorder),
       ),
       child: Text(
         widget.source,
@@ -91,7 +92,7 @@ class _MermaidDiagramState extends State<MermaidDiagram> {
           fontFamily: 'monospace',
           fontSize: widget.width * 0.02,
           height: 1.3,
-          color: const Color(0xFF24292E),
+          color: AppTheme.ghInk,
         ),
       ),
     );

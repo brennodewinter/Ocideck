@@ -12,11 +12,108 @@ import '../dialogs/slide_quality_details_dialog.dart';
 import 'slide_quality_actions.dart';
 import '../../theme/app_theme.dart';
 
+/// Het gecombineerde kwaliteitsresultaat: de synchrone analyse plus de
+/// asynchrone titel-afbeelding-contrastcheck. Gedeeld door het paneel en de
+/// compacte samenvattingschip zodat beide dezelfde tellingen tonen. Gebruik
+/// `.value` (niet `.asData?.value`) zodat de vorige uitslag blijft staan
+/// terwijl de FutureProvider herlaadt — anders knippert de melding weg.
+SlideQualityResult combinedSlideQualityResult(WidgetRef ref) {
+  final syncResult = ref.watch(deckQualityProvider);
+  final imageIssues = ref.watch(imageContrastIssuesProvider).value ?? const [];
+  return imageIssues.isEmpty
+      ? syncResult
+      : SlideQualityResult([...syncResult.issues, ...imageIssues]);
+}
+
+/// De achtergrond- en voorgrondkleur horend bij de ernst van [result].
+({Color bg, Color fg}) slideQualityColors(SlideQualityResult result) {
+  final hasErrors = result.errorCount > 0;
+  final hasWarnings = result.warningCount > 0;
+  final bg = !result.hasIssues
+      ? AppTheme.successBg
+      : hasErrors
+      ? AppTheme.dangerBg
+      : hasWarnings
+      ? AppTheme.warningBg
+      : AppTheme.infoBg;
+  final fg = !result.hasIssues
+      ? AppTheme.successFg
+      : hasErrors
+      ? AppTheme.dangerFg
+      : hasWarnings
+      ? AppTheme.warningFg
+      : AppTheme.slate600;
+  return (bg: bg, fg: fg);
+}
+
 class SlideQualityPanel extends ConsumerStatefulWidget {
-  const SlideQualityPanel({super.key});
+  /// In [embedded]-modus rendert het paneel alleen de uitgeklapte inhoud
+  /// (zonder eigen kopregel): de samenvatting/toggle staat dan als
+  /// [SlideQualitySummaryChip] in de editor-kopregel.
+  final bool embedded;
+
+  const SlideQualityPanel({super.key, this.embedded = false});
 
   @override
   ConsumerState<SlideQualityPanel> createState() => _SlideQualityPanelState();
+}
+
+/// Compacte kwaliteits-samenvatting voor de editor-kopregel: statusicoon +
+/// telling, klikbaar om het [SlideQualityPanel] (embedded) eronder te tonen.
+class SlideQualitySummaryChip extends ConsumerWidget {
+  final bool open;
+  final VoidCallback onToggle;
+
+  const SlideQualitySummaryChip({
+    super.key,
+    required this.open,
+    required this.onToggle,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final result = combinedSlideQualityResult(ref);
+    final (:bg, :fg) = slideQualityColors(result);
+    // Alleen het woord "Kwaliteit" met de statuskleur; de telling zit in de
+    // tooltip en in het uitgeklapte paneel (zie [SlideQualityPanel]).
+    return Tooltip(
+      message: formatSlideQualityCountSummary(l10n, result),
+      child: InkWell(
+        onTap: onToggle,
+        borderRadius: BorderRadius.circular(6),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                result.hasIssues
+                    ? Icons.accessibility_new_outlined
+                    : Icons.check_circle_outline,
+                size: 14,
+                color: fg,
+              ),
+              const SizedBox(width: 5),
+              Text(
+                l10n.d('Kwaliteit'),
+                style: TextStyle(
+                  fontSize: 11.5,
+                  color: fg,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Icon(
+                open ? Icons.expand_less : Icons.expand_more,
+                size: 15,
+                color: fg,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
@@ -43,72 +140,22 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final syncResult = ref.watch(deckQualityProvider);
-    // Image-contrast checks decode the background asynchronously; fold their
-    // findings into the same result so counts, summary and dialog include them.
-    // Use `.value` (not `.asData?.value`): it retains the previous result while
-    // the autoDispose FutureProvider reloads on each deck edit, so the contrast
-    // warnings don't blink away on every keystroke.
-    final imageIssues =
-        ref.watch(imageContrastIssuesProvider).value ?? const [];
-    final result = imageIssues.isEmpty
-        ? syncResult
-        : SlideQualityResult([...syncResult.issues, ...imageIssues]);
+    final result = combinedSlideQualityResult(ref);
     final visibleIssues = _filteredIssues(result);
-    final hasErrors = result.errorCount > 0;
-    final hasWarnings = result.warningCount > 0;
-    final color = !result.hasIssues
-        ? const Color(0xFFECFDF5)
-        : hasErrors
-        ? const Color(0xFFFEE2E2)
-        : hasWarnings
-        ? const Color(0xFFFEF3C7)
-        : const Color(0xFFEFF6FF);
-    final iconColor = !result.hasIssues
-        ? const Color(0xFF047857)
-        : hasErrors
-        ? Colors.red.shade700
-        : hasWarnings
-        ? const Color(0xFF92400E)
-        : AppTheme.slate600;
-
+    final (:bg, :fg) = slideQualityColors(result);
+    final iconColor = fg;
+    // In embedded-modus staat de samenvatting/toggle in de kopregel; toon dan
+    // meteen de inhoud zonder eigen kopregel.
+    final expanded = widget.embedded || _expanded;
     final summary = formatSlideQualityCountSummary(l10n, result);
 
     return Material(
-      color: color,
+      color: bg,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          InkWell(
-            onTap: () => setState(() => _expanded = !_expanded),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              child: Row(
-                children: [
-                  Icon(
-                    result.hasIssues
-                        ? Icons.accessibility_new_outlined
-                        : Icons.check_circle_outline,
-                    size: 14,
-                    color: iconColor,
-                  ),
-                  const SizedBox(width: 6),
-                  Expanded(
-                    child: Text(
-                      '${l10n.d('Slidekwaliteit')}: $summary',
-                      style: TextStyle(fontSize: 11, color: iconColor),
-                    ),
-                  ),
-                  Icon(
-                    _expanded ? Icons.expand_less : Icons.expand_more,
-                    size: 18,
-                    color: iconColor,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          if (!result.hasIssues && _expanded)
+          _summaryHeader(l10n, result, iconColor, summary),
+          if (!result.hasIssues && expanded)
             ..._performedChecksList(l10n, iconColor),
           if (result.hasIssues) ...[
             Padding(
@@ -133,7 +180,7 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
               ),
             ),
           ],
-          if (_expanded && result.hasIssues) ...[
+          if (expanded && result.hasIssues) ...[
             Padding(
               padding: const EdgeInsets.fromLTRB(12, 0, 12, 6),
               child: Wrap(
@@ -184,6 +231,49 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
           ],
         ],
       ),
+    );
+  }
+
+  /// De kopregel met statusicoon en telling. Interactief (met chevron) in het
+  /// standalone paneel; statisch in embedded-modus (daar is de toggle de
+  /// compacte chip in de editor-kopregel).
+  Widget _summaryHeader(
+    AppLocalizations l10n,
+    SlideQualityResult result,
+    Color iconColor,
+    String summary,
+  ) {
+    final row = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      child: Row(
+        children: [
+          Icon(
+            result.hasIssues
+                ? Icons.accessibility_new_outlined
+                : Icons.check_circle_outline,
+            size: 14,
+            color: iconColor,
+          ),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              '${l10n.d('Slidekwaliteit')}: $summary',
+              style: TextStyle(fontSize: 11, color: iconColor),
+            ),
+          ),
+          if (!widget.embedded)
+            Icon(
+              _expanded ? Icons.expand_less : Icons.expand_more,
+              size: 18,
+              color: iconColor,
+            ),
+        ],
+      ),
+    );
+    if (widget.embedded) return row;
+    return InkWell(
+      onTap: () => setState(() => _expanded = !_expanded),
+      child: row,
     );
   }
 

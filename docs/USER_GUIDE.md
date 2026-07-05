@@ -16,6 +16,16 @@ Marp tools.
 - **Crash recovery**: unsaved work is snapshotted automatically and offered back
   after an unexpected exit.
 
+## Command palette
+
+Press `Ctrl/Cmd + K` for a searchable list of the common actions — present,
+export, save, add a chart, find & replace, the image library, toggle
+markdown/visual mode, full-deck preview, new tab, open, package/URL import,
+settings, and setting each TLP level. Start typing to filter (accents and case
+don't matter), use `↑`/`↓` to move, `Enter` to run, and `Esc` to close. Actions
+that aren't available yet (for example export before you've saved) stay visible
+but greyed out. The palette is also in the `⋮` menu.
+
 ## Nextcloud (WebDAV)
 
 You can use a folder on your Nextcloud as a source for decks and assets.
@@ -51,6 +61,18 @@ dated events), and
 wireframe of the layout, and the dialog works entirely with the keyboard
 (`Tab`/`Enter` to choose, `Esc` to cancel). Each type has a dedicated editor on
 the left and a live preview on the right.
+
+Not sure what a slide type is for? Click the small **"What can I do here?"**
+button at the top of the editor for a one-line hint about the selected type (for
+example, how to import CSV data into a chart, how to trim a video, or how to
+paste a table from a spreadsheet). The info icon next to a slide's **TLP** picker
+explains that slides classified above the deck's level are left out when you
+present or export. The editor header keeps everything on one strip: the type and
+style pickers, that hint, a compact **Quality** chip (its colour shows the
+status; hover or open it for the counts) and a gear button for **Slide
+settings** — the less-used per-slide options (audio, logo, footer, timing, TLP).
+Each expands just below the strip; a set per-slide TLP shows as a small badge on
+the gear so the classification stays visible at a glance.
 
 Text fields support inline Markdown (`**bold**`, `*italic*`, `` `code` ``,
 `[links](…)`). Free-Markdown slides also render fenced code with syntax
@@ -183,7 +205,7 @@ Markdown list, so the slide stays readable and Marp-compatible in the `.md` file
 ### Video slides
 
 A video slide plays a clip from a **local file** or, when you enable **Online
-media** in *Settings → Privacy*, from an **online source**: paste a direct
+media** in *Settings → Beveiliging* (Security), from an **online source**: paste a direct
 `http(s)` link to an `.mp4`/`.mov`, or a **YouTube/Vimeo** link to embed the
 official player. Image fields accept an online URL the same way. Online media is
 off by default for your privacy — until you turn it on, an online slide shows a

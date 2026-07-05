@@ -168,7 +168,7 @@ class _CockpitEditorState extends State<CockpitEditor> {
               ),
               Text(
                 '${meters.length}/$cockpitMaxMeters',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
                   color: AppTheme.slate500,
                   fontWeight: FontWeight.w600,
@@ -198,21 +198,14 @@ class _CockpitEditorState extends State<CockpitEditor> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(
-                Icons.palette_outlined,
-                size: 15,
-                color: AppTheme.slate500,
-              ),
+              Icon(Icons.palette_outlined, size: 15, color: AppTheme.slate500),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
                   l10n.d(
                     'De statuskleuren volgen het cockpit-kleurschema; pas het aan of maak varianten via Instellingen → Cockpit.',
                   ),
-                  style: const TextStyle(
-                    fontSize: 11,
-                    color: AppTheme.slate500,
-                  ),
+                  style: TextStyle(fontSize: 11, color: AppTheme.slate500),
                 ),
               ),
             ],

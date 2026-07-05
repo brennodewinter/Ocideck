@@ -83,6 +83,47 @@ const _stringsDe = {
 };
 
 const _dutchSourceDe = {
+  'Kwaliteit': 'Qualität',
+  'Slide-instellingen': 'Folien-Einstellungen',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Die Titelfolie mit einem großen Titel und Untertitel. Füge über die Bildbibliothek ein Hintergrundbild hinzu.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Eine Zwischenüberschrift, die einen neuen Teil der Präsentation ankündigt. Halte sie kurz.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Eine Aufzählung. Rücke eine Zeile mit Leerzeichen ein für einen Unterpunkt; beginne mit "[ ]" für einen abhakbaren Eintrag.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Zwei Aufzählungsspalten nebeneinander — praktisch zum Vergleichen zweier Dinge.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Aufzählung links, Bild rechts. Wähle ein Bild aus der Bibliothek oder ziehe eines hinein.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Zwei Bilder nebeneinander, jedes mit eigener Bildunterschrift.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Ein großes, bildfüllendes Bild mit optionaler Bildunterschrift.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Lege Start- und Endzeit in Sekunden fest, um zu schneiden, oder schneide live an der Abspielposition in der Vorschau.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Ein hervorgehobenes Zitat mit Quellenangabe.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Füge eine Auswahl aus einer Tabelle mit Ctrl/Cmd+V ein oder tippe je Zelle. Aktiviere "bearbeitbar beim Präsentieren", um live zu ändern.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Rohes Markdown mit Überschriften, Code, mathematischen LaTeX-Formeln und mermaid-Diagrammen.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Ein Codeblock mit Syntaxhervorhebung. Wähle die Programmiersprache für die richtige Formatierung.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Importiere Zahlen aus einer CSV-Datei oder tippe sie ins Raster. Wähle Balken, Linie, Torte oder Radar.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Ein Dashboard aus Messanzeigen. Gib jeder Anzeige einen Wert, Bereich und ein Label.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Eine interaktive Quizfrage. Wähle die Art (Mehrfachauswahl, wahr/falsch, mehrere richtig oder Reihenfolge) und trage die Antworten ein.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Eine Zeitleiste datierter Ereignisse. Wähle das Layout und wie die Ereignisse erscheinen.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'Die TLP-Klassifizierung bestimmt, wer die Folie sehen darf. Folien mit einer höheren Stufe als das Deck werden beim Präsentieren und Exportieren weggelassen.',
+  'Wat kan ik hier?': 'Was kann ich hier tun?',
+  'Uitvoeren': 'Ausführen',
+  'Nieuwe grafiek': 'Neues Diagramm',
+  'Commandopalet': 'Befehlspalette',
+  'Typ een commando…': 'Befehl eingeben…',
   'Instelling opslaan is mislukt.':
       'Einstellung konnte nicht gespeichert werden.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':

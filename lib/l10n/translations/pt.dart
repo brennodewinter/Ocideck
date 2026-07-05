@@ -84,6 +84,47 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'Kwaliteit': 'Qualidade',
+  'Slide-instellingen': 'Definições do slide',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'O diapositivo de abertura com um título grande e um subtítulo. Adicione uma imagem de fundo a partir da biblioteca de imagens.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Um subtítulo de secção que anuncia uma nova parte da apresentação. Seja breve.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Uma lista com marcadores. Recue uma linha com espaços para um subponto; comece com "[ ]" para um item selecionável.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Duas colunas de marcadores lado a lado — úteis para comparar duas coisas.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Marcadores à esquerda, imagem à direita. Escolha uma imagem da biblioteca ou arraste uma para aqui.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Duas imagens lado a lado, cada uma com a sua própria legenda.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Uma imagem grande de página inteira com uma legenda opcional.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Defina o início e o fim em segundos para cortar, ou corte ao vivo no ponto de reprodução na pré-visualização.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Uma citação em destaque com a respetiva fonte.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Cole uma seleção de uma folha de cálculo com Ctrl/Cmd+V, ou escreva célula a célula. Marque "editável durante a apresentação" para a alterar ao vivo.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Markdown em bruto com títulos, código, fórmulas matemáticas LaTeX e diagramas mermaid.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Um bloco de código com realce de sintaxe. Escolha a linguagem de programação para uma formatação correta.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Importe números de um ficheiro CSV ou escreva-os na grelha. Escolha barras, linhas, circular ou radar.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Um painel de medidores. Atribua a cada medidor um valor, um intervalo e um rótulo.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Uma pergunta de questionário interativa. Escolha o tipo (escolha múltipla, verdadeiro/falso, várias corretas ou ordenação) e preencha as respostas.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Uma linha cronológica de eventos datados. Escolha o esquema e a forma como os eventos surgem.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'A classificação TLP determina quem pode ver o diapositivo. Os diapositivos com um nível superior ao do deck são omitidos ao apresentar e exportar.',
+  'Wat kan ik hier?': 'O que posso fazer aqui?',
+  'Uitvoeren': 'Executar',
+  'Nieuwe grafiek': 'Novo gráfico',
+  'Commandopalet': 'Paleta de comandos',
+  'Typ een commando…': 'Digite um comando…',
   'Instelling opslaan is mislukt.': 'Não foi possível guardar a definição.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: a versão web só pode obter de servidores que o permitam (CORS).',

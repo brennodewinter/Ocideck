@@ -1,0 +1,34 @@
+# Trivy configuration for OciDeck's advisory supply-chain scan (`make trivy`).
+#
+# OciDeck ships no container images and no infrastructure-as-code, so Trivy's
+# image and misconfig scanners have nothing to look at here. The two scanners
+# that *do* add value are enabled:
+#
+#   - vuln   : CVEs in the resolved Dart packages (pubspec.lock). These are
+#              licence-checked by `make licenses` but were not CVE-scanned
+#              before — this closes that gap. Note Dart/pub advisory coverage
+#              is still sparse, which is why this stays advisory, not a gate.
+#   - secret : a committed-secret sweep over the repo. Cheap insurance; real
+#              secrets live in the macOS keychain / flutter_secure_storage, so
+#              a clean result is the expected (and enforced) state.
+#
+# The scan is informational: `make trivy` and the CI job do not fail on
+# findings. Triage anything reported by hand.
+scan:
+  scanners:
+    - vuln
+    - secret
+  skip-dirs:
+    - build
+    - .dart_tool
+    - .claude
+    - coverage
+    - macos/Pods
+    - ios/Pods
+
+# Report everything and let a human decide; the target never fails the build.
+severity:
+  - LOW
+  - MEDIUM
+  - HIGH
+  - CRITICAL

@@ -8,6 +8,35 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Dark mode for the editor** — selecting the dark app-appearance profile
+  (*Settings → Appearance*) now also darkens the editor chrome, not just the
+  Material widgets. Every semantic `AppTheme` colour token resolves per mode
+  (`AppTheme.isDark`, tied to the profile), so surfaces, text, borders and status
+  tints flip together. Slide content stays a fixed white canvas (a slide is a
+  design surface), and brand/accent colours are unchanged across modes.
+- **Advisory supply-chain scan (`make trivy`)** — an optional [Trivy](https://trivy.dev)
+  scan that checks the resolved Dart packages (`pubspec.lock`) for known CVEs —
+  previously only licence-checked, not vulnerability-scanned — and sweeps the
+  repo for committed secrets. Scanners and scope live in `trivy.yaml`. It is
+  advisory: not part of `make check`/`check-full` (it needs the external `trivy`
+  binary and Dart/pub advisory data is still sparse), and the matching CI job
+  runs with `exit-code: 0` so it reports without blocking merges. Documented in
+  `docs/CHECKS.md`.
+- **Contextual help in the editor** — a subtle "What can I do here?" button at
+  the top of the slide editor expands a short, slide-type-specific hint (e.g.
+  chart: CSV import; video: trimming/cut-at-playhead; table: paste from a
+  spreadsheet). An info tooltip next to the per-slide TLP control explains that
+  slides above the deck's level are left out when presenting and exporting. Every
+  slide type has a hint (enforced by an exhaustive switch); all hints are
+  translated in the 30 non-Dutch languages.
+- **Command palette (Ctrl/Cmd+K)** — a searchable overlay listing the common
+  actions (present, export, save, new chart, find & replace, image library,
+  toggle markdown/visual mode, full-deck preview, new tab, open, package/URL
+  import, settings, and setting each TLP level). Type to filter (accent- and
+  case-insensitive), arrow keys to move, Enter to run, Esc to close; disabled
+  actions (e.g. export before saving) stay visible but greyed. Also reachable
+  from the "⋮" menu. Labels reuse the existing menu/tooltip strings; the few new
+  strings are translated in all 30 non-Dutch languages.
 - **Software Bill of Materials (SBOM)** — a complete, machine-readable inventory
   of every shipped component (Dart/Flutter packages direct + transitive, the
   vendored JS/CSS export bundles, the plugin forks in `third_party/`, the bundled
@@ -63,7 +92,7 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   mirror to the beamer in dual-screen mode.
 - **Online media by URL** — image and video slides accept an `http(s)` URL as
   the source, rendered live (no local copy). Off by default: the new
-  **Online media** privacy setting must be enabled before any remote source is
+  **Online media** security setting must be enabled before any remote source is
   fetched; until then the slide shows a placeholder with the URL. On export, a
   remote source also emits a clickable literal URL.
 - **YouTube/Vimeo embeds** — a video slide can embed a YouTube or Vimeo link,
@@ -76,6 +105,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 - **Redesigned settings dialog** — the settings window moves from a flat tab bar
   to a sidebar navigation (sections on the left, a titled content area on the
   right, a footer action bar), without changing any of the settings themselves.
+- **"Over OciDeck" screen** — a new About section in Settings, opened from the
+  OciDeck logo at the bottom of the settings sidebar. It explains where the name
+  comes from (the *Ocicat* breed of the author's cats plus a slide *deck*),
+  introduces publisher **Stichting LibreKAT** with its mission, contact details
+  and a link to librekat.nl, and shows the three mascot cats (Branie, Keiko,
+  Otis) with photos. Translated in all 30 non-Dutch languages.
 - **Title background can fill the whole slide** — a "fill slide" toggle on title
   slides shows the background image edge-to-edge (cover, cropping the overflow)
   instead of being limited to the zoom slider. Toggling it back off restores the
@@ -231,6 +266,21 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **Calmer slide editor.** The editor header now packs everything onto one
+  strip: the type and style pickers, a "What can I do here?" hint, a compact
+  **Quality** chip (the word coloured by status; the counts move to its tooltip
+  and its expanded panel) and a gear button for **Slide settings**. Each of the
+  three toggles expands its content just below the strip. The secondary
+  per-slide controls (audio, logo, footer, table option, timing, TLP) live
+  behind the gear (collapsed by default); a set per-slide TLP still shows as a
+  small badge next to the gear so the classification stays visible. Speaker and
+  user notes keep their own collapsible fields.
+- **Settings: "Privacy" is now "Licentie en Privacy", with a separate
+  "Beveiliging" (Security) tab.** The renamed tab keeps the licence/privacy
+  statement and the consent controls. The **Online media** toggle and the
+  crash-recovery-files control move to the new *Beveiliging* tab, since they are
+  security choices rather than privacy ones. The tab title and the new tab are
+  translated in all 30 non-Dutch languages.
 - **Bullet slides** can now carry an optional **subheading** under the title; the
   **two bullet columns** type can have an optional **heading above each column**,
   separate from the slide title.
@@ -263,6 +313,11 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   behavioural change; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ### Fixed
+- **Web: a saved deck no longer reads as "not saved yet".** On the web build,
+  saving is a browser download, which returns no file path, so the status bar's
+  filename slot stayed on "Not saved yet" right next to the green "Saved" chip.
+  It now shows the downloaded filename (with a tooltip explaining it went to your
+  downloads folder); desktop is unchanged.
 - **Consent dialog no longer crashes its action bar.** A `Spacer` in the
   `AlertDialog` actions (which are laid out in an OverflowBar, not a Flex) threw
   a layout error that the release build swallowed into a dark placeholder box

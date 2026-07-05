@@ -7,6 +7,7 @@ import '../../platform/platform_features.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/foundation.dart' show kIsWeb, listEquals;
 import 'package:flutter/material.dart';
+import '../../theme/presenter_palette.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:screen_retriever/screen_retriever.dart';
@@ -916,8 +917,8 @@ class _SectionLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
-        color: Color(0xFF6B7280),
+      style: TextStyle(
+        color: AppTheme.gray500,
         fontSize: 10,
         fontWeight: FontWeight.w700,
         letterSpacing: 1.2,
@@ -935,7 +936,7 @@ class _NavButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final enabled = onTap != null;
     return Material(
-      color: enabled ? const Color(0xFF1F1F1F) : const Color(0xFF141414),
+      color: enabled ? PresenterPalette.surface : PresenterPalette.bg,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
       child: InkWell(
         onTap: onTap,

@@ -100,7 +100,7 @@ Color _averageOf(ByteData data) {
     }
     count++;
   }
-  if (count == 0) return const Color(0xFF000000);
+  if (count == 0) return Colors.black;
   return Color.fromARGB(
     255,
     (r / count).round().clamp(0, 255),

@@ -84,6 +84,47 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Kwaliteit': 'Calidad',
+  'Slide-instellingen': 'Ajustes de diapositiva',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'La diapositiva de apertura con un título grande y un subtítulo. Añade una imagen de fondo desde la biblioteca de imágenes.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Un subtítulo de sección que anuncia una nueva parte de la presentación. Mantenlo breve.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Una lista con viñetas. Sangra una línea con espacios para un subpunto; empieza con "[ ]" para un elemento marcable.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Dos columnas de viñetas una al lado de la otra — útil para comparar dos cosas.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Viñetas a la izquierda, imagen a la derecha. Elige una imagen de la biblioteca o arrástrala aquí.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Dos imágenes una al lado de la otra, cada una con su propio pie.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Una imagen grande a sangre completa con un pie opcional.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Indica el inicio y el fin en segundos para recortar, o corta en vivo en el punto de reproducción de la vista previa.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Una cita destacada con su fuente.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Pega una selección de una hoja de cálculo con Ctrl/Cmd+V, o escribe celda por celda. Marca "editable durante la presentación" para cambiarla en vivo.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Markdown en bruto con encabezados, código, fórmulas matemáticas LaTeX y diagramas mermaid.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Un bloque de código con resaltado de sintaxis. Elige el lenguaje de programación para un formato correcto.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Importa cifras desde un archivo CSV o escríbelas en la cuadrícula. Elige barras, líneas, tarta o radar.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Un panel de medidores. Da a cada medidor un valor, un rango y una etiqueta.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Una pregunta de cuestionario interactiva. Elige el tipo (opción múltiple, verdadero/falso, varias correctas u orden) y rellena las respuestas.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Una línea de tiempo de eventos fechados. Elige el diseño y cómo aparecen los eventos.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'La clasificación TLP determina quién puede ver la diapositiva. Las diapositivas con un nivel superior al del deck se omiten al presentar y exportar.',
+  'Wat kan ik hier?': '¿Qué puedo hacer aquí?',
+  'Uitvoeren': 'Ejecutar',
+  'Nieuwe grafiek': 'Nuevo gráfico',
+  'Commandopalet': 'Paleta de comandos',
+  'Typ een commando…': 'Escribe un comando…',
   'Instelling opslaan is mislukt.': 'No se pudo guardar el ajuste.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: la versión web solo puede descargar de servidores que lo permitan (CORS).',

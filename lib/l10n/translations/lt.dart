@@ -83,6 +83,47 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Kwaliteit': 'Kokybė',
+  'Slide-instellingen': 'Skaidrės nustatymai',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Pradžios skaidrė su dideliu antrašte ir paantrašte. Pridėkite fono vaizdą iš vaizdų bibliotekos.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Skyriaus antraštė, skelbianti naują pristatymo dalį. Laikykite ją trumpą.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Sąrašas su ženkleliais. Įtraukite eilutę tarpais, kad sukurtumėte papunktį; pradėkite nuo "[ ]", kad būtų žymimasis elementas.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Dvi ženklelių stulpelių eilės greta — patogu palyginti du dalykus.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Ženkleliai kairėje, vaizdas dešinėje. Pasirinkite vaizdą iš bibliotekos arba vilkite jį vidun.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Du vaizdai greta, kiekvienas su savo antrašte.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Vienas didelis, visą ekraną užpildantis vaizdas su neprivaloma antrašte.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Nustatykite pradžios ir pabaigos laiką sekundėmis, kad apkarpytumėte, arba apkarpykite tiesiogiai atkūrimo taške peržiūroje.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Išryškinta citata su šaltinio nuoroda.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Įklijuokite pažymėtą sritį iš skaičiuoklės su Ctrl/Cmd+V arba rašykite po langelį. Pažymėkite "redaguojama pristatymo metu", kad keistumėte tiesiogiai.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Neapdorotas Markdown su antraštėmis, kodu, matematinėmis LaTeX formulėmis ir mermaid diagramomis.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Kodo blokas su sintaksės spalvinimu. Pasirinkite programavimo kalbą, kad formatavimas būtų teisingas.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Importuokite skaičius iš CSV failo arba įrašykite juos į tinklelį. Pasirinkite stulpelinę, linijinę, skritulinę ar radaro.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Matuoklių skydelis. Kiekvienam matuokliui suteikite reikšmę, intervalą ir etiketę.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Interaktyvus viktorinos klausimas. Pasirinkite rūšį (keli variantai, tiesa/netiesa, keli teisingi ar seka) ir įrašykite atsakymus.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Datuotų įvykių laiko juosta. Pasirinkite išdėstymą ir kaip įvykiai atsiranda.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'TLP klasifikacija nustato, kas gali matyti skaidrę. Skaidrės su aukštesniu lygiu nei kaladė praleidžiamos pristatant ir eksportuojant.',
+  'Wat kan ik hier?': 'Ką aš čia galiu daryti?',
+  'Uitvoeren': 'Vykdyti',
+  'Nieuwe grafiek': 'Nauja diagrama',
+  'Commandopalet': 'Komandų paletė',
+  'Typ een commando…': 'Įveskite komandą…',
   'Instelling opslaan is mislukt.': 'Nepavyko išsaugoti nustatymo.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Pastaba: žiniatinklio versija gali parsisiųsti tik iš serverių, kurie tai leidžia (CORS).',

@@ -97,8 +97,8 @@ class SlideThumbnail extends ConsumerWidget {
     final borderColor = isSelected
         ? AppTheme.accent
         : skipped
-        ? const Color(0xFF8A6D3B)
-        : const Color(0xFF3A3F4B);
+        ? AppTheme.goldDark
+        : AppTheme.darkSlate600;
     // Actieve slide krijgt een dikkere rand dan de overige geselecteerde.
     final borderWidth = isSelected ? (isPrimary ? 2.5 : 1.6) : 1.0;
 
@@ -124,9 +124,7 @@ class SlideThumbnail extends ConsumerWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
             border: Border.all(color: borderColor, width: borderWidth),
-            color: isSelected
-                ? const Color(0xFF2A2F3B)
-                : const Color(0xFF252830),
+            color: isSelected ? AppTheme.darkSlate700 : AppTheme.darkSlate800,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -193,7 +191,7 @@ class SlideThumbnail extends ConsumerWidget {
                       vertical: 2,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xCC8A6D3B),
+                      color: AppTheme.goldDarkOverlay,
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Row(
@@ -226,7 +224,7 @@ class SlideThumbnail extends ConsumerWidget {
                     child: Container(
                       padding: const EdgeInsets.all(3),
                       decoration: BoxDecoration(
-                        color: const Color(0xCC2563EB),
+                        color: AppTheme.accentOverlay,
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: const Icon(
@@ -282,7 +280,7 @@ class SlideThumbnail extends ConsumerWidget {
             width: 18,
             height: 18,
             decoration: BoxDecoration(
-              color: isSelected ? AppTheme.accent : const Color(0xFF4A4F5B),
+              color: isSelected ? AppTheme.accent : AppTheme.darkSlate500,
               borderRadius: BorderRadius.circular(9),
             ),
             child: Center(
@@ -300,14 +298,14 @@ class SlideThumbnail extends ConsumerWidget {
           Expanded(
             child: Text(
               l10n.d(slide.type.label),
-              style: const TextStyle(color: AppTheme.slate400, fontSize: 9),
+              style: TextStyle(color: AppTheme.slate400, fontSize: 9),
               overflow: TextOverflow.ellipsis,
             ),
           ),
           // Drag handle
           ReorderableDragStartListener(
             index: index,
-            child: const Padding(
+            child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 2),
               child: Icon(
                 Icons.drag_handle,
@@ -329,7 +327,7 @@ class SlideThumbnail extends ConsumerWidget {
                   : l10n.d('Overslaan bij presenteren/exporteren'),
               icon: Icon(
                 skipped ? Icons.visibility_off : Icons.visibility_outlined,
-                color: skipped ? const Color(0xFFD4A24E) : AppTheme.slate500,
+                color: skipped ? AppTheme.gold : AppTheme.slate500,
               ),
               onPressed: onToggleSkip,
             ),
@@ -339,11 +337,7 @@ class SlideThumbnail extends ConsumerWidget {
             width: 20,
             height: 20,
             child: PopupMenuButton<String>(
-              icon: const Icon(
-                Icons.more_vert,
-                color: AppTheme.slate500,
-                size: 14,
-              ),
+              icon: Icon(Icons.more_vert, color: AppTheme.slate500, size: 14),
               padding: EdgeInsets.zero,
               itemBuilder: (_) => [
                 PopupMenuItem(value: 'copy', child: Text(l10n.d('Kopiëren'))),

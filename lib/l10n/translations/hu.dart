@@ -83,6 +83,47 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Kwaliteit': 'Minőség',
+  'Slide-instellingen': 'Dia beállításai',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'A nyitódia nagy címmel és alcímmel. Adj hozzá háttérképet a képtárból.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Szakaszcím, amely a bemutató új részét jelzi. Tartsd röviden.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Felsorolás. Behúzhatsz egy sort szóközökkel egy alponthoz; kezdd a "[ ]" jellel a kipipálható elemhez.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Két felsoroláshasáb egymás mellett — praktikus két dolog összehasonlításához.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Felsorolás balra, kép jobbra. Válassz képet a tárból, vagy húzz be egyet.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Két kép egymás mellett, mindegyiknek saját felirata.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Egy nagy, teljes felületet kitöltő kép, opcionális felirattal.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Add meg a kezdő- és záróidőt másodpercben a vágáshoz, vagy vágj élőben a lejátszási pontnál az előnézetben.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Kiemelt idézet forrásmegjelöléssel.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Illessz be egy kijelölést táblázatból a Ctrl/Cmd+V billentyűkkel, vagy gépeld cellánként. Pipáld ki a "bemutatás közben szerkeszthető" jelölőt az élő módosításhoz.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Nyers Markdown címsorokkal, kóddal, matematikai LaTeX-képletekkel és mermaid-diagramokkal.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Kódblokk szintaxiskiemeléssel. Válaszd ki a programozási nyelvet a helyes formázáshoz.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Importálj számokat CSV-fájlból, vagy gépeld be őket a rácsba. Válassz oszlop, vonal, kör vagy radar típust.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Mérőórák műszerfala. Adj minden mérőórának értéket, tartományt és címkét.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Interaktív kvízkérdés. Válaszd ki a típust (feleletválasztós, igaz/hamis, több helyes vagy sorrend), és töltsd ki a válaszokat.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Dátumozott események idővonala. Válaszd ki az elrendezést és azt, hogyan jelenjenek meg az események.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'A TLP-besorolás határozza meg, ki láthatja a diát. A decknél magasabb szintű diák bemutatáskor és exportáláskor kimaradnak.',
+  'Wat kan ik hier?': 'Mit tehetek itt?',
+  'Uitvoeren': 'Futtatás',
+  'Nieuwe grafiek': 'Új diagram',
+  'Commandopalet': 'Parancspaletta',
+  'Typ een commando…': 'Írjon be egy parancsot…',
   'Instelling opslaan is mislukt.': 'A beállítás mentése sikertelen.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Megjegyzés: a webes verzió csak olyan szerverekről tölthet le, amelyek ezt engedélyezik (CORS).',

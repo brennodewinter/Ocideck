@@ -12,6 +12,10 @@ class _EditorToolbar extends StatelessWidget {
   final ValueChanged<ThemeProfile> onProfileChanged;
   final VoidCallback onDefaultProfileRequested;
 
+  /// Extra items rechts in de kopregel (bijv. de hulp-toggle en de
+  /// kwaliteits-samenvatting), zodat die op dezelfde regel als TYPE/STIJL staan.
+  final List<Widget> trailing;
+
   const _EditorToolbar({
     required this.slide,
     required this.profiles,
@@ -20,6 +24,7 @@ class _EditorToolbar extends StatelessWidget {
     required this.onTypeChanged,
     required this.onProfileChanged,
     required this.onDefaultProfileRequested,
+    this.trailing = const [],
   });
 
   @override
@@ -33,7 +38,7 @@ class _EditorToolbar extends StatelessWidget {
     ];
 
     return Container(
-      color: Colors.white,
+      color: AppTheme.paper,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: Row(
         children: [
@@ -148,8 +153,100 @@ class _EditorToolbar extends StatelessWidget {
               ),
             ),
           ],
+          ...trailing,
         ],
       ),
+    );
+  }
+}
+
+/// De editor-kopregel: TYPE- en STIJL-keuze plus de compacte schakelaars voor
+/// hulp, slidekwaliteit en slide-instellingen op één regel. Elke schakelaar
+/// klapt z'n inhoud eronder uit (elk beheert z'n eigen open/dicht-toestand).
+class _EditorHeaderBar extends StatefulWidget {
+  final Slide slide;
+  final List<ThemeProfile> profiles;
+  final ThemeProfile activeProfile;
+  final ThemeProfile defaultProfile;
+  final ValueChanged<SlideType> onTypeChanged;
+  final ValueChanged<ThemeProfile> onProfileChanged;
+  final VoidCallback onDefaultProfileRequested;
+  final ValueChanged<Slide> onUpdate;
+  final ImageService imageService;
+  final Deck deck;
+
+  const _EditorHeaderBar({
+    required this.slide,
+    required this.profiles,
+    required this.activeProfile,
+    required this.defaultProfile,
+    required this.onTypeChanged,
+    required this.onProfileChanged,
+    required this.onDefaultProfileRequested,
+    required this.onUpdate,
+    required this.imageService,
+    required this.deck,
+  });
+
+  @override
+  State<_EditorHeaderBar> createState() => _EditorHeaderBarState();
+}
+
+class _EditorHeaderBarState extends State<_EditorHeaderBar> {
+  bool _helpOpen = false;
+  bool _qualityOpen = false;
+  bool _settingsOpen = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _EditorToolbar(
+          slide: widget.slide,
+          profiles: widget.profiles,
+          activeProfile: widget.activeProfile,
+          defaultProfile: widget.defaultProfile,
+          onTypeChanged: widget.onTypeChanged,
+          onProfileChanged: widget.onProfileChanged,
+          onDefaultProfileRequested: widget.onDefaultProfileRequested,
+          trailing: [
+            const SizedBox(width: 8),
+            SlideTypeHelpToggle(
+              open: _helpOpen,
+              onToggle: () => setState(() => _helpOpen = !_helpOpen),
+            ),
+            const SizedBox(width: 6),
+            SlideQualitySummaryChip(
+              open: _qualityOpen,
+              onToggle: () => setState(() => _qualityOpen = !_qualityOpen),
+            ),
+            const SizedBox(width: 6),
+            _SlideSettingsToggle(
+              slide: widget.slide,
+              open: _settingsOpen,
+              onToggle: () => setState(() => _settingsOpen = !_settingsOpen),
+            ),
+          ],
+        ),
+        if (_helpOpen) ...[
+          const Divider(height: 1),
+          SlideTypeHelpBody(type: widget.slide.type),
+        ],
+        if (_qualityOpen) ...[
+          const Divider(height: 1),
+          const SlideQualityPanel(embedded: true),
+        ],
+        if (_settingsOpen) ...[
+          const Divider(height: 1),
+          _SlideSettingsBody(
+            slide: widget.slide,
+            onUpdate: widget.onUpdate,
+            imageService: widget.imageService,
+            deck: widget.deck,
+          ),
+        ],
+      ],
     );
   }
 }
@@ -167,7 +264,7 @@ class _ToolbarField extends StatelessWidget {
       children: [
         Text(
           l10n.d(label),
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 9,
             fontWeight: FontWeight.w700,
             color: AppTheme.slate400,
@@ -179,7 +276,7 @@ class _ToolbarField extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             decoration: BoxDecoration(
-              color: const Color(0xFFF1F5F9),
+              color: AppTheme.slate100,
               borderRadius: BorderRadius.circular(6),
               border: Border.all(color: AppTheme.slate200),
             ),
@@ -210,11 +307,11 @@ class _SlideTimingControl extends StatelessWidget {
     final duration = slide.advanceDuration;
 
     return Container(
-      color: const Color(0xFFF0F9FF),
+      color: AppTheme.slate50,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
       child: Row(
         children: [
-          const Icon(Icons.timer_outlined, size: 14, color: Color(0xFF0369A1)),
+          Icon(Icons.timer_outlined, size: 14, color: AppTheme.slate500),
           const SizedBox(width: 8),
           Checkbox(
             value: enabled,
@@ -225,7 +322,7 @@ class _SlideTimingControl extends StatelessWidget {
           const SizedBox(width: 4),
           Text(
             l10n.d('Automatisch doorgaan na'),
-            style: const TextStyle(fontSize: 12, color: Color(0xFF0369A1)),
+            style: TextStyle(fontSize: 12, color: AppTheme.slate600),
           ),
           const SizedBox(width: 8),
           // Minus knop
@@ -239,7 +336,7 @@ class _SlideTimingControl extends StatelessWidget {
               onPressed: enabled && duration > 0.1
                   ? () => _setDuration(duration - 0.1)
                   : null,
-              color: const Color(0xFF0369A1),
+              color: AppTheme.slate500,
             ),
           ),
           // Waarde
@@ -251,7 +348,7 @@ class _SlideTimingControl extends StatelessWidget {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: enabled ? const Color(0xFF0369A1) : AppTheme.slate400,
+                color: enabled ? AppTheme.slate600 : AppTheme.slate400,
               ),
             ),
           ),
@@ -264,7 +361,7 @@ class _SlideTimingControl extends StatelessWidget {
               tooltip: l10n.d('Duur verlengen'),
               icon: const Icon(Icons.add, size: 14),
               onPressed: enabled ? () => _setDuration(duration + 0.1) : null,
-              color: const Color(0xFF0369A1),
+              color: AppTheme.slate500,
             ),
           ),
         ],
@@ -284,11 +381,11 @@ class _SlideLogoControl extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Container(
-      color: const Color(0xFFF8FAFC),
+      color: AppTheme.slate50,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
       child: Row(
         children: [
-          const Icon(
+          Icon(
             Icons.branding_watermark_outlined,
             size: 14,
             color: AppTheme.slate500,
@@ -303,7 +400,7 @@ class _SlideLogoControl extends StatelessWidget {
           const SizedBox(width: 4),
           Text(
             l10n.d('Logo tonen op deze slide'),
-            style: const TextStyle(fontSize: 12, color: AppTheme.slate600),
+            style: TextStyle(fontSize: 12, color: AppTheme.slate600),
           ),
         ],
       ),
@@ -322,15 +419,11 @@ class _SlideFooterControl extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Container(
-      color: const Color(0xFFF8FAFC),
+      color: AppTheme.slate50,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
       child: Row(
         children: [
-          const Icon(
-            Icons.short_text_outlined,
-            size: 14,
-            color: AppTheme.slate500,
-          ),
+          Icon(Icons.short_text_outlined, size: 14, color: AppTheme.slate500),
           const SizedBox(width: 8),
           Checkbox(
             value: slide.showFooter,
@@ -341,7 +434,7 @@ class _SlideFooterControl extends StatelessWidget {
           const SizedBox(width: 4),
           Text(
             l10n.d('Footer tonen op deze slide'),
-            style: const TextStyle(fontSize: 12, color: AppTheme.slate600),
+            style: TextStyle(fontSize: 12, color: AppTheme.slate600),
           ),
         ],
       ),
@@ -360,11 +453,11 @@ class _SlideTableEditControl extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Container(
-      color: const Color(0xFFF8FAFC),
+      color: AppTheme.slate50,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
       child: Row(
         children: [
-          const Icon(Icons.edit_outlined, size: 14, color: AppTheme.slate500),
+          Icon(Icons.edit_outlined, size: 14, color: AppTheme.slate500),
           const SizedBox(width: 8),
           Checkbox(
             value: slide.tableEditable,
@@ -377,7 +470,7 @@ class _SlideTableEditControl extends StatelessWidget {
           Expanded(
             child: Text(
               l10n.d('Tabel bewerkbaar tijdens presenteren'),
-              style: const TextStyle(fontSize: 12, color: AppTheme.slate600),
+              style: TextStyle(fontSize: 12, color: AppTheme.slate600),
             ),
           ),
         ],
@@ -397,24 +490,29 @@ class _SlideTlpControl extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Container(
-      color: const Color(0xFFF8FAFC),
+      color: AppTheme.slate50,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
       child: Row(
         children: [
-          const Icon(Icons.shield_outlined, size: 14, color: AppTheme.slate500),
+          Icon(Icons.shield_outlined, size: 14, color: AppTheme.slate500),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               l10n.d('TLP van deze slide'),
-              style: const TextStyle(fontSize: 12, color: AppTheme.slate600),
+              style: TextStyle(fontSize: 12, color: AppTheme.slate600),
             ),
           ),
+          Tooltip(
+            message: slideTlpHelpText(l10n),
+            child: Icon(Icons.info_outline, size: 14, color: AppTheme.slate400),
+          ),
+          const SizedBox(width: 8),
           DropdownButtonHideUnderline(
             child: DropdownButton<TlpLevel>(
               value: slide.tlp,
               isDense: true,
               borderRadius: BorderRadius.circular(6),
-              style: const TextStyle(fontSize: 12, color: Color(0xFF0F172A)),
+              style: TextStyle(fontSize: 12, color: AppTheme.ink),
               items: [
                 for (final level in TlpLevel.values)
                   DropdownMenuItem(
@@ -431,6 +529,127 @@ class _SlideTlpControl extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+// ── Gebundelde slide-instellingen ─────────────────────────────────────────────
+
+/// Compacte "Slide-instellingen"-schakelaar voor de editor-kopregel; de
+/// bijbehorende controls verschijnen via [_SlideSettingsBody]. Een gezette
+/// TLP-markering blijft als badge zichtbaar zonder open te klappen (belangrijk
+/// voor de classificatie), de rest zie je bij het aanklikken.
+class _SlideSettingsToggle extends StatelessWidget {
+  final bool open;
+  final VoidCallback onToggle;
+  final Slide slide;
+
+  const _SlideSettingsToggle({
+    required this.open,
+    required this.onToggle,
+    required this.slide,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    // Icon-only zodat de vijf items op één regel passen; het label staat in de
+    // tooltip. Een gezette TLP-markering blijft wél als badge zichtbaar.
+    return Tooltip(
+      message: l10n.d('Slide-instellingen'),
+      child: InkWell(
+        onTap: onToggle,
+        borderRadius: BorderRadius.circular(6),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.tune, size: 15, color: AppTheme.slate500),
+              if (slide.tlp != TlpLevel.none) ...[
+                const SizedBox(width: 5),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 5,
+                    vertical: 1,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppTheme.slate200,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    slide.tlp.label,
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                      color: AppTheme.slate700,
+                    ),
+                  ),
+                ),
+              ],
+              Icon(
+                open ? Icons.expand_less : Icons.expand_more,
+                size: 15,
+                color: AppTheme.slate500,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// De controls achter de [_SlideSettingsToggle]: audio, logo, footer,
+/// tabel-optie, timing en TLP van deze slide.
+class _SlideSettingsBody extends StatelessWidget {
+  final Slide slide;
+  final ValueChanged<Slide> onUpdate;
+  final ImageService imageService;
+  final Deck deck;
+
+  const _SlideSettingsBody({
+    required this.slide,
+    required this.onUpdate,
+    required this.imageService,
+    required this.deck,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (slide.type != SlideType.video) ...[
+          Container(
+            color: AppTheme.slate50,
+            padding: const EdgeInsets.all(12),
+            child: AudioAttachmentEditor(
+              slide: slide,
+              imageService: imageService,
+              onUpdate: onUpdate,
+              projectPath: deck.projectPath,
+            ),
+          ),
+          const Divider(height: 1),
+        ],
+        if (deck.themeProfile.logoPath?.isNotEmpty == true) ...[
+          _SlideLogoControl(slide: slide, onUpdate: onUpdate),
+          const Divider(height: 1),
+        ],
+        if (deck.themeProfile.footerText.trim().isNotEmpty ||
+            deck.themeProfile.footerShowPageNumbers) ...[
+          _SlideFooterControl(slide: slide, onUpdate: onUpdate),
+          const Divider(height: 1),
+        ],
+        if (slide.type == SlideType.table) ...[
+          _SlideTableEditControl(slide: slide, onUpdate: onUpdate),
+          const Divider(height: 1),
+        ],
+        _SlideTimingControl(slide: slide, onUpdate: onUpdate),
+        const Divider(height: 1),
+        _SlideTlpControl(slide: slide, onUpdate: onUpdate),
+      ],
     );
   }
 }

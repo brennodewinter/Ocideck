@@ -12,7 +12,7 @@ extension _CarouselGrid on _ImageCarouselPickerState {
       flex: 13,
       child: Container(
         decoration: const BoxDecoration(
-          border: Border(right: BorderSide(color: Color(0xFF21262D))),
+          border: Border(right: BorderSide(color: ImagePickerPalette.surface2)),
         ),
         child: GridView.builder(
           controller: _gridScrollController,
@@ -62,8 +62,8 @@ extension _CarouselGrid on _ImageCarouselPickerState {
               color: isSelected
                   ? AppTheme.blue500
                   : isHovered
-                  ? const Color(0xFF58A6FF)
-                  : const Color(0xFF21262D),
+                  ? ImagePickerPalette.accent
+                  : ImagePickerPalette.surface2,
               width: isSelected
                   ? 2.5
                   : isHovered
@@ -91,10 +91,10 @@ extension _CarouselGrid on _ImageCarouselPickerState {
                   fit: BoxFit.cover,
                   cacheWidth: 360,
                   errorBuilder: (context, error, stackTrace) => Container(
-                    color: const Color(0xFF161B22),
+                    color: ImagePickerPalette.surface1,
                     child: const Icon(
                       Icons.broken_image_outlined,
-                      color: Color(0xFF30363D),
+                      color: ImagePickerPalette.border,
                       size: 32,
                     ),
                   ),
@@ -151,7 +151,10 @@ extension _CarouselGrid on _ImageCarouselPickerState {
                         color: AppTheme.blue500,
                         shape: BoxShape.circle,
                         boxShadow: [
-                          BoxShadow(color: Color(0xFF1D4ED8), blurRadius: 6),
+                          BoxShadow(
+                            color: ImagePickerPalette.accentStrong,
+                            blurRadius: 6,
+                          ),
                         ],
                       ),
                       child: const Icon(
@@ -187,9 +190,9 @@ extension _CarouselGrid on _ImageCarouselPickerState {
           gradient: RadialGradient(
             center: Alignment(0, -0.15),
             radius: 1.1,
-            colors: [Color(0xFF161D2B), Color(0xFF0B0F16)],
+            colors: [ImagePickerPalette.overlay, ImagePickerPalette.bgDeep],
           ),
-          border: Border(right: BorderSide(color: Color(0xFF21262D))),
+          border: Border(right: BorderSide(color: ImagePickerPalette.surface2)),
         ),
         child: Column(
           children: [
@@ -305,7 +308,7 @@ extension _CarouselGrid on _ImageCarouselPickerState {
                 border: Border.all(
                   color: isSelected
                       ? AppTheme.blue500
-                      : const Color(0xFF21262D),
+                      : ImagePickerPalette.surface2,
                   width: isSelected ? 2.5 : 1,
                 ),
                 boxShadow: [
@@ -329,10 +332,10 @@ extension _CarouselGrid on _ImageCarouselPickerState {
                       fit: BoxFit.cover,
                       cacheWidth: 1000,
                       errorBuilder: (context, error, stackTrace) => Container(
-                        color: const Color(0xFF161B22),
+                        color: ImagePickerPalette.surface1,
                         child: const Icon(
                           Icons.broken_image_outlined,
-                          color: Color(0xFF30363D),
+                          color: ImagePickerPalette.border,
                           size: 48,
                         ),
                       ),
@@ -388,7 +391,7 @@ extension _CarouselGrid on _ImageCarouselPickerState {
       child: IgnorePointer(
         ignoring: !enabled,
         child: Material(
-          color: const Color(0xFF161B22).withValues(alpha: 0.85),
+          color: ImagePickerPalette.surface1.withValues(alpha: 0.85),
           shape: const CircleBorder(),
           child: InkWell(
             customBorder: const CircleBorder(),
@@ -399,9 +402,9 @@ extension _CarouselGrid on _ImageCarouselPickerState {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: const Color(0xFF30363D)),
+                border: Border.all(color: ImagePickerPalette.border),
               ),
-              child: Icon(icon, color: const Color(0xFFCDD9E5), size: 24),
+              child: Icon(icon, color: ImagePickerPalette.text, size: 24),
             ),
           ),
         ),
@@ -424,7 +427,7 @@ extension _CarouselGrid on _ImageCarouselPickerState {
             borderRadius: BorderRadius.circular(3),
             child: Stack(
               children: [
-                Container(height: 3, color: const Color(0xFF21262D)),
+                Container(height: 3, color: ImagePickerPalette.surface2),
                 FractionallySizedBox(
                   widthFactor: progress.clamp(0.0, 1.0),
                   child: Container(
@@ -443,7 +446,7 @@ extension _CarouselGrid on _ImageCarouselPickerState {
           Text(
             '${pos + 1} / $total',
             style: const TextStyle(
-              color: Color(0xFF8B949E),
+              color: ImagePickerPalette.textMuted,
               fontSize: 12,
               fontWeight: FontWeight.w500,
               letterSpacing: 0.3,

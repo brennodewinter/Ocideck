@@ -28,7 +28,7 @@ extension _SettingsSecurity on _SettingsDialogState {
             l10n.d(
               'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.',
             ),
-            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
           value: ref.watch(settingsProvider.select((s) => s.allowRemoteMedia)),
           onChanged: (value) =>
@@ -42,7 +42,7 @@ extension _SettingsSecurity on _SettingsDialogState {
             l10n.d(
               'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.',
             ),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
         Align(

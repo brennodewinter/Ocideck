@@ -278,7 +278,7 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
             hits.length >= _maxResults
                 ? '${l10n.d('Eerste')} $_maxResults ${l10n.d('treffers — verfijn je zoekopdracht')}'
                 : '${hits.length} ${l10n.d('treffer(s)')}',
-            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
         Expanded(
@@ -311,7 +311,7 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
           Text(
             message,
             textAlign: TextAlign.center,
-            style: const TextStyle(color: AppTheme.slate500, fontSize: 13),
+            style: TextStyle(color: AppTheme.slate500, fontSize: 13),
           ),
         ],
       ),
@@ -367,7 +367,7 @@ class _SlideHitCard extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           '$sourceName · ${l10n.d('slide')} ${hit.slideIndex + 1}',
-          style: const TextStyle(fontSize: 10.5, color: AppTheme.slate400),
+          style: TextStyle(fontSize: 10.5, color: AppTheme.slate400),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),

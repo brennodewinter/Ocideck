@@ -250,7 +250,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
           _onWrong == QuestionOnWrong.retry
               ? l10n.d('Fout = niet doorgaan; de vraag moet opnieuw.')
               : l10n.d('Fout = wel doorgaan, maar niet opnieuw doen.'),
-          style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
+          style: TextStyle(fontSize: 12, color: AppTheme.slate500),
         ),
         const SizedBox(height: 20),
         ..._imageSection(),
@@ -276,7 +276,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
               : l10n.d(
                   'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.',
                 ),
-          style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
+          style: TextStyle(fontSize: 12, color: AppTheme.slate500),
         ),
       ),
       for (int i = 0; i < _answers.length; i++) _buildAnswerRow(i),
@@ -297,7 +297,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
               const Icon(
                 Icons.warning_amber_rounded,
                 size: 16,
-                color: Color(0xFFB45309),
+                color: AppTheme.amber700,
               ),
               const SizedBox(width: 6),
               Expanded(
@@ -305,7 +305,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
                   l10n.d('Geef minstens één goed én één fout antwoord op.'),
                   style: const TextStyle(
                     fontSize: 12,
-                    color: Color(0xFFB45309),
+                    color: AppTheme.amber700,
                   ),
                 ),
               ),
@@ -327,7 +327,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
           l10n.d(
             'Zet de antwoorden hier in de juiste volgorde. Bij presenteren worden ze geschud getoond.',
           ),
-          style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
+          style: TextStyle(fontSize: 12, color: AppTheme.slate500),
         ),
       ),
       for (int i = 0; i < _answers.length; i++) _buildOrderingRow(i),
@@ -348,7 +348,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
               const Icon(
                 Icons.warning_amber_rounded,
                 size: 16,
-                color: Color(0xFFB45309),
+                color: AppTheme.amber700,
               ),
               const SizedBox(width: 6),
               Expanded(
@@ -356,7 +356,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
                   l10n.d('Geef minstens twee antwoorden op.'),
                   style: const TextStyle(
                     fontSize: 12,
-                    color: Color(0xFFB45309),
+                    color: AppTheme.amber700,
                   ),
                 ),
               ),
@@ -378,7 +378,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
             child: Text(
               '${i + 1}.',
               textAlign: TextAlign.right,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
                 color: AppTheme.slate500,
@@ -396,18 +396,14 @@ class _QuestionEditorState extends State<QuestionEditor> {
             ),
           ),
           IconButton(
-            icon: const Icon(
-              Icons.arrow_upward,
-              size: 18,
-              color: AppTheme.slate500,
-            ),
+            icon: Icon(Icons.arrow_upward, size: 18, color: AppTheme.slate500),
             onPressed: i > 0 ? () => _moveAnswer(i, -1) : null,
             tooltip: l10n.d('Omhoog'),
             padding: const EdgeInsets.symmetric(horizontal: 4),
             constraints: const BoxConstraints(minWidth: 28),
           ),
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_downward,
               size: 18,
               color: AppTheme.slate500,
@@ -418,7 +414,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
             constraints: const BoxConstraints(minWidth: 28),
           ),
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.remove_circle_outline,
               size: 18,
               color: AppTheme.slate500,
@@ -503,7 +499,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
       const SizedBox(height: 6),
       Text(
         l10n.d('De stelling hierboven is juist of onjuist; kies welke.'),
-        style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
+        style: TextStyle(fontSize: 12, color: AppTheme.slate500),
       ),
     ];
   }
@@ -537,7 +533,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
             ),
           ),
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.remove_circle_outline,
               size: 18,
               color: AppTheme.slate500,

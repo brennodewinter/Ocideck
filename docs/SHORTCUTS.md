@@ -6,6 +6,7 @@
 
 | Shortcut | Action |
 | --- | --- |
+| `Ctrl/Cmd + K` | Open the command palette (searchable list of actions) |
 | `Ctrl/Cmd + O` | Open a presentation |
 | `Ctrl/Cmd + S` | Save the active deck |
 | `Ctrl/Cmd + Z` | Undo |

@@ -412,7 +412,7 @@ class _ChartEditorState extends State<ChartEditor> {
                 l10n.d(
                   'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.',
                 ),
-                style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
+                style: TextStyle(fontSize: 11, color: AppTheme.slate500),
               ),
             ),
           if (_type == ChartType.radar)
@@ -422,7 +422,7 @@ class _ChartEditorState extends State<ChartEditor> {
                 l10n.d(
                   'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.',
                 ),
-                style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
+                style: TextStyle(fontSize: 11, color: AppTheme.slate500),
               ),
             ),
           if (linked) _linkedSourceRow(l10n),
@@ -507,12 +507,12 @@ class _ChartEditorState extends State<ChartEditor> {
       padding: const EdgeInsets.only(top: 8),
       child: Row(
         children: [
-          const Icon(Icons.link, size: 14, color: Color(0xFF0369A1)),
+          const Icon(Icons.link, size: 14, color: AppTheme.infoAccent),
           const SizedBox(width: 6),
           Expanded(
             child: Text(
               '${l10n.d('Gekoppeld aan')} $_source',
-              style: const TextStyle(fontSize: 11, color: Color(0xFF0369A1)),
+              style: const TextStyle(fontSize: 11, color: AppTheme.infoAccent),
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -531,11 +531,7 @@ class _ChartEditorState extends State<ChartEditor> {
           padding: const EdgeInsets.only(top: 12),
           child: Row(
             children: [
-              const Icon(
-                Icons.auto_awesome,
-                size: 18,
-                color: AppTheme.slate500,
-              ),
+              Icon(Icons.auto_awesome, size: 18, color: AppTheme.slate500),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -595,7 +591,7 @@ class _ChartEditorState extends State<ChartEditor> {
       children: [
         Text(
           l10n.d('Type grafiek'),
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
             color: AppTheme.slate500,
@@ -605,7 +601,7 @@ class _ChartEditorState extends State<ChartEditor> {
           value: _type,
           isDense: true,
           borderRadius: BorderRadius.circular(6),
-          style: const TextStyle(fontSize: 12, color: Color(0xFF0F172A)),
+          style: TextStyle(fontSize: 12, color: AppTheme.ink),
           items: [
             DropdownMenuItem(
               value: ChartType.bar,
@@ -725,7 +721,7 @@ class _ChartEditorState extends State<ChartEditor> {
                               ),
                               boxShadow: const [
                                 BoxShadow(
-                                  color: Color(0x330F172A),
+                                  color: AppTheme.inkOverlay,
                                   blurRadius: 2,
                                 ),
                               ],
@@ -877,7 +873,7 @@ class _ChartEditorState extends State<ChartEditor> {
     style: const TextStyle(fontSize: 12),
     decoration: InputDecoration(
       labelText: label,
-      labelStyle: const TextStyle(fontSize: 12, color: AppTheme.slate500),
+      labelStyle: TextStyle(fontSize: 12, color: AppTheme.slate500),
       hintText: context.l10n.d('geen'),
       isDense: true,
       contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
@@ -889,7 +885,7 @@ class _ChartEditorState extends State<ChartEditor> {
     padding: const EdgeInsets.only(left: 4, bottom: 4),
     child: Text(
       text,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 11,
         fontWeight: FontWeight.w600,
         color: AppTheme.slate500,
@@ -902,7 +898,7 @@ class _ChartEditorState extends State<ChartEditor> {
       key: ValueKey('chart-sort-${column ?? 'label'}'),
       enabled: enabled,
       tooltip: context.l10n.d('Sorteren'),
-      icon: const Icon(Icons.sort, size: 15, color: AppTheme.slate500),
+      icon: Icon(Icons.sort, size: 15, color: AppTheme.slate500),
       padding: EdgeInsets.zero,
       constraints: const BoxConstraints(minWidth: 24, minHeight: 28),
       itemBuilder: (context) => [
@@ -927,7 +923,7 @@ class _ChartEditorState extends State<ChartEditor> {
       color: Color(int.parse(hex.substring(1), radix: 16) | 0xFF000000),
       shape: BoxShape.circle,
       border: Border.all(color: Colors.white, width: 1.5),
-      boxShadow: const [BoxShadow(color: Color(0x330F172A), blurRadius: 2)],
+      boxShadow: const [BoxShadow(color: AppTheme.inkOverlay, blurRadius: 2)],
     ),
   );
 
@@ -964,7 +960,7 @@ class _ChartEditorState extends State<ChartEditor> {
         decoration: InputDecoration(
           isDense: true,
           filled: muted,
-          fillColor: muted ? const Color(0xFFF1F5F9) : null,
+          fillColor: muted ? AppTheme.slate100 : null,
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 8,
             vertical: 8,

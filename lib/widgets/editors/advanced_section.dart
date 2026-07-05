@@ -53,7 +53,7 @@ class _AdvancedSectionState extends State<AdvancedSection> {
                 const SizedBox(width: 4),
                 Text(
                   widget.title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                     color: AppTheme.slate500,

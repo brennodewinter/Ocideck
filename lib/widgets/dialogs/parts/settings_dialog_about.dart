@@ -186,7 +186,7 @@ extension _SettingsAbout on _SettingsDialogState {
   }
 
   static const _aboutBodyStyle = TextStyle(fontSize: 12, height: 1.45);
-  static const _aboutLabelStyle = TextStyle(
+  static TextStyle get _aboutLabelStyle => TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w700,
     color: AppTheme.slate700,
@@ -201,7 +201,7 @@ extension _SettingsAbout on _SettingsDialogState {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF273A60), AppTheme.navy],
+          colors: [AppTheme.navySoft, AppTheme.navy],
         ),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -294,7 +294,7 @@ extension _SettingsAbout on _SettingsDialogState {
             width: 92,
             child: Text(
               label,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
                 color: AppTheme.slate500,
@@ -356,7 +356,7 @@ extension _SettingsAbout on _SettingsDialogState {
                   children: [
                     Text(
                       cat.name,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
                         color: AppTheme.slate700,

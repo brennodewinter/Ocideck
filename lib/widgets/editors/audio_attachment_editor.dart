@@ -42,7 +42,7 @@ class AudioAttachmentEditor extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border.all(color: AppTheme.slate300),
                   borderRadius: BorderRadius.circular(6),
-                  color: Colors.white,
+                  color: AppTheme.paper,
                 ),
                 child: Text(
                   slide.audioPath.isEmpty

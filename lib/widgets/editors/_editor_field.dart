@@ -142,7 +142,7 @@ class _EditorFieldState extends ConsumerState<EditorField> {
       children: [
         Text(
           l10n.d(widget.label),
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
             color: AppTheme.slate500,
@@ -252,11 +252,7 @@ class ImageZoomControl extends StatelessWidget {
           children: [
             Tooltip(
               message: l10n.d('Uitzoomen (meer van de foto zichtbaar)'),
-              child: const Icon(
-                Icons.zoom_out,
-                size: 16,
-                color: AppTheme.slate500,
-              ),
+              child: Icon(Icons.zoom_out, size: 16, color: AppTheme.slate500),
             ),
             Expanded(
               child: Slider(
@@ -276,11 +272,7 @@ class ImageZoomControl extends StatelessWidget {
             ),
             Tooltip(
               message: l10n.d('Inzoomen (minder van de foto zichtbaar)'),
-              child: const Icon(
-                Icons.zoom_in,
-                size: 16,
-                color: AppTheme.slate500,
-              ),
+              child: Icon(Icons.zoom_in, size: 16, color: AppTheme.slate500),
             ),
             const SizedBox(width: 8),
             SizedBox(
@@ -312,7 +304,7 @@ class ImageZoomControl extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8, bottom: 4),
           child: Text(
             _label(context),
-            style: const TextStyle(fontSize: 10, color: AppTheme.slate500),
+            style: TextStyle(fontSize: 10, color: AppTheme.slate500),
           ),
         ),
       ],
@@ -470,7 +462,7 @@ class ImagePickerBar extends ConsumerWidget {
           decoration: BoxDecoration(
             border: Border.all(color: AppTheme.slate300),
             borderRadius: BorderRadius.circular(6),
-            color: Colors.white,
+            color: AppTheme.paper,
           ),
           child: Text(
             imagePath.isEmpty ? l10n.d(label) : imagePath,
@@ -663,9 +655,9 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
     final isError = severity == MarkdownValidationSeverity.error;
     final isWarning = severity == MarkdownValidationSeverity.warning;
     final hintColor = isError
-        ? const Color(0xFFB45309)
+        ? AppTheme.amber700
         : isWarning
-        ? const Color(0xFFB45309)
+        ? AppTheme.amber700
         : AppTheme.slate500;
 
     return Column(
@@ -678,7 +670,7 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
             hintText: l10n.d(
               'Caption / bronvermelding (bijv. © Naam Fotograaf)',
             ),
-            hintStyle: const TextStyle(fontSize: 12, color: Color(0xFFB0BEC5)),
+            hintStyle: const TextStyle(fontSize: 12, color: AppTheme.blueGray2),
             prefixIcon: Icon(
               Icons.copyright_outlined,
               size: 16,
@@ -690,14 +682,12 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
               horizontal: 10,
             ),
             filled: true,
-            fillColor: showHint
-                ? const Color(0xFFFFFBEB)
-                : const Color(0xFFF8FAFC),
+            fillColor: showHint ? AppTheme.notesBg : AppTheme.slate50,
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
               borderSide: BorderSide(
                 color: showHint && (isError || isWarning)
-                    ? const Color(0xFFF59E0B)
+                    ? AppTheme.amber500
                     : AppTheme.slate300,
               ),
             ),
@@ -705,13 +695,13 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
               borderRadius: BorderRadius.circular(6),
               borderSide: BorderSide(
                 color: showHint && (isError || isWarning)
-                    ? const Color(0xFFD97706)
+                    ? AppTheme.amber600
                     : AppTheme.slate500,
               ),
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
-              borderSide: const BorderSide(color: AppTheme.slate300),
+              borderSide: BorderSide(color: AppTheme.slate300),
             ),
           ),
           style: const TextStyle(fontSize: 12),
@@ -729,7 +719,7 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
             style: TextStyle(
               fontSize: 10,
               color: isError || isWarning
-                  ? const Color(0xFFB45309)
+                  ? AppTheme.amber700
                   : AppTheme.slate500,
             ),
           ),
@@ -750,7 +740,7 @@ class SectionLabel extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 6),
       child: Text(
         l10n.d(text),
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w600,
           color: AppTheme.slate500,

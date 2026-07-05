@@ -83,6 +83,46 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Kwaliteit': 'Kalidat',
+  'Slide-instellingen': 'Konfigurashon di slide',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'E slide di apertura ku un título grandi i un subtítulo. Agregá un imágen di fondo for di e biblioteka di imágen.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Un enkabesamentu di sekshon ku ta anunsiá un parti nobo di e presentashon. Tenele kòrtiku.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Un lista ku punto. Indentá un liña ku espasio pa un subpunto; kuminsá ku "[ ]" pa un item ku bo por marká.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Dos kolumna di punto banda di otro — práktiko pa kompará dos kos.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Punto na banda robes, imágen na banda drechi. Skohe un imágen for di e biblioteka òf lastra un aden.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Dos imágen banda di otro, kada un ku su mes deskripshon.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Un imágen grandi ku ta yena tur e pantaya ku un deskripshon opshonal.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Pone tempu di kuminsamentu i final na sekònde pa kòrta, òf kòrta na bibu na e punto di toka den e vista previo.',
+  'Een uitgelicht citaat met bronvermelding.': 'Un sita destaká ku atribushon.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Pega un selekshon for di un spreadsheet ku Ctrl/Cmd+V, òf tik selda pa selda. Marká "editabel durante presentá" pa kambi\'é na bibu.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Markdown krudo ku enkabesamentu, kódigo, fórmula matemátiko LaTeX i diagrama mermaid.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Un blòki di kódigo ku koló di sintaksis. Skohe e lenga di programashon pa e formato korekto.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Importá number for di un archivo CSV òf tik nan den e ret. Skohe bara, liña, taart òf radar.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Un dashboard di midó. Duna kada midó un balor, rango i etikèt.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Un pregunta di kwis interaktivo. Skohe e tipo (multiple choice, bèrdat/falsu, mas ku un korekto òf òrdu) i yena e kontestanan.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Un liña di tempu ku eventunan datá. Skohe e formato i kon e eventunan ta parse.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'E klasifikashon TLP ta determiná ken por mira e slide. Slide ku un nivel mas haltu ku e dèk ta keda afó ora di presentá i eksportá.',
+  'Wat kan ik hier?': 'Kiko mi por hasi akinan?',
+  'Uitvoeren': 'Ehekutá',
+  'Nieuwe grafiek': 'Gráfiko nobo',
+  'Commandopalet': 'Paleta di komando',
+  'Typ een commando…': 'Tipa un komando…',
   'Instelling opslaan is mislukt.': 'Warda di konfigurashon a faya.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: e vershon web por baha solamente for di servernan ku ta permití esaki (CORS).',

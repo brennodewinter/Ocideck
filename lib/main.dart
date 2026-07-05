@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'theme/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app.dart';
@@ -67,9 +68,9 @@ void _installErrorHandlers() {
   // problems stay obvious during development.
   if (kReleaseMode) {
     ErrorWidget.builder = (details) => const ColoredBox(
-      color: Color(0xFF1A1A1A),
+      color: AppTheme.darkInk,
       child: Center(
-        child: Icon(Icons.warning_amber_rounded, color: Color(0xFF888888)),
+        child: Icon(Icons.warning_amber_rounded, color: AppTheme.gray550),
       ),
     );
   }
