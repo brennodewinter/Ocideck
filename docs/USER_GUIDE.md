@@ -183,7 +183,7 @@ Markdown list, so the slide stays readable and Marp-compatible in the `.md` file
 ### Video slides
 
 A video slide plays a clip from a **local file** or, when you enable **Online
-media** in *Settings → Privacy*, from an **online source**: paste a direct
+media** in *Settings → Beveiliging* (Security), from an **online source**: paste a direct
 `http(s)` link to an `.mp4`/`.mov`, or a **YouTube/Vimeo** link to embed the
 official player. Image fields accept an online URL the same way. Online media is
 off by default for your privacy — until you turn it on, an online slide shows a

@@ -347,7 +347,7 @@ beginning; a missing end plays to the natural end.
 ```
 
 > Online media (URL files and embeds) is only loaded live when the
-> **Online media** privacy setting is on (off by default). When off, the slide
+> **Online media** security setting is on (off by default). When off, the slide
 > shows a placeholder with the URL instead of fetching anything. On **export**,
 > a remote source also gets a clickable literal URL link.
 
