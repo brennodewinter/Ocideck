@@ -1,0 +1,12 @@
+{
+  "_comment": "Pinned inventory of third-party GitHub/Forgejo Actions used by the CI workflows that we pin to an EXACT version (not a floating @vN tag). `make check-actions` (tool/check_pinned_actions.dart) reads this list and asks each action's release API whether a newer version exists, so a pinned action drifting behind stands out — the same monitor pattern as the vendored-JS MANIFEST.json + `make deps-check`. Actions pinned to a floating major tag (actions/checkout@v4, subosito/flutter-action@v2, lycheeverse/lychee-action@v2, actions/upload-artifact@v4) auto-update within their major and are intentionally NOT tracked here. When you bump a pinned action, update its `uses:` in the workflow AND the version below in the same commit.",
+  "actions": [
+    {
+      "uses": "aquasecurity/trivy-action",
+      "version": "v0.36.0",
+      "workflow": ".github/workflows/ci.yml",
+      "purpose": "Advisory supply-chain scan (Dart-dep CVEs + committed secrets); mirrors `make trivy`.",
+      "releases_api": "https://api.github.com/repos/aquasecurity/trivy-action/releases/latest"
+    }
+  ]
+}

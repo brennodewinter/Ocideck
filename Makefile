@@ -1,4 +1,4 @@
-.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy licenses sbom sbom-verify check-conventions mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
+.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions licenses sbom sbom-verify check-conventions mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 help:
 	@echo "OciDeck quality targets:"
@@ -17,6 +17,7 @@ help:
 	@echo "  make deps-outdated   Advisory dependency freshness report."
 	@echo "  make deps-check      Verify vendored JS bundles vs manifest + OSV CVEs."
 	@echo "  make trivy           Advisory supply-chain scan: Dart-dep CVEs + committed secrets (needs trivy)."
+	@echo "  make check-actions   Advisory: exact-pinned CI Actions vs their latest release."
 	@echo "  make licenses        Verify all dependencies use open-source licences."
 	@echo "  make sbom            Generate the SBOM (CycloneDX + SPDX) in sbom/."
 	@echo "  make sbom-verify     Fail if the committed SBOM is stale (CRA staleness gate)."
@@ -196,7 +197,23 @@ trivy:
 	@echo "Failure means: trivy is missing or the scan errored — reported"
 	@echo "        vulnerabilities/secrets are advisory; triage them by hand."
 	@command -v trivy >/dev/null 2>&1 || { echo "trivy not found — install it (macOS: brew install trivy; docs: https://trivy.dev/latest/getting-started/installation/)"; exit 2; }
-	trivy fs --config trivy.yaml .
+	@# Trivy pulls its public vuln DB from an OCI registry and would otherwise
+	@# read ~/.docker/config.json; a stale credsStore (e.g. docker-credential-
+	@# desktop missing from PATH) then aborts the DB download. The DB needs no
+	@# auth, so point DOCKER_CONFIG at an empty dir to bypass the cred helper.
+	DOCKER_CONFIG=$$(mktemp -d) trivy fs --config trivy.yaml .
+
+# Advisory freshness monitor for the third-party CI Actions we pin to an EXACT
+# version. Reads .github/pinned-actions.json and asks each Action's release API
+# whether a newer version exists — the Action analogue of deps-check for the
+# vendored JS. Advisory (needs network, a bump is a prompt not a regression), so
+# NOT wired into check/check-full. `--offline` validates the manifest only.
+check-actions:
+	@echo "== OciDeck advisory check: pinned CI Actions =="
+	@echo "Command: dart run tool/check_pinned_actions.dart"
+	@echo "Covers: every exact-pinned Action in .github/pinned-actions.json vs its latest release."
+	@echo "Failure means: a pinned Action is behind (bump it + the manifest) or the release API was unreachable."
+	dart run tool/check_pinned_actions.dart
 
 # Security gate for the vendored JS bundles inlined into the HTML export.
 # Verifies each file still matches assets/web_export/MANIFEST.json (sha256) and

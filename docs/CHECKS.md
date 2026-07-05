@@ -54,6 +54,7 @@ run locally and in CI, the number you see locally is the number CI gates on.
 | [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ |
 | [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — |
 | [`make trivy`](#make-trivy-advisory) | Dart-dep CVEs + committed secrets (advisory) | — | — | ✅ (advisory) |
+| [`make check-actions`](#make-check-actions-advisory) | Pinned CI Actions vs their latest release (advisory) | — | — | — |
 
 CI additionally runs `flutter pub get --enforce-lockfile` (reproducible
 dependencies) and a **Markdown link check** (`lychee --offline`).
@@ -210,6 +211,19 @@ These three run on every push and pull request (and as `make check`).
   gate can't assume the `trivy` binary is installed, and Dart/pub advisory
   coverage is still thin, so a finding is a prompt to review rather than a build
   break. Container/IaC scanners are omitted — OciDeck ships no images or IaC.
+
+### `make check-actions` (advisory)
+- **Runs:** `dart run tool/check_pinned_actions.dart` (`--offline` validates the
+  manifest without hitting the network).
+- **Covers:** every third-party CI Action pinned to an **exact** version in
+  [`.github/pinned-actions.json`](../.github/pinned-actions.json) (currently
+  `aquasecurity/trivy-action`). It queries each Action's release API and flags
+  any that have fallen behind, so a stale pin stands out — the Action analogue
+  of `make deps-check`. Actions on a floating major tag (`@v4`, `@v2`)
+  auto-update and are intentionally not tracked.
+- **Advisory** and not part of the gate (it needs network access and a bump is a
+  prompt, not a regression). When it reports a newer release, bump the `uses:`
+  in the workflow **and** the version in the manifest in the same commit.
 
 ---
 
