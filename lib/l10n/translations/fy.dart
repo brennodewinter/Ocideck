@@ -334,6 +334,39 @@ const _dutchSourceFy = {
   'Deze presentatie staat ook op een andere plek:':
       'Dizze presintaasje stiet ek op in oar plak:',
   'Opruimen…': 'Opromje…',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" ferwiist nei de ocicat, it kattenras fan de katten fan Brenno de Winter. "Deck" is it Ingelske wurd foar in diasrige. OciDeck makket fan ienfâldige tekst in fersoarge presintaasje.',
+  'Adressen': 'Adressen',
+  'Bestuur': 'Bestjoer',
+  'Beveiliging': 'Befeiliging',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (foarsitter), Jan Klopper (skriuwer) en Astrid Oosenbrug (skathâlder).',
+  'Contact': 'Kontakt',
+  'De katten van Brenno': 'De katten fan Brenno',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'De maskottes fan OciDeck en besibbe projekten binne de ocicats fan Brenno de Winter.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'De stichting is op 23 oktober 2025 by notariële akte oprjochte te Leeuwarden en hat har statutêre sit yn Noordwijk.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Dizze ynstellingen bepale wat OciDeck fan it ynternet ôf lade mei en hokker spoaren op dit apparaat efterbliuwe. Se steane los fan dyn privacyferklearring en tastimming, dy\'tst by "Lisinsje en Privacy" fynst.',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Doelstellingen fan de stichting:\n\n•  Opensource-software en -hardware foar feilige digitale ynfrastruktueren stimulearje.\n•  Transparânsje en reprodusearberens yn befeiligingsprosessen befoarderje.\n•  Ûndersyk, trainingen en aktiviteiten oer digitale wjerberens organisearje.\n•  Boargers, bedriuwen, oerheid en maatskiplike organisaasjes mei-inoar ferbine.',
+  'E-mail': 'E-mail',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Kearnwearden: feiligens, frijheid en iepenheid, soevereiniteit, yntegriteit, kennisdieling, betrouberens, minsklikheid, harkje en ferbine, "just culture" en duorsumens.',
+  'Licentie en Privacy': 'Lisinsje en Privacy',
+  'Mascotte van MIAUW.': 'Maskotte fan MIAUW.',
+  'Mascotte van OpenKAT.': 'Maskotte fan OpenKAT.',
+  'Mascotte van de checklisttool.': 'Maskotte fan it checklisttool.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeck wurdt útjûn troch Stichting LibreKAT. De stichting wurket oan in feiliger digitale mienskip fia iepen, kontrolearbere ynformaasjebefeiliging, mei de klam op kennisdieling, mienskipsfoarming en it stypjen fan opensource-oplossingen.',
+  'Over OciDeck': 'Oer OciDeck',
+  'Telefoon': 'Telefoan',
+  'Uitgever: Stichting LibreKAT': 'Útjouwer: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Fersoarge presintaasjes út ienfâldige tekst — frij, kontrolearber en mei dyn gegevens op dyn eigen apparaat.',
+  'Waar komt de naam vandaan?': 'Wêr komt de namme wei?',
+  'Website van de stichting': 'Webside fan de stichting',
 };
 
 const _dutchSourceAddFy = {

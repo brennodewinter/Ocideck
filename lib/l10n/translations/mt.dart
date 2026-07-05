@@ -1337,4 +1337,37 @@ const _dutchSourceMt = {
   'Naar prullenbak': 'Lejn l-iskart',
   'Deze presentatie staat ook op een andere plek:':
       'Din il-preżentazzjoni teżisti wkoll x’imkien ieħor:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '„Oci” tirreferi għall-ocicat, ir-razza tal-qtates ta\' Brenno de Winter. „Deck” hija l-kelma Ingliża għal sett ta\' slajds. OciDeck jibdel test sempliċi f\'preżentazzjoni raffinata.',
+  'Adressen': 'Indirizzi',
+  'Bestuur': 'Bord',
+  'Beveiliging': 'Sigurtà',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (president), Jan Klopper (segretarju) u Astrid Oosenbrug (teżorier).',
+  'Contact': 'Kuntatt',
+  'De katten van Brenno': 'Il-qtates ta\' Brenno',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'Il-mascots ta\' OciDeck u tal-proġetti relatati huma l-ocicats ta\' Brenno de Winter.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'Il-fondazzjoni twaqqfet fit-23 ta\' Ottubru 2025 b\'att notarili f\'Leeuwarden u għandha s-sede statutorja tagħha f\'Noordwijk.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Dawn is-settings jiddeterminaw x\'jista\' jgħabbi OciDeck mill-internet u liema traċċi jibqgħu fuq dan l-apparat. Huma indipendenti mid-dikjarazzjoni tal-privatezza u l-kunsens tiegħek, li ssibhom taħt „Liċenzja u Privatezza”.',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'L-objettivi tal-fondazzjoni:\n\n•  Nistimulaw softwer u ħardwer open source għal infrastrutturi diġitali siguri.\n•  Nippromwovu t-trasparenza u r-riproduċibbiltà fil-proċessi tas-sigurtà.\n•  Norganizzaw riċerka, taħriġ u attivitajiet madwar ir-reżiljenza diġitali.\n•  Ngħaqqdu ċittadini, negozji, gvern u organizzazzjonijiet soċjali flimkien.',
+  'E-mail': 'Email',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Valuri ewlenin: sigurtà, libertà u ftuħ, sovranità, integrità, kondiviżjoni tal-għarfien, affidabbiltà, umanità, smigħ u konnessjoni, „just culture” u sostenibbiltà.',
+  'Licentie en Privacy': 'Liċenzja u Privatezza',
+  'Mascotte van MIAUW.': 'Il-mascot ta\' MIAUW.',
+  'Mascotte van OpenKAT.': 'Il-mascot ta\' OpenKAT.',
+  'Mascotte van de checklisttool.': 'Il-mascot tal-għodda taċ-checklist.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeck huwa ppubblikat minn Stichting LibreKAT. Il-fondazzjoni taħdem lejn soċjetà diġitali aktar sigura permezz ta\' sigurtà tal-informazzjoni miftuħa u verifikabbli, b\'enfasi fuq il-kondiviżjoni tal-għarfien, il-bini ta\' komunità u l-appoġġ ta\' soluzzjonijiet open source.',
+  'Over OciDeck': 'Dwar OciDeck',
+  'Telefoon': 'Telefown',
+  'Uitgever: Stichting LibreKAT': 'Pubblikatur: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Preżentazzjonijiet raffinati minn test sempliċi — liberi, verifikabbli u bid-data tiegħek fuq l-apparat tiegħek stess.',
+  'Waar komt de naam vandaan?': 'Minn fejn ġej l-isem?',
+  'Website van de stichting': 'Il-websajt tal-fondazzjoni',
 };

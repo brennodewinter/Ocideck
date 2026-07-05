@@ -1320,4 +1320,37 @@ const _dutchSourceSl = {
   'Naar prullenbak': 'V smetnjak',
   'Deze presentatie staat ook op een andere plek:':
       'Ta predstavitev obstaja tudi na drugem mestu:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" se nanaša na ocicata, mačjo pasmo mačk Brenna de Winterja. "Deck" je angleška beseda za komplet diapozitivov. OciDeck iz preprostega besedila ustvari dovršeno predstavitev.',
+  'Adressen': 'Naslovi',
+  'Bestuur': 'Uprava',
+  'Beveiliging': 'Varnost',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (predsednik), Jan Klopper (tajnik) in Astrid Oosenbrug (blagajničarka).',
+  'Contact': 'Stik',
+  'De katten van Brenno': 'Brennove mačke',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'Maskote OciDeck in sorodnih projektov so ocicati Brenna de Winterja.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'Ustanova je bila 23. oktobra 2025 ustanovljena z notarsko listino v Leeuwardnu in ima svoj statutarni sedež v Noordwijku.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Te nastavitve določajo, kaj sme OciDeck nalagati z interneta in katere sledi ostanejo na tej napravi. Ločene so od tvoje izjave o zasebnosti in privolitve, ki ju najdeš pod "Licenca in zasebnost".',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Cilji ustanove:\n\n•  Spodbujati odprtokodno programsko in strojno opremo za varno digitalno infrastrukturo.\n•  Spodbujati preglednost in ponovljivost v varnostnih procesih.\n•  Organizirati raziskave, usposabljanja in dejavnosti na področju digitalne odpornosti.\n•  Povezovati državljane, podjetja, državo in civilnodružbene organizacije.',
+  'E-mail': 'E-pošta',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Temeljne vrednote: varnost, svoboda in odprtost, suverenost, integriteta, deljenje znanja, zanesljivost, človečnost, poslušanje in povezovanje, "just culture" in trajnostnost.',
+  'Licentie en Privacy': 'Licenca in zasebnost',
+  'Mascotte van MIAUW.': 'Maskota projekta MIAUW.',
+  'Mascotte van OpenKAT.': 'Maskota projekta OpenKAT.',
+  'Mascotte van de checklisttool.': 'Maskota orodja za sezname opravil.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeck izdaja Stichting LibreKAT. Ustanova si prizadeva za varnejšo digitalno družbo prek odprte in preverljive informacijske varnosti, s poudarkom na deljenju znanja, oblikovanju skupnosti in podpori odprtokodnim rešitvam.',
+  'Over OciDeck': 'O OciDeck',
+  'Telefoon': 'Telefon',
+  'Uitgever: Stichting LibreKAT': 'Izdajatelj: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Dovršene predstavitve iz preprostega besedila — svobodne, preverljive in s tvojimi podatki na tvoji lastni napravi.',
+  'Waar komt de naam vandaan?': 'Od kod izvira ime?',
+  'Website van de stichting': 'Spletno mesto ustanove',
 };

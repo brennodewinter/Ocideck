@@ -1319,4 +1319,37 @@ const _dutchSourceLv = {
   'Naar prullenbak': 'Uz atkritni',
   'Deze presentatie staat ook op een andere plek:':
       'Šī prezentācija pastāv arī citā vietā:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" norāda uz ocicat — Brenno de Winter kaķu šķirni. "Deck" angļu valodā nozīmē slaidu kopu. OciDeck no vienkārša teksta izveido kārtīgu prezentāciju.',
+  'Adressen': 'Adreses',
+  'Bestuur': 'Valde',
+  'Beveiliging': 'Drošība',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (priekšsēdētājs), Jan Klopper (sekretārs) un Astrid Oosenbrug (kasieris).',
+  'Contact': 'Kontakti',
+  'De katten van Brenno': 'Brenno kaķi',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'OciDeck un saistīto projektu maskoti ir Brenno de Winter ocicat kaķi.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'Nodibinājums tika izveidots ar notariālu aktu 2025. gada 23. oktobrī Leeuwarden, un tā juridiskā adrese ir Noordwijk.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Šie iestatījumi nosaka, ko OciDeck drīkst ielādēt no interneta un kādas pēdas paliek šajā ierīcē. Tie ir nošķirti no tavas privātuma paziņojuma un piekrišanas, kuras atrodamas sadaļā "Licence un privātums".',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Nodibinājuma mērķi:\n\n•  Veicināt atvērtā koda programmatūru un aparatūru drošai digitālajai infrastruktūrai.\n•  Sekmēt caurspīdīgumu un atkārtojamību drošības procesos.\n•  Organizēt pētniecību, apmācības un aktivitātes par digitālo noturību.\n•  Savstarpēji savienot iedzīvotājus, uzņēmumus, valsti un sabiedriskās organizācijas.',
+  'E-mail': 'E-pasts',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Pamatvērtības: drošība, brīvība un atklātība, suverenitāte, integritāte, zināšanu apmaiņa, uzticamība, cilvēcīgums, klausīšanās un savienošana, "just culture" un ilgtspēja.',
+  'Licentie en Privacy': 'Licence un privātums',
+  'Mascotte van MIAUW.': 'MIAUW maskots.',
+  'Mascotte van OpenKAT.': 'OpenKAT maskots.',
+  'Mascotte van de checklisttool.': 'Kontrolsaraksta rīka maskots.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeck izdod Stichting LibreKAT. Nodibinājums strādā pie drošākas digitālās sabiedrības, izmantojot atklātu un pārbaudāmu informācijas drošību, ar uzsvaru uz zināšanu apmaiņu, kopienas veidošanu un atvērtā koda risinājumu atbalstīšanu.',
+  'Over OciDeck': 'Par OciDeck',
+  'Telefoon': 'Tālrunis',
+  'Uitgever: Stichting LibreKAT': 'Izdevējs: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Kārtīgas prezentācijas no vienkārša teksta — brīvi, pārbaudāmi un ar taviem datiem tavā paša ierīcē.',
+  'Waar komt de naam vandaan?': 'No kurienes cēlies nosaukums?',
+  'Website van de stichting': 'Nodibinājuma tīmekļa vietne',
 };

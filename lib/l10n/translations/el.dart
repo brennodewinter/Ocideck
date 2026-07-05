@@ -1337,4 +1337,37 @@ const _dutchSourceEl = {
   'Naar prullenbak': 'Στα απορρίμματα',
   'Deze presentatie staat ook op een andere plek:':
       'Αυτή η παρουσίαση υπάρχει και σε άλλη θέση:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      'Το "Oci" παραπέμπει στη γάτα ocicat, τη ράτσα των γατών του Brenno de Winter. Το "Deck" είναι η αγγλική λέξη για ένα σύνολο διαφανειών. Το OciDeck μετατρέπει απλό κείμενο σε μια φροντισμένη παρουσίαση.',
+  'Adressen': 'Διευθύνσεις',
+  'Bestuur': 'Διοικητικό συμβούλιο',
+  'Beveiliging': 'Ασφάλεια',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (πρόεδρος), Jan Klopper (γραμματέας) και Astrid Oosenbrug (ταμίας).',
+  'Contact': 'Επικοινωνία',
+  'De katten van Brenno': 'Οι γάτες του Brenno',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'Οι μασκότ του OciDeck και των συναφών έργων είναι οι γάτες ocicat του Brenno de Winter.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'Το ίδρυμα συστάθηκε στις 23 Οκτωβρίου 2025 με συμβολαιογραφική πράξη στο Leeuwarden και έχει την καταστατική του έδρα στο Noordwijk.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Αυτές οι ρυθμίσεις καθορίζουν τι μπορεί να φορτώνει το OciDeck από το διαδίκτυο και ποια ίχνη παραμένουν σε αυτή τη συσκευή. Είναι ανεξάρτητες από τη δήλωση απορρήτου και τη συγκατάθεσή σου, που θα βρεις στο "Άδεια και Απόρρητο".',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Στόχοι του ιδρύματος:\n\n•  Προώθηση λογισμικού και υλικού ανοιχτού κώδικα για ασφαλείς ψηφιακές υποδομές.\n•  Ενίσχυση της διαφάνειας και της αναπαραγωγιμότητας στις διαδικασίες ασφαλείας.\n•  Οργάνωση έρευνας, εκπαιδεύσεων και δραστηριοτήτων γύρω από την ψηφιακή ανθεκτικότητα.\n•  Σύνδεση πολιτών, επιχειρήσεων, δημόσιου τομέα και κοινωνικών οργανώσεων μεταξύ τους.',
+  'E-mail': 'Email',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Βασικές αξίες: ασφάλεια, ελευθερία και ανοιχτότητα, κυριαρχία, ακεραιότητα, διαμοιρασμός γνώσης, αξιοπιστία, ανθρωπιά, ακρόαση και σύνδεση, "just culture" και βιωσιμότητα.',
+  'Licentie en Privacy': 'Άδεια και Απόρρητο',
+  'Mascotte van MIAUW.': 'Μασκότ του MIAUW.',
+  'Mascotte van OpenKAT.': 'Μασκότ του OpenKAT.',
+  'Mascotte van de checklisttool.': 'Μασκότ του εργαλείου λιστών ελέγχου.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'Το OciDeck εκδίδεται από το Stichting LibreKAT. Το ίδρυμα εργάζεται για μια ασφαλέστερη ψηφιακή κοινωνία μέσω ανοιχτής, ελέγξιμης ασφάλειας πληροφοριών, με έμφαση στον διαμοιρασμό γνώσης, τη δημιουργία κοινότητας και την υποστήριξη λύσεων ανοιχτού κώδικα.',
+  'Over OciDeck': 'Σχετικά με το OciDeck',
+  'Telefoon': 'Τηλέφωνο',
+  'Uitgever: Stichting LibreKAT': 'Εκδότης: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Φροντισμένες παρουσιάσεις από απλό κείμενο — ελεύθερες, ελέγξιμες και με τα δεδομένα σου στη δική σου συσκευή.',
+  'Waar komt de naam vandaan?': 'Από πού προέρχεται το όνομα;',
+  'Website van de stichting': 'Ιστότοπος του ιδρύματος',
 };

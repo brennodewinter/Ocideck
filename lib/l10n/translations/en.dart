@@ -522,6 +522,39 @@ const _dutchSourceEn = {
   'Deze presentatie staat ook op een andere plek:':
       'This presentation also exists somewhere else:',
   'Opruimen…': 'Clean up…',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" refers to the ocicat, the cat breed of Brenno de Winter\'s cats. "Deck" is the English word for a slide set. OciDeck turns simple text into a polished presentation.',
+  'Adressen': 'Addresses',
+  'Bestuur': 'Board',
+  'Beveiliging': 'Security',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (chair), Jan Klopper (secretary) and Astrid Oosenbrug (treasurer).',
+  'Contact': 'Contact',
+  'De katten van Brenno': 'Brenno\'s cats',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'The mascots of OciDeck and related projects are Brenno de Winter\'s ocicats.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'The foundation was established by notarial deed in Leeuwarden on 23 October 2025 and has its registered office in Noordwijk.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'These settings determine what OciDeck may load from the internet and what traces are left behind on this device. They are separate from your privacy statement and consent, which you can find under "Licence and Privacy".',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Objectives of the foundation:\n\n•  Promote open-source software and hardware for secure digital infrastructures.\n•  Advance transparency and reproducibility in security processes.\n•  Organise research, training and activities around digital resilience.\n•  Connect citizens, businesses, government and civil society organisations with one another.',
+  'E-mail': 'Email',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Core values: safety, freedom and openness, sovereignty, integrity, knowledge sharing, reliability, humanity, listening and connecting, "just culture" and sustainability.',
+  'Licentie en Privacy': 'Licence and Privacy',
+  'Mascotte van MIAUW.': 'Mascot of MIAUW.',
+  'Mascotte van OpenKAT.': 'Mascot of OpenKAT.',
+  'Mascotte van de checklisttool.': 'Mascot of the checklist tool.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeck is published by Stichting LibreKAT. The foundation works towards a safer digital society through open, verifiable information security, with an emphasis on knowledge sharing, community building and supporting open-source solutions.',
+  'Over OciDeck': 'About OciDeck',
+  'Telefoon': 'Phone',
+  'Uitgever: Stichting LibreKAT': 'Publisher: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Polished presentations from simple text — free, verifiable and with your data on your own device.',
+  'Waar komt de naam vandaan?': 'Where does the name come from?',
+  'Website van de stichting': 'Foundation website',
 };
 
 const _dutchSourceAddEn = {

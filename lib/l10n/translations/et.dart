@@ -1311,4 +1311,37 @@ const _dutchSourceEt = {
   'Naar prullenbak': 'Prügikasti',
   'Deze presentatie staat ook op een andere plek:':
       'See esitlus on olemas ka teises kohas:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" viitab ocicatile, Brenno de Winteri kasside tõule. "Deck" on ingliskeelne sõna slaidikomplekti tähenduses. OciDeck muudab lihtsa teksti korralikuks esitluseks.',
+  'Adressen': 'Aadressid',
+  'Bestuur': 'Juhatus',
+  'Beveiliging': 'Turvalisus',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (esimees), Jan Klopper (sekretär) ja Astrid Oosenbrug (laekur).',
+  'Contact': 'Kontakt',
+  'De katten van Brenno': 'Brenno kassid',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'OciDecki ja seotud projektide maskotid on Brenno de Winteri ocicatid.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'Sihtasutus asutati notariaalse aktiga 23. oktoobril 2025 Leeuwardenis ning selle registrijärgne asukoht on Noordwijk.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Need seaded määravad, mida OciDeck tohib internetist laadida ja millised jäljed sellele seadmele jäävad. Need on eraldi sinu privaatsusavaldusest ja nõusolekust, mille leiad jaotisest "Litsents ja privaatsus".',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Sihtasutuse eesmärgid:\n\n•  Edendada avatud lähtekoodiga tarkvara ja riistvara turvaliste digitaristute jaoks.\n•  Soodustada läbipaistvust ja korratavust turvaprotsessides.\n•  Korraldada digitaalse vastupidavusega seotud uuringuid, koolitusi ja tegevusi.\n•  Ühendada omavahel kodanikke, ettevõtteid, riiki ja ühiskondlikke organisatsioone.',
+  'E-mail': 'E-post',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Põhiväärtused: turvalisus, vabadus ja avatus, suveräänsus, ausus, teadmiste jagamine, usaldusväärsus, inimlikkus, kuulamine ja ühendamine, "just culture" ning jätkusuutlikkus.',
+  'Licentie en Privacy': 'Litsents ja privaatsus',
+  'Mascotte van MIAUW.': 'MIAUW maskott.',
+  'Mascotte van OpenKAT.': 'OpenKAT maskott.',
+  'Mascotte van de checklisttool.': 'Kontrollnimekirja tööriista maskott.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDecki annab välja Stichting LibreKAT. Sihtasutus töötab turvalisema digitaalse ühiskonna nimel avatud ja kontrollitava infoturbe kaudu, rõhuasetusega teadmiste jagamisel, kogukonna kujundamisel ning avatud lähtekoodiga lahenduste toetamisel.',
+  'Over OciDeck': 'OciDeckist',
+  'Telefoon': 'Telefon',
+  'Uitgever: Stichting LibreKAT': 'Väljaandja: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Korralikud esitlused lihtsast tekstist — vabalt, kontrollitavalt ja sinu andmetega sinu enda seadmes.',
+  'Waar komt de naam vandaan?': 'Kust nimi pärineb?',
+  'Website van de stichting': 'Sihtasutuse veebisait',
 };

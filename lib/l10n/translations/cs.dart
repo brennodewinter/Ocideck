@@ -1321,4 +1321,37 @@ const _dutchSourceCs = {
   'Naar prullenbak': 'Do koše',
   'Deze presentatie staat ook op een andere plek:':
       'Tato prezentace existuje i na jiném místě:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '„Oci” odkazuje na ocicata, kočičí plemeno koček Brenna de Winter. „Deck” je anglické slovo pro sadu snímků. OciDeck promění jednoduchý text v propracovanou prezentaci.',
+  'Adressen': 'Adresy',
+  'Bestuur': 'Správní rada',
+  'Beveiliging': 'Zabezpečení',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (předseda), Jan Klopper (tajemník) a Astrid Oosenbrug (pokladník).',
+  'Contact': 'Kontakt',
+  'De katten van Brenno': 'Kočky Brenna',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'Maskoty OciDeck a souvisejících projektů jsou ocicati Brenna de Winter.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'Nadace byla založena 23. října 2025 notářským zápisem v Leeuwardenu a má své sídlo v Noordwijku.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Tato nastavení určují, co může OciDeck načítat z internetu a jaké stopy zůstávají na tomto zařízení. Jsou nezávislá na vašem prohlášení o ochraně soukromí a souhlasu, které najdete v části „Licence a soukromí”.',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Cíle nadace:\n\n•  Podporovat open source software a hardware pro bezpečné digitální infrastruktury.\n•  Prosazovat transparentnost a reprodukovatelnost v bezpečnostních procesech.\n•  Organizovat výzkum, školení a aktivity v oblasti digitální odolnosti.\n•  Propojovat občany, firmy, veřejnou správu a společenské organizace.',
+  'E-mail': 'E-mail',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Základní hodnoty: bezpečnost, svoboda a otevřenost, suverenita, integrita, sdílení znalostí, spolehlivost, lidskost, naslouchání a propojování, „just culture” a udržitelnost.',
+  'Licentie en Privacy': 'Licence a soukromí',
+  'Mascotte van MIAUW.': 'Maskot MIAUW.',
+  'Mascotte van OpenKAT.': 'Maskot OpenKAT.',
+  'Mascotte van de checklisttool.': 'Maskot nástroje pro kontrolní seznamy.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeck vydává Stichting LibreKAT. Nadace usiluje o bezpečnější digitální společnost prostřednictvím otevřené, ověřitelné informační bezpečnosti, s důrazem na sdílení znalostí, budování komunity a podporu open source řešení.',
+  'Over OciDeck': 'O OciDeck',
+  'Telefoon': 'Telefon',
+  'Uitgever: Stichting LibreKAT': 'Vydavatel: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Propracované prezentace z jednoduchého textu — svobodné, ověřitelné a s vašimi daty na vlastním zařízení.',
+  'Waar komt de naam vandaan?': 'Odkud pochází název?',
+  'Website van de stichting': 'Webové stránky nadace',
 };

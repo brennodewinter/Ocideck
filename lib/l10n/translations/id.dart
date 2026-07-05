@@ -1320,4 +1320,37 @@ const _dutchSourceId = {
   'Naar prullenbak': 'Ke tempat sampah',
   'Deze presentatie staat ook op een andere plek:':
       'Presentasi ini juga ada di tempat lain:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" merujuk pada ocicat, ras kucing milik Brenno de Winter. "Deck" adalah kata Inggris untuk kumpulan salindia. OciDeck mengubah teks sederhana menjadi presentasi yang rapi.',
+  'Adressen': 'Alamat',
+  'Bestuur': 'Pengurus',
+  'Beveiliging': 'Keamanan',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (ketua), Jan Klopper (sekretaris) dan Astrid Oosenbrug (bendahara).',
+  'Contact': 'Kontak',
+  'De katten van Brenno': 'Kucing-kucing Brenno',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'Maskot OciDeck dan proyek-proyek terkait adalah para ocicat milik Brenno de Winter.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'Yayasan ini didirikan pada 23 Oktober 2025 dengan akta notaris di Leeuwarden dan berkedudukan hukum di Noordwijk.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Pengaturan ini menentukan apa yang boleh dimuat OciDeck dari internet dan jejak mana yang tertinggal di perangkat ini. Pengaturan ini terpisah dari pernyataan privasi dan persetujuanmu, yang dapat kamu temukan di "Lisensi dan Privasi".',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Tujuan yayasan:\n\n•  Mendorong perangkat lunak dan perangkat keras sumber terbuka untuk infrastruktur digital yang aman.\n•  Memajukan transparansi dan keterulangan dalam proses keamanan.\n•  Menyelenggarakan penelitian, pelatihan, dan kegiatan seputar ketahanan digital.\n•  Menghubungkan warga, perusahaan, pemerintah, dan organisasi masyarakat satu sama lain.',
+  'E-mail': 'E-mail',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Nilai inti: keamanan, kebebasan dan keterbukaan, kedaulatan, integritas, berbagi pengetahuan, keandalan, kemanusiaan, mendengarkan dan menghubungkan, "just culture" dan keberlanjutan.',
+  'Licentie en Privacy': 'Lisensi dan Privasi',
+  'Mascotte van MIAUW.': 'Maskot MIAUW.',
+  'Mascotte van OpenKAT.': 'Maskot OpenKAT.',
+  'Mascotte van de checklisttool.': 'Maskot alat daftar periksa.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeck diterbitkan oleh Stichting LibreKAT. Yayasan ini bekerja untuk masyarakat digital yang lebih aman melalui keamanan informasi yang terbuka dan dapat diperiksa, dengan penekanan pada berbagi pengetahuan, pembentukan komunitas, dan dukungan bagi solusi sumber terbuka.',
+  'Over OciDeck': 'Tentang OciDeck',
+  'Telefoon': 'Telepon',
+  'Uitgever: Stichting LibreKAT': 'Penerbit: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Presentasi yang rapi dari teks sederhana — bebas, dapat diperiksa, dan dengan datamu tetap di perangkatmu sendiri.',
+  'Waar komt de naam vandaan?': 'Dari mana asal namanya?',
+  'Website van de stichting': 'Situs web yayasan',
 };

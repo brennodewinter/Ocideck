@@ -1318,4 +1318,37 @@ const _dutchSourceFi = {
   'Naar prullenbak': 'Siirrä roskakoriin',
   'Deze presentatie staat ook op een andere plek:':
       'Tämä esitys on myös toisessa paikassa:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" viittaa ocicatiin, Brenno de Winterin kissojen kissarotuun. "Deck" on englannin kielen sana diasarjalle. OciDeck tekee yksinkertaisesta tekstistä huolitellun esityksen.',
+  'Adressen': 'Osoitteet',
+  'Bestuur': 'Hallitus',
+  'Beveiliging': 'Turvallisuus',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (puheenjohtaja), Jan Klopper (sihteeri) ja Astrid Oosenbrug (rahastonhoitaja).',
+  'Contact': 'Yhteystiedot',
+  'De katten van Brenno': 'Brennon kissat',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'OciDeckin ja siihen liittyvien projektien maskotit ovat Brenno de Winterin ocicatit.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'Säätiö perustettiin 23. lokakuuta 2025 notaarin vahvistamalla asiakirjalla Leeuwardenissa, ja sen sääntömääräinen kotipaikka on Noordwijk.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Nämä asetukset määrittävät, mitä OciDeck saa ladata internetistä ja mitä jälkiä tälle laitteelle jää. Ne ovat erillisiä tietosuojaselosteesta ja suostumuksesta, jotka löydät kohdasta "Lisenssi ja Tietosuoja".',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Säätiön tavoitteet:\n\n•  Edistää avoimen lähdekoodin ohjelmistoja ja laitteistoja turvallisen digitaalisen infrastruktuurin hyväksi.\n•  Edistää läpinäkyvyyttä ja toistettavuutta tietoturvaprosesseissa.\n•  Järjestää tutkimusta, koulutusta ja toimintaa digitaalisen kestävyyden ympärillä.\n•  Yhdistää kansalaisia, yrityksiä, julkishallintoa ja kansalaisjärjestöjä toisiinsa.',
+  'E-mail': 'Sähköposti',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Ydinarvot: turvallisuus, vapaus ja avoimuus, suvereniteetti, rehellisyys, tiedon jakaminen, luotettavuus, inhimillisyys, kuunteleminen ja yhdistäminen, "just culture" ja kestävyys.',
+  'Licentie en Privacy': 'Lisenssi ja Tietosuoja',
+  'Mascotte van MIAUW.': 'MIAUW:n maskotti.',
+  'Mascotte van OpenKAT.': 'OpenKAT:n maskotti.',
+  'Mascotte van de checklisttool.': 'Tarkistuslistatyökalun maskotti.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeckin julkaisee Stichting LibreKAT. Säätiö työskentelee turvallisemman digitaalisen yhteiskunnan puolesta avoimen ja tarkistettavan tietoturvan avulla, painottaen tiedon jakamista, yhteisön rakentamista ja avoimen lähdekoodin ratkaisujen tukemista.',
+  'Over OciDeck': 'Tietoja OciDeckistä',
+  'Telefoon': 'Puhelin',
+  'Uitgever: Stichting LibreKAT': 'Julkaisija: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Huoliteltuja esityksiä yksinkertaisesta tekstistä — vapaasti, tarkistettavasti ja tietosi omalla laitteellasi.',
+  'Waar komt de naam vandaan?': 'Mistä nimi tulee?',
+  'Website van de stichting': 'Säätiön verkkosivusto',
 };

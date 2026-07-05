@@ -1316,4 +1316,37 @@ const _dutchSourceDa = {
   'Naar prullenbak': 'Til papirkurven',
   'Deze presentatie staat ook op een andere plek:':
       'Denne præsentation findes også et andet sted:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" henviser til ocicatten, katteracen for Brenno de Winters katte. "Deck" er det engelske ord for et diassæt. OciDeck laver en velformet præsentation ud af enkel tekst.',
+  'Adressen': 'Adresser',
+  'Bestuur': 'Bestyrelse',
+  'Beveiliging': 'Sikkerhed',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (formand), Jan Klopper (sekretær) og Astrid Oosenbrug (kasserer).',
+  'Contact': 'Kontakt',
+  'De katten van Brenno': 'Brennos katte',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'Maskotterne for OciDeck og beslægtede projekter er Brenno de Winters ocicats.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'Fonden blev oprettet den 23. oktober 2025 ved notarialt dokument i Leeuwarden og har sit vedtægtsmæssige hjemsted i Noordwijk.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Disse indstillinger afgør, hvad OciDeck må hente fra internettet, og hvilke spor der efterlades på denne enhed. De er uafhængige af din privatlivserklæring og dit samtykke, som du finder under "Licens og Privatliv".',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Fondens formål:\n\n•  Fremme open source-software og -hardware til sikker digital infrastruktur.\n•  Fremme gennemsigtighed og reproducerbarhed i sikkerhedsprocesser.\n•  Organisere forskning, uddannelse og aktiviteter inden for digital modstandsdygtighed.\n•  Forbinde borgere, virksomheder, det offentlige og civilsamfundsorganisationer med hinanden.',
+  'E-mail': 'E-mail',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Kerneværdier: sikkerhed, frihed og åbenhed, suverænitet, integritet, videndeling, pålidelighed, menneskelighed, at lytte og forbinde, "just culture" og bæredygtighed.',
+  'Licentie en Privacy': 'Licens og Privatliv',
+  'Mascotte van MIAUW.': 'Maskot for MIAUW.',
+  'Mascotte van OpenKAT.': 'Maskot for OpenKAT.',
+  'Mascotte van de checklisttool.': 'Maskot for checklisteværktøjet.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeck udgives af Stichting LibreKAT. Fonden arbejder for et mere sikkert digitalt samfund gennem åben, kontrollerbar informationssikkerhed med vægt på videndeling, fællesskabsdannelse og støtte til open source-løsninger.',
+  'Over OciDeck': 'Om OciDeck',
+  'Telefoon': 'Telefon',
+  'Uitgever: Stichting LibreKAT': 'Udgiver: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Velformede præsentationer ud af enkel tekst — frit, kontrollerbart og med dine data på din egen enhed.',
+  'Waar komt de naam vandaan?': 'Hvor kommer navnet fra?',
+  'Website van de stichting': 'Fondens websted',
 };
