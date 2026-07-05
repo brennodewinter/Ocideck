@@ -1333,4 +1333,37 @@ const _dutchSourceLa = {
   'Naar prullenbak': 'In scrinium purgamentorum',
   'Deze presentatie staat ook op een andere plek:':
       'Haec praesentatio etiam alio loco est:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" ad ocicattum spectat, genus felium quae Brenno de Winter possidet. "Deck" verbum Anglicum est quo ordo tabellarum significatur. OciDeck ex textu simplici expolitam narrationem efficit.',
+  'Adressen': 'Inscriptiones',
+  'Bestuur': 'Consilium',
+  'Beveiliging': 'Securitas',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (praeses), Jan Klopper (a secretis) et Astrid Oosenbrug (quaestor).',
+  'Contact': 'Contactus',
+  'De katten van Brenno': 'Feles Brennonis',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'Insignia OciDeck et operum affinium sunt ocicatti Brennonis de Winter.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'Fundatio die 23 Octobris anno 2025 instrumento notariali Leeuwardae condita est et sedem statutariam Noordwijci habet.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Hae optiones determinant quid OciDeck ex interrete onerare liceat et quae vestigia in hoc instrumento remaneant. A declaratione privatitatis et consensu tuo sunt seiunctae, quae apud "Licentia et Privatitas" invenies.',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Proposita fundationis:\n\n•  Programmata et machinas fonte aperto pro infrastructuris digitalibus tutis promovere.\n•  Perspicuitatem et reproducibilitatem in processibus securitatis fovere.\n•  Investigationem, institutiones et actiones de firmitate digitali disponere.\n•  Cives, societates, imperium et instituta civilia inter se coniungere.',
+  'E-mail': 'Epistula electronica',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Valores praecipui: securitas, libertas et apertio, superioritas, integritas, communicatio scientiae, fidelitas, humanitas, auscultatio et coniunctio, "just culture" et sustentabilitas.',
+  'Licentie en Privacy': 'Licentia et Privatitas',
+  'Mascotte van MIAUW.': 'Insigne MIAUW.',
+  'Mascotte van OpenKAT.': 'Insigne OpenKAT.',
+  'Mascotte van de checklisttool.': 'Insigne instrumenti indicis.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeck a Stichting LibreKAT editur. Fundatio ad societatem digitalem tutiorem laborat per securitatem informationis apertam et examinabilem, cum studio communicandae scientiae, communitatis formandae et solutionum fonte aperto sustinendarum.',
+  'Over OciDeck': 'De OciDeck',
+  'Telefoon': 'Telephonum',
+  'Uitgever: Stichting LibreKAT': 'Editor: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Expolitae narrationes ex textu simplici — liberae, examinabiles et cum datis tuis in tuo ipsius instrumento manentibus.',
+  'Waar komt de naam vandaan?': 'Unde nomen venit?',
+  'Website van de stichting': 'Situs interretialis fundationis',
 };

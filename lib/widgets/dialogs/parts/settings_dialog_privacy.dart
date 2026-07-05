@@ -12,43 +12,6 @@ extension _SettingsPrivacy on _SettingsDialogState {
       children: [
         const PrivacyStatementContent(),
         const SizedBox(height: 20),
-        _sectionTitle(l10n.d('Online media')),
-        SwitchListTile(
-          contentPadding: EdgeInsets.zero,
-          title: Text(
-            l10n.d('Online media toestaan'),
-            style: const TextStyle(fontSize: 13),
-          ),
-          subtitle: Text(
-            l10n.d(
-              'Sta het live laden toe van afbeeldingen en video\'s via een URL en van YouTube/Vimeo-embeds. Standaard uit voor je privacy en veiligheid.',
-            ),
-            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
-          ),
-          value: ref.watch(settingsProvider.select((s) => s.allowRemoteMedia)),
-          onChanged: (value) =>
-              ref.read(settingsProvider.notifier).setAllowRemoteMedia(value),
-        ),
-        const SizedBox(height: 20),
-        _sectionTitle(l10n.d('Herstelbestanden')),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            l10n.d(
-              'Crash-herstelbestanden bevatten de volledige inhoud van je presentaties in platte tekst. Ze worden na 7 dagen automatisch opgeruimd; hier kun je ze direct wissen.',
-            ),
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
-          ),
-        ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: OutlinedButton.icon(
-            onPressed: _clearRecoveryFiles,
-            icon: const Icon(Icons.delete_sweep_outlined, size: 16),
-            label: Text(l10n.d('Herstelbestanden nu wissen')),
-          ),
-        ),
-        const SizedBox(height: 20),
         _sectionTitle(l10n.d('Toestemming')),
         Container(
           padding: const EdgeInsets.all(12),
@@ -90,21 +53,6 @@ extension _SettingsPrivacy on _SettingsDialogState {
           ),
         ),
       ],
-    );
-  }
-
-  Future<void> _clearRecoveryFiles() async {
-    final l10n = context.l10n;
-    final removed = await RecoveryService().discardAll();
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          removed == 0
-              ? l10n.d('Er waren geen herstelbestanden.')
-              : '$removed ${l10n.d('herstelbestand(en) gewist.')}',
-        ),
-      ),
     );
   }
 

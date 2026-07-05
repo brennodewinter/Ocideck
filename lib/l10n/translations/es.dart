@@ -324,6 +324,40 @@ const _dutchSourceEs = {
   'Deze presentatie staat ook op een andere plek:':
       'Esta presentación también existe en otro lugar:',
   'Opruimen…': 'Limpiar…',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" hace referencia al ocicat, la raza de los gatos de Brenno de Winter. "Deck" es la palabra inglesa para un conjunto de diapositivas. OciDeck convierte texto sencillo en una presentación cuidada.',
+  'Adressen': 'Direcciones',
+  'Bestuur': 'Junta directiva',
+  'Beveiliging': 'Seguridad',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (presidente), Jan Klopper (secretario) y Astrid Oosenbrug (tesorera).',
+  'Contact': 'Contacto',
+  'De katten van Brenno': 'Los gatos de Brenno',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'Las mascotas de OciDeck y de los proyectos relacionados son los ocicats de Brenno de Winter.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'La fundación se constituyó el 23 de octubre de 2025 mediante escritura notarial en Leeuwarden y tiene su domicilio social en Noordwijk.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Estos ajustes determinan qué puede cargar OciDeck desde internet y qué rastros quedan en este dispositivo. Son independientes de tu declaración de privacidad y consentimiento, que encontrarás en "Licencia y Privacidad".',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Objetivos de la fundación:\n\n•  Fomentar el software y el hardware de código abierto para infraestructuras digitales seguras.\n•  Promover la transparencia y la reproducibilidad en los procesos de seguridad.\n•  Organizar investigación, formación y actividades en torno a la resiliencia digital.\n•  Conectar a ciudadanos, empresas, administración pública y organizaciones sociales entre sí.',
+  'E-mail': 'Correo electrónico',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Valores fundamentales: seguridad, libertad y apertura, soberanía, integridad, compartir conocimiento, fiabilidad, humanidad, escuchar y conectar, "just culture" y sostenibilidad.',
+  'Licentie en Privacy': 'Licencia y Privacidad',
+  'Mascotte van MIAUW.': 'Mascota de MIAUW.',
+  'Mascotte van OpenKAT.': 'Mascota de OpenKAT.',
+  'Mascotte van de checklisttool.':
+      'Mascota de la herramienta de listas de verificación.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeck es publicado por Stichting LibreKAT. La fundación trabaja por una sociedad digital más segura mediante una seguridad de la información abierta y verificable, con énfasis en compartir conocimiento, crear comunidad y apoyar soluciones de código abierto.',
+  'Over OciDeck': 'Acerca de OciDeck',
+  'Telefoon': 'Teléfono',
+  'Uitgever: Stichting LibreKAT': 'Editor: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Presentaciones cuidadas a partir de texto sencillo: libres, verificables y con tus datos en tu propio dispositivo.',
+  'Waar komt de naam vandaan?': '¿De dónde viene el nombre?',
+  'Website van de stichting': 'Sitio web de la fundación',
 };
 
 const _dutchSourceAddEs = {

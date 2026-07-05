@@ -177,7 +177,11 @@ class AppLocalizations {
     'э': 'e', 'ё': 'e',
   };
 
-  static String _sortKey(String s) {
+  /// Latin-folded, lowercased sort key of [s] (see [_translitMap]). Public so
+  /// other pickers (e.g. the template chooser) sort display names the same way
+  /// the language list does — diacritics and other scripts land where a reader
+  /// expects them instead of after all plain-Latin names.
+  static String sortKey(String s) {
     final buf = StringBuffer();
     for (final ch in s.toLowerCase().split('')) {
       buf.write(_translitMap[ch] ?? ch);
@@ -189,7 +193,7 @@ class AppLocalizations {
   /// pickers (the map itself keeps its own order for lookups).
   static List<MapEntry<String, String>> get languageOptions =>
       languageNames.entries.toList()
-        ..sort((a, b) => _sortKey(a.value).compareTo(_sortKey(b.value)));
+        ..sort((a, b) => sortKey(a.value).compareTo(sortKey(b.value)));
 
   static const _materialLocaleFallbacks = {
     'nl': Locale('nl'),

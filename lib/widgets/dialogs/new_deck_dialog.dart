@@ -23,6 +23,25 @@ class NewDeckChoice {
   });
 }
 
+/// Sjablonen in weergavevolgorde: "Leeg deck" (`empty`) blijft bovenaan als
+/// startpunt-vanaf-nul, de rest alfabetisch op [displayTitle] — de getoonde,
+/// vertaalde titel — via [AppLocalizations.sortKey], zodat zoeken en scannen in
+/// elke taal logisch verloopt (diacrieten en andere schriften vouwen mee).
+List<DeckTemplate> sortTemplatesForDisplay(
+  Iterable<DeckTemplate> items,
+  String Function(DeckTemplate template) displayTitle,
+) {
+  final list = items.toList();
+  list.sort((a, b) {
+    if (a.id == 'empty') return b.id == 'empty' ? 0 : -1;
+    if (b.id == 'empty') return 1;
+    return AppLocalizations.sortKey(
+      displayTitle(a),
+    ).compareTo(AppLocalizations.sortKey(displayTitle(b)));
+  });
+  return list;
+}
+
 /// De nieuwe-presentatie-wizard: vraagt een titel, laat een stijlprofiel
 /// kiezen en een [DeckTemplate] waarvan de voorbeeldslides het verse deck
 /// vullen.
@@ -91,19 +110,19 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
     super.dispose();
   }
 
-  /// The catalogue narrowed by the search box. Matches the localised title
-  /// and description, plus the Dutch source strings, so a term in either
-  /// language finds the template.
+  /// The catalogue narrowed by the search box and sorted for display. Matches
+  /// the localised title and description, plus the Dutch source strings, so a
+  /// term in either language finds the template.
   List<DeckTemplate> _filtered(AppLocalizations l10n) {
     final query = _searchCtrl.text.trim().toLowerCase();
-    if (query.isEmpty) return deckTemplates;
     bool matches(DeckTemplate t) => [
       l10n.d(t.title),
       l10n.d(t.description),
       t.title,
       t.description,
     ].any((text) => text.toLowerCase().contains(query));
-    return deckTemplates.where(matches).toList();
+    final base = query.isEmpty ? deckTemplates : deckTemplates.where(matches);
+    return sortTemplatesForDisplay(base, (t) => l10n.d(t.title));
   }
 
   void _onSearchChanged() {

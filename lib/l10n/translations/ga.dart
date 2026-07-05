@@ -1348,4 +1348,37 @@ const _dutchSourceGa = {
   'Naar prullenbak': 'Go dtí an bruscar',
   'Deze presentatie staat ook op een andere plek:':
       'Tá an láithreoireacht seo ann in áit eile freisin:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      'Tagraíonn „Oci” don ocicat, pór na gcat a bhaineann le Brenno de Winter. Is é „Deck” an focal Béarla ar shraith sleamhnán. Déanann OciDeck láithreoireacht shlachtmhar as téacs simplí.',
+  'Adressen': 'Seoltaí',
+  'Bestuur': 'Bord',
+  'Beveiliging': 'Slándáil',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (cathaoirleach), Jan Klopper (rúnaí) agus Astrid Oosenbrug (cisteoir).',
+  'Contact': 'Teagmháil',
+  'De katten van Brenno': 'Cait Brenno',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'Is iad ocicats Brenno de Winter mascotaí OciDeck agus na dtionscadal gaolmhar.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'Bunaíodh an fhondúireacht le gníomhas nótaireachta ar 23 Deireadh Fómhair 2025 i Leeuwarden agus tá a suíomh reachtúil in Noordwijk.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Cinneann na socruithe seo cad is féidir le OciDeck a luchtú ón idirlíon agus cé na rianta a fhanann ar an ngléas seo. Tá siad neamhspleách ar do ráiteas príobháideachta agus toiliú, atá le fáil faoi „Ceadúnas agus Príobháideacht”.',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Cuspóirí na fondúireachta:\n\n•  Bogearraí agus crua-earraí foinse oscailte a spreagadh le haghaidh bonneagair dhigiteacha shábháilte.\n•  Trédhearcacht agus in-atáirgeacht i bpróisis slándála a chur chun cinn.\n•  Taighde, oiliúint agus gníomhaíochtaí a bhaineann le hathléimneacht dhigiteach a eagrú.\n•  Saoránaigh, gnólachtaí, rialtas agus eagraíochtaí sochaíocha a nascadh le chéile.',
+  'E-mail': 'Ríomhphost',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Croíluachanna: sábháilteacht, saoirse agus oscailteacht, ceannasacht, ionracas, comhroinnt eolais, iontaofacht, daonnacht, éisteacht agus nascadh, „just culture” agus inbhuanaitheacht.',
+  'Licentie en Privacy': 'Ceadúnas agus Príobháideacht',
+  'Mascotte van MIAUW.': 'Mascota MIAUW.',
+  'Mascotte van OpenKAT.': 'Mascota OpenKAT.',
+  'Mascotte van de checklisttool.': 'Mascota na huirlise seicliosta.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'Foilsíonn Stichting LibreKAT OciDeck. Oibríonn an fhondúireacht i dtreo sochaí dhigiteach níos sábháilte trí shlándáil faisnéise oscailte, infhíoraithe, agus béim ar chomhroinnt eolais, ar fhorbairt pobail agus ar thacú le réitigh foinse oscailte.',
+  'Over OciDeck': 'Maidir le OciDeck',
+  'Telefoon': 'Fón',
+  'Uitgever: Stichting LibreKAT': 'Foilsitheoir: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Láithreoireachtaí slachtmhara as téacs simplí — saor, infhíoraithe agus do chuid sonraí ar do ghléas féin.',
+  'Waar komt de naam vandaan?': 'Cad as a dtagann an t-ainm?',
+  'Website van de stichting': 'Suíomh gréasáin na fondúireachta',
 };

@@ -1303,4 +1303,37 @@ const _dutchSourceTlh = {
   'Naar prullenbak': 'veQDaq',
   'Deze presentatie staat ook op een andere plek:':
       'latlh DaqDaq je tu\'lu\' cha\'nobvam:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" \'oH ocicat, Brenno de Winter vIghro\'mey rewwI\'. "Deck" \'oH nav Segh DIvI\' Hol mu\'\'e\'. ngoDHom ghItlh OciDeck lo\'laHbogh \'anglqach chenmoH.',
+  'Adressen': 'juHHom',
+  'Bestuur': 'che\'wI\'pu\'',
+  'Beveiliging': 'Hubqu\'',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (DevwI\'), Jan Klopper (ghItlhwI\') je Astrid Oosenbrug (HuchqawI\').',
+  'Contact': 'rItlh',
+  'De katten van Brenno': 'Brenno vIghro\'pu\'',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'OciDeck Damey je rurbogh nabmey Damey, chaH Brenno de Winter ocicats.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'cha\'maH wejDIch jar wa\'maH DIS 2025 Leeuwarden Sep DaqDaq ghItlhwI\' HablI\' chenmoH je Noordwijk Daq chuvmey Daq.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Dochvammey lugh \'e\' bopjup nuq OciDeck internet vo\' pol \'ej nuq lo\'meH Daq ratlh. quv privacy jatlh je chaw\' vo\' pIm; "chaw\' je privacy" DaqDaq DatI\'nes.',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'che\'wI\' ngoQmey:\n\n•  QaphengHa\' De\'wI\' vum je De\'wI\' Doch Hubqu\'ghach chenmoH.\n•  Hubqu\'ghach vangmeH lugh je choHlaHqu\'ghach QaphengHa\'.\n•  ghoj, ghojmoH je vangHa\' De\'wI\' HeghlaHbe\'ghach malja\' chenmoH.\n•  nughmey, malja\'mey, wo\' je ghom malja\'mey rar.',
+  'E-mail': 'QIn',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      '\'oy\'naQ \'ej\': Hubqu\', tlhab je poSmoHghach, che\'ghach, batlh, Sovmey ngeHmeH, voqmoH, Human, \'IjmeH \'ej rarmeH, "just culture" je ruch.',
+  'Licentie en Privacy': 'chaw\' je privacy',
+  'Mascotte van MIAUW.': 'MIAUW Damey.',
+  'Mascotte van OpenKAT.': 'OpenKAT Damey.',
+  'Mascotte van de checklisttool.': 'checklist jonta\' Damey.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'Stichting LibreKAT ghItlh OciDeck. De\'wI\' Hubqu\'ghach poSmoH \'ej choHlaHqu\' lo\'taHvIS De\'wI\' HeghlaHbe\'ghach malja\' Sar chenmoH De\'wI\', Sovmey ngeHmeH, ghom chenmoH je opensource wanI\' teb chenmoH.',
+  'Over OciDeck': 'OciDeck ngoDmey',
+  'Telefoon': 'ghogh Su\'',
+  'Uitgever: Stichting LibreKAT': 'ghItlhwI\': Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'ngoDHom vo\' lo\'laHbogh \'anglqach — tlhab, choHlaHqu\' je SoH De\'wI\' SoH Daq patlh.',
+  'Waar komt de naam vandaan?': 'nuqDaq pong ghoS?',
+  'Website van de stichting': 'De\'wI\' ghItlhngeH',
 };

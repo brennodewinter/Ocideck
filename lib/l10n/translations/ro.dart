@@ -1334,4 +1334,38 @@ const _dutchSourceRo = {
   'Naar prullenbak': 'La coșul de gunoi',
   'Deze presentatie staat ook op een andere plek:':
       'Această prezentare există și în alt loc:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" face trimitere la ocicat, rasa pisicilor lui Brenno de Winter. "Deck" este cuvântul englezesc pentru un set de diapozitive. OciDeck transformă text simplu într-o prezentare îngrijită.',
+  'Adressen': 'Adrese',
+  'Bestuur': 'Consiliul de administrație',
+  'Beveiliging': 'Securitate',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (președinte), Jan Klopper (secretar) și Astrid Oosenbrug (trezorier).',
+  'Contact': 'Contact',
+  'De katten van Brenno': 'Pisicile lui Brenno',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'Mascotele OciDeck și ale proiectelor conexe sunt pisicile ocicat ale lui Brenno de Winter.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'Fundația a fost înființată la 23 octombrie 2025 prin act notarial la Leeuwarden și are sediul statutar în Noordwijk.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Aceste setări stabilesc ce poate încărca OciDeck de pe internet și ce urme rămân pe acest dispozitiv. Sunt independente de declarația ta de confidențialitate și de consimțământ, pe care le găsești la "Licență și Confidențialitate".',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Obiectivele fundației:\n\n•  Promovarea software-ului și hardware-ului open source pentru infrastructuri digitale sigure.\n•  Stimularea transparenței și reproductibilității în procesele de securitate.\n•  Organizarea de cercetări, instruiri și activități privind reziliența digitală.\n•  Conectarea între ei a cetățenilor, întreprinderilor, autorităților și organizațiilor societății civile.',
+  'E-mail': 'E-mail',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Valori fundamentale: securitate, libertate și deschidere, suveranitate, integritate, împărtășirea cunoștințelor, fiabilitate, umanitate, ascultare și conectare, "just culture" și durabilitate.',
+  'Licentie en Privacy': 'Licență și Confidențialitate',
+  'Mascotte van MIAUW.': 'Mascota MIAUW.',
+  'Mascotte van OpenKAT.': 'Mascota OpenKAT.',
+  'Mascotte van de checklisttool.':
+      'Mascota instrumentului de liste de verificare.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeck este publicat de Stichting LibreKAT. Fundația lucrează pentru o societate digitală mai sigură prin securitate a informațiilor deschisă și verificabilă, cu accent pe împărtășirea cunoștințelor, formarea de comunități și sprijinirea soluțiilor open source.',
+  'Over OciDeck': 'Despre OciDeck',
+  'Telefoon': 'Telefon',
+  'Uitgever: Stichting LibreKAT': 'Editor: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Prezentări îngrijite din text simplu — libere, verificabile și cu datele tale pe propriul tău dispozitiv.',
+  'Waar komt de naam vandaan?': 'De unde provine numele?',
+  'Website van de stichting': 'Site-ul web al fundației',
 };

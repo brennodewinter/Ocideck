@@ -1319,4 +1319,37 @@ const _dutchSourceGsw = {
   'Naar prullenbak': 'In Papierchorb',
   'Deze presentatie staat ook op een andere plek:':
       'Die Präsentation git s au an eme andere Ort:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" wiist uf d Ocicat, d Chatzerass vo de Chatze vom Brenno de Winter. "Deck" isch s änglisch Wort für e Foliesatz. OciDeck macht us eifachem Text e gschtalteti Präsentation.',
+  'Adressen': 'Adrässe',
+  'Bestuur': 'Vorschtand',
+  'Beveiliging': 'Sicherheit',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (Presidänt), Jan Klopper (Sekretär) und Astrid Oosenbrug (Kassier).',
+  'Contact': 'Kontakt',
+  'De katten van Brenno': 'D Chatze vom Brenno',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'D Maskottli vo OciDeck und de verwandte Projäkt sind d Ocicats vom Brenno de Winter.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'D Stiftig isch am 23. Oktober 2025 mit notarielle Urkund z Leeuwarden gründet worde und het ihre statutarisch Sitz z Noordwijk.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Die Iischtellige beschtimme, was OciDeck vom Internet ladä darf und weli Spure uf däm Grät zrugg blibe. Si sind unabhängig vo dinere Datäschutzerklärig und Iiwilligung, wo du under "Lizänz und Privatsphäre" findsch.',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Ziel vo de Stiftig:\n\n•  Opensource-Software und -Hardware für sicheri digitali Infrastrukture förderä.\n•  Transparänz und Reproduzierbarkeit i de Sicherheitsprozäss förderä.\n•  Forschig, Schuälige und Aktivitäte rund um digitali Widerschtandschraft organisierä.\n•  Bürger, Firme, Bhörde und gsellschaftlichi Organisatione mitenand verbindä.',
+  'E-mail': 'E-Mail',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Kärnwärt: Sicherheit, Freiheit und Offeheit, Souveränität, Integrität, Wüsseteilig, Zuäverlässigkeit, Menschlichkeit, Zuälosä und Verbindä, "just culture" und Nachhaltigkeit.',
+  'Licentie en Privacy': 'Lizänz und Privatsphäre',
+  'Mascotte van MIAUW.': 'Maskottli vo MIAUW.',
+  'Mascotte van OpenKAT.': 'Maskottli vo OpenKAT.',
+  'Mascotte van de checklisttool.': 'Maskottli vom Checkischte-Tool.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeck wird vo de Stichting LibreKAT usegä. D Stiftig schaffet a nere sicherere digitale Gsellschaft über offeni, überprüfbari Informationssicherheit, mit em Schwärpunkt uf Wüsseteilig, Community-Bildig und em Ünderschtütze vo Opensource-Lösige.',
+  'Over OciDeck': 'Über OciDeck',
+  'Telefoon': 'Telefon',
+  'Uitgever: Stichting LibreKAT': 'Userussgäber: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Gschtalteti Präsentatione us eifachem Text — frei, überprüfbar und mit dine Date uf dim eigene Grät.',
+  'Waar komt de naam vandaan?': 'Wo chunt de Name här?',
+  'Website van de stichting': 'Website vo de Stiftig',
 };

@@ -44,6 +44,7 @@ void main() {
       'Bank',
       'Bullet',
       'Code',
+      'Contact',
       'Coverflow',
       'Label',
       'Link',

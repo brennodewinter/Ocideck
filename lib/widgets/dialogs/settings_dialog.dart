@@ -14,6 +14,7 @@ import '../../state/tabs_provider.dart';
 import '../../state/consent_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/log.dart';
+import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
 import '../editors/advanced_section.dart';
 import '../language_flag.dart';
@@ -24,6 +25,9 @@ part 'parts/settings_dialog_appearance.dart';
 part 'parts/settings_dialog_colors.dart';
 part 'parts/settings_dialog_webdav.dart';
 part 'parts/settings_dialog_privacy.dart';
+part 'parts/settings_dialog_security.dart';
+part 'parts/settings_dialog_about.dart';
+part 'parts/settings_dialog_hex_color.dart';
 
 TextStyle _fontStyle(String font, TextStyle base) {
   return base.copyWith(fontFamily: font);
@@ -130,8 +134,15 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     Icons.slideshow_outlined,
     Icons.speed_outlined,
     Icons.privacy_tip_outlined,
+    Icons.shield_outlined,
     Icons.cloud_outlined,
+    Icons.info_outline,
   ];
+
+  /// Index of the "Over OciDeck" pane. It is the last entry in the tab lists
+  /// but is opened from the branded footer at the bottom of the sidebar rather
+  /// than from a regular nav item, so the nav list stops one short of it.
+  static const _aboutTabIndex = 7;
 
   static const _colorPresets = [
     '#FFFFFF',
@@ -200,7 +211,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           });
     }
     _highlightedThemeField = widget.highlightThemeField;
-    _selectedTab = widget.initialTab.clamp(0, 5);
+    _selectedTab = widget.initialTab.clamp(0, _aboutTabIndex);
     if (widget.highlightThemeField != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scrollToThemeField(widget.highlightThemeField!);
@@ -381,8 +392,10 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       l10n.d('App-thema'),
       l10n.d('Presentatiestijl'),
       l10n.d('Cockpit'),
-      l10n.d('Privacy'),
+      l10n.d('Licentie en Privacy'),
+      l10n.d('Beveiliging'),
       l10n.d('Nextcloud'),
+      l10n.d('Over OciDeck'),
     ];
 
     final bodies = <Widget>[
@@ -391,7 +404,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       _tabBody(_presentationStyleTab(profiles)),
       _tabBody(_cockpitTab()),
       _tabBody(_privacyTab()),
+      _tabBody(_securityTab()),
       _tabBody(_webdavTab()),
+      _tabBody(_aboutTab()),
     ];
 
     return Dialog(
@@ -490,43 +505,82 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
               ],
             ),
           ),
-          for (var i = 0; i < labels.length; i++)
+          // The last label ("Over OciDeck") is not a regular nav item; it is
+          // reached from the branded footer below, so stop one short.
+          for (var i = 0; i < labels.length - 1; i++)
             _navItem(i, _navIcons[i], labels[i]),
           const Spacer(),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 12, 20, 18),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // EU-yellow recolour of the logo, so it reads on the dark
-                // sidebar without a backing plate.
-                Semantics(
-                  label: 'OciDeck',
-                  image: true,
-                  child: Image.asset(
-                    'assets/images/ocideck-logo-eu.png',
-                    width: 30,
-                    height: 30,
-                    fit: BoxFit.contain,
-                    filterQuality: FilterQuality.high,
+          _aboutFooter(labels.last),
+        ],
+      ),
+    );
+  }
+
+  /// The branded footer at the bottom of the sidebar. Doubles as the entry
+  /// point to the "Over OciDeck" pane: tapping it selects that tab and the
+  /// footer lights up like a selected nav item.
+  Widget _aboutFooter(String aboutLabel) {
+    final selected = _selectedTab == _aboutTabIndex;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 14),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(11),
+          onTap: () => setState(() => _selectedTab = _aboutTabIndex),
+          child: Tooltip(
+            message: aboutLabel,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 150),
+              padding: const EdgeInsets.fromLTRB(10, 10, 12, 10),
+              decoration: BoxDecoration(
+                color: selected
+                    ? Colors.white.withValues(alpha: 0.13)
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(11),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // EU-yellow recolour of the logo, so it reads on the dark
+                  // sidebar without a backing plate.
+                  Semantics(
+                    label: 'OciDeck',
+                    image: true,
+                    child: Image.asset(
+                      'assets/images/ocideck-logo-eu.png',
+                      width: 30,
+                      height: 30,
+                      fit: BoxFit.contain,
+                      filterQuality: FilterQuality.high,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 10),
-                const Text(
-                  'OciDeck',
-                  style: TextStyle(
-                    // EU-vlaggeel: leesbaar op de donkere/EU-blauwe zijbalk,
-                    // passend bij het geel-hertinte logo erboven.
-                    color: Color(0xFFFFCC00),
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 2.5,
+                  const SizedBox(width: 10),
+                  const Expanded(
+                    child: Text(
+                      'OciDeck',
+                      style: TextStyle(
+                        // EU-vlaggeel: leesbaar op de donkere/EU-blauwe
+                        // zijbalk, passend bij het geel-hertinte logo ernaast.
+                        color: Color(0xFFFFCC00),
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 2.5,
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                  Icon(
+                    Icons.info_outline,
+                    size: 16,
+                    color: selected
+                        ? Colors.white
+                        : Colors.white.withValues(alpha: 0.5),
+                  ),
+                ],
+              ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -881,102 +935,5 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
   Color _parseColor(String hex) {
     return _parseHexColor(hex);
-  }
-}
-
-class _HexColorDialog extends StatefulWidget {
-  final String initial;
-
-  const _HexColorDialog({required this.initial});
-
-  @override
-  State<_HexColorDialog> createState() => _HexColorDialogState();
-}
-
-class _HexColorDialogState extends State<_HexColorDialog> {
-  late final TextEditingController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController(text: widget.initial);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  String? _normalize(String raw) {
-    final up = raw.trim().toUpperCase();
-    final hex = up.startsWith('#') ? up : '#$up';
-    return RegExp(r'^#[0-9A-F]{6}$').hasMatch(hex) ? hex : null;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final normalized = _normalize(_controller.text);
-    return AlertDialog(
-      title: Text(l10n.d('Eigen kleur (hex)')),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: _parseHexColor(normalized ?? '#FFFFFF'),
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: AppTheme.slate300),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: TextField(
-                  controller: _controller,
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    labelText: l10n.d('Hexkleur'),
-                    hintText: '#33FF33',
-                    isDense: true,
-                    border: const OutlineInputBorder(),
-                  ),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'[#0-9a-fA-F]')),
-                    LengthLimitingTextInputFormatter(7),
-                  ],
-                  onChanged: (_) => setState(() {}),
-                  onSubmitted: (_) {
-                    final ok = _normalize(_controller.text);
-                    if (ok != null) Navigator.pop(context, ok);
-                  },
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(
-            l10n.d('Bijvoorbeeld #33FF33 voor een CRT-groen scherm.'),
-            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
-          ),
-        ],
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text(l10n.d('Annuleren')),
-        ),
-        FilledButton(
-          onPressed: normalized == null
-              ? null
-              : () => Navigator.pop(context, normalized),
-          child: Text(l10n.d('Toepassen')),
-        ),
-      ],
-    );
   }
 }

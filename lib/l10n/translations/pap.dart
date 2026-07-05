@@ -333,6 +333,39 @@ const _dutchSourcePap = {
   'Deze presentatie staat ook op een andere plek:':
       'E presentashon aki ta eksistí tambe na otro lugá:',
   'Opruimen…': 'Limpia…',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" ta referí na e ocicat, e rasa di pushi di e pushinan di Brenno de Winter. "Deck" ta e palabra ingles pa un set di slide. OciDeck ta transformá teksto simpel den un presentashon kuidá.',
+  'Adressen': 'Adresnan',
+  'Bestuur': 'Direktiva',
+  'Beveiliging': 'Seguridat',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (presidente), Jan Klopper (sekretario) i Astrid Oosenbrug (tesorero).',
+  'Contact': 'Kontakto',
+  'De katten van Brenno': 'E pushinan di Brenno',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'E maskotnan di OciDeck i proyektonan relashoná ta e ocicats di Brenno de Winter.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'E fundashon a wòrdu fundá riba 23 di òktober 2025 pa medio di akta notarial na Leeuwarden i tin su sede statutario na Noordwijk.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'E konfigurashonnan aki ta determiná kiko OciDeck por karga for di internet i ki rastronan ta keda atras riba e aparato aki. Nan ta separá for di bo deklarashon di privasidat i konsentimentu, ku bo ta haña na "Lisensia i Privasidat".',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Metanan di e fundashon:\n\n•  Stimulá software i hardware opensource pa infrastruktura digital sigur.\n•  Promové transparensia i reproducibilidat den prosesonan di seguridat.\n•  Organisá investigashon, entrenamentu i aktividatnan tokante resiliensia digital.\n•  Konektá siudadanonan, empresanan, gobièrnu i organisashonnan sosial ku otro.',
+  'E-mail': 'E-mail',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Balornan fundamental: seguridat, libertat i apertura, soberania, integridat, kompartimentu di konosementu, konfiabilidat, humanidat, skucha i konektá, "just culture" i sustenabilidat.',
+  'Licentie en Privacy': 'Lisensia i Privasidat',
+  'Mascotte van MIAUW.': 'Maskòt di MIAUW.',
+  'Mascotte van OpenKAT.': 'Maskòt di OpenKAT.',
+  'Mascotte van de checklisttool.': 'Maskòt di e hèrmènt di checklist.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeck ta wòrdu publiká pa Stichting LibreKAT. E fundashon ta traha riba un sosiedat digital mas sigur pa medio di seguridat di informashon habrí i verifikabel, ku énfasis riba kompartimentu di konosementu, formashon di komunidat i sostené solushonnan opensource.',
+  'Over OciDeck': 'Tokante OciDeck',
+  'Telefoon': 'Telefòn',
+  'Uitgever: Stichting LibreKAT': 'Publikadó: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Presentashonnan kuidá for di teksto simpel — liber, verifikabel i ku bo datonan riba bo mes aparato.',
+  'Waar komt de naam vandaan?': 'Di unda e nòmber ta bini?',
+  'Website van de stichting': 'Wèpsait di e fundashon',
 };
 
 const _dutchSourceAddPap = {

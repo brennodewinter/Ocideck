@@ -1324,4 +1324,37 @@ const _dutchSourceLt = {
   'Naar prullenbak': 'Į šiukšlinę',
   'Deze presentatie staat ook op een andere plek:':
       'Ši pateiktis yra ir kitoje vietoje:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" nurodo ocicatę — Brenno de Winter kačių veislę. "Deck" – angliškas žodis, reiškiantis skaidrių rinkinį. OciDeck iš paprasto teksto sukuria tvarkingą pristatymą.',
+  'Adressen': 'Adresai',
+  'Bestuur': 'Valdyba',
+  'Beveiliging': 'Saugumas',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (pirmininkas), Jan Klopper (sekretorius) ir Astrid Oosenbrug (iždininkas).',
+  'Contact': 'Kontaktai',
+  'De katten van Brenno': 'Brenno katės',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'OciDeck ir susijusių projektų talismanai yra Brenno de Winter ocicatės.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'Fondas įsteigtas notariniu aktu 2025 m. spalio 23 d. Leeuwarden mieste, o jo registruota buveinė yra Noordwijk.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Šie nustatymai nulemia, ką OciDeck gali įkelti iš interneto ir kokie pėdsakai lieka šiame įrenginyje. Jie atskirti nuo tavo privatumo pareiškimo ir sutikimo, kuriuos rasi skiltyje "Licencija ir privatumas".',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Fondo tikslai:\n\n•  Skatinti atvirojo kodo programinę ir aparatinę įrangą saugioms skaitmeninėms infrastruktūroms.\n•  Ugdyti skaidrumą ir atkuriamumą saugumo procesuose.\n•  Organizuoti su skaitmeniniu atsparumu susijusius tyrimus, mokymus ir veiklas.\n•  Sujungti tarpusavyje piliečius, įmones, valdžią ir visuomenines organizacijas.',
+  'E-mail': 'El. paštas',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Pagrindinės vertybės: saugumas, laisvė ir atvirumas, suverenumas, sąžiningumas, žinių dalijimasis, patikimumas, žmoniškumas, įsiklausymas ir jungimas, "just culture" bei tvarumas.',
+  'Licentie en Privacy': 'Licencija ir privatumas',
+  'Mascotte van MIAUW.': 'MIAUW talismanas.',
+  'Mascotte van OpenKAT.': 'OpenKAT talismanas.',
+  'Mascotte van de checklisttool.': 'Kontrolinio sąrašo įrankio talismanas.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeck leidžia Stichting LibreKAT. Fondas dirba dėl saugesnės skaitmeninės visuomenės per atvirą ir tikrinamą informacijos saugą, akcentuodamas žinių dalijimąsi, bendruomenės kūrimą ir atvirojo kodo sprendimų palaikymą.',
+  'Over OciDeck': 'Apie OciDeck',
+  'Telefoon': 'Telefonas',
+  'Uitgever: Stichting LibreKAT': 'Leidėjas: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Tvarkingi pristatymai iš paprasto teksto — laisvai, tikrinamai ir su tavo duomenimis tavo paties įrenginyje.',
+  'Waar komt de naam vandaan?': 'Iš kur kilo pavadinimas?',
+  'Website van de stichting': 'Fondo svetainė',
 };

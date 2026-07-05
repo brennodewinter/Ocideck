@@ -1333,4 +1333,38 @@ const _dutchSourceUk = {
   'Naar prullenbak': 'У смітник',
   'Deze presentatie staat ook op een andere plek:':
       'Ця презентація існує також в іншому місці:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" походить від оцикета — котячої породи котів Бренно де Вінтера. "Deck" — англійське слово для набору слайдів. OciDeck перетворює простий текст на охайну презентацію.',
+  'Adressen': 'Адреси',
+  'Bestuur': 'Правління',
+  'Beveiliging': 'Безпека',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Бренно де Вінтер (голова), Ян Клоппер (секретар) і Астрід Оосенбруг (скарбник).',
+  'Contact': 'Контакт',
+  'De katten van Brenno': 'Коти Бренно',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'Маскоти OciDeck і споріднених проєктів — це оцикети Бренно де Вінтера.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'Фундацію було засновано 23 жовтня 2025 року нотаріальним актом у Леувардені, її статутне місце перебування — у Нордвейку.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Ці налаштування визначають, що OciDeck може завантажувати з інтернету та які сліди залишаються на цьому пристрої. Вони не пов\'язані з твоєю заявою про конфіденційність і згодою, які ти знайдеш у розділі "Ліцензія та конфіденційність".',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Цілі фундації:\n\n•  Сприяти програмному та апаратному забезпеченню з відкритим кодом для безпечних цифрових інфраструктур.\n•  Сприяти прозорості та відтворюваності в процесах безпеки.\n•  Організовувати дослідження, тренінги та заходи щодо цифрової стійкості.\n•  Об\'єднувати громадян, підприємства, державу та організації громадянського суспільства.',
+  'E-mail': 'Електронна пошта',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Основні цінності: безпека, свобода й відкритість, суверенітет, доброчесність, обмін знаннями, надійність, людяність, уміння слухати й об\'єднувати, "just culture" та сталість.',
+  'Licentie en Privacy': 'Ліцензія та конфіденційність',
+  'Mascotte van MIAUW.': 'Маскот проєкту MIAUW.',
+  'Mascotte van OpenKAT.': 'Маскот проєкту OpenKAT.',
+  'Mascotte van de checklisttool.':
+      'Маскот інструмента для контрольних списків.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeck видає Stichting LibreKAT. Фундація працює над безпечнішим цифровим суспільством через відкриту та перевірювану інформаційну безпеку, з наголосом на обміні знаннями, формуванні спільноти та підтримці рішень з відкритим кодом.',
+  'Over OciDeck': 'Про OciDeck',
+  'Telefoon': 'Телефон',
+  'Uitgever: Stichting LibreKAT': 'Видавець: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Охайні презентації з простого тексту — вільні, перевірювані та з твоїми даними на твоєму власному пристрої.',
+  'Waar komt de naam vandaan?': 'Звідки походить назва?',
+  'Website van de stichting': 'Вебсайт фундації',
 };

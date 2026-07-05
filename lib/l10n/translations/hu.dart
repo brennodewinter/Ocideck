@@ -1321,4 +1321,37 @@ const _dutchSourceHu = {
   'Naar prullenbak': 'A kukába',
   'Deze presentatie staat ook op een andere plek:':
       'Ez a prezentáció máshol is létezik:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      'Az „Oci” az ocicatra utal, Brenno de Winter macskáinak fajtájára. A „Deck” az angol szó a diakészletre. Az OciDeck egyszerű szövegből ápolt prezentációt készít.',
+  'Adressen': 'Címek',
+  'Bestuur': 'Vezetőség',
+  'Beveiliging': 'Biztonság',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (elnök), Jan Klopper (titkár) és Astrid Oosenbrug (pénztáros).',
+  'Contact': 'Kapcsolat',
+  'De katten van Brenno': 'Brenno macskái',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'Az OciDeck és a kapcsolódó projektek kabalái Brenno de Winter ocicatjai.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'Az alapítványt 2025. október 23-án közjegyzői okirattal alapították Leeuwardenben, székhelye Noordwijkban van.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'Ezek a beállítások határozzák meg, hogy az OciDeck mit tölthet be az internetről, és milyen nyomok maradnak ezen az eszközön. Függetlenek az adatvédelmi nyilatkozatodtól és hozzájárulásodtól, amelyet a „Licenc és adatvédelem” alatt találsz.',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Az alapítvány céljai:\n\n•  A biztonságos digitális infrastruktúrákat szolgáló nyílt forráskódú szoftverek és hardverek ösztönzése.\n•  Az átláthatóság és a reprodukálhatóság előmozdítása a biztonsági folyamatokban.\n•  Kutatások, képzések és tevékenységek szervezése a digitális ellenálló képesség terén.\n•  A polgárok, vállalkozások, kormányzat és társadalmi szervezetek összekapcsolása.',
+  'E-mail': 'E-mail',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Alapértékek: biztonság, szabadság és nyitottság, szuverenitás, integritás, tudásmegosztás, megbízhatóság, emberség, meghallgatás és összekapcsolás, „just culture” és fenntarthatóság.',
+  'Licentie en Privacy': 'Licenc és adatvédelem',
+  'Mascotte van MIAUW.': 'A MIAUW kabalája.',
+  'Mascotte van OpenKAT.': 'Az OpenKAT kabalája.',
+  'Mascotte van de checklisttool.': 'Az ellenőrzőlista-eszköz kabalája.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'Az OciDeckt a Stichting LibreKAT adja ki. Az alapítvány egy biztonságosabb digitális társadalmon dolgozik nyílt, ellenőrizhető információbiztonság révén, hangsúlyt fektetve a tudásmegosztásra, a közösségépítésre és a nyílt forráskódú megoldások támogatására.',
+  'Over OciDeck': 'Az OciDeckről',
+  'Telefoon': 'Telefon',
+  'Uitgever: Stichting LibreKAT': 'Kiadó: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Ápolt prezentációk egyszerű szövegből — szabadon, ellenőrizhetően, az adataiddal a saját eszközödön.',
+  'Waar komt de naam vandaan?': 'Honnan ered a név?',
+  'Website van de stichting': 'Az alapítvány weboldala',
 };

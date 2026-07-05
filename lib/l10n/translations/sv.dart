@@ -1318,4 +1318,37 @@ const _dutchSourceSv = {
   'Naar prullenbak': 'Till papperskorgen',
   'Deze presentatie staat ook op een andere plek:':
       'Den här presentationen finns även på en annan plats:',
+  '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
+      '"Oci" syftar på ocicaten, kattrasen för Brenno de Winters katter. "Deck" är det engelska ordet för en bildserie. OciDeck gör en välgjord presentation av enkel text.',
+  'Adressen': 'Adresser',
+  'Bestuur': 'Styrelse',
+  'Beveiliging': 'Säkerhet',
+  'Brenno de Winter (voorzitter), Jan Klopper (secretaris) en Astrid Oosenbrug (penningmeester).':
+      'Brenno de Winter (ordförande), Jan Klopper (sekreterare) och Astrid Oosenbrug (kassör).',
+  'Contact': 'Kontakt',
+  'De katten van Brenno': 'Brennos katter',
+  'De mascottes van OciDeck en verwante projecten zijn de ocicats van Brenno de Winter.':
+      'Maskotarna för OciDeck och närliggande projekt är Brenno de Winters ocicats.',
+  'De stichting is op 23 oktober 2025 bij notariële akte opgericht te Leeuwarden en heeft haar statutaire zetel in Noordwijk.':
+      'Stiftelsen bildades den 23 oktober 2025 genom notariehandling i Leeuwarden och har sitt stadgeenliga säte i Noordwijk.',
+  'Deze instellingen bepalen wat OciDeck vanaf het internet mag laden en welke sporen op dit apparaat achterblijven. Ze staan los van je privacyverklaring en toestemming, die je bij "Licentie en Privacy" vindt.':
+      'De här inställningarna avgör vad OciDeck får läsa in från internet och vilka spår som lämnas kvar på den här enheten. De är oberoende av din integritetspolicy och ditt samtycke, som du hittar under "Licens och Integritet".',
+  'Doelstellingen van de stichting:\n\n•  Opensource-software en -hardware voor veilige digitale infrastructuren stimuleren.\n•  Transparantie en reproduceerbaarheid in beveiligingsprocessen bevorderen.\n•  Onderzoek, trainingen en activiteiten rond digitale weerbaarheid organiseren.\n•  Burgers, bedrijven, overheid en maatschappelijke organisaties met elkaar verbinden.':
+      'Stiftelsens mål:\n\n•  Främja programvara och hårdvara med öppen källkod för säker digital infrastruktur.\n•  Främja transparens och reproducerbarhet i säkerhetsprocesser.\n•  Organisera forskning, utbildning och aktiviteter kring digital motståndskraft.\n•  Förbinda medborgare, företag, det offentliga och civilsamhällesorganisationer med varandra.',
+  'E-mail': 'E-post',
+  'Kernwaarden: veiligheid, vrijheid en openheid, soevereiniteit, integriteit, kennisdeling, betrouwbaarheid, menselijkheid, luisteren en verbinden, "just culture" en duurzaamheid.':
+      'Kärnvärden: säkerhet, frihet och öppenhet, suveränitet, integritet, kunskapsdelning, tillförlitlighet, mänsklighet, att lyssna och förbinda, "just culture" och hållbarhet.',
+  'Licentie en Privacy': 'Licens och Integritet',
+  'Mascotte van MIAUW.': 'Maskot för MIAUW.',
+  'Mascotte van OpenKAT.': 'Maskot för OpenKAT.',
+  'Mascotte van de checklisttool.': 'Maskot för checklistverktyget.',
+  'OciDeck wordt uitgegeven door Stichting LibreKAT. De stichting werkt aan een veiligere digitale samenleving via open, controleerbare informatiebeveiliging, met de nadruk op kennisdeling, community-vorming en het ondersteunen van opensource-oplossingen.':
+      'OciDeck ges ut av Stichting LibreKAT. Stiftelsen arbetar för ett säkrare digitalt samhälle genom öppen, kontrollerbar informationssäkerhet, med tonvikt på kunskapsdelning, gemenskapsbyggande och stöd till lösningar med öppen källkod.',
+  'Over OciDeck': 'Om OciDeck',
+  'Telefoon': 'Telefon',
+  'Uitgever: Stichting LibreKAT': 'Utgivare: Stichting LibreKAT',
+  'Verzorgde presentaties uit eenvoudige tekst — vrij, controleerbaar en met je gegevens op je eigen apparaat.':
+      'Välgjorda presentationer av enkel text — fritt, kontrollerbart och med dina data på din egen enhet.',
+  'Waar komt de naam vandaan?': 'Var kommer namnet ifrån?',
+  'Website van de stichting': 'Stiftelsens webbplats',
 };
