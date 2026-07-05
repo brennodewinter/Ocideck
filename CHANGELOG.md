@@ -49,7 +49,7 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   mirror to the beamer in dual-screen mode.
 - **Online media by URL** — image and video slides accept an `http(s)` URL as
   the source, rendered live (no local copy). Off by default: the new
-  **Online media** privacy setting must be enabled before any remote source is
+  **Online media** security setting must be enabled before any remote source is
   fetched; until then the slide shows a placeholder with the URL. On export, a
   remote source also emits a clickable literal URL.
 - **YouTube/Vimeo embeds** — a video slide can embed a YouTube or Vimeo link,
@@ -62,6 +62,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 - **Redesigned settings dialog** — the settings window moves from a flat tab bar
   to a sidebar navigation (sections on the left, a titled content area on the
   right, a footer action bar), without changing any of the settings themselves.
+- **"Over OciDeck" screen** — a new About section in Settings, opened from the
+  OciDeck logo at the bottom of the settings sidebar. It explains where the name
+  comes from (the *Ocicat* breed of the author's cats plus a slide *deck*),
+  introduces publisher **Stichting LibreKAT** with its mission, contact details
+  and a link to librekat.nl, and shows the three mascot cats (Branie, Keiko,
+  Otis) with photos. Translated in all 30 non-Dutch languages.
 - **Title background can fill the whole slide** — a "fill slide" toggle on title
   slides shows the background image edge-to-edge (cover, cropping the overflow)
   instead of being limited to the zoom slider. Toggling it back off restores the
@@ -217,6 +223,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **Settings: "Privacy" is now "Licentie en Privacy", with a separate
+  "Beveiliging" (Security) tab.** The renamed tab keeps the licence/privacy
+  statement and the consent controls. The **Online media** toggle and the
+  crash-recovery-files control move to the new *Beveiliging* tab, since they are
+  security choices rather than privacy ones. The tab title and the new tab are
+  translated in all 30 non-Dutch languages.
 - **Bullet slides** can now carry an optional **subheading** under the title; the
   **two bullet columns** type can have an optional **heading above each column**,
   separate from the slide title.
@@ -249,6 +261,11 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   behavioural change; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ### Fixed
+- **Web: a saved deck no longer reads as "not saved yet".** On the web build,
+  saving is a browser download, which returns no file path, so the status bar's
+  filename slot stayed on "Not saved yet" right next to the green "Saved" chip.
+  It now shows the downloaded filename (with a tooltip explaining it went to your
+  downloads folder); desktop is unchanged.
 - **Consent dialog no longer crashes its action bar.** A `Spacer` in the
   `AlertDialog` actions (which are laid out in an OverflowBar, not a Flex) threw
   a layout error that the release build swallowed into a dark placeholder box
