@@ -62,7 +62,7 @@ class _FreeMarkdownEditorState extends State<FreeMarkdownEditor> {
         children: [
           Text(
             l10n.d('Markdown inhoud'),
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
               color: AppTheme.slate500,

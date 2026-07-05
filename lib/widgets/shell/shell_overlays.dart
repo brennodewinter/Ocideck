@@ -16,7 +16,7 @@ class _DropOverlay extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 22),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppTheme.paper,
               borderRadius: BorderRadius.circular(14),
               border: Border.all(color: AppTheme.blue400, width: 2),
             ),
@@ -31,7 +31,7 @@ class _DropOverlay extends StatelessWidget {
                 const SizedBox(height: 10),
                 Text(
                   context.l10n.d('Laat los om toe te voegen'),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                     color: AppTheme.slate800,
@@ -42,10 +42,7 @@ class _DropOverlay extends StatelessWidget {
                   context.l10n.d(
                     'Afbeeldingen → nieuwe slides · .md / .ocideck → openen',
                   ),
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: AppTheme.slate500,
-                  ),
+                  style: TextStyle(fontSize: 12, color: AppTheme.slate500),
                 ),
               ],
             ),

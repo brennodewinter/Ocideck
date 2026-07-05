@@ -141,7 +141,7 @@ class SlideTypeHelpBody extends StatelessWidget {
     final l10n = context.l10n;
     return Container(
       width: double.infinity,
-      color: Colors.white,
+      color: AppTheme.paper,
       padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
       child: Container(
         padding: const EdgeInsets.all(10),
@@ -158,7 +158,7 @@ class SlideTypeHelpBody extends StatelessWidget {
             Expanded(
               child: Text(
                 slideTypeHelpText(l10n, type),
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12.5,
                   height: 1.45,
                   color: AppTheme.slate700,

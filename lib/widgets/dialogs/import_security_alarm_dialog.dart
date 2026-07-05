@@ -13,7 +13,7 @@ class ImportSecurityAlarmDialog {
   ImportSecurityAlarmDialog._();
 
   static const _alarmRed = AppTheme.danger700;
-  static const _alarmBg = AppTheme.dangerBg;
+  static Color get _alarmBg => AppTheme.dangerBg;
 
   static Future<void> show(BuildContext context, ImportSecurityAlarm alarm) {
     final l10n = context.l10n;
@@ -24,10 +24,7 @@ class ImportSecurityAlarmDialog {
         return AlertDialog(
           icon: Container(
             padding: const EdgeInsets.all(10),
-            decoration: const BoxDecoration(
-              color: _alarmBg,
-              shape: BoxShape.circle,
-            ),
+            decoration: BoxDecoration(color: _alarmBg, shape: BoxShape.circle),
             child: const Icon(
               Icons.gpp_bad_outlined,
               color: _alarmRed,
@@ -52,15 +49,12 @@ class ImportSecurityAlarmDialog {
                     l10n.d(
                       'Deze presentatie is niet geopend. Het bestand bevat inhoud die code kan uitvoeren, en een presentatie hoort alleen gegevens te bevatten — niets uitvoerbaars.',
                     ),
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: AppTheme.slate700,
-                    ),
+                    style: TextStyle(fontSize: 13, color: AppTheme.slate700),
                   ),
                   const SizedBox(height: 16),
                   Text(
                     l10n.d('Gevonden:'),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
                       letterSpacing: 0.6,
@@ -123,7 +117,7 @@ class _FindingRow extends StatelessWidget {
                 child: Text(
                   '${ImportSecurityAlarmDialog.threatLabel(l10n, finding.kind)}'
                   ' · ${l10n.d('Regel')} ${finding.line}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
                     color: AppTheme.slate700,
@@ -144,7 +138,7 @@ class _FindingRow extends StatelessWidget {
             child: SelectableText(
               finding.evidence,
               maxLines: 3,
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'monospace',
                 fontSize: 11.5,
                 color: AppTheme.slate600,

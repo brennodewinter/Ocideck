@@ -31,10 +31,7 @@ Future<void> showSlideQualityDetailsDialog(
               children: [
                 Text(
                   formatSlideQualityCountSummary(l10n, result),
-                  style: const TextStyle(
-                    fontSize: 13,
-                    color: AppTheme.slate700,
-                  ),
+                  style: TextStyle(fontSize: 13, color: AppTheme.slate700),
                 ),
                 const SizedBox(height: 14),
                 for (final severity in MarkdownValidationSeverity.values)

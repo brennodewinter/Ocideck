@@ -298,14 +298,14 @@ class SlideThumbnail extends ConsumerWidget {
           Expanded(
             child: Text(
               l10n.d(slide.type.label),
-              style: const TextStyle(color: AppTheme.slate400, fontSize: 9),
+              style: TextStyle(color: AppTheme.slate400, fontSize: 9),
               overflow: TextOverflow.ellipsis,
             ),
           ),
           // Drag handle
           ReorderableDragStartListener(
             index: index,
-            child: const Padding(
+            child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 2),
               child: Icon(
                 Icons.drag_handle,
@@ -337,11 +337,7 @@ class SlideThumbnail extends ConsumerWidget {
             width: 20,
             height: 20,
             child: PopupMenuButton<String>(
-              icon: const Icon(
-                Icons.more_vert,
-                color: AppTheme.slate500,
-                size: 14,
-              ),
+              icon: Icon(Icons.more_vert, color: AppTheme.slate500, size: 14),
               padding: EdgeInsets.zero,
               itemBuilder: (_) => [
                 PopupMenuItem(value: 'copy', child: Text(l10n.d('Kopiëren'))),

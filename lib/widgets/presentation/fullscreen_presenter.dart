@@ -917,7 +917,7 @@ class _SectionLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
+      style: TextStyle(
         color: AppTheme.gray500,
         fontSize: 10,
         fontWeight: FontWeight.w700,

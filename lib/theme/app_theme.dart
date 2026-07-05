@@ -34,44 +34,79 @@ class AppPalette extends ThemeExtension<AppPalette> {
 }
 
 class AppTheme {
+  /// Of de app-chrome in donkere modus staat. Wordt in [OciDeckApp.build]
+  /// gelijkgezet aan het gekozen app-appearance-profiel (`appearance.isDark`),
+  /// zodat de mode-afhankelijke tokens hieronder meeschakelen met het thema.
+  static bool isDark = false;
+
+  /// Kies [light] of [dark] afhankelijk van [isDark]. Mode-afhankelijke tokens
+  /// zijn getters (niet const), dus een `const`-context die zo'n token gebruikt
+  /// moet z'n `const` laten vallen.
+  static Color _m(Color light, Color dark) => isDark ? dark : light;
+
   // Brand colours
   static const navy = Color(0xFF1C2B47);
   static const teal = Color(0xFF2E7D64);
   static const accent = Color(0xFF2563EB);
-  static const surface = Color(0xFFF8F9FA);
+  static Color get surface =>
+      _m(const Color(0xFFF8F9FA), const Color(0xFF14161B));
+
+  /// Wit "papier"-oppervlak voor editor-chrome (toolbars, panelen, dialogen).
+  /// In donkere modus een donker oppervlak. NIET gebruiken voor slide-inhoud —
+  /// een slide is een vast wit canvas en blijft `Colors.white`.
+  static Color get paper => _m(Colors.white, const Color(0xFF181B21));
+
   static const panelBg = Color(0xFF1E2028);
   static const panelFg = Color(0xFFE2E8F0);
 
-  // Het slate/blue-palet (Tailwind-tinten) van de editor-UI. Deze waarden
-  // stonden tot 90× hardcoded verspreid door lib/widgets/; via deze consts
-  // raakt een paletwijziging één plek in plaats van tientallen bestanden.
-  static const slate50 = Color(0xFFF8FAFC);
-  static const slate100 = Color(0xFFF1F5F9);
-  static const slate200 = Color(0xFFE2E8F0);
-  static const slate300 = Color(0xFFCBD5E1);
-  static const slate400 = Color(0xFF94A3B8);
-  static const slate500 = Color(0xFF64748B);
-  static const slate600 = Color(0xFF475569);
-  static const slate700 = Color(0xFF334155);
-  static const slate800 = Color(0xFF1E293B);
+  // Het slate-palet (Tailwind-tinten) van de editor-UI. Mode-afhankelijk: in
+  // donkere modus keert de licht/donker-oriëntatie om (50 = donkerste
+  // oppervlak, 800 = lichtste tekst), zodat bestaande usages meeschakelen.
+  static Color get slate50 =>
+      _m(const Color(0xFFF8FAFC), const Color(0xFF1C1F26));
+  static Color get slate100 =>
+      _m(const Color(0xFFF1F5F9), const Color(0xFF232730));
+  static Color get slate200 =>
+      _m(const Color(0xFFE2E8F0), const Color(0xFF2C313B));
+  static Color get slate300 =>
+      _m(const Color(0xFFCBD5E1), const Color(0xFF3A4150));
+  static Color get slate400 =>
+      _m(const Color(0xFF94A3B8), const Color(0xFF8B95A6));
+  static Color get slate500 =>
+      _m(const Color(0xFF64748B), const Color(0xFFAAB4C4));
+  static Color get slate600 =>
+      _m(const Color(0xFF475569), const Color(0xFFC6CEDA));
+  static Color get slate700 =>
+      _m(const Color(0xFF334155), const Color(0xFFDCE2EC));
+  static Color get slate800 =>
+      _m(const Color(0xFF1E293B), const Color(0xFFE8ECF3));
   static const blue400 = Color(0xFF60A5FA);
   static const blue500 = Color(0xFF3B82F6);
 
   // Neutraal grijs (Tailwind gray-schaal; kilter dan slate).
-  static const gray100 = Color(0xFFF3F4F6);
-  static const gray300 = Color(0xFFD1D5DB);
-  static const gray400 = Color(0xFF9CA3AF);
-  static const gray500 = Color(0xFF6B7280);
-  static const gray700 = Color(0xFF374151);
-  static const gray900 = Color(0xFF111827);
+  static Color get gray100 =>
+      _m(const Color(0xFFF3F4F6), const Color(0xFF222429));
+  static Color get gray300 =>
+      _m(const Color(0xFFD1D5DB), const Color(0xFF3A3D44));
+  static Color get gray400 =>
+      _m(const Color(0xFF9CA3AF), const Color(0xFF9CA3AF));
+  static Color get gray500 =>
+      _m(const Color(0xFF6B7280), const Color(0xFFAAB0BA));
+  static Color get gray700 =>
+      _m(const Color(0xFF374151), const Color(0xFFCED3DB));
+  static Color get gray900 =>
+      _m(const Color(0xFF111827), const Color(0xFFE8ECF3));
 
   // GitHub-flavoured neutralen (mermaid/markdown-previews).
-  static const ghSurface = Color(0xFFF6F8FA);
-  static const ghBorder = Color(0xFFE1E4E8);
-  static const ghInk = Color(0xFF24292E);
+  static Color get ghSurface =>
+      _m(const Color(0xFFF6F8FA), const Color(0xFF20242B));
+  static Color get ghBorder =>
+      _m(const Color(0xFFE1E4E8), const Color(0xFF2C313B));
+  static Color get ghInk =>
+      _m(const Color(0xFF24292E), const Color(0xFFDCE2EC));
 
-  /// Primaire inkt-kleur voor tekst (slate900-achtig).
-  static const ink = Color(0xFF0F172A);
+  /// Primaire inkt-kleur voor tekst (slate900-achtig; licht in donkere modus).
+  static Color get ink => _m(const Color(0xFF0F172A), const Color(0xFFE8ECF3));
 
   // Amber-schaal (generiek — waarschuwingen, markeringen, notitie-accent).
   static const amber500 = Color(0xFFF59E0B);
@@ -83,38 +118,52 @@ class AppTheme {
   // Gebruikt door o.a. het kwaliteitspaneel en per-slide controls. Eén plek
   // i.p.v. tientallen verspreide Color(0xFF…)-literals; ook de basis voor een
   // latere donkere modus.
-  static const successBg = Color(0xFFECFDF5);
-  static const successBgSoft = Color(0xFFA7F3D0);
-  static const successFg = Color(0xFF047857);
+  static Color get successBg =>
+      _m(const Color(0xFFECFDF5), const Color(0xFF10281F));
+  static Color get successBgSoft =>
+      _m(const Color(0xFFA7F3D0), const Color(0xFF14503B));
+  static Color get successFg =>
+      _m(const Color(0xFF047857), const Color(0xFF6EE7B7));
   static const success600 = Color(0xFF2E7D32);
   static const success700 = Color(0xFF15803D);
   static const success800 = Color(0xFF166534);
   static const successSoft = Color(0xFF7DD3A7);
-  static const warningBg = Color(0xFFFEF3C7);
-  static const warningBgSoft = Color(0xFFFDE68A);
-  static const warningFg = Color(0xFF92400E);
-  static const dangerBg = Color(0xFFFEE2E2);
-  static const dangerBgSoft = Color(0xFFFECACA);
-  static const dangerFg = Color(0xFFD32F2F); // Material red 700
+  static Color get warningBg =>
+      _m(const Color(0xFFFEF3C7), const Color(0xFF2E2410));
+  static Color get warningBgSoft =>
+      _m(const Color(0xFFFDE68A), const Color(0xFF4A3A12));
+  static Color get warningFg =>
+      _m(const Color(0xFF92400E), const Color(0xFFFCD34D));
+  static Color get dangerBg =>
+      _m(const Color(0xFFFEE2E2), const Color(0xFF2E1616));
+  static Color get dangerBgSoft =>
+      _m(const Color(0xFFFECACA), const Color(0xFF4A1E1E));
+  static Color get dangerFg =>
+      _m(const Color(0xFFD32F2F), const Color(0xFFF87171));
   static const danger500 = Color(0xFFEF4444);
   static const danger600 = Color(0xFFDC2626);
   static const danger700 = Color(0xFFB91C1C);
   static const danger800 = Color(0xFFC62828);
   static const dangerPlain = Color(0xFFCC0000);
-  static const infoBg = Color(0xFFEFF6FF);
+  static Color get infoBg =>
+      _m(const Color(0xFFEFF6FF), const Color(0xFF15202E));
 
   /// Lichtblauwe accent-tint (info-state controls).
-  static const infoSurface = Color(0xFFF0F9FF);
+  static Color get infoSurface =>
+      _m(const Color(0xFFF0F9FF), const Color(0xFF14202B));
 
   /// Blauwe accent-tint (bijv. CSV-koppeling in de grafiek-editor).
   static const infoAccent = Color(0xFF0369A1);
 
   // ── Sprekersnotities-accent (amber) ───────────────────────────────────────
   // Icoon/accent/focus gebruiken de generieke amber-schaal (amber700/600/500).
-  static const notesBg = Color(0xFFFFFBEB);
+  static Color get notesBg =>
+      _m(const Color(0xFFFFFBEB), const Color(0xFF2A2410));
   static const notesBorder = Color(0xFFFCD34D);
-  static const notesText = Color(0xFF78350F);
-  static const notesCodeBg = Color(0xFFFFF7ED);
+  static Color get notesText =>
+      _m(const Color(0xFF78350F), const Color(0xFFF5D9A8));
+  static Color get notesCodeBg =>
+      _m(const Color(0xFFFFF7ED), const Color(0xFF241D12));
 
   // ── Gebruikersnotities-accent (blauw; tegenhanger van de amber notities) ───
   // De achtergrond en code-achtergrond delen [infoBg].

@@ -38,7 +38,7 @@ class _EditorToolbar extends StatelessWidget {
     ];
 
     return Container(
-      color: Colors.white,
+      color: AppTheme.paper,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: Row(
         children: [
@@ -264,7 +264,7 @@ class _ToolbarField extends StatelessWidget {
       children: [
         Text(
           l10n.d(label),
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 9,
             fontWeight: FontWeight.w700,
             color: AppTheme.slate400,
@@ -311,7 +311,7 @@ class _SlideTimingControl extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
       child: Row(
         children: [
-          const Icon(Icons.timer_outlined, size: 14, color: AppTheme.slate500),
+          Icon(Icons.timer_outlined, size: 14, color: AppTheme.slate500),
           const SizedBox(width: 8),
           Checkbox(
             value: enabled,
@@ -322,7 +322,7 @@ class _SlideTimingControl extends StatelessWidget {
           const SizedBox(width: 4),
           Text(
             l10n.d('Automatisch doorgaan na'),
-            style: const TextStyle(fontSize: 12, color: AppTheme.slate600),
+            style: TextStyle(fontSize: 12, color: AppTheme.slate600),
           ),
           const SizedBox(width: 8),
           // Minus knop
@@ -385,7 +385,7 @@ class _SlideLogoControl extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
       child: Row(
         children: [
-          const Icon(
+          Icon(
             Icons.branding_watermark_outlined,
             size: 14,
             color: AppTheme.slate500,
@@ -400,7 +400,7 @@ class _SlideLogoControl extends StatelessWidget {
           const SizedBox(width: 4),
           Text(
             l10n.d('Logo tonen op deze slide'),
-            style: const TextStyle(fontSize: 12, color: AppTheme.slate600),
+            style: TextStyle(fontSize: 12, color: AppTheme.slate600),
           ),
         ],
       ),
@@ -423,11 +423,7 @@ class _SlideFooterControl extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
       child: Row(
         children: [
-          const Icon(
-            Icons.short_text_outlined,
-            size: 14,
-            color: AppTheme.slate500,
-          ),
+          Icon(Icons.short_text_outlined, size: 14, color: AppTheme.slate500),
           const SizedBox(width: 8),
           Checkbox(
             value: slide.showFooter,
@@ -438,7 +434,7 @@ class _SlideFooterControl extends StatelessWidget {
           const SizedBox(width: 4),
           Text(
             l10n.d('Footer tonen op deze slide'),
-            style: const TextStyle(fontSize: 12, color: AppTheme.slate600),
+            style: TextStyle(fontSize: 12, color: AppTheme.slate600),
           ),
         ],
       ),
@@ -461,7 +457,7 @@ class _SlideTableEditControl extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
       child: Row(
         children: [
-          const Icon(Icons.edit_outlined, size: 14, color: AppTheme.slate500),
+          Icon(Icons.edit_outlined, size: 14, color: AppTheme.slate500),
           const SizedBox(width: 8),
           Checkbox(
             value: slide.tableEditable,
@@ -474,7 +470,7 @@ class _SlideTableEditControl extends StatelessWidget {
           Expanded(
             child: Text(
               l10n.d('Tabel bewerkbaar tijdens presenteren'),
-              style: const TextStyle(fontSize: 12, color: AppTheme.slate600),
+              style: TextStyle(fontSize: 12, color: AppTheme.slate600),
             ),
           ),
         ],
@@ -498,21 +494,17 @@ class _SlideTlpControl extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
       child: Row(
         children: [
-          const Icon(Icons.shield_outlined, size: 14, color: AppTheme.slate500),
+          Icon(Icons.shield_outlined, size: 14, color: AppTheme.slate500),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               l10n.d('TLP van deze slide'),
-              style: const TextStyle(fontSize: 12, color: AppTheme.slate600),
+              style: TextStyle(fontSize: 12, color: AppTheme.slate600),
             ),
           ),
           Tooltip(
             message: slideTlpHelpText(l10n),
-            child: const Icon(
-              Icons.info_outline,
-              size: 14,
-              color: AppTheme.slate400,
-            ),
+            child: Icon(Icons.info_outline, size: 14, color: AppTheme.slate400),
           ),
           const SizedBox(width: 8),
           DropdownButtonHideUnderline(
@@ -520,7 +512,7 @@ class _SlideTlpControl extends StatelessWidget {
               value: slide.tlp,
               isDense: true,
               borderRadius: BorderRadius.circular(6),
-              style: const TextStyle(fontSize: 12, color: AppTheme.ink),
+              style: TextStyle(fontSize: 12, color: AppTheme.ink),
               items: [
                 for (final level in TlpLevel.values)
                   DropdownMenuItem(
@@ -573,7 +565,7 @@ class _SlideSettingsToggle extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.tune, size: 15, color: AppTheme.slate500),
+              Icon(Icons.tune, size: 15, color: AppTheme.slate500),
               if (slide.tlp != TlpLevel.none) ...[
                 const SizedBox(width: 5),
                 Container(
@@ -587,7 +579,7 @@ class _SlideSettingsToggle extends StatelessWidget {
                   ),
                   child: Text(
                     slide.tlp.label,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w700,
                       color: AppTheme.slate700,

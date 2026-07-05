@@ -164,7 +164,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                           padding: const EdgeInsets.only(bottom: 3),
                           child: Text(
                             '•  ${s.label}  ·  ${_formatWhen(s.savedAt)}',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 12.5,
                               color: AppTheme.slate600,
                             ),

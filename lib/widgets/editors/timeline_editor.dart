@@ -254,7 +254,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
               padding: const EdgeInsets.only(top: 8),
               child: ReorderableDragStartListener(
                 index: i,
-                child: const Icon(
+                child: Icon(
                   Icons.drag_indicator,
                   size: 16,
                   color: AppTheme.slate300,
@@ -321,7 +321,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
               constraints: const BoxConstraints(minWidth: 28),
             ),
             IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.remove_circle_outline,
                 size: 18,
                 color: AppTheme.slate500,
@@ -348,7 +348,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
       padding: const EdgeInsets.only(top: 12),
       child: Row(
         children: [
-          const Icon(Icons.timer_outlined, size: 18, color: AppTheme.slate500),
+          Icon(Icons.timer_outlined, size: 18, color: AppTheme.slate500),
           const SizedBox(width: 8),
           Text(
             context.l10n.d('Activatieduur'),

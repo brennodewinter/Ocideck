@@ -647,16 +647,16 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   Widget _contentHeader(String title) {
     return Container(
       padding: const EdgeInsets.fromLTRB(28, 18, 14, 16),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        border: Border(bottom: BorderSide(color: AppTheme.iceBlue)),
+      decoration: BoxDecoration(
+        color: AppTheme.paper,
+        border: const Border(bottom: BorderSide(color: AppTheme.iceBlue)),
       ),
       child: Row(
         children: [
           Expanded(
             child: Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
                 color: AppTheme.slate800,
@@ -679,9 +679,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   Widget _footerBar(AppLocalizations l10n) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: AppTheme.iceBlue)),
+      decoration: BoxDecoration(
+        color: AppTheme.paper,
+        border: const Border(top: BorderSide(color: AppTheme.iceBlue)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -900,7 +900,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       padding: const EdgeInsets.only(bottom: 8),
       child: Text(
         text.toUpperCase(),
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 10,
           fontWeight: FontWeight.w700,
           color: AppTheme.slate500,
@@ -929,7 +929,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     return BoxDecoration(
       border: Border.all(color: AppTheme.slate300),
       borderRadius: BorderRadius.circular(6),
-      color: Colors.white,
+      color: AppTheme.paper,
     );
   }
 

@@ -131,7 +131,7 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
     if (widget.matchCount == 0) {
       return Text(
         l10n.d('Geen resultaten'),
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 11,
           color: AppTheme.slate400,
           fontWeight: FontWeight.w600,
@@ -182,7 +182,7 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
                         ),
                         border: const OutlineInputBorder(),
                         filled: true,
-                        fillColor: Colors.white,
+                        fillColor: AppTheme.paper,
                       ),
                     ),
                   ),
@@ -233,7 +233,7 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
                           ),
                           border: const OutlineInputBorder(),
                           filled: true,
-                          fillColor: Colors.white,
+                          fillColor: AppTheme.paper,
                         ),
                       ),
                     ),

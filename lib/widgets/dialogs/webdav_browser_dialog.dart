@@ -143,7 +143,7 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
           Expanded(
             child: Text(
               _path.isEmpty ? '/' : '/$_path',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
                 color: AppTheme.slate600,
                 fontFamily: 'monospace',
@@ -166,7 +166,7 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
       return Center(
         child: Text(
           l10n.d('Deze map is leeg'),
-          style: const TextStyle(color: AppTheme.slate400),
+          style: TextStyle(color: AppTheme.slate400),
         ),
       );
     }
@@ -210,7 +210,7 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.cloud_off, size: 40, color: AppTheme.slate400),
+            Icon(Icons.cloud_off, size: 40, color: AppTheme.slate400),
             const SizedBox(height: 12),
             Text(
               isConfig
@@ -221,7 +221,7 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
                       'Kon de map niet laden. Controleer je verbinding en instellingen.',
                     ),
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 13, color: AppTheme.slate500),
+              style: TextStyle(fontSize: 13, color: AppTheme.slate500),
             ),
             const SizedBox(height: 14),
             OutlinedButton.icon(

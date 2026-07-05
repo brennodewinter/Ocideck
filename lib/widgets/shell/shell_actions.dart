@@ -418,7 +418,7 @@ class _UrlImportDialogState extends State<_UrlImportDialog> {
               l10n.d(
                 'Plak de link naar een .ocideck-pakket of een Marp-markdownbestand.',
               ),
-              style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
+              style: TextStyle(fontSize: 12, color: AppTheme.slate500),
             ),
             const SizedBox(height: 12),
             TextField(

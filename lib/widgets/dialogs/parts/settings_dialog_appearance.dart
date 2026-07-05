@@ -480,7 +480,7 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
                   ),
                 ],
               ),
-              style: const TextStyle(fontSize: 12, color: AppTheme.slate700),
+              style: TextStyle(fontSize: 12, color: AppTheme.slate700),
             ),
           ),
         ],

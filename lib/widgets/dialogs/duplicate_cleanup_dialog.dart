@@ -159,10 +159,7 @@ class _DuplicateCleanupDialogState
             ? Center(
                 child: Text(
                   l10n.d('Geen dubbele presentaties gevonden.'),
-                  style: const TextStyle(
-                    color: AppTheme.slate500,
-                    fontSize: 13,
-                  ),
+                  style: TextStyle(color: AppTheme.slate500, fontSize: 13),
                 ),
               )
             : ListView(
@@ -239,7 +236,7 @@ class _DuplicateCleanupDialogState
               child: Text(
                 '${displayFolder(path, homeDir: widget.homeDir, osHome: osHomeDirectory)}'
                 '  ·  ${p.basename(path)}${date.isEmpty ? '' : '  ·  $date'}',
-                style: const TextStyle(fontSize: 12, color: AppTheme.slate600),
+                style: TextStyle(fontSize: 12, color: AppTheme.slate600),
                 overflow: TextOverflow.ellipsis,
               ),
             ),

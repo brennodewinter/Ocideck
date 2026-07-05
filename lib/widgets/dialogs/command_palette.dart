@@ -196,7 +196,7 @@ class _CommandPaletteState extends State<CommandPalette> {
       padding: const EdgeInsets.fromLTRB(14, 8, 12, 8),
       child: Row(
         children: [
-          const Icon(Icons.search, size: 20, color: AppTheme.slate400),
+          Icon(Icons.search, size: 20, color: AppTheme.slate400),
           const SizedBox(width: 10),
           Expanded(
             child: TextField(
@@ -277,7 +277,7 @@ class _CommandPaletteState extends State<CommandPalette> {
       ),
       child: Text(
         text,
-        style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
+        style: TextStyle(fontSize: 11, color: AppTheme.slate500),
       ),
     );
   }
@@ -288,7 +288,7 @@ class _CommandPaletteState extends State<CommandPalette> {
       child: Center(
         child: Text(
           l10n.d('Geen resultaten'),
-          style: const TextStyle(fontSize: 13, color: AppTheme.slate500),
+          style: TextStyle(fontSize: 13, color: AppTheme.slate500),
         ),
       ),
     );
@@ -298,7 +298,7 @@ class _CommandPaletteState extends State<CommandPalette> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
       child: DefaultTextStyle(
-        style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
+        style: TextStyle(fontSize: 11, color: AppTheme.slate500),
         child: Row(
           children: [
             _footerHint('↑↓', l10n.d('Kiezen')),

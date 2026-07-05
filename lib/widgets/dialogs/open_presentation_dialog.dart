@@ -308,7 +308,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
           Text(
             message,
             textAlign: TextAlign.center,
-            style: const TextStyle(color: AppTheme.slate500, fontSize: 13),
+            style: TextStyle(color: AppTheme.slate500, fontSize: 13),
           ),
         ],
       ),
@@ -375,7 +375,7 @@ class _PresentationRow extends StatelessWidget {
                             Flexible(
                               child: Text(
                                 title,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w700,
                                   color: AppTheme.slate800,
@@ -405,7 +405,7 @@ class _PresentationRow extends StatelessWidget {
                             '${displayFolder(presentation.path, homeDir: scanRoot, osHome: osHomeDirectory)}'
                             '  ·  ${presentation.fileName}'
                             '  ·  ${deck.slides.length} ${l10n.t('slides')}',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 11,
                               color: AppTheme.slate400,
                             ),
@@ -455,7 +455,7 @@ class _PresentationRow extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 hit.snippet,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 12,
                                   color: AppTheme.slate600,
                                 ),
@@ -472,7 +472,7 @@ class _PresentationRow extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 4, top: 2),
                       child: Text(
                         '+ ${hits.length - 4} ${l10n.d('meer treffer(s)')}',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 11,
                           color: AppTheme.slate400,
                         ),

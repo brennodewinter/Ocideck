@@ -477,7 +477,7 @@ class _TlpChip extends StatelessWidget {
                 if (level == tlp) ...[
                   const SizedBox(width: 12),
                   const Spacer(),
-                  const Icon(Icons.check, size: 16, color: AppTheme.slate600),
+                  Icon(Icons.check, size: 16, color: AppTheme.slate600),
                 ],
               ],
             ),

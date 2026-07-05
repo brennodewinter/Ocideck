@@ -35,7 +35,7 @@ extension _SettingsPrivacy on _SettingsDialogState {
                 l10n.d(
                   'U kunt uw toestemming op elk moment intrekken. Na intrekking moet u deze voorwaarden opnieuw accepteren.',
                 ),
-                style: const TextStyle(fontSize: 11, color: AppTheme.slate600),
+                style: TextStyle(fontSize: 11, color: AppTheme.slate600),
               ),
             ],
           ),

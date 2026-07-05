@@ -183,7 +183,7 @@ class _VideoSlideEditorState extends State<VideoSlideEditor> {
               l10n.d(
                 'Speel het segment van deze slide af in het voorbeeld en knip op het punt waar je wilt splitsen: het tweede deel komt op een nieuwe slide.',
               ),
-              style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
+              style: TextStyle(fontSize: 11, color: AppTheme.slate500),
             ),
             const SizedBox(height: 8),
             Row(

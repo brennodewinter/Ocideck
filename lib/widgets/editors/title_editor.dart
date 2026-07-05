@@ -86,7 +86,7 @@ class _TitleEditorState extends ConsumerState<TitleEditor>
           l10n.d(
             'De afbeelding wordt schermvullend als achtergrond getoond. Gebruik de waas als de titel meer rust of contrast nodig heeft.',
           ),
-          style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
+          style: TextStyle(fontSize: 11, color: AppTheme.slate500),
         ),
         const SizedBox(height: 8),
         ImagePickerBar(

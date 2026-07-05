@@ -375,14 +375,14 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: Row(
         children: [
-          const Icon(Icons.code, size: 14, color: AppTheme.warningFg),
+          Icon(Icons.code, size: 14, color: AppTheme.warningFg),
           const SizedBox(width: 6),
           Expanded(
             child: Text(
               l10n.d(
                 'Markdown modus — bewerk de volledige presentatie als Marp Markdown',
               ),
-              style: const TextStyle(fontSize: 11, color: AppTheme.warningFg),
+              style: TextStyle(fontSize: 11, color: AppTheme.warningFg),
             ),
           ),
           TextButton.icon(
@@ -429,7 +429,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                 fontSize: 13,
                 height: 1.5,
               ),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(8, 16, 16, 16),
                 border: InputBorder.none,
                 filled: true,

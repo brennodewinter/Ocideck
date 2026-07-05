@@ -229,15 +229,11 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(
-            Icons.cloud_off_outlined,
-            color: AppTheme.slate400,
-            size: 32,
-          ),
+          Icon(Icons.cloud_off_outlined, color: AppTheme.slate400, size: 32),
           const SizedBox(height: 8),
           Text(
             context.l10n.d('Online media staat uit'),
-            style: const TextStyle(
+            style: TextStyle(
               color: AppTheme.slate500,
               fontSize: 12,
               fontWeight: FontWeight.w600,
@@ -247,7 +243,7 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
           const SizedBox(height: 4),
           Text(
             url,
-            style: const TextStyle(color: AppTheme.slate400, fontSize: 10),
+            style: TextStyle(color: AppTheme.slate400, fontSize: 10),
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -267,10 +263,7 @@ Widget _mediaPlaceholder(IconData icon, String label) {
         children: [
           Icon(icon, color: AppTheme.slate400, size: 32),
           const SizedBox(height: 6),
-          Text(
-            label,
-            style: const TextStyle(color: AppTheme.slate400, fontSize: 12),
-          ),
+          Text(label, style: TextStyle(color: AppTheme.slate400, fontSize: 12)),
         ],
       ),
     ),
@@ -297,15 +290,11 @@ Widget _imagePlaceholder(BuildContext context) {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(
-                Icons.image_outlined,
-                color: AppTheme.slate400,
-                size: 24,
-              ),
+              Icon(Icons.image_outlined, color: AppTheme.slate400, size: 24),
               const SizedBox(height: 4),
               Text(
                 context.l10n.d('Afbeelding'),
-                style: const TextStyle(color: AppTheme.slate400, fontSize: 10),
+                style: TextStyle(color: AppTheme.slate400, fontSize: 10),
               ),
             ],
           ),

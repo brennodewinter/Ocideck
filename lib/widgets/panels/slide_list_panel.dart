@@ -480,12 +480,8 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         decoration: InputDecoration(
           isDense: true,
           hintText: l10n.d('Zoek in slides…'),
-          hintStyle: const TextStyle(color: AppTheme.gray500, fontSize: 12),
-          prefixIcon: const Icon(
-            Icons.search,
-            size: 15,
-            color: AppTheme.gray500,
-          ),
+          hintStyle: TextStyle(color: AppTheme.gray500, fontSize: 12),
+          prefixIcon: Icon(Icons.search, size: 15, color: AppTheme.gray500),
           prefixIconConstraints: const BoxConstraints(
             minWidth: 30,
             minHeight: 30,
@@ -497,7 +493,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                   iconSize: 14,
                   splashRadius: 14,
                   tooltip: l10n.d('Zoekopdracht wissen'),
-                  icon: const Icon(Icons.clear, color: AppTheme.gray500),
+                  icon: Icon(Icons.clear, color: AppTheme.gray500),
                   onPressed: () => setState(() {
                     _searchController.clear();
                     _query = '';
@@ -552,7 +548,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
               Text(
                 '${l10n.d('Geen slides met')} "$query"',
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: AppTheme.slate400, fontSize: 12),
+                style: TextStyle(color: AppTheme.slate400, fontSize: 12),
               ),
             ],
           ),
@@ -743,7 +739,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                       children: [
                         Text(
                           l10n.d('SLIDES'),
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: AppTheme.slate400,
                             fontSize: 10,
                             fontWeight: FontWeight.w700,
@@ -755,7 +751,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                           searching
                               ? '$matchCount / ${deck.slides.length}'
                               : '${deck.slides.length}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: AppTheme.slate500,
                             fontSize: 10,
                           ),

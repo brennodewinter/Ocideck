@@ -48,7 +48,7 @@ const double kTitleOverlayAlpha = 0.62;
 const double kTitleSubtitleAlpha = 0.72;
 
 const Color _lightText = Colors.white;
-const Color _darkText = AppTheme.gray900;
+Color _darkText = AppTheme.gray900;
 
 Color _effectiveTextColor(ThemeProfile theme, Slide slide) {
   final hex = slide.titleTextColorOverride.isNotEmpty

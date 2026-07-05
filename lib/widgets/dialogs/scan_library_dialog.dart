@@ -174,7 +174,7 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
           Text(
             '${l10n.d('Bekende mappen worden doorzocht…')}'
             '$phase  ·  ${_hits.length} ${l10n.d('gevonden')}',
-            style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate500),
             overflow: TextOverflow.ellipsis,
           ),
         ],
@@ -182,7 +182,7 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
     }
     return Text(
       '${_hits.length} ${l10n.d('presentatie(s) gevonden')}',
-      style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
+      style: TextStyle(fontSize: 11, color: AppTheme.slate500),
     );
   }
 
@@ -252,7 +252,7 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
           Text(
             message,
             textAlign: TextAlign.center,
-            style: const TextStyle(color: AppTheme.slate500, fontSize: 13),
+            style: TextStyle(color: AppTheme.slate500, fontSize: 13),
           ),
         ],
       ),
@@ -298,7 +298,7 @@ class _HitRow extends StatelessWidget {
                       Flexible(
                         child: Text(
                           hit.displayTitle,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
                             color: AppTheme.slate800,
@@ -329,10 +329,7 @@ class _HitRow extends StatelessWidget {
                     child: Text(
                       '${displayFolder(hit.path, homeDir: homeDir, osHome: osHomeDirectory)}'
                       '  ·  ${hit.fileName}',
-                      style: const TextStyle(
-                        fontSize: 11,
-                        color: AppTheme.slate400,
-                      ),
+                      style: TextStyle(fontSize: 11, color: AppTheme.slate400),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),

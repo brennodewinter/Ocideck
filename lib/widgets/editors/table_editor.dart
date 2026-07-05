@@ -205,7 +205,7 @@ class _TableEditorState extends State<TableEditor> {
           child: Text(
             '${l10n.d('Tip: druk op Enter binnen een cel voor een nieuwe regel.')}\n'
             '${l10n.d('Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.')}',
-            style: const TextStyle(fontSize: 11, color: AppTheme.slate500),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate500),
           ),
         ),
         _buildColumnControls(),
@@ -240,7 +240,7 @@ class _TableEditorState extends State<TableEditor> {
             Expanded(
               child: Center(
                 child: IconButton(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.delete_outline,
                     size: 16,
                     color: AppTheme.slate500,
@@ -311,7 +311,7 @@ class _TableEditorState extends State<TableEditor> {
             width: _rowActionWidth,
             height: 40,
             child: IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.remove_circle_outline,
                 size: 18,
                 color: AppTheme.slate500,

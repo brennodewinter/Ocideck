@@ -357,7 +357,7 @@ class _ExportDialogState extends State<ExportDialog> {
         children: [
           Text(
             _phase,
-            style: const TextStyle(fontSize: 13, color: AppTheme.slate700),
+            style: TextStyle(fontSize: 13, color: AppTheme.slate700),
           ),
           const SizedBox(height: 12),
           ClipRRect(
@@ -368,7 +368,7 @@ class _ExportDialogState extends State<ExportDialog> {
             const SizedBox(height: 8),
             Text(
               counter,
-              style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
+              style: TextStyle(fontSize: 11, color: AppTheme.slate400),
             ),
           ],
         ],
@@ -420,7 +420,7 @@ class _ExportDialogState extends State<ExportDialog> {
               'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.',
             ),
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
+            style: TextStyle(fontSize: 12, color: AppTheme.slate500),
           ),
         ],
       );
@@ -442,7 +442,7 @@ class _ExportDialogState extends State<ExportDialog> {
           Text(
             formatQualityExportReason(l10n, widget.qualityResult),
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
+            style: TextStyle(fontSize: 12, color: AppTheme.slate500),
           ),
           const SizedBox(height: 12),
           OutlinedButton.icon(
@@ -475,7 +475,7 @@ class _ExportDialogState extends State<ExportDialog> {
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
             l10n.t('exportIntro'),
-            style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
+            style: TextStyle(fontSize: 12, color: AppTheme.slate500),
           ),
         ),
         _exportButton(
@@ -501,7 +501,7 @@ class _ExportDialogState extends State<ExportDialog> {
             l10n.d(
               'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.',
             ),
-            style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
         const SizedBox(height: 8),
@@ -534,7 +534,7 @@ class _ExportDialogState extends State<ExportDialog> {
               padding: const EdgeInsets.only(top: 4),
               child: Text(
                 _compress ? l10n.t('compressedHelp') : l10n.t('losslessHelp'),
-                style: const TextStyle(fontSize: 11, color: AppTheme.slate400),
+                style: TextStyle(fontSize: 11, color: AppTheme.slate400),
               ),
             ),
           ],
@@ -554,13 +554,13 @@ class _ExportDialogState extends State<ExportDialog> {
       ),
       child: Row(
         children: [
-          const Icon(Icons.task_alt, size: 16, color: AppTheme.successFg),
+          Icon(Icons.task_alt, size: 16, color: AppTheme.successFg),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               '${l10n.d('Klaar voor export')} — '
               '${l10n.d('Geen kwaliteitsproblemen gevonden')}',
-              style: const TextStyle(fontSize: 11, color: AppTheme.successFg),
+              style: TextStyle(fontSize: 11, color: AppTheme.successFg),
             ),
           ),
         ],

@@ -95,7 +95,7 @@ class _BulkActionBar extends StatelessWidget {
           Expanded(
             child: Text(
               '$count ${l10n.d('geselecteerd')}',
-              style: const TextStyle(
+              style: TextStyle(
                 color: AppTheme.slate200,
                 fontSize: 11,
                 fontWeight: FontWeight.w600,

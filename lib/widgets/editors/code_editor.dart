@@ -97,7 +97,7 @@ class _CodeEditorState extends State<CodeEditor> {
               Flexible(
                 child: Text(
                   l10n.d('Programmeertaal'),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                     color: AppTheme.slate500,
@@ -110,7 +110,7 @@ class _CodeEditorState extends State<CodeEditor> {
                 value: items.any((e) => e.$1 == current) ? current : '',
                 isDense: true,
                 borderRadius: BorderRadius.circular(6),
-                style: const TextStyle(fontSize: 12, color: AppTheme.ink),
+                style: TextStyle(fontSize: 12, color: AppTheme.ink),
                 items: [
                   for (final (id, label) in items)
                     DropdownMenuItem(value: id, child: Text(label)),
@@ -125,7 +125,7 @@ class _CodeEditorState extends State<CodeEditor> {
           const SizedBox(height: 16),
           Text(
             l10n.d('Broncode'),
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
               color: AppTheme.slate500,

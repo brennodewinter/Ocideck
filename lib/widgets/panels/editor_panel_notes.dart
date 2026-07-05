@@ -106,7 +106,7 @@ class _NotesFieldState extends State<_NotesField> {
               Expanded(
                 child: Text(
                   l10n.d('Sprekersnotities'),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                     color: AppTheme.warningFg,
@@ -138,7 +138,7 @@ class _NotesFieldState extends State<_NotesField> {
                 ),
                 controller: _ctrl,
                 expand: true,
-                baseStyle: const TextStyle(
+                baseStyle: TextStyle(
                   fontSize: 12,
                   color: AppTheme.notesText,
                   height: 1.45,
@@ -155,7 +155,7 @@ class _NotesFieldState extends State<_NotesField> {
                     color: AppTheme.amber600,
                   ),
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: AppTheme.paper,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6),
                     borderSide: const BorderSide(color: AppTheme.notesBorder),
@@ -313,7 +313,7 @@ class _UserNotesFieldState extends State<_UserNotesField> {
                     color: AppTheme.userNotesBorderFocus,
                   ),
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: AppTheme.paper,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6),
                     borderSide: const BorderSide(

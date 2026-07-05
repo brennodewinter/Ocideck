@@ -145,10 +145,10 @@ class SlideTypePreviewPainter extends CustomPainter {
   final SlideType type;
 
   /// Wireframe palette: dark bars for titles, soft bars for body text.
-  static const _canvas = AppTheme.slate50;
-  static const _ink = AppTheme.slate700;
+  static Color get _canvas => AppTheme.slate50;
+  static Color get _ink => AppTheme.slate700;
   static const _soft = AppTheme.blueGray;
-  static const _fill = AppTheme.slate200;
+  static Color get _fill => AppTheme.slate200;
   static const _accent = AppTheme.accent;
 
   const SlideTypePreviewPainter({required this.type});

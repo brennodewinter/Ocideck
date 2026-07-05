@@ -302,7 +302,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
           Text(
             message,
             textAlign: TextAlign.center,
-            style: const TextStyle(color: AppTheme.slate500, fontSize: 13),
+            style: TextStyle(color: AppTheme.slate500, fontSize: 13),
           ),
         ],
       ),
@@ -355,7 +355,7 @@ class _PresentationSection extends StatelessWidget {
                         text: deck.title.isEmpty
                             ? presentation.fileName
                             : deck.title,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w700,
                           color: AppTheme.slate800,
@@ -363,7 +363,7 @@ class _PresentationSection extends StatelessWidget {
                       ),
                       TextSpan(
                         text: '   ${presentation.fileName}',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 11,
                           color: AppTheme.slate400,
                         ),
