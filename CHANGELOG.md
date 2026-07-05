@@ -8,6 +8,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Dark mode for the editor** — selecting the dark app-appearance profile
+  (*Settings → Appearance*) now also darkens the editor chrome, not just the
+  Material widgets. Every semantic `AppTheme` colour token resolves per mode
+  (`AppTheme.isDark`, tied to the profile), so surfaces, text, borders and status
+  tints flip together. Slide content stays a fixed white canvas (a slide is a
+  design surface), and brand/accent colours are unchanged across modes.
 - **Contextual help in the editor** — a subtle "What can I do here?" button at
   the top of the slide editor expands a short, slide-type-specific hint (e.g.
   chart: CSV import; video: trimming/cut-at-playhead; table: paste from a

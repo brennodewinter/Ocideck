@@ -312,7 +312,11 @@ class AppTheme {
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(foregroundColor: primary),
+        // In donkere modus is [primary] donker (onleesbaar op donker); gebruik
+        // dan de lichte tekstkleur.
+        style: OutlinedButton.styleFrom(
+          foregroundColor: profile.isDark ? text : primary,
+        ),
       ),
       extensions: [
         AppPalette(panel: panel, panelText: panelText, mutedText: muted),
