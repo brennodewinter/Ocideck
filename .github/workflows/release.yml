@@ -9,6 +9,40 @@ on:
   workflow_dispatch:
 
 jobs:
+  # Software Bill of Materials (CycloneDX 1.6 + SPDX 2.3). Uploaded as its own
+  # release artefact so the CRA (Reg. (EU) 2024/2847, Annex I Part II §1)
+  # bill-of-materials accompanies every release. The web bundle also ships a
+  # copy under /sbom/ (see `make build-web`).
+  sbom:
+    name: Generate SBOM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.44.2
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get --enforce-lockfile
+
+      # Verify the committed SBOM is current, then emit it fresh for upload.
+      - name: Verify + generate SBOM (make sbom-verify + sbom)
+        run: |
+          make sbom-verify
+          make sbom
+
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: ocideck-sbom
+          path: sbom
+          if-no-files-found: error
+
   # Hardened web bundle: self-hosted CanvasKit (no third-party CDN) + CSP-safe
   # loader. Same flags as `make build-web`.
   web:

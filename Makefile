@@ -1,4 +1,4 @@
-.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline licenses check-conventions mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
+.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline licenses sbom sbom-verify check-conventions mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 help:
 	@echo "OciDeck quality targets:"
@@ -17,6 +17,8 @@ help:
 	@echo "  make deps-outdated   Advisory dependency freshness report."
 	@echo "  make deps-check      Verify vendored JS bundles vs manifest + OSV CVEs."
 	@echo "  make licenses        Verify all dependencies use open-source licences."
+	@echo "  make sbom            Generate the SBOM (CycloneDX + SPDX) in sbom/."
+	@echo "  make sbom-verify     Fail if the committed SBOM is stale (CRA staleness gate)."
 	@echo "  make check-conventions  No print(); bare catch (_) & file-size ratchets."
 	@echo "  make check-method-length  Per-method length ratchet (AST-measured, max 150)."
 	@echo "  make build-web       Build the hardened web bundle (self-hosted CanvasKit + CSP-safe loader)."
@@ -199,6 +201,28 @@ licenses:
 	@echo "Failure means: a dependency uses an unrecognised or non-open-source licence — review it."
 	dart run tool/check_licenses.dart
 
+# Software Bill of Materials. Regenerates the machine-readable inventory the EU
+# Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires, in
+# both common formats, from the files that are already the source of truth
+# (pubspec.lock, MANIFEST.json, pubspec.yaml, .tool-versions). Commit the result.
+sbom:
+	@echo "== OciDeck build: Software Bill of Materials =="
+	@echo "Command: dart run tool/generate_sbom.dart"
+	@echo "Output: sbom/ocideck.cdx.json (CycloneDX 1.6), sbom/ocideck.spdx.json (SPDX 2.3),"
+	@echo "        and sbom/ocideck.sbom.md (human-readable)."
+	dart run tool/generate_sbom.dart
+
+# Staleness gate: regenerate in memory and fail if the committed SBOM drifted
+# from the current dependency set (volatile timestamp/serial fields ignored).
+# Same role as deps-verify-offline for the JS bundles — keeps the CRA artefact
+# from silently going out of date. Wired into CI and check-full.
+sbom-verify:
+	@echo "== OciDeck check: SBOM up to date =="
+	@echo "Command: dart run tool/generate_sbom.dart --check"
+	@echo "Failure means: dependencies changed but the SBOM wasn't regenerated —"
+	@echo "        run 'make sbom' and commit sbom/ocideck.cdx.json + .spdx.json."
+	dart run tool/generate_sbom.dart --check
+
 # Project-convention guard: no print() (use the logger in lib/utils/log.dart) and
 # no NEW bare `catch (_)` (a downward-only ratchet; see the script's baseline).
 check-conventions:
@@ -239,12 +263,17 @@ deps-verify-offline:
 	@echo "== OciDeck check: bundled JavaScript integrity (offline) =="
 	dart run tool/check_bundled_js.dart --offline
 
-build-web: deps-verify-offline
+build-web: deps-verify-offline sbom-verify
 	@echo "== OciDeck build: hardened web bundle =="
 	@echo "Command: flutter build web --release --no-web-resources-cdn --csp"
 	@echo "Covers: self-hosted CanvasKit (no third-party CDN) and a CSP-safe loader."
 	@echo "Output: build/web — serve behind the CSP declared in web/index.html."
 	flutter build web --release --no-web-resources-cdn --csp
+	@# Ship the SBOM alongside the product so the CRA artefact travels with the
+	@# distributed bundle (served under /sbom/ from the same origin): both
+	@# machine-readable formats and the human-readable Markdown view.
+	mkdir -p build/web/sbom
+	cp sbom/ocideck.cdx.json sbom/ocideck.spdx.json sbom/ocideck.sbom.md build/web/sbom/
 	@# Flutter kopieert assets mét hun bronpermissies. Een bestand dat lokaal
 	@# 600 staat wordt dan op de webserver onleesbaar (stil 403 → "onzichtbaar"
 	@# logo). Normaliseer daarom de hele bundel naar world-readable.
@@ -310,6 +339,6 @@ check: format-check analyze check-conventions check-method-length test
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.
-check-full: check licenses deps-check check-web deps-outdated
+check-full: check licenses sbom-verify deps-check check-web deps-outdated
 	@echo "== OciDeck extended check complete =="
-	@echo "Validated: required quality gate, licence compliance, bundled-JS CVEs, web hardening, and dependency freshness."
+	@echo "Validated: required quality gate, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, and dependency freshness."

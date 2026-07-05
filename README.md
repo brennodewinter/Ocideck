@@ -66,9 +66,14 @@ Targeted test groups speed up focused work:
 
 Run `make check` before pushing — it is the same quality gate (format check,
 static analysis, full test suite) you would wire into CI. `make check-full` adds
-licence compliance (`make licenses`) and the vendored-JS security check
-(`make deps-check`). For the full reference — every check, what it covers, and
-how CI runs it — see [`docs/CHECKS.md`](docs/CHECKS.md).
+licence compliance (`make licenses`), the vendored-JS security check
+(`make deps-check`), and the SBOM freshness gate (`make sbom-verify`). For the
+full reference — every check, what it covers, and how CI runs it — see
+[`docs/CHECKS.md`](docs/CHECKS.md).
+
+OciDeck ships a machine-readable **Software Bill of Materials** (CycloneDX 1.6 +
+SPDX 2.3) covering every component, as required by the EU Cyber Resilience Act —
+see [`docs/SBOM.md`](docs/SBOM.md).
 
 ## Project layout
 
@@ -107,6 +112,7 @@ style profile, sidecars, and the package format — is documented in
 | [File format](docs/FILE_FORMAT.md) | The Marp Markdown, front matter, sidecars, and `.ocideck` package |
 | [Keyboard shortcuts](docs/SHORTCUTS.md) | Editor and presenter shortcuts |
 | [Licence compliance](docs/LICENSE_COMPLIANCE.md) | Open-source policy and the `make licenses` check |
+| [SBOM](docs/SBOM.md) | The machine-readable Software Bill of Materials and its CRA mapping |
 | [Security policy](SECURITY.md) | How to report a vulnerability |
 | [Source map](docs/SOURCE_MAP.md) | One-line description of every file under `lib/` |
 | [Third-party notices](THIRD_PARTY_NOTICES.md) | Bundled components and their licences |

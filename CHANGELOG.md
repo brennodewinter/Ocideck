@@ -8,6 +8,20 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Software Bill of Materials (SBOM)** — a complete, machine-readable inventory
+  of every shipped component (Dart/Flutter packages direct + transitive, the
+  vendored JS/CSS export bundles, the plugin forks in `third_party/`, the bundled
+  fonts, and the build SDKs) in **both** common machine-readable formats —
+  CycloneDX 1.6 (`sbom/ocideck.cdx.json`) and SPDX 2.3 (`sbom/ocideck.spdx.json`)
+  — plus a human-readable Markdown view (`sbom/ocideck.sbom.md`). Generated
+  from the existing sources of truth by `dart run tool/generate_sbom.dart`
+  (`make sbom`); each component carries its version, SHA-256, purl and licence
+  (classified by the same logic as `make licenses`). A `make sbom-verify`
+  staleness gate — wired into CI, `make check-full`, and the test suite — fails
+  the build if dependencies change without the SBOM being regenerated. The SBOM
+  ships in the web build (`build/web/sbom/`) and as a release artifact, and is
+  the artefact required by the **EU Cyber Resilience Act** (Reg. (EU) 2024/2847,
+  Annex I Part II §1). See [`docs/SBOM.md`](docs/SBOM.md).
 - **Ordering questions** — a fourth question kind next to multiple choice,
   true/false and multiple-correct: the answers as entered in the editor are the
   correct order (rearranged with up/down arrows). Presenting draws a random

@@ -65,6 +65,10 @@ dev_dependencies:
   # A fake VideoPlayerPlatform drives the media-lifecycle tests without real
   # playback (pause-before-dispose, supersession, completion).
   video_player_platform_interface: ^6.4.0
+  # Parses pubspec.lock / pubspec.yaml in the SBOM generator (tool/sbom_build.dart)
+  # and its test. Already resolved transitively; declared here so the tooling can
+  # depend on it directly.
+  yaml: ^3.1.2
 
 dependency_overrides:
   screen_retriever_macos:

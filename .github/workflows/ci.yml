@@ -59,6 +59,12 @@ jobs:
       - name: Licence compliance (make licenses)
         run: make licenses
 
+      # Fail the build if the committed SBOM (CycloneDX + SPDX) drifted from the
+      # current dependency set — i.e. deps changed but `make sbom` wasn't re-run.
+      # Keeps the CRA (Reg. (EU) 2024/2847) bill-of-materials artefact current.
+      - name: SBOM up to date (make sbom-verify)
+        run: make sbom-verify
+
       # Fail the build if a vendored JS bundle drifted from its manifest or a
       # pinned version has a known vulnerability (queries the OSV database).
       - name: Bundled JS security (make deps-check)
