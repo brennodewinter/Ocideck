@@ -64,12 +64,12 @@ extension _PresenterOverlays on _FullscreenPresenterState {
       decoration: BoxDecoration(
         color: Colors.black.withValues(alpha: 0.82),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFF59E0B), width: 1.5),
+        border: Border.all(color: AppTheme.amber500, width: 1.5),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.timer_outlined, color: Color(0xFFF59E0B), size: 20),
+          const Icon(Icons.timer_outlined, color: AppTheme.amber500, size: 20),
           const SizedBox(width: 10),
           Text(
             preview,
@@ -131,9 +131,9 @@ extension _PresenterOverlays on _FullscreenPresenterState {
           child: Container(
             padding: const EdgeInsets.all(28),
             decoration: BoxDecoration(
-              color: const Color(0xFF161616),
+              color: PresenterPalette.bg2,
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: const Color(0xFF2A2A2A)),
+              border: Border.all(color: PresenterPalette.surface3),
             ),
             child: SingleChildScrollView(
               child: Column(
@@ -182,7 +182,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                             child: Text(
                               desc,
                               style: const TextStyle(
-                                color: Color(0xFFE5E5E5),
+                                color: PresenterPalette.text,
                                 fontSize: 14,
                               ),
                             ),
@@ -257,9 +257,9 @@ extension _PresenterOverlays on _FullscreenPresenterState {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: const Color(0xFF161616),
+        color: PresenterPalette.bg2,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: const Color(0xFF262626)),
+        border: Border.all(color: PresenterPalette.surface2),
       ),
       child: Column(
         children: [
@@ -296,7 +296,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
               ),
             ],
           ),
-          const Divider(height: 18, color: Color(0xFF262626)),
+          const Divider(height: 18, color: PresenterPalette.surface2),
           // Onderrij: aftelling (resterend/over) en tijd op huidige slide.
           Row(
             children: [
@@ -307,8 +307,8 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                   color: remaining == null
                       ? Colors.white24
                       : (overtime
-                            ? const Color(0xFFEF4444)
-                            : const Color(0xFF22C55E)),
+                            ? AppTheme.danger500
+                            : PresenterPalette.laserGreen),
                   size: 20,
                 ),
               ),
@@ -485,7 +485,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
       borderColor = AppTheme.blue400;
       borderWidth = 2;
     } else {
-      borderColor = const Color(0xFF3A3A3A);
+      borderColor = PresenterPalette.surface4;
       borderWidth = 1;
     }
 

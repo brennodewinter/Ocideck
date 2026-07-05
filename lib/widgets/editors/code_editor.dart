@@ -110,7 +110,7 @@ class _CodeEditorState extends State<CodeEditor> {
                 value: items.any((e) => e.$1 == current) ? current : '',
                 isDense: true,
                 borderRadius: BorderRadius.circular(6),
-                style: const TextStyle(fontSize: 12, color: Color(0xFF0F172A)),
+                style: const TextStyle(fontSize: 12, color: AppTheme.ink),
                 items: [
                   for (final (id, label) in items)
                     DropdownMenuItem(value: id, child: Text(label)),

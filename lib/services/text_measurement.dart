@@ -11,11 +11,7 @@ TextSpan _measurementSpan(String text, TextStyle style) {
   if (!hasInlineMarkdown(text)) return TextSpan(text: text, style: style);
   return TextSpan(
     style: style,
-    children: buildInlineSpans(
-      text,
-      baseStyle: style,
-      linkColor: const Color(0xFF000000),
-    ),
+    children: buildInlineSpans(text, baseStyle: style, linkColor: Colors.black),
   );
 }
 

@@ -44,7 +44,7 @@ run locally and in CI, the number you see locally is the number CI gates on.
 | --- | --- | :---: | :---: | :---: |
 | [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ |
 | [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ |
-| [`make check-conventions`](#make-check-conventions) | No `print()`; bare `catch (_)` & file-size ratchets | ✅ | ✅ | ✅ |
+| [`make check-conventions`](#make-check-conventions) | No `print()`; bare `catch (_)`, raw-colour & file-size ratchets | ✅ | ✅ | ✅ |
 | [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 65% floor | — | — | ✅ (gate) |
@@ -91,20 +91,25 @@ These three run on every push and pull request (and as `make check`).
 
 ### `make check-conventions`
 - **Runs:** `dart run tool/check_conventions.dart`
-- **Covers:** three project conventions in `lib/`:
+- **Covers:** these project conventions in `lib/`:
   - **no `print()`** (diagnostics go through the logger in `lib/utils/log.dart`);
   - **no bare `catch (_)`** (silently swallowing errors) — a **ratchet**: a
     baseline count that may shrink but never grow, currently **0**, so every
     swallow routes a named error through `logError`/`logWarning`;
+  - **raw-colour ratchet** — literal `Color(0x…)` outside
+    `lib/theme/app_theme.dart` may shrink but never grow (`rawColorBaseline`).
+    Prefer a semantic `AppTheme` token so a palette change — and a future dark
+    mode — touches one place instead of dozens;
   - **file-size ratchet** — no file may exceed **1000** lines, except the
     files listed in `fileSizeBaseline` whose ceiling is their size at ratchet
     time. A ceiling may shrink (split the file) but never grow, so large files
     trend smaller instead of creeping bigger. `lib/l10n/translations/*` is
     exempt (those grow with every UI string).
-- **Failure means:** route the diagnostic through `logError`; **or** split the
-  oversized file (then lower its `fileSizeBaseline` entry — the run prints a
-  tip), or deliberately raise the entry with a reason; **or** — if you removed a
-  `catch (_)` — lower `catchUnderscoreBaseline` to lock it in.
+- **Failure means:** route the diagnostic through `logError`; **or** replace the
+  literal colour with an `AppTheme` token (then lower `rawColorBaseline`); **or**
+  split the oversized file (then lower its `fileSizeBaseline` entry — the run
+  prints a tip), or deliberately raise the entry with a reason; **or** — if you
+  removed a `catch (_)` — lower `catchUnderscoreBaseline` to lock it in.
 
 ### `make check-method-length`
 - **Runs:** `dart run tool/check_method_length.dart`

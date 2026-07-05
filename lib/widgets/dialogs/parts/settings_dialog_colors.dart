@@ -586,7 +586,7 @@ extension _SettingsColors on _SettingsDialogState {
   }) {
     final parsed = _parseColor(color);
     final checkColor = parsed.computeLuminance() > 0.55
-        ? const Color(0xFF0F172A)
+        ? AppTheme.ink
         : Colors.white;
     return Tooltip(
       message: selected ? '${context.l10n.d('Geselecteerd')}: $color' : color,
@@ -618,7 +618,7 @@ extension _SettingsColors on _SettingsDialogState {
                   border: Border.all(color: Colors.white, width: 2),
                   boxShadow: const [
                     BoxShadow(
-                      color: Color(0x330F172A),
+                      color: AppTheme.inkOverlay,
                       blurRadius: 2,
                       offset: Offset(0, 1),
                     ),

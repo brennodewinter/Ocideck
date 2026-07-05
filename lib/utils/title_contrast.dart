@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
 
 import '../models/settings.dart';
 import '../models/slide.dart';
@@ -46,20 +47,19 @@ const double kTitleOverlayAlpha = 0.62;
 /// constraint whenever a subtitle is present.
 const double kTitleSubtitleAlpha = 0.72;
 
-const Color _lightText = Color(0xFFFFFFFF);
-const Color _darkText = Color(0xFF111827);
+const Color _lightText = Colors.white;
+const Color _darkText = AppTheme.gray900;
 
 Color _effectiveTextColor(ThemeProfile theme, Slide slide) {
   final hex = slide.titleTextColorOverride.isNotEmpty
       ? slide.titleTextColorOverride
       : theme.titleTextColor;
-  return parseHexColor(hex) ?? const Color(0xFFFFFFFF);
+  return parseHexColor(hex) ?? Colors.white;
 }
 
 Color _background(Color avgImage, ThemeProfile theme, bool overlay) {
   if (!overlay) return avgImage;
-  final wash =
-      parseHexColor(theme.titleBackgroundColor) ?? const Color(0xFF1C2B47);
+  final wash = parseHexColor(theme.titleBackgroundColor) ?? AppTheme.navy;
   return Color.alphaBlend(wash.withValues(alpha: kTitleOverlayAlpha), avgImage);
 }
 

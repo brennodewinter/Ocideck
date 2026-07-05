@@ -390,7 +390,7 @@ class _ExportDialogState extends State<ExportDialog> {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 13,
-              color: _success ? const Color(0xFF166534) : Colors.red[800],
+              color: _success ? AppTheme.success800 : Colors.red[800],
             ),
           ),
         ],
@@ -420,7 +420,7 @@ class _ExportDialogState extends State<ExportDialog> {
               'Stel een TLP-niveau in — export is geblokkeerd door het classificatiebeleid.',
             ),
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+            style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
           ),
         ],
       );
@@ -548,19 +548,19 @@ class _ExportDialogState extends State<ExportDialog> {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(0xFFECFDF5),
+        color: AppTheme.successBg,
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: const Color(0xFFA7F3D0)),
+        border: Border.all(color: AppTheme.successBgSoft),
       ),
       child: Row(
         children: [
-          const Icon(Icons.task_alt, size: 16, color: Color(0xFF047857)),
+          const Icon(Icons.task_alt, size: 16, color: AppTheme.successFg),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               '${l10n.d('Klaar voor export')} — '
               '${l10n.d('Geen kwaliteitsproblemen gevonden')}',
-              style: const TextStyle(fontSize: 11, color: Color(0xFF047857)),
+              style: const TextStyle(fontSize: 11, color: AppTheme.successFg),
             ),
           ),
         ],
@@ -573,19 +573,19 @@ class _ExportDialogState extends State<ExportDialog> {
     final hasErrors = result.errorCount > 0;
     final hasWarnings = result.warningCount > 0;
     final color = hasErrors
-        ? const Color(0xFFFEE2E2)
+        ? AppTheme.dangerBg
         : hasWarnings
-        ? const Color(0xFFFEF3C7)
-        : const Color(0xFFEFF6FF);
+        ? AppTheme.warningBg
+        : AppTheme.infoBg;
     final borderColor = hasErrors
-        ? const Color(0xFFFECACA)
+        ? AppTheme.dangerBgSoft
         : hasWarnings
-        ? const Color(0xFFFDE68A)
-        : const Color(0xFFBFDBFE);
+        ? AppTheme.warningBgSoft
+        : AppTheme.userNotesBorder;
     final iconColor = hasErrors
         ? Colors.red.shade700
         : hasWarnings
-        ? const Color(0xFF92400E)
+        ? AppTheme.warningFg
         : AppTheme.slate600;
 
     return Container(

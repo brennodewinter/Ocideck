@@ -8,6 +8,21 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Contextual help in the editor** — a subtle "What can I do here?" button at
+  the top of the slide editor expands a short, slide-type-specific hint (e.g.
+  chart: CSV import; video: trimming/cut-at-playhead; table: paste from a
+  spreadsheet). An info tooltip next to the per-slide TLP control explains that
+  slides above the deck's level are left out when presenting and exporting. Every
+  slide type has a hint (enforced by an exhaustive switch); all hints are
+  translated in the 30 non-Dutch languages.
+- **Command palette (Ctrl/Cmd+K)** — a searchable overlay listing the common
+  actions (present, export, save, new chart, find & replace, image library,
+  toggle markdown/visual mode, full-deck preview, new tab, open, package/URL
+  import, settings, and setting each TLP level). Type to filter (accent- and
+  case-insensitive), arrow keys to move, Enter to run, Esc to close; disabled
+  actions (e.g. export before saving) stay visible but greyed. Also reachable
+  from the "⋮" menu. Labels reuse the existing menu/tooltip strings; the few new
+  strings are translated in all 30 non-Dutch languages.
 - **Ordering questions** — a fourth question kind next to multiple choice,
   true/false and multiple-correct: the answers as entered in the editor are the
   correct order (rearranged with up/down arrows). Presenting draws a random
@@ -223,6 +238,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **Calmer slide editor.** The editor header now packs everything onto one
+  strip: the type and style pickers, a "What can I do here?" hint, a compact
+  **Quality** chip (the word coloured by status; the counts move to its tooltip
+  and its expanded panel) and a gear button for **Slide settings**. Each of the
+  three toggles expands its content just below the strip. The secondary
+  per-slide controls (audio, logo, footer, table option, timing, TLP) live
+  behind the gear (collapsed by default); a set per-slide TLP still shows as a
+  small badge next to the gear so the classification stays visible. Speaker and
+  user notes keep their own collapsible fields.
 - **Settings: "Privacy" is now "Licentie en Privacy", with a separate
   "Beveiliging" (Security) tab.** The renamed tab keeps the licence/privacy
   statement and the consent controls. The **Online media** toggle and the

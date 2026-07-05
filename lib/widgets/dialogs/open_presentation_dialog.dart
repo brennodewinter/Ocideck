@@ -378,7 +378,7 @@ class _PresentationRow extends StatelessWidget {
                                 style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w700,
-                                  color: Color(0xFF1E293B),
+                                  color: AppTheme.slate800,
                                 ),
                                 overflow: TextOverflow.ellipsis,
                               ),

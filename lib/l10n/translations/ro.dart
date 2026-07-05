@@ -84,6 +84,46 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Kwaliteit': 'Calitate',
+  'Slide-instellingen': 'Setări diapozitiv',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Diapozitivul de deschidere cu un titlu mare și un subtitlu. Adaugă o imagine de fundal din biblioteca de imagini.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Un subtitlu de secțiune care anunță o nouă parte a prezentării. Păstrează-l scurt.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'O listă cu marcatori. Indentează o linie cu spații pentru un subpunct; începe cu "[ ]" pentru un element bifabil.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Două coloane cu marcatori una lângă alta — utile pentru a compara două lucruri.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Marcatori în stânga, imagine în dreapta. Alege o imagine din bibliotecă sau trage una aici.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Două imagini una lângă alta, fiecare cu propria legendă.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'O singură imagine mare, pe tot ecranul, cu o legendă opțională.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Setează începutul și sfârșitul în secunde pentru a decupa, sau taie live la punctul de redare din previzualizare.',
+  'Een uitgelicht citaat met bronvermelding.': 'Un citat evidențiat cu sursa.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Lipește o selecție dintr-o foaie de calcul cu Ctrl/Cmd+V, sau tastează celulă cu celulă. Bifează "editabil în timpul prezentării" pentru a-l modifica live.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Markdown brut cu titluri, cod, formule matematice LaTeX și diagrame mermaid.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Un bloc de cod cu evidențierea sintaxei. Alege limbajul de programare pentru o formatare corectă.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Importă numere dintr-un fișier CSV sau tastează-le în grilă. Alege bare, linie, plăcintă sau radar.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Un tablou de bord cu indicatoare. Dă fiecărui indicator o valoare, un interval și o etichetă.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'O întrebare de test interactivă. Alege tipul (alegere multiplă, adevărat/fals, mai multe corecte sau ordonare) și completează răspunsurile.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'O cronologie a evenimentelor datate. Alege aspectul și modul în care apar evenimentele.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'Clasificarea TLP stabilește cine poate vedea diapozitivul. Diapozitivele cu un nivel mai ridicat decât deck-ul sunt omise la prezentare și la export.',
+  'Wat kan ik hier?': 'Ce pot face aici?',
+  'Uitvoeren': 'Execută',
+  'Nieuwe grafiek': 'Grafic nou',
+  'Commandopalet': 'Paletă de comenzi',
+  'Typ een commando…': 'Tastați o comandă…',
   'Instelling opslaan is mislukt.': 'Salvarea setării a eșuat.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Notă: versiunea web poate prelua doar de la servere care permit acest lucru (CORS).',

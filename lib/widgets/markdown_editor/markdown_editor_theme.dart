@@ -75,14 +75,12 @@ class MarkdownEditorTheme {
   }) {
     final darkPanel = panelBackground.computeLuminance() < 0.45;
     return MarkdownEditorTheme(
-      surface: darkPanel ? const Color(0xFF242424) : Colors.white,
-      text: darkPanel ? const Color(0xFFF3F4F6) : const Color(0xFF1E293B),
-      hint: darkPanel ? const Color(0xFF9CA3AF) : AppTheme.slate400,
+      surface: darkPanel ? AppTheme.darkNeutral : Colors.white,
+      text: darkPanel ? AppTheme.gray100 : AppTheme.slate800,
+      hint: darkPanel ? AppTheme.gray400 : AppTheme.slate400,
       link: accent,
-      codeBackground: darkPanel
-          ? const Color(0xFF374151)
-          : const Color(0xFFF1F5F9),
-      toolbarIcon: darkPanel ? const Color(0xFFD1D5DB) : AppTheme.slate500,
+      codeBackground: darkPanel ? AppTheme.gray700 : AppTheme.slate100,
+      toolbarIcon: darkPanel ? AppTheme.gray300 : AppTheme.slate500,
       accent: accent,
       border: panelText.withValues(alpha: 0.2),
       fontSize: 15,

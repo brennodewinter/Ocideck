@@ -73,7 +73,7 @@ class _ConsentGate extends ConsumerWidget {
               const SizedBox(height: 16),
               Text(
                 context.l10n.d('OciDeck wordt gestart…'),
-                style: const TextStyle(fontSize: 13, color: Color(0xFF64748B)),
+                style: const TextStyle(fontSize: 13, color: AppTheme.slate500),
               ),
             ],
           ),

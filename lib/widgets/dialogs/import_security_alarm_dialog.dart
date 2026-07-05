@@ -12,8 +12,8 @@ import '../../theme/app_theme.dart';
 class ImportSecurityAlarmDialog {
   ImportSecurityAlarmDialog._();
 
-  static const _alarmRed = Color(0xFFB91C1C);
-  static const _alarmBg = Color(0xFFFEE2E2);
+  static const _alarmRed = AppTheme.danger700;
+  static const _alarmBg = AppTheme.dangerBg;
 
   static Future<void> show(BuildContext context, ImportSecurityAlarm alarm) {
     final l10n = context.l10n;
@@ -137,7 +137,7 @@ class _FindingRow extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
             decoration: BoxDecoration(
-              color: const Color(0xFFF1F5F9),
+              color: AppTheme.slate100,
               borderRadius: BorderRadius.circular(4),
               border: Border.all(color: AppTheme.slate200),
             ),

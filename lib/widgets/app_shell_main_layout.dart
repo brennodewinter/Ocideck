@@ -19,6 +19,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
 
   double _slideRailWidth = _defaultSlideRailWidth;
 
+  // Laatst berekende exportstatus, zodat het commandopalet (geopend via een
+  // sneltoets/menu, buiten build) de export-gate kan respecteren zonder een
+  // provider te watchen in een callback.
+  bool _canExport = false;
+
   @override
   Widget build(BuildContext context) {
     final deckState = ref.watch(deckProvider);
@@ -45,6 +50,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       quality,
       l10n,
     );
+    _canExport = canExport;
 
     return Focus(
       canRequestFocus: false,
@@ -173,6 +179,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           _openFindReplace,
       const SingleActivator(LogicalKeyboardKey.keyH, meta: true):
           _openFindReplace,
+      // Commandopalet: doorzoekbare lijst van alle acties.
+      const SingleActivator(LogicalKeyboardKey.keyK, control: true):
+          _openCommandPalette,
+      const SingleActivator(LogicalKeyboardKey.keyK, meta: true):
+          _openCommandPalette,
     };
   }
 
@@ -342,6 +353,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         position: PopupMenuPosition.under,
         onSelected: (v) {
           switch (v) {
+            case 'command_palette':
+              _openCommandPalette();
             case 'new_tab':
               _newInTab();
             case 'open':
@@ -368,61 +381,73 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               SettingsDialog.show(context);
           }
         },
-        itemBuilder: (_) => [
-          _menuItem(
-            'new_tab',
-            Icons.add_circle_outline,
-            l10n.t('newPresentationTab'),
-          ),
-          _menuItem('open', Icons.folder_open_outlined, l10n.t('openEllipsis')),
-          const PopupMenuDivider(),
-          // Pakketten en URL-import werken overal: op web volledig in het
-          // geheugen (pakket als download, import via de browser met dezelfde
-          // security-gate). Alleen Nextcloud is op web bewust uit (zie
-          // platform_features.dart).
-          _menuItem(
-            'export_package',
-            Icons.inventory_2_outlined,
-            l10n.t('exportPackage'),
-          ),
-          _menuItem(
-            'import_package',
-            Icons.unarchive_outlined,
-            l10n.t('importPackage'),
-          ),
-          _menuItem('import_url', Icons.link, l10n.t('importUrl')),
-          const PopupMenuDivider(),
-          if (supportsNetworkDeckSources) ...[
-            _menuItem(
-              'open_nextcloud',
-              Icons.cloud_download_outlined,
-              l10n.d('Openen vanaf Nextcloud'),
-            ),
-            _menuItem(
-              'save_nextcloud',
-              Icons.cloud_upload_outlined,
-              l10n.d('Opslaan naar Nextcloud'),
-            ),
-            const PopupMenuDivider(),
-          ],
-          _menuItem('find', Icons.find_replace, l10n.t('findReplace')),
-          _menuItem(
-            'clear_checklists',
-            Icons.check_box_outline_blank,
-            l10n.d('Alle checkboxen legen'),
-          ),
-          _menuItem(
-            'full_preview',
-            Icons.preview_outlined,
-            l10n.t('fullDeckPreview'),
-          ),
-          const PopupMenuDivider(),
-          // Style profiles are chosen via the "STIJL" pulldown in the
-          // editor toolbar; no need to duplicate them here.
-          _menuItem('settings', Icons.settings_outlined, l10n.t('settings')),
-        ],
+        itemBuilder: (_) => _moreMenuItems(l10n),
       ),
       const SizedBox(width: 8),
+    ];
+  }
+
+  /// De items van het "⋮"-overloopmenu. Losgetrokken uit [_appBarActions] om
+  /// die methode binnen de lengtegrens te houden.
+  List<PopupMenuEntry<String>> _moreMenuItems(AppLocalizations l10n) {
+    return [
+      _menuItem(
+        'command_palette',
+        Icons.keyboard_command_key,
+        '${l10n.d('Commandopalet')}  (Ctrl/Cmd+K)',
+      ),
+      const PopupMenuDivider(),
+      _menuItem(
+        'new_tab',
+        Icons.add_circle_outline,
+        l10n.t('newPresentationTab'),
+      ),
+      _menuItem('open', Icons.folder_open_outlined, l10n.t('openEllipsis')),
+      const PopupMenuDivider(),
+      // Pakketten en URL-import werken overal: op web volledig in het
+      // geheugen (pakket als download, import via de browser met dezelfde
+      // security-gate). Alleen Nextcloud is op web bewust uit (zie
+      // platform_features.dart).
+      _menuItem(
+        'export_package',
+        Icons.inventory_2_outlined,
+        l10n.t('exportPackage'),
+      ),
+      _menuItem(
+        'import_package',
+        Icons.unarchive_outlined,
+        l10n.t('importPackage'),
+      ),
+      _menuItem('import_url', Icons.link, l10n.t('importUrl')),
+      const PopupMenuDivider(),
+      if (supportsNetworkDeckSources) ...[
+        _menuItem(
+          'open_nextcloud',
+          Icons.cloud_download_outlined,
+          l10n.d('Openen vanaf Nextcloud'),
+        ),
+        _menuItem(
+          'save_nextcloud',
+          Icons.cloud_upload_outlined,
+          l10n.d('Opslaan naar Nextcloud'),
+        ),
+        const PopupMenuDivider(),
+      ],
+      _menuItem('find', Icons.find_replace, l10n.t('findReplace')),
+      _menuItem(
+        'clear_checklists',
+        Icons.check_box_outline_blank,
+        l10n.d('Alle checkboxen legen'),
+      ),
+      _menuItem(
+        'full_preview',
+        Icons.preview_outlined,
+        l10n.t('fullDeckPreview'),
+      ),
+      const PopupMenuDivider(),
+      // Style profiles are chosen via the "STIJL" pulldown in the
+      // editor toolbar; no need to duplicate them here.
+      _menuItem('settings', Icons.settings_outlined, l10n.t('settings')),
     ];
   }
 
@@ -454,6 +479,113 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       replaceAll: (q, r, cs) =>
           deckNotifier.replaceAll(q, r, caseSensitive: cs),
     );
+  }
+
+  /// Commandopalet (Ctrl/Cmd+K): één doorzoekbare lijst van alle acties. Labels
+  /// hergebruiken de bestaande menu-/tooltipteksten, zodat ze niet uit de pas
+  /// lopen en geen extra vertalingen kosten. De export-gate volgt [_canExport].
+  void _openCommandPalette() {
+    final l10n = context.l10n;
+    final settings = ref.read(settingsProvider);
+    final deck = ref.read(deckProvider).deck!;
+    final deckNotifier = ref.read(deckProvider.notifier);
+    final editorNotifier = ref.read(editorProvider.notifier);
+    final isMarkdownMode = ref.read(editorProvider).mode == EditorMode.markdown;
+
+    final commands = <PaletteCommand>[
+      PaletteCommand(
+        label: l10n.d('Presenteren'),
+        icon: Icons.play_circle_outline,
+        keywords: const ['present', 'slideshow', 'F5'],
+        onInvoke: _presentDeck,
+      ),
+      PaletteCommand(
+        label: l10n.t('export'),
+        icon: Icons.file_download_outlined,
+        keywords: const ['pdf', 'pptx', 'html'],
+        enabled: _canExport,
+        onInvoke: _exportDeck,
+      ),
+      PaletteCommand(
+        label: l10n.d('Opslaan'),
+        icon: Icons.save_outlined,
+        shortcut: 'Ctrl/Cmd+S',
+        onInvoke: _saveDeck,
+      ),
+      PaletteCommand(
+        label: l10n.d('Nieuwe grafiek'),
+        icon: Icons.insert_chart_outlined,
+        keywords: const ['chart', 'csv'],
+        onInvoke: () {
+          final i = ref.read(editorProvider).selectedIndex;
+          deckNotifier.addSlide(SlideType.chart, afterIndex: i);
+          editorNotifier.select(i + 1);
+        },
+      ),
+      PaletteCommand(
+        label: l10n.t('findReplace'),
+        icon: Icons.find_replace,
+        shortcut: 'Ctrl/Cmd+H',
+        onInvoke: _openFindReplace,
+      ),
+      PaletteCommand(
+        label: l10n.t('imageLibrary'),
+        icon: Icons.photo_library_outlined,
+        onInvoke: _openImageCarousel,
+      ),
+      PaletteCommand(
+        label: isMarkdownMode ? l10n.t('visualMode') : l10n.t('markdownMode'),
+        icon: isMarkdownMode ? Icons.view_quilt : Icons.code,
+        onInvoke: _toggleMarkdownMode,
+      ),
+      PaletteCommand(
+        label: l10n.t('fullDeckPreview'),
+        icon: Icons.preview_outlined,
+        onInvoke: _openFullDeckPreview,
+      ),
+      PaletteCommand(
+        label: l10n.t('newPresentationTab'),
+        icon: Icons.add_circle_outline,
+        onInvoke: _newInTab,
+      ),
+      PaletteCommand(
+        label: l10n.t('openEllipsis'),
+        icon: Icons.folder_open_outlined,
+        onInvoke: () => _openWithSearch(context, ref, settings.homeDirectory),
+      ),
+      PaletteCommand(
+        label: l10n.t('exportPackage'),
+        icon: Icons.inventory_2_outlined,
+        onInvoke: _exportPackage,
+      ),
+      PaletteCommand(
+        label: l10n.t('importPackage'),
+        icon: Icons.unarchive_outlined,
+        onInvoke: _importPackage,
+      ),
+      PaletteCommand(
+        label: l10n.t('importUrl'),
+        icon: Icons.link,
+        onInvoke: _importUrl,
+      ),
+      PaletteCommand(
+        label: l10n.t('settings'),
+        icon: Icons.settings_outlined,
+        onInvoke: () => SettingsDialog.show(context),
+      ),
+      // TLP-classificatie: één commando per niveau (het huidige niveau is uit).
+      for (final level in TlpLevel.values)
+        PaletteCommand(
+          label:
+              '${l10n.t('classification')}: '
+              '${level == TlpLevel.none ? l10n.d('Geen') : level.label}',
+          icon: Icons.shield_outlined,
+          keywords: const ['tlp', 'classification'],
+          enabled: deck.tlp != level,
+          onInvoke: () => deckNotifier.updateInfo(tlp: level),
+        ),
+    ];
+    CommandPalette.show(context, commands);
   }
 
   Future<void> _clearAllChecklists() async {

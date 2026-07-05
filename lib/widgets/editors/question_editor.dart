@@ -297,7 +297,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
               const Icon(
                 Icons.warning_amber_rounded,
                 size: 16,
-                color: Color(0xFFB45309),
+                color: AppTheme.amber700,
               ),
               const SizedBox(width: 6),
               Expanded(
@@ -305,7 +305,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
                   l10n.d('Geef minstens één goed én één fout antwoord op.'),
                   style: const TextStyle(
                     fontSize: 12,
-                    color: Color(0xFFB45309),
+                    color: AppTheme.amber700,
                   ),
                 ),
               ),
@@ -348,7 +348,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
               const Icon(
                 Icons.warning_amber_rounded,
                 size: 16,
-                color: Color(0xFFB45309),
+                color: AppTheme.amber700,
               ),
               const SizedBox(width: 6),
               Expanded(
@@ -356,7 +356,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
                   l10n.d('Geef minstens twee antwoorden op.'),
                   style: const TextStyle(
                     fontSize: 12,
-                    color: Color(0xFFB45309),
+                    color: AppTheme.amber700,
                   ),
                 ),
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../theme/app_theme.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../utils/markdown_quill_codec.dart';
@@ -66,7 +67,7 @@ class MarkdownNotesEditor extends StatefulWidget {
     FocusNode? focusNode,
     required TextStyle baseStyle,
     required Color linkColor,
-    Color codeBackground = const Color(0x1A000000),
+    Color codeBackground = AppTheme.shadow10,
     required String hintText,
     InputDecoration? inputDecoration,
     int minLines = 4,
@@ -86,13 +87,13 @@ class MarkdownNotesEditor extends StatefulWidget {
         ? (inputDecoration!.enabledBorder as OutlineInputBorder)
               .borderSide
               .color
-        : const Color(0xFFBFDBFE);
+        : AppTheme.userNotesBorder;
     return MarkdownNotesEditor(
       key: key,
       controller: controller,
       focusNode: focusNode,
       editorTheme: MarkdownEditorTheme.editorPanel(
-        text: baseStyle.color ?? const Color(0xFF1E293B),
+        text: baseStyle.color ?? AppTheme.slate800,
         link: linkColor,
         accent: linkColor,
         codeBackground: codeBackground,

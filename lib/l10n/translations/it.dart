@@ -83,6 +83,47 @@ const _stringsIt = {
 };
 
 const _dutchSourceIt = {
+  'Kwaliteit': 'Qualità',
+  'Slide-instellingen': 'Impostazioni diapositiva',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'La diapositiva di apertura con un titolo grande e un sottotitolo. Aggiungi un\'immagine di sfondo dalla libreria immagini.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Un titolo di sezione che annuncia una nuova parte della presentazione. Mantienilo breve.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Un elenco puntato. Rientra una riga con spazi per un sottopunto; inizia con "[ ]" per un elemento spuntabile.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Due colonne di punti affiancate — comode per confrontare due cose.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Punti a sinistra, immagine a destra. Scegli un\'immagine dalla libreria o trascinala qui.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Due immagini affiancate, ciascuna con la propria didascalia.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Un\'unica immagine grande a tutta pagina con una didascalia facoltativa.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Imposta inizio e fine in secondi per tagliare, oppure taglia dal vivo sul punto di riproduzione nell\'anteprima.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Una citazione in evidenza con la fonte.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Incolla una selezione da un foglio di calcolo con Ctrl/Cmd+V, oppure digita cella per cella. Spunta "modificabile durante la presentazione" per cambiarla dal vivo.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Markdown grezzo con intestazioni, codice, formule matematiche LaTeX e diagrammi mermaid.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Un blocco di codice con evidenziazione della sintassi. Scegli il linguaggio di programmazione per una formattazione corretta.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Importa i numeri da un file CSV o digitali nella griglia. Scegli barre, linee, torta o radar.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Un cruscotto di indicatori. Assegna a ogni indicatore un valore, un intervallo e un\'etichetta.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Una domanda di quiz interattiva. Scegli il tipo (scelta multipla, vero/falso, più risposte corrette o ordinamento) e inserisci le risposte.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Una linea del tempo di eventi datati. Scegli il layout e come compaiono gli eventi.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'La classificazione TLP determina chi può vedere la diapositiva. Le diapositive con un livello superiore a quello del deck vengono escluse durante la presentazione e l\'esportazione.',
+  'Wat kan ik hier?': 'Cosa posso fare qui?',
+  'Uitvoeren': 'Esegui',
+  'Nieuwe grafiek': 'Nuovo grafico',
+  'Commandopalet': 'Palette dei comandi',
+  'Typ een commando…': 'Digita un comando…',
   'Instelling opslaan is mislukt.': 'Salvataggio impostazione non riuscito.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Nota: la versione web può scaricare solo da server che lo consentono (CORS).',

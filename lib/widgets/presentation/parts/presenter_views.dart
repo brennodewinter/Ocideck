@@ -144,7 +144,7 @@ extension _PresenterViews on _FullscreenPresenterState {
     final nextSlide = hasNext ? widget.slides[_index + 1] : null;
 
     return Container(
-      color: const Color(0xFF0A0A0A),
+      color: PresenterPalette.bgDeepest,
       padding: const EdgeInsets.all(20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -231,7 +231,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                             ),
                           )
                         : Container(
-                            color: const Color(0xFF161616),
+                            color: PresenterPalette.bg2,
                             alignment: Alignment.center,
                             child: Text(
                               l10n.d('Einde van de presentatie'),

@@ -507,12 +507,12 @@ class _ChartEditorState extends State<ChartEditor> {
       padding: const EdgeInsets.only(top: 8),
       child: Row(
         children: [
-          const Icon(Icons.link, size: 14, color: Color(0xFF0369A1)),
+          const Icon(Icons.link, size: 14, color: AppTheme.infoAccent),
           const SizedBox(width: 6),
           Expanded(
             child: Text(
               '${l10n.d('Gekoppeld aan')} $_source',
-              style: const TextStyle(fontSize: 11, color: Color(0xFF0369A1)),
+              style: const TextStyle(fontSize: 11, color: AppTheme.infoAccent),
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -605,7 +605,7 @@ class _ChartEditorState extends State<ChartEditor> {
           value: _type,
           isDense: true,
           borderRadius: BorderRadius.circular(6),
-          style: const TextStyle(fontSize: 12, color: Color(0xFF0F172A)),
+          style: const TextStyle(fontSize: 12, color: AppTheme.ink),
           items: [
             DropdownMenuItem(
               value: ChartType.bar,
@@ -725,7 +725,7 @@ class _ChartEditorState extends State<ChartEditor> {
                               ),
                               boxShadow: const [
                                 BoxShadow(
-                                  color: Color(0x330F172A),
+                                  color: AppTheme.inkOverlay,
                                   blurRadius: 2,
                                 ),
                               ],
@@ -927,7 +927,7 @@ class _ChartEditorState extends State<ChartEditor> {
       color: Color(int.parse(hex.substring(1), radix: 16) | 0xFF000000),
       shape: BoxShape.circle,
       border: Border.all(color: Colors.white, width: 1.5),
-      boxShadow: const [BoxShadow(color: Color(0x330F172A), blurRadius: 2)],
+      boxShadow: const [BoxShadow(color: AppTheme.inkOverlay, blurRadius: 2)],
     ),
   );
 
@@ -964,7 +964,7 @@ class _ChartEditorState extends State<ChartEditor> {
         decoration: InputDecoration(
           isDense: true,
           filled: muted,
-          fillColor: muted ? const Color(0xFFF1F5F9) : null,
+          fillColor: muted ? AppTheme.slate100 : null,
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 8,
             vertical: 8,

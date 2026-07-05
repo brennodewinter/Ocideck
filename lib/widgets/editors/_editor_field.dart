@@ -663,9 +663,9 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
     final isError = severity == MarkdownValidationSeverity.error;
     final isWarning = severity == MarkdownValidationSeverity.warning;
     final hintColor = isError
-        ? const Color(0xFFB45309)
+        ? AppTheme.amber700
         : isWarning
-        ? const Color(0xFFB45309)
+        ? AppTheme.amber700
         : AppTheme.slate500;
 
     return Column(
@@ -678,7 +678,7 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
             hintText: l10n.d(
               'Caption / bronvermelding (bijv. © Naam Fotograaf)',
             ),
-            hintStyle: const TextStyle(fontSize: 12, color: Color(0xFFB0BEC5)),
+            hintStyle: const TextStyle(fontSize: 12, color: AppTheme.blueGray2),
             prefixIcon: Icon(
               Icons.copyright_outlined,
               size: 16,
@@ -690,14 +690,12 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
               horizontal: 10,
             ),
             filled: true,
-            fillColor: showHint
-                ? const Color(0xFFFFFBEB)
-                : const Color(0xFFF8FAFC),
+            fillColor: showHint ? AppTheme.notesBg : AppTheme.slate50,
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
               borderSide: BorderSide(
                 color: showHint && (isError || isWarning)
-                    ? const Color(0xFFF59E0B)
+                    ? AppTheme.amber500
                     : AppTheme.slate300,
               ),
             ),
@@ -705,7 +703,7 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
               borderRadius: BorderRadius.circular(6),
               borderSide: BorderSide(
                 color: showHint && (isError || isWarning)
-                    ? const Color(0xFFD97706)
+                    ? AppTheme.amber600
                     : AppTheme.slate500,
               ),
             ),
@@ -729,7 +727,7 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
             style: TextStyle(
               fontSize: 10,
               color: isError || isWarning
-                  ? const Color(0xFFB45309)
+                  ? AppTheme.amber700
                   : AppTheme.slate500,
             ),
           ),

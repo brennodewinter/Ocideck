@@ -312,7 +312,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
               ),
             if (widget.parseError)
               Container(
-                color: const Color(0xFFFEE2E2),
+                color: AppTheme.dangerBg,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
                   vertical: 6,
@@ -371,18 +371,18 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
 
   Widget _modeBanner(AppLocalizations l10n) {
     return Container(
-      color: const Color(0xFFFFF9E6),
+      color: AppTheme.warnSurface,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: Row(
         children: [
-          const Icon(Icons.code, size: 14, color: Color(0xFF92400E)),
+          const Icon(Icons.code, size: 14, color: AppTheme.warningFg),
           const SizedBox(width: 6),
           Expanded(
             child: Text(
               l10n.d(
                 'Markdown modus — bewerk de volledige presentatie als Marp Markdown',
               ),
-              style: const TextStyle(fontSize: 11, color: Color(0xFF92400E)),
+              style: const TextStyle(fontSize: 11, color: AppTheme.warningFg),
             ),
           ),
           TextButton.icon(
@@ -433,7 +433,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                 contentPadding: EdgeInsets.fromLTRB(8, 16, 16, 16),
                 border: InputBorder.none,
                 filled: true,
-                fillColor: Color(0xFFF8FAFC),
+                fillColor: AppTheme.slate50,
               ),
               onChanged: (_) {
                 setState(() {
@@ -492,12 +492,8 @@ class _ValidationSummaryBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final color = result.isValid
-        ? const Color(0xFFFEF3C7)
-        : const Color(0xFFFEE2E2);
-    final iconColor = result.isValid
-        ? const Color(0xFF92400E)
-        : Colors.red.shade700;
+    final color = result.isValid ? AppTheme.warningBg : AppTheme.dangerBg;
+    final iconColor = result.isValid ? AppTheme.warningFg : Colors.red.shade700;
     final summary = result.hasIssues
         ? '${result.errorCount} ${l10n.d('fout(en),')} '
               '${result.warningCount} ${l10n.d('waarschuwing(en)')}'
@@ -594,7 +590,7 @@ class _IssueTile extends StatelessWidget {
             Icon(
               isError ? Icons.error_outline : Icons.info_outline,
               size: 14,
-              color: isError ? Colors.red.shade700 : const Color(0xFF92400E),
+              color: isError ? Colors.red.shade700 : AppTheme.warningFg,
             ),
             const SizedBox(width: 6),
             Expanded(
@@ -602,9 +598,7 @@ class _IssueTile extends StatelessWidget {
                 '${context.l10n.d('Regel')} ${issue.line}: ${issue.message}',
                 style: TextStyle(
                   fontSize: 11,
-                  color: isError
-                      ? Colors.red.shade700
-                      : const Color(0xFF92400E),
+                  color: isError ? Colors.red.shade700 : AppTheme.warningFg,
                 ),
               ),
             ),
@@ -631,7 +625,7 @@ class _LineNumberGutter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
-      color: const Color(0xFFEEF2F7),
+      color: AppTheme.iceBlue2,
       child: SizedBox(
         width: 44,
         child: ClipRect(
@@ -685,8 +679,8 @@ class _LineNumberCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bg = switch (severity) {
-      MarkdownValidationSeverity.error => const Color(0xFFFECACA),
-      MarkdownValidationSeverity.warning => const Color(0xFFFDE68A),
+      MarkdownValidationSeverity.error => AppTheme.dangerBgSoft,
+      MarkdownValidationSeverity.warning => AppTheme.warningBgSoft,
       MarkdownValidationSeverity.informational => AppTheme.slate200,
       null => Colors.transparent,
     };
@@ -706,7 +700,7 @@ class _LineNumberCell extends StatelessWidget {
             color: severity == MarkdownValidationSeverity.error
                 ? Colors.red.shade700
                 : severity == MarkdownValidationSeverity.warning
-                ? const Color(0xFF92400E)
+                ? AppTheme.warningFg
                 : AppTheme.slate400,
           ),
         ),

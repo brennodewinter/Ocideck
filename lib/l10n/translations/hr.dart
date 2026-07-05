@@ -83,6 +83,47 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Kwaliteit': 'Kvaliteta',
+  'Slide-instellingen': 'Postavke slajda',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Uvodni slajd s velikim naslovom i podnaslovom. Iz knjižnice slika dodajte pozadinsku sliku.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Naslov odjeljka koji najavljuje novi dio prezentacije. Neka bude kratak.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Popis s natuknicama. Uvlačenje razmacima stvara podtočku; započnite s "[ ]" za stavku koja se može označiti.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Dva stupca natuknica jedan uz drugi — zgodno za usporedbu dviju stvari.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Natuknice lijevo, slika desno. Odaberite sliku iz knjižnice ili je povucite ovamo.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Dvije slike jedna uz drugu, svaka sa svojim opisom.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Jedna velika slika preko cijelog slajda s neobveznim opisom.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Postavite početno i završno vrijeme u sekundama za rezanje ili režite uživo na mjestu reprodukcije u pregledu.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Istaknuti citat s navođenjem izvora.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Zalijepite odabir iz proračunske tablice pomoću Ctrl/Cmd+V ili upisujte po ćeliji. Označite "može se uređivati tijekom prezentacije" za promjene uživo.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Čisti Markdown s naslovima, kodom, matematičkim LaTeX formulama i mermaid dijagramima.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Blok koda s isticanjem sintakse. Odaberite programski jezik za ispravno oblikovanje.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Uvezite brojeve iz CSV datoteke ili ih upišite u rešetku. Odaberite stupčani, linijski, tortni ili radarski.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Nadzorna ploča s mjeračima. Svakom mjeraču dodijelite vrijednost, raspon i oznaku.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Interaktivno kviz pitanje. Odaberite vrstu (višestruki izbor, točno/netočno, više točnih ili redoslijed) i ispunite odgovore.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Vremenska crta datiranih događaja. Odaberite izgled i način na koji se događaji pojavljuju.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'Klasifikacija TLP određuje tko smije vidjeti slajd. Slajdovi s višom razinom od kompleta izostavljaju se pri prezentiranju i izvozu.',
+  'Wat kan ik hier?': 'Što ovdje mogu?',
+  'Uitvoeren': 'Izvrši',
+  'Nieuwe grafiek': 'Novi grafikon',
+  'Commandopalet': 'Paleta naredbi',
+  'Typ een commando…': 'Upišite naredbu…',
   'Instelling opslaan is mislukt.': 'Spremanje postavke nije uspjelo.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Napomena: web-verzija može dohvaćati samo s poslužitelja koji to dopuštaju (CORS).',

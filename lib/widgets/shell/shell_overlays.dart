@@ -11,7 +11,7 @@ class _DropOverlay extends StatelessWidget {
     return Positioned.fill(
       child: IgnorePointer(
         child: Container(
-          color: const Color(0xFF1C2B47).withValues(alpha: 0.55),
+          color: AppTheme.navy.withValues(alpha: 0.55),
           alignment: Alignment.center,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 22),
@@ -34,7 +34,7 @@ class _DropOverlay extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF1E293B),
+                    color: AppTheme.slate800,
                   ),
                 ),
                 const SizedBox(height: 4),

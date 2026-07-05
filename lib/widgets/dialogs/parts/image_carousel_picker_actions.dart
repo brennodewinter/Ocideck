@@ -355,7 +355,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
       builder: (ctx) {
         final l10n = ctx.l10n;
         return AlertDialog(
-          backgroundColor: const Color(0xFF161B22),
+          backgroundColor: ImagePickerPalette.surface1,
           title: Row(
             children: [
               const Icon(
@@ -383,7 +383,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
                     'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.',
                   ),
                   style: const TextStyle(
-                    color: Color(0xFF8B949E),
+                    color: ImagePickerPalette.textMuted,
                     fontSize: 13,
                   ),
                 ),
@@ -399,14 +399,14 @@ extension _CarouselActions on _ImageCarouselPickerState {
                               const Icon(
                                 Icons.check_circle_outline,
                                 size: 14,
-                                color: Color(0xFF22C55E),
+                                color: ImagePickerPalette.success,
                               ),
                               const SizedBox(width: 6),
                               Expanded(
                                 child: Text(
                                   p.basename(entry.keeper),
                                   style: const TextStyle(
-                                    color: Color(0xFFCDD9E5),
+                                    color: ImagePickerPalette.text,
                                     fontSize: 12.5,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -423,14 +423,14 @@ extension _CarouselActions on _ImageCarouselPickerState {
                                   const Icon(
                                     Icons.delete_outline,
                                     size: 13,
-                                    color: Color(0xFFE5746E),
+                                    color: ImagePickerPalette.dangerSoft,
                                   ),
                                   const SizedBox(width: 6),
                                   Expanded(
                                     child: Text(
                                       p.basename(path),
                                       style: const TextStyle(
-                                        color: Color(0xFF8B949E),
+                                        color: ImagePickerPalette.textMuted,
                                         fontSize: 12,
                                       ),
                                       overflow: TextOverflow.ellipsis,
@@ -452,7 +452,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
               style: TextButton.styleFrom(
-                foregroundColor: const Color(0xFF8B949E),
+                foregroundColor: ImagePickerPalette.textMuted,
               ),
               child: Text(l10n.t('cancel')),
             ),
@@ -461,7 +461,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
               icon: const Icon(Icons.layers_clear_outlined, size: 16),
               label: Text(l10n.d('Opruimen')),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF238636),
+                backgroundColor: ImagePickerPalette.successStrong,
                 foregroundColor: Colors.white,
               ),
             ),

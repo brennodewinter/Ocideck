@@ -130,7 +130,7 @@ extension _PresenterInk on _FullscreenPresenterState {
       decoration: BoxDecoration(
         color: Colors.black.withValues(alpha: 0.82),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF2A2A2A)),
+        border: Border.all(color: PresenterPalette.surface3),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

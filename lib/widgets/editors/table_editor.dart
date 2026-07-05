@@ -295,7 +295,7 @@ class _TableEditorState extends State<TableEditor> {
                     decoration: InputDecoration(
                       isDense: true,
                       filled: isHeader,
-                      fillColor: isHeader ? const Color(0xFFF1F5F9) : null,
+                      fillColor: isHeader ? AppTheme.slate100 : null,
                       hintText: isHeader ? '${l10n.d('Kolom')} ${c + 1}' : null,
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 8,

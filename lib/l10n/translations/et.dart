@@ -82,6 +82,47 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Kwaliteit': 'Kvaliteet',
+  'Slide-instellingen': 'Slaidi sätted',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Avaslaid suure pealkirja ja alapealkirjaga. Lisa taustapilt pildikogust.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Vahepealkiri, mis kuulutab ette esitluse uue osa. Hoia see lühike.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Loend. Taande rida tühikutega alampunkti jaoks; alusta märgiga "[ ]", et punkt oleks linnutatav.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Kaks loendiveergu kõrvuti — mugav kahe asja võrdlemiseks.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Loend vasakul, pilt paremal. Vali pilt kogust või lohista see sisse.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Kaks pilti kõrvuti, kummalgi oma pildiallkiri.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Üks suur, kogu ala täitev pilt valikulise pildiallkirjaga.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Määra algus- ja lõpuaeg sekundites lõikamiseks või lõika reaalajas esituskohas eelvaates.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Esiletõstetud tsitaat allikaviitega.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Kleebi valik tabelarvutusest klahvidega Ctrl/Cmd+V või sisesta lahtri kaupa. Märgi "muudetav esitluse ajal", et seda reaalajas muuta.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Toores Markdown pealkirjade, koodi, matemaatiliste LaTeX-valemite ja mermaid-diagrammidega.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Koodiplokk süntaksi esiletõstuga. Vali õigeks vormindamiseks programmeerimiskeel.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Impordi arvud CSV-failist või sisesta need ruudustikku. Vali tulp, joon, sektor või radar.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Mõõdikute töölaud. Anna igale mõõdikule väärtus, vahemik ja silt.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Interaktiivne viktoriiniküsimus. Vali tüüp (valikvastus, õige/vale, mitu õiget või järjestus) ja täida vastused.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Kuupäevastatud sündmuste ajajoon. Vali paigutus ja see, kuidas sündmused ilmuvad.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'TLP-klassifikatsioon määrab, kes tohib slaidi näha. Slaidid, mille tase on kõrgem kui deckil, jäetakse esitamisel ja eksportimisel välja.',
+  'Wat kan ik hier?': 'Mida ma siin teha saan?',
+  'Uitvoeren': 'Käivita',
+  'Nieuwe grafiek': 'Uus graafik',
+  'Commandopalet': 'Käskude palett',
+  'Typ een commando…': 'Sisesta käsk…',
   'Instelling opslaan is mislukt.': 'Sätte salvestamine ebaõnnestus.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Märkus: veebiversioon saab laadida ainult serveritest, mis seda lubavad (CORS).',

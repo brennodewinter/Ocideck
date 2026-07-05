@@ -83,6 +83,47 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'Kwaliteit': 'Quality',
+  'Slide-instellingen': 'Slide settings',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'The opening slide with a large title and subtitle. Add a background image from the image library.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'A section heading that announces a new part of the presentation. Keep it short.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'A bulleted list. Indent a line with spaces for a sub-point; start with "[ ]" for a checkable item.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Two bullet columns side by side — handy for comparing two things.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Bullets on the left, image on the right. Pick an image from the library or drag one in.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Two images side by side, each with its own caption.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'One large, full-bleed image with an optional caption.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Set start and end time in seconds to trim, or cut live at the playhead in the preview.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'A highlighted quote with attribution.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Paste a selection from a spreadsheet with Ctrl/Cmd+V, or type per cell. Tick "editable while presenting" to change it live.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Raw Markdown with headings, code, mathematical LaTeX formulas and mermaid diagrams.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'A code block with syntax highlighting. Pick the programming language for correct formatting.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Import numbers from a CSV file or type them in the grid. Choose bar, line, pie or radar.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'A dashboard of gauges. Give each gauge a value, range and label.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'An interactive quiz question. Pick the kind (multiple choice, true/false, multiple correct or ordering) and fill in the answers.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'A timeline of dated events. Choose the layout and how the events appear.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'The TLP classification determines who may see the slide. Slides with a higher level than the deck are left out when presenting and exporting.',
+  'Wat kan ik hier?': 'What can I do here?',
+  'Uitvoeren': 'Run',
+  'Nieuwe grafiek': 'New chart',
+  'Commandopalet': 'Command palette',
+  'Typ een commando…': 'Type a command…',
   'Instelling opslaan is mislukt.': 'Could not save the setting.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Note: the web version can only fetch from servers that allow it (CORS).',

@@ -83,6 +83,47 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Kwaliteit': 'Kvalitet',
+  'Slide-instellingen': 'Bildinställningar',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Öppningsbilden med en stor titel och underrubrik. Lägg till en bakgrundsbild via bildbiblioteket.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'En mellanrubrik som aviserar en ny del av presentationen. Håll den kort.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'En punktlista. Dra in en rad med blanksteg för en underpunkt; börja med "[ ]" för en avbockningsbar post.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Två punktkolumner sida vid sida — praktiskt för att jämföra två saker.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Punkter till vänster, bild till höger. Välj en bild från biblioteket eller dra in en.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Två bilder sida vid sida, var och en med egen bildtext.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'En stor, helskärmsfyllande bild med en valfri bildtext.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Ange start- och sluttid i sekunder för att klippa, eller klipp live vid uppspelningspunkten i förhandsvisningen.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Ett framhävt citat med källhänvisning.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Klistra in ett urval från ett kalkylark med Ctrl/Cmd+V, eller skriv per cell. Bocka i "redigerbar under presentation" för att ändra live.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Rå Markdown med rubriker, kod, matematiska LaTeX-formler och mermaid-diagram.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Ett kodblock med syntaxmarkering. Välj programmeringsspråket för rätt formatering.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Importera siffror från en CSV-fil eller skriv in dem i rutnätet. Välj stapel, linje, tårta eller radar.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'En instrumentpanel med mätare. Ge varje mätare ett värde, intervall och en etikett.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'En interaktiv quizfråga. Välj typen (flerval, sant/falskt, flera rätta eller ordning) och fyll i svaren.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'En tidslinje med daterade händelser. Välj layouten och hur händelserna visas.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'TLP-klassificeringen avgör vem som får se bilden. Bilder med en högre nivå än decket utelämnas vid presentation och export.',
+  'Wat kan ik hier?': 'Vad kan jag göra här?',
+  'Uitvoeren': 'Kör',
+  'Nieuwe grafiek': 'Nytt diagram',
+  'Commandopalet': 'Kommandopalett',
+  'Typ een commando…': 'Skriv ett kommando…',
   'Instelling opslaan is mislukt.': 'Det gick inte att spara inställningen.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Obs: webbversionen kan bara hämta från servrar som tillåter det (CORS).',

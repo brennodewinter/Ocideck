@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../theme/presenter_palette.dart';
 import '../../models/annotation.dart';
 
 /// A transparent drawing plane that sits on top of a 16:9 slide canvas. It is
@@ -284,10 +285,10 @@ class _InkPainter extends CustomPainter {
       c,
       r * 2.2,
       Paint()
-        ..color = const Color(0xFFFF3B30).withValues(alpha: 0.25)
+        ..color = PresenterPalette.laserRed.withValues(alpha: 0.25)
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, r),
     );
-    canvas.drawCircle(c, r, Paint()..color = const Color(0xFFFF3B30));
+    canvas.drawCircle(c, r, Paint()..color = PresenterPalette.laserRed);
     canvas.drawCircle(
       c,
       r * 0.45,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
 
 import '../l10n/app_localizations.dart';
 import '../models/markdown_validation.dart';
@@ -143,9 +144,9 @@ slideQualityPerformedChecks(AppLocalizations l10n) {
 
 Color slideQualitySeverityColor(MarkdownValidationSeverity severity) {
   return switch (severity) {
-    MarkdownValidationSeverity.error => const Color(0xFFB91C1C),
-    MarkdownValidationSeverity.warning => const Color(0xFF92400E),
-    MarkdownValidationSeverity.informational => const Color(0xFF475569),
+    MarkdownValidationSeverity.error => AppTheme.danger700,
+    MarkdownValidationSeverity.warning => AppTheme.warningFg,
+    MarkdownValidationSeverity.informational => AppTheme.slate600,
   };
 }
 

@@ -16,8 +16,8 @@ extension _SettingsPrivacy on _SettingsDialogState {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: const Color(0xFFF0F9FF),
-            border: Border.all(color: const Color(0xFFBFDBFE)),
+            color: AppTheme.infoSurface,
+            border: Border.all(color: AppTheme.userNotesBorder),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(

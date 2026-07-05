@@ -82,7 +82,7 @@ extension _CarouselDelete on _ImageCarouselPickerState {
       builder: (ctx) {
         final l10n = ctx.l10n;
         return AlertDialog(
-          backgroundColor: const Color(0xFF161B22),
+          backgroundColor: ImagePickerPalette.surface1,
           title: Row(
             children: [
               Icon(
@@ -90,8 +90,8 @@ extension _CarouselDelete on _ImageCarouselPickerState {
                     ? Icons.delete_outline
                     : Icons.warning_amber_rounded,
                 color: usages.isEmpty
-                    ? const Color(0xFFE5534B)
-                    : const Color(0xFFF0B429),
+                    ? ImagePickerPalette.danger
+                    : ImagePickerPalette.warning,
                 size: 20,
               ),
               const SizedBox(width: 10),
@@ -110,7 +110,7 @@ extension _CarouselDelete on _ImageCarouselPickerState {
               Text(
                 p.basename(path),
                 style: const TextStyle(
-                  color: Color(0xFFCDD9E5),
+                  color: ImagePickerPalette.text,
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                 ),
@@ -122,7 +122,7 @@ extension _CarouselDelete on _ImageCarouselPickerState {
                     'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.',
                   ),
                   style: const TextStyle(
-                    color: Color(0xFF8B949E),
+                    color: ImagePickerPalette.textMuted,
                     fontSize: 13,
                   ),
                 )
@@ -130,7 +130,7 @@ extension _CarouselDelete on _ImageCarouselPickerState {
                 Text(
                   '${l10n.d('Let op: deze afbeelding wordt nog gebruikt in')} $slideCount ${slideCount == 1 ? l10n.d("slide") : l10n.t("slides")}:',
                   style: const TextStyle(
-                    color: Color(0xFFF0B429),
+                    color: ImagePickerPalette.warning,
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                   ),
@@ -148,7 +148,7 @@ extension _CarouselDelete on _ImageCarouselPickerState {
                             child: Text(
                               '•  $u',
                               style: const TextStyle(
-                                color: Color(0xFFCDD9E5),
+                                color: ImagePickerPalette.text,
                                 fontSize: 12.5,
                               ),
                             ),
@@ -163,7 +163,7 @@ extension _CarouselDelete on _ImageCarouselPickerState {
                     'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.',
                   ),
                   style: const TextStyle(
-                    color: Color(0xFF8B949E),
+                    color: ImagePickerPalette.textMuted,
                     fontSize: 13,
                   ),
                 ),
@@ -174,7 +174,7 @@ extension _CarouselDelete on _ImageCarouselPickerState {
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
               style: TextButton.styleFrom(
-                foregroundColor: const Color(0xFF8B949E),
+                foregroundColor: ImagePickerPalette.textMuted,
               ),
               child: Text(l10n.t('cancel')),
             ),
@@ -183,7 +183,7 @@ extension _CarouselDelete on _ImageCarouselPickerState {
               icon: const Icon(Icons.delete_outline, size: 16),
               label: Text(l10n.d('Verwijderen')),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFB62324),
+                backgroundColor: ImagePickerPalette.dangerStrong,
                 foregroundColor: Colors.white,
               ),
             ),

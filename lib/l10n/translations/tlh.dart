@@ -81,6 +81,46 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Kwaliteit': 'QaQ',
+  'Slide-instellingen': 'Slide DuHmey',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'mung QIn \'ay\' \'oH. tIn per je qutlh per luben. nagh beQmey qach vabDot chal DIr chelmoH.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'presentation \'ay\' chu\' \'ang per. tItlhutlh.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'tetlh. tlhoy\' lo\'lu\'taH bIng ghItlh; "[ ]" lo\' \'e\' DaghItlhchugh, item lupoQ \'e\' laj.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'cha\' tetlh HeH pa\' — cha\' Doch nughanglu\'DI\' QaQ.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'poD tetlh, nIH nagh beQ. nagh beQmey qach nagh beQ wIv pagh \'oH yISum.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'cha\' nagh beQ HeH, Hoch per Sup ghaj.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'wa\' nagh beQ tIn, Hoch qach buy\', per DILtaH ghaj.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'yInmoH taH pagh mev poH secondmey Set, pagh voQ \'a\' preview mIw voQ.',
+  'Een uitgelicht citaat met bronvermelding.': 'per bel \'ang, mung \'ang.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'spreadsheet wIv Ctrl/Cmd+V lo\'DI\' pol, pagh Hoch bIQtIq ghItlh. "presenting choHlaH" tlhaw\' \'e\' Dalajchugh, DILtaH choH.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Markdown Segh: per, De\' ghItlh, LaTeX mI\' mIw je mermaid nughmeH chelmoH.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'De\' ghItlh \'ay\' Segh Doq \'ang. QIn Ho\' \'e\' wIvmeH, programming Hol yIwIv.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'CSV teywI\' mI\' chelmoH pagh ret ghItlh. bar, tlhegh, cha\'DIch pagh radar yIwIv.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'juH lo\'laHwI\' tetlh. Hoch lo\'laHwI\' vay\', Sech je per nob.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'vay\' quv Segh. Segh (law\' wIv, teH/nol, law\' teH pagh mIw) yIwIv \'ej jang yIbuy\'moH.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'poHmey wanI\' timeline. Segh yIwIv \'ej chetvI\' \'ang wanI\'.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'TLP quv \'ang net legh \'Iv per. deck patlh law\' law\' patlh QIn puS presentDI\' je exportDI\' pagh ch, net woD.',
+  'Wat kan ik hier?': 'nuqDaq vI\' vumlaH?',
+  'Uitvoeren': 'ta\'',
+  'Nieuwe grafiek': 'De\'wI\'ghom chu\'',
+  'Commandopalet': 'ra\'ghom',
+  'Typ een commando…': 'ra\' yIghItlh…',
   'Instelling opslaan is mislukt.': 'choqmeH luj.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'yIqIm: chaw\'bogh jabwI\'meyvo\' neH SuqlaH web mIw (CORS).',

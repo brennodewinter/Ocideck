@@ -480,11 +480,11 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         decoration: InputDecoration(
           isDense: true,
           hintText: l10n.d('Zoek in slides…'),
-          hintStyle: const TextStyle(color: Color(0xFF6B7280), fontSize: 12),
+          hintStyle: const TextStyle(color: AppTheme.gray500, fontSize: 12),
           prefixIcon: const Icon(
             Icons.search,
             size: 15,
-            color: Color(0xFF6B7280),
+            color: AppTheme.gray500,
           ),
           prefixIconConstraints: const BoxConstraints(
             minWidth: 30,
@@ -497,22 +497,22 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                   iconSize: 14,
                   splashRadius: 14,
                   tooltip: l10n.d('Zoekopdracht wissen'),
-                  icon: const Icon(Icons.clear, color: Color(0xFF6B7280)),
+                  icon: const Icon(Icons.clear, color: AppTheme.gray500),
                   onPressed: () => setState(() {
                     _searchController.clear();
                     _query = '';
                   }),
                 ),
           filled: true,
-          fillColor: const Color(0xFF1B1E25),
+          fillColor: AppTheme.darkSlate900,
           contentPadding: const EdgeInsets.symmetric(vertical: 0),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(6),
-            borderSide: const BorderSide(color: Color(0xFF3A3F4B)),
+            borderSide: const BorderSide(color: AppTheme.darkSlate600),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(6),
-            borderSide: const BorderSide(color: Color(0xFF3A3F4B)),
+            borderSide: const BorderSide(color: AppTheme.darkSlate600),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(6),
@@ -546,7 +546,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
               const Icon(
                 Icons.search_off_outlined,
                 size: 32,
-                color: Color(0xFF4A4F5B),
+                color: AppTheme.darkSlate500,
               ),
               const SizedBox(height: 10),
               Text(
@@ -835,7 +835,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     final notifier = ref.read(deckProvider.notifier);
     final editorNotifier = ref.read(editorProvider.notifier);
     return Container(
-      color: const Color(0xFF252830),
+      color: AppTheme.darkSlate800,
       padding: const EdgeInsets.all(8),
       child: Column(
         children: [
@@ -871,7 +871,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
               label: Text(l10n.d('Afbeelding plakken')),
               style: OutlinedButton.styleFrom(
                 foregroundColor: Colors.white70,
-                side: const BorderSide(color: Color(0xFF4A4F5B)),
+                side: const BorderSide(color: AppTheme.darkSlate500),
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 textStyle: const TextStyle(fontSize: 11),
               ),
@@ -909,7 +909,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
               label: Text(l10n.d('Slide zoeken')),
               style: OutlinedButton.styleFrom(
                 foregroundColor: Colors.white70,
-                side: const BorderSide(color: Color(0xFF4A4F5B)),
+                side: const BorderSide(color: AppTheme.darkSlate500),
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 textStyle: const TextStyle(fontSize: 11),
               ),
@@ -925,7 +925,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
               label: Text(l10n.d('Slides importeren')),
               style: OutlinedButton.styleFrom(
                 foregroundColor: Colors.white70,
-                side: const BorderSide(color: Color(0xFF4A4F5B)),
+                side: const BorderSide(color: AppTheme.darkSlate500),
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 textStyle: const TextStyle(fontSize: 11),
               ),
@@ -949,7 +949,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                 label: Text(l10n.d('Slide plakken')),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Colors.white70,
-                  side: const BorderSide(color: Color(0xFF4A4F5B)),
+                  side: const BorderSide(color: AppTheme.darkSlate500),
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   textStyle: const TextStyle(fontSize: 11),
                 ),

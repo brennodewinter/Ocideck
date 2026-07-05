@@ -17,16 +17,16 @@ class _SkipBanner extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(8, 5, 4, 5),
       decoration: BoxDecoration(
-        color: const Color(0x33B8860B),
+        color: AppTheme.goldOverlay,
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: const Color(0xFF8A6D3B)),
+        border: Border.all(color: AppTheme.goldDark),
       ),
       child: Row(
         children: [
           const Icon(
             Icons.visibility_off_outlined,
             size: 13,
-            color: Color(0xFFD4A24E),
+            color: AppTheme.gold,
           ),
           const SizedBox(width: 6),
           Expanded(
@@ -35,7 +35,7 @@ class _SkipBanner extends StatelessWidget {
                   ? l10n.d('1 slide overgeslagen')
                   : '$count ${l10n.d('slides overgeslagen')}',
               style: const TextStyle(
-                color: Color(0xFFE3C281),
+                color: AppTheme.goldSoft,
                 fontSize: 11,
                 fontWeight: FontWeight.w500,
               ),
@@ -44,7 +44,7 @@ class _SkipBanner extends StatelessWidget {
           TextButton(
             onPressed: onClearAll,
             style: TextButton.styleFrom(
-              foregroundColor: const Color(0xFFD4A24E),
+              foregroundColor: AppTheme.gold,
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
               minimumSize: const Size(0, 26),
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -86,7 +86,7 @@ class _BulkActionBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(8, 4, 4, 4),
       decoration: BoxDecoration(
-        color: const Color(0x332E7D64),
+        color: AppTheme.tealOverlay,
         borderRadius: BorderRadius.circular(6),
         border: Border.all(color: AppTheme.accent.withValues(alpha: 0.6)),
       ),
@@ -120,7 +120,7 @@ class _BulkActionBar extends StatelessWidget {
           _BulkIcon(
             icon: Icons.delete_outline,
             tooltip: l10n.d('Verwijderen'),
-            color: const Color(0xFFE5746E),
+            color: AppTheme.coral,
             onTap: onDelete,
           ),
           _BulkIcon(

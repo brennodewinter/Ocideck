@@ -85,6 +85,47 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Kwaliteit': 'Jakość',
+  'Slide-instellingen': 'Ustawienia slajdu',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Slajd otwierający z dużym tytułem i podtytułem. Dodaj obraz tła z biblioteki obrazów.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Nagłówek sekcji zapowiadający nową część prezentacji. Zwięźle.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Lista wypunktowana. Wcięcie spacjami tworzy podpunkt; zacznij od "[ ]", aby dodać element do odhaczenia.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Dwie kolumny punktów obok siebie — wygodne do porównania dwóch rzeczy.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Punkty po lewej, obraz po prawej. Wybierz obraz z biblioteki lub przeciągnij go tutaj.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Dwa obrazy obok siebie, każdy z własnym podpisem.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Jeden duży obraz wypełniający slajd, z opcjonalnym podpisem.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Ustaw czas początku i końca w sekundach, aby przyciąć, lub przytnij na żywo w miejscu odtwarzania w podglądzie.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Wyróżniony cytat ze wskazaniem źródła.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Wklej zaznaczenie z arkusza kalkulacyjnego za pomocą Ctrl/Cmd+V lub wpisz po komórce. Zaznacz "edytowalne podczas prezentacji", aby zmieniać na żywo.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Surowy Markdown z nagłówkami, kodem, matematycznymi wzorami LaTeX i diagramami mermaid.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Blok kodu z kolorowaniem składni. Wybierz język programowania, aby uzyskać właściwe formatowanie.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Zaimportuj liczby z pliku CSV lub wpisz je w siatce. Wybierz słupkowy, liniowy, kołowy lub radarowy.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Panel mierników. Nadaj każdemu miernikowi wartość, zakres i etykietę.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Interaktywne pytanie quizowe. Wybierz rodzaj (jednokrotny wybór, prawda/fałsz, wielokrotny wybór lub kolejność) i uzupełnij odpowiedzi.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Oś czasu z datowanymi wydarzeniami. Wybierz układ i sposób pojawiania się wydarzeń.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'Klasyfikacja TLP określa, kto może zobaczyć slajd. Slajdy o wyższym poziomie niż talia są pomijane podczas prezentacji i eksportu.',
+  'Wat kan ik hier?': 'Co mogę tu zrobić?',
+  'Uitvoeren': 'Wykonaj',
+  'Nieuwe grafiek': 'Nowy wykres',
+  'Commandopalet': 'Paleta poleceń',
+  'Typ een commando…': 'Wpisz polecenie…',
   'Instelling opslaan is mislukt.': 'Nie udało się zapisać ustawienia.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Uwaga: wersja internetowa może pobierać tylko z serwerów, które na to pozwalają (CORS).',

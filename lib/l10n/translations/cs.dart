@@ -84,6 +84,47 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Kwaliteit': 'Kvalita',
+  'Slide-instellingen': 'Nastavení snímku',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Úvodní snímek s velkým názvem a podtitulem. Přidejte obrázek na pozadí z knihovny obrázků.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Nadpis oddílu, který uvádí novou část prezentace. Buďte struční.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Odrážkový seznam. Odsazením mezerami vytvoříte podbod; začněte znakem "[ ]" pro odškrtávatelnou položku.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Dva sloupce odrážek vedle sebe — vhodné pro porovnání dvou věcí.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Odrážky vlevo, obrázek vpravo. Vyberte obrázek z knihovny nebo jej sem přetáhněte.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Dva obrázky vedle sebe, každý s vlastním popiskem.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Jeden velký obrázek přes celý snímek s volitelným popiskem.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Nastavte počáteční a koncový čas v sekundách pro oříznutí, nebo ořízněte živě na místě přehrávání v náhledu.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Zvýrazněný citát s uvedením zdroje.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Vložte výběr z tabulkového procesoru pomocí Ctrl/Cmd+V nebo pište po buňkách. Zaškrtněte "upravitelné během prezentace" pro změny naživo.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Čistý Markdown s nadpisy, kódem, matematickými vzorci LaTeX a diagramy mermaid.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Blok kódu se zvýrazněním syntaxe. Vyberte programovací jazyk pro správné formátování.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Importujte čísla ze souboru CSV nebo je zadejte do mřížky. Zvolte sloupcový, čárový, koláčový nebo radarový.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Panel měřidel. Každému měřidlu zadejte hodnotu, rozsah a popisek.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Interaktivní kvízová otázka. Vyberte typ (výběr z možností, pravda/nepravda, více správných nebo pořadí) a vyplňte odpovědi.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Časová osa datovaných událostí. Zvolte rozvržení a způsob, jakým se události objevují.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'Klasifikace TLP určuje, kdo smí snímek vidět. Snímky s vyšší úrovní než sada se při prezentaci a exportu vynechají.',
+  'Wat kan ik hier?': 'Co tu mohu dělat?',
+  'Uitvoeren': 'Spustit',
+  'Nieuwe grafiek': 'Nový graf',
+  'Commandopalet': 'Paleta příkazů',
+  'Typ een commando…': 'Zadejte příkaz…',
   'Instelling opslaan is mislukt.': 'Uložení nastavení selhalo.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Pozor: webová verze může stahovat jen ze serverů, které to povolují (CORS).',

@@ -84,6 +84,47 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'Kwaliteit': 'Qualité',
+  'Slide-instellingen': 'Paramètres de la diapo',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'La diapositive d\'ouverture avec un grand titre et un sous-titre. Ajoutez une image de fond depuis la bibliothèque d\'images.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Un intertitre qui annonce une nouvelle partie de la présentation. Restez concis.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Une liste à puces. Indentez une ligne avec des espaces pour un sous-point ; commencez par "[ ]" pour un élément cochable.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Deux colonnes de puces côte à côte — pratique pour comparer deux choses.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Puces à gauche, image à droite. Choisissez une image dans la bibliothèque ou glissez-la ici.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Deux images côte à côte, chacune avec sa propre légende.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Une grande image pleine page avec une légende facultative.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Indiquez le début et la fin en secondes pour rogner, ou coupez en direct au point de lecture dans l\'aperçu.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Une citation mise en avant avec sa source.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Collez une sélection d\'un tableur avec Ctrl/Cmd+V, ou saisissez cellule par cellule. Cochez "modifiable pendant la présentation" pour la changer en direct.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Du Markdown brut avec des titres, du code, des formules mathématiques LaTeX et des diagrammes mermaid.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Un bloc de code avec coloration syntaxique. Choisissez le langage de programmation pour une mise en forme correcte.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Importez des chiffres depuis un fichier CSV ou saisissez-les dans la grille. Choisissez barres, courbe, secteurs ou radar.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Un tableau de bord de jauges. Donnez à chaque jauge une valeur, une plage et un libellé.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Une question de quiz interactive. Choisissez le type (choix multiple, vrai/faux, plusieurs bonnes réponses ou ordre) et remplissez les réponses.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Une chronologie d\'événements datés. Choisissez la mise en page et la façon dont les événements apparaissent.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'La classification TLP détermine qui peut voir la diapositive. Les diapositives d\'un niveau supérieur au deck sont omises lors de la présentation et de l\'exportation.',
+  'Wat kan ik hier?': 'Que puis-je faire ici ?',
+  'Uitvoeren': 'Exécuter',
+  'Nieuwe grafiek': 'Nouveau graphique',
+  'Commandopalet': 'Palette de commandes',
+  'Typ een commando…': 'Tapez une commande…',
   'Instelling opslaan is mislukt.': 'Échec de l\'enregistrement du paramètre.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Remarque : la version web ne peut récupérer que depuis des serveurs qui l\'autorisent (CORS).',

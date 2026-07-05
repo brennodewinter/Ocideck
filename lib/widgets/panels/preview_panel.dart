@@ -154,7 +154,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
       child: GestureDetector(
         onTap: _focusNode.requestFocus,
         child: Container(
-          color: const Color(0xFFF1F5F9),
+          color: AppTheme.slate100,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -439,7 +439,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
 
   Widget _themeChip(AppLocalizations l10n, Deck deck) {
     return Container(
-      color: const Color(0xFFF8FAFC),
+      color: AppTheme.slate50,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: Row(
         children: [
@@ -487,7 +487,7 @@ class FullDeckPreview extends ConsumerWidget {
         .watch(settingsProvider)
         .classificationWatermarkEnabled;
     return Scaffold(
-      backgroundColor: const Color(0xFF1E2028),
+      backgroundColor: AppTheme.panelBg,
       appBar: AppBar(
         title: Text('${deck.title} — ${l10n.d('volledig deck')}'),
         backgroundColor: AppTheme.navy,

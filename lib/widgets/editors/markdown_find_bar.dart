@@ -156,7 +156,7 @@ class _MarkdownFindBarState extends State<MarkdownFindBar> {
     final hasMatches = widget.matchCount > 0;
 
     return Material(
-      color: const Color(0xFFF1F5F9),
+      color: AppTheme.slate100,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8, 6, 8, 6),
         child: Column(

@@ -201,7 +201,7 @@ extension _SettingsAbout on _SettingsDialogState {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF273A60), AppTheme.navy],
+          colors: [AppTheme.navySoft, AppTheme.navy],
         ),
         borderRadius: BorderRadius.circular(12),
       ),

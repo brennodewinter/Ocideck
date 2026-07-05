@@ -286,9 +286,9 @@ class _SourceKindChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final (label, color) = switch (source.kind) {
-      VideoSourceKind.youtube => ('YouTube', const Color(0xFFCC0000)),
-      VideoSourceKind.vimeo => ('Vimeo', const Color(0xFF1AB7EA)),
-      VideoSourceKind.remoteFile => (l10n.d('Online'), const Color(0xFF2E7D64)),
+      VideoSourceKind.youtube => ('YouTube', AppTheme.dangerPlain),
+      VideoSourceKind.vimeo => ('Vimeo', AppTheme.cyan),
+      VideoSourceKind.remoteFile => (l10n.d('Online'), AppTheme.teal),
       VideoSourceKind.localFile => (
         l10n.d('Lokaal bestand'),
         AppTheme.slate500,

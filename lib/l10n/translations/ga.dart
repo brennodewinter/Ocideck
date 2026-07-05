@@ -85,6 +85,47 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Kwaliteit': 'Cáilíocht',
+  'Slide-instellingen': 'Socruithe sleamhnáin',
+  'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'An sleamhnán oscailte le teideal mór agus fotheideal. Cuir íomhá chúlra leis ón leabharlann íomhánna.',
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
+      'Ceannteideal rannóige a fhógraíonn cuid nua den chur i láthair. Coinnigh gearr é.',
+  'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
+      'Liosta urchar. Eangaigh líne le spásanna le haghaidh fophointe; tosaigh le "[ ]" le haghaidh míre inseiceáilte.',
+  'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
+      'Dhá cholún urchar taobh le taobh — áisiúil chun dhá rud a chur i gcomparáid.',
+  'Opsomming links, afbeelding rechts. Kies een beeld uit de bibliotheek of sleep het naar binnen.':
+      'Urchair ar chlé, íomhá ar dheis. Roghnaigh íomhá ón leabharlann nó tarraing isteach í.',
+  'Twee afbeeldingen naast elkaar, elk met een eigen bijschrift.':
+      'Dhá íomhá taobh le taobh, gach ceann lena fhotheideal féin.',
+  'Eén grote, beeldvullende afbeelding met een optioneel bijschrift.':
+      'Íomhá amháin mhór lánscáileáin le fotheideal roghnach.',
+  'Zet begin- en eindtijd in seconden om te knippen, of knip live op het afspeelpunt in het voorbeeld.':
+      'Socraigh am tosaigh agus deiridh i soicindí chun bearradh, nó gearr beo ag an bpointe seinnte sa réamhamharc.',
+  'Een uitgelicht citaat met bronvermelding.':
+      'Athfhriotal aibhsithe le foinse.',
+  'Plak een selectie uit een spreadsheet met Ctrl/Cmd+V, of typ per cel. Vink "bewerkbaar tijdens presenteren" aan om live te wijzigen.':
+      'Greamaigh roghnúchán ó scarbhileog le Ctrl/Cmd+V, nó clóscríobh de réir cille. Tic "ineagarthóireachta le linn cur i láthair" chun é a athrú beo.',
+  'Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.':
+      'Markdown amh le ceannteidil, cód, foirmlí matamaiticiúla LaTeX agus léaráidí mermaid.',
+  'Een codeblok met syntaxiskleuring. Kies de programmeertaal voor de juiste opmaak.':
+      'Bloc cóid le haibhsiú comhréire. Roghnaigh an teanga ríomhchláraithe don fhormáidiú ceart.',
+  'Importeer cijfers uit een CSV-bestand of typ ze in het rooster. Kies staaf, lijn, taart of radar.':
+      'Iompórtáil uimhreacha ó chomhad CSV nó clóscríobh sa ghreille iad. Roghnaigh barra, líne, píóg nó radar.',
+  'Een dashboard van meters. Geef elke meter een waarde, bereik en label.':
+      'Deais de thomhsairí. Tabhair luach, raon agus lipéad do gach tomhsaire.',
+  'Een interactieve quizvraag. Kies het soort (meerkeuze, juist/onjuist, meerdere goed of volgorde) en vul de antwoorden in.':
+      'Ceist thráth na gceist idirghníomhach. Roghnaigh an cineál (ilrogha, fíor/bréagach, iolra ceart nó ord) agus líon isteach na freagraí.',
+  'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.':
+      'Amlíne d\'imeachtaí dátaithe. Roghnaigh an leagan amach agus conas a thagann na himeachtaí chun cinn.',
+  'De TLP-classificatie bepaalt wie de slide mag zien. Slides met een hoger niveau dan het deck worden bij presenteren en exporteren weggelaten.':
+      'Cinneann an t-aicmiú TLP cé a fhéadann an sleamhnán a fheiceáil. Fágtar sleamhnáin le leibhéal níos airde ná an deic ar lár agus tú ag cur i láthair agus ag easpórtáil.',
+  'Wat kan ik hier?': 'Cad is féidir liom a dhéanamh anseo?',
+  'Uitvoeren': 'Rith',
+  'Nieuwe grafiek': 'Cairt nua',
+  'Commandopalet': 'Pailéad orduithe',
+  'Typ een commando…': 'Clóscríobh ordú…',
   'Instelling opslaan is mislukt.': 'Theip ar an socrú a shábháil.',
   'Let op: de webversie kan alleen ophalen van servers die dit toestaan (CORS).':
       'Tabhair faoi deara: ní féidir leis an leagan gréasáin íoslódáil ach ó fhreastalaithe a cheadaíonn é (CORS).',

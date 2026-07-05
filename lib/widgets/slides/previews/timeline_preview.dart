@@ -263,7 +263,7 @@ Color _readableOn(Color bg, Color preferred) {
   }
 
   if (contrast(bg, preferred) >= 3.0) return preferred;
-  return rel(bg) > 0.5 ? const Color(0xFF10231C) : Colors.white;
+  return rel(bg) > 0.5 ? AppTheme.forestDark : Colors.white;
 }
 
 /// Picks a font [scale] and description line count that fill [room] px of

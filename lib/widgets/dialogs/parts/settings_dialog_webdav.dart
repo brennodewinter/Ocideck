@@ -107,16 +107,13 @@ extension _SettingsWebdav on _SettingsDialogState {
                 children: [
                   const Icon(
                     Icons.check_circle,
-                    color: Color(0xFF2E7D64),
+                    color: AppTheme.teal,
                     size: 18,
                   ),
                   const SizedBox(width: 6),
                   Text(
                     l10n.d('Verbinding gelukt'),
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF2E7D64),
-                    ),
+                    style: const TextStyle(fontSize: 12, color: AppTheme.teal),
                   ),
                 ],
               ),
@@ -130,7 +127,7 @@ extension _SettingsWebdav on _SettingsDialogState {
               children: [
                 const Icon(
                   Icons.error_outline,
-                  color: Color(0xFFDC2626),
+                  color: AppTheme.danger600,
                   size: 18,
                 ),
                 const SizedBox(width: 6),
@@ -139,7 +136,7 @@ extension _SettingsWebdav on _SettingsDialogState {
                     testMsg,
                     style: const TextStyle(
                       fontSize: 12,
-                      color: Color(0xFFDC2626),
+                      color: AppTheme.danger600,
                     ),
                   ),
                 ),
