@@ -146,6 +146,57 @@ void main() {
       );
     });
 
+    test('treats theme code text as large text (3:1 threshold)', () {
+      // Het LibreKAT-huisstijlgroen (#2E7D64) op de donkere codeachtergrond
+      // (#111827) haalt ~3.6:1 — voldoende voor grote tekst, en code op een
+      // slide staat op displayformaat. Dus dit mag geen contrastwaarschuwing
+      // opleveren.
+      final deck = Deck(
+        title: 'Demo',
+        themeProfile: const ThemeProfile(
+          codeTextColor: '#2E7D64',
+          codeBackgroundColor: '#111827',
+        ),
+        slides: [Slide.create(SlideType.code)],
+      );
+
+      expect(
+        analyzer
+            .analyze(deck)
+            .issues
+            .where(
+              (i) =>
+                  i.kind == SlideQualityIssueKind.themeContrast &&
+                  i.field == 'codeTextColor',
+            ),
+        isEmpty,
+      );
+    });
+
+    test('still flags theme code below the large-text threshold', () {
+      // Onder 3.0:1 blijft ook grote tekst onleesbaar: dit moet gemeld worden.
+      final deck = Deck(
+        title: 'Demo',
+        themeProfile: const ThemeProfile(
+          codeTextColor: '#4A4A4A',
+          codeBackgroundColor: '#111827',
+        ),
+        slides: [Slide.create(SlideType.code)],
+      );
+
+      expect(
+        analyzer
+            .analyze(deck)
+            .issues
+            .any(
+              (i) =>
+                  i.kind == SlideQualityIssueKind.themeContrast &&
+                  i.field == 'codeTextColor',
+            ),
+        isTrue,
+      );
+    });
+
     test('detects dense bullet slide text', () {
       final longBullet = 'Lorem ipsum dolor sit amet, ' * 8;
       final deck = Deck(

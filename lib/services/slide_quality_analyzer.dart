@@ -232,7 +232,11 @@ class SlideQualityAnalyzer {
       label: 'Thema code',
       foreground: theme.codeTextColor,
       background: theme.codeBackgroundColor,
-      largeText: false,
+      // Code op een slide staat op displayformaat (grote tekst), net als de
+      // titel en de tabelkop hierboven: dus de WCAG-drempel voor grote tekst
+      // (3.0). Code die zó dicht is dat het klein zou renderen, wordt al apart
+      // gevangen door de density-check (kind codeDensityHigh).
+      largeText: true,
       field: 'codeTextColor',
     );
     addPairIssue(
