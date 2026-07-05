@@ -1,0 +1,7107 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:4f0d7799-44c4-5608-88a8-5c70f8d096ed",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-05T20:48:20.323153Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "group": "ocideck",
+          "name": "generate_sbom.dart",
+          "version": "1.0"
+        }
+      ]
+    },
+    "component": {
+      "bom-ref": "ocideck@1.0.0+1",
+      "type": "application",
+      "name": "ocideck",
+      "version": "1.0.0+1",
+      "purl": "pkg:generic/ocideck@1.0.0+1",
+      "licenses": [
+        {
+          "license": {
+            "id": "EUPL-1.2"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "application"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Marp Presentation Builder for Desktop and Web"
+        }
+      ]
+    },
+    "properties": [
+      {
+        "name": "cra:regulation",
+        "value": "EU 2024/2847 (Cyber Resilience Act)"
+      },
+      {
+        "name": "cra:reference",
+        "value": "Annex I, Part II, §1 — software bill of materials"
+      },
+      {
+        "name": "ocideck:generated-by",
+        "value": "tool/generate_sbom.dart"
+      }
+    ]
+  },
+  "components": [
+    {
+      "bom-ref": "pkg:pub/_fe_analyzer_shared@99.0.0",
+      "type": "library",
+      "name": "_fe_analyzer_shared",
+      "version": "99.0.0",
+      "purl": "pkg:pub/_fe_analyzer_shared@99.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a49d6cf99e8d8e7a8e93668d09ced0bbdb954d0b4fccc2f5f9241c6b87fad95c"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/_fe_analyzer_shared/versions/99.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/analyzer@12.1.0",
+      "type": "library",
+      "name": "analyzer",
+      "version": "12.1.0",
+      "purl": "pkg:pub/analyzer@12.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "663efa951fb8a45e06f491223a604c93820598f20e6a99c25617a1576065e8b7"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/analyzer/versions/12.1.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct dev"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/archive@4.0.9",
+      "type": "library",
+      "name": "archive",
+      "version": "4.0.9",
+      "purl": "pkg:pub/archive@4.0.9",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a96e8b390886ee8abb49b7bd3ac8df6f451c621619f52a26e815fdcf568959ff"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/archive/versions/4.0.9"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/args@2.7.0",
+      "type": "library",
+      "name": "args",
+      "version": "2.7.0",
+      "purl": "pkg:pub/args@2.7.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d0481093c50b1da8910eb0bb301626d4d8eb7284aa739614d2b394ee09e3ea04"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/args/versions/2.7.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/async@2.13.1",
+      "type": "library",
+      "name": "async",
+      "version": "2.13.1",
+      "purl": "pkg:pub/async@2.13.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e2eb0491ba5ddb6177742d2da23904574082139b07c1e33b8503b9f46f3e1a37"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/async/versions/2.13.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/barcode@2.2.9",
+      "type": "library",
+      "name": "barcode",
+      "version": "2.2.9",
+      "purl": "pkg:pub/barcode@2.2.9",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7b6729c37e3b7f34233e2318d866e8c48ddb46c1f7ad01ff7bb2a8de1da2b9f4"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/barcode/versions/2.2.9"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/bidi@2.0.13",
+      "type": "library",
+      "name": "bidi",
+      "version": "2.0.13",
+      "purl": "pkg:pub/bidi@2.0.13",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "77f475165e94b261745cf1032c751e2032b8ed92ccb2bf5716036db79320637d"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/bidi/versions/2.0.13"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/boolean_selector@2.1.2",
+      "type": "library",
+      "name": "boolean_selector",
+      "version": "2.1.2",
+      "purl": "pkg:pub/boolean_selector@2.1.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8aab1771e1243a5063b8b0ff68042d67334e3feab9e95b9490f9a6ebf73b42ea"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/boolean_selector/versions/2.1.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/characters@1.4.1",
+      "type": "library",
+      "name": "characters",
+      "version": "1.4.1",
+      "purl": "pkg:pub/characters@1.4.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "faf38497bda5ead2a8c7615f4f7939df04333478bf32e4173fcb06d428b5716b"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/characters/versions/1.4.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/charcode@1.4.0",
+      "type": "library",
+      "name": "charcode",
+      "version": "1.4.0",
+      "purl": "pkg:pub/charcode@1.4.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "fb0f1107cac15a5ea6ef0a6ef71a807b9e4267c713bb93e00e92d737cc8dbd8a"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/charcode/versions/1.4.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/cli_config@0.2.0",
+      "type": "library",
+      "name": "cli_config",
+      "version": "0.2.0",
+      "purl": "pkg:pub/cli_config@0.2.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ac20a183a07002b700f0c25e61b7ee46b23c309d76ab7b7640a028f18e4d99ec"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/cli_config/versions/0.2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/clock@1.1.2",
+      "type": "library",
+      "name": "clock",
+      "version": "1.1.2",
+      "purl": "pkg:pub/clock@1.1.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "fddb70d9b5277016c77a80201021d40a2247104d9f4aa7bab7157b7e3f05b84b"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/clock/versions/1.1.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/code_assets@1.2.1",
+      "type": "library",
+      "name": "code_assets",
+      "version": "1.2.1",
+      "purl": "pkg:pub/code_assets@1.2.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "bf394f466ba9205f1812a0433b392d6af280f155f56651eda7c18cc32ed493b8"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/code_assets/versions/1.2.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/collection@1.19.1",
+      "type": "library",
+      "name": "collection",
+      "version": "1.19.1",
+      "purl": "pkg:pub/collection@1.19.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2f5709ae4d3d59dd8f7cd309b4e023046b57d8a6c82130785d2b0e5868084e76"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/collection/versions/1.19.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/convert@3.1.2",
+      "type": "library",
+      "name": "convert",
+      "version": "3.1.2",
+      "purl": "pkg:pub/convert@3.1.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b30acd5944035672bc15c6b7a8b47d773e41e2f17de064350988c5d02adb1c68"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/convert/versions/3.1.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/coverage@1.15.1",
+      "type": "library",
+      "name": "coverage",
+      "version": "1.15.1",
+      "purl": "pkg:pub/coverage@1.15.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "956a3de0725ca232ad353565a8290d3357592bf4250f6f298a185e2d949c5d3d"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/coverage/versions/1.15.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/cross_file@0.3.5+4",
+      "type": "library",
+      "name": "cross_file",
+      "version": "0.3.5+4",
+      "purl": "pkg:pub/cross_file@0.3.5+4",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "92c9c43c383bfa1c32079d3bc492d55d6d4318044b7b47edaff8971cbb555c51"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/cross_file/versions/0.3.5+4"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/crypto@3.0.7",
+      "type": "library",
+      "name": "crypto",
+      "version": "3.0.7",
+      "purl": "pkg:pub/crypto@3.0.7",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c8ea0233063ba03258fbcf2ca4d6dadfefe14f02fab57702265467a19f27fadf"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/crypto/versions/3.0.7"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/csslib@1.0.2",
+      "type": "library",
+      "name": "csslib",
+      "version": "1.0.2",
+      "purl": "pkg:pub/csslib@1.0.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "09bad715f418841f976c77db72d5398dc1253c21fb9c0c7f0b0b985860b2d58e"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/csslib/versions/1.0.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/cupertino_icons@1.0.9",
+      "type": "library",
+      "name": "cupertino_icons",
+      "version": "1.0.9",
+      "purl": "pkg:pub/cupertino_icons@1.0.9",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "41e005c33bd814be4d3096aff55b1908d419fde52ca656c8c47719ec745873cd"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/cupertino_icons/versions/1.0.9"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/dart_quill_delta@10.8.3",
+      "type": "library",
+      "name": "dart_quill_delta",
+      "version": "10.8.3",
+      "purl": "pkg:pub/dart_quill_delta@10.8.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "bddb0b2948bd5b5a328f1651764486d162c59a8ccffd4c63e8b2c5e44be1dac4"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/dart_quill_delta/versions/10.8.3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/dbus@0.7.13",
+      "type": "library",
+      "name": "dbus",
+      "version": "0.7.13",
+      "purl": "pkg:pub/dbus@0.7.13",
+      "licenses": [
+        {
+          "license": {
+            "id": "MPL-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "792974a4007974fbc5c1b5433eb2330a9db3e368c3f906253af4c007d0f49a91"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/dbus/versions/0.7.13"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/desktop_drop@0.7.1",
+      "type": "library",
+      "name": "desktop_drop",
+      "version": "0.7.1",
+      "purl": "pkg:pub/desktop_drop@0.7.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "aa1e797255bfbc76f9eb5aa4f61e5b68dbf69962ab1be6495816d2f251bc0d1f"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/desktop_drop/versions/0.7.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/diff_match_patch@0.4.1",
+      "type": "library",
+      "name": "diff_match_patch",
+      "version": "0.4.1",
+      "purl": "pkg:pub/diff_match_patch@0.4.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2efc9e6e8f449d0abe15be240e2c2a3bcd977c8d126cfd70598aee60af35c0a4"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/diff_match_patch/versions/0.4.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/equatable@2.0.8",
+      "type": "library",
+      "name": "equatable",
+      "version": "2.0.8",
+      "purl": "pkg:pub/equatable@2.0.8",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3e0141505477fd8ad55d6eb4e7776d3fe8430be8e497ccb1521370c3f21a3e2b"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/equatable/versions/2.0.8"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/fake_async@1.3.3",
+      "type": "library",
+      "name": "fake_async",
+      "version": "1.3.3",
+      "purl": "pkg:pub/fake_async@1.3.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5368f224a74523e8d2e7399ea1638b37aecfca824a3cc4dfdf77bf1fa905ac44"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/fake_async/versions/1.3.3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct dev"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/ffi@2.2.0",
+      "type": "library",
+      "name": "ffi",
+      "version": "2.2.0",
+      "purl": "pkg:pub/ffi@2.2.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6d7fd89431262d8f3125e81b50d3847a091d846eafcd4fdb88dd06f36d705a45"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/ffi/versions/2.2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/file@7.0.1",
+      "type": "library",
+      "name": "file",
+      "version": "7.0.1",
+      "purl": "pkg:pub/file@7.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a3b4f84adafef897088c160faf7dfffb7696046cb13ae90b508c2cbc95d3b8d4"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/file/versions/7.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/file_picker@11.0.2",
+      "type": "library",
+      "name": "file_picker",
+      "version": "11.0.2",
+      "purl": "pkg:pub/file_picker@11.0.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f13a03000d942e476bc1ff0a736d2e9de711d2f89a95cd4c1d88f861c3348387"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/file_picker/versions/11.0.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/file_selector_platform_interface@2.7.0",
+      "type": "library",
+      "name": "file_selector_platform_interface",
+      "version": "2.7.0",
+      "purl": "pkg:pub/file_selector_platform_interface@2.7.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "35e0bd61ebcdb91a3505813b055b09b79dfdc7d0aee9c09a7ba59ae4bb13dc85"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/file_selector_platform_interface/versions/2.7.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/file_selector_windows@0.9.3+5",
+      "type": "library",
+      "name": "file_selector_windows",
+      "version": "0.9.3+5",
+      "purl": "pkg:pub/file_selector_windows@0.9.3+5",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "62197474ae75893a62df75939c777763d39c2bc5f73ce5b88497208bc269abfd"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/file_selector_windows/versions/0.9.3+5"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/fixnum@1.1.1",
+      "type": "library",
+      "name": "fixnum",
+      "version": "1.1.1",
+      "purl": "pkg:pub/fixnum@1.1.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b6dc7065e46c974bc7c5f143080a6764ec7a4be6da1285ececdc37be96de53be"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/fixnum/versions/1.1.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/fl_chart@1.2.0",
+      "type": "library",
+      "name": "fl_chart",
+      "version": "1.2.0",
+      "purl": "pkg:pub/fl_chart@1.2.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b938f77d042cbcd822936a7a359a7235bad8bd72070de1f827efc2cc297ac888"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/fl_chart/versions/1.2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "sdk:flutter@0.0.0",
+      "type": "library",
+      "name": "flutter",
+      "version": "0.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Source: sdk."
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_colorpicker@1.1.0",
+      "type": "library",
+      "name": "flutter_colorpicker",
+      "version": "1.1.0",
+      "purl": "pkg:pub/flutter_colorpicker@1.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "969de5f6f9e2a570ac660fb7b501551451ea2a1ab9e2097e89475f60e07816ea"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_colorpicker/versions/1.1.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_highlight@0.7.0",
+      "type": "library",
+      "name": "flutter_highlight",
+      "version": "0.7.0",
+      "purl": "pkg:pub/flutter_highlight@0.7.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7b96333867aa07e122e245c033b8ad622e4e3a42a1a2372cbb098a2541d8782c"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_highlight/versions/0.7.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_keyboard_visibility_linux@1.0.0",
+      "type": "library",
+      "name": "flutter_keyboard_visibility_linux",
+      "version": "1.0.0",
+      "purl": "pkg:pub/flutter_keyboard_visibility_linux@1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6fba7cd9bb033b6ddd8c2beb4c99ad02d728f1e6e6d9b9446667398b2ac39f08"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_keyboard_visibility_linux/versions/1.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_keyboard_visibility_macos@1.0.0",
+      "type": "library",
+      "name": "flutter_keyboard_visibility_macos",
+      "version": "1.0.0",
+      "purl": "pkg:pub/flutter_keyboard_visibility_macos@1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c5c49b16fff453dfdafdc16f26bdd8fb8d55812a1d50b0ce25fc8d9f2e53d086"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_keyboard_visibility_macos/versions/1.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_keyboard_visibility_platform_interface@2.0.0",
+      "type": "library",
+      "name": "flutter_keyboard_visibility_platform_interface",
+      "version": "2.0.0",
+      "purl": "pkg:pub/flutter_keyboard_visibility_platform_interface@2.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e43a89845873f7be10cb3884345ceb9aebf00a659f479d1c8f4293fcb37022a4"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_keyboard_visibility_platform_interface/versions/2.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_keyboard_visibility_temp_fork@0.1.5",
+      "type": "library",
+      "name": "flutter_keyboard_visibility_temp_fork",
+      "version": "0.1.5",
+      "purl": "pkg:pub/flutter_keyboard_visibility_temp_fork@0.1.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e3d02900640fbc1129245540db16944a0898b8be81694f4bf04b6c985bed9048"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_keyboard_visibility_temp_fork/versions/0.1.5"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_keyboard_visibility_windows@1.0.0",
+      "type": "library",
+      "name": "flutter_keyboard_visibility_windows",
+      "version": "1.0.0",
+      "purl": "pkg:pub/flutter_keyboard_visibility_windows@1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "fc4b0f0b6be9b93ae527f3d527fb56ee2d918cd88bbca438c478af7bcfd0ef73"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_keyboard_visibility_windows/versions/1.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_lints@6.0.0",
+      "type": "library",
+      "name": "flutter_lints",
+      "version": "6.0.0",
+      "purl": "pkg:pub/flutter_lints@6.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3105dc8492f6183fb076ccf1f351ac3d60564bff92e20bfc4af9cc1651f4e7e1"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_lints/versions/6.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct dev"
+        }
+      ]
+    },
+    {
+      "bom-ref": "sdk:flutter_localizations@0.0.0",
+      "type": "library",
+      "name": "flutter_localizations",
+      "version": "0.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Source: sdk."
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_math_fork@0.7.4",
+      "type": "library",
+      "name": "flutter_math_fork",
+      "version": "0.7.4",
+      "purl": "pkg:pub/flutter_math_fork@0.7.4",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6d5f2f1aa57ae539ffb0a04bb39d2da67af74601d685a161aff7ce5bda5fa407"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_math_fork/versions/0.7.4"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_plugin_android_lifecycle@2.0.35",
+      "type": "library",
+      "name": "flutter_plugin_android_lifecycle",
+      "version": "2.0.35",
+      "purl": "pkg:pub/flutter_plugin_android_lifecycle@2.0.35",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3854fe5e3bff0b113c658f260b90c95dea17c92db0f2addeac2e343dd9969785"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_plugin_android_lifecycle/versions/2.0.35"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_quill@11.5.1",
+      "type": "library",
+      "name": "flutter_quill",
+      "version": "11.5.1",
+      "purl": "pkg:pub/flutter_quill@11.5.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3ee7125b2dd3f3bce3ebdaac722a72f0c8aff3db9aa19053a9d777db12d71c98"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_quill/versions/11.5.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_quill_delta_from_html@1.5.3",
+      "type": "library",
+      "name": "flutter_quill_delta_from_html",
+      "version": "1.5.3",
+      "purl": "pkg:pub/flutter_quill_delta_from_html@1.5.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "0eb801ea8dd498cadc057507af5da794d4c9599ce58b2569cb3d4bb53ba8bed2"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_quill_delta_from_html/versions/1.5.3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_riverpod@3.3.2",
+      "type": "library",
+      "name": "flutter_riverpod",
+      "version": "3.3.2",
+      "purl": "pkg:pub/flutter_riverpod@3.3.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9255e1e3ad6e38906a1b4f8287678f95f378744c5b46b1985588543f3f19046e"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_riverpod/versions/3.3.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_secure_storage@10.3.1",
+      "type": "library",
+      "name": "flutter_secure_storage",
+      "version": "10.3.1",
+      "purl": "pkg:pub/flutter_secure_storage@10.3.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7686b1d6a29985dcbb808c59518226e603e3bfa7c0ddfd1a0d00e4cda77c868e"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_secure_storage/versions/10.3.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_secure_storage_darwin@0.3.2",
+      "type": "library",
+      "name": "flutter_secure_storage_darwin",
+      "version": "0.3.2",
+      "purl": "pkg:pub/flutter_secure_storage_darwin@0.3.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "82329fa5cdf343773b1b6897dea959105a29f092454259edff92f9f6637e8149"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_secure_storage_darwin/versions/0.3.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_secure_storage_linux@3.0.1",
+      "type": "library",
+      "name": "flutter_secure_storage_linux",
+      "version": "3.0.1",
+      "purl": "pkg:pub/flutter_secure_storage_linux@3.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a5f35ddab43cf5c8215d2feb4ce1957851f28c5c37e6f04335066a0602087bf5"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_secure_storage_linux/versions/3.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_secure_storage_platform_interface@2.0.1",
+      "type": "library",
+      "name": "flutter_secure_storage_platform_interface",
+      "version": "2.0.1",
+      "purl": "pkg:pub/flutter_secure_storage_platform_interface@2.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8ceea1223bee3c6ac1a22dabd8feefc550e4729b3675de4b5900f55afcb435d6"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_secure_storage_platform_interface/versions/2.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_secure_storage_web@2.1.1",
+      "type": "library",
+      "name": "flutter_secure_storage_web",
+      "version": "2.1.1",
+      "purl": "pkg:pub/flutter_secure_storage_web@2.1.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "073a62b3aeb866ab4ce795f960413948e51e5a42a9b0c8333b6daf5bb3208a1c"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_secure_storage_web/versions/2.1.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_secure_storage_windows@4.1.0",
+      "type": "library",
+      "name": "flutter_secure_storage_windows",
+      "version": "4.1.0",
+      "purl": "pkg:pub/flutter_secure_storage_windows@4.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3b7c8e068875dfd46719ff57c90d8c459c87f2302ed6b00ff006b3c9fcad1613"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_secure_storage_windows/versions/4.1.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/flutter_svg@2.3.0",
+      "type": "library",
+      "name": "flutter_svg",
+      "version": "2.3.0",
+      "purl": "pkg:pub/flutter_svg@2.3.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "35882981abcbfb8c15b286f0cd690ff25bac12d95eff3e25ee207f37d4c42e7f"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_svg/versions/2.3.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "sdk:flutter_test@0.0.0",
+      "type": "library",
+      "name": "flutter_test",
+      "version": "0.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct dev"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Source: sdk."
+        }
+      ]
+    },
+    {
+      "bom-ref": "sdk:flutter_web_plugins@0.0.0",
+      "type": "library",
+      "name": "flutter_web_plugins",
+      "version": "0.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Source: sdk."
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/frontend_server_client@4.0.0",
+      "type": "library",
+      "name": "frontend_server_client",
+      "version": "4.0.0",
+      "purl": "pkg:pub/frontend_server_client@4.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f64a0333a82f30b0cca061bc3d143813a486dc086b574bfb233b7c1372427694"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/frontend_server_client/versions/4.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/glob@2.1.3",
+      "type": "library",
+      "name": "glob",
+      "version": "2.1.3",
+      "purl": "pkg:pub/glob@2.1.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c3f1ee72c96f8f78935e18aa8cecced9ab132419e8625dc187e1c2408efc20de"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/glob/versions/2.1.3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/highlight@0.7.0",
+      "type": "library",
+      "name": "highlight",
+      "version": "0.7.0",
+      "purl": "pkg:pub/highlight@0.7.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5353a83ffe3e3eca7df0abfb72dcf3fa66cc56b953728e7113ad4ad88497cf21"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/highlight/versions/0.7.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/hooks@2.0.2",
+      "type": "library",
+      "name": "hooks",
+      "version": "2.0.2",
+      "purl": "pkg:pub/hooks@2.0.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9a62a50b50b769a737bc0a8ff381f333529df3ab746b2f6b02e83760231455ba"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/hooks/versions/2.0.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/html@0.15.6",
+      "type": "library",
+      "name": "html",
+      "version": "0.15.6",
+      "purl": "pkg:pub/html@0.15.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6d1264f2dffa1b1101c25a91dff0dc2daee4c18e87cd8538729773c073dbf602"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/html/versions/0.15.6"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/http@1.6.0",
+      "type": "library",
+      "name": "http",
+      "version": "1.6.0",
+      "purl": "pkg:pub/http@1.6.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "87721a4a50b19c7f1d49001e51409bddc46303966ce89a65af4f4e6004896412"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/http/versions/1.6.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/http_multi_server@3.2.2",
+      "type": "library",
+      "name": "http_multi_server",
+      "version": "3.2.2",
+      "purl": "pkg:pub/http_multi_server@3.2.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "aa6199f908078bb1c5efb8d8638d4ae191aac11b311132c3ef48ce352fb52ef8"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/http_multi_server/versions/3.2.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/http_parser@4.1.2",
+      "type": "library",
+      "name": "http_parser",
+      "version": "4.1.2",
+      "purl": "pkg:pub/http_parser@4.1.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "178d74305e7866013777bab2c3d8726205dc5a4dd935297175b19a23a2e66571"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/http_parser/versions/4.1.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/image@4.9.1",
+      "type": "library",
+      "name": "image",
+      "version": "4.9.1",
+      "purl": "pkg:pub/image@4.9.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6300175e00616bbc832e2fc91bfa4d776af5402c81c7151bee6905bb08473c52"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/image/versions/4.9.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/intl@0.20.2",
+      "type": "library",
+      "name": "intl",
+      "version": "0.20.2",
+      "purl": "pkg:pub/intl@0.20.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/intl/versions/0.20.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/io@1.0.5",
+      "type": "library",
+      "name": "io",
+      "version": "1.0.5",
+      "purl": "pkg:pub/io@1.0.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "dfd5a80599cf0165756e3181807ed3e77daf6dd4137caaad72d0b7931597650b"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/io/versions/1.0.5"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/jni@1.0.0",
+      "type": "library",
+      "name": "jni",
+      "version": "1.0.0",
+      "purl": "pkg:pub/jni@1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c2230682d5bc2362c1c9e8d3c7f406d9cbba23ab3f2e203a025dd47e0fb2e68f"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/jni/versions/1.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/jni_flutter@1.0.1",
+      "type": "library",
+      "name": "jni_flutter",
+      "version": "1.0.1",
+      "purl": "pkg:pub/jni_flutter@1.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8b59e590786050b1cd866677dddaf76b1ade5e7bc751abe04b86e84d379d3ba6"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/jni_flutter/versions/1.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/json_annotation@4.12.0",
+      "type": "library",
+      "name": "json_annotation",
+      "version": "4.12.0",
+      "purl": "pkg:pub/json_annotation@4.12.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2a743920d81b7910627f68ee2c9ac1fc0bfee32b9fc3403587d7c6791ca12f80"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/json_annotation/versions/4.12.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/leak_tracker@11.0.2",
+      "type": "library",
+      "name": "leak_tracker",
+      "version": "11.0.2",
+      "purl": "pkg:pub/leak_tracker@11.0.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "33e2e26bdd85a0112ec15400c8cbffea70d0f9c3407491f672a2fad47915e2de"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/leak_tracker/versions/11.0.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/leak_tracker_flutter_testing@3.0.10",
+      "type": "library",
+      "name": "leak_tracker_flutter_testing",
+      "version": "3.0.10",
+      "purl": "pkg:pub/leak_tracker_flutter_testing@3.0.10",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1dbc140bb5a23c75ea9c4811222756104fbcd1a27173f0c34ca01e16bea473c1"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/leak_tracker_flutter_testing/versions/3.0.10"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/leak_tracker_testing@3.0.2",
+      "type": "library",
+      "name": "leak_tracker_testing",
+      "version": "3.0.2",
+      "purl": "pkg:pub/leak_tracker_testing@3.0.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8d5a2d49f4a66b49744b23b018848400d23e54caf9463f4eb20df3eb8acb2eb1"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/leak_tracker_testing/versions/3.0.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/lints@6.1.0",
+      "type": "library",
+      "name": "lints",
+      "version": "6.1.0",
+      "purl": "pkg:pub/lints@6.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "12f842a479589fea194fe5c5a3095abc7be0c1f2ddfa9a0e76aed1dbd26a87df"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/lints/versions/6.1.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/logging@1.3.0",
+      "type": "library",
+      "name": "logging",
+      "version": "1.3.0",
+      "purl": "pkg:pub/logging@1.3.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c8245ada5f1717ed44271ed1c26b8ce85ca3228fd2ffdb75468ab01979309d61"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/logging/versions/1.3.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/markdown@7.3.1",
+      "type": "library",
+      "name": "markdown",
+      "version": "7.3.1",
+      "purl": "pkg:pub/markdown@7.3.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ee85086ad7698b42522c6ad42fe195f1b9898e4d974a1af4576c1a3a176cada9"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/markdown/versions/7.3.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/markdown_quill@4.3.0",
+      "type": "library",
+      "name": "markdown_quill",
+      "version": "4.3.0",
+      "purl": "pkg:pub/markdown_quill@4.3.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b378c3f268f488f1146bf8e2abdc0d45133a914e2efaa4f601cc9e6118af2fbe"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/markdown_quill/versions/4.3.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/matcher@0.12.19",
+      "type": "library",
+      "name": "matcher",
+      "version": "0.12.19",
+      "purl": "pkg:pub/matcher@0.12.19",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "dc0b7dc7651697ea4ff3e69ef44b0407ea32c487a39fff6a4004fa585e901861"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/matcher/versions/0.12.19"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/material_color_utilities@0.13.0",
+      "type": "library",
+      "name": "material_color_utilities",
+      "version": "0.13.0",
+      "purl": "pkg:pub/material_color_utilities@0.13.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9c337007e82b1889149c82ed242ed1cb24a66044e30979c44912381e9be4c48b"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/material_color_utilities/versions/0.13.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/meta@1.18.0",
+      "type": "library",
+      "name": "meta",
+      "version": "1.18.0",
+      "purl": "pkg:pub/meta@1.18.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1741988757a65eb6b36abe716829688cf01910bbf91c34354ff7ec1c3de2b349"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/meta/versions/1.18.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/mime@2.0.0",
+      "type": "library",
+      "name": "mime",
+      "version": "2.0.0",
+      "purl": "pkg:pub/mime@2.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "41a20518f0cb1256669420fdba0cd90d21561e560ac240f26ef8322e45bb7ed6"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/mime/versions/2.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/nested@1.0.0",
+      "type": "library",
+      "name": "nested",
+      "version": "1.0.0",
+      "purl": "pkg:pub/nested@1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/nested/versions/1.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/node_preamble@2.0.2",
+      "type": "library",
+      "name": "node_preamble",
+      "version": "2.0.2",
+      "purl": "pkg:pub/node_preamble@2.0.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6e7eac89047ab8a8d26cf16127b5ed26de65209847630400f9aefd7cd5c730db"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/node_preamble/versions/2.0.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/objective_c@9.4.1",
+      "type": "library",
+      "name": "objective_c",
+      "version": "9.4.1",
+      "purl": "pkg:pub/objective_c@9.4.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6cb691c686fa2838c6deb34980d426145c2a5d537491cb83d463c33cdbc726ed"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/objective_c/versions/9.4.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/package_config@2.2.0",
+      "type": "library",
+      "name": "package_config",
+      "version": "2.2.0",
+      "purl": "pkg:pub/package_config@2.2.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f096c55ebb7deb7e384101542bfba8c52696c1b56fca2eb62827989ef2353bbc"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/package_config/versions/2.2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/package_info_plus@9.0.1",
+      "type": "library",
+      "name": "package_info_plus",
+      "version": "9.0.1",
+      "purl": "pkg:pub/package_info_plus@9.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "468c26b4254ab01979fa5e4a98cb343ea3631b9acee6f21028997419a80e1a20"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/package_info_plus/versions/9.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/package_info_plus_platform_interface@3.2.1",
+      "type": "library",
+      "name": "package_info_plus_platform_interface",
+      "version": "3.2.1",
+      "purl": "pkg:pub/package_info_plus_platform_interface@3.2.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "202a487f08836a592a6bd4f901ac69b3a8f146af552bbd14407b6b41e1c3f086"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/package_info_plus_platform_interface/versions/3.2.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/pasteboard@0.5.0",
+      "type": "library",
+      "name": "pasteboard",
+      "version": "0.5.0",
+      "purl": "pkg:pub/pasteboard@0.5.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "fedbe8da188d2f713aa8b01260737342e6e1087534a3ab26e1a719f8d3e8f32f"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/pasteboard/versions/0.5.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/path@1.9.1",
+      "type": "library",
+      "name": "path",
+      "version": "1.9.1",
+      "purl": "pkg:pub/path@1.9.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "75cca69d1490965be98c73ceaea117e8a04dd21217b37b292c9ddbec0d955bc5"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/path/versions/1.9.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/path_parsing@1.1.0",
+      "type": "library",
+      "name": "path_parsing",
+      "version": "1.1.0",
+      "purl": "pkg:pub/path_parsing@1.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "883402936929eac138ee0a45da5b0f2c80f89913e6dc3bf77eb65b84b409c6ca"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/path_parsing/versions/1.1.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/path_provider@2.1.6",
+      "type": "library",
+      "name": "path_provider",
+      "version": "2.1.6",
+      "purl": "pkg:pub/path_provider@2.1.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a7f4874f987173da295a61c181b8ee71dab59b332a486b391babf26a1b884825"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/path_provider/versions/2.1.6"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/path_provider_android@2.3.1",
+      "type": "library",
+      "name": "path_provider_android",
+      "version": "2.3.1",
+      "purl": "pkg:pub/path_provider_android@2.3.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "69cbd515a62b94d32a7944f086b2f82b4ac40a1d45bebfc00813a430ab2dabcd"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/path_provider_android/versions/2.3.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/path_provider_foundation@2.6.0",
+      "type": "library",
+      "name": "path_provider_foundation",
+      "version": "2.6.0",
+      "purl": "pkg:pub/path_provider_foundation@2.6.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2a376b7d6392d80cd3705782d2caa734ca4727776db0b6ec36ef3f1855197699"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/path_provider_foundation/versions/2.6.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/path_provider_linux@2.2.2",
+      "type": "library",
+      "name": "path_provider_linux",
+      "version": "2.2.2",
+      "purl": "pkg:pub/path_provider_linux@2.2.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "58c2005f147315b11e9b4a7bc889cd5203e250cba8e3f012dae259b4972b5c16"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/path_provider_linux/versions/2.2.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/path_provider_platform_interface@2.1.3",
+      "type": "library",
+      "name": "path_provider_platform_interface",
+      "version": "2.1.3",
+      "purl": "pkg:pub/path_provider_platform_interface@2.1.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "484838772624c3a4b94f1e44a3e19897fee738f2d5c4ce448443b0417f7c9dda"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/path_provider_platform_interface/versions/2.1.3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/path_provider_windows@2.3.0",
+      "type": "library",
+      "name": "path_provider_windows",
+      "version": "2.3.0",
+      "purl": "pkg:pub/path_provider_windows@2.3.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "bd6f00dbd873bfb70d0761682da2b3a2c2fccc2b9e84c495821639601d81afe7"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/path_provider_windows/versions/2.3.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/pdf@3.13.0",
+      "type": "library",
+      "name": "pdf",
+      "version": "3.13.0",
+      "purl": "pkg:pub/pdf@3.13.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "517df47af468734a23c8b513c0c6a8a62357403ab1b8ab7fad1606576a9dbdd0"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/pdf/versions/3.13.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/petitparser@7.0.2",
+      "type": "library",
+      "name": "petitparser",
+      "version": "7.0.2",
+      "purl": "pkg:pub/petitparser@7.0.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "91bd59303e9f769f108f8df05e371341b15d59e995e6806aefab827b58336675"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/petitparser/versions/7.0.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/platform@3.1.6",
+      "type": "library",
+      "name": "platform",
+      "version": "3.1.6",
+      "purl": "pkg:pub/platform@3.1.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5d6b1b0036a5f331ebc77c850ebc8506cbc1e9416c27e59b439f917a902a4984"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/platform/versions/3.1.6"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/plugin_platform_interface@2.1.8",
+      "type": "library",
+      "name": "plugin_platform_interface",
+      "version": "2.1.8",
+      "purl": "pkg:pub/plugin_platform_interface@2.1.8",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4820fbfdb9478b1ebae27888254d445073732dae3d6ea81f0b7e06d5dedc3f02"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/plugin_platform_interface/versions/2.1.8"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/pool@1.5.2",
+      "type": "library",
+      "name": "pool",
+      "version": "1.5.2",
+      "purl": "pkg:pub/pool@1.5.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "978783255c543aa3586a1b3c21f6e9d720eb315376a915872c61ef8b5c20177d"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/pool/versions/1.5.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/posix@6.5.0",
+      "type": "library",
+      "name": "posix",
+      "version": "6.5.0",
+      "purl": "pkg:pub/posix@6.5.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "185ef7606574f789b40f289c233efa52e96dead518aed988e040a10737febb07"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/posix/versions/6.5.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/provider@6.1.5+1",
+      "type": "library",
+      "name": "provider",
+      "version": "6.1.5+1",
+      "purl": "pkg:pub/provider@6.1.5+1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4e82183fa20e5ca25703ead7e05de9e4cceed1fbd1eadc1ac3cb6f565a09f272"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/provider/versions/6.1.5+1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/pub_semver@2.2.0",
+      "type": "library",
+      "name": "pub_semver",
+      "version": "2.2.0",
+      "purl": "pkg:pub/pub_semver@2.2.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5bfcf68ca79ef689f8990d1160781b4bad40a3bd5e5218ad4076ddb7f4081585"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/pub_semver/versions/2.2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/qr@3.0.2",
+      "type": "library",
+      "name": "qr",
+      "version": "3.0.2",
+      "purl": "pkg:pub/qr@3.0.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5a1d2586170e172b8a8c8470bbbffd5eb0cd38a66c0d77155ea138d3af3a4445"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/qr/versions/3.0.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/quill_native_bridge@11.1.0",
+      "type": "library",
+      "name": "quill_native_bridge",
+      "version": "11.1.0",
+      "purl": "pkg:pub/quill_native_bridge@11.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "76a16512e398e84216f3f659f7cb18a89ec1e141ea908e954652b4ce6cf15b18"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/quill_native_bridge/versions/11.1.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/quill_native_bridge_android@0.0.1+2",
+      "type": "library",
+      "name": "quill_native_bridge_android",
+      "version": "0.0.1+2",
+      "purl": "pkg:pub/quill_native_bridge_android@0.0.1+2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b75c7e6ede362a7007f545118e756b1f19053994144ec9eda932ce5e54a57569"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/quill_native_bridge_android/versions/0.0.1+2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/quill_native_bridge_ios@0.0.1",
+      "type": "library",
+      "name": "quill_native_bridge_ios",
+      "version": "0.0.1",
+      "purl": "pkg:pub/quill_native_bridge_ios@0.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d23de3cd7724d482fe2b514617f8eedc8f296e120fb297368917ac3b59d8099f"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/quill_native_bridge_ios/versions/0.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/quill_native_bridge_macos@0.0.1",
+      "type": "library",
+      "name": "quill_native_bridge_macos",
+      "version": "0.0.1",
+      "purl": "pkg:pub/quill_native_bridge_macos@0.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1c0631bd1e2eee765a8b06017c5286a4e829778f4585736e048eb67c97af8a77"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/quill_native_bridge_macos/versions/0.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/quill_native_bridge_platform_interface@0.0.2+1",
+      "type": "library",
+      "name": "quill_native_bridge_platform_interface",
+      "version": "0.0.2+1",
+      "purl": "pkg:pub/quill_native_bridge_platform_interface@0.0.2+1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8264a2bdb8a294c31377a27b46c0f8717fa9f968cf113f7dc52d332ed9c84526"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/quill_native_bridge_platform_interface/versions/0.0.2+1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/quill_native_bridge_web@0.0.2",
+      "type": "library",
+      "name": "quill_native_bridge_web",
+      "version": "0.0.2",
+      "purl": "pkg:pub/quill_native_bridge_web@0.0.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7c723f6824b0250d7f33e8b6c23f2f8eb0103fe48ee7ebf47ab6786b64d5c05d"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/quill_native_bridge_web/versions/0.0.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/quill_native_bridge_windows@0.0.2",
+      "type": "library",
+      "name": "quill_native_bridge_windows",
+      "version": "0.0.2",
+      "purl": "pkg:pub/quill_native_bridge_windows@0.0.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3f96ced19e3206ddf4f6f7dde3eb16bdd05e10294964009ea3a806d995aa7caa"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/quill_native_bridge_windows/versions/0.0.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/quiver@3.2.2",
+      "type": "library",
+      "name": "quiver",
+      "version": "3.2.2",
+      "purl": "pkg:pub/quiver@3.2.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ea0b925899e64ecdfbf9c7becb60d5b50e706ade44a85b2363be2a22d88117d2"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/quiver/versions/3.2.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/record_use@0.6.0",
+      "type": "library",
+      "name": "record_use",
+      "version": "0.6.0",
+      "purl": "pkg:pub/record_use@0.6.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2551bd8eecfe95d14ae75f6021ad0248be5c27f138c2ec12fcb52b500b3ba1ed"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/record_use/versions/0.6.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/riverpod@3.3.2",
+      "type": "library",
+      "name": "riverpod",
+      "version": "3.3.2",
+      "purl": "pkg:pub/riverpod@3.3.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "17100416c51db7810c71a7bb2c34d1f881faa0074fd452afb0c4db6f8f126c76"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/riverpod/versions/3.3.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/screen_retriever@0.2.1",
+      "type": "library",
+      "name": "screen_retriever",
+      "version": "0.2.1",
+      "purl": "pkg:pub/screen_retriever@0.2.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "42cc3b402a0f67d2455a0d067553d0f13453f6a008d98eababf8b63958d506bd"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/screen_retriever/versions/0.2.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/screen_retriever_linux@0.2.1",
+      "type": "library",
+      "name": "screen_retriever_linux",
+      "version": "0.2.1",
+      "purl": "pkg:pub/screen_retriever_linux@0.2.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2a476f1a5538065bc5badf376cfdc83d6ecf07d77eb2391b9c2bff5a76970048"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/screen_retriever_linux/versions/0.2.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/screen_retriever_platform_interface@0.2.1",
+      "type": "library",
+      "name": "screen_retriever_platform_interface",
+      "version": "0.2.1",
+      "purl": "pkg:pub/screen_retriever_platform_interface@0.2.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3af22d926bedf20c2caa308eea376776451a3af125919ce072e56525fded8901"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/screen_retriever_platform_interface/versions/0.2.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/screen_retriever_windows@0.2.1",
+      "type": "library",
+      "name": "screen_retriever_windows",
+      "version": "0.2.1",
+      "purl": "pkg:pub/screen_retriever_windows@0.2.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c44b38a4c4bab34af259180a70a4eee1e29384e7b82e627c9faa68afcdab2e73"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/screen_retriever_windows/versions/0.2.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/shared_preferences@2.5.5",
+      "type": "library",
+      "name": "shared_preferences",
+      "version": "2.5.5",
+      "purl": "pkg:pub/shared_preferences@2.5.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c3025c5534b01739267eb7d76959bbc25a6d10f6988e1c2a3036940133dd10bf"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/shared_preferences/versions/2.5.5"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/shared_preferences_android@2.4.26",
+      "type": "library",
+      "name": "shared_preferences_android",
+      "version": "2.4.26",
+      "purl": "pkg:pub/shared_preferences_android@2.4.26",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "93ae5884a9df5d3bb696825bceb3a17590754548b5d740eba51500afc8d088f5"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/shared_preferences_android/versions/2.4.26"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/shared_preferences_foundation@2.5.6",
+      "type": "library",
+      "name": "shared_preferences_foundation",
+      "version": "2.5.6",
+      "purl": "pkg:pub/shared_preferences_foundation@2.5.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4e7eaffc2b17ba398759f1151415869a34771ba11ebbccd1b0145472a619a64f"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/shared_preferences_foundation/versions/2.5.6"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/shared_preferences_linux@2.4.1",
+      "type": "library",
+      "name": "shared_preferences_linux",
+      "version": "2.4.1",
+      "purl": "pkg:pub/shared_preferences_linux@2.4.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "580abfd40f415611503cae30adf626e6656dfb2f0cee8f465ece7b6defb40f2f"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/shared_preferences_linux/versions/2.4.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/shared_preferences_platform_interface@2.4.2",
+      "type": "library",
+      "name": "shared_preferences_platform_interface",
+      "version": "2.4.2",
+      "purl": "pkg:pub/shared_preferences_platform_interface@2.4.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "649dc798a33931919ea356c4305c2d1f81619ea6e92244070b520187b5140ef9"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/shared_preferences_platform_interface/versions/2.4.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/shared_preferences_web@2.4.3",
+      "type": "library",
+      "name": "shared_preferences_web",
+      "version": "2.4.3",
+      "purl": "pkg:pub/shared_preferences_web@2.4.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c49bd060261c9a3f0ff445892695d6212ff603ef3115edbb448509d407600019"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/shared_preferences_web/versions/2.4.3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/shared_preferences_windows@2.4.1",
+      "type": "library",
+      "name": "shared_preferences_windows",
+      "version": "2.4.1",
+      "purl": "pkg:pub/shared_preferences_windows@2.4.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "94ef0f72b2d71bc3e700e025db3710911bd51a71cefb65cc609dd0d9a982e3c1"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/shared_preferences_windows/versions/2.4.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/shelf@1.4.2",
+      "type": "library",
+      "name": "shelf",
+      "version": "1.4.2",
+      "purl": "pkg:pub/shelf@1.4.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e7dd780a7ffb623c57850b33f43309312fc863fb6aa3d276a754bb299839ef12"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/shelf/versions/1.4.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/shelf_packages_handler@3.0.2",
+      "type": "library",
+      "name": "shelf_packages_handler",
+      "version": "3.0.2",
+      "purl": "pkg:pub/shelf_packages_handler@3.0.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "89f967eca29607c933ba9571d838be31d67f53f6e4ee15147d5dc2934fee1b1e"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/shelf_packages_handler/versions/3.0.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/shelf_static@1.1.3",
+      "type": "library",
+      "name": "shelf_static",
+      "version": "1.1.3",
+      "purl": "pkg:pub/shelf_static@1.1.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c87c3875f91262785dade62d135760c2c69cb217ac759485334c5857ad89f6e3"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/shelf_static/versions/1.1.3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/shelf_web_socket@3.0.0",
+      "type": "library",
+      "name": "shelf_web_socket",
+      "version": "3.0.0",
+      "purl": "pkg:pub/shelf_web_socket@3.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3632775c8e90d6c9712f883e633716432a27758216dfb61bd86a8321c0580925"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/shelf_web_socket/versions/3.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "sdk:sky_engine@0.0.0",
+      "type": "library",
+      "name": "sky_engine",
+      "version": "0.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSL-1.0"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Source: sdk."
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/source_map_stack_trace@2.1.2",
+      "type": "library",
+      "name": "source_map_stack_trace",
+      "version": "2.1.2",
+      "purl": "pkg:pub/source_map_stack_trace@2.1.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c0713a43e323c3302c2abe2a1cc89aa057a387101ebd280371d6a6c9fa68516b"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/source_map_stack_trace/versions/2.1.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/source_maps@0.10.13",
+      "type": "library",
+      "name": "source_maps",
+      "version": "0.10.13",
+      "purl": "pkg:pub/source_maps@0.10.13",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "190222579a448b03896e0ca6eca5998fa810fda630c1d65e2f78b3f638f54812"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/source_maps/versions/0.10.13"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/source_span@1.10.2",
+      "type": "library",
+      "name": "source_span",
+      "version": "1.10.2",
+      "purl": "pkg:pub/source_span@1.10.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "56a02f1f4cd1a2d96303c0144c93bd6d909eea6bee6bf5a0e0b685edbd4c47ab"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/source_span/versions/1.10.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/stack_trace@1.12.1",
+      "type": "library",
+      "name": "stack_trace",
+      "version": "1.12.1",
+      "purl": "pkg:pub/stack_trace@1.12.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8b27215b45d22309b5cddda1aa2b19bdfec9df0e765f2de506401c071d38d1b1"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/stack_trace/versions/1.12.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/state_notifier@1.0.0",
+      "type": "library",
+      "name": "state_notifier",
+      "version": "1.0.0",
+      "purl": "pkg:pub/state_notifier@1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b8677376aa54f2d7c58280d5a007f9e8774f1968d1fb1c096adcb4792fba29bb"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/state_notifier/versions/1.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/stream_channel@2.1.4",
+      "type": "library",
+      "name": "stream_channel",
+      "version": "2.1.4",
+      "purl": "pkg:pub/stream_channel@2.1.4",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "969e04c80b8bcdf826f8f16579c7b14d780458bd97f56d107d3950fdbeef059d"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/stream_channel/versions/2.1.4"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/string_scanner@1.4.1",
+      "type": "library",
+      "name": "string_scanner",
+      "version": "1.4.1",
+      "purl": "pkg:pub/string_scanner@1.4.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "921cd31725b72fe181906c6a94d987c78e3b98c2e205b397ea399d4054872b43"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/string_scanner/versions/1.4.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/term_glyph@1.2.2",
+      "type": "library",
+      "name": "term_glyph",
+      "version": "1.2.2",
+      "purl": "pkg:pub/term_glyph@1.2.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7f554798625ea768a7518313e58f83891c7f5024f88e46e7182a4558850a4b8e"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/term_glyph/versions/1.2.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/test@1.31.0",
+      "type": "library",
+      "name": "test",
+      "version": "1.31.0",
+      "purl": "pkg:pub/test@1.31.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8d9ceddbab833f180fbefed08afa76d7c03513dfdba87ffcec2718b02bbcbf20"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/test/versions/1.31.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/test_api@0.7.11",
+      "type": "library",
+      "name": "test_api",
+      "version": "0.7.11",
+      "purl": "pkg:pub/test_api@0.7.11",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "949a932224383300f01be9221c39180316445ecb8e7547f70a41a35bf421fb9e"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/test_api/versions/0.7.11"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/test_core@0.6.17",
+      "type": "library",
+      "name": "test_core",
+      "version": "0.6.17",
+      "purl": "pkg:pub/test_core@0.6.17",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1991d4cfe85d5043241acac92962c3977c8d2f2add1ee73130c7b286417d1d34"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/test_core/versions/0.6.17"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/tuple@2.0.2",
+      "type": "library",
+      "name": "tuple",
+      "version": "2.0.2",
+      "purl": "pkg:pub/tuple@2.0.2",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a97ce2013f240b2f3807bcbaf218765b6f301c3eff91092bcfa23a039e7dd151"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/tuple/versions/2.0.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/typed_data@1.4.0",
+      "type": "library",
+      "name": "typed_data",
+      "version": "1.4.0",
+      "purl": "pkg:pub/typed_data@1.4.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f9049c039ebfeb4cf7a7104a675823cd72dba8297f264b6637062516699fa006"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/typed_data/versions/1.4.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/universal_platform@1.1.0",
+      "type": "library",
+      "name": "universal_platform",
+      "version": "1.1.0",
+      "purl": "pkg:pub/universal_platform@1.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "64e16458a0ea9b99260ceb5467a214c1f298d647c659af1bff6d3bf82536b1ec"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/universal_platform/versions/1.1.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/url_launcher@6.3.2",
+      "type": "library",
+      "name": "url_launcher",
+      "version": "6.3.2",
+      "purl": "pkg:pub/url_launcher@6.3.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f6a7e5c4835bb4e3026a04793a4199ca2d14c739ec378fdfe23fc8075d0439f8"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/url_launcher/versions/6.3.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/url_launcher_android@6.3.32",
+      "type": "library",
+      "name": "url_launcher_android",
+      "version": "6.3.32",
+      "purl": "pkg:pub/url_launcher_android@6.3.32",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b413d49b73867ac08dd2f9890efd3cc11f2a0e577618d50843440a1fb3776c32"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/url_launcher_android/versions/6.3.32"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/url_launcher_ios@6.4.1",
+      "type": "library",
+      "name": "url_launcher_ios",
+      "version": "6.4.1",
+      "purl": "pkg:pub/url_launcher_ios@6.4.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "580fe5dfb51671ae38191d316e027f6b76272b026370708c2d898799750a02b0"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/url_launcher_ios/versions/6.4.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/url_launcher_linux@3.2.2",
+      "type": "library",
+      "name": "url_launcher_linux",
+      "version": "3.2.2",
+      "purl": "pkg:pub/url_launcher_linux@3.2.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d5e14138b3bc193a0f63c10a53c94b91d399df0512b1f29b94a043db7482384a"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/url_launcher_linux/versions/3.2.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/url_launcher_macos@3.2.5",
+      "type": "library",
+      "name": "url_launcher_macos",
+      "version": "3.2.5",
+      "purl": "pkg:pub/url_launcher_macos@3.2.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "368adf46f71ad3c21b8f06614adb38346f193f3a59ba8fe9a2fd74133070ba18"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/url_launcher_macos/versions/3.2.5"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/url_launcher_platform_interface@2.3.2",
+      "type": "library",
+      "name": "url_launcher_platform_interface",
+      "version": "2.3.2",
+      "purl": "pkg:pub/url_launcher_platform_interface@2.3.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "552f8a1e663569be95a8190206a38187b531910283c3e982193e4f2733f01029"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/url_launcher_platform_interface/versions/2.3.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/url_launcher_web@2.4.3",
+      "type": "library",
+      "name": "url_launcher_web",
+      "version": "2.4.3",
+      "purl": "pkg:pub/url_launcher_web@2.4.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "85c81589622fbc87c1c683aaea164d3604a7777495a79d91e39ffcdec39ddb34"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/url_launcher_web/versions/2.4.3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/url_launcher_windows@3.1.5",
+      "type": "library",
+      "name": "url_launcher_windows",
+      "version": "3.1.5",
+      "purl": "pkg:pub/url_launcher_windows@3.1.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "712c70ab1b99744ff066053cbe3e80c73332b38d46e5e945c98689b2e66fc15f"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/url_launcher_windows/versions/3.1.5"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/uuid@4.5.3",
+      "type": "library",
+      "name": "uuid",
+      "version": "4.5.3",
+      "purl": "pkg:pub/uuid@4.5.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1fef9e8e11e2991bb773070d4656b7bd5d850967a2456cfc83cf47925ba79489"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/uuid/versions/4.5.3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/vector_graphics@1.2.2",
+      "type": "library",
+      "name": "vector_graphics",
+      "version": "1.2.2",
+      "purl": "pkg:pub/vector_graphics@1.2.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2306c03da2ba81724afeb589c351ebbc0aa7d86005925be8f8735856dbe5e42d"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/vector_graphics/versions/1.2.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/vector_graphics_codec@1.1.13",
+      "type": "library",
+      "name": "vector_graphics_codec",
+      "version": "1.1.13",
+      "purl": "pkg:pub/vector_graphics_codec@1.1.13",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "99fd9fbd34d9f9a32efd7b6a6aae14125d8237b10403b422a6a6dfeac2806146"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/vector_graphics_codec/versions/1.1.13"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/vector_graphics_compiler@1.2.6",
+      "type": "library",
+      "name": "vector_graphics_compiler",
+      "version": "1.2.6",
+      "purl": "pkg:pub/vector_graphics_compiler@1.2.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "142a9146f447d15b10bdc00e21d5f4d83e5b32bb5f8f8f5a04c75311344923a3"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/vector_graphics_compiler/versions/1.2.6"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/vector_math@2.2.0",
+      "type": "library",
+      "name": "vector_math",
+      "version": "2.2.0",
+      "purl": "pkg:pub/vector_math@2.2.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d530bd74fea330e6e364cda7a85019c434070188383e1cd8d9777ee586914c5b"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/vector_math/versions/2.2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/video_player@2.11.1",
+      "type": "library",
+      "name": "video_player",
+      "version": "2.11.1",
+      "purl": "pkg:pub/video_player@2.11.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "48a7bdaa38a3d50ec10c78627abdbfad863fdf6f0d6e08c7c3c040cfd80ae36f"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/video_player/versions/2.11.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/video_player_android@2.10.0",
+      "type": "library",
+      "name": "video_player_android",
+      "version": "2.10.0",
+      "purl": "pkg:pub/video_player_android@2.10.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "15bfd0598f8d8946bf0e2d50e2ca1a0db9491589a8bb7f6f9a388c0b48aef764"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/video_player_android/versions/2.10.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/video_player_avfoundation@2.10.0",
+      "type": "library",
+      "name": "video_player_avfoundation",
+      "version": "2.10.0",
+      "purl": "pkg:pub/video_player_avfoundation@2.10.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "76097729ef0c976937945afa53f1ca3afa9b50c9a95909ba347bcf93270466fd"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/video_player_avfoundation/versions/2.10.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/video_player_platform_interface@6.8.0",
+      "type": "library",
+      "name": "video_player_platform_interface",
+      "version": "6.8.0",
+      "purl": "pkg:pub/video_player_platform_interface@6.8.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e4ae5bc934b528e5b95c5e47be2812860186260cd3eed3ac62f5ed380fdd1613"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/video_player_platform_interface/versions/6.8.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct dev"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/video_player_web@2.4.0",
+      "type": "library",
+      "name": "video_player_web",
+      "version": "2.4.0",
+      "purl": "pkg:pub/video_player_web@2.4.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9f3c00be2ef9b76a95d94ac5119fb843dca6f2c69e6c9968f6f2b6c9e7afbdeb"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/video_player_web/versions/2.4.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/vm_service@15.2.0",
+      "type": "library",
+      "name": "vm_service",
+      "version": "15.2.0",
+      "purl": "pkg:pub/vm_service@15.2.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "0016aef94fc66495ac78af5859181e3f3bf2026bd8eecc72b9565601e19ab360"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/vm_service/versions/15.2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/wakelock_plus@1.5.2",
+      "type": "library",
+      "name": "wakelock_plus",
+      "version": "1.5.2",
+      "purl": "pkg:pub/wakelock_plus@1.5.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ddf3db70eaa10c37558ff817519b85d527dbd21034fd5d8e1c2e85f31588f1c1"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/wakelock_plus/versions/1.5.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/wakelock_plus_platform_interface@1.5.1",
+      "type": "library",
+      "name": "wakelock_plus_platform_interface",
+      "version": "1.5.1",
+      "purl": "pkg:pub/wakelock_plus_platform_interface@1.5.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b13f99e992e7ae6a152e16c5559d3c07ff445b13330192662494e614ca3e7d7b"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/wakelock_plus_platform_interface/versions/1.5.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/watcher@1.2.1",
+      "type": "library",
+      "name": "watcher",
+      "version": "1.2.1",
+      "purl": "pkg:pub/watcher@1.2.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1398c9f081a753f9226febe8900fce8f7d0a67163334e1c94a2438339d79d635"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/watcher/versions/1.2.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/web@1.1.1",
+      "type": "library",
+      "name": "web",
+      "version": "1.1.1",
+      "purl": "pkg:pub/web@1.1.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "868d88a33d8a87b18ffc05f9f030ba328ffefba92d6c127917a2ba740f9cfe4a"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/web/versions/1.1.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/web_socket@1.0.1",
+      "type": "library",
+      "name": "web_socket",
+      "version": "1.0.1",
+      "purl": "pkg:pub/web_socket@1.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "34d64019aa8e36bf9842ac014bb5d2f5586ca73df5e4d9bf5c936975cae6982c"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/web_socket/versions/1.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/web_socket_channel@3.0.3",
+      "type": "library",
+      "name": "web_socket_channel",
+      "version": "3.0.3",
+      "purl": "pkg:pub/web_socket_channel@3.0.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d645757fb0f4773d602444000a8131ff5d48c9e47adfe9772652dd1a4f2d45c8"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/web_socket_channel/versions/3.0.3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/webkit_inspection_protocol@1.2.1",
+      "type": "library",
+      "name": "webkit_inspection_protocol",
+      "version": "1.2.1",
+      "purl": "pkg:pub/webkit_inspection_protocol@1.2.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "87d3f2333bb240704cd3f1c6b5b7acd8a10e7f0bc28c28dcf14e782014f4a572"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/webkit_inspection_protocol/versions/1.2.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/webview_flutter@4.14.0",
+      "type": "library",
+      "name": "webview_flutter",
+      "version": "4.14.0",
+      "purl": "pkg:pub/webview_flutter@4.14.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e4d3474277c5043f5f3100ed27d94ad693abfd5c602b0221c719a4497e4ba1e4"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/webview_flutter/versions/4.14.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/webview_flutter_android@4.13.0",
+      "type": "library",
+      "name": "webview_flutter_android",
+      "version": "4.13.0",
+      "purl": "pkg:pub/webview_flutter_android@4.13.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a97db7a44f8e71af2f3971c45550a08cce1fb60059c1b8e534251e6cfb753490"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/webview_flutter_android/versions/4.13.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/webview_flutter_platform_interface@2.15.1",
+      "type": "library",
+      "name": "webview_flutter_platform_interface",
+      "version": "2.15.1",
+      "purl": "pkg:pub/webview_flutter_platform_interface@2.15.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1221c1b12f5278791042f2ec2841743784cf25c5a644e23d6680e5d718824f04"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/webview_flutter_platform_interface/versions/2.15.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/webview_flutter_web@0.2.3+4",
+      "type": "library",
+      "name": "webview_flutter_web",
+      "version": "0.2.3+4",
+      "purl": "pkg:pub/webview_flutter_web@0.2.3+4",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "18a7ccc1c31dd9a5c759a1b7217a2a1e04bd8f65712714a4070bfac19a23ca9e"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/webview_flutter_web/versions/0.2.3+4"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/webview_flutter_wkwebview@3.26.0",
+      "type": "library",
+      "name": "webview_flutter_wkwebview",
+      "version": "3.26.0",
+      "purl": "pkg:pub/webview_flutter_wkwebview@3.26.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c879dd64b87c452aa84381b244d5469da57ba7e8cca6884c7b1e0d406372c12d"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/webview_flutter_wkwebview/versions/3.26.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/win32@5.15.0",
+      "type": "library",
+      "name": "win32",
+      "version": "5.15.0",
+      "purl": "pkg:pub/win32@5.15.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d7cb55e04cd34096cd3a79b3330245f54cb96a370a1c27adb3c84b917de8b08e"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/win32/versions/5.15.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/window_manager@0.5.1",
+      "type": "library",
+      "name": "window_manager",
+      "version": "0.5.1",
+      "purl": "pkg:pub/window_manager@0.5.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7eb6d6c4164ec08e1bf978d6e733f3cebe792e2a23fb07cbca25c2872bfdbdcd"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/window_manager/versions/0.5.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/xdg_directories@1.1.0",
+      "type": "library",
+      "name": "xdg_directories",
+      "version": "1.1.0",
+      "purl": "pkg:pub/xdg_directories@1.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7a3f37b05d989967cdddcbb571f1ea834867ae2faa29725fd085180e0883aa15"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/xdg_directories/versions/1.1.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/xml@7.0.1",
+      "type": "library",
+      "name": "xml",
+      "version": "7.0.1",
+      "purl": "pkg:pub/xml@7.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "67f0aff7be013d107995e9b75bf4e7f2c3ef2dfdb2c8e68024bba0a7fd5756a4"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/xml/versions/7.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/yaml@3.1.3",
+      "type": "library",
+      "name": "yaml",
+      "version": "3.1.3",
+      "purl": "pkg:pub/yaml@3.1.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b9da305ac7c39faa3f030eccd175340f968459dae4af175130b3fc47e40d76ce"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/yaml/versions/3.1.3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct dev"
+        }
+      ]
+    },
+    {
+      "bom-ref": "export-asset:highlight.css",
+      "type": "file",
+      "name": "highlight.css",
+      "version": "11.11.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3a9a5def8b9c311e5ae43abde85c63133185eed4f0d9f67fea4b00a8308cf066"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "export-asset"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Hash-pinned export asset (no npm package)."
+        }
+      ]
+    },
+    {
+      "bom-ref": "font:assets/fonts/EBGaramond-Italic-Variable.ttf",
+      "type": "file",
+      "name": "EB Garamond",
+      "purl": "pkg:generic/EB%20Garamond",
+      "licenses": [
+        {
+          "license": {
+            "id": "OFL-1.1"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b76b365299331ddff5f8077648ef3b6fbb67f3bd15bebb955a42c6e57904aed0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "font"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Bundled font file assets/EBGaramond-Italic-Variable.ttf."
+        }
+      ]
+    },
+    {
+      "bom-ref": "font:assets/fonts/EBGaramond-Variable.ttf",
+      "type": "file",
+      "name": "EB Garamond",
+      "purl": "pkg:generic/EB%20Garamond",
+      "licenses": [
+        {
+          "license": {
+            "id": "OFL-1.1"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "684fcc0db2239b43497341d596d68422ea60ef7522cf2e857071ad84e4ade2a4"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "font"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Bundled font file assets/EBGaramond-Variable.ttf."
+        }
+      ]
+    },
+    {
+      "bom-ref": "font:assets/fonts/Inter-Variable.ttf",
+      "type": "file",
+      "name": "Inter",
+      "purl": "pkg:generic/Inter",
+      "licenses": [
+        {
+          "license": {
+            "id": "OFL-1.1"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "font"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Bundled font file assets/Inter-Variable.ttf."
+        }
+      ]
+    },
+    {
+      "bom-ref": "font:assets/fonts/Lora-Variable.ttf",
+      "type": "file",
+      "name": "Lora",
+      "purl": "pkg:generic/Lora",
+      "licenses": [
+        {
+          "license": {
+            "id": "OFL-1.1"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "822a6621ccbe8d97d20ac88c1c41f5615c9c2c202eaa75f272cd452aac6475a7"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "font"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Bundled font file assets/Lora-Variable.ttf."
+        }
+      ]
+    },
+    {
+      "bom-ref": "font:assets/fonts/Roboto-Variable.ttf",
+      "type": "file",
+      "name": "Roboto",
+      "purl": "pkg:generic/Roboto",
+      "licenses": [
+        {
+          "license": {
+            "id": "OFL-1.1"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d7598e12c5dbef095ff8272cfc55da0250bd07fbdecbac8a530b9b277872a134"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "font"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Bundled font file assets/Roboto-Variable.ttf."
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/dompurify@3.4.11",
+      "type": "library",
+      "name": "dompurify",
+      "version": "3.4.11",
+      "purl": "pkg:npm/dompurify@3.4.11",
+      "licenses": [
+        {
+          "expression": "Apache-2.0 OR MPL-2.0"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "dbabb5b205a333ec49c8c09e7fca30ef66df0523bb8bc0fa9ea843841f111dbd"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://cdn.jsdelivr.net/npm/dompurify@3.4.11/dist/purify.min.js"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "npm-bundle"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Vendored into purify.min.js, inlined into the HTML export."
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/highlight.js@11.11.1",
+      "type": "library",
+      "name": "highlight.js",
+      "version": "11.11.1",
+      "purl": "pkg:npm/highlight.js@11.11.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c4a399dd6f488bc97a3546e3476747b3e714c99c57b9473154c6fb8d259b9381"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "npm-bundle"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Vendored into highlight.min.js, inlined into the HTML export."
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/marked@18.0.5",
+      "type": "library",
+      "name": "marked",
+      "version": "18.0.5",
+      "purl": "pkg:npm/marked@18.0.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2dc4769dfde29f51c7aca1a539c6407c789c8ea644cf8b7d01ded28a9c1d800b"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://cdn.jsdelivr.net/npm/marked@18.0.5/lib/marked.umd.js"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "npm-bundle"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Vendored into marked.min.js, inlined into the HTML export."
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/mathjax@3.2.2",
+      "type": "library",
+      "name": "mathjax",
+      "version": "3.2.2",
+      "purl": "pkg:npm/mathjax@3.2.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d4295dc33744836935c1399feece5159577b34c5c8ffb9f1c6324cd82e03a882"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "npm-bundle"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Vendored into tex-svg.js, inlined into the HTML export."
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/mermaid@10.9.6",
+      "type": "library",
+      "name": "mermaid",
+      "version": "10.9.6",
+      "purl": "pkg:npm/mermaid@10.9.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "eda3a0ad572bbe69a318c1be0163e8233dd824f3f12939e5168feba207767151"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://cdn.jsdelivr.net/npm/mermaid@10.9.6/dist/mermaid.min.js"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "npm-bundle"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Vendored into mermaid.min.js, inlined into the HTML export."
+        }
+      ]
+    },
+    {
+      "bom-ref": "sdk:dart@^3.12.0",
+      "type": "framework",
+      "name": "dart",
+      "version": "^3.12.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://dart.dev"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/dart-lang/sdk"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "sdk"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Dart SDK constraint from pubspec.yaml (environment.sdk)."
+        }
+      ]
+    },
+    {
+      "bom-ref": "sdk:flutter@3.44.2",
+      "type": "framework",
+      "name": "flutter",
+      "version": "3.44.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://flutter.dev"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/flutter/flutter"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "sdk"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Pinned build SDK (.tool-versions)."
+        }
+      ]
+    },
+    {
+      "bom-ref": "fork:desktop_multi_window@0.3.0",
+      "type": "library",
+      "name": "desktop_multi_window",
+      "version": "0.3.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/MixinNetwork/flutter-plugins"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "vendored-fork"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Vendored fork in third_party/desktop_multi_window (local native changes)."
+        }
+      ]
+    },
+    {
+      "bom-ref": "fork:screen_retriever_macos@0.2.0",
+      "type": "library",
+      "name": "screen_retriever_macos",
+      "version": "0.2.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/leanflutter/screen_retriever"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "vendored-fork"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct overridden"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Vendored fork in third_party/screen_retriever_macos (local native changes)."
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "ocideck@1.0.0+1",
+      "dependsOn": [
+        "pkg:pub/analyzer@12.1.0",
+        "pkg:pub/archive@4.0.9",
+        "pkg:pub/characters@1.4.1",
+        "pkg:pub/crypto@3.0.7",
+        "pkg:pub/cupertino_icons@1.0.9",
+        "pkg:pub/desktop_drop@0.7.1",
+        "pkg:pub/fake_async@1.3.3",
+        "pkg:pub/file_picker@11.0.2",
+        "pkg:pub/fl_chart@1.2.0",
+        "sdk:flutter@0.0.0",
+        "pkg:pub/flutter_highlight@0.7.0",
+        "pkg:pub/flutter_lints@6.0.0",
+        "sdk:flutter_localizations@0.0.0",
+        "pkg:pub/flutter_math_fork@0.7.4",
+        "pkg:pub/flutter_quill@11.5.1",
+        "pkg:pub/flutter_riverpod@3.3.2",
+        "pkg:pub/flutter_secure_storage@10.3.1",
+        "pkg:pub/flutter_svg@2.3.0",
+        "sdk:flutter_test@0.0.0",
+        "pkg:pub/highlight@0.7.0",
+        "pkg:pub/http@1.6.0",
+        "pkg:pub/image@4.9.1",
+        "pkg:pub/markdown@7.3.1",
+        "pkg:pub/markdown_quill@4.3.0",
+        "pkg:pub/pasteboard@0.5.0",
+        "pkg:pub/path@1.9.1",
+        "pkg:pub/path_provider@2.1.6",
+        "pkg:pub/pdf@3.13.0",
+        "pkg:pub/screen_retriever@0.2.1",
+        "pkg:pub/shared_preferences@2.5.5",
+        "pkg:pub/url_launcher@6.3.2",
+        "pkg:pub/uuid@4.5.3",
+        "pkg:pub/video_player@2.11.1",
+        "pkg:pub/video_player_platform_interface@6.8.0",
+        "pkg:pub/wakelock_plus@1.5.2",
+        "pkg:pub/web@1.1.1",
+        "pkg:pub/webview_flutter@4.14.0",
+        "pkg:pub/webview_flutter_web@0.2.3+4",
+        "pkg:pub/window_manager@0.5.1",
+        "pkg:pub/xml@7.0.1",
+        "pkg:pub/yaml@3.1.3",
+        "fork:desktop_multi_window@0.3.0",
+        "fork:screen_retriever_macos@0.2.0"
+      ]
+    }
+  ]
+}

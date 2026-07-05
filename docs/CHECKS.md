@@ -15,7 +15,7 @@ Run this before every push; it is exactly what the CI gate runs. For the extende
 local sweep that also covers licences and dependency health:
 
 ```sh
-make check-full   # check + licenses + deps-check + deps-outdated
+make check-full   # check + licenses + sbom-verify + deps-check + deps-outdated
 ```
 
 ## How intensively is it tested?
@@ -49,6 +49,7 @@ run locally and in CI, the number you see locally is the number CI gates on.
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 65% floor | — | — | ✅ (gate) |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
+| [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | ✅ |
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ |
 | [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ |
 | [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — |
@@ -156,6 +157,18 @@ These three run on every push and pull request (and as `make check`).
 - **Failure means:** a dependency uses an unrecognised or non-open-source
   licence — review it. See [`LICENSE_COMPLIANCE.md`](LICENSE_COMPLIANCE.md) for
   the policy and the allow-list.
+
+### `make sbom` / `make sbom-verify`
+- **Runs:** `dart run tool/generate_sbom.dart` (and `--check` for `sbom-verify`).
+- **Covers:** the Software Bill of Materials the EU Cyber Resilience Act
+  (Reg. (EU) 2024/2847, Annex I Part II §1) requires. `make sbom` regenerates
+  `sbom/ocideck.cdx.json` (CycloneDX 1.6) and `sbom/ocideck.spdx.json`
+  (SPDX 2.3) from the files that are already the source of truth. `make
+  sbom-verify` regenerates in memory and fails if the committed SBOM drifted
+  (volatile timestamp/serial fields are normalised out first).
+- **Failure means:** dependencies changed but the SBOM wasn't regenerated —
+  run `make sbom` and commit the result. See [`SBOM.md`](SBOM.md) for the
+  format, the covered components, and the CRA mapping.
 
 ### `make deps-check`
 - **Runs:** `dart run tool/check_bundled_js.dart`
@@ -269,7 +282,8 @@ For focused work, run only the relevant slice instead of the whole suite:
 - **Gate (Linux)** — `runs-on: ubuntu-latest`: `flutter pub get
   --enforce-lockfile`, then `make format-check`, `make analyze`,
   `make check-conventions`, `make coverage` (with the line-coverage floor),
-  `make licenses`, and `make deps-check`. Uploads the coverage report.
+  `make licenses`, `make sbom-verify`, and `make deps-check`. Uploads the
+  coverage report.
 - **Test matrix (macOS + Windows)** — runs `flutter test
   --test-randomize-ordering-seed random` on the other two desktop OSes to catch
   platform-specific (path, `Platform.isX`) regressions the Linux gate would miss.
