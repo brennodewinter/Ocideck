@@ -21,7 +21,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   advisory: not part of `make check`/`check-full` (it needs the external `trivy`
   binary and Dart/pub advisory data is still sparse), and the matching CI job
   runs with `exit-code: 0` so it reports without blocking merges. Documented in
-  `docs/CHECKS.md`.
+  `docs/CHECKS.md`. The CI job pins `trivy-action` to `v0.36.0`, and `make trivy`
+  bypasses a stale docker credential helper via an empty `DOCKER_CONFIG` so the
+  (auth-free) vuln-DB download can't be blocked by it.
+- **Pinned-Action freshness monitor (`make check-actions`)** — an advisory check
+  that reads `.github/pinned-actions.json` and asks each exact-pinned third-party
+  CI Action's release API whether a newer version exists, so a stale pin stands
+  out (the Action analogue of `make deps-check`). Floating `@vN` Actions
+  auto-update and are not tracked. Documented in `docs/CHECKS.md`.
 - **Contextual help in the editor** — a subtle "What can I do here?" button at
   the top of the slide editor expands a short, slide-type-specific hint (e.g.
   chart: CSV import; video: trimming/cut-at-playhead; table: paste from a
