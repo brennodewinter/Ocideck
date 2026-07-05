@@ -1336,4 +1336,6 @@ const _dutchSourceTlh = {
       'ngoDHom vo\' lo\'laHbogh \'anglqach — tlhab, choHlaHqu\' je SoH De\'wI\' SoH Daq patlh.',
   'Waar komt de naam vandaan?': 'nuqDaq pong ghoS?',
   'Website van de stichting': 'De\'wI\' ghItlhngeH',
+  'Opgeslagen als download in je map met downloads.':
+      'yorwI\' DaqvaD ghItlh vItlhutlh.',
 };

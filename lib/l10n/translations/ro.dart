@@ -1368,4 +1368,6 @@ const _dutchSourceRo = {
       'Prezentări îngrijite din text simplu — libere, verificabile și cu datele tale pe propriul tău dispozitiv.',
   'Waar komt de naam vandaan?': 'De unde provine numele?',
   'Website van de stichting': 'Site-ul web al fundației',
+  'Opgeslagen als download in je map met downloads.':
+      'Salvat ca descărcare în folderul de descărcări.',
 };

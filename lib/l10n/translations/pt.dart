@@ -1375,4 +1375,6 @@ const _dutchSourcePt = {
       'Apresentações cuidadas a partir de texto simples — livres, verificáveis e com os teus dados no teu próprio dispositivo.',
   'Waar komt de naam vandaan?': 'De onde vem o nome?',
   'Website van de stichting': 'Website da fundação',
+  'Opgeslagen als download in je map met downloads.':
+      'Guardado como transferência na sua pasta de transferências.',
 };

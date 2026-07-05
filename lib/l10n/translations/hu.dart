@@ -1354,4 +1354,6 @@ const _dutchSourceHu = {
       'Ápolt prezentációk egyszerű szövegből — szabadon, ellenőrizhetően, az adataiddal a saját eszközödön.',
   'Waar komt de naam vandaan?': 'Honnan ered a név?',
   'Website van de stichting': 'Az alapítvány weboldala',
+  'Opgeslagen als download in je map met downloads.':
+      'Letöltésként mentve a letöltések mappájába.',
 };

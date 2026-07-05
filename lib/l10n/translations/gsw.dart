@@ -1352,4 +1352,6 @@ const _dutchSourceGsw = {
       'Gschtalteti Präsentatione us eifachem Text — frei, überprüfbar und mit dine Date uf dim eigene Grät.',
   'Waar komt de naam vandaan?': 'Wo chunt de Name här?',
   'Website van de stichting': 'Website vo de Stiftig',
+  'Opgeslagen als download in je map met downloads.':
+      'Als Download i dim Download-Ordner gspicheret.',
 };

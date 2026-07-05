@@ -1353,4 +1353,6 @@ const _dutchSourceId = {
       'Presentasi yang rapi dari teks sederhana — bebas, dapat diperiksa, dan dengan datamu tetap di perangkatmu sendiri.',
   'Waar komt de naam vandaan?': 'Dari mana asal namanya?',
   'Website van de stichting': 'Situs web yayasan',
+  'Opgeslagen als download in je map met downloads.':
+      'Disimpan sebagai unduhan di folder unduhan Anda.',
 };

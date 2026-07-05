@@ -1354,4 +1354,6 @@ const _dutchSourceCs = {
       'Propracované prezentace z jednoduchého textu — svobodné, ověřitelné a s vašimi daty na vlastním zařízení.',
   'Waar komt de naam vandaan?': 'Odkud pochází název?',
   'Website van de stichting': 'Webové stránky nadace',
+  'Opgeslagen als download in je map met downloads.':
+      'Uloženo jako stažený soubor do složky stažených souborů.',
 };

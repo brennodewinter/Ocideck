@@ -1371,4 +1371,6 @@ const _dutchSourceBg = {
       'Изящни презентации от обикновен текст — свободни, проверяеми и с данните ти на собственото ти устройство.',
   'Waar komt de naam vandaan?': 'Откъде идва името?',
   'Website van de stichting': 'Уебсайт на фондацията',
+  'Opgeslagen als download in je map met downloads.':
+      'Запазено като изтегляне в папката с изтегляния.',
 };

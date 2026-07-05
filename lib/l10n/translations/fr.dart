@@ -359,6 +359,8 @@ const _dutchSourceFr = {
       'Des présentations soignées à partir d\'un texte simple — libres, vérifiables et avec tes données sur ton propre appareil.',
   'Waar komt de naam vandaan?': 'D\'où vient le nom ?',
   'Website van de stichting': 'Site web de la fondation',
+  'Opgeslagen als download in je map met downloads.':
+      'Enregistré en téléchargement dans votre dossier de téléchargements.',
 };
 
 const _dutchSourceAddFr = {

@@ -1351,4 +1351,6 @@ const _dutchSourceSv = {
       'Välgjorda presentationer av enkel text — fritt, kontrollerbart och med dina data på din egen enhet.',
   'Waar komt de naam vandaan?': 'Var kommer namnet ifrån?',
   'Website van de stichting': 'Stiftelsens webbplats',
+  'Opgeslagen als download in je map met downloads.':
+      'Sparad som en nedladdning i din nedladdningsmapp.',
 };

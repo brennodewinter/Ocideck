@@ -1344,4 +1344,6 @@ const _dutchSourceEt = {
       'Korralikud esitlused lihtsast tekstist — vabalt, kontrollitavalt ja sinu andmetega sinu enda seadmes.',
   'Waar komt de naam vandaan?': 'Kust nimi pärineb?',
   'Website van de stichting': 'Sihtasutuse veebisait',
+  'Opgeslagen als download in je map met downloads.':
+      'Salvestatud allalaadimisena teie allalaadimiste kausta.',
 };

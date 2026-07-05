@@ -1381,4 +1381,6 @@ const _dutchSourceGa = {
       'Láithreoireachtaí slachtmhara as téacs simplí — saor, infhíoraithe agus do chuid sonraí ar do ghléas féin.',
   'Waar komt de naam vandaan?': 'Cad as a dtagann an t-ainm?',
   'Website van de stichting': 'Suíomh gréasáin na fondúireachta',
+  'Opgeslagen als download in je map met downloads.':
+      'Sábháilte mar íoslódáil i d\'fhillteán íoslódálacha.',
 };

@@ -1370,4 +1370,6 @@ const _dutchSourceEl = {
       'Φροντισμένες παρουσιάσεις από απλό κείμενο — ελεύθερες, ελέγξιμες και με τα δεδομένα σου στη δική σου συσκευή.',
   'Waar komt de naam vandaan?': 'Από πού προέρχεται το όνομα;',
   'Website van de stichting': 'Ιστότοπος του ιδρύματος',
+  'Opgeslagen als download in je map met downloads.':
+      'Αποθηκεύτηκε ως λήψη στον φάκελο λήψεων σας.',
 };

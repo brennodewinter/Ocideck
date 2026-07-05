@@ -1353,4 +1353,6 @@ const _dutchSourceSl = {
       'Dovršene predstavitve iz preprostega besedila — svobodne, preverljive in s tvojimi podatki na tvoji lastni napravi.',
   'Waar komt de naam vandaan?': 'Od kod izvira ime?',
   'Website van de stichting': 'Spletno mesto ustanove',
+  'Opgeslagen als download in je map met downloads.':
+      'Shranjeno kot prenos v mapo prenosov.',
 };

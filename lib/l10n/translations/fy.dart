@@ -367,6 +367,8 @@ const _dutchSourceFy = {
       'Fersoarge presintaasjes út ienfâldige tekst — frij, kontrolearber en mei dyn gegevens op dyn eigen apparaat.',
   'Waar komt de naam vandaan?': 'Wêr komt de namme wei?',
   'Website van de stichting': 'Webside fan de stichting',
+  'Opgeslagen als download in je map met downloads.':
+      'As download bewarre yn dyn map mei downloads.',
 };
 
 const _dutchSourceAddFy = {

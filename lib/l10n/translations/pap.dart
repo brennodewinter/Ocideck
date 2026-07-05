@@ -366,6 +366,8 @@ const _dutchSourcePap = {
       'Presentashonnan kuidá for di teksto simpel — liber, verifikabel i ku bo datonan riba bo mes aparato.',
   'Waar komt de naam vandaan?': 'Di unda e nòmber ta bini?',
   'Website van de stichting': 'Wèpsait di e fundashon',
+  'Opgeslagen als download in je map met downloads.':
+      'Warda komo un download den bo karpeta di download.',
 };
 
 const _dutchSourceAddPap = {
