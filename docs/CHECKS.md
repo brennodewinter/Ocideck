@@ -52,6 +52,7 @@ run locally and in CI, the number you see locally is the number CI gates on.
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ |
 | [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ |
 | [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — |
+| [`make trivy`](#make-trivy-advisory) | Dart-dep CVEs + committed secrets (advisory) | — | — | ✅ (advisory) |
 
 CI additionally runs `flutter pub get --enforce-lockfile` (reproducible
 dependencies) and a **Markdown link check** (`lychee --offline`).
@@ -185,6 +186,18 @@ These three run on every push and pull request (and as `make check`).
   access and an outdated package is not in itself a regression. Not part of the
   required gate.
 
+### `make trivy` (advisory)
+- **Runs:** `trivy fs --config trivy.yaml .` (needs the external
+  [`trivy`](https://trivy.dev) binary; `brew install trivy` on macOS).
+- **Covers:** known **CVEs in the resolved Dart packages** (`pubspec.lock`) —
+  which `make licenses` checks for licence but not for vulnerabilities — plus a
+  **committed-secret sweep** over the repo. Scanners and scope are pinned in
+  [`trivy.yaml`](../trivy.yaml).
+- **Advisory** and deliberately **not** wired into `check`/`check-full`: the
+  gate can't assume the `trivy` binary is installed, and Dart/pub advisory
+  coverage is still thin, so a finding is a prompt to review rather than a build
+  break. Container/IaC scanners are omitted — OciDeck ships no images or IaC.
+
 ---
 
 ## Enforced behaviours worth calling out
@@ -266,6 +279,9 @@ For focused work, run only the relevant slice instead of the whole suite:
   its hardening invariants.
 - **Docs links (Linux)** — `lychee --offline` validates internal Markdown links
   across the repo (external URLs are skipped so it can't flake).
+- **Supply-chain (Linux, advisory)** — the [`trivy-action`](https://github.com/aquasecurity/trivy-action)
+  runs the same `make trivy` scan (Dart-dep CVEs + committed secrets) with
+  `exit-code: 0`, so it surfaces findings without blocking merges.
 
 CI does **not** build native binaries here; it validates formatting, analysis,
 tests, and the web bundle's hardening, which are platform-independent.

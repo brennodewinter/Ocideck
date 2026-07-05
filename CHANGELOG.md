@@ -14,6 +14,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   (`AppTheme.isDark`, tied to the profile), so surfaces, text, borders and status
   tints flip together. Slide content stays a fixed white canvas (a slide is a
   design surface), and brand/accent colours are unchanged across modes.
+- **Advisory supply-chain scan (`make trivy`)** — an optional [Trivy](https://trivy.dev)
+  scan that checks the resolved Dart packages (`pubspec.lock`) for known CVEs —
+  previously only licence-checked, not vulnerability-scanned — and sweeps the
+  repo for committed secrets. Scanners and scope live in `trivy.yaml`. It is
+  advisory: not part of `make check`/`check-full` (it needs the external `trivy`
+  binary and Dart/pub advisory data is still sparse), and the matching CI job
+  runs with `exit-code: 0` so it reports without blocking merges. Documented in
+  `docs/CHECKS.md`.
 - **Contextual help in the editor** — a subtle "What can I do here?" button at
   the top of the slide editor expands a short, slide-type-specific hint (e.g.
   chart: CSV import; video: trimming/cut-at-playhead; table: paste from a
