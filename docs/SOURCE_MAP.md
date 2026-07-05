@@ -165,7 +165,9 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `open_presentation_dialog.dart` — Full-text searchable presentation picker with directory scanning.
 - `presentation_info_dialog.dart` — Edits title/author/organization/description metadata.
 - `scan_library_dialog.dart` — Scans well-known locations for presentations.
-- `settings_dialog.dart` — Tabbed settings (theme colours, fonts, WebDAV, consent).
+- `settings_dialog.dart` — Sidebar settings (theme colours, fonts, cockpit,
+  Licentie en Privacy, Beveiliging, Nextcloud, and an "Over OciDeck" screen);
+  tab bodies live in `parts/settings_dialog_*.dart`.
 - `slide_finder_dialog.dart` — Stay-open searcher for gathering slides from many presentations.
 - `slide_quality_details_dialog.dart` — Issues grouped by severity with counts and navigation.
 - `webdav_browser_dialog.dart` — Browses WebDAV/Nextcloud folders to pick a deck or images.
