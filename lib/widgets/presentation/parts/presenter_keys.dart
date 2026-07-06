@@ -7,6 +7,15 @@ extension _PresenterKeys on _FullscreenPresenterState {
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
     final key = event.logicalKey;
 
+    // Cmd+W / Ctrl+W sluit de presentatie, net als het sluiten van een venster
+    // elders in het systeem — werkt in elke modus, ongeacht overlays.
+    final hw = HardwareKeyboard.instance;
+    if ((hw.isMetaPressed || hw.isControlPressed) &&
+        key == LogicalKeyboardKey.keyW) {
+      _exit();
+      return KeyEventResult.handled;
+    }
+
     // Sneltoets-overzicht vangt alles: sluiten met ? / H / Esc.
     if (_helpOpen) {
       if (key == LogicalKeyboardKey.escape ||

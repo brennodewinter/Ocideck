@@ -221,13 +221,31 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     return (_timelineStep + 1).clamp(1, n);
   }
 
+  /// Cmd+W / Ctrl+W op het beamervenster vraagt de presenter de presentatie af
+  /// te sluiten (die ruimt dit venster daarna op). Overige toetsen laten we
+  /// door, zodat het beamervenster verder geen sneltoetsen opslokt.
+  KeyEventResult _handleKey(FocusNode _, KeyEvent event) {
+    if (event is! KeyDownEvent) return KeyEventResult.ignored;
+    final keys = HardwareKeyboard.instance;
+    if ((keys.isMetaPressed || keys.isControlPressed) &&
+        event.logicalKey == LogicalKeyboardKey.keyW) {
+      _send('exit');
+      return KeyEventResult.handled;
+    }
+    return KeyEventResult.ignored;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.black,
-        body: Stack(children: [_body(), const MermaidRenderHostLayer()]),
+        body: Focus(
+          autofocus: true,
+          onKeyEvent: _handleKey,
+          child: Stack(children: [_body(), const MermaidRenderHostLayer()]),
+        ),
       ),
     );
   }
