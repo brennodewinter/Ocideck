@@ -10,6 +10,7 @@ part 'deck_template_general.dart';
 part 'deck_template_work_a.dart';
 part 'deck_template_work_b.dart';
 part 'deck_template_sessions.dart';
+part 'deck_template_briefings.dart';
 
 /// A starting-point recipe for a new presentation: a title page plus a set of
 /// example slides the user overwrites with real content. Templates are pure
@@ -59,6 +60,33 @@ final List<DeckTemplate> deckTemplates = [
     description: 'Situatie, feiten en gevraagd besluit in zes slides.',
     icon: 'briefing',
     buildSlides: _buildBriefing,
+  ),
+  DeckTemplate(
+    id: 'securityGuardBriefing',
+    title: 'Beveiligingsbriefing / dienststart',
+    description:
+        'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en '
+        'bezetting voor de beveiligingsdienst.',
+    icon: 'securityGuardBriefing',
+    buildSlides: _buildSecurityGuardBriefing,
+  ),
+  DeckTemplate(
+    id: 'policeBriefing',
+    title: 'Operationele politiebriefing',
+    description:
+        'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid '
+        'en gebiedsinzet voor de dienst.',
+    icon: 'policeBriefing',
+    buildSlides: _buildPoliceBriefing,
+  ),
+  DeckTemplate(
+    id: 'enforcementBriefing',
+    title: 'Handhavingsbriefing (BOA)',
+    description:
+        'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen '
+        'veiligheid en gebiedsinzet voor de handhavingsdienst.',
+    icon: 'enforcementBriefing',
+    buildSlides: _buildEnforcementBriefing,
   ),
   DeckTemplate(
     id: 'status',

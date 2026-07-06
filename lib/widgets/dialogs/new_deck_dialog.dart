@@ -66,6 +66,9 @@ class NewDeckDialog extends ConsumerStatefulWidget {
 const Map<String, IconData> templatePickerIcons = {
   'empty': Icons.crop_landscape_outlined,
   'briefing': Icons.summarize_outlined,
+  'securityGuardBriefing': Icons.security,
+  'policeBriefing': Icons.local_police_outlined,
+  'enforcementBriefing': Icons.badge_outlined,
   'status': Icons.speed_outlined,
   'kickoff': Icons.rocket_launch_outlined,
   'communication': Icons.forum_outlined,
