@@ -231,6 +231,61 @@ void main() {
     expect(n.state.deck!.slides.first.type, SlideType.image);
   });
 
+  // Bouwt een deck met slides getiteld "0".."5" zodat de volgorde traceerbaar is.
+  DeckNotifier titledDeck() {
+    final n = _notifier()..newDeck('D');
+    for (var i = 0; i < 5; i++) {
+      n.addSlide(SlideType.bullets);
+    }
+    final slides = n.state.deck!.slides;
+    for (var i = 0; i < slides.length; i++) {
+      n.updateSlide(i, slides[i].copyWith(title: '$i'));
+    }
+    return n;
+  }
+
+  List<String> titles(DeckNotifier n) =>
+      n.state.deck!.slides.map((s) => s.title).toList();
+
+  test('moveSlides moves a contiguous block downward as one unit', () {
+    final n = titledDeck();
+    final start = n.moveSlides({0, 1}, 1, 3);
+    expect(titles(n), ['2', '3', '0', '1', '4', '5']);
+    expect(start, 2);
+  });
+
+  test('moveSlides moves a contiguous block upward as one unit', () {
+    final n = titledDeck();
+    final start = n.moveSlides({3, 4}, 3, 1);
+    expect(titles(n), ['0', '3', '4', '1', '2', '5']);
+    expect(start, 1);
+  });
+
+  test(
+    'moveSlides gathers a non-contiguous selection into one ordered block',
+    () {
+      final n = titledDeck();
+      final start = n.moveSlides({0, 2, 4}, 2, 4);
+      // De selectie {0,2,4} wordt één aaneengesloten blok in oorspronkelijke
+      // volgorde, geplaatst vóór slide "5".
+      expect(titles(n), ['1', '3', '0', '2', '4', '5']);
+      expect(start, 2);
+    },
+  );
+
+  test('moveSlides can drop the block at the end', () {
+    final n = titledDeck();
+    final start = n.moveSlides({0, 1}, 0, 5);
+    expect(titles(n), ['2', '3', '4', '5', '0', '1']);
+    expect(start, 4);
+  });
+
+  test('moveSlides falls back to a single move for a lone selection', () {
+    final n = titledDeck();
+    n.moveSlides({2}, 2, 0);
+    expect(titles(n), ['2', '0', '1', '3', '4', '5']);
+  });
+
   test('updateSlide replaces the slide at an index', () {
     final n = _notifier()..newDeck('D');
     final updated = n.state.deck!.slides.first.copyWith(title: 'Nieuw');

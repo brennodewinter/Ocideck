@@ -426,7 +426,12 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       initialDirectory: initialDir,
       excludePath: deckState.filePath,
       onAdd: (slide) {
-        final at = ref.read(deckProvider.notifier).insertSlides([slide]);
+        // Voeg in ná de huidige slide (niet achteraan). Doordat we de nieuwe
+        // slide selecteren, ketenen opeenvolgende keuzes netjes achter elkaar.
+        final idx = ref.read(editorProvider).selectedIndex;
+        final at = ref.read(deckProvider.notifier).insertSlides([
+          slide,
+        ], afterIndex: idx);
         if (at >= 0) ref.read(editorProvider.notifier).select(at);
       },
     );
@@ -626,6 +631,23 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       buildDefaultDragHandles: false,
       itemCount: deck.slides.length,
       onReorderItem: (old, nw) {
+        // Sleep je één slide uit een multiselectie, dan verhuist het hele blok
+        // in één keer; de selectie volgt het blok naar de nieuwe plek.
+        if (editor.hasMultiSelection && editor.selection.contains(old)) {
+          final start = notifier.moveSlides(editor.selection, old, nw);
+          if (start >= 0) {
+            final count = editor.selection.length;
+            final primaryOffset = editor.selection
+                .where((i) => i < editor.selectedIndex)
+                .length;
+            editorNotifier.selectBlock(
+              start,
+              count,
+              primary: start + primaryOffset,
+            );
+          }
+          return;
+        }
         notifier.reorderSlides(old, nw);
         // Adjust selection when active slide moved
         final selIdx = editor.selectedIndex;

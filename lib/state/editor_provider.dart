@@ -113,6 +113,17 @@ class EditorNotifier extends StateNotifier<EditorState> {
     }
   }
 
+  /// Selecteer een aaneengesloten reeks van [count] slides vanaf [start], met
+  /// [primary] als actieve slide. Gebruikt nadat een multiselectie als blok is
+  /// verplaatst, zodat de selectie het blok blijft volgen.
+  void selectBlock(int start, int count, {int? primary}) {
+    if (count <= 0) return;
+    state = state.copyWith(
+      selection: {for (var i = start; i < start + count; i++) i},
+      selectedIndex: (primary ?? start).clamp(start, start + count - 1),
+    );
+  }
+
   /// Selecteer alle [count] slides (Ctrl/Cmd+A).
   void selectAll(int count) {
     if (count <= 0) return;
