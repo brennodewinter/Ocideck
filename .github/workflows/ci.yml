@@ -43,6 +43,11 @@ jobs:
       - name: Method length (make check-method-length)
         run: make check-method-length
 
+      # Fail the build on orphaned lib/ files (unreachable from any entrypoint) —
+      # the analyzer's blind spot for whole dead files.
+      - name: Dead code (make check-dead-code)
+        run: make check-dead-code
+
       # Runs the full suite with coverage and enforces a line-coverage floor.
       - name: Test + coverage (make coverage)
         run: make coverage
