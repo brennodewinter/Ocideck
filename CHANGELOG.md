@@ -293,6 +293,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **Splitting an over-full bullet slide now divides evenly.** When both halves
+  fit within the per-page optimum, "Split slide" halves the bullets (e.g. 10
+  bullets become 5/5 instead of 8/2) rather than cramming page 1 and leaving a
+  near-empty continuation. Slides too full to fit in two pages still fill page 1
+  to the optimum and leave the remainder, which you can split again. Applies to
+  single-column, checklist and two-column slides.
+- **A split "bullets + image" slide keeps its image on the continuation page.**
+  The follow-up page is now itself a *bullets + image* slide that inherits the
+  same picture (previously it became a full-width, image-less bullets slide), so
+  the two pages look consistent and share one font size. You can still swap the
+  continuation to a plain bullets page (or give it a different image) per page via
+  the slide **type** picker.
 - **Opening the same presentation twice now jumps to its tab** instead of
   loading a second copy. Every open-from-path flow (file picker, recent files,
   drag-and-drop, deep link) checks whether the file is already open — comparing

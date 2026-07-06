@@ -16,6 +16,9 @@ class _BulletsImagePreview extends StatelessWidget {
   /// First number for a numbered list (continues a chain across slides).
   final int numberStart;
 
+  /// Shared font scale for a split run (see [SlidePreviewWidget.fitScaleOverride]).
+  final double? fitScaleOverride;
+
   const _BulletsImagePreview({
     required this.slide,
     required this.w,
@@ -26,6 +29,7 @@ class _BulletsImagePreview extends StatelessWidget {
     this.showRichTextPageControls = false,
     this.onRichTextPageChanged,
     this.numberStart = 1,
+    this.fitScaleOverride,
   });
 
   @override
@@ -115,6 +119,12 @@ class _BulletsImagePreview extends StatelessWidget {
                   spacing: spacing,
                   bulletGap: bulletGap,
                 );
+                // Deelt deze pagina een split-run met andere pagina's, dan
+                // rendert ze op de gedeelde (kleinste) schaal — nooit groter dan
+                // haar eigen fit.
+                final resolvedScale = fitScaleOverride != null
+                    ? math.min(fitScaleOverride!, scale)
+                    : scale;
 
                 return ClipRect(
                   child: SizedBox(
@@ -128,7 +138,7 @@ class _BulletsImagePreview extends StatelessWidget {
                         padding: textPadding,
                         child: _contentColumn(
                           context: context,
-                          scale: scale,
+                          scale: resolvedScale,
                           bullets: bullets,
                           hasTitle: hasTitle,
                           titleSize: titleSize,

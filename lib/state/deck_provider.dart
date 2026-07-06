@@ -389,16 +389,17 @@ class DeckNotifier extends StateNotifier<DeckState> {
   /// Bepaalt hoe de bulletslide [slide] in tweeën valt, of `null` als dat niet
   /// kan (geen bullettype, of te weinig bullets om te splitsen).
   ({Slide first, Slide second})? _splitSlide(Slide slide, String font) {
-    // Slide 1 houdt het optimum: niet meer dan wat op natuurlijke grootte past
-    // én niet meer dan de leesbaarheidsdrempel, zodat de overgebleven slide niet
-    // opnieuw te vol is. Past de hele kolom al binnen het optimum (de slide is
-    // niet te vol), dan splitsen we netjes doormidden — de gebruiker koos er
-    // immers bewust voor om in tweeën te knippen. Resultaat ligt altijd in
-    // [1, len-1] zodat beide helften minstens één bullet houden.
+    // Het optimum per pagina is het kleinste van wat op natuurlijke grootte past
+    // en de leesbaarheidsdrempel. Passen beide helften binnen dat optimum
+    // (len ≤ 2·cap), dan verdelen we netjes doormidden — zo voorkom je een scheve
+    // 8/2-splitsing. Zo niet, dan vullen we pagina 1 tot het optimum en laten de
+    // rest over; die kan de gebruiker desgewenst opnieuw splitsen tot de staart
+    // klein genoeg is. Resultaat ligt altijd in [1, len-1] zodat beide helften
+    // minstens één bullet houden.
     int keepFor(int fit, int len, int limit) {
       if (len < 2) return len; // niets te verplaatsen in deze kolom
-      var keep = fit < limit ? fit : limit;
-      if (keep >= len) keep = len ~/ 2;
+      final cap = fit < limit ? fit : limit;
+      final keep = len <= 2 * cap ? len ~/ 2 : cap;
       return keep < 1 ? 1 : (keep > len - 1 ? len - 1 : keep);
     }
 
@@ -414,20 +415,15 @@ class DeckNotifier extends StateNotifier<DeckState> {
             ? kChecklistBulletWarningCount
             : kSingleColumnBulletWarningCount;
         final at = keepFor(counts.left, bullets.length, limit);
-        var second = Slide.duplicate(
+        // De vervolgpagina erft standaard hetzelfde type en dezelfde afbeelding
+        // (Slide.duplicate kopieert imagePath/-caption/-size). Zo houden beide
+        // helften van een bulletsImage-slide gelijke tekstbreedte — nodig voor de
+        // gelijkmatige verdeling én de gedeelde fontgrootte. Wie de vervolgpagina
+        // liever zonder (of met een andere) afbeelding wil, wisselt dat per pagina
+        // via de TYPE-keuze in de editor.
+        final second = Slide.duplicate(
           slide,
         ).copyWith(bullets: bullets.sublist(at), continuesSplit: true);
-        // The image is the anchor of the first page only: a continuation page
-        // is pure text, so it drops the image and becomes a plain bullets slide
-        // (full width) rather than repeating the visual.
-        if (slide.type == SlideType.bulletsImage) {
-          second = second.copyWith(
-            type: SlideType.bullets,
-            imagePath: '',
-            imageCaption: '',
-            imageSize: 0,
-          );
-        }
         return (
           first: slide.copyWith(bullets: bullets.sublist(0, at)),
           second: second,
