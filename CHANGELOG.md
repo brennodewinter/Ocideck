@@ -403,6 +403,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   behavioural change; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ### Fixed
+- **"Continue numbering" is now available on a split bullets-with-image slide.**
+  A "bullets + image" slide is a `bulletsImage` slide, edited in the bullets-
+  with-image editor — which was missing the *Continue numbering from previous
+  slide* toggle that the plain bullets editor already had. So after splitting a
+  numbered bullets-with-image slide, its second half could not be told to carry
+  on the count, even though the renderer (`numberedListStartFor`) already
+  supported it. The toggle now appears in that editor too, under the same
+  condition (a numbered list whose preceding slide is also numbered).
 - **The slide rail now continues a numbered list across a split.** After
   splitting a numbered slide and ticking *Continue numbering from previous
   slide* on the second half, the builder's thumbnail rail still restarted the

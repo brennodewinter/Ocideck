@@ -96,6 +96,7 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         imageService: c.imageService,
         searchPaths: c.searchPaths,
         captionBasePath: c.captionBasePath,
+        previousSlideIsNumbered: c.previousSlideIsNumbered,
         nestedInScrollView: c.nestedInScrollView,
       ),
       SlideType.twoImages: (c) => TwoImagesEditor(
