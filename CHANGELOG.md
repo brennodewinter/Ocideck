@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Roomier documentation reader with adjustable text size** — the in-app reader
+  now uses the full window width, so wide tables get the space they need instead
+  of being squeezed into a narrow column (running text still keeps a readable
+  line length). A subtle **A−/A+** control in the app bar enlarges or shrinks the
+  document text; the choice is remembered and is separate from the app-wide
+  interface text size.
+- **`Ctrl/Cmd + W` closes the presentation** — pressing the standard
+  window-close shortcut during a presentation now exits it, just like closing a
+  window elsewhere. It works from any mode and from both the presenter and the
+  beamer window (in dual-screen mode the beamer asks the presenter to close).
 - **Fifteen conversation-preparation templates** — the new-presentation wizard
   now helps you prepare for a difficult or important conversation. Work
   conversations: **job interview** (STAR answers), **performance review**,

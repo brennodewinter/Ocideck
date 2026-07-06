@@ -13,13 +13,27 @@ import '../slides/inline_markdown.dart';
 ///
 /// Typography is theme-driven (so it follows light/dark mode) and uses logical
 /// font sizes, which Flutter scales with the OS text-size setting for
-/// accessibility. The caller is expected to bound the line length (see
-/// DocumentReaderScreen) — long measure hurts readability.
+/// accessibility.
+///
+/// Prose (paragraphs, headings, lists, quotes, rules) is bounded to
+/// [maxTextWidth] so the line length stays readable even in a wide window, while
+/// tables and code blocks are left unbounded: they use the full width they are
+/// given (and scroll horizontally beyond it), so wide tables are no longer
+/// squeezed into a narrow column. Pass `null` to bound nothing.
 class DocumentMarkdownView extends StatelessWidget {
-  const DocumentMarkdownView(this.markdown, {super.key, this.onTapLink});
+  const DocumentMarkdownView(
+    this.markdown, {
+    super.key,
+    this.onTapLink,
+    this.maxTextWidth,
+  });
 
   final String markdown;
   final void Function(String url)? onTapLink;
+
+  /// Maximum measure for prose blocks; tables and code ignore it. `null` leaves
+  /// prose unbounded too (the whole document then fills the available width).
+  final double? maxTextWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +81,7 @@ class DocumentMarkdownView extends StatelessWidget {
 
       // Horizontal rule: ---, *** or ___ (three or more).
       if (_isHorizontalRule(trimmed)) {
-        blocks.add(_rule(t));
+        blocks.add(_bounded(_rule(t)));
         i++;
         continue;
       }
@@ -75,7 +89,9 @@ class DocumentMarkdownView extends StatelessWidget {
       // ATX heading: # … ######.
       final heading = _headingLevel(trimmed);
       if (heading > 0) {
-        blocks.add(_heading(t, heading, trimmed.substring(heading).trim()));
+        blocks.add(
+          _bounded(_heading(t, heading, trimmed.substring(heading).trim())),
+        );
         i++;
         continue;
       }
@@ -87,7 +103,7 @@ class DocumentMarkdownView extends StatelessWidget {
           quote.add(lines[i].trimLeft().replaceFirst(RegExp(r'^>\s?'), ''));
           i++;
         }
-        blocks.add(_blockQuote(t, quote.join('\n')));
+        blocks.add(_bounded(_blockQuote(t, quote.join('\n'))));
         continue;
       }
 
@@ -98,7 +114,7 @@ class DocumentMarkdownView extends StatelessWidget {
           items.add(_listItem(lines[i])!);
           i++;
         }
-        blocks.add(_list(t, items));
+        blocks.add(_bounded(_list(t, items)));
         continue;
       }
 
@@ -108,12 +124,23 @@ class DocumentMarkdownView extends StatelessWidget {
         para.add(lines[i].trim());
         i++;
       }
-      blocks.add(_paragraph(t, para.join(' ')));
+      blocks.add(_bounded(_paragraph(t, para.join(' '))));
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: blocks,
+    );
+  }
+
+  /// Keep prose within a readable measure; tables and code blocks skip this and
+  /// use the full width available to the document.
+  Widget _bounded(Widget child) {
+    final max = maxTextWidth;
+    if (max == null) return child;
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: max),
+      child: child,
     );
   }
 

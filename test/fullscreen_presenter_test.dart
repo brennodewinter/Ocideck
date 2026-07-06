@@ -616,6 +616,64 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets('Ctrl/Cmd + W closes the presentation', (tester) async {
+    // Exit takes the single-screen path, which drops full screen via the
+    // window_manager plugin; stub it so the platform call resolves in the test.
+    const windowManager = MethodChannel('window_manager');
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      windowManager,
+      (call) async => null,
+    );
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        windowManager,
+        null,
+      ),
+    );
+
+    // Push the presenter over a launcher screen so its exit (Navigator.pop)
+    // is observable; disable the rehearsal summary so exit goes straight through.
+    await tester.pumpWidget(
+      MaterialApp(
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          FlutterQuillLocalizations.delegate,
+        ],
+        home: Scaffold(
+          body: Builder(
+            builder: (context) => TextButton(
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => FullscreenPresenter(
+                    slides: slides,
+                    projectPath: null,
+                    themeProfile: const ThemeProfile(),
+                    initialIndex: 0,
+                    showRehearsalSummary: false,
+                  ),
+                ),
+              ),
+              child: const Text('open'),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+    expect(find.text('Eerste'), findsOneWidget);
+
+    await sendControlKey(tester, LogicalKeyboardKey.keyW);
+    await tester.pumpAndSettle();
+
+    // Back on the launcher: the presentation closed.
+    expect(find.text('Eerste'), findsNothing);
+    expect(find.text('open'), findsOneWidget);
+  });
+
   testWidgets('user notes panel is hidden by default', (tester) async {
     await tester.pumpWidget(_host(slides));
     await tester.pump();

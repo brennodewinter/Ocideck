@@ -83,6 +83,8 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Tekst kleiner': 'Mažesnis tekstas',
+  'Tekst groter': 'Didesnis tekstas',
   'Documentatie': 'Dokumentacija',
   'Gebruikershandleiding': 'Naudotojo vadovas',
   'Bestandsformaat': 'Failo formatas',

@@ -84,6 +84,8 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Tekst kleiner': 'По-малък текст',
+  'Tekst groter': 'По-голям текст',
   'Documentatie': 'Документация',
   'Gebruikershandleiding': 'Ръководство за потребителя',
   'Bestandsformaat': 'Файлов формат',

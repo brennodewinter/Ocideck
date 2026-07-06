@@ -464,6 +464,11 @@ OciDeck aims for WCAG 2.1 in the editor:
   text scaling for the whole editing environment, on top of what the operating
   system asks for. Slides keep their fixed 16:9 design size, so what you see is
   still exactly what you present and export.
+- **Document reader** — the in-app reader for the bundled guides uses the full
+  window width, so wide tables get room instead of being squeezed into a narrow
+  column, while running text stays at a comfortable line length. Its app bar has
+  a subtle **A−/A+** control to enlarge or shrink the document text; the choice
+  is remembered and is independent of the interface text size above.
 - **Keyboard** — the panel divider between the slide list and the editor can be
   focused with `Tab` and resized with `←`/`→`; the add-slide dialog is fully
   keyboard-operable.

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/widgets/presentation/audience_window.dart';
 
@@ -103,6 +104,46 @@ void main() {
 
     expect(tester.takeException(), isNull);
     expect(find.text('Welkom'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('Ctrl/Cmd + W asks the presenter to close the presentation', (
+    tester,
+  ) async {
+    // The beamer forwards navigation and exit over a desktop_multi_window
+    // channel; intercept it to confirm an 'exit' request is sent.
+    const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+    final sent = <String>[];
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(bridge, (
+      call,
+    ) async {
+      if (call.method == 'invokeMethod') {
+        final args = Map<String, dynamic>.from(call.arguments as Map);
+        final method = args['method'];
+        if (method is String) sent.add(method);
+      }
+      return null;
+    });
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        bridge,
+        null,
+      ),
+    );
+
+    await _pumpAudience(tester, <String, dynamic>{
+      'markdown': _deckMarkdown,
+      'index': 0,
+    });
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.keyW);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.keyW);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
+    await tester.pump();
+
+    expect(sent, contains('exit'));
 
     await tester.pumpWidget(const SizedBox());
   });

@@ -81,6 +81,8 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Tekst kleiner': 'mu\' mach',
+  'Tekst groter': 'mu\' tIn',
   'Documentatie': 'ghItlhmey',
   'Gebruikershandleiding': 'lo\'wI\' paq',
   'Bestandsformaat': 'De\' Segh',

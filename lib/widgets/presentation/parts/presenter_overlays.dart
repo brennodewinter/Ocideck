@@ -115,7 +115,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
       ('L', l10n.d('Herhalen (loop) aan/uit')),
       ('M', l10n.d('Na media automatisch doorgaan')),
       ('H', l10n.d('Deze legenda')),
-      ('Esc', l10n.d('Terug / afsluiten')),
+      ('Esc · Ctrl+W', l10n.d('Terug / afsluiten')),
     ];
     return GestureDetector(
       onTap: _toggleHelp,

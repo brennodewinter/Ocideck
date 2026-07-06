@@ -83,6 +83,8 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Tekst kleiner': 'Manji tekst',
+  'Tekst groter': 'Veći tekst',
   'Documentatie': 'Dokumentacija',
   'Gebruikershandleiding': 'Korisnički priručnik',
   'Bestandsformaat': 'Format datoteke',

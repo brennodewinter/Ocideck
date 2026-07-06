@@ -83,6 +83,8 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Tekst kleiner': 'Mindre text',
+  'Tekst groter': 'Större text',
   'Documentatie': 'Dokumentation',
   'Gebruikershandleiding': 'Användarhandbok',
   'Bestandsformaat': 'Filformat',

@@ -83,6 +83,8 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Tekst kleiner': 'Teksto mas chikí',
+  'Tekst groter': 'Teksto mas grandi',
   'Documentatie': 'Dokumentashon',
   'Gebruikershandleiding': 'Guia di uzuario',
   'Bestandsformaat': 'Formato di archivo',

@@ -83,6 +83,8 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Tekst kleiner': 'Pienennä tekstiä',
+  'Tekst groter': 'Suurenna tekstiä',
   'Documentatie': 'Dokumentaatio',
   'Gebruikershandleiding': 'Käyttöopas',
   'Bestandsformaat': 'Tiedostomuoto',

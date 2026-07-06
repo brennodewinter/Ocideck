@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../services/documentation_service.dart';
+import '../../state/settings_provider.dart';
 import '../../utils/url_launcher_util.dart';
 import 'document_markdown_view.dart';
 
 /// A full-screen, accessible reader for a bundled Markdown document.
 ///
-/// Unlike the cramped in-dialog viewers, this route uses the whole window: the
-/// content fills the height and is centred in a readable-width column (long
-/// measure hurts readability, so the width is bounded rather than edge-to-edge).
-/// Text follows the OS text-size setting, is selectable, and links open
-/// externally. It sits above dialogs (pushed on the root navigator), so it can
-/// be opened from the consent gate and the settings screen alike.
-class DocumentReaderScreen extends StatelessWidget {
+/// The content fills the height and uses most of the window width: tables and
+/// code blocks span the full measure (so wide tables are no longer squeezed),
+/// while prose is kept to a readable line length. A subtle text-size control in
+/// the app bar enlarges or shrinks the document text; the choice is remembered
+/// (see [SettingsNotifier.setDocReaderTextScale]) independently of the app-wide
+/// interface scale. Text is selectable and links open externally. It sits above
+/// dialogs (pushed on the root navigator), so it can be opened from the consent
+/// gate and the settings screen alike.
+class DocumentReaderScreen extends ConsumerWidget {
   const DocumentReaderScreen({
     super.key,
     required this.title,
@@ -32,6 +36,13 @@ class DocumentReaderScreen extends StatelessWidget {
   final String? onlineUrl;
 
   final DocumentationService service;
+
+  /// Prose is bounded to this measure; tables and code use the full width.
+  static const double _proseMaxWidth = 860;
+
+  /// Cap the content column so ultra-wide windows don't stretch edge-to-edge,
+  /// yet far more of the width is used than the old fixed narrow column.
+  static const double _contentMaxWidth = 1200;
 
   /// Pushes the reader over everything (including any open dialog).
   static Future<void> open(
@@ -52,14 +63,18 @@ class DocumentReaderScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final languageCode = Localizations.localeOf(context).languageCode;
+    final scale = ref.watch(
+      settingsProvider.select((s) => s.docReaderTextScale),
+    );
 
     return Scaffold(
       appBar: AppBar(
         title: Semantics(header: true, child: Text(title)),
         actions: [
+          ..._textSizeActions(context, ref, l10n, scale),
           if (onlineUrl != null)
             IconButton(
               icon: const Icon(Icons.open_in_new),
@@ -82,26 +97,71 @@ class DocumentReaderScreen extends StatelessWidget {
               ),
             );
           }
-          return _body(snap.data!);
+          return _body(context, snap.data!, scale);
         },
       ),
     );
   }
 
-  Widget _body(String markdown) {
-    return Scrollbar(
-      child: SingleChildScrollView(
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 760),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
-              // SelectionArea makes the whole document selectable/copyable while
-              // keeping links tappable.
-              child: SelectionArea(
-                child: DocumentMarkdownView(
-                  markdown,
-                  onTapLink: openExternalUrl,
+  /// The subtle "smaller / larger" pair, each disabled at its bound.
+  List<Widget> _textSizeActions(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
+    double scale,
+  ) {
+    void nudge(double delta) => ref
+        .read(settingsProvider.notifier)
+        .setDocReaderTextScale(scale + delta);
+
+    const step = SettingsNotifier.docReaderTextScaleStep;
+    final canShrink = scale > SettingsNotifier.docReaderTextScaleMin + 1e-6;
+    final canGrow = scale < SettingsNotifier.docReaderTextScaleMax - 1e-6;
+    return [
+      IconButton(
+        icon: const Icon(Icons.text_decrease),
+        iconSize: 20,
+        tooltip: l10n.d('Tekst kleiner'),
+        onPressed: canShrink ? () => nudge(-step) : null,
+      ),
+      IconButton(
+        icon: const Icon(Icons.text_increase),
+        iconSize: 20,
+        tooltip: l10n.d('Tekst groter'),
+        onPressed: canGrow ? () => nudge(step) : null,
+      ),
+    ];
+  }
+
+  Widget _body(BuildContext context, String markdown, double scale) {
+    final media = MediaQuery.of(context);
+    // The reader's own scale multiplies whatever the OS and the app-wide
+    // interface scale already ask for, so all document text (tables included)
+    // grows and shrinks together.
+    final scaled = media.copyWith(
+      textScaler: TextScaler.linear(media.textScaler.scale(1.0) * scale),
+    );
+
+    return MediaQuery(
+      data: scaled,
+      child: Scrollbar(
+        child: SingleChildScrollView(
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: _contentMaxWidth),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 28,
+                ),
+                // SelectionArea makes the whole document selectable/copyable
+                // while keeping links tappable.
+                child: SelectionArea(
+                  child: DocumentMarkdownView(
+                    markdown,
+                    onTapLink: openExternalUrl,
+                    maxTextWidth: _proseMaxWidth,
+                  ),
                 ),
               ),
             ),

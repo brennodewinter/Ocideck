@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/documentation_service.dart';
+import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 import 'package:ocideck/widgets/reader/document_reader_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -105,18 +108,26 @@ void main() {
   });
 
   group('DocumentReaderScreen', () {
+    setUp(() => SharedPreferences.setMockInitialValues({}));
+
+    Widget wrap(Widget home) => ProviderScope(
+      child: MaterialApp(
+        locale: const Locale('nl'),
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: home,
+      ),
+    );
+
     testWidgets('shows the title and the document body', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          locale: const Locale('nl'),
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: AppLocalizations.supportedLocales,
-          home: const DocumentReaderScreen(
+        wrap(
+          const DocumentReaderScreen(
             title: 'Sneltoetsen',
             assetBase: 'docs/SHORTCUTS.md',
           ),
@@ -126,5 +137,86 @@ void main() {
       expect(find.text('Sneltoetsen'), findsOneWidget);
       expect(find.byType(DocumentMarkdownView), findsOneWidget);
     });
+
+    testWidgets('bounds prose but lets the document use the wide column', (
+      tester,
+    ) async {
+      // A wide window: the content column is far wider than the old fixed
+      // narrow one, while prose is held to a readable measure via a
+      // ConstrainedBox — tables and code skip that bound.
+      tester.view.physicalSize = const Size(1600, 1000);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(
+        wrap(
+          const DocumentReaderScreen(
+            title: 'Gids',
+            assetBase: 'x',
+            service: _FakeDocs(
+              '# Titel\n\n'
+              'Een tamelijk lange paragraaf die zonder begrenzing breder zou '
+              'worden dan de leesbare maat, om het inperken te tonen.\n\n'
+              // A deliberately wide table: it must overflow the prose measure
+              // and use the wider content column rather than being squeezed.
+              '| Kolom1 | Kolom2 | Kolom3 | Kolom4 | Kolom5 | Kolom6 | Kolom7 | Kolom8 | Kolom9 | Kolom10 |\n'
+              '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n'
+              '| aaaa | bbbb | cccc | dddd | eeee | ffff | gggg | hhhh | iiii | jjjj |\n',
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final viewWidth = tester.getSize(find.byType(DocumentMarkdownView)).width;
+      // The document view spans well beyond the old ~760 px column…
+      expect(viewWidth, greaterThan(900));
+      // …and prose blocks are wrapped in a bounding ConstrainedBox (860 px).
+      final bounded = find.byWidgetPredicate(
+        (w) => w is ConstrainedBox && w.constraints.maxWidth == 860,
+      );
+      expect(bounded, findsWidgets);
+    });
+
+    testWidgets('the text-size buttons grow and shrink the reader scale', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        wrap(
+          const DocumentReaderScreen(
+            title: 'Gids',
+            assetBase: 'x',
+            service: _FakeDocs('# Titel\n\nTekst.\n'),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final container = ProviderScope.containerOf(
+        tester.element(find.byType(DocumentMarkdownView)),
+      );
+      double scale() => container.read(settingsProvider).docReaderTextScale;
+
+      expect(scale(), 1.0);
+
+      await tester.tap(find.byIcon(Icons.text_increase));
+      await tester.pumpAndSettle();
+      expect(scale(), greaterThan(1.0));
+
+      await tester.tap(find.byIcon(Icons.text_decrease));
+      await tester.pumpAndSettle();
+      expect(scale(), closeTo(1.0, 1e-9));
+    });
   });
+}
+
+/// A stand-in documentation service that returns fixed markdown without any
+/// asset IO, so reader tests stay deterministic.
+class _FakeDocs implements DocumentationService {
+  const _FakeDocs(this.markdown);
+  final String markdown;
+
+  @override
+  Future<String> load(String baseAsset, String languageCode) async => markdown;
 }

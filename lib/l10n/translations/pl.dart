@@ -85,6 +85,8 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Tekst kleiner': 'Mniejszy tekst',
+  'Tekst groter': 'Większy tekst',
   'Documentatie': 'Dokumentacja',
   'Gebruikershandleiding': 'Podręcznik użytkownika',
   'Bestandsformaat': 'Format pliku',

@@ -85,6 +85,8 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Tekst kleiner': 'Textus minor',
+  'Tekst groter': 'Textus maior',
   'Documentatie': 'Documentatio',
   'Gebruikershandleiding': 'Manuale usoris',
   'Bestandsformaat': 'Formatum plicae',

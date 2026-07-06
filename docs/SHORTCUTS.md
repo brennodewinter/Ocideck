@@ -62,6 +62,7 @@ View & timing:
 | `L` | Loop (restart after the last slide) on/off |
 | `M` | Advance automatically after a slide's audio finishes |
 | `H` · `?` | Show the in-app shortcut cheatsheet |
+| `Ctrl/Cmd + W` | Close the presentation (works from the presenter and the beamer window) |
 
 Annotation tools:
 
@@ -91,7 +92,10 @@ highlighted when on — that toggles editing with a mouse/clicker, just like `E`
 `Esc` is layered: it first closes the **my notes** panel (`Ctrl/Cmd + N`), then
 leaves table editing, then puts away the active annotation tool, then clears a
 typed slide number, then removes a black/white screen, and finally exits the
-presentation.
+presentation. `Ctrl/Cmd + W` closes the presentation straight away, from any
+mode, mirroring how a window closes elsewhere in the system.
 
 > In **dual-screen** mode (macOS, Windows, Linux) the keyboard stays with the
 > laptop (presenter) window; clicks on the beamer also advance the slide.
+> `Ctrl/Cmd + W` also works when the beamer window is focused — it asks the
+> presenter window to close the presentation.

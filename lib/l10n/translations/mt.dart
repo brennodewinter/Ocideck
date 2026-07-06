@@ -84,6 +84,8 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Tekst kleiner': 'Test iżgħar',
+  'Tekst groter': 'Test akbar',
   'Documentatie': 'Dokumentazzjoni',
   'Gebruikershandleiding': 'Gwida tal-utent',
   'Bestandsformaat': 'Format tal-fajl',
