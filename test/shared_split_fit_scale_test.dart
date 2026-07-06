@@ -16,6 +16,13 @@ void main() {
         SlideType.bullets,
       ).copyWith(bullets: items, continuesSplit: continuesSplit);
 
+  Slide bulletsImage(List<String> items, {bool continuesSplit = false}) =>
+      Slide.create(SlideType.bulletsImage).copyWith(
+        bullets: items,
+        imagePath: 'foto.png',
+        continuesSplit: continuesSplit,
+      );
+
   group('sharedSplitFitScale', () {
     test('a standalone slide (no continuation neighbour) shares nothing', () {
       final slides = [
@@ -66,15 +73,39 @@ void main() {
       expect(s2, s0);
     });
 
+    test('a bullets+image run shares the fuller page\'s scale', () {
+      // Beide helften van een gesplitste bulletsImage-slide houden de afbeelding
+      // en vormen dus een echte gedeelde-schaal-run.
+      final full = List.generate(10, (i) => 'Een wat langere bullet nummer $i');
+      final sparse = ['Kort', 'Ook kort'];
+      final slides = [
+        bulletsImage(full),
+        bulletsImage(sparse, continuesSplit: true),
+      ];
+
+      final shared = sharedSplitFitScale(slides, 0, profile, font);
+      expect(shared, isNotNull);
+      expect(sharedSplitFitScale(slides, 1, profile, font), shared);
+
+      final fullScale = bulletsImageSlideFitScale(
+        slide: bulletsImage(full),
+        font: font,
+      );
+      final sparseScale = bulletsImageSlideFitScale(
+        slide: bulletsImage(sparse),
+        font: font,
+      );
+      expect(sparseScale, greaterThan(fullScale));
+      expect(shared, closeTo(fullScale, 1e-9));
+    });
+
     test(
-      'a lone continuation with no same-type predecessor shares nothing',
+      'a continuation whose type differs from its predecessor shares nothing',
       () {
-        // A bulletsImage page 1 splits into a plain bullets continuation: the
-        // types differ, so they do not form a shared-size run.
+        // Wisselt de gebruiker de vervolgpagina naar een gewone bulletslide (geen
+        // afbeelding), dan verschillen de types en vormen ze geen gedeelde run.
         final slides = [
-          Slide.create(
-            SlideType.bulletsImage,
-          ).copyWith(bullets: ['a', 'b'], imagePath: 'x.png'),
+          bulletsImage(['a', 'b']),
           bullets(['c', 'd'], continuesSplit: true),
         ];
         expect(sharedSplitFitScale(slides, 1, profile, font), isNull);
