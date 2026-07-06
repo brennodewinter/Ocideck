@@ -9,7 +9,9 @@ Marp tools.
 ## Creating and opening decks
 
 - **New / Open**: use the welcome screen or `Ctrl/Cmd + O`. Multiple decks open in
-  **tabs**.
+  **tabs**. Opening a deck that is already open just jumps to its existing tab —
+  the same file is never loaded into two tabs at once, so you can't accidentally
+  edit two out-of-sync copies.
 - **Save**: `Ctrl/Cmd + S`. Saving lays out a tidy project folder next to your
   `.md` (`images/`, `data/`, `logos/`, `themes/`) and copies assets in. See
   [`FILE_FORMAT.md`](FILE_FORMAT.md).

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/editor_provider.dart';
@@ -9,6 +10,52 @@ import 'package:ocideck/widgets/panels/slide_list_panel.dart';
 import 'package:ocideck/widgets/slides/slide_thumbnail.dart';
 
 void main() {
+  // Regression: the thumbnail rail used to leave numberStart at 1, so a split
+  // numbered slide's second half restarted at 1 in the builder even though the
+  // main preview and the presentation continued the count. The rail must
+  // compute the same start as those, so the overview matches what is shown.
+  testWidgets('rail thumbnails continue a numbered list across a split', (
+    tester,
+  ) async {
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+    final first = Slide.create(SlideType.bullets).copyWith(
+      title: 'Eerste',
+      listStyle: ListStyle.numbered,
+      bullets: const ['een', 'twee', 'drie'],
+    );
+    final second = Slide.create(SlideType.bullets).copyWith(
+      title: 'Vervolg',
+      listStyle: ListStyle.numbered,
+      continueNumbering: true,
+      bullets: const ['vier', 'vijf'],
+    );
+    container
+        .read(deckProvider.notifier)
+        .loadDeck(Deck(title: 'T', slides: [first, second]));
+
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          theme: AppTheme.light,
+          home: const Scaffold(
+            body: SizedBox(width: 320, child: SlideListPanel(railWidth: 320)),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    SlideThumbnail thumbAt(int i) => tester.widget<SlideThumbnail>(
+      find.byWidgetPredicate((w) => w is SlideThumbnail && w.index == i),
+    );
+    // First slide starts at 1; the continued second half starts past its three
+    // items, at 4.
+    expect(thumbAt(0).numberStart, 1);
+    expect(thumbAt(1).numberStart, 4);
+  });
+
   testWidgets('resizing the rail brings the edited slide back into view', (
     tester,
   ) async {

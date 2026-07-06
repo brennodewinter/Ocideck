@@ -273,6 +273,13 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **Opening the same presentation twice now jumps to its tab** instead of
+  loading a second copy. Every open-from-path flow (file picker, recent files,
+  drag-and-drop, deep link) checks whether the file is already open — comparing
+  normalised absolute paths — and, if so, selects that existing tab rather than
+  creating a duplicate. This prevents version confusion where two tabs edit the
+  same file independently. In-memory opens on the web (which carry no file path)
+  are unaffected.
 - **Calmer slide editor.** The editor header now packs everything onto one
   strip: the type and style pickers, a "What can I do here?" hint, a compact
   **Quality** chip (the word coloured by status; the counts move to its tooltip
@@ -320,6 +327,13 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   behavioural change; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ### Fixed
+- **The slide rail now continues a numbered list across a split.** After
+  splitting a numbered slide and ticking *Continue numbering from previous
+  slide* on the second half, the builder's thumbnail rail still restarted the
+  count at 1, even though the main preview and the actual presentation continued
+  it (7, 8, 9…). The rail thumbnails now compute the same start number
+  (`numberedListStartFor`) as the main preview and the presenter/audience views,
+  so the overview matches what is shown.
 - **Code-colour contrast is judged against the large-text threshold.** The
   theme quality check treated the code text/background pair as normal body text
   (WCAG AA 4.5:1), so the LibreKAT house-style green on the dark code panel

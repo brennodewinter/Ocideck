@@ -21,6 +21,7 @@ import '../../utils/page_scoped_notes.dart';
 import '../dialogs/add_slide_dialog.dart';
 import '../dialogs/import_slides_dialog.dart';
 import '../dialogs/slide_finder_dialog.dart';
+import '../../services/slide_layout_metrics.dart';
 import '../slides/slide_preview.dart';
 import '../slides/slide_thumbnail.dart';
 
@@ -581,6 +582,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
             deck.themeProfile,
             deck.themeProfile.fontFamily,
           ),
+          numberStart: numberedListStartFor(deck.slides, index),
           onTap: () => _onSlideTap(index),
           onToggleSkip: () => notifier.toggleSkip(index),
           onCopyImage: () => _copySlideAsImage(slide),
@@ -659,6 +661,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
             deck.themeProfile,
             deck.themeProfile.fontFamily,
           ),
+          numberStart: numberedListStartFor(deck.slides, i),
           onTap: () => _onSlideTap(i),
           onToggleSkip: () => notifier.toggleSkip(i),
           onCopyImage: () => _copySlideAsImage(slide),
