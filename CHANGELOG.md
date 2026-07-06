@@ -273,6 +273,13 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **Opening the same presentation twice now jumps to its tab** instead of
+  loading a second copy. Every open-from-path flow (file picker, recent files,
+  drag-and-drop, deep link) checks whether the file is already open — comparing
+  normalised absolute paths — and, if so, selects that existing tab rather than
+  creating a duplicate. This prevents version confusion where two tabs edit the
+  same file independently. In-memory opens on the web (which carry no file path)
+  are unaffected.
 - **Calmer slide editor.** The editor header now packs everything onto one
   strip: the type and style pickers, a "What can I do here?" hint, a compact
   **Quality** chip (the word coloured by status; the counts move to its tooltip

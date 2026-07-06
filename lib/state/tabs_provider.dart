@@ -327,6 +327,25 @@ class TabsNotifier extends StateNotifier<TabsState> {
   }
 
   Future<OpenResult> openFileByPath(String path, {int? selectIndex}) async {
+    // Dezelfde presentatie hoort maar één keer open te staan. Staat dit bestand
+    // al in een tabblad, spring er dan naartoe in plaats van een tweede kopie te
+    // openen — dat voorkomt versieverwarring (twee tabs, twee losse bewerkingen
+    // van hetzelfde bestand). De veiligheidsscan is bij het eerste openen al
+    // gedaan, dus die hoeft hier niet opnieuw.
+    final existing = _indexOfOpenPath(path);
+    if (existing != null) {
+      selectTab(existing);
+      if (selectIndex != null) {
+        final tab = state.tabs[existing];
+        if (tab.deckNotifier.mounted) {
+          final count = tab.deckNotifier.currentState.deck?.slides.length ?? 0;
+          if (count > 0) {
+            tab.editorNotifier.select(selectIndex.clamp(0, count - 1));
+          }
+        }
+      }
+      return OpenResult.opened;
+    }
     // Security gate: every file that enters the app (open, recent, drag-drop,
     // URL/package import) is scanned first. A presentation is data only — if the
     // file carries anything executable we refuse it and raise the alarm instead
@@ -384,6 +403,22 @@ class TabsNotifier extends StateNotifier<TabsState> {
     } catch (e) {
       logWarning('TabsNotifier._noticeIdenticalCopy', e);
     }
+  }
+
+  /// Index van het tabblad waarin het bestand met [path] al open is, of `null`.
+  /// Vergelijkt genormaliseerde absolute paden zodat een relatief pad en het
+  /// volledige pad naar hetzelfde bestand hetzelfde tabblad raken.
+  int? _indexOfOpenPath(String path) {
+    final target = p.canonicalize(path);
+    for (var i = 0; i < state.tabs.length; i++) {
+      final tab = state.tabs[i];
+      if (!tab.deckNotifier.mounted) continue;
+      final open = tab.deckNotifier.currentState.filePath;
+      if (open != null && open.isNotEmpty && p.canonicalize(open) == target) {
+        return i;
+      }
+    }
+    return null;
   }
 
   /// Zet een zojuist geopend deck in een tabblad: een leeg huidig tabblad
