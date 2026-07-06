@@ -8,6 +8,23 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Fifteen conversation-preparation templates** — the new-presentation wizard
+  now helps you prepare for a difficult or important conversation. Work
+  conversations: **job interview** (STAR answers), **performance review**,
+  **salary negotiation**, **asking for more responsibility** and **raising a
+  workplace problem**. Difficult personal conversations: **resolving a
+  conflict**, **giving or receiving criticism**, **delivering bad news**,
+  **setting boundaries** and **discussing a strained relationship or
+  friendship**. Commercial/persuasive conversations: **client conversation**,
+  **sales conversation** (SPIN), **supplier negotiation** (BATNA/ZOPA),
+  **pitch** and **getting buy-in in a meeting**. The genuinely high-stakes,
+  emotional conversations weave in the *Crucial Conversations* method (Patterson,
+  Grenny, McMillan & Switzler): start with heart, separate facts from your
+  story, make it safe, STATE your path, listen (AMPP) and move to action; the
+  commercial and interview templates use a scenario-specific framework instead.
+  Each has fill-in preparation and anticipation tables plus a progress checklist
+  for agreements, and its title and description are translated in all 30
+  non-Dutch languages.
 - **Three shift-briefing templates** — the new-presentation wizard now offers a
   **Security briefing** (current events and previous shift, points of attention,
   special notes for the day, building/site maintenance and staffing), an
@@ -303,6 +320,13 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **The RASCI / TVB template no longer pre-fills the role assignments.** The
+  RASCI matrix, the role overview and the tasks/responsibilities/authority table
+  used to ship with example assignments (CISO, management, SOC, IT, …) baked into
+  every cell, which presumes an organisation structure the template cannot know.
+  Those assignment cells are now empty (`…`) and the three tables are live-
+  editable, so you fill in who holds which role for your own organisation; only
+  the generic example role and task labels remain as scaffolding.
 - **Found slides insert at the cursor, not at the end.** The *Slide zoeken*
   (find slides) picker now inserts each chosen slide right after the current
   slide and selects it, so consecutive picks stay in order at your position —

@@ -12,6 +12,17 @@ Marp tools.
   **tabs**. Opening a deck that is already open just jumps to its existing tab —
   the same file is never loaded into two tabs at once, so you can't accidentally
   edit two out-of-sync copies.
+- **Start from a template**: the new-presentation dialog offers a searchable
+  catalogue of starting points — from an empty deck to shift briefings, security
+  and privacy work decks, crisis and flight-prep sessions, and **conversation-
+  preparation** templates. The latter help you prepare for a difficult or
+  important talk (job interview, performance review, salary negotiation,
+  resolving a conflict, giving or receiving criticism, delivering bad news,
+  setting boundaries, a strained relationship, client and sales conversations,
+  supplier negotiations, a pitch, or getting buy-in in a meeting). The
+  high-stakes, emotional ones weave in the *Crucial Conversations* method; each
+  comes with fill-in preparation tables and a progress checklist. Everything is
+  placeholder text you overwrite with your own content.
 - **Save**: `Ctrl/Cmd + S`. Saving lays out a tidy project folder next to your
   `.md` (`images/`, `data/`, `logos/`, `themes/`) and copies assets in. See
   [`FILE_FORMAT.md`](FILE_FORMAT.md).
