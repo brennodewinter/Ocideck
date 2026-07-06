@@ -358,9 +358,15 @@ void main() {
       final n = await _loadedNotifier();
       expect(n.state.docReaderTextScale, 1.0);
       await n.setDocReaderTextScale(5);
-      expect(n.state.docReaderTextScale, SettingsNotifier.docReaderTextScaleMax);
+      expect(
+        n.state.docReaderTextScale,
+        SettingsNotifier.docReaderTextScaleMax,
+      );
       await n.setDocReaderTextScale(0.1);
-      expect(n.state.docReaderTextScale, SettingsNotifier.docReaderTextScaleMin);
+      expect(
+        n.state.docReaderTextScale,
+        SettingsNotifier.docReaderTextScaleMin,
+      );
       await n.setDocReaderTextScale(1.3);
       expect(n.state.docReaderTextScale, 1.3);
     });
