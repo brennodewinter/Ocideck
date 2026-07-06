@@ -17,6 +17,11 @@ class BulletsImageEditor extends StatefulWidget {
   final ImageService imageService;
   final List<String> searchPaths;
   final String? captionBasePath;
+
+  /// Whether the preceding slide renders a numbered list — only then is the
+  /// "continue numbering" toggle offered (e.g. the second half of a split
+  /// numbered bullets-with-image slide can carry on the count).
+  final bool previousSlideIsNumbered;
   final bool nestedInScrollView;
 
   const BulletsImageEditor({
@@ -26,6 +31,7 @@ class BulletsImageEditor extends StatefulWidget {
     required this.imageService,
     this.searchPaths = const [],
     this.captionBasePath,
+    this.previousSlideIsNumbered = false,
     this.nestedInScrollView = false,
   });
 
@@ -42,6 +48,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   late ListStyle _listStyle;
   BulletMarker? _bulletMarkerOverride;
   late bool _showChecklistProgress;
+  late bool _continueNumbering;
   late final TextEditingController _richText;
 
   static const _maxLevel = 4;
@@ -54,6 +61,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
     _listStyle = widget.slide.listStyle;
     _bulletMarkerOverride = widget.slide.bulletMarkerOverride;
     _showChecklistProgress = widget.slide.showChecklistProgress;
+    _continueNumbering = widget.slide.continueNumbering;
     _richText = TextEditingController(
       text: normalizeRichTextMarkdown(widget.slide.customMarkdown),
     );
@@ -87,6 +95,10 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
         bulletMarkerOverride: _bulletMarkerOverride,
         clearBulletMarkerOverride: _bulletMarkerOverride == null,
         showChecklistProgress: _showChecklistProgress,
+        // Only a numbered list can continue a chain; keep it off otherwise so a
+        // later switch to bullets/checklist doesn't leave a stale flag behind.
+        continueNumbering:
+            _listStyle == ListStyle.numbered && _continueNumbering,
         customMarkdown: _listStyle == ListStyle.richText
             ? normalizeRichTextMarkdown(_richText.text)
             : widget.slide.customMarkdown,
@@ -262,6 +274,22 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
             },
           ),
         ],
+        // Offered only when the previous slide is a numbered list — e.g. after
+        // splitting a numbered bullets-with-image slide, its second half can
+        // carry on the count.
+        if (_listStyle == ListStyle.numbered && widget.previousSlideIsNumbered)
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(l10n.d('Doornummeren vanaf vorige slide')),
+            subtitle: Text(
+              l10n.d('Begin de nummering waar de vorige slide ophield.'),
+            ),
+            value: _continueNumbering,
+            onChanged: (value) {
+              setState(() => _continueNumbering = value);
+              _emit();
+            },
+          ),
         if (_listStyle == ListStyle.checklist)
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
