@@ -293,6 +293,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **Found slides insert at the cursor, not at the end.** The *Slide zoeken*
+  (find slides) picker now inserts each chosen slide right after the current
+  slide and selects it, so consecutive picks stay in order at your position —
+  matching *Add slide*, *Paste slide*, *Paste image* and *Import slides*, which
+  already inserted at the cursor.
+- **Move a whole multi-selection at once.** Select several slides (shift- or
+  cmd-click, Ctrl/Cmd+A) and drag any one of them: the entire selection moves as
+  a single contiguous block, preserving its order, and the selection follows to
+  the new position. A non-contiguous selection is gathered into one block at the
+  drop point. Dragging a single slide is unchanged.
 - **Splitting an over-full bullet slide now divides evenly.** When both halves
   fit within the per-page optimum, "Split slide" halves the bullets (e.g. 10
   bullets become 5/5 instead of 8/2) rather than cramming page 1 and leaving a

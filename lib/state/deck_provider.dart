@@ -486,6 +486,54 @@ class DeckNotifier extends StateNotifier<DeckState> {
     _mutate(deck.copyWith(slides: slides));
   }
 
+  /// Verplaats de geselecteerde slides als één aaneengesloten blok (in hun
+  /// oorspronkelijke volgorde) naar de drop-plek. [oldIndex]/[newIndex] komen van
+  /// `onReorderItem` (voor-gecorrigeerd, net als bij [reorderSlides]). Bij minder
+  /// dan twee geselecteerde slides valt dit terug op een gewone enkel-slide-move.
+  /// Geeft de nieuwe startindex van het blok, of -1 als er niets te doen is.
+  ///
+  /// De drop-plek wordt verankerd op slide-**id** i.p.v. index: we zoeken de
+  /// eerste niet-blok-slide op of na [newIndex] en zetten het blok daar vóór. Zo
+  /// blijft de plaatsing correct ongeacht hoeveel geselecteerde slides boven de
+  /// drop stonden.
+  int moveSlides(Set<int> selection, int oldIndex, int newIndex) {
+    final deck = state.deck;
+    if (deck == null) return -1;
+    final n = deck.slides.length;
+    final sel = selection.where((i) => i >= 0 && i < n).toList()..sort();
+    if (sel.length < 2) {
+      reorderSlides(oldIndex, newIndex);
+      return newIndex;
+    }
+
+    final slides = List<Slide>.from(deck.slides);
+    final block = [for (final i in sel) slides[i]];
+    final blockIds = {for (final s in block) s.id};
+
+    // Anker = eerste niet-blok-slide op/na de drop in de lijst zonder de
+    // gesleepte slide (newIndex is in die coördinaten voor-gecorrigeerd).
+    final withoutOld = List<Slide>.from(slides)..removeAt(oldIndex);
+    String? anchorId;
+    for (var k = newIndex; k < withoutOld.length; k++) {
+      if (!blockIds.contains(withoutOld[k].id)) {
+        anchorId = withoutOld[k].id;
+        break;
+      }
+    }
+
+    final selSet = sel.toSet();
+    final reduced = [
+      for (var i = 0; i < n; i++)
+        if (!selSet.contains(i)) slides[i],
+    ];
+    final insertAt = anchorId == null
+        ? reduced.length
+        : reduced.indexWhere((s) => s.id == anchorId).clamp(0, reduced.length);
+    reduced.insertAll(insertAt, block);
+    _mutate(deck.copyWith(slides: reduced), bumpRevision: true);
+    return insertAt;
+  }
+
   /// [bumpRevision] dwingt een editor-remount af; nodig wanneer de wijziging
   /// niet uit de editor zelf komt (zoals een kwaliteits-quick-fix) en de
   /// tekstvelden de nieuwe slide-inhoud moeten laden.

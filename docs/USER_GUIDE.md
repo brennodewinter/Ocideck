@@ -222,6 +222,21 @@ also type the start/end seconds by hand. When presenting with autoplay, each
 segment stops at its cut point and advances to the next slide. Cutting works for
 local files, online files and YouTube/Vimeo embeds.
 
+## Organising the slide list
+
+The rail on the left lists every slide as a thumbnail.
+
+- **Select** a slide by clicking it. Hold **Shift** to select a range, or
+  **Ctrl/Cmd** to add/remove individual slides; **Ctrl/Cmd+A** selects them all.
+- **Reorder** by dragging a thumbnail's drag handle. With several slides
+  selected, dragging any one of them moves the **whole selection** as a single
+  block (keeping its order); a scattered selection is gathered together at the
+  drop point. The selection follows to the new position.
+- **Add, paste, find or import** slides with the buttons under the list. New
+  slides are inserted **right after the current slide**, not at the end, so they
+  land where you are working. Bulk actions (delete, skip, copy to another deck)
+  apply to the whole selection.
+
 ## Image library
 
 Image fields open a library that shows every image found in the deck's
