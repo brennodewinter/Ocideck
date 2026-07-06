@@ -19,6 +19,7 @@ import '../../l10n/app_localizations.dart';
 import '../editors/advanced_section.dart';
 import '../language_flag.dart';
 import '../privacy_statement_content.dart';
+import '../reader/document_reader_screen.dart';
 
 part 'parts/settings_dialog_general.dart';
 part 'parts/settings_dialog_appearance.dart';
@@ -26,6 +27,7 @@ part 'parts/settings_dialog_colors.dart';
 part 'parts/settings_dialog_webdav.dart';
 part 'parts/settings_dialog_privacy.dart';
 part 'parts/settings_dialog_security.dart';
+part 'parts/settings_dialog_docs.dart';
 part 'parts/settings_dialog_about.dart';
 part 'parts/settings_dialog_hex_color.dart';
 
@@ -136,13 +138,14 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     Icons.privacy_tip_outlined,
     Icons.shield_outlined,
     Icons.cloud_outlined,
+    Icons.menu_book_outlined,
     Icons.info_outline,
   ];
 
   /// Index of the "Over OciDeck" pane. It is the last entry in the tab lists
   /// but is opened from the branded footer at the bottom of the sidebar rather
   /// than from a regular nav item, so the nav list stops one short of it.
-  static const _aboutTabIndex = 7;
+  static const _aboutTabIndex = 8;
 
   static const _colorPresets = [
     '#FFFFFF',
@@ -395,6 +398,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       l10n.d('Licentie en Privacy'),
       l10n.d('Beveiliging'),
       l10n.d('Nextcloud'),
+      l10n.d('Documentatie'),
       l10n.d('Over OciDeck'),
     ];
 
@@ -406,6 +410,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       _tabBody(_privacyTab()),
       _tabBody(_securityTab()),
       _tabBody(_webdavTab()),
+      _tabBody(_documentationTab()),
       _tabBody(_aboutTab()),
     ];
 
