@@ -158,10 +158,11 @@ void main() {
     expect(n.state.deck!.slides, hasLength(1));
   });
 
-  test('splitSlide also works on a bullets+image slide that still fits', () {
+  test('splitSlide keeps the image on both halves of a bullets+image slide', () {
     // De gemelde casus: weinig bullets náást een afbeelding. Het tekstvlak is
     // smal, en de gebruiker wil toch in tweeën knippen; dan splitsen we
-    // doormidden in plaats van een dode klik.
+    // doormidden in plaats van een dode klik. Beide helften erven de afbeelding,
+    // zodat de vervolgpagina niet plots full-width tekst wordt.
     TestWidgetsFlutterBinding.ensureInitialized();
     final n = _notifier()..newDeck('D');
     final bullets = List.generate(6, (i) => 'Bullet $i');
@@ -175,14 +176,35 @@ void main() {
 
     final slides = n.state.deck!.slides;
     expect(slides, hasLength(3));
-    // The first half keeps the image; the continuation page is pure text.
+    // Beide helften blijven een bulletsImage met dezelfde afbeelding.
     expect(slides[1].type, SlideType.bulletsImage);
     expect(slides[1].imagePath, 'foto.png');
-    expect(slides[2].type, SlideType.bullets);
-    expect(slides[2].imagePath, isEmpty);
+    expect(slides[2].type, SlideType.bulletsImage);
+    expect(slides[2].imagePath, 'foto.png');
+    expect(slides[2].continuesSplit, isTrue);
     expect(slides[1].bullets, isNotEmpty);
     expect(slides[2].bullets, isNotEmpty);
     expect([...slides[1].bullets, ...slides[2].bullets], bullets);
+  });
+
+  test('splitSlide verdeelt een niet-volle bulletslide gelijkmatig', () {
+    // 10 bullets die niet allemaal passen: pagina 1 werd vroeger volgepropt tot
+    // de leesbaarheidsdrempel (8) en liet 2 achter. Nu passen beide helften
+    // binnen het optimum, dus verdelen we netjes 5/5.
+    TestWidgetsFlutterBinding.ensureInitialized();
+    final n = _notifier()..newDeck('D');
+    final bullets = List.generate(10, (i) => 'Bullet met wat tekst nummer $i');
+    n.addSlide(SlideType.bullets, afterIndex: 0);
+    n.updateSlide(1, n.state.deck!.slides[1].copyWith(bullets: bullets));
+
+    n.splitSlide(1);
+
+    final slides = n.state.deck!.slides;
+    expect(slides, hasLength(3));
+    expect(slides[1].bullets.length, 5);
+    expect(slides[2].bullets.length, 5);
+    expect([...slides[1].bullets, ...slides[2].bullets], bullets);
+    expect(slides[2].continuesSplit, isTrue);
   });
 
   test('insertSlides duplicates with fresh ids and returns insert index', () {

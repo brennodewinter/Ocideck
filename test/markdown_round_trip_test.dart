@@ -197,6 +197,18 @@ void main() {
         ).continuesSplit,
         isTrue,
       );
+      // Een gesplitste bulletsImage-vervolgpagina behoudt zowel de afbeelding als
+      // de split-vlag, zodat de gedeelde-schaal-run een save/open overleeft.
+      final splitImage = _roundTrip(
+        Slide.create(SlideType.bulletsImage).copyWith(
+          bullets: ['a', 'b'],
+          imagePath: 'images/foto.png',
+          continuesSplit: true,
+        ),
+      );
+      expect(splitImage.type, SlideType.bulletsImage);
+      expect(splitImage.imagePath, 'images/foto.png');
+      expect(splitImage.continuesSplit, isTrue);
     });
 
     test('checklist style and checked items round-trip', () {

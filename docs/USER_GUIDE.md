@@ -503,6 +503,14 @@ for (`lib/services/slide_quality_analyzer.dart`).
 Theme-wide contrast issues are listed once for the whole deck; slide-specific
 issues name the slide number.
 
+A too-dense bullet slide offers a one-click **Split slide** fix (also available
+from the slide thumbnail's menu). It divides the bullets evenly between the two
+pages when both halves fit; a slide too full for two pages fills the first page to
+the readable optimum and leaves the rest, which you can split again. Splitting a
+**bullets + image** slide keeps the image on the continuation page too, so both
+pages match and share one font size — swap the follow-up to a plain bullets page
+via the slide **type** picker if you prefer.
+
 #### Settings
 
 Under *Settings → General → Accessibility*:

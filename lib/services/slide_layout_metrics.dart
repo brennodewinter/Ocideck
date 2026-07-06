@@ -786,8 +786,14 @@ double richTextFitScale({
   }
 }
 
-/// Layout metrics for a bullets + image slide.
-double bulletsImageSlideFitScale({required Slide slide, required String font}) {
+/// Layout metrics for a bullets + image slide. [extraVReserve] reserves extra
+/// vertical space (bijv. de logostrook) zodat de gedeelde split-schaal die net zo
+/// vrijhoudt als de live layout.
+double bulletsImageSlideFitScale({
+  required Slide slide,
+  required String font,
+  double extraVReserve = 0,
+}) {
   final w = kReferenceSlideWidth;
   final leftPad = w * 0.038;
   final verticalPad = w * 0.042;
@@ -803,7 +809,7 @@ double bulletsImageSlideFitScale({required Slide slide, required String font}) {
 
   final slideHeight = w * 9 / 16;
   final availW = (w - imgWidth - gap - leftPad).clamp(w * 0.12, w);
-  final availH = slideHeight - verticalPad * 2;
+  final availH = slideHeight - verticalPad * 2 - extraVReserve;
 
   return bulletsFitScale(
     availW: availW,

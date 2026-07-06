@@ -209,7 +209,9 @@ double? sharedSplitFitScale(
 ) {
   if (index < 0 || index >= slides.length) return null;
   bool splittable(SlideType t) =>
-      t == SlideType.bullets || t == SlideType.twoBullets;
+      t == SlideType.bullets ||
+      t == SlideType.twoBullets ||
+      t == SlideType.bulletsImage;
   if (!splittable(slides[index].type)) return null;
   bool sameRun(Slide a, Slide b) =>
       a.type == b.type && a.listStyle == b.listStyle;
@@ -240,6 +242,18 @@ double? sharedSplitFitScale(
 /// reserving the logo strip so the shared scale clears the logo just as the
 /// live layout does.
 double _memberRenderScale(Slide slide, ThemeProfile profile, String font) {
+  if (slide.type == SlideType.bulletsImage) {
+    // De smalle tekstkolom reserveert de logostrook via de split-tekst-insets,
+    // net als de live layout.
+    final safe = slide.showLogo
+        ? _splitTextLogoSafeInsets(kReferenceSlideWidth, profile)
+        : EdgeInsets.zero;
+    return bulletsImageSlideFitScale(
+      slide: slide,
+      font: font,
+      extraVReserve: safe.top + safe.bottom,
+    );
+  }
   final safe = slide.showLogo
       ? _logoSafeInsets(kReferenceSlideWidth, profile)
       : EdgeInsets.zero;
@@ -603,6 +617,7 @@ class SlidePreviewWidget extends StatelessWidget {
           showRichTextPageControls: showRichTextPageControls,
           onRichTextPageChanged: onRichTextPageChanged,
           numberStart: numberStart,
+          fitScaleOverride: fitScaleOverride,
         );
       case SlideType.twoImages:
         return _TwoImagesPreview(
