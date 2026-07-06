@@ -74,6 +74,7 @@ void main() {
       find.text('Korte briefing'),
       60,
       scrollable: find.byType(Scrollable).last,
+      maxScrolls: 200,
     );
     expect(find.text('Korte briefing'), findsOneWidget);
     expect(find.byType(TextFormField), findsOneWidget);
@@ -97,6 +98,7 @@ void main() {
       find.text('Projectstart / kick-off'),
       60,
       scrollable: find.byType(Scrollable).last,
+      maxScrolls: 200,
     );
     // Volledig in beeld brengen: scrollUntilVisible kan de tegel aan de rand
     // laten staan, waar een tap net naast zou vallen.

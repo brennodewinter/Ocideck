@@ -347,6 +347,86 @@ void main() {
     });
   });
 
+  group('gesprekssjablonen', () {
+    // De negen echt lastige gesprekken weven de Crucial Conversations-methode
+    // erdoorheen; de zes commerciële/sollicitatiesjablonen gebruiken een
+    // scenario-eigen kader.
+    const crucialIds = [
+      'performanceReview',
+      'salaryNegotiation',
+      'moreResponsibility',
+      'raiseWorkplaceIssue',
+      'resolveConflict',
+      'giveReceiveFeedback',
+      'deliverBadNews',
+      'setBoundaries',
+      'strainedRelationship',
+    ];
+    const scenarioIds = [
+      'jobInterview',
+      'clientConversation',
+      'salesConversation',
+      'supplierNegotiation',
+      'pitch',
+      'meetingToGetBuyIn',
+    ];
+    final conversationIds = [...crucialIds, ...scenarioIds];
+
+    test('all fifteen conversation templates are registered', () {
+      final ids = deckTemplates.map((t) => t.id).toSet();
+      expect(ids, containsAll(conversationIds));
+      expect(conversationIds.toSet(), hasLength(15));
+    });
+
+    test(
+      'every conversation template is live-invulbaar with a progress list',
+      () {
+        for (final id in conversationIds) {
+          final slides = deckTemplateById(id)!.buildSlides('T');
+          expect(
+            slides.any((s) => s.type == SlideType.table && s.tableEditable),
+            isTrue,
+            reason: '$id: editable table',
+          );
+          expect(
+            slides.any(
+              (s) =>
+                  s.listStyle == ListStyle.checklist && s.showChecklistProgress,
+            ),
+            isTrue,
+            reason: '$id: progress checklist',
+          );
+        }
+      },
+    );
+
+    test('crucial conversations carry the Crucial Conversations method', () {
+      for (final id in crucialIds) {
+        final slides = deckTemplateById(id)!.buildSlides('T');
+        expect(
+          slides.any(
+            (s) =>
+                s.type == SlideType.section &&
+                s.title == 'De aanpak: een cruciaal gesprek voeren',
+          ),
+          isTrue,
+          reason: id,
+        );
+      }
+    });
+
+    test('scenario conversations do not force the crucial method section', () {
+      for (final id in scenarioIds) {
+        final slides = deckTemplateById(id)!.buildSlides('T');
+        expect(
+          slides.any((s) => s.type == SlideType.section),
+          isFalse,
+          reason: id,
+        );
+      }
+    });
+  });
+
   group('l10n coverage', () {
     // Titles/descriptions reach l10n.d() via the model, not as literals, so
     // the grep-based coverage test in app_localizations_test.dart cannot see
