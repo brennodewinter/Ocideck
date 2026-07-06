@@ -123,6 +123,10 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       classificationWatermarkEnabled:
           prefs.getBool('classificationWatermarkEnabled') ?? false,
       uiTextScale: (prefs.getDouble('uiTextScale') ?? 1.0).clamp(1.0, 2.0),
+      docReaderTextScale: (prefs.getDouble('docReaderTextScale') ?? 1.0).clamp(
+        0.8,
+        1.8,
+      ),
       qualityWarningsOnExport: prefs.getBool('qualityWarningsOnExport') ?? true,
       qualityBlockExportOnErrors:
           prefs.getBool('qualityBlockExportOnErrors') ?? false,
@@ -249,6 +253,24 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await _persist(
       'setUiTextScale',
       (prefs) => prefs.setDouble('uiTextScale', clamped),
+    );
+  }
+
+  /// Ondergrens, bovengrens en stapgrootte voor de documentatielezer-schaal;
+  /// gedeeld met de knoppen in de lezer zodat clampen en stappen consistent zijn.
+  static const double docReaderTextScaleMin = 0.8;
+  static const double docReaderTextScaleMax = 1.8;
+  static const double docReaderTextScaleStep = 0.1;
+
+  Future<void> setDocReaderTextScale(double scale) async {
+    final clamped = scale
+        .clamp(docReaderTextScaleMin, docReaderTextScaleMax)
+        .toDouble();
+    if (clamped == state.docReaderTextScale) return;
+    state = state.copyWith(docReaderTextScale: clamped);
+    await _persist(
+      'setDocReaderTextScale',
+      (prefs) => prefs.setDouble('docReaderTextScale', clamped),
     );
   }
 

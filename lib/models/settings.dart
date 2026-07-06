@@ -617,6 +617,11 @@ class AppSettings {
   /// fixed 16:9 design surface. WCAG 1.4.4 asks for text resizing up to 200%.
   final double uiTextScale;
 
+  /// Lettergrootte in de documentatielezer (0.8–1.8), bovenop [uiTextScale] en
+  /// de systeemschaal. Los van de interfaceschaal zodat de lezer per keer groter
+  /// of kleiner kan zonder de rest van de app te beïnvloeden.
+  final double docReaderTextScale;
+
   /// Toon een waarschuwing vóór export wanneer de slide-kwaliteitscontrole
   /// problemen vindt (alt-tekst, contrast, tekstdichtheid).
   final bool qualityWarningsOnExport;
@@ -656,6 +661,7 @@ class AppSettings {
     this.requireClassificationOnExport = false,
     this.classificationWatermarkEnabled = false,
     this.uiTextScale = 1.0,
+    this.docReaderTextScale = 1.0,
     this.qualityWarningsOnExport = true,
     this.qualityBlockExportOnErrors = false,
     this.contrastMinRatio = 4.5,
@@ -728,6 +734,7 @@ class AppSettings {
     bool? requireClassificationOnExport,
     bool? classificationWatermarkEnabled,
     double? uiTextScale,
+    double? docReaderTextScale,
     bool? qualityWarningsOnExport,
     bool? qualityBlockExportOnErrors,
     double? contrastMinRatio,
@@ -784,6 +791,7 @@ class AppSettings {
       classificationWatermarkEnabled:
           classificationWatermarkEnabled ?? this.classificationWatermarkEnabled,
       uiTextScale: uiTextScale ?? this.uiTextScale,
+      docReaderTextScale: docReaderTextScale ?? this.docReaderTextScale,
       qualityWarningsOnExport:
           qualityWarningsOnExport ?? this.qualityWarningsOnExport,
       qualityBlockExportOnErrors:
