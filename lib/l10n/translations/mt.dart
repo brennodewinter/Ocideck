@@ -84,6 +84,12 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Documentatie': 'Dokumentazzjoni',
+  'Gebruikershandleiding': 'Gwida tal-utent',
+  'Bestandsformaat': 'Format tal-fajl',
+  'Online openen': 'Iftaħ online',
+  'Dit document kon niet worden geladen.':
+      'Dan id-dokument ma setax jitgħabba.',
   'Kwaliteit': 'Kwalità',
   'Slide-instellingen': 'Settings tas-slajd',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

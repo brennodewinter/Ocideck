@@ -83,6 +83,12 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Documentatie': 'Dokumentation',
+  'Gebruikershandleiding': 'Benutzerhandbuech',
+  'Bestandsformaat': 'Dateiformat',
+  'Online openen': 'Online öffne',
+  'Dit document kon niet worden geladen.':
+      'Das Dokumänt het nöd chöne glade werde.',
   'Kwaliteit': 'Qualität',
   'Slide-instellingen': 'Slide-Iistellige',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

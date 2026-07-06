@@ -83,6 +83,11 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Documentatie': 'Dokumentācija',
+  'Gebruikershandleiding': 'Lietotāja rokasgrāmata',
+  'Bestandsformaat': 'Faila formāts',
+  'Online openen': 'Atvērt tiešsaistē',
+  'Dit document kon niet worden geladen.': 'Šo dokumentu neizdevās ielādēt.',
   'Kwaliteit': 'Kvalitāte',
   'Slide-instellingen': 'Slaida iestatījumi',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

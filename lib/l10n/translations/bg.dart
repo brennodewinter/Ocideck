@@ -84,6 +84,12 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Documentatie': 'Документация',
+  'Gebruikershandleiding': 'Ръководство за потребителя',
+  'Bestandsformaat': 'Файлов формат',
+  'Online openen': 'Отваряне онлайн',
+  'Dit document kon niet worden geladen.':
+      'Този документ не можа да бъде зареден.',
   'Kwaliteit': 'Качество',
   'Slide-instellingen': 'Настройки на слайда',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

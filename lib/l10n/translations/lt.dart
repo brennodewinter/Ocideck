@@ -83,6 +83,11 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Documentatie': 'Dokumentacija',
+  'Gebruikershandleiding': 'Naudotojo vadovas',
+  'Bestandsformaat': 'Failo formatas',
+  'Online openen': 'Atverti internete',
+  'Dit document kon niet worden geladen.': 'Nepavyko įkelti šio dokumento.',
   'Kwaliteit': 'Kokybė',
   'Slide-instellingen': 'Skaidrės nustatymai',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

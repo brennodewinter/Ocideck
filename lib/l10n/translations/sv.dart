@@ -83,6 +83,12 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Documentatie': 'Dokumentation',
+  'Gebruikershandleiding': 'Användarhandbok',
+  'Bestandsformaat': 'Filformat',
+  'Online openen': 'Öppna online',
+  'Dit document kon niet worden geladen.':
+      'Det gick inte att läsa in det här dokumentet.',
   'Kwaliteit': 'Kvalitet',
   'Slide-instellingen': 'Bildinställningar',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

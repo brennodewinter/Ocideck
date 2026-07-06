@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:url_launcher/url_launcher.dart';
 import '../../l10n/app_localizations.dart';
-import '../theme/app_theme.dart';
+import 'reader/document_reader_screen.dart';
 
 /// Shared licence + privacy copy for the consent gate and the settings screen,
 /// so both stay in sync and truthful. Covers three things: the EUPL 1.2 licence
@@ -69,7 +69,7 @@ class PrivacyStatementContent extends StatelessWidget {
 
         // ── 1. Licence ───────────────────────────────────────────────────────
         _heading(theme, Icons.gavel_outlined, l10n.d('Licentie (EUPL 1.2)')),
-        _card(theme, _licenseCard(theme, l10n)),
+        _card(theme, _licenseCard(context, theme, l10n)),
         const SizedBox(height: 16),
 
         // ── 2. What OciDeck stores on this device ────────────────────────────
@@ -135,9 +135,13 @@ class PrivacyStatementContent extends StatelessWidget {
     ),
   );
 
-  /// De licentiekaart: samenvatting, inklapbare volledige tekst en de link
-  /// naar de officiële online versies.
-  Widget _licenseCard(ThemeData theme, AppLocalizations l10n) {
+  /// De licentiekaart: samenvatting, een knop naar de volledige (gerenderde)
+  /// licentie in het leesscherm, en de link naar de officiële online versies.
+  Widget _licenseCard(
+    BuildContext context,
+    ThemeData theme,
+    AppLocalizations l10n,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -147,25 +151,22 @@ class PrivacyStatementContent extends StatelessWidget {
           ),
           style: _bodyStyle,
         ),
-        // The card around this content has a background colour; an
-        // ExpansionTile paints its ink on the nearest Material, so give it
-        // a transparent one to avoid the debug "invisible ink" assertion.
-        Material(
-          type: MaterialType.transparency,
-          child: Theme(
-            data: theme.copyWith(dividerColor: Colors.transparent),
-            child: ExpansionTile(
-              tilePadding: EdgeInsets.zero,
-              childrenPadding: EdgeInsets.zero,
-              title: Text(
-                l10n.d('Lees de volledige licentie'),
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              children: [_fullLicenseViewer(theme), const SizedBox(height: 8)],
+        const SizedBox(height: 4),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: TextButton.icon(
+            onPressed: () => DocumentReaderScreen.open(
+              context,
+              title: l10n.d('Licentie (EUPL 1.2)'),
+              assetBase: 'LICENSE.md',
+              onlineUrl: licenseUrl,
             ),
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              minimumSize: const Size(0, 32),
+            ),
+            icon: const Icon(Icons.menu_book_outlined, size: 16),
+            label: Text(l10n.d('Lees de volledige licentie')),
           ),
         ),
         Align(
@@ -183,46 +184,6 @@ class PrivacyStatementContent extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  /// Scrollbaar vak met de volledige, gebundelde licentietekst.
-  Widget _fullLicenseViewer(ThemeData theme) {
-    return Container(
-      constraints: const BoxConstraints(maxHeight: 240),
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.4),
-        border: Border.all(color: theme.colorScheme.outlineVariant),
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: FutureBuilder<String>(
-        future: loadFullLicense(),
-        builder: (context, snap) {
-          if (!snap.hasData) {
-            return const SizedBox(
-              height: 40,
-              child: Center(
-                child: SizedBox(
-                  width: 18,
-                  height: 18,
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                ),
-              ),
-            );
-          }
-          return SingleChildScrollView(
-            child: SelectableText(
-              snap.data!,
-              style: TextStyle(
-                fontSize: 10.5,
-                height: 1.35,
-                color: AppTheme.slate600,
-              ),
-            ),
-          );
-        },
-      ),
     );
   }
 }

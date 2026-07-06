@@ -84,6 +84,12 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Documentatie': 'Dokumentace',
+  'Gebruikershandleiding': 'Uživatelská příručka',
+  'Bestandsformaat': 'Formát souboru',
+  'Online openen': 'Otevřít online',
+  'Dit document kon niet worden geladen.':
+      'Tento dokument se nepodařilo načíst.',
   'Kwaliteit': 'Kvalita',
   'Slide-instellingen': 'Nastavení snímku',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

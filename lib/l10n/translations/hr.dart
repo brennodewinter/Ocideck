@@ -83,6 +83,11 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Documentatie': 'Dokumentacija',
+  'Gebruikershandleiding': 'Korisnički priručnik',
+  'Bestandsformaat': 'Format datoteke',
+  'Online openen': 'Otvori na mreži',
+  'Dit document kon niet worden geladen.': 'Ovaj dokument nije moguće učitati.',
   'Kwaliteit': 'Kvaliteta',
   'Slide-instellingen': 'Postavke slajda',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

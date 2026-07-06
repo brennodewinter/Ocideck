@@ -81,6 +81,11 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Documentatie': 'ghItlhmey',
+  'Gebruikershandleiding': 'lo\'wI\' paq',
+  'Bestandsformaat': 'De\' Segh',
+  'Online openen': 'online poSmoH',
+  'Dit document kon niet worden geladen.': 'ghItlhvam laDlaHbe\'.',
   'Kwaliteit': 'QaQ',
   'Slide-instellingen': 'Slide DuHmey',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
