@@ -8,6 +8,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Dead-code gate (`make check-dead-code`)** — a new quality check, wired into
+  `make check` and CI, that walks the `lib/` import graph from the app
+  entrypoint and fails on any orphaned `.dart` file reachable via no
+  `import`/`export`/`part` (both branches of a conditional import counted). This
+  closes the analyzer's blind spot: `flutter analyze --fatal-infos` already
+  rejects unreachable code and unused imports/private elements, but a whole
+  detached file stayed green. A companion **`make fix`** helper applies
+  `dart fix --apply` + reformat for local cleanup. See `docs/CHECKS.md`.
 - **Dark mode for the editor** — selecting the dark app-appearance profile
   (*Settings → Appearance*) now also darkens the editor chrome, not just the
   Material widgets. Every semantic `AppTheme` colour token resolves per mode

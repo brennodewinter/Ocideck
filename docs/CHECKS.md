@@ -46,6 +46,7 @@ run locally and in CI, the number you see locally is the number CI gates on.
 | [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ |
 | [`make check-conventions`](#make-check-conventions) | No `print()`; bare `catch (_)`, raw-colour & file-size ratchets | ✅ | ✅ | ✅ |
 | [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ |
+| [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 65% floor | — | — | ✅ (gate) |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
@@ -129,6 +130,26 @@ These three run on every push and pull request (and as `make check`).
 - **Failure means:** extract helpers or sub-widgets to shrink the method (then
   lower its `methodLengthBaseline` entry — the run prints a tip), or deliberately
   add/raise the entry with a reason.
+
+### `make check-dead-code`
+- **Runs:** `dart run tool/check_dead_code.dart`
+- **Covers:** **orphaned files** — the analyzer's blind spot. `flutter analyze
+  --fatal-infos` already fails on unreachable statements, unused imports/locals/
+  fields and unused *private* elements, but a whole `.dart` file (or a public
+  symbol) that nothing imports stays green forever. This check builds the `lib/`
+  import graph and walks it from every top-level `main(`; any file reachable via
+  `import` / `export` / `part` from none of them is dead.
+- **How it measures:** static directive scan — **both** branches of a conditional
+  import (`import 'x.dart' if (dart.library.io) 'y.dart'`) count as edges, `part`
+  files are pulled in by their parent, and `package:ocideck/…` resolves to `lib/`.
+  An unparsed/comment URI can only *add* an edge, so the check errs toward missing
+  a dead file, never toward failing on a live one.
+- **Failure means:** delete the orphaned file, wire it in, or — for a deliberate
+  dynamic entrypoint the static walk can't follow — add it (with a reason) to
+  `deadCodeAllowlist` in `tool/check_dead_code.dart`.
+- **Not covered:** unused *public symbols* inside a live file (high false-positive
+  rate: generated l10n, test-only use). Use `make fix` (`dart fix --apply`) to
+  sweep the analyzer-visible kinds; `make analyze` then enforces the result.
 
 ### `make test`
 - **Runs:** `flutter test --test-randomize-ordering-seed random` — the full
@@ -295,9 +316,9 @@ For focused work, run only the relevant slice instead of the whole suite:
 ### `.github/workflows/ci.yml` — every push and pull request
 - **Gate (Linux)** — `runs-on: ubuntu-latest`: `flutter pub get
   --enforce-lockfile`, then `make format-check`, `make analyze`,
-  `make check-conventions`, `make coverage` (with the line-coverage floor),
-  `make licenses`, `make sbom-verify`, and `make deps-check`. Uploads the
-  coverage report.
+  `make check-conventions`, `make check-method-length`, `make check-dead-code`,
+  `make coverage` (with the line-coverage floor), `make licenses`,
+  `make sbom-verify`, and `make deps-check`. Uploads the coverage report.
 - **Test matrix (macOS + Windows)** — runs `flutter test
   --test-randomize-ordering-seed random` on the other two desktop OSes to catch
   platform-specific (path, `Platform.isX`) regressions the Linux gate would miss.
