@@ -327,6 +327,13 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   behavioural change; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ### Fixed
+- **The slide rail now continues a numbered list across a split.** After
+  splitting a numbered slide and ticking *Continue numbering from previous
+  slide* on the second half, the builder's thumbnail rail still restarted the
+  count at 1, even though the main preview and the actual presentation continued
+  it (7, 8, 9…). The rail thumbnails now compute the same start number
+  (`numberedListStartFor`) as the main preview and the presenter/audience views,
+  so the overview matches what is shown.
 - **Code-colour contrast is judged against the large-text threshold.** The
   theme quality check treated the code text/background pair as normal body text
   (WCAG AA 4.5:1), so the LibreKAT house-style green on the dark code panel
