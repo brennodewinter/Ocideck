@@ -1412,4 +1412,14 @@ const _dutchSourceAddFr = {
       'Préparer un vol VFR avec route, météo, NOTAM, performances, masse et centrage, carburant, terrains de dégagement et checks go/no-go personnels.',
   'Zoek een sjabloon': 'Rechercher un modèle',
   'Geen sjablonen gevonden': 'Aucun modèle trouvé',
+  'Beveiligingsbriefing / dienststart':
+      'Briefing de sécurité / prise de service',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Actualités, points d\'attention, particularités, maintenance et effectifs pour le service de sécurité.',
+  'Operationele politiebriefing': 'Briefing opérationnel de police',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Actualités, points chauds, avis de recherche (BOLO), missions, sécurité des agents et déploiement territorial pour le service.',
+  'Handhavingsbriefing (BOA)': 'Briefing d\'application (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Lieux sensibles, nuisances, événements, pouvoirs, sécurité des agents et déploiement territorial pour le service d\'application.',
 };

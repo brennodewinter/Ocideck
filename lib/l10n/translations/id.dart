@@ -1401,4 +1401,13 @@ const _dutchSourceId = {
   'Website van de stichting': 'Situs web yayasan',
   'Opgeslagen als download in je map met downloads.':
       'Disimpan sebagai unduhan di folder unduhan Anda.',
+  'Beveiligingsbriefing / dienststart': 'Pengarahan keamanan / awal tugas jaga',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Perkembangan terkini, hal-hal yang perlu diperhatikan, catatan khusus, pemeliharaan, dan penempatan personel untuk dinas keamanan.',
+  'Operationele politiebriefing': 'Pengarahan operasional kepolisian',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Perkembangan terkini, hotspot, pemberitahuan buronan, penugasan, keselamatan diri, dan penempatan wilayah untuk tugas jaga.',
+  'Handhavingsbriefing (BOA)': 'Pengarahan penegakan (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Lokasi perhatian, gangguan, acara, kewenangan, keselamatan diri, dan penempatan wilayah untuk dinas penegakan.',
 };

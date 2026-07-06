@@ -1401,4 +1401,13 @@ const _dutchSourceGsw = {
   'Website van de stichting': 'Website vo de Stiftig',
   'Opgeslagen als download in je map met downloads.':
       'Als Download i dim Download-Ordner gspicheret.',
+  'Beveiligingsbriefing / dienststart': 'Sicherheits-Briefing / Dienschtaafang',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Aktuells, Ufmerksamkeitshiiwiis, Bsunderheite, Unterhalt und Bsetzig für de Sicherheitsdienscht.',
+  'Operationele politiebriefing': 'Operativs Polizei-Briefing',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Aktuells, Hotspots, Fahndige, Ufträg, eigeni Sicherheit und Gebietsiisatz für de Dienscht.',
+  'Handhavingsbriefing (BOA)': 'Vollzugs-Briefing (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Ufmerksamkeitsort, Störige, Aaläss, Befugniss, eigeni Sicherheit und Gebietsiisatz für de Vollzugsdienscht.',
 };

@@ -1420,4 +1420,14 @@ const _dutchSourceBg = {
   'Website van de stichting': 'Уебсайт на фондацията',
   'Opgeslagen als download in je map met downloads.':
       'Запазено като изтегляне в папката с изтегляния.',
+  'Beveiligingsbriefing / dienststart':
+      'Инструктаж по сигурността / начало на смяната',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Актуални събития, обръщане на внимание, особености, поддръжка и заетост за охранителната служба.',
+  'Operationele politiebriefing': 'Оперативен полицейски инструктаж',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Актуални събития, горещи точки, обявления за издирване, задачи, лична безопасност и разполагане по райони за смяната.',
+  'Handhavingsbriefing (BOA)': 'Инструктаж по правоприлагане (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Обектни локации, безпокойство, събития, правомощия, лична безопасност и разполагане по райони за службата по правоприлагане.',
 };

@@ -1424,4 +1424,14 @@ const _dutchSourcePt = {
   'Website van de stichting': 'Website da fundação',
   'Opgeslagen als download in je map met downloads.':
       'Guardado como transferência na sua pasta de transferências.',
+  'Beveiligingsbriefing / dienststart':
+      'Briefing de segurança / início do turno',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Atualidades, pontos de atenção, particularidades, manutenção e escalação para o serviço de segurança.',
+  'Operationele politiebriefing': 'Briefing operacional da polícia',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Atualidades, hotspots, alertas de procura, ordens, segurança do agente e destacamento por zona para o turno.',
+  'Handhavingsbriefing (BOA)': 'Briefing de fiscalização (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Locais de atenção, incómodos, eventos, competências, segurança do agente e destacamento por zona para o serviço de fiscalização.',
 };

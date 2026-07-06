@@ -1402,4 +1402,13 @@ const _dutchSourceSl = {
   'Website van de stichting': 'Spletno mesto ustanove',
   'Opgeslagen als download in je map met downloads.':
       'Shranjeno kot prenos v mapo prenosov.',
+  'Beveiligingsbriefing / dienststart': 'Varnostni briefing / začetek izmene',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Aktualnosti, opozorila, posebnosti, vzdrževanje in zasedba za varnostno službo.',
+  'Operationele politiebriefing': 'Operativni policijski briefing',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Aktualnosti, žarišča, razpisi tiralic, naloge, lastna varnost in razporeditev po območjih za izmeno.',
+  'Handhavingsbriefing (BOA)': 'Briefing za inšpekcijski nadzor (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Lokacije pozornosti, motnje, dogodki, pooblastila, lastna varnost in razporeditev po območjih za nadzorno službo.',
 };

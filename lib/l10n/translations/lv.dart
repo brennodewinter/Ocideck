@@ -1400,4 +1400,13 @@ const _dutchSourceLv = {
   'Website van de stichting': 'Nodibinājuma tīmekļa vietne',
   'Opgeslagen als download in je map met downloads.':
       'Saglabāts kā lejupielāde jūsu lejupielāžu mapē.',
+  'Beveiligingsbriefing / dienststart': 'Drošības instruktāža / maiņas sākums',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Aktualitātes, uzmanības norādes, īpatnības, apkope un personāla nodrošinājums apsardzes dienestam.',
+  'Operationele politiebriefing': 'Operatīvā policijas instruktāža',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Aktualitātes, karstie punkti, meklēšanas paziņojumi, uzdevumi, paša drošība un izvietojums teritorijā maiņai.',
+  'Handhavingsbriefing (BOA)': 'Uzraudzības instruktāža (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Uzmanības vietas, traucējumi, pasākumi, pilnvaras, paša drošība un izvietojums teritorijā uzraudzības dienestam.',
 };

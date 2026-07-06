@@ -1403,4 +1403,13 @@ const _dutchSourceCs = {
   'Website van de stichting': 'Webové stránky nadace',
   'Opgeslagen als download in je map met downloads.':
       'Uloženo jako stažený soubor do složky stažených souborů.',
+  'Beveiligingsbriefing / dienststart': 'Bezpečnostní briefing / začátek směny',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Aktuality, upozornění, zvláštnosti, údržba a obsazení pro bezpečnostní službu.',
+  'Operationele politiebriefing': 'Operační policejní briefing',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Aktuality, hotspoty, pátrání, úkoly, vlastní bezpečnost a nasazení v oblasti pro směnu.',
+  'Handhavingsbriefing (BOA)': 'Briefing pro dozor (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Rizikové lokality, obtěžování, akce, pravomoci, vlastní bezpečnost a nasazení v oblasti pro dozorčí službu.',
 };

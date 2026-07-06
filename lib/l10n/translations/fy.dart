@@ -1389,4 +1389,13 @@ const _dutchSourceAddFy = {
       'Ried in VFR-flecht ta mei rûte, waar, NOTAMs, prestaasjes, weight & balance, brânstof, alternates en persoanlike go/no-go-checks.',
   'Zoek een sjabloon': 'Sykje in sjabloan',
   'Geen sjablonen gevonden': 'Gjin sjabloanen fûn',
+  'Beveiligingsbriefing / dienststart': 'Feiligensbriefing / tsjinststart',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Aktualiteiten, oandachtspunten, bysûnderheden, ûnderhâld en beset foar de feiligenstsjinst.',
+  'Operationele politiebriefing': 'Operasjonele plysjebriefing',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Aktualiteiten, hotspots, opspoaringsberjochten, opdrachten, eigen feiligens en gebietsynset foar de tsjinst.',
+  'Handhavingsbriefing (BOA)': 'Hanthavingsbriefing (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Oandachtslokaasjes, oerlêst, eveneminten, foegen, eigen feiligens en gebietsynset foar de hanthavingstsjinst.',
 };

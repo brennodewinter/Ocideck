@@ -1403,4 +1403,13 @@ const _dutchSourceHu = {
   'Website van de stichting': 'Az alapítvány weboldala',
   'Opgeslagen als download in je map met downloads.':
       'Letöltésként mentve a letöltések mappájába.',
+  'Beveiligingsbriefing / dienststart': 'Biztonsági eligazítás / műszakkezdés',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Aktualitások, figyelemfelhívások, különleges tudnivalók, karbantartás és létszám a biztonsági műszakhoz.',
+  'Operationele politiebriefing': 'Operatív rendőrségi eligazítás',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Aktualitások, gócpontok, körözések, feladatok, saját biztonság és területi bevetés a műszakhoz.',
+  'Handhavingsbriefing (BOA)': 'Végrehajtási eligazítás (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Kiemelt helyszínek, zavaró magatartás, rendezvények, hatáskörök, saját biztonság és területi bevetés a végrehajtási műszakhoz.',
 };

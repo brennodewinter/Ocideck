@@ -1392,4 +1392,14 @@ const _dutchSourceAddPap = {
       'Prepará un buelo VFR ku ruta, wèr, NOTAMs, prestashon, weight & balance, kombustibel, alternates i cheknan go/no-go personal.',
   'Zoek een sjabloon': 'Buska un modelo',
   'Geen sjablonen gevonden': 'No a haña ningun modelo',
+  'Beveiligingsbriefing / dienststart':
+      'Briefing di seguridat / kuminsamentu di turno',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Aktualidat, puntonan di atenshon, partikularidat, mantenshon i okupashon di personal pa e servisio di seguridat.',
+  'Operationele politiebriefing': 'Briefing operashonal di polis',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Aktualidat, hotspots, komunikashonnan di buskamentu, enkargonan, siguridat propio i despliegue di area pa e turno.',
+  'Handhavingsbriefing (BOA)': 'Briefing di fiskalisashon (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Lokashonnan di atenshon, molèster, eventonan, kompetensianan, siguridat propio i despliegue di area pa e servisio di fiskalisashon.',
 };

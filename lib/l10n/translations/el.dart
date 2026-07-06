@@ -1419,4 +1419,13 @@ const _dutchSourceEl = {
   'Website van de stichting': 'Ιστότοπος του ιδρύματος',
   'Opgeslagen als download in je map met downloads.':
       'Αποθηκεύτηκε ως λήψη στον φάκελο λήψεων σας.',
+  'Beveiligingsbriefing / dienststart': 'Ενημέρωση ασφαλείας / έναρξη βάρδιας',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Επικαιρότητα, σημεία προσοχής, ιδιαιτερότητες, συντήρηση και στελέχωση για την υπηρεσία ασφαλείας.',
+  'Operationele politiebriefing': 'Επιχειρησιακή αστυνομική ενημέρωση',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Επικαιρότητα, hotspots, σήματα αναζήτησης, εντολές, ατομική ασφάλεια και ανάπτυξη στην περιοχή για τη βάρδια.',
+  'Handhavingsbriefing (BOA)': 'Ενημέρωση επιβολής (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Σημεία προσοχής, οχλήσεις, εκδηλώσεις, αρμοδιότητες, ατομική ασφάλεια και ανάπτυξη στην περιοχή για την υπηρεσία επιβολής.',
 };

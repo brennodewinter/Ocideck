@@ -1419,4 +1419,13 @@ const _dutchSourceMt = {
   'Website van de stichting': 'Il-websajt tal-fondazzjoni',
   'Opgeslagen als download in je map met downloads.':
       'Issejvjat bħala download fil-folder tad-downloads tiegħek.',
+  'Beveiligingsbriefing / dienststart': 'Briefing tas-sigurtà / bidu tax-xift',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Ġrajjiet kurrenti, punti ta\' attenzjoni, noti speċjali, manutenzjoni u persunal għax-xift tas-sigurtà.',
+  'Operationele politiebriefing': 'Briefing operattiv tal-pulizija',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Ġrajjiet kurrenti, hotspots, avviżi ta\' tfittxija, kompiti, sigurtà personali u skjerament fiż-żona għax-xift.',
+  'Handhavingsbriefing (BOA)': 'Briefing tal-infurzar (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Postijiet ta\' attenzjoni, inkonvenjenza, avvenimenti, setgħat, sigurtà personali u skjerament fiż-żona għax-xift tal-infurzar.',
 };

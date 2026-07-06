@@ -1399,4 +1399,13 @@ const _dutchSourceFi = {
   'Website van de stichting': 'Säätiön verkkosivusto',
   'Opgeslagen als download in je map met downloads.':
       'Tallennettu latauksena lataukset-kansioosi.',
+  'Beveiligingsbriefing / dienststart': 'Turvallisuusbriefing / vuoron alku',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Ajankohtaiset asiat, huomioitavat kohdat, erityispiirteet, huolto ja miehitys turvallisuusvuoroa varten.',
+  'Operationele politiebriefing': 'Operatiivinen poliisibriefing',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Ajankohtaiset asiat, hotspotit, etsintäkuulutukset, tehtävät, oma turvallisuus ja alueellinen sijoittelu vuoroa varten.',
+  'Handhavingsbriefing (BOA)': 'Valvontabriefing (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Huomiokohteet, häiriöt, tapahtumat, toimivaltuudet, oma turvallisuus ja alueellinen sijoittelu valvontavuoroa varten.',
 };

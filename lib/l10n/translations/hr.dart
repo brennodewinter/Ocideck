@@ -1406,4 +1406,13 @@ const _dutchSourceHr = {
   'Website van de stichting': 'Web-mjesto zaklade',
   'Opgeslagen als download in je map met downloads.':
       'Spremljeno kao preuzimanje u mapu preuzimanja.',
+  'Beveiligingsbriefing / dienststart': 'Sigurnosni brifing / početak smjene',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Aktualnosti, upozorenja, posebnosti, održavanje i raspored osoblja za zaštitarsku službu.',
+  'Operationele politiebriefing': 'Operativni policijski brifing',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Aktualnosti, žarišta, potjernice, zadaci, osobna sigurnost i raspored po području za smjenu.',
+  'Handhavingsbriefing (BOA)': 'Brifing za nadzor (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Lokacije od interesa, ometanja, događaji, ovlasti, osobna sigurnost i raspored po području za nadzornu službu.',
 };
