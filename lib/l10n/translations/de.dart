@@ -1398,4 +1398,13 @@ const _dutchSourceAddDe = {
       'Einen VFR-Flug vorbereiten mit Route, Wetter, NOTAMs, Flugleistung, Weight & Balance, Kraftstoff, Alternates und persönlichen Go/No-Go-Checks.',
   'Zoek een sjabloon': 'Vorlage suchen',
   'Geen sjablonen gevonden': 'Keine Vorlagen gefunden',
+  'Beveiligingsbriefing / dienststart': 'Sicherheitsbriefing / Dienstbeginn',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Aktuelles, Hinweise, Besonderheiten, Wartung und Besetzung für den Sicherheitsdienst.',
+  'Operationele politiebriefing': 'Operatives Polizeibriefing',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Aktuelles, Hotspots, Fahndungshinweise (BOLO), Aufträge, Eigensicherung und Gebietseinsatz für den Dienst.',
+  'Handhavingsbriefing (BOA)': 'Vollzugsbriefing (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Brennpunkte, Störungen, Veranstaltungen, Befugnisse, Eigensicherung und Gebietseinsatz für den Vollzugsdienst.',
 };

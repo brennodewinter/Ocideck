@@ -1393,4 +1393,13 @@ const _dutchSourceEt = {
   'Website van de stichting': 'Sihtasutuse veebisait',
   'Opgeslagen als download in je map met downloads.':
       'Salvestatud allalaadimisena teie allalaadimiste kausta.',
+  'Beveiligingsbriefing / dienststart': 'Turvabriifing / vahetuse algus',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Päevakajalised sündmused, tähelepanupunktid, erimärkused, hooldus ja mehitatus turvavahetuse jaoks.',
+  'Operationele politiebriefing': 'Operatiivne politseibriifing',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Päevakajalised sündmused, kuumkohad, tagaotsimisteated, ülesanded, isiklik turvalisus ja piirkonna paigutus vahetuse jaoks.',
+  'Handhavingsbriefing (BOA)': 'Korrakaitsebriifing (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Tähelepanukohad, häirimine, üritused, volitused, isiklik turvalisus ja piirkonna paigutus korrakaitsevahetuse jaoks.',
 };

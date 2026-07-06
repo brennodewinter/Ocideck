@@ -1430,4 +1430,13 @@ const _dutchSourceGa = {
   'Website van de stichting': 'Suíomh gréasáin na fondúireachta',
   'Opgeslagen als download in je map met downloads.':
       'Sábháilte mar íoslódáil i d\'fhillteán íoslódálacha.',
+  'Beveiligingsbriefing / dienststart': 'Faisnéisiú slándála / tús an tseala',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Imeachtaí reatha, pointí airde, nótaí speisialta, cothabháil agus foireann don seal slándála.',
+  'Operationele politiebriefing': 'Faisnéisiú oibríochtúil póilíneachta',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Imeachtaí reatha, hotspots, fógraí cuardaigh, tascanna, sábháilteacht phearsanta agus imlonnú ceantair don seal.',
+  'Handhavingsbriefing (BOA)': 'Faisnéisiú forfheidhmithe (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Láithreacha airde, núis, imeachtaí, cumhachtaí, sábháilteacht phearsanta agus imlonnú ceantair don seal forfheidhmithe.',
 };

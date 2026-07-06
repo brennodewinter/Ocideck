@@ -1405,4 +1405,14 @@ const _dutchSourceLt = {
   'Website van de stichting': 'Fondo svetainė',
   'Opgeslagen als download in je map met downloads.':
       'Įrašyta kaip atsisiuntimas į jūsų atsisiuntimų aplanką.',
+  'Beveiligingsbriefing / dienststart':
+      'Saugumo instruktažas / pamainos pradžia',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Aktualijos, dėmesio verti dalykai, ypatingos pastabos, priežiūra ir personalo užimtumas saugumo pamainai.',
+  'Operationele politiebriefing': 'Operatyvinis policijos instruktažas',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Aktualijos, karštieji taškai, paieškos pranešimai, užduotys, asmeninis saugumas ir dislokavimas teritorijoje pamainai.',
+  'Handhavingsbriefing (BOA)': 'Vykdymo užtikrinimo instruktažas (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Dėmesio vietos, viešosios rimties trikdymas, renginiai, įgaliojimai, asmeninis saugumas ir dislokavimas teritorijoje vykdymo užtikrinimo pamainai.',
 };

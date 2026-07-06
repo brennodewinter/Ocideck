@@ -1402,4 +1402,14 @@ const _dutchSourceAddEs = {
       'Prepara un vuelo VFR con ruta, meteorología, NOTAMs, prestaciones, peso y centrado, combustible, alternativos y checks go/no-go personales.',
   'Zoek een sjabloon': 'Buscar una plantilla',
   'Geen sjablonen gevonden': 'No se encontraron plantillas',
+  'Beveiligingsbriefing / dienststart':
+      'Briefing de seguridad / inicio de turno',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Actualidad, avisos, particularidades, mantenimiento y dotación para el servicio de seguridad.',
+  'Operationele politiebriefing': 'Briefing policial operativo',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Actualidad, puntos calientes, requisitorias (BOLO), asignaciones, seguridad del agente y despliegue territorial para el turno.',
+  'Handhavingsbriefing (BOA)': 'Briefing de vigilancia (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Ubicaciones de atención, molestias, eventos, competencias, seguridad del agente y despliegue territorial para el servicio de vigilancia.',
 };

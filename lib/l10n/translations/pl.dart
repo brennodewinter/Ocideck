@@ -1410,4 +1410,13 @@ const _dutchSourcePl = {
   'Website van de stichting': 'Strona internetowa fundacji',
   'Opgeslagen als download in je map met downloads.':
       'Zapisano jako pobrany plik w folderze pobierania.',
+  'Beveiligingsbriefing / dienststart': 'Odprawa ochrony / początek służby',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Bieżące informacje, kwestie wymagające uwagi, szczególne uwagi, konserwacja i obsada dla służby ochrony.',
+  'Operationele politiebriefing': 'Odprawa operacyjna policji',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Bieżące informacje, punkty zapalne, komunikaty poszukiwawcze, zadania, bezpieczeństwo własne i rozmieszczenie w terenie na czas służby.',
+  'Handhavingsbriefing (BOA)': 'Odprawa egzekwowania przepisów (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Lokalizacje wymagające uwagi, uciążliwości, wydarzenia, uprawnienia, bezpieczeństwo własne i rozmieszczenie w terenie dla służby egzekwowania przepisów.',
 };

@@ -1383,4 +1383,13 @@ const _dutchSourceTlh = {
   'Website van de stichting': 'De\'wI\' ghItlhngeH',
   'Opgeslagen als download in je map met downloads.':
       'yorwI\' DaqvaD ghItlh vItlhutlh.',
+  'Beveiligingsbriefing / dienststart': 'Hub QaS ja\'chuq / QaS taghlu\'',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Hub QaSvaD ngoDHom, buSlu\'bogh, pIqmey, choH je nughmey.',
+  'Operationele politiebriefing': 'yoDwI\' QaS ja\'chuq',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'QaSvaD ngoDHom, Daqmey qu\', nejlu\'bogh Segh, ra\'ghomHommey, Hoch Hub je Sep patlh.',
+  'Handhavingsbriefing (BOA)': 'chut choqlu\' ja\'chuq (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'buSlu\'bogh Daqmey, Qay\'moHwI\', wanI\'mey, laHmey, Hoch Hub je Sep patlh chut choqlu\' QaSvaD.',
 };

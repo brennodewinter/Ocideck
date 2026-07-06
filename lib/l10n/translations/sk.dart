@@ -1408,4 +1408,13 @@ const _dutchSourceSk = {
   'Website van de stichting': 'Webová stránka nadácie',
   'Opgeslagen als download in je map met downloads.':
       'Uložené ako stiahnutý súbor do priečinka so stiahnutými súbormi.',
+  'Beveiligingsbriefing / dienststart': 'Bezpečnostný brífing / začiatok zmeny',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Aktuality, upozornenia, osobitosti, údržba a obsadenie pre bezpečnostnú službu.',
+  'Operationele politiebriefing': 'Operačný policajný brífing',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Aktuality, hotspoty, pátracie relácie, úlohy, vlastná bezpečnosť a nasadenie v teréne pre zmenu.',
+  'Handhavingsbriefing (BOA)': 'Brífing pre výkon dohľadu (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Miesta pozornosti, rušenie poriadku, podujatia, právomoci, vlastná bezpečnosť a nasadenie v teréne pre službu dohľadu.',
 };

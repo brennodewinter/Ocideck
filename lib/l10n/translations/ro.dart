@@ -1416,4 +1416,14 @@ const _dutchSourceRo = {
   'Website van de stichting': 'Site-ul web al fundației',
   'Opgeslagen als download in je map met downloads.':
       'Salvat ca descărcare în folderul de descărcări.',
+  'Beveiligingsbriefing / dienststart':
+      'Briefing de securitate / începutul turei',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Noutăți, puncte de atenție, aspecte deosebite, mentenanță și încadrare cu personal pentru serviciul de securitate.',
+  'Operationele politiebriefing': 'Briefing operațional al poliției',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Noutăți, hotspots, semnalări de urmărire, sarcini, siguranța proprie și dispunerea pe zone pentru tură.',
+  'Handhavingsbriefing (BOA)': 'Briefing de aplicare a legii (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Locații de atenție, tulburări, evenimente, competențe, siguranța proprie și dispunerea pe zone pentru serviciul de aplicare a legii.',
 };

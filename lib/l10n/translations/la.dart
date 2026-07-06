@@ -1414,4 +1414,14 @@ const _dutchSourceLa = {
   'Website van de stichting': 'Situs interretialis fundationis',
   'Opgeslagen als download in je map met downloads.':
       'Servatum ut receptum in tuo plicae receptorum.',
+  'Beveiligingsbriefing / dienststart':
+      'Instructio securitatis / initium custodiae',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Res recentes, puncta animadvertenda, singularia, tutela et occupatio pro custodia securitatis.',
+  'Operationele politiebriefing': 'Instructio operativa vigilum',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Res recentes, loca fervida, nuntii quaesitionis, mandata, propria securitas et dispositio regionis pro custodia.',
+  'Handhavingsbriefing (BOA)': 'Instructio exsecutionis (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Loca observanda, molestiae, eventus, potestates, propria securitas et dispositio regionis pro custodia exsecutionis.',
 };

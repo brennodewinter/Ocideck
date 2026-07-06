@@ -1400,4 +1400,13 @@ const _dutchSourceSv = {
   'Website van de stichting': 'Stiftelsens webbplats',
   'Opgeslagen als download in je map met downloads.':
       'Sparad som en nedladdning i din nedladdningsmapp.',
+  'Beveiligingsbriefing / dienststart': 'Säkerhetsgenomgång / passstart',
+  'Actualiteiten, aandachtsvestigingen, bijzonderheden, onderhoud en bezetting voor de beveiligingsdienst.':
+      'Aktuellt, uppmärksamhetspunkter, särskilda förhållanden, underhåll och bemanning för bevakningstjänsten.',
+  'Operationele politiebriefing': 'Operativ polisgenomgång',
+  'Actualiteiten, hotspots, signaleringen, opdrachten, eigen veiligheid en gebiedsinzet voor de dienst.':
+      'Aktuellt, hotspots, efterlysningar, uppdrag, egen säkerhet och områdesinsats för passet.',
+  'Handhavingsbriefing (BOA)': 'Tillsynsgenomgång (BOA)',
+  'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
+      'Uppmärksamhetsplatser, störningar, evenemang, befogenheter, egen säkerhet och områdesinsats för tillsynstjänsten.',
 };
