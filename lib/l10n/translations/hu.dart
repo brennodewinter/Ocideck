@@ -83,6 +83,12 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Documentatie': 'Dokumentáció',
+  'Gebruikershandleiding': 'Felhasználói kézikönyv',
+  'Bestandsformaat': 'Fájlformátum',
+  'Online openen': 'Megnyitás online',
+  'Dit document kon niet worden geladen.':
+      'A dokumentumot nem sikerült betölteni.',
   'Kwaliteit': 'Minőség',
   'Slide-instellingen': 'Dia beállításai',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

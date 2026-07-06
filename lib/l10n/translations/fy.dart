@@ -83,6 +83,11 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Documentatie': 'Dokumintaasje',
+  'Gebruikershandleiding': 'Brûkershantlieding',
+  'Bestandsformaat': 'Triemformaat',
+  'Online openen': 'Online iepenje',
+  'Dit document kon niet worden geladen.': 'Dit dokumint koe net laden wurde.',
   'Kwaliteit': 'Kwaliteit',
   'Slide-instellingen': 'Slide-ynstellingen',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

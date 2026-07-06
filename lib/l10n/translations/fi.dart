@@ -83,6 +83,11 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Documentatie': 'Dokumentaatio',
+  'Gebruikershandleiding': 'Käyttöopas',
+  'Bestandsformaat': 'Tiedostomuoto',
+  'Online openen': 'Avaa verkossa',
+  'Dit document kon niet worden geladen.': 'Tätä asiakirjaa ei voitu ladata.',
   'Kwaliteit': 'Laatu',
   'Slide-instellingen': 'Dian asetukset',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

@@ -84,6 +84,12 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Documentatie': 'Documentație',
+  'Gebruikershandleiding': 'Ghidul utilizatorului',
+  'Bestandsformaat': 'Format de fișier',
+  'Online openen': 'Deschide online',
+  'Dit document kon niet worden geladen.':
+      'Acest document nu a putut fi încărcat.',
   'Kwaliteit': 'Calitate',
   'Slide-instellingen': 'Setări diapozitiv',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

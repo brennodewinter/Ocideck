@@ -85,6 +85,11 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Documentatie': 'Documentatio',
+  'Gebruikershandleiding': 'Manuale usoris',
+  'Bestandsformaat': 'Formatum plicae',
+  'Online openen': 'Aperire in rete',
+  'Dit document kon niet worden geladen.': 'Hoc documentum onerari non potuit.',
   'Kwaliteit': 'Qualitas',
   'Slide-instellingen': 'Optiones paginae',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

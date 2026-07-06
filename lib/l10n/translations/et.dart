@@ -82,6 +82,12 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Documentatie': 'Dokumentatsioon',
+  'Gebruikershandleiding': 'Kasutusjuhend',
+  'Bestandsformaat': 'Failivorming',
+  'Online openen': 'Ava veebis',
+  'Dit document kon niet worden geladen.':
+      'Selle dokumendi laadimine ebaõnnestus.',
   'Kwaliteit': 'Kvaliteet',
   'Slide-instellingen': 'Slaidi sätted',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

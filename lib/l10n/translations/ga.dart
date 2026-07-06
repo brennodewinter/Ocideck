@@ -85,6 +85,12 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Documentatie': 'Doiciméadú',
+  'Gebruikershandleiding': 'Treoir úsáideora',
+  'Bestandsformaat': 'Formáid chomhaid',
+  'Online openen': 'Oscail ar líne',
+  'Dit document kon niet worden geladen.':
+      'Níorbh fhéidir an cháipéis seo a lódáil.',
   'Kwaliteit': 'Cáilíocht',
   'Slide-instellingen': 'Socruithe sleamhnáin',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

@@ -83,6 +83,12 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Documentatie': 'Τεκμηρίωση',
+  'Gebruikershandleiding': 'Οδηγός χρήστη',
+  'Bestandsformaat': 'Μορφή αρχείου',
+  'Online openen': 'Άνοιγμα online',
+  'Dit document kon niet worden geladen.':
+      'Δεν ήταν δυνατή η φόρτωση αυτού του εγγράφου.',
   'Kwaliteit': 'Ποιότητα',
   'Slide-instellingen': 'Ρυθμίσεις διαφάνειας',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

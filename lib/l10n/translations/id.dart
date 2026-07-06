@@ -83,6 +83,11 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Documentatie': 'Dokumentasi',
+  'Gebruikershandleiding': 'Panduan pengguna',
+  'Bestandsformaat': 'Format berkas',
+  'Online openen': 'Buka online',
+  'Dit document kon niet worden geladen.': 'Dokumen ini tidak dapat dimuat.',
   'Kwaliteit': 'Kualitas',
   'Slide-instellingen': 'Pengaturan slide',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

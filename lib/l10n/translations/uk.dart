@@ -84,6 +84,12 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Documentatie': 'Документація',
+  'Gebruikershandleiding': 'Посібник користувача',
+  'Bestandsformaat': 'Формат файлу',
+  'Online openen': 'Відкрити онлайн',
+  'Dit document kon niet worden geladen.':
+      'Не вдалося завантажити цей документ.',
   'Kwaliteit': 'Якість',
   'Slide-instellingen': 'Налаштування слайда',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

@@ -83,6 +83,11 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Documentatie': 'Dokumentashon',
+  'Gebruikershandleiding': 'Guia di uzuario',
+  'Bestandsformaat': 'Formato di archivo',
+  'Online openen': 'Habri online',
+  'Dit document kon niet worden geladen.': 'No por a karga e dokumento aki.',
   'Kwaliteit': 'Kalidat',
   'Slide-instellingen': 'Konfigurashon di slide',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':

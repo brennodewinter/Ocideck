@@ -84,6 +84,12 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'Documentatie': 'Documentação',
+  'Gebruikershandleiding': 'Guia do utilizador',
+  'Bestandsformaat': 'Formato de ficheiro',
+  'Online openen': 'Abrir online',
+  'Dit document kon niet worden geladen.':
+      'Não foi possível carregar este documento.',
   'Kwaliteit': 'Qualidade',
   'Slide-instellingen': 'Definições do slide',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
