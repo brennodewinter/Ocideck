@@ -1,4 +1,4 @@
-.PHONY: setup format format-check analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions licenses sbom sbom-verify check-conventions mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
+.PHONY: setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions licenses sbom sbom-verify check-conventions check-method-length check-dead-code mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 help:
 	@echo "OciDeck quality targets:"
@@ -23,6 +23,8 @@ help:
 	@echo "  make sbom-verify     Fail if the committed SBOM is stale (CRA staleness gate)."
 	@echo "  make check-conventions  No print(); bare catch (_) & file-size ratchets."
 	@echo "  make check-method-length  Per-method length ratchet (AST-measured, max 150)."
+	@echo "  make check-dead-code Fail on orphaned lib/ files (unreachable from any entrypoint)."
+	@echo "  make fix             Auto-apply 'dart fix' and reformat (local cleanup helper)."
 	@echo "  make build-web       Build the hardened web bundle (self-hosted CanvasKit + CSP-safe loader)."
 	@echo "  make check-web       Build the web bundle and assert its hardening (CSP, self-hosted, fonts)."
 	@echo "  make build-macos     Build the macOS .app (macOS only)."
@@ -41,6 +43,15 @@ setup:
 format:
 	@echo "== OciDeck format =="
 	@echo "Purpose: rewrite Dart files using the repository formatter."
+	dart format .
+
+# Local cleanup helper: apply every analyzer-suggested fix (removes unused
+# imports, unreachable code, unnecessary_* etc.), then reformat. Curative, not a
+# gate — run it before committing; `make analyze` still enforces the result.
+fix:
+	@echo "== OciDeck fix =="
+	@echo "Purpose: apply 'dart fix' auto-fixes (dead code, unused imports, ...) then reformat."
+	dart fix --apply
 	dart format .
 
 # Verify formatting without modifying files.
@@ -280,6 +291,19 @@ check-method-length:
 	@echo "        the baseline in tool/check_method_length.dart."
 	dart run tool/check_method_length.dart
 
+# Dead-file guard: walks the lib/ import graph from the entrypoint(s) and fails
+# on any .dart file reachable from none of them — the analyzer's blind spot
+# (whole orphaned files and cross-library public symbols it can't see).
+check-dead-code:
+	@echo "== OciDeck check: dead code =="
+	@echo "Command: dart run tool/check_dead_code.dart"
+	@echo "Covers: orphaned lib/ files — unreachable via import/export/part from any"
+	@echo "        top-level main() (both branches of conditional imports counted)."
+	@echo "Failure means: delete the orphaned file, wire it in, or (for a deliberate"
+	@echo "        dynamic entrypoint) add it to deadCodeAllowlist in"
+	@echo "        tool/check_dead_code.dart."
+	dart run tool/check_dead_code.dart
+
 # Build the hardened web bundle. Two flags do the security work:
 #   --no-web-resources-cdn  Self-host CanvasKit instead of fetching it from the
 #                           gstatic CDN, so the running app pulls ZERO third-party
@@ -367,9 +391,9 @@ build-release:
 	scripts/build_release.sh
 
 # Full local quality gate. Intended for humans, CI logs, and LLM-assisted debugging.
-check: format-check analyze check-conventions check-method-length test
+check: format-check analyze check-conventions check-method-length check-dead-code test
 	@echo "== OciDeck check complete =="
-	@echo "Validated: formatting, static analysis, conventions, method length, and the full Flutter test suite."
+	@echo "Validated: formatting, static analysis, conventions, method length, dead-code, and the full Flutter test suite."
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.
