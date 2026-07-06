@@ -38,6 +38,10 @@ class SlideThumbnail extends ConsumerWidget {
   /// matches the main preview (see [SlidePreviewWidget.fitScaleOverride]).
   final double? fitScaleOverride;
 
+  /// First number a continued numbered list shows here, so the rail matches the
+  /// main preview and the presentation (see [SlidePreviewWidget.numberStart]).
+  final int numberStart;
+
   const SlideThumbnail({
     super.key,
     required this.slide,
@@ -57,6 +61,7 @@ class SlideThumbnail extends ConsumerWidget {
     this.tlp = TlpLevel.none,
     this.organization = '',
     this.fitScaleOverride,
+    this.numberStart = 1,
   });
 
   @override
@@ -175,6 +180,7 @@ class SlideThumbnail extends ConsumerWidget {
                       .cockpitColorScheme,
                   slideNumber: index + 1,
                   slideCount: slideCount,
+                  numberStart: numberStart,
                   fitScaleOverride: fitScaleOverride,
                   tlp: tlp,
                   organization: organization,
