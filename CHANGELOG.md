@@ -8,6 +8,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **In-app documentation reader** — a new **Documentation** tab in Settings
+  lists the user guide, keyboard shortcuts, the file-format reference and the
+  full EUPL 1.2 licence; each opens in a spacious, accessible full-screen reader
+  that **renders** the Markdown (headings, lists, tables, code, links) instead
+  of showing raw source in a cramped box. Text follows the OS text-size setting,
+  is selectable, and links open externally; the reading column is width-bounded
+  for legibility. The consent screen's "read the full licence" now opens the
+  same reader. Documents load **locale-aware**: a translated variant
+  (e.g. `docs/USER_GUIDE.de.md`) is used automatically when bundled, otherwise
+  the source-language document. Built on the app's own inline-Markdown renderer —
+  no new dependency. The few new UI strings are translated in all 30 non-Dutch
+  languages.
 - **Dark mode for the editor** — selecting the dark app-appearance profile
   (*Settings → Appearance*) now also darkens the editor chrome, not just the
   Material widgets. Every semantic `AppTheme` colour token resolves per mode
