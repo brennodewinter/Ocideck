@@ -1439,4 +1439,51 @@ const _dutchSourceGa = {
   'Handhavingsbriefing (BOA)': 'Faisnéisiú forfheidhmithe (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Láithreacha airde, núis, imeachtaí, cumhachtaí, sábháilteacht phearsanta agus imlonnú ceantair don seal forfheidhmithe.',
+  'Sollicitatiegesprek': 'Agallamh poist',
+  'Functioneringsgesprek': 'Comhrá feidhmíochta',
+  'Salarisonderhandeling': 'Idirbheartaíocht tuarastail',
+  'Meer verantwoordelijkheid vragen': 'Níos mó freagrachta a iarraidh',
+  'Probleem op de werkvloer aankaarten': 'Fadhb san ionad oibre a ardú',
+  'Conflict uitpraten': 'Coinbhleacht a réiteach trí chaint',
+  'Kritiek geven of ontvangen': 'Cáineadh a thabhairt nó a fháil',
+  'Slecht nieuws brengen': 'Drochscéala a thabhairt',
+  'Grenzen stellen': 'Teorainneacha a leagan síos',
+  'Stroef lopende relatie bespreken':
+      'Caidreamh atá ag dul chun deacrachta a phlé',
+  'Klantgesprek': 'Comhrá custaiméara',
+  'Verkoopgesprek': 'Comhrá díolacháin',
+  'Onderhandeling met leveranciers': 'Idirbheartaíocht le soláthraithe',
+  'Pitch geven': 'Pitch a thabhairt',
+  'Iets voor elkaar krijgen in een vergadering':
+      'Rud a bhaint amach ag cruinniú',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Ullmhaigh le freagraí STAR, do cheisteanna féin agus na coinníollacha fostaíochta.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Torthaí, mianta forbartha agus comhaontuithe de réir chur chuige na gcomhráite criticiúla.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Fianaise, raon agus frithargóintí de réir chur chuige na gcomhráite criticiúla.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Iarr ról níos mó ar do bhainisteoir de réir chur chuige na gcomhráite criticiúla.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Déan fadhb inphléite gan milleán a chur, de réir chur chuige na gcomhráite criticiúla.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Tar ar réiteach le chéile trí fhíricí, sábháilteacht agus éisteacht, de réir chur chuige na gcomhráite criticiúla.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Tabhair agus faigh aiseolas le fíric, éifeacht agus iarratas, de réir chur chuige na gcomhráite criticiúla.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Tabhair drochscéala go soiléir agus le meas, de réir chur chuige na gcomhráite criticiúla.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Leag síos do theorainn go socair agus go soiléir, de réir chur chuige na gcomhráite criticiúla.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Pléigh caidreamh nó cairdeas atá ag dul chun deacrachta, de réir chur chuige na gcomhráite criticiúla.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Anailís riachtanas, aistriú luacha agus agóidí le haghaidh comhrá maith custaiméara.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'Ceisteanna SPIN, aistriú luacha, agóidí agus dúnadh le haghaidh comhrá díolacháin.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Éilimh, spás idirbheartaíochta agus oirbheartaíocht le BATNA agus ZOPA le haghaidh idirbheartaíocht soláthraithe.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Crúca, fadhb, réiteach, fianaise agus iarratas le haghaidh cur i láthair diongbháilte.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Páirtithe leasmhara, argóintíocht agus agóidí chun cinneadh nó tacaíocht a fháil ag cruinniú.',
 };

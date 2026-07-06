@@ -1422,4 +1422,50 @@ const _dutchSourceAddEn = {
   'Handhavingsbriefing (BOA)': 'Enforcement briefing (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Focus locations, nuisance, events, powers, officer safety and area deployment for the enforcement shift.',
+  'Sollicitatiegesprek': 'Job interview',
+  'Functioneringsgesprek': 'Performance review',
+  'Salarisonderhandeling': 'Salary negotiation',
+  'Meer verantwoordelijkheid vragen': 'Asking for more responsibility',
+  'Probleem op de werkvloer aankaarten': 'Raising a problem at work',
+  'Conflict uitpraten': 'Talking through a conflict',
+  'Kritiek geven of ontvangen': 'Giving or receiving criticism',
+  'Slecht nieuws brengen': 'Delivering bad news',
+  'Grenzen stellen': 'Setting boundaries',
+  'Stroef lopende relatie bespreken': 'Discussing a strained relationship',
+  'Klantgesprek': 'Client conversation',
+  'Verkoopgesprek': 'Sales conversation',
+  'Onderhandeling met leveranciers': 'Negotiation with suppliers',
+  'Pitch geven': 'Deliver a pitch',
+  'Iets voor elkaar krijgen in een vergadering':
+      'Getting something done in a meeting',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Prepare with STAR answers, your own questions and terms of employment.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Results, development goals and agreements using the crucial-conversations approach.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Rationale, range and counterarguments using the crucial-conversations approach.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Ask your manager for a bigger role using the crucial-conversations approach.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Make a problem discussable without blaming, using the crucial-conversations approach.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Resolve it together with facts, safety and listening, using the crucial-conversations approach.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Give and receive feedback with fact, effect and request, using the crucial-conversations approach.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Deliver bad news clearly and respectfully, using the crucial-conversations approach.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Set your boundary calmly and clearly, using the crucial-conversations approach.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Discuss a relationship or friendship that has become strained, using the crucial-conversations approach.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Needs analysis, value translation and objections for a good client conversation.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'SPIN questions, value translation, objections and closing for a sales conversation.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Requirements, negotiation room and tactics with BATNA and ZOPA for a supplier negotiation.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Hook, problem, solution, proof and ask for a persuasive pitch.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Stakeholders, argumentation and objections to gain a decision or support in a meeting.',
 };

@@ -1407,4 +1407,49 @@ const _dutchSourceDa = {
   'Handhavingsbriefing (BOA)': 'Håndhævelsesbriefing (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Opmærksomhedssteder, gener, arrangementer, beføjelser, egen sikkerhed og områdeindsats for håndhævelsestjenesten.',
+  'Sollicitatiegesprek': 'Jobsamtale',
+  'Functioneringsgesprek': 'Medarbejdersamtale',
+  'Salarisonderhandeling': 'Lønforhandling',
+  'Meer verantwoordelijkheid vragen': 'Bede om mere ansvar',
+  'Probleem op de werkvloer aankaarten': 'Tage et problem på arbejdspladsen op',
+  'Conflict uitpraten': 'Tale en konflikt igennem',
+  'Kritiek geven of ontvangen': 'Give eller modtage kritik',
+  'Slecht nieuws brengen': 'Overbringe dårlige nyheder',
+  'Grenzen stellen': 'Sætte grænser',
+  'Stroef lopende relatie bespreken': 'Drøfte et anstrengt forhold',
+  'Klantgesprek': 'Kundesamtale',
+  'Verkoopgesprek': 'Salgssamtale',
+  'Onderhandeling met leveranciers': 'Forhandling med leverandører',
+  'Pitch geven': 'Holde en pitch',
+  'Iets voor elkaar krijgen in een vergadering': 'Få noget igennem på et møde',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Forbered dig med STAR-svar, egne spørgsmål og ansættelsesvilkår.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Resultater, udviklingsønsker og aftaler efter tilgangen til afgørende samtaler.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Begrundelse, spændvidde og modargumenter efter tilgangen til afgørende samtaler.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Bed din leder om en større rolle efter tilgangen til afgørende samtaler.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Gør et problem drøftbart uden at anklage, efter tilgangen til afgørende samtaler.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Find en løsning sammen med fakta, tryghed og lytning, efter tilgangen til afgørende samtaler.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Giv og modtag feedback med kendsgerning, effekt og anmodning, efter tilgangen til afgørende samtaler.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Overbring dårlige nyheder klart og med respekt, efter tilgangen til afgørende samtaler.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Sæt din grænse roligt og tydeligt, efter tilgangen til afgørende samtaler.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Drøft et forhold eller et venskab, der er blevet anstrengt, efter tilgangen til afgørende samtaler.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Behovsanalyse, værdioversættelse og indvendinger til en god kundesamtale.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'SPIN-spørgsmål, værdioversættelse, indvendinger og afslutning til en salgssamtale.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Krav, forhandlingsrum og taktikker med BATNA og ZOPA til en leverandørforhandling.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Krog, problem, løsning, bevis og anmodning til en overbevisende pitch.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Interessenter, argumentation og indvendinger for at opnå en beslutning eller opbakning på et møde.',
 };

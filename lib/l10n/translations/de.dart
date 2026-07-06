@@ -1407,4 +1407,51 @@ const _dutchSourceAddDe = {
   'Handhavingsbriefing (BOA)': 'Vollzugsbriefing (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Brennpunkte, Störungen, Veranstaltungen, Befugnisse, Eigensicherung und Gebietseinsatz für den Vollzugsdienst.',
+  'Sollicitatiegesprek': 'Vorstellungsgespräch',
+  'Functioneringsgesprek': 'Mitarbeitergespräch',
+  'Salarisonderhandeling': 'Gehaltsverhandlung',
+  'Meer verantwoordelijkheid vragen': 'Mehr Verantwortung erbitten',
+  'Probleem op de werkvloer aankaarten':
+      'Ein Problem am Arbeitsplatz ansprechen',
+  'Conflict uitpraten': 'Einen Konflikt klären',
+  'Kritiek geven of ontvangen': 'Kritik geben oder erhalten',
+  'Slecht nieuws brengen': 'Schlechte Nachrichten überbringen',
+  'Grenzen stellen': 'Grenzen setzen',
+  'Stroef lopende relatie bespreken': 'Eine schwierige Beziehung besprechen',
+  'Klantgesprek': 'Kundengespräch',
+  'Verkoopgesprek': 'Verkaufsgespräch',
+  'Onderhandeling met leveranciers': 'Verhandlung mit Lieferanten',
+  'Pitch geven': 'Einen Pitch halten',
+  'Iets voor elkaar krijgen in een vergadering':
+      'In einer Besprechung etwas erreichen',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Bereite dich mit STAR-Antworten, eigenen Fragen und Arbeitsbedingungen vor.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Ergebnisse, Entwicklungswünsche und Vereinbarungen nach dem Ansatz für entscheidende Gespräche.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Begründung, Bandbreite und Gegenargumente nach dem Ansatz für entscheidende Gespräche.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Bitte deine Führungskraft um eine größere Rolle nach dem Ansatz für entscheidende Gespräche.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Mache ein Problem besprechbar, ohne zu beschuldigen, nach dem Ansatz für entscheidende Gespräche.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Findet gemeinsam eine Lösung mit Fakten, Sicherheit und Zuhören, nach dem Ansatz für entscheidende Gespräche.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Gib und erhalte Feedback mit Fakt, Wirkung und Bitte, nach dem Ansatz für entscheidende Gespräche.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Überbringe schlechte Nachrichten klar und respektvoll, nach dem Ansatz für entscheidende Gespräche.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Setze deine Grenze ruhig und deutlich, nach dem Ansatz für entscheidende Gespräche.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Besprich eine Beziehung oder Freundschaft, die schwierig läuft, nach dem Ansatz für entscheidende Gespräche.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Bedarfsanalyse, Nutzenübersetzung und Einwände für ein gutes Kundengespräch.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'SPIN-Fragen, Nutzenübersetzung, Einwände und Abschluss für ein Verkaufsgespräch.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Forderungen, Verhandlungsspielraum und Taktiken mit BATNA und ZOPA für eine Lieferantenverhandlung.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Aufhänger, Problem, Lösung, Beleg und Frage für einen überzeugenden Pitch.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Stakeholder, Argumentation und Einwände, um in einer Besprechung eine Entscheidung oder Unterstützung zu erhalten.',
 };

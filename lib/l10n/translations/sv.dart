@@ -1409,4 +1409,49 @@ const _dutchSourceSv = {
   'Handhavingsbriefing (BOA)': 'Tillsynsgenomgång (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Uppmärksamhetsplatser, störningar, evenemang, befogenheter, egen säkerhet och områdesinsats för tillsynstjänsten.',
+  'Sollicitatiegesprek': 'Anställningsintervju',
+  'Functioneringsgesprek': 'Medarbetarsamtal',
+  'Salarisonderhandeling': 'Löneförhandling',
+  'Meer verantwoordelijkheid vragen': 'Be om mer ansvar',
+  'Probleem op de werkvloer aankaarten': 'Ta upp ett problem på arbetsplatsen',
+  'Conflict uitpraten': 'Prata igenom en konflikt',
+  'Kritiek geven of ontvangen': 'Ge eller ta emot kritik',
+  'Slecht nieuws brengen': 'Framföra dåliga nyheter',
+  'Grenzen stellen': 'Sätta gränser',
+  'Stroef lopende relatie bespreken': 'Diskutera en ansträngd relation',
+  'Klantgesprek': 'Kundsamtal',
+  'Verkoopgesprek': 'Säljsamtal',
+  'Onderhandeling met leveranciers': 'Förhandling med leverantörer',
+  'Pitch geven': 'Hålla en pitch',
+  'Iets voor elkaar krijgen in een vergadering': 'Få igenom något på ett möte',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Förbered dig med STAR-svar, egna frågor och anställningsvillkor.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Resultat, utvecklingsönskemål och överenskommelser enligt metoden för avgörande samtal.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Underbyggnad, spännvidd och motargument enligt metoden för avgörande samtal.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Be din chef om en större roll enligt metoden för avgörande samtal.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Gör ett problem samtalbart utan att anklaga, enligt metoden för avgörande samtal.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Nå en lösning tillsammans med fakta, trygghet och lyssnande, enligt metoden för avgörande samtal.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Ge och ta emot feedback med fakta, effekt och begäran, enligt metoden för avgörande samtal.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Framför dåliga nyheter tydligt och med respekt, enligt metoden för avgörande samtal.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Sätt din gräns lugnt och tydligt, enligt metoden för avgörande samtal.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Diskutera en relation eller vänskap som blivit ansträngd, enligt metoden för avgörande samtal.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Behovsanalys, värdeöversättning och invändningar för ett bra kundsamtal.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'SPIN-frågor, värdeöversättning, invändningar och avslut för ett säljsamtal.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Krav, förhandlingsutrymme och taktiker med BATNA och ZOPA för en leverantörsförhandling.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Krok, problem, lösning, bevis och begäran för en övertygande pitch.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Intressenter, argumentation och invändningar för att få ett beslut eller stöd på ett möte.',
 };

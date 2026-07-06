@@ -1419,4 +1419,50 @@ const _dutchSourcePl = {
   'Handhavingsbriefing (BOA)': 'Odprawa egzekwowania przepisów (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Lokalizacje wymagające uwagi, uciążliwości, wydarzenia, uprawnienia, bezpieczeństwo własne i rozmieszczenie w terenie dla służby egzekwowania przepisów.',
+  'Sollicitatiegesprek': 'Rozmowa kwalifikacyjna',
+  'Functioneringsgesprek': 'Rozmowa oceniająca',
+  'Salarisonderhandeling': 'Negocjacje płacowe',
+  'Meer verantwoordelijkheid vragen': 'Prośba o większą odpowiedzialność',
+  'Probleem op de werkvloer aankaarten': 'Poruszenie problemu w miejscu pracy',
+  'Conflict uitpraten': 'Wyjaśnienie konfliktu',
+  'Kritiek geven of ontvangen': 'Udzielanie lub przyjmowanie krytyki',
+  'Slecht nieuws brengen': 'Przekazywanie złych wiadomości',
+  'Grenzen stellen': 'Wyznaczanie granic',
+  'Stroef lopende relatie bespreken': 'Omówienie napiętej relacji',
+  'Klantgesprek': 'Rozmowa z klientem',
+  'Verkoopgesprek': 'Rozmowa sprzedażowa',
+  'Onderhandeling met leveranciers': 'Negocjacje z dostawcami',
+  'Pitch geven': 'Przedstawić pitch',
+  'Iets voor elkaar krijgen in een vergadering':
+      'Osiągnięcie celu na spotkaniu',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Przygotuj się z odpowiedziami STAR, własnymi pytaniami i warunkami zatrudnienia.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Wyniki, potrzeby rozwojowe i ustalenia zgodnie z metodą kluczowych rozmów.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Uzasadnienie, widełki i kontrargumenty zgodnie z metodą kluczowych rozmów.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Poproś przełożonego o większą rolę zgodnie z metodą kluczowych rozmów.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Poruszaj problem bez oskarżania, zgodnie z metodą kluczowych rozmów.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Dojdźcie razem do rozwiązania dzięki faktom, poczuciu bezpieczeństwa i słuchaniu, zgodnie z metodą kluczowych rozmów.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Udzielaj i przyjmuj informację zwrotną w oparciu o fakt, skutek i prośbę, zgodnie z metodą kluczowych rozmów.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Przekaż złe wiadomości jasno i z szacunkiem, zgodnie z metodą kluczowych rozmów.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Wyznacz swoją granicę spokojnie i wyraźnie, zgodnie z metodą kluczowych rozmów.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Omów relację lub przyjaźń, która się nie układa, zgodnie z metodą kluczowych rozmów.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Analiza potrzeb, przełożenie na wartość i obiekcje na potrzeby dobrej rozmowy z klientem.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'Pytania SPIN, przełożenie na wartość, obiekcje i finalizacja na potrzeby rozmowy sprzedażowej.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Wymagania, pole do negocjacji i taktyki z BATNA i ZOPA na potrzeby negocjacji z dostawcą.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Zaczep, problem, rozwiązanie, dowód i prośba dla przekonującej prezentacji.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Interesariusze, argumentacja i obiekcje, aby uzyskać decyzję lub poparcie na spotkaniu.',
 };

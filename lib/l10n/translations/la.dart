@@ -1424,4 +1424,51 @@ const _dutchSourceLa = {
   'Handhavingsbriefing (BOA)': 'Instructio exsecutionis (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Loca observanda, molestiae, eventus, potestates, propria securitas et dispositio regionis pro custodia exsecutionis.',
+  // Nieuwe gesprekssjablonen (titel + beschrijving).
+  'Sollicitatiegesprek': 'Colloquium de munere',
+  'Functioneringsgesprek': 'Colloquium de opere aestimando',
+  'Salarisonderhandeling': 'Negotiatio de stipendio',
+  'Meer verantwoordelijkheid vragen': 'Maiorem responsabilitatem petere',
+  'Probleem op de werkvloer aankaarten': 'Difficultatem in opere proponere',
+  'Conflict uitpraten': 'Discordiam colloquendo solvere',
+  'Kritiek geven of ontvangen': 'Reprehensionem dare vel accipere',
+  'Slecht nieuws brengen': 'Malum nuntium afferre',
+  'Grenzen stellen': 'Fines statuere',
+  'Stroef lopende relatie bespreken': 'De relatione difficili colloqui',
+  'Klantgesprek': 'Colloquium cum cliente',
+  'Verkoopgesprek': 'Colloquium venditionis',
+  'Onderhandeling met leveranciers': 'Negotiatio cum praebitoribus',
+  'Iets voor elkaar krijgen in een vergadering':
+      'Aliquid in conventu perficere',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Te para responsis STAR, propriis quaestionibus et condicionibus laboris.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Effectus, vota progressus et pacta secundum rationem colloquiorum cardinalium.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Argumentatio, spatium negotiandi et contraargumenta secundum rationem colloquiorum cardinalium.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Roga praefectum tuum maiorem partem secundum rationem colloquiorum cardinalium.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Difficultatem tractabilem redde sine accusatione, secundum rationem colloquiorum cardinalium.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Simul ad solutionem venite factis, securitate et auscultatione, secundum rationem colloquiorum cardinalium.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Da et accipe responsum facto, effectu et petitione, secundum rationem colloquiorum cardinalium.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Malum nuntium clare et cum reverentia affer, secundum rationem colloquiorum cardinalium.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Finem tuum tranquille et clare pone, secundum rationem colloquiorum cardinalium.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'De relatione vel amicitia quae difficulter procedit colloquere, secundum rationem colloquiorum cardinalium.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Analysis necessitatum, translatio valoris et obiectiones ad bonum colloquium cum cliente.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'Quaestiones SPIN, translatio valoris, obiectiones et conclusio ad colloquium venditionis.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Postulata, spatium negotiandi et artes cum BATNA et ZOPA ad negotiationem cum praebitoribus.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Hamus, difficultas, solutio, argumentum et petitio ad pitch persuasoriam.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Participes, argumentatio et obiectiones ad decretum vel auxilium in conventu obtinendum.',
+  'Pitch geven': 'Pitch praebere',
 };

@@ -1428,4 +1428,52 @@ const _dutchSourceEl = {
   'Handhavingsbriefing (BOA)': 'Ενημέρωση επιβολής (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Σημεία προσοχής, οχλήσεις, εκδηλώσεις, αρμοδιότητες, ατομική ασφάλεια και ανάπτυξη στην περιοχή για την υπηρεσία επιβολής.',
+  'Sollicitatiegesprek': 'Συνέντευξη για δουλειά',
+  'Functioneringsgesprek': 'Συζήτηση αξιολόγησης',
+  'Salarisonderhandeling': 'Διαπραγμάτευση μισθού',
+  'Meer verantwoordelijkheid vragen': 'Αίτημα για περισσότερη ευθύνη',
+  'Probleem op de werkvloer aankaarten':
+      'Ανάδειξη προβλήματος στον χώρο εργασίας',
+  'Conflict uitpraten': 'Επίλυση σύγκρουσης με συζήτηση',
+  'Kritiek geven of ontvangen': 'Άσκηση ή αποδοχή κριτικής',
+  'Slecht nieuws brengen': 'Ανακοίνωση δυσάρεστων νέων',
+  'Grenzen stellen': 'Θέσπιση ορίων',
+  'Stroef lopende relatie bespreken':
+      'Συζήτηση για μια σχέση που δυσλειτουργεί',
+  'Klantgesprek': 'Συνομιλία με πελάτη',
+  'Verkoopgesprek': 'Συνομιλία πωλήσεων',
+  'Onderhandeling met leveranciers': 'Διαπραγμάτευση με προμηθευτές',
+  'Pitch geven': 'Παρουσίαση pitch',
+  'Iets voor elkaar krijgen in een vergadering':
+      'Επίτευξη ενός στόχου σε μια σύσκεψη',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Προετοιμάσου με απαντήσεις STAR, δικές σου ερωτήσεις και όρους εργασίας.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Αποτελέσματα, επιθυμίες ανάπτυξης και συμφωνίες σύμφωνα με την προσέγγιση για κρίσιμες συζητήσεις.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Τεκμηρίωση, εύρος και αντεπιχειρήματα σύμφωνα με την προσέγγιση για κρίσιμες συζητήσεις.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Ζήτησε από τον προϊστάμενό σου έναν μεγαλύτερο ρόλο σύμφωνα με την προσέγγιση για κρίσιμες συζητήσεις.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Κάνε ένα πρόβλημα συζητήσιμο χωρίς κατηγορίες, σύμφωνα με την προσέγγιση για κρίσιμες συζητήσεις.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Βρες κοινή λύση με γεγονότα, ασφάλεια και ακρόαση, σύμφωνα με την προσέγγιση για κρίσιμες συζητήσεις.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Δώσε και δέξου ανατροφοδότηση με γεγονός, επίπτωση και αίτημα, σύμφωνα με την προσέγγιση για κρίσιμες συζητήσεις.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Ανακοίνωσε δυσάρεστα νέα με σαφήνεια και σεβασμό, σύμφωνα με την προσέγγιση για κρίσιμες συζητήσεις.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Θέσε το όριό σου ήρεμα και ξεκάθαρα, σύμφωνα με την προσέγγιση για κρίσιμες συζητήσεις.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Συζήτησε μια σχέση ή φιλία που δυσλειτουργεί, σύμφωνα με την προσέγγιση για κρίσιμες συζητήσεις.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Ανάλυση αναγκών, μετάφραση αξίας και αντιρρήσεις για μια καλή συνομιλία με πελάτη.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'Ερωτήσεις SPIN, μετάφραση αξίας, αντιρρήσεις και κλείσιμο για μια συνομιλία πωλήσεων.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Απαιτήσεις, περιθώριο διαπραγμάτευσης και τακτικές με BATNA και ZOPA για μια διαπραγμάτευση με προμηθευτές.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Άγκιστρο, πρόβλημα, λύση, απόδειξη και αίτημα για μια πειστική παρουσίαση ιδέας.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Ενδιαφερόμενα μέρη, επιχειρηματολογία και αντιρρήσεις για να λάβεις μια απόφαση ή υποστήριξη σε μια σύσκεψη.',
 };

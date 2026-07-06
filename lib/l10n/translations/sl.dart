@@ -1411,4 +1411,50 @@ const _dutchSourceSl = {
   'Handhavingsbriefing (BOA)': 'Briefing za inšpekcijski nadzor (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Lokacije pozornosti, motnje, dogodki, pooblastila, lastna varnost in razporeditev po območjih za nadzorno službo.',
+  'Sollicitatiegesprek': 'Zaposlitveni razgovor',
+  'Functioneringsgesprek': 'Ocenjevalni razgovor',
+  'Salarisonderhandeling': 'Pogajanje o plači',
+  'Meer verantwoordelijkheid vragen': 'Prošnja za več odgovornosti',
+  'Probleem op de werkvloer aankaarten':
+      'Izpostavljanje težave na delovnem mestu',
+  'Conflict uitpraten': 'Razčiščevanje konflikta',
+  'Kritiek geven of ontvangen': 'Podajanje ali sprejemanje kritike',
+  'Slecht nieuws brengen': 'Sporočanje slabih novic',
+  'Grenzen stellen': 'Postavljanje meja',
+  'Stroef lopende relatie bespreken': 'Pogovor o napetem odnosu',
+  'Klantgesprek': 'Pogovor s stranko',
+  'Verkoopgesprek': 'Prodajni pogovor',
+  'Onderhandeling met leveranciers': 'Pogajanje z dobavitelji',
+  'Pitch geven': 'Predstaviti pitch',
+  'Iets voor elkaar krijgen in een vergadering': 'Doseganje cilja na sestanku',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Pripravite se z odgovori STAR, lastnimi vprašanji in pogoji zaposlitve.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Rezultati, želje po razvoju in dogovori po pristopu ključnih pogovorov.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Utemeljitev, razpon in protiargumenti po pristopu ključnih pogovorov.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Prosite nadrejenega za večjo vlogo po pristopu ključnih pogovorov.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Odprite težavo brez obtoževanja, po pristopu ključnih pogovorov.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Skupaj poiščite rešitev z dejstvi, varnostjo in poslušanjem, po pristopu ključnih pogovorov.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Podajajte in sprejemajte povratne informacije z dejstvom, učinkom in prošnjo, po pristopu ključnih pogovorov.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Slabo novico sporočite jasno in s spoštovanjem, po pristopu ključnih pogovorov.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Svojo mejo postavite mirno in jasno, po pristopu ključnih pogovorov.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Pogovorite se o odnosu ali prijateljstvu, ki škripa, po pristopu ključnih pogovorov.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Analiza potreb, prevedba v vrednost in ugovori za dober pogovor s stranko.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'Vprašanja SPIN, prevedba v vrednost, ugovori in zaključek za prodajni pogovor.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Zahteve, pogajalski prostor in taktike z BATNA in ZOPA za pogajanje z dobaviteljem.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Kavelj, težava, rešitev, dokaz in poziv za prepričljivo predstavitev.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Deležniki, argumentacija in ugovori za pridobitev odločitve ali podpore na sestanku.',
 };

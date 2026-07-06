@@ -283,24 +283,28 @@ List<Slide> _buildRasci(String deckTitle) => [
     'Periode: …',
     'Buiten scope: …',
   ]),
+  // Laat de invulcellen leeg: wie welke rol vervult en wie waar
+  // verantwoordelijk voor is, hangt van de organisatie af. Alleen de
+  // voorbeeldrollen en -taken staan er als steiger; de toewijzing vult de
+  // gebruiker zelf in.
   _table('Rollenoverzicht', [
     ['Rol', 'Wie', 'Organisatieonderdeel'],
-    ['CISO', 'Naam', 'Security'],
-    ['Proceseigenaar', 'Naam', 'Bedrijfsvoering'],
-    ['IT-beheer', 'Naam', 'IT'],
-  ]),
+    ['CISO', '…', '…'],
+    ['Proceseigenaar', '…', '…'],
+    ['IT-beheer', '…', '…'],
+  ], editable: true),
   _table('RASCI-matrix', [
     ['Taak', 'R', 'A', 'S', 'C', 'I'],
-    ['Beleid vaststellen', 'CISO', 'Directie', '—', 'Jurist', 'Allen'],
-    ['Incidentrespons', 'SOC', 'CISO', 'IT-beheer', '—', 'Directie'],
-    ['Toegangsbeheer', 'IT-beheer', 'Proceseigenaar', 'HR', 'CISO', '—'],
-  ]),
+    ['Beleid vaststellen', '…', '…', '…', '…', '…'],
+    ['Incidentrespons', '…', '…', '…', '…', '…'],
+    ['Toegangsbeheer', '…', '…', '…', '…', '…'],
+  ], editable: true),
   _table('Taken, verantwoordelijkheden en bevoegdheden', [
     ['Taak', 'Verantwoordelijk', 'Bevoegd tot'],
-    ['Risicoanalyse uitvoeren', 'CISO', 'Prioriteren van maatregelen'],
-    ['Wijzigingen doorvoeren', 'IT-beheer', 'Wijzigen binnen kaders'],
-    ['Uitzonderingen toestaan', 'Directie', 'Afwijken van beleid'],
-  ]),
+    ['Risicoanalyse uitvoeren', '…', '…'],
+    ['Wijzigingen doorvoeren', '…', '…'],
+    ['Uitzonderingen toestaan', '…', '…'],
+  ], editable: true),
   _bullets('Escalatie en besluitvorming', [
     'Eerste escalatielijn: …',
     'Tweede escalatielijn: …',

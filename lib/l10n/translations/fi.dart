@@ -1408,4 +1408,50 @@ const _dutchSourceFi = {
   'Handhavingsbriefing (BOA)': 'Valvontabriefing (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Huomiokohteet, häiriöt, tapahtumat, toimivaltuudet, oma turvallisuus ja alueellinen sijoittelu valvontavuoroa varten.',
+  'Sollicitatiegesprek': 'Työhaastattelu',
+  'Functioneringsgesprek': 'Kehityskeskustelu',
+  'Salarisonderhandeling': 'Palkkaneuvottelu',
+  'Meer verantwoordelijkheid vragen': 'Suuremman vastuun pyytäminen',
+  'Probleem op de werkvloer aankaarten': 'Ongelman esiin ottaminen työpaikalla',
+  'Conflict uitpraten': 'Ristiriidan selvittäminen',
+  'Kritiek geven of ontvangen': 'Kritiikin antaminen tai vastaanottaminen',
+  'Slecht nieuws brengen': 'Huonojen uutisten kertominen',
+  'Grenzen stellen': 'Rajojen asettaminen',
+  'Stroef lopende relatie bespreken': 'Kireän suhteen käsittely',
+  'Klantgesprek': 'Asiakaskeskustelu',
+  'Verkoopgesprek': 'Myyntikeskustelu',
+  'Onderhandeling met leveranciers': 'Neuvottelu toimittajien kanssa',
+  'Pitch geven': 'Pitchin pitäminen',
+  'Iets voor elkaar krijgen in een vergadering':
+      'Kuinka saada tahtonsa läpi kokouksessa',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Valmistaudu STAR-vastauksilla, omilla kysymyksilläsi ja työehdoilla.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Tulokset, kehitystoiveet ja sopimukset ratkaisevien keskustelujen lähestymistavan mukaan.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Perustelut, vaihteluväli ja vasta-argumentit ratkaisevien keskustelujen lähestymistavan mukaan.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Pyydä esihenkilöltäsi suurempaa roolia ratkaisevien keskustelujen lähestymistavan mukaan.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Ota ongelma puheeksi syyttämättä, ratkaisevien keskustelujen lähestymistavan mukaan.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Löytäkää yhdessä ratkaisu faktojen, turvallisuuden ja kuuntelun avulla, ratkaisevien keskustelujen lähestymistavan mukaan.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Anna ja vastaanota palautetta faktan, vaikutuksen ja pyynnön avulla, ratkaisevien keskustelujen lähestymistavan mukaan.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Kerro huonot uutiset selkeästi ja kunnioittavasti, ratkaisevien keskustelujen lähestymistavan mukaan.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Aseta rajasi rauhallisesti ja selkeästi, ratkaisevien keskustelujen lähestymistavan mukaan.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Käsittele kireää ihmissuhdetta tai ystävyyttä, ratkaisevien keskustelujen lähestymistavan mukaan.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Tarveanalyysi, arvon välittäminen ja vastaväitteet hyvää asiakaskeskustelua varten.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'SPIN-kysymykset, arvon välittäminen, vastaväitteet ja kaupan päättäminen myyntikeskustelua varten.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Vaatimukset, neuvotteluvara ja taktiikat BATNA:n ja ZOPA:n avulla toimittajaneuvottelua varten.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Koukku, ongelma, ratkaisu, todiste ja pyyntö vakuuttavaa pitchiä varten.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Sidosryhmät, argumentointi ja vastaväitteet, jotta saat kokouksessa päätöksen tai tuen.',
 };

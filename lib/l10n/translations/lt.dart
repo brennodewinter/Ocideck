@@ -1415,4 +1415,50 @@ const _dutchSourceLt = {
   'Handhavingsbriefing (BOA)': 'Vykdymo užtikrinimo instruktažas (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Dėmesio vietos, viešosios rimties trikdymas, renginiai, įgaliojimai, asmeninis saugumas ir dislokavimas teritorijoje vykdymo užtikrinimo pamainai.',
+  'Sollicitatiegesprek': 'Darbo pokalbis',
+  'Functioneringsgesprek': 'Veiklos vertinimo pokalbis',
+  'Salarisonderhandeling': 'Derybos dėl atlyginimo',
+  'Meer verantwoordelijkheid vragen': 'Didesnės atsakomybės prašymas',
+  'Probleem op de werkvloer aankaarten': 'Problemos darbo vietoje iškėlimas',
+  'Conflict uitpraten': 'Konflikto išsiaiškinimas',
+  'Kritiek geven of ontvangen': 'Kritikos išsakymas ar priėmimas',
+  'Slecht nieuws brengen': 'Blogos žinios pranešimas',
+  'Grenzen stellen': 'Ribų nustatymas',
+  'Stroef lopende relatie bespreken': 'Įtemptų santykių aptarimas',
+  'Klantgesprek': 'Pokalbis su klientu',
+  'Verkoopgesprek': 'Pardavimo pokalbis',
+  'Onderhandeling met leveranciers': 'Derybos su tiekėjais',
+  'Pitch geven': 'Pristatyti pitch\'ą',
+  'Iets voor elkaar krijgen in een vergadering':
+      'Kaip pasiekti tikslą susirinkime',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Pasiruošk STAR atsakymais, savais klausimais ir darbo sąlygomis.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Rezultatai, tobulėjimo poreikiai ir susitarimai pagal lemtingų pokalbių metodą.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Pagrindimas, ribos ir kontrargumentai pagal lemtingų pokalbių metodą.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Paprašyk vadovo didesnio vaidmens pagal lemtingų pokalbių metodą.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Iškelk problemą aptarti nekaltindamas, pagal lemtingų pokalbių metodą.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Suraskite bendrą sprendimą faktais, saugumu ir įsiklausymu, pagal lemtingų pokalbių metodą.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Teik ir priimk grįžtamąjį ryšį naudodamas faktą, poveikį ir prašymą, pagal lemtingų pokalbių metodą.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Pranešk blogą žinią aiškiai ir pagarbiai, pagal lemtingų pokalbių metodą.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Nustatyk savo ribą ramiai ir aiškiai, pagal lemtingų pokalbių metodą.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Aptark įtemptus santykius ar draugystę, pagal lemtingų pokalbių metodą.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Poreikių analizė, vertės perteikimas ir prieštaravimai sėkmingam pokalbiui su klientu.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'SPIN klausimai, vertės perteikimas, prieštaravimai ir sandorio užbaigimas pardavimo pokalbiui.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Reikalavimai, derybų erdvė ir taktikos su BATNA ir ZOPA deryboms su tiekėjais.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Kabliukas, problema, sprendimas, įrodymas ir prašymas įtikinamam pristatymui.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Suinteresuotosios šalys, argumentai ir prieštaravimai, kad susirinkime gautum sprendimą ar palaikymą.',
 };

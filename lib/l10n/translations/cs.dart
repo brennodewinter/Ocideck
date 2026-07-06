@@ -1412,4 +1412,49 @@ const _dutchSourceCs = {
   'Handhavingsbriefing (BOA)': 'Briefing pro dozor (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Rizikové lokality, obtěžování, akce, pravomoci, vlastní bezpečnost a nasazení v oblasti pro dozorčí službu.',
+  'Sollicitatiegesprek': 'Pracovní pohovor',
+  'Functioneringsgesprek': 'Hodnoticí pohovor',
+  'Salarisonderhandeling': 'Vyjednávání o platu',
+  'Meer verantwoordelijkheid vragen': 'Žádost o větší odpovědnost',
+  'Probleem op de werkvloer aankaarten': 'Otevření problému na pracovišti',
+  'Conflict uitpraten': 'Vyříkání konfliktu',
+  'Kritiek geven of ontvangen': 'Poskytování a přijímání kritiky',
+  'Slecht nieuws brengen': 'Sdělení špatných zpráv',
+  'Grenzen stellen': 'Stanovení hranic',
+  'Stroef lopende relatie bespreken': 'Rozhovor o napjatém vztahu',
+  'Klantgesprek': 'Rozhovor se zákazníkem',
+  'Verkoopgesprek': 'Prodejní rozhovor',
+  'Onderhandeling met leveranciers': 'Vyjednávání s dodavateli',
+  'Pitch geven': 'Přednést pitch',
+  'Iets voor elkaar krijgen in een vergadering': 'Prosazení něčeho na jednání',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Připravte se s odpověďmi STAR, vlastními otázkami a pracovními podmínkami.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Výsledky, rozvojová přání a dohody podle metody klíčových rozhovorů.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Zdůvodnění, rozpětí a protiargumenty podle metody klíčových rozhovorů.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Požádejte svého nadřízeného o větší roli podle metody klíčových rozhovorů.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Otevřete problém bez obviňování, podle metody klíčových rozhovorů.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Najděte společné řešení pomocí faktů, bezpečí a naslouchání, podle metody klíčových rozhovorů.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Dávejte a přijímejte zpětnou vazbu pomocí faktu, dopadu a žádosti, podle metody klíčových rozhovorů.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Sdělte špatnou zprávu jasně a s respektem, podle metody klíčových rozhovorů.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Stanovte svou hranici klidně a jasně, podle metody klíčových rozhovorů.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Proberte vztah nebo přátelství, které vázne, podle metody klíčových rozhovorů.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Analýza potřeb, převedení na hodnotu a námitky pro dobrý rozhovor se zákazníkem.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'Otázky SPIN, převedení na hodnotu, námitky a uzavření pro prodejní rozhovor.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Požadavky, vyjednávací prostor a taktiky s BATNA a ZOPA pro vyjednávání s dodavatelem.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Háček, problém, řešení, důkaz a výzva pro přesvědčivý pitch.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Zainteresované strany, argumentace a námitky pro získání rozhodnutí či podpory na jednání.',
 };

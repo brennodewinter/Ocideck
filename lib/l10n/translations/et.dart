@@ -1402,4 +1402,50 @@ const _dutchSourceEt = {
   'Handhavingsbriefing (BOA)': 'Korrakaitsebriifing (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Tähelepanukohad, häirimine, üritused, volitused, isiklik turvalisus ja piirkonna paigutus korrakaitsevahetuse jaoks.',
+  'Sollicitatiegesprek': 'Töövestlus',
+  'Functioneringsgesprek': 'Arenguvestlus',
+  'Salarisonderhandeling': 'Palgaläbirääkimised',
+  'Meer verantwoordelijkheid vragen': 'Suurema vastutuse küsimine',
+  'Probleem op de werkvloer aankaarten': 'Probleemi tõstatamine töökohal',
+  'Conflict uitpraten': 'Konflikti selgeksrääkimine',
+  'Kritiek geven of ontvangen': 'Kriitika andmine või vastuvõtmine',
+  'Slecht nieuws brengen': 'Halva uudise edastamine',
+  'Grenzen stellen': 'Piiride seadmine',
+  'Stroef lopende relatie bespreken': 'Pingelise suhte arutamine',
+  'Klantgesprek': 'Kliendivestlus',
+  'Verkoopgesprek': 'Müügivestlus',
+  'Onderhandeling met leveranciers': 'Läbirääkimised tarnijatega',
+  'Pitch geven': 'Pitchi esitamine',
+  'Iets voor elkaar krijgen in een vergadering':
+      'Kuidas saada koosolekul soovitu',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Valmistu STAR-vastuste, oma küsimuste ja töötingimustega.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Tulemused, arengusoovid ja kokkulepped otsustavate vestluste lähenemise järgi.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Põhjendus, vahemik ja vastuargumendid otsustavate vestluste lähenemise järgi.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Palu oma juhilt suuremat rolli otsustavate vestluste lähenemise järgi.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Tõsta probleem arutlusele ilma süüdistamata, otsustavate vestluste lähenemise järgi.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Jõudke koos lahenduseni faktide, turvalisuse ja kuulamisega, otsustavate vestluste lähenemise järgi.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Anna ja võta vastu tagasisidet fakti, mõju ja palvega, otsustavate vestluste lähenemise järgi.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Edasta halb uudis selgelt ja lugupidavalt, otsustavate vestluste lähenemise järgi.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Sea oma piir rahulikult ja selgelt, otsustavate vestluste lähenemise järgi.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Aruta pingelist suhet või sõprust, otsustavate vestluste lähenemise järgi.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Vajaduste analüüs, väärtuse edastamine ja vastuväited hea kliendivestluse jaoks.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'SPIN-küsimused, väärtuse edastamine, vastuväited ja tehingu sõlmimine müügivestluse jaoks.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Nõuded, läbirääkimisruum ja taktikad BATNA ja ZOPA-ga tarnijaläbirääkimiste jaoks.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Konks, probleem, lahendus, tõestus ja palve veenva pitch\'i jaoks.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Sidusrühmad, argumentatsioon ja vastuväited, et saada koosolekul otsus või toetus.',
 };

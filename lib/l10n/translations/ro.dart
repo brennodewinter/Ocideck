@@ -1426,4 +1426,51 @@ const _dutchSourceRo = {
   'Handhavingsbriefing (BOA)': 'Briefing de aplicare a legii (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Locații de atenție, tulburări, evenimente, competențe, siguranța proprie și dispunerea pe zone pentru serviciul de aplicare a legii.',
+  // Nieuwe gesprekssjablonen (titel + beschrijving).
+  'Sollicitatiegesprek': 'Interviu de angajare',
+  'Functioneringsgesprek': 'Evaluare a performanței',
+  'Salarisonderhandeling': 'Negociere salarială',
+  'Meer verantwoordelijkheid vragen': 'A cere mai multă responsabilitate',
+  'Probleem op de werkvloer aankaarten':
+      'A aborda o problemă la locul de muncă',
+  'Conflict uitpraten': 'A rezolva un conflict',
+  'Kritiek geven of ontvangen': 'A oferi sau a primi critici',
+  'Slecht nieuws brengen': 'A transmite vești proaste',
+  'Grenzen stellen': 'A stabili limite',
+  'Stroef lopende relatie bespreken': 'A discuta despre o relație dificilă',
+  'Klantgesprek': 'Discuție cu clientul',
+  'Verkoopgesprek': 'Discuție de vânzare',
+  'Onderhandeling met leveranciers': 'Negociere cu furnizorii',
+  'Iets voor elkaar krijgen in een vergadering': 'A obține ceva într-o ședință',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Pregătește-te cu răspunsuri STAR, propriile întrebări și condițiile de muncă.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Rezultate, dorințe de dezvoltare și înțelegeri conform abordării conversațiilor cruciale.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Argumentare, marjă de negociere și contraargumente conform abordării conversațiilor cruciale.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Cere-i superiorului tău un rol mai important conform abordării conversațiilor cruciale.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Fă o problemă abordabilă fără să acuzi, conform abordării conversațiilor cruciale.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Ajungeți împreună la o soluție cu fapte, siguranță și ascultare, conform abordării conversațiilor cruciale.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Oferă și primește feedback cu fapt, efect și solicitare, conform abordării conversațiilor cruciale.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Transmite vești proaste clar și cu respect, conform abordării conversațiilor cruciale.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Stabilește-ți limita cu calm și claritate, conform abordării conversațiilor cruciale.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Discută despre o relație sau prietenie care merge greu, conform abordării conversațiilor cruciale.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Analiza nevoilor, traducerea valorii și obiecții pentru o discuție bună cu clientul.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'Întrebări SPIN, traducerea valorii, obiecții și încheiere pentru o discuție de vânzare.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Cerințe, marjă de negociere și tactici cu BATNA și ZOPA pentru o negociere cu furnizorii.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Cârlig, problemă, soluție, dovadă și solicitare pentru un pitch convingător.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Părți interesate, argumentare și obiecții pentru a obține o decizie sau sprijin într-o ședință.',
+  'Pitch geven': 'Susține un pitch',
 };

@@ -11,6 +11,7 @@ part 'deck_template_work_a.dart';
 part 'deck_template_work_b.dart';
 part 'deck_template_sessions.dart';
 part 'deck_template_briefings.dart';
+part 'deck_template_conversations.dart';
 
 /// A starting-point recipe for a new presentation: a title page plus a set of
 /// example slides the user overwrites with real content. Templates are pure
@@ -281,6 +282,142 @@ final List<DeckTemplate> deckTemplates = [
     description: 'Drie vraagvormen met uitleg en nabespreking.',
     icon: 'quiz',
     buildSlides: _buildQuiz,
+  ),
+  // ── Gesprekssjablonen ──────────────────────────────────────────────────────
+  DeckTemplate(
+    id: 'jobInterview',
+    title: 'Sollicitatiegesprek',
+    description:
+        'Bereid je voor met STAR-antwoorden, eigen vragen en '
+        'arbeidsvoorwaarden.',
+    icon: 'jobInterview',
+    buildSlides: _buildJobInterview,
+  ),
+  DeckTemplate(
+    id: 'performanceReview',
+    title: 'Functioneringsgesprek',
+    description:
+        'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor '
+        'cruciale gesprekken.',
+    icon: 'performanceReview',
+    buildSlides: _buildPerformanceReview,
+  ),
+  DeckTemplate(
+    id: 'salaryNegotiation',
+    title: 'Salarisonderhandeling',
+    description:
+        'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor '
+        'cruciale gesprekken.',
+    icon: 'salaryNegotiation',
+    buildSlides: _buildSalaryNegotiation,
+  ),
+  DeckTemplate(
+    id: 'moreResponsibility',
+    title: 'Meer verantwoordelijkheid vragen',
+    description:
+        'Vraag je leidinggevende om een grotere rol volgens de aanpak voor '
+        'cruciale gesprekken.',
+    icon: 'moreResponsibility',
+    buildSlides: _buildMoreResponsibility,
+  ),
+  DeckTemplate(
+    id: 'raiseWorkplaceIssue',
+    title: 'Probleem op de werkvloer aankaarten',
+    description:
+        'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de '
+        'aanpak voor cruciale gesprekken.',
+    icon: 'raiseWorkplaceIssue',
+    buildSlides: _buildRaiseWorkplaceIssue,
+  ),
+  DeckTemplate(
+    id: 'resolveConflict',
+    title: 'Conflict uitpraten',
+    description:
+        'Kom er samen uit met feiten, veiligheid en luisteren, volgens de '
+        'aanpak voor cruciale gesprekken.',
+    icon: 'resolveConflict',
+    buildSlides: _buildResolveConflict,
+  ),
+  DeckTemplate(
+    id: 'giveReceiveFeedback',
+    title: 'Kritiek geven of ontvangen',
+    description:
+        'Geef en ontvang feedback met feit, effect en verzoek, volgens de '
+        'aanpak voor cruciale gesprekken.',
+    icon: 'giveReceiveFeedback',
+    buildSlides: _buildGiveReceiveFeedback,
+  ),
+  DeckTemplate(
+    id: 'deliverBadNews',
+    title: 'Slecht nieuws brengen',
+    description:
+        'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor '
+        'cruciale gesprekken.',
+    icon: 'deliverBadNews',
+    buildSlides: _buildDeliverBadNews,
+  ),
+  DeckTemplate(
+    id: 'setBoundaries',
+    title: 'Grenzen stellen',
+    description:
+        'Zet je grens rustig en duidelijk neer, volgens de aanpak voor '
+        'cruciale gesprekken.',
+    icon: 'setBoundaries',
+    buildSlides: _buildSetBoundaries,
+  ),
+  DeckTemplate(
+    id: 'strainedRelationship',
+    title: 'Stroef lopende relatie bespreken',
+    description:
+        'Bespreek een relatie of vriendschap die stroef loopt, volgens de '
+        'aanpak voor cruciale gesprekken.',
+    icon: 'strainedRelationship',
+    buildSlides: _buildStrainedRelationship,
+  ),
+  DeckTemplate(
+    id: 'clientConversation',
+    title: 'Klantgesprek',
+    description:
+        'Behoefteanalyse, waardevertaling en bezwaren voor een goed '
+        'klantgesprek.',
+    icon: 'clientConversation',
+    buildSlides: _buildClientConversation,
+  ),
+  DeckTemplate(
+    id: 'salesConversation',
+    title: 'Verkoopgesprek',
+    description:
+        'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een '
+        'verkoopgesprek.',
+    icon: 'salesConversation',
+    buildSlides: _buildSalesConversation,
+  ),
+  DeckTemplate(
+    id: 'supplierNegotiation',
+    title: 'Onderhandeling met leveranciers',
+    description:
+        'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een '
+        'leveranciersonderhandeling.',
+    icon: 'supplierNegotiation',
+    buildSlides: _buildSupplierNegotiation,
+  ),
+  DeckTemplate(
+    id: 'pitch',
+    title: 'Pitch geven',
+    description:
+        'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende '
+        'pitch.',
+    icon: 'pitch',
+    buildSlides: _buildPitch,
+  ),
+  DeckTemplate(
+    id: 'meetingToGetBuyIn',
+    title: 'Iets voor elkaar krijgen in een vergadering',
+    description:
+        'Stakeholders, argumentatie en bezwaren om een besluit of steun te '
+        'krijgen in een vergadering.',
+    icon: 'meetingToGetBuyIn',
+    buildSlides: _buildMeetingToGetBuyIn,
   ),
   DeckTemplate(
     id: 'pplFlightPrep',
