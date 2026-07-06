@@ -83,6 +83,8 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Tekst kleiner': 'Μικρότερο κείμενο',
+  'Tekst groter': 'Μεγαλύτερο κείμενο',
   'Documentatie': 'Τεκμηρίωση',
   'Gebruikershandleiding': 'Οδηγός χρήστη',
   'Bestandsformaat': 'Μορφή αρχείου',

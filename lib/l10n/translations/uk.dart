@@ -84,6 +84,8 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Tekst kleiner': 'Менший текст',
+  'Tekst groter': 'Більший текст',
   'Documentatie': 'Документація',
   'Gebruikershandleiding': 'Посібник користувача',
   'Bestandsformaat': 'Формат файлу',

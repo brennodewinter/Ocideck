@@ -85,6 +85,8 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Tekst kleiner': 'Téacs níos lú',
+  'Tekst groter': 'Téacs níos mó',
   'Documentatie': 'Doiciméadú',
   'Gebruikershandleiding': 'Treoir úsáideora',
   'Bestandsformaat': 'Formáid chomhaid',

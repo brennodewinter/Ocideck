@@ -83,6 +83,8 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Tekst kleiner': 'Kisebb szöveg',
+  'Tekst groter': 'Nagyobb szöveg',
   'Documentatie': 'Dokumentáció',
   'Gebruikershandleiding': 'Felhasználói kézikönyv',
   'Bestandsformaat': 'Fájlformátum',

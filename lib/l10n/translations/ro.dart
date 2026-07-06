@@ -84,6 +84,8 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Tekst kleiner': 'Text mai mic',
+  'Tekst groter': 'Text mai mare',
   'Documentatie': 'Documentație',
   'Gebruikershandleiding': 'Ghidul utilizatorului',
   'Bestandsformaat': 'Format de fișier',

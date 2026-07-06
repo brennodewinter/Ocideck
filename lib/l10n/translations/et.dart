@@ -82,6 +82,8 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Tekst kleiner': 'Väiksem tekst',
+  'Tekst groter': 'Suurem tekst',
   'Documentatie': 'Dokumentatsioon',
   'Gebruikershandleiding': 'Kasutusjuhend',
   'Bestandsformaat': 'Failivorming',

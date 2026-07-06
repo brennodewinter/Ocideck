@@ -83,6 +83,8 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Tekst kleiner': 'Täxt chliiner',
+  'Tekst groter': 'Täxt grösser',
   'Documentatie': 'Dokumentation',
   'Gebruikershandleiding': 'Benutzerhandbuech',
   'Bestandsformaat': 'Dateiformat',

@@ -83,6 +83,8 @@ const _stringsIt = {
 };
 
 const _dutchSourceIt = {
+  'Tekst kleiner': 'Testo più piccolo',
+  'Tekst groter': 'Testo più grande',
   'Documentatie': 'Documentazione',
   'Gebruikershandleiding': 'Guida utente',
   'Bestandsformaat': 'Formato file',

@@ -83,6 +83,8 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Tekst kleiner': 'Teks lebih kecil',
+  'Tekst groter': 'Teks lebih besar',
   'Documentatie': 'Dokumentasi',
   'Gebruikershandleiding': 'Panduan pengguna',
   'Bestandsformaat': 'Format berkas',

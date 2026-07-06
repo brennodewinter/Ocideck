@@ -83,6 +83,8 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Tekst kleiner': 'Mindre tekst',
+  'Tekst groter': 'Større tekst',
   'Documentatie': 'Dokumentation',
   'Gebruikershandleiding': 'Brugervejledning',
   'Bestandsformaat': 'Filformat',

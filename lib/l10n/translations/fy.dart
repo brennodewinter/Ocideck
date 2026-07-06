@@ -83,6 +83,8 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Tekst kleiner': 'Tekst lytser',
+  'Tekst groter': 'Tekst grutter',
   'Documentatie': 'Dokumintaasje',
   'Gebruikershandleiding': 'Brûkershantlieding',
   'Bestandsformaat': 'Triemformaat',

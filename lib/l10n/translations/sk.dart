@@ -84,6 +84,8 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Tekst kleiner': 'Menší text',
+  'Tekst groter': 'Väčší text',
   'Documentatie': 'Dokumentácia',
   'Gebruikershandleiding': 'Používateľská príručka',
   'Bestandsformaat': 'Formát súboru',

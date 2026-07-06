@@ -84,6 +84,8 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'Tekst kleiner': 'Texto menor',
+  'Tekst groter': 'Texto maior',
   'Documentatie': 'Documentação',
   'Gebruikershandleiding': 'Guia do utilizador',
   'Bestandsformaat': 'Formato de ficheiro',

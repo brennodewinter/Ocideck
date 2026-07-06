@@ -84,6 +84,8 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Tekst kleiner': 'Texto más pequeño',
+  'Tekst groter': 'Texto más grande',
   'Documentatie': 'Documentación',
   'Gebruikershandleiding': 'Guía del usuario',
   'Bestandsformaat': 'Formato de archivo',
