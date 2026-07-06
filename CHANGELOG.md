@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Three shift-briefing templates** — the new-presentation wizard now offers a
+  **Security briefing** (current events and previous shift, points of attention,
+  special notes for the day, building/site maintenance and staffing), an
+  **Operational police briefing** (hotspots/hot times/hot crimes, person and
+  vehicle wanted notices with threat level, priorities and area assignments,
+  officer safety) and an **Enforcement briefing (BOA)** (focus locations and
+  nuisance, ongoing actions, powers and legal framework, cooperation with and
+  escalation to the police). Each is an enriched briefing with fill-in tables,
+  a pre-shift checklist with progress, and a handover/debrief. Titles and
+  descriptions are translated in all 30 non-Dutch languages.
 - **In-app documentation reader** — a new **Documentation** tab in Settings
   lists the user guide, keyboard shortcuts, the file-format reference and the
   full EUPL 1.2 licence; each opens in a spacious, accessible full-screen reader
