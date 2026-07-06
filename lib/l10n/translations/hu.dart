@@ -1412,4 +1412,50 @@ const _dutchSourceHu = {
   'Handhavingsbriefing (BOA)': 'Végrehajtási eligazítás (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Kiemelt helyszínek, zavaró magatartás, rendezvények, hatáskörök, saját biztonság és területi bevetés a végrehajtási műszakhoz.',
+  'Sollicitatiegesprek': 'Állásinterjú',
+  'Functioneringsgesprek': 'Teljesítményértékelő beszélgetés',
+  'Salarisonderhandeling': 'Bértárgyalás',
+  'Meer verantwoordelijkheid vragen': 'Nagyobb felelősség kérése',
+  'Probleem op de werkvloer aankaarten': 'Probléma felvetése a munkahelyen',
+  'Conflict uitpraten': 'Konfliktus megbeszélése',
+  'Kritiek geven of ontvangen': 'Kritika adása vagy fogadása',
+  'Slecht nieuws brengen': 'Rossz hír közlése',
+  'Grenzen stellen': 'Határok kijelölése',
+  'Stroef lopende relatie bespreken': 'Feszült kapcsolat megbeszélése',
+  'Klantgesprek': 'Ügyfélbeszélgetés',
+  'Verkoopgesprek': 'Értékesítési beszélgetés',
+  'Onderhandeling met leveranciers': 'Tárgyalás beszállítókkal',
+  'Pitch geven': 'Pitch tartása',
+  'Iets voor elkaar krijgen in een vergadering':
+      'Hogyan érd el a célod egy megbeszélésen',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Készülj fel STAR-válaszokkal, saját kérdésekkel és a munkafeltételekkel.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Eredmények, fejlődési igények és megállapodások a sorsdöntő beszélgetések módszere szerint.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Alátámasztás, mozgástér és ellenérvek a sorsdöntő beszélgetések módszere szerint.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Kérj nagyobb szerepet a vezetődtől a sorsdöntő beszélgetések módszere szerint.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Tedd megbeszélhetővé a problémát vádaskodás nélkül, a sorsdöntő beszélgetések módszere szerint.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Jussatok közösen dűlőre tényekkel, biztonsággal és odafigyeléssel, a sorsdöntő beszélgetések módszere szerint.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Adj és fogadj visszajelzést ténnyel, hatással és kéréssel, a sorsdöntő beszélgetések módszere szerint.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Közöld a rossz hírt világosan és tisztelettel, a sorsdöntő beszélgetések módszere szerint.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Jelöld ki a határodat nyugodtan és világosan, a sorsdöntő beszélgetések módszere szerint.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Beszélj meg egy feszültté vált kapcsolatot vagy barátságot, a sorsdöntő beszélgetések módszere szerint.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Igényfelmérés, értékközvetítés és kifogások egy jó ügyfélbeszélgetéshez.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'SPIN-kérdések, értékközvetítés, kifogások és lezárás egy értékesítési beszélgetéshez.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Követelmények, tárgyalási mozgástér és taktikák BATNA-val és ZOPA-val egy beszállítói tárgyaláshoz.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Horog, probléma, megoldás, bizonyíték és kérés egy meggyőző pitch-hez.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Érintettek, érvelés és kifogások, hogy döntést vagy támogatást szerezz egy megbeszélésen.',
 };

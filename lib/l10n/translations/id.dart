@@ -1410,4 +1410,49 @@ const _dutchSourceId = {
   'Handhavingsbriefing (BOA)': 'Pengarahan penegakan (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Lokasi perhatian, gangguan, acara, kewenangan, keselamatan diri, dan penempatan wilayah untuk dinas penegakan.',
+  'Sollicitatiegesprek': 'Wawancara kerja',
+  'Functioneringsgesprek': 'Penilaian kinerja',
+  'Salarisonderhandeling': 'Negosiasi gaji',
+  'Meer verantwoordelijkheid vragen': 'Meminta tanggung jawab lebih',
+  'Probleem op de werkvloer aankaarten': 'Mengangkat masalah di tempat kerja',
+  'Conflict uitpraten': 'Menyelesaikan konflik lewat bicara',
+  'Kritiek geven of ontvangen': 'Memberi atau menerima kritik',
+  'Slecht nieuws brengen': 'Menyampaikan kabar buruk',
+  'Grenzen stellen': 'Menetapkan batasan',
+  'Stroef lopende relatie bespreken': 'Membahas hubungan yang tersendat',
+  'Klantgesprek': 'Percakapan dengan pelanggan',
+  'Verkoopgesprek': 'Percakapan penjualan',
+  'Onderhandeling met leveranciers': 'Negosiasi dengan pemasok',
+  'Pitch geven': 'Menyampaikan pitch',
+  'Iets voor elkaar krijgen in een vergadering': 'Mencapai sesuatu dalam rapat',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Bersiaplah dengan jawaban STAR, pertanyaanmu sendiri, dan syarat kerja.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Hasil, keinginan pengembangan, dan kesepakatan menurut pendekatan percakapan krusial.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Dasar, rentang, dan argumen tandingan menurut pendekatan percakapan krusial.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Mintalah peran yang lebih besar kepada atasanmu menurut pendekatan percakapan krusial.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Buat sebuah masalah dapat dibicarakan tanpa menuduh, menurut pendekatan percakapan krusial.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Temukan solusi bersama dengan fakta, rasa aman, dan mendengarkan, menurut pendekatan percakapan krusial.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Beri dan terima umpan balik dengan fakta, dampak, dan permintaan, menurut pendekatan percakapan krusial.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Sampaikan kabar buruk dengan jelas dan penuh hormat, menurut pendekatan percakapan krusial.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Tetapkan batasanmu dengan tenang dan jelas, menurut pendekatan percakapan krusial.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Bahas hubungan atau persahabatan yang tersendat, menurut pendekatan percakapan krusial.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Analisis kebutuhan, penerjemahan nilai, dan keberatan untuk percakapan pelanggan yang baik.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'Pertanyaan SPIN, penerjemahan nilai, keberatan, dan penutupan untuk percakapan penjualan.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Tuntutan, ruang negosiasi, dan taktik dengan BATNA dan ZOPA untuk negosiasi dengan pemasok.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Kait, masalah, solusi, bukti, dan permintaan untuk presentasi gagasan yang meyakinkan.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Pemangku kepentingan, argumentasi, dan keberatan untuk memperoleh keputusan atau dukungan dalam rapat.',
 };

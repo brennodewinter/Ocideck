@@ -1428,4 +1428,51 @@ const _dutchSourceMt = {
   'Handhavingsbriefing (BOA)': 'Briefing tal-infurzar (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Postijiet ta\' attenzjoni, inkonvenjenza, avvenimenti, setgħat, sigurtà personali u skjerament fiż-żona għax-xift tal-infurzar.',
+  'Sollicitatiegesprek': 'Intervista għax-xogħol',
+  'Functioneringsgesprek': 'Laqgħa ta\' evalwazzjoni',
+  'Salarisonderhandeling': 'Negozjar tas-salarju',
+  'Meer verantwoordelijkheid vragen': 'Titlob aktar responsabbiltà',
+  'Probleem op de werkvloer aankaarten':
+      'Tqajjem problema fuq il-post tax-xogħol',
+  'Conflict uitpraten': 'Issolvi kunflitt bid-diskussjoni',
+  'Kritiek geven of ontvangen': 'Tagħti jew tirċievi kritika',
+  'Slecht nieuws brengen': 'Twassal aħbar ħażina',
+  'Grenzen stellen': 'Tistabbilixxi limiti',
+  'Stroef lopende relatie bespreken':
+      'Tiddiskuti relazzjoni li mhux miexja tajjeb',
+  'Klantgesprek': 'Konversazzjoni mal-klijent',
+  'Verkoopgesprek': 'Konversazzjoni tal-bejgħ',
+  'Onderhandeling met leveranciers': 'Negozjar mal-fornituri',
+  'Pitch geven': 'Agħmel pitch',
+  'Iets voor elkaar krijgen in een vergadering': 'Tikseb xi ħaġa f\'laqgħa',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Ipprepara b\'tweġibiet STAR, il-mistoqsijiet tiegħek u l-kundizzjonijiet tax-xogħol.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Riżultati, xewqat ta\' żvilupp u ftehimiet skont l-approċċ għal konversazzjonijiet kruċjali.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Ġustifikazzjoni, medda u kontroargumenti skont l-approċċ għal konversazzjonijiet kruċjali.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Itlob lill-maniġer tiegħek għal rwol akbar skont l-approċċ għal konversazzjonijiet kruċjali.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Iftaħ problema għad-diskussjoni mingħajr ma takkuża, skont l-approċċ għal konversazzjonijiet kruċjali.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Sib soluzzjoni flimkien bil-fatti, is-sigurtà u s-smigħ, skont l-approċċ għal konversazzjonijiet kruċjali.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Agħti u irċievi feedback bil-fatt, l-effett u t-talba, skont l-approċċ għal konversazzjonijiet kruċjali.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Wassal aħbar ħażina b\'mod ċar u b\'rispett, skont l-approċċ għal konversazzjonijiet kruċjali.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Stabbilixxi l-limitu tiegħek bil-kalma u b\'mod ċar, skont l-approċċ għal konversazzjonijiet kruċjali.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Iddiskuti relazzjoni jew ħbiberija li mhux miexja tajjeb, skont l-approċċ għal konversazzjonijiet kruċjali.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Analiżi tal-bżonnijiet, traduzzjoni tal-valur u oġġezzjonijiet għal konversazzjoni tajba mal-klijent.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'Mistoqsijiet SPIN, traduzzjoni tal-valur, oġġezzjonijiet u għeluq għal konversazzjoni tal-bejgħ.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Rekwiżiti, spazju ta\' negozjar u tattiċi b\'BATNA u ZOPA għal negozjar mal-fornituri.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Ganċ, problema, soluzzjoni, prova u talba għal preżentazzjoni konvinċenti ta\' idea.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Partijiet interessati, argumentazzjoni u oġġezzjonijiet biex tikseb deċiżjoni jew appoġġ f\'laqgħa.',
 };

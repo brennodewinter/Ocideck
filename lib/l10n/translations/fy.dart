@@ -1398,4 +1398,50 @@ const _dutchSourceAddFy = {
   'Handhavingsbriefing (BOA)': 'Hanthavingsbriefing (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Oandachtslokaasjes, oerlêst, eveneminten, foegen, eigen feiligens en gebietsynset foar de hanthavingstsjinst.',
+  'Sollicitatiegesprek': 'Sollisitaasjepetear',
+  'Functioneringsgesprek': 'Funksjonearringspetear',
+  'Salarisonderhandeling': 'Salarisûnderhanneling',
+  'Meer verantwoordelijkheid vragen': 'Mear ferantwurdlikheid freegje',
+  'Probleem op de werkvloer aankaarten': 'In probleem op it wurk oankaartsje',
+  'Conflict uitpraten': 'In konflikt útprate',
+  'Kritiek geven of ontvangen': 'Krityk jaan of ûntfange',
+  'Slecht nieuws brengen': 'Min nijs bringe',
+  'Grenzen stellen': 'Grinzen stelle',
+  'Stroef lopende relatie bespreken': 'In stroef rinnende relaasje besprekke',
+  'Klantgesprek': 'Klantpetear',
+  'Verkoopgesprek': 'Ferkeappetear',
+  'Onderhandeling met leveranciers': 'Ûnderhanneling mei leveransiers',
+  'Pitch geven': 'In pitch jaan',
+  'Iets voor elkaar krijgen in een vergadering':
+      'Wat foar elkoar krije yn in gearkomste',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Ried dy ta mei STAR-antwurden, eigen fragen en arbeidsbetingsten.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Resultaten, ûntwikkelwinsken en ôfspraken neffens de oanpak foar krúsjale petearen.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Ûnderbouwing, bânbreedte en tsjinarguminten neffens de oanpak foar krúsjale petearen.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Freegje dyn lieding om in gruttere rol neffens de oanpak foar krúsjale petearen.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Meitsje in probleem besprekber sûnder te beskuldigjen, neffens de oanpak foar krúsjale petearen.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Kom der tegearre út mei feiten, feiligens en harkjen, neffens de oanpak foar krúsjale petearen.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Jou en ûntfang feedback mei feit, effekt en fersyk, neffens de oanpak foar krúsjale petearen.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Bring min nijs dúdlik en mei respekt, neffens de oanpak foar krúsjale petearen.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Set dyn grins rêstich en dúdlik del, neffens de oanpak foar krúsjale petearen.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Besprek in relaasje of freonskip dy\'t stroef rint, neffens de oanpak foar krúsjale petearen.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Ferlet-analyse, wearde-oersetting en beswieren foar in goed klantpetear.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'SPIN-fragen, wearde-oersetting, beswieren en ôfsluten foar in ferkeappetear.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Easken, ûnderhannelromte en taktiken mei BATNA en ZOPA foar in leveransiersûnderhanneling.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Heak, probleem, oplossing, bewiis en fraach foar in oertsjûgjende pitch.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Stakeholders, arguminten en beswieren om in beslút of stipe te krijen yn in gearkomste.',
 };

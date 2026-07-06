@@ -1410,4 +1410,50 @@ const _dutchSourceGsw = {
   'Handhavingsbriefing (BOA)': 'Vollzugs-Briefing (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Ufmerksamkeitsort, Störige, Aaläss, Befugniss, eigeni Sicherheit und Gebietsiisatz für de Vollzugsdienscht.',
+  'Sollicitatiegesprek': 'Vorstelligsgspröch',
+  'Functioneringsgesprek': 'Mitarbeitergspröch',
+  'Salarisonderhandeling': 'Lohnverhandlig',
+  'Meer verantwoordelijkheid vragen': 'Meh Verantwortig frage',
+  'Probleem op de werkvloer aankaarten':
+      'Es Problem am Arbeitsplatz aaschpräche',
+  'Conflict uitpraten': 'En Konflikt uuseschwätze',
+  'Kritiek geven of ontvangen': 'Kritik gä oder überchoo',
+  'Slecht nieuws brengen': 'Schlächti Nachrichte überbringe',
+  'Grenzen stellen': 'Gränze setze',
+  'Stroef lopende relatie bespreken': 'En schwirigi Beziehig bespräche',
+  'Klantgesprek': 'Chundegspröch',
+  'Verkoopgesprek': 'Verchaufsgspröch',
+  'Onderhandeling met leveranciers': 'Verhandlig mit Lieferante',
+  'Pitch geven': 'En Pitch halte',
+  'Iets voor elkaar krijgen in een vergadering': 'In ere Sitzig öppis erreiche',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Bereite di mit STAR-Antworte, eigene Frage und Aaschtelligsbedingige vor.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Resultat, Entwickligswünsch und Abmachige nach em Aasatz für entscheidendi Gspröch.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Begründig, Bandbreiti und Gägeargumänt nach em Aasatz für entscheidendi Gspröch.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Frag dini Füehrigsperson um e grösseri Rolle nach em Aasatz für entscheidendi Gspröch.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Mach es Problem besprächbar ohni z beschuldige, nach em Aasatz für entscheidendi Gspröch.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Chömed zäme use mit Fakte, Sicherheit und Zuelose, nach em Aasatz für entscheidendi Gspröch.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Gib und überchum Feedback mit Fakt, Wirkig und Bitt, nach em Aasatz für entscheidendi Gspröch.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Bring schlächti Nachrichte klar und mit Respäkt, nach em Aasatz für entscheidendi Gspröch.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Setz dini Gränze ruhig und dütlich, nach em Aasatz für entscheidendi Gspröch.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Bespräch e Beziehig oder Fründschaft wo schwirig lauft, nach em Aasatz für entscheidendi Gspröch.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Bedürfnisanalyse, Wärtübersetzig und Iiwänd für es guets Chundegspröch.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'SPIN-Frage, Wärtübersetzig, Iiwänd und Abschluss für es Verchaufsgspröch.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Aaforderige, Verhandligsspielruum und Taktike mit BATNA und ZOPA für e Lieferanteverhandlig.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Aahänker, Problem, Lösig, Bewiis und Frag für en überzügende Pitch.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Stakeholder, Argumäntation und Iiwänd zum en Entscheid oder Underschtützig i ere Sitzig überchoo.',
 };

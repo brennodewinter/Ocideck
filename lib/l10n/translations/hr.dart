@@ -1415,4 +1415,49 @@ const _dutchSourceHr = {
   'Handhavingsbriefing (BOA)': 'Brifing za nadzor (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Lokacije od interesa, ometanja, događaji, ovlasti, osobna sigurnost i raspored po području za nadzornu službu.',
+  'Sollicitatiegesprek': 'Razgovor za posao',
+  'Functioneringsgesprek': 'Razgovor o radnoj uspješnosti',
+  'Salarisonderhandeling': 'Pregovaranje o plaći',
+  'Meer verantwoordelijkheid vragen': 'Traženje veće odgovornosti',
+  'Probleem op de werkvloer aankaarten': 'Otvaranje problema na radnom mjestu',
+  'Conflict uitpraten': 'Raščišćavanje sukoba',
+  'Kritiek geven of ontvangen': 'Davanje ili primanje kritike',
+  'Slecht nieuws brengen': 'Priopćavanje loših vijesti',
+  'Grenzen stellen': 'Postavljanje granica',
+  'Stroef lopende relatie bespreken': 'Razgovor o napetom odnosu',
+  'Klantgesprek': 'Razgovor s klijentom',
+  'Verkoopgesprek': 'Prodajni razgovor',
+  'Onderhandeling met leveranciers': 'Pregovaranje s dobavljačima',
+  'Pitch geven': 'Održati pitch',
+  'Iets voor elkaar krijgen in een vergadering': 'Postizanje cilja na sastanku',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Pripremite se s odgovorima STAR, vlastitim pitanjima i uvjetima rada.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Rezultati, želje za razvojem i dogovori prema pristupu ključnih razgovora.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Obrazloženje, raspon i protuargumenti prema pristupu ključnih razgovora.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Zamolite nadređenog za veću ulogu prema pristupu ključnih razgovora.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Otvorite problem bez optuživanja, prema pristupu ključnih razgovora.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Zajedno pronađite rješenje uz činjenice, sigurnost i slušanje, prema pristupu ključnih razgovora.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Dajte i primite povratnu informaciju uz činjenicu, učinak i molbu, prema pristupu ključnih razgovora.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Prenesite loše vijesti jasno i s poštovanjem, prema pristupu ključnih razgovora.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Postavite svoju granicu smireno i jasno, prema pristupu ključnih razgovora.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Porazgovarajte o odnosu ili prijateljstvu koje škripi, prema pristupu ključnih razgovora.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Analiza potreba, prijevod u vrijednost i prigovori za dobar razgovor s klijentom.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'SPIN pitanja, prijevod u vrijednost, prigovori i zaključivanje za prodajni razgovor.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Zahtjevi, pregovarački prostor i taktike s BATNA i ZOPA za pregovaranje s dobavljačem.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Kuka, problem, rješenje, dokaz i poziv za uvjerljivo predstavljanje.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Dionici, argumentacija i prigovori za dobivanje odluke ili podrške na sastanku.',
 };

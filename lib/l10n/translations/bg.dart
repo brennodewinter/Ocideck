@@ -1430,4 +1430,50 @@ const _dutchSourceBg = {
   'Handhavingsbriefing (BOA)': 'Инструктаж по правоприлагане (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Обектни локации, безпокойство, събития, правомощия, лична безопасност и разполагане по райони за службата по правоприлагане.',
+  'Sollicitatiegesprek': 'Интервю за работа',
+  'Functioneringsgesprek': 'Разговор за оценка на представянето',
+  'Salarisonderhandeling': 'Преговори за заплата',
+  'Meer verantwoordelijkheid vragen': 'Искане на повече отговорност',
+  'Probleem op de werkvloer aankaarten':
+      'Повдигане на проблем на работното място',
+  'Conflict uitpraten': 'Изясняване на конфликт',
+  'Kritiek geven of ontvangen': 'Даване или получаване на критика',
+  'Slecht nieuws brengen': 'Съобщаване на лоши новини',
+  'Grenzen stellen': 'Поставяне на граници',
+  'Stroef lopende relatie bespreken': 'Разговор за обтегната връзка',
+  'Klantgesprek': 'Разговор с клиент',
+  'Verkoopgesprek': 'Търговски разговор',
+  'Onderhandeling met leveranciers': 'Преговори с доставчици',
+  'Pitch geven': 'Представяне на питч',
+  'Iets voor elkaar krijgen in een vergadering': 'Постигане на нещо на срещата',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Подгответе се с отговори STAR, собствени въпроси и условия на труд.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Резултати, желания за развитие и договорености според подхода за ключови разговори.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Обосновка, диапазон и контрааргументи според подхода за ключови разговори.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Помолете ръководителя си за по-голяма роля според подхода за ключови разговори.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Повдигнете проблем, без да обвинявате, според подхода за ключови разговори.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Стигнете заедно до решение чрез факти, безопасност и изслушване, според подхода за ключови разговори.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Давайте и получавайте обратна връзка чрез факт, ефект и молба, според подхода за ключови разговори.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Съобщете лошата новина ясно и с уважение, според подхода за ключови разговори.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Поставете границата си спокойно и ясно, според подхода за ключови разговори.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Обсъдете връзка или приятелство, което не върви гладко, според подхода за ключови разговори.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Анализ на нуждите, превод в стойност и възражения за добър разговор с клиент.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'Въпроси SPIN, превод в стойност, възражения и приключване за търговски разговор.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Изисквания, поле за преговори и тактики с BATNA и ZOPA за преговори с доставчик.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Кука, проблем, решение, доказателство и призив за убедително представяне.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Заинтересовани страни, аргументация и възражения за постигане на решение или подкрепа на срещата.',
 };

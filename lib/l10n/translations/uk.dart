@@ -1425,4 +1425,49 @@ const _dutchSourceUk = {
   'Handhavingsbriefing (BOA)': 'Інструктаж із забезпечення правопорядку (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Місця підвищеної уваги, порушення спокою, заходи, повноваження, власна безпека та розгортання по території для служби забезпечення правопорядку.',
+  'Sollicitatiegesprek': 'Співбесіда',
+  'Functioneringsgesprek': 'Оцінювальна бесіда',
+  'Salarisonderhandeling': 'Переговори про зарплату',
+  'Meer verantwoordelijkheid vragen': 'Прохання про більшу відповідальність',
+  'Probleem op de werkvloer aankaarten': 'Порушення проблеми на робочому місці',
+  'Conflict uitpraten': 'Залагодження конфлікту',
+  'Kritiek geven of ontvangen': 'Надання або отримання критики',
+  'Slecht nieuws brengen': 'Повідомлення поганих новин',
+  'Grenzen stellen': 'Встановлення меж',
+  'Stroef lopende relatie bespreken': 'Розмова про напружені стосунки',
+  'Klantgesprek': 'Розмова з клієнтом',
+  'Verkoopgesprek': 'Продажна розмова',
+  'Onderhandeling met leveranciers': 'Переговори з постачальниками',
+  'Pitch geven': 'Провести пітч',
+  'Iets voor elkaar krijgen in een vergadering': 'Досягнення мети на нараді',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Підготуйтеся з відповідями STAR, власними запитаннями та умовами праці.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Результати, побажання щодо розвитку та домовленості за підходом ключових розмов.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Обґрунтування, діапазон і контраргументи за підходом ключових розмов.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Попросіть керівника про більшу роль за підходом ключових розмов.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Порушіть проблему без звинувачень, за підходом ключових розмов.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Разом знайдіть рішення за допомогою фактів, безпеки та слухання, за підходом ключових розмов.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Надавайте й отримуйте зворотний зв’язок через факт, ефект і прохання, за підходом ключових розмов.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Повідомте погану новину чітко та з повагою, за підходом ключових розмов.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Встановіть свою межу спокійно та чітко, за підходом ключових розмов.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Обговоріть стосунки чи дружбу, що дають тріщину, за підходом ключових розмов.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Аналіз потреб, переклад у цінність і заперечення для доброї розмови з клієнтом.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'Запитання SPIN, переклад у цінність, заперечення та завершення для продажної розмови.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Вимоги, простір для переговорів і тактики з BATNA та ZOPA для переговорів із постачальником.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Гачок, проблема, рішення, доказ і заклик для переконливої презентації.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Зацікавлені сторони, аргументація та заперечення для отримання рішення чи підтримки на нараді.',
 };

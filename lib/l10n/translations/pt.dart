@@ -1434,4 +1434,50 @@ const _dutchSourcePt = {
   'Handhavingsbriefing (BOA)': 'Briefing de fiscalização (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Locais de atenção, incómodos, eventos, competências, segurança do agente e destacamento por zona para o serviço de fiscalização.',
+  // Nieuwe gesprekssjablonen (titel + beschrijving).
+  'Sollicitatiegesprek': 'Entrevista de emprego',
+  'Functioneringsgesprek': 'Avaliação de desempenho',
+  'Salarisonderhandeling': 'Negociação salarial',
+  'Meer verantwoordelijkheid vragen': 'Pedir mais responsabilidade',
+  'Probleem op de werkvloer aankaarten': 'Abordar um problema no trabalho',
+  'Conflict uitpraten': 'Resolver um conflito',
+  'Kritiek geven of ontvangen': 'Dar ou receber críticas',
+  'Slecht nieuws brengen': 'Dar más notícias',
+  'Grenzen stellen': 'Definir limites',
+  'Stroef lopende relatie bespreken': 'Falar de uma relação difícil',
+  'Klantgesprek': 'Conversa com o cliente',
+  'Verkoopgesprek': 'Conversa de venda',
+  'Onderhandeling met leveranciers': 'Negociação com fornecedores',
+  'Iets voor elkaar krijgen in een vergadering': 'Conseguir algo numa reunião',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Prepara-te com respostas STAR, as tuas próprias perguntas e as condições de trabalho.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Resultados, desejos de desenvolvimento e acordos segundo a abordagem das conversas cruciais.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Argumentação, margem de negociação e contra-argumentos segundo a abordagem das conversas cruciais.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Pede ao teu responsável um papel maior segundo a abordagem das conversas cruciais.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Torna um problema abordável sem acusar, segundo a abordagem das conversas cruciais.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Cheguem a um entendimento com factos, segurança e escuta, segundo a abordagem das conversas cruciais.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Dá e recebe feedback com facto, efeito e pedido, segundo a abordagem das conversas cruciais.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Dá más notícias com clareza e respeito, segundo a abordagem das conversas cruciais.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Estabelece o teu limite com calma e clareza, segundo a abordagem das conversas cruciais.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Fala de uma relação ou amizade que corre mal, segundo a abordagem das conversas cruciais.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Análise de necessidades, tradução do valor e objeções para uma boa conversa com o cliente.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'Perguntas SPIN, tradução do valor, objeções e fecho para uma conversa de venda.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Exigências, margem de negociação e táticas com BATNA e ZOPA para uma negociação com fornecedores.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Gancho, problema, solução, prova e pedido para um pitch convincente.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Partes interessadas, argumentação e objeções para obter uma decisão ou apoio numa reunião.',
+  'Pitch geven': 'Fazer um pitch',
 };

@@ -1392,4 +1392,49 @@ const _dutchSourceTlh = {
   'Handhavingsbriefing (BOA)': 'chut choqlu\' ja\'chuq (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'buSlu\'bogh Daqmey, Qay\'moHwI\', wanI\'mey, laHmey, Hoch Hub je Sep patlh chut choqlu\' QaSvaD.',
+  'Sollicitatiegesprek': 'vum nejmeH ja\'chuq',
+  'Functioneringsgesprek': 'Qapla\' ja\'chuq',
+  'Salarisonderhandeling': 'Huch ghItlh SuqmeH ja\'chuq',
+  'Meer verantwoordelijkheid vragen': 'law\' Qu\' tlhob',
+  'Probleem op de werkvloer aankaarten': 'vumDaq Qagh \'ang',
+  'Conflict uitpraten': 'noH ja\'chuqmo\' Sang',
+  'Kritiek geven of ontvangen': 'ghay nob pagh Suq',
+  'Slecht nieuws brengen': 'ngoDHom qab qem',
+  'Grenzen stellen': 'veHmey cher',
+  'Stroef lopende relatie bespreken': 'rar Doy\'qu\'bogh ja\'',
+  'Klantgesprek': 'je\'wI\' ja\'chuq',
+  'Verkoopgesprek': 'ngevmeH ja\'chuq',
+  'Onderhandeling met leveranciers': 'nobwI\'pu\' tlhej ja\'chuq',
+  'Pitch geven': 'pitch \'ang',
+  'Iets voor elkaar krijgen in een vergadering': 'qepDaq vay\' ta\'',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'STAR jangmeH mu\'tlheghmey, mu\'tlheghmeylIj je vum chutmey DaghojnIS.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'ngup, choH neHmey je qeSmey, qaStaHvIS Sengqu\'ghach ja\'chuqmey mIw.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'nguv, \'ov \'ay\' je jangmeH ghItlhmey, qaStaHvIS Sengqu\'ghach ja\'chuqmey mIw.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'DevwI\'lI\' Qu\' tInqu\' tlhob, qaStaHvIS Sengqu\'ghach ja\'chuqmey mIw.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'ghung Hutlh Qagh ja\'chuqmeH chenmoH, qaStaHvIS Sengqu\'ghach ja\'chuqmey mIw.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'ngoDmey, Hubqu\' je \'IjmeH tlhIngan Sang, qaStaHvIS Sengqu\'ghach ja\'chuqmey mIw.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'ngoD, Seng je tlhobmeH ngup nob \'ej Suq, qaStaHvIS Sengqu\'ghach ja\'chuqmey mIw.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'ngoDHom qab val \'ej batlh qem, qaStaHvIS Sengqu\'ghach ja\'chuqmey mIw.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'veHlIj jotchoH \'ej val cher, qaStaHvIS Sengqu\'ghach ja\'chuqmey mIw.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'rar pagh jup Doy\'qu\'bogh ja\', qaStaHvIS Sengqu\'ghach ja\'chuqmey mIw.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'neHmey nItlh, laH mughmeH je qImHa\'meH, je\'wI\' ja\'chuq QaQvaD.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'SPIN mu\'tlheghmey, laH mughmeH, qImHa\'meH je SoQmoHmeH, ngevmeH ja\'chuqvaD.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'poQmey, ja\'chuq \'ay\' je nabmey, BATNA je ZOPA lo\', nobwI\'pu\' ja\'chuqvaD.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'ghItlh, Qagh, Sang, nguv je tlhob, qechHom \'ang HoSghajvaD.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'jI\'wI\'pu\', ghItlhmey je qImHa\'meH, wuq pagh QaH SuqmeH qepDaq.',
 };

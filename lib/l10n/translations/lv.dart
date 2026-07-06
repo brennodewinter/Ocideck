@@ -1409,4 +1409,49 @@ const _dutchSourceLv = {
   'Handhavingsbriefing (BOA)': 'Uzraudzības instruktāža (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Uzmanības vietas, traucējumi, pasākumi, pilnvaras, paša drošība un izvietojums teritorijā uzraudzības dienestam.',
+  'Sollicitatiegesprek': 'Darba intervija',
+  'Functioneringsgesprek': 'Snieguma pārrunas',
+  'Salarisonderhandeling': 'Algas pārrunas',
+  'Meer verantwoordelijkheid vragen': 'Lūgums pēc lielākas atbildības',
+  'Probleem op de werkvloer aankaarten': 'Problēmas izvirzīšana darba vietā',
+  'Conflict uitpraten': 'Konflikta izrunāšana',
+  'Kritiek geven of ontvangen': 'Kritikas izteikšana vai saņemšana',
+  'Slecht nieuws brengen': 'Sliktu ziņu paziņošana',
+  'Grenzen stellen': 'Robežu noteikšana',
+  'Stroef lopende relatie bespreken': 'Saspringtu attiecību pārrunāšana',
+  'Klantgesprek': 'Saruna ar klientu',
+  'Verkoopgesprek': 'Pārdošanas saruna',
+  'Onderhandeling met leveranciers': 'Pārrunas ar piegādātājiem',
+  'Pitch geven': 'Prezentēt pitch',
+  'Iets voor elkaar krijgen in een vergadering': 'Kā panākt savu sanāksmē',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Sagatavojies ar STAR atbildēm, saviem jautājumiem un darba nosacījumiem.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Rezultāti, attīstības vēlmes un vienošanās saskaņā ar izšķirošo sarunu pieeju.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Pamatojums, robežas un pretargumenti saskaņā ar izšķirošo sarunu pieeju.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Palūdz vadītājam lielāku lomu saskaņā ar izšķirošo sarunu pieeju.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Izvirzi problēmu apspriešanai, nevainojot, saskaņā ar izšķirošo sarunu pieeju.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Rodiet kopīgu risinājumu ar faktiem, drošību un ieklausīšanos, saskaņā ar izšķirošo sarunu pieeju.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Sniedz un saņem atsauksmes ar faktu, ietekmi un lūgumu, saskaņā ar izšķirošo sarunu pieeju.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Paziņo sliktu ziņu skaidri un ar cieņu, saskaņā ar izšķirošo sarunu pieeju.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Nosaki savu robežu mierīgi un skaidri, saskaņā ar izšķirošo sarunu pieeju.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Pārrunā attiecības vai draudzību, kas norit saspringti, saskaņā ar izšķirošo sarunu pieeju.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Vajadzību analīze, vērtības nodošana un iebildumi labai sarunai ar klientu.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'SPIN jautājumi, vērtības nodošana, iebildumi un darījuma noslēgšana pārdošanas sarunai.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Prasības, sarunu telpa un taktikas ar BATNA un ZOPA pārrunām ar piegādātājiem.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Āķis, problēma, risinājums, pierādījums un lūgums pārliecinošai prezentācijai.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Ieinteresētās puses, argumentācija un iebildumi, lai sanāksmē panāktu lēmumu vai atbalstu.',
 };

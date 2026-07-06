@@ -1402,4 +1402,50 @@ const _dutchSourceAddPap = {
   'Handhavingsbriefing (BOA)': 'Briefing di fiskalisashon (BOA)',
   'Aandachtslocaties, overlast, evenementen, bevoegdheden, eigen veiligheid en gebiedsinzet voor de handhavingsdienst.':
       'Lokashonnan di atenshon, molèster, eventonan, kompetensianan, siguridat propio i despliegue di area pa e servisio di fiskalisashon.',
+  // Nieuwe gesprekssjablonen (titel + beschrijving).
+  'Sollicitatiegesprek': 'Entrevista di trabou',
+  'Functioneringsgesprek': 'Konversashon di evaluashon',
+  'Salarisonderhandeling': 'Negosiashon di salario',
+  'Meer verantwoordelijkheid vragen': 'Pidi mas responsabilidat',
+  'Probleem op de werkvloer aankaarten': 'Trese un problema na trabou dilanti',
+  'Conflict uitpraten': 'Resolvé un konflikto',
+  'Kritiek geven of ontvangen': 'Duna òf risibí krítika',
+  'Slecht nieuws brengen': 'Trese notisia malu',
+  'Grenzen stellen': 'Pone límite',
+  'Stroef lopende relatie bespreken': 'Papia tokante un relashon difísil',
+  'Klantgesprek': 'Konversashon ku kliente',
+  'Verkoopgesprek': 'Konversashon di benta',
+  'Onderhandeling met leveranciers': 'Negosiashon ku proveedónan',
+  'Iets voor elkaar krijgen in een vergadering': 'Logra algu den un reunion',
+  'Bereid je voor met STAR-antwoorden, eigen vragen en arbeidsvoorwaarden.':
+      'Prepará bo ku kontesta STAR, bo mes preguntanan i kondishonnan di trabou.',
+  'Resultaten, ontwikkelwensen en afspraken volgens de aanpak voor cruciale gesprekken.':
+      'Resultado, deseo di desaroyo i akuerdo segun e enfoke di konversashonnan krusial.',
+  'Onderbouwing, bandbreedte en tegenargumenten volgens de aanpak voor cruciale gesprekken.':
+      'Argumentashon, espasio di negosiashon i kontraargumento segun e enfoke di konversashonnan krusial.',
+  'Vraag je leidinggevende om een grotere rol volgens de aanpak voor cruciale gesprekken.':
+      'Pidi bo hefe un ròl mas grandi segun e enfoke di konversashonnan krusial.',
+  'Maak een probleem bespreekbaar zonder te beschuldigen, volgens de aanpak voor cruciale gesprekken.':
+      'Hasi un problema papiabel sin akusá, segun e enfoke di konversashonnan krusial.',
+  'Kom er samen uit met feiten, veiligheid en luisteren, volgens de aanpak voor cruciale gesprekken.':
+      'Yega na un solushon huntu ku echo, siguridat i skucha, segun e enfoke di konversashonnan krusial.',
+  'Geef en ontvang feedback met feit, effect en verzoek, volgens de aanpak voor cruciale gesprekken.':
+      'Duna i risibí feedback ku echo, efekto i petishon, segun e enfoke di konversashonnan krusial.',
+  'Breng slecht nieuws duidelijk en met respect, volgens de aanpak voor cruciale gesprekken.':
+      'Trese notisia malu klaru i ku rèspèt, segun e enfoke di konversashonnan krusial.',
+  'Zet je grens rustig en duidelijk neer, volgens de aanpak voor cruciale gesprekken.':
+      'Pone bo límite trankil i klaru, segun e enfoke di konversashonnan krusial.',
+  'Bespreek een relatie of vriendschap die stroef loopt, volgens de aanpak voor cruciale gesprekken.':
+      'Papia tokante un relashon òf amistat ku ta bai difísil, segun e enfoke di konversashonnan krusial.',
+  'Behoefteanalyse, waardevertaling en bezwaren voor een goed klantgesprek.':
+      'Analisis di nesesidat, tradukshon di balor i opheshon pa un bon konversashon ku kliente.',
+  'SPIN-vragen, waardevertaling, bezwaren en afsluiten voor een verkoopgesprek.':
+      'Pregunta SPIN, tradukshon di balor, opheshon i sera pa un konversashon di benta.',
+  'Eisen, onderhandelruimte en tactieken met BATNA en ZOPA voor een leveranciersonderhandeling.':
+      'Eksigensia, espasio di negosiashon i táktika ku BATNA i ZOPA pa un negosiashon ku proveedónan.',
+  'Haak, probleem, oplossing, bewijs en vraag voor een overtuigende pitch.':
+      'Anzuelo, problema, solushon, prueba i petishon pa un pitch konvinsente.',
+  'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
+      'Partido interesá, argumentashon i opheshon pa logra un desishon òf apoyo den un reunion.',
+  'Pitch geven': 'Duna un pitch',
 };
