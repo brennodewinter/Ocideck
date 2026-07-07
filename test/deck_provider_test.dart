@@ -447,10 +447,7 @@ void main() {
     n.addSlide(SlideType.bullets, afterIndex: 0);
 
     // Twee slide-blokken gescheiden door `---` vervangen de ene slide door twee.
-    expect(
-      n.applySlideMarkdown(1, '# Eerste\n\n---\n\n# Tweede'),
-      isTrue,
-    );
+    expect(n.applySlideMarkdown(1, '# Eerste\n\n---\n\n# Tweede'), isTrue);
     final slides = n.state.deck!.slides;
     expect(slides, hasLength(3));
     expect(slides[1].title, 'Eerste');
@@ -460,10 +457,7 @@ void main() {
   test('applySlideMarkdown is undoable and reports failure on empty input', () {
     final n = _notifier()..newDeck('D');
     n.addSlide(SlideType.bullets, afterIndex: 0);
-    n.updateSlide(
-      1,
-      n.state.deck!.slides[1].copyWith(title: 'Voor'),
-    );
+    n.updateSlide(1, n.state.deck!.slides[1].copyWith(title: 'Voor'));
 
     expect(n.applySlideMarkdown(1, '# Na'), isTrue);
     expect(n.state.deck!.slides[1].title, 'Na');
