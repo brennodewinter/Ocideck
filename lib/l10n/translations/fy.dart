@@ -83,6 +83,35 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Beschermen met een wachtwoord (AES-256)':
+      'Beskermje mei in wachtwurd (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Bewarje dit wachtwurd goed: rekkest it kwyt, dan is dit pakket net mear te iepenjen.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Dit pakket is mei in wachtwurd befeilige. Fier it wachtwurd yn om it te iepenjen.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Dit pakket is fersifere; der koe net om in wachtwurd frege wurde.',
+  'Exporteren': 'Eksportearje',
+  'Genereer sterk wachtwoord': 'Meitsje sterk wachtwurd',
+  'Maak het langer voor betere bescherming.':
+      'Meitsje it langer foar bettere beskerming.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Ferkeard wachtwurd. Besykje it nochris.',
+  'Ontgrendelen': 'Untskoattelje',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Opsjoneel. Allinnich wa\'t it wachtwurd hat, kin it pakket iepenje.',
+  'Redelijk': 'Ridlik',
+  'Sterk': 'Sterk',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Tip: in lange wachtwurdsin is feiliger as in koart wachtwurd mei symboalen.',
+  'Versleuteld pakket': 'Fersifere pakket',
+  'Wachtwoord': 'Wachtwurd',
+  'Wachtwoord gekopieerd naar klembord.': 'Wachtwurd kopiearre nei klamboerd.',
+  'Wachtwoord tonen': 'Wachtwurd sjen litte',
+  'Wachtwoord verbergen': 'Wachtwurd ferbergje',
+  'Zeer sterk': 'Tige sterk',
+  'Zeer zwak': 'Tige swak',
+  'Zwak': 'Swak',
   'Tekst kleiner': 'Tekst lytser',
   'Tekst groter': 'Tekst grutter',
   'Documentatie': 'Dokumintaasje',

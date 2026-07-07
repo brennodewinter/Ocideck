@@ -83,6 +83,35 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Beschermen met een wachtwoord (AES-256)':
+      'Protehá ku un kontraseña (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Warda e kontraseña aki bon: si bo pèrd\'é, no por habri e paket aki mas.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'E paket aki ta protehá ku un kontraseña. Introdusí e kontraseña pa habri\'é.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'E paket aki ta enkriptá; no por a pidi un kontraseña.',
+  'Exporteren': 'Eksportá',
+  'Genereer sterk wachtwoord': 'Generá un kontraseña fuerte',
+  'Maak het langer voor betere bescherming.':
+      'Hasi\'é mas largu pa mihó protekshon.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Kontraseña robes. Purba di nobo.',
+  'Ontgrendelen': 'Habri sla',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Opshonal. Solamente esun ku tin e kontraseña por habri e paket.',
+  'Redelijk': 'Razonabel',
+  'Sterk': 'Fuerte',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Konseho: un frase largu ta mas sigur ku un kontraseña kòrtiku ku símbolo.',
+  'Versleuteld pakket': 'Paket enkriptá',
+  'Wachtwoord': 'Kontraseña',
+  'Wachtwoord gekopieerd naar klembord.': 'Kontraseña kopiá na klembòrt.',
+  'Wachtwoord tonen': 'Mustra kontraseña',
+  'Wachtwoord verbergen': 'Skonde kontraseña',
+  'Zeer sterk': 'Masha fuerte',
+  'Zeer zwak': 'Masha suak',
+  'Zwak': 'Suak',
   'Tekst kleiner': 'Teksto mas chikí',
   'Tekst groter': 'Teksto mas grandi',
   'Documentatie': 'Dokumentashon',

@@ -83,6 +83,34 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Beschermen met een wachtwoord (AES-256)': 'Aizsargāt ar paroli (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Glabājiet šo paroli drošā vietā: ja to pazaudēsiet, šo pakotni vairs nevarēs atvērt.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Šī pakotne ir aizsargāta ar paroli. Ievadiet paroli, lai to atvērtu.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Šī pakotne ir šifrēta; paroli nevarēja pieprasīt.',
+  'Exporteren': 'Eksportēt',
+  'Genereer sterk wachtwoord': 'Ģenerēt spēcīgu paroli',
+  'Maak het langer voor betere bescherming.':
+      'Padariet to garāku labākai aizsardzībai.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Nepareiza parole. Mēģiniet vēlreiz.',
+  'Ontgrendelen': 'Atbloķēt',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Neobligāti. Pakotni var atvērt tikai tas, kam ir parole.',
+  'Redelijk': 'Pieņemama',
+  'Sterk': 'Spēcīga',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Padoms: gara paroles frāze ir drošāka nekā īsa parole ar simboliem.',
+  'Versleuteld pakket': 'Šifrēta pakotne',
+  'Wachtwoord': 'Parole',
+  'Wachtwoord gekopieerd naar klembord.': 'Parole nokopēta starpliktuvē.',
+  'Wachtwoord tonen': 'Rādīt paroli',
+  'Wachtwoord verbergen': 'Slēpt paroli',
+  'Zeer sterk': 'Ļoti spēcīga',
+  'Zeer zwak': 'Ļoti vāja',
+  'Zwak': 'Vāja',
   'Tekst kleiner': 'Mazāks teksts',
   'Tekst groter': 'Lielāks teksts',
   'Documentatie': 'Dokumentācija',

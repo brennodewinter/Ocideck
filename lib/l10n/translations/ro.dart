@@ -84,6 +84,34 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Beschermen met een wachtwoord (AES-256)': 'Protejează cu o parolă (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Păstrează parola în siguranță: dacă o pierzi, acest pachet nu mai poate fi deschis.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Acest pachet este protejat cu parolă. Introdu parola pentru a-l deschide.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Acest pachet este criptat; nu s-a putut solicita o parolă.',
+  'Exporteren': 'Exportă',
+  'Genereer sterk wachtwoord': 'Generează o parolă puternică',
+  'Maak het langer voor betere bescherming.':
+      'Fă-o mai lungă pentru o protecție mai bună.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Parolă incorectă. Încearcă din nou.',
+  'Ontgrendelen': 'Deblochează',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Opțional. Doar cine deține parola poate deschide pachetul.',
+  'Redelijk': 'Acceptabilă',
+  'Sterk': 'Puternică',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Sfat: o frază de acces lungă este mai sigură decât o parolă scurtă cu simboluri.',
+  'Versleuteld pakket': 'Pachet criptat',
+  'Wachtwoord': 'Parolă',
+  'Wachtwoord gekopieerd naar klembord.': 'Parola a fost copiată în clipboard.',
+  'Wachtwoord tonen': 'Afișează parola',
+  'Wachtwoord verbergen': 'Ascunde parola',
+  'Zeer sterk': 'Foarte puternică',
+  'Zeer zwak': 'Foarte slabă',
+  'Zwak': 'Slabă',
   'Tekst kleiner': 'Text mai mic',
   'Tekst groter': 'Text mai mare',
   'Documentatie': 'Documentație',

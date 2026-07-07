@@ -84,6 +84,34 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Beschermen met een wachtwoord (AES-256)': 'Защита с парола (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Пазете добре тази парола: ако я загубите, този пакет вече не може да бъде отворен.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Този пакет е защитен с парола. Въведете паролата, за да го отворите.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Този пакет е шифрован; не беше възможно да се поиска парола.',
+  'Exporteren': 'Експортиране',
+  'Genereer sterk wachtwoord': 'Генериране на силна парола',
+  'Maak het langer voor betere bescherming.':
+      'Направете я по-дълга за по-добра защита.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Неправилна парола. Опитайте отново.',
+  'Ontgrendelen': 'Отключване',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'По желание. Само този, който има паролата, може да отвори пакета.',
+  'Redelijk': 'Приемлива',
+  'Sterk': 'Силна',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Съвет: дълга парола фраза е по-сигурна от кратка парола със символи.',
+  'Versleuteld pakket': 'Шифрован пакет',
+  'Wachtwoord': 'Парола',
+  'Wachtwoord gekopieerd naar klembord.': 'Паролата е копирана в клипборда.',
+  'Wachtwoord tonen': 'Показване на паролата',
+  'Wachtwoord verbergen': 'Скриване на паролата',
+  'Zeer sterk': 'Много силна',
+  'Zeer zwak': 'Много слаба',
+  'Zwak': 'Слаба',
   'Tekst kleiner': 'По-малък текст',
   'Tekst groter': 'По-голям текст',
   'Documentatie': 'Документация',

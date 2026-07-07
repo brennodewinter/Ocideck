@@ -81,6 +81,32 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Beschermen met een wachtwoord (AES-256)': 'mu\'wIj Qan (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'mu\'wIjvam yImej: DachIlchugh, vaj paqvam DapoSmoHlaHbe\'.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'mu\'wIj lo\' \'ej paqvam Qan. DapoSmoHmeH mu\'wIj yIter.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'paqvam So\'lu\'; mu\'wIj poQlu\'laHbe\'.',
+  'Exporteren': 'DoQmeH ngeH',
+  'Genereer sterk wachtwoord': 'mu\'wIj HoS chenmoH',
+  'Maak het langer voor betere bescherming.': 'Qan QaQmeH tIq yIchenmoH.',
+  'Onjuist wachtwoord. Probeer het opnieuw.': 'mu\'wIj lugh Ha\'. yInID.',
+  'Ontgrendelen': 'yIngaQHa\'moH',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'wIvlu\'. mu\'wIj ghajbogh nuv neH paq poSmoHlaH.',
+  'Redelijk': 'motlh',
+  'Sterk': 'HoS',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'qeS: mu\'tlhegh tIq \'oH Qanqu\'; mu\'wIj machHa\' \'ej Degh ghajbogh law\', Qanqu\'law\'.',
+  'Versleuteld pakket': 'paq So\'lu\'pu\'bogh',
+  'Wachtwoord': 'mu\'wIj',
+  'Wachtwoord gekopieerd naar klembord.': 'raSDaq mu\'wIj vellu\'pu\'.',
+  'Wachtwoord tonen': 'mu\'wIj yI\'ang',
+  'Wachtwoord verbergen': 'mu\'wIj yISo\'',
+  'Zeer sterk': 'HoSqu\'',
+  'Zeer zwak': 'puj law\'',
+  'Zwak': 'puj',
   'Tekst kleiner': 'mu\' mach',
   'Tekst groter': 'mu\' tIn',
   'Documentatie': 'ghItlhmey',

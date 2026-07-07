@@ -83,6 +83,34 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Beschermen met een wachtwoord (AES-256)': 'Védelem jelszóval (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Őrizze meg jól ezt a jelszót: ha elveszíti, ez a csomag többé nem nyitható meg.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Ez a csomag jelszóval védett. A megnyitásához adja meg a jelszót.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Ez a csomag titkosított; nem sikerült jelszót kérni.',
+  'Exporteren': 'Exportálás',
+  'Genereer sterk wachtwoord': 'Erős jelszó generálása',
+  'Maak het langer voor betere bescherming.':
+      'Tegye hosszabbá a jobb védelem érdekében.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Helytelen jelszó. Próbálja újra.',
+  'Ontgrendelen': 'Feloldás',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Nem kötelező. A csomagot csak az nyithatja meg, akinél a jelszó van.',
+  'Redelijk': 'Megfelelő',
+  'Sterk': 'Erős',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Tipp: egy hosszú jelmondat biztonságosabb, mint egy rövid, szimbólumokat tartalmazó jelszó.',
+  'Versleuteld pakket': 'Titkosított csomag',
+  'Wachtwoord': 'Jelszó',
+  'Wachtwoord gekopieerd naar klembord.': 'Jelszó a vágólapra másolva.',
+  'Wachtwoord tonen': 'Jelszó megjelenítése',
+  'Wachtwoord verbergen': 'Jelszó elrejtése',
+  'Zeer sterk': 'Nagyon erős',
+  'Zeer zwak': 'Nagyon gyenge',
+  'Zwak': 'Gyenge',
   'Tekst kleiner': 'Kisebb szöveg',
   'Tekst groter': 'Nagyobb szöveg',
   'Documentatie': 'Dokumentáció',

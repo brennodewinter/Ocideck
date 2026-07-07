@@ -84,6 +84,36 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'Beschermen met een wachtwoord (AES-256)':
+      'Proteger com uma palavra-passe (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Guarde bem esta palavra-passe: se a perder, este pacote deixa de poder ser aberto.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Este pacote está protegido por palavra-passe. Introduza a palavra-passe para o abrir.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Este pacote está encriptado; não foi possível solicitar uma palavra-passe.',
+  'Exporteren': 'Exportar',
+  'Genereer sterk wachtwoord': 'Gerar palavra-passe forte',
+  'Maak het langer voor betere bescherming.':
+      'Torne-a mais longa para melhor proteção.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Palavra-passe incorreta. Tente novamente.',
+  'Ontgrendelen': 'Desbloquear',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Opcional. Apenas quem tiver a palavra-passe pode abrir o pacote.',
+  'Redelijk': 'Razoável',
+  'Sterk': 'Forte',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Dica: uma frase-passe longa é mais segura do que uma palavra-passe curta com símbolos.',
+  'Versleuteld pakket': 'Pacote encriptado',
+  'Wachtwoord': 'Palavra-passe',
+  'Wachtwoord gekopieerd naar klembord.':
+      'Palavra-passe copiada para a área de transferência.',
+  'Wachtwoord tonen': 'Mostrar palavra-passe',
+  'Wachtwoord verbergen': 'Ocultar palavra-passe',
+  'Zeer sterk': 'Muito forte',
+  'Zeer zwak': 'Muito fraca',
+  'Zwak': 'Fraca',
   'Tekst kleiner': 'Texto menor',
   'Tekst groter': 'Texto maior',
   'Documentatie': 'Documentação',

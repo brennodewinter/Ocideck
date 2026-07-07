@@ -83,6 +83,34 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Beschermen met een wachtwoord (AES-256)':
+      'Lindungi dengan kata sandi (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Simpan kata sandi ini dengan aman: jika hilang, paket ini tidak dapat dibuka lagi.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Paket ini dilindungi kata sandi. Masukkan kata sandi untuk membukanya.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Paket ini terenkripsi; kata sandi tidak dapat diminta.',
+  'Exporteren': 'Ekspor',
+  'Genereer sterk wachtwoord': 'Buat kata sandi yang kuat',
+  'Maak het langer voor betere bescherming.':
+      'Buat lebih panjang untuk perlindungan yang lebih baik.',
+  'Onjuist wachtwoord. Probeer het opnieuw.': 'Kata sandi salah. Coba lagi.',
+  'Ontgrendelen': 'Buka kunci',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Opsional. Hanya orang yang memiliki kata sandi yang dapat membuka paket.',
+  'Redelijk': 'Cukup',
+  'Sterk': 'Kuat',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Tips: frasa sandi yang panjang lebih aman daripada kata sandi pendek dengan simbol.',
+  'Versleuteld pakket': 'Paket terenkripsi',
+  'Wachtwoord': 'Kata sandi',
+  'Wachtwoord gekopieerd naar klembord.': 'Kata sandi disalin ke papan klip.',
+  'Wachtwoord tonen': 'Tampilkan kata sandi',
+  'Wachtwoord verbergen': 'Sembunyikan kata sandi',
+  'Zeer sterk': 'Sangat kuat',
+  'Zeer zwak': 'Sangat lemah',
+  'Zwak': 'Lemah',
   'Tekst kleiner': 'Teks lebih kecil',
   'Tekst groter': 'Teks lebih besar',
   'Documentatie': 'Dokumentasi',

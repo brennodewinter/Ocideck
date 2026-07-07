@@ -83,6 +83,36 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Beschermen met een wachtwoord (AES-256)':
+      'Προστασία με κωδικό πρόσβασης (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Φυλάξτε καλά αυτόν τον κωδικό πρόσβασης: αν τον χάσετε, αυτό το πακέτο δεν θα μπορεί πλέον να ανοιχτεί.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Αυτό το πακέτο προστατεύεται με κωδικό πρόσβασης. Εισαγάγετε τον κωδικό πρόσβασης για να το ανοίξετε.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Αυτό το πακέτο είναι κρυπτογραφημένο· δεν ήταν δυνατό να ζητηθεί κωδικός πρόσβασης.',
+  'Exporteren': 'Εξαγωγή',
+  'Genereer sterk wachtwoord': 'Δημιουργία ισχυρού κωδικού πρόσβασης',
+  'Maak het langer voor betere bescherming.':
+      'Κάντε τον μεγαλύτερο για καλύτερη προστασία.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Λανθασμένος κωδικός πρόσβασης. Δοκιμάστε ξανά.',
+  'Ontgrendelen': 'Ξεκλείδωμα',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Προαιρετικό. Μόνο όποιος έχει τον κωδικό πρόσβασης μπορεί να ανοίξει το πακέτο.',
+  'Redelijk': 'Μέτριος',
+  'Sterk': 'Ισχυρός',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Συμβουλή: μια μεγάλη φράση πρόσβασης είναι ασφαλέστερη από έναν σύντομο κωδικό με σύμβολα.',
+  'Versleuteld pakket': 'Κρυπτογραφημένο πακέτο',
+  'Wachtwoord': 'Κωδικός πρόσβασης',
+  'Wachtwoord gekopieerd naar klembord.':
+      'Ο κωδικός πρόσβασης αντιγράφηκε στο πρόχειρο.',
+  'Wachtwoord tonen': 'Εμφάνιση κωδικού πρόσβασης',
+  'Wachtwoord verbergen': 'Απόκρυψη κωδικού πρόσβασης',
+  'Zeer sterk': 'Πολύ ισχυρός',
+  'Zeer zwak': 'Πολύ αδύναμος',
+  'Zwak': 'Αδύναμος',
   'Tekst kleiner': 'Μικρότερο κείμενο',
   'Tekst groter': 'Μεγαλύτερο κείμενο',
   'Documentatie': 'Τεκμηρίωση',

@@ -84,6 +84,33 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Beschermen met een wachtwoord (AES-256)': 'Chrániť heslom (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Uschovajte toto heslo na bezpečnom mieste: ak ho stratíte, tento balík sa už nedá otvoriť.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Tento balík je chránený heslom. Zadajte heslo na jeho otvorenie.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Tento balík je zašifrovaný; nebolo možné požiadať o heslo.',
+  'Exporteren': 'Exportovať',
+  'Genereer sterk wachtwoord': 'Vygenerovať silné heslo',
+  'Maak het langer voor betere bescherming.': 'Predĺžte ho pre lepšiu ochranu.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Nesprávne heslo. Skúste to znova.',
+  'Ontgrendelen': 'Odomknúť',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Voliteľné. Balík môže otvoriť iba ten, kto pozná heslo.',
+  'Redelijk': 'Prijateľné',
+  'Sterk': 'Silné',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Tip: dlhá prístupová fráza je bezpečnejšia než krátke heslo so symbolmi.',
+  'Versleuteld pakket': 'Zašifrovaný balík',
+  'Wachtwoord': 'Heslo',
+  'Wachtwoord gekopieerd naar klembord.': 'Heslo skopírované do schránky.',
+  'Wachtwoord tonen': 'Zobraziť heslo',
+  'Wachtwoord verbergen': 'Skryť heslo',
+  'Zeer sterk': 'Veľmi silné',
+  'Zeer zwak': 'Veľmi slabé',
+  'Zwak': 'Slabé',
   'Tekst kleiner': 'Menší text',
   'Tekst groter': 'Väčší text',
   'Documentatie': 'Dokumentácia',

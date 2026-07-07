@@ -82,6 +82,33 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Beschermen met een wachtwoord (AES-256)': 'Kaitse parooliga (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Hoia see parool hoolikalt alles: kui kaotad selle, ei saa seda paketti enam avada.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'See pakett on parooliga kaitstud. Selle avamiseks sisesta parool.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'See pakett on krüpteeritud; parooli ei olnud võimalik küsida.',
+  'Exporteren': 'Ekspordi',
+  'Genereer sterk wachtwoord': 'Loo tugev parool',
+  'Maak het langer voor betere bescherming.':
+      'Tee see parema kaitse jaoks pikemaks.',
+  'Onjuist wachtwoord. Probeer het opnieuw.': 'Vale parool. Proovi uuesti.',
+  'Ontgrendelen': 'Ava lukk',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Valikuline. Ainult see, kellel on parool, saab paketti avada.',
+  'Redelijk': 'Rahuldav',
+  'Sterk': 'Tugev',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Nõuanne: pikk paroolifraas on turvalisem kui lühike sümbolitega parool.',
+  'Versleuteld pakket': 'Krüpteeritud pakett',
+  'Wachtwoord': 'Parool',
+  'Wachtwoord gekopieerd naar klembord.': 'Parool kopeeriti lõikelauale.',
+  'Wachtwoord tonen': 'Näita parooli',
+  'Wachtwoord verbergen': 'Peida parool',
+  'Zeer sterk': 'Väga tugev',
+  'Zeer zwak': 'Väga nõrk',
+  'Zwak': 'Nõrk',
   'Tekst kleiner': 'Väiksem tekst',
   'Tekst groter': 'Suurem tekst',
   'Documentatie': 'Dokumentatsioon',

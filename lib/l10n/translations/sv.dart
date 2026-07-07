@@ -83,6 +83,34 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Beschermen met een wachtwoord (AES-256)':
+      'Skydda med ett lösenord (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Förvara detta lösenord säkert: om du tappar bort det går paketet inte längre att öppna.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Detta paket är lösenordsskyddat. Ange lösenordet för att öppna det.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Detta paket är krypterat; det gick inte att be om ett lösenord.',
+  'Exporteren': 'Exportera',
+  'Genereer sterk wachtwoord': 'Generera starkt lösenord',
+  'Maak het langer voor betere bescherming.':
+      'Gör det längre för bättre skydd.',
+  'Onjuist wachtwoord. Probeer het opnieuw.': 'Fel lösenord. Försök igen.',
+  'Ontgrendelen': 'Lås upp',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Valfritt. Endast den som har lösenordet kan öppna paketet.',
+  'Redelijk': 'Godtagbart',
+  'Sterk': 'Starkt',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Tips: en lång lösenordsfras är säkrare än ett kort lösenord med symboler.',
+  'Versleuteld pakket': 'Krypterat paket',
+  'Wachtwoord': 'Lösenord',
+  'Wachtwoord gekopieerd naar klembord.': 'Lösenordet kopierat till urklipp.',
+  'Wachtwoord tonen': 'Visa lösenord',
+  'Wachtwoord verbergen': 'Dölj lösenord',
+  'Zeer sterk': 'Mycket starkt',
+  'Zeer zwak': 'Mycket svagt',
+  'Zwak': 'Svagt',
   'Tekst kleiner': 'Mindre text',
   'Tekst groter': 'Större text',
   'Documentatie': 'Dokumentation',
