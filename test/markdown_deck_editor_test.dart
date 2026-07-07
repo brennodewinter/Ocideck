@@ -95,4 +95,37 @@ void main() {
 
     expect(applied, 'baz bar baz');
   });
+
+  testWidgets('accentuates finding lines in the code after checking', (
+    tester,
+  ) async {
+    bool isHighlightLayer(Widget w) =>
+        w is CustomPaint &&
+        w.painter.runtimeType.toString() == '_IssueHighlightPainter';
+
+    await tester.pumpWidget(
+      _host(
+        // Unclosed front matter → a validation error on a specific line.
+        content: '---\nmarp: true\n# nooit gesloten\n',
+        onApply: (_) {},
+      ),
+    );
+
+    // Nothing is checked yet, so no code is accentuated.
+    expect(find.byWidgetPredicate(isHighlightLayer), findsNothing);
+
+    await tester.tap(find.text('Controleren'));
+    await tester.pump();
+
+    // After checking, the finding is painted behind the code.
+    expect(find.byWidgetPredicate(isHighlightLayer), findsOneWidget);
+
+    // Editing clears the stale findings, so the accent disappears again.
+    await tester.enterText(
+      find.byType(TextField).first,
+      '---\nmarp: true\n---\n\n# ok\n',
+    );
+    await tester.pump();
+    expect(find.byWidgetPredicate(isHighlightLayer), findsNothing);
+  });
 }
