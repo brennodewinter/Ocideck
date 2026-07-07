@@ -8,6 +8,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Findings are highlighted in the code, not just the gutter.** After
+  **Check** in markdown mode, each line with a validation issue now gets a
+  coloured band behind the code with a stronger left accent bar — red for
+  errors, amber for warnings — so problems stand out where you edit. The bands
+  scroll with the text and clear as soon as you start typing (the findings are
+  stale then), matching the existing line-number markers.
 - **Per-slide markdown view** — markdown mode can now show a single slide's
   markdown instead of the whole presentation. A graphical sliding toggle at the
   top of the markdown editor switches between **Full presentation** and **This
