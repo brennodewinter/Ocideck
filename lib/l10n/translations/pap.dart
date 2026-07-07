@@ -83,6 +83,7 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Volledige presentatie': 'Presentashon kompleto',
   'Beschermen met een wachtwoord (AES-256)':
       'Protehá ku un kontraseña (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':

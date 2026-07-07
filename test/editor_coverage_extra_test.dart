@@ -25,6 +25,7 @@ Widget _markdownHost({
             onApply: onApply,
             parseError: false,
             onExitMarkdown: onExit ?? () {},
+            onScopeChanged: (_) {},
           ),
         ),
       ),

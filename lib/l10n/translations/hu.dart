@@ -83,6 +83,7 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Volledige presentatie': 'Teljes prezentáció',
   'Beschermen met een wachtwoord (AES-256)': 'Védelem jelszóval (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Őrizze meg jól ezt a jelszót: ha elveszíti, ez a csomag többé nem nyitható meg.',

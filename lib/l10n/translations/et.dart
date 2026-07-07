@@ -82,6 +82,7 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Volledige presentatie': 'Kogu esitlus',
   'Beschermen met een wachtwoord (AES-256)': 'Kaitse parooliga (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Hoia see parool hoolikalt alles: kui kaotad selle, ei saa seda paketti enam avada.',

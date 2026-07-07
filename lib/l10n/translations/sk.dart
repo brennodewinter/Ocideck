@@ -84,6 +84,7 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Volledige presentatie': 'Celá prezentácia',
   'Beschermen met een wachtwoord (AES-256)': 'Chrániť heslom (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Uschovajte toto heslo na bezpečnom mieste: ak ho stratíte, tento balík sa už nedá otvoriť.',

@@ -83,6 +83,7 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Volledige presentatie': 'Folsleine presintaasje',
   'Beschermen met een wachtwoord (AES-256)':
       'Beskermje mei in wachtwurd (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':

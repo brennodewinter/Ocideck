@@ -83,6 +83,7 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Volledige presentatie': 'Celotna predstavitev',
   'Beschermen met een wachtwoord (AES-256)': 'Zaščiti z geslom (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Dobro shranite to geslo: če ga izgubite, tega paketa ni več mogoče odpreti.',

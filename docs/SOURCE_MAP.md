@@ -69,6 +69,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 
 - `consent_provider.dart` — `ConsentNotifier` managing consent acceptance/revocation with persistent storage.
 - `deck_provider.dart` — `DeckNotifier`: loaded deck, dirty state, undo/redo history, file path.
+- `deck_provider_markdown.dart` — `DeckNotifierMarkdown` extension: generate/apply markdown for the whole deck or a single slide (per-slide markdown view).
 - `deck_quality_provider.dart` — Computes accessibility/quality analysis for the loaded deck.
 - `editor_provider.dart` — `EditorState`/`EditorNotifier`: selected slide, editor mode, markdown buffer.
 - `image_contrast_provider.dart` — Computes title-slide image-contrast issues asynchronously per deck.
@@ -191,7 +192,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `free_markdown_editor.dart` — Edits a free-form custom-markdown slide.
 - `image_slide_editor.dart` — Edits a full-slide image (title, caption).
 - `list_style_selector.dart` — Selects list style (bullets/numbered/checklist/rich text).
-- `markdown_deck_editor.dart` — Whole-deck markdown editor with validation and find/replace.
+- `markdown_deck_editor.dart` — Markdown editor with validation and find/replace, plus a sliding scope toggle for whole-deck vs. single-slide markdown.
 - `markdown_find_bar.dart` — In-editor find/replace bar for markdown mode.
 - `question_editor.dart` — Edits a question slide (answers, options).
 - `quote_editor.dart` — Edits a quote slide (text, author, background image).

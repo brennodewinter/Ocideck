@@ -21,6 +21,8 @@ import '../utils/log.dart';
 import '../utils/page_scoped_notes.dart';
 import 'settings_provider.dart';
 
+part 'deck_provider_markdown.dart';
+
 // ── Service providers ────────────────────────────────────────────────────────
 
 final markdownServiceProvider = Provider<MarkdownService>(
@@ -830,48 +832,8 @@ class DeckNotifier extends StateNotifier<DeckState> {
   );
 
   // ── Markdown mode ──────────────────────────────────────────────────────────
-
-  String generateMarkdown() {
-    final deck = state.deck;
-    // Inline linked chart data so a markdown round-trip (toggle, recovery
-    // snapshot) keeps the chart's points. Saving to disk still writes the
-    // source-only form (see FileService._writeProject), so the .md stays clean.
-    return deck != null ? _md.generateDeck(deck, inlineChartData: true) : '';
-  }
-
-  /// Returns false if parsing fails (content is preserved).
-  bool applyMarkdown(String markdown) {
-    final parsed = _md.parseDeck(markdown, filePath: state.filePath);
-    if (parsed == null) return false;
-    // The markdown carries only content; keep the deck's current styling rather
-    // than resetting it to the default profile the parser returns.
-    final current = state.deck;
-    var deck = current == null
-        ? parsed
-        : parsed.copyWith(themeProfile: current.themeProfile);
-    if (current != null && current.userNotes.isNotEmpty) {
-      final encoded = UserNotesCodec.encode(current.slides, current.userNotes);
-      final remapped = encoded != null
-          ? UserNotesCodec.decode(encoded, deck.slides)
-          : const <String, String>{};
-      deck = deck.copyWith(userNotes: remapped);
-    }
-    // Annotations (ink layers) live outside the markdown; without re-anchoring
-    // them to the new slides a markdown toggle would wipe the drawings, and a
-    // subsequent save would delete their sidecar — permanent data loss.
-    if (current != null && current.annotations.isNotEmpty) {
-      final encoded = AnnotationCodec.encode(
-        current.slides,
-        current.annotations,
-      );
-      final remapped = encoded != null
-          ? AnnotationCodec.decode(encoded, deck.slides)
-          : const <String, List<InkStroke>>{};
-      deck = deck.copyWith(annotations: remapped);
-    }
-    _mutate(deck); // discrete stap → ook ongedaan te maken
-    return true;
-  }
+  // Zie deck_provider_markdown.dart (extension DeckNotifierMarkdown) voor
+  // generateMarkdown/generateSlideMarkdown/applyMarkdown/applySlideMarkdown.
 
   void clearError() => state = state.copyWith(clearError: true);
 

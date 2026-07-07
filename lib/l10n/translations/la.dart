@@ -85,6 +85,7 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Volledige presentatie': 'Tota praesentatio',
   'Beschermen met een wachtwoord (AES-256)': 'Tessera muni (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Hanc tesseram bene serva: si eam amiseris, hoc fasciculus aperiri non poterit.',

@@ -83,6 +83,7 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Volledige presentatie': 'Ολόκληρη η παρουσίαση',
   'Beschermen met een wachtwoord (AES-256)':
       'Προστασία με κωδικό πρόσβασης (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':

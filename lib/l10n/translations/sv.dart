@@ -83,6 +83,7 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Volledige presentatie': 'Hela presentationen',
   'Beschermen met een wachtwoord (AES-256)':
       'Skydda med ett lösenord (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':

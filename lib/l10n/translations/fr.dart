@@ -84,6 +84,7 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'Volledige presentatie': 'Présentation complète',
   'Beschermen met een wachtwoord (AES-256)':
       'Protéger par un mot de passe (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':

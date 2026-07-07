@@ -81,6 +81,7 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Volledige presentatie': '\'ang naQ',
   'Beschermen met een wachtwoord (AES-256)': 'mu\'wIj Qan (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'mu\'wIjvam yImej: DachIlchugh, vaj paqvam DapoSmoHlaHbe\'.',

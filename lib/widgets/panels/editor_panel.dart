@@ -57,7 +57,7 @@ class EditorPanel extends ConsumerWidget {
     ];
 
     if (editor.mode == EditorMode.markdown) {
-      return _markdownEditor(ref, revision, editor);
+      return _markdownEditor(ref, revision, editor, deck);
     }
 
     // De tekstvelden cachen hun inhoud in eigen controllers en verversen alleen
@@ -175,15 +175,34 @@ class EditorPanel extends ConsumerWidget {
     ];
   }
 
-  Widget _markdownEditor(WidgetRef ref, int revision, EditorState editor) {
+  Widget _markdownEditor(
+    WidgetRef ref,
+    int revision,
+    EditorState editor,
+    Deck deck,
+  ) {
     final deckNotifier = ref.read(deckProvider.notifier);
     final editorNotifier = ref.read(editorProvider.notifier);
+    final scope = editor.markdownScope;
+    final isSlide = scope == MarkdownScope.slide;
+    final idx = editor.selectedIndex.clamp(0, deck.slides.length - 1);
     return MarkdownDeckEditor(
       // Verse instantie na undo/redo zodat de markdown opnieuw wordt geladen.
+      // Bij wisselen van omvang of actieve slide blijft de widget bestaan
+      // (zodat de scope-toggle vloeiend animeert) en herlaadt hij zijn inhoud
+      // via didUpdateWidget op basis van de veranderde initialContent.
       key: ValueKey('md-$revision'),
-      initialContent: deckNotifier.generateMarkdown(),
+      initialContent: isSlide
+          ? deckNotifier.generateSlideMarkdown(idx)
+          : deckNotifier.generateMarkdown(),
+      scope: scope,
+      slideNumber: idx + 1,
+      slideCount: deck.slides.length,
+      onScopeChanged: editorNotifier.setMarkdownScope,
       onApply: (md) {
-        final ok = deckNotifier.applyMarkdown(md);
+        final ok = isSlide
+            ? deckNotifier.applySlideMarkdown(idx, md)
+            : deckNotifier.applyMarkdown(md);
         editorNotifier.setParseError(!ok);
         return ok;
       },

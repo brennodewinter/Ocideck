@@ -84,6 +84,7 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Volledige presentatie': 'Уся презентація',
   'Beschermen met een wachtwoord (AES-256)': 'Захистити паролем (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Збережіть цей пароль надійно: якщо ви його втратите, цей пакет більше не вдасться відкрити.',

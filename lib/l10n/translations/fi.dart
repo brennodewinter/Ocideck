@@ -83,6 +83,7 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Volledige presentatie': 'Koko esitys',
   'Beschermen met een wachtwoord (AES-256)': 'Suojaa salasanalla (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Säilytä tämä salasana huolellisesti: jos menetät sen, tätä pakettia ei voi enää avata.',

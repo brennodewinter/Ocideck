@@ -83,6 +83,7 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Volledige presentatie': 'Visa prezentacija',
   'Beschermen met een wachtwoord (AES-256)': 'Apsaugoti slaptažodžiu (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Saugokite šį slaptažodį: jį praradę, šio paketo nebegalėsite atidaryti.',

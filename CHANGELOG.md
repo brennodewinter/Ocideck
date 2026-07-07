@@ -8,6 +8,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Per-slide markdown view** — markdown mode can now show a single slide's
+  markdown instead of the whole presentation. A graphical sliding toggle at the
+  top of the markdown editor switches between **Full presentation** and **This
+  slide** (with a `n/total` counter); selecting another slide reloads its
+  markdown. Both scopes edit and quality-check the same way — **Apply** in the
+  per-slide scope parses just that fragment back into the deck (and splits into
+  several slides if you add `---` separators), with user notes and annotations
+  re-anchored exactly as in whole-deck mode. See
+  [docs/USER_GUIDE.md](docs/USER_GUIDE.md) → *Markdown mode*.
 - **Optional password encryption for `.ocideck` packages** — when you export a
   package you can now protect it with a password. OciDeck encrypts every file in
   the package with **AES-256** (the WinZip AES standard). The export dialog shows

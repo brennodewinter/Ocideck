@@ -84,6 +84,7 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Volledige presentatie': 'Цялата презентация',
   'Beschermen met een wachtwoord (AES-256)': 'Защита с парола (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Пазете добре тази парола: ако я загубите, този пакет вече не може да бъде отворен.',

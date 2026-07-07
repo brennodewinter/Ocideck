@@ -84,6 +84,7 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Volledige presentatie': 'Întreaga prezentare',
   'Beschermen met een wachtwoord (AES-256)': 'Protejează cu o parolă (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Păstrează parola în siguranță: dacă o pierzi, acest pachet nu mai poate fi deschis.',
