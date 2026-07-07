@@ -344,6 +344,50 @@ class MarkdownService {
     }
   }
 
+  /// Splits a deck body (front matter already stripped) into slide blocks on
+  /// lines that are exactly `---`, but never when that `---` sits inside a
+  /// fenced code block (```` ``` ```` or `~~~`). A separator-looking line inside
+  /// a code sample, a diff hunk or an embedded YAML document therefore no longer
+  /// tears the slide in two. Shared with the markdown validator so the checker
+  /// and the parser agree on exactly where the slide boundaries are.
+  static List<String> splitSlideBlocks(String body) {
+    final lines = body.split('\n');
+    final blocks = <String>[];
+    final current = <String>[];
+    String? fenceChar; // '`' or '~' while inside a fence, else null.
+    for (final line in lines) {
+      final trimmed = line.trimLeft();
+      if (fenceChar == null) {
+        if (line == '---') {
+          blocks.add(current.join('\n'));
+          current.clear();
+          continue;
+        }
+        if (trimmed.startsWith('```')) {
+          fenceChar = '`';
+        } else if (trimmed.startsWith('~~~')) {
+          fenceChar = '~';
+        }
+      } else if (isBareFence(trimmed, fenceChar)) {
+        fenceChar = null;
+      }
+      current.add(line);
+    }
+    blocks.add(current.join('\n'));
+    return blocks;
+  }
+
+  /// True when [trimmed] is a bare fence line: three or more of [fenceChar] and
+  /// nothing else. An opening ```` ```dart ```` carries an info string, so it
+  /// never reads as a closing fence.
+  static bool isBareFence(String trimmed, String fenceChar) {
+    if (trimmed.length < 3) return false;
+    for (var i = 0; i < trimmed.length; i++) {
+      if (trimmed[i] != fenceChar) return false;
+    }
+    return true;
+  }
+
   /// Cheap frontmatter probe for the disk-wide presentation scan: reads only the
   /// `--- … ---` header (no slide body, no Deck construction) and reports whether
   /// the file declares `marp: true`, plus its `theme`/`title`. [head] may be a

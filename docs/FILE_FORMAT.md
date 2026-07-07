@@ -85,8 +85,10 @@ ocideck_style_profile: <base64url(JSON)>
 ```
 
 - The document starts with **YAML front matter** between `---` lines (§3).
-- Slides are separated by a line containing exactly `---` (internally split on
-  `\n---\n`).
+- Slides are separated by a line containing exactly `---`. A `---` line **inside
+  a fenced code block** (```` ``` ```` or `~~~`) is code content, not a
+  separator, so a code sample, diff hunk or embedded YAML document that contains
+  `---` no longer splits the slide.
 - Each slide can optionally start with a `<!-- _class: ... -->` line that
   determines the slide type and behavior (§4).
 
