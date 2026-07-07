@@ -6,6 +6,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
+import 'package:ocideck/widgets/panels/slide_list_panel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -113,5 +114,43 @@ void main() {
     expect(container.read(tabsProvider).tabs.length, 1);
     expect(firstNotifier.mounted, isTrue);
     expect(container.read(tabsProvider).current!.label, 'First');
+  });
+
+  testWidgets('a play-only deck shows the locked play screen, not the editor', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1600, 1000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+    await tester.pumpAndSettle();
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(AppShell)),
+    );
+    container
+        .read(tabsProvider)
+        .current!
+        .deckNotifier
+        .loadDeck(
+          Deck(
+            title: 'Vergrendeld',
+            playOnly: true,
+            slides: [Slide.create(SlideType.title).copyWith(title: 'Test')],
+          ),
+        );
+    await tester.pumpAndSettle();
+
+    // The locked screen shows a Play button and the deck title, but none of the
+    // editing chrome (the slide-list rail is only built by the main layout).
+    expect(find.text('Afspelen'), findsOneWidget);
+    expect(
+      find.text('Deze presentatie is vergrendeld op alleen afspelen.'),
+      findsOneWidget,
+    );
+    expect(find.byType(SlideListPanel), findsNothing);
+
+    // Closing from the play-only screen restores the normal (welcome) working.
+    await tester.tap(find.widgetWithText(OutlinedButton, 'Sluiten'));
+    await tester.pumpAndSettle();
+    expect(container.read(tabsProvider).current!.isOpen, isFalse);
   });
 }

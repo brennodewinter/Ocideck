@@ -704,65 +704,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     deckNotifier.updateSlide(idx, updated);
   }
 
-  void _presentDeck() {
-    final deckNotifier = ref.read(deckProvider.notifier);
-    final deck = ref.read(deckProvider).deck!;
-    final editor = ref.read(editorProvider);
-    final l10n = context.l10n;
-    // Overgeslagen slides weglaten en de selectie naar de eerstvolgende
-    // zichtbare slide vertalen.
-    final visible = <int>[
-      for (var i = 0; i < deck.slides.length; i++)
-        if (!deck.slides[i].skipped &&
-            slideVisibleAtTlp(deck.slides[i], deck.tlp))
-          i,
-    ];
-    final slides = _slidesForPresentationOrExport(deck);
-    if (slides.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            l10n.d('Alle slides zijn overgeslagen — niets om te tonen.'),
-          ),
-        ),
-      );
-      return;
-    }
-    var initial = visible.indexWhere((i) => i >= editor.selectedIndex);
-    if (initial < 0) initial = visible.length - 1;
-    if (initial < 0) initial = 0;
-    FullscreenPresenter.present(
-      context,
-      slides: slides,
-      projectPath: deck.projectPath,
-      themeProfile: deck.themeProfile,
-      cockpitColorScheme: ref.read(settingsProvider).cockpitColorScheme,
-      initialIndex: initial,
-      tlp: deck.tlp,
-      organization: deck.organization,
-      showClassificationWatermark: ref
-          .read(settingsProvider)
-          .classificationWatermarkEnabled,
-      allowRemoteMedia: ref.read(settingsProvider).allowRemoteMedia,
-      showRehearsalSummary: deck.showRehearsalSummary,
-      targetDuration: () {
-        final secs = deck.presentationTargetSeconds;
-        return secs > 0 ? Duration(seconds: secs) : null;
-      }(),
-      annotations: deck.annotations,
-      onAnnotationsChanged: deckNotifier.setAnnotations,
-      initialUserNotes: deck.userNotes,
-      onUserNotesChanged: deckNotifier.setUserNotes,
-      onSlideChanged: (updated) {
-        final index = deckNotifier.currentState.deck?.slides.indexWhere(
-          (slide) => slide.id == updated.id,
-        );
-        if (index != null && index >= 0) {
-          deckNotifier.updateSlide(index, updated);
-        }
-      },
-    );
-  }
+  void _presentDeck() => presentDeck(context, ref);
 
   Future<void> _exportDeck() async {
     final deckState = ref.read(deckProvider);
@@ -898,6 +840,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       keywords: info.keywords,
       presentationTargetSeconds: info.presentationTargetSeconds,
       showRehearsalSummary: info.showRehearsalSummary,
+      playOnly: info.playOnly,
     );
     // Een hier gekozen stijlprofiel geldt app-breed (profielen zijn globaal)
     // en wordt meteen op het open deck toegepast.

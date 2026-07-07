@@ -72,4 +72,44 @@ void main() {
     expect(info, isNotNull);
     expect(info!.styleProfileName, 'Standaard');
   });
+
+  testWidgets('play-only toggle komt in het resultaat', (tester) async {
+    Future<PresentationInfo?>? result;
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: Builder(
+            builder: (context) => Scaffold(
+              body: ElevatedButton(
+                onPressed: () => result = PresentationInfoDialog.show(
+                  context,
+                  const Deck(title: 'Test'),
+                ),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pump(const Duration(milliseconds: 100));
+    await tester.pumpAndSettle();
+
+    // Scroll de schakelaar in beeld en zet 'Alleen afspelen' aan.
+    await tester.scrollUntilVisible(
+      find.text('Alleen afspelen (vergrendeld)'),
+      100,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.tap(find.text('Alleen afspelen (vergrendeld)'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Opslaan'));
+    await tester.pumpAndSettle();
+
+    final info = await result!;
+    expect(info, isNotNull);
+    expect(info!.playOnly, isTrue);
+  });
 }
