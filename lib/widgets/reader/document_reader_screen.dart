@@ -17,7 +17,7 @@ import 'document_markdown_view.dart';
 /// interface scale. Text is selectable and links open externally. It sits above
 /// dialogs (pushed on the root navigator), so it can be opened from the consent
 /// gate and the settings screen alike.
-class DocumentReaderScreen extends ConsumerWidget {
+class DocumentReaderScreen extends ConsumerStatefulWidget {
   const DocumentReaderScreen({
     super.key,
     required this.title,
@@ -44,6 +44,10 @@ class DocumentReaderScreen extends ConsumerWidget {
   /// yet far more of the width is used than the old fixed narrow column.
   static const double _contentMaxWidth = 1200;
 
+  @override
+  ConsumerState<DocumentReaderScreen> createState() =>
+      _DocumentReaderScreenState();
+
   /// Pushes the reader over everything (including any open dialog).
   static Future<void> open(
     BuildContext context, {
@@ -61,9 +65,23 @@ class DocumentReaderScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
+  // Shared by the Scrollbar and the SingleChildScrollView so the thumb is
+  // bound to a real ScrollPosition. Without this, on desktop the Scrollbar
+  // falls back to the PrimaryScrollController (which the scroll view does not
+  // attach to there), and dragging throws "no ScrollPosition attached".
+  final ScrollController _scrollController = ScrollController();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = context.l10n;
     final languageCode = Localizations.localeOf(context).languageCode;
     final scale = ref.watch(
@@ -72,19 +90,19 @@ class DocumentReaderScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Semantics(header: true, child: Text(title)),
+        title: Semantics(header: true, child: Text(widget.title)),
         actions: [
           ..._textSizeActions(context, ref, l10n, scale),
-          if (onlineUrl != null)
+          if (widget.onlineUrl != null)
             IconButton(
               icon: const Icon(Icons.open_in_new),
               tooltip: l10n.d('Online openen'),
-              onPressed: () => openExternalUrl(onlineUrl!),
+              onPressed: () => openExternalUrl(widget.onlineUrl!),
             ),
         ],
       ),
       body: FutureBuilder<String>(
-        future: service.load(assetBase, languageCode),
+        future: widget.service.load(widget.assetBase, languageCode),
         builder: (context, snap) {
           if (snap.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
@@ -145,10 +163,14 @@ class DocumentReaderScreen extends ConsumerWidget {
     return MediaQuery(
       data: scaled,
       child: Scrollbar(
+        controller: _scrollController,
         child: SingleChildScrollView(
+          controller: _scrollController,
           child: Center(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: _contentMaxWidth),
+              constraints: const BoxConstraints(
+                maxWidth: DocumentReaderScreen._contentMaxWidth,
+              ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 24,
@@ -160,7 +182,7 @@ class DocumentReaderScreen extends ConsumerWidget {
                   child: DocumentMarkdownView(
                     markdown,
                     onTapLink: openExternalUrl,
-                    maxTextWidth: _proseMaxWidth,
+                    maxTextWidth: DocumentReaderScreen._proseMaxWidth,
                   ),
                 ),
               ),
