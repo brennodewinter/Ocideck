@@ -80,6 +80,11 @@ class MarkdownService {
     if (!deck.showRehearsalSummary) {
       buf.writeln('ocideck_show_rehearsal_summary: false');
     }
+    // 'Alleen afspelen'-vergrendeling: default (false) blijft uit de front
+    // matter; enkel de opt-in wordt bewaard.
+    if (deck.playOnly) {
+      buf.writeln('ocideck_play_only: true');
+    }
     if (inlineStyleProfile) {
       buf.writeln(
         'ocideck_style_profile: ${base64Url.encode(utf8.encode(jsonEncode(deck.themeProfile.toJson())))}',

@@ -1039,6 +1039,36 @@ void main() {
       },
     );
 
+    test('deck-level play-only lock round-trips (default stays clean)', () {
+      final service = MarkdownService();
+      Deck? roundTrip(bool lock) => service.parseDeck(
+        service.generateDeck(
+          Deck(
+            title: 'Demo',
+            playOnly: lock,
+            slides: [Slide.create(SlideType.title).copyWith(title: 'Een')],
+          ),
+        ),
+      );
+      // Default (false) is not written to the front matter, but still parses
+      // false.
+      final offMarkdown = service.generateDeck(
+        Deck(title: 'Demo', slides: [Slide.create(SlideType.title)]),
+      );
+      expect(offMarkdown.contains('ocideck_play_only'), isFalse);
+      expect(roundTrip(false)!.playOnly, isFalse);
+      // Opt-in is persisted as `true` and round-trips.
+      final onMarkdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          playOnly: true,
+          slides: [Slide.create(SlideType.title)],
+        ),
+      );
+      expect(onMarkdown.contains('ocideck_play_only: true'), isTrue);
+      expect(roundTrip(true)!.playOnly, isTrue);
+    });
+
     test('timeline slide keeps title, events, layout and animation', () {
       final out = _roundTrip(
         Slide.create(SlideType.timeline).copyWith(

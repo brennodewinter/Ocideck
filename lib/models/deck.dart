@@ -125,6 +125,14 @@ class Deck {
   /// eindscherm getoond wordt. Per presentatie ingesteld (presentatie-info).
   final bool showRehearsalSummary;
 
+  /// 'Alleen afspelen'-modus: is deze vlag gezet, dan wordt het deck vergrendeld
+  /// tot presenteren. De editor, toolbar, menu's en sneltoetsen worden niet
+  /// opgebouwd; enkel de eerste slide met een afspeelknop is zichtbaar. Bewust
+  /// in de markdown-front-matter opgeslagen (inhoud van het bestand), zodat het
+  /// deck als vergrendeld gedeeld kan worden. Uitzetten kan alleen door de
+  /// front-matter-sleutel `ocideck_play_only` uit het bestand te halen.
+  final bool playOnly;
+
   /// Annotatielaag: vrije-hand-tekeningen per slide, gekeyd op [Slide.id].
   /// Bewust géén onderdeel van de Marp-markdown — dit wordt los bewaard in een
   /// sidecar zodat het deck pure, uitwisselbare Marp blijft.
@@ -151,6 +159,7 @@ class Deck {
     this.tlp = TlpLevel.none,
     this.presentationTargetSeconds = 0,
     this.showRehearsalSummary = true,
+    this.playOnly = false,
     this.annotations = const {},
     this.userNotes = const {},
   });
@@ -172,6 +181,7 @@ class Deck {
     TlpLevel? tlp,
     int? presentationTargetSeconds,
     bool? showRehearsalSummary,
+    bool? playOnly,
     Map<String, List<InkStroke>>? annotations,
     Map<String, String>? userNotes,
   }) {
@@ -192,6 +202,7 @@ class Deck {
       presentationTargetSeconds:
           presentationTargetSeconds ?? this.presentationTargetSeconds,
       showRehearsalSummary: showRehearsalSummary ?? this.showRehearsalSummary,
+      playOnly: playOnly ?? this.playOnly,
       annotations: annotations ?? this.annotations,
       userNotes: userNotes ?? this.userNotes,
     );
