@@ -83,6 +83,7 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Volledige presentatie': 'Cijela prezentacija',
   'Ontwerp': 'Dizajn',
   'Architectuur': 'Arhitektura',
   'Bouwinstructies': 'Upute za izradu',

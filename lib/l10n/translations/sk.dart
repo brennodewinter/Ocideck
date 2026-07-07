@@ -84,6 +84,7 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Volledige presentatie': 'Celá prezentácia',
   'Ontwerp': 'Návrh',
   'Architectuur': 'Architektúra',
   'Bouwinstructies': 'Pokyny na zostavenie',

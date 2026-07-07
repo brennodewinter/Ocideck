@@ -83,6 +83,7 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Volledige presentatie': 'Folsleine presintaasje',
   'Ontwerp': 'Ûntwerp',
   'Architectuur': 'Arsjitektuer',
   'Bouwinstructies': 'Bou-ynstruksjes',

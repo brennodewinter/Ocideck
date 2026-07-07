@@ -83,6 +83,7 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Volledige presentatie': 'Presentashon kompleto',
   'Ontwerp': 'Diseño',
   'Architectuur': 'Arkitektura',
   'Bouwinstructies': 'Instrukshonnan di konstrukshon',

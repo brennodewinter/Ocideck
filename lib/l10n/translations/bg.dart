@@ -84,6 +84,7 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Volledige presentatie': 'Цялата презентация',
   'Ontwerp': 'Проект',
   'Architectuur': 'Архитектура',
   'Bouwinstructies': 'Инструкции за компилиране',

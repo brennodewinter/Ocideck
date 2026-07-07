@@ -83,6 +83,7 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Volledige presentatie': 'Ολόκληρη η παρουσίαση',
   'Ontwerp': 'Σχεδίαση',
   'Architectuur': 'Αρχιτεκτονική',
   'Bouwinstructies': 'Οδηγίες δημιουργίας',

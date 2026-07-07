@@ -421,6 +421,60 @@ void main() {
     expect(slides[1].imagePath, 'images/x.png');
   });
 
+  test('generateSlideMarkdown and applySlideMarkdown round-trip one slide', () {
+    final n = _notifier()..newDeck('D');
+    n.addSlide(SlideType.bullets, afterIndex: 0);
+    n.updateSlide(
+      1,
+      n.state.deck!.slides[1].copyWith(title: 'Origineel', bullets: ['Een']),
+    );
+
+    // Alleen slide 1 als markdown ophalen, wijzigen en terugzetten.
+    final slideMd = n.generateSlideMarkdown(1);
+    expect(slideMd, contains('Origineel'));
+    final edited = slideMd.replaceAll('Origineel', 'Gewijzigd');
+    expect(n.applySlideMarkdown(1, edited), isTrue);
+
+    final slides = n.state.deck!.slides;
+    expect(slides, hasLength(2), reason: 'slide 0 blijft ongemoeid');
+    expect(slides[0].title, 'D', reason: 'de titelslide is niet aangeraakt');
+    expect(slides[1].title, 'Gewijzigd');
+    expect(slides[1].bullets, ['Een']);
+  });
+
+  test('applySlideMarkdown splits one slide into several on a divider', () {
+    final n = _notifier()..newDeck('D');
+    n.addSlide(SlideType.bullets, afterIndex: 0);
+
+    // Twee slide-blokken gescheiden door `---` vervangen de ene slide door twee.
+    expect(
+      n.applySlideMarkdown(1, '# Eerste\n\n---\n\n# Tweede'),
+      isTrue,
+    );
+    final slides = n.state.deck!.slides;
+    expect(slides, hasLength(3));
+    expect(slides[1].title, 'Eerste');
+    expect(slides[2].title, 'Tweede');
+  });
+
+  test('applySlideMarkdown is undoable and reports failure on empty input', () {
+    final n = _notifier()..newDeck('D');
+    n.addSlide(SlideType.bullets, afterIndex: 0);
+    n.updateSlide(
+      1,
+      n.state.deck!.slides[1].copyWith(title: 'Voor'),
+    );
+
+    expect(n.applySlideMarkdown(1, '# Na'), isTrue);
+    expect(n.state.deck!.slides[1].title, 'Na');
+    n.undo();
+    expect(n.state.deck!.slides[1].title, 'Voor');
+
+    // Lege markdown parseert niet naar een slide → inhoud blijft behouden.
+    expect(n.applySlideMarkdown(1, '   '), isFalse);
+    expect(n.state.deck!.slides[1].title, 'Voor');
+  });
+
   test('slide operations are no-ops when no deck is open', () {
     final n = _notifier();
     n.addSlide(SlideType.bullets);

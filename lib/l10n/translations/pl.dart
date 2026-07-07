@@ -85,6 +85,7 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Volledige presentatie': 'Cała prezentacja',
   'Ontwerp': 'Projekt',
   'Architectuur': 'Architektura',
   'Bouwinstructies': 'Instrukcje budowania',

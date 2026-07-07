@@ -21,6 +21,7 @@ Widget _host({
           },
           parseError: false,
           onExitMarkdown: () {},
+          onScopeChanged: (_) {},
         ),
       ),
     ),

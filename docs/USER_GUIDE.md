@@ -559,6 +559,24 @@ Use this for bulk edits, copy-paste from another tool, or tweaks that are faster
 in raw text. Switch back with **Apply** (to parse the text back into typed slides)
 or **Cancel** (discard your edits and return to the visual editor).
 
+### Whole presentation or a single slide
+
+A sliding toggle at the top of the markdown editor chooses the **scope**:
+
+- **Full presentation** — the entire deck as one document (the default), for
+  bulk edits and front-matter changes.
+- **This slide** — only the currently selected slide, shown without front matter.
+  The label carries the slide number (e.g. `This slide · 3/12`). Selecting a
+  different slide in the rail reloads its markdown; switching scope is animated.
+
+Both scopes edit and check the same way. **Apply** in *This slide* scope parses
+just that fragment back into the deck, replacing the one slide — and if you add
+`---` separators it splits into several slides. Editing and applying discard the
+same way as the whole-deck view: unapplied fragment edits are lost when you
+switch slides or scope, and only what you **Apply** changes the deck. User notes
+and ink annotations re-anchor to the reparsed slide exactly as in whole-deck
+mode.
+
 ### Find & replace
 
 Markdown mode has an **in-editor find bar** (IDE-style) that searches the live

@@ -83,6 +83,7 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Volledige presentatie': 'Visa prezentācija',
   'Ontwerp': 'Dizains',
   'Architectuur': 'Arhitektūra',
   'Bouwinstructies': 'Būvēšanas instrukcijas',

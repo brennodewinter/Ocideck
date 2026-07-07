@@ -84,6 +84,7 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Volledige presentatie': 'Preżentazzjoni sħiħa',
   'Ontwerp': 'Disinn',
   'Architectuur': 'Arkitettura',
   'Bouwinstructies': 'Struzzjonijiet tal-bini',

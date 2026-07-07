@@ -83,6 +83,7 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Volledige presentatie': 'Hela presentationen',
   'Ontwerp': 'Design',
   'Architectuur': 'Arkitektur',
   'Bouwinstructies': 'Bygginstruktioner',

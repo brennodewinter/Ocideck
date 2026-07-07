@@ -85,6 +85,7 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Volledige presentatie': 'An láithreoireacht iomlán',
   'Ontwerp': 'Dearadh',
   'Architectuur': 'Ailtireacht',
   'Bouwinstructies': 'Treoracha tógála',

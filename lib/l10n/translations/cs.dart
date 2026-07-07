@@ -84,6 +84,7 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Volledige presentatie': 'Celá prezentace',
   'Ontwerp': 'Návrh',
   'Architectuur': 'Architektura',
   'Bouwinstructies': 'Pokyny k sestavení',

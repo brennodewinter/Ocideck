@@ -85,6 +85,7 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Volledige presentatie': 'Tota praesentatio',
   'Ontwerp': 'Designatio',
   'Architectuur': 'Architectura',
   'Bouwinstructies': 'Praecepta compilationis',

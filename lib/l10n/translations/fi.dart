@@ -83,6 +83,7 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Volledige presentatie': 'Koko esitys',
   'Ontwerp': 'Suunnittelu',
   'Architectuur': 'Arkkitehtuuri',
   'Bouwinstructies': 'Käännösohjeet',

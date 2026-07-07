@@ -84,6 +84,7 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Volledige presentatie': 'Presentación completa',
   'Ontwerp': 'Diseño',
   'Architectuur': 'Arquitectura',
   'Bouwinstructies': 'Instrucciones de compilación',

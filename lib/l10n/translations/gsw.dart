@@ -83,6 +83,7 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Volledige presentatie': 'Ganzi Präsentation',
   'Ontwerp': 'Design',
   'Architectuur': 'Architektur',
   'Bouwinstructies': 'Bauaaleitig',

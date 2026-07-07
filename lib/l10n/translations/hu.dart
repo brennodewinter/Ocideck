@@ -83,6 +83,7 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Volledige presentatie': 'Teljes prezentáció',
   'Ontwerp': 'Tervezés',
   'Architectuur': 'Architektúra',
   'Bouwinstructies': 'Fordítási útmutató',

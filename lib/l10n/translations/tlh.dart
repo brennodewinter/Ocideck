@@ -81,6 +81,7 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Volledige presentatie': '\'ang naQ',
   'Ontwerp': 'nab',
   'Architectuur': 'qach mIw',
   'Bouwinstructies': 'chenmoHmeH ra\'meymey',

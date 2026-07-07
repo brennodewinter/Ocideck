@@ -83,6 +83,7 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Volledige presentatie': 'Hele præsentationen',
   'Ontwerp': 'Design',
   'Architectuur': 'Arkitektur',
   'Bouwinstructies': 'Byggeinstruktioner',

@@ -16,13 +16,31 @@ class MarkdownDeckEditor extends ConsumerStatefulWidget {
   final bool parseError;
   final VoidCallback onExitMarkdown;
 
+  /// Of de editor de hele presentatie of alleen de actieve slide toont.
+  final MarkdownScope scope;
+
+  /// 1-gebaseerd nummer van de actieve slide (voor het per-slide label).
+  final int slideNumber;
+
+  /// Totaal aantal slides (voor het per-slide label).
+  final int slideCount;
+
+  /// Wissel de omvang tussen hele presentatie en actieve slide.
+  final ValueChanged<MarkdownScope> onScopeChanged;
+
   const MarkdownDeckEditor({
     super.key,
     required this.initialContent,
     required this.onApply,
     required this.parseError,
     required this.onExitMarkdown,
+    this.scope = MarkdownScope.deck,
+    this.slideNumber = 1,
+    this.slideCount = 1,
+    required this.onScopeChanged,
   });
+
+  bool get isSlideScope => scope == MarkdownScope.slide;
 
   @override
   ConsumerState<MarkdownDeckEditor> createState() => _MarkdownDeckEditorState();
@@ -50,6 +68,25 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     super.initState();
     _ctrl = TextEditingController(text: widget.initialContent);
     _scrollController = ScrollController();
+  }
+
+  @override
+  void didUpdateWidget(MarkdownDeckEditor oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Bij het wisselen van omvang (hele presentatie ↔ slide) of van de actieve
+    // slide levert het paneel verse [initialContent]. De widget blijft bestaan
+    // (zodat de toggle animeert), dus laden we de nieuwe inhoud hier in en
+    // ruimen we validatie/zoekstaat op. Eigen tikwerk verandert alleen
+    // [_ctrl.text], niet [initialContent], dus dat blijft ongemoeid.
+    if (widget.initialContent != oldWidget.initialContent) {
+      _ctrl.text = widget.initialContent;
+      setState(() {
+        _validation = null;
+        _showIssues = false;
+        _matches = const [];
+        _matchIndex = -1;
+      });
+    }
   }
 
   @override
@@ -376,15 +413,16 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       child: Row(
         children: [
           Icon(Icons.code, size: 14, color: AppTheme.warningFg),
-          const SizedBox(width: 6),
-          Expanded(
-            child: Text(
-              l10n.d(
-                'Markdown modus — bewerk de volledige presentatie als Marp Markdown',
-              ),
-              style: TextStyle(fontSize: 11, color: AppTheme.warningFg),
+          const SizedBox(width: 8),
+          Flexible(
+            child: _MarkdownScopeToggle(
+              scope: widget.scope,
+              slideNumber: widget.slideNumber,
+              slideCount: widget.slideCount,
+              onChanged: widget.onScopeChanged,
             ),
           ),
+          const Spacer(),
           TextButton.icon(
             onPressed: _runValidation,
             icon: const Icon(Icons.rule, size: 16),
@@ -446,6 +484,127 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// Geanimeerde segmented-toggle waarmee de markdown-modus wisselt tussen de
+/// hele presentatie en alleen de actieve slide. Een wit "pilletje" schuift
+/// vloeiend onder het gekozen segment.
+class _MarkdownScopeToggle extends StatelessWidget {
+  final MarkdownScope scope;
+  final int slideNumber;
+  final int slideCount;
+  final ValueChanged<MarkdownScope> onChanged;
+
+  const _MarkdownScopeToggle({
+    required this.scope,
+    required this.slideNumber,
+    required this.slideCount,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final isSlide = scope == MarkdownScope.slide;
+    final fg = AppTheme.warningFg;
+    return Container(
+      height: 30,
+      constraints: const BoxConstraints(maxWidth: 360),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.5),
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: fg.withValues(alpha: 0.25)),
+      ),
+      padding: const EdgeInsets.all(2),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return Stack(
+            children: [
+              // Het schuivende, gemarkeerde segment.
+              AnimatedAlign(
+                duration: const Duration(milliseconds: 220),
+                curve: Curves.easeOutCubic,
+                alignment: isSlide
+                    ? Alignment.centerRight
+                    : Alignment.centerLeft,
+                child: FractionallySizedBox(
+                  widthFactor: 0.5,
+                  heightFactor: 1,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(13),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.12),
+                          blurRadius: 4,
+                          offset: const Offset(0, 1),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  _segment(
+                    icon: Icons.view_carousel_outlined,
+                    label: l10n.d('Volledige presentatie'),
+                    active: !isSlide,
+                    onTap: () => onChanged(MarkdownScope.deck),
+                  ),
+                  _segment(
+                    icon: Icons.crop_square_outlined,
+                    label: '${l10n.d('Deze slide')} · $slideNumber/$slideCount',
+                    active: isSlide,
+                    onTap: () => onChanged(MarkdownScope.slide),
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _segment({
+    required IconData icon,
+    required String label,
+    required bool active,
+    required VoidCallback onTap,
+  }) {
+    final fg = AppTheme.warningFg;
+    final color = active ? fg : fg.withValues(alpha: 0.6);
+    return Expanded(
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(13),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, size: 14, color: color),
+              const SizedBox(width: 5),
+              Flexible(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: active ? FontWeight.w600 : FontWeight.w500,
+                    color: color,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -83,6 +83,7 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Volledige presentatie': 'Seluruh presentasi',
   'Ontwerp': 'Desain',
   'Architectuur': 'Arsitektur',
   'Bouwinstructies': 'Instruksi build',

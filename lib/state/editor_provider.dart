@@ -2,6 +2,11 @@ import 'package:flutter_riverpod/legacy.dart';
 
 enum EditorMode { visual, markdown }
 
+/// Welke omvang de markdown-modus toont: de hele presentatie of alleen de
+/// actieve slide. Zo kan een gebruiker de markdown van één slide inzichtelijk
+/// maken zonder de rest te zien.
+enum MarkdownScope { deck, slide }
+
 class EditorState {
   /// The active slide (shown in the editor/preview). Always part of [selection].
   final int selectedIndex;
@@ -9,6 +14,9 @@ class EditorState {
   /// All currently selected slide indices (for bulk actions). Never empty.
   final Set<int> selection;
   final EditorMode mode;
+
+  /// Of de markdown-modus de hele presentatie of alleen de actieve slide toont.
+  final MarkdownScope markdownScope;
   final String markdownBuffer;
   final bool parseError;
 
@@ -26,6 +34,7 @@ class EditorState {
     this.selectedIndex = 0,
     this.selection = const {0},
     this.mode = EditorMode.visual,
+    this.markdownScope = MarkdownScope.deck,
     this.markdownBuffer = '',
     this.parseError = false,
     this.focusQualityField,
@@ -39,6 +48,7 @@ class EditorState {
     int? selectedIndex,
     Set<int>? selection,
     EditorMode? mode,
+    MarkdownScope? markdownScope,
     String? markdownBuffer,
     bool? parseError,
     String? focusQualityField,
@@ -50,6 +60,7 @@ class EditorState {
       selectedIndex: selectedIndex ?? this.selectedIndex,
       selection: selection ?? this.selection,
       mode: mode ?? this.mode,
+      markdownScope: markdownScope ?? this.markdownScope,
       markdownBuffer: markdownBuffer ?? this.markdownBuffer,
       parseError: parseError ?? this.parseError,
       focusQualityField: clearFocusQualityField
@@ -154,6 +165,12 @@ class EditorNotifier extends StateNotifier<EditorState> {
 
   void updateMarkdown(String content) {
     state = state.copyWith(markdownBuffer: content);
+  }
+
+  /// Wissel de markdown-modus tussen de hele presentatie en de actieve slide.
+  void setMarkdownScope(MarkdownScope scope) {
+    if (state.markdownScope == scope) return;
+    state = state.copyWith(markdownScope: scope, parseError: false);
   }
 
   void setParseError(bool value) {

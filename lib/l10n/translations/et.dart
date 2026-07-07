@@ -82,6 +82,7 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Volledige presentatie': 'Kogu esitlus',
   'Ontwerp': 'Kavand',
   'Architectuur': 'Arhitektuur',
   'Bouwinstructies': 'Ehitusjuhised',

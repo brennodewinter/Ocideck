@@ -84,6 +84,7 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'Volledige presentatie': 'Apresentação completa',
   'Ontwerp': 'Design',
   'Architectuur': 'Arquitetura',
   'Bouwinstructies': 'Instruções de compilação',
