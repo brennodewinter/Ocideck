@@ -74,60 +74,66 @@ void main() {
       expect(tester.takeException(), isNull);
     });
 
-    testWidgets(
-      'reflects a selection change made through the editor provider',
-      (tester) async {
-        tester.view.physicalSize = const Size(1400, 1600);
-        tester.view.devicePixelRatio = 1.0;
-        addTearDown(tester.view.reset);
+    testWidgets('reflects a selection change made through the editor provider', (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(1400, 1600);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.reset);
 
-        final container = ProviderContainer();
-        addTearDown(container.dispose);
-        final deckNotifier = container.read(deckProvider.notifier);
-        deckNotifier.newDeck('Test');
-        for (var i = 0; i < 4; i++) {
-          deckNotifier.addSlide(SlideType.bullets);
-        }
-        container.read(editorProvider.notifier).select(0);
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+      final deckNotifier = container.read(deckProvider.notifier);
+      deckNotifier.newDeck('Test');
+      for (var i = 0; i < 4; i++) {
+        deckNotifier.addSlide(SlideType.bullets);
+      }
+      container.read(editorProvider.notifier).select(0);
 
-        await tester.pumpWidget(
-          UncontrolledProviderScope(
-            container: container,
-            child: MaterialApp(
-              theme: AppTheme.light,
-              home: const Scaffold(
-                body: SizedBox(
-                  width: 320,
-                  height: 1200,
-                  child: SlideListPanel(railWidth: 320),
-                ),
+      await tester.pumpWidget(
+        UncontrolledProviderScope(
+          container: container,
+          child: MaterialApp(
+            theme: AppTheme.light,
+            home: const Scaffold(
+              body: SizedBox(
+                width: 320,
+                height: 1200,
+                child: SlideListPanel(railWidth: 320),
               ),
             ),
           ),
+        ),
+      );
+      await tester.pump();
+
+      // De selectie zit sinds de perf-optimalisatie ín de thumbnail (elke
+      // kaart bewaakt zijn eigen editorProvider-select), dus we lezen de
+      // daadwerkelijk gerenderde staat af via Semantics.selected i.p.v. een
+      // widget-veld.
+      bool isPrimary(int index) {
+        final thumb = find.byWidgetPredicate(
+          (w) => w is SlideThumbnail && w.index == index,
         );
-        await tester.pump();
+        final semantics = tester.widget<Semantics>(
+          find.descendant(of: thumb, matching: find.byType(Semantics)).first,
+        );
+        return semantics.properties.selected ?? false;
+      }
 
-        bool isPrimary(int index) => find
-            .byWidgetPredicate(
-              (w) => w is SlideThumbnail && w.index == index && w.isPrimary,
-            )
-            .evaluate()
-            .isNotEmpty;
+      expect(isPrimary(0), isTrue);
+      expect(isPrimary(2), isFalse);
 
-        expect(isPrimary(0), isTrue);
-        expect(isPrimary(2), isFalse);
+      // Een selectie via de provider verplaatst de markering: de betrokken
+      // thumbnails reageren op de editor-state (het paneel rebuildt niet meer).
+      container.read(editorProvider.notifier).select(2);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 200)); // scroll-to-top
 
-        // Selecting another slide via the provider rebuilds the panel and moves
-        // the primary marker — the panel reacts to editor state.
-        container.read(editorProvider.notifier).select(2);
-        await tester.pump();
-        await tester.pump(const Duration(milliseconds: 200)); // scroll-to-top
-
-        expect(isPrimary(2), isTrue);
-        expect(isPrimary(0), isFalse);
-        expect(tester.takeException(), isNull);
-      },
-    );
+      expect(isPrimary(2), isTrue);
+      expect(isPrimary(0), isFalse);
+      expect(tester.takeException(), isNull);
+    });
   });
 
   group('media previews', () {

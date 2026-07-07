@@ -56,6 +56,14 @@ const double kBulletMaxFontFraction = 0.0335;
 
 const double kBulletLineHeight = 1.16;
 
+/// Stop de fit-schaal-bisectie zodra het interval hieronder zakt. Elke iteratie
+/// kost een volledige blok-meting (een TextPainter-layout per bullet/regel), en
+/// een schaalverschil van 0,004 is zelfs op de referentiebreedte (960pt) maar
+/// ~0,1pt lettergrootte — onzichtbaar. Zo dalen tekstrijke slides van een vaste
+/// 24 iteraties naar ~8–10; de schaal kan alleen kleiner uitvallen (tekst wordt
+/// nooit groter), dus overloop blijft uitgesloten.
+const double kFitScaleBisectTolerance = 0.004;
+
 /// Line height for rich-text body paragraphs (preview + measurement).
 const double kRichTextBodyLineHeight = 1.2;
 
@@ -188,7 +196,7 @@ double bulletsFitScale({
     lo = minScale;
     hi = maxScale > 1.0 ? 1.0 : maxScale;
   }
-  for (var i = 0; i < 24; i++) {
+  for (var i = 0; i < 24 && hi - lo > kFitScaleBisectTolerance; i++) {
     final mid = (lo + hi) / 2;
     if (measure(mid) <= budget) {
       lo = mid;
@@ -633,7 +641,7 @@ double maxVerticalFitScale({
     lo = minScale;
     hi = maxScale > 1.0 ? 1.0 : maxScale;
   }
-  for (var i = 0; i < 24; i++) {
+  for (var i = 0; i < 24 && hi - lo > kFitScaleBisectTolerance; i++) {
     final mid = (lo + hi) / 2;
     if (measure(mid) <= target) {
       lo = mid;
@@ -693,7 +701,7 @@ double richTextFitScale({
     lo = minScale;
     hi = maxScale > 1.0 ? 1.0 : maxScale;
   }
-  for (var i = 0; i < 24; i++) {
+  for (var i = 0; i < 24 && hi - lo > kFitScaleBisectTolerance; i++) {
     final mid = (lo + hi) / 2;
     if (measure(mid) <= target) {
       lo = mid;

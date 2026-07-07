@@ -5,6 +5,7 @@ import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../state/deck_quality_provider.dart';
+import '../../state/editor_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/slide_clipboard_provider.dart';
 import '../../theme/app_theme.dart';
@@ -14,11 +15,6 @@ import 'slide_preview.dart';
 class SlideThumbnail extends ConsumerWidget {
   final Slide slide;
   final int index;
-  final bool isSelected;
-
-  /// De actieve slide binnen een meervoudige selectie (de slide die in de
-  /// editor wordt getoond). Krijgt een iets sterkere markering.
-  final bool isPrimary;
   final String? projectPath;
   final ThemeProfile themeProfile;
   final int slideCount;
@@ -46,7 +42,6 @@ class SlideThumbnail extends ConsumerWidget {
     super.key,
     required this.slide,
     required this.index,
-    required this.isSelected,
     required this.onTap,
     required this.onDuplicate,
     required this.onDelete,
@@ -54,7 +49,6 @@ class SlideThumbnail extends ConsumerWidget {
     required this.onCopyImage,
     required this.onSplit,
     this.hasUserNotes = false,
-    this.isPrimary = true,
     this.projectPath,
     this.themeProfile = const ThemeProfile(),
     this.slideCount = 1,
@@ -68,6 +62,14 @@ class SlideThumbnail extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final skipped = slide.skipped;
+    // Elke thumbnail bewaakt alléén zijn eigen selectiestatus. Zo rebuildt bij
+    // een selectiewissel alleen de oude en de nieuwe kaart, niet de hele lijst.
+    // (isSelected = onderdeel van de selectie; isPrimary = de actieve slide.)
+    final (isSelected, isPrimary) = ref.watch(
+      editorProvider.select(
+        (s) => (s.selection.contains(index), s.selectedIndex == index),
+      ),
+    );
     // Selects op booleans i.p.v. het hele kwaliteitsresultaat: anders rebuildt
     // élke thumbnail bij elke wijziging waar dan ook in het deck.
     final hasQualityErrors = ref.watch(
@@ -144,7 +146,13 @@ class SlideThumbnail extends ConsumerWidget {
                 hasQualityErrors: hasQualityErrors,
               ),
               // Footer: slide number, type label, action buttons
-              _footer(ref, l10n, skipped: skipped, canSplit: canSplit),
+              _footer(
+                ref,
+                l10n,
+                skipped: skipped,
+                canSplit: canSplit,
+                isSelected: isSelected,
+              ),
             ],
           ),
         ),
@@ -168,23 +176,27 @@ class SlideThumbnail extends ConsumerWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              // Overgeslagen slides worden gedimd weergegeven.
+              // Overgeslagen slides worden gedimd weergegeven. De preview is de
+              // dure verf (thumbnail-raster); een RepaintBoundary isoleert hem
+              // zodat een naburige kaart die verandert deze niet mee herverft.
               Opacity(
                 opacity: skipped ? 0.32 : 1,
-                child: SlidePreviewWidget(
-                  slide: slide,
-                  projectPath: projectPath,
-                  themeProfile: themeProfile,
-                  cockpitColorScheme: ref
-                      .watch(settingsProvider)
-                      .cockpitColorScheme,
-                  slideNumber: index + 1,
-                  slideCount: slideCount,
-                  numberStart: numberStart,
-                  fitScaleOverride: fitScaleOverride,
-                  tlp: tlp,
-                  organization: organization,
-                  showClassificationWatermark: showWatermark,
+                child: RepaintBoundary(
+                  child: SlidePreviewWidget(
+                    slide: slide,
+                    projectPath: projectPath,
+                    themeProfile: themeProfile,
+                    cockpitColorScheme: ref.watch(
+                      settingsProvider.select((s) => s.cockpitColorScheme),
+                    ),
+                    slideNumber: index + 1,
+                    slideCount: slideCount,
+                    numberStart: numberStart,
+                    fitScaleOverride: fitScaleOverride,
+                    tlp: tlp,
+                    organization: organization,
+                    showClassificationWatermark: showWatermark,
+                  ),
                 ),
               ),
               if (skipped)
@@ -277,6 +289,7 @@ class SlideThumbnail extends ConsumerWidget {
     AppLocalizations l10n, {
     required bool skipped,
     required bool canSplit,
+    required bool isSelected,
   }) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
