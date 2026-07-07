@@ -330,6 +330,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **Switching between slides in the rail is snappier.** Clicking a slide in the
+  side rail used to rebuild and repaint every visible thumbnail just to move the
+  selection outline, which could stutter while building a large or content-heavy
+  deck. Each thumbnail now tracks its own selection, so only the previously and
+  newly selected cards refresh; the mini-previews are also isolated so an
+  unrelated card never triggers a re-render of its neighbours.
 - **The RASCI / TVB template no longer pre-fills the role assignments.** The
   RASCI matrix, the role overview and the tasks/responsibilities/authority table
   used to ship with example assignments (CISO, management, SOC, IT, …) baked into

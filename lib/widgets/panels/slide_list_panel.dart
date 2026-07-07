@@ -528,7 +528,6 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
   Widget _buildFilteredList(
     Deck deck,
     String query,
-    EditorState editor,
     DeckNotifier notifier,
     EditorNotifier editorNotifier,
   ) {
@@ -573,8 +572,6 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
           key: _keyForSlide(slide),
           slide: slide,
           index: index,
-          isSelected: editor.selection.contains(index),
-          isPrimary: editor.selectedIndex == index,
           hasUserNotes: slideHasUserNotes(deck.userNotes, slide.id),
           projectPath: deck.projectPath,
           themeProfile: deck.themeProfile,
@@ -613,12 +610,11 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     Deck deck,
     bool searching,
     String query,
-    EditorState editor,
     DeckNotifier notifier,
     EditorNotifier editorNotifier,
   ) {
     if (searching) {
-      return _buildFilteredList(deck, query, editor, notifier, editorNotifier);
+      return _buildFilteredList(deck, query, notifier, editorNotifier);
     }
     return ReorderableListView.builder(
       // Rebuild when slides are bulk-added/removed — the list's internal
@@ -631,6 +627,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       buildDefaultDragHandles: false,
       itemCount: deck.slides.length,
       onReorderItem: (old, nw) {
+        final editor = ref.read(editorProvider);
         // Sleep je één slide uit een multiselectie, dan verhuist het hele blok
         // in één keer; de selectie volgt het blok naar de nieuwe plek.
         if (editor.hasMultiSelection && editor.selection.contains(old)) {
@@ -669,8 +666,6 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
           key: _keyForSlide(slide),
           slide: slide,
           index: i,
-          isSelected: editor.selection.contains(i),
-          isPrimary: editor.selectedIndex == i,
           hasUserNotes: slideHasUserNotes(deck.userNotes, slide.id),
           projectPath: deck.projectPath,
           themeProfile: deck.themeProfile,
@@ -711,7 +706,16 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     final deckState = ref.watch(deckProvider);
     final deck = deckState.deck!;
     _pruneSlideKeys(deck);
-    final editor = ref.watch(editorProvider);
+    // Alleen de bulk-actiebalk in de header hangt van de selectie af. Het
+    // wisselen van de actieve slide mag dit paneel niet laten rebuilden — anders
+    // herbouwt de hele thumbnaillijst bij elke klik. Elke thumbnail bewaakt zijn
+    // eigen selectiestatus (zie SlideThumbnail), dus alleen de oude en nieuwe
+    // kaart verversen bij een selectiewissel.
+    final multiSelectionCount = ref.watch(
+      editorProvider.select(
+        (s) => s.hasMultiSelection ? s.selection.length : 0,
+      ),
+    );
 
     ref.listen<int>(editorProvider.select((s) => s.selectedIndex), (
       previous,
@@ -795,22 +799,23 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                       ),
                     ],
                     // Bulk-actiebalk bij een meervoudige selectie.
-                    if (editor.hasMultiSelection) ...[
+                    if (multiSelectionCount > 0) ...[
                       const SizedBox(height: 6),
                       _BulkActionBar(
-                        count: editor.selection.length,
+                        count: multiSelectionCount,
                         onCopyToDeck: _copySelectionToOtherDeck,
                         onDelete: _deleteSelection,
                         onSkip: () => notifier.setSkippedForSlides(
-                          editor.selection,
+                          ref.read(editorProvider).selection,
                           true,
                         ),
                         onShow: () => notifier.setSkippedForSlides(
-                          editor.selection,
+                          ref.read(editorProvider).selection,
                           false,
                         ),
-                        onDeselect: () =>
-                            editorNotifier.select(editor.selectedIndex),
+                        onDeselect: () => editorNotifier.select(
+                          ref.read(editorProvider).selectedIndex,
+                        ),
                       ),
                     ],
                   ],
@@ -823,21 +828,13 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                   deck,
                   searching,
                   query,
-                  editor,
                   notifier,
                   editorNotifier,
                 ),
               ),
 
               // ── Add / Paste slide buttons ─────────────────────────────────
-              _addPasteButtons(
-                context,
-                deck,
-                deckState,
-                editor,
-                clipboard,
-                l10n,
-              ),
+              _addPasteButtons(context, deck, deckState, clipboard, l10n),
             ],
           ),
         ),
@@ -849,7 +846,6 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     BuildContext context,
     Deck deck,
     DeckState deckState,
-    EditorState editor,
     Slide? clipboard,
     AppLocalizations l10n,
   ) {
@@ -879,7 +875,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                   );
                   return;
                 }
-                final idx = editor.selectedIndex;
+                final idx = ref.read(editorProvider).selectedIndex;
                 notifier.addSlide(SlideType.image, afterIndex: idx);
                 final newIdx = idx + 1;
                 notifier.updateSlide(
@@ -906,7 +902,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
               onPressed: () async {
                 final type = await AddSlideDialog.show(context);
                 if (type != null) {
-                  final idx = editor.selectedIndex;
+                  final idx = ref.read(editorProvider).selectedIndex;
                   notifier.addSlide(type, afterIndex: idx);
                   editorNotifier.select(idx + 1);
                 }
@@ -959,7 +955,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
               width: double.infinity,
               child: OutlinedButton.icon(
                 onPressed: () {
-                  final idx = editor.selectedIndex;
+                  final idx = ref.read(editorProvider).selectedIndex;
                   notifier.addSlide(clipboard.type, afterIndex: idx);
                   // Replace the newly created blank slide with the copied one
                   final newIdx = idx + 1;
