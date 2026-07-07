@@ -85,6 +85,9 @@ const _stringsHr = {
 const _dutchSourceHr = {
   'Volledige presentatie': 'Cijela prezentacija',
   'Ontwerp': 'Dizajn',
+  'Gebruiker': 'Korisnik',
+  'Techniek': 'Tehnika',
+  'Licentie en naleving': 'Licenca i usklađenost',
   'Architectuur': 'Arhitektura',
   'Bouwinstructies': 'Upute za izradu',
   'Kwaliteitscontroles': 'Provjere kvalitete',

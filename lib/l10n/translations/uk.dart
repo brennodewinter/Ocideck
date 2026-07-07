@@ -86,6 +86,9 @@ const _stringsUk = {
 const _dutchSourceUk = {
   'Volledige presentatie': 'Уся презентація',
   'Ontwerp': 'Проєкт',
+  'Gebruiker': 'Користувач',
+  'Techniek': 'Технічне',
+  'Licentie en naleving': 'Ліцензія та відповідність',
   'Architectuur': 'Архітектура',
   'Bouwinstructies': 'Інструкції зі складання',
   'Kwaliteitscontroles': 'Перевірки якості',

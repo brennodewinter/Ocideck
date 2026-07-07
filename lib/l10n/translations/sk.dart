@@ -86,6 +86,9 @@ const _stringsSk = {
 const _dutchSourceSk = {
   'Volledige presentatie': 'Celá prezentácia',
   'Ontwerp': 'Návrh',
+  'Gebruiker': 'Používateľ',
+  'Techniek': 'Technika',
+  'Licentie en naleving': 'Licencia a súlad',
   'Architectuur': 'Architektúra',
   'Bouwinstructies': 'Pokyny na zostavenie',
   'Kwaliteitscontroles': 'Kontroly kvality',

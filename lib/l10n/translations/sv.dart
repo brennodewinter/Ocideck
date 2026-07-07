@@ -85,6 +85,9 @@ const _stringsSv = {
 const _dutchSourceSv = {
   'Volledige presentatie': 'Hela presentationen',
   'Ontwerp': 'Design',
+  'Gebruiker': 'Användare',
+  'Techniek': 'Teknik',
+  'Licentie en naleving': 'Licens och efterlevnad',
   'Architectuur': 'Arkitektur',
   'Bouwinstructies': 'Bygginstruktioner',
   'Kwaliteitscontroles': 'Kvalitetskontroller',

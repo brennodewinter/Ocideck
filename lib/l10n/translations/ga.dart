@@ -87,6 +87,9 @@ const _stringsGa = {
 const _dutchSourceGa = {
   'Volledige presentatie': 'An láithreoireacht iomlán',
   'Ontwerp': 'Dearadh',
+  'Gebruiker': 'Úsáideoir',
+  'Techniek': 'Teicniúil',
+  'Licentie en naleving': 'Ceadúnas agus comhlíonadh',
   'Architectuur': 'Ailtireacht',
   'Bouwinstructies': 'Treoracha tógála',
   'Kwaliteitscontroles': 'Seiceálacha cáilíochta',

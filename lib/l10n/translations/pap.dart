@@ -85,6 +85,9 @@ const _stringsPap = {
 const _dutchSourcePap = {
   'Volledige presentatie': 'Presentashon kompleto',
   'Ontwerp': 'Diseño',
+  'Gebruiker': 'Usuario',
+  'Techniek': 'Tékniko',
+  'Licentie en naleving': 'Lisensia i cumplimentu',
   'Architectuur': 'Arkitektura',
   'Bouwinstructies': 'Instrukshonnan di konstrukshon',
   'Kwaliteitscontroles': 'Chekeonan di kalidat',

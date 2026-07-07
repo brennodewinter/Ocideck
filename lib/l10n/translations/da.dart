@@ -85,6 +85,9 @@ const _stringsDa = {
 const _dutchSourceDa = {
   'Volledige presentatie': 'Hele præsentationen',
   'Ontwerp': 'Design',
+  'Gebruiker': 'Bruger',
+  'Techniek': 'Teknik',
+  'Licentie en naleving': 'Licens og overholdelse',
   'Architectuur': 'Arkitektur',
   'Bouwinstructies': 'Byggeinstruktioner',
   'Kwaliteitscontroles': 'Kvalitetskontroller',

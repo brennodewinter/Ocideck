@@ -85,6 +85,9 @@ const _stringsGsw = {
 const _dutchSourceGsw = {
   'Volledige presentatie': 'Ganzi Präsentation',
   'Ontwerp': 'Design',
+  'Gebruiker': 'Benutzer',
+  'Techniek': 'Technik',
+  'Licentie en naleving': 'Lizänz und Compliance',
   'Architectuur': 'Architektur',
   'Bouwinstructies': 'Bauaaleitig',
   'Kwaliteitscontroles': 'Qualitätsprüefige',

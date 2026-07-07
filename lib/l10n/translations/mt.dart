@@ -86,6 +86,9 @@ const _stringsMt = {
 const _dutchSourceMt = {
   'Volledige presentatie': 'Preżentazzjoni sħiħa',
   'Ontwerp': 'Disinn',
+  'Gebruiker': 'Utent',
+  'Techniek': 'Teknika',
+  'Licentie en naleving': 'Liċenzja u konformità',
   'Architectuur': 'Arkitettura',
   'Bouwinstructies': 'Struzzjonijiet tal-bini',
   'Kwaliteitscontroles': 'Kontrolli tal-kwalità',

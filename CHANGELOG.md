@@ -358,6 +358,13 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **The documentation list is now grouped into named sections.** Settings →
+  Documentation previously showed one long flat list with a single **Design**
+  heading at the bottom, so every other document floated without a category. The
+  documents are now organised under headings by audience — **User** (user guide,
+  shortcuts, file format), **Technical** (architecture, build, quality checks,
+  source map), **License and compliance** (license compliance, SBOM, the EUPL
+  license) and **Design** — with each heading translated in all languages.
 - **Switching between slides in the rail is snappier.** Clicking a slide in the
   side rail used to rebuild and repaint every visible thumbnail just to move the
   selection outline, which could stutter while building a large or content-heavy

@@ -85,6 +85,9 @@ const _stringsLt = {
 const _dutchSourceLt = {
   'Volledige presentatie': 'Visa prezentacija',
   'Ontwerp': 'Projektas',
+  'Gebruiker': 'Naudotojas',
+  'Techniek': 'Techninė dalis',
+  'Licentie en naleving': 'Licencija ir atitiktis',
   'Architectuur': 'Architektūra',
   'Bouwinstructies': 'Kūrimo instrukcijos',
   'Kwaliteitscontroles': 'Kokybės patikros',

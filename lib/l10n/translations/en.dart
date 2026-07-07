@@ -85,6 +85,9 @@ const _stringsEn = {
 const _dutchSourceEn = {
   'Volledige presentatie': 'Full presentation',
   'Ontwerp': 'Design',
+  'Gebruiker': 'User',
+  'Techniek': 'Technical',
+  'Licentie en naleving': 'License and compliance',
   'Architectuur': 'Architecture',
   'Bouwinstructies': 'Build instructions',
   'Kwaliteitscontroles': 'Quality checks',

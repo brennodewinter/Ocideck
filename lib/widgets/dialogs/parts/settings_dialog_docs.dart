@@ -12,6 +12,11 @@ extension _SettingsDocs on _SettingsDialogState {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Documents are grouped by audience so the list reads as named
+        // sections rather than one long flat run. Every group carries a
+        // heading (including this first one), so no tile floats without a
+        // category. Guarded by docs_registration_test.dart.
+        _docSectionHeader(l10n.d('Gebruiker')),
         _docTile(
           Icons.menu_book_outlined,
           l10n.d('Gebruikershandleiding'),
@@ -27,6 +32,7 @@ extension _SettingsDocs on _SettingsDialogState {
           l10n.d('Bestandsformaat'),
           assetBase: 'docs/FILE_FORMAT.md',
         ),
+        _docSectionHeader(l10n.d('Techniek')),
         _docTile(
           Icons.account_tree_outlined,
           l10n.d('Architectuur'),
@@ -47,6 +53,7 @@ extension _SettingsDocs on _SettingsDialogState {
           l10n.d('Broncodekaart'),
           assetBase: 'docs/SOURCE_MAP.md',
         ),
+        _docSectionHeader(l10n.d('Licentie en naleving')),
         _docTile(
           Icons.balance_outlined,
           l10n.d('Licentienaleving'),
@@ -65,7 +72,7 @@ extension _SettingsDocs on _SettingsDialogState {
         ),
         // Design documents (docs/design/**) are their own class: forward-looking
         // specs rather than product/reference docs, so they sit under a separate
-        // heading. Guarded by docs_registration_test.dart.
+        // heading.
         _docSectionHeader(l10n.d('Ontwerp')),
         _docTile(
           Icons.groups_outlined,
