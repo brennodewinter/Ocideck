@@ -202,20 +202,39 @@ class MarkdownValidator {
     List<String> lines,
     List<MarkdownValidationIssue> issues,
   ) {
+    // Balanscontrole over regelgrenzen heen: een meerregelig
+    // `<!-- … -->` (zoals geserialiseerde sprekersnotities) mag geen fout
+    // geven, terwijl een écht niet-afgesloten commentaar dat wél doet.
+    int? openCommentLine;
     for (var i = 0; i < lines.length; i++) {
       final line = lines[i];
-      final openCount = '<!--'.allMatches(line).length;
-      final closeCount = '-->'.allMatches(line).length;
-      if (openCount > closeCount) {
-        issues.add(
-          MarkdownValidationIssue(
-            line: i + 1,
-            severity: MarkdownValidationSeverity.error,
-            message: 'HTML-commentaar is niet afgesloten met `-->`.',
-          ),
-        );
+      var searchStart = 0;
+      while (searchStart <= line.length) {
+        if (openCommentLine == null) {
+          final openIndex = line.indexOf('<!--', searchStart);
+          if (openIndex == -1) break;
+          openCommentLine = i + 1;
+          searchStart = openIndex + 4;
+        } else {
+          final closeIndex = line.indexOf('-->', searchStart);
+          if (closeIndex == -1) break;
+          openCommentLine = null;
+          searchStart = closeIndex + 3;
+        }
       }
+    }
+    if (openCommentLine != null) {
+      issues.add(
+        MarkdownValidationIssue(
+          line: openCommentLine,
+          severity: MarkdownValidationSeverity.error,
+          message: 'HTML-commentaar is niet afgesloten met `-->`.',
+        ),
+      );
+    }
 
+    for (var i = 0; i < lines.length; i++) {
+      final line = lines[i];
       final classLike = _reClassLikeComment.firstMatch(line);
       if (classLike != null &&
           !line.contains('_class:') &&

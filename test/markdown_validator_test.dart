@@ -282,6 +282,51 @@ marp: true
     );
   });
 
+  test('accepts a multi-line HTML comment that closes on a later line', () {
+    // Sprekersnotities serialiseren als een meerregelig `<!-- … -->`; de
+    // openingsregel heeft op zichzelf geen `-->`, maar het commentaar sluit
+    // verderop wél. Dat mag geen valse "niet afgesloten"-fout geven.
+    const markdown = '''
+---
+marp: true
+---
+
+# Kop
+
+<!--
+Mooi verhaal
+-->
+''';
+    final result = validator.validate(markdown);
+    expect(
+      result.issues.any(
+        (i) => i.message.contains('HTML-commentaar is niet afgesloten'),
+      ),
+      isFalse,
+    );
+  });
+
+  test('detects a truly unclosed multi-line HTML comment', () {
+    const markdown = '''
+---
+marp: true
+---
+
+# Kop
+
+<!--
+Mooi verhaal dat nooit sluit
+''';
+    final result = validator.validate(markdown);
+    expect(result.isValid, isFalse);
+    expect(
+      result.issues.any(
+        (i) => i.message.contains('HTML-commentaar is niet afgesloten'),
+      ),
+      isTrue,
+    );
+  });
+
   test('detects invalid cockpit JSON', () {
     const markdown = '''
 ---
