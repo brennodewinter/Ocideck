@@ -84,6 +84,14 @@ const _stringsFi = {
 
 const _dutchSourceFi = {
   'Volledige presentatie': 'Koko esitys',
+  'Ontwerp': 'Suunnittelu',
+  'Architectuur': 'Arkkitehtuuri',
+  'Bouwinstructies': 'Käännösohjeet',
+  'Kwaliteitscontroles': 'Laatutarkistukset',
+  'Broncodekaart': 'Lähdekoodikartta',
+  'Licentienaleving': 'Lisenssien noudattaminen',
+  'Softwarestuklijst (SBOM)': 'Ohjelmiston osaluettelo (SBOM)',
+  'Samenwerking (ontwerp)': 'Yhteistyö (suunnitelma)',
   'Beschermen met een wachtwoord (AES-256)': 'Suojaa salasanalla (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Säilytä tämä salasana huolellisesti: jos menetät sen, tätä pakettia ei voi enää avata.',

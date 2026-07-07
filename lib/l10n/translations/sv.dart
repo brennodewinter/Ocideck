@@ -84,6 +84,14 @@ const _stringsSv = {
 
 const _dutchSourceSv = {
   'Volledige presentatie': 'Hela presentationen',
+  'Ontwerp': 'Design',
+  'Architectuur': 'Arkitektur',
+  'Bouwinstructies': 'Bygginstruktioner',
+  'Kwaliteitscontroles': 'Kvalitetskontroller',
+  'Broncodekaart': 'Källkodskarta',
+  'Licentienaleving': 'Licensefterlevnad',
+  'Softwarestuklijst (SBOM)': 'Programvaruförteckning (SBOM)',
+  'Samenwerking (ontwerp)': 'Samarbete (design)',
   'Beschermen met een wachtwoord (AES-256)':
       'Skydda med ett lösenord (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':

@@ -84,6 +84,14 @@ const _stringsId = {
 
 const _dutchSourceId = {
   'Volledige presentatie': 'Seluruh presentasi',
+  'Ontwerp': 'Desain',
+  'Architectuur': 'Arsitektur',
+  'Bouwinstructies': 'Instruksi build',
+  'Kwaliteitscontroles': 'Pemeriksaan kualitas',
+  'Broncodekaart': 'Peta kode sumber',
+  'Licentienaleving': 'Kepatuhan lisensi',
+  'Softwarestuklijst (SBOM)': 'Daftar Komponen Perangkat Lunak (SBOM)',
+  'Samenwerking (ontwerp)': 'Kolaborasi (desain)',
   'Beschermen met een wachtwoord (AES-256)':
       'Lindungi dengan kata sandi (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':

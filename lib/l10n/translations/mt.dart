@@ -85,6 +85,14 @@ const _stringsMt = {
 
 const _dutchSourceMt = {
   'Volledige presentatie': 'Preżentazzjoni sħiħa',
+  'Ontwerp': 'Disinn',
+  'Architectuur': 'Arkitettura',
+  'Bouwinstructies': 'Struzzjonijiet tal-bini',
+  'Kwaliteitscontroles': 'Kontrolli tal-kwalità',
+  'Broncodekaart': 'Mappa tal-kodiċi sors',
+  'Licentienaleving': 'Konformità tal-liċenzji',
+  'Softwarestuklijst (SBOM)': 'Lista tal-Materjali tas-Software (SBOM)',
+  'Samenwerking (ontwerp)': 'Kollaborazzjoni (disinn)',
   'Beschermen met een wachtwoord (AES-256)': 'Ipproteġi b\'password (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Żomm din il-password fis-sigurtà: jekk titlifha, dan il-pakkett ma jkunx jista\' jinfetaħ aktar.',

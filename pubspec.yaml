@@ -99,6 +99,13 @@ flutter:
     - docs/USER_GUIDE.md
     - docs/SHORTCUTS.md
     - docs/FILE_FORMAT.md
+    - docs/ARCHITECTURE.md
+    - docs/BUILD.md
+    - docs/CHECKS.md
+    - docs/SOURCE_MAP.md
+    - docs/LICENSE_COMPLIANCE.md
+    - docs/SBOM.md
+    - docs/design/COLLABORATION.md
   fonts:
     - family: EB Garamond
       fonts:

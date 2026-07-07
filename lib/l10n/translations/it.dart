@@ -84,6 +84,14 @@ const _stringsIt = {
 
 const _dutchSourceIt = {
   'Volledige presentatie': 'Presentazione completa',
+  'Ontwerp': 'Progettazione',
+  'Architectuur': 'Architettura',
+  'Bouwinstructies': 'Istruzioni di compilazione',
+  'Kwaliteitscontroles': 'Controlli di qualità',
+  'Broncodekaart': 'Mappa del codice sorgente',
+  'Licentienaleving': 'Conformità delle licenze',
+  'Softwarestuklijst (SBOM)': 'Distinta base del software (SBOM)',
+  'Samenwerking (ontwerp)': 'Collaborazione (progetto)',
   'Beschermen met een wachtwoord (AES-256)':
       'Proteggi con una password (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':

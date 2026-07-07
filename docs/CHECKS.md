@@ -61,9 +61,12 @@ CI additionally runs `flutter pub get --enforce-lockfile` (reproducible
 dependencies) and a **Markdown link check** (`lychee --offline`).
 
 Enforced inside `make test`: **localization in all 8 languages**, the
-**path/SSRF guards**, and the **HTML-export sanitisation** invariants (strict
+**path/SSRF guards**, the **HTML-export sanitisation** invariants (strict
 export CSP + injected-`</script>` neutralisation; see
-[below](#enforced-behaviours-worth-calling-out)). The
+[below](#enforced-behaviours-worth-calling-out)), and **documentation
+registration** — every `docs/**/*.md` (design docs are their own class) must be
+bundled in `pubspec.yaml` and surfaced in the in-app reader, so a new document
+cannot ship unreachable. The
 [targeted test groups](#targeted-test-groups) (`make test-contracts`,
 `test-preview`, `test-export`, `test-state`, `test-services`, `test-presenter`)
 are subsets of `make test` for focused work — not separate gates.

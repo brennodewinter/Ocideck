@@ -84,6 +84,14 @@ const _stringsHr = {
 
 const _dutchSourceHr = {
   'Volledige presentatie': 'Cijela prezentacija',
+  'Ontwerp': 'Dizajn',
+  'Architectuur': 'Arhitektura',
+  'Bouwinstructies': 'Upute za izradu',
+  'Kwaliteitscontroles': 'Provjere kvalitete',
+  'Broncodekaart': 'Karta izvornog kôda',
+  'Licentienaleving': 'Usklađenost licenci',
+  'Softwarestuklijst (SBOM)': 'Popis komponenti softvera (SBOM)',
+  'Samenwerking (ontwerp)': 'Suradnja (dizajn)',
   'Beschermen met een wachtwoord (AES-256)': 'Zaštiti lozinkom (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Dobro čuvajte ovu lozinku: ako je izgubite, ovaj paket više neće biti moguće otvoriti.',

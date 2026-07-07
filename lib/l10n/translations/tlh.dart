@@ -82,6 +82,14 @@ const _stringsTlh = {
 
 const _dutchSourceTlh = {
   'Volledige presentatie': '\'ang naQ',
+  'Ontwerp': 'nab',
+  'Architectuur': 'qach mIw',
+  'Bouwinstructies': 'chenmoHmeH ra\'meymey',
+  'Kwaliteitscontroles': 'QaQ noHmey',
+  'Broncodekaart': 'mung De\' chIm',
+  'Licentienaleving': 'chaw\' lobmeH',
+  'Softwarestuklijst (SBOM)': 'De\'wI\' Doch tetlh (SBOM)',
+  'Samenwerking (ontwerp)': 'tay\' vum (nab)',
   'Beschermen met een wachtwoord (AES-256)': 'mu\'wIj Qan (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'mu\'wIjvam yImej: DachIlchugh, vaj paqvam DapoSmoHlaHbe\'.',

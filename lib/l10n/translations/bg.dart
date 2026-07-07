@@ -85,6 +85,14 @@ const _stringsBg = {
 
 const _dutchSourceBg = {
   'Volledige presentatie': 'Цялата презентация',
+  'Ontwerp': 'Проект',
+  'Architectuur': 'Архитектура',
+  'Bouwinstructies': 'Инструкции за компилиране',
+  'Kwaliteitscontroles': 'Проверки на качеството',
+  'Broncodekaart': 'Карта на изходния код',
+  'Licentienaleving': 'Съответствие с лицензите',
+  'Softwarestuklijst (SBOM)': 'Списък на софтуерните компоненти (SBOM)',
+  'Samenwerking (ontwerp)': 'Сътрудничество (проект)',
   'Beschermen met een wachtwoord (AES-256)': 'Защита с парола (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Пазете добре тази парола: ако я загубите, този пакет вече не може да бъде отворен.',

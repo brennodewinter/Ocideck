@@ -84,6 +84,14 @@ const _stringsSl = {
 
 const _dutchSourceSl = {
   'Volledige presentatie': 'Celotna predstavitev',
+  'Ontwerp': 'Zasnova',
+  'Architectuur': 'Arhitektura',
+  'Bouwinstructies': 'Navodila za gradnjo',
+  'Kwaliteitscontroles': 'Preverjanja kakovosti',
+  'Broncodekaart': 'Zemljevid izvorne kode',
+  'Licentienaleving': 'Skladnost z licencami',
+  'Softwarestuklijst (SBOM)': 'Kosovnica programske opreme (SBOM)',
+  'Samenwerking (ontwerp)': 'Sodelovanje (zasnova)',
   'Beschermen met een wachtwoord (AES-256)': 'Zaščiti z geslom (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Dobro shranite to geslo: če ga izgubite, tega paketa ni več mogoče odpreti.',

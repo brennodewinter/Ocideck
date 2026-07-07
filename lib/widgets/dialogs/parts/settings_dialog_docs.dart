@@ -28,12 +28,68 @@ extension _SettingsDocs on _SettingsDialogState {
           assetBase: 'docs/FILE_FORMAT.md',
         ),
         _docTile(
+          Icons.account_tree_outlined,
+          l10n.d('Architectuur'),
+          assetBase: 'docs/ARCHITECTURE.md',
+        ),
+        _docTile(
+          Icons.build_outlined,
+          l10n.d('Bouwinstructies'),
+          assetBase: 'docs/BUILD.md',
+        ),
+        _docTile(
+          Icons.fact_check_outlined,
+          l10n.d('Kwaliteitscontroles'),
+          assetBase: 'docs/CHECKS.md',
+        ),
+        _docTile(
+          Icons.map_outlined,
+          l10n.d('Broncodekaart'),
+          assetBase: 'docs/SOURCE_MAP.md',
+        ),
+        _docTile(
+          Icons.balance_outlined,
+          l10n.d('Licentienaleving'),
+          assetBase: 'docs/LICENSE_COMPLIANCE.md',
+        ),
+        _docTile(
+          Icons.inventory_2_outlined,
+          l10n.d('Softwarestuklijst (SBOM)'),
+          assetBase: 'docs/SBOM.md',
+        ),
+        _docTile(
           Icons.gavel_outlined,
           l10n.d('Licentie (EUPL 1.2)'),
           assetBase: 'LICENSE.md',
           onlineUrl: PrivacyStatementContent.licenseUrl,
         ),
+        // Design documents (docs/design/**) are their own class: forward-looking
+        // specs rather than product/reference docs, so they sit under a separate
+        // heading. Guarded by docs_registration_test.dart.
+        _docSectionHeader(l10n.d('Ontwerp')),
+        _docTile(
+          Icons.groups_outlined,
+          l10n.d('Samenwerking (ontwerp)'),
+          assetBase: 'docs/design/COLLABORATION.md',
+        ),
       ],
+    );
+  }
+
+  /// Small caps-style heading that separates a class of documents (e.g. the
+  /// design specs) from the general documentation above it.
+  Widget _docSectionHeader(String label) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 6, bottom: 10, left: 2),
+      child: Text(
+        label.toUpperCase(),
+        style: TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w700,
+          letterSpacing: 0.6,
+          color: AppTheme.slate400,
+        ),
+      ),
     );
   }
 
