@@ -364,7 +364,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             case 'save_nextcloud':
               _saveToNextcloud(context, ref);
             case 'export_package':
-              _exportPackage();
+              _exportPackage(context, ref);
             case 'import_package':
               _importPackage();
             case 'import_url':
@@ -556,7 +556,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       PaletteCommand(
         label: l10n.t('exportPackage'),
         icon: Icons.inventory_2_outlined,
-        onInvoke: _exportPackage,
+        onInvoke: () => _exportPackage(context, ref),
       ),
       PaletteCommand(
         label: l10n.t('importPackage'),
@@ -914,41 +914,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             .selectThemeProfile(profileName);
         deckNotifier.updateThemeProfile(profile);
       }
-    }
-  }
-
-  Future<void> _exportPackage() async {
-    final deck = ref.read(deckProvider).deck!;
-    final l10n = context.l10n;
-    final fileService = ref.read(fileServiceProvider);
-    try {
-      // Web: geen doelmap — het pakket wordt in het geheugen gebouwd (met de
-      // mem:-assets uit de WebAssetStore) en als download aangeboden.
-      final String dest;
-      if (isWebPlatform) {
-        dest = await fileService.downloadPackage(deck);
-      } else {
-        final picked = await fileService.pickPackageDestination(deck);
-        if (picked == null) return;
-        await fileService.exportPackage(deck, picked);
-        dest = picked;
-      }
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('${l10n.d('Pakket geëxporteerd naar:')}\n$dest'),
-        ),
-      );
-    } catch (e) {
-      logError('AppShell: pakketexport mislukt', e);
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            '${l10n.d('Export mislukt:')} ${userFacingError(l10n, e)}',
-          ),
-        ),
-      );
     }
   }
 

@@ -14,10 +14,50 @@ void _reportOpenFailure(
       'Dit is geen Marp/OciDeck-presentatie.',
     ),
     OpenResult.unreadable => l10n.d('Kon dit bestand niet openen.'),
-    OpenResult.opened || OpenResult.blocked => null,
+    OpenResult.opened ||
+    OpenResult.blocked ||
+    OpenResult.passwordCancelled => null,
   };
   if (message != null) {
     messenger.showSnackBar(SnackBar(content: Text(message)));
+  }
+}
+
+/// Exporteer het huidige deck als zelfstandig `.ocideck`-pakket. Toont eerst de
+/// [PackageEncryptDialog] zodat de gebruiker het pakket optioneel met een
+/// wachtwoord (AES-256) kan beschermen; annuleren daar breekt de export af. Op
+/// web wordt het pakket in het geheugen gebouwd en als download aangeboden.
+Future<void> _exportPackage(BuildContext context, WidgetRef ref) async {
+  final deck = ref.read(deckProvider).deck!;
+  final choice = await PackageEncryptDialog.show(context);
+  if (choice == null || !context.mounted) return;
+  final password = choice.encrypt ? choice.password : null;
+  final l10n = context.l10n;
+  final fileService = ref.read(fileServiceProvider);
+  try {
+    final String dest;
+    if (isWebPlatform) {
+      dest = await fileService.downloadPackage(deck, password: password);
+    } else {
+      final picked = await fileService.pickPackageDestination(deck);
+      if (picked == null) return;
+      await fileService.exportPackage(deck, picked, password: password);
+      dest = picked;
+    }
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('${l10n.d('Pakket geëxporteerd naar:')}\n$dest')),
+    );
+  } catch (e) {
+    logError('AppShell: pakketexport mislukt', e);
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          '${l10n.d('Export mislukt:')} ${userFacingError(l10n, e)}',
+        ),
+      ),
+    );
   }
 }
 
@@ -137,7 +177,11 @@ Future<void> _importUrlWeb(
     _reportOpenFailure(messenger, l10n, result);
     return;
   }
-  if (result == OpenResult.opened || result == OpenResult.blocked) return;
+  if (result == OpenResult.opened ||
+      result == OpenResult.blocked ||
+      result == OpenResult.passwordCancelled) {
+    return;
+  }
   // Op web is de meest voorkomende oorzaak geen tikfout maar CORS: de
   // browser mag alleen lezen van servers die dat expliciet toestaan.
   messenger.showSnackBar(
