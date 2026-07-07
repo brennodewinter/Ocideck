@@ -85,6 +85,11 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Alleen afspelen (vergrendeld)': 'Tantum ludere (clausum)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Haec praesentatio ad ludendum tantum clausa est.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Fasciculum claudit ad praesentandum: editor, menua et exportatio non sunt disponibilia. Postea aperiri potest tantum clave ex plica Markdown remota.',
   'Volledige presentatie': 'Tota praesentatio',
   'Ontwerp': 'Designatio',
   'Gebruiker': 'Usor',

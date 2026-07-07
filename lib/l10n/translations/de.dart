@@ -83,6 +83,11 @@ const _stringsDe = {
 };
 
 const _dutchSourceDe = {
+  'Alleen afspelen (vergrendeld)': 'Nur abspielen (gesperrt)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Diese Präsentation ist zum nur abspielen gesperrt.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Sperrt das Deck zum Präsentieren: der Editor, Menüs und Export sind nicht verfügbar. Danach kann nur durch das Entfernen des Schlüssels aus der Markdown-Datei entsperrt werden.',
   'Volledige presentatie': 'Gesamte Präsentation',
   'Ontwerp': 'Design',
   'Gebruiker': 'Benutzer',

@@ -83,6 +83,11 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Alleen afspelen (vergrendeld)': 'Solo toká (blokeá)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'E presentashon aki ta blokeá pa solo toká.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Ta blokeá e deck pa presentá: e editor, menu i eksportá no ta disponibel. Pa desblokeá despues, kita e yabi for di e archivo markdown.',
   'Volledige presentatie': 'Presentashon kompleto',
   'Ontwerp': 'Diseño',
   'Gebruiker': 'Usuario',

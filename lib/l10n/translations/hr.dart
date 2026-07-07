@@ -83,6 +83,11 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Alleen afspelen (vergrendeld)': 'Samo reprodukcija (zaključano)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Ova prezentacija je zaključana na samo reprodukciju.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Zaključava špil za prezentiranje: uređivač, izbornici i izvoz nisu dostupni. Isključivanje se kasnije može obaviti samo uklanjanjem ključa iz markdown datoteke.',
   'Volledige presentatie': 'Cijela prezentacija',
   'Ontwerp': 'Dizajn',
   'Gebruiker': 'Korisnik',

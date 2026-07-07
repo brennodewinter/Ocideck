@@ -83,6 +83,11 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Alleen afspelen (vergrendeld)': 'Hanya Putar (Terkunci)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Presentasi ini terkunci pada mode putar saja.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Mengunci deck hingga presentasi: editor, menu, dan ekspor tidak tersedia. Pembukaan kunci hanya dapat dilakukan dengan menghapus kunci dari file markdown.',
   'Volledige presentatie': 'Seluruh presentasi',
   'Ontwerp': 'Desain',
   'Gebruiker': 'Pengguna',

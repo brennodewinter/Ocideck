@@ -81,6 +81,11 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Alleen afspelen (vergrendeld)': 'cho\'qa\' neH (ngaQmoHlu\'pu\')',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'cho\'qa\' neH ngaQmoHlu\'pu\' nobvam.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'nobHom ngaQmoHlu\' choHmeH: choHwI\', ra\'ghommey, ngeHtaHghach je lo\'laHbe\'. tugh markdown teywI\'vo\' ngaQHa\'moHmeH, De\' QIn tIteq.',
   'Volledige presentatie': '\'ang naQ',
   'Ontwerp': 'nab',
   'Gebruiker': 'lo\'wI\'',

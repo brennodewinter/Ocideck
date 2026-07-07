@@ -84,6 +84,11 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Alleen afspelen (vergrendeld)': 'Тільки презентування (заблоковано)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Ця презентація заблокована тільки для презентування.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Блокує колоду для презентування: редактор, меню та експорт недоступні. Розблокування можливо лише видаленням ключа з файлу markdown.',
   'Volledige presentatie': 'Уся презентація',
   'Ontwerp': 'Проєкт',
   'Gebruiker': 'Користувач',

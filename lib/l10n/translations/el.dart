@@ -83,6 +83,11 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Alleen afspelen (vergrendeld)': 'Μόνο προβολή (κλειδωμένο)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Αυτή η παρουσίαση είναι κλειδωμένη σε μόνο προβολή.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Κλειδώνει το deck μέχρι την παρουσίαση: ο επεξεργαστής, τα μενού και η εξαγωγή δεν είναι διαθέσιμα. Η απενεργοποίηση μπορεί αργότερα να γίνει μόνο αφαιρώντας το κλειδί από το αρχείο markdown.',
   'Volledige presentatie': 'Ολόκληρη η παρουσίαση',
   'Ontwerp': 'Σχεδίαση',
   'Gebruiker': 'Χρήστης',

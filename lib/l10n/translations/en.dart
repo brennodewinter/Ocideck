@@ -83,6 +83,11 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'Alleen afspelen (vergrendeld)': 'Play-only (locked)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'This presentation is locked to play-only mode.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Locks the deck to presenting: the editor, menus and export are unavailable. Afterwards it can only be unlocked by removing the key from the Markdown file.',
   'Volledige presentatie': 'Full presentation',
   'Ontwerp': 'Design',
   'Gebruiker': 'User',

@@ -83,6 +83,11 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Alleen afspelen (vergrendeld)': 'Vain toisto (lukittu)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Tämä esitys on lukittu vain toistoon.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Lukitsee diasarjan esittämiseen: editori, valikot ja vienti eivät ole käytettävissä. Voidaan avata vain poistamalla avain markdown-tiedostosta.',
   'Volledige presentatie': 'Koko esitys',
   'Ontwerp': 'Suunnittelu',
   'Gebruiker': 'Käyttäjä',

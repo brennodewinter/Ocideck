@@ -84,6 +84,11 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Alleen afspelen (vergrendeld)': 'Iba na prezentovanie (zamknuté)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Táto prezentácia je zamknutá iba na prezentovanie.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Zamkne balík iba na prezentovanie: editor, ponuky a export nie sú dostupné. Odomknutie je možné len odstránením kľúča zo súboru markdown.',
   'Volledige presentatie': 'Celá prezentácia',
   'Ontwerp': 'Návrh',
   'Gebruiker': 'Používateľ',
