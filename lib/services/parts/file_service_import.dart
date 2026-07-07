@@ -6,16 +6,43 @@
 part of '../file_service.dart';
 
 extension FileServiceImport on FileService {
+  /// Probeer een versleuteld pakket met [password] te ontgrendelen zonder het
+  /// helemaal uit te pakken: de central directory lezen valideert de MAC nog
+  /// niet, dus we decoderen de inhoud van één lid. Een onjuist wachtwoord laat
+  /// de WinZip-AES-MAC falen (gooit) of levert onleesbare bytes — beide → false.
+  ///
+  /// Werkt op een kopie van [bytes]: de AES-ontsleuteling muteert de
+  /// invoerbuffer, dus zonder kopie zou een latere echte decode van dezelfde
+  /// bytes op beschadigde inhoud stuiten.
+  bool canDecodePackage(List<int> bytes, String password) {
+    try {
+      final copy = Uint8List.fromList(bytes);
+      final archive = ZipDecoder().decodeBytes(copy, password: password);
+      final file = archive.files.firstWhere(
+        (f) => f.isFile,
+        orElse: () => throw StateError('leeg archief'),
+      );
+      // De content-getter ontsleutelt en controleert de MAC van dit lid.
+      final _ = file.content;
+      return true;
+    } catch (e) {
+      logWarning('FileService.canDecodePackage: ontgrendelen mislukt', e);
+      return false;
+    }
+  }
+
   /// Pak een pakket uit in een submap onder [destParentDir]. Geeft het pad
   /// naar het uitgepakte markdown-bestand terug (om in een tab te openen).
   Future<String?> importPackageBytes(
     List<int> zipBytes,
     String destParentDir, {
     int maxBytes = FileService.maxPackageBytes,
+    PackagePasswordResolver? onPassword,
   }) async => (await importPackageBytesDetailed(
     zipBytes,
     destParentDir,
     maxBytes: maxBytes,
+    onPassword: onPassword,
   )).mdPath;
 
   /// Als [importPackageBytes], maar met de weiger-reden zodat de UI kan
@@ -32,9 +59,31 @@ extension FileServiceImport on FileService {
     List<int> zipBytes,
     String destParentDir, {
     int maxBytes = FileService.maxPackageBytes,
+    PackagePasswordResolver? onPassword,
   }) async {
     if (zipBytes.length > maxBytes) {
       return const ImportOutcome.failed(ImportFailure.tooLarge);
+    }
+
+    // Versleuteld pakket: vraag (met retry) het wachtwoord vóór elke decode.
+    // Zonder resolver kan er niet gevraagd worden; de gebruiker kan afbreken.
+    String? password;
+    if (FileService.isEncryptedPackage(zipBytes)) {
+      if (onPassword == null) {
+        return const ImportOutcome.failed(ImportFailure.needsPassword);
+      }
+      var retry = false;
+      while (true) {
+        final pw = await onPassword(retry: retry);
+        if (pw == null) {
+          return const ImportOutcome.failed(ImportFailure.encryptedCancelled);
+        }
+        if (canDecodePackage(zipBytes, pw)) {
+          password = pw;
+          break;
+        }
+        retry = true;
+      }
     }
 
     // Alleen voor de weiger-reden: decodeBytes leest de zip-inhoudsopgave
@@ -42,7 +91,7 @@ extension FileServiceImport on FileService {
     // eigen melding krijgen vóór de echte begrensde decode hieronder.
     final Archive archive;
     try {
-      archive = ZipDecoder().decodeBytes(zipBytes);
+      archive = ZipDecoder().decodeBytes(zipBytes, password: password);
     } catch (e, s) {
       logError('FileService.importPackageBytes: ZIP decode failed', e, s);
       return const ImportOutcome.failed(ImportFailure.corrupt);
@@ -57,7 +106,11 @@ extension FileServiceImport on FileService {
 
     // De echte verdediging: begrensde inflater die een zip-bom
     // mid-decompressie stopt (gedeeld met de in-memory web-open).
-    final entries = decodePackageEntries(zipBytes, maxBytes: maxBytes);
+    final entries = decodePackageEntries(
+      zipBytes,
+      maxBytes: maxBytes,
+      password: password,
+    );
     if (entries == null) {
       return const ImportOutcome.failed(ImportFailure.limitExceeded);
     }
@@ -125,14 +178,22 @@ extension FileServiceImport on FileService {
   /// Download een presentatie vanaf [url]. Een zip-pakket wordt uitgepakt;
   /// platte markdown wordt als losse `.md` opgeslagen. Geeft het pad naar het
   /// markdown-bestand terug.
-  Future<String?> importFromUrl(String url, String destParentDir) async =>
-      (await importFromUrlDetailed(url, destParentDir)).mdPath;
+  Future<String?> importFromUrl(
+    String url,
+    String destParentDir, {
+    PackagePasswordResolver? onPassword,
+  }) async => (await importFromUrlDetailed(
+    url,
+    destParentDir,
+    onPassword: onPassword,
+  )).mdPath;
 
   /// Als [importFromUrl], maar met de weiger-reden voor een gerichte melding.
   Future<ImportOutcome> importFromUrlDetailed(
     String url,
-    String destParentDir,
-  ) async {
+    String destParentDir, {
+    PackagePasswordResolver? onPassword,
+  }) async {
     final uri = Uri.tryParse(url.trim());
     if (uri == null || !uri.hasScheme) {
       return const ImportOutcome.failed(ImportFailure.network);
@@ -193,7 +254,11 @@ extension FileServiceImport on FileService {
 
     // Zip-magie → pakket; anders als markdown behandelen.
     if (FileService.looksLikeZipBytes(bytes)) {
-      return importPackageBytesDetailed(bytes, destParentDir);
+      return importPackageBytesDetailed(
+        bytes,
+        destParentDir,
+        onPassword: onPassword,
+      );
     }
 
     // Platte markdown.

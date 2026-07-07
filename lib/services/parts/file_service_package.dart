@@ -31,28 +31,40 @@ extension FileServicePackage on FileService {
   /// Schrijf een zelfstandig pakket (zip): de markdown + álle gebruikte assets
   /// (afbeeldingen, media, logo) en de thema-CSS, met onderling relatieve
   /// paden. Werkt ongeacht of het deck al is opgeslagen.
-  Future<void> exportPackage(Deck deck, String destPath) async {
-    final bytes = await buildPackageBytes(deck);
+  ///
+  /// Is [password] niet-leeg, dan wordt het pakket met AES-256 versleuteld (zie
+  /// [buildPackageBytes]).
+  Future<void> exportPackage(
+    Deck deck,
+    String destPath, {
+    String? password,
+  }) async {
+    final bytes = await buildPackageBytes(deck, password: password);
     await writeBytesAtomic(File(destPath), bytes);
   }
 
   /// Bouw de bytes van een zelfstandig `.ocideck`-pakket (zie [exportPackage]),
   /// zonder ze weg te schrijven. Gebruikt om hetzelfde pakket te uploaden naar
   /// een WebDAV-bron of (op web) als download aan te bieden.
-  Future<Uint8List> buildPackageBytes(Deck deck) async {
+  ///
+  /// Met een niet-leeg [password] versleutelt de `ZipEncoder` elk lid met
+  /// WinZip-AES-256. Een leeg/`null` wachtwoord levert een gewoon, onversleuteld
+  /// pakket op (bestaand gedrag).
+  Future<Uint8List> buildPackageBytes(Deck deck, {String? password}) async {
     final archive = await _buildPackageArchive(deck);
+    final pw = (password != null && password.isNotEmpty) ? password : null;
     // Zip-compressie is CPU-zwaar (media-assets kunnen honderden MB zijn);
     // in een eigen isolate blijft de UI responsief tijdens het pakken. Op web
     // bestaan isolates niet en pakt de main thread — merkbaar, maar werkend.
-    if (kIsWeb) return ZipEncoder().encodeBytes(archive);
-    return Isolate.run(() => ZipEncoder().encodeBytes(archive));
+    if (kIsWeb) return ZipEncoder(password: pw).encodeBytes(archive);
+    return Isolate.run(() => ZipEncoder(password: pw).encodeBytes(archive));
   }
 
   /// Web: bouw het pakket in het geheugen en bied het de browser als download
   /// aan. Retourneert de gebruikte bestandsnaam. In tegenstelling tot de kale
   /// `.md`-download reizen de afbeeldingen (mem:-assets) en sidecars hier mee.
-  Future<String> downloadPackage(Deck deck) async {
-    final bytes = await buildPackageBytes(deck);
+  Future<String> downloadPackage(Deck deck, {String? password}) async {
+    final bytes = await buildPackageBytes(deck, password: password);
     final name = '${_safeName(deck.title)}.${FileService.packageExtension}';
     await FilePicker.saveFile(fileName: name, bytes: bytes);
     return name;

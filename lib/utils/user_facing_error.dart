@@ -51,6 +51,11 @@ String importFailureMessage(AppLocalizations l10n, ImportFailure failure) {
     ImportFailure.network => l10n.d(
       'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.',
     ),
+    ImportFailure.needsPassword => l10n.d(
+      'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.',
+    ),
+    // Afbreken is geen fout; de aanroepers vangen dit al af vóór deze melding.
+    ImportFailure.encryptedCancelled => '',
   };
 }
 
