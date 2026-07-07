@@ -411,6 +411,18 @@ Export to:
 - **Portable package** (`.ocideck`) — a single zip with the Markdown and all
   assets, to hand the whole deck to someone else.
 
+**Password-protecting a package (optional).** When you export a package, a dialog
+lets you switch on **AES-256 encryption** and set a password. Encryption is off by
+default. A strength meter gives honest, entropy-based feedback — a long passphrase
+beats a short password with symbols, and nothing is forced — and a **Generate
+strong password** button creates a random 32- or 256-character password you can
+**copy** to pass along separately. Keep the password safe: if you lose it, the
+package can no longer be opened. Opening an encrypted package (from a file, drag &
+drop, URL, or Nextcloud) prompts for the password, with a clear message on a wrong
+one. Note that the file *names* inside the package stay visible, and the WinZip-AES
+key derivation is weak, so a strong password is what actually protects it — see
+[FILE_FORMAT.md](FILE_FORMAT.md) §7.1.
+
 **Classification enforcement (optional).** Under *Settings → General →
 Accessibility → Classification enforcement* an organisation can configure up to
 four independent rules. All are off by default; together they form a single

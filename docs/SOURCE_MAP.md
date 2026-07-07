@@ -92,12 +92,15 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `markdown_quill_codec.dart` — Round-trip conversion between markdown and Quill documents.
 - `net_guard.dart` — SSRF guards (host/address checks, `safeResolve`, media resolve gate) against DNS rebind.
 - `page_scoped_notes.dart` — Per-page speaker/user-notes parsing and storage.
+- `password_generator.dart` — Cryptographically strong random passwords (`Random.secure`) for encrypted packages.
+- `password_strength.dart` — Entropy-based password-strength estimate (warn-only) for the encrypt dialog.
 - `project_path.dart` — Path resolution with project containment and symlink checking.
 - `sanitize_svg.dart` — Strips dangerous elements/attributes from Mermaid SVG output.
 - `table_clipboard.dart` — Parses tabular clipboard content (TSV, CSV, markdown tables).
 - `text_search.dart` — Case-insensitive text search/replace with match tracking.
 - `title_contrast.dart` — Evaluates title contrast and recommends WCAG fixes.
 - `url_launcher_util.dart` — Opens external links with scheme and SSRF validation.
+- `zip_encryption.dart` — Detects whether a `.ocideck` zip is password-encrypted (header inspection, no password needed).
 
 ## `lib/platform/` — platform abstraction (conditional imports)
 
@@ -164,6 +167,8 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `import_slides_dialog.dart` — Scans directories for presentations to import slides from.
 - `new_deck_dialog.dart` — Creates a new presentation with a title.
 - `open_presentation_dialog.dart` — Full-text searchable presentation picker with directory scanning.
+- `package_encrypt_dialog.dart` — Optional password protection when exporting a package: strength meter, generator, copy.
+- `package_password_dialog.dart` — Prompts for the password when opening an encrypted package (with wrong-password retry).
 - `presentation_info_dialog.dart` — Edits title/author/organization/description metadata.
 - `scan_library_dialog.dart` — Scans well-known locations for presentations.
 - `settings_dialog.dart` — Sidebar settings (theme colours, fonts, cockpit,
