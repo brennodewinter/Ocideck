@@ -82,6 +82,14 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Ontwerp': 'Kavand',
+  'Architectuur': 'Arhitektuur',
+  'Bouwinstructies': 'Ehitusjuhised',
+  'Kwaliteitscontroles': 'Kvaliteedikontrollid',
+  'Broncodekaart': 'Lähtekoodi kaart',
+  'Licentienaleving': 'Litsentsinõuetele vastavus',
+  'Softwarestuklijst (SBOM)': 'Tarkvara komponentide loend (SBOM)',
+  'Samenwerking (ontwerp)': 'Koostöö (kavand)',
   'Beschermen met een wachtwoord (AES-256)': 'Kaitse parooliga (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Hoia see parool hoolikalt alles: kui kaotad selle, ei saa seda paketti enam avada.',

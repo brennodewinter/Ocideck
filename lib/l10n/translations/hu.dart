@@ -83,6 +83,14 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Ontwerp': 'Tervezés',
+  'Architectuur': 'Architektúra',
+  'Bouwinstructies': 'Fordítási útmutató',
+  'Kwaliteitscontroles': 'Minőségi ellenőrzések',
+  'Broncodekaart': 'Forráskód-térkép',
+  'Licentienaleving': 'Licencmegfelelőség',
+  'Softwarestuklijst (SBOM)': 'Szoftver-összetevők jegyzéke (SBOM)',
+  'Samenwerking (ontwerp)': 'Együttműködés (terv)',
   'Beschermen met een wachtwoord (AES-256)': 'Védelem jelszóval (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Őrizze meg jól ezt a jelszót: ha elveszíti, ez a csomag többé nem nyitható meg.',

@@ -24,6 +24,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   line length). A subtle **A−/A+** control in the app bar enlarges or shrinks the
   document text; the choice is remembered and is separate from the app-wide
   interface text size.
+- **All project documentation is now readable in-app** — Settings →
+  Documentation previously listed only the user guide, shortcuts and file
+  format. It now also opens the architecture overview, build instructions,
+  quality checks, source-code map, license compliance and the SBOM, plus a
+  separate **Design** section for forward-looking specs (starting with the
+  real-time collaboration design). Every title is translated in all languages,
+  and a new guard test fails the build if a document lands in `docs/` without
+  being bundled and shown in the reader, so nothing can silently go missing
+  again.
 - **`Ctrl/Cmd + W` closes the presentation** — pressing the standard
   window-close shortcut during a presentation now exits it, just like closing a
   window elsewhere. It works from any mode and from both the presenter and the

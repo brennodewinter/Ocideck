@@ -85,6 +85,14 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Ontwerp': 'Dearadh',
+  'Architectuur': 'Ailtireacht',
+  'Bouwinstructies': 'Treoracha tógála',
+  'Kwaliteitscontroles': 'Seiceálacha cáilíochta',
+  'Broncodekaart': 'Léarscáil an chóid fhoinsigh',
+  'Licentienaleving': 'Comhlíonadh ceadúnas',
+  'Softwarestuklijst (SBOM)': 'Bille Ábhar Bogearraí (SBOM)',
+  'Samenwerking (ontwerp)': 'Comhoibriú (dearadh)',
   'Beschermen met een wachtwoord (AES-256)': 'Cosain le pasfhocal (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Coinnigh an pasfhocal seo slán: má chailleann tú é, ní bheifear in ann an pacáiste seo a oscailt a thuilleadh.',

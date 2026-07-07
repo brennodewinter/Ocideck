@@ -83,6 +83,14 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Ontwerp': 'Ûntwerp',
+  'Architectuur': 'Arsjitektuer',
+  'Bouwinstructies': 'Bou-ynstruksjes',
+  'Kwaliteitscontroles': 'Kwaliteitskontrôles',
+  'Broncodekaart': 'Boarnekoadekaart',
+  'Licentienaleving': 'Lisinsjeneilibjen',
+  'Softwarestuklijst (SBOM)': 'Softwarestikliist (SBOM)',
+  'Samenwerking (ontwerp)': 'Gearwurking (ûntwerp)',
   'Beschermen met een wachtwoord (AES-256)':
       'Beskermje mei in wachtwurd (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':

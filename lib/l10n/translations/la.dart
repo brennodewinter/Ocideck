@@ -85,6 +85,14 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Ontwerp': 'Designatio',
+  'Architectuur': 'Architectura',
+  'Bouwinstructies': 'Praecepta compilationis',
+  'Kwaliteitscontroles': 'Probationes qualitatis',
+  'Broncodekaart': 'Charta codicis fontis',
+  'Licentienaleving': 'Observantia licentiarum',
+  'Softwarestuklijst (SBOM)': 'Index materiarum programmatis (SBOM)',
+  'Samenwerking (ontwerp)': 'Cooperatio (designatio)',
   'Beschermen met een wachtwoord (AES-256)': 'Tessera muni (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Hanc tesseram bene serva: si eam amiseris, hoc fasciculus aperiri non poterit.',
