@@ -85,6 +85,9 @@ const _stringsEl = {
 const _dutchSourceEl = {
   'Volledige presentatie': 'Ολόκληρη η παρουσίαση',
   'Ontwerp': 'Σχεδίαση',
+  'Gebruiker': 'Χρήστης',
+  'Techniek': 'Τεχνικά',
+  'Licentie en naleving': 'Άδεια και συμμόρφωση',
   'Architectuur': 'Αρχιτεκτονική',
   'Bouwinstructies': 'Οδηγίες δημιουργίας',
   'Kwaliteitscontroles': 'Έλεγχοι ποιότητας',

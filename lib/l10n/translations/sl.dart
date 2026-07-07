@@ -85,6 +85,9 @@ const _stringsSl = {
 const _dutchSourceSl = {
   'Volledige presentatie': 'Celotna predstavitev',
   'Ontwerp': 'Zasnova',
+  'Gebruiker': 'Uporabnik',
+  'Techniek': 'Tehnika',
+  'Licentie en naleving': 'Licenca in skladnost',
   'Architectuur': 'Arhitektura',
   'Bouwinstructies': 'Navodila za gradnjo',
   'Kwaliteitscontroles': 'Preverjanja kakovosti',

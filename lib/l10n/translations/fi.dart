@@ -85,6 +85,9 @@ const _stringsFi = {
 const _dutchSourceFi = {
   'Volledige presentatie': 'Koko esitys',
   'Ontwerp': 'Suunnittelu',
+  'Gebruiker': 'Käyttäjä',
+  'Techniek': 'Tekniikka',
+  'Licentie en naleving': 'Lisenssi ja vaatimustenmukaisuus',
   'Architectuur': 'Arkkitehtuuri',
   'Bouwinstructies': 'Käännösohjeet',
   'Kwaliteitscontroles': 'Laatutarkistukset',

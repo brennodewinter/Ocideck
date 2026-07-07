@@ -87,6 +87,9 @@ const _stringsLa = {
 const _dutchSourceLa = {
   'Volledige presentatie': 'Tota praesentatio',
   'Ontwerp': 'Designatio',
+  'Gebruiker': 'Usor',
+  'Techniek': 'Technica',
+  'Licentie en naleving': 'Licentia et observantia',
   'Architectuur': 'Architectura',
   'Bouwinstructies': 'Praecepta compilationis',
   'Kwaliteitscontroles': 'Probationes qualitatis',

@@ -85,6 +85,9 @@ const _stringsHu = {
 const _dutchSourceHu = {
   'Volledige presentatie': 'Teljes prezentáció',
   'Ontwerp': 'Tervezés',
+  'Gebruiker': 'Felhasználó',
+  'Techniek': 'Technikai',
+  'Licentie en naleving': 'Licenc és megfelelőség',
   'Architectuur': 'Architektúra',
   'Bouwinstructies': 'Fordítási útmutató',
   'Kwaliteitscontroles': 'Minőségi ellenőrzések',

@@ -85,6 +85,9 @@ const _stringsFy = {
 const _dutchSourceFy = {
   'Volledige presentatie': 'Folsleine presintaasje',
   'Ontwerp': 'Ûntwerp',
+  'Gebruiker': 'Brûker',
+  'Techniek': 'Technyk',
+  'Licentie en naleving': 'Lisinsje en neilibjen',
   'Architectuur': 'Arsjitektuer',
   'Bouwinstructies': 'Bou-ynstruksjes',
   'Kwaliteitscontroles': 'Kwaliteitskontrôles',

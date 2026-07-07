@@ -86,6 +86,9 @@ const _stringsRo = {
 const _dutchSourceRo = {
   'Volledige presentatie': 'Întreaga prezentare',
   'Ontwerp': 'Proiectare',
+  'Gebruiker': 'Utilizator',
+  'Techniek': 'Tehnic',
+  'Licentie en naleving': 'Licență și conformitate',
   'Architectuur': 'Arhitectură',
   'Bouwinstructies': 'Instrucțiuni de compilare',
   'Kwaliteitscontroles': 'Verificări de calitate',

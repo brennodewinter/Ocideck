@@ -86,6 +86,9 @@ const _stringsCs = {
 const _dutchSourceCs = {
   'Volledige presentatie': 'Celá prezentace',
   'Ontwerp': 'Návrh',
+  'Gebruiker': 'Uživatel',
+  'Techniek': 'Technika',
+  'Licentie en naleving': 'Licence a shoda',
   'Architectuur': 'Architektura',
   'Bouwinstructies': 'Pokyny k sestavení',
   'Kwaliteitscontroles': 'Kontroly kvality',

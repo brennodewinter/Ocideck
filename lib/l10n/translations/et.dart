@@ -84,6 +84,9 @@ const _stringsEt = {
 const _dutchSourceEt = {
   'Volledige presentatie': 'Kogu esitlus',
   'Ontwerp': 'Kavand',
+  'Gebruiker': 'Kasutaja',
+  'Techniek': 'Tehniline',
+  'Licentie en naleving': 'Litsents ja vastavus',
   'Architectuur': 'Arhitektuur',
   'Bouwinstructies': 'Ehitusjuhised',
   'Kwaliteitscontroles': 'Kvaliteedikontrollid',

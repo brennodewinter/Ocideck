@@ -358,6 +358,13 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **The documentation list is now grouped into named sections.** Settings →
+  Documentation previously showed one long flat list with a single **Design**
+  heading at the bottom, so every other document floated without a category. The
+  documents are now organised under headings by audience — **User** (user guide,
+  shortcuts, file format), **Technical** (architecture, build, quality checks,
+  source map), **License and compliance** (license compliance, SBOM, the EUPL
+  license) and **Design** — with each heading translated in all languages.
 - **Switching between slides in the rail is snappier.** Clicking a slide in the
   side rail used to rebuild and repaint every visible thumbnail just to move the
   selection outline, which could stutter while building a large or content-heavy
@@ -452,6 +459,11 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   behavioural change; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ### Fixed
+- **The documentation reader no longer throws while you drag its scrollbar.** On
+  desktop the reader's scrollbar was not bound to its own scroll view, so
+  dragging the thumb raised *"The Scrollbar's ScrollController has no
+  ScrollPosition attached"* (repeatedly). The reader now gives the scrollbar and
+  its scroll view a shared `ScrollController`, so dragging works cleanly.
 - **"Continue numbering" is now available on a split bullets-with-image slide.**
   A "bullets + image" slide is a `bulletsImage` slide, edited in the bullets-
   with-image editor — which was missing the *Continue numbering from previous

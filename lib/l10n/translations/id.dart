@@ -85,6 +85,9 @@ const _stringsId = {
 const _dutchSourceId = {
   'Volledige presentatie': 'Seluruh presentasi',
   'Ontwerp': 'Desain',
+  'Gebruiker': 'Pengguna',
+  'Techniek': 'Teknis',
+  'Licentie en naleving': 'Lisensi dan kepatuhan',
   'Architectuur': 'Arsitektur',
   'Bouwinstructies': 'Instruksi build',
   'Kwaliteitscontroles': 'Pemeriksaan kualitas',
