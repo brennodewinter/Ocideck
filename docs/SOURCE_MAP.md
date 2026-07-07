@@ -143,11 +143,12 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 
 ### `lib/widgets/shell/` (each `part of app_shell.dart`)
 
-- `shell_actions.dart` — File-IO helpers for deck import/export and Nextcloud integration.
+- `shell_actions.dart` — File-IO helpers for deck import/export and Nextcloud integration, plus shared `presentDeck`/`requestCloseTab` helpers.
 - `shell_overlays.dart` — `_DropOverlay` and `_ResizableDivider` chrome.
 - `status_bar.dart` — `_DeckStatusBar`: save state, file info, TLP classification.
-- `tab_bar.dart` — `_AppTabBar`/`_TabChip` multi-deck tab management.
+- `tab_bar.dart` — `_AppTabBar`/`_TabChip` multi-deck tab management; `_TabContent` picks welcome / play-only / editor per deck.
 - `welcome_screen.dart` — `_WelcomeScreen`: recent files and new/open/import actions.
+- `play_only_screen.dart` — `_PlayOnlyScreen`: locked view for `Deck.playOnly` decks (first slide + Play + Close).
 
 ### `lib/widgets/panels/`
 
