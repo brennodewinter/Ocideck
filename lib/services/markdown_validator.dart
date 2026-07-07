@@ -10,10 +10,14 @@ class MarkdownValidator {
   // Hoisted regexes: de validator draait per validatiepass over elke regel van
   // elk slide-blok; inline `RegExp(...)` hercompileerde dezelfde patronen
   // honderden keren per pass.
-  static final _reSlideDivider = RegExp(r'\n---\n');
-  static final _reClassLikeComment = RegExp(r'<!--\s*([^_][^>]*?)-->');
-  static final _reTlpComment = RegExp(r'^tlp:\s*\S');
-  static final _reAdvanceComment = RegExp(r'^advance:\s*[\d.]+');
+  static final _reHtmlCommentMultiline = RegExp(r'<!--([\s\S]*?)-->');
+  static final _reInlineComment = RegExp(r'<!--.*?-->');
+  // A comment that opens with `_key:` or `ocideck_key:` is clearly an attempted
+  // directive (prose speaker notes never start that way), so an unknown one is
+  // worth flagging rather than silently dropping.
+  static final _reDirectiveKey = RegExp(
+    r'^(_[A-Za-z][\w-]*|ocideck_[A-Za-z0-9_-]+)\s*:',
+  );
   static final _reFence = RegExp(r'^\s*```');
   static final _reClassDirective = RegExp(r'<!--\s*_class:\s*([^>]+?)\s*-->');
   static final _reClassOpen = RegExp(r'<!--\s*_class:');
@@ -61,7 +65,60 @@ class MarkdownValidator {
     'richText',
   };
 
+  // Front-matter keys MarkdownService._doParse actually reads. `marp` is the
+  // canonical Marp marker OciDeck assumes and deliberately ignores. Anything
+  // else (a typo, or a Marp option OciDeck does not implement like `header`,
+  // `footer`, `size`, `style`) is silently dropped by the parser, so the
+  // validator warns that it has no effect.
+  static const _knownFrontMatterKeys = {
+    'marp',
+    'theme',
+    'paginate',
+    'title',
+    'author',
+    'organization',
+    'version',
+    'date',
+    'description',
+    'keywords',
+    'tlp',
+    'ocideck_target_seconds',
+    'ocideck_show_rehearsal_summary',
+    'ocideck_style_profile',
+  };
+
+  // Comment directives `_parseBlockDirectives` understands. A comment that looks
+  // like a directive (`_key:` / `ocideck_key:`) but is not one of these is
+  // dropped without effect — e.g. Marp's per-slide `_paginate`, `_header`,
+  // `_footer`, `_color` — so the validator flags it.
+  static const _supportedCommentDirectives = {
+    '_class',
+    '_style',
+    'tlp',
+    'advance',
+    'skip',
+    'ocideck_list_style',
+    'ocideck_checklist_progress',
+    'ocideck_continue_numbering',
+    'ocideck_continue_split',
+    'ocideck_title_image_overlay',
+    'ocideck_title_text_color',
+    'ocideck_bullet_marker',
+    'ocideck_timeline_duration',
+    'ocideck_timeline_current',
+    'ocideck_two_bullets_left',
+    'ocideck_two_bullets_right',
+    'ocideck_two_bullets_left_title',
+    'ocideck_two_bullets_right_title',
+  };
+
   MarkdownValidationResult validate(String markdown) {
+    // Normalise line endings like MarkdownService.parseDeck does. Without this
+    // a Windows (CRLF) or classic-Mac (CR) document would fail the `lines.first
+    // == '---'` front-matter probe and the `---` slide split, so the validator
+    // would silently skip those checks while the parser (which normalises) still
+    // succeeds — the two would disagree.
+    markdown = markdown.replaceAll('\r\n', '\n').replaceAll('\r', '\n');
     final issues = <MarkdownValidationIssue>[];
     if (markdown.trim().isEmpty) {
       issues.add(
@@ -77,6 +134,7 @@ class MarkdownValidator {
     final lines = markdown.split('\n');
     _validateFrontMatter(lines, issues);
     _validateHtmlComments(lines, issues);
+    _validateCommentDirectives(markdown, issues);
 
     final body = _stripFrontMatter(markdown);
     final bodyStartLine = markdown.length - body.length > 0
@@ -86,7 +144,7 @@ class MarkdownValidator {
               .length
         : 1;
 
-    final blocks = body.split(_reSlideDivider);
+    final blocks = MarkdownService.splitSlideBlocks(body);
     if (blocks.every((block) => block.trim().isEmpty)) {
       issues.add(
         MarkdownValidationIssue(
@@ -180,6 +238,15 @@ class MarkdownValidator {
             ),
           );
         }
+      } else if (!_knownFrontMatterKeys.contains(key)) {
+        issues.add(
+          MarkdownValidationIssue(
+            line: i + 1,
+            severity: MarkdownValidationSeverity.warning,
+            message:
+                'Onbekende front-matter sleutel "$key" wordt genegeerd (typefout of niet-ondersteunde MARP-optie).',
+          ),
+        );
       }
     }
   }
@@ -232,26 +299,31 @@ class MarkdownValidator {
         ),
       );
     }
+  }
 
-    for (var i = 0; i < lines.length; i++) {
-      final line = lines[i];
-      final classLike = _reClassLikeComment.firstMatch(line);
-      if (classLike != null &&
-          !line.contains('_class:') &&
-          !line.contains('ocideck_') &&
-          !line.contains('_style:') &&
-          classLike.group(1)?.trim() != 'skip' &&
-          !_reTlpComment.hasMatch(classLike.group(1)!.trim()) &&
-          !_reAdvanceComment.hasMatch(classLike.group(1)!.trim())) {
-        issues.add(
-          MarkdownValidationIssue(
-            line: i + 1,
-            severity: MarkdownValidationSeverity.warning,
-            message:
-                'Commentaar mist `_class:` of een bekende ocideck-sleutel.',
-          ),
-        );
-      }
+  /// Flags HTML comments that *look* like a directive — they open with a
+  /// reserved `_key:` or `ocideck_key:` token — but name a directive OciDeck
+  /// does not implement (so the parser drops them silently). Plain prose
+  /// comments are speaker notes and are intentionally left alone, so genuine
+  /// notes no longer trigger a spurious warning.
+  void _validateCommentDirectives(
+    String markdown,
+    List<MarkdownValidationIssue> issues,
+  ) {
+    for (final match in _reHtmlCommentMultiline.allMatches(markdown)) {
+      final content = match.group(1)!.trim();
+      final keyMatch = _reDirectiveKey.firstMatch(content);
+      if (keyMatch == null) continue;
+      final key = keyMatch.group(1)!;
+      if (_supportedCommentDirectives.contains(key)) continue;
+      final line = markdown.substring(0, match.start).split('\n').length;
+      issues.add(
+        MarkdownValidationIssue(
+          line: line,
+          severity: MarkdownValidationSeverity.warning,
+          message: 'Directive `$key` wordt niet ondersteund en genegeerd.',
+        ),
+      );
     }
   }
 
@@ -260,18 +332,30 @@ class MarkdownValidator {
     List<MarkdownValidationIssue> issues, {
     int lineOffset = 0,
   }) {
-    var fenceCount = 0;
-    int? firstFenceLine;
+    // Track real open/close state rather than parity: two opened-but-never-
+    // closed fences make an even count, which a parity check reads as balanced.
+    // The same open/close model the slide splitter uses keeps them consistent.
+    String? fenceChar;
+    int? openLine;
     for (var i = 0; i < lines.length; i++) {
-      if (_reFence.hasMatch(lines[i])) {
-        fenceCount++;
-        firstFenceLine ??= lineOffset + i + 1;
+      final trimmed = lines[i].trimLeft();
+      if (fenceChar == null) {
+        if (trimmed.startsWith('```')) {
+          fenceChar = '`';
+          openLine = lineOffset + i + 1;
+        } else if (trimmed.startsWith('~~~')) {
+          fenceChar = '~';
+          openLine = lineOffset + i + 1;
+        }
+      } else if (MarkdownService.isBareFence(trimmed, fenceChar)) {
+        fenceChar = null;
+        openLine = null;
       }
     }
-    if (fenceCount.isOdd && firstFenceLine != null) {
+    if (fenceChar != null && openLine != null) {
       issues.add(
         MarkdownValidationIssue(
-          line: firstFenceLine,
+          line: openLine,
           severity: MarkdownValidationSeverity.error,
           message: 'Codeblok is niet afgesloten met ```.',
         ),
@@ -287,6 +371,11 @@ class MarkdownValidator {
   }) {
     final blockLines = block.split('\n');
     int lineNo(int index) => startLine + index;
+    // Lines strictly inside a fenced code block: their content is verbatim, so
+    // an HTML tag or image shown there is a sample, not real markup. Structural
+    // checks (div balance, unclosed image/media) skip them to avoid false
+    // positives on code slides.
+    final fenced = _fencedLineIndexes(blockLines);
 
     final classMatch = _reClassDirective.firstMatch(block);
     if (classMatch == null &&
@@ -334,6 +423,7 @@ class MarkdownValidator {
       classTokens: classTokens,
       slideNumber: slideNumber,
       startLine: startLine,
+      fenced: fenced,
       issues: issues,
     );
     if (classTokens.contains('cockpit')) {
@@ -349,7 +439,30 @@ class MarkdownValidator {
       _validateTableSlide(blockLines, slideNumber, lineNo, issues);
     }
 
-    _validateDivBalance(blockLines, slideNumber, lineNo, issues);
+    _validateDivBalance(blockLines, slideNumber, lineNo, fenced, issues);
+  }
+
+  /// Indexes of lines that sit strictly inside a fenced code block (the fence
+  /// markers themselves are excluded). Uses the same fence detection as
+  /// [MarkdownService.splitSlideBlocks] so both agree on what "inside code" is.
+  Set<int> _fencedLineIndexes(List<String> lines) {
+    final inside = <int>{};
+    String? fenceChar;
+    for (var i = 0; i < lines.length; i++) {
+      final trimmed = lines[i].trimLeft();
+      if (fenceChar == null) {
+        if (trimmed.startsWith('```')) {
+          fenceChar = '`';
+        } else if (trimmed.startsWith('~~~')) {
+          fenceChar = '~';
+        }
+      } else if (MarkdownService.isBareFence(trimmed, fenceChar)) {
+        fenceChar = null;
+      } else {
+        inside.add(i);
+      }
+    }
+    return inside;
   }
 
   void _validateBlockLines({
@@ -357,6 +470,7 @@ class MarkdownValidator {
     required List<String> classTokens,
     required int slideNumber,
     required int startLine,
+    required Set<int> fenced,
     required List<MarkdownValidationIssue> issues,
   }) {
     int lineNo(int index) => startLine + index;
@@ -438,6 +552,10 @@ class MarkdownValidator {
           }
         }
       }
+
+      // The remaining checks are for real markup; inside a fenced code block an
+      // image or media tag is a verbatim sample, not markup to validate.
+      if (fenced.contains(i)) continue;
 
       if (_reUnclosedImage.hasMatch(trimmed)) {
         issues.add(
@@ -783,12 +901,16 @@ class MarkdownValidator {
     List<String> blockLines,
     int slideNumber,
     int Function(int) lineNo,
+    Set<int> fenced,
     List<MarkdownValidationIssue> issues,
   ) {
     var depth = 0;
     int? firstOpenLine;
     for (var i = 0; i < blockLines.length; i++) {
-      final line = blockLines[i];
+      // A `<div>` inside a code fence is sample text, and one inside a comment
+      // is not markup either — neither should shift the balance.
+      if (fenced.contains(i)) continue;
+      final line = blockLines[i].replaceAll(_reInlineComment, '');
       final opens = _reDivOpen.allMatches(line).length;
       final closes = _reDivClose.allMatches(line).length;
       if (opens > 0 && firstOpenLine == null) firstOpenLine = i;
