@@ -85,6 +85,14 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Ontwerp': 'Projekt',
+  'Architectuur': 'Architektura',
+  'Bouwinstructies': 'Instrukcje budowania',
+  'Kwaliteitscontroles': 'Kontrole jakości',
+  'Broncodekaart': 'Mapa kodu źródłowego',
+  'Licentienaleving': 'Zgodność licencyjna',
+  'Softwarestuklijst (SBOM)': 'Zestawienie komponentów oprogramowania (SBOM)',
+  'Samenwerking (ontwerp)': 'Współpraca (projekt)',
   'Beschermen met een wachtwoord (AES-256)': 'Zabezpiecz hasłem (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Zachowaj to hasło w bezpiecznym miejscu: jeśli je utracisz, tego pakietu nie da się już otworzyć.',

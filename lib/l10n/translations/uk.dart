@@ -84,6 +84,14 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Ontwerp': 'Проєкт',
+  'Architectuur': 'Архітектура',
+  'Bouwinstructies': 'Інструкції зі складання',
+  'Kwaliteitscontroles': 'Перевірки якості',
+  'Broncodekaart': 'Карта вихідного коду',
+  'Licentienaleving': 'Дотримання ліцензій',
+  'Softwarestuklijst (SBOM)': 'Специфікація ПЗ (SBOM)',
+  'Samenwerking (ontwerp)': 'Співпраця (проєкт)',
   'Beschermen met een wachtwoord (AES-256)': 'Захистити паролем (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Збережіть цей пароль надійно: якщо ви його втратите, цей пакет більше не вдасться відкрити.',

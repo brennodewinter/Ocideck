@@ -83,6 +83,14 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Ontwerp': 'Design',
+  'Architectuur': 'Architektur',
+  'Bouwinstructies': 'Bauaaleitig',
+  'Kwaliteitscontroles': 'Qualitätsprüefige',
+  'Broncodekaart': 'Quällcode-Charte',
+  'Licentienaleving': 'Lizänz-Compliance',
+  'Softwarestuklijst (SBOM)': 'Software-Stückliste (SBOM)',
+  'Samenwerking (ontwerp)': 'Zämenarbet (Design)',
   'Beschermen met een wachtwoord (AES-256)':
       'Mit eme Passwort schütze (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':

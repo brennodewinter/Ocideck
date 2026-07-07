@@ -84,6 +84,14 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Ontwerp': 'Návrh',
+  'Architectuur': 'Architektúra',
+  'Bouwinstructies': 'Pokyny na zostavenie',
+  'Kwaliteitscontroles': 'Kontroly kvality',
+  'Broncodekaart': 'Mapa zdrojového kódu',
+  'Licentienaleving': 'Dodržiavanie licencií',
+  'Softwarestuklijst (SBOM)': 'Kusovník softvéru (SBOM)',
+  'Samenwerking (ontwerp)': 'Spolupráca (návrh)',
   'Beschermen met een wachtwoord (AES-256)': 'Chrániť heslom (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
       'Uschovajte toto heslo na bezpečnom mieste: ak ho stratíte, tento balík sa už nedá otvoriť.',

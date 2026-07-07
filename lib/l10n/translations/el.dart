@@ -83,6 +83,14 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Ontwerp': 'Σχεδίαση',
+  'Architectuur': 'Αρχιτεκτονική',
+  'Bouwinstructies': 'Οδηγίες δημιουργίας',
+  'Kwaliteitscontroles': 'Έλεγχοι ποιότητας',
+  'Broncodekaart': 'Χάρτης πηγαίου κώδικα',
+  'Licentienaleving': 'Συμμόρφωση αδειών',
+  'Softwarestuklijst (SBOM)': 'Κατάλογος υλικών λογισμικού (SBOM)',
+  'Samenwerking (ontwerp)': 'Συνεργασία (σχεδίαση)',
   'Beschermen met een wachtwoord (AES-256)':
       'Προστασία με κωδικό πρόσβασης (AES-256)',
   'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
