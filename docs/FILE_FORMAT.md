@@ -116,6 +116,15 @@ whitespace, special characters such as `: # "`, or a YAML indicator at the
 start). OciDeck does not use a full YAML parser when reading; it uses a simple
 line-by-line parser, so keep front matter flat (one key per line).
 
+Only the keys above (plus `marp`) are read; any other front-matter key — a typo,
+or a Marp option OciDeck does not implement such as `header`, `footer`, `size` or
+`style` — is silently ignored. The in-app markdown checker flags such keys with a
+warning so they are not mistaken for having an effect. Likewise, a comment that
+looks like a directive (`<!-- _key: … -->` or `<!-- ocideck_key: … -->`) but is
+not one OciDeck understands — e.g. Marp's per-slide `_paginate`, `_header`,
+`_footer`, `_color` — is dropped and flagged; plain prose comments remain speaker
+notes.
+
 ### 3.1 TLP Levels
 
 Stored under the `tlp` key with these stable values:

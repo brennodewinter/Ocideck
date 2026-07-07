@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/markdown_validation.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/markdown_validator.dart';
@@ -62,9 +63,12 @@ void main() {}
     );
   });
 
-  test('detects per-slide fence imbalances that cancel out document-wide', () {
-    // One unclosed fence in each of two slides sums to an even count; a
-    // document-wide counter saw a balanced total and reported nothing (C5).
+  test('reports an unclosed fence that swallows a following separator', () {
+    // An unclosed ```dart fence runs to the end of the document, so the `---`
+    // below it is code content, not a slide separator (fence-aware splitting).
+    // The whole thing is therefore one slide with one still-open fence — and
+    // the open/close tracker reports it even though the two ```dart lines make
+    // an even count that a parity check would have read as balanced (C5).
     const markdown = '''
 ---
 marp: true
@@ -87,7 +91,7 @@ void other() {}
     final fenceIssues = result.issues
         .where((i) => i.message.contains('Codeblok is niet afgesloten'))
         .toList();
-    expect(fenceIssues, hasLength(2));
+    expect(fenceIssues, hasLength(1));
   });
 
   test('detects code slide without fenced block', () {
@@ -557,6 +561,124 @@ marp: true
         ),
         isFalse,
       );
+    });
+  });
+
+  group('hardening: CRLF, fence-awareness, unknown keys/directives', () {
+    test('normalises CRLF before validating unclosed front matter', () {
+      // With Windows line endings the raw `lines.first` is "---\r"; without
+      // normalisation the front-matter probe (and every downstream check) is
+      // silently skipped while the parser still succeeds.
+      const md = '---\r\ntitle: X\r\n\r\n# Slide een\r\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any((i) => i.message.contains('niet afgesloten')),
+        isTrue,
+      );
+    });
+
+    test('a valid CRLF deck reports no false errors', () {
+      final lf = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(
+              SlideType.bullets,
+            ).copyWith(title: 'Kop', bullets: ['Eerste punt']),
+          ],
+        ),
+      );
+      final crlf = lf.replaceAll('\n', '\r\n');
+      expect(validator.validate(crlf).isValid, isTrue);
+      expect(validator.validate(crlf).warningCount, 0);
+    });
+
+    test('a `---` inside a fenced code block does not split the slide', () {
+      const md = '---\nmarp: true\n---\n\n# Een\n\n```\nvoor\n---\nna\n```\n';
+      final result = validator.validate(md);
+      // One slide, one closed fence: no unclosed-fence and no "no slides" error.
+      expect(result.issues.any((i) => i.message.contains('Codeblok')), isFalse);
+      expect(service.parseDeck(md)!.slides, hasLength(1));
+    });
+
+    test('warns on an unknown front-matter key', () {
+      const md = '---\nmarp: true\npagenate: false\n---\n\n# Slide\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any(
+          (i) =>
+              i.severity == MarkdownValidationSeverity.warning &&
+              i.message.contains('pagenate'),
+        ),
+        isTrue,
+      );
+    });
+
+    test('does not warn on known / Marp front-matter keys', () {
+      const md =
+          '---\nmarp: true\ntheme: ocideck\ntitle: X\nauthor: A\n---\n\n# Slide\n';
+      expect(validator.validate(md).warningCount, 0);
+    });
+
+    test('warns on an unsupported scoped Marp directive', () {
+      const md =
+          '---\nmarp: true\n---\n\n<!-- _paginate: false -->\n\n# Slide\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any(
+          (i) =>
+              i.severity == MarkdownValidationSeverity.warning &&
+              i.message.contains('_paginate'),
+        ),
+        isTrue,
+      );
+    });
+
+    test('does not warn on supported directives or prose notes', () {
+      const md =
+          '---\nmarp: true\n---\n\n<!-- _class: title -->\n'
+          '<!-- ocideck_bullet_marker: paw -->\n\n# Slide\n\n'
+          '<!-- Vergeet niet te lachen -->\n<!-- TODO: dit later fixen -->\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any((i) => i.message.contains('niet ondersteund')),
+        isFalse,
+      );
+    });
+
+    test('a <div> inside a code fence does not break div balance', () {
+      const md =
+          '---\nmarp: true\n---\n\n<!-- _class: code -->\n\n# HTML\n\n'
+          '```html\n<div class="x">\n```\n';
+      final result = validator.validate(md);
+      expect(result.issues.any((i) => i.message.contains('div')), isFalse);
+    });
+
+    test('an unclosed image inside a code fence is not flagged', () {
+      const md =
+          '---\nmarp: true\n---\n\n<!-- _class: code -->\n\n# Voorbeeld\n\n'
+          '```dart\nfinal s = "![a](b";\n```\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any((i) => i.message.contains('afbeeldings-markdown')),
+        isFalse,
+      );
+    });
+
+    test('detects an unclosed tilde (~~~) fence', () {
+      const md = '---\nmarp: true\n---\n\n# Code\n\n~~~\nvoid main() {}\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any((i) => i.message.contains('Codeblok is niet')),
+        isTrue,
+      );
+    });
+
+    test('a <div> inside a tilde (~~~) fence does not break div balance', () {
+      const md =
+          '---\nmarp: true\n---\n\n# HTML\n\n~~~html\n<div class="x">\n~~~\n';
+      final result = validator.validate(md);
+      expect(result.issues.any((i) => i.message.contains('div')), isFalse);
     });
   });
 }
