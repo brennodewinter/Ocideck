@@ -96,6 +96,108 @@ void main() {
     expect(imported!.userNotes.values, contains('Cursusnotitie'));
   });
 
+  group('encrypted packages', () {
+    Deck sampleDeck() => Deck(
+      title: 'Geheim Deck',
+      slides: [
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Punten', bullets: ['een', 'twee']),
+      ],
+    );
+
+    test('versleuteld pakket is detecteerbaar; onversleuteld niet', () async {
+      final encPath = p.join(tmp.path, 'enc.ocideck');
+      await file.exportPackage(sampleDeck(), encPath, password: 'geheim123!');
+      final plainPath = p.join(tmp.path, 'plain.ocideck');
+      await file.exportPackage(sampleDeck(), plainPath);
+
+      expect(
+        FileService.isEncryptedPackage(File(encPath).readAsBytesSync()),
+        isTrue,
+      );
+      expect(
+        FileService.isEncryptedPackage(File(plainPath).readAsBytesSync()),
+        isFalse,
+      );
+    });
+
+    test('round-trip met juist wachtwoord via de resolver', () async {
+      final zipPath = p.join(tmp.path, 'enc.ocideck');
+      await file.exportPackage(
+        sampleDeck(),
+        zipPath,
+        password: 'correct-paard',
+      );
+      final bytes = File(zipPath).readAsBytesSync();
+      final out = Directory(p.join(tmp.path, 'out_enc'))..createSync();
+
+      final outcome = await file.importPackageBytesDetailed(
+        bytes,
+        out.path,
+        onPassword: ({required bool retry}) async => 'correct-paard',
+      );
+      expect(outcome.mdPath, isNotNull);
+      final imported = await file.openDeck(outcome.mdPath!);
+      expect(imported!.slides.single.bullets, ['een', 'twee']);
+    });
+
+    test('retry: eerst fout, dan juist wachtwoord', () async {
+      final zipPath = p.join(tmp.path, 'enc.ocideck');
+      await file.exportPackage(sampleDeck(), zipPath, password: 's3cret');
+      final bytes = File(zipPath).readAsBytesSync();
+      final out = Directory(p.join(tmp.path, 'out_retry'))..createSync();
+
+      var attempts = 0;
+      final outcome = await file.importPackageBytesDetailed(
+        bytes,
+        out.path,
+        onPassword: ({required bool retry}) async {
+          attempts++;
+          expect(retry, attempts > 1);
+          return attempts == 1 ? 'fout' : 's3cret';
+        },
+      );
+      expect(attempts, 2);
+      expect(outcome.mdPath, isNotNull);
+    });
+
+    test('afbreken → encryptedCancelled (geen fout)', () async {
+      final zipPath = p.join(tmp.path, 'enc.ocideck');
+      await file.exportPackage(sampleDeck(), zipPath, password: 'x');
+      final bytes = File(zipPath).readAsBytesSync();
+      final out = Directory(p.join(tmp.path, 'out_cancel'))..createSync();
+
+      final outcome = await file.importPackageBytesDetailed(
+        bytes,
+        out.path,
+        onPassword: ({required bool retry}) async => null,
+      );
+      expect(outcome.mdPath, isNull);
+      expect(outcome.failure, ImportFailure.encryptedCancelled);
+    });
+
+    test('geen resolver → needsPassword', () async {
+      final zipPath = p.join(tmp.path, 'enc.ocideck');
+      await file.exportPackage(sampleDeck(), zipPath, password: 'x');
+      final bytes = File(zipPath).readAsBytesSync();
+      final out = Directory(p.join(tmp.path, 'out_none'))..createSync();
+
+      final outcome = await file.importPackageBytesDetailed(bytes, out.path);
+      expect(outcome.failure, ImportFailure.needsPassword);
+    });
+
+    test('onversleuteld pakket importeert zonder resolver', () async {
+      final zipPath = p.join(tmp.path, 'plain.ocideck');
+      await file.exportPackage(sampleDeck(), zipPath);
+      final bytes = File(zipPath).readAsBytesSync();
+      final out = Directory(p.join(tmp.path, 'out_plain'))..createSync();
+
+      final mdPath = await file.importPackageBytes(bytes, out.path);
+      expect(mdPath, isNotNull);
+    });
+  });
+
   test('importing the same package twice never loses local edits', () async {
     final deck = Deck(
       title: 'Deck',

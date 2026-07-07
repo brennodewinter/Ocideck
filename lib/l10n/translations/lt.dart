@@ -83,6 +83,35 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Beschermen met een wachtwoord (AES-256)': 'Apsaugoti slaptažodžiu (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Saugokite šį slaptažodį: jį praradę, šio paketo nebegalėsite atidaryti.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Šis paketas apsaugotas slaptažodžiu. Įveskite slaptažodį, kad jį atidarytumėte.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Šis paketas užšifruotas; slaptažodžio nepavyko paprašyti.',
+  'Exporteren': 'Eksportuoti',
+  'Genereer sterk wachtwoord': 'Sugeneruoti stiprų slaptažodį',
+  'Maak het langer voor betere bescherming.':
+      'Pailginkite jį geresnei apsaugai.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Neteisingas slaptažodis. Bandykite dar kartą.',
+  'Ontgrendelen': 'Atrakinti',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Neprivaloma. Paketą atidaryti gali tik tas, kas turi slaptažodį.',
+  'Redelijk': 'Vidutinis',
+  'Sterk': 'Stiprus',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Patarimas: ilga slaptažodžio frazė yra saugesnė nei trumpas slaptažodis su simboliais.',
+  'Versleuteld pakket': 'Užšifruotas paketas',
+  'Wachtwoord': 'Slaptažodis',
+  'Wachtwoord gekopieerd naar klembord.':
+      'Slaptažodis nukopijuotas į iškarpinę.',
+  'Wachtwoord tonen': 'Rodyti slaptažodį',
+  'Wachtwoord verbergen': 'Slėpti slaptažodį',
+  'Zeer sterk': 'Labai stiprus',
+  'Zeer zwak': 'Labai silpnas',
+  'Zwak': 'Silpnas',
   'Tekst kleiner': 'Mažesnis tekstas',
   'Tekst groter': 'Didesnis tekstas',
   'Documentatie': 'Dokumentacija',

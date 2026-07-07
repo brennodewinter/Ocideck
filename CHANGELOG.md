@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Optional password encryption for `.ocideck` packages** — when you export a
+  package you can now protect it with a password. OciDeck encrypts every file in
+  the package with **AES-256** (the WinZip AES standard). The export dialog shows
+  an intelligent, entropy-based strength meter (a long passphrase beats a short
+  password with symbols — it never forces a mandatory "!") and can generate a
+  strong random password (choose **32** or **256** characters) that you can copy
+  to share out of band. Opening an encrypted package prompts for the password,
+  with a clear message on a wrong one. Encryption is entirely optional; existing
+  unencrypted packages keep opening as before. See
+  [docs/FILE_FORMAT.md](docs/FILE_FORMAT.md) §7.1 for the format and its caveats.
 - **Roomier documentation reader with adjustable text size** — the in-app reader
   now uses the full window width, so wide tables get the space they need instead
   of being squeezed into a narrow column (running text still keeps a readable

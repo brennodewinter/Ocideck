@@ -115,6 +115,10 @@ enum OpenResult {
   /// The file was refused because it contains executable content; the security
   /// alarm has been raised via [importSecurityAlarmProvider].
   blocked,
+
+  /// The package is encrypted and the user cancelled the password prompt (or no
+  /// resolver was available). Handled silently — no error is surfaced.
+  passwordCancelled,
 }
 
 /// A blocked import surfaced to the UI: the offending file plus what was found.
@@ -146,6 +150,12 @@ class TabsNotifier extends StateNotifier<TabsState> {
   final DuplicateService _duplicates = DuplicateService();
   Timer? _autosaveTimer;
   int _nextId = 0;
+
+  /// UI-callback die het wachtwoord van een versleuteld pakket ophaalt.
+  /// Geregistreerd door de shell (die een [BuildContext] heeft); zonder
+  /// registratie kan er niet om een wachtwoord worden gevraagd en falen
+  /// versleutelde pakketten met [ImportFailure.needsPassword].
+  PackagePasswordResolver? packagePasswordResolver;
 
   /// Hoe vaak niet-opgeslagen tabbladen naar een herstelbestand worden bewaard.
   static const _autosaveInterval = Duration(seconds: 25);
@@ -477,7 +487,23 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// (annotaties, sprekersnotities) reizen mee. Er raakt geen bestandssysteem
   /// aan te pas, dus dit werkt ook in de webversie.
   Future<OpenResult> _openPackageFromBytes(Uint8List bytes, String name) async {
-    final entries = _file.decodePackageEntries(bytes);
+    // Versleuteld pakket: vraag (met retry) het wachtwoord vóór het decoderen.
+    String? password;
+    if (FileService.isEncryptedPackage(bytes)) {
+      final resolver = packagePasswordResolver;
+      if (resolver == null) return OpenResult.passwordCancelled;
+      var retry = false;
+      while (true) {
+        final pw = await resolver(retry: retry);
+        if (pw == null || !mounted) return OpenResult.passwordCancelled;
+        if (_file.canDecodePackage(bytes, pw)) {
+          password = pw;
+          break;
+        }
+        retry = true;
+      }
+    }
+    final entries = _file.decodePackageEntries(bytes, password: password);
     if (entries == null) return OpenResult.unreadable;
     final mdEntry = FileService.mainMarkdownEntry(entries);
     if (mdEntry == null) return OpenResult.notAPresentation;
@@ -657,8 +683,14 @@ class TabsNotifier extends StateNotifier<TabsState> {
       return ImportFailure.tooLarge;
     }
     final bytes = await file.readAsBytes();
-    final outcome = await _file.importPackageBytesDetailed(bytes, dest);
+    final outcome = await _file.importPackageBytesDetailed(
+      bytes,
+      dest,
+      onPassword: packagePasswordResolver,
+    );
     final mdPath = outcome.mdPath;
+    // Afbreken van de wachtwoordvraag is geen fout: geen melding tonen.
+    if (outcome.failure == ImportFailure.encryptedCancelled) return null;
     if (mdPath == null) return outcome.failure;
     final result = await _openImported(mdPath);
     return _importHandled(result) ? null : ImportFailure.unsupported;
@@ -668,8 +700,13 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// het in een tab. Zie [importPackageFile] voor de betekenis van de retour.
   Future<ImportFailure?> importFromUrl(String url, {String? homeDir}) async {
     final dest = await _importDestDir(homeDir);
-    final outcome = await _file.importFromUrlDetailed(url, dest);
+    final outcome = await _file.importFromUrlDetailed(
+      url,
+      dest,
+      onPassword: packagePasswordResolver,
+    );
     final mdPath = outcome.mdPath;
+    if (outcome.failure == ImportFailure.encryptedCancelled) return null;
     if (mdPath == null) return outcome.failure;
     final result = await _openImported(mdPath);
     if (result == OpenResult.opened && mounted) {
@@ -725,9 +762,20 @@ class TabsNotifier extends StateNotifier<TabsState> {
       maxBytes: maxBytes,
     );
     if (!mounted) return OpenResult.unreadable;
-    final mdPath = entry.isMarkdown
-        ? await _file.importMarkdownBytes(bytes, dest, entry.name)
-        : await _file.importPackageBytes(bytes, dest);
+    final String? mdPath;
+    if (entry.isMarkdown) {
+      mdPath = await _file.importMarkdownBytes(bytes, dest, entry.name);
+    } else {
+      final outcome = await _file.importPackageBytesDetailed(
+        bytes,
+        dest,
+        onPassword: packagePasswordResolver,
+      );
+      if (outcome.failure == ImportFailure.encryptedCancelled) {
+        return OpenResult.passwordCancelled;
+      }
+      mdPath = outcome.mdPath;
+    }
     if (mdPath == null) return OpenResult.unreadable;
     final result = await _openImported(mdPath);
     if (result != OpenResult.opened) return result;

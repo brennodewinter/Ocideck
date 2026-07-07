@@ -20,6 +20,7 @@ import '../utils/file_download.dart';
 import '../utils/log.dart';
 import '../utils/net_guard.dart';
 import '../utils/project_path.dart';
+import '../utils/zip_encryption.dart';
 import 'annotation_codec.dart';
 import 'user_notes_codec.dart';
 import 'caption_service.dart';
@@ -161,7 +162,21 @@ enum ImportFailure {
 
   /// Ophalen zelf mislukte (URL, verbinding, statuscode).
   network,
+
+  /// Pakket is versleuteld maar er kon niet om een wachtwoord worden gevraagd
+  /// (geen resolver geregistreerd — vooral in tests/headless).
+  needsPassword,
+
+  /// Pakket is versleuteld en de gebruiker brak de wachtwoordvraag af. Geen
+  /// echte fout: de aanroeper toont hierbij géén foutmelding.
+  encryptedCancelled,
 }
+
+/// Vraagt (interactief) het wachtwoord van een versleuteld pakket. [retry] is
+/// waar na een onjuiste poging. Retourneert `null` als de gebruiker afbreekt.
+/// De service kent geen UI; de shell levert een concrete implementatie aan.
+typedef PackagePasswordResolver =
+    Future<String?> Function({required bool retry});
 
 /// Uitkomst van een import: het pad naar de hoofd-markdown bij succes, anders
 /// een [failure] met de reden.
@@ -701,12 +716,16 @@ class FileService {
   List<PackageEntry>? decodePackageEntries(
     List<int> zipBytes, {
     int maxBytes = maxPackageBytes,
+    String? password,
   }) {
     if (zipBytes.length > maxBytes) return null;
 
+    // AES-ontsleuteling muteert de invoerbuffer; werk op een kopie zodat de
+    // bytes van de aanroeper (die deze soms opnieuw gebruikt) intact blijven.
+    final input = password != null ? Uint8List.fromList(zipBytes) : zipBytes;
     final Archive archive;
     try {
-      archive = ZipDecoder().decodeBytes(zipBytes);
+      archive = ZipDecoder().decodeBytes(input, password: password);
     } catch (e, s) {
       logError('FileService.decodePackageEntries: ZIP decode failed', e, s);
       return null;
@@ -733,31 +752,58 @@ class FileService {
         );
         return null;
       }
-      // Inflate into a capped stream that aborts the moment the entry exceeds
-      // the remaining budget. This bounds peak memory per entry: unlike
-      // `f.content` (which decodes the whole entry into memory before we can
-      // check its size), the underlying inflater writes incrementally, so a
-      // deflate bomb that understated its header size is stopped mid-inflation.
-      final remaining = maxBytes - extracted;
-      final capped = _CappedOutputStream(remaining);
       final Uint8List content;
-      try {
-        f.writeContent(capped);
-        content = Uint8List.fromList(capped.getBytes());
-      } on _ExtractionLimitException {
-        logWarning(
-          'FileService.decodePackageEntries: entry exceeds decompression '
-          'limit (possible zip bomb): ${f.name}',
-        );
-        return null;
-      } catch (e) {
-        // Decompressing a corrupt entry can throw; skip it instead of aborting.
-        logWarning(
-          'FileService.decodePackageEntries: unreadable entry skipped '
-          '(${f.name})',
-          e,
-        );
-        continue;
+      if (password != null) {
+        // Versleutelde leden: WinZip-AES wordt alleen door de content-getter
+        // ontsleuteld — de streaming `writeContent` inflate-weg past de
+        // AES-laag niet toe en zou onleesbare bytes opleveren. De begrenzing
+        // valt hier terug op de gedeclareerde grootte (hierboven gecheckt) plus
+        // de lopende totaalsom; de streaming-cap vervalt, wat aanvaardbaar is
+        // voor pakketten die de gebruiker zelf versleutelde en ontgrendelde.
+        final List<int> raw;
+        try {
+          raw = f.content;
+        } catch (e) {
+          logWarning(
+            'FileService.decodePackageEntries: unreadable encrypted entry '
+            'skipped (${f.name})',
+            e,
+          );
+          continue;
+        }
+        if (extracted + raw.length > maxBytes) {
+          logWarning(
+            'FileService.decodePackageEntries: decrypted size exceeds limit',
+          );
+          return null;
+        }
+        content = raw is Uint8List ? raw : Uint8List.fromList(raw);
+      } else {
+        // Inflate into a capped stream that aborts the moment the entry exceeds
+        // the remaining budget. This bounds peak memory per entry: unlike
+        // `f.content` (which decodes the whole entry into memory before we can
+        // check its size), the underlying inflater writes incrementally, so a
+        // deflate bomb that understated its header size is stopped mid-inflation.
+        final remaining = maxBytes - extracted;
+        final capped = _CappedOutputStream(remaining);
+        try {
+          f.writeContent(capped);
+          content = Uint8List.fromList(capped.getBytes());
+        } on _ExtractionLimitException {
+          logWarning(
+            'FileService.decodePackageEntries: entry exceeds decompression '
+            'limit (possible zip bomb): ${f.name}',
+          );
+          return null;
+        } catch (e) {
+          // Decompressing a corrupt entry can throw; skip it instead of aborting.
+          logWarning(
+            'FileService.decodePackageEntries: unreadable entry skipped '
+            '(${f.name})',
+            e,
+          );
+          continue;
+        }
       }
       extracted += content.length;
       entries.add((name: f.name, bytes: content));
@@ -840,6 +886,10 @@ class FileService {
       bytes[1] == 0x4B &&
       bytes[2] == 0x03 &&
       bytes[3] == 0x04;
+
+  /// True als [bytes] een met wachtwoord versleuteld pakket is (zie
+  /// [isEncryptedZip]). Puur byte-inspectie, zonder het wachtwoord te kennen.
+  static bool isEncryptedPackage(List<int> bytes) => isEncryptedZip(bytes);
 
   // ── Netwerk ── zie parts/file_service_net.dart voor de URL-import
   // (desktop, met SSRF-pinning) en de web-fetch met hulppunt-terugval.

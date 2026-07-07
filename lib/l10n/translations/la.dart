@@ -85,6 +85,33 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Beschermen met een wachtwoord (AES-256)': 'Tessera muni (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Hanc tesseram bene serva: si eam amiseris, hoc fasciculus aperiri non poterit.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Hic fasciculus tessera munitus est. Tesseram insere ut aperiatur.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Hic fasciculus cifratus est; tessera peti non potuit.',
+  'Exporteren': 'Exportare',
+  'Genereer sterk wachtwoord': 'Tesseram validam genera',
+  'Maak het langer voor betere bescherming.':
+      'Longiorem fac ad meliorem tutelam.',
+  'Onjuist wachtwoord. Probeer het opnieuw.': 'Tessera falsa. Iterum conare.',
+  'Ontgrendelen': 'Reserare',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Optativum. Solus qui tesseram habet fasciculum aperire potest.',
+  'Redelijk': 'Mediocris',
+  'Sterk': 'Validus',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Consilium: sententia longa tutior est quam tessera brevis cum signis.',
+  'Versleuteld pakket': 'Fasciculus cifratus',
+  'Wachtwoord': 'Tessera',
+  'Wachtwoord gekopieerd naar klembord.': 'Tessera in tabellam translata est.',
+  'Wachtwoord tonen': 'Tesseram monstrare',
+  'Wachtwoord verbergen': 'Tesseram celare',
+  'Zeer sterk': 'Validissimus',
+  'Zeer zwak': 'Infirmissimus',
+  'Zwak': 'Infirmus',
   'Tekst kleiner': 'Textus minor',
   'Tekst groter': 'Textus maior',
   'Documentatie': 'Documentatio',

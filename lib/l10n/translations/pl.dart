@@ -85,6 +85,34 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Beschermen met een wachtwoord (AES-256)': 'Zabezpiecz hasłem (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Zachowaj to hasło w bezpiecznym miejscu: jeśli je utracisz, tego pakietu nie da się już otworzyć.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Ten pakiet jest chroniony hasłem. Wprowadź hasło, aby go otworzyć.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Ten pakiet jest zaszyfrowany; nie można było poprosić o hasło.',
+  'Exporteren': 'Eksportuj',
+  'Genereer sterk wachtwoord': 'Wygeneruj silne hasło',
+  'Maak het langer voor betere bescherming.':
+      'Wydłuż je, aby zapewnić lepszą ochronę.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Nieprawidłowe hasło. Spróbuj ponownie.',
+  'Ontgrendelen': 'Odblokuj',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Opcjonalnie. Tylko osoba znająca hasło może otworzyć pakiet.',
+  'Redelijk': 'Umiarkowane',
+  'Sterk': 'Silne',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Wskazówka: długie hasło-fraza jest bezpieczniejsze niż krótkie hasło z symbolami.',
+  'Versleuteld pakket': 'Zaszyfrowany pakiet',
+  'Wachtwoord': 'Hasło',
+  'Wachtwoord gekopieerd naar klembord.': 'Skopiowano hasło do schowka.',
+  'Wachtwoord tonen': 'Pokaż hasło',
+  'Wachtwoord verbergen': 'Ukryj hasło',
+  'Zeer sterk': 'Bardzo silne',
+  'Zeer zwak': 'Bardzo słabe',
+  'Zwak': 'Słabe',
   'Tekst kleiner': 'Mniejszy tekst',
   'Tekst groter': 'Większy tekst',
   'Documentatie': 'Dokumentacja',

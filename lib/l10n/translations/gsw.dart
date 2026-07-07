@@ -83,6 +83,35 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Beschermen met een wachtwoord (AES-256)':
+      'Mit eme Passwort schütze (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Bhalt das Passwort guet uf: wänn du\'s verliersch, chasch das Päckli nöd meh öffne.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Das Päckli isch mit eme Passwort gschützt. Gib s Passwort ii zum es öffne.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Das Päckli isch verschlüsslet; s het nöd chöne nach eme Passwort gfrogt werde.',
+  'Exporteren': 'Exportiere',
+  'Genereer sterk wachtwoord': 'Starchs Passwort generiere',
+  'Maak het langer voor betere bescherming.':
+      'Mach\'s länger für e bessere Schutz.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Falschs Passwort. Probier\'s no einisch.',
+  'Ontgrendelen': 'Entsperre',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Optional. Nume wer s Passwort het, cha s Päckli öffne.',
+  'Redelijk': 'Mittel',
+  'Sterk': 'Starch',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Tipp: en langi Passwortphrase isch sicherer als es churzes Passwort mit Zeiche.',
+  'Versleuteld pakket': 'Verschlüsslets Päckli',
+  'Wachtwoord': 'Passwort',
+  'Wachtwoord gekopieerd naar klembord.': 'Passwort i d Zwischeablag kopiert.',
+  'Wachtwoord tonen': 'Passwort zeige',
+  'Wachtwoord verbergen': 'Passwort verstecke',
+  'Zeer sterk': 'Sehr starch',
+  'Zeer zwak': 'Sehr schwach',
+  'Zwak': 'Schwach',
   'Tekst kleiner': 'Täxt chliiner',
   'Tekst groter': 'Täxt grösser',
   'Documentatie': 'Dokumentation',

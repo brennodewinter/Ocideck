@@ -52,6 +52,8 @@ import 'dialogs/image_carousel_picker.dart';
 import 'dialogs/import_security_alarm_dialog.dart';
 import 'dialogs/new_deck_dialog.dart';
 import 'dialogs/open_presentation_dialog.dart';
+import 'dialogs/package_encrypt_dialog.dart';
+import 'dialogs/package_password_dialog.dart';
 import 'dialogs/presentation_info_dialog.dart';
 import 'dialogs/scan_library_dialog.dart';
 import 'dialogs/settings_dialog.dart';
@@ -92,6 +94,14 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     super.initState();
     windowManager.addListener(this);
     _openFileChannel = OpenFileChannel(_onFilesDropped);
+    // De TabsNotifier kent geen BuildContext; de shell levert de dialoog die
+    // om het wachtwoord van een versleuteld pakket vraagt (met retry-melding).
+    ref
+        .read(tabsProvider.notifier)
+        .packagePasswordResolver = ({required bool retry}) async {
+      if (!mounted) return null;
+      return PackagePasswordDialog.show(context, retry: retry);
+    };
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _maybeRestore();
       // Open any file the app was launched with, and start listening for files

@@ -83,6 +83,33 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Beschermen met een wachtwoord (AES-256)': 'Zaščiti z geslom (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Dobro shranite to geslo: če ga izgubite, tega paketa ni več mogoče odpreti.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Ta paket je zaščiten z geslom. Vnesite geslo, da ga odprete.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Ta paket je šifriran; za geslo ni bilo mogoče vprašati.',
+  'Exporteren': 'Izvozi',
+  'Genereer sterk wachtwoord': 'Ustvari močno geslo',
+  'Maak het langer voor betere bescherming.':
+      'Naredite ga daljšega za boljšo zaščito.',
+  'Onjuist wachtwoord. Probeer het opnieuw.': 'Napačno geslo. Poskusite znova.',
+  'Ontgrendelen': 'Odkleni',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Neobvezno. Paket lahko odpre samo tisti, ki ima geslo.',
+  'Redelijk': 'Zmerno',
+  'Sterk': 'Močno',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Nasvet: dolgo geselno besedilo je varnejše od kratkega gesla s simboli.',
+  'Versleuteld pakket': 'Šifriran paket',
+  'Wachtwoord': 'Geslo',
+  'Wachtwoord gekopieerd naar klembord.': 'Geslo je kopirano v odložišče.',
+  'Wachtwoord tonen': 'Prikaži geslo',
+  'Wachtwoord verbergen': 'Skrij geslo',
+  'Zeer sterk': 'Zelo močno',
+  'Zeer zwak': 'Zelo šibko',
+  'Zwak': 'Šibko',
   'Tekst kleiner': 'Manjše besedilo',
   'Tekst groter': 'Večje besedilo',
   'Documentatie': 'Dokumentacija',

@@ -84,6 +84,35 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Beschermen met een wachtwoord (AES-256)': 'Захистити паролем (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Збережіть цей пароль надійно: якщо ви його втратите, цей пакет більше не вдасться відкрити.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Цей пакет захищено паролем. Уведіть пароль, щоб його відкрити.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Цей пакет зашифровано; не вдалося запитати пароль.',
+  'Exporteren': 'Експортувати',
+  'Genereer sterk wachtwoord': 'Згенерувати надійний пароль',
+  'Maak het langer voor betere bescherming.':
+      'Зробіть його довшим для кращого захисту.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Неправильний пароль. Спробуйте ще раз.',
+  'Ontgrendelen': 'Розблокувати',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Необовʼязково. Відкрити пакет може лише той, хто має пароль.',
+  'Redelijk': 'Помірний',
+  'Sterk': 'Надійний',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Порада: довга парольна фраза безпечніша за короткий пароль із символами.',
+  'Versleuteld pakket': 'Зашифрований пакет',
+  'Wachtwoord': 'Пароль',
+  'Wachtwoord gekopieerd naar klembord.':
+      'Пароль скопійовано до буфера обміну.',
+  'Wachtwoord tonen': 'Показати пароль',
+  'Wachtwoord verbergen': 'Приховати пароль',
+  'Zeer sterk': 'Дуже надійний',
+  'Zeer zwak': 'Дуже слабкий',
+  'Zwak': 'Слабкий',
   'Tekst kleiner': 'Менший текст',
   'Tekst groter': 'Більший текст',
   'Documentatie': 'Документація',

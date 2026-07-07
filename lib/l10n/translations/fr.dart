@@ -84,6 +84,36 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'Beschermen met een wachtwoord (AES-256)':
+      'Protéger par un mot de passe (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Conservez bien ce mot de passe : si vous le perdez, ce paquet ne pourra plus être ouvert.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Ce paquet est protégé par un mot de passe. Saisissez le mot de passe pour l\'ouvrir.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Ce paquet est chiffré ; impossible de demander un mot de passe.',
+  'Exporteren': 'Exporter',
+  'Genereer sterk wachtwoord': 'Générer un mot de passe fort',
+  'Maak het langer voor betere bescherming.':
+      'Allongez-le pour une meilleure protection.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Mot de passe incorrect. Réessayez.',
+  'Ontgrendelen': 'Déverrouiller',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Facultatif. Seul celui qui possède le mot de passe peut ouvrir le paquet.',
+  'Redelijk': 'Correct',
+  'Sterk': 'Fort',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Astuce : une longue phrase de passe est plus sûre qu\'un mot de passe court avec des symboles.',
+  'Versleuteld pakket': 'Paquet chiffré',
+  'Wachtwoord': 'Mot de passe',
+  'Wachtwoord gekopieerd naar klembord.':
+      'Mot de passe copié dans le presse-papiers.',
+  'Wachtwoord tonen': 'Afficher le mot de passe',
+  'Wachtwoord verbergen': 'Masquer le mot de passe',
+  'Zeer sterk': 'Très fort',
+  'Zeer zwak': 'Très faible',
+  'Zwak': 'Faible',
   'Tekst kleiner': 'Texte plus petit',
   'Tekst groter': 'Texte plus grand',
   'Documentatie': 'Documentation',

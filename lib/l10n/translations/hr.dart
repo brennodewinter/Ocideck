@@ -83,6 +83,34 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Beschermen met een wachtwoord (AES-256)': 'Zaštiti lozinkom (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Dobro čuvajte ovu lozinku: ako je izgubite, ovaj paket više neće biti moguće otvoriti.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Ovaj je paket zaštićen lozinkom. Unesite lozinku da biste ga otvorili.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Ovaj je paket šifriran; nije bilo moguće zatražiti lozinku.',
+  'Exporteren': 'Izvezi',
+  'Genereer sterk wachtwoord': 'Generiraj jaku lozinku',
+  'Maak het langer voor betere bescherming.':
+      'Neka bude dulja za bolju zaštitu.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Netočna lozinka. Pokušajte ponovno.',
+  'Ontgrendelen': 'Otključaj',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Neobavezno. Paket može otvoriti samo onaj tko ima lozinku.',
+  'Redelijk': 'Osrednja',
+  'Sterk': 'Jaka',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Savjet: duga lozinka od riječi sigurnija je od kratke lozinke sa simbolima.',
+  'Versleuteld pakket': 'Šifrirani paket',
+  'Wachtwoord': 'Lozinka',
+  'Wachtwoord gekopieerd naar klembord.': 'Lozinka je kopirana u međuspremnik.',
+  'Wachtwoord tonen': 'Prikaži lozinku',
+  'Wachtwoord verbergen': 'Sakrij lozinku',
+  'Zeer sterk': 'Vrlo jaka',
+  'Zeer zwak': 'Vrlo slaba',
+  'Zwak': 'Slaba',
   'Tekst kleiner': 'Manji tekst',
   'Tekst groter': 'Veći tekst',
   'Documentatie': 'Dokumentacija',

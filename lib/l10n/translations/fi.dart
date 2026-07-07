@@ -83,6 +83,34 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Beschermen met een wachtwoord (AES-256)': 'Suojaa salasanalla (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Säilytä tämä salasana huolellisesti: jos menetät sen, tätä pakettia ei voi enää avata.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Tämä paketti on suojattu salasanalla. Avaa se syöttämällä salasana.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Tämä paketti on salattu; salasanaa ei voitu pyytää.',
+  'Exporteren': 'Vie',
+  'Genereer sterk wachtwoord': 'Luo vahva salasana',
+  'Maak het langer voor betere bescherming.':
+      'Tee siitä pidempi paremman suojan takaamiseksi.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Väärä salasana. Yritä uudelleen.',
+  'Ontgrendelen': 'Avaa lukitus',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Valinnainen. Vain se, jolla on salasana, voi avata paketin.',
+  'Redelijk': 'Kohtalainen',
+  'Sterk': 'Vahva',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Vinkki: pitkä tunnuslause on turvallisempi kuin lyhyt salasana symboleilla.',
+  'Versleuteld pakket': 'Salattu paketti',
+  'Wachtwoord': 'Salasana',
+  'Wachtwoord gekopieerd naar klembord.': 'Salasana kopioitu leikepöydälle.',
+  'Wachtwoord tonen': 'Näytä salasana',
+  'Wachtwoord verbergen': 'Piilota salasana',
+  'Zeer sterk': 'Erittäin vahva',
+  'Zeer zwak': 'Erittäin heikko',
+  'Zwak': 'Heikko',
   'Tekst kleiner': 'Pienennä tekstiä',
   'Tekst groter': 'Suurenna tekstiä',
   'Documentatie': 'Dokumentaatio',

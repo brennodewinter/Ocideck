@@ -85,6 +85,35 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Beschermen met een wachtwoord (AES-256)': 'Cosain le pasfhocal (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Coinnigh an pasfhocal seo slán: má chailleann tú é, ní bheifear in ann an pacáiste seo a oscailt a thuilleadh.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Tá an pacáiste seo cosanta le pasfhocal. Cuir isteach an pasfhocal chun é a oscailt.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Tá an pacáiste seo criptithe; níorbh fhéidir pasfhocal a iarraidh.',
+  'Exporteren': 'Easpórtáil',
+  'Genereer sterk wachtwoord': 'Gin pasfhocal láidir',
+  'Maak het langer voor betere bescherming.':
+      'Déan níos faide é le haghaidh cosaint níos fearr.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Pasfhocal mícheart. Bain triail eile as.',
+  'Ontgrendelen': 'Díghlasáil',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Roghnach. Ní féidir ach le duine a bhfuil an pasfhocal aige an pacáiste a oscailt.',
+  'Redelijk': 'Réasúnta',
+  'Sterk': 'Láidir',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Leid: tá frása pasfhocail fada níos sábháilte ná pasfhocal gearr le siombailí.',
+  'Versleuteld pakket': 'Pacáiste criptithe',
+  'Wachtwoord': 'Pasfhocal',
+  'Wachtwoord gekopieerd naar klembord.':
+      'Cóipeáladh an pasfhocal chuig an ngearrthaisce.',
+  'Wachtwoord tonen': 'Taispeáin an pasfhocal',
+  'Wachtwoord verbergen': 'Folaigh an pasfhocal',
+  'Zeer sterk': 'An-láidir',
+  'Zeer zwak': 'An-lag',
+  'Zwak': 'Lag',
   'Tekst kleiner': 'Téacs níos lú',
   'Tekst groter': 'Téacs níos mó',
   'Documentatie': 'Doiciméadú',

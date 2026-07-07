@@ -667,6 +667,30 @@ On import:
   magic `PK\x03\x04`, it is treated as a package; otherwise it is saved as plain
   Markdown.
 
+### 7.1 Encrypted packages (optional)
+
+When exporting a package you may protect it with a password. Encryption is
+**optional** and off by default; an unencrypted package is a plain zip as above.
+
+- **Cipher.** Every file in the zip is encrypted with **AES-256** in the
+  **WinZip AES (AE-1)** format (general-purpose-bit-flag bit 0 set, extra field
+  `0x9901`). Any AES-zip-aware tool (7-Zip, Keka, WinZip) can open it; the
+  built-in macOS Archive Utility cannot.
+- **Detection on open.** OciDeck inspects the zip header (no password needed) to
+  see whether the package is encrypted, then prompts for the password and
+  retries on a wrong one. The central directory (file **names** and structure)
+  is *not* encrypted — only file **contents** are.
+- **Key derivation.** WinZip AES derives the key with **PBKDF2-HMAC-SHA1, 1000
+  iterations**. This iteration count is fixed by the WinZip AES spec and is low
+  by modern standards, so a short/guessable password is the weak link. The
+  export dialog therefore shows an entropy-based strength meter and offers a
+  generator (32 or 256 random characters); with a long or generated password the
+  weak KDF is irrelevant.
+- **Caveat.** Because file names stay visible and the KDF is weak, ZIP-AES suits
+  "keep casual readers out". For strong confidentiality of sensitive material,
+  wrap the package in a container with a modern KDF and hidden names (age, GPG,
+  or 7-Zip `-mhe=on`).
+
 ---
 
 ## 8. Special Per-Slide Comments (Overview)

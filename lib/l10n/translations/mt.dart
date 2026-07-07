@@ -84,6 +84,35 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Beschermen met een wachtwoord (AES-256)': 'Ipproteġi b\'password (AES-256)',
+  'Bewaar dit wachtwoord goed: raak je het kwijt, dan is dit pakket niet meer te openen.':
+      'Żomm din il-password fis-sigurtà: jekk titlifha, dan il-pakkett ma jkunx jista\' jinfetaħ aktar.',
+  'Dit pakket is met een wachtwoord beveiligd. Voer het wachtwoord in om het te openen.':
+      'Dan il-pakkett huwa protett b\'password. Daħħal il-password biex tiftħu.',
+  'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.':
+      'Dan il-pakkett huwa kriptat; ma setgħetx tintalab password.',
+  'Exporteren': 'Esporta',
+  'Genereer sterk wachtwoord': 'Iġġenera password b\'saħħitha',
+  'Maak het langer voor betere bescherming.':
+      'Agħmilha itwal għal protezzjoni aħjar.',
+  'Onjuist wachtwoord. Probeer het opnieuw.':
+      'Password żbaljata. Erġa\' pprova.',
+  'Ontgrendelen': 'Iftaħ',
+  'Optioneel. Alleen wie het wachtwoord heeft, kan het pakket openen.':
+      'Fakultattiv. Min għandu l-password biss jista\' jiftaħ il-pakkett.',
+  'Redelijk': 'Raġonevoli',
+  'Sterk': 'B\'saħħitha',
+  'Tip: een lange wachtwoordzin is veiliger dan een kort wachtwoord met symbolen.':
+      'Parir: frażi twila ta\' password hija aktar sigura minn password qasira b\'simboli.',
+  'Versleuteld pakket': 'Pakkett kriptat',
+  'Wachtwoord': 'Password',
+  'Wachtwoord gekopieerd naar klembord.':
+      'Il-password ġiet ikkupjata fil-clipboard.',
+  'Wachtwoord tonen': 'Uri l-password',
+  'Wachtwoord verbergen': 'Aħbi l-password',
+  'Zeer sterk': 'B\'saħħitha ħafna',
+  'Zeer zwak': 'Dgħajfa ħafna',
+  'Zwak': 'Dgħajfa',
   'Tekst kleiner': 'Test iżgħar',
   'Tekst groter': 'Test akbar',
   'Documentatie': 'Dokumentazzjoni',
