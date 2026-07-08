@@ -84,6 +84,11 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Alleen afspelen (vergrendeld)': 'Doar redare (blocat)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Această prezentare este blocată numai pentru redare.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Blochează pachetul pentru prezentare: editorul, meniurile și exportul nu sunt disponibile. Dezactivarea se poate face ulterior doar prin eliminarea cheii din fișierul markdown.',
   'Volledige presentatie': 'Întreaga prezentare',
   'Ontwerp': 'Proiectare',
   'Gebruiker': 'Utilizator',

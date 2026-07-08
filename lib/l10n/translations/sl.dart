@@ -83,6 +83,11 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Alleen afspelen (vergrendeld)': 'Samo za predstavljanje (zaklenjeno)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Ta predstavitev je zaklenjena samo za predstavljanje.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Zaklene komplet do predstavljanja: urejevalnik, meniji in izvoz niso dostopni. Odklepanje je mogoče le z odstranjevanjem ključa iz datoteke markdown.',
   'Volledige presentatie': 'Celotna predstavitev',
   'Ontwerp': 'Zasnova',
   'Gebruiker': 'Uporabnik',

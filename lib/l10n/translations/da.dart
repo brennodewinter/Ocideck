@@ -83,6 +83,11 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Alleen afspelen (vergrendeld)': 'Kun afspilning (låst)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Denne præsentation er låst til kun afspilning.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Låser decket til præsentation: editoren, menuerne og eksport er ikke tilgængelige. Kan kun låses op ved at fjerne nøglen fra markdown-filen.',
   'Volledige presentatie': 'Hele præsentationen',
   'Ontwerp': 'Design',
   'Gebruiker': 'Bruger',

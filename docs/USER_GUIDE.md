@@ -331,6 +331,21 @@ Start the fullscreen presenter from the toolbar. See
 `G` for the grid overview, `B`/`W` to blank, `P` for presenter view, `K` for the
 countdown, `R` to reset the timing, `H` for the in-app cheatsheet.
 
+### Play-only decks
+
+You can hand out a deck **locked for presenting only**. Turn on **Play only
+(locked)** under *Presentation properties* (or add `ocideck_play_only: true` to
+the file's front matter by hand). When such a deck is opened, OciDeck shows a
+stripped-down screen: **just the first slide and a Play button** — no editor, no
+toolbar, no menus, no export, and the editing shortcuts are gone. Pressing
+**Play** switches the app to full screen and runs the presentation exactly as
+usual.
+
+The lock is part of the file, so it stays with the deck when you share it.
+**Closing the deck always brings back the normal working of the app** — you can
+open and edit other decks as usual. To *unlock* a play-only deck for editing,
+remove the `ocideck_play_only` key from its markdown.
+
 ### Rehearsing and timing
 
 The presenter view (`P`) is also a rehearsal clock — it measures, it does not

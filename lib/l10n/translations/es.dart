@@ -84,6 +84,11 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Alleen afspelen (vergrendeld)': 'Solo reproducción (bloqueado)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Esta presentación está bloqueada en modo solo reproducción.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Bloquea el deck para presentar: el editor, los menús y la exportación no están disponibles. Después solo se puede desbloquear eliminando la clave del archivo Markdown.',
   'Volledige presentatie': 'Presentación completa',
   'Ontwerp': 'Diseño',
   'Gebruiker': 'Usuario',

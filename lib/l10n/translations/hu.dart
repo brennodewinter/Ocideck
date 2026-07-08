@@ -83,6 +83,11 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Alleen afspelen (vergrendeld)': 'Csak lejátszás (zárva)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Ez a bemutató csak lejátszásra van zárva.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Zárolja a diasort a bemutatáshoz: a szerkesztő, a menük és az exportálás nem érhetők el. A kikapcsolást később csak a kulcs eltávolításával lehet elvégezni a markdown fájlból.',
   'Volledige presentatie': 'Teljes prezentáció',
   'Ontwerp': 'Tervezés',
   'Gebruiker': 'Felhasználó',

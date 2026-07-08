@@ -20,6 +20,9 @@ class PresentationInfo {
   final int presentationTargetSeconds;
   final bool showRehearsalSummary;
 
+  /// 'Alleen afspelen'-vergrendeling. Zie [Deck.playOnly].
+  final bool playOnly;
+
   /// Naam van het gekozen stijlprofiel (null = ongewijzigd laten).
   final String? styleProfileName;
 
@@ -33,6 +36,7 @@ class PresentationInfo {
     required this.keywords,
     this.presentationTargetSeconds = 0,
     this.showRehearsalSummary = true,
+    this.playOnly = false,
     this.styleProfileName,
   });
 }
@@ -81,6 +85,7 @@ class _PresentationInfoDialogState
   late final TextEditingController _keywords;
   late int _presentationTargetSeconds;
   late bool _showRehearsalSummary;
+  late bool _playOnly;
   late String _profileName;
 
   @override
@@ -95,6 +100,7 @@ class _PresentationInfoDialogState
     _keywords = TextEditingController(text: widget.deck.keywords);
     _presentationTargetSeconds = widget.deck.presentationTargetSeconds;
     _showRehearsalSummary = widget.deck.showRehearsalSummary;
+    _playOnly = widget.deck.playOnly;
     _profileName = widget.deck.themeProfile.name;
   }
 
@@ -123,6 +129,7 @@ class _PresentationInfoDialogState
         keywords: _keywords.text.trim(),
         presentationTargetSeconds: _presentationTargetSeconds,
         showRehearsalSummary: _showRehearsalSummary,
+        playOnly: _playOnly,
         styleProfileName: _profileName,
       ),
     );
@@ -192,6 +199,21 @@ class _PresentationInfoDialogState
                   ),
                   value: _showRehearsalSummary,
                   onChanged: (v) => setState(() => _showRehearsalSummary = v),
+                ),
+                const SizedBox(height: 4),
+                SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  dense: true,
+                  secondary: const Icon(Icons.lock_outline, size: 20),
+                  title: Text(l10n.d('Alleen afspelen (vergrendeld)')),
+                  subtitle: Text(
+                    l10n.d(
+                      'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.',
+                    ),
+                    style: const TextStyle(fontSize: 11),
+                  ),
+                  value: _playOnly,
+                  onChanged: (v) => setState(() => _playOnly = v),
                 ),
                 const SizedBox(height: 8),
                 Text(

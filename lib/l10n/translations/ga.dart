@@ -85,6 +85,11 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Alleen afspelen (vergrendeld)': 'Seinm amháin (glasáilte)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Tá an láithreoireacht seo glasáilte le seinm amháin.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Glasálann sé an deic go dtí an cur i láthair: níl an t-eagarthóir, na roghchláir ná an t-easpórtáil ar fáil. Ní féidir é a dhíchumasú ina dhiaidh sin ach an eochair a bhaint as an gcomhad markdown.',
   'Volledige presentatie': 'An láithreoireacht iomlán',
   'Ontwerp': 'Dearadh',
   'Gebruiker': 'Úsáideoir',

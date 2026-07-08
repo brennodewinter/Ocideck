@@ -108,6 +108,9 @@ ocideck_style_profile: <base64url(JSON)>
 | `description` | string | Description. |
 | `keywords` | string | Keywords. |
 | `tlp` | enum | Traffic Light Protocol level (§3.1). Written only when not `none`. |
+| `ocideck_target_seconds` | int | Target duration for the presenter countdown, in seconds. Written only when `> 0`. |
+| `ocideck_show_rehearsal_summary` | `false`/absent | Opt-out of the post-presentation timing summary. Default (shown) stays out of the file; only `false` is written. |
+| `ocideck_play_only` | `true`/absent | Play-only lock. When `true`, the deck opens locked: no editor, toolbar, menus, or export — only the first slide with a play button, presented full screen. Closing the deck restores normal editing. Default (unlocked) stays out of the file; only `true` is written. Removing this key unlocks the deck. |
 | `ocideck_style_profile` | base64url | Complete style profile as JSON (§3.2). |
 
 Metadata fields are written only when they are not empty. Text is written as a

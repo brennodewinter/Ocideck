@@ -74,6 +74,7 @@ extension _MarkdownParse on MarkdownService {
     TlpLevel tlp = TlpLevel.none;
     int presentationTargetSeconds = 0;
     bool showRehearsalSummary = true;
+    bool playOnly = false;
 
     // Strip front matter
     if (content.startsWith('---\n')) {
@@ -115,6 +116,8 @@ extension _MarkdownParse on MarkdownService {
               presentationTargetSeconds = int.tryParse(value) ?? 0;
             case 'ocideck_show_rehearsal_summary':
               showRehearsalSummary = value != 'false';
+            case 'ocideck_play_only':
+              playOnly = value == 'true';
             case 'ocideck_style_profile':
               // Best-effort: a corrupt profile token must not fail the whole
               // parse (which would blank the audience window). Keep the default.
@@ -175,6 +178,7 @@ extension _MarkdownParse on MarkdownService {
       tlp: tlp,
       presentationTargetSeconds: presentationTargetSeconds.clamp(0, 86400),
       showRehearsalSummary: showRehearsalSummary,
+      playOnly: playOnly,
     );
   }
 

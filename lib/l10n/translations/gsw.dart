@@ -83,6 +83,11 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Alleen afspelen (vergrendeld)': 'Nume abspiele (verrieglet)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Die Präsentation isch uf nume abspiele verrieglet.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Verrieglet s Deck zum Präsentiere: dr Editor, d Menüs und s Exportiere sind nöd verfüegbar. Entsperre cha me nohär nume dur s Entferne vom Schlüssel us dr Markdown-Datei.',
   'Volledige presentatie': 'Ganzi Präsentation',
   'Ontwerp': 'Design',
   'Gebruiker': 'Benutzer',

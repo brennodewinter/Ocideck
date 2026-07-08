@@ -83,6 +83,11 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Alleen afspelen (vergrendeld)': 'Endast uppspelning (låst)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Denna presentation är låst för endast uppspelning.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Låser deck till presentation: redigeraren, menyerna och export är inte tillgängliga. Kan endast låsas upp genom att ta bort nyckeln från markdown-filen.',
   'Volledige presentatie': 'Hela presentationen',
   'Ontwerp': 'Design',
   'Gebruiker': 'Användare',

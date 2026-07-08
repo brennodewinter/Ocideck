@@ -589,4 +589,153 @@ List<Slide> _slidesForPresentationOrExport(Deck deck) {
   return slides;
 }
 
+/// Toont de "niet-opgeslagen wijzigingen"-dialoog en geeft de keuze terug.
+/// Top-level zodat zowel de tabbalk als het 'alleen afspelen'-scherm hetzelfde
+/// dialoog gebruiken.
+Future<_CloseChoice> _confirmSaveBeforeCloseDialog(
+  BuildContext context,
+  String message,
+) async {
+  if (!context.mounted) return _CloseChoice.cancel;
+  return await showDialog<_CloseChoice>(
+        context: context,
+        barrierDismissible: false,
+        builder: (ctx) {
+          final l10n = ctx.l10n;
+          return AlertDialog(
+            title: Text(l10n.d('Niet-opgeslagen wijzigingen')),
+            content: Text(message),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, _CloseChoice.cancel),
+                child: Text(l10n.t('cancel')),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, _CloseChoice.discard),
+                style: TextButton.styleFrom(
+                  foregroundColor: Theme.of(ctx).colorScheme.error,
+                ),
+                child: Text(l10n.d('Niet opslaan')),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(ctx, _CloseChoice.save),
+                child: Text(l10n.d('Opslaan en sluiten')),
+              ),
+            ],
+          );
+        },
+      ) ??
+      _CloseChoice.cancel;
+}
+
+/// Sluit het tabblad op [index], met de "niet-opgeslagen wijzigingen"-check.
+/// Gedeeld door de tabbalk (kruisje/middenklik) en het 'alleen afspelen'-scherm
+/// zodat sluiten overal dezelfde afhandeling volgt.
+Future<void> requestCloseTab(
+  BuildContext context,
+  WidgetRef ref,
+  int index,
+) async {
+  final tabs = ref.read(tabsProvider).tabs;
+  if (index < 0 || index >= tabs.length) return;
+  final tab = tabs[index];
+  if (tab.isDirty) {
+    final choice = await _confirmSaveBeforeCloseDialog(
+      context,
+      context.l10n.d(
+        'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.',
+      ),
+    );
+    switch (choice) {
+      case _CloseChoice.cancel:
+        return;
+      case _CloseChoice.discard:
+        // Wijzigingen verwerpen: closeTab() ruimt ook het herstelbestand op.
+        break;
+      case _CloseChoice.save:
+        final saved = await tab.deckNotifier.save(
+          initialDirectory: ref.read(settingsProvider).homeDirectory,
+        );
+        if (!saved) return;
+    }
+  }
+  ref.read(tabsProvider.notifier).closeTab(index);
+}
+
+/// Opent de fullscreen-presenter voor het open deck. Gedeeld door de
+/// hoofd-toolbar en het 'alleen afspelen'-scherm zodat beide exact dezelfde
+/// slide-filtering, annotatie-koppeling en fullscreen-overgang gebruiken.
+///
+/// Met [fromStart] begint de presentatie bij de eerste zichtbare slide; anders
+/// bij de huidige selectie in de editor. Toont een melding en doet niets als er
+/// (na filtering) geen slides zijn.
+void presentDeck(
+  BuildContext context,
+  WidgetRef ref, {
+  bool fromStart = false,
+}) {
+  final deckNotifier = ref.read(deckProvider.notifier);
+  final deck = ref.read(deckProvider).deck;
+  if (deck == null) return;
+  final l10n = context.l10n;
+  // Overgeslagen slides weglaten en de selectie naar de eerstvolgende
+  // zichtbare slide vertalen.
+  final visible = <int>[
+    for (var i = 0; i < deck.slides.length; i++)
+      if (!deck.slides[i].skipped &&
+          slideVisibleAtTlp(deck.slides[i], deck.tlp))
+        i,
+  ];
+  final slides = _slidesForPresentationOrExport(deck);
+  if (slides.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          l10n.d('Alle slides zijn overgeslagen — niets om te tonen.'),
+        ),
+      ),
+    );
+    return;
+  }
+  int initial;
+  if (fromStart) {
+    initial = 0;
+  } else {
+    final selectedIndex = ref.read(editorProvider).selectedIndex;
+    initial = visible.indexWhere((i) => i >= selectedIndex);
+    if (initial < 0) initial = visible.length - 1;
+    if (initial < 0) initial = 0;
+  }
+  final settings = ref.read(settingsProvider);
+  FullscreenPresenter.present(
+    context,
+    slides: slides,
+    projectPath: deck.projectPath,
+    themeProfile: deck.themeProfile,
+    cockpitColorScheme: settings.cockpitColorScheme,
+    initialIndex: initial,
+    tlp: deck.tlp,
+    organization: deck.organization,
+    showClassificationWatermark: settings.classificationWatermarkEnabled,
+    allowRemoteMedia: settings.allowRemoteMedia,
+    showRehearsalSummary: deck.showRehearsalSummary,
+    targetDuration: () {
+      final secs = deck.presentationTargetSeconds;
+      return secs > 0 ? Duration(seconds: secs) : null;
+    }(),
+    annotations: deck.annotations,
+    onAnnotationsChanged: deckNotifier.setAnnotations,
+    initialUserNotes: deck.userNotes,
+    onUserNotesChanged: deckNotifier.setUserNotes,
+    onSlideChanged: (updated) {
+      final index = deckNotifier.currentState.deck?.slides.indexWhere(
+        (slide) => slide.id == updated.id,
+      );
+      if (index != null && index >= 0) {
+        deckNotifier.updateSlide(index, updated);
+      }
+    },
+  );
+}
+
 // ── App shell ─────────────────────────────────────────────────────────────────

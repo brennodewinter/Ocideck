@@ -84,6 +84,11 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Alleen afspelen (vergrendeld)': 'Daqq biss (imsakkar)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Din il-preżentazzjoni hija msakkra għad-daqq biss.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Isakkar id-deck għall-preżentazzjoni: l-editur, il-menus u l-esportazzjoni mhumiex disponibbli. Wara jista\' jinfetaħ biss billi titneħħa ċ-ċavetta mill-fajl markdown.',
   'Volledige presentatie': 'Preżentazzjoni sħiħa',
   'Ontwerp': 'Disinn',
   'Gebruiker': 'Utent',

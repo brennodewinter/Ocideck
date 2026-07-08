@@ -83,6 +83,11 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Alleen afspelen (vergrendeld)': 'Tikai atskaņošana (bloķēts)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Šī prezentācija ir bloķēta tikai atskaņošanai.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Bloķē klāju prezentēšanai: redaktors, izvēlnes un eksports nav pieejami. Var atbloķēt, tikai noņemot atslēgu no markdown faila.',
   'Volledige presentatie': 'Visa prezentācija',
   'Ontwerp': 'Dizains',
   'Gebruiker': 'Lietotājs',

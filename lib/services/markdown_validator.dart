@@ -84,6 +84,7 @@ class MarkdownValidator {
     'tlp',
     'ocideck_target_seconds',
     'ocideck_show_rehearsal_summary',
+    'ocideck_play_only',
     'ocideck_style_profile',
   };
 

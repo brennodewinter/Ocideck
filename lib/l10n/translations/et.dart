@@ -82,6 +82,11 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Alleen afspelen (vergrendeld)': 'Ainult esitatav (lukustatud)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'See esitlus on lukustatud ainult esitamisele.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Lukustab komplekti esitlemiseks: redaktor, menüüd ja eksport pole saadaval. Saab avada ainult eemaldades võtme markdown-failist.',
   'Volledige presentatie': 'Kogu esitlus',
   'Ontwerp': 'Kavand',
   'Gebruiker': 'Kasutaja',

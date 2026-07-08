@@ -84,6 +84,11 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Alleen afspelen (vergrendeld)': 'Само за представяне (заключено)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Тази презентация е заключена само за представяне.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Заключва декото до представяне: редакторът, менютата и експортирането не са налични. Отключването е възможно само чрез премахване на ключа от markdown файла.',
   'Volledige presentatie': 'Цялата презентация',
   'Ontwerp': 'Проект',
   'Gebruiker': 'Потребител',

@@ -83,6 +83,11 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Alleen afspelen (vergrendeld)': 'Allinnich ôfspylje (skoattele)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Dizze presintaasje is skoattele op de ôfspylje-modus allinne.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Skoattelet it deck foar presintaasje: de editor, menu\'s en eksportearje binne net beskikber. Ûntskotteljen kin dêrnei allinnich troch de kaai út de markdown-triem te fuortsmiten.',
   'Volledige presentatie': 'Folsleine presintaasje',
   'Ontwerp': 'Ûntwerp',
   'Gebruiker': 'Brûker',

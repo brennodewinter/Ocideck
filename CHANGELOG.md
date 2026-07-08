@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Play-only lock** — a deck can be marked *play-only* in its file
+  (`ocideck_play_only: true` in the front matter, or the **Play only (locked)**
+  switch in *Presentation properties*). A play-only deck opens locked: the
+  editor, toolbar, menus, shortcuts and export are gone — only the first slide is
+  shown with a **Play** button. Starting playback switches the app to full
+  screen; the presentation runs exactly as normal. Closing the deck restores the
+  normal working of the app. The lock lives in the file, so it travels with the
+  deck when shared; to remove it, delete the `ocideck_play_only` key from the
+  markdown. See [docs/USER_GUIDE.md](docs/USER_GUIDE.md) → *Play-only decks* and
+  [docs/FILE_FORMAT.md](docs/FILE_FORMAT.md) §3.
 - **Findings are highlighted in the code, not just the gutter.** After
   **Check** in markdown mode, each line with a validation issue now gets a
   coloured band behind the code with a stronger left accent bar — red for

@@ -83,6 +83,11 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Alleen afspelen (vergrendeld)': 'Tik atkūrimas (užrakinta)',
+  'Deze presentatie is vergrendeld op alleen afspelen.':
+      'Šis pristatymas užrakintas tik atkūrimui.',
+  'Vergrendelt het deck tot presenteren: de editor, menu\'s en export zijn niet beschikbaar. Uitzetten kan daarna alleen door de sleutel uit het markdown-bestand te halen.':
+      'Užrakina rinkinį pristatymui: redaktorius, meniu ir eksportavimas nepasiekiami. Atrakinti galima tik pašalinus raktą iš markdown failo.',
   'Volledige presentatie': 'Visa prezentacija',
   'Ontwerp': 'Projektas',
   'Gebruiker': 'Naudotojas',

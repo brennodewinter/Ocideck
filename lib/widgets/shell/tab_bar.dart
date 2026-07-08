@@ -198,6 +198,13 @@ class _TabContent extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isOpen = ref.watch(deckProvider.select((s) => s.isOpen));
     if (!isOpen) return const _WelcomeScreen();
+    // 'Alleen afspelen'-vergrendeling: het volledige bewerk-scherm (toolbar,
+    // menu's, sneltoetsen, editor) wordt dan niet opgebouwd — enkel het
+    // afspeel-scherm. Sluiten van het tabblad geeft de normale werking terug.
+    final playOnly = ref.watch(
+      deckProvider.select((s) => s.deck?.playOnly ?? false),
+    );
+    if (playOnly) return const _PlayOnlyScreen();
     return _MainLayout(exportService: ExportService());
   }
 }

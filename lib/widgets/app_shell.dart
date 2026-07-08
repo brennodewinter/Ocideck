@@ -63,6 +63,7 @@ import 'panels/editor_panel.dart';
 import 'panels/preview_panel.dart';
 import 'panels/slide_list_panel.dart';
 import 'presentation/fullscreen_presenter.dart';
+import 'slides/slide_preview.dart';
 
 part 'app_shell_main_layout.dart';
 
@@ -73,6 +74,7 @@ part 'app_shell_main_layout.dart';
 part 'shell/shell_actions.dart';
 part 'shell/tab_bar.dart';
 part 'shell/welcome_screen.dart';
+part 'shell/play_only_screen.dart';
 part 'shell/status_bar.dart';
 part 'shell/shell_overlays.dart';
 
@@ -247,38 +249,8 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     await windowManager.destroy();
   }
 
-  Future<_CloseChoice> _confirmSaveBeforeClose(String message) async {
-    if (!mounted) return _CloseChoice.cancel;
-    return await showDialog<_CloseChoice>(
-          context: context,
-          barrierDismissible: false,
-          builder: (ctx) {
-            final l10n = ctx.l10n;
-            return AlertDialog(
-              title: Text(l10n.d('Niet-opgeslagen wijzigingen')),
-              content: Text(message),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(ctx, _CloseChoice.cancel),
-                  child: Text(l10n.t('cancel')),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.pop(ctx, _CloseChoice.discard),
-                  style: TextButton.styleFrom(
-                    foregroundColor: Theme.of(ctx).colorScheme.error,
-                  ),
-                  child: Text(l10n.d('Niet opslaan')),
-                ),
-                ElevatedButton(
-                  onPressed: () => Navigator.pop(ctx, _CloseChoice.save),
-                  child: Text(l10n.d('Opslaan en sluiten')),
-                ),
-              ],
-            );
-          },
-        ) ??
-        _CloseChoice.cancel;
-  }
+  Future<_CloseChoice> _confirmSaveBeforeClose(String message) =>
+      _confirmSaveBeforeCloseDialog(context, message);
 
   Future<bool> _saveAllDirtyTabs() async {
     final homeDir = ref.read(settingsProvider).homeDirectory;
@@ -290,29 +262,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     return true;
   }
 
-  Future<void> _onCloseTab(int index) async {
-    final tab = ref.read(tabsProvider).tabs[index];
-    if (tab.isDirty) {
-      final choice = await _confirmSaveBeforeClose(
-        context.l10n.d(
-          'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.',
-        ),
-      );
-      switch (choice) {
-        case _CloseChoice.cancel:
-          return;
-        case _CloseChoice.discard:
-          // Wijzigingen verwerpen: closeTab() ruimt ook het herstelbestand op.
-          break;
-        case _CloseChoice.save:
-          final saved = await tab.deckNotifier.save(
-            initialDirectory: ref.read(settingsProvider).homeDirectory,
-          );
-          if (!saved) return;
-      }
-    }
-    ref.read(tabsProvider.notifier).closeTab(index);
-  }
+  Future<void> _onCloseTab(int index) => requestCloseTab(context, ref, index);
 
   /// Sla het actieve tabblad op. App-breed zodat Ctrl/Cmd+S altijd werkt,
   /// ongeacht waar de focus zit.
