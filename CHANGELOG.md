@@ -492,6 +492,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   behavioural change; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ### Fixed
+- **Folder pickers that a browser cannot honour are hidden on the web.** In the
+  browser there is no file system — decks open from their bytes and every export
+  is a download — so choosing a folder has no meaning. Three controls relied on a
+  native directory picker that the browser does not implement, so their button
+  did nothing when clicked (no error, no dialog): the *presentation folder* and
+  *export folder* settings (*Settings → General*), and the **Find slides** /
+  **Import slides** buttons in the slide list. All of these are now hidden when
+  running on the web.
 - **Deleting a slide keeps focus on the slide above it.** Removing a slide (via
   its context menu or the Delete/Backspace key) now selects the slide *above* the
   deleted one instead of jumping back to the first slide; deleting the first
