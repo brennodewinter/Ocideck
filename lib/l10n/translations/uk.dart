@@ -84,6 +84,7 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Git-opslag (ontwerp)': 'Сховище Git (проєкт)',
   'Zoek in documentatie…': 'Пошук у документації…',
   'Geen documenten gevonden': 'Документів не знайдено',
   'Alleen afspelen (vergrendeld)': 'Тільки презентування (заблоковано)',

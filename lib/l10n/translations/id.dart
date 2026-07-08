@@ -83,6 +83,7 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Git-opslag (ontwerp)': 'Penyimpanan Git (desain)',
   'Zoek in documentatie…': 'Cari di dokumentasi…',
   'Geen documenten gevonden': 'Tidak ada dokumen yang ditemukan',
   'Alleen afspelen (vergrendeld)': 'Hanya Putar (Terkunci)',

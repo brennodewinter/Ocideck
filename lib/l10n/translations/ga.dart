@@ -85,6 +85,7 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Git-opslag (ontwerp)': 'Stóráil Git (dearadh)',
   'Zoek in documentatie…': 'Cuardaigh sa doiciméadú…',
   'Geen documenten gevonden': 'Níor aimsíodh aon doiciméad',
   'Alleen afspelen (vergrendeld)': 'Seinm amháin (glasáilte)',

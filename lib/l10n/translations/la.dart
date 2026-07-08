@@ -85,6 +85,7 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Git-opslag (ontwerp)': 'Git repositio (designatio)',
   'Zoek in documentatie…': 'Quaere in documentatione…',
   'Geen documenten gevonden': 'Nulla documenta inventa',
   'Alleen afspelen (vergrendeld)': 'Tantum ludere (clausum)',

@@ -83,6 +83,7 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Git-opslag (ontwerp)': 'Git-tárolás (terv)',
   'Zoek in documentatie…': 'Keresés a dokumentációban…',
   'Geen documenten gevonden': 'Nem található dokumentum',
   'Alleen afspelen (vergrendeld)': 'Csak lejátszás (zárva)',

@@ -83,6 +83,7 @@ const _stringsIt = {
 };
 
 const _dutchSourceIt = {
+  'Git-opslag (ontwerp)': 'Archiviazione Git (progetto)',
   'Zoek in documentatie…': 'Cerca nella documentazione…',
   'Geen documenten gevonden': 'Nessun documento trovato',
   'Alleen afspelen (vergrendeld)': 'Solo riproduzione (bloccato)',

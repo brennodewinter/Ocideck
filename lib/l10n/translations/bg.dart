@@ -84,6 +84,7 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Git-opslag (ontwerp)': 'Git хранилище (проект)',
   'Zoek in documentatie…': 'Търсене в документацията…',
   'Geen documenten gevonden': 'Няма намерени документи',
   'Alleen afspelen (vergrendeld)': 'Само за представяне (заключено)',

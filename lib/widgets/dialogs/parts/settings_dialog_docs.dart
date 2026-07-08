@@ -95,6 +95,11 @@ extension _SettingsDocs on _SettingsDialogState {
               title: l10n.d('Samenwerking (ontwerp)'),
               assetBase: 'docs/design/COLLABORATION.md',
             ),
+            DocEntry(
+              icon: Icons.commit_outlined,
+              title: l10n.d('Git-opslag (ontwerp)'),
+              assetBase: 'docs/design/GIT_STORAGE.md',
+            ),
           ],
         ),
       ],

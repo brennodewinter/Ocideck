@@ -83,6 +83,7 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Git-opslag (ontwerp)': 'Git-tallennus (suunnitelma)',
   'Zoek in documentatie…': 'Etsi dokumentaatiosta…',
   'Geen documenten gevonden': 'Dokumentteja ei löytynyt',
   'Alleen afspelen (vergrendeld)': 'Vain toisto (lukittu)',

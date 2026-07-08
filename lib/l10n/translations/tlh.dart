@@ -81,6 +81,7 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Git-opslag (ontwerp)': 'Git So\' (nab)',
   'Zoek in documentatie…': 'ghItlhmeyDaq yISam…',
   'Geen documenten gevonden': 'ghItlh tu\'be\'lu\'',
   'Alleen afspelen (vergrendeld)': 'cho\'qa\' neH (ngaQmoHlu\'pu\')',

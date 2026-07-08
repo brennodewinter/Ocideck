@@ -83,6 +83,7 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Git-opslag (ontwerp)': 'Almasenamentu Git (diseño)',
   'Zoek in documentatie…': 'Buska den dokumentashon…',
   'Geen documenten gevonden': 'No a haña ningun dokumento',
   'Alleen afspelen (vergrendeld)': 'Solo toká (blokeá)',

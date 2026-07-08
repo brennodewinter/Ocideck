@@ -84,6 +84,7 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Git-opslag (ontwerp)': 'Almacenamiento Git (diseño)',
   'Zoek in documentatie…': 'Buscar en la documentación…',
   'Geen documenten gevonden': 'No se encontraron documentos',
   'Alleen afspelen (vergrendeld)': 'Solo reproducción (bloqueado)',

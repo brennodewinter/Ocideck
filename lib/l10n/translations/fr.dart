@@ -84,6 +84,7 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'Git-opslag (ontwerp)': 'Stockage Git (conception)',
   'Zoek in documentatie…': 'Rechercher dans la documentation…',
   'Geen documenten gevonden': 'Aucun document trouvé',
   'Alleen afspelen (vergrendeld)': 'Lecture seule (verrouillée)',

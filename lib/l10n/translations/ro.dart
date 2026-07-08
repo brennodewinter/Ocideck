@@ -84,6 +84,7 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Git-opslag (ontwerp)': 'Stocare Git (proiectare)',
   'Zoek in documentatie…': 'Caută în documentație…',
   'Geen documenten gevonden': 'Nu s-au găsit documente',
   'Alleen afspelen (vergrendeld)': 'Doar redare (blocat)',

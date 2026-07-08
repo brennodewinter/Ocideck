@@ -83,6 +83,7 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Git-opslag (ontwerp)': 'Shramba Git (zasnova)',
   'Zoek in documentatie…': 'Iskanje po dokumentaciji…',
   'Geen documenten gevonden': 'Ni najdenih dokumentov',
   'Alleen afspelen (vergrendeld)': 'Samo za predstavljanje (zaklenjeno)',

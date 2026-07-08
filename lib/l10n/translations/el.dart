@@ -83,6 +83,7 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Git-opslag (ontwerp)': 'Αποθήκευση Git (σχεδίαση)',
   'Zoek in documentatie…': 'Αναζήτηση στην τεκμηρίωση…',
   'Geen documenten gevonden': 'Δεν βρέθηκαν έγγραφα',
   'Alleen afspelen (vergrendeld)': 'Μόνο προβολή (κλειδωμένο)',

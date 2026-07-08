@@ -85,6 +85,7 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Git-opslag (ontwerp)': 'Magazyn Git (projekt)',
   'Zoek in documentatie…': 'Szukaj w dokumentacji…',
   'Geen documenten gevonden': 'Nie znaleziono dokumentów',
   'Alleen afspelen (vergrendeld)': 'Tylko do prezentacji (zablokowane)',
