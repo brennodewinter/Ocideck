@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../models/slide.dart';
+import '../../platform/platform_features.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/settings_provider.dart';
@@ -921,38 +922,43 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
               ),
             ),
           ),
-          const SizedBox(height: 6),
-          SizedBox(
-            height: 32,
-            width: double.infinity,
-            child: OutlinedButton.icon(
-              onPressed: () => _findSlides(context, ref, deckState),
-              icon: const Icon(Icons.travel_explore_outlined, size: 14),
-              label: Text(l10n.d('Slide zoeken')),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: Colors.white70,
-                side: const BorderSide(color: AppTheme.darkSlate500),
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                textStyle: const TextStyle(fontSize: 11),
+          // Slide zoeken/importeren doorzoeken lokale mappen (native
+          // map-kiezer). Op web bestaat dat bestandssysteem niet, dus de
+          // knoppen zouden stil niets doen — verberg ze daar.
+          if (supportsLocalProjectFolders) ...[
+            const SizedBox(height: 6),
+            SizedBox(
+              height: 32,
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: () => _findSlides(context, ref, deckState),
+                icon: const Icon(Icons.travel_explore_outlined, size: 14),
+                label: Text(l10n.d('Slide zoeken')),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.white70,
+                  side: const BorderSide(color: AppTheme.darkSlate500),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  textStyle: const TextStyle(fontSize: 11),
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 6),
-          SizedBox(
-            height: 32,
-            width: double.infinity,
-            child: OutlinedButton.icon(
-              onPressed: () => _importSlides(context, ref, deckState),
-              icon: const Icon(Icons.library_add_outlined, size: 14),
-              label: Text(l10n.d('Slides importeren')),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: Colors.white70,
-                side: const BorderSide(color: AppTheme.darkSlate500),
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                textStyle: const TextStyle(fontSize: 11),
+            const SizedBox(height: 6),
+            SizedBox(
+              height: 32,
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: () => _importSlides(context, ref, deckState),
+                icon: const Icon(Icons.library_add_outlined, size: 14),
+                label: Text(l10n.d('Slides importeren')),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.white70,
+                  side: const BorderSide(color: AppTheme.darkSlate500),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  textStyle: const TextStyle(fontSize: 11),
+                ),
               ),
             ),
-          ),
+          ],
           if (clipboard != null) ...[
             const SizedBox(height: 6),
             SizedBox(
