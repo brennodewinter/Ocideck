@@ -83,6 +83,9 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Bijsnijden': 'Apgriezt',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Velciet attēlu, lai izvēlētos, kura daļa paliek redzama.',
   'Git-opslag (ontwerp)': 'Git krātuve (dizains)',
   'Zoek in documentatie…': 'Meklēt dokumentācijā…',
   'Geen documenten gevonden': 'Nav atrasts neviens dokuments',

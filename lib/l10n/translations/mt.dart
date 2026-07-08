@@ -84,6 +84,9 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Bijsnijden': 'Aqta\'',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Iġbed l-immaġni biex tagħżel liema parti tibqa\' viżibbli.',
   'Git-opslag (ontwerp)': 'Ħażna Git (disinn)',
   'Zoek in documentatie…': 'Fittex fid-dokumentazzjoni…',
   'Geen documenten gevonden': 'Ma nstab l-ebda dokument',

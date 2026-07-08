@@ -81,6 +81,9 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Bijsnijden': 'yISol',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'nagh beQ yInIH, \'ay\' legh laHbogh wIvmeH.',
   'Git-opslag (ontwerp)': 'Git So\' (nab)',
   'Zoek in documentatie…': 'ghItlhmeyDaq yISam…',
   'Geen documenten gevonden': 'ghItlh tu\'be\'lu\'',

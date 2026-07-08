@@ -83,6 +83,9 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Bijsnijden': 'Beskær',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Træk billedet for at vælge, hvilken del der forbliver synlig.',
   'Git-opslag (ontwerp)': 'Git-lagring (design)',
   'Zoek in documentatie…': 'Søg i dokumentation…',
   'Geen documenten gevonden': 'Ingen dokumenter fundet',

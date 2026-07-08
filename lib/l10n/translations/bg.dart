@@ -84,6 +84,9 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Bijsnijden': 'Изрязване',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Плъзнете изображението, за да изберете коя част да остане видима.',
   'Git-opslag (ontwerp)': 'Git хранилище (проект)',
   'Zoek in documentatie…': 'Търсене в документацията…',
   'Geen documenten gevonden': 'Няма намерени документи',

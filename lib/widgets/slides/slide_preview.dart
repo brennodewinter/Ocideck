@@ -28,6 +28,7 @@ import '../../services/slide_layout_metrics.dart';
 import '../../services/rich_text_layout.dart';
 import '../../services/web_asset_store.dart';
 import '../../utils/bundled_asset.dart';
+import '../../utils/image_focal.dart';
 import '../../utils/image_limits.dart';
 import '../../utils/log.dart';
 import '../../utils/lru_cache.dart';

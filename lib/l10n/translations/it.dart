@@ -83,6 +83,9 @@ const _stringsIt = {
 };
 
 const _dutchSourceIt = {
+  'Bijsnijden': 'Ritaglia',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Trascina l\'immagine per scegliere quale parte rimane visibile.',
   'Git-opslag (ontwerp)': 'Archiviazione Git (progetto)',
   'Zoek in documentatie…': 'Cerca nella documentazione…',
   'Geen documenten gevonden': 'Nessun documento trovato',

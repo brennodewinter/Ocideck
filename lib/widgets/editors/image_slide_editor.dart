@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/slide.dart';
 import '../../services/image_service.dart';
+import '../slides/image_crop_dialog.dart';
 import '_editor_field.dart';
 
 class ImageSlideEditor extends StatefulWidget {
@@ -71,6 +72,29 @@ class _ImageSlideEditorState extends State<ImageSlideEditor>
     }
   }
 
+  Future<void> _openCrop() async {
+    // The image slide is full-bleed (16:9); crop adjusts both the zoom and the
+    // focal point so the author picks which part stays in view.
+    final result = await showImageCropDialog(
+      context,
+      imagePath: widget.slide.imagePath,
+      projectPath: widget.captionBasePath,
+      frameAspect: 16 / 9,
+      imageSize: widget.slide.imageSize,
+      focalX: widget.slide.imageFocalX,
+      focalY: widget.slide.imageFocalY,
+      enableZoom: true,
+    );
+    if (result == null) return;
+    widget.onUpdate(
+      widget.slide.copyWith(
+        imageSize: result.imageSize,
+        imageFocalX: result.focalX,
+        imageFocalY: result.focalY,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return editorScrollList(
@@ -119,6 +143,17 @@ class _ImageSlideEditorState extends State<ImageSlideEditor>
             value: widget.slide.imageSize,
             onChanged: (v) =>
                 widget.onUpdate(widget.slide.copyWith(imageSize: v)),
+          ),
+        ],
+        if (imageIsCroppable(widget.slide.imagePath)) ...[
+          const SizedBox(height: 8),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: OutlinedButton.icon(
+              icon: const Icon(Icons.crop, size: 18),
+              label: Text(context.l10n.d('Bijsnijden')),
+              onPressed: _openCrop,
+            ),
           ),
         ],
         const SizedBox(height: 16),

@@ -84,6 +84,9 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Bijsnijden': 'Recortar',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Arrastra la imagen para elegir qué parte permanece visible.',
   'Git-opslag (ontwerp)': 'Almacenamiento Git (diseño)',
   'Zoek in documentatie…': 'Buscar en la documentación…',
   'Geen documenten gevonden': 'No se encontraron documentos',

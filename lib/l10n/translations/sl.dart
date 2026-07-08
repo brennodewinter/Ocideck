@@ -83,6 +83,9 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Bijsnijden': 'Obreži',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Povlecite sliko, da izberete, kateri del ostane viden.',
   'Git-opslag (ontwerp)': 'Shramba Git (zasnova)',
   'Zoek in documentatie…': 'Iskanje po dokumentaciji…',
   'Geen documenten gevonden': 'Ni najdenih dokumentov',

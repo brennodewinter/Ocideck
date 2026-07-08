@@ -83,6 +83,9 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Bijsnijden': 'Apkarpyti',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Vilkite paveikslėlį, kad pasirinktumėte, kuri dalis liks matoma.',
   'Git-opslag (ontwerp)': 'Git saugykla (projektas)',
   'Zoek in documentatie…': 'Ieškoti dokumentacijoje…',
   'Geen documenten gevonden': 'Dokumentų nerasta',

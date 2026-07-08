@@ -83,6 +83,9 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Bijsnijden': 'Rajaa',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Vedä kuvaa valitaksesi, mikä osa jää näkyviin.',
   'Git-opslag (ontwerp)': 'Git-tallennus (suunnitelma)',
   'Zoek in documentatie…': 'Etsi dokumentaatiosta…',
   'Geen documenten gevonden': 'Dokumentteja ei löytynyt',

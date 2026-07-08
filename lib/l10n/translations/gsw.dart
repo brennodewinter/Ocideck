@@ -83,6 +83,9 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Bijsnijden': 'Zueschniide',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Zieh s Bild, zum uswähle, weli Teil sichtbar bliibt.',
   'Git-opslag (ontwerp)': 'Git-Speicher (Design)',
   'Zoek in documentatie…': 'I de Dokumentation sueche…',
   'Geen documenten gevonden': 'Kei Dokumänt gfunde',

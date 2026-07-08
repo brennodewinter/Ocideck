@@ -6,6 +6,34 @@
 part of 'markdown_service.dart';
 
 extension _MarkdownSerialize on MarkdownService {
+  /// Emits the image crop focal point(s) as HTML comments Marp ignores, only
+  /// when they differ from the centre default. `2` is the twoImages right image;
+  /// on single-image slides its focal stays centred, so nothing extra is
+  /// written. Round-trips via `ocideck_image_focus` in [_parseBlock].
+  void _writeImageFocus(StringBuffer buf, Slide slide) {
+    if (slide.imageFocalX != 0.5 || slide.imageFocalY != 0.5) {
+      buf.writeln(
+        '<!-- ocideck_image_focus: '
+        '${_formatFocal(slide.imageFocalX)},${_formatFocal(slide.imageFocalY)}'
+        ' -->',
+      );
+    }
+    if (slide.imageFocalX2 != 0.5 || slide.imageFocalY2 != 0.5) {
+      buf.writeln(
+        '<!-- ocideck_image_focus2: '
+        '${_formatFocal(slide.imageFocalX2)},${_formatFocal(slide.imageFocalY2)}'
+        ' -->',
+      );
+    }
+  }
+
+  /// Focal points come from drag maths, so trim to 3 decimals and drop trailing
+  /// zeros to keep the `.md` tidy (0.5 → `0.5`, not `0.500`).
+  String _formatFocal(double value) {
+    final rounded = (value.clamp(0.0, 1.0) * 1000).round() / 1000.0;
+    return rounded.toString();
+  }
+
   void _writeTitleSlide(StringBuffer buf, Slide slide) {
     // Background image before headings so Marp treats it as a bg directive
     if (slide.imagePath.isNotEmpty) {
@@ -18,6 +46,7 @@ extension _MarkdownSerialize on MarkdownService {
       if (!slide.titleImageOverlay) {
         buf.writeln('<!-- ocideck_title_image_overlay: false -->');
       }
+      _writeImageFocus(buf, slide);
       _writeImageCaption(buf, slide.imageCaption);
       buf.writeln();
     }
@@ -131,6 +160,7 @@ extension _MarkdownSerialize on MarkdownService {
       buf.writeln('<div class="split-image">');
       buf.writeln();
       buf.writeln('![](${slide.imagePath})');
+      _writeImageFocus(buf, slide);
       _writeImageCaption(buf, slide.imageCaption);
       buf.writeln();
       buf.writeln('</div>');
@@ -149,6 +179,7 @@ extension _MarkdownSerialize on MarkdownService {
     if (slide.imagePath2.isNotEmpty) {
       buf.writeln('![bg right:${100 - splitPct}%](${slide.imagePath2})');
     }
+    _writeImageFocus(buf, slide);
     _writeCaptionDiv(
       buf,
       _joinTwoCaptions(slide.imageCaption, slide.imageCaption2),
@@ -163,6 +194,7 @@ extension _MarkdownSerialize on MarkdownService {
     if (slide.imagePath.isNotEmpty) {
       final sizeSpec = slide.imageSize > 0 ? ' ${slide.imageSize}%' : '';
       buf.writeln('![bg$sizeSpec](${slide.imagePath})');
+      _writeImageFocus(buf, slide);
       _writeImageCaption(buf, slide.imageCaption);
     }
     if (slide.title.isNotEmpty) {

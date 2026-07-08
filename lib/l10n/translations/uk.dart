@@ -84,6 +84,9 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Bijsnijden': 'Обрізати',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Перетягніть зображення, щоб вибрати, яка частина залишиться видимою.',
   'Git-opslag (ontwerp)': 'Сховище Git (проєкт)',
   'Zoek in documentatie…': 'Пошук у документації…',
   'Geen documenten gevonden': 'Документів не знайдено',

@@ -182,10 +182,50 @@ extension _MarkdownParse on MarkdownService {
     );
   }
 
+  /// Pulls the image crop focal-point comments out of [block] and returns the
+  /// block with those comments removed plus the decoded points (centre default
+  /// when absent). Handled here — not in [_parseBlockDirectives] — so the crop
+  /// directive is stripped before the generic scan treats it as presenter notes,
+  /// without lengthening that already-long method.
+  ({double fx, double fy, double fx2, double fy2, String block})
+  _parseImageFocus(String block) {
+    double fx = 0.5, fy = 0.5, fx2 = 0.5, fy2 = 0.5;
+    final cleaned = block.replaceAllMapped(_reHtmlComment, (m) {
+      final content = m.group(1)!.trim();
+      if (content.startsWith('ocideck_image_focus:')) {
+        final p = _parseFocalPair(content.substring(20));
+        if (p != null) (fx, fy) = p;
+        return '';
+      }
+      if (content.startsWith('ocideck_image_focus2:')) {
+        final p = _parseFocalPair(content.substring(21));
+        if (p != null) (fx2, fy2) = p;
+        return '';
+      }
+      return m.group(0)!;
+    });
+    return (fx: fx, fy: fy, fx2: fx2, fy2: fy2, block: cleaned);
+  }
+
+  /// Parses an `x,y` image focal-point comment into a clamped (0..1) pair, or
+  /// null when the value is malformed (fail-safe: the caller keeps the centre
+  /// default). Plain split — no RegExp — so it stays cheap on the parse path.
+  (double, double)? _parseFocalPair(String raw) {
+    final parts = raw.trim().split(',');
+    if (parts.length != 2) return null;
+    final x = double.tryParse(parts[0].trim());
+    final y = double.tryParse(parts[1].trim());
+    if (x == null || y == null || !x.isFinite || !y.isFinite) return null;
+    return (x.clamp(0.0, 1.0), y.clamp(0.0, 1.0));
+  }
+
   Slide? _parseBlock(String block) {
     if (block.isEmpty) return null;
 
-    final d = _parseBlockDirectives(block);
+    // Lift the crop focal points out first, so the directive is stripped before
+    // the generic comment scan would otherwise read it as presenter notes.
+    final focus = _parseImageFocus(block);
+    final d = _parseBlockDirectives(focus.block);
 
     // Code/chart/cockpit/question slides carry a fenced block the generic line
     // parser below would mangle; they are handled up front.
@@ -276,6 +316,10 @@ extension _MarkdownParse on MarkdownService {
       imagePath2: body.imagePath2,
       imageCaption: body.imageCaption,
       imageCaption2: body.imageCaption2,
+      imageFocalX: focus.fx,
+      imageFocalY: focus.fy,
+      imageFocalX2: focus.fx2,
+      imageFocalY2: focus.fy2,
       imageSize: imageSize,
       titleImageOverlay: d.titleImageOverlay,
       titleTextColorOverride: d.titleTextColorOverride,

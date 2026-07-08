@@ -297,6 +297,10 @@ class _TwoImagesPreview extends StatelessWidget {
                       context,
                       slide.imagePath,
                       projectPath,
+                      alignment: focalAlignment(
+                        slide.imageFocalX,
+                        slide.imageFocalY,
+                      ),
                       semanticLabel: imageSemanticsLabel(
                         context,
                         slide.imageCaption,
@@ -315,6 +319,10 @@ class _TwoImagesPreview extends StatelessWidget {
                       context,
                       slide.imagePath2,
                       projectPath,
+                      alignment: focalAlignment(
+                        slide.imageFocalX2,
+                        slide.imageFocalY2,
+                      ),
                       semanticLabel: imageSemanticsLabel(
                         context,
                         slide.imageCaption2,
@@ -389,9 +397,12 @@ class _ImagePreview extends StatelessWidget {
           projectPath,
           slide.imageSize,
           bgColor: _hexColor(profile.slideBackgroundColor),
-          // When zoomed out, anchor the image to the top so the bottom title
-          // banner sits in the freed-up space instead of over the picture.
-          alignment: hasTitle ? Alignment.topCenter : Alignment.center,
+          // A focal point (crop) decides which part of the picture stays in
+          // view. Without one, keep the old default: when zoomed out, anchor to
+          // the top so the bottom title banner sits in the freed-up space.
+          alignment: hasCustomFocal(slide.imageFocalX, slide.imageFocalY)
+              ? focalAlignment(slide.imageFocalX, slide.imageFocalY)
+              : (hasTitle ? Alignment.topCenter : Alignment.center),
           semanticLabel: imageSemanticsLabel(context, slide.imageCaption),
         ),
         if (slide.title.isNotEmpty)

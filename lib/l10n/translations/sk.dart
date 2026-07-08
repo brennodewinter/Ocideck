@@ -84,6 +84,9 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Bijsnijden': 'Orezať',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Potiahnutím obrázka vyberte, ktorá časť zostane viditeľná.',
   'Git-opslag (ontwerp)': 'Úložisko Git (návrh)',
   'Zoek in documentatie…': 'Hľadať v dokumentácii…',
   'Geen documenten gevonden': 'Nenašli sa žiadne dokumenty',

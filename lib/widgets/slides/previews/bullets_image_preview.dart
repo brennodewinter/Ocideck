@@ -83,6 +83,10 @@ class _BulletsImagePreview extends StatelessWidget {
                   context,
                   slide.imagePath,
                   projectPath,
+                  alignment: focalAlignment(
+                    slide.imageFocalX,
+                    slide.imageFocalY,
+                  ),
                   semanticLabel: imageSemanticsLabel(
                     context,
                     slide.imageCaption,
@@ -251,6 +255,10 @@ class _BulletsImagePreview extends StatelessWidget {
                   context,
                   slide.imagePath,
                   projectPath,
+                  alignment: focalAlignment(
+                    slide.imageFocalX,
+                    slide.imageFocalY,
+                  ),
                   semanticLabel: imageSemanticsLabel(
                     context,
                     slide.imageCaption,

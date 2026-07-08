@@ -161,6 +161,10 @@ class _TitlePreview extends StatelessWidget {
                     projectPath,
                     slide.imageSize,
                     bgColor: _hexColor(profile.titleBackgroundColor),
+                    alignment: focalAlignment(
+                      slide.imageFocalX,
+                      slide.imageFocalY,
+                    ),
                   ),
                   _captionOverlay(context, slide.imageCaption, w),
                 ],
@@ -182,6 +186,7 @@ class _TitlePreview extends StatelessWidget {
           projectPath,
           slide.imageSize,
           bgColor: _hexColor(profile.titleBackgroundColor),
+          alignment: focalAlignment(slide.imageFocalX, slide.imageFocalY),
         ),
         if (slide.titleImageOverlay) _scrim(),
         _lockup(context),
