@@ -85,7 +85,8 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `color_contrast.dart` — WCAG 2.1 contrast-ratio calculation and hex colour parsing.
 - `deck_markdown_dashes.dart` — Escapes standalone dash lines so the deck parser can't misread them.
 - `file_download.dart` — Browserdownload (blob + anker) voor web-opslaan; conditional import met stub.
-- `image_limits.dart` — Caps decoded image dimensions (and `cappedNetworkImage`) to prevent OOM.
+- `image_focal.dart` — Maps a normalized image crop focal point (0..1) to the `Alignment` used to reposition a cropped/cover image.
+- `image_limits.dart` — Caps decoded image dimensions to prevent OOM; the `CappedImage` provider only downscales over-cap images so within-cap animated GIFs/WebP decode natively and keep animating.
 - `image_luminance.dart` — Computes average image colour, cached by mtime/size.
 - `log.dart` — Fail-soft logging to DevTools without exposing sensitive data (`logError`/`logWarning`).
 - `lru_cache.dart` — Fixed-capacity LRU cache backed by `LinkedHashMap`.
@@ -219,6 +220,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 
 ### `lib/widgets/slides/` — slide rendering
 
+- `image_crop_dialog.dart` — Interactive crop/reposition dialog: drag to set the focal point (and zoom for full-slide/title images), WYSIWYG in the slot's aspect ratio.
 - `image_zoom_dialog.dart` — Full-screen pan/zoom image viewer.
 - `inline_markdown.dart` — Lightweight inline-markdown parser (bold/italic/code/links).
 - `mermaid_diagram.dart` — Renders Mermaid definitions to inline SVG in previews.
