@@ -486,6 +486,10 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   behavioural change; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ### Fixed
+- **Deleting a slide keeps focus on the slide above it.** Removing a slide (via
+  its context menu or the Delete/Backspace key) now selects the slide *above* the
+  deleted one instead of jumping back to the first slide; deleting the first
+  slide moves focus to the new first slide.
 - **A `---` inside a fenced code block no longer splits a slide.** Slide
   separation is now fence-aware: a `---` line inside a ```` ``` ```` or `~~~`
   block (a code sample, a diff hunk, an embedded YAML document) is treated as
