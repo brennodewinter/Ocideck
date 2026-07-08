@@ -512,4 +512,29 @@ void main() {
     );
     expect(legacy.bulletMarker, BulletMarker.dot);
   });
+
+  test('a `---` line inside a fenced code block does not split the slide', () {
+    // A code sample, diff hunk or embedded YAML can legitimately contain a
+    // `---` line; fence-aware splitting keeps it as code instead of tearing the
+    // slide into two (one of them malformed).
+    const md =
+        '---\nmarp: true\n---\n\n<!-- _class: code -->\n\n# Config\n\n'
+        '```yaml\na: 1\n---\nb: 2\n```\n';
+    final deck = MarkdownService().parseDeck(md);
+    expect(deck, isNotNull);
+    expect(deck!.slides, hasLength(1));
+    expect(deck.slides.first.type, SlideType.code);
+    // The verbatim code keeps both documents, separator line included.
+    expect(deck.slides.first.customMarkdown, contains('---'));
+    expect(deck.slides.first.customMarkdown, contains('b: 2'));
+  });
+
+  test('splitSlideBlocks keeps top-level separators but not fenced ones', () {
+    final blocks = MarkdownService.splitSlideBlocks(
+      '# Een\n\n```\n---\n```\n\n---\n\n# Twee',
+    );
+    expect(blocks, hasLength(2));
+    expect(blocks.first, contains('---')); // the fenced separator stays put
+    expect(blocks.last, contains('# Twee'));
+  });
 }

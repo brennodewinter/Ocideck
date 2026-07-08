@@ -18,6 +18,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   deck when shared; to remove it, delete the `ocideck_play_only` key from the
   markdown. See [docs/USER_GUIDE.md](docs/USER_GUIDE.md) → *Play-only decks* and
   [docs/FILE_FORMAT.md](docs/FILE_FORMAT.md) §3.
+- **Findings are highlighted in the code, not just the gutter.** After
+  **Check** in markdown mode, each line with a validation issue now gets a
+  coloured band behind the code with a stronger left accent bar — red for
+  errors, amber for warnings — so problems stand out where you edit. The bands
+  scroll with the text and clear as soon as you start typing (the findings are
+  stale then), matching the existing line-number markers.
 - **Per-slide markdown view** — markdown mode can now show a single slide's
   markdown instead of the whole presentation. A graphical sliding toggle at the
   top of the markdown editor switches between **Full presentation** and **This
@@ -368,6 +374,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **The markdown checker is more critical and less noisy.** It now warns about
+  **unknown front-matter keys** (a typo like `pagenate:`, or a Marp option
+  OciDeck does not implement such as `header`/`footer`/`size`/`style`) and about
+  **unsupported directive comments** (Marp's per-slide `<!-- _paginate -->`,
+  `<!-- _header -->`, `<!-- _color -->`, …), which the parser silently drops — so
+  you now get told instead of wondering why they have no effect. At the same
+  time, plain prose speaker-note comments no longer trigger a spurious "missing
+  `_class`" warning, and HTML shown inside a code block (a `<div>`, an
+  `![img](…`, a `<video>`) is no longer mis-flagged as broken markup. Unclosed
+  code fences are detected by real open/close tracking rather than a parity
+  count, so two unclosed fences can no longer cancel each other out.
 - **The documentation list is now grouped into named sections.** Settings →
   Documentation previously showed one long flat list with a single **Design**
   heading at the bottom, so every other document floated without a category. The
@@ -469,6 +486,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   behavioural change; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ### Fixed
+- **A `---` inside a fenced code block no longer splits a slide.** Slide
+  separation is now fence-aware: a `---` line inside a ```` ``` ```` or `~~~`
+  block (a code sample, a diff hunk, an embedded YAML document) is treated as
+  code, not as a slide break, so such slides are no longer silently torn in two.
+  The parser and the in-app markdown checker share one splitter so they always
+  agree on the slide boundaries.
+- **The markdown checker now matches the parser on Windows/Mac line endings.**
+  The checker normalises CRLF/CR up front, like the parser already did; without
+  this a pasted CRLF document made it silently skip the front-matter and
+  slide-structure checks while the parse still succeeded.
 - **The documentation reader no longer throws while you drag its scrollbar.** On
   desktop the reader's scrollbar was not bound to its own scroll view, so
   dragging the thumb raised *"The Scrollbar's ScrollController has no

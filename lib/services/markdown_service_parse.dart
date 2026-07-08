@@ -14,10 +14,12 @@ final _reHtmlList = RegExp(r'^</?(ul|ol)(?:\s[^>]*)?>$', caseSensitive: false);
 final _reBullet = RegExp(r'^([-*+•◦▪▫–]|\d+[.)])\s+(.+)$');
 final _reChecklistMark = RegExp(r'^\[[ xX]\]\s*');
 final _reNumberedMark = RegExp(r'^\d+[.)]$');
+// Slide splitting moved to the fence-aware MarkdownService.splitSlideBlocks so a
+// `---` inside a code fence no longer tears a slide in two; the old
+// `\n---\n`-regex split lived here.
 final _reBgImage = RegExp(r'!\[bg');
 final _reBgImageUrl = RegExp(r'!\[bg[^\]]*\]\(([^)]+)\)');
 final _reBgImageSize = RegExp(r'!\[bg[^\]]*?(\d+)%[^\]]*\]');
-final _reSlideDivider = RegExp(r'\n---\n');
 final _reSeparatorCell = RegExp(r'^:?-+:?$');
 final _reClassDirective = RegExp(r'<!--\s*_class:\s*([^>]+?)\s*-->');
 final _reHtmlComment = RegExp(r'<!--([\s\S]*?)-->', multiLine: true);
@@ -138,7 +140,7 @@ extension _MarkdownParse on MarkdownService {
       }
     }
 
-    final blocks = content.split(_reSlideDivider);
+    final blocks = MarkdownService.splitSlideBlocks(content);
     final slides = <Slide>[];
     for (final block in blocks) {
       final slide = _parseBlock(block.trim());

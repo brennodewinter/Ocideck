@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -48,6 +49,10 @@ class MarkdownDeckEditor extends ConsumerStatefulWidget {
 
 class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   static const _lineHeight = 19.5;
+
+  /// Top inset of the text area; the finding bands and the gutter share it so
+  /// every line's band lines up with its text and its line number.
+  static const _editorTopPadding = 16.0;
 
   late final TextEditingController _ctrl;
   late final ScrollController _scrollController;
@@ -456,31 +461,51 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
             onLineTap: _jumpToLine,
           ),
           Expanded(
-            child: TextField(
-              controller: _ctrl,
-              scrollController: _scrollController,
-              maxLines: null,
-              expands: true,
-              textAlignVertical: TextAlignVertical.top,
-              style: const TextStyle(
-                fontFamily: 'monospace',
-                fontSize: 13,
-                height: 1.5,
-              ),
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(8, 16, 16, 16),
-                border: InputBorder.none,
-                filled: true,
-                fillColor: AppTheme.slate50,
-              ),
-              onChanged: (_) {
-                setState(() {
-                  _validation = null;
-                });
-                if (_findVisible && _findQuery.isNotEmpty) {
-                  _recountMatches(selectFirst: false);
-                }
-              },
+            child: Stack(
+              children: [
+                // Backdrop + the coloured finding bands sit behind the text; the
+                // TextField's own fill is transparent so they show through while
+                // the text, caret and selection stay on top and readable.
+                Positioned.fill(child: ColoredBox(color: AppTheme.slate50)),
+                Positioned.fill(
+                  child: _IssueHighlightLayer(
+                    scrollController: _scrollController,
+                    issueLines: issueLines,
+                    topPadding: _editorTopPadding,
+                  ),
+                ),
+                TextField(
+                  controller: _ctrl,
+                  scrollController: _scrollController,
+                  maxLines: null,
+                  expands: true,
+                  textAlignVertical: TextAlignVertical.top,
+                  style: const TextStyle(
+                    fontFamily: 'monospace',
+                    fontSize: 13,
+                    height: 1.5,
+                  ),
+                  decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.fromLTRB(
+                      8,
+                      _editorTopPadding,
+                      16,
+                      16,
+                    ),
+                    border: InputBorder.none,
+                    filled: true,
+                    fillColor: Colors.transparent,
+                  ),
+                  onChanged: (_) {
+                    setState(() {
+                      _validation = null;
+                    });
+                    if (_findVisible && _findQuery.isNotEmpty) {
+                      _recountMatches(selectFirst: false);
+                    }
+                  },
+                ),
+              ],
             ),
           ),
         ],
@@ -766,6 +791,98 @@ class _IssueTile extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Paints a full-width coloured band (plus a stronger left accent bar) behind
+/// every line that carries a validation issue, so findings are visible in the
+/// code itself — red for errors, amber for warnings — not only in the gutter.
+/// It scrolls in lock-step with the text via [scrollController].
+class _IssueHighlightLayer extends StatelessWidget {
+  final ScrollController scrollController;
+  final Map<int, MarkdownValidationSeverity> issueLines;
+  final double topPadding;
+
+  const _IssueHighlightLayer({
+    required this.scrollController,
+    required this.issueLines,
+    required this.topPadding,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (issueLines.isEmpty) return const SizedBox.shrink();
+    return IgnorePointer(
+      child: ClipRect(
+        child: AnimatedBuilder(
+          animation: scrollController,
+          builder: (context, _) {
+            final offset = scrollController.hasClients
+                ? scrollController.offset
+                : 0.0;
+            return CustomPaint(
+              painter: _IssueHighlightPainter(
+                issueLines: issueLines,
+                lineHeight: _MarkdownDeckEditorState._lineHeight,
+                topPadding: topPadding,
+                scrollOffset: offset,
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _IssueHighlightPainter extends CustomPainter {
+  final Map<int, MarkdownValidationSeverity> issueLines;
+  final double lineHeight;
+  final double topPadding;
+  final double scrollOffset;
+
+  _IssueHighlightPainter({
+    required this.issueLines,
+    required this.lineHeight,
+    required this.topPadding,
+    required this.scrollOffset,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    for (final entry in issueLines.entries) {
+      final (band, accent) = switch (entry.value) {
+        MarkdownValidationSeverity.error => (
+          AppTheme.dangerBgSoft,
+          Colors.red.shade700,
+        ),
+        MarkdownValidationSeverity.warning => (
+          AppTheme.warningBgSoft,
+          AppTheme.warningFg,
+        ),
+        MarkdownValidationSeverity.informational => (
+          AppTheme.slate200,
+          AppTheme.slate400,
+        ),
+      };
+      final top = topPadding + (entry.key - 1) * lineHeight - scrollOffset;
+      if (top + lineHeight < 0 || top > size.height) continue;
+      canvas.drawRect(
+        Rect.fromLTWH(0, top, size.width, lineHeight),
+        Paint()..color = band,
+      );
+      canvas.drawRect(
+        Rect.fromLTWH(0, top, 3, lineHeight),
+        Paint()..color = accent,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(_IssueHighlightPainter old) =>
+      old.scrollOffset != scrollOffset ||
+      old.topPadding != topPadding ||
+      old.lineHeight != lineHeight ||
+      !mapEquals(old.issueLines, issueLines);
 }
 
 class _LineNumberGutter extends StatelessWidget {
