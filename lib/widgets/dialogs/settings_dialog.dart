@@ -19,7 +19,7 @@ import '../../l10n/app_localizations.dart';
 import '../editors/advanced_section.dart';
 import '../language_flag.dart';
 import '../privacy_statement_content.dart';
-import '../reader/document_reader_screen.dart';
+import '../reader/documentation_search_tab.dart';
 
 part 'parts/settings_dialog_general.dart';
 part 'parts/settings_dialog_appearance.dart';

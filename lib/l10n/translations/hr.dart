@@ -83,6 +83,8 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Zoek in documentatie…': 'Pretraži dokumentaciju…',
+  'Geen documenten gevonden': 'Nisu pronađeni dokumenti',
   'Alleen afspelen (vergrendeld)': 'Samo reprodukcija (zaključano)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Ova prezentacija je zaključana na samo reprodukciju.',

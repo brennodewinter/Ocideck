@@ -84,6 +84,8 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Zoek in documentatie…': 'Пошук у документації…',
+  'Geen documenten gevonden': 'Документів не знайдено',
   'Alleen afspelen (vergrendeld)': 'Тільки презентування (заблоковано)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Ця презентація заблокована тільки для презентування.',

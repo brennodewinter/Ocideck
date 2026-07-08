@@ -496,6 +496,12 @@ OciDeck aims for WCAG 2.1 in the editor:
   column, while running text stays at a comfortable line length. Its app bar has
   a subtle **A−/A+** control to enlarge or shrink the document text; the choice
   is remembered and is independent of the interface text size above.
+- **Searching the documentation** — *Settings → Documentation* has a search box
+  above the list. Type one or more words and the list narrows to the documents
+  whose title or body contains **all** of them, with a short excerpt showing
+  where each match sits and the words highlighted. Clearing the box restores the
+  full grouped list. The search runs over the documents in your current
+  interface language.
 - **Keyboard** — the panel divider between the slide list and the editor can be
   focused with `Tab` and resized with `←`/`→`; the add-slide dialog is fully
   keyboard-operable.

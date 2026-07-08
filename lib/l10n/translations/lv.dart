@@ -83,6 +83,8 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Zoek in documentatie…': 'Meklēt dokumentācijā…',
+  'Geen documenten gevonden': 'Nav atrasts neviens dokuments',
   'Alleen afspelen (vergrendeld)': 'Tikai atskaņošana (bloķēts)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Šī prezentācija ir bloķēta tikai atskaņošanai.',

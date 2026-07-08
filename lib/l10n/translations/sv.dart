@@ -83,6 +83,8 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Zoek in documentatie…': 'Sök i dokumentation…',
+  'Geen documenten gevonden': 'Inga dokument hittades',
   'Alleen afspelen (vergrendeld)': 'Endast uppspelning (låst)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Denna presentation är låst för endast uppspelning.',

@@ -84,6 +84,8 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'Zoek in documentatie…': 'Rechercher dans la documentation…',
+  'Geen documenten gevonden': 'Aucun document trouvé',
   'Alleen afspelen (vergrendeld)': 'Lecture seule (verrouillée)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Cette présentation est verrouillée en mode lecture seule.',

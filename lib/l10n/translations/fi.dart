@@ -83,6 +83,8 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Zoek in documentatie…': 'Etsi dokumentaatiosta…',
+  'Geen documenten gevonden': 'Dokumentteja ei löytynyt',
   'Alleen afspelen (vergrendeld)': 'Vain toisto (lukittu)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Tämä esitys on lukittu vain toistoon.',

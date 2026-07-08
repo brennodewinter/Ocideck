@@ -83,6 +83,8 @@ const _stringsDe = {
 };
 
 const _dutchSourceDe = {
+  'Zoek in documentatie…': 'In Dokumentation suchen…',
+  'Geen documenten gevonden': 'Keine Dokumente gefunden',
   'Alleen afspelen (vergrendeld)': 'Nur abspielen (gesperrt)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Diese Präsentation ist zum nur abspielen gesperrt.',

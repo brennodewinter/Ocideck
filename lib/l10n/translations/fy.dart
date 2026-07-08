@@ -83,6 +83,8 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Zoek in documentatie…': 'Sykje yn dokumintaasje…',
+  'Geen documenten gevonden': 'Gjin dokuminten fûn',
   'Alleen afspelen (vergrendeld)': 'Allinnich ôfspylje (skoattele)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Dizze presintaasje is skoattele op de ôfspylje-modus allinne.',

@@ -84,6 +84,8 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Zoek in documentatie…': 'Търсене в документацията…',
+  'Geen documenten gevonden': 'Няма намерени документи',
   'Alleen afspelen (vergrendeld)': 'Само за представяне (заключено)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Тази презентация е заключена само за представяне.',

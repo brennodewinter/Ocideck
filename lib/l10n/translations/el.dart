@@ -83,6 +83,8 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Zoek in documentatie…': 'Αναζήτηση στην τεκμηρίωση…',
+  'Geen documenten gevonden': 'Δεν βρέθηκαν έγγραφα',
   'Alleen afspelen (vergrendeld)': 'Μόνο προβολή (κλειδωμένο)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Αυτή η παρουσίαση είναι κλειδωμένη σε μόνο προβολή.',

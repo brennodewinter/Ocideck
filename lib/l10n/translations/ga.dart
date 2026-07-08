@@ -85,6 +85,8 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Zoek in documentatie…': 'Cuardaigh sa doiciméadú…',
+  'Geen documenten gevonden': 'Níor aimsíodh aon doiciméad',
   'Alleen afspelen (vergrendeld)': 'Seinm amháin (glasáilte)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Tá an láithreoireacht seo glasáilte le seinm amháin.',

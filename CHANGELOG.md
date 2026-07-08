@@ -8,6 +8,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Search the documentation** — *Settings → Documentation* now has a search box
+  above the document list. Type one or more words and the list narrows to the
+  documents whose title or body contains all of them, each shown with a short
+  excerpt where the words are highlighted. Clearing the box restores the full
+  grouped list. Bodies are searched in the current interface language. See
+  [docs/USER_GUIDE.md](docs/USER_GUIDE.md) → *Accessibility*.
 - **Play-only lock** — a deck can be marked *play-only* in its file
   (`ocideck_play_only: true` in the front matter, or the **Play only (locked)**
   switch in *Presentation properties*). A play-only deck opens locked: the

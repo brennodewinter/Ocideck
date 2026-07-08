@@ -84,6 +84,8 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Zoek in documentatie…': 'Caută în documentație…',
+  'Geen documenten gevonden': 'Nu s-au găsit documente',
   'Alleen afspelen (vergrendeld)': 'Doar redare (blocat)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Această prezentare este blocată numai pentru redare.',

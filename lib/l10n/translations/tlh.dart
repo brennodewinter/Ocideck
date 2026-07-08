@@ -81,6 +81,8 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Zoek in documentatie…': 'ghItlhmeyDaq yISam…',
+  'Geen documenten gevonden': 'ghItlh tu\'be\'lu\'',
   'Alleen afspelen (vergrendeld)': 'cho\'qa\' neH (ngaQmoHlu\'pu\')',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'cho\'qa\' neH ngaQmoHlu\'pu\' nobvam.',

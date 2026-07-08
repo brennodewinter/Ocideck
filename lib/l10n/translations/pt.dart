@@ -84,6 +84,8 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'Zoek in documentatie…': 'Procurar na documentação…',
+  'Geen documenten gevonden': 'Nenhum documento encontrado',
   'Alleen afspelen (vergrendeld)': 'Apenas reprodução (bloqueado)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Esta apresentação está bloqueada no modo apenas reprodução.',
