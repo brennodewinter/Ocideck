@@ -83,6 +83,9 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Git-opslag (ontwerp)': 'Git-Speicher (Design)',
+  'Zoek in documentatie…': 'I de Dokumentation sueche…',
+  'Geen documenten gevonden': 'Kei Dokumänt gfunde',
   'Alleen afspelen (vergrendeld)': 'Nume abspiele (verrieglet)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Die Präsentation isch uf nume abspiele verrieglet.',

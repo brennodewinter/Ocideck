@@ -84,6 +84,9 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Git-opslag (ontwerp)': 'Úložiště Git (návrh)',
+  'Zoek in documentatie…': 'Hledat v dokumentaci…',
+  'Geen documenten gevonden': 'Nebyly nalezeny žádné dokumenty',
   'Alleen afspelen (vergrendeld)': 'Pouze pro prezentaci (zamknuté)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Tato prezentace je zamknutá pouze pro prezentaci.',

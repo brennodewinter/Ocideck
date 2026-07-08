@@ -83,6 +83,9 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Git-opslag (ontwerp)': 'Git-lagring (design)',
+  'Zoek in documentatie…': 'Søg i dokumentation…',
+  'Geen documenten gevonden': 'Ingen dokumenter fundet',
   'Alleen afspelen (vergrendeld)': 'Kun afspilning (låst)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Denne præsentation er låst til kun afspilning.',

@@ -84,6 +84,9 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Git-opslag (ontwerp)': 'Úložisko Git (návrh)',
+  'Zoek in documentatie…': 'Hľadať v dokumentácii…',
+  'Geen documenten gevonden': 'Nenašli sa žiadne dokumenty',
   'Alleen afspelen (vergrendeld)': 'Iba na prezentovanie (zamknuté)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Táto prezentácia je zamknutá iba na prezentovanie.',

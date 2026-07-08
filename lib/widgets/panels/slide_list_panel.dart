@@ -362,9 +362,10 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     final remaining = deck.slides.length - selection.length;
     if (remaining < 1) return;
     ref.read(deckProvider.notifier).removeSlides(selection);
-    final target = selection
-        .reduce((a, b) => a < b ? a : b)
-        .clamp(0, remaining - 1);
+    // Focus naar de slide bóven het verwijderde blok (of de eerste als het
+    // blok bij de eerste slide begon), niet terug naar het begin.
+    final firstRemoved = selection.reduce((a, b) => a < b ? a : b);
+    final target = (firstRemoved - 1).clamp(0, remaining - 1);
     ref.read(editorProvider.notifier).select(target);
   }
 
@@ -599,7 +600,9 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
           onDelete: () {
             if (deck.slides.length <= 1) return;
             notifier.removeSlide(index);
-            editorNotifier.clampIndex(deck.slides.length - 2);
+            // Focus naar de slide bóven de verwijderde (of de eerste als de
+            // eerste is verwijderd), niet terug naar het begin.
+            editorNotifier.select((index - 1).clamp(0, deck.slides.length - 2));
           },
         );
       },
@@ -693,7 +696,9 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
           onDelete: () {
             if (deck.slides.length <= 1) return;
             notifier.removeSlide(i);
-            editorNotifier.clampIndex(deck.slides.length - 2);
+            // Focus naar de slide bóven de verwijderde (of de eerste als de
+            // eerste is verwijderd), niet terug naar het begin.
+            editorNotifier.select((i - 1).clamp(0, deck.slides.length - 2));
           },
         );
       },

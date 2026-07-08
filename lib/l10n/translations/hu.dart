@@ -83,6 +83,9 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Git-opslag (ontwerp)': 'Git-tárolás (terv)',
+  'Zoek in documentatie…': 'Keresés a dokumentációban…',
+  'Geen documenten gevonden': 'Nem található dokumentum',
   'Alleen afspelen (vergrendeld)': 'Csak lejátszás (zárva)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Ez a bemutató csak lejátszásra van zárva.',

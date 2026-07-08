@@ -83,6 +83,9 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Git-opslag (ontwerp)': 'Git saugykla (projektas)',
+  'Zoek in documentatie…': 'Ieškoti dokumentacijoje…',
+  'Geen documenten gevonden': 'Dokumentų nerasta',
   'Alleen afspelen (vergrendeld)': 'Tik atkūrimas (užrakinta)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Šis pristatymas užrakintas tik atkūrimui.',

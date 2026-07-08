@@ -106,6 +106,7 @@ flutter:
     - docs/LICENSE_COMPLIANCE.md
     - docs/SBOM.md
     - docs/design/COLLABORATION.md
+    - docs/design/GIT_STORAGE.md
   fonts:
     - family: EB Garamond
       fonts:

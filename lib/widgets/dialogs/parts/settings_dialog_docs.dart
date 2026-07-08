@@ -6,145 +6,103 @@ part of '../settings_dialog.dart';
 
 extension _SettingsDocs on _SettingsDialogState {
   /// Lists the bundled user documentation; each row opens the full-screen
-  /// reader. The licence also offers its canonical online version.
+  /// reader, and a search field filters the list by the words in each document.
+  /// The licence also offers its canonical online version.
+  ///
+  /// Documents are grouped by audience so the list reads as named sections
+  /// rather than one long flat run. Every group carries a heading (including the
+  /// first), so no tile floats without a category. The `assetBase` string
+  /// literals below are what docs_registration_test.dart greps for — keep them
+  /// as literals here when adding a document.
   Widget _documentationTab() {
     final l10n = context.l10n;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Documents are grouped by audience so the list reads as named
-        // sections rather than one long flat run. Every group carries a
-        // heading (including this first one), so no tile floats without a
-        // category. Guarded by docs_registration_test.dart.
-        _docSectionHeader(l10n.d('Gebruiker')),
-        _docTile(
-          Icons.menu_book_outlined,
-          l10n.d('Gebruikershandleiding'),
-          assetBase: 'docs/USER_GUIDE.md',
+    return DocumentationSearchTab(
+      sections: [
+        DocSection(
+          label: l10n.d('Gebruiker'),
+          entries: [
+            DocEntry(
+              icon: Icons.menu_book_outlined,
+              title: l10n.d('Gebruikershandleiding'),
+              assetBase: 'docs/USER_GUIDE.md',
+            ),
+            DocEntry(
+              icon: Icons.keyboard_outlined,
+              title: l10n.d('Sneltoetsen'),
+              assetBase: 'docs/SHORTCUTS.md',
+            ),
+            DocEntry(
+              icon: Icons.description_outlined,
+              title: l10n.d('Bestandsformaat'),
+              assetBase: 'docs/FILE_FORMAT.md',
+            ),
+          ],
         ),
-        _docTile(
-          Icons.keyboard_outlined,
-          l10n.d('Sneltoetsen'),
-          assetBase: 'docs/SHORTCUTS.md',
+        DocSection(
+          label: l10n.d('Techniek'),
+          entries: [
+            DocEntry(
+              icon: Icons.account_tree_outlined,
+              title: l10n.d('Architectuur'),
+              assetBase: 'docs/ARCHITECTURE.md',
+            ),
+            DocEntry(
+              icon: Icons.build_outlined,
+              title: l10n.d('Bouwinstructies'),
+              assetBase: 'docs/BUILD.md',
+            ),
+            DocEntry(
+              icon: Icons.fact_check_outlined,
+              title: l10n.d('Kwaliteitscontroles'),
+              assetBase: 'docs/CHECKS.md',
+            ),
+            DocEntry(
+              icon: Icons.map_outlined,
+              title: l10n.d('Broncodekaart'),
+              assetBase: 'docs/SOURCE_MAP.md',
+            ),
+          ],
         ),
-        _docTile(
-          Icons.description_outlined,
-          l10n.d('Bestandsformaat'),
-          assetBase: 'docs/FILE_FORMAT.md',
-        ),
-        _docSectionHeader(l10n.d('Techniek')),
-        _docTile(
-          Icons.account_tree_outlined,
-          l10n.d('Architectuur'),
-          assetBase: 'docs/ARCHITECTURE.md',
-        ),
-        _docTile(
-          Icons.build_outlined,
-          l10n.d('Bouwinstructies'),
-          assetBase: 'docs/BUILD.md',
-        ),
-        _docTile(
-          Icons.fact_check_outlined,
-          l10n.d('Kwaliteitscontroles'),
-          assetBase: 'docs/CHECKS.md',
-        ),
-        _docTile(
-          Icons.map_outlined,
-          l10n.d('Broncodekaart'),
-          assetBase: 'docs/SOURCE_MAP.md',
-        ),
-        _docSectionHeader(l10n.d('Licentie en naleving')),
-        _docTile(
-          Icons.balance_outlined,
-          l10n.d('Licentienaleving'),
-          assetBase: 'docs/LICENSE_COMPLIANCE.md',
-        ),
-        _docTile(
-          Icons.inventory_2_outlined,
-          l10n.d('Softwarestuklijst (SBOM)'),
-          assetBase: 'docs/SBOM.md',
-        ),
-        _docTile(
-          Icons.gavel_outlined,
-          l10n.d('Licentie (EUPL 1.2)'),
-          assetBase: 'LICENSE.md',
-          onlineUrl: PrivacyStatementContent.licenseUrl,
+        DocSection(
+          label: l10n.d('Licentie en naleving'),
+          entries: [
+            DocEntry(
+              icon: Icons.balance_outlined,
+              title: l10n.d('Licentienaleving'),
+              assetBase: 'docs/LICENSE_COMPLIANCE.md',
+            ),
+            DocEntry(
+              icon: Icons.inventory_2_outlined,
+              title: l10n.d('Softwarestuklijst (SBOM)'),
+              assetBase: 'docs/SBOM.md',
+            ),
+            DocEntry(
+              icon: Icons.gavel_outlined,
+              title: l10n.d('Licentie (EUPL 1.2)'),
+              assetBase: 'LICENSE.md',
+              onlineUrl: PrivacyStatementContent.licenseUrl,
+            ),
+          ],
         ),
         // Design documents (docs/design/**) are their own class: forward-looking
         // specs rather than product/reference docs, so they sit under a separate
         // heading.
-        _docSectionHeader(l10n.d('Ontwerp')),
-        _docTile(
-          Icons.groups_outlined,
-          l10n.d('Samenwerking (ontwerp)'),
-          assetBase: 'docs/design/COLLABORATION.md',
+        DocSection(
+          label: l10n.d('Ontwerp'),
+          entries: [
+            DocEntry(
+              icon: Icons.groups_outlined,
+              title: l10n.d('Samenwerking (ontwerp)'),
+              assetBase: 'docs/design/COLLABORATION.md',
+            ),
+            DocEntry(
+              icon: Icons.commit_outlined,
+              title: l10n.d('Git-opslag (ontwerp)'),
+              assetBase: 'docs/design/GIT_STORAGE.md',
+            ),
+          ],
         ),
       ],
-    );
-  }
-
-  /// Small caps-style heading that separates a class of documents (e.g. the
-  /// design specs) from the general documentation above it.
-  Widget _docSectionHeader(String label) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 6, bottom: 10, left: 2),
-      child: Text(
-        label.toUpperCase(),
-        style: TextStyle(
-          fontSize: 11,
-          fontWeight: FontWeight.w700,
-          letterSpacing: 0.6,
-          color: AppTheme.slate400,
-        ),
-      ),
-    );
-  }
-
-  Widget _docTile(
-    IconData icon,
-    String title, {
-    required String assetBase,
-    String? onlineUrl,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Material(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(10),
-          onTap: () => DocumentReaderScreen.open(
-            context,
-            title: title,
-            assetBase: assetBase,
-            onlineUrl: onlineUrl,
-          ),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-            decoration: BoxDecoration(
-              border: Border.all(color: AppTheme.slate300),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              children: [
-                Icon(icon, size: 22, color: AppTheme.blue500),
-                const SizedBox(width: 14),
-                Expanded(
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: AppTheme.slate700,
-                    ),
-                  ),
-                ),
-                Icon(Icons.chevron_right, size: 20, color: AppTheme.slate400),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

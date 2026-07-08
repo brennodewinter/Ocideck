@@ -84,6 +84,9 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Git-opslag (ontwerp)': 'Ħażna Git (disinn)',
+  'Zoek in documentatie…': 'Fittex fid-dokumentazzjoni…',
+  'Geen documenten gevonden': 'Ma nstab l-ebda dokument',
   'Alleen afspelen (vergrendeld)': 'Daqq biss (imsakkar)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'Din il-preżentazzjoni hija msakkra għad-daqq biss.',

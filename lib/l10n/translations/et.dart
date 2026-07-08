@@ -82,6 +82,9 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Git-opslag (ontwerp)': 'Git-salvestus (kavand)',
+  'Zoek in documentatie…': 'Otsi dokumentatsioonist…',
+  'Geen documenten gevonden': 'Ühtegi dokumenti ei leitud',
   'Alleen afspelen (vergrendeld)': 'Ainult esitatav (lukustatud)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'See esitlus on lukustatud ainult esitamisele.',

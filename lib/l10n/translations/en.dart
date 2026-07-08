@@ -83,6 +83,9 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'Git-opslag (ontwerp)': 'Git storage (design)',
+  'Zoek in documentatie…': 'Search in documentation…',
+  'Geen documenten gevonden': 'No documents found',
   'Alleen afspelen (vergrendeld)': 'Play-only (locked)',
   'Deze presentatie is vergrendeld op alleen afspelen.':
       'This presentation is locked to play-only mode.',
