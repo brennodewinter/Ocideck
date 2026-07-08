@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
+import '../slides/image_crop_dialog.dart';
 import '_editor_field.dart';
 import '../../theme/app_theme.dart';
 
@@ -53,6 +54,43 @@ class _TitleEditorState extends ConsumerState<TitleEditor>
   void _emit() {
     widget.onUpdate(
       widget.slide.copyWith(title: _title.text, subtitle: _subtitle.text),
+    );
+  }
+
+  Widget _cropButton(String imagePath) {
+    if (!imageIsCroppable(imagePath)) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: OutlinedButton.icon(
+          icon: const Icon(Icons.crop, size: 18),
+          label: Text(context.l10n.d('Bijsnijden')),
+          onPressed: _openCrop,
+        ),
+      ),
+    );
+  }
+
+  Future<void> _openCrop() async {
+    // The title background is full-bleed (16:9); crop tunes zoom + focal point.
+    final result = await showImageCropDialog(
+      context,
+      imagePath: widget.slide.imagePath,
+      projectPath: widget.captionBasePath,
+      frameAspect: 16 / 9,
+      imageSize: widget.slide.imageSize,
+      focalX: widget.slide.imageFocalX,
+      focalY: widget.slide.imageFocalY,
+      enableZoom: true,
+    );
+    if (result == null) return;
+    widget.onUpdate(
+      widget.slide.copyWith(
+        imageSize: result.imageSize,
+        imageFocalX: result.focalX,
+        imageFocalY: result.focalY,
+      ),
     );
   }
 
@@ -145,6 +183,7 @@ class _TitleEditorState extends ConsumerState<TitleEditor>
                   widget.onUpdate(widget.slide.copyWith(imageSize: v)),
             ),
           ],
+          _cropButton(imagePath),
           const SizedBox(height: 12),
           CheckboxListTile(
             value: widget.slide.titleImageOverlay,

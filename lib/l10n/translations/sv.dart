@@ -83,6 +83,9 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Bijsnijden': 'Beskär',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Dra i bilden för att välja vilken del som förblir synlig.',
   'Git-opslag (ontwerp)': 'Git-lagring (design)',
   'Zoek in documentatie…': 'Sök i dokumentation…',
   'Geen documenten gevonden': 'Inga dokument hittades',

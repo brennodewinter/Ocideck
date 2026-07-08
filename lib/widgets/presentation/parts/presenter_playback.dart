@@ -47,7 +47,9 @@ extension _PresenterPlayback on _FullscreenPresenterState {
         ? resolveTrustedAssetPath(path, widget.projectPath)
         : resolveSlideAssetPath(path, widget.projectPath);
     if (resolved == null) return;
-    precacheImage(FileImage(File(resolved)), context, onError: (_, _) {});
+    // Capped provider (same cache key as display) so the precached frame is
+    // reused and an animated image is decoded animation-preserving, not frozen.
+    precacheImage(cappedFileImage(File(resolved)), context, onError: (_, _) {});
   }
 
   void _scheduleAdvance() {

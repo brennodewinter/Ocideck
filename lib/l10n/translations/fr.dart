@@ -84,6 +84,9 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'Bijsnijden': 'Rogner',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Faites glisser l\'image pour choisir la partie qui reste visible.',
   'Git-opslag (ontwerp)': 'Stockage Git (conception)',
   'Zoek in documentatie…': 'Rechercher dans la documentation…',
   'Geen documenten gevonden': 'Aucun document trouvé',

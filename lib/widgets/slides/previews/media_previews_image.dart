@@ -23,6 +23,9 @@ Widget _zoomedImage(
       context,
       imagePath,
       projectPath,
+      // Cover crops the overflow; honour the focal point so the author can pick
+      // which part of the picture stays in view instead of always centring.
+      alignment: alignment,
       semanticLabel: semanticLabel,
     ); // BoxFit.cover standaard
   }
@@ -76,6 +79,7 @@ Widget _resolvedImage(
   String imagePath,
   String? projectPath, {
   BoxFit fit = BoxFit.cover,
+  Alignment alignment = Alignment.center,
   bool trustedAsset = false,
   String? semanticLabel,
 }) {
@@ -87,6 +91,7 @@ Widget _resolvedImage(
     return Image(
       image: cappedBundledAssetImage(bundledAssetKey(imagePath)),
       fit: fit,
+      alignment: alignment,
       width: double.infinity,
       height: double.infinity,
       gaplessPlayback: true,
@@ -105,6 +110,7 @@ Widget _resolvedImage(
     return Image(
       image: cappedMemoryImage(memBytes),
       fit: fit,
+      alignment: alignment,
       width: double.infinity,
       height: double.infinity,
       gaplessPlayback: true,
@@ -137,6 +143,7 @@ Widget _resolvedImage(
         return Image(
           image: cappedNetworkImage(imagePath),
           fit: fit,
+          alignment: alignment,
           width: double.infinity,
           height: double.infinity,
           gaplessPlayback: true,
@@ -168,6 +175,7 @@ Widget _resolvedImage(
     // exhaust memory; see cappedFileImage / kMaxImageDecodeDimension.
     image: cappedFileImage(File(resolved)),
     fit: fit,
+    alignment: alignment,
     width: double.infinity,
     height: double.infinity,
     semanticLabel: semanticLabel,

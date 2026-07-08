@@ -83,6 +83,9 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Bijsnijden': 'Περικοπή',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Σύρετε την εικόνα για να επιλέξετε ποιο μέρος παραμένει ορατό.',
   'Git-opslag (ontwerp)': 'Αποθήκευση Git (σχεδίαση)',
   'Zoek in documentatie…': 'Αναζήτηση στην τεκμηρίωση…',
   'Geen documenten gevonden': 'Δεν βρέθηκαν έγγραφα',

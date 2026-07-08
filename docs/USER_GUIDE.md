@@ -101,6 +101,15 @@ falls outside the frame — handy for full-bleed photos. Leave it off to show th
 scales it from edge-to-edge fit down to smaller, or zoomed in past the frame.
 An optional title overlay can sit on top.
 
+**Crop to fit.** When a picture is cropped (slide-filling or zoomed in) and the
+wrong part shows, click **Bijsnijden** (Crop). A live editor opens with the image
+inside its slot: **drag** the picture to choose which part stays in view, and —
+for the large image and title background — **zoom** in the same dialog. The crop
+is non-destructive: it stores a focal point, never rewrites the image file, and
+travels with the deck in the `.md`. The same **Bijsnijden** button is on the
+title background, the bullets-and-image panel, and each image of a two-images
+slide (remote/URL images can't be cropped this way).
+
 ### Source-code slides
 
 Choose a programming language for syntax highlighting (or "plain text") and paste
@@ -255,6 +264,12 @@ directories, with a grid and a coverflow view, search, and a preview pane. Per
 image you can store a **caption** (source/credit line, shown on the slide) and a
 searchable **description** — in practice your tags. The search box matches file
 names and descriptions.
+
+Supported formats are PNG, JPEG, **GIF (including animated)**, BMP and WebP.
+Animated GIFs (and animated WebP) play in the preview, presentation and audience
+window. Very large images are decoded at a capped size to protect memory; a
+picture within that limit — which covers virtually all animations — plays at
+native resolution. PDF/PPTX export captures one still frame.
 
 - **Filter untagged images** — the label toggle next to the search box shows
   only images that have no description/tags yet, so you can see at a glance

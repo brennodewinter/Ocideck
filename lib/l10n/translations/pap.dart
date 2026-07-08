@@ -83,6 +83,9 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Bijsnijden': 'Korta',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Lastra e imagen pa skohe ki parti ta keda visibel.',
   'Git-opslag (ontwerp)': 'Almasenamentu Git (diseño)',
   'Zoek in documentatie…': 'Buska den dokumentashon…',
   'Geen documenten gevonden': 'No a haña ningun dokumento',

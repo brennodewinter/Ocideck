@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/web_asset_store.dart';
+import 'package:ocideck/utils/image_limits.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
 Future<Uint8List> _redPngBytes() async {
@@ -65,17 +66,13 @@ void main() {
       await tester.pump();
 
       // De preview moet een echte Image tekenen (geen placeholder-icoon)
-      // waarvan de provider onze bytes draagt.
+      // waarvan de capped provider onze bytes als cache-sleutel draagt.
       final images = tester
           .widgetList<Image>(find.byType(Image))
           .where(
             (w) =>
-                w.image is ResizeImage &&
-                (w.image as ResizeImage).imageProvider is MemoryImage &&
-                identical(
-                  ((w.image as ResizeImage).imageProvider as MemoryImage).bytes,
-                  bytes,
-                ),
+                w.image is CappedImage &&
+                identical((w.image as CappedImage).cacheKey, bytes),
           );
       expect(images, isNotEmpty, reason: 'mem:-afbeelding moet renderen');
       expect(find.byIcon(Icons.image_outlined), findsNothing);

@@ -84,6 +84,9 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Bijsnijden': 'Oříznout',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Přetažením obrázku vyberte, která část zůstane viditelná.',
   'Git-opslag (ontwerp)': 'Úložiště Git (návrh)',
   'Zoek in documentatie…': 'Hledat v dokumentaci…',
   'Geen documenten gevonden': 'Nebyly nalezeny žádné dokumenty',

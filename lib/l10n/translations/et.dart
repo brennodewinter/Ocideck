@@ -82,6 +82,9 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Bijsnijden': 'Kärbi',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Lohista pilti, et valida, milline osa jääb nähtavaks.',
   'Git-opslag (ontwerp)': 'Git-salvestus (kavand)',
   'Zoek in documentatie…': 'Otsi dokumentatsioonist…',
   'Geen documenten gevonden': 'Ühtegi dokumenti ei leitud',

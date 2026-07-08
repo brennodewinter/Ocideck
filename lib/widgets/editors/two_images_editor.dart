@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/slide.dart';
 import '../../state/deck_provider.dart';
+import '../slides/image_crop_dialog.dart';
 import '_editor_field.dart';
 import '../../theme/app_theme.dart';
 
@@ -85,6 +87,52 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
     );
   }
 
+  Future<void> _openCrop(bool isSecond) async {
+    // Each picture covers its half-panel; the split (imageSize) sets the widths,
+    // so crop only repositions the cover crop of that one image.
+    final leftFraction =
+        (widget.slide.imageSize > 0 ? widget.slide.imageSize / 100.0 : 0.5)
+            .clamp(0.1, 0.9);
+    final fraction = isSecond ? 1 - leftFraction : leftFraction;
+    final result = await showImageCropDialog(
+      context,
+      imagePath: isSecond ? widget.slide.imagePath2 : widget.slide.imagePath,
+      projectPath: widget.captionBasePath,
+      frameAspect: fraction * 16 / 9,
+      imageSize: widget.slide.imageSize,
+      focalX: isSecond ? widget.slide.imageFocalX2 : widget.slide.imageFocalX,
+      focalY: isSecond ? widget.slide.imageFocalY2 : widget.slide.imageFocalY,
+    );
+    if (result == null) return;
+    widget.onUpdate(
+      isSecond
+          ? widget.slide.copyWith(
+              imageFocalX2: result.focalX,
+              imageFocalY2: result.focalY,
+            )
+          : widget.slide.copyWith(
+              imageFocalX: result.focalX,
+              imageFocalY: result.focalY,
+            ),
+    );
+  }
+
+  Widget _cropButton(bool isSecond) {
+    final path = isSecond ? widget.slide.imagePath2 : widget.slide.imagePath;
+    if (!imageIsCroppable(path)) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: OutlinedButton.icon(
+          icon: const Icon(Icons.crop, size: 18),
+          label: Text(context.l10n.d('Bijsnijden')),
+          onPressed: () => _openCrop(isSecond),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return editorScrollList(
@@ -113,6 +161,7 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
           onCaptionChanged: (caption) =>
               widget.onUpdate(widget.slide.copyWith(imageCaption: caption)),
         ),
+        _cropButton(false),
         const SizedBox(height: 20),
         const SectionLabel('Rechter afbeelding'),
         ImagePickerBar(
@@ -132,6 +181,7 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
           onCaptionChanged: (caption) =>
               widget.onUpdate(widget.slide.copyWith(imageCaption2: caption)),
         ),
+        _cropButton(true),
         const SizedBox(height: 20),
         const SectionLabel('Verdeling (links / rechts)'),
         ImageZoomControl(

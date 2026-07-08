@@ -85,6 +85,9 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Bijsnijden': 'Bearr',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Tarraing an íomhá chun a roghnú cén chuid a fhanann le feiceáil.',
   'Git-opslag (ontwerp)': 'Stóráil Git (dearadh)',
   'Zoek in documentatie…': 'Cuardaigh sa doiciméadú…',
   'Geen documenten gevonden': 'Níor aimsíodh aon doiciméad',

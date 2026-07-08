@@ -85,6 +85,9 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Bijsnijden': 'Recidere',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Trahe imaginem ut eligas quae pars visibilis maneat.',
   'Git-opslag (ontwerp)': 'Git repositio (designatio)',
   'Zoek in documentatie…': 'Quaere in documentatione…',
   'Geen documenten gevonden': 'Nulla documenta inventa',

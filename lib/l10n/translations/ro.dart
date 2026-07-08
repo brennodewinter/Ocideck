@@ -84,6 +84,9 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Bijsnijden': 'Decupează',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Trageți imaginea pentru a alege ce parte rămâne vizibilă.',
   'Git-opslag (ontwerp)': 'Stocare Git (proiectare)',
   'Zoek in documentatie…': 'Caută în documentație…',
   'Geen documenten gevonden': 'Nu s-au găsit documente',

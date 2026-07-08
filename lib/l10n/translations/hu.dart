@@ -83,6 +83,9 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Bijsnijden': 'Levágás',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Húzza a képet, hogy kiválassza, melyik rész marad látható.',
   'Git-opslag (ontwerp)': 'Git-tárolás (terv)',
   'Zoek in documentatie…': 'Keresés a dokumentációban…',
   'Geen documenten gevonden': 'Nem található dokumentum',

@@ -1353,4 +1353,85 @@ void main() {
       expectAudio(out);
     });
   });
+
+  group('image crop focal point round-trips', () {
+    test('image slide keeps a non-centred focal point', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.image).copyWith(
+          imagePath: 'images/wide.png',
+          imageSize: 150,
+          imageFocalX: 0.2,
+          imageFocalY: 0.75,
+        ),
+      );
+      expect(out.type, SlideType.image);
+      expect(out.imageFocalX, 0.2);
+      expect(out.imageFocalY, 0.75);
+    });
+
+    test('title background keeps a focal point', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.title).copyWith(
+          title: 'Kop',
+          imagePath: 'images/cover.png',
+          imageFocalX: 0.9,
+          imageFocalY: 0.1,
+        ),
+      );
+      expect(out.type, SlideType.title);
+      expect(out.imageFocalX, 0.9);
+      expect(out.imageFocalY, 0.1);
+    });
+
+    test('bullets+image keeps the panel focal point', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.bulletsImage).copyWith(
+          bullets: const ['Een', 'Twee'],
+          imagePath: 'images/side.png',
+          imageSize: 40,
+          imageFocalX: 0.35,
+          imageFocalY: 0.6,
+        ),
+      );
+      expect(out.type, SlideType.bulletsImage);
+      expect(out.imageFocalX, 0.35);
+      expect(out.imageFocalY, 0.6);
+    });
+
+    test('two-images keeps a separate focal point per image', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.twoImages).copyWith(
+          imagePath: 'images/left.png',
+          imagePath2: 'images/right.png',
+          imageFocalX: 0.15,
+          imageFocalY: 0.5,
+          imageFocalX2: 0.85,
+          imageFocalY2: 0.25,
+        ),
+      );
+      expect(out.type, SlideType.twoImages);
+      expect(out.imageFocalX, 0.15);
+      expect(out.imageFocalY, 0.5);
+      expect(out.imageFocalX2, 0.85);
+      expect(out.imageFocalY2, 0.25);
+    });
+
+    test('a centred focal point writes no comment and stays default', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(
+              SlideType.image,
+            ).copyWith(imagePath: 'images/x.png', imageSize: 100),
+          ],
+        ),
+      );
+      expect(markdown.contains('ocideck_image_focus'), isFalse);
+      final out = service.parseDeck(markdown)!.slides.single;
+      expect(out.imageFocalX, 0.5);
+      expect(out.imageFocalY, 0.5);
+    });
+  });
 }

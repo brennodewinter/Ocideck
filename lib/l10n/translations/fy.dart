@@ -83,6 +83,9 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Bijsnijden': 'Bysnije',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Sleep de ôfbylding om te kiezen hokker diel sichtber bliuwt.',
   'Git-opslag (ontwerp)': 'Git-opslach (ûntwerp)',
   'Zoek in documentatie…': 'Sykje yn dokumintaasje…',
   'Geen documenten gevonden': 'Gjin dokuminten fûn',

@@ -8,6 +8,20 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Animated GIFs play** — an imported animated GIF (or WebP/APNG) now keeps
+  animating in the preview, presentation and audience window instead of freezing
+  on its first frame. The decode-size cap that guards against memory-bomb images
+  now only downscales pictures that actually exceed the limit, so within-limit
+  animations decode at native resolution and play. Exports (PDF/PPTX) still
+  capture a single still frame, as before.
+- **Crop images to fit** — when a picture is bigger than its slot and part falls
+  outside, a **Crop** button (image slide, title background, bullets + image, and
+  each image of a two-images slide) opens a live editor. Drag the image to choose
+  which part stays in view; for the full-slide image and title background you can
+  also zoom in the same dialog. The crop is a non-destructive focal point — the
+  original file is untouched and it round-trips in the `.md`
+  (`ocideck_image_focus`, see [docs/FILE_FORMAT.md](docs/FILE_FORMAT.md) §8). See
+  [docs/USER_GUIDE.md](docs/USER_GUIDE.md) → *Images*.
 - **Search the documentation** — *Settings → Documentation* now has a search box
   above the document list. Type one or more words and the list narrows to the
   documents whose title or body contains all of them, each shown with a short

@@ -4,6 +4,7 @@ import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/image_service.dart';
 import '../../l10n/app_localizations.dart';
+import '../slides/image_crop_dialog.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../markdown_editor/markdown_editor.dart';
 import '_editor_field.dart';
@@ -368,7 +369,42 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
           minValue: 20,
           maxValue: 70,
         ),
+        if (imageIsCroppable(imagePath)) ...[
+          const SizedBox(height: 8),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: OutlinedButton.icon(
+              icon: const Icon(Icons.crop, size: 18),
+              label: Text(l10n.d('Bijsnijden')),
+              onPressed: _openCrop,
+            ),
+          ),
+        ],
       ],
+    );
+  }
+
+  Future<void> _openCrop() async {
+    // The image fills a fixed right-hand panel (cover); its width is the panel
+    // fraction, so crop here only repositions the cover — no zoom to change.
+    final fraction =
+        (widget.slide.imageSize > 0 ? widget.slide.imageSize / 100.0 : 0.40)
+            .clamp(0.1, 0.70);
+    final result = await showImageCropDialog(
+      context,
+      imagePath: widget.slide.imagePath,
+      projectPath: widget.captionBasePath,
+      frameAspect: fraction * 16 / 9,
+      imageSize: widget.slide.imageSize,
+      focalX: widget.slide.imageFocalX,
+      focalY: widget.slide.imageFocalY,
+    );
+    if (result == null) return;
+    widget.onUpdate(
+      widget.slide.copyWith(
+        imageFocalX: result.focalX,
+        imageFocalY: result.focalY,
+      ),
     );
   }
 

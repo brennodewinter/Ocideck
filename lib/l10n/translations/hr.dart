@@ -83,6 +83,9 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Bijsnijden': 'Izreži',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Povucite sliku da odaberete koji dio ostaje vidljiv.',
   'Git-opslag (ontwerp)': 'Git pohrana (dizajn)',
   'Zoek in documentatie…': 'Pretraži dokumentaciju…',
   'Geen documenten gevonden': 'Nisu pronađeni dokumenti',

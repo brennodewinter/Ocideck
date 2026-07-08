@@ -85,6 +85,9 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Bijsnijden': 'Przytnij',
+  'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
+      'Przeciągnij obraz, aby wybrać, która część pozostanie widoczna.',
   'Git-opslag (ontwerp)': 'Magazyn Git (projekt)',
   'Zoek in documentatie…': 'Szukaj w dokumentacji…',
   'Geen documenten gevonden': 'Nie znaleziono dokumentów',

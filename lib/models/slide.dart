@@ -156,6 +156,17 @@ class Slide {
   final String imagePath2;
   final String imageCaption;
   final String imageCaption2;
+
+  /// Normalized focal point (0..1, 0.5 = centre) that decides which part of a
+  /// cropped image stays in view instead of always centring. It applies when
+  /// the picture overflows its slot — cover mode, zoom-in, or a fixed panel
+  /// (bulletsImage / twoImages). [imageFocalX]/[imageFocalY] belong to
+  /// [imagePath]; [imageFocalX2]/[imageFocalY2] to [imagePath2] (twoImages).
+  /// The centre default keeps older decks rendering exactly as before.
+  final double imageFocalX;
+  final double imageFocalY;
+  final double imageFocalX2;
+  final double imageFocalY2;
   final String videoPath;
   final bool videoAutoplay;
 
@@ -238,6 +249,10 @@ class Slide {
     this.imagePath2 = '',
     this.imageCaption = '',
     this.imageCaption2 = '',
+    this.imageFocalX = 0.5,
+    this.imageFocalY = 0.5,
+    this.imageFocalX2 = 0.5,
+    this.imageFocalY2 = 0.5,
     this.videoPath = '',
     this.videoAutoplay = false,
     this.videoStartMs = 0,
@@ -313,6 +328,10 @@ class Slide {
       imagePath2: src.imagePath2,
       imageCaption: src.imageCaption,
       imageCaption2: src.imageCaption2,
+      imageFocalX: src.imageFocalX,
+      imageFocalY: src.imageFocalY,
+      imageFocalX2: src.imageFocalX2,
+      imageFocalY2: src.imageFocalY2,
       videoPath: src.videoPath,
       videoAutoplay: src.videoAutoplay,
       videoStartMs: src.videoStartMs,
@@ -359,6 +378,10 @@ class Slide {
     String? imagePath2,
     String? imageCaption,
     String? imageCaption2,
+    double? imageFocalX,
+    double? imageFocalY,
+    double? imageFocalX2,
+    double? imageFocalY2,
     String? videoPath,
     bool? videoAutoplay,
     int? videoStartMs,
@@ -408,6 +431,10 @@ class Slide {
       imagePath2: imagePath2 ?? this.imagePath2,
       imageCaption: imageCaption ?? this.imageCaption,
       imageCaption2: imageCaption2 ?? this.imageCaption2,
+      imageFocalX: imageFocalX ?? this.imageFocalX,
+      imageFocalY: imageFocalY ?? this.imageFocalY,
+      imageFocalX2: imageFocalX2 ?? this.imageFocalX2,
+      imageFocalY2: imageFocalY2 ?? this.imageFocalY2,
       videoPath: videoPath ?? this.videoPath,
       videoAutoplay: videoAutoplay ?? this.videoAutoplay,
       videoStartMs: videoStartMs ?? this.videoStartMs,
