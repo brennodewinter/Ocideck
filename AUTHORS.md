@@ -1,8 +1,11 @@
 # Authors
 
-OciDeck is created and maintained by:
+OciDeck was initiated and conceived by:
 
-- **Brenno de Winter**
+- **Brenno de Winter** — initiator and originator
+
+It is developed as an open-source project; copyright is held by
+**Stichting LibreKAT**.
 
 The name is a wink: *Oci* comes from the **Ocicats** (Brenno's cats) and *Deck*
 is short for a presentation deck.

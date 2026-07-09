@@ -1,6 +1,6 @@
 <!--
 SPDX-License-Identifier: EUPL-1.2
-Copyright © Brenno de Winter
+Copyright © Stichting LibreKAT
 
 OciDeck is licensed under the European Union Public Licence (EUPL) v. 1.2.
 The full, authoritative licence text follows. The EUPL is published by the

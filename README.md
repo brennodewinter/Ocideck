@@ -128,7 +128,10 @@ reflected in `docs/FILE_FORMAT.md`. For security issues, see
 
 ## License
 
-Copyright © Brenno de Winter.
+Copyright © Stichting LibreKAT.
+
+OciDeck was initiated and conceived by Brenno de Winter and is developed as an
+open-source project.
 
 OciDeck is licensed under the **European Union Public Licence v. 1.2 (EUPL-1.2)**.
 You may use, study, share, and modify the software under the terms of that
