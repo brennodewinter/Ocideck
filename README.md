@@ -128,7 +128,7 @@ reflected in `docs/FILE_FORMAT.md`. For security issues, see
 
 ## License
 
-Copyright © Stichting LibreKAT.
+Copyright © 2026 Stichting LibreKAT.
 
 OciDeck was initiated and conceived by Brenno de Winter and is developed as an
 open-source project.
