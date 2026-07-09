@@ -517,7 +517,9 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 - **Deleting a slide keeps focus on the slide above it.** Removing a slide (via
   its context menu or the Delete/Backspace key) now selects the slide *above* the
   deleted one instead of jumping back to the first slide; deleting the first
-  slide moves focus to the new first slide.
+  slide moves focus to the new first slide. The slide-list rail now also scrolls
+  that focused slide back into view instead of snapping to the top — previously,
+  deleting a slide below the selected one left the list showing the first slide.
 - **A `---` inside a fenced code block no longer splits a slide.** Slide
   separation is now fence-aware: a `---` line inside a ```` ``` ```` or `~~~`
   block (a code sample, a diff hunk, an embedded YAML document) is treated as

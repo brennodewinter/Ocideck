@@ -179,4 +179,124 @@ void main() {
     );
     expect(find.byIcon(Icons.edit_note_outlined), findsOneWidget);
   });
+
+  testWidgets('deleting a slide keeps the newly focused slide in view', (
+    tester,
+  ) async {
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+    final deckNotifier = container.read(deckProvider.notifier);
+    final editorNotifier = container.read(editorProvider.notifier);
+    deckNotifier.newDeck('Test');
+    for (var i = 0; i < 19; i++) {
+      deckNotifier.addSlide(SlideType.bullets);
+    }
+
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          theme: AppTheme.light,
+          home: const Scaffold(
+            body: SizedBox(
+              width: 320,
+              height: 600,
+              child: SlideListPanel(railWidth: 320),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    Finder thumb(int i) =>
+        find.byWidgetPredicate((w) => w is SlideThumbnail && w.index == i);
+
+    // Select a slide far below the fold and let it scroll to the top.
+    editorNotifier.select(15);
+    for (var i = 0; i < 4; i++) {
+      await tester.pump();
+    }
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(thumb(15), findsOneWidget);
+    expect(thumb(0), findsNothing);
+
+    // Delete slide 15 exactly as the panel's context menu does: drop the slide,
+    // then move focus to the slide above it.
+    deckNotifier.removeSlide(15);
+    editorNotifier.select(14);
+    for (var i = 0; i < 4; i++) {
+      await tester.pump();
+    }
+    await tester.pump(const Duration(milliseconds: 200));
+
+    // Regression: the list must follow the focus to slide 14, not snap back to
+    // the top with slide 0 showing.
+    expect(
+      thumb(14),
+      findsOneWidget,
+      reason: 'focused slide should be visible',
+    );
+    final rect = tester.getRect(thumb(14));
+    expect(rect.top, lessThan(200), reason: 'focused slide should be near top');
+  });
+
+  testWidgets('deleting a slide below the selection keeps it in view', (
+    tester,
+  ) async {
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+    final deckNotifier = container.read(deckProvider.notifier);
+    final editorNotifier = container.read(editorProvider.notifier);
+    deckNotifier.newDeck('Test');
+    for (var i = 0; i < 19; i++) {
+      deckNotifier.addSlide(SlideType.bullets);
+    }
+
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          theme: AppTheme.light,
+          home: const Scaffold(
+            body: SizedBox(
+              width: 320,
+              height: 600,
+              child: SlideListPanel(railWidth: 320),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    Finder thumb(int i) =>
+        find.byWidgetPredicate((w) => w is SlideThumbnail && w.index == i);
+
+    editorNotifier.select(14);
+    for (var i = 0; i < 4; i++) {
+      await tester.pump();
+    }
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(thumb(14), findsOneWidget);
+    expect(thumb(0), findsNothing);
+
+    // Delete slide 15 (below the selection) via the context menu: the focus
+    // target is the already-selected slide 14, so `select` is a no-op and only
+    // the deck length changes.
+    deckNotifier.removeSlide(15);
+    editorNotifier.select(14);
+    for (var i = 0; i < 4; i++) {
+      await tester.pump();
+    }
+    await tester.pump(const Duration(milliseconds: 200));
+
+    expect(
+      thumb(14),
+      findsOneWidget,
+      reason: 'focused slide should stay in view',
+    );
+    final rect = tester.getRect(thumb(14));
+    expect(rect.top, lessThan(200), reason: 'focused slide should be near top');
+  });
 }

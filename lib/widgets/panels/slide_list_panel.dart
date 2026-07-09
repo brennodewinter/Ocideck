@@ -729,11 +729,17 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     ) {
       if (previous != next) _scrollSlideToTop(next);
     });
+    // Any change in slide count rebuilds the list under a fresh ValueKey (see
+    // _buildSlideList), which resets the scroll offset to the top. Re-reveal the
+    // active slide so it stays put — on removal the focus target can equal the
+    // current selection (a no-op `select`), so the selectedIndex listener above
+    // would not fire and only this listener keeps the list from snapping to the
+    // first slide.
     ref.listen<int?>(deckProvider.select((s) => s.deck?.slides.length), (
       previous,
       next,
     ) {
-      if (previous != null && next != null && next > previous) {
+      if (previous != null && next != null && next != previous) {
         _scrollSlideToTop(ref.read(editorProvider).selectedIndex);
       }
     });
