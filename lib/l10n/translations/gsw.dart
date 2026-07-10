@@ -83,6 +83,9 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Pentestrapportage (ontwerp)': 'Pentest-Bricht (Design)',
+  'AI-assistentie (ontwerp)': 'AI-Assistänz (Design)',
+  'Agentisch bouwplan (ontwerp)': 'Agentische Bauplan (Design)',
   'Bijsnijden': 'Zueschniide',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Zieh s Bild, zum uswähle, weli Teil sichtbar bliibt.',

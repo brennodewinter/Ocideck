@@ -84,6 +84,9 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Pentestrapportage (ontwerp)': 'Звіт про пентест (проєкт)',
+  'AI-assistentie (ontwerp)': 'Допомога ШІ (проєкт)',
+  'Agentisch bouwplan (ontwerp)': 'Агентний план складання (проєкт)',
   'Bijsnijden': 'Обрізати',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Перетягніть зображення, щоб вибрати, яка частина залишиться видимою.',

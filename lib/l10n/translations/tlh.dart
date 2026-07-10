@@ -81,6 +81,9 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Pentestrapportage (ontwerp)': 'pentest ja\'ghach (nab)',
+  'AI-assistentie (ontwerp)': 'AI QaH (nab)',
+  'Agentisch bouwplan (ontwerp)': 'agentic chenmoHmeH nab (nab)',
   'Bijsnijden': 'yISol',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'nagh beQ yInIH, \'ay\' legh laHbogh wIvmeH.',

@@ -85,6 +85,9 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Pentestrapportage (ontwerp)': 'Tuairisc tástála treá (dearadh)',
+  'AI-assistentie (ontwerp)': 'Cúnamh AI (dearadh)',
+  'Agentisch bouwplan (ontwerp)': 'Plean tógála gníomhaireach (dearadh)',
   'Bijsnijden': 'Bearr',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Tarraing an íomhá chun a roghnú cén chuid a fhanann le feiceáil.',

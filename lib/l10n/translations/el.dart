@@ -83,6 +83,9 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Pentestrapportage (ontwerp)': 'Αναφορά δοκιμής διείσδυσης (σχεδίαση)',
+  'AI-assistentie (ontwerp)': 'Βοήθεια AI (σχεδίαση)',
+  'Agentisch bouwplan (ontwerp)': 'Πρακτορικό πλάνο κατασκευής (σχεδίαση)',
   'Bijsnijden': 'Περικοπή',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Σύρετε την εικόνα για να επιλέξετε ποιο μέρος παραμένει ορατό.',

@@ -85,6 +85,10 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Pentestrapportage (ontwerp)': 'Relatio pentest (designatio)',
+  'AI-assistentie (ontwerp)': 'Auxilium AI (designatio)',
+  'Agentisch bouwplan (ontwerp)':
+      'Consilium aedificationis agenticum (designatio)',
   'Bijsnijden': 'Recidere',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Trahe imaginem ut eligas quae pars visibilis maneat.',

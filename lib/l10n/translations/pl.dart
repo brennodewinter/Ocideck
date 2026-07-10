@@ -85,6 +85,9 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Pentestrapportage (ontwerp)': 'Raport z pentestu (projekt)',
+  'AI-assistentie (ontwerp)': 'Wsparcie AI (projekt)',
+  'Agentisch bouwplan (ontwerp)': 'Agentyczny plan budowy (projekt)',
   'Bijsnijden': 'Przytnij',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Przeciągnij obraz, aby wybrać, która część pozostanie widoczna.',

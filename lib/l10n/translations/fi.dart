@@ -83,6 +83,10 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Pentestrapportage (ontwerp)': 'Pentest-raportti (suunnitelma)',
+  'AI-assistentie (ontwerp)': 'Tekoälyavustus (suunnitelma)',
+  'Agentisch bouwplan (ontwerp)':
+      'Agenttinen rakennussuunnitelma (suunnitelma)',
   'Bijsnijden': 'Rajaa',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Vedä kuvaa valitaksesi, mikä osa jää näkyviin.',

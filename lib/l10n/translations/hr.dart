@@ -83,6 +83,9 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Pentestrapportage (ontwerp)': 'Izvještaj penetracijskog testiranja (dizajn)',
+  'AI-assistentie (ontwerp)': 'AI pomoć (dizajn)',
+  'Agentisch bouwplan (ontwerp)': 'Agentski plan izgradnje (dizajn)',
   'Bijsnijden': 'Izreži',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Povucite sliku da odaberete koji dio ostaje vidljiv.',

@@ -83,6 +83,9 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Pentestrapportage (ontwerp)': 'Behatolásteszt-beszámoló (terv)',
+  'AI-assistentie (ontwerp)': 'AI-asszisztencia (terv)',
+  'Agentisch bouwplan (ontwerp)': 'Ágensalapú építési terv (terv)',
   'Bijsnijden': 'Levágás',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Húzza a képet, hogy kiválassza, melyik rész marad látható.',

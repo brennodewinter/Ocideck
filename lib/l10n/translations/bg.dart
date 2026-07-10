@@ -84,6 +84,9 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Pentestrapportage (ontwerp)': 'Доклад от пентест (проект)',
+  'AI-assistentie (ontwerp)': 'AI помощ (проект)',
+  'Agentisch bouwplan (ontwerp)': 'Агентен план за изграждане (проект)',
   'Bijsnijden': 'Изрязване',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Плъзнете изображението, за да изберете коя част да остане видима.',

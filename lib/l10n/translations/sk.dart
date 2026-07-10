@@ -84,6 +84,9 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Pentestrapportage (ontwerp)': 'Pentestová správa (návrh)',
+  'AI-assistentie (ontwerp)': 'Asistencia AI (návrh)',
+  'Agentisch bouwplan (ontwerp)': 'Agentný plán zostavenia (návrh)',
   'Bijsnijden': 'Orezať',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Potiahnutím obrázka vyberte, ktorá časť zostane viditeľná.',

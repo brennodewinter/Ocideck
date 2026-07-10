@@ -83,6 +83,9 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Pentestrapportage (ontwerp)': 'Rapòrt di pentest (diseño)',
+  'AI-assistentie (ontwerp)': 'Asistensia AI (diseño)',
+  'Agentisch bouwplan (ontwerp)': 'Plan di konstrukshon agéntiko (diseño)',
   'Bijsnijden': 'Korta',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Lastra e imagen pa skohe ki parti ta keda visibel.',

@@ -100,6 +100,21 @@ extension _SettingsDocs on _SettingsDialogState {
               title: l10n.d('Git-opslag (ontwerp)'),
               assetBase: 'docs/design/GIT_STORAGE.md',
             ),
+            DocEntry(
+              icon: Icons.shield_outlined,
+              title: l10n.d('Pentestrapportage (ontwerp)'),
+              assetBase: 'docs/design/PENTEST_MIAUW.md',
+            ),
+            DocEntry(
+              icon: Icons.smart_toy_outlined,
+              title: l10n.d('AI-assistentie (ontwerp)'),
+              assetBase: 'docs/design/AI_ASSIST.md',
+            ),
+            DocEntry(
+              icon: Icons.account_tree_outlined,
+              title: l10n.d('Agentisch bouwplan (ontwerp)'),
+              assetBase: 'docs/design/AGENTIC_BUILD_PLAN.md',
+            ),
           ],
         ),
       ],

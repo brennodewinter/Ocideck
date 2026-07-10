@@ -84,6 +84,9 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'Pentestrapportage (ontwerp)': 'Rapport de pentest (conception)',
+  'AI-assistentie (ontwerp)': 'Assistance IA (conception)',
+  'Agentisch bouwplan (ontwerp)': 'Plan de construction agentique (conception)',
   'Bijsnijden': 'Rogner',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Faites glisser l\'image pour choisir la partie qui reste visible.',

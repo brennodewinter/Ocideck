@@ -84,6 +84,9 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Pentestrapportage (ontwerp)': 'Raport de pentest (proiectare)',
+  'AI-assistentie (ontwerp)': 'Asistență AI (proiectare)',
+  'Agentisch bouwplan (ontwerp)': 'Plan de construcție agentic (proiectare)',
   'Bijsnijden': 'Decupează',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Trageți imaginea pentru a alege ce parte rămâne vizibilă.',
