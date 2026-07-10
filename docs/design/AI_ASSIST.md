@@ -57,6 +57,24 @@ per-image sidecars return null on web.
   generated roll-ups stay deterministic (see [`PENTEST_MIAUW.md`](PENTEST_MIAUW.md)
   §7/§10). AI only drafts free text and *suggests* image metadata.
 
+### Two connection directions
+
+AI is deliberately **decoupled from OciDeck** — you bring the model, and it can
+live anywhere. There are two, complementary directions (build the first; the
+second is optional):
+
+- **OciDeck calls a model** (§3) — a **provider-agnostic inference client**: pick a
+  `base URL + model`, pointing at any OpenAI-compatible runtime, **local or
+  remote**. No vendor is baked in. This powers the in-app "Suggest" actions and is
+  how OciDeck's own optional AI gets a model.
+- **An external AI agent drives OciDeck** (§10, optional, additive) — OciDeck
+  exposes an **MCP server**, so any external MCP host (Claude Desktop, Cursor, an
+  agent — using *any* model, local or remote) operates OciDeck through tools and
+  resources. Here the AI lives entirely *outside* OciDeck. This is interop /
+  automation, **not** how OciDeck obtains a model: MCP servers hold no model, and
+  MCP *sampling* — the only server→model bridge — is deprecated as of the
+  2026-07-28 spec RC (which now recommends direct provider APIs, i.e. §3).
+
 ---
 
 ## 2. Principles
@@ -82,8 +100,18 @@ backend choice and per-consumer switches. Backend fields: mode
 connection" action. Default mode is **none** even when the toggle is on — nothing
 fires until the user acts on a specific field.
 
-### 3.2 Three-tier backend (fixed priority)
-Every consumer talks to one OpenAI-compatible `/v1/chat/completions` client.
+### 3.2 Three-tier backend — a *provider-agnostic* client
+Every consumer talks to one client speaking the OpenAI-compatible
+`/v1/chat/completions` wire format. **This is a provider-agnostic standard, not a
+dependency on OpenAI the company** — `base URL + model name` *is* the model
+choice, and that one wire format is spoken by Ollama, LM Studio, llama.cpp, vLLM,
+LocalAI, Jan, OpenRouter, Groq, Together and OpenAI alike, so any model runs
+**locally or remotely through a single code path**. (It is also the direction MCP
+now endorses: the 2026-07-28 spec RC deprecated MCP *sampling* and tells servers
+to "integrate directly with LLM provider APIs" — see §10.) A native adapter (e.g.
+the Anthropic Messages API via `anthropic_sdk_dart`) can be added later behind the
+same interface, but the OpenAI-compatible client already reaches essentially every
+local and hosted runtime, so it is the pragmatic default.
 
 1. **Local on-device (default).** Ollama / LM Studio / llama.cpp at
    `http://127.0.0.1:11434/v1`. On-device inference is local IPC, not egress — no
@@ -239,9 +267,13 @@ inconsistent across slide types. Rejected.
 | **1 · Consumer B (image alt-text)** | `imageAltText` field + `ocideck_image_alt` round-trip + `imageSemanticsLabel` preference + vision call + editor "Suggest"/decorative toggle + quality-nudge update. |
 | **2 · Consumer B (tags/library)** | Auto-tag into `DescriptionService`; "auto-tag untagged" bulk action in the carousel; import-time hook. |
 | **3 · Consumer A (pentest)** | Wire the pentest field-drafting (§16 there) onto the shared backend. |
+| **4 · MCP server surface** (optional, additive) | OciDeck as a localhost Streamable-HTTP MCP server (§10) so external agents can drive it. Independent of Consumers A/B — sequence any time after Phase 0; desktop-only. |
 
 Consumer B is sequenced before the pentest consumer because it is useful to all
 users and exercises the shared backend end-to-end with a simpler grounding story.
+Phase 4 is **independent and optional**: it does not block the client or the
+consumers, and gives OciDeck the "AI lives outside the app / another application
+drives it" capability without touching how OciDeck gets a model.
 
 ---
 
@@ -258,6 +290,9 @@ users and exercises the shared backend end-to-end with a simpler grounding story
    library search.
 5. **Transport.** `/v1` (portable) as the only path, or keep Ollama `/api/chat`
    as an internal fallback?
+6. **MCP server surface (§10).** Build it now (Phase 4) or defer? It is optional
+   interop, desktop-only, and depends on a community Dart MCP package
+   (`mcp_dart`) until the official `dart_mcp` ships an HTTP transport.
 
 ---
 
@@ -267,3 +302,48 @@ No model weights are bundled or redistributed; the user supplies the runtime and
 model. Document the recommended local runtimes (Ollama/LM Studio, their licences)
 and the fact that model outputs are unverified drafts in the
 [`USER_GUIDE.md`](../USER_GUIDE.md) and an about/AI screen when this lands.
+
+---
+
+## 10. MCP server surface — external agents drive OciDeck (optional, additive)
+
+A **separate, optional** capability from the §3 client, and the honest home for
+"let AI live outside OciDeck / another application drives it": OciDeck exposes
+itself as an **MCP server** so an external MCP host — Claude Desktop, Cursor, an
+IDE, any agent, running **any model, local or remote** — can operate OciDeck. This
+is interop/automation, **not** a way for OciDeck to obtain a model.
+
+### 10.1 Why this, and not MCP for inference
+MCP is a *tools/context* protocol; a server holds no model. The only server→model
+bridge is **sampling**, which (a) requires an external host to be running and
+driving OciDeck, and (b) is **deprecated** in the 2026-07-28 spec RC (SEP-2577),
+which tells servers to "integrate directly with LLM provider APIs" — i.e. the §3
+client. So OciDeck's *own* AI uses §3; MCP is used only the other way around.
+
+### 10.2 What OciDeck exposes
+- **Tools:** `add_finding`, `set_cvss` (validate + score via the native engine,
+  §7 of PENTEST_MIAUW), `tag_image` / `list_untagged_images`, `add_slide`,
+  `read_deck` / `read_slide`, `finalize_seal` (guarded). The host's LLM chooses
+  which to call; each tool runs OciDeck's own deterministic logic (so e.g. CVSS is
+  still scored natively, never by the model).
+- **Resources:** the deck, a slide, an embedded image (read-only context).
+- **Prompts:** a few report-drafting templates.
+- **Elicitation** (still supported; 2026 RC = Multi-Round-Trip /
+  `InputRequiredResult`) for confirmations. **No sampling** (deprecated).
+
+### 10.3 Transport & feasibility (Flutter)
+A running Flutter GUI **cannot** be a clean stdio subprocess of a host, so expose
+an **in-process Streamable-HTTP MCP server bound to `127.0.0.1:<port>`** — via
+`mcp_dart` (MIT; HTTP + full capabilities) or the turnkey `flutter_mcp`; the
+official `dart_mcp` is stdio-only today (adopt once it ships HTTP). Security per
+the MCP local-server rules: **bind loopback only, validate the `Origin` header
+(DNS-rebind guard), require a local auth token**. **Desktop-only** — the web build
+can neither bind a socket nor spawn a subprocess (consistent with
+`supportsNetworkDeckSources = false`). Pin the MCP package version into
+`MANIFEST`/`make deps-check` like the other vendored deps.
+
+### 10.4 Consent
+A **distinct** consent gate — *"an external application may read and modify this
+deck"* — separate from the §3 outbound consent, because here control of the model,
+the conversation and data-egress moves to the external host. Off by default, with
+a clear indicator while a server session is active.
