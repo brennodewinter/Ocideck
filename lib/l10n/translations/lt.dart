@@ -83,6 +83,18 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Uitbreidingen': 'Plėtiniai',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Neprivalomi moduliai. Numatytai išjungti; jie nieko neprideda prie pagrindinės programos, kol jų neįjungiate.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Pentestų ataskaitos pagal MIAUW. Įjungus vieną kartą atsisiunčiami nuorodų duomenys; vėliau modulis veikia neprisijungus.',
+  'Gegevens opschonen': 'Išvalyti duomenis',
+  'Gegevens lokaal beschikbaar': 'Duomenys pasiekiami vietoje',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Pirmiausia suteikite sutikimą išeinančiam srautui skiltyje Licencija ir privatumas.',
+  'Op het web nog niet beschikbaar': 'Žiniatinklyje dar nepasiekiama',
+  'Ophalen mislukt': 'Nepavyko atsisiųsti',
+  'Nog niet opgehaald': 'Dar neatsisiųsta',
   'AI-assistentie': 'DI pagalba',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'DI pagalba pasiekiama tik darbalaukio versijoje.',

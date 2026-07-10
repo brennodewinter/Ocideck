@@ -83,6 +83,18 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Uitbreidingen': 'Erwyterige',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Optionali Modul. Standardmässig us; si tüend zur Basis-App nüt derzue, bis du si iischaltisch.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Pentest-Bricht nach MIAUW. Bim Iischalte werde d\'Referänzdate eimol glade; dernah lauft s Modul offline.',
+  'Gegevens opschonen': 'Date ufruume',
+  'Gegevens lokaal beschikbaar': 'Date lokal verfüegbar',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Gib zerscht d\'Zuestimmig für usgehende Verkehr under Lizänz und Dateschutz.',
+  'Op het web nog niet beschikbaar': 'Im Web no nöd verfüegbar',
+  'Ophalen mislukt': 'Abruef fehlgschlage',
+  'Nog niet opgehaald': 'No nöd glade',
   'AI-assistentie': 'KI-Unterstützig',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'KI-Unterstützig isch nume i de Desktop-Version verfüegbar.',

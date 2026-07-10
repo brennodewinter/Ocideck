@@ -84,6 +84,18 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Uitbreidingen': 'Разширения',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Незадължителни модули. По подразбиране изключени; не добавят нищо към основното приложение, докато не ги включите.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Докладване на пентестове по MIAUW. Включването изтегля референтните данни веднъж; след това модулът работи офлайн.',
+  'Gegevens opschonen': 'Изчистване на данните',
+  'Gegevens lokaal beschikbaar': 'Данните са налични локално',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Първо дайте съгласие за изходящ трафик в раздел Лиценз и поверителност.',
+  'Op het web nog niet beschikbaar': 'Все още не е налично в мрежата',
+  'Ophalen mislukt': 'Изтеглянето е неуспешно',
+  'Nog niet opgehaald': 'Още не е изтеглено',
   'AI-assistentie': 'AI помощ',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'AI помощта е налична само в настолната версия.',

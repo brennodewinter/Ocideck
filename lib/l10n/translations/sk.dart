@@ -84,6 +84,18 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Uitbreidingen': 'Rozšírenia',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Voliteľné moduly. Predvolene vypnuté; do základnej aplikácie nič nepridávajú, kým ich nezapnete.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Vykazovanie pentestov podľa MIAUW. Zapnutie raz stiahne referenčné údaje; potom modul funguje offline.',
+  'Gegevens opschonen': 'Vyčistiť údaje',
+  'Gegevens lokaal beschikbaar': 'Údaje dostupné lokálne',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Najprv udeľte súhlas s odchádzajúcou prevádzkou v časti Licencia a súkromie.',
+  'Op het web nog niet beschikbaar': 'Na webe zatiaľ nedostupné',
+  'Ophalen mislukt': 'Sťahovanie zlyhalo',
+  'Nog niet opgehaald': 'Zatiaľ nestiahnuté',
   'AI-assistentie': 'Asistencia AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Asistencia AI je dostupná len v desktopovej verzii.',

@@ -12,9 +12,11 @@ import '../../services/ai_security_gate.dart';
 import '../../services/recovery_service.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/webdav_service.dart';
+import '../../services/secmodule/sec_module_provisioner.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../state/consent_provider.dart';
+import '../../state/sec_module_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/log.dart';
 import '../../utils/url_launcher_util.dart';
@@ -32,6 +34,7 @@ part 'parts/settings_dialog_privacy.dart';
 part 'parts/settings_dialog_security.dart';
 part 'parts/settings_dialog_ai.dart';
 part 'parts/settings_dialog_docs.dart';
+part 'parts/settings_dialog_modules.dart';
 part 'parts/settings_dialog_about.dart';
 part 'parts/settings_dialog_hex_color.dart';
 
@@ -164,13 +167,14 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     Icons.smart_toy_outlined,
     Icons.cloud_outlined,
     Icons.menu_book_outlined,
+    Icons.extension_outlined,
     Icons.info_outline,
   ];
 
   /// Index of the "Over OciDeck" pane. It is the last entry in the tab lists
   /// but is opened from the branded footer at the bottom of the sidebar rather
   /// than from a regular nav item, so the nav list stops one short of it.
-  static const _aboutTabIndex = 9;
+  static const _aboutTabIndex = 10;
 
   static const _colorPresets = [
     '#FFFFFF',
@@ -431,6 +435,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       l10n.d('AI-assistentie'),
       l10n.d('Nextcloud'),
       l10n.d('Documentatie'),
+      l10n.d('Uitbreidingen'),
       l10n.d('Over OciDeck'),
     ];
 
@@ -444,6 +449,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       _tabBody(_aiTab()),
       _tabBody(_webdavTab()),
       _tabBody(_documentationTab()),
+      _tabBody(_modulesTab()),
       _tabBody(_aboutTab()),
     ];
 
@@ -545,8 +551,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           ),
           // The last label ("Over OciDeck") is not a regular nav item; it is
           // reached from the branded footer below, so stop one short. The nav
-          // list scrolls when the dialog is short so it can never overflow the
-          // sidebar regardless of how many sections there are.
+          // list scrolls so extra tabs (AI, Modules, …) never overflow the
+          // sidebar; the footer stays pinned at the bottom.
           Expanded(
             child: SingleChildScrollView(
               child: Column(

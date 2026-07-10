@@ -84,6 +84,18 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Uitbreidingen': 'Estensjonijiet',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Moduli fakultattivi. Mitfija b\'mod awtomatiku; ma jżidu xejn mal-app bażika sakemm ma tattivahomx.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Rappurtar tal-pentest skont MIAUW. L-attivazzjoni tniżżel id-dejta ta\' referenza darba; imbagħad il-modulu jaħdem offline.',
+  'Gegevens opschonen': 'Naddaf id-dejta',
+  'Gegevens lokaal beschikbaar': 'Dejta disponibbli lokalment',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'L-ewwel agħti kunsens għat-traffiku \'l barra taħt Liċenzja u Privatezza.',
+  'Op het web nog niet beschikbaar': 'Għadha mhux disponibbli fuq il-web',
+  'Ophalen mislukt': 'It-tniżżil falla',
+  'Nog niet opgehaald': 'Għadha ma tniżżlitx',
   'AI-assistentie': 'Assistenza AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'L-assistenza AI hija disponibbli biss fil-verżjoni desktop.',

@@ -84,6 +84,18 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Uitbreidingen': 'Розширення',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Необов\'язкові модулі. Типово вимкнені; вони нічого не додають до базового застосунку, доки ви їх не увімкнете.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Звітування про пентести за MIAUW. Увімкнення один раз завантажує довідкові дані; потім модуль працює офлайн.',
+  'Gegevens opschonen': 'Очистити дані',
+  'Gegevens lokaal beschikbaar': 'Дані доступні локально',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Спершу надайте згоду на вихідний трафік у розділі «Ліцензія та конфіденційність».',
+  'Op het web nog niet beschikbaar': 'У вебі поки що недоступно',
+  'Ophalen mislukt': 'Не вдалося завантажити',
+  'Nog niet opgehaald': 'Ще не завантажено',
   'AI-assistentie': 'Підтримка ШІ',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Підтримка ШІ доступна лише в настільній версії.',

@@ -85,6 +85,18 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Uitbreidingen': 'Extensiones',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Moduli optionales. Praedefinite exstincti; nihil applicationi basi addunt donec eos actives.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Relationes pentest secundum MIAUW. Activatio data referentiae semel accersit; deinde modulus sine rete operatur.',
+  'Gegevens opschonen': 'Data purgare',
+  'Gegevens lokaal beschikbaar': 'Data localiter praesto',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Primum consensum ad commercium exiens sub Licentia et Secreto concede.',
+  'Op het web nog niet beschikbaar': 'In rete nondum praesto',
+  'Ophalen mislukt': 'Accersitio defecit',
+  'Nog niet opgehaald': 'Nondum accersitum',
   'AI-assistentie': 'Auxilium IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Auxilium IA solum in versione desktop praesto est.',

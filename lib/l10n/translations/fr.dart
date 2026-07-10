@@ -84,6 +84,18 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'Uitbreidingen': 'Extensions',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Modules optionnels. Désactivés par défaut ; ils n\'ajoutent rien à l\'application de base jusqu\'à leur activation.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Rapports de pentest selon MIAUW. L\'activation télécharge les données de référence une fois ; le module fonctionne ensuite hors ligne.',
+  'Gegevens opschonen': 'Nettoyer les données',
+  'Gegevens lokaal beschikbaar': 'Données disponibles localement',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Accordez d\'abord le consentement au trafic sortant sous Licence et confidentialité.',
+  'Op het web nog niet beschikbaar': 'Pas encore disponible sur le web',
+  'Ophalen mislukt': 'Échec du téléchargement',
+  'Nog niet opgehaald': 'Pas encore téléchargé',
   'AI-assistentie': 'Assistance IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'L\'assistance IA n\'est disponible que dans la version de bureau.',

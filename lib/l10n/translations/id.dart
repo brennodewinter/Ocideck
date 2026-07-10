@@ -83,6 +83,18 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Uitbreidingen': 'Ekstensi',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Modul opsional. Mati secara bawaan; tidak menambahkan apa pun ke aplikasi dasar sampai Anda mengaktifkannya.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Pelaporan pentest menurut MIAUW. Mengaktifkan akan mengambil data referensi sekali; setelah itu modul bekerja offline.',
+  'Gegevens opschonen': 'Bersihkan data',
+  'Gegevens lokaal beschikbaar': 'Data tersedia secara lokal',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Berikan dulu persetujuan untuk lalu lintas keluar di Lisensi dan Privasi.',
+  'Op het web nog niet beschikbaar': 'Belum tersedia di web',
+  'Ophalen mislukt': 'Pengambilan gagal',
+  'Nog niet opgehaald': 'Belum diambil',
   'AI-assistentie': 'Bantuan AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Bantuan AI hanya tersedia di versi desktop.',

@@ -85,6 +85,18 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Uitbreidingen': 'Breiseáin',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Modúil roghnacha. Múchta de réir réamhshocraithe; ní chuireann siad aon rud leis an mbunaip go dtí go gcumasaíonn tú iad.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Tuairisciú pentest de réir MIAUW. Íoslódálann cumasú na sonraí tagartha uair amháin; oibríonn an modúl as líne ina dhiaidh sin.',
+  'Gegevens opschonen': 'Glan na sonraí',
+  'Gegevens lokaal beschikbaar': 'Sonraí ar fáil go háitiúil',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Tabhair toiliú do thrácht amach ar dtús faoi Ceadúnas agus Príobháideachas.',
+  'Op het web nog niet beschikbaar': 'Níl sé ar fáil ar an ngréasán fós',
+  'Ophalen mislukt': 'Theip ar an íoslódáil',
+  'Nog niet opgehaald': 'Gan íoslódáil fós',
   'AI-assistentie': 'Cúnamh II',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Níl cúnamh II ar fáil ach sa leagan deisce.',

@@ -83,6 +83,18 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Uitbreidingen': 'Paplašinājumi',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Neobligāti moduļi. Pēc noklusējuma izslēgti; tie neko nepievieno pamata lietotnei, kamēr tos neieslēdzat.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Pentestu ziņošana pēc MIAUW. Ieslēgšana vienreiz lejupielādē atsauces datus; pēc tam modulis darbojas bezsaistē.',
+  'Gegevens opschonen': 'Notīrīt datus',
+  'Gegevens lokaal beschikbaar': 'Dati pieejami lokāli',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Vispirms sniedziet piekrišanu izejošajam trafikam sadaļā Licence un privātums.',
+  'Op het web nog niet beschikbaar': 'Tīmeklī vēl nav pieejams',
+  'Ophalen mislukt': 'Lejupielāde neizdevās',
+  'Nog niet opgehaald': 'Vēl nav lejupielādēts',
   'AI-assistentie': 'MI palīdzība',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'MI palīdzība ir pieejama tikai darbvirsmas versijā.',

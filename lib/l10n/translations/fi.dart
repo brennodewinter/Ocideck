@@ -83,6 +83,18 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Uitbreidingen': 'Laajennukset',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Valinnaiset moduulit. Oletuksena pois; ne eivät lisää mitään perussovellukseen ennen kuin otat ne käyttöön.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Pentest-raportointi MIAUW:n mukaan. Käyttöönotto hakee viitetiedot kerran; sen jälkeen moduuli toimii offline-tilassa.',
+  'Gegevens opschonen': 'Siivoa tiedot',
+  'Gegevens lokaal beschikbaar': 'Tiedot saatavilla paikallisesti',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Anna ensin suostumus lähtevään liikenteeseen kohdassa Lisenssi ja tietosuoja.',
+  'Op het web nog niet beschikbaar': 'Ei vielä saatavilla verkossa',
+  'Ophalen mislukt': 'Haku epäonnistui',
+  'Nog niet opgehaald': 'Ei vielä haettu',
   'AI-assistentie': 'Tekoälyavustus',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Tekoälyavustus on saatavilla vain työpöytäversiossa.',

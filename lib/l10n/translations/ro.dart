@@ -84,6 +84,18 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Uitbreidingen': 'Extensii',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Module opționale. Dezactivate implicit; nu adaugă nimic aplicației de bază până nu le activați.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Raportare pentest conform MIAUW. Activarea descarcă o dată datele de referință; apoi modulul funcționează offline.',
+  'Gegevens opschonen': 'Curăță datele',
+  'Gegevens lokaal beschikbaar': 'Date disponibile local',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Acordați mai întâi consimțământul pentru traficul de ieșire la Licență și confidențialitate.',
+  'Op het web nog niet beschikbaar': 'Încă indisponibil pe web',
+  'Ophalen mislukt': 'Descărcarea a eșuat',
+  'Nog niet opgehaald': 'Încă nedescărcat',
   'AI-assistentie': 'Asistență IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Asistența IA este disponibilă doar în versiunea desktop.',

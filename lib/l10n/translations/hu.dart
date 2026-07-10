@@ -83,6 +83,18 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Uitbreidingen': 'Bővítmények',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Választható modulok. Alapértelmezetten kikapcsolva; semmit sem adnak az alapalkalmazáshoz, amíg be nem kapcsolja őket.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Pentest-jelentés MIAUW szerint. A bekapcsolás egyszer letölti a referenciaadatokat; ezután a modul offline működik.',
+  'Gegevens opschonen': 'Adatok törlése',
+  'Gegevens lokaal beschikbaar': 'Adatok helyben elérhetők',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Először adjon hozzájárulást a kimenő forgalomhoz a Licenc és adatvédelem részben.',
+  'Op het web nog niet beschikbaar': 'A weben még nem érhető el',
+  'Ophalen mislukt': 'A letöltés sikertelen',
+  'Nog niet opgehaald': 'Még nincs letöltve',
   'AI-assistentie': 'MI-segítség',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Az MI-segítség csak az asztali verzióban érhető el.',

@@ -83,6 +83,18 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Uitbreidingen': 'Razširitve',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Izbirni moduli. Privzeto izklopljeni; osnovni aplikaciji ne dodajo ničesar, dokler jih ne omogočite.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Poročanje o pentestih po MIAUW. Omogočanje enkrat prenese referenčne podatke; nato modul deluje brez povezave.',
+  'Gegevens opschonen': 'Počisti podatke',
+  'Gegevens lokaal beschikbaar': 'Podatki na voljo lokalno',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Najprej podajte soglasje za odhodni promet v razdelku Licenca in zasebnost.',
+  'Op het web nog niet beschikbaar': 'V spletu še ni na voljo',
+  'Ophalen mislukt': 'Prenos ni uspel',
+  'Nog niet opgehaald': 'Še ni preneseno',
   'AI-assistentie': 'Pomoč UI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Pomoč UI je na voljo samo v namizni različici.',

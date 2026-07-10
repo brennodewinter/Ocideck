@@ -83,6 +83,18 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Uitbreidingen': 'Ekstenshonnan',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Módulonan opcional. Pa defekto apagá; nan no ta agregá nada na e app básiko te ora bo aktivá nan.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Raportahe di pentest segun MIAUW. Aktivashon ta baha e datonan di referensia un biaha; despues e módulo ta funshoná offline.',
+  'Gegevens opschonen': 'Limpia datonan',
+  'Gegevens lokaal beschikbaar': 'Datonan disponibel lokalmente',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Duna promé permit pa tráfiko saliente na Lisensia i Privasidat.',
+  'Op het web nog niet beschikbaar': 'Ainda no disponibel riba web',
+  'Ophalen mislukt': 'Baha a faya',
+  'Nog niet opgehaald': 'Ainda no a baha',
   'AI-assistentie': 'Asistensia di IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
       'Asistensia di IA ta disponibel solamente den e version di desktop.',
