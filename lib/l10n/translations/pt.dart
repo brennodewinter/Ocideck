@@ -84,6 +84,13 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'Scope-object': 'Objeto do escopo',
+  'CVSS 4.0-vector': 'Vetor CVSS 4.0',
+  'Bevestiging (reproductie)': 'Confirmação (reprodução)',
+  'Mogelijke impact': 'Impacto possível',
+  'Aanbeveling': 'Recomendação',
+  'Bevinding-id': 'ID da constatação',
+  'Controleer de CVSS-vector': 'Verifique o vetor CVSS',
   '(leeg)': '(vazio)',
   'Audio': 'Áudio',
   'Bijschrift': 'Legenda',

@@ -84,6 +84,13 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Scope-object': 'Objekt rozsahu',
+  'CVSS 4.0-vector': 'Vektor CVSS 4.0',
+  'Bevestiging (reproductie)': 'Potvrdenie (reprodukcia)',
+  'Mogelijke impact': 'Možný dopad',
+  'Aanbeveling': 'Odporúčanie',
+  'Bevinding-id': 'ID zistenia',
+  'Controleer de CVSS-vector': 'Skontrolujte vektor CVSS',
   '(leeg)': '(prázdne)',
   'Audio': 'Audio',
   'Bijschrift': 'Popis',

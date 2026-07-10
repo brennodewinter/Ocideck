@@ -84,6 +84,13 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Scope-object': 'Oġġett tal-ambitu',
+  'CVSS 4.0-vector': 'Vettur CVSS 4.0',
+  'Bevestiging (reproductie)': 'Konferma (riproduzzjoni)',
+  'Mogelijke impact': 'Impatt possibbli',
+  'Aanbeveling': 'Rakkomandazzjoni',
+  'Bevinding-id': 'ID tas-sejba',
+  'Controleer de CVSS-vector': 'Iċċekkja l-vettur CVSS',
   '(leeg)': '(vojt)',
   'Audio': 'Awdjo',
   'Bijschrift': 'Didaskalija',

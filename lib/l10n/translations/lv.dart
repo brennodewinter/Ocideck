@@ -83,6 +83,13 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Scope-object': 'Tvēruma objekts',
+  'CVSS 4.0-vector': 'CVSS 4.0 vektors',
+  'Bevestiging (reproductie)': 'Apstiprinājums (reproducēšana)',
+  'Mogelijke impact': 'Iespējamā ietekme',
+  'Aanbeveling': 'Ieteikums',
+  'Bevinding-id': 'Konstatējuma ID',
+  'Controleer de CVSS-vector': 'Pārbaudiet CVSS vektoru',
   '(leeg)': '(tukšs)',
   'Audio': 'Audio',
   'Bijschrift': 'Paraksts',

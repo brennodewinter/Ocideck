@@ -83,6 +83,13 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Scope-object': 'Scope-objekt',
+  'CVSS 4.0-vector': 'CVSS 4.0-vektor',
+  'Bevestiging (reproductie)': 'Bekræftelse (reproduktion)',
+  'Mogelijke impact': 'Mulig påvirkning',
+  'Aanbeveling': 'Anbefaling',
+  'Bevinding-id': 'Fund-id',
+  'Controleer de CVSS-vector': 'Kontrollér CVSS-vektoren',
   '(leeg)': '(tom)',
   'Audio': 'Lyd',
   'Bijschrift': 'Billedtekst',

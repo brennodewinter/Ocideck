@@ -82,6 +82,13 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Scope-object': 'Ulatuse objekt',
+  'CVSS 4.0-vector': 'CVSS 4.0 vektor',
+  'Bevestiging (reproductie)': 'Kinnitus (taasesitus)',
+  'Mogelijke impact': 'Võimalik mõju',
+  'Aanbeveling': 'Soovitus',
+  'Bevinding-id': 'Leiu ID',
+  'Controleer de CVSS-vector': 'Kontrollige CVSS-vektorit',
   '(leeg)': '(tühi)',
   'Audio': 'Audio',
   'Bijschrift': 'Pealdis',

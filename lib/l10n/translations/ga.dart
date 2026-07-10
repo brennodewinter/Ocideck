@@ -85,6 +85,13 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Scope-object': 'Réad scóipe',
+  'CVSS 4.0-vector': 'Veicteoir CVSS 4.0',
+  'Bevestiging (reproductie)': 'Deimhniú (atáirgeadh)',
+  'Mogelijke impact': 'Tionchar féideartha',
+  'Aanbeveling': 'Moladh',
+  'Bevinding-id': 'Aitheantas na fionnachtana',
+  'Controleer de CVSS-vector': 'Seiceáil an veicteoir CVSS',
   '(leeg)': '(folamh)',
   'Audio': 'Fuaim',
   'Bijschrift': 'Foscríbhinn',

@@ -83,6 +83,13 @@ const _stringsIt = {
 };
 
 const _dutchSourceIt = {
+  'Scope-object': 'Oggetto dell\'ambito',
+  'CVSS 4.0-vector': 'Vettore CVSS 4.0',
+  'Bevestiging (reproductie)': 'Conferma (riproduzione)',
+  'Mogelijke impact': 'Impatto possibile',
+  'Aanbeveling': 'Raccomandazione',
+  'Bevinding-id': 'ID del rilievo',
+  'Controleer de CVSS-vector': 'Controlla il vettore CVSS',
   '(leeg)': '(vuoto)',
   'Audio': 'Audio',
   'Bijschrift': 'Didascalia',

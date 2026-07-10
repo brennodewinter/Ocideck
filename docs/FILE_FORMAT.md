@@ -531,6 +531,61 @@ here" shows.
 > The reveal step (how many events are currently shown in step mode) is
 > **session-only** and never written to the file.
 
+**Finding** (`finding`) — a pentest finding's **header card**, stored as plain,
+human-readable Markdown so it reads like a report page rather than a machine
+block. All structured fields are inline and re-parsed on load:
+
+```markdown
+<!-- _class: finding -->
+<!-- ocideck_finding_id: F-03 -->
+<!-- ocideck_finding_role: header -->
+# F-03 · SQL injection in the login form
+
+**Scope object:** `https://app.client.example/login`
+**CVSS 4.0:** 9.3 (Critical) · `CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N`
+**CWE:** [CWE-89 — Improper Neutralization of SQL](https://cwe.mitre.org/data/definitions/89.html)
+**CVE:** [CVE-2024-1234](https://nvd.nist.gov/vuln/detail/CVE-2024-1234)
+
+## Description
+…
+## Confirmation (reproduction)
+…
+## Possible impact
+…
+## Recommendation
+…
+```
+
+Rules:
+
+- The **score and severity band** shown on the `**CVSS 4.0:**` line are always
+  **derived** from the vector string by the native CVSS 4.0 engine and rewritten
+  on save — they are never a separate stored value. The CWE id/name and the CVE
+  ids are likewise parsed back from the inline links; there is no duplicated
+  machine block.
+- The section headings (`## Description`, `## Confirmation (reproduction)`,
+  `## Possible impact`, `## Recommendation`) are **stable English anchors** —
+  they are finding *content*, not localised UI, so a finding round-trips
+  identically regardless of interface language.
+- The whole body rides on the free-Markdown rails in `customMarkdown`, so a
+  hand-edited finding is preserved verbatim (file = truth); the structured fields
+  are a parsed *view* used by the editor and the severity-card preview.
+
+A finding is authored as a **group**: a header card plus its detail slides
+(description, reproduction, impact, recommendation) and evidence image slides.
+Every slide in the group carries the same id and its role — a `finding`-typed
+header, plus ordinary `bullets`/`image` detail and evidence slides:
+
+```markdown
+<!-- ocideck_finding_id: F-03 -->
+<!-- ocideck_finding_role: header | detail | evidence -->
+```
+
+Both comments are written on any slide with a non-empty finding id (empty = the
+slide is not part of a finding). The group carries **one id and one severity**
+(derived once from the header's CVSS vector) and moves, deletes and round-trips
+as a unit.
+
 ### Image Size (`imageSize`)
 
 One integer field with type-dependent meaning: for `image`/`title`/`quote`, it

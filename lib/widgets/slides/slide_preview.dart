@@ -18,12 +18,14 @@ import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
 import '../../models/cockpit.dart';
 import '../../models/deck.dart';
+import '../../models/finding_spec.dart';
 import '../../models/question.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../models/timeline.dart';
 import '../../models/video_source.dart';
 import '../../theme/app_theme.dart';
+import '../../theme/finding_severity_palette.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../services/rich_text_layout.dart';
 import '../../services/web_asset_store.dart';
@@ -56,6 +58,7 @@ part 'previews/cockpit_preview.dart';
 part 'previews/question_preview.dart';
 part 'previews/timeline_preview.dart';
 part 'previews/scaffold_previews.dart';
+part 'previews/finding_preview.dart';
 part 'previews/overlays.dart';
 
 /// Returns a TextStyle with the correct font. 'EB Garamond' is bundled with the
@@ -706,20 +709,33 @@ class SlidePreviewWidget extends StatelessWidget {
           presentationMode: presentationMode,
           revealedCount: timelineRevealedCount,
         );
-      // Informatieveiligheid-scaffold (P1-S): one shared free-Markdown preview
-      // for all five types until each gains a structured preview.
       case SlideType.finding:
       case SlideType.findingsSummary:
       case SlideType.checklist:
       case SlideType.scopeMatrix:
       case SlideType.signOff:
-        return _ScaffoldPreview(
-          slide: slide,
-          w: w,
-          font: fontFamily,
-          profile: themeProfile,
-        );
+        return _securityPreview(w);
     }
+  }
+
+  /// Preview for the Informatieveiligheid slide types: `finding` has its
+  /// structured severity-card preview (P1-FIND); the other four keep the shared
+  /// free-Markdown scaffold until their packages land (P1-CHK/SCOPE/SUM/SIGN).
+  Widget _securityPreview(double w) {
+    if (slide.type == SlideType.finding) {
+      return _FindingPreview(
+        slide: slide,
+        w: w,
+        font: fontFamily,
+        profile: themeProfile,
+      );
+    }
+    return _ScaffoldPreview(
+      slide: slide,
+      w: w,
+      font: fontFamily,
+      profile: themeProfile,
+    );
   }
 
   Widget _videoPreview(double w) {

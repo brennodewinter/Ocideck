@@ -81,6 +81,13 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Scope-object': 'HevmeH Doch',
+  'CVSS 4.0-vector': 'CVSS 4.0 vector',
+  'Bevestiging (reproductie)': 'toblu\'ta\' (reproduction)',
+  'Mogelijke impact': 'potlh qaSbogh',
+  'Aanbeveling': 'chup',
+  'Bevinding-id': 'SamwI\'ghach ID',
+  'Controleer de CVSS-vector': 'CVSS vector yInoH',
   '(leeg)': '(chIm)',
   'Audio': 'wab',
   'Bijschrift': 'per',

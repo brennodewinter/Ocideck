@@ -273,17 +273,43 @@ extension _MarkdownParse on MarkdownService {
     return (x.clamp(0.0, 1.0), y.clamp(0.0, 1.0));
   }
 
+  /// The stored body for a parsed slide: free-Markdown and the Informatieveiligheid
+  /// scaffold types keep the whole remaining block; a richText bullet slide keeps
+  /// its rich-text lines; every other type stores nothing (its own fields hold
+  /// the content).
+  String _parsedCustomMarkdown(
+    SlideType type,
+    String remaining,
+    ListStyle listStyle,
+    List<String> richTextLines,
+  ) {
+    if (type == SlideType.freeMarkdown || type.usesScaffoldMarkdownBody) {
+      return normalizeRichTextMarkdown(
+        unescapeDeckMarkdownDashLines(remaining),
+      );
+    }
+    if (listStyle == ListStyle.richText) {
+      return normalizeRichTextMarkdown(
+        unescapeDeckMarkdownDashLines(richTextLines.join('\n').trim()),
+      );
+    }
+    return '';
+  }
+
   Slide? _parseBlock(String block) {
     if (block.isEmpty) return null;
 
-    // Lift the crop focal points out first, so the directive is stripped before
-    // the generic comment scan would otherwise read it as presenter notes.
+    // Lift the crop focal points and finding-group link out first, so those
+    // directives are stripped before the generic comment scan would otherwise
+    // read them as presenter notes.
     final focus = _parseImageFocus(block);
-    final d = _parseBlockDirectives(focus.block);
+    final link = _parseFindingLink(focus.block);
+    final d = _parseBlockDirectives(link.block);
 
-    // Code/chart/cockpit/question slides carry a fenced block the generic line
-    // parser below would mangle; they are handled up front.
-    final fenced = _tryFencedSlide(
+    // Fenced (code/chart/cockpit/question) and finding-header slides carry
+    // structured bodies the generic line parser below would mangle; they are
+    // parsed up front from their class token.
+    final structured = _tryStructuredSlide(
       cssClass: d.cssClass,
       remaining: d.remaining,
       notes: d.notes,
@@ -291,8 +317,10 @@ extension _MarkdownParse on MarkdownService {
       skipped: d.skipped,
       tlp: d.tlp,
       styleImageWidth: d.styleImageWidth,
+      findingId: link.findingId,
+      findingRole: link.findingRole,
     );
-    if (fenced != null) return fenced;
+    if (structured != null) return structured;
 
     // bullets may already hold the decoded two-column data; the line parser
     // appends to the same list, so pass it through by reference.
@@ -386,18 +414,12 @@ extension _MarkdownParse on MarkdownService {
       audioAutoplay: body.audioAutoplay,
       quote: body.quote,
       quoteAuthor: body.quoteAuthor,
-      customMarkdown:
-          type == SlideType.freeMarkdown || type.usesScaffoldMarkdownBody
-          ? normalizeRichTextMarkdown(
-              unescapeDeckMarkdownDashLines(d.remaining),
-            )
-          : body.listStyle == ListStyle.richText
-          ? normalizeRichTextMarkdown(
-              unescapeDeckMarkdownDashLines(
-                body.richTextLines.join('\n').trim(),
-              ),
-            )
-          : '',
+      customMarkdown: _parsedCustomMarkdown(
+        type,
+        d.remaining,
+        body.listStyle,
+        body.richTextLines,
+      ),
       cssClass: effectiveClass,
       notes: d.notes,
       advanceDuration: d.advanceDuration,
@@ -416,6 +438,8 @@ extension _MarkdownParse on MarkdownService {
           : TimelineReveal.onEnter,
       timelineAnimationMs: d.timelineAnimationMs,
       timelineCurrentIndex: d.timelineCurrentIndex,
+      findingId: link.findingId,
+      findingRole: link.findingRole,
     );
   }
 
@@ -575,10 +599,12 @@ extension _MarkdownParse on MarkdownService {
     );
   }
 
-  /// Fenced-block slide types (code/chart/cockpit/question) delegate to their
-  /// own parsers, which keep the fenced body verbatim. Returns the parsed slide,
-  /// or null when [d] is not one of those types.
-  Slide? _tryFencedSlide({
+  /// Structured slide types whose body the generic line parser would mangle:
+  /// the fenced blocks (code/chart/cockpit/question) delegate to their own
+  /// verbatim-body parsers, and a `finding` header is parsed as one opaque
+  /// Markdown body. Returns the parsed slide, or null when [cssClass] is none of
+  /// them (the caller falls through to the generic line walker).
+  Slide? _tryStructuredSlide({
     required String cssClass,
     required String remaining,
     required String notes,
@@ -586,6 +612,8 @@ extension _MarkdownParse on MarkdownService {
     required bool skipped,
     required TlpLevel tlp,
     required int styleImageWidth,
+    required String findingId,
+    required FindingRole findingRole,
   }) {
     final tokens = cssClass.split(_reWhitespace);
     if (tokens.contains('code')) {
@@ -629,7 +657,16 @@ extension _MarkdownParse on MarkdownService {
         imageSize: styleImageWidth,
       );
     }
-    return null;
+    return _tryFindingSlide(
+      cssClass: cssClass,
+      remaining: remaining,
+      notes: notes,
+      advanceDuration: advanceDuration,
+      skipped: skipped,
+      tlp: tlp,
+      findingId: findingId,
+      findingRole: findingRole,
+    );
   }
 
   /// Walk the (non-fenced) body lines, accumulating headings, bullets, images,

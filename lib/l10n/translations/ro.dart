@@ -84,6 +84,13 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Scope-object': 'Obiect din domeniu',
+  'CVSS 4.0-vector': 'Vector CVSS 4.0',
+  'Bevestiging (reproductie)': 'Confirmare (reproducere)',
+  'Mogelijke impact': 'Impact posibil',
+  'Aanbeveling': 'Recomandare',
+  'Bevinding-id': 'ID-ul constatării',
+  'Controleer de CVSS-vector': 'Verificați vectorul CVSS',
   '(leeg)': '(gol)',
   'Audio': 'Audio',
   'Bijschrift': 'Legendă',
