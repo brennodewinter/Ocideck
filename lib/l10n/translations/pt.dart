@@ -1543,4 +1543,23 @@ const _dutchSourcePt = {
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Partes interessadas, argumentação e objeções para obter uma decisão ou apoio numa reunião.',
   'Pitch geven': 'Fazer um pitch',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Finalizar e selar',
+  'Verzegelen': 'Selar',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalize esta apresentação e calcule um selo SHA-512 sobre o conteúdo. Depois disso o ficheiro fica bloqueado e não pode mais ser editado; alterações posteriores tornam-se visíveis. Isto não pode ser desfeito na aplicação.',
+  'Handtekening (optioneel)': 'Assinatura (opcional)',
+  'Naam': 'Nome',
+  'Rol of functie': 'Função ou cargo',
+  'Verklaring': 'Declaração',
+  'Getypte handtekening': 'Assinatura digitada',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Esta apresentação está finalizada e selada e não pode ser editada.',
+  'Integriteit intact': 'Integridade intacta',
+  'Gewijzigd na afronden': 'Alterado após a finalização',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Selado com SHA-512. O conteúdo corresponde ao selo.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'O conteúdo difere do selo — o ficheiro foi alterado após a finalização.',
+  'Presentatie afgerond en verzegeld.': 'Apresentação finalizada e selada.',
 };

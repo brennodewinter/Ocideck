@@ -1516,4 +1516,23 @@ const _dutchSourceFi = {
       'Koukku, ongelma, ratkaisu, todiste ja pyyntö vakuuttavaa pitchiä varten.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Sidosryhmät, argumentointi ja vastaväitteet, jotta saat kokouksessa päätöksen tai tuen.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Viimeistele ja sinetöi',
+  'Verzegelen': 'Sinetöi',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Viimeistele tämä esitys ja laske sisällöstä SHA-512-sinetti. Tämän jälkeen tiedosto lukitaan eikä sitä voi enää muokata; myöhemmät muutokset tulevat näkyviin. Tätä ei voi kumota sovelluksessa.',
+  'Handtekening (optioneel)': 'Allekirjoitus (valinnainen)',
+  'Naam': 'Nimi',
+  'Rol of functie': 'Rooli tai tehtävä',
+  'Verklaring': 'Vakuutus',
+  'Getypte handtekening': 'Kirjoitettu allekirjoitus',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Tämä esitys on viimeistelty ja sinetöity, eikä sitä voi muokata.',
+  'Integriteit intact': 'Eheys kunnossa',
+  'Gewijzigd na afronden': 'Muutettu viimeistelyn jälkeen',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Sinetöity SHA-512:lla. Sisältö vastaa sinettiä.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Sisältö poikkeaa sinetistä — tiedostoa on muutettu viimeistelyn jälkeen.',
+  'Presentatie afgerond en verzegeld.': 'Esitys viimeistelty ja sinetöity.',
 };

@@ -1539,4 +1539,24 @@ const _dutchSourceEl = {
       'Άγκιστρο, πρόβλημα, λύση, απόδειξη και αίτημα για μια πειστική παρουσίαση ιδέας.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Ενδιαφερόμενα μέρη, επιχειρηματολογία και αντιρρήσεις για να λάβεις μια απόφαση ή υποστήριξη σε μια σύσκεψη.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Οριστικοποίηση & σφράγιση',
+  'Verzegelen': 'Σφράγιση',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Οριστικοποιήστε αυτήν την παρουσίαση και υπολογίστε μια σφραγίδα SHA-512 στο περιεχόμενό της. Στη συνέχεια το αρχείο κλειδώνεται και δεν μπορεί πλέον να επεξεργαστεί· οι μεταγενέστερες αλλαγές γίνονται ορατές. Αυτό δεν μπορεί να αναιρεθεί στην εφαρμογή.',
+  'Handtekening (optioneel)': 'Υπογραφή (προαιρετικά)',
+  'Naam': 'Όνομα',
+  'Rol of functie': 'Ρόλος ή ιδιότητα',
+  'Verklaring': 'Δήλωση',
+  'Getypte handtekening': 'Πληκτρολογημένη υπογραφή',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Αυτή η παρουσίαση είναι οριστικοποιημένη και σφραγισμένη και δεν μπορεί να επεξεργαστεί.',
+  'Integriteit intact': 'Ακεραιότητα άθικτη',
+  'Gewijzigd na afronden': 'Άλλαξε μετά την οριστικοποίηση',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Σφραγισμένο με SHA-512. Το περιεχόμενο ταιριάζει με τη σφραγίδα.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Το περιεχόμενο διαφέρει από τη σφραγίδα — το αρχείο άλλαξε μετά την οριστικοποίηση.',
+  'Presentatie afgerond en verzegeld.':
+      'Η παρουσίαση οριστικοποιήθηκε και σφραγίστηκε.',
 };

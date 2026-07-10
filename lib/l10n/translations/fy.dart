@@ -477,6 +477,25 @@ const _dutchSourceFy = {
   'Website van de stichting': 'Webside fan de stichting',
   'Opgeslagen als download in je map met downloads.':
       'As download bewarre yn dyn map mei downloads.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Ôfslute & fersegelje',
+  'Verzegelen': 'Fersegelje',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Slút dizze presintaasje ôf en berekkenje in SHA-512-segel oer de ynhâld. Dêrnei is it bestân ferskoattele en net mear te bewurkjen; lettere wizigingen wurde sichtber. Dit kin yn de app net ûngedien makke wurde.',
+  'Handtekening (optioneel)': 'Hantekening (opsjoneel)',
+  'Naam': 'Namme',
+  'Rol of functie': 'Rol of funksje',
+  'Verklaring': 'Ferklearring',
+  'Getypte handtekening': 'Typte hantekening',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Dizze presintaasje is ôfsluten en fersegele en kin net bewurke wurde.',
+  'Integriteit intact': 'Yntegriteit yntakt',
+  'Gewijzigd na afronden': 'Wizige nei it ôfsluten',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Fersegele mei SHA-512. De ynhâld komt oerien mei it segel.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'De ynhâld wykt ôf fan it segel — it bestân is nei it ôfsluten wizige.',
+  'Presentatie afgerond en verzegeld.': 'Presintaasje ôfsluten en fersegele.',
 };
 
 const _dutchSourceAddFy = {

@@ -1532,4 +1532,24 @@ const _dutchSourceUk = {
       'Гачок, проблема, рішення, доказ і заклик для переконливої презентації.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Зацікавлені сторони, аргументація та заперечення для отримання рішення чи підтримки на нараді.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Завершити та скріпити печаткою',
+  'Verzegelen': 'Скріпити печаткою',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Завершіть цю презентацію та обчисліть печатку SHA-512 для її вмісту. Після цього файл буде заблоковано, і його більше не можна буде редагувати; подальші зміни стануть помітними. Цю дію не можна скасувати в застосунку.',
+  'Handtekening (optioneel)': 'Підпис (необовʼязково)',
+  'Naam': 'Імʼя',
+  'Rol of functie': 'Роль або посада',
+  'Verklaring': 'Заява',
+  'Getypte handtekening': 'Введений підпис',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Цю презентацію завершено та скріплено печаткою, її не можна редагувати.',
+  'Integriteit intact': 'Цілісність збережено',
+  'Gewijzigd na afronden': 'Змінено після завершення',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Скріплено печаткою SHA-512. Вміст відповідає печатці.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Вміст відрізняється від печатки — файл було змінено після завершення.',
+  'Presentatie afgerond en verzegeld.':
+      'Презентацію завершено та скріплено печаткою.',
 };

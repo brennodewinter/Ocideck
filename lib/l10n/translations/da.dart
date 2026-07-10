@@ -1514,4 +1514,24 @@ const _dutchSourceDa = {
       'Krog, problem, løsning, bevis og anmodning til en overbevisende pitch.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Interessenter, argumentation og indvendinger for at opnå en beslutning eller opbakning på et møde.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Færdiggør & forsegl',
+  'Verzegelen': 'Forsegl',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Færdiggør denne præsentation, og beregn et SHA-512-segl over indholdet. Derefter er filen låst og kan ikke længere redigeres; senere ændringer bliver synlige. Dette kan ikke fortrydes i appen.',
+  'Handtekening (optioneel)': 'Underskrift (valgfri)',
+  'Naam': 'Navn',
+  'Rol of functie': 'Rolle eller funktion',
+  'Verklaring': 'Erklæring',
+  'Getypte handtekening': 'Indtastet underskrift',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Denne præsentation er færdiggjort og forseglet og kan ikke redigeres.',
+  'Integriteit intact': 'Integritet intakt',
+  'Gewijzigd na afronden': 'Ændret efter færdiggørelse',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Forseglet med SHA-512. Indholdet svarer til seglet.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Indholdet afviger fra seglet — filen blev ændret efter færdiggørelsen.',
+  'Presentatie afgerond en verzegeld.':
+      'Præsentationen er færdiggjort og forseglet.',
 };

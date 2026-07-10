@@ -1534,4 +1534,23 @@ const _dutchSourceRo = {
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Părți interesate, argumentare și obiecții pentru a obține o decizie sau sprijin într-o ședință.',
   'Pitch geven': 'Susține un pitch',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Finalizează și sigilează',
+  'Verzegelen': 'Sigilează',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalizați această prezentare și calculați un sigiliu SHA-512 asupra conținutului. Fișierul este apoi blocat și nu mai poate fi editat; modificările ulterioare devin vizibile. Această acțiune nu poate fi anulată în aplicație.',
+  'Handtekening (optioneel)': 'Semnătură (opțional)',
+  'Naam': 'Nume',
+  'Rol of functie': 'Rol sau funcție',
+  'Verklaring': 'Declarație',
+  'Getypte handtekening': 'Semnătură tastată',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Această prezentare este finalizată și sigilată și nu poate fi editată.',
+  'Integriteit intact': 'Integritate intactă',
+  'Gewijzigd na afronden': 'Modificat după finalizare',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Sigilat cu SHA-512. Conținutul corespunde sigiliului.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Conținutul diferă de sigiliu — fișierul a fost modificat după finalizare.',
+  'Presentatie afgerond en verzegeld.': 'Prezentare finalizată și sigilată.',
 };

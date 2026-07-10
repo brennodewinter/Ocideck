@@ -1523,4 +1523,24 @@ const _dutchSourceLt = {
       'Kabliukas, problema, sprendimas, įrodymas ir prašymas įtikinamam pristatymui.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Suinteresuotosios šalys, argumentai ir prieštaravimai, kad susirinkime gautum sprendimą ar palaikymą.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Užbaigti ir užantspauduoti',
+  'Verzegelen': 'Užantspauduoti',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Užbaikite šią prezentaciją ir apskaičiuokite jos turinio SHA-512 antspaudą. Tada failas užrakinamas ir jo nebegalima redaguoti; vėlesni pakeitimai tampa matomi. Programoje to atšaukti negalima.',
+  'Handtekening (optioneel)': 'Parašas (nebūtina)',
+  'Naam': 'Vardas',
+  'Rol of functie': 'Vaidmuo arba pareigos',
+  'Verklaring': 'Pareiškimas',
+  'Getypte handtekening': 'Įvestas parašas',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Ši prezentacija yra užbaigta ir užantspauduota ir jos redaguoti negalima.',
+  'Integriteit intact': 'Vientisumas nepažeistas',
+  'Gewijzigd na afronden': 'Pakeista po užbaigimo',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Užantspauduota SHA-512. Turinys atitinka antspaudą.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Turinys skiriasi nuo antspaudo — failas po užbaigimo buvo pakeistas.',
+  'Presentatie afgerond en verzegeld.':
+      'Prezentacija užbaigta ir užantspauduota.',
 };

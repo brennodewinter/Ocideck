@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/cockpit.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/document_signature.dart';
 import 'package:ocideck/models/question.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
@@ -1067,6 +1068,63 @@ void main() {
       );
       expect(onMarkdown.contains('ocideck_play_only: true'), isTrue);
       expect(roundTrip(true)!.playOnly, isTrue);
+    });
+
+    test('finalise flag and SHA-512 seal round-trip (default stays clean)', () {
+      final service = MarkdownService();
+      // Default (not finalised) writes none of the integrity keys.
+      final plain = service.generateDeck(
+        Deck(title: 'Demo', slides: [Slide.create(SlideType.title)]),
+      );
+      expect(plain.contains('ocideck_finalized'), isFalse);
+      expect(plain.contains('ocideck_seal_'), isFalse);
+
+      final sealed = Deck(
+        title: 'Demo',
+        finalized: true,
+        sealHash: 'abc123',
+        sealAlgo: 'sha-512',
+        sealAt: '2026-07-10T12:00:00.000Z',
+        slides: [Slide.create(SlideType.title).copyWith(title: 'Een')],
+      );
+      final md = service.generateDeck(sealed);
+      expect(md.contains('ocideck_finalized: true'), isTrue);
+      expect(md.contains('ocideck_seal_hash: abc123'), isTrue);
+      expect(md.contains('ocideck_seal_algo: sha-512'), isTrue);
+      expect(md.contains('ocideck_seal_at:'), isTrue);
+
+      final back = service.parseDeck(md)!;
+      expect(back.finalized, isTrue);
+      expect(back.sealHash, 'abc123');
+      expect(back.sealAlgo, 'sha-512');
+      expect(back.sealAt, '2026-07-10T12:00:00.000Z');
+    });
+
+    test('visual signature round-trips and is absent by default', () {
+      final service = MarkdownService();
+      final plain = service.generateDeck(
+        Deck(title: 'Demo', slides: [Slide.create(SlideType.title)]),
+      );
+      expect(plain.contains('ocideck_sig_'), isFalse);
+
+      final signed = Deck(
+        title: 'Demo',
+        signature: const DocumentSignature(
+          name: 'Jan Jansen',
+          role: 'Onderzoeker',
+          date: '2026-07-10',
+          statement: 'Naar waarheid opgesteld.',
+          typedSignature: 'J. Jansen',
+        ),
+        slides: [Slide.create(SlideType.title)],
+      );
+      final back = service.parseDeck(service.generateDeck(signed))!;
+      final sig = back.signature!;
+      expect(sig.name, 'Jan Jansen');
+      expect(sig.role, 'Onderzoeker');
+      expect(sig.date, '2026-07-10');
+      expect(sig.statement, 'Naar waarheid opgesteld.');
+      expect(sig.typedSignature, 'J. Jansen');
     });
 
     test('timeline slide keeps title, events, layout and animation', () {

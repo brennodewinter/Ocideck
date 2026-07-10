@@ -6,6 +6,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/document_integrity.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
@@ -797,5 +798,56 @@ void main() {
     n.undo();
     expect(n.state.deck!.slides[0].title, isNot('XY'));
     expect(n.state.deck!.slides[0].title, isNot('X'));
+  });
+
+  group('finalise & seal (document integrity A1)', () {
+    test('finalizeAndSeal locks the deck and stamps the seal', () {
+      final n = _notifier()..newDeck('Rapport');
+      n.addSlide(SlideType.bullets);
+      n.finalizeAndSeal();
+      final deck = n.state.deck!;
+      expect(deck.finalized, isTrue);
+      expect(deck.sealAlgo, 'sha-512');
+      expect(deck.sealHash.length, 128);
+      expect(deck.sealAt, isNotEmpty);
+      expect(n.integrityStatus, IntegrityStatus.intact);
+    });
+
+    test('a finalised deck is read-only: content edits are refused', () {
+      final n = _notifier()..newDeck('Rapport');
+      n.addSlide(SlideType.bullets);
+      n.finalizeAndSeal();
+      final before = n.generateMarkdown();
+      final titleBefore = n.state.deck!.slides[0].title;
+
+      // Every content mutation funnels through _mutate, which no-ops here.
+      n.updateSlide(0, n.state.deck!.slides[0].copyWith(title: 'Gehackt'));
+      n.addSlide(SlideType.image);
+      n.removeSlide(0);
+      n.updateInfo(author: 'Indringer');
+
+      expect(n.state.deck!.slides[0].title, titleBefore);
+      expect(n.state.deck!.slides, hasLength(2));
+      expect(n.state.deck!.author, isEmpty);
+      expect(n.generateMarkdown(), before);
+      expect(n.integrityStatus, IntegrityStatus.intact);
+    });
+
+    test('finalizeAndSeal clears history so finalising cannot be undone', () {
+      final n = _notifier()..newDeck('Rapport');
+      n.addSlide(SlideType.bullets);
+      n.finalizeAndSeal();
+      expect(n.canUndo, isFalse);
+      n.undo();
+      expect(n.state.deck!.finalized, isTrue);
+    });
+
+    test('finalizeAndSeal is a no-op on an already finalised deck', () {
+      final n = _notifier()..newDeck('Rapport');
+      n.finalizeAndSeal();
+      final hash = n.state.deck!.sealHash;
+      n.finalizeAndSeal();
+      expect(n.state.deck!.sealHash, hash);
+    });
   });
 }

@@ -1515,4 +1515,23 @@ const _dutchSourceLv = {
       'Āķis, problēma, risinājums, pierādījums un lūgums pārliecinošai prezentācijai.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Ieinteresētās puses, argumentācija un iebildumi, lai sanāksmē panāktu lēmumu vai atbalstu.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Pabeigt un aizzīmogot',
+  'Verzegelen': 'Aizzīmogot',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Pabeidziet šo prezentāciju un aprēķiniet SHA-512 zīmogu tās saturam. Pēc tam fails tiek bloķēts, un to vairs nevar rediģēt; vēlākās izmaiņas kļūst redzamas. To lietotnē nevar atsaukt.',
+  'Handtekening (optioneel)': 'Paraksts (neobligāts)',
+  'Naam': 'Vārds',
+  'Rol of functie': 'Loma vai amats',
+  'Verklaring': 'Paziņojums',
+  'Getypte handtekening': 'Ierakstīts paraksts',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Šī prezentācija ir pabeigta un aizzīmogota, un to nevar rediģēt.',
+  'Integriteit intact': 'Integritāte nav skarta',
+  'Gewijzigd na afronden': 'Mainīts pēc pabeigšanas',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Aizzīmogots ar SHA-512. Saturs atbilst zīmogam.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Saturs atšķiras no zīmoga — fails pēc pabeigšanas ir mainīts.',
+  'Presentatie afgerond en verzegeld.': 'Prezentācija pabeigta un aizzīmogota.',
 };

@@ -1519,4 +1519,23 @@ const _dutchSourceHu = {
       'Horog, probléma, megoldás, bizonyíték és kérés egy meggyőző pitch-hez.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Érintettek, érvelés és kifogások, hogy döntést vagy támogatást szerezz egy megbeszélésen.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Véglegesítés és lezárás',
+  'Verzegelen': 'Lezárás',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Véglegesítse ezt a bemutatót, és számítson ki egy SHA-512 pecsétet a tartalmáról. Ezután a fájl zárolva lesz, és többé nem szerkeszthető; a későbbi módosítások láthatóvá válnak. Ez az alkalmazásban nem vonható vissza.',
+  'Handtekening (optioneel)': 'Aláírás (opcionális)',
+  'Naam': 'Név',
+  'Rol of functie': 'Szerep vagy beosztás',
+  'Verklaring': 'Nyilatkozat',
+  'Getypte handtekening': 'Beírt aláírás',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Ez a bemutató véglegesítve és lezárva van, és nem szerkeszthető.',
+  'Integriteit intact': 'Az integritás sértetlen',
+  'Gewijzigd na afronden': 'Véglegesítés után módosult',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'SHA-512-vel lezárva. A tartalom megegyezik a pecséttel.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'A tartalom eltér a pecséttől — a fájlt a véglegesítés után módosították.',
+  'Presentatie afgerond en verzegeld.': 'A bemutató véglegesítve és lezárva.',
 };

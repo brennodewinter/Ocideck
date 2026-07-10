@@ -75,6 +75,11 @@ extension _MarkdownParse on MarkdownService {
     int presentationTargetSeconds = 0;
     bool showRehearsalSummary = true;
     bool playOnly = false;
+    bool finalized = false;
+    String sealHash = '';
+    String sealAlgo = '';
+    String sealAt = '';
+    DocumentSignature signature = const DocumentSignature();
 
     // Strip front matter
     if (content.startsWith('---\n')) {
@@ -91,6 +96,16 @@ extension _MarkdownParse on MarkdownService {
           if (colon <= 0) continue;
           final key = line.substring(0, colon).trim();
           final value = line.substring(colon + 1).trim();
+          // Visual-signature fields share a prefix; fold them into the
+          // accumulator here so the switch below (and _doParse) stay short.
+          if (key.startsWith('ocideck_sig_')) {
+            signature = _applySignatureField(
+              signature,
+              key,
+              _parseScalar(value),
+            );
+            continue;
+          }
           switch (key) {
             case 'theme':
               theme = value;
@@ -118,6 +133,14 @@ extension _MarkdownParse on MarkdownService {
               showRehearsalSummary = value != 'false';
             case 'ocideck_play_only':
               playOnly = value == 'true';
+            case 'ocideck_finalized':
+              finalized = value == 'true';
+            case 'ocideck_seal_hash':
+              sealHash = _parseScalar(value);
+            case 'ocideck_seal_algo':
+              sealAlgo = _parseScalar(value);
+            case 'ocideck_seal_at':
+              sealAt = _parseScalar(value);
             case 'ocideck_style_profile':
               // Best-effort: a corrupt profile token must not fail the whole
               // parse (which would blank the audience window). Keep the default.
@@ -179,7 +202,38 @@ extension _MarkdownParse on MarkdownService {
       presentationTargetSeconds: presentationTargetSeconds.clamp(0, 86400),
       showRehearsalSummary: showRehearsalSummary,
       playOnly: playOnly,
+      finalized: finalized,
+      sealHash: sealHash,
+      sealAlgo: sealAlgo,
+      sealAt: sealAt,
+      signature: signature.isEmpty ? null : signature,
     );
+  }
+
+  /// Folds one `ocideck_sig_*` front-matter field into the running visual
+  /// signature (§8 A1). Unknown `ocideck_sig_*` keys are ignored so a future
+  /// field never breaks the parse.
+  DocumentSignature _applySignatureField(
+    DocumentSignature sig,
+    String key,
+    String value,
+  ) {
+    switch (key) {
+      case 'ocideck_sig_name':
+        return sig.copyWith(name: value);
+      case 'ocideck_sig_role':
+        return sig.copyWith(role: value);
+      case 'ocideck_sig_date':
+        return sig.copyWith(date: value);
+      case 'ocideck_sig_statement':
+        return sig.copyWith(statement: value);
+      case 'ocideck_sig_typed':
+        return sig.copyWith(typedSignature: value);
+      case 'ocideck_sig_image':
+        return sig.copyWith(imagePath: value);
+      default:
+        return sig;
+    }
   }
 
   /// Pulls the image crop focal-point comments out of [block] and returns the

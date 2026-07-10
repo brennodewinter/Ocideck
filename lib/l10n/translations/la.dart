@@ -1532,4 +1532,23 @@ const _dutchSourceLa = {
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Participes, argumentatio et obiectiones ad decretum vel auxilium in conventu obtinendum.',
   'Pitch geven': 'Pitch praebere',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Perfice et obsigna',
+  'Verzegelen': 'Obsigna',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Hanc praesentationem perfice et sigillum SHA-512 super contentum computa. Deinde tabella obserata est nec amplius mutari potest; mutationes posteriores conspicuae fiunt. Hoc in applicatione revocari non potest.',
+  'Handtekening (optioneel)': 'Subscriptio (ad libitum)',
+  'Naam': 'Nomen',
+  'Rol of functie': 'Munus vel officium',
+  'Verklaring': 'Declaratio',
+  'Getypte handtekening': 'Subscriptio typis scripta',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Haec praesentatio perfecta et obsignata est nec mutari potest.',
+  'Integriteit intact': 'Integritas incolumis',
+  'Gewijzigd na afronden': 'Post perfectionem mutata',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'SHA-512 obsignata. Contentum sigillo congruit.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Contentum a sigillo differt — tabella post perfectionem mutata est.',
+  'Presentatie afgerond en verzegeld.': 'Praesentatio perfecta et obsignata.',
 };

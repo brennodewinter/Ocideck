@@ -1516,4 +1516,23 @@ const _dutchSourceId = {
       'Kait, masalah, solusi, bukti, dan permintaan untuk presentasi gagasan yang meyakinkan.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Pemangku kepentingan, argumentasi, dan keberatan untuk memperoleh keputusan atau dukungan dalam rapat.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Finalisasi & segel',
+  'Verzegelen': 'Segel',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalisasi presentasi ini dan hitung segel SHA-512 atas kontennya. Setelah itu berkas dikunci dan tidak dapat diedit lagi; perubahan berikutnya menjadi terlihat. Ini tidak dapat dibatalkan di aplikasi.',
+  'Handtekening (optioneel)': 'Tanda tangan (opsional)',
+  'Naam': 'Nama',
+  'Rol of functie': 'Peran atau jabatan',
+  'Verklaring': 'Pernyataan',
+  'Getypte handtekening': 'Tanda tangan ketikan',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Presentasi ini telah difinalisasi dan disegel serta tidak dapat diedit.',
+  'Integriteit intact': 'Integritas utuh',
+  'Gewijzigd na afronden': 'Diubah setelah finalisasi',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Disegel dengan SHA-512. Konten sesuai dengan segel.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Konten berbeda dari segel — berkas diubah setelah finalisasi.',
+  'Presentatie afgerond en verzegeld.': 'Presentasi difinalisasi dan disegel.',
 };

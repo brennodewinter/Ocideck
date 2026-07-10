@@ -1526,4 +1526,24 @@ const _dutchSourcePl = {
       'Zaczep, problem, rozwiązanie, dowód i prośba dla przekonującej prezentacji.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Interesariusze, argumentacja i obiekcje, aby uzyskać decyzję lub poparcie na spotkaniu.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Sfinalizuj i zapieczętuj',
+  'Verzegelen': 'Zapieczętuj',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Sfinalizuj tę prezentację i oblicz pieczęć SHA-512 na jej zawartości. Plik zostanie następnie zablokowany i nie będzie można go już edytować; późniejsze zmiany staną się widoczne. Tego nie można cofnąć w aplikacji.',
+  'Handtekening (optioneel)': 'Podpis (opcjonalnie)',
+  'Naam': 'Imię i nazwisko',
+  'Rol of functie': 'Rola lub funkcja',
+  'Verklaring': 'Oświadczenie',
+  'Getypte handtekening': 'Wpisany podpis',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Ta prezentacja jest sfinalizowana i zapieczętowana i nie można jej edytować.',
+  'Integriteit intact': 'Integralność nienaruszona',
+  'Gewijzigd na afronden': 'Zmieniono po sfinalizowaniu',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Zapieczętowano za pomocą SHA-512. Zawartość jest zgodna z pieczęcią.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Zawartość różni się od pieczęci — plik został zmieniony po sfinalizowaniu.',
+  'Presentatie afgerond en verzegeld.':
+      'Prezentacja sfinalizowana i zapieczętowana.',
 };

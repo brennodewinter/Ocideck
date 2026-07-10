@@ -468,6 +468,25 @@ const _dutchSourceEs = {
   'Website van de stichting': 'Sitio web de la fundación',
   'Opgeslagen als download in je map met downloads.':
       'Guardado como descarga en tu carpeta de descargas.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Finalizar y sellar',
+  'Verzegelen': 'Sellar',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalice esta presentación y calcule un sello SHA-512 sobre su contenido. Después el archivo queda bloqueado y ya no se puede editar; los cambios posteriores se hacen visibles. Esto no se puede deshacer en la aplicación.',
+  'Handtekening (optioneel)': 'Firma (opcional)',
+  'Naam': 'Nombre',
+  'Rol of functie': 'Rol o función',
+  'Verklaring': 'Declaración',
+  'Getypte handtekening': 'Firma escrita',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Esta presentación está finalizada y sellada y no se puede editar.',
+  'Integriteit intact': 'Integridad intacta',
+  'Gewijzigd na afronden': 'Modificado tras finalizar',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Sellado con SHA-512. El contenido coincide con el sello.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'El contenido difiere del sello: el archivo se modificó después de finalizar.',
+  'Presentatie afgerond en verzegeld.': 'Presentación finalizada y sellada.',
 };
 
 const _dutchSourceAddEs = {

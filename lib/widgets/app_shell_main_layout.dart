@@ -126,7 +126,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                 });
               }
 
-              return Row(
+              final workspace = Row(
                 children: [
                   SizedBox(
                     width: railWidth,
@@ -144,8 +144,50 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                   const Expanded(child: EditorPanel()),
                 ],
               );
+              if (!deck.finalized) return workspace;
+              // Read-only lock (§8 A1): een afgerond deck blijft zichtbaar en
+              // exporteerbaar, maar niet bewerkbaar. De banner maakt dat
+              // duidelijk; de harde grendel zit in DeckNotifier._mutate.
+              return Column(
+                children: [
+                  _finalizedBanner(context, l10n),
+                  Expanded(child: workspace),
+                ],
+              );
             },
           ),
+        ),
+      ),
+    );
+  }
+
+  /// Read-only-banner voor een afgerond & verzegeld deck (§8 A1). Slank, boven
+  /// de werkruimte; bekijken/exporteren blijft mogelijk, bewerken niet.
+  Widget _finalizedBanner(BuildContext context, AppLocalizations l10n) {
+    final theme = Theme.of(context);
+    return Material(
+      color: AppTheme.amber600.withValues(alpha: 0.14),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(color: theme.colorScheme.outlineVariant),
+          ),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.lock_outline, size: 16, color: AppTheme.amber600),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                l10n.d(
+                  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.',
+                ),
+                style: const TextStyle(fontSize: 12.5),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -375,6 +417,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _clearAllChecklists();
             case 'full_preview':
               _openFullDeckPreview();
+            case 'finalize':
+              _finalizeAndSeal();
             case 'properties':
               _openProperties();
             case 'settings':
@@ -445,6 +489,14 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         l10n.t('fullDeckPreview'),
       ),
       const PopupMenuDivider(),
+      // Documentintegriteit (§8 A1): afronden is bewust eenrichtingsverkeer, dus
+      // het item verdwijnt zodra het deck verzegeld is.
+      if (ref.read(deckProvider).deck?.finalized != true)
+        _menuItem(
+          'finalize',
+          Icons.verified_user_outlined,
+          l10n.d('Afronden & verzegelen'),
+        ),
       // Style profiles are chosen via the "STIJL" pulldown in the
       // editor toolbar; no need to duplicate them here.
       _menuItem('settings', Icons.settings_outlined, l10n.t('settings')),
@@ -823,6 +875,25 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     ref
         .read(tabsProvider.notifier)
         .newDeckInNewTab(choice.title, template: choice.template);
+  }
+
+  /// Documentintegriteit (§8 A1): toon de afrond-dialoog, verzegel het deck en
+  /// sla het meteen op zodat het zegel op schijf staat.
+  Future<void> _finalizeAndSeal() async {
+    final deck = ref.read(deckProvider).deck;
+    if (deck == null || deck.finalized) return;
+    final result = await FinalizeSealDialog.show(context);
+    if (result == null || !mounted) return;
+    ref
+        .read(deckProvider.notifier)
+        .finalizeAndSeal(signature: result.signature);
+    await _saveDeck();
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(context.l10n.d('Presentatie afgerond en verzegeld.')),
+      ),
+    );
   }
 
   Future<void> _openProperties() async {

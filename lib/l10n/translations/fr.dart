@@ -471,6 +471,25 @@ const _dutchSourceFr = {
   'Website van de stichting': 'Site web de la fondation',
   'Opgeslagen als download in je map met downloads.':
       'Enregistré en téléchargement dans votre dossier de téléchargements.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Finaliser et sceller',
+  'Verzegelen': 'Sceller',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalisez cette présentation et calculez un sceau SHA-512 sur son contenu. Le fichier est alors verrouillé et ne peut plus être modifié ; les modifications ultérieures deviennent visibles. Cette action est irréversible dans l\'application.',
+  'Handtekening (optioneel)': 'Signature (facultative)',
+  'Naam': 'Nom',
+  'Rol of functie': 'Rôle ou fonction',
+  'Verklaring': 'Déclaration',
+  'Getypte handtekening': 'Signature saisie',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Cette présentation est finalisée et scellée et ne peut pas être modifiée.',
+  'Integriteit intact': 'Intégrité intacte',
+  'Gewijzigd na afronden': 'Modifié après la finalisation',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Scellé avec SHA-512. Le contenu correspond au sceau.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Le contenu diffère du sceau — le fichier a été modifié après la finalisation.',
+  'Presentatie afgerond en verzegeld.': 'Présentation finalisée et scellée.',
 };
 
 const _dutchSourceAddFr = {

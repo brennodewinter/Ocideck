@@ -3,9 +3,11 @@ import 'package:flutter_riverpod/legacy.dart';
 import '../models/annotation.dart';
 import '../models/deck.dart';
 import '../models/deck_template.dart';
+import '../models/document_signature.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../services/annotation_codec.dart';
+import '../services/document_integrity.dart';
 import '../services/file_service.dart';
 import '../services/image_service.dart';
 import '../services/markdown_service.dart';
@@ -753,6 +755,27 @@ class DeckNotifier extends StateNotifier<DeckState> {
     );
   }
 
+  /// Documentintegriteit (§8 A1): rond het deck af en verzegel het. Berekent een
+  /// SHA-512-zegel over de inhoud (met de optionele [signature] eronder), zet de
+  /// vergrendeling en het zegel, en wist de ongedaan-maken-historie zodat het
+  /// afronden in de app niet terug te draaien is (bewust eenrichtingsverkeer).
+  /// Doet niets wanneer het deck al verzegeld is.
+  void finalizeAndSeal({DocumentSignature? signature}) {
+    final deck = state.deck;
+    if (deck == null || deck.finalized) return;
+    final sealed = DocumentIntegrity(_md).seal(deck, signature: signature);
+    _clearHistory();
+    state = state.copyWith(deck: sealed, isDirty: true);
+  }
+
+  /// De integriteitsstatus van het open deck (niet-verzegeld / intact /
+  /// gewijzigd-na-afronden). Herberekent de hash en vergelijkt met het zegel.
+  IntegrityStatus get integrityStatus {
+    final deck = state.deck;
+    if (deck == null) return IntegrityStatus.notSealed;
+    return DocumentIntegrity(_md).verify(deck);
+  }
+
   void updateThemeProfile(ThemeProfile profile) {
     final deck = state.deck;
     if (deck == null) return;
@@ -899,6 +922,13 @@ class DeckNotifier extends StateNotifier<DeckState> {
   /// waarden tonen).
   void _mutate(Deck deck, {String? coalesceKey, bool bumpRevision = false}) {
     final previous = state.deck;
+    // Read-only lock (§8 A1): a finalised deck is not editable. Every content
+    // edit funnels through here, so refusing at this single choke point makes
+    // the whole editor read-only without a parallel guard on each action.
+    // Bekijken en exporteren lezen de state en gaan niet via [_mutate], dus die
+    // blijven werken. Het verzegelen zelf loopt via [finalizeAndSeal], dat de
+    // state rechtstreeks zet terwijl het deck nog bewerkbaar is.
+    if (previous != null && previous.finalized) return;
     if (previous != null) {
       final now = DateTime.now();
       final canCoalesce =

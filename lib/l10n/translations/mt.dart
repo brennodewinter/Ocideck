@@ -1537,4 +1537,24 @@ const _dutchSourceMt = {
       'Ganċ, problema, soluzzjoni, prova u talba għal preżentazzjoni konvinċenti ta\' idea.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Partijiet interessati, argumentazzjoni u oġġezzjonijiet biex tikseb deċiżjoni jew appoġġ f\'laqgħa.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Iffinalizza u ssiġilla',
+  'Verzegelen': 'Issiġilla',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Iffinalizza din il-preżentazzjoni u kkalkula siġill SHA-512 fuq il-kontenut tagħha. Wara, il-fajl jiġi msakkar u ma jistax jiġi editjat aktar; il-bidliet ta\' wara jsiru viżibbli. Dan ma jistax jiġi żvolut fl-app.',
+  'Handtekening (optioneel)': 'Firma (mhux obbligatorja)',
+  'Naam': 'Isem',
+  'Rol of functie': 'Rwol jew funzjoni',
+  'Verklaring': 'Dikjarazzjoni',
+  'Getypte handtekening': 'Firma miktuba',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Din il-preżentazzjoni hija ffinalizzata u ssiġillata u ma tistax tiġi editjata.',
+  'Integriteit intact': 'Integrità intatta',
+  'Gewijzigd na afronden': 'Mibdul wara l-finalizzazzjoni',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Issiġillat b\'SHA-512. Il-kontenut jaqbel mas-siġill.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Il-kontenut ivarja mis-siġill — il-fajl inbidel wara l-finalizzazzjoni.',
+  'Presentatie afgerond en verzegeld.':
+      'Il-preżentazzjoni ġiet iffinalizzata u ssiġillata.',
 };

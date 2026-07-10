@@ -1,4 +1,5 @@
 import 'annotation.dart';
+import 'document_signature.dart';
 import 'slide.dart';
 import 'settings.dart';
 
@@ -133,6 +134,30 @@ class Deck {
   /// front-matter-sleutel `ocideck_play_only` uit het bestand te halen.
   final bool playOnly;
 
+  /// Documentintegriteit (§8 A1): is dit deck 'afgerond en verzegeld'? Een
+  /// afgerond deck is bewust alleen-lezen — bekijken en exporteren kan, maar de
+  /// inhoud is niet meer te bewerken. Bewust in de markdown-front-matter
+  /// (`ocideck_finalized`) opgeslagen, zodat de vergrendeling meereist met het
+  /// bestand. Generaliseert dezelfde opslag-/parse-/gate-aanpak als [playOnly].
+  final bool finalized;
+
+  /// Het inhouds-zegel: een SHA-512-hash over de gecanonicaliseerde inhoud van
+  /// het deck (exclusief de zegelvelden zelf, zodat de hash niet circulair is).
+  /// Leeg wanneer het deck niet verzegeld is. Bij openen wordt de hash
+  /// herberekend en vergeleken om wijziging-na-afronden zichtbaar te maken.
+  final String sealHash;
+
+  /// Het gebruikte hash-algoritme voor [sealHash] (`sha-512`). Meegeslagen zodat
+  /// een later algoritme herkenbaar blijft.
+  final String sealAlgo;
+
+  /// Tijdstip van verzegelen als ISO-8601-string. Leeg wanneer niet verzegeld.
+  final String sealAt;
+
+  /// Optionele zichtbare handtekening die bij het verzegelen is vastgelegd.
+  /// Herbruikbaar element (zie [DocumentSignature]); null wanneer niet gezet.
+  final DocumentSignature? signature;
+
   /// Annotatielaag: vrije-hand-tekeningen per slide, gekeyd op [Slide.id].
   /// Bewust géén onderdeel van de Marp-markdown — dit wordt los bewaard in een
   /// sidecar zodat het deck pure, uitwisselbare Marp blijft.
@@ -160,6 +185,11 @@ class Deck {
     this.presentationTargetSeconds = 0,
     this.showRehearsalSummary = true,
     this.playOnly = false,
+    this.finalized = false,
+    this.sealHash = '',
+    this.sealAlgo = '',
+    this.sealAt = '',
+    this.signature,
     this.annotations = const {},
     this.userNotes = const {},
   });
@@ -182,6 +212,12 @@ class Deck {
     int? presentationTargetSeconds,
     bool? showRehearsalSummary,
     bool? playOnly,
+    bool? finalized,
+    String? sealHash,
+    String? sealAlgo,
+    String? sealAt,
+    DocumentSignature? signature,
+    bool clearSignature = false,
     Map<String, List<InkStroke>>? annotations,
     Map<String, String>? userNotes,
   }) {
@@ -203,6 +239,11 @@ class Deck {
           presentationTargetSeconds ?? this.presentationTargetSeconds,
       showRehearsalSummary: showRehearsalSummary ?? this.showRehearsalSummary,
       playOnly: playOnly ?? this.playOnly,
+      finalized: finalized ?? this.finalized,
+      sealHash: sealHash ?? this.sealHash,
+      sealAlgo: sealAlgo ?? this.sealAlgo,
+      sealAt: sealAt ?? this.sealAt,
+      signature: clearSignature ? null : (signature ?? this.signature),
       annotations: annotations ?? this.annotations,
       userNotes: userNotes ?? this.userNotes,
     );

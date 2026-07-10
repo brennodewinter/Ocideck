@@ -1518,4 +1518,24 @@ const _dutchSourceGsw = {
       'Aahänker, Problem, Lösig, Bewiis und Frag für en überzügende Pitch.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Stakeholder, Argumäntation und Iiwänd zum en Entscheid oder Underschtützig i ere Sitzig überchoo.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Abschliesse & versiegle',
+  'Verzegelen': 'Versiegle',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Schliess die Präsentation ab und rächne e SHA-512-Sigel über de Inhalt. Denn isch d Datei gsperrt und cha nüme bearbeitet werde; spöteri Änderige wärded sichtbar. Das cha i de App nöd rückgängig gmacht werde.',
+  'Handtekening (optioneel)': 'Underschrift (optional)',
+  'Naam': 'Name',
+  'Rol of functie': 'Rolle oder Funktion',
+  'Verklaring': 'Erklärig',
+  'Getypte handtekening': 'Tippti Underschrift',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Die Präsentation isch abgschlosse und versieglet und cha nöd bearbeitet werde.',
+  'Integriteit intact': 'Integrität intakt',
+  'Gewijzigd na afronden': 'Nach em Abschliesse gänderet',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Mit SHA-512 versieglet. De Inhalt stimmt mit em Sigel überii.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'De Inhalt wiicht vom Sigel ab — d Datei isch nach em Abschliesse gänderet worde.',
+  'Presentatie afgerond en verzegeld.':
+      'Präsentation abgschlosse und versieglet.',
 };
