@@ -24,6 +24,16 @@ enum SlideType {
   cockpit,
   question,
   timeline,
+  // Informatieveiligheid-module (pentestrapportage, PENTEST_MIAUW §4). Toegevoegd
+  // als scaffold (P1-S): enum + meta + registries staan; de gestructureerde
+  // editors/previews/serialisers volgen per type in P1-FIND/CHK/SCOPE/SUM/SIGN.
+  // Voorlopig gedragen ze zich als een vrije-Markdown-body onder hun eigen
+  // `_class`-token, zodat inhoud én type verliesvrij round-trippen.
+  finding,
+  findingsSummary,
+  checklist,
+  scopeMatrix,
+  signOff,
 }
 
 /// Broad grouping a [SlideType] belongs to, used by the add-slide picker to
@@ -124,6 +134,34 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
   SlideType.cockpit: SlideTypeMeta(label: 'Cockpit', marpClass: 'cockpit'),
   SlideType.question: SlideTypeMeta(label: 'Vraag', marpClass: 'question'),
   SlideType.timeline: SlideTypeMeta(label: 'Tijdlijn', marpClass: 'timeline'),
+  // Informatieveiligheid-module — categorie [SlideCategory.informatieveiligheid],
+  // waardoor de kiezer automatisch een tabblad toont (P0-PICK). marpClass-tokens
+  // volgen PENTEST_MIAUW §4.
+  SlideType.finding: SlideTypeMeta(
+    label: 'Bevinding',
+    marpClass: 'finding',
+    category: SlideCategory.informatieveiligheid,
+  ),
+  SlideType.findingsSummary: SlideTypeMeta(
+    label: 'Bevindingenoverzicht',
+    marpClass: 'findings-summary',
+    category: SlideCategory.informatieveiligheid,
+  ),
+  SlideType.checklist: SlideTypeMeta(
+    label: 'Checklist',
+    marpClass: 'checklist',
+    category: SlideCategory.informatieveiligheid,
+  ),
+  SlideType.scopeMatrix: SlideTypeMeta(
+    label: 'Scope-matrix',
+    marpClass: 'scope-matrix',
+    category: SlideCategory.informatieveiligheid,
+  ),
+  SlideType.signOff: SlideTypeMeta(
+    label: 'Ondertekening',
+    marpClass: 'sign-off',
+    category: SlideCategory.informatieveiligheid,
+  ),
 };
 
 extension SlideTypeExtension on SlideType {
@@ -138,6 +176,15 @@ extension SlideTypeExtension on SlideType {
 
   /// The picker category this type belongs to.
   SlideCategory get category => slideTypeMeta[this]!.category;
+
+  /// Informatieveiligheid scaffold types (P1-S): their body is stored as free
+  /// Markdown in [Slide.customMarkdown] and round-trips like a free-Markdown
+  /// slide until each type's structured editor/serialiser lands (P1-FIND/CHK/
+  /// SCOPE/SUM/SIGN). Every such type currently belongs to
+  /// [SlideCategory.informatieveiligheid], so the set derives from the category;
+  /// the per-type packages narrow this as they add real fields.
+  bool get usesScaffoldMarkdownBody =>
+      category == SlideCategory.informatieveiligheid;
 }
 
 class Slide {

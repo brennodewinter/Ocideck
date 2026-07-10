@@ -83,6 +83,20 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Bevinding': 'Εύρημα',
+  'Bevindingenoverzicht': 'Επισκόπηση ευρημάτων',
+  'Scope-matrix': 'Μήτρα εμβέλειας',
+  'Ondertekening': 'Υπογραφή',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Ένα εύρημα: θέμα, βαθμολογία CVSS, CWE/CVE και η περιγραφή, η αναπαραγωγή, ο αντίκτυπος και η σύσταση.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Διοικητική επισκόπηση: πλήθος ευρημάτων ανά σοβαρότητα, με γράφημα και κύρια αίτια.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Μια λίστα δοκιμών σύμφωνα με ένα πρότυπο (όπως το OWASP WSTG), με κατάσταση ανά δοκιμή και σύνδεση με τα ευρήματα.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Μια μήτρα των αντικειμένων εμβέλειας έναντι των προτύπων και του βαθμού ελέγχου.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Η δήλωση ακρίβειας με τον συντάκτη, την πιστοποίηση, την υπογραφή και τη σφράγιση.',
   'Uitbreidingen': 'Επεκτάσεις',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Προαιρετικές μονάδες. Απενεργοποιημένες από προεπιλογή· δεν προσθέτουν τίποτα στη βασική εφαρμογή μέχρι να τις ενεργοποιήσετε.',

@@ -85,6 +85,20 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Bevinding': 'Ustalenie',
+  'Bevindingenoverzicht': 'Zestawienie ustaleń',
+  'Scope-matrix': 'Macierz zakresu',
+  'Ondertekening': 'Podpis',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Jedno ustalenie: temat, ocena CVSS, CWE/CVE oraz opis, reprodukcja, wpływ i zalecenie.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Podsumowanie zarządcze: liczba ustaleń według poziomu istotności, z wykresem i przyczynami źródłowymi.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Lista testów zgodna ze standardem (takim jak OWASP WSTG), ze statusem każdego testu i powiązaniem z ustaleniami.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Macierz obiektów zakresu względem standardów oraz stopnia weryfikacji.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Oświadczenie o zgodności z prawdą, zawierające raportującego, certyfikację, podpis i opieczętowanie.',
   'Uitbreidingen': 'Rozszerzenia',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Moduły opcjonalne. Domyślnie wyłączone; nie dodają niczego do podstawowej aplikacji, dopóki ich nie włączysz.',

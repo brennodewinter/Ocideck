@@ -1492,4 +1492,40 @@ void main() {
       expect(out.imageFocalY, 0.5);
     });
   });
+
+  group('Informatieveiligheid scaffold types round-trip (P1-S)', () {
+    // The five security slide types are scaffolded as free-Markdown bodies
+    // carried by their own `_class` token. Both the type and the body must
+    // survive serialize → parse until each type gains a structured serialiser.
+    const scaffoldTypes = {
+      SlideType.finding: 'finding',
+      SlideType.findingsSummary: 'findings-summary',
+      SlideType.checklist: 'checklist',
+      SlideType.scopeMatrix: 'scope-matrix',
+      SlideType.signOff: 'sign-off',
+    };
+
+    scaffoldTypes.forEach((type, marpClass) {
+      test('$type keeps its type, class token and body', () {
+        const body = '# F-03 · Voorbeeld\n\nBeschrijving met **nadruk**.';
+        final service = MarkdownService();
+        final markdown = service.generateDeck(
+          Deck(
+            title: 'Demo',
+            slides: [Slide.create(type).copyWith(customMarkdown: body)],
+          ),
+        );
+        expect(
+          markdown.contains('<!-- _class: $marpClass -->'),
+          isTrue,
+          reason: 'Expected the $marpClass class token in:\n$markdown',
+        );
+        final out = _roundTrip(
+          Slide.create(type).copyWith(customMarkdown: body),
+        );
+        expect(out.type, type);
+        expect(out.customMarkdown, body);
+      });
+    });
+  });
 }

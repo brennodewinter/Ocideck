@@ -84,6 +84,20 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Bevinding': 'Zjištění',
+  'Bevindingenoverzicht': 'Přehled zjištění',
+  'Scope-matrix': 'Matice rozsahu',
+  'Ondertekening': 'Podpis',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Jedno zjištění: předmět, skóre CVSS, CWE/CVE a popis, reprodukce, dopad a doporučení.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Manažerský přehled: počty zjištění podle závažnosti, s grafem a hlavními příčinami.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Seznam testů podle standardu (například OWASP WSTG), se stavem u každého testu a propojením na zjištění.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Matice objektů rozsahu vůči standardům a míra ověření.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Prohlášení o pravdivosti se zpracovatelem, certifikací, podpisem a pečetí.',
   'Uitbreidingen': 'Rozšíření',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Volitelné moduly. Ve výchozím nastavení vypnuté; do základní aplikace nic nepřidávají, dokud je nezapnete.',

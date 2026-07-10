@@ -11,6 +11,7 @@ import 'free_markdown_editor.dart';
 import 'image_slide_editor.dart';
 import 'question_editor.dart';
 import 'quote_editor.dart';
+import 'scaffold_slide_editor.dart';
 import 'section_editor.dart';
 import 'table_editor.dart';
 import 'timeline_editor.dart';
@@ -183,4 +184,18 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         themeAnimationDurationMs: c.themeAnimationDurationMs,
         nestedInScrollView: c.nestedInScrollView,
       ),
+      // Informatieveiligheid-scaffold (P1-S): one shared free-Markdown editor
+      // for all five types until each gains a structured editor.
+      SlideType.finding: _scaffoldEditor,
+      SlideType.findingsSummary: _scaffoldEditor,
+      SlideType.checklist: _scaffoldEditor,
+      SlideType.scopeMatrix: _scaffoldEditor,
+      SlideType.signOff: _scaffoldEditor,
     };
+
+Widget _scaffoldEditor(SlideEditorContext c) => ScaffoldSlideEditor(
+  key: c._key,
+  slide: c.slide,
+  onUpdate: c.onUpdate,
+  nestedInScrollView: c.nestedInScrollView,
+);

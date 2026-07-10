@@ -83,6 +83,20 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Bevinding': 'Befining',
+  'Bevindingenoverzicht': 'Befiningenoersjoch',
+  'Scope-matrix': 'Scope-matriks',
+  'Ondertekening': 'Undertekening',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Ien befining: ûnderwerp, CVSS-score, CWE/CVE en de beskriuwing, reproduksje, ynfloed en oanrikkemandaasje.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Managementoersjoch: oantallen befiningen per earnst, mei grafyk en haadoarsaken.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'In testlist neffens in standert (lykas OWASP WSTG), mei status per test en keppeling nei befiningen.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'In matriks fan scope-objekten tsjin standerts en de mjitte fan toetsing.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'De wierheidsferklearring mei rapporteur, sertifisearring, hantekening en fersegeling.',
   'Uitbreidingen': 'Utwreidingen',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Opsjonele modules. Standert út; se foegje neat ta oan de basis-app oant jo se ynskeakelje.',

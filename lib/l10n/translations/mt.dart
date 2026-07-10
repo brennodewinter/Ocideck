@@ -84,6 +84,20 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Bevinding': 'Sejba',
+  'Bevindingenoverzicht': 'Ħarsa ġenerali tas-sejbiet',
+  'Scope-matrix': 'Matriċi tal-ambitu',
+  'Ondertekening': 'Iffirmar',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Sejba waħda: is-suġġett, il-punteġġ CVSS, CWE/CVE u d-deskrizzjoni, ir-riproduzzjoni, l-impatt u r-rakkomandazzjoni.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Ħarsa ġenerali għall-maniġment: l-għadd ta\' sejbiet skont il-gravità, bi grafika u l-kawżi ewlenin.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Lista ta\' testijiet skont standard (bħal OWASP WSTG), bl-istatus ta\' kull test u rabta mas-sejbiet.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Matriċi ta\' oġġetti tal-ambitu kontra standards u l-livell ta\' verifika.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Id-dikjarazzjoni tal-verità bir-rapporteur, iċ-ċertifikazzjoni, il-firma u s-siġill.',
   'Uitbreidingen': 'Estensjonijiet',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Moduli fakultattivi. Mitfija b\'mod awtomatiku; ma jżidu xejn mal-app bażika sakemm ma tattivahomx.',

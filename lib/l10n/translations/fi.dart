@@ -83,6 +83,20 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Bevinding': 'Havainto',
+  'Bevindingenoverzicht': 'Havaintojen yhteenveto',
+  'Scope-matrix': 'Laajuusmatriisi',
+  'Ondertekening': 'Allekirjoitus',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Yksi havainto: aihe, CVSS-pistemäärä, CWE/CVE sekä kuvaus, toistaminen, vaikutus ja suositus.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Johdon yhteenveto: havaintojen määrä vakavuusasteen mukaan, kaavion ja perussyiden kanssa.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Standardin mukainen testiluettelo (kuten OWASP WSTG), jossa on tila testikohtaisesti ja kytkentä havaintoihin.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Matriisi laajuuskohteista suhteessa standardeihin ja arvioinnin kattavuuteen.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Totuudenvakuutus raportoijan, sertifioinnin, allekirjoituksen ja sinetöinnin kanssa.',
   'Uitbreidingen': 'Laajennukset',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Valinnaiset moduulit. Oletuksena pois; ne eivät lisää mitään perussovellukseen ennen kuin otat ne käyttöön.',

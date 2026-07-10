@@ -82,6 +82,20 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Bevinding': 'Leid',
+  'Bevindingenoverzicht': 'Leidude ülevaade',
+  'Scope-matrix': 'Ulatuse maatriks',
+  'Ondertekening': 'Allkirjastamine',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Üks leid: teema, CVSS-skoor, CWE/CVE ning kirjeldus, taastootmine, mõju ja soovitus.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Juhtkonna ülevaade: leidude arv raskusastme kaupa, koos graafiku ja peamiste põhjustega.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Standardil (nagu OWASP WSTG) põhinev testide loend, iga testi olekuga ja seosega leidudele.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Ulatuse objektide maatriks standardite suhtes ja kontrollimise ulatus.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Tõesuse kinnitus koos raportööri, sertifitseerimise, allkirja ja pitseriga.',
   'Uitbreidingen': 'Laiendused',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Valikulised moodulid. Vaikimisi väljas; nad ei lisa põhirakendusele midagi, kuni te need sisse lülitate.',

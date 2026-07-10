@@ -83,6 +83,20 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Bevinding': 'Radinys',
+  'Bevindingenoverzicht': 'Radinių apžvalga',
+  'Scope-matrix': 'Aprėpties matrica',
+  'Ondertekening': 'Pasirašymas',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Vienas radinys: tema, CVSS balas, CWE/CVE bei aprašymas, atkūrimas, poveikis ir rekomendacija.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Vadovybės apžvalga: radinių skaičius pagal svarbumą, su diagrama ir pagrindinėmis priežastimis.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Testų sąrašas pagal standartą (pavyzdžiui, OWASP WSTG), su kiekvieno testo būsena ir nuoroda į radinius.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Aprėpties objektų ir standartų matrica bei tikrinimo mastas.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Tikrumo deklaracija su ataskaitos rengėju, sertifikavimu, parašu ir antspaudu.',
   'Uitbreidingen': 'Plėtiniai',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Neprivalomi moduliai. Numatytai išjungti; jie nieko neprideda prie pagrindinės programos, kol jų neįjungiate.',

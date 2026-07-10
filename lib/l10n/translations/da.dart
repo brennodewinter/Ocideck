@@ -83,6 +83,20 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Bevinding': 'Fund',
+  'Bevindingenoverzicht': 'Oversigt over fund',
+  'Scope-matrix': 'Scope-matrix',
+  'Ondertekening': 'Underskrift',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Ét fund: emne, CVSS-score, CWE/CVE samt beskrivelse, reproduktion, konsekvens og anbefaling.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Ledelsesoversigt: antal fund pr. alvorlighedsgrad, med diagram og hovedårsager.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'En testliste efter en standard (såsom OWASP WSTG), med status pr. test og kobling til fund.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'En matrix over scope-objekter over for standarder og graden af afprøvning.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Sandhedserklæringen med rapportør, certificering, underskrift og forsegling.',
   'Uitbreidingen': 'Udvidelser',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Valgfrie moduler. Slået fra som standard; de tilføjer intet til basisappen, før du aktiverer dem.',

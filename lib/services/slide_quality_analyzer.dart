@@ -410,6 +410,11 @@ class SlideQualityAnalyzer {
       case SlideType.cockpit:
       case SlideType.question:
       case SlideType.timeline:
+      case SlideType.finding:
+      case SlideType.findingsSummary:
+      case SlideType.checklist:
+      case SlideType.scopeMatrix:
+      case SlideType.signOff:
         break;
     }
   }
@@ -536,6 +541,11 @@ class SlideQualityAnalyzer {
       case SlideType.chart:
       case SlideType.cockpit:
       case SlideType.timeline:
+      case SlideType.finding:
+      case SlideType.findingsSummary:
+      case SlideType.checklist:
+      case SlideType.scopeMatrix:
+      case SlideType.signOff:
         break;
     }
   }

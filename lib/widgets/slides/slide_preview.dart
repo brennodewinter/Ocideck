@@ -55,6 +55,7 @@ part 'previews/chart_preview_radar.dart';
 part 'previews/cockpit_preview.dart';
 part 'previews/question_preview.dart';
 part 'previews/timeline_preview.dart';
+part 'previews/scaffold_previews.dart';
 part 'previews/overlays.dart';
 
 /// Returns a TextStyle with the correct font. 'EB Garamond' is bundled with the
@@ -704,6 +705,19 @@ class SlidePreviewWidget extends StatelessWidget {
           profile: themeProfile,
           presentationMode: presentationMode,
           revealedCount: timelineRevealedCount,
+        );
+      // Informatieveiligheid-scaffold (P1-S): one shared free-Markdown preview
+      // for all five types until each gains a structured preview.
+      case SlideType.finding:
+      case SlideType.findingsSummary:
+      case SlideType.checklist:
+      case SlideType.scopeMatrix:
+      case SlideType.signOff:
+        return _ScaffoldPreview(
+          slide: slide,
+          w: w,
+          font: fontFamily,
+          profile: themeProfile,
         );
     }
   }

@@ -84,6 +84,20 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Bevinding': 'Hallazgo',
+  'Bevindingenoverzicht': 'Resumen de hallazgos',
+  'Scope-matrix': 'Matriz de alcance',
+  'Ondertekening': 'Firma',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Un solo hallazgo: asunto, puntuación CVSS, CWE/CVE y la descripción, reproducción, impacto y recomendación.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Resumen ejecutivo: número de hallazgos por gravedad, con gráfico y causas principales.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Una lista de pruebas según un estándar (como OWASP WSTG), con estado por prueba y vínculo con los hallazgos.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Una matriz de objetos del alcance frente a estándares y el grado de evaluación.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'La declaración de veracidad con el ponente, la certificación, la firma y el sellado.',
   'Uitbreidingen': 'Extensiones',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Módulos opcionales. Desactivados por defecto; no añaden nada a la aplicación base hasta que los activa.',

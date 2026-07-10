@@ -83,6 +83,20 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Bevinding': 'Megállapítás',
+  'Bevindingenoverzicht': 'Megállapítások áttekintése',
+  'Scope-matrix': 'Hatókör-mátrix',
+  'Ondertekening': 'Aláírás',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Egyetlen megállapítás: tárgy, CVSS-pontszám, CWE/CVE, valamint a leírás, reprodukció, hatás és javaslat.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Vezetői összefoglaló: a megállapítások száma súlyosság szerint, grafikonnal és fő okokkal.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Szabvány szerinti tesztlista (például OWASP WSTG), tesztenkénti státusszal és a megállapításokhoz való hivatkozással.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'A hatókör-objektumok és a szabványok mátrixa, valamint a vizsgálat mértéke.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'A valódiságnyilatkozat a jelentéstevővel, tanúsítással, aláírással és pecséttel.',
   'Uitbreidingen': 'Bővítmények',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Választható modulok. Alapértelmezetten kikapcsolva; semmit sem adnak az alapalkalmazáshoz, amíg be nem kapcsolja őket.',

@@ -81,6 +81,20 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Bevinding': 'SamwI\'ghach',
+  'Bevindingenoverzicht': 'SamwI\'ghach chevmey',
+  'Scope-matrix': 'HevmeH matrix',
+  'Ondertekening': 'qonta\'ghach',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'wa\' SamwI\'ghach: mIw, CVSS mI\', CWE/CVE je QIj, chenqa\'moHmeH mIw, \'ang je qeS.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'che\'wI\' chevmey: \'ay\' SamwI\'ghachmey \'ugh, nav mIllogh je tlhIntagh potlh.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'chov ghItlh, ghob (OWASP WSTG rurbogh) tlha\', chov Dotlh je SamwI\'ghachmey rar.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'HevmeH Doch matrix, ghobmey qaD je chov \'ar.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'vIt jatlhchuq, jatlhwI\', ngZ tlhob, qonta\'ghach je ghItlh Sor\'a\'.',
   'Uitbreidingen': 'chelwI\'mey',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'ngoQmey DIch Hutlh. motlh chImmoH; DamaghmoHpa\' app basis vaS chelbe\'.',

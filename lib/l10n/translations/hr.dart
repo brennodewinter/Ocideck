@@ -83,6 +83,20 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Bevinding': 'Nalaz',
+  'Bevindingenoverzicht': 'Pregled nalaza',
+  'Scope-matrix': 'Matrica opsega',
+  'Ondertekening': 'Potpis',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Jedan nalaz: predmet, CVSS ocjena, CWE/CVE te opis, reprodukcija, utjecaj i preporuka.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Upravljački pregled: broj nalaza prema ozbiljnosti, s grafikonom i glavnim uzrocima.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Popis testova prema standardu (poput OWASP WSTG), sa statusom svakog testa i povezivanjem s nalazima.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Matrica objekata opsega u odnosu na standarde i razinu provjere.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Izjava o istinitosti s izvjestiteljem, certificiranjem, potpisom i pečatom.',
   'Uitbreidingen': 'Proširenja',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Neobavezni moduli. Prema zadanim postavkama isključeni; ne dodaju ništa osnovnoj aplikaciji dok ih ne omogućite.',

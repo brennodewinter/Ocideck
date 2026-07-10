@@ -84,6 +84,20 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Bevinding': 'Constatare',
+  'Bevindingenoverzicht': 'Prezentare generală a constatărilor',
+  'Scope-matrix': 'Matrice a domeniului',
+  'Ondertekening': 'Semnătură',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'O singură constatare: subiect, scor CVSS, CWE/CVE și descrierea, reproducerea, impactul și recomandarea.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Rezumat pentru management: numărul de constatări în funcție de gravitate, cu grafic și cauze principale.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'O listă de teste conform unui standard (precum OWASP WSTG), cu statusul fiecărui test și legătura către constatări.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'O matrice a obiectelor din domeniu față de standarde și gradul de verificare.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Declarația de veridicitate cu raportorul, certificarea, semnătura și sigilarea.',
   'Uitbreidingen': 'Extensii',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Module opționale. Dezactivate implicit; nu adaugă nimic aplicației de bază până nu le activați.',

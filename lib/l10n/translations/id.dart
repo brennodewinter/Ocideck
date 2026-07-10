@@ -83,6 +83,20 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Bevinding': 'Temuan',
+  'Bevindingenoverzicht': 'Ikhtisar temuan',
+  'Scope-matrix': 'Matriks cakupan',
+  'Ondertekening': 'Penandatanganan',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Satu temuan: topik, skor CVSS, CWE/CVE serta deskripsi, reproduksi, dampak, dan rekomendasi.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Ikhtisar manajemen: jumlah temuan berdasarkan tingkat keparahan, dengan grafik dan penyebab utama.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Daftar pengujian sesuai standar (seperti OWASP WSTG), dengan status per pengujian dan tautan ke temuan.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Matriks objek cakupan terhadap standar dan tingkat pengujian.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Pernyataan kebenaran dengan pelapor, sertifikasi, tanda tangan, dan penyegelan.',
   'Uitbreidingen': 'Ekstensi',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Modul opsional. Mati secara bawaan; tidak menambahkan apa pun ke aplikasi dasar sampai Anda mengaktifkannya.',

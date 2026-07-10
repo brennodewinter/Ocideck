@@ -386,7 +386,8 @@ extension _MarkdownParse on MarkdownService {
       audioAutoplay: body.audioAutoplay,
       quote: body.quote,
       quoteAuthor: body.quoteAuthor,
-      customMarkdown: type == SlideType.freeMarkdown
+      customMarkdown:
+          type == SlideType.freeMarkdown || type.usesScaffoldMarkdownBody
           ? normalizeRichTextMarkdown(
               unescapeDeckMarkdownDashLines(d.remaining),
             )
@@ -874,6 +875,15 @@ extension _MarkdownParse on MarkdownService {
     if (tokens.contains('quote')) return SlideType.quote;
     if (tokens.contains('video')) return SlideType.video;
     if (tokens.contains('table')) return SlideType.table;
+    // Informatieveiligheid-module (PENTEST_MIAUW §4). Elk type draagt een eigen
+    // `_class`-token; de body round-trip't als vrije Markdown (zie de
+    // customMarkdown-toewijzing hieronder). Exacte tokens, dus geen conflict
+    // onderling ('finding' matcht niet 'findings-summary').
+    if (tokens.contains('finding')) return SlideType.finding;
+    if (tokens.contains('findings-summary')) return SlideType.findingsSummary;
+    if (tokens.contains('checklist')) return SlideType.checklist;
+    if (tokens.contains('scope-matrix')) return SlideType.scopeMatrix;
+    if (tokens.contains('sign-off')) return SlideType.signOff;
 
     // No explicit class token — fall back to content heuristics.
     if (quote.isNotEmpty) return SlideType.quote;

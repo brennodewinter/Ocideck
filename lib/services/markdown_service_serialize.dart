@@ -243,6 +243,16 @@ extension _MarkdownSerialize on MarkdownService {
     }
   }
 
+  /// Scaffold serialiser for the Informatieveiligheid slide types (P1-S). Their
+  /// body rides in [Slide.customMarkdown] as free Markdown, exactly like a
+  /// free-Markdown slide; the type is carried by the `_class` token that
+  /// [generateSlide] already wrote. Parse restores it via the same
+  /// `d.remaining` path (see `_inferSlideType` + the customMarkdown assignment
+  /// in the parser). Per-type serialisers replace this in P1-FIND/CHK/SCOPE/
+  /// SUM/SIGN once each type gains structured fields.
+  void _writeScaffoldSlide(StringBuffer buf, Slide slide) =>
+      _writeFreeMarkdownSlide(buf, slide);
+
   void _writeCodeSlide(StringBuffer buf, Slide slide) {
     if (slide.title.isNotEmpty) {
       buf.writeln('# ${slide.title}');

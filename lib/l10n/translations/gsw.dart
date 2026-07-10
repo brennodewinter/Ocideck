@@ -83,6 +83,20 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Bevinding': 'Befund',
+  'Bevindingenoverzicht': 'Befund-Übersicht',
+  'Scope-matrix': 'Scope-Matrix',
+  'Ondertekening': 'Underschrift',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Ei Befund: Thema, CVSS-Score, CWE/CVE und d Bschriibig, Reproduktion, Uuswirkig und Empfählig.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Management-Übersicht: Aazahl vo de Befund pro Schweregrad, mit Grafik und Hauptursache.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'E Teschtlischte nach eme Standard (wie OWASP WSTG), mit Status pro Tescht und Verchnüpfig zu de Befund.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'E Matrix vo Scope-Objäkt gäge Standards und s Uusmass vo de Prüefig.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'D Wahrheitserkläärig mit em Berichterstatter, Zertifizierig, Underschrift und Versieglig.',
   'Uitbreidingen': 'Erwyterige',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Optionali Modul. Standardmässig us; si tüend zur Basis-App nüt derzue, bis du si iischaltisch.',

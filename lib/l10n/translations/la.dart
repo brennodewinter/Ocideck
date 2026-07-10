@@ -85,6 +85,20 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Bevinding': 'Inventum',
+  'Bevindingenoverzicht': 'Conspectus inventorum',
+  'Scope-matrix': 'Matrix ambitus',
+  'Ondertekening': 'Subscriptio',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Unum inventum: argumentum, CVSS-punctum, CWE/CVE et descriptio, reproductio, impulsus et commendatio.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Conspectus administrationis: numeri inventorum secundum gravitatem, cum diagrammate et causis principalibus.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Index probationum secundum normam (velut OWASP WSTG), cum statu cuiusque probationis et nexu ad inventa.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Matrix obiectorum ambitus contra normas et mensura examinationis.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Declaratio veritatis cum relatore, certificatione, subscriptione et sigillo.',
   'Uitbreidingen': 'Extensiones',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Moduli optionales. Praedefinite exstincti; nihil applicationi basi addunt donec eos actives.',
