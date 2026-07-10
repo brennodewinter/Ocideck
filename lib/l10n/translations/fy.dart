@@ -83,6 +83,18 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Uitbreidingen': 'Utwreidingen',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Opsjonele modules. Standert út; se foegje neat ta oan de basis-app oant jo se ynskeakelje.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Pentestrapportaazje neffens MIAUW. By it ynskeakeljen wurde de referinsjegegevens ien kear ophelle; dêrnei wurket de module offline.',
+  'Gegevens opschonen': 'Gegevens opromje',
+  'Gegevens lokaal beschikbaar': 'Gegevens lokaal beskikber',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Jou earst tastimming foar útgeand ferkear by Lisinsje en Privacy.',
+  'Op het web nog niet beschikbaar': 'Op it web noch net beskikber',
+  'Ophalen mislukt': 'Ophaljen mislearre',
+  'Nog niet opgehaald': 'Noch net ophelle',
   'Zoek een slidetype': 'Sykje in slidetype',
   'Alfabetisch sorteren': 'Alfabetysk sortearje',
   'Algemeen': 'Algemien',

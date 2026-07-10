@@ -81,6 +81,18 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Uitbreidingen': 'chelwI\'mey',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'ngoQmey DIch Hutlh. motlh chImmoH; DamaghmoHpa\' app basis vaS chelbe\'.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'MIAUW pentest ja\'ghach. DamaghmoHchugh De\' Qan wa\'logh Suq; ngoQ offline vumtaH.',
+  'Gegevens opschonen': 'De\' Say\'moH',
+  'Gegevens lokaal beschikbaar': 'De\' pa\' naDev',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'wa\'DIch Data lel Doch \'e\' chaw\'chugh neH nga\'chuqlaH.',
+  'Op het web nog niet beschikbaar': 'web-Daq DungluqlaHbe\'taH',
+  'Ophalen mislukt': 'Suq luj',
+  'Nog niet opgehaald': 'SuqluHbe\'taH',
   'Zoek een slidetype': 'cha\'nob Segh yInej',
   'Alfabetisch sorteren': 'pIqaD yInuD',
   'Algemeen': 'motlh',

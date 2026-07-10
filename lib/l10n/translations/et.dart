@@ -82,6 +82,18 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Uitbreidingen': 'Laiendused',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Valikulised moodulid. Vaikimisi väljas; nad ei lisa põhirakendusele midagi, kuni te need sisse lülitate.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Pentesti aruandlus MIAUW järgi. Sisselülitamine laadib võrdlusandmed korra alla; seejärel töötab moodul võrguühenduseta.',
+  'Gegevens opschonen': 'Puhasta andmed',
+  'Gegevens lokaal beschikbaar': 'Andmed saadaval kohapeal',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Andke esmalt nõusolek väljuvale liiklusele jaotises Litsents ja privaatsus.',
+  'Op het web nog niet beschikbaar': 'Veebis veel saadaval pole',
+  'Ophalen mislukt': 'Allalaadimine ebaõnnestus',
+  'Nog niet opgehaald': 'Pole veel alla laaditud',
   'Zoek een slidetype': 'Otsi slaiditüüpi',
   'Alfabetisch sorteren': 'Sorteeri tähestikuliselt',
   'Algemeen': 'Üldine',

@@ -83,6 +83,18 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Uitbreidingen': 'Udvidelser',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Valgfrie moduler. Slået fra som standard; de tilføjer intet til basisappen, før du aktiverer dem.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Pentest-rapportering efter MIAUW. Aktivering henter referencedataene én gang; derefter arbejder modulet offline.',
+  'Gegevens opschonen': 'Ryd data',
+  'Gegevens lokaal beschikbaar': 'Data tilgængelige lokalt',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Giv først samtykke til udgående trafik under Licens og privatliv.',
+  'Op het web nog niet beschikbaar': 'Endnu ikke tilgængelig på nettet',
+  'Ophalen mislukt': 'Hentning mislykkedes',
+  'Nog niet opgehaald': 'Endnu ikke hentet',
   'Zoek een slidetype': 'Søg efter en slidetype',
   'Alfabetisch sorteren': 'Sortér alfabetisk',
   'Algemeen': 'Generelt',

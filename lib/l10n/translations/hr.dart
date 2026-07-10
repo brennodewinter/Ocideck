@@ -83,6 +83,18 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Uitbreidingen': 'Proširenja',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Neobavezni moduli. Prema zadanim postavkama isključeni; ne dodaju ništa osnovnoj aplikaciji dok ih ne omogućite.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Izvještavanje o pentestu prema MIAUW-u. Omogućavanje jednom preuzima referentne podatke; nakon toga modul radi izvan mreže.',
+  'Gegevens opschonen': 'Očisti podatke',
+  'Gegevens lokaal beschikbaar': 'Podaci dostupni lokalno',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Najprije dajte privolu za izlazni promet u odjeljku Licenca i privatnost.',
+  'Op het web nog niet beschikbaar': 'Još nije dostupno na webu',
+  'Ophalen mislukt': 'Preuzimanje nije uspjelo',
+  'Nog niet opgehaald': 'Još nije preuzeto',
   'Zoek een slidetype': 'Pretraži vrstu slajda',
   'Alfabetisch sorteren': 'Sortiraj abecedno',
   'Algemeen': 'Općenito',

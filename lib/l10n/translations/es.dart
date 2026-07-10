@@ -84,6 +84,18 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Uitbreidingen': 'Extensiones',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Módulos opcionales. Desactivados por defecto; no añaden nada a la aplicación base hasta que los activa.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Informes de pentest según MIAUW. Al activarlo se descargan los datos de referencia una vez; luego el módulo funciona sin conexión.',
+  'Gegevens opschonen': 'Limpiar datos',
+  'Gegevens lokaal beschikbaar': 'Datos disponibles localmente',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Conceda primero el consentimiento para el tráfico saliente en Licencia y privacidad.',
+  'Op het web nog niet beschikbaar': 'Aún no disponible en la web',
+  'Ophalen mislukt': 'Error al descargar',
+  'Nog niet opgehaald': 'Aún no descargado',
   'Zoek een slidetype': 'Buscar un tipo de diapositiva',
   'Alfabetisch sorteren': 'Ordenar alfabéticamente',
   'Algemeen': 'General',

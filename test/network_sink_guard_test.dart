@@ -67,6 +67,8 @@ void main() {
         // importFromUrl: safeResolve + pin (import-part van file_service).
         'lib/services/parts/file_service_import.dart',
         'lib/services/webdav_service.dart', // safeResolveTrusted + pin
+        // module provisioning fetch: NetGuard.safeResolve + socket pin + no-redirect.
+        'lib/services/secmodule/sec_pack_platform_io.dart',
       },
       guidance:
           'New raw HttpClient. Resolve the host through NetGuard.safeResolve '

@@ -83,6 +83,18 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Uitbreidingen': 'Tillägg',
+  'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
+      'Valfria moduler. Av som standard; de lägger inte till något i basappen förrän du aktiverar dem.',
+  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Pentest-rapportering enligt MIAUW. Aktivering hämtar referensdata en gång; sedan fungerar modulen offline.',
+  'Gegevens opschonen': 'Rensa data',
+  'Gegevens lokaal beschikbaar': 'Data tillgängliga lokalt',
+  'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
+      'Ge först samtycke till utgående trafik under Licens och integritet.',
+  'Op het web nog niet beschikbaar': 'Inte tillgängligt på webben ännu',
+  'Ophalen mislukt': 'Hämtningen misslyckades',
+  'Nog niet opgehaald': 'Inte hämtat ännu',
   'Zoek een slidetype': 'Sök efter en bildtyp',
   'Alfabetisch sorteren': 'Sortera alfabetiskt',
   'Algemeen': 'Allmänt',
