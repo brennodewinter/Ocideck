@@ -84,6 +84,40 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  '(leeg)': '(порожньо)',
+  'Audio': 'Аудіо',
+  'Bijschrift': 'Підпис',
+  'Bron citaat': 'Джерело цитати',
+  'Codetaal': 'Мова коду',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Немає видимих відмінностей — слайди ідентичні за змістом.',
+  'In meerdere presentaties': 'У кількох презентаціях',
+  'Kop kolom 1': 'Заголовок стовпця 1',
+  'Kop kolom 2': 'Заголовок стовпця 2',
+  'Lijststijl': 'Стиль списку',
+  'Notities': 'Нотатки',
+  'Tweede bijschrift': 'Другий підпис',
+  'Tweede opsomming': 'Другий список',
+  'Vergelijk met:': 'Порівняти з:',
+  'Verschillen': 'Відмінності',
+  'Verschillen tussen slides': 'Відмінності між слайдами',
+  'duplica(a)t(en) verborgen': 'дублікатів приховано',
+  'slides — verfijn je zoekopdracht': 'слайдів — уточніть свій запит',
+  'unieke slide(s)': 'унікальних слайдів',
+  'Bevinding': 'Виявлення',
+  'Bevindingenoverzicht': 'Огляд виявлень',
+  'Scope-matrix': 'Матриця обсягу',
+  'Ondertekening': 'Підпис',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Одне виявлення: тема, оцінка CVSS, CWE/CVE, а також опис, відтворення, вплив і рекомендація.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Управлінський огляд: кількість виявлень за рівнем критичності, з діаграмою та основними причинами.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Список тестів за стандартом (наприклад, OWASP WSTG), зі статусом кожного тесту та посиланням на виявлення.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Матриця об\'єктів обсягу відносно стандартів і ступеня перевірки.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Декларація про достовірність із доповідачем, сертифікацією, підписом і печаткою.',
   'Uitbreidingen': 'Розширення',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Необов\'язкові модулі. Типово вимкнені; вони нічого не додають до базового застосунку, доки ви їх не увімкнете.',

@@ -84,6 +84,40 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  '(leeg)': '(празно)',
+  'Audio': 'Аудио',
+  'Bijschrift': 'Надпис',
+  'Bron citaat': 'Източник на цитата',
+  'Codetaal': 'Език на кода',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Няма видими разлики — слайдовете са идентични по съдържание.',
+  'In meerdere presentaties': 'В няколко презентации',
+  'Kop kolom 1': 'Заглавие на колона 1',
+  'Kop kolom 2': 'Заглавие на колона 2',
+  'Lijststijl': 'Стил на списъка',
+  'Notities': 'Бележки',
+  'Tweede bijschrift': 'Втори надпис',
+  'Tweede opsomming': 'Втори списък',
+  'Vergelijk met:': 'Сравни с:',
+  'Verschillen': 'Разлики',
+  'Verschillen tussen slides': 'Разлики между слайдовете',
+  'duplica(a)t(en) verborgen': 'дубликати скрити',
+  'slides — verfijn je zoekopdracht': 'слайда — прецизирайте търсенето си',
+  'unieke slide(s)': 'уникални слайда',
+  'Bevinding': 'Констатация',
+  'Bevindingenoverzicht': 'Преглед на констатациите',
+  'Scope-matrix': 'Матрица на обхвата',
+  'Ondertekening': 'Подпис',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Една констатация: тема, CVSS оценка, CWE/CVE, както и описанието, възпроизвеждането, въздействието и препоръката.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Управленски преглед: брой констатации по степен на сериозност, с диаграма и основни причини.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Списък с тестове съгласно стандарт (като OWASP WSTG), със статус за всеки тест и връзка към констатациите.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Матрица на обектите от обхвата спрямо стандартите и степента на проверка.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Декларацията за достоверност с докладчика, сертифицирането, подписа и печата.',
   'Uitbreidingen': 'Разширения',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Незадължителни модули. По подразбиране изключени; не добавят нищо към основното приложение, докато не ги включите.',

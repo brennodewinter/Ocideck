@@ -75,6 +75,26 @@ String slideTypeHelpText(AppLocalizations l10n, SlideType type) {
       return l10n.d(
         'Een tijdlijn van gedateerde gebeurtenissen. Kies de opmaak en hoe de gebeurtenissen verschijnen.',
       );
+    case SlideType.finding:
+      return l10n.d(
+        'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.',
+      );
+    case SlideType.findingsSummary:
+      return l10n.d(
+        'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.',
+      );
+    case SlideType.checklist:
+      return l10n.d(
+        'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.',
+      );
+    case SlideType.scopeMatrix:
+      return l10n.d(
+        'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.',
+      );
+    case SlideType.signOff:
+      return l10n.d(
+        'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.',
+      );
   }
 }
 

@@ -84,6 +84,41 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  '(leeg)': '(vacío)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Leyenda',
+  'Bron citaat': 'Fuente de la cita',
+  'Codetaal': 'Lenguaje de código',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Sin diferencias visibles — las diapositivas tienen un contenido idéntico.',
+  'In meerdere presentaties': 'En varias presentaciones',
+  'Kop kolom 1': 'Encabezado de columna 1',
+  'Kop kolom 2': 'Encabezado de columna 2',
+  'Lijststijl': 'Estilo de lista',
+  'Notities': 'Notas',
+  'Tweede bijschrift': 'Segunda leyenda',
+  'Tweede opsomming': 'Segunda lista con viñetas',
+  'Vergelijk met:': 'Comparar con:',
+  'Verschillen': 'Diferencias',
+  'Verschillen tussen slides': 'Diferencias entre diapositivas',
+  'Video': 'Vídeo',
+  'duplica(a)t(en) verborgen': 'duplicado(s) oculto(s)',
+  'slides — verfijn je zoekopdracht': 'diapositivas — refina tu búsqueda',
+  'unieke slide(s)': 'diapositiva(s) única(s)',
+  'Bevinding': 'Hallazgo',
+  'Bevindingenoverzicht': 'Resumen de hallazgos',
+  'Scope-matrix': 'Matriz de alcance',
+  'Ondertekening': 'Firma',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Un solo hallazgo: asunto, puntuación CVSS, CWE/CVE y la descripción, reproducción, impacto y recomendación.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Resumen ejecutivo: número de hallazgos por gravedad, con gráfico y causas principales.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Una lista de pruebas según un estándar (como OWASP WSTG), con estado por prueba y vínculo con los hallazgos.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Una matriz de objetos del alcance frente a estándares y el grado de evaluación.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'La declaración de veracidad con el ponente, la certificación, la firma y el sellado.',
   'Uitbreidingen': 'Extensiones',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Módulos opcionales. Desactivados por defecto; no añaden nada a la aplicación base hasta que los activa.',

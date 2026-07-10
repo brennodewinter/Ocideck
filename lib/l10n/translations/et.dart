@@ -82,6 +82,40 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  '(leeg)': '(tühi)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Pealdis',
+  'Bron citaat': 'Tsitaadi allikas',
+  'Codetaal': 'Koodikeel',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Nähtavaid erinevusi pole — slaidid on sisu poolest identsed.',
+  'In meerdere presentaties': 'Mitmes esitluses',
+  'Kop kolom 1': '1. veeru päis',
+  'Kop kolom 2': '2. veeru päis',
+  'Lijststijl': 'Loendi stiil',
+  'Notities': 'Märkmed',
+  'Tweede bijschrift': 'Teine pealdis',
+  'Tweede opsomming': 'Teine täpploend',
+  'Vergelijk met:': 'Võrdle:',
+  'Verschillen': 'Erinevused',
+  'Verschillen tussen slides': 'Erinevused slaidide vahel',
+  'duplica(a)t(en) verborgen': 'duplikaati peidetud',
+  'slides — verfijn je zoekopdracht': 'slaidi — täpsusta otsingut',
+  'unieke slide(s)': 'unikaalset slaidi',
+  'Bevinding': 'Leid',
+  'Bevindingenoverzicht': 'Leidude ülevaade',
+  'Scope-matrix': 'Ulatuse maatriks',
+  'Ondertekening': 'Allkirjastamine',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Üks leid: teema, CVSS-skoor, CWE/CVE ning kirjeldus, taastootmine, mõju ja soovitus.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Juhtkonna ülevaade: leidude arv raskusastme kaupa, koos graafiku ja peamiste põhjustega.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Standardil (nagu OWASP WSTG) põhinev testide loend, iga testi olekuga ja seosega leidudele.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Ulatuse objektide maatriks standardite suhtes ja kontrollimise ulatus.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Tõesuse kinnitus koos raportööri, sertifitseerimise, allkirja ja pitseriga.',
   'Uitbreidingen': 'Laiendused',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Valikulised moodulid. Vaikimisi väljas; nad ei lisa põhirakendusele midagi, kuni te need sisse lülitate.',

@@ -83,6 +83,40 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  '(leeg)': '(kosong)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Keterangan',
+  'Bron citaat': 'Sumber kutipan',
+  'Codetaal': 'Bahasa kode',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Tidak ada perbedaan yang terlihat — slide identik secara isi.',
+  'In meerdere presentaties': 'Di beberapa presentasi',
+  'Kop kolom 1': 'Judul kolom 1',
+  'Kop kolom 2': 'Judul kolom 2',
+  'Lijststijl': 'Gaya daftar',
+  'Notities': 'Catatan',
+  'Tweede bijschrift': 'Keterangan kedua',
+  'Tweede opsomming': 'Daftar berpoin kedua',
+  'Vergelijk met:': 'Bandingkan dengan:',
+  'Verschillen': 'Perbedaan',
+  'Verschillen tussen slides': 'Perbedaan antarslide',
+  'duplica(a)t(en) verborgen': 'duplikat disembunyikan',
+  'slides — verfijn je zoekopdracht': 'slide — persempit pencarian Anda',
+  'unieke slide(s)': 'slide unik',
+  'Bevinding': 'Temuan',
+  'Bevindingenoverzicht': 'Ikhtisar temuan',
+  'Scope-matrix': 'Matriks cakupan',
+  'Ondertekening': 'Penandatanganan',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Satu temuan: topik, skor CVSS, CWE/CVE serta deskripsi, reproduksi, dampak, dan rekomendasi.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Ikhtisar manajemen: jumlah temuan berdasarkan tingkat keparahan, dengan grafik dan penyebab utama.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Daftar pengujian sesuai standar (seperti OWASP WSTG), dengan status per pengujian dan tautan ke temuan.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Matriks objek cakupan terhadap standar dan tingkat pengujian.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Pernyataan kebenaran dengan pelapor, sertifikasi, tanda tangan, dan penyegelan.',
   'Uitbreidingen': 'Ekstensi',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Modul opsional. Mati secara bawaan; tidak menambahkan apa pun ke aplikasi dasar sampai Anda mengaktifkannya.',

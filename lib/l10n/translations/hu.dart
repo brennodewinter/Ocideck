@@ -83,6 +83,40 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  '(leeg)': '(üres)',
+  'Audio': 'Hang',
+  'Bijschrift': 'Képaláírás',
+  'Bron citaat': 'Idézet forrása',
+  'Codetaal': 'Kód nyelve',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Nincs látható eltérés — a diák tartalmilag azonosak.',
+  'In meerdere presentaties': 'Több bemutatóban',
+  'Kop kolom 1': '1. oszlop fejléce',
+  'Kop kolom 2': '2. oszlop fejléce',
+  'Lijststijl': 'Listastílus',
+  'Notities': 'Jegyzetek',
+  'Tweede bijschrift': 'Második képaláírás',
+  'Tweede opsomming': 'Második felsorolás',
+  'Vergelijk met:': 'Összehasonlítás ezzel:',
+  'Verschillen': 'Eltérések',
+  'Verschillen tussen slides': 'Eltérések a diák között',
+  'duplica(a)t(en) verborgen': 'duplikátum elrejtve',
+  'slides — verfijn je zoekopdracht': 'dia — pontosítsd a keresést',
+  'unieke slide(s)': 'egyedi dia',
+  'Bevinding': 'Megállapítás',
+  'Bevindingenoverzicht': 'Megállapítások áttekintése',
+  'Scope-matrix': 'Hatókör-mátrix',
+  'Ondertekening': 'Aláírás',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Egyetlen megállapítás: tárgy, CVSS-pontszám, CWE/CVE, valamint a leírás, reprodukció, hatás és javaslat.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Vezetői összefoglaló: a megállapítások száma súlyosság szerint, grafikonnal és fő okokkal.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Szabvány szerinti tesztlista (például OWASP WSTG), tesztenkénti státusszal és a megállapításokhoz való hivatkozással.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'A hatókör-objektumok és a szabványok mátrixa, valamint a vizsgálat mértéke.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'A valódiságnyilatkozat a jelentéstevővel, tanúsítással, aláírással és pecséttel.',
   'Uitbreidingen': 'Bővítmények',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Választható modulok. Alapértelmezetten kikapcsolva; semmit sem adnak az alapalkalmazáshoz, amíg be nem kapcsolja őket.',

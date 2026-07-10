@@ -83,6 +83,41 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  '(leeg)': '(bashí)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Lènda',
+  'Bron citaat': 'Fuente di sita',
+  'Codetaal': 'Idioma di kódigo',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Sin diferensia visibel — e slides ta igual den kontenido.',
+  'In meerdere presentaties': 'Den vários presentashon',
+  'Kop kolom 1': 'Título kolòm 1',
+  'Kop kolom 2': 'Título kolòm 2',
+  'Lijststijl': 'Stil di lista',
+  'Notities': 'Notanan',
+  'Tweede bijschrift': 'Di dos lènda',
+  'Tweede opsomming': 'Di dos lista',
+  'Vergelijk met:': 'Kompará ku:',
+  'Verschillen': 'Diferensianan',
+  'Verschillen tussen slides': 'Diferensia entre slides',
+  'Video': 'Video',
+  'duplica(a)t(en) verborgen': 'duplikado(nan) skondí',
+  'slides — verfijn je zoekopdracht': 'slides — refiná bo búskeda',
+  'unieke slide(s)': 'slide(s) úniko',
+  'Bevinding': 'Konstatashon',
+  'Bevindingenoverzicht': 'Resúmen di konstatashonnan',
+  'Scope-matrix': 'Matriks di alkanse',
+  'Ondertekening': 'Firmamentu',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Un solo konstatashon: tema, puntahe CVSS, CWE/CVE i e deskripshon, reprodukshon, impakto i rekomendashon.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Resúmen pa gerensia: kantidat di konstatashon pa gravedat, ku gráfiko i kousanan prinsipal.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Un lista di test segun un estándar (manera OWASP WSTG), ku status pa kada test i konekshon ku konstatashonnan.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Un matriks di opheto di alkanse kontra estándar i e grado di evaluashon.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'E deklarashon di berdat ku e reportadó, sertifikashon, firma i seyo.',
   'Uitbreidingen': 'Ekstenshonnan',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Módulonan opcional. Pa defekto apagá; nan no ta agregá nada na e app básiko te ora bo aktivá nan.',

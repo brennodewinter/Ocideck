@@ -83,6 +83,40 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  '(leeg)': '(empty)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Caption',
+  'Bron citaat': 'Quote source',
+  'Codetaal': 'Code language',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'No visible differences — the slides are identical in content.',
+  'In meerdere presentaties': 'In multiple presentations',
+  'Kop kolom 1': 'Column 1 heading',
+  'Kop kolom 2': 'Column 2 heading',
+  'Lijststijl': 'List style',
+  'Notities': 'Notes',
+  'Tweede bijschrift': 'Second caption',
+  'Tweede opsomming': 'Second bullet list',
+  'Vergelijk met:': 'Compare with:',
+  'Verschillen': 'Differences',
+  'Verschillen tussen slides': 'Differences between slides',
+  'duplica(a)t(en) verborgen': 'duplicate(s) hidden',
+  'slides — verfijn je zoekopdracht': 'slides — refine your search',
+  'unieke slide(s)': 'unique slide(s)',
+  'Bevinding': 'Finding',
+  'Bevindingenoverzicht': 'Findings overview',
+  'Scope-matrix': 'Scope matrix',
+  'Ondertekening': 'Sign-off',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'A single finding: subject, CVSS score, CWE/CVE and the description, reproduction, impact and recommendation.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Management overview: number of findings by severity, with chart and root causes.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'A test checklist based on a standard (such as OWASP WSTG), with status per test and links to findings.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'A matrix of scope objects against standards and the extent of testing.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'The statement of truth with reporter, certification, signature and sealing.',
   'Uitbreidingen': 'Extensions',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Optional modules. Off by default; they add nothing to the base app until you enable them.',

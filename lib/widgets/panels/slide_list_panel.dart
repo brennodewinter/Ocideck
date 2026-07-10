@@ -9,6 +9,7 @@ import '../../models/slide.dart';
 import '../../platform/platform_features.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
+import '../../state/sec_module_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../services/classification_enforcement_policy.dart';
@@ -889,12 +890,11 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                 }
                 final idx = ref.read(editorProvider).selectedIndex;
                 notifier.addSlide(SlideType.image, afterIndex: idx);
-                final newIdx = idx + 1;
                 notifier.updateSlide(
-                  newIdx,
+                  idx + 1,
                   Slide.create(SlideType.image).copyWith(imagePath: path),
                 );
-                editorNotifier.select(newIdx);
+                editorNotifier.select(idx + 1);
               },
               icon: const Icon(Icons.image_outlined, size: 14),
               label: Text(l10n.d('Afbeelding plakken')),
@@ -912,7 +912,10 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
             width: double.infinity,
             child: ElevatedButton.icon(
               onPressed: () async {
-                final type = await AddSlideDialog.show(context);
+                final type = await AddSlideDialog.show(
+                  context,
+                  revealSecurityModule: ref.read(secModuleRevealProvider),
+                );
                 if (type != null) {
                   final idx = ref.read(editorProvider).selectedIndex;
                   notifier.addSlide(type, afterIndex: idx);

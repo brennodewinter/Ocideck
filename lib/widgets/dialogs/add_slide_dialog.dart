@@ -12,12 +12,22 @@ class _PickerTab {
 }
 
 class AddSlideDialog extends StatefulWidget {
-  const AddSlideDialog({super.key});
+  /// Whether the Informatieveiligheid module is revealed (enabled + a matching
+  /// pack provisioned). Gates the security slide types and their picker tab, so
+  /// they stay hidden until the module is on (see `secModuleRevealProvider`,
+  /// PENTEST_MIAUW §6). Off by default; the caller passes the provider's value.
+  final bool revealSecurityModule;
 
-  static Future<SlideType?> show(BuildContext context) {
+  const AddSlideDialog({super.key, this.revealSecurityModule = false});
+
+  static Future<SlideType?> show(
+    BuildContext context, {
+    bool revealSecurityModule = false,
+  }) {
     return showDialog<SlideType>(
       context: context,
-      builder: (_) => const AddSlideDialog(),
+      builder: (_) =>
+          AddSlideDialog(revealSecurityModule: revealSecurityModule),
     );
   }
 
@@ -42,6 +52,13 @@ class AddSlideDialog extends StatefulWidget {
     SlideType.question,
     SlideType.code,
     SlideType.freeMarkdown,
+    // Informatieveiligheid-module — grouped last; shown under their own picker
+    // tab (P0-PICK) once the category carries types.
+    SlideType.finding,
+    SlideType.findingsSummary,
+    SlideType.checklist,
+    SlideType.scopeMatrix,
+    SlideType.signOff,
   ];
 
   @override
@@ -59,10 +76,15 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
   @override
   void initState() {
     super.initState();
-    // Default to the first category tab when tabs are shown; otherwise the
-    // value is unused (no tab bar, every type is offered).
-    final tabs = _tabs();
-    _activeCategory = tabs.isEmpty ? null : tabs.first.category;
+    // Default to the first category tab when the tab bar is shown (≥2
+    // categories carry types); otherwise no tab bar and the value is unused.
+    // Computed without l10n — `context.l10n` is illegal in initState, and the
+    // labelled tabs are built later in [_tabs] (during build). This mirrors
+    // `_tabs`' first entry: the first present category in enum order.
+    final present = _categoriesPresent();
+    _activeCategory = present.length < 2
+        ? null
+        : SlideCategory.values.firstWhere(present.contains);
   }
 
   @override
@@ -71,8 +93,17 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
     super.dispose();
   }
 
-  /// All types in curated order, with any uncurated type appended in enum
-  /// order. Derived from [slideTypeMeta] so a new type shows up automatically.
+  /// The types the picker may offer: every registered type, minus the
+  /// Informatieveiligheid types while the module is not revealed. Derived from
+  /// [slideTypeMeta] so a new type shows up automatically.
+  Iterable<SlideType> _availableTypes() => slideTypeMeta.keys.where(
+    (t) =>
+        widget.revealSecurityModule ||
+        t.category != SlideCategory.informatieveiligheid,
+  );
+
+  /// Available types in curated order, with any uncurated type appended in enum
+  /// order.
   List<SlideType> _orderedTypes() {
     final order = AddSlideDialog._curatedOrder;
     int rank(SlideType t) {
@@ -80,12 +111,12 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
       return i == -1 ? order.length + t.index : i;
     }
 
-    return slideTypeMeta.keys.toList()
+    return _availableTypes().toList()
       ..sort((a, b) => rank(a).compareTo(rank(b)));
   }
 
   Set<SlideCategory> _categoriesPresent() =>
-      slideTypeMeta.values.map((m) => m.category).toSet();
+      _availableTypes().map((t) => t.category).toSet();
 
   /// The tab bar's tabs, or an empty list when only one category carries
   /// types (today's state) — in which case no tab bar is drawn. A category tab
@@ -481,6 +512,95 @@ class SlideTypePreviewPainter extends CustomPainter {
           final y = 30.0 + r * 13;
           _bar(canvas, 14, y, 132, 10, r == 0 ? _accent : _soft, radius: 3);
         }
+      case SlideType.finding:
+      case SlideType.findingsSummary:
+      case SlideType.checklist:
+      case SlideType.scopeMatrix:
+      case SlideType.signOff:
+        _paintSecurityWireframe(canvas, type);
+    }
+  }
+
+  /// Wireframes for the Informatieveiligheid slide types (P1-S), split out of
+  /// [paint] so that method stays within the length ratchet. Only called for
+  /// the five security types; the `default` keeps the switch total.
+  void _paintSecurityWireframe(Canvas canvas, SlideType type) {
+    switch (type) {
+      case SlideType.finding:
+        // Finding card: id/title bar with a severity chip, then body lines.
+        _bar(canvas, 14, 12, 68, 9, _ink);
+        _bar(canvas, 120, 11, 26, 11, _accent, radius: 3);
+        _bar(canvas, 14, 32, 132, 6, _soft);
+        _bar(canvas, 14, 44, 116, 6, _soft);
+        _bar(canvas, 14, 56, 132, 6, _soft);
+        _bar(canvas, 14, 68, 88, 6, _soft);
+      case SlideType.findingsSummary:
+        // Severity roll-up: axis + bars descending from critical to low.
+        final sumAxis = _paint(_soft)..strokeWidth = 2;
+        canvas.drawLine(const Offset(22, 14), const Offset(22, 74), sumAxis);
+        canvas.drawLine(const Offset(22, 74), const Offset(148, 74), sumAxis);
+        _bar(canvas, 34, 28, 22, 46, _accent, radius: 2);
+        _bar(canvas, 66, 40, 22, 34, _ink, radius: 2);
+        _bar(canvas, 98, 52, 22, 22, _soft, radius: 2);
+        _bar(canvas, 130, 62, 14, 12, _fill, radius: 2);
+      case SlideType.checklist:
+        // Title, then rows each with a status box and a text line.
+        _bar(canvas, 14, 12, 96, 9, _ink);
+        for (var r = 0; r < 4; r++) {
+          final y = 30.0 + r * 13;
+          _bar(canvas, 14, y, 9, 9, r.isEven ? _accent : _soft, radius: 2);
+          _bar(canvas, 30, y + 1, r.isEven ? 116 : 96, 6, _soft);
+        }
+      case SlideType.scopeMatrix:
+        // Objects (rows) × standards (columns) grid with a few tested cells.
+        _bar(canvas, 14, 12, 72, 8, _ink);
+        final grid = _paint(_soft)..strokeWidth = 1.2;
+        const gLeft = 14.0, gTop = 28.0, gRight = 146.0, gBottom = 76.0;
+        for (var c = 0; c <= 4; c++) {
+          final x = gLeft + c * (gRight - gLeft) / 4;
+          canvas.drawLine(Offset(x, gTop), Offset(x, gBottom), grid);
+        }
+        for (var rr = 0; rr <= 3; rr++) {
+          final y = gTop + rr * (gBottom - gTop) / 3;
+          canvas.drawLine(Offset(gLeft, y), Offset(gRight, y), grid);
+        }
+        _bar(canvas, 20, 32, 20, 9, _accent, radius: 2);
+        _bar(canvas, 86, 48, 20, 9, _accent, radius: 2);
+        _bar(canvas, 53, 64, 20, 9, _accent, radius: 2);
+      case SlideType.signOff:
+        // Truthfulness statement, a signature scribble over a rule, and a seal.
+        _bar(canvas, 14, 12, 90, 9, _ink);
+        _bar(canvas, 14, 30, 132, 6, _soft);
+        _bar(canvas, 14, 42, 108, 6, _soft);
+        canvas.drawLine(
+          const Offset(20, 68),
+          const Offset(98, 68),
+          _paint(_ink)..strokeWidth = 1.5,
+        );
+        final sig = Path()
+          ..moveTo(26, 66)
+          ..cubicTo(34, 54, 44, 74, 54, 60)
+          ..cubicTo(62, 50, 72, 70, 92, 58);
+        canvas.drawPath(
+          sig,
+          _paint(_accent)
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 1.6,
+        );
+        canvas.drawCircle(
+          const Offset(128, 60),
+          12,
+          _paint(_accent.withValues(alpha: 0.18)),
+        );
+        canvas.drawCircle(
+          const Offset(128, 60),
+          12,
+          _paint(_accent)
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 1.5,
+        );
+      default:
+        break;
     }
   }
 

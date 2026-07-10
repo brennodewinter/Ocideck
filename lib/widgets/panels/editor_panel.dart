@@ -329,4 +329,9 @@ const Map<SlideType, IconData> slideTypeIcons = {
   SlideType.cockpit: Icons.speed_outlined,
   SlideType.question: Icons.quiz_outlined,
   SlideType.timeline: Icons.timeline_outlined,
+  SlideType.finding: Icons.bug_report_outlined,
+  SlideType.findingsSummary: Icons.summarize_outlined,
+  SlideType.checklist: Icons.checklist,
+  SlideType.scopeMatrix: Icons.grid_on_outlined,
+  SlideType.signOff: Icons.draw_outlined,
 };

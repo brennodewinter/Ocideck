@@ -83,6 +83,41 @@ const _stringsIt = {
 };
 
 const _dutchSourceIt = {
+  '(leeg)': '(vuoto)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Didascalia',
+  'Bron citaat': 'Fonte della citazione',
+  'Codetaal': 'Linguaggio del codice',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Nessuna differenza visibile — le diapositive hanno un contenuto identico.',
+  'In meerdere presentaties': 'In più presentazioni',
+  'Kop kolom 1': 'Intestazione colonna 1',
+  'Kop kolom 2': 'Intestazione colonna 2',
+  'Lijststijl': 'Stile elenco',
+  'Notities': 'Note',
+  'Tweede bijschrift': 'Seconda didascalia',
+  'Tweede opsomming': 'Secondo elenco puntato',
+  'Vergelijk met:': 'Confronta con:',
+  'Verschillen': 'Differenze',
+  'Verschillen tussen slides': 'Differenze tra le diapositive',
+  'Video': 'Video',
+  'duplica(a)t(en) verborgen': 'duplicato/i nascosto/i',
+  'slides — verfijn je zoekopdracht': 'diapositive — affina la tua ricerca',
+  'unieke slide(s)': 'diapositiva/e unica/uniche',
+  'Bevinding': 'Rilievo',
+  'Bevindingenoverzicht': 'Panoramica dei rilievi',
+  'Scope-matrix': 'Matrice dell\'ambito',
+  'Ondertekening': 'Firma',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Un singolo rilievo: oggetto, punteggio CVSS, CWE/CVE nonché la descrizione, la riproduzione, l\'impatto e la raccomandazione.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Panoramica direzionale: numero di rilievi per gravità, con grafico e cause principali.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Un elenco di test secondo uno standard (come OWASP WSTG), con stato per ogni test e collegamento ai rilievi.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Una matrice degli oggetti dell\'ambito rispetto agli standard e il grado di verifica.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'La dichiarazione di veridicità con relatore, certificazione, firma e sigillatura.',
   'Uitbreidingen': 'Estensioni',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Moduli opzionali. Disattivati per impostazione predefinita; non aggiungono nulla all\'app di base finché non li attivi.',

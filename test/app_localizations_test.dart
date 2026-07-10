@@ -41,9 +41,11 @@ void main() {
 
     const unchangedInEnglish = {
       'Accent / bullets',
+      'Audio',
       'Bank',
       'Bullet',
       'Code',
+      'Video',
       'Contact',
       'Coverflow',
       'Label',

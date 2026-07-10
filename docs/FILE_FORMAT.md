@@ -218,6 +218,11 @@ The first class determines (together with the content) the **slide type**:
 | Cockpit | `cockpit` | — |
 | Question | `question` | — |
 | Timeline | `timeline` | — |
+| Finding | `finding` | — |
+| Findings summary | `findings-summary` | — |
+| Checklist | `checklist` | — |
+| Scope matrix | `scope-matrix` | — |
+| Sign-off | `sign-off` | — |
 | Bullets only | *(none)* | bullets present |
 | Two images | *(none)* | two background images |
 | Large image | *(none)* | one image, no bullets |
@@ -795,7 +800,7 @@ not model is not reported.
 | **Comment** | warning | Comment without `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:`, or `advance:`. |
 | **Code blocks** | error | Odd number of ` ``` ` lines (not closed). |
 | **`_class`** | error | Malformed `<!-- _class: ... -->`. |
-| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`). |
+| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`). |
 | **Slide metadata** | error | Unknown `<!-- tlp: ... -->`, non-numeric `<!-- advance: ... -->`, or invalid `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`). |
 | **Two columns** | error | Invalid base64/JSON in `ocideck_two_bullets_*` comments. |
 | **Images** | error | `![...](...` without closing `)`. |

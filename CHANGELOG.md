@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Informatieveiligheid slide types (scaffold)** — five new slide types for
+  pentest reporting (*Bevinding*, *Bevindingenoverzicht*, *Checklist*,
+  *Scope-matrix*, *Ondertekening*) are registered end to end: enum, metadata,
+  picker wireframes, editor, preview and Markdown round-trip (each rides its own
+  Marp `_class` token — `finding`, `findings-summary`, `checklist`,
+  `scope-matrix`, `sign-off`). They belong to the *Informatieveiligheid*
+  category and only appear in the add-slide picker once that module is enabled.
+  For now each behaves as a free-Markdown body; the structured editors follow per
+  type. Localised in all interface languages. See
+  [docs/FILE_FORMAT.md](docs/FILE_FORMAT.md) §4.
 - **Animated GIFs play** — an imported animated GIF (or WebP/APNG) now keeps
   animating in the preview, presentation and audience window instead of freezing
   on its first frame. The decode-size cap that guards against memory-bomb images

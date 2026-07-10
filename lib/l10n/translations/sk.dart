@@ -84,6 +84,40 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  '(leeg)': '(prázdne)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Popis',
+  'Bron citaat': 'Zdroj citátu',
+  'Codetaal': 'Jazyk kódu',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Žiadne viditeľné rozdiely — snímky sú obsahovo zhodné.',
+  'In meerdere presentaties': 'Vo viacerých prezentáciách',
+  'Kop kolom 1': 'Hlavička stĺpca 1',
+  'Kop kolom 2': 'Hlavička stĺpca 2',
+  'Lijststijl': 'Štýl zoznamu',
+  'Notities': 'Poznámky',
+  'Tweede bijschrift': 'Druhý popis',
+  'Tweede opsomming': 'Druhý zoznam s odrážkami',
+  'Vergelijk met:': 'Porovnať s:',
+  'Verschillen': 'Rozdiely',
+  'Verschillen tussen slides': 'Rozdiely medzi snímkami',
+  'duplica(a)t(en) verborgen': 'skrytých duplikátov',
+  'slides — verfijn je zoekopdracht': 'snímok — spresnite vyhľadávanie',
+  'unieke slide(s)': 'jedinečných snímok',
+  'Bevinding': 'Zistenie',
+  'Bevindingenoverzicht': 'Prehľad zistení',
+  'Scope-matrix': 'Matica rozsahu',
+  'Ondertekening': 'Podpis',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Jedno zistenie: predmet, skóre CVSS, CWE/CVE a popis, reprodukcia, dopad a odporúčanie.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Manažérsky prehľad: počty zistení podľa závažnosti, s grafom a hlavnými príčinami.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Zoznam testov podľa štandardu (napríklad OWASP WSTG), so stavom pri každom teste a prepojením na zistenia.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Matica objektov rozsahu voči štandardom a miera overenia.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Vyhlásenie o pravdivosti so spracovateľom, certifikáciou, podpisom a pečaťou.',
   'Uitbreidingen': 'Rozšírenia',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Voliteľné moduly. Predvolene vypnuté; do základnej aplikácie nič nepridávajú, kým ich nezapnete.',

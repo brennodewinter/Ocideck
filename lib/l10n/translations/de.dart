@@ -83,6 +83,41 @@ const _stringsDe = {
 };
 
 const _dutchSourceDe = {
+  '(leeg)': '(leer)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Bildunterschrift',
+  'Bron citaat': 'Zitatquelle',
+  'Codetaal': 'Codesprache',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Keine sichtbaren Unterschiede — die Folien sind inhaltlich identisch.',
+  'In meerdere presentaties': 'In mehreren Präsentationen',
+  'Kop kolom 1': 'Überschrift Spalte 1',
+  'Kop kolom 2': 'Überschrift Spalte 2',
+  'Lijststijl': 'Listenstil',
+  'Notities': 'Notizen',
+  'Tweede bijschrift': 'Zweite Bildunterschrift',
+  'Tweede opsomming': 'Zweite Aufzählung',
+  'Vergelijk met:': 'Vergleichen mit:',
+  'Verschillen': 'Unterschiede',
+  'Verschillen tussen slides': 'Unterschiede zwischen Folien',
+  'Video': 'Video',
+  'duplica(a)t(en) verborgen': 'Duplikat(e) ausgeblendet',
+  'slides — verfijn je zoekopdracht': 'Folien — verfeinere deine Suche',
+  'unieke slide(s)': 'eindeutige Folie(n)',
+  'Bevinding': 'Feststellung',
+  'Bevindingenoverzicht': 'Feststellungsübersicht',
+  'Scope-matrix': 'Scope-Matrix',
+  'Ondertekening': 'Unterzeichnung',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Eine einzelne Feststellung: Thema, CVSS-Score, CWE/CVE sowie Beschreibung, Reproduktion, Auswirkung und Empfehlung.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Management-Übersicht: Anzahl der Feststellungen nach Schweregrad, mit Diagramm und Hauptursachen.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Eine Testliste gemäß einem Standard (wie OWASP WSTG), mit Status je Test und Verknüpfung zu Feststellungen.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Eine Matrix von Scope-Objekten gegen Standards und dem Umfang der Prüfung.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Die Wahrheitserklärung mit Berichterstatter, Zertifizierung, Unterschrift und Versiegelung.',
   'Uitbreidingen': 'Erweiterungen',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Optionale Module. Standardmäßig aus; sie fügen der Basis-App nichts hinzu, bis Sie sie aktivieren.',

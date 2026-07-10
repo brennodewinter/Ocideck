@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 import '../../models/slide.dart';
 import '../../services/file_service.dart';
+import '../../services/slide_dedup_service.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../slides/slide_preview.dart';
+import 'slide_diff_dialog.dart';
 
 /// A single search hit: one slide from a scanned presentation.
 class _Hit {
@@ -15,6 +17,11 @@ class _Hit {
   const _Hit(this.source, this.slideIndex, this.slide);
 
   String get key => '${source.path}#$slideIndex';
+
+  /// The deck's title, or its file name when untitled — used to label where a
+  /// slide came from.
+  String get sourceName =>
+      source.deck.title.isEmpty ? source.fileName : source.deck.title;
 }
 
 /// "Slide finder": search across every presentation in a directory and add
@@ -62,12 +69,17 @@ class SlideFinderDialog extends StatefulWidget {
 class _SlideFinderDialogState extends State<SlideFinderDialog> {
   static const _maxResults = 200;
 
+  final _dedup = SlideDedupService();
+
   String? _directory;
   bool _loading = false;
   List<ScannedPresentation> _presentations = const [];
   String _query = '';
   int _addedCount = 0;
-  final _addedKeys = <String>{};
+
+  /// Added slides, keyed by their content signature so every identical copy of
+  /// an added slide shows as added — not just the one card that was clicked.
+  final _addedSignatures = <String>{};
 
   @override
   void initState() {
@@ -128,26 +140,26 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
     return imagePath;
   }
 
-  /// Flat, capped list of slides matching the current query (every term must
-  /// appear somewhere in the slide).
-  List<_Hit> _hits() {
+  /// Every slide matching the current query (each term must appear somewhere in
+  /// the slide), in scan order. De-duplication happens afterwards in [_dedup].
+  List<_Hit> _matches() {
     final q = _query.trim().toLowerCase();
     if (q.isEmpty) return const [];
     final terms = q.split(RegExp(r'\s+')).where((t) => t.isNotEmpty).toList();
-    final hits = <_Hit>[];
+    final matches = <_Hit>[];
     for (final pres in _presentations) {
       for (var i = 0; i < pres.deck.slides.length; i++) {
         final text = _slideText(pres.deck.slides[i]);
         if (terms.every(text.contains)) {
-          hits.add(_Hit(pres, i, pres.deck.slides[i]));
-          if (hits.length >= _maxResults) return hits;
+          matches.add(_Hit(pres, i, pres.deck.slides[i]));
         }
       }
     }
-    return hits;
+    return matches;
   }
 
-  void _add(_Hit hit) {
+  void _add(SlideGroup<_Hit> group) {
+    final hit = group.primary;
     final projectPath = hit.source.deck.projectPath;
     final resolved = hit.slide.copyWith(
       imagePath: _resolve(hit.slide.imagePath, projectPath),
@@ -155,15 +167,39 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
     );
     widget.onAdd(resolved);
     setState(() {
-      _addedKeys.add(hit.key);
+      _addedSignatures.add(group.signature);
       _addedCount++;
     });
+  }
+
+  /// Open the side-by-side comparison for a group and its look-alikes.
+  void _compare(
+    AppLocalizations l10n,
+    SlideGroup<_Hit> group,
+    List<SlideGroup<_Hit>> similar,
+  ) {
+    SlideDiffRef refOf(_Hit h) => SlideDiffRef(
+      label: '${h.sourceName} · ${l10n.d('slide')} ${h.slideIndex + 1}',
+      slide: h.slide,
+      projectPath: h.source.deck.projectPath,
+      themeProfile: h.source.deck.themeProfile,
+    );
+
+    SlideDiffDialog.show(
+      context,
+      primary: refOf(group.primary),
+      others: [for (final g in similar) refOf(g.primary)],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final hits = _hits();
+    final result = _dedup.dedupe(
+      _matches(),
+      (h) => h.slide,
+      maxGroups: _maxResults,
+    );
 
     return AlertDialog(
       title: Row(
@@ -197,7 +233,7 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
           children: [
             _toolbar(),
             const SizedBox(height: 12),
-            Expanded(child: _body(hits)),
+            Expanded(child: _body(result)),
           ],
         ),
       ),
@@ -245,7 +281,7 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
     );
   }
 
-  Widget _body(List<_Hit> hits) {
+  Widget _body(SlideDedupResult<_Hit> result) {
     final l10n = context.l10n;
     if (_loading) {
       return const Center(child: CircularProgressIndicator());
@@ -262,22 +298,22 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
         l10n.d('Typ zoektermen om slides uit al je presentaties te vinden.'),
       );
     }
-    if (hits.isEmpty) {
+    final groups = result.groups;
+    if (groups.isEmpty) {
       return _empty(
         Icons.search_off_outlined,
         '${l10n.d('Geen slides gevonden voor')} "${_query.trim()}".',
       );
     }
 
+    final hidden = groups.fold<int>(0, (n, g) => n + g.copies) - groups.length;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 8, left: 2),
           child: Text(
-            hits.length >= _maxResults
-                ? '${l10n.d('Eerste')} $_maxResults ${l10n.d('treffers — verfijn je zoekopdracht')}'
-                : '${hits.length} ${l10n.d('treffer(s)')}',
+            _resultSummary(l10n, groups.length, hidden, result.truncated),
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
@@ -287,18 +323,42 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
               maxCrossAxisExtent: 280,
               mainAxisSpacing: 14,
               crossAxisSpacing: 14,
-              childAspectRatio: 0.78,
+              childAspectRatio: 0.72,
             ),
-            itemCount: hits.length,
-            itemBuilder: (_, i) => _SlideHitCard(
-              hit: hits[i],
-              added: _addedKeys.contains(hits[i].key),
-              onAdd: () => _add(hits[i]),
-            ),
+            itemCount: groups.length,
+            itemBuilder: (_, i) {
+              final group = groups[i];
+              final similar = [for (final j in result.similar[i]) groups[j]];
+              return _SlideHitCard(
+                group: group,
+                similar: similar,
+                added: _addedSignatures.contains(group.signature),
+                onAdd: () => _add(group),
+                onCompare: similar.isEmpty
+                    ? null
+                    : () => _compare(l10n, group, similar),
+              );
+            },
           ),
         ),
       ],
     );
+  }
+
+  /// One-line count above the grid: distinct slides, how many duplicates were
+  /// merged away, and whether the list was capped.
+  String _resultSummary(
+    AppLocalizations l10n,
+    int distinct,
+    int hidden,
+    bool truncated,
+  ) {
+    if (truncated) {
+      return '${l10n.d('Eerste')} $_maxResults ${l10n.d('slides — verfijn je zoekopdracht')}';
+    }
+    final base = '$distinct ${l10n.d('unieke slide(s)')}';
+    if (hidden <= 0) return base;
+    return '$base · $hidden ${l10n.d('duplica(a)t(en) verborgen')}';
   }
 
   Widget _empty(IconData icon, String message) {
@@ -319,58 +379,97 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
   }
 }
 
-// ── A rendered slide result with an add button ───────────────────────────────
+// ── A de-duplicated slide result with add and compare actions ────────────────
 
 class _SlideHitCard extends StatelessWidget {
-  final _Hit hit;
+  /// The slides collapsed onto one card (identical content across decks).
+  final SlideGroup<_Hit> group;
+
+  /// Distinct-but-look-alike slides, offered via the "differences" action.
+  final List<SlideGroup<_Hit>> similar;
   final bool added;
   final VoidCallback onAdd;
+  final VoidCallback? onCompare;
 
   const _SlideHitCard({
-    required this.hit,
+    required this.group,
+    required this.similar,
     required this.added,
     required this.onAdd,
+    required this.onCompare,
   });
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final hit = group.primary;
     final deck = hit.source.deck;
-    final sourceName = deck.title.isEmpty ? hit.source.fileName : deck.title;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
         Expanded(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              border: Border.all(
-                color: added ? AppTheme.accent : AppTheme.slate300,
-                width: added ? 2 : 1,
-              ),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: SlidePreviewWidget(
-                  slide: hit.slide,
-                  projectPath: deck.projectPath,
-                  themeProfile: deck.themeProfile,
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                      color: added ? AppTheme.accent : AppTheme.slate300,
+                      width: added ? 2 : 1,
+                    ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: SlidePreviewWidget(
+                        slide: hit.slide,
+                        projectPath: deck.projectPath,
+                        themeProfile: deck.themeProfile,
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
+              if (group.hasCopies)
+                Positioned(top: 4, left: 4, child: _copiesBadge(l10n)),
+            ],
           ),
         ),
         const SizedBox(height: 4),
         Text(
-          '$sourceName · ${l10n.d('slide')} ${hit.slideIndex + 1}',
+          group.hasCopies
+              ? '${hit.sourceName} · ${l10n.d('slide')} ${hit.slideIndex + 1} +${group.copies - 1}'
+              : '${hit.sourceName} · ${l10n.d('slide')} ${hit.slideIndex + 1}',
           style: TextStyle(fontSize: 10.5, color: AppTheme.slate400),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
+        if (onCompare != null) ...[
+          const SizedBox(height: 2),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton.icon(
+              onPressed: onCompare,
+              icon: const Icon(Icons.difference_outlined, size: 13),
+              label: Text(
+                similar.length == 1
+                    ? l10n.d('Verschillen')
+                    : '${l10n.d('Verschillen')} (${similar.length})',
+              ),
+              style: TextButton.styleFrom(
+                foregroundColor: AppTheme.amber700,
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                minimumSize: const Size(0, 24),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                textStyle: const TextStyle(fontSize: 11),
+              ),
+            ),
+          ),
+        ],
         const SizedBox(height: 4),
         SizedBox(
           height: 28,
@@ -398,6 +497,50 @@ class _SlideHitCard extends StatelessWidget {
                 ),
         ),
       ],
+    );
+  }
+
+  /// "In N presentaties" chip listing every deck this exact slide was found in.
+  Widget _copiesBadge(AppLocalizations l10n) {
+    return PopupMenuButton<void>(
+      tooltip: l10n.d('In meerdere presentaties'),
+      itemBuilder: (_) => [
+        for (final h in group.occurrences)
+          PopupMenuItem<void>(
+            enabled: false,
+            height: 32,
+            child: Tooltip(
+              message: h.source.path,
+              child: Text(
+                '${h.sourceName} · ${l10n.d('slide')} ${h.slideIndex + 1}',
+                style: const TextStyle(fontSize: 12),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+      ],
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+        decoration: BoxDecoration(
+          color: AppTheme.accent,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.copy_all_outlined, size: 11, color: Colors.white),
+            const SizedBox(width: 3),
+            Text(
+              '${group.copies}',
+              style: const TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

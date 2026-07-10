@@ -83,6 +83,40 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  '(leeg)': '(tom)',
+  'Audio': 'Ljud',
+  'Bijschrift': 'Bildtext',
+  'Bron citaat': 'Citatkälla',
+  'Codetaal': 'Kodspråk',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Inga synliga skillnader — bilderna har samma innehåll.',
+  'In meerdere presentaties': 'I flera presentationer',
+  'Kop kolom 1': 'Rubrik kolumn 1',
+  'Kop kolom 2': 'Rubrik kolumn 2',
+  'Lijststijl': 'Liststil',
+  'Notities': 'Anteckningar',
+  'Tweede bijschrift': 'Andra bildtexten',
+  'Tweede opsomming': 'Andra punktlistan',
+  'Vergelijk met:': 'Jämför med:',
+  'Verschillen': 'Skillnader',
+  'Verschillen tussen slides': 'Skillnader mellan bilder',
+  'duplica(a)t(en) verborgen': 'dubblett(er) dolda',
+  'slides — verfijn je zoekopdracht': 'bilder — förfina din sökning',
+  'unieke slide(s)': 'unik(a) bild(er)',
+  'Bevinding': 'Iakttagelse',
+  'Bevindingenoverzicht': 'Sammanställning av iakttagelser',
+  'Scope-matrix': 'Omfattningsmatris',
+  'Ondertekening': 'Underskrift',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'En iakttagelse: ämne, CVSS-poäng, CWE/CVE samt beskrivning, reproduktion, konsekvens och rekommendation.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Ledningsöversikt: antal iakttagelser per allvarlighetsgrad, med diagram och grundorsaker.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'En testlista enligt en standard (såsom OWASP WSTG), med status per test och koppling till iakttagelser.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'En matris över omfattningsobjekt mot standarder och graden av granskning.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Sanningsförsäkran med rapportör, certifiering, underskrift och försegling.',
   'Uitbreidingen': 'Tillägg',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Valfria moduler. Av som standard; de lägger inte till något i basappen förrän du aktiverar dem.',

@@ -84,6 +84,41 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  '(leeg)': '(vide)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Légende',
+  'Bron citaat': 'Source de la citation',
+  'Codetaal': 'Langage du code',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Aucune différence visible — les diapositives ont un contenu identique.',
+  'In meerdere presentaties': 'Dans plusieurs présentations',
+  'Kop kolom 1': 'Titre de la colonne 1',
+  'Kop kolom 2': 'Titre de la colonne 2',
+  'Lijststijl': 'Style de liste',
+  'Notities': 'Notes',
+  'Tweede bijschrift': 'Deuxième légende',
+  'Tweede opsomming': 'Deuxième liste à puces',
+  'Vergelijk met:': 'Comparer avec :',
+  'Verschillen': 'Différences',
+  'Verschillen tussen slides': 'Différences entre les diapositives',
+  'Video': 'Vidéo',
+  'duplica(a)t(en) verborgen': 'doublon(s) masqué(s)',
+  'slides — verfijn je zoekopdracht': 'diapositives — affinez votre recherche',
+  'unieke slide(s)': 'diapositive(s) unique(s)',
+  'Bevinding': 'Constatation',
+  'Bevindingenoverzicht': 'Aperçu des constatations',
+  'Scope-matrix': 'Matrice de périmètre',
+  'Ondertekening': 'Signature',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Une seule constatation : sujet, score CVSS, CWE/CVE ainsi que la description, la reproduction, l\'impact et la recommandation.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Aperçu de gestion : nombre de constatations par gravité, avec graphique et causes principales.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Une liste de tests selon une norme (telle qu\'OWASP WSTG), avec un statut par test et un lien vers les constatations.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Une matrice des objets du périmètre par rapport aux normes et le degré d\'évaluation.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'La déclaration de véracité avec le rapporteur, la certification, la signature et le scellement.',
   'Uitbreidingen': 'Extensions',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Modules optionnels. Désactivés par défaut ; ils n\'ajoutent rien à l\'application de base jusqu\'à leur activation.',

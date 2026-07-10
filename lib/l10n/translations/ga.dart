@@ -85,6 +85,40 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  '(leeg)': '(folamh)',
+  'Audio': 'Fuaim',
+  'Bijschrift': 'Foscríbhinn',
+  'Bron citaat': 'Foinse an athfhriotail',
+  'Codetaal': 'Teanga an chóid',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Níl aon difríocht le feiceáil — tá an t-ábhar céanna ag na sleamhnáin.',
+  'In meerdere presentaties': 'I roinnt láithreoireachtaí',
+  'Kop kolom 1': 'Ceannteideal colún 1',
+  'Kop kolom 2': 'Ceannteideal colún 2',
+  'Lijststijl': 'Stíl liosta',
+  'Notities': 'Nótaí',
+  'Tweede bijschrift': 'An dara foscríbhinn',
+  'Tweede opsomming': 'An dara liosta urchar',
+  'Vergelijk met:': 'Cuir i gcomparáid le:',
+  'Verschillen': 'Difríochtaí',
+  'Verschillen tussen slides': 'Difríochtaí idir sleamhnáin',
+  'duplica(a)t(en) verborgen': 'dúblach folaithe',
+  'slides — verfijn je zoekopdracht': 'sleamhnán — beachtaigh do chuardach',
+  'unieke slide(s)': 'sleamhnán uathúil',
+  'Bevinding': 'Fionnachtain',
+  'Bevindingenoverzicht': 'Forbhreathnú ar fhionnachtana',
+  'Scope-matrix': 'Maitrís raon feidhme',
+  'Ondertekening': 'Síniú',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Fionnachtain amháin: ábhar, scór CVSS, CWE/CVE agus an cur síos, atáirgeadh, tionchar agus moladh.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Forbhreathnú bainistíochta: líon na bhfionnachtana de réir déine, le graf agus príomhchúiseanna.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Liosta tástála de réir caighdeáin (amhail OWASP WSTG), le stádas do gach tástáil agus nasc leis na fionnachtana.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Maitrís de réada raon feidhme in aghaidh caighdeán agus méid an tástála.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'An dearbhú fírinne le tuairisceoir, deimhniú, síniú agus séalú.',
   'Uitbreidingen': 'Breiseáin',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Modúil roghnacha. Múchta de réir réamhshocraithe; ní chuireann siad aon rud leis an mbunaip go dtí go gcumasaíonn tú iad.',

@@ -5,7 +5,10 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/dialogs/add_slide_dialog.dart';
 
 void main() {
-  Future<SlideType?> Function() openDialog(WidgetTester tester) {
+  Future<SlideType?> Function() openDialog(
+    WidgetTester tester, {
+    bool reveal = false,
+  }) {
     SlideType? picked;
     return () async {
       await tester.pumpWidget(
@@ -13,8 +16,10 @@ void main() {
           home: Builder(
             builder: (context) => Center(
               child: ElevatedButton(
-                onPressed: () async =>
-                    picked = await AddSlideDialog.show(context),
+                onPressed: () async => picked = await AddSlideDialog.show(
+                  context,
+                  revealSecurityModule: reveal,
+                ),
                 child: const Text('open'),
               ),
             ),
@@ -35,7 +40,11 @@ void main() {
       .toList();
 
   testWidgets('every slide type shows a wireframe preview', (tester) async {
-    await openDialog(tester)();
+    // Reveal the security module so every type is offered; the "Alle" tab drops
+    // the category filter so all of them are visible at once.
+    await openDialog(tester, reveal: true)();
+    await tester.tap(find.text('Alle'));
+    await tester.pumpAndSettle();
     expect(visibleTypes(tester).toSet(), SlideType.values.toSet());
   });
 
@@ -44,17 +53,50 @@ void main() {
   ) async {
     // Derived from the single source of truth, so a newly added type shows up
     // automatically instead of having to be added to a second hand-kept list.
-    await openDialog(tester)();
+    await openDialog(tester, reveal: true)();
+    await tester.tap(find.text('Alle'));
+    await tester.pumpAndSettle();
     expect(visibleTypes(tester).toSet(), slideTypeMeta.keys.toSet());
   });
 
-  testWidgets('shows no category tab bar while one category has types', (
+  testWidgets('hides the security types and tab bar until the module is on', (
     tester,
   ) async {
-    // Everything is SlideCategory.algemeen today; the tab bar only appears once
-    // a second category carries types.
+    // Module off (the default): only SlideCategory.algemeen types are offered,
+    // so no tab bar is drawn and no Informatieveiligheid type is reachable.
     await openDialog(tester)();
     expect(find.byType(ChoiceChip), findsNothing);
+    expect(
+      visibleTypes(
+        tester,
+      ).any((t) => t.category == SlideCategory.informatieveiligheid),
+      isFalse,
+    );
+  });
+
+  testWidgets('reveals the security types under a tab when the module is on', (
+    tester,
+  ) async {
+    await openDialog(tester, reveal: true)();
+    // A second category now carries types, so the tab bar appears. The default
+    // tab is Algemeen, so no security type is shown yet.
+    expect(find.byType(ChoiceChip), findsWidgets);
+    expect(
+      visibleTypes(
+        tester,
+      ).any((t) => t.category == SlideCategory.informatieveiligheid),
+      isFalse,
+    );
+    // The Informatieveiligheid tab shows exactly the five scaffolded types.
+    await tester.tap(find.text('Informatieveiligheid'));
+    await tester.pumpAndSettle();
+    expect(visibleTypes(tester).toSet(), {
+      SlideType.finding,
+      SlideType.findingsSummary,
+      SlideType.checklist,
+      SlideType.scopeMatrix,
+      SlideType.signOff,
+    });
   });
 
   testWidgets('the search field filters cards by localised label', (

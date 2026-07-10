@@ -83,6 +83,40 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  '(leeg)': '(tukšs)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Paraksts',
+  'Bron citaat': 'Citāta avots',
+  'Codetaal': 'Koda valoda',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Nav redzamu atšķirību — slaidi pēc satura ir vienādi.',
+  'In meerdere presentaties': 'Vairākās prezentācijās',
+  'Kop kolom 1': '1. kolonnas virsraksts',
+  'Kop kolom 2': '2. kolonnas virsraksts',
+  'Lijststijl': 'Saraksta stils',
+  'Notities': 'Piezīmes',
+  'Tweede bijschrift': 'Otrais paraksts',
+  'Tweede opsomming': 'Otrais aizzīmju saraksts',
+  'Vergelijk met:': 'Salīdzināt ar:',
+  'Verschillen': 'Atšķirības',
+  'Verschillen tussen slides': 'Atšķirības starp slaidiem',
+  'duplica(a)t(en) verborgen': 'dublikāts(-i) paslēpts(-i)',
+  'slides — verfijn je zoekopdracht': 'slaidi — precizējiet meklējumu',
+  'unieke slide(s)': 'unikāls(-i) slaids(-i)',
+  'Bevinding': 'Konstatējums',
+  'Bevindingenoverzicht': 'Konstatējumu pārskats',
+  'Scope-matrix': 'Tvēruma matrica',
+  'Ondertekening': 'Parakstīšana',
+  'Eén bevinding: onderwerp, CVSS-score, CWE/CVE en de beschrijving, reproductie, impact en aanbeveling.':
+      'Viens konstatējums: temats, CVSS novērtējums, CWE/CVE, kā arī apraksts, atveidošana, ietekme un ieteikums.',
+  'Managementoverzicht: aantallen bevindingen per ernst, met grafiek en hoofdoorzaken.':
+      'Vadības pārskats: konstatējumu skaits pēc nopietnības, ar diagrammu un galvenajiem cēloņiem.',
+  'Een testlijst volgens een standaard (zoals OWASP WSTG), met status per test en koppeling naar bevindingen.':
+      'Testu saraksts atbilstoši standartam (piemēram, OWASP WSTG), ar katra testa statusu un saiti uz konstatējumiem.',
+  'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.':
+      'Tvēruma objektu matrica pret standartiem un pārbaudes pakāpe.',
+  'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.':
+      'Patiesuma apliecinājums ar ziņotāju, sertifikāciju, parakstu un aizzīmogojumu.',
   'Uitbreidingen': 'Paplašinājumi',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Neobligāti moduļi. Pēc noklusējuma izslēgti; tie neko nepievieno pamata lietotnei, kamēr tos neieslēdzat.',
