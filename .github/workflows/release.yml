@@ -24,7 +24,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.44.2
+          flutter-version: 3.44.6
           cache: true
 
       - name: Install dependencies
@@ -56,7 +56,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.44.2
+          flutter-version: 3.44.6
           cache: true
 
       - name: Install dependencies
@@ -91,7 +91,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.44.2
+          flutter-version: 3.44.6
           cache: true
 
       - name: Install dependencies
@@ -120,7 +120,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.44.2
+          flutter-version: 3.44.6
           cache: true
 
       - name: Install dependencies
@@ -158,7 +158,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.44.2
+          flutter-version: 3.44.6
           cache: true
 
       - name: Install dependencies

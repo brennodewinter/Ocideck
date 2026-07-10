@@ -83,7 +83,7 @@ These three run on every push and pull request (and as `make check`).
 - **Failure means:** at least one file is not formatted. Fix with `make format`
   (which rewrites files in place), then re-run.
 - **Note:** `dart format`'s output is tied to the Dart/Flutter version. The repo
-  is pinned to **Flutter 3.44.2** (see [Version pin](#version-pin)); a different
+  is pinned to **Flutter 3.44.6** (see [Version pin](#version-pin)); a different
   local version can report spurious drift. Match the pin before reformatting the
   whole tree.
 
@@ -355,7 +355,7 @@ See [`BUILD.md`](BUILD.md) for the matching local `make build-*` targets.
 
 ## Version pin
 
-CI pins **Flutter 3.44.2 (stable)**, recorded in `.tool-versions` (asdf) and in
+CI pins **Flutter 3.44.6 (stable)**, recorded in `.tool-versions` (asdf) and in
 both `.github/workflows/*.yml`. The pin matters mainly for **`dart format`**: its
 line-wrapping output changes between releases, so an unpinned local toolchain — or
 a separately installed standalone Dart used instead of the Flutter-bundled one —
