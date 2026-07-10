@@ -96,6 +96,24 @@ const _dutchSourceBg = {
   'Op het web nog niet beschikbaar': 'Все още не е налично в мрежата',
   'Ophalen mislukt': 'Изтеглянето е неуспешно',
   'Nog niet opgehaald': 'Още не е изтеглено',
+  'AI-assistentie': 'AI помощ',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'AI помощта е налична само в настолната версия.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'AI помощта е по избор и е изключена по подразбиране. Нищо не се изпраща, докато не я включите и сами не изберете бекенд. Тази функция работи само в настолната версия.',
+  'AI-assistentie inschakelen': 'Включване на AI помощта',
+  'AI-backend': 'AI бекенд',
+  'Lokaal (op dit apparaat)': 'Локално (на това устройство)',
+  'Zelf gehost (eigen server)': 'Самостоятелно хостван (собствен сървър)',
+  'Cloud (externe dienst)': 'Облак (външна услуга)',
+  'Modelnaam': 'Име на модела',
+  'API-sleutel (optioneel)': 'API ключ (по избор)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Облачна услуга първо изисква вашето съгласие за поверителност в "Лиценз и поверителност" и не работи в уеб версията.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Разбирам, че данни се изпращат до тази външна услуга',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'AI помощ (изключена по подразбиране): ако изберете самостоятелно хостван или облачен бекенд, текстовете или изображенията, които обработвате, се изпращат на този адрес. Локален AI модел на това устройство не изпраща нищо.',
   'Zoek een slidetype': 'Търсене на тип слайд',
   'Alfabetisch sorteren': 'Азбучно сортиране',
   'Algemeen': 'Общи',

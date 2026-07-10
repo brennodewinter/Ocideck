@@ -96,6 +96,24 @@ const _dutchSourceMt = {
   'Op het web nog niet beschikbaar': 'Għadha mhux disponibbli fuq il-web',
   'Ophalen mislukt': 'It-tniżżil falla',
   'Nog niet opgehaald': 'Għadha ma tniżżlitx',
+  'AI-assistentie': 'Assistenza AI',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'L-assistenza AI hija disponibbli biss fil-verżjoni desktop.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'L-assistenza AI hija fakultattiva u mitfija b\'default. Xejn ma jintbagħat sakemm ma tattivahiex u tagħżel backend int stess. Din il-funzjoni taħdem biss fil-verżjoni desktop.',
+  'AI-assistentie inschakelen': 'Attiva l-assistenza AI',
+  'AI-backend': 'Backend AI',
+  'Lokaal (op dit apparaat)': 'Lokali (fuq dan l-apparat)',
+  'Zelf gehost (eigen server)': 'Ospitat minnek (server tiegħek)',
+  'Cloud (externe dienst)': 'Cloud (servizz estern)',
+  'Modelnaam': 'Isem tal-mudell',
+  'API-sleutel (optioneel)': 'Ċavetta API (fakultattiva)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Servizz tal-cloud l-ewwel jeħtieġ il-kunsens tiegħek għall-privatezza taħt "Liċenzja u Privatezza" u ma jaħdimx fil-verżjoni web.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Nifhem li d-data tintbagħat lil dan is-servizz estern',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Assistenza AI (mitfija b\'default): jekk tagħżel backend ospitat minnek jew fil-cloud, it-testi jew l-immaġni li tipproċessa jintbagħtu lil dak l-indirizz. Mudell AI lokali fuq dan l-apparat ma jibgħat xejn.',
   'Zoek een slidetype': 'Fittex it-tip ta\' slide',
   'Alfabetisch sorteren': 'Issortja alfabetikament',
   'Algemeen': 'Ġenerali',

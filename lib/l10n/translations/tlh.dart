@@ -93,6 +93,24 @@ const _dutchSourceTlh = {
   'Op het web nog niet beschikbaar': 'web-Daq DungluqlaHbe\'taH',
   'Ophalen mislukt': 'Suq luj',
   'Nog niet opgehaald': 'SuqluHbe\'taH',
+  'AI-assistentie': 'AI QaH',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'desktop mIlloghDaq neH AI QaH lo\'laH.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'AI QaH DawIvlaH \'ach pab bejlu\'be\'. DaHoymoHpa\' \'ej backend DawIvpa\', pagh ngeHlu\'. desktop mIlloghDaq neH vum.',
+  'AI-assistentie inschakelen': 'AI QaH yIchu\'',
+  'AI-backend': 'AI backend',
+  'Lokaal (op dit apparaat)': 'naDev (jan vam)',
+  'Zelf gehost (eigen server)': 'SoH DaQeHmoH (server vam)',
+  'Cloud (externe dienst)': 'cloud (Hur Qu\')',
+  'Modelnaam': 'model pong',
+  'API-sleutel (optioneel)': 'API ngaQHa\'moHwI\' (DaH DaneHchugh)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      '"chIrgh \'ej peghmey" Daq peghmey chaw\'lIj poQ cloud Qu\'; web mIlloghDaq vumbe\'.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Hur Qu\' vamvaD De\' ngeHlu\' \'e\' vISov',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'AI QaH (pab chu\'be\'): SoH DaQeHmoH pagh cloud backend DawIvchugh, ghItlh pagh mIllogh Damugh \'e\' DaqvaD ngeHlu\'. jan vamDaq AI model naDev pagh ngeHlu\'.',
   'Zoek een slidetype': 'cha\'nob Segh yInej',
   'Alfabetisch sorteren': 'pIqaD yInuD',
   'Algemeen': 'motlh',

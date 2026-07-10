@@ -95,6 +95,24 @@ const _dutchSourceFy = {
   'Op het web nog niet beschikbaar': 'Op it web noch net beskikber',
   'Ophalen mislukt': 'Ophaljen mislearre',
   'Nog niet opgehaald': 'Noch net ophelle',
+  'AI-assistentie': 'AI-stipe',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'AI-stipe is allinnich beskikber yn de desktopferzje.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'AI-stipe is opsjoneel en stiet standert út. Der wurdt neat ferstjoerd oant do it ynskeakelest en sels in backend kiest. Dizze funksje wurket allinnich yn de desktopferzje.',
+  'AI-assistentie inschakelen': 'AI-stipe ynskeakelje',
+  'AI-backend': 'AI-backend',
+  'Lokaal (op dit apparaat)': 'Lokaal (op dit apparaat)',
+  'Zelf gehost (eigen server)': 'Sels host (eigen server)',
+  'Cloud (externe dienst)': 'Cloud (eksterne tsjinst)',
+  'Modelnaam': 'Modelnamme',
+  'API-sleutel (optioneel)': 'API-kaai (opsjoneel)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'In clouddienst freget earst dyn privacytastimming by "Lisinsje en Privacy" en wurket net yn de webferzje.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Ik begryp dat gegevens nei dizze eksterne tsjinst ferstjoerd wurde',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'AI-stipe (stiet standert út): kiest do in sels-hoste of cloud-backend, dan wurde de teksten of ôfbyldings dy\'t do ferwurkje litst nei dat adres stjoerd. In lokaal AI-model op dit apparaat ferstjoert neat.',
   'Zoek een slidetype': 'Sykje in slidetype',
   'Alfabetisch sorteren': 'Alfabetysk sortearje',
   'Algemeen': 'Algemien',

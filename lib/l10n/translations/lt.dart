@@ -95,6 +95,24 @@ const _dutchSourceLt = {
   'Op het web nog niet beschikbaar': 'Žiniatinklyje dar nepasiekiama',
   'Ophalen mislukt': 'Nepavyko atsisiųsti',
   'Nog niet opgehaald': 'Dar neatsisiųsta',
+  'AI-assistentie': 'DI pagalba',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'DI pagalba pasiekiama tik darbalaukio versijoje.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'DI pagalba yra neprivaloma ir pagal numatytuosius nustatymus išjungta. Niekas nesiunčiama, kol jos neįjungsite ir patys nepasirinksite vidinės sistemos. Ši funkcija veikia tik darbalaukio versijoje.',
+  'AI-assistentie inschakelen': 'Įjungti DI pagalbą',
+  'AI-backend': 'DI vidinė sistema',
+  'Lokaal (op dit apparaat)': 'Vietinė (šiame įrenginyje)',
+  'Zelf gehost (eigen server)': 'Savarankiškai talpinama (savas serveris)',
+  'Cloud (externe dienst)': 'Debesis (išorinė paslauga)',
+  'Modelnaam': 'Modelio pavadinimas',
+  'API-sleutel (optioneel)': 'API raktas (neprivaloma)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Debesijos paslaugai pirmiausia reikia jūsų privatumo sutikimo skiltyje "Licencija ir privatumas" ir ji neveikia žiniatinklio versijoje.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Suprantu, kad duomenys siunčiami į šią išorinę paslaugą',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'DI pagalba (pagal numatytuosius nustatymus išjungta): jei pasirinksite savarankiškai talpinamą ar debesijos vidinę sistemą, tekstai ar vaizdai, kuriuos apdorojate, siunčiami tuo adresu. Vietinis DI modelis šiame įrenginyje nieko nesiunčia.',
   'Zoek een slidetype': 'Ieškoti skaidrės tipo',
   'Alfabetisch sorteren': 'Rūšiuoti abėcėlės tvarka',
   'Algemeen': 'Bendra',

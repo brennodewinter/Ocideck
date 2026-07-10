@@ -7,6 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
 import '../../platform/platform_features.dart';
+import '../../services/ai_client_service.dart';
+import '../../services/ai_security_gate.dart';
 import '../../services/recovery_service.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/webdav_service.dart';
@@ -30,6 +32,7 @@ part 'parts/settings_dialog_colors.dart';
 part 'parts/settings_dialog_webdav.dart';
 part 'parts/settings_dialog_privacy.dart';
 part 'parts/settings_dialog_security.dart';
+part 'parts/settings_dialog_ai.dart';
 part 'parts/settings_dialog_docs.dart';
 part 'parts/settings_dialog_modules.dart';
 part 'parts/settings_dialog_about.dart';
@@ -124,6 +127,26 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   String? _webdavTestMessage;
   bool _webdavTesting = false;
 
+  // AI-assistentie (optioneel, standaard uit).
+  late bool _aiEnabled;
+  late AiBackendMode _aiMode;
+  late bool _aiTrusted;
+  late bool _aiCloudConfirmed;
+  late TextEditingController _aiBaseUrl;
+  late TextEditingController _aiModel;
+  late TextEditingController _aiApiKey;
+
+  /// De API-sleutel zoals uit de keychain geladen, om bij opslaan te bepalen of
+  /// hij écht gewijzigd is (zelfde patroon als het WebDAV-wachtwoord).
+  String _loadedAiApiKey = '';
+
+  /// Basis-URL bij het openen, om te detecteren dat de keychain-sleutel wijzigt
+  /// en de API-sleutel onder de nieuwe sleutel moet.
+  String _initialAiBaseUrl = '';
+  bool? _aiTestOk;
+  String? _aiTestMessage;
+  bool _aiTesting = false;
+
   /// Whether the user changed the active profile in this session. Used to
   /// decide whether to apply the profile to the currently open presentation.
   bool _profileTouched = false;
@@ -141,6 +164,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     Icons.speed_outlined,
     Icons.privacy_tip_outlined,
     Icons.shield_outlined,
+    Icons.smart_toy_outlined,
     Icons.cloud_outlined,
     Icons.menu_book_outlined,
     Icons.extension_outlined,
@@ -150,7 +174,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// Index of the "Over OciDeck" pane. It is the last entry in the tab lists
   /// but is opened from the branded footer at the bottom of the sidebar rather
   /// than from a regular nav item, so the nav list stops one short of it.
-  static const _aboutTabIndex = 9;
+  static const _aboutTabIndex = 10;
 
   static const _colorPresets = [
     '#FFFFFF',
@@ -218,6 +242,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             }
           });
     }
+    _initAiFields(settings.aiSettings);
     _highlightedThemeField = widget.highlightThemeField;
     _selectedTab = widget.initialTab.clamp(0, _aboutTabIndex);
     if (widget.highlightThemeField != null) {
@@ -239,6 +264,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _webdavUser.dispose();
     _webdavRoot.dispose();
     _webdavPassword.dispose();
+    _aiBaseUrl.dispose();
+    _aiModel.dispose();
+    _aiApiKey.dispose();
     super.dispose();
   }
 
@@ -380,6 +408,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       notifier.setWebdavServer(null);
     }
 
+    _saveAiSettings(notifier);
+
     Navigator.pop(context);
   }
 
@@ -402,6 +432,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       l10n.d('Cockpit'),
       l10n.d('Licentie en Privacy'),
       l10n.d('Beveiliging'),
+      l10n.d('AI-assistentie'),
       l10n.d('Nextcloud'),
       l10n.d('Documentatie'),
       l10n.d('Uitbreidingen'),
@@ -415,6 +446,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       _tabBody(_cockpitTab()),
       _tabBody(_privacyTab()),
       _tabBody(_securityTab()),
+      _tabBody(_aiTab()),
       _tabBody(_webdavTab()),
       _tabBody(_documentationTab()),
       _tabBody(_modulesTab()),

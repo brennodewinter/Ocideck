@@ -95,6 +95,24 @@ const _dutchSourceSv = {
   'Op het web nog niet beschikbaar': 'Inte tillgängligt på webben ännu',
   'Ophalen mislukt': 'Hämtningen misslyckades',
   'Nog niet opgehaald': 'Inte hämtat ännu',
+  'AI-assistentie': 'AI-assistans',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'AI-assistans är endast tillgängligt i skrivbordsversionen.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'AI-assistans är valfritt och avstängt som standard. Ingenting skickas förrän du aktiverar det och själv väljer en backend. Den här funktionen fungerar endast i skrivbordsversionen.',
+  'AI-assistentie inschakelen': 'Aktivera AI-assistans',
+  'AI-backend': 'AI-backend',
+  'Lokaal (op dit apparaat)': 'Lokalt (på den här enheten)',
+  'Zelf gehost (eigen server)': 'Självhostad (din egen server)',
+  'Cloud (externe dienst)': 'Moln (extern tjänst)',
+  'Modelnaam': 'Modellnamn',
+  'API-sleutel (optioneel)': 'API-nyckel (valfritt)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'En molntjänst kräver först ditt integritetssamtycke under "Licens och integritet" och fungerar inte i webbversionen.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Jag förstår att data skickas till den här externa tjänsten',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'AI-assistans (avstängt som standard): om du väljer en självhostad eller molnbaserad backend skickas de texter eller bilder du låter bearbeta till den adressen. En lokal AI-modell på den här enheten skickar ingenting.',
   'Zoek een slidetype': 'Sök efter en bildtyp',
   'Alfabetisch sorteren': 'Sortera alfabetiskt',
   'Algemeen': 'Allmänt',

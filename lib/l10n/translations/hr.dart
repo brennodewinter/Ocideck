@@ -95,6 +95,24 @@ const _dutchSourceHr = {
   'Op het web nog niet beschikbaar': 'Još nije dostupno na webu',
   'Ophalen mislukt': 'Preuzimanje nije uspjelo',
   'Nog niet opgehaald': 'Još nije preuzeto',
+  'AI-assistentie': 'AI pomoć',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'AI pomoć dostupna je samo u verziji za računalo.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'AI pomoć nije obavezna i prema zadanome je isključena. Ništa se ne šalje dok je ne uključite i sami ne odaberete pozadinski sustav. Ova značajka radi samo u verziji za računalo.',
+  'AI-assistentie inschakelen': 'Uključi AI pomoć',
+  'AI-backend': 'AI pozadinski sustav',
+  'Lokaal (op dit apparaat)': 'Lokalno (na ovom uređaju)',
+  'Zelf gehost (eigen server)': 'Samostalno hostano (vlastiti poslužitelj)',
+  'Cloud (externe dienst)': 'Oblak (vanjska usluga)',
+  'Modelnaam': 'Naziv modela',
+  'API-sleutel (optioneel)': 'API ključ (neobavezno)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Usluga u oblaku najprije zahtijeva vaš pristanak na privatnost pod "Licenca i privatnost" i ne radi u web verziji.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Razumijem da se podaci šalju ovoj vanjskoj usluzi',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'AI pomoć (prema zadanome isključena): ako odaberete samostalno hostani ili oblak pozadinski sustav, tekstovi ili slike koje obrađujete šalju se na tu adresu. Lokalni AI model na ovom uređaju ne šalje ništa.',
   'Zoek een slidetype': 'Pretraži vrstu slajda',
   'Alfabetisch sorteren': 'Sortiraj abecedno',
   'Algemeen': 'Općenito',

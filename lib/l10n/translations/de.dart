@@ -95,6 +95,24 @@ const _dutchSourceDe = {
   'Op het web nog niet beschikbaar': 'Im Web noch nicht verfügbar',
   'Ophalen mislukt': 'Abruf fehlgeschlagen',
   'Nog niet opgehaald': 'Noch nicht geladen',
+  'AI-assistentie': 'KI-Unterstützung',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'KI-Unterstützung ist nur in der Desktop-Version verfügbar.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'KI-Unterstützung ist optional und standardmäßig deaktiviert. Es wird nichts gesendet, bis du sie aktivierst und selbst ein Backend auswählst. Diese Funktion ist nur in der Desktop-Version verfügbar.',
+  'AI-assistentie inschakelen': 'KI-Unterstützung aktivieren',
+  'AI-backend': 'KI-Backend',
+  'Lokaal (op dit apparaat)': 'Lokal (auf diesem Gerät)',
+  'Zelf gehost (eigen server)': 'Selbst gehostet (eigener Server)',
+  'Cloud (externe dienst)': 'Cloud (externer Dienst)',
+  'Modelnaam': 'Modellname',
+  'API-sleutel (optioneel)': 'API-Schlüssel (optional)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Ein Cloud-Dienst erfordert zuerst deine Datenschutz-Einwilligung unter "Lizenz und Datenschutz" und funktioniert nicht in der Web-Version.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Mir ist bewusst, dass Daten an diesen externen Dienst gesendet werden',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'KI-Unterstützung (standardmäßig aus): Wählst du ein selbst gehostetes oder Cloud-Backend, werden die von dir verarbeiteten Texte oder Bilder an diese Adresse gesendet. Ein lokales KI-Modell auf diesem Gerät sendet nichts.',
   'Zoek een slidetype': 'Folientyp suchen',
   'Alfabetisch sorteren': 'Alphabetisch sortieren',
   'Algemeen': 'Allgemein',

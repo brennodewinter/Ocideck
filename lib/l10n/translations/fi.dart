@@ -95,6 +95,24 @@ const _dutchSourceFi = {
   'Op het web nog niet beschikbaar': 'Ei vielä saatavilla verkossa',
   'Ophalen mislukt': 'Haku epäonnistui',
   'Nog niet opgehaald': 'Ei vielä haettu',
+  'AI-assistentie': 'Tekoälyavustus',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'Tekoälyavustus on saatavilla vain työpöytäversiossa.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'Tekoälyavustus on valinnainen ja oletuksena pois päältä. Mitään ei lähetetä, ennen kuin otat sen käyttöön ja valitset itse taustajärjestelmän. Tämä ominaisuus toimii vain työpöytäversiossa.',
+  'AI-assistentie inschakelen': 'Ota tekoälyavustus käyttöön',
+  'AI-backend': 'Tekoälytaustajärjestelmä',
+  'Lokaal (op dit apparaat)': 'Paikallinen (tällä laitteella)',
+  'Zelf gehost (eigen server)': 'Itse isännöity (oma palvelin)',
+  'Cloud (externe dienst)': 'Pilvi (ulkoinen palvelu)',
+  'Modelnaam': 'Mallin nimi',
+  'API-sleutel (optioneel)': 'API-avain (valinnainen)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Pilvipalvelu edellyttää ensin yksityisyyssuostumustasi kohdassa "Lisenssi ja yksityisyys" eikä toimi verkkoversiossa.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Ymmärrän, että tietoja lähetetään tähän ulkoiseen palveluun',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Tekoälyavustus (oletuksena pois päältä): jos valitset itse isännöidyn tai pilvipohjaisen taustajärjestelmän, käsittelemäsi tekstit tai kuvat lähetetään kyseiseen osoitteeseen. Paikallinen tekoälymalli tällä laitteella ei lähetä mitään.',
   'Zoek een slidetype': 'Etsi diatyyppiä',
   'Alfabetisch sorteren': 'Lajittele aakkosjärjestykseen',
   'Algemeen': 'Yleiset',

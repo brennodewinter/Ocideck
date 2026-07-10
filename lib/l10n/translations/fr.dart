@@ -96,6 +96,24 @@ const _dutchSourceFr = {
   'Op het web nog niet beschikbaar': 'Pas encore disponible sur le web',
   'Ophalen mislukt': 'Échec du téléchargement',
   'Nog niet opgehaald': 'Pas encore téléchargé',
+  'AI-assistentie': 'Assistance IA',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'L\'assistance IA n\'est disponible que dans la version de bureau.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'L\'assistance IA est facultative et désactivée par défaut. Rien n\'est envoyé tant que vous ne l\'activez pas et ne choisissez pas vous-même un backend. Cette fonction ne fonctionne que dans la version de bureau.',
+  'AI-assistentie inschakelen': 'Activer l\'assistance IA',
+  'AI-backend': 'Backend IA',
+  'Lokaal (op dit apparaat)': 'Local (sur cet appareil)',
+  'Zelf gehost (eigen server)': 'Auto-hébergé (votre propre serveur)',
+  'Cloud (externe dienst)': 'Cloud (service externe)',
+  'Modelnaam': 'Nom du modèle',
+  'API-sleutel (optioneel)': 'Clé API (facultatif)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Un service cloud requiert d\'abord votre consentement de confidentialité sous "Licence et confidentialité" et ne fonctionne pas dans la version web.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Je comprends que des données sont envoyées à ce service externe',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Assistance IA (désactivée par défaut) : si vous choisissez un backend auto-hébergé ou cloud, les textes ou images que vous faites traiter sont envoyés à cette adresse. Un modèle IA local sur cet appareil n\'envoie rien.',
   'Zoek een slidetype': 'Rechercher un type de diapositive',
   'Alfabetisch sorteren': 'Trier par ordre alphabétique',
   'Algemeen': 'Général',

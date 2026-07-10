@@ -95,6 +95,24 @@ const _dutchSourceIt = {
   'Op het web nog niet beschikbaar': 'Non ancora disponibile sul web',
   'Ophalen mislukt': 'Download non riuscito',
   'Nog niet opgehaald': 'Non ancora scaricato',
+  'AI-assistentie': 'Assistenza IA',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'L\'assistenza IA è disponibile solo nella versione desktop.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'L\'assistenza IA è facoltativa e disattivata per impostazione predefinita. Non viene inviato nulla finché non la attivi e scegli tu stesso un backend. Questa funzione è disponibile solo nella versione desktop.',
+  'AI-assistentie inschakelen': 'Attiva l\'assistenza IA',
+  'AI-backend': 'Backend IA',
+  'Lokaal (op dit apparaat)': 'Locale (su questo dispositivo)',
+  'Zelf gehost (eigen server)': 'Self-hosted (server personale)',
+  'Cloud (externe dienst)': 'Cloud (servizio esterno)',
+  'Modelnaam': 'Nome del modello',
+  'API-sleutel (optioneel)': 'Chiave API (facoltativa)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Un servizio cloud richiede prima il tuo consenso alla privacy in "Licenza e privacy" e non funziona nella versione web.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Capisco che i dati vengono inviati a questo servizio esterno',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Assistenza IA (disattivata per impostazione predefinita): se scegli un backend self-hosted o cloud, i testi o le immagini che fai elaborare vengono inviati a quell\'indirizzo. Un modello IA locale su questo dispositivo non invia nulla.',
   'Zoek een slidetype': 'Cerca un tipo di slide',
   'Alfabetisch sorteren': 'Ordina alfabeticamente',
   'Algemeen': 'Generale',

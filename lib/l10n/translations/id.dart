@@ -95,6 +95,24 @@ const _dutchSourceId = {
   'Op het web nog niet beschikbaar': 'Belum tersedia di web',
   'Ophalen mislukt': 'Pengambilan gagal',
   'Nog niet opgehaald': 'Belum diambil',
+  'AI-assistentie': 'Bantuan AI',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'Bantuan AI hanya tersedia di versi desktop.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'Bantuan AI bersifat opsional dan mati secara bawaan. Tidak ada yang dikirim sampai Anda mengaktifkannya dan memilih backend sendiri. Fitur ini hanya berfungsi di versi desktop.',
+  'AI-assistentie inschakelen': 'Aktifkan bantuan AI',
+  'AI-backend': 'Backend AI',
+  'Lokaal (op dit apparaat)': 'Lokal (di perangkat ini)',
+  'Zelf gehost (eigen server)': 'Hosting sendiri (server Anda sendiri)',
+  'Cloud (externe dienst)': 'Cloud (layanan eksternal)',
+  'Modelnaam': 'Nama model',
+  'API-sleutel (optioneel)': 'Kunci API (opsional)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Layanan cloud terlebih dahulu memerlukan persetujuan privasi Anda di "Lisensi dan Privasi" dan tidak berfungsi di versi web.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Saya memahami bahwa data dikirim ke layanan eksternal ini',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Bantuan AI (mati secara bawaan): jika Anda memilih backend hosting sendiri atau cloud, teks atau gambar yang Anda proses dikirim ke alamat tersebut. Model AI lokal di perangkat ini tidak mengirim apa pun.',
   'Zoek een slidetype': 'Cari tipe slide',
   'Alfabetisch sorteren': 'Urutkan menurut abjad',
   'Algemeen': 'Umum',

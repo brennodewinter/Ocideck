@@ -97,6 +97,24 @@ const _dutchSourceLa = {
   'Op het web nog niet beschikbaar': 'In rete nondum praesto',
   'Ophalen mislukt': 'Accersitio defecit',
   'Nog niet opgehaald': 'Nondum accersitum',
+  'AI-assistentie': 'Auxilium IA',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'Auxilium IA solum in versione desktop praesto est.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'Auxilium IA optionale est et per praedefinitum exstinctum. Nihil mittitur donec id actives et ipse backend eligas. Haec functio solum in versione desktop operatur.',
+  'AI-assistentie inschakelen': 'Auxilium IA activare',
+  'AI-backend': 'Backend IA',
+  'Lokaal (op dit apparaat)': 'Locale (in hoc instrumento)',
+  'Zelf gehost (eigen server)': 'Per te hospitatum (proprius servius)',
+  'Cloud (externe dienst)': 'Nubes (servitium externum)',
+  'Modelnaam': 'Nomen exemplaris',
+  'API-sleutel (optioneel)': 'Clavis API (optionalis)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Servitium nubis primum consensum tuum de privata re requirit apud "Licentia et Privata" nec in versione interretiali operatur.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Intellego data ad hoc servitium externum mitti',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Auxilium IA (per praedefinitum exstinctum): si backend per te hospitatum vel nubis eligis, textus vel imagines quas tractari sinis ad illam inscriptionem mittuntur. Exemplar IA locale in hoc instrumento nihil mittit.',
   'Zoek een slidetype': 'Quaere genus paginae',
   'Alfabetisch sorteren': 'Ordina alphabetice',
   'Algemeen': 'Generalia',

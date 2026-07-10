@@ -95,6 +95,24 @@ const _dutchSourceLv = {
   'Op het web nog niet beschikbaar': 'Tīmeklī vēl nav pieejams',
   'Ophalen mislukt': 'Lejupielāde neizdevās',
   'Nog niet opgehaald': 'Vēl nav lejupielādēts',
+  'AI-assistentie': 'MI palīdzība',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'MI palīdzība ir pieejama tikai darbvirsmas versijā.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'MI palīdzība ir neobligāta un pēc noklusējuma izslēgta. Nekas netiek nosūtīts, kamēr to neieslēdzat un pats neizvēlaties aizmugursistēmu. Šī funkcija darbojas tikai darbvirsmas versijā.',
+  'AI-assistentie inschakelen': 'Ieslēgt MI palīdzību',
+  'AI-backend': 'MI aizmugursistēma',
+  'Lokaal (op dit apparaat)': 'Lokāli (šajā ierīcē)',
+  'Zelf gehost (eigen server)': 'Pašmitināts (paša serveris)',
+  'Cloud (externe dienst)': 'Mākonis (ārējs pakalpojums)',
+  'Modelnaam': 'Modeļa nosaukums',
+  'API-sleutel (optioneel)': 'API atslēga (neobligāti)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Mākoņpakalpojumam vispirms nepieciešama jūsu privātuma piekrišana sadaļā "Licence un privātums", un tas nedarbojas tīmekļa versijā.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Es saprotu, ka dati tiek nosūtīti šim ārējam pakalpojumam',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'MI palīdzība (pēc noklusējuma izslēgta): ja izvēlaties pašmitinātu vai mākoņa aizmugursistēmu, teksti vai attēli, ko apstrādājat, tiek nosūtīti uz šo adresi. Lokāls MI modelis šajā ierīcē neko nenosūta.',
   'Zoek een slidetype': 'Meklēt slaida tipu',
   'Alfabetisch sorteren': 'Kārtot alfabētiski',
   'Algemeen': 'Vispārīgi',

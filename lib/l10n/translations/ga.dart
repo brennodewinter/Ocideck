@@ -97,6 +97,24 @@ const _dutchSourceGa = {
   'Op het web nog niet beschikbaar': 'Níl sé ar fáil ar an ngréasán fós',
   'Ophalen mislukt': 'Theip ar an íoslódáil',
   'Nog niet opgehaald': 'Gan íoslódáil fós',
+  'AI-assistentie': 'Cúnamh II',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'Níl cúnamh II ar fáil ach sa leagan deisce.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'Tá cúnamh II roghnach agus múchta de réir réamhshocraithe. Ní sheoltar aon rud go dtí go gcumasaíonn tú é agus go roghnaíonn tú inneall féin. Ní oibríonn an ghné seo ach sa leagan deisce.',
+  'AI-assistentie inschakelen': 'Cumasaigh cúnamh II',
+  'AI-backend': 'Inneall II',
+  'Lokaal (op dit apparaat)': 'Áitiúil (ar an ngléas seo)',
+  'Zelf gehost (eigen server)': 'Féinóstáilte (do fhreastalaí féin)',
+  'Cloud (externe dienst)': 'Néal (seirbhís sheachtrach)',
+  'Modelnaam': 'Ainm an mhúnla',
+  'API-sleutel (optioneel)': 'Eochair API (roghnach)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Éilíonn seirbhís néil do thoiliú príobháideachais ar dtús faoi "Ceadúnas agus Príobháideachas" agus ní oibríonn sí sa leagan gréasáin.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Tuigim go seoltar sonraí chuig an tseirbhís sheachtrach seo',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Cúnamh II (múchta de réir réamhshocraithe): má roghnaíonn tú inneall féinóstáilte nó néil, seoltar na téacsanna nó na híomhánna a phróiseálann tú chuig an seoladh sin. Ní sheolann múnla II áitiúil ar an ngléas seo aon rud.',
   'Zoek een slidetype': 'Cuardaigh cineál sleamhnáin',
   'Alfabetisch sorteren': 'Sórtáil in ord aibítre',
   'Algemeen': 'Ginearálta',

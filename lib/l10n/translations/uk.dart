@@ -96,6 +96,24 @@ const _dutchSourceUk = {
   'Op het web nog niet beschikbaar': 'У вебі поки що недоступно',
   'Ophalen mislukt': 'Не вдалося завантажити',
   'Nog niet opgehaald': 'Ще не завантажено',
+  'AI-assistentie': 'Підтримка ШІ',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'Підтримка ШІ доступна лише в настільній версії.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'Підтримка ШІ є необов\'язковою і вимкнена за замовчуванням. Нічого не надсилається, доки ви не увімкнете її та не оберете бекенд самостійно. Ця функція працює лише в настільній версії.',
+  'AI-assistentie inschakelen': 'Увімкнути підтримку ШІ',
+  'AI-backend': 'Бекенд ШІ',
+  'Lokaal (op dit apparaat)': 'Локально (на цьому пристрої)',
+  'Zelf gehost (eigen server)': 'Власний хостинг (власний сервер)',
+  'Cloud (externe dienst)': 'Хмара (зовнішній сервіс)',
+  'Modelnaam': 'Назва моделі',
+  'API-sleutel (optioneel)': 'Ключ API (необов\'язково)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Хмарний сервіс спершу потребує вашої згоди на конфіденційність у розділі "Ліцензія та конфіденційність" і не працює у веб-версії.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Я розумію, що дані надсилаються до цього зовнішнього сервісу',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Підтримка ШІ (вимкнена за замовчуванням): якщо ви оберете власний або хмарний бекенд, тексти чи зображення, які ви обробляєте, надсилаються на цю адресу. Локальна модель ШІ на цьому пристрої нічого не надсилає.',
   'Zoek een slidetype': 'Пошук типу слайда',
   'Alfabetisch sorteren': 'Сортувати за абеткою',
   'Algemeen': 'Загальні',
