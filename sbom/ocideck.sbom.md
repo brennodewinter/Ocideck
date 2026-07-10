@@ -243,4 +243,4 @@ This is **ocideck 1.0.0+1** (licence EUPL-1.2) and every third-party component i
 | Component | Version | Licence | Source |
 | --- | --- | --- | --- |
 | dart | ^3.12.0 | BSD-3-Clause | https://github.com/dart-lang/sdk |
-| flutter | 3.44.2 | BSD-3-Clause | https://github.com/flutter/flutter |
+| flutter | 3.44.6 | BSD-3-Clause | https://github.com/flutter/flutter |

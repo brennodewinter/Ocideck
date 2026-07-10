@@ -4,7 +4,7 @@ How to build OciDeck from source and produce distributable apps.
 
 ## Prerequisites
 
-- **Flutter 3.44.2** (stable) / **Dart 3.12.2** — the exact version CI pins
+- **Flutter 3.44.6** (stable) / **Dart 3.12.2** — the exact version CI pins
   (see `.tool-versions` and both `.github/workflows/*.yml`). Building tolerates
   3.44+, but **`make format-check` is version-sensitive**: a different
   `dart format` reflows whitespace and fails the gate. Use the Flutter-bundled
@@ -179,6 +179,6 @@ platform-independent).
 `.github/workflows/release.yml` builds the distributable artifacts. On a version
 tag (`v*`) — or a manual run — it builds **web, macOS, Windows and Linux** on
 their matching runners and uploads each as an artifact, so one tag produces all
-four. Both workflows pin **Flutter 3.44.2** (stable).
+four. Both workflows pin **Flutter 3.44.6** (stable).
 
 For the full check reference, see [`CHECKS.md`](CHECKS.md).

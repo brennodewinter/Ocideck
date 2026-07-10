@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:4f0d7799-44c4-5608-88a8-5c70f8d096ed",
+  "serialNumber": "urn:uuid:b714365c-523f-52e6-8c88-b8aa6759df8b",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-05T20:48:20.323153Z",
+    "timestamp": "2026-07-10T07:56:23.309758Z",
     "tools": {
       "components": [
         {
@@ -6955,10 +6955,10 @@
       ]
     },
     {
-      "bom-ref": "sdk:flutter@3.44.2",
+      "bom-ref": "sdk:flutter@3.44.6",
       "type": "framework",
       "name": "flutter",
-      "version": "3.44.2",
+      "version": "3.44.6",
       "licenses": [
         {
           "license": {
