@@ -83,6 +83,9 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Pentestrapportage (ontwerp)': 'Ielaušanās testa atskaite (dizains)',
+  'AI-assistentie (ontwerp)': 'MI palīdzība (dizains)',
+  'Agentisch bouwplan (ontwerp)': 'Aģentisks veidošanas plāns (dizains)',
   'Bijsnijden': 'Apgriezt',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Velciet attēlu, lai izvēlētos, kura daļa paliek redzama.',

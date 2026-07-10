@@ -83,6 +83,9 @@ const _stringsDe = {
 };
 
 const _dutchSourceDe = {
+  'Pentestrapportage (ontwerp)': 'Pentest-Bericht (Design)',
+  'AI-assistentie (ontwerp)': 'KI-Assistenz (Design)',
+  'Agentisch bouwplan (ontwerp)': 'Agentischer Bauplan (Design)',
   'Bijsnijden': 'Zuschneiden',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Ziehe das Bild, um zu wählen, welcher Teil sichtbar bleibt.',

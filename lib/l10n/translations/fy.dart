@@ -83,6 +83,9 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Pentestrapportage (ontwerp)': 'Pentestrapportaazje (ûntwerp)',
+  'AI-assistentie (ontwerp)': 'AI-assistinsje (ûntwerp)',
+  'Agentisch bouwplan (ontwerp)': 'Agentysk bouplan (ûntwerp)',
   'Bijsnijden': 'Bysnije',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Sleep de ôfbylding om te kiezen hokker diel sichtber bliuwt.',

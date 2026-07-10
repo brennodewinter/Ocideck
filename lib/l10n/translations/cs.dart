@@ -84,6 +84,9 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Pentestrapportage (ontwerp)': 'Zpráva z penetračního testu (návrh)',
+  'AI-assistentie (ontwerp)': 'AI asistence (návrh)',
+  'Agentisch bouwplan (ontwerp)': 'Agentní plán sestavení (návrh)',
   'Bijsnijden': 'Oříznout',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Přetažením obrázku vyberte, která část zůstane viditelná.',

@@ -83,6 +83,9 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Pentestrapportage (ontwerp)': 'Poročilo o pentestu (zasnova)',
+  'AI-assistentie (ontwerp)': 'Pomoč AI (zasnova)',
+  'Agentisch bouwplan (ontwerp)': 'Agentni načrt gradnje (zasnova)',
   'Bijsnijden': 'Obreži',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Povlecite sliko, da izberete, kateri del ostane viden.',

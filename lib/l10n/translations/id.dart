@@ -83,6 +83,9 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Pentestrapportage (ontwerp)': 'Laporan pentest (desain)',
+  'AI-assistentie (ontwerp)': 'Bantuan AI (desain)',
+  'Agentisch bouwplan (ontwerp)': 'Rencana build agentik (desain)',
   'Bijsnijden': 'Pangkas',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Seret gambar untuk memilih bagian mana yang tetap terlihat.',

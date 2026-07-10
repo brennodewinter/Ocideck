@@ -84,6 +84,9 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Pentestrapportage (ontwerp)': 'Rapport tal-pentest (disinn)',
+  'AI-assistentie (ontwerp)': 'Assistenza AI (disinn)',
+  'Agentisch bouwplan (ontwerp)': 'Pjan ta\' bini aġentiku (disinn)',
   'Bijsnijden': 'Aqta\'',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Iġbed l-immaġni biex tagħżel liema parti tibqa\' viżibbli.',

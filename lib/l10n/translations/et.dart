@@ -82,6 +82,9 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Pentestrapportage (ontwerp)': 'Pentesti aruanne (kavand)',
+  'AI-assistentie (ontwerp)': 'AI-abi (kavand)',
+  'Agentisch bouwplan (ontwerp)': 'Agentne ehitusplaan (kavand)',
   'Bijsnijden': 'Kärbi',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Lohista pilti, et valida, milline osa jääb nähtavaks.',
