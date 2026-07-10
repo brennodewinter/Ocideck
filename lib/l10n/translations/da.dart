@@ -83,6 +83,24 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'AI-assistentie': 'AI-assistance',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'AI-assistance er kun tilgængelig i desktopversionen.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'AI-assistance er valgfri og slået fra som standard. Der sendes intet, før du aktiverer den og selv vælger en backend. Denne funktion virker kun i desktopversionen.',
+  'AI-assistentie inschakelen': 'Aktivér AI-assistance',
+  'AI-backend': 'AI-backend',
+  'Lokaal (op dit apparaat)': 'Lokal (på denne enhed)',
+  'Zelf gehost (eigen server)': 'Selvhostet (din egen server)',
+  'Cloud (externe dienst)': 'Sky (ekstern tjeneste)',
+  'Modelnaam': 'Modelnavn',
+  'API-sleutel (optioneel)': 'API-nøgle (valgfri)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'En skytjeneste kræver først dit privatlivssamtykke under "Licens og privatliv" og virker ikke i webversionen.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Jeg forstår, at data sendes til denne eksterne tjeneste',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'AI-assistance (slået fra som standard): hvis du vælger en selvhostet eller sky-backend, sendes de tekster eller billeder, du får behandlet, til den adresse. En lokal AI-model på denne enhed sender intet.',
   'Zoek een slidetype': 'Søg efter en slidetype',
   'Alfabetisch sorteren': 'Sortér alfabetisk',
   'Algemeen': 'Generelt',

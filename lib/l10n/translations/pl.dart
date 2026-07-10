@@ -85,6 +85,24 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'AI-assistentie': 'Wsparcie AI',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'Wsparcie AI jest dostępne tylko w wersji na komputer.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'Wsparcie AI jest opcjonalne i domyślnie wyłączone. Nic nie jest wysyłane, dopóki go nie włączysz i samodzielnie nie wybierzesz backendu. Ta funkcja działa tylko w wersji na komputer.',
+  'AI-assistentie inschakelen': 'Włącz wsparcie AI',
+  'AI-backend': 'Backend AI',
+  'Lokaal (op dit apparaat)': 'Lokalnie (na tym urządzeniu)',
+  'Zelf gehost (eigen server)': 'Własny hosting (własny serwer)',
+  'Cloud (externe dienst)': 'Chmura (usługa zewnętrzna)',
+  'Modelnaam': 'Nazwa modelu',
+  'API-sleutel (optioneel)': 'Klucz API (opcjonalnie)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Usługa w chmurze wymaga najpierw Twojej zgody na prywatność w "Licencja i prywatność" i nie działa w wersji internetowej.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Rozumiem, że dane są wysyłane do tej usługi zewnętrznej',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Wsparcie AI (domyślnie wyłączone): jeśli wybierzesz backend własny lub w chmurze, teksty lub obrazy, które przetwarzasz, są wysyłane pod ten adres. Lokalny model AI na tym urządzeniu nic nie wysyła.',
   'Zoek een slidetype': 'Wyszukaj typ slajdu',
   'Alfabetisch sorteren': 'Sortuj alfabetycznie',
   'Algemeen': 'Ogólne',

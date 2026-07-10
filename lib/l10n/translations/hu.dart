@@ -83,6 +83,24 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'AI-assistentie': 'MI-segítség',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'Az MI-segítség csak az asztali verzióban érhető el.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'Az MI-segítség opcionális, és alapértelmezés szerint ki van kapcsolva. Semmi sem kerül elküldésre, amíg be nem kapcsolod, és magad ki nem választasz egy háttérrendszert. Ez a funkció csak az asztali verzióban működik.',
+  'AI-assistentie inschakelen': 'MI-segítség bekapcsolása',
+  'AI-backend': 'MI-háttérrendszer',
+  'Lokaal (op dit apparaat)': 'Helyi (ezen az eszközön)',
+  'Zelf gehost (eigen server)': 'Saját üzemeltetésű (saját szerver)',
+  'Cloud (externe dienst)': 'Felhő (külső szolgáltatás)',
+  'Modelnaam': 'Modell neve',
+  'API-sleutel (optioneel)': 'API-kulcs (opcionális)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'A felhőszolgáltatáshoz először az adatvédelmi hozzájárulásod szükséges a "Licenc és adatvédelem" részben, és a webes verzióban nem működik.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Megértem, hogy adatok kerülnek elküldésre ehhez a külső szolgáltatáshoz',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'MI-segítség (alapértelmezés szerint kikapcsolva): ha saját üzemeltetésű vagy felhőalapú háttérrendszert választasz, az általad feldolgoztatott szövegek vagy képek erre a címre kerülnek elküldésre. Egy helyi MI-modell ezen az eszközön semmit sem küld.',
   'Zoek een slidetype': 'Diatípus keresése',
   'Alfabetisch sorteren': 'Betűrendes rendezés',
   'Algemeen': 'Általános',

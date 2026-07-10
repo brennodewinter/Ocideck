@@ -83,6 +83,24 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'AI-assistentie': 'KI-Unterstützig',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'KI-Unterstützig isch nume i de Desktop-Version verfüegbar.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'KI-Unterstützig isch fakultativ und standardmässig us. Es wird nüt gschickt, bis du sie iischaltisch und sälber es Backend uswählsch. Die Funktion lauft nume i de Desktop-Version.',
+  'AI-assistentie inschakelen': 'KI-Unterstützig iischalte',
+  'AI-backend': 'KI-Backend',
+  'Lokaal (op dit apparaat)': 'Lokal (uf däm Grät)',
+  'Zelf gehost (eigen server)': 'Sälber ghostet (eigene Server)',
+  'Cloud (externe dienst)': 'Cloud (externe Dienscht)',
+  'Modelnaam': 'Modällname',
+  'API-sleutel (optioneel)': 'API-Schlüssel (fakultativ)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'E Cloud-Dienscht bruucht zerscht dini Dateschutz-Iiwilligung under "Lizänz und Datenschutz" und lauft nöd i de Web-Version.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Mir isch bewusst, dass Date a de externi Dienscht gschickt werded',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'KI-Unterstützig (standardmässig us): wänn du es sälber ghostets oder Cloud-Backend uswählsch, werded die Text oder Bilder wo du la verarbeite lasch a die Adrässe gschickt. Es lokals KI-Modäll uf däm Grät schickt nüt.',
   'Zoek een slidetype': 'Slide-Typ suech',
   'Alfabetisch sorteren': 'Alphabetisch sortiere',
   'Algemeen': 'Allgemein',

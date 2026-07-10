@@ -83,6 +83,24 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'AI-assistentie': 'Asistensia di IA',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'Asistensia di IA ta disponibel solamente den e version di desktop.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'Asistensia di IA ta opcional i ta paga pa default. No ta wòrdu mandá nada te ora bo aktivá esaki i skohe un backend bo mes. E funshon aki ta funshoná solamente den e version di desktop.',
+  'AI-assistentie inschakelen': 'Aktivá asistensia di IA',
+  'AI-backend': 'Backend di IA',
+  'Lokaal (op dit apparaat)': 'Lokal (riba e aparato aki)',
+  'Zelf gehost (eigen server)': 'Ospedá bo mes (bo mes server)',
+  'Cloud (externe dienst)': 'Nubia (servisio èksterno)',
+  'Modelnaam': 'Nòmber di modelo',
+  'API-sleutel (optioneel)': 'Yabi di API (opcional)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Un servisio di nubia ta rekerí promé bo konsentimentu di privasidat na "Lisensia i Privasidat" i no ta funshoná den e version web.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Mi ta komprendé ku datos ta wòrdu mandá na e servisio èksterno aki',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Asistensia di IA (ta paga pa default): si bo skohe un backend ospedá bo mes òf di nubia, e tekstonan òf imágennan ku bo ta laga prosesá ta wòrdu mandá na e adres ei. Un modelo di IA lokal riba e aparato aki no ta manda nada.',
   'Zoek een slidetype': 'Buska un tipo di slide',
   'Alfabetisch sorteren': 'Ordená alfabétikamente',
   'Algemeen': 'General',

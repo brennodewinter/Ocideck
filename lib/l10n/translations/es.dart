@@ -84,6 +84,24 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'AI-assistentie': 'Asistencia de IA',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'La asistencia de IA solo está disponible en la versión de escritorio.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'La asistencia de IA es opcional y está desactivada de forma predeterminada. No se envía nada hasta que la actives y elijas un backend tú mismo. Esta función solo funciona en la versión de escritorio.',
+  'AI-assistentie inschakelen': 'Activar la asistencia de IA',
+  'AI-backend': 'Backend de IA',
+  'Lokaal (op dit apparaat)': 'Local (en este dispositivo)',
+  'Zelf gehost (eigen server)': 'Autoalojado (tu propio servidor)',
+  'Cloud (externe dienst)': 'Nube (servicio externo)',
+  'Modelnaam': 'Nombre del modelo',
+  'API-sleutel (optioneel)': 'Clave de API (opcional)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Un servicio en la nube requiere primero tu consentimiento de privacidad en "Licencia y privacidad" y no funciona en la versión web.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Entiendo que se envían datos a este servicio externo',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Asistencia de IA (desactivada de forma predeterminada): si eliges un backend autoalojado o en la nube, los textos o imágenes que procesas se envían a esa dirección. Un modelo de IA local en este dispositivo no envía nada.',
   'Zoek een slidetype': 'Buscar un tipo de diapositiva',
   'Alfabetisch sorteren': 'Ordenar alfabéticamente',
   'Algemeen': 'General',

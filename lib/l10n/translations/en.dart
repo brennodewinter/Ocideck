@@ -83,6 +83,24 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'AI-assistentie': 'AI assistance',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'AI assistance is only available in the desktop version.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'AI assistance is optional and off by default. Nothing is sent until you enable it and choose a backend yourself. This feature only works in the desktop version.',
+  'AI-assistentie inschakelen': 'Enable AI assistance',
+  'AI-backend': 'AI backend',
+  'Lokaal (op dit apparaat)': 'Local (on this device)',
+  'Zelf gehost (eigen server)': 'Self-hosted (your own server)',
+  'Cloud (externe dienst)': 'Cloud (external service)',
+  'Modelnaam': 'Model name',
+  'API-sleutel (optioneel)': 'API key (optional)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'A cloud service first requires your privacy consent under "Licence and Privacy" and does not work in the web version.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'I understand that data is sent to this external service',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'AI assistance (off by default): if you choose a self-hosted or cloud backend, the texts or images you have processed are sent to that address. A local AI model on this device sends nothing.',
   'Zoek een slidetype': 'Search for a slide type',
   'Alfabetisch sorteren': 'Sort alphabetically',
   'Algemeen': 'General',

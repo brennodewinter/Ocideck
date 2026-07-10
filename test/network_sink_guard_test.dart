@@ -67,6 +67,9 @@ void main() {
         // importFromUrl: safeResolve + pin (import-part van file_service).
         'lib/services/parts/file_service_import.dart',
         'lib/services/webdav_service.dart', // safeResolveTrusted + pin
+        // AI backend: resolves per AiResolveStrategy (loopback-direct for local
+        // IPC, safeResolveTrusted for self-hosted, safeResolve for cloud) + pin.
+        'lib/services/ai_client_service.dart',
       },
       guidance:
           'New raw HttpClient. Resolve the host through NetGuard.safeResolve '
