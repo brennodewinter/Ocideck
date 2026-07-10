@@ -82,6 +82,24 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'AI-assistentie': 'Tehisintellekti abi',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'Tehisintellekti abi on saadaval ainult lauaarvuti versioonis.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'Tehisintellekti abi on valikuline ja vaikimisi välja lülitatud. Midagi ei saadeta enne, kui selle sisse lülitate ja ise taustsüsteemi valite. See funktsioon töötab ainult lauaarvuti versioonis.',
+  'AI-assistentie inschakelen': 'Lülita tehisintellekti abi sisse',
+  'AI-backend': 'Tehisintellekti taustsüsteem',
+  'Lokaal (op dit apparaat)': 'Kohalik (selles seadmes)',
+  'Zelf gehost (eigen server)': 'Ise majutatud (oma server)',
+  'Cloud (externe dienst)': 'Pilv (väline teenus)',
+  'Modelnaam': 'Mudeli nimi',
+  'API-sleutel (optioneel)': 'API-võti (valikuline)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Pilveteenus nõuab kõigepealt teie privaatsusnõusolekut jaotises "Litsents ja privaatsus" ega tööta veebiversioonis.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Saan aru, et andmed saadetakse sellele välisele teenusele',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Tehisintellekti abi (vaikimisi välja lülitatud): kui valite ise majutatud või pilvepõhise taustsüsteemi, saadetakse tekstid või pildid, mida töödelda lasete, sellele aadressile. Kohalik tehisintellekti mudel selles seadmes ei saada midagi.',
   'Zoek een slidetype': 'Otsi slaiditüüpi',
   'Alfabetisch sorteren': 'Sorteeri tähestikuliselt',
   'Algemeen': 'Üldine',

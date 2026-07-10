@@ -84,6 +84,24 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'AI-assistentie': 'Asistence AI',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'Asistence AI je dostupná pouze v desktopové verzi.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'Asistence AI je volitelná a ve výchozím nastavení vypnutá. Nic se neodesílá, dokud ji nezapnete a sami nezvolíte backend. Tato funkce funguje pouze v desktopové verzi.',
+  'AI-assistentie inschakelen': 'Zapnout asistenci AI',
+  'AI-backend': 'Backend AI',
+  'Lokaal (op dit apparaat)': 'Místně (na tomto zařízení)',
+  'Zelf gehost (eigen server)': 'Vlastní hosting (vlastní server)',
+  'Cloud (externe dienst)': 'Cloud (externí služba)',
+  'Modelnaam': 'Název modelu',
+  'API-sleutel (optioneel)': 'Klíč API (volitelné)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Cloudová služba nejprve vyžaduje váš souhlas se soukromím v části "Licence a soukromí" a ve webové verzi nefunguje.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Rozumím, že se data odesílají této externí službě',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Asistence AI (ve výchozím nastavení vypnutá): pokud zvolíte vlastní nebo cloudový backend, texty nebo obrázky, které necháte zpracovat, se odešlou na tuto adresu. Místní model AI na tomto zařízení neodesílá nic.',
   'Zoek een slidetype': 'Vyhledat typ snímku',
   'Alfabetisch sorteren': 'Seřadit abecedně',
   'Algemeen': 'Obecné',

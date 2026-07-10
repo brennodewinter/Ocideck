@@ -83,6 +83,24 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'AI-assistentie': 'Pomoč UI',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'Pomoč UI je na voljo samo v namizni različici.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'Pomoč UI je izbirna in privzeto izklopljena. Nič se ne pošlje, dokler je ne vklopite in sami ne izberete zaledja. Ta funkcija deluje samo v namizni različici.',
+  'AI-assistentie inschakelen': 'Vklopi pomoč UI',
+  'AI-backend': 'Zaledje UI',
+  'Lokaal (op dit apparaat)': 'Lokalno (na tej napravi)',
+  'Zelf gehost (eigen server)': 'Lastno gostovanje (lasten strežnik)',
+  'Cloud (externe dienst)': 'Oblak (zunanja storitev)',
+  'Modelnaam': 'Ime modela',
+  'API-sleutel (optioneel)': 'Ključ API (izbirno)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Oblačna storitev najprej zahteva vaše soglasje o zasebnosti pod "Licenca in zasebnost" in ne deluje v spletni različici.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Razumem, da se podatki pošiljajo tej zunanji storitvi',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Pomoč UI (privzeto izklopljena): če izberete lastno gostovano ali oblačno zaledje, se besedila ali slike, ki jih obdelate, pošljejo na ta naslov. Lokalni model UI na tej napravi ne pošlje ničesar.',
   'Zoek een slidetype': 'Poišči vrsto diapozitiva',
   'Alfabetisch sorteren': 'Razvrsti po abecedi',
   'Algemeen': 'Splošno',

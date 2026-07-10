@@ -95,6 +95,17 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
         logWarning('SettingsNotifier: ongeldige webdavServer-prefs', e);
       }
     }
+    final aiJson = prefs.getString('aiSettings');
+    var ai = const AiSettings();
+    if (aiJson != null) {
+      try {
+        ai = AiSettings.fromJson(
+          Map<String, Object?>.from(jsonDecode(aiJson) as Map),
+        );
+      } catch (e) {
+        logWarning('SettingsNotifier: ongeldige aiSettings-prefs', e);
+      }
+    }
     state = AppSettings(
       languageCode: prefs.getString('languageCode') ?? 'nl',
       homeDirectory: prefs.getString('homeDirectory'),
@@ -136,6 +147,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       ),
       allowRemoteMedia: prefs.getBool('allowRemoteMedia') ?? false,
       webdavServer: webdav,
+      aiSettings: ai,
     );
   }
 
@@ -200,6 +212,39 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   /// Lees het opgeslagen WebDAV-wachtwoord uit de keychain, of `null`.
   Future<String?> readWebdavPassword(String baseUrl, String username) {
     return _secrets.readWebdavPassword(baseUrl, username);
+  }
+
+  /// Bewaar de instellingen van de optionele AI-backend (zonder API-sleutel) in
+  /// hetzelfde prefs-domein. Wist enkel deze key — nooit het hele domein (zie
+  /// geheugen `ocideck-prefs-storage`).
+  Future<void> setAiSettings(AiSettings settings) async {
+    state = state.copyWith(aiSettings: settings);
+    await _persist('setAiSettings', (prefs) async {
+      await prefs.setString('aiSettings', jsonEncode(settings.toJson()));
+    });
+  }
+
+  /// Schrijf de optionele AI-API-sleutel versleuteld naar de keychain (gekeyd
+  /// op de basis-URL). Een lege sleutel wist de entry. Vangt keychain-fouten
+  /// zelf af (en logt ze) zodat een niet-afgewachte aanroep — zoals vanuit de
+  /// settings-dialoog — nooit een onafgevangen async-exceptie oplevert.
+  Future<bool> setAiApiKey(String baseUrl, String apiKey) async {
+    try {
+      if (apiKey.isEmpty) {
+        await _secrets.deleteAiApiKey(baseUrl);
+      } else {
+        await _secrets.writeAiApiKey(baseUrl, apiKey);
+      }
+      return true;
+    } catch (e) {
+      logWarning('SettingsNotifier.setAiApiKey: keychain mislukt', e);
+      return false;
+    }
+  }
+
+  /// Lees de opgeslagen AI-API-sleutel uit de keychain, of `null`.
+  Future<String?> readAiApiKey(String baseUrl) {
+    return _secrets.readAiApiKey(baseUrl);
   }
 
   /// Stel het vrijgaveplafond voor de export-gate in (een TLP-sleutel), of

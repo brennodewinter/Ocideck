@@ -1,7 +1,9 @@
+import 'ai_settings.dart';
 import 'chart.dart' show normalizeChartColor;
 import 'recent_file.dart';
 import 'webdav_settings.dart';
 
+export 'ai_settings.dart';
 export 'recent_file.dart';
 export 'webdav_settings.dart';
 
@@ -644,6 +646,10 @@ class AppSettings {
   /// ingesteld. Bevat nooit het wachtwoord (dat staat in de keychain).
   final WebdavServer? webdavServer;
 
+  /// Instellingen voor de optionele AI-assistentie. Standaard uit; bevat nooit
+  /// een API-sleutel (die staat in de keychain).
+  final AiSettings aiSettings;
+
   const AppSettings({
     this.languageCode = 'nl',
     this.homeDirectory,
@@ -667,6 +673,7 @@ class AppSettings {
     this.contrastMinRatio = 4.5,
     this.allowRemoteMedia = false,
     this.webdavServer,
+    this.aiSettings = const AiSettings(),
   });
 
   ThemeProfile get themeProfile {
@@ -740,6 +747,7 @@ class AppSettings {
     double? contrastMinRatio,
     bool? allowRemoteMedia,
     WebdavServer? webdavServer,
+    AiSettings? aiSettings,
     bool clearHomeDirectory = false,
     bool clearExportDirectory = false,
     bool clearMaxReleaseExportTlp = false,
@@ -801,6 +809,7 @@ class AppSettings {
       webdavServer: clearWebdavServer
           ? null
           : (webdavServer ?? this.webdavServer),
+      aiSettings: aiSettings ?? this.aiSettings,
     );
   }
 }

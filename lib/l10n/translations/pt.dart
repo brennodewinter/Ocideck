@@ -84,6 +84,24 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'AI-assistentie': 'Assistência de IA',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'A assistência de IA só está disponível na versão para computador.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'A assistência de IA é opcional e está desativada por padrão. Nada é enviado até que a ative e escolha você mesmo um backend. Esta funcionalidade só funciona na versão para computador.',
+  'AI-assistentie inschakelen': 'Ativar a assistência de IA',
+  'AI-backend': 'Backend de IA',
+  'Lokaal (op dit apparaat)': 'Local (neste dispositivo)',
+  'Zelf gehost (eigen server)': 'Auto-hospedado (o seu próprio servidor)',
+  'Cloud (externe dienst)': 'Nuvem (serviço externo)',
+  'Modelnaam': 'Nome do modelo',
+  'API-sleutel (optioneel)': 'Chave de API (opcional)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Um serviço na nuvem requer primeiro o seu consentimento de privacidade em "Licença e privacidade" e não funciona na versão web.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Compreendo que os dados são enviados para este serviço externo',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Assistência de IA (desativada por padrão): se escolher um backend auto-hospedado ou na nuvem, os textos ou imagens que manda processar são enviados para esse endereço. Um modelo de IA local neste dispositivo não envia nada.',
   'Zoek een slidetype': 'Procurar um tipo de slide',
   'Alfabetisch sorteren': 'Ordenar alfabeticamente',
   'Algemeen': 'Geral',

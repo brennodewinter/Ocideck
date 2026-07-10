@@ -54,4 +54,38 @@ class SecretStore {
       logWarning('SecretStore.deleteWebdavPassword: keychain delete failed', e);
     }
   }
+
+  /// Keychain-sleutel voor de optionele API-sleutel van een AI-backend, gekeyd
+  /// op de genormaliseerde basis-URL zodat verschillende backends naast elkaar
+  /// kunnen bestaan.
+  static String aiApiKeyKey(String baseUrl) {
+    final normalized = baseUrl.trim().replaceAll(RegExp(r'/+$'), '');
+    return 'ai_api_key::$normalized';
+  }
+
+  Future<void> writeAiApiKey(String baseUrl, String apiKey) async {
+    try {
+      await _storage.write(key: aiApiKeyKey(baseUrl), value: apiKey);
+    } catch (e) {
+      logError('SecretStore.writeAiApiKey: keychain write failed', e);
+      rethrow;
+    }
+  }
+
+  Future<String?> readAiApiKey(String baseUrl) async {
+    try {
+      return await _storage.read(key: aiApiKeyKey(baseUrl));
+    } catch (e) {
+      logError('SecretStore.readAiApiKey: keychain read failed', e);
+      return null;
+    }
+  }
+
+  Future<void> deleteAiApiKey(String baseUrl) async {
+    try {
+      await _storage.delete(key: aiApiKeyKey(baseUrl));
+    } catch (e) {
+      logWarning('SecretStore.deleteAiApiKey: keychain delete failed', e);
+    }
+  }
 }

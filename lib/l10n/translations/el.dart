@@ -83,6 +83,24 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'AI-assistentie': 'Υποστήριξη AI',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'Η υποστήριξη AI είναι διαθέσιμη μόνο στην έκδοση για υπολογιστή.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'Η υποστήριξη AI είναι προαιρετική και απενεργοποιημένη από προεπιλογή. Δεν αποστέλλεται τίποτα μέχρι να την ενεργοποιήσετε και να επιλέξετε μόνοι σας ένα backend. Αυτή η λειτουργία λειτουργεί μόνο στην έκδοση για υπολογιστή.',
+  'AI-assistentie inschakelen': 'Ενεργοποίηση υποστήριξης AI',
+  'AI-backend': 'Backend AI',
+  'Lokaal (op dit apparaat)': 'Τοπικά (σε αυτή τη συσκευή)',
+  'Zelf gehost (eigen server)': 'Αυτοφιλοξενούμενο (δικός σας διακομιστής)',
+  'Cloud (externe dienst)': 'Cloud (εξωτερική υπηρεσία)',
+  'Modelnaam': 'Όνομα μοντέλου',
+  'API-sleutel (optioneel)': 'Κλειδί API (προαιρετικό)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Μια υπηρεσία cloud απαιτεί πρώτα τη συγκατάθεσή σας για το απόρρητο στην ενότητα "Άδεια και Απόρρητο" και δεν λειτουργεί στην έκδοση web.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Κατανοώ ότι δεδομένα αποστέλλονται σε αυτή την εξωτερική υπηρεσία',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Υποστήριξη AI (απενεργοποιημένη από προεπιλογή): αν επιλέξετε ένα αυτοφιλοξενούμενο ή cloud backend, τα κείμενα ή οι εικόνες που επεξεργάζεστε αποστέλλονται σε αυτή τη διεύθυνση. Ένα τοπικό μοντέλο AI σε αυτή τη συσκευή δεν αποστέλλει τίποτα.',
   'Zoek een slidetype': 'Αναζήτηση τύπου διαφάνειας',
   'Alfabetisch sorteren': 'Αλφαβητική ταξινόμηση',
   'Algemeen': 'Γενικά',

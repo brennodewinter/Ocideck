@@ -84,6 +84,24 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'AI-assistentie': 'Asistență IA',
+  'AI-assistentie is alleen beschikbaar in de desktopversie.':
+      'Asistența IA este disponibilă doar în versiunea desktop.',
+  'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.':
+      'Asistența IA este opțională și dezactivată implicit. Nu se trimite nimic până când nu o activezi și nu alegi singur un backend. Această funcție funcționează doar în versiunea desktop.',
+  'AI-assistentie inschakelen': 'Activează asistența IA',
+  'AI-backend': 'Backend IA',
+  'Lokaal (op dit apparaat)': 'Local (pe acest dispozitiv)',
+  'Zelf gehost (eigen server)': 'Auto-găzduit (propriul server)',
+  'Cloud (externe dienst)': 'Cloud (serviciu extern)',
+  'Modelnaam': 'Numele modelului',
+  'API-sleutel (optioneel)': 'Cheie API (opțional)',
+  'Een clouddienst vereist eerst je privacytoestemming bij "Licentie en Privacy" en werkt niet in de webversie.':
+      'Un serviciu cloud necesită mai întâi consimțământul tău privind confidențialitatea la "Licență și confidențialitate" și nu funcționează în versiunea web.',
+  'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd':
+      'Înțeleg că datele sunt trimise către acest serviciu extern',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Asistență IA (dezactivată implicit): dacă alegi un backend auto-găzduit sau cloud, textele sau imaginile pe care le procesezi sunt trimise la acea adresă. Un model IA local pe acest dispozitiv nu trimite nimic.',
   'Zoek een slidetype': 'Căutați un tip de slide',
   'Alfabetisch sorteren': 'Sortează alfabetic',
   'Algemeen': 'General',
