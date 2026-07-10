@@ -118,6 +118,20 @@ style profile, sidecars, and the package format — is documented in
 | [Third-party notices](THIRD_PARTY_NOTICES.md) | Bundled components and their licences |
 | [User Guide](docs/USER_GUIDE.md) | Using the app: slide types, charts, presenting, exporting, theming |
 
+### Design documents (proposals)
+
+Forward-looking design proposals — **not yet implemented**. They describe future
+capabilities and the chosen architecture, kept deliberately separate from the
+current-state docs above.
+
+| Document | What it covers |
+| --- | --- |
+| [Collaboration](docs/design/COLLABORATION.md) | Real-time co-authoring, presenting, and calls |
+| [Git storage](docs/design/GIT_STORAGE.md) | Storing decks in a git repository as versioned storage |
+| [Pentest reporting (MIAUW)](docs/design/PENTEST_MIAUW.md) | Penetration-test reports with audit value, per the MIAUW methodology |
+| [AI assistance](docs/design/AI_ASSIST.md) | Optional, privacy-first AI assistance (finding text drafting and image tagging) |
+| [Agentic build plan](docs/design/AGENTIC_BUILD_PLAN.md) | Building the pentest and AI feature set with autonomous agents |
+
 ## Contributing
 
 Contributions are welcome! Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) and our
