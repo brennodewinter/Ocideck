@@ -46,7 +46,7 @@ This is **ocideck 1.0.0+1** (licence EUPL-1.2) and every third-party component i
 | dbus _(transitive)_ | 0.7.13 | MPL-2.0 | `pkg:pub/dbus@0.7.13` |
 | desktop_drop _(direct main)_ | 0.7.1 | Apache-2.0 | `pkg:pub/desktop_drop@0.7.1` |
 | diff_match_patch _(transitive)_ | 0.4.1 | Apache-2.0 | `pkg:pub/diff_match_patch@0.4.1` |
-| equatable _(transitive)_ | 2.0.8 | MIT | `pkg:pub/equatable@2.0.8` |
+| equatable _(transitive)_ | 2.1.0 | MIT | `pkg:pub/equatable@2.1.0` |
 | fake_async _(direct dev)_ | 1.3.3 | Apache-2.0 | `pkg:pub/fake_async@1.3.3` |
 | ffi _(transitive)_ | 2.2.0 | BSD-3-Clause | `pkg:pub/ffi@2.2.0` |
 | file _(transitive)_ | 7.0.1 | BSD-3-Clause | `pkg:pub/file@7.0.1` |
@@ -138,10 +138,10 @@ This is **ocideck 1.0.0+1** (licence EUPL-1.2) and every third-party component i
 | quiver _(transitive)_ | 3.2.2 | Apache-2.0 | `pkg:pub/quiver@3.2.2` |
 | record_use _(transitive)_ | 0.6.0 | BSD-3-Clause | `pkg:pub/record_use@0.6.0` |
 | riverpod _(transitive)_ | 3.3.2 | MIT | `pkg:pub/riverpod@3.3.2` |
-| screen_retriever _(direct main)_ | 0.2.1 | MIT | `pkg:pub/screen_retriever@0.2.1` |
-| screen_retriever_linux _(transitive)_ | 0.2.1 | MIT | `pkg:pub/screen_retriever_linux@0.2.1` |
-| screen_retriever_platform_interface _(transitive)_ | 0.2.1 | MIT | `pkg:pub/screen_retriever_platform_interface@0.2.1` |
-| screen_retriever_windows _(transitive)_ | 0.2.1 | MIT | `pkg:pub/screen_retriever_windows@0.2.1` |
+| screen_retriever _(direct main)_ | 0.2.2 | MIT | `pkg:pub/screen_retriever@0.2.2` |
+| screen_retriever_linux _(transitive)_ | 0.2.2 | MIT | `pkg:pub/screen_retriever_linux@0.2.2` |
+| screen_retriever_platform_interface _(transitive)_ | 0.2.2 | MIT | `pkg:pub/screen_retriever_platform_interface@0.2.2` |
+| screen_retriever_windows _(transitive)_ | 0.2.2 | MIT | `pkg:pub/screen_retriever_windows@0.2.2` |
 | shared_preferences _(direct main)_ | 2.5.5 | BSD-3-Clause | `pkg:pub/shared_preferences@2.5.5` |
 | shared_preferences_android _(transitive)_ | 2.4.26 | BSD-3-Clause | `pkg:pub/shared_preferences_android@2.4.26` |
 | shared_preferences_foundation _(transitive)_ | 2.5.6 | BSD-3-Clause | `pkg:pub/shared_preferences_foundation@2.5.6` |
@@ -182,9 +182,9 @@ This is **ocideck 1.0.0+1** (licence EUPL-1.2) and every third-party component i
 | vector_graphics_compiler _(transitive)_ | 1.2.6 | BSD-3-Clause | `pkg:pub/vector_graphics_compiler@1.2.6` |
 | vector_math _(transitive)_ | 2.2.0 | BSD-3-Clause | `pkg:pub/vector_math@2.2.0` |
 | video_player _(direct main)_ | 2.11.1 | BSD-3-Clause | `pkg:pub/video_player@2.11.1` |
-| video_player_android _(transitive)_ | 2.10.0 | BSD-3-Clause | `pkg:pub/video_player_android@2.10.0` |
-| video_player_avfoundation _(transitive)_ | 2.10.0 | BSD-3-Clause | `pkg:pub/video_player_avfoundation@2.10.0` |
-| video_player_platform_interface _(direct dev)_ | 6.8.0 | BSD-3-Clause | `pkg:pub/video_player_platform_interface@6.8.0` |
+| video_player_android _(transitive)_ | 2.11.0 | BSD-3-Clause | `pkg:pub/video_player_android@2.11.0` |
+| video_player_avfoundation _(transitive)_ | 2.11.0 | BSD-3-Clause | `pkg:pub/video_player_avfoundation@2.11.0` |
+| video_player_platform_interface _(direct dev)_ | 6.9.0 | BSD-3-Clause | `pkg:pub/video_player_platform_interface@6.9.0` |
 | video_player_web _(transitive)_ | 2.4.0 | BSD-3-Clause | `pkg:pub/video_player_web@2.4.0` |
 | vm_service _(transitive)_ | 15.2.0 | BSD-3-Clause | `pkg:pub/vm_service@15.2.0` |
 | wakelock_plus _(direct main)_ | 1.5.2 | BSD-3-Clause | `pkg:pub/wakelock_plus@1.5.2` |
@@ -194,13 +194,13 @@ This is **ocideck 1.0.0+1** (licence EUPL-1.2) and every third-party component i
 | web_socket _(transitive)_ | 1.0.1 | BSD-3-Clause | `pkg:pub/web_socket@1.0.1` |
 | web_socket_channel _(transitive)_ | 3.0.3 | BSD-3-Clause | `pkg:pub/web_socket_channel@3.0.3` |
 | webkit_inspection_protocol _(transitive)_ | 1.2.1 | BSD-3-Clause | `pkg:pub/webkit_inspection_protocol@1.2.1` |
-| webview_flutter _(direct main)_ | 4.14.0 | BSD-3-Clause | `pkg:pub/webview_flutter@4.14.0` |
+| webview_flutter _(direct main)_ | 4.14.1 | BSD-3-Clause | `pkg:pub/webview_flutter@4.14.1` |
 | webview_flutter_android _(transitive)_ | 4.13.0 | BSD-3-Clause | `pkg:pub/webview_flutter_android@4.13.0` |
 | webview_flutter_platform_interface _(transitive)_ | 2.15.1 | BSD-3-Clause | `pkg:pub/webview_flutter_platform_interface@2.15.1` |
 | webview_flutter_web _(direct main)_ | 0.2.3+4 | BSD-3-Clause | `pkg:pub/webview_flutter_web@0.2.3+4` |
 | webview_flutter_wkwebview _(transitive)_ | 3.26.0 | BSD-3-Clause | `pkg:pub/webview_flutter_wkwebview@3.26.0` |
 | win32 _(transitive)_ | 5.15.0 | BSD-3-Clause | `pkg:pub/win32@5.15.0` |
-| window_manager _(direct main)_ | 0.5.1 | MIT | `pkg:pub/window_manager@0.5.1` |
+| window_manager _(direct main)_ | 0.5.2 | MIT | `pkg:pub/window_manager@0.5.2` |
 | xdg_directories _(transitive)_ | 1.1.0 | BSD-3-Clause | `pkg:pub/xdg_directories@1.1.0` |
 | xml _(direct main)_ | 7.0.1 | MIT | `pkg:pub/xml@7.0.1` |
 | yaml _(direct dev)_ | 3.1.3 | MIT | `pkg:pub/yaml@3.1.3` |
