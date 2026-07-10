@@ -469,6 +469,26 @@ const _dutchSourceIt = {
   'Website van de stichting': 'Sito web della fondazione',
   'Opgeslagen als download in je map met downloads.':
       'Salvato come download nella tua cartella dei download.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Finalizza e sigilla',
+  'Verzegelen': 'Sigilla',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalizza questa presentazione e calcola un sigillo SHA-512 sul contenuto. Il file viene quindi bloccato e non può più essere modificato; le modifiche successive diventano visibili. Questa operazione non può essere annullata nell\'app.',
+  'Handtekening (optioneel)': 'Firma (facoltativa)',
+  'Naam': 'Nome',
+  'Rol of functie': 'Ruolo o funzione',
+  'Verklaring': 'Dichiarazione',
+  'Getypte handtekening': 'Firma digitata',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Questa presentazione è finalizzata e sigillata e non può essere modificata.',
+  'Integriteit intact': 'Integrità intatta',
+  'Gewijzigd na afronden': 'Modificato dopo la finalizzazione',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Sigillato con SHA-512. Il contenuto corrisponde al sigillo.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Il contenuto è diverso dal sigillo — il file è stato modificato dopo la finalizzazione.',
+  'Presentatie afgerond en verzegeld.':
+      'Presentazione finalizzata e sigillata.',
 };
 
 const _dutchSourceAddIt = {

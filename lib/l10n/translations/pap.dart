@@ -475,6 +475,25 @@ const _dutchSourcePap = {
   'Website van de stichting': 'Wèpsait di e fundashon',
   'Opgeslagen als download in je map met downloads.':
       'Warda komo un download den bo karpeta di download.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Finalisá & seyá',
+  'Verzegelen': 'Seyá',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalisá e presentashon aki i kalkulá un seyo SHA-512 riba su kontenido. Despues e archivo ta wòrdu será i no por wòrdu editá mas; kambionan posterior ta bira visibel. Esaki no por wòrdu deshasí den e app.',
+  'Handtekening (optioneel)': 'Firma (opshonal)',
+  'Naam': 'Nòmber',
+  'Rol of functie': 'Ròl òf funshon',
+  'Verklaring': 'Deklarashon',
+  'Getypte handtekening': 'Firma tipiá',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'E presentashon aki ta finalisá i seyá i no por wòrdu editá.',
+  'Integriteit intact': 'Integridat intakto',
+  'Gewijzigd na afronden': 'Kambiá despues di finalisá',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Seyá ku SHA-512. E kontenido ta korespondé ku e seyo.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'E kontenido ta diferente for di e seyo — e archivo a wòrdu kambiá despues di finalisá.',
+  'Presentatie afgerond en verzegeld.': 'Presentashon finalisá i seyá.',
 };
 
 const _dutchSourceAddPap = {

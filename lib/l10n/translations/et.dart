@@ -1508,4 +1508,23 @@ const _dutchSourceEt = {
       'Konks, probleem, lahendus, tõestus ja palve veenva pitch\'i jaoks.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Sidusrühmad, argumentatsioon ja vastuväited, et saada koosolekul otsus või toetus.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Vormista ja pitseeri',
+  'Verzegelen': 'Pitseeri',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Vormista see esitlus ja arvuta selle sisu kohta SHA-512 pitser. Seejärel on fail lukustatud ega ole enam muudetav; hilisemad muudatused muutuvad nähtavaks. Seda ei saa rakenduses tagasi võtta.',
+  'Handtekening (optioneel)': 'Allkiri (valikuline)',
+  'Naam': 'Nimi',
+  'Rol of functie': 'Roll või ametikoht',
+  'Verklaring': 'Kinnitus',
+  'Getypte handtekening': 'Sisestatud allkiri',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'See esitlus on vormistatud ja pitseeritud ning seda ei saa muuta.',
+  'Integriteit intact': 'Terviklikkus säilinud',
+  'Gewijzigd na afronden': 'Muudetud pärast vormistamist',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Pitseeritud SHA-512-ga. Sisu vastab pitserile.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Sisu erineb pitserist — faili on pärast vormistamist muudetud.',
+  'Presentatie afgerond en verzegeld.': 'Esitlus vormistatud ja pitseeritud.',
 };

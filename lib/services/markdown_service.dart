@@ -4,6 +4,7 @@ import 'package:uuid/uuid.dart';
 import '../models/chart.dart';
 import '../models/cockpit.dart';
 import '../models/deck.dart';
+import '../models/document_signature.dart';
 import '../models/question.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
@@ -85,6 +86,18 @@ class MarkdownService {
     if (deck.playOnly) {
       buf.writeln('ocideck_play_only: true');
     }
+    // Documentintegriteit (§8 A1). De handtekening is inhoud en valt daarom
+    // ónder het zegel; ze wordt vóór de zegelvelden geschreven zodat de
+    // canonicalisatie (die enkel de zegelvelden weglaat) haar meeneemt.
+    _writeSignature(buf, deck.signature);
+    if (deck.finalized) {
+      buf.writeln('ocideck_finalized: true');
+    }
+    if (deck.sealHash.isNotEmpty) {
+      buf.writeln('ocideck_seal_hash: ${_yamlScalar(deck.sealHash)}');
+      buf.writeln('ocideck_seal_algo: ${_yamlScalar(deck.sealAlgo)}');
+      buf.writeln('ocideck_seal_at: ${_yamlScalar(deck.sealAt)}');
+    }
     if (inlineStyleProfile) {
       buf.writeln(
         'ocideck_style_profile: ${base64Url.encode(utf8.encode(jsonEncode(deck.themeProfile.toJson())))}',
@@ -108,6 +121,36 @@ class MarkdownService {
       );
     }
     return buf.toString();
+  }
+
+  /// Writes the (optional) visual signature as plain front-matter lines. Each
+  /// non-empty field rides along as its own `ocideck_sig_*` key so the block
+  /// stays human-readable and round-trips. Nothing is written for an absent or
+  /// empty signature, so the default document has no signature noise.
+  void _writeSignature(StringBuffer buf, DocumentSignature? sig) {
+    if (sig == null || sig.isEmpty) return;
+    void line(String key, String value) {
+      if (value.isNotEmpty) buf.writeln('$key: ${_yamlScalar(value)}');
+    }
+
+    line('ocideck_sig_name', sig.name);
+    line('ocideck_sig_role', sig.role);
+    line('ocideck_sig_date', sig.date);
+    line('ocideck_sig_statement', sig.statement);
+    line('ocideck_sig_typed', sig.typedSignature);
+    line('ocideck_sig_image', sig.imagePath);
+  }
+
+  /// The canonical content string the document seal (§8 A1) hashes over: the
+  /// deck's markdown with all integrity metadata (the finalise flag and the
+  /// `ocideck_seal_*` fields) stripped, so the hash never covers itself and
+  /// stays stable across sealing and re-opening. Styling is already excluded by
+  /// [generateDeck], so the seal is purely over content; the visible signature
+  /// is deliberately kept, so tampering with it is detectable.
+  String canonicalContentForSeal(Deck deck) {
+    return generateDeck(
+      deck.copyWith(finalized: false, sealHash: '', sealAlgo: '', sealAt: ''),
+    );
   }
 
   /// Render a string as a YAML scalar, quoting/escaping only when needed so the

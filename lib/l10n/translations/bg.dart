@@ -1537,4 +1537,24 @@ const _dutchSourceBg = {
       'Кука, проблем, решение, доказателство и призив за убедително представяне.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Заинтересовани страни, аргументация и възражения за постигане на решение или подкрепа на срещата.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Финализиране и подпечатване',
+  'Verzegelen': 'Подпечатване',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Финализирайте тази презентация и изчислете SHA-512 печат върху съдържанието ѝ. След това файлът се заключва и вече не може да се редактира; по-късните промени стават видими. Това не може да бъде отменено в приложението.',
+  'Handtekening (optioneel)': 'Подпис (по избор)',
+  'Naam': 'Име',
+  'Rol of functie': 'Роля или длъжност',
+  'Verklaring': 'Декларация',
+  'Getypte handtekening': 'Въведен подпис',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Тази презентация е финализирана и подпечатана и не може да бъде редактирана.',
+  'Integriteit intact': 'Целостта е запазена',
+  'Gewijzigd na afronden': 'Променено след финализиране',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Подпечатано със SHA-512. Съдържанието съответства на печата.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Съдържанието се различава от печата — файлът е променен след финализирането.',
+  'Presentatie afgerond en verzegeld.':
+      'Презентацията е финализирана и подпечатана.',
 };

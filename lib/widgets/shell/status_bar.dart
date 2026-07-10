@@ -130,6 +130,10 @@ class _DeckStatusBar extends StatelessWidget {
                       color: Color(deck.tlp.foreground),
                     ),
                   ],
+                  if (deck.finalized) ...[
+                    const _StatusDivider(),
+                    _integrityBadge(l10n, deck),
+                  ],
                 ],
               ),
             ),
@@ -156,6 +160,27 @@ class _DeckStatusBar extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  /// Documentintegriteit-badge (§8 A1): toont of het verzegelde deck intact is
+  /// of ná afronden is gewijzigd. Alleen zichtbaar wanneer het deck verzegeld is.
+  Widget _integrityBadge(AppLocalizations l10n, Deck deck) {
+    final status = deckIntegrityStatus(deck);
+    final intact = status == IntegrityStatus.intact;
+    return _StatusItem(
+      icon: intact ? Icons.verified_user : Icons.gpp_bad,
+      label: intact
+          ? l10n.d('Integriteit intact')
+          : l10n.d('Gewijzigd na afronden'),
+      tooltip: intact
+          ? l10n.d(
+              'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.',
+            )
+          : l10n.d(
+              'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.',
+            ),
+      color: intact ? AppTheme.success700 : AppTheme.danger700,
     );
   }
 }

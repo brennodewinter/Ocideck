@@ -1496,4 +1496,23 @@ const _dutchSourceTlh = {
       'ghItlh, Qagh, Sang, nguv je tlhob, qechHom \'ang HoSghajvaD.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'jI\'wI\'pu\', ghItlhmey je qImHa\'meH, wuq pagh QaH SuqmeH qepDaq.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'rInmoH & SoQmoH',
+  'Verzegelen': 'SoQmoH',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'cha\'nob rInmoH \'ej De\' SHA-512 HablI\' chenmoH. ngugh teywI\' SoQlu\' \'ej choHlaHbe\'lu\'. choHmey veb \'anglu\'. naDev DaW\' laHbe\'.',
+  'Handtekening (optioneel)': 'ghItlh pong (DIch)',
+  'Naam': 'pong',
+  'Rol of functie': 'Qu\' pagh patlh',
+  'Verklaring': 'maqtaHghach',
+  'Getypte handtekening': 'ghItlhlu\'bogh pong',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'cha\'nob rInpu\' \'ej SoQpu\'. choHlaHbe\'lu\'.',
+  'Integriteit intact': 'naQghach naQ',
+  'Gewijzigd na afronden': 'rInmoH tlhab choHpu\'',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'SHA-512 lo\'lu\'. HablI\' rap De\'.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'HablI\' rap be\' De\' — rInmoH tlhab teywI\' choHpu\'.',
+  'Presentatie afgerond en verzegeld.': 'cha\'nob rInpu\' \'ej SoQpu\'.',
 };

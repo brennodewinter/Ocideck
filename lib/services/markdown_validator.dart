@@ -85,6 +85,16 @@ class MarkdownValidator {
     'ocideck_target_seconds',
     'ocideck_show_rehearsal_summary',
     'ocideck_play_only',
+    'ocideck_finalized',
+    'ocideck_seal_hash',
+    'ocideck_seal_algo',
+    'ocideck_seal_at',
+    'ocideck_sig_name',
+    'ocideck_sig_role',
+    'ocideck_sig_date',
+    'ocideck_sig_statement',
+    'ocideck_sig_typed',
+    'ocideck_sig_image',
     'ocideck_style_profile',
   };
 

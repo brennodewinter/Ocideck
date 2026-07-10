@@ -1517,4 +1517,24 @@ const _dutchSourceSl = {
       'Kavelj, težava, rešitev, dokaz in poziv za prepričljivo predstavitev.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Deležniki, argumentacija in ugovori za pridobitev odločitve ali podpore na sestanku.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Zaključi in zapečati',
+  'Verzegelen': 'Zapečati',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Zaključite to predstavitev in izračunajte pečat SHA-512 nad njeno vsebino. Datoteka je nato zaklenjena in je ni več mogoče urejati; poznejše spremembe postanejo vidne. Tega v aplikaciji ni mogoče razveljaviti.',
+  'Handtekening (optioneel)': 'Podpis (izbirno)',
+  'Naam': 'Ime',
+  'Rol of functie': 'Vloga ali funkcija',
+  'Verklaring': 'Izjava',
+  'Getypte handtekening': 'Vneseni podpis',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Ta predstavitev je zaključena in zapečatena ter je ni mogoče urejati.',
+  'Integriteit intact': 'Celovitost nedotaknjena',
+  'Gewijzigd na afronden': 'Spremenjeno po zaključku',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Zapečateno s SHA-512. Vsebina se ujema s pečatom.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Vsebina se razlikuje od pečata — datoteka je bila po zaključku spremenjena.',
+  'Presentatie afgerond en verzegeld.':
+      'Predstavitev zaključena in zapečatena.',
 };

@@ -1548,4 +1548,24 @@ const _dutchSourceGa = {
       'Crúca, fadhb, réiteach, fianaise agus iarratas le haghaidh cur i láthair diongbháilte.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Páirtithe leasmhara, argóintíocht agus agóidí chun cinneadh nó tacaíocht a fháil ag cruinniú.',
+  // Document integrity (A1) — finalise, seal (SHA-512) and signature.
+  'Afronden & verzegelen': 'Cuir i gcrích agus séalaigh',
+  'Verzegelen': 'Séalaigh',
+  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Cuir an cur i láthair seo i gcrích agus ríomh séala SHA-512 ar a bhfuil ann. Ansin cuirtear an comhad faoi ghlas agus ní féidir é a chur in eagar a thuilleadh; feictear athruithe níos déanaí. Ní féidir é seo a chealú san aip.',
+  'Handtekening (optioneel)': 'Síniú (roghnach)',
+  'Naam': 'Ainm',
+  'Rol of functie': 'Ról nó feidhm',
+  'Verklaring': 'Ráiteas',
+  'Getypte handtekening': 'Síniú clóscríofa',
+  'Deze presentatie is afgerond en verzegeld en kan niet worden bewerkt.':
+      'Tá an cur i láthair seo curtha i gcrích agus séalaithe agus ní féidir é a chur in eagar.',
+  'Integriteit intact': 'Sláine slán',
+  'Gewijzigd na afronden': 'Athraithe tar éis é a chur i gcrích',
+  'Verzegeld met SHA-512. De inhoud komt overeen met het zegel.':
+      'Séalaithe le SHA-512. Meaitseálann an t-ábhar leis an séala.',
+  'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
+      'Tá an t-ábhar difriúil ón séala — athraíodh an comhad tar éis é a chur i gcrích.',
+  'Presentatie afgerond en verzegeld.':
+      'Cur i láthair curtha i gcrích agus séalaithe.',
 };
