@@ -4,7 +4,14 @@ import '../../models/slide.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 
-class AddSlideDialog extends StatelessWidget {
+/// A picker tab: one [SlideCategory] to filter by, or `null` for "all types".
+class _PickerTab {
+  final SlideCategory? category;
+  final String label;
+  const _PickerTab(this.category, this.label);
+}
+
+class AddSlideDialog extends StatefulWidget {
   const AddSlideDialog({super.key});
 
   static Future<SlideType?> show(BuildContext context) {
@@ -14,28 +21,127 @@ class AddSlideDialog extends StatelessWidget {
     );
   }
 
-  static const _types = [
-    (SlideType.title, 'Titelpagina'),
-    (SlideType.section, 'Tussentitel'),
-    (SlideType.bullets, 'Alleen Bullets'),
-    (SlideType.twoBullets, 'Twee Bulletkolommen'),
-    (SlideType.bulletsImage, 'Bullets + Afbeelding'),
-    (SlideType.twoImages, 'Twee Afbeeldingen'),
-    (SlideType.image, 'Grote Afbeelding'),
-    (SlideType.video, 'Video'),
-    (SlideType.quote, 'Quote'),
-    (SlideType.table, 'Tabel'),
-    (SlideType.chart, 'Grafiek'),
-    (SlideType.cockpit, 'Cockpit'),
-    (SlideType.timeline, 'Tijdlijn'),
-    (SlideType.question, 'Vraag'),
-    (SlideType.code, 'Broncode'),
-    (SlideType.freeMarkdown, 'Vrije Markdown'),
+  /// Curated display order for the built-in types. Any [SlideType] missing here
+  /// (a later package's addition) is appended in enum order, so the list is
+  /// still derived from [slideTypeMeta] — the single source of truth — and no
+  /// type can be forgotten.
+  static const _curatedOrder = <SlideType>[
+    SlideType.title,
+    SlideType.section,
+    SlideType.bullets,
+    SlideType.twoBullets,
+    SlideType.bulletsImage,
+    SlideType.twoImages,
+    SlideType.image,
+    SlideType.video,
+    SlideType.quote,
+    SlideType.table,
+    SlideType.chart,
+    SlideType.cockpit,
+    SlideType.timeline,
+    SlideType.question,
+    SlideType.code,
+    SlideType.freeMarkdown,
   ];
+
+  @override
+  State<AddSlideDialog> createState() => _AddSlideDialogState();
+}
+
+class _AddSlideDialogState extends State<AddSlideDialog> {
+  final _searchCtrl = TextEditingController();
+  bool _alphabetical = false;
+
+  /// The active category filter, or `null` for the "all types" tab. Only
+  /// meaningful when the tab bar is shown (i.e. ≥2 categories carry types).
+  SlideCategory? _activeCategory;
+
+  @override
+  void initState() {
+    super.initState();
+    // Default to the first category tab when tabs are shown; otherwise the
+    // value is unused (no tab bar, every type is offered).
+    final tabs = _tabs();
+    _activeCategory = tabs.isEmpty ? null : tabs.first.category;
+  }
+
+  @override
+  void dispose() {
+    _searchCtrl.dispose();
+    super.dispose();
+  }
+
+  /// All types in curated order, with any uncurated type appended in enum
+  /// order. Derived from [slideTypeMeta] so a new type shows up automatically.
+  List<SlideType> _orderedTypes() {
+    final order = AddSlideDialog._curatedOrder;
+    int rank(SlideType t) {
+      final i = order.indexOf(t);
+      return i == -1 ? order.length + t.index : i;
+    }
+
+    return slideTypeMeta.keys.toList()
+      ..sort((a, b) => rank(a).compareTo(rank(b)));
+  }
+
+  Set<SlideCategory> _categoriesPresent() =>
+      slideTypeMeta.values.map((m) => m.category).toSet();
+
+  /// The tab bar's tabs, or an empty list when only one category carries
+  /// types (today's state) — in which case no tab bar is drawn. A category tab
+  /// only appears when types of that category exist, so the
+  /// `informatieveiligheid` tab is gated on the presence of such types.
+  List<_PickerTab> _tabs() {
+    final present = _categoriesPresent();
+    if (present.length < 2) return const [];
+    final l10n = context.l10n;
+    return [
+      for (final c in SlideCategory.values)
+        if (present.contains(c)) _PickerTab(c, _categoryLabel(l10n, c)),
+      _PickerTab(null, l10n.d('Alle')),
+    ];
+  }
+
+  String _categoryLabel(AppLocalizations l10n, SlideCategory category) {
+    switch (category) {
+      case SlideCategory.algemeen:
+        return l10n.d('Algemeen');
+      case SlideCategory.informatieveiligheid:
+        return l10n.d('Informatieveiligheid');
+    }
+  }
+
+  /// The visible types after applying the active category tab, the search
+  /// query (case/diacritic-insensitive contains on the localised label) and
+  /// the sort mode (curated by default, alphabetical when toggled).
+  List<SlideType> _visibleTypes(AppLocalizations l10n, bool hasTabs) {
+    var types = _orderedTypes();
+    if (hasTabs && _activeCategory != null) {
+      types = types.where((t) => t.category == _activeCategory).toList();
+    }
+    final query = AppLocalizations.sortKey(_searchCtrl.text.trim());
+    if (query.isNotEmpty) {
+      types = types
+          .where(
+            (t) => AppLocalizations.sortKey(l10n.d(t.label)).contains(query),
+          )
+          .toList();
+    }
+    if (_alphabetical) {
+      types.sort(
+        (a, b) => AppLocalizations.sortKey(
+          l10n.d(a.label),
+        ).compareTo(AppLocalizations.sortKey(l10n.d(b.label))),
+      );
+    }
+    return types;
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final tabs = _tabs();
+    final types = _visibleTypes(l10n, tabs.isNotEmpty);
     return CallbackShortcuts(
       bindings: {
         const SingleActivator(LogicalKeyboardKey.escape): () =>
@@ -45,21 +151,21 @@ class AddSlideDialog extends StatelessWidget {
         title: Text(l10n.d('Slide type kiezen')),
         content: SizedBox(
           width: 440,
-          // Reading-order tabbing through the cards; the first one takes
-          // focus so the dialog is fully keyboard-operable right away.
+          // Reading-order tabbing through the controls and cards; the first
+          // card takes focus so the dialog is keyboard-operable right away.
           child: FocusTraversalGroup(
             policy: ReadingOrderTraversalPolicy(),
-            child: Wrap(
-              spacing: 10,
-              runSpacing: 10,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                for (var i = 0; i < _types.length; i++)
-                  _TypeCard(
-                    type: _types[i].$1,
-                    label: l10n.d(_types[i].$2),
-                    autofocus: i == 0,
-                    onTap: () => Navigator.pop(context, _types[i].$1),
-                  ),
+                if (tabs.isNotEmpty) ...[
+                  _buildTabBar(tabs),
+                  const SizedBox(height: 10),
+                ],
+                _buildSearchRow(l10n),
+                const SizedBox(height: 12),
+                Flexible(child: _buildGrid(context, l10n, types)),
               ],
             ),
           ),
@@ -69,6 +175,94 @@ class AddSlideDialog extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
             child: Text(l10n.t('cancel')),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTabBar(List<_PickerTab> tabs) {
+    return Semantics(
+      container: true,
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: [
+          for (final tab in tabs)
+            ChoiceChip(
+              label: Text(tab.label),
+              selected: _activeCategory == tab.category,
+              onSelected: (_) => setState(() => _activeCategory = tab.category),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSearchRow(AppLocalizations l10n) {
+    return Row(
+      children: [
+        Expanded(
+          child: TextField(
+            controller: _searchCtrl,
+            onChanged: (_) => setState(() {}),
+            decoration: InputDecoration(
+              isDense: true,
+              prefixIcon: const Icon(Icons.search, size: 18),
+              hintText: l10n.d('Zoek een slidetype'),
+              suffixIcon: _searchCtrl.text.isEmpty
+                  ? null
+                  : IconButton(
+                      icon: const Icon(Icons.clear, size: 18),
+                      tooltip: l10n.d('Zoekopdracht wissen'),
+                      onPressed: () => setState(() => _searchCtrl.clear()),
+                    ),
+              border: const OutlineInputBorder(),
+            ),
+          ),
+        ),
+        const SizedBox(width: 8),
+        IconButton(
+          icon: const Icon(Icons.sort_by_alpha),
+          isSelected: _alphabetical,
+          tooltip: l10n.d('Alfabetisch sorteren'),
+          onPressed: () => setState(() => _alphabetical = !_alphabetical),
+          style: IconButton.styleFrom(
+            backgroundColor: _alphabetical
+                ? AppTheme.accent.withValues(alpha: 0.14)
+                : null,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildGrid(
+    BuildContext context,
+    AppLocalizations l10n,
+    List<SlideType> types,
+  ) {
+    if (types.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 24),
+        child: Text(
+          l10n.d('Geen resultaten'),
+          textAlign: TextAlign.center,
+          style: TextStyle(color: AppTheme.slate500),
+        ),
+      );
+    }
+    return SingleChildScrollView(
+      child: Wrap(
+        spacing: 10,
+        runSpacing: 10,
+        children: [
+          for (var i = 0; i < types.length; i++)
+            _TypeCard(
+              type: types[i],
+              label: l10n.d(types[i].label),
+              autofocus: i == 0,
+              onTap: () => Navigator.pop(context, types[i]),
+            ),
         ],
       ),
     );

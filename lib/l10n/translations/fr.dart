@@ -84,6 +84,11 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'Zoek een slidetype': 'Rechercher un type de diapositive',
+  'Alfabetisch sorteren': 'Trier par ordre alphabétique',
+  'Algemeen': 'Général',
+  'Informatieveiligheid': 'Sécurité de l\'information',
+  'Alle': 'Tout',
   'Pentestrapportage (ontwerp)': 'Rapport de pentest (conception)',
   'AI-assistentie (ontwerp)': 'Assistance IA (conception)',
   'Agentisch bouwplan (ontwerp)': 'Plan de construction agentique (conception)',

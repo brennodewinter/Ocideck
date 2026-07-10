@@ -84,6 +84,11 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Zoek een slidetype': 'Пошук типу слайда',
+  'Alfabetisch sorteren': 'Сортувати за абеткою',
+  'Algemeen': 'Загальні',
+  'Informatieveiligheid': 'Інформаційна безпека',
+  'Alle': 'Усі',
   'Pentestrapportage (ontwerp)': 'Звіт про пентест (проєкт)',
   'AI-assistentie (ontwerp)': 'Допомога ШІ (проєкт)',
   'Agentisch bouwplan (ontwerp)': 'Агентний план складання (проєкт)',

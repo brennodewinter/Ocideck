@@ -83,6 +83,11 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Zoek een slidetype': 'Buska un tipo di slide',
+  'Alfabetisch sorteren': 'Ordená alfabétikamente',
+  'Algemeen': 'General',
+  'Informatieveiligheid': 'Seguridat di informashon',
+  'Alle': 'Tur',
   'Pentestrapportage (ontwerp)': 'Rapòrt di pentest (diseño)',
   'AI-assistentie (ontwerp)': 'Asistensia AI (diseño)',
   'Agentisch bouwplan (ontwerp)': 'Plan di konstrukshon agéntiko (diseño)',

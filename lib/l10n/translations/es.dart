@@ -84,6 +84,11 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Zoek een slidetype': 'Buscar un tipo de diapositiva',
+  'Alfabetisch sorteren': 'Ordenar alfabéticamente',
+  'Algemeen': 'General',
+  'Informatieveiligheid': 'Seguridad de la información',
+  'Alle': 'Todos',
   'Pentestrapportage (ontwerp)': 'Informe de pentest (diseño)',
   'AI-assistentie (ontwerp)': 'Asistencia de IA (diseño)',
   'Agentisch bouwplan (ontwerp)': 'Plan de construcción agéntico (diseño)',

@@ -83,6 +83,11 @@ const _stringsIt = {
 };
 
 const _dutchSourceIt = {
+  'Zoek een slidetype': 'Cerca un tipo di slide',
+  'Alfabetisch sorteren': 'Ordina alfabeticamente',
+  'Algemeen': 'Generale',
+  'Informatieveiligheid': 'Sicurezza delle informazioni',
+  'Alle': 'Tutti',
   'Pentestrapportage (ontwerp)': 'Rapporto penetration test (progetto)',
   'AI-assistentie (ontwerp)': 'Assistenza AI (progetto)',
   'Agentisch bouwplan (ontwerp)': 'Piano di build agentico (progetto)',

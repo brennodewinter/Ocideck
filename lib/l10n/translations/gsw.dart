@@ -83,6 +83,11 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Zoek een slidetype': 'Slide-Typ suech',
+  'Alfabetisch sorteren': 'Alphabetisch sortiere',
+  'Algemeen': 'Allgemein',
+  'Informatieveiligheid': 'Informationssicherheit',
+  'Alle': 'Alli',
   'Pentestrapportage (ontwerp)': 'Pentest-Bricht (Design)',
   'AI-assistentie (ontwerp)': 'AI-Assistänz (Design)',
   'Agentisch bouwplan (ontwerp)': 'Agentische Bauplan (Design)',

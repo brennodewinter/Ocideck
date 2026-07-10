@@ -82,6 +82,11 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Zoek een slidetype': 'Otsi slaiditüüpi',
+  'Alfabetisch sorteren': 'Sorteeri tähestikuliselt',
+  'Algemeen': 'Üldine',
+  'Informatieveiligheid': 'Infoturve',
+  'Alle': 'Kõik',
   'Pentestrapportage (ontwerp)': 'Pentesti aruanne (kavand)',
   'AI-assistentie (ontwerp)': 'AI-abi (kavand)',
   'Agentisch bouwplan (ontwerp)': 'Agentne ehitusplaan (kavand)',

@@ -83,6 +83,11 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Zoek een slidetype': 'Sök efter en bildtyp',
+  'Alfabetisch sorteren': 'Sortera alfabetiskt',
+  'Algemeen': 'Allmänt',
+  'Informatieveiligheid': 'Informationssäkerhet',
+  'Alle': 'Alla',
   'Pentestrapportage (ontwerp)': 'Pentestrapport (design)',
   'AI-assistentie (ontwerp)': 'AI-assistans (design)',
   'Agentisch bouwplan (ontwerp)': 'Agentisk byggplan (design)',

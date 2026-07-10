@@ -83,6 +83,11 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Zoek een slidetype': 'Pretraži vrstu slajda',
+  'Alfabetisch sorteren': 'Sortiraj abecedno',
+  'Algemeen': 'Općenito',
+  'Informatieveiligheid': 'Informacijska sigurnost',
+  'Alle': 'Sve',
   'Pentestrapportage (ontwerp)': 'Izvještaj penetracijskog testiranja (dizajn)',
   'AI-assistentie (ontwerp)': 'AI pomoć (dizajn)',
   'Agentisch bouwplan (ontwerp)': 'Agentski plan izgradnje (dizajn)',

@@ -81,6 +81,11 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Zoek een slidetype': 'cha\'nob Segh yInej',
+  'Alfabetisch sorteren': 'pIqaD yInuD',
+  'Algemeen': 'motlh',
+  'Informatieveiligheid': 'De\' Qan',
+  'Alle': 'Hoch',
   'Pentestrapportage (ontwerp)': 'pentest ja\'ghach (nab)',
   'AI-assistentie (ontwerp)': 'AI QaH (nab)',
   'Agentisch bouwplan (ontwerp)': 'agentic chenmoHmeH nab (nab)',

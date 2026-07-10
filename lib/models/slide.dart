@@ -26,6 +26,13 @@ enum SlideType {
   timeline,
 }
 
+/// Broad grouping a [SlideType] belongs to, used by the add-slide picker to
+/// offer category tabs. Everything is [SlideCategory.algemeen] today; a later
+/// package tags the pentest-reporting layouts as
+/// [SlideCategory.informatieveiligheid], at which point the picker's tab bar
+/// appears automatically.
+enum SlideCategory { algemeen, informatieveiligheid }
+
 enum ListStyle { bullets, numbered, checklist, richText }
 
 int bulletLevel(String value) {
@@ -69,11 +76,17 @@ class SlideTypeMeta {
   /// A heading/divider slide (title or section) with no flowing body content.
   final bool isHeading;
 
+  /// Which picker category this type belongs to. Drives the add-slide dialog's
+  /// category tabs; defaults to [SlideCategory.algemeen] so existing types need
+  /// no per-entry change.
+  final SlideCategory category;
+
   const SlideTypeMeta({
     required this.label,
     required this.marpClass,
     this.splitWithImage = false,
     this.isHeading = false,
+    this.category = SlideCategory.algemeen,
   });
 }
 
@@ -122,6 +135,9 @@ extension SlideTypeExtension on SlideType {
 
   /// True for a title/section heading slide.
   bool get isHeading => slideTypeMeta[this]!.isHeading;
+
+  /// The picker category this type belongs to.
+  SlideCategory get category => slideTypeMeta[this]!.category;
 }
 
 class Slide {

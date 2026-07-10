@@ -84,6 +84,11 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Zoek een slidetype': 'Căutați un tip de slide',
+  'Alfabetisch sorteren': 'Sortează alfabetic',
+  'Algemeen': 'General',
+  'Informatieveiligheid': 'Securitatea informației',
+  'Alle': 'Toate',
   'Pentestrapportage (ontwerp)': 'Raport de pentest (proiectare)',
   'AI-assistentie (ontwerp)': 'Asistență AI (proiectare)',
   'Agentisch bouwplan (ontwerp)': 'Plan de construcție agentic (proiectare)',

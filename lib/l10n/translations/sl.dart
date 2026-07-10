@@ -83,6 +83,11 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Zoek een slidetype': 'Poišči vrsto diapozitiva',
+  'Alfabetisch sorteren': 'Razvrsti po abecedi',
+  'Algemeen': 'Splošno',
+  'Informatieveiligheid': 'Informacijska varnost',
+  'Alle': 'Vse',
   'Pentestrapportage (ontwerp)': 'Poročilo o pentestu (zasnova)',
   'AI-assistentie (ontwerp)': 'Pomoč AI (zasnova)',
   'Agentisch bouwplan (ontwerp)': 'Agentni načrt gradnje (zasnova)',

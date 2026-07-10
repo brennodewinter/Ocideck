@@ -85,6 +85,11 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Zoek een slidetype': 'Quaere genus paginae',
+  'Alfabetisch sorteren': 'Ordina alphabetice',
+  'Algemeen': 'Generalia',
+  'Informatieveiligheid': 'Securitas informationis',
+  'Alle': 'Omnia',
   'Pentestrapportage (ontwerp)': 'Relatio pentest (designatio)',
   'AI-assistentie (ontwerp)': 'Auxilium AI (designatio)',
   'Agentisch bouwplan (ontwerp)':
