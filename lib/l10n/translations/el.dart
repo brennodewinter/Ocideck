@@ -83,6 +83,27 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  '(leeg)': '(κενό)',
+  'Audio': 'Ήχος',
+  'Bijschrift': 'Λεζάντα',
+  'Bron citaat': 'Πηγή παραθέματος',
+  'Codetaal': 'Γλώσσα κώδικα',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Καμία ορατή διαφορά — οι διαφάνειες είναι ίδιες ως προς το περιεχόμενο.',
+  'In meerdere presentaties': 'Σε πολλές παρουσιάσεις',
+  'Kop kolom 1': 'Κεφαλίδα στήλης 1',
+  'Kop kolom 2': 'Κεφαλίδα στήλης 2',
+  'Lijststijl': 'Στυλ λίστας',
+  'Notities': 'Σημειώσεις',
+  'Tweede bijschrift': 'Δεύτερη λεζάντα',
+  'Tweede opsomming': 'Δεύτερη λίστα κουκκίδων',
+  'Vergelijk met:': 'Σύγκριση με:',
+  'Verschillen': 'Διαφορές',
+  'Verschillen tussen slides': 'Διαφορές μεταξύ διαφανειών',
+  'duplica(a)t(en) verborgen': 'διπλότυπα κρυμμένα',
+  'slides — verfijn je zoekopdracht':
+      'διαφάνειες — βελτιώστε την αναζήτησή σας',
+  'unieke slide(s)': 'μοναδικές διαφάνειες',
   'Bevinding': 'Εύρημα',
   'Bevindingenoverzicht': 'Επισκόπηση ευρημάτων',
   'Scope-matrix': 'Μήτρα εμβέλειας',

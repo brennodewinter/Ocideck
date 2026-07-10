@@ -84,6 +84,26 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  '(leeg)': '(gol)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Legendă',
+  'Bron citaat': 'Sursa citatului',
+  'Codetaal': 'Limbaj de cod',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Nicio diferență vizibilă — diapozitivele sunt identice ca conținut.',
+  'In meerdere presentaties': 'În mai multe prezentări',
+  'Kop kolom 1': 'Antet coloana 1',
+  'Kop kolom 2': 'Antet coloana 2',
+  'Lijststijl': 'Stil listă',
+  'Notities': 'Notițe',
+  'Tweede bijschrift': 'A doua legendă',
+  'Tweede opsomming': 'A doua listă cu marcatori',
+  'Vergelijk met:': 'Compară cu:',
+  'Verschillen': 'Diferențe',
+  'Verschillen tussen slides': 'Diferențe între diapozitive',
+  'duplica(a)t(en) verborgen': 'duplicate ascunse',
+  'slides — verfijn je zoekopdracht': 'diapozitive — rafinează căutarea',
+  'unieke slide(s)': 'diapozitive unice',
   'Bevinding': 'Constatare',
   'Bevindingenoverzicht': 'Prezentare generală a constatărilor',
   'Scope-matrix': 'Matrice a domeniului',

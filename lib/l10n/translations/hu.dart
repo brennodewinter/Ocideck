@@ -83,6 +83,26 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  '(leeg)': '(üres)',
+  'Audio': 'Hang',
+  'Bijschrift': 'Képaláírás',
+  'Bron citaat': 'Idézet forrása',
+  'Codetaal': 'Kód nyelve',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Nincs látható eltérés — a diák tartalmilag azonosak.',
+  'In meerdere presentaties': 'Több bemutatóban',
+  'Kop kolom 1': '1. oszlop fejléce',
+  'Kop kolom 2': '2. oszlop fejléce',
+  'Lijststijl': 'Listastílus',
+  'Notities': 'Jegyzetek',
+  'Tweede bijschrift': 'Második képaláírás',
+  'Tweede opsomming': 'Második felsorolás',
+  'Vergelijk met:': 'Összehasonlítás ezzel:',
+  'Verschillen': 'Eltérések',
+  'Verschillen tussen slides': 'Eltérések a diák között',
+  'duplica(a)t(en) verborgen': 'duplikátum elrejtve',
+  'slides — verfijn je zoekopdracht': 'dia — pontosítsd a keresést',
+  'unieke slide(s)': 'egyedi dia',
   'Bevinding': 'Megállapítás',
   'Bevindingenoverzicht': 'Megállapítások áttekintése',
   'Scope-matrix': 'Hatókör-mátrix',

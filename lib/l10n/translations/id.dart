@@ -83,6 +83,26 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  '(leeg)': '(kosong)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Keterangan',
+  'Bron citaat': 'Sumber kutipan',
+  'Codetaal': 'Bahasa kode',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Tidak ada perbedaan yang terlihat — slide identik secara isi.',
+  'In meerdere presentaties': 'Di beberapa presentasi',
+  'Kop kolom 1': 'Judul kolom 1',
+  'Kop kolom 2': 'Judul kolom 2',
+  'Lijststijl': 'Gaya daftar',
+  'Notities': 'Catatan',
+  'Tweede bijschrift': 'Keterangan kedua',
+  'Tweede opsomming': 'Daftar berpoin kedua',
+  'Vergelijk met:': 'Bandingkan dengan:',
+  'Verschillen': 'Perbedaan',
+  'Verschillen tussen slides': 'Perbedaan antarslide',
+  'duplica(a)t(en) verborgen': 'duplikat disembunyikan',
+  'slides — verfijn je zoekopdracht': 'slide — persempit pencarian Anda',
+  'unieke slide(s)': 'slide unik',
   'Bevinding': 'Temuan',
   'Bevindingenoverzicht': 'Ikhtisar temuan',
   'Scope-matrix': 'Matriks cakupan',

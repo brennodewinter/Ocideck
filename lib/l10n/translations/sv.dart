@@ -83,6 +83,26 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  '(leeg)': '(tom)',
+  'Audio': 'Ljud',
+  'Bijschrift': 'Bildtext',
+  'Bron citaat': 'Citatkälla',
+  'Codetaal': 'Kodspråk',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Inga synliga skillnader — bilderna har samma innehåll.',
+  'In meerdere presentaties': 'I flera presentationer',
+  'Kop kolom 1': 'Rubrik kolumn 1',
+  'Kop kolom 2': 'Rubrik kolumn 2',
+  'Lijststijl': 'Liststil',
+  'Notities': 'Anteckningar',
+  'Tweede bijschrift': 'Andra bildtexten',
+  'Tweede opsomming': 'Andra punktlistan',
+  'Vergelijk met:': 'Jämför med:',
+  'Verschillen': 'Skillnader',
+  'Verschillen tussen slides': 'Skillnader mellan bilder',
+  'duplica(a)t(en) verborgen': 'dubblett(er) dolda',
+  'slides — verfijn je zoekopdracht': 'bilder — förfina din sökning',
+  'unieke slide(s)': 'unik(a) bild(er)',
   'Bevinding': 'Iakttagelse',
   'Bevindingenoverzicht': 'Sammanställning av iakttagelser',
   'Scope-matrix': 'Omfattningsmatris',

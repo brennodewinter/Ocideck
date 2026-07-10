@@ -85,6 +85,26 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  '(leeg)': '(puste)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Podpis',
+  'Bron citaat': 'Źródło cytatu',
+  'Codetaal': 'Język kodu',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Brak widocznych różnic — slajdy mają tę samą treść.',
+  'In meerdere presentaties': 'W wielu prezentacjach',
+  'Kop kolom 1': 'Nagłówek kolumny 1',
+  'Kop kolom 2': 'Nagłówek kolumny 2',
+  'Lijststijl': 'Styl listy',
+  'Notities': 'Notatki',
+  'Tweede bijschrift': 'Drugi podpis',
+  'Tweede opsomming': 'Druga lista punktowana',
+  'Vergelijk met:': 'Porównaj z:',
+  'Verschillen': 'Różnice',
+  'Verschillen tussen slides': 'Różnice między slajdami',
+  'duplica(a)t(en) verborgen': 'duplikat(y) ukryte',
+  'slides — verfijn je zoekopdracht': 'slajdów — zawęź wyszukiwanie',
+  'unieke slide(s)': 'unikatowych slajdów',
   'Bevinding': 'Ustalenie',
   'Bevindingenoverzicht': 'Zestawienie ustaleń',
   'Scope-matrix': 'Macierz zakresu',

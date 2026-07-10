@@ -84,6 +84,26 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  '(leeg)': '(prázdne)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Popis',
+  'Bron citaat': 'Zdroj citátu',
+  'Codetaal': 'Jazyk kódu',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Žiadne viditeľné rozdiely — snímky sú obsahovo zhodné.',
+  'In meerdere presentaties': 'Vo viacerých prezentáciách',
+  'Kop kolom 1': 'Hlavička stĺpca 1',
+  'Kop kolom 2': 'Hlavička stĺpca 2',
+  'Lijststijl': 'Štýl zoznamu',
+  'Notities': 'Poznámky',
+  'Tweede bijschrift': 'Druhý popis',
+  'Tweede opsomming': 'Druhý zoznam s odrážkami',
+  'Vergelijk met:': 'Porovnať s:',
+  'Verschillen': 'Rozdiely',
+  'Verschillen tussen slides': 'Rozdiely medzi snímkami',
+  'duplica(a)t(en) verborgen': 'skrytých duplikátov',
+  'slides — verfijn je zoekopdracht': 'snímok — spresnite vyhľadávanie',
+  'unieke slide(s)': 'jedinečných snímok',
   'Bevinding': 'Zistenie',
   'Bevindingenoverzicht': 'Prehľad zistení',
   'Scope-matrix': 'Matica rozsahu',

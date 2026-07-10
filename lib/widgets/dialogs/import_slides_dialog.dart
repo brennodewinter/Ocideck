@@ -4,9 +4,28 @@ import 'package:path/path.dart' as p;
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/file_service.dart';
+import '../../services/slide_dedup_service.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../slides/slide_preview.dart';
+import 'slide_diff_dialog.dart';
+
+/// One place a slide was found while scanning: the deck plus the slide. Used to
+/// de-duplicate identical slides across decks and to label where they live.
+class _Occ {
+  final ScannedPresentation pres;
+  final Slide slide;
+  const _Occ(this.pres, this.slide);
+
+  String get sourceName =>
+      pres.deck.title.isEmpty ? pres.fileName : pres.deck.title;
+
+  /// 1-based position of the slide in its deck, for labels/tooltips.
+  int get slideNumber => pres.deck.slides.indexOf(slide) + 1;
+
+  String label(AppLocalizations l10n) =>
+      '$sourceName · ${l10n.d('slide')} $slideNumber';
+}
 
 /// Dialog that scans a directory for other Marp presentations, lets the user
 /// search across them and pick individual slides to import. Returns the
@@ -45,6 +64,8 @@ class ImportSlidesDialog extends StatefulWidget {
 }
 
 class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
+  final _dedup = SlideDedupService();
+
   String? _directory;
   bool _loading = false;
   List<ScannedPresentation> _presentations = const [];
@@ -146,6 +167,26 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
     if (p.isAbsolute(imagePath)) return imagePath;
     if (projectPath != null) return p.join(projectPath, imagePath);
     return imagePath;
+  }
+
+  /// Open the side-by-side comparison for a shown slide and its look-alikes.
+  void _compare(
+    AppLocalizations l10n,
+    _Occ primary,
+    List<SlideGroup<_Occ>> similar,
+  ) {
+    SlideDiffRef refOf(_Occ o) => SlideDiffRef(
+      label: o.label(l10n),
+      slide: o.slide,
+      projectPath: o.pres.deck.projectPath,
+      themeProfile: o.pres.deck.themeProfile,
+    );
+
+    SlideDiffDialog.show(
+      context,
+      primary: refOf(primary),
+      others: [for (final g in similar) refOf(g.primary)],
+    );
   }
 
   @override
@@ -267,14 +308,42 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
       );
     }
 
+    // De-duplicate identical slides across the whole (query-filtered) view: the
+    // slide is shown once, at its first occurrence, and hidden from later decks.
+    final occs = [
+      for (final (pres, slides) in visible)
+        for (final s in slides) _Occ(pres, s),
+    ];
+    final result = _dedup.dedupe(occs, (o) => o.slide);
+    final groupByPrimaryId = <String, SlideGroup<_Occ>>{};
+    final similarByPrimaryId = <String, List<SlideGroup<_Occ>>>{};
+    for (var i = 0; i < result.groups.length; i++) {
+      final g = result.groups[i];
+      groupByPrimaryId[g.primary.slide.id] = g;
+      similarByPrimaryId[g.primary.slide.id] = [
+        for (final j in result.similar[i]) result.groups[j],
+      ];
+    }
+
+    // Re-project onto the per-deck sections, keeping only primary occurrences.
+    final sections = <(ScannedPresentation, List<Slide>)>[];
+    for (final (pres, slides) in visible) {
+      final kept = slides
+          .where((s) => groupByPrimaryId.containsKey(s.id))
+          .toList();
+      if (kept.isNotEmpty) sections.add((pres, kept));
+    }
+
     return ListView.builder(
-      itemCount: visible.length,
+      itemCount: sections.length,
       itemBuilder: (_, i) {
-        final (pres, slides) = visible[i];
+        final (pres, slides) = sections[i];
         return _PresentationSection(
           presentation: pres,
           slides: slides,
           selectedIds: _selectedIds,
+          groupByPrimaryId: groupByPrimaryId,
+          similarByPrimaryId: similarByPrimaryId,
           onToggle: (slide) => setState(() {
             if (!_selectedIds.remove(slide.id)) _selectedIds.add(slide.id);
           }),
@@ -287,6 +356,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
               }
             }
           }),
+          onCompare: (primary, similar) => _compare(l10n, primary, similar),
         );
       },
     );
@@ -316,15 +386,21 @@ class _PresentationSection extends StatelessWidget {
   final ScannedPresentation presentation;
   final List<Slide> slides;
   final Set<String> selectedIds;
+  final Map<String, SlideGroup<_Occ>> groupByPrimaryId;
+  final Map<String, List<SlideGroup<_Occ>>> similarByPrimaryId;
   final ValueChanged<Slide> onToggle;
   final ValueChanged<bool> onToggleAll;
+  final void Function(_Occ primary, List<SlideGroup<_Occ>> similar) onCompare;
 
   const _PresentationSection({
     required this.presentation,
     required this.slides,
     required this.selectedIds,
+    required this.groupByPrimaryId,
+    required this.similarByPrimaryId,
     required this.onToggle,
     required this.onToggleAll,
+    required this.onCompare,
   });
 
   @override
@@ -393,17 +469,27 @@ class _PresentationSection extends StatelessWidget {
             runSpacing: 10,
             children: [
               for (final slide in slides)
-                _SlideCard(
-                  slide: slide,
-                  projectPath: deck.projectPath,
-                  themeProfile: deck.themeProfile,
-                  selected: selectedIds.contains(slide.id),
-                  onTap: () => onToggle(slide),
-                ),
+                _slideCardFor(slide, deck.projectPath, deck.themeProfile),
             ],
           ),
         ],
       ),
+    );
+  }
+
+  Widget _slideCardFor(Slide slide, String? projectPath, ThemeProfile theme) {
+    final group = groupByPrimaryId[slide.id];
+    final similar = similarByPrimaryId[slide.id] ?? const [];
+    return _SlideCard(
+      slide: slide,
+      projectPath: projectPath,
+      themeProfile: theme,
+      selected: selectedIds.contains(slide.id),
+      occurrences: group?.occurrences ?? const [],
+      onTap: () => onToggle(slide),
+      onCompare: (similar.isEmpty || group == null)
+          ? null
+          : () => onCompare(group.primary, similar),
     );
   }
 }
@@ -415,64 +501,140 @@ class _SlideCard extends StatelessWidget {
   final String? projectPath;
   final ThemeProfile themeProfile;
   final bool selected;
+
+  /// Every place this exact slide was found (length > 1 ⇒ a duplicate hidden
+  /// from other decks; drives the "in N presentaties" badge).
+  final List<_Occ> occurrences;
   final VoidCallback onTap;
+  final VoidCallback? onCompare;
 
   const _SlideCard({
     required this.slide,
     required this.projectPath,
     required this.themeProfile,
     required this.selected,
+    required this.occurrences,
     required this.onTap,
+    required this.onCompare,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: SizedBox(
-        width: 168,
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(
-                  color: selected ? AppTheme.accent : AppTheme.slate300,
-                  width: selected ? 2.5 : 1,
-                ),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: SlidePreviewWidget(
-                    slide: slide,
-                    projectPath: projectPath,
-                    themeProfile: themeProfile,
+    final l10n = context.l10n;
+    return SizedBox(
+      width: 168,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          GestureDetector(
+            onTap: onTap,
+            child: Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                      color: selected ? AppTheme.accent : AppTheme.slate300,
+                      width: selected ? 2.5 : 1,
+                    ),
                   ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: SlidePreviewWidget(
+                        slide: slide,
+                        projectPath: projectPath,
+                        themeProfile: themeProfile,
+                      ),
+                    ),
+                  ),
+                ),
+                if (occurrences.length > 1)
+                  Positioned(top: 4, left: 4, child: _copiesBadge(l10n)),
+                Positioned(
+                  top: 4,
+                  right: 4,
+                  child: AnimatedOpacity(
+                    opacity: selected ? 1 : 0.55,
+                    duration: const Duration(milliseconds: 120),
+                    child: Container(
+                      width: 22,
+                      height: 22,
+                      decoration: BoxDecoration(
+                        color: selected ? AppTheme.accent : Colors.black38,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.white, width: 1.5),
+                      ),
+                      child: Icon(
+                        selected ? Icons.check : Icons.add,
+                        size: 14,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (onCompare != null)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                onPressed: onCompare,
+                icon: const Icon(Icons.difference_outlined, size: 13),
+                label: Text(l10n.d('Verschillen')),
+                style: TextButton.styleFrom(
+                  foregroundColor: AppTheme.amber700,
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  minimumSize: const Size(0, 24),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  textStyle: const TextStyle(fontSize: 11),
                 ),
               ),
             ),
-            Positioned(
-              top: 4,
-              right: 4,
-              child: AnimatedOpacity(
-                opacity: selected ? 1 : 0.55,
-                duration: const Duration(milliseconds: 120),
-                child: Container(
-                  width: 22,
-                  height: 22,
-                  decoration: BoxDecoration(
-                    color: selected ? AppTheme.accent : Colors.black38,
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 1.5),
-                  ),
-                  child: Icon(
-                    selected ? Icons.check : Icons.add,
-                    size: 14,
-                    color: Colors.white,
-                  ),
-                ),
+        ],
+      ),
+    );
+  }
+
+  /// "In N presentaties" chip listing every deck this exact slide was found in.
+  Widget _copiesBadge(AppLocalizations l10n) {
+    return PopupMenuButton<void>(
+      tooltip: l10n.d('In meerdere presentaties'),
+      itemBuilder: (_) => [
+        for (final o in occurrences)
+          PopupMenuItem<void>(
+            enabled: false,
+            height: 32,
+            child: Tooltip(
+              message: o.pres.path,
+              child: Text(
+                o.label(l10n),
+                style: const TextStyle(fontSize: 12),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+      ],
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+        decoration: BoxDecoration(
+          color: AppTheme.accent,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.copy_all_outlined, size: 11, color: Colors.white),
+            const SizedBox(width: 3),
+            Text(
+              '${occurrences.length}',
+              style: const TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
               ),
             ),
           ],

@@ -83,6 +83,27 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  '(leeg)': '(leech)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Byskrift',
+  'Bron citaat': 'Boarne sitaat',
+  'Codetaal': 'Koadetaal',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Gjin sichtbere ferskillen — de slides binne ynhâldlik gelyk.',
+  'In meerdere presentaties': 'Yn meardere presintaasjes',
+  'Kop kolom 1': 'Kop kolom 1',
+  'Kop kolom 2': 'Kop kolom 2',
+  'Lijststijl': 'Liststyl',
+  'Notities': 'Notysjes',
+  'Tweede bijschrift': 'Twadde byskrift',
+  'Tweede opsomming': 'Twadde opsomming',
+  'Vergelijk met:': 'Ferlykje mei:',
+  'Verschillen': 'Ferskillen',
+  'Verschillen tussen slides': 'Ferskillen tusken slides',
+  'Video': 'Video',
+  'duplica(a)t(en) verborgen': 'duplika(a)t(en) ferstoppe',
+  'slides — verfijn je zoekopdracht': 'slides — ferfynje dyn sykopdracht',
+  'unieke slide(s)': 'unike slide(s)',
   'Bevinding': 'Befining',
   'Bevindingenoverzicht': 'Befiningenoersjoch',
   'Scope-matrix': 'Scope-matriks',

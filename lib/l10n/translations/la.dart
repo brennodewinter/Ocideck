@@ -85,6 +85,26 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  '(leeg)': '(vacuum)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Inscriptio',
+  'Bron citaat': 'Fons citationis',
+  'Codetaal': 'Lingua codicis',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Nullae differentiae visibiles — paginae contentu aequales sunt.',
+  'In meerdere presentaties': 'In pluribus praesentationibus',
+  'Kop kolom 1': 'Titulus columnae 1',
+  'Kop kolom 2': 'Titulus columnae 2',
+  'Lijststijl': 'Stilus indicis',
+  'Notities': 'Notae',
+  'Tweede bijschrift': 'Inscriptio secunda',
+  'Tweede opsomming': 'Enumeratio secunda',
+  'Vergelijk met:': 'Confer cum:',
+  'Verschillen': 'Differentiae',
+  'Verschillen tussen slides': 'Differentiae inter paginas',
+  'duplica(a)t(en) verborgen': 'duplicata occultata',
+  'slides — verfijn je zoekopdracht': 'paginae — inquisitionem tuam expoli',
+  'unieke slide(s)': 'paginae singulares',
   'Bevinding': 'Inventum',
   'Bevindingenoverzicht': 'Conspectus inventorum',
   'Scope-matrix': 'Matrix ambitus',

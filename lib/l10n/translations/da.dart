@@ -83,6 +83,26 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  '(leeg)': '(tom)',
+  'Audio': 'Lyd',
+  'Bijschrift': 'Billedtekst',
+  'Bron citaat': 'Citatkilde',
+  'Codetaal': 'Kodesprog',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Ingen synlige forskelle — diassene har samme indhold.',
+  'In meerdere presentaties': 'I flere præsentationer',
+  'Kop kolom 1': 'Overskrift kolonne 1',
+  'Kop kolom 2': 'Overskrift kolonne 2',
+  'Lijststijl': 'Listestil',
+  'Notities': 'Noter',
+  'Tweede bijschrift': 'Anden billedtekst',
+  'Tweede opsomming': 'Anden punktopstilling',
+  'Vergelijk met:': 'Sammenlign med:',
+  'Verschillen': 'Forskelle',
+  'Verschillen tussen slides': 'Forskelle mellem dias',
+  'duplica(a)t(en) verborgen': 'dublet(ter) skjult',
+  'slides — verfijn je zoekopdracht': 'dias — forfin din søgning',
+  'unieke slide(s)': 'unik(ke) dias',
   'Bevinding': 'Fund',
   'Bevindingenoverzicht': 'Oversigt over fund',
   'Scope-matrix': 'Scope-matrix',

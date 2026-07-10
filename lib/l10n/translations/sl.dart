@@ -83,6 +83,26 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  '(leeg)': '(prazno)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Napis',
+  'Bron citaat': 'Vir citata',
+  'Codetaal': 'Jezik kode',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Ni vidnih razlik — prosojnice so vsebinsko enake.',
+  'In meerdere presentaties': 'V več predstavitvah',
+  'Kop kolom 1': 'Glava stolpca 1',
+  'Kop kolom 2': 'Glava stolpca 2',
+  'Lijststijl': 'Slog seznama',
+  'Notities': 'Opombe',
+  'Tweede bijschrift': 'Drugi napis',
+  'Tweede opsomming': 'Drugi označeni seznam',
+  'Vergelijk met:': 'Primerjaj z:',
+  'Verschillen': 'Razlike',
+  'Verschillen tussen slides': 'Razlike med prosojnicami',
+  'duplica(a)t(en) verborgen': 'skritih dvojnikov',
+  'slides — verfijn je zoekopdracht': 'prosojnic — izpopolnite iskanje',
+  'unieke slide(s)': 'edinstvenih prosojnic',
   'Bevinding': 'Ugotovitev',
   'Bevindingenoverzicht': 'Pregled ugotovitev',
   'Scope-matrix': 'Matrika obsega',

@@ -84,6 +84,26 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  '(leeg)': '(prázdné)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Popisek',
+  'Bron citaat': 'Zdroj citátu',
+  'Codetaal': 'Jazyk kódu',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Žádné viditelné rozdíly — snímky jsou obsahově shodné.',
+  'In meerdere presentaties': 'Ve více prezentacích',
+  'Kop kolom 1': 'Záhlaví sloupce 1',
+  'Kop kolom 2': 'Záhlaví sloupce 2',
+  'Lijststijl': 'Styl seznamu',
+  'Notities': 'Poznámky',
+  'Tweede bijschrift': 'Druhý popisek',
+  'Tweede opsomming': 'Druhý seznam s odrážkami',
+  'Vergelijk met:': 'Porovnat s:',
+  'Verschillen': 'Rozdíly',
+  'Verschillen tussen slides': 'Rozdíly mezi snímky',
+  'duplica(a)t(en) verborgen': 'skrytých duplikátů',
+  'slides — verfijn je zoekopdracht': 'snímků — upřesněte vyhledávání',
+  'unieke slide(s)': 'jedinečných snímků',
   'Bevinding': 'Zjištění',
   'Bevindingenoverzicht': 'Přehled zjištění',
   'Scope-matrix': 'Matice rozsahu',

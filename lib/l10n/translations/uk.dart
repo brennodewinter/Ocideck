@@ -84,6 +84,26 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  '(leeg)': '(порожньо)',
+  'Audio': 'Аудіо',
+  'Bijschrift': 'Підпис',
+  'Bron citaat': 'Джерело цитати',
+  'Codetaal': 'Мова коду',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Немає видимих відмінностей — слайди ідентичні за змістом.',
+  'In meerdere presentaties': 'У кількох презентаціях',
+  'Kop kolom 1': 'Заголовок стовпця 1',
+  'Kop kolom 2': 'Заголовок стовпця 2',
+  'Lijststijl': 'Стиль списку',
+  'Notities': 'Нотатки',
+  'Tweede bijschrift': 'Другий підпис',
+  'Tweede opsomming': 'Другий список',
+  'Vergelijk met:': 'Порівняти з:',
+  'Verschillen': 'Відмінності',
+  'Verschillen tussen slides': 'Відмінності між слайдами',
+  'duplica(a)t(en) verborgen': 'дублікатів приховано',
+  'slides — verfijn je zoekopdracht': 'слайдів — уточніть свій запит',
+  'unieke slide(s)': 'унікальних слайдів',
   'Bevinding': 'Виявлення',
   'Bevindingenoverzicht': 'Огляд виявлень',
   'Scope-matrix': 'Матриця обсягу',

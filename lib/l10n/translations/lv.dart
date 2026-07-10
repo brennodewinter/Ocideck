@@ -83,6 +83,26 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  '(leeg)': '(tukšs)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Paraksts',
+  'Bron citaat': 'Citāta avots',
+  'Codetaal': 'Koda valoda',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Nav redzamu atšķirību — slaidi pēc satura ir vienādi.',
+  'In meerdere presentaties': 'Vairākās prezentācijās',
+  'Kop kolom 1': '1. kolonnas virsraksts',
+  'Kop kolom 2': '2. kolonnas virsraksts',
+  'Lijststijl': 'Saraksta stils',
+  'Notities': 'Piezīmes',
+  'Tweede bijschrift': 'Otrais paraksts',
+  'Tweede opsomming': 'Otrais aizzīmju saraksts',
+  'Vergelijk met:': 'Salīdzināt ar:',
+  'Verschillen': 'Atšķirības',
+  'Verschillen tussen slides': 'Atšķirības starp slaidiem',
+  'duplica(a)t(en) verborgen': 'dublikāts(-i) paslēpts(-i)',
+  'slides — verfijn je zoekopdracht': 'slaidi — precizējiet meklējumu',
+  'unieke slide(s)': 'unikāls(-i) slaids(-i)',
   'Bevinding': 'Konstatējums',
   'Bevindingenoverzicht': 'Konstatējumu pārskats',
   'Scope-matrix': 'Tvēruma matrica',

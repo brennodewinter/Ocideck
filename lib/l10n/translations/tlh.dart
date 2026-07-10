@@ -81,6 +81,26 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  '(leeg)': '(chIm)',
+  'Audio': 'wab',
+  'Bijschrift': 'per',
+  'Bron citaat': 'mu\'mey mung',
+  'Codetaal': 'De\'wI\' Hol',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'pImmey leghlu\'be\' — navmey rap.',
+  'In meerdere presentaties': '\'aghmey law\'Daq',
+  'Kop kolom 1': '\'ay\' wa\'DIch nach',
+  'Kop kolom 2': '\'ay\' cha\'DIch nach',
+  'Lijststijl': 'tetlh Segh',
+  'Notities': 'ghItlhmey',
+  'Tweede bijschrift': 'per cha\'DIch',
+  'Tweede opsomming': 'tetlh cha\'DIch',
+  'Vergelijk met:': 'yIjuvchuq:',
+  'Verschillen': 'pImmey',
+  'Verschillen tussen slides': 'navmey joj pImmey',
+  'duplica(a)t(en) verborgen': 'rapmey So\'lu\'',
+  'slides — verfijn je zoekopdracht': 'navmey — yInejqa\'',
+  'unieke slide(s)': 'navmey mob',
   'Bevinding': 'SamwI\'ghach',
   'Bevindingenoverzicht': 'SamwI\'ghach chevmey',
   'Scope-matrix': 'HevmeH matrix',

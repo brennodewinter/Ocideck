@@ -84,6 +84,27 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  '(leeg)': '(vide)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Légende',
+  'Bron citaat': 'Source de la citation',
+  'Codetaal': 'Langage du code',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Aucune différence visible — les diapositives ont un contenu identique.',
+  'In meerdere presentaties': 'Dans plusieurs présentations',
+  'Kop kolom 1': 'Titre de la colonne 1',
+  'Kop kolom 2': 'Titre de la colonne 2',
+  'Lijststijl': 'Style de liste',
+  'Notities': 'Notes',
+  'Tweede bijschrift': 'Deuxième légende',
+  'Tweede opsomming': 'Deuxième liste à puces',
+  'Vergelijk met:': 'Comparer avec :',
+  'Verschillen': 'Différences',
+  'Verschillen tussen slides': 'Différences entre les diapositives',
+  'Video': 'Vidéo',
+  'duplica(a)t(en) verborgen': 'doublon(s) masqué(s)',
+  'slides — verfijn je zoekopdracht': 'diapositives — affinez votre recherche',
+  'unieke slide(s)': 'diapositive(s) unique(s)',
   'Bevinding': 'Constatation',
   'Bevindingenoverzicht': 'Aperçu des constatations',
   'Scope-matrix': 'Matrice de périmètre',

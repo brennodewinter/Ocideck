@@ -85,6 +85,26 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  '(leeg)': '(folamh)',
+  'Audio': 'Fuaim',
+  'Bijschrift': 'Foscríbhinn',
+  'Bron citaat': 'Foinse an athfhriotail',
+  'Codetaal': 'Teanga an chóid',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Níl aon difríocht le feiceáil — tá an t-ábhar céanna ag na sleamhnáin.',
+  'In meerdere presentaties': 'I roinnt láithreoireachtaí',
+  'Kop kolom 1': 'Ceannteideal colún 1',
+  'Kop kolom 2': 'Ceannteideal colún 2',
+  'Lijststijl': 'Stíl liosta',
+  'Notities': 'Nótaí',
+  'Tweede bijschrift': 'An dara foscríbhinn',
+  'Tweede opsomming': 'An dara liosta urchar',
+  'Vergelijk met:': 'Cuir i gcomparáid le:',
+  'Verschillen': 'Difríochtaí',
+  'Verschillen tussen slides': 'Difríochtaí idir sleamhnáin',
+  'duplica(a)t(en) verborgen': 'dúblach folaithe',
+  'slides — verfijn je zoekopdracht': 'sleamhnán — beachtaigh do chuardach',
+  'unieke slide(s)': 'sleamhnán uathúil',
   'Bevinding': 'Fionnachtain',
   'Bevindingenoverzicht': 'Forbhreathnú ar fhionnachtana',
   'Scope-matrix': 'Maitrís raon feidhme',

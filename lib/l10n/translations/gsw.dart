@@ -83,6 +83,26 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  '(leeg)': '(leer)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Bildlegände',
+  'Bron citaat': 'Zitatquälle',
+  'Codetaal': 'Code-Sproch',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Kei sichtbare Unterschiid — d Folie sind inhaltlich gliich.',
+  'In meerdere presentaties': 'I mehrere Präsentatione',
+  'Kop kolom 1': 'Titel Spalte 1',
+  'Kop kolom 2': 'Titel Spalte 2',
+  'Lijststijl': 'Lischtestil',
+  'Notities': 'Notize',
+  'Tweede bijschrift': 'Zwöiti Bildlegände',
+  'Tweede opsomming': 'Zwöiti Ufzählig',
+  'Vergelijk met:': 'Verglyche mit:',
+  'Verschillen': 'Unterschiid',
+  'Verschillen tussen slides': 'Unterschiid zwüsche de Folie',
+  'duplica(a)t(en) verborgen': 'Duplikat(e) versteckt',
+  'slides — verfijn je zoekopdracht': 'Folie — verfeinere dini Sueche',
+  'unieke slide(s)': 'einzigartigi Folie(n)',
   'Bevinding': 'Befund',
   'Bevindingenoverzicht': 'Befund-Übersicht',
   'Scope-matrix': 'Scope-Matrix',

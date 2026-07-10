@@ -83,6 +83,27 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  '(leeg)': '(bashí)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Lènda',
+  'Bron citaat': 'Fuente di sita',
+  'Codetaal': 'Idioma di kódigo',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Sin diferensia visibel — e slides ta igual den kontenido.',
+  'In meerdere presentaties': 'Den vários presentashon',
+  'Kop kolom 1': 'Título kolòm 1',
+  'Kop kolom 2': 'Título kolòm 2',
+  'Lijststijl': 'Stil di lista',
+  'Notities': 'Notanan',
+  'Tweede bijschrift': 'Di dos lènda',
+  'Tweede opsomming': 'Di dos lista',
+  'Vergelijk met:': 'Kompará ku:',
+  'Verschillen': 'Diferensianan',
+  'Verschillen tussen slides': 'Diferensia entre slides',
+  'Video': 'Video',
+  'duplica(a)t(en) verborgen': 'duplikado(nan) skondí',
+  'slides — verfijn je zoekopdracht': 'slides — refiná bo búskeda',
+  'unieke slide(s)': 'slide(s) úniko',
   'Bevinding': 'Konstatashon',
   'Bevindingenoverzicht': 'Resúmen di konstatashonnan',
   'Scope-matrix': 'Matriks di alkanse',

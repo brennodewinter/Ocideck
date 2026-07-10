@@ -83,6 +83,26 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  '(leeg)': '(tyhjä)',
+  'Audio': 'Ääni',
+  'Bijschrift': 'Kuvateksti',
+  'Bron citaat': 'Lainauksen lähde',
+  'Codetaal': 'Koodikieli',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Ei näkyviä eroja — diat ovat sisällöltään samat.',
+  'In meerdere presentaties': 'Useissa esityksissä',
+  'Kop kolom 1': 'Sarakkeen 1 otsikko',
+  'Kop kolom 2': 'Sarakkeen 2 otsikko',
+  'Lijststijl': 'Luettelotyyli',
+  'Notities': 'Muistiinpanot',
+  'Tweede bijschrift': 'Toinen kuvateksti',
+  'Tweede opsomming': 'Toinen luettelo',
+  'Vergelijk met:': 'Vertaa kohteeseen:',
+  'Verschillen': 'Erot',
+  'Verschillen tussen slides': 'Diojen väliset erot',
+  'duplica(a)t(en) verborgen': 'duplikaatti(a) piilotettu',
+  'slides — verfijn je zoekopdracht': 'diaa — tarkenna hakuasi',
+  'unieke slide(s)': 'uniikkia diaa',
   'Bevinding': 'Havainto',
   'Bevindingenoverzicht': 'Havaintojen yhteenveto',
   'Scope-matrix': 'Laajuusmatriisi',

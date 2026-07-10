@@ -82,6 +82,26 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  '(leeg)': '(tühi)',
+  'Audio': 'Audio',
+  'Bijschrift': 'Pealdis',
+  'Bron citaat': 'Tsitaadi allikas',
+  'Codetaal': 'Koodikeel',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Nähtavaid erinevusi pole — slaidid on sisu poolest identsed.',
+  'In meerdere presentaties': 'Mitmes esitluses',
+  'Kop kolom 1': '1. veeru päis',
+  'Kop kolom 2': '2. veeru päis',
+  'Lijststijl': 'Loendi stiil',
+  'Notities': 'Märkmed',
+  'Tweede bijschrift': 'Teine pealdis',
+  'Tweede opsomming': 'Teine täpploend',
+  'Vergelijk met:': 'Võrdle:',
+  'Verschillen': 'Erinevused',
+  'Verschillen tussen slides': 'Erinevused slaidide vahel',
+  'duplica(a)t(en) verborgen': 'duplikaati peidetud',
+  'slides — verfijn je zoekopdracht': 'slaidi — täpsusta otsingut',
+  'unieke slide(s)': 'unikaalset slaidi',
   'Bevinding': 'Leid',
   'Bevindingenoverzicht': 'Leidude ülevaade',
   'Scope-matrix': 'Ulatuse maatriks',

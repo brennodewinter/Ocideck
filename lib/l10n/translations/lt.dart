@@ -83,6 +83,26 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  '(leeg)': '(tuščia)',
+  'Audio': 'Garsas',
+  'Bijschrift': 'Antraštė',
+  'Bron citaat': 'Citatos šaltinis',
+  'Codetaal': 'Kodo kalba',
+  'Geen zichtbare verschillen — de slides zijn inhoudelijk gelijk.':
+      'Nėra matomų skirtumų — skaidrių turinys identiškas.',
+  'In meerdere presentaties': 'Keliose pateiktyse',
+  'Kop kolom 1': '1 stulpelio antraštė',
+  'Kop kolom 2': '2 stulpelio antraštė',
+  'Lijststijl': 'Sąrašo stilius',
+  'Notities': 'Pastabos',
+  'Tweede bijschrift': 'Antra antraštė',
+  'Tweede opsomming': 'Antras sąrašas',
+  'Vergelijk met:': 'Palyginti su:',
+  'Verschillen': 'Skirtumai',
+  'Verschillen tussen slides': 'Skaidrių skirtumai',
+  'duplica(a)t(en) verborgen': 'dublikatų paslėpta',
+  'slides — verfijn je zoekopdracht': 'skaidrės — patikslinkite paiešką',
+  'unieke slide(s)': 'unikalių skaidrių',
   'Bevinding': 'Radinys',
   'Bevindingenoverzicht': 'Radinių apžvalga',
   'Scope-matrix': 'Aprėpties matrica',
