@@ -85,6 +85,11 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Zoek een slidetype': 'Cuardaigh cineál sleamhnáin',
+  'Alfabetisch sorteren': 'Sórtáil in ord aibítre',
+  'Algemeen': 'Ginearálta',
+  'Informatieveiligheid': 'Slándáil faisnéise',
+  'Alle': 'Gach ceann',
   'Pentestrapportage (ontwerp)': 'Tuairisc tástála treá (dearadh)',
   'AI-assistentie (ontwerp)': 'Cúnamh AI (dearadh)',
   'Agentisch bouwplan (ontwerp)': 'Plean tógála gníomhaireach (dearadh)',

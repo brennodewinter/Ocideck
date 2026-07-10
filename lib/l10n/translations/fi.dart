@@ -83,6 +83,11 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Zoek een slidetype': 'Etsi diatyyppiä',
+  'Alfabetisch sorteren': 'Lajittele aakkosjärjestykseen',
+  'Algemeen': 'Yleiset',
+  'Informatieveiligheid': 'Tietoturva',
+  'Alle': 'Kaikki',
   'Pentestrapportage (ontwerp)': 'Pentest-raportti (suunnitelma)',
   'AI-assistentie (ontwerp)': 'Tekoälyavustus (suunnitelma)',
   'Agentisch bouwplan (ontwerp)':

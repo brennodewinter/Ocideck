@@ -83,6 +83,11 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Zoek een slidetype': 'Meklēt slaida tipu',
+  'Alfabetisch sorteren': 'Kārtot alfabētiski',
+  'Algemeen': 'Vispārīgi',
+  'Informatieveiligheid': 'Informācijas drošība',
+  'Alle': 'Visi',
   'Pentestrapportage (ontwerp)': 'Ielaušanās testa atskaite (dizains)',
   'AI-assistentie (ontwerp)': 'MI palīdzība (dizains)',
   'Agentisch bouwplan (ontwerp)': 'Aģentisks veidošanas plāns (dizains)',

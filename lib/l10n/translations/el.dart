@@ -83,6 +83,11 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Zoek een slidetype': 'Αναζήτηση τύπου διαφάνειας',
+  'Alfabetisch sorteren': 'Αλφαβητική ταξινόμηση',
+  'Algemeen': 'Γενικά',
+  'Informatieveiligheid': 'Ασφάλεια πληροφοριών',
+  'Alle': 'Όλα',
   'Pentestrapportage (ontwerp)': 'Αναφορά δοκιμής διείσδυσης (σχεδίαση)',
   'AI-assistentie (ontwerp)': 'Βοήθεια AI (σχεδίαση)',
   'Agentisch bouwplan (ontwerp)': 'Πρακτορικό πλάνο κατασκευής (σχεδίαση)',

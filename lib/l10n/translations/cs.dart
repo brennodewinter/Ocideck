@@ -84,6 +84,11 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Zoek een slidetype': 'Vyhledat typ snímku',
+  'Alfabetisch sorteren': 'Seřadit abecedně',
+  'Algemeen': 'Obecné',
+  'Informatieveiligheid': 'Informační bezpečnost',
+  'Alle': 'Vše',
   'Pentestrapportage (ontwerp)': 'Zpráva z penetračního testu (návrh)',
   'AI-assistentie (ontwerp)': 'AI asistence (návrh)',
   'Agentisch bouwplan (ontwerp)': 'Agentní plán sestavení (návrh)',

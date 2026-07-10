@@ -83,6 +83,11 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Zoek een slidetype': 'Ieškoti skaidrės tipo',
+  'Alfabetisch sorteren': 'Rūšiuoti abėcėlės tvarka',
+  'Algemeen': 'Bendra',
+  'Informatieveiligheid': 'Informacijos saugumas',
+  'Alle': 'Visi',
   'Pentestrapportage (ontwerp)': 'Įsiskverbimo testo ataskaita (projektas)',
   'AI-assistentie (ontwerp)': 'DI pagalba (projektas)',
   'Agentisch bouwplan (ontwerp)': 'Agentinis kūrimo planas (projektas)',

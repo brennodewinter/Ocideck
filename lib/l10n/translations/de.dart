@@ -83,6 +83,11 @@ const _stringsDe = {
 };
 
 const _dutchSourceDe = {
+  'Zoek een slidetype': 'Folientyp suchen',
+  'Alfabetisch sorteren': 'Alphabetisch sortieren',
+  'Algemeen': 'Allgemein',
+  'Informatieveiligheid': 'Informationssicherheit',
+  'Alle': 'Alle',
   'Pentestrapportage (ontwerp)': 'Pentest-Bericht (Design)',
   'AI-assistentie (ontwerp)': 'KI-Assistenz (Design)',
   'Agentisch bouwplan (ontwerp)': 'Agentischer Bauplan (Design)',

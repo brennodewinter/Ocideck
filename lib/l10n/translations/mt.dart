@@ -84,6 +84,11 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Zoek een slidetype': 'Fittex it-tip ta\' slide',
+  'Alfabetisch sorteren': 'Issortja alfabetikament',
+  'Algemeen': 'Ġenerali',
+  'Informatieveiligheid': 'Sigurtà tal-informazzjoni',
+  'Alle': 'Kollha',
   'Pentestrapportage (ontwerp)': 'Rapport tal-pentest (disinn)',
   'AI-assistentie (ontwerp)': 'Assistenza AI (disinn)',
   'Agentisch bouwplan (ontwerp)': 'Pjan ta\' bini aġentiku (disinn)',

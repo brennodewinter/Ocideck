@@ -83,6 +83,11 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Zoek een slidetype': 'Diatípus keresése',
+  'Alfabetisch sorteren': 'Betűrendes rendezés',
+  'Algemeen': 'Általános',
+  'Informatieveiligheid': 'Információbiztonság',
+  'Alle': 'Összes',
   'Pentestrapportage (ontwerp)': 'Behatolásteszt-beszámoló (terv)',
   'AI-assistentie (ontwerp)': 'AI-asszisztencia (terv)',
   'Agentisch bouwplan (ontwerp)': 'Ágensalapú építési terv (terv)',

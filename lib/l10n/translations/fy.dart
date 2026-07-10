@@ -83,6 +83,11 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Zoek een slidetype': 'Sykje in slidetype',
+  'Alfabetisch sorteren': 'Alfabetysk sortearje',
+  'Algemeen': 'Algemien',
+  'Informatieveiligheid': 'Ynformaasjefeiligens',
+  'Alle': 'Alle',
   'Pentestrapportage (ontwerp)': 'Pentestrapportaazje (ûntwerp)',
   'AI-assistentie (ontwerp)': 'AI-assistinsje (ûntwerp)',
   'Agentisch bouwplan (ontwerp)': 'Agentysk bouplan (ûntwerp)',
