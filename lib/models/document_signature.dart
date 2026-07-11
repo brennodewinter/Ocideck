@@ -12,6 +12,10 @@ class DocumentSignature {
   /// Role or function of the signer (e.g. "Onderzoeker", "CISO").
   final String role;
 
+  /// The signer's certification / accreditation (e.g. "OSCP", "RvIG-register"),
+  /// shown on the pentest sign-off page (MIAUW 1.6). Empty when not applicable.
+  final String certification;
+
   /// Signing date, free-form text (typically an ISO date like `2026-07-10`).
   final String date;
 
@@ -28,6 +32,7 @@ class DocumentSignature {
   const DocumentSignature({
     this.name = '',
     this.role = '',
+    this.certification = '',
     this.date = '',
     this.statement = '',
     this.typedSignature = '',
@@ -39,6 +44,7 @@ class DocumentSignature {
   bool get isEmpty =>
       name.isEmpty &&
       role.isEmpty &&
+      certification.isEmpty &&
       date.isEmpty &&
       statement.isEmpty &&
       typedSignature.isEmpty &&
@@ -49,6 +55,7 @@ class DocumentSignature {
   DocumentSignature copyWith({
     String? name,
     String? role,
+    String? certification,
     String? date,
     String? statement,
     String? typedSignature,
@@ -57,6 +64,7 @@ class DocumentSignature {
     return DocumentSignature(
       name: name ?? this.name,
       role: role ?? this.role,
+      certification: certification ?? this.certification,
       date: date ?? this.date,
       statement: statement ?? this.statement,
       typedSignature: typedSignature ?? this.typedSignature,

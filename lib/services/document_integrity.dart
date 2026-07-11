@@ -88,3 +88,19 @@ class DocumentIntegrity {
 /// finalised deck, so callers typically guard on [Deck.finalized] first.
 IntegrityStatus deckIntegrityStatus(Deck deck) =>
     DocumentIntegrity(MarkdownService()).verify(deck);
+
+/// The 1-based slide numbers that still carry unreviewed AI-assist markers
+/// (AI_ASSIST §16.3, [Slide.aiAssistedFields]). While this is non-empty the deck
+/// must **not** be sealed: the EIS 1.6 attestation has to cover human-verified
+/// text, so every AI-drafted field must be reviewed and cleared first. AI
+/// drafting (P3-AIA) sets the markers and clears them on review; nothing writes
+/// them yet, so today this is empty for every hand-authored deck.
+List<int> slidesWithUnreviewedAiMarkers(Deck deck) => [
+  for (var i = 0; i < deck.slides.length; i++)
+    if (deck.slides[i].aiAssistedFields.isNotEmpty) i + 1,
+];
+
+/// Whether any slide carries an unreviewed AI-assist marker — i.e. sealing is
+/// blocked (see [slidesWithUnreviewedAiMarkers]).
+bool deckHasUnreviewedAiMarkers(Deck deck) =>
+    deck.slides.any((s) => s.aiAssistedFields.isNotEmpty);

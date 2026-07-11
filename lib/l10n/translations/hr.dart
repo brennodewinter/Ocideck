@@ -91,6 +91,18 @@ const _dutchSourceHr = {
   'Aantal bevindingen per ernst': 'Broj nalaza po ozbiljnosti',
   'Aangepast…': 'Prilagođeno…',
   'Aangepaste tijd': 'Prilagođeno vrijeme',
+  'Waarheidsverklaring': 'Izjava o istinitosti',
+  'Rapporteur': 'Izvjestitelj',
+  'Certificering': 'Certifikacija',
+  'Nog niet ondertekend': 'Još nije potpisano',
+  'Nog niet verzegeld': 'Još nije zapečaćeno',
+  'Verzegeld op': 'Zapečaćeno dana',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Zapečaćeno. Spremite (Ctrl/Cmd+S) da biste zadržali.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Ovo je izvješće sastavljeno istinito.',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Pečaćenje je moguće tek nakon pregleda svih AI nacrta. Još za provjeru na slajdu(ovima):',
   'Uit sjabloon…': 'Iz predloška…',
   'Sjabloon kiezen': 'Odaberi predložak',
   'Scope-object': 'Objekt opsega',

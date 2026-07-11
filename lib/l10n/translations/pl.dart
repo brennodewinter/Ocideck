@@ -93,6 +93,18 @@ const _dutchSourcePl = {
   'Aantal bevindingen per ernst': 'Liczba ustaleń według istotności',
   'Aangepast…': 'Własny…',
   'Aangepaste tijd': 'Własny czas',
+  'Waarheidsverklaring': 'Oświadczenie o zgodności z prawdą',
+  'Rapporteur': 'Sprawozdawca',
+  'Certificering': 'Certyfikacja',
+  'Nog niet ondertekend': 'Jeszcze nie podpisano',
+  'Nog niet verzegeld': 'Jeszcze nie zapieczętowano',
+  'Verzegeld op': 'Zapieczętowano dnia',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Zapieczętowano. Zapisz (Ctrl/Cmd+S), aby zachować.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Niniejszy raport sporządzono zgodnie z prawdą.',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Zapieczętowanie jest możliwe dopiero po sprawdzeniu wszystkich szkiców AI. Do sprawdzenia na slajdzie(-ach):',
   'Uit sjabloon…': 'Z szablonu…',
   'Sjabloon kiezen': 'Wybierz szablon',
   'Scope-object': 'Obiekt zakresu',

@@ -8,6 +8,27 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Sign-off slide type (`signOff`)** — the *Ondertekening* type is now a
+  structured truthful-reporting page (MIAUW 1.6) instead of a free-Markdown
+  scaffold. A dedicated editor authors the deck-wide **visual signature** — the
+  truthfulness statement, rapporteur name/role, **certification** and typed
+  signature — and offers **Afronden & verzegelen** right on the slide; the
+  preview renders that attestation with the document **seal status** ("Verzegeld
+  op …" once sealed). The signature is the same reusable, seal-covered
+  `DocumentSignature` used elsewhere (one signer per report), now with a
+  certification field (`ocideck_sig_cert`); the finalise dialog gained the field
+  too and pre-fills from the slide. Sealing stays blocked until every AI-drafted
+  field is reviewed. Localised in all interface languages. See
+  [docs/FILE_FORMAT.md](docs/FILE_FORMAT.md) §3 and §5.
+- **Sealing waits for AI-drafted text to be reviewed** — groundwork for the
+  optional AI drafting assistant (AI_ASSIST §16.3): a slide can carry an
+  `ocideck_ai_assisted` marker naming the fields whose text was drafted by AI and
+  not yet human-checked. While any slide carries such a marker, **Afronden &
+  verzegelen** is blocked and names the slides still to review, so the EIS 1.6
+  truthfulness attestation always covers human-verified text. The marker
+  round-trips in the `.md` (see [docs/FILE_FORMAT.md](docs/FILE_FORMAT.md) §8);
+  nothing writes it yet — the drafting assistant that sets and clears it lands
+  later. Localised in all interface languages.
 - **Findings-summary slide type (`findingsSummary`)** — the *Bevindingenoverzicht*
   type is now a structured management overview instead of a free-Markdown
   scaffold. A dedicated editor captures the number of findings per CVSS 4.0

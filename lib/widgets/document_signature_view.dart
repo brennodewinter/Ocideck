@@ -70,6 +70,11 @@ class DocumentSignatureView extends StatelessWidget {
               color: theme.colorScheme.onSurface,
             ),
           ),
+        if (signature.certification.isNotEmpty)
+          Text(
+            signature.certification,
+            style: TextStyle(fontSize: 11 * scale, color: muted),
+          ),
         if (signature.date.isNotEmpty)
           Text(
             signature.date,

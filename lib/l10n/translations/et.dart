@@ -90,6 +90,18 @@ const _dutchSourceEt = {
   'Aantal bevindingen per ernst': 'Leidude arv raskusastme järgi',
   'Aangepast…': 'Oma…',
   'Aangepaste tijd': 'Oma aeg',
+  'Waarheidsverklaring': 'Tõesuse kinnitus',
+  'Rapporteur': 'Aruandja',
+  'Certificering': 'Sertifitseerimine',
+  'Nog niet ondertekend': 'Veel allkirjastamata',
+  'Nog niet verzegeld': 'Veel pitseerimata',
+  'Verzegeld op': 'Pitseeritud',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Pitseeritud. Salvesta (Ctrl/Cmd+S), et see säiliks.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'See aruanne on koostatud tõeselt.',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Pitseerimine on võimalik alles siis, kui kõik AI mustandid on üle vaadatud. Veel kontrollida slaidil (slaididel):',
   'Uit sjabloon…': 'Mallist…',
   'Sjabloon kiezen': 'Vali mall',
   'Scope-object': 'Ulatuse objekt',

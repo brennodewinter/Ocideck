@@ -91,6 +91,18 @@ const _dutchSourceHu = {
   'Aantal bevindingen per ernst': 'Megállapítások száma súlyosság szerint',
   'Aangepast…': 'Egyéni…',
   'Aangepaste tijd': 'Egyéni idő',
+  'Waarheidsverklaring': 'Valódiságnyilatkozat',
+  'Rapporteur': 'Jelentéstevő',
+  'Certificering': 'Tanúsítás',
+  'Nog niet ondertekend': 'Még nincs aláírva',
+  'Nog niet verzegeld': 'Még nincs lepecsételve',
+  'Verzegeld op': 'Lepecsételve',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Lepecsételve. Mentse el (Ctrl/Cmd+S) a megőrzéshez.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Ez a jelentés a valóságnak megfelelően készült.',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'A lezárás csak akkor lehetséges, ha minden AI-vázlatot ellenőriztek. Még ellenőrizni kell a dián/diákon:',
   'Uit sjabloon…': 'Sablonból…',
   'Sjabloon kiezen': 'Sablon választása',
   'Scope-object': 'Hatókör objektuma',

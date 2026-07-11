@@ -137,6 +137,7 @@ class MarkdownService {
 
     line('ocideck_sig_name', sig.name);
     line('ocideck_sig_role', sig.role);
+    line('ocideck_sig_cert', sig.certification);
     line('ocideck_sig_date', sig.date);
     line('ocideck_sig_statement', sig.statement);
     line('ocideck_sig_typed', sig.typedSignature);
@@ -309,7 +310,16 @@ class MarkdownService {
       buf.writeln('<!-- ocideck_finding_id: ${slide.findingId} -->');
       buf.writeln('<!-- ocideck_finding_role: ${slide.findingRole.name} -->');
     }
-    if (classes.isNotEmpty || slide.findingId.isNotEmpty) {
+    // AI-assist markers (AI_ASSIST §16.3): the fields whose text was drafted by
+    // AI and not yet reviewed. Persisted so the seal gate survives a save/open.
+    if (slide.aiAssistedFields.isNotEmpty) {
+      buf.writeln(
+        '<!-- ocideck_ai_assisted: ${slide.aiAssistedFields.join(', ')} -->',
+      );
+    }
+    if (classes.isNotEmpty ||
+        slide.findingId.isNotEmpty ||
+        slide.aiAssistedFields.isNotEmpty) {
       buf.writeln();
     }
 
@@ -347,16 +357,17 @@ class MarkdownService {
       case SlideType.question:
         _writeQuestionSlide(buf, slide);
       // Informatieveiligheid: `checklist` (§3.2), `scopeMatrix` (§4.4) en
-      // `findingsSummary` (§4.3.4) serialiseren als een gewone Markdown-tabel,
-      // dus hergebruiken de tabel-writer. De overige twee scaffold-types delen
-      // voorlopig één vrije-Markdown-body onder hun eigen `_class`-token
-      // (P1-FIND heeft een eigen body; P1-SIGN volgt nog).
+      // `findingsSummary` (§4.3.4) serialiseren als een gewone Markdown-tabel.
+      // `signOff` (§1.6/§8) heeft geen eigen dia-inhoud behalve een optionele kop
+      // — de attestatie is deck-breed (`ocideck_sig_*`). Alleen `finding`
+      // (P1-FIND) deelt nog de vrije-Markdown-scaffold-body.
       case SlideType.checklist:
       case SlideType.scopeMatrix:
       case SlideType.findingsSummary:
         _writeTableSlide(buf, slide);
-      case SlideType.finding:
       case SlideType.signOff:
+        _writeSignOffSlide(buf, slide);
+      case SlideType.finding:
         _writeScaffoldSlide(buf, slide);
     }
 

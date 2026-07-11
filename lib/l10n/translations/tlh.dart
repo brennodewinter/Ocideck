@@ -89,6 +89,17 @@ const _dutchSourceTlh = {
   'Aantal bevindingen per ernst': 'Qob patlh mI\'',
   'Aangepast…': 'SeH…',
   'Aangepaste tijd': 'SeH poH',
+  'Waarheidsverklaring': 'vIt Doch',
+  'Rapporteur': 'jatlhwI\'',
+  'Certificering': 'ngoq',
+  'Nog niet ondertekend': 'not qItlhpu\'be\'',
+  'Nog niet verzegeld': 'not matlhpu\'be\'',
+  'Verzegeld op': 'matlh jaj',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'matlhlu\'ta\'. yInISbe\' (Ctrl/Cmd+S) \'e\' pol.',
+  'Deze rapportage is naar waarheid opgesteld.': 'vIt retlh nab qonlu\'.',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Hoch AI-ghItlh nughlu\'pu\'DI\' neH SoQ chu\'laH. qelnIS \'ay\':',
   'Uit sjabloon…': 'sablonvo\'…',
   'Sjabloon kiezen': 'sablon yIwIv',
   'Scope-object': 'HevmeH Doch',

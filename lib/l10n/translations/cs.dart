@@ -92,6 +92,18 @@ const _dutchSourceCs = {
   'Aantal bevindingen per ernst': 'Počet zjištění podle závažnosti',
   'Aangepast…': 'Vlastní…',
   'Aangepaste tijd': 'Vlastní čas',
+  'Waarheidsverklaring': 'Prohlášení o pravdivosti',
+  'Rapporteur': 'Zpravodaj',
+  'Certificering': 'Certifikace',
+  'Nog niet ondertekend': 'Zatím nepodepsáno',
+  'Nog niet verzegeld': 'Zatím nezapečetěno',
+  'Verzegeld op': 'Zapečetěno dne',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Zapečetěno. Uložte (Ctrl/Cmd+S) pro zachování.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Tato zpráva byla vypracována pravdivě.',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Zapečetění je možné až po kontrole všech AI konceptů. Zbývá zkontrolovat na snímku(cích):',
   'Uit sjabloon…': 'Ze šablony…',
   'Sjabloon kiezen': 'Vybrat šablonu',
   'Scope-object': 'Objekt rozsahu',

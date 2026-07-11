@@ -112,6 +112,9 @@ ocideck_style_profile: <base64url(JSON)>
 | `ocideck_show_rehearsal_summary` | `false`/absent | Opt-out of the post-presentation timing summary. Default (shown) stays out of the file; only `false` is written. |
 | `ocideck_play_only` | `true`/absent | Play-only lock. When `true`, the deck opens locked: no editor, toolbar, menus, or export — only the first slide with a play button, presented full screen. Closing the deck restores normal editing. Default (unlocked) stays out of the file; only `true` is written. Removing this key unlocks the deck. |
 | `ocideck_style_profile` | base64url | Complete style profile as JSON (§3.2). |
+| `ocideck_finalized` | `true`/absent | Document integrity (§8 A1): the deck is finalised and read-only. Written only when `true`. |
+| `ocideck_seal_hash` · `ocideck_seal_algo` · `ocideck_seal_at` | string | The content seal: a SHA-512 hash over the canonical content (styling and the seal fields themselves excluded), the algorithm (`sha-512`), and the ISO-8601 UTC timestamp. Recomputed on open → *intact* / *changed after finalising*. |
+| `ocideck_sig_name` · `ocideck_sig_role` · `ocideck_sig_cert` · `ocideck_sig_date` · `ocideck_sig_statement` · `ocideck_sig_typed` · `ocideck_sig_image` | string | The deck-level **visual signature** rendered by the `signOff` slide (§5): signer name, role, certification, date, attested statement, typed signature, and an optional embedded (`data:`) signature image. Written before the seal fields, so the signature is covered by the hash. Each key is written only when non-empty. |
 
 Metadata fields are written only when they are not empty. Text is written as a
 YAML scalar and quoted only when needed (empty value, leading/trailing
@@ -607,6 +610,23 @@ title; the table is a fixed two-column count, one row per band:
   counts as informational), but they remain hand-editable and are stored so the
   slide is self-contained. The **total** shown is derived, never stored.
 
+**Sign-off** (`sign-off`) — the report's truthful-reporting attestation (MIAUW
+1.6). The slide itself carries **no body of its own** — only an optional heading;
+the attestation is the **deck-level visual signature** (`ocideck_sig_*`) and the
+document seal (`ocideck_finalized` / `ocideck_seal_*`), both in the front matter
+(§3) and covered by the seal:
+
+```markdown
+<!-- _class: sign-off -->
+# Ondertekening
+```
+
+The editor authors the deck signature (statement, rapporteur name/role,
+certification, typed signature) and offers **Afronden & verzegelen**; the preview
+renders the signature plus the seal status. Because the signature is deck-level,
+one report has one signer, and the sign-off page round-trips as just its class
+token and heading — the signer's details live once in the front matter.
+
 Rules:
 
 - The **score and severity band** shown on the `**CVSS 4.0:**` line are always
@@ -849,6 +869,8 @@ for presenter notes):
 | `<!-- ocideck_bullet_marker: dot\|paw -->` | Per-slide bullet-marker override (bullets/two-bullets/bullets+image). Absent = inherit the theme's `bulletMarker` (§3.2). |
 | `<!-- ocideck_image_focus: x,y -->` | Image crop focal point (0..1 per axis, `0.5,0.5` = centre) for the slide's image. Decides which part stays in view when the picture is cropped (fill/zoom, or a fixed image panel). Written only when not centred. |
 | `<!-- ocideck_image_focus2: x,y -->` | Same, for the **second** image of a two-images slide. Written only when not centred. |
+| `<!-- ocideck_finding_id: F-03 -->` · `<!-- ocideck_finding_role: header\|detail\|evidence -->` | Finding-group link: ties a header card to its detail/evidence slides (§5). Written on any slide with a non-empty finding id. |
+| `<!-- ocideck_ai_assisted: field1, field2 -->` | The slide's fields whose text was drafted by AI and not yet human-reviewed. While any slide carries this marker the deck **cannot be finalised/sealed** (the EIS 1.6 attestation must cover human-verified text). Written only when non-empty; AI drafting sets it and clears it on review. |
 | `<!-- advance: N.N -->` | Auto-advance after N.N seconds (0 = off). |
 | `<!-- skip -->` | Skip slide during both presenting and export. |
 | `<!-- tlp: <key> -->` | Per-slide TLP level (see §3.1). The slide is held back if the presentation TLP is lower. Written only when not `none`. |

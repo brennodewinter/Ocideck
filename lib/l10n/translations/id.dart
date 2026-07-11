@@ -91,6 +91,18 @@ const _dutchSourceId = {
   'Aantal bevindingen per ernst': 'Jumlah temuan per tingkat keparahan',
   'Aangepast…': 'Kustom…',
   'Aangepaste tijd': 'Waktu kustom',
+  'Waarheidsverklaring': 'Pernyataan kebenaran',
+  'Rapporteur': 'Pelapor',
+  'Certificering': 'Sertifikasi',
+  'Nog niet ondertekend': 'Belum ditandatangani',
+  'Nog niet verzegeld': 'Belum disegel',
+  'Verzegeld op': 'Disegel pada',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Tersegel. Simpan (Ctrl/Cmd+S) untuk menyimpannya.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Laporan ini disusun secara benar.',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Penyegelan baru bisa dilakukan setelah semua draf AI ditinjau. Masih perlu diperiksa pada slide:',
   'Uit sjabloon…': 'Dari templat…',
   'Sjabloon kiezen': 'Pilih templat',
   'Scope-object': 'Objek lingkup',

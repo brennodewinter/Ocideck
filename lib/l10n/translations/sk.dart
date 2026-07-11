@@ -92,6 +92,18 @@ const _dutchSourceSk = {
   'Aantal bevindingen per ernst': 'Počet zistení podľa závažnosti',
   'Aangepast…': 'Vlastné…',
   'Aangepaste tijd': 'Vlastný čas',
+  'Waarheidsverklaring': 'Vyhlásenie o pravdivosti',
+  'Rapporteur': 'Spravodajca',
+  'Certificering': 'Certifikácia',
+  'Nog niet ondertekend': 'Zatiaľ nepodpísané',
+  'Nog niet verzegeld': 'Zatiaľ nezapečatené',
+  'Verzegeld op': 'Zapečatené dňa',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Zapečatené. Uložte (Ctrl/Cmd+S) na zachovanie.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Táto správa bola vypracovaná pravdivo.',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Zapečatenie je možné až po kontrole všetkých AI konceptov. Ešte skontrolovať na snímke(ach):',
   'Uit sjabloon…': 'Zo šablóny…',
   'Sjabloon kiezen': 'Vybrať šablónu',
   'Scope-object': 'Objekt rozsahu',

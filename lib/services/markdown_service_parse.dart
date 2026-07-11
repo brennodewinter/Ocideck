@@ -234,6 +234,8 @@ extension _MarkdownParse on MarkdownService {
         return sig.copyWith(name: value);
       case 'ocideck_sig_role':
         return sig.copyWith(role: value);
+      case 'ocideck_sig_cert':
+        return sig.copyWith(certification: value);
       case 'ocideck_sig_date':
         return sig.copyWith(date: value);
       case 'ocideck_sig_statement':
@@ -331,7 +333,9 @@ extension _MarkdownParse on MarkdownService {
       findingId: link.findingId,
       findingRole: link.findingRole,
     );
-    if (structured != null) return structured;
+    if (structured != null) {
+      return structured.copyWith(aiAssistedFields: link.aiAssistedFields);
+    }
 
     // bullets may already hold the decoded two-column data; the line parser
     // appends to the same list, so pass it through by reference.
@@ -451,6 +455,7 @@ extension _MarkdownParse on MarkdownService {
       timelineCurrentIndex: d.timelineCurrentIndex,
       findingId: link.findingId,
       findingRole: link.findingRole,
+      aiAssistedFields: link.aiAssistedFields,
     );
   }
 

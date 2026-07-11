@@ -19,6 +19,7 @@ import '../../models/chart.dart';
 import '../../models/checklist_spec.dart';
 import '../../models/cockpit.dart';
 import '../../models/deck.dart';
+import '../../models/document_signature.dart';
 import '../../models/finding_spec.dart';
 import '../../models/findings_summary_spec.dart';
 import '../../models/question.dart';
@@ -65,6 +66,7 @@ part 'previews/scaffold_previews.dart';
 part 'previews/finding_preview.dart';
 part 'previews/scope_matrix_preview.dart';
 part 'previews/findings_summary_preview.dart';
+part 'previews/signoff_preview.dart';
 part 'previews/overlays.dart';
 
 /// Returns a TextStyle with the correct font. 'EB Garamond' is bundled with the
@@ -320,6 +322,16 @@ class SlidePreviewWidget extends StatelessWidget {
   /// Organisatienaam voor het watermerk (uit deck-metadata).
   final String organization;
 
+  /// Deck-brede visuele handtekening (§8 A1), gerenderd door de `signOff`-slide.
+  /// Deck-niveau ambient context — net als [tlp]/[organization] doorgegeven door
+  /// aanroepers die het deck hebben; null in losse previews (dan toont de
+  /// sign-off-slide een placeholder).
+  final DocumentSignature? deckSignature;
+
+  /// De verzegeldatum van het deck (`ocideck_seal_at`) als het is afgerond, anders
+  /// leeg. De `signOff`-slide toont daarmee "Verzegeld op …".
+  final String sealedAt;
+
   /// Of audio/video op deze slide afgespeeld kan worden (de audioknop verschijnt
   /// en video kan starten). Standaard uit — thumbnails en export spelen niets.
   final bool enableMedia;
@@ -406,6 +418,8 @@ class SlidePreviewWidget extends StatelessWidget {
     this.tlp = TlpLevel.none,
     this.showClassificationWatermark = false,
     this.organization = '',
+    this.deckSignature,
+    this.sealedAt = '',
     this.enableMedia = false,
     this.autoplayMedia = false,
     this.allowRemoteMedia = false,
@@ -724,10 +738,10 @@ class SlidePreviewWidget extends StatelessWidget {
     }
   }
 
-  /// Preview for the Informatieveiligheid slide types: `finding` (P1-FIND),
-  /// `checklist` (P1-CHK), `scopeMatrix` (P1-SCOPE) and `findingsSummary`
-  /// (P1-SUM) have structured previews; only `signOff` keeps the shared
-  /// free-Markdown scaffold until its package lands (P1-SIGN).
+  /// Preview for the Informatieveiligheid slide types: all five (`finding`
+  /// P1-FIND, `checklist` P1-CHK, `scopeMatrix` P1-SCOPE, `findingsSummary`
+  /// P1-SUM, `signOff` P1-SIGN) have structured previews; the scaffold fallthrough
+  /// stays as a defensive default.
   Widget _securityPreview(double w) {
     if (slide.type == SlideType.finding) {
       return _FindingPreview(
@@ -759,6 +773,16 @@ class SlidePreviewWidget extends StatelessWidget {
         w: w,
         font: fontFamily,
         profile: themeProfile,
+      );
+    }
+    if (slide.type == SlideType.signOff) {
+      return _SignOffPreview(
+        slide: slide,
+        w: w,
+        font: fontFamily,
+        profile: themeProfile,
+        signature: deckSignature,
+        sealedAt: sealedAt,
       );
     }
     return _ScaffoldPreview(

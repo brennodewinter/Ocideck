@@ -1495,37 +1495,87 @@ void main() {
     });
   });
 
-  group('Informatieveiligheid scaffold types round-trip (P1-S)', () {
-    // The remaining security slide types are scaffolded as free-Markdown bodies
-    // carried by their own `_class` token. Both the type and the body must
-    // survive serialize → parse until each type gains a structured serialiser.
-    // (`finding` graduated to P1-FIND — see the dedicated group below;
-    // `checklist` graduated to P1-CHK — see checklist_spec_test.dart;
-    // `scopeMatrix` graduated to P1-SCOPE — see scope_matrix_spec_test.dart;
-    // `findingsSummary` graduated to P1-SUM — see findings_summary_spec_test.dart.)
-    const scaffoldTypes = {SlideType.signOff: 'sign-off'};
+  // All five Informatieveiligheid types now have structured serialisers, so the
+  // former free-Markdown scaffold round-trip group is gone; each type is covered
+  // by its own group / spec test (finding P1-FIND, checklist P1-CHK, scopeMatrix
+  // P1-SCOPE, findingsSummary P1-SUM, signOff P1-SIGN below).
 
-    scaffoldTypes.forEach((type, marpClass) {
-      test('$type keeps its type, class token and body', () {
-        const body = '# F-03 · Voorbeeld\n\nBeschrijving met **nadruk**.';
+  group('signOff slide + deck signature round-trip (P1-SIGN)', () {
+    test(
+      'a signOff slide keeps its type, class token and optional heading',
+      () {
         final service = MarkdownService();
         final markdown = service.generateDeck(
           Deck(
             title: 'Demo',
-            slides: [Slide.create(type).copyWith(customMarkdown: body)],
+            slides: [
+              Slide.create(SlideType.signOff).copyWith(title: 'Ondertekening'),
+            ],
           ),
         );
-        expect(
-          markdown.contains('<!-- _class: $marpClass -->'),
-          isTrue,
-          reason: 'Expected the $marpClass class token in:\n$markdown',
-        );
+        expect(markdown, contains('<!-- _class: sign-off -->'));
         final out = _roundTrip(
-          Slide.create(type).copyWith(customMarkdown: body),
+          Slide.create(SlideType.signOff).copyWith(title: 'Ondertekening'),
         );
-        expect(out.type, type);
-        expect(out.customMarkdown, body);
-      });
+        expect(out.type, SlideType.signOff);
+        expect(out.title, 'Ondertekening');
+        // The attestation is deck-level, so the slide itself carries no body.
+        expect(out.customMarkdown, isEmpty);
+      },
+    );
+
+    test(
+      'the deck signature certification round-trips in the front matter',
+      () {
+        const sig = DocumentSignature(
+          name: 'Jan Jansen',
+          role: 'Onderzoeker',
+          certification: 'OSCP',
+          statement: 'Naar waarheid opgesteld.',
+          typedSignature: 'J. Jansen',
+        );
+        final service = MarkdownService();
+        final markdown = service.generateDeck(
+          Deck(
+            title: 'Demo',
+            signature: sig,
+            slides: [Slide.create(SlideType.signOff)],
+          ),
+        );
+        expect(markdown, contains('ocideck_sig_cert: OSCP'));
+        final out = service.parseDeck(markdown)!;
+        expect(out.signature?.certification, 'OSCP');
+        expect(out.signature?.name, 'Jan Jansen');
+      },
+    );
+  });
+
+  group('AI-assist marker round-trip (AI_ASSIST §16.3)', () {
+    test('a slide keeps its ocideck_ai_assisted fields', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.bullets).copyWith(
+          bullets: const ['x'],
+          aiAssistedFields: const ['description', 'impact'],
+        ),
+      );
+      expect(out.aiAssistedFields, ['description', 'impact']);
+    });
+
+    test('a slide without markers stays empty and writes no comment', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.bullets).copyWith(bullets: ['x']),
+          ],
+        ),
+      );
+      expect(markdown.contains('ocideck_ai_assisted'), isFalse);
+      expect(
+        _roundTrip(Slide.create(SlideType.bullets)).aiAssistedFields,
+        isEmpty,
+      );
     });
   });
 

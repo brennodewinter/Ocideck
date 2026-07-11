@@ -91,6 +91,18 @@ const _dutchSourceEn = {
   'Aantal bevindingen per ernst': 'Number of findings per severity',
   'Aangepast…': 'Custom…',
   'Aangepaste tijd': 'Custom time',
+  'Waarheidsverklaring': 'Statement of truth',
+  'Rapporteur': 'Reporter',
+  'Certificering': 'Certification',
+  'Nog niet ondertekend': 'Not yet signed',
+  'Nog niet verzegeld': 'Not yet sealed',
+  'Verzegeld op': 'Sealed on',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Sealed. Save (Ctrl/Cmd+S) to keep it.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'This report has been prepared truthfully.',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Sealing is only possible once all AI drafts have been reviewed. Still to check on slide(s):',
   'Uit sjabloon…': 'From template…',
   'Sjabloon kiezen': 'Choose template',
   'Scope-object': 'Scope object',

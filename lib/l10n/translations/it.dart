@@ -91,6 +91,18 @@ const _dutchSourceIt = {
   'Aantal bevindingen per ernst': 'Numero di risultati per gravità',
   'Aangepast…': 'Personalizzato…',
   'Aangepaste tijd': 'Tempo personalizzato',
+  'Waarheidsverklaring': 'Dichiarazione di veridicità',
+  'Rapporteur': 'Relatore',
+  'Certificering': 'Certificazione',
+  'Nog niet ondertekend': 'Non ancora firmato',
+  'Nog niet verzegeld': 'Non ancora sigillato',
+  'Verzegeld op': 'Sigillato il',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Sigillato. Salva (Ctrl/Cmd+S) per conservarlo.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Questo rapporto è stato redatto in modo veritiero.',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'La sigillatura è possibile solo dopo aver revisionato tutte le bozze IA. Ancora da controllare nella/e diapositiva/e:',
   'Uit sjabloon…': 'Da modello…',
   'Sjabloon kiezen': 'Scegli un modello',
   'Scope-object': 'Oggetto dell\'ambito',

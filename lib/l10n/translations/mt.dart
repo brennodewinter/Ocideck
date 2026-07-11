@@ -92,6 +92,18 @@ const _dutchSourceMt = {
   'Aantal bevindingen per ernst': 'Numru ta\' sejbiet skont il-gravità',
   'Aangepast…': 'Personalizzat…',
   'Aangepaste tijd': 'Ħin personalizzat',
+  'Waarheidsverklaring': 'Dikjarazzjoni ta\' verità',
+  'Rapporteur': 'Rapporteur',
+  'Certificering': 'Ċertifikazzjoni',
+  'Nog niet ondertekend': 'Għadu mhux iffirmat',
+  'Nog niet verzegeld': 'Għadu mhux issiġillat',
+  'Verzegeld op': 'Issiġillat fi',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Issiġillat. Issejvja (Ctrl/Cmd+S) biex iżżommu.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Dan ir-rapport tħejja bil-verità.',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'L-issiġillar huwa possibbli biss wara li jiġu riveduti l-abbozzi kollha tal-IA. Għad irid jiġi ċċekkjat fuq is-slajd(s):',
   'Uit sjabloon…': 'Minn mudell…',
   'Sjabloon kiezen': 'Agħżel mudell',
   'Scope-object': 'Oġġett tal-ambitu',

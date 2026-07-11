@@ -91,6 +91,18 @@ const _dutchSourceSl = {
   'Aantal bevindingen per ernst': 'Število ugotovitev po resnosti',
   'Aangepast…': 'Po meri…',
   'Aangepaste tijd': 'Čas po meri',
+  'Waarheidsverklaring': 'Izjava o resničnosti',
+  'Rapporteur': 'Poročevalec',
+  'Certificering': 'Certificiranje',
+  'Nog niet ondertekend': 'Še ni podpisano',
+  'Nog niet verzegeld': 'Še ni zapečateno',
+  'Verzegeld op': 'Zapečateno dne',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Zapečateno. Shranite (Ctrl/Cmd+S), da ga ohranite.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'To poročilo je bilo pripravljeno resnično.',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Zapečatenje je mogoče šele, ko so vsi osnutki UI pregledani. Še za preverjanje na prosojnici(-ah):',
   'Uit sjabloon…': 'Iz predloge…',
   'Sjabloon kiezen': 'Izberi predlogo',
   'Scope-object': 'Predmet obsega',

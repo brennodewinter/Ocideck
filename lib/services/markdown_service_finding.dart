@@ -6,17 +6,24 @@
 part of 'markdown_service.dart';
 
 extension _MarkdownFindingParse on MarkdownService {
-  /// Pulls the finding-group link comments (`ocideck_finding_id` /
-  /// `ocideck_finding_role`) out of [block], returning the block with them
-  /// removed plus the decoded values (empty id / [FindingRole.header] when
-  /// absent). Handled here — like `_parseImageFocus` — so they are stripped
-  /// before `_parseBlockDirectives`'s generic scan would treat them as presenter
-  /// notes, without lengthening that method.
-  ({String findingId, FindingRole findingRole, String block}) _parseFindingLink(
+  /// Pulls the per-slide attestation link comments out of [block]: the
+  /// finding-group link (`ocideck_finding_id` / `ocideck_finding_role`) and the
+  /// AI-assist markers (`ocideck_ai_assisted`, AI_ASSIST §16.3). Returns the
+  /// block with them removed plus the decoded values (empty id /
+  /// [FindingRole.header] / empty markers when absent). Handled here — like
+  /// `_parseImageFocus` — so they are stripped before `_parseBlockDirectives`'s
+  /// generic scan would treat them as presenter notes, without lengthening that
+  /// method.
+  ({
+    String findingId,
+    FindingRole findingRole,
+    List<String> aiAssistedFields,
     String block,
-  ) {
+  })
+  _parseFindingLink(String block) {
     var findingId = '';
     var findingRole = FindingRole.header;
+    var aiAssistedFields = const <String>[];
     final cleaned = block.replaceAllMapped(_reHtmlComment, (m) {
       final content = m.group(1)!.trim();
       if (content.startsWith('ocideck_finding_id:')) {
@@ -31,9 +38,23 @@ extension _MarkdownFindingParse on MarkdownService {
         );
         return '';
       }
+      if (content.startsWith('ocideck_ai_assisted:')) {
+        aiAssistedFields = content
+            .substring('ocideck_ai_assisted:'.length)
+            .split(',')
+            .map((f) => f.trim())
+            .where((f) => f.isNotEmpty)
+            .toList();
+        return '';
+      }
       return m.group(0)!;
     });
-    return (findingId: findingId, findingRole: findingRole, block: cleaned);
+    return (
+      findingId: findingId,
+      findingRole: findingRole,
+      aiAssistedFields: aiAssistedFields,
+      block: cleaned,
+    );
   }
 
   /// A `finding` header slide (PENTEST_MIAUW §3.1). Its body is structured
