@@ -47,6 +47,48 @@ Uint8List resizeImageForVision(Uint8List bytes) {
 String jpegDataUri(Uint8List jpeg) =>
     'data:image/jpeg;base64,${base64Encode(jpeg)}';
 
+/// Build the multimodal request for **searchable keyword tags** (AI_ASSIST §6):
+/// a handful of comma-separated keywords, not a sentence, for the image library
+/// search sidecar.
+AiChatRequest buildTagsRequest({
+  required String model,
+  required String imageDataUri,
+  required String languageName,
+}) {
+  final instruction =
+      'List 5 to 8 short, searchable keyword tags for this image, in '
+      '$languageName, separated by commas. Use single words or very short '
+      'phrases (objects, subjects, setting, colours, type of image). No '
+      'sentences, no numbering, no explanation — only the comma-separated tags.';
+  return AiChatRequest(
+    model: model,
+    maxTokens: 80,
+    messages: [
+      AiMessage.text(AiRole.system, AiPrompts.systemGuardrail),
+      AiMessage(AiRole.user, [
+        AiTextPart(instruction),
+        AiImagePart(imageDataUri),
+      ]),
+    ],
+  );
+}
+
+/// Tidy a raw model tag list into a clean, de-duplicated comma-separated string:
+/// split on commas/newlines, drop numbering/bullets and empties, lower-case for
+/// dedup, cap the count.
+String cleanTagsDraft(String raw, {int maxTags = 8}) {
+  final seen = <String>{};
+  final tags = <String>[];
+  for (final part in raw.split(RegExp(r'[,\n;]'))) {
+    var t = part.trim().replaceFirst(RegExp(r'^[\-\*\d.\)\s]+'), '').trim();
+    if (t.isEmpty) continue;
+    final key = t.toLowerCase();
+    if (seen.add(key)) tags.add(t);
+    if (tags.length >= maxTags) break;
+  }
+  return tags.join(', ');
+}
+
 /// Build the multimodal alt-text request: the shared guardrail + a concise,
 /// locale-aware per-field instruction + the image part (object form).
 AiChatRequest buildAltTextRequest({
@@ -124,5 +166,21 @@ class ImageAltAiService {
       languageName: languageName,
     );
     return cleanAltDraft((await _client.chat(request)).text);
+  }
+
+  /// Suggest searchable keyword tags (comma-separated) for [imageBytes] in
+  /// [languageName], for the image-library search sidecar. Same resize/gate path
+  /// as [suggestAltText]; returns the cleaned tag string (empty = none).
+  Future<String> suggestTags({
+    required Uint8List imageBytes,
+    required String languageName,
+  }) async {
+    final jpeg = await compute(resizeImageForVision, imageBytes);
+    final request = buildTagsRequest(
+      model: _client.settings.model,
+      imageDataUri: jpegDataUri(jpeg),
+      languageName: languageName,
+    );
+    return cleanTagsDraft((await _client.chat(request)).text);
   }
 }
