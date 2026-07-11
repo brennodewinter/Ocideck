@@ -1,4 +1,5 @@
 import 'package:uuid/uuid.dart';
+import 'checklist_spec.dart';
 import 'cockpit.dart';
 import 'deck.dart';
 import 'finding_spec.dart';
@@ -188,14 +189,15 @@ extension SlideTypeExtension on SlideType {
   /// The picker category this type belongs to.
   SlideCategory get category => slideTypeMeta[this]!.category;
 
-  /// Informatieveiligheid scaffold types (P1-S): their body is stored as free
-  /// Markdown in [Slide.customMarkdown] and round-trips like a free-Markdown
-  /// slide until each type's structured editor/serialiser lands (P1-FIND/CHK/
-  /// SCOPE/SUM/SIGN). Every such type currently belongs to
-  /// [SlideCategory.informatieveiligheid], so the set derives from the category;
-  /// the per-type packages narrow this as they add real fields.
+  /// Informatieveiligheid scaffold types (P1-S) whose body is still stored as
+  /// free Markdown in [Slide.customMarkdown] and round-trips like a free-Markdown
+  /// slide until each type's structured serialiser lands (P1-FIND/SCOPE/SUM/SIGN).
+  /// `checklist` has graduated (P1-CHK): it serialises as a real Markdown table
+  /// in [Slide.tableRows], so it is excluded here; the other packages narrow this
+  /// further as they land.
   bool get usesScaffoldMarkdownBody =>
-      category == SlideCategory.informatieveiligheid;
+      category == SlideCategory.informatieveiligheid &&
+      this != SlideType.checklist;
 }
 
 class Slide {
@@ -389,6 +391,12 @@ class Slide {
               ['', ''],
               ['', ''],
             ]
+          : type == SlideType.checklist
+          // Start met de vaste kop + twee lege testregels, zodat de
+          // checklist-editor meteen invulbare rijen toont.
+          ? const ChecklistSpec(
+              rows: [ChecklistRow(), ChecklistRow()],
+            ).toTableRows()
           : const [],
       customMarkdown: type == SlideType.cockpit
           ? CockpitSpec.pentestPreset().toBlock()

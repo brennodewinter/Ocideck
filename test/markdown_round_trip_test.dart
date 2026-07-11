@@ -1499,10 +1499,10 @@ void main() {
     // The remaining security slide types are scaffolded as free-Markdown bodies
     // carried by their own `_class` token. Both the type and the body must
     // survive serialize → parse until each type gains a structured serialiser.
-    // (`finding` has graduated to P1-FIND — see the dedicated group below.)
+    // (`finding` graduated to P1-FIND — see the dedicated group below;
+    // `checklist` graduated to P1-CHK — see checklist_spec_test.dart.)
     const scaffoldTypes = {
       SlideType.findingsSummary: 'findings-summary',
-      SlideType.checklist: 'checklist',
       SlideType.scopeMatrix: 'scope-matrix',
       SlideType.signOff: 'sign-off',
     };

@@ -5,6 +5,7 @@ import '../../services/image_service.dart';
 import 'bullets_editor.dart';
 import 'bullets_image_editor.dart';
 import 'chart_editor.dart';
+import 'checklist_editor.dart';
 import 'code_editor.dart';
 import 'cockpit_editor.dart';
 import 'finding_editor.dart';
@@ -185,17 +186,22 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         themeAnimationDurationMs: c.themeAnimationDurationMs,
         nestedInScrollView: c.nestedInScrollView,
       ),
-      // Informatieveiligheid: `finding` has its structured editor (P1-FIND);
-      // the other four still share the free-Markdown scaffold until their
-      // packages land (P1-CHK/SCOPE/SUM/SIGN).
+      // Informatieveiligheid: `finding` (P1-FIND) and `checklist` (P1-CHK) have
+      // structured editors; the other three still share the free-Markdown
+      // scaffold until their packages land (P1-SCOPE/SUM/SIGN).
       SlideType.finding: (c) => FindingEditor(
         key: c._key,
         slide: c.slide,
         onUpdate: c.onUpdate,
         nestedInScrollView: c.nestedInScrollView,
       ),
+      SlideType.checklist: (c) => ChecklistEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
       SlideType.findingsSummary: _scaffoldEditor,
-      SlideType.checklist: _scaffoldEditor,
       SlideType.scopeMatrix: _scaffoldEditor,
       SlideType.signOff: _scaffoldEditor,
     };

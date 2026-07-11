@@ -31,6 +31,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   and human-readable (PENTEST_MIAUW §3.1); see
   [docs/FILE_FORMAT.md](docs/FILE_FORMAT.md) §4. Localised in all interface
   languages.
+- **Checklist slide type (`checklist`)** — the *Checklist* type is now a
+  structured, standard-driven test list instead of a free-Markdown scaffold. A
+  dedicated editor captures a standard label and a list of tests, each with an
+  id, name, MIAUW **tri-state** status (*Getoetst* / *Afwijking* / *Niet
+  toetsbaar* / *Niet getoetst*), an optional link to a finding id, and a note.
+  The preview shows a derived tested/total progress bar and per-row status chips.
+  Storage stays a **plain Markdown table** (PENTEST_MIAUW §3.2), so it aligns
+  with the existing `table` handling and round-trips losslessly; the progress is
+  derived, never stored. Localised in all interface languages. See
+  [docs/FILE_FORMAT.md](docs/FILE_FORMAT.md) §5.
 - **Informatieveiligheid slide types (scaffold)** — five new slide types for
   pentest reporting (*Bevinding*, *Bevindingenoverzicht*, *Checklist*,
   *Scope-matrix*, *Ondertekening*) are registered end to end: enum, metadata,

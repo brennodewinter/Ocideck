@@ -16,6 +16,7 @@ import 'mermaid_diagram.dart';
 import 'video_playhead_bus.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
+import '../../models/checklist_spec.dart';
 import '../../models/cockpit.dart';
 import '../../models/deck.dart';
 import '../../models/finding_spec.dart';
@@ -57,6 +58,7 @@ part 'previews/chart_preview_radar.dart';
 part 'previews/cockpit_preview.dart';
 part 'previews/question_preview.dart';
 part 'previews/timeline_preview.dart';
+part 'previews/checklist_preview.dart';
 part 'previews/scaffold_previews.dart';
 part 'previews/finding_preview.dart';
 part 'previews/overlays.dart';
@@ -709,21 +711,29 @@ class SlidePreviewWidget extends StatelessWidget {
           presentationMode: presentationMode,
           revealedCount: timelineRevealedCount,
         );
+      case SlideType.checklist:
       case SlideType.finding:
       case SlideType.findingsSummary:
-      case SlideType.checklist:
       case SlideType.scopeMatrix:
       case SlideType.signOff:
         return _securityPreview(w);
     }
   }
 
-  /// Preview for the Informatieveiligheid slide types: `finding` has its
-  /// structured severity-card preview (P1-FIND); the other four keep the shared
-  /// free-Markdown scaffold until their packages land (P1-CHK/SCOPE/SUM/SIGN).
+  /// Preview for the Informatieveiligheid slide types: `finding` (P1-FIND) and
+  /// `checklist` (P1-CHK) have structured previews; the other three keep the
+  /// shared free-Markdown scaffold until their packages land (P1-SCOPE/SUM/SIGN).
   Widget _securityPreview(double w) {
     if (slide.type == SlideType.finding) {
       return _FindingPreview(
+        slide: slide,
+        w: w,
+        font: fontFamily,
+        profile: themeProfile,
+      );
+    }
+    if (slide.type == SlideType.checklist) {
+      return _ChecklistPreview(
         slide: slide,
         w: w,
         font: fontFamily,

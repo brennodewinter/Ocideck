@@ -554,6 +554,18 @@ block. All structured fields are inline and re-parsed on load:
 …
 ## Recommendation
 …
+**Checklist** (`checklist`) — a standard-driven test list, stored as a normal
+Markdown table so it aligns with the `table` slide and round-trips losslessly.
+The heading is the standard label; the table has a fixed five-column shape:
+
+```markdown
+<!-- _class: checklist -->
+# Checklist — OWASP WSTG
+| ID | Test | Status | Finding | Note |
+| --- | --- | --- | --- | --- |
+| WSTG-ATHN-07 | Testing for Weak Password Policy | Anomaly | F-03 | |
+| WSTG-CRYP-04 | Testing for Weak Encryption | Not testable | — | functionality absent |
+| WSTG-SESS-01 | Testing for Session Management |  | — | |
 ```
 
 Rules:
@@ -585,6 +597,15 @@ Both comments are written on any slide with a non-empty finding id (empty = the
 slide is not part of a finding). The group carries **one id and one severity**
 (derived once from the header's CVSS vector) and moves, deletes and round-trips
 as a unit.
+- The **Status** column holds the MIAUW tri-state as a **stable English word** —
+  `Tested`, `Anomaly`, `Not testable`, or empty (not yet tested) — so the table
+  round-trips regardless of interface language; the editor and preview localise
+  it for display. Columns are read **by position**, so a translated or reordered
+  header never misroutes a value.
+- The **Finding** column links a test to a finding id (e.g. `F-03`); `—` means
+  none.
+- The header line's tested/total count (shown as a progress bar in the app) is
+  **derived** from the rows and is not stored.
 
 ### Image Size (`imageSize`)
 
