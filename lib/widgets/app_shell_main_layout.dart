@@ -581,6 +581,13 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         onInvoke: _openFindReplace,
       ),
       PaletteCommand(
+        label: l10n.d('Wis AI-alt-teksten'),
+        icon: Icons.auto_delete_outlined,
+        keywords: const ['ai', 'alt', 'accessibility', 'undo'],
+        enabled: deckNotifier.aiGeneratedAltTextCount > 0,
+        onInvoke: () => clearAiAltTexts(),
+      ),
+      PaletteCommand(
         label: l10n.t('imageLibrary'),
         icon: Icons.photo_library_outlined,
         onInvoke: _openImageCarousel,

@@ -127,6 +127,12 @@ class _ImageSlideEditorState extends State<ImageSlideEditor>
                 .copyWith(imageAltText: alt)
                 .withAiAssistedField('imageAltText', present: true),
           ),
+          imageAltIsAiDraft: widget.slide.aiAssistedFields.contains(
+            'imageAltText',
+          ),
+          onAltTextAccepted: () => widget.onUpdate(
+            widget.slide.withAiAssistedField('imageAltText', present: false),
+          ),
         ),
         const SizedBox(height: 8),
         // Slide-filling = cover mode (imageSize 0): the image fills the whole

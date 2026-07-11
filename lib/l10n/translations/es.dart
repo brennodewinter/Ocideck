@@ -84,6 +84,15 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'AI-concept': 'Borrador de IA',
+  'Nagekeken': 'Revisado',
+  'Wis AI-alt-teksten': 'Borrar textos alternativos de IA',
+  'AI-alt-teksten wissen': 'Borrar textos alternativos de IA',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      '¿Eliminar todos los textos alternativos de IA aún no revisados? Los textos manuales y revisados se conservan.',
+  'aantal': 'cantidad',
+  'Wissen': 'Borrar',
+  'AI-alt-teksten gewist.': 'Textos alternativos de IA borrados.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'No se pudo leer la imagen para el análisis de IA.',
   'Het model gaf geen alt-tekst terug.':

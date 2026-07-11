@@ -84,6 +84,15 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'AI-concept': 'Abbozz IA',
+  'Nagekeken': 'Rivedut',
+  'Wis AI-alt-teksten': 'Naddaf it-testi alternattivi IA',
+  'AI-alt-teksten wissen': 'Naddaf it-testi alternattivi IA',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Tneħħi t-testi alternattivi IA kollha li għadhom ma ġewx riveduti? Dawk manwali u riveduti jinżammu.',
+  'aantal': 'numru',
+  'Wissen': 'Naddaf',
+  'AI-alt-teksten gewist.': 'It-testi alternattivi IA tneħħew.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Ma setgħetx tinqara l-immaġni għall-analiżi tal-IA.',
   'Het model gaf geen alt-tekst terug.':

@@ -83,6 +83,15 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'AI-concept': 'AI nacrt',
+  'Nagekeken': 'Pregledano',
+  'Wis AI-alt-teksten': 'Očisti AI alternativne tekstove',
+  'AI-alt-teksten wissen': 'Očisti AI alternativne tekstove',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Ukloniti sve još nepregledane AI alternativne tekstove? Ručni i pregledani ostaju.',
+  'aantal': 'broj',
+  'Wissen': 'Očisti',
+  'AI-alt-teksten gewist.': 'AI alternativni tekstovi očišćeni.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Slika se nije mogla pročitati za AI analizu.',
   'Het model gaf geen alt-tekst terug.':

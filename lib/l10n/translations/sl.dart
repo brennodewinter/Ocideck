@@ -83,6 +83,15 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'AI-concept': 'Osnutek UI',
+  'Nagekeken': 'Pregledano',
+  'Wis AI-alt-teksten': 'Počisti nadomestna besedila UI',
+  'AI-alt-teksten wissen': 'Počisti nadomestna besedila UI',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Odstranim vsa še nepregledana nadomestna besedila UI? Ročna in pregledana ostanejo.',
+  'aantal': 'število',
+  'Wissen': 'Počisti',
+  'AI-alt-teksten gewist.': 'Nadomestna besedila UI počiščena.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Slike ni bilo mogoče prebrati za analizo UI.',
   'Het model gaf geen alt-tekst terug.':

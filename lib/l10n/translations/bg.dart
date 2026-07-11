@@ -84,6 +84,15 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'AI-concept': 'AI чернова',
+  'Nagekeken': 'Прегледано',
+  'Wis AI-alt-teksten': 'Изчисти AI алт-текстовете',
+  'AI-alt-teksten wissen': 'Изчисти AI алт-текстовете',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Да се премахнат ли всички още непрегледани AI алт-текстове? Ръчните и прегледаните се запазват.',
+  'aantal': 'брой',
+  'Wissen': 'Изчисти',
+  'AI-alt-teksten gewist.': 'AI алт-текстовете са изчистени.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Изображението не можа да бъде прочетено за AI анализ.',
   'Het model gaf geen alt-tekst terug.': 'Моделът не върна алтернативен текст.',

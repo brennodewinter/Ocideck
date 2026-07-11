@@ -354,6 +354,11 @@ class ImagePickerBar extends ConsumerWidget {
   /// Non-null enables the "suggest alt-text" button (still gated on the AI toggle
   /// being on).
   final ValueChanged<String>? onAltTextSuggested;
+
+  /// Whether the current alt-text is an unreviewed AI draft (shows the badge +
+  /// "reviewed" action), and the callback that marks it reviewed.
+  final bool imageAltIsAiDraft;
+  final VoidCallback? onAltTextAccepted;
   final String label;
   final String captionField;
 
@@ -371,6 +376,8 @@ class ImagePickerBar extends ConsumerWidget {
     this.imageAltText = '',
     this.onAltTextChanged,
     this.onAltTextSuggested,
+    this.imageAltIsAiDraft = false,
+    this.onAltTextAccepted,
     this.label = 'Geen afbeelding gekozen',
     this.captionField = 'imageCaption',
   });
@@ -588,6 +595,8 @@ class ImagePickerBar extends ConsumerWidget {
             captionBasePath: captionBasePath,
             onChanged: onAltTextChanged!,
             onSuggested: onAltTextSuggested,
+            isAiDraft: imageAltIsAiDraft,
+            onAccepted: onAltTextAccepted,
           ),
         ],
       ],

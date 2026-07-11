@@ -84,6 +84,15 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'AI-concept': 'Rascunho de IA',
+  'Nagekeken': 'Revisto',
+  'Wis AI-alt-teksten': 'Limpar textos alternativos de IA',
+  'AI-alt-teksten wissen': 'Limpar textos alternativos de IA',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Remover todos os textos alternativos de IA ainda não revistos? Os manuais e revistos são mantidos.',
+  'aantal': 'quantidade',
+  'Wissen': 'Limpar',
+  'AI-alt-teksten gewist.': 'Textos alternativos de IA limpos.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Não foi possível ler a imagem para análise de IA.',
   'Het model gaf geen alt-tekst terug.':

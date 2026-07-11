@@ -171,6 +171,12 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
                 .copyWith(imageAltText: alt)
                 .withAiAssistedField('imageAltText', present: true),
           ),
+          imageAltIsAiDraft: widget.slide.aiAssistedFields.contains(
+            'imageAltText',
+          ),
+          onAltTextAccepted: () => widget.onUpdate(
+            widget.slide.withAiAssistedField('imageAltText', present: false),
+          ),
         ),
         _cropButton(false),
         const SizedBox(height: 20),
@@ -201,6 +207,12 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
             widget.slide
                 .copyWith(imageAltText2: alt)
                 .withAiAssistedField('imageAltText2', present: true),
+          ),
+          imageAltIsAiDraft: widget.slide.aiAssistedFields.contains(
+            'imageAltText2',
+          ),
+          onAltTextAccepted: () => widget.onUpdate(
+            widget.slide.withAiAssistedField('imageAltText2', present: false),
           ),
         ),
         _cropButton(true),

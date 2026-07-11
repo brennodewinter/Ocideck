@@ -83,6 +83,15 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'AI-concept': 'AI-utkast',
+  'Nagekeken': 'Granskad',
+  'Wis AI-alt-teksten': 'Rensa AI-alt-texter',
+  'AI-alt-teksten wissen': 'Rensa AI-alt-texter',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Ta bort alla AI-alt-texter som ännu inte granskats? Manuella och granskade behålls.',
+  'aantal': 'antal',
+  'Wissen': 'Rensa',
+  'AI-alt-teksten gewist.': 'AI-alt-texter rensade.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Bilden kunde inte läsas för AI-analys.',
   'Het model gaf geen alt-tekst terug.': 'Modellen returnerade ingen alt-text.',

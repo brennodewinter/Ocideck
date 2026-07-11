@@ -85,6 +85,15 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'AI-concept': 'Szkic AI',
+  'Nagekeken': 'Sprawdzone',
+  'Wis AI-alt-teksten': 'Wyczyść teksty alternatywne AI',
+  'AI-alt-teksten wissen': 'Wyczyść teksty alternatywne AI',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Usunąć wszystkie niesprawdzone teksty alternatywne AI? Ręczne i sprawdzone zostają.',
+  'aantal': 'liczba',
+  'Wissen': 'Wyczyść',
+  'AI-alt-teksten gewist.': 'Teksty alternatywne AI wyczyszczone.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Nie udało się odczytać obrazu do analizy AI.',
   'Het model gaf geen alt-tekst terug.':

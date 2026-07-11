@@ -83,6 +83,15 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'AI-concept': 'Προσχέδιο AI',
+  'Nagekeken': 'Ελεγμένο',
+  'Wis AI-alt-teksten': 'Εκκαθάριση εναλλακτικών κειμένων AI',
+  'AI-alt-teksten wissen': 'Εκκαθάριση εναλλακτικών κειμένων AI',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Να αφαιρεθούν όλα τα μη ελεγμένα εναλλακτικά κείμενα AI; Τα χειροκίνητα και ελεγμένα διατηρούνται.',
+  'aantal': 'πλήθος',
+  'Wissen': 'Εκκαθάριση',
+  'AI-alt-teksten gewist.': 'Τα εναλλακτικά κείμενα AI εκκαθαρίστηκαν.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Δεν ήταν δυνατή η ανάγνωση της εικόνας για ανάλυση AI.',
   'Het model gaf geen alt-tekst terug.':

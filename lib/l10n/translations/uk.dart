@@ -84,6 +84,15 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'AI-concept': 'Чернетка ШІ',
+  'Nagekeken': 'Перевірено',
+  'Wis AI-alt-teksten': 'Очистити альт-тексти ШІ',
+  'AI-alt-teksten wissen': 'Очистити альт-тексти ШІ',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Видалити всі ще неперевірені альт-тексти ШІ? Ручні та перевірені зберігаються.',
+  'aantal': 'кількість',
+  'Wissen': 'Очистити',
+  'AI-alt-teksten gewist.': 'Альт-тексти ШІ очищено.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Не вдалося прочитати зображення для аналізу ШІ.',
   'Het model gaf geen alt-tekst terug.':

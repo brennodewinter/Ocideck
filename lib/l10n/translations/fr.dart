@@ -84,6 +84,15 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'AI-concept': 'Brouillon IA',
+  'Nagekeken': 'Vérifié',
+  'Wis AI-alt-teksten': 'Effacer les textes alternatifs IA',
+  'AI-alt-teksten wissen': 'Effacer les textes alternatifs IA',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Supprimer tous les textes alternatifs IA non encore vérifiés ? Les textes manuels et vérifiés sont conservés.',
+  'aantal': 'nombre',
+  'Wissen': 'Effacer',
+  'AI-alt-teksten gewist.': 'Textes alternatifs IA effacés.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Impossible de lire l\'image pour l\'analyse IA.',
   'Het model gaf geen alt-tekst terug.':

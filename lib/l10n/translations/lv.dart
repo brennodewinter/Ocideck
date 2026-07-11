@@ -83,6 +83,15 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'AI-concept': 'MI melnraksts',
+  'Nagekeken': 'Pārbaudīts',
+  'Wis AI-alt-teksten': 'Notīrīt MI alt tekstus',
+  'AI-alt-teksten wissen': 'Notīrīt MI alt tekstus',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Noņemt visus vēl nepārbaudītos MI alt tekstus? Manuālie un pārbaudītie tiek saglabāti.',
+  'aantal': 'skaits',
+  'Wissen': 'Notīrīt',
+  'AI-alt-teksten gewist.': 'MI alt teksti notīrīti.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Attēlu neizdevās nolasīt MI analīzei.',
   'Het model gaf geen alt-tekst terug.': 'Modelis neatgrieza alt tekstu.',

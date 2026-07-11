@@ -83,6 +83,15 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'AI-concept': 'AI-udkast',
+  'Nagekeken': 'Gennemgået',
+  'Wis AI-alt-teksten': 'Ryd AI-alt-tekster',
+  'AI-alt-teksten wissen': 'Ryd AI-alt-tekster',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Fjern alle AI-alt-tekster, der endnu ikke er gennemgået? Manuelle og gennemgåede bevares.',
+  'aantal': 'antal',
+  'Wissen': 'Ryd',
+  'AI-alt-teksten gewist.': 'AI-alt-tekster ryddet.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Billedet kunne ikke læses til AI-analyse.',
   'Het model gaf geen alt-tekst terug.':

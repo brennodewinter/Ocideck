@@ -84,6 +84,15 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'AI-concept': 'AI koncept',
+  'Nagekeken': 'Skontrolované',
+  'Wis AI-alt-teksten': 'Vymazať AI alt texty',
+  'AI-alt-teksten wissen': 'Vymazať AI alt texty',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Odstrániť všetky ešte neskontrolované AI alt texty? Ručné a skontrolované zostanú.',
+  'aantal': 'počet',
+  'Wissen': 'Vymazať',
+  'AI-alt-teksten gewist.': 'AI alt texty vymazané.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Obrázok sa nepodarilo načítať pre AI analýzu.',
   'Het model gaf geen alt-tekst terug.': 'Model nevrátil žiadny alt text.',

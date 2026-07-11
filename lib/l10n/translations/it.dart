@@ -83,6 +83,15 @@ const _stringsIt = {
 };
 
 const _dutchSourceIt = {
+  'AI-concept': 'Bozza IA',
+  'Nagekeken': 'Verificato',
+  'Wis AI-alt-teksten': 'Cancella testi alternativi IA',
+  'AI-alt-teksten wissen': 'Cancella testi alternativi IA',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Rimuovere tutti i testi alternativi IA non ancora verificati? I testi manuali e verificati vengono mantenuti.',
+  'aantal': 'numero',
+  'Wissen': 'Cancella',
+  'AI-alt-teksten gewist.': 'Testi alternativi IA cancellati.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Impossibile leggere l\'immagine per l\'analisi IA.',
   'Het model gaf geen alt-tekst terug.':

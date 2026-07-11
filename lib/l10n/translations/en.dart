@@ -83,6 +83,15 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'AI-concept': 'AI draft',
+  'Nagekeken': 'Reviewed',
+  'Wis AI-alt-teksten': 'Clear AI alt-texts',
+  'AI-alt-teksten wissen': 'Clear AI alt-texts',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Remove all AI alt-texts that have not been reviewed yet? Manual and reviewed alt-texts are kept.',
+  'aantal': 'count',
+  'Wissen': 'Clear',
+  'AI-alt-teksten gewist.': 'AI alt-texts cleared.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Couldn\'t read the image for AI analysis.',
   'Het model gaf geen alt-tekst terug.': 'The model returned no alt text.',

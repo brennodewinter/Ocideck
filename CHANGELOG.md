@@ -18,6 +18,13 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   marked (`ocideck_ai_assisted`) so **Afronden & verzegelen** stays blocked until
   it is reviewed. Off by default; desktop only (AI_ASSIST §6). Localised in all
   interface languages.
+- **AI alt-text is traceable and reversible** — an AI-drafted alt-text shows an
+  **"AI-concept"** badge in the editor with a **"Nagekeken"** button that keeps
+  the text but clears its AI marker (so it survives the bulk cleanup and no longer
+  blocks sealing). A **"Wis AI-alt-teksten"** command (command palette, Ctrl/Cmd+K)
+  removes every still-unreviewed AI alt-text across the deck in one undoable step —
+  a safety net if a bulk suggestion run goes wrong — while leaving human-written
+  and reviewed alt-text untouched. Localised in all interface languages.
 - **Image alt-text for screen readers (WCAG 1.1.1)** — image slides now carry a
   dedicated **alt-text** field, separate from the visible caption. The image, two-
   images and bullets-with-image editors gained an *Alt-tekst* box; a screen reader

@@ -85,6 +85,15 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'AI-concept': 'Dréacht IS',
+  'Nagekeken': 'Seiceáilte',
+  'Wis AI-alt-teksten': 'Glan téacsanna malartacha IS',
+  'AI-alt-teksten wissen': 'Glan téacsanna malartacha IS',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Bain gach téacs malartach IS nár seiceáladh fós? Coinnítear cinn láimhe agus seiceáilte.',
+  'aantal': 'líon',
+  'Wissen': 'Glan',
+  'AI-alt-teksten gewist.': 'Téacsanna malartacha IS glanta.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Níorbh fhéidir an íomhá a léamh le haghaidh anailís IS.',
   'Het model gaf geen alt-tekst terug.':

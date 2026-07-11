@@ -850,4 +850,58 @@ void main() {
       expect(n.state.deck!.sealHash, hash);
     });
   });
+
+  group('clear AI-generated alt-texts (safety net)', () {
+    Slide img({
+      String alt = '',
+      String alt2 = '',
+      List<String> ai = const [],
+      SlideType type = SlideType.image,
+    }) => Slide.create(type).copyWith(
+      imagePath: 'a.png',
+      imagePath2: alt2.isEmpty ? '' : 'b.png',
+      imageAltText: alt,
+      imageAltText2: alt2,
+      aiAssistedFields: ai,
+    );
+
+    test('clears only marked alt-texts, keeps manual and reviewed', () {
+      final n = _notifier();
+      n.loadDeck(
+        Deck(
+          title: 'D',
+          slides: [
+            img(alt: 'AI draft', ai: const ['imageAltText']), // cleared
+            img(alt: 'Human text'), // kept (no marker)
+            img(alt: 'Reviewed AI'), // kept (marker already cleared)
+            img(
+              alt2: 'AI draft 2',
+              ai: const ['imageAltText2'],
+              type: SlideType.twoImages,
+            ), // alt2 cleared
+          ],
+        ),
+      );
+      expect(n.aiGeneratedAltTextCount, 2);
+      expect(n.clearAiGeneratedAltTexts(), 2);
+      final s = n.state.deck!.slides;
+      expect(s[0].imageAltText, '');
+      expect(s[0].aiAssistedFields, isEmpty);
+      expect(s[1].imageAltText, 'Human text');
+      expect(s[2].imageAltText, 'Reviewed AI');
+      expect(s[3].imageAltText2, '');
+      expect(n.aiGeneratedAltTextCount, 0);
+    });
+
+    test('a clean deck clears nothing', () {
+      final n = _notifier()
+        ..loadDeck(
+          Deck(
+            title: 'D',
+            slides: [img(alt: 'x')],
+          ),
+        );
+      expect(n.clearAiGeneratedAltTexts(), 0);
+    });
+  });
 }

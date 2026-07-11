@@ -248,6 +248,42 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
     super.dispose();
   }
 
+  Widget _imageBar(String imagePath) {
+    return ImagePickerBar(
+      imagePath: imagePath,
+      imageCaption: widget.slide.imageCaption,
+      searchPaths: widget.searchPaths,
+      captionBasePath: widget.captionBasePath,
+      onPicked: (path, caption) => widget.onUpdate(
+        widget.slide.copyWith(imagePath: path, imageCaption: caption),
+      ),
+      onBrowse: _pickImage,
+      onPaste: _pasteImage,
+      onClear: imagePath.isNotEmpty
+          ? () => widget.onUpdate(
+              widget.slide.copyWith(imagePath: '', imageCaption: ''),
+            )
+          : null,
+      onCaptionChanged: (caption) =>
+          widget.onUpdate(widget.slide.copyWith(imageCaption: caption)),
+      imageAltText: widget.slide.imageAltText,
+      onAltTextChanged: (alt) => widget.onUpdate(
+        widget.slide
+            .copyWith(imageAltText: alt)
+            .withAiAssistedField('imageAltText', present: false),
+      ),
+      onAltTextSuggested: (alt) => widget.onUpdate(
+        widget.slide
+            .copyWith(imageAltText: alt)
+            .withAiAssistedField('imageAltText', present: true),
+      ),
+      imageAltIsAiDraft: widget.slide.aiAssistedFields.contains('imageAltText'),
+      onAltTextAccepted: () => widget.onUpdate(
+        widget.slide.withAiAssistedField('imageAltText', present: false),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -341,35 +377,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
         ],
         const SizedBox(height: 16),
         const SectionLabel('Afbeelding (rechts)'),
-        ImagePickerBar(
-          imagePath: imagePath,
-          imageCaption: widget.slide.imageCaption,
-          searchPaths: widget.searchPaths,
-          captionBasePath: widget.captionBasePath,
-          onPicked: (path, caption) => widget.onUpdate(
-            widget.slide.copyWith(imagePath: path, imageCaption: caption),
-          ),
-          onBrowse: _pickImage,
-          onPaste: _pasteImage,
-          onClear: imagePath.isNotEmpty
-              ? () => widget.onUpdate(
-                  widget.slide.copyWith(imagePath: '', imageCaption: ''),
-                )
-              : null,
-          onCaptionChanged: (caption) =>
-              widget.onUpdate(widget.slide.copyWith(imageCaption: caption)),
-          imageAltText: widget.slide.imageAltText,
-          onAltTextChanged: (alt) => widget.onUpdate(
-            widget.slide
-                .copyWith(imageAltText: alt)
-                .withAiAssistedField('imageAltText', present: false),
-          ),
-          onAltTextSuggested: (alt) => widget.onUpdate(
-            widget.slide
-                .copyWith(imageAltText: alt)
-                .withAiAssistedField('imageAltText', present: true),
-          ),
-        ),
+        _imageBar(imagePath),
         const SizedBox(height: 12),
         const SectionLabel('Breedte afbeeldingspaneel (rechts)'),
         ImageZoomControl(

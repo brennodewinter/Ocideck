@@ -83,6 +83,15 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'AI-concept': 'Draf AI',
+  'Nagekeken': 'Ditinjau',
+  'Wis AI-alt-teksten': 'Hapus teks alt AI',
+  'AI-alt-teksten wissen': 'Hapus teks alt AI',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Hapus semua teks alt AI yang belum ditinjau? Teks manual dan yang sudah ditinjau dipertahankan.',
+  'aantal': 'jumlah',
+  'Wissen': 'Hapus',
+  'AI-alt-teksten gewist.': 'Teks alt AI dihapus.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Tidak dapat membaca gambar untuk analisis AI.',
   'Het model gaf geen alt-tekst terug.': 'Model tidak mengembalikan teks alt.',
