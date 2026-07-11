@@ -83,6 +83,15 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'AI-concept': 'DI juodraštis',
+  'Nagekeken': 'Peržiūrėta',
+  'Wis AI-alt-teksten': 'Išvalyti DI alt tekstus',
+  'AI-alt-teksten wissen': 'Išvalyti DI alt tekstus',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Pašalinti visus dar neperžiūrėtus DI alt tekstus? Rankiniai ir peržiūrėti lieka.',
+  'aantal': 'kiekis',
+  'Wissen': 'Išvalyti',
+  'AI-alt-teksten gewist.': 'DI alt tekstai išvalyti.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Nepavyko nuskaityti vaizdo DI analizei.',
   'Het model gaf geen alt-tekst terug.': 'Modelis negrąžino alt teksto.',

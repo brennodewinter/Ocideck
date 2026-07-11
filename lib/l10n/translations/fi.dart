@@ -83,6 +83,15 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'AI-concept': 'Tekoälyluonnos',
+  'Nagekeken': 'Tarkistettu',
+  'Wis AI-alt-teksten': 'Tyhjennä tekoälyn alt-tekstit',
+  'AI-alt-teksten wissen': 'Tyhjennä tekoälyn alt-tekstit',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Poistetaanko kaikki vielä tarkistamattomat tekoälyn alt-tekstit? Manuaaliset ja tarkistetut säilytetään.',
+  'aantal': 'määrä',
+  'Wissen': 'Tyhjennä',
+  'AI-alt-teksten gewist.': 'Tekoälyn alt-tekstit tyhjennetty.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Kuvaa ei voitu lukea tekoälyanalyysiä varten.',
   'Het model gaf geen alt-tekst terug.': 'Malli ei palauttanut alt-tekstiä.',

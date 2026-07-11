@@ -82,6 +82,15 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'AI-concept': 'AI mustand',
+  'Nagekeken': 'Üle vaadatud',
+  'Wis AI-alt-teksten': 'Kustuta AI alt-tekstid',
+  'AI-alt-teksten wissen': 'Kustuta AI alt-tekstid',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Eemaldada kõik veel üle vaatamata AI alt-tekstid? Käsitsi ja üle vaadatud jäävad alles.',
+  'aantal': 'arv',
+  'Wissen': 'Kustuta',
+  'AI-alt-teksten gewist.': 'AI alt-tekstid kustutatud.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Pilti ei õnnestunud AI-analüüsiks lugeda.',
   'Het model gaf geen alt-tekst terug.': 'Mudel ei tagastanud alt-teksti.',

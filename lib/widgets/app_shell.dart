@@ -75,6 +75,7 @@ part 'app_shell_main_layout.dart';
 // Shell sub-widgets and helpers, split into part files for navigability.
 // These parts share this library's imports and private scope.
 part 'shell/shell_actions.dart';
+part 'shell/ai_actions.dart';
 part 'shell/tab_bar.dart';
 part 'shell/welcome_screen.dart';
 part 'shell/play_only_screen.dart';

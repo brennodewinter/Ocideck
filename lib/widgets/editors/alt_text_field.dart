@@ -24,6 +24,15 @@ class AltTextField extends ConsumerStatefulWidget {
   final ValueChanged<String> onChanged;
   final ValueChanged<String>? onSuggested;
 
+  /// Whether the current alt-text is an unreviewed AI draft (its provenance
+  /// marker is set). Shows a badge + a "reviewed" action.
+  final bool isAiDraft;
+
+  /// Marks the current AI draft as reviewed — clears the provenance marker
+  /// without changing the text (so it survives "clear AI alt-texts" and no longer
+  /// blocks sealing).
+  final VoidCallback? onAccepted;
+
   const AltTextField({
     super.key,
     required this.altText,
@@ -31,6 +40,8 @@ class AltTextField extends ConsumerStatefulWidget {
     required this.captionBasePath,
     required this.onChanged,
     this.onSuggested,
+    this.isAiDraft = false,
+    this.onAccepted,
   });
 
   @override
@@ -191,6 +202,45 @@ class _AltTextFieldState extends ConsumerState<AltTextField> {
           ),
           style: const TextStyle(fontSize: 12),
         ),
+        if (widget.isAiDraft) ...[
+          const SizedBox(height: 6),
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                decoration: BoxDecoration(
+                  color: AppTheme.accent.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.auto_awesome, size: 12, color: AppTheme.accent),
+                    const SizedBox(width: 4),
+                    Text(
+                      l10n.d('AI-concept'),
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: AppTheme.accent,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Spacer(),
+              if (widget.onAccepted != null)
+                TextButton.icon(
+                  onPressed: widget.onAccepted,
+                  icon: const Icon(Icons.check, size: 15),
+                  label: Text(
+                    l10n.d('Nagekeken'),
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                ),
+            ],
+          ),
+        ],
         if (_aiAvailable) ...[
           const SizedBox(height: 6),
           Align(

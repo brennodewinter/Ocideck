@@ -83,6 +83,15 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'AI-concept': 'AI-vázlat',
+  'Nagekeken': 'Ellenőrizve',
+  'Wis AI-alt-teksten': 'AI alt szövegek törlése',
+  'AI-alt-teksten wissen': 'AI alt szövegek törlése',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Eltávolít minden még nem ellenőrzött AI alt szöveget? A kézi és ellenőrzött szövegek megmaradnak.',
+  'aantal': 'darab',
+  'Wissen': 'Törlés',
+  'AI-alt-teksten gewist.': 'AI alt szövegek törölve.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'A kép nem volt olvasható az AI-elemzéshez.',
   'Het model gaf geen alt-tekst terug.':

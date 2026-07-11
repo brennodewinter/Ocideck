@@ -84,6 +84,15 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'AI-concept': 'Schiță IA',
+  'Nagekeken': 'Verificat',
+  'Wis AI-alt-teksten': 'Șterge textele alternative IA',
+  'AI-alt-teksten wissen': 'Șterge textele alternative IA',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Eliminați toate textele alternative IA încă neverificate? Cele manuale și verificate se păstrează.',
+  'aantal': 'număr',
+  'Wissen': 'Șterge',
+  'AI-alt-teksten gewist.': 'Texte alternative IA șterse.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Imaginea nu a putut fi citită pentru analiza IA.',
   'Het model gaf geen alt-tekst terug.':

@@ -81,6 +81,15 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'AI-concept': 'IA nab',
+  'Nagekeken': 'qaywI\'',
+  'Wis AI-alt-teksten': 'IA Del ghItlh Qaw\'',
+  'AI-alt-teksten wissen': 'IA Del ghItlh Qaw\'',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Hoch IA Del ghItlh qaybe\'bogh teqnIS\'a\'? qaywI\' je ghItlhwI\' pollu\'.',
+  'aantal': 'mI\'',
+  'Wissen': 'Qaw\'',
+  'AI-alt-teksten gewist.': 'IA Del ghItlh Qaw\'lu\'pu\'.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'IA nojmoH nabvaD nagh HaqlaHbe\'.',
   'Het model gaf geen alt-tekst terug.': 'Del ghItlh chugh De\' chov qawHa\'.',

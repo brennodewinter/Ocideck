@@ -6,6 +6,7 @@ import '../models/deck_template.dart';
 import '../models/document_signature.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../services/ai_alt_text_cleanup.dart';
 import '../services/annotation_codec.dart';
 import '../services/document_integrity.dart';
 import '../services/file_service.dart';
@@ -24,6 +25,7 @@ import '../utils/page_scoped_notes.dart';
 import 'settings_provider.dart';
 
 part 'deck_provider_markdown.dart';
+part 'deck_provider_ai.dart';
 
 // ── Service providers ────────────────────────────────────────────────────────
 

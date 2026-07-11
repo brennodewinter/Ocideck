@@ -83,6 +83,15 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'AI-concept': 'AI-konsept',
+  'Nagekeken': 'Neisjoen',
+  'Wis AI-alt-teksten': 'AI-alt-teksten wiskje',
+  'AI-alt-teksten wissen': 'AI-alt-teksten wiskje',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Alle noch net neisjoene AI-alt-teksten fuortsmite? Hânmjittige en neisjoene alt-teksten bliuwe stean.',
+  'aantal': 'oantal',
+  'Wissen': 'Wiskje',
+  'AI-alt-teksten gewist.': 'AI-alt-teksten wiske.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Koe de ôfbylding net lêze foar AI-analyze.',
   'Het model gaf geen alt-tekst terug.': 'It model joech gjin alt-tekst werom.',

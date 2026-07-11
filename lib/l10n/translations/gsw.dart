@@ -83,6 +83,15 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'AI-concept': 'KI-Entwurf',
+  'Nagekeken': 'Prüeft',
+  'Wis AI-alt-teksten': 'KI-Alt-Text lösche',
+  'AI-alt-teksten wissen': 'KI-Alt-Text lösche',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Alli no nöd prüefte KI-Alt-Text entfärne? Manuelli und prüefti Alt-Text blibe.',
+  'aantal': 'Aazahl',
+  'Wissen': 'Lösche',
+  'AI-alt-teksten gewist.': 'KI-Alt-Text glöscht.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'S Bild het nöd chöne glääse wärde für d KI-Analyse.',
   'Het model gaf geen alt-tekst terug.': 'S Modäll het kein Alt-Text zruggäh.',

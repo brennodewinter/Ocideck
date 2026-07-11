@@ -83,6 +83,15 @@ const _stringsDe = {
 };
 
 const _dutchSourceDe = {
+  'AI-concept': 'KI-Entwurf',
+  'Nagekeken': 'Geprüft',
+  'Wis AI-alt-teksten': 'KI-Alt-Texte löschen',
+  'AI-alt-teksten wissen': 'KI-Alt-Texte löschen',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Alle noch nicht geprüften KI-Alt-Texte entfernen? Manuelle und geprüfte Alt-Texte bleiben erhalten.',
+  'aantal': 'Anzahl',
+  'Wissen': 'Löschen',
+  'AI-alt-teksten gewist.': 'KI-Alt-Texte gelöscht.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Das Bild konnte für die KI-Analyse nicht gelesen werden.',
   'Het model gaf geen alt-tekst terug.':

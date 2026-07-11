@@ -83,6 +83,15 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'AI-concept': 'Konsepto di IA',
+  'Nagekeken': 'Revisá',
+  'Wis AI-alt-teksten': 'Kita teksto alternativo di IA',
+  'AI-alt-teksten wissen': 'Kita teksto alternativo di IA',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Kita tur teksto alternativo di IA ku ainda no a ser revisá? Teksto manual i revisá ta keda.',
+  'aantal': 'kantidat',
+  'Wissen': 'Kita',
+  'AI-alt-teksten gewist.': 'Teksto alternativo di IA kitá.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'No por a lesa e imagen pa análisis di IA.',
   'Het model gaf geen alt-tekst terug.':

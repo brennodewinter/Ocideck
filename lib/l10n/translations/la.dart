@@ -85,6 +85,15 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'AI-concept': 'Adumbratio IA',
+  'Nagekeken': 'Recognitum',
+  'Wis AI-alt-teksten': 'Textus alternos IA dele',
+  'AI-alt-teksten wissen': 'Textus alternos IA dele',
+  'Verwijder alle nog niet-nagekeken AI-alt-teksten? Handmatige en nagekeken alt-teksten blijven staan.':
+      'Omnes textus alternos IA nondum recognitos removere? Manuales et recogniti manent.',
+  'aantal': 'numerus',
+  'Wissen': 'Dele',
+  'AI-alt-teksten gewist.': 'Textus alterni IA deleti.',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Imago ad analysim IA legi non potuit.',
   'Het model gaf geen alt-tekst terug.':
