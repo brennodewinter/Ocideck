@@ -1500,10 +1500,10 @@ void main() {
     // carried by their own `_class` token. Both the type and the body must
     // survive serialize → parse until each type gains a structured serialiser.
     // (`finding` graduated to P1-FIND — see the dedicated group below;
-    // `checklist` graduated to P1-CHK — see checklist_spec_test.dart.)
+    // `checklist` graduated to P1-CHK — see checklist_spec_test.dart;
+    // `scopeMatrix` graduated to P1-SCOPE — see scope_matrix_spec_test.dart.)
     const scaffoldTypes = {
       SlideType.findingsSummary: 'findings-summary',
-      SlideType.scopeMatrix: 'scope-matrix',
       SlideType.signOff: 'sign-off',
     };
 

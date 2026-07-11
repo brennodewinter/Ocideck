@@ -21,6 +21,7 @@ import '../../models/cockpit.dart';
 import '../../models/deck.dart';
 import '../../models/finding_spec.dart';
 import '../../models/question.dart';
+import '../../models/scope_matrix_spec.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../models/timeline.dart';
@@ -61,6 +62,7 @@ part 'previews/timeline_preview.dart';
 part 'previews/checklist_preview.dart';
 part 'previews/scaffold_previews.dart';
 part 'previews/finding_preview.dart';
+part 'previews/scope_matrix_preview.dart';
 part 'previews/overlays.dart';
 
 /// Returns a TextStyle with the correct font. 'EB Garamond' is bundled with the
@@ -734,6 +736,14 @@ class SlidePreviewWidget extends StatelessWidget {
     }
     if (slide.type == SlideType.checklist) {
       return _ChecklistPreview(
+        slide: slide,
+        w: w,
+        font: fontFamily,
+        profile: themeProfile,
+      );
+    }
+    if (slide.type == SlideType.scopeMatrix) {
+      return _ScopeMatrixPreview(
         slide: slide,
         w: w,
         font: fontFamily,

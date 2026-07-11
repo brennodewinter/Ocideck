@@ -14,6 +14,7 @@ import 'image_slide_editor.dart';
 import 'question_editor.dart';
 import 'quote_editor.dart';
 import 'scaffold_slide_editor.dart';
+import 'scope_matrix_editor.dart';
 import 'section_editor.dart';
 import 'table_editor.dart';
 import 'timeline_editor.dart';
@@ -202,7 +203,12 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         nestedInScrollView: c.nestedInScrollView,
       ),
       SlideType.findingsSummary: _scaffoldEditor,
-      SlideType.scopeMatrix: _scaffoldEditor,
+      SlideType.scopeMatrix: (c) => ScopeMatrixEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
       SlideType.signOff: _scaffoldEditor,
     };
 

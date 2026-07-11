@@ -566,6 +566,18 @@ The heading is the standard label; the table has a fixed five-column shape:
 | WSTG-ATHN-07 | Testing for Weak Password Policy | Anomaly | F-03 | |
 | WSTG-CRYP-04 | Testing for Weak Encryption | Not testable | — | functionality absent |
 | WSTG-SESS-01 | Testing for Session Management |  | — | |
+**Scope matrix** (`scope-matrix`) — the scope objects and the extent of testing,
+stored as a normal Markdown table (like `checklist`) so it round-trips
+losslessly. The heading is the title; the table has a fixed five-column shape:
+
+```markdown
+<!-- _class: scope-matrix -->
+# Scope
+| Object | Type | Standard | Status | Note |
+| --- | --- | --- | --- | --- |
+| https://app.example | Web | WSTG | Tested | |
+| 10.0.0.0/24 | Infra | PTES | Anomaly | one host down |
+| firmware.bin | Firmware | FSTM |  | |
 ```
 
 Rules:
@@ -606,6 +618,15 @@ as a unit.
   none.
 - The header line's tested/total count (shown as a progress bar in the app) is
   **derived** from the rows and is not stored.
+- The **Type** column drives the **Standard** column: the mapping is fixed
+  (Web→WSTG, Infra→PTES, IoT→ISTG, Firmware→FSTM, API→WSTG, Mobile→MASTG, Other→
+  none, §10.7), so the standard is **derived from the type** and rewritten on
+  save — the type is the source of truth. Type and Status are stable English
+  words; columns are read **by position**.
+- The **Status** column is the coverage tri-state: `Tested`, `Anomaly`,
+  `Unreachable`, or empty (not yet tested).
+- The tested/total coverage (shown as a progress bar in the app) is **derived**
+  from the rows and is not stored.
 
 ### Image Size (`imageSize`)
 

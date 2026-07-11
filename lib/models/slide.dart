@@ -4,6 +4,7 @@ import 'cockpit.dart';
 import 'deck.dart';
 import 'finding_spec.dart';
 import 'question.dart';
+import 'scope_matrix_spec.dart';
 import 'settings.dart';
 import 'timeline.dart';
 
@@ -191,13 +192,14 @@ extension SlideTypeExtension on SlideType {
 
   /// Informatieveiligheid scaffold types (P1-S) whose body is still stored as
   /// free Markdown in [Slide.customMarkdown] and round-trips like a free-Markdown
-  /// slide until each type's structured serialiser lands (P1-FIND/SCOPE/SUM/SIGN).
-  /// `checklist` has graduated (P1-CHK): it serialises as a real Markdown table
-  /// in [Slide.tableRows], so it is excluded here; the other packages narrow this
-  /// further as they land.
+  /// slide until each type's structured serialiser lands (P1-FIND/SUM/SIGN).
+  /// `checklist` (P1-CHK) and `scopeMatrix` (P1-SCOPE) have graduated: they
+  /// serialise as real Markdown tables in [Slide.tableRows], so they are excluded
+  /// here; the other packages narrow this further as they land.
   bool get usesScaffoldMarkdownBody =>
       category == SlideCategory.informatieveiligheid &&
-      this != SlideType.checklist;
+      this != SlideType.checklist &&
+      this != SlideType.scopeMatrix;
 }
 
 class Slide {
@@ -397,6 +399,9 @@ class Slide {
           ? const ChecklistSpec(
               rows: [ChecklistRow(), ChecklistRow()],
             ).toTableRows()
+          : type == SlideType.scopeMatrix
+          // Start met de vaste kop + twee lege scope-regels.
+          ? const ScopeMatrixSpec(rows: [ScopeRow(), ScopeRow()]).toTableRows()
           : const [],
       customMarkdown: type == SlideType.cockpit
           ? CockpitSpec.pentestPreset().toBlock()

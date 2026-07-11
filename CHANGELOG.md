@@ -40,6 +40,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   Storage stays a **plain Markdown table** (PENTEST_MIAUW §3.2), so it aligns
   with the existing `table` handling and round-trips losslessly; the progress is
   derived, never stored. Localised in all interface languages. See
+- **Scope-matrix slide type (`scopeMatrix`)** — the *Scope-matrix* type is now a
+  structured matrix instead of a free-Markdown scaffold. A dedicated editor lists
+  the scope objects, each with a **type** (Web / Infra / IoT / Firmware / API /
+  Mobile / Other) that **automatically fixes its test standard** (Web→WSTG,
+  Infra→PTES, IoT→ISTG, Firmware→FSTM, API→WSTG, Mobile→MASTG — PENTEST_MIAUW
+  §10.7), a coverage status (Tested / Anomaly / Unreachable / Not tested) and a
+  note. The preview renders the objects × standard × status matrix with a derived
+  coverage bar. Storage stays a **plain Markdown table** (§4.4), so it aligns with
+  the `table` handling and round-trips losslessly; the standard and the coverage
+  are derived, never stored. Localised in all interface languages. See
   [docs/FILE_FORMAT.md](docs/FILE_FORMAT.md) §5.
 - **Informatieveiligheid slide types (scaffold)** — five new slide types for
   pentest reporting (*Bevinding*, *Bevindingenoverzicht*, *Checklist*,

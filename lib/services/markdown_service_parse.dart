@@ -25,6 +25,15 @@ final _reClassDirective = RegExp(r'<!--\s*_class:\s*([^>]+?)\s*-->');
 final _reHtmlComment = RegExp(r'<!--([\s\S]*?)-->', multiLine: true);
 final _reImageWidthStyle = RegExp(r'--image-width:\s*(\d+)%');
 
+/// Slide types whose body is stored as a Markdown table, so the parser keeps the
+/// decoded rows in [Slide.tableRows]: the `table` type plus the security types
+/// that serialise as a table (`checklist` P1-CHK, `scopeMatrix` P1-SCOPE).
+const _tableBackedTypes = {
+  SlideType.table,
+  SlideType.checklist,
+  SlideType.scopeMatrix,
+};
+
 /// Mutable accumulator for [_MarkdownParse._parseBodyLines]: the per-line
 /// handlers fill these fields as they walk a slide block's body.
 class _BodyParse {
@@ -427,9 +436,7 @@ extension _MarkdownParse on MarkdownService {
       showFooter: showFooter,
       skipped: d.skipped,
       tlp: d.tlp,
-      tableRows: type == SlideType.table || type == SlideType.checklist
-          ? tableRows
-          : const [],
+      tableRows: _tableBackedTypes.contains(type) ? tableRows : const [],
       tableEditable:
           type == SlideType.table && classTokens.contains('table-editable'),
       timelineLayout: type == SlideType.timeline
