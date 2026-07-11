@@ -84,6 +84,19 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Object': 'Obiect',
+  'Notitie': 'Notă',
+  'Status': 'Stare',
+  'gedekt': 'acoperit',
+  'Object toevoegen': 'Adaugă obiect',
+  'Object verwijderen': 'Elimină obiect',
+  'Niet getest': 'Netestat',
+  'Getest': 'Testat',
+  'Afwijking': 'Abatere',
+  'Onbereikbaar': 'Inaccesibil',
+  'Infrastructuur': 'Infrastructură',
+  'Mobiel': 'Mobil',
+  'Overig': 'Altul',
   '(leeg)': '(gol)',
   'Audio': 'Audio',
   'Bijschrift': 'Legendă',

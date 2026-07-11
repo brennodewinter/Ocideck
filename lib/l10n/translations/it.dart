@@ -83,6 +83,19 @@ const _stringsIt = {
 };
 
 const _dutchSourceIt = {
+  'Object': 'Oggetto',
+  'Notitie': 'Nota',
+  'Status': 'Stato',
+  'gedekt': 'coperto',
+  'Object toevoegen': 'Aggiungi oggetto',
+  'Object verwijderen': 'Rimuovi oggetto',
+  'Niet getest': 'Non testato',
+  'Getest': 'Testato',
+  'Afwijking': 'Anomalia',
+  'Onbereikbaar': 'Irraggiungibile',
+  'Infrastructuur': 'Infrastruttura',
+  'Mobiel': 'Mobile',
+  'Overig': 'Altro',
   '(leeg)': '(vuoto)',
   'Audio': 'Audio',
   'Bijschrift': 'Didascalia',

@@ -84,6 +84,19 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Object': 'Oġġett',
+  'Notitie': 'Nota',
+  'Status': 'Status',
+  'gedekt': 'kopert',
+  'Object toevoegen': 'Żid oġġett',
+  'Object verwijderen': 'Neħħi oġġett',
+  'Niet getest': 'Mhux ittestjat',
+  'Getest': 'Ittestjat',
+  'Afwijking': 'Anomalija',
+  'Onbereikbaar': 'Ma jintlaħaqx',
+  'Infrastructuur': 'Infrastruttura',
+  'Mobiel': 'Mobbli',
+  'Overig': 'Ieħor',
   '(leeg)': '(vojt)',
   'Audio': 'Awdjo',
   'Bijschrift': 'Didaskalija',

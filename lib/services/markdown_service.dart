@@ -333,13 +333,15 @@ class MarkdownService {
         _writeTimelineSlide(buf, slide);
       case SlideType.question:
         _writeQuestionSlide(buf, slide);
-      // Informatieveiligheid-scaffold (P1-S): één gedeelde vrije-Markdown-body
-      // per type; het `_class`-token hierboven draagt het type. Per-type
-      // serialisers vervangen deze cases in P1-FIND/CHK/SCOPE/SUM/SIGN.
+      // Informatieveiligheid: `scopeMatrix` serialiseert als een gewone
+      // Markdown-tabel (§4.4), dus hergebruikt de tabel-writer. De overige vier
+      // scaffold-types delen voorlopig één vrije-Markdown-body onder hun eigen
+      // `_class`-token, tot hun pakketten landen (P1-FIND/CHK/SUM/SIGN).
+      case SlideType.scopeMatrix:
+        _writeTableSlide(buf, slide);
       case SlideType.finding:
       case SlideType.findingsSummary:
       case SlideType.checklist:
-      case SlideType.scopeMatrix:
       case SlideType.signOff:
         _writeScaffoldSlide(buf, slide);
     }

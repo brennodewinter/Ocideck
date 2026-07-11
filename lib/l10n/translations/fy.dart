@@ -83,6 +83,19 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Object': 'Objekt',
+  'Notitie': 'Notysje',
+  'Status': 'Status',
+  'gedekt': 'dekt',
+  'Object toevoegen': 'Objekt tafoegje',
+  'Object verwijderen': 'Objekt fuortsmite',
+  'Niet getest': 'Net test',
+  'Getest': 'Test',
+  'Afwijking': 'Ôfwiking',
+  'Onbereikbaar': 'Net berikber',
+  'Infrastructuur': 'Ynfrastruktuer',
+  'Mobiel': 'Mobyl',
+  'Overig': 'Oars',
   '(leeg)': '(leech)',
   'Audio': 'Audio',
   'Bijschrift': 'Byskrift',

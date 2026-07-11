@@ -83,6 +83,19 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Object': 'Objektum',
+  'Notitie': 'Megjegyzés',
+  'Status': 'Állapot',
+  'gedekt': 'lefedve',
+  'Object toevoegen': 'Objektum hozzáadása',
+  'Object verwijderen': 'Objektum eltávolítása',
+  'Niet getest': 'Nincs tesztelve',
+  'Getest': 'Tesztelve',
+  'Afwijking': 'Eltérés',
+  'Onbereikbaar': 'Elérhetetlen',
+  'Infrastructuur': 'Infrastruktúra',
+  'Mobiel': 'Mobil',
+  'Overig': 'Egyéb',
   '(leeg)': '(üres)',
   'Audio': 'Hang',
   'Bijschrift': 'Képaláírás',

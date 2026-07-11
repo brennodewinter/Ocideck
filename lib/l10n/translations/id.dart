@@ -83,6 +83,19 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Object': 'Objek',
+  'Notitie': 'Catatan',
+  'Status': 'Status',
+  'gedekt': 'tercakup',
+  'Object toevoegen': 'Tambah objek',
+  'Object verwijderen': 'Hapus objek',
+  'Niet getest': 'Belum diuji',
+  'Getest': 'Diuji',
+  'Afwijking': 'Anomali',
+  'Onbereikbaar': 'Tidak terjangkau',
+  'Infrastructuur': 'Infrastruktur',
+  'Mobiel': 'Seluler',
+  'Overig': 'Lainnya',
   '(leeg)': '(kosong)',
   'Audio': 'Audio',
   'Bijschrift': 'Keterangan',

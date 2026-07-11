@@ -85,6 +85,19 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Object': 'Obiekt',
+  'Notitie': 'Notatka',
+  'Status': 'Status',
+  'gedekt': 'pokryty',
+  'Object toevoegen': 'Dodaj obiekt',
+  'Object verwijderen': 'Usuń obiekt',
+  'Niet getest': 'Nieprzetestowane',
+  'Getest': 'Przetestowane',
+  'Afwijking': 'Odchylenie',
+  'Onbereikbaar': 'Nieosiągalny',
+  'Infrastructuur': 'Infrastruktura',
+  'Mobiel': 'Mobilny',
+  'Overig': 'Inne',
   '(leeg)': '(puste)',
   'Audio': 'Audio',
   'Bijschrift': 'Podpis',

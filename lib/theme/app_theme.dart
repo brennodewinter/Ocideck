@@ -145,6 +145,14 @@ class AppTheme {
   static const danger700 = Color(0xFFB91C1C);
   static const danger800 = Color(0xFFC62828);
   static const dangerPlain = Color(0xFFCC0000);
+
+  // ── Scope-matrix-status (PENTEST_MIAUW §4.4) ──────────────────────────────
+  // Deterministische const-tokens voor de coverage-chips, export-isolate-veilig.
+  // P1-THEME verhuist deze naar het beveiligings-ThemeProfile.
+  static const scopeTested = Color(0xFF15803D); // green 700
+  static const scopeDeviation = Color(0xFFB45309); // amber 700
+  static const scopeUnreachable = Color(0xFFB91C1C); // red 700
+  static const scopeNotTested = Color(0xFF64748B); // slate 500
   static Color get infoBg =>
       _m(const Color(0xFFEFF6FF), const Color(0xFF15202E));
 

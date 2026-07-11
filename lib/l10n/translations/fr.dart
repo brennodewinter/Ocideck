@@ -84,6 +84,19 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'Object': 'Objet',
+  'Notitie': 'Note',
+  'Status': 'Statut',
+  'gedekt': 'couvert',
+  'Object toevoegen': 'Ajouter un objet',
+  'Object verwijderen': 'Supprimer l\'objet',
+  'Niet getest': 'Non testé',
+  'Getest': 'Testé',
+  'Afwijking': 'Anomalie',
+  'Onbereikbaar': 'Injoignable',
+  'Infrastructuur': 'Infrastructure',
+  'Mobiel': 'Mobile',
+  'Overig': 'Autre',
   '(leeg)': '(vide)',
   'Audio': 'Audio',
   'Bijschrift': 'Légende',

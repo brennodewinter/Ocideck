@@ -83,6 +83,19 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Object': 'Opheto',
+  'Notitie': 'Nota',
+  'Status': 'Status',
+  'gedekt': 'kubrí',
+  'Object toevoegen': 'Agregá opheto',
+  'Object verwijderen': 'Kita opheto',
+  'Niet getest': 'No test',
+  'Getest': 'Test',
+  'Afwijking': 'Anomalia',
+  'Onbereikbaar': 'No alkansabel',
+  'Infrastructuur': 'Infrastruktura',
+  'Mobiel': 'Móbil',
+  'Overig': 'Otro',
   '(leeg)': '(bashí)',
   'Audio': 'Audio',
   'Bijschrift': 'Lènda',

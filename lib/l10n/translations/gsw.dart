@@ -83,6 +83,19 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Object': 'Objäkt',
+  'Notitie': 'Notiz',
+  'Status': 'Status',
+  'gedekt': 'abdeckt',
+  'Object toevoegen': 'Objäkt hinzuefüege',
+  'Object verwijderen': 'Objäkt entferne',
+  'Niet getest': 'Nöd teschtet',
+  'Getest': 'Teschtet',
+  'Afwijking': 'Abwiichig',
+  'Onbereikbaar': 'Nöd erreichbar',
+  'Infrastructuur': 'Infrastruktur',
+  'Mobiel': 'Mobil',
+  'Overig': 'Anders',
   '(leeg)': '(leer)',
   'Audio': 'Audio',
   'Bijschrift': 'Bildlegände',

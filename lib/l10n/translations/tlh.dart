@@ -81,6 +81,19 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Object': 'Doch',
+  'Notitie': 'ghItlh',
+  'Status': 'Dotlh',
+  'gedekt': 'So\'lu\'pu\'',
+  'Object toevoegen': 'Doch chel',
+  'Object verwijderen': 'Doch teq',
+  'Niet getest': 'waHbe\'lu\'pu\'',
+  'Getest': 'waHlu\'pu\'',
+  'Afwijking': 'Qagh',
+  'Onbereikbaar': 'Sumbe\'',
+  'Infrastructuur': 'qach',
+  'Mobiel': 'jotlh',
+  'Overig': 'latlh',
   '(leeg)': '(chIm)',
   'Audio': 'wab',
   'Bijschrift': 'per',

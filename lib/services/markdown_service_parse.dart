@@ -405,7 +405,9 @@ extension _MarkdownParse on MarkdownService {
       showFooter: showFooter,
       skipped: d.skipped,
       tlp: d.tlp,
-      tableRows: type == SlideType.table ? tableRows : const [],
+      tableRows: type == SlideType.table || type == SlideType.scopeMatrix
+          ? tableRows
+          : const [],
       tableEditable:
           type == SlideType.table && classTokens.contains('table-editable'),
       timelineLayout: type == SlideType.timeline

@@ -83,6 +83,19 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Object': 'Predmet',
+  'Notitie': 'Opomba',
+  'Status': 'Stanje',
+  'gedekt': 'pokrito',
+  'Object toevoegen': 'Dodaj predmet',
+  'Object verwijderen': 'Odstrani predmet',
+  'Niet getest': 'Ni preverjeno',
+  'Getest': 'Preverjeno',
+  'Afwijking': 'Odstopanje',
+  'Onbereikbaar': 'Nedosegljivo',
+  'Infrastructuur': 'Infrastruktura',
+  'Mobiel': 'Mobilno',
+  'Overig': 'Drugo',
   '(leeg)': '(prazno)',
   'Audio': 'Audio',
   'Bijschrift': 'Napis',

@@ -85,6 +85,19 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Object': 'Réad',
+  'Notitie': 'Nóta',
+  'Status': 'Stádas',
+  'gedekt': 'clúdaithe',
+  'Object toevoegen': 'Cuir réad leis',
+  'Object verwijderen': 'Bain réad',
+  'Niet getest': 'Gan tástáil',
+  'Getest': 'Tástáilte',
+  'Afwijking': 'Claonadh',
+  'Onbereikbaar': 'Do-shroichte',
+  'Infrastructuur': 'Bonneagar',
+  'Mobiel': 'Móbíleach',
+  'Overig': 'Eile',
   '(leeg)': '(folamh)',
   'Audio': 'Fuaim',
   'Bijschrift': 'Foscríbhinn',

@@ -1494,14 +1494,14 @@ void main() {
   });
 
   group('Informatieveiligheid scaffold types round-trip (P1-S)', () {
-    // The five security slide types are scaffolded as free-Markdown bodies
+    // The remaining security slide types are scaffolded as free-Markdown bodies
     // carried by their own `_class` token. Both the type and the body must
     // survive serialize → parse until each type gains a structured serialiser.
+    // (`scopeMatrix` has graduated to P1-SCOPE — see scope_matrix_spec_test.dart.)
     const scaffoldTypes = {
       SlideType.finding: 'finding',
       SlideType.findingsSummary: 'findings-summary',
       SlideType.checklist: 'checklist',
-      SlideType.scopeMatrix: 'scope-matrix',
       SlideType.signOff: 'sign-off',
     };
 

@@ -83,6 +83,19 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Object': 'Objektas',
+  'Notitie': 'Pastaba',
+  'Status': 'Būsena',
+  'gedekt': 'padengta',
+  'Object toevoegen': 'Pridėti objektą',
+  'Object verwijderen': 'Pašalinti objektą',
+  'Niet getest': 'Nepatikrinta',
+  'Getest': 'Patikrinta',
+  'Afwijking': 'Nuokrypis',
+  'Onbereikbaar': 'Nepasiekiama',
+  'Infrastructuur': 'Infrastruktūra',
+  'Mobiel': 'Mobilusis',
+  'Overig': 'Kita',
   '(leeg)': '(tuščia)',
   'Audio': 'Garsas',
   'Bijschrift': 'Antraštė',

@@ -83,6 +83,19 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Object': 'Objekts',
+  'Notitie': 'Piezīme',
+  'Status': 'Statuss',
+  'gedekt': 'segts',
+  'Object toevoegen': 'Pievienot objektu',
+  'Object verwijderen': 'Noņemt objektu',
+  'Niet getest': 'Nav pārbaudīts',
+  'Getest': 'Pārbaudīts',
+  'Afwijking': 'Novirze',
+  'Onbereikbaar': 'Nesasniedzams',
+  'Infrastructuur': 'Infrastruktūra',
+  'Mobiel': 'Mobilais',
+  'Overig': 'Cits',
   '(leeg)': '(tukšs)',
   'Audio': 'Audio',
   'Bijschrift': 'Paraksts',

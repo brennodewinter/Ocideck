@@ -83,6 +83,19 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Object': 'Objekt',
+  'Notitie': 'Anteckning',
+  'Status': 'Status',
+  'gedekt': 'täckt',
+  'Object toevoegen': 'Lägg till objekt',
+  'Object verwijderen': 'Ta bort objekt',
+  'Niet getest': 'Inte testad',
+  'Getest': 'Testad',
+  'Afwijking': 'Avvikelse',
+  'Onbereikbaar': 'Onåbar',
+  'Infrastructuur': 'Infrastruktur',
+  'Mobiel': 'Mobil',
+  'Overig': 'Övrigt',
   '(leeg)': '(tom)',
   'Audio': 'Ljud',
   'Bijschrift': 'Bildtext',

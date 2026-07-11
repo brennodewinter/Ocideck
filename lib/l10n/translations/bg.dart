@@ -84,6 +84,19 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Object': 'Обект',
+  'Notitie': 'Бележка',
+  'Status': 'Статус',
+  'gedekt': 'покрито',
+  'Object toevoegen': 'Добавяне на обект',
+  'Object verwijderen': 'Премахване на обект',
+  'Niet getest': 'Не е тествано',
+  'Getest': 'Тествано',
+  'Afwijking': 'Отклонение',
+  'Onbereikbaar': 'Недостъпно',
+  'Infrastructuur': 'Инфраструктура',
+  'Mobiel': 'Мобилно',
+  'Overig': 'Друго',
   '(leeg)': '(празно)',
   'Audio': 'Аудио',
   'Bijschrift': 'Надпис',

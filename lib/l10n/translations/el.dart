@@ -83,6 +83,19 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Object': 'Αντικείμενο',
+  'Notitie': 'Σημείωση',
+  'Status': 'Κατάσταση',
+  'gedekt': 'καλύφθηκε',
+  'Object toevoegen': 'Προσθήκη αντικειμένου',
+  'Object verwijderen': 'Αφαίρεση αντικειμένου',
+  'Niet getest': 'Μη ελεγμένο',
+  'Getest': 'Ελεγμένο',
+  'Afwijking': 'Απόκλιση',
+  'Onbereikbaar': 'Μη προσβάσιμο',
+  'Infrastructuur': 'Υποδομή',
+  'Mobiel': 'Κινητό',
+  'Overig': 'Άλλο',
   '(leeg)': '(κενό)',
   'Audio': 'Ήχος',
   'Bijschrift': 'Λεζάντα',

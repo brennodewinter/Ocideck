@@ -82,6 +82,19 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Object': 'Objekt',
+  'Notitie': 'Märkus',
+  'Status': 'Olek',
+  'gedekt': 'kaetud',
+  'Object toevoegen': 'Lisa objekt',
+  'Object verwijderen': 'Eemalda objekt',
+  'Niet getest': 'Testimata',
+  'Getest': 'Testitud',
+  'Afwijking': 'Kõrvalekalle',
+  'Onbereikbaar': 'Kättesaamatu',
+  'Infrastructuur': 'Taristu',
+  'Mobiel': 'Mobiil',
+  'Overig': 'Muu',
   '(leeg)': '(tühi)',
   'Audio': 'Audio',
   'Bijschrift': 'Pealdis',

@@ -12,6 +12,7 @@ import 'image_slide_editor.dart';
 import 'question_editor.dart';
 import 'quote_editor.dart';
 import 'scaffold_slide_editor.dart';
+import 'scope_matrix_editor.dart';
 import 'section_editor.dart';
 import 'table_editor.dart';
 import 'timeline_editor.dart';
@@ -61,137 +62,143 @@ class SlideEditorContext {
 /// `switch (slide.type)` dispatch; a guard test (`slide_type_meta_test.dart`)
 /// asserts every [SlideType] has an entry, so a new type fails fast instead of
 /// hitting the null-assertion at runtime.
-final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
-    {
-      SlideType.title: (c) => TitleEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        searchPaths: c.searchPaths,
-        captionBasePath: c.captionBasePath,
-        nestedInScrollView: c.nestedInScrollView,
-      ),
-      SlideType.section: (c) => SectionEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        nestedInScrollView: c.nestedInScrollView,
-      ),
-      SlideType.bullets: (c) => BulletsEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        previousSlideIsNumbered: c.previousSlideIsNumbered,
-        nestedInScrollView: c.nestedInScrollView,
-      ),
-      SlideType.twoBullets: (c) => TwoBulletsEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        nestedInScrollView: c.nestedInScrollView,
-      ),
-      SlideType.bulletsImage: (c) => BulletsImageEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        imageService: c.imageService,
-        searchPaths: c.searchPaths,
-        captionBasePath: c.captionBasePath,
-        previousSlideIsNumbered: c.previousSlideIsNumbered,
-        nestedInScrollView: c.nestedInScrollView,
-      ),
-      SlideType.twoImages: (c) => TwoImagesEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        searchPaths: c.searchPaths,
-        captionBasePath: c.captionBasePath,
-        nestedInScrollView: c.nestedInScrollView,
-      ),
-      SlideType.image: (c) => ImageSlideEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        imageService: c.imageService,
-        searchPaths: c.searchPaths,
-        captionBasePath: c.captionBasePath,
-        nestedInScrollView: c.nestedInScrollView,
-      ),
-      SlideType.video: (c) => VideoSlideEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        imageService: c.imageService,
-        projectPath: c.captionBasePath,
-        nestedInScrollView: c.nestedInScrollView,
-        onSplit: c.onSplitVideo,
-      ),
-      SlideType.quote: (c) => QuoteEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        searchPaths: c.searchPaths,
-        captionBasePath: c.captionBasePath,
-        nestedInScrollView: c.nestedInScrollView,
-      ),
-      SlideType.table: (c) => TableEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        nestedInScrollView: c.nestedInScrollView,
-      ),
-      SlideType.freeMarkdown: (c) => FreeMarkdownEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        nestedInScrollView: c.nestedInScrollView,
-      ),
-      SlideType.code: (c) => CodeEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        nestedInScrollView: c.nestedInScrollView,
-      ),
-      SlideType.chart: (c) => ChartEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        onAddVariants: c.onAddChartVariants,
-        projectPath: c.captionBasePath,
-        themeAnimationDurationMs: c.themeAnimationDurationMs,
-        nestedInScrollView: c.nestedInScrollView,
-      ),
-      SlideType.cockpit: (c) => CockpitEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        themeAnimationDurationMs: c.themeAnimationDurationMs,
-        nestedInScrollView: c.nestedInScrollView,
-      ),
-      SlideType.question: (c) => QuestionEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        imageService: c.imageService,
-        searchPaths: c.searchPaths,
-        captionBasePath: c.captionBasePath,
-        nestedInScrollView: c.nestedInScrollView,
-      ),
-      SlideType.timeline: (c) => TimelineEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        themeAnimationDurationMs: c.themeAnimationDurationMs,
-        nestedInScrollView: c.nestedInScrollView,
-      ),
-      // Informatieveiligheid-scaffold (P1-S): one shared free-Markdown editor
-      // for all five types until each gains a structured editor.
-      SlideType.finding: _scaffoldEditor,
-      SlideType.findingsSummary: _scaffoldEditor,
-      SlideType.checklist: _scaffoldEditor,
-      SlideType.scopeMatrix: _scaffoldEditor,
-      SlideType.signOff: _scaffoldEditor,
-    };
+final Map<SlideType, Widget Function(SlideEditorContext)>
+slideEditorBuilders = {
+  SlideType.title: (c) => TitleEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    searchPaths: c.searchPaths,
+    captionBasePath: c.captionBasePath,
+    nestedInScrollView: c.nestedInScrollView,
+  ),
+  SlideType.section: (c) => SectionEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    nestedInScrollView: c.nestedInScrollView,
+  ),
+  SlideType.bullets: (c) => BulletsEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    previousSlideIsNumbered: c.previousSlideIsNumbered,
+    nestedInScrollView: c.nestedInScrollView,
+  ),
+  SlideType.twoBullets: (c) => TwoBulletsEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    nestedInScrollView: c.nestedInScrollView,
+  ),
+  SlideType.bulletsImage: (c) => BulletsImageEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    imageService: c.imageService,
+    searchPaths: c.searchPaths,
+    captionBasePath: c.captionBasePath,
+    previousSlideIsNumbered: c.previousSlideIsNumbered,
+    nestedInScrollView: c.nestedInScrollView,
+  ),
+  SlideType.twoImages: (c) => TwoImagesEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    searchPaths: c.searchPaths,
+    captionBasePath: c.captionBasePath,
+    nestedInScrollView: c.nestedInScrollView,
+  ),
+  SlideType.image: (c) => ImageSlideEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    imageService: c.imageService,
+    searchPaths: c.searchPaths,
+    captionBasePath: c.captionBasePath,
+    nestedInScrollView: c.nestedInScrollView,
+  ),
+  SlideType.video: (c) => VideoSlideEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    imageService: c.imageService,
+    projectPath: c.captionBasePath,
+    nestedInScrollView: c.nestedInScrollView,
+    onSplit: c.onSplitVideo,
+  ),
+  SlideType.quote: (c) => QuoteEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    searchPaths: c.searchPaths,
+    captionBasePath: c.captionBasePath,
+    nestedInScrollView: c.nestedInScrollView,
+  ),
+  SlideType.table: (c) => TableEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    nestedInScrollView: c.nestedInScrollView,
+  ),
+  SlideType.freeMarkdown: (c) => FreeMarkdownEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    nestedInScrollView: c.nestedInScrollView,
+  ),
+  SlideType.code: (c) => CodeEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    nestedInScrollView: c.nestedInScrollView,
+  ),
+  SlideType.chart: (c) => ChartEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    onAddVariants: c.onAddChartVariants,
+    projectPath: c.captionBasePath,
+    themeAnimationDurationMs: c.themeAnimationDurationMs,
+    nestedInScrollView: c.nestedInScrollView,
+  ),
+  SlideType.cockpit: (c) => CockpitEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    themeAnimationDurationMs: c.themeAnimationDurationMs,
+    nestedInScrollView: c.nestedInScrollView,
+  ),
+  SlideType.question: (c) => QuestionEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    imageService: c.imageService,
+    searchPaths: c.searchPaths,
+    captionBasePath: c.captionBasePath,
+    nestedInScrollView: c.nestedInScrollView,
+  ),
+  SlideType.timeline: (c) => TimelineEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    themeAnimationDurationMs: c.themeAnimationDurationMs,
+    nestedInScrollView: c.nestedInScrollView,
+  ),
+  // Informatieveiligheid: `scopeMatrix` has its structured editor (P1-SCOPE);
+  // the other four still share the free-Markdown scaffold until their
+  // packages land (P1-FIND/CHK/SUM/SIGN).
+  SlideType.scopeMatrix: (c) => ScopeMatrixEditor(
+    key: c._key,
+    slide: c.slide,
+    onUpdate: c.onUpdate,
+    nestedInScrollView: c.nestedInScrollView,
+  ),
+  SlideType.finding: _scaffoldEditor,
+  SlideType.findingsSummary: _scaffoldEditor,
+  SlideType.checklist: _scaffoldEditor,
+  SlideType.signOff: _scaffoldEditor,
+};
 
 Widget _scaffoldEditor(SlideEditorContext c) => ScaffoldSlideEditor(
   key: c._key,

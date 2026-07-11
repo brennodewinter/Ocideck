@@ -84,6 +84,19 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Object': 'Objeto',
+  'Notitie': 'Nota',
+  'Status': 'Estado',
+  'gedekt': 'cubierto',
+  'Object toevoegen': 'Añadir objeto',
+  'Object verwijderen': 'Eliminar objeto',
+  'Niet getest': 'No probado',
+  'Getest': 'Probado',
+  'Afwijking': 'Anomalía',
+  'Onbereikbaar': 'Inaccesible',
+  'Infrastructuur': 'Infraestructura',
+  'Mobiel': 'Móvil',
+  'Overig': 'Otro',
   '(leeg)': '(vacío)',
   'Audio': 'Audio',
   'Bijschrift': 'Leyenda',

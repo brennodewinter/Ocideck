@@ -84,6 +84,19 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Object': 'Об\'єкт',
+  'Notitie': 'Примітка',
+  'Status': 'Статус',
+  'gedekt': 'охоплено',
+  'Object toevoegen': 'Додати об\'єкт',
+  'Object verwijderen': 'Видалити об\'єкт',
+  'Niet getest': 'Не перевірено',
+  'Getest': 'Перевірено',
+  'Afwijking': 'Відхилення',
+  'Onbereikbaar': 'Недоступно',
+  'Infrastructuur': 'Інфраструктура',
+  'Mobiel': 'Мобільний',
+  'Overig': 'Інше',
   '(leeg)': '(порожньо)',
   'Audio': 'Аудіо',
   'Bijschrift': 'Підпис',

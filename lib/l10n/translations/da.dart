@@ -83,6 +83,19 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Object': 'Objekt',
+  'Notitie': 'Note',
+  'Status': 'Status',
+  'gedekt': 'dækket',
+  'Object toevoegen': 'Tilføj objekt',
+  'Object verwijderen': 'Fjern objekt',
+  'Niet getest': 'Ikke testet',
+  'Getest': 'Testet',
+  'Afwijking': 'Afvigelse',
+  'Onbereikbaar': 'Utilgængelig',
+  'Infrastructuur': 'Infrastruktur',
+  'Mobiel': 'Mobil',
+  'Overig': 'Andet',
   '(leeg)': '(tom)',
   'Audio': 'Lyd',
   'Bijschrift': 'Billedtekst',

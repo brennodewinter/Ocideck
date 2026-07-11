@@ -85,6 +85,19 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Object': 'Obiectum',
+  'Notitie': 'Nota',
+  'Status': 'Status',
+  'gedekt': 'obtectum',
+  'Object toevoegen': 'Obiectum addere',
+  'Object verwijderen': 'Obiectum removere',
+  'Niet getest': 'Non probatum',
+  'Getest': 'Probatum',
+  'Afwijking': 'Discrepantia',
+  'Onbereikbaar': 'Inaccessibile',
+  'Infrastructuur': 'Infrastructura',
+  'Mobiel': 'Mobile',
+  'Overig': 'Aliud',
   '(leeg)': '(vacuum)',
   'Audio': 'Audio',
   'Bijschrift': 'Inscriptio',

@@ -84,6 +84,19 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Object': 'Objekt',
+  'Notitie': 'Poznámka',
+  'Status': 'Stav',
+  'gedekt': 'pokryto',
+  'Object toevoegen': 'Přidat objekt',
+  'Object verwijderen': 'Odebrat objekt',
+  'Niet getest': 'Neotestováno',
+  'Getest': 'Otestováno',
+  'Afwijking': 'Odchylka',
+  'Onbereikbaar': 'Nedostupné',
+  'Infrastructuur': 'Infrastruktura',
+  'Mobiel': 'Mobilní',
+  'Overig': 'Ostatní',
   '(leeg)': '(prázdné)',
   'Audio': 'Audio',
   'Bijschrift': 'Popisek',

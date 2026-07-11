@@ -83,6 +83,19 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Object': 'Kohde',
+  'Notitie': 'Muistiinpano',
+  'Status': 'Tila',
+  'gedekt': 'katettu',
+  'Object toevoegen': 'Lisää kohde',
+  'Object verwijderen': 'Poista kohde',
+  'Niet getest': 'Ei testattu',
+  'Getest': 'Testattu',
+  'Afwijking': 'Poikkeama',
+  'Onbereikbaar': 'Ei tavoitettavissa',
+  'Infrastructuur': 'Infrastruktuuri',
+  'Mobiel': 'Mobiili',
+  'Overig': 'Muu',
   '(leeg)': '(tyhjä)',
   'Audio': 'Ääni',
   'Bijschrift': 'Kuvateksti',
