@@ -62,12 +62,8 @@ Future<void> _exportPackage(BuildContext context, WidgetRef ref) async {
 }
 
 /// Open the search-based presentation picker and load the chosen file
-/// (optionally jumping to a matched slide).
-Future<void> _openWithSearch(
-  BuildContext context,
-  WidgetRef ref,
-  String? initialDirectory,
-) async {
+/// (optionally jumping to a matched slide). Scans every configured library.
+Future<void> _openWithSearch(BuildContext context, WidgetRef ref) async {
   // Op web is er geen bestandssysteem om te doorzoeken; alle open-ingangen
   // (welkomstscherm, menu, Ctrl/Cmd+O) lopen daar via de browser-picker.
   if (isWebPlatform) {
@@ -77,7 +73,7 @@ Future<void> _openWithSearch(
   final result = await OpenPresentationDialog.show(
     context,
     fileService: ref.read(fileServiceProvider),
-    initialDirectory: initialDirectory ?? settings.homeDirectory,
+    libraries: settings.libraries,
   );
   if (result == null || !context.mounted) return;
   final messenger = ScaffoldMessenger.of(context);
@@ -499,11 +495,13 @@ class _UrlImportDialogState extends State<_UrlImportDialog> {
   }
 }
 
-List<String> _imageSearchPaths(String? projectPath, String? homeDirectory) {
+List<String> _imageSearchPaths(String? projectPath, List<String> libraryPaths) {
   final projectImagesPath = projectPath == null
       ? null
       : p.join(projectPath, 'images');
-  return [?projectImagesPath, ?projectPath, ?homeDirectory];
+  // Projectmap eerst, dan alle bibliotheken als zoekwortels. De carousel scant
+  // elke wortel recursief, dus diepe submappen komen automatisch mee.
+  return [?projectImagesPath, ?projectPath, ...libraryPaths];
 }
 
 String? _resolveImagePath(String path, String? projectPath) {
@@ -628,6 +626,31 @@ Future<_CloseChoice> _confirmSaveBeforeCloseDialog(
       _CloseChoice.cancel;
 }
 
+/// Sla [deckNotifier] op. Voor een nieuw deck (nog geen bestandspad) toont dit
+/// eerst een bestemmingsdialoog — kies een bibliotheek en zie waar de
+/// presentatie, afbeeldingen en media landen — en opent daarna het
+/// systeem-opslaanvenster in de gekozen map. Bestaande decks slaan direct op.
+/// Op web (geen schrijfbaar bestandssysteem) is opslaan een download; dan geen
+/// dialoog. Geeft terug of er daadwerkelijk is opgeslagen.
+Future<bool> saveDeckWithDestination(
+  BuildContext context,
+  WidgetRef ref,
+  DeckNotifier deckNotifier,
+) async {
+  final settings = ref.read(settingsProvider);
+  final isNewDeck = deckNotifier.currentState.filePath == null;
+  if (!isNewDeck || !supportsLocalProjectFolders) {
+    return deckNotifier.save(initialDirectory: settings.homeDirectory);
+  }
+  final choice = await SaveDestinationDialog.show(
+    context,
+    libraries: settings.libraries,
+    deckTitle: deckNotifier.currentState.deck?.title ?? '',
+  );
+  if (choice == null || !context.mounted) return false;
+  return deckNotifier.save(initialDirectory: choice.directory);
+}
+
 /// Sluit het tabblad op [index], met de "niet-opgeslagen wijzigingen"-check.
 /// Gedeeld door de tabbalk (kruisje/middenklik) en het 'alleen afspelen'-scherm
 /// zodat sluiten overal dezelfde afhandeling volgt.
@@ -646,6 +669,7 @@ Future<void> requestCloseTab(
         'Deze presentatie heeft niet-opgeslagen wijzigingen. Sla de presentatie op voordat het tabblad sluit.',
       ),
     );
+    if (!context.mounted) return;
     switch (choice) {
       case _CloseChoice.cancel:
         return;
@@ -653,8 +677,10 @@ Future<void> requestCloseTab(
         // Wijzigingen verwerpen: closeTab() ruimt ook het herstelbestand op.
         break;
       case _CloseChoice.save:
-        final saved = await tab.deckNotifier.save(
-          initialDirectory: ref.read(settingsProvider).homeDirectory,
+        final saved = await saveDeckWithDestination(
+          context,
+          ref,
+          tab.deckNotifier,
         );
         if (!saved) return;
     }

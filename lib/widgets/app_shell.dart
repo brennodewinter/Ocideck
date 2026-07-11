@@ -57,6 +57,7 @@ import 'dialogs/open_presentation_dialog.dart';
 import 'dialogs/package_encrypt_dialog.dart';
 import 'dialogs/package_password_dialog.dart';
 import 'dialogs/presentation_info_dialog.dart';
+import 'dialogs/save_destination_dialog.dart';
 import 'dialogs/scan_library_dialog.dart';
 import 'dialogs/settings_dialog.dart';
 import 'dialogs/webdav_browser_dialog.dart';
@@ -255,10 +256,13 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       _confirmSaveBeforeCloseDialog(context, message);
 
   Future<bool> _saveAllDirtyTabs() async {
-    final homeDir = ref.read(settingsProvider).homeDirectory;
     for (final tab in ref.read(tabsProvider).tabs) {
       if (!tab.isDirty) continue;
-      final saved = await tab.deckNotifier.save(initialDirectory: homeDir);
+      final saved = await saveDeckWithDestination(
+        context,
+        ref,
+        tab.deckNotifier,
+      );
       if (!saved) return false;
     }
     return true;
@@ -270,15 +274,13 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   /// ongeacht waar de focus zit.
   void _saveActive() {
     final tab = ref.read(tabsProvider).current;
-    tab?.deckNotifier.save(
-      initialDirectory: ref.read(settingsProvider).homeDirectory,
-    );
+    if (tab != null) saveDeckWithDestination(context, ref, tab.deckNotifier);
   }
 
   /// Open een presentatie via de zoek-/kies-dialoog. App-breed zodat Ctrl/Cmd+O
   /// altijd werkt, ongeacht waar de focus zit.
   void _openActive() {
-    _openWithSearch(context, ref, ref.read(settingsProvider).homeDirectory);
+    _openWithSearch(context, ref);
   }
 
   bool _dragging = false;

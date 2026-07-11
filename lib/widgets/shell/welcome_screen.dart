@@ -10,7 +10,6 @@ class _WelcomeScreen extends ConsumerWidget {
     final l10n = context.l10n;
     final theme = Theme.of(context);
     final palette = theme.extension<AppPalette>()!;
-    final homeDir = ref.watch(settingsProvider.select((s) => s.homeDirectory));
     final recentFiles = ref.watch(
       settingsProvider.select((s) => s.recentFiles),
     );
@@ -58,8 +57,7 @@ class _WelcomeScreen extends ConsumerWidget {
                         SizedBox(
                           width: 220,
                           child: OutlinedButton.icon(
-                            onPressed: () =>
-                                _openWithSearch(context, ref, homeDir),
+                            onPressed: () => _openWithSearch(context, ref),
                             icon: const Icon(
                               Icons.folder_open_outlined,
                               size: 18,

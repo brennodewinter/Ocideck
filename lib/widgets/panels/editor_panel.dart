@@ -51,11 +51,12 @@ class EditorPanel extends ConsumerWidget {
 
     final settings = ref.watch(settingsProvider);
 
-    // Zoekpaden voor de afbeeldingencarousel
+    // Zoekpaden voor de afbeeldingencarousel: projectmap eerst, dan alle
+    // bibliotheken als (recursief gescande) zoekwortels.
     final searchPaths = [
       if (deck.projectPath != null) '${deck.projectPath}/images',
       if (deck.projectPath != null) deck.projectPath!,
-      if (settings.homeDirectory != null) settings.homeDirectory!,
+      ...settings.libraryPaths,
     ];
 
     if (editor.mode == EditorMode.markdown) {
