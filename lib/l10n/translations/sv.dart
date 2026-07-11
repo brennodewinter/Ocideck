@@ -91,6 +91,16 @@ const _dutchSourceSv = {
   'Aantal bevindingen per ernst': 'Antal fynd per allvarlighetsgrad',
   'Aangepast…': 'Egen…',
   'Aangepaste tijd': 'Egen tid',
+  'Waarheidsverklaring': 'Sanningsförsäkran',
+  'Rapporteur': 'Rapportör',
+  'Certificering': 'Certifiering',
+  'Nog niet ondertekend': 'Ännu inte signerad',
+  'Nog niet verzegeld': 'Ännu inte förseglad',
+  'Verzegeld op': 'Förseglad den',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Förseglad. Spara (Ctrl/Cmd+S) för att behålla den.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Denna rapport har upprättats sanningsenligt.',
   'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
       'Försegling är möjlig först när alla AI-utkast har granskats. Återstår att kontrollera på bild(er):',
   'Uit sjabloon…': 'Från mall…',

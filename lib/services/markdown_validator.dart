@@ -96,6 +96,7 @@ class MarkdownValidator {
     'ocideck_seal_at',
     'ocideck_sig_name',
     'ocideck_sig_role',
+    'ocideck_sig_cert',
     'ocideck_sig_date',
     'ocideck_sig_statement',
     'ocideck_sig_typed',

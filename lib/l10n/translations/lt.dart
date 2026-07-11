@@ -91,6 +91,16 @@ const _dutchSourceLt = {
   'Aantal bevindingen per ernst': 'Radinių skaičius pagal sunkumą',
   'Aangepast…': 'Savas…',
   'Aangepaste tijd': 'Savas laikas',
+  'Waarheidsverklaring': 'Teisingumo deklaracija',
+  'Rapporteur': 'Pranešėjas',
+  'Certificering': 'Sertifikavimas',
+  'Nog niet ondertekend': 'Dar nepasirašyta',
+  'Nog niet verzegeld': 'Dar neužantspauduota',
+  'Verzegeld op': 'Užantspauduota',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Užantspauduota. Išsaugokite (Ctrl/Cmd+S), kad išliktų.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Ši ataskaita parengta teisingai.',
   'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
       'Užantspauduoti galima tik peržiūrėjus visus DI juodraščius. Dar reikia patikrinti skaidrėje (-ėse):',
   'Uit sjabloon…': 'Iš šablono…',

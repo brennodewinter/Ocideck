@@ -235,6 +235,17 @@ extension _MarkdownSerialize on MarkdownService {
     _writeTable(buf, slide.tableRows);
   }
 
+  /// A `signOff` slide (PENTEST_MIAUW 1.6 / §8 A1) carries no per-slide body of
+  /// its own — its attestation is the deck-level visual signature
+  /// (`ocideck_sig_*`, written in the front matter) and the seal. Only an
+  /// optional heading is stored on the slide.
+  void _writeSignOffSlide(StringBuffer buf, Slide slide) {
+    if (slide.title.isNotEmpty) {
+      buf.writeln('# ${slide.title}');
+      buf.writeln();
+    }
+  }
+
   void _writeFreeMarkdownSlide(StringBuffer buf, Slide slide) {
     final body = escapeDeckMarkdownDashLines(slide.customMarkdown);
     buf.write(body);

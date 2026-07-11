@@ -353,6 +353,8 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                       : null,
                   tlp: deck.tlp,
                   organization: deck.organization,
+                  deckSignature: deck.signature,
+                  sealedAt: deck.finalized ? deck.sealAt : '',
                   showClassificationWatermark:
                       settings.classificationWatermarkEnabled,
                   // In de editor mag audio/video bediend worden, maar
@@ -519,6 +521,8 @@ class FullDeckPreview extends ConsumerWidget {
                     slideCount: deck.slides.length,
                     tlp: deck.tlp,
                     organization: deck.organization,
+                    deckSignature: deck.signature,
+                    sealedAt: deck.finalized ? deck.sealAt : '',
                     showClassificationWatermark: showWatermark,
                   ),
                 ),

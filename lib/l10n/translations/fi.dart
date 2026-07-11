@@ -91,6 +91,16 @@ const _dutchSourceFi = {
   'Aantal bevindingen per ernst': 'Havaintojen määrä vakavuuden mukaan',
   'Aangepast…': 'Oma…',
   'Aangepaste tijd': 'Oma aika',
+  'Waarheidsverklaring': 'Totuudenmukaisuusvakuutus',
+  'Rapporteur': 'Raportoija',
+  'Certificering': 'Sertifiointi',
+  'Nog niet ondertekend': 'Ei vielä allekirjoitettu',
+  'Nog niet verzegeld': 'Ei vielä sinetöity',
+  'Verzegeld op': 'Sinetöity',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Sinetöity. Tallenna (Ctrl/Cmd+S) säilyttääksesi.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Tämä raportti on laadittu totuudenmukaisesti.',
   'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
       'Sinetöinti on mahdollista vasta, kun kaikki tekoälyluonnokset on tarkistettu. Vielä tarkistettava dialla (dioilla):',
   'Uit sjabloon…': 'Mallista…',

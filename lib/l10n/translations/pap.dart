@@ -91,6 +91,16 @@ const _dutchSourcePap = {
   'Aantal bevindingen per ernst': 'Kantidat di deskubrimentu pa severidat',
   'Aangepast…': 'Propio…',
   'Aangepaste tijd': 'Tempo propio',
+  'Waarheidsverklaring': 'Deklarashon di berdat',
+  'Rapporteur': 'Reportadó',
+  'Certificering': 'Sertifikashon',
+  'Nog niet ondertekend': 'Ainda no firmá',
+  'Nog niet verzegeld': 'Ainda no seyá',
+  'Verzegeld op': 'Seyá riba',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Seyá. Warda (Ctrl/Cmd+S) pa keda kuné.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'E rapòrt aki a ser prepará konforme berdat.',
   'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
       'Por seya solamente ora tur konseptonan di IA a ser revisá. Ainda pa kontrolá riba slide:',
   'Uit sjabloon…': 'For di plantia…',

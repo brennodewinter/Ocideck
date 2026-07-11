@@ -92,6 +92,16 @@ const _dutchSourceUk = {
   'Aantal bevindingen per ernst': 'Кількість знахідок за рівнем',
   'Aangepast…': 'Власний…',
   'Aangepaste tijd': 'Власний час',
+  'Waarheidsverklaring': 'Декларація про достовірність',
+  'Rapporteur': 'Доповідач',
+  'Certificering': 'Сертифікація',
+  'Nog niet ondertekend': 'Ще не підписано',
+  'Nog niet verzegeld': 'Ще не запечатано',
+  'Verzegeld op': 'Запечатано',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Запечатано. Збережіть (Ctrl/Cmd+S), щоб зберегти.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Цей звіт складено достовірно.',
   'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
       'Запечатування можливе лише після перевірки всіх чернеток ШІ. Ще перевірити на слайді(ах):',
   'Uit sjabloon…': 'З шаблону…',

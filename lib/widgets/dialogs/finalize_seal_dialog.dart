@@ -19,12 +19,19 @@ class FinalizeSealResult {
 /// optionally collects a visual signature. Deliberately does NOT offer an
 /// unfinalise — finalising is one-way in the UI.
 class FinalizeSealDialog extends StatefulWidget {
-  const FinalizeSealDialog({super.key});
+  /// Pre-fills the signature fields (e.g. from the deck's existing
+  /// [DocumentSignature] authored on a sign-off slide). Null = start blank.
+  final DocumentSignature? initial;
 
-  static Future<FinalizeSealResult?> show(BuildContext context) {
+  const FinalizeSealDialog({super.key, this.initial});
+
+  static Future<FinalizeSealResult?> show(
+    BuildContext context, {
+    DocumentSignature? initial,
+  }) {
     return showDialog<FinalizeSealResult>(
       context: context,
-      builder: (_) => const FinalizeSealDialog(),
+      builder: (_) => FinalizeSealDialog(initial: initial),
     );
   }
 
@@ -33,15 +40,23 @@ class FinalizeSealDialog extends StatefulWidget {
 }
 
 class _FinalizeSealDialogState extends State<FinalizeSealDialog> {
-  final _name = TextEditingController();
-  final _role = TextEditingController();
-  final _statement = TextEditingController();
-  final _typed = TextEditingController();
+  late final _name = TextEditingController(text: widget.initial?.name ?? '');
+  late final _role = TextEditingController(text: widget.initial?.role ?? '');
+  late final _certification = TextEditingController(
+    text: widget.initial?.certification ?? '',
+  );
+  late final _statement = TextEditingController(
+    text: widget.initial?.statement ?? '',
+  );
+  late final _typed = TextEditingController(
+    text: widget.initial?.typedSignature ?? '',
+  );
 
   @override
   void dispose() {
     _name.dispose();
     _role.dispose();
+    _certification.dispose();
     _statement.dispose();
     _typed.dispose();
     super.dispose();
@@ -56,6 +71,7 @@ class _FinalizeSealDialogState extends State<FinalizeSealDialog> {
   DocumentSignature _currentSignature() => DocumentSignature(
     name: _name.text.trim(),
     role: _role.text.trim(),
+    certification: _certification.text.trim(),
     statement: _statement.text.trim(),
     typedSignature: _typed.text.trim(),
   );
@@ -125,6 +141,8 @@ class _FinalizeSealDialogState extends State<FinalizeSealDialog> {
           _field(l10n, _name, 'Naam'),
           const SizedBox(height: 10),
           _field(l10n, _role, 'Rol of functie'),
+          const SizedBox(height: 10),
+          _field(l10n, _certification, 'Certificering'),
           const SizedBox(height: 10),
           _field(l10n, _statement, 'Verklaring', maxLines: 2),
           const SizedBox(height: 10),

@@ -92,6 +92,16 @@ const _dutchSourcePt = {
   'Aantal bevindingen per ernst': 'Número de constatações por gravidade',
   'Aangepast…': 'Personalizado…',
   'Aangepaste tijd': 'Tempo personalizado',
+  'Waarheidsverklaring': 'Declaração de veracidade',
+  'Rapporteur': 'Relator',
+  'Certificering': 'Certificação',
+  'Nog niet ondertekend': 'Ainda não assinado',
+  'Nog niet verzegeld': 'Ainda não selado',
+  'Verzegeld op': 'Selado em',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Selado. Guarde (Ctrl/Cmd+S) para manter.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Este relatório foi elaborado com veracidade.',
   'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
       'O selamento só é possível depois de revistos todos os rascunhos de IA. Ainda por verificar no(s) slide(s):',
   'Uit sjabloon…': 'A partir de modelo…',

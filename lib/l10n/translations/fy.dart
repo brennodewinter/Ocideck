@@ -91,6 +91,16 @@ const _dutchSourceFy = {
   'Aantal bevindingen per ernst': 'Oantal befinings per earnst',
   'Aangepast…': 'Eigen…',
   'Aangepaste tijd': 'Eigen tiid',
+  'Waarheidsverklaring': 'Wierheidsferklearring',
+  'Rapporteur': 'Rapporteur',
+  'Certificering': 'Sertifisearring',
+  'Nog niet ondertekend': 'Noch net ûndertekene',
+  'Nog niet verzegeld': 'Noch net fersegele',
+  'Verzegeld op': 'Fersegele op',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Fersegele. Bewarje (Ctrl/Cmd+S) om it te hâlden.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Dit rapport is nei wierheid opsteld.',
   'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
       'Fersegelje kin pas as alle AI-konsepten neisjoen binne. Noch te kontrolearjen op dia(\'s):',
   'Uit sjabloon…': 'Ut sjabloan…',

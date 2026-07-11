@@ -92,6 +92,16 @@ const _dutchSourceEs = {
   'Aantal bevindingen per ernst': 'Número de hallazgos por severidad',
   'Aangepast…': 'Personalizado…',
   'Aangepaste tijd': 'Tiempo personalizado',
+  'Waarheidsverklaring': 'Declaración de veracidad',
+  'Rapporteur': 'Ponente',
+  'Certificering': 'Certificación',
+  'Nog niet ondertekend': 'Sin firmar aún',
+  'Nog niet verzegeld': 'Sin sellar aún',
+  'Verzegeld op': 'Sellado el',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Sellado. Guarde (Ctrl/Cmd+S) para conservarlo.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Este informe se ha elaborado con veracidad.',
   'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
       'El sellado solo es posible tras revisar todos los borradores de IA. Aún por comprobar en la(s) diapositiva(s):',
   'Uit sjabloon…': 'Desde plantilla…',

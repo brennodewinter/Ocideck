@@ -92,6 +92,16 @@ const _dutchSourceRo = {
   'Aantal bevindingen per ernst': 'Număr de constatări după gravitate',
   'Aangepast…': 'Personalizat…',
   'Aangepaste tijd': 'Timp personalizat',
+  'Waarheidsverklaring': 'Declarație de veridicitate',
+  'Rapporteur': 'Raportor',
+  'Certificering': 'Certificare',
+  'Nog niet ondertekend': 'Încă nesemnat',
+  'Nog niet verzegeld': 'Încă nesigilat',
+  'Verzegeld op': 'Sigilat la',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Sigilat. Salvați (Ctrl/Cmd+S) pentru a-l păstra.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Acest raport a fost întocmit în mod veridic.',
   'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
       'Sigilarea este posibilă doar după verificarea tuturor schițelor AI. Rămâne de verificat pe diapozitiv(e):',
   'Uit sjabloon…': 'Din șablon…',

@@ -193,16 +193,17 @@ extension SlideTypeExtension on SlideType {
 
   /// Informatieveiligheid scaffold types (P1-S) whose body is still stored as
   /// free Markdown in [Slide.customMarkdown] and round-trips like a free-Markdown
-  /// slide until each type's structured serialiser lands (P1-FIND/SUM/SIGN).
-  /// `checklist` (P1-CHK), `scopeMatrix` (P1-SCOPE) and `findingsSummary`
-  /// (P1-SUM) have graduated: they serialise as real Markdown tables in
-  /// [Slide.tableRows], so they are excluded here; the other packages narrow
-  /// this further as they land.
+  /// slide until each type's structured serialiser lands. `checklist` (P1-CHK),
+  /// `scopeMatrix` (P1-SCOPE) and `findingsSummary` (P1-SUM) graduated to real
+  /// Markdown tables in [Slide.tableRows]; `signOff` (P1-SIGN) stores only an
+  /// optional heading (its attestation is deck-level), so all four are excluded
+  /// here. Only `finding` (P1-FIND) still uses the scaffold body.
   bool get usesScaffoldMarkdownBody =>
       category == SlideCategory.informatieveiligheid &&
       this != SlideType.checklist &&
       this != SlideType.scopeMatrix &&
-      this != SlideType.findingsSummary;
+      this != SlideType.findingsSummary &&
+      this != SlideType.signOff;
 }
 
 class Slide {

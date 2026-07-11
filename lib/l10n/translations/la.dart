@@ -93,6 +93,16 @@ const _dutchSourceLa = {
   'Aantal bevindingen per ernst': 'Numerus inventorum per gravitatem',
   'Aangepast…': 'Proprium…',
   'Aangepaste tijd': 'Tempus proprium',
+  'Waarheidsverklaring': 'Testificatio veritatis',
+  'Rapporteur': 'Relator',
+  'Certificering': 'Certificatio',
+  'Nog niet ondertekend': 'Nondum subscriptum',
+  'Nog niet verzegeld': 'Nondum obsignatum',
+  'Verzegeld op': 'Obsignatum die',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Obsignatum. Serva (Ctrl/Cmd+S) ut retineas.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Haec relatio secundum veritatem confecta est.',
   'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
       'Obsignatio fieri non potest nisi omnia adumbrata ab IA recognita sint. Adhuc examinandum in scida(is):',
   'Uit sjabloon…': 'Ex exemplari…',

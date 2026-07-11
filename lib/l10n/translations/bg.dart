@@ -92,6 +92,16 @@ const _dutchSourceBg = {
   'Aantal bevindingen per ernst': 'Брой констатации по тежест',
   'Aangepast…': 'По избор…',
   'Aangepaste tijd': 'Време по избор',
+  'Waarheidsverklaring': 'Декларация за достоверност',
+  'Rapporteur': 'Докладчик',
+  'Certificering': 'Сертификация',
+  'Nog niet ondertekend': 'Още не е подписано',
+  'Nog niet verzegeld': 'Още не е подпечатано',
+  'Verzegeld op': 'Подпечатано на',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Подпечатано. Запазете (Ctrl/Cmd+S), за да го запазите.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Този доклад е изготвен добросъвестно.',
   'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
       'Подпечатването е възможно едва след като всички AI чернови са прегледани. Още за проверка на слайд(ове):',
   'Uit sjabloon…': 'От шаблон…',

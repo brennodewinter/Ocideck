@@ -234,6 +234,8 @@ extension _MarkdownParse on MarkdownService {
         return sig.copyWith(name: value);
       case 'ocideck_sig_role':
         return sig.copyWith(role: value);
+      case 'ocideck_sig_cert':
+        return sig.copyWith(certification: value);
       case 'ocideck_sig_date':
         return sig.copyWith(date: value);
       case 'ocideck_sig_statement':

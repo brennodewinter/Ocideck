@@ -91,6 +91,16 @@ const _dutchSourceDe = {
   'Aantal bevindingen per ernst': 'Anzahl der Befunde nach Schweregrad',
   'Aangepast…': 'Benutzerdefiniert…',
   'Aangepaste tijd': 'Benutzerdefinierte Zeit',
+  'Waarheidsverklaring': 'Wahrheitserklärung',
+  'Rapporteur': 'Berichterstatter',
+  'Certificering': 'Zertifizierung',
+  'Nog niet ondertekend': 'Noch nicht unterschrieben',
+  'Nog niet verzegeld': 'Noch nicht versiegelt',
+  'Verzegeld op': 'Versiegelt am',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Versiegelt. Speichern (Strg/Cmd+S), um es zu behalten.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Dieser Bericht wurde wahrheitsgemäß erstellt.',
   'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
       'Versiegeln ist erst möglich, wenn alle KI-Entwürfe geprüft wurden. Noch zu prüfen auf Folie(n):',
   'Uit sjabloon…': 'Aus Vorlage…',

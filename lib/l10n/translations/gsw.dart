@@ -91,6 +91,16 @@ const _dutchSourceGsw = {
   'Aantal bevindingen per ernst': 'Aazahl Befund pro Schweregrad',
   'Aangepast…': 'Eigeni…',
   'Aangepaste tijd': 'Eigeni Ziit',
+  'Waarheidsverklaring': 'Wahrheitserklärig',
+  'Rapporteur': 'Berichterstatter',
+  'Certificering': 'Zertifizierig',
+  'Nog niet ondertekend': 'Nonig unterschribe',
+  'Nog niet verzegeld': 'Nonig versieglet',
+  'Verzegeld op': 'Versieglet am',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Versieglet. Speichere (Strg/Cmd+S) zum bhalte.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Dää Bricht isch wahrheitsgetröi verfasst worde.',
   'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
       'Versiegle gaht erscht, wenn alli KI-Entwürf prüeft sind. Na z prüefe uf de Folie(ne):',
   'Uit sjabloon…': 'Us Vorlag…',

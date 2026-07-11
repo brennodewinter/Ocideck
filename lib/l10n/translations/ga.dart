@@ -93,6 +93,16 @@ const _dutchSourceGa = {
   'Aantal bevindingen per ernst': 'Líon na dtorthaí de réir déine',
   'Aangepast…': 'Saincheaptha…',
   'Aangepaste tijd': 'Am saincheaptha',
+  'Waarheidsverklaring': 'Ráiteas fírinne',
+  'Rapporteur': 'Tuairisceoir',
+  'Certificering': 'Deimhniú',
+  'Nog niet ondertekend': 'Gan síniú fós',
+  'Nog niet verzegeld': 'Gan séalú fós',
+  'Verzegeld op': 'Séalaithe ar',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Séalaithe. Sábháil (Ctrl/Cmd+S) chun é a choinneáil.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Ullmhaíodh an tuarascáil seo go fírinneach.',
   'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
       'Ní féidir séalú a dhéanamh go dtí go seiceáiltear gach dréacht AI. Le seiceáil fós ar shleamhnán(áin):',
   'Uit sjabloon…': 'Ó theimpléad…',

@@ -91,6 +91,16 @@ const _dutchSourceLv = {
   'Aantal bevindingen per ernst': 'Atradumu skaits pēc smaguma',
   'Aangepast…': 'Pielāgots…',
   'Aangepaste tijd': 'Pielāgots laiks',
+  'Waarheidsverklaring': 'Patiesuma apliecinājums',
+  'Rapporteur': 'Ziņotājs',
+  'Certificering': 'Sertifikācija',
+  'Nog niet ondertekend': 'Vēl nav parakstīts',
+  'Nog niet verzegeld': 'Vēl nav aizzīmogots',
+  'Verzegeld op': 'Aizzīmogots',
+  'Verzegeld. Sla op (Ctrl/Cmd+S) om te bewaren.':
+      'Aizzīmogots. Saglabājiet (Ctrl/Cmd+S), lai saglabātu.',
+  'Deze rapportage is naar waarheid opgesteld.':
+      'Šis ziņojums ir sagatavots patiesi.',
   'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
       'Aizzīmogošana iespējama tikai pēc visu MI melnrakstu pārbaudes. Vēl jāpārbauda slaidā(os):',
   'Uit sjabloon…': 'No veidnes…',

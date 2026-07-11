@@ -781,6 +781,21 @@ class DeckNotifier extends StateNotifier<DeckState> {
     return deck == null ? const [] : slidesWithUnreviewedAiMarkers(deck);
   }
 
+  /// Set the deck-level visual signature draft (authored on the `signOff` slide,
+  /// §8 A1). Goes through [_mutate], so it is undoable and — like every edit —
+  /// blocked once the deck is finalised. Clearing to an empty signature removes
+  /// it from the front matter.
+  void setSignature(DocumentSignature signature) {
+    final deck = state.deck;
+    if (deck == null) return;
+    _mutate(
+      deck.copyWith(
+        signature: signature.isEmpty ? null : signature,
+        clearSignature: signature.isEmpty,
+      ),
+    );
+  }
+
   /// De integriteitsstatus van het open deck (niet-verzegeld / intact /
   /// gewijzigd-na-afronden). Herberekent de hash en vergelijkt met het zegel.
   IntegrityStatus get integrityStatus {
