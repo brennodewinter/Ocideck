@@ -83,6 +83,8 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Teks alternatif (deskripsi untuk pembaca layar)',
   'Hoog': 'Tinggi',
   'Middel': 'Sedang',
   'Laag': 'Rendah',

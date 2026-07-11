@@ -84,6 +84,8 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Test alternattiv (deskrizzjoni għall-qarrejja tal-iskrin)',
   'Hoog': 'Għoli',
   'Middel': 'Medju',
   'Laag': 'Baxx',

@@ -83,6 +83,8 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Alt-tekst (beskriuwing foar skermlêzers)',
   'Hoog': 'Heech',
   'Middel': 'Middel',
   'Laag': 'Leech',

@@ -85,6 +85,8 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Textus alternus (descriptio pro lectoribus scrinii)',
   'Hoog': 'Altum',
   'Middel': 'Medium',
   'Laag': 'Humile',

@@ -83,6 +83,8 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Alt-tekst (beskrivelse for skærmlæsere)',
   'Hoog': 'Høj',
   'Middel': 'Middel',
   'Laag': 'Lav',

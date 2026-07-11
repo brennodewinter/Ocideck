@@ -358,6 +358,9 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
               : null,
           onCaptionChanged: (caption) =>
               widget.onUpdate(widget.slide.copyWith(imageCaption: caption)),
+          imageAltText: widget.slide.imageAltText,
+          onAltTextChanged: (alt) =>
+              widget.onUpdate(widget.slide.copyWith(imageAltText: alt)),
         ),
         const SizedBox(height: 12),
         const SectionLabel('Breedte afbeeldingspaneel (rechts)'),

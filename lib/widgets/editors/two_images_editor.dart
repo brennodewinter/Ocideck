@@ -160,6 +160,9 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
               : null,
           onCaptionChanged: (caption) =>
               widget.onUpdate(widget.slide.copyWith(imageCaption: caption)),
+          imageAltText: widget.slide.imageAltText,
+          onAltTextChanged: (alt) =>
+              widget.onUpdate(widget.slide.copyWith(imageAltText: alt)),
         ),
         _cropButton(false),
         const SizedBox(height: 20),
@@ -180,6 +183,9 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
               : null,
           onCaptionChanged: (caption) =>
               widget.onUpdate(widget.slide.copyWith(imageCaption2: caption)),
+          imageAltText: widget.slide.imageAltText2,
+          onAltTextChanged: (alt) =>
+              widget.onUpdate(widget.slide.copyWith(imageAltText2: alt)),
         ),
         _cropButton(true),
         const SizedBox(height: 20),

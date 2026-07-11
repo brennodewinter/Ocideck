@@ -83,6 +83,8 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Vaihtoehtoinen teksti (kuvaus ruudunlukijoille)',
   'Hoog': 'Korkea',
   'Middel': 'Keskitaso',
   'Laag': 'Matala',

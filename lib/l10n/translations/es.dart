@@ -84,6 +84,8 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Texto alternativo (descripción para lectores de pantalla)',
   'Hoog': 'Alto',
   'Middel': 'Medio',
   'Laag': 'Bajo',

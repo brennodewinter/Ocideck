@@ -90,6 +90,7 @@ class _BulletsImagePreview extends StatelessWidget {
                   semanticLabel: imageSemanticsLabel(
                     context,
                     slide.imageCaption,
+                    altText: slide.imageAltText,
                   ),
                 ),
                 _captionOverlay(context, slide.imageCaption, w),
@@ -262,6 +263,7 @@ class _BulletsImagePreview extends StatelessWidget {
                   semanticLabel: imageSemanticsLabel(
                     context,
                     slide.imageCaption,
+                    altText: slide.imageAltText,
                   ),
                 ),
                 _captionOverlay(context, slide.imageCaption, w),

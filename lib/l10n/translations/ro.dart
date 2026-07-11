@@ -84,6 +84,8 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Text alternativ (descriere pentru cititoare de ecran)',
   'Hoog': 'Ridicat',
   'Middel': 'Mediu',
   'Laag': 'Scăzut',

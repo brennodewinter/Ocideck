@@ -133,6 +133,12 @@ class MarkdownValidator {
     'ocideck_finding_id',
     'ocideck_finding_role',
     'ocideck_ai_assisted',
+    // Per-image directives the parser lifts before the generic scan
+    // (crop focal point + WCAG alt-text, AI_ASSIST §6.1).
+    'ocideck_image_focus',
+    'ocideck_image_focus2',
+    'ocideck_image_alt',
+    'ocideck_image_alt2',
   };
 
   MarkdownValidationResult validate(String markdown) {

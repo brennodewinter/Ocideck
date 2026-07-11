@@ -869,6 +869,8 @@ for presenter notes):
 | `<!-- ocideck_bullet_marker: dot\|paw -->` | Per-slide bullet-marker override (bullets/two-bullets/bullets+image). Absent = inherit the theme's `bulletMarker` (§3.2). |
 | `<!-- ocideck_image_focus: x,y -->` | Image crop focal point (0..1 per axis, `0.5,0.5` = centre) for the slide's image. Decides which part stays in view when the picture is cropped (fill/zoom, or a fixed image panel). Written only when not centred. |
 | `<!-- ocideck_image_focus2: x,y -->` | Same, for the **second** image of a two-images slide. Written only when not centred. |
+| `<!-- ocideck_image_alt: text -->` | Per-usage WCAG alt-text (accessibility description) for the slide's image. Preferred over the visible caption as the screen-reader label. Written only when set; `-->` inside is escaped like presenter notes. |
+| `<!-- ocideck_image_alt2: text -->` | Same, for the **second** image of a two-images slide. |
 | `<!-- ocideck_finding_id: F-03 -->` · `<!-- ocideck_finding_role: header\|detail\|evidence -->` | Finding-group link: ties a header card to its detail/evidence slides (§5). Written on any slide with a non-empty finding id. |
 | `<!-- ocideck_ai_assisted: field1, field2 -->` | The slide's fields whose text was drafted by AI and not yet human-reviewed. While any slide carries this marker the deck **cannot be finalised/sealed** (the EIS 1.6 attestation must cover human-verified text). Written only when non-empty; AI drafting sets it and clears it on review. |
 | `<!-- advance: N.N -->` | Auto-advance after N.N seconds (0 = off). |

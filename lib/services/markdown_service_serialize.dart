@@ -34,6 +34,22 @@ extension _MarkdownSerialize on MarkdownService {
     return rounded.toString();
   }
 
+  /// Emits the per-usage WCAG alt-text as HTML comments Marp ignores, only when
+  /// set (AI_ASSIST §6.1). `2` is the twoImages right image. Round-trips via
+  /// `ocideck_image_alt` in [_parseBlock]; `-->` is escaped like presenter notes.
+  void _writeImageAlt(StringBuffer buf, Slide slide) {
+    if (slide.imageAltText.isNotEmpty) {
+      buf.writeln(
+        '<!-- ocideck_image_alt: ${_escapeNotes(slide.imageAltText)} -->',
+      );
+    }
+    if (slide.imageAltText2.isNotEmpty) {
+      buf.writeln(
+        '<!-- ocideck_image_alt2: ${_escapeNotes(slide.imageAltText2)} -->',
+      );
+    }
+  }
+
   void _writeTitleSlide(StringBuffer buf, Slide slide) {
     // Background image before headings so Marp treats it as a bg directive
     if (slide.imagePath.isNotEmpty) {
@@ -47,6 +63,7 @@ extension _MarkdownSerialize on MarkdownService {
         buf.writeln('<!-- ocideck_title_image_overlay: false -->');
       }
       _writeImageFocus(buf, slide);
+      _writeImageAlt(buf, slide);
       _writeImageCaption(buf, slide.imageCaption);
       buf.writeln();
     }
@@ -161,6 +178,7 @@ extension _MarkdownSerialize on MarkdownService {
       buf.writeln();
       buf.writeln('![](${slide.imagePath})');
       _writeImageFocus(buf, slide);
+      _writeImageAlt(buf, slide);
       _writeImageCaption(buf, slide.imageCaption);
       buf.writeln();
       buf.writeln('</div>');
@@ -180,6 +198,7 @@ extension _MarkdownSerialize on MarkdownService {
       buf.writeln('![bg right:${100 - splitPct}%](${slide.imagePath2})');
     }
     _writeImageFocus(buf, slide);
+    _writeImageAlt(buf, slide);
     _writeCaptionDiv(
       buf,
       _joinTwoCaptions(slide.imageCaption, slide.imageCaption2),
@@ -195,6 +214,7 @@ extension _MarkdownSerialize on MarkdownService {
       final sizeSpec = slide.imageSize > 0 ? ' ${slide.imageSize}%' : '';
       buf.writeln('![bg$sizeSpec](${slide.imagePath})');
       _writeImageFocus(buf, slide);
+      _writeImageAlt(buf, slide);
       _writeImageCaption(buf, slide.imageCaption);
     }
     if (slide.title.isNotEmpty) {

@@ -84,6 +84,8 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Texte alternatif (description pour les lecteurs d\'écran)',
   'Hoog': 'Élevé',
   'Middel': 'Moyen',
   'Laag': 'Faible',

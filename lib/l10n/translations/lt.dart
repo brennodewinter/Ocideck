@@ -83,6 +83,8 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Alternatyvus tekstas (aprašymas ekrano skaitytuvams)',
   'Hoog': 'Aukštas',
   'Middel': 'Vidutinis',
   'Laag': 'Žemas',

@@ -83,6 +83,8 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Alternatív szöveg (leírás képernyőolvasóknak)',
   'Hoog': 'Magas',
   'Middel': 'Közepes',
   'Laag': 'Alacsony',

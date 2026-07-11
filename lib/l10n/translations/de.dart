@@ -83,6 +83,8 @@ const _stringsDe = {
 };
 
 const _dutchSourceDe = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Alt-Text (Beschreibung für Screenreader)',
   'Hoog': 'Hoch',
   'Middel': 'Mittel',
   'Laag': 'Niedrig',

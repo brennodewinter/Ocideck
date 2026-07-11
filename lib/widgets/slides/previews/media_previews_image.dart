@@ -65,11 +65,18 @@ Widget _zoomedImage(
   );
 }
 
-/// Alt text for a content image (WCAG 1.1.1): the author's caption when there
-/// is one, otherwise a generic "image" so a screen reader still announces that
-/// a picture is present (the slide-quality analyzer nudges adding a caption).
-/// Background/decorative images pass `null` and stay out of the semantics tree.
-String imageSemanticsLabel(BuildContext context, String caption) {
+/// Alt text for a content image (WCAG 1.1.1): the per-usage [altText] when the
+/// author set one (AI_ASSIST §6.1), else the visible caption, else a generic
+/// "image" so a screen reader still announces that a picture is present (the
+/// slide-quality analyzer nudges adding alt-text). Background/decorative images
+/// pass `null` and stay out of the semantics tree.
+String imageSemanticsLabel(
+  BuildContext context,
+  String caption, {
+  String altText = '',
+}) {
+  final alt = altText.trim();
+  if (alt.isNotEmpty) return alt;
   final text = caption.trim();
   return text.isEmpty ? context.l10n.d('Afbeelding') : text;
 }

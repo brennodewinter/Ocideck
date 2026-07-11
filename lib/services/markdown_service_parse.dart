@@ -286,6 +286,34 @@ extension _MarkdownParse on MarkdownService {
     return (x.clamp(0.0, 1.0), y.clamp(0.0, 1.0));
   }
 
+  /// Lifts the WCAG alt-text comments (`ocideck_image_alt` / `…_alt2`, AI_ASSIST
+  /// §6.1) out of [block] and decodes them (unescaping `-->` like presenter
+  /// notes), so the directive is stripped before the generic scan treats it as
+  /// notes. Mirrors [_parseImageFocus].
+  ({String alt, String alt2, String block}) _parseImageAlt(String block) {
+    var alt = '';
+    var alt2 = '';
+    final cleaned = block.replaceAllMapped(_reHtmlComment, (m) {
+      final content = m.group(1)!.trim();
+      // `_alt2` first: it is not a prefix of `_alt:` (the colon differs), but the
+      // explicit order keeps the intent obvious.
+      if (content.startsWith('ocideck_image_alt2:')) {
+        alt2 = _unescapeNotes(
+          content.substring('ocideck_image_alt2:'.length).trim(),
+        );
+        return '';
+      }
+      if (content.startsWith('ocideck_image_alt:')) {
+        alt = _unescapeNotes(
+          content.substring('ocideck_image_alt:'.length).trim(),
+        );
+        return '';
+      }
+      return m.group(0)!;
+    });
+    return (alt: alt, alt2: alt2, block: cleaned);
+  }
+
   /// The stored body for a parsed slide: free-Markdown and the Informatieveiligheid
   /// scaffold types keep the whole remaining block; a richText bullet slide keeps
   /// its rich-text lines; every other type stores nothing (its own fields hold
@@ -309,6 +337,16 @@ extension _MarkdownParse on MarkdownService {
     return '';
   }
 
+  /// The image size (`![bg N%]`) to store: the body value, or the `_style`
+  /// `--image-width` when absent. `0` stays "auto"; capped at 400% so a crafted
+  /// `![bg 900000%]` can't blow the layout box up.
+  int _cappedImageSize(int bodySize, int styleImageWidth) {
+    final size = bodySize == 0 && styleImageWidth > 0
+        ? styleImageWidth
+        : bodySize;
+    return size > 400 ? 400 : size;
+  }
+
   Slide? _parseBlock(String block) {
     if (block.isEmpty) return null;
 
@@ -316,7 +354,8 @@ extension _MarkdownParse on MarkdownService {
     // directives are stripped before the generic comment scan would otherwise
     // read them as presenter notes.
     final focus = _parseImageFocus(block);
-    final link = _parseFindingLink(focus.block);
+    final alt = _parseImageAlt(focus.block);
+    final link = _parseFindingLink(alt.block);
     final d = _parseBlockDirectives(link.block);
 
     // Fenced (code/chart/cockpit/question) and finding-header slides carry
@@ -347,12 +386,7 @@ extension _MarkdownParse on MarkdownService {
       bullets,
     );
 
-    var imageSize = body.imageSize;
-    if (imageSize == 0 && d.styleImageWidth > 0) imageSize = d.styleImageWidth;
-    // 0 stays "auto"; a real value is capped so a crafted `![bg 900000%]`
-    // can't blow the layout box up (~maxWidth × 9000) and thrash rendering/
-    // rasterisation. 400% is well beyond any legitimate zoom.
-    if (imageSize > 400) imageSize = 400;
+    final imageSize = _cappedImageSize(body.imageSize, d.styleImageWidth);
 
     final tableRows = <List<String>>[];
     for (final line in body.tableLines) {
@@ -413,6 +447,8 @@ extension _MarkdownParse on MarkdownService {
       imagePath2: body.imagePath2,
       imageCaption: body.imageCaption,
       imageCaption2: body.imageCaption2,
+      imageAltText: alt.alt,
+      imageAltText2: alt.alt2,
       imageFocalX: focus.fx,
       imageFocalY: focus.fy,
       imageFocalX2: focus.fx2,
