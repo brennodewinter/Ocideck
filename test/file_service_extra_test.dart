@@ -118,6 +118,25 @@ void main() {
     },
   );
 
+  test('scanPresentations descends deeper than four levels', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_scan_deep_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+
+    // Zes mappen diep — voorbij de oude limiet van vier.
+    final deep = p.join(temp.path, 'a', 'b', 'c', 'd', 'e', 'f');
+    await Directory(deep).create(recursive: true);
+    File(p.join(deep, 'diep.md')).writeAsStringSync(
+      '---\nmarp: true\ntheme: ocideck\ntitle: Diep\n---\n\n# Diep\n',
+    );
+
+    final service = makeService();
+    final all = await service.scanPresentations(temp.path);
+    expect(all.map((s) => s.fileName), contains('diep.md'));
+    expect(all.single.deck.title, 'Diep');
+  });
+
   test('scanPresentations returns empty for a missing directory', () async {
     final service = makeService();
     final result = await service.scanPresentations(

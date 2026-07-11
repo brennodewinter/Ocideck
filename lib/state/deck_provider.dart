@@ -42,6 +42,7 @@ final fileServiceProvider = Provider<FileService>((ref) {
     () => ref.read(settingsProvider).themeProfile,
     languageCode: () => ref.read(settingsProvider).languageCode,
     homeDirectory: () => ref.read(settingsProvider).homeDirectory,
+    libraryPaths: () => ref.read(settingsProvider).libraryPaths,
   );
 });
 

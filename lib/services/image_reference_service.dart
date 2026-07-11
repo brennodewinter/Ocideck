@@ -18,18 +18,26 @@ class ImageReferenceService {
     '.git',
     '.dart_tool',
   };
-  static const _maxDepth = 4;
+
+  /// Diepte-plafond voor de walk: praktisch onbeperkt voor echte mappen, maar
+  /// een harde bovengrens tegen pathologische bomen.
+  static const _maxDepth = 32;
+
+  /// Bovengrens op het aantal gevonden `.md`-bestanden — een vangnet zodat een
+  /// extreem grote map de dedupe-/verwijzingsactie niet laat vastlopen.
+  static const _maxFiles = 20000;
 
   /// Markdown-afbeelding: `![alt of bg-directive](pad)`.
   static final _imageRef = RegExp(r'!\[([^\]]*)\]\(([^)\n]+)\)');
 
-  /// Zoek recursief alle `.md`-bestanden onder [searchDirs] (begrensd op
-  /// diepte, asset- en verborgen mappen worden overgeslagen). Dubbele treffers
-  /// via overlappende zoekpaden worden één keer teruggegeven.
+  /// Zoek recursief alle `.md`-bestanden onder [searchDirs] (begrensd op diepte
+  /// en aantal; asset- en verborgen mappen worden overgeslagen). Dubbele
+  /// treffers via overlappende zoekpaden worden één keer teruggegeven.
   Future<List<String>> findDeckFiles(Iterable<String> searchDirs) async {
     final found = <String>{};
 
     Future<void> walk(Directory dir, int depth) async {
+      if (found.length >= _maxFiles) return;
       List<FileSystemEntity> entries;
       try {
         entries = await dir.list(followLinks: false).toList();
@@ -38,6 +46,7 @@ class ImageReferenceService {
         return;
       }
       for (final entity in entries) {
+        if (found.length >= _maxFiles) return;
         if (entity is File) {
           if (entity.path.toLowerCase().endsWith('.md')) {
             found.add(p.normalize(entity.path));

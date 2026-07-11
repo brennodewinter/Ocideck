@@ -40,6 +40,15 @@ void main() {
 
       expect(found, [p.normalize(deck)]);
     });
+
+    test('descends deeper than four levels', () async {
+      // Zes mappen diep — voorbij de oude limiet van vier.
+      final deck = write('a/b/c/d/e/f/diep.md', '# Diep');
+
+      final found = await service.findDeckFiles([tmp.path]);
+
+      expect(found, [p.normalize(deck)]);
+    });
   });
 
   group('countReferences', () {
