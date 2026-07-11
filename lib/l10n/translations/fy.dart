@@ -83,6 +83,8 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Uit sjabloon…': 'Ut sjabloan…',
+  'Sjabloon kiezen': 'Sjabloan kieze',
   'Scope-object': 'Scope-objekt',
   'CVSS 4.0-vector': 'CVSS 4.0-vektor',
   'Bevestiging (reproductie)': 'Befêstiging (reproduksje)',

@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Reusable finding-template library** — findings can be started from a
+  reusable template instead of a blank slide. A searchable **"Uit sjabloon…"**
+  picker in the finding editor offers a set of bundled starter findings (SQL
+  injection, reflected XSS, weak password policy — each with a CVSS 4.0 vector,
+  CWE and description / reproduction / impact / recommendation); picking one
+  fills those fields so the tester can specialise it, while the scope object,
+  CVE ids and finding id stay per-engagement. Templates are plain Markdown with
+  YAML front matter (title, severity, `cvss_vector`, `cvss_version`, `cwe`,
+  `references`), so they are diffable and (in a later step) importable as
+  community/team packs (PENTEST_MIAUW §17). Localised in all interface languages.
 - **Finding slide type (`finding`)** — the *Bevinding* type is now a structured
   header card instead of a free-Markdown scaffold. A dedicated editor captures
   the scope object, the **CVSS 4.0 vector** (with a live, derived score +

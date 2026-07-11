@@ -83,6 +83,8 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Uit sjabloon…': 'Iz predloge…',
+  'Sjabloon kiezen': 'Izberi predlogo',
   'Scope-object': 'Predmet obsega',
   'CVSS 4.0-vector': 'Vektor CVSS 4.0',
   'Bevestiging (reproductie)': 'Potrditev (reprodukcija)',

@@ -83,6 +83,8 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Uit sjabloon…': 'Fra skabelon…',
+  'Sjabloon kiezen': 'Vælg skabelon',
   'Scope-object': 'Scope-objekt',
   'CVSS 4.0-vector': 'CVSS 4.0-vektor',
   'Bevestiging (reproductie)': 'Bekræftelse (reproduktion)',

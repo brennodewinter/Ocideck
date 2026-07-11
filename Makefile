@@ -133,6 +133,7 @@ mutate-parsers:
 	@echo "Failure means: a predicate survived — it is dead or untested; review it."
 	dart run tool/mutation_check.dart lib/services/markdown_service_parse.dart test/markdown_round_trip_test.dart test/markdown_service_test.dart
 	dart run tool/mutation_check.dart lib/services/markdown_service_finding.dart test/markdown_round_trip_test.dart test/markdown_service_test.dart
+	dart run tool/mutation_check.dart lib/models/finding_template.dart test/finding_template_test.dart
 	dart run tool/mutation_check.dart lib/services/markdown_service_serialize.dart test/markdown_round_trip_test.dart test/markdown_service_test.dart
 	dart run tool/mutation_check.dart lib/services/markdown_body_blocks.dart test/markdown_body_blocks_test.dart test/rich_text_layout_test.dart
 	dart run tool/mutation_check.dart lib/widgets/slides/inline_markdown.dart test/inline_markdown_test.dart

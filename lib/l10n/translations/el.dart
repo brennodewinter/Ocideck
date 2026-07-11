@@ -83,6 +83,8 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Uit sjabloon…': 'Από πρότυπο…',
+  'Sjabloon kiezen': 'Επιλογή προτύπου',
   'Scope-object': 'Αντικείμενο εμβέλειας',
   'CVSS 4.0-vector': 'Διάνυσμα CVSS 4.0',
   'Bevestiging (reproductie)': 'Επιβεβαίωση (αναπαραγωγή)',

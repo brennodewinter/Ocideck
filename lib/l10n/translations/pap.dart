@@ -83,6 +83,8 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Uit sjabloon…': 'For di plantia…',
+  'Sjabloon kiezen': 'Skohe plantia',
   'Scope-object': 'Opheto di scope',
   'CVSS 4.0-vector': 'Vektor CVSS 4.0',
   'Bevestiging (reproductie)': 'Konfirmashon (reproduskshon)',

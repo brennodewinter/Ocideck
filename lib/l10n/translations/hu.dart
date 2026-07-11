@@ -83,6 +83,8 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Uit sjabloon…': 'Sablonból…',
+  'Sjabloon kiezen': 'Sablon választása',
   'Scope-object': 'Hatókör objektuma',
   'CVSS 4.0-vector': 'CVSS 4.0 vektor',
   'Bevestiging (reproductie)': 'Megerősítés (reprodukció)',

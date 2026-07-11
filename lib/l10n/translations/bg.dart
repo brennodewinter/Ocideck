@@ -84,6 +84,8 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Uit sjabloon…': 'От шаблон…',
+  'Sjabloon kiezen': 'Изберете шаблон',
   'Scope-object': 'Обект от обхвата',
   'CVSS 4.0-vector': 'CVSS 4.0 вектор',
   'Bevestiging (reproductie)': 'Потвърждение (възпроизвеждане)',

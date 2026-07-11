@@ -83,6 +83,8 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'Uit sjabloon…': 'From template…',
+  'Sjabloon kiezen': 'Choose template',
   'Scope-object': 'Scope object',
   'CVSS 4.0-vector': 'CVSS 4.0 vector',
   'Bevestiging (reproductie)': 'Confirmation (reproduction)',

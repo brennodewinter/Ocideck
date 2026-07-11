@@ -84,6 +84,8 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'Uit sjabloon…': 'A partir de modelo…',
+  'Sjabloon kiezen': 'Escolher modelo',
   'Scope-object': 'Objeto do escopo',
   'CVSS 4.0-vector': 'Vetor CVSS 4.0',
   'Bevestiging (reproductie)': 'Confirmação (reprodução)',

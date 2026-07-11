@@ -84,6 +84,8 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Uit sjabloon…': 'Din șablon…',
+  'Sjabloon kiezen': 'Alege un șablon',
   'Scope-object': 'Obiect din domeniu',
   'CVSS 4.0-vector': 'Vector CVSS 4.0',
   'Bevestiging (reproductie)': 'Confirmare (reproducere)',

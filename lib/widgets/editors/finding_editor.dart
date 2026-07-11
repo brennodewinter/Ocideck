@@ -6,6 +6,7 @@ import '../../models/slide.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/finding_severity_palette.dart';
+import '../dialogs/finding_template_picker.dart';
 import '_editor_field.dart';
 
 /// Structured editor for a `finding` **header** slide (PENTEST_MIAUW §3.1). The
@@ -114,11 +115,36 @@ class _FindingEditorState extends State<FindingEditor>
     );
   }
 
+  /// Pull a reusable template (PENTEST_MIAUW §17) into this finding and let the
+  /// tester specialise it: the title, CVSS, CWE and the four sections are filled
+  /// from the template; the scope object, CVE ids and finding id stay as the
+  /// tester set them for this engagement.
+  Future<void> _pickTemplate() async {
+    final template = await FindingTemplatePicker.show(context);
+    if (template == null) return;
+    final spec = template.toFindingSpec();
+    _heading.text = spec.heading;
+    _cvss.text = spec.cvssVector;
+    _cwe.text = _composeCwe(spec);
+    _description.text = spec.description;
+    _confirmation.text = spec.confirmation;
+    _impact.text = spec.impact;
+    _recommendation.text = spec.recommendation;
+  }
+
   @override
   Widget build(BuildContext context) {
     return EditorFieldList(
       nestedInScrollView: widget.nestedInScrollView,
       children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: OutlinedButton.icon(
+            onPressed: _pickTemplate,
+            icon: const Icon(Icons.library_books_outlined, size: 16),
+            label: Text(context.l10n.d('Uit sjabloon…')),
+          ),
+        ),
         EditorField(
           label: 'Titel',
           controller: _heading,

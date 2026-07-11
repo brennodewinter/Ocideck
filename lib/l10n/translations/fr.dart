@@ -84,6 +84,8 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'Uit sjabloon…': 'Depuis un modèle…',
+  'Sjabloon kiezen': 'Choisir un modèle',
   'Scope-object': 'Objet du périmètre',
   'CVSS 4.0-vector': 'Vecteur CVSS 4.0',
   'Bevestiging (reproductie)': 'Confirmation (reproduction)',

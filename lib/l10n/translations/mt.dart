@@ -84,6 +84,8 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Uit sjabloon…': 'Minn mudell…',
+  'Sjabloon kiezen': 'Agħżel mudell',
   'Scope-object': 'Oġġett tal-ambitu',
   'CVSS 4.0-vector': 'Vettur CVSS 4.0',
   'Bevestiging (reproductie)': 'Konferma (riproduzzjoni)',

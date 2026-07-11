@@ -83,6 +83,8 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Uit sjabloon…': 'No veidnes…',
+  'Sjabloon kiezen': 'Izvēlēties veidni',
   'Scope-object': 'Tvēruma objekts',
   'CVSS 4.0-vector': 'CVSS 4.0 vektors',
   'Bevestiging (reproductie)': 'Apstiprinājums (reproducēšana)',
