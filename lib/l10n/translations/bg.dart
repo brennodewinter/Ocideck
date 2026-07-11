@@ -84,6 +84,15 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Nieuwe bevinding (wizard)': 'Ново откритие (съветник)',
+  'Bevinding maken': 'Създай откритие',
+  'CIA-rating (scope-object)': 'CIA оценка (обект от обхвата)',
+  'Vertrouwelijkheid': 'Поверителност',
+  'Integriteit': 'Цялост',
+  'Beschikbaarheid': 'Наличност',
+  'Detailslide toevoegen': 'Добави слайд с детайли',
+  'Bewijsslide toevoegen': 'Добави слайд с доказателства',
+  'CIA-gewogen': 'Претеглено по CIA',
   'Severity (bevindingen)': 'Сериозност (констатации)',
   'CWE kiezen': 'Избор на CWE',
   'Zoek op naam of CWE-nummer': 'Търсене по име или CWE номер',

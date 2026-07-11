@@ -84,6 +84,15 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Nieuwe bevinding (wizard)': 'Nuevo hallazgo (asistente)',
+  'Bevinding maken': 'Crear hallazgo',
+  'CIA-rating (scope-object)': 'Clasificación CIA (objeto de alcance)',
+  'Vertrouwelijkheid': 'Confidencialidad',
+  'Integriteit': 'Integridad',
+  'Beschikbaarheid': 'Disponibilidad',
+  'Detailslide toevoegen': 'Añadir diapositiva de detalle',
+  'Bewijsslide toevoegen': 'Añadir diapositiva de evidencia',
+  'CIA-gewogen': 'Ponderado por CIA',
   'Severity (bevindingen)': 'Gravedad (hallazgos)',
   'CWE kiezen': 'Elegir CWE',
   'Zoek op naam of CWE-nummer': 'Buscar por nombre o número CWE',

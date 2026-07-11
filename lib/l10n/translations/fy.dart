@@ -83,6 +83,15 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Nieuwe bevinding (wizard)': 'Nije befining (wizard)',
+  'Bevinding maken': 'Befining meitsje',
+  'CIA-rating (scope-object)': 'CIA-wurdearring (scope-objekt)',
+  'Vertrouwelijkheid': 'Fertroulikheid',
+  'Integriteit': 'Yntegriteit',
+  'Beschikbaarheid': 'Beskikberens',
+  'Detailslide toevoegen': 'Detailslide tafoegje',
+  'Bewijsslide toevoegen': 'Bewiisslide tafoegje',
+  'CIA-gewogen': 'CIA-woegen',
   'Severity (bevindingen)': 'Earnst (befinings)',
   'CWE kiezen': 'CWE kieze',
   'Zoek op naam of CWE-nummer': 'Sykje op namme of CWE-nûmer',

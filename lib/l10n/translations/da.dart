@@ -83,6 +83,15 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Nieuwe bevinding (wizard)': 'Nyt fund (guide)',
+  'Bevinding maken': 'Opret fund',
+  'CIA-rating (scope-object)': 'CIA-vurdering (scopeobjekt)',
+  'Vertrouwelijkheid': 'Fortrolighed',
+  'Integriteit': 'Integritet',
+  'Beschikbaarheid': 'Tilgængelighed',
+  'Detailslide toevoegen': 'Tilføj detaljeslide',
+  'Bewijsslide toevoegen': 'Tilføj bevisslide',
+  'CIA-gewogen': 'CIA-vægtet',
   'Severity (bevindingen)': 'Alvorlighed (fund)',
   'CWE kiezen': 'Vælg CWE',
   'Zoek op naam of CWE-nummer': 'Søg efter navn eller CWE-nummer',

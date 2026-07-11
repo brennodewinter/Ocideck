@@ -85,6 +85,15 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Nieuwe bevinding (wizard)': 'Nowe ustalenie (kreator)',
+  'Bevinding maken': 'Utwórz ustalenie',
+  'CIA-rating (scope-object)': 'Ocena CIA (obiekt zakresu)',
+  'Vertrouwelijkheid': 'Poufność',
+  'Integriteit': 'Integralność',
+  'Beschikbaarheid': 'Dostępność',
+  'Detailslide toevoegen': 'Dodaj slajd szczegółów',
+  'Bewijsslide toevoegen': 'Dodaj slajd dowodu',
+  'CIA-gewogen': 'Ważone CIA',
   'Severity (bevindingen)': 'Ważność (ustalenia)',
   'CWE kiezen': 'Wybierz CWE',
   'Zoek op naam of CWE-nummer': 'Szukaj według nazwy lub numeru CWE',

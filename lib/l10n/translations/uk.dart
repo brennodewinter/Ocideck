@@ -84,6 +84,15 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Nieuwe bevinding (wizard)': 'Нове виявлення (майстер)',
+  'Bevinding maken': 'Створити виявлення',
+  'CIA-rating (scope-object)': 'Оцінка CIA (об\'єкт області)',
+  'Vertrouwelijkheid': 'Конфіденційність',
+  'Integriteit': 'Цілісність',
+  'Beschikbaarheid': 'Доступність',
+  'Detailslide toevoegen': 'Додати слайд деталей',
+  'Bewijsslide toevoegen': 'Додати слайд доказів',
+  'CIA-gewogen': 'Зважено за CIA',
   'Severity (bevindingen)': 'Серйозність (виявлення)',
   'CWE kiezen': 'Вибрати CWE',
   'Zoek op naam of CWE-nummer': 'Пошук за назвою або номером CWE',

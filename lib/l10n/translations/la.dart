@@ -85,6 +85,15 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Nieuwe bevinding (wizard)': 'Novum inventum (adiutor)',
+  'Bevinding maken': 'Inventum creare',
+  'CIA-rating (scope-object)': 'Aestimatio CIA (res ambitus)',
+  'Vertrouwelijkheid': 'Confidentialitas',
+  'Integriteit': 'Integritas',
+  'Beschikbaarheid': 'Disponibilitas',
+  'Detailslide toevoegen': 'Addere laminam particularem',
+  'Bewijsslide toevoegen': 'Addere laminam testimonii',
+  'CIA-gewogen': 'CIA ponderatum',
   'Severity (bevindingen)': 'Gravitas (inventa)',
   'CWE kiezen': 'CWE eligere',
   'Zoek op naam of CWE-nummer': 'Quaere nomine vel numero CWE',

@@ -83,6 +83,15 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Nieuwe bevinding (wizard)': 'Novi nalaz (čarobnjak)',
+  'Bevinding maken': 'Izradi nalaz',
+  'CIA-rating (scope-object)': 'CIA ocjena (objekt opsega)',
+  'Vertrouwelijkheid': 'Povjerljivost',
+  'Integriteit': 'Integritet',
+  'Beschikbaarheid': 'Dostupnost',
+  'Detailslide toevoegen': 'Dodaj slajd s detaljima',
+  'Bewijsslide toevoegen': 'Dodaj slajd s dokazima',
+  'CIA-gewogen': 'CIA-ponderirano',
   'Severity (bevindingen)': 'Ozbiljnost (nalazi)',
   'CWE kiezen': 'Odaberi CWE',
   'Zoek op naam of CWE-nummer': 'Pretraži po nazivu ili CWE broju',

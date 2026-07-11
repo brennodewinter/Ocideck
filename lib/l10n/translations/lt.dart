@@ -83,6 +83,15 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Nieuwe bevinding (wizard)': 'Naujas radinys (vediklis)',
+  'Bevinding maken': 'Sukurti radinį',
+  'CIA-rating (scope-object)': 'CIA vertinimas (aprėpties objektas)',
+  'Vertrouwelijkheid': 'Konfidencialumas',
+  'Integriteit': 'Vientisumas',
+  'Beschikbaarheid': 'Prieinamumas',
+  'Detailslide toevoegen': 'Pridėti detalių skaidrę',
+  'Bewijsslide toevoegen': 'Pridėti įrodymų skaidrę',
+  'CIA-gewogen': 'Pagal CIA pasvertas',
   'Severity (bevindingen)': 'Rimtumas (radiniai)',
   'CWE kiezen': 'Pasirinkti CWE',
   'Zoek op naam of CWE-nummer': 'Ieškoti pagal pavadinimą arba CWE numerį',

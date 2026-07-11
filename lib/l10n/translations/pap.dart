@@ -83,6 +83,15 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Nieuwe bevinding (wizard)': 'Deskubrimentu nobo (wizard)',
+  'Bevinding maken': 'Krea deskubrimentu',
+  'CIA-rating (scope-object)': 'Klasifikashon CIA (opheto di scope)',
+  'Vertrouwelijkheid': 'Konfidensialidat',
+  'Integriteit': 'Integridat',
+  'Beschikbaarheid': 'Disponibilidat',
+  'Detailslide toevoegen': 'Agregá slide di detaye',
+  'Bewijsslide toevoegen': 'Agregá slide di prueba',
+  'CIA-gewogen': 'Pondera pa CIA',
   'Severity (bevindingen)': 'Severidat (findingnan)',
   'CWE kiezen': 'Skohe CWE',
   'Zoek op naam of CWE-nummer': 'Buska pa nòmber o number CWE',

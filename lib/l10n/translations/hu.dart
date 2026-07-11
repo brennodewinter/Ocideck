@@ -83,6 +83,15 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Nieuwe bevinding (wizard)': 'Új megállapítás (varázsló)',
+  'Bevinding maken': 'Megállapítás létrehozása',
+  'CIA-rating (scope-object)': 'CIA-besorolás (hatókör-objektum)',
+  'Vertrouwelijkheid': 'Bizalmasság',
+  'Integriteit': 'Sértetlenség',
+  'Beschikbaarheid': 'Rendelkezésre állás',
+  'Detailslide toevoegen': 'Részletdia hozzáadása',
+  'Bewijsslide toevoegen': 'Bizonyítékdia hozzáadása',
+  'CIA-gewogen': 'CIA-súlyozott',
   'Severity (bevindingen)': 'Súlyosság (megállapítások)',
   'CWE kiezen': 'CWE kiválasztása',
   'Zoek op naam of CWE-nummer': 'Keresés név vagy CWE-szám alapján',
