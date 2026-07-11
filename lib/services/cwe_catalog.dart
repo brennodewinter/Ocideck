@@ -1,0 +1,510 @@
+import '../models/cwe_entry.dart';
+
+/// The offline CWE catalog (PENTEST_MIAUW §6/§10.6). This first increment ships
+/// a **curated, bundled subset** of the most pentest-relevant MITRE CWE
+/// weaknesses (mapping onto the OWASP Top 10 and common web/infra findings) as
+/// in-repo data — no asset wiring, no network. Selecting an entry in the finding
+/// editor fills the CWE field and, for empty sections, a deterministic
+/// description + remediation skeleton.
+///
+/// The **full** MITRE CWE 4.20 list (944 weaknesses) is a later, provisioned
+/// data pack (§6, `lib/services/secmodule/`); this catalog stays the always-on
+/// offline floor and every entry links back to `cwe.mitre.org`.
+class CweCatalog {
+  CweCatalog._();
+
+  static final CweCatalog instance = CweCatalog._();
+
+  /// All bundled entries, in catalog order.
+  List<CweEntry> get entries => _entries;
+
+  /// The entry for [id], or null when it is not in the bundled subset.
+  CweEntry? byId(int id) {
+    for (final entry in _entries) {
+      if (entry.id == id) return entry;
+    }
+    return null;
+  }
+
+  /// Entries whose id/name/description contain **every** whitespace-separated
+  /// term in [query] (case-insensitive). An empty query returns all entries, so
+  /// the picker shows the full list before the tester types.
+  List<CweEntry> search(String query) {
+    final terms = query.toLowerCase().split(RegExp(r'\s+'))
+      ..removeWhere((t) => t.isEmpty);
+    if (terms.isEmpty) return _entries;
+    return _entries
+        .where((e) => terms.every((term) => e.searchText.contains(term)))
+        .toList();
+  }
+}
+
+/// The bundled catalog. Names are the canonical MITRE weakness names; the
+/// description and recommendation are short, neutral English snippets (the
+/// deterministic floor, §10.6) — the tester specialises them per engagement.
+const List<CweEntry> _entries = [
+  CweEntry(
+    id: 79,
+    name:
+        "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    description:
+        'The application places untrusted input into web page output without '
+        'proper neutralization, so an attacker can inject script that runs in '
+        "other users' browsers (reflected, stored or DOM-based XSS).",
+    recommendation:
+        'Contextually output-encode all untrusted data (HTML body, attribute, '
+        'JavaScript, URL and CSS contexts), validate input against an '
+        'allow-list, and deploy a restrictive Content-Security-Policy.',
+  ),
+  CweEntry(
+    id: 89,
+    name:
+        "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    description:
+        'User-controllable input is concatenated into an SQL query without '
+        'proper neutralization, letting an attacker alter the query logic to '
+        'read, modify or destroy data or bypass authentication.',
+    recommendation:
+        'Use parameterized queries / prepared statements for all dynamic SQL, '
+        'apply least-privilege database accounts, and validate input against an '
+        'expected type and range.',
+  ),
+  CweEntry(
+    id: 78,
+    name:
+        "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    description:
+        'The application builds an operating-system command from untrusted '
+        'input without neutralization, so an attacker can execute arbitrary '
+        'commands on the host.',
+    recommendation:
+        'Avoid shelling out; use library calls or APIs instead. Where a command '
+        'is unavoidable, pass arguments as a parameter array (never a shell '
+        'string) and allow-list permitted values.',
+  ),
+  CweEntry(
+    id: 94,
+    name: "Improper Control of Generation of Code ('Code Injection')",
+    description:
+        'Untrusted input is incorporated into code that the application then '
+        'evaluates or executes, allowing an attacker to run arbitrary code in '
+        'the application context.',
+    recommendation:
+        'Never evaluate untrusted input. Remove dynamic-evaluation constructs '
+        '(eval, deserialization of code, template injection sinks) and use safe, '
+        'data-only interfaces with strict input validation.',
+  ),
+  CweEntry(
+    id: 90,
+    name:
+        "Improper Neutralization of Special Elements used in an LDAP Query ('LDAP Injection')",
+    description:
+        'Untrusted input is placed into an LDAP query without neutralization, '
+        'letting an attacker modify the query to bypass authentication or read '
+        'unauthorized directory data.',
+    recommendation:
+        'Escape LDAP special characters per RFC 4515, use parameterized '
+        'directory APIs, and validate input against an allow-list before it '
+        'reaches the query.',
+  ),
+  CweEntry(
+    id: 22,
+    name:
+        "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+    description:
+        'The application uses untrusted input to build a file path without '
+        "neutralizing sequences such as '../', so an attacker can read or write "
+        'files outside the intended directory.',
+    recommendation:
+        'Resolve the canonical path and verify it stays within an allow-listed '
+        'base directory; reject path separators and traversal sequences in '
+        'user-supplied file names.',
+  ),
+  CweEntry(
+    id: 434,
+    name: 'Unrestricted Upload of File with Dangerous Type',
+    description:
+        'The application lets users upload files without adequately restricting '
+        'the type or content, so an attacker can upload executable or malicious '
+        'files and have them served or run.',
+    recommendation:
+        'Validate file type by content (not just extension), store uploads '
+        'outside the web root, serve them with a safe content type, and '
+        'generate non-executable server-side file names.',
+  ),
+  CweEntry(
+    id: 352,
+    name: "Cross-Site Request Forgery (CSRF)",
+    description:
+        'The application cannot distinguish a deliberate user request from one '
+        "forged by a malicious site, so an attacker can cause state-changing "
+        "actions using the victim's authenticated session.",
+    recommendation:
+        'Require an unpredictable anti-CSRF token on every state-changing '
+        "request, set cookies with SameSite, and verify the Origin/Referer for "
+        'sensitive operations.',
+  ),
+  CweEntry(
+    id: 601,
+    name: "URL Redirection to Untrusted Site ('Open Redirect')",
+    description:
+        'The application redirects to a URL taken from untrusted input without '
+        'validation, so an attacker can send victims to a malicious site under '
+        'a trusted domain name.',
+    recommendation:
+        'Avoid user-controlled redirect targets; where needed, map input to an '
+        'allow-list of permitted destinations and reject absolute or external '
+        'URLs.',
+  ),
+  CweEntry(
+    id: 611,
+    name: 'Improper Restriction of XML External Entity Reference',
+    description:
+        'The XML parser resolves external entities defined in untrusted input '
+        '(XXE), letting an attacker read local files, reach internal services '
+        'or exhaust resources.',
+    recommendation:
+        'Disable DTD processing and external entity resolution in the XML '
+        'parser, or use a hardened parser configuration; prefer less complex '
+        'data formats where possible.',
+  ),
+  CweEntry(
+    id: 918,
+    name: 'Server-Side Request Forgery (SSRF)',
+    description:
+        'The application fetches a URL supplied by the user without sufficient '
+        'validation, so an attacker can make the server issue requests to '
+        'internal or unintended systems.',
+    recommendation:
+        'Allow-list permitted hosts/schemes, resolve and validate the target '
+        'before connecting, block requests to internal/link-local ranges, and '
+        'disable unneeded URL schemes and redirects.',
+  ),
+  CweEntry(
+    id: 502,
+    name: 'Deserialization of Untrusted Data',
+    description:
+        'The application deserializes untrusted data without sufficient '
+        'verification, allowing an attacker to tamper with object state or, '
+        'depending on the gadget chain, execute code.',
+    recommendation:
+        'Avoid deserializing untrusted data; use data-only formats (e.g. JSON '
+        'without type resolution), enforce strict type allow-lists, and verify '
+        'integrity with a signature before deserializing.',
+  ),
+  CweEntry(
+    id: 20,
+    name: 'Improper Input Validation',
+    description:
+        'The application does not validate, or incorrectly validates, input '
+        'that influences control flow or data, which can lead to a range of '
+        'downstream weaknesses.',
+    recommendation:
+        'Validate all input against a strict allow-list of expected type, '
+        'length, format and range as close to the entry point as possible, and '
+        'reject rather than sanitise where feasible.',
+  ),
+  CweEntry(
+    id: 116,
+    name: 'Improper Encoding or Escaping of Output',
+    description:
+        'The application does not correctly encode or escape output for the '
+        'consuming context, so special characters are interpreted as control '
+        'data (injection into HTML, SQL, shells, etc.).',
+    recommendation:
+        'Apply context-aware output encoding/escaping for every downstream '
+        'interpreter, and prefer structured APIs (parameterized queries, safe '
+        'templating) over manual string building.',
+  ),
+  CweEntry(
+    id: 287,
+    name: 'Improper Authentication',
+    description:
+        'The application does not correctly verify a claimed identity, so an '
+        'attacker can authenticate as another user or bypass authentication '
+        'controls.',
+    recommendation:
+        'Use a vetted authentication framework, enforce strong credential and '
+        'session handling, add multi-factor authentication for sensitive access, '
+        'and fail securely on every path.',
+  ),
+  CweEntry(
+    id: 306,
+    name: 'Missing Authentication for Critical Function',
+    description:
+        'A function that performs a sensitive action does not require '
+        'authentication, so any actor who can reach it can invoke it.',
+    recommendation:
+        'Require authentication (and appropriate authorization) on every '
+        'sensitive endpoint, and verify it server-side rather than relying on '
+        'the UI hiding the function.',
+  ),
+  CweEntry(
+    id: 862,
+    name: 'Missing Authorization',
+    description:
+        'The application does not check whether the authenticated user is '
+        'permitted to perform the requested action, allowing unauthorized '
+        'access to data or functions.',
+    recommendation:
+        'Enforce authorization checks on every request server-side, deny by '
+        'default, and centralise access-control logic so it cannot be bypassed '
+        'by direct requests.',
+  ),
+  CweEntry(
+    id: 863,
+    name: 'Incorrect Authorization',
+    description:
+        'The application performs an authorization check but does so '
+        'incorrectly, so a user can access resources or actions beyond their '
+        'intended permissions.',
+    recommendation:
+        'Review the authorization model for logic flaws, test it against each '
+        'role, and validate ownership/scope of the target object on every '
+        'request.',
+  ),
+  CweEntry(
+    id: 639,
+    name: 'Authorization Bypass Through User-Controlled Key',
+    description:
+        'The application exposes a direct reference to an object (an id in the '
+        'request) and authorizes on that key without checking ownership, '
+        'enabling insecure direct object reference (IDOR).',
+    recommendation:
+        'Verify that the authenticated user owns or may access the referenced '
+        'object on every request; prefer indirect, per-session references and '
+        'deny by default.',
+  ),
+  CweEntry(
+    id: 284,
+    name: 'Improper Access Control',
+    description:
+        'The application does not restrict, or incorrectly restricts, access to '
+        'a resource from an unauthorized actor.',
+    recommendation:
+        'Define and enforce a least-privilege access-control policy server-side '
+        'for every resource and action, deny by default, and test it per role.',
+  ),
+  CweEntry(
+    id: 269,
+    name: 'Improper Privilege Management',
+    description:
+        'The application does not properly assign, track or revoke privileges, '
+        'so an actor can gain more privilege than intended.',
+    recommendation:
+        'Grant least privilege, separate duties, drop elevated privileges as '
+        'soon as they are no longer needed, and revoke access promptly on role '
+        'change.',
+  ),
+  CweEntry(
+    id: 732,
+    name: 'Incorrect Permission Assignment for Critical Resource',
+    description:
+        'A security-critical resource is created with permissions that allow '
+        'unintended actors to read or modify it.',
+    recommendation:
+        'Set restrictive permissions on files, directories, registry keys and '
+        'other resources by default, and verify effective permissions in the '
+        'deployment environment.',
+  ),
+  CweEntry(
+    id: 798,
+    name: 'Use of Hard-coded Credentials',
+    description:
+        'The application contains hard-coded credentials (passwords, keys) in '
+        'source or configuration, giving anyone with access to the artifact a '
+        'usable secret.',
+    recommendation:
+        'Remove hard-coded secrets; load credentials from a secrets manager or '
+        'protected configuration at runtime, and rotate any secret that has '
+        'been exposed.',
+  ),
+  CweEntry(
+    id: 521,
+    name: 'Weak Password Requirements',
+    description:
+        'The application allows weak passwords, making credentials easy to '
+        'guess or brute-force.',
+    recommendation:
+        'Enforce a modern password policy (sufficient length, screening against '
+        'breached-password lists), avoid arbitrary composition rules, and '
+        'support multi-factor authentication.',
+  ),
+  CweEntry(
+    id: 307,
+    name: 'Improper Restriction of Excessive Authentication Attempts',
+    description:
+        'The application does not limit failed authentication attempts, '
+        'allowing brute-force or credential-stuffing attacks.',
+    recommendation:
+        'Rate-limit and progressively delay or lock out after repeated '
+        'failures, monitor for credential-stuffing patterns, and add '
+        'multi-factor authentication.',
+  ),
+  CweEntry(
+    id: 522,
+    name: 'Insufficiently Protected Credentials',
+    description:
+        'The application stores or transmits credentials using a method that '
+        'does not sufficiently protect them from retrieval.',
+    recommendation:
+        'Store password verifiers with a strong adaptive hash, transmit '
+        'credentials only over TLS, and never log or cache them in recoverable '
+        'form.',
+  ),
+  CweEntry(
+    id: 916,
+    name: 'Use of Password Hash With Insufficient Computational Effort',
+    description:
+        'Passwords are hashed with a fast or unsalted algorithm, so captured '
+        'hashes can be cracked cheaply at scale.',
+    recommendation:
+        'Use a memory-hard, salted password hash (e.g. argon2id, scrypt or '
+        'bcrypt) with parameters tuned to current hardware, and re-hash on the '
+        'next successful login when parameters change.',
+  ),
+  CweEntry(
+    id: 311,
+    name: 'Missing Encryption of Sensitive Data',
+    description:
+        'Sensitive data is stored or transmitted without encryption, exposing '
+        'it to anyone who can access the storage or the channel.',
+    recommendation:
+        'Encrypt sensitive data at rest and in transit with vetted algorithms, '
+        'classify data to decide what must be protected, and manage keys '
+        'securely.',
+  ),
+  CweEntry(
+    id: 319,
+    name: 'Cleartext Transmission of Sensitive Information',
+    description:
+        'The application transmits sensitive information in cleartext, letting '
+        'an attacker on the network path read or modify it.',
+    recommendation:
+        'Require TLS for all sensitive traffic, enable HSTS, disable cleartext '
+        'fallbacks, and use certificate validation on every endpoint.',
+  ),
+  CweEntry(
+    id: 327,
+    name: 'Use of a Broken or Risky Cryptographic Algorithm',
+    description:
+        'The application relies on a weak or outdated cryptographic algorithm '
+        'or mode, undermining the confidentiality or integrity it is meant to '
+        'provide.',
+    recommendation:
+        'Use current, standard algorithms and modes through a vetted library, '
+        'avoid deprecated primitives (MD5, SHA-1, DES, ECB), and keep '
+        'cryptographic agility for future upgrades.',
+  ),
+  CweEntry(
+    id: 295,
+    name: 'Improper Certificate Validation',
+    description:
+        'The application does not validate, or incorrectly validates, a TLS '
+        'certificate, so an attacker can present a fraudulent certificate and '
+        'intercept the connection.',
+    recommendation:
+        'Validate the full certificate chain, hostname and expiry against a '
+        'trusted store; never disable verification, and consider pinning for '
+        'high-value connections.',
+  ),
+  CweEntry(
+    id: 200,
+    name: 'Exposure of Sensitive Information to an Unauthorized Actor',
+    description:
+        'The application discloses sensitive information to actors who are not '
+        'explicitly authorized to access it.',
+    recommendation:
+        'Return only the data each actor needs, remove sensitive details from '
+        'responses/headers/metadata, and apply authorization checks before '
+        'disclosing any sensitive field.',
+  ),
+  CweEntry(
+    id: 209,
+    name: 'Generation of Error Message Containing Sensitive Information',
+    description:
+        'Error messages reveal sensitive details (stack traces, queries, paths, '
+        'secrets) that help an attacker understand and exploit the system.',
+    recommendation:
+        'Return generic error messages to clients, log the detail server-side '
+        'only, and disable verbose/debug error output in production.',
+  ),
+  CweEntry(
+    id: 384,
+    name: 'Session Fixation',
+    description:
+        'The application does not renew the session identifier at '
+        'authentication, so an attacker who fixes a known session id can hijack '
+        "the victim's authenticated session.",
+    recommendation:
+        'Issue a fresh session identifier on every privilege change '
+        '(especially login), invalidate the old one, and bind sessions to '
+        'secure, HttpOnly cookies.',
+  ),
+  CweEntry(
+    id: 613,
+    name: 'Insufficient Session Expiration',
+    description:
+        'Sessions remain valid too long or are not invalidated on logout, '
+        'widening the window in which a captured session can be reused.',
+    recommendation:
+        'Enforce absolute and idle session timeouts, invalidate sessions '
+        'server-side on logout and password change, and keep lifetimes '
+        'proportionate to the risk.',
+  ),
+  CweEntry(
+    id: 614,
+    name: "Sensitive Cookie in HTTPS Session Without 'Secure' Attribute",
+    description:
+        'A session cookie is set without the Secure attribute, so it can be '
+        'sent over an unencrypted connection and captured by a network '
+        'attacker.',
+    recommendation:
+        'Set the Secure attribute on all sensitive cookies, serve the site '
+        'exclusively over HTTPS, and combine with HttpOnly and SameSite.',
+  ),
+  CweEntry(
+    id: 1004,
+    name: "Sensitive Cookie Without 'HttpOnly' Flag",
+    description:
+        'A sensitive cookie is set without the HttpOnly attribute, so '
+        'client-side script can read it — for example to steal a session via '
+        'XSS.',
+    recommendation:
+        'Set the HttpOnly attribute on all sensitive cookies so they are not '
+        'exposed to JavaScript, alongside Secure and SameSite.',
+  ),
+  CweEntry(
+    id: 1021,
+    name: 'Improper Restriction of Rendered UI Layers or Frames',
+    description:
+        'The application can be framed by another site, enabling clickjacking '
+        "where a victim's clicks are hijacked over a hidden overlay.",
+    recommendation:
+        "Send a restrictive frame-ancestors Content-Security-Policy (or "
+        'X-Frame-Options), and require confirmation for sensitive actions.',
+  ),
+  CweEntry(
+    id: 400,
+    name: 'Uncontrolled Resource Consumption',
+    description:
+        'The application does not control the amount of a resource an actor can '
+        'consume, allowing denial of service by exhausting CPU, memory, '
+        'connections or storage.',
+    recommendation:
+        'Apply rate limits, quotas and timeouts, cap request/response sizes, '
+        'and release resources deterministically under load.',
+  ),
+  CweEntry(
+    id: 770,
+    name: 'Allocation of Resources Without Limits or Throttling',
+    description:
+        'The application allocates resources based on untrusted input without '
+        'limits, so an attacker can force excessive allocation and exhaust the '
+        'system.',
+    recommendation:
+        'Enforce upper bounds and throttling on resource allocation driven by '
+        'input, validate requested sizes/counts, and reject requests that '
+        'exceed safe limits.',
+  ),
+];
