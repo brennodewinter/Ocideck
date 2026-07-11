@@ -81,6 +81,8 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Aangepast…': 'SeH…',
+  'Aangepaste tijd': 'SeH poH',
   'Uit sjabloon…': 'sablonvo\'…',
   'Sjabloon kiezen': 'sablon yIwIv',
   'Scope-object': 'HevmeH Doch',

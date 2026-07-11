@@ -85,6 +85,8 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Aangepast…': 'Własny…',
+  'Aangepaste tijd': 'Własny czas',
   'Uit sjabloon…': 'Z szablonu…',
   'Sjabloon kiezen': 'Wybierz szablon',
   'Scope-object': 'Obiekt zakresu',

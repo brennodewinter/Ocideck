@@ -84,6 +84,8 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Aangepast…': 'Personalizado…',
+  'Aangepaste tijd': 'Tiempo personalizado',
   'Uit sjabloon…': 'Desde plantilla…',
   'Sjabloon kiezen': 'Elegir plantilla',
   'Scope-object': 'Objeto del alcance',

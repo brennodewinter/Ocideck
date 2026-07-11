@@ -83,6 +83,8 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Aangepast…': 'Oma…',
+  'Aangepaste tijd': 'Oma aika',
   'Uit sjabloon…': 'Mallista…',
   'Sjabloon kiezen': 'Valitse malli',
   'Scope-object': 'Kohde (scope)',

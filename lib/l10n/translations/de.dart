@@ -83,6 +83,8 @@ const _stringsDe = {
 };
 
 const _dutchSourceDe = {
+  'Aangepast…': 'Benutzerdefiniert…',
+  'Aangepaste tijd': 'Benutzerdefinierte Zeit',
   'Uit sjabloon…': 'Aus Vorlage…',
   'Sjabloon kiezen': 'Vorlage wählen',
   'Scope-object': 'Scope-Objekt',

@@ -83,6 +83,8 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Aangepast…': 'Eigen…',
+  'Aangepaste tijd': 'Eigen tiid',
   'Uit sjabloon…': 'Ut sjabloan…',
   'Sjabloon kiezen': 'Sjabloan kieze',
   'Scope-object': 'Scope-objekt',

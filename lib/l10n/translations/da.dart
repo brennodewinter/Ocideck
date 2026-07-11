@@ -83,6 +83,8 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Aangepast…': 'Brugerdefineret…',
+  'Aangepaste tijd': 'Brugerdefineret tid',
   'Uit sjabloon…': 'Fra skabelon…',
   'Sjabloon kiezen': 'Vælg skabelon',
   'Scope-object': 'Scope-objekt',

@@ -83,6 +83,8 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Aangepast…': 'Eigeni…',
+  'Aangepaste tijd': 'Eigeni Ziit',
   'Uit sjabloon…': 'Us Vorlag…',
   'Sjabloon kiezen': 'Vorlag uswähle',
   'Scope-object': 'Scope-Objäkt',

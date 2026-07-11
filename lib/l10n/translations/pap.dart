@@ -83,6 +83,8 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Aangepast…': 'Propio…',
+  'Aangepaste tijd': 'Tempo propio',
   'Uit sjabloon…': 'For di plantia…',
   'Sjabloon kiezen': 'Skohe plantia',
   'Scope-object': 'Opheto di scope',

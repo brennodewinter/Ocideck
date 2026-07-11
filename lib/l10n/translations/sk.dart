@@ -84,6 +84,8 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Aangepast…': 'Vlastné…',
+  'Aangepaste tijd': 'Vlastný čas',
   'Uit sjabloon…': 'Zo šablóny…',
   'Sjabloon kiezen': 'Vybrať šablónu',
   'Scope-object': 'Objekt rozsahu',

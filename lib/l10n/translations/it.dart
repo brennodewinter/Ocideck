@@ -83,6 +83,8 @@ const _stringsIt = {
 };
 
 const _dutchSourceIt = {
+  'Aangepast…': 'Personalizzato…',
+  'Aangepaste tijd': 'Tempo personalizzato',
   'Uit sjabloon…': 'Da modello…',
   'Sjabloon kiezen': 'Scegli un modello',
   'Scope-object': 'Oggetto dell\'ambito',

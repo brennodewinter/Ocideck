@@ -84,6 +84,8 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Aangepast…': 'Власний…',
+  'Aangepaste tijd': 'Власний час',
   'Uit sjabloon…': 'З шаблону…',
   'Sjabloon kiezen': 'Вибрати шаблон',
   'Scope-object': 'Об\'єкт області',

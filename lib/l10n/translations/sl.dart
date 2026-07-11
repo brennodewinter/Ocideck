@@ -83,6 +83,8 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Aangepast…': 'Po meri…',
+  'Aangepaste tijd': 'Čas po meri',
   'Uit sjabloon…': 'Iz predloge…',
   'Sjabloon kiezen': 'Izberi predlogo',
   'Scope-object': 'Predmet obsega',

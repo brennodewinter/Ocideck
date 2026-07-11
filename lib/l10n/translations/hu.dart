@@ -83,6 +83,8 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Aangepast…': 'Egyéni…',
+  'Aangepaste tijd': 'Egyéni idő',
   'Uit sjabloon…': 'Sablonból…',
   'Sjabloon kiezen': 'Sablon választása',
   'Scope-object': 'Hatókör objektuma',
