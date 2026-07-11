@@ -82,6 +82,18 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Pilti ei õnnestunud AI-analüüsiks lugeda.',
+  'Het model gaf geen alt-tekst terug.': 'Mudel ei tagastanud alt-teksti.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Alt-tekst on juba olemas. Kas asendada see AI mustandiga?',
+  'Vervangen': 'Asenda',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'AI-abi pole saadaval. Kontrolli seadeid.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'AI-päring ebaõnnestus (mudel pole laaditud või server pole kättesaadav).',
+  'Bezig met AI-analyse…': 'AI-analüüs käib…',
+  'Stel alt-tekst voor (AI)': 'Paku alt-teksti (AI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Alt-tekst (kirjeldus ekraanilugejatele)',
   'Hoog': 'Kõrge',

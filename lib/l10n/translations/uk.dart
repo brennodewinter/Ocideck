@@ -84,6 +84,19 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Не вдалося прочитати зображення для аналізу ШІ.',
+  'Het model gaf geen alt-tekst terug.':
+      'Модель не повернула альтернативний текст.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Альтернативний текст уже є. Замінити його чернеткою ШІ?',
+  'Vervangen': 'Замінити',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'Допомога ШІ недоступна. Перевірте налаштування.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'Виклик ШІ не вдався (модель не завантажена або сервер недоступний).',
+  'Bezig met AI-analyse…': 'Аналіз за допомогою ШІ…',
+  'Stel alt-tekst voor (AI)': 'Запропонувати альтернативний текст (ШІ)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Альтернативний текст (опис для програм зчитування з екрана)',
   'Hoog': 'Високий',

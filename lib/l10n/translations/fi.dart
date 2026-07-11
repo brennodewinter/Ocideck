@@ -83,6 +83,18 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Kuvaa ei voitu lukea tekoälyanalyysiä varten.',
+  'Het model gaf geen alt-tekst terug.': 'Malli ei palauttanut alt-tekstiä.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Alt-teksti on jo olemassa. Korvataanko se tekoälyn luonnoksella?',
+  'Vervangen': 'Korvaa',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'Tekoälyapu ei ole käytettävissä. Tarkista asetukset.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'Tekoälypyyntö epäonnistui (mallia ei ladattu tai palvelin ei tavoitettavissa).',
+  'Bezig met AI-analyse…': 'Analysoidaan tekoälyllä…',
+  'Stel alt-tekst voor (AI)': 'Ehdota alt-tekstiä (tekoäly)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Vaihtoehtoinen teksti (kuvaus ruudunlukijoille)',
   'Hoog': 'Korkea',

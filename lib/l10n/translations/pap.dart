@@ -83,6 +83,19 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'No por a lesa e imagen pa análisis di IA.',
+  'Het model gaf geen alt-tekst terug.':
+      'E modelo no a duna teksto alternativo bèk.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Ya tin teksto alternativo. Remplasá kuné ku e konsepto di IA?',
+  'Vervangen': 'Remplasá',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'Asistensia di IA no ta disponibel. Chèk e konfigurashon.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'E yamada di IA a frakasá (modelo no kargá of server no alkansabel).',
+  'Bezig met AI-analyse…': 'Ta analisá ku IA…',
+  'Stel alt-tekst voor (AI)': 'Sugerí teksto alternativo (IA)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Teksto alternativo (deskripshon pa lektor di pantaya)',
   'Hoog': 'Haltu',

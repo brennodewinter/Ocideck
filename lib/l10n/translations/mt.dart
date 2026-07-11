@@ -84,6 +84,19 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Ma setgħetx tinqara l-immaġni għall-analiżi tal-IA.',
+  'Het model gaf geen alt-tekst terug.':
+      'Il-mudell ma rritornax test alternattiv.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Diġà hemm test alternattiv. Tibdlu bl-abbozz tal-IA?',
+  'Vervangen': 'Ibdel',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'L-għajnuna tal-IA mhijiex disponibbli. Iċċekkja s-settings.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'Is-sejħa tal-IA falliet (il-mudell mhux mgħobbi jew is-server mhux aċċessibbli).',
+  'Bezig met AI-analyse…': 'Analiżi bl-IA…',
+  'Stel alt-tekst voor (AI)': 'Issuġġerixxi test alternattiv (IA)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Test alternattiv (deskrizzjoni għall-qarrejja tal-iskrin)',
   'Hoog': 'Għoli',

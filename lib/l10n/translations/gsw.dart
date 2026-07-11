@@ -83,6 +83,18 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'S Bild het nöd chöne glääse wärde für d KI-Analyse.',
+  'Het model gaf geen alt-tekst terug.': 'S Modäll het kein Alt-Text zruggäh.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Es git scho Alt-Text. Mit em KI-Entwurf ersetze?',
+  'Vervangen': 'Ersetze',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'KI-Hilf isch nöd verfüegbar. Prüef d Iistellige.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'De KI-Ufruef isch fählgschlage (Modäll nöd glade oder Server nöd erreichbar).',
+  'Bezig met AI-analyse…': 'KI-Analyse lauft…',
+  'Stel alt-tekst voor (AI)': 'Alt-Text vorschla (KI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Alt-Text (Beschriibig für Screenreader)',
   'Hoog': 'Hoch',

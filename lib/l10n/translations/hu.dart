@@ -83,6 +83,19 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'A kép nem volt olvasható az AI-elemzéshez.',
+  'Het model gaf geen alt-tekst terug.':
+      'A modell nem adott vissza alt szöveget.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Már van alt szöveg. Lecseréli az AI-vázlatra?',
+  'Vervangen': 'Csere',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'Az AI-segítség nem érhető el. Ellenőrizd a beállításokat.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'Az AI-hívás sikertelen (a modell nincs betöltve vagy a szerver elérhetetlen).',
+  'Bezig met AI-analyse…': 'Elemzés AI-val…',
+  'Stel alt-tekst voor (AI)': 'Alt szöveg javaslata (AI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Alternatív szöveg (leírás képernyőolvasóknak)',
   'Hoog': 'Magas',

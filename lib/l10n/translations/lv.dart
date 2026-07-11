@@ -83,6 +83,18 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Attēlu neizdevās nolasīt MI analīzei.',
+  'Het model gaf geen alt-tekst terug.': 'Modelis neatgrieza alt tekstu.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Alt teksts jau pastāv. Aizstāt to ar MI melnrakstu?',
+  'Vervangen': 'Aizstāt',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'MI palīdzība nav pieejama. Pārbaudiet iestatījumus.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'MI pieprasījums neizdevās (modelis nav ielādēts vai serveris nav sasniedzams).',
+  'Bezig met AI-analyse…': 'Analizē ar MI…',
+  'Stel alt-tekst voor (AI)': 'Ieteikt alt tekstu (MI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Alternatīvais teksts (apraksts ekrāna lasītājiem)',
   'Hoog': 'Augsts',

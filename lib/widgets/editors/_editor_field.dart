@@ -7,6 +7,7 @@ import '../../models/slide.dart';
 import '../../services/image_service.dart';
 import '../../state/deck_provider.dart';
 import '../../state/tabs_provider.dart';
+import 'alt_text_field.dart';
 import '../../l10n/slide_quality_localization.dart';
 import '../../models/markdown_validation.dart';
 import '../../state/deck_quality_provider.dart';
@@ -346,6 +347,13 @@ class ImagePickerBar extends ConsumerWidget {
   /// background images that need no alt).
   final String imageAltText;
   final ValueChanged<String>? onAltTextChanged;
+
+  /// Applies an **AI-drafted** alt-text (AI_ASSIST §6): distinct from
+  /// [onAltTextChanged] so the editor can set the AI-provenance marker
+  /// (`imageAltText` in `aiAssistedFields`) that blocks sealing until reviewed.
+  /// Non-null enables the "suggest alt-text" button (still gated on the AI toggle
+  /// being on).
+  final ValueChanged<String>? onAltTextSuggested;
   final String label;
   final String captionField;
 
@@ -362,6 +370,7 @@ class ImagePickerBar extends ConsumerWidget {
     this.onCaptionChanged,
     this.imageAltText = '',
     this.onAltTextChanged,
+    this.onAltTextSuggested,
     this.label = 'Geen afbeelding gekozen',
     this.captionField = 'imageCaption',
   });
@@ -572,79 +581,16 @@ class ImagePickerBar extends ConsumerWidget {
         // Alt-tekstveld (WCAG 1.1.1, AI_ASSIST §6.1)
         if (imagePath.isNotEmpty && onAltTextChanged != null) ...[
           const SizedBox(height: 8),
-          _AltTextField(
+          AltTextField(
             key: ValueKey('alt:$imagePath'),
             altText: imageAltText,
+            imagePath: imagePath,
+            captionBasePath: captionBasePath,
             onChanged: onAltTextChanged!,
+            onSuggested: onAltTextSuggested,
           ),
         ],
       ],
-    );
-  }
-}
-
-/// A plain per-usage alt-text field (WCAG 1.1.1). Unlike [_CaptionField] there is
-/// no sidecar: the value lives on the slide ([Slide.imageAltText]) and travels in
-/// the `.md`. A later step adds an AI "Suggest" button + a decorative toggle here.
-class _AltTextField extends StatefulWidget {
-  final String altText;
-  final ValueChanged<String> onChanged;
-
-  const _AltTextField({
-    super.key,
-    required this.altText,
-    required this.onChanged,
-  });
-
-  @override
-  State<_AltTextField> createState() => _AltTextFieldState();
-}
-
-class _AltTextFieldState extends State<_AltTextField> {
-  late final TextEditingController _ctrl;
-
-  @override
-  void initState() {
-    super.initState();
-    _ctrl = TextEditingController(text: widget.altText)
-      ..addListener(() => widget.onChanged(_ctrl.text));
-  }
-
-  @override
-  void dispose() {
-    _ctrl.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    return TextField(
-      controller: _ctrl,
-      minLines: 1,
-      maxLines: 3,
-      decoration: InputDecoration(
-        hintText: l10n.d('Alt-tekst (beschrijving voor schermlezers)'),
-        hintStyle: const TextStyle(fontSize: 12, color: AppTheme.blueGray2),
-        prefixIcon: Icon(
-          Icons.accessibility_new_outlined,
-          size: 16,
-          color: AppTheme.slate500,
-        ),
-        isDense: true,
-        contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-        filled: true,
-        fillColor: AppTheme.slate50,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(6),
-          borderSide: BorderSide(color: AppTheme.slate300),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(6),
-          borderSide: BorderSide(color: AppTheme.slate300),
-        ),
-      ),
-      style: const TextStyle(fontSize: 12),
     );
   }
 }

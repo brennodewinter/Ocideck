@@ -83,6 +83,19 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Billedet kunne ikke læses til AI-analyse.',
+  'Het model gaf geen alt-tekst terug.':
+      'Modellen returnerede ingen alt-tekst.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Der er allerede alt-tekst. Erstat den med AI-udkastet?',
+  'Vervangen': 'Erstat',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'AI-assistance er ikke tilgængelig. Tjek indstillingerne.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'AI-kaldet mislykkedes (model ikke indlæst eller server utilgængelig).',
+  'Bezig met AI-analyse…': 'Analyserer med AI…',
+  'Stel alt-tekst voor (AI)': 'Foreslå alt-tekst (AI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Alt-tekst (beskrivelse for skærmlæsere)',
   'Hoog': 'Høj',

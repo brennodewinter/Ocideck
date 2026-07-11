@@ -83,6 +83,19 @@ const _stringsDe = {
 };
 
 const _dutchSourceDe = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Das Bild konnte für die KI-Analyse nicht gelesen werden.',
+  'Het model gaf geen alt-tekst terug.':
+      'Das Modell hat keinen Alt-Text zurückgegeben.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Es gibt bereits Alt-Text. Durch den KI-Entwurf ersetzen?',
+  'Vervangen': 'Ersetzen',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'KI-Unterstützung ist nicht verfügbar. Prüfe die Einstellungen.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'Die KI-Anfrage ist fehlgeschlagen (Modell nicht geladen oder Server nicht erreichbar).',
+  'Bezig met AI-analyse…': 'KI-Analyse läuft…',
+  'Stel alt-tekst voor (AI)': 'Alt-Text vorschlagen (KI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Alt-Text (Beschreibung für Screenreader)',
   'Hoog': 'Hoch',

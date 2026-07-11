@@ -161,8 +161,16 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
           onCaptionChanged: (caption) =>
               widget.onUpdate(widget.slide.copyWith(imageCaption: caption)),
           imageAltText: widget.slide.imageAltText,
-          onAltTextChanged: (alt) =>
-              widget.onUpdate(widget.slide.copyWith(imageAltText: alt)),
+          onAltTextChanged: (alt) => widget.onUpdate(
+            widget.slide
+                .copyWith(imageAltText: alt)
+                .withAiAssistedField('imageAltText', present: false),
+          ),
+          onAltTextSuggested: (alt) => widget.onUpdate(
+            widget.slide
+                .copyWith(imageAltText: alt)
+                .withAiAssistedField('imageAltText', present: true),
+          ),
         ),
         _cropButton(false),
         const SizedBox(height: 20),
@@ -184,8 +192,16 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
           onCaptionChanged: (caption) =>
               widget.onUpdate(widget.slide.copyWith(imageCaption2: caption)),
           imageAltText: widget.slide.imageAltText2,
-          onAltTextChanged: (alt) =>
-              widget.onUpdate(widget.slide.copyWith(imageAltText2: alt)),
+          onAltTextChanged: (alt) => widget.onUpdate(
+            widget.slide
+                .copyWith(imageAltText2: alt)
+                .withAiAssistedField('imageAltText2', present: false),
+          ),
+          onAltTextSuggested: (alt) => widget.onUpdate(
+            widget.slide
+                .copyWith(imageAltText2: alt)
+                .withAiAssistedField('imageAltText2', present: true),
+          ),
         ),
         _cropButton(true),
         const SizedBox(height: 20),

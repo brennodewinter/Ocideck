@@ -84,6 +84,18 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Obrázok sa nepodarilo načítať pre AI analýzu.',
+  'Het model gaf geen alt-tekst terug.': 'Model nevrátil žiadny alt text.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Alt text už existuje. Nahradiť ho AI konceptom?',
+  'Vervangen': 'Nahradiť',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'AI asistencia nie je dostupná. Skontrolujte nastavenia.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'Volanie AI zlyhalo (model nenačítaný alebo server nedostupný).',
+  'Bezig met AI-analyse…': 'Analýza pomocou AI…',
+  'Stel alt-tekst voor (AI)': 'Navrhnúť alt text (AI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Alternatívny text (popis pre čítačky obrazovky)',
   'Hoog': 'Vysoké',

@@ -83,6 +83,19 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Δεν ήταν δυνατή η ανάγνωση της εικόνας για ανάλυση AI.',
+  'Het model gaf geen alt-tekst terug.':
+      'Το μοντέλο δεν επέστρεψε εναλλακτικό κείμενο.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Υπάρχει ήδη εναλλακτικό κείμενο. Αντικατάσταση με το προσχέδιο AI;',
+  'Vervangen': 'Αντικατάσταση',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'Η βοήθεια AI δεν είναι διαθέσιμη. Ελέγξτε τις ρυθμίσεις.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'Η κλήση AI απέτυχε (το μοντέλο δεν φορτώθηκε ή ο διακομιστής δεν είναι προσβάσιμος).',
+  'Bezig met AI-analyse…': 'Ανάλυση με AI…',
+  'Stel alt-tekst voor (AI)': 'Πρόταση εναλλακτικού κειμένου (AI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Εναλλακτικό κείμενο (περιγραφή για αναγνώστες οθόνης)',
   'Hoog': 'Υψηλό',

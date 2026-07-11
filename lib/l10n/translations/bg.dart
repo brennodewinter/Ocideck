@@ -84,6 +84,18 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Изображението не можа да бъде прочетено за AI анализ.',
+  'Het model gaf geen alt-tekst terug.': 'Моделът не върна алтернативен текст.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Вече има алтернативен текст. Да се замени ли с AI черновата?',
+  'Vervangen': 'Замяна',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'AI помощта не е налична. Проверете настройките.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'AI заявката е неуспешна (моделът не е зареден или сървърът е недостъпен).',
+  'Bezig met AI-analyse…': 'Анализиране с AI…',
+  'Stel alt-tekst voor (AI)': 'Предложи алтернативен текст (AI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Алтернативен текст (описание за екранни четци)',
   'Hoog': 'Високо',

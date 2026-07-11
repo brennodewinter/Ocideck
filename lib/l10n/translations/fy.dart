@@ -83,6 +83,18 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Koe de ôfbylding net lêze foar AI-analyze.',
+  'Het model gaf geen alt-tekst terug.': 'It model joech gjin alt-tekst werom.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Der stiet al alt-tekst. Ferfange troch it AI-konsept?',
+  'Vervangen': 'Ferfange',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'AI-assistinsje is net beskikber. Kontrolearje de ynstellings.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'De AI-oanrop is mislearre (model net laden of server ûnberikber).',
+  'Bezig met AI-analyse…': 'Dwaande mei AI-analyze…',
+  'Stel alt-tekst voor (AI)': 'Alt-tekst foarstelle (AI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Alt-tekst (beskriuwing foar skermlêzers)',
   'Hoog': 'Heech',

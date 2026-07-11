@@ -615,4 +615,13 @@ class Slide {
       aiAssistedFields: aiAssistedFields ?? this.aiAssistedFields,
     );
   }
+
+  /// Add or remove [field] from [aiAssistedFields] (AI_ASSIST §16.3 provenance):
+  /// an AI draft marks the field so the seal-gate blocks until reviewed; a manual
+  /// edit clears it (the human has reviewed it). De-duplicates on add.
+  Slide withAiAssistedField(String field, {required bool present}) => copyWith(
+    aiAssistedFields: present
+        ? {...aiAssistedFields, field}.toList()
+        : aiAssistedFields.where((f) => f != field).toList(),
+  );
 }

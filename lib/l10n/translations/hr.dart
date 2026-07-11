@@ -83,6 +83,19 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Slika se nije mogla pročitati za AI analizu.',
+  'Het model gaf geen alt-tekst terug.':
+      'Model nije vratio alternativni tekst.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Alternativni tekst već postoji. Zamijeniti ga AI nacrtom?',
+  'Vervangen': 'Zamijeni',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'AI pomoć nije dostupna. Provjerite postavke.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'AI poziv nije uspio (model nije učitan ili poslužitelj nedostupan).',
+  'Bezig met AI-analyse…': 'Analiza pomoću AI…',
+  'Stel alt-tekst voor (AI)': 'Predloži alternativni tekst (AI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Alternativni tekst (opis za čitače zaslona)',
   'Hoog': 'Visoko',

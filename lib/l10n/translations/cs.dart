@@ -84,6 +84,18 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Obrázek se nepodařilo načíst pro AI analýzu.',
+  'Het model gaf geen alt-tekst terug.': 'Model nevrátil žádný alt text.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Alt text už existuje. Nahradit ho AI konceptem?',
+  'Vervangen': 'Nahradit',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'AI asistence není dostupná. Zkontrolujte nastavení.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'Volání AI selhalo (model nenačten nebo server nedostupný).',
+  'Bezig met AI-analyse…': 'Analýza pomocí AI…',
+  'Stel alt-tekst voor (AI)': 'Navrhnout alt text (AI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Alternativní text (popis pro čtečky obrazovky)',
   'Hoog': 'Vysoké',

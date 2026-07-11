@@ -83,6 +83,18 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Tidak dapat membaca gambar untuk analisis AI.',
+  'Het model gaf geen alt-tekst terug.': 'Model tidak mengembalikan teks alt.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Teks alt sudah ada. Ganti dengan draf AI?',
+  'Vervangen': 'Ganti',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'Bantuan AI tidak tersedia. Periksa pengaturan.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'Panggilan AI gagal (model tidak dimuat atau server tidak dapat dijangkau).',
+  'Bezig met AI-analyse…': 'Menganalisis dengan AI…',
+  'Stel alt-tekst voor (AI)': 'Sarankan teks alt (AI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Teks alternatif (deskripsi untuk pembaca layar)',
   'Hoog': 'Tinggi',

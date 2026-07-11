@@ -359,8 +359,16 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
           onCaptionChanged: (caption) =>
               widget.onUpdate(widget.slide.copyWith(imageCaption: caption)),
           imageAltText: widget.slide.imageAltText,
-          onAltTextChanged: (alt) =>
-              widget.onUpdate(widget.slide.copyWith(imageAltText: alt)),
+          onAltTextChanged: (alt) => widget.onUpdate(
+            widget.slide
+                .copyWith(imageAltText: alt)
+                .withAiAssistedField('imageAltText', present: false),
+          ),
+          onAltTextSuggested: (alt) => widget.onUpdate(
+            widget.slide
+                .copyWith(imageAltText: alt)
+                .withAiAssistedField('imageAltText', present: true),
+          ),
         ),
         const SizedBox(height: 12),
         const SectionLabel('Breedte afbeeldingspaneel (rechts)'),
