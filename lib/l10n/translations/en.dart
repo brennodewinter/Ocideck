@@ -83,6 +83,16 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'MIAUW-compliance': 'MIAUW compliance',
+  'Voldaan': 'Met',
+  'Openstaand': 'Open',
+  'Uitgesloten door klant': 'Excluded by client',
+  'Handmatig': 'Manual',
+  'Uitsluiten': 'Exclude',
+  'Opheffen': 'Lift',
+  'Reden voor uitsluiting': 'Reason for exclusion',
+  'Fundamentele eisen zijn uitgesloten':
+      'Foundational requirements are excluded',
   'Nieuwe bevinding (wizard)': 'New finding (wizard)',
   'Bevinding maken': 'Create finding',
   'CIA-rating (scope-object)': 'CIA rating (scope object)',

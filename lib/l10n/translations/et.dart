@@ -82,6 +82,15 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'MIAUW-compliance': 'MIAUW vastavus',
+  'Voldaan': 'Täidetud',
+  'Openstaand': 'Avatud',
+  'Uitgesloten door klant': 'Klient välistas',
+  'Handmatig': 'Käsitsi',
+  'Uitsluiten': 'Välista',
+  'Opheffen': 'Tühista',
+  'Reden voor uitsluiting': 'Välistamise põhjus',
+  'Fundamentele eisen zijn uitgesloten': 'Põhinõuded on välistatud',
   'Nieuwe bevinding (wizard)': 'Uus leid (viisard)',
   'Bevinding maken': 'Loo leid',
   'CIA-rating (scope-object)': 'CIA hinnang (ulatuse objekt)',

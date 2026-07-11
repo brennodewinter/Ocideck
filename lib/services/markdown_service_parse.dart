@@ -75,6 +75,7 @@ extension _MarkdownParse on MarkdownService {
     String theme = 'ocideck';
     bool paginate = true;
     ThemeProfile themeProfile = const ThemeProfile();
+    Map<String, String> miauwWaivers = const {};
     String? presentationTitle;
     String author = '';
     String organization = '';
@@ -153,20 +154,17 @@ extension _MarkdownParse on MarkdownService {
             case 'ocideck_seal_at':
               sealAt = _parseScalar(value);
             case 'ocideck_style_profile':
-              // Best-effort: a corrupt profile token must not fail the whole
-              // parse (which would blank the audience window). Keep the default.
-              try {
-                final decoded = utf8.decode(base64Url.decode(value));
-                themeProfile = ThemeProfile.fromJson(
-                  Map<String, Object?>.from(jsonDecode(decoded) as Map),
-                );
-              } catch (e, s) {
-                logError(
-                  'MarkdownService._doParse: decode ocideck_style_profile',
-                  e,
-                  s,
-                );
-                // Leave themeProfile at its default.
+              // Best-effort: a corrupt token keeps the default (see helper).
+              final styleJson = _decodeBase64JsonMap(value, key);
+              if (styleJson != null) {
+                themeProfile = ThemeProfile.fromJson(styleJson);
+              }
+            case 'ocideck_miauw_waivers':
+              final waiverJson = _decodeBase64JsonMap(value, key);
+              if (waiverJson != null) {
+                miauwWaivers = {
+                  for (final e in waiverJson.entries) e.key: '${e.value}',
+                };
               }
           }
         }
@@ -218,6 +216,7 @@ extension _MarkdownParse on MarkdownService {
       sealAlgo: sealAlgo,
       sealAt: sealAt,
       signature: signature.isEmpty ? null : signature,
+      miauwWaivers: miauwWaivers,
     );
   }
 

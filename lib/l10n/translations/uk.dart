@@ -84,6 +84,15 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'MIAUW-compliance': 'Відповідність MIAUW',
+  'Voldaan': 'Виконано',
+  'Openstaand': 'Відкрито',
+  'Uitgesloten door klant': 'Виключено клієнтом',
+  'Handmatig': 'Вручну',
+  'Uitsluiten': 'Виключити',
+  'Opheffen': 'Скасувати',
+  'Reden voor uitsluiting': 'Причина виключення',
+  'Fundamentele eisen zijn uitgesloten': 'Основні вимоги виключено',
   'Nieuwe bevinding (wizard)': 'Нове виявлення (майстер)',
   'Bevinding maken': 'Створити виявлення',
   'CIA-rating (scope-object)': 'Оцінка CIA (об\'єкт області)',

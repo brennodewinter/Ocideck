@@ -83,6 +83,15 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'MIAUW-compliance': 'MIAUW-megfelelés',
+  'Voldaan': 'Teljesült',
+  'Openstaand': 'Nyitott',
+  'Uitgesloten door klant': 'Ügyfél kizárta',
+  'Handmatig': 'Kézi',
+  'Uitsluiten': 'Kizárás',
+  'Opheffen': 'Visszavonás',
+  'Reden voor uitsluiting': 'Kizárás oka',
+  'Fundamentele eisen zijn uitgesloten': 'Alapvető követelmények kizárva',
   'Nieuwe bevinding (wizard)': 'Új megállapítás (varázsló)',
   'Bevinding maken': 'Megállapítás létrehozása',
   'CIA-rating (scope-object)': 'CIA-besorolás (hatókör-objektum)',

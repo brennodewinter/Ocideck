@@ -84,6 +84,16 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'MIAUW-compliance': 'Conformidade MIAUW',
+  'Voldaan': 'Cumprido',
+  'Openstaand': 'Aberto',
+  'Uitgesloten door klant': 'Excluído pelo cliente',
+  'Handmatig': 'Manual',
+  'Uitsluiten': 'Excluir',
+  'Opheffen': 'Anular',
+  'Reden voor uitsluiting': 'Motivo da exclusão',
+  'Fundamentele eisen zijn uitgesloten':
+      'Requisitos fundamentais foram excluídos',
   'Nieuwe bevinding (wizard)': 'Nova constatação (assistente)',
   'Bevinding maken': 'Criar constatação',
   'CIA-rating (scope-object)': 'Classificação CIA (objeto de âmbito)',

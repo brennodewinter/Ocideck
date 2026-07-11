@@ -85,6 +85,15 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'MIAUW-compliance': 'Conformitas MIAUW',
+  'Voldaan': 'Impletum',
+  'Openstaand': 'Apertum',
+  'Uitgesloten door klant': 'A cliente exclusum',
+  'Handmatig': 'Manuale',
+  'Uitsluiten': 'Excludere',
+  'Opheffen': 'Revocare',
+  'Reden voor uitsluiting': 'Causa exclusionis',
+  'Fundamentele eisen zijn uitgesloten': 'Requisita fundamentalia exclusa sunt',
   'Nieuwe bevinding (wizard)': 'Novum inventum (adiutor)',
   'Bevinding maken': 'Inventum creare',
   'CIA-rating (scope-object)': 'Aestimatio CIA (res ambitus)',

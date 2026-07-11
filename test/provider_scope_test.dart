@@ -31,6 +31,9 @@ void main() {
       const allowlist = <String>{
         // Stateless analyzer service; the deck is passed in at call sites.
         'slideQualityAnalyzerProvider',
+        // Stateless MIAUW analyzer; the deck is passed in at call sites (its
+        // result provider miauwComplianceProvider is overridden per tab).
+        'miauwComplianceAnalyzerProvider',
       };
 
       final appShell = File('lib/widgets/app_shell.dart').readAsStringSync();

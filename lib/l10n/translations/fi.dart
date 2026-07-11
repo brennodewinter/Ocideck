@@ -83,6 +83,15 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'MIAUW-compliance': 'MIAUW-vaatimustenmukaisuus',
+  'Voldaan': 'Täytetty',
+  'Openstaand': 'Avoin',
+  'Uitgesloten door klant': 'Asiakas jätti pois',
+  'Handmatig': 'Manuaalinen',
+  'Uitsluiten': 'Jätä pois',
+  'Opheffen': 'Kumoa',
+  'Reden voor uitsluiting': 'Poisjätön syy',
+  'Fundamentele eisen zijn uitgesloten': 'Perusvaatimuksia on jätetty pois',
   'Nieuwe bevinding (wizard)': 'Uusi havainto (ohjattu)',
   'Bevinding maken': 'Luo havainto',
   'CIA-rating (scope-object)': 'CIA-luokitus (kohdeobjekti)',

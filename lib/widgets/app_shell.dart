@@ -12,6 +12,7 @@ import '../platform/platform_features.dart';
 import '../utils/display_path.dart';
 import '../utils/log.dart';
 import '../models/deck.dart';
+import '../models/miauw_compliance.dart';
 import '../models/recent_file.dart';
 import '../models/settings.dart' show AppSettings;
 import '../models/slide.dart';
@@ -36,6 +37,8 @@ import '../services/webdav_service.dart';
 import '../state/deck_provider.dart';
 import '../state/deck_quality_provider.dart';
 import '../state/image_contrast_provider.dart';
+import '../state/miauw_compliance_provider.dart';
+import '../state/sec_module_provider.dart';
 import '../state/editor_provider.dart';
 import '../state/settings_provider.dart';
 import '../state/tabs_provider.dart';
@@ -47,6 +50,7 @@ import '../l10n/app_localizations.dart';
 import '../l10n/slide_quality_localization.dart';
 import 'dialogs/command_palette.dart';
 import 'dialogs/duplicate_cleanup_dialog.dart';
+import 'dialogs/miauw_compliance_panel.dart';
 import 'dialogs/export_dialog.dart';
 import 'dialogs/finalize_seal_dialog.dart';
 import 'dialogs/find_replace_dialog.dart';
@@ -76,6 +80,7 @@ part 'app_shell_main_layout.dart';
 // These parts share this library's imports and private scope.
 part 'shell/shell_actions.dart';
 part 'shell/ai_actions.dart';
+part 'shell/command_palette_actions.dart';
 part 'shell/tab_bar.dart';
 part 'shell/welcome_screen.dart';
 part 'shell/play_only_screen.dart';
@@ -503,6 +508,17 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                                   }
                                   return ref
                                       .watch(slideQualityAnalyzerProvider)
+                                      .analyze(deck);
+                                }),
+                                miauwComplianceProvider.overrideWith((ref) {
+                                  final deck = ref.watch(
+                                    deckProvider.select((state) => state.deck),
+                                  );
+                                  if (deck == null) {
+                                    return const MiauwComplianceResult([]);
+                                  }
+                                  return ref
+                                      .watch(miauwComplianceAnalyzerProvider)
                                       .analyze(deck);
                                 }),
                                 imageContrastIssuesProvider.overrideWith(

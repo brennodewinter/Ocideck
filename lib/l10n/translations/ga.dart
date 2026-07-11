@@ -85,6 +85,15 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'MIAUW-compliance': 'Comhlíonadh MIAUW',
+  'Voldaan': 'Comhlíonta',
+  'Openstaand': 'Oscailte',
+  'Uitgesloten door klant': 'Eisiata ag an gcliant',
+  'Handmatig': 'De láimh',
+  'Uitsluiten': 'Eisiaigh',
+  'Opheffen': 'Cealaigh',
+  'Reden voor uitsluiting': 'Fáth an eisiata',
+  'Fundamentele eisen zijn uitgesloten': 'Tá ceanglais bhunúsacha eisiata',
   'Nieuwe bevinding (wizard)': 'Fionnachtain nua (draoi)',
   'Bevinding maken': 'Cruthaigh fionnachtain',
   'CIA-rating (scope-object)': 'Rátáil CIA (réad scóip)',

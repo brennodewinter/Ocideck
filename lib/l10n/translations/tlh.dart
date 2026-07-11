@@ -81,6 +81,15 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'MIAUW-compliance': 'MIAUW lobtaHghach',
+  'Voldaan': 'wuqta\'',
+  'Openstaand': 'poSmoH',
+  'Uitgesloten door klant': 'vuvwI\' woDta\'',
+  'Handmatig': 'ghop',
+  'Uitsluiten': 'woD',
+  'Opheffen': 'chID',
+  'Reden voor uitsluiting': 'woDmeH meq',
+  'Fundamentele eisen zijn uitgesloten': 'potlh poQmey woDlu\'',
   'Nieuwe bevinding (wizard)': 'tu\'bogh chu\' (wizard)',
   'Bevinding maken': 'tu\'bogh chenmoH',
   'CIA-rating (scope-object)': 'CIA juv (scope Doch)',

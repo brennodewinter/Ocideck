@@ -83,6 +83,16 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'MIAUW-compliance': 'MIAUW-Konformität',
+  'Voldaan': 'Erfüllt',
+  'Openstaand': 'Offe',
+  'Uitgesloten door klant': 'Vom Chund uusgschlosse',
+  'Handmatig': 'Vo Hand',
+  'Uitsluiten': 'Uusschliesse',
+  'Opheffen': 'Ufhebe',
+  'Reden voor uitsluiting': 'Grund fürs Uusschliesse',
+  'Fundamentele eisen zijn uitgesloten':
+      'Grundlegendi Aaforderige sind uusgschlosse',
   'Nieuwe bevinding (wizard)': 'Neue Befund (Assistänt)',
   'Bevinding maken': 'Befund erstelle',
   'CIA-rating (scope-object)': 'CIA-Bewärtig (Scope-Objäkt)',

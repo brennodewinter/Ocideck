@@ -26,6 +26,7 @@ import 'settings_provider.dart';
 
 part 'deck_provider_markdown.dart';
 part 'deck_provider_ai.dart';
+part 'deck_provider_miauw.dart';
 
 // ── Service providers ────────────────────────────────────────────────────────
 

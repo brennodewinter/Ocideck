@@ -83,6 +83,15 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'MIAUW-compliance': 'Kepatuhan MIAUW',
+  'Voldaan': 'Terpenuhi',
+  'Openstaand': 'Terbuka',
+  'Uitgesloten door klant': 'Dikecualikan oleh klien',
+  'Handmatig': 'Manual',
+  'Uitsluiten': 'Kecualikan',
+  'Opheffen': 'Batalkan',
+  'Reden voor uitsluiting': 'Alasan pengecualian',
+  'Fundamentele eisen zijn uitgesloten': 'Persyaratan mendasar dikecualikan',
   'Nieuwe bevinding (wizard)': 'Temuan baru (wisaya)',
   'Bevinding maken': 'Buat temuan',
   'CIA-rating (scope-object)': 'Peringkat CIA (objek lingkup)',

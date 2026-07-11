@@ -168,6 +168,12 @@ class Deck {
   /// van de Marp-markdown — opgeslagen in een aparte sidecar.
   final Map<String, String> userNotes;
 
+  /// MIAUW-compliance-uitsluitingen (PENTEST_MIAUW §9), gekeyd op EIS-id
+  /// (bijv. `1.6`) met de verplichte reden als waarde. Een uitgesloten
+  /// requirement telt als "Uitgesloten door klant" in het compliance-overzicht.
+  /// Reist mee in de front matter als `ocideck_miauw_waivers` (base64url-JSON).
+  final Map<String, String> miauwWaivers;
+
   const Deck({
     required this.title,
     this.theme = 'ocideck',
@@ -192,6 +198,7 @@ class Deck {
     this.signature,
     this.annotations = const {},
     this.userNotes = const {},
+    this.miauwWaivers = const {},
   });
 
   Deck copyWith({
@@ -220,6 +227,7 @@ class Deck {
     bool clearSignature = false,
     Map<String, List<InkStroke>>? annotations,
     Map<String, String>? userNotes,
+    Map<String, String>? miauwWaivers,
   }) {
     return Deck(
       title: title ?? this.title,
@@ -246,6 +254,7 @@ class Deck {
       signature: clearSignature ? null : (signature ?? this.signature),
       annotations: annotations ?? this.annotations,
       userNotes: userNotes ?? this.userNotes,
+      miauwWaivers: miauwWaivers ?? this.miauwWaivers,
     );
   }
 }

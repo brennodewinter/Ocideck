@@ -105,6 +105,11 @@ class MarkdownService {
         'ocideck_style_profile: ${base64Url.encode(utf8.encode(jsonEncode(deck.themeProfile.toJson())))}',
       );
     }
+    if (deck.miauwWaivers.isNotEmpty) {
+      buf.writeln(
+        'ocideck_miauw_waivers: ${base64Url.encode(utf8.encode(jsonEncode(deck.miauwWaivers)))}',
+      );
+    }
     buf.writeln('---');
     buf.writeln();
 
@@ -170,6 +175,21 @@ class MarkdownService {
         .replaceAll('"', r'\"')
         .replaceAll('\n', r'\n');
     return '"$escaped"';
+  }
+
+  /// Decode a base64url-JSON front-matter value ([key] for logging) to a map,
+  /// or null on corruption — a bad token must never fail the whole deck parse
+  /// (which would blank the audience window). Shared by the `ocideck_*` keys
+  /// that store a structured value this way (style profile, MIAUW waivers).
+  Map<String, Object?>? _decodeBase64JsonMap(String value, String key) {
+    try {
+      return Map<String, Object?>.from(
+        jsonDecode(utf8.decode(base64Url.decode(value))) as Map,
+      );
+    } catch (e, s) {
+      logError('MarkdownService: decode $key', e, s);
+      return null;
+    }
   }
 
   /// Inverse of [_yamlScalar] for the simple line-based front matter parser.

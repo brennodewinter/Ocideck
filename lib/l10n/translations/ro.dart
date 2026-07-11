@@ -84,6 +84,15 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'MIAUW-compliance': 'Conformitate MIAUW',
+  'Voldaan': 'Îndeplinit',
+  'Openstaand': 'Deschis',
+  'Uitgesloten door klant': 'Exclus de client',
+  'Handmatig': 'Manual',
+  'Uitsluiten': 'Exclude',
+  'Opheffen': 'Anulează',
+  'Reden voor uitsluiting': 'Motivul excluderii',
+  'Fundamentele eisen zijn uitgesloten': 'Cerințe fundamentale sunt excluse',
   'Nieuwe bevinding (wizard)': 'Constatare nouă (expert)',
   'Bevinding maken': 'Creează constatare',
   'CIA-rating (scope-object)': 'Evaluare CIA (obiect de domeniu)',

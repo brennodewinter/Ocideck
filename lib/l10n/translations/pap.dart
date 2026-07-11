@@ -83,6 +83,15 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'MIAUW-compliance': 'Kumplimentu MIAUW',
+  'Voldaan': 'Kumpli',
+  'Openstaand': 'Habrí',
+  'Uitgesloten door klant': 'Eksklui pa kliente',
+  'Handmatig': 'Manual',
+  'Uitsluiten': 'Eksklui',
+  'Opheffen': 'Kita',
+  'Reden voor uitsluiting': 'Motibu di eksklushon',
+  'Fundamentele eisen zijn uitgesloten': 'Rekisitonan fundamental ta eksklui',
   'Nieuwe bevinding (wizard)': 'Deskubrimentu nobo (wizard)',
   'Bevinding maken': 'Krea deskubrimentu',
   'CIA-rating (scope-object)': 'Klasifikashon CIA (opheto di scope)',

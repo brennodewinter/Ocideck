@@ -83,6 +83,15 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'MIAUW-compliance': 'MIAUW-efterlevnad',
+  'Voldaan': 'Uppfylld',
+  'Openstaand': 'Öppen',
+  'Uitgesloten door klant': 'Utesluten av kunden',
+  'Handmatig': 'Manuell',
+  'Uitsluiten': 'Uteslut',
+  'Opheffen': 'Upphäv',
+  'Reden voor uitsluiting': 'Skäl för uteslutning',
+  'Fundamentele eisen zijn uitgesloten': 'Grundläggande krav är uteslutna',
   'Nieuwe bevinding (wizard)': 'Nytt fynd (guide)',
   'Bevinding maken': 'Skapa fynd',
   'CIA-rating (scope-object)': 'CIA-bedömning (omfångsobjekt)',

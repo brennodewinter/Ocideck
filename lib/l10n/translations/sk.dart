@@ -84,6 +84,15 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'MIAUW-compliance': 'Súlad s MIAUW',
+  'Voldaan': 'Splnené',
+  'Openstaand': 'Otvorené',
+  'Uitgesloten door klant': 'Vylúčené klientom',
+  'Handmatig': 'Ručne',
+  'Uitsluiten': 'Vylúčiť',
+  'Opheffen': 'Zrušiť',
+  'Reden voor uitsluiting': 'Dôvod vylúčenia',
+  'Fundamentele eisen zijn uitgesloten': 'Základné požiadavky sú vylúčené',
   'Nieuwe bevinding (wizard)': 'Nový nález (sprievodca)',
   'Bevinding maken': 'Vytvoriť nález',
   'CIA-rating (scope-object)': 'Hodnotenie CIA (objekt rozsahu)',
