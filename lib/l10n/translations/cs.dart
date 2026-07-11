@@ -84,6 +84,14 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Bewijs-hashes kopiëren': 'Kopírovat hashe důkazů',
+  'Bewijs-hashes gekopieerd': 'Hashe důkazů zkopírovány',
+  'Bevindingen hernummeren': 'Přečíslovat nálezy',
+  'Scope-dekking controleren': 'Zkontrolovat pokrytí rozsahu',
+  'Scope-dekking': 'Pokrytí rozsahu',
+  'Geen dekkingsgaten': 'Žádné mezery v pokrytí',
+  'In scope, maar niet getest en geen bevinding:':
+      'V rozsahu, ale netestováno a bez nálezu:',
   'MIAUW-compliance': 'Soulad s MIAUW',
   'Voldaan': 'Splněno',
   'Openstaand': 'Otevřené',

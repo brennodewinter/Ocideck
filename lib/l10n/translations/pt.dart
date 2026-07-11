@@ -84,6 +84,14 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'Bewijs-hashes kopiëren': 'Copiar hashes de evidência',
+  'Bewijs-hashes gekopieerd': 'Hashes de evidência copiados',
+  'Bevindingen hernummeren': 'Renumerar constatações',
+  'Scope-dekking controleren': 'Verificar cobertura do âmbito',
+  'Scope-dekking': 'Cobertura do âmbito',
+  'Geen dekkingsgaten': 'Sem lacunas de cobertura',
+  'In scope, maar niet getest en geen bevinding:':
+      'No âmbito, mas não testado e sem constatação:',
   'MIAUW-compliance': 'Conformidade MIAUW',
   'Voldaan': 'Cumprido',
   'Openstaand': 'Aberto',

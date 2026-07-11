@@ -84,6 +84,14 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Bewijs-hashes kopiëren': 'Копирай хешовете на доказателствата',
+  'Bewijs-hashes gekopieerd': 'Хешовете на доказателствата са копирани',
+  'Bevindingen hernummeren': 'Преномериране на констатациите',
+  'Scope-dekking controleren': 'Провери покритието на обхвата',
+  'Scope-dekking': 'Покритие на обхвата',
+  'Geen dekkingsgaten': 'Няма пропуски в покритието',
+  'In scope, maar niet getest en geen bevinding:':
+      'В обхвата, но не тествано и без констатация:',
   'MIAUW-compliance': 'Съответствие с MIAUW',
   'Voldaan': 'Изпълнено',
   'Openstaand': 'Отворено',

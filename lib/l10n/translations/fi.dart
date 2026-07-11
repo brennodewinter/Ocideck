@@ -83,6 +83,14 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Bewijs-hashes kopiëren': 'Kopioi todisteiden tiivisteet',
+  'Bewijs-hashes gekopieerd': 'Todisteiden tiivisteet kopioitu',
+  'Bevindingen hernummeren': 'Numeroi havainnot uudelleen',
+  'Scope-dekking controleren': 'Tarkista laajuuden kattavuus',
+  'Scope-dekking': 'Laajuuden kattavuus',
+  'Geen dekkingsgaten': 'Ei kattavuusaukkoja',
+  'In scope, maar niet getest en geen bevinding:':
+      'Laajuudessa, mutta ei testattu eikä havaintoa:',
   'MIAUW-compliance': 'MIAUW-vaatimustenmukaisuus',
   'Voldaan': 'Täytetty',
   'Openstaand': 'Avoin',

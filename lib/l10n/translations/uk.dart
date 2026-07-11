@@ -84,6 +84,14 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Bewijs-hashes kopiëren': 'Копіювати хеші доказів',
+  'Bewijs-hashes gekopieerd': 'Хеші доказів скопійовано',
+  'Bevindingen hernummeren': 'Перенумерувати виявлення',
+  'Scope-dekking controleren': 'Перевірити покриття обсягу',
+  'Scope-dekking': 'Покриття обсягу',
+  'Geen dekkingsgaten': 'Немає прогалин у покритті',
+  'In scope, maar niet getest en geen bevinding:':
+      'В обсязі, але не перевірено і без виявлення:',
   'MIAUW-compliance': 'Відповідність MIAUW',
   'Voldaan': 'Виконано',
   'Openstaand': 'Відкрито',

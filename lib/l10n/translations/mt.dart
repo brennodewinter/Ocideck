@@ -84,6 +84,14 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Bewijs-hashes kopiëren': 'Ikkupja l-hashes tal-evidenza',
+  'Bewijs-hashes gekopieerd': 'Hashes tal-evidenza kkupjati',
+  'Bevindingen hernummeren': 'Innumra mill-ġdid is-sejbiet',
+  'Scope-dekking controleren': 'Iċċekkja l-kopertura tal-ambitu',
+  'Scope-dekking': 'Kopertura tal-ambitu',
+  'Geen dekkingsgaten': 'Ebda lakuni fil-kopertura',
+  'In scope, maar niet getest en geen bevinding:':
+      'Fl-ambitu, iżda mhux ittestjat u bla sejba:',
   'MIAUW-compliance': 'Konformità MIAUW',
   'Voldaan': 'Sodisfatt',
   'Openstaand': 'Miftuħ',

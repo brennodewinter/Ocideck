@@ -9,6 +9,7 @@ import '../models/slide.dart';
 import '../services/ai_alt_text_cleanup.dart';
 import '../services/annotation_codec.dart';
 import '../services/document_integrity.dart';
+import '../services/finding_numbering.dart';
 import '../services/file_service.dart';
 import '../services/image_service.dart';
 import '../services/markdown_service.dart';
@@ -27,6 +28,7 @@ import 'settings_provider.dart';
 part 'deck_provider_markdown.dart';
 part 'deck_provider_ai.dart';
 part 'deck_provider_miauw.dart';
+part 'deck_provider_auto.dart';
 
 // ── Service providers ────────────────────────────────────────────────────────
 

@@ -83,6 +83,14 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Bewijs-hashes kopiëren': 'Kopiér bevis-hasher',
+  'Bewijs-hashes gekopieerd': 'Bevis-hasher kopieret',
+  'Bevindingen hernummeren': 'Omnummerer fund',
+  'Scope-dekking controleren': 'Tjek scope-dækning',
+  'Scope-dekking': 'Scope-dækning',
+  'Geen dekkingsgaten': 'Ingen dækningshuller',
+  'In scope, maar niet getest en geen bevinding:':
+      'I scope, men ikke testet og uden fund:',
   'MIAUW-compliance': 'MIAUW-overholdelse',
   'Voldaan': 'Opfyldt',
   'Openstaand': 'Åben',

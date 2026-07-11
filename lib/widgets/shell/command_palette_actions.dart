@@ -66,6 +66,28 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
         onInvoke: () => MiauwCompliancePanel.show(context),
       ),
       PaletteCommand(
+        label: l10n.d('Bevindingen hernummeren'),
+        icon: Icons.format_list_numbered,
+        keywords: const ['finding', 'renumber', 'nummer', 'f-01'],
+        enabled: ref.read(secModuleRevealProvider),
+        onInvoke: deckNotifier.autoRenumberFindings,
+      ),
+      PaletteCommand(
+        label: l10n.d('Scope-dekking controleren'),
+        icon: Icons.travel_explore_outlined,
+        keywords: const ['scope', 'coverage', 'gap', 'dekking'],
+        enabled: ref.read(secModuleRevealProvider),
+        onInvoke: () =>
+            ScopeCoverageDialog.show(context, deckScopeCoverageGaps(deck)),
+      ),
+      PaletteCommand(
+        label: l10n.d('Bewijs-hashes kopiëren'),
+        icon: Icons.tag_outlined,
+        keywords: const ['sha1', 'sha256', 'hash', 'bewijs', 'evidence'],
+        enabled: ref.read(secModuleRevealProvider),
+        onInvoke: _copyEvidenceHashes,
+      ),
+      PaletteCommand(
         label: l10n.t('imageLibrary'),
         icon: Icons.photo_library_outlined,
         onInvoke: _openImageCarousel,
@@ -123,5 +145,34 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
         ),
     ];
     CommandPalette.show(context, commands);
+  }
+
+  /// Compute the MIAUW evidence hash table (SHA1 + SHA-256) for every evidence
+  /// slide in the deck and copy it to the clipboard (PENTEST_MIAUW §10.2). Reads
+  /// each evidence image's bytes off disk; slides it cannot read are skipped.
+  Future<void> _copyEvidenceHashes() async {
+    final deck = ref.read(deckProvider).deck;
+    if (deck == null) return;
+    final imageService = ImageService();
+    final hashes = <String, EvidenceHashes>{};
+    for (final slide in deck.slides) {
+      if (slide.findingRole != FindingRole.evidence ||
+          slide.imagePath.isEmpty) {
+        continue;
+      }
+      final bytes = await imageService.readSlideImageBytes(
+        slide.imagePath,
+        projectPath: deck.projectPath,
+      );
+      if (bytes != null) {
+        hashes[slide.imagePath] = computeEvidenceHashes(bytes);
+      }
+    }
+    if (!mounted) return;
+    await Clipboard.setData(ClipboardData(text: evidenceHashTable(hashes)));
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(context.l10n.d('Bewijs-hashes gekopieerd'))),
+    );
   }
 }

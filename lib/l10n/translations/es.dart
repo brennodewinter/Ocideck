@@ -84,6 +84,14 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Bewijs-hashes kopiëren': 'Copiar hashes de evidencia',
+  'Bewijs-hashes gekopieerd': 'Hashes de evidencia copiados',
+  'Bevindingen hernummeren': 'Renumerar hallazgos',
+  'Scope-dekking controleren': 'Comprobar cobertura del alcance',
+  'Scope-dekking': 'Cobertura del alcance',
+  'Geen dekkingsgaten': 'Sin lagunas de cobertura',
+  'In scope, maar niet getest en geen bevinding:':
+      'En el alcance, pero no probado y sin hallazgos:',
   'MIAUW-compliance': 'Conformidad MIAUW',
   'Voldaan': 'Cumplido',
   'Openstaand': 'Abierto',

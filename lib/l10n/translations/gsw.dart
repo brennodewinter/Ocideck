@@ -83,6 +83,14 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Bewijs-hashes kopiëren': 'Nachwiis-Hashes kopiere',
+  'Bewijs-hashes gekopieerd': 'Nachwiis-Hashes kopiert',
+  'Bevindingen hernummeren': 'Befund neu nummeriere',
+  'Scope-dekking controleren': 'Scope-Abdeckig prüefe',
+  'Scope-dekking': 'Scope-Abdeckig',
+  'Geen dekkingsgaten': 'Kei Abdeckigslücke',
+  'In scope, maar niet getest en geen bevinding:':
+      'Im Scope, aber nöd teschtet und ohni Befund:',
   'MIAUW-compliance': 'MIAUW-Konformität',
   'Voldaan': 'Erfüllt',
   'Openstaand': 'Offe',

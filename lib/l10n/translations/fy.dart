@@ -83,6 +83,14 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Bewijs-hashes kopiëren': 'Bewiis-hashes kopiearje',
+  'Bewijs-hashes gekopieerd': 'Bewiis-hashes kopiearre',
+  'Bevindingen hernummeren': 'Befinings opnij nûmerje',
+  'Scope-dekking controleren': 'Scope-dekking kontrolearje',
+  'Scope-dekking': 'Scope-dekking',
+  'Geen dekkingsgaten': 'Gjin dekkingsgatten',
+  'In scope, maar niet getest en geen bevinding:':
+      'Yn scope, mar net test en gjin befining:',
   'MIAUW-compliance': 'MIAUW-neilibjen',
   'Voldaan': 'Foldien',
   'Openstaand': 'Iepensteand',

@@ -85,6 +85,14 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Bewijs-hashes kopiëren': 'Cóipeáil haiseanna fianaise',
+  'Bewijs-hashes gekopieerd': 'Haiseanna fianaise cóipeáilte',
+  'Bevindingen hernummeren': 'Athuimhrigh na fionnachtana',
+  'Scope-dekking controleren': 'Seiceáil clúdach an scóip',
+  'Scope-dekking': 'Clúdach an scóip',
+  'Geen dekkingsgaten': 'Gan bearnaí clúdaigh',
+  'In scope, maar niet getest en geen bevinding:':
+      'Sa scóip, ach gan tástáil agus gan fionnachtain:',
   'MIAUW-compliance': 'Comhlíonadh MIAUW',
   'Voldaan': 'Comhlíonta',
   'Openstaand': 'Oscailte',

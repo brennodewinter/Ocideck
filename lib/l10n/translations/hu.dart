@@ -83,6 +83,14 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Bewijs-hashes kopiëren': 'Bizonyíték-hashek másolása',
+  'Bewijs-hashes gekopieerd': 'Bizonyíték-hashek másolva',
+  'Bevindingen hernummeren': 'Megállapítások újraszámozása',
+  'Scope-dekking controleren': 'Hatókör-lefedettség ellenőrzése',
+  'Scope-dekking': 'Hatókör-lefedettség',
+  'Geen dekkingsgaten': 'Nincsenek lefedettségi hézagok',
+  'In scope, maar niet getest en geen bevinding:':
+      'Hatókörben, de nem tesztelt és nincs megállapítás:',
   'MIAUW-compliance': 'MIAUW-megfelelés',
   'Voldaan': 'Teljesült',
   'Openstaand': 'Nyitott',

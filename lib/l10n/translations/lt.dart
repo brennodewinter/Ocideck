@@ -83,6 +83,14 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Bewijs-hashes kopiëren': 'Kopijuoti įrodymų maišas',
+  'Bewijs-hashes gekopieerd': 'Įrodymų maišos nukopijuotos',
+  'Bevindingen hernummeren': 'Pernumeruoti radinius',
+  'Scope-dekking controleren': 'Patikrinti aprėpties dengimą',
+  'Scope-dekking': 'Aprėpties dengimas',
+  'Geen dekkingsgaten': 'Nėra dengimo spragų',
+  'In scope, maar niet getest en geen bevinding:':
+      'Aprėptyje, bet nepatikrinta ir be radinio:',
   'MIAUW-compliance': 'MIAUW atitiktis',
   'Voldaan': 'Atitinka',
   'Openstaand': 'Atvira',

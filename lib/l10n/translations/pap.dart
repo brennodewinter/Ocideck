@@ -83,6 +83,14 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Bewijs-hashes kopiëren': 'Kopia hash di prueba',
+  'Bewijs-hashes gekopieerd': 'Hash di prueba kopiá',
+  'Bevindingen hernummeren': 'Rennumera e deskubrimentunan',
+  'Scope-dekking controleren': 'Kontrolá kobertura di scope',
+  'Scope-dekking': 'Kobertura di scope',
+  'Geen dekkingsgaten': 'Sin lakuna di kobertura',
+  'In scope, maar niet getest en geen bevinding:':
+      'Den scope, pero no testá i sin deskubrimentu:',
   'MIAUW-compliance': 'Kumplimentu MIAUW',
   'Voldaan': 'Kumpli',
   'Openstaand': 'Habrí',
