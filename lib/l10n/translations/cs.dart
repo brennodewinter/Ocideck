@@ -84,6 +84,12 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Hoog': 'Vysoké',
+  'Middel': 'Střední',
+  'Laag': 'Nízké',
+  'Informatief': 'Informativní',
+  'Vernieuw uit deck': 'Obnovit z balíčku',
+  'Aantal bevindingen per ernst': 'Počet zjištění podle závažnosti',
   'Aangepast…': 'Vlastní…',
   'Aangepaste tijd': 'Vlastní čas',
   'Uit sjabloon…': 'Ze šablony…',

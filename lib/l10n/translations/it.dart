@@ -83,6 +83,12 @@ const _stringsIt = {
 };
 
 const _dutchSourceIt = {
+  'Hoog': 'Alto',
+  'Middel': 'Medio',
+  'Laag': 'Basso',
+  'Informatief': 'Informativo',
+  'Vernieuw uit deck': 'Aggiorna dal deck',
+  'Aantal bevindingen per ernst': 'Numero di risultati per gravità',
   'Aangepast…': 'Personalizzato…',
   'Aangepaste tijd': 'Tempo personalizzato',
   'Uit sjabloon…': 'Da modello…',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/slide.dart';
+import '../../services/cvss/cvss4.dart';
 import '../../services/image_service.dart';
 import 'bullets_editor.dart';
 import 'bullets_image_editor.dart';
@@ -9,6 +10,7 @@ import 'checklist_editor.dart';
 import 'code_editor.dart';
 import 'cockpit_editor.dart';
 import 'finding_editor.dart';
+import 'findings_summary_editor.dart';
 import 'free_markdown_editor.dart';
 import 'image_slide_editor.dart';
 import 'question_editor.dart';
@@ -44,6 +46,11 @@ class SlideEditorContext {
   /// "continue numbering from the previous slide" option in the bullets editor.
   final bool previousSlideIsNumbered;
 
+  /// The severity band of every finding in the deck, for the `findingsSummary`
+  /// editor's "refresh from deck". Computed by the panel (which has the deck);
+  /// empty for the other editors, which ignore it.
+  final List<Cvss4Severity> deckFindingSeverities;
+
   const SlideEditorContext({
     required this.slide,
     required this.onUpdate,
@@ -55,6 +62,7 @@ class SlideEditorContext {
     this.previousSlideIsNumbered = false,
     this.nestedInScrollView = false,
     this.onSplitVideo,
+    this.deckFindingSeverities = const [],
   });
 
   Key get _key => ValueKey(slide.id);
@@ -187,9 +195,10 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         themeAnimationDurationMs: c.themeAnimationDurationMs,
         nestedInScrollView: c.nestedInScrollView,
       ),
-      // Informatieveiligheid: `finding` (P1-FIND) and `checklist` (P1-CHK) have
-      // structured editors; the other three still share the free-Markdown
-      // scaffold until their packages land (P1-SCOPE/SUM/SIGN).
+      // Informatieveiligheid: `finding` (P1-FIND), `checklist` (P1-CHK),
+      // `scopeMatrix` (P1-SCOPE) and `findingsSummary` (P1-SUM) have structured
+      // editors; only `signOff` still shares the free-Markdown scaffold until
+      // its package lands (P1-SIGN).
       SlideType.finding: (c) => FindingEditor(
         key: c._key,
         slide: c.slide,
@@ -202,7 +211,13 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         onUpdate: c.onUpdate,
         nestedInScrollView: c.nestedInScrollView,
       ),
-      SlideType.findingsSummary: _scaffoldEditor,
+      SlideType.findingsSummary: (c) => FindingsSummaryEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        deckFindingSeverities: c.deckFindingSeverities,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
       SlideType.scopeMatrix: (c) => ScopeMatrixEditor(
         key: c._key,
         slide: c.slide,

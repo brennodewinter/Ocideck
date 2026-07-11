@@ -83,6 +83,12 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Hoog': 'Hög',
+  'Middel': 'Medel',
+  'Laag': 'Låg',
+  'Informatief': 'Informativ',
+  'Vernieuw uit deck': 'Uppdatera från deck',
+  'Aantal bevindingen per ernst': 'Antal fynd per allvarlighetsgrad',
   'Aangepast…': 'Egen…',
   'Aangepaste tijd': 'Egen tid',
   'Uit sjabloon…': 'Från mall…',

@@ -85,6 +85,12 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Hoog': 'Wysoki',
+  'Middel': 'Średni',
+  'Laag': 'Niski',
+  'Informatief': 'Informacyjny',
+  'Vernieuw uit deck': 'Odśwież z decku',
+  'Aantal bevindingen per ernst': 'Liczba ustaleń według istotności',
   'Aangepast…': 'Własny…',
   'Aangepaste tijd': 'Własny czas',
   'Uit sjabloon…': 'Z szablonu…',

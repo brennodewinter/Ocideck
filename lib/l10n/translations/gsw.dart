@@ -83,6 +83,12 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Hoog': 'Hoch',
+  'Middel': 'Mittel',
+  'Laag': 'Nieder',
+  'Informatief': 'Informativ',
+  'Vernieuw uit deck': 'Vom Deck aktualisiere',
+  'Aantal bevindingen per ernst': 'Aazahl Befund pro Schweregrad',
   'Aangepast…': 'Eigeni…',
   'Aangepaste tijd': 'Eigeni Ziit',
   'Uit sjabloon…': 'Us Vorlag…',

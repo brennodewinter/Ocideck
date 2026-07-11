@@ -83,6 +83,12 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'Hoog': 'High',
+  'Middel': 'Medium',
+  'Laag': 'Low',
+  'Informatief': 'Informational',
+  'Vernieuw uit deck': 'Refresh from deck',
+  'Aantal bevindingen per ernst': 'Number of findings per severity',
   'Aangepast…': 'Custom…',
   'Aangepaste tijd': 'Custom time',
   'Uit sjabloon…': 'From template…',

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
+import '../../models/findings_summary_spec.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../models/timeline.dart';
+import '../../services/cvss/cvss4.dart';
 import '../../services/image_service.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../state/deck_provider.dart';
@@ -108,6 +110,11 @@ class EditorPanel extends ConsumerWidget {
                       deck.themeProfile.animationDurationMs,
                   previousSlideIsNumbered:
                       idx > 0 && isNumberedListSlide(deck.slides[idx - 1]),
+                  // Only the findingsSummary editor uses it; skip the parse for
+                  // every other type.
+                  deckFindingSeverities: slide.type == SlideType.findingsSummary
+                      ? deckFindingSeverities(deck.slides)
+                      : const <Cvss4Severity>[],
                   nestedInScrollView: true,
                   onSplitVideo: (atMs) {
                     deckNotifier.splitVideoSlide(idx, atMs);
@@ -291,6 +298,7 @@ class EditorPanel extends ConsumerWidget {
     bool previousSlideIsNumbered = false,
     bool nestedInScrollView = false,
     void Function(int atMs)? onSplitVideo,
+    List<Cvss4Severity> deckFindingSeverities = const [],
   }) {
     return slideEditorBuilders[slide.type]!(
       SlideEditorContext(
@@ -304,6 +312,7 @@ class EditorPanel extends ConsumerWidget {
         previousSlideIsNumbered: previousSlideIsNumbered,
         nestedInScrollView: nestedInScrollView,
         onSplitVideo: onSplitVideo,
+        deckFindingSeverities: deckFindingSeverities,
       ),
     );
   }

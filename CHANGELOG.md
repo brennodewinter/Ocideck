@@ -8,6 +8,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Findings-summary slide type (`findingsSummary`)** — the *Bevindingenoverzicht*
+  type is now a structured management overview instead of a free-Markdown
+  scaffold. A dedicated editor captures the number of findings per CVSS 4.0
+  severity band (Critical / High / Medium / Low / Informational); the preview
+  renders a severity-coloured **bar chart** (via `fl_chart`) with the exact
+  per-band counts and a derived total. **"Vernieuw uit deck"** recomputes the
+  counts from the deck's `finding` slides — each finding's severity is derived
+  from its CVSS vector, an absent vector counting as informational — while the
+  counts stay hand-editable. Storage is a **plain Markdown table** (PENTEST_MIAUW
+  §4.3.4 / §11), so it aligns with the `checklist` / `scopeMatrix` handling and
+  round-trips losslessly; the total is derived, never stored. Localised in all
+  interface languages. See [docs/FILE_FORMAT.md](docs/FILE_FORMAT.md) §5.
 - **Reusable finding-template library** — findings can be started from a
   reusable template instead of a blank slide. A searchable **"Uit sjabloon…"**
   picker in the finding editor offers a set of bundled starter findings (SQL

@@ -83,6 +83,12 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Hoog': 'Aukštas',
+  'Middel': 'Vidutinis',
+  'Laag': 'Žemas',
+  'Informatief': 'Informacinis',
+  'Vernieuw uit deck': 'Atnaujinti iš rinkinio',
+  'Aantal bevindingen per ernst': 'Radinių skaičius pagal sunkumą',
   'Aangepast…': 'Savas…',
   'Aangepaste tijd': 'Savas laikas',
   'Uit sjabloon…': 'Iš šablono…',

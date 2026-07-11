@@ -84,6 +84,12 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Hoog': 'Високо',
+  'Middel': 'Средно',
+  'Laag': 'Ниско',
+  'Informatief': 'Информативно',
+  'Vernieuw uit deck': 'Обнови от тестето',
+  'Aantal bevindingen per ernst': 'Брой констатации по тежест',
   'Aangepast…': 'По избор…',
   'Aangepaste tijd': 'Време по избор',
   'Uit sjabloon…': 'От шаблон…',

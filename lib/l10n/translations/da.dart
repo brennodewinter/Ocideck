@@ -83,6 +83,12 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Hoog': 'Høj',
+  'Middel': 'Middel',
+  'Laag': 'Lav',
+  'Informatief': 'Informativ',
+  'Vernieuw uit deck': 'Opdater fra deck',
+  'Aantal bevindingen per ernst': 'Antal fund efter alvorlighed',
   'Aangepast…': 'Brugerdefineret…',
   'Aangepaste tijd': 'Brugerdefineret tid',
   'Uit sjabloon…': 'Fra skabelon…',

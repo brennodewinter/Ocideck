@@ -82,6 +82,12 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Hoog': 'Kõrge',
+  'Middel': 'Keskmine',
+  'Laag': 'Madal',
+  'Informatief': 'Informatiivne',
+  'Vernieuw uit deck': 'Värskenda deckist',
+  'Aantal bevindingen per ernst': 'Leidude arv raskusastme järgi',
   'Aangepast…': 'Oma…',
   'Aangepaste tijd': 'Oma aeg',
   'Uit sjabloon…': 'Mallist…',

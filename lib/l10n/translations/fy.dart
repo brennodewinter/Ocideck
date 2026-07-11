@@ -83,6 +83,12 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Hoog': 'Heech',
+  'Middel': 'Middel',
+  'Laag': 'Leech',
+  'Informatief': 'Ynformatyf',
+  'Vernieuw uit deck': 'Fernije út deck',
+  'Aantal bevindingen per ernst': 'Oantal befinings per earnst',
   'Aangepast…': 'Eigen…',
   'Aangepaste tijd': 'Eigen tiid',
   'Uit sjabloon…': 'Ut sjabloan…',

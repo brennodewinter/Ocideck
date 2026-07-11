@@ -81,6 +81,12 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Hoog': 'potlh',
+  'Middel': 'motlh',
+  'Laag': 'ram',
+  'Informatief': 'De\'',
+  'Vernieuw uit deck': 'navvo\' chu\'choH',
+  'Aantal bevindingen per ernst': 'Qob patlh mI\'',
   'Aangepast…': 'SeH…',
   'Aangepaste tijd': 'SeH poH',
   'Uit sjabloon…': 'sablonvo\'…',

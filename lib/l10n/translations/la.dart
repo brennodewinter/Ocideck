@@ -85,6 +85,12 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Hoog': 'Altum',
+  'Middel': 'Medium',
+  'Laag': 'Humile',
+  'Informatief': 'Informativum',
+  'Vernieuw uit deck': 'Renova ex fasciculo',
+  'Aantal bevindingen per ernst': 'Numerus inventorum per gravitatem',
   'Aangepast…': 'Proprium…',
   'Aangepaste tijd': 'Tempus proprium',
   'Uit sjabloon…': 'Ex exemplari…',

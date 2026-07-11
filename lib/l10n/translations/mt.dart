@@ -84,6 +84,12 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Hoog': 'Għoli',
+  'Middel': 'Medju',
+  'Laag': 'Baxx',
+  'Informatief': 'Informattiv',
+  'Vernieuw uit deck': 'Aġġorna mid-deck',
+  'Aantal bevindingen per ernst': 'Numru ta\' sejbiet skont il-gravità',
   'Aangepast…': 'Personalizzat…',
   'Aangepaste tijd': 'Ħin personalizzat',
   'Uit sjabloon…': 'Minn mudell…',
