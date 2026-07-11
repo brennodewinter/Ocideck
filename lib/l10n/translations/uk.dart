@@ -84,6 +84,10 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'CWE kiezen': 'Вибрати CWE',
+  'Zoek op naam of CWE-nummer': 'Пошук за назвою або номером CWE',
+  'Geen CWE gevonden': 'CWE не знайдено',
+  'Kies CWE…': 'Вибрати CWE…',
   'AI-concept': 'Чернетка ШІ',
   'Nagekeken': 'Перевірено',
   'Wis AI-alt-teksten': 'Очистити альт-тексти ШІ',

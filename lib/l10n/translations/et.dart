@@ -82,6 +82,10 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'CWE kiezen': 'Vali CWE',
+  'Zoek op naam of CWE-nummer': 'Otsi nime või CWE-numbri järgi',
+  'Geen CWE gevonden': 'CWE-d ei leitud',
+  'Kies CWE…': 'Vali CWE…',
   'AI-concept': 'AI mustand',
   'Nagekeken': 'Üle vaadatud',
   'Wis AI-alt-teksten': 'Kustuta AI alt-tekstid',

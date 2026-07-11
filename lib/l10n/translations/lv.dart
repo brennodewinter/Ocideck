@@ -83,6 +83,10 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'CWE kiezen': 'Izvēlēties CWE',
+  'Zoek op naam of CWE-nummer': 'Meklēt pēc nosaukuma vai CWE numura',
+  'Geen CWE gevonden': 'Neviens CWE nav atrasts',
+  'Kies CWE…': 'Izvēlēties CWE…',
   'AI-concept': 'MI melnraksts',
   'Nagekeken': 'Pārbaudīts',
   'Wis AI-alt-teksten': 'Notīrīt MI alt tekstus',

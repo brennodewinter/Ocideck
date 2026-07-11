@@ -84,6 +84,10 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'CWE kiezen': 'Agħżel CWE',
+  'Zoek op naam of CWE-nummer': 'Fittex bl-isem jew bin-numru CWE',
+  'Geen CWE gevonden': 'Ebda CWE ma nstab',
+  'Kies CWE…': 'Agħżel CWE…',
   'AI-concept': 'Abbozz IA',
   'Nagekeken': 'Rivedut',
   'Wis AI-alt-teksten': 'Naddaf it-testi alternattivi IA',

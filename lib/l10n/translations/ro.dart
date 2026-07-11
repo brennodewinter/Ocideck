@@ -84,6 +84,10 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'CWE kiezen': 'Alege CWE',
+  'Zoek op naam of CWE-nummer': 'Caută după nume sau număr CWE',
+  'Geen CWE gevonden': 'Niciun CWE găsit',
+  'Kies CWE…': 'Alege CWE…',
   'AI-concept': 'Schiță IA',
   'Nagekeken': 'Verificat',
   'Wis AI-alt-teksten': 'Șterge textele alternative IA',

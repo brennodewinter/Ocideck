@@ -81,6 +81,10 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'CWE kiezen': 'CWE wIv',
+  'Zoek op naam of CWE-nummer': 'pong ghap CWE mI\' Sam',
+  'Geen CWE gevonden': 'CWE tu\'lu\'be\'',
+  'Kies CWE…': 'CWE wIv…',
   'AI-concept': 'IA nab',
   'Nagekeken': 'qaywI\'',
   'Wis AI-alt-teksten': 'IA Del ghItlh Qaw\'',

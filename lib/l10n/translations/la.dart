@@ -85,6 +85,10 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'CWE kiezen': 'CWE eligere',
+  'Zoek op naam of CWE-nummer': 'Quaere nomine vel numero CWE',
+  'Geen CWE gevonden': 'Nullum CWE inventum',
+  'Kies CWE…': 'CWE elige…',
   'AI-concept': 'Adumbratio IA',
   'Nagekeken': 'Recognitum',
   'Wis AI-alt-teksten': 'Textus alternos IA dele',

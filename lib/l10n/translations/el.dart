@@ -83,6 +83,10 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'CWE kiezen': 'Επιλογή CWE',
+  'Zoek op naam of CWE-nummer': 'Αναζήτηση με όνομα ή αριθμό CWE',
+  'Geen CWE gevonden': 'Δεν βρέθηκε CWE',
+  'Kies CWE…': 'Επιλογή CWE…',
   'AI-concept': 'Προσχέδιο AI',
   'Nagekeken': 'Ελεγμένο',
   'Wis AI-alt-teksten': 'Εκκαθάριση εναλλακτικών κειμένων AI',

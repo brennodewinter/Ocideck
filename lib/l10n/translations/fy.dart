@@ -83,6 +83,10 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'CWE kiezen': 'CWE kieze',
+  'Zoek op naam of CWE-nummer': 'Sykje op namme of CWE-nûmer',
+  'Geen CWE gevonden': 'Gjin CWE fûn',
+  'Kies CWE…': 'Kies CWE…',
   'AI-concept': 'AI-konsept',
   'Nagekeken': 'Neisjoen',
   'Wis AI-alt-teksten': 'AI-alt-teksten wiskje',

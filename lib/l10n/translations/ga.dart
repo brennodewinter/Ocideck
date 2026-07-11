@@ -85,6 +85,10 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'CWE kiezen': 'Roghnaigh CWE',
+  'Zoek op naam of CWE-nummer': 'Cuardaigh de réir ainm nó uimhir CWE',
+  'Geen CWE gevonden': 'Níor aimsíodh CWE',
+  'Kies CWE…': 'Roghnaigh CWE…',
   'AI-concept': 'Dréacht IS',
   'Nagekeken': 'Seiceáilte',
   'Wis AI-alt-teksten': 'Glan téacsanna malartacha IS',

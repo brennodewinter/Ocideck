@@ -84,6 +84,10 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'CWE kiezen': 'Избор на CWE',
+  'Zoek op naam of CWE-nummer': 'Търсене по име или CWE номер',
+  'Geen CWE gevonden': 'Няма намерен CWE',
+  'Kies CWE…': 'Избор на CWE…',
   'AI-concept': 'AI чернова',
   'Nagekeken': 'Прегледано',
   'Wis AI-alt-teksten': 'Изчисти AI алт-текстовете',
