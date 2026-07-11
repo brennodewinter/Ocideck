@@ -84,6 +84,10 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'CWE kiezen': 'Vybrat CWE',
+  'Zoek op naam of CWE-nummer': 'Hledat podle názvu nebo čísla CWE',
+  'Geen CWE gevonden': 'Žádné CWE nenalezeno',
+  'Kies CWE…': 'Vybrat CWE…',
   'AI-concept': 'AI koncept',
   'Nagekeken': 'Zkontrolováno',
   'Wis AI-alt-teksten': 'Vymazat AI alt texty',

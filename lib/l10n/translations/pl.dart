@@ -85,6 +85,10 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'CWE kiezen': 'Wybierz CWE',
+  'Zoek op naam of CWE-nummer': 'Szukaj według nazwy lub numeru CWE',
+  'Geen CWE gevonden': 'Nie znaleziono CWE',
+  'Kies CWE…': 'Wybierz CWE…',
   'AI-concept': 'Szkic AI',
   'Nagekeken': 'Sprawdzone',
   'Wis AI-alt-teksten': 'Wyczyść teksty alternatywne AI',

@@ -83,6 +83,10 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'CWE kiezen': 'Vælg CWE',
+  'Zoek op naam of CWE-nummer': 'Søg efter navn eller CWE-nummer',
+  'Geen CWE gevonden': 'Ingen CWE fundet',
+  'Kies CWE…': 'Vælg CWE…',
   'AI-concept': 'AI-udkast',
   'Nagekeken': 'Gennemgået',
   'Wis AI-alt-teksten': 'Ryd AI-alt-tekster',

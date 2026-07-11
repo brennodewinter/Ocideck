@@ -83,6 +83,10 @@ const _stringsDe = {
 };
 
 const _dutchSourceDe = {
+  'CWE kiezen': 'CWE auswählen',
+  'Zoek op naam of CWE-nummer': 'Nach Name oder CWE-Nummer suchen',
+  'Geen CWE gevonden': 'Kein CWE gefunden',
+  'Kies CWE…': 'CWE auswählen…',
   'AI-concept': 'KI-Entwurf',
   'Nagekeken': 'Geprüft',
   'Wis AI-alt-teksten': 'KI-Alt-Texte löschen',

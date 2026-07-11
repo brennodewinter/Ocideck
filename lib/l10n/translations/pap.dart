@@ -83,6 +83,10 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'CWE kiezen': 'Skohe CWE',
+  'Zoek op naam of CWE-nummer': 'Buska pa nòmber o number CWE',
+  'Geen CWE gevonden': 'No a haña CWE',
+  'Kies CWE…': 'Skohe CWE…',
   'AI-concept': 'Konsepto di IA',
   'Nagekeken': 'Revisá',
   'Wis AI-alt-teksten': 'Kita teksto alternativo di IA',

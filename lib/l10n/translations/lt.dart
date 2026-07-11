@@ -83,6 +83,10 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'CWE kiezen': 'Pasirinkti CWE',
+  'Zoek op naam of CWE-nummer': 'Ieškoti pagal pavadinimą arba CWE numerį',
+  'Geen CWE gevonden': 'CWE nerasta',
+  'Kies CWE…': 'Pasirinkti CWE…',
   'AI-concept': 'DI juodraštis',
   'Nagekeken': 'Peržiūrėta',
   'Wis AI-alt-teksten': 'Išvalyti DI alt tekstus',

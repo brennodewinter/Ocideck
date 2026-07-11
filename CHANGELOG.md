@@ -8,6 +8,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Offline CWE picker with deterministic snippet autofill** — the finding
+  editor gained a **"Kies CWE…"** button that opens a searchable picker over a
+  bundled, offline catalog of the most pentest-relevant MITRE CWE weaknesses
+  (OWASP Top 10 + common web/infra findings). Picking one sets the finding's CWE
+  field and, **only when they are still empty**, fills the description and
+  recommendation with a short, neutral snippet — a good starting point written
+  **without an LLM** that the tester then specialises; it never overwrites text
+  already entered. Every entry links back to the canonical `cwe.mitre.org`
+  definition. Fully offline; the full 944-weakness list arrives later as a
+  provisioned data pack (PENTEST_MIAUW §6/§10.6). Localised in all interface
+  languages.
 - **Suggest image alt-text with a local vision model** — when the optional AI
   backend is on, the image / two-images / bullets-with-image editors show a
   **"Stel alt-tekst voor (AI)"** button next to the alt-text box. It downscales

@@ -6,6 +6,7 @@ import '../../models/slide.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/finding_severity_palette.dart';
+import '../dialogs/cwe_picker.dart';
 import '../dialogs/finding_template_picker.dart';
 import '_editor_field.dart';
 
@@ -132,6 +133,20 @@ class _FindingEditorState extends State<FindingEditor>
     _recommendation.text = spec.recommendation;
   }
 
+  /// Pick a weakness from the offline CWE catalog (§10.6): always set the CWE
+  /// field, and fill the description / recommendation **only when they are
+  /// still empty** with the entry's deterministic snippet — so a picked CWE
+  /// gives a head start without ever overwriting text the tester already wrote.
+  Future<void> _pickCwe() async {
+    final entry = await CwePicker.show(context);
+    if (entry == null) return;
+    _cwe.text = entry.label;
+    if (_description.text.trim().isEmpty) _description.text = entry.description;
+    if (_recommendation.text.trim().isEmpty) {
+      _recommendation.text = entry.recommendation;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return EditorFieldList(
@@ -139,10 +154,21 @@ class _FindingEditorState extends State<FindingEditor>
       children: [
         Align(
           alignment: Alignment.centerLeft,
-          child: OutlinedButton.icon(
-            onPressed: _pickTemplate,
-            icon: const Icon(Icons.library_books_outlined, size: 16),
-            label: Text(context.l10n.d('Uit sjabloon…')),
+          child: Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              OutlinedButton.icon(
+                onPressed: _pickTemplate,
+                icon: const Icon(Icons.library_books_outlined, size: 16),
+                label: Text(context.l10n.d('Uit sjabloon…')),
+              ),
+              OutlinedButton.icon(
+                onPressed: _pickCwe,
+                icon: const Icon(Icons.shield_outlined, size: 16),
+                label: Text(context.l10n.d('Kies CWE…')),
+              ),
+            ],
           ),
         ),
         EditorField(

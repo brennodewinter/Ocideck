@@ -83,6 +83,10 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'CWE kiezen': 'CWE kiválasztása',
+  'Zoek op naam of CWE-nummer': 'Keresés név vagy CWE-szám alapján',
+  'Geen CWE gevonden': 'Nincs találat CWE-re',
+  'Kies CWE…': 'CWE kiválasztása…',
   'AI-concept': 'AI-vázlat',
   'Nagekeken': 'Ellenőrizve',
   'Wis AI-alt-teksten': 'AI alt szövegek törlése',

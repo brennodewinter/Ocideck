@@ -83,6 +83,10 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'CWE kiezen': 'Valitse CWE',
+  'Zoek op naam of CWE-nummer': 'Hae nimellä tai CWE-numerolla',
+  'Geen CWE gevonden': 'CWE:tä ei löytynyt',
+  'Kies CWE…': 'Valitse CWE…',
   'AI-concept': 'Tekoälyluonnos',
   'Nagekeken': 'Tarkistettu',
   'Wis AI-alt-teksten': 'Tyhjennä tekoälyn alt-tekstit',
