@@ -274,6 +274,13 @@ native resolution. PDF/PPTX export captures one still frame.
 - **Filter untagged images** — the label toggle next to the search box shows
   only images that have no description/tags yet, so you can see at a glance
   which ones still need attention.
+- **Auto-tag with AI** — when the optional AI backend is on, an auto-tag button
+  walks every image that still has **no** tags, asks a local vision model for a
+  handful of searchable keyword tags in your interface language, and saves them to
+  the description sidecar so the picture becomes findable. It only fills empty
+  descriptions — a tag you (or an earlier run) wrote is never overwritten — and an
+  **Ongedaan maken** action clears exactly the tags that run wrote, so a bad bulk
+  pass is fully reversible.
 - **Clean up duplicates** — the button in the footer finds byte-identical
   images by md5 checksum. Per group one file is kept (preferring the one used
   in slides, then the oldest), tags and captions of the copies are merged onto
@@ -523,9 +530,17 @@ OciDeck aims for WCAG 2.1 in the editor:
 - **Screen readers** — slide thumbnails announce a concise label ("Slide 3/12:
   title", including skipped state and whether the slide has user notes), charts
   read out their data as a text alternative, and the fullscreen presenter
-  announces every slide change. Pictures expose their caption as alt text (and a
-  generic "image" when uncaptioned, which the slide-quality analyser flags), and
-  icon-only buttons carry a label so their purpose is read aloud.
+  announces every slide change. Icon-only buttons carry a label so their purpose
+  is read aloud.
+- **Image alt-text (WCAG 1.1.1)** — the image, two-images and bullets-with-image
+  editors have a dedicated **Alt-tekst** field, separate from the visible caption.
+  A screen reader announces the alt-text when set, falling back to the caption and
+  then a generic "image"; the slide-quality check nudges until either is present.
+  Alt-text travels in the `.md` (see [FILE_FORMAT.md](FILE_FORMAT.md) §8). When the
+  optional AI backend is on, a **Stel alt-tekst voor (AI)** button drafts one with
+  a local vision model — draft-only, marked as an AI concept and cleared for
+  sealing only after you review it; a **Wis AI-alt-teksten** command removes every
+  still-unreviewed AI draft in one undoable step.
 - **Slide quality** — while you edit, OciDeck continuously checks the deck for
   accessibility and readability problems. See the subsection below.
 
@@ -586,6 +601,93 @@ Under *Settings → General → Accessibility*:
 
 When *Warn on export* is off, quality issues are ignored at export time (they
 still show while editing).
+
+## Information security module (pentest reports)
+
+OciDeck has an optional module for writing **MIAUW-conforming penetration-test
+reports** ("Informatieveiligheidsonderzoek"). It is **off by default** and adds a
+set of security slide types, a guided finding flow, a compliance overview and
+report-automation commands. Everything below is offline; the AI helpers are the
+same optional, off-by-default backend used elsewhere.
+
+### Enabling the module
+
+Turn it on under **Settings → Uitbreidingen (Extensions)**. Once enabled, the
+security slide types appear in a dedicated *Informatieveiligheid* tab of the
+add-slide picker, and the module's command-palette actions become available.
+
+### Security slide types
+
+- **Finding** — one vulnerability, authored as a **group**: a structured header
+  card plus optional detail and evidence slides that share one finding id, so the
+  whole finding moves and round-trips as a unit. The header carries the scope
+  object, the CVSS 4.0 vector (with a live, derived score and severity band), CWE
+  and CVE references, and the description / reproduction / impact / recommendation
+  sections. Severity is always **derived** from the vector, never typed.
+- **Checklist** — a standard-driven test list with a MIAUW tri-state per item
+  (*Getoetst* / *Afwijking* / *Niet toetsbaar* / *Niet getoetst*) and an optional
+  link to a finding id.
+- **Scope matrix** — the scope objects, each with a type (Web / Infra / IoT /
+  Firmware / API / Mobile / Other) that automatically fixes its test standard
+  (Web→WSTG, Infra→PTES, …), a coverage status and a note.
+- **Findings summary** — a management overview: the number of findings per CVSS
+  severity band, rendered as a severity-coloured bar chart. **Vernieuw uit deck**
+  recomputes the counts from the deck's findings.
+- **Sign-off** — the truthful-reporting page (MIAUW 1.6) with the deck-wide visual
+  signature and certification, and **Afronden & verzegelen** to seal the report.
+
+### The finding wizard
+
+Adding a **Bevinding** opens a step-by-step wizard instead of a blank slide:
+
+1. **Basis** — title, finding id, scope object.
+2. **CVSS 4.0** — a per-metric builder (a dropdown per metric) with a live score
+   and severity read-out, plus the scope object's **CIA rating** (Confidentiality
+   / Integrity / Availability). The CIA rating pre-fills the CVSS Environmental
+   requirements (`CR`/`IR`/`AR`), so the offered score is **CIA-weighted** by
+   default (you can still override any metric).
+3. **CWE & CVE** — a searchable **CWE picker** over a bundled offline catalog of
+   the most pentest-relevant weaknesses. Picking one sets the CWE and, only when
+   they are still empty, fills the description and recommendation with a short,
+   neutral snippet — a good starting point written without an LLM. A CVE field
+   accepts one or more ids.
+4. **Inhoud** — the four narrative sections, and a choice to add a detail and/or
+   evidence placeholder.
+
+On finish the wizard inserts the whole finding group in one step. The same CWE
+picker is also available from the finding editor's **Kies CWE…** button.
+
+### MIAUW compliance overview
+
+The **MIAUW-compliance** command (command palette) opens a gap-analysis panel that
+scores each MIAUW requirement (EIS) as **Voldaan** / **Openstaand** / **Uitgesloten
+door klant**, grouped by the four parts. Content-derivable requirements are checked
+automatically from the deck (does every finding carry a CVSS vector, scope, CWE and
+sections; is there a management summary, scope matrix, checklist, timeline and
+sign-off; is the deck sealed); organisational requirements are tagged *Handmatig*.
+**Every requirement is waivable** with a mandatory reason — it is a gap analysis,
+never a hard gate, that only *warns* when a foundational requirement (1.1, 1.6) is
+excluded. Waivers travel in the deck front matter.
+
+### Report automation
+
+Three more command-palette actions remove mechanical bookkeeping:
+
+- **Bevindingen hernummeren** — renumbers every finding sequentially (`F-01`,
+  `F-02`, … in deck order), rewriting each group's shared id and its heading
+  prefix in one undoable step (skipped on a sealed deck).
+- **Scope-dekking controleren** — lists scope objects that are in scope but neither
+  tested nor referenced by any finding — the "did you test everything you scoped"
+  guardrail.
+- **Bewijs-hashes kopiëren** — computes the MIAUW-required SHA1 (plus SHA-256) of
+  every evidence image and copies the appendix hash table to the clipboard.
+
+### Security theme
+
+A built-in **Security** theme profile ships a clean, professional report look and
+severity colour tokens (Critical / High / Medium / Low / Informational). The
+tokens drive finding cards, CVSS badges and the findings-summary chart, and can be
+retuned per profile under *Settings → presentation style → Severity (bevindingen)*.
 
 ## Markdown mode
 

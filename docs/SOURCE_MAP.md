@@ -19,12 +19,22 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 
 - `annotation.dart` — `InkStroke` and `InkTool` enum for freehand drawing annotations on presentation slides.
 - `chart.dart` — `ChartSpec`/`ChartSeries` for bar/line/pie/radar/scatter chart slides with inline or CSV data.
+- `checklist_spec.dart` — `ChecklistSpec` for the security checklist slide (MIAUW tri-state test list linked to findings).
 - `cockpit.dart` — `CockpitSpec`/`CockpitMeterSpec` for instrumentation gauges (speedometer, voltmeter, etc.).
-- `deck.dart` — `Deck` with metadata, TLP classification, slides list, annotations, and user notes.
+- `cvss_builder.dart` — CVSS 4.0 Base-metric metadata + vector assembly + `CiaRating`→`CR`/`IR`/`AR` mapping (finding wizard).
+- `cwe_entry.dart` — `CweEntry` for the offline CWE catalog (id/name/description/remediation).
+- `deck.dart` — `Deck` with metadata, TLP classification, slides list, annotations, user notes, and MIAUW waivers.
+- `document_signature.dart` — `DocumentSignature`, the reusable visual signature for sign-off and the document seal.
+- `eis_entry.dart` — `EisEntry`/`EisPart`/`EisDerivation`/`EisCheck` for the MIAUW compliance schema.
+- `finding_spec.dart` — `FindingSpec`: the structured content of a `finding` header slide (scope, CVSS, CWE, CVE, sections).
+- `finding_template.dart` — `FindingTemplate`, a reusable finding starter parsed from Markdown with YAML front matter.
+- `findings_summary_spec.dart` — per-severity findings-summary counts + `deckFindingSeverities` derivation.
 - `markdown_validation.dart` — `MarkdownValidationResult`/`MarkdownValidationIssue` for linting markdown content.
+- `miauw_compliance.dart` — `MiauwComplianceResult`/`EisResult`/`EisStatus` for the compliance overview.
 - `question.dart` — `QuestionSpec`/`QuestionView` for interactive quiz slides (multiple-choice/true-false/multiple-correct/ordering).
 - `rehearsal.dart` — `RehearsalRun`/`SlideTiming` for tracking presentation-practice durations per slide.
-- `settings.dart` — `AppSettings`, `ThemeProfile`, `AppAppearanceProfile`, `CockpitColorScheme` config.
+- `scope_matrix_spec.dart` — `ScopeMatrixSpec`/`ScopeRow`/`ScopeObjectType`/`ScopeStatus` for the scope-matrix slide.
+- `settings.dart` — `AppSettings`, `ThemeProfile` (incl. severity tokens + built-in Security profile), `AppAppearanceProfile`, `CockpitColorScheme` config.
 - `slide.dart` — `Slide` model with typed fields; `SlideType` enum for the slide layout variants.
 - `slide_quality.dart` — `SlideQualityResult`/`SlideQualityIssue` for accessibility/contrast/density audits.
 - `timeline.dart` — `TimelineEvent` and `TimelineLayout`/`TimelineReveal` enums for animated timeline slides.
@@ -33,14 +43,26 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 
 ## `lib/services/` — business logic & IO
 
+- `ai_alt_text_cleanup.dart` — Counts and clears still-unreviewed AI-generated image alt-texts (the bulk-wipe safety net).
+- `ai_client_service.dart` — The gated, provider-agnostic `/v1` client for the optional local AI backend.
+- `ai_request.dart` — `AiChatRequest`/`AiMessage`/`AiImagePart` request model + the shared system guardrail prompt.
+- `ai_security_gate.dart` — Enforces the AI opt-in/consent/endpoint gate before any outbound AI call.
 - `annotation_codec.dart` — Serializes slide annotation layers with content fingerprints.
 - `caption_service.dart` — Stores image captions in JSON sidecars per image directory.
 - `classification_enforcement_policy.dart` — Enforces deck TLP classification rules on export (the authoritative gate).
 - `classification_policy.dart` — Thin backward-compatible wrapper around the TLP export ceiling only.
+- `cvss/cvss4.dart` — Native-Dart port of the FIRST CVSS v4.0 calculator (metrics, parse, score, severity); `cvss4_lookup.dart` + `cvss4_scoring.dart` are its lookup-table/scoring parts.
+- `cwe_catalog.dart` — The bundled offline CWE catalog (`CweCatalog`, curated subset) with search/byId.
 - `description_service.dart` — Stores searchable image descriptions as JSON sidecars.
+- `document_integrity.dart` — Computes/verifies the SHA-512 deck seal and seals a finalised deck.
+- `evidence_hash_service.dart` — Computes the MIAUW SHA1 + SHA-256 of evidence bytes and builds the appendix hash table.
 - `export_metadata.dart` — `ExportDocumentMetadata` stamped into PDF/PPTX/HTML (title, author, org, keywords, TLP).
 - `export_service.dart` — The single chokepoint that renders decks to PDF, PPTX, and HTML.
 - `file_service.dart` — Scans presentation files, opens decks (with the safety gate), and import/URL/package IO.
+- `finding_group_builder.dart` — `buildFindingGroup`: assembles a finding header + optional detail/evidence slides sharing one id.
+- `finding_numbering.dart` — `renumberFindings` (F-01… from deck order) + `deckFindingList` derivation.
+- `finding_template_library.dart` — The bundled reusable finding-template library with search.
+- `image_alt_ai_service.dart` — Vision consumer: suggests WCAG alt-text and searchable tags for an image via the local backend.
 - `image_dedup_service.dart` — Finds byte-identical image files by md5 to clean up libraries.
 - `image_sidecar_store.dart` — Shared read/mutate/atomic-write layer for the per-directory JSON sidecars of captions and descriptions.
 - `image_reference_service.dart` — Finds and rewrites image references in Marp markdown files.
@@ -48,15 +70,19 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `markdown_body_blocks.dart` — Splits markdown into code blocks and paragraphs.
 - `markdown_safety.dart` — Scans raw `.md` for executable content and blocks unsafe imports.
 - `markdown_service.dart` — Serializes decks to Marp markdown and parses it back (the file-format contract).
+- `markdown_service_finding.dart` — Parses/serializes the `finding` slide group's id/role markers and header spec.
 - `markdown_validator.dart` — Line-anchored structural pre-flight against the parser's expectations.
 - `marp_html_service.dart` — Builds the self-contained, sanitised HTML export with embedded assets.
 - `mermaid_render_service.dart` — Renders Mermaid diagrams to cached inline SVG via a shared WebView.
+- `miauw_compliance_analyzer.dart` — Scores each MIAUW EIS (Voldaan/Openstaand/Uitgesloten) from deck content + waivers.
+- `miauw_eis_catalog.dart` — The bundled offline MIAUW EIS catalog (`MiauwEisCatalog`, curated subset).
 - `open_file_channel.dart` — Receives file-open paths from macOS for `.md` files.
 - `quality_export_policy.dart` — Gates export by slide-quality issues with warnings.
 - `recovery_service.dart` — Auto-saves deck snapshots for crash/unsaved recovery.
 - `rehearsal_controller.dart` — Unit-testable controller tracking elapsed/remaining/per-slide rehearsal timing.
 - `rich_text_layout.dart` — Computes pagination and scaling for rich-text markdown bodies.
-- `secret_store.dart` — Manages secrets (WebDAV credentials) in the OS keychain.
+- `scope_coverage.dart` — `deckScopeCoverageGaps`: flags in-scope objects with no test and no finding.
+- `secret_store.dart` — Manages secrets (WebDAV credentials, AI API key) in the OS keychain.
 - `slide_layout_metrics.dart` — Layout constants/helpers for text sizing, fonts, and fit scaling.
 - `slide_quality_analyzer.dart` — Checks deck slides for accessibility and readability issues.
 - `slide_rasterizer.dart` — Renders on-screen slide previews to PNG for WYSIWYG PDF/PPTX export.
@@ -69,10 +95,15 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 
 - `consent_provider.dart` — `ConsentNotifier` managing consent acceptance/revocation with persistent storage.
 - `deck_provider.dart` — `DeckNotifier`: loaded deck, dirty state, undo/redo history, file path.
+- `deck_provider_ai.dart` — `DeckNotifierAiAlt` extension: count/clear AI-generated image alt-texts.
+- `deck_provider_auto.dart` — `DeckNotifierAuto` extension: `autoRenumberFindings` (P2-AUTO).
 - `deck_provider_markdown.dart` — `DeckNotifierMarkdown` extension: generate/apply markdown for the whole deck or a single slide (per-slide markdown view).
+- `deck_provider_miauw.dart` — `DeckNotifierMiauw` extension: set/remove MIAUW compliance waivers.
 - `deck_quality_provider.dart` — Computes accessibility/quality analysis for the loaded deck.
 - `editor_provider.dart` — `EditorState`/`EditorNotifier`: selected slide, editor mode, markdown buffer.
 - `image_contrast_provider.dart` — Computes title-slide image-contrast issues asynchronously per deck.
+- `miauw_compliance_provider.dart` — Computes the MIAUW compliance overview for the loaded deck (per-tab scoped).
+- `sec_module_provider.dart` — The security-module enable/reveal state that gates the pentest features.
 - `settings_provider.dart` — `SettingsNotifier`: app settings, theme/appearance profiles, cockpit schemes.
 - `slide_clipboard_provider.dart` — Global slide clipboard for copy/paste across tabs.
 - `tabs_provider.dart` — `TabInfo` and the tabs notifier: open editor tabs, recovery, WebDAV origin.
@@ -144,6 +175,8 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 
 ### `lib/widgets/shell/` (each `part of app_shell.dart`)
 
+- `ai_actions.dart` — `_MainLayoutAiActions`: the bulk "wipe AI alt-texts" safety action.
+- `command_palette_actions.dart` — `_MainLayoutCommandPalette`: builds and shows the Ctrl/Cmd+K command list (incl. the security-module actions).
 - `shell_actions.dart` — File-IO helpers for deck import/export and Nextcloud integration, plus shared `presentDeck`/`requestCloseTab` helpers.
 - `shell_overlays.dart` — `_DropOverlay` and `_ResizableDivider` chrome.
 - `status_bar.dart` — `_DeckStatusBar`: save state, file info, TLP classification.
@@ -163,17 +196,22 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `add_slide_dialog.dart` — Selects a slide type when adding a slide.
 - `command_palette.dart` — Searchable command overlay (Ctrl/Cmd+K); filters actions, keyboard-navigable.
 - `consent_dialog.dart` — Initial consent/welcome dialog (privacy and license).
+- `cwe_picker.dart` — Searchable picker over the offline CWE catalog (finding editor / wizard).
 - `export_dialog.dart` — WYSIWYG export dialog for PDF/PPTX/HTML.
 - `find_replace_dialog.dart` — Full-text find-and-replace across all slides.
+- `finding_template_picker.dart` — Searchable picker over the reusable finding-template library.
+- `finding_wizard.dart` — The guided finding wizard (title → scope → CVSS+CIA → CWE → CVE → sections → emits a group).
 - `image_carousel_picker.dart` — Image-library carousel (grid and coverflow modes).
 - `import_security_alarm_dialog.dart` — Hard-stop alarm screen for a rejected unsafe presentation.
 - `import_slides_dialog.dart` — Scans directories for presentations to import slides from.
+- `miauw_compliance_panel.dart` — The MIAUW compliance overview panel with per-EIS status and waivers.
 - `new_deck_dialog.dart` — Creates a new presentation with a title.
 - `open_presentation_dialog.dart` — Full-text searchable presentation picker with directory scanning.
 - `package_encrypt_dialog.dart` — Optional password protection when exporting a package: strength meter, generator, copy.
 - `package_password_dialog.dart` — Prompts for the password when opening an encrypted package (with wrong-password retry).
 - `presentation_info_dialog.dart` — Edits title/author/organization/description metadata.
 - `scan_library_dialog.dart` — Scans well-known locations for presentations.
+- `scope_coverage_dialog.dart` — Shows the scope-coverage gaps (in-scope objects with no test/finding).
 - `settings_dialog.dart` — Sidebar settings (theme colours, fonts, cockpit,
   Licentie en Privacy, Beveiliging, Nextcloud, and an "Over OciDeck" screen);
   tab bodies live in `parts/settings_dialog_*.dart`.
@@ -184,13 +222,17 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 ### `lib/widgets/editors/` — per-slide-type editors
 
 - `_editor_field.dart` — Shared layout helpers for slide editors.
+- `alt_text_field.dart` — Per-image alt-text field with the optional "suggest alt-text (AI)" button and AI-draft badge.
 - `audio_attachment_editor.dart` — Edits a slide's audio file attachment.
 - `bullet_marker_selector.dart` — Per-slide bullet-marker override (dot or paw).
 - `bullets_editor.dart` — Edits a bullet-list slide (title, subtitle, nested levels, markers).
 - `bullets_image_editor.dart` — Edits a bullets-with-image slide.
 - `chart_editor.dart` — Edits a chart slide (type, data grid, CSV import/linking).
+- `checklist_editor.dart` — Edits a checklist slide (standard label, tri-state test rows, finding links).
 - `cockpit_editor.dart` — Edits a cockpit slide (title + meter specs).
 - `code_editor.dart` — Edits a code slide (syntax-highlighted monospace field).
+- `finding_editor.dart` — Edits a finding header (scope, CVSS vector, CWE picker, CVE, sections; template + CWE pickers).
+- `findings_summary_editor.dart` — Edits the findings-summary counts (with "refresh from deck").
 - `free_markdown_editor.dart` — Edits a free-form custom-markdown slide.
 - `image_slide_editor.dart` — Edits a full-slide image (title, caption).
 - `list_style_selector.dart` — Selects list style (bullets/numbered/checklist/rich text).
@@ -198,7 +240,9 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `markdown_find_bar.dart` — In-editor find/replace bar for markdown mode.
 - `question_editor.dart` — Edits a question slide (answers, options).
 - `quote_editor.dart` — Edits a quote slide (text, author, background image).
+- `scope_matrix_editor.dart` — Edits a scope-matrix slide (objects × type/standard × coverage status).
 - `section_editor.dart` — Edits a section-divider slide (title, subtitle).
+- `signoff_editor.dart` — Edits the sign-off slide (truthfulness statement, signature, certification, seal).
 - `slide_type_help.dart` — Collapsible "what can I do here?" hint per slide type (and the TLP hint); exhaustive switch guarantees every type has one.
 - `table_editor.dart` — Edits a table slide (grid of cells, header row).
 - `timeline_editor.dart` — Edits a timeline slide (reorderable events, layout).
