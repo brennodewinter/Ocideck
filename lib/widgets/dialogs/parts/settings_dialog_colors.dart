@@ -71,6 +71,63 @@ extension _SettingsColors on _SettingsDialogState {
       ),
       ..._checklistTableColorSettings(),
       ..._codeColorSettings(),
+      ..._severityColorSettings(),
+    ];
+  }
+
+  /// Severity colour tokens for finding cards / CVSS badges (FIRST bands). The
+  /// band labels reuse the shared findings-summary strings so they never drift
+  /// (PENTEST_MIAUW §11).
+  List<Widget> _severityColorSettings() {
+    final l10n = context.l10n;
+    return [
+      const SizedBox(height: 24),
+      _sectionTitle(l10n.d('Severity (bevindingen)')),
+      _themeColorAnchor(
+        'severityCriticalColor',
+        _colorSetting(
+          l10n.d('Kritiek'),
+          _themeProfile.severityCriticalColor,
+          (v) =>
+              _themeProfile = _themeProfile.copyWith(severityCriticalColor: v),
+        ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'severityHighColor',
+        _colorSetting(
+          l10n.d('Hoog'),
+          _themeProfile.severityHighColor,
+          (v) => _themeProfile = _themeProfile.copyWith(severityHighColor: v),
+        ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'severityMediumColor',
+        _colorSetting(
+          l10n.d('Middel'),
+          _themeProfile.severityMediumColor,
+          (v) => _themeProfile = _themeProfile.copyWith(severityMediumColor: v),
+        ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'severityLowColor',
+        _colorSetting(
+          l10n.d('Laag'),
+          _themeProfile.severityLowColor,
+          (v) => _themeProfile = _themeProfile.copyWith(severityLowColor: v),
+        ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'severityNoneColor',
+        _colorSetting(
+          l10n.d('Informatief'),
+          _themeProfile.severityNoneColor,
+          (v) => _themeProfile = _themeProfile.copyWith(severityNoneColor: v),
+        ),
+      ),
     ];
   }
 

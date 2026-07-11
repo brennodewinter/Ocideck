@@ -83,6 +83,7 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Severity (bevindingen)': 'Vakavuus (havainnot)',
   'CWE kiezen': 'Valitse CWE',
   'Zoek op naam of CWE-nummer': 'Hae nimellä tai CWE-numerolla',
   'Geen CWE gevonden': 'CWE:tä ei löytynyt',

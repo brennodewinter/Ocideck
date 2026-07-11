@@ -83,6 +83,7 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Severity (bevindingen)': 'Súlyosság (megállapítások)',
   'CWE kiezen': 'CWE kiválasztása',
   'Zoek op naam of CWE-nummer': 'Keresés név vagy CWE-szám alapján',
   'Geen CWE gevonden': 'Nincs találat CWE-re',

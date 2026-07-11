@@ -83,6 +83,7 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Severity (bevindingen)': 'Σοβαρότητα (ευρήματα)',
   'CWE kiezen': 'Επιλογή CWE',
   'Zoek op naam of CWE-nummer': 'Αναζήτηση με όνομα ή αριθμό CWE',
   'Geen CWE gevonden': 'Δεν βρέθηκε CWE',

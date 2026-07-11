@@ -81,6 +81,7 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Severity (bevindingen)': 'ghob (Sammeypu\')',
   'CWE kiezen': 'CWE wIv',
   'Zoek op naam of CWE-nummer': 'pong ghap CWE mI\' Sam',
   'Geen CWE gevonden': 'CWE tu\'lu\'be\'',

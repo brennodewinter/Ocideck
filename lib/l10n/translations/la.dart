@@ -85,6 +85,7 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Severity (bevindingen)': 'Gravitas (inventa)',
   'CWE kiezen': 'CWE eligere',
   'Zoek op naam of CWE-nummer': 'Quaere nomine vel numero CWE',
   'Geen CWE gevonden': 'Nullum CWE inventum',

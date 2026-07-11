@@ -186,6 +186,11 @@ has these fields (with defaults):
 | `footerPosition` | `right` | `left`/`center`/`right`. |
 | `closingSlideEnabled` | `false` | Automatically add a closing slide during presenting/exporting. |
 | `closingSlideMarkdown` | `"# Bedankt\n\nVragen?"` | Markdown for that closing slide. |
+| `severityCriticalColor` | `#B91C1C` | Finding/CVSS colour for the Critical band. |
+| `severityHighColor` | `#EA580C` | Finding/CVSS colour for the High band. |
+| `severityMediumColor` | `#D97706` | Finding/CVSS colour for the Medium band. |
+| `severityLowColor` | `#15803D` | Finding/CVSS colour for the Low band. |
+| `severityNoneColor` | `#475569` | Finding/CVSS colour for the Informational band. |
 
 Unknown or missing fields fall back to defaults, so older files migrate cleanly.
 

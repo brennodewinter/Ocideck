@@ -83,6 +83,7 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Severity (bevindingen)': 'Nopietnība (atradumi)',
   'CWE kiezen': 'Izvēlēties CWE',
   'Zoek op naam of CWE-nummer': 'Meklēt pēc nosaukuma vai CWE numura',
   'Geen CWE gevonden': 'Neviens CWE nav atrasts',

@@ -82,6 +82,7 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Severity (bevindingen)': 'Raskusaste (leiud)',
   'CWE kiezen': 'Vali CWE',
   'Zoek op naam of CWE-nummer': 'Otsi nime või CWE-numbri järgi',
   'Geen CWE gevonden': 'CWE-d ei leitud',

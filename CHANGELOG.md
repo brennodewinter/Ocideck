@@ -8,6 +8,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Security theme profile with severity colour tokens** — theme profiles now
+  carry five **severity colour tokens** (Critical / High / Medium / Low /
+  Informational, the FIRST bands) that drive finding cards, CVSS badges and the
+  findings-summary chart, so the whole security look is retunable from one place
+  (Settings → presentation style → *Severity (bevindingen)*). A new built-in
+  **"Security"** profile ships a clean, professional pentest-report style (light
+  pages, dark slate title band, red accent) with the standard severity palette.
+  Defaults mirror the previous hardcoded colours, so existing decks render
+  identically; the tokens travel in the deck's style profile and pass the same
+  strict `#RRGGBB` validation as every other profile colour (PENTEST_MIAUW §11).
+  Localised in all interface languages.
 - **Auto-tag untagged images with a local vision model** — the image library's
   carousel gained an **auto-tag** button (visible only when the optional AI
   backend is on). It walks every image that has **no** searchable tags yet, asks a

@@ -84,6 +84,7 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Severity (bevindingen)': 'Gravità (sejbiet)',
   'CWE kiezen': 'Agħżel CWE',
   'Zoek op naam of CWE-nummer': 'Fittex bl-isem jew bin-numru CWE',
   'Geen CWE gevonden': 'Ebda CWE ma nstab',

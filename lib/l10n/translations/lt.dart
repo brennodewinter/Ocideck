@@ -83,6 +83,7 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Severity (bevindingen)': 'Rimtumas (radiniai)',
   'CWE kiezen': 'Pasirinkti CWE',
   'Zoek op naam of CWE-nummer': 'Ieškoti pagal pavadinimą arba CWE numerį',
   'Geen CWE gevonden': 'CWE nerasta',

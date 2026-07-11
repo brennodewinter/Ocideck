@@ -85,6 +85,7 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Severity (bevindingen)': 'Déine (fionnachtana)',
   'CWE kiezen': 'Roghnaigh CWE',
   'Zoek op naam of CWE-nummer': 'Cuardaigh de réir ainm nó uimhir CWE',
   'Geen CWE gevonden': 'Níor aimsíodh CWE',

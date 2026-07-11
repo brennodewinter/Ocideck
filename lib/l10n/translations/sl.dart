@@ -83,6 +83,7 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Severity (bevindingen)': 'Resnost (ugotovitve)',
   'CWE kiezen': 'Izberi CWE',
   'Zoek op naam of CWE-nummer': 'Iskanje po imenu ali številki CWE',
   'Geen CWE gevonden': 'Noben CWE ni bil najden',

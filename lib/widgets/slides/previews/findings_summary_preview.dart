@@ -102,6 +102,7 @@ class _FindingsSummaryPreview extends StatelessWidget {
                   toY: spec.countOf(FindingsSummarySpec.order[i]).toDouble(),
                   color: FindingSeverityPalette.of(
                     FindingsSummarySpec.order[i],
+                    profile: profile,
                   ),
                   width: w * 0.06,
                   borderRadius: BorderRadius.vertical(
@@ -139,7 +140,7 @@ class _FindingsSummaryPreview extends StatelessWidget {
                 width: w * 0.02,
                 height: w * 0.02,
                 decoration: BoxDecoration(
-                  color: FindingSeverityPalette.of(band),
+                  color: FindingSeverityPalette.of(band, profile: profile),
                   shape: BoxShape.circle,
                 ),
               ),

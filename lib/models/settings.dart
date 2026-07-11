@@ -88,6 +88,16 @@ class ThemeProfile {
   /// (timeline, cockpit). A slide may override it; null override = inherit this.
   final int animationDurationMs;
 
+  /// Severity colour tokens for finding / CVSS rendering (the five FIRST bands,
+  /// Critical→Informational). Defaults mirror the built-in
+  /// [FindingSeverityPalette] so every existing profile renders identically; the
+  /// security profile and the colours editor can retune them (PENTEST_MIAUW §11).
+  final String severityCriticalColor;
+  final String severityHighColor;
+  final String severityMediumColor;
+  final String severityLowColor;
+  final String severityNoneColor;
+
   const ThemeProfile({
     this.name = 'Standaard',
     this.slideBackgroundColor = '#FFFFFF',
@@ -117,6 +127,11 @@ class ThemeProfile {
     this.closingSlideEnabled = false,
     this.closingSlideMarkdown = '# Bedankt\n\nVragen?',
     this.animationDurationMs = kThemeDefaultAnimationDurationMs,
+    this.severityCriticalColor = '#B91C1C',
+    this.severityHighColor = '#EA580C',
+    this.severityMediumColor = '#D97706',
+    this.severityLowColor = '#15803D',
+    this.severityNoneColor = '#475569',
   }) : tableTextColor = tableTextColor ?? textColor,
        tableHeaderBackgroundColor = tableHeaderBackgroundColor ?? accentColor;
 
@@ -158,10 +173,38 @@ class ThemeProfile {
     fontFamily: 'EB Garamond',
   );
 
+  /// Ingebouwd beveiligingsprofiel voor pentest-/MIAUW-rapporten (PENTEST_MIAUW
+  /// §11): een strakke, zakelijke look — leesbare lichte pagina's met een
+  /// donkere slate-titelbalk en een rood accent dat de beveiligingscontext
+  /// signaleert. De severity-tokens blijven op de FIRST-standaardpalet, zodat
+  /// bevindingskaarten meteen de vertrouwde bandkleuren tonen.
+  static const security = ThemeProfile(
+    name: 'Security',
+    slideBackgroundColor: '#FFFFFF',
+    textColor: '#1E293B',
+    accentColor: '#B91C1C',
+    checklistCheckedColor: '#15803D',
+    checklistUncheckedColor: '#CBD5E1',
+    checklistStrikeThrough: true,
+    bulletMarker: BulletMarker.dot,
+    tableTextColor: '#1E293B',
+    tableHeaderTextColor: '#FFFFFF',
+    tableHeaderBackgroundColor: '#0F172A',
+    titleBackgroundColor: '#0F172A',
+    titleTextColor: '#FFFFFF',
+    sectionBackgroundColor: '#B91C1C',
+    codeBackgroundColor: '#0F172A',
+    codeTextColor: '#E2E8F0',
+    codeHighlightSyntax: true,
+    codeFontFamily: 'monospace',
+    fontFamily: 'Arial',
+  );
+
   /// Ingebouwde stijlprofielen voor een verse installatie: LibreKAT voorop
-  /// (en dus de standaardselectie), met het neutrale 'Standaard' ernaast.
-  /// Bestaande installaties behouden hun eigen opgeslagen profielenlijst.
-  static const builtIns = [libreKat, ThemeProfile()];
+  /// (en dus de standaardselectie), met het neutrale 'Standaard' en het
+  /// beveiligingsprofiel ernaast. Bestaande installaties behouden hun eigen
+  /// opgeslagen profielenlijst.
+  static const builtIns = [libreKat, ThemeProfile(), security];
 
   ThemeProfile copyWith({
     String? name,
@@ -192,6 +235,11 @@ class ThemeProfile {
     bool? closingSlideEnabled,
     String? closingSlideMarkdown,
     int? animationDurationMs,
+    String? severityCriticalColor,
+    String? severityHighColor,
+    String? severityMediumColor,
+    String? severityLowColor,
+    String? severityNoneColor,
     bool clearLogo = false,
   }) {
     return ThemeProfile(
@@ -229,6 +277,12 @@ class ThemeProfile {
       closingSlideEnabled: closingSlideEnabled ?? this.closingSlideEnabled,
       closingSlideMarkdown: closingSlideMarkdown ?? this.closingSlideMarkdown,
       animationDurationMs: animationDurationMs ?? this.animationDurationMs,
+      severityCriticalColor:
+          severityCriticalColor ?? this.severityCriticalColor,
+      severityHighColor: severityHighColor ?? this.severityHighColor,
+      severityMediumColor: severityMediumColor ?? this.severityMediumColor,
+      severityLowColor: severityLowColor ?? this.severityLowColor,
+      severityNoneColor: severityNoneColor ?? this.severityNoneColor,
     );
   }
 
@@ -262,6 +316,11 @@ class ThemeProfile {
       'closingSlideEnabled': closingSlideEnabled,
       'closingSlideMarkdown': closingSlideMarkdown,
       'animationDurationMs': animationDurationMs,
+      'severityCriticalColor': severityCriticalColor,
+      'severityHighColor': severityHighColor,
+      'severityMediumColor': severityMediumColor,
+      'severityLowColor': severityLowColor,
+      'severityNoneColor': severityNoneColor,
     };
   }
 
@@ -337,6 +396,11 @@ class ThemeProfile {
         (json['animationDurationMs'] as num?)?.round() ??
             kThemeDefaultAnimationDurationMs,
       ),
+      severityCriticalColor: _color(json['severityCriticalColor'], '#B91C1C'),
+      severityHighColor: _color(json['severityHighColor'], '#EA580C'),
+      severityMediumColor: _color(json['severityMediumColor'], '#D97706'),
+      severityLowColor: _color(json['severityLowColor'], '#15803D'),
+      severityNoneColor: _color(json['severityNoneColor'], '#475569'),
     );
   }
 }
