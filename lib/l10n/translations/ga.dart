@@ -85,6 +85,15 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Notitie': 'Nóta',
+  'Status': 'Stádas',
+  'getoetst': 'tástáilte',
+  'Test toevoegen': 'Cuir tástáil leis',
+  'Test verwijderen': 'Bain tástáil',
+  'Niet getoetst': 'Gan tástáil',
+  'Getoetst': 'Tástáilte',
+  'Afwijking': 'Claonadh',
+  'Niet toetsbaar': 'Do-thástáilte',
   '(leeg)': '(folamh)',
   'Audio': 'Fuaim',
   'Bijschrift': 'Foscríbhinn',

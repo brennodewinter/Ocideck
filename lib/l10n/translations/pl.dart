@@ -85,6 +85,15 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Notitie': 'Notatka',
+  'Status': 'Status',
+  'getoetst': 'przetestowano',
+  'Test toevoegen': 'Dodaj test',
+  'Test verwijderen': 'Usuń test',
+  'Niet getoetst': 'Nieprzetestowane',
+  'Getoetst': 'Przetestowane',
+  'Afwijking': 'Odchylenie',
+  'Niet toetsbaar': 'Nietestowalne',
   '(leeg)': '(puste)',
   'Audio': 'Audio',
   'Bijschrift': 'Podpis',

@@ -84,6 +84,15 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Notitie': 'Nota',
+  'Status': 'Status',
+  'getoetst': 'ittestjat',
+  'Test toevoegen': 'Żid test',
+  'Test verwijderen': 'Neħħi test',
+  'Niet getoetst': 'Mhux ittestjat',
+  'Getoetst': 'Ittestjat',
+  'Afwijking': 'Anomalija',
+  'Niet toetsbaar': 'Ma jistax jiġi ttestjat',
   '(leeg)': '(vojt)',
   'Audio': 'Awdjo',
   'Bijschrift': 'Didaskalija',

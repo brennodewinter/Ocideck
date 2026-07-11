@@ -84,6 +84,15 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Notitie': 'Poznámka',
+  'Status': 'Stav',
+  'getoetst': 'otestované',
+  'Test toevoegen': 'Pridať test',
+  'Test verwijderen': 'Odstrániť test',
+  'Niet getoetst': 'Neotestované',
+  'Getoetst': 'Otestované',
+  'Afwijking': 'Odchýlka',
+  'Niet toetsbaar': 'Nedá sa otestovať',
   '(leeg)': '(prázdne)',
   'Audio': 'Audio',
   'Bijschrift': 'Popis',

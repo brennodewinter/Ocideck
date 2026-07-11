@@ -84,6 +84,15 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Notitie': 'Бележка',
+  'Status': 'Статус',
+  'getoetst': 'тествано',
+  'Test toevoegen': 'Добавяне на тест',
+  'Test verwijderen': 'Премахване на тест',
+  'Niet getoetst': 'Не е тествано',
+  'Getoetst': 'Тествано',
+  'Afwijking': 'Отклонение',
+  'Niet toetsbaar': 'Не може да се тества',
   '(leeg)': '(празно)',
   'Audio': 'Аудио',
   'Bijschrift': 'Надпис',

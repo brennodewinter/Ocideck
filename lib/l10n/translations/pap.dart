@@ -83,6 +83,15 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Notitie': 'Nota',
+  'Status': 'Status',
+  'getoetst': 'testá',
+  'Test toevoegen': 'Agregá test',
+  'Test verwijderen': 'Kita test',
+  'Niet getoetst': 'No testá',
+  'Getoetst': 'Testá',
+  'Afwijking': 'Anomalia',
+  'Niet toetsbaar': 'No por wordu testá',
   '(leeg)': '(bashí)',
   'Audio': 'Audio',
   'Bijschrift': 'Lènda',

@@ -84,6 +84,15 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Notitie': 'Nota',
+  'Status': 'Estado',
+  'getoetst': 'probado',
+  'Test toevoegen': 'Añadir prueba',
+  'Test verwijderen': 'Eliminar prueba',
+  'Niet getoetst': 'No probado',
+  'Getoetst': 'Probado',
+  'Afwijking': 'Anomalía',
+  'Niet toetsbaar': 'No comprobable',
   '(leeg)': '(vacío)',
   'Audio': 'Audio',
   'Bijschrift': 'Leyenda',

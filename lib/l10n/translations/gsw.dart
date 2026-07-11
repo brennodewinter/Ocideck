@@ -83,6 +83,15 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Notitie': 'Notiz',
+  'Status': 'Status',
+  'getoetst': 'teschtet',
+  'Test toevoegen': 'Test hinzuefüege',
+  'Test verwijderen': 'Test entferne',
+  'Niet getoetst': 'Nöd teschtet',
+  'Getoetst': 'Teschtet',
+  'Afwijking': 'Abwiichig',
+  'Niet toetsbaar': 'Nöd teschtbar',
   '(leeg)': '(leer)',
   'Audio': 'Audio',
   'Bijschrift': 'Bildlegände',

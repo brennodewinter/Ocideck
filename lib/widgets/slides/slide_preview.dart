@@ -16,6 +16,7 @@ import 'mermaid_diagram.dart';
 import 'video_playhead_bus.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
+import '../../models/checklist_spec.dart';
 import '../../models/cockpit.dart';
 import '../../models/deck.dart';
 import '../../models/question.dart';
@@ -55,6 +56,7 @@ part 'previews/chart_preview_radar.dart';
 part 'previews/cockpit_preview.dart';
 part 'previews/question_preview.dart';
 part 'previews/timeline_preview.dart';
+part 'previews/checklist_preview.dart';
 part 'previews/scaffold_previews.dart';
 part 'previews/overlays.dart';
 
@@ -706,20 +708,33 @@ class SlidePreviewWidget extends StatelessWidget {
           presentationMode: presentationMode,
           revealedCount: timelineRevealedCount,
         );
-      // Informatieveiligheid-scaffold (P1-S): one shared free-Markdown preview
-      // for all five types until each gains a structured preview.
+      case SlideType.checklist:
       case SlideType.finding:
       case SlideType.findingsSummary:
-      case SlideType.checklist:
       case SlideType.scopeMatrix:
       case SlideType.signOff:
-        return _ScaffoldPreview(
-          slide: slide,
-          w: w,
-          font: fontFamily,
-          profile: themeProfile,
-        );
+        return _securityPreview(w);
     }
+  }
+
+  /// Preview for the Informatieveiligheid slide types: `checklist` has its
+  /// structured table preview (P1-CHK); the other four keep the shared
+  /// free-Markdown scaffold until their packages land (P1-FIND/SCOPE/SUM/SIGN).
+  Widget _securityPreview(double w) {
+    if (slide.type == SlideType.checklist) {
+      return _ChecklistPreview(
+        slide: slide,
+        w: w,
+        font: fontFamily,
+        profile: themeProfile,
+      );
+    }
+    return _ScaffoldPreview(
+      slide: slide,
+      w: w,
+      font: fontFamily,
+      profile: themeProfile,
+    );
   }
 
   Widget _videoPreview(double w) {

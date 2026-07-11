@@ -83,6 +83,15 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Notitie': 'Piezīme',
+  'Status': 'Statuss',
+  'getoetst': 'pārbaudīts',
+  'Test toevoegen': 'Pievienot testu',
+  'Test verwijderen': 'Noņemt testu',
+  'Niet getoetst': 'Nav pārbaudīts',
+  'Getoetst': 'Pārbaudīts',
+  'Afwijking': 'Novirze',
+  'Niet toetsbaar': 'Nav pārbaudāms',
   '(leeg)': '(tukšs)',
   'Audio': 'Audio',
   'Bijschrift': 'Paraksts',

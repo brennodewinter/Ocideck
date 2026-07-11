@@ -83,6 +83,15 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Notitie': 'Σημείωση',
+  'Status': 'Κατάσταση',
+  'getoetst': 'ελεγμένο',
+  'Test toevoegen': 'Προσθήκη ελέγχου',
+  'Test verwijderen': 'Αφαίρεση ελέγχου',
+  'Niet getoetst': 'Μη ελεγμένο',
+  'Getoetst': 'Ελεγμένο',
+  'Afwijking': 'Απόκλιση',
+  'Niet toetsbaar': 'Μη ελέγξιμο',
   '(leeg)': '(κενό)',
   'Audio': 'Ήχος',
   'Bijschrift': 'Λεζάντα',

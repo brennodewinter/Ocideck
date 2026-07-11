@@ -83,6 +83,15 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Notitie': 'Muistiinpano',
+  'Status': 'Tila',
+  'getoetst': 'testattu',
+  'Test toevoegen': 'Lisää testi',
+  'Test verwijderen': 'Poista testi',
+  'Niet getoetst': 'Ei testattu',
+  'Getoetst': 'Testattu',
+  'Afwijking': 'Poikkeama',
+  'Niet toetsbaar': 'Ei testattavissa',
   '(leeg)': '(tyhjä)',
   'Audio': 'Ääni',
   'Bijschrift': 'Kuvateksti',

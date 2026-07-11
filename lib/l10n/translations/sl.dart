@@ -83,6 +83,15 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Notitie': 'Opomba',
+  'Status': 'Stanje',
+  'getoetst': 'preverjeno',
+  'Test toevoegen': 'Dodaj test',
+  'Test verwijderen': 'Odstrani test',
+  'Niet getoetst': 'Ni preverjeno',
+  'Getoetst': 'Preverjeno',
+  'Afwijking': 'Odstopanje',
+  'Niet toetsbaar': 'Ni mogoče preveriti',
   '(leeg)': '(prazno)',
   'Audio': 'Audio',
   'Bijschrift': 'Napis',

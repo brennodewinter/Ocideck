@@ -84,6 +84,15 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Notitie': 'Notă',
+  'Status': 'Stare',
+  'getoetst': 'testat',
+  'Test toevoegen': 'Adaugă test',
+  'Test verwijderen': 'Elimină test',
+  'Niet getoetst': 'Netestat',
+  'Getoetst': 'Testat',
+  'Afwijking': 'Abatere',
+  'Niet toetsbaar': 'Netestabil',
   '(leeg)': '(gol)',
   'Audio': 'Audio',
   'Bijschrift': 'Legendă',

@@ -83,6 +83,15 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Notitie': 'Megjegyzés',
+  'Status': 'Állapot',
+  'getoetst': 'tesztelve',
+  'Test toevoegen': 'Teszt hozzáadása',
+  'Test verwijderen': 'Teszt eltávolítása',
+  'Niet getoetst': 'Nincs tesztelve',
+  'Getoetst': 'Tesztelve',
+  'Afwijking': 'Eltérés',
+  'Niet toetsbaar': 'Nem tesztelhető',
   '(leeg)': '(üres)',
   'Audio': 'Hang',
   'Bijschrift': 'Képaláírás',

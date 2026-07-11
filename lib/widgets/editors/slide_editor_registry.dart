@@ -5,6 +5,7 @@ import '../../services/image_service.dart';
 import 'bullets_editor.dart';
 import 'bullets_image_editor.dart';
 import 'chart_editor.dart';
+import 'checklist_editor.dart';
 import 'code_editor.dart';
 import 'cockpit_editor.dart';
 import 'free_markdown_editor.dart';
@@ -184,11 +185,17 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         themeAnimationDurationMs: c.themeAnimationDurationMs,
         nestedInScrollView: c.nestedInScrollView,
       ),
-      // Informatieveiligheid-scaffold (P1-S): one shared free-Markdown editor
-      // for all five types until each gains a structured editor.
+      // Informatieveiligheid: `checklist` has its structured editor (P1-CHK);
+      // the other four still share the free-Markdown scaffold until their
+      // packages land (P1-FIND/SCOPE/SUM/SIGN).
+      SlideType.checklist: (c) => ChecklistEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
       SlideType.finding: _scaffoldEditor,
       SlideType.findingsSummary: _scaffoldEditor,
-      SlideType.checklist: _scaffoldEditor,
       SlideType.scopeMatrix: _scaffoldEditor,
       SlideType.signOff: _scaffoldEditor,
     };

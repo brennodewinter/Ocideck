@@ -81,6 +81,15 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Notitie': 'ghItlh',
+  'Status': 'Dotlh',
+  'getoetst': 'waHlu\'pu\'',
+  'Test toevoegen': 'waHmeH chel',
+  'Test verwijderen': 'waHmeH teq',
+  'Niet getoetst': 'waHbe\'lu\'pu\'',
+  'Getoetst': 'waHlu\'pu\'',
+  'Afwijking': 'Qagh',
+  'Niet toetsbaar': 'waHlu\' laHbe\'',
   '(leeg)': '(chIm)',
   'Audio': 'wab',
   'Bijschrift': 'per',

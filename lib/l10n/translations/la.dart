@@ -85,6 +85,15 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Notitie': 'Nota',
+  'Status': 'Status',
+  'getoetst': 'probatum',
+  'Test toevoegen': 'Probationem addere',
+  'Test verwijderen': 'Probationem removere',
+  'Niet getoetst': 'Non probatum',
+  'Getoetst': 'Probatum',
+  'Afwijking': 'Discrepantia',
+  'Niet toetsbaar': 'Non probabile',
   '(leeg)': '(vacuum)',
   'Audio': 'Audio',
   'Bijschrift': 'Inscriptio',

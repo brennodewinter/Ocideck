@@ -68,6 +68,7 @@ void main() {
       'Slide',
       'slide',
       'Spider',
+      'Status',
       'Type',
       'Contrast',
       ':1).',

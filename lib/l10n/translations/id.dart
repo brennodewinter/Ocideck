@@ -83,6 +83,15 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Notitie': 'Catatan',
+  'Status': 'Status',
+  'getoetst': 'diuji',
+  'Test toevoegen': 'Tambah tes',
+  'Test verwijderen': 'Hapus tes',
+  'Niet getoetst': 'Belum diuji',
+  'Getoetst': 'Diuji',
+  'Afwijking': 'Anomali',
+  'Niet toetsbaar': 'Tidak dapat diuji',
   '(leeg)': '(kosong)',
   'Audio': 'Audio',
   'Bijschrift': 'Keterangan',

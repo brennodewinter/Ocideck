@@ -84,6 +84,15 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Notitie': 'Примітка',
+  'Status': 'Статус',
+  'getoetst': 'перевірено',
+  'Test toevoegen': 'Додати тест',
+  'Test verwijderen': 'Видалити тест',
+  'Niet getoetst': 'Не перевірено',
+  'Getoetst': 'Перевірено',
+  'Afwijking': 'Відхилення',
+  'Niet toetsbaar': 'Не піддається перевірці',
   '(leeg)': '(порожньо)',
   'Audio': 'Аудіо',
   'Bijschrift': 'Підпис',

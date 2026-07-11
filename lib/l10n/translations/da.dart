@@ -83,6 +83,15 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Notitie': 'Note',
+  'Status': 'Status',
+  'getoetst': 'testet',
+  'Test toevoegen': 'Tilføj test',
+  'Test verwijderen': 'Fjern test',
+  'Niet getoetst': 'Ikke testet',
+  'Getoetst': 'Testet',
+  'Afwijking': 'Afvigelse',
+  'Niet toetsbaar': 'Ikke testbar',
   '(leeg)': '(tom)',
   'Audio': 'Lyd',
   'Bijschrift': 'Billedtekst',

@@ -84,6 +84,15 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Notitie': 'Poznámka',
+  'Status': 'Stav',
+  'getoetst': 'otestováno',
+  'Test toevoegen': 'Přidat test',
+  'Test verwijderen': 'Odebrat test',
+  'Niet getoetst': 'Neotestováno',
+  'Getoetst': 'Otestováno',
+  'Afwijking': 'Odchylka',
+  'Niet toetsbaar': 'Nelze otestovat',
   '(leeg)': '(prázdné)',
   'Audio': 'Audio',
   'Bijschrift': 'Popisek',

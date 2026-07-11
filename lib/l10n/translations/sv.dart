@@ -83,6 +83,15 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Notitie': 'Anteckning',
+  'Status': 'Status',
+  'getoetst': 'testad',
+  'Test toevoegen': 'Lägg till test',
+  'Test verwijderen': 'Ta bort test',
+  'Niet getoetst': 'Inte testad',
+  'Getoetst': 'Testad',
+  'Afwijking': 'Avvikelse',
+  'Niet toetsbaar': 'Inte testbar',
   '(leeg)': '(tom)',
   'Audio': 'Ljud',
   'Bijschrift': 'Bildtext',

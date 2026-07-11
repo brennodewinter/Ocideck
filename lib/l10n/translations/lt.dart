@@ -83,6 +83,15 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Notitie': 'Pastaba',
+  'Status': 'Būsena',
+  'getoetst': 'patikrinta',
+  'Test toevoegen': 'Pridėti testą',
+  'Test verwijderen': 'Pašalinti testą',
+  'Niet getoetst': 'Nepatikrinta',
+  'Getoetst': 'Patikrinta',
+  'Afwijking': 'Nuokrypis',
+  'Niet toetsbaar': 'Netikrinama',
   '(leeg)': '(tuščia)',
   'Audio': 'Garsas',
   'Bijschrift': 'Antraštė',

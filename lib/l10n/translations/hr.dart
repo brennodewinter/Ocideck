@@ -83,6 +83,15 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Notitie': 'Bilješka',
+  'Status': 'Status',
+  'getoetst': 'testirano',
+  'Test toevoegen': 'Dodaj test',
+  'Test verwijderen': 'Ukloni test',
+  'Niet getoetst': 'Nije testirano',
+  'Getoetst': 'Testirano',
+  'Afwijking': 'Odstupanje',
+  'Niet toetsbaar': 'Nije moguće testirati',
   '(leeg)': '(prazno)',
   'Audio': 'Audio',
   'Bijschrift': 'Natpis',

@@ -82,6 +82,15 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Notitie': 'Märkus',
+  'Status': 'Olek',
+  'getoetst': 'testitud',
+  'Test toevoegen': 'Lisa test',
+  'Test verwijderen': 'Eemalda test',
+  'Niet getoetst': 'Testimata',
+  'Getoetst': 'Testitud',
+  'Afwijking': 'Kõrvalekalle',
+  'Niet toetsbaar': 'Ei ole testitav',
   '(leeg)': '(tühi)',
   'Audio': 'Audio',
   'Bijschrift': 'Pealdis',

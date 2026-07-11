@@ -83,6 +83,15 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Notitie': 'Notysje',
+  'Status': 'Status',
+  'getoetst': 'toetst',
+  'Test toevoegen': 'Test tafoegje',
+  'Test verwijderen': 'Test fuortsmite',
+  'Niet getoetst': 'Net toetst',
+  'Getoetst': 'Toetst',
+  'Afwijking': 'Ôfwiking',
+  'Niet toetsbaar': 'Net toetsber',
   '(leeg)': '(leech)',
   'Audio': 'Audio',
   'Bijschrift': 'Byskrift',
