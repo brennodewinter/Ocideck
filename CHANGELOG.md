@@ -8,6 +8,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Auto-tag untagged images with a local vision model** — the image library's
+  carousel gained an **auto-tag** button (visible only when the optional AI
+  backend is on). It walks every image that has **no** searchable tags yet, asks a
+  local vision model for a handful of keyword tags in the interface language, and
+  saves them to the description sidecar so the picture becomes findable. It only
+  fills **empty** descriptions — a human or earlier tag is never overwritten — and
+  after a run an **Ongedaan maken** action clears exactly the tags that run wrote,
+  so a bad bulk pass is fully reversible. Off by default; desktop only
+  (AI_ASSIST §6). Localised in all interface languages.
 - **Offline CWE picker with deterministic snippet autofill** — the finding
   editor gained a **"Kies CWE…"** button that opens a searchable picker over a
   bundled, offline catalog of the most pentest-relevant MITRE CWE weaknesses

@@ -96,6 +96,11 @@ const _dutchSourceEn = {
   'aantal': 'count',
   'Wissen': 'Clear',
   'AI-alt-teksten gewist.': 'AI alt-texts cleared.',
+  'Alle afbeeldingen hebben al tags.': 'All images already have tags.',
+  'Afbeeldingen taggen…': 'Tagging images…',
+  'afbeeldingen getagd door AI.': 'images tagged by AI.',
+  'Ongetagde afbeeldingen taggen met AI': 'Tag untagged images with AI',
+  'Ongedaan maken': 'Undo',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Couldn\'t read the image for AI analysis.',
   'Het model gaf geen alt-tekst terug.': 'The model returned no alt text.',

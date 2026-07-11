@@ -98,6 +98,12 @@ const _dutchSourceGa = {
   'aantal': 'líon',
   'Wissen': 'Glan',
   'AI-alt-teksten gewist.': 'Téacsanna malartacha IS glanta.',
+  'Alle afbeeldingen hebben al tags.':
+      'Tá clibeanna ag gach íomhá cheana féin.',
+  'Afbeeldingen taggen…': 'Íomhánna á gclibeáil…',
+  'afbeeldingen getagd door AI.': 'íomhá clibeáilte ag IS.',
+  'Ongetagde afbeeldingen taggen met AI': 'Clibeáil íomhánna gan chlib le IS',
+  'Ongedaan maken': 'Cealaigh',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Níorbh fhéidir an íomhá a léamh le haghaidh anailís IS.',
   'Het model gaf geen alt-tekst terug.':

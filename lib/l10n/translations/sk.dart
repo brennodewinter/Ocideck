@@ -97,6 +97,12 @@ const _dutchSourceSk = {
   'aantal': 'počet',
   'Wissen': 'Vymazať',
   'AI-alt-teksten gewist.': 'AI alt texty vymazané.',
+  'Alle afbeeldingen hebben al tags.': 'Všetky obrázky už majú štítky.',
+  'Afbeeldingen taggen…': 'Označovanie obrázkov…',
+  'afbeeldingen getagd door AI.': 'obrázkov označených AI.',
+  'Ongetagde afbeeldingen taggen met AI':
+      'Označiť neoznačené obrázky pomocou AI',
+  'Ongedaan maken': 'Späť',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Obrázok sa nepodarilo načítať pre AI analýzu.',
   'Het model gaf geen alt-tekst terug.': 'Model nevrátil žiadny alt text.',

@@ -96,6 +96,11 @@ const _dutchSourceDe = {
   'aantal': 'Anzahl',
   'Wissen': 'Löschen',
   'AI-alt-teksten gewist.': 'KI-Alt-Texte gelöscht.',
+  'Alle afbeeldingen hebben al tags.': 'Alle Bilder haben bereits Tags.',
+  'Afbeeldingen taggen…': 'Bilder werden getaggt…',
+  'afbeeldingen getagd door AI.': 'Bilder per KI getaggt.',
+  'Ongetagde afbeeldingen taggen met AI': 'Bilder ohne Tags mit KI taggen',
+  'Ongedaan maken': 'Rückgängig',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Das Bild konnte für die KI-Analyse nicht gelesen werden.',
   'Het model gaf geen alt-tekst terug.':

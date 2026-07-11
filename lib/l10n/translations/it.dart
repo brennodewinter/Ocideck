@@ -96,6 +96,12 @@ const _dutchSourceIt = {
   'aantal': 'numero',
   'Wissen': 'Cancella',
   'AI-alt-teksten gewist.': 'Testi alternativi IA cancellati.',
+  'Alle afbeeldingen hebben al tags.': 'Tutte le immagini hanno già dei tag.',
+  'Afbeeldingen taggen…': 'Assegnazione tag alle immagini…',
+  'afbeeldingen getagd door AI.': 'immagini taggate dall\'IA.',
+  'Ongetagde afbeeldingen taggen met AI':
+      'Assegna tag alle immagini senza tag con l\'IA',
+  'Ongedaan maken': 'Annulla',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Impossibile leggere l\'immagine per l\'analisi IA.',
   'Het model gaf geen alt-tekst terug.':

@@ -96,6 +96,11 @@ const _dutchSourceLt = {
   'aantal': 'kiekis',
   'Wissen': 'Išvalyti',
   'AI-alt-teksten gewist.': 'DI alt tekstai išvalyti.',
+  'Alle afbeeldingen hebben al tags.': 'Visi vaizdai jau turi žymas.',
+  'Afbeeldingen taggen…': 'Žymimi vaizdai…',
+  'afbeeldingen getagd door AI.': 'vaizdai pažymėti DI.',
+  'Ongetagde afbeeldingen taggen met AI': 'Pažymėti nepažymėtus vaizdus su DI',
+  'Ongedaan maken': 'Atšaukti',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Nepavyko nuskaityti vaizdo DI analizei.',
   'Het model gaf geen alt-tekst terug.': 'Modelis negrąžino alt teksto.',

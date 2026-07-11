@@ -79,6 +79,10 @@ extension _CarouselChrome on _ImageCarouselPickerState {
           Expanded(child: _buildSearchField()),
           const SizedBox(width: 12),
           _buildUntaggedToggle(),
+          if (_aiTaggingAvailable) ...[
+            const SizedBox(width: 12),
+            _buildAutoTagButton(),
+          ],
           const SizedBox(width: 12),
           _buildViewToggle(),
           const SizedBox(width: 12),
@@ -151,6 +155,42 @@ extension _CarouselChrome on _ImageCarouselPickerState {
   }
 
   /// Aan/uit-knop voor het filter "alleen afbeeldingen zonder tags". Handig om
+  /// AI-knop om alle nog ongetagde afbeeldingen automatisch van zoek-tags te
+  /// voorzien (AI_ASSIST §6). Tijdens het taggen toont 'ie de voortgang; alleen
+  /// zichtbaar als de AI-backend aanstaat.
+  Widget _buildAutoTagButton() {
+    final l10n = context.l10n;
+    if (_autoTagging) {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(
+            width: 16,
+            height: 16,
+            child: CircularProgressIndicator(strokeWidth: 2),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            _autoTagPhase ?? l10n.d('Afbeeldingen taggen…'),
+            style: const TextStyle(
+              color: ImagePickerPalette.textDim,
+              fontSize: 12,
+            ),
+          ),
+        ],
+      );
+    }
+    return IconButton(
+      icon: const Icon(
+        Icons.auto_awesome_outlined,
+        color: ImagePickerPalette.textDim,
+        size: 20,
+      ),
+      onPressed: _autoTagUntagged,
+      tooltip: l10n.d('Ongetagde afbeeldingen taggen met AI'),
+    );
+  }
+
   /// te zien welke afbeeldingen nog een beschrijving/tags nodig hebben.
   Widget _buildUntaggedToggle() {
     final l10n = context.l10n;

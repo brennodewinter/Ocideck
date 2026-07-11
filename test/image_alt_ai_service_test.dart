@@ -115,4 +115,36 @@ void main() {
       expect(fake.lastBody, contains('data:image/jpeg;base64,'));
     });
   });
+
+  group('cleanTagsDraft', () {
+    test('splits, trims, de-duplicates and caps', () {
+      expect(cleanTagsDraft('cat, dog, Cat , , bird'), 'cat, dog, bird');
+      expect(
+        cleanTagsDraft('1. mountain\n2. lake\n- forest', maxTags: 2),
+        'mountain, lake',
+      );
+    });
+  });
+
+  group('ImageAltAiService.suggestTags', () {
+    test('returns cleaned comma-separated tags', () async {
+      final fake = _FakeTransport()
+        ..result = const AiHttpResult(
+          200,
+          '{"choices":[{"message":{"content":"- mountain\\n- lake\\n- mountain"}}]}',
+        );
+      final client = AiClientService(
+        settings: _localSettings,
+        hasOutboundConsent: false,
+        transport: fake,
+        isWeb: false,
+      );
+      final png = img.encodePng(img.Image(width: 48, height: 48));
+      final tags = await ImageAltAiService(
+        client,
+      ).suggestTags(imageBytes: png, languageName: 'English');
+      expect(tags, 'mountain, lake');
+      expect(fake.lastBody, contains('data:image/jpeg;base64,'));
+    });
+  });
 }

@@ -96,6 +96,11 @@ const _dutchSourcePap = {
   'aantal': 'kantidat',
   'Wissen': 'Kita',
   'AI-alt-teksten gewist.': 'Teksto alternativo di IA kitá.',
+  'Alle afbeeldingen hebben al tags.': 'Tur imagen tin tag kaba.',
+  'Afbeeldingen taggen…': 'Ta pone tag na imagennan…',
+  'afbeeldingen getagd door AI.': 'imagen a haña tag pa IA.',
+  'Ongetagde afbeeldingen taggen met AI': 'Pone tag na imagennan sin tag ku IA',
+  'Ongedaan maken': 'Deshasí',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'No por a lesa e imagen pa análisis di IA.',
   'Het model gaf geen alt-tekst terug.':

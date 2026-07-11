@@ -97,6 +97,12 @@ const _dutchSourcePt = {
   'aantal': 'quantidade',
   'Wissen': 'Limpar',
   'AI-alt-teksten gewist.': 'Textos alternativos de IA limpos.',
+  'Alle afbeeldingen hebben al tags.': 'Todas as imagens já têm etiquetas.',
+  'Afbeeldingen taggen…': 'A etiquetar imagens…',
+  'afbeeldingen getagd door AI.': 'imagens etiquetadas por IA.',
+  'Ongetagde afbeeldingen taggen met AI':
+      'Etiquetar imagens sem etiqueta com IA',
+  'Ongedaan maken': 'Desfazer',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Não foi possível ler a imagem para análise de IA.',
   'Het model gaf geen alt-tekst terug.':

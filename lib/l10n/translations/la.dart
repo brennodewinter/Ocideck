@@ -98,6 +98,11 @@ const _dutchSourceLa = {
   'aantal': 'numerus',
   'Wissen': 'Dele',
   'AI-alt-teksten gewist.': 'Textus alterni IA deleti.',
+  'Alle afbeeldingen hebben al tags.': 'Omnes imagines iam titulos habent.',
+  'Afbeeldingen taggen…': 'Imagines titulantur…',
+  'afbeeldingen getagd door AI.': 'imagines ab IA titulatae.',
+  'Ongetagde afbeeldingen taggen met AI': 'Imagines sine titulis IA titulare',
+  'Ongedaan maken': 'Revocare',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Imago ad analysim IA legi non potuit.',
   'Het model gaf geen alt-tekst terug.':

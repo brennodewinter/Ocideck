@@ -96,6 +96,11 @@ const _dutchSourceFy = {
   'aantal': 'oantal',
   'Wissen': 'Wiskje',
   'AI-alt-teksten gewist.': 'AI-alt-teksten wiske.',
+  'Alle afbeeldingen hebben al tags.': 'Alle ôfbyldings hawwe al tags.',
+  'Afbeeldingen taggen…': 'Ofbyldings taggje…',
+  'afbeeldingen getagd door AI.': 'ôfbyldings tagge troch AI.',
+  'Ongetagde afbeeldingen taggen met AI': 'Untagde ôfbyldings taggje mei AI',
+  'Ongedaan maken': 'Ûngedien meitsje',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Koe de ôfbylding net lêze foar AI-analyze.',
   'Het model gaf geen alt-tekst terug.': 'It model joech gjin alt-tekst werom.',

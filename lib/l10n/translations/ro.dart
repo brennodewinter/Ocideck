@@ -97,6 +97,12 @@ const _dutchSourceRo = {
   'aantal': 'număr',
   'Wissen': 'Șterge',
   'AI-alt-teksten gewist.': 'Texte alternative IA șterse.',
+  'Alle afbeeldingen hebben al tags.': 'Toate imaginile au deja etichete.',
+  'Afbeeldingen taggen…': 'Se etichetează imaginile…',
+  'afbeeldingen getagd door AI.': 'imagini etichetate de IA.',
+  'Ongetagde afbeeldingen taggen met AI':
+      'Etichetează imaginile neetichetate cu IA',
+  'Ongedaan maken': 'Anulează',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Imaginea nu a putut fi citită pentru analiza IA.',
   'Het model gaf geen alt-tekst terug.':

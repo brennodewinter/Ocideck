@@ -96,6 +96,11 @@ const _dutchSourceLv = {
   'aantal': 'skaits',
   'Wissen': 'Notīrīt',
   'AI-alt-teksten gewist.': 'MI alt teksti notīrīti.',
+  'Alle afbeeldingen hebben al tags.': 'Visiem attēliem jau ir birkas.',
+  'Afbeeldingen taggen…': 'Attēlu birkošana…',
+  'afbeeldingen getagd door AI.': 'attēli, ko marķējis MI.',
+  'Ongetagde afbeeldingen taggen met AI': 'Marķēt attēlus bez birkām ar MI',
+  'Ongedaan maken': 'Atsaukt',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Attēlu neizdevās nolasīt MI analīzei.',
   'Het model gaf geen alt-tekst terug.': 'Modelis neatgrieza alt tekstu.',

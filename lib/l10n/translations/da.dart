@@ -96,6 +96,11 @@ const _dutchSourceDa = {
   'aantal': 'antal',
   'Wissen': 'Ryd',
   'AI-alt-teksten gewist.': 'AI-alt-tekster ryddet.',
+  'Alle afbeeldingen hebben al tags.': 'Alle billeder har allerede tags.',
+  'Afbeeldingen taggen…': 'Tagger billeder…',
+  'afbeeldingen getagd door AI.': 'billeder tagget af AI.',
+  'Ongetagde afbeeldingen taggen met AI': 'Tag billeder uden tags med AI',
+  'Ongedaan maken': 'Fortryd',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Billedet kunne ikke læses til AI-analyse.',
   'Het model gaf geen alt-tekst terug.':

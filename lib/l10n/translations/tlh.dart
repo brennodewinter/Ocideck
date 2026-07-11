@@ -94,6 +94,11 @@ const _dutchSourceTlh = {
   'aantal': 'mI\'',
   'Wissen': 'Qaw\'',
   'AI-alt-teksten gewist.': 'IA Del ghItlh Qaw\'lu\'pu\'.',
+  'Alle afbeeldingen hebben al tags.': 'Hoch mIllogh per ghaj.',
+  'Afbeeldingen taggen…': 'mIllogh per lup…',
+  'afbeeldingen getagd door AI.': 'mIllogh per IA.',
+  'Ongetagde afbeeldingen taggen met AI': 'per Hutlh mIllogh IA per moj',
+  'Ongedaan maken': 'chID',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'IA nojmoH nabvaD nagh HaqlaHbe\'.',
   'Het model gaf geen alt-tekst terug.': 'Del ghItlh chugh De\' chov qawHa\'.',

@@ -97,6 +97,11 @@ const _dutchSourceMt = {
   'aantal': 'numru',
   'Wissen': 'Naddaf',
   'AI-alt-teksten gewist.': 'It-testi alternattivi IA tneħħew.',
+  'Alle afbeeldingen hebben al tags.': 'L-istampi kollha diġà għandhom tags.',
+  'Afbeeldingen taggen…': 'Qed jiġu ttaggjati l-istampi…',
+  'afbeeldingen getagd door AI.': 'stampi ttaggjati mill-IA.',
+  'Ongetagde afbeeldingen taggen met AI': 'Ittaggja stampi mingħajr tags bl-IA',
+  'Ongedaan maken': 'Ħassar',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Ma setgħetx tinqara l-immaġni għall-analiżi tal-IA.',
   'Het model gaf geen alt-tekst terug.':

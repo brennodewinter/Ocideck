@@ -96,6 +96,11 @@ const _dutchSourceSv = {
   'aantal': 'antal',
   'Wissen': 'Rensa',
   'AI-alt-teksten gewist.': 'AI-alt-texter rensade.',
+  'Alle afbeeldingen hebben al tags.': 'Alla bilder har redan taggar.',
+  'Afbeeldingen taggen…': 'Taggar bilder…',
+  'afbeeldingen getagd door AI.': 'bilder taggade av AI.',
+  'Ongetagde afbeeldingen taggen met AI': 'Tagga otaggade bilder med AI',
+  'Ongedaan maken': 'Ångra',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Bilden kunde inte läsas för AI-analys.',
   'Het model gaf geen alt-tekst terug.': 'Modellen returnerade ingen alt-text.',

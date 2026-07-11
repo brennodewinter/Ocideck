@@ -97,6 +97,12 @@ const _dutchSourceUk = {
   'aantal': 'кількість',
   'Wissen': 'Очистити',
   'AI-alt-teksten gewist.': 'Альт-тексти ШІ очищено.',
+  'Alle afbeeldingen hebben al tags.': 'Усі зображення вже мають теги.',
+  'Afbeeldingen taggen…': 'Додавання тегів до зображень…',
+  'afbeeldingen getagd door AI.': 'зображень позначено ШІ.',
+  'Ongetagde afbeeldingen taggen met AI':
+      'Позначити зображення без тегів за допомогою ШІ',
+  'Ongedaan maken': 'Скасувати',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Не вдалося прочитати зображення для аналізу ШІ.',
   'Het model gaf geen alt-tekst terug.':

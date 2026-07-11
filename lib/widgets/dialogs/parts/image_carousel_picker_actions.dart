@@ -167,6 +167,95 @@ extension _CarouselActions on _ImageCarouselPickerState {
     );
   }
 
+  /// Whether the optional AI backend is on — gates the "auto-tag untagged" action.
+  bool get _aiTaggingAvailable {
+    final ai = ref.read(settingsProvider).aiSettings;
+    return ai.enabled && ai.isConfigured;
+  }
+
+  /// Auto-tag every *untagged* library image with AI-generated searchable keyword
+  /// tags (AI_ASSIST §6), so it becomes findable. Only fills empty descriptions —
+  /// never overwrites an existing (human or earlier) tag. Progress shows on the
+  /// button; an undo snackbar clears exactly what this run tagged.
+  Future<void> _autoTagUntagged() async {
+    await _persistDescription();
+    if (!mounted) return;
+    final l10n = context.l10n;
+    final untagged = [
+      for (final path in _images)
+        if ((_descriptions[path] ?? '').trim().isEmpty) path,
+    ];
+    if (untagged.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.d('Alle afbeeldingen hebben al tags.'))),
+      );
+      return;
+    }
+    final settings = ref.read(settingsProvider).aiSettings;
+    final tagger = ImageAltAiService(
+      AiClientService(
+        settings: settings,
+        hasOutboundConsent: ref.read(consentProvider).hasAccepted,
+        apiKey: await SecretStore().readAiApiKey(settings.baseUrl),
+      ),
+    );
+    final imageService = ImageService();
+    final langName =
+        AppLocalizations.languageNames[l10n.languageCode] ?? 'English';
+    final tagged = <String>[];
+    _rebuild(() => _autoTagging = true);
+    for (var i = 0; i < untagged.length; i++) {
+      if (!mounted) break;
+      _rebuild(
+        () => _autoTagPhase =
+            '${l10n.d('Afbeeldingen taggen…')} ${i + 1}/${untagged.length}',
+      );
+      try {
+        final bytes = await imageService.readSlideImageBytes(untagged[i]);
+        if (bytes == null) continue;
+        final tags = await tagger.suggestTags(
+          imageBytes: bytes,
+          languageName: langName,
+        );
+        if (tags.isEmpty) continue;
+        await widget.descriptionService.saveDescription(untagged[i], tags);
+        _descriptions[untagged[i]] = tags;
+        tagged.add(untagged[i]);
+      } catch (e, s) {
+        logError('ImageCarouselPicker._autoTagUntagged', e, s);
+      }
+    }
+    if (!mounted) return;
+    _rebuild(() {
+      _autoTagging = false;
+      _autoTagPhase = null;
+      _applyFilter();
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          '${tagged.length} ${l10n.d('afbeeldingen getagd door AI.')}',
+        ),
+        action: tagged.isEmpty
+            ? null
+            : SnackBarAction(
+                label: l10n.d('Ongedaan maken'),
+                onPressed: () => _undoAutoTag(tagged),
+              ),
+      ),
+    );
+  }
+
+  /// Undo the last auto-tag run: clear the descriptions it wrote (a safety net
+  /// for a bad bulk run — it only touches images this run tagged).
+  Future<void> _undoAutoTag(List<String> paths) async {
+    for (final path in paths) {
+      await widget.descriptionService.removeDescription(path);
+      _descriptions.remove(path);
+    }
+    if (mounted) _rebuild(_applyFilter);
+  }
+
   /// Zoek byte-identieke afbeeldingen (md5), laat de gebruiker bevestigen en
   /// ruim ze op: per groep blijft één bestand staan, tags/beschrijvingen en
   /// opmerkingen/captions worden samengevoegd en slides die een verwijderde
