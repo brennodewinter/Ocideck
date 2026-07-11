@@ -83,6 +83,10 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Managementsamenvatting': 'Resúmen ehekutivo',
+  'Bevindingen totaal': 'Total di deskubrimentu',
+  'scope-objecten getest': 'opheto di scope testá',
+  'Gebruikte standaarden': 'Standardnan usá',
   'Bewijs-hashes kopiëren': 'Kopia hash di prueba',
   'Bewijs-hashes gekopieerd': 'Hash di prueba kopiá',
   'Bevindingen hernummeren': 'Rennumera e deskubrimentunan',

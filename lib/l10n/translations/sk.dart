@@ -84,6 +84,10 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Managementsamenvatting': 'Manažérske zhrnutie',
+  'Bevindingen totaal': 'Zistenia spolu',
+  'scope-objecten getest': 'testované objekty rozsahu',
+  'Gebruikte standaarden': 'Použité štandardy',
   'Bewijs-hashes kopiëren': 'Kopírovať hashe dôkazov',
   'Bewijs-hashes gekopieerd': 'Hashe dôkazov skopírované',
   'Bevindingen hernummeren': 'Prečíslovať zistenia',

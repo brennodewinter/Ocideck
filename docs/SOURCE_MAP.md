@@ -69,6 +69,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `image_service.dart` — Validates and manages imported image and media asset files.
 - `markdown_body_blocks.dart` — Splits markdown into code blocks and paragraphs.
 - `markdown_safety.dart` — Scans raw `.md` for executable content and blocks unsafe imports.
+- `management_summary.dart` — Derives the management summary from the deck (severity counts, scope coverage, standards used).
 - `markdown_service.dart` — Serializes decks to Marp markdown and parses it back (the file-format contract).
 - `markdown_service_finding.dart` — Parses/serializes the `finding` slide group's id/role markers and header spec.
 - `markdown_validator.dart` — Line-anchored structural pre-flight against the parser's expectations.
@@ -204,6 +205,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `image_carousel_picker.dart` — Image-library carousel (grid and coverflow modes).
 - `import_security_alarm_dialog.dart` — Hard-stop alarm screen for a rejected unsafe presentation.
 - `import_slides_dialog.dart` — Scans directories for presentations to import slides from.
+- `management_summary_dialog.dart` — Shows the derived management summary (severity counts, coverage, standards).
 - `miauw_compliance_panel.dart` — The MIAUW compliance overview panel with per-EIS status and waivers.
 - `new_deck_dialog.dart` — Creates a new presentation with a title.
 - `open_presentation_dialog.dart` — Full-text searchable presentation picker with directory scanning.

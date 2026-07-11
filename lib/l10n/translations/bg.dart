@@ -84,6 +84,10 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Managementsamenvatting': 'Обобщение за ръководството',
+  'Bevindingen totaal': 'Общо констатации',
+  'scope-objecten getest': 'тествани обекти от обхвата',
+  'Gebruikte standaarden': 'Използвани стандарти',
   'Bewijs-hashes kopiëren': 'Копирай хешовете на доказателствата',
   'Bewijs-hashes gekopieerd': 'Хешовете на доказателствата са копирани',
   'Bevindingen hernummeren': 'Преномериране на констатациите',

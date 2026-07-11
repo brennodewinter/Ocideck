@@ -84,6 +84,10 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Managementsamenvatting': 'Manažerské shrnutí',
+  'Bevindingen totaal': 'Nálezy celkem',
+  'scope-objecten getest': 'testované objekty rozsahu',
+  'Gebruikte standaarden': 'Použité standardy',
   'Bewijs-hashes kopiëren': 'Kopírovat hashe důkazů',
   'Bewijs-hashes gekopieerd': 'Hashe důkazů zkopírovány',
   'Bevindingen hernummeren': 'Přečíslovat nálezy',

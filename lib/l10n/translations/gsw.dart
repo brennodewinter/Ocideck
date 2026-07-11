@@ -83,6 +83,10 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Managementsamenvatting': 'Managementzämmefassig',
+  'Bevindingen totaal': 'Befund total',
+  'scope-objecten getest': 'Scope-Objäkt teschtet',
+  'Gebruikte standaarden': 'Bruuchti Standards',
   'Bewijs-hashes kopiëren': 'Nachwiis-Hashes kopiere',
   'Bewijs-hashes gekopieerd': 'Nachwiis-Hashes kopiert',
   'Bevindingen hernummeren': 'Befund neu nummeriere',

@@ -83,6 +83,10 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Managementsamenvatting': 'Σύνοψη διοίκησης',
+  'Bevindingen totaal': 'Σύνολο ευρημάτων',
+  'scope-objecten getest': 'αντικείμενα εμβέλειας ελέγχθηκαν',
+  'Gebruikte standaarden': 'Πρότυπα που χρησιμοποιήθηκαν',
   'Bewijs-hashes kopiëren': 'Αντιγραφή hash αποδείξεων',
   'Bewijs-hashes gekopieerd': 'Τα hash αποδείξεων αντιγράφηκαν',
   'Bevindingen hernummeren': 'Επαναρίθμηση ευρημάτων',

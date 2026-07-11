@@ -84,6 +84,10 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'Managementsamenvatting': 'Synthèse pour la direction',
+  'Bevindingen totaal': 'Total des constatations',
+  'scope-objecten getest': 'objets de périmètre testés',
+  'Gebruikte standaarden': 'Normes utilisées',
   'Bewijs-hashes kopiëren': 'Copier les empreintes de preuve',
   'Bewijs-hashes gekopieerd': 'Empreintes de preuve copiées',
   'Bevindingen hernummeren': 'Renuméroter les constatations',

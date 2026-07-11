@@ -681,6 +681,10 @@ Three more command-palette actions remove mechanical bookkeeping:
   guardrail.
 - **Bewijs-hashes kopiëren** — computes the MIAUW-required SHA1 (plus SHA-256) of
   every evidence image and copies the appendix hash table to the clipboard.
+- **Managementsamenvatting** — shows the management overview derived live from the
+  deck: the number of findings per severity band, how many scope objects were
+  tested, and the test standards used (WSTG, PTES, MASTG, … from the scope objects
+  and checklists). It regenerates from the deck, so it always matches the report.
 
 ### Security theme
 

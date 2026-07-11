@@ -84,6 +84,10 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'Managementsamenvatting': 'Resumo executivo',
+  'Bevindingen totaal': 'Total de constatações',
+  'scope-objecten getest': 'objetos de âmbito testados',
+  'Gebruikte standaarden': 'Normas utilizadas',
   'Bewijs-hashes kopiëren': 'Copiar hashes de evidência',
   'Bewijs-hashes gekopieerd': 'Hashes de evidência copiados',
   'Bevindingen hernummeren': 'Renumerar constatações',
