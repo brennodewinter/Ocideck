@@ -81,6 +81,18 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'IA nojmoH nabvaD nagh HaqlaHbe\'.',
+  'Het model gaf geen alt-tekst terug.': 'Del ghItlh chugh De\' chov qawHa\'.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Del ghItlh tu\'lu\'. IA nab lIjmoH\'a\'?',
+  'Vervangen': 'chID',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'IA QaH lI\'be\'. DaH SeHlaw yInuD.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'IA jatlh luj (nab polbe\' pagh Sum ghajbe\' server).',
+  'Bezig met AI-analyse…': 'IA nuD taH…',
+  'Stel alt-tekst voor (AI)': 'Del ghItlh qaSmoH (IA)',
   'Alt-tekst (beschrijving voor schermlezers)': 'Alt ghItlh (HaqwI\'vaD Del)',
   'Hoog': 'potlh',
   'Middel': 'motlh',

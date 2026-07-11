@@ -85,6 +85,19 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Níorbh fhéidir an íomhá a léamh le haghaidh anailís IS.',
+  'Het model gaf geen alt-tekst terug.':
+      'Níor thug an tsamhail téacs mhalartach ar ais.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Tá téacs malartach ann cheana. Cuir dréacht an IS ina ionad?',
+  'Vervangen': 'Ionadaigh',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'Níl cúnamh IS ar fáil. Seiceáil na socruithe.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'Theip ar an nglao IS (samhail gan lódáil nó freastalaí dorochtana).',
+  'Bezig met AI-analyse…': 'Ag anailísiú le IS…',
+  'Stel alt-tekst voor (AI)': 'Mol téacs malartach (IS)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Téacs malartach (cur síos do léitheoirí scáileáin)',
   'Hoog': 'Ard',

@@ -85,6 +85,19 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Nie udało się odczytać obrazu do analizy AI.',
+  'Het model gaf geen alt-tekst terug.':
+      'Model nie zwrócił tekstu alternatywnego.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Tekst alternatywny już istnieje. Zastąpić go szkicem AI?',
+  'Vervangen': 'Zastąp',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'Pomoc AI jest niedostępna. Sprawdź ustawienia.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'Wywołanie AI nie powiodło się (model niezaładowany lub serwer nieosiągalny).',
+  'Bezig met AI-analyse…': 'Analiza z użyciem AI…',
+  'Stel alt-tekst voor (AI)': 'Zaproponuj tekst alternatywny (AI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Tekst alternatywny (opis dla czytników ekranu)',
   'Hoog': 'Wysoki',

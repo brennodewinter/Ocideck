@@ -183,6 +183,31 @@ class ImageService {
     return _importIntoProject(path, projectPath, subdir: 'media');
   }
 
+  /// Read the encoded bytes of a slide image [path] resolved against
+  /// [projectPath], for the AI vision call (AI_ASSIST §6.3). Honours project
+  /// containment (via [resolveSlideAssetPath]); on web only `mem:` paths resolve
+  /// (through [WebAssetStore]). Returns null for an out-of-project path, a `mem:`
+  /// miss, or a read error — never throws.
+  Future<Uint8List?> readSlideImageBytes(
+    String path, {
+    String? projectPath,
+  }) async {
+    if (path.isEmpty) return null;
+    if (kIsWeb) {
+      return WebAssetStore.isMemPath(path)
+          ? WebAssetStore.bytesFor(path)
+          : null;
+    }
+    final resolved = resolveSlideAssetPath(path, projectPath);
+    if (resolved == null) return null;
+    try {
+      return await File(resolved).readAsBytes();
+    } catch (e, s) {
+      logError('ImageService.readSlideImageBytes', e, s);
+      return null;
+    }
+  }
+
   /// Schrijf afbeeldings[bytes] naar het systeemklembord. Geeft false terug
   /// bij een fout. Gebruikt voor zowel bestanden als een gerasteriseerde slide.
   Future<bool> copyImageBytesToClipboard(Uint8List bytes) async {

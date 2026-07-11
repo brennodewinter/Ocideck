@@ -85,6 +85,19 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Imago ad analysim IA legi non potuit.',
+  'Het model gaf geen alt-tekst terug.':
+      'Exemplar nullum textum alternum reddidit.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Textus alternus iam adest. Adumbratione IA substituere?',
+  'Vervangen': 'Substituere',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'Auxilium IA non praesto est. Optiones inspice.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'Vocatio IA defecit (exemplar non oneratum vel moderatrum inaccessibile).',
+  'Bezig met AI-analyse…': 'Analysis IA in cursu…',
+  'Stel alt-tekst voor (AI)': 'Textum alternum proponere (IA)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Textus alternus (descriptio pro lectoribus scrinii)',
   'Hoog': 'Altum',

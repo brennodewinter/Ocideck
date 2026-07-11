@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Suggest image alt-text with a local vision model** — when the optional AI
+  backend is on, the image / two-images / bullets-with-image editors show a
+  **"Stel alt-tekst voor (AI)"** button next to the alt-text box. It downscales
+  the picture, sends it to a local vision model through the shared `/v1` backend,
+  and drafts concise WCAG alt-text in the deck's language, stripping "image of…"
+  filler. It is **draft-only**: the text is inserted for review, an existing
+  human alt-text is never replaced without confirming, and AI-drafted alt-text is
+  marked (`ocideck_ai_assisted`) so **Afronden & verzegelen** stays blocked until
+  it is reviewed. Off by default; desktop only (AI_ASSIST §6). Localised in all
+  interface languages.
 - **Image alt-text for screen readers (WCAG 1.1.1)** — image slides now carry a
   dedicated **alt-text** field, separate from the visible caption. The image, two-
   images and bullets-with-image editors gained an *Alt-tekst* box; a screen reader

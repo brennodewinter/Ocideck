@@ -84,6 +84,19 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Imaginea nu a putut fi citită pentru analiza IA.',
+  'Het model gaf geen alt-tekst terug.':
+      'Modelul nu a returnat text alternativ.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Există deja text alternativ. Îl înlocuiți cu schița IA?',
+  'Vervangen': 'Înlocuiește',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'Asistența IA nu este disponibilă. Verificați setările.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'Apelul IA a eșuat (model neîncărcat sau server inaccesibil).',
+  'Bezig met AI-analyse…': 'Se analizează cu IA…',
+  'Stel alt-tekst voor (AI)': 'Sugerează text alternativ (IA)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Text alternativ (descriere pentru cititoare de ecran)',
   'Hoog': 'Ridicat',

@@ -83,6 +83,18 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Nepavyko nuskaityti vaizdo DI analizei.',
+  'Het model gaf geen alt-tekst terug.': 'Modelis negrąžino alt teksto.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Alt tekstas jau yra. Pakeisti jį DI juodraščiu?',
+  'Vervangen': 'Pakeisti',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'DI pagalba nepasiekiama. Patikrinkite nustatymus.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'DI užklausa nepavyko (modelis neįkeltas arba serveris nepasiekiamas).',
+  'Bezig met AI-analyse…': 'Analizuojama su DI…',
+  'Stel alt-tekst voor (AI)': 'Siūlyti alt tekstą (DI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Alternatyvus tekstas (aprašymas ekrano skaitytuvams)',
   'Hoog': 'Aukštas',

@@ -83,6 +83,18 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Bilden kunde inte läsas för AI-analys.',
+  'Het model gaf geen alt-tekst terug.': 'Modellen returnerade ingen alt-text.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Det finns redan alt-text. Ersätt den med AI-utkastet?',
+  'Vervangen': 'Ersätt',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'AI-hjälp är inte tillgänglig. Kontrollera inställningarna.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'AI-anropet misslyckades (modellen inte laddad eller servern onåbar).',
+  'Bezig met AI-analyse…': 'Analyserar med AI…',
+  'Stel alt-tekst voor (AI)': 'Föreslå alt-text (AI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Alternativtext (beskrivning för skärmläsare)',
   'Hoog': 'Hög',

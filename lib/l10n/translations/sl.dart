@@ -83,6 +83,19 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Kon de afbeelding niet lezen voor AI-analyse.':
+      'Slike ni bilo mogoče prebrati za analizo UI.',
+  'Het model gaf geen alt-tekst terug.':
+      'Model ni vrnil nadomestnega besedila.',
+  'Er staat al alt-tekst. Vervangen door het AI-concept?':
+      'Nadomestno besedilo že obstaja. Ga zamenjam z osnutkom UI?',
+  'Vervangen': 'Zamenjaj',
+  'AI-assistentie is niet beschikbaar. Controleer de instellingen.':
+      'Pomoč UI ni na voljo. Preverite nastavitve.',
+  'De AI-aanroep is mislukt (model niet geladen of server onbereikbaar).':
+      'Klic UI ni uspel (model ni naložen ali strežnik ni dosegljiv).',
+  'Bezig met AI-analyse…': 'Analiza z UI…',
+  'Stel alt-tekst voor (AI)': 'Predlagaj nadomestno besedilo (UI)',
   'Alt-tekst (beschrijving voor schermlezers)':
       'Nadomestno besedilo (opis za bralnike zaslona)',
   'Hoog': 'Visoko',
