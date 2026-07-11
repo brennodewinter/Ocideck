@@ -89,6 +89,31 @@ const _dutchSourceLt = {
   'Informatief': 'Informacinis',
   'Vernieuw uit deck': 'Atnaujinti iš rinkinio',
   'Aantal bevindingen per ernst': 'Radinių skaičius pagal sunkumą',
+  'Afbeeldingen': 'Vaizdai',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Vaizdais ir medija dalijasi tame pačiame aplanke esančios prezentacijos. Tikslų pavadinimą netrukus pasirinksi sistemos lange.',
+  'Alle bibliotheken': 'Visos bibliotekos',
+  'Andere map…': 'Kitas aplankas…',
+  'Bibliotheek verwijderen': 'Pašalinti biblioteką',
+  'Bibliotheken': 'Bibliotekos',
+  'Geen bibliotheek': 'Nėra bibliotekos',
+  'Geen presentaties (.md) gevonden.': 'Prezentacijų (.md) nerasta.',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Aplanką ir pavadinimą pasirinksi kitame lange. Vaizdai keliauja į poaplankį images/, o medija į media/, šalia prezentacijos failo.',
+  'Kies bestandsnaam…': 'Pasirinkti failo pavadinimą…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Pasirink aplanką, kuriame išsaugoti prezentaciją.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Pasirink, į kurią biblioteką pateks prezentacija.',
+  'Map toevoegen': 'Pridėti aplanką',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Aplankai, kuriuose saugai ir ieškai savo prezentacijų. Suteik kiekvienam savą pavadinimą, kad juos atskirtum. Visos bibliotekos peržiūrimos atveriant ir vaizdų bibliotekoje.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Bibliotekos dar nėra — pridėk aplanką.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Bibliotekos dar nėra. Pridėk ją Nustatymuose arba viršuje pasirink aplanką paieškai.',
+  'Presentatie opslaan': 'Įrašyti prezentaciją',
+  'Zo worden de bestanden bewaard': 'Štai kaip saugomi failai',
   'Aangepast…': 'Savas…',
   'Aangepaste tijd': 'Savas laikas',
   'Waarheidsverklaring': 'Teisingumo deklaracija',

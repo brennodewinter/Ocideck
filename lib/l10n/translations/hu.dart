@@ -89,6 +89,31 @@ const _dutchSourceHu = {
   'Informatief': 'Tájékoztató',
   'Vernieuw uit deck': 'Frissítés a deckből',
   'Aantal bevindingen per ernst': 'Megállapítások száma súlyosság szerint',
+  'Afbeeldingen': 'Képek',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'A képeket és a médiát az ugyanabban a mappában lévő prezentációk közösen használják. A pontos nevet mindjárt a rendszerablakban választod ki.',
+  'Alle bibliotheken': 'Összes könyvtár',
+  'Andere map…': 'Másik mappa…',
+  'Bibliotheek verwijderen': 'Könyvtár eltávolítása',
+  'Bibliotheken': 'Könyvtárak',
+  'Geen bibliotheek': 'Nincs könyvtár',
+  'Geen presentaties (.md) gevonden.': 'Nem található prezentáció (.md).',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'A mappát és a nevet a következő ablakban választod ki. A képek egy images/ almappába kerülnek, a média pedig a media/ mappába, a prezentációfájl mellé.',
+  'Kies bestandsnaam…': 'Fájlnév kiválasztása…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Válassz mappát a prezentáció mentéséhez.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Válaszd ki, melyik könyvtárba kerüljön a prezentáció.',
+  'Map toevoegen': 'Mappa hozzáadása',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Mappák, amelyekben a prezentációidat tárolod és keresed. Adj mindegyiknek saját nevet, hogy megkülönböztethesd őket. Az összes könyvtárban keres a program megnyitáskor és a képkönyvtárban.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Még nincs könyvtár — adj hozzá egy mappát.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Még nincs könyvtár. Adj hozzá egyet a Beállításokban, vagy válassz fentebb egy mappát a kereséshez.',
+  'Presentatie opslaan': 'Prezentáció mentése',
+  'Zo worden de bestanden bewaard': 'Így tárolódnak a fájlok',
   'Aangepast…': 'Egyéni…',
   'Aangepaste tijd': 'Egyéni idő',
   'Waarheidsverklaring': 'Valódiságnyilatkozat',

@@ -89,6 +89,32 @@ const _dutchSourceLv = {
   'Informatief': 'Informatīvs',
   'Vernieuw uit deck': 'Atjaunināt no krājuma',
   'Aantal bevindingen per ernst': 'Atradumu skaits pēc smaguma',
+  'Afbeeldingen': 'Attēli',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Attēlus un multividi koplieto prezentācijas vienā mapē. Precīzo nosaukumu tūlīt izvēlēsies sistēmas logā.',
+  'Alle bibliotheken': 'Visas bibliotēkas',
+  'Andere map…': 'Cita mape…',
+  'Bibliotheek verwijderen': 'Noņemt bibliotēku',
+  'Bibliotheken': 'Bibliotēkas',
+  'Geen bibliotheek': 'Nav bibliotēkas',
+  'Geen presentaties (.md) gevonden.':
+      'Nav atrasta neviena prezentācija (.md).',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Mapi un nosaukumu izvēlēsies nākamajā logā. Attēli nonāk apakšmapē images/, bet multivide media/, blakus prezentācijas failam.',
+  'Kies bestandsnaam…': 'Izvēlēties faila nosaukumu…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Izvēlies mapi, kurā saglabāt prezentāciju.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Izvēlies, kurā bibliotēkā nonāks prezentācija.',
+  'Map toevoegen': 'Pievienot mapi',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Mapes, kurās glabā un meklē savas prezentācijas. Piešķir katrai savu nosaukumu, lai tās atšķirtu. Visas bibliotēkas tiek pārmeklētas atverot un attēlu bibliotēkā.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Vēl nav bibliotēkas — pievieno mapi.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Vēl nav bibliotēkas. Pievieno to Iestatījumos vai izvēlies mapi augšā, lai meklētu.',
+  'Presentatie opslaan': 'Saglabāt prezentāciju',
+  'Zo worden de bestanden bewaard': 'Tā tiek glabāti faili',
   'Aangepast…': 'Pielāgots…',
   'Aangepaste tijd': 'Pielāgots laiks',
   'Waarheidsverklaring': 'Patiesuma apliecinājums',

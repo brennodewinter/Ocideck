@@ -90,6 +90,31 @@ const _dutchSourceRo = {
   'Informatief': 'Informativ',
   'Vernieuw uit deck': 'Reîmprospătează din deck',
   'Aantal bevindingen per ernst': 'Număr de constatări după gravitate',
+  'Afbeeldingen': 'Imagini',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Imaginile și media sunt partajate de prezentările din același folder. Numele exact îl alegi imediat în fereastra de sistem.',
+  'Alle bibliotheken': 'Toate bibliotecile',
+  'Andere map…': 'Alt folder…',
+  'Bibliotheek verwijderen': 'Elimină biblioteca',
+  'Bibliotheken': 'Biblioteci',
+  'Geen bibliotheek': 'Nicio bibliotecă',
+  'Geen presentaties (.md) gevonden.': 'Nu s-au găsit prezentări (.md).',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Alegi folderul și numele în fereastra următoare. Imaginile ajung într-un subfolder images/, iar media în media/, lângă fișierul prezentării.',
+  'Kies bestandsnaam…': 'Alege numele fișierului…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Alege un folder în care să salvezi prezentarea.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Alege în care bibliotecă ajunge prezentarea.',
+  'Map toevoegen': 'Adaugă folder',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Foldere în care îți păstrezi și cauți prezentările. Dă-i fiecăruia un nume propriu ca să le deosebești. Toate bibliotecile sunt căutate la deschidere și în biblioteca de imagini.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Încă nicio bibliotecă — adaugă un folder.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Încă nicio bibliotecă. Adaugă una în Setări sau alege mai sus un folder pentru căutare.',
+  'Presentatie opslaan': 'Salvează prezentarea',
+  'Zo worden de bestanden bewaard': 'Așa sunt păstrate fișierele',
   'Aangepast…': 'Personalizat…',
   'Aangepaste tijd': 'Timp personalizat',
   'Waarheidsverklaring': 'Declarație de veridicitate',

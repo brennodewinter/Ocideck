@@ -91,6 +91,30 @@ const _dutchSourcePl = {
   'Informatief': 'Informacyjny',
   'Vernieuw uit deck': 'Odśwież z decku',
   'Aantal bevindingen per ernst': 'Liczba ustaleń według istotności',
+  'Afbeeldingen': 'Obrazy',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Obrazy i multimedia są współdzielone przez prezentacje w tym samym folderze. Dokładną nazwę wybierzesz za chwilę w oknie systemowym.',
+  'Alle bibliotheken': 'Wszystkie biblioteki',
+  'Andere map…': 'Inny folder…',
+  'Bibliotheek verwijderen': 'Usuń bibliotekę',
+  'Bibliotheken': 'Biblioteki',
+  'Geen bibliotheek': 'Brak biblioteki',
+  'Geen presentaties (.md) gevonden.': 'Nie znaleziono prezentacji (.md).',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Folder i nazwę wybierzesz w następnym oknie. Obrazy trafią do podfolderu images/, a multimedia do media/, obok pliku prezentacji.',
+  'Kies bestandsnaam…': 'Wybierz nazwę pliku…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Wybierz folder, w którym zapisać prezentację.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Wybierz, do której biblioteki trafi prezentacja.',
+  'Map toevoegen': 'Dodaj folder',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Foldery, w których przechowujesz i przeszukujesz prezentacje. Nadaj każdemu własną nazwę, aby je rozróżnić. Wszystkie biblioteki są przeszukiwane przy otwieraniu i w bibliotece obrazów.',
+  'Nog geen bibliotheek — voeg een map toe.': 'Brak biblioteki — dodaj folder.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Jeszcze brak biblioteki. Dodaj ją w Ustawieniach lub wybierz powyżej folder do przeszukania.',
+  'Presentatie opslaan': 'Zapisz prezentację',
+  'Zo worden de bestanden bewaard': 'Tak przechowywane są pliki',
   'Aangepast…': 'Własny…',
   'Aangepaste tijd': 'Własny czas',
   'Waarheidsverklaring': 'Oświadczenie o zgodności z prawdą',

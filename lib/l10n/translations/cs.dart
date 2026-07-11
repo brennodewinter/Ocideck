@@ -90,6 +90,32 @@ const _dutchSourceCs = {
   'Informatief': 'Informativní',
   'Vernieuw uit deck': 'Obnovit z balíčku',
   'Aantal bevindingen per ernst': 'Počet zjištění podle závažnosti',
+  'Afbeeldingen': 'Obrázky',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Obrázky a média sdílejí prezentace ve stejné složce. Přesný název zvolíš za chvíli v systémovém okně.',
+  'Alle bibliotheken': 'Všechny knihovny',
+  'Andere map…': 'Jiná složka…',
+  'Bibliotheek verwijderen': 'Odebrat knihovnu',
+  'Bibliotheken': 'Knihovny',
+  'Geen bibliotheek': 'Žádná knihovna',
+  'Geen presentaties (.md) gevonden.':
+      'Nebyly nalezeny žádné prezentace (.md).',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Složku a název zvolíš v dalším okně. Obrázky se uloží do podsložky images/ a média do media/, vedle souboru prezentace.',
+  'Kies bestandsnaam…': 'Zvolit název souboru…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Zvol složku, do které se prezentace uloží.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Zvol, do které knihovny prezentace patří.',
+  'Map toevoegen': 'Přidat složku',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Složky, ve kterých ukládáš a prohledáváš své prezentace. Dej každé vlastní název, abys je rozlišil. Všechny knihovny se prohledávají při otevírání a v knihovně obrázků.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Zatím žádná knihovna — přidej složku.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Zatím žádná knihovna. Přidej ji v Nastavení nebo výše zvol složku k prohledání.',
+  'Presentatie opslaan': 'Uložit prezentaci',
+  'Zo worden de bestanden bewaard': 'Takto se soubory ukládají',
   'Aangepast…': 'Vlastní…',
   'Aangepaste tijd': 'Vlastní čas',
   'Waarheidsverklaring': 'Prohlášení o pravdivosti',

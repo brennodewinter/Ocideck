@@ -89,6 +89,31 @@ const _dutchSourceDa = {
   'Informatief': 'Informativ',
   'Vernieuw uit deck': 'Opdater fra deck',
   'Aantal bevindingen per ernst': 'Antal fund efter alvorlighed',
+  'Afbeeldingen': 'Billeder',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Billeder og medier deles af præsentationer i samme mappe. Det præcise navn vælger du straks i systemvinduet.',
+  'Alle bibliotheken': 'Alle biblioteker',
+  'Andere map…': 'Anden mappe…',
+  'Bibliotheek verwijderen': 'Fjern bibliotek',
+  'Bibliotheken': 'Biblioteker',
+  'Geen bibliotheek': 'Intet bibliotek',
+  'Geen presentaties (.md) gevonden.': 'Ingen præsentationer (.md) fundet.',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Du vælger mappen og navnet i det næste vindue. Billederne kommer i en undermappe images/ og medier i media/, ved siden af præsentationsfilen.',
+  'Kies bestandsnaam…': 'Vælg filnavn…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Vælg en mappe, hvor præsentationen skal gemmes.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Vælg hvilket bibliotek præsentationen skal i.',
+  'Map toevoegen': 'Tilføj mappe',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Mapper, hvor du gemmer og søger i dine præsentationer. Giv dem hvert sit navn for at holde dem adskilt. Alle biblioteker gennemsøges ved åbning og i billedbiblioteket.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Intet bibliotek endnu — tilføj en mappe.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Intet bibliotek endnu. Tilføj et under Indstillinger, eller vælg en mappe ovenfor at søge i.',
+  'Presentatie opslaan': 'Gem præsentation',
+  'Zo worden de bestanden bewaard': 'Sådan gemmes filerne',
   'Aangepast…': 'Brugerdefineret…',
   'Aangepaste tijd': 'Brugerdefineret tid',
   'Waarheidsverklaring': 'Sandhedserklæring',

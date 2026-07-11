@@ -87,6 +87,30 @@ const _dutchSourceTlh = {
   'Informatief': 'De\'',
   'Vernieuw uit deck': 'navvo\' chu\'choH',
   'Aantal bevindingen per ernst': 'Qob patlh mI\'',
+  'Afbeeldingen': 'mIlloghmey',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'mIlloghmey media je lo\' chevmey rar Daq wa\'. pongvam DaghItlhbogh De\'wI\' Qorwaghvo\' wIv.',
+  'Alle bibliotheken': 'Hoch qol\'om',
+  'Andere map…': 'latlh Daq…',
+  'Bibliotheek verwijderen': 'qol\'om teq',
+  'Bibliotheken': 'qol\'ommey',
+  'Geen bibliotheek': 'qol\'om Suqbe\'',
+  'Geen presentaties (.md) gevonden.': 'presentation (.md) tu\'be\'.',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Daq pong je DaghItlh veb Qorwagh. mIlloghmey images/ DaqvaD, media media/ DaqvaD, presentation De\' retlh.',
+  'Kies bestandsnaam…': 'De\' pong yIwIv…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Daq yIwIv, presentation DaQaw\'meH.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'qol\'om yIwIv, presentation DaqvaD.',
+  'Map toevoegen': 'Daq chel',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Daqmey, presentationlIj DaQaw\' je DaSammeH. pong pagh yInob \'e\' DachevmeH. Hoch qol\'ommey luSam poSDI\' je mIllogh qol\'om.',
+  'Nog geen bibliotheek — voeg een map toe.': 'qol\'om Suqbe\' — Daq yIchel.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'qol\'om Suqbe\'. Settings-Daq wa\' yIchel, pagh Dung Daq yIwIv DaSammeH.',
+  'Presentatie opslaan': 'presentation yISav',
+  'Zo worden de bestanden bewaard': 'vaj De\'mey pollu\'',
   'Aangepast…': 'SeH…',
   'Aangepaste tijd': 'SeH poH',
   'Waarheidsverklaring': 'vIt Doch',

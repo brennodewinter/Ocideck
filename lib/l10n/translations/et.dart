@@ -88,6 +88,30 @@ const _dutchSourceEt = {
   'Informatief': 'Informatiivne',
   'Vernieuw uit deck': 'Värskenda deckist',
   'Aantal bevindingen per ernst': 'Leidude arv raskusastme järgi',
+  'Afbeeldingen': 'Pildid',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Pilte ja meediat jagavad samas kaustas olevad esitlused. Täpse nime valid kohe süsteemiaknas.',
+  'Alle bibliotheken': 'Kõik teegid',
+  'Andere map…': 'Muu kaust…',
+  'Bibliotheek verwijderen': 'Eemalda teek',
+  'Bibliotheken': 'Teegid',
+  'Geen bibliotheek': 'Teek puudub',
+  'Geen presentaties (.md) gevonden.': 'Esitlusi (.md) ei leitud.',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Kausta ja nime valid järgmises aknas. Pildid lähevad alamkausta images/ ja meedia media/, esitlusfaili kõrvale.',
+  'Kies bestandsnaam…': 'Vali failinimi…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Vali kaust, kuhu esitlus salvestada.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Vali, millisesse teeki esitlus läheb.',
+  'Map toevoegen': 'Lisa kaust',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Kaustad, kuhu salvestad ja kust otsid oma esitlusi. Anna igaühele oma nimi, et neid eristada. Kõiki teeke otsitakse avamisel ja pilditeegis.',
+  'Nog geen bibliotheek — voeg een map toe.': 'Teeki veel pole — lisa kaust.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Teeki veel pole. Lisa see Seadetes või vali ülal kaust, millest otsida.',
+  'Presentatie opslaan': 'Salvesta esitlus',
+  'Zo worden de bestanden bewaard': 'Nii failid salvestatakse',
   'Aangepast…': 'Oma…',
   'Aangepaste tijd': 'Oma aeg',
   'Waarheidsverklaring': 'Tõesuse kinnitus',

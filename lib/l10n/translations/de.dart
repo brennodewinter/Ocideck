@@ -89,6 +89,31 @@ const _dutchSourceDe = {
   'Informatief': 'Informativ',
   'Vernieuw uit deck': 'Aus Deck aktualisieren',
   'Aantal bevindingen per ernst': 'Anzahl der Befunde nach Schweregrad',
+  'Afbeeldingen': 'Bilder',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Bilder und Medien werden von Präsentationen im selben Ordner gemeinsam genutzt. Den genauen Namen wählst du gleich im Systemfenster.',
+  'Alle bibliotheken': 'Alle Bibliotheken',
+  'Andere map…': 'Anderer Ordner…',
+  'Bibliotheek verwijderen': 'Bibliothek entfernen',
+  'Bibliotheken': 'Ordnerbibliotheken',
+  'Geen bibliotheek': 'Keine Bibliothek',
+  'Geen presentaties (.md) gevonden.': 'Keine Präsentationen (.md) gefunden.',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Du wählst den Ordner und den Namen im nächsten Fenster. Die Bilder landen in einem Unterordner images/ und Medien in media/, neben der Präsentationsdatei.',
+  'Kies bestandsnaam…': 'Dateinamen wählen…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Wähle einen Ordner, in dem die Präsentation gespeichert wird.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Wähle, in welche Bibliothek die Präsentation kommt.',
+  'Map toevoegen': 'Ordner hinzufügen',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Ordner, in denen du deine Präsentationen speicherst und durchsuchst. Gib ihnen einen eigenen Namen, um sie auseinanderzuhalten. Alle Bibliotheken werden beim Öffnen und in der Bildbibliothek durchsucht.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Noch keine Bibliothek — füge einen Ordner hinzu.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Noch keine Bibliothek. Füge eine in den Einstellungen hinzu oder wähle oben einen Ordner zum Durchsuchen.',
+  'Presentatie opslaan': 'Präsentation speichern',
+  'Zo worden de bestanden bewaard': 'So werden die Dateien gespeichert',
   'Aangepast…': 'Benutzerdefiniert…',
   'Aangepaste tijd': 'Benutzerdefinierte Zeit',
   'Waarheidsverklaring': 'Wahrheitserklärung',

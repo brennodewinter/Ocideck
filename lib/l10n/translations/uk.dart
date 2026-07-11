@@ -90,6 +90,31 @@ const _dutchSourceUk = {
   'Informatief': 'Інформаційний',
   'Vernieuw uit deck': 'Оновити з колоди',
   'Aantal bevindingen per ernst': 'Кількість знахідок за рівнем',
+  'Afbeeldingen': 'Зображення',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Зображення та медіа спільно використовуються презентаціями в тій самій теці. Точну назву ви оберете за мить у системному вікні.',
+  'Alle bibliotheken': 'Усі бібліотеки',
+  'Andere map…': 'Інша тека…',
+  'Bibliotheek verwijderen': 'Видалити бібліотеку',
+  'Bibliotheken': 'Бібліотеки',
+  'Geen bibliotheek': 'Немає бібліотеки',
+  'Geen presentaties (.md) gevonden.': 'Презентацій (.md) не знайдено.',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Теку й назву ви оберете в наступному вікні. Зображення потраплять до підтеки images/, а медіа — до media/, поруч із файлом презентації.',
+  'Kies bestandsnaam…': 'Обрати назву файлу…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Оберіть теку, у якій зберегти презентацію.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Оберіть, до якої бібліотеки потрапить презентація.',
+  'Map toevoegen': 'Додати теку',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Теки, у яких ви зберігаєте й шукаєте свої презентації. Дайте кожній власну назву, щоб їх розрізняти. Усі бібліотеки переглядаються під час відкриття та в бібліотеці зображень.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Бібліотеки ще немає — додайте теку.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Бібліотеки ще немає. Додайте її в Налаштуваннях або оберіть теку вгорі для пошуку.',
+  'Presentatie opslaan': 'Зберегти презентацію',
+  'Zo worden de bestanden bewaard': 'Ось як зберігаються файли',
   'Aangepast…': 'Власний…',
   'Aangepaste tijd': 'Власний час',
   'Waarheidsverklaring': 'Декларація про достовірність',

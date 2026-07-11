@@ -89,6 +89,31 @@ const _dutchSourceFi = {
   'Informatief': 'Informatiivinen',
   'Vernieuw uit deck': 'Päivitä deckistä',
   'Aantal bevindingen per ernst': 'Havaintojen määrä vakavuuden mukaan',
+  'Afbeeldingen': 'Kuvat',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Kuvat ja media ovat samassa kansiossa olevien esitysten yhteisiä. Tarkan nimen valitset kohta järjestelmäikkunassa.',
+  'Alle bibliotheken': 'Kaikki kirjastot',
+  'Andere map…': 'Toinen kansio…',
+  'Bibliotheek verwijderen': 'Poista kirjasto',
+  'Bibliotheken': 'Kirjastot',
+  'Geen bibliotheek': 'Ei kirjastoa',
+  'Geen presentaties (.md) gevonden.': 'Esityksiä (.md) ei löytynyt.',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Valitset kansion ja nimen seuraavassa ikkunassa. Kuvat menevät images/-alikansioon ja media media/-kansioon esitystiedoston viereen.',
+  'Kies bestandsnaam…': 'Valitse tiedostonimi…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Valitse kansio, johon esitys tallennetaan.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Valitse, mihin kirjastoon esitys tulee.',
+  'Map toevoegen': 'Lisää kansio',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Kansiot, joihin tallennat ja joista haet esityksiäsi. Anna kullekin oma nimi, jotta erotat ne toisistaan. Kaikki kirjastot haetaan avattaessa ja kuvakirjastossa.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Ei vielä kirjastoa — lisää kansio.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Ei vielä kirjastoa. Lisää sellainen Asetuksissa tai valitse yllä kansio, josta haetaan.',
+  'Presentatie opslaan': 'Tallenna esitys',
+  'Zo worden de bestanden bewaard': 'Näin tiedostot tallennetaan',
   'Aangepast…': 'Oma…',
   'Aangepaste tijd': 'Oma aika',
   'Waarheidsverklaring': 'Totuudenmukaisuusvakuutus',

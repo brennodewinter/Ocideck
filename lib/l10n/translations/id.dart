@@ -89,6 +89,31 @@ const _dutchSourceId = {
   'Informatief': 'Informasional',
   'Vernieuw uit deck': 'Perbarui dari deck',
   'Aantal bevindingen per ernst': 'Jumlah temuan per tingkat keparahan',
+  'Afbeeldingen': 'Gambar',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Gambar dan media digunakan bersama oleh presentasi dalam folder yang sama. Nama persisnya kamu pilih sebentar lagi di jendela sistem.',
+  'Alle bibliotheken': 'Semua pustaka',
+  'Andere map…': 'Folder lain…',
+  'Bibliotheek verwijderen': 'Hapus pustaka',
+  'Bibliotheken': 'Pustaka',
+  'Geen bibliotheek': 'Tidak ada pustaka',
+  'Geen presentaties (.md) gevonden.': 'Tidak ada presentasi (.md) ditemukan.',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Kamu memilih folder dan namanya di jendela berikutnya. Gambar masuk ke subfolder images/ dan media ke media/, di samping berkas presentasi.',
+  'Kies bestandsnaam…': 'Pilih nama berkas…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Pilih folder untuk menyimpan presentasi.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Pilih di pustaka mana presentasi disimpan.',
+  'Map toevoegen': 'Tambah folder',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Folder tempat kamu menyimpan dan mencari presentasi. Beri masing-masing nama sendiri agar mudah dibedakan. Semua pustaka dicari saat membuka dan di pustaka gambar.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Belum ada pustaka — tambahkan folder.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Belum ada pustaka. Tambahkan satu di Pengaturan, atau pilih folder di atas untuk ditelusuri.',
+  'Presentatie opslaan': 'Simpan presentasi',
+  'Zo worden de bestanden bewaard': 'Beginilah berkas disimpan',
   'Aangepast…': 'Kustom…',
   'Aangepaste tijd': 'Waktu kustom',
   'Waarheidsverklaring': 'Pernyataan kebenaran',

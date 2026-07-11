@@ -63,28 +63,29 @@ extension _SettingsGeneralTab on _SettingsDialogState {
         // dus dan is de mapkeuze zinloos — verberg beide secties.
         if (supportsLocalProjectFolders) ...[
           const SizedBox(height: 16),
-          _sectionTitle(l10n.t('presentationFolder')),
-          Row(
-            children: [
-              Expanded(
-                child: _pathBox(
-                  _homeDirectory ?? l10n.t('notSet'),
-                  muted: _homeDirectory == null,
-                ),
-              ),
-              const SizedBox(width: 8),
-              ElevatedButton.icon(
-                onPressed: _pickHomeDirectory,
-                icon: const Icon(Icons.folder_open, size: 16),
-                label: Text(l10n.t('choose')),
-              ),
-              if (_homeDirectory != null)
-                IconButton(
-                  onPressed: () => _rebuild(() => _homeDirectory = null),
-                  icon: const Icon(Icons.clear, size: 18),
-                  tooltip: l10n.t('removeDefaultFolder'),
-                ),
-            ],
+          _sectionTitle(l10n.d('Bibliotheken')),
+          Text(
+            l10n.d(
+              'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.',
+            ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
+          const SizedBox(height: 10),
+          if (_libraries.isEmpty)
+            _pathBox(
+              l10n.d('Nog geen bibliotheek — voeg een map toe.'),
+              muted: true,
+            )
+          else
+            for (var i = 0; i < _libraries.length; i++) _libraryRow(i),
+          const SizedBox(height: 10),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: ElevatedButton.icon(
+              onPressed: _addLibrary,
+              icon: const Icon(Icons.create_new_folder_outlined, size: 16),
+              label: Text(l10n.d('Map toevoegen')),
+            ),
           ),
           const SizedBox(height: 16),
           _sectionTitle(l10n.t('exportFolderSetting')),
@@ -119,6 +120,47 @@ extension _SettingsGeneralTab on _SettingsDialogState {
           ),
         ],
       ],
+    );
+  }
+
+  /// Eén bibliotheekrij: bewerkbaar naamveld, het pad (afgekort, volledig in de
+  /// tooltip) en een verwijderknop. Wijzigingen gaan direct naar [_libraries]
+  /// en worden pas bij Opslaan weggeschreven.
+  Widget _libraryRow(int index) {
+    final l10n = context.l10n;
+    final lib = _libraries[index];
+    return Padding(
+      key: ValueKey('library_${index}_${lib.path}'),
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 150,
+            child: TextFormField(
+              initialValue: lib.name,
+              decoration: InputDecoration(
+                isDense: true,
+                labelText: l10n.d('Naam'),
+                prefixIcon: const Icon(
+                  Icons.drive_file_rename_outline,
+                  size: 16,
+                ),
+              ),
+              onChanged: (value) =>
+                  _libraries[index] = _libraries[index].copyWith(name: value),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Tooltip(message: lib.path, child: _pathBox(lib.path)),
+          ),
+          IconButton(
+            onPressed: () => _rebuild(() => _libraries.removeAt(index)),
+            icon: const Icon(Icons.delete_outline, size: 18),
+            tooltip: l10n.d('Bibliotheek verwijderen'),
+          ),
+        ],
+      ),
     );
   }
 

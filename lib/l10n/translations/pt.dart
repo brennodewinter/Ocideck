@@ -90,6 +90,31 @@ const _dutchSourcePt = {
   'Informatief': 'Informativo',
   'Vernieuw uit deck': 'Atualizar a partir do deck',
   'Aantal bevindingen per ernst': 'Número de constatações por gravidade',
+  'Afbeeldingen': 'Imagens',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'As imagens e a mídia são compartilhadas pelas apresentações na mesma pasta. O nome exato você escolhe já na janela do sistema.',
+  'Alle bibliotheken': 'Todas as bibliotecas',
+  'Andere map…': 'Outra pasta…',
+  'Bibliotheek verwijderen': 'Remover biblioteca',
+  'Bibliotheken': 'Bibliotecas',
+  'Geen bibliotheek': 'Sem biblioteca',
+  'Geen presentaties (.md) gevonden.': 'Nenhuma apresentação (.md) encontrada.',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Você escolhe a pasta e o nome na próxima janela. As imagens vão para uma subpasta images/ e a mídia para media/, ao lado do arquivo da apresentação.',
+  'Kies bestandsnaam…': 'Escolher nome do arquivo…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Escolha uma pasta para salvar a apresentação.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Escolha em qual biblioteca a apresentação ficará.',
+  'Map toevoegen': 'Adicionar pasta',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Pastas onde você guarda e pesquisa suas apresentações. Dê a cada uma um nome próprio para distingui-las. Todas as bibliotecas são pesquisadas ao abrir e na biblioteca de imagens.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Ainda sem biblioteca — adicione uma pasta.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Ainda sem biblioteca. Adicione uma nas Configurações ou escolha acima uma pasta para pesquisar.',
+  'Presentatie opslaan': 'Salvar apresentação',
+  'Zo worden de bestanden bewaard': 'É assim que os arquivos são guardados',
   'Aangepast…': 'Personalizado…',
   'Aangepaste tijd': 'Tempo personalizado',
   'Waarheidsverklaring': 'Declaração de veracidade',

@@ -89,6 +89,31 @@ const _dutchSourceIt = {
   'Informatief': 'Informativo',
   'Vernieuw uit deck': 'Aggiorna dal deck',
   'Aantal bevindingen per ernst': 'Numero di risultati per gravità',
+  'Afbeeldingen': 'Immagini',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Le immagini e i media sono condivisi dalle presentazioni nella stessa cartella. Il nome esatto lo scegli tra poco nella finestra di sistema.',
+  'Alle bibliotheken': 'Tutte le librerie',
+  'Andere map…': 'Altra cartella…',
+  'Bibliotheek verwijderen': 'Rimuovi libreria',
+  'Bibliotheken': 'Librerie',
+  'Geen bibliotheek': 'Nessuna libreria',
+  'Geen presentaties (.md) gevonden.': 'Nessuna presentazione (.md) trovata.',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Scegli la cartella e il nome nella finestra successiva. Le immagini vanno in una sottocartella images/ e i media in media/, accanto al file della presentazione.',
+  'Kies bestandsnaam…': 'Scegli il nome del file…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Scegli una cartella in cui salvare la presentazione.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Scegli in quale libreria inserire la presentazione.',
+  'Map toevoegen': 'Aggiungi cartella',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Cartelle in cui conservi e cerchi le tue presentazioni. Dai a ciascuna un nome proprio per distinguerle. Tutte le librerie vengono cercate all\'apertura e nella libreria immagini.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Ancora nessuna libreria — aggiungi una cartella.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Ancora nessuna libreria. Aggiungine una nelle Impostazioni, oppure scegli sopra una cartella da consultare.',
+  'Presentatie opslaan': 'Salva presentazione',
+  'Zo worden de bestanden bewaard': 'Ecco come vengono conservati i file',
   'Aangepast…': 'Personalizzato…',
   'Aangepaste tijd': 'Tempo personalizzato',
   'Waarheidsverklaring': 'Dichiarazione di veridicità',

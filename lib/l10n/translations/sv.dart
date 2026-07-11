@@ -89,6 +89,31 @@ const _dutchSourceSv = {
   'Informatief': 'Informativ',
   'Vernieuw uit deck': 'Uppdatera från deck',
   'Aantal bevindingen per ernst': 'Antal fynd per allvarlighetsgrad',
+  'Afbeeldingen': 'Bilder',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Bilder och media delas av presentationer i samma mapp. Det exakta namnet väljer du strax i systemfönstret.',
+  'Alle bibliotheken': 'Alla bibliotek',
+  'Andere map…': 'Annan mapp…',
+  'Bibliotheek verwijderen': 'Ta bort bibliotek',
+  'Bibliotheken': 'Bibliotek',
+  'Geen bibliotheek': 'Inget bibliotek',
+  'Geen presentaties (.md) gevonden.': 'Inga presentationer (.md) hittades.',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Du väljer mappen och namnet i nästa fönster. Bilderna hamnar i en undermapp images/ och media i media/, bredvid presentationsfilen.',
+  'Kies bestandsnaam…': 'Välj filnamn…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Välj en mapp att spara presentationen i.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Välj vilket bibliotek presentationen ska ligga i.',
+  'Map toevoegen': 'Lägg till mapp',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Mappar där du sparar och söker bland dina presentationer. Ge var och en ett eget namn för att hålla isär dem. Alla bibliotek genomsöks vid öppning och i bildbiblioteket.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Inget bibliotek ännu — lägg till en mapp.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Inget bibliotek ännu. Lägg till ett under Inställningar, eller välj en mapp ovan att söka i.',
+  'Presentatie opslaan': 'Spara presentation',
+  'Zo worden de bestanden bewaard': 'Så här sparas filerna',
   'Aangepast…': 'Egen…',
   'Aangepaste tijd': 'Egen tid',
   'Waarheidsverklaring': 'Sanningsförsäkran',
