@@ -84,6 +84,15 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Nieuwe bevinding (wizard)': 'Constatare nouă (expert)',
+  'Bevinding maken': 'Creează constatare',
+  'CIA-rating (scope-object)': 'Evaluare CIA (obiect de domeniu)',
+  'Vertrouwelijkheid': 'Confidențialitate',
+  'Integriteit': 'Integritate',
+  'Beschikbaarheid': 'Disponibilitate',
+  'Detailslide toevoegen': 'Adaugă diapozitiv de detaliu',
+  'Bewijsslide toevoegen': 'Adaugă diapozitiv de dovadă',
+  'CIA-gewogen': 'Ponderat CIA',
   'Severity (bevindingen)': 'Severitate (constatări)',
   'CWE kiezen': 'Alege CWE',
   'Zoek op naam of CWE-nummer': 'Caută după nume sau număr CWE',

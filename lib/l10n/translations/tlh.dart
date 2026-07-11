@@ -81,6 +81,15 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Nieuwe bevinding (wizard)': 'tu\'bogh chu\' (wizard)',
+  'Bevinding maken': 'tu\'bogh chenmoH',
+  'CIA-rating (scope-object)': 'CIA juv (scope Doch)',
+  'Vertrouwelijkheid': 'peghmoHwI\'',
+  'Integriteit': 'naptaHghach',
+  'Beschikbaarheid': 'lolaHtaHghach',
+  'Detailslide toevoegen': 'Sech HaSta yatlh',
+  'Bewijsslide toevoegen': 'povwI\' HaSta yatlh',
+  'CIA-gewogen': 'CIA\'e\' \'ap',
   'Severity (bevindingen)': 'ghob (Sammeypu\')',
   'CWE kiezen': 'CWE wIv',
   'Zoek op naam of CWE-nummer': 'pong ghap CWE mI\' Sam',

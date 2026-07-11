@@ -83,6 +83,15 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Nieuwe bevinding (wizard)': 'Nytt fynd (guide)',
+  'Bevinding maken': 'Skapa fynd',
+  'CIA-rating (scope-object)': 'CIA-bedömning (omfångsobjekt)',
+  'Vertrouwelijkheid': 'Konfidentialitet',
+  'Integriteit': 'Integritet',
+  'Beschikbaarheid': 'Tillgänglighet',
+  'Detailslide toevoegen': 'Lägg till detaljbild',
+  'Bewijsslide toevoegen': 'Lägg till bevisbild',
+  'CIA-gewogen': 'CIA-viktad',
   'Severity (bevindingen)': 'Allvarlighetsgrad (fynd)',
   'CWE kiezen': 'Välj CWE',
   'Zoek op naam of CWE-nummer': 'Sök på namn eller CWE-nummer',

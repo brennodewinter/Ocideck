@@ -82,6 +82,15 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Nieuwe bevinding (wizard)': 'Uus leid (viisard)',
+  'Bevinding maken': 'Loo leid',
+  'CIA-rating (scope-object)': 'CIA hinnang (ulatuse objekt)',
+  'Vertrouwelijkheid': 'Konfidentsiaalsus',
+  'Integriteit': 'Terviklus',
+  'Beschikbaarheid': 'Käideldavus',
+  'Detailslide toevoegen': 'Lisa detailislaid',
+  'Bewijsslide toevoegen': 'Lisa tõendislaid',
+  'CIA-gewogen': 'CIA-kaalutud',
   'Severity (bevindingen)': 'Raskusaste (leiud)',
   'CWE kiezen': 'Vali CWE',
   'Zoek op naam of CWE-nummer': 'Otsi nime või CWE-numbri järgi',

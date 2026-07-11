@@ -83,6 +83,15 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Nieuwe bevinding (wizard)': 'Nova ugotovitev (čarovnik)',
+  'Bevinding maken': 'Ustvari ugotovitev',
+  'CIA-rating (scope-object)': 'Ocena CIA (predmet obsega)',
+  'Vertrouwelijkheid': 'Zaupnost',
+  'Integriteit': 'Celovitost',
+  'Beschikbaarheid': 'Razpoložljivost',
+  'Detailslide toevoegen': 'Dodaj diapozitiv podrobnosti',
+  'Bewijsslide toevoegen': 'Dodaj diapozitiv dokaza',
+  'CIA-gewogen': 'Uteženo po CIA',
   'Severity (bevindingen)': 'Resnost (ugotovitve)',
   'CWE kiezen': 'Izberi CWE',
   'Zoek op naam of CWE-nummer': 'Iskanje po imenu ali številki CWE',

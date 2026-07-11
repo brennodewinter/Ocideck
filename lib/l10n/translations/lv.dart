@@ -83,6 +83,15 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Nieuwe bevinding (wizard)': 'Jauns atradums (vednis)',
+  'Bevinding maken': 'Izveidot atradumu',
+  'CIA-rating (scope-object)': 'CIA novērtējums (tvēruma objekts)',
+  'Vertrouwelijkheid': 'Konfidencialitāte',
+  'Integriteit': 'Integritāte',
+  'Beschikbaarheid': 'Pieejamība',
+  'Detailslide toevoegen': 'Pievienot detaļu slaidu',
+  'Bewijsslide toevoegen': 'Pievienot pierādījumu slaidu',
+  'CIA-gewogen': 'CIA svērts',
   'Severity (bevindingen)': 'Nopietnība (atradumi)',
   'CWE kiezen': 'Izvēlēties CWE',
   'Zoek op naam of CWE-nummer': 'Meklēt pēc nosaukuma vai CWE numura',

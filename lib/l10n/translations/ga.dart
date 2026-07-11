@@ -85,6 +85,15 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Nieuwe bevinding (wizard)': 'Fionnachtain nua (draoi)',
+  'Bevinding maken': 'Cruthaigh fionnachtain',
+  'CIA-rating (scope-object)': 'Rátáil CIA (réad scóip)',
+  'Vertrouwelijkheid': 'Rúndacht',
+  'Integriteit': 'Sláine',
+  'Beschikbaarheid': 'Infhaighteacht',
+  'Detailslide toevoegen': 'Cuir sleamhnán mionsonraí leis',
+  'Bewijsslide toevoegen': 'Cuir sleamhnán fianaise leis',
+  'CIA-gewogen': 'Ualaithe de réir CIA',
   'Severity (bevindingen)': 'Déine (fionnachtana)',
   'CWE kiezen': 'Roghnaigh CWE',
   'Zoek op naam of CWE-nummer': 'Cuardaigh de réir ainm nó uimhir CWE',

@@ -83,6 +83,15 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Nieuwe bevinding (wizard)': 'Temuan baru (wisaya)',
+  'Bevinding maken': 'Buat temuan',
+  'CIA-rating (scope-object)': 'Peringkat CIA (objek lingkup)',
+  'Vertrouwelijkheid': 'Kerahasiaan',
+  'Integriteit': 'Integritas',
+  'Beschikbaarheid': 'Ketersediaan',
+  'Detailslide toevoegen': 'Tambah slide detail',
+  'Bewijsslide toevoegen': 'Tambah slide bukti',
+  'CIA-gewogen': 'Berbobot CIA',
   'Severity (bevindingen)': 'Tingkat keparahan (temuan)',
   'CWE kiezen': 'Pilih CWE',
   'Zoek op naam of CWE-nummer': 'Cari berdasarkan nama atau nomor CWE',

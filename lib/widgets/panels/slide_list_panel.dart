@@ -21,6 +21,7 @@ import '../../l10n/app_localizations.dart';
 import '../../utils/log.dart';
 import '../../utils/page_scoped_notes.dart';
 import '../dialogs/add_slide_dialog.dart';
+import '../dialogs/finding_wizard.dart';
 import '../dialogs/import_slides_dialog.dart';
 import '../dialogs/slide_finder_dialog.dart';
 import '../../services/slide_layout_metrics.dart';
@@ -28,6 +29,7 @@ import '../slides/slide_preview.dart';
 import '../slides/slide_thumbnail.dart';
 
 part 'slide_list_panel_bars.dart';
+part 'slide_list_panel_add.dart';
 
 class SlideListPanel extends ConsumerStatefulWidget {
   /// Current width of the slide rail. When it changes (dragging the divider),
@@ -911,17 +913,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
             height: 36,
             width: double.infinity,
             child: ElevatedButton.icon(
-              onPressed: () async {
-                final type = await AddSlideDialog.show(
-                  context,
-                  revealSecurityModule: ref.read(secModuleRevealProvider),
-                );
-                if (type != null) {
-                  final idx = ref.read(editorProvider).selectedIndex;
-                  notifier.addSlide(type, afterIndex: idx);
-                  editorNotifier.select(idx + 1);
-                }
-              },
+              onPressed: _onAddSlide,
               icon: const Icon(Icons.add, size: 16),
               label: Text(l10n.d('Slide toevoegen')),
               style: ElevatedButton.styleFrom(

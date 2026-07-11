@@ -84,6 +84,15 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Nieuwe bevinding (wizard)': 'Sejba ġdida (wizard)',
+  'Bevinding maken': 'Oħloq sejba',
+  'CIA-rating (scope-object)': 'Klassifikazzjoni CIA (oġġett tal-ambitu)',
+  'Vertrouwelijkheid': 'Kunfidenzjalità',
+  'Integriteit': 'Integrità',
+  'Beschikbaarheid': 'Disponibbiltà',
+  'Detailslide toevoegen': 'Żid slide ta\' dettall',
+  'Bewijsslide toevoegen': 'Żid slide ta\' evidenza',
+  'CIA-gewogen': 'Peżat b\'CIA',
   'Severity (bevindingen)': 'Gravità (sejbiet)',
   'CWE kiezen': 'Agħżel CWE',
   'Zoek op naam of CWE-nummer': 'Fittex bl-isem jew bin-numru CWE',

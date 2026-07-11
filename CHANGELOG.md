@@ -8,6 +8,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Guided finding wizard** — a new finding is now authored through a step-by-step
+  wizard (opened from **Slide toevoegen → Bevinding**) instead of a blank slide:
+  title → scope object → a **per-metric CVSS 4.0 builder** (dropdown per metric,
+  with a live score + severity read-out) → CWE (reusing the offline CWE picker) →
+  CVE → the four narrative sections. The CVSS step also takes the scope object's
+  **CIA rating** (Confidentiality / Integrity / Availability), which pre-fills the
+  Environmental `CR`/`IR`/`AR` requirements so the offered score is **CIA-weighted**
+  by default (PENTEST_MIAUW §4.1/§10.5). On finish it emits a whole **finding
+  group** — the structured header plus an optional detail and evidence placeholder,
+  all sharing one finding id — inserted in one step. Localised in all interface
+  languages.
 - **Security theme profile with severity colour tokens** — theme profiles now
   carry five **severity colour tokens** (Critical / High / Medium / Low /
   Informational, the FIRST bands) that drive finding cards, CVSS badges and the

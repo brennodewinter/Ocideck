@@ -84,6 +84,15 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Nieuwe bevinding (wizard)': 'Nový nález (průvodce)',
+  'Bevinding maken': 'Vytvořit nález',
+  'CIA-rating (scope-object)': 'Hodnocení CIA (objekt rozsahu)',
+  'Vertrouwelijkheid': 'Důvěrnost',
+  'Integriteit': 'Integrita',
+  'Beschikbaarheid': 'Dostupnost',
+  'Detailslide toevoegen': 'Přidat snímek s detaily',
+  'Bewijsslide toevoegen': 'Přidat snímek s důkazy',
+  'CIA-gewogen': 'Vážené podle CIA',
   'Severity (bevindingen)': 'Závažnost (nálezy)',
   'CWE kiezen': 'Vybrat CWE',
   'Zoek op naam of CWE-nummer': 'Hledat podle názvu nebo čísla CWE',

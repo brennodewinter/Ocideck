@@ -83,6 +83,15 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Nieuwe bevinding (wizard)': 'Uusi havainto (ohjattu)',
+  'Bevinding maken': 'Luo havainto',
+  'CIA-rating (scope-object)': 'CIA-luokitus (kohdeobjekti)',
+  'Vertrouwelijkheid': 'Luottamuksellisuus',
+  'Integriteit': 'Eheys',
+  'Beschikbaarheid': 'Saatavuus',
+  'Detailslide toevoegen': 'Lisää yksityiskohtainen dia',
+  'Bewijsslide toevoegen': 'Lisää todistedia',
+  'CIA-gewogen': 'CIA-painotettu',
   'Severity (bevindingen)': 'Vakavuus (havainnot)',
   'CWE kiezen': 'Valitse CWE',
   'Zoek op naam of CWE-nummer': 'Hae nimellä tai CWE-numerolla',

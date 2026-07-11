@@ -83,6 +83,15 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Nieuwe bevinding (wizard)': 'Νέο εύρημα (οδηγός)',
+  'Bevinding maken': 'Δημιουργία ευρήματος',
+  'CIA-rating (scope-object)': 'Αξιολόγηση CIA (αντικείμενο εμβέλειας)',
+  'Vertrouwelijkheid': 'Εμπιστευτικότητα',
+  'Integriteit': 'Ακεραιότητα',
+  'Beschikbaarheid': 'Διαθεσιμότητα',
+  'Detailslide toevoegen': 'Προσθήκη διαφάνειας λεπτομερειών',
+  'Bewijsslide toevoegen': 'Προσθήκη διαφάνειας αποδείξεων',
+  'CIA-gewogen': 'Σταθμισμένο κατά CIA',
   'Severity (bevindingen)': 'Σοβαρότητα (ευρήματα)',
   'CWE kiezen': 'Επιλογή CWE',
   'Zoek op naam of CWE-nummer': 'Αναζήτηση με όνομα ή αριθμό CWE',
