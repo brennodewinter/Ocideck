@@ -91,6 +91,8 @@ const _dutchSourceHr = {
   'Aantal bevindingen per ernst': 'Broj nalaza po ozbiljnosti',
   'Aangepast…': 'Prilagođeno…',
   'Aangepaste tijd': 'Prilagođeno vrijeme',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Pečaćenje je moguće tek nakon pregleda svih AI nacrta. Još za provjeru na slajdu(ovima):',
   'Uit sjabloon…': 'Iz predloška…',
   'Sjabloon kiezen': 'Odaberi predložak',
   'Scope-object': 'Objekt opsega',

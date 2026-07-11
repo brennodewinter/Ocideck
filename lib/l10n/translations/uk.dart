@@ -92,6 +92,8 @@ const _dutchSourceUk = {
   'Aantal bevindingen per ernst': 'Кількість знахідок за рівнем',
   'Aangepast…': 'Власний…',
   'Aangepaste tijd': 'Власний час',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Запечатування можливе лише після перевірки всіх чернеток ШІ. Ще перевірити на слайді(ах):',
   'Uit sjabloon…': 'З шаблону…',
   'Sjabloon kiezen': 'Вибрати шаблон',
   'Scope-object': 'Об\'єкт області',

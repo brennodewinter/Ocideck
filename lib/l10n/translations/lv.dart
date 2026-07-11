@@ -91,6 +91,8 @@ const _dutchSourceLv = {
   'Aantal bevindingen per ernst': 'Atradumu skaits pēc smaguma',
   'Aangepast…': 'Pielāgots…',
   'Aangepaste tijd': 'Pielāgots laiks',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Aizzīmogošana iespējama tikai pēc visu MI melnrakstu pārbaudes. Vēl jāpārbauda slaidā(os):',
   'Uit sjabloon…': 'No veidnes…',
   'Sjabloon kiezen': 'Izvēlēties veidni',
   'Scope-object': 'Tvēruma objekts',

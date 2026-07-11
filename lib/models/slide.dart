@@ -325,6 +325,14 @@ class Slide {
   /// [FindingRole.header]. Round-trips as `<!-- ocideck_finding_role: … -->`.
   final FindingRole findingRole;
 
+  /// The names of fields on this slide whose text was drafted by AI and not yet
+  /// human-reviewed (AI_ASSIST / PENTEST_MIAUW §16.3). Empty for hand-authored
+  /// slides. While any slide carries such a marker the deck **cannot be sealed**
+  /// (the EIS 1.6 attestation must cover human-verified text) — see
+  /// `deckHasUnreviewedAiMarkers`. AI drafting (P3-AIA) sets these and clears them
+  /// on review. Round-trips as `<!-- ocideck_ai_assisted: field1, field2 -->`.
+  final List<String> aiAssistedFields;
+
   const Slide({
     required this.id,
     required this.type,
@@ -375,6 +383,7 @@ class Slide {
     this.timelineCurrentIndex,
     this.findingId = '',
     this.findingRole = FindingRole.header,
+    this.aiAssistedFields = const [],
   });
 
   factory Slide.create(SlideType type) {
@@ -471,6 +480,7 @@ class Slide {
       timelineCurrentIndex: src.timelineCurrentIndex,
       findingId: src.findingId,
       findingRole: src.findingRole,
+      aiAssistedFields: src.aiAssistedFields,
     );
   }
 
@@ -526,6 +536,7 @@ class Slide {
     bool clearTimelineCurrent = false,
     String? findingId,
     FindingRole? findingRole,
+    List<String>? aiAssistedFields,
   }) {
     return Slide(
       id: id,
@@ -585,6 +596,7 @@ class Slide {
           : (timelineCurrentIndex ?? this.timelineCurrentIndex),
       findingId: findingId ?? this.findingId,
       findingRole: findingRole ?? this.findingRole,
+      aiAssistedFields: aiAssistedFields ?? this.aiAssistedFields,
     );
   }
 }

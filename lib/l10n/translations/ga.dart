@@ -93,6 +93,8 @@ const _dutchSourceGa = {
   'Aantal bevindingen per ernst': 'Líon na dtorthaí de réir déine',
   'Aangepast…': 'Saincheaptha…',
   'Aangepaste tijd': 'Am saincheaptha',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Ní féidir séalú a dhéanamh go dtí go seiceáiltear gach dréacht AI. Le seiceáil fós ar shleamhnán(áin):',
   'Uit sjabloon…': 'Ó theimpléad…',
   'Sjabloon kiezen': 'Roghnaigh teimpléad',
   'Scope-object': 'Réad scóipe',

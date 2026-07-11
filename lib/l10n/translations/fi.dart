@@ -91,6 +91,8 @@ const _dutchSourceFi = {
   'Aantal bevindingen per ernst': 'Havaintojen määrä vakavuuden mukaan',
   'Aangepast…': 'Oma…',
   'Aangepaste tijd': 'Oma aika',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Sinetöinti on mahdollista vasta, kun kaikki tekoälyluonnokset on tarkistettu. Vielä tarkistettava dialla (dioilla):',
   'Uit sjabloon…': 'Mallista…',
   'Sjabloon kiezen': 'Valitse malli',
   'Scope-object': 'Kohde (scope)',

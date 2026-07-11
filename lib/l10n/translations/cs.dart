@@ -92,6 +92,8 @@ const _dutchSourceCs = {
   'Aantal bevindingen per ernst': 'Počet zjištění podle závažnosti',
   'Aangepast…': 'Vlastní…',
   'Aangepaste tijd': 'Vlastní čas',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Zapečetění je možné až po kontrole všech AI konceptů. Zbývá zkontrolovat na snímku(cích):',
   'Uit sjabloon…': 'Ze šablony…',
   'Sjabloon kiezen': 'Vybrat šablonu',
   'Scope-object': 'Objekt rozsahu',

@@ -882,6 +882,19 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
   Future<void> _finalizeAndSeal() async {
     final deck = ref.read(deckProvider).deck;
     if (deck == null || deck.finalized) return;
+    // AI_ASSIST §16.3: block sealing while AI-drafted text is unreviewed, and
+    // say which slides so the user can clear them first.
+    final blocking = ref.read(deckProvider.notifier).slidesBlockingSeal;
+    if (blocking.isNotEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            '${context.l10n.d('Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:')} ${blocking.join(', ')}',
+          ),
+        ),
+      );
+      return;
+    }
     final result = await FinalizeSealDialog.show(context);
     if (result == null || !mounted) return;
     ref

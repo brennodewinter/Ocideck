@@ -90,6 +90,8 @@ const _dutchSourceEt = {
   'Aantal bevindingen per ernst': 'Leidude arv raskusastme järgi',
   'Aangepast…': 'Oma…',
   'Aangepaste tijd': 'Oma aeg',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Pitseerimine on võimalik alles siis, kui kõik AI mustandid on üle vaadatud. Veel kontrollida slaidil (slaididel):',
   'Uit sjabloon…': 'Mallist…',
   'Sjabloon kiezen': 'Vali mall',
   'Scope-object': 'Ulatuse objekt',

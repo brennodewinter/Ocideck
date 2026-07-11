@@ -91,6 +91,8 @@ const _dutchSourceIt = {
   'Aantal bevindingen per ernst': 'Numero di risultati per gravità',
   'Aangepast…': 'Personalizzato…',
   'Aangepaste tijd': 'Tempo personalizzato',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'La sigillatura è possibile solo dopo aver revisionato tutte le bozze IA. Ancora da controllare nella/e diapositiva/e:',
   'Uit sjabloon…': 'Da modello…',
   'Sjabloon kiezen': 'Scegli un modello',
   'Scope-object': 'Oggetto dell\'ambito',

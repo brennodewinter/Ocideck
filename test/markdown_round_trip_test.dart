@@ -1529,6 +1529,35 @@ void main() {
     });
   });
 
+  group('AI-assist marker round-trip (AI_ASSIST §16.3)', () {
+    test('a slide keeps its ocideck_ai_assisted fields', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.bullets).copyWith(
+          bullets: const ['x'],
+          aiAssistedFields: const ['description', 'impact'],
+        ),
+      );
+      expect(out.aiAssistedFields, ['description', 'impact']);
+    });
+
+    test('a slide without markers stays empty and writes no comment', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.bullets).copyWith(bullets: ['x']),
+          ],
+        ),
+      );
+      expect(markdown.contains('ocideck_ai_assisted'), isFalse);
+      expect(
+        _roundTrip(Slide.create(SlideType.bullets)).aiAssistedFields,
+        isEmpty,
+      );
+    });
+  });
+
   group('finding slide type round-trip (P1-FIND)', () {
     const headerBody =
         '# F-03 · SQL injection in the login form\n'

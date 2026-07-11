@@ -8,6 +8,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Sealing waits for AI-drafted text to be reviewed** — groundwork for the
+  optional AI drafting assistant (AI_ASSIST §16.3): a slide can carry an
+  `ocideck_ai_assisted` marker naming the fields whose text was drafted by AI and
+  not yet human-checked. While any slide carries such a marker, **Afronden &
+  verzegelen** is blocked and names the slides still to review, so the EIS 1.6
+  truthfulness attestation always covers human-verified text. The marker
+  round-trips in the `.md` (see [docs/FILE_FORMAT.md](docs/FILE_FORMAT.md) §8);
+  nothing writes it yet — the drafting assistant that sets and clears it lands
+  later. Localised in all interface languages.
 - **Findings-summary slide type (`findingsSummary`)** — the *Bevindingenoverzicht*
   type is now a structured management overview instead of a free-Markdown
   scaffold. A dedicated editor captures the number of findings per CVSS 4.0

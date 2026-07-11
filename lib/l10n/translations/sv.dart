@@ -91,6 +91,8 @@ const _dutchSourceSv = {
   'Aantal bevindingen per ernst': 'Antal fynd per allvarlighetsgrad',
   'Aangepast…': 'Egen…',
   'Aangepaste tijd': 'Egen tid',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Försegling är möjlig först när alla AI-utkast har granskats. Återstår att kontrollera på bild(er):',
   'Uit sjabloon…': 'Från mall…',
   'Sjabloon kiezen': 'Välj mall',
   'Scope-object': 'Scope-objekt',

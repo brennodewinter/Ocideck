@@ -92,6 +92,8 @@ const _dutchSourceBg = {
   'Aantal bevindingen per ernst': 'Брой констатации по тежест',
   'Aangepast…': 'По избор…',
   'Aangepaste tijd': 'Време по избор',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Подпечатването е възможно едва след като всички AI чернови са прегледани. Още за проверка на слайд(ове):',
   'Uit sjabloon…': 'От шаблон…',
   'Sjabloon kiezen': 'Изберете шаблон',
   'Scope-object': 'Обект от обхвата',

@@ -92,6 +92,8 @@ const _dutchSourceRo = {
   'Aantal bevindingen per ernst': 'Număr de constatări după gravitate',
   'Aangepast…': 'Personalizat…',
   'Aangepaste tijd': 'Timp personalizat',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Sigilarea este posibilă doar după verificarea tuturor schițelor AI. Rămâne de verificat pe diapozitiv(e):',
   'Uit sjabloon…': 'Din șablon…',
   'Sjabloon kiezen': 'Alege un șablon',
   'Scope-object': 'Obiect din domeniu',

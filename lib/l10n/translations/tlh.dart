@@ -89,6 +89,8 @@ const _dutchSourceTlh = {
   'Aantal bevindingen per ernst': 'Qob patlh mI\'',
   'Aangepast…': 'SeH…',
   'Aangepaste tijd': 'SeH poH',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Hoch AI-ghItlh nughlu\'pu\'DI\' neH SoQ chu\'laH. qelnIS \'ay\':',
   'Uit sjabloon…': 'sablonvo\'…',
   'Sjabloon kiezen': 'sablon yIwIv',
   'Scope-object': 'HevmeH Doch',

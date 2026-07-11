@@ -91,6 +91,8 @@ const _dutchSourceDa = {
   'Aantal bevindingen per ernst': 'Antal fund efter alvorlighed',
   'Aangepast…': 'Brugerdefineret…',
   'Aangepaste tijd': 'Brugerdefineret tid',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Forsegling er først mulig, når alle AI-udkast er gennemgået. Mangler at blive kontrolleret på dias:',
   'Uit sjabloon…': 'Fra skabelon…',
   'Sjabloon kiezen': 'Vælg skabelon',
   'Scope-object': 'Scope-objekt',

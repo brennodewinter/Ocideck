@@ -91,6 +91,8 @@ const _dutchSourceLt = {
   'Aantal bevindingen per ernst': 'Radinių skaičius pagal sunkumą',
   'Aangepast…': 'Savas…',
   'Aangepaste tijd': 'Savas laikas',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Užantspauduoti galima tik peržiūrėjus visus DI juodraščius. Dar reikia patikrinti skaidrėje (-ėse):',
   'Uit sjabloon…': 'Iš šablono…',
   'Sjabloon kiezen': 'Pasirinkti šabloną',
   'Scope-object': 'Aprėpties objektas',

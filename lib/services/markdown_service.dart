@@ -309,7 +309,16 @@ class MarkdownService {
       buf.writeln('<!-- ocideck_finding_id: ${slide.findingId} -->');
       buf.writeln('<!-- ocideck_finding_role: ${slide.findingRole.name} -->');
     }
-    if (classes.isNotEmpty || slide.findingId.isNotEmpty) {
+    // AI-assist markers (AI_ASSIST §16.3): the fields whose text was drafted by
+    // AI and not yet reviewed. Persisted so the seal gate survives a save/open.
+    if (slide.aiAssistedFields.isNotEmpty) {
+      buf.writeln(
+        '<!-- ocideck_ai_assisted: ${slide.aiAssistedFields.join(', ')} -->',
+      );
+    }
+    if (classes.isNotEmpty ||
+        slide.findingId.isNotEmpty ||
+        slide.aiAssistedFields.isNotEmpty) {
       buf.writeln();
     }
 

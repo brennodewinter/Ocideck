@@ -763,9 +763,22 @@ class DeckNotifier extends StateNotifier<DeckState> {
   void finalizeAndSeal({DocumentSignature? signature}) {
     final deck = state.deck;
     if (deck == null || deck.finalized) return;
+    // AI_ASSIST §16.3: refuse to seal while any AI-drafted field is unreviewed,
+    // so the EIS 1.6 attestation always covers human-verified text. The UI
+    // pre-checks and explains which slides block it (see [slidesBlockingSeal]);
+    // this is the authoritative guard.
+    if (deckHasUnreviewedAiMarkers(deck)) return;
     final sealed = DocumentIntegrity(_md).seal(deck, signature: signature);
     _clearHistory();
     state = state.copyWith(deck: sealed, isDirty: true);
+  }
+
+  /// The 1-based slide numbers whose unreviewed AI-assist markers currently
+  /// block sealing (empty = sealing is allowed). Used by the finalise UI to
+  /// explain the block instead of silently doing nothing.
+  List<int> get slidesBlockingSeal {
+    final deck = state.deck;
+    return deck == null ? const [] : slidesWithUnreviewedAiMarkers(deck);
   }
 
   /// De integriteitsstatus van het open deck (niet-verzegeld / intact /

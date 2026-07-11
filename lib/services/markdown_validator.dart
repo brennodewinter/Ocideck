@@ -126,6 +126,12 @@ class MarkdownValidator {
     'ocideck_two_bullets_right',
     'ocideck_two_bullets_left_title',
     'ocideck_two_bullets_right_title',
+    // Per-slide attestation link comments (PENTEST_MIAUW §3.1 / AI_ASSIST §16.3):
+    // the parser lifts these in `_parseFindingLink`, so the checker must not flag
+    // them as unsupported.
+    'ocideck_finding_id',
+    'ocideck_finding_role',
+    'ocideck_ai_assisted',
   };
 
   MarkdownValidationResult validate(String markdown) {

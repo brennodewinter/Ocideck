@@ -91,6 +91,8 @@ const _dutchSourceEl = {
   'Aantal bevindingen per ernst': 'Αριθμός ευρημάτων ανά σοβαρότητα',
   'Aangepast…': 'Προσαρμοσμένο…',
   'Aangepaste tijd': 'Προσαρμοσμένος χρόνος',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Η σφράγιση είναι δυνατή μόνο αφού ελεγχθούν όλα τα προσχέδια AI. Απομένει έλεγχος στη(ις) διαφάνεια(ες):',
   'Uit sjabloon…': 'Από πρότυπο…',
   'Sjabloon kiezen': 'Επιλογή προτύπου',
   'Scope-object': 'Αντικείμενο εμβέλειας',

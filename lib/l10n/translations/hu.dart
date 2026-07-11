@@ -91,6 +91,8 @@ const _dutchSourceHu = {
   'Aantal bevindingen per ernst': 'Megállapítások száma súlyosság szerint',
   'Aangepast…': 'Egyéni…',
   'Aangepaste tijd': 'Egyéni idő',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'A lezárás csak akkor lehetséges, ha minden AI-vázlatot ellenőriztek. Még ellenőrizni kell a dián/diákon:',
   'Uit sjabloon…': 'Sablonból…',
   'Sjabloon kiezen': 'Sablon választása',
   'Scope-object': 'Hatókör objektuma',

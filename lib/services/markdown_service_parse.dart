@@ -331,7 +331,9 @@ extension _MarkdownParse on MarkdownService {
       findingId: link.findingId,
       findingRole: link.findingRole,
     );
-    if (structured != null) return structured;
+    if (structured != null) {
+      return structured.copyWith(aiAssistedFields: link.aiAssistedFields);
+    }
 
     // bullets may already hold the decoded two-column data; the line parser
     // appends to the same list, so pass it through by reference.
@@ -451,6 +453,7 @@ extension _MarkdownParse on MarkdownService {
       timelineCurrentIndex: d.timelineCurrentIndex,
       findingId: link.findingId,
       findingRole: link.findingRole,
+      aiAssistedFields: link.aiAssistedFields,
     );
   }
 

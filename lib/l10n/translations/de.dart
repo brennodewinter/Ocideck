@@ -91,6 +91,8 @@ const _dutchSourceDe = {
   'Aantal bevindingen per ernst': 'Anzahl der Befunde nach Schweregrad',
   'Aangepast…': 'Benutzerdefiniert…',
   'Aangepaste tijd': 'Benutzerdefinierte Zeit',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Versiegeln ist erst möglich, wenn alle KI-Entwürfe geprüft wurden. Noch zu prüfen auf Folie(n):',
   'Uit sjabloon…': 'Aus Vorlage…',
   'Sjabloon kiezen': 'Vorlage wählen',
   'Scope-object': 'Scope-Objekt',

@@ -92,6 +92,8 @@ const _dutchSourcePt = {
   'Aantal bevindingen per ernst': 'Número de constatações por gravidade',
   'Aangepast…': 'Personalizado…',
   'Aangepaste tijd': 'Tempo personalizado',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'O selamento só é possível depois de revistos todos os rascunhos de IA. Ainda por verificar no(s) slide(s):',
   'Uit sjabloon…': 'A partir de modelo…',
   'Sjabloon kiezen': 'Escolher modelo',
   'Scope-object': 'Objeto do escopo',

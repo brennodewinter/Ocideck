@@ -91,6 +91,8 @@ const _dutchSourceFy = {
   'Aantal bevindingen per ernst': 'Oantal befinings per earnst',
   'Aangepast…': 'Eigen…',
   'Aangepaste tijd': 'Eigen tiid',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Fersegelje kin pas as alle AI-konsepten neisjoen binne. Noch te kontrolearjen op dia(\'s):',
   'Uit sjabloon…': 'Ut sjabloan…',
   'Sjabloon kiezen': 'Sjabloan kieze',
   'Scope-object': 'Scope-objekt',

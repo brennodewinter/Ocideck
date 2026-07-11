@@ -91,6 +91,8 @@ const _dutchSourcePap = {
   'Aantal bevindingen per ernst': 'Kantidat di deskubrimentu pa severidat',
   'Aangepast…': 'Propio…',
   'Aangepaste tijd': 'Tempo propio',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Por seya solamente ora tur konseptonan di IA a ser revisá. Ainda pa kontrolá riba slide:',
   'Uit sjabloon…': 'For di plantia…',
   'Sjabloon kiezen': 'Skohe plantia',
   'Scope-object': 'Opheto di scope',

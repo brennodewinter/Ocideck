@@ -91,6 +91,8 @@ const _dutchSourceSl = {
   'Aantal bevindingen per ernst': 'Število ugotovitev po resnosti',
   'Aangepast…': 'Po meri…',
   'Aangepaste tijd': 'Čas po meri',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Zapečatenje je mogoče šele, ko so vsi osnutki UI pregledani. Še za preverjanje na prosojnici(-ah):',
   'Uit sjabloon…': 'Iz predloge…',
   'Sjabloon kiezen': 'Izberi predlogo',
   'Scope-object': 'Predmet obsega',

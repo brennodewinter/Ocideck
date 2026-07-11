@@ -92,6 +92,8 @@ const _dutchSourceEs = {
   'Aantal bevindingen per ernst': 'Número de hallazgos por severidad',
   'Aangepast…': 'Personalizado…',
   'Aangepaste tijd': 'Tiempo personalizado',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'El sellado solo es posible tras revisar todos los borradores de IA. Aún por comprobar en la(s) diapositiva(s):',
   'Uit sjabloon…': 'Desde plantilla…',
   'Sjabloon kiezen': 'Elegir plantilla',
   'Scope-object': 'Objeto del alcance',

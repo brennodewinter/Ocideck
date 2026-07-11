@@ -92,6 +92,8 @@ const _dutchSourceMt = {
   'Aantal bevindingen per ernst': 'Numru ta\' sejbiet skont il-gravità',
   'Aangepast…': 'Personalizzat…',
   'Aangepaste tijd': 'Ħin personalizzat',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'L-issiġillar huwa possibbli biss wara li jiġu riveduti l-abbozzi kollha tal-IA. Għad irid jiġi ċċekkjat fuq is-slajd(s):',
   'Uit sjabloon…': 'Minn mudell…',
   'Sjabloon kiezen': 'Agħżel mudell',
   'Scope-object': 'Oġġett tal-ambitu',

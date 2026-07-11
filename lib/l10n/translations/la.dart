@@ -93,6 +93,8 @@ const _dutchSourceLa = {
   'Aantal bevindingen per ernst': 'Numerus inventorum per gravitatem',
   'Aangepast…': 'Proprium…',
   'Aangepaste tijd': 'Tempus proprium',
+  'Verzegelen kan pas als alle AI-concepten zijn nagekeken. Nog te controleren op dia:':
+      'Obsignatio fieri non potest nisi omnia adumbrata ab IA recognita sint. Adhuc examinandum in scida(is):',
   'Uit sjabloon…': 'Ex exemplari…',
   'Sjabloon kiezen': 'Exemplar eligere',
   'Scope-object': 'Obiectum ambitus',
