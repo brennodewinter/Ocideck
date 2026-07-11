@@ -266,3 +266,40 @@ extension FileServicePackage on FileService {
     }
   }
 }
+
+/// Thrown by [_CappedOutputStream] when a decompressed entry would exceed its
+/// byte budget — the signal that a package entry is a decompression bomb.
+class _ExtractionLimitException implements Exception {
+  const _ExtractionLimitException();
+}
+
+/// An [OutputStream] that refuses to grow past [limit] bytes. The archive
+/// inflater writes decompressed output incrementally, so throwing here stops a
+/// zip bomb mid-inflation instead of after the whole entry is in memory.
+class _CappedOutputStream extends OutputMemoryStream {
+  _CappedOutputStream(this.limit);
+
+  final int limit;
+
+  void _guard(int add) {
+    if (length + add > limit) throw const _ExtractionLimitException();
+  }
+
+  @override
+  void writeByte(int value) {
+    _guard(1);
+    super.writeByte(value);
+  }
+
+  @override
+  void writeBytes(List<int> bytes, {int? length}) {
+    _guard(length ?? bytes.length);
+    super.writeBytes(bytes, length: length);
+  }
+
+  @override
+  void writeStream(InputStream stream) {
+    _guard(stream.length);
+    super.writeStream(stream);
+  }
+}
