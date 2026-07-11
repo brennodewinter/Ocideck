@@ -145,6 +145,16 @@ class AppTheme {
   static const danger700 = Color(0xFFB91C1C);
   static const danger800 = Color(0xFFC62828);
   static const dangerPlain = Color(0xFFCC0000);
+
+  // ── Bevinding-ernst (FIRST CVSS-banden) ───────────────────────────────────
+  // Deterministische const-tokens zodat een `finding` identiek rendert in de
+  // on-screen preview én in een headless export-isolate (PENTEST_MIAUW §11).
+  // P1-THEME verhuist deze naar het beveiligings-ThemeProfile.
+  static const severityCritical = Color(0xFFB91C1C); // red 700
+  static const severityHigh = Color(0xFFEA580C); // orange 600
+  static const severityMedium = Color(0xFFD97706); // amber 600
+  static const severityLow = Color(0xFF15803D); // green 700
+  static const severityNone = Color(0xFF475569); // slate 600
   static Color get infoBg =>
       _m(const Color(0xFFEFF6FF), const Color(0xFF15202E));
 

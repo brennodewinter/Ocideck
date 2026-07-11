@@ -85,6 +85,13 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Scope-object': 'Obiectum ambitus',
+  'CVSS 4.0-vector': 'Vector CVSS 4.0',
+  'Bevestiging (reproductie)': 'Confirmatio (reproductio)',
+  'Mogelijke impact': 'Impulsus possibilis',
+  'Aanbeveling': 'Commendatio',
+  'Bevinding-id': 'ID inventi',
+  'Controleer de CVSS-vector': 'Vectorem CVSS inspice',
   '(leeg)': '(vacuum)',
   'Audio': 'Audio',
   'Bijschrift': 'Inscriptio',

@@ -83,6 +83,13 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Scope-object': 'Scope-objekt',
+  'CVSS 4.0-vector': 'CVSS 4.0-vektor',
+  'Bevestiging (reproductie)': 'Befêstiging (reproduksje)',
+  'Mogelijke impact': 'Mooglike ynfloed',
+  'Aanbeveling': 'Oanrikkemandaasje',
+  'Bevinding-id': 'Befining-id',
+  'Controleer de CVSS-vector': 'Kontrolearje de CVSS-vektor',
   '(leeg)': '(leech)',
   'Audio': 'Audio',
   'Bijschrift': 'Byskrift',

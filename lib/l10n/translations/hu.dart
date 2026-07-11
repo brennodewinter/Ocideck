@@ -83,6 +83,13 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Scope-object': 'Hatókör objektuma',
+  'CVSS 4.0-vector': 'CVSS 4.0 vektor',
+  'Bevestiging (reproductie)': 'Megerősítés (reprodukció)',
+  'Mogelijke impact': 'Lehetséges hatás',
+  'Aanbeveling': 'Ajánlás',
+  'Bevinding-id': 'Megállapítás azonosítója',
+  'Controleer de CVSS-vector': 'Ellenőrizze a CVSS-vektort',
   '(leeg)': '(üres)',
   'Audio': 'Hang',
   'Bijschrift': 'Képaláírás',

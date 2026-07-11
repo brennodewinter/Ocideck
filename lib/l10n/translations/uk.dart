@@ -84,6 +84,13 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Scope-object': 'Об\'єкт області',
+  'CVSS 4.0-vector': 'Вектор CVSS 4.0',
+  'Bevestiging (reproductie)': 'Підтвердження (відтворення)',
+  'Mogelijke impact': 'Можливий вплив',
+  'Aanbeveling': 'Рекомендація',
+  'Bevinding-id': 'Ідентифікатор виявлення',
+  'Controleer de CVSS-vector': 'Перевірте вектор CVSS',
   '(leeg)': '(порожньо)',
   'Audio': 'Аудіо',
   'Bijschrift': 'Підпис',

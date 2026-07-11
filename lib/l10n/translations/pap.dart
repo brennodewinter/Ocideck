@@ -83,6 +83,13 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Scope-object': 'Opheto di scope',
+  'CVSS 4.0-vector': 'Vektor CVSS 4.0',
+  'Bevestiging (reproductie)': 'Konfirmashon (reproduskshon)',
+  'Mogelijke impact': 'Impakto posibel',
+  'Aanbeveling': 'Rekomendashon',
+  'Bevinding-id': 'ID di konstatashon',
+  'Controleer de CVSS-vector': 'Chèk e vektor CVSS',
   '(leeg)': '(bashí)',
   'Audio': 'Audio',
   'Bijschrift': 'Lènda',

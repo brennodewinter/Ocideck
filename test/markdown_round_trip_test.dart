@@ -3,10 +3,12 @@ import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/cockpit.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/document_signature.dart';
+import 'package:ocideck/models/finding_spec.dart';
 import 'package:ocideck/models/question.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/timeline.dart';
+import 'package:ocideck/services/cvss/cvss4.dart';
 import 'package:ocideck/services/markdown_service.dart';
 
 /// Serialize a single slide to markdown and parse it straight back.
@@ -1494,11 +1496,11 @@ void main() {
   });
 
   group('Informatieveiligheid scaffold types round-trip (P1-S)', () {
-    // The five security slide types are scaffolded as free-Markdown bodies
+    // The remaining security slide types are scaffolded as free-Markdown bodies
     // carried by their own `_class` token. Both the type and the body must
     // survive serialize → parse until each type gains a structured serialiser.
+    // (`finding` has graduated to P1-FIND — see the dedicated group below.)
     const scaffoldTypes = {
-      SlideType.finding: 'finding',
       SlideType.findingsSummary: 'findings-summary',
       SlideType.checklist: 'checklist',
       SlideType.scopeMatrix: 'scope-matrix',
@@ -1526,6 +1528,105 @@ void main() {
         expect(out.type, type);
         expect(out.customMarkdown, body);
       });
+    });
+  });
+
+  group('finding slide type round-trip (P1-FIND)', () {
+    const headerBody =
+        '# F-03 · SQL injection in the login form\n'
+        '\n'
+        '**Scope object:** `https://app.client.example/login`\n'
+        '**CVSS 4.0:** 9.3 (Critical) · '
+        '`CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N`\n'
+        '**CWE:** [CWE-89 — Improper Neutralization of SQL]'
+        '(https://cwe.mitre.org/data/definitions/89.html)\n'
+        '**CVE:** [CVE-2024-1234]'
+        '(https://nvd.nist.gov/vuln/detail/CVE-2024-1234)\n'
+        '\n'
+        '## Description\n'
+        '\n'
+        'The login form concatenates the username straight into the query.\n'
+        '\n'
+        '## Confirmation (reproduction)\n'
+        '\n'
+        'Injecting a tautology returns every row.\n'
+        '\n'
+        '## Possible impact\n'
+        '\n'
+        'Full read/write access to the user table.\n'
+        '\n'
+        '## Recommendation\n'
+        '\n'
+        'Use parameterised queries.';
+
+    test('header keeps its structured body, id, role and derived title', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.finding).copyWith(
+          customMarkdown: headerBody,
+          findingId: 'F-03',
+          findingRole: FindingRole.header,
+        ),
+      );
+      expect(out.type, SlideType.finding);
+      expect(out.findingId, 'F-03');
+      expect(out.findingRole, FindingRole.header);
+      expect(out.customMarkdown, headerBody);
+      expect(out.title, 'F-03 · SQL injection in the login form');
+    });
+
+    test('a whole group shares one id and one derived severity', () {
+      final header = Slide.create(SlideType.finding).copyWith(
+        customMarkdown: headerBody,
+        findingId: 'F-03',
+        findingRole: FindingRole.header,
+      );
+      final detail = Slide.create(SlideType.bullets).copyWith(
+        title: 'Details',
+        bullets: const ['Stap 1', 'Stap 2'],
+        findingId: 'F-03',
+        findingRole: FindingRole.detail,
+      );
+      final evidence = Slide.create(SlideType.image).copyWith(
+        imagePath: 'images/poc.png',
+        findingId: 'F-03',
+        findingRole: FindingRole.evidence,
+      );
+      final service = MarkdownService();
+      final md = service.generateDeck(
+        Deck(title: 'Demo', slides: [header, detail, evidence]),
+      );
+      final slides = service.parseDeck(md)!.slides;
+      expect(slides, hasLength(3));
+      expect(slides.map((s) => s.findingId), everyElement('F-03'));
+      expect(slides.map((s) => s.findingRole), const [
+        FindingRole.header,
+        FindingRole.detail,
+        FindingRole.evidence,
+      ]);
+      // Types are preserved: a finding card plus ordinary detail/evidence.
+      expect(slides[0].type, SlideType.finding);
+      expect(slides[1].type, SlideType.bullets);
+      expect(slides[2].type, SlideType.image);
+      expect(slides[1].bullets, const ['Stap 1', 'Stap 2']);
+      // One severity for the group, derived once from the header's CVSS vector.
+      expect(
+        FindingSpec.parse(slides[0].customMarkdown).severity,
+        Cvss4Severity.critical,
+      );
+    });
+
+    test('a slide outside a finding group writes no group sidecar', () {
+      final service = MarkdownService();
+      final md = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.bullets).copyWith(bullets: const ['x']),
+          ],
+        ),
+      );
+      expect(md, isNot(contains('ocideck_finding_id')));
+      expect(md, isNot(contains('ocideck_finding_role')));
     });
   });
 }

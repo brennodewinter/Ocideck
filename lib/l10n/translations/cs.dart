@@ -84,6 +84,13 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Scope-object': 'Objekt rozsahu',
+  'CVSS 4.0-vector': 'Vektor CVSS 4.0',
+  'Bevestiging (reproductie)': 'Potvrzení (reprodukce)',
+  'Mogelijke impact': 'Možný dopad',
+  'Aanbeveling': 'Doporučení',
+  'Bevinding-id': 'ID zjištění',
+  'Controleer de CVSS-vector': 'Zkontrolujte vektor CVSS',
   '(leeg)': '(prázdné)',
   'Audio': 'Audio',
   'Bijschrift': 'Popisek',

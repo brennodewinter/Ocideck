@@ -83,6 +83,13 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Scope-object': 'Aprėpties objektas',
+  'CVSS 4.0-vector': 'CVSS 4.0 vektorius',
+  'Bevestiging (reproductie)': 'Patvirtinimas (atkūrimas)',
+  'Mogelijke impact': 'Galimas poveikis',
+  'Aanbeveling': 'Rekomendacija',
+  'Bevinding-id': 'Radinio ID',
+  'Controleer de CVSS-vector': 'Patikrinkite CVSS vektorių',
   '(leeg)': '(tuščia)',
   'Audio': 'Garsas',
   'Bijschrift': 'Antraštė',

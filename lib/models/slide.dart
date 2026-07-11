@@ -1,6 +1,7 @@
 import 'package:uuid/uuid.dart';
 import 'cockpit.dart';
 import 'deck.dart';
+import 'finding_spec.dart';
 import 'question.dart';
 import 'settings.dart';
 import 'timeline.dart';
@@ -42,6 +43,16 @@ enum SlideType {
 /// [SlideCategory.informatieveiligheid], at which point the picker's tab bar
 /// appears automatically.
 enum SlideCategory { algemeen, informatieveiligheid }
+
+/// The part a slide plays inside a finding *group* (PENTEST_MIAUW §3.1). A real
+/// finding spans a header/summary card plus detail slides (description,
+/// reproduction, impact, recommendation) and evidence screenshots; every slide
+/// in the group shares one [Slide.findingId]. The `finding` slide type is always
+/// the [header]; [detail] and [evidence] ride on ordinary slide types (bullets,
+/// image) that opt into the group by carrying a finding id + role. Round-trips
+/// as `<!-- ocideck_finding_role: … -->` and is only meaningful when
+/// [Slide.findingId] is set.
+enum FindingRole { header, detail, evidence }
 
 enum ListStyle { bullets, numbered, checklist, richText }
 
@@ -295,6 +306,18 @@ class Slide {
   /// `ocideck_timeline_current` comment so the `.md` reads as an event number.
   final int? timelineCurrentIndex;
 
+  /// The finding group this slide belongs to (PENTEST_MIAUW §3.1). Empty = the
+  /// slide is not part of a finding. Every slide sharing a non-empty id forms
+  /// one finding — a header card plus its detail/evidence slides — that carries
+  /// a single finding id and a single severity (derived from the header's CVSS
+  /// vector, never stored). Round-trips as `<!-- ocideck_finding_id: F-03 -->`.
+  final String findingId;
+
+  /// This slide's [FindingRole] within its finding group; only meaningful when
+  /// [findingId] is set. A `finding`-typed slide is the group's
+  /// [FindingRole.header]. Round-trips as `<!-- ocideck_finding_role: … -->`.
+  final FindingRole findingRole;
+
   const Slide({
     required this.id,
     required this.type,
@@ -343,6 +366,8 @@ class Slide {
     this.timelineReveal = TimelineReveal.onEnter,
     this.timelineAnimationMs,
     this.timelineCurrentIndex,
+    this.findingId = '',
+    this.findingRole = FindingRole.header,
   });
 
   factory Slide.create(SlideType type) {
@@ -369,6 +394,8 @@ class Slide {
           ? CockpitSpec.pentestPreset().toBlock()
           : type == SlideType.question
           ? QuestionSpec.defaultMultipleChoice().toBlock()
+          : type == SlideType.finding
+          ? const FindingSpec().toMarkdown()
           : '',
     );
   }
@@ -422,6 +449,8 @@ class Slide {
       timelineReveal: src.timelineReveal,
       timelineAnimationMs: src.timelineAnimationMs,
       timelineCurrentIndex: src.timelineCurrentIndex,
+      findingId: src.findingId,
+      findingRole: src.findingRole,
     );
   }
 
@@ -475,6 +504,8 @@ class Slide {
     bool clearTimelineAnimation = false,
     int? timelineCurrentIndex,
     bool clearTimelineCurrent = false,
+    String? findingId,
+    FindingRole? findingRole,
   }) {
     return Slide(
       id: id,
@@ -532,6 +563,8 @@ class Slide {
       timelineCurrentIndex: clearTimelineCurrent
           ? null
           : (timelineCurrentIndex ?? this.timelineCurrentIndex),
+      findingId: findingId ?? this.findingId,
+      findingRole: findingRole ?? this.findingRole,
     );
   }
 }

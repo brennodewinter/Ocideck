@@ -83,6 +83,13 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Scope-object': 'Αντικείμενο εμβέλειας',
+  'CVSS 4.0-vector': 'Διάνυσμα CVSS 4.0',
+  'Bevestiging (reproductie)': 'Επιβεβαίωση (αναπαραγωγή)',
+  'Mogelijke impact': 'Πιθανή επίπτωση',
+  'Aanbeveling': 'Σύσταση',
+  'Bevinding-id': 'Αναγνωριστικό ευρήματος',
+  'Controleer de CVSS-vector': 'Ελέγξτε το διάνυσμα CVSS',
   '(leeg)': '(κενό)',
   'Audio': 'Ήχος',
   'Bijschrift': 'Λεζάντα',

@@ -83,6 +83,13 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Scope-object': 'Kohde (scope)',
+  'CVSS 4.0-vector': 'CVSS 4.0 -vektori',
+  'Bevestiging (reproductie)': 'Vahvistus (toisto)',
+  'Mogelijke impact': 'Mahdollinen vaikutus',
+  'Aanbeveling': 'Suositus',
+  'Bevinding-id': 'Havainnon tunnus',
+  'Controleer de CVSS-vector': 'Tarkista CVSS-vektori',
   '(leeg)': '(tyhjä)',
   'Audio': 'Ääni',
   'Bijschrift': 'Kuvateksti',

@@ -83,6 +83,13 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Scope-object': 'Scope-Objäkt',
+  'CVSS 4.0-vector': 'CVSS-4.0-Vektor',
+  'Bevestiging (reproductie)': 'Bestätigung (Reproduktion)',
+  'Mogelijke impact': 'Möglichi Uswirkig',
+  'Aanbeveling': 'Empfählig',
+  'Bevinding-id': 'Befund-ID',
+  'Controleer de CVSS-vector': 'CVSS-Vektor prüefe',
   '(leeg)': '(leer)',
   'Audio': 'Audio',
   'Bijschrift': 'Bildlegände',

@@ -84,6 +84,13 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Scope-object': 'Обект от обхвата',
+  'CVSS 4.0-vector': 'CVSS 4.0 вектор',
+  'Bevestiging (reproductie)': 'Потвърждение (възпроизвеждане)',
+  'Mogelijke impact': 'Възможно въздействие',
+  'Aanbeveling': 'Препоръка',
+  'Bevinding-id': 'ИД на констатацията',
+  'Controleer de CVSS-vector': 'Проверете CVSS вектора',
   '(leeg)': '(празно)',
   'Audio': 'Аудио',
   'Bijschrift': 'Надпис',

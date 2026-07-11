@@ -83,6 +83,13 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Scope-object': 'Objek lingkup',
+  'CVSS 4.0-vector': 'Vektor CVSS 4.0',
+  'Bevestiging (reproductie)': 'Konfirmasi (reproduksi)',
+  'Mogelijke impact': 'Dampak yang mungkin',
+  'Aanbeveling': 'Rekomendasi',
+  'Bevinding-id': 'ID temuan',
+  'Controleer de CVSS-vector': 'Periksa vektor CVSS',
   '(leeg)': '(kosong)',
   'Audio': 'Audio',
   'Bijschrift': 'Keterangan',

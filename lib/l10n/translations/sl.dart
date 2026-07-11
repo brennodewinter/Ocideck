@@ -83,6 +83,13 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Scope-object': 'Predmet obsega',
+  'CVSS 4.0-vector': 'Vektor CVSS 4.0',
+  'Bevestiging (reproductie)': 'Potrditev (reprodukcija)',
+  'Mogelijke impact': 'Možni vpliv',
+  'Aanbeveling': 'Priporočilo',
+  'Bevinding-id': 'ID ugotovitve',
+  'Controleer de CVSS-vector': 'Preverite vektor CVSS',
   '(leeg)': '(prazno)',
   'Audio': 'Audio',
   'Bijschrift': 'Napis',

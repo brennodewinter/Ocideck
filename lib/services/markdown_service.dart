@@ -5,6 +5,7 @@ import '../models/chart.dart';
 import '../models/cockpit.dart';
 import '../models/deck.dart';
 import '../models/document_signature.dart';
+import '../models/finding_spec.dart';
 import '../models/question.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
@@ -16,6 +17,7 @@ import '../utils/markdown_paste_cleanup.dart';
 
 part 'markdown_service_helpers.dart';
 part 'markdown_service_parse.dart';
+part 'markdown_service_finding.dart';
 part 'markdown_service_fenced.dart';
 part 'markdown_service_serialize.dart';
 
@@ -297,6 +299,17 @@ class MarkdownService {
 
     if (classes.isNotEmpty) {
       buf.writeln('<!-- _class: ${classes.join(' ')} -->');
+    }
+    // Finding-group linkage (PENTEST_MIAUW §3.1): a shared id + role tie a
+    // header card to its detail/evidence slides. Written for any slide that
+    // joins a group — a `finding` header, but also a `bullets` detail or an
+    // `image` evidence slide — so the whole group round-trips as a unit. Role is
+    // only meaningful alongside an id, so both ride together.
+    if (slide.findingId.isNotEmpty) {
+      buf.writeln('<!-- ocideck_finding_id: ${slide.findingId} -->');
+      buf.writeln('<!-- ocideck_finding_role: ${slide.findingRole.name} -->');
+    }
+    if (classes.isNotEmpty || slide.findingId.isNotEmpty) {
       buf.writeln();
     }
 

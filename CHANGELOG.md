@@ -8,6 +8,19 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Finding slide type (`finding`)** — the *Bevinding* type is now a structured
+  header card instead of a free-Markdown scaffold. A dedicated editor captures
+  the scope object, the **CVSS 4.0 vector** (with a live, derived score +
+  severity band), CWE and CVE references, and the description / reproduction /
+  impact / recommendation sections; the preview renders a severity-coloured card
+  with a CVSS badge and CWE/CVE chips. Severity is always **derived** from the
+  vector by the native CVSS 4.0 engine, never stored. Findings can be linked into
+  a **group** — a header card plus its detail and evidence slides — through a
+  shared finding id (`ocideck_finding_id`) and role (`ocideck_finding_role`), so
+  the whole finding moves and round-trips as a unit. Storage stays Markdown-close
+  and human-readable (PENTEST_MIAUW §3.1); see
+  [docs/FILE_FORMAT.md](docs/FILE_FORMAT.md) §4. Localised in all interface
+  languages.
 - **Informatieveiligheid slide types (scaffold)** — five new slide types for
   pentest reporting (*Bevinding*, *Bevindingenoverzicht*, *Checklist*,
   *Scope-matrix*, *Ondertekening*) are registered end to end: enum, metadata,
