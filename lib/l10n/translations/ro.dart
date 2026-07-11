@@ -84,6 +84,12 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Hoog': 'Ridicat',
+  'Middel': 'Mediu',
+  'Laag': 'Scăzut',
+  'Informatief': 'Informativ',
+  'Vernieuw uit deck': 'Reîmprospătează din deck',
+  'Aantal bevindingen per ernst': 'Număr de constatări după gravitate',
   'Aangepast…': 'Personalizat…',
   'Aangepaste tijd': 'Timp personalizat',
   'Uit sjabloon…': 'Din șablon…',

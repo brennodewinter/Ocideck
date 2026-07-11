@@ -580,6 +580,33 @@ losslessly. The heading is the title; the table has a fixed five-column shape:
 | firmware.bin | Firmware | FSTM |  | |
 ```
 
+**Findings summary** (`findings-summary`) — a management overview of how many
+findings fall in each CVSS severity band, stored as a normal Markdown table (like
+`checklist` / `scope-matrix`) so it round-trips losslessly. The heading is the
+title; the table is a fixed two-column count, one row per band:
+
+```markdown
+<!-- _class: findings-summary -->
+# Bevindingenoverzicht
+| Severity | Count |
+| --- | --- |
+| Critical | 1 |
+| High | 2 |
+| Medium | 0 |
+| Low | 1 |
+| None | 0 |
+```
+
+- The first column holds the **stable English FIRST band names** (`Critical`,
+  `High`, `Medium`, `Low`, `None`) so the table round-trips regardless of
+  interface language; the editor and preview localise them (the `None` band is
+  presented as "Informational") and colour them per severity.
+- The counts are a **deliberate snapshot**: the editor's **Vernieuw uit deck**
+  ("refresh from deck") recomputes them from the deck's `finding` header slides
+  (each finding's severity is derived from its CVSS vector; an absent vector
+  counts as informational), but they remain hand-editable and are stored so the
+  slide is self-contained. The **total** shown is derived, never stored.
+
 Rules:
 
 - The **score and severity band** shown on the `**CVSS 4.0:**` line are always

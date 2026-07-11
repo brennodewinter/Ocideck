@@ -83,6 +83,12 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Hoog': 'Augsts',
+  'Middel': 'Vidējs',
+  'Laag': 'Zems',
+  'Informatief': 'Informatīvs',
+  'Vernieuw uit deck': 'Atjaunināt no krājuma',
+  'Aantal bevindingen per ernst': 'Atradumu skaits pēc smaguma',
   'Aangepast…': 'Pielāgots…',
   'Aangepaste tijd': 'Pielāgots laiks',
   'Uit sjabloon…': 'No veidnes…',

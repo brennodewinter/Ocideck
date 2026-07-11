@@ -83,6 +83,12 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Hoog': 'Magas',
+  'Middel': 'Közepes',
+  'Laag': 'Alacsony',
+  'Informatief': 'Tájékoztató',
+  'Vernieuw uit deck': 'Frissítés a deckből',
+  'Aantal bevindingen per ernst': 'Megállapítások száma súlyosság szerint',
   'Aangepast…': 'Egyéni…',
   'Aangepaste tijd': 'Egyéni idő',
   'Uit sjabloon…': 'Sablonból…',

@@ -83,6 +83,12 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Hoog': 'Haltu',
+  'Middel': 'Medio',
+  'Laag': 'Abou',
+  'Informatief': 'Informativo',
+  'Vernieuw uit deck': 'Refreská for di deck',
+  'Aantal bevindingen per ernst': 'Kantidat di deskubrimentu pa severidat',
   'Aangepast…': 'Propio…',
   'Aangepaste tijd': 'Tempo propio',
   'Uit sjabloon…': 'For di plantia…',

@@ -84,6 +84,12 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Hoog': 'Vysoké',
+  'Middel': 'Stredné',
+  'Laag': 'Nízke',
+  'Informatief': 'Informačné',
+  'Vernieuw uit deck': 'Obnoviť z balíka',
+  'Aantal bevindingen per ernst': 'Počet zistení podľa závažnosti',
   'Aangepast…': 'Vlastné…',
   'Aangepaste tijd': 'Vlastný čas',
   'Uit sjabloon…': 'Zo šablóny…',

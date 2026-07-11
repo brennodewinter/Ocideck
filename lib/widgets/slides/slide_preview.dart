@@ -20,6 +20,7 @@ import '../../models/checklist_spec.dart';
 import '../../models/cockpit.dart';
 import '../../models/deck.dart';
 import '../../models/finding_spec.dart';
+import '../../models/findings_summary_spec.dart';
 import '../../models/question.dart';
 import '../../models/scope_matrix_spec.dart';
 import '../../models/settings.dart';
@@ -63,6 +64,7 @@ part 'previews/checklist_preview.dart';
 part 'previews/scaffold_previews.dart';
 part 'previews/finding_preview.dart';
 part 'previews/scope_matrix_preview.dart';
+part 'previews/findings_summary_preview.dart';
 part 'previews/overlays.dart';
 
 /// Returns a TextStyle with the correct font. 'EB Garamond' is bundled with the
@@ -722,9 +724,10 @@ class SlidePreviewWidget extends StatelessWidget {
     }
   }
 
-  /// Preview for the Informatieveiligheid slide types: `finding` (P1-FIND) and
-  /// `checklist` (P1-CHK) have structured previews; the other three keep the
-  /// shared free-Markdown scaffold until their packages land (P1-SCOPE/SUM/SIGN).
+  /// Preview for the Informatieveiligheid slide types: `finding` (P1-FIND),
+  /// `checklist` (P1-CHK), `scopeMatrix` (P1-SCOPE) and `findingsSummary`
+  /// (P1-SUM) have structured previews; only `signOff` keeps the shared
+  /// free-Markdown scaffold until its package lands (P1-SIGN).
   Widget _securityPreview(double w) {
     if (slide.type == SlideType.finding) {
       return _FindingPreview(
@@ -744,6 +747,14 @@ class SlidePreviewWidget extends StatelessWidget {
     }
     if (slide.type == SlideType.scopeMatrix) {
       return _ScopeMatrixPreview(
+        slide: slide,
+        w: w,
+        font: fontFamily,
+        profile: themeProfile,
+      );
+    }
+    if (slide.type == SlideType.findingsSummary) {
+      return _FindingsSummaryPreview(
         slide: slide,
         w: w,
         font: fontFamily,

@@ -83,6 +83,12 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Hoog': 'Visoko',
+  'Middel': 'Srednje',
+  'Laag': 'Nisko',
+  'Informatief': 'Informativno',
+  'Vernieuw uit deck': 'Osvježi iz decka',
+  'Aantal bevindingen per ernst': 'Broj nalaza po ozbiljnosti',
   'Aangepast…': 'Prilagođeno…',
   'Aangepaste tijd': 'Prilagođeno vrijeme',
   'Uit sjabloon…': 'Iz predloška…',

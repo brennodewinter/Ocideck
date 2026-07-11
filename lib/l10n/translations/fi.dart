@@ -83,6 +83,12 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Hoog': 'Korkea',
+  'Middel': 'Keskitaso',
+  'Laag': 'Matala',
+  'Informatief': 'Informatiivinen',
+  'Vernieuw uit deck': 'Päivitä deckistä',
+  'Aantal bevindingen per ernst': 'Havaintojen määrä vakavuuden mukaan',
   'Aangepast…': 'Oma…',
   'Aangepaste tijd': 'Oma aika',
   'Uit sjabloon…': 'Mallista…',

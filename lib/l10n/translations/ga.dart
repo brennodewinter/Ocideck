@@ -85,6 +85,12 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Hoog': 'Ard',
+  'Middel': 'Meánach',
+  'Laag': 'Íseal',
+  'Informatief': 'Faisnéiseach',
+  'Vernieuw uit deck': 'Athnuaigh ón deic',
+  'Aantal bevindingen per ernst': 'Líon na dtorthaí de réir déine',
   'Aangepast…': 'Saincheaptha…',
   'Aangepaste tijd': 'Am saincheaptha',
   'Uit sjabloon…': 'Ó theimpléad…',

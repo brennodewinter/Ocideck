@@ -84,6 +84,12 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Hoog': 'Високий',
+  'Middel': 'Середній',
+  'Laag': 'Низький',
+  'Informatief': 'Інформаційний',
+  'Vernieuw uit deck': 'Оновити з колоди',
+  'Aantal bevindingen per ernst': 'Кількість знахідок за рівнем',
   'Aangepast…': 'Власний…',
   'Aangepaste tijd': 'Власний час',
   'Uit sjabloon…': 'З шаблону…',

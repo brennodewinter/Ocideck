@@ -83,6 +83,12 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Hoog': 'Tinggi',
+  'Middel': 'Sedang',
+  'Laag': 'Rendah',
+  'Informatief': 'Informasional',
+  'Vernieuw uit deck': 'Perbarui dari deck',
+  'Aantal bevindingen per ernst': 'Jumlah temuan per tingkat keparahan',
   'Aangepast…': 'Kustom…',
   'Aangepaste tijd': 'Waktu kustom',
   'Uit sjabloon…': 'Dari templat…',

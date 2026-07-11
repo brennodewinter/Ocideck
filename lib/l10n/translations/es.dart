@@ -84,6 +84,12 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Hoog': 'Alto',
+  'Middel': 'Medio',
+  'Laag': 'Bajo',
+  'Informatief': 'Informativo',
+  'Vernieuw uit deck': 'Actualizar desde el deck',
+  'Aantal bevindingen per ernst': 'Número de hallazgos por severidad',
   'Aangepast…': 'Personalizado…',
   'Aangepaste tijd': 'Tiempo personalizado',
   'Uit sjabloon…': 'Desde plantilla…',

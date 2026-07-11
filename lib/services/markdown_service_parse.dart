@@ -27,11 +27,13 @@ final _reImageWidthStyle = RegExp(r'--image-width:\s*(\d+)%');
 
 /// Slide types whose body is stored as a Markdown table, so the parser keeps the
 /// decoded rows in [Slide.tableRows]: the `table` type plus the security types
-/// that serialise as a table (`checklist` P1-CHK, `scopeMatrix` P1-SCOPE).
+/// that serialise as a table (`checklist` P1-CHK, `scopeMatrix` P1-SCOPE,
+/// `findingsSummary` P1-SUM).
 const _tableBackedTypes = {
   SlideType.table,
   SlideType.checklist,
   SlideType.scopeMatrix,
+  SlideType.findingsSummary,
 };
 
 /// Mutable accumulator for [_MarkdownParse._parseBodyLines]: the per-line

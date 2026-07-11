@@ -83,6 +83,12 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Hoog': 'Υψηλό',
+  'Middel': 'Μεσαίο',
+  'Laag': 'Χαμηλό',
+  'Informatief': 'Πληροφοριακό',
+  'Vernieuw uit deck': 'Ανανέωση από το deck',
+  'Aantal bevindingen per ernst': 'Αριθμός ευρημάτων ανά σοβαρότητα',
   'Aangepast…': 'Προσαρμοσμένο…',
   'Aangepaste tijd': 'Προσαρμοσμένος χρόνος',
   'Uit sjabloon…': 'Από πρότυπο…',
