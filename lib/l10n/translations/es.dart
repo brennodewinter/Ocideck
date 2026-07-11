@@ -84,6 +84,10 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Managementsamenvatting': 'Resumen ejecutivo',
+  'Bevindingen totaal': 'Total de hallazgos',
+  'scope-objecten getest': 'objetos de alcance probados',
+  'Gebruikte standaarden': 'Estándares utilizados',
   'Bewijs-hashes kopiëren': 'Copiar hashes de evidencia',
   'Bewijs-hashes gekopieerd': 'Hashes de evidencia copiados',
   'Bevindingen hernummeren': 'Renumerar hallazgos',

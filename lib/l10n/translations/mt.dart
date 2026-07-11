@@ -84,6 +84,10 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Managementsamenvatting': 'Sommarju maniġerjali',
+  'Bevindingen totaal': 'Total tas-sejbiet',
+  'scope-objecten getest': 'oġġetti tal-ambitu ttestjati',
+  'Gebruikte standaarden': 'Standards użati',
   'Bewijs-hashes kopiëren': 'Ikkupja l-hashes tal-evidenza',
   'Bewijs-hashes gekopieerd': 'Hashes tal-evidenza kkupjati',
   'Bevindingen hernummeren': 'Innumra mill-ġdid is-sejbiet',

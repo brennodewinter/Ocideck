@@ -83,6 +83,10 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Managementsamenvatting': 'Sažetak za upravu',
+  'Bevindingen totaal': 'Ukupno nalaza',
+  'scope-objecten getest': 'testirani objekti opsega',
+  'Gebruikte standaarden': 'Korišteni standardi',
   'Bewijs-hashes kopiëren': 'Kopiraj hashove dokaza',
   'Bewijs-hashes gekopieerd': 'Hashovi dokaza kopirani',
   'Bevindingen hernummeren': 'Ponovno numeriraj nalaze',

@@ -85,6 +85,10 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Managementsamenvatting': 'Summarium administrationis',
+  'Bevindingen totaal': 'Inventa summa',
+  'scope-objecten getest': 'res ambitus probatae',
+  'Gebruikte standaarden': 'Normae adhibitae',
   'Bewijs-hashes kopiëren': 'Digestos testimonii transcribere',
   'Bewijs-hashes gekopieerd': 'Digesti testimonii descripti',
   'Bevindingen hernummeren': 'Inventa renumerare',

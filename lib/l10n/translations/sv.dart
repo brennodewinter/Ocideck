@@ -83,6 +83,10 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Managementsamenvatting': 'Sammanfattning för ledningen',
+  'Bevindingen totaal': 'Totalt antal fynd',
+  'scope-objecten getest': 'omfångsobjekt testade',
+  'Gebruikte standaarden': 'Använda standarder',
   'Bewijs-hashes kopiëren': 'Kopiera bevis-hashar',
   'Bewijs-hashes gekopieerd': 'Bevis-hashar kopierade',
   'Bevindingen hernummeren': 'Numrera om fynd',

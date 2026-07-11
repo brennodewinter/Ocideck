@@ -88,6 +88,14 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
         onInvoke: _copyEvidenceHashes,
       ),
       PaletteCommand(
+        label: l10n.d('Managementsamenvatting'),
+        icon: Icons.summarize_outlined,
+        keywords: const ['summary', 'management', 'samenvatting', 'overzicht'],
+        enabled: ref.read(secModuleRevealProvider),
+        onInvoke: () =>
+            ManagementSummaryDialog.show(context, deckManagementSummary(deck)),
+      ),
+      PaletteCommand(
         label: l10n.t('imageLibrary'),
         icon: Icons.photo_library_outlined,
         onInvoke: _openImageCarousel,

@@ -83,6 +83,10 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Managementsamenvatting': 'Managementgearfetting',
+  'Bevindingen totaal': 'Befinings totaal',
+  'scope-objecten getest': 'scope-objekten test',
+  'Gebruikte standaarden': 'Brûkte standerts',
   'Bewijs-hashes kopiëren': 'Bewiis-hashes kopiearje',
   'Bewijs-hashes gekopieerd': 'Bewiis-hashes kopiearre',
   'Bevindingen hernummeren': 'Befinings opnij nûmerje',

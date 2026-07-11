@@ -83,6 +83,10 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Managementsamenvatting': 'Vadības kopsavilkums',
+  'Bevindingen totaal': 'Atradumu kopā',
+  'scope-objecten getest': 'pārbaudīti tvēruma objekti',
+  'Gebruikte standaarden': 'Izmantotie standarti',
   'Bewijs-hashes kopiëren': 'Kopēt pierādījumu jaucējus',
   'Bewijs-hashes gekopieerd': 'Pierādījumu jaucēji nokopēti',
   'Bevindingen hernummeren': 'Pārnumurēt atradumus',

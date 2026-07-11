@@ -85,6 +85,10 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Managementsamenvatting': 'Podsumowanie zarządcze',
+  'Bevindingen totaal': 'Łącznie ustaleń',
+  'scope-objecten getest': 'przetestowane obiekty zakresu',
+  'Gebruikte standaarden': 'Użyte standardy',
   'Bewijs-hashes kopiëren': 'Kopiuj skróty dowodów',
   'Bewijs-hashes gekopieerd': 'Skopiowano skróty dowodów',
   'Bevindingen hernummeren': 'Ponownie ponumeruj ustalenia',

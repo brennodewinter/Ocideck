@@ -83,6 +83,10 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Managementsamenvatting': 'Johdon yhteenveto',
+  'Bevindingen totaal': 'Havaintoja yhteensä',
+  'scope-objecten getest': 'laajuuden kohteita testattu',
+  'Gebruikte standaarden': 'Käytetyt standardit',
   'Bewijs-hashes kopiëren': 'Kopioi todisteiden tiivisteet',
   'Bewijs-hashes gekopieerd': 'Todisteiden tiivisteet kopioitu',
   'Bevindingen hernummeren': 'Numeroi havainnot uudelleen',

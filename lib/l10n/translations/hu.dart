@@ -83,6 +83,10 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Managementsamenvatting': 'Vezetői összefoglaló',
+  'Bevindingen totaal': 'Megállapítások összesen',
+  'scope-objecten getest': 'tesztelt hatókör-objektumok',
+  'Gebruikte standaarden': 'Használt szabványok',
   'Bewijs-hashes kopiëren': 'Bizonyíték-hashek másolása',
   'Bewijs-hashes gekopieerd': 'Bizonyíték-hashek másolva',
   'Bevindingen hernummeren': 'Megállapítások újraszámozása',

@@ -83,6 +83,10 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Managementsamenvatting': 'Ringkasan manajemen',
+  'Bevindingen totaal': 'Total temuan',
+  'scope-objecten getest': 'objek lingkup diuji',
+  'Gebruikte standaarden': 'Standar yang digunakan',
   'Bewijs-hashes kopiëren': 'Salin hash bukti',
   'Bewijs-hashes gekopieerd': 'Hash bukti disalin',
   'Bevindingen hernummeren': 'Nomori ulang temuan',

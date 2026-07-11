@@ -84,6 +84,10 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Managementsamenvatting': 'Резюме для керівництва',
+  'Bevindingen totaal': 'Усього виявлень',
+  'scope-objecten getest': 'об\'єктів обсягу перевірено',
+  'Gebruikte standaarden': 'Використані стандарти',
   'Bewijs-hashes kopiëren': 'Копіювати хеші доказів',
   'Bewijs-hashes gekopieerd': 'Хеші доказів скопійовано',
   'Bevindingen hernummeren': 'Перенумерувати виявлення',

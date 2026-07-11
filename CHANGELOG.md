@@ -8,6 +8,13 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Management summary derived from the deck** — a **Managementsamenvatting**
+  command (command palette) shows a management overview computed live from the
+  deck: the number of findings per severity band, how many scope objects were
+  tested, and the **standards used** (WSTG / PTES / MASTG / … derived from the
+  scope objects' types and the checklists present). It regenerates from the deck,
+  so it always matches the report (PENTEST_MIAUW §10.3). Localised in all
+  interface languages.
 - **Report automation: renumber findings, evidence hashes, scope-coverage gaps**
   (PENTEST_MIAUW §10). The command palette gained **Bevindingen hernummeren**,
   which renumbers every finding sequentially (`F-01`, `F-02`, … in deck order) —

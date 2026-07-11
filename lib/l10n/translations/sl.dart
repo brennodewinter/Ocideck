@@ -83,6 +83,10 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Managementsamenvatting': 'Povzetek za vodstvo',
+  'Bevindingen totaal': 'Ugotovitev skupaj',
+  'scope-objecten getest': 'preizkušeni predmeti obsega',
+  'Gebruikte standaarden': 'Uporabljeni standardi',
   'Bewijs-hashes kopiëren': 'Kopiraj razpršila dokazov',
   'Bewijs-hashes gekopieerd': 'Razpršila dokazov kopirana',
   'Bevindingen hernummeren': 'Preštevilči ugotovitve',

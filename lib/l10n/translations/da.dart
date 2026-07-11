@@ -83,6 +83,10 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Managementsamenvatting': 'Ledelsesresumé',
+  'Bevindingen totaal': 'Fund i alt',
+  'scope-objecten getest': 'scope-objekter testet',
+  'Gebruikte standaarden': 'Anvendte standarder',
   'Bewijs-hashes kopiëren': 'Kopiér bevis-hasher',
   'Bewijs-hashes gekopieerd': 'Bevis-hasher kopieret',
   'Bevindingen hernummeren': 'Omnummerer fund',

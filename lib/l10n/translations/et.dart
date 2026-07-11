@@ -82,6 +82,10 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Managementsamenvatting': 'Juhtkonna kokkuvõte',
+  'Bevindingen totaal': 'Leide kokku',
+  'scope-objecten getest': 'ulatuse objekte testitud',
+  'Gebruikte standaarden': 'Kasutatud standardid',
   'Bewijs-hashes kopiëren': 'Kopeeri tõendite räsid',
   'Bewijs-hashes gekopieerd': 'Tõendite räsid kopeeritud',
   'Bevindingen hernummeren': 'Nummerda leiud ümber',

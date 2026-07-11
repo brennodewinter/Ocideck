@@ -81,6 +81,10 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Managementsamenvatting': 'che\' boQ',
+  'Bevindingen totaal': 'Sammeypu\' naQ',
+  'scope-objecten getest': 'scope Dochmey waH',
+  'Gebruikte standaarden': 'Qapla\' lo\'lu\'bogh',
   'Bewijs-hashes kopiëren': 'povwI\' hash velqa\'',
   'Bewijs-hashes gekopieerd': 'povwI\' hash velqa\'lu\'pu\'',
   'Bevindingen hernummeren': 'Sammey mI\' choqmoH',

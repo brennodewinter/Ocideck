@@ -83,6 +83,10 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Managementsamenvatting': 'Vadovybės santrauka',
+  'Bevindingen totaal': 'Iš viso radinių',
+  'scope-objecten getest': 'patikrinti aprėpties objektai',
+  'Gebruikte standaarden': 'Naudoti standartai',
   'Bewijs-hashes kopiëren': 'Kopijuoti įrodymų maišas',
   'Bewijs-hashes gekopieerd': 'Įrodymų maišos nukopijuotos',
   'Bevindingen hernummeren': 'Pernumeruoti radinius',

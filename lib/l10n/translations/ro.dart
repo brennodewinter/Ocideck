@@ -84,6 +84,10 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Managementsamenvatting': 'Rezumat pentru management',
+  'Bevindingen totaal': 'Total constatări',
+  'scope-objecten getest': 'obiecte de domeniu testate',
+  'Gebruikte standaarden': 'Standarde utilizate',
   'Bewijs-hashes kopiëren': 'Copiază hash-urile probelor',
   'Bewijs-hashes gekopieerd': 'Hash-urile probelor au fost copiate',
   'Bevindingen hernummeren': 'Renumerotează constatările',

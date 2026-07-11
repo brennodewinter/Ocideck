@@ -85,6 +85,10 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Managementsamenvatting': 'Achoimre bhainistíochta',
+  'Bevindingen totaal': 'Fionnachtana san iomlán',
+  'scope-objecten getest': 'réada scóip tástáilte',
+  'Gebruikte standaarden': 'Caighdeáin úsáidte',
   'Bewijs-hashes kopiëren': 'Cóipeáil haiseanna fianaise',
   'Bewijs-hashes gekopieerd': 'Haiseanna fianaise cóipeáilte',
   'Bevindingen hernummeren': 'Athuimhrigh na fionnachtana',

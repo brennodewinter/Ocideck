@@ -83,6 +83,10 @@ const _stringsDe = {
 };
 
 const _dutchSourceDe = {
+  'Managementsamenvatting': 'Managementzusammenfassung',
+  'Bevindingen totaal': 'Befunde insgesamt',
+  'scope-objecten getest': 'Scope-Objekte getestet',
+  'Gebruikte standaarden': 'Verwendete Standards',
   'Bewijs-hashes kopiëren': 'Nachweis-Hashes kopieren',
   'Bewijs-hashes gekopieerd': 'Nachweis-Hashes kopiert',
   'Bevindingen hernummeren': 'Befunde neu nummerieren',
