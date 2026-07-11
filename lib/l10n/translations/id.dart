@@ -96,6 +96,11 @@ const _dutchSourceId = {
   'aantal': 'jumlah',
   'Wissen': 'Hapus',
   'AI-alt-teksten gewist.': 'Teks alt AI dihapus.',
+  'Alle afbeeldingen hebben al tags.': 'Semua gambar sudah memiliki tag.',
+  'Afbeeldingen taggen…': 'Menandai gambar…',
+  'afbeeldingen getagd door AI.': 'gambar ditandai oleh AI.',
+  'Ongetagde afbeeldingen taggen met AI': 'Tandai gambar tanpa tag dengan AI',
+  'Ongedaan maken': 'Urungkan',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Tidak dapat membaca gambar untuk analisis AI.',
   'Het model gaf geen alt-tekst terug.': 'Model tidak mengembalikan teks alt.',

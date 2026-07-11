@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ocideck/services/caption_service.dart';
 import 'package:ocideck/services/description_service.dart';
 import 'package:ocideck/widgets/dialogs/image_carousel_picker.dart';
@@ -23,6 +25,9 @@ void main() {
   late Directory tempDir;
 
   setUp(() {
+    // The picker is a ConsumerStatefulWidget; its settings provider reads
+    // SharedPreferences on build, which needs a mock store under flutter_test.
+    SharedPreferences.setMockInitialValues({});
     tempDir = Directory.systemTemp.createTempSync('carousel_smoke');
     for (final name in ['alpha.png', 'beta.png', 'gamma.png']) {
       File('${tempDir.path}/$name').writeAsBytesSync(_onePixelPng);
@@ -65,11 +70,13 @@ void main() {
     // loading spinner forever).
     await tester.runAsync(() async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: ImageCarouselPicker(
-            searchPaths: [tempDir.path],
-            captionService: CaptionService(),
-            descriptionService: DescriptionService(),
+        ProviderScope(
+          child: MaterialApp(
+            home: ImageCarouselPicker(
+              searchPaths: [tempDir.path],
+              captionService: CaptionService(),
+              descriptionService: DescriptionService(),
+            ),
           ),
         ),
       );

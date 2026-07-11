@@ -97,6 +97,12 @@ const _dutchSourceCs = {
   'aantal': 'počet',
   'Wissen': 'Vymazat',
   'AI-alt-teksten gewist.': 'AI alt texty vymazány.',
+  'Alle afbeeldingen hebben al tags.': 'Všechny obrázky už mají štítky.',
+  'Afbeeldingen taggen…': 'Označování obrázků…',
+  'afbeeldingen getagd door AI.': 'obrázků označeno AI.',
+  'Ongetagde afbeeldingen taggen met AI':
+      'Označit neoznačené obrázky pomocí AI',
+  'Ongedaan maken': 'Zpět',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Obrázek se nepodařilo načíst pro AI analýzu.',
   'Het model gaf geen alt-tekst terug.': 'Model nevrátil žádný alt text.',

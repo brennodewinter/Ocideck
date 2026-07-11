@@ -96,6 +96,11 @@ const _dutchSourceHr = {
   'aantal': 'broj',
   'Wissen': 'Očisti',
   'AI-alt-teksten gewist.': 'AI alternativni tekstovi očišćeni.',
+  'Alle afbeeldingen hebben al tags.': 'Sve slike već imaju oznake.',
+  'Afbeeldingen taggen…': 'Označavanje slika…',
+  'afbeeldingen getagd door AI.': 'slika označeno pomoću AI.',
+  'Ongetagde afbeeldingen taggen met AI': 'Označi neoznačene slike pomoću AI',
+  'Ongedaan maken': 'Poništi',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Slika se nije mogla pročitati za AI analizu.',
   'Het model gaf geen alt-tekst terug.':

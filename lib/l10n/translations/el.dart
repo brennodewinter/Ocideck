@@ -96,6 +96,12 @@ const _dutchSourceEl = {
   'aantal': 'πλήθος',
   'Wissen': 'Εκκαθάριση',
   'AI-alt-teksten gewist.': 'Τα εναλλακτικά κείμενα AI εκκαθαρίστηκαν.',
+  'Alle afbeeldingen hebben al tags.': 'Όλες οι εικόνες έχουν ήδη ετικέτες.',
+  'Afbeeldingen taggen…': 'Προσθήκη ετικετών στις εικόνες…',
+  'afbeeldingen getagd door AI.': 'εικόνες με ετικέτες από AI.',
+  'Ongetagde afbeeldingen taggen met AI':
+      'Προσθήκη ετικετών σε εικόνες χωρίς ετικέτες με AI',
+  'Ongedaan maken': 'Αναίρεση',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Δεν ήταν δυνατή η ανάγνωση της εικόνας για ανάλυση AI.',
   'Het model gaf geen alt-tekst terug.':

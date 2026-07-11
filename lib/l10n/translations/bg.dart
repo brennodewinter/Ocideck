@@ -97,6 +97,12 @@ const _dutchSourceBg = {
   'aantal': 'брой',
   'Wissen': 'Изчисти',
   'AI-alt-teksten gewist.': 'AI алт-текстовете са изчистени.',
+  'Alle afbeeldingen hebben al tags.': 'Всички изображения вече имат етикети.',
+  'Afbeeldingen taggen…': 'Добавяне на етикети към изображенията…',
+  'afbeeldingen getagd door AI.': 'изображения с етикети от AI.',
+  'Ongetagde afbeeldingen taggen met AI':
+      'Добави етикети на изображения без етикети с AI',
+  'Ongedaan maken': 'Отмени',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Изображението не можа да бъде прочетено за AI анализ.',
   'Het model gaf geen alt-tekst terug.': 'Моделът не върна алтернативен текст.',

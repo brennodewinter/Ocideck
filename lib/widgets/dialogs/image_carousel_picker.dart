@@ -1,14 +1,20 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../theme/image_picker_palette.dart';
 import 'package:flutter/services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:path/path.dart' as p;
+import '../../services/ai_client_service.dart';
 import '../../services/caption_service.dart';
 import '../../services/description_service.dart';
+import '../../services/image_alt_ai_service.dart';
 import '../../services/image_dedup_service.dart';
 import '../../services/image_reference_service.dart';
 import '../../services/image_service.dart';
+import '../../services/secret_store.dart';
+import '../../state/consent_provider.dart';
+import '../../state/settings_provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/log.dart';
 import '../../theme/app_theme.dart';
@@ -49,7 +55,7 @@ enum _ViewMode {
 
 /// Spectaculaire afbeeldingencarousel.
 /// Toont alle afbeeldingen uit de opgegeven mappen in een mooi grid.
-class ImageCarouselPicker extends StatefulWidget {
+class ImageCarouselPicker extends ConsumerStatefulWidget {
   final List<String> searchPaths;
   final String? initialPath;
   final CaptionService captionService;
@@ -99,10 +105,11 @@ class ImageCarouselPicker extends StatefulWidget {
   }
 
   @override
-  State<ImageCarouselPicker> createState() => _ImageCarouselPickerState();
+  ConsumerState<ImageCarouselPicker> createState() =>
+      _ImageCarouselPickerState();
 }
 
-class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
+class _ImageCarouselPickerState extends ConsumerState<ImageCarouselPicker> {
   static const _exts = {
     '.jpg',
     '.jpeg',
@@ -133,6 +140,8 @@ class _ImageCarouselPickerState extends State<ImageCarouselPicker> {
   bool _untaggedOnly = false; // toon alleen afbeeldingen zonder tags
   bool _deduping = false; // duplicaten-opruimactie bezig
   String? _dedupePhase; // huidige fase van de opruimactie, voor op de knop
+  bool _autoTagging = false; // AI-auto-tag-actie bezig
+  String? _autoTagPhase; // huidige fase van het auto-taggen, voor op de knop
   int _hoveredIndex = -1;
   _ViewMode _viewMode = _ViewMode.grid;
 

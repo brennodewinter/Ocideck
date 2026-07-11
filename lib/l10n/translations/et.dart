@@ -95,6 +95,11 @@ const _dutchSourceEt = {
   'aantal': 'arv',
   'Wissen': 'Kustuta',
   'AI-alt-teksten gewist.': 'AI alt-tekstid kustutatud.',
+  'Alle afbeeldingen hebben al tags.': 'Kõigil piltidel on juba sildid.',
+  'Afbeeldingen taggen…': 'Piltide sildistamine…',
+  'afbeeldingen getagd door AI.': 'pilti sildistas AI.',
+  'Ongetagde afbeeldingen taggen met AI': 'Sildista sildistamata pildid AI-ga',
+  'Ongedaan maken': 'Võta tagasi',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Pilti ei õnnestunud AI-analüüsiks lugeda.',
   'Het model gaf geen alt-tekst terug.': 'Mudel ei tagastanud alt-teksti.',

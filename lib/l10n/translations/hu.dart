@@ -96,6 +96,11 @@ const _dutchSourceHu = {
   'aantal': 'darab',
   'Wissen': 'Törlés',
   'AI-alt-teksten gewist.': 'AI alt szövegek törölve.',
+  'Alle afbeeldingen hebben al tags.': 'Minden képnek már van címkéje.',
+  'Afbeeldingen taggen…': 'Képek címkézése…',
+  'afbeeldingen getagd door AI.': 'kép címkézve AI által.',
+  'Ongetagde afbeeldingen taggen met AI': 'Címkézetlen képek címkézése AI-vel',
+  'Ongedaan maken': 'Visszavonás',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'A kép nem volt olvasható az AI-elemzéshez.',
   'Het model gaf geen alt-tekst terug.':

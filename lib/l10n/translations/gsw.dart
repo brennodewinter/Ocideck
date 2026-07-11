@@ -96,6 +96,11 @@ const _dutchSourceGsw = {
   'aantal': 'Aazahl',
   'Wissen': 'Lösche',
   'AI-alt-teksten gewist.': 'KI-Alt-Text glöscht.',
+  'Alle afbeeldingen hebben al tags.': 'Alli Bilder hend scho Tags.',
+  'Afbeeldingen taggen…': 'Bilder werded taggt…',
+  'afbeeldingen getagd door AI.': 'Bilder mit KI taggt.',
+  'Ongetagde afbeeldingen taggen met AI': 'Bilder ohni Tags mit KI tagge',
+  'Ongedaan maken': 'Zrugg',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'S Bild het nöd chöne glääse wärde für d KI-Analyse.',
   'Het model gaf geen alt-tekst terug.': 'S Modäll het kein Alt-Text zruggäh.',

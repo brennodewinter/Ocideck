@@ -98,6 +98,12 @@ const _dutchSourcePl = {
   'aantal': 'liczba',
   'Wissen': 'Wyczyść',
   'AI-alt-teksten gewist.': 'Teksty alternatywne AI wyczyszczone.',
+  'Alle afbeeldingen hebben al tags.': 'Wszystkie obrazy mają już tagi.',
+  'Afbeeldingen taggen…': 'Tagowanie obrazów…',
+  'afbeeldingen getagd door AI.': 'obrazów oznaczonych przez AI.',
+  'Ongetagde afbeeldingen taggen met AI':
+      'Oznacz nieotagowane obrazy za pomocą AI',
+  'Ongedaan maken': 'Cofnij',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Nie udało się odczytać obrazu do analizy AI.',
   'Het model gaf geen alt-tekst terug.':

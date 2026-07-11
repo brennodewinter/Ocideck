@@ -97,6 +97,13 @@ const _dutchSourceFr = {
   'aantal': 'nombre',
   'Wissen': 'Effacer',
   'AI-alt-teksten gewist.': 'Textes alternatifs IA effacés.',
+  'Alle afbeeldingen hebben al tags.':
+      'Toutes les images ont déjà des étiquettes.',
+  'Afbeeldingen taggen…': 'Étiquetage des images…',
+  'afbeeldingen getagd door AI.': 'images étiquetées par l\'IA.',
+  'Ongetagde afbeeldingen taggen met AI':
+      'Étiqueter les images sans étiquette avec l\'IA',
+  'Ongedaan maken': 'Annuler',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Impossible de lire l\'image pour l\'analyse IA.',
   'Het model gaf geen alt-tekst terug.':

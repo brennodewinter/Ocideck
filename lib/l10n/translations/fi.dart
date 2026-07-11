@@ -96,6 +96,12 @@ const _dutchSourceFi = {
   'aantal': 'määrä',
   'Wissen': 'Tyhjennä',
   'AI-alt-teksten gewist.': 'Tekoälyn alt-tekstit tyhjennetty.',
+  'Alle afbeeldingen hebben al tags.': 'Kaikilla kuvilla on jo tunnisteet.',
+  'Afbeeldingen taggen…': 'Merkitään kuvia…',
+  'afbeeldingen getagd door AI.': 'kuvaa merkitty tekoälyllä.',
+  'Ongetagde afbeeldingen taggen met AI':
+      'Merkitse merkitsemättömät kuvat tekoälyllä',
+  'Ongedaan maken': 'Kumoa',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Kuvaa ei voitu lukea tekoälyanalyysiä varten.',
   'Het model gaf geen alt-tekst terug.': 'Malli ei palauttanut alt-tekstiä.',

@@ -96,6 +96,11 @@ const _dutchSourceSl = {
   'aantal': 'število',
   'Wissen': 'Počisti',
   'AI-alt-teksten gewist.': 'Nadomestna besedila UI počiščena.',
+  'Alle afbeeldingen hebben al tags.': 'Vse slike že imajo oznake.',
+  'Afbeeldingen taggen…': 'Označevanje slik…',
+  'afbeeldingen getagd door AI.': 'slik označenih z UI.',
+  'Ongetagde afbeeldingen taggen met AI': 'Označi neoznačene slike z UI',
+  'Ongedaan maken': 'Razveljavi',
   'Kon de afbeelding niet lezen voor AI-analyse.':
       'Slike ni bilo mogoče prebrati za analizo UI.',
   'Het model gaf geen alt-tekst terug.':
