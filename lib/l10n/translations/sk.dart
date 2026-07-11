@@ -84,6 +84,8 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Uit sjabloon…': 'Zo šablóny…',
+  'Sjabloon kiezen': 'Vybrať šablónu',
   'Scope-object': 'Objekt rozsahu',
   'CVSS 4.0-vector': 'Vektor CVSS 4.0',
   'Bevestiging (reproductie)': 'Potvrdenie (reprodukcia)',

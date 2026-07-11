@@ -84,6 +84,8 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Uit sjabloon…': 'Desde plantilla…',
+  'Sjabloon kiezen': 'Elegir plantilla',
   'Scope-object': 'Objeto del alcance',
   'CVSS 4.0-vector': 'Vector CVSS 4.0',
   'Bevestiging (reproductie)': 'Confirmación (reproducción)',

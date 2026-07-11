@@ -83,6 +83,8 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Uit sjabloon…': 'Iz predloška…',
+  'Sjabloon kiezen': 'Odaberi predložak',
   'Scope-object': 'Objekt opsega',
   'CVSS 4.0-vector': 'Vektor CVSS 4.0',
   'Bevestiging (reproductie)': 'Potvrda (reprodukcija)',

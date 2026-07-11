@@ -85,6 +85,8 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Uit sjabloon…': 'Ex exemplari…',
+  'Sjabloon kiezen': 'Exemplar eligere',
   'Scope-object': 'Obiectum ambitus',
   'CVSS 4.0-vector': 'Vector CVSS 4.0',
   'Bevestiging (reproductie)': 'Confirmatio (reproductio)',

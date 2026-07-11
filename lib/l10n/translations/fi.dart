@@ -83,6 +83,8 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Uit sjabloon…': 'Mallista…',
+  'Sjabloon kiezen': 'Valitse malli',
   'Scope-object': 'Kohde (scope)',
   'CVSS 4.0-vector': 'CVSS 4.0 -vektori',
   'Bevestiging (reproductie)': 'Vahvistus (toisto)',

@@ -85,6 +85,8 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Uit sjabloon…': 'Ó theimpléad…',
+  'Sjabloon kiezen': 'Roghnaigh teimpléad',
   'Scope-object': 'Réad scóipe',
   'CVSS 4.0-vector': 'Veicteoir CVSS 4.0',
   'Bevestiging (reproductie)': 'Deimhniú (atáirgeadh)',

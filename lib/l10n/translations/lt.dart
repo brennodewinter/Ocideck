@@ -83,6 +83,8 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Uit sjabloon…': 'Iš šablono…',
+  'Sjabloon kiezen': 'Pasirinkti šabloną',
   'Scope-object': 'Aprėpties objektas',
   'CVSS 4.0-vector': 'CVSS 4.0 vektorius',
   'Bevestiging (reproductie)': 'Patvirtinimas (atkūrimas)',

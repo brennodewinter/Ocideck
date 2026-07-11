@@ -83,6 +83,8 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Uit sjabloon…': 'Från mall…',
+  'Sjabloon kiezen': 'Välj mall',
   'Scope-object': 'Scope-objekt',
   'CVSS 4.0-vector': 'CVSS 4.0-vektor',
   'Bevestiging (reproductie)': 'Bekräftelse (reproduktion)',

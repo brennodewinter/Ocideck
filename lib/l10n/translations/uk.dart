@@ -84,6 +84,8 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Uit sjabloon…': 'З шаблону…',
+  'Sjabloon kiezen': 'Вибрати шаблон',
   'Scope-object': 'Об\'єкт області',
   'CVSS 4.0-vector': 'Вектор CVSS 4.0',
   'Bevestiging (reproductie)': 'Підтвердження (відтворення)',

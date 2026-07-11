@@ -82,6 +82,8 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Uit sjabloon…': 'Mallist…',
+  'Sjabloon kiezen': 'Vali mall',
   'Scope-object': 'Ulatuse objekt',
   'CVSS 4.0-vector': 'CVSS 4.0 vektor',
   'Bevestiging (reproductie)': 'Kinnitus (taasesitus)',

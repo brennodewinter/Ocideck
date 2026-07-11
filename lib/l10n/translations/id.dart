@@ -83,6 +83,8 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Uit sjabloon…': 'Dari templat…',
+  'Sjabloon kiezen': 'Pilih templat',
   'Scope-object': 'Objek lingkup',
   'CVSS 4.0-vector': 'Vektor CVSS 4.0',
   'Bevestiging (reproductie)': 'Konfirmasi (reproduksi)',

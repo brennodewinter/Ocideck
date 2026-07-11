@@ -81,6 +81,8 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Uit sjabloon…': 'sablonvo\'…',
+  'Sjabloon kiezen': 'sablon yIwIv',
   'Scope-object': 'HevmeH Doch',
   'CVSS 4.0-vector': 'CVSS 4.0 vector',
   'Bevestiging (reproductie)': 'toblu\'ta\' (reproduction)',

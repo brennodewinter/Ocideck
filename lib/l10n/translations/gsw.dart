@@ -83,6 +83,8 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Uit sjabloon…': 'Us Vorlag…',
+  'Sjabloon kiezen': 'Vorlag uswähle',
   'Scope-object': 'Scope-Objäkt',
   'CVSS 4.0-vector': 'CVSS-4.0-Vektor',
   'Bevestiging (reproductie)': 'Bestätigung (Reproduktion)',
