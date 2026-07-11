@@ -27,7 +27,10 @@ class _FindingPreview extends StatelessWidget {
     final pad = w * 0.07;
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
     final spec = FindingSpec.parse(slide.customMarkdown);
-    final severityColor = FindingSeverityPalette.of(spec.severity);
+    final severityColor = FindingSeverityPalette.of(
+      spec.severity,
+      profile: profile,
+    );
 
     return Container(
       color: Colors.white,
