@@ -105,6 +105,11 @@ class MarkdownService {
         'ocideck_style_profile: ${base64Url.encode(utf8.encode(jsonEncode(deck.themeProfile.toJson())))}',
       );
     }
+    if (deck.miauwWaivers.isNotEmpty) {
+      buf.writeln(
+        'ocideck_miauw_waivers: ${base64Url.encode(utf8.encode(jsonEncode(deck.miauwWaivers)))}',
+      );
+    }
     buf.writeln('---');
     buf.writeln();
 

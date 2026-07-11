@@ -75,6 +75,7 @@ extension _MarkdownParse on MarkdownService {
     String theme = 'ocideck';
     bool paginate = true;
     ThemeProfile themeProfile = const ThemeProfile();
+    Map<String, String> miauwWaivers = const {};
     String? presentationTitle;
     String author = '';
     String organization = '';
@@ -168,6 +169,24 @@ extension _MarkdownParse on MarkdownService {
                 );
                 // Leave themeProfile at its default.
               }
+            case 'ocideck_miauw_waivers':
+              // Best-effort: a corrupt waiver map must not fail the whole parse.
+              try {
+                final decoded = utf8.decode(base64Url.decode(value));
+                final map = Map<String, Object?>.from(
+                  jsonDecode(decoded) as Map,
+                );
+                miauwWaivers = {
+                  for (final entry in map.entries) entry.key: '${entry.value}',
+                };
+              } catch (e, s) {
+                logError(
+                  'MarkdownService._doParse: decode ocideck_miauw_waivers',
+                  e,
+                  s,
+                );
+                // Leave miauwWaivers empty.
+              }
           }
         }
         content = content.substring(end + 5).trim();
@@ -218,6 +237,7 @@ extension _MarkdownParse on MarkdownService {
       sealAlgo: sealAlgo,
       sealAt: sealAt,
       signature: signature.isEmpty ? null : signature,
+      miauwWaivers: miauwWaivers,
     );
   }
 

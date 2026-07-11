@@ -370,6 +370,30 @@ void main() {
       expect(markdown, isNot(contains('text-decoration:line-through')));
     });
 
+    test('MIAUW waivers round-trip through the front matter', () {
+      final service = MarkdownService();
+      const waivers = {
+        '1.3': 'Certificering niet vereist door klant',
+        '3.3': 'Geen bewijsbestanden in scope',
+      };
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Pentest',
+          miauwWaivers: waivers,
+          slides: [Slide.create(SlideType.title)],
+        ),
+      );
+      expect(markdown, contains('ocideck_miauw_waivers:'));
+      expect(service.parseDeck(markdown)!.miauwWaivers, waivers);
+    });
+
+    test('a deck without waivers writes no waiver key', () {
+      final markdown = MarkdownService().generateDeck(
+        Deck(title: 'X', slides: [Slide.create(SlideType.title)]),
+      );
+      expect(markdown, isNot(contains('ocideck_miauw_waivers')));
+    });
+
     test('bulletsImage slide keeps bullets, image, size and caption', () {
       final out = _roundTrip(
         Slide.create(SlideType.bulletsImage).copyWith(
