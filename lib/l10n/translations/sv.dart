@@ -83,6 +83,8 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Alternativtext (beskrivning för skärmläsare)',
   'Hoog': 'Hög',
   'Middel': 'Medel',
   'Laag': 'Låg',

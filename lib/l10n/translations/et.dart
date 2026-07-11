@@ -82,6 +82,8 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Alt-tekst (kirjeldus ekraanilugejatele)',
   'Hoog': 'Kõrge',
   'Middel': 'Keskmine',
   'Laag': 'Madal',

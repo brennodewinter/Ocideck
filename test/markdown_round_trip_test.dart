@@ -1495,6 +1495,56 @@ void main() {
     });
   });
 
+  group('image alt-text round-trips (AI_ASSIST §6.1)', () {
+    test('image slide keeps its alt-text', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.image).copyWith(
+          imagePath: 'images/chart.png',
+          imageAltText: 'Staafgrafiek van de omzet per kwartaal',
+        ),
+      );
+      expect(out.type, SlideType.image);
+      expect(out.imageAltText, 'Staafgrafiek van de omzet per kwartaal');
+    });
+
+    test('two-images keeps a separate alt per image', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.twoImages).copyWith(
+          imagePath: 'images/a.png',
+          imagePath2: 'images/b.png',
+          imageAltText: 'Links: het oude ontwerp',
+          imageAltText2: 'Rechts: het nieuwe ontwerp',
+        ),
+      );
+      expect(out.imageAltText, 'Links: het oude ontwerp');
+      expect(out.imageAltText2, 'Rechts: het nieuwe ontwerp');
+    });
+
+    test('empty alt writes no comment and stays empty', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.image).copyWith(imagePath: 'images/x.png'),
+          ],
+        ),
+      );
+      expect(markdown.contains('ocideck_image_alt'), isFalse);
+      expect(service.parseDeck(markdown)!.slides.single.imageAltText, '');
+    });
+
+    test('alt-text with a --> sequence round-trips (escaped like notes)', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.image).copyWith(
+          imagePath: 'images/x.png',
+          imageAltText: 'A tricky --> caption end',
+        ),
+      );
+      expect(out.imageAltText, 'A tricky --> caption end');
+    });
+  });
+
   // All five Informatieveiligheid types now have structured serialisers, so the
   // former free-Markdown scaffold round-trip group is gone; each type is covered
   // by its own group / spec test (finding P1-FIND, checklist P1-CHK, scopeMatrix

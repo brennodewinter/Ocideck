@@ -304,6 +304,7 @@ class _TwoImagesPreview extends StatelessWidget {
                       semanticLabel: imageSemanticsLabel(
                         context,
                         slide.imageCaption,
+                        altText: slide.imageAltText,
                       ),
                     ),
                     _captionOverlay(context, slide.imageCaption, w),
@@ -326,6 +327,7 @@ class _TwoImagesPreview extends StatelessWidget {
                       semanticLabel: imageSemanticsLabel(
                         context,
                         slide.imageCaption2,
+                        altText: slide.imageAltText2,
                       ),
                     ),
                     _captionOverlay(context, slide.imageCaption2, w),
@@ -403,7 +405,11 @@ class _ImagePreview extends StatelessWidget {
           alignment: hasCustomFocal(slide.imageFocalX, slide.imageFocalY)
               ? focalAlignment(slide.imageFocalX, slide.imageFocalY)
               : (hasTitle ? Alignment.topCenter : Alignment.center),
-          semanticLabel: imageSemanticsLabel(context, slide.imageCaption),
+          semanticLabel: imageSemanticsLabel(
+            context,
+            slide.imageCaption,
+            altText: slide.imageAltText,
+          ),
         ),
         if (slide.title.isNotEmpty)
           Positioned(

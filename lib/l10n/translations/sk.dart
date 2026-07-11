@@ -84,6 +84,8 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Alternatívny text (popis pre čítačky obrazovky)',
   'Hoog': 'Vysoké',
   'Middel': 'Stredné',
   'Laag': 'Nízke',

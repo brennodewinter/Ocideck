@@ -399,6 +399,15 @@ class SlideQualityAnalyzer {
       case SlideType.image:
       case SlideType.twoImages:
       case SlideType.bulletsImage:
+        _checkMediaAltText(
+          slide: slide,
+          index: index,
+          issues: issues,
+          hasMedia:
+              slide.imagePath.trim().isNotEmpty ||
+              slide.imagePath2.trim().isNotEmpty,
+          label: 'Afbeelding',
+        );
       case SlideType.title:
       case SlideType.quote:
       case SlideType.bullets:
@@ -451,10 +460,17 @@ class SlideQualityAnalyzer {
     required String label,
   }) {
     if (!hasMedia) return;
+    // Per-usage alt-text (AI_ASSIST §6.1) or the visible caption clears the
+    // nudge just as a title/notes/subtitle does — all of them give a screen
+    // reader something to announce (see [imageSemanticsLabel]).
     final hasDescription =
         slide.title.trim().isNotEmpty ||
         slide.notes.trim().isNotEmpty ||
-        slide.subtitle.trim().isNotEmpty;
+        slide.subtitle.trim().isNotEmpty ||
+        slide.imageAltText.trim().isNotEmpty ||
+        slide.imageAltText2.trim().isNotEmpty ||
+        slide.imageCaption.trim().isNotEmpty ||
+        slide.imageCaption2.trim().isNotEmpty;
     if (hasDescription) return;
 
     issues.add(

@@ -83,6 +83,8 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Εναλλακτικό κείμενο (περιγραφή για αναγνώστες οθόνης)',
   'Hoog': 'Υψηλό',
   'Middel': 'Μεσαίο',
   'Laag': 'Χαμηλό',

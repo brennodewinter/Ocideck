@@ -239,6 +239,13 @@ class Slide {
   final String imageCaption;
   final String imageCaption2;
 
+  /// Per-usage WCAG alt-text for the slide's image(s) (AI_ASSIST §6.1). Empty =
+  /// fall back to the caption in [imageSemanticsLabel]; an explicitly empty alt
+  /// on a *decorative* image is valid (`alt=""`). Round-trips as
+  /// `<!-- ocideck_image_alt: … -->` / `…_alt2`.
+  final String imageAltText;
+  final String imageAltText2;
+
   /// Normalized focal point (0..1, 0.5 = centre) that decides which part of a
   /// cropped image stays in view instead of always centring. It applies when
   /// the picture overflows its slot — cover mode, zoom-in, or a fixed panel
@@ -351,6 +358,8 @@ class Slide {
     this.imagePath2 = '',
     this.imageCaption = '',
     this.imageCaption2 = '',
+    this.imageAltText = '',
+    this.imageAltText2 = '',
     this.imageFocalX = 0.5,
     this.imageFocalY = 0.5,
     this.imageFocalX2 = 0.5,
@@ -448,6 +457,8 @@ class Slide {
       imagePath2: src.imagePath2,
       imageCaption: src.imageCaption,
       imageCaption2: src.imageCaption2,
+      imageAltText: src.imageAltText,
+      imageAltText2: src.imageAltText2,
       imageFocalX: src.imageFocalX,
       imageFocalY: src.imageFocalY,
       imageFocalX2: src.imageFocalX2,
@@ -501,6 +512,8 @@ class Slide {
     String? imagePath2,
     String? imageCaption,
     String? imageCaption2,
+    String? imageAltText,
+    String? imageAltText2,
     double? imageFocalX,
     double? imageFocalY,
     double? imageFocalX2,
@@ -557,6 +570,8 @@ class Slide {
       imagePath2: imagePath2 ?? this.imagePath2,
       imageCaption: imageCaption ?? this.imageCaption,
       imageCaption2: imageCaption2 ?? this.imageCaption2,
+      imageAltText: imageAltText ?? this.imageAltText,
+      imageAltText2: imageAltText2 ?? this.imageAltText2,
       imageFocalX: imageFocalX ?? this.imageFocalX,
       imageFocalY: imageFocalY ?? this.imageFocalY,
       imageFocalX2: imageFocalX2 ?? this.imageFocalX2,

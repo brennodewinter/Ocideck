@@ -85,6 +85,8 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Tekst alternatywny (opis dla czytników ekranu)',
   'Hoog': 'Wysoki',
   'Middel': 'Średni',
   'Laag': 'Niski',

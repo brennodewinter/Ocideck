@@ -8,6 +8,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Image alt-text for screen readers (WCAG 1.1.1)** — image slides now carry a
+  dedicated **alt-text** field, separate from the visible caption. The image, two-
+  images and bullets-with-image editors gained an *Alt-tekst* box; a screen reader
+  now announces the alt-text when set, falling back to the caption and then a
+  generic "image" as before. The slide-quality check counts alt-text (or a
+  caption) so its nudge clears once either is present. Alt-text is per-usage, so it
+  travels in the `.md` as an `<!-- ocideck_image_alt: … -->` comment (and `_alt2`
+  for the second image of a two-images slide); see
+  [docs/FILE_FORMAT.md](docs/FILE_FORMAT.md) §8. Localised in all interface
+  languages. (Groundwork for AI_ASSIST §6; the optional "suggest alt-text" vision
+  model follows.)
 - **Sign-off slide type (`signOff`)** — the *Ondertekening* type is now a
   structured truthful-reporting page (MIAUW 1.6) instead of a free-Markdown
   scaffold. A dedicated editor authors the deck-wide **visual signature** — the

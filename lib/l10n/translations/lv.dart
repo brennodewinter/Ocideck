@@ -83,6 +83,8 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Alternatīvais teksts (apraksts ekrāna lasītājiem)',
   'Hoog': 'Augsts',
   'Middel': 'Vidējs',
   'Laag': 'Zems',

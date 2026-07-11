@@ -83,6 +83,8 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Alt-Text (Beschriibig für Screenreader)',
   'Hoog': 'Hoch',
   'Middel': 'Mittel',
   'Laag': 'Nieder',

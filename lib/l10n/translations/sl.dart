@@ -83,6 +83,8 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Nadomestno besedilo (opis za bralnike zaslona)',
   'Hoog': 'Visoko',
   'Middel': 'Srednje',
   'Laag': 'Nizko',

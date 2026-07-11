@@ -55,7 +55,13 @@ mixin BgImageHandlers<T extends ConsumerStatefulWidget> on ConsumerState<T> {
       projectPath: bgImageBasePath,
     );
     if (path != null) {
-      onSlideUpdate(editorSlide.copyWith(imagePath: path, imageCaption: ''));
+      onSlideUpdate(
+        editorSlide.copyWith(
+          imagePath: path,
+          imageCaption: '',
+          imageAltText: '',
+        ),
+      );
     }
   }
 
@@ -66,12 +72,20 @@ mixin BgImageHandlers<T extends ConsumerStatefulWidget> on ConsumerState<T> {
       projectPath: bgImageBasePath,
     );
     if (path != null) {
-      onSlideUpdate(editorSlide.copyWith(imagePath: path, imageCaption: ''));
+      onSlideUpdate(
+        editorSlide.copyWith(
+          imagePath: path,
+          imageCaption: '',
+          imageAltText: '',
+        ),
+      );
     }
   }
 
   void clearBgImage() {
-    onSlideUpdate(editorSlide.copyWith(imagePath: '', imageCaption: ''));
+    onSlideUpdate(
+      editorSlide.copyWith(imagePath: '', imageCaption: '', imageAltText: ''),
+    );
   }
 }
 
@@ -326,6 +340,12 @@ class ImagePickerBar extends ConsumerWidget {
   final VoidCallback? onPaste;
   final VoidCallback? onClear;
   final ValueChanged<String>? onCaptionChanged;
+
+  /// Per-usage WCAG alt-text (AI_ASSIST §6.1). When [onAltTextChanged] is set an
+  /// alt-text field appears below the caption; null hides it (e.g. decorative
+  /// background images that need no alt).
+  final String imageAltText;
+  final ValueChanged<String>? onAltTextChanged;
   final String label;
   final String captionField;
 
@@ -340,6 +360,8 @@ class ImagePickerBar extends ConsumerWidget {
     this.onPaste,
     this.onClear,
     this.onCaptionChanged,
+    this.imageAltText = '',
+    this.onAltTextChanged,
     this.label = 'Geen afbeelding gekozen',
     this.captionField = 'imageCaption',
   });
@@ -547,7 +569,82 @@ class ImagePickerBar extends ConsumerWidget {
             onChanged: onCaptionChanged!,
           ),
         ],
+        // Alt-tekstveld (WCAG 1.1.1, AI_ASSIST §6.1)
+        if (imagePath.isNotEmpty && onAltTextChanged != null) ...[
+          const SizedBox(height: 8),
+          _AltTextField(
+            key: ValueKey('alt:$imagePath'),
+            altText: imageAltText,
+            onChanged: onAltTextChanged!,
+          ),
+        ],
       ],
+    );
+  }
+}
+
+/// A plain per-usage alt-text field (WCAG 1.1.1). Unlike [_CaptionField] there is
+/// no sidecar: the value lives on the slide ([Slide.imageAltText]) and travels in
+/// the `.md`. A later step adds an AI "Suggest" button + a decorative toggle here.
+class _AltTextField extends StatefulWidget {
+  final String altText;
+  final ValueChanged<String> onChanged;
+
+  const _AltTextField({
+    super.key,
+    required this.altText,
+    required this.onChanged,
+  });
+
+  @override
+  State<_AltTextField> createState() => _AltTextFieldState();
+}
+
+class _AltTextFieldState extends State<_AltTextField> {
+  late final TextEditingController _ctrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = TextEditingController(text: widget.altText)
+      ..addListener(() => widget.onChanged(_ctrl.text));
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return TextField(
+      controller: _ctrl,
+      minLines: 1,
+      maxLines: 3,
+      decoration: InputDecoration(
+        hintText: l10n.d('Alt-tekst (beschrijving voor schermlezers)'),
+        hintStyle: const TextStyle(fontSize: 12, color: AppTheme.blueGray2),
+        prefixIcon: Icon(
+          Icons.accessibility_new_outlined,
+          size: 16,
+          color: AppTheme.slate500,
+        ),
+        isDense: true,
+        contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+        filled: true,
+        fillColor: AppTheme.slate50,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: BorderSide(color: AppTheme.slate300),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: BorderSide(color: AppTheme.slate300),
+        ),
+      ),
+      style: const TextStyle(fontSize: 12),
     );
   }
 }

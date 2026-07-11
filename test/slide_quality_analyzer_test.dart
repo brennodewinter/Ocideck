@@ -837,4 +837,45 @@ void main() {
       expect(calls, 2, reason: 'distinct slide objects are distinct keys');
     });
   });
+
+  group('image alt-text nudge (AI_ASSIST §6.2)', () {
+    bool nudges(Slide slide) => analyzer
+        .analyze(Deck(title: 'D', slides: [slide]))
+        .issues
+        .any((i) => i.kind == SlideQualityIssueKind.mediaMissingDescription);
+
+    test('a bare image with no description is flagged', () {
+      expect(
+        nudges(Slide.create(SlideType.image).copyWith(imagePath: 'x.png')),
+        isTrue,
+      );
+    });
+
+    test('alt-text clears the flag', () {
+      expect(
+        nudges(
+          Slide.create(SlideType.image).copyWith(
+            imagePath: 'x.png',
+            imageAltText: 'Duidelijke omschrijving',
+          ),
+        ),
+        isFalse,
+      );
+    });
+
+    test('a caption also clears the flag', () {
+      expect(
+        nudges(
+          Slide.create(
+            SlideType.image,
+          ).copyWith(imagePath: 'x.png', imageCaption: '© Fotograaf'),
+        ),
+        isFalse,
+      );
+    });
+
+    test('an image slide without an image is not flagged', () {
+      expect(nudges(Slide.create(SlideType.image)), isFalse);
+    });
+  });
 }

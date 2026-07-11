@@ -112,7 +112,11 @@ class _QuestionPreview extends StatelessWidget {
           context,
           slide.imagePath,
           projectPath,
-          semanticLabel: imageSemanticsLabel(context, slide.imageCaption),
+          semanticLabel: imageSemanticsLabel(
+            context,
+            slide.imageCaption,
+            altText: slide.imageAltText,
+          ),
         ),
         _captionOverlay(context, slide.imageCaption, w),
         // Magnify affordance — opens the detail/zoom popup.

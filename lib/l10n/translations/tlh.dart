@@ -81,6 +81,7 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Alt-tekst (beschrijving voor schermlezers)': 'Alt ghItlh (HaqwI\'vaD Del)',
   'Hoog': 'potlh',
   'Middel': 'motlh',
   'Laag': 'ram',

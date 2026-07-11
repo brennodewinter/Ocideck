@@ -84,6 +84,8 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Альтернативний текст (опис для програм зчитування з екрана)',
   'Hoog': 'Високий',
   'Middel': 'Середній',
   'Laag': 'Низький',

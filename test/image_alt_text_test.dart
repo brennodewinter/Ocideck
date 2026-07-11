@@ -25,6 +25,27 @@ void main() {
     expect(label, 'Omzet per kwartaal');
   });
 
+  testWidgets('per-usage alt-text takes precedence over the caption', (
+    tester,
+  ) async {
+    late String label;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Builder(
+          builder: (context) {
+            label = imageSemanticsLabel(
+              context,
+              'Zichtbaar bijschrift',
+              altText: '  Beschrijvende alt-tekst  ',
+            );
+            return const SizedBox();
+          },
+        ),
+      ),
+    );
+    expect(label, 'Beschrijvende alt-tekst');
+  });
+
   testWidgets('an uncaptioned image still gets a generic alt text', (
     tester,
   ) async {

@@ -83,6 +83,8 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Teksto alternativo (deskripshon pa lektor di pantaya)',
   'Hoog': 'Haltu',
   'Middel': 'Medio',
   'Laag': 'Abou',

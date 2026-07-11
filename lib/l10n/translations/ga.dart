@@ -85,6 +85,8 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Alt-tekst (beschrijving voor schermlezers)':
+      'Téacs malartach (cur síos do léitheoirí scáileáin)',
   'Hoog': 'Ard',
   'Middel': 'Meánach',
   'Laag': 'Íseal',

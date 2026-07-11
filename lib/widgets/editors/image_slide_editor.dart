@@ -116,6 +116,9 @@ class _ImageSlideEditorState extends State<ImageSlideEditor>
               : null,
           onCaptionChanged: (caption) =>
               widget.onUpdate(widget.slide.copyWith(imageCaption: caption)),
+          imageAltText: widget.slide.imageAltText,
+          onAltTextChanged: (alt) =>
+              widget.onUpdate(widget.slide.copyWith(imageAltText: alt)),
         ),
         const SizedBox(height: 8),
         // Slide-filling = cover mode (imageSize 0): the image fills the whole
