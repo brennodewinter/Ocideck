@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
-import 'package:ocideck/models/eis_entry.dart';
 import 'package:ocideck/models/finding_spec.dart';
 import 'package:ocideck/models/miauw_compliance.dart';
 import 'package:ocideck/models/slide.dart';

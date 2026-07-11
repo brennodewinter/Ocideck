@@ -83,6 +83,15 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'MIAUW-compliance': 'MIAUW atbilstība',
+  'Voldaan': 'Izpildīts',
+  'Openstaand': 'Atvērts',
+  'Uitgesloten door klant': 'Klients izslēdzis',
+  'Handmatig': 'Manuāli',
+  'Uitsluiten': 'Izslēgt',
+  'Opheffen': 'Atcelt',
+  'Reden voor uitsluiting': 'Izslēgšanas iemesls',
+  'Fundamentele eisen zijn uitgesloten': 'Pamatprasības ir izslēgtas',
   'Nieuwe bevinding (wizard)': 'Jauns atradums (vednis)',
   'Bevinding maken': 'Izveidot atradumu',
   'CIA-rating (scope-object)': 'CIA novērtējums (tvēruma objekts)',

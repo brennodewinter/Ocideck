@@ -83,6 +83,15 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'MIAUW-compliance': 'MIAUW atitiktis',
+  'Voldaan': 'Atitinka',
+  'Openstaand': 'Atvira',
+  'Uitgesloten door klant': 'Klientas pašalino',
+  'Handmatig': 'Rankiniu būdu',
+  'Uitsluiten': 'Pašalinti',
+  'Opheffen': 'Atšaukti',
+  'Reden voor uitsluiting': 'Pašalinimo priežastis',
+  'Fundamentele eisen zijn uitgesloten': 'Pagrindiniai reikalavimai pašalinti',
   'Nieuwe bevinding (wizard)': 'Naujas radinys (vediklis)',
   'Bevinding maken': 'Sukurti radinį',
   'CIA-rating (scope-object)': 'CIA vertinimas (aprėpties objektas)',

@@ -8,6 +8,19 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **MIAUW compliance overview (the 92 EIS)** — a new **MIAUW-compliance** command
+  (command palette) opens a gap-analysis panel that scores each MIAUW requirement
+  (EIS) as **Voldaan** / **Openstaand** / **Uitgesloten door klant**, grouped by
+  the four parts. Content-derivable requirements are checked automatically from
+  the deck (every finding carries a CVSS vector / scope / CWE / sections; a
+  management summary, scope matrix, checklist, timeline and sign-off are present;
+  the deck is sealed); organisational requirements are tagged *Handmatig*. **Every
+  requirement is waivable** with a mandatory reason — a gap analysis, never a hard
+  gate, that only *warns* when a foundational EIS (1.1, 1.6) is excluded. Waivers
+  round-trip in the deck front matter (`ocideck_miauw_waivers`). This first
+  increment ships a curated in-repo EIS subset (the always-on offline floor); the
+  full 92-EIS schema follows as a provisioned pack (PENTEST_MIAUW §9). Localised in
+  all interface languages.
 - **Guided finding wizard** — a new finding is now authored through a step-by-step
   wizard (opened from **Slide toevoegen → Bevinding**) instead of a blank slide:
   title → scope object → a **per-metric CVSS 4.0 builder** (dropdown per metric,

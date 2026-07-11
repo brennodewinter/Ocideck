@@ -83,6 +83,16 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'MIAUW-compliance': 'Συμμόρφωση MIAUW',
+  'Voldaan': 'Πληρούται',
+  'Openstaand': 'Ανοιχτό',
+  'Uitgesloten door klant': 'Εξαιρέθηκε από τον πελάτη',
+  'Handmatig': 'Χειροκίνητα',
+  'Uitsluiten': 'Εξαίρεση',
+  'Opheffen': 'Άρση',
+  'Reden voor uitsluiting': 'Λόγος εξαίρεσης',
+  'Fundamentele eisen zijn uitgesloten':
+      'Θεμελιώδεις απαιτήσεις έχουν εξαιρεθεί',
   'Nieuwe bevinding (wizard)': 'Νέο εύρημα (οδηγός)',
   'Bevinding maken': 'Δημιουργία ευρήματος',
   'CIA-rating (scope-object)': 'Αξιολόγηση CIA (αντικείμενο εμβέλειας)',

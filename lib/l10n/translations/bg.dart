@@ -84,6 +84,15 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'MIAUW-compliance': 'Съответствие с MIAUW',
+  'Voldaan': 'Изпълнено',
+  'Openstaand': 'Отворено',
+  'Uitgesloten door klant': 'Изключено от клиента',
+  'Handmatig': 'Ръчно',
+  'Uitsluiten': 'Изключи',
+  'Opheffen': 'Отмени',
+  'Reden voor uitsluiting': 'Причина за изключване',
+  'Fundamentele eisen zijn uitgesloten': 'Основни изисквания са изключени',
   'Nieuwe bevinding (wizard)': 'Ново откритие (съветник)',
   'Bevinding maken': 'Създай откритие',
   'CIA-rating (scope-object)': 'CIA оценка (обект от обхвата)',

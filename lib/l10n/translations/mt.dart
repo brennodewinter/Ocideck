@@ -84,6 +84,15 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'MIAUW-compliance': 'Konformità MIAUW',
+  'Voldaan': 'Sodisfatt',
+  'Openstaand': 'Miftuħ',
+  'Uitgesloten door klant': 'Eskluż mill-klijent',
+  'Handmatig': 'Manwali',
+  'Uitsluiten': 'Eskludi',
+  'Opheffen': 'Neħħi',
+  'Reden voor uitsluiting': 'Raġuni għall-esklużjoni',
+  'Fundamentele eisen zijn uitgesloten': 'Rekwiżiti fundamentali huma esklużi',
   'Nieuwe bevinding (wizard)': 'Sejba ġdida (wizard)',
   'Bevinding maken': 'Oħloq sejba',
   'CIA-rating (scope-object)': 'Klassifikazzjoni CIA (oġġett tal-ambitu)',

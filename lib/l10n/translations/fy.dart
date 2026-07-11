@@ -83,6 +83,15 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'MIAUW-compliance': 'MIAUW-neilibjen',
+  'Voldaan': 'Foldien',
+  'Openstaand': 'Iepensteand',
+  'Uitgesloten door klant': 'Utsletten troch klant',
+  'Handmatig': 'Mei de hân',
+  'Uitsluiten': 'Utslute',
+  'Opheffen': 'Opheffe',
+  'Reden voor uitsluiting': 'Reden foar útsluting',
+  'Fundamentele eisen zijn uitgesloten': 'Fûnemintele easken binne útsletten',
   'Nieuwe bevinding (wizard)': 'Nije befining (wizard)',
   'Bevinding maken': 'Befining meitsje',
   'CIA-rating (scope-object)': 'CIA-wurdearring (scope-objekt)',

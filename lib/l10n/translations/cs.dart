@@ -84,6 +84,15 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'MIAUW-compliance': 'Soulad s MIAUW',
+  'Voldaan': 'Splněno',
+  'Openstaand': 'Otevřené',
+  'Uitgesloten door klant': 'Vyloučeno klientem',
+  'Handmatig': 'Ručně',
+  'Uitsluiten': 'Vyloučit',
+  'Opheffen': 'Zrušit',
+  'Reden voor uitsluiting': 'Důvod vyloučení',
+  'Fundamentele eisen zijn uitgesloten': 'Základní požadavky jsou vyloučeny',
   'Nieuwe bevinding (wizard)': 'Nový nález (průvodce)',
   'Bevinding maken': 'Vytvořit nález',
   'CIA-rating (scope-object)': 'Hodnocení CIA (objekt rozsahu)',

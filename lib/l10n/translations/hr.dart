@@ -83,6 +83,15 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'MIAUW-compliance': 'MIAUW usklađenost',
+  'Voldaan': 'Ispunjeno',
+  'Openstaand': 'Otvoreno',
+  'Uitgesloten door klant': 'Isključio klijent',
+  'Handmatig': 'Ručno',
+  'Uitsluiten': 'Isključi',
+  'Opheffen': 'Poništi',
+  'Reden voor uitsluiting': 'Razlog isključenja',
+  'Fundamentele eisen zijn uitgesloten': 'Temeljni zahtjevi su isključeni',
   'Nieuwe bevinding (wizard)': 'Novi nalaz (čarobnjak)',
   'Bevinding maken': 'Izradi nalaz',
   'CIA-rating (scope-object)': 'CIA ocjena (objekt opsega)',
