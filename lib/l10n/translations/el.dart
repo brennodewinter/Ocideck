@@ -83,6 +83,14 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Bewijs-hashes kopiëren': 'Αντιγραφή hash αποδείξεων',
+  'Bewijs-hashes gekopieerd': 'Τα hash αποδείξεων αντιγράφηκαν',
+  'Bevindingen hernummeren': 'Επαναρίθμηση ευρημάτων',
+  'Scope-dekking controleren': 'Έλεγχος κάλυψης εμβέλειας',
+  'Scope-dekking': 'Κάλυψη εμβέλειας',
+  'Geen dekkingsgaten': 'Χωρίς κενά κάλυψης',
+  'In scope, maar niet getest en geen bevinding:':
+      'Εντός εμβέλειας, αλλά χωρίς έλεγχο και εύρημα:',
   'MIAUW-compliance': 'Συμμόρφωση MIAUW',
   'Voldaan': 'Πληρούται',
   'Openstaand': 'Ανοιχτό',

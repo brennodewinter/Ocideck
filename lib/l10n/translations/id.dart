@@ -83,6 +83,14 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Bewijs-hashes kopiëren': 'Salin hash bukti',
+  'Bewijs-hashes gekopieerd': 'Hash bukti disalin',
+  'Bevindingen hernummeren': 'Nomori ulang temuan',
+  'Scope-dekking controleren': 'Periksa cakupan lingkup',
+  'Scope-dekking': 'Cakupan lingkup',
+  'Geen dekkingsgaten': 'Tidak ada celah cakupan',
+  'In scope, maar niet getest en geen bevinding:':
+      'Dalam lingkup, tetapi tidak diuji dan tanpa temuan:',
   'MIAUW-compliance': 'Kepatuhan MIAUW',
   'Voldaan': 'Terpenuhi',
   'Openstaand': 'Terbuka',

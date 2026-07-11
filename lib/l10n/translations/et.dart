@@ -82,6 +82,14 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Bewijs-hashes kopiëren': 'Kopeeri tõendite räsid',
+  'Bewijs-hashes gekopieerd': 'Tõendite räsid kopeeritud',
+  'Bevindingen hernummeren': 'Nummerda leiud ümber',
+  'Scope-dekking controleren': 'Kontrolli ulatuse katvust',
+  'Scope-dekking': 'Ulatuse katvus',
+  'Geen dekkingsgaten': 'Katvuselünki pole',
+  'In scope, maar niet getest en geen bevinding:':
+      'Ulatuses, kuid testimata ja leiuta:',
   'MIAUW-compliance': 'MIAUW vastavus',
   'Voldaan': 'Täidetud',
   'Openstaand': 'Avatud',

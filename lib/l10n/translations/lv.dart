@@ -83,6 +83,14 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Bewijs-hashes kopiëren': 'Kopēt pierādījumu jaucējus',
+  'Bewijs-hashes gekopieerd': 'Pierādījumu jaucēji nokopēti',
+  'Bevindingen hernummeren': 'Pārnumurēt atradumus',
+  'Scope-dekking controleren': 'Pārbaudīt tvēruma pārklājumu',
+  'Scope-dekking': 'Tvēruma pārklājums',
+  'Geen dekkingsgaten': 'Nav pārklājuma nepilnību',
+  'In scope, maar niet getest en geen bevinding:':
+      'Tvērumā, bet nav pārbaudīts un bez atraduma:',
   'MIAUW-compliance': 'MIAUW atbilstība',
   'Voldaan': 'Izpildīts',
   'Openstaand': 'Atvērts',

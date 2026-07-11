@@ -81,6 +81,14 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Bewijs-hashes kopiëren': 'povwI\' hash velqa\'',
+  'Bewijs-hashes gekopieerd': 'povwI\' hash velqa\'lu\'pu\'',
+  'Bevindingen hernummeren': 'Sammey mI\' choqmoH',
+  'Scope-dekking controleren': 'scope So\' Doch nuD',
+  'Scope-dekking': 'scope So\'',
+  'Geen dekkingsgaten': 'So\' ghembogh pagh',
+  'In scope, maar niet getest en geen bevinding:':
+      'scope-Daq, \'ach nuDbe\' \'ej Sammeypu\' pagh:',
   'MIAUW-compliance': 'MIAUW lobtaHghach',
   'Voldaan': 'wuqta\'',
   'Openstaand': 'poSmoH',

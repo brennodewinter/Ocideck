@@ -85,6 +85,14 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Bewijs-hashes kopiëren': 'Digestos testimonii transcribere',
+  'Bewijs-hashes gekopieerd': 'Digesti testimonii descripti',
+  'Bevindingen hernummeren': 'Inventa renumerare',
+  'Scope-dekking controleren': 'Coperturam ambitus inspicere',
+  'Scope-dekking': 'Copertura ambitus',
+  'Geen dekkingsgaten': 'Nullae lacunae coperturae',
+  'In scope, maar niet getest en geen bevinding:':
+      'In ambitu, sed non probatum et sine invento:',
   'MIAUW-compliance': 'Conformitas MIAUW',
   'Voldaan': 'Impletum',
   'Openstaand': 'Apertum',

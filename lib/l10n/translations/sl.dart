@@ -83,6 +83,14 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Bewijs-hashes kopiëren': 'Kopiraj razpršila dokazov',
+  'Bewijs-hashes gekopieerd': 'Razpršila dokazov kopirana',
+  'Bevindingen hernummeren': 'Preštevilči ugotovitve',
+  'Scope-dekking controleren': 'Preveri pokritost obsega',
+  'Scope-dekking': 'Pokritost obsega',
+  'Geen dekkingsgaten': 'Ni vrzeli v pokritosti',
+  'In scope, maar niet getest en geen bevinding:':
+      'V obsegu, a nepreverjeno in brez ugotovitve:',
   'MIAUW-compliance': 'Skladnost MIAUW',
   'Voldaan': 'Izpolnjeno',
   'Openstaand': 'Odprto',

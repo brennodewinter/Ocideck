@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Report automation: renumber findings, evidence hashes, scope-coverage gaps**
+  (PENTEST_MIAUW §10). The command palette gained **Bevindingen hernummeren**,
+  which renumbers every finding sequentially (`F-01`, `F-02`, … in deck order) —
+  rewriting each group's shared id and its `F-NN` heading prefix in one undoable
+  step (skipped on a sealed deck). **Scope-dekking controleren** opens a panel
+  listing scope objects that are in scope but neither tested nor referenced by any
+  finding — the "did you test everything you scoped" guardrail. A new evidence-hash
+  service computes the MIAUW-required **SHA1** (plus SHA-256) of an artefact and
+  builds the appendix hash table. Both new commands are gated behind the security
+  module. Localised in all interface languages.
 - **MIAUW compliance overview (the 92 EIS)** — a new **MIAUW-compliance** command
   (command palette) opens a gap-analysis panel that scores each MIAUW requirement
   (EIS) as **Voldaan** / **Openstaand** / **Uitgesloten door klant**, grouped by

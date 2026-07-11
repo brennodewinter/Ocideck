@@ -85,6 +85,14 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Bewijs-hashes kopiëren': 'Kopiuj skróty dowodów',
+  'Bewijs-hashes gekopieerd': 'Skopiowano skróty dowodów',
+  'Bevindingen hernummeren': 'Ponownie ponumeruj ustalenia',
+  'Scope-dekking controleren': 'Sprawdź pokrycie zakresu',
+  'Scope-dekking': 'Pokrycie zakresu',
+  'Geen dekkingsgaten': 'Brak luk w pokryciu',
+  'In scope, maar niet getest en geen bevinding:':
+      'W zakresie, ale nieprzetestowane i bez ustalenia:',
   'MIAUW-compliance': 'Zgodność MIAUW',
   'Voldaan': 'Spełniono',
   'Openstaand': 'Otwarte',

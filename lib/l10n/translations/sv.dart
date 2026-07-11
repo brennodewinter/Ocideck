@@ -83,6 +83,14 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Bewijs-hashes kopiëren': 'Kopiera bevis-hashar',
+  'Bewijs-hashes gekopieerd': 'Bevis-hashar kopierade',
+  'Bevindingen hernummeren': 'Numrera om fynd',
+  'Scope-dekking controleren': 'Kontrollera scope-täckning',
+  'Scope-dekking': 'Scope-täckning',
+  'Geen dekkingsgaten': 'Inga täckningsluckor',
+  'In scope, maar niet getest en geen bevinding:':
+      'Inom scope, men inte testat och utan fynd:',
   'MIAUW-compliance': 'MIAUW-efterlevnad',
   'Voldaan': 'Uppfylld',
   'Openstaand': 'Öppen',

@@ -84,6 +84,14 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Bewijs-hashes kopiëren': 'Kopírovať hashe dôkazov',
+  'Bewijs-hashes gekopieerd': 'Hashe dôkazov skopírované',
+  'Bevindingen hernummeren': 'Prečíslovať zistenia',
+  'Scope-dekking controleren': 'Skontrolovať pokrytie rozsahu',
+  'Scope-dekking': 'Pokrytie rozsahu',
+  'Geen dekkingsgaten': 'Žiadne medzery v pokrytí',
+  'In scope, maar niet getest en geen bevinding:':
+      'V rozsahu, ale netestované a bez zistenia:',
   'MIAUW-compliance': 'Súlad s MIAUW',
   'Voldaan': 'Splnené',
   'Openstaand': 'Otvorené',

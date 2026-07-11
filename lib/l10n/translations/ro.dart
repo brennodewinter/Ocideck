@@ -84,6 +84,14 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Bewijs-hashes kopiëren': 'Copiază hash-urile probelor',
+  'Bewijs-hashes gekopieerd': 'Hash-urile probelor au fost copiate',
+  'Bevindingen hernummeren': 'Renumerotează constatările',
+  'Scope-dekking controleren': 'Verifică acoperirea domeniului',
+  'Scope-dekking': 'Acoperirea domeniului',
+  'Geen dekkingsgaten': 'Fără lacune de acoperire',
+  'In scope, maar niet getest en geen bevinding:':
+      'În domeniu, dar netestat și fără constatare:',
   'MIAUW-compliance': 'Conformitate MIAUW',
   'Voldaan': 'Îndeplinit',
   'Openstaand': 'Deschis',
