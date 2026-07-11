@@ -338,7 +338,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     bool isMarkdownMode,
   ) {
     final deckNotifier = ref.read(deckProvider.notifier);
-    final settings = ref.read(settingsProvider);
     return [
       // ── Bewerken ────────────────────────────────────────────────
       Tooltip(
@@ -400,7 +399,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             case 'new_tab':
               _newInTab();
             case 'open':
-              _openWithSearch(context, ref, settings.homeDirectory);
+              _openWithSearch(context, ref);
             case 'open_nextcloud':
               _openFromNextcloud(context, ref);
             case 'save_nextcloud':
@@ -504,9 +503,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
   }
 
   Future<void> _saveDeck() async {
-    final settings = ref.read(settingsProvider);
-    final deckNotifier = ref.read(deckProvider.notifier);
-    await deckNotifier.save(initialDirectory: settings.homeDirectory);
+    await saveDeckWithDestination(
+      context,
+      ref,
+      ref.read(deckProvider.notifier),
+    );
   }
 
   void _openFind() {
@@ -538,7 +539,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
   /// lopen en geen extra vertalingen kosten. De export-gate volgt [_canExport].
   void _openCommandPalette() {
     final l10n = context.l10n;
-    final settings = ref.read(settingsProvider);
     final deck = ref.read(deckProvider).deck!;
     final deckNotifier = ref.read(deckProvider.notifier);
     final editorNotifier = ref.read(editorProvider.notifier);
@@ -603,7 +603,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       PaletteCommand(
         label: l10n.t('openEllipsis'),
         icon: Icons.folder_open_outlined,
-        onInvoke: () => _openWithSearch(context, ref, settings.homeDirectory),
+        onInvoke: () => _openWithSearch(context, ref),
       ),
       PaletteCommand(
         label: l10n.t('exportPackage'),
@@ -698,7 +698,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     final initialPath = _resolveImagePath(slide.imagePath, deck.projectPath);
     final result = await ImageCarouselPicker.show(
       context,
-      searchPaths: _imageSearchPaths(deck.projectPath, settings.homeDirectory),
+      searchPaths: _imageSearchPaths(deck.projectPath, settings.libraryPaths),
       initialPath: initialPath,
       captionService: ref.read(captionServiceProvider),
       descriptionService: ref.read(descriptionServiceProvider),

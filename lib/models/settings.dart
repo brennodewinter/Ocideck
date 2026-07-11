@@ -1,9 +1,11 @@
 import 'ai_settings.dart';
 import 'chart.dart' show normalizeChartColor;
+import 'library_folder.dart';
 import 'recent_file.dart';
 import 'webdav_settings.dart';
 
 export 'ai_settings.dart';
+export 'library_folder.dart';
 export 'recent_file.dart';
 export 'webdav_settings.dart';
 
@@ -572,7 +574,23 @@ class CockpitColorScheme {
 
 class AppSettings {
   final String languageCode;
-  final String? homeDirectory;
+
+  /// Benoemde opslaglocaties ("bibliotheken") waarmee de gebruiker onderscheid
+  /// maakt tussen bijv. privé en werk. Dient als startpunt voor openen/opslaan
+  /// en als zoekwortel voor de presentatie- en afbeeldingenbibliotheek.
+  /// Vervangt de vroegere enkele `homeDirectory`-instelling; de eerste
+  /// bibliotheek geldt als standaardmap (zie [homeDirectory]).
+  final List<LibraryFolder> libraries;
+
+  /// De standaard-startmap: het pad van de eerste bibliotheek, of null wanneer
+  /// er geen is. Compat-toegang voor de vele plekken die één "thuismap"
+  /// verwachten (native openen/opslaan als startpunt, logo-oplossing,
+  /// weergavepad-verkorting).
+  String? get homeDirectory => libraries.isEmpty ? null : libraries.first.path;
+
+  /// Alle bibliotheekpaden — de zoekwortels voor multi-map zoekacties (openen,
+  /// afbeeldingenbibliotheek, brede scan).
+  List<String> get libraryPaths => [for (final l in libraries) l.path];
 
   /// Folder where all exports (PDF/PPTX) are written. When null, exports land
   /// next to the source deck (legacy behaviour).
@@ -652,7 +670,7 @@ class AppSettings {
 
   const AppSettings({
     this.languageCode = 'nl',
-    this.homeDirectory,
+    this.libraries = const [],
     this.exportDirectory,
     this.themeProfiles = ThemeProfile.builtIns,
     this.selectedThemeProfileName = 'LibreKAT',
@@ -725,7 +743,7 @@ class AppSettings {
 
   AppSettings copyWith({
     String? languageCode,
-    String? homeDirectory,
+    List<LibraryFolder>? libraries,
     String? exportDirectory,
     ThemeProfile? themeProfile,
     List<ThemeProfile>? themeProfiles,
@@ -748,7 +766,6 @@ class AppSettings {
     bool? allowRemoteMedia,
     WebdavServer? webdavServer,
     AiSettings? aiSettings,
-    bool clearHomeDirectory = false,
     bool clearExportDirectory = false,
     bool clearMaxReleaseExportTlp = false,
     bool clearMinRequiredExportTlp = false,
@@ -757,9 +774,7 @@ class AppSettings {
     final nextProfiles = themeProfiles ?? this.themeProfiles;
     return AppSettings(
       languageCode: languageCode ?? this.languageCode,
-      homeDirectory: clearHomeDirectory
-          ? null
-          : (homeDirectory ?? this.homeDirectory),
+      libraries: libraries ?? this.libraries,
       exportDirectory: clearExportDirectory
           ? null
           : (exportDirectory ?? this.exportDirectory),

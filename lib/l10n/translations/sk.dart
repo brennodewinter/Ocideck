@@ -90,6 +90,31 @@ const _dutchSourceSk = {
   'Informatief': 'Informačné',
   'Vernieuw uit deck': 'Obnoviť z balíka',
   'Aantal bevindingen per ernst': 'Počet zistení podľa závažnosti',
+  'Afbeeldingen': 'Obrázky',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Obrázky a médiá zdieľajú prezentácie v rovnakom priečinku. Presný názov zvolíš o chvíľu v systémovom okne.',
+  'Alle bibliotheken': 'Všetky knižnice',
+  'Andere map…': 'Iný priečinok…',
+  'Bibliotheek verwijderen': 'Odstrániť knižnicu',
+  'Bibliotheken': 'Knižnice',
+  'Geen bibliotheek': 'Žiadna knižnica',
+  'Geen presentaties (.md) gevonden.': 'Nenašli sa žiadne prezentácie (.md).',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Priečinok a názov zvolíš v ďalšom okne. Obrázky sa uložia do podpriečinka images/ a médiá do media/, vedľa súboru prezentácie.',
+  'Kies bestandsnaam…': 'Zvoliť názov súboru…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Zvoľ priečinok, do ktorého sa prezentácia uloží.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Zvoľ, do ktorej knižnice prezentácia patrí.',
+  'Map toevoegen': 'Pridať priečinok',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Priečinky, do ktorých ukladáš a v ktorých hľadáš svoje prezentácie. Daj každému vlastný názov, aby si ich rozlíšil. Všetky knižnice sa prehľadávajú pri otváraní a v knižnici obrázkov.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Zatiaľ žiadna knižnica — pridaj priečinok.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Zatiaľ žiadna knižnica. Pridaj ju v Nastaveniach alebo vyššie zvoľ priečinok na prehľadanie.',
+  'Presentatie opslaan': 'Uložiť prezentáciu',
+  'Zo worden de bestanden bewaard': 'Takto sa súbory ukladajú',
   'Aangepast…': 'Vlastné…',
   'Aangepaste tijd': 'Vlastný čas',
   'Waarheidsverklaring': 'Vyhlásenie o pravdivosti',

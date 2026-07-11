@@ -465,16 +465,54 @@ void main() {
       },
     );
 
-    test('home and export directories set and clear', () async {
+    test('libraries: add, rename, remove round-trip and persist', () async {
       final n = await _loadedNotifier();
-      await n.setHomeDirectory('/home/decks');
+      expect(n.state.libraries, isEmpty);
+      expect(n.state.homeDirectory, isNull);
+      expect(n.state.libraryPaths, isEmpty);
+
+      await n.addLibrary('Privé', '/home/prive');
+      await n.addLibrary('Werk', '/home/werk');
+      expect(n.state.libraries.map((l) => l.name).toList(), ['Privé', 'Werk']);
+      expect(n.state.libraryPaths, ['/home/prive', '/home/werk']);
+      // Eerste bibliotheek geldt als standaard-startmap (compat-getter).
+      expect(n.state.homeDirectory, '/home/prive');
+
+      // Een al toegevoegd pad wordt niet nogmaals toegevoegd.
+      await n.addLibrary('Privé kopie', '/home/prive');
+      expect(n.state.libraries.length, 2);
+
+      await n.updateLibrary(1, name: 'Kantoor');
+      expect(n.state.libraries[1].name, 'Kantoor');
+      expect(n.state.libraries[1].path, '/home/werk');
+
+      await n.removeLibrary(0);
+      expect(n.state.libraryPaths, ['/home/werk']);
+
+      // Persistentie: een verse notifier op dezelfde prefs leest de lijst terug.
+      final reloaded = SettingsNotifier();
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      expect(reloaded.state.libraries.map((l) => l.name).toList(), ['Kantoor']);
+      expect(reloaded.state.libraryPaths, ['/home/werk']);
+    });
+
+    test('libraries: legacy homeDirectory migrates to one library', () async {
+      SharedPreferences.setMockInitialValues({
+        'homeDirectory': '/legacy/decks',
+      });
+      final n = SettingsNotifier();
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      expect(n.state.libraries.length, 1);
+      expect(n.state.libraries.single.path, '/legacy/decks');
+      expect(n.state.homeDirectory, '/legacy/decks');
+    });
+
+    test('export directory set and clear', () async {
+      final n = await _loadedNotifier();
       await n.setExportDirectory('/export');
-      expect(n.state.homeDirectory, '/home/decks');
       expect(n.state.exportDirectory, '/export');
 
-      await n.setHomeDirectory(null);
       await n.setExportDirectory(null);
-      expect(n.state.homeDirectory, isNull);
       expect(n.state.exportDirectory, isNull);
     });
   });

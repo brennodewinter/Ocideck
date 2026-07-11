@@ -90,6 +90,32 @@ const _dutchSourceEs = {
   'Informatief': 'Informativo',
   'Vernieuw uit deck': 'Actualizar desde el deck',
   'Aantal bevindingen per ernst': 'Número de hallazgos por severidad',
+  'Afbeeldingen': 'Imágenes',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Las imágenes y los medios se comparten entre las presentaciones de la misma carpeta. El nombre exacto lo eliges enseguida en la ventana del sistema.',
+  'Alle bibliotheken': 'Todas las bibliotecas',
+  'Andere map…': 'Otra carpeta…',
+  'Bibliotheek verwijderen': 'Eliminar biblioteca',
+  'Bibliotheken': 'Bibliotecas',
+  'Geen bibliotheek': 'Sin biblioteca',
+  'Geen presentaties (.md) gevonden.':
+      'No se encontraron presentaciones (.md).',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Eliges la carpeta y el nombre en la siguiente ventana. Las imágenes van en una subcarpeta images/ y los medios en media/, junto al archivo de la presentación.',
+  'Kies bestandsnaam…': 'Elegir nombre de archivo…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Elige una carpeta donde guardar la presentación.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Elige en qué biblioteca se guarda la presentación.',
+  'Map toevoegen': 'Añadir carpeta',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Carpetas donde guardas y buscas tus presentaciones. Dales un nombre propio para distinguirlas. Todas las bibliotecas se examinan al abrir y en la biblioteca de imágenes.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Aún no hay biblioteca — añade una carpeta.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Aún no hay biblioteca. Añade una en Ajustes, o elige arriba una carpeta para explorar.',
+  'Presentatie opslaan': 'Guardar presentación',
+  'Zo worden de bestanden bewaard': 'Así se guardan los archivos',
   'Aangepast…': 'Personalizado…',
   'Aangepaste tijd': 'Tiempo personalizado',
   'Waarheidsverklaring': 'Declaración de veracidad',

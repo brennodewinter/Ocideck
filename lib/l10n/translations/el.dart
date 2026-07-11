@@ -89,6 +89,31 @@ const _dutchSourceEl = {
   'Informatief': 'Πληροφοριακό',
   'Vernieuw uit deck': 'Ανανέωση από το deck',
   'Aantal bevindingen per ernst': 'Αριθμός ευρημάτων ανά σοβαρότητα',
+  'Afbeeldingen': 'Εικόνες',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Οι εικόνες και τα πολυμέσα μοιράζονται από τις παρουσιάσεις στον ίδιο φάκελο. Το ακριβές όνομα θα το επιλέξετε αμέσως στο παράθυρο του συστήματος.',
+  'Alle bibliotheken': 'Όλες οι βιβλιοθήκες',
+  'Andere map…': 'Άλλος φάκελος…',
+  'Bibliotheek verwijderen': 'Αφαίρεση βιβλιοθήκης',
+  'Bibliotheken': 'Βιβλιοθήκες',
+  'Geen bibliotheek': 'Καμία βιβλιοθήκη',
+  'Geen presentaties (.md) gevonden.': 'Δεν βρέθηκαν παρουσιάσεις (.md).',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Επιλέγετε τον φάκελο και το όνομα στο επόμενο παράθυρο. Οι εικόνες πηγαίνουν σε έναν υποφάκελο images/ και τα πολυμέσα σε media/, δίπλα στο αρχείο της παρουσίασης.',
+  'Kies bestandsnaam…': 'Επιλογή ονόματος αρχείου…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Επιλέξτε έναν φάκελο για να αποθηκεύσετε την παρουσίαση.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Επιλέξτε σε ποια βιβλιοθήκη θα μπει η παρουσίαση.',
+  'Map toevoegen': 'Προσθήκη φακέλου',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Φάκελοι όπου αποθηκεύετε και αναζητάτε τις παρουσιάσεις σας. Δώστε στον καθένα δικό του όνομα για να τους ξεχωρίζετε. Όλες οι βιβλιοθήκες αναζητούνται κατά το άνοιγμα και στη βιβλιοθήκη εικόνων.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Καμία βιβλιοθήκη ακόμη — προσθέστε έναν φάκελο.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Καμία βιβλιοθήκη ακόμη. Προσθέστε μία στις Ρυθμίσεις ή επιλέξτε παραπάνω έναν φάκελο για αναζήτηση.',
+  'Presentatie opslaan': 'Αποθήκευση παρουσίασης',
+  'Zo worden de bestanden bewaard': 'Έτσι αποθηκεύονται τα αρχεία',
   'Aangepast…': 'Προσαρμοσμένο…',
   'Aangepaste tijd': 'Προσαρμοσμένος χρόνος',
   'Waarheidsverklaring': 'Δήλωση αλήθειας',

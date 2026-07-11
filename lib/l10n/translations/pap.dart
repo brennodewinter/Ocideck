@@ -89,6 +89,31 @@ const _dutchSourcePap = {
   'Informatief': 'Informativo',
   'Vernieuw uit deck': 'Refreská for di deck',
   'Aantal bevindingen per ernst': 'Kantidat di deskubrimentu pa severidat',
+  'Afbeeldingen': 'Imágennan',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Imágen i media ta wòrdu kompartí pa presentashonnan den e mesun karpeta. E nòmber eksakto bo ta skohe djaki den e bentana di sistema.',
+  'Alle bibliotheken': 'Tur biblioteka',
+  'Andere map…': 'Otro karpeta…',
+  'Bibliotheek verwijderen': 'Kita biblioteka',
+  'Bibliotheken': 'Bibliotekanan',
+  'Geen bibliotheek': 'Sin biblioteka',
+  'Geen presentaties (.md) gevonden.': 'No a haña presentashon (.md).',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Bo ta skohe e karpeta i e nòmber den e siguiente bentana. E imágennan ta bai den un subkarpeta images/ i media den media/, banda di e archivo di presentashon.',
+  'Kies bestandsnaam…': 'Skohe nòmber di archivo…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Skohe un karpeta pa warda e presentashon.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Skohe den kua biblioteka e presentashon ta bai.',
+  'Map toevoegen': 'Agregá karpeta',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Karpetanan kaminda bo ta warda i buska bo presentashonnan. Dun\'nan un nòmber propio pa distinguí nan. Tur biblioteka ta wòrdu buská ora bo habri i den e biblioteka di imágen.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Ainda no tin biblioteka — agregá un karpeta.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Ainda no tin biblioteka. Agregá un den Konfigurashon, of skohe ariba un karpeta pa buska.',
+  'Presentatie opslaan': 'Warda presentashon',
+  'Zo worden de bestanden bewaard': 'Asina e archivonan ta wòrdu wardá',
   'Aangepast…': 'Propio…',
   'Aangepaste tijd': 'Tempo propio',
   'Waarheidsverklaring': 'Deklarashon di berdat',

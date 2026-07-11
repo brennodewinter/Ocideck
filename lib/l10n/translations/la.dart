@@ -91,6 +91,31 @@ const _dutchSourceLa = {
   'Informatief': 'Informativum',
   'Vernieuw uit deck': 'Renova ex fasciculo',
   'Aantal bevindingen per ernst': 'Numerus inventorum per gravitatem',
+  'Afbeeldingen': 'Imagines',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Imagines et instrumenta a praesentationibus in eadem plica communiter adhibentur. Nomen exactum mox in fenestra systematis eliges.',
+  'Alle bibliotheken': 'Omnes bibliothecae',
+  'Andere map…': 'Alia plica…',
+  'Bibliotheek verwijderen': 'Bibliothecam removere',
+  'Bibliotheken': 'Bibliothecae',
+  'Geen bibliotheek': 'Nulla bibliotheca',
+  'Geen presentaties (.md) gevonden.': 'Nullae praesentationes (.md) inventae.',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Plicam et nomen in fenestra sequenti eliges. Imagines in subplica images/ et instrumenta in media/ iuxta tabellam praesentationis ponentur.',
+  'Kies bestandsnaam…': 'Nomen tabellae eligere…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Plicam elige ubi praesentatio servetur.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Elige in qua bibliotheca praesentatio ponatur.',
+  'Map toevoegen': 'Plicam addere',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Plicae ubi praesentationes tuas servas et perquiris. Da eis nomen proprium ut inter se distinguantur. Omnes bibliothecae in aperiendo et in bibliotheca imaginum perquiruntur.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Nulla adhuc bibliotheca — plicam adde.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Nulla adhuc bibliotheca. Adde unam in Praeferentiis, vel supra plicam ad perquirendum elige.',
+  'Presentatie opslaan': 'Praesentationem servare',
+  'Zo worden de bestanden bewaard': 'Sic tabellae servantur',
   'Aangepast…': 'Proprium…',
   'Aangepaste tijd': 'Tempus proprium',
   'Waarheidsverklaring': 'Testificatio veritatis',

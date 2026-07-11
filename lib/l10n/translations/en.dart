@@ -89,6 +89,30 @@ const _dutchSourceEn = {
   'Informatief': 'Informational',
   'Vernieuw uit deck': 'Refresh from deck',
   'Aantal bevindingen per ernst': 'Number of findings per severity',
+  'Afbeeldingen': 'Images',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Images and media are shared by presentations in the same folder. You choose the exact name in the system dialog in a moment.',
+  'Alle bibliotheken': 'All libraries',
+  'Andere map…': 'Other folder…',
+  'Bibliotheek verwijderen': 'Remove library',
+  'Bibliotheken': 'Libraries',
+  'Geen bibliotheek': 'No library',
+  'Geen presentaties (.md) gevonden.': 'No presentations (.md) found.',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'You choose the folder and the name in the next window. The images go into an images/ subfolder and media into media/, next to the presentation file.',
+  'Kies bestandsnaam…': 'Choose file name…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Choose a folder to save the presentation in.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Choose which library the presentation goes into.',
+  'Map toevoegen': 'Add folder',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Folders where you store and search your presentations. Give each its own name to tell them apart. All libraries are searched when opening and in the image library.',
+  'Nog geen bibliotheek — voeg een map toe.': 'No library yet — add a folder.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'No library yet. Add one in Settings, or choose a folder above to search.',
+  'Presentatie opslaan': 'Save presentation',
+  'Zo worden de bestanden bewaard': 'This is how the files are stored',
   'Aangepast…': 'Custom…',
   'Aangepaste tijd': 'Custom time',
   'Waarheidsverklaring': 'Statement of truth',

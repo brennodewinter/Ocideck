@@ -194,6 +194,7 @@ class FileService {
   final ThemeProfile Function() _themeProfile;
   final String Function() _languageCode;
   final String? Function() _homeDirectory;
+  final List<String> Function() _libraryPaths;
   final CaptionService _captions = CaptionService();
 
   FileService(
@@ -202,8 +203,10 @@ class FileService {
     this._themeProfile, {
     String Function()? languageCode,
     String? Function()? homeDirectory,
+    List<String> Function()? libraryPaths,
   }) : _languageCode = languageCode ?? (() => 'nl'),
-       _homeDirectory = homeDirectory ?? (() => null);
+       _homeDirectory = homeDirectory ?? (() => null),
+       _libraryPaths = libraryPaths ?? (() => const []);
 
   ThemeProfile get currentThemeProfile => resolveThemeProfile(_themeProfile());
 
@@ -253,18 +256,25 @@ class FileService {
 
   /// Recursively scan [directory] for Marp markdown presentations and parse
   /// them into decks. [excludePath] (typically the currently open file) is
-  /// skipped. Directories such as images/ and themes/ are ignored, and the
-  /// walk is bounded by [maxDepth] to keep large home folders responsive.
+  /// skipped. Directories such as images/ and themes/ are ignored. The walk
+  /// descends the full tree (up to [maxDepth], effectively unbounded for real
+  /// folders) but is capped at [maxFilesVisited] parsed decks so a pathological
+  /// tree can't hang the UI — each `.md` here is fully read and parsed, which is
+  /// costlier than the frontmatter probe used by [scanKnownLocations].
   Future<List<ScannedPresentation>> scanPresentations(
     String directory, {
     String? excludePath,
-    int maxDepth = 4,
+    int maxDepth = 32,
+    int maxFilesVisited = 5000,
   }) async {
     final root = Directory(directory);
     if (!await root.exists()) return [];
 
     final results = <ScannedPresentation>[];
+    var visited = 0;
+    var capped = false;
     Future<void> walk(Directory dir, int depth) async {
+      if (capped) return;
       List<FileSystemEntity> entries;
       try {
         entries = await dir.list(followLinks: false).toList();
@@ -276,10 +286,19 @@ class FileService {
         return;
       }
       for (final entity in entries) {
+        if (capped) return;
         if (entity is File) {
           if (!entity.path.toLowerCase().endsWith('.md')) continue;
           if (excludePath != null && p.equals(entity.path, excludePath)) {
             continue;
+          }
+          if (++visited > maxFilesVisited) {
+            capped = true;
+            logWarning(
+              'FileService.scanPresentations: visited cap reached '
+              '($maxFilesVisited files) — results truncated',
+            );
+            return;
           }
           String content;
           try {
@@ -467,6 +486,11 @@ class FileService {
       ]) {
         candidates.add(p.join(home, sub));
       }
+    }
+    // Geconfigureerde bibliotheken staan mogelijk buiten de standaardmappen;
+    // neem ze als eigen wortels mee zodat de brede scan ze ook dekt.
+    for (final path in _libraryPaths()) {
+      if (path.trim().isNotEmpty) candidates.add(path);
     }
     for (final f in recentFiles) {
       if (f.trim().isEmpty) continue;
@@ -945,42 +969,5 @@ class FileService {
       dialogTitle: _d('Pakket exporteren'),
       fileName: '${_safeName(deck.title)}.$packageExtension',
     );
-  }
-}
-
-/// Thrown by [_CappedOutputStream] when a decompressed entry would exceed its
-/// byte budget — the signal that a package entry is a decompression bomb.
-class _ExtractionLimitException implements Exception {
-  const _ExtractionLimitException();
-}
-
-/// An [OutputStream] that refuses to grow past [limit] bytes. The archive
-/// inflater writes decompressed output incrementally, so throwing here stops a
-/// zip bomb mid-inflation instead of after the whole entry is in memory.
-class _CappedOutputStream extends OutputMemoryStream {
-  _CappedOutputStream(this.limit);
-
-  final int limit;
-
-  void _guard(int add) {
-    if (length + add > limit) throw const _ExtractionLimitException();
-  }
-
-  @override
-  void writeByte(int value) {
-    _guard(1);
-    super.writeByte(value);
-  }
-
-  @override
-  void writeBytes(List<int> bytes, {int? length}) {
-    _guard(length ?? bytes.length);
-    super.writeBytes(bytes, length: length);
-  }
-
-  @override
-  void writeStream(InputStream stream) {
-    _guard(stream.length);
-    super.writeStream(stream);
   }
 }

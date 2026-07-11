@@ -108,7 +108,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     }
     state = AppSettings(
       languageCode: prefs.getString('languageCode') ?? 'nl',
-      homeDirectory: prefs.getString('homeDirectory'),
+      libraries: _loadLibraries(prefs),
       exportDirectory: prefs.getString('exportDirectory'),
       themeProfiles: profiles.isEmpty ? ThemeProfile.builtIns : profiles,
       selectedThemeProfileName:
@@ -354,6 +354,23 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     );
   }
 
+  /// Standaardnaam voor de bibliotheek die uit de oude enkele 'homeDirectory'
+  /// wordt gemigreerd. Puur een startlabel; de gebruiker kan het hernoemen.
+  static const _migratedLibraryName = 'Mijn presentaties';
+
+  /// Bibliotheken: de JSON-opslag ('libraries') wint; de oude enkele
+  /// 'homeDirectory'-string wordt eenmalig als één benoemde bibliotheek
+  /// gemigreerd en daarna alleen nog overschreven bij het wegschrijven.
+  List<LibraryFolder> _loadLibraries(SharedPreferences prefs) {
+    final stored = LibraryFolder.decodeList(prefs.getString('libraries'));
+    if (stored.isNotEmpty) return stored;
+    final legacy = prefs.getString('homeDirectory');
+    if (legacy != null && legacy.trim().isNotEmpty) {
+      return [LibraryFolder(name: _migratedLibraryName, path: legacy)];
+    }
+    return const [];
+  }
+
   /// Recente lijst: de nieuwe JSON-opslag ('recentFilesV2') wint; de oude
   /// paden-lijst ('recentFiles') wordt eenmalig als metadata-loze entries
   /// gemigreerd en daarna alleen nog overschreven bij het wegschrijven.
@@ -461,17 +478,49 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     );
   }
 
-  Future<void> setHomeDirectory(String? path) async {
-    state = path == null
-        ? state.copyWith(clearHomeDirectory: true)
-        : state.copyWith(homeDirectory: path);
-    await _persist('setHomeDirectory', (prefs) async {
-      if (path == null) {
-        await prefs.remove('homeDirectory');
-      } else {
-        await prefs.setString('homeDirectory', path);
-      }
+  /// Schrijf de volledige bibliothekenlijst weg. De legacy enkele 'homeDirectory'
+  /// wordt daarbij opgeruimd, zodat de migratie niet opnieuw triggert nadat de
+  /// gebruiker (bijvoorbeeld) alle bibliotheken heeft verwijderd.
+  Future<void> setLibraries(List<LibraryFolder> libraries) async {
+    state = state.copyWith(libraries: libraries);
+    await _persist('setLibraries', (prefs) async {
+      await prefs.setString('libraries', LibraryFolder.encodeList(libraries));
+      await prefs.remove('homeDirectory');
     });
+  }
+
+  /// Voeg een bibliotheek toe. Een leeg pad wordt genegeerd; een pad dat al als
+  /// bibliotheek bestaat wordt niet nog eens toegevoegd (de bestaande naam
+  /// blijft dan gelden).
+  Future<void> addLibrary(String name, String path) async {
+    if (path.trim().isEmpty) return;
+    if (state.libraries.any((l) => l.path == path)) return;
+    await setLibraries([
+      ...state.libraries,
+      LibraryFolder(name: name.trim(), path: path),
+    ]);
+  }
+
+  /// Werk de bibliotheek op [index] bij (naam en/of pad). Buiten bereik: no-op.
+  Future<void> updateLibrary(int index, {String? name, String? path}) async {
+    if (index < 0 || index >= state.libraries.length) return;
+    final next = [
+      for (var i = 0; i < state.libraries.length; i++)
+        if (i == index)
+          state.libraries[i].copyWith(name: name?.trim(), path: path)
+        else
+          state.libraries[i],
+    ];
+    await setLibraries(next);
+  }
+
+  /// Verwijder de bibliotheek op [index]. Buiten bereik: no-op.
+  Future<void> removeLibrary(int index) async {
+    if (index < 0 || index >= state.libraries.length) return;
+    await setLibraries([
+      for (var i = 0; i < state.libraries.length; i++)
+        if (i != index) state.libraries[i],
+    ]);
   }
 
   Future<void> setExportDirectory(String? path) async {

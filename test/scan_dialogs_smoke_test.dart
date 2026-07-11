@@ -91,7 +91,7 @@ void main() {
         (BuildContext context) => OpenPresentationDialog.show(
           context,
           fileService: service,
-          initialDirectory: dir.path,
+          libraries: [LibraryFolder(name: 'Test', path: dir.path)],
         ),
       ),
     );

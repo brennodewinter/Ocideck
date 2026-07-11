@@ -90,6 +90,31 @@ const _dutchSourceBg = {
   'Informatief': 'Информативно',
   'Vernieuw uit deck': 'Обнови от тестето',
   'Aantal bevindingen per ernst': 'Брой констатации по тежест',
+  'Afbeeldingen': 'Изображения',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Изображенията и медията се споделят от презентациите в същата папка. Точното име ще изберете след малко в системния прозорец.',
+  'Alle bibliotheken': 'Всички библиотеки',
+  'Andere map…': 'Друга папка…',
+  'Bibliotheek verwijderen': 'Премахване на библиотеката',
+  'Bibliotheken': 'Библиотеки',
+  'Geen bibliotheek': 'Няма библиотека',
+  'Geen presentaties (.md) gevonden.': 'Не са намерени презентации (.md).',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Избирате папката и името в следващия прозорец. Изображенията отиват в подпапка images/, а медията в media/, до файла на презентацията.',
+  'Kies bestandsnaam…': 'Избери име на файл…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Изберете папка, в която да запазите презентацията.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Изберете в коя библиотека да попадне презентацията.',
+  'Map toevoegen': 'Добавяне на папка',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Папки, в които съхранявате и търсите презентациите си. Дайте на всяка собствено име, за да ги различавате. Всички библиотеки се претърсват при отваряне и в библиотеката с изображения.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Все още няма библиотека — добавете папка.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Все още няма библиотека. Добавете една в Настройки или изберете папка по-горе за търсене.',
+  'Presentatie opslaan': 'Запазване на презентацията',
+  'Zo worden de bestanden bewaard': 'Ето как се съхраняват файловете',
   'Aangepast…': 'По избор…',
   'Aangepaste tijd': 'Време по избор',
   'Waarheidsverklaring': 'Декларация за достоверност',

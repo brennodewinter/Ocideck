@@ -89,6 +89,32 @@ const _dutchSourceHr = {
   'Informatief': 'Informativno',
   'Vernieuw uit deck': 'Osvježi iz decka',
   'Aantal bevindingen per ernst': 'Broj nalaza po ozbiljnosti',
+  'Afbeeldingen': 'Slike',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Slike i medije dijele prezentacije u istoj mapi. Točan naziv odabrat ćeš odmah u sistemskom prozoru.',
+  'Alle bibliotheken': 'Sve biblioteke',
+  'Andere map…': 'Druga mapa…',
+  'Bibliotheek verwijderen': 'Ukloni biblioteku',
+  'Bibliotheken': 'Biblioteke',
+  'Geen bibliotheek': 'Nema biblioteke',
+  'Geen presentaties (.md) gevonden.':
+      'Nije pronađena nijedna prezentacija (.md).',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Mapu i naziv biraš u sljedećem prozoru. Slike idu u podmapu images/, a mediji u media/, uz datoteku prezentacije.',
+  'Kies bestandsnaam…': 'Odaberi naziv datoteke…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Odaberi mapu u koju ćeš spremiti prezentaciju.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Odaberi u koju biblioteku ide prezentacija.',
+  'Map toevoegen': 'Dodaj mapu',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Mape u kojima čuvaš i pretražuješ svoje prezentacije. Daj svakoj vlastiti naziv da ih razlikuješ. Sve se biblioteke pretražuju pri otvaranju i u biblioteci slika.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Još nema biblioteke — dodaj mapu.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Još nema biblioteke. Dodaj je u Postavkama ili gore odaberi mapu za pretraživanje.',
+  'Presentatie opslaan': 'Spremi prezentaciju',
+  'Zo worden de bestanden bewaard': 'Ovako se datoteke čuvaju',
   'Aangepast…': 'Prilagođeno…',
   'Aangepaste tijd': 'Prilagođeno vrijeme',
   'Waarheidsverklaring': 'Izjava o istinitosti',

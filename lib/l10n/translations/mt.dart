@@ -90,6 +90,32 @@ const _dutchSourceMt = {
   'Informatief': 'Informattiv',
   'Vernieuw uit deck': 'Aġġorna mid-deck',
   'Aantal bevindingen per ernst': 'Numru ta\' sejbiet skont il-gravità',
+  'Afbeeldingen': 'Immaġni',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'L-immaġni u l-media jinqasmu mill-preżentazzjonijiet fl-istess kartella. L-isem eżatt tagħżlu mill-ewwel fit-tieqa tas-sistema.',
+  'Alle bibliotheken': 'Il-libreriji kollha',
+  'Andere map…': 'Kartella oħra…',
+  'Bibliotheek verwijderen': 'Neħħi l-librerija',
+  'Bibliotheken': 'Libreriji',
+  'Geen bibliotheek': 'L-ebda librerija',
+  'Geen presentaties (.md) gevonden.':
+      'Ma nstabet l-ebda preżentazzjoni (.md).',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Tagħżel il-kartella u l-isem fit-tieqa li jmiss. L-immaġni jmorru f\'sottokartella images/ u l-media f\'media/, ħdejn il-fajl tal-preżentazzjoni.',
+  'Kies bestandsnaam…': 'Agħżel isem tal-fajl…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Agħżel kartella biex tissejvja l-preżentazzjoni.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Agħżel f\'liema librerija tmur il-preżentazzjoni.',
+  'Map toevoegen': 'Żid kartella',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Kartelli fejn iżżomm u tfittex il-preżentazzjonijiet tiegħek. Agħti lil kull waħda isem tagħha biex tiddistingwihom. Il-libreriji kollha jiġu mfittxa mal-ftuħ u fil-librerija tal-immaġni.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Għad l-ebda librerija — żid kartella.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Għad l-ebda librerija. Żid waħda fis-Settings, jew agħżel kartella hawn fuq biex tfittex.',
+  'Presentatie opslaan': 'Issejvja l-preżentazzjoni',
+  'Zo worden de bestanden bewaard': 'Hekk jinżammu l-fajls',
   'Aangepast…': 'Personalizzat…',
   'Aangepaste tijd': 'Ħin personalizzat',
   'Waarheidsverklaring': 'Dikjarazzjoni ta\' verità',

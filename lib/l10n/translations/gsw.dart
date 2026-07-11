@@ -89,6 +89,31 @@ const _dutchSourceGsw = {
   'Informatief': 'Informativ',
   'Vernieuw uit deck': 'Vom Deck aktualisiere',
   'Aantal bevindingen per ernst': 'Aazahl Befund pro Schweregrad',
+  'Afbeeldingen': 'Bilder',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Bilder und Medie wärde vo Präsentatione im gliiche Ordner gmeinsam bruucht. De genau Name wählsch grad im Systemfänschter.',
+  'Alle bibliotheken': 'Alli Bibliotheke',
+  'Andere map…': 'Andere Ordner…',
+  'Bibliotheek verwijderen': 'Bibliothek etferne',
+  'Bibliotheken': 'Bibliotheke',
+  'Geen bibliotheek': 'Kei Bibliothek',
+  'Geen presentaties (.md) gevonden.': 'Kei Präsentatione (.md) gfunde.',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'De Ordner und de Name wählsch im nächschte Fänschter. D Bilder chömed i en Underordner images/ und Medie i media/, näbem Präsentationsfile.',
+  'Kies bestandsnaam…': 'Dateiname wähle…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Wähl en Ordner, wo d Präsentation gspeicheret wird.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Wähl, i weli Bibliothek d Präsentation chunnt.',
+  'Map toevoegen': 'Ordner zuefüege',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Ordner, wo du dini Präsentatione speichersch und durchsuechsch. Gib ene en eigene Name, damit mer se usenandhalte cha. Alli Bibliotheke wärde bim Öffne und i de Bildbibliothek durchsuecht.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Na kei Bibliothek — füeg en Ordner zue.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Na kei Bibliothek. Füeg eini i de Iischtellige zue oder wähl obe en Ordner zum Durchsueche.',
+  'Presentatie opslaan': 'Präsentation speichere',
+  'Zo worden de bestanden bewaard': 'So wärde d Dateie gspeicheret',
   'Aangepast…': 'Eigeni…',
   'Aangepaste tijd': 'Eigeni Ziit',
   'Waarheidsverklaring': 'Wahrheitserklärig',

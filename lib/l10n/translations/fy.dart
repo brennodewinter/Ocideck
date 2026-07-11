@@ -89,6 +89,31 @@ const _dutchSourceFy = {
   'Informatief': 'Ynformatyf',
   'Vernieuw uit deck': 'Fernije út deck',
   'Aantal bevindingen per ernst': 'Oantal befinings per earnst',
+  'Afbeeldingen': 'Ôfbyldings',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Ôfbyldings en media wurde dield troch presintaasjes yn deselde map. De krekte namme kiesto aanst yn it systeemfinster.',
+  'Alle bibliotheken': 'Alle biblioteken',
+  'Andere map…': 'Oare map…',
+  'Bibliotheek verwijderen': 'Bibleteek fuortsmite',
+  'Bibliotheken': 'Biblioteken',
+  'Geen bibliotheek': 'Gjin bibleteek',
+  'Geen presentaties (.md) gevonden.': 'Gjin presintaasjes (.md) fûn.',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Do kiest de map en de namme yn it folgjende finster. De ôfbyldings komme yn in submap images/ en media yn media/, njonken it presintaasjebestân.',
+  'Kies bestandsnaam…': 'Kies bestânsnamme…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Kies in map om de presintaasje yn te bewarjen.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Kies yn hokker bibleteek de presintaasje komt.',
+  'Map toevoegen': 'Map tafoegje',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Mappen dêr\'tsto presintaasjes yn bewarrest en trochsikest. Jou se in eigen namme om se út inoar te hâlden. Alle biblioteken wurde trochsocht by it iepenjen en yn de ôfbyldingsbibleteek.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Noch gjin bibleteek — foegje in map ta.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Noch gjin bibleteek. Foegje der ien ta by Ynstellings, of kies hjirboppe in map om te trochsykjen.',
+  'Presentatie opslaan': 'Presintaasje bewarje',
+  'Zo worden de bestanden bewaard': 'Sa wurde de bestannen bewarre',
   'Aangepast…': 'Eigen…',
   'Aangepaste tijd': 'Eigen tiid',
   'Waarheidsverklaring': 'Wierheidsferklearring',

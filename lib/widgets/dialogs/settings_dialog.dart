@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path/path.dart' as p;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
@@ -27,6 +28,7 @@ import '../privacy_statement_content.dart';
 import '../reader/documentation_search_tab.dart';
 
 part 'parts/settings_dialog_general.dart';
+part 'parts/settings_dialog_presentation.dart';
 part 'parts/settings_dialog_appearance.dart';
 part 'parts/settings_dialog_colors.dart';
 part 'parts/settings_dialog_webdav.dart';
@@ -83,7 +85,9 @@ class SettingsDialog extends ConsumerStatefulWidget {
 }
 
 class _SettingsDialogState extends ConsumerState<SettingsDialog> {
-  late String? _homeDirectory;
+  /// Bewerkbare kopie van de bibliotheken; toegepast bij Opslaan (zoals de
+  /// export­map en het stijlprofiel), zodat Annuleren de wijzigingen verwerpt.
+  late List<LibraryFolder> _libraries;
   late String? _exportDirectory;
   late ThemeProfile _themeProfile;
   late AppAppearanceProfile _appearanceProfile;
@@ -194,7 +198,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   void initState() {
     super.initState();
     final settings = ref.read(settingsProvider);
-    _homeDirectory = settings.homeDirectory;
+    _libraries = List.of(settings.libraries);
     _exportDirectory = settings.exportDirectory;
     // Reflect the profile the open presentation actually uses, falling back to
     // the globally selected profile when no deck is open.
@@ -297,19 +301,37 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     ];
   }
 
-  Future<void> _pickHomeDirectory() async {
+  /// Kies een map en voeg 'm als nieuwe bibliotheek toe. De naam start op de
+  /// mapnaam en is daarna in de rij te wijzigen. Een al toegevoegd pad wordt
+  /// overgeslagen.
+  Future<void> _addLibrary() async {
     final result = await FilePicker.getDirectoryPath(
-      dialogTitle: context.l10n.d('Standaard map voor presentaties'),
-      initialDirectory: _homeDirectory,
+      dialogTitle: context.l10n.d('Map kiezen'),
+      initialDirectory: _libraries.isEmpty ? null : _libraries.last.path,
     );
-    if (!mounted) return;
-    if (result != null) setState(() => _homeDirectory = result);
+    if (!mounted || result == null) return;
+    if (_libraries.any((l) => l.path == result)) return;
+    setState(
+      () =>
+          _libraries.add(LibraryFolder(name: p.basename(result), path: result)),
+    );
   }
+
+  /// De bibliotheken zoals ze worden opgeslagen: namen getrimd, en een leeg
+  /// gemaakte naam valt terug op de mapnaam zodat elke rij een label houdt.
+  List<LibraryFolder> _normalizedLibraries() => [
+    for (final lib in _libraries)
+      lib.copyWith(
+        name: lib.name.trim().isEmpty ? p.basename(lib.path) : lib.name.trim(),
+      ),
+  ];
 
   Future<void> _pickExportDirectory() async {
     final result = await FilePicker.getDirectoryPath(
       dialogTitle: context.l10n.d('Map voor exports'),
-      initialDirectory: _exportDirectory ?? _homeDirectory,
+      initialDirectory:
+          _exportDirectory ??
+          (_libraries.isEmpty ? null : _libraries.first.path),
     );
     if (!mounted) return;
     if (result != null) setState(() => _exportDirectory = result);
@@ -353,7 +375,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       footerText: _footerText.text,
       closingSlideMarkdown: _closingSlideMarkdown.text,
     );
-    notifier.setHomeDirectory(_homeDirectory);
+    notifier.setLibraries(_normalizedLibraries());
     notifier.setExportDirectory(_exportDirectory);
     notifier.saveThemeProfile(profile, previousName: _originalName);
     if (_appearanceProfile.isBuiltIn) {
@@ -911,41 +933,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
             : null,
         child: child,
       ),
-    );
-  }
-
-  Widget _presentationStyleTab(List<ThemeProfile> profiles) {
-    final l10n = context.l10n;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _profileScopeBanner(),
-        _sectionTitle(l10n.t('styleProfile')),
-        _profileSelector(profiles),
-        const SizedBox(height: 20),
-        _sectionTitle(l10n.d('Lettertype')),
-        _fontSection(),
-        _presentationStyleDivider(l10n.t('settingsColors')),
-        ..._colorsSectionChildren(),
-        _presentationStyleDivider(l10n.d('Animatie')),
-        ..._animationSettings(),
-        _presentationStyleDivider(l10n.d('Logo en footer')),
-        ..._logoSectionChildren(),
-        const SizedBox(height: 18),
-        _stylePreview(),
-      ],
-    );
-  }
-
-  Widget _presentationStyleDivider(String title) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 24),
-        const Divider(height: 1),
-        const SizedBox(height: 16),
-        _sectionTitle(title),
-      ],
     );
   }
 

@@ -91,6 +91,32 @@ const _dutchSourceGa = {
   'Informatief': 'Faisnéiseach',
   'Vernieuw uit deck': 'Athnuaigh ón deic',
   'Aantal bevindingen per ernst': 'Líon na dtorthaí de réir déine',
+  'Afbeeldingen': 'Íomhánna',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Roinntear íomhánna agus meáin ar na láithreoireachtaí san fhillteán céanna. Roghnóidh tú an t-ainm cruinn ar ball san fhuinneog chórais.',
+  'Alle bibliotheken': 'Gach leabharlann',
+  'Andere map…': 'Fillteán eile…',
+  'Bibliotheek verwijderen': 'Bain leabharlann',
+  'Bibliotheken': 'Leabharlanna',
+  'Geen bibliotheek': 'Gan leabharlann',
+  'Geen presentaties (.md) gevonden.':
+      'Níor aimsíodh aon láithreoireacht (.md).',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Roghnaíonn tú an fillteán agus an t-ainm sa chéad fhuinneog eile. Téann na híomhánna i bhfofhillteán images/ agus na meáin i media/, in aice le comhad na láithreoireachta.',
+  'Kies bestandsnaam…': 'Roghnaigh ainm comhaid…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Roghnaigh fillteán chun an láithreoireacht a shábháil ann.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Roghnaigh cén leabharlann ina rachaidh an láithreoireacht.',
+  'Map toevoegen': 'Cuir fillteán leis',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Fillteáin ina stórálann agus ina gcuardaíonn tú do láithreoireachtaí. Tabhair ainm dá gcuid féin do gach ceann chun iad a idirdhealú. Cuardaítear gach leabharlann agus tú ag oscailt agus sa leabharlann íomhánna.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Gan leabharlann fós — cuir fillteán leis.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Gan leabharlann fós. Cuir ceann leis sna Socruithe, nó roghnaigh fillteán thuas le cuardach.',
+  'Presentatie opslaan': 'Sábháil an láithreoireacht',
+  'Zo worden de bestanden bewaard': 'Seo mar a stóráiltear na comhaid',
   'Aangepast…': 'Saincheaptha…',
   'Aangepaste tijd': 'Am saincheaptha',
   'Waarheidsverklaring': 'Ráiteas fírinne',

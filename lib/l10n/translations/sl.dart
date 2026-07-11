@@ -89,6 +89,30 @@ const _dutchSourceSl = {
   'Informatief': 'Informativno',
   'Vernieuw uit deck': 'Osveži iz kompleta',
   'Aantal bevindingen per ernst': 'Število ugotovitev po resnosti',
+  'Afbeeldingen': 'Slike',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Slike in medije si delijo predstavitve v isti mapi. Točno ime izbereš kar v sistemskem oknu.',
+  'Alle bibliotheken': 'Vse knjižnice',
+  'Andere map…': 'Druga mapa…',
+  'Bibliotheek verwijderen': 'Odstrani knjižnico',
+  'Bibliotheken': 'Knjižnice',
+  'Geen bibliotheek': 'Ni knjižnice',
+  'Geen presentaties (.md) gevonden.': 'Ni najdenih predstavitev (.md).',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Mapo in ime izbereš v naslednjem oknu. Slike gredo v podmapo images/, mediji pa v media/, poleg datoteke predstavitve.',
+  'Kies bestandsnaam…': 'Izberi ime datoteke…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Izberi mapo, v katero shraniš predstavitev.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Izberi, v katero knjižnico gre predstavitev.',
+  'Map toevoegen': 'Dodaj mapo',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Mape, v katerih hraniš in iščeš svoje predstavitve. Vsaki daj svoje ime, da jih ločiš. Vse knjižnice se preiščejo ob odpiranju in v knjižnici slik.',
+  'Nog geen bibliotheek — voeg een map toe.': 'Še ni knjižnice — dodaj mapo.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Še ni knjižnice. Dodaj jo v Nastavitvah ali zgoraj izberi mapo za iskanje.',
+  'Presentatie opslaan': 'Shrani predstavitev',
+  'Zo worden de bestanden bewaard': 'Tako se datoteke shranijo',
   'Aangepast…': 'Po meri…',
   'Aangepaste tijd': 'Čas po meri',
   'Waarheidsverklaring': 'Izjava o resničnosti',

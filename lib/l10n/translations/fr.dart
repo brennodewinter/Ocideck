@@ -90,6 +90,31 @@ const _dutchSourceFr = {
   'Informatief': 'Informatif',
   'Vernieuw uit deck': 'Actualiser depuis le deck',
   'Aantal bevindingen per ernst': 'Nombre de constats par gravité',
+  'Afbeeldingen': 'Images',
+  'Afbeeldingen en media worden gedeeld door presentaties in dezelfde map. De exacte naam kies je zo in het systeemvenster.':
+      'Les images et les médias sont partagés par les présentations du même dossier. Vous choisirez le nom exact dans la fenêtre système.',
+  'Alle bibliotheken': 'Toutes les bibliothèques',
+  'Andere map…': 'Autre dossier…',
+  'Bibliotheek verwijderen': 'Supprimer la bibliothèque',
+  'Bibliotheken': 'Bibliothèques',
+  'Geen bibliotheek': 'Aucune bibliothèque',
+  'Geen presentaties (.md) gevonden.': 'Aucune présentation (.md) trouvée.',
+  'Je kiest de map en de naam in het volgende venster. De afbeeldingen komen in een submap images/ en media in media/, naast het presentatiebestand.':
+      'Vous choisissez le dossier et le nom dans la fenêtre suivante. Les images vont dans un sous-dossier images/ et les médias dans media/, à côté du fichier de présentation.',
+  'Kies bestandsnaam…': 'Choisir le nom du fichier…',
+  'Kies een map om de presentatie in te bewaren.':
+      'Choisissez un dossier où enregistrer la présentation.',
+  'Kies in welke bibliotheek de presentatie komt.':
+      'Choisissez dans quelle bibliothèque placer la présentation.',
+  'Map toevoegen': 'Ajouter un dossier',
+  'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.':
+      'Dossiers où vous conservez et recherchez vos présentations. Donnez-leur un nom propre pour les distinguer. Toutes les bibliothèques sont explorées à l\'ouverture et dans la bibliothèque d\'images.',
+  'Nog geen bibliotheek — voeg een map toe.':
+      'Aucune bibliothèque pour l\'instant — ajoutez un dossier.',
+  'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.':
+      'Aucune bibliothèque pour l\'instant. Ajoutez-en une dans les Réglages, ou choisissez ci-dessus un dossier à explorer.',
+  'Presentatie opslaan': 'Enregistrer la présentation',
+  'Zo worden de bestanden bewaard': 'Voici comment les fichiers sont conservés',
   'Aangepast…': 'Personnalisé…',
   'Aangepaste tijd': 'Temps personnalisé',
   'Waarheidsverklaring': 'Déclaration de véracité',
