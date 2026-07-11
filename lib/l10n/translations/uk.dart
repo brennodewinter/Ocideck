@@ -84,6 +84,7 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Severity (bevindingen)': 'Серйозність (виявлення)',
   'CWE kiezen': 'Вибрати CWE',
   'Zoek op naam of CWE-nummer': 'Пошук за назвою або номером CWE',
   'Geen CWE gevonden': 'CWE не знайдено',

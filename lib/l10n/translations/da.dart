@@ -83,6 +83,7 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Severity (bevindingen)': 'Alvorlighed (fund)',
   'CWE kiezen': 'Vælg CWE',
   'Zoek op naam of CWE-nummer': 'Søg efter navn eller CWE-nummer',
   'Geen CWE gevonden': 'Ingen CWE fundet',

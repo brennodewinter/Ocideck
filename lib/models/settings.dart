@@ -173,10 +173,38 @@ class ThemeProfile {
     fontFamily: 'EB Garamond',
   );
 
+  /// Ingebouwd beveiligingsprofiel voor pentest-/MIAUW-rapporten (PENTEST_MIAUW
+  /// §11): een strakke, zakelijke look — leesbare lichte pagina's met een
+  /// donkere slate-titelbalk en een rood accent dat de beveiligingscontext
+  /// signaleert. De severity-tokens blijven op de FIRST-standaardpalet, zodat
+  /// bevindingskaarten meteen de vertrouwde bandkleuren tonen.
+  static const security = ThemeProfile(
+    name: 'Security',
+    slideBackgroundColor: '#FFFFFF',
+    textColor: '#1E293B',
+    accentColor: '#B91C1C',
+    checklistCheckedColor: '#15803D',
+    checklistUncheckedColor: '#CBD5E1',
+    checklistStrikeThrough: true,
+    bulletMarker: BulletMarker.dot,
+    tableTextColor: '#1E293B',
+    tableHeaderTextColor: '#FFFFFF',
+    tableHeaderBackgroundColor: '#0F172A',
+    titleBackgroundColor: '#0F172A',
+    titleTextColor: '#FFFFFF',
+    sectionBackgroundColor: '#B91C1C',
+    codeBackgroundColor: '#0F172A',
+    codeTextColor: '#E2E8F0',
+    codeHighlightSyntax: true,
+    codeFontFamily: 'monospace',
+    fontFamily: 'Arial',
+  );
+
   /// Ingebouwde stijlprofielen voor een verse installatie: LibreKAT voorop
-  /// (en dus de standaardselectie), met het neutrale 'Standaard' ernaast.
-  /// Bestaande installaties behouden hun eigen opgeslagen profielenlijst.
-  static const builtIns = [libreKat, ThemeProfile()];
+  /// (en dus de standaardselectie), met het neutrale 'Standaard' en het
+  /// beveiligingsprofiel ernaast. Bestaande installaties behouden hun eigen
+  /// opgeslagen profielenlijst.
+  static const builtIns = [libreKat, ThemeProfile(), security];
 
   ThemeProfile copyWith({
     String? name,

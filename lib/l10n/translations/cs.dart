@@ -84,6 +84,7 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Severity (bevindingen)': 'Závažnost (nálezy)',
   'CWE kiezen': 'Vybrat CWE',
   'Zoek op naam of CWE-nummer': 'Hledat podle názvu nebo čísla CWE',
   'Geen CWE gevonden': 'Žádné CWE nenalezeno',

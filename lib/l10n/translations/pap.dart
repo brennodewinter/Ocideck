@@ -83,6 +83,7 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Severity (bevindingen)': 'Severidat (findingnan)',
   'CWE kiezen': 'Skohe CWE',
   'Zoek op naam of CWE-nummer': 'Buska pa nòmber o number CWE',
   'Geen CWE gevonden': 'No a haña CWE',

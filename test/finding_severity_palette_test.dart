@@ -83,5 +83,17 @@ void main() {
       expect(r.severityMediumColor, '#ABCDEF');
       expect(r.severityLowColor, p.severityLowColor);
     });
+
+    test('the built-in Security profile ships the default severity palette', () {
+      const p = ThemeProfile.security;
+      expect(p.name, 'Security');
+      for (final s in Cvss4Severity.values) {
+        expect(
+          FindingSeverityPalette.of(s, profile: p),
+          FindingSeverityPalette.of(s),
+          reason: s.name,
+        );
+      }
+    });
   });
 }
