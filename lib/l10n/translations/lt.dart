@@ -83,6 +83,8 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Aangepast…': 'Savas…',
+  'Aangepaste tijd': 'Savas laikas',
   'Uit sjabloon…': 'Iš šablono…',
   'Sjabloon kiezen': 'Pasirinkti šabloną',
   'Scope-object': 'Aprėpties objektas',

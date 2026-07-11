@@ -84,6 +84,8 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Aangepast…': 'Personalizat…',
+  'Aangepaste tijd': 'Timp personalizat',
   'Uit sjabloon…': 'Din șablon…',
   'Sjabloon kiezen': 'Alege un șablon',
   'Scope-object': 'Obiect din domeniu',

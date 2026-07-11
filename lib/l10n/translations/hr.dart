@@ -83,6 +83,8 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Aangepast…': 'Prilagođeno…',
+  'Aangepaste tijd': 'Prilagođeno vrijeme',
   'Uit sjabloon…': 'Iz predloška…',
   'Sjabloon kiezen': 'Odaberi predložak',
   'Scope-object': 'Objekt opsega',

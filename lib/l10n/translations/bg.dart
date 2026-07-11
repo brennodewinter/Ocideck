@@ -84,6 +84,8 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Aangepast…': 'По избор…',
+  'Aangepaste tijd': 'Време по избор',
   'Uit sjabloon…': 'От шаблон…',
   'Sjabloon kiezen': 'Изберете шаблон',
   'Scope-object': 'Обект от обхвата',

@@ -83,6 +83,8 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Aangepast…': 'Egen…',
+  'Aangepaste tijd': 'Egen tid',
   'Uit sjabloon…': 'Från mall…',
   'Sjabloon kiezen': 'Välj mall',
   'Scope-object': 'Scope-objekt',

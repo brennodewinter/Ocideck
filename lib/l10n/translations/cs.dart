@@ -84,6 +84,8 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Aangepast…': 'Vlastní…',
+  'Aangepaste tijd': 'Vlastní čas',
   'Uit sjabloon…': 'Ze šablony…',
   'Sjabloon kiezen': 'Vybrat šablonu',
   'Scope-object': 'Objekt rozsahu',

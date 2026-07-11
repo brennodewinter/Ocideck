@@ -83,6 +83,8 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Aangepast…': 'Kustom…',
+  'Aangepaste tijd': 'Waktu kustom',
   'Uit sjabloon…': 'Dari templat…',
   'Sjabloon kiezen': 'Pilih templat',
   'Scope-object': 'Objek lingkup',

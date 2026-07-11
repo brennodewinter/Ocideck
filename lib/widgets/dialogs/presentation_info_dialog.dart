@@ -74,7 +74,12 @@ class _PresentationInfoDialogState
     2700,
     3600,
     5400,
+    7200,
   ];
+
+  /// Sentinel dropdown value for the "custom time" option. When selected the
+  /// number of seconds comes from [_customMinutes] instead of a fixed preset.
+  static const _customTargetValue = -1;
 
   late final TextEditingController _title;
   late final TextEditingController _author;
@@ -84,6 +89,8 @@ class _PresentationInfoDialogState
   late final TextEditingController _description;
   late final TextEditingController _keywords;
   late int _presentationTargetSeconds;
+  late bool _useCustomTarget;
+  late final TextEditingController _customMinutes;
   late bool _showRehearsalSummary;
   late bool _playOnly;
   late String _profileName;
@@ -99,6 +106,12 @@ class _PresentationInfoDialogState
     _description = TextEditingController(text: widget.deck.description);
     _keywords = TextEditingController(text: widget.deck.keywords);
     _presentationTargetSeconds = widget.deck.presentationTargetSeconds;
+    _useCustomTarget =
+        _presentationTargetSeconds > 0 &&
+        !_targetSteps.contains(_presentationTargetSeconds);
+    _customMinutes = TextEditingController(
+      text: _useCustomTarget ? '${_presentationTargetSeconds ~/ 60}' : '',
+    );
     _showRehearsalSummary = widget.deck.showRehearsalSummary;
     _playOnly = widget.deck.playOnly;
     _profileName = widget.deck.themeProfile.name;
@@ -113,6 +126,7 @@ class _PresentationInfoDialogState
     _date.dispose();
     _description.dispose();
     _keywords.dispose();
+    _customMinutes.dispose();
     super.dispose();
   }
 
@@ -142,15 +156,8 @@ class _PresentationInfoDialogState
     _date.selection = TextSelection.collapsed(offset: _date.text.length);
   }
 
-  int get _targetDropdownValue {
-    return _targetSteps.reduce(
-      (a, b) =>
-          (a - _presentationTargetSeconds).abs() <=
-              (b - _presentationTargetSeconds).abs()
-          ? a
-          : b,
-    );
-  }
+  int get _targetDropdownValue =>
+      _useCustomTarget ? _customTargetValue : _presentationTargetSeconds;
 
   @override
   Widget build(BuildContext context) {
@@ -388,14 +395,59 @@ class _PresentationInfoDialogState
                           : '${step ~/ 60} min',
                     ),
                   ),
+                DropdownMenuItem(
+                  value: _customTargetValue,
+                  child: Text(l10n.d('Aangepast…')),
+                ),
               ],
               onChanged: (seconds) {
                 if (seconds == null) return;
-                setState(() => _presentationTargetSeconds = seconds);
+                setState(() {
+                  if (seconds == _customTargetValue) {
+                    _useCustomTarget = true;
+                    // Seed the field from the current value for a smooth switch.
+                    final minutes = _presentationTargetSeconds ~/ 60;
+                    _customMinutes.text = minutes > 0 ? '$minutes' : '';
+                  } else {
+                    _useCustomTarget = false;
+                    _presentationTargetSeconds = seconds;
+                  }
+                });
               },
             ),
           ),
         ),
+        if (_useCustomTarget)
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: SizedBox(
+              width: 200,
+              child: TextField(
+                controller: _customMinutes,
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  LengthLimitingTextInputFormatter(4),
+                ],
+                decoration: InputDecoration(
+                  labelText: l10n.d('Aangepaste tijd'),
+                  suffixText: 'min',
+                  isDense: true,
+                  prefixIcon: const Icon(Icons.edit_outlined, size: 18),
+                  border: const OutlineInputBorder(),
+                ),
+                onChanged: (value) {
+                  final minutes = int.tryParse(value) ?? 0;
+                  setState(
+                    () => _presentationTargetSeconds = (minutes * 60).clamp(
+                      0,
+                      86400,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
         Padding(
           padding: const EdgeInsets.only(top: 6),
           child: Text(

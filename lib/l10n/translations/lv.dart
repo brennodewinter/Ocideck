@@ -83,6 +83,8 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Aangepast…': 'Pielāgots…',
+  'Aangepaste tijd': 'Pielāgots laiks',
   'Uit sjabloon…': 'No veidnes…',
   'Sjabloon kiezen': 'Izvēlēties veidni',
   'Scope-object': 'Tvēruma objekts',

@@ -82,6 +82,8 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Aangepast…': 'Oma…',
+  'Aangepaste tijd': 'Oma aeg',
   'Uit sjabloon…': 'Mallist…',
   'Sjabloon kiezen': 'Vali mall',
   'Scope-object': 'Ulatuse objekt',

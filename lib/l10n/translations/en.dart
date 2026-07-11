@@ -83,6 +83,8 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'Aangepast…': 'Custom…',
+  'Aangepaste tijd': 'Custom time',
   'Uit sjabloon…': 'From template…',
   'Sjabloon kiezen': 'Choose template',
   'Scope-object': 'Scope object',

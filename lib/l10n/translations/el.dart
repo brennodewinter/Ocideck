@@ -83,6 +83,8 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Aangepast…': 'Προσαρμοσμένο…',
+  'Aangepaste tijd': 'Προσαρμοσμένος χρόνος',
   'Uit sjabloon…': 'Από πρότυπο…',
   'Sjabloon kiezen': 'Επιλογή προτύπου',
   'Scope-object': 'Αντικείμενο εμβέλειας',

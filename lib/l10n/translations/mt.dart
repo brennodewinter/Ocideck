@@ -84,6 +84,8 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Aangepast…': 'Personalizzat…',
+  'Aangepaste tijd': 'Ħin personalizzat',
   'Uit sjabloon…': 'Minn mudell…',
   'Sjabloon kiezen': 'Agħżel mudell',
   'Scope-object': 'Oġġett tal-ambitu',

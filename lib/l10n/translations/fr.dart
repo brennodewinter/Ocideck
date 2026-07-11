@@ -84,6 +84,8 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'Aangepast…': 'Personnalisé…',
+  'Aangepaste tijd': 'Temps personnalisé',
   'Uit sjabloon…': 'Depuis un modèle…',
   'Sjabloon kiezen': 'Choisir un modèle',
   'Scope-object': 'Objet du périmètre',

@@ -85,6 +85,8 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Aangepast…': 'Saincheaptha…',
+  'Aangepaste tijd': 'Am saincheaptha',
   'Uit sjabloon…': 'Ó theimpléad…',
   'Sjabloon kiezen': 'Roghnaigh teimpléad',
   'Scope-object': 'Réad scóipe',

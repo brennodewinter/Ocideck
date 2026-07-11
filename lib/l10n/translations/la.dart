@@ -85,6 +85,8 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Aangepast…': 'Proprium…',
+  'Aangepaste tijd': 'Tempus proprium',
   'Uit sjabloon…': 'Ex exemplari…',
   'Sjabloon kiezen': 'Exemplar eligere',
   'Scope-object': 'Obiectum ambitus',
