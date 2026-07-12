@@ -32,6 +32,7 @@ import 'web_asset_store.dart';
 part 'parts/file_service_net.dart';
 part 'parts/file_service_open.dart';
 part 'parts/file_service_package.dart';
+part 'parts/file_service_dossier.dart';
 part 'parts/file_service_project.dart';
 part 'parts/file_service_import.dart';
 
