@@ -84,6 +84,10 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Auditdossier exporteren': 'Esporta d-dossier tal-awditu',
+  'Finaliseer en verzegel het rapport eerst.':
+      'Iffinalizza u ssiġilla r-rapport l-ewwel.',
+  'Auditdossier geëxporteerd naar:': 'Id-dossier tal-awditu ġie esportat lejn:',
   'MIAUW-pentestrapport': 'Rapport tal-pentest MIAUW',
   'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
       'Struttura sħiħa tar-rapport MIAUW: ġestjoni tad-dokumenti, kamp ta\' applikazzjoni, eżekuzzjoni, sommarju maniġerjali, sejbiet, listi ta\' kontroll u firma.',

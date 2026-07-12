@@ -83,6 +83,10 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Auditdossier exporteren': 'Eksportá dossier di ouditó',
+  'Finaliseer en verzegel het rapport eerst.':
+      'Finalisá i seyá e rapòrt promé.',
+  'Auditdossier geëxporteerd naar:': 'Dossier di ouditó eksportá na:',
   'MIAUW-pentestrapport': 'Rapòrt di pentest MIAUW',
   'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
       'Struktura kompletu di rapòrt MIAUW: maneho di dokumento, skòp, ehekushon, resúmen pa gerensia, deskubrimentu, chèklist i firma.',

@@ -83,6 +83,10 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Auditdossier exporteren': 'Eksportēt audita dokumentāciju',
+  'Finaliseer en verzegel het rapport eerst.':
+      'Vispirms pabeidziet un aizzīmogojiet ziņojumu.',
+  'Auditdossier geëxporteerd naar:': 'Audita dokumentācija eksportēta uz:',
   'MIAUW-pentestrapport': 'MIAUW pentesta ziņojums',
   'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
       'Pilna MIAUW ziņojuma struktūra: dokumentu pārvaldība, tvērums, izpilde, vadības kopsavilkums, atklājumi, kontrolsaraksti un parakstīšana.',

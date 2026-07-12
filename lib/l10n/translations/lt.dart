@@ -83,6 +83,10 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Auditdossier exporteren': 'Eksportuoti audito bylą',
+  'Finaliseer en verzegel het rapport eerst.':
+      'Pirmiausia užbaikite ir užantspauduokite ataskaitą.',
+  'Auditdossier geëxporteerd naar:': 'Audito byla eksportuota į:',
   'MIAUW-pentestrapport': 'MIAUW pentesto ataskaita',
   'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
       'Visa MIAUW ataskaitos struktūra: dokumentų valdymas, apimtis, vykdymas, vadovybės santrauka, radiniai, kontroliniai sąrašai ir pasirašymas.',
