@@ -26,7 +26,7 @@ lib/
   state/      # Riverpod providers: deck, editor, settings, tabs, clipboard,
               # webdav
   widgets/    # app shell, panels, dialogs, per-type editors, slides, presenter
-  l10n/       # AppLocalizations + translations/<lang>.dart (8 languages)
+  l10n/       # AppLocalizations + translations/<lang>.dart (31 languages)
   theme/      # app theming
   utils/      # small shared helpers (clipboard table parsing, URL launching)
 ```
@@ -228,16 +228,52 @@ Two upstream plugins are forked into `third_party/` and wired via `pubspec.yaml`
 If you bump either upstream, re-apply the local changes (they're small and
 documented in the diff) and re-test the dual-screen presenter.
 
+## Information-security module (optional, off by default)
+
+The MIAUW pentest-reporting module (design: `docs/design/PENTEST_MIAUW.md`) is
+gated behind `state/sec_module_provider.dart`: `secModuleRevealProvider` stays
+false until the user enables it in Settings, so its UI (a dedicated slide-picker
+tab, command-palette actions, the report template) is hidden otherwise. It rides
+the existing rails rather than adding a parallel stack:
+
+- **Slide types** — `finding`, `findingsSummary`, `checklist`, `scopeMatrix` and
+  `signOff` are ordinary entries in the `slideTypeMeta` registry
+  (`models/slide.dart`); each carries a `_class` token and round-trips its
+  structured data as `<!-- ocideck_* -->` comments like every other type. A
+  **finding** is authored as a *group*: a header slide plus detail / evidence
+  slides sharing one `ocideck_finding_id` and a `FindingRole`.
+- **Domain services** (pure, network-free) — the native **CVSS 4.0** engine
+  (`services/cvss/`), the offline **CWE** and **MIAUW EIS** catalogs, the finding
+  numbering / evidence hashing / scope-coverage / management-summary /
+  compliance-analyzer derivations, and the audit-dossier index builder
+  (`services/audit_dossier.dart`).
+- **Document integrity** — `services/document_integrity.dart` seals a finalised
+  deck with a SHA-512 hash over the canonicalised content (front matter
+  `ocideck_finalized` / `ocideck_seal_*`), re-verified on open. An optional **RFC
+  3161** timestamp (`services/rfc3161_timestamp.dart`, with a hand-rolled ASN.1
+  DER codec in `utils/asn1_der.dart` — no new dependency) anchors that hash in
+  time; OciDeck only produces and verifies, never contacts a TSA itself.
+- **Audit dossier** — `parts/file_service_dossier.dart` reuses the AES-256
+  package builder to bundle the sealed report, its evidence and the hash tables
+  into one encrypted `.ocideck` archive plus an `AUDIT_DOSSIER.md` index.
+- **Optional AI** — a shared, off-by-default backend (`services/ai_*`) drafts
+  finding text and image alt-text behind the outbound-privacy consent; drafts are
+  marked `ocideck_ai_assisted` and block sealing until a human reviews them.
+
 ## Localization
 
 Dutch is the source language: UI code calls `d('Nederlandse brontekst')` (literal
 source) or `t('key')` (keyed). `l10n/app_localizations.dart` keeps only the
 `AppLocalizations` class and delegate, and **assembles** the three lookup maps
 (`_strings`, `_dutchSourceStrings`, `_dutchSourceStringAdditions`) from one file
-per language. The translation data lives in `l10n/translations/<lang>.dart`
-(nl/en/it/de/fr/es/fy/pap), each a `part of '../app_localizations.dart'` that
-declares `_strings<Lang>`, `_dutchSource<Lang>`, and `_dutchSourceAdd<Lang>`
-(Dutch only needs `_stringsNl`, being the source).
+per language. The translation data lives in `l10n/translations/<lang>.dart` (31
+languages), each a `part of '../app_localizations.dart'` that declares
+`_strings<Lang>`, `_dutchSource<Lang>`, and (for the languages that need later
+additions) `_dutchSourceAdd<Lang>` (Dutch only needs `_stringsNl`, being the
+source). For a Dutch source string `d()` reads the additions map before the
+primary map, so a key must never live in both (guarded by
+`test/l10n_duplicate_keys_test.dart`); every `d()`/`t()` string is required in all
+languages by `test/app_localizations_test.dart`.
 
 - **Translate or add a string:** edit the relevant language file(s). A test
   (`test/app_localizations_test.dart`) fails unless every literal `d('…')` has a

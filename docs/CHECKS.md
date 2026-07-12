@@ -60,7 +60,7 @@ run locally and in CI, the number you see locally is the number CI gates on.
 CI additionally runs `flutter pub get --enforce-lockfile` (reproducible
 dependencies) and a **Markdown link check** (`lychee --offline`).
 
-Enforced inside `make test`: **localization in all 8 languages**, the
+Enforced inside `make test`: **localization in all 31 languages**, the
 **path/SSRF guards**, the **HTML-export sanitisation** invariants (strict
 export CSP + injected-`</script>` neutralisation; see
 [below](#enforced-behaviours-worth-calling-out)), and **documentation
