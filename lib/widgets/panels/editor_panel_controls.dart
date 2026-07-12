@@ -12,6 +12,10 @@ class _EditorToolbar extends StatelessWidget {
   final ValueChanged<ThemeProfile> onProfileChanged;
   final VoidCallback onDefaultProfileRequested;
 
+  /// Of de informatieveiligheid-module onthuld is; gate de security-slidetypes
+  /// in de kiezer net als 'Slide toevoegen' (zie [AddSlideDialog]).
+  final bool revealSecurityModule;
+
   /// Extra items rechts in de kopregel (bijv. de hulp-toggle en de
   /// kwaliteits-samenvatting), zodat die op dezelfde regel als TYPE/STIJL staan.
   final List<Widget> trailing;
@@ -24,12 +28,27 @@ class _EditorToolbar extends StatelessWidget {
     required this.onTypeChanged,
     required this.onProfileChanged,
     required this.onDefaultProfileRequested,
+    required this.revealSecurityModule,
     this.trailing = const [],
   });
 
+  /// Open dezelfde visuele kiezer als 'Slide toevoegen' om het slide-type te
+  /// wijzigen. Is de huidige slide al een informatieveiligheid-type, dan tonen
+  /// we die categorie óók als de module uit staat — anders zit je vast en kun
+  /// je zo'n slide niet naar een ander security-type ombouwen.
+  Future<void> _pickType(BuildContext context) async {
+    final reveal =
+        revealSecurityModule ||
+        slide.type.category == SlideCategory.informatieveiligheid;
+    final picked = await AddSlideDialog.show(
+      context,
+      revealSecurityModule: reveal,
+    );
+    if (picked != null && picked != slide.type) onTypeChanged(picked);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     // Make sure the active profile is always selectable, even when it was
     // loaded from a file and is not part of the saved profile list.
     final profileItems = <ThemeProfile>[
@@ -45,44 +64,9 @@ class _EditorToolbar extends StatelessWidget {
           Expanded(
             child: _ToolbarField(
               label: 'TYPE',
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<SlideType>(
-                  value: slide.type,
-                  isExpanded: true,
-                  isDense: true,
-                  borderRadius: BorderRadius.circular(6),
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: AppTheme.navy,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  items: [
-                    for (final type in SlideType.values)
-                      DropdownMenuItem(
-                        value: type,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              slideTypeIcons[type]!,
-                              size: 14,
-                              color: AppTheme.navy,
-                            ),
-                            const SizedBox(width: 4),
-                            Flexible(
-                              child: Text(
-                                l10n.d(type.label),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                  ],
-                  onChanged: (v) {
-                    if (v != null) onTypeChanged(v);
-                  },
-                ),
+              child: _SlideTypePickerButton(
+                type: slide.type,
+                onTap: () => _pickType(context),
               ),
             ),
           ),
@@ -173,6 +157,7 @@ class _EditorHeaderBar extends StatefulWidget {
   final ValueChanged<SlideType> onTypeChanged;
   final ValueChanged<ThemeProfile> onProfileChanged;
   final VoidCallback onDefaultProfileRequested;
+  final bool revealSecurityModule;
 
   const _EditorHeaderBar({
     required this.slide,
@@ -182,6 +167,7 @@ class _EditorHeaderBar extends StatefulWidget {
     required this.onTypeChanged,
     required this.onProfileChanged,
     required this.onDefaultProfileRequested,
+    required this.revealSecurityModule,
   });
 
   @override
@@ -205,6 +191,7 @@ class _EditorHeaderBarState extends State<_EditorHeaderBar> {
           onTypeChanged: widget.onTypeChanged,
           onProfileChanged: widget.onProfileChanged,
           onDefaultProfileRequested: widget.onDefaultProfileRequested,
+          revealSecurityModule: widget.revealSecurityModule,
           trailing: [
             const SizedBox(width: 8),
             SlideTypeHelpToggle(
@@ -264,6 +251,60 @@ class _ToolbarField extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+/// De TYPE-keuze in de kopregel. Ziet eruit als een pulldown (icoon + label +
+/// pijltje), maar opent dezelfde visuele kiezer als 'Slide toevoegen' — met
+/// categorie-tabs, zoeken en wireframe-previews. Zo delen 'toevoegen' en
+/// 'wijzigen' één bron en tonen ze exact dezelfde slidetypes.
+class _SlideTypePickerButton extends StatelessWidget {
+  final SlideType type;
+  final VoidCallback onTap;
+
+  const _SlideTypePickerButton({required this.type, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Semantics(
+      button: true,
+      child: Tooltip(
+        message: l10n.d('Slide type kiezen'),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(6),
+          child: Padding(
+            // Verticaal zo gekozen dat de knop even hoog is als de dense
+            // STIJL-dropdown ernaast (beide ~24px), zodat de kopregel netjes
+            // uitlijnt.
+            padding: const EdgeInsets.symmetric(vertical: 3),
+            child: Row(
+              children: [
+                Icon(slideTypeIcons[type]!, size: 14, color: AppTheme.navy),
+                const SizedBox(width: 4),
+                Expanded(
+                  child: Text(
+                    l10n.d(type.label),
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: AppTheme.navy,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                const Icon(
+                  Icons.arrow_drop_down,
+                  size: 18,
+                  color: AppTheme.navy,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

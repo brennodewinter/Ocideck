@@ -75,7 +75,10 @@ dated events), and
 **free Markdown**. Each card in the chooser shows a miniature
 wireframe of the layout, and the dialog works entirely with the keyboard
 (`Tab`/`Enter` to choose, `Esc` to cancel). Each type has a dedicated editor on
-the left and a live preview on the right.
+the left and a live preview on the right. You can change an existing slide's type
+at any time from the **TYPE** control in the editor header: it opens the same
+chooser, so adding and re-typing a slide always offer exactly the same set of
+types.
 
 Not sure what a slide type is for? Click the small **"What can I do here?"**
 button at the top of the editor for a one-line hint about the selected type (for

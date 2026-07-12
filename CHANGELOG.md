@@ -630,6 +630,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **The editor's slide-type selector now opens the same visual picker as "Slide
+  toevoegen".** The **TYPE** control in the editor header used to be a plain
+  pulldown that listed every slide type in one long, flat list — and, unlike the
+  add-slide dialog, it always showed the Informatieveiligheid types even with the
+  module off, so the two places disagreed about which types exist. It now opens
+  the shared picker (category tabs, search and wireframe previews) and gates the
+  security types exactly like the add dialog, so both surfaces offer an identical
+  set. A slide that is already a security type can still be re-typed among the
+  security types with the module off, so imported reports are never a dead-end.
 - **The markdown checker is more critical and less noisy.** It now warns about
   **unknown front-matter keys** (a typo like `pagenate:`, or a Marp option
   OciDeck does not implement such as `header`/`footer`/`size`/`style`) and about
