@@ -3,17 +3,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck_template.dart';
+import 'package:ocideck/state/sec_module_provider.dart';
 import 'package:ocideck/widgets/dialogs/new_deck_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Pompt een minimale app met een "open"-knop en opent de dialoog. De
 /// uiteindelijke uitkomst landt in [_Harness.choice] zodra de dialoog sluit.
 class _Harness {
+  _Harness({this.reveal = false});
+
+  /// Whether the Informatieveiligheid module is revealed (gates MIAUW-only
+  /// templates). Off by default, matching a fresh install.
+  final bool reveal;
   NewDeckChoice? choice;
 
   Future<void> open(WidgetTester tester) async {
     await tester.pumpWidget(
       ProviderScope(
+        overrides: [secModuleRevealProvider.overrideWithValue(reveal)],
         child: MaterialApp(
           localizationsDelegates: const [AppLocalizations.delegate],
           home: Builder(
@@ -129,9 +136,11 @@ void main() {
   ) async {
     await _Harness().open(tester);
     // In weergavevolgorde itereren zodat het scrollen monotoon omlaag gaat —
-    // scrollUntilVisible scrolt maar één richting op.
+    // scrollUntilVisible scrolt maar één richting op. Module-only sjablonen
+    // (MIAUW) blijven verborgen tot Informatieveiligheid aanstaat en horen dus
+    // niet in deze standaardcatalogus.
     for (final template in sortTemplatesForDisplay(
-      deckTemplates,
+      deckTemplates.where((t) => !t.requiresSecurityModule),
       (t) => t.title,
     )) {
       await tester.scrollUntilVisible(
@@ -141,6 +150,25 @@ void main() {
       );
       expect(find.text(template.title), findsOneWidget);
     }
+  });
+
+  testWidgets('a module-only template is hidden until the module is revealed', (
+    tester,
+  ) async {
+    final miauw = deckTemplates.firstWhere((t) => t.id == 'miauwReport');
+
+    // Module off (the default) → the MIAUW template is not in the picker.
+    await _Harness().open(tester);
+    expect(find.text(miauw.title), findsNothing);
+
+    // Reveal the Informatieveiligheid module → it appears.
+    await _Harness(reveal: true).open(tester);
+    await tester.scrollUntilVisible(
+      find.text(miauw.title),
+      60,
+      scrollable: find.byType(Scrollable).last,
+    );
+    expect(find.text(miauw.title), findsOneWidget);
   });
 
   testWidgets('every template has a picker icon', (tester) async {

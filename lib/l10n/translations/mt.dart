@@ -84,6 +84,9 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'MIAUW-pentestrapport': 'Rapport tal-pentest MIAUW',
+  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
+      'Struttura sħiħa tar-rapport MIAUW: ġestjoni tad-dokumenti, kamp ta\' applikazzjoni, eżekuzzjoni, sommarju maniġerjali, sejbiet, listi ta\' kontroll u firma.',
   'Tekst voorstellen (AI)': 'Issuġġerixxi test (IA)',
   'Het model gaf geen tekst terug.': 'Il-mudell ma rritorna l-ebda test.',
   'Er staat al tekst. Vervangen door het AI-concept?':

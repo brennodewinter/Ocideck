@@ -85,6 +85,9 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'MIAUW-pentestrapport': 'Relatio pentesti MIAUW',
+  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
+      'Plena structura relationis MIAUW: administratio documentorum, ambitus, executio, summarium moderatorium, inventa, indices et subscriptio.',
   'Tekst voorstellen (AI)': 'Textum proponere (IA)',
   'Het model gaf geen tekst terug.': 'Exemplar nullum textum reddidit.',
   'Er staat al tekst. Vervangen door het AI-concept?':

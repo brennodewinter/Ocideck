@@ -83,6 +83,9 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'MIAUW-pentestrapport': 'Laporan pentest MIAUW',
+  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
+      'Struktur laporan MIAUW lengkap: manajemen dokumen, ruang lingkup, eksekusi, ringkasan manajemen, temuan, daftar periksa, dan penandatanganan.',
   'Tekst voorstellen (AI)': 'Sarankan teks (AI)',
   'Het model gaf geen tekst terug.': 'Model tidak mengembalikan teks.',
   'Er staat al tekst. Vervangen door het AI-concept?':

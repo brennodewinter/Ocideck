@@ -84,6 +84,9 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'MIAUW-pentestrapport': 'Správa o pentestu MIAUW',
+  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
+      'Úplná štruktúra správy MIAUW: správa dokumentov, rozsah, vykonanie, manažérske zhrnutie, zistenia, kontrolné zoznamy a podpis.',
   'Tekst voorstellen (AI)': 'Navrhnúť text (AI)',
   'Het model gaf geen tekst terug.': 'Model nevrátil žiadny text.',
   'Er staat al tekst. Vervangen door het AI-concept?':

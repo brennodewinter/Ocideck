@@ -84,6 +84,9 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'MIAUW-pentestrapport': 'Доклад за пентест MIAUW',
+  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
+      'Пълна структура на доклада MIAUW: управление на документи, обхват, изпълнение, резюме за ръководството, констатации, контролни списъци и подписване.',
   'Tekst voorstellen (AI)': 'Предложи текст (AI)',
   'Het model gaf geen tekst terug.': 'Моделът не върна текст.',
   'Er staat al tekst. Vervangen door het AI-concept?':

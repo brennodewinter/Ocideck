@@ -1,5 +1,6 @@
 import 'chart.dart';
 import 'cockpit.dart';
+import 'finding_spec.dart';
 import 'question.dart';
 import 'slide.dart';
 import 'timeline.dart';
@@ -12,6 +13,7 @@ part 'deck_template_work_b.dart';
 part 'deck_template_sessions.dart';
 part 'deck_template_briefings.dart';
 part 'deck_template_conversations.dart';
+part 'deck_template_security.dart';
 
 /// A starting-point recipe for a new presentation: a title page plus a set of
 /// example slides the user overwrites with real content. Templates are pure
@@ -36,12 +38,19 @@ class DeckTemplate {
   /// starts with a title slide carrying that title.
   final List<Slide> Function(String deckTitle) buildSlides;
 
+  /// True for templates that only make sense with the "Informatieveiligheid"
+  /// module on (they scaffold module-only slide types like `finding` /
+  /// `scopeMatrix`). The picker hides them until `secModuleRevealProvider` is
+  /// true, so the flat catalogue stays uncluttered for everyone else.
+  final bool requiresSecurityModule;
+
   const DeckTemplate({
     required this.id,
     required this.title,
     required this.description,
     required this.icon,
     required this.buildSlides,
+    this.requiresSecurityModule = false,
   });
 }
 
@@ -428,6 +437,16 @@ final List<DeckTemplate> deckTemplates = [
         'go/no-go checks.',
     icon: 'pplFlightPrep',
     buildSlides: _buildPplFlightPrep,
+  ),
+  DeckTemplate(
+    id: 'miauwReport',
+    title: 'MIAUW-pentestrapport',
+    description:
+        'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, '
+        'managementsamenvatting, bevindingen, checklists en ondertekening.',
+    icon: 'miauwReport',
+    buildSlides: _buildMiauwReport,
+    requiresSecurityModule: true,
   ),
 ];
 

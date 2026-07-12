@@ -616,6 +616,19 @@ Turn it on under **Settings → Uitbreidingen (Extensions)**. Once enabled, the
 security slide types appear in a dedicated *Informatieveiligheid* tab of the
 add-slide picker, and the module's command-palette actions become available.
 
+### Starting from the MIAUW report template
+
+Once the module is on, the new-presentation dialog gains a
+**MIAUW-pentestrapport** template. It scaffolds a complete, MIAUW-conforming
+report in one step: a cover page, the four MIAUW parts as section dividers
+(*Algemeen*, *Plan van aanpak*, *Executie*, *Rapportage*), a document-management
+overview, a sign-off page, a scope matrix, a management summary, a research
+timeline, an example finding, a per-standard checklist and an appendix list.
+Overwrite the placeholders with your own content, then fill the structured
+slides with the wizard and the automation commands below. The template stays
+hidden until the module is enabled, so the catalogue is unchanged for everyone
+else.
+
 ### Security slide types
 
 - **Finding** — one vulnerability, authored as a **group**: a structured header

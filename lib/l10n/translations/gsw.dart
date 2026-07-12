@@ -83,6 +83,9 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'MIAUW-pentestrapport': 'MIAUW-Pentescht-Bricht',
+  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
+      'Vollständigi MIAUW-Bricht-Struktur: Dokumäntverwaltig, Umfang, Durchfüerig, Managemänt-Zämefassig, Befund, Checklischte und Underschrift.',
   'Tekst voorstellen (AI)': 'Text vorschla (KI)',
   'Het model gaf geen tekst terug.': 'S Modäll het kein Text zruggäh.',
   'Er staat al tekst. Vervangen door het AI-concept?':

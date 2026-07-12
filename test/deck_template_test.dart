@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/deck_template.dart';
+import 'package:ocideck/models/finding_spec.dart';
 import 'package:ocideck/models/question.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/timeline.dart';
@@ -424,6 +425,66 @@ void main() {
           reason: id,
         );
       }
+    });
+  });
+
+  group('MIAUW-pentestrapport', () {
+    List<Slide> slides() =>
+        deckTemplateById('miauwReport')!.buildSlides('Pentestrapport');
+
+    test('is registered as a module-only template', () {
+      final template = deckTemplateById('miauwReport')!;
+      expect(template.requiresSecurityModule, isTrue);
+      expect(template.title, 'MIAUW-pentestrapport');
+      expect(slides().first.type, SlideType.title);
+    });
+
+    test('has the four MIAUW report parts as section dividers', () {
+      final sections = slides()
+          .where((s) => s.type == SlideType.section)
+          .map((s) => s.title)
+          .toList();
+      expect(sections, [
+        '1. Algemeen',
+        '2. Plan van aanpak',
+        '3. Executie',
+        '4. Rapportage',
+      ]);
+    });
+
+    test('scaffolds every module-only slide type', () {
+      final types = slides().map((s) => s.type).toSet();
+      expect(
+        types,
+        containsAll([
+          SlideType.signOff,
+          SlideType.scopeMatrix,
+          SlideType.findingsSummary,
+          SlideType.finding,
+          SlideType.checklist,
+        ]),
+      );
+    });
+
+    test('the example finding is a numberable header with a full spec', () {
+      final finding = slides().singleWhere((s) => s.type == SlideType.finding);
+      // Recognised as a finding by the numbering/list services.
+      expect(finding.findingRole, FindingRole.header);
+      final spec = FindingSpec.parse(finding.customMarkdown);
+      expect(spec.heading, 'F-01 · Voorbeeldbevinding');
+      expect(spec.description, isNotEmpty);
+      expect(spec.recommendation, isNotEmpty);
+    });
+
+    test('survives serialize + parse keeping its module slide types', () {
+      final md = MarkdownService();
+      final deck = Deck(title: 'Pentestrapport', slides: slides());
+      final parsed = md.parseDeck(md.generateDeck(deck));
+      expect(parsed, isNotNull);
+      expect(
+        parsed!.slides.map((s) => s.type).toList(),
+        slides().map((s) => s.type).toList(),
+      );
     });
   });
 
