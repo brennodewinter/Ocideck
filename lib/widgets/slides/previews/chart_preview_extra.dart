@@ -479,8 +479,8 @@ extension _ChartPreviewExtra on _ChartPreviewState {
     if (spec.minBound != null && spec.minBound! < minY) minY = spec.minBound!;
     maxY = maxY <= 0 ? 1 : maxY * 1.15;
     if (minY < 0) minY = minY * 1.15;
-    const up = Color(0xFF10B981);
-    const down = Color(0xFFEF4444);
+    const up = AppTheme.success700;
+    const down = AppTheme.danger500;
     final barW = (w * 0.03).clamp(w * 0.01, w * 0.03);
 
     return BarChart(

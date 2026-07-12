@@ -791,7 +791,8 @@ void _waterfallSvg(
     final gx = left + groupW * i + (groupW - barW) / 2;
     final y0 = py(tops[i]);
     final h = py(bottoms[i]) - y0;
-    final fill = deltas[i] >= 0 ? '#10B981' : '#EF4444';
+    // Matches AppTheme.success700 / danger500 used by the live preview.
+    final fill = deltas[i] >= 0 ? '#15803D' : '#EF4444';
     b.write(
       '<rect x="$gx" y="$y0" width="$barW" height="$h" rx="3" fill="$fill"/>',
     );
