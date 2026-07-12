@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/deck_template.dart';
 import '../../models/settings.dart';
+import '../../state/sec_module_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 
@@ -112,6 +113,7 @@ const Map<String, IconData> templatePickerIcons = {
   'pitch': Icons.tips_and_updates_outlined,
   'meetingToGetBuyIn': Icons.how_to_vote_outlined,
   'pplFlightPrep': Icons.flight_takeoff,
+  'miauwReport': Icons.bug_report_outlined,
 };
 
 class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
@@ -133,13 +135,18 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
   /// term in either language finds the template.
   List<DeckTemplate> _filtered(AppLocalizations l10n) {
     final query = _searchCtrl.text.trim().toLowerCase();
+    // Module-only templates (MIAUW) stay hidden until Informatieveiligheid is
+    // provisioned, so the catalogue is unchanged for everyone else.
+    final revealed = ref.watch(secModuleRevealProvider);
+    bool visible(DeckTemplate t) => revealed || !t.requiresSecurityModule;
     bool matches(DeckTemplate t) => [
       l10n.d(t.title),
       l10n.d(t.description),
       t.title,
       t.description,
     ].any((text) => text.toLowerCase().contains(query));
-    final base = query.isEmpty ? deckTemplates : deckTemplates.where(matches);
+    final catalogue = deckTemplates.where(visible);
+    final base = query.isEmpty ? catalogue : catalogue.where(matches);
     return sortTemplatesForDisplay(base, (t) => l10n.d(t.title));
   }
 
