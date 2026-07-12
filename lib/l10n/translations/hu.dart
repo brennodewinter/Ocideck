@@ -1,6 +1,7 @@
 part of '../app_localizations.dart';
 
 const _stringsHu = {
+  'bankLabel': 'Bank',
   'newPresentation': 'Új bemutató',
   'open': 'Megnyitás...',
   'openEllipsis': 'Megnyitás…',

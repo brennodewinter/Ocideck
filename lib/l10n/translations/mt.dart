@@ -1,6 +1,7 @@
 part of '../app_localizations.dart';
 
 const _stringsMt = {
+  'bankLabel': 'Bank',
   'newPresentation': 'Preżentazzjoni ġdida',
   'open': 'Iftaħ...',
   'openEllipsis': 'Iftaħ…',

@@ -732,6 +732,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   behavioural change; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ### Fixed
+- **"Bank" mistranslated on the About page.** The label for the foundation's bank
+  (Triodos) reused the Dutch source word `Bank`, which also labels the cockpit
+  artificial-horizon **roll angle** — so in every non-Dutch language the About
+  page showed the *aviation* translation (e.g. French *Roulis* — "roll"). The
+  financial label now has its own key and reads correctly (*Banque*, *Banco*, …),
+  independent of the cockpit gauge.
 - **Folder pickers that a browser cannot honour are hidden on the web.** In the
   browser there is no file system — decks open from their bytes and every export
   is a download — so choosing a folder has no meaning. Three controls relied on a

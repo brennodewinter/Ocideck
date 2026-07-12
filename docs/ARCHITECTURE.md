@@ -275,6 +275,16 @@ primary map, so a key must never live in both (guarded by
 `test/l10n_duplicate_keys_test.dart`); every `d()`/`t()` string is required in all
 languages by `test/app_localizations_test.dart`.
 
+**Homographs — use `t()`, not `d()`.** Because `d('bron')` keys on the Dutch
+text, a word that spells the same but means different things in different
+contexts collapses to one translation. Reach for a keyed `t('...')` string in
+that case, so each meaning gets its own value. Concrete example: the cockpit
+artificial-horizon roll angle `d('Bank')` (translated as aviation *Roulis /
+Rollen / Alabeo*) and the financial bank on the About page (`t('bankLabel')` →
+*Banque / Banco / …*) — one Dutch word, two meanings, two keys. This is the one
+class the shadowing guard cannot catch, because it is a semantic collision, not a
+data duplicate.
+
 - **Translate or add a string:** edit the relevant language file(s). A test
   (`test/app_localizations_test.dart`) fails unless every literal `d('…')` has a
   translation in *every* language.

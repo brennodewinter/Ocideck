@@ -1,6 +1,7 @@
 part of '../app_localizations.dart';
 
 const _stringsCs = {
+  'bankLabel': 'Banka',
   'newPresentation': 'Nová prezentace',
   'open': 'Otevřít...',
   'openEllipsis': 'Otevřít…',

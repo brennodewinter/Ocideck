@@ -1,6 +1,7 @@
 part of '../app_localizations.dart';
 
 const _stringsTlh = {
+  'bankLabel': 'Huch pa\'',
   'newPresentation': '\'ang chu\'',
   'open': 'poSmoH...',
   'openEllipsis': 'poSmoH…',

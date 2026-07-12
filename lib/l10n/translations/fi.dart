@@ -1,6 +1,7 @@
 part of '../app_localizations.dart';
 
 const _stringsFi = {
+  'bankLabel': 'Pankki',
   'newPresentation': 'Uusi esitys',
   'open': 'Avaa...',
   'openEllipsis': 'Avaa…',
