@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:eb0f6910-11ef-59d8-8b3a-1f7edea22f1d",
+  "serialNumber": "urn:uuid:ffab1d8e-0c22-5719-8763-1376ea0c1316",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-12T15:33:34.560024Z",
+    "timestamp": "2026-07-12T16:09:27.410355Z",
     "tools": {
       "components": [
         {
@@ -5736,11 +5736,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/video_player@2.11.1",
+      "bom-ref": "pkg:pub/video_player@2.12.0",
       "type": "library",
       "name": "video_player",
-      "version": "2.11.1",
-      "purl": "pkg:pub/video_player@2.11.1",
+      "version": "2.12.0",
+      "purl": "pkg:pub/video_player@2.12.0",
       "licenses": [
         {
           "license": {
@@ -5751,13 +5751,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "48a7bdaa38a3d50ec10c78627abdbfad863fdf6f0d6e08c7c3c040cfd80ae36f"
+          "content": "0431179e1a7a2234a1148f64dde63c73167ca23829815169b24cc0bc6b9444a3"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/video_player/versions/2.11.1"
+          "url": "https://pub.dev/packages/video_player/versions/2.12.0"
         }
       ],
       "properties": [
@@ -7092,7 +7092,7 @@
         "pkg:pub/url_launcher@6.3.2",
         "pkg:pub/url_launcher_platform_interface@2.3.2",
         "pkg:pub/uuid@4.5.3",
-        "pkg:pub/video_player@2.11.1",
+        "pkg:pub/video_player@2.12.0",
         "pkg:pub/video_player_platform_interface@6.9.0",
         "pkg:pub/wakelock_plus@1.5.2",
         "pkg:pub/web@1.1.1",

@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-1.0.0+1",
-  "documentNamespace": "https://ocideck.app/spdx/eaafde8c-5a52-5633-8d13-c4b53aacb311",
+  "documentNamespace": "https://ocideck.app/spdx/97b42317-cbfe-5d43-89cc-5d6b4b34ab00",
   "creationInfo": {
-    "created": "2026-07-12T15:33:34.560024Z",
+    "created": "2026-07-12T16:09:27.410355Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -3470,22 +3470,22 @@
     {
       "SPDXID": "SPDXRef-160-video-player",
       "name": "video_player",
-      "versionInfo": "2.11.1",
-      "downloadLocation": "https://pub.dev/packages/video_player/versions/2.11.1",
+      "versionInfo": "2.12.0",
+      "downloadLocation": "https://pub.dev/packages/video_player/versions/2.12.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "48a7bdaa38a3d50ec10c78627abdbfad863fdf6f0d6e08c7c3c040cfd80ae36f"
+          "checksumValue": "0431179e1a7a2234a1148f64dde63c73167ca23829815169b24cc0bc6b9444a3"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/video_player@2.11.1"
+          "referenceLocator": "pkg:pub/video_player@2.12.0"
         }
       ]
     },

@@ -181,7 +181,7 @@ This is **ocideck 1.0.0+1** (licence EUPL-1.2) and every third-party component i
 | vector_graphics_codec _(transitive)_ | 1.1.13 | BSD-3-Clause | `pkg:pub/vector_graphics_codec@1.1.13` |
 | vector_graphics_compiler _(transitive)_ | 1.2.6 | BSD-3-Clause | `pkg:pub/vector_graphics_compiler@1.2.6` |
 | vector_math _(transitive)_ | 2.2.0 | BSD-3-Clause | `pkg:pub/vector_math@2.2.0` |
-| video_player _(direct main)_ | 2.11.1 | BSD-3-Clause | `pkg:pub/video_player@2.11.1` |
+| video_player _(direct main)_ | 2.12.0 | BSD-3-Clause | `pkg:pub/video_player@2.12.0` |
 | video_player_android _(transitive)_ | 2.11.0 | BSD-3-Clause | `pkg:pub/video_player_android@2.11.0` |
 | video_player_avfoundation _(transitive)_ | 2.11.0 | BSD-3-Clause | `pkg:pub/video_player_avfoundation@2.11.0` |
 | video_player_platform_interface _(direct dev)_ | 6.9.0 | BSD-3-Clause | `pkg:pub/video_player_platform_interface@6.9.0` |
