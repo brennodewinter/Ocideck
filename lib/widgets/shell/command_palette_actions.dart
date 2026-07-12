@@ -172,6 +172,20 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
         enabled: enabled,
         onInvoke: () => SealTimestampDialog.show(context, deckNotifier),
       ),
+      PaletteCommand(
+        label: l10n.d('Auditdossier exporteren'),
+        icon: Icons.inventory_2_outlined,
+        keywords: const [
+          'audit',
+          'dossier',
+          'export',
+          'pakket',
+          'bewijs',
+          'verzegel',
+        ],
+        enabled: enabled,
+        onInvoke: () => _exportAuditDossier(context, ref),
+      ),
     ];
   }
 
