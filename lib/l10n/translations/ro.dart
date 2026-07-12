@@ -1788,3 +1788,7 @@ const _dutchSourceRo = {
       'Conținutul diferă de sigiliu — fișierul a fost modificat după finalizare.',
   'Presentatie afgerond en verzegeld.': 'Prezentare finalizată și sigilată.',
 };
+
+const _dutchSourceAddRo = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

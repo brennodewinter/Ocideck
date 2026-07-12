@@ -1772,3 +1772,7 @@ const _dutchSourceHu = {
       'A tartalom eltér a pecséttől — a fájlt a véglegesítés után módosították.',
   'Presentatie afgerond en verzegeld.': 'A bemutató véglegesítve és lezárva.',
 };
+
+const _dutchSourceAddHu = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

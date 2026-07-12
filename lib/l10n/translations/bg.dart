@@ -1791,3 +1791,7 @@ const _dutchSourceBg = {
   'Presentatie afgerond en verzegeld.':
       'Презентацията е финализирана и подпечатана.',
 };
+
+const _dutchSourceAddBg = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

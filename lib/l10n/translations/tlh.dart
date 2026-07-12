@@ -1745,3 +1745,7 @@ const _dutchSourceTlh = {
       'HablI\' rap be\' De\' — rInmoH tlhab teywI\' choHpu\'.',
   'Presentatie afgerond en verzegeld.': 'cha\'nob rInpu\' \'ej SoQpu\'.',
 };
+
+const _dutchSourceAddTlh = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

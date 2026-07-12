@@ -1768,3 +1768,7 @@ const _dutchSourceSv = {
   'Presentatie afgerond en verzegeld.':
       'Presentationen är slutförd och förseglad.',
 };
+
+const _dutchSourceAddSv = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

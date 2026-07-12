@@ -1796,3 +1796,7 @@ const _dutchSourceEl = {
   'Presentatie afgerond en verzegeld.':
       'Η παρουσίαση οριστικοποιήθηκε και σφραγίστηκε.',
 };
+
+const _dutchSourceAddEl = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

@@ -1804,3 +1804,7 @@ const _dutchSourceGa = {
   'Presentatie afgerond en verzegeld.':
       'Cur i láthair curtha i gcrích agus séalaithe.',
 };
+
+const _dutchSourceAddGa = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

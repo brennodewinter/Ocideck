@@ -1775,3 +1775,7 @@ const _dutchSourceHr = {
       'Sadržaj se razlikuje od pečata — datoteka je promijenjena nakon dovršetka.',
   'Presentatie afgerond en verzegeld.': 'Prezentacija dovršena i zapečaćena.',
 };
+
+const _dutchSourceAddHr = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

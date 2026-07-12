@@ -1792,3 +1792,7 @@ const _dutchSourceMt = {
   'Presentatie afgerond en verzegeld.':
       'Il-preżentazzjoni ġiet iffinalizzata u ssiġillata.',
 };
+
+const _dutchSourceAddMt = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

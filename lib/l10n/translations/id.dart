@@ -1768,3 +1768,7 @@ const _dutchSourceId = {
       'Konten berbeda dari segel — berkas diubah setelah finalisasi.',
   'Presentatie afgerond en verzegeld.': 'Presentasi difinalisasi dan disegel.',
 };
+
+const _dutchSourceAddId = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

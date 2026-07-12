@@ -1787,3 +1787,7 @@ const _dutchSourceUk = {
   'Presentatie afgerond en verzegeld.':
       'Презентацію завершено та скріплено печаткою.',
 };
+
+const _dutchSourceAddUk = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

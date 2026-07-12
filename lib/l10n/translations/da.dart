@@ -1768,3 +1768,7 @@ const _dutchSourceDa = {
   'Presentatie afgerond en verzegeld.':
       'Præsentationen er færdiggjort og forseglet.',
 };
+
+const _dutchSourceAddDa = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};
