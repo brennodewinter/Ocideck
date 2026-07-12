@@ -161,8 +161,10 @@ class _EditorToolbar extends StatelessWidget {
 }
 
 /// De editor-kopregel: TYPE- en STIJL-keuze plus de compacte schakelaars voor
-/// hulp, slidekwaliteit en slide-instellingen op één regel. Elke schakelaar
-/// klapt z'n inhoud eronder uit (elk beheert z'n eigen open/dicht-toestand).
+/// hulp en slidekwaliteit op één regel. Elke schakelaar klapt z'n inhoud
+/// eronder uit (elk beheert z'n eigen open/dicht-toestand). De slide-specifieke
+/// instellingen staan niet meer hier maar als inklapbaar blok onder de inhoud
+/// (zie [_SlideSettingsSection]).
 class _EditorHeaderBar extends StatefulWidget {
   final Slide slide;
   final List<ThemeProfile> profiles;
@@ -171,9 +173,6 @@ class _EditorHeaderBar extends StatefulWidget {
   final ValueChanged<SlideType> onTypeChanged;
   final ValueChanged<ThemeProfile> onProfileChanged;
   final VoidCallback onDefaultProfileRequested;
-  final ValueChanged<Slide> onUpdate;
-  final ImageService imageService;
-  final Deck deck;
 
   const _EditorHeaderBar({
     required this.slide,
@@ -183,9 +182,6 @@ class _EditorHeaderBar extends StatefulWidget {
     required this.onTypeChanged,
     required this.onProfileChanged,
     required this.onDefaultProfileRequested,
-    required this.onUpdate,
-    required this.imageService,
-    required this.deck,
   });
 
   @override
@@ -195,7 +191,6 @@ class _EditorHeaderBar extends StatefulWidget {
 class _EditorHeaderBarState extends State<_EditorHeaderBar> {
   bool _helpOpen = false;
   bool _qualityOpen = false;
-  bool _settingsOpen = false;
 
   @override
   Widget build(BuildContext context) {
@@ -221,12 +216,6 @@ class _EditorHeaderBarState extends State<_EditorHeaderBar> {
               open: _qualityOpen,
               onToggle: () => setState(() => _qualityOpen = !_qualityOpen),
             ),
-            const SizedBox(width: 6),
-            _SlideSettingsToggle(
-              slide: widget.slide,
-              open: _settingsOpen,
-              onToggle: () => setState(() => _settingsOpen = !_settingsOpen),
-            ),
           ],
         ),
         if (_helpOpen) ...[
@@ -236,15 +225,6 @@ class _EditorHeaderBarState extends State<_EditorHeaderBar> {
         if (_qualityOpen) ...[
           const Divider(height: 1),
           const SlideQualityPanel(embedded: true),
-        ],
-        if (_settingsOpen) ...[
-          const Divider(height: 1),
-          _SlideSettingsBody(
-            slide: widget.slide,
-            onUpdate: widget.onUpdate,
-            imageService: widget.imageService,
-            deck: widget.deck,
-          ),
         ],
       ],
     );
@@ -535,39 +515,59 @@ class _SlideTlpControl extends StatelessWidget {
 
 // ── Gebundelde slide-instellingen ─────────────────────────────────────────────
 
-/// Compacte "Slide-instellingen"-schakelaar voor de editor-kopregel; de
-/// bijbehorende controls verschijnen via [_SlideSettingsBody]. Een gezette
-/// TLP-markering blijft als badge zichtbaar zonder open te klappen (belangrijk
-/// voor de classificatie), de rest zie je bij het aanklikken.
-class _SlideSettingsToggle extends StatelessWidget {
-  final bool open;
-  final VoidCallback onToggle;
+/// De aanvullende slide-instellingen (audio, logo, footer, tabel, timing, TLP)
+/// als inklapbaar blok onder de type-specifieke editor, boven de notities.
+/// Standaard ingeklapt zodat de editorkolom rustig blijft; een gezette
+/// TLP-markering blijft als badge in de kop zichtbaar (belangrijk voor de
+/// classificatie), de rest zie je bij het uitklappen.
+class _SlideSettingsSection extends StatefulWidget {
   final Slide slide;
+  final ValueChanged<Slide> onUpdate;
+  final ImageService imageService;
+  final Deck deck;
 
-  const _SlideSettingsToggle({
-    required this.open,
-    required this.onToggle,
+  const _SlideSettingsSection({
     required this.slide,
+    required this.onUpdate,
+    required this.imageService,
+    required this.deck,
   });
+
+  @override
+  State<_SlideSettingsSection> createState() => _SlideSettingsSectionState();
+}
+
+class _SlideSettingsSectionState extends State<_SlideSettingsSection> {
+  bool _expanded = false;
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    // Icon-only zodat de vijf items op één regel passen; het label staat in de
-    // tooltip. Een gezette TLP-markering blijft wél als badge zichtbaar.
-    return Tooltip(
-      message: l10n.d('Slide-instellingen'),
-      child: InkWell(
-        onTap: onToggle,
-        borderRadius: BorderRadius.circular(6),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
+    final slide = widget.slide;
+    return Material(
+      color: AppTheme.slate50,
+      child: Theme(
+        data: Theme.of(context).copyWith(dividerColor: AppTheme.slate200),
+        child: ExpansionTile(
+          initiallyExpanded: _expanded,
+          onExpansionChanged: (open) => setState(() => _expanded = open),
+          tilePadding: const EdgeInsets.symmetric(horizontal: 12),
+          childrenPadding: EdgeInsets.zero,
+          leading: Icon(Icons.tune, size: 18, color: AppTheme.slate500),
+          title: Row(
             children: [
-              Icon(Icons.tune, size: 15, color: AppTheme.slate500),
-              if (slide.tlp != TlpLevel.none) ...[
-                const SizedBox(width: 5),
+              Expanded(
+                child: Text(
+                  l10n.d('Slide-instellingen'),
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: AppTheme.slate600,
+                  ),
+                ),
+              ),
+              // Gezette TLP blijft ook ingeklapt zichtbaar als badge.
+              if (slide.tlp != TlpLevel.none)
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 5,
@@ -586,21 +586,24 @@ class _SlideSettingsToggle extends StatelessWidget {
                     ),
                   ),
                 ),
-              ],
-              Icon(
-                open ? Icons.expand_less : Icons.expand_more,
-                size: 15,
-                color: AppTheme.slate500,
-              ),
             ],
           ),
+          children: [
+            const Divider(height: 1),
+            _SlideSettingsBody(
+              slide: slide,
+              onUpdate: widget.onUpdate,
+              imageService: widget.imageService,
+              deck: widget.deck,
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-/// De controls achter de [_SlideSettingsToggle]: audio, logo, footer,
+/// De controls binnen [_SlideSettingsSection]: audio, logo, footer,
 /// tabel-optie, timing en TLP van deze slide.
 class _SlideSettingsBody extends StatelessWidget {
   final Slide slide;
