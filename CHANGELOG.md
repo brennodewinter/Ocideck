@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **One-click audit dossier** — with the Informatieveiligheid module on and a
+  **finalised, sealed** report, the **Auditdossier exporteren** command bundles the
+  whole hand-off into one archive (PENTEST_MIAUW §10.11): the ordinary `.ocideck`
+  package (report `.md` + assets + evidence images) plus an `AUDIT_DOSSIER.md` index
+  that restates the report identity, the seal facts (SHA-512 hash, seal time, RFC
+  3161 timestamp presence + how to verify), the management summary, the MIAUW
+  compliance tally (Voldaan / Openstaand / Uitgesloten) and the evidence SHA1 +
+  SHA-256 hash table. Optionally password-protected with WinZip **AES-256**, so the
+  report, its evidence and the hash tables travel together as one encrypted,
+  auditor-ready file. Localised in all interface languages.
 - **MIAUW report template** — with the Informatieveiligheid module on, the
   new-presentation dialog offers a **MIAUW-pentestrapport** template that
   scaffolds a full MIAUW-conforming report in one step: a cover, the four MIAUW
