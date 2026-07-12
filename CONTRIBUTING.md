@@ -67,10 +67,14 @@ Targeted test groups for focused work:
   that isn't plain Marp belongs in a sidecar (see the file format).
 - **Localization is enforced.** UI strings go through `context.l10n.d('Nederlandse
   brontekst')`. The test `test/app_localizations_test.dart` fails if a literal
-  `.d('…')` string lacks a translation in **every** supported language
-  (Dutch is the source; en/it/de/fr/es/fy/pap need an entry). Add your strings to
-  the matching per-language file in `lib/l10n/translations/` for all languages, or
-  the suite goes red.
+  `.d('…')` string lacks a translation in **every** supported language (Dutch is
+  the source; all 30 other languages need an entry). Rather than hand-editing 30
+  files, write the translations into a small JSON spec and run
+  `make add-l10n SPEC=…` — it inserts them into each language's additions overlay,
+  `dart format`s the result, skips anything already present, and whitelists any
+  `"unchanged"` loanwords (see `tool/add_l10n.dart` for the format). Validate with
+  `make l10n-check`. A loanword kept identical in every language (e.g. `Heatmap`)
+  goes in the spec's `unchanged` list instead of being translated.
 - **Tests**: add or update tests for behaviour you change — especially the
   Markdown round-trip and any file-format change.
 - **File format**: if you change how anything is stored, update
