@@ -36,7 +36,7 @@ class _Harness {
       ),
     );
     await tester.pumpAndSettle();
-    await tester.tap(find.text('open'));
+    await tester.tap(find.widgetWithText(ElevatedButton, 'open'));
     await tester.pumpAndSettle();
   }
 }
@@ -152,7 +152,7 @@ void main() {
     }
   });
 
-  testWidgets('a module-only template is hidden until the module is revealed', (
+  testWidgets('a module-only template is hidden while the module is off', (
     tester,
   ) async {
     final miauw = deckTemplates.firstWhere((t) => t.id == 'miauwReport');
@@ -160,6 +160,12 @@ void main() {
     // Module off (the default) → the MIAUW template is not in the picker.
     await _Harness().open(tester);
     expect(find.text(miauw.title), findsNothing);
+  });
+
+  testWidgets('a module-only template appears once the module is revealed', (
+    tester,
+  ) async {
+    final miauw = deckTemplates.firstWhere((t) => t.id == 'miauwReport');
 
     // Reveal the Informatieveiligheid module → it appears.
     await _Harness(reveal: true).open(tester);
