@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:43d30f3f-f623-54e0-8a7f-dfcfe4b7aa26",
+  "serialNumber": "urn:uuid:eb0f6910-11ef-59d8-8b3a-1f7edea22f1d",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-10T08:11:34.252374Z",
+    "timestamp": "2026-07-12T15:33:34.560024Z",
     "tools": {
       "components": [
         {
@@ -3652,7 +3652,7 @@
         },
         {
           "name": "cdx:pub:scope",
-          "value": "transitive"
+          "value": "direct dev"
         }
       ]
     },
@@ -5479,7 +5479,7 @@
         },
         {
           "name": "cdx:pub:scope",
-          "value": "transitive"
+          "value": "direct dev"
         }
       ]
     },
@@ -7086,9 +7086,11 @@
         "pkg:pub/path@1.9.1",
         "pkg:pub/path_provider@2.1.6",
         "pkg:pub/pdf@3.13.0",
+        "pkg:pub/plugin_platform_interface@2.1.8",
         "pkg:pub/screen_retriever@0.2.2",
         "pkg:pub/shared_preferences@2.5.5",
         "pkg:pub/url_launcher@6.3.2",
+        "pkg:pub/url_launcher_platform_interface@2.3.2",
         "pkg:pub/uuid@4.5.3",
         "pkg:pub/video_player@2.11.1",
         "pkg:pub/video_player_platform_interface@6.9.0",
