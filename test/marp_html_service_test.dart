@@ -158,6 +158,55 @@ void main() {}
     expect(html, isNot(contains('data:font/ttf;base64,')));
   });
 
+  group('per-slide title colour override', () {
+    test('a title override becomes a scoped variable the h1 reads', () async {
+      final service = MarpHtmlService(
+        loadAsset: _diskLoader,
+        loadBytes: _diskBytes,
+      );
+      const theme = ThemeProfile(textColor: '#EEF1F4');
+      final html = await service.build(
+        '# Titel\n<!-- ocideck_title_text_color: #111827 -->',
+        theme: theme,
+      );
+
+      // The section carries the override as a custom property...
+      expect(html, contains('style="--ocideck-title-color:#111827"'));
+      // ...and the h1 rule reads it, falling back to the theme text colour.
+      expect(html, contains('color:var(--ocideck-title-color,#EEF1F4)'));
+    });
+
+    test('a slide without an override gets no title-colour style', () async {
+      final service = MarpHtmlService(
+        loadAsset: _diskLoader,
+        loadBytes: _diskBytes,
+      );
+      final html = await service.build('# Titel', theme: const ThemeProfile());
+
+      // The `:` only appears in the inline style, not the var() reference.
+      expect(html, isNot(contains('--ocideck-title-color:')));
+    });
+
+    test(
+      'a non-hex override value is rejected, so no style is injected',
+      () async {
+        final service = MarpHtmlService(
+          loadAsset: _diskLoader,
+          loadBytes: _diskBytes,
+        );
+        final html = await service.build(
+          '# Titel\n<!-- ocideck_title_text_color: red;} body{display:none -->',
+          theme: const ThemeProfile(),
+        );
+
+        // The value never reaches an active `style` attribute — the raw comment
+        // text survives only inside the inert `<script type="text/markdown">`
+        // payload, never as a `--ocideck-title-color:` declaration on the section.
+        expect(html, isNot(contains('--ocideck-title-color:')));
+      },
+    );
+  });
+
   test('code blocks use the themed code colours in the export CSS', () async {
     final service = MarpHtmlService(
       loadAsset: _diskLoader,

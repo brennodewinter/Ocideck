@@ -763,6 +763,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   behavioural change; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ### Fixed
+- **Per-slide title colour lost in the self-contained HTML export.** A title slide
+  whose title text colour was overridden (the "Titelkleur: Wit/Donker" choice, e.g.
+  a dark title over a light background image) rendered with the theme's default
+  title colour in the standalone HTML export, so a title tuned for its background
+  could vanish. The override now travels into the export as a per-slide CSS
+  variable that the title heading reads, matching the app preview, presenter and
+  PDF/PPTX. Only a strict hex value is accepted, so it cannot break out of the
+  attribute it is written into.
 - **"Bank" mistranslated on the About page.** The label for the foundation's bank
   (Triodos) reused the Dutch source word `Bank`, which also labels the cockpit
   artificial-horizon **roll angle** — so in every non-Dutch language the About
