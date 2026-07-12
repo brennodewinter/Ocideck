@@ -83,6 +83,10 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Tekst voorstellen (AI)': 'Sugerí teksto (IA)',
+  'Het model gaf geen tekst terug.': 'E modelo no a duna teksto bèk.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Tin teksto kaba. Remplasá ku e konsepto IA?',
   'RFC3161-tijdstempel': 'Seyo di tempu RFC3161',
   'Verzegel het deck eerst.': 'Seya e deck promé.',
   'Verzoek (.tsq) exporteren': 'Eksportá petishon (.tsq)',

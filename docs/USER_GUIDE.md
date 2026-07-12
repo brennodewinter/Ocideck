@@ -657,6 +657,19 @@ Adding a **Bevinding** opens a step-by-step wizard instead of a blank slide:
 On finish the wizard inserts the whole finding group in one step. The same CWE
 picker is also available from the finding editor's **Kies CWE…** button.
 
+### AI drafting for finding text (optional)
+
+When the optional AI backend is on, the finding editor shows a **Tekst voorstellen
+(AI)** button under the *Beschrijving*, *Mogelijke impact* and *Aanbeveling*
+fields. It drafts that field with a local model, grounded **only** on your own
+facts for this finding (title, scope object, CVSS, CWE/CVE and the fields you have
+already filled) — and it is forbidden to invent identifiers: any CWE, CVE or CVSS
+id the model emits that is not already in your facts is stripped out
+(PENTEST_MIAUW §16). It is **draft-only**: an AI-drafted field is marked with an
+**AI-concept** badge and **Afronden & verzegelen** stays blocked until you press
+**Nagekeken** on each one, so the truthful-reporting signature always covers
+human-verified text. Off by default; desktop only.
+
 ### MIAUW compliance overview
 
 The **MIAUW-compliance** command (command palette) opens a gap-analysis panel that

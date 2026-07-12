@@ -83,6 +83,10 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Tekst voorstellen (AI)': 'Tekst foarstelle (AI)',
+  'Het model gaf geen tekst terug.': 'It model joech gjin tekst werom.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Der stiet al tekst. Ferfange troch it AI-konsept?',
   'RFC3161-tijdstempel': 'RFC3161-tiidstimpel',
   'Verzegel het deck eerst.': 'Fersegelje earst it deck.',
   'Verzoek (.tsq) exporteren': 'Fersyk (.tsq) eksportearje',

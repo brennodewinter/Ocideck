@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **AI drafting for finding text fields** — with the optional AI backend on, the
+  finding editor shows a **Tekst voorstellen (AI)** button under the description,
+  possible-impact and recommendation fields. It drafts that field with a local
+  model, grounded **only** on the tester's own facts for the finding (title, scope
+  object, CVSS, CWE/CVE and the already-filled fields), and a hard guardrail
+  **strips any CWE/CVE/CVSS identifier the model invents** that is not already in
+  those facts. Draft-only: an AI-drafted field gets an **AI-concept** badge and
+  sealing stays blocked until the tester presses **Nagekeken**, so the EIS 1.6
+  truthful-reporting signature always covers human-verified text (PENTEST_MIAUW
+  §16). Off by default; desktop only. Localised in all interface languages.
 - **RFC 3161 trusted timestamp for the seal** — a finalised, sealed report can now
   be anchored in time. The **RFC3161-tijdstempel** command (command palette)
   **exports a request (`.tsq`)** over the SHA-512 seal hash, which the user has

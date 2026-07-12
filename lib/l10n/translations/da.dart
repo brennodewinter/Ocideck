@@ -83,6 +83,10 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Tekst voorstellen (AI)': 'Foreslå tekst (AI)',
+  'Het model gaf geen tekst terug.': 'Modellen returnerede ingen tekst.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Der er allerede tekst. Erstat med AI-udkastet?',
   'RFC3161-tijdstempel': 'RFC3161-tidsstempel',
   'Verzegel het deck eerst.': 'Forsegl først decket.',
   'Verzoek (.tsq) exporteren': 'Eksportér anmodning (.tsq)',

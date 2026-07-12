@@ -85,6 +85,10 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Tekst voorstellen (AI)': 'Mol téacs (IS)',
+  'Het model gaf geen tekst terug.': 'Níor thug an tsamhail téacs ar ais.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Tá téacs ann cheana. Cuir dréacht IS ina áit?',
   'RFC3161-tijdstempel': 'Stampa ama RFC3161',
   'Verzegel het deck eerst.': 'Séalaigh an deck ar dtús.',
   'Verzoek (.tsq) exporteren': 'Easpórtáil iarratas (.tsq)',

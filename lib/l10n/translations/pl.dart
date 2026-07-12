@@ -85,6 +85,10 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Tekst voorstellen (AI)': 'Zaproponuj tekst (AI)',
+  'Het model gaf geen tekst terug.': 'Model nie zwrócił tekstu.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Tekst już istnieje. Zastąpić go szkicem AI?',
   'RFC3161-tijdstempel': 'Znacznik czasu RFC3161',
   'Verzegel het deck eerst.': 'Najpierw zapieczętuj deck.',
   'Verzoek (.tsq) exporteren': 'Eksportuj żądanie (.tsq)',

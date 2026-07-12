@@ -83,6 +83,10 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Tekst voorstellen (AI)': 'Siūlyti tekstą (DI)',
+  'Het model gaf geen tekst terug.': 'Modelis negrąžino teksto.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Tekstas jau yra. Pakeisti jį DI juodraščiu?',
   'RFC3161-tijdstempel': 'RFC3161 laiko žyma',
   'Verzegel het deck eerst.': 'Pirmiausia užantspauduokite deką.',
   'Verzoek (.tsq) exporteren': 'Eksportuoti užklausą (.tsq)',

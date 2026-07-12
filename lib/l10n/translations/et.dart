@@ -82,6 +82,10 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Tekst voorstellen (AI)': 'Paku teksti (AI)',
+  'Het model gaf geen tekst terug.': 'Mudel ei tagastanud teksti.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Tekst on juba olemas. Kas asendada AI mustandiga?',
   'RFC3161-tijdstempel': 'RFC3161 ajatempel',
   'Verzegel het deck eerst.': 'Pitseerige esmalt deck.',
   'Verzoek (.tsq) exporteren': 'Ekspordi päring (.tsq)',

@@ -83,6 +83,11 @@ const _stringsDe = {
 };
 
 const _dutchSourceDe = {
+  'Tekst voorstellen (AI)': 'Text vorschlagen (KI)',
+  'Het model gaf geen tekst terug.':
+      'Das Modell hat keinen Text zurückgegeben.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Es ist bereits Text vorhanden. Durch den KI-Entwurf ersetzen?',
   'RFC3161-tijdstempel': 'RFC3161-Zeitstempel',
   'Verzegel het deck eerst.': 'Deck zuerst versiegeln.',
   'Verzoek (.tsq) exporteren': 'Anfrage (.tsq) exportieren',

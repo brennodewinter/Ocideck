@@ -84,6 +84,10 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Tekst voorstellen (AI)': 'Sugerează text (IA)',
+  'Het model gaf geen tekst terug.': 'Modelul nu a returnat text.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Există deja text. Îl înlocuiți cu ciorna IA?',
   'RFC3161-tijdstempel': 'Marcaj temporal RFC3161',
   'Verzegel het deck eerst.': 'Sigilează mai întâi deck-ul.',
   'Verzoek (.tsq) exporteren': 'Exportă cererea (.tsq)',

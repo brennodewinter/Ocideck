@@ -83,6 +83,10 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Tekst voorstellen (AI)': 'Predlagaj besedilo (UI)',
+  'Het model gaf geen tekst terug.': 'Model ni vrnil besedila.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Besedilo že obstaja. Ga zamenjati z osnutkom UI?',
   'RFC3161-tijdstempel': 'Časovni žig RFC3161',
   'Verzegel het deck eerst.': 'Najprej zapečatite komplet.',
   'Verzoek (.tsq) exporteren': 'Izvozi zahtevo (.tsq)',

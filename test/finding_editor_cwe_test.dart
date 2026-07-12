@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/finding_spec.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/editors/finding_editor.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// The finding editor's "Kies CWE…" action pulls a weakness from the offline
 /// CWE catalog. It must always set the CWE field but only fill the description /
 /// recommendation when they are still empty — never clobber the tester's text.
 
-Widget _host(Slide slide, void Function(Slide) onUpdate) => MaterialApp(
-  home: Scaffold(
-    body: FindingEditor(slide: slide, onUpdate: onUpdate),
+// The editor now embeds AI-suggest controls (ConsumerWidget reading the settings
+// provider), so it needs a ProviderScope + a mocked SharedPreferences store.
+Widget _host(Slide slide, void Function(Slide) onUpdate) => ProviderScope(
+  child: MaterialApp(
+    home: Scaffold(
+      body: FindingEditor(slide: slide, onUpdate: onUpdate),
+    ),
   ),
 );
 
@@ -37,6 +43,8 @@ Future<void> _pickCwe89(WidgetTester tester) async {
 }
 
 void main() {
+  setUp(() => SharedPreferences.setMockInitialValues({}));
+
   testWidgets('picking a CWE fills the field and an empty description', (
     tester,
   ) async {
@@ -72,5 +80,27 @@ void main() {
     final spec = FindingSpec.parse(updated!.customMarkdown);
     expect(spec.cweId, 89);
     expect(spec.description.trim(), 'Handmatige beschrijving');
+  });
+
+  testWidgets('shows the AI-concept badge for a marked field, no suggest '
+      'button while the AI backend is off', (tester) async {
+    final slide = Slide.create(SlideType.finding)
+        .copyWith(
+          customMarkdown: const FindingSpec(
+            heading: 'F',
+            description: 'x',
+          ).toMarkdown(),
+        )
+        .withAiAssistedField('description', present: true);
+    // A tall surface so the scrolling field list builds the description row.
+    await tester.binding.setSurfaceSize(const Size(1000, 2000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(_host(slide, (_) {}));
+    await tester.pumpAndSettle();
+
+    // AI backend off by default → no "suggest" control (outlined sparkle).
+    expect(find.byIcon(Icons.auto_awesome_outlined), findsNothing);
+    // The marked field still shows its AI-concept badge (filled sparkle).
+    expect(find.byIcon(Icons.auto_awesome), findsOneWidget);
   });
 }

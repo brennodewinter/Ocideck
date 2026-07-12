@@ -84,6 +84,10 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Tekst voorstellen (AI)': 'Navrhnúť text (AI)',
+  'Het model gaf geen tekst terug.': 'Model nevrátil žiadny text.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Text už existuje. Nahradiť ho návrhom AI?',
   'RFC3161-tijdstempel': 'Časová pečiatka RFC3161',
   'Verzegel het deck eerst.': 'Najprv zapečaťte deck.',
   'Verzoek (.tsq) exporteren': 'Exportovať žiadosť (.tsq)',

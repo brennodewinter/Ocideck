@@ -81,6 +81,10 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Tekst voorstellen (AI)': 'ghItlh qaSmoH (IA)',
+  'Het model gaf geen tekst terug.': 'ghItlh tlhobbe\' qorDu\'.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'ghItlh tu\'lu\'. IA qawHaq lo\'laH?',
   'RFC3161-tijdstempel': 'RFC3161 poH degh',
   'Verzegel het deck eerst.': 'wa\'DIch deck rItlh.',
   'Verzoek (.tsq) exporteren': 'tlhob (.tsq) ngeH',

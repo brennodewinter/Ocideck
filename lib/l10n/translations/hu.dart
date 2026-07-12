@@ -83,6 +83,10 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Tekst voorstellen (AI)': 'Szöveg javaslata (AI)',
+  'Het model gaf geen tekst terug.': 'A modell nem adott vissza szöveget.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Már van szöveg. Lecseréli az AI-vázlatra?',
   'RFC3161-tijdstempel': 'RFC3161 időbélyeg',
   'Verzegel het deck eerst.': 'Előbb pecsételje le a decket.',
   'Verzoek (.tsq) exporteren': 'Kérés exportálása (.tsq)',
