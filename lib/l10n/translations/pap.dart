@@ -429,7 +429,6 @@ const _dutchSourcePap = {
   'Importeren via URL': 'Importá for di URL',
   'Ophalen': 'Tuma',
   'Titelpagina': 'Slide di título',
-  'Tussentitel': 'Título di sekshon',
   'Alleen Bullets': 'Solamente bullets',
   'Twee Bulletkolommen': 'Dos kolòm di bullets',
   'Bullets + Afbeelding': 'Bullets + Imágen',
@@ -479,7 +478,6 @@ const _dutchSourcePap = {
   'Verwijder': 'Kita',
   'Citaat': 'Sitá',
   'Auteur': 'Outor',
-  'Achtergrondafbeelding': 'Imágen di fondo',
   'Achtergrondafbeelding (optioneel)': 'Imágen di fondo (opshonal)',
   'Zoom achtergrond': 'Zoom di fondo',
   'Zoom afbeelding': 'Zoom di imágen',
@@ -662,7 +660,6 @@ const _dutchSourcePap = {
   'Naar prullenbak': 'Pa e baki di sushi',
   'Deze presentatie staat ook op een andere plek:':
       'E presentashon aki ta eksistí tambe na otro lugá:',
-  'Opruimen…': 'Limpia…',
   '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
       '"Oci" ta referí na e ocicat, e rasa di pushi di e pushinan di Brenno de Winter. "Deck" ta e palabra ingles pa un set di slide. OciDeck ta transformá teksto simpel den un presentashon kuidá.',
   'Adressen': 'Adresnan',

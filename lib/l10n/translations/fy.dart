@@ -429,7 +429,6 @@ const _dutchSourceFy = {
   'Importeren via URL': 'Ymportearje fan URL',
   'Ophalen': 'Ophelje',
   'Titelpagina': 'Titelslide',
-  'Tussentitel': 'Tuskenkop',
   'Alleen Bullets': 'Allinnich bullets',
   'Twee Bulletkolommen': 'Twa bulletkolommen',
   'Bullets + Afbeelding': 'Bullets + Ofbylding',
@@ -479,7 +478,6 @@ const _dutchSourceFy = {
   'Verwijder': 'Fuortsmite',
   'Citaat': 'Sitaat',
   'Auteur': 'Auteur',
-  'Achtergrondafbeelding': 'Eftergrûnôfbylding',
   'Achtergrondafbeelding (optioneel)': 'Eftergrûnôfbylding (opsjoneel)',
   'Zoom achtergrond': 'Eftergrûn zoom',
   'Zoom afbeelding': 'Ofbylding zoom',
@@ -663,7 +661,6 @@ const _dutchSourceFy = {
   'Naar prullenbak': 'Nei it jiskefet',
   'Deze presentatie staat ook op een andere plek:':
       'Dizze presintaasje stiet ek op in oar plak:',
-  'Opruimen…': 'Opromje…',
   '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
       '"Oci" ferwiist nei de ocicat, it kattenras fan de katten fan Brenno de Winter. "Deck" is it Ingelske wurd foar in diasrige. OciDeck makket fan ienfâldige tekst in fersoarge presintaasje.',
   'Adressen': 'Adressen',
