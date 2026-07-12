@@ -24,6 +24,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `cvss_builder.dart` — CVSS 4.0 Base-metric metadata + vector assembly + `CiaRating`→`CR`/`IR`/`AR` mapping (finding wizard).
 - `cwe_entry.dart` — `CweEntry` for the offline CWE catalog (id/name/description/remediation).
 - `deck.dart` — `Deck` with metadata, TLP classification, slides list, annotations, user notes, and MIAUW waivers.
+- `deck_template_security.dart` — The module-only **MIAUW-pentestrapport** deck template (`_buildMiauwReport`): scaffolds the full MIAUW report structure across the security slide types.
 - `document_signature.dart` — `DocumentSignature`, the reusable visual signature for sign-off and the document seal.
 - `eis_entry.dart` — `EisEntry`/`EisPart`/`EisDerivation`/`EisCheck` for the MIAUW compliance schema.
 - `finding_spec.dart` — `FindingSpec`: the structured content of a `finding` header slide (scope, CVSS, CWE, CVE, sections).
@@ -209,7 +210,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `import_slides_dialog.dart` — Scans directories for presentations to import slides from.
 - `management_summary_dialog.dart` — Shows the derived management summary (severity counts, coverage, standards).
 - `miauw_compliance_panel.dart` — The MIAUW compliance overview panel with per-EIS status and waivers.
-- `new_deck_dialog.dart` — Creates a new presentation with a title.
+- `new_deck_dialog.dart` — Creates a new presentation with a title; the searchable template picker + `templatePickerIcons`, hiding `requiresSecurityModule` templates (MIAUW) until the module is revealed.
 - `open_presentation_dialog.dart` — Full-text searchable presentation picker with directory scanning.
 - `package_encrypt_dialog.dart` — Optional password protection when exporting a package: strength meter, generator, copy.
 - `package_password_dialog.dart` — Prompts for the password when opening an encrypted package (with wrong-password retry).

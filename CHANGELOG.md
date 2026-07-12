@@ -8,6 +8,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **MIAUW report template** — with the Informatieveiligheid module on, the
+  new-presentation dialog offers a **MIAUW-pentestrapport** template that
+  scaffolds a full MIAUW-conforming report in one step: a cover, the four MIAUW
+  parts as section dividers (*Algemeen*, *Plan van aanpak*, *Executie*,
+  *Rapportage*), a document-management overview, a sign-off page, a scope matrix,
+  a management summary, a research timeline, an example finding, a per-standard
+  checklist and an appendix list. The template stays hidden until the module is
+  revealed, so the catalogue is unchanged for everyone else (PENTEST_MIAUW §4.1).
+  Localised in all interface languages.
 - **AI drafting for finding text fields** — with the optional AI backend on, the
   finding editor shows a **Tekst voorstellen (AI)** button under the description,
   possible-impact and recommendation fields. It drafts that field with a local
