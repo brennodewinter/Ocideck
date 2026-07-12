@@ -88,9 +88,12 @@ const _dutchSourceEn = {
   'Vlak': 'Area',
   'Horizontale staaf': 'Horizontal bar',
   'Waterval': 'Waterfall',
-  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Last series as a line on a second axis; the rest as bars.',
-  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'First series: each value is an up or down step on the running total.',
-  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Series = row, column = label, the cell colour follows the value. Label the axes likelihood and impact for a risk matrix.',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Last series as a line on a second axis; the rest as bars.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'First series: each value is an up or down step on the running total.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'Series = row, column = label, the cell colour follows the value. Label the axes likelihood and impact for a risk matrix.',
   'Auditdossier exporteren': 'Export audit dossier',
   'Finaliseer en verzegel het rapport eerst.':
       'Finalise and seal the report first.',

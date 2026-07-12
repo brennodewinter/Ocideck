@@ -88,9 +88,12 @@ const _dutchSourceEl = {
   'Vlak': 'Περιοχή',
   'Horizontale staaf': 'Οριζόντιες ράβδοι',
   'Waterval': 'Καταρράκτης',
-  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Τελευταία σειρά ως γραμμή σε δεύτερο άξονα· οι υπόλοιπες ως ράβδοι.',
-  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'Πρώτη σειρά: κάθε τιμή είναι ένα βήμα πάνω ή κάτω στο τρέχον σύνολο.',
-  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Σειρά = γραμμή, στήλη = ετικέτα, το χρώμα του κελιού ακολουθεί την τιμή. Ονομάστε τους άξονες πιθανότητα και επίπτωση για μητρώο κινδύνου.',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Τελευταία σειρά ως γραμμή σε δεύτερο άξονα· οι υπόλοιπες ως ράβδοι.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'Πρώτη σειρά: κάθε τιμή είναι ένα βήμα πάνω ή κάτω στο τρέχον σύνολο.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'Σειρά = γραμμή, στήλη = ετικέτα, το χρώμα του κελιού ακολουθεί την τιμή. Ονομάστε τους άξονες πιθανότητα και επίπτωση για μητρώο κινδύνου.',
   'Auditdossier exporteren': 'Εξαγωγή φακέλου ελέγχου',
   'Finaliseer en verzegel het rapport eerst.':
       'Οριστικοποιήστε και σφραγίστε πρώτα την αναφορά.',

@@ -88,9 +88,12 @@ const _dutchSourceFy = {
   'Vlak': 'Flak',
   'Horizontale staaf': 'Horizontale steaf',
   'Waterval': 'Wetterfal',
-  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Lêste searje as line op in twadde as; de rest as staven.',
-  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'Earste searje: elke wearde is in stap omheech of omleech op it rinnende totaal.',
-  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Searje = rige, kolom = label, de selkleur folget de wearde. Label de assen kâns en ynfloed foar in risikomatriks.',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Lêste searje as line op in twadde as; de rest as staven.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'Earste searje: elke wearde is in stap omheech of omleech op it rinnende totaal.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'Searje = rige, kolom = label, de selkleur folget de wearde. Label de assen kâns en ynfloed foar in risikomatriks.',
   'Auditdossier exporteren': 'Auditdossier eksportearje',
   'Finaliseer en verzegel het rapport eerst.':
       'Finalisearje en fersegelje earst it rapport.',

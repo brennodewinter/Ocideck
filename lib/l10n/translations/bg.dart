@@ -89,9 +89,12 @@ const _dutchSourceBg = {
   'Vlak': 'Площна',
   'Horizontale staaf': 'Хоризонтална стълбовидна',
   'Waterval': 'Каскадна',
-  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Последната серия като линия на втора ос; останалите като стълбове.',
-  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'Първа серия: всяка стойност е стъпка нагоре или надолу спрямо текущата сума.',
-  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Серия = ред, колона = етикет, цветът на клетката следва стойността. Обозначете осите като вероятност и въздействие за матрица на риска.',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Последната серия като линия на втора ос; останалите като стълбове.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'Първа серия: всяка стойност е стъпка нагоре или надолу спрямо текущата сума.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'Серия = ред, колона = етикет, цветът на клетката следва стойността. Обозначете осите като вероятност и въздействие за матрица на риска.',
   'Auditdossier exporteren': 'Експортиране на одитно досие',
   'Finaliseer en verzegel het rapport eerst.':
       'Първо финализирайте и запечатайте доклада.',

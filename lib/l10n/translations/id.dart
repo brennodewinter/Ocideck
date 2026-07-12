@@ -88,9 +88,12 @@ const _dutchSourceId = {
   'Vlak': 'Area',
   'Horizontale staaf': 'Batang horizontal',
   'Waterval': 'Air terjun',
-  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Seri terakhir sebagai garis pada sumbu kedua; sisanya sebagai batang.',
-  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'Seri pertama: setiap nilai adalah langkah naik atau turun pada total berjalan.',
-  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Seri = baris, kolom = label, warna sel mengikuti nilai. Beri label sumbu sebagai kemungkinan dan dampak untuk matriks risiko.',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Seri terakhir sebagai garis pada sumbu kedua; sisanya sebagai batang.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'Seri pertama: setiap nilai adalah langkah naik atau turun pada total berjalan.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'Seri = baris, kolom = label, warna sel mengikuti nilai. Beri label sumbu sebagai kemungkinan dan dampak untuk matriks risiko.',
   'Auditdossier exporteren': 'Ekspor dosir audit',
   'Finaliseer en verzegel het rapport eerst.':
       'Finalkan dan segel laporan terlebih dahulu.',

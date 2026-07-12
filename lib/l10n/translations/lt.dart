@@ -88,9 +88,12 @@ const _dutchSourceLt = {
   'Vlak': 'Ploto',
   'Horizontale staaf': 'Horizontali stulpelinė',
   'Waterval': 'Krioklio',
-  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Paskutinė serija kaip linija antroje ašyje; kitos kaip stulpeliai.',
-  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'Pirma serija: kiekviena reikšmė yra žingsnis aukštyn arba žemyn nuo einamosios sumos.',
-  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Serija = eilutė, stulpelis = etiketė, langelio spalva atitinka reikšmę. Pažymėkite ašis kaip tikimybę ir poveikį rizikos matricai.',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Paskutinė serija kaip linija antroje ašyje; kitos kaip stulpeliai.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'Pirma serija: kiekviena reikšmė yra žingsnis aukštyn arba žemyn nuo einamosios sumos.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'Serija = eilutė, stulpelis = etiketė, langelio spalva atitinka reikšmę. Pažymėkite ašis kaip tikimybę ir poveikį rizikos matricai.',
   'Auditdossier exporteren': 'Eksportuoti audito bylą',
   'Finaliseer en verzegel het rapport eerst.':
       'Pirmiausia užbaikite ir užantspauduokite ataskaitą.',

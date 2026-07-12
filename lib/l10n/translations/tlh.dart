@@ -86,9 +86,12 @@ const _dutchSourceTlh = {
   'Vlak': 'Sep',
   'Horizontale staaf': 'SIrgh SaS',
   'Waterval': 'bIQtIq',
-  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Qav tetlh tlhegh rur; latlh tetlh SIrgh rur.',
-  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'wa\'DIch tetlh: Hoch mI\' San tlheghqa\' law\' pagh puS.',
-  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'tetlh \'ep; per HebtIn; San mI\' bopbogh rItlh. San matrix DaneHchugh, \'e\' DaHar \'ej Dochmey DaghurmoH.',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Qav tetlh tlhegh rur; latlh tetlh SIrgh rur.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'wa\'DIch tetlh: Hoch mI\' San tlheghqa\' law\' pagh puS.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'tetlh \'ep; per HebtIn; San mI\' bopbogh rItlh. San matrix DaneHchugh, \'e\' DaHar \'ej Dochmey DaghurmoH.',
   'Auditdossier exporteren': 'qonta\' ghItlh pop ngeH',
   'Finaliseer en verzegel het rapport eerst.':
       'wa\'DIch ghItlh rInmoH \'ej Segh.',

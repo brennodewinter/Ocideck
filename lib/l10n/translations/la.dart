@@ -90,9 +90,12 @@ const _dutchSourceLa = {
   'Vlak': 'Area',
   'Horizontale staaf': 'Columnae horizontales',
   'Waterval': 'Cataracta',
-  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Ultima series ut linea in altero axe; ceterae ut columnae.',
-  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'Prima series: quisque valor gradus sursum aut deorsum in summa currente est.',
-  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Series = ordo, columna = titulus, color cellae valorem sequitur. Axes probabilitate et impetu inscribe ad matricem periculi.',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Ultima series ut linea in altero axe; ceterae ut columnae.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'Prima series: quisque valor gradus sursum aut deorsum in summa currente est.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'Series = ordo, columna = titulus, color cellae valorem sequitur. Axes probabilitate et impetu inscribe ad matricem periculi.',
   'Auditdossier exporteren': 'Fasciculum auditus exportare',
   'Finaliseer en verzegel het rapport eerst.':
       'Prius relationem consumma et obsigna.',

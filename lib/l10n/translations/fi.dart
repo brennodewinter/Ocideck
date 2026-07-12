@@ -88,9 +88,12 @@ const _dutchSourceFi = {
   'Vlak': 'Alue',
   'Horizontale staaf': 'Vaakapylväs',
   'Waterval': 'Vesiputous',
-  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Viimeinen sarja viivana toisella akselilla; muut pylväinä.',
-  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'Ensimmäinen sarja: jokainen arvo on askel ylös tai alas juoksevassa summassa.',
-  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Sarja = rivi, sarake = otsikko, solun väri seuraa arvoa. Nimeä akselit todennäköisyydeksi ja vaikutukseksi riskimatriisia varten.',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Viimeinen sarja viivana toisella akselilla; muut pylväinä.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'Ensimmäinen sarja: jokainen arvo on askel ylös tai alas juoksevassa summassa.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'Sarja = rivi, sarake = otsikko, solun väri seuraa arvoa. Nimeä akselit todennäköisyydeksi ja vaikutukseksi riskimatriisia varten.',
   'Auditdossier exporteren': 'Vie auditointikansio',
   'Finaliseer en verzegel het rapport eerst.':
       'Viimeistele ja sinetöi raportti ensin.',

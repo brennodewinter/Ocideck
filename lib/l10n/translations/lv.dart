@@ -88,9 +88,12 @@ const _dutchSourceLv = {
   'Vlak': 'Laukuma',
   'Horizontale staaf': 'Horizontāls stabiņu',
   'Waterval': 'Ūdenskrituma',
-  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Pēdējā sērija kā līnija uz otras ass; pārējās kā stabiņi.',
-  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'Pirmā sērija: katra vērtība ir solis uz augšu vai leju no tekošās summas.',
-  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Sērija = rinda, kolonna = etiķete, šūnas krāsa seko vērtībai. Apzīmējiet asis kā varbūtību un ietekmi riska matricai.',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Pēdējā sērija kā līnija uz otras ass; pārējās kā stabiņi.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'Pirmā sērija: katra vērtība ir solis uz augšu vai leju no tekošās summas.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'Sērija = rinda, kolonna = etiķete, šūnas krāsa seko vērtībai. Apzīmējiet asis kā varbūtību un ietekmi riska matricai.',
   'Auditdossier exporteren': 'Eksportēt audita dokumentāciju',
   'Finaliseer en verzegel het rapport eerst.':
       'Vispirms pabeidziet un aizzīmogojiet ziņojumu.',

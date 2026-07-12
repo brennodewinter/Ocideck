@@ -87,9 +87,12 @@ const _dutchSourceEt = {
   'Vlak': 'Pindala',
   'Horizontale staaf': 'Horisontaalne tulp',
   'Waterval': 'Juga',
-  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Viimane seeria joonena teisel teljel; ülejäänud tulpadena.',
-  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'Esimene seeria: iga väärtus on samm üles või alla jooksval summal.',
-  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Seeria = rida, veerg = silt, lahtri värv järgib väärtust. Märgista teljed tõenäosuse ja mõjuna riskimaatriksi jaoks.',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Viimane seeria joonena teisel teljel; ülejäänud tulpadena.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'Esimene seeria: iga väärtus on samm üles või alla jooksval summal.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'Seeria = rida, veerg = silt, lahtri värv järgib väärtust. Märgista teljed tõenäosuse ja mõjuna riskimaatriksi jaoks.',
   'Auditdossier exporteren': 'Ekspordi auditidokumentatsioon',
   'Finaliseer en verzegel het rapport eerst.':
       'Esmalt vormista ja pitseeri aruanne.',

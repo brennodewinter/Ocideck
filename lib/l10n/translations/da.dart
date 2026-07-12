@@ -88,9 +88,12 @@ const _dutchSourceDa = {
   'Vlak': 'Areal',
   'Horizontale staaf': 'Vandret søjle',
   'Waterval': 'Vandfald',
-  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Sidste serie som linje på en anden akse; resten som søjler.',
-  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'Første serie: hver værdi er et trin op eller ned på den løbende sum.',
-  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Serie = række, kolonne = etiket, cellefarven følger værdien. Navngiv akserne sandsynlighed og konsekvens for en risikomatrix.',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Sidste serie som linje på en anden akse; resten som søjler.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'Første serie: hver værdi er et trin op eller ned på den løbende sum.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'Serie = række, kolonne = etiket, cellefarven følger værdien. Navngiv akserne sandsynlighed og konsekvens for en risikomatrix.',
   'Auditdossier exporteren': 'Eksportér revisionsdossier',
   'Finaliseer en verzegel het rapport eerst.':
       'Færdiggør og forsegl først rapporten.',
