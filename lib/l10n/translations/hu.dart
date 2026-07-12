@@ -84,6 +84,8 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Túl kicsi a kontraszt a háttérrel — olvashatatlan lehet.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Terület',
   'Horizontale staaf': 'Vízszintes oszlop',

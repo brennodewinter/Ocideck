@@ -84,6 +84,8 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'For lidt kontrast til baggrunden — kan være ulæseligt.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Areal',
   'Horizontale staaf': 'Vandret søjle',

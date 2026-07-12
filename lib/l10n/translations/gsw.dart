@@ -84,6 +84,8 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Z wenig Kontrast zum Hindergrund — villicht unläsbar.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Flächä',
   'Horizontale staaf': 'Horizontali Balke',

@@ -85,6 +85,8 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Contrast prea mic cu fundalul — poate fi ilizibil.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Suprafață',
   'Horizontale staaf': 'Bare orizontale',

@@ -84,6 +84,8 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Kontras dengan latar terlalu rendah — mungkin tak terbaca.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Batang horizontal',

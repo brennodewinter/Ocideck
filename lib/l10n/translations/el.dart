@@ -84,6 +84,8 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Πολύ μικρή αντίθεση με το φόντο — ίσως δυσανάγνωστο.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Περιοχή',
   'Horizontale staaf': 'Οριζόντιες ράβδοι',

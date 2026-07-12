@@ -84,6 +84,8 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Premalo kontrasta z ozadjem — morda neberljivo.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Površinski',
   'Horizontale staaf': 'Vodoravni stolpci',

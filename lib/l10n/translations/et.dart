@@ -83,6 +83,8 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Liiga väike kontrast taustaga — võib olla loetamatu.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Pindala',
   'Horizontale staaf': 'Horisontaalne tulp',

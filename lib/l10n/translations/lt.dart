@@ -84,6 +84,8 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Per mažas kontrastas su fonu — gali būti neįskaitoma.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Ploto',
   'Horizontale staaf': 'Horizontali stulpelinė',
