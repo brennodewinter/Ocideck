@@ -57,12 +57,15 @@ void main() {
   ) async {
     await pump(tester, tlp: TlpLevel.none);
 
-    final settingsToggle = find.byTooltip(_l10n.d('Slide-instellingen'));
+    // De instellingen zitten nu als inklapbaar blok onder de inhoud; de kop
+    // toont het label 'Slide-instellingen'.
+    final settingsToggle = find.text(_l10n.d('Slide-instellingen'));
     expect(settingsToggle, findsOneWidget);
     // Collapsed: the individual controls are not built yet.
     expect(find.text(_l10n.d('Automatisch doorgaan na')), findsNothing);
     expect(find.text(_l10n.d('TLP van deze slide')), findsNothing);
 
+    await tester.ensureVisible(settingsToggle);
     await tester.tap(settingsToggle);
     await tester.pumpAndSettle();
 

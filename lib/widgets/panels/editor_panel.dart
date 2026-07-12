@@ -85,9 +85,6 @@ class EditorPanel extends ConsumerWidget {
                 deckNotifier.updateThemeProfile(profile),
             onDefaultProfileRequested: () =>
                 deckNotifier.updateThemeProfile(settings.themeProfile),
-            onUpdate: update,
-            imageService: imgService,
-            deck: deck,
           ),
           const Divider(height: 1),
           Expanded(
@@ -127,6 +124,8 @@ class EditorPanel extends ConsumerWidget {
                   slide: slide,
                   update: update,
                   deckNotifier: deckNotifier,
+                  imageService: imgService,
+                  deck: deck,
                   richTextPage: richTextPage,
                   richTextPages: richTextPages,
                   multiPageNotes: multiPageNotes,
@@ -139,21 +138,30 @@ class EditorPanel extends ConsumerWidget {
     );
   }
 
-  /// De controls onder de type-specifieke editor (audio, logo, footer, tabel,
-  /// timing, TLP, notities). Losgetrokken uit [build] om die binnen de
-  /// lengtegrens te houden.
+  /// De controls onder de type-specifieke editor: eerst het inklapbare blok met
+  /// slide-instellingen (audio, logo, footer, tabel, timing, TLP), daarna de
+  /// notitievelden. Losgetrokken uit [build] om die binnen de lengtegrens te
+  /// houden.
   List<Widget> _belowEditorControls({
     required Slide slide,
     required ValueChanged<Slide> update,
     required DeckNotifier deckNotifier,
+    required ImageService imageService,
+    required Deck deck,
     required int richTextPage,
     required int richTextPages,
     required bool multiPageNotes,
   }) {
-    // De secundaire controls (audio, logo, footer, timing, TLP) zitten nu achter
-    // de "Slide-instellingen"-schakelaar in de kopregel; hier alleen de
-    // notitievelden.
+    // Volgorde: eerst de slide-specifieke inhoud (hierboven, via _buildEditor),
+    // dan de aanvullende instellingen als inklapbaar blok, dan de notities.
     return [
+      const Divider(height: 1),
+      _SlideSettingsSection(
+        slide: slide,
+        onUpdate: update,
+        imageService: imageService,
+        deck: deck,
+      ),
       const Divider(height: 1),
       _NotesField(
         slide: slide,
