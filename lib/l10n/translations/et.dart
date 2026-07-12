@@ -82,6 +82,11 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Auditdossier exporteren': 'Ekspordi auditidokumentatsioon',
+  'Finaliseer en verzegel het rapport eerst.':
+      'Esmalt vormista ja pitseeri aruanne.',
+  'Auditdossier geëxporteerd naar:':
+      'Auditidokumentatsioon eksporditi asukohta:',
   'MIAUW-pentestrapport': 'MIAUW pentesti aruanne',
   'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
       'Täielik MIAUW aruande struktuur: dokumendihaldus, ulatus, teostus, juhtkonna kokkuvõte, leiud, kontroll-loendid ja allkiri.',

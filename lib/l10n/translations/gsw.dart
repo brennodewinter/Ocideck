@@ -83,6 +83,10 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Auditdossier exporteren': 'Audit-Dossier exportiere',
+  'Finaliseer en verzegel het rapport eerst.':
+      'Finalisier und versigle zerscht de Bricht.',
+  'Auditdossier geëxporteerd naar:': 'Audit-Dossier exportiert nach:',
   'MIAUW-pentestrapport': 'MIAUW-Pentescht-Bricht',
   'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
       'Vollständigi MIAUW-Bricht-Struktur: Dokumäntverwaltig, Umfang, Durchfüerig, Managemänt-Zämefassig, Befund, Checklischte und Underschrift.',

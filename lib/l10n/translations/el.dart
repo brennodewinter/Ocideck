@@ -83,6 +83,10 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Auditdossier exporteren': 'Εξαγωγή φακέλου ελέγχου',
+  'Finaliseer en verzegel het rapport eerst.':
+      'Οριστικοποιήστε και σφραγίστε πρώτα την αναφορά.',
+  'Auditdossier geëxporteerd naar:': 'Ο φάκελος ελέγχου εξήχθη σε:',
   'MIAUW-pentestrapport': 'Αναφορά pentest MIAUW',
   'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
       'Πλήρης δομή αναφοράς MIAUW: διαχείριση εγγράφων, εύρος, εκτέλεση, σύνοψη διοίκησης, ευρήματα, λίστες ελέγχου και υπογραφή.',

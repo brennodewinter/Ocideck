@@ -728,6 +728,25 @@ This keeps OciDeck a *producer of hashes* — it never has to contact the TSA it
 The stored token is verified again every time the deck opens, so a "timestamped on
 …" or "does not match" status is always shown (PENTEST_MIAUW §8-A2).
 
+### One-click audit dossier
+
+The **Auditdossier exporteren** command bundles a delivered report into a single
+hand-off archive (PENTEST_MIAUW §10.11). It only runs once the report is
+**finalised and sealed**; otherwise it asks you to finalise first. The dossier is
+an ordinary `.ocideck` package — the report source (`.md`) with all its assets and
+evidence images — plus an `AUDIT_DOSSIER.md` index that restates, in one place:
+
+- the report identity (title, author, organisation, version, date, TLP);
+- the seal facts — finalised state, SHA-512 seal hash, seal time, and whether an
+  RFC 3161 timestamp is attached — with a short note on how to verify integrity;
+- the management summary (findings per severity, scope coverage, standards used);
+- the MIAUW compliance tally (Voldaan / Openstaand / Uitgesloten);
+- the evidence hash table (SHA1 + SHA-256 per evidence image).
+
+Like the normal package export, you can protect the whole dossier with a password
+(WinZip **AES-256**), so the report, its evidence and the hash tables travel
+together as one encrypted, auditor-ready file.
+
 ### Security theme
 
 A built-in **Security** theme profile ships a clean, professional report look and

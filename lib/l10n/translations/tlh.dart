@@ -81,6 +81,10 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Auditdossier exporteren': 'qonta\' ghItlh pop ngeH',
+  'Finaliseer en verzegel het rapport eerst.':
+      'wa\'DIch ghItlh rInmoH \'ej Segh.',
+  'Auditdossier geëxporteerd naar:': 'qonta\' ghItlh pop ngeHta\' Daq:',
   'MIAUW-pentestrapport': 'MIAUW pentest ghItlh',
   'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
       'naQ MIAUW ghItlh Segh: De\' vu\'wI\', ghoS, ta\', che\'wI\' boQ, tu\'lu\'bogh, tetlh, je qID.',

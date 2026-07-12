@@ -85,6 +85,10 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Auditdossier exporteren': 'Fasciculum auditus exportare',
+  'Finaliseer en verzegel het rapport eerst.':
+      'Prius relationem consumma et obsigna.',
+  'Auditdossier geëxporteerd naar:': 'Fasciculus auditus exportatus ad:',
   'MIAUW-pentestrapport': 'Relatio pentesti MIAUW',
   'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
       'Plena structura relationis MIAUW: administratio documentorum, ambitus, executio, summarium moderatorium, inventa, indices et subscriptio.',

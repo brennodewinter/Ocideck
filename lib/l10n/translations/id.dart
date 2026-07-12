@@ -83,6 +83,10 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Auditdossier exporteren': 'Ekspor dosir audit',
+  'Finaliseer en verzegel het rapport eerst.':
+      'Finalkan dan segel laporan terlebih dahulu.',
+  'Auditdossier geëxporteerd naar:': 'Dosir audit diekspor ke:',
   'MIAUW-pentestrapport': 'Laporan pentest MIAUW',
   'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
       'Struktur laporan MIAUW lengkap: manajemen dokumen, ruang lingkup, eksekusi, ringkasan manajemen, temuan, daftar periksa, dan penandatanganan.',

@@ -84,6 +84,10 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Auditdossier exporteren': 'Експортувати аудиторське досьє',
+  'Finaliseer en verzegel het rapport eerst.':
+      'Спершу завершіть і опечатайте звіт.',
+  'Auditdossier geëxporteerd naar:': 'Аудиторське досьє експортовано до:',
   'MIAUW-pentestrapport': 'Звіт про пентест MIAUW',
   'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
       'Повна структура звіту MIAUW: керування документами, обсяг, виконання, резюме для керівництва, результати, контрольні списки та підписання.',

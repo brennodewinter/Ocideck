@@ -84,6 +84,10 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Auditdossier exporteren': 'Експортиране на одитно досие',
+  'Finaliseer en verzegel het rapport eerst.':
+      'Първо финализирайте и запечатайте доклада.',
+  'Auditdossier geëxporteerd naar:': 'Одитното досие е експортирано в:',
   'MIAUW-pentestrapport': 'Доклад за пентест MIAUW',
   'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
       'Пълна структура на доклада MIAUW: управление на документи, обхват, изпълнение, резюме за ръководството, констатации, контролни списъци и подписване.',

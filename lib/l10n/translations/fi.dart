@@ -83,6 +83,10 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Auditdossier exporteren': 'Vie auditointikansio',
+  'Finaliseer en verzegel het rapport eerst.':
+      'Viimeistele ja sinetöi raportti ensin.',
+  'Auditdossier geëxporteerd naar:': 'Auditointikansio viety kohteeseen:',
   'MIAUW-pentestrapport': 'MIAUW-tunkeutumistestiraportti',
   'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
       'Täydellinen MIAUW-raportin rakenne: dokumenttien hallinta, laajuus, toteutus, johdon yhteenveto, havainnot, tarkistuslistat ja allekirjoitus.',

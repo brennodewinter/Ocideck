@@ -49,6 +49,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `ai_request.dart` — `AiChatRequest`/`AiMessage`/`AiImagePart` request model + the shared system guardrail prompt.
 - `ai_security_gate.dart` — Enforces the AI opt-in/consent/endpoint gate before any outbound AI call.
 - `annotation_codec.dart` — Serializes slide annotation layers with content fingerprints.
+- `audit_dossier.dart` — `buildAuditDossier`: the MIAUW §10.11 audit-dossier index (report identity, seal facts, summary, compliance tally, evidence hash table) as deterministic Markdown.
 - `caption_service.dart` — Stores image captions in JSON sidecars per image directory.
 - `classification_enforcement_policy.dart` — Enforces deck TLP classification rules on export (the authoritative gate).
 - `classification_policy.dart` — Thin backward-compatible wrapper around the TLP export ceiling only.
@@ -59,7 +60,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `evidence_hash_service.dart` — Computes the MIAUW SHA1 + SHA-256 of evidence bytes and builds the appendix hash table.
 - `export_metadata.dart` — `ExportDocumentMetadata` stamped into PDF/PPTX/HTML (title, author, org, keywords, TLP).
 - `export_service.dart` — The single chokepoint that renders decks to PDF, PPTX, and HTML.
-- `file_service.dart` — Scans presentation files, opens decks (with the safety gate), and import/URL/package IO.
+- `file_service.dart` — Scans presentation files, opens decks (with the safety gate), and import/URL/package IO. Part `parts/file_service_dossier.dart` builds the one-click audit dossier (package + `AUDIT_DOSSIER.md` + optional `report.pdf`, AES-256).
 - `finding_ai_service.dart` — Drafts a free-text finding field via the AI backend, grounded on the tester's facts; strips fabricated CWE/CVE/CVSS ids.
 - `finding_group_builder.dart` — `buildFindingGroup`: assembles a finding header + optional detail/evidence slides sharing one id.
 - `finding_numbering.dart` — `renumberFindings` (F-01… from deck order) + `deckFindingList` derivation.

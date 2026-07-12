@@ -85,6 +85,10 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Auditdossier exporteren': 'Easpórtáil dálach iniúchta',
+  'Finaliseer en verzegel het rapport eerst.':
+      'Cuir bailchríoch agus séala ar an tuairisc ar dtús.',
+  'Auditdossier geëxporteerd naar:': 'Easpórtáladh an dálach iniúchta go:',
   'MIAUW-pentestrapport': 'Tuairisc pentest MIAUW',
   'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
       'Struchtúr iomlán tuairisce MIAUW: bainistíocht doiciméad, scóip, forghníomhú, achoimre bhainistíochta, torthaí, seicliostaí agus síniú.',

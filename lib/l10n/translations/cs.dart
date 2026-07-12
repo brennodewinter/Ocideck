@@ -84,6 +84,10 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Auditdossier exporteren': 'Exportovat auditní dokumentaci',
+  'Finaliseer en verzegel het rapport eerst.':
+      'Nejprve dokončete a zapečeťte zprávu.',
+  'Auditdossier geëxporteerd naar:': 'Auditní dokumentace exportována do:',
   'MIAUW-pentestrapport': 'Zpráva o pentestu MIAUW',
   'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
       'Úplná struktura zprávy MIAUW: správa dokumentů, rozsah, provedení, manažerské shrnutí, zjištění, kontrolní seznamy a podpis.',

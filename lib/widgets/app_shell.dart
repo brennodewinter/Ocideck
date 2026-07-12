@@ -17,6 +17,7 @@ import '../models/settings.dart' show AppSettings;
 import '../models/slide.dart';
 import '../models/slide_quality.dart';
 import '../models/webdav_settings.dart';
+import '../services/audit_dossier.dart';
 import '../services/caption_service.dart';
 import '../services/description_service.dart';
 import '../services/classification_enforcement_policy.dart';

@@ -83,6 +83,10 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'Auditdossier exporteren': 'Export audit dossier',
+  'Finaliseer en verzegel het rapport eerst.':
+      'Finalise and seal the report first.',
+  'Auditdossier geëxporteerd naar:': 'Audit dossier exported to:',
   'MIAUW-pentestrapport': 'MIAUW pentest report',
   'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
       'Full MIAUW report structure: document control, scope, execution, management summary, findings, checklists and sign-off.',
