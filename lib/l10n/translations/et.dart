@@ -1760,3 +1760,7 @@ const _dutchSourceEt = {
       'Sisu erineb pitserist — faili on pärast vormistamist muudetud.',
   'Presentatie afgerond en verzegeld.': 'Esitlus vormistatud ja pitseeritud.',
 };
+
+const _dutchSourceAddEt = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

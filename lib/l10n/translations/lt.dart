@@ -1776,3 +1776,7 @@ const _dutchSourceLt = {
   'Presentatie afgerond en verzegeld.':
       'Prezentacija užbaigta ir užantspauduota.',
 };
+
+const _dutchSourceAddLt = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

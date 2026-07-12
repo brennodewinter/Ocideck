@@ -1798,3 +1798,7 @@ const _dutchSourcePt = {
       'O conteúdo difere do selo — o ficheiro foi alterado após a finalização.',
   'Presentatie afgerond en verzegeld.': 'Apresentação finalizada e selada.',
 };
+
+const _dutchSourceAddPt = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

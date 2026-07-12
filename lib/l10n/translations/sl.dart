@@ -1770,3 +1770,7 @@ const _dutchSourceSl = {
   'Presentatie afgerond en verzegeld.':
       'Predstavitev zaključena in zapečatena.',
 };
+
+const _dutchSourceAddSl = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

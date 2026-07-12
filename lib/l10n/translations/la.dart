@@ -1785,3 +1785,7 @@ const _dutchSourceLa = {
       'Contentum a sigillo differt — tabella post perfectionem mutata est.',
   'Presentatie afgerond en verzegeld.': 'Praesentatio perfecta et obsignata.',
 };
+
+const _dutchSourceAddLa = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

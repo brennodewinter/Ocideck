@@ -1,4 +1,4 @@
-.PHONY: setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions licenses sbom sbom-verify check-conventions check-method-length check-dead-code mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
+.PHONY: setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions licenses sbom sbom-verify check-conventions check-method-length check-dead-code add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 help:
 	@echo "OciDeck quality targets:"
@@ -24,6 +24,8 @@ help:
 	@echo "  make check-conventions  No print(); bare catch (_) & file-size ratchets."
 	@echo "  make check-method-length  Per-method length ratchet (AST-measured, max 150)."
 	@echo "  make check-dead-code Fail on orphaned lib/ files (unreachable from any entrypoint)."
+	@echo "  make add-l10n SPEC=… Add d('…') source strings to every language from a JSON spec."
+	@echo "  make l10n-check      Fast l10n gate: duplicate keys, per-language coverage, and formatting."
 	@echo "  make fix             Auto-apply 'dart fix' and reformat (local cleanup helper)."
 	@echo "  make build-web       Build the hardened web bundle (self-hosted CanvasKit + CSP-safe loader)."
 	@echo "  make check-web       Build the web bundle and assert its hardening (CSP, self-hosted, fonts)."
@@ -305,6 +307,27 @@ check-dead-code:
 	@echo "        dynamic entrypoint) add it to deadCodeAllowlist in"
 	@echo "        tool/check_dead_code.dart."
 	dart run tool/check_dead_code.dart
+
+# Add new d('…') source strings to every language's additions overlay from a
+# JSON spec (format documented in tool/add_l10n.dart). Inserts, dart-formats and
+# de-duplicates across all 30 language files in one step, and whitelists any
+# "unchanged" loanwords — so a new translatable string is one command, not 30
+# hand-edits. Re-running is safe (already-present entries are skipped).
+add-l10n:
+	@echo "== OciDeck l10n: add strings =="
+	@[ -n "$(SPEC)" ] || { echo "Usage: make add-l10n SPEC=path/to/spec.json"; exit 2; }
+	dart run tool/add_l10n.dart "$(SPEC)"
+
+# Fast localisation gate — the subset of `make check` that touches l10n, so a
+# translation change can be validated without the full suite: no duplicate keys,
+# every d()/t() literal covered in every language, and the language files are
+# dart-format-clean (the exact failures that used to slip through by hand).
+l10n-check:
+	@echo "== OciDeck check: l10n =="
+	@echo "Covers: duplicate keys, per-language d()/t() coverage, and l10n formatting."
+	@echo "Failure means: run 'make add-l10n' / 'dart format lib/l10n', or fill the gap."
+	dart format --output=none --set-exit-if-changed lib/l10n
+	flutter test test/l10n_duplicate_keys_test.dart test/app_localizations_test.dart
 
 # Build the hardened web bundle. Two flags do the security work:
 #   --no-web-resources-cdn  Self-host CanvasKit instead of fetching it from the

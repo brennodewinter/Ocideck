@@ -1771,3 +1771,7 @@ const _dutchSourceCs = {
       'Obsah se liší od pečeti — soubor byl po dokončení změněn.',
   'Presentatie afgerond en verzegeld.': 'Prezentace dokončena a zapečetěna.',
 };
+
+const _dutchSourceAddCs = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

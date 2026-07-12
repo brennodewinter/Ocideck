@@ -1772,3 +1772,7 @@ const _dutchSourceGsw = {
   'Presentatie afgerond en verzegeld.':
       'Präsentation abgschlosse und versieglet.',
 };
+
+const _dutchSourceAddGsw = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

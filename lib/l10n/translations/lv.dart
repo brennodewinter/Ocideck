@@ -1768,3 +1768,7 @@ const _dutchSourceLv = {
       'Saturs atšķiras no zīmoga — fails pēc pabeigšanas ir mainīts.',
   'Presentatie afgerond en verzegeld.': 'Prezentācija pabeigta un aizzīmogota.',
 };
+
+const _dutchSourceAddLv = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

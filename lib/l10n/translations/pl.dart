@@ -1781,3 +1781,7 @@ const _dutchSourcePl = {
   'Presentatie afgerond en verzegeld.':
       'Prezentacja sfinalizowana i zapieczętowana.',
 };
+
+const _dutchSourceAddPl = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

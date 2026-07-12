@@ -1775,3 +1775,7 @@ const _dutchSourceSk = {
       'Obsah sa líši od pečate — súbor bol po dokončení zmenený.',
   'Presentatie afgerond en verzegeld.': 'Prezentácia dokončená a zapečatená.',
 };
+
+const _dutchSourceAddSk = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};

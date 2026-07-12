@@ -1769,3 +1769,7 @@ const _dutchSourceFi = {
       'Sisältö poikkeaa sinetistä — tiedostoa on muutettu viimeistelyn jälkeen.',
   'Presentatie afgerond en verzegeld.': 'Esitys viimeistelty ja sinetöity.',
 };
+
+const _dutchSourceAddFi = <String, String>{
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
+};
