@@ -79,8 +79,10 @@ void main() {
       }
       if (primary != null && additions != null) {
         for (final key in primary.intersection(additions)) {
-          problems.add('${file.path}: $key is in both the primary and '
-              'additions map');
+          problems.add(
+            '${file.path}: $key is in both the primary and '
+            'additions map',
+          );
         }
       }
     }
