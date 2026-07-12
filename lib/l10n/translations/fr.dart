@@ -85,6 +85,8 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Contraste trop faible avec le fond — peut être illisible.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Aires',
   'Horizontale staaf': 'Barres horizontales',
@@ -294,14 +296,22 @@ const _dutchSourceFr = {
   'Uitbreidingen': 'Extensions',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Modules optionnels. Désactivés par défaut ; ils n\'ajoutent rien à l\'application de base jusqu\'à leur activation.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Rapports de pentest selon MIAUW. L\'activation télécharge les données de référence une fois ; le module fonctionne ensuite hors ligne.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Diapositives de rapport et données de référence pour la sécurité de l\'information : constatations, listes de contrôle, matrices de périmètre et signature. Structuré selon MIAUW et largement utilisable pour les pentests, les audits et la recherche en sécurité. L\'activation télécharge les données de référence une fois ; le module fonctionne ensuite hors ligne.',
   'Gegevens opschonen': 'Nettoyer les données',
   'Gegevens lokaal beschikbaar': 'Données disponibles localement',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Accordez d\'abord le consentement au trafic sortant sous Licence et confidentialité.',
   'Op het web nog niet beschikbaar': 'Pas encore disponible sur le web',
-  'Ophalen mislukt': 'Échec du téléchargement',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Aucune source accessible — les données de référence n\'ont pu être téléchargées nulle part. Vérifiez votre connexion Internet et réessayez plus tard.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Les données téléchargées ne correspondaient pas à l\'empreinte attendue et ont été refusées par précaution.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Le paquet de données était endommagé ou invalide et a donc été refusé.',
+  'Gegevenspakket kiezen': 'Choisir le paquet de données',
+  'Kon het gekozen bestand niet lezen.':
+      'Impossible de lire le fichier choisi.',
   'Nog niet opgehaald': 'Pas encore téléchargé',
   'AI-assistentie': 'Assistance IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

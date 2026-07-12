@@ -84,6 +84,8 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Too little contrast with the background — may be unreadable.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Horizontal bar',
@@ -288,14 +290,21 @@ const _dutchSourceEn = {
   'Uitbreidingen': 'Extensions',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Optional modules. Off by default; they add nothing to the base app until you enable them.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Pentest reporting per MIAUW. Enabling fetches the reference data once; the module then works offline.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Reporting slides and reference data for information security: findings, checklists, scope matrices and sign-off. Structured per MIAUW and broadly usable for pentests, audits and security research. Enabling fetches the reference data once; the module then works offline.',
   'Gegevens opschonen': 'Clean up data',
   'Gegevens lokaal beschikbaar': 'Data available locally',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'First grant consent for outbound traffic under Licence and Privacy.',
   'Op het web nog niet beschikbaar': 'Not yet available on the web',
-  'Ophalen mislukt': 'Fetch failed',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'No source reachable — the reference data could not be fetched anywhere. Check your internet connection and try again later.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'The fetched data did not match the expected fingerprint and was refused as a precaution.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'The data pack was damaged or invalid and was therefore refused.',
+  'Gegevenspakket kiezen': 'Choose data pack',
+  'Kon het gekozen bestand niet lezen.': 'Could not read the chosen file.',
   'Nog niet opgehaald': 'Not fetched yet',
   'AI-assistentie': 'AI assistance',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

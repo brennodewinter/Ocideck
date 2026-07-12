@@ -48,7 +48,7 @@ extension _SettingsModules on _SettingsDialogState {
             ),
             subtitle: Text(
               l10n.d(
-                'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.',
+                'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.',
               ),
               style: TextStyle(fontSize: 12, color: AppTheme.slate600),
             ),
@@ -74,15 +74,24 @@ extension _SettingsModules on _SettingsDialogState {
         ),
       );
     }
+    final failed = _secModuleFailed(module);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
             Icon(
-              module.revealed ? Icons.check_circle_outline : Icons.info_outline,
+              module.revealed
+                  ? Icons.check_circle_outline
+                  : failed
+                  ? Icons.error_outline
+                  : Icons.info_outline,
               size: 15,
-              color: module.revealed ? AppTheme.accent : AppTheme.slate400,
+              color: module.revealed
+                  ? AppTheme.accent
+                  : failed
+                  ? AppTheme.amber700
+                  : AppTheme.slate400,
             ),
             const SizedBox(width: 6),
             Expanded(
@@ -93,6 +102,20 @@ extension _SettingsModules on _SettingsDialogState {
             ),
           ],
         ),
+        // Fallback #3 (PENTEST_MIAUW §6): while the module is on but nothing is
+        // revealed yet — e.g. no mirror is reachable — offer the manual
+        // local-file import so the module is usable without a live host.
+        if (module.enabled && !module.revealed) ...[
+          const SizedBox(height: 8),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton.icon(
+              onPressed: () => _importSecModulePack(),
+              icon: const Icon(Icons.file_open_outlined, size: 16),
+              label: Text(l10n.d('Pakket importeren')),
+            ),
+          ),
+        ],
         if (module.provisionedVersion != null) ...[
           const SizedBox(height: 8),
           Align(
@@ -109,6 +132,50 @@ extension _SettingsModules on _SettingsDialogState {
     );
   }
 
+  /// Manual local-file import (PENTEST_MIAUW §6 fallback #3, the air-gapped
+  /// path): pick a pack file and hand its bytes to the notifier, which verifies
+  /// them against the pinned hash + inner manifest before caching. No consent is
+  /// needed — nothing leaves the device. The status row reflects the outcome
+  /// (revealed on success, a distinct failure message otherwise).
+  Future<void> _importSecModulePack() async {
+    final l10n = context.l10n;
+    final picked = await FilePicker.pickFiles(
+      dialogTitle: l10n.d('Gegevenspakket kiezen'),
+      type: FileType.custom,
+      allowedExtensions: const ['zip'],
+      withData: true,
+    );
+    if (!mounted || picked == null) return;
+    final bytes = picked.files.single.bytes;
+    if (bytes == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.d('Kon het gekozen bestand niet lezen.'))),
+      );
+      return;
+    }
+    await ref.read(secModuleProvider.notifier).provisionFromBytes(bytes);
+  }
+
+  /// Whether the last provisioning attempt ended in a genuine failure (as
+  /// opposed to a not-yet-tried / needs-consent / unsupported state), so the
+  /// status row can flag it with a warning icon.
+  bool _secModuleFailed(SecModuleState module) {
+    if (module.revealed) return false;
+    switch (module.lastStatus) {
+      case SecProvisionStatus.allMirrorsFailed:
+      case SecProvisionStatus.hashMismatch:
+      case SecProvisionStatus.invalidPack:
+        return true;
+      case SecProvisionStatus.noConsent:
+      case SecProvisionStatus.unsupportedPlatform:
+      case SecProvisionStatus.alreadyCached:
+      case SecProvisionStatus.fetched:
+      case SecProvisionStatus.imported:
+      case null:
+        return false;
+    }
+  }
+
   String _secModuleStatusText(AppLocalizations l10n, SecModuleState module) {
     if (module.revealed) return l10n.d('Gegevens lokaal beschikbaar');
     switch (module.lastStatus) {
@@ -118,10 +185,20 @@ extension _SettingsModules on _SettingsDialogState {
         );
       case SecProvisionStatus.unsupportedPlatform:
         return l10n.d('Op het web nog niet beschikbaar');
+      // Distinct failure reasons so the user sees what went wrong, not a bare
+      // "Ophalen mislukt" (PENTEST_MIAUW §6 fallback chain).
       case SecProvisionStatus.allMirrorsFailed:
+        return l10n.d(
+          'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.',
+        );
       case SecProvisionStatus.hashMismatch:
+        return l10n.d(
+          'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.',
+        );
       case SecProvisionStatus.invalidPack:
-        return l10n.d('Ophalen mislukt');
+        return l10n.d(
+          'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.',
+        );
       case SecProvisionStatus.alreadyCached:
       case SecProvisionStatus.fetched:
       case SecProvisionStatus.imported:

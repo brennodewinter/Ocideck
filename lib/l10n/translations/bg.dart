@@ -85,6 +85,8 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Твърде малък контраст с фона — може да е нечетливо.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Площна',
   'Horizontale staaf': 'Хоризонтална стълбовидна',
@@ -290,14 +292,22 @@ const _dutchSourceBg = {
   'Uitbreidingen': 'Разширения',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Незадължителни модули. По подразбиране изключени; не добавят нищо към основното приложение, докато не ги включите.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Докладване на пентестове по MIAUW. Включването изтегля референтните данни веднъж; след това модулът работи офлайн.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Слайдове за докладване и референтни данни за информационната сигурност: констатации, контролни списъци, матрици на обхвата и подписване. Структурирано по MIAUW и широко приложимо за пентестове, одити и проучвания на сигурността. Включването изтегля референтните данни веднъж; след това модулът работи офлайн.',
   'Gegevens opschonen': 'Изчистване на данните',
   'Gegevens lokaal beschikbaar': 'Данните са налични локално',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Първо дайте съгласие за изходящ трафик в раздел Лиценз и поверителност.',
   'Op het web nog niet beschikbaar': 'Все още не е налично в мрежата',
-  'Ophalen mislukt': 'Изтеглянето е неуспешно',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Няма достъпен източник — референтните данни не можаха да бъдат изтеглени отникъде. Проверете интернет връзката си и опитайте отново по-късно.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Изтеглените данни не съвпаднаха с очаквания отпечатък и бяха отхвърлени от предпазливост.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Пакетът с данни беше повреден или невалиден и затова беше отхвърлен.',
+  'Gegevenspakket kiezen': 'Избор на пакет с данни',
+  'Kon het gekozen bestand niet lezen.':
+      'Избраният файл не можа да бъде прочетен.',
   'Nog niet opgehaald': 'Още не е изтеглено',
   'AI-assistentie': 'AI помощ',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

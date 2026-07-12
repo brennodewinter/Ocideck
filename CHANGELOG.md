@@ -8,6 +8,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Low-contrast warning in the style-profile editor** — *Settings → Colours* now
+  shows a live warning beneath any colour whose contrast the deck-level quality
+  panel would flag, so you catch the problem while designing the style instead of
+  later in a presentation. It is driven by the same `SlideQualityAnalyzer` (and
+  your configured contrast threshold), so the two never disagree: body, accent,
+  title (against both the title band and section background), table text, table
+  header, code, and checklist-marker colours are all covered, amber for a warning
+  and red for a hard contrast error. Each warning shows the actual contrast ratio
+  inline (e.g. `1.0:1` for white-on-white) and repeats the panel's full message —
+  label, ratio and required minimum — as a tooltip. This catches self-defeating
+  combinations such as white title text on a white title background, where the
+  title-slide heading would otherwise render invisibly.
 - **Six new chart types** — chart slides gain **area** (a filled line),
   **horizontal bar** (for rankings and long labels), **combo** (bars plus the
   last series as a line on a second axis, e.g. revenue + growth %), **donut** (a

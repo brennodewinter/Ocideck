@@ -86,6 +86,8 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Codarsnacht ró-íseal leis an gcúlra — seans nach féidir é a léamh.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Achar',
   'Horizontale staaf': 'Barra chothrománach',
@@ -293,14 +295,22 @@ const _dutchSourceGa = {
   'Uitbreidingen': 'Breiseáin',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Modúil roghnacha. Múchta de réir réamhshocraithe; ní chuireann siad aon rud leis an mbunaip go dtí go gcumasaíonn tú iad.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Tuairisciú pentest de réir MIAUW. Íoslódálann cumasú na sonraí tagartha uair amháin; oibríonn an modúl as líne ina dhiaidh sin.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Sleamhnáin tuairiscithe agus sonraí tagartha don slándáil faisnéise: fionnachtana, seicliostaí, maitrísí raon feidhme agus síniú. Struchtúrtha de réir MIAUW agus inúsáidte go forleathan le haghaidh pentestanna, iniúchtaí agus taighde slándála. Íoslódálann cumasú na sonraí tagartha uair amháin; oibríonn an modúl as líne ina dhiaidh sin.',
   'Gegevens opschonen': 'Glan na sonraí',
   'Gegevens lokaal beschikbaar': 'Sonraí ar fáil go háitiúil',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Tabhair toiliú do thrácht amach ar dtús faoi Ceadúnas agus Príobháideachas.',
   'Op het web nog niet beschikbaar': 'Níl sé ar fáil ar an ngréasán fós',
-  'Ophalen mislukt': 'Theip ar an íoslódáil',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Níl aon fhoinse insroichte — níorbh fhéidir na sonraí tagartha a íoslódáil áit ar bith. Seiceáil do cheangal idirlín agus bain triail eile as níos déanaí.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Níor mheaitseáil na sonraí a íoslódáladh leis an méarlorg a bhíothas ag súil leis agus diúltaíodh dóibh mar réamhchúram.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Bhí an paca sonraí damáistithe nó neamhbhailí agus diúltaíodh dó dá bhrí sin.',
+  'Gegevenspakket kiezen': 'Roghnaigh paca sonraí',
+  'Kon het gekozen bestand niet lezen.':
+      'Níorbh fhéidir an comhad roghnaithe a léamh.',
   'Nog niet opgehaald': 'Gan íoslódáil fós',
   'AI-assistentie': 'Cúnamh II',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

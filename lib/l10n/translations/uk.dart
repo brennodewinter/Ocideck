@@ -85,6 +85,8 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Замалий контраст із тлом — можливо, нечитабельно.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Площинна',
   'Horizontale staaf': 'Горизонтальна стовпчикова',
@@ -291,14 +293,21 @@ const _dutchSourceUk = {
   'Uitbreidingen': 'Розширення',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Необов\'язкові модулі. Типово вимкнені; вони нічого не додають до базового застосунку, доки ви їх не увімкнете.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Звітування про пентести за MIAUW. Увімкнення один раз завантажує довідкові дані; потім модуль працює офлайн.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Слайди звітів і довідкові дані для інформаційної безпеки: висновки, контрольні списки, матриці обсягу та підписання. Структуровано за MIAUW і широко застосовно для пентестів, аудитів і досліджень безпеки. Увімкнення один раз завантажує довідкові дані; потім модуль працює офлайн.',
   'Gegevens opschonen': 'Очистити дані',
   'Gegevens lokaal beschikbaar': 'Дані доступні локально',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Спершу надайте згоду на вихідний трафік у розділі «Ліцензія та конфіденційність».',
   'Op het web nog niet beschikbaar': 'У вебі поки що недоступно',
-  'Ophalen mislukt': 'Не вдалося завантажити',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Жодне джерело недоступне — довідкові дані не вдалося завантажити ніде. Перевірте підключення до інтернету та повторіть спробу пізніше.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Отримані дані не збіглися з очікуваним відбитком і з обережності були відхилені.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Пакет даних був пошкоджений або недійсний і тому був відхилений.',
+  'Gegevenspakket kiezen': 'Вибрати пакет даних',
+  'Kon het gekozen bestand niet lezen.': 'Не вдалося прочитати вибраний файл.',
   'Nog niet opgehaald': 'Ще не завантажено',
   'AI-assistentie': 'Підтримка ШІ',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

@@ -85,6 +85,8 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Contraste insuficiente com o fundo — pode ficar ilegível.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Área',
   'Horizontale staaf': 'Barras horizontais',
@@ -292,14 +294,22 @@ const _dutchSourcePt = {
   'Uitbreidingen': 'Extensões',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Módulos opcionais. Desativados por predefinição; não acrescentam nada à aplicação base até os ativar.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Relatórios de pentest segundo o MIAUW. Ao ativar, os dados de referência são obtidos uma vez; depois o módulo funciona offline.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Diapositivos de relatório e dados de referência para a segurança da informação: constatações, listas de tarefas, matrizes de escopo e assinatura. Estruturado segundo o MIAUW e amplamente utilizável para pentests, auditorias e investigação de segurança. Ao ativar, os dados de referência são obtidos uma vez; depois o módulo funciona offline.',
   'Gegevens opschonen': 'Limpar dados',
   'Gegevens lokaal beschikbaar': 'Dados disponíveis localmente',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Conceda primeiro o consentimento para o tráfego de saída em Licença e privacidade.',
   'Op het web nog niet beschikbaar': 'Ainda não disponível na web',
-  'Ophalen mislukt': 'Falha ao obter',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Nenhuma fonte acessível — não foi possível obter os dados de referência em lado nenhum. Verifique a sua ligação à Internet e tente novamente mais tarde.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Os dados obtidos não correspondiam à impressão digital esperada e foram recusados por precaução.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'O pacote de dados estava danificado ou inválido e foi, por isso, recusado.',
+  'Gegevenspakket kiezen': 'Escolher pacote de dados',
+  'Kon het gekozen bestand niet lezen.':
+      'Não foi possível ler o ficheiro escolhido.',
   'Nog niet opgehaald': 'Ainda não obtido',
   'AI-assistentie': 'Assistência de IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

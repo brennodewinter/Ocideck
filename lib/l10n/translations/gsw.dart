@@ -84,6 +84,8 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Z wenig Kontrast zum Hindergrund — villicht unläsbar.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Flächä',
   'Horizontale staaf': 'Horizontali Balke',
@@ -289,14 +291,22 @@ const _dutchSourceGsw = {
   'Uitbreidingen': 'Erwyterige',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Optionali Modul. Standardmässig us; si tüend zur Basis-App nüt derzue, bis du si iischaltisch.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Pentest-Bricht nach MIAUW. Bim Iischalte werde d\'Referänzdate eimol glade; dernah lauft s Modul offline.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Bricht-Slides und Referänzdate für d\'Informationssicherheit: Befund, Checkliste, Scope-Matrize und Underzeichnig. Nach MIAUW strukturiert und breit iisetzbar für Pentest, Audits und Sicherheitsforschig. Bim Iischalte werde d\'Referänzdate eimol glade; dernah lauft s Modul offline.',
   'Gegevens opschonen': 'Date ufruume',
   'Gegevens lokaal beschikbaar': 'Date lokal verfüegbar',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Gib zerscht d\'Zuestimmig für usgehende Verkehr under Lizänz und Dateschutz.',
   'Op het web nog niet beschikbaar': 'Im Web no nöd verfüegbar',
-  'Ophalen mislukt': 'Abruef fehlgschlage',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Kei Quelle erreichbar — d\'Referänzdate händ nienersch chöne glade werde. Prüef dini Internetverbindig und probier\'s spöter no einisch.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'D\'gladene Date händ nöd mit em erwartete Fingerabdruck übereigstimmt und sind us Vorsicht abglehnt worde.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'S Datepäckli isch beschädigt oder ungültig gsi und isch drum abglehnt worde.',
+  'Gegevenspakket kiezen': 'Datepäckli uswähle',
+  'Kon het gekozen bestand niet lezen.':
+      'S usgwählte File het nöd chöne gläse werde.',
   'Nog niet opgehaald': 'No nöd glade',
   'AI-assistentie': 'KI-Unterstützig',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

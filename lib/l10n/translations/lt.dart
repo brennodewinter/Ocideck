@@ -84,6 +84,8 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Per mažas kontrastas su fonu — gali būti neįskaitoma.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Ploto',
   'Horizontale staaf': 'Horizontali stulpelinė',
@@ -288,14 +290,22 @@ const _dutchSourceLt = {
   'Uitbreidingen': 'Plėtiniai',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Neprivalomi moduliai. Numatytai išjungti; jie nieko neprideda prie pagrindinės programos, kol jų neįjungiate.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Pentestų ataskaitos pagal MIAUW. Įjungus vieną kartą atsisiunčiami nuorodų duomenys; vėliau modulis veikia neprisijungus.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Ataskaitų skaidrės ir nuorodų duomenys informacijos saugumui: išvados, kontroliniai sąrašai, aprėpties matricos ir patvirtinimas. Struktūruota pagal MIAUW ir plačiai pritaikoma pentestams, auditams ir saugumo tyrimams. Įjungus vieną kartą atsisiunčiami nuorodų duomenys; vėliau modulis veikia neprisijungus.',
   'Gegevens opschonen': 'Išvalyti duomenis',
   'Gegevens lokaal beschikbaar': 'Duomenys pasiekiami vietoje',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Pirmiausia suteikite sutikimą išeinančiam srautui skiltyje Licencija ir privatumas.',
   'Op het web nog niet beschikbaar': 'Žiniatinklyje dar nepasiekiama',
-  'Ophalen mislukt': 'Nepavyko atsisiųsti',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Nepavyko pasiekti jokio šaltinio — nuorodų duomenų niekur nepavyko atsisiųsti. Patikrinkite interneto ryšį ir vėliau bandykite dar kartą.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Atsisiųsti duomenys neatitiko laukiamo skaitmeninio atspaudo ir dėl atsargumo buvo atmesti.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Duomenų paketas buvo sugadintas arba netinkamas, todėl buvo atmestas.',
+  'Gegevenspakket kiezen': 'Pasirinkti duomenų paketą',
+  'Kon het gekozen bestand niet lezen.':
+      'Nepavyko nuskaityti pasirinkto failo.',
   'Nog niet opgehaald': 'Dar neatsisiųsta',
   'AI-assistentie': 'DI pagalba',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

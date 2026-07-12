@@ -84,6 +84,8 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Liian vähän kontrastia taustaan — voi olla lukukelvoton.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Alue',
   'Horizontale staaf': 'Vaakapylväs',
@@ -289,14 +291,21 @@ const _dutchSourceFi = {
   'Uitbreidingen': 'Laajennukset',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Valinnaiset moduulit. Oletuksena pois; ne eivät lisää mitään perussovellukseen ennen kuin otat ne käyttöön.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Pentest-raportointi MIAUW:n mukaan. Käyttöönotto hakee viitetiedot kerran; sen jälkeen moduuli toimii offline-tilassa.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Raportointidiat ja viitetiedot tietoturvaa varten: havainnot, tarkistuslistat, scope-matriisit ja hyväksyntä. Jäsennelty MIAUW:n mukaisesti ja laajasti käytettävissä pentesteihin, auditointeihin ja tietoturvatutkimukseen. Käyttöönotto hakee viitetiedot kerran; sen jälkeen moduuli toimii offline-tilassa.',
   'Gegevens opschonen': 'Siivoa tiedot',
   'Gegevens lokaal beschikbaar': 'Tiedot saatavilla paikallisesti',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Anna ensin suostumus lähtevään liikenteeseen kohdassa Lisenssi ja tietosuoja.',
   'Op het web nog niet beschikbaar': 'Ei vielä saatavilla verkossa',
-  'Ophalen mislukt': 'Haku epäonnistui',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Yhtään lähdettä ei tavoitettu — viitetietoja ei voitu hakea mistään. Tarkista internetyhteytesi ja yritä myöhemmin uudelleen.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Haetut tiedot eivät vastanneet odotettua sormenjälkeä, ja ne hylättiin varotoimena.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Tietopaketti oli vaurioitunut tai virheellinen, ja se siksi hylättiin.',
+  'Gegevenspakket kiezen': 'Valitse tietopaketti',
+  'Kon het gekozen bestand niet lezen.': 'Valittua tiedostoa ei voitu lukea.',
   'Nog niet opgehaald': 'Ei vielä haettu',
   'AI-assistentie': 'Tekoälyavustus',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

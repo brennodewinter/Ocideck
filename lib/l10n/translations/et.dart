@@ -83,6 +83,8 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Liiga väike kontrast taustaga — võib olla loetamatu.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Pindala',
   'Horizontale staaf': 'Horisontaalne tulp',
@@ -287,14 +289,21 @@ const _dutchSourceEt = {
   'Uitbreidingen': 'Laiendused',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Valikulised moodulid. Vaikimisi väljas; nad ei lisa põhirakendusele midagi, kuni te need sisse lülitate.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Pentesti aruandlus MIAUW järgi. Sisselülitamine laadib võrdlusandmed korra alla; seejärel töötab moodul võrguühenduseta.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Aruandlusslaidid ja võrdlusandmed infoturbe jaoks: leiud, kontroll-loendid, skoobimaatriksid ja allkirjastamine. Struktureeritud MIAUW järgi ja laialt kasutatav pentestideks, audititeks ja turvauuringuteks. Sisselülitamine laadib võrdlusandmed korra alla; seejärel töötab moodul võrguühenduseta.',
   'Gegevens opschonen': 'Puhasta andmed',
   'Gegevens lokaal beschikbaar': 'Andmed saadaval kohapeal',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Andke esmalt nõusolek väljuvale liiklusele jaotises Litsents ja privaatsus.',
   'Op het web nog niet beschikbaar': 'Veebis veel saadaval pole',
-  'Ophalen mislukt': 'Allalaadimine ebaõnnestus',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Ühtegi allikat pole kättesaadav — võrdlusandmeid ei õnnestunud kusagilt alla laadida. Kontrollige oma internetiühendust ja proovige hiljem uuesti.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Allalaaditud andmed ei vastanud oodatud sõrmejäljele ja lükati ettevaatusabinõuna tagasi.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Andmepakett oli kahjustatud või vigane ja lükati seetõttu tagasi.',
+  'Gegevenspakket kiezen': 'Vali andmepakett',
+  'Kon het gekozen bestand niet lezen.': 'Valitud faili ei õnnestunud lugeda.',
   'Nog niet opgehaald': 'Pole veel alla laaditud',
   'AI-assistentie': 'Tehisintellekti abi',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

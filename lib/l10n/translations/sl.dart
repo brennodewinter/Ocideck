@@ -84,6 +84,8 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Premalo kontrasta z ozadjem — morda neberljivo.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Površinski',
   'Horizontale staaf': 'Vodoravni stolpci',
@@ -288,14 +290,22 @@ const _dutchSourceSl = {
   'Uitbreidingen': 'Razširitve',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Izbirni moduli. Privzeto izklopljeni; osnovni aplikaciji ne dodajo ničesar, dokler jih ne omogočite.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Poročanje o pentestih po MIAUW. Omogočanje enkrat prenese referenčne podatke; nato modul deluje brez povezave.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Poročilne prosojnice in referenčni podatki za informacijsko varnost: ugotovitve, kontrolni seznami, matrike obsega in podpis. Strukturirano po MIAUW in široko uporabno za penteste, revizije in varnostne raziskave. Omogočanje enkrat prenese referenčne podatke; nato modul deluje brez povezave.',
   'Gegevens opschonen': 'Počisti podatke',
   'Gegevens lokaal beschikbaar': 'Podatki na voljo lokalno',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Najprej podajte soglasje za odhodni promet v razdelku Licenca in zasebnost.',
   'Op het web nog niet beschikbaar': 'V spletu še ni na voljo',
-  'Ophalen mislukt': 'Prenos ni uspel',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Noben vir ni dosegljiv — referenčnih podatkov ni bilo mogoče nikjer prenesti. Preverite internetno povezavo in poskusite znova pozneje.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Preneseni podatki se niso ujemali s pričakovanim prstnim odtisom in so bili iz previdnosti zavrnjeni.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Podatkovni paket je bil poškodovan ali neveljaven in je bil zato zavrnjen.',
+  'Gegevenspakket kiezen': 'Izberi podatkovni paket',
+  'Kon het gekozen bestand niet lezen.':
+      'Izbrane datoteke ni bilo mogoče prebrati.',
   'Nog niet opgehaald': 'Še ni preneseno',
   'AI-assistentie': 'Pomoč UI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

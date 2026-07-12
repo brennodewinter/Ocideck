@@ -84,6 +84,8 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Pārāk mazs kontrasts ar fonu — var būt nesalasāms.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Laukuma',
   'Horizontale staaf': 'Horizontāls stabiņu',
@@ -289,14 +291,21 @@ const _dutchSourceLv = {
   'Uitbreidingen': 'Paplašinājumi',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Neobligāti moduļi. Pēc noklusējuma izslēgti; tie neko nepievieno pamata lietotnei, kamēr tos neieslēdzat.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Pentestu ziņošana pēc MIAUW. Ieslēgšana vienreiz lejupielādē atsauces datus; pēc tam modulis darbojas bezsaistē.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Ziņošanas slaidi un atsauces dati informācijas drošībai: atklājumi, kontrolsaraksti, tvēruma matricas un apstiprināšana. Strukturēts pēc MIAUW un plaši izmantojams pentestiem, auditiem un drošības pētījumiem. Ieslēgšana vienreiz lejupielādē atsauces datus; pēc tam modulis darbojas bezsaistē.',
   'Gegevens opschonen': 'Notīrīt datus',
   'Gegevens lokaal beschikbaar': 'Dati pieejami lokāli',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Vispirms sniedziet piekrišanu izejošajam trafikam sadaļā Licence un privātums.',
   'Op het web nog niet beschikbaar': 'Tīmeklī vēl nav pieejams',
-  'Ophalen mislukt': 'Lejupielāde neizdevās',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Neviens avots nav sasniedzams — atsauces datus nekur neizdevās lejupielādēt. Pārbaudiet savu interneta savienojumu un mēģiniet vēlāk vēlreiz.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Lejupielādētie dati neatbilda gaidītajam ciparnospiedumam un piesardzības nolūkā tika atteikti.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Datu pakotne bija bojāta vai nederīga, tāpēc tā tika atteikta.',
+  'Gegevenspakket kiezen': 'Izvēlēties datu pakotni',
+  'Kon het gekozen bestand niet lezen.': 'Neizdevās nolasīt izvēlēto failu.',
   'Nog niet opgehaald': 'Vēl nav lejupielādēts',
   'AI-assistentie': 'MI palīdzība',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

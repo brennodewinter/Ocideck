@@ -85,6 +85,8 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Kuntrast baxx wisq mal-isfond — forsi illeġibbli.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Erja',
   'Horizontale staaf': 'Bar orizzontali',
@@ -291,14 +293,21 @@ const _dutchSourceMt = {
   'Uitbreidingen': 'Estensjonijiet',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Moduli fakultattivi. Mitfija b\'mod awtomatiku; ma jżidu xejn mal-app bażika sakemm ma tattivahomx.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Rappurtar tal-pentest skont MIAUW. L-attivazzjoni tniżżel id-dejta ta\' referenza darba; imbagħad il-modulu jaħdem offline.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Slajds ta\' rappurtar u dejta ta\' referenza għas-sigurtà tal-informazzjoni: sejbiet, listi ta\' verifika, matriċi tal-ambitu u firma. Strutturat skont MIAUW u użabbli fuq firxa wiesgħa għall-pentests, l-awditi u r-riċerka tas-sigurtà. L-attivazzjoni tniżżel id-dejta ta\' referenza darba; imbagħad il-modulu jaħdem offline.',
   'Gegevens opschonen': 'Naddaf id-dejta',
   'Gegevens lokaal beschikbaar': 'Dejta disponibbli lokalment',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'L-ewwel agħti kunsens għat-traffiku \'l barra taħt Liċenzja u Privatezza.',
   'Op het web nog niet beschikbaar': 'Għadha mhux disponibbli fuq il-web',
-  'Ophalen mislukt': 'It-tniżżil falla',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'L-ebda sors ma huwa aċċessibbli — id-dejta ta\' referenza ma setgħetx tinġieb minn imkien. Iċċekkja l-konnessjoni tal-internet tiegħek u erġa\' pprova aktar tard.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Id-dejta miġjuba ma qablitx mal-marka tas-swaba\' mistennija u ġiet miċħuda bħala prekawzjoni.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Il-pakkett tad-dejta kien bil-ħsara jew invalidu u għalhekk ġie miċħud.',
+  'Gegevenspakket kiezen': 'Agħżel il-pakkett tad-dejta',
+  'Kon het gekozen bestand niet lezen.': 'Ma setax jinqara l-fajl magħżul.',
   'Nog niet opgehaald': 'Għadha ma tniżżlitx',
   'AI-assistentie': 'Assistenza AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

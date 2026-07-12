@@ -86,6 +86,8 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Discrimen colorum a fundo nimis exiguum — fortasse illegibile.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Columnae horizontales',
@@ -291,14 +293,21 @@ const _dutchSourceLa = {
   'Uitbreidingen': 'Extensiones',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Moduli optionales. Praedefinite exstincti; nihil applicationi basi addunt donec eos actives.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Relationes pentest secundum MIAUW. Activatio data referentiae semel accersit; deinde modulus sine rete operatur.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Tabellae relationis et data referentiae ad securitatem informationis: inventa, indices agendorum, matrices ambitus et subscriptio. Secundum MIAUW ordinata et late adhibenda ad pentest, recognitiones et investigationem securitatis. Activatio data referentiae semel accersit; deinde modulus sine rete operatur.',
   'Gegevens opschonen': 'Data purgare',
   'Gegevens lokaal beschikbaar': 'Data localiter praesto',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Primum consensum ad commercium exiens sub Licentia et Secreto concede.',
   'Op het web nog niet beschikbaar': 'In rete nondum praesto',
-  'Ophalen mislukt': 'Accersitio defecit',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Nullus fons attingi potest — data referentiae nusquam accersi potuerunt. Conexionem tuam interretialem inspice et postea rursus conare.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Data accersita cum vestigio digitali exspectato non convenerunt et ex cautione recusata sunt.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Fasciculus datorum corruptus aut invalidus erat ideoque recusatus est.',
+  'Gegevenspakket kiezen': 'Fasciculum datorum eligere',
+  'Kon het gekozen bestand niet lezen.': 'Plica electa legi non potuit.',
   'Nog niet opgehaald': 'Nondum accersitum',
   'AI-assistentie': 'Auxilium IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

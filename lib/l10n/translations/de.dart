@@ -84,6 +84,8 @@ const _stringsDe = {
 };
 
 const _dutchSourceDe = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Zu wenig Kontrast zum Hintergrund — möglicherweise unlesbar.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Fläche',
   'Horizontale staaf': 'Horizontale Balken',
@@ -292,14 +294,22 @@ const _dutchSourceDe = {
   'Uitbreidingen': 'Erweiterungen',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Optionale Module. Standardmäßig aus; sie fügen der Basis-App nichts hinzu, bis Sie sie aktivieren.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Pentest-Berichterstattung nach MIAUW. Beim Aktivieren werden die Referenzdaten einmalig geladen; danach arbeitet das Modul offline.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Berichtsfolien und Referenzdaten für die Informationssicherheit: Feststellungen, Checklisten, Scope-Matrizen und Unterzeichnung. Strukturiert nach MIAUW und breit einsetzbar für Pentests, Audits und Sicherheitsuntersuchungen. Beim Aktivieren werden die Referenzdaten einmalig geladen; danach arbeitet das Modul offline.',
   'Gegevens opschonen': 'Daten bereinigen',
   'Gegevens lokaal beschikbaar': 'Daten lokal verfügbar',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Erteilen Sie zuerst die Zustimmung für ausgehenden Datenverkehr unter Lizenz und Datenschutz.',
   'Op het web nog niet beschikbaar': 'Im Web noch nicht verfügbar',
-  'Ophalen mislukt': 'Abruf fehlgeschlagen',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Keine Quelle erreichbar — die Referenzdaten konnten nirgends geladen werden. Überprüfe deine Internetverbindung und versuche es später erneut.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Die geladenen Daten stimmten nicht mit dem erwarteten Fingerabdruck überein und wurden vorsichtshalber abgelehnt.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Das Datenpaket war beschädigt oder ungültig und wurde daher abgelehnt.',
+  'Gegevenspakket kiezen': 'Datenpaket auswählen',
+  'Kon het gekozen bestand niet lezen.':
+      'Die ausgewählte Datei konnte nicht gelesen werden.',
   'Nog niet opgehaald': 'Noch nicht geladen',
   'AI-assistentie': 'KI-Unterstützung',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

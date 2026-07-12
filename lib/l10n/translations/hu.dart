@@ -84,6 +84,8 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Túl kicsi a kontraszt a háttérrel — olvashatatlan lehet.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Terület',
   'Horizontale staaf': 'Vízszintes oszlop',
@@ -289,14 +291,22 @@ const _dutchSourceHu = {
   'Uitbreidingen': 'Bővítmények',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Választható modulok. Alapértelmezetten kikapcsolva; semmit sem adnak az alapalkalmazáshoz, amíg be nem kapcsolja őket.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Pentest-jelentés MIAUW szerint. A bekapcsolás egyszer letölti a referenciaadatokat; ezután a modul offline működik.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Jelentésdiák és referenciaadatok az információbiztonsághoz: megállapítások, ellenőrzőlisták, hatókörmátrixok és aláírás. MIAUW szerint strukturálva és széles körben használható pentesztekhez, auditokhoz és biztonsági kutatáshoz. A bekapcsolás egyszer letölti a referenciaadatokat; ezután a modul offline működik.',
   'Gegevens opschonen': 'Adatok törlése',
   'Gegevens lokaal beschikbaar': 'Adatok helyben elérhetők',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Először adjon hozzájárulást a kimenő forgalomhoz a Licenc és adatvédelem részben.',
   'Op het web nog niet beschikbaar': 'A weben még nem érhető el',
-  'Ophalen mislukt': 'A letöltés sikertelen',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Nincs elérhető forrás — a referenciaadatokat sehonnan sem sikerült letölteni. Ellenőrizd az internetkapcsolatot, és próbáld meg később újra.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'A letöltött adatok nem egyeztek a várt ujjlenyomattal, ezért elővigyázatosságból elutasítottuk őket.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Az adatcsomag sérült vagy érvénytelen volt, ezért elutasítottuk.',
+  'Gegevenspakket kiezen': 'Adatcsomag kiválasztása',
+  'Kon het gekozen bestand niet lezen.':
+      'A kiválasztott fájlt nem sikerült beolvasni.',
   'Nog niet opgehaald': 'Még nincs letöltve',
   'AI-assistentie': 'MI-segítség',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

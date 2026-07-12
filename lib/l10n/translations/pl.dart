@@ -86,6 +86,8 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Zbyt mały kontrast z tłem — może być nieczytelne.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Warstwowy',
   'Horizontale staaf': 'Słupkowy poziomy',
@@ -292,14 +294,22 @@ const _dutchSourcePl = {
   'Uitbreidingen': 'Rozszerzenia',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Moduły opcjonalne. Domyślnie wyłączone; nie dodają niczego do podstawowej aplikacji, dopóki ich nie włączysz.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Raportowanie pentestów według MIAUW. Włączenie jednorazowo pobiera dane referencyjne; potem moduł działa offline.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Slajdy raportowe i dane referencyjne dla bezpieczeństwa informacji: ustalenia, listy kontrolne, macierze zakresu i podpisanie. Uporządkowane według MIAUW i szeroko przydatne do pentestów, audytów oraz badań bezpieczeństwa. Włączenie jednorazowo pobiera dane referencyjne; potem moduł działa offline.',
   'Gegevens opschonen': 'Wyczyść dane',
   'Gegevens lokaal beschikbaar': 'Dane dostępne lokalnie',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Najpierw wyraź zgodę na ruch wychodzący w sekcji Licencja i prywatność.',
   'Op het web nog niet beschikbaar': 'Jeszcze niedostępne w sieci',
-  'Ophalen mislukt': 'Pobieranie nie powiodło się',
+  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Żadne źródło nie jest osiągalne — nie udało się nigdzie pobrać danych referencyjnych. Sprawdź połączenie internetowe i spróbuj ponownie później.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Pobrane dane nie zgadzały się z oczekiwanym odciskiem palca i z ostrożności zostały odrzucone.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Pakiet danych był uszkodzony lub nieprawidłowy i dlatego został odrzucony.',
+  'Gegevenspakket kiezen': 'Wybierz pakiet danych',
+  'Kon het gekozen bestand niet lezen.':
+      'Nie udało się odczytać wybranego pliku.',
   'Nog niet opgehaald': 'Jeszcze nie pobrano',
   'AI-assistentie': 'Wsparcie AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
