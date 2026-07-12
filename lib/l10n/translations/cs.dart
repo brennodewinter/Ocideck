@@ -85,6 +85,13 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
+  'Vlak': 'Plošný',
+  'Horizontale staaf': 'Vodorovný sloupcový',
+  'Waterval': 'Vodopád',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Poslední řada jako čára na druhé ose; ostatní jako sloupce.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'První řada: každá hodnota je krok nahoru nebo dolů na průběžném součtu.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Řada = řádek, sloupec = popisek, barva buňky sleduje hodnotu. Osy označte jako pravděpodobnost a dopad pro matici rizik.',
   'Auditdossier exporteren': 'Exportovat auditní dokumentaci',
   'Finaliseer en verzegel het rapport eerst.':
       'Nejprve dokončete a zapečeťte zprávu.',

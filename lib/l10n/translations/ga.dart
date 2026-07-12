@@ -86,6 +86,13 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
+  'Vlak': 'Achar',
+  'Horizontale staaf': 'Barra chothrománach',
+  'Waterval': 'Eas',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'An tsraith dheireanach mar líne ar dhara ais; an chuid eile mar bharraí.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'An chéad tsraith: is céim suas nó síos gach luach ar an tsuim reatha.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Sraith = ró, colún = lipéad, leanann dath na cille an luach. Cuir lipéad ar na haiseanna mar dhóchúlacht agus tionchar le haghaidh maitrís riosca.',
   'Auditdossier exporteren': 'Easpórtáil dálach iniúchta',
   'Finaliseer en verzegel het rapport eerst.':
       'Cuir bailchríoch agus séala ar an tuairisc ar dtús.',

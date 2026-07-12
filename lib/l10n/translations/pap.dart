@@ -84,6 +84,13 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
+  'Vlak': 'Área',
+  'Horizontale staaf': 'Bara horizontal',
+  'Waterval': 'Kaskada',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Último serie komo liña riba un di dos èks; e restu komo bara.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'Promé serie: kada balor ta un paso ariba òf abou riba e total akumulá.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Serie = fila, kolom = etiket, koló di e selda ta sigui e balor. Pone nòmber na e èksnan probabilidat i impakto pa un matris di risiko.',
   'Auditdossier exporteren': 'Eksportá dossier di ouditó',
   'Finaliseer en verzegel het rapport eerst.':
       'Finalisá i seyá e rapòrt promé.',

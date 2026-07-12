@@ -84,6 +84,13 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
+  'Vlak': 'Yta',
+  'Horizontale staaf': 'Liggande stapel',
+  'Waterval': 'Vattenfall',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Sista serien som linje på en andra axel; de övriga som staplar.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'Första serien: varje värde är ett steg upp eller ner på den löpande summan.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Serie = rad, kolumn = etikett, cellfärgen följer värdet. Namnge axlarna sannolikhet och konsekvens för en riskmatris.',
   'Auditdossier exporteren': 'Exportera revisionsdossier',
   'Finaliseer en verzegel het rapport eerst.':
       'Slutför och försegla rapporten först.',

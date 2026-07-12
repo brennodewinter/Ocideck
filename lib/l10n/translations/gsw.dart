@@ -84,6 +84,13 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
+  'Vlak': 'Flächä',
+  'Horizontale staaf': 'Horizontali Balke',
+  'Waterval': 'Wasserfall',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Letschti Reie als Linie uf ere zweite Achs; d Rescht als Balke.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'Erschti Reie: jede Wärt isch e Schritt ufe oder abe uf em laufende Total.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Reie = Zile, Spalte = Beschriftig, d Zällefarb folgt em Wärt. Beschrift d Achse mit Wahrschinlichkeit und Uswirkig für e Risikomatrix.',
   'Auditdossier exporteren': 'Audit-Dossier exportiere',
   'Finaliseer en verzegel het rapport eerst.':
       'Finalisier und versigle zerscht de Bricht.',

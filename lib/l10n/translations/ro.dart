@@ -85,6 +85,13 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
+  'Vlak': 'Suprafață',
+  'Horizontale staaf': 'Bare orizontale',
+  'Waterval': 'Cascadă',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'Ultima serie ca linie pe o a doua axă; restul ca bare.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'Prima serie: fiecare valoare este un pas în sus sau în jos pe totalul curent.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Serie = rând, coloană = etichetă, culoarea celulei urmează valoarea. Etichetează axele ca probabilitate și impact pentru o matrice de risc.',
   'Auditdossier exporteren': 'Exportă dosarul de audit',
   'Finaliseer en verzegel het rapport eerst.':
       'Finalizați și sigilați mai întâi raportul.',

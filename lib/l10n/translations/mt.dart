@@ -85,6 +85,13 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
+  'Vlak': 'Erja',
+  'Horizontale staaf': 'Bar orizzontali',
+  'Waterval': 'Kaskata',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.': 'L-aħħar serje bħala linja fuq it-tieni assi; il-bqija bħala bars.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.': 'L-ewwel serje: kull valur huwa pass \'il fuq jew \'l isfel fuq it-total kurrenti.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.': 'Serje = ringiela, kolonna = tikketta, il-kulur taċ-ċellula jsegwi l-valur. Semmi l-assi bħala probabbiltà u impatt għal matriċi tar-riskju.',
   'Auditdossier exporteren': 'Esporta d-dossier tal-awditu',
   'Finaliseer en verzegel het rapport eerst.':
       'Iffinalizza u ssiġilla r-rapport l-ewwel.',
