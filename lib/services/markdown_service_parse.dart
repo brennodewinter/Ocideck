@@ -91,6 +91,7 @@ extension _MarkdownParse on MarkdownService {
     String sealHash = '';
     String sealAlgo = '';
     String sealAt = '';
+    String sealTsr = '';
     DocumentSignature signature = const DocumentSignature();
 
     // Strip front matter
@@ -153,6 +154,8 @@ extension _MarkdownParse on MarkdownService {
               sealAlgo = _parseScalar(value);
             case 'ocideck_seal_at':
               sealAt = _parseScalar(value);
+            case 'ocideck_seal_tsr':
+              sealTsr = value;
             case 'ocideck_style_profile':
               // Best-effort: a corrupt token keeps the default (see helper).
               final styleJson = _decodeBase64JsonMap(value, key);
@@ -215,6 +218,7 @@ extension _MarkdownParse on MarkdownService {
       sealHash: sealHash,
       sealAlgo: sealAlgo,
       sealAt: sealAt,
+      sealTimestampToken: sealTsr,
       signature: signature.isEmpty ? null : signature,
       miauwWaivers: miauwWaivers,
     );
