@@ -436,7 +436,6 @@ const _dutchSourceFr = {
   'Importeren via URL': 'Importer depuis une URL',
   'Ophalen': 'Récupérer',
   'Titelpagina': 'Diapositive de titre',
-  'Tussentitel': 'Intertitre',
   'Alleen Bullets': 'Puces uniquement',
   'Twee Bulletkolommen': 'Deux colonnes de puces',
   'Bullets + Afbeelding': 'Puces + image',
@@ -486,7 +485,6 @@ const _dutchSourceFr = {
   'Verwijder': 'Supprimer',
   'Citaat': 'Citation',
   'Auteur': 'Auteur',
-  'Achtergrondafbeelding': 'Image de fond',
   'Achtergrondafbeelding (optioneel)': 'Image de fond (facultative)',
   'Zoom achtergrond': 'Zoom du fond',
   'Zoom afbeelding': 'Zoom image',
@@ -660,7 +658,6 @@ const _dutchSourceFr = {
   'Naar prullenbak': 'Vers la corbeille',
   'Deze presentatie staat ook op een andere plek:':
       'Cette présentation existe aussi à un autre endroit :',
-  'Opruimen…': 'Nettoyer…',
   '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
       '« Oci » fait référence à l\'ocicat, la race des chats de Brenno de Winter. « Deck » est le mot anglais désignant un jeu de diapositives. OciDeck transforme un texte simple en une présentation soignée.',
   'Adressen': 'Adresses',

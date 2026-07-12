@@ -460,7 +460,6 @@ const _dutchSourceEn = {
   'TLP-classificatie (Traffic Light Protocol)':
       'TLP classification (Traffic Light Protocol)',
   'Titelpagina': 'Title slide',
-  'Tussentitel': 'Section divider',
   'Alleen Bullets': 'Bullets only',
   'Twee Bulletkolommen': 'Two bullet columns',
   'Bullets + Afbeelding': 'Bullets + Image',
@@ -480,7 +479,6 @@ const _dutchSourceEn = {
   'Niet meer overslaan': 'Do not skip',
   'Overslaan': 'Skip',
   'Titel': 'Title',
-  'Titel (optioneel)': 'Title (optional)',
   'Slide titel': 'Slide title',
   'Ondertitel': 'Subtitle',
   'Subtitel': 'Subtitle',
@@ -492,7 +490,6 @@ const _dutchSourceEn = {
   'Citaat tekst...': 'Quote text...',
   'Auteur': 'Author',
   'Naam van de auteur': 'Author name',
-  'Achtergrondafbeelding': 'Background image',
   'Achtergrondafbeelding (optioneel)': 'Background image (optional)',
   'De afbeelding wordt schermvullend als achtergrond getoond met verminderde opaciteit zodat de tekst leesbaar blijft.':
       'The image is shown fullscreen as a background with reduced opacity so the text remains readable.',
@@ -701,11 +698,8 @@ const _dutchSourceEn = {
   'Tabel bewerkbaar tijdens presenteren': 'Table editable while presenting',
   'Footer tonen op deze slide': 'Show footer on this slide',
   'Sprekersnotities...': 'Speaker notes...',
-  'Sprekersnotities': 'Speaker notes',
-  'Notities voor tijdens het presenteren': 'Notes for while presenting',
   'Markdown modus — bewerk de volledige presentatie als Marp Markdown':
       'Markdown mode — edit the full presentation as Marp Markdown',
-  'Toepassen': 'Apply',
   'Markdown kon niet worden verwerkt. Controleer de syntax.':
       'Markdown could not be processed. Check the syntax.',
   'Controleren': 'Check syntax',
@@ -782,7 +776,6 @@ const _dutchSourceEn = {
   'Mijn notities': 'My notes',
   'Gebruikersnotities': 'User notes',
   'Gebruikersnotities voor deze slide...': 'User notes for this slide...',
-  'Notities weggooien': 'Discard notes',
   'Notities voor de ontvanger tijdens een cursus':
       'Notes for the recipient during a course',
   'Schakel naar Markdown-modus om notities toe te voegen.':
@@ -849,7 +842,6 @@ const _dutchSourceEn = {
   'Naar prullenbak': 'Move to trash',
   'Deze presentatie staat ook op een andere plek:':
       'This presentation also exists somewhere else:',
-  'Opruimen…': 'Clean up…',
   '"Oci" verwijst naar de ocicat, het kattenras van de katten van Brenno de Winter. "Deck" is het Engelse woord voor een diaset. OciDeck maakt van eenvoudige tekst een verzorgde presentatie.':
       '"Oci" refers to the ocicat, the cat breed of Brenno de Winter\'s cats. "Deck" is the English word for a slide set. OciDeck turns simple text into a polished presentation.',
   'Adressen': 'Addresses',

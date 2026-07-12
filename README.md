@@ -15,6 +15,8 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 - **Timeline slides** — turn a list of dated events into an animated timeline: a glowing accent spine with nodes and cards that alternate above/below (horizontal) or left/right (vertical), styled from the active profile. Layout is automatic (horizontal for short timelines, vertical for longer ones) or forced; animation is draw-in-on-open, step-by-step (one event per click, synced to the audience window), or none. Events are an ordinary Markdown list (`marker :: title :: description`), so the `.md` stays readable; layout and animation round-trip as `_class` tokens.
 - **Live preview** — see each slide rendered as you edit, with inline Markdown, footers, and TLP (Traffic Light Protocol) marking. Free-Markdown slides render fenced code with syntax highlighting, `$…$` / `$$…$$` LaTeX math, and Mermaid diagrams.
 - **Traffic Light Protocol** — a deck-wide classification plus an optional **per-slide TLP level**; slides classified stricter than the level the deck is shown at are automatically withheld, both when presenting and exporting. **Visual marking** (banner, badge, optional diagonal watermark) follows FIRST TLP 2.0 colours and is WYSIWYG through preview, presenter, and PDF/PPTX export. Optional **classification enforcement** (release ceiling, required minimum, mandatory classification, watermark toggle) blocks export fail-closed when policy fails; export metadata embeds TLP in PDF/PPTX/HTML.
+- **Information-security reporting (MIAUW pentest module)** — an optional module, **off by default**, for authoring MIAUW-conforming penetration-test reports. It adds dedicated **finding / findings-summary / checklist / scope-matrix / sign-off** slide types, a native **CVSS 4.0** builder with an offline **CWE** picker and CVE fields, a **finding wizard**, and a **compliance overview** that scores the deck against the MIAUW requirements (EIS). Mechanical bookkeeping is automated: **auto-numbering** of findings, **evidence SHA1 + SHA-256** hashing, **scope-coverage** checks, and a derived **management summary**. A report can be **finalised and sealed** (SHA-512 over the canonicalised content, detecting any later change) with an optional **RFC 3161** trusted timestamp, exported as a **MIAUW report template**, and bundled into a **one-click, AES-256-encrypted audit dossier** (report + evidence + hash tables). Everything is offline by default; the optional AI helpers below are privacy-gated.
+- **Optional, privacy-first AI assistance** — an entirely optional, **off-by-default** backend (a local model, or a consented outbound endpoint) that drafts free-text **finding fields** grounded only on the tester's own facts (it strips any CWE/CVE/CVSS identifier it invents) and suggests **image alt-text / tags** for accessibility. AI-drafted content is marked and blocks sealing until a human reviews it, so provenance is always explicit.
 - **Fullscreen presenter** — keyboard-driven navigation, presenter view, blank screen, auto-advance, and a slide-grid overview.
 - **Presentation timer / rehearsal mode** — the presenter view doubles as a rehearsal clock: a countdown against a target time (set in Settings or live with `K`), the time spent on the current slide, and an end-of-run summary (total vs. target and per-slide times, copyable). It measures only — no pacing coaching — and is session-only, never written to disk.
 - **Dual-screen presenter** — when a second display is connected, the beamer shows the slide while the laptop shows the presenter view (current/next slide, notes, timer), kept in sync.
@@ -27,7 +29,7 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 - **Accessibility** — WCAG 2.1-oriented: interface text scaling up to 200%, keyboard-operable panel divider and dialogs, screen-reader labels for slides and charts (charts read out their data), and slide-change announcements while presenting.
 - **Crash recovery** — automatic snapshots so work survives an unexpected exit.
 - **Theming** — customizable deck style profiles (deck and source-code colours via presets or custom hex, fonts, logo, footer) and app appearance (including a dark interface), a bundled Marp CSS theme (`assets/themes/ocideck.css`), and a bundled EB Garamond font (no network fetch).
-- **Localized** — Dutch, English, Italian, German, French, Spanish, Frisian, and Papiamento.
+- **Localized** — a fully translated interface in **31 languages**: Dutch, English, German, French, Italian, Spanish, Portuguese, Polish, Czech, Slovak, Slovenian, Croatian, Bulgarian, Romanian, Hungarian, Greek, Danish, Swedish, Finnish, Estonian, Latvian, Lithuanian, Maltese, Irish, Ukrainian, Indonesian, Frisian, Swiss German, Latin, Papiamento, and Klingon. Every interface string is translated in all of them, enforced by tests.
 
 ## Requirements
 
@@ -83,7 +85,7 @@ lib/
   services/   # Markdown, export, file, image, caption, recovery, rasterizer
   state/      # Riverpod providers (deck, editor, settings, tabs, clipboard)
   widgets/    # UI: app shell, panels, dialogs, per-type editors, presenter
-  l10n/       # AppLocalizations (8 languages)
+  l10n/       # AppLocalizations (31 languages)
   theme/      # App theming
   utils/      # Small shared helpers (clipboard table parsing, URL launching)
 ```
@@ -116,21 +118,22 @@ style profile, sidecars, and the package format — is documented in
 | [Security policy](SECURITY.md) | How to report a vulnerability |
 | [Source map](docs/SOURCE_MAP.md) | One-line description of every file under `lib/` |
 | [Third-party notices](THIRD_PARTY_NOTICES.md) | Bundled components and their licences |
-| [User Guide](docs/USER_GUIDE.md) | Using the app: slide types, charts, presenting, exporting, theming |
+| [User Guide](docs/USER_GUIDE.md) | Using the app: slide types, charts, presenting, exporting, theming, and the information-security (pentest) module |
 
-### Design documents (proposals)
+### Design documents
 
-Forward-looking design proposals — **not yet implemented**. They describe future
-capabilities and the chosen architecture, kept deliberately separate from the
-current-state docs above.
+The design rationale and chosen architecture, kept separate from the
+current-state docs above. The **pentest-reporting (MIAUW)** and **AI-assistance**
+designs are now **implemented** (see the User Guide and the Features list);
+Collaboration and Git storage remain forward-looking proposals.
 
-| Document | What it covers |
-| --- | --- |
-| [Collaboration](docs/design/COLLABORATION.md) | Real-time co-authoring, presenting, and calls |
-| [Git storage](docs/design/GIT_STORAGE.md) | Storing decks in a git repository as versioned storage |
-| [Pentest reporting (MIAUW)](docs/design/PENTEST_MIAUW.md) | Penetration-test reports with audit value, per the MIAUW methodology |
-| [AI assistance](docs/design/AI_ASSIST.md) | Optional, privacy-first AI assistance (finding text drafting and image tagging) |
-| [Agentic build plan](docs/design/AGENTIC_BUILD_PLAN.md) | Building the pentest and AI feature set with autonomous agents |
+| Document | Status | What it covers |
+| --- | --- | --- |
+| [Pentest reporting (MIAUW)](docs/design/PENTEST_MIAUW.md) | **Implemented** | Penetration-test reports with audit value, per the MIAUW methodology |
+| [AI assistance](docs/design/AI_ASSIST.md) | **Implemented** | Optional, privacy-first AI assistance (finding text drafting and image tagging) |
+| [Agentic build plan](docs/design/AGENTIC_BUILD_PLAN.md) | Executed | How the pentest and AI feature set was built with autonomous agents |
+| [Collaboration](docs/design/COLLABORATION.md) | Proposal | Real-time co-authoring, presenting, and calls |
+| [Git storage](docs/design/GIT_STORAGE.md) | Proposal | Storing decks in a git repository as versioned storage |
 
 ## Contributing
 

@@ -49,6 +49,51 @@ void main() {
     );
   });
 
+  test('no dutch-source key lives in both the primary and additions map', () {
+    // The `d()` resolver checks `_dutchSourceAdd<Lang>` before
+    // `_dutchSource<Lang>`, so a key present in both silently uses the additions
+    // value and the primary entry is dead — and, worse, can hold a *different*,
+    // never-shown translation. Each source string must live in exactly one map.
+    final dir = Directory('lib/l10n/translations');
+    final files =
+        dir
+            .listSync()
+            .whereType<File>()
+            .where((f) => f.path.endsWith('.dart'))
+            .toList()
+          ..sort((a, b) => a.path.compareTo(b.path));
+
+    final problems = <String>[];
+    for (final file in files) {
+      final src = file.readAsStringSync();
+      Set<String>? primary;
+      Set<String>? additions;
+      for (final block in _mapBlocks(src)) {
+        if (!block.name.startsWith('_dutchSource')) continue;
+        final keys = _mapKeys(block.body).toSet();
+        if (block.name.startsWith('_dutchSourceAdd')) {
+          additions = keys;
+        } else {
+          primary = keys;
+        }
+      }
+      if (primary != null && additions != null) {
+        for (final key in primary.intersection(additions)) {
+          problems.add('${file.path}: $key is in both the primary and '
+              'additions map');
+        }
+      }
+    }
+
+    expect(
+      problems,
+      isEmpty,
+      reason:
+          'Shadowed dutch-source keys (remove the primary entry so the winning '
+          'additions value is the only one):\n${problems.join('\n')}',
+    );
+  });
+
   group('key extraction is robust (self-test of the guard)', () {
     test('catches a duplicate; values with :/, are not read as keys', () {
       const body = r'''
