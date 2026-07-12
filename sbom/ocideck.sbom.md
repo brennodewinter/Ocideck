@@ -122,7 +122,7 @@ This is **ocideck 1.0.0+1** (licence EUPL-1.2) and every third-party component i
 | pdf _(direct main)_ | 3.13.0 | Apache-2.0 | `pkg:pub/pdf@3.13.0` |
 | petitparser _(transitive)_ | 7.0.2 | MIT | `pkg:pub/petitparser@7.0.2` |
 | platform _(transitive)_ | 3.1.6 | BSD-3-Clause | `pkg:pub/platform@3.1.6` |
-| plugin_platform_interface _(transitive)_ | 2.1.8 | BSD-3-Clause | `pkg:pub/plugin_platform_interface@2.1.8` |
+| plugin_platform_interface _(direct dev)_ | 2.1.8 | BSD-3-Clause | `pkg:pub/plugin_platform_interface@2.1.8` |
 | pool _(transitive)_ | 1.5.2 | BSD-3-Clause | `pkg:pub/pool@1.5.2` |
 | posix _(transitive)_ | 6.5.0 | MIT | `pkg:pub/posix@6.5.0` |
 | provider _(transitive)_ | 6.1.5+1 | MIT | `pkg:pub/provider@6.1.5+1` |
@@ -173,7 +173,7 @@ This is **ocideck 1.0.0+1** (licence EUPL-1.2) and every third-party component i
 | url_launcher_ios _(transitive)_ | 6.4.1 | BSD-3-Clause | `pkg:pub/url_launcher_ios@6.4.1` |
 | url_launcher_linux _(transitive)_ | 3.2.2 | BSD-3-Clause | `pkg:pub/url_launcher_linux@3.2.2` |
 | url_launcher_macos _(transitive)_ | 3.2.5 | BSD-3-Clause | `pkg:pub/url_launcher_macos@3.2.5` |
-| url_launcher_platform_interface _(transitive)_ | 2.3.2 | BSD-3-Clause | `pkg:pub/url_launcher_platform_interface@2.3.2` |
+| url_launcher_platform_interface _(direct dev)_ | 2.3.2 | BSD-3-Clause | `pkg:pub/url_launcher_platform_interface@2.3.2` |
 | url_launcher_web _(transitive)_ | 2.4.3 | BSD-3-Clause | `pkg:pub/url_launcher_web@2.4.3` |
 | url_launcher_windows _(transitive)_ | 3.1.5 | BSD-3-Clause | `pkg:pub/url_launcher_windows@3.1.5` |
 | uuid _(direct main)_ | 4.5.3 | MIT | `pkg:pub/uuid@4.5.3` |

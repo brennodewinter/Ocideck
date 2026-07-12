@@ -5,7 +5,7 @@
   "name": "ocideck-1.0.0+1",
   "documentNamespace": "https://ocideck.app/spdx/eaafde8c-5a52-5633-8d13-c4b53aacb311",
   "creationInfo": {
-    "created": "2026-07-10T08:11:34.252374Z",
+    "created": "2026-07-12T15:33:34.560024Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -4404,6 +4404,11 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-101-plugin-platform-interface"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-117-screen-retriever"
     },
     {
@@ -4415,6 +4420,11 @@
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-147-url-launcher"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-152-url-launcher-platform-interface"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
