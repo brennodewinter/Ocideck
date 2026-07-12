@@ -83,6 +83,16 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'RFC3161-tijdstempel': 'RFC3161-tidsstempel',
+  'Verzegel het deck eerst.': 'Forsegl først decket.',
+  'Verzoek (.tsq) exporteren': 'Eksportér anmodning (.tsq)',
+  'Token (.tsr) importeren': 'Importér token (.tsr)',
+  'Nog geen tijdstempel': 'Endnu intet tidsstempel',
+  'Getijdstempeld op': 'Tidsstemplet den',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Tidsstemplet matcher ikke seglets hash',
+  'Tijdstempelverzoek opgeslagen': 'Tidsstempelanmodning gemt',
+  'Tijdstempel geïmporteerd': 'Tidsstempel importeret',
   'Managementsamenvatting': 'Ledelsesresumé',
   'Bevindingen totaal': 'Fund i alt',
   'scope-objecten getest': 'scope-objekter testet',

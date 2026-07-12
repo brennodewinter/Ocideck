@@ -83,6 +83,16 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'RFC3161-tijdstempel': 'RFC3161-aikaleima',
+  'Verzegel het deck eerst.': 'Sinetöi ensin deck.',
+  'Verzoek (.tsq) exporteren': 'Vie pyyntö (.tsq)',
+  'Token (.tsr) importeren': 'Tuo token (.tsr)',
+  'Nog geen tijdstempel': 'Ei vielä aikaleimaa',
+  'Getijdstempeld op': 'Aikaleimattu',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Aikaleima ei vastaa sinetin tiivistettä',
+  'Tijdstempelverzoek opgeslagen': 'Aikaleimapyyntö tallennettu',
+  'Tijdstempel geïmporteerd': 'Aikaleima tuotu',
   'Managementsamenvatting': 'Johdon yhteenveto',
   'Bevindingen totaal': 'Havaintoja yhteensä',
   'scope-objecten getest': 'laajuuden kohteita testattu',

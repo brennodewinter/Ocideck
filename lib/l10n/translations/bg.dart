@@ -84,6 +84,16 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'RFC3161-tijdstempel': 'Времеви печат RFC3161',
+  'Verzegel het deck eerst.': 'Първо запечатайте тестето.',
+  'Verzoek (.tsq) exporteren': 'Експортирай заявка (.tsq)',
+  'Token (.tsr) importeren': 'Импортирай токен (.tsr)',
+  'Nog geen tijdstempel': 'Все още няма времеви печат',
+  'Getijdstempeld op': 'С времеви печат от',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Времевият печат не съвпада с хеша на печата',
+  'Tijdstempelverzoek opgeslagen': 'Заявката за времеви печат е запазена',
+  'Tijdstempel geïmporteerd': 'Времевият печат е импортиран',
   'Managementsamenvatting': 'Обобщение за ръководството',
   'Bevindingen totaal': 'Общо констатации',
   'scope-objecten getest': 'тествани обекти от обхвата',

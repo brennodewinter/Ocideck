@@ -83,6 +83,16 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'RFC3161-tijdstempel': 'Χρονοσήμανση RFC3161',
+  'Verzegel het deck eerst.': 'Σφραγίστε πρώτα το deck.',
+  'Verzoek (.tsq) exporteren': 'Εξαγωγή αιτήματος (.tsq)',
+  'Token (.tsr) importeren': 'Εισαγωγή διακριτικού (.tsr)',
+  'Nog geen tijdstempel': 'Χωρίς χρονοσήμανση ακόμη',
+  'Getijdstempeld op': 'Χρονοσημάνθηκε στις',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Η χρονοσήμανση δεν ταιριάζει με το hash της σφραγίδας',
+  'Tijdstempelverzoek opgeslagen': 'Το αίτημα χρονοσήμανσης αποθηκεύτηκε',
+  'Tijdstempel geïmporteerd': 'Η χρονοσήμανση εισήχθη',
   'Managementsamenvatting': 'Σύνοψη διοίκησης',
   'Bevindingen totaal': 'Σύνολο ευρημάτων',
   'scope-objecten getest': 'αντικείμενα εμβέλειας ελέγχθηκαν',

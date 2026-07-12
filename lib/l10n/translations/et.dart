@@ -82,6 +82,16 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'RFC3161-tijdstempel': 'RFC3161 ajatempel',
+  'Verzegel het deck eerst.': 'Pitseerige esmalt deck.',
+  'Verzoek (.tsq) exporteren': 'Ekspordi päring (.tsq)',
+  'Token (.tsr) importeren': 'Impordi tunnusluba (.tsr)',
+  'Nog geen tijdstempel': 'Ajatemplit veel pole',
+  'Getijdstempeld op': 'Ajatembeldatud',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Ajatempel ei ühti pitseri räsiga',
+  'Tijdstempelverzoek opgeslagen': 'Ajatempli päring salvestatud',
+  'Tijdstempel geïmporteerd': 'Ajatempel imporditud',
   'Managementsamenvatting': 'Juhtkonna kokkuvõte',
   'Bevindingen totaal': 'Leide kokku',
   'scope-objecten getest': 'ulatuse objekte testitud',

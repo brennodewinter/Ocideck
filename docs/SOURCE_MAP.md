@@ -81,6 +81,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `quality_export_policy.dart` — Gates export by slide-quality issues with warnings.
 - `recovery_service.dart` — Auto-saves deck snapshots for crash/unsaved recovery.
 - `rehearsal_controller.dart` — Unit-testable controller tracking elapsed/remaining/per-slide rehearsal timing.
+- `rfc3161_timestamp.dart` — Builds a `.tsq` from the seal hash and parses/verifies a `.tsr` timestamp token.
 - `rich_text_layout.dart` — Computes pagination and scaling for rich-text markdown bodies.
 - `scope_coverage.dart` — `deckScopeCoverageGaps`: flags in-scope objects with no test and no finding.
 - `secret_store.dart` — Manages secrets (WebDAV credentials, AI API key) in the OS keychain.
@@ -103,7 +104,6 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `deck_quality_provider.dart` — Computes accessibility/quality analysis for the loaded deck.
 - `editor_provider.dart` — `EditorState`/`EditorNotifier`: selected slide, editor mode, markdown buffer.
 - `image_contrast_provider.dart` — Computes title-slide image-contrast issues asynchronously per deck.
-- `miauw_compliance_provider.dart` — Computes the MIAUW compliance overview for the loaded deck (per-tab scoped).
 - `sec_module_provider.dart` — The security-module enable/reveal state that gates the pentest features.
 - `settings_provider.dart` — `SettingsNotifier`: app settings, theme/appearance profiles, cockpit schemes.
 - `slide_clipboard_provider.dart` — Global slide clipboard for copy/paste across tabs.
@@ -112,6 +112,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 
 ## `lib/utils/` — small shared helpers
 
+- `asn1_der.dart` — Minimal dependency-free ASN.1/DER encode + parse for RFC 3161 timestamping.
 - `atomic_file.dart` — Atomic writes (temp file + rename) to prevent data loss on crash.
 - `bundled_asset.dart` — `asset:`-schema voor méégebundelde logo's van ingebouwde stijlprofielen.
 - `color_contrast.dart` — WCAG 2.1 contrast-ratio calculation and hex colour parsing.
@@ -214,6 +215,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `presentation_info_dialog.dart` — Edits title/author/organization/description metadata.
 - `scan_library_dialog.dart` — Scans well-known locations for presentations.
 - `scope_coverage_dialog.dart` — Shows the scope-coverage gaps (in-scope objects with no test/finding).
+- `seal_timestamp_dialog.dart` — RFC 3161 timestamp workflow: export the `.tsq`, import/verify the `.tsr`.
 - `settings_dialog.dart` — Sidebar settings (theme colours, fonts, cockpit,
   Licentie en Privacy, Beveiliging, Nextcloud, and an "Over OciDeck" screen);
   tab bodies live in `parts/settings_dialog_*.dart`.

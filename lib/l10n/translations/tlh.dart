@@ -81,6 +81,16 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'RFC3161-tijdstempel': 'RFC3161 poH degh',
+  'Verzegel het deck eerst.': 'wa\'DIch deck rItlh.',
+  'Verzoek (.tsq) exporteren': 'tlhob (.tsq) ngeH',
+  'Token (.tsr) importeren': 'token (.tsr) \'el',
+  'Nog geen tijdstempel': 'poH degh Suqbe\'taH',
+  'Getijdstempeld op': 'poH degh:',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'poH degh rItlh degh rap be\'',
+  'Tijdstempelverzoek opgeslagen': 'tlhob poH degh pollu\'',
+  'Tijdstempel geïmporteerd': 'poH degh \'elpu\'',
   'Managementsamenvatting': 'che\' boQ',
   'Bevindingen totaal': 'Sammeypu\' naQ',
   'scope-objecten getest': 'scope Dochmey waH',

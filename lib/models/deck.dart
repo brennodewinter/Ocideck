@@ -154,6 +154,12 @@ class Deck {
   /// Tijdstip van verzegelen als ISO-8601-string. Leeg wanneer niet verzegeld.
   final String sealAt;
 
+  /// Optionele RFC 3161-tijdstempeltoken (`.tsr`) over [sealHash], base64url-
+  /// gecodeerd (PENTEST_MIAUW §8-A2). Een externe TSA/OpenKAT tijdstempelt de
+  /// hash out-of-band; de geïmporteerde token wordt in-app geverifieerd. Leeg
+  /// wanneer er geen tijdstempel is. Reist mee als `ocideck_seal_tsr`.
+  final String sealTimestampToken;
+
   /// Optionele zichtbare handtekening die bij het verzegelen is vastgelegd.
   /// Herbruikbaar element (zie [DocumentSignature]); null wanneer niet gezet.
   final DocumentSignature? signature;
@@ -195,6 +201,7 @@ class Deck {
     this.sealHash = '',
     this.sealAlgo = '',
     this.sealAt = '',
+    this.sealTimestampToken = '',
     this.signature,
     this.annotations = const {},
     this.userNotes = const {},
@@ -223,6 +230,7 @@ class Deck {
     String? sealHash,
     String? sealAlgo,
     String? sealAt,
+    String? sealTimestampToken,
     DocumentSignature? signature,
     bool clearSignature = false,
     Map<String, List<InkStroke>>? annotations,
@@ -251,6 +259,7 @@ class Deck {
       sealHash: sealHash ?? this.sealHash,
       sealAlgo: sealAlgo ?? this.sealAlgo,
       sealAt: sealAt ?? this.sealAt,
+      sealTimestampToken: sealTimestampToken ?? this.sealTimestampToken,
       signature: clearSignature ? null : (signature ?? this.signature),
       annotations: annotations ?? this.annotations,
       userNotes: userNotes ?? this.userNotes,

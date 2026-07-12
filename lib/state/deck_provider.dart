@@ -771,8 +771,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
     if (deck == null || deck.finalized) return;
     // AI_ASSIST §16.3: refuse to seal while any AI-drafted field is unreviewed,
     // so the EIS 1.6 attestation always covers human-verified text. The UI
-    // pre-checks and explains which slides block it (see [slidesBlockingSeal]);
-    // this is the authoritative guard.
+    // pre-checks it (see [slidesBlockingSeal]); this is the authoritative guard.
     if (deckHasUnreviewedAiMarkers(deck)) return;
     final sealed = DocumentIntegrity(_md).seal(deck, signature: signature);
     _clearHistory();
@@ -954,15 +953,17 @@ class DeckNotifier extends StateNotifier<DeckState> {
   /// bewerkingen die de huidige slide aanpassen zonder dat de editor zelf de
   /// bron van de wijziging was (anders blijft de editor de oude, gecachte
   /// waarden tonen).
-  void _mutate(Deck deck, {String? coalesceKey, bool bumpRevision = false}) {
+  void _mutate(
+    Deck deck, {
+    String? coalesceKey,
+    bool bumpRevision = false,
+    bool allowFinalized = false,
+  }) {
     final previous = state.deck;
-    // Read-only lock (§8 A1): a finalised deck is not editable. Every content
-    // edit funnels through here, so refusing at this single choke point makes
-    // the whole editor read-only without a parallel guard on each action.
-    // Bekijken en exporteren lezen de state en gaan niet via [_mutate], dus die
-    // blijven werken. Het verzegelen zelf loopt via [finalizeAndSeal], dat de
-    // state rechtstreeks zet terwijl het deck nog bewerkbaar is.
-    if (previous != null && previous.finalized) return;
+    // Read-only lock (§8 A1): a finalised deck rejects edits here (sealing sets
+    // state directly via [finalizeAndSeal]); only the post-seal RFC3161
+    // timestamp ([allowFinalized]) is exempt — it falls outside the hashed body.
+    if (previous != null && previous.finalized && !allowFinalized) return;
     if (previous != null) {
       final now = DateTime.now();
       final canCoalesce =

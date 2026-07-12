@@ -8,6 +8,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **RFC 3161 trusted timestamp for the seal** — a finalised, sealed report can now
+  be anchored in time. The **RFC3161-tijdstempel** command (command palette)
+  **exports a request (`.tsq`)** over the SHA-512 seal hash, which the user has
+  OpenKAT or any timestamp authority (TSA) timestamp out-of-band, then **imports
+  the returned token (`.tsr`)**. OciDeck verifies it **offline** — the token's
+  message imprint must equal the seal hash — and stores it in the deck front
+  matter (`ocideck_seal_tsr`), showing a "timestamped on …" or "does not match"
+  status that is re-checked on every open. OciDeck never contacts the TSA itself,
+  and the token is excluded from the sealed content hash (no new dependency; a
+  small ASN.1/DER codec does the encoding). PENTEST_MIAUW §8-A2. Localised in all
+  interface languages.
 - **Management summary derived from the deck** — a **Managementsamenvatting**
   command (command palette) shows a management overview computed live from the
   deck: the number of findings per severity band, how many scope objects were

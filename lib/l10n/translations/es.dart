@@ -84,6 +84,16 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'RFC3161-tijdstempel': 'Sello de tiempo RFC3161',
+  'Verzegel het deck eerst.': 'Sella primero el deck.',
+  'Verzoek (.tsq) exporteren': 'Exportar solicitud (.tsq)',
+  'Token (.tsr) importeren': 'Importar token (.tsr)',
+  'Nog geen tijdstempel': 'Aún sin sello de tiempo',
+  'Getijdstempeld op': 'Sellado el',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'El sello de tiempo no coincide con el hash del sello',
+  'Tijdstempelverzoek opgeslagen': 'Solicitud de sello de tiempo guardada',
+  'Tijdstempel geïmporteerd': 'Sello de tiempo importado',
   'Managementsamenvatting': 'Resumen ejecutivo',
   'Bevindingen totaal': 'Total de hallazgos',
   'scope-objecten getest': 'objetos de alcance probados',

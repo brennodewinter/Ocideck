@@ -85,6 +85,16 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'RFC3161-tijdstempel': 'Stampa ama RFC3161',
+  'Verzegel het deck eerst.': 'Séalaigh an deck ar dtús.',
+  'Verzoek (.tsq) exporteren': 'Easpórtáil iarratas (.tsq)',
+  'Token (.tsr) importeren': 'Iompórtáil comhartha (.tsr)',
+  'Nog geen tijdstempel': 'Gan stampa ama fós',
+  'Getijdstempeld op': 'Stampáilte ama ar',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Ní mheaitseálann an stampa ama le hais an tséala',
+  'Tijdstempelverzoek opgeslagen': 'Iarratas stampa ama sábháilte',
+  'Tijdstempel geïmporteerd': 'Stampa ama iompórtáilte',
   'Managementsamenvatting': 'Achoimre bhainistíochta',
   'Bevindingen totaal': 'Fionnachtana san iomlán',
   'scope-objecten getest': 'réada scóip tástáilte',

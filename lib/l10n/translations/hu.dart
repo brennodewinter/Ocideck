@@ -83,6 +83,16 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'RFC3161-tijdstempel': 'RFC3161 időbélyeg',
+  'Verzegel het deck eerst.': 'Előbb pecsételje le a decket.',
+  'Verzoek (.tsq) exporteren': 'Kérés exportálása (.tsq)',
+  'Token (.tsr) importeren': 'Token importálása (.tsr)',
+  'Nog geen tijdstempel': 'Még nincs időbélyeg',
+  'Getijdstempeld op': 'Időbélyegezve',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Az időbélyeg nem egyezik a pecsét hashével',
+  'Tijdstempelverzoek opgeslagen': 'Időbélyeg-kérés mentve',
+  'Tijdstempel geïmporteerd': 'Időbélyeg importálva',
   'Managementsamenvatting': 'Vezetői összefoglaló',
   'Bevindingen totaal': 'Megállapítások összesen',
   'scope-objecten getest': 'tesztelt hatókör-objektumok',

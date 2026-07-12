@@ -84,6 +84,16 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'RFC3161-tijdstempel': 'Мітка часу RFC3161',
+  'Verzegel het deck eerst.': 'Спершу запечатайте колоду.',
+  'Verzoek (.tsq) exporteren': 'Експортувати запит (.tsq)',
+  'Token (.tsr) importeren': 'Імпортувати токен (.tsr)',
+  'Nog geen tijdstempel': 'Ще немає мітки часу',
+  'Getijdstempeld op': 'Позначено часом',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Мітка часу не збігається з хешем печатки',
+  'Tijdstempelverzoek opgeslagen': 'Запит мітки часу збережено',
+  'Tijdstempel geïmporteerd': 'Мітку часу імпортовано',
   'Managementsamenvatting': 'Резюме для керівництва',
   'Bevindingen totaal': 'Усього виявлень',
   'scope-objecten getest': 'об\'єктів обсягу перевірено',

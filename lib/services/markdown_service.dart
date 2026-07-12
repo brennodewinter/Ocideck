@@ -100,6 +100,9 @@ class MarkdownService {
       buf.writeln('ocideck_seal_algo: ${_yamlScalar(deck.sealAlgo)}');
       buf.writeln('ocideck_seal_at: ${_yamlScalar(deck.sealAt)}');
     }
+    if (deck.sealTimestampToken.isNotEmpty) {
+      buf.writeln('ocideck_seal_tsr: ${deck.sealTimestampToken}');
+    }
     if (inlineStyleProfile) {
       buf.writeln(
         'ocideck_style_profile: ${base64Url.encode(utf8.encode(jsonEncode(deck.themeProfile.toJson())))}',
@@ -157,7 +160,15 @@ class MarkdownService {
   /// is deliberately kept, so tampering with it is detectable.
   String canonicalContentForSeal(Deck deck) {
     return generateDeck(
-      deck.copyWith(finalized: false, sealHash: '', sealAlgo: '', sealAt: ''),
+      deck.copyWith(
+        finalized: false,
+        sealHash: '',
+        sealAlgo: '',
+        sealAt: '',
+        // The RFC3161 token is added *after* sealing and timestamps the hash, so
+        // it must stay out of the content the hash covers (else it is circular).
+        sealTimestampToken: '',
+      ),
     );
   }
 

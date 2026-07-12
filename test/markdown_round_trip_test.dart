@@ -394,6 +394,47 @@ void main() {
       expect(markdown, isNot(contains('ocideck_miauw_waivers')));
     });
 
+    test(
+      'the RFC3161 timestamp token round-trips through the front matter',
+      () {
+        final service = MarkdownService();
+        const token = 'MIAFAKEtoken-base64url_';
+        final markdown = service.generateDeck(
+          Deck(
+            title: 'Pentest',
+            sealHash: 'abc123',
+            sealTimestampToken: token,
+            slides: [Slide.create(SlideType.title)],
+          ),
+        );
+        expect(markdown, contains('ocideck_seal_tsr: $token'));
+        expect(service.parseDeck(markdown)!.sealTimestampToken, token);
+      },
+    );
+
+    test('a deck without a timestamp writes no seal_tsr key', () {
+      final markdown = MarkdownService().generateDeck(
+        Deck(title: 'X', slides: [Slide.create(SlideType.title)]),
+      );
+      expect(markdown, isNot(contains('ocideck_seal_tsr')));
+    });
+
+    test('the timestamp token stays out of the sealed content hash', () {
+      final service = MarkdownService();
+      final base = Deck(
+        title: 'Pentest',
+        sealHash: 'abc123',
+        slides: [Slide.create(SlideType.title)],
+      );
+      final withToken = base.copyWith(sealTimestampToken: 'MIAFAKEtoken');
+      // Adding the token (which timestamps the hash) must not change the
+      // canonical content the hash is computed over.
+      expect(
+        service.canonicalContentForSeal(withToken),
+        service.canonicalContentForSeal(base),
+      );
+    });
+
     test('bulletsImage slide keeps bullets, image, size and caption', () {
       final out = _roundTrip(
         Slide.create(SlideType.bulletsImage).copyWith(

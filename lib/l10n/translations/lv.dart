@@ -83,6 +83,16 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'RFC3161-tijdstempel': 'RFC3161 laika zīmogs',
+  'Verzegel het deck eerst.': 'Vispirms aizzīmogojiet deku.',
+  'Verzoek (.tsq) exporteren': 'Eksportēt pieprasījumu (.tsq)',
+  'Token (.tsr) importeren': 'Importēt marķieri (.tsr)',
+  'Nog geen tijdstempel': 'Vēl nav laika zīmoga',
+  'Getijdstempeld op': 'Laika zīmogots',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Laika zīmogs neatbilst zīmoga jaucējam',
+  'Tijdstempelverzoek opgeslagen': 'Laika zīmoga pieprasījums saglabāts',
+  'Tijdstempel geïmporteerd': 'Laika zīmogs importēts',
   'Managementsamenvatting': 'Vadības kopsavilkums',
   'Bevindingen totaal': 'Atradumu kopā',
   'scope-objecten getest': 'pārbaudīti tvēruma objekti',

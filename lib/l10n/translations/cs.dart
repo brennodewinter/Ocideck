@@ -84,6 +84,16 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'RFC3161-tijdstempel': 'Časové razítko RFC3161',
+  'Verzegel het deck eerst.': 'Nejprve zapečeťte deck.',
+  'Verzoek (.tsq) exporteren': 'Exportovat žádost (.tsq)',
+  'Token (.tsr) importeren': 'Importovat token (.tsr)',
+  'Nog geen tijdstempel': 'Zatím žádné časové razítko',
+  'Getijdstempeld op': 'Označeno časem',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Časové razítko neodpovídá hashi pečeti',
+  'Tijdstempelverzoek opgeslagen': 'Žádost o časové razítko uložena',
+  'Tijdstempel geïmporteerd': 'Časové razítko importováno',
   'Managementsamenvatting': 'Manažerské shrnutí',
   'Bevindingen totaal': 'Nálezy celkem',
   'scope-objecten getest': 'testované objekty rozsahu',

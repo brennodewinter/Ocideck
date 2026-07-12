@@ -83,6 +83,16 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'RFC3161-tijdstempel': 'RFC3161-tiidstimpel',
+  'Verzegel het deck eerst.': 'Fersegelje earst it deck.',
+  'Verzoek (.tsq) exporteren': 'Fersyk (.tsq) eksportearje',
+  'Token (.tsr) importeren': 'Token (.tsr) ymportearje',
+  'Nog geen tijdstempel': 'Noch gjin tiidstimpel',
+  'Getijdstempeld op': 'Tiidstimpele op',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Tiidstimpel komt net oerien mei de segel-hash',
+  'Tijdstempelverzoek opgeslagen': 'Tiidstimpelfersyk bewarre',
+  'Tijdstempel geïmporteerd': 'Tiidstimpel ymportearre',
   'Managementsamenvatting': 'Managementgearfetting',
   'Bevindingen totaal': 'Befinings totaal',
   'scope-objecten getest': 'scope-objekten test',

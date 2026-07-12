@@ -84,6 +84,16 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'RFC3161-tijdstempel': 'Časová pečiatka RFC3161',
+  'Verzegel het deck eerst.': 'Najprv zapečaťte deck.',
+  'Verzoek (.tsq) exporteren': 'Exportovať žiadosť (.tsq)',
+  'Token (.tsr) importeren': 'Importovať token (.tsr)',
+  'Nog geen tijdstempel': 'Zatiaľ žiadna časová pečiatka',
+  'Getijdstempeld op': 'Označené časom',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Časová pečiatka nezodpovedá hashu pečate',
+  'Tijdstempelverzoek opgeslagen': 'Žiadosť o časovú pečiatku uložená',
+  'Tijdstempel geïmporteerd': 'Časová pečiatka importovaná',
   'Managementsamenvatting': 'Manažérske zhrnutie',
   'Bevindingen totaal': 'Zistenia spolu',
   'scope-objecten getest': 'testované objekty rozsahu',

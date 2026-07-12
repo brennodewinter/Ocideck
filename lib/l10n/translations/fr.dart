@@ -84,6 +84,16 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'RFC3161-tijdstempel': 'Horodatage RFC3161',
+  'Verzegel het deck eerst.': 'Scellez d\'abord le deck.',
+  'Verzoek (.tsq) exporteren': 'Exporter la requête (.tsq)',
+  'Token (.tsr) importeren': 'Importer le jeton (.tsr)',
+  'Nog geen tijdstempel': 'Pas encore d\'horodatage',
+  'Getijdstempeld op': 'Horodaté le',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'L\'horodatage ne correspond pas au hachage du sceau',
+  'Tijdstempelverzoek opgeslagen': 'Requête d\'horodatage enregistrée',
+  'Tijdstempel geïmporteerd': 'Horodatage importé',
   'Managementsamenvatting': 'Synthèse pour la direction',
   'Bevindingen totaal': 'Total des constatations',
   'scope-objecten getest': 'objets de périmètre testés',

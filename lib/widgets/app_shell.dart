@@ -12,7 +12,6 @@ import '../platform/platform_features.dart';
 import '../utils/display_path.dart';
 import '../utils/log.dart';
 import '../models/deck.dart';
-import '../models/miauw_compliance.dart';
 import '../models/recent_file.dart';
 import '../models/settings.dart' show AppSettings;
 import '../models/slide.dart';
@@ -40,7 +39,6 @@ import '../services/webdav_service.dart';
 import '../state/deck_provider.dart';
 import '../state/deck_quality_provider.dart';
 import '../state/image_contrast_provider.dart';
-import '../state/miauw_compliance_provider.dart';
 import '../state/sec_module_provider.dart';
 import '../state/editor_provider.dart';
 import '../state/settings_provider.dart';
@@ -68,6 +66,7 @@ import 'dialogs/package_password_dialog.dart';
 import 'dialogs/presentation_info_dialog.dart';
 import 'dialogs/save_destination_dialog.dart';
 import 'dialogs/scan_library_dialog.dart';
+import 'dialogs/seal_timestamp_dialog.dart';
 import 'dialogs/settings_dialog.dart';
 import 'dialogs/webdav_browser_dialog.dart';
 import '../services/trash_service.dart';
@@ -513,17 +512,6 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                                   }
                                   return ref
                                       .watch(slideQualityAnalyzerProvider)
-                                      .analyze(deck);
-                                }),
-                                miauwComplianceProvider.overrideWith((ref) {
-                                  final deck = ref.watch(
-                                    deckProvider.select((state) => state.deck),
-                                  );
-                                  if (deck == null) {
-                                    return const MiauwComplianceResult([]);
-                                  }
-                                  return ref
-                                      .watch(miauwComplianceAnalyzerProvider)
                                       .analyze(deck);
                                 }),
                                 imageContrastIssuesProvider.overrideWith(

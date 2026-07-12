@@ -83,6 +83,16 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'RFC3161-tijdstempel': 'Stempel waktu RFC3161',
+  'Verzegel het deck eerst.': 'Segel deck terlebih dahulu.',
+  'Verzoek (.tsq) exporteren': 'Ekspor permintaan (.tsq)',
+  'Token (.tsr) importeren': 'Impor token (.tsr)',
+  'Nog geen tijdstempel': 'Belum ada stempel waktu',
+  'Getijdstempeld op': 'Distempel waktu pada',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Stempel waktu tidak cocok dengan hash segel',
+  'Tijdstempelverzoek opgeslagen': 'Permintaan stempel waktu disimpan',
+  'Tijdstempel geïmporteerd': 'Stempel waktu diimpor',
   'Managementsamenvatting': 'Ringkasan manajemen',
   'Bevindingen totaal': 'Total temuan',
   'scope-objecten getest': 'objek lingkup diuji',
