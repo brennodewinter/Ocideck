@@ -763,4 +763,182 @@ void main() {
     expect(q1.rodStackItems[1].toY, 5);
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('area chart draws a filled line', (tester) async {
+    const spec = ChartSpec(
+      type: ChartType.area,
+      title: 'Trend',
+      x: ['Q1', 'Q2', 'Q3'],
+      series: [
+        ChartSeries(name: '2026', data: [10, 14, 12]),
+      ],
+    );
+
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    final line = tester.widget<LineChart>(find.byType(LineChart));
+    expect(line.data.lineBarsData.single.belowBarData.show, isTrue);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('donut shows the series total in the centre hole', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.donut,
+      title: 'Verdeling',
+      x: ['A', 'B', 'C'],
+      series: [
+        ChartSeries(name: 'Aandeel', data: [20, 30, 50]),
+      ],
+    );
+
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    expect(find.byType(PieChart), findsOneWidget);
+    // 20 + 30 + 50 = 100, printed in the hole.
+    expect(find.text('100'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('horizontal bar renders category and value labels', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.horizontalBar,
+      title: 'Ranglijst',
+      x: ['Alpha', 'Beta'],
+      series: [
+        ChartSeries(name: 'Score', data: [8, 12]),
+      ],
+    );
+
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    expect(find.text('Alpha'), findsOneWidget);
+    expect(find.text('Beta'), findsOneWidget);
+    expect(find.text('12'), findsWidgets);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets(
+    'combo overlays a line over the bars, degrades below two series',
+    (tester) async {
+      const combo = ChartSpec(
+        type: ChartType.combo,
+        title: 'Omzet en groei',
+        x: ['Q1', 'Q2', 'Q3'],
+        series: [
+          ChartSeries(name: 'Omzet', data: [10, 14, 12]),
+          ChartSeries(name: 'Groei %', data: [3, 8, 5]),
+        ],
+      );
+
+      await tester.pumpWidget(_host(combo));
+      await tester.pump();
+
+      expect(find.byType(BarChart), findsOneWidget);
+      expect(find.byType(LineChart), findsOneWidget);
+      expect(tester.takeException(), isNull);
+
+      // One series → falls back to a plain bar chart (no line layer).
+      const single = ChartSpec(
+        type: ChartType.combo,
+        x: ['Q1', 'Q2'],
+        series: [
+          ChartSeries(name: 'Omzet', data: [10, 14]),
+        ],
+      );
+      await tester.pumpWidget(_host(single));
+      await tester.pump();
+      expect(find.byType(BarChart), findsOneWidget);
+      expect(find.byType(LineChart), findsNothing);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets('waterfall floats each step from the running total', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.waterfall,
+      title: 'Brug',
+      x: ['Start', 'Erbij', 'Eraf'],
+      series: [
+        ChartSeries(name: 'Stap', data: [100, 20, -30]),
+      ],
+    );
+
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    final bar = tester.widget<BarChart>(find.byType(BarChart));
+    // Cumulative: 0→100, 100→120, 120→90. Each rod floats between the two.
+    final rods = [for (final g in bar.data.barGroups) g.barRods.single];
+    expect(rods[0].fromY, 0);
+    expect(rods[0].toY, 100);
+    expect(rods[1].fromY, 100);
+    expect(rods[1].toY, 120);
+    expect(rods[2].fromY, 90);
+    expect(rods[2].toY, 120);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('heatmap renders every cell value and its column labels', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.heatmap,
+      title: 'Risico',
+      x: ['Laag', 'Hoog'],
+      series: [
+        ChartSeries(name: 'Kans A', data: [1, 4]),
+        ChartSeries(name: 'Kans B', data: [2, 9]),
+      ],
+    );
+
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    expect(find.text('Kans A'), findsOneWidget);
+    expect(find.text('Kans B'), findsOneWidget);
+    expect(find.text('Laag'), findsOneWidget);
+    expect(find.text('Hoog'), findsOneWidget);
+    // '4' is a cell value that isn't also a scale bound (min 1, max 9).
+    expect(find.text('4'), findsOneWidget);
+    // '9' is both the top cell and the scale maximum.
+    expect(find.text('9'), findsWidgets);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('new chart types animate in presentation mode without error', (
+    tester,
+  ) async {
+    for (final type in [
+      ChartType.area,
+      ChartType.donut,
+      ChartType.horizontalBar,
+      ChartType.combo,
+      ChartType.waterfall,
+      ChartType.heatmap,
+    ]) {
+      final spec = ChartSpec(
+        type: type,
+        title: 'Test',
+        x: const ['A', 'B', 'C'],
+        series: const [
+          ChartSeries(name: 'Een', data: [3, 6, 4]),
+          ChartSeries(name: 'Twee', data: [5, 2, 8]),
+        ],
+      );
+      await tester.pumpWidget(_host(spec, presentationMode: true));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull, reason: '$type threw');
+    }
+  });
 }

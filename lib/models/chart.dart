@@ -20,7 +20,29 @@ const List<String> chartColorPalette = [
 ];
 
 /// Supported chart kinds for a chart slide.
-enum ChartType { bar, stackedBar, line, pie, radar, scatter }
+///
+/// New kinds are appended so a slide's stored `type` name stays stable. The
+/// first six are the original set; the rest were added later:
+/// - [area] — a filled line chart (trend + magnitude).
+/// - [donut] — a pie with a hole and the total in the centre.
+/// - [horizontalBar] — bars laid out left-to-right (long labels / rankings).
+/// - [combo] — bars plus the last series drawn as a line on a second axis.
+/// - [waterfall] — the first series as up/down steps building on a total.
+/// - [heatmap] — a grid coloured by value (doubles as a risk matrix).
+enum ChartType {
+  bar,
+  stackedBar,
+  line,
+  pie,
+  radar,
+  scatter,
+  area,
+  donut,
+  horizontalBar,
+  combo,
+  waterfall,
+  heatmap,
+}
 
 ChartType _chartTypeFromName(String? name) => ChartType.values.firstWhere(
   (t) => t.name == name,
@@ -112,16 +134,29 @@ class ChartSpec {
 
   bool get hasInlineData => x.isNotEmpty && series.isNotEmpty;
 
-  /// Whether the optional [minBound]/[maxBound] apply. On bar/line/scatter they are
-  /// horizontal threshold lines; on radar they fix the scale (centre/outer
-  /// ring). Pie charts have no axis, so they never use bounds.
-  bool get supportsBounds => type != ChartType.pie;
+  /// Whether the optional [minBound]/[maxBound] apply. On the cartesian charts
+  /// they are horizontal threshold lines; on radar they fix the scale
+  /// (centre/outer ring). The proportional/grid charts (pie, donut, horizontal
+  /// bar, heatmap) have no single value axis, so they never use bounds.
+  bool get supportsBounds =>
+      type != ChartType.pie &&
+      type != ChartType.donut &&
+      type != ChartType.horizontalBar &&
+      type != ChartType.heatmap;
+
+  /// Whether this is a pie-like proportional chart (one circle per series,
+  /// segments per label) — pie and donut share their data mapping, legend and
+  /// screen-reader readout.
+  bool get isPieLike => type == ChartType.pie || type == ChartType.donut;
 
   /// True only where bounds render as horizontal threshold *lines*.
   bool get supportsBoundLines =>
       type == ChartType.bar ||
       type == ChartType.stackedBar ||
       type == ChartType.line ||
+      type == ChartType.area ||
+      type == ChartType.combo ||
+      type == ChartType.waterfall ||
       type == ChartType.scatter;
 
   ChartSpec copyWith({

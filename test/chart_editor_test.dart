@@ -196,12 +196,20 @@ void main() {
     await tester.pump();
 
     final specs = variants!.map((s) => ChartSpec.parse(s.customMarkdown));
+    // The dialog lists every other type in enum order; moving item 0 down one
+    // swaps the first two (stackedBar/line).
     expect(specs.map((s) => s.type), [
       ChartType.line,
       ChartType.stackedBar,
       ChartType.pie,
       ChartType.radar,
       ChartType.scatter,
+      ChartType.area,
+      ChartType.donut,
+      ChartType.horizontalBar,
+      ChartType.combo,
+      ChartType.waterfall,
+      ChartType.heatmap,
     ]);
     expect(specs.first.x, ['A', 'B']);
     expect(specs.first.series.single.data, [10, 20]);

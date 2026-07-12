@@ -18,7 +18,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 ## `lib/models/` — data model
 
 - `annotation.dart` — `InkStroke` and `InkTool` enum for freehand drawing annotations on presentation slides.
-- `chart.dart` — `ChartSpec`/`ChartSeries` for bar/line/pie/radar/scatter chart slides with inline or CSV data.
+- `chart.dart` — `ChartSpec`/`ChartSeries` and the `ChartType` enum (bar, stacked/horizontal bar, combo, line, area, pie, donut, radar, scatter, waterfall, heatmap) for chart slides with inline or CSV data.
 - `checklist_spec.dart` — `ChecklistSpec` for the security checklist slide (MIAUW tri-state test list linked to findings).
 - `cockpit.dart` — `CockpitSpec`/`CockpitMeterSpec` for instrumentation gauges (speedometer, voltmeter, etc.).
 - `cvss_builder.dart` — CVSS 4.0 Base-metric metadata + vector assembly + `CiaRating`→`CR`/`IR`/`AR` mapping (finding wizard).
@@ -283,7 +283,8 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 ### `lib/widgets/slides/previews/` (each `part of slide_preview.dart`)
 
 - `bullets_previews.dart` — Bullet-point slide layout.
-- `chart_preview.dart` — Bar/line/pie chart slides with hover.
+- `chart_preview.dart` — Chart slide rendering + dispatch, legend, hover, and screen-reader text for every chart type.
+- `chart_preview_extra.dart` — Hand-drawn builders for the horizontal-bar, combo, waterfall, and heatmap chart types.
 - `checklist_previews.dart` — Checklist slides with a progress bar.
 - `cockpit_preview.dart` — Animated cockpit/gauge dashboard slides.
 - `code_preview.dart` — Syntax-highlighted code slides with fit.

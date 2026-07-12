@@ -84,6 +84,16 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
+  'Vlak': 'Površinski',
+  'Horizontale staaf': 'Vodoravni stupčasti',
+  'Waterval': 'Slap',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Zadnja serija kao linija na drugoj osi; ostale kao stupci.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'Prva serija: svaka vrijednost je korak gore ili dolje na tekućem zbroju.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'Serija = redak, stupac = oznaka, boja ćelije prati vrijednost. Označite osi kao vjerojatnost i učinak za matricu rizika.',
   'Auditdossier exporteren': 'Izvezi revizijski dosje',
   'Finaliseer en verzegel het rapport eerst.':
       'Prvo dovršite i zapečatite izvještaj.',

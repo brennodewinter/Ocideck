@@ -84,6 +84,16 @@ const _stringsIt = {
 };
 
 const _dutchSourceIt = {
+  // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
+  'Vlak': 'Area',
+  'Horizontale staaf': 'Barre orizzontali',
+  'Waterval': 'Cascata',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Ultima serie come linea su un secondo asse; le altre come barre.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'Prima serie: ogni valore è un passo in su o in giù sul totale progressivo.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'Serie = riga, colonna = etichetta, il colore della cella segue il valore. Etichetta gli assi come probabilità e impatto per una matrice di rischio.',
   'Auditdossier exporteren': 'Esporta dossier di audit',
   'Finaliseer en verzegel het rapport eerst.':
       'Finalizza e sigilla prima il report.',

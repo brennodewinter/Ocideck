@@ -66,8 +66,10 @@ You can use a folder on your Nextcloud as a source for decks and assets.
 
 Add a slide and pick a type: **title**, **section** divider, **bullets**, **two
 bullet columns**, **bullets + image**, **two images**, **large image**, **video**,
-**audio**, **quote**, **table**, **source code**, **chart** (bar, line, pie, or
-spider/radar), **cockpit** (a dashboard of aviation-style instrument gauges),
+**audio**, **quote**, **table**, **source code**, **chart** (bar, horizontal
+bar, stacked bar, combo, line, area, pie, donut, spider/radar, scatter,
+waterfall, or heatmap/risk matrix), **cockpit** (a dashboard of aviation-style
+instrument gauges),
 **question** (an interactive quiz slide), **timeline** (an animated timeline of
 dated events), and
 **free Markdown**. Each card in the chooser shows a miniature
@@ -137,20 +139,41 @@ live during a presentation, tick **Table editable while presenting** in
 
 ### Charts
 
-Pick a type (**bar**, **stacked bar**, **line**, **pie**, **spider/radar**, or
-**scatter**) and a title, then
-enter data in the grid: the first column is the labels, each further column is a
-named series. Use **Row** and **Series** to add data; the small ✕ removes a
-row/column. Each series and (for pie/radar) each label can be given its own colour.
+Pick a type and a title, then enter data in the grid: the first column is the
+labels, each further column is a named series. Use **Row** and **Series** to add
+data; the small ✕ removes a row/column. Each series and (for pie/donut/radar)
+each label can be given its own colour.
+
+The available types:
+
+- **Bar**, **stacked bar**, **line**, **area** (a filled line), **scatter** —
+  cartesian charts (labels on the x-axis, values on the y-axis).
+- **Horizontal bar** — bars laid left-to-right; best for rankings and long
+  category names.
+- **Combo** — bars for every series **except the last**, which is drawn as a
+  line on its own right-hand axis (e.g. revenue bars + a growth-% line). With a
+  single series it falls back to a plain bar chart.
+- **Pie** / **Donut** — proportional slices; the labels are the segments. A
+  donut prints the series total in its centre hole. Both show at most the first
+  two series.
+- **Spider/radar** — needs at least three labels (axes); each series is a
+  filled area.
+- **Waterfall** — uses the **first** series; each value is an up or down step
+  that builds on the previous running total (green up, red down). Good for
+  budget/bridge stories.
+- **Heatmap** — a coloured grid: each series is a row, each label a column, the
+  cell colour follows the value. Label the axes *likelihood* and *impact* and it
+  serves as a **risk matrix**.
 
 - **CSV import** — click **CSV importeren**. You can either keep the data **in the
   slide** (inline) or store it **as a CSV file**. A linked CSV lives in the deck's
   `data/` directory and stays the source of truth (edit it in a spreadsheet); the
   grid then shows it read-only until you **Ontkoppelen** (unlink).
-- **Min/max** (optional, bar/line/radar) — on bar and line charts these draw
+- **Min/max** (optional) — offered for the cartesian types (bar, line, area,
+  scatter, combo, waterfall) and radar. On the cartesian charts they draw
   horizontal **reference lines**; on a spider/radar chart they fix the **scale**
-  (centre to outer ring), shown as evenly spaced values in a small legend beside
-  the chart. Leave them empty to scale automatically.
+  (centre to outer ring). They are not shown for pie, donut, horizontal bar, or
+  heatmap. Leave them empty to scale automatically.
 - **Reading values** — hovering a legend entry highlights its series (or pie
   slice). On a line chart the tooltip belongs to the dot under the cursor and
   shows every overlapping dot at once; on a spider/radar chart hovering a point
@@ -615,6 +638,12 @@ same optional, off-by-default backend used elsewhere.
 Turn it on under **Settings → Uitbreidingen (Extensions)**. Once enabled, the
 security slide types appear in a dedicated *Informatieveiligheid* tab of the
 add-slide picker, and the module's command-palette actions become available.
+
+Enabling fetches the module's reference data once and then works offline. If
+that fetch cannot complete, the card explains **which** step failed — no source
+reachable, a fingerprint that did not match, or a damaged/invalid pack — instead
+of a bare "failed", and offers **Pakket importeren (Import pack)** to load the
+data pack from a local file instead (the air-gapped fallback).
 
 ### Starting from the MIAUW report template
 

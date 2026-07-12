@@ -24,9 +24,15 @@ class _ChartVariantsDialogState extends State<_ChartVariantsDialog> {
       ChartType.bar => l10n.d('Staaf'),
       ChartType.stackedBar => l10n.d('Gestapelde staaf'),
       ChartType.line => l10n.d('Lijn'),
+      ChartType.area => l10n.d('Vlak'),
       ChartType.pie => l10n.d('Cirkel'),
+      ChartType.donut => l10n.d('Donut'),
       ChartType.radar => l10n.d('Spider'),
       ChartType.scatter => l10n.d('Spreiding'),
+      ChartType.horizontalBar => l10n.d('Horizontale staaf'),
+      ChartType.combo => l10n.d('Combo'),
+      ChartType.waterfall => l10n.d('Waterval'),
+      ChartType.heatmap => l10n.d('Heatmap'),
     };
   }
 
@@ -57,45 +63,64 @@ class _ChartVariantsDialogState extends State<_ChartVariantsDialog> {
               style: TextStyle(fontSize: 12, color: AppTheme.slate500),
             ),
             const SizedBox(height: 12),
-            for (var i = 0; i < _types.length; i++)
-              ListTile(
-                key: ValueKey('chart-variant-${_types[i].name}'),
-                dense: true,
-                contentPadding: EdgeInsets.zero,
-                leading: Icon(switch (_types[i]) {
-                  ChartType.bar => Icons.bar_chart,
-                  ChartType.stackedBar => Icons.stacked_bar_chart,
-                  ChartType.line => Icons.show_chart,
-                  ChartType.pie => Icons.pie_chart_outline,
-                  ChartType.radar => Icons.radar,
-                  ChartType.scatter => Icons.scatter_plot,
-                }),
-                title: Text(_label(context, _types[i])),
-                trailing: Row(
+            // The list can hold every other chart type; cap its height and let
+            // it scroll so the dialog never overflows.
+            Flexible(
+              child: SingleChildScrollView(
+                child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    IconButton(
-                      key: ValueKey('chart-variant-up-$i'),
-                      onPressed: i == 0 ? null : () => _move(i, -1),
-                      icon: const Icon(Icons.arrow_upward, size: 18),
-                      tooltip: l10n.d('Omhoog'),
-                    ),
-                    IconButton(
-                      key: ValueKey('chart-variant-down-$i'),
-                      onPressed: i == _types.length - 1
-                          ? null
-                          : () => _move(i, 1),
-                      icon: const Icon(Icons.arrow_downward, size: 18),
-                      tooltip: l10n.d('Omlaag'),
-                    ),
-                    IconButton(
-                      onPressed: () => setState(() => _types.removeAt(i)),
-                      icon: const Icon(Icons.close, size: 18),
-                      tooltip: l10n.d('Niet toevoegen'),
-                    ),
+                    for (var i = 0; i < _types.length; i++)
+                      ListTile(
+                        key: ValueKey('chart-variant-${_types[i].name}'),
+                        dense: true,
+                        contentPadding: EdgeInsets.zero,
+                        leading: Icon(switch (_types[i]) {
+                          ChartType.bar => Icons.bar_chart,
+                          ChartType.stackedBar => Icons.stacked_bar_chart,
+                          ChartType.line => Icons.show_chart,
+                          ChartType.area => Icons.area_chart,
+                          ChartType.pie => Icons.pie_chart_outline,
+                          ChartType.donut => Icons.donut_large,
+                          ChartType.radar => Icons.radar,
+                          ChartType.scatter => Icons.scatter_plot,
+                          ChartType.horizontalBar =>
+                            Icons.align_horizontal_left,
+                          ChartType.combo => Icons.insights,
+                          ChartType.waterfall => Icons.waterfall_chart,
+                          ChartType.heatmap => Icons.grid_on,
+                        }),
+                        title: Text(_label(context, _types[i])),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              key: ValueKey('chart-variant-up-$i'),
+                              onPressed: i == 0 ? null : () => _move(i, -1),
+                              icon: const Icon(Icons.arrow_upward, size: 18),
+                              tooltip: l10n.d('Omhoog'),
+                            ),
+                            IconButton(
+                              key: ValueKey('chart-variant-down-$i'),
+                              onPressed: i == _types.length - 1
+                                  ? null
+                                  : () => _move(i, 1),
+                              icon: const Icon(Icons.arrow_downward, size: 18),
+                              tooltip: l10n.d('Omlaag'),
+                            ),
+                            IconButton(
+                              onPressed: () =>
+                                  setState(() => _types.removeAt(i)),
+                              icon: const Icon(Icons.close, size: 18),
+                              tooltip: l10n.d('Niet toevoegen'),
+                            ),
+                          ],
+                        ),
+                      ),
                   ],
                 ),
               ),
+            ),
           ],
         ),
       ),

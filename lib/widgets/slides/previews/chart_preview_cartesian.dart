@@ -158,7 +158,10 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
     );
   }
 
-  Widget _lineChart(ChartSpec spec, Color textColor) {
+  /// Line chart, or — when [area] is true — an area chart: the same line with a
+  /// prominent fill down to the baseline so the magnitude reads as well as the
+  /// trend.
+  Widget _lineChart(ChartSpec spec, Color textColor, {bool area = false}) {
     final bars = <LineChartBarData>[];
     for (var si = 0; si < spec.series.length; si++) {
       bars.add(
@@ -182,10 +185,11 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
           ),
           belowBarData: BarAreaData(
             show: true,
-            color: _seriesDisplayColor(
-              spec.series[si],
-              si,
-            ).withValues(alpha: spec.series.length == 1 ? 0.14 : 0.05),
+            color: _seriesDisplayColor(spec.series[si], si).withValues(
+              alpha: area
+                  ? (spec.series.length == 1 ? 0.32 : 0.18)
+                  : (spec.series.length == 1 ? 0.14 : 0.05),
+            ),
           ),
         ),
       );
@@ -234,7 +238,9 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
     );
   }
 
-  Widget _pieChart(ChartSpec spec, Color textColor) {
+  /// Pie chart, or — when [donut] is true — a donut: a wider centre hole with
+  /// the series total printed inside it.
+  Widget _pieChart(ChartSpec spec, Color textColor, {bool donut = false}) {
     if (spec.series.isEmpty || spec.x.isEmpty) {
       return _placeholderText('—');
     }
@@ -299,7 +305,8 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
                                     _hexColor(chartRowColor(spec, xi)),
                                 ],
                                 radius: radius,
-                                centerSpaceRadius: radius * 0.42,
+                                centerSpaceRadius:
+                                    radius * (donut ? 0.62 : 0.42),
                                 sectionSpace: w * 0.002,
                                 titleStyle: _applyFont(
                                   font,
@@ -313,6 +320,18 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
                                   ),
                                 ),
                                 tooltipStyle: _tooltipStyle(),
+                                centerLabel: donut ? _fmtNum(total) : null,
+                                centerLabelStyle: _applyFont(
+                                  font,
+                                  TextStyle(
+                                    fontSize: (radius * 0.28).clamp(
+                                      w * 0.013,
+                                      w * 0.022,
+                                    ),
+                                    color: textColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
                             );
                           },

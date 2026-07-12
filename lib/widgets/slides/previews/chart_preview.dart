@@ -186,9 +186,15 @@ class _ChartPreviewState extends State<_ChartPreview>
       ChartType.bar => l10n.d('Staaf'),
       ChartType.stackedBar => l10n.d('Gestapelde staaf'),
       ChartType.line => l10n.d('Lijn'),
+      ChartType.area => l10n.d('Vlak'),
       ChartType.pie => l10n.d('Cirkel'),
+      ChartType.donut => l10n.d('Donut'),
       ChartType.radar => l10n.d('Spider'),
       ChartType.scatter => l10n.d('Spreiding'),
+      ChartType.horizontalBar => l10n.d('Horizontale staaf'),
+      ChartType.combo => l10n.d('Combo'),
+      ChartType.waterfall => l10n.d('Waterval'),
+      ChartType.heatmap => l10n.d('Heatmap'),
     };
     final buffer = StringBuffer('${l10n.d('Grafiek')} ($typeName)');
     if (spec.title.isNotEmpty) {
@@ -297,11 +303,9 @@ class _ChartPreviewState extends State<_ChartPreview>
                           ? _chart(spec, textColor)
                           : _placeholder(context),
                     ),
-                    if (spec.hasInlineData && spec.series.isNotEmpty) ...[
+                    if (_legendWidget(spec, textColor) case final legend?) ...[
                       SizedBox(height: w * 0.006),
-                      spec.type == ChartType.pie
-                          ? _pieLegend(spec, textColor)
-                          : _legend(spec, textColor),
+                      legend,
                     ],
                   ],
                 ),
@@ -311,6 +315,19 @@ class _ChartPreviewState extends State<_ChartPreview>
         ),
       ),
     );
+  }
+
+  /// The legend under the plot, or null for chart types that carry their key
+  /// elsewhere: pie/donut list their slices, heatmap shows a colour scale
+  /// inside the plot, and a waterfall reads a single series so a legend adds
+  /// nothing.
+  Widget? _legendWidget(ChartSpec spec, Color textColor) {
+    if (!spec.hasInlineData || spec.series.isEmpty) return null;
+    if (spec.type == ChartType.heatmap || spec.type == ChartType.waterfall) {
+      return null;
+    }
+    if (spec.isPieLike) return _pieLegend(spec, textColor);
+    return _legend(spec, textColor);
   }
 
   Widget _legend(ChartSpec spec, Color textColor) {
@@ -476,12 +493,24 @@ class _ChartPreviewState extends State<_ChartPreview>
         return _stackedBarChart(spec, textColor);
       case ChartType.line:
         return _lineChart(spec, textColor);
+      case ChartType.area:
+        return _lineChart(spec, textColor, area: true);
       case ChartType.pie:
         return _pieEntrance(_pieChart(spec, textColor));
+      case ChartType.donut:
+        return _pieEntrance(_pieChart(spec, textColor, donut: true));
       case ChartType.radar:
         return _radarChart(spec, textColor);
       case ChartType.scatter:
         return _scatterChart(spec, textColor);
+      case ChartType.horizontalBar:
+        return _horizontalBarChart(spec, textColor);
+      case ChartType.combo:
+        return _comboChart(spec, textColor);
+      case ChartType.waterfall:
+        return _waterfallChart(spec, textColor);
+      case ChartType.heatmap:
+        return _heatmapChart(spec, textColor);
     }
   }
 
@@ -725,6 +754,10 @@ class _HoverPieChart extends StatefulWidget {
   /// with this chart's own touch hover.
   final int? externalHover;
 
+  /// Optional text drawn in the centre hole (the total, for a donut).
+  final String? centerLabel;
+  final TextStyle? centerLabelStyle;
+
   const _HoverPieChart({
     required this.values,
     required this.labels,
@@ -735,6 +768,8 @@ class _HoverPieChart extends StatefulWidget {
     required this.titleStyle,
     required this.tooltipStyle,
     this.externalHover,
+    this.centerLabel,
+    this.centerLabelStyle,
   });
 
   @override
@@ -790,6 +825,19 @@ class _HoverPieChartState extends State<_HoverPieChart> {
             duration: Duration.zero,
           ),
         ),
+        if (widget.centerLabel != null)
+          Positioned.fill(
+            child: IgnorePointer(
+              child: Center(
+                child: Text(
+                  widget.centerLabel!,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: widget.centerLabelStyle,
+                ),
+              ),
+            ),
+          ),
         if (hovered != null && hovered >= 0 && hovered < widget.values.length)
           Positioned(
             top: 4,

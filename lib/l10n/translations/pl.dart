@@ -86,6 +86,16 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
+  'Vlak': 'Warstwowy',
+  'Horizontale staaf': 'Słupkowy poziomy',
+  'Waterval': 'Kaskadowy',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Ostatnia seria jako linia na drugiej osi; pozostałe jako słupki.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'Pierwsza seria: każda wartość to krok w górę lub w dół względem sumy bieżącej.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'Seria = wiersz, kolumna = etykieta, kolor komórki zależy od wartości. Opisz osie jako prawdopodobieństwo i skutek, aby uzyskać macierz ryzyka.',
   'Auditdossier exporteren': 'Eksportuj dossier audytu',
   'Finaliseer en verzegel het rapport eerst.':
       'Najpierw sfinalizuj i zapieczętuj raport.',

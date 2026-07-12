@@ -84,6 +84,16 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
+  'Vlak': 'Terület',
+  'Horizontale staaf': 'Vízszintes oszlop',
+  'Waterval': 'Vízesés',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Az utolsó sorozat vonalként egy második tengelyen; a többi oszlopként.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'Első sorozat: minden érték egy lépés fel vagy le a futó összegen.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'Sorozat = sor, oszlop = címke, a cella színe az értéket követi. Címkézd a tengelyeket valószínűségnek és hatásnak egy kockázati mátrixhoz.',
   'Auditdossier exporteren': 'Auditdosszié exportálása',
   'Finaliseer en verzegel het rapport eerst.':
       'Először véglegesítse és pecsételje le a jelentést.',

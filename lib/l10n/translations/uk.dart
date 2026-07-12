@@ -85,6 +85,16 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
+  'Vlak': 'Площинна',
+  'Horizontale staaf': 'Горизонтальна стовпчикова',
+  'Waterval': 'Каскадна',
+  'Laatste reeks als lijn op een tweede as; de rest als staven.':
+      'Останній ряд як лінія на другій осі; решта — стовпцями.',
+  'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.':
+      'Перший ряд: кожне значення — крок вгору або вниз від наростаючого підсумку.',
+  'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.':
+      'Ряд = рядок, стовпець = підпис, колір клітинки залежить від значення. Підпишіть осі як імовірність та вплив для матриці ризиків.',
   'Auditdossier exporteren': 'Експортувати аудиторське досьє',
   'Finaliseer en verzegel het rapport eerst.':
       'Спершу завершіть і опечатайте звіт.',
