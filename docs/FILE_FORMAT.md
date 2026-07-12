@@ -421,13 +421,13 @@ that CSV is read back in.
 ````markdown
 ```chart
 {
-  "type": "bar",            // bar | line | pie | radar
+  "type": "bar",            // see the type list below; defaults to bar
   "title": "Revenue",
   "source": "data/revenue.csv",  // optional; otherwise inline x/series
   "x": ["Q1", "Q2"],
-  "rowColors": ["#003399", "#FFCC00"],  // optional; color per label (pie/radar)
-  "minBound": 0,            // optional; not for pie
-  "maxBound": 20,           // optional; not for pie
+  "rowColors": ["#003399", "#FFCC00"],  // optional; color per label (pie/donut/radar)
+  "minBound": 0,            // optional; cartesian/radar only
+  "maxBound": 20,           // optional; cartesian/radar only
   "series": [ { "name": "2025", "data": [10, 14], "color": "#2563EB" } ]
 }
 ```
@@ -435,15 +435,33 @@ that CSV is read back in.
 
 Fields:
 
-- `type` — `bar`, `line`, `pie`, or `radar` (spider). Defaults to `bar`.
-- `x` — labels; for `pie`/`radar`, these are the segments/axes (radar requires
-  at least three).
+- `type` — defaults to `bar`. One of:
+  - `bar`, `stackedBar`, `line`, `area`, `scatter` — cartesian (labels on the
+    x-axis, values on the y-axis). `area` is a filled line.
+  - `horizontalBar` — bars laid out left-to-right; good for rankings and long
+    labels.
+  - `combo` — bars for every series except the **last**, which is drawn as a
+    line on its own right-hand axis (e.g. revenue bars + growth-% line).
+    Falls back to a plain bar chart with a single series.
+  - `waterfall` — reads the **first** series only; each value is an up/down
+    step floating from the previous running total (green up, red down).
+  - `pie`, `donut` — proportional; the labels are the segments. `donut` prints
+    the series total in the centre hole. Both show at most the first two series.
+  - `radar` — spider chart; needs at least three labels (axes).
+  - `heatmap` — a grid: each series is a **row**, each label a **column**, the
+    cell colour a light→accent ramp over the data range. Label the axes
+    likelihood and impact and it reads as a risk matrix.
+- `x` — labels; for `pie`/`donut`/`radar` these are the segments/axes (radar
+  requires at least three); for `heatmap` they are the columns.
 - `series` — named series with `data` (aligned with `x`) and optionally a
-  `color` (hex). `pie` shows at most the first two series.
-- `rowColors` — optional color per label (used by `pie`/`radar`).
-- `minBound` / `maxBound` — optional and only for non-`pie`. For `bar`/`line`,
-  these are horizontal **reference lines**; for `radar`, they determine the
-  **scale** (inner/outer ring) with even spacing. Omitted for `pie`.
+  `color` (hex). `pie`/`donut` show at most the first two series; `waterfall`
+  uses only the first; `heatmap` treats each series as a row.
+- `rowColors` — optional color per label (used by `pie`/`donut`/`radar`).
+- `minBound` / `maxBound` — optional; only for the cartesian types and `radar`.
+  On `bar`/`stackedBar`/`line`/`area`/`scatter`/`combo`/`waterfall` they are
+  horizontal **reference lines**; for `radar` they set the **scale**
+  (inner/outer ring) with even spacing. Ignored for `pie`, `donut`,
+  `horizontalBar`, and `heatmap`.
 
 **Question** (`question`) — a fenced ```question``` block with the quiz
 specification as **JSON**, optionally preceded by a `# title`, an `![](image)`

@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Six new chart types** — chart slides gain **area** (a filled line),
+  **horizontal bar** (for rankings and long labels), **combo** (bars plus the
+  last series as a line on a second axis, e.g. revenue + growth %), **donut** (a
+  pie with the total in the centre), **waterfall** (the first series as up/down
+  steps building on a running total) and **heatmap** (a value-coloured grid that
+  doubles as a likelihood × impact **risk matrix**). Each renders natively
+  (preview, presenter, PDF, PPTX) and as self-contained SVG in the HTML export,
+  round-trips through the same `chart` JSON block, animates on enter, and carries
+  a screen-reader text alternative. Type names are localised in all interface
+  languages.
 - **One-click audit dossier** — with the Informatieveiligheid module on and a
   **finalised, sealed** report, the **Auditdossier exporteren** command bundles the
   whole hand-off into one archive (PENTEST_MIAUW §10.11): the ordinary `.ocideck`
