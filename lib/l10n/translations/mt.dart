@@ -84,6 +84,10 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Tekst voorstellen (AI)': 'Issuġġerixxi test (IA)',
+  'Het model gaf geen tekst terug.': 'Il-mudell ma rritorna l-ebda test.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Diġà hemm test. Tibdlu bl-abbozz tal-IA?',
   'RFC3161-tijdstempel': 'Timbru tal-ħin RFC3161',
   'Verzegel het deck eerst.': 'L-ewwel issiġilla d-deck.',
   'Verzoek (.tsq) exporteren': 'Esporta t-talba (.tsq)',

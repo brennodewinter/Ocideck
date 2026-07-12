@@ -85,6 +85,10 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Tekst voorstellen (AI)': 'Textum proponere (IA)',
+  'Het model gaf geen tekst terug.': 'Exemplar nullum textum reddidit.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Textus iam adest. Designatione IA substituere?',
   'RFC3161-tijdstempel': 'Signaculum temporis RFC3161',
   'Verzegel het deck eerst.': 'Sigilla prius fasciculum.',
   'Verzoek (.tsq) exporteren': 'Petitionem (.tsq) exportare',

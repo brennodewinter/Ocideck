@@ -83,6 +83,10 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Tekst voorstellen (AI)': 'Πρόταση κειμένου (AI)',
+  'Het model gaf geen tekst terug.': 'Το μοντέλο δεν επέστρεψε κείμενο.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Υπάρχει ήδη κείμενο. Αντικατάσταση με το προσχέδιο AI;',
   'RFC3161-tijdstempel': 'Χρονοσήμανση RFC3161',
   'Verzegel het deck eerst.': 'Σφραγίστε πρώτα το deck.',
   'Verzoek (.tsq) exporteren': 'Εξαγωγή αιτήματος (.tsq)',

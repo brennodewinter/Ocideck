@@ -83,6 +83,10 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Tekst voorstellen (AI)': 'Text vorschla (KI)',
+  'Het model gaf geen tekst terug.': 'S Modäll het kein Text zruggäh.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Es het scho Text. Mit em KI-Entwurf ersetze?',
   'RFC3161-tijdstempel': 'RFC3161-Ziitstämpel',
   'Verzegel het deck eerst.': 'Versiegle zerst s Deck.',
   'Verzoek (.tsq) exporteren': 'Aafrog (.tsq) exportiere',

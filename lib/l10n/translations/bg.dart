@@ -84,6 +84,10 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Tekst voorstellen (AI)': 'Предложи текст (AI)',
+  'Het model gaf geen tekst terug.': 'Моделът не върна текст.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Вече има текст. Да се замени с AI черновата?',
   'RFC3161-tijdstempel': 'Времеви печат RFC3161',
   'Verzegel het deck eerst.': 'Първо запечатайте тестето.',
   'Verzoek (.tsq) exporteren': 'Експортирай заявка (.tsq)',

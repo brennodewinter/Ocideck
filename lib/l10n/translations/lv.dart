@@ -83,6 +83,10 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Tekst voorstellen (AI)': 'Ieteikt tekstu (MI)',
+  'Het model gaf geen tekst terug.': 'Modelis neatgrieza tekstu.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Teksts jau ir. Aizstāt to ar MI melnrakstu?',
   'RFC3161-tijdstempel': 'RFC3161 laika zīmogs',
   'Verzegel het deck eerst.': 'Vispirms aizzīmogojiet deku.',
   'Verzoek (.tsq) exporteren': 'Eksportēt pieprasījumu (.tsq)',

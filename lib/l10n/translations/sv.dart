@@ -83,6 +83,10 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Tekst voorstellen (AI)': 'Föreslå text (AI)',
+  'Het model gaf geen tekst terug.': 'Modellen returnerade ingen text.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Det finns redan text. Ersätt med AI-utkastet?',
   'RFC3161-tijdstempel': 'RFC3161-tidsstämpel',
   'Verzegel het deck eerst.': 'Försegla decket först.',
   'Verzoek (.tsq) exporteren': 'Exportera begäran (.tsq)',

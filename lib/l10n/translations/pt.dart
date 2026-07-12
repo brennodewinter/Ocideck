@@ -84,6 +84,10 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'Tekst voorstellen (AI)': 'Sugerir texto (IA)',
+  'Het model gaf geen tekst terug.': 'O modelo não devolveu texto.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Já existe texto. Substituí-lo pelo rascunho de IA?',
   'RFC3161-tijdstempel': 'Carimbo de data/hora RFC3161',
   'Verzegel het deck eerst.': 'Sele o deck primeiro.',
   'Verzoek (.tsq) exporteren': 'Exportar pedido (.tsq)',

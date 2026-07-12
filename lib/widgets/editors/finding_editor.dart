@@ -4,11 +4,13 @@ import '../../l10n/app_localizations.dart';
 import '../../models/finding_spec.dart';
 import '../../models/slide.dart';
 import '../../services/cvss/cvss4.dart';
+import '../../services/finding_ai_service.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/finding_severity_palette.dart';
 import '../dialogs/cwe_picker.dart';
 import '../dialogs/finding_template_picker.dart';
 import '_editor_field.dart';
+import 'ai_suggest_field.dart';
 
 /// Structured editor for a `finding` **header** slide (PENTEST_MIAUW §3.1). The
 /// fields map one-to-one onto [FindingSpec], which round-trips to plain,
@@ -53,10 +55,16 @@ class _FindingEditorState extends State<FindingEditor>
   static final _reCweSep = RegExp(r'^[—:·-]\s*');
   static final _reCve = RegExp(r'CVE-\d{4}-\d+', caseSensitive: false);
 
+  /// The free-text fields whose current value is an unreviewed AI draft
+  /// (`ocideck_ai_assisted`, §16.3). Seeded from the slide and written back by
+  /// [_emit]; the seal step blocks while it is non-empty.
+  late final Set<String> _aiFields;
+
   @override
   void initState() {
     super.initState();
     final spec = FindingSpec.parse(widget.slide.customMarkdown);
+    _aiFields = {...widget.slide.aiAssistedFields};
     _heading = newController(spec.heading, _onChanged);
     _findingId = newController(widget.slide.findingId, _onChanged);
     _scope = newController(spec.scopeObject, _onChanged);
@@ -112,9 +120,57 @@ class _FindingEditorState extends State<FindingEditor>
         customMarkdown: spec.toMarkdown(),
         title: spec.heading,
         findingId: _findingId.text.trim(),
+        aiAssistedFields: _aiFields.toList(),
       ),
     );
   }
+
+  /// The pentester's own facts, the only grounding the AI drafting gets (§16.3).
+  FindingAiContext _aiContext() {
+    final cweText = _cwe.text.trim();
+    return FindingAiContext(
+      heading: _heading.text,
+      scopeObject: _scope.text,
+      cvssVector: _cvss.text,
+      cwe: cweText,
+      cveIds: [for (final m in _reCve.allMatches(_cve.text)) m.group(0)!],
+      description: _description.text,
+      confirmation: _confirmation.text,
+      impact: _impact.text,
+      recommendation: _recommendation.text,
+    );
+  }
+
+  /// Insert an AI draft into [controller] and mark [field] as an unreviewed AI
+  /// draft; setting the text re-emits with the marker.
+  void _onAiSuggested(
+    String field,
+    TextEditingController controller,
+    String draft,
+  ) {
+    setState(() => _aiFields.add(field));
+    controller.text = draft;
+  }
+
+  /// Clear the AI-draft marker on [field] once the tester has reviewed it.
+  void _onAiReviewed(String field) {
+    setState(() => _aiFields.remove(field));
+    _emit();
+  }
+
+  /// The per-field AI "suggest" control row (only free-text fields, §16).
+  Widget _suggest(
+    FindingAiField field,
+    String key,
+    TextEditingController controller,
+  ) => AiSuggestField(
+    field: field,
+    contextBuilder: _aiContext,
+    hasExistingText: controller.text.trim().isNotEmpty,
+    isAiDraft: _aiFields.contains(key),
+    onSuggested: (draft) => _onAiSuggested(key, controller, draft),
+    onAccepted: () => _onAiReviewed(key),
+  );
 
   /// Pull a reusable template (PENTEST_MIAUW §17) into this finding and let the
   /// tester specialise it: the title, CVSS, CWE and the four sections are filled
@@ -208,6 +264,7 @@ class _FindingEditorState extends State<FindingEditor>
           controller: _description,
           maxLines: 5,
         ),
+        _suggest(FindingAiField.description, 'description', _description),
         EditorField(
           label: 'Bevestiging (reproductie)',
           controller: _confirmation,
@@ -218,10 +275,16 @@ class _FindingEditorState extends State<FindingEditor>
           controller: _impact,
           maxLines: 4,
         ),
+        _suggest(FindingAiField.impact, 'impact', _impact),
         EditorField(
           label: 'Aanbeveling',
           controller: _recommendation,
           maxLines: 4,
+        ),
+        _suggest(
+          FindingAiField.recommendation,
+          'recommendation',
+          _recommendation,
         ),
       ],
     );

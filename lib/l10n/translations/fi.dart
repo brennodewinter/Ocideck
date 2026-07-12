@@ -83,6 +83,10 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Tekst voorstellen (AI)': 'Ehdota tekstiä (tekoäly)',
+  'Het model gaf geen tekst terug.': 'Malli ei palauttanut tekstiä.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Tekstiä on jo. Korvataanko se tekoälyluonnoksella?',
   'RFC3161-tijdstempel': 'RFC3161-aikaleima',
   'Verzegel het deck eerst.': 'Sinetöi ensin deck.',
   'Verzoek (.tsq) exporteren': 'Vie pyyntö (.tsq)',

@@ -83,6 +83,10 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Tekst voorstellen (AI)': 'Sarankan teks (AI)',
+  'Het model gaf geen tekst terug.': 'Model tidak mengembalikan teks.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Sudah ada teks. Ganti dengan draf AI?',
   'RFC3161-tijdstempel': 'Stempel waktu RFC3161',
   'Verzegel het deck eerst.': 'Segel deck terlebih dahulu.',
   'Verzoek (.tsq) exporteren': 'Ekspor permintaan (.tsq)',

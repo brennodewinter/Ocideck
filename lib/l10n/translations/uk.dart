@@ -84,6 +84,10 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Tekst voorstellen (AI)': 'Запропонувати текст (ШІ)',
+  'Het model gaf geen tekst terug.': 'Модель не повернула текст.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'Текст уже є. Замінити його чернеткою ШІ?',
   'RFC3161-tijdstempel': 'Мітка часу RFC3161',
   'Verzegel het deck eerst.': 'Спершу запечатайте колоду.',
   'Verzoek (.tsq) exporteren': 'Експортувати запит (.tsq)',

@@ -83,6 +83,10 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'Tekst voorstellen (AI)': 'Suggest text (AI)',
+  'Het model gaf geen tekst terug.': 'The model returned no text.',
+  'Er staat al tekst. Vervangen door het AI-concept?':
+      'There is already text. Replace it with the AI draft?',
   'RFC3161-tijdstempel': 'RFC3161 timestamp',
   'Verzegel het deck eerst.': 'Seal the deck first.',
   'Verzoek (.tsq) exporteren': 'Export request (.tsq)',

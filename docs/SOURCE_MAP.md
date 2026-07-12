@@ -59,6 +59,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `export_metadata.dart` — `ExportDocumentMetadata` stamped into PDF/PPTX/HTML (title, author, org, keywords, TLP).
 - `export_service.dart` — The single chokepoint that renders decks to PDF, PPTX, and HTML.
 - `file_service.dart` — Scans presentation files, opens decks (with the safety gate), and import/URL/package IO.
+- `finding_ai_service.dart` — Drafts a free-text finding field via the AI backend, grounded on the tester's facts; strips fabricated CWE/CVE/CVSS ids.
 - `finding_group_builder.dart` — `buildFindingGroup`: assembles a finding header + optional detail/evidence slides sharing one id.
 - `finding_numbering.dart` — `renumberFindings` (F-01… from deck order) + `deckFindingList` derivation.
 - `finding_template_library.dart` — The bundled reusable finding-template library with search.
@@ -226,6 +227,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 ### `lib/widgets/editors/` — per-slide-type editors
 
 - `_editor_field.dart` — Shared layout helpers for slide editors.
+- `ai_suggest_field.dart` — Per-field "suggest text (AI)" control + AI-concept badge/Nagekeken for finding free-text fields.
 - `alt_text_field.dart` — Per-image alt-text field with the optional "suggest alt-text (AI)" button and AI-draft badge.
 - `audio_attachment_editor.dart` — Edits a slide's audio file attachment.
 - `bullet_marker_selector.dart` — Per-slide bullet-marker override (dot or paw).
