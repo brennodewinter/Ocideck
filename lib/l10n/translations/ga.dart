@@ -85,6 +85,9 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'MIAUW-pentestrapport': 'Tuairisc pentest MIAUW',
+  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
+      'Struchtúr iomlán tuairisce MIAUW: bainistíocht doiciméad, scóip, forghníomhú, achoimre bhainistíochta, torthaí, seicliostaí agus síniú.',
   'Tekst voorstellen (AI)': 'Mol téacs (IS)',
   'Het model gaf geen tekst terug.': 'Níor thug an tsamhail téacs ar ais.',
   'Er staat al tekst. Vervangen door het AI-concept?':

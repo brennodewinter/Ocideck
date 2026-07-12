@@ -83,6 +83,9 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'MIAUW-pentestrapport': 'Rapòrt di pentest MIAUW',
+  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
+      'Struktura kompletu di rapòrt MIAUW: maneho di dokumento, skòp, ehekushon, resúmen pa gerensia, deskubrimentu, chèklist i firma.',
   'Tekst voorstellen (AI)': 'Sugerí teksto (IA)',
   'Het model gaf geen tekst terug.': 'E modelo no a duna teksto bèk.',
   'Er staat al tekst. Vervangen door het AI-concept?':

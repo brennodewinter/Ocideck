@@ -83,6 +83,9 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'MIAUW-pentestrapport': 'MIAUW-tunkeutumistestiraportti',
+  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
+      'Täydellinen MIAUW-raportin rakenne: dokumenttien hallinta, laajuus, toteutus, johdon yhteenveto, havainnot, tarkistuslistat ja allekirjoitus.',
   'Tekst voorstellen (AI)': 'Ehdota tekstiä (tekoäly)',
   'Het model gaf geen tekst terug.': 'Malli ei palauttanut tekstiä.',
   'Er staat al tekst. Vervangen door het AI-concept?':

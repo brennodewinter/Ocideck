@@ -81,6 +81,9 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'MIAUW-pentestrapport': 'MIAUW pentest ghItlh',
+  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
+      'naQ MIAUW ghItlh Segh: De\' vu\'wI\', ghoS, ta\', che\'wI\' boQ, tu\'lu\'bogh, tetlh, je qID.',
   'Tekst voorstellen (AI)': 'ghItlh qaSmoH (IA)',
   'Het model gaf geen tekst terug.': 'ghItlh tlhobbe\' qorDu\'.',
   'Er staat al tekst. Vervangen door het AI-concept?':

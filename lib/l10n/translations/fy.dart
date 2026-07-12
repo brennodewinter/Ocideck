@@ -83,6 +83,9 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'MIAUW-pentestrapport': 'MIAUW-pentestrapport',
+  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
+      'Folsleine MIAUW-rapportstruktuer: dokumintbehear, scope, útfiering, managementgearfetting, befiningen, checklists en ûndertekening.',
   'Tekst voorstellen (AI)': 'Tekst foarstelle (AI)',
   'Het model gaf geen tekst terug.': 'It model joech gjin tekst werom.',
   'Er staat al tekst. Vervangen door het AI-concept?':

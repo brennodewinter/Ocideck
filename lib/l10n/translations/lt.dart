@@ -83,6 +83,9 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'MIAUW-pentestrapport': 'MIAUW pentesto ataskaita',
+  'Volledige MIAUW-rapportstructuur: documentbeheer, scope, executie, managementsamenvatting, bevindingen, checklists en ondertekening.':
+      'Visa MIAUW ataskaitos struktūra: dokumentų valdymas, apimtis, vykdymas, vadovybės santrauka, radiniai, kontroliniai sąrašai ir pasirašymas.',
   'Tekst voorstellen (AI)': 'Siūlyti tekstą (DI)',
   'Het model gaf geen tekst terug.': 'Modelis negrąžino teksto.',
   'Er staat al tekst. Vervangen door het AI-concept?':
