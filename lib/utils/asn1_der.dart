@@ -88,7 +88,8 @@ Asn1Node? parseDer(Uint8List data) {
   try {
     final (node, _) = _readNode(data, 0);
     return node;
-  } catch (_) {
+  } on RangeError {
+    // Truncated/malformed DER indexes past the end — not valid, return null.
     return null;
   }
 }

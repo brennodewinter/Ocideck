@@ -83,6 +83,16 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'RFC3161-tijdstempel': 'Časovni žig RFC3161',
+  'Verzegel het deck eerst.': 'Najprej zapečatite komplet.',
+  'Verzoek (.tsq) exporteren': 'Izvozi zahtevo (.tsq)',
+  'Token (.tsr) importeren': 'Uvozi žeton (.tsr)',
+  'Nog geen tijdstempel': 'Še ni časovnega žiga',
+  'Getijdstempeld op': 'Časovno žigosano',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Časovni žig se ne ujema z zgoščeno vrednostjo pečata',
+  'Tijdstempelverzoek opgeslagen': 'Zahteva za časovni žig shranjena',
+  'Tijdstempel geïmporteerd': 'Časovni žig uvožen',
   'Managementsamenvatting': 'Povzetek za vodstvo',
   'Bevindingen totaal': 'Ugotovitev skupaj',
   'scope-objecten getest': 'preizkušeni predmeti obsega',

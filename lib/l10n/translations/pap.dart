@@ -83,6 +83,16 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'RFC3161-tijdstempel': 'Seyo di tempu RFC3161',
+  'Verzegel het deck eerst.': 'Seya e deck promé.',
+  'Verzoek (.tsq) exporteren': 'Eksportá petishon (.tsq)',
+  'Token (.tsr) importeren': 'Importá token (.tsr)',
+  'Nog geen tijdstempel': 'Ainda sin seyo di tempu',
+  'Getijdstempeld op': 'Seyá riba',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'E seyo di tempu no ta koresponde ku e hash di seyo',
+  'Tijdstempelverzoek opgeslagen': 'Petishon di seyo di tempu wardá',
+  'Tijdstempel geïmporteerd': 'Seyo di tempu importá',
   'Managementsamenvatting': 'Resúmen ehekutivo',
   'Bevindingen totaal': 'Total di deskubrimentu',
   'scope-objecten getest': 'opheto di scope testá',

@@ -85,6 +85,16 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'RFC3161-tijdstempel': 'Znacznik czasu RFC3161',
+  'Verzegel het deck eerst.': 'Najpierw zapieczętuj deck.',
+  'Verzoek (.tsq) exporteren': 'Eksportuj żądanie (.tsq)',
+  'Token (.tsr) importeren': 'Importuj token (.tsr)',
+  'Nog geen tijdstempel': 'Brak znacznika czasu',
+  'Getijdstempeld op': 'Ostemplowano czasowo',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Znacznik czasu nie pasuje do skrótu pieczęci',
+  'Tijdstempelverzoek opgeslagen': 'Żądanie znacznika czasu zapisane',
+  'Tijdstempel geïmporteerd': 'Znacznik czasu zaimportowany',
   'Managementsamenvatting': 'Podsumowanie zarządcze',
   'Bevindingen totaal': 'Łącznie ustaleń',
   'scope-objecten getest': 'przetestowane obiekty zakresu',

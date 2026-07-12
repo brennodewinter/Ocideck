@@ -83,6 +83,16 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'RFC3161-tijdstempel': 'RFC3161 laiko žyma',
+  'Verzegel het deck eerst.': 'Pirmiausia užantspauduokite deką.',
+  'Verzoek (.tsq) exporteren': 'Eksportuoti užklausą (.tsq)',
+  'Token (.tsr) importeren': 'Importuoti prieigos raktą (.tsr)',
+  'Nog geen tijdstempel': 'Kol kas nėra laiko žymos',
+  'Getijdstempeld op': 'Pažymėta laiku',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Laiko žyma neatitinka antspaudo maišos',
+  'Tijdstempelverzoek opgeslagen': 'Laiko žymos užklausa įrašyta',
+  'Tijdstempel geïmporteerd': 'Laiko žyma importuota',
   'Managementsamenvatting': 'Vadovybės santrauka',
   'Bevindingen totaal': 'Iš viso radinių',
   'scope-objecten getest': 'patikrinti aprėpties objektai',

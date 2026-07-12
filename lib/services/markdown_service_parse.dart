@@ -157,7 +157,6 @@ extension _MarkdownParse on MarkdownService {
             case 'ocideck_seal_tsr':
               sealTsr = value;
             case 'ocideck_style_profile':
-              // Best-effort: a corrupt token keeps the default (see helper).
               final styleJson = _decodeBase64JsonMap(value, key);
               if (styleJson != null) {
                 themeProfile = ThemeProfile.fromJson(styleJson);
@@ -165,9 +164,7 @@ extension _MarkdownParse on MarkdownService {
             case 'ocideck_miauw_waivers':
               final waiverJson = _decodeBase64JsonMap(value, key);
               if (waiverJson != null) {
-                miauwWaivers = {
-                  for (final e in waiverJson.entries) e.key: '${e.value}',
-                };
+                miauwWaivers = waiverJson.map((k, v) => MapEntry(k, '$v'));
               }
           }
         }

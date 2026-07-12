@@ -83,6 +83,16 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'RFC3161-tijdstempel': 'RFC3161 vremenska oznaka',
+  'Verzegel het deck eerst.': 'Prvo zapečatite deck.',
+  'Verzoek (.tsq) exporteren': 'Izvezi zahtjev (.tsq)',
+  'Token (.tsr) importeren': 'Uvezi token (.tsr)',
+  'Nog geen tijdstempel': 'Još nema vremenske oznake',
+  'Getijdstempeld op': 'Vremenski označeno',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Vremenska oznaka ne odgovara hashu pečata',
+  'Tijdstempelverzoek opgeslagen': 'Zahtjev za vremensku oznaku spremljen',
+  'Tijdstempel geïmporteerd': 'Vremenska oznaka uvezena',
   'Managementsamenvatting': 'Sažetak za upravu',
   'Bevindingen totaal': 'Ukupno nalaza',
   'scope-objecten getest': 'testirani objekti opsega',

@@ -85,6 +85,16 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'RFC3161-tijdstempel': 'Signaculum temporis RFC3161',
+  'Verzegel het deck eerst.': 'Sigilla prius fasciculum.',
+  'Verzoek (.tsq) exporteren': 'Petitionem (.tsq) exportare',
+  'Token (.tsr) importeren': 'Signum (.tsr) importare',
+  'Nog geen tijdstempel': 'Nullum adhuc signaculum temporis',
+  'Getijdstempeld op': 'Tempore signatum die',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Signaculum temporis cum sigilli summa non congruit',
+  'Tijdstempelverzoek opgeslagen': 'Petitio signaculi temporis servata',
+  'Tijdstempel geïmporteerd': 'Signaculum temporis importatum',
   'Managementsamenvatting': 'Summarium administrationis',
   'Bevindingen totaal': 'Inventa summa',
   'scope-objecten getest': 'res ambitus probatae',

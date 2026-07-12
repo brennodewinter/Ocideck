@@ -84,6 +84,16 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'RFC3161-tijdstempel': 'Carimbo de data/hora RFC3161',
+  'Verzegel het deck eerst.': 'Sele o deck primeiro.',
+  'Verzoek (.tsq) exporteren': 'Exportar pedido (.tsq)',
+  'Token (.tsr) importeren': 'Importar token (.tsr)',
+  'Nog geen tijdstempel': 'Ainda sem carimbo de data/hora',
+  'Getijdstempeld op': 'Carimbado em',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'O carimbo de data/hora não corresponde ao hash do selo',
+  'Tijdstempelverzoek opgeslagen': 'Pedido de carimbo de data/hora guardado',
+  'Tijdstempel geïmporteerd': 'Carimbo de data/hora importado',
   'Managementsamenvatting': 'Resumo executivo',
   'Bevindingen totaal': 'Total de constatações',
   'scope-objecten getest': 'objetos de âmbito testados',

@@ -83,6 +83,16 @@ const _stringsDe = {
 };
 
 const _dutchSourceDe = {
+  'RFC3161-tijdstempel': 'RFC3161-Zeitstempel',
+  'Verzegel het deck eerst.': 'Deck zuerst versiegeln.',
+  'Verzoek (.tsq) exporteren': 'Anfrage (.tsq) exportieren',
+  'Token (.tsr) importeren': 'Token (.tsr) importieren',
+  'Nog geen tijdstempel': 'Noch kein Zeitstempel',
+  'Getijdstempeld op': 'Zeitgestempelt am',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Zeitstempel stimmt nicht mit dem Siegel-Hash überein',
+  'Tijdstempelverzoek opgeslagen': 'Zeitstempelanfrage gespeichert',
+  'Tijdstempel geïmporteerd': 'Zeitstempel importiert',
   'Managementsamenvatting': 'Managementzusammenfassung',
   'Bevindingen totaal': 'Befunde insgesamt',
   'scope-objecten getest': 'Scope-Objekte getestet',

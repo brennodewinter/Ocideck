@@ -83,6 +83,16 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'RFC3161-tijdstempel': 'RFC3161 timestamp',
+  'Verzegel het deck eerst.': 'Seal the deck first.',
+  'Verzoek (.tsq) exporteren': 'Export request (.tsq)',
+  'Token (.tsr) importeren': 'Import token (.tsr)',
+  'Nog geen tijdstempel': 'No timestamp yet',
+  'Getijdstempeld op': 'Timestamped on',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Timestamp does not match the seal hash',
+  'Tijdstempelverzoek opgeslagen': 'Timestamp request saved',
+  'Tijdstempel geïmporteerd': 'Timestamp imported',
   'Managementsamenvatting': 'Management summary',
   'Bevindingen totaal': 'Total findings',
   'scope-objecten getest': 'scope objects tested',

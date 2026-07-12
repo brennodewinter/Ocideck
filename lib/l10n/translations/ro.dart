@@ -84,6 +84,16 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'RFC3161-tijdstempel': 'Marcaj temporal RFC3161',
+  'Verzegel het deck eerst.': 'Sigilează mai întâi deck-ul.',
+  'Verzoek (.tsq) exporteren': 'Exportă cererea (.tsq)',
+  'Token (.tsr) importeren': 'Importă tokenul (.tsr)',
+  'Nog geen tijdstempel': 'Încă niciun marcaj temporal',
+  'Getijdstempeld op': 'Marcat temporal la',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Marcajul temporal nu se potrivește cu hash-ul sigiliului',
+  'Tijdstempelverzoek opgeslagen': 'Cererea de marcaj temporal salvată',
+  'Tijdstempel geïmporteerd': 'Marcaj temporal importat',
   'Managementsamenvatting': 'Rezumat pentru management',
   'Bevindingen totaal': 'Total constatări',
   'scope-objecten getest': 'obiecte de domeniu testate',

@@ -84,6 +84,16 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'RFC3161-tijdstempel': 'Timbru tal-ħin RFC3161',
+  'Verzegel het deck eerst.': 'L-ewwel issiġilla d-deck.',
+  'Verzoek (.tsq) exporteren': 'Esporta t-talba (.tsq)',
+  'Token (.tsr) importeren': 'Importa t-token (.tsr)',
+  'Nog geen tijdstempel': 'Għad m\'hemmx timbru tal-ħin',
+  'Getijdstempeld op': 'Ittimbrat fil-ħin fi',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'It-timbru tal-ħin ma jaqbilx mal-hash tas-siġill',
+  'Tijdstempelverzoek opgeslagen': 'It-talba tat-timbru tal-ħin ġiet salvata',
+  'Tijdstempel geïmporteerd': 'It-timbru tal-ħin ġie importat',
   'Managementsamenvatting': 'Sommarju maniġerjali',
   'Bevindingen totaal': 'Total tas-sejbiet',
   'scope-objecten getest': 'oġġetti tal-ambitu ttestjati',

@@ -686,6 +686,22 @@ Three more command-palette actions remove mechanical bookkeeping:
   tested, and the test standards used (WSTG, PTES, MASTG, … from the scope objects
   and checklists). It regenerates from the deck, so it always matches the report.
 
+### Trusted timestamp (RFC 3161)
+
+Once a report is finalised and sealed, its content is protected by a SHA-512 hash.
+To anchor that hash to a point in time, the **RFC3161-tijdstempel** command opens a
+small dialog that lets you:
+
+- **Export a request (`.tsq`)** — a timestamp request over the seal hash, which you
+  hand to OpenKAT or any RFC 3161 timestamp authority (TSA) out-of-band.
+- **Import the token (`.tsr`)** — the token the TSA returns. OciDeck verifies it
+  offline (its message imprint must equal the current seal hash) and, when it
+  matches, stores it in the deck (`ocideck_seal_tsr`) and shows the timestamp.
+
+This keeps OciDeck a *producer of hashes* — it never has to contact the TSA itself.
+The stored token is verified again every time the deck opens, so a "timestamped on
+…" or "does not match" status is always shown (PENTEST_MIAUW §8-A2).
+
 ### Security theme
 
 A built-in **Security** theme profile ships a clean, professional report look and

@@ -1,35 +1,75 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/eis_entry.dart';
 import '../../models/miauw_compliance.dart';
+import '../../services/miauw_compliance_analyzer.dart';
 import '../../state/deck_provider.dart';
-import '../../state/miauw_compliance_provider.dart';
 import '../../theme/app_theme.dart';
 
 /// The MIAUW compliance overview (PENTEST_MIAUW §9): per EIS a status
 /// (Voldaan / Open / Uitgesloten door klant) grouped by part, with a per-row
 /// action to exclude a requirement (mandatory reason) or lift the exclusion. A
 /// gap analysis — it warns when a foundational EIS is excluded, but never blocks.
-class MiauwCompliancePanel extends ConsumerStatefulWidget {
-  const MiauwCompliancePanel({super.key});
+///
+/// Shown as a root-navigator dialog (via the command palette), so it must NOT
+/// read the per-tab-scoped `deckProvider`: those overrides live below the root
+/// Navigator, so a root dialog would resolve the empty root deck instead. It
+/// therefore takes the tab's [DeckNotifier] (captured at the tab-scoped call
+/// site), subscribes to it, and recomputes the overview on the live deck — so
+/// waive/unwaive updates the panel immediately.
+class MiauwCompliancePanel extends StatefulWidget {
+  const MiauwCompliancePanel({super.key, required this.notifier});
 
-  static Future<void> show(BuildContext context) => showDialog<void>(
-    context: context,
-    builder: (_) => const MiauwCompliancePanel(),
-  );
+  /// The active tab's deck notifier, passed in from the tab-scoped command
+  /// (see `command_palette_actions.dart`).
+  final DeckNotifier notifier;
+
+  static Future<void> show(BuildContext context, DeckNotifier notifier) =>
+      showDialog<void>(
+        context: context,
+        builder: (_) => MiauwCompliancePanel(notifier: notifier),
+      );
 
   @override
-  ConsumerState<MiauwCompliancePanel> createState() =>
-      _MiauwCompliancePanelState();
+  State<MiauwCompliancePanel> createState() => _MiauwCompliancePanelState();
 }
 
-class _MiauwCompliancePanelState extends ConsumerState<MiauwCompliancePanel> {
+class _MiauwCompliancePanelState extends State<MiauwCompliancePanel> {
+  static const _analyzer = MiauwComplianceAnalyzer();
+
+  late MiauwComplianceResult _result;
+  VoidCallback? _removeListener;
+
+  @override
+  void initState() {
+    super.initState();
+    // Seed from the current deck, then rebuild on every deck edit (including
+    // this panel's own waive/unwaive). `fireImmediately: false` avoids a
+    // setState during initState.
+    _result = _analyze(widget.notifier.currentState);
+    _removeListener = widget.notifier.addListener((state) {
+      final result = _analyze(state);
+      if (mounted) setState(() => _result = result);
+    }, fireImmediately: false);
+  }
+
+  @override
+  void dispose() {
+    _removeListener?.call();
+    super.dispose();
+  }
+
+  MiauwComplianceResult _analyze(DeckState state) {
+    final deck = state.deck;
+    if (deck == null) return const MiauwComplianceResult([]);
+    return _analyzer.analyze(deck);
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final result = ref.watch(miauwComplianceProvider);
+    final result = _result;
     return AlertDialog(
       title: Row(
         children: [
@@ -185,7 +225,7 @@ class _MiauwCompliancePanelState extends ConsumerState<MiauwCompliancePanel> {
     EisResult r,
     bool waived,
   ) async {
-    final notifier = ref.read(deckProvider.notifier);
+    final notifier = widget.notifier;
     if (waived) {
       notifier.removeMiauwWaiver(r.entry.id);
       return;

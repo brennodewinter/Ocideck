@@ -16,4 +16,16 @@ extension DeckNotifierAuto on DeckNotifier {
     if (count > 0) _mutate(renumbered, bumpRevision: true);
     return count;
   }
+
+  /// Store the imported RFC 3161 timestamp token (base64url of the `.tsr`) on the
+  /// sealed deck (PENTEST_MIAUW §8-A2). Allowed on a finalised deck because the
+  /// token lives outside the hashed content. Ignored when the deck is unsealed.
+  void setSealTimestampToken(String base64Token) {
+    final deck = currentState.deck;
+    if (deck == null || deck.sealHash.isEmpty) return;
+    _mutate(
+      deck.copyWith(sealTimestampToken: base64Token),
+      allowFinalized: true,
+    );
+  }
 }

@@ -83,6 +83,16 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'RFC3161-tijdstempel': 'RFC3161-Ziitstämpel',
+  'Verzegel het deck eerst.': 'Versiegle zerst s Deck.',
+  'Verzoek (.tsq) exporteren': 'Aafrog (.tsq) exportiere',
+  'Token (.tsr) importeren': 'Token (.tsr) importiere',
+  'Nog geen tijdstempel': 'No kei Ziitstämpel',
+  'Getijdstempeld op': 'Ziitgstämplet am',
+  'Tijdstempel komt niet overeen met de seal-hash':
+      'Ziitstämpel passt nöd zum Siegel-Hash',
+  'Tijdstempelverzoek opgeslagen': 'Ziitstämpel-Aafrog gspeicheret',
+  'Tijdstempel geïmporteerd': 'Ziitstämpel importiert',
   'Managementsamenvatting': 'Managementzämmefassig',
   'Bevindingen totaal': 'Befund total',
   'scope-objecten getest': 'Scope-Objäkt teschtet',
