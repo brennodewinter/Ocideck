@@ -87,7 +87,15 @@ class _ChartEditorState extends State<ChartEditor> {
     _loadFromSpec(spec);
   }
 
-  bool get _supportsBounds => _type != ChartType.pie;
+  /// Pie and donut share the "one circle per series, labels are the segments"
+  /// data mapping, so the grid dims columns past the first two for both.
+  bool get _isPieLike => _type == ChartType.pie || _type == ChartType.donut;
+
+  bool get _supportsBounds =>
+      _type != ChartType.pie &&
+      _type != ChartType.donut &&
+      _type != ChartType.horizontalBar &&
+      _type != ChartType.heatmap;
 
   static String _fmtBound(double? v) => v == null ? '' : _fmt(v);
 
@@ -183,8 +191,8 @@ class _ChartEditorState extends State<ChartEditor> {
           customMarkdown: base
               .copyWith(
                 type: type,
-                clearMinBound: type == ChartType.pie,
-                clearMaxBound: type == ChartType.pie,
+                clearMinBound: !base.copyWith(type: type).supportsBounds,
+                clearMaxBound: !base.copyWith(type: type).supportsBounds,
               )
               .toBlock(),
         ),
@@ -405,23 +413,11 @@ class _ChartEditorState extends State<ChartEditor> {
           EditorField(label: 'Titel (optioneel)', controller: _title),
           const SizedBox(height: 16),
           _typeControls(l10n),
-          if (_type == ChartType.pie)
+          if (_typeHint(l10n) case final hint?)
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Text(
-                l10n.d(
-                  'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.',
-                ),
-                style: TextStyle(fontSize: 11, color: AppTheme.slate500),
-              ),
-            ),
-          if (_type == ChartType.radar)
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Text(
-                l10n.d(
-                  'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.',
-                ),
+                hint,
                 style: TextStyle(fontSize: 11, color: AppTheme.slate500),
               ),
             ),
@@ -583,6 +579,31 @@ class _ChartEditorState extends State<ChartEditor> {
     );
   }
 
+  /// Short explanation of the non-obvious data mapping for the current type,
+  /// or null for the self-explanatory ones (bar, line, …).
+  String? _typeHint(AppLocalizations l10n) {
+    if (_isPieLike) {
+      return l10n.d(
+        'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.',
+      );
+    }
+    return switch (_type) {
+      ChartType.radar => l10n.d(
+        'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.',
+      ),
+      ChartType.combo => l10n.d(
+        'Laatste reeks als lijn op een tweede as; de rest als staven.',
+      ),
+      ChartType.waterfall => l10n.d(
+        'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.',
+      ),
+      ChartType.heatmap => l10n.d(
+        'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.',
+      ),
+      _ => null,
+    };
+  }
+
   Widget _typeControls(AppLocalizations l10n) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -608,16 +629,32 @@ class _ChartEditorState extends State<ChartEditor> {
               child: Text(l10n.d('Staaf')),
             ),
             DropdownMenuItem(
+              value: ChartType.horizontalBar,
+              child: Text(l10n.d('Horizontale staaf')),
+            ),
+            DropdownMenuItem(
               value: ChartType.stackedBar,
               child: Text(l10n.d('Gestapelde staaf')),
+            ),
+            DropdownMenuItem(
+              value: ChartType.combo,
+              child: Text(l10n.d('Combo')),
             ),
             DropdownMenuItem(
               value: ChartType.line,
               child: Text(l10n.d('Lijn')),
             ),
             DropdownMenuItem(
+              value: ChartType.area,
+              child: Text(l10n.d('Vlak')),
+            ),
+            DropdownMenuItem(
               value: ChartType.pie,
               child: Text(l10n.d('Cirkel')),
+            ),
+            DropdownMenuItem(
+              value: ChartType.donut,
+              child: Text(l10n.d('Donut')),
             ),
             DropdownMenuItem(
               value: ChartType.radar,
@@ -626,6 +663,14 @@ class _ChartEditorState extends State<ChartEditor> {
             DropdownMenuItem(
               value: ChartType.scatter,
               child: Text(l10n.d('Spreiding')),
+            ),
+            DropdownMenuItem(
+              value: ChartType.waterfall,
+              child: Text(l10n.d('Waterval')),
+            ),
+            DropdownMenuItem(
+              value: ChartType.heatmap,
+              child: Text(l10n.d('Heatmap')),
             ),
           ],
           onChanged: (v) {
@@ -686,9 +731,7 @@ class _ChartEditorState extends State<ChartEditor> {
                   Container(
                     key: ValueKey('chart-series-column-$c'),
                     width: cellWidth,
-                    color: _type == ChartType.pie && c >= 2
-                        ? AppTheme.slate200
-                        : null,
+                    color: _isPieLike && c >= 2 ? AppTheme.slate200 : null,
                     child: Row(
                       children: [
                         IconButton(
@@ -699,7 +742,7 @@ class _ChartEditorState extends State<ChartEditor> {
                             height: 16,
                             decoration: BoxDecoration(
                               color: Color(
-                                _type == ChartType.pie && c >= 2
+                                _isPieLike && c >= 2
                                     ? 0xFF64748B
                                     : int.parse(
                                             chartSeriesColor(
@@ -741,7 +784,7 @@ class _ChartEditorState extends State<ChartEditor> {
                             enabled: enabled,
                             onChanged: (v) => _seriesNames[c] = v,
                             bold: true,
-                            muted: _type == ChartType.pie && c >= 2,
+                            muted: _isPieLike && c >= 2,
                           ),
                         ),
                         _sortButton(column: c, enabled: enabled),
@@ -830,15 +873,13 @@ class _ChartEditorState extends State<ChartEditor> {
           for (var c = 0; c < cols; c++)
             Container(
               width: cellWidth,
-              color: _type == ChartType.pie && c >= 2
-                  ? AppTheme.slate200
-                  : null,
+              color: _isPieLike && c >= 2 ? AppTheme.slate200 : null,
               child: _cell(
                 key: ValueKey('v-$_rev-$r-$c'),
                 value: c < _values[r].length ? _values[r][c] : '',
                 enabled: enabled,
                 number: true,
-                muted: _type == ChartType.pie && c >= 2,
+                muted: _isPieLike && c >= 2,
                 onChanged: (v) {
                   while (_values[r].length <= c) {
                     _values[r].add('');

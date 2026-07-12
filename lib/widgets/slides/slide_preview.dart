@@ -58,6 +58,7 @@ part 'previews/code_preview.dart';
 part 'previews/chart_preview.dart';
 part 'previews/chart_preview_cartesian.dart';
 part 'previews/chart_preview_radar.dart';
+part 'previews/chart_preview_extra.dart';
 part 'previews/cockpit_preview.dart';
 part 'previews/question_preview.dart';
 part 'previews/timeline_preview.dart';
