@@ -86,6 +86,8 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Zbyt mały kontrast z tłem — może być nieczytelne.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Warstwowy',
   'Horizontale staaf': 'Słupkowy poziomy',

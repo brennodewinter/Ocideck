@@ -84,6 +84,8 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'För lite kontrast mot bakgrunden — kan bli oläsligt.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Yta',
   'Horizontale staaf': 'Liggande stapel',

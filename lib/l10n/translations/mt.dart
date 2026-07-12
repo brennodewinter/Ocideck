@@ -85,6 +85,8 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Kuntrast baxx wisq mal-isfond — forsi illeġibbli.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Erja',
   'Horizontale staaf': 'Bar orizzontali',

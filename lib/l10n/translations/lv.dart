@@ -84,6 +84,8 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Pārāk mazs kontrasts ar fonu — var būt nesalasāms.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Laukuma',
   'Horizontale staaf': 'Horizontāls stabiņu',

@@ -7,6 +7,7 @@ part of '../settings_dialog.dart';
 extension _SettingsColors on _SettingsDialogState {
   List<Widget> _colorsSectionChildren() {
     final l10n = context.l10n;
+    final contrast = _themeContrastByField();
     return [
       _themeColorAnchor(
         'slideBackgroundColor',
@@ -20,19 +21,27 @@ extension _SettingsColors on _SettingsDialogState {
       const SizedBox(height: 12),
       _themeColorAnchor(
         'textColor',
-        _colorSetting(
-          l10n.d('Tekst'),
-          _themeProfile.textColor,
-          (v) => _themeProfile = _themeProfile.copyWith(textColor: v),
+        _colorWithContrastWarning(
+          _colorSetting(
+            l10n.d('Tekst'),
+            _themeProfile.textColor,
+            (v) => _themeProfile = _themeProfile.copyWith(textColor: v),
+          ),
+          'textColor',
+          contrast,
         ),
       ),
       const SizedBox(height: 12),
       _themeColorAnchor(
         'accentColor',
-        _colorSetting(
-          l10n.d('Accent / bullets'),
-          _themeProfile.accentColor,
-          (v) => _themeProfile = _themeProfile.copyWith(accentColor: v),
+        _colorWithContrastWarning(
+          _colorSetting(
+            l10n.d('Accent / bullets'),
+            _themeProfile.accentColor,
+            (v) => _themeProfile = _themeProfile.copyWith(accentColor: v),
+          ),
+          'accentColor',
+          contrast,
         ),
       ),
       const SizedBox(height: 12),
@@ -69,8 +78,8 @@ extension _SettingsColors on _SettingsDialogState {
           ),
         ],
       ),
-      ..._checklistTableColorSettings(),
-      ..._codeColorSettings(),
+      ..._checklistTableColorSettings(contrast),
+      ..._codeColorSettings(contrast),
       ..._severityColorSettings(),
     ];
   }
@@ -183,29 +192,40 @@ extension _SettingsColors on _SettingsDialogState {
     ];
   }
 
-  List<Widget> _checklistTableColorSettings() {
+  List<Widget> _checklistTableColorSettings(
+    Map<String, SlideQualityIssue> contrast,
+  ) {
     final l10n = context.l10n;
     return [
       const SizedBox(height: 24),
       _sectionTitle(l10n.d('Checklist')),
       _themeColorAnchor(
         'checklistCheckedColor',
-        _colorSetting(
-          l10n.d('Afgevinkt'),
-          _themeProfile.checklistCheckedColor,
-          (v) =>
-              _themeProfile = _themeProfile.copyWith(checklistCheckedColor: v),
+        _colorWithContrastWarning(
+          _colorSetting(
+            l10n.d('Afgevinkt'),
+            _themeProfile.checklistCheckedColor,
+            (v) => _themeProfile = _themeProfile.copyWith(
+              checklistCheckedColor: v,
+            ),
+          ),
+          'checklistCheckedColor',
+          contrast,
         ),
       ),
       const SizedBox(height: 12),
       _themeColorAnchor(
         'checklistUncheckedColor',
-        _colorSetting(
-          l10n.d('Niet afgevinkt'),
-          _themeProfile.checklistUncheckedColor,
-          (v) => _themeProfile = _themeProfile.copyWith(
-            checklistUncheckedColor: v,
+        _colorWithContrastWarning(
+          _colorSetting(
+            l10n.d('Niet afgevinkt'),
+            _themeProfile.checklistUncheckedColor,
+            (v) => _themeProfile = _themeProfile.copyWith(
+              checklistUncheckedColor: v,
+            ),
           ),
+          'checklistUncheckedColor',
+          contrast,
         ),
       ),
       const SizedBox(height: 6),
@@ -230,20 +250,28 @@ extension _SettingsColors on _SettingsDialogState {
       const SizedBox(height: 12),
       _themeColorAnchor(
         'tableTextColor',
-        _colorSetting(
-          l10n.d('Tabeltekst'),
-          _themeProfile.tableTextColor,
-          (v) => _themeProfile = _themeProfile.copyWith(tableTextColor: v),
+        _colorWithContrastWarning(
+          _colorSetting(
+            l10n.d('Tabeltekst'),
+            _themeProfile.tableTextColor,
+            (v) => _themeProfile = _themeProfile.copyWith(tableTextColor: v),
+          ),
+          'tableTextColor',
+          contrast,
         ),
       ),
       const SizedBox(height: 12),
       _themeColorAnchor(
         'tableHeaderTextColor',
-        _colorSetting(
-          l10n.d('Tabel koptekst'),
-          _themeProfile.tableHeaderTextColor,
-          (v) =>
-              _themeProfile = _themeProfile.copyWith(tableHeaderTextColor: v),
+        _colorWithContrastWarning(
+          _colorSetting(
+            l10n.d('Tabel koptekst'),
+            _themeProfile.tableHeaderTextColor,
+            (v) =>
+                _themeProfile = _themeProfile.copyWith(tableHeaderTextColor: v),
+          ),
+          'tableHeaderTextColor',
+          contrast,
         ),
       ),
       const SizedBox(height: 12),
@@ -270,10 +298,17 @@ extension _SettingsColors on _SettingsDialogState {
       const SizedBox(height: 12),
       _themeColorAnchor(
         'titleTextColor',
-        _colorSetting(
-          l10n.d('Titeltekst'),
-          _themeProfile.titleTextColor,
-          (v) => _themeProfile = _themeProfile.copyWith(titleTextColor: v),
+        _colorWithContrastWarning(
+          _colorSetting(
+            l10n.d('Titeltekst'),
+            _themeProfile.titleTextColor,
+            (v) => _themeProfile = _themeProfile.copyWith(titleTextColor: v),
+          ),
+          // The analyser checks the title colour against both the title band and
+          // (via a section probe slide) the section background; either failing
+          // surfaces here.
+          'titleTextColor',
+          contrast,
         ),
       ),
       const SizedBox(height: 12),
@@ -289,7 +324,7 @@ extension _SettingsColors on _SettingsDialogState {
     ];
   }
 
-  List<Widget> _codeColorSettings() {
+  List<Widget> _codeColorSettings(Map<String, SlideQualityIssue> contrast) {
     final l10n = context.l10n;
     return [
       const SizedBox(height: 24),
@@ -305,10 +340,14 @@ extension _SettingsColors on _SettingsDialogState {
       const SizedBox(height: 12),
       _themeColorAnchor(
         'codeTextColor',
-        _colorSetting(
-          l10n.d('Broncode tekst'),
-          _themeProfile.codeTextColor,
-          (v) => _themeProfile = _themeProfile.copyWith(codeTextColor: v),
+        _colorWithContrastWarning(
+          _colorSetting(
+            l10n.d('Broncode tekst'),
+            _themeProfile.codeTextColor,
+            (v) => _themeProfile = _themeProfile.copyWith(codeTextColor: v),
+          ),
+          'codeTextColor',
+          contrast,
         ),
       ),
       const SizedBox(height: 6),
@@ -549,6 +588,118 @@ extension _SettingsColors on _SettingsDialogState {
         },
       ),
     ];
+  }
+
+  /// Every contrast problem the quality panel would raise for the current
+  /// profile, keyed by the colour field it belongs to (an error outranks a
+  /// warning on the same field). Runs the real [SlideQualityAnalyzer] — with the
+  /// user's own [AppSettings.contrastMinRatio] threshold — over two probe slides
+  /// (a checklist and a section slide) so the deck-conditional checklist and
+  /// section checks fire too. Driving the editor from the analyzer keeps its
+  /// inline warnings exactly in step with the deck-level quality report: any
+  /// pairing the panel flags in a presentation is flagged here in the style.
+  Map<String, SlideQualityIssue> _themeContrastByField() {
+    final analyzer = SlideQualityAnalyzer(
+      minContrastRatio: ref.read(settingsProvider).contrastMinRatio,
+    );
+    final result = analyzer.analyzeSlides(
+      slides: [
+        const Slide(id: '_probe_section', type: SlideType.section, title: 'x'),
+        const Slide(
+          id: '_probe_checklist',
+          type: SlideType.bullets,
+          listStyle: ListStyle.checklist,
+          bullets: ['x'],
+        ),
+      ],
+      theme: _themeProfile,
+      font: _themeProfile.fontFamily,
+    );
+    final byField = <String, SlideQualityIssue>{};
+    for (final issue in result.issues) {
+      if (issue.category != SlideQualityCategory.contrast) continue;
+      // The section-slide title check carries no field; fold it into the title
+      // colour it actually tests (titleTextColor vs sectionBackgroundColor).
+      final field =
+          issue.field ??
+          (issue.kind == SlideQualityIssueKind.slideContrast
+              ? 'titleTextColor'
+              : null);
+      if (field == null) continue;
+      // An error outranks a warning already recorded for the same field.
+      final existing = byField[field];
+      if (existing != null &&
+          existing.severity == MarkdownValidationSeverity.error) {
+        continue;
+      }
+      byField[field] = issue;
+    }
+    return byField;
+  }
+
+  /// Wraps a colour picker and appends a readability warning underneath when the
+  /// quality analyser flags [field] on the current profile. The warning updates
+  /// live because the whole colours tab rebuilds on every edit.
+  Widget _colorWithContrastWarning(
+    Widget colorSetting,
+    String field,
+    Map<String, SlideQualityIssue> contrast,
+  ) {
+    final issue = contrast[field];
+    if (issue == null) return colorSetting;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [colorSetting, _contrastWarning(issue)],
+    );
+  }
+
+  /// The inline warning shown under a colour the quality panel would flag — e.g.
+  /// white title text on a white title background, where the title becomes
+  /// invisible. Coloured by severity so it mirrors the panel (amber for a
+  /// warning, red for a hard contrast error), shows the actual ratio inline, and
+  /// carries the panel's full message (label, ratio and threshold) as a tooltip.
+  Widget _contrastWarning(SlideQualityIssue issue) {
+    final color = issue.severity == MarkdownValidationSeverity.error
+        ? AppTheme.dangerFg
+        : AppTheme.warningFg;
+    final ratio = issue.args['ratio'];
+    return Tooltip(
+      message: formatSlideQualityIssue(context.l10n, issue),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 6, bottom: 2),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.warning_amber_rounded, size: 15, color: color),
+            const SizedBox(width: 6),
+            Expanded(
+              child: Text(
+                context.l10n.d(
+                  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.',
+                ),
+                style: TextStyle(
+                  fontSize: 11,
+                  color: color,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            if (ratio != null) ...[
+              const SizedBox(width: 6),
+              Text(
+                '$ratio:1',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: color,
+                  fontWeight: FontWeight.w700,
+                  fontFeatures: const [FontFeature.tabularFigures()],
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _colorSetting(

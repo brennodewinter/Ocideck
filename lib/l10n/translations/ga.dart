@@ -86,6 +86,8 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Codarsnacht ró-íseal leis an gcúlra — seans nach féidir é a léamh.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Achar',
   'Horizontale staaf': 'Barra chothrománach',

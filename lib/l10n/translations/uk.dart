@@ -85,6 +85,8 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Замалий контраст із тлом — можливо, нечитабельно.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Площинна',
   'Horizontale staaf': 'Горизонтальна стовпчикова',

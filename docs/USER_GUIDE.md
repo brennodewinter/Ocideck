@@ -890,8 +890,13 @@ Implementation: `lib/services/markdown_validator.dart` (unit tests in
 - **Style profiles** control deck colours (including the source-code background,
   text, font and an optional syntax-colouring toggle), fonts, logo, and footer.
   Every colour can be picked from the presets or entered as a custom hex value. The
-  Colours and Logo tabs show which profile you're editing. The bundled Marp theme
-  is `assets/themes/ocideck.css`.
+  Colours and Logo tabs show which profile you're editing. As you edit, a warning
+  appears beneath any colour whose contrast the quality panel would flag for a
+  presentation — e.g. a white title on a white title background, which would make
+  the heading invisible. The check mirrors the deck-level quality report (same
+  analyser and contrast threshold), amber for a warning and red for a hard error,
+  with the exact contrast ratio shown inline and the full details on hover. The
+  bundled Marp theme is `assets/themes/ocideck.css`.
 - **App appearance** (a dark interface, the accent and panel colours, and the
   **interface font** — Roboto, Inter, Lora or EB Garamond, all bundled so the
   choice also holds on the web build) is configurable in settings. Create a

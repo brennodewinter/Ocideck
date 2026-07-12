@@ -106,8 +106,9 @@ class MarpHtmlService {
         scheme: cockpitColorScheme,
       );
       final markerClass = _bulletMarkerSectionClass(slide);
+      final titleColorStyle = _titleColorSectionStyle(slide);
       sections
-        ..write('<section class="slide$markerClass">')
+        ..write('<section class="slide$markerClass"$titleColorStyle>')
         ..write('<script type="text/markdown">')
         ..write(_guard(renderedBlocks))
         ..write('</script></section>');
@@ -184,6 +185,23 @@ class MarpHtmlService {
   static final RegExp _bulletMarkerComment = RegExp(
     r'<!--\s*ocideck_bullet_marker:\s*(\w+)',
   );
+
+  /// Strict hex so the matched value can never break out of the `style`
+  /// attribute it is written into (see [_titleColorSectionStyle]).
+  static final RegExp _titleColorComment = RegExp(
+    r'<!--\s*ocideck_title_text_color:\s*(#[0-9A-Fa-f]{3,8})',
+  );
+
+  /// Inline style carrying a title slide's per-slide title-text-colour override
+  /// (`ocideck_title_text_color`) as a CSS custom property, or `''` when the
+  /// slide sets none. The title `h1` reads this variable (with the theme's title
+  /// colour as fallback), so a slide that dims or lightens its title for a busy
+  /// background image keeps that choice in the HTML export — matching the app
+  /// preview, presenter and PDF/PPTX, which already honour the override.
+  static String _titleColorSectionStyle(String slideMarkdown) {
+    final hex = _titleColorComment.firstMatch(slideMarkdown)?.group(1);
+    return hex == null ? '' : ' style="--ocideck-title-color:$hex"';
+  }
 
   /// Extra `<section>` class that turns this slide's plain bullets into cat-paw
   /// markers (` paw-bullets`), or `''`. The decision is taken entirely from the
@@ -286,7 +304,8 @@ class MarpHtmlService {
         'background:${t.slideBackgroundColor};color:${t.textColor};padding:60px;'
         'overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.4);border-radius:4px;'
         'font-family:$family}'
-        '.slide h1{font-size:48px;margin:.15em 0;color:${t.textColor}}'
+        '.slide h1{font-size:48px;margin:.15em 0;'
+        'color:var(--ocideck-title-color,${t.textColor})}'
         '.slide h2{font-size:34px;margin:.15em 0;color:${t.accentColor}}'
         '.slide a{color:${t.accentColor}}'
         '.slide p,.slide li{font-size:24px;line-height:1.45}'
@@ -356,7 +375,7 @@ class MarpHtmlService {
 html,body{margin:0;padding:0}
 body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#1a1a1a}
 .slide{position:relative;width:1280px;min-height:720px;margin:24px auto;background:#fff;padding:60px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.4);border-radius:4px}
-.slide h1{font-size:48px;margin:.15em 0}
+.slide h1{font-size:48px;margin:.15em 0;color:var(--ocideck-title-color,inherit)}
 .slide h2{font-size:34px;margin:.15em 0}
 .slide p,.slide li{font-size:24px;line-height:1.45}
 .slide pre{background:#f6f8fa;border:1px solid #e1e4e8;border-radius:6px;padding:16px;overflow:auto;font-size:18px}

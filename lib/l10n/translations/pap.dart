@@ -84,6 +84,8 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Muy poko kontraste ku e fondo — kisas ilegibel.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Área',
   'Horizontale staaf': 'Bara horizontal',

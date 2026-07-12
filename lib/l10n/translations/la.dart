@@ -86,6 +86,8 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Discrimen colorum a fundo nimis exiguum — fortasse illegibile.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Columnae horizontales',

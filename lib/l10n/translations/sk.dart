@@ -85,6 +85,8 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Príliš malý kontrast s pozadím — môže byť nečitateľné.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Plošný',
   'Horizontale staaf': 'Vodorovný stĺpcový',

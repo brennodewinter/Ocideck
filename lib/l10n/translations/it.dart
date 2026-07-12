@@ -84,6 +84,8 @@ const _stringsIt = {
 };
 
 const _dutchSourceIt = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Contrasto insufficiente con lo sfondo — potrebbe essere illeggibile.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Barre orizzontali',
