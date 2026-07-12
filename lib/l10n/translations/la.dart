@@ -86,8 +86,6 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Discrimen colorum a fundo nimis exiguum — fortasse illegibile.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Columnae horizontales',
@@ -1789,5 +1787,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Discrimen colorum a fundo nimis exiguum — fortasse illegibile.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

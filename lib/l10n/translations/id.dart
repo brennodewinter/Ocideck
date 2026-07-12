@@ -84,8 +84,6 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Kontras dengan latar terlalu rendah — mungkin tak terbaca.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Batang horizontal',
@@ -1772,5 +1770,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Kontras dengan latar terlalu rendah — mungkin tak terbaca.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

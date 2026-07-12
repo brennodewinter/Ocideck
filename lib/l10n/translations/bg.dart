@@ -85,8 +85,6 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Твърде малък контраст с фона — може да е нечетливо.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Площна',
   'Horizontale staaf': 'Хоризонтална стълбовидна',
@@ -1795,5 +1793,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Твърде малък контраст с фона — може да е нечетливо.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

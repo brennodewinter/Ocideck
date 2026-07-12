@@ -86,8 +86,6 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Zbyt mały kontrast z tłem — może być nieczytelne.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Warstwowy',
   'Horizontale staaf': 'Słupkowy poziomy',
@@ -1785,5 +1783,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Zbyt mały kontrast z tłem — może być nieczytelne.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

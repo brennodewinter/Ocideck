@@ -82,8 +82,6 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'rItlh puS — laDlaHbe\'lu\'.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Sep',
   'Horizontale staaf': 'SIrgh SaS',
@@ -1749,5 +1747,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'rItlh puS — laDlaHbe\'lu\'.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

@@ -85,8 +85,6 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Contraste trop faible avec le fond — peut être illisible.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Aires',
   'Horizontale staaf': 'Barres horizontales',
@@ -729,6 +727,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Contraste trop faible avec le fond — peut être illisible.',
   // Consent / license screen (redesign).
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'J\'accepte la licence EUPL 1.2 et j\'ai lu quelles données OciDeck conserve.',

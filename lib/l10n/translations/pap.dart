@@ -84,8 +84,6 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Muy poko kontraste ku e fondo — kisas ilegibel.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Área',
   'Horizontale staaf': 'Bara horizontal',
@@ -730,6 +728,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Muy poko kontraste ku e fondo — kisas ilegibel.',
   // Consent / license screen (redesign).
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Mi ta aseptá e lisensia EUPL 1.2 i mi a lesa ki datos OciDeck ta warda.',

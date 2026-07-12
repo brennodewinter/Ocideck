@@ -84,8 +84,6 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Liian vähän kontrastia taustaan — voi olla lukukelvoton.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Alue',
   'Horizontale staaf': 'Vaakapylväs',
@@ -1773,5 +1771,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Liian vähän kontrastia taustaan — voi olla lukukelvoton.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

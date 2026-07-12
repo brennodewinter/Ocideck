@@ -84,8 +84,6 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Πολύ μικρή αντίθεση με το φόντο — ίσως δυσανάγνωστο.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Περιοχή',
   'Horizontale staaf': 'Οριζόντιες ράβδοι',
@@ -1800,5 +1798,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Πολύ μικρή αντίθεση με το φόντο — ίσως δυσανάγνωστο.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

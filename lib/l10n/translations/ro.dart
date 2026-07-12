@@ -85,8 +85,6 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Contrast prea mic cu fundalul — poate fi ilizibil.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Suprafață',
   'Horizontale staaf': 'Bare orizontale',
@@ -1792,5 +1790,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Contrast prea mic cu fundalul — poate fi ilizibil.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

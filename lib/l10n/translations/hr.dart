@@ -84,8 +84,6 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Premali kontrast s pozadinom — možda nečitljivo.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Površinski',
   'Horizontale staaf': 'Vodoravni stupčasti',
@@ -1779,5 +1777,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Premali kontrast s pozadinom — možda nečitljivo.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };
