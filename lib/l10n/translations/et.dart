@@ -1,6 +1,7 @@
 part of '../app_localizations.dart';
 
 const _stringsEt = {
+  'bankLabel': 'Pank',
   'newPresentation': 'Uus esitlus',
   'open': 'Ava...',
   'openEllipsis': 'Ava…',

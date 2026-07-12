@@ -1,6 +1,7 @@
 part of '../app_localizations.dart';
 
 const _stringsFy = {
+  'bankLabel': 'Bank',
   'newPresentation': 'Nije presintaasje',
   'open': 'Iepenje...',
   'openEllipsis': 'Iepenje…',

@@ -1,6 +1,7 @@
 part of '../app_localizations.dart';
 
 const _stringsGsw = {
+  'bankLabel': 'Bank',
   'newPresentation': 'Nöi Präsentation',
   'open': 'Öffne...',
   'openEllipsis': 'Öffne…',

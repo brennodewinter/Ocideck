@@ -137,7 +137,10 @@ extension _SettingsAbout on _SettingsDialogState {
               _aboutKeyValue('KvK', '98657836'),
               _aboutKeyValue('IBAN', 'NL63 TRIO 0321 2051 89'),
               _aboutKeyValue('BIC', 'TRIONL2U'),
-              _aboutKeyValue(l10n.d('Bank'), 'Triodos N.V.'),
+              // Keyed, not d('Bank'): the source word "Bank" collides with the
+              // cockpit artificial-horizon roll angle, which is translated as
+              // aviation "bank" (Roulis/Rollen/…). This is the financial bank.
+              _aboutKeyValue(l10n.t('bankLabel'), 'Triodos N.V.'),
             ],
           ),
         ),

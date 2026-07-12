@@ -1,6 +1,7 @@
 part of '../app_localizations.dart';
 
 const _stringsGa = {
+  'bankLabel': 'Banc',
   'newPresentation': 'Láithreoireacht nua',
   'open': 'Oscail...',
   'openEllipsis': 'Oscail…',

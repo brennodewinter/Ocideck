@@ -1,6 +1,7 @@
 part of '../app_localizations.dart';
 
 const _stringsSv = {
+  'bankLabel': 'Bank',
   'newPresentation': 'Ny presentation',
   'open': 'Öppna...',
   'openEllipsis': 'Öppna…',

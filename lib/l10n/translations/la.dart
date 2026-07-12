@@ -1,6 +1,7 @@
 part of '../app_localizations.dart';
 
 const _stringsLa = {
+  'bankLabel': 'Argentaria',
   'newPresentation': 'Nova praesentatio',
   'open': 'Aperire...',
   'openEllipsis': 'Aperire…',
