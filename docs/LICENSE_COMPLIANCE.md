@@ -61,6 +61,26 @@ font (SIL OFL-1.1, see `assets/fonts/OFL.txt`). The OciDeck-owned brand images i
 
 **Conclusion: no non-open-source software is included.**
 
+## Bundled reference data (information-security module)
+
+The optional *Informatieveiligheid* module (off by default) bundles a small
+amount of curated reference data. Each dataset is a hand-curated subset stored as
+plain Dart data in the repo, not a verbatim upstream dump:
+
+| Dataset | Where | Upstream | Licence / terms |
+|---|---|---|---|
+| MIAUW EIS catalog (curated subset) | `lib/services/miauw_eis_catalog.dart` | MIAUW schema / methodology | EUPL-1.2 (same as OciDeck) — clean to bundle |
+| CWE catalog (curated subset) | `lib/services/cwe_catalog.dart` | MITRE CWE | MITRE Terms of Use — attribution to MITRE |
+| CVSS v4.0 calculator | `lib/services/cvss/cvss4.dart` | FIRST.Org CVSS v4.0 specification | Native-Dart reimplementation of the public spec; attribution to FIRST.Org |
+
+Test standards are referenced **by name only** for the scope-to-standard mapping
+(Web→OWASP WSTG, Infra→PTES, IoT→OWASP ISTG, Firmware→OWASP FSTM, API→WSTG ch.12,
+Mobile→OWASP MASTG). No WSTG / MASTG / ISTG / FSTM text or checklist content is
+bundled, so OWASP's CC-BY-SA-4.0 share-alike is **not** triggered — nominative use
+of a standard's name carries no licensing obligation. Should verbatim checklist
+content be bundled later, it must ship with CC-BY-SA-4.0 attribution + share-alike
+(PENTEST_MIAUW §15).
+
 ## A note on Apache-2.0 and the EUPL
 
 A few components are Apache-2.0 (e.g. MathJax in the HTML export, and some Dart
