@@ -85,8 +85,6 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Kuntrast baxx wisq mal-isfond — forsi illeġibbli.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Erja',
   'Horizontale staaf': 'Bar orizzontali',
@@ -1796,5 +1794,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Kuntrast baxx wisq mal-isfond — forsi illeġibbli.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

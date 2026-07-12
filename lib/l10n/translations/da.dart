@@ -84,8 +84,6 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'For lidt kontrast til baggrunden — kan være ulæseligt.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Areal',
   'Horizontale staaf': 'Vandret søjle',
@@ -1772,5 +1770,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'For lidt kontrast til baggrunden — kan være ulæseligt.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };
