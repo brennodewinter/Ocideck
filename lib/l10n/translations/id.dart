@@ -1783,6 +1783,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Uitvoering testen conform standaard': 'Pengujian sesuai standar',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Kontras dengan latar terlalu rendah — mungkin tak terbaca.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).

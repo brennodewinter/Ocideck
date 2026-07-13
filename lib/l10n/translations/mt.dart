@@ -1806,6 +1806,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Uitvoering testen conform standaard': 'Ittestjar skont l-istandard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Kuntrast baxx wisq mal-isfond — forsi illeġibbli.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).

@@ -740,6 +740,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Uitvoering testen conform standaard': 'Tests selon la norme',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Contraste trop faible avec le fond — peut être illisible.',
   // Consent / license screen (redesign).

@@ -1782,6 +1782,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Uitvoering testen conform standaard': 'Test i henhold til standard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'For lidt kontrast til baggrunden — kan være ulæseligt.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).

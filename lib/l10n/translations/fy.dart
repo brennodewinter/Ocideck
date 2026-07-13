@@ -741,6 +741,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Uitvoering testen conform standaard': 'Testen neffens de standert',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Te min kontrast mei de eftergrûn — mooglik ûnlêsber.',
   // Consent / license screen (redesign).

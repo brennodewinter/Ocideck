@@ -1783,6 +1783,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Uitvoering testen conform standaard': 'Testaus standardin mukaan',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Liian vähän kontrastia taustaan — voi olla lukukelvoton.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).

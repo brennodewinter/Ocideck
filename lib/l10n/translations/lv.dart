@@ -1782,6 +1782,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Uitvoering testen conform standaard': 'Testēšana saskaņā ar standartu',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Pārāk mazs kontrasts ar fonu — var būt nesalasāms.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).

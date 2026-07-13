@@ -1790,6 +1790,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Uitvoering testen conform standaard': 'Testiranje prema standardu',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Premali kontrast s pozadinom — možda nečitljivo.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).

@@ -1811,6 +1811,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Uitvoering testen conform standaard': 'Δοκιμές σύμφωνα με το πρότυπο',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Πολύ μικρή αντίθεση με το φόντο — ίσως δυσανάγνωστο.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).

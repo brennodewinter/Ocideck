@@ -685,7 +685,9 @@ else.
   object, the CVSS 4.0 vector (with a live, derived score and severity band), CWE
   and CVE references, and the description / reproduction / impact / recommendation
   sections. Severity is always **derived** from the vector, never typed.
-- **Checklist** — a standard-driven test list with a MIAUW tri-state per item
+- **Uitvoering testen conform standaard** (the checklist slide type; the file
+  format keeps the `checklist` class) — a standard-driven test list with a MIAUW
+  tri-state per item
   (*Getoetst* / *Afwijking* / *Niet toetsbaar* / *Niet getoetst*) and an optional
   link to a finding id.
 - **Scope matrix** — the scope objects, each with a type (Web / Infra / IoT /

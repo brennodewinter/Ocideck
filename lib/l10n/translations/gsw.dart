@@ -1787,6 +1787,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Uitvoering testen conform standaard': 'Tests gmäss Standard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Z wenig Kontrast zum Hindergrund — villicht unläsbar.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
