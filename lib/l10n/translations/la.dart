@@ -1799,6 +1799,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Basis': 'Basis',
+  'Context': 'Contextus',
+  'CVSS-wizard': 'Auxilium CVSS',
+  'Kies uit de scope': 'Ex ambitu elige',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Punctum contextus inventorum in hoc obiecto definit; vacuum relinque si pondus ignotum est.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Punctum contextus pondere aestimationis CIA obiecti ambitus electi ponderatur.',
   'WSTG-testen laden': 'Tests WSTG onerare',
   'testen': 'probationes',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

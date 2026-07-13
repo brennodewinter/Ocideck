@@ -24,6 +24,7 @@ import '../../services/markdown_service.dart';
 import '../../services/mermaid_render_service.dart';
 import '../../services/rehearsal_controller.dart';
 import '../../services/rich_text_layout.dart';
+import '../../services/finding_context_score.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../services/web_asset_store.dart';
 import '../../utils/bundled_asset.dart';

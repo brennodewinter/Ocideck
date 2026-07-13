@@ -1801,6 +1801,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Basis': 'Базовий',
+  'Context': 'Контекст',
+  'CVSS-wizard': 'Майстер CVSS',
+  'Kies uit de scope': 'Вибрати з обсягу',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Визначає контекстну оцінку виявлень для цього об\'єкта; залиште порожнім, якщо вагу невідомо.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Контекстна оцінка зважена за CIA-рейтингом вибраного об\'єкта обсягу.',
   'WSTG-testen laden': 'Завантажити тести WSTG',
   'testen': 'тестів',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

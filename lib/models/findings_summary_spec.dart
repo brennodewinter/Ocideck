@@ -1,4 +1,5 @@
 import '../services/cvss/cvss4.dart';
+import '../services/finding_context_score.dart';
 import 'finding_spec.dart';
 import 'slide.dart';
 
@@ -121,16 +122,27 @@ String findingsSeverityDutchLabel(Cvss4Severity band) => switch (band) {
   Cvss4Severity.none => 'Informatief',
 };
 
-/// Derive the severity band of every finding in [slides]: each `finding` header
-/// slide contributes its finding's derived CVSS 4.0 band (an absent or invalid
-/// vector counts as [Cvss4Severity.none] — an informational finding). Detail and
-/// evidence slides of a group are skipped so each finding is counted once.
+/// Derive the **effective** severity band of every finding in [slides]: each
+/// `finding` header slide contributes its finding's context (CIA-weighted) band
+/// when its scope object is rated on the scope matrix, otherwise its base band
+/// (an absent or invalid vector counts as [Cvss4Severity.none] — an
+/// informational finding). Detail and evidence slides of a group are skipped so
+/// each finding is counted once. Using the effective band keeps the management
+/// roll-up consistent with what the finding shows in the report (§10.3/§10.5).
 ///
-/// Shared by the findingsSummary editor's "refresh from deck" action and, later,
-/// the management-summary derivation (P2-MSUM, §10.3).
-List<Cvss4Severity> deckFindingSeverities(Iterable<Slide> slides) => [
-  for (final slide in slides)
-    if (slide.type == SlideType.finding &&
-        slide.findingRole == FindingRole.header)
-      FindingSpec.parse(slide.customMarkdown).severity ?? Cvss4Severity.none,
-];
+/// Shared by the findingsSummary editor's "refresh from deck" action and the
+/// management-summary derivation.
+List<Cvss4Severity> deckFindingSeverities(Iterable<Slide> slides) {
+  final list = slides is List<Slide> ? slides : slides.toList();
+  final ciaIndex = deckScopeCiaIndex(list);
+  return [
+    for (final slide in list)
+      if (slide.type == SlideType.finding &&
+          slide.findingRole == FindingRole.header)
+        findingEffectiveSeverity(
+              FindingSpec.parse(slide.customMarkdown),
+              ciaIndex,
+            ) ??
+            Cvss4Severity.none,
+  ];
+}

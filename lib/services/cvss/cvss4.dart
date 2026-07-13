@@ -168,6 +168,28 @@ class Cvss4 {
     return buffer.toString();
   }
 
+  /// Returns a copy of this vector with the Environmental Security Requirements
+  /// `CR`/`IR`/`AR` overwritten (`'X'` clears a requirement), every other metric
+  /// preserved. Used to derive a finding's **context (environmental) score**
+  /// from its scope object's CIA rating without baking the rating into the
+  /// stored vector — so changing the scope object re-scores every finding that
+  /// references it. An unrecognised token clamps to `'X'` (Not Defined).
+  Cvss4 withEnvironmental({String cr = 'X', String ir = 'X', String ar = 'X'}) {
+    final next = Map<String, String>.from(_metrics);
+    next['CR'] = _clampValue('CR', cr);
+    next['IR'] = _clampValue('IR', ir);
+    next['AR'] = _clampValue('AR', ar);
+    return Cvss4._(next);
+  }
+
+  /// [value] if it is an allowed value for metric [key], else `'X'`.
+  static String _clampValue(String key, String value) {
+    for (final def in _metricOrder) {
+      if (def.key == key) return def.values.contains(value) ? value : 'X';
+    }
+    return 'X';
+  }
+
   /// The CVSS v4.0 score (0.0–10.0), rounded to one decimal place, computed
   /// via the faithful MacroVector + interpolation algorithm. Cached.
   late final double score = _cvss4Score(_metrics);

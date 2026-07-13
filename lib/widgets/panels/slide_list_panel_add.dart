@@ -18,7 +18,10 @@ extension _SlideListPanelAddSlide on _SlideListPanelState {
     final idx = ref.read(editorProvider).selectedIndex;
     if (type == SlideType.finding) {
       if (!mounted) return;
-      final group = await FindingWizard.show(context);
+      final scopeRows = deckScopeRows(
+        ref.read(deckProvider).deck?.slides ?? [],
+      );
+      final group = await FindingWizard.show(context, scopeRows: scopeRows);
       if (group == null || group.isEmpty) return;
       final at = notifier.insertSlides(group, afterIndex: idx);
       if (at >= 0) editorNotifier.select(at);

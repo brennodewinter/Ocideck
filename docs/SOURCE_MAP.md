@@ -21,7 +21,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `chart.dart` — `ChartSpec`/`ChartSeries` and the `ChartType` enum (bar, stacked/horizontal bar, combo, line, area, pie, donut, radar, scatter, waterfall, heatmap) for chart slides with inline or CSV data.
 - `checklist_spec.dart` — `ChecklistSpec` for the security checklist slide (MIAUW tri-state test list linked to findings).
 - `cockpit.dart` — `CockpitSpec`/`CockpitMeterSpec` for instrumentation gauges (speedometer, voltmeter, etc.).
-- `cvss_builder.dart` — CVSS 4.0 Base-metric metadata + vector assembly + `CiaRating`→`CR`/`IR`/`AR` mapping (finding wizard).
+- `cvss_builder.dart` — CVSS 4.0 Base-metric metadata + vector assembly, `CiaRating`→`CR`/`IR`/`AR` mapping, `baseCvss4Vector` and `contextCvss` (derive a CIA-weighted context score).
 - `cwe_entry.dart` — `CweEntry` for the offline CWE catalog (id/name/description/remediation).
 - `wstg_test.dart` — `WstgTest` for the offline WSTG catalog (id/title/category).
 - `deck.dart` — `Deck` with metadata, TLP classification, slides list, annotations, user notes, and MIAUW waivers.
@@ -35,7 +35,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `miauw_compliance.dart` — `MiauwComplianceResult`/`EisResult`/`EisStatus` for the compliance overview.
 - `question.dart` — `QuestionSpec`/`QuestionView` for interactive quiz slides (multiple-choice/true-false/multiple-correct/ordering).
 - `rehearsal.dart` — `RehearsalRun`/`SlideTiming` for tracking presentation-practice durations per slide.
-- `scope_matrix_spec.dart` — `ScopeMatrixSpec`/`ScopeRow`/`ScopeObjectType`/`ScopeStatus` for the scope-matrix slide.
+- `scope_matrix_spec.dart` — `ScopeMatrixSpec`/`ScopeRow`/`ScopeObjectType`/`ScopeStatus` for the scope-matrix slide; each row carries a `CiaRating` (serialised as the `C`/`I`/`A` columns).
 - `settings.dart` — `AppSettings`, `ThemeProfile` (incl. severity tokens + built-in Security profile), `AppAppearanceProfile`, `CockpitColorScheme` config.
 - `slide.dart` — `Slide` model with typed fields; `SlideType` enum for the slide layout variants.
 - `slide_quality.dart` — `SlideQualityResult`/`SlideQualityIssue` for accessibility/contrast/density audits.
@@ -89,6 +89,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `rfc3161_timestamp.dart` — Builds a `.tsq` from the seal hash and parses/verifies a `.tsr` timestamp token.
 - `rich_text_layout.dart` — Computes pagination and scaling for rich-text markdown bodies.
 - `scope_coverage.dart` — `deckScopeCoverageGaps`: flags in-scope objects with no test and no finding.
+- `finding_context_score.dart` — builds the deck's scope-object→CIA index and derives each finding's context (environmental) score / effective severity from it.
 - `secret_store.dart` — Manages secrets (WebDAV credentials, AI API key) in the OS keychain.
 - `slide_layout_metrics.dart` — Layout constants/helpers for text sizing, fonts, and fit scaling.
 - `slide_quality_analyzer.dart` — Checks deck slides for accessibility and readability issues.
@@ -203,11 +204,12 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `add_slide_dialog.dart` — Selects a slide type when adding a slide.
 - `command_palette.dart` — Searchable command overlay (Ctrl/Cmd+K); filters actions, keyboard-navigable.
 - `consent_dialog.dart` — Initial consent/welcome dialog (privacy and license).
+- `cvss_builder_dialog.dart` — Reusable per-metric CVSS 4.0 builder (`CvssBuilder`) + modal wrapper (`CvssBuilderDialog`) with a base/context score read-out; shared by the finding wizard and editor.
 - `cwe_picker.dart` — Searchable picker over the offline CWE catalog (finding editor / wizard).
 - `export_dialog.dart` — WYSIWYG export dialog for PDF/PPTX/HTML.
 - `find_replace_dialog.dart` — Full-text find-and-replace across all slides.
 - `finding_template_picker.dart` — Searchable picker over the reusable finding-template library.
-- `finding_wizard.dart` — The guided finding wizard (title → scope → CVSS+CIA → CWE → CVE → sections → emits a group).
+- `finding_wizard.dart` — The guided finding wizard (title → scope → CVSS builder → CWE → CVE → sections → emits a group); stores the base vector, context score derived from the scope object's CIA.
 - `image_carousel_picker.dart` — Image-library carousel (grid and coverflow modes).
 - `import_security_alarm_dialog.dart` — Hard-stop alarm screen for a rejected unsafe presentation.
 - `import_slides_dialog.dart` — Scans directories for presentations to import slides from.

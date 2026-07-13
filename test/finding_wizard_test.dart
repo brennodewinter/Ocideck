@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/cvss_builder.dart';
 import 'package:ocideck/models/finding_spec.dart';
+import 'package:ocideck/models/scope_matrix_spec.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/dialogs/finding_wizard.dart';
 
@@ -55,6 +57,62 @@ void main() {
     expect(spec.cvssVector, startsWith('CVSS:4.0/'));
     // A builder-assembled vector always parses, so the header has a severity.
     expect(spec.severity, isNotNull);
+  });
+
+  testWidgets('stores a base-only vector even for a rated scope object', (
+    tester,
+  ) async {
+    List<Slide>? emitted;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Builder(
+            builder: (context) => ElevatedButton(
+              onPressed: () async {
+                emitted = await FindingWizard.show(
+                  context,
+                  scopeRows: const [
+                    ScopeRow(
+                      object: 'https://app.example',
+                      cia: CiaRating(
+                        confidentiality: CiaLevel.high,
+                        integrity: CiaLevel.high,
+                        availability: CiaLevel.high,
+                      ),
+                    ),
+                  ],
+                );
+              },
+              child: const Text('open'),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    final fields = find.byType(TextField);
+    await tester.enterText(fields.at(0), 'F-9 · Rated');
+    await tester.enterText(fields.at(1), 'F-9');
+    await tester.enterText(fields.at(2), 'https://app.example');
+
+    Finder next() => find.byType(FilledButton);
+    for (var i = 0; i < 3; i++) {
+      await tester.tap(next());
+      await tester.pumpAndSettle();
+    }
+    await tester.tap(next());
+    await tester.pumpAndSettle();
+
+    final spec = FindingSpec.parse(emitted!.first.customMarkdown);
+    // The CIA weighting lives on the scope object, so it is NOT baked into the
+    // finding's stored vector — no Environmental CR/IR/AR metrics.
+    expect(spec.cvssVector, startsWith('CVSS:4.0/'));
+    expect(spec.cvssVector, isNot(contains('CR:')));
+    expect(spec.cvssVector, isNot(contains('IR:')));
+    expect(spec.cvssVector, isNot(contains('AR:')));
   });
 
   testWidgets('cancel returns null', (tester) async {

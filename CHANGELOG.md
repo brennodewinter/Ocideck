@@ -8,6 +8,21 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Guide the CVSS score with a CIA-weighted context score.** Each scope object
+  in the **scope matrix** now carries a **CIA rating** (Confidentiality /
+  Integrity / Availability, each `H`/`M`/`L` or empty), stored in three new
+  `C`/`I`/`A` columns appended after `Note` (older five-column matrices still
+  parse). A finding that references a rated scope object gets a **context
+  (environmental) score** derived from that rating on top of its base CVSS 4.0
+  vector — the weighting lives on the scope object, so re-rating it re-scores
+  every finding on it. The finding editor gains a **CVSS-wizard** button (the
+  guided per-metric builder, now also available when editing, not only when
+  creating) and a scope-object picker sourced from the matrix; the read-out shows
+  the base score plus the context score. The context score flows everywhere — the
+  finding card, previews and PDF/PPTX export — and the findings-summary and
+  management-summary counts use the context severity band. The finding wizard now
+  stores the **base vector** (the CIA weighting is no longer baked in). Localised
+  in all interface languages.
 - **Load the full OWASP WSTG test list into a checklist.** The
   "Uitvoering testen conform standaard" (checklist) editor gains a
   **WSTG-testen laden (Load WSTG tests)** action that fills the list in one click

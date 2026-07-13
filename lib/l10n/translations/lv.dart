@@ -1782,6 +1782,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Basis': 'Bāze',
+  'Context': 'Konteksts',
+  'CVSS-wizard': 'CVSS vednis',
+  'Kies uit de scope': 'Izvēlēties no tvēruma',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Nosaka atradumu konteksta vērtējumu šim objektam; atstājiet tukšu, ja svērums nav zināms.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Konteksta vērtējums ir svērts ar izvēlētā tvēruma objekta CIA novērtējumu.',
   'WSTG-testen laden': 'Ielādēt WSTG testus',
   'testen': 'testi',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

@@ -36,6 +36,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                   slideNumber: _index + 1,
                   slideCount: widget.slides.length,
                   numberStart: numberedListStartFor(widget.slides, _index),
+                  scopeCia: deckScopeCiaIndex(widget.slides),
                   fitScaleOverride: sharedSplitFitScale(
                     widget.slides,
                     _index,
@@ -222,6 +223,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                               showClassificationWatermark:
                                   widget.showClassificationWatermark,
                               presentationMode: true,
+                              scopeCia: deckScopeCiaIndex(widget.slides),
                               fitScaleOverride: sharedSplitFitScale(
                                 widget.slides,
                                 _index + 1,

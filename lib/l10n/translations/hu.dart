@@ -1787,6 +1787,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Basis': 'Alap',
+  'Context': 'Kontextus',
+  'CVSS-wizard': 'CVSS varázsló',
+  'Kies uit de scope': 'Válasszon a hatókörből',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Meghatározza az objektumhoz tartozó megállapítások kontextuspontszámát; hagyja üresen, ha a súlyozás ismeretlen.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'A kontextuspontszám a kiválasztott hatókör-objektum CIA-besorolásával van súlyozva.',
   'WSTG-testen laden': 'WSTG-tesztek betöltése',
   'testen': 'teszt',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

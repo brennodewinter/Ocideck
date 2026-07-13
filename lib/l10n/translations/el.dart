@@ -1811,6 +1811,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Basis': 'Βασικό',
+  'Context': 'Πλαίσιο',
+  'CVSS-wizard': 'Οδηγός CVSS',
+  'Kies uit de scope': 'Επιλογή από το εύρος',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Καθορίζει τη βαθμολογία πλαισίου των ευρημάτων σε αυτό το αντικείμενο· αφήστε κενό αν η στάθμιση είναι άγνωστη.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Η βαθμολογία πλαισίου σταθμίζεται με τη διαβάθμιση CIA του επιλεγμένου αντικειμένου εύρους.',
   'WSTG-testen laden': 'Φόρτωση δοκιμών WSTG',
   'testen': 'δοκιμές',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

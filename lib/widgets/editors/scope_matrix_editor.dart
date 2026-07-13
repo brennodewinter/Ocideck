@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../models/cvss_builder.dart';
 import '../../models/scope_matrix_spec.dart';
 import '../../models/slide.dart';
 import '../../theme/app_theme.dart';
@@ -31,18 +32,21 @@ class _RowControllers {
     : object = TextEditingController(text: row.object)..addListener(onChanged),
       note = TextEditingController(text: row.note)..addListener(onChanged),
       type = row.type,
-      status = row.status;
+      status = row.status,
+      cia = row.cia;
 
   final TextEditingController object;
   final TextEditingController note;
   ScopeObjectType type;
   ScopeStatus status;
+  CiaRating cia;
 
   ScopeRow toRow() => ScopeRow(
     object: object.text.trim(),
     type: type,
     status: status,
     note: note.text.trim(),
+    cia: cia,
   );
 
   void dispose() {
@@ -166,6 +170,81 @@ class _ScopeMatrixEditorState extends State<ScopeMatrixEditor> {
           ),
           const SizedBox(height: 8),
           EditorField(label: 'Notitie', controller: row.note),
+          const SizedBox(height: 10),
+          Text(
+            l10n.d('CIA-rating (scope-object)'),
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: AppTheme.slate500,
+            ),
+          ),
+          Text(
+            l10n.d(
+              'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.',
+            ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
+          const SizedBox(height: 6),
+          _ciaRow(
+            l10n.d('Vertrouwelijkheid'),
+            row.cia.confidentiality,
+            (v) => _setCia(index, row.cia.copyWith(confidentiality: v)),
+          ),
+          _ciaRow(
+            l10n.d('Integriteit'),
+            row.cia.integrity,
+            (v) => _setCia(index, row.cia.copyWith(integrity: v)),
+          ),
+          _ciaRow(
+            l10n.d('Beschikbaarheid'),
+            row.cia.availability,
+            (v) => _setCia(index, row.cia.copyWith(availability: v)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _setCia(int index, CiaRating cia) {
+    setState(() => _rows[index].cia = cia);
+    _emit();
+  }
+
+  /// One CIA-dimension dropdown (`X`/`L`/`M`/`H`), styled like the finding
+  /// wizard's builder: a fixed label beside a compact dropdown.
+  Widget _ciaRow(
+    String label,
+    CiaLevel value,
+    ValueChanged<CiaLevel> onChanged,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 5,
+            child: Text(label, style: const TextStyle(fontSize: 12)),
+          ),
+          Expanded(
+            flex: 4,
+            child: DropdownButton<CiaLevel>(
+              isExpanded: true,
+              isDense: true,
+              value: value,
+              style: TextStyle(fontSize: 12, color: AppTheme.ink),
+              items: [
+                for (final level in CiaLevel.values)
+                  DropdownMenuItem(
+                    value: level,
+                    child: Text('${level.token} · ${level.label}'),
+                  ),
+              ],
+              onChanged: (v) {
+                if (v != null) onChanged(v);
+              },
+            ),
+          ),
         ],
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/cvss_builder.dart';
 import 'package:ocideck/models/scope_matrix_spec.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/editors/_editor_field.dart';
@@ -134,5 +135,26 @@ void main() {
     );
     expect(spec.rows.single.status, ScopeStatus.deviation);
     expect(latest()!.tableRows[1][3], 'Deviation');
+  });
+
+  testWidgets('setting the confidentiality rating writes its token', (
+    tester,
+  ) async {
+    final latest = await pump(tester, slideWithRows(1));
+
+    // The three CIA dropdowns are confidentiality, integrity, availability; the
+    // first is confidentiality.
+    await tester.tap(find.byType(DropdownButton<CiaLevel>).first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('H · High').last);
+    await tester.pumpAndSettle();
+
+    final spec = ScopeMatrixSpec.fromSlide(
+      latest()!.title,
+      latest()!.tableRows,
+    );
+    expect(spec.rows.single.cia.confidentiality, CiaLevel.high);
+    // C is the sixth column (index 5), empty for the still-unset I and A.
+    expect(latest()!.tableRows[1].sublist(5), ['H', '', '']);
   });
 }

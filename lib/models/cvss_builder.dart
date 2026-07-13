@@ -92,6 +92,16 @@ enum CiaLevel {
 
   final String token;
   final String label;
+
+  /// The level for an on-disk Environmental token (`H`/`M`/`L`); anything else
+  /// (including `X` or an empty cell) reads as [notDefined].
+  static CiaLevel fromToken(String value) {
+    final v = value.trim().toUpperCase();
+    for (final level in values) {
+      if (level != notDefined && level.token == v) return level;
+    }
+    return notDefined;
+  }
 }
 
 /// A scope object's client-supplied CIA rating (Vertrouwelijkheid / Integriteit /
@@ -149,4 +159,34 @@ String assembleCvss4Vector(Map<String, String> base, {CiaRating? cia}) {
     });
   }
   return parts.join('/');
+}
+
+/// The canonical **Base-only** vector for [vector]: each of the eleven Base
+/// metrics taken from [vector] when present, else its builder default; any
+/// Threat/Environmental/Supplemental metrics are dropped. Seeds the per-metric
+/// builder and strips a legacy vector's baked-in `CR`/`IR`/`AR` back to its
+/// base — the CIA weighting now lives on the scope object, not the finding.
+String baseCvss4Vector(String vector) {
+  final parsed = Cvss4.tryParseVector(vector);
+  return assembleCvss4Vector({
+    for (final m in kCvss4BaseMetrics)
+      m.code: parsed?[m.code] ?? m.defaultToken,
+  });
+}
+
+/// The **context (environmental) score** for a finding whose base vector is
+/// [baseVector], weighted by a scope object's [cia] rating. Returns `null` when
+/// the rating adds nothing ([CiaRating.isDefined] is false) or [baseVector] does
+/// not parse, so a caller renders the base score in those cases. The rating
+/// overwrites `CR`/`IR`/`AR`, so a scope object's rating wins over any
+/// requirement already baked into the vector (idempotent for a base-only one).
+Cvss4? contextCvss(String baseVector, CiaRating cia) {
+  if (!cia.isDefined) return null;
+  final base = Cvss4.tryParseVector(baseVector);
+  if (base == null) return null;
+  return base.withEnvironmental(
+    cr: cia.confidentiality.token,
+    ir: cia.integrity.token,
+    ar: cia.availability.token,
+  );
 }

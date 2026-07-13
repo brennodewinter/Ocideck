@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/cvss_builder.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
@@ -16,7 +18,7 @@ const _headerBody =
     '\n'
     '## Description\n\nx\n';
 
-Widget _host(Slide slide) {
+Widget _host(Slide slide, {Map<String, CiaRating> scopeCia = const {}}) {
   return MaterialApp(
     home: Scaffold(
       body: Center(
@@ -26,6 +28,7 @@ Widget _host(Slide slide) {
           child: SlidePreviewWidget(
             slide: slide,
             themeProfile: const ThemeProfile(),
+            scopeCia: scopeCia,
           ),
         ),
       ),
@@ -38,6 +41,8 @@ Slide _finding(String body) => Slide.create(
 ).copyWith(customMarkdown: body, findingId: 'F-03');
 
 void main() {
+  setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
+
   testWidgets('finding renders a derived CVSS badge and CWE/CVE chips', (
     tester,
   ) async {
@@ -53,6 +58,29 @@ void main() {
       find.textContaining('SQL injection in the login form'),
       findsOneWidget,
     );
+  });
+
+  testWidgets('a rated scope object adds a context badge beside the base', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _host(
+        _finding(_headerBody),
+        scopeCia: const {
+          'https://app.client.example/login': CiaRating(
+            confidentiality: CiaLevel.low,
+            integrity: CiaLevel.low,
+            availability: CiaLevel.low,
+          ),
+        },
+      ),
+    );
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+    // Base score is still shown (labelled), plus a CIA-weighted context score.
+    expect(find.textContaining('Basis 9.3'), findsOneWidget);
+    expect(find.textContaining('Context'), findsOneWidget);
   });
 
   testWidgets('a finding with no CVSS renders without a badge or a crash', (

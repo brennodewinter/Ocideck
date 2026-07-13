@@ -161,6 +161,7 @@ class _PlayOnlyScreen extends ConsumerWidget {
           cockpitColorScheme: settings.cockpitColorScheme,
           slideNumber: 1,
           slideCount: slideCount,
+          scopeCia: deckScopeCiaIndex(deck.slides),
           tlp: deck.tlp,
           organization: deck.organization,
           showClassificationWatermark: settings.classificationWatermarkEnabled,

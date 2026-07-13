@@ -740,6 +740,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Basis': 'Base',
+  'Context': 'Konteksto',
+  'CVSS-wizard': 'Asistente CVSS',
+  'Kies uit de scope': 'Skohe for di e scope',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Ta determiná e skor di konteksto di e findingnan riba e opheto aki; lag\'é bashí si e ponderashon no ta konosí.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'E skor di konteksto ta ponderá ku e klasifikashon CIA di e opheto di scope skohé.',
   'WSTG-testen laden': 'Karga tèstnan WSTG',
   'testen': 'tèstnan',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
