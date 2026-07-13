@@ -492,6 +492,7 @@ extension _MarkdownParse on MarkdownService {
       findingId: link.findingId,
       findingRole: link.findingRole,
       aiAssistedFields: link.aiAssistedFields,
+      checklistScope: link.checklistScope,
     );
   }
 

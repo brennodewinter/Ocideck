@@ -18,16 +18,24 @@ extension _MarkdownFindingParse on MarkdownService {
     String findingId,
     FindingRole findingRole,
     List<String> aiAssistedFields,
+    String checklistScope,
     String block,
   })
   _parseFindingLink(String block) {
     var findingId = '';
     var findingRole = FindingRole.header;
     var aiAssistedFields = const <String>[];
+    var checklistScope = '';
     final cleaned = block.replaceAllMapped(_reHtmlComment, (m) {
       final content = m.group(1)!.trim();
       if (content.startsWith('ocideck_finding_id:')) {
         findingId = content.substring('ocideck_finding_id:'.length).trim();
+        return '';
+      }
+      if (content.startsWith('ocideck_checklist_scope:')) {
+        checklistScope = content
+            .substring('ocideck_checklist_scope:'.length)
+            .trim();
         return '';
       }
       if (content.startsWith('ocideck_finding_role:')) {
@@ -53,6 +61,7 @@ extension _MarkdownFindingParse on MarkdownService {
       findingId: findingId,
       findingRole: findingRole,
       aiAssistedFields: aiAssistedFields,
+      checklistScope: checklistScope,
       block: cleaned,
     );
   }

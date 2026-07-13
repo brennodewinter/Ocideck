@@ -89,4 +89,38 @@ void main() {
     expect(back.rows[1].note, 'functie afwezig');
     expect(back.testedCount, 2);
   });
+
+  test('checklist slide round-trips its scope-object link (feedback #8)', () {
+    final spec = _sampleSpec();
+    final slide = Slide.create(SlideType.checklist).copyWith(
+      title: spec.standardLabel,
+      tableRows: spec.toTableRows(),
+      checklistScope: 'https://app.example/login',
+    );
+    final service = MarkdownService();
+    final md = service.generateDeck(Deck(title: 'Demo', slides: [slide]));
+    expect(
+      md,
+      contains('<!-- ocideck_checklist_scope: https://app.example/login -->'),
+    );
+
+    final out = service.parseDeck(md)!.slides.single;
+    expect(out.type, SlideType.checklist);
+    expect(out.checklistScope, 'https://app.example/login');
+    // The marker is stripped from the body, not left as a stray comment/table row.
+    final back = ChecklistSpec.fromSlide(out.title, out.tableRows);
+    expect(back.rows.length, 3);
+  });
+
+  test('the scope marker is written only for checklist slides', () {
+    // A non-checklist slide that happens to carry a scope string never emits the
+    // marker (guards the `type == checklist` condition in the serializer).
+    final slide = Slide.create(
+      SlideType.bullets,
+    ).copyWith(checklistScope: 'https://app.example/login');
+    final md = MarkdownService().generateDeck(
+      Deck(title: 'Demo', slides: [slide]),
+    );
+    expect(md, isNot(contains('ocideck_checklist_scope')));
+  });
 }

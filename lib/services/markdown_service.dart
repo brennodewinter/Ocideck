@@ -348,9 +348,15 @@ class MarkdownService {
         '<!-- ocideck_ai_assisted: ${slide.aiAssistedFields.join(', ')} -->',
       );
     }
+    // Checklist↔scope-object link (feedback #8): the scope object this checklist
+    // covers, so it round-trips as a unit with the scope matrix.
+    if (slide.type == SlideType.checklist && slide.checklistScope.isNotEmpty) {
+      buf.writeln('<!-- ocideck_checklist_scope: ${slide.checklistScope} -->');
+    }
     if (classes.isNotEmpty ||
         slide.findingId.isNotEmpty ||
-        slide.aiAssistedFields.isNotEmpty) {
+        slide.aiAssistedFields.isNotEmpty ||
+        slide.checklistScope.isNotEmpty) {
       buf.writeln();
     }
 
