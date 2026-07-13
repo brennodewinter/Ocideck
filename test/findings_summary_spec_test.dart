@@ -1,7 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/cvss_builder.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/finding_spec.dart';
 import 'package:ocideck/models/findings_summary_spec.dart';
+import 'package:ocideck/models/scope_matrix_spec.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/cvss/cvss4.dart';
 import 'package:ocideck/services/markdown_service.dart';
@@ -82,6 +84,31 @@ void main() {
         Cvss4Severity.critical,
         Cvss4Severity.none,
       ]);
+    });
+
+    test('a rated scope object shifts a finding to its context band', () {
+      final scope = Slide.create(SlideType.scopeMatrix).copyWith(
+        tableRows: ScopeMatrixSpec(
+          rows: const [
+            ScopeRow(
+              object: 'https://app.example',
+              cia: CiaRating(
+                confidentiality: CiaLevel.low,
+                integrity: CiaLevel.low,
+                availability: CiaLevel.low,
+              ),
+            ),
+          ],
+        ).toTableRows(),
+      );
+      final finding = Slide.create(SlideType.finding).copyWith(
+        customMarkdown: const FindingSpec(
+          scopeObject: 'https://app.example',
+          cvssVector: _criticalVector,
+        ).toMarkdown(),
+      );
+      // Base 9.3 (Critical) is weighted down to 8.9 (High) by the low CIA rating.
+      expect(deckFindingSeverities([scope, finding]), [Cvss4Severity.high]);
     });
   });
 
