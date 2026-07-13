@@ -85,6 +85,8 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Un paquete de datos es un .zip con los datos de referencia de este módulo. Primero se verifica con la huella integrada en la aplicación; solo se acepta un paquete que coincida con esta versión de la aplicación.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Contraste insuficiente con el fondo — puede ser ilegible.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.

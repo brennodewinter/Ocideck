@@ -95,6 +95,10 @@ flutter:
     - assets/images/cat-otis.jpg
     - assets/themes/ocideck.css
     - assets/web_export/
+    # Baseline Informatieveiligheid module data pack, bundled so the module
+    # provisions offline (verified against the pinned hash in
+    # sec_pack_config.dart). Rebuild with tool/build_secmodule_pack.dart.
+    - assets/secmodule/
     # Full EUPL 1.2 licence text, shown verbatim in the consent screen.
     - LICENSE.md
     # User-facing documentation, shown in the in-app reader (Settings →

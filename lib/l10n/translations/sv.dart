@@ -84,6 +84,8 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Ett datapaket är en .zip med referensdata för den här modulen. Det kontrolleras först mot fingeravtrycket som är inbyggt i appen; endast ett paket som matchar den här appversionen godtas.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'För lite kontrast mot bakgrunden — kan bli oläsligt.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.

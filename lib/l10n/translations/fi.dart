@@ -84,6 +84,8 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Datapaketti on .zip, joka sisältää tämän moduulin viitetiedot. Se tarkistetaan ensin sovellukseen sisäänrakennettua sormenjälkeä vasten; vain tähän sovellusversioon sopiva paketti hyväksytään.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Liian vähän kontrastia taustaan — voi olla lukukelvoton.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.

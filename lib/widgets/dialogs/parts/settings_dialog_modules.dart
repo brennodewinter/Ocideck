@@ -102,11 +102,11 @@ extension _SettingsModules on _SettingsDialogState {
             ),
           ],
         ),
-        // While the module is on but nothing is revealed yet — e.g. no mirror
-        // is reachable — offer the two recourses side by side: retry the fetch
-        // (network back, or consent just granted) and, as fallback #3
-        // (PENTEST_MIAUW §6), the manual local-file import so the module is
-        // usable without a live host.
+        // The module normally provisions from the pack bundled with the app, so
+        // this branch is only reached in the rare case that bundle is missing
+        // and no mirror is reachable. Offer the two recourses side by side —
+        // retry the fetch and the manual local-file import — plus a line saying
+        // what an importable pack actually is.
         if (module.enabled && !module.revealed) ...[
           const SizedBox(height: 8),
           Wrap(
@@ -127,6 +127,13 @@ extension _SettingsModules on _SettingsDialogState {
                 label: Text(l10n.d('Pakket importeren')),
               ),
             ],
+          ),
+          const SizedBox(height: 4),
+          Text(
+            l10n.d(
+              'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.',
+            ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate500),
           ),
         ],
         if (module.provisionedVersion != null) ...[
@@ -182,6 +189,7 @@ extension _SettingsModules on _SettingsDialogState {
       case SecProvisionStatus.noConsent:
       case SecProvisionStatus.unsupportedPlatform:
       case SecProvisionStatus.alreadyCached:
+      case SecProvisionStatus.bundled:
       case SecProvisionStatus.fetched:
       case SecProvisionStatus.imported:
       case null:
@@ -213,6 +221,7 @@ extension _SettingsModules on _SettingsDialogState {
           'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.',
         );
       case SecProvisionStatus.alreadyCached:
+      case SecProvisionStatus.bundled:
       case SecProvisionStatus.fetched:
       case SecProvisionStatus.imported:
       case null:

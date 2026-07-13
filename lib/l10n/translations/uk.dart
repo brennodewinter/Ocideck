@@ -85,6 +85,8 @@ const _stringsUk = {
 };
 
 const _dutchSourceUk = {
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Пакет даних — це .zip із довідковими даними для цього модуля. Спершу він перевіряється за відбитком, вбудованим у застосунок; приймається лише пакет, що відповідає цій версії застосунку.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Замалий контраст із тлом — можливо, нечитабельно.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.

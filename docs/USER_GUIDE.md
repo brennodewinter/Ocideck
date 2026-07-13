@@ -647,17 +647,22 @@ anywhere, so the picker stays short for everyone who does not need them — but 
 report that already uses them always opens and renders correctly regardless (the
 file is the source of truth; the toggle only governs *authoring*).
 
-Enabling fetches the module's reference data once and then works offline. If
-that fetch cannot complete, the card explains **which** step failed — no source
-reachable, a fingerprint that did not match, or a damaged/invalid pack — instead
-of a bare "failed". The "no source reachable" message states plainly that the
-data could not be retrieved from any source (it no longer implies your
-connection is at fault), and the card offers two recourses: **Opnieuw proberen
-(Try again)** to re-run the fetch once the cause is cleared — your network is
-back, or you have just granted the outbound-traffic consent — and **Pakket
-importeren (Import pack)** to load the data pack from a local file instead (the
-air-gapped fallback). Retry is hidden on the web build, which cannot reach a
-mirror; import still works there.
+The module's reference data is **bundled with the app**, so enabling it works
+**offline and out of the box** — no download, no server, and no outbound traffic
+(nothing leaves your device; you do not even need to grant the outbound-traffic
+consent for this). The bundled pack is verified against a fingerprint compiled
+into the app before it is used, so a tampered or mismatched pack is refused.
+
+You will normally never see a failure. In the rare case the bundled pack cannot
+be read and no mirror is reachable, the card explains **which** step failed — no
+source reachable, a fingerprint that did not match, or a damaged/invalid pack —
+instead of a bare "failed", and offers two recourses: **Opnieuw proberen (Try
+again)** to re-run provisioning, and **Pakket importeren (Import pack)** to load
+a data pack from a local file. A data pack is a `.zip` holding this module's
+reference data; on import it is checked against the same built-in fingerprint, so
+**only a pack that matches your app version is accepted** — this is the
+air-gapped / update path, not something you need for normal use. Retry is hidden
+on the web build; import still works there.
 
 ### Starting from the MIAUW report template
 

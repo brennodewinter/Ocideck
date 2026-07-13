@@ -84,6 +84,8 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'In gegevenspakket is in .zip mei de referinsjegegevens foar dizze module. It wurdt earst tsjin de yn de app ynboude fingerôfdruk kontrolearre; allinnich in pakket dat by dizze app-ferzje heart, wurdt akseptearre.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Te min kontrast mei de eftergrûn — mooglik ûnlêsber.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.

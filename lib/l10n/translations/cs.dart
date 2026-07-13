@@ -85,6 +85,8 @@ const _stringsCs = {
 };
 
 const _dutchSourceCs = {
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Datový balíček je .zip s referenčními daty pro tento modul. Nejprve se ověří proti otisku vestavěnému v aplikaci; přijme se pouze balíček odpovídající této verzi aplikace.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Příliš malý kontrast s pozadím — může být nečitelné.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
