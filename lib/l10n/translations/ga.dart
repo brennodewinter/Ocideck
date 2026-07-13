@@ -302,8 +302,8 @@ const _dutchSourceGa = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Tabhair toiliú do thrácht amach ar dtús faoi Ceadúnas agus Príobháideachas.',
   'Op het web nog niet beschikbaar': 'Níl sé ar fáil ar an ngréasán fós',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Níl aon fhoinse insroichte — níorbh fhéidir na sonraí tagartha a íoslódáil áit ar bith. Seiceáil do cheangal idirlín agus bain triail eile as níos déanaí.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Níl aon fhoinse insroichte — níorbh fhéidir na sonraí tagartha a íoslódáil áit ar bith. Bain triail eile as nó iompórtáil an pacáiste de láimh.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Níor mheaitseáil na sonraí a íoslódáladh leis an méarlorg a bhíothas ag súil leis agus diúltaíodh dóibh mar réamhchúram.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

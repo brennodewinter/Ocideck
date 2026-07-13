@@ -297,8 +297,8 @@ const _dutchSourceEn = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'First grant consent for outbound traffic under Licence and Privacy.',
   'Op het web nog niet beschikbaar': 'Not yet available on the web',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'No source reachable — the reference data could not be fetched anywhere. Check your internet connection and try again later.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'No source reachable — the reference data could not be fetched anywhere. Try again or import the pack manually.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'The fetched data did not match the expected fingerprint and was refused as a precaution.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

@@ -299,8 +299,8 @@ const _dutchSourceSk = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Najprv udeľte súhlas s odchádzajúcou prevádzkou v časti Licencia a súkromie.',
   'Op het web nog niet beschikbaar': 'Na webe zatiaľ nedostupné',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Žiadny zdroj nie je dostupný — referenčné údaje sa nepodarilo nikde stiahnuť. Skontrolujte pripojenie na internet a skúste to znova neskôr.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Žiadny zdroj nie je dostupný — referenčné údaje sa nepodarilo nikde stiahnuť. Skúste to znova alebo balík importujte ručne.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Stiahnuté údaje sa nezhodovali s očakávaným odtlačkom a z opatrnosti boli odmietnuté.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

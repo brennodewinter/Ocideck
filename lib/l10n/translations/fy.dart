@@ -298,8 +298,8 @@ const _dutchSourceFy = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Jou earst tastimming foar útgeand ferkear by Lisinsje en Privacy.',
   'Op het web nog niet beschikbaar': 'Op it web noch net beskikber',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Gjin boarne berikber — de referinsjegegevens koenen nearne ophelle wurde. Kontrolearje dyn ynternetferbining en besykje it letter opnij.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Gjin boarne berikber — de referinsjegegevens koenen nearne ophelle wurde. Besykje it opnij of ymportearje it pakket mei de hân.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'De ophelle gegevens kamen net oerien mei de ferwachte fingerôfdruk en binne út foarsoarch wegere.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

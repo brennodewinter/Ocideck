@@ -300,8 +300,8 @@ const _dutchSourceUk = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Спершу надайте згоду на вихідний трафік у розділі «Ліцензія та конфіденційність».',
   'Op het web nog niet beschikbaar': 'У вебі поки що недоступно',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Жодне джерело недоступне — довідкові дані не вдалося завантажити ніде. Перевірте підключення до інтернету та повторіть спробу пізніше.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Жодне джерело недоступне — довідкові дані не вдалося завантажити ніде. Спробуйте ще раз або імпортуйте пакет вручну.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Отримані дані не збіглися з очікуваним відбитком і з обережності були відхилені.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

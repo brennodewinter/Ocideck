@@ -301,8 +301,8 @@ const _dutchSourceEl = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Δώστε πρώτα συγκατάθεση για εξερχόμενη κίνηση στην ενότητα Άδεια και Απόρρητο.',
   'Op het web nog niet beschikbaar': 'Δεν είναι ακόμη διαθέσιμο στον ιστό',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Καμία πηγή δεν είναι προσβάσιμη — τα δεδομένα αναφοράς δεν ήταν δυνατό να ληφθούν από πουθενά. Ελέγξτε τη σύνδεσή σας στο διαδίκτυο και δοκιμάστε ξανά αργότερα.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Καμία πηγή δεν είναι προσβάσιμη — τα δεδομένα αναφοράς δεν ήταν δυνατό να ληφθούν από πουθενά. Δοκιμάστε ξανά ή εισαγάγετε το πακέτο χειροκίνητα.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Τα δεδομένα που λήφθηκαν δεν ταίριαζαν με το αναμενόμενο αποτύπωμα και απορρίφθηκαν προληπτικά.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

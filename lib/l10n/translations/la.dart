@@ -300,8 +300,8 @@ const _dutchSourceLa = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Primum consensum ad commercium exiens sub Licentia et Secreto concede.',
   'Op het web nog niet beschikbaar': 'In rete nondum praesto',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Nullus fons attingi potest — data referentiae nusquam accersi potuerunt. Conexionem tuam interretialem inspice et postea rursus conare.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Nullus fons attingi potest — data referentiae nusquam accersi potuerunt. Iterum conare vel fasciculum manu importa.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Data accersita cum vestigio digitali exspectato non convenerunt et ex cautione recusata sunt.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

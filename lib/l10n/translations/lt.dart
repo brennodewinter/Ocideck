@@ -297,8 +297,8 @@ const _dutchSourceLt = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Pirmiausia suteikite sutikimą išeinančiam srautui skiltyje Licencija ir privatumas.',
   'Op het web nog niet beschikbaar': 'Žiniatinklyje dar nepasiekiama',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Nepavyko pasiekti jokio šaltinio — nuorodų duomenų niekur nepavyko atsisiųsti. Patikrinkite interneto ryšį ir vėliau bandykite dar kartą.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Nepavyko pasiekti jokio šaltinio — nuorodų duomenų niekur nepavyko atsisiųsti. Bandykite dar kartą arba importuokite paketą rankiniu būdu.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Atsisiųsti duomenys neatitiko laukiamo skaitmeninio atspaudo ir dėl atsargumo buvo atmesti.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

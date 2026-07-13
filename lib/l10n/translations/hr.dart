@@ -299,8 +299,8 @@ const _dutchSourceHr = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Najprije dajte privolu za izlazni promet u odjeljku Licenca i privatnost.',
   'Op het web nog niet beschikbaar': 'Još nije dostupno na webu',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Nijedan izvor nije dostupan — referentne podatke nije bilo moguće nigdje preuzeti. Provjerite internetsku vezu i pokušajte ponovno kasnije.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Nijedan izvor nije dostupan — referentne podatke nije bilo moguće nigdje preuzeti. Pokušajte ponovno ili ručno uvezite paket.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Preuzeti podaci nisu odgovarali očekivanom otisku i odbijeni su iz opreza.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

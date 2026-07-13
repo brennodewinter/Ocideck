@@ -298,8 +298,8 @@ const _dutchSourceHu = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Először adjon hozzájárulást a kimenő forgalomhoz a Licenc és adatvédelem részben.',
   'Op het web nog niet beschikbaar': 'A weben még nem érhető el',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Nincs elérhető forrás — a referenciaadatokat sehonnan sem sikerült letölteni. Ellenőrizd az internetkapcsolatot, és próbáld meg később újra.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Nincs elérhető forrás — a referenciaadatokat sehonnan sem sikerült letölteni. Próbáld meg újra, vagy importáld a csomagot manuálisan.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'A letöltött adatok nem egyeztek a várt ujjlenyomattal, ezért elővigyázatosságból elutasítottuk őket.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

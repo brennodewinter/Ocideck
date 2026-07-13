@@ -299,8 +299,8 @@ const _dutchSourcePap = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Duna promé permit pa tráfiko saliente na Lisensia i Privasidat.',
   'Op het web nog niet beschikbaar': 'Ainda no disponibel riba web',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Ningun fuente alkansabel — no por a baha e datonan di referensia di ningun kaminda. Kontrolá bo konekshon di internet i purba atrobe despues.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Ningun fuente alkansabel — no por a baha e datonan di referensia di ningun kaminda. Purba atrobe òf importá e pakete manualmente.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'E datonan bahá no a kuadra ku e wela digital sperá i pa prekoushon a wòrdu rechazá.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

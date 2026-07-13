@@ -298,8 +298,8 @@ const _dutchSourceLv = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Vispirms sniedziet piekrišanu izejošajam trafikam sadaļā Licence un privātums.',
   'Op het web nog niet beschikbaar': 'Tīmeklī vēl nav pieejams',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Neviens avots nav sasniedzams — atsauces datus nekur neizdevās lejupielādēt. Pārbaudiet savu interneta savienojumu un mēģiniet vēlāk vēlreiz.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Neviens avots nav sasniedzams — atsauces datus nekur neizdevās lejupielādēt. Mēģiniet vēlreiz vai importējiet pakotni manuāli.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Lejupielādētie dati neatbilda gaidītajam ciparnospiedumam un piesardzības nolūkā tika atteikti.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

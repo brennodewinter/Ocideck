@@ -300,8 +300,8 @@ const _dutchSourceMt = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'L-ewwel agħti kunsens għat-traffiku \'l barra taħt Liċenzja u Privatezza.',
   'Op het web nog niet beschikbaar': 'Għadha mhux disponibbli fuq il-web',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'L-ebda sors ma huwa aċċessibbli — id-dejta ta\' referenza ma setgħetx tinġieb minn imkien. Iċċekkja l-konnessjoni tal-internet tiegħek u erġa\' pprova aktar tard.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'L-ebda sors ma huwa aċċessibbli — id-dejta ta\' referenza ma setgħetx tinġieb minn imkien. Erġa\' pprova jew importa l-pakkett manwalment.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Id-dejta miġjuba ma qablitx mal-marka tas-swaba\' mistennija u ġiet miċħuda bħala prekawzjoni.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

@@ -298,8 +298,8 @@ const _dutchSourceDa = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Giv først samtykke til udgående trafik under Licens og privatliv.',
   'Op het web nog niet beschikbaar': 'Endnu ikke tilgængelig på nettet',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Ingen kilde tilgængelig — referencedataene kunne ikke hentes nogen steder. Kontrollér din internetforbindelse, og prøv igen senere.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Ingen kilde tilgængelig — referencedataene kunne ikke hentes nogen steder. Prøv igen, eller importer pakken manuelt.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'De hentede data stemte ikke overens med det forventede fingeraftryk og blev afvist for en sikkerheds skyld.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

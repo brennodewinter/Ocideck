@@ -301,8 +301,8 @@ const _dutchSourceDe = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Erteilen Sie zuerst die Zustimmung für ausgehenden Datenverkehr unter Lizenz und Datenschutz.',
   'Op het web nog niet beschikbaar': 'Im Web noch nicht verfügbar',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Keine Quelle erreichbar — die Referenzdaten konnten nirgends geladen werden. Überprüfe deine Internetverbindung und versuche es später erneut.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Keine Quelle erreichbar — die Referenzdaten konnten nirgends geladen werden. Versuche es erneut oder importiere das Paket manuell.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Die geladenen Daten stimmten nicht mit dem erwarteten Fingerabdruck überein und wurden vorsichtshalber abgelehnt.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
