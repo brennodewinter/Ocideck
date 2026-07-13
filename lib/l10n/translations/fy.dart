@@ -741,6 +741,23 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'CVE opzoeken': 'CVE opsykje',
+  'CVE opzoeken (online)': 'CVE opsykje (online)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'CVE opsykje is net beskikber yn de webferzje.',
+  'CVE-mirror (basis-URL)': 'CVE-spegel (basis-URL)',
+  'Geen CVE gevonden.': 'Gjin CVE fûn.',
+  'Kon de CVE-bron niet bereiken.': 'Koe de CVE-boarne net berikke.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Tastean om online yn CVE\'s te sykjen yn de befiningseditor fia in NVD-mirror. Standert út; freget ek dyn tastimming en wurket allinnich op desktop.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Typ (in diel fan) in CVE-id en sykje.',
+  'Typ minstens 3 tekens.': 'Typ op syn minst 3 tekens.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Set CVE opsykje (online) oan yn Ynstellings → Feiligens om online yn CVE\'s te sykjen.',
+  'Zoek CVE…': 'Sykje CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228': 'Sykje op CVE-id, bygl. 2021-44228',
+  'Zoeken': 'Sykje',
   'Hertest': 'Werhelle test',
   'Niet hertest': 'Net op \'e nij test',
   'Opgelost': 'Oplost',

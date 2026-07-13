@@ -55,7 +55,9 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `classification_enforcement_policy.dart` — Enforces deck TLP classification rules on export (the authoritative gate).
 - `classification_policy.dart` — Thin backward-compatible wrapper around the TLP export ceiling only.
 - `cvss/cvss4.dart` — Native-Dart port of the FIRST CVSS v4.0 calculator (metrics, parse, score, severity); `cvss4_lookup.dart` + `cvss4_scoring.dart` are its lookup-table/scoring parts.
-- `cwe_catalog.dart` — The bundled offline CWE catalog (`CweCatalog`, curated subset) with search/byId.
+- `cwe_catalog.dart` — The offline CWE catalog (`CweCatalog`): a curated floor merged with the full MITRE list from `assets/cwe/cwe_full.json` (via `ensureLoaded`); search/byId.
+- `cve_search_service.dart` — `CveSearchService` + `CveSource` cascade (primary `LibrekatCveSource`) that searches CVEs by id pattern; `CveHit` in `models/cve_hit.dart`.
+- `cve_transport.dart` / `cve_transport_io.dart` / `cve_transport_web.dart` / `cve_transport_factory.dart` — injectable, SSRF-pinned HTTP transport for the CVE search (io) with a web stub, selected by conditional export.
 - `wstg_catalog.dart` — The bundled offline OWASP WSTG v4.2 test catalog (`WstgCatalog`, 97 tests + pinned version) used to one-click-fill a `checklist` slide.
 - `description_service.dart` — Stores searchable image descriptions as JSON sidecars.
 - `document_integrity.dart` — Computes/verifies the SHA-512 deck seal and seals a finalised deck.
@@ -206,6 +208,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `consent_dialog.dart` — Initial consent/welcome dialog (privacy and license).
 - `cvss_builder_dialog.dart` — Reusable per-metric CVSS 4.0 builder (`CvssBuilder`) + modal wrapper (`CvssBuilderDialog`) with a base/context score read-out; shared by the finding wizard and editor.
 - `cwe_picker.dart` — Searchable picker over the offline CWE catalog (finding editor / wizard).
+- `cve_picker.dart` — Gated online CVE lookup dialog (by id pattern) returning the chosen id to the finding editor / wizard.
 - `export_dialog.dart` — WYSIWYG export dialog for PDF/PPTX/HTML.
 - `find_replace_dialog.dart` — Full-text find-and-replace across all slides.
 - `finding_template_picker.dart` — Searchable picker over the reusable finding-template library.

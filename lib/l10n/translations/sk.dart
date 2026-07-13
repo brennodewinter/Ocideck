@@ -1790,6 +1790,23 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'CVE opzoeken': 'Vyhľadať CVE',
+  'CVE opzoeken (online)': 'Vyhľadať CVE (online)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'Vyhľadávanie CVE nie je dostupné vo webovej verzii.',
+  'CVE-mirror (basis-URL)': 'Zrkadlo CVE (základná URL)',
+  'Geen CVE gevonden.': 'Nenašiel sa žiadny CVE.',
+  'Kon de CVE-bron niet bereiken.': 'Nepodarilo sa spojiť so zdrojom CVE.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Povoliť online vyhľadávanie CVE v editore zistení prostredníctvom zrkadla NVD. Predvolene vypnuté; vyžaduje aj váš súhlas a funguje iba na počítači.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Zadajte (časť) ID CVE a vyhľadajte.',
+  'Typ minstens 3 tekens.': 'Zadajte aspoň 3 znaky.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Zapnite vyhľadávanie CVE (online) v Nastavenia → Zabezpečenie na online vyhľadávanie CVE.',
+  'Zoek CVE…': 'Hľadať CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228': 'Hľadať podľa ID CVE, napr. 2021-44228',
+  'Zoeken': 'Hľadať',
   'Hertest': 'Opakovaný test',
   'Niet hertest': 'Nepretestované',
   'Opgelost': 'Vyriešené',

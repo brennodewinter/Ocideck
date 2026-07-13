@@ -1811,6 +1811,24 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'CVE opzoeken': 'Αναζήτηση CVE',
+  'CVE opzoeken (online)': 'Αναζήτηση CVE (διαδικτυακά)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'Η αναζήτηση CVE δεν είναι διαθέσιμη στην έκδοση web.',
+  'CVE-mirror (basis-URL)': 'Κάτοπτρο CVE (βασικό URL)',
+  'Geen CVE gevonden.': 'Δεν βρέθηκε CVE.',
+  'Kon de CVE-bron niet bereiken.': 'Δεν ήταν δυνατή η πρόσβαση στην πηγή CVE.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Επιτρέψτε την αναζήτηση CVE διαδικτυακά στον επεξεργαστή ευρημάτων μέσω ενός κατόπτρου NVD. Απενεργοποιημένο από προεπιλογή· απαιτεί επίσης τη συγκατάθεσή σας και λειτουργεί μόνο σε υπολογιστή.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Πληκτρολογήστε (μέρος) ενός αναγνωριστικού CVE και αναζητήστε.',
+  'Typ minstens 3 tekens.': 'Πληκτρολογήστε τουλάχιστον 3 χαρακτήρες.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Ενεργοποιήστε την αναζήτηση CVE (διαδικτυακά) στις Ρυθμίσεις → Ασφάλεια για αναζήτηση CVE διαδικτυακά.',
+  'Zoek CVE…': 'Αναζήτηση CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228':
+      'Αναζήτηση με βάση το id CVE, π.χ. 2021-44228',
+  'Zoeken': 'Αναζήτηση',
   'Hertest': 'Επανέλεγχος',
   'Niet hertest': 'Δεν επανελέγχθηκε',
   'Opgelost': 'Επιλύθηκε',

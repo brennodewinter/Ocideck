@@ -72,6 +72,8 @@ void main() {
         // AI backend: resolves per AiResolveStrategy (loopback-direct for local
         // IPC, safeResolveTrusted for self-hosted, safeResolve for cloud) + pin.
         'lib/services/ai_client_service.dart',
+        // CVE lookup: NetGuard.safeResolve + socket pin + no-redirect + cap.
+        'lib/services/cve_transport_io.dart',
       },
       guidance:
           'New raw HttpClient. Resolve the host through NetGuard.safeResolve '

@@ -740,6 +740,23 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'CVE opzoeken': 'Buska CVE',
+  'CVE opzoeken (online)': 'Buska CVE (online)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'Buska CVE no ta disponibel den e version web.',
+  'CVE-mirror (basis-URL)': 'Spil CVE (URL base)',
+  'Geen CVE gevonden.': 'No a haña ningun CVE.',
+  'Kon de CVE-bron niet bereiken.': 'No por a alkansá e fuente CVE.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Permití buska CVE online den e editor di findings via un mirror NVD. Apagá pa default; tambe ta rekerí bo permiso i ta funshoná solamente riba desktop.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Skirbi (un parti di) un id CVE i buska.',
+  'Typ minstens 3 tekens.': 'Skirbi por lo ménos 3 karakter.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Sende buska CVE (online) den Konfigurashon → Siguridat pa buska CVE online.',
+  'Zoek CVE…': 'Buska CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228': 'Buska pa id CVE, p.e. 2021-44228',
+  'Zoeken': 'Buska',
   'Hertest': 'Test di nobo',
   'Niet hertest': 'No testá di nobo',
   'Opgelost': 'Resolvé',

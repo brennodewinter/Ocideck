@@ -1783,6 +1783,24 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'CVE opzoeken': 'Hae CVE',
+  'CVE opzoeken (online)': 'Hae CVE (verkossa)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'CVE-haku ei ole käytettävissä verkkoversiossa.',
+  'CVE-mirror (basis-URL)': 'CVE-peili (perus-URL)',
+  'Geen CVE gevonden.': 'CVE:tä ei löytynyt.',
+  'Kon de CVE-bron niet bereiken.': 'CVE-lähteeseen ei saatu yhteyttä.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Salli CVE:iden haku verkossa löydöseditorissa NVD-peilin kautta. Oletuksena pois päältä; vaatii myös suostumuksesi ja toimii vain työpöydällä.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Kirjoita (osa) CVE-tunnuksesta ja hae.',
+  'Typ minstens 3 tekens.': 'Kirjoita vähintään 3 merkkiä.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Ota CVE-haku (verkossa) käyttöön kohdassa Asetukset → Suojaus hakeaksesi CVE:itä verkossa.',
+  'Zoek CVE…': 'Hae CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228':
+      'Hae CVE-tunnuksen mukaan, esim. 2021-44228',
+  'Zoeken': 'Hae',
   'Hertest': 'Uusintatesti',
   'Niet hertest': 'Ei testattu uudelleen',
   'Opgelost': 'Ratkaistu',

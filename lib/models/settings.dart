@@ -724,6 +724,18 @@ class AppSettings {
   /// derden laden. De gebruiker zet dit bewust aan in de instellingen.
   final bool allowRemoteMedia;
 
+  /// De standaard-CVE-mirror (een NVD-spiegel) voor het opzoeken van CVE's.
+  static const defaultCveApiBaseUrl = 'https://cveapi.librekat.nl';
+
+  /// Of CVE's online opgezocht mogen worden (in de bevinding-editor). Standaard
+  /// uit (fail-closed, offline-first): de gebruiker zet het bewust aan en dan
+  /// nog geldt de outbound-consent. Alleen desktop (geen web).
+  final bool allowCveLookup;
+
+  /// De basis-URL van de CVE-mirror; instelbaar zodat je een eigen spiegel kunt
+  /// gebruiken. Leeg = de standaard ([defaultCveApiBaseUrl]).
+  final String cveApiBaseUrl;
+
   /// Geconfigureerde WebDAV/Nextcloud-bron, of `null` wanneer geen server is
   /// ingesteld. Bevat nooit het wachtwoord (dat staat in de keychain).
   final WebdavServer? webdavServer;
@@ -754,6 +766,8 @@ class AppSettings {
     this.qualityBlockExportOnErrors = false,
     this.contrastMinRatio = 4.5,
     this.allowRemoteMedia = false,
+    this.allowCveLookup = false,
+    this.cveApiBaseUrl = defaultCveApiBaseUrl,
     this.webdavServer,
     this.aiSettings = const AiSettings(),
   });
@@ -828,6 +842,8 @@ class AppSettings {
     bool? qualityBlockExportOnErrors,
     double? contrastMinRatio,
     bool? allowRemoteMedia,
+    bool? allowCveLookup,
+    String? cveApiBaseUrl,
     WebdavServer? webdavServer,
     AiSettings? aiSettings,
     bool clearExportDirectory = false,
@@ -885,6 +901,8 @@ class AppSettings {
           qualityBlockExportOnErrors ?? this.qualityBlockExportOnErrors,
       contrastMinRatio: contrastMinRatio ?? this.contrastMinRatio,
       allowRemoteMedia: allowRemoteMedia ?? this.allowRemoteMedia,
+      allowCveLookup: allowCveLookup ?? this.allowCveLookup,
+      cveApiBaseUrl: cveApiBaseUrl ?? this.cveApiBaseUrl,
       webdavServer: clearWebdavServer
           ? null
           : (webdavServer ?? this.webdavServer),

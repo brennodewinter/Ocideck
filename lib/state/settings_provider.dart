@@ -146,6 +146,9 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
         7.0,
       ),
       allowRemoteMedia: prefs.getBool('allowRemoteMedia') ?? false,
+      allowCveLookup: prefs.getBool('allowCveLookup') ?? false,
+      cveApiBaseUrl:
+          prefs.getString('cveApiBaseUrl') ?? AppSettings.defaultCveApiBaseUrl,
       webdavServer: webdav,
       aiSettings: ai,
     );
@@ -351,6 +354,27 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await _persist(
       'setAllowRemoteMedia',
       (prefs) => prefs.setBool('allowRemoteMedia', enabled),
+    );
+  }
+
+  /// Sta het online opzoeken van CVE's toe, of zet het uit (fail-closed).
+  Future<void> setAllowCveLookup(bool enabled) async {
+    state = state.copyWith(allowCveLookup: enabled);
+    await _persist(
+      'setAllowCveLookup',
+      (prefs) => prefs.setBool('allowCveLookup', enabled),
+    );
+  }
+
+  /// Stel de CVE-mirror-basis-URL in; leeg valt terug op de standaard.
+  Future<void> setCveApiBaseUrl(String url) async {
+    final value = url.trim().isEmpty
+        ? AppSettings.defaultCveApiBaseUrl
+        : url.trim();
+    state = state.copyWith(cveApiBaseUrl: value);
+    await _persist(
+      'setCveApiBaseUrl',
+      (prefs) => prefs.setString('cveApiBaseUrl', value),
     );
   }
 

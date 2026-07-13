@@ -1758,6 +1758,22 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'CVE opzoeken': 'CVE yInej',
+  'CVE opzoeken (online)': 'CVE yInej (online)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'web version-Daq CVE nejwI\' lo\'laHbe\'.',
+  'CVE-mirror (basis-URL)': 'CVE \'echleth (base URL)',
+  'Geen CVE gevonden.': 'CVE tu\'lu\'be\'.',
+  'Kon de CVE-bron niet bereiken.': 'CVE Daq luchoptaHbe\'.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'NVD mirror lo\'taHvIS finding editor-Daq CVE-mey Sam \'e\' chaw\'. tagha\' chu\'be\'; SoH chaw\'lIj poQ \'ej desktop-Daq neH vum.',
+  'Typ een (deel van een) CVE-id en zoek.': 'CVE id (\'ay\') yaSov \'ej yInej.',
+  'Typ minstens 3 tekens.': 'wej Degh puS yIghItlh.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'CVE-mey online SammeH Settings → Security-Daq CVE nej (online) yIchu\'.',
+  'Zoek CVE…': 'CVE yInej…',
+  'Zoek op CVE-id, bijv. 2021-44228': 'CVE id-Daq yInej, ghItlh 2021-44228',
+  'Zoeken': 'yInej',
   'Hertest': 'nIDqa\'',
   'Niet hertest': 'nIDqa\'be\'',
   'Opgelost': 'rInpu\'',

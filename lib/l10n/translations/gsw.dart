@@ -1787,6 +1787,24 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'CVE opzoeken': 'CVE nachluege',
+  'CVE opzoeken (online)': 'CVE nachluege (online)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'CVE nachluege isch i de Webversion nöd verfüegbar.',
+  'CVE-mirror (basis-URL)': 'CVE-Spiegel (Basis-URL)',
+  'Geen CVE gevonden.': 'Kei CVE gfunde.',
+  'Kon de CVE-bron niet bereiken.':
+      'S CVE-Quelle het nöd erreicht werde chöne.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Erlaub online i CVE\'s z sueche im Befund-Editor über en NVD-Spiegel. Standardmässig us; brucht au dini Zuestimmig und funktioniert nume ufem Desktop.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Gib (en Teil vo) ere CVE-ID i und suech.',
+  'Typ minstens 3 tekens.': 'Gib mindestens 3 Zeiche i.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Schalt CVE nachluege (online) i de Iistellige → Sicherheit ii, zum online i CVE\'s z sueche.',
+  'Zoek CVE…': 'CVE sueche…',
+  'Zoek op CVE-id, bijv. 2021-44228': 'Nach CVE-ID sueche, z. B. 2021-44228',
+  'Zoeken': 'Sueche',
   'Hertest': 'Nochtescht',
   'Niet hertest': 'Nöd nochtescht',
   'Opgelost': 'Glöst',

@@ -1782,6 +1782,23 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'CVE opzoeken': 'Slå upp CVE',
+  'CVE opzoeken (online)': 'Slå upp CVE (online)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'CVE-uppslag är inte tillgängligt i webbversionen.',
+  'CVE-mirror (basis-URL)': 'CVE-spegel (bas-URL)',
+  'Geen CVE gevonden.': 'Ingen CVE hittades.',
+  'Kon de CVE-bron niet bereiken.': 'Kunde inte nå CVE-källan.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Tillåt sökning efter CVE:er online i fyndeditorn via en NVD-spegel. Avstängt som standard; kräver också ditt samtycke och fungerar endast på skrivbordet.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Skriv (en del av) ett CVE-id och sök.',
+  'Typ minstens 3 tekens.': 'Skriv minst 3 tecken.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Aktivera CVE-uppslag (online) i Inställningar → Säkerhet för att söka CVE:er online.',
+  'Zoek CVE…': 'Sök CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228': 'Sök efter CVE-id, t.ex. 2021-44228',
+  'Zoeken': 'Sök',
   'Hertest': 'Omtest',
   'Niet hertest': 'Inte omtestad',
   'Opgelost': 'Löst',

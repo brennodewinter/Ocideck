@@ -94,6 +94,9 @@ flutter:
     - assets/images/cat-keiko.jpg
     - assets/images/cat-otis.jpg
     - assets/themes/ocideck.css
+    # Full MITRE CWE weakness list (offline), merged over the curated floor in
+    # lib/services/cwe_catalog.dart. Regenerate with tool/build_cwe_catalog.dart.
+    - assets/cwe/cwe_full.json
     - assets/web_export/
     # Baseline Informatieveiligheid module data pack, bundled so the module
     # provisions offline (verified against the pinned hash in

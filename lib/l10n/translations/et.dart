@@ -1774,6 +1774,23 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'CVE opzoeken': 'Otsi CVE',
+  'CVE opzoeken (online)': 'Otsi CVE (võrgus)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'CVE otsing pole veebiversioonis saadaval.',
+  'CVE-mirror (basis-URL)': 'CVE peegel (baas-URL)',
+  'Geen CVE gevonden.': 'CVE-d ei leitud.',
+  'Kon de CVE-bron niet bereiken.': 'CVE allikat ei õnnestunud saavutada.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Luba CVE-de otsimine võrgus leidude redaktoris NVD peegli kaudu. Vaikimisi väljas; nõuab ka teie nõusolekut ja töötab ainult arvutis.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Sisestage (osa) CVE identifikaatorist ja otsige.',
+  'Typ minstens 3 tekens.': 'Sisestage vähemalt 3 tähemärki.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Lülitage CVE otsing (võrgus) sisse menüüs Seaded → Turvalisus, et otsida CVE-sid võrgus.',
+  'Zoek CVE…': 'Otsi CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228': 'Otsi CVE id järgi, nt 2021-44228',
+  'Zoeken': 'Otsi',
   'Hertest': 'Kordustest',
   'Niet hertest': 'Uuesti testimata',
   'Opgelost': 'Lahendatud',
