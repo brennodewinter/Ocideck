@@ -341,6 +341,13 @@ class Slide {
   /// on review. Round-trips as `<!-- ocideck_ai_assisted: field1, field2 -->`.
   final List<String> aiAssistedFields;
 
+  /// For a `checklist` slide: the scope object this checklist covers (feedback
+  /// #8, "per scope-object heb je een checklist"). Empty = not linked to any
+  /// scope object. Matched against a [ScopeRow.object] via `normalizeScopeObject`
+  /// (like the finding↔scope link), so it stores the plain object string.
+  /// Round-trips as `<!-- ocideck_checklist_scope: https://app.example/login -->`.
+  final String checklistScope;
+
   const Slide({
     required this.id,
     required this.type,
@@ -394,6 +401,7 @@ class Slide {
     this.findingId = '',
     this.findingRole = FindingRole.header,
     this.aiAssistedFields = const [],
+    this.checklistScope = '',
   });
 
   factory Slide.create(SlideType type) {
@@ -494,6 +502,7 @@ class Slide {
       findingId: src.findingId,
       findingRole: src.findingRole,
       aiAssistedFields: src.aiAssistedFields,
+      checklistScope: src.checklistScope,
     );
   }
 
@@ -552,6 +561,7 @@ class Slide {
     String? findingId,
     FindingRole? findingRole,
     List<String>? aiAssistedFields,
+    String? checklistScope,
   }) {
     return Slide(
       id: id,
@@ -614,6 +624,7 @@ class Slide {
       findingId: findingId ?? this.findingId,
       findingRole: findingRole ?? this.findingRole,
       aiAssistedFields: aiAssistedFields ?? this.aiAssistedFields,
+      checklistScope: checklistScope ?? this.checklistScope,
     );
   }
 

@@ -1819,6 +1819,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Genereer checklists voor scope-objecten': 'Gin seicliostaí do réada scóipe',
+  'checklists toegevoegd': 'seicliostaí curtha leis',
+  'Alle scope-objecten hebben al een checklist':
+      'Tá seicliosta ag gach réad scóip cheana féin',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Cruthaíonn sé seicliosta in aghaidh gach réad scóipe (WSTG do web/API); coinnítear na cinn atá ann.',
   'CVE opzoeken': 'Cuardaigh CVE',
   'CVE opzoeken (online)': 'Cuardaigh CVE (ar líne)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

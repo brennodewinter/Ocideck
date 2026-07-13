@@ -1,15 +1,20 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import '../models/annotation.dart';
+import '../models/checklist_spec.dart';
 import '../models/deck.dart';
 import '../models/deck_template.dart';
 import '../models/document_signature.dart';
+import '../models/scope_matrix_spec.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../services/ai_alt_text_cleanup.dart';
 import '../services/annotation_codec.dart';
 import '../services/document_integrity.dart';
+import '../services/finding_context_score.dart';
 import '../services/finding_numbering.dart';
+import '../services/scope_coverage.dart';
+import '../services/wstg_catalog.dart';
 import '../services/file_service.dart';
 import '../services/image_service.dart';
 import '../services/markdown_service.dart';
@@ -28,6 +33,7 @@ import 'settings_provider.dart';
 part 'deck_provider_markdown.dart';
 part 'deck_provider_ai.dart';
 part 'deck_provider_miauw.dart';
+part 'deck_provider_checklist.dart';
 part 'deck_provider_auto.dart';
 
 // ── Service providers ────────────────────────────────────────────────────────
@@ -597,43 +603,6 @@ class DeckNotifier extends StateNotifier<DeckState> {
       total += s.bullets2.where(checklistItemChecked).length;
     }
     return total;
-  }
-
-  /// Vink in één keer alle checklist-items in de hele presentatie uit (bijv.
-  /// om een ingevulde checklist opnieuw te kunnen aflopen). Eén
-  /// ongedaan-maken-stap. No-op wanneer er niets is aangevinkt.
-  void clearAllChecklists() {
-    final deck = state.deck;
-    if (deck == null) return;
-    String uncheck(String bullet) => checklistItemChecked(bullet)
-        ? checklistBullet(
-            level: bulletLevel(bullet),
-            text: checklistItemText(bullet),
-            checked: false,
-          )
-        : bullet;
-    var changed = false;
-    final slides = <Slide>[];
-    for (final s in deck.slides) {
-      if (s.bullets.any(checklistItemChecked) ||
-          s.bullets2.any(checklistItemChecked)) {
-        changed = true;
-        slides.add(
-          s.copyWith(
-            bullets: [for (final b in s.bullets) uncheck(b)],
-            bullets2: [for (final b in s.bullets2) uncheck(b)],
-          ),
-        );
-      } else {
-        slides.add(s);
-      }
-    }
-    // Bump de revisie zodat de editor van de geselecteerde slide remount en de
-    // uitgevinkte checkboxen ook in het invoerpaneel toont (niet alleen in de
-    // slidepreview).
-    if (changed) {
-      _mutate(deck.copyWith(slides: slides), bumpRevision: true);
-    }
   }
 
   // ── Zoeken & vervangen ─────────────────────────────────────────────────────

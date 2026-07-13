@@ -6,6 +6,23 @@
 part of 'markdown_service.dart';
 
 extension _MarkdownFindingParse on MarkdownService {
+  /// Split each Markdown table body line into cells, dropping the GFM separator
+  /// row (`| --- | :---: |`). Lives here (a `part` of the parser library) to keep
+  /// `_parseBlock` under the file-size ratchet; shares the library-private
+  /// `_splitTableRow` / `_reSeparatorCell` helpers.
+  List<List<String>> _decodeTableRows(List<String> tableLines) {
+    final rows = <List<String>>[];
+    for (final line in tableLines) {
+      final cells = _splitTableRow(line);
+      if (cells.isNotEmpty &&
+          cells.every((c) => _reSeparatorCell.hasMatch(c.trim()))) {
+        continue;
+      }
+      rows.add(cells);
+    }
+    return rows;
+  }
+
   /// Pulls the per-slide attestation link comments out of [block]: the
   /// finding-group link (`ocideck_finding_id` / `ocideck_finding_role`) and the
   /// AI-assist markers (`ocideck_ai_assisted`, AI_ASSIST §16.3). Returns the
@@ -18,16 +35,24 @@ extension _MarkdownFindingParse on MarkdownService {
     String findingId,
     FindingRole findingRole,
     List<String> aiAssistedFields,
+    String checklistScope,
     String block,
   })
   _parseFindingLink(String block) {
     var findingId = '';
     var findingRole = FindingRole.header;
     var aiAssistedFields = const <String>[];
+    var checklistScope = '';
     final cleaned = block.replaceAllMapped(_reHtmlComment, (m) {
       final content = m.group(1)!.trim();
       if (content.startsWith('ocideck_finding_id:')) {
         findingId = content.substring('ocideck_finding_id:'.length).trim();
+        return '';
+      }
+      if (content.startsWith('ocideck_checklist_scope:')) {
+        checklistScope = content
+            .substring('ocideck_checklist_scope:'.length)
+            .trim();
         return '';
       }
       if (content.startsWith('ocideck_finding_role:')) {
@@ -53,6 +78,7 @@ extension _MarkdownFindingParse on MarkdownService {
       findingId: findingId,
       findingRole: findingRole,
       aiAssistedFields: aiAssistedFields,
+      checklistScope: checklistScope,
       block: cleaned,
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/checklist_spec.dart';
@@ -35,9 +36,11 @@ void main() {
     await tester.binding.setSurfaceSize(const Size(1000, 2400));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: ChecklistEditor(slide: slide, onUpdate: (s) => updated = s),
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: ChecklistEditor(slide: slide, onUpdate: (s) => updated = s),
+          ),
         ),
       ),
     );
@@ -60,6 +63,23 @@ void main() {
       find.widgetWithIcon(IconButton, Icons.delete_outline),
     );
     expect(delete.onPressed, isNull);
+  });
+
+  testWidgets('editing the scope-object field emits Slide.checklistScope', (
+    tester,
+  ) async {
+    final latest = await pump(tester, slideWithRows(1));
+
+    final scopeField = find.byWidgetPredicate(
+      (w) =>
+          w is TextField &&
+          w.decoration?.hintText == 'https://app.voorbeeld/login',
+    );
+    expect(scopeField, findsOneWidget);
+    await tester.enterText(scopeField, 'https://app.example/login');
+    await tester.pump();
+
+    expect(latest()!.checklistScope, 'https://app.example/login');
   });
 
   testWidgets('editing the standard label emits it as the slide title', (

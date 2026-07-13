@@ -1802,6 +1802,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Genereer checklists voor scope-objecten':
+      'Generează liste de verificare pentru obiectele din domeniu',
+  'checklists toegevoegd': 'liste de verificare adăugate',
+  'Alle scope-objecten hebben al een checklist':
+      'Toate obiectele din domeniu au deja o listă de verificare',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Creează o listă de verificare pentru fiecare obiect din domeniu (WSTG pentru web/API); cele existente se păstrează.',
   'CVE opzoeken': 'Caută CVE',
   'CVE opzoeken (online)': 'Caută CVE (online)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

@@ -1783,6 +1783,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Genereer checklists voor scope-objecten':
+      'Buat daftar periksa untuk objek cakupan',
+  'checklists toegevoegd': 'daftar periksa ditambahkan',
+  'Alle scope-objecten hebben al een checklist':
+      'Semua objek cakupan sudah memiliki daftar periksa',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Membuat daftar periksa per objek cakupan (WSTG untuk web/API); yang ada tetap dipertahankan.',
   'CVE opzoeken': 'Cari CVE',
   'CVE opzoeken (online)': 'Cari CVE (daring)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

@@ -1782,6 +1782,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Genereer checklists voor scope-objecten':
+      'Generera checklistor för scope-objekt',
+  'checklists toegevoegd': 'checklistor tillagda',
+  'Alle scope-objecten hebben al een checklist':
+      'Alla scope-objekt har redan en checklista',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Skapar en checklista per scope-objekt (WSTG för webb/API); befintliga behålls.',
   'CVE opzoeken': 'Slå upp CVE',
   'CVE opzoeken (online)': 'Slå upp CVE (online)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

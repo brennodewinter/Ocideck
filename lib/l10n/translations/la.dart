@@ -1799,6 +1799,13 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Genereer checklists voor scope-objecten':
+      'Indices pro obiectis ambitus genera',
+  'checklists toegevoegd': 'indices additi',
+  'Alle scope-objecten hebben al een checklist':
+      'Omnia obiecta ambitus iam indicem habent',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Pro singulis obiectis ambitus indicem creat (WSTG pro web/API); exsistentia manent.',
   'CVE opzoeken': 'CVE quaerere',
   'CVE opzoeken (online)': 'CVE quaerere (interrete)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

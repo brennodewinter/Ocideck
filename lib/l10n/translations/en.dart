@@ -922,6 +922,13 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Genereer checklists voor scope-objecten':
+      'Generate checklists for scope objects',
+  'checklists toegevoegd': 'checklists added',
+  'Alle scope-objecten hebben al een checklist':
+      'All scope objects already have a checklist',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Creates a checklist per scope object (WSTG for web/API); existing ones are kept.',
   'CVE opzoeken': 'Look up CVE',
   'CVE opzoeken (online)': 'Look up CVE (online)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

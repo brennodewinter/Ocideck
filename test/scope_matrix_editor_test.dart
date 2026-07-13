@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/cvss_builder.dart';
@@ -35,9 +36,11 @@ void main() {
     await tester.binding.setSurfaceSize(const Size(1000, 2400));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: ScopeMatrixEditor(slide: slide, onUpdate: (s) => updated = s),
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: ScopeMatrixEditor(slide: slide, onUpdate: (s) => updated = s),
+          ),
         ),
       ),
     );
@@ -52,6 +55,16 @@ void main() {
     expect(fieldByLabel('Object'), findsOneWidget);
     // The default object type is `web`, whose bound standard is WSTG.
     expect(find.text('Standaard: WSTG'), findsOneWidget);
+  });
+
+  testWidgets('shows the "generate checklists" action (feedback #8)', (
+    tester,
+  ) async {
+    await pump(tester, slideWithRows(1));
+    expect(
+      find.text('Genereer checklists voor scope-objecten'),
+      findsOneWidget,
+    );
   });
 
   testWidgets('the only row cannot be deleted', (tester) async {

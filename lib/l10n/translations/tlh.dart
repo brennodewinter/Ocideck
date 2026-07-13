@@ -1758,6 +1758,12 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Genereer checklists voor scope-objecten': 'scope-Doch checklist chenmoH',
+  'checklists toegevoegd': 'checklist chelta\'',
+  'Alle scope-objecten hebben al een checklist':
+      'Hoch scope-Doch checklist ghaj',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'scope-Doch checklist chenmoH (WSTG web/API); ratlhpu\'bogh checklist taH.',
   'CVE opzoeken': 'CVE yInej',
   'CVE opzoeken (online)': 'CVE yInej (online)',
   'CVE opzoeken is niet beschikbaar in de webversie.':
