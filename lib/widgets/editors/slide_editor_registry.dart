@@ -202,6 +202,8 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         key: c._key,
         slide: c.slide,
         onUpdate: c.onUpdate,
+        imageService: c.imageService,
+        projectPath: c.captionBasePath,
         nestedInScrollView: c.nestedInScrollView,
       ),
       SlideType.checklist: (c) => ChecklistEditor(

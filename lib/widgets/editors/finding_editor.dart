@@ -1,12 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/finding_spec.dart';
 import '../../models/slide.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/finding_ai_service.dart';
+import '../../services/image_service.dart';
+import '../../state/deck_provider.dart';
+import '../../state/editor_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/finding_severity_palette.dart';
+import '../../utils/project_path.dart';
 import '../dialogs/cwe_picker.dart';
 import '../dialogs/finding_template_picker.dart';
 import '_editor_field.dart';
@@ -21,23 +28,27 @@ import 'ai_suggest_field.dart';
 /// [Cvss4] engine and shown live — never typed and never stored (§3.1). A full
 /// per-metric CVSS builder is the finding wizard's job (P2-WIZ); here the vector
 /// is entered as text with an immediate score/severity read-out.
-class FindingEditor extends StatefulWidget {
+class FindingEditor extends ConsumerStatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
+  final ImageService imageService;
+  final String? projectPath;
   final bool nestedInScrollView;
 
   const FindingEditor({
     super.key,
     required this.slide,
     required this.onUpdate,
+    required this.imageService,
+    this.projectPath,
     this.nestedInScrollView = false,
   });
 
   @override
-  State<FindingEditor> createState() => _FindingEditorState();
+  ConsumerState<FindingEditor> createState() => _FindingEditorState();
 }
 
-class _FindingEditorState extends State<FindingEditor>
+class _FindingEditorState extends ConsumerState<FindingEditor>
     with EditorTextControllers {
   late final TextEditingController _heading;
   late final TextEditingController _findingId;
@@ -286,7 +297,184 @@ class _FindingEditorState extends State<FindingEditor>
           'recommendation',
           _recommendation,
         ),
+        const SizedBox(height: 8),
+        _evidenceSection(context.l10n),
       ],
+    );
+  }
+
+  /// Evidence attached to this finding: screenshots and videos, each stored as
+  /// its own slide in the finding group (role `evidence`) right after the
+  /// header — so evidence rides with the finding and round-trips as part of it.
+  Widget _evidenceSection(AppLocalizations l10n) {
+    final deck = ref.watch(deckProvider.select((s) => s.deck));
+    final findingId = _findingId.text.trim();
+    final evidence = <(int, Slide)>[
+      if (deck != null && findingId.isNotEmpty)
+        for (var i = 0; i < deck.slides.length; i++)
+          if (deck.slides[i].findingRole == FindingRole.evidence &&
+              deck.slides[i].findingId == findingId)
+            (i, deck.slides[i]),
+    ];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SectionLabel('Bewijs'),
+        Text(
+          l10n.d(
+            'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.',
+          ),
+          style: TextStyle(fontSize: 11, color: AppTheme.slate500),
+        ),
+        const SizedBox(height: 8),
+        for (final (index, slide) in evidence)
+          _evidenceTile(l10n, index, slide),
+        if (evidence.isNotEmpty) const SizedBox(height: 8),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            OutlinedButton.icon(
+              onPressed: findingId.isEmpty ? null : _addScreenshot,
+              icon: const Icon(Icons.add_photo_alternate_outlined, size: 16),
+              label: Text(l10n.d('Screenshot toevoegen')),
+            ),
+            OutlinedButton.icon(
+              onPressed: findingId.isEmpty ? null : _addVideo,
+              icon: const Icon(Icons.video_call_outlined, size: 16),
+              label: Text(l10n.d('Video toevoegen')),
+            ),
+          ],
+        ),
+        if (findingId.isEmpty) ...[
+          const SizedBox(height: 4),
+          Text(
+            l10n.d('Geef eerst een bevinding-id op om bewijs te koppelen.'),
+            style: TextStyle(fontSize: 11, color: AppTheme.amber700),
+          ),
+        ],
+      ],
+    );
+  }
+
+  /// One evidence slide: a small preview (screenshot thumbnail or a video icon)
+  /// with its file name, plus jump-to-edit and remove actions.
+  Widget _evidenceTile(AppLocalizations l10n, int index, Slide slide) {
+    final isVideo = slide.type == SlideType.video;
+    final path = isVideo ? slide.videoPath : slide.imagePath;
+    final name = path.isEmpty
+        ? l10n.d('(nog leeg)')
+        : path.split(Platform.pathSeparator).last.split('/').last;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 6),
+      child: Row(
+        children: [
+          SizedBox(width: 44, height: 30, child: _evidenceThumb(isVideo, path)),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 12, color: AppTheme.slate700),
+            ),
+          ),
+          IconButton(
+            tooltip: l10n.d('Bewerk deze slide'),
+            icon: const Icon(Icons.edit_outlined, size: 16),
+            visualDensity: VisualDensity.compact,
+            color: AppTheme.slate500,
+            onPressed: () => ref.read(editorProvider.notifier).select(index),
+          ),
+          IconButton(
+            tooltip: l10n.d('Bewijs verwijderen'),
+            icon: const Icon(Icons.delete_outline, size: 16),
+            visualDensity: VisualDensity.compact,
+            color: AppTheme.slate500,
+            onPressed: () => ref.read(deckProvider.notifier).removeSlide(index),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _evidenceThumb(bool isVideo, String path) {
+    if (!isVideo && path.isNotEmpty) {
+      final resolved = resolveEditorAssetPath(path, widget.projectPath);
+      if (resolved != null) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: Image.file(
+            File(resolved),
+            fit: BoxFit.cover,
+            errorBuilder: (_, _, _) => _evidenceIcon(isVideo),
+          ),
+        );
+      }
+    }
+    return _evidenceIcon(isVideo);
+  }
+
+  Widget _evidenceIcon(bool isVideo) => Container(
+    decoration: BoxDecoration(
+      color: AppTheme.slate100,
+      borderRadius: BorderRadius.circular(4),
+    ),
+    child: Icon(
+      isVideo ? Icons.movie_outlined : Icons.image_outlined,
+      size: 16,
+      color: AppTheme.slate400,
+    ),
+  );
+
+  /// Insert [evidence] right after this finding's group (its header plus any
+  /// existing detail/evidence slides that share the id).
+  void _insertEvidence(Slide evidence) {
+    final deck = ref.read(deckProvider).deck;
+    if (deck == null) return;
+    final findingId = _findingId.text.trim();
+    var afterIndex = deck.slides.indexWhere((s) => s.id == widget.slide.id);
+    if (afterIndex < 0) return;
+    for (var i = afterIndex + 1; i < deck.slides.length; i++) {
+      if (deck.slides[i].findingId == findingId &&
+          deck.slides[i].findingRole != FindingRole.header) {
+        afterIndex = i;
+      } else {
+        break;
+      }
+    }
+    ref.read(deckProvider.notifier).insertSlides([
+      evidence,
+    ], afterIndex: afterIndex);
+  }
+
+  Future<void> _addScreenshot() async {
+    final path = await pickImageWithFeedback(
+      context,
+      widget.imageService,
+      projectPath: widget.projectPath,
+    );
+    if (path == null || !mounted) return;
+    _insertEvidence(
+      Slide.create(SlideType.image).copyWith(
+        imagePath: path,
+        findingId: _findingId.text.trim(),
+        findingRole: FindingRole.evidence,
+      ),
+    );
+  }
+
+  Future<void> _addVideo() async {
+    final path = await widget.imageService.pickVideo(
+      projectPath: widget.projectPath,
+    );
+    if (path == null || !mounted) return;
+    _insertEvidence(
+      Slide.create(SlideType.video).copyWith(
+        videoPath: path,
+        findingId: _findingId.text.trim(),
+        findingRole: FindingRole.evidence,
+      ),
     );
   }
 
