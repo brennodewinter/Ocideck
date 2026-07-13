@@ -43,6 +43,7 @@ part 'parts/settings_dialog_security.dart';
 part 'parts/settings_dialog_ai.dart';
 part 'parts/settings_dialog_docs.dart';
 part 'parts/settings_dialog_modules.dart';
+part 'parts/settings_dialog_checklists.dart';
 part 'parts/settings_dialog_about.dart';
 part 'parts/settings_dialog_hex_color.dart';
 
@@ -178,13 +179,14 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     Icons.cloud_outlined,
     Icons.menu_book_outlined,
     Icons.extension_outlined,
+    Icons.checklist_outlined,
     Icons.info_outline,
   ];
 
   /// Index of the "Over OciDeck" pane. It is the last entry in the tab lists
   /// but is opened from the branded footer at the bottom of the sidebar rather
   /// than from a regular nav item, so the nav list stops one short of it.
-  static const _aboutTabIndex = 10;
+  static const _aboutTabIndex = 11;
 
   static const _colorPresets = [
     '#FFFFFF',
@@ -464,6 +466,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       l10n.d('Nextcloud'),
       l10n.d('Documentatie'),
       l10n.d('Uitbreidingen'),
+      l10n.d('Checklists'),
       l10n.d('Over OciDeck'),
     ];
 
@@ -478,6 +481,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       _tabBody(_webdavTab()),
       _tabBody(_documentationTab()),
       _tabBody(_modulesTab()),
+      _tabBody(_checklistsTab()),
       _tabBody(_aboutTab()),
     ];
 
