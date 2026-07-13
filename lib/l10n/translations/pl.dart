@@ -86,6 +86,8 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Pakiet danych to plik .zip z danymi referencyjnymi tego modułu. Najpierw jest sprawdzany względem odcisku wbudowanego w aplikację; akceptowany jest tylko pakiet zgodny z tą wersją aplikacji.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Zbyt mały kontrast z tłem — może być nieczytelne.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.

@@ -84,6 +84,8 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Duomenų paketas – tai .zip su šio modulio nuorodų duomenimis. Pirmiausia jis patikrinamas pagal į programą įtaisytą atspaudą; priimamas tik su šia programos versija suderinamas paketas.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Per mažas kontrastas su fonu — gali būti neįskaitoma.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.

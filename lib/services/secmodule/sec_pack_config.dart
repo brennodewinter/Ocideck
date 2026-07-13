@@ -18,6 +18,13 @@ library;
 /// bumping it re-provisions.
 const secPackVersion = '2026.07.0-skeleton';
 
+/// The bundled baseline pack, shipped as an app asset (pubspec.yaml → assets/
+/// secmodule/) so the module provisions offline with no mirror and no outbound
+/// traffic: the provisioner loads these bytes and verifies them against
+/// [secPackSha256] exactly like a manual import. Kept in step with
+/// [secPackVersion] and rebuilt by tool/build_secmodule_pack.dart.
+const secPackAssetKey = 'assets/secmodule/secmodule_pack_$secPackVersion.zip';
+
 /// Outer sha256 (lowercase hex) of the baseline pack, compiled into the app.
 /// Integrity is hash-only for now; a detached signature is a later phase (see
 /// PENTEST_MIAUW.md §14 open question 2).

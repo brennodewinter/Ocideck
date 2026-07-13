@@ -84,6 +84,8 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Es Datepaket isch es .zip mit de Referänzdate für die Modul. Es wird zerscht gäge de i de App iiboute Fingerabdruck prüeft; nume es Paket, wo zu där App-Version passt, wird akzeptiert.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Z wenig Kontrast zum Hindergrund — villicht unläsbar.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.

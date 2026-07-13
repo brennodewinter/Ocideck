@@ -15,9 +15,11 @@
 // normalisers then, rebuild, and re-pin the printed hash + committed fixture in
 // the same commit.
 //
-// The pack is also the hermetic test fixture: it is written under
-// test/fixtures/secmodule/ so the provisioning tests read known bytes with a
-// known hash and never hit the network.
+// The pack is BUNDLED with the app (declared under `assets/secmodule/` in
+// pubspec.yaml) so the Informatieveiligheid module provisions from it offline,
+// with no mirror and no outbound traffic — the provisioner verifies the bundled
+// bytes against the pinned hash exactly like a manual import. Rebuild + re-pin
+// the printed hash here in the same commit whenever the datasets change.
 
 import 'dart:convert';
 import 'dart:io';
@@ -25,8 +27,8 @@ import 'dart:io';
 import 'package:ocideck/services/secmodule/sec_pack_codec.dart';
 import 'package:ocideck/services/secmodule/sec_pack_config.dart';
 
-/// Where the built pack (and hermetic test fixture) is written.
-const _outDir = 'test/fixtures/secmodule';
+/// Where the built pack is written — the bundled app asset (see pubspec.yaml).
+const _outDir = 'assets/secmodule';
 
 void main(List<String> args) {
   final version = secPackVersion;

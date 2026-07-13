@@ -84,6 +84,8 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Paket data adalah .zip berisi data referensi untuk modul ini. Paket diperiksa dulu terhadap sidik jari yang tertanam di aplikasi; hanya paket yang cocok dengan versi aplikasi ini yang diterima.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Kontras dengan latar terlalu rendah — mungkin tak terbaca.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.

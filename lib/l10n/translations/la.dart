@@ -86,6 +86,8 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Fasciculus datorum est .zip cum datis referentiae huius moduli. Primum cum nota digiti in applicatione insita comparatur; solum fasciculus qui huic applicationis versioni convenit accipitur.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Discrimen colorum a fundo nimis exiguum — fortasse illegibile.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.

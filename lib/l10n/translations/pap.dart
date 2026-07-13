@@ -84,6 +84,8 @@ const _stringsPap = {
 };
 
 const _dutchSourcePap = {
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Un pakete di dato ta un .zip ku e datonan di referensia pa e módulo aki. Promé e ta wòrdu kontrolá kontra e fingerprint inkorporá den e app; solamente un pakete ku ta kuadra ku e vershon di app aki ta wòrdu aseptá.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Muy poko kontraste ku e fondo — kisas ilegibel.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.

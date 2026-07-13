@@ -84,6 +84,8 @@ const _stringsSl = {
 };
 
 const _dutchSourceSl = {
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Podatkovni paket je datoteka .zip z referenčnimi podatki za ta modul. Najprej se preveri glede na prstni odtis, vgrajen v aplikacijo; sprejet je le paket, ki ustreza tej različici aplikacije.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Premalo kontrasta z ozadjem — morda neberljivo.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.

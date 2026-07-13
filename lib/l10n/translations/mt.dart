@@ -85,6 +85,8 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Pakkett tad-data huwa .zip bid-dejta ta\' referenza għal dan il-modulu. L-ewwel jiġi vverifikat mal-marka tas-swaba\' mibnija fl-app; jiġi aċċettat biss pakkett li jaqbel ma\' din il-verżjoni tal-app.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Kuntrast baxx wisq mal-isfond — forsi illeġibbli.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.

@@ -82,6 +82,8 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'De\' ngaSwI\' ghaH .zip, pa\' De\' Qan module vam. wa\'DIch app qelDI\' nItlh \'oH nuDlu\'; app version vam rurbogh ngaSwI\' neH laj.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'rItlh puS — laDlaHbe\'lu\'.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.

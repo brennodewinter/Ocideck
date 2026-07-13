@@ -8,6 +8,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **The Informatieveiligheid module now works offline, out of the box.** Its
+  baseline reference data is **bundled with the app** (as a signed-by-hash asset)
+  and provisioned from there on enable — no mirror, no download, no outbound
+  traffic, and no consent needed (nothing leaves the device). The bundled pack is
+  verified against the fingerprint compiled into the app before use, exactly like
+  an import. This replaces the skeleton behaviour where enabling always failed
+  with "no source reachable" because no mirror served the pack yet. The manual
+  **Pakket importeren (Import pack)** path remains for an air-gapped/updated pack
+  and now explains, on the card, what an importable pack is (a `.zip` verified
+  against the built-in fingerprint; only a pack matching your app version is
+  accepted). Localised in all interface languages (PENTEST_MIAUW §6).
 - **Retry a failed module fetch, and a clearer reason when it fails** — the
   *Informatieveiligheid* extension card now offers **Opnieuw proberen (Try
   again)** whenever the module is on but its reference data is not yet present,
