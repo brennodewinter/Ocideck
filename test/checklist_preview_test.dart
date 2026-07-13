@@ -65,10 +65,7 @@ void main() {
     await tester.pump();
 
     expect(tester.takeException(), isNull);
-    expect(
-      find.textContaining('https://app.example/login'),
-      findsOneWidget,
-    );
+    expect(find.textContaining('https://app.example/login'), findsOneWidget);
   });
 
   testWidgets('checklist without a scope object shows no scope line', (

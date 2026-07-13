@@ -602,14 +602,22 @@ stored as a normal Markdown table so it aligns with the `table` slide and
 round-trips losslessly.
 The heading is the standard label; the table has a fixed five-column shape:
 
+A checklist may be **linked to a scope object** (the scope element it covers) via
+an `<!-- ocideck_checklist_scope: … -->` comment carrying the plain object string
+(matched to the scope matrix by the same normalisation as the finding↔scope link).
+It is written only for `checklist` slides and only when set:
+
 ```markdown
 <!-- _class: checklist -->
+<!-- ocideck_checklist_scope: https://app.example/login -->
 # Checklist — OWASP WSTG
 | ID | Test | Status | Finding | Note |
 | --- | --- | --- | --- | --- |
 | WSTG-ATHN-07 | Testing for Weak Password Policy | Anomaly | F-03 | |
 | WSTG-CRYP-04 | Testing for Weak Encryption | Not testable | — | functionality absent |
 | WSTG-SESS-01 | Testing for Session Management |  | — | |
+```
+
 **Scope matrix** (`scope-matrix`) — the scope objects and the extent of testing,
 stored as a normal Markdown table (like `checklist`) so it round-trips
 losslessly. The heading is the title; the table has a fixed eight-column shape:

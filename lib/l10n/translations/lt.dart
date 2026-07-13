@@ -1791,6 +1791,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Genereer checklists voor scope-objecten':
+      'Generuoti kontrolinius sąrašus apimties objektams',
+  'checklists toegevoegd': 'pridėta kontrolinių sąrašų',
+  'Alle scope-objecten hebben al een checklist':
+      'Visi apimties objektai jau turi kontrolinį sąrašą',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Sukuria kontrolinį sąrašą kiekvienam apimties objektui (WSTG žiniatinkliui/API); esami išlieka.',
   'CVE opzoeken': 'Ieškoti CVE',
   'CVE opzoeken (online)': 'Ieškoti CVE (internete)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

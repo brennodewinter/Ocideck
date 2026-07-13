@@ -737,6 +737,13 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Genereer checklists voor scope-objecten':
+      'Generar listas de verificación para los objetos del alcance',
+  'checklists toegevoegd': 'listas de verificación añadidas',
+  'Alle scope-objecten hebben al een checklist':
+      'Todos los objetos del alcance ya tienen una lista de verificación',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Crea una lista de verificación por objeto del alcance (WSTG para web/API); las existentes se conservan.',
   'CVE opzoeken': 'Buscar CVE',
   'CVE opzoeken (online)': 'Buscar CVE (en línea)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

@@ -1813,6 +1813,13 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Genereer checklists voor scope-objecten':
+      'Gerar listas de verificação para objetos do escopo',
+  'checklists toegevoegd': 'listas de verificação adicionadas',
+  'Alle scope-objecten hebben al een checklist':
+      'Todos os objetos do escopo já têm uma lista de verificação',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Cria uma lista de verificação por objeto do escopo (WSTG para web/API); as existentes são mantidas.',
   'CVE opzoeken': 'Procurar CVE',
   'CVE opzoeken (online)': 'Procurar CVE (online)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

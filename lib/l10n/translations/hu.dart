@@ -1787,6 +1787,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Genereer checklists voor scope-objecten':
+      'Ellenőrzőlisták létrehozása a hatókör-objektumokhoz',
+  'checklists toegevoegd': 'ellenőrzőlista hozzáadva',
+  'Alle scope-objecten hebben al een checklist':
+      'Minden hatókör-objektumnak már van ellenőrzőlistája',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Hatókör-objektumonként ellenőrzőlistát hoz létre (WSTG web/API esetén); a meglévők megmaradnak.',
   'CVE opzoeken': 'CVE keresése',
   'CVE opzoeken (online)': 'CVE keresése (online)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

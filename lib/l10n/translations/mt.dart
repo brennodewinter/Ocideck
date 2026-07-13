@@ -1806,6 +1806,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Genereer checklists voor scope-objecten':
+      'Iġġenera listi ta\' kontroll għall-oġġetti tal-kamp',
+  'checklists toegevoegd': 'listi ta\' kontroll miżjuda',
+  'Alle scope-objecten hebben al een checklist':
+      'L-oġġetti kollha tal-kamp diġà għandhom lista ta\' kontroll',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Joħloq lista ta\' kontroll għal kull oġġett tal-kamp (WSTG għal web/API); dawk eżistenti jinżammu.',
   'CVE opzoeken': 'Fittex CVE',
   'CVE opzoeken (online)': 'Fittex CVE (onlajn)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

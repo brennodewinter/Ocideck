@@ -914,10 +914,7 @@ void main() {
         title: 'Scope',
         tableRows: ScopeMatrixSpec(title: 'Scope', rows: rows).toTableRows(),
       );
-      return Deck(
-        title: 'D',
-        slides: [Slide.create(SlideType.title), scope],
-      );
+      return Deck(title: 'D', slides: [Slide.create(SlideType.title), scope]);
     }
 
     test('adds one checklist per uncovered object, WSTG for web/api', () {

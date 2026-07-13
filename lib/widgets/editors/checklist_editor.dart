@@ -157,11 +157,10 @@ class _ChecklistEditorState extends ConsumerState<ChecklistEditor> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final deck = ref.watch(deckProvider.select((s) => s.deck));
-    final scopeObjects =
-        <String>{
-          for (final r in deckScopeRows(deck?.slides ?? const []))
-            if (r.object.trim().isNotEmpty) r.object.trim(),
-        }.toList();
+    final scopeObjects = <String>{
+      for (final r in deckScopeRows(deck?.slides ?? const []))
+        if (r.object.trim().isNotEmpty) r.object.trim(),
+    }.toList();
     return editorScrollList(
       nestedInScrollView: widget.nestedInScrollView,
       children: [

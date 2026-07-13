@@ -740,6 +740,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Genereer checklists voor scope-objecten':
+      'Generá lista di kontrol pa objeto di scope',
+  'checklists toegevoegd': 'lista di kontrol añadí',
+  'Alle scope-objecten hebben al een checklist':
+      'Tur objeto di scope tin ya un lista di kontrol',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Ta krea un lista di kontrol pa kada objeto di scope (WSTG pa web/API); esnan eksistente ta keda.',
   'CVE opzoeken': 'Buska CVE',
   'CVE opzoeken (online)': 'Buska CVE (online)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

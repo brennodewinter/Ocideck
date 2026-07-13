@@ -107,6 +107,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `deck_provider.dart` — `DeckNotifier`: loaded deck, dirty state, undo/redo history, file path.
 - `deck_provider_ai.dart` — `DeckNotifierAiAlt` extension: count/clear AI-generated image alt-texts.
 - `deck_provider_auto.dart` — `DeckNotifierAuto` extension: `autoRenumberFindings` (P2-AUTO).
+- `deck_provider_checklist.dart` — `DeckNotifierChecklist` extension: `generateScopeChecklists` (one checklist per scope object, feedback #8) and `clearAllChecklists`.
 - `deck_provider_markdown.dart` — `DeckNotifierMarkdown` extension: generate/apply markdown for the whole deck or a single slide (per-slide markdown view).
 - `deck_provider_miauw.dart` — `DeckNotifierMiauw` extension: set/remove MIAUW compliance waivers.
 - `deck_quality_provider.dart` — Computes accessibility/quality analysis for the loaded deck.

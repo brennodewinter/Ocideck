@@ -1806,6 +1806,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Genereer checklists voor scope-objecten':
+      'Генериране на контролни списъци за обекти от обхвата',
+  'checklists toegevoegd': 'добавени контролни списъка',
+  'Alle scope-objecten hebben al een checklist':
+      'Всички обекти от обхвата вече имат контролен списък',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Създава контролен списък за всеки обект от обхвата (WSTG за уеб/API); съществуващите се запазват.',
   'CVE opzoeken': 'Търсене на CVE',
   'CVE opzoeken (online)': 'Търсене на CVE (онлайн)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

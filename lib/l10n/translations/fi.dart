@@ -1783,6 +1783,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Genereer checklists voor scope-objecten':
+      'Luo tarkistuslistat laajuuden kohteille',
+  'checklists toegevoegd': 'tarkistuslistaa lisätty',
+  'Alle scope-objecten hebben al een checklist':
+      'Kaikilla laajuuden kohteilla on jo tarkistuslista',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Luo tarkistuslistan kutakin laajuuden kohdetta kohti (WSTG webille/API:lle); olemassa olevat säilytetään.',
   'CVE opzoeken': 'Hae CVE',
   'CVE opzoeken (online)': 'Hae CVE (verkossa)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

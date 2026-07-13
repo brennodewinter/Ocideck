@@ -388,16 +388,7 @@ extension _MarkdownParse on MarkdownService {
 
     final imageSize = _cappedImageSize(body.imageSize, d.styleImageWidth);
 
-    final tableRows = <List<String>>[];
-    for (final line in body.tableLines) {
-      final cells = _splitTableRow(line);
-      // Skip the GFM separator row (e.g. | --- | :---: |).
-      if (cells.isNotEmpty &&
-          cells.every((c) => _reSeparatorCell.hasMatch(c.trim()))) {
-        continue;
-      }
-      tableRows.add(cells);
-    }
+    final tableRows = _decodeTableRows(body.tableLines);
 
     final type = _inferSlideType(
       cssClass: d.cssClass,

@@ -1811,6 +1811,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Genereer checklists voor scope-objecten':
+      'Δημιουργία λιστών ελέγχου για αντικείμενα εμβέλειας',
+  'checklists toegevoegd': 'λίστες ελέγχου προστέθηκαν',
+  'Alle scope-objecten hebben al een checklist':
+      'Όλα τα αντικείμενα εμβέλειας έχουν ήδη λίστα ελέγχου',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Δημιουργεί μια λίστα ελέγχου ανά αντικείμενο εμβέλειας (WSTG για web/API)· οι υπάρχουσες διατηρούνται.',
   'CVE opzoeken': 'Αναζήτηση CVE',
   'CVE opzoeken (online)': 'Αναζήτηση CVE (διαδικτυακά)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

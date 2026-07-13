@@ -1774,6 +1774,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Genereer checklists voor scope-objecten':
+      'Loo kontrollnimekirjad ulatuse objektidele',
+  'checklists toegevoegd': 'kontrollnimekirja lisatud',
+  'Alle scope-objecten hebben al een checklist':
+      'Kõigil ulatuse objektidel on juba kontrollnimekiri',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Loob kontrollnimekirja iga ulatuse objekti kohta (WSTG veebi/API jaoks); olemasolevad säilivad.',
   'CVE opzoeken': 'Otsi CVE',
   'CVE opzoeken (online)': 'Otsi CVE (võrgus)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

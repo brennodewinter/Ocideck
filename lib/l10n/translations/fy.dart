@@ -741,6 +741,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Genereer checklists voor scope-objecten':
+      'Generearje checklists foar scope-objekten',
+  'checklists toegevoegd': 'checklists tafoege',
+  'Alle scope-objecten hebben al een checklist':
+      'Alle scope-objekten hawwe al in checklist',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Makket per scope-objekt in checklist (WSTG foar web/API); besteande bliuwe stean.',
   'CVE opzoeken': 'CVE opsykje',
   'CVE opzoeken (online)': 'CVE opsykje (online)',
   'CVE opzoeken is niet beschikbaar in de webversie.':

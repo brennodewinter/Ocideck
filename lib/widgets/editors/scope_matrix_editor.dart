@@ -137,8 +137,7 @@ class _ScopeMatrixEditorState extends ConsumerState<ScopeMatrixEditor> {
           alignment: Alignment.centerLeft,
           child: Tooltip(
             message: l10n.d(
-              'Maakt per scope-object een checklist (WSTG voor web/API); '
-              'bestaande blijven staan.',
+              'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.',
             ),
             child: OutlinedButton.icon(
               onPressed: _generateChecklists,

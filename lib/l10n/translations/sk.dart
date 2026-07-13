@@ -1790,6 +1790,13 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Genereer checklists voor scope-objecten':
+      'Vygenerovať kontrolné zoznamy pre objekty rozsahu',
+  'checklists toegevoegd': 'kontrolných zoznamov pridaných',
+  'Alle scope-objecten hebben al een checklist':
+      'Všetky objekty rozsahu už majú kontrolný zoznam',
+  'Maakt per scope-object een checklist (WSTG voor web/API); bestaande blijven staan.':
+      'Vytvorí kontrolný zoznam pre každý objekt rozsahu (WSTG pre web/API); existujúce zostávajú.',
   'CVE opzoeken': 'Vyhľadať CVE',
   'CVE opzoeken (online)': 'Vyhľadať CVE (online)',
   'CVE opzoeken is niet beschikbaar in de webversie.':
