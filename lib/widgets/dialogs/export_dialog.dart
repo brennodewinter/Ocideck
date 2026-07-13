@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import '../../models/deck.dart';
+import '../../models/document_signature.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../models/slide_quality.dart';
@@ -46,6 +47,11 @@ class ExportDialog extends StatefulWidget {
   final bool showClassificationWatermark;
   final ExportDocumentMetadata documentMetadata;
 
+  /// The deck-level visual signature and seal timestamp, so a `signOff` slide
+  /// renders its (typed or drawn) signature in the rasterised export.
+  final DocumentSignature? signature;
+  final String sealedAt;
+
   /// Na een geslaagde export aangeroepen met het formaat-label ("PDF",
   /// "PPTX", "HTML") — bijv. om het bij de recente bestanden te noteren.
   final void Function(String formatLabel)? onExported;
@@ -67,6 +73,8 @@ class ExportDialog extends StatefulWidget {
     this.organization = '',
     this.showClassificationWatermark = false,
     this.documentMetadata = const ExportDocumentMetadata(),
+    this.signature,
+    this.sealedAt = '',
     this.onExported,
   });
 
@@ -88,6 +96,8 @@ class ExportDialog extends StatefulWidget {
     String organization = '',
     bool showClassificationWatermark = false,
     ExportDocumentMetadata documentMetadata = const ExportDocumentMetadata(),
+    DocumentSignature? signature,
+    String sealedAt = '',
     void Function(String formatLabel)? onExported,
   }) {
     return showDialog(
@@ -109,6 +119,8 @@ class ExportDialog extends StatefulWidget {
         organization: organization,
         showClassificationWatermark: showClassificationWatermark,
         documentMetadata: documentMetadata,
+        signature: signature,
+        sealedAt: sealedAt,
         onExported: onExported,
       ),
     );
@@ -223,6 +235,8 @@ class _ExportDialogState extends State<ExportDialog> {
             themeProfile: widget.themeProfile,
             cockpitColorScheme: widget.cockpitColorScheme,
             projectPath: widget.projectPath,
+            signature: widget.signature,
+            sealedAt: widget.sealedAt,
             tlp: widget.tlp,
             showClassificationWatermark: widget.showClassificationWatermark,
             organization: widget.organization,

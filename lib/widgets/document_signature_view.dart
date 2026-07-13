@@ -6,26 +6,33 @@ import 'package:flutter/material.dart';
 import '../models/document_signature.dart';
 import '../utils/log.dart' show logError;
 
+/// A tiny memo of decoded signature images keyed by the exact `data:` URI. The
+/// key point is instance stability: every caller for the same URI gets the SAME
+/// [Uint8List], so `MemoryImage(bytes)` compares equal across the export
+/// precache and the preview's `Image.memory` — a cache hit that lets the drawn
+/// signature paint on the first frame the rasteriser captures. Bounded, so a
+/// re-draw (a different URI) never grows it without limit.
+final Map<String, Uint8List?> _sigImageCache = {};
+
 /// Decode an embedded `data:...;base64,...` signature image to raw bytes, or
 /// null when [imagePath] is empty, not a base64 data URI, or malformed. Shared
 /// by [DocumentSignatureView], the sign-off slide preview and the editor's
 /// drawn-signature preview so they all read a drawn signature the same way.
 Uint8List? decodeEmbeddedSignatureImage(String imagePath) {
   if (!imagePath.startsWith('data:')) return null;
+  if (_sigImageCache.containsKey(imagePath)) return _sigImageCache[imagePath];
   final comma = imagePath.indexOf(',');
-  if (comma == -1 || !imagePath.substring(0, comma).contains('base64')) {
-    return null;
+  Uint8List? bytes;
+  if (comma != -1 && imagePath.substring(0, comma).contains('base64')) {
+    try {
+      bytes = base64Decode(imagePath.substring(comma + 1));
+    } catch (e, s) {
+      logError('decodeEmbeddedSignatureImage: bad data-URI image', e, s);
+    }
   }
-  try {
-    return base64Decode(imagePath.substring(comma + 1));
-  } catch (e, s) {
-    logError(
-      'decodeEmbeddedSignatureImage: bad data-URI signature image',
-      e,
-      s,
-    );
-    return null;
-  }
+  if (_sigImageCache.length >= 8) _sigImageCache.clear();
+  _sigImageCache[imagePath] = bytes;
+  return bytes;
 }
 
 /// A small, reusable render of a [DocumentSignature]: the attested statement,
