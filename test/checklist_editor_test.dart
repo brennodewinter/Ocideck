@@ -3,10 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/checklist_spec.dart';
+import 'package:ocideck/models/checklist_template.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/wstg_catalog.dart';
 import 'package:ocideck/widgets/editors/_editor_field.dart';
 import 'package:ocideck/widgets/editors/checklist_editor.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Behaviour tests for the `checklist` slide editor: it edits the standard label
 /// and per-row fields into the slide's title and `tableRows`, and adds/removes
@@ -205,5 +207,45 @@ void main() {
 
     final spec = ChecklistSpec.fromSlide(latest()!.title, latest()!.tableRows);
     expect(spec.rows.length, WstgCatalog.instance.tests.length);
+  });
+
+  testWidgets('a custom template appears in the picker and loads (#9)', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({
+      'customChecklists': ChecklistTemplate.encodeList(const [
+        ChecklistTemplate(
+          name: 'Interne test',
+          standardLabel: 'PTES intern',
+          items: [
+            ChecklistTemplateItem(id: 'NET-01', title: 'Poortscan'),
+            ChecklistTemplateItem(id: 'NET-02', title: 'Zwakke wachtwoorden'),
+          ],
+        ),
+      ]),
+    });
+    final latest = await pump(tester, slideWithRows(1));
+    // Let the async settings load settle so the template surfaces.
+    await tester.pump(const Duration(milliseconds: 100));
+
+    expect(find.text('Sjabloon laden…'), findsOneWidget);
+    await tester.tap(find.text('Sjabloon laden…'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.textContaining('Interne test'));
+    await tester.pumpAndSettle();
+
+    final spec = ChecklistSpec.fromSlide(latest()!.title, latest()!.tableRows);
+    expect(spec.rows.map((r) => r.id), containsAll(['NET-01', 'NET-02']));
+    // The template's standard label lands on the (empty) label.
+    expect(latest()!.title, 'PTES intern');
+  });
+
+  testWidgets('no "Sjabloon laden…" menu when there are no templates', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({});
+    await pump(tester, slideWithRows(1));
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(find.text('Sjabloon laden…'), findsNothing);
   });
 }
