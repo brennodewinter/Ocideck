@@ -90,8 +90,9 @@ extension _SettingsChecklists on _SettingsDialogState {
           ),
           IconButton(
             tooltip: l10n.d('Verwijderen'),
-            onPressed: () =>
-                ref.read(settingsProvider.notifier).removeCustomChecklist(index),
+            onPressed: () => ref
+                .read(settingsProvider.notifier)
+                .removeCustomChecklist(index),
             icon: const Icon(Icons.delete_outline, size: 18),
             color: AppTheme.slate500,
             visualDensity: VisualDensity.compact,
@@ -168,7 +169,9 @@ class _ChecklistTemplateDialogState extends State<_ChecklistTemplateDialog> {
     ];
     if (_items.isEmpty) {
       _items = [
-        _ChecklistItemControllers(const ChecklistTemplateItem(id: '', title: '')),
+        _ChecklistItemControllers(
+          const ChecklistTemplateItem(id: '', title: ''),
+        ),
       ];
     }
   }

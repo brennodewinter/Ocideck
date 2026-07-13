@@ -17,12 +17,15 @@ class ChecklistTemplateItem {
     this.category = '',
   });
 
-  ChecklistTemplateItem copyWith({String? id, String? title, String? category}) =>
-      ChecklistTemplateItem(
-        id: id ?? this.id,
-        title: title ?? this.title,
-        category: category ?? this.category,
-      );
+  ChecklistTemplateItem copyWith({
+    String? id,
+    String? title,
+    String? category,
+  }) => ChecklistTemplateItem(
+    id: id ?? this.id,
+    title: title ?? this.title,
+    category: category ?? this.category,
+  );
 
   Map<String, Object?> toJson() => {
     'id': id,

@@ -741,6 +741,18 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bewerken': 'Bewurkje',
+  'Checklist-sjabloon': 'Checklist-sjabloan',
+  'Eigen checklists': 'Eigen checklists',
+  'Laad een eigen checklist-sjabloon': 'Laad in eigen checklist-sjabloan',
+  'Leeg laten': 'Leech litte',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Meitsje werbrûkbere testlisten dyst per scope-objekt yn in checklist laden kinst, neist de gebundele WSTG-list.',
+  'Nieuw sjabloon': 'Nij sjabloan',
+  'Nog geen eigen checklists.': 'Noch gjin eigen checklists.',
+  'Sjabloon laden…': 'Sjabloan lade…',
+  'Sjabloon voor overige objecten': 'Sjabloan foar oare objekten',
+  'Testen': 'Testen',
   'Genereer checklists voor scope-objecten':
       'Generearje checklists foar scope-objekten',
   'checklists toegevoegd': 'checklists tafoege',

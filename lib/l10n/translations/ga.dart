@@ -1819,6 +1819,19 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bewerken': 'Cuir in eagar',
+  'Checklist-sjabloon': 'Teimpléad seicliosta',
+  'Eigen checklists': 'Seicliostaí saincheaptha',
+  'Laad een eigen checklist-sjabloon':
+      'Luchtaigh teimpléad seicliosta saincheaptha',
+  'Leeg laten': 'Fág folamh',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Cruthaigh liostaí tástála in-athúsáidte is féidir a luchtú i seicliosta in aghaidh gach réad scóipe, taobh leis an liosta WSTG atá san áireamh.',
+  'Nieuw sjabloon': 'Teimpléad nua',
+  'Nog geen eigen checklists.': 'Níl aon seicliosta saincheaptha ann fós.',
+  'Sjabloon laden…': 'Luchtaigh teimpléad…',
+  'Sjabloon voor overige objecten': 'Teimpléad do na réada eile',
+  'Testen': 'Tástálacha',
   'Genereer checklists voor scope-objecten': 'Gin seicliostaí do réada scóipe',
   'checklists toegevoegd': 'seicliostaí curtha leis',
   'Alle scope-objecten hebben al een checklist':

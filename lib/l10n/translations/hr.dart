@@ -1790,6 +1790,19 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Bewerken': 'Uredi',
+  'Checklist-sjabloon': 'Predložak kontrolnog popisa',
+  'Eigen checklists': 'Vlastiti kontrolni popisi',
+  'Laad een eigen checklist-sjabloon':
+      'Učitaj vlastiti predložak kontrolnog popisa',
+  'Leeg laten': 'Ostavi prazno',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Izradi ponovno upotrebljive popise testova koje možeš učitati u kontrolni popis po objektu opsega, uz ugrađeni WSTG popis.',
+  'Nieuw sjabloon': 'Novi predložak',
+  'Nog geen eigen checklists.': 'Još nema vlastitih kontrolnih popisa.',
+  'Sjabloon laden…': 'Učitaj predložak…',
+  'Sjabloon voor overige objecten': 'Predložak za ostale objekte',
+  'Testen': 'Testovi',
   'Genereer checklists voor scope-objecten':
       'Generiraj kontrolne popise za objekte opsega',
   'checklists toegevoegd': 'kontrolnih popisa dodano',

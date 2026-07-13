@@ -1787,6 +1787,18 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bewerken': 'Bearbeite',
+  'Checklist-sjabloon': 'Checkliste-Vorlag',
+  'Eigen checklists': 'Eigeni Checkliste',
+  'Laad een eigen checklist-sjabloon': 'E eigeni Checkliste-Vorlag lade',
+  'Leeg laten': 'Läär loo',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Erstell wiederverwändbari Testlischte, wo du pro Scope-Objäkt i e Checkliste chasch lade – näbe dr integrierte WSTG-Lischte.',
+  'Nieuw sjabloon': 'Neui Vorlag',
+  'Nog geen eigen checklists.': 'No kei eigeni Checkliste.',
+  'Sjabloon laden…': 'Vorlag lade…',
+  'Sjabloon voor overige objecten': 'Vorlag für anderi Objäkt',
+  'Testen': 'Tests',
   'Genereer checklists voor scope-objecten':
       'Checkliste für Scope-Objäkt erstelle',
   'checklists toegevoegd': 'Checkliste zuegfüegt',

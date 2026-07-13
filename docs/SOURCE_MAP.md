@@ -20,6 +20,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `annotation.dart` — `InkStroke` and `InkTool` enum for freehand drawing annotations on presentation slides.
 - `chart.dart` — `ChartSpec`/`ChartSeries` and the `ChartType` enum (bar, stacked/horizontal bar, combo, line, area, pie, donut, radar, scatter, waterfall, heatmap) for chart slides with inline or CSV data.
 - `checklist_spec.dart` — `ChecklistSpec` for the security checklist slide (MIAUW tri-state test list linked to findings).
+- `checklist_template.dart` — `ChecklistTemplate`/`ChecklistTemplateItem`: a user-created reusable checklist stored in the settings (feedback #9), with tolerant `encodeList`/`decodeList`.
 - `cockpit.dart` — `CockpitSpec`/`CockpitMeterSpec` for instrumentation gauges (speedometer, voltmeter, etc.).
 - `cvss_builder.dart` — CVSS 4.0 Base-metric metadata + vector assembly, `CiaRating`→`CR`/`IR`/`AR` mapping, `baseCvss4Vector` and `contextCvss` (derive a CIA-weighted context score).
 - `cwe_entry.dart` — `CweEntry` for the offline CWE catalog (id/name/description/remediation).
@@ -59,6 +60,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `cve_search_service.dart` — `CveSearchService` + `CveSource` cascade (`LibrekatCveSource` mirror → `EnisaCveSource` EUVD keyword search → `MitreCveSource` exact-id lookup); `CveHit` in `models/cve_hit.dart`.
 - `cve_transport.dart` / `cve_transport_io.dart` / `cve_transport_web.dart` / `cve_transport_factory.dart` — injectable, SSRF-pinned HTTP transport for the CVE search (io) with a web stub, selected by conditional export.
 - `wstg_catalog.dart` — The bundled offline OWASP WSTG v4.2 test catalog (`WstgCatalog`, 97 tests + pinned version) used to one-click-fill a `checklist` slide.
+- `checklist_templates.dart` — `ChecklistSource` + helpers that present WSTG and each user `ChecklistTemplate` uniformly to the checklist editor and the per-scope generator (feedback #9).
 - `description_service.dart` — Stores searchable image descriptions as JSON sidecars.
 - `document_integrity.dart` — Computes/verifies the SHA-512 deck seal and seals a finalised deck.
 - `evidence_hash_service.dart` — Computes the MIAUW SHA1 + SHA-256 of evidence bytes and builds the appendix hash table.
@@ -228,8 +230,9 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `scope_coverage_dialog.dart` — Shows the scope-coverage gaps (in-scope objects with no test/finding).
 - `seal_timestamp_dialog.dart` — RFC 3161 timestamp workflow: export the `.tsq`, import/verify the `.tsr`.
 - `settings_dialog.dart` — Sidebar settings (theme colours, fonts, cockpit,
-  Licentie en Privacy, Beveiliging, Nextcloud, and an "Over OciDeck" screen);
-  tab bodies live in `parts/settings_dialog_*.dart`.
+  Licentie en Privacy, Beveiliging, Nextcloud, Checklists, and an "Over OciDeck"
+  screen); tab bodies live in `parts/settings_dialog_*.dart` (the Checklists tab
+  managing user checklist templates is `parts/settings_dialog_checklists.dart`).
 - `slide_finder_dialog.dart` — Stay-open searcher for gathering slides from many presentations.
 - `slide_quality_details_dialog.dart` — Issues grouped by severity with counts and navigation.
 - `webdav_browser_dialog.dart` — Browses WebDAV/Nextcloud folders to pick a deck or images.

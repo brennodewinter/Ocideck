@@ -1790,6 +1790,19 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Bewerken': 'Upraviť',
+  'Checklist-sjabloon': 'Šablóna kontrolného zoznamu',
+  'Eigen checklists': 'Vlastné kontrolné zoznamy',
+  'Laad een eigen checklist-sjabloon':
+      'Načítať vlastnú šablónu kontrolného zoznamu',
+  'Leeg laten': 'Ponechať prázdne',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Vytvárajte opakovane použiteľné zoznamy testov, ktoré môžete načítať do kontrolného zoznamu pre každý objekt rozsahu, popri vstavanom zozname WSTG.',
+  'Nieuw sjabloon': 'Nová šablóna',
+  'Nog geen eigen checklists.': 'Zatiaľ žiadne vlastné kontrolné zoznamy.',
+  'Sjabloon laden…': 'Načítať šablónu…',
+  'Sjabloon voor overige objecten': 'Šablóna pre ostatné objekty',
+  'Testen': 'Testy',
   'Genereer checklists voor scope-objecten':
       'Vygenerovať kontrolné zoznamy pre objekty rozsahu',
   'checklists toegevoegd': 'kontrolných zoznamov pridaných',

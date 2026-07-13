@@ -42,10 +42,7 @@ void main() {
     expect(ChecklistTemplate.decodeList('not json'), isEmpty);
     expect(ChecklistTemplate.decodeList('{"not":"a list"}'), isEmpty);
     // A template without a name cannot be selected, so it is dropped.
-    expect(
-      ChecklistTemplate.decodeList('[{"name":"","items":[]}]'),
-      isEmpty,
-    );
+    expect(ChecklistTemplate.decodeList('[{"name":"","items":[]}]'), isEmpty);
   });
 
   test('empty items are dropped on decode', () {

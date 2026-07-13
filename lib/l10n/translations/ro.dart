@@ -1802,6 +1802,19 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bewerken': 'Editează',
+  'Checklist-sjabloon': 'Șablon de listă de verificare',
+  'Eigen checklists': 'Liste de verificare proprii',
+  'Laad een eigen checklist-sjabloon':
+      'Încarcă un șablon de listă de verificare propriu',
+  'Leeg laten': 'Lasă gol',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Creează liste de teste reutilizabile pe care le poți încărca într-o listă de verificare pentru fiecare obiect din domeniu, pe lângă lista WSTG inclusă.',
+  'Nieuw sjabloon': 'Șablon nou',
+  'Nog geen eigen checklists.': 'Încă nu există liste de verificare proprii.',
+  'Sjabloon laden…': 'Încarcă șablon…',
+  'Sjabloon voor overige objecten': 'Șablon pentru celelalte obiecte',
+  'Testen': 'Teste',
   'Genereer checklists voor scope-objecten':
       'Generează liste de verificare pentru obiectele din domeniu',
   'checklists toegevoegd': 'liste de verificare adăugate',

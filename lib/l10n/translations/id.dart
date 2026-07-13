@@ -1783,6 +1783,18 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bewerken': 'Ubah',
+  'Checklist-sjabloon': 'Templat daftar periksa',
+  'Eigen checklists': 'Daftar periksa khusus',
+  'Laad een eigen checklist-sjabloon': 'Muat templat daftar periksa khusus',
+  'Leeg laten': 'Biarkan kosong',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Buat daftar uji yang dapat digunakan ulang untuk dimuat ke daftar periksa per objek cakupan, di samping daftar WSTG bawaan.',
+  'Nieuw sjabloon': 'Templat baru',
+  'Nog geen eigen checklists.': 'Belum ada daftar periksa khusus.',
+  'Sjabloon laden…': 'Muat templat…',
+  'Sjabloon voor overige objecten': 'Templat untuk objek lainnya',
+  'Testen': 'Pengujian',
   'Genereer checklists voor scope-objecten':
       'Buat daftar periksa untuk objek cakupan',
   'checklists toegevoegd': 'daftar periksa ditambahkan',

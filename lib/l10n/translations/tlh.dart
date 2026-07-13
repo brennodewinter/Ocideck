@@ -1758,6 +1758,18 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Bewerken': 'choH',
+  'Checklist-sjabloon': 'checklist HewmeH',
+  'Eigen checklists': 'checklist ghaj',
+  'Laad een eigen checklist-sjabloon': 'checklist HewmeH ghaj laH',
+  'Leeg laten': 'chImmoH',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'WSTG tetlh tu\'lu\'bogh je, scope-Doch checklist-Daq lo\'laH testlists chenmoH.',
+  'Nieuw sjabloon': 'HewmeH chu\'',
+  'Nog geen eigen checklists.': 'checklist ghajbe\' SoH.',
+  'Sjabloon laden…': 'HewmeH laH…',
+  'Sjabloon voor overige objecten': 'latlh Dochmey HewmeH',
+  'Testen': 'tests',
   'Genereer checklists voor scope-objecten': 'scope-Doch checklist chenmoH',
   'checklists toegevoegd': 'checklist chelta\'',
   'Alle scope-objecten hebben al een checklist':

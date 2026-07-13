@@ -1811,6 +1811,20 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bewerken': 'Επεξεργασία',
+  'Checklist-sjabloon': 'Πρότυπο λίστας ελέγχου',
+  'Eigen checklists': 'Προσαρμοσμένες λίστες ελέγχου',
+  'Laad een eigen checklist-sjabloon':
+      'Φόρτωση προσαρμοσμένου προτύπου λίστας ελέγχου',
+  'Leeg laten': 'Άφησε κενό',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Δημιούργησε επαναχρησιμοποιήσιμες λίστες ελέγχων που μπορείς να φορτώσεις σε μια λίστα ελέγχου ανά αντικείμενο εμβέλειας, δίπλα στην ενσωματωμένη λίστα WSTG.',
+  'Nieuw sjabloon': 'Νέο πρότυπο',
+  'Nog geen eigen checklists.':
+      'Δεν υπάρχουν ακόμη προσαρμοσμένες λίστες ελέγχου.',
+  'Sjabloon laden…': 'Φόρτωση προτύπου…',
+  'Sjabloon voor overige objecten': 'Πρότυπο για τα άλλα αντικείμενα',
+  'Testen': 'Έλεγχοι',
   'Genereer checklists voor scope-objecten':
       'Δημιουργία λιστών ελέγχου για αντικείμενα εμβέλειας',
   'checklists toegevoegd': 'λίστες ελέγχου προστέθηκαν',

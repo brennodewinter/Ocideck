@@ -1787,6 +1787,18 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bewerken': 'Szerkesztés',
+  'Checklist-sjabloon': 'Ellenőrzőlista-sablon',
+  'Eigen checklists': 'Saját ellenőrzőlisták',
+  'Laad een eigen checklist-sjabloon': 'Saját ellenőrzőlista-sablon betöltése',
+  'Leeg laten': 'Hagyd üresen',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Hozz létre újrafelhasználható tesztlistákat, amelyeket hatókör-objektumonként betölthetsz egy ellenőrzőlistába a beépített WSTG-lista mellett.',
+  'Nieuw sjabloon': 'Új sablon',
+  'Nog geen eigen checklists.': 'Még nincsenek saját ellenőrzőlisták.',
+  'Sjabloon laden…': 'Sablon betöltése…',
+  'Sjabloon voor overige objecten': 'Sablon a többi objektumhoz',
+  'Testen': 'Tesztek',
   'Genereer checklists voor scope-objecten':
       'Ellenőrzőlisták létrehozása a hatókör-objektumokhoz',
   'checklists toegevoegd': 'ellenőrzőlista hozzáadva',

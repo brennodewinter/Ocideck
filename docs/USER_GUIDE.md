@@ -714,7 +714,11 @@ else.
   A checklist can also be **linked to a scope object** via the **Scope-object**
   field at the top of the editor (free text, or pick one from the scope matrix);
   the linked object is shown in the checklist preview, so each scope element has
-  its own test list.
+  its own test list. Beyond WSTG you can load your **own checklist templates**:
+  create them under **Settings → Checklists** (a name, a standard label and its
+  test items) and load them with the **Sjabloon laden…** menu next to the WSTG
+  button. Templates are saved in the settings, so they are available in every
+  deck.
 - **Scope matrix** — the scope objects, each with a type (Web / Infra / IoT /
   Firmware / API / Mobile / Other) that automatically fixes its test standard
   (Web→WSTG, Infra→PTES, …), a coverage status, a note, and a **CIA rating**
@@ -725,9 +729,11 @@ else.
   remove or reorder objects (move up/down) as you go.
   **Genereer checklists voor scope-objecten (Generate checklists for scope
   objects)** creates, in one click, a checklist slide for every scope object that
-  does not have one yet — the full WSTG list for Web/API objects, or an empty
-  checklist titled with the object's standard otherwise. It skips objects that are
-  already linked to a checklist, so you can re-run it after adding more objects.
+  does not have one yet — the full WSTG list for Web/API objects, and for the
+  other objects either an empty checklist titled with the object's standard or,
+  when you have templates, one you pick to pre-fill them. It skips objects that
+  are already linked to a checklist, so you can re-run it after adding more
+  objects.
 - **Findings summary** — a management overview: the number of findings per CVSS
   severity band, rendered as a severity-coloured bar chart, plus an always-shown
   **Opgelost na hertest (Resolved after retest)** total. **Vernieuw uit deck**

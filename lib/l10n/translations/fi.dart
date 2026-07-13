@@ -1783,6 +1783,18 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bewerken': 'Muokkaa',
+  'Checklist-sjabloon': 'Tarkistuslistan malli',
+  'Eigen checklists': 'Omat tarkistuslistat',
+  'Laad een eigen checklist-sjabloon': 'Lataa oma tarkistuslistan malli',
+  'Leeg laten': 'Jätä tyhjäksi',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Luo uudelleenkäytettäviä testilistoja, jotka voit ladata tarkistuslistaan laajuuden kohdetta kohti, sisäänrakennetun WSTG-listan rinnalle.',
+  'Nieuw sjabloon': 'Uusi malli',
+  'Nog geen eigen checklists.': 'Ei vielä omia tarkistuslistoja.',
+  'Sjabloon laden…': 'Lataa malli…',
+  'Sjabloon voor overige objecten': 'Malli muille kohteille',
+  'Testen': 'Testit',
   'Genereer checklists voor scope-objecten':
       'Luo tarkistuslistat laajuuden kohteille',
   'checklists toegevoegd': 'tarkistuslistaa lisätty',
