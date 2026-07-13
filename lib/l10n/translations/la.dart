@@ -1799,6 +1799,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Sine indicio inventi, unum automatice creatur cum primo argumento.',
   'Niet gedefinieerd': 'Non definitum',
   'Netwerk': 'Rete',
   'Aangrenzend': 'Adiacens',

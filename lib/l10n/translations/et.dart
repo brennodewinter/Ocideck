@@ -1774,6 +1774,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Ilma leiu ID-ta luuakse see esimese tõendi juures automaatselt.',
   'Niet gedefinieerd': 'Määratlemata',
   'Netwerk': 'Võrk',
   'Aangrenzend': 'Külgnev',

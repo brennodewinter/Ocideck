@@ -1782,6 +1782,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Uden et fund-id oprettes et automatisk ved det første bevis.',
   'Niet gedefinieerd': 'Ikke defineret',
   'Netwerk': 'Netværk',
   'Aangrenzend': 'Tilstødende',

@@ -1785,6 +1785,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Brez ID-ja ugotovitve se ta samodejno ustvari ob prvem dokazu.',
   'Niet gedefinieerd': 'Ni določeno',
   'Netwerk': 'Omrežje',
   'Aangrenzend': 'Sosednje',

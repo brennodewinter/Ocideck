@@ -741,6 +741,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Sûnder befinings-id meitsje we by it earste bewiis automatysk ien oan.',
   'Niet gedefinieerd': 'Net definiearre',
   'Netwerk': 'Netwurk',
   'Aangrenzend': 'Neistlizzend',

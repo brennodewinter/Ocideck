@@ -737,6 +737,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Sin un ID de hallazgo, se crea uno automáticamente con la primera evidencia.',
   'Niet gedefinieerd': 'No definido',
   'Netwerk': 'Red',
   'Aangrenzend': 'Adyacente',

@@ -1802,6 +1802,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Fără un ID de constatare, unul este creat automat la prima dovadă.',
   'Niet gedefinieerd': 'Nedefinit',
   'Netwerk': 'Rețea',
   'Aangrenzend': 'Adiacent',

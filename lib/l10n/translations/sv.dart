@@ -1782,6 +1782,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Utan ett fynd-id skapas ett automatiskt vid det första beviset.',
   'Niet gedefinieerd': 'Ej definierad',
   'Netwerk': 'Nätverk',
   'Aangrenzend': 'Angränsande',

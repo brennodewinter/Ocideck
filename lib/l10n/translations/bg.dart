@@ -1806,6 +1806,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Без идентификатор на констатацията се създава автоматично при първото доказателство.',
   'Niet gedefinieerd': 'Не е дефинирано',
   'Netwerk': 'Мрежа',
   'Aangrenzend': 'Съседен',

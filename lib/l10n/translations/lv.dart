@@ -1782,6 +1782,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Bez atraduma ID tas tiek izveidots automātiski pie pirmā pierādījuma.',
   'Niet gedefinieerd': 'Nav definēts',
   'Netwerk': 'Tīkls',
   'Aangrenzend': 'Blakusesošs',

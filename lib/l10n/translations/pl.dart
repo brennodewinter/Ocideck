@@ -1796,6 +1796,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Bez identyfikatora ustalenia zostanie on utworzony automatycznie przy pierwszym dowodzie.',
   'Niet gedefinieerd': 'Niezdefiniowane',
   'Netwerk': 'Sieć',
   'Aangrenzend': 'Sąsiadujący',

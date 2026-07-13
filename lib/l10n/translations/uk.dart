@@ -1801,6 +1801,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Без ідентифікатора виявлення його буде створено автоматично для першого доказу.',
   'Niet gedefinieerd': 'Не визначено',
   'Netwerk': 'Мережа',
   'Aangrenzend': 'Суміжний',

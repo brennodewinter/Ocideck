@@ -736,6 +736,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Senza un ID rilevazione, ne viene creato uno automaticamente al primo elemento di prova.',
   'Niet gedefinieerd': 'Non definito',
   'Netwerk': 'Rete',
   'Aangrenzend': 'Adiacente',

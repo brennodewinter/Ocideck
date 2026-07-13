@@ -1813,6 +1813,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Sem um ID de constatação, é criado um automaticamente na primeira evidência.',
   'Niet gedefinieerd': 'Não definido',
   'Netwerk': 'Rede',
   'Aangrenzend': 'Adjacente',

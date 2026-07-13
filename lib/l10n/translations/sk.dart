@@ -1790,6 +1790,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Bez ID zistenia sa pri prvom dôkaze vytvorí automaticky.',
   'Niet gedefinieerd': 'Nedefinované',
   'Netwerk': 'Sieť',
   'Aangrenzend': 'Susedné',

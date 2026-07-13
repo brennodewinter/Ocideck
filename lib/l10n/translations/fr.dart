@@ -740,6 +740,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Sans identifiant de constatation, un est créé automatiquement au premier élément de preuve.',
   'Niet gedefinieerd': 'Non défini',
   'Netwerk': 'Réseau',
   'Aangrenzend': 'Adjacent',

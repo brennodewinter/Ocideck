@@ -1783,6 +1783,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Ilman löydöstunnusta se luodaan automaattisesti ensimmäisen todisteen yhteydessä.',
   'Niet gedefinieerd': 'Ei määritelty',
   'Netwerk': 'Verkko',
   'Aangrenzend': 'Vierekkäinen',

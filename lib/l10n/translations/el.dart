@@ -1811,6 +1811,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Χωρίς αναγνωριστικό ευρήματος, δημιουργείται αυτόματα ένα με το πρώτο τεκμήριο.',
   'Niet gedefinieerd': 'Μη ορισμένο',
   'Netwerk': 'Δίκτυο',
   'Aangrenzend': 'Παρακείμενο',

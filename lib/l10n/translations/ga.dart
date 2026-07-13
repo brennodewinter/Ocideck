@@ -1819,6 +1819,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Gan aitheantas torthaí, cruthaítear ceann go huathoibríoch ag an gcéad fhianaise.',
   'Niet gedefinieerd': 'Gan sainiú',
   'Netwerk': 'Líonra',
   'Aangrenzend': 'Cóngarach',

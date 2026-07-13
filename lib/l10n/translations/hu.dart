@@ -1787,6 +1787,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Megállapítás-azonosító nélkül az első bizonyítéknál automatikusan létrejön egy.',
   'Niet gedefinieerd': 'Nincs meghatározva',
   'Netwerk': 'Hálózat',
   'Aangrenzend': 'Szomszédos',

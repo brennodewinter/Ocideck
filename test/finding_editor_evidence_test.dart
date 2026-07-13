@@ -77,20 +77,19 @@ void main() {
     expect(find.text('Video toevoegen'), findsOneWidget);
   });
 
-  testWidgets('gates evidence on a finding id', (tester) async {
+  testWidgets('evidence can be added even without a finding id', (
+    tester,
+  ) async {
     await pump(tester, findingId: '');
-    // Without an id, adding evidence is blocked with a hint.
-    expect(
-      find.text('Geef eerst een bevinding-id op om bewijs te koppelen.'),
-      findsOneWidget,
-    );
+    // The buttons are enabled; a missing id is generated on the first evidence.
+    expect(find.textContaining('automatisch'), findsOneWidget);
     final addButton = tester.widget<OutlinedButton>(
       find.ancestor(
         of: find.text('Screenshot toevoegen'),
         matching: find.byType(OutlinedButton),
       ),
     );
-    expect(addButton.onPressed, isNull);
+    expect(addButton.onPressed, isNotNull);
   });
 
   testWidgets('removing evidence drops the slide from the deck', (

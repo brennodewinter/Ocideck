@@ -740,6 +740,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Ohne Feststellungs-ID wird beim ersten Nachweis automatisch eine erzeugt.',
   'Niet gedefinieerd': 'Nicht definiert',
   'Netwerk': 'Netzwerk',
   'Aangrenzend': 'Benachbart',

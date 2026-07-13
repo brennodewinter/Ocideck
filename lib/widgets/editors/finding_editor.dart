@@ -355,12 +355,12 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
           runSpacing: 8,
           children: [
             OutlinedButton.icon(
-              onPressed: findingId.isEmpty ? null : _addScreenshot,
+              onPressed: _addScreenshot,
               icon: const Icon(Icons.add_photo_alternate_outlined, size: 16),
               label: Text(l10n.d('Screenshot toevoegen')),
             ),
             OutlinedButton.icon(
-              onPressed: findingId.isEmpty ? null : _addVideo,
+              onPressed: _addVideo,
               icon: const Icon(Icons.video_call_outlined, size: 16),
               label: Text(l10n.d('Video toevoegen')),
             ),
@@ -369,12 +369,30 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
         if (findingId.isEmpty) ...[
           const SizedBox(height: 4),
           Text(
-            l10n.d('Geef eerst een bevinding-id op om bewijs te koppelen.'),
-            style: TextStyle(fontSize: 11, color: AppTheme.amber700),
+            l10n.d(
+              'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.',
+            ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate500),
           ),
         ],
       ],
     );
+  }
+
+  /// The finding-id, generating one when empty so evidence can always be
+  /// attached: derived from an `F-xx`-style prefix in the heading when present,
+  /// else a short id from the slide id (the tester can renumber later).
+  String _ensureFindingId() {
+    final current = _findingId.text.trim();
+    if (current.isNotEmpty) return current;
+    final fromHeading = RegExp(
+      r'^\s*([A-Za-z]{1,4}-?\d+)',
+    ).firstMatch(_heading.text.trim())?.group(1)?.trim();
+    final id = (fromHeading != null && fromHeading.isNotEmpty)
+        ? fromHeading
+        : 'F-${widget.slide.id.substring(0, 4)}';
+    _findingId.text = id; // notifies -> _onChanged -> _emit
+    return id;
   }
 
   /// One evidence slide: a small preview (screenshot thumbnail or a video icon)
@@ -478,7 +496,7 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
     _insertEvidence(
       Slide.create(SlideType.image).copyWith(
         imagePath: path,
-        findingId: _findingId.text.trim(),
+        findingId: _ensureFindingId(),
         findingRole: FindingRole.evidence,
       ),
     );
@@ -492,7 +510,7 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
     _insertEvidence(
       Slide.create(SlideType.video).copyWith(
         videoPath: path,
-        findingId: _findingId.text.trim(),
+        findingId: _ensureFindingId(),
         findingRole: FindingRole.evidence,
       ),
     );

@@ -1787,6 +1787,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Ohni Befind-ID wird bim erschte Bewiis automatisch eini erstellt.',
   'Niet gedefinieerd': 'Nöd definiert',
   'Netwerk': 'Netzwärch',
   'Aangrenzend': 'Aagränzend',
