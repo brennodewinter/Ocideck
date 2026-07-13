@@ -741,6 +741,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'WSTG-testen laden': 'WSTG-testen lade',
+  'testen': 'testen',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Foeget ûntbrekkende WSTG-testen ta; besteande bliuwe stean.',
   'Bewijs': 'Bewiis',
   'Screenshot toevoegen': 'Skermôfdruk tafoegje',
   'Video toevoegen': 'Fideo tafoegje',

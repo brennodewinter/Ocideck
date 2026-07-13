@@ -737,6 +737,10 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'WSTG-testen laden': 'Cargar pruebas WSTG',
+  'testen': 'pruebas',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Añade las pruebas WSTG que faltan; las existentes se conservan.',
   'Bewijs': 'Evidencias',
   'Screenshot toevoegen': 'Añadir captura de pantalla',
   'Video toevoegen': 'Añadir vídeo',

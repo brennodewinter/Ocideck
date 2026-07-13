@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/checklist_spec.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/wstg_catalog.dart';
 import 'package:ocideck/widgets/editors/_editor_field.dart';
 import 'package:ocideck/widgets/editors/checklist_editor.dart';
 
@@ -124,5 +125,65 @@ void main() {
     expect(spec.rows.single.status, ChecklistStatus.anomaly);
     // The stable English token — not the Dutch label — is what gets stored.
     expect(latest()!.tableRows[1][2], 'Anomaly');
+  });
+
+  testWidgets(
+    '"WSTG-testen laden" fills an empty checklist with the standard',
+    (tester) async {
+      final latest = await pump(tester, slideWithRows(1));
+
+      await tester.tap(find.text('WSTG-testen laden'));
+      await tester.pumpAndSettle();
+
+      final spec = ChecklistSpec.fromSlide(
+        latest()!.title,
+        latest()!.tableRows,
+      );
+      expect(spec.rows.length, WstgCatalog.instance.tests.length);
+      expect(spec.rows.first.id, 'WSTG-INFO-01');
+      // The blank starter row is replaced, and the label carries the version.
+      expect(latest()!.title, 'OWASP WSTG v4.2');
+    },
+  );
+
+  testWidgets('loading is non-destructive and keeps existing rows + label', (
+    tester,
+  ) async {
+    final slide = Slide.create(SlideType.checklist).copyWith(
+      title: 'Eigen standaard',
+      tableRows: const ChecklistSpec(
+        standardLabel: 'Eigen standaard',
+        rows: [
+          ChecklistRow(
+            id: 'CUSTOM-01',
+            test: 'Eigen test',
+            status: ChecklistStatus.tested,
+          ),
+        ],
+      ).toTableRows(),
+    );
+    final latest = await pump(tester, slide);
+
+    await tester.tap(find.text('WSTG-testen laden'));
+    await tester.pumpAndSettle();
+
+    final spec = ChecklistSpec.fromSlide(latest()!.title, latest()!.tableRows);
+    expect(spec.rows.length, WstgCatalog.instance.tests.length + 1);
+    expect(spec.rows.first.id, 'CUSTOM-01');
+    expect(spec.rows.first.status, ChecklistStatus.tested);
+    // A non-empty label is left untouched.
+    expect(latest()!.title, 'Eigen standaard');
+  });
+
+  testWidgets('loading twice does not duplicate tests', (tester) async {
+    final latest = await pump(tester, slideWithRows(1));
+
+    await tester.tap(find.text('WSTG-testen laden'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('WSTG-testen laden'));
+    await tester.pumpAndSettle();
+
+    final spec = ChecklistSpec.fromSlide(latest()!.title, latest()!.tableRows);
+    expect(spec.rows.length, WstgCatalog.instance.tests.length);
   });
 }

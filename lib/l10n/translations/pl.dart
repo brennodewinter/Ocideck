@@ -1796,6 +1796,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'WSTG-testen laden': 'Wczytaj testy WSTG',
+  'testen': 'testów',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Dodaje brakujące testy WSTG; istniejące pozostają.',
   'Bewijs': 'Dowody',
   'Screenshot toevoegen': 'Dodaj zrzut ekranu',
   'Video toevoegen': 'Dodaj wideo',

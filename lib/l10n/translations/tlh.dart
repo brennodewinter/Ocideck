@@ -1758,6 +1758,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'WSTG-testen laden': 'WSTG tests laD',
+  'testen': 'tests',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'WSTG tests chel; ratlhbogh ratlh.',
   'Bewijs': '\'ol',
   'Screenshot toevoegen': 'HaSta nabmey chel',
   'Video toevoegen': 'video chel',

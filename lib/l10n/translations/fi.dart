@@ -1783,6 +1783,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'WSTG-testen laden': 'Lataa WSTG-testit',
+  'testen': 'testiä',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Lisää puuttuvat WSTG-testit; olemassa olevat säilyvät.',
   'Bewijs': 'Todisteet',
   'Screenshot toevoegen': 'Lisää kuvakaappaus',
   'Video toevoegen': 'Lisää video',

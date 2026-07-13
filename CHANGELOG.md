@@ -8,6 +8,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Load the full OWASP WSTG test list into a checklist.** The
+  "Uitvoering testen conform standaard" (checklist) editor gains a
+  **WSTG-testen laden (Load WSTG tests)** action that fills the list in one click
+  with the complete **OWASP WSTG v4.2** checklist — 97 tests across all 12
+  categories — instead of typing each test by hand. The standard version is now
+  shown (next to the button and written into the standard label, so it appears on
+  the slide and in exports). Loading is **non-destructive**: it only appends the
+  tests whose id you don't already have, preserving existing rows and their
+  statuses, so you can re-load after editing without losing progress. The catalog
+  is a bundled, offline dataset (no network), mirroring the offline CWE catalog.
+  Localised in all interface languages.
 - **Attach evidence to a finding.** The finding editor now has a **Bewijs
   (Evidence)** section: **Screenshot toevoegen** and **Video toevoegen** attach a
   screenshot or a video as evidence. Each piece of evidence becomes its own slide

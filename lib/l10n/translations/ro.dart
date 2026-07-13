@@ -1802,6 +1802,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'WSTG-testen laden': 'Încarcă testele WSTG',
+  'testen': 'teste',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Adaugă testele WSTG lipsă; cele existente rămân.',
   'Bewijs': 'Dovezi',
   'Screenshot toevoegen': 'Adaugă captură de ecran',
   'Video toevoegen': 'Adaugă videoclip',

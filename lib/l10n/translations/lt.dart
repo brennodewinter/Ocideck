@@ -1791,6 +1791,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'WSTG-testen laden': 'Įkelti WSTG testus',
+  'testen': 'testų',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Prideda trūkstamus WSTG testus; esami lieka.',
   'Bewijs': 'Įrodymai',
   'Screenshot toevoegen': 'Pridėti ekrano nuotrauką',
   'Video toevoegen': 'Pridėti vaizdo įrašą',

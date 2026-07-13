@@ -1819,6 +1819,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'WSTG-testen laden': 'Luchtaigh tástálacha WSTG',
+  'testen': 'tástáil',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Cuireann sé na tástálacha WSTG atá ar iarraidh leis; coinnítear na cinn atá ann.',
   'Bewijs': 'Fianaise',
   'Screenshot toevoegen': 'Cuir gabháil scáileáin leis',
   'Video toevoegen': 'Cuir físeán leis',

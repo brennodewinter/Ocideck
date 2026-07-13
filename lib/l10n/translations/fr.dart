@@ -740,6 +740,10 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'WSTG-testen laden': 'Charger les tests WSTG',
+  'testen': 'tests',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Ajoute les tests WSTG manquants ; les existants sont conservés.',
   'Bewijs': 'Preuves',
   'Screenshot toevoegen': 'Ajouter une capture d\'écran',
   'Video toevoegen': 'Ajouter une vidéo',

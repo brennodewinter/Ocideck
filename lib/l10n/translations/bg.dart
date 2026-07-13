@@ -1806,6 +1806,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'WSTG-testen laden': 'Зареди WSTG тестове',
+  'testen': 'теста',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Добавя липсващите WSTG тестове; съществуващите се запазват.',
   'Bewijs': 'Доказателства',
   'Screenshot toevoegen': 'Добави екранна снимка',
   'Video toevoegen': 'Добави видео',

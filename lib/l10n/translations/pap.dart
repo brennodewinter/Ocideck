@@ -740,6 +740,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'WSTG-testen laden': 'Karga tèstnan WSTG',
+  'testen': 'tèstnan',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Ta agregá e tèstnan WSTG ku ta falta; esnan eksistente ta keda.',
   'Bewijs': 'Prueba',
   'Screenshot toevoegen': 'Añadí screenshot',
   'Video toevoegen': 'Añadí video',

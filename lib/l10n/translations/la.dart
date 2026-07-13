@@ -1799,6 +1799,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'WSTG-testen laden': 'Tests WSTG onerare',
+  'testen': 'probationes',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Addit tests WSTG deficientes; exsistentes manent.',
   'Bewijs': 'Documenta',
   'Screenshot toevoegen': 'Imaginem screen addere',
   'Video toevoegen': 'Pelliculam addere',

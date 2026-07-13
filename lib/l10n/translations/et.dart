@@ -1774,6 +1774,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'WSTG-testen laden': 'Laadi WSTG testid',
+  'testen': 'testi',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Lisab puuduvad WSTG testid; olemasolevad jäävad alles.',
   'Bewijs': 'Tõendid',
   'Screenshot toevoegen': 'Lisa ekraanipilt',
   'Video toevoegen': 'Lisa video',

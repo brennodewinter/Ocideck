@@ -922,6 +922,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'WSTG-testen laden': 'Load WSTG tests',
+  'testen': 'tests',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Adds the missing WSTG tests; existing ones are kept.',
   'Bewijs': 'Evidence',
   'Screenshot toevoegen': 'Add screenshot',
   'Video toevoegen': 'Add video',

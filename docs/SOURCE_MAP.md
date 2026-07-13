@@ -23,6 +23,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `cockpit.dart` — `CockpitSpec`/`CockpitMeterSpec` for instrumentation gauges (speedometer, voltmeter, etc.).
 - `cvss_builder.dart` — CVSS 4.0 Base-metric metadata + vector assembly + `CiaRating`→`CR`/`IR`/`AR` mapping (finding wizard).
 - `cwe_entry.dart` — `CweEntry` for the offline CWE catalog (id/name/description/remediation).
+- `wstg_test.dart` — `WstgTest` for the offline WSTG catalog (id/title/category).
 - `deck.dart` — `Deck` with metadata, TLP classification, slides list, annotations, user notes, and MIAUW waivers.
 - `deck_template_security.dart` — The module-only **MIAUW-pentestrapport** deck template (`_buildMiauwReport`): scaffolds the full MIAUW report structure across the security slide types.
 - `document_signature.dart` — `DocumentSignature`, the reusable visual signature for sign-off and the document seal.
@@ -55,6 +56,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `classification_policy.dart` — Thin backward-compatible wrapper around the TLP export ceiling only.
 - `cvss/cvss4.dart` — Native-Dart port of the FIRST CVSS v4.0 calculator (metrics, parse, score, severity); `cvss4_lookup.dart` + `cvss4_scoring.dart` are its lookup-table/scoring parts.
 - `cwe_catalog.dart` — The bundled offline CWE catalog (`CweCatalog`, curated subset) with search/byId.
+- `wstg_catalog.dart` — The bundled offline OWASP WSTG v4.2 test catalog (`WstgCatalog`, 97 tests + pinned version) used to one-click-fill a `checklist` slide.
 - `description_service.dart` — Stores searchable image descriptions as JSON sidecars.
 - `document_integrity.dart` — Computes/verifies the SHA-512 deck seal and seals a finalised deck.
 - `evidence_hash_service.dart` — Computes the MIAUW SHA1 + SHA-256 of evidence bytes and builds the appendix hash table.

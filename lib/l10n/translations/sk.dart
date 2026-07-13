@@ -1790,6 +1790,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'WSTG-testen laden': 'Načítať testy WSTG',
+  'testen': 'testov',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Pridá chýbajúce testy WSTG; existujúce zostanú.',
   'Bewijs': 'Dôkazy',
   'Screenshot toevoegen': 'Pridať snímku obrazovky',
   'Video toevoegen': 'Pridať video',

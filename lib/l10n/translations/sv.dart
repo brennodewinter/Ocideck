@@ -1782,6 +1782,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'WSTG-testen laden': 'Läs in WSTG-tester',
+  'testen': 'tester',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Lägger till de saknade WSTG-testerna; befintliga behålls.',
   'Bewijs': 'Bevis',
   'Screenshot toevoegen': 'Lägg till skärmbild',
   'Video toevoegen': 'Lägg till video',
