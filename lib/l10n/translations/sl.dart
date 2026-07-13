@@ -297,8 +297,8 @@ const _dutchSourceSl = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Najprej podajte soglasje za odhodni promet v razdelku Licenca in zasebnost.',
   'Op het web nog niet beschikbaar': 'V spletu še ni na voljo',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Noben vir ni dosegljiv — referenčnih podatkov ni bilo mogoče nikjer prenesti. Preverite internetno povezavo in poskusite znova pozneje.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Noben vir ni dosegljiv — referenčnih podatkov ni bilo mogoče nikjer prenesti. Poskusite znova ali ročno uvozite paket.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Preneseni podatki se niso ujemali s pričakovanim prstnim odtisom in so bili iz previdnosti zavrnjeni.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

@@ -242,6 +242,19 @@ The first class determines (together with the content) the **slide type**:
 > that would confuse the generic line parser, so they are recognized separately
 > through their `_class`.
 
+> **Information-security classes and the module.** `finding`, `findings-summary`,
+> `checklist`, `scope-matrix` and `sign-off` are the slide types of the optional
+> **Informatieveiligheid** module (§ "Information security module" in the User
+> Guide). Their handling in the file format is **unconditional and does not
+> depend on the module**: OciDeck always parses these classes, and always renders
+> them, whether or not the module is enabled — the file is the source of truth, so
+> a report authored elsewhere opens and presents fully on any install. The module
+> toggle governs **authoring only**: these types are offered in the add-slide and
+> change-type pickers, and the MIAUW template appears in the new-presentation
+> dialog, only while the module is enabled. A slide that is already one of these
+> types can still be re-typed among them with the module off, so an imported
+> report is never a dead-end.
+
 Additional behavior classes:
 
 - `logo-safe` — reserve space so the logo does not overlap content. Added

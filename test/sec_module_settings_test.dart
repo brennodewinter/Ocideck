@@ -102,9 +102,9 @@ void main() {
 
   const cases = {
     SecProvisionStatus.allMirrorsFailed:
-        'Geen bron bereikbaar — de referentiegegevens konden nergens worden '
-        'opgehaald. Controleer je internetverbinding en probeer het later '
-        'opnieuw.',
+        'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele '
+        'bron worden opgehaald. Probeer het opnieuw of importeer het pakket '
+        'handmatig.',
     SecProvisionStatus.hashMismatch:
         'De opgehaalde gegevens kwamen niet overeen met de verwachte '
         'vingerafdruk en zijn uit voorzorg geweigerd.',
@@ -122,7 +122,13 @@ void main() {
       expect(find.text(message, skipOffstage: false), findsOneWidget);
       // The old catch-all is gone.
       expect(find.text('Ophalen mislukt', skipOffstage: false), findsNothing);
-      // The manual-import fallback is offered while nothing is revealed yet.
+      // Both recourses are offered while nothing is revealed yet: retry the
+      // fetch (none of these failures is the web's unsupportedPlatform) and the
+      // manual local-file import.
+      expect(
+        find.text('Opnieuw proberen', skipOffstage: false),
+        findsOneWidget,
+      );
       expect(
         find.text('Pakket importeren', skipOffstage: false),
         findsOneWidget,

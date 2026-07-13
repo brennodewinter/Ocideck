@@ -130,7 +130,21 @@ class SecModuleNotifier extends Notifier<SecModuleState> {
   Future<SecProvisionStatus> enable() async {
     state = state.copyWith(enabled: true, busy: true);
     await _persistBool(_enabledKey, true);
+    return _provision();
+  }
 
+  /// Re-run provisioning for an already-enabled module — the "try again" action
+  /// after a fetch failed (no mirror reachable) or after the user has just
+  /// granted the outbound consent. Same pipeline as [enable] minus flipping the
+  /// toggle, so it is a no-op safe to call whenever the module is on.
+  Future<SecProvisionStatus> retry() async {
+    if (!state.enabled) return SecProvisionStatus.noConsent;
+    state = state.copyWith(busy: true);
+    return _provision();
+  }
+
+  /// The shared fetch → verify → cache run behind [enable] and [retry].
+  Future<SecProvisionStatus> _provision() async {
     final hasConsent = ref.read(consentProvider).hasAccepted;
     final provisioner = ref.read(secModuleProvisionerProvider);
     final result = await provisioner.provision(hasConsent: hasConsent);

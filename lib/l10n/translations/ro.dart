@@ -300,8 +300,8 @@ const _dutchSourceRo = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Acordați mai întâi consimțământul pentru traficul de ieșire la Licență și confidențialitate.',
   'Op het web nog niet beschikbaar': 'Încă indisponibil pe web',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Nicio sursă accesibilă — datele de referință nu au putut fi descărcate de nicăieri. Verifică conexiunea la internet și încearcă din nou mai târziu.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Nicio sursă accesibilă — datele de referință nu au putut fi descărcate de nicăieri. Încearcă din nou sau importă pachetul manual.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Datele descărcate nu au corespuns amprentei așteptate și au fost refuzate ca măsură de precauție.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

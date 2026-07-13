@@ -298,8 +298,8 @@ const _dutchSourceGsw = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Gib zerscht d\'Zuestimmig für usgehende Verkehr under Lizänz und Dateschutz.',
   'Op het web nog niet beschikbaar': 'Im Web no nöd verfüegbar',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Kei Quelle erreichbar — d\'Referänzdate händ nienersch chöne glade werde. Prüef dini Internetverbindig und probier\'s spöter no einisch.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Kei Quelle erreichbar — d\'Referänzdate händ nienersch chöne glade werde. Probier\'s nomol oder importier s Paket vo Hand.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'D\'gladene Date händ nöd mit em erwartete Fingerabdruck übereigstimmt und sind us Vorsicht abglehnt worde.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

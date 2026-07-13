@@ -298,8 +298,8 @@ const _dutchSourceFi = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Anna ensin suostumus lähtevään liikenteeseen kohdassa Lisenssi ja tietosuoja.',
   'Op het web nog niet beschikbaar': 'Ei vielä saatavilla verkossa',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Yhtään lähdettä ei tavoitettu — viitetietoja ei voitu hakea mistään. Tarkista internetyhteytesi ja yritä myöhemmin uudelleen.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Yhtään lähdettä ei tavoitettu — viitetietoja ei voitu hakea mistään. Yritä uudelleen tai tuo paketti manuaalisesti.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Haetut tiedot eivät vastanneet odotettua sormenjälkeä, ja ne hylättiin varotoimena.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

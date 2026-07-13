@@ -300,8 +300,8 @@ const _dutchSourceCs = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Nejprve udělte souhlas s odchozím provozem v části Licence a soukromí.',
   'Op het web nog niet beschikbaar': 'Na webu zatím nedostupné',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Žádný zdroj není dostupný — referenční data se nepodařilo nikde stáhnout. Zkontrolujte připojení k internetu a zkuste to znovu později.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Žádný zdroj není dostupný — referenční data se nepodařilo nikde stáhnout. Zkuste to znovu nebo balíček importujte ručně.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Stažená data neodpovídala očekávanému otisku a byla z opatrnosti odmítnuta.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

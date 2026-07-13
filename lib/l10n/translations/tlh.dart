@@ -292,8 +292,8 @@ const _dutchSourceTlh = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'wa\'DIch Data lel Doch \'e\' chaw\'chugh neH nga\'chuqlaH.',
   'Op het web nog niet beschikbaar': 'web-Daq DungluqlaHbe\'taH',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Suplu\'laHbe\' Hal — pa\' De\' Qan Suqlu\'laHbe\'. internet rar yInuD \'ej tugh yInID.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Suplu\'laHbe\' Hal — pa\' De\' Qan Suqlu\'laHbe\'. cha\'logh yInID pagh ngaSHa\' yIkII\'.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'De\' Suqta\' pIHbogh nItlh Degh rurbe\'; Qan meqmo\' lajlu\'be\'.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

@@ -102,18 +102,31 @@ extension _SettingsModules on _SettingsDialogState {
             ),
           ],
         ),
-        // Fallback #3 (PENTEST_MIAUW §6): while the module is on but nothing is
-        // revealed yet — e.g. no mirror is reachable — offer the manual
-        // local-file import so the module is usable without a live host.
+        // While the module is on but nothing is revealed yet — e.g. no mirror
+        // is reachable — offer the two recourses side by side: retry the fetch
+        // (network back, or consent just granted) and, as fallback #3
+        // (PENTEST_MIAUW §6), the manual local-file import so the module is
+        // usable without a live host.
         if (module.enabled && !module.revealed) ...[
           const SizedBox(height: 8),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: TextButton.icon(
-              onPressed: () => _importSecModulePack(),
-              icon: const Icon(Icons.file_open_outlined, size: 16),
-              label: Text(l10n.d('Pakket importeren')),
-            ),
+          Wrap(
+            spacing: 4,
+            runSpacing: 4,
+            children: [
+              // Retry only makes sense where a fetch could succeed: skip it on
+              // the web, which cannot reach a mirror at all.
+              if (module.lastStatus != SecProvisionStatus.unsupportedPlatform)
+                TextButton.icon(
+                  onPressed: () => ref.read(secModuleProvider.notifier).retry(),
+                  icon: const Icon(Icons.refresh, size: 16),
+                  label: Text(l10n.d('Opnieuw proberen')),
+                ),
+              TextButton.icon(
+                onPressed: () => _importSecModulePack(),
+                icon: const Icon(Icons.file_open_outlined, size: 16),
+                label: Text(l10n.d('Pakket importeren')),
+              ),
+            ],
           ),
         ],
         if (module.provisionedVersion != null) ...[
@@ -189,7 +202,7 @@ extension _SettingsModules on _SettingsDialogState {
       // "Ophalen mislukt" (PENTEST_MIAUW §6 fallback chain).
       case SecProvisionStatus.allMirrorsFailed:
         return l10n.d(
-          'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.',
+          'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.',
         );
       case SecProvisionStatus.hashMismatch:
         return l10n.d(

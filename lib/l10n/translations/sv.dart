@@ -297,8 +297,8 @@ const _dutchSourceSv = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Ge först samtycke till utgående trafik under Licens och integritet.',
   'Op het web nog niet beschikbaar': 'Inte tillgängligt på webben ännu',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Ingen källa nåbar — referensdata kunde inte hämtas någonstans. Kontrollera din internetanslutning och försök igen senare.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Ingen källa nåbar — referensdata kunde inte hämtas någonstans. Försök igen eller importera paketet manuellt.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'De hämtade uppgifterna matchade inte det förväntade fingeravtrycket och avvisades som en försiktighetsåtgärd.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

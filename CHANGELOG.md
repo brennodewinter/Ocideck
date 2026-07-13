@@ -8,6 +8,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Retry a failed module fetch, and a clearer reason when it fails** — the
+  *Informatieveiligheid* extension card now offers **Opnieuw proberen (Try
+  again)** whenever the module is on but its reference data is not yet present,
+  so a fetch that failed because the network was briefly down — or because the
+  outbound-traffic consent had not been granted yet — can be re-run in place
+  without toggling the module off and on. It sits next to the existing **Pakket
+  importeren (Import pack)** recourse and is hidden on the web build, which
+  cannot reach a mirror. The "no source reachable" message was also reworded: it
+  now states plainly that the data could not be retrieved from any source and
+  points to the two recourses, instead of implying the user's own internet
+  connection is at fault. Localised in all interface languages (PENTEST_MIAUW §6).
 - **Low-contrast warning in the style-profile editor** — *Settings → Colours* now
   shows a live warning beneath any colour whose contrast the deck-level quality
   panel would flag, so you catch the problem while designing the style instead of

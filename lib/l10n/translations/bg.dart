@@ -299,8 +299,8 @@ const _dutchSourceBg = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Първо дайте съгласие за изходящ трафик в раздел Лиценз и поверителност.',
   'Op het web nog niet beschikbaar': 'Все още не е налично в мрежата',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Няма достъпен източник — референтните данни не можаха да бъдат изтеглени отникъде. Проверете интернет връзката си и опитайте отново по-късно.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Няма достъпен източник — референтните данни не можаха да бъдат изтеглени отникъде. Опитайте отново или импортирайте пакета ръчно.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Изтеглените данни не съвпаднаха с очаквания отпечатък и бяха отхвърлени от предпазливост.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

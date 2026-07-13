@@ -297,8 +297,8 @@ const _dutchSourceId = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Berikan dulu persetujuan untuk lalu lintas keluar di Lisensi dan Privasi.',
   'Op het web nog niet beschikbaar': 'Belum tersedia di web',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Tidak ada sumber yang dapat dijangkau — data referensi tidak dapat diambil dari mana pun. Periksa koneksi internet Anda dan coba lagi nanti.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Tidak ada sumber yang dapat dijangkau — data referensi tidak dapat diambil dari mana pun. Coba lagi atau impor paket secara manual.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Data yang diambil tidak cocok dengan sidik jari yang diharapkan dan ditolak sebagai tindakan pencegahan.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':

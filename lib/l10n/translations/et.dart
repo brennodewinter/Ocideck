@@ -296,8 +296,8 @@ const _dutchSourceEt = {
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Andke esmalt nõusolek väljuvale liiklusele jaotises Litsents ja privaatsus.',
   'Op het web nog niet beschikbaar': 'Veebis veel saadaval pole',
-  'Geen bron bereikbaar — de referentiegegevens konden nergens worden opgehaald. Controleer je internetverbinding en probeer het later opnieuw.':
-      'Ühtegi allikat pole kättesaadav — võrdlusandmeid ei õnnestunud kusagilt alla laadida. Kontrollige oma internetiühendust ja proovige hiljem uuesti.',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Ühtegi allikat pole kättesaadav — võrdlusandmeid ei õnnestunud kusagilt alla laadida. Proovi uuesti või impordi pakett käsitsi.',
   'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
       'Allalaaditud andmed ei vastanud oodatud sõrmejäljele ja lükati ettevaatusabinõuna tagasi.',
   'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
