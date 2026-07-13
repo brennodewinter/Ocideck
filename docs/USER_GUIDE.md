@@ -233,7 +233,9 @@ A timeline slide turns a list of dated events into an animated visual. Pick
 **Timeline** in the type chooser, give the slide a title, then add events; each
 event has a **marker** (a year or phase, optional), a **title** and an optional
 **description**. Drag the handle to reorder, and use the buttons to add or remove
-events.
+events. **PTES-fasen laden (Load PTES phases)** seeds the seven Penetration
+Testing Execution Standard phases (Voorafgaande afspraken → Rapportage) as
+ready-to-edit events, keeping any events you already have.
 
 Two display options sit above the event list:
 
@@ -707,7 +709,8 @@ else.
   (Confidentiality / Integrity / Availability, each `H`/`M`/`L` or left empty).
   The rating captures how important the object is per dimension and drives the
   **context score** of every finding on that object (see below); leave it empty
-  when the weighting is not known.
+  when the weighting is not known. A new matrix starts with one object; add,
+  remove or reorder objects (move up/down) as you go.
 - **Findings summary** — a management overview: the number of findings per CVSS
   severity band, rendered as a severity-coloured bar chart. **Vernieuw uit deck**
   recomputes the counts from the deck's findings.

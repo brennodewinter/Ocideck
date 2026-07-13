@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Load the seven PTES phases into a timeline.** The timeline editor gains a
+  **PTES-fasen laden (Load PTES phases)** button that seeds the seven
+  Penetration Testing Execution Standard phases (Voorafgaande afspraken →
+  Rapportage) as ready-to-edit events, non-destructively (matched by title,
+  replacing a lone blank starter). Localised in all interface languages.
+- **The CVSS/CIA builder now reads in the interface language.** The per-metric
+  CVSS 4.0 builder (CVSS-wizard) and the scope object's CIA-rating dropdowns show
+  their metric names and values in the interface language (Aanvalsvector,
+  Netwerk, Hoog, …); the canonical tokens (`AV`/`N`/`L`/`H`, …) and the English
+  FIRST names stay as the on-disk/reference form. Translated in all 30 languages.
 - **Guide the CVSS score with a CIA-weighted context score.** Each scope object
   in the **scope matrix** now carries a **CIA rating** (Confidentiality /
   Integrity / Availability, each `H`/`M`/`L` or empty), stored in three new
@@ -723,6 +733,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **A new scope matrix starts with one object, and objects can be reordered.**
+  Instead of two starter rows, a fresh scope matrix begins with a single scope
+  object; each row gains move-up/move-down buttons to change the order (removing
+  a row already worked down to the last one).
+- **Attach evidence to a finding without first typing a finding id.** The
+  "Screenshot/Video toevoegen" buttons are always enabled; when the finding has
+  no id yet, one is derived from the title (`F-xx`) or generated on the first
+  piece of evidence. Adding several screenshots/videos already worked (each is
+  its own evidence slide) — the id is no longer a gate.
 - **The "Checklist" security slide type is renamed to "Uitvoering testen conform
   standaard".** The old name clashed with the bullets *Checklist* list style;
   the new name says what the slide is (a per-standard test run, e.g. OWASP WSTG).
