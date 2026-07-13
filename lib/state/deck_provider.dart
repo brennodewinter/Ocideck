@@ -1,15 +1,20 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import '../models/annotation.dart';
+import '../models/checklist_spec.dart';
 import '../models/deck.dart';
 import '../models/deck_template.dart';
 import '../models/document_signature.dart';
+import '../models/scope_matrix_spec.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../services/ai_alt_text_cleanup.dart';
 import '../services/annotation_codec.dart';
 import '../services/document_integrity.dart';
+import '../services/finding_context_score.dart';
 import '../services/finding_numbering.dart';
+import '../services/scope_coverage.dart';
+import '../services/wstg_catalog.dart';
 import '../services/file_service.dart';
 import '../services/image_service.dart';
 import '../services/markdown_service.dart';
@@ -378,6 +383,56 @@ class DeckNotifier extends StateNotifier<DeckState> {
     final slides = List<Slide>.from(deck.slides);
     slides.insert(index + 1, Slide.duplicate(slides[index]));
     _mutate(deck.copyWith(slides: slides));
+  }
+
+  /// Generate one checklist slide per scope-matrix object that does not yet have
+  /// one (feedback #8, "per scope-object heb je een checklist"). A `Web`/`API`
+  /// object (standard = WSTG) is pre-filled with the full bundled WSTG list; any
+  /// other type gets an empty checklist titled with its derived standard, ready
+  /// for a template (PR 2) or manual filling. Objects already linked to a
+  /// checklist (by [Slide.checklistScope]) are skipped, so it is safe to re-run.
+  /// Returns the number of checklists added. Appended after the existing slides.
+  int generateScopeChecklists() {
+    final deck = state.deck;
+    if (deck == null) return 0;
+    final covered = <String>{
+      for (final s in deck.slides)
+        if (s.type == SlideType.checklist && s.checklistScope.trim().isNotEmpty)
+          normalizeScopeObject(s.checklistScope),
+    };
+    final additions = <Slide>[];
+    final seen = <String>{};
+    for (final row in deckScopeRows(deck.slides)) {
+      final object = row.object.trim();
+      if (object.isEmpty) continue;
+      final key = normalizeScopeObject(object);
+      if (covered.contains(key) || !seen.add(key)) continue;
+      additions.add(_checklistForScope(object, row.type));
+    }
+    if (additions.isEmpty) return 0;
+    final slides = List<Slide>.from(deck.slides)..addAll(additions);
+    _mutate(deck.copyWith(slides: slides), bumpRevision: true);
+    return additions.length;
+  }
+
+  /// Build a checklist slide linked to [object]: WSTG rows for a WSTG-standard
+  /// type, otherwise an empty checklist titled with the derived standard.
+  Slide _checklistForScope(String object, ScopeObjectType type) {
+    final useWstg = type.standard == 'WSTG';
+    final spec = ChecklistSpec(
+      standardLabel: useWstg ? WstgCatalog.instance.standardLabel : type.standard,
+      rows: useWstg
+          ? [
+              for (final t in WstgCatalog.instance.tests)
+                ChecklistRow(id: t.id, test: t.title),
+            ]
+          : const [ChecklistRow()],
+    );
+    return Slide.create(SlideType.checklist).copyWith(
+      title: spec.standardLabel,
+      tableRows: spec.toTableRows(),
+      checklistScope: object,
+    );
   }
 
   /// Splitst de bulletslide op [index] in tweeën: het maximale aantal bullets

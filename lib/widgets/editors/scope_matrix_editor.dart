@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/cvss_builder.dart';
 import '../../models/scope_matrix_spec.dart';
 import '../../models/slide.dart';
+import '../../state/deck_provider.dart';
 import '../../theme/app_theme.dart';
 import '_editor_field.dart';
 
@@ -11,7 +13,11 @@ import '_editor_field.dart';
 /// list of scope objects, each with a type that fixes its test standard (§10.7,
 /// shown read-only), a coverage status, and a note. Emits the slide title and
 /// `tableRows` via [ScopeMatrixSpec]; storage stays a Markdown table.
-class ScopeMatrixEditor extends StatefulWidget {
+///
+/// A one-click **Generate checklists** action creates a `checklist` slide per
+/// scope object that lacks one (feedback #8), via
+/// [DeckNotifier.generateScopeChecklists].
+class ScopeMatrixEditor extends ConsumerStatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
   final bool nestedInScrollView;
@@ -24,7 +30,7 @@ class ScopeMatrixEditor extends StatefulWidget {
   });
 
   @override
-  State<ScopeMatrixEditor> createState() => _ScopeMatrixEditorState();
+  ConsumerState<ScopeMatrixEditor> createState() => _ScopeMatrixEditorState();
 }
 
 class _RowControllers {
@@ -55,7 +61,7 @@ class _RowControllers {
   }
 }
 
-class _ScopeMatrixEditorState extends State<ScopeMatrixEditor> {
+class _ScopeMatrixEditorState extends ConsumerState<ScopeMatrixEditor> {
   late final TextEditingController _title;
   late List<_RowControllers> _rows;
 
@@ -126,7 +132,39 @@ class _ScopeMatrixEditorState extends State<ScopeMatrixEditor> {
             label: Text(l10n.d('Object toevoegen')),
           ),
         ),
+        const SizedBox(height: 12),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Tooltip(
+            message: l10n.d(
+              'Maakt per scope-object een checklist (WSTG voor web/API); '
+              'bestaande blijven staan.',
+            ),
+            child: OutlinedButton.icon(
+              onPressed: _generateChecklists,
+              icon: const Icon(Icons.playlist_add_check, size: 16),
+              label: Text(l10n.d('Genereer checklists voor scope-objecten')),
+            ),
+          ),
+        ),
       ],
+    );
+  }
+
+  /// Create a checklist slide per scope object that lacks one, then report how
+  /// many were added via a SnackBar.
+  void _generateChecklists() {
+    final l10n = context.l10n;
+    final added = ref.read(deckProvider.notifier).generateScopeChecklists();
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          added > 0
+              ? '$added ${l10n.d('checklists toegevoegd')}'
+              : l10n.d('Alle scope-objecten hebben al een checklist'),
+        ),
+      ),
     );
   }
 

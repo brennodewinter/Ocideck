@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/annotation.dart';
+import 'package:ocideck/models/checklist_spec.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/deck_template.dart';
+import 'package:ocideck/models/scope_matrix_spec.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/document_integrity.dart';
@@ -12,6 +14,7 @@ import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/slide_quality_analyzer.dart'
     show kSingleColumnBulletWarningCount;
+import 'package:ocideck/services/wstg_catalog.dart';
 import 'package:ocideck/state/deck_provider.dart';
 
 DeckNotifier _notifier() {
@@ -902,6 +905,74 @@ void main() {
           ),
         );
       expect(n.clearAiGeneratedAltTexts(), 0);
+    });
+  });
+
+  group('generateScopeChecklists (feedback #8)', () {
+    Deck deckWithScope(List<ScopeRow> rows) {
+      final scope = Slide.create(SlideType.scopeMatrix).copyWith(
+        title: 'Scope',
+        tableRows: ScopeMatrixSpec(title: 'Scope', rows: rows).toTableRows(),
+      );
+      return Deck(
+        title: 'D',
+        slides: [Slide.create(SlideType.title), scope],
+      );
+    }
+
+    test('adds one checklist per uncovered object, WSTG for web/api', () {
+      final n = _notifier()
+        ..loadDeck(
+          deckWithScope(const [
+            ScopeRow(object: 'https://app.example', type: ScopeObjectType.web),
+            ScopeRow(object: '10.0.0.1', type: ScopeObjectType.infra),
+          ]),
+        );
+
+      expect(n.generateScopeChecklists(), 2);
+      final checklists = n.state.deck!.slides
+          .where((s) => s.type == SlideType.checklist)
+          .toList();
+      expect(checklists, hasLength(2));
+
+      final web = checklists.firstWhere(
+        (s) => s.checklistScope == 'https://app.example',
+      );
+      expect(web.title, WstgCatalog.instance.standardLabel);
+      final webSpec = ChecklistSpec.fromSlide(web.title, web.tableRows);
+      expect(webSpec.rows.length, WstgCatalog.instance.tests.length);
+
+      final infra = checklists.firstWhere(
+        (s) => s.checklistScope == '10.0.0.1',
+      );
+      expect(infra.title, 'PTES'); // derived standard, blank starter row
+      final infraSpec = ChecklistSpec.fromSlide(infra.title, infra.tableRows);
+      expect(infraSpec.rows, hasLength(1));
+      expect(infraSpec.rows.single.id, isEmpty);
+    });
+
+    test('is idempotent — re-running adds nothing', () {
+      final n = _notifier()
+        ..loadDeck(
+          deckWithScope(const [
+            ScopeRow(object: 'https://app.example', type: ScopeObjectType.web),
+          ]),
+        );
+      expect(n.generateScopeChecklists(), 1);
+      expect(n.generateScopeChecklists(), 0);
+    });
+
+    test('skips blank objects and de-duplicates by normalized object', () {
+      final n = _notifier()
+        ..loadDeck(
+          deckWithScope(const [
+            ScopeRow(object: '  ', type: ScopeObjectType.web),
+            ScopeRow(object: 'https://App.Example/', type: ScopeObjectType.web),
+            ScopeRow(object: 'https://app.example', type: ScopeObjectType.web),
+          ]),
+        );
+      // The two case/slash variants normalize to one object; blank is ignored.
+      expect(n.generateScopeChecklists(), 1);
     });
   });
 }
